@@ -126,7 +126,7 @@ function libPage(l) {
     ${mapTable}
   </section>
 
-  ${picker({ id: 'find', p, actions: l.migrate.mode === 'component' ? ['jsx', 'svg', 'png'] : ['class', 'svg', 'png'], groups: [[null, [...new Set(l.migrate.map.map(r => r[1]))].slice(0, 24)]], q: '', heading: `Find the with icons version of any ${esc(sn)} icon`, intro: `Type the ${esc(sn)} name or just what it means (“${esc(l.searchQ)}”). Search understands synonyms and typos across all ${N} icons.`, placeholder: `Try a ${sn} name, e.g. “${l.searchQ}”` })}
+  ${picker({ id: 'find', p, actions: l.migrate.mode === 'component' ? ['jsx', 'svg', 'png'] : ['class', 'svg', 'png'], groups: [[null, [...new Set(l.migrate.map.map(r => r[1]))].slice(0, 24)]], q: '', heading: `Find the with icons version of any ${esc(sn)} icon`, intro: `Type the ${esc(sn)} name or just what it means (“${esc(l.searchQ)}”). Search understands synonyms and typos across all ${N} icons.`, placeholder: `Try “${l.searchQ}” or any ${sn} name` })}
 
   ${faqBlock('faq-h', qs, `${esc(name)} alternative: questions`)}
 
@@ -201,7 +201,7 @@ function hub() {
 
   <section aria-labelledby="pick-h">
     <div class="ax-sec-head"><p class="ax-kicker">Quick guide</p><h2 id="pick-h">Which icon library should you use?</h2></div>
-    <ul class="ax-pickers">${guide.map(([w, s]) => `<li data-reveal><b>${esc(w)}</b><span>Look at <a href="${s}.html">${esc(by[s].name)}</a>.</span></li>`).join('')}<li data-reveal><b>You want one set for code, slides and docs, in 7 styles, with no credit</b><span>That’s <a href="${p}icons.html">with icons</a>.</span></li></ul>
+    <ul class="ax-pickers">${guide.map(([w, s]) => `<li data-reveal><b>${esc(w)}</b><span>Look at <a href="${s}.html">${esc(by[s].name)}</a>.</span></li>`).join('')}<li class="is-us" data-reveal><b>You want one set for code, slides and docs, in 7 styles, with no credit</b><span>That’s <a href="${p}icons.html">with icons</a>.</span></li></ul>
   </section>
 
   <section aria-labelledby="open-h"><h2 id="open-h" class="ax-h2">Open-source icon libraries</h2>${cards(LIBS.filter(l => l.kind === 'open'))}</section>

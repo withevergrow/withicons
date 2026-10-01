@@ -244,7 +244,29 @@
     var tries = 0; (function go() { if (getEngine() || tries++ > 30) run(); else setTimeout(go, 100) })()
   }
 
+  /* wide tables (the hub matrix) scroll inside their box on small screens: fade the edge that has more, and say so once */
+  function initScrollHint(wrap) {
+    var hint = null
+    function upd() {
+      var max = wrap.scrollWidth - wrap.clientWidth, x = wrap.scrollLeft
+      var can = max > 4
+      wrap.classList.toggle('is-scroll', can)
+      wrap.classList.toggle('at-start', x <= 4)
+      wrap.classList.toggle('at-end', x >= max - 4)
+      if (can && !hint) {
+        hint = doc.createElement('p'); hint.className = 'ax-swipe'; hint.setAttribute('aria-hidden', 'true')
+        hint.textContent = 'Swipe the table sideways to see every column →'
+        wrap.parentNode.insertBefore(hint, wrap)
+      }
+      if (hint) hint.hidden = !can
+    }
+    wrap.addEventListener('scroll', upd, { passive: true })
+    W.addEventListener('resize', upd)
+    upd()
+  }
+
   function init() {
+    $$('.ax-compare').forEach(initScrollHint)
     $$('[data-picker]').forEach(initPicker)
     $$('[data-converter]').forEach(initConverter)
   }

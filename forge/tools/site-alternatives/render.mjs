@@ -55,7 +55,7 @@ export function answer(html, { tag = 'Short answer', checked = true } = {}) {
  * Icon picker: curated grid (rendered here in Line) + search across all 300 + style, colour and click action.
  * groups: [[title|null, [names]]]; actions: subset of svg|png|dl|dlsvg|class|jsx|vue (first = default)
  */
-export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = 'Search all 300 icons, e.g. “throw away”', colors = true, q = '', heading, intro, size = 32, px = 512 }) {
+export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = 'Search all 300, e.g. “throw away”', colors = true, q = '', heading, intro, size = 32, px = 512 }) {
   const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : []
   for (const [, names] of groups) assertIcons(names, 'picker ' + id)
   const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'] }

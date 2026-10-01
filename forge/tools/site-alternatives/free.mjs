@@ -373,12 +373,20 @@ function hub(all, libs) {
 <div class="ax-page">
   <section class="pg-hero ax-hero">
     ${crumbs([['Home', p + 'index.html'], ['Free icons', null]])}
-    <p class="pg-eyebrow"><span class="hand">free, for whatever you’re making</span></p>
-    <h1 class="pg-title ax-title">Free icons for <span class="pg-hl" style="--g:${cvar('solid')}">every tool</span></h1>
-    ${answer(`with icons is a free, MIT-licensed set of <b>${TOTAL}</b>. Pick the page for the app you’re using: each one has a ready icon grid, the right file format and click-to-copy or download.`, { checked: false })}
+    <div class="ax-hero-grid">
+      <div>
+        <p class="pg-eyebrow"><span class="hand">free, for whatever you’re making</span></p>
+        <h1 class="pg-title ax-title">Free icons for <span class="pg-hl" style="--g:${cvar('solid')}">every tool</span></h1>
+        ${answer(`with icons is a free, MIT-licensed set of <b>${TOTAL}</b>. Pick the page for the app you’re using: each one has a ready icon grid, the right file format and click-to-copy or download.`, { checked: false })}
+      </div>
+      <div class="ax-hero-art" aria-hidden="true">
+        <div class="ax-apps">${all.map((l, i) => `<span class="s-${l.color}" style="--i:${i}">${I(l.icon, l.style || 'duo', 34)}</span>`).join('')}</div>
+        <p class="ax-swap-note hand">one set, every app</p>
+      </div>
+    </div>
   </section>
   ${groups.map(([g, slugs], gi) => `<section class="ax-cards-sec" aria-labelledby="fg-${gi}"><h2 id="fg-${gi}" class="ax-h2">${g}</h2>
-    <ul class="ax-cards">${slugs.map((s, i) => { const l = by[s]; return `<li data-reveal style="--d:${i};--g:${cvar(l.color)}"><a class="ax-card" href="${s}.html"><span class="ax-card-ic">${I(l.icon, l.style || 'duo', 36)}</span><b>${esc(l.short)}</b><span>${esc(l.desc.split('. ')[0].replace(/^[^:]*: /, ''))}</span>${I('arrow-right', 'line', 18, 'ax-card-arr')}</a></li>` }).join('')}</ul></section>`).join('')}
+    <ul class="ax-cards">${slugs.map((s, i) => { const l = by[s]; return `<li data-reveal style="--d:${i};--g:${cvar(l.color)}"><a class="ax-card" href="${s}.html"><span class="ax-card-ic">${I(l.icon, l.style || 'duo', 36)}</span><b>${esc(l.short)}</b><span>${esc(l.desc.split('. ')[0].replace(/^[^:]*: /, '')).replace(/^./, c => c.toUpperCase())}</span>${I('arrow-right', 'line', 18, 'ax-card-arr')}</a></li>` }).join('')}</ul></section>`).join('')}
   ${faqBlock('faq-h', qs)}
   <section class="ax-more" aria-label="Related pages">${altLinks(p, libs, null, 'Looking for an alternative to another icon library?')}</section>
   ${cta(p)}
