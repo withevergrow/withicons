@@ -58,12 +58,22 @@
      --c-<style>-text  a darker/brighter twin that passes AA as text on --paper
      --c-<style>-soft  a pale tint for backgrounds */
   --c-line: #2F5BFF;      --c-line-text: #2448D8;      --c-line-soft: #E3E9FF;
-  --c-solid: #FF5A36;     --c-solid-text: #C93512;     --c-solid-soft: #FFE5DE;
-  --c-duo: #7B5CFF;       --c-duo-text: #5B3CE0;       --c-duo-soft: #ECE6FF;
+  --c-solid: #FF5A36;     --c-solid-text: #BA2F0E;     --c-solid-soft: #FFE5DE;
+  --c-duo: #7252FF;       --c-duo-text: #5B3CE0;       --c-duo-soft: #ECE6FF;
   --c-gloss: #FF4FA3;     --c-gloss-text: #C4166C;     --c-gloss-soft: #FFE2F0;
   --c-engrave: #C9962B;   --c-engrave-text: #8A6414;   --c-engrave-soft: #F6ECD4;
   --c-blueprint: #00A3C4; --c-blueprint-text: #00728A; --c-blueprint-soft: #D9F3F8;
   --c-sketch: #22A861;    --c-sketch-text: #157A43;    --c-sketch-soft: #DDF3E6;
+  /* text/icon colour ON a filled style colour (AA): white on the deep ones, ink on the bright ones */
+  --c-line-on: #FFFFFF; --c-solid-on: #111318; --c-duo-on: #FFFFFF; --c-gloss-on: #111318;
+  --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
+  --c-duo-fill: var(--c-duo); /* kept for compatibility: violet is now deep enough (4.8:1 with white) */
+  --style-on: var(--c-line-on);
+  /* short aliases (library.css relies on these names) */
+  --on-line: var(--c-line-on); --on-solid: var(--c-solid-on); --on-duo: var(--c-duo-on); --on-gloss: var(--c-gloss-on);
+  --on-engrave: var(--c-engrave-on); --on-blueprint: var(--c-blueprint-on); --on-sketch: var(--c-sketch-on);
+  /* focus: ink ring (17:1 on paper) inside a sun halo; dark theme flips the ring to sun */
+  --focus-ring: #111318; --focus-halo: var(--sun);
   /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
      or use the helper classes .s-line … .s-sketch (they also set --style-text and --style-soft) */
   --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft);
@@ -143,6 +153,12 @@
   --c-engrave: #D9A94A;   --c-engrave-text: #E7C17A;   --c-engrave-soft: #33280F;
   --c-blueprint: #19B8D8; --c-blueprint-text: #63D3EA; --c-blueprint-soft: #0B2B33;
   --c-sketch: #34BF73;    --c-sketch-text: #6FD99C;    --c-sketch-soft: #10301E;
+  --c-line-on: #111318; --c-solid-on: #111318; --c-duo-on: #111318; --c-gloss-on: #111318;
+  --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
+  --c-duo-fill: var(--c-duo);
+  --focus-ring: var(--sun); --focus-halo: rgba(255, 210, 63, .28);
+  /* duo previews on dark grounds: a light-ink tint at 20% reads as muddy grey, so tint with the duo violet */
+  --with-duo: var(--c-duo);
   --accent-text: var(--c-line-text);
   --dark: #07080B; --dark-2: #12141B;
   --shadow-s: 0 1px 0 rgba(0,0,0,.3), 0 4px 14px -8px rgba(0,0,0,.7);
@@ -153,13 +169,13 @@
 /* light by default: dark applies only via [data-theme="dark"] (the toggle) */
 
 /* style helper classes: set the "current style" colour trio on any element */
-.s-line { --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft); }
-.s-solid { --style: var(--c-solid); --style-text: var(--c-solid-text); --style-soft: var(--c-solid-soft); }
-.s-duo { --style: var(--c-duo); --style-text: var(--c-duo-text); --style-soft: var(--c-duo-soft); }
-.s-gloss { --style: var(--c-gloss); --style-text: var(--c-gloss-text); --style-soft: var(--c-gloss-soft); }
-.s-engrave { --style: var(--c-engrave); --style-text: var(--c-engrave-text); --style-soft: var(--c-engrave-soft); }
-.s-blueprint { --style: var(--c-blueprint); --style-text: var(--c-blueprint-text); --style-soft: var(--c-blueprint-soft); }
-.s-sketch { --style: var(--c-sketch); --style-text: var(--c-sketch-text); --style-soft: var(--c-sketch-soft); }
+.s-line { --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft); --style-on: var(--c-line-on); --style-fill: initial; }
+.s-solid { --style: var(--c-solid); --style-text: var(--c-solid-text); --style-soft: var(--c-solid-soft); --style-on: var(--c-solid-on); --style-fill: initial; }
+.s-duo { --style: var(--c-duo); --style-text: var(--c-duo-text); --style-soft: var(--c-duo-soft); --style-on: var(--c-duo-on); --style-fill: var(--c-duo-fill); }
+.s-gloss { --style: var(--c-gloss); --style-text: var(--c-gloss-text); --style-soft: var(--c-gloss-soft); --style-on: var(--c-gloss-on); --style-fill: initial; }
+.s-engrave { --style: var(--c-engrave); --style-text: var(--c-engrave-text); --style-soft: var(--c-engrave-soft); --style-on: var(--c-engrave-on); --style-fill: initial; }
+.s-blueprint { --style: var(--c-blueprint); --style-text: var(--c-blueprint-text); --style-soft: var(--c-blueprint-soft); --style-on: var(--c-blueprint-on); --style-fill: initial; }
+.s-sketch { --style: var(--c-sketch); --style-text: var(--c-sketch-text); --style-soft: var(--c-sketch-soft); --style-on: var(--c-sketch-on); --style-fill: initial; }
 
 /* ───────── base ───────── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -177,7 +193,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
 p { text-wrap: pretty; }
-:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 8px; }
+:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px; box-shadow: 0 0 0 7px var(--focus-halo, #FFD23F); border-radius: 8px; }
 ::selection { background: var(--sun); color: #111318; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

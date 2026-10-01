@@ -157,7 +157,7 @@
 .lane { position: relative; height: 66px; display: flex; align-items: center; overflow: hidden; }
 .lane + .lane { margin-top: 4px; }
 .lane-label { position: absolute; z-index: 2; left: var(--gutter); top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px 0 10px;
-  border-radius: var(--pill); background: var(--style); color: #fff; font: 700 13.5px/1 var(--font-sans); text-decoration: none; box-shadow: 0 0 0 6px var(--dark), 0 10px 24px -8px #000;
+  border-radius: var(--pill); background: var(--style-fill, var(--style)); color: var(--style-on, #fff); font: 700 13.5px/1 var(--font-sans); text-decoration: none; box-shadow: 0 0 0 6px var(--dark), 0 10px 24px -8px #000;
   transition: transform .3s var(--e-out); }
 .lane-label:hover { transform: translateY(-50%) scale(1.06); }
 .lane-label .ll-n { font: 500 11px/1 var(--font-mono); opacity: .8; }
@@ -172,7 +172,7 @@
 .lane-tile { flex: none; width: 56px; height: 56px; display: grid; place-items: center; border-radius: 16px; color: var(--style);
   background: color-mix(in srgb, var(--style) 13%, transparent); transition: background-color .25s, color .25s, transform .35s var(--e-spring); }
 .lane-tile svg { width: 30px; height: 30px; }
-.lane-tile:hover { background: var(--style); color: #fff; transform: scale(1.12) rotate(-5deg); }
+.lane-tile:hover { background: var(--style-fill, var(--style)); color: var(--style-on, #fff); transform: scale(1.12) rotate(-5deg); }
 .reduced .lane-track { animation: none; }
 
 /* ═════════════════════ PICK A STYLE ═════════════════════ */
@@ -210,7 +210,7 @@
 .app { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px 0 12px; border-radius: var(--pill); background: var(--card); border: 1px solid var(--rule);
   font: 600 14.5px/1 var(--font-sans); text-decoration: none; color: var(--ink); transition: background-color .25s, color .25s, transform .3s var(--e-out), border-color .25s; }
 .app::before { content: ''; width: 9px; height: 9px; border-radius: 3px; background: var(--style); transform: rotate(45deg); transition: background-color .25s; }
-.app:hover { background: var(--style); color: #fff; border-color: var(--style); transform: translateY(-2px); }
+.app:hover { background: var(--style-fill, var(--style)); color: var(--style-on, #fff); border-color: var(--style); transform: translateY(-2px); }
 .app:hover::before { background: #fff; }
 .mock { position: relative; min-height: 440px; }
 .mock-win { position: absolute; border-radius: 18px; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow-l); overflow: hidden; }
@@ -261,7 +261,7 @@
 .try-cards { display: grid; gap: 14px; }
 .try-card { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; column-gap: 18px; padding: 22px 24px; border-radius: var(--radius-l);
   background: var(--style-soft); }
-.try-card .try-num { grid-row: 1 / 4; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: var(--style); color: #fff; font: 800 20px/1 var(--font-display); }
+.try-card .try-num { grid-row: 1 / 4; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: var(--style-fill, var(--style)); color: var(--style-on, #fff); font: 800 20px/1 var(--font-display); }
 .try-card .h3 { margin: 4px 0 4px; font-size: var(--step-2); }
 .try-card p { margin: 0 0 14px; color: var(--ink-2); font-size: 15px; }
 .try-card .btn { justify-self: start; min-height: 44px; }
@@ -319,7 +319,7 @@
 .use > * { position: relative; z-index: 1; }
 .use:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--style) 40%, transparent); }
 .use:hover::after { transform: scale(1.5); }
-.use-ic { width: 60px; height: 60px; display: grid; place-items: center; border-radius: 18px; background: var(--style); color: #fff; margin-bottom: 22px; }
+.use-ic { width: 60px; height: 60px; display: grid; place-items: center; border-radius: 18px; background: var(--style-fill, var(--style)); color: var(--style-on, #fff); margin-bottom: 22px; }
 .use-ic svg { width: 36px; height: 36px; }
 .use-who { margin: 0 0 6px; font: 750 var(--step-1)/1.1 var(--font-display); letter-spacing: -.02em; }
 .use-what { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.5; }
@@ -353,7 +353,7 @@
 .final-inner { position: relative; z-index: 2; }
 .final-title { margin: 0; font: 800 clamp(3.2rem, 1rem + 9vw, 9.5rem)/.88 var(--font-display); letter-spacing: -.06em; font-variation-settings: 'opsz' 96; }
 .final-title .hand { display: block; font-size: .5em; font-weight: 700; color: var(--sun); transform: rotate(-4deg); letter-spacing: 0; margin-bottom: .08em; }
-.final .lede { margin: 22px auto 34px; color: rgba(255,255,255,.82); text-align: center; }
+.final .lede { margin: 22px auto 34px; color: #fff; text-align: center; }
 .final-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
 .final-orbit { position: absolute; z-index: 1; left: 50%; top: 50%; width: min(1200px, 150vw); aspect-ratio: 1.9; transform: translate(-50%, -50%); pointer-events: none; }
 .orb { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; display: grid; place-items: center; border-radius: 20px;
@@ -454,7 +454,7 @@ body[data-page="home"] .site-footer { margin-top: 0; z-index: 3; }
 .ask-input { width: 100%; resize: none; min-height: 84px; padding: 14px 16px; border-radius: 18px; border: 1.5px solid var(--rule-strong); background: var(--paper);
   font: 600 clamp(17px, 1rem + .3vw, 20px)/1.35 var(--font-sans); letter-spacing: -.015em; color: var(--ink); transition: border-color .2s, box-shadow .3s var(--e-out); }
 .ask-input::placeholder { color: var(--faint); font-weight: 500; }
-.ask-input:focus { outline: 0; border-color: var(--c-duo); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c-duo) 18%, transparent); }
+.ask-input:focus { outline: 0; border-color: var(--c-duo-text); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c-duo) 18%, transparent); }
 .ask-examples { display: flex; flex-wrap: wrap; gap: 6px; }
 .ask-examples .hs-pill { height: 30px; font-size: 13px; }
 .ask-peek summary { cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--muted); width: max-content; }
@@ -541,3 +541,21 @@ body[data-page="home"] .site-footer { margin-top: 0; z-index: 3; }
 .hs-input { width: 0; } /* flex: 1 sizes it; keeps the box's min-content small now that Ask AI sits beside it */
 .hs-empty .hs-empty-ask .ask-ai-btn { border: 1px solid var(--rule-strong); }
 .hs-empty .hs-empty-ask .ask-ai-copy { border-style: dashed; background: var(--paper-2); }
+
+/* ── review 2026-10-02 ── */
+/* consecutive plain-paper sections: don't stack two full paddings (was ~230px of dead air at 1440) */
+.actions-sec + .duo-sec, .duo-sec + .ask-sec, .ask-sec + .tools-sec, .tools-sec + .uses, .ask-sec + .tools-sec[hidden] + .uses, .uses + .faq { padding-top: clamp(24px, 3vw, 44px); }
+/* 8 assistants don't fit one row on desktop: wrap instead of hiding tabs off the right edge */
+@media (min-width: 901px) { .tools-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; } .tools-tabs [role=tab] { justify-content: flex-start; padding-left: 12px; } }
+/* narrow screens keep the swipeable row, with a fade that says "there is more" */
+@media (max-width: 900px) {
+  .tools-box { position: relative; }
+  .tools-box::after { content: ""; position: absolute; top: 0; right: 0; width: 44px; height: 72px; pointer-events: none; z-index: 1;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--paper-2) 0%, transparent), var(--paper-2) 85%); border-top-right-radius: inherit; }
+  .tools-tabs { padding-right: 40px; }
+}
+.tl-logo.is-icon { color: #111318; }
+.tl-logo.is-icon svg { width: 62%; height: 62%; }
+/* keyboard focus inside the hero search pill: a real ring, not just the soft sun glow */
+.hs-box:has(.hs-input:focus-visible) { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 3px; }
+.hs-input:focus-visible { box-shadow: none; }

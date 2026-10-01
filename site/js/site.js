@@ -446,7 +446,7 @@
   }
 
   /* ───────────── code highlighting (tiny, for our own snippets) ───────────── */
-  var HL = /(\/\/[^\n]*|^[ \t]*#[^\n]*|<!--[\s\S]*?-->|\/\*[\s\S]*?\*\/)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`[^`]*`)|(<\/?)([A-Za-z][\w.-]*)|\b(import|from|export|default|const|let|return|function|new|class|as|true|false|null)\b|([A-Za-z_:@[\]().-]*[A-Za-z_\]])(?==)|(\b\d+(?:\.\d+)?\b)|([{}[\]()<>/=;:,]|\/?>)/gm
+  var HL = /((?<![:\w])\/\/[^\n]*|^[ \t]*#[^\n]*|<!--[\s\S]*?-->|\/\*[\s\S]*?\*\/)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`[^`]*`)|(<\/?)([A-Za-z][\w.-]*)|\b(import|from|export|default|const|let|return|function|new|class|as|true|false|null)\b|([A-Za-z_:@[\]().-]*[A-Za-z_\]])(?==)|(\b\d+(?:\.\d+)?\b)|([{}[\]()<>/=;:,]|\/?>)/gm
   function highlight(code) {
     var out = '', last = 0, m
     HL.lastIndex = 0
@@ -1625,9 +1625,9 @@
      theme-aware elsewhere); the navbar byline gets the tiny square mark. */
   function evergrowLogo(onDark) {
     var b = esc(scriptBase + 'brand/')
-    if (onDark) return '<img class="eg-logo" src="' + b + 'evergrow-white.webp" width="400" height="91" alt="Evergrow" decoding="async" loading="lazy">'
-    return '<img class="eg-logo eg-on-light" src="' + b + 'evergrow-black.webp" width="400" height="91" alt="Evergrow" decoding="async" loading="lazy">' +
-      '<img class="eg-logo eg-on-dark" src="' + b + 'evergrow-white.webp" width="400" height="91" alt="" decoding="async" loading="lazy">'
+    if (onDark) return '<img class="eg-logo" src="' + b + 'evergrow-white.webp" width="400" height="91" alt="Evergrow" decoding="async" loading="eager">'
+    return '<img class="eg-logo eg-on-light" src="' + b + 'evergrow-black.webp" width="400" height="91" alt="Evergrow" decoding="async" loading="eager">' +
+      '<img class="eg-logo eg-on-dark" src="' + b + 'evergrow-white.webp" width="400" height="91" alt="" decoding="async" loading="eager">'
   }
   function initEvergrow() {
     $$('[data-evergrow-mark]').forEach(function (m) {

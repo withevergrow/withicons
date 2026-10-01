@@ -545,7 +545,12 @@
   }
   function logo(it, cls) {
     var l = it.logo || {}, light = typeof l === 'string' ? l : l.light, dark = typeof l === 'string' ? l : (l.dark || l.light)
-    if (!light) return '<span class="tl-logo ' + cls + ' is-text" aria-hidden="true">' + esc((it.name || '?').charAt(0)) + '</span>'
+    if (!light) {
+      // no brand mark supplied (vscode, windsurf): our own `code` icon on the same white tile
+      var ic = window.WI && WI.svg ? WI.svg('code', 'line', 24) : ''
+      return ic ? '<span class="tl-logo ' + cls + ' is-icon" aria-hidden="true">' + ic + '</span>'
+        : '<span class="tl-logo ' + cls + ' is-text" aria-hidden="true" data-tl-code>' + esc((it.name || '?').charAt(0)) + '</span>'
+    }
     var base = (window.WI && WI.base) || ''
     var src = function (p) { return esc(/^(https?:|data:)/.test(p) ? p : base + String(p).replace(/^\.?\//, '')) }
     return '<span class="tl-logo ' + cls + '" aria-hidden="true"><img class="tl-l" src="' + src(light) + '" alt="" width="24" height="24" loading="lazy" decoding="async">' +
@@ -612,6 +617,12 @@
     })
     sec.hidden = false
     show(0)
+    if (sec.querySelector('[data-tl-code]') && window.WI && WI.loadStyle) {
+      WI.loadStyle('line').then(function () {
+        var ic = WI.svg('code', 'line', 24)
+        if (ic) sec.querySelectorAll('[data-tl-code]').forEach(function (s) { s.innerHTML = ic; s.classList.remove('is-text'); s.classList.add('is-icon'); s.removeAttribute('data-tl-code') })
+      })
+    }
   }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init()
 })()
