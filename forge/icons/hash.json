@@ -1,0 +1,56 @@
+{
+  "name": "hash",
+  "category": "text",
+  "description": "A hash symbol for hashtags, topics, and chat channels.",
+  "aliases": [
+    "hashtag",
+    "pound",
+    "number-sign",
+    "octothorpe",
+    "channel",
+    "sharp"
+  ],
+  "tags": [
+    "hashtag",
+    "symbol",
+    "social",
+    "number",
+    "channel"
+  ],
+  "paths": [
+    {
+      "d": "M10 3.5 L8 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16 3.5 L14 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 9 H20",
+      "plate": "A"
+    },
+    {
+      "d": "M4 15 H20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "hash tag",
+    "topic",
+    "tag",
+    "trending",
+    "number",
+    "pound sign",
+    "slack channel",
+    "chat room",
+    "id number",
+    "count",
+    "social media",
+    "twitter tag",
+    "anchor link",
+    "c sharp"
+  ]
+}

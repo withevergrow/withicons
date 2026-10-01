@@ -1,0 +1,81 @@
+{
+  "name": "bot",
+  "category": "development",
+  "description": "A robot head with an antenna and two eyes for assistants, agents, and automated senders.",
+  "aliases": [
+    "robot",
+    "chatbot",
+    "assistant",
+    "ai-bot",
+    "robot-head",
+    "agent",
+    "android"
+  ],
+  "tags": [
+    "robot",
+    "ai",
+    "automation",
+    "machine",
+    "assistant",
+    "agent"
+  ],
+  "paths": [
+    {
+      "d": "M8 8 H16 A3 3 0 0 1 19 11 V17.5 A3 3 0 0 1 16 20.5 H8 A3 3 0 0 1 5 17.5 V11 A3 3 0 0 1 8 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 V4.75",
+      "plate": "A"
+    },
+    {
+      "d": "M13.25 3.5 A1.25 1.25 0 1 1 10.75 3.5 A1.25 1.25 0 1 1 13.25 3.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 13 V15",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 13 V15",
+      "plate": "A"
+    },
+    {
+      "d": "M2 12.5 V16",
+      "plate": "A"
+    },
+    {
+      "d": "M22 12.5 V16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 8 H16 A3 3 0 0 1 19 11 V17.5 A3 3 0 0 1 16 20.5 H8 A3 3 0 0 1 5 17.5 V11 A3 3 0 0 1 8 8 Z"
+  ],
+  "cutouts": [
+    "M8.5 13 A1 1 0 0 1 10.5 13 V15 A1 1 0 0 1 8.5 15 Z",
+    "M13.5 13 A1 1 0 0 1 15.5 13 V15 A1 1 0 0 1 13.5 15 Z"
+  ],
+  "synonyms": [
+    "ai",
+    "artificial intelligence",
+    "ai assistant",
+    "virtual assistant",
+    "chat bot",
+    "automation",
+    "automated",
+    "machine",
+    "helper",
+    "bot message",
+    "customer support bot",
+    "gpt",
+    "llm",
+    "copilot",
+    "ask ai",
+    "droid",
+    "cyborg",
+    "auto reply",
+    "smart assistant",
+    "robo"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "volume-off",
+  "category": "media",
+  "description": "A speaker with an X in place of its sound waves for muted audio.",
+  "aliases": [
+    "mute",
+    "sound-off",
+    "speaker-off",
+    "no-sound",
+    "volume-mute",
+    "volume-x",
+    "silent"
+  ],
+  "tags": [
+    "media",
+    "audio",
+    "sound",
+    "speaker",
+    "silence"
+  ],
+  "paths": [
+    {
+      "d": "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.25 9.25 L20.75 14.75",
+      "plate": "S"
+    },
+    {
+      "d": "M20.75 9.25 L15.25 14.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "muted",
+    "silence",
+    "quiet",
+    "mute audio",
+    "turn off sound",
+    "audio off",
+    "no audio",
+    "sound muted",
+    "hush",
+    "shh",
+    "do not disturb",
+    "speaker muted",
+    "mute button",
+    "sound disabled",
+    "silent mode",
+    "volume zero"
+  ]
+}

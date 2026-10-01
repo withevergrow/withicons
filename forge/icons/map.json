@@ -1,0 +1,74 @@
+{
+  "name": "map",
+  "category": "maps",
+  "description": "A folded paper map with three panels and visible fold creases.",
+  "aliases": [
+    "folded-map",
+    "paper-map",
+    "atlas",
+    "cartography",
+    "route-map",
+    "travel-map",
+    "street-map",
+    "road-map"
+  ],
+  "tags": [
+    "map",
+    "travel",
+    "geography",
+    "location",
+    "fold",
+    "trifold"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 L9 3.5 L15 6 L21 3.5 V18 L15 20.5 L9 18 L3 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 3.5 V18",
+      "plate": "A"
+    },
+    {
+      "d": "M15 6 V20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 6 L9 3.5 L15 6 L21 3.5 V18 L15 20.5 L9 18 L3 20.5 Z"
+  ],
+  "cutouts": [
+    "M9 4.5 V17",
+    "M15 7 V19.5"
+  ],
+  "synonyms": [
+    "maps",
+    "geography",
+    "guide",
+    "tourist map",
+    "city map",
+    "world map",
+    "area",
+    "region",
+    "territory",
+    "explore",
+    "exploration",
+    "travel",
+    "trip",
+    "journey",
+    "directions",
+    "navigate",
+    "adventure",
+    "hiking",
+    "trail",
+    "road trip",
+    "plan a trip",
+    "sightseeing",
+    "terrain",
+    "locate",
+    "treasure map",
+    "site map",
+    "floor plan",
+    "mapp"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "check-circle",
+  "category": "status",
+  "description": "A checkmark in a circle signalling a successful or completed state.",
+  "aliases": [
+    "success",
+    "circle-check",
+    "checkmark-circle",
+    "approved",
+    "verified",
+    "completed",
+    "ok-circle"
+  ],
+  "tags": [
+    "check",
+    "success",
+    "done",
+    "complete",
+    "tick",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12.5 L10.75 15.25 L16 9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M8 12.5 L10.75 15.25 L16 9.5"
+  ],
+  "synonyms": [
+    "done",
+    "complete",
+    "confirmed",
+    "valid",
+    "ok",
+    "okay",
+    "all good",
+    "passed",
+    "finished",
+    "accepted",
+    "correct",
+    "right",
+    "resolved",
+    "task complete",
+    "goal reached",
+    "success message",
+    "saved successfully",
+    "sent",
+    "paid",
+    "delivered",
+    "green tick",
+    "tick in circle",
+    "active",
+    "online"
+  ]
+}

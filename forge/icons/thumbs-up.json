@@ -1,0 +1,74 @@
+{
+  "name": "thumbs-up",
+  "category": "status",
+  "description": "A raised thumb for approval, upvotes and positive feedback.",
+  "aliases": [
+    "like",
+    "upvote",
+    "approve",
+    "agree",
+    "positive",
+    "good",
+    "helpful",
+    "thumb-up",
+    "okay",
+    "well-done"
+  ],
+  "tags": [
+    "feedback",
+    "approval",
+    "hand",
+    "vote",
+    "positive"
+  ],
+  "paths": [
+    {
+      "d": "M7 10 L9.97 3.78 A2.25 2.25 0 0 1 14.25 4.88 L14 9 H18.5 C19.9 9 20.9 10.3 20.6 11.7 L19.2 19.1 C19 20.2 18.1 21 17 21 H7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 10 H4.5 A1.5 1.5 0 0 0 3 11.5 V19.5 A1.5 1.5 0 0 0 4.5 21 H7",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 10 L9.97 3.78 A2.25 2.25 0 0 1 14.25 4.88 L14 9 H18.5 C19.9 9 20.9 10.3 20.6 11.7 L19.2 19.1 C19 20.2 18.1 21 17 21 H7 Z",
+    "M7 10 H4.5 A1.5 1.5 0 0 0 3 11.5 V19.5 A1.5 1.5 0 0 0 4.5 21 H7 Z"
+  ],
+  "cutouts": [
+    "M7 10 V21"
+  ],
+  "synonyms": [
+    "thumbs up",
+    "yes",
+    "ok",
+    "nice",
+    "great",
+    "good job",
+    "awesome",
+    "cool",
+    "approved",
+    "approval",
+    "liked",
+    "likes",
+    "love it",
+    "vote up",
+    "up vote",
+    "positive feedback",
+    "recommend",
+    "endorse",
+    "support",
+    "success",
+    "fine",
+    "sounds good",
+    "thank you",
+    "thanks",
+    "was this helpful",
+    "agreed",
+    "all good",
+    "thumb up",
+    "thums up",
+    "likes count",
+    "yep"
+  ]
+}

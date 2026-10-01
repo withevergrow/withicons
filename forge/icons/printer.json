@@ -1,0 +1,62 @@
+{
+  "name": "printer",
+  "category": "devices",
+  "description": "A printer feeding a sheet of paper, for print actions and printable views.",
+  "aliases": [
+    "print",
+    "printing",
+    "hardcopy",
+    "print-preview",
+    "print-document",
+    "print-page",
+    "printout"
+  ],
+  "tags": [
+    "paper",
+    "office",
+    "document",
+    "hardware",
+    "output"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 8 V3.5 A1 1 0 0 1 7.5 2.5 H16.5 A1 1 0 0 1 17.5 3.5 V8",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 17.5 H4.5 A2 2 0 0 1 2.5 15.5 V10 A2 2 0 0 1 4.5 8 H19.5 A2 2 0 0 1 21.5 10 V15.5 A2 2 0 0 1 19.5 17.5 H17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 14 H17.5 V20.5 A1 1 0 0 1 16.5 21.5 H7.5 A1 1 0 0 1 6.5 20.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 8 H19.5 A2 2 0 0 1 21.5 10 V15.5 A2 2 0 0 1 19.5 17.5 H17.5 V14 H6.5 V17.5 H4.5 A2 2 0 0 1 2.5 15.5 V10 A2 2 0 0 1 4.5 8 Z",
+    "M6.5 8 V3.5 A1 1 0 0 1 7.5 2.5 H16.5 A1 1 0 0 1 17.5 3.5 V8 Z",
+    "M6.5 14 H17.5 V20.5 A1 1 0 0 1 16.5 21.5 H7.5 A1 1 0 0 1 6.5 20.5 Z"
+  ],
+  "cutouts": [
+    "M5 6.25 H19",
+    "M4.75 19.5 V12.25 H19.25 V19.5"
+  ],
+  "synonyms": [
+    "printed",
+    "printer friendly",
+    "print this",
+    "paper",
+    "office",
+    "ink",
+    "toner",
+    "photocopy",
+    "scanner",
+    "fax",
+    "hard copy",
+    "document",
+    "inkjet",
+    "laser printer",
+    "priner",
+    "printr"
+  ]
+}

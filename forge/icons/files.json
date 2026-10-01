@@ -1,0 +1,63 @@
+{
+  "name": "files",
+  "category": "files",
+  "description": "Two stacked pages for multiple files, copies or a document set.",
+  "aliases": [
+    "documents",
+    "multiple-files",
+    "file-stack",
+    "all-files",
+    "stacked-files",
+    "file-set"
+  ],
+  "tags": [
+    "files",
+    "documents",
+    "stack",
+    "multiple",
+    "pages",
+    "collection"
+  ],
+  "paths": [
+    {
+      "d": "M15.5 6.5 H9.5 A2 2 0 0 0 7.5 8.5 V19.5 A2 2 0 0 0 9.5 21.5 H18.5 A2 2 0 0 0 20.5 19.5 V11.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 6.5 V10 A1.5 1.5 0 0 0 17 11.5 H20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 17.5 V4.5 A2 2 0 0 1 5.5 2.5 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M15.5 6.5 H9.5 A2 2 0 0 0 7.5 8.5 V19.5 A2 2 0 0 0 9.5 21.5 H18.5 A2 2 0 0 0 20.5 19.5 V11.5 Z",
+    "M3.5 17.5 V4.5 A2 2 0 0 1 5.5 2.5 H13 V4.5 H5.5 V17.5 Z"
+  ],
+  "cutouts": [
+    "M15.5 6.5 V10 A1.5 1.5 0 0 0 17 11.5 H20.5",
+    "M6 18 V5 H13.5"
+  ],
+  "synonyms": [
+    "docs",
+    "pages",
+    "duplicate",
+    "duplicate file",
+    "copies",
+    "many files",
+    "several files",
+    "bulk",
+    "batch",
+    "papers",
+    "stack of papers",
+    "document set",
+    "multiple documents",
+    "attachments",
+    "records",
+    "filez",
+    "library",
+    "paperwork"
+  ]
+}

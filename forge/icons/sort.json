@@ -1,0 +1,68 @@
+{
+  "name": "sort",
+  "category": "layout",
+  "description": "A downward arrow beside lines of shrinking length, for changing the sort order of a collection.",
+  "aliases": [
+    "order",
+    "order-by",
+    "sort-by",
+    "sort-order",
+    "arrange",
+    "ascending",
+    "descending",
+    "asc-desc",
+    "sort-descending"
+  ],
+  "tags": [
+    "sort",
+    "order",
+    "list",
+    "arrange",
+    "rank",
+    "table"
+  ],
+  "paths": [
+    {
+      "d": "M13.5 5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 12 H18.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 19 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M6 4 V20",
+      "plate": "A"
+    },
+    {
+      "d": "M2 16 L6 20 L10 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "sorting",
+    "reorder",
+    "rank",
+    "ranking",
+    "organise",
+    "organize",
+    "a to z",
+    "z to a",
+    "high to low",
+    "low to high",
+    "newest first",
+    "oldest first",
+    "sort list",
+    "sort items",
+    "arrange by",
+    "sorted",
+    "sorter",
+    "order list"
+  ]
+}

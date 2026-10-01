@@ -1,0 +1,411 @@
+/* with icons — generated pages: icons/<name>.html, categories/<cat>.html, styles/<style>.html.
+   Built on tokens.css (colour, type, radii, motion) and chrome.css (.wrap, .btn, header, footer). */
+
+.ip-page {
+  --sc: var(--style, #2F5BFF);
+  --ip-e: var(--e-out, cubic-bezier(.2, .8, .2, 1));
+  --ip-spring: var(--e-spring, cubic-bezier(.34, 1.56, .64, 1));
+  --ic: var(--ink);
+}
+.ip-page main { overflow-x: clip; }
+.ip, .hub { --sc: var(--style, #2F5BFF); }
+
+/* breadcrumbs */
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; font: 500 13.5px/1.4 var(--font-sans); color: var(--muted); }
+.crumbs li + li::before { content: "/"; margin-right: 6px; opacity: .5 }
+.crumbs a { color: inherit; text-decoration: none }
+.crumbs a:hover { color: var(--ink); text-decoration: underline }
+.crumbs [aria-current] { color: var(--ink); font-weight: 600 }
+
+/* shared type */
+.ip-eyebrow { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; font: 600 12.5px/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.ip-eyebrow a { color: inherit }
+.ip-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sc) 22%, transparent); transition: background .5s var(--ip-e); }
+.ip-h1 { margin: 0; font: 800 clamp(44px, 6.5vw, 92px)/.94 var(--font-display); letter-spacing: -.04em; text-wrap: balance; }
+.ip-hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: 0; color: var(--style-text, var(--sc)); display: inline-block; transform: rotate(-3deg); font-size: 1.08em; transition: color .5s var(--ip-e); }
+.ip-lede { max-width: 54ch; margin: 18px 0 0; font: 400 clamp(17px, 1.5vw, 20px)/1.5 var(--font-sans); color: var(--ink-2, var(--ink)); text-wrap: pretty; }
+.ip-aka-line { max-width: 60ch; margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.ip-aka-line b { color: var(--ink); font-weight: 650; margin-right: 4px }
+.ip-h2 { margin: 0; font: 780 clamp(28px, 3.6vw, 48px)/1 var(--font-display); letter-spacing: -.03em; text-wrap: balance; }
+.ip-section { padding: clamp(48px, 7vw, 96px) 0 0; }
+.ip-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 32px; margin-bottom: clamp(20px, 3vw, 32px); }
+.ip-head > p { margin: 0; max-width: 48ch; color: var(--muted); font-size: 16px; line-height: 1.5 }
+.ip-head a, .ip-apps a, .ip-note a, .ip-soon a, .hub-when a { color: var(--ink); font-weight: 650; text-decoration-color: var(--sc); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.ip-head .arr, .ip-app .arr { width: 16px; height: 16px; vertical-align: -3px; transition: transform .3s var(--ip-spring) }
+.ip-head a:hover .arr, .ip-app a:hover .arr { transform: translateX(3px) }
+
+/* ─────────── hero ─────────── */
+.ip-hero { padding: clamp(18px, 3vw, 32px) 0 0; }
+.ip-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: start; margin-top: clamp(18px, 3vw, 36px); }
+.ip-intro { min-width: 0 }
+.ip-pick { display: flex; flex-wrap: wrap; gap: 6px; margin: 26px 0 0; }
+.ip-pick-b { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 14px 0 10px; border-radius: 999px; border: 1.5px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 600 14px/1 var(--font-sans); cursor: pointer; transition: transform .25s var(--ip-spring), background .25s, border-color .25s, color .25s; }
+.ip-pick-b svg { width: 22px; height: 22px; color: var(--sc) }
+.ip-pick-b:hover { transform: translateY(-2px); border-color: var(--sc) }
+.ip-pick-b[aria-checked="true"] { background: var(--sc); border-color: var(--sc); color: #fff; box-shadow: 0 10px 22px -12px var(--sc) }
+.ip-pick-b[aria-checked="true"] svg { color: #fff }
+.ip-pick-b:focus-visible, .ip-btn:focus-visible, .ip-seg button:focus-visible, .ip-sw button:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px }
+
+.ip-actions { display: grid; gap: 10px; margin-top: 18px; max-width: 560px; }
+.ip-btn { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: left; padding: 14px 18px; border-radius: 18px; border: 1.5px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 750 18px/1.1 var(--font-display); cursor: pointer; transition: transform .25s var(--ip-spring), border-color .2s, box-shadow .3s; }
+.ip-btn svg { grid-row: span 2; width: 24px; height: 24px }
+.ip-btn small { font: 500 13px/1.3 var(--font-sans); color: var(--muted) }
+.ip-btn:hover { transform: translateY(-2px); border-color: var(--sc) }
+.ip-btn:active { transform: scale(.97) }
+.ip-btn.is-primary { background: var(--sc); border-color: var(--sc); color: #fff; padding: 18px 22px; font-size: 22px; box-shadow: 0 18px 36px -18px var(--sc); transition: transform .25s var(--ip-spring), background .5s var(--ip-e), border-color .5s var(--ip-e), box-shadow .3s; }
+.ip-btn.is-primary small { color: rgba(255, 255, 255, .88) }
+.ip-btn.is-primary svg { width: 28px; height: 28px }
+.ip-btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
+.ip-opts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.ip-seg { display: inline-flex; padding: 4px; border-radius: 14px; background: var(--paper-2); }
+.ip-seg button { min-width: 64px; height: 36px; padding: 0 12px; border: 0; border-radius: 10px; background: none; color: var(--muted); font: 650 14px/1 var(--font-mono); cursor: pointer }
+.ip-seg button small { font-size: 10px; margin-left: 2px; opacity: .7 }
+.ip-seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(0, 0, 0, .14) }
+.ip-sw { display: flex; align-items: center; gap: 6px }
+.ip-sw button, .ip-sw-custom { position: relative; width: 36px; height: 36px; padding: 4px; border-radius: 50%; border: 2px solid transparent; background: none; cursor: pointer; display: grid; place-items: center }
+.ip-sw span { display: block; width: 100%; height: 100%; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--rule-strong) }
+.ip-sw .is-style { background: var(--sc); transition: background .5s var(--ip-e) }
+.ip-sw button[aria-pressed="true"], .ip-sw-custom.is-on { border-color: var(--sc) }
+.ip-sw-custom input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer }
+.ip-sw-custom span { background: conic-gradient(#FF5A36, #FFD23F, #22A861, #00A3C4, #2F5BFF, #7B5CFF, #FF4FA3, #FF5A36) }
+.ip-textbtn { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 2px; border: 0; background: none; color: var(--ink); font: 650 15px/1.2 var(--font-sans); cursor: pointer }
+.ip-textbtn svg { width: 18px; height: 18px; color: var(--sc) }
+.ip-textbtn small { font-weight: 500; color: var(--muted) }
+.ip-textbtn:hover { text-decoration: underline; text-decoration-color: var(--sc); text-decoration-thickness: 2px }
+
+/* the stage */
+.ip-stage {
+  position: relative; border-radius: clamp(24px, 3vw, 36px); padding: clamp(20px, 3vw, 32px); overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 110%, color-mix(in srgb, var(--sc) 34%, transparent), transparent 62%), var(--paper-2);
+  border: 1px solid var(--rule); transition: background .6s var(--ip-e);
+}
+.ip-stage::before { content: ""; position: absolute; inset: 0; opacity: .55; pointer-events: none;
+  background: linear-gradient(var(--rule) 1px, transparent 1px) 0 0/calc(100% / 12) calc(100% / 12), linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0/calc(100% / 12) calc(100% / 12);
+  mask: radial-gradient(circle at 50% 45%, #000 20%, transparent 70%); -webkit-mask: radial-gradient(circle at 50% 45%, #000 20%, transparent 70%); }
+.ip-stage-art { position: relative; aspect-ratio: 1; display: grid; place-items: center; color: var(--ic); cursor: grab; }
+.ip-stage-art:active { cursor: grabbing }
+.ip-stage-art svg { width: 64%; max-width: 380px; height: auto; aspect-ratio: 1; overflow: visible; scale: var(--opt, 1); transition: color .4s var(--ip-e), scale .4s var(--ip-e); filter: drop-shadow(0 20px 30px color-mix(in srgb, var(--sc) 30%, transparent)); }
+.ip.is-white .ip-stage { background: radial-gradient(120% 90% at 50% 110%, color-mix(in srgb, var(--sc) 60%, transparent), transparent 70%), #1B1E26 }
+.ip-stage-hint { position: absolute; right: clamp(18px, 3vw, 30px); top: clamp(16px, 2.5vw, 26px); margin: 0; font: 700 22px/1 var(--font-hand); color: var(--style-text, var(--sc)); transform: rotate(-5deg); }
+.ip-sizes { position: relative; display: flex; justify-content: center; align-items: end; gap: clamp(14px, 3vw, 34px); margin: 4px 0 0; padding-top: 18px; border-top: 1px dashed var(--rule-strong); color: var(--ic) }
+.ip-sizes figure { margin: 0; display: grid; justify-items: center; gap: 8px }
+.ip-sizes figcaption { font: 600 11px/1 var(--font-mono); color: var(--muted) }
+
+/* ─────────── use it in… ─────────── */
+.ip-app-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: none }
+.ip-app { position: relative; display: flex; flex-direction: column; padding: 20px 18px 18px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule); transition: transform .3s var(--ip-spring), border-color .3s, box-shadow .3s; }
+.ip-app:hover { transform: translateY(-4px); border-color: var(--app); box-shadow: 0 20px 40px -26px var(--app) }
+.ip-app h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 750 19px/1.1 var(--font-display); letter-spacing: -.01em }
+.ip-app-dot { width: 14px; height: 14px; border-radius: 5px; background: var(--app); transform: rotate(45deg) }
+.ip-app ol { margin: 0 0 14px; padding-left: 20px; display: grid; gap: 7px; font-size: 14.5px; line-height: 1.45; color: var(--ink-2, var(--ink)); flex: 1 }
+.ip-app ol li::marker { font: 700 12px var(--font-mono); color: var(--muted) }
+.ip-app kbd { font-size: 11.5px }
+.ip-app > a { font-size: 14px; text-decoration-color: var(--app) }
+
+/* ─────────── every style ─────────── */
+.ip-styles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 152px), 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none }
+.ip-sc { position: relative; display: flex; flex-direction: column; padding: 16px; border-radius: 24px; background: var(--card); border: 1px solid var(--rule); transition: transform .3s var(--ip-spring), box-shadow .3s; }
+.ip-sc:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -28px var(--sc) }
+.ip-sc-art { height: 150px; padding: 28px; box-sizing: border-box; display: grid; place-items: center; border-radius: 16px; background: color-mix(in srgb, var(--sc) 12%, var(--card)); color: var(--ink); margin-bottom: 14px; transition: background .3s }
+.ip-sc:hover .ip-sc-art { background: var(--sc); color: #fff }
+.ip-sc-art svg { width: 80px; height: 80px; overflow: visible; scale: var(--opt, 1); transition: transform .45s var(--ip-spring) }
+.ip-sc:hover .ip-sc-art svg { transform: scale(1.1) rotate(-4deg) }
+.ip-sc h3 { margin: 0; display: flex; align-items: baseline; gap: 8px; font: 750 20px/1.1 var(--font-display) }
+.ip-sc h3 a { color: inherit; text-decoration: none }
+.ip-sc h3 a:hover { text-decoration: underline; text-decoration-color: var(--sc) }
+.ip-sc h3 small { font: 600 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--sc) }
+.ip-sc p { margin: 6px 0 14px; font-size: 14px; line-height: 1.45; color: var(--muted); flex: 1 }
+.ip-sc-act { display: flex; gap: 6px }
+.ip-sc-act button { flex: 1; display: grid; place-items: center; height: 38px; border-radius: 11px; border: 1.5px solid var(--rule-strong); background: none; color: var(--ink); font: 700 13.5px/1 var(--font-sans); cursor: pointer; transition: background .2s, border-color .2s, color .2s }
+.ip-sc-act button:last-child { flex: none; width: 44px }
+.ip-sc-act button svg { width: 18px; height: 18px }
+.ip-sc-act button:hover { background: var(--sc); border-color: var(--sc); color: #fff }
+
+/* ─────────── also known as ─────────── */
+.ip-names { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start }
+.ip-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
+.ip-chips a, .ip-chips span { display: inline-block; padding: 9px 15px; border-radius: 999px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); font: 550 15px/1.2 var(--font-sans); text-decoration: none; transition: transform .25s var(--ip-spring), border-color .2s, background .2s }
+.ip-chips a:hover { transform: translateY(-2px) rotate(-1deg); border-color: var(--sc); background: color-mix(in srgb, var(--sc) 10%, var(--card)) }
+.ip-facts { display: grid; gap: 0; margin: 0; border-radius: 22px; background: var(--card); border: 1px solid var(--rule); overflow: hidden }
+.ip-facts > div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 13px 18px; border-top: 1px solid var(--rule) }
+.ip-facts > div:first-child { border-top: 0 }
+.ip-facts dt { font: 600 12px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted) }
+.ip-facts dd { margin: 0; font-size: 15px; line-height: 1.5 }
+.ip-facts a { color: var(--ink) }
+
+/* ─────────── developers ─────────── */
+.ip-dev { border-radius: clamp(24px, 3vw, 32px); background: var(--dark); color: var(--on-dark); overflow: hidden }
+.ip-dev > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: clamp(22px, 3vw, 32px); cursor: pointer }
+.ip-dev > summary::-webkit-details-marker { display: none }
+.ip-dev-t { display: grid; gap: 6px }
+.ip-dev-t .ip-h2 { color: var(--on-dark) }
+.ip-dev-t small { font: 500 14px/1.4 var(--font-sans); color: var(--on-dark-2, rgba(247, 243, 236, .7)) }
+.ip-dev-plus { position: relative; flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--sun); transition: transform .4s var(--ip-spring) }
+.ip-dev-plus::before, .ip-dev-plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 20px; height: 3px; margin: -1.5px 0 0 -10px; border-radius: 2px; background: #111318 }
+.ip-dev-plus::after { transform: rotate(90deg) }
+.ip-dev[open] .ip-dev-plus { transform: rotate(135deg) }
+.ip-dev > :not(summary) { margin-left: clamp(22px, 3vw, 32px); margin-right: clamp(22px, 3vw, 32px) }
+.ip-soon { margin-top: 0; font-size: 15px; line-height: 1.5; color: var(--on-dark-2, rgba(247, 243, 236, .75)) }
+.ip-soon b { color: var(--on-dark) }
+.ip-soon code, .ip-panel > p code, .ip-note code { font: 500 .88em var(--font-mono); background: rgba(255, 255, 255, .1); padding: .1em .4em; border-radius: 6px }
+.ip-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 4px; border-radius: 14px; background: rgba(255, 255, 255, .06) }
+.ip-tabs::-webkit-scrollbar { display: none }
+.ip-tabs button { flex: none; height: 38px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--on-dark-2, rgba(247, 243, 236, .7)); font: 600 14px/1 var(--font-sans); cursor: pointer }
+.ip-tabs button:hover { color: var(--on-dark) }
+.ip-tabs button[aria-selected="true"] { background: var(--on-dark); color: #111318 }
+.ip-tabs button:focus-visible { outline: 3px solid var(--sun); outline-offset: 1px }
+.ip-panel { padding: 18px 0 clamp(22px, 3vw, 32px) }
+.ip-panel > p { max-width: 70ch; margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: var(--on-dark-2, rgba(247, 243, 236, .8)) }
+.ip-install { display: flex; flex-wrap: wrap; align-items: center; gap: 10px }
+.ip-install code { font-size: 14px !important; padding: .35em .7em !important }
+.ip-soon-tag { padding: 4px 10px; border-radius: 999px; background: var(--sun); color: #111318; font: 700 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .05em }
+.ip-code { border-radius: 16px; background: #07080B; border: 1px solid rgba(255, 255, 255, .08); overflow: hidden }
+.ip-code-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 16px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: rgba(247, 243, 236, .55) }
+.ip-copy { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 9px; border: 0; background: rgba(255, 255, 255, .1); color: #fff; font: 600 13px/1 var(--font-sans); cursor: pointer; text-transform: none; letter-spacing: 0 }
+.ip-copy svg { width: 15px; height: 15px }
+.ip-copy:hover { background: rgba(255, 255, 255, .18) }
+.ip-copy.is-done { background: #22A861 }
+.ip-code pre { margin: 0; padding: 16px; overflow: auto; font: 13px/1.65 var(--font-mono); color: #E9E5DD; tab-size: 2 }
+.tk-c { color: #7E8696 } .tk-s { color: #9BE3B4 } .tk-k { color: #FF8FC4 } .tk-t { color: #8EA6FF }
+.ip-note { margin: 12px 0 0; font-size: 14px; line-height: 1.55; color: var(--on-dark-2, rgba(247, 243, 236, .7)) }
+.ip-note a { color: var(--on-dark) }
+.ip-intro .ip-note { color: var(--muted) }
+
+/* ─────────── grids: related + hubs ─────────── */
+.ip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none }
+.ip-grid a { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; aspect-ratio: 1; padding: 12px 8px; border-radius: 18px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; text-align: center; transition: transform .3s var(--ip-spring), border-color .2s, box-shadow .3s }
+.ip-grid a svg { width: 32px; height: 32px; transition: transform .35s var(--ip-spring), color .2s }
+.ip-grid a span { font: 550 12.5px/1.2 var(--font-sans); color: var(--muted) }
+.ip-grid a small { font: 500 11px/1.2 var(--font-sans); color: var(--muted); opacity: .75; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.ip-grid a:hover { transform: translateY(-3px); border-color: var(--sc); box-shadow: 0 16px 32px -22px var(--sc) }
+.ip-grid a:hover svg { transform: scale(1.15); color: var(--sc) }
+.ip-grid a:hover span { color: var(--ink) }
+.ip-grid.is-hub { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)) }
+
+/* faq */
+.ip-faq { display: grid; gap: 10px; max-width: 900px }
+.ip-q { border-radius: 18px; background: var(--card); border: 1px solid var(--rule); }
+.ip-q summary { list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 18px 20px; cursor: pointer; font: 680 17px/1.35 var(--font-display) }
+.ip-q summary::-webkit-details-marker { display: none }
+.ip-q summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--paper-2); font: 600 18px/1 var(--font-mono); transition: transform .3s var(--ip-spring), background .2s }
+.ip-q[open] summary::after { transform: rotate(45deg); background: var(--sc); color: #fff }
+.ip-q p { margin: 0; padding: 0 20px 20px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2, var(--ink)); max-width: 72ch }
+.ip-q code { font: 500 .88em var(--font-mono); background: var(--paper-2); padding: .1em .4em; border-radius: 6px }
+
+/* pager */
+.ip-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-bottom: clamp(48px, 8vw, 96px) }
+.ip-pager a { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; transition: transform .3s var(--ip-spring), border-color .2s }
+.ip-pager a.next { justify-content: flex-end; text-align: right }
+.ip-pager a:hover { border-color: var(--sc); transform: translateY(-2px) }
+.ip-pager svg { width: 34px; height: 34px; flex: none }
+.ip-pager small { display: block; font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 6px }
+.ip-pager b { font: 720 18px/1.2 var(--font-display) }
+
+/* ─────────── hubs ─────────── */
+.hub-hero { padding: clamp(18px, 3vw, 32px) 0 0 }
+.hub-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 64px); align-items: center; margin-top: clamp(18px, 3vw, 36px) }
+.hub-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0 }
+.hub-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.4vw, 14px) }
+.hub-strip span { aspect-ratio: 1; display: grid; place-items: center; border-radius: clamp(18px, 2vw, 28px); background: var(--sc); color: #fff; box-shadow: 0 18px 34px -24px var(--sc); animation: hub-in .7s var(--ip-spring) both; animation-delay: calc(var(--i) * 60ms) }
+.hub-strip span svg { width: 46%; height: auto; aspect-ratio: 1 }
+.hub-strip span:nth-child(odd) { transform: rotate(-3deg) }
+.hub-strip span:nth-child(3n) { transform: rotate(4deg) translateY(6px) }
+@keyframes hub-in { from { opacity: 0; transform: translateY(18px) scale(.7) rotate(-12deg) } }
+.hub-strip.is-mono span { background: var(--card); color: var(--sc); border: 1px solid var(--rule); box-shadow: none }
+.hub-strip.is-mono span:nth-child(5) { background: var(--sc); color: #fff }
+.hub-hero.is-style { position: relative }
+.hub-style .ip-hand, .hub-style .ip-dot { color: var(--sc) }
+.hub-when { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
+.hub-when article { padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule) }
+.hub-when h3 { margin: 0 0 8px; font: 600 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--sc) }
+.hub-when p { margin: 0; font-size: 15px; line-height: 1.55 }
+.hub-when code { font: 500 .85em var(--font-mono); background: var(--paper-2); padding: .1em .35em; border-radius: 5px }
+.hub-group { margin-top: 32px }
+.hub-group h3 { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; font: 720 22px/1.1 var(--font-display) }
+.hub-group h3 a { color: inherit; text-decoration: none }
+.hub-group h3 a:hover { text-decoration: underline; text-decoration-color: var(--sc) }
+.hub-group h3 small { font: 600 12px/1 var(--font-mono); color: var(--muted) }
+.hub-table-wrap { overflow: auto; border-radius: 22px; background: var(--card); border: 1px solid var(--rule) }
+.hub-table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.45 }
+.hub-table th, .hub-table td { padding: 12px 16px; text-align: left; vertical-align: top; border-top: 1px solid var(--rule) }
+.hub-table thead th { border-top: 0; font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 16px }
+.hub-table tbody th { white-space: nowrap }
+.hub-table tbody th a { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; text-decoration: none }
+.hub-table tbody th a:hover { text-decoration: underline; text-decoration-color: var(--sc) }
+.hub-table td:last-child { color: var(--muted) }
+.hub-cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
+.hub-cats a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; font: 600 14.5px/1 var(--font-sans); transition: transform .25s var(--ip-spring), border-color .2s }
+.hub-cats a svg { width: 18px; height: 18px; color: var(--muted) }
+.hub-cats a small { font: 600 11.5px/1 var(--font-mono); color: var(--muted) }
+.hub-cats a:hover { transform: translateY(-2px); border-color: var(--ink) }
+.hub-cats a[aria-current] { background: var(--ink); color: var(--paper); border-color: var(--ink) }
+.hub-cats a[aria-current] svg, .hub-cats a[aria-current] small { color: inherit }
+.hub-styles { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none }
+.hub-styles a { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 8px 14px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; transition: transform .3s var(--ip-spring), background .25s, color .25s }
+.hub-styles a svg { width: 40px; height: 40px; color: var(--sc); margin-bottom: 6px; transition: transform .4s var(--ip-spring), color .25s }
+.hub-styles b { font: 720 16px/1 var(--font-display) }
+.hub-styles small { font: 600 10.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
+.hub-styles a:hover, .hub-styles a[aria-current] { background: var(--sc); color: #fff; transform: translateY(-3px) }
+.hub-styles a:hover svg, .hub-styles a[aria-current] svg { color: #fff; transform: rotate(-6deg) scale(1.08) }
+.hub-styles a:hover small, .hub-styles a[aria-current] small { color: rgba(255, 255, 255, .85) }
+.hub > .ip-section:last-child { padding-bottom: clamp(48px, 8vw, 96px) }
+
+/* fallback toast (site.js provides the shared one) */
+.ip-toast { position: fixed; left: 50%; bottom: 24px; z-index: 80; transform: translate(-50%, 20px); opacity: 0; padding: 12px 18px; border-radius: 14px; background: var(--dark); color: var(--on-dark); font: 500 15px/1.4 var(--font-sans); transition: opacity .2s, transform .35s var(--ip-spring); pointer-events: none; max-width: calc(100vw - 32px) }
+.ip-toast.is-on { opacity: 1; transform: translate(-50%, 0) }
+
+/* ─────────── responsive ─────────── */
+@media (max-width: 1100px) {
+  .ip-app-list { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .hub-when { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .hub-styles { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+}
+@media (max-width: 900px) {
+  .ip-hero-grid, .hub-hero-grid { grid-template-columns: minmax(0, 1fr) }
+  .ip-stage { order: -1 }
+  .ip-names { grid-template-columns: minmax(0, 1fr) }
+  .hub-strip { grid-template-columns: repeat(5, 1fr) }
+  .hub-strip span:nth-child(n+6) { display: none }
+}
+@media (max-width: 640px) {
+  .ip-app-list { grid-template-columns: minmax(0, 1fr) }
+  .ip-h1 { font-size: clamp(40px, 12vw, 60px) }
+  .ip-pick-b { height: 38px; padding: 0 10px 0 8px; font-size: 13px }
+  .ip-pick-b span { display: none }
+  .ip-pick-b[aria-checked="true"] span { display: inline }
+  .ip-btn.is-primary { font-size: 19px; padding: 16px 18px }
+  .ip-btn { padding: 12px 14px; font-size: 16px }
+  .ip-opts { flex-direction: column; align-items: stretch }
+  .ip-seg { justify-content: stretch }
+  .ip-seg button { flex: 1 }
+  .ip-facts > div { grid-template-columns: 1fr; gap: 2px }
+  .ip-pager { grid-template-columns: 1fr }
+  .ip-stage-hint { font-size: 18px }
+  .hub-when { grid-template-columns: minmax(0, 1fr) }
+  .hub-styles { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .ip-grid, .ip-grid.is-hub { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .ip-grid a small { display: none }
+  .hub-table thead th:nth-child(2), .hub-table td:nth-child(2) { display: none }
+}
+@media (hover: none) {
+  .ip-app:hover, .ip-sc:hover, .ip-grid a:hover { transform: none; box-shadow: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ip-page *, .ip-page *::before, .ip-page *::after { animation-duration: .001ms !important; transition-duration: .001ms !important }
+}
+@media print { .ip-actions, .ip-pick, .ip-dev, .ip-pager { display: none } }
+.ip-head a, .ip-app > a { white-space: nowrap; display: inline-flex; align-items: center; gap: 4px }
+.ip-head a .arr, .ip-app a .arr { display: inline-block; flex: none; margin: 0 }
+.hub-hero.is-style { background: linear-gradient(180deg, color-mix(in srgb, var(--sc) 18%, var(--paper)) 0%, var(--paper) 100%); padding-bottom: clamp(24px, 4vw, 48px) }
+.hub-strip.is-mono span:nth-child(odd) { background: var(--sc); color: #fff; border-color: transparent; box-shadow: 0 18px 34px -22px var(--sc) }
+.hub-strip.is-mono span:nth-child(5) { background: var(--ink); color: var(--paper) }
+
+/* ─────────── optical balance: filled styles read heavier than outlines at the same grid size ─────────── */
+.ip-sc, .ip { --opt: 1 }
+.ip[data-style="solid"], .ip-sc.s-solid { --opt: .94 }
+.ip[data-style="gloss"], .ip-sc.s-gloss { --opt: .93 }
+.ip[data-style="engrave"], .ip-sc.s-engrave { --opt: .97 }
+.ip[data-style="duo"], .ip-sc.s-duo { --opt: .98 }
+.ip[data-style="blueprint"], .ip-sc.s-blueprint { --opt: .96 }
+.ip-sizes svg, .ip-pick-b svg, .ip-ask-tile svg { overflow: visible }
+
+/* ─────────── hero side column: stage + related + library link ─────────── */
+.ip-side { display: grid; gap: 14px; min-width: 0 }
+.ip-side-links { display: grid; gap: 12px; padding: 16px 18px 18px; border-radius: 24px; background: var(--card); border: 1px solid var(--rule) }
+.ip-side-links > p { display: flex; justify-content: space-between; align-items: baseline; margin: 0; font: 600 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
+.ip-side-links > p b { font-weight: 650 }
+.ip-side-links > p a { color: var(--ink); text-transform: none; letter-spacing: 0; font: 650 13.5px/1 var(--font-sans); text-decoration: none; display: inline-flex; align-items: center; gap: 4px }
+.ip-side-links > p a .arr { width: 14px; height: 14px }
+.ip-side-links > p a:hover { text-decoration: underline; text-decoration-color: var(--sc) }
+.ip-side-links ul { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none }
+.ip-side-links li a { display: grid; justify-items: center; gap: 6px; padding: 10px 4px 8px; border-radius: 14px; background: var(--paper-2); color: var(--ink); text-decoration: none; transition: transform .25s var(--ip-spring), background .2s, color .2s }
+.ip-side-links li svg { width: 26px; height: 26px }
+.ip-side-links li span { max-width: 100%; font: 550 11px/1.15 var(--font-sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.ip-side-links li a:hover { transform: translateY(-2px); background: var(--sc); color: #fff }
+.ip-side-links li a:hover span { color: rgba(255, 255, 255, .9) }
+.ip-lib-link { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; border: 1.5px solid var(--rule-strong); color: var(--ink); text-decoration: none; transition: border-color .2s, transform .25s var(--ip-spring) }
+.ip-lib-link > svg:first-child { width: 22px; height: 22px; color: var(--sc) }
+.ip-lib-link b { display: block; font: 720 16px/1.2 var(--font-display) }
+.ip-lib-link small { font: 500 13px/1.3 var(--font-sans); color: var(--muted) }
+.ip-lib-link .arr { width: 18px; height: 18px; transition: transform .3s var(--ip-spring) }
+.ip-lib-link:hover { border-color: var(--sc); transform: translateY(-2px) }
+.ip-lib-link:hover .arr { transform: translateX(3px) }
+.ip-textrow { display: flex; flex-wrap: wrap; gap: 4px 22px }
+a.ip-textbtn { text-decoration: none }
+
+/* compact entry near the downloads: jumps to the Ask-AI task picker */
+.ip-ask-jump { display: flex; align-items: center; gap: 10px; margin-top: 4px; padding: 12px 14px; border-radius: 18px; text-decoration: none; color: var(--ink-2, var(--ink)); font: 500 14.5px/1.3 var(--font-sans); background: color-mix(in srgb, var(--sc) 9%, var(--card)); border: 1px dashed color-mix(in srgb, var(--sc) 45%, var(--rule)); transition: border-color .2s, transform .25s var(--ip-spring) }
+.ip-ask-jump b { font-weight: 700; color: var(--ink) }
+.ip-ask-jump > svg:first-child { width: 20px; height: 20px; color: var(--sc); flex: none }
+.ip-ask-jump .arr { width: 16px; height: 16px; margin-left: auto; flex: none; transition: transform .3s var(--ip-spring) }
+.ip-ask-jump:hover { border-style: solid; transform: translateY(-1px) }
+.ip-ask-jump:hover .arr { transform: translateY(3px) }
+
+/* the prominent Ask-AI section */
+.ip-ask-card { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 22px clamp(24px, 4vw, 56px); padding: clamp(24px, 4vw, 48px); border-radius: clamp(24px, 3vw, 36px); background: radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--sc) 22%, transparent), transparent 60%), var(--card); border: 1.5px solid color-mix(in srgb, var(--sc) 35%, var(--rule)); box-shadow: 0 30px 60px -44px var(--sc); overflow: hidden; transition: border-color .5s var(--ip-e), box-shadow .5s var(--ip-e) }
+.ip-ask-copy p:last-child { margin: 16px 0 0; max-width: 56ch; font-size: 17px; line-height: 1.55; color: var(--ink-2, var(--ink)) }
+.ip-ask-demo { display: grid; align-content: center; gap: 10px }
+.ip-ask-bubble { margin: 0; max-width: 92%; padding: 12px 16px; border-radius: 18px; font: 500 15px/1.4 var(--font-sans); box-shadow: var(--shadow-s, 0 2px 8px rgba(0, 0, 0, .08)) }
+.ip-ask-bubble.is-user { justify-self: end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 6px }
+.ip-ask-bubble.is-ai { display: flex; align-items: center; gap: 12px; background: var(--paper-2); color: var(--ink); border-bottom-left-radius: 6px }
+.ip-ask-bubble i { font-style: normal; font-weight: 650 }
+.ip-ask-tile { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--sc); color: #fff; transition: background .5s var(--ip-e) }
+.ip-ask-tile svg { width: 32px; height: 32px; scale: var(--opt, 1) }
+.ip-ask-widget { grid-column: 1 / -1; min-width: 0; min-height: 64px }
+.ip-ask { scroll-margin-top: calc(var(--header-h, 72px) + 16px) }
+
+@media (max-width: 900px) {
+  .ip-side { display: contents }
+  .ip-side-links { order: 2 }
+  .ip-stage-art { aspect-ratio: 1.6 }
+  .ip-stage-art svg { width: auto; height: 74%; max-width: none }
+  .ip-ask-card { grid-template-columns: minmax(0, 1fr) }
+}
+@media (max-width: 640px) {
+  .ip-side-links ul { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .ip-ask-demo { display: none }
+  .ip-sc-art { height: 128px; padding: 24px }
+  .ip-sc-art svg { width: 68px; height: 68px }
+}
+.ip-ask-widget.is-tasks .ask-task[aria-checked="true"] { border-color: var(--sc); box-shadow: inset 0 0 0 1px var(--sc), 0 10px 22px -16px var(--sc) }
+.ip-ask-widget.is-tasks .ask-task[aria-checked="true"] .ask-task-t::before { color: var(--sc) }
+.ip-ask-widget .ask-need-in:focus { border-color: var(--sc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sc) 18%, transparent) }
+.ip-ask-widget .ask-ai-btn { min-height: 48px; padding: 0 18px 0 14px; font-size: 15px }
+.ip-ask-widget .ask-ai-logo, .ip-ask-widget .ask-ai-logo svg { width: 22px; height: 22px }
+
+/* ─────────── the <i> tag: the quickest copy for websites ─────────── */
+.ip-tag { display: grid; gap: 8px }
+.ip-tag-btn { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k go" "code go"; align-items: center; gap: 6px 14px; width: 100%; padding: 14px 14px 14px 18px; border-radius: 18px; border: 0; background: var(--dark); color: var(--on-dark); text-align: left; cursor: pointer; box-shadow: 0 18px 36px -22px color-mix(in srgb, var(--sc) 70%, #000); transition: transform .25s var(--ip-spring), box-shadow .3s }
+.ip-tag-btn:hover { transform: translateY(-2px) }
+.ip-tag-btn:active { transform: scale(.98) }
+.ip-tag-btn:focus-visible, .ip-tag-css:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px }
+.ip-tag-k { grid-area: k; display: inline-flex; align-items: center; gap: 8px; font: 650 12.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--on-dark-2, rgba(247, 243, 236, .75)) }
+.ip-tag-k svg { width: 16px; height: 16px; color: var(--sc); transition: color .5s var(--ip-e) }
+.ip-tag-btn code { grid-area: code; min-width: 0; font: 600 clamp(14px, 1.45vw, 17px)/1.35 var(--font-mono); color: #fff; overflow-wrap: anywhere }
+.ip-tag-go { grid-area: go; display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border-radius: 13px; background: var(--sc); color: #fff; font: 750 16px/1 var(--font-display); transition: background .5s var(--ip-e) }
+.ip-tag-go svg { width: 18px; height: 18px }
+.ip-tag-btn.is-done .ip-tag-go { background: #22A861 }
+.ip-tag-hint { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted) }
+.ip-tag-hint b { color: var(--ink); font-weight: 650 }
+.ip-tag-hint > code { font: 500 .9em var(--font-mono) }
+.ip-tag-css { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; margin: 2px 0; padding: 4px 8px; border-radius: 8px; border: 1px dashed var(--rule-strong); background: var(--paper-2); color: var(--ink); cursor: pointer; text-align: left; vertical-align: middle }
+.ip-tag-css code { font: 500 11.5px/1.35 var(--font-mono); overflow-wrap: anywhere }
+.ip-tag-css svg { flex: none; width: 14px; height: 14px; color: var(--muted) }
+.ip-tag-css:hover { border-color: var(--sc) }
+.ip-tag-hint .ip-soon-tag { padding: 3px 7px; font-size: 10px; vertical-align: middle }
+.ip-opt { display: grid; gap: 6px }
+.ip-opt-l { font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
+.ip-opt-l small { text-transform: none; letter-spacing: 0; font: 500 11.5px/1 var(--font-sans); opacity: .85 }
+.ip-seg button { min-width: 0; padding: 0 10px }
+@media (max-width: 640px) {
+  .ip-tag-btn { grid-template-columns: minmax(0, 1fr); grid-template-areas: "k" "code" "go"; }
+  .ip-tag-go { justify-content: center }
+}
+.ip-styles { gap: 10px }
+.ip-sc { padding: 12px }
+.ip-sc h3 { flex-wrap: wrap; gap: 2px 8px }
+.ip-sc-act { gap: 5px }
+.ip-sc-act button { min-width: 0; height: 36px; font-size: 12.5px }
+.ip-sc-act button:last-child { width: 36px }
+.ip-tag-btn { border: 1px solid rgba(255, 255, 255, .12) }
+.ip-ask .ip-hand { margin-right: .14em }

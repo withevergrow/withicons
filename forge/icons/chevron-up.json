@@ -1,0 +1,45 @@
+{
+  "name": "chevron-up",
+  "category": "navigation",
+  "description": "Upward chevron for collapsing an expanded section or scrolling to top.",
+  "aliases": [
+    "caret-up",
+    "angle-up",
+    "collapse",
+    "show-less",
+    "accordion-close",
+    "dropdown-up"
+  ],
+  "tags": [
+    "chevron",
+    "up",
+    "collapse",
+    "caret",
+    "top"
+  ],
+  "paths": [
+    {
+      "d": "M6 15 L12 9 L18 15",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "scroll to top",
+    "back to top",
+    "top",
+    "go up",
+    "up",
+    "close menu",
+    "hide",
+    "fold",
+    "less",
+    "see less",
+    "minimise",
+    "previous section",
+    "raise",
+    "higher",
+    "ascending"
+  ]
+}

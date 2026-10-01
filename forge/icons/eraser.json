@@ -1,0 +1,60 @@
+{
+  "name": "eraser",
+  "category": "actions",
+  "description": "An angled block eraser resting on the line it clears.",
+  "aliases": [
+    "erase",
+    "rubber",
+    "wipe",
+    "remove-format",
+    "clear-formatting",
+    "eraser-tool",
+    "rub-out"
+  ],
+  "tags": [
+    "erase",
+    "clear",
+    "rubber",
+    "delete",
+    "stationery"
+  ],
+  "paths": [
+    {
+      "d": "M9 20.5 L4.41 15.91 A2 2 0 0 1 4.41 13.09 L13.59 3.91 A2 2 0 0 1 16.41 3.91 L19.59 7.09 A2 2 0 0 1 19.59 9.91 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11 L12.5 17",
+      "plate": "A"
+    },
+    {
+      "d": "M9 20.5 H20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 20.5 L4.41 15.91 A2 2 0 0 1 4.41 13.09 L13.59 3.91 A2 2 0 0 1 16.41 3.91 L19.59 7.09 A2 2 0 0 1 19.59 9.91 Z"
+  ],
+  "cutouts": [
+    "M6.5 11 L12.5 17"
+  ],
+  "synonyms": [
+    "clear",
+    "clean",
+    "clean up",
+    "scrub",
+    "correction",
+    "mistake",
+    "fix mistake",
+    "stationery",
+    "school",
+    "pencil eraser",
+    "rubber eraser",
+    "white out",
+    "tippex",
+    "wipe out",
+    "clear text",
+    "erasor",
+    "errase"
+  ]
+}

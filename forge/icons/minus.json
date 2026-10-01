@@ -1,0 +1,59 @@
+{
+  "name": "minus",
+  "category": "actions",
+  "description": "A minus sign for removing an item or decrementing a value.",
+  "aliases": [
+    "subtract",
+    "remove",
+    "decrement",
+    "dash",
+    "hyphen",
+    "less",
+    "negative",
+    "minus-sign",
+    "line-horizontal",
+    "horizontal-line"
+  ],
+  "tags": [
+    "remove",
+    "subtract",
+    "decrease",
+    "math",
+    "line"
+  ],
+  "paths": [
+    {
+      "d": "M5 12 H19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "take away",
+    "takeaway",
+    "decrease",
+    "reduce",
+    "lower",
+    "fewer",
+    "minus one",
+    "quantity down",
+    "deduct",
+    "subtraction",
+    "math",
+    "maths",
+    "negative number",
+    "collapse",
+    "hide",
+    "fold",
+    "line",
+    "bar",
+    "em dash",
+    "en dash",
+    "stroke",
+    "divider",
+    "substract",
+    "minis",
+    "mins"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "zoom-out",
+  "category": "layout",
+  "description": "A magnifier with a minus for zooming out of content.",
+  "aliases": [
+    "zoom-minus",
+    "search-minus",
+    "magnifier-minus",
+    "unzoom",
+    "scale-down",
+    "decrease-zoom",
+    "shrink-view",
+    "zoom-back"
+  ],
+  "tags": [
+    "magnifier",
+    "zoom",
+    "reduce",
+    "scale",
+    "wider",
+    "minus"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.6 15.6 L20.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 10.5 H13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z"
+  ],
+  "cutouts": [
+    "M7.5 10.5 H13.5"
+  ],
+  "synonyms": [
+    "smaller",
+    "make smaller",
+    "reduce",
+    "shrink",
+    "farther",
+    "further away",
+    "see more",
+    "overview",
+    "wide view",
+    "decrease size",
+    "lower zoom",
+    "less zoom",
+    "fit to screen",
+    "zooming out",
+    "zoomout",
+    "magnifying glass minus"
+  ]
+}

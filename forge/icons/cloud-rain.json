@@ -1,0 +1,65 @@
+{
+  "name": "cloud-rain",
+  "category": "weather",
+  "description": "A cloud with slanted falling streaks for rain and precipitation forecasts.",
+  "aliases": [
+    "rain",
+    "rainy",
+    "showers",
+    "precipitation",
+    "drizzle",
+    "rainfall",
+    "rain-cloud",
+    "raining"
+  ],
+  "tags": [
+    "weather",
+    "rain",
+    "forecast",
+    "showers",
+    "wet"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 17.5 L6.5 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13 17.5 L11 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 17.5 L15.5 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "wet",
+    "weather",
+    "forecast",
+    "rainy day",
+    "downpour",
+    "shower",
+    "raindrops",
+    "wet weather",
+    "bring umbrella",
+    "grey sky",
+    "gray sky",
+    "spitting",
+    "pouring",
+    "heavy rain",
+    "light rain",
+    "rain forecast",
+    "autumn",
+    "fall weather",
+    "rainy season"
+  ]
+}

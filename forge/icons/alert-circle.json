@@ -1,0 +1,73 @@
+{
+  "name": "alert-circle",
+  "category": "status",
+  "description": "An exclamation mark in a circle for inline errors and important notices.",
+  "aliases": [
+    "error",
+    "exclamation-circle",
+    "important",
+    "attention",
+    "notice",
+    "issue",
+    "error-circle",
+    "problem",
+    "exclamation-mark"
+  ],
+  "tags": [
+    "error",
+    "alert",
+    "exclamation",
+    "notice",
+    "problem",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7.5 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V12.5",
+    "M12 16 V16.5"
+  ],
+  "synonyms": [
+    "something went wrong",
+    "alert",
+    "failed",
+    "failure",
+    "fail",
+    "invalid",
+    "mistake",
+    "wrong",
+    "oops",
+    "bug report",
+    "read me",
+    "note this",
+    "heads up",
+    "pay attention",
+    "urgent",
+    "exclamation point",
+    "bang",
+    "!",
+    "status",
+    "validation error",
+    "form error",
+    "incorrect",
+    "missing",
+    "flag issue",
+    "eror",
+    "importent"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "file-text",
+  "category": "files",
+  "description": "A page with lines of text for written documents, notes and reports.",
+  "aliases": [
+    "text-file",
+    "document-text",
+    "txt",
+    "article",
+    "notes",
+    "written-document",
+    "page-text",
+    "doc-file",
+    "word-document"
+  ],
+  "tags": [
+    "document",
+    "text",
+    "page",
+    "writing",
+    "notes",
+    "paper"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 9 H11",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 13 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 17 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M8.5 9 H11",
+    "M8.5 13 H15.5",
+    "M8.5 17 H15.5"
+  ],
+  "synonyms": [
+    "document",
+    "report",
+    "letter",
+    "essay",
+    "write-up",
+    "writing",
+    "contract",
+    "terms",
+    "policy",
+    "readme",
+    "memo",
+    "summary",
+    "transcript",
+    "docx",
+    "word",
+    "resume",
+    "cv",
+    "reading",
+    "paper",
+    "page with lines",
+    "text document",
+    "textfile",
+    "doucment",
+    "documnet",
+    "blog post"
+  ]
+}

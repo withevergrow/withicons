@@ -1,0 +1,59 @@
+{
+  "name": "check-square",
+  "category": "status",
+  "description": "A checkmark inside a rounded square, a ticked checkbox.",
+  "aliases": [
+    "checkbox",
+    "checked",
+    "ticked",
+    "square-check",
+    "checkbox-on",
+    "checked-box",
+    "tick-box"
+  ],
+  "tags": [
+    "checkbox",
+    "check",
+    "tick",
+    "done",
+    "form",
+    "task"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12.5 L10.75 15.25 L16 9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M8 12.5 L10.75 15.25 L16 9.5"
+  ],
+  "synonyms": [
+    "selected",
+    "task done",
+    "todo",
+    "to do",
+    "to-do list",
+    "tick box",
+    "checklist",
+    "select all",
+    "mark done",
+    "agree",
+    "i agree",
+    "accept terms",
+    "opt in",
+    "vote",
+    "survey",
+    "form",
+    "option",
+    "ballot",
+    "completed task"
+  ]
+}

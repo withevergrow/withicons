@@ -1,0 +1,76 @@
+name: Deploy withicons.com
+
+# Builds the site and the MCP/search Lambda, uploads changed files to S3, updates the Lambda code
+# and invalidates only changed paths. AWS access is a short-lived OIDC session for the role created
+# by infra/site.yaml (output DeployRoleArn) - no AWS keys are stored in GitHub.
+#
+# Repository settings needed (Settings -> Environments -> production):
+#   variable AWS_DEPLOY_ROLE_ARN = <DeployRoleArn output>
+#   variable WITHICONS_STACK     = withicons-site   (optional)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'forge/**'
+      - 'packages/**'
+      - 'skills/**'
+      - 'infra/lambda/**'
+      - 'scripts/deploy.mjs'
+      - 'scripts/skill-sync.mjs'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+    inputs:
+      full_invalidation:
+        description: Invalidate /* instead of only changed paths
+        type: boolean
+        default: false
+
+permissions:
+  id-token: write   # OIDC token for AWS
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # skipped until AWS is set up: add the repository/environment variable AWS_DEPLOY_ROLE_ARN (docs/LAUNCH.md §6.5)
+    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production   # OIDC subject repo:withevergrow/withicons:environment:production
+      url: https://withicons.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          role-session-name: withicons-deploy-${{ github.run_id }}
+          aws-region: us-east-1
+
+      - name: Build, upload, update API, invalidate
+        env:
+          WITHICONS_STACK: ${{ vars.WITHICONS_STACK || 'withicons-site' }}
+        run: node scripts/deploy.mjs ${{ inputs.full_invalidation && '--full-invalidation' || '' }}
+
+      - name: Smoke test
+        run: |
+          set -e
+          for u in / /icons.html /llms.txt /icons.json; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://withicons.com$u")
+            echo "$code $u"; [ "$code" = 200 ]
+          done
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://withicons.com/api/search?q=home")
+          echo "$code /api/search?q=home"

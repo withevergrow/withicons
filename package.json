@@ -1,0 +1,18 @@
+{
+  "name": "egopenicons-monorepo",
+  "private": true,
+  "type": "module",
+  "withiconsVersion": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "node forge/build.mjs",
+    "check": "node forge/tools/check.mjs",
+    "preview": "node forge/tools/preview.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "polybooljs": "^1.2.2"
+  }
+}

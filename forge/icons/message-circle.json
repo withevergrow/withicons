@@ -1,0 +1,71 @@
+{
+  "name": "message-circle",
+  "category": "communication",
+  "description": "A round speech bubble for chat threads and conversations.",
+  "aliases": [
+    "chat",
+    "speech-bubble",
+    "bubble",
+    "chat-bubble",
+    "talk",
+    "dm",
+    "direct-message",
+    "chat-circle",
+    "round-bubble",
+    "text-message"
+  ],
+  "tags": [
+    "chat",
+    "message",
+    "speech",
+    "bubble",
+    "talk",
+    "communication"
+  ],
+  "paths": [
+    {
+      "d": "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "message",
+    "messaging",
+    "conversation",
+    "talking",
+    "speak",
+    "say",
+    "said",
+    "respond",
+    "comment",
+    "comments",
+    "live chat",
+    "chat with us",
+    "chat now",
+    "support chat",
+    "help chat",
+    "ask",
+    "question",
+    "instant message",
+    "im",
+    "sms",
+    "text",
+    "texting",
+    "whatsapp",
+    "messenger",
+    "send message",
+    "discuss",
+    "speech",
+    "dialog",
+    "chatbot",
+    "ping",
+    "chatt",
+    "mesage",
+    "messege",
+    "social"
+  ]
+}

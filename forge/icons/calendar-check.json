@@ -1,0 +1,69 @@
+{
+  "name": "calendar-check",
+  "category": "time",
+  "description": "A calendar with a checkmark on its page, for confirmed bookings and completed dates.",
+  "aliases": [
+    "booked",
+    "scheduled",
+    "event-confirmed",
+    "booking-confirmed",
+    "date-confirmed",
+    "rsvp"
+  ],
+  "tags": [
+    "calendar",
+    "confirmed",
+    "booking",
+    "done",
+    "appointment",
+    "reservation"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M9 15.5 L11 17.5 L15.5 13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H19",
+    "M9 15.5 L11 17.5 L15.5 13"
+  ],
+  "synonyms": [
+    "attending",
+    "going",
+    "appointment confirmed",
+    "reserved",
+    "confirmed date",
+    "completed event",
+    "done for the day",
+    "marked",
+    "availability",
+    "available",
+    "attendance",
+    "check in",
+    "accepted invite",
+    "yes going",
+    "save the date",
+    "booking",
+    "reservation"
+  ]
+}

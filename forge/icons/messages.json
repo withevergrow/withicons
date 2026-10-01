@@ -1,0 +1,69 @@
+{
+  "name": "messages",
+  "category": "communication",
+  "description": "Two overlapping speech bubbles for a conversation or chat thread.",
+  "aliases": [
+    "chats",
+    "conversation",
+    "conversations",
+    "dialogue",
+    "dialog",
+    "chat-thread",
+    "forum",
+    "group-chat",
+    "discussion",
+    "threads"
+  ],
+  "tags": [
+    "chat",
+    "messages",
+    "conversation",
+    "talk",
+    "thread",
+    "community"
+  ],
+  "paths": [
+    {
+      "d": "M3 16 V5 A2 2 0 0 1 5 3 H13 A2 2 0 0 1 15 5 V10.5 A2 2 0 0 1 13 12.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M18.25 8 H19 A2 2 0 0 1 21 10 V21 L17.5 17.5 H11 A2 2 0 0 1 9.02 15.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 16 V5 A2 2 0 0 1 5 3 H13 A2 2 0 0 1 15 5 V10.5 A2 2 0 0 1 13 12.5 H6.5 Z",
+    "M15 8 H19 A2 2 0 0 1 21 10 V21 L17.5 17.5 H11 A2 2 0 0 1 9 15.5 V12.5 H13 A2 2 0 0 0 15 10.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "chat",
+    "messaging",
+    "talk",
+    "talking",
+    "group",
+    "group message",
+    "community",
+    "team chat",
+    "back and forth",
+    "exchange",
+    "replies",
+    "q and a",
+    "questions and answers",
+    "support",
+    "help desk",
+    "customer service",
+    "discuss",
+    "debate",
+    "interview",
+    "social",
+    "meeting",
+    "collaborate",
+    "collaboration",
+    "speech bubbles",
+    "msgs",
+    "mesages",
+    "messeges"
+  ]
+}

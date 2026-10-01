@@ -1,0 +1,74 @@
+{
+  "name": "x-circle",
+  "category": "status",
+  "description": "An X in a circle signalling failure, an error, or a rejected item.",
+  "aliases": [
+    "cross-circle",
+    "failed",
+    "close-circle",
+    "denied",
+    "invalid",
+    "circle-x",
+    "fail-icon"
+  ],
+  "tags": [
+    "error",
+    "failure",
+    "reject",
+    "cancel",
+    "circle"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 L15 15",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 L9 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M9 9 L15 15",
+    "M15 9 L9 15"
+  ],
+  "synonyms": [
+    "failure",
+    "fail",
+    "wrong",
+    "incorrect",
+    "rejected",
+    "reject",
+    "declined",
+    "not allowed",
+    "no",
+    "dismiss",
+    "cancel",
+    "clear",
+    "error",
+    "problem",
+    "oops",
+    "delete",
+    "x mark",
+    "cross",
+    "cross mark",
+    "x button",
+    "exit",
+    "cancelled",
+    "canceled",
+    "false",
+    "error message",
+    "not ok",
+    "unsuccessful",
+    "abort",
+    "wrong answer",
+    "errror"
+  ]
+}

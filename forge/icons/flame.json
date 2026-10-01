@@ -1,0 +1,61 @@
+{
+  "name": "flame",
+  "category": "objects",
+  "description": "A single teardrop-shaped flame with an inner tongue.",
+  "aliases": [
+    "fire",
+    "hot",
+    "streak",
+    "burn",
+    "blaze",
+    "lit",
+    "on-fire",
+    "hot-deal"
+  ],
+  "tags": [
+    "fire",
+    "hot",
+    "heat",
+    "trending",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C8.25 21.5 5 18.75 5 15 C5 11.75 5.75 9.5 7 7.5 C8 8.75 9.25 9.5 10.5 9.5 C10.25 6.5 11.5 4.25 14 2.5 C17.25 5.5 19 10 19 15 C19 18.75 15.75 21.5 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 17.5 A2.5 2.5 0 0 1 10 15 C10 13.25 11.75 12.5 13 11.5 C14 12.75 15 13.75 15 15 A2.5 2.5 0 0 1 12.5 17.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C8.25 21.5 5 18.75 5 15 C5 11.75 5.75 9.5 7 7.5 C8 8.75 9.25 9.5 10.5 9.5 C10.25 6.5 11.5 4.25 14 2.5 C17.25 5.5 19 10 19 15 C19 18.75 15.75 21.5 12 21.5 Z"
+  ],
+  "cutouts": [
+    "M12.5 17.5 A2.5 2.5 0 0 1 10 15 C10 13.25 11.75 12.5 13 11.5 C14 12.75 15 13.75 15 15 A2.5 2.5 0 0 1 12.5 17.5 Z"
+  ],
+  "synonyms": [
+    "popular",
+    "trending",
+    "campfire",
+    "heat",
+    "warm",
+    "burning",
+    "fiery",
+    "spicy",
+    "calories",
+    "energy",
+    "gas",
+    "ignite",
+    "torch",
+    "candle",
+    "bonfire",
+    "hottest",
+    "fire streak",
+    "viral",
+    "hype",
+    "firey",
+    "flames"
+  ]
+}

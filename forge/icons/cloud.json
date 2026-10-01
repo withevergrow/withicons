@@ -1,0 +1,63 @@
+{
+  "name": "cloud",
+  "category": "weather",
+  "description": "A simple cloud for cloudy weather and generic cloud services.",
+  "aliases": [
+    "cloudy",
+    "overcast",
+    "cloud-storage",
+    "cloud-computing",
+    "online",
+    "cloud-service",
+    "sky-cloud",
+    "hosting"
+  ],
+  "tags": [
+    "weather",
+    "overcast",
+    "storage",
+    "saas",
+    "internet",
+    "hosting"
+  ],
+  "paths": [
+    {
+      "d": "M7 19 A4.5 4.5 0 0 1 6.2 10.1 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 17.25 19 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 19 A4.5 4.5 0 0 1 6.2 10.1 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 17.25 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "weather",
+    "sky",
+    "clouds",
+    "forecast",
+    "grey",
+    "gray",
+    "dull",
+    "remote",
+    "internet",
+    "web",
+    "saas",
+    "storage",
+    "icloud",
+    "google drive",
+    "dropbox",
+    "onedrive",
+    "aws",
+    "azure",
+    "data center",
+    "sync",
+    "offline",
+    "dream",
+    "fluffy",
+    "daydream",
+    "cloud drive",
+    "online storage",
+    "cloude",
+    "clowd"
+  ]
+}

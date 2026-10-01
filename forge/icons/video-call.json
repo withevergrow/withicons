@@ -1,0 +1,72 @@
+{
+  "name": "video-call",
+  "category": "communication",
+  "description": "A video camera framing a person, for video meetings and calls.",
+  "aliases": [
+    "video-chat",
+    "video-meeting",
+    "video-conference",
+    "webcam-call",
+    "facetime",
+    "zoom-call",
+    "join-call",
+    "face-call"
+  ],
+  "tags": [
+    "video",
+    "call",
+    "meeting",
+    "camera",
+    "person",
+    "webcam"
+  ],
+  "paths": [
+    {
+      "d": "M4 4.5 H14 A2 2 0 0 1 16 6.5 V17.5 A2 2 0 0 1 14 19.5 H4 A2 2 0 0 1 2 17.5 V6.5 A2 2 0 0 1 4 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 10.5 L22 7 V17 L16 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11 10.5 A2 2 0 1 1 7 10.5 A2 2 0 1 1 11 10.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 19.5 V19 A2.5 2.5 0 0 1 8 16.5 H10 A2.5 2.5 0 0 1 12.5 19 V19.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4.5 H14 A2 2 0 0 1 16 6.5 V17.5 A2 2 0 0 1 14 19.5 H4 A2 2 0 0 1 2 17.5 V6.5 A2 2 0 0 1 4 4.5 Z",
+    "M16 10.5 L22 7 V17 L16 13.5 Z"
+  ],
+  "cutouts": [
+    "M11.75 10.5 A2.75 2.75 0 1 1 6.25 10.5 A2.75 2.75 0 1 1 11.75 10.5 Z",
+    "M4.5 18.5 A3 3 0 0 1 7.5 15.5 H10.5 A3 3 0 0 1 13.5 18.5 Z"
+  ],
+  "synonyms": [
+    "meeting",
+    "online meeting",
+    "virtual meeting",
+    "call",
+    "conference",
+    "teleconference",
+    "webinar",
+    "remote meeting",
+    "skype",
+    "google meet",
+    "teams call",
+    "start video call",
+    "call with video",
+    "see each other",
+    "face to face",
+    "interview",
+    "telehealth",
+    "consultation",
+    "live chat",
+    "video conferencing",
+    "videocall"
+  ]
+}

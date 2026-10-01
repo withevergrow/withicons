@@ -1,0 +1,50 @@
+{
+  "name": "git-commit",
+  "category": "development",
+  "description": "A node on a line representing a single commit or revision.",
+  "aliases": [
+    "commit",
+    "revision",
+    "changeset",
+    "sha",
+    "checkpoint-commit",
+    "save-point",
+    "commit-node"
+  ],
+  "tags": [
+    "git",
+    "commit",
+    "version-control",
+    "revision",
+    "history"
+  ],
+  "paths": [
+    {
+      "d": "M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 12 H8",
+      "plate": "K"
+    },
+    {
+      "d": "M16 12 H21.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "snapshot",
+    "save changes",
+    "version",
+    "commit history",
+    "timeline node",
+    "git",
+    "changelog",
+    "checkin",
+    "check in"
+  ]
+}

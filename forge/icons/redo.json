@@ -1,0 +1,52 @@
+{
+  "name": "redo",
+  "category": "actions",
+  "description": "Forward-curving arrow that reapplies an undone action.",
+  "aliases": [
+    "reapply",
+    "do-again",
+    "redo-action",
+    "arrow-uturn-right",
+    "repeat-action",
+    "step-forward",
+    "forward-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "forward",
+    "history",
+    "reapply",
+    "u-turn"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 9.5 H9 A5.5 5.5 0 0 0 9 20.5 H14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 4.5 L20.5 9.5 L15.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "redo last action",
+    "do it again",
+    "bring back",
+    "restore change",
+    "ctrl y",
+    "ctrl+y",
+    "cmd shift z",
+    "next step",
+    "go forward",
+    "curved arrow right",
+    "u-turn arrow",
+    "history",
+    "edit history",
+    "reapply change",
+    "reverse undo",
+    "re-do",
+    "redu"
+  ]
+}

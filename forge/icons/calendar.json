@@ -1,0 +1,83 @@
+{
+  "name": "calendar",
+  "category": "time",
+  "description": "A calendar page with binder rings and a header band, for dates, schedules, and calendar views.",
+  "aliases": [
+    "date",
+    "schedule",
+    "planner",
+    "agenda",
+    "date-picker",
+    "appointment",
+    "event",
+    "month"
+  ],
+  "tags": [
+    "date",
+    "time",
+    "schedule",
+    "month",
+    "event",
+    "planner"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H19"
+  ],
+  "synonyms": [
+    "dates",
+    "events",
+    "day",
+    "week",
+    "year",
+    "today",
+    "tomorrow",
+    "deadline",
+    "due date",
+    "plan",
+    "planning",
+    "timetable",
+    "diary",
+    "organiser",
+    "organizer",
+    "holiday",
+    "vacation",
+    "birthday",
+    "anniversary",
+    "meeting",
+    "booking",
+    "reservation",
+    "availability",
+    "when",
+    "upcoming",
+    "calender",
+    "calander",
+    "callendar",
+    "google calendar",
+    "outlook",
+    "datebook",
+    "itinerary",
+    "yearly",
+    "month view"
+  ]
+}

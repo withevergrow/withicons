@@ -1,0 +1,59 @@
+{
+  "name": "mountain",
+  "category": "maps",
+  "description": "Two mountain peaks, a tall one in front of a smaller one, for terrain, outdoors, and landscapes.",
+  "aliases": [
+    "mountains",
+    "peak",
+    "summit",
+    "hill",
+    "terrain",
+    "landscape",
+    "alps",
+    "mountain-range"
+  ],
+  "tags": [
+    "nature",
+    "peaks",
+    "altitude",
+    "elevation",
+    "adventure",
+    "climb"
+  ],
+  "paths": [
+    {
+      "d": "M2 20 L9.5 5 L14 14 L16.5 10 L22 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 14 L17 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 20 L9.5 5 L14 14 L16.5 10 L22 20 Z"
+  ],
+  "cutouts": [
+    "M13.75 13.5 L17.75 21.5",
+    "M5 11.5 L6.5 11.5 L8.25 13 L9.75 11.5 L11.25 13 L12.75 11.75 L14 11.75"
+  ],
+  "synonyms": [
+    "hiking",
+    "outdoors",
+    "nature",
+    "climbing",
+    "trek",
+    "trekking",
+    "adventure",
+    "altitude",
+    "elevation",
+    "scenery",
+    "wilderness",
+    "camping",
+    "ski",
+    "national park",
+    "mountian",
+    "montain",
+    "rocky"
+  ]
+}

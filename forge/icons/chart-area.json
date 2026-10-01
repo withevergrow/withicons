@@ -1,0 +1,48 @@
+{
+  "name": "chart-area",
+  "category": "charts",
+  "description": "A shaded region under a line on a pair of axes, for cumulative volume and totals over time.",
+  "aliases": [
+    "area-chart",
+    "area-graph",
+    "filled-graph",
+    "stacked-area",
+    "mountain-chart",
+    "volume-chart"
+  ],
+  "tags": [
+    "chart",
+    "graph",
+    "analytics",
+    "data",
+    "volume",
+    "metrics"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 V18.5 A2 2 0 0 0 5.5 20.5 H20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 16.5 V12 L11.5 8 L15 11.5 L20.5 6 V16.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7.5 16.5 V12 L11.5 8 L15 11.5 L20.5 6 V16.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "cumulative",
+    "growth",
+    "analytics",
+    "statistics",
+    "data",
+    "report",
+    "traffic",
+    "usage",
+    "volume over time",
+    "area plot",
+    "graph"
+  ]
+}

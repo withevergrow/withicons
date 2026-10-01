@@ -1,0 +1,56 @@
+{
+  "name": "chart-line",
+  "category": "charts",
+  "description": "A rising polyline for time-series metrics and trend views.",
+  "aliases": [
+    "line-chart",
+    "line-graph",
+    "graph",
+    "time-series",
+    "trend-graph",
+    "plot"
+  ],
+  "tags": [
+    "chart",
+    "graph",
+    "analytics",
+    "data",
+    "timeline",
+    "metrics"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 V18.5 A2 2 0 0 0 5.5 20.5 H20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 15.5 L11.5 10 L15 13.5 L20.5 6",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "metrics",
+    "sparkline",
+    "analytics",
+    "statistics",
+    "stats",
+    "data",
+    "report",
+    "progress",
+    "growth",
+    "performance",
+    "stock",
+    "stocks",
+    "market",
+    "price history",
+    "over time",
+    "line diagram",
+    "insights",
+    "kpi",
+    "monitoring",
+    "forecast",
+    "chart"
+  ]
+}

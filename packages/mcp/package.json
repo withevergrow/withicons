@@ -1,0 +1,69 @@
+{
+  "name": "@withicons/mcp",
+  "version": "0.1.0",
+  "description": "MCP server for with icons: search 300 icons x 7 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code. stdio (npx) and AWS Lambda.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "ai",
+    "claude",
+    "cursor",
+    "icon-search"
+  ],
+  "type": "module",
+  "bin": {
+    "withicons-mcp": "dist/stdio.mjs"
+  },
+  "main": "./dist/lib.mjs",
+  "exports": {
+    ".": "./dist/lib.mjs",
+    "./lib": "./dist/lib.mjs",
+    "./stdio": "./dist/stdio.mjs",
+    "./lambda": "./dist/lambda.mjs",
+    "./data/*": "./dist/data/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "imports": {
+    "#data": "./src/data-fs.mjs"
+  },
+  "scripts": {
+    "build": "node ../../forge/lib/emit-mcp.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "esbuild": "^0.28.2",
+    "zod": "^4.6.5"
+  }
+}

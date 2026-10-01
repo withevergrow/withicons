@@ -1,0 +1,74 @@
+{
+  "name": "award",
+  "category": "objects",
+  "description": "A ribboned medal for achievements, badges, and recognition.",
+  "aliases": [
+    "medal",
+    "achievement",
+    "prize",
+    "ribbon",
+    "recognition",
+    "badge",
+    "reward",
+    "honor",
+    "honour",
+    "rosette"
+  ],
+  "tags": [
+    "medal",
+    "achievement",
+    "winner",
+    "prize",
+    "rosette"
+  ],
+  "paths": [
+    {
+      "d": "M18.5 9 A6.5 6.5 0 1 1 5.5 9 A6.5 6.5 0 1 1 18.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 14.5 L7 21.5 L12 19.5 L17 21.5 L15.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M18.5 9 A6.5 6.5 0 1 1 5.5 9 A6.5 6.5 0 1 1 18.5 9 Z",
+    "M8.5 14.5 L7 21.5 L12 19.5 L17 21.5 L15.5 14.5 Z"
+  ],
+  "cutouts": [
+    "M17 9 A5 5 0 1 1 7 9 A5 5 0 1 1 17 8.99",
+    "M5.5 14 A8.25 8.25 0 0 0 18.5 14"
+  ],
+  "synonyms": [
+    "winner",
+    "won",
+    "win",
+    "first place",
+    "first prize",
+    "champion",
+    "best",
+    "excellence",
+    "accomplishment",
+    "milestone",
+    "certificate",
+    "certification",
+    "award ribbon",
+    "gold medal",
+    "olympics",
+    "competition",
+    "contest",
+    "congratulations",
+    "well done",
+    "success",
+    "merit",
+    "quality",
+    "awards",
+    "accolade",
+    "medallion",
+    "rank",
+    "level up",
+    "gamification",
+    "meddle",
+    "aword"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "banknote",
+  "category": "commerce",
+  "description": "A paper banknote with a centre medallion for cash, payouts, and pricing.",
+  "aliases": [
+    "cash",
+    "bill",
+    "money",
+    "paper-money",
+    "currency",
+    "payout",
+    "dollar-bill",
+    "bank-note"
+  ],
+  "tags": [
+    "money",
+    "cash",
+    "finance",
+    "payment",
+    "currency"
+  ],
+  "paths": [
+    {
+      "d": "M4 5.5 H20 A2 2 0 0 1 22 7.5 V16.5 A2 2 0 0 1 20 18.5 H4 A2 2 0 0 1 2 16.5 V7.5 A2 2 0 0 1 4 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 12 A2.5 2.5 0 1 1 9.5 12 A2.5 2.5 0 1 1 14.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M5.75 12 H6.25",
+      "plate": "A"
+    },
+    {
+      "d": "M17.75 12 H18.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 5.5 H20 A2 2 0 0 1 22 7.5 V16.5 A2 2 0 0 1 20 18.5 H4 A2 2 0 0 1 2 16.5 V7.5 A2 2 0 0 1 4 5.5 Z"
+  ],
+  "cutouts": [
+    "M15.25 12 A3.25 3.25 0 1 1 8.75 12 A3.25 3.25 0 1 1 15.25 12 Z M13.75 12 A1.75 1.75 0 1 1 10.25 12 A1.75 1.75 0 1 1 13.75 12 Z",
+    "M5.75 12 H6.25",
+    "M17.75 12 H18.25"
+  ],
+  "synonyms": [
+    "pay",
+    "payment",
+    "note",
+    "pay cash",
+    "salary",
+    "wages",
+    "income",
+    "earnings",
+    "price",
+    "pricing",
+    "cost",
+    "fee",
+    "budget",
+    "finance",
+    "financial",
+    "funds",
+    "savings",
+    "spend",
+    "buy",
+    "purchase",
+    "sale",
+    "refund",
+    "withdraw",
+    "atm",
+    "tip",
+    "dollar",
+    "euro",
+    "pound",
+    "bucks",
+    "notes",
+    "bills",
+    "money bill",
+    "greenback",
+    "banknotes",
+    "bank note",
+    "mony"
+  ]
+}

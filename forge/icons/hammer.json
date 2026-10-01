@@ -1,0 +1,58 @@
+{
+  "name": "hammer",
+  "category": "objects",
+  "description": "A claw hammer, for building, repairs, tools and construction.",
+  "aliases": [
+    "tool",
+    "build",
+    "construction",
+    "carpentry",
+    "mallet",
+    "diy"
+  ],
+  "tags": [
+    "tool",
+    "claw-hammer",
+    "hardware",
+    "workshop",
+    "maintenance",
+    "nail"
+  ],
+  "paths": [
+    {
+      "d": "M12.68 2.82 L18.34 8.47 C20.82 10.95 21.35 14.31 19.22 17.49 C19.75 15.19 18.87 13.25 17.28 11.66 L16.57 10.95 L14.81 12.72 L8.79 6.71 A1 1 0 0 1 8.79 5.29 L11.27 2.82 A1 1 0 0 1 12.68 2.82 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.98 9.89 L4.02 17.84 A2 2 0 0 0 6.85 20.67 L14.81 12.72",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.68 2.82 L18.34 8.47 C20.82 10.95 21.35 14.31 19.22 17.49 C19.75 15.19 18.87 13.25 17.28 11.66 L16.57 10.95 L14.81 12.72 L8.79 6.71 A1 1 0 0 1 8.79 5.29 L11.27 2.82 A1 1 0 0 1 12.68 2.82 Z",
+    "M11.98 9.89 L4.02 17.84 A2 2 0 0 0 6.85 20.67 L14.81 12.72 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "fix",
+    "hammer and nail",
+    "nail",
+    "builder",
+    "handyman",
+    "workshop",
+    "tools",
+    "under construction",
+    "renovation",
+    "home improvement",
+    "crafting",
+    "auction",
+    "gavel",
+    "smash",
+    "hit",
+    "build tools",
+    "make",
+    "hamer",
+    "repair",
+    "maintenance"
+  ]
+}

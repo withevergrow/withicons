@@ -1,0 +1,68 @@
+{
+  "name": "minimize",
+  "category": "layout",
+  "description": "Two diagonal arrows pointing in toward the centre, exiting fullscreen or shrinking a panel.",
+  "aliases": [
+    "exit-fullscreen",
+    "shrink",
+    "contract",
+    "restore",
+    "reduce",
+    "minimise",
+    "arrows-in",
+    "collapse-view",
+    "leave-fullscreen",
+    "smaller"
+  ],
+  "tags": [
+    "fullscreen",
+    "shrink",
+    "window",
+    "view",
+    "collapse",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 3.5 L14 10",
+      "plate": "K"
+    },
+    {
+      "d": "M14 4 V10 H20",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 20.5 L10 14",
+      "plate": "K"
+    },
+    {
+      "d": "M4 14 H10 V20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "exit full screen",
+    "close fullscreen",
+    "leave full screen",
+    "make smaller",
+    "scale down",
+    "shrink window",
+    "small",
+    "smaller view",
+    "compress",
+    "condense",
+    "reduce size",
+    "restore size",
+    "normal size",
+    "default size",
+    "windowed",
+    "fit",
+    "minimize window",
+    "min",
+    "resize",
+    "collapse",
+    "minimze"
+  ]
+}

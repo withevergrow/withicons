@@ -1,0 +1,61 @@
+{
+  "name": "cloud-lightning",
+  "category": "weather",
+  "description": "A cloud with a lightning bolt dropping through it for thunderstorms and severe weather.",
+  "aliases": [
+    "storm",
+    "thunderstorm",
+    "thunder",
+    "storm-cloud",
+    "stormy",
+    "lightning-cloud",
+    "severe-weather",
+    "electric-storm"
+  ],
+  "tags": [
+    "weather",
+    "storm",
+    "lightning",
+    "thunder",
+    "bolt",
+    "forecast"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 9 L10 17 H15 L12.5 22",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 15 V14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 V15 Z"
+  ],
+  "cutouts": [
+    "M9.07 14.75 L11.9 8.3 A1.75 1.75 0 0 1 15.1 9.7 L12.89 14.75"
+  ],
+  "synonyms": [
+    "lightning",
+    "thunder and lightning",
+    "lightning bolt",
+    "bolt",
+    "weather",
+    "forecast",
+    "bad weather",
+    "tempest",
+    "rainstorm",
+    "severe",
+    "storm warning",
+    "weather alert",
+    "power outage",
+    "thunderstorms",
+    "lightening",
+    "thundercloud",
+    "dark clouds",
+    "monsoon",
+    "hurricane",
+    "tropical storm"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "book-open",
+  "category": "objects",
+  "description": "An open book with two facing pages meeting at the spine.",
+  "aliases": [
+    "open-book",
+    "read",
+    "reading",
+    "ebook",
+    "study",
+    "pages"
+  ],
+  "tags": [
+    "book",
+    "pages",
+    "reading",
+    "knowledge",
+    "study"
+  ],
+  "paths": [
+    {
+      "d": "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V20"
+  ],
+  "synonyms": [
+    "learn",
+    "learning",
+    "education",
+    "school",
+    "story",
+    "novel",
+    "reader",
+    "read more",
+    "read aloud",
+    "bible",
+    "literature",
+    "knowledge",
+    "lesson",
+    "course",
+    "tutorial",
+    "guide",
+    "magazine",
+    "e-reader",
+    "kindle",
+    "open a book",
+    "chapter",
+    "dictionary"
+  ]
+}

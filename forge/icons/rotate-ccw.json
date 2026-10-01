@@ -1,0 +1,53 @@
+{
+  "name": "rotate-ccw",
+  "category": "arrows",
+  "description": "Circular arrow turning counter-clockwise",
+  "aliases": [
+    "rotate-left",
+    "counterclockwise",
+    "anticlockwise",
+    "turn-left",
+    "rotate-back",
+    "undo-rotate",
+    "counter-clockwise"
+  ],
+  "tags": [
+    "rotate",
+    "counterclockwise",
+    "turn",
+    "orientation",
+    "transform"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 13 A8.5 8.5 0 1 0 5 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 2.5 L5 7.5 L10 7.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "rotate image left",
+    "rotate photo",
+    "turn image",
+    "turn picture",
+    "flip left",
+    "rotate 90 left",
+    "90 degrees",
+    "anti clockwise",
+    "anti-clockwise",
+    "circular arrow left",
+    "orientation",
+    "reverse",
+    "go back in time",
+    "reset",
+    "revert",
+    "restore",
+    "spin left",
+    "roatate"
+  ]
+}

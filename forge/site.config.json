@@ -1,0 +1,13 @@
+{
+  "name": "with icons",
+  "displayName": "with icons",
+  "shortName": "withicons",
+  "url": "https://withicons.com",
+  "repo": "https://github.com/withevergrow/withicons",
+  "npmScope": "@withicons",
+  "element": "with-icon",
+  "classPrefix": "with",
+  "cdn": "https://cdn.jsdelivr.net/npm",
+  "publisher": { "name": "Evergrow", "url": "https://withevergrow.com" },
+  "description": "with icons: 300 free icons in 7 styles for websites, apps, slides and docs. Copy, download or install for HTML, React, Vue, Svelte, Angular and Solid. MIT licensed. Powered by Evergrow."
+}

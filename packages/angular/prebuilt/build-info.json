@@ -1,0 +1,7 @@
+{
+  "srcHash": "580b39824c3bb5c1",
+  "angular": "22.2.0",
+  "ngPackagr": "22.2.1",
+  "typescript": "6.0.3",
+  "partialMinVersion": "17.0.0"
+}

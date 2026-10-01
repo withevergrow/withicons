@@ -1,0 +1,57 @@
+{
+  "name": "arrow-down",
+  "category": "arrows",
+  "description": "A straight downward arrow for moving down or descending sort.",
+  "aliases": [
+    "down",
+    "south",
+    "descend",
+    "move-down",
+    "scroll-down",
+    "sort-descending",
+    "downward",
+    "down-arrow",
+    "arrow-south"
+  ],
+  "tags": [
+    "arrow",
+    "down",
+    "descend",
+    "direction",
+    "below"
+  ],
+  "paths": [
+    {
+      "d": "M12 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M18.5 13.5 L12 20 L5.5 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "go down",
+    "below",
+    "lower",
+    "decrease",
+    "drop",
+    "fall",
+    "falling",
+    "decline",
+    "reduce",
+    "less",
+    "bottom",
+    "scroll",
+    "dropdown",
+    "drop down",
+    "descending",
+    "sink",
+    "beneath",
+    "point down",
+    "pointer down",
+    "underneath"
+  ]
+}

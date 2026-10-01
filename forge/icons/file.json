@@ -1,0 +1,63 @@
+{
+  "name": "file",
+  "category": "files",
+  "description": "A blank page with a folded corner for an untyped file or document.",
+  "aliases": [
+    "document",
+    "page",
+    "doc",
+    "blank-file",
+    "blank-page",
+    "paper",
+    "untitled",
+    "empty-file",
+    "generic-file"
+  ],
+  "tags": [
+    "files",
+    "document",
+    "page",
+    "blank",
+    "paper"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 1.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H20.5"
+  ],
+  "synonyms": [
+    "attachment",
+    "sheet of paper",
+    "single file",
+    "form",
+    "record",
+    "paperwork",
+    "letter",
+    "blank",
+    "empty page",
+    "note",
+    "draft",
+    "asset",
+    "data file",
+    "fiel",
+    "flie",
+    "dokument",
+    "folded corner",
+    "unknown file",
+    "any file",
+    "file type",
+    "default file",
+    "sheet"
+  ]
+}

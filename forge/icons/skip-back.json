@@ -1,0 +1,57 @@
+{
+  "name": "skip-back",
+  "category": "media",
+  "description": "A bar-capped reversed triangle that jumps to the previous track or chapter.",
+  "aliases": [
+    "previous",
+    "previous-track",
+    "prev",
+    "skip-previous",
+    "back-track",
+    "restart-track",
+    "step-back",
+    "go-to-start"
+  ],
+  "tags": [
+    "media",
+    "player",
+    "control",
+    "previous",
+    "track"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 7.73 A1.75 1.75 0 0 0 16.79 6.26 L10.25 10.53 A1.75 1.75 0 0 0 10.25 13.47 L16.79 17.74 A1.75 1.75 0 0 0 19.5 16.27 L19.5 7.73 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 5 V19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 7.73 A1.75 1.75 0 0 0 16.79 6.26 L10.25 10.53 A1.75 1.75 0 0 0 10.25 13.47 L16.79 17.74 A1.75 1.75 0 0 0 19.5 16.27 L19.5 7.73 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "previous song",
+    "last song",
+    "previous episode",
+    "previous chapter",
+    "go back",
+    "back",
+    "skip back",
+    "start over",
+    "beginning",
+    "restart",
+    "media control",
+    "music player",
+    "video player",
+    "audio player",
+    "playback",
+    "playlist",
+    "back button",
+    "previus",
+    "prevous"
+  ]
+}

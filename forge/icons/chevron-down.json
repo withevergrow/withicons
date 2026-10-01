@@ -1,0 +1,48 @@
+{
+  "name": "chevron-down",
+  "category": "navigation",
+  "description": "Downward chevron marking dropdowns, selects, and expandable sections.",
+  "aliases": [
+    "caret-down",
+    "angle-down",
+    "dropdown",
+    "expand",
+    "disclosure-down",
+    "arrow-down-small"
+  ],
+  "tags": [
+    "chevron",
+    "down",
+    "dropdown",
+    "expand",
+    "select",
+    "caret"
+  ],
+  "paths": [
+    {
+      "d": "M6 9 L12 15 L18 9",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "drop down",
+    "drop-down",
+    "open menu",
+    "show more",
+    "see more",
+    "more options",
+    "accordion",
+    "select",
+    "choose",
+    "open",
+    "unfold",
+    "reveal",
+    "down",
+    "scroll down",
+    "next section",
+    "expand section",
+    "v shape"
+  ]
+}

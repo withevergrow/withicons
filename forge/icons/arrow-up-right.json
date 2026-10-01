@@ -1,0 +1,57 @@
+{
+  "name": "arrow-up-right",
+  "category": "arrows",
+  "description": "A diagonal arrow for outbound links, growth deltas, and drill-through.",
+  "aliases": [
+    "northeast",
+    "north-east",
+    "up-right",
+    "outbound",
+    "open-link-arrow",
+    "growth-arrow",
+    "top-right",
+    "arrow-ne",
+    "diagonal-up-right"
+  ],
+  "tags": [
+    "diagonal",
+    "outbound",
+    "growth",
+    "direction",
+    "link"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 17.5 L17.5 6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 6.5 H17.5 V16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "external",
+    "open in new",
+    "new tab",
+    "visit",
+    "go to",
+    "link out",
+    "outside link",
+    "growth",
+    "grow",
+    "rising",
+    "increase",
+    "gain",
+    "profit",
+    "up and to the right",
+    "trend",
+    "progress",
+    "improve",
+    "launch",
+    "diagonal arrow",
+    "upper right"
+  ]
+}

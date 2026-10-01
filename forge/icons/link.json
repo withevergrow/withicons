@@ -1,0 +1,70 @@
+{
+  "name": "link",
+  "category": "actions",
+  "description": "Interlocking chain links for inserting or displaying a hyperlink.",
+  "aliases": [
+    "hyperlink",
+    "url",
+    "chain",
+    "insert-link",
+    "permalink",
+    "copy-link",
+    "href",
+    "web-link",
+    "weblink",
+    "chain-link"
+  ],
+  "tags": [
+    "chain",
+    "url",
+    "connect",
+    "web",
+    "hyperlink"
+  ],
+  "paths": [
+    {
+      "d": "M11.29 17.66 L9.35 19.6 A3.5 3.5 0 0 1 4.4 14.65 L8.29 10.76 A3.5 3.5 0 0 1 13.63 11.23",
+      "plate": "K"
+    },
+    {
+      "d": "M12.71 6.34 L14.65 4.4 A3.5 3.5 0 0 1 19.6 9.35 L15.71 13.24 A3.5 3.5 0 0 1 10.37 12.77",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "add link",
+    "attach link",
+    "paste link",
+    "share link",
+    "link to",
+    "web address",
+    "website address",
+    "address",
+    "anchor link",
+    "connect",
+    "connection",
+    "join",
+    "linked",
+    "linking",
+    "relation",
+    "related",
+    "reference",
+    "source",
+    "shortcut",
+    "backlink",
+    "url link",
+    "short link",
+    "shortened url",
+    "invite link",
+    "embed",
+    "bind",
+    "attach",
+    "tie",
+    "lnk",
+    "hyper link",
+    "chain links",
+    "links"
+  ]
+}

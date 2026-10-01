@@ -1,0 +1,61 @@
+{
+  "name": "chart-pie",
+  "category": "charts",
+  "description": "A segmented circle showing composition or share of total.",
+  "aliases": [
+    "pie-chart",
+    "pie-graph",
+    "donut-chart",
+    "doughnut-chart",
+    "proportion",
+    "breakdown"
+  ],
+  "tags": [
+    "chart",
+    "pie",
+    "analytics",
+    "share",
+    "composition",
+    "report"
+  ],
+  "paths": [
+    {
+      "d": "M10 14 V6.5 A7.5 7.5 0 1 0 17.5 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 10 V2.5 A7.5 7.5 0 0 1 21.5 10 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 14 V6.5 A7.5 7.5 0 1 0 17.5 14 Z",
+    "M14 10 V2.5 A7.5 7.5 0 0 1 21.5 10 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "market share",
+    "segments",
+    "distribution",
+    "share of total",
+    "percentage",
+    "portion",
+    "slice",
+    "split",
+    "allocation",
+    "budget",
+    "spending",
+    "expenses",
+    "composition",
+    "statistics",
+    "analytics",
+    "report",
+    "data",
+    "demographics",
+    "survey",
+    "pie",
+    "doughnut",
+    "ratio",
+    "chart"
+  ]
+}

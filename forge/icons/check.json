@@ -1,0 +1,64 @@
+{
+  "name": "check",
+  "category": "actions",
+  "description": "A bare checkmark for selection, completion, and confirm buttons.",
+  "aliases": [
+    "tick",
+    "checkmark",
+    "confirm",
+    "done",
+    "accept",
+    "approve",
+    "yes",
+    "complete"
+  ],
+  "tags": [
+    "success",
+    "selected",
+    "ok",
+    "valid",
+    "confirm"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 12.5 L9.5 17.5 L19.5 6.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "ok",
+    "okay",
+    "correct",
+    "right",
+    "success",
+    "agree",
+    "valid",
+    "selected",
+    "chosen",
+    "finished",
+    "completed",
+    "verified",
+    "approved",
+    "submit",
+    "apply",
+    "save changes",
+    "got it",
+    "all set",
+    "good",
+    "pass",
+    "passed",
+    "true",
+    "affirmative",
+    "check mark",
+    "tick mark",
+    "tic",
+    "chek",
+    "ticked",
+    "marked",
+    "included",
+    "available",
+    "in stock"
+  ]
+}

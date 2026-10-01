@@ -1,0 +1,71 @@
+{
+  "name": "alert-triangle",
+  "category": "status",
+  "description": "An exclamation mark in a rounded triangle for warnings and risky actions.",
+  "aliases": [
+    "warning",
+    "caution",
+    "danger",
+    "exclamation-triangle",
+    "hazard",
+    "risk",
+    "warn",
+    "warning-sign",
+    "caution-sign"
+  ],
+  "tags": [
+    "warning",
+    "caution",
+    "alert",
+    "danger",
+    "exclamation",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M10.27 4 A2 2 0 0 1 13.73 4 L21.53 17.5 A2 2 0 0 1 19.8 20.5 L4.2 20.5 A2 2 0 0 1 2.47 17.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 9 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16.75 V17.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10.27 4 A2 2 0 0 1 13.73 4 L21.53 17.5 A2 2 0 0 1 19.8 20.5 L4.2 20.5 A2 2 0 0 1 2.47 17.5 Z"
+  ],
+  "cutouts": [
+    "M12 9 V13.5",
+    "M12 16.75 V17.25"
+  ],
+  "synonyms": [
+    "be careful",
+    "careful",
+    "dangerous",
+    "unsafe",
+    "risky",
+    "beware",
+    "watch out",
+    "look out",
+    "threat",
+    "emergency",
+    "critical",
+    "severe",
+    "road sign",
+    "hazard sign",
+    "yield",
+    "exclamation",
+    "!",
+    "high risk",
+    "proceed with caution",
+    "destructive",
+    "irreversible",
+    "unstable",
+    "warnning",
+    "cuation"
+  ]
+}

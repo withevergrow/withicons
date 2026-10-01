@@ -1,0 +1,67 @@
+{
+  "name": "history",
+  "category": "time",
+  "description": "A clock with a backward arrow for recent activity and revision history.",
+  "aliases": [
+    "recent",
+    "past",
+    "revisions",
+    "version-history",
+    "activity-log",
+    "timeline",
+    "undo-history",
+    "rewind",
+    "log"
+  ],
+  "tags": [
+    "clock",
+    "past",
+    "recent",
+    "revisions",
+    "rewind",
+    "log"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 13 A8.5 8.5 0 1 0 6 6 L3 9",
+      "plate": "K"
+    },
+    {
+      "d": "M3 4.5 V9 H7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7.5 V12 L15.5 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 12 A7 7 0 1 1 5 12 A7 7 0 1 1 19 12 Z"
+  ],
+  "cutouts": [
+    "M12 5.25 A6.75 6.75 0 1 1 11.8 5.25",
+    "M12 7.5 V12 L15.5 14"
+  ],
+  "synonyms": [
+    "recently viewed",
+    "recent files",
+    "history log",
+    "browsing history",
+    "go back in time",
+    "previous",
+    "earlier",
+    "changelog",
+    "audit log",
+    "time machine",
+    "backup",
+    "restore",
+    "old versions",
+    "last seen",
+    "recent activity",
+    "order history",
+    "call history",
+    "chat history",
+    "previous versions",
+    "histroy"
+  ]
+}

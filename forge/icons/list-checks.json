@@ -1,0 +1,75 @@
+{
+  "name": "list-checks",
+  "category": "text",
+  "description": "A checklist: checkmarks beside lines for tasks and to-dos.",
+  "aliases": [
+    "checklist",
+    "todo",
+    "todo-list",
+    "to-do",
+    "task-list",
+    "tasks",
+    "checked-list",
+    "done-list",
+    "check-list"
+  ],
+  "tags": [
+    "list",
+    "checklist",
+    "tasks",
+    "completed",
+    "items"
+  ],
+  "paths": [
+    {
+      "d": "M12 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M12 18 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 6 L4.5 8 L8 4",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 18 L4.5 20 L8 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "to do list",
+    "things to do",
+    "completed tasks",
+    "done",
+    "tick list",
+    "ticked",
+    "checkbox list",
+    "checkboxes",
+    "requirements",
+    "steps done",
+    "progress",
+    "plan",
+    "planner",
+    "chores",
+    "shopping list",
+    "packing list",
+    "agenda",
+    "action items",
+    "review",
+    "audit",
+    "inspection",
+    "criteria",
+    "features",
+    "assignments",
+    "goals",
+    "accomplished"
+  ]
+}

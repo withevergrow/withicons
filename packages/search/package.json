@@ -1,0 +1,74 @@
+{
+  "name": "@withicons/search",
+  "version": "0.1.0",
+  "description": "Fast, typo-tolerant, dependency-free search engine and prebuilt index for the with icons library (300 icons x 7 styles).",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/search"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "search",
+    "icon-search",
+    "fuzzy-search",
+    "typo-tolerant",
+    "mcp"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/with-search.js",
+  "jsdelivr": "./dist/with-search.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./data": {
+      "import": {
+        "types": "./dist/data.d.ts",
+        "default": "./dist/data.js"
+      },
+      "require": {
+        "types": "./dist/data.d.cts",
+        "default": "./dist/data.cjs"
+      }
+    },
+    "./index.json": "./dist/index.json",
+    "./browser": "./dist/with-search.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

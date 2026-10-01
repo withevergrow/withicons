@@ -1,0 +1,76 @@
+{
+  "name": "microphone-off",
+  "category": "media",
+  "description": "A microphone crossed out by a diagonal slash for muted audio input.",
+  "aliases": [
+    "mic-off",
+    "mute",
+    "muted",
+    "mute-mic",
+    "mic-muted",
+    "no-mic",
+    "silence-mic",
+    "unmute",
+    "microphone-muted",
+    "voice-off"
+  ],
+  "tags": [
+    "microphone",
+    "mute",
+    "audio",
+    "voice",
+    "disabled"
+  ],
+  "paths": [
+    {
+      "d": "M9.02 5.13 A3 3 0 0 1 15 5.5 V11.11",
+      "plate": "K"
+    },
+    {
+      "d": "M18.5 11 A6.5 6.5 0 0 1 17.81 13.92",
+      "plate": "A"
+    },
+    {
+      "d": "M13.45 17.34 A6.5 6.5 0 0 1 5.5 11",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9 6.35 V5.5 A3 3 0 0 1 15 5.5 V12.35 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "mute microphone",
+    "mute myself",
+    "mute me",
+    "mic disabled",
+    "microphone off",
+    "no audio",
+    "no sound",
+    "silent",
+    "silence",
+    "quiet",
+    "turn off mic",
+    "stop recording",
+    "stop talking",
+    "disable voice",
+    "on mute",
+    "you are muted",
+    "privacy",
+    "crossed mic",
+    "meeting mute",
+    "zoom mute",
+    "call mute",
+    "mic slash",
+    "mike off",
+    "microphne off"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "book",
+  "category": "files",
+  "description": "A closed book with a rounded spine and a visible block of pages.",
+  "aliases": [
+    "manual",
+    "handbook",
+    "docs",
+    "guidebook",
+    "closed-book",
+    "textbook"
+  ],
+  "tags": [
+    "files",
+    "read",
+    "learn",
+    "knowledge",
+    "education"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 19 V5 A2.5 2.5 0 0 1 7 2.5 H18 A1.5 1.5 0 0 1 19.5 4 V20 A1.5 1.5 0 0 1 18 21.5 H7 A2.5 2.5 0 0 1 4.5 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.5 16.5 H7 A2.5 2.5 0 0 0 4.5 19",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M4.5 19 V5 A2.5 2.5 0 0 1 7 2.5 H18 A1.5 1.5 0 0 1 19.5 4 V16.5 H7 A2.5 2.5 0 0 0 4.5 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "documentation",
+    "library",
+    "novel",
+    "journal",
+    "diary",
+    "notebook",
+    "catalog",
+    "catalogue",
+    "reference",
+    "encyclopedia",
+    "knowledge base",
+    "help guide",
+    "user guide",
+    "instructions",
+    "literature",
+    "publication",
+    "author",
+    "bookshelf",
+    "school",
+    "bible",
+    "recipe book"
+  ]
+}

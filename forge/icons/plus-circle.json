@@ -1,0 +1,58 @@
+{
+  "name": "plus-circle",
+  "category": "actions",
+  "description": "A plus sign inside a circle for adding or creating an item.",
+  "aliases": [
+    "add-circle",
+    "circle-plus",
+    "plus-circled",
+    "add-item",
+    "new-item",
+    "create-new",
+    "add-button"
+  ],
+  "tags": [
+    "add",
+    "new",
+    "create",
+    "circle",
+    "increase"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 V16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 12 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 8 V16",
+    "M8 12 H16"
+  ],
+  "synonyms": [
+    "add",
+    "new",
+    "create",
+    "add more",
+    "add another",
+    "insert",
+    "increase",
+    "more",
+    "plus button",
+    "add to list",
+    "join",
+    "include",
+    "round plus",
+    "new entry"
+  ]
+}

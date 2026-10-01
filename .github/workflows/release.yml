@@ -1,0 +1,87 @@
+name: Release to npm
+
+# Tag-driven, lockstep release of every public package under packages/*:
+#   1. bump the version in the root package.json (forge/build.mjs stamps it into every package)
+#   2. node forge/build.mjs, update CHANGELOG.md, commit, then:  git tag v0.2.0 && git push origin v0.2.0
+#   3. this workflow builds, tests, verifies all packages are at 0.2.0 and publishes them in
+#      dependency order with provenance, then creates the GitHub Release.
+#
+# Auth: npm Trusted Publishing (OIDC). Configure it once per package on npmjs.com ->
+# package -> Settings -> Trusted publishing: GitHub Actions, org "withevergrow", repo "withicons",
+# workflow "release.yml", environment "npm". Trusted Publishing can only be added to a package that
+# already exists, so the very first publish is manual (docs/LAUNCH.md). NPM_TOKEN is an optional
+# fallback secret for packages that are not yet configured - delete it once all are.
+
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+*']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Pack and validate only (npm publish --dry-run)
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # create the GitHub Release
+  id-token: write   # npm Trusted Publishing + provenance
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: npm >= 11.5.1 (required for Trusted Publishing)
+        run: npm install -g npm@^11.5.1 && npm --version
+
+      - run: npm ci
+      - run: node forge/build.mjs
+      - run: node forge/tools/check.mjs
+      - run: npm test --workspaces --if-present
+
+      - name: Publish (dry run)
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run
+        run: node scripts/publish.mjs --dry-run
+
+      # npm publishing is OPT-IN: set the repository variable NPM_PUBLISH=true after the first manual
+      # publish + Trusted Publishing setup (docs/LAUNCH.md). Until then a tag only builds, tests and
+      # creates the GitHub Release with the packed tarballs attached.
+      - name: Publish
+        if: (github.event_name == 'push' && vars.NPM_PUBLISH == 'true') || (github.event_name == 'workflow_dispatch' && !inputs.dry_run)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}   # empty once Trusted Publishing is set up everywhere
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            node scripts/publish.mjs --expect "${GITHUB_REF_NAME}"
+          else
+            node scripts/publish.mjs
+          fi
+
+      - name: Pack release assets
+        if: github.ref_type == 'tag'
+        run: |
+          mkdir -p release-assets
+          npm pack --workspaces --pack-destination release-assets >/dev/null
+          ls -la release-assets
+
+      - name: GitHub Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pre=""; case "$GITHUB_REF_NAME" in *-*) pre="--prerelease";; esac
+          gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes $pre \
+            --title "with icons $GITHUB_REF_NAME" release-assets/*.tgz

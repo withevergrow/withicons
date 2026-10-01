@@ -1,0 +1,75 @@
+{
+  "name": "timer",
+  "category": "time",
+  "description": "A stopwatch for countdowns, timers, and measured durations.",
+  "aliases": [
+    "stopwatch",
+    "countdown",
+    "chronometer",
+    "lap-time",
+    "elapsed",
+    "time-tracker",
+    "duration",
+    "stop-watch",
+    "time-limit"
+  ],
+  "tags": [
+    "stopwatch",
+    "countdown",
+    "time",
+    "sport",
+    "measure",
+    "duration"
+  ],
+  "paths": [
+    {
+      "d": "M20 13.5 A8 8 0 1 1 4 13.5 A8 8 0 1 1 20 13.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 2 H14 M12 2 V5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18 7.5 L20 5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13.5 L15 10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M20 13.5 A8 8 0 1 1 4 13.5 A8 8 0 1 1 20 13.5 Z"
+  ],
+  "cutouts": [
+    "M12 13.5 L15 10.5"
+  ],
+  "synonyms": [
+    "timing",
+    "time",
+    "timed",
+    "countdown timer",
+    "kitchen timer",
+    "egg timer",
+    "race",
+    "race timer",
+    "track time",
+    "time tracking",
+    "seconds",
+    "minutes",
+    "pomodoro",
+    "workout timer",
+    "lap",
+    "sprint",
+    "speed",
+    "deadline",
+    "time left",
+    "time remaining",
+    "measure time",
+    "stopwatch app",
+    "set timer",
+    "quick",
+    "fast"
+  ]
+}

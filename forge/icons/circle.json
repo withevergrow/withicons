@@ -1,0 +1,55 @@
+{
+  "name": "circle",
+  "category": "objects",
+  "description": "A plain circle used for radio controls, status dots, and bullets.",
+  "aliases": [
+    "dot",
+    "ring",
+    "round",
+    "radio-shape",
+    "status-dot",
+    "bullet",
+    "ellipse"
+  ],
+  "tags": [
+    "shape",
+    "round",
+    "geometry",
+    "radio",
+    "primitive"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "oval",
+    "shape",
+    "empty circle",
+    "radio button",
+    "unchecked",
+    "unselected",
+    "not done",
+    "outline circle",
+    "point",
+    "spot",
+    "disc",
+    "sphere",
+    "ball",
+    "zero",
+    "record",
+    "indicator",
+    "empty",
+    "blank",
+    "geometric",
+    "basic shape",
+    "loop",
+    "orb"
+  ]
+}

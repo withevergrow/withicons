@@ -1,0 +1,66 @@
+{
+  "name": "keyboard",
+  "category": "devices",
+  "description": "A keyboard with rows of keys and a space bar, for typing, input settings, and shortcuts.",
+  "aliases": [
+    "typing",
+    "keypad",
+    "input-device",
+    "keyboard-shortcut",
+    "hotkeys",
+    "shortcuts",
+    "qwerty",
+    "keybindings"
+  ],
+  "tags": [
+    "keyboard",
+    "typing",
+    "input",
+    "keys",
+    "hardware"
+  ],
+  "paths": [
+    {
+      "d": "M4 4.5 H20 A2 2 0 0 1 22 6.5 V17.5 A2 2 0 0 1 20 19.5 H4 A2 2 0 0 1 2 17.5 V6.5 A2 2 0 0 1 4 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.75 8.5 H6.25 M9.75 8.5 H10.25 M13.75 8.5 H14.25 M17.75 8.5 H18.25",
+      "plate": "A"
+    },
+    {
+      "d": "M7.75 12 H8.25 M11.75 12 H12.25 M15.75 12 H16.25",
+      "plate": "A"
+    },
+    {
+      "d": "M8 15.5 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4.5 H20 A2 2 0 0 1 22 6.5 V17.5 A2 2 0 0 1 20 19.5 H4 A2 2 0 0 1 2 17.5 V6.5 A2 2 0 0 1 4 4.5 Z"
+  ],
+  "cutouts": [
+    "M7 8.5 A1 1 0 1 1 5 8.5 A1 1 0 1 1 7 8.5 Z M11 8.5 A1 1 0 1 1 9 8.5 A1 1 0 1 1 11 8.5 Z M15 8.5 A1 1 0 1 1 13 8.5 A1 1 0 1 1 15 8.5 Z M19 8.5 A1 1 0 1 1 17 8.5 A1 1 0 1 1 19 8.5 Z",
+    "M9 12 A1 1 0 1 1 7 12 A1 1 0 1 1 9 12 Z M13 12 A1 1 0 1 1 11 12 A1 1 0 1 1 13 12 Z M17 12 A1 1 0 1 1 15 12 A1 1 0 1 1 17 12 Z",
+    "M8 15.5 H16"
+  ],
+  "synonyms": [
+    "type",
+    "typing speed",
+    "keyboard shortcuts",
+    "key bindings",
+    "keybinds",
+    "input",
+    "text input",
+    "computer keyboard",
+    "on screen keyboard",
+    "virtual keyboard",
+    "mechanical keyboard",
+    "write",
+    "peripheral",
+    "input language",
+    "keybord",
+    "keyborad"
+  ]
+}

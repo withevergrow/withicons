@@ -1,0 +1,76 @@
+{
+  "name": "rocket",
+  "category": "objects",
+  "description": "A rocket lifting off, for deployments, launches, and release actions.",
+  "aliases": [
+    "launch",
+    "deploy",
+    "ship",
+    "release",
+    "spaceship",
+    "liftoff",
+    "boost",
+    "blast-off",
+    "spacecraft"
+  ],
+  "tags": [
+    "space",
+    "launch",
+    "deploy",
+    "release",
+    "speed",
+    "growth"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 11.5 L2.25 11.25 Q5.75 7.25 9 8 L11 6 A11.01 11.01 0 0 1 21 3 A11.01 11.01 0 0 1 18 13 L16 15 Q16.75 18.25 12.75 21.75 L12.5 17.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.9 9 A0.9 0.9 0 1 1 14.1 9 A0.9 0.9 0 1 1 15.9 9 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7.75 12.75 C5.25 14.25 4.4 16.9 4 20 C7.1 19.6 9.75 18.75 11.25 16.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 11.5 L2.25 11.25 Q5.75 7.25 9 8 L11 6 A11.01 11.01 0 0 1 21 3 A11.01 11.01 0 0 1 18 13 L16 15 Q16.75 18.25 12.75 21.75 L12.5 17.5 Z",
+    "M7.75 12.75 C5.25 14.25 4.4 16.9 4 20 C7.1 19.6 9.75 18.75 11.25 16.25 Z"
+  ],
+  "cutouts": [
+    "M16.75 9 A1.75 1.75 0 1 1 13.25 9 A1.75 1.75 0 1 1 16.75 9 Z",
+    "M5.9 13.1 L10.9 18.1"
+  ],
+  "synonyms": [
+    "startup",
+    "start up",
+    "get started",
+    "launch product",
+    "go live",
+    "publish",
+    "takeoff",
+    "take off",
+    "space",
+    "outer space",
+    "nasa",
+    "astronaut",
+    "galaxy",
+    "speed",
+    "fast",
+    "growth",
+    "grow fast",
+    "to the moon",
+    "boost performance",
+    "accelerate",
+    "innovation",
+    "new feature",
+    "productivity",
+    "rocketship",
+    "rocket ship",
+    "missile",
+    "roket",
+    "rockit"
+  ]
+}

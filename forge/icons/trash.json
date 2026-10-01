@@ -1,0 +1,90 @@
+{
+  "name": "trash",
+  "category": "actions",
+  "description": "A waste bin with a lid for deleting records, files, or list rows.",
+  "aliases": [
+    "delete",
+    "bin",
+    "remove",
+    "garbage",
+    "rubbish",
+    "waste",
+    "discard",
+    "trash-can",
+    "dustbin",
+    "wastebasket",
+    "garbage-can",
+    "recycle-bin",
+    "waste-bin"
+  ],
+  "tags": [
+    "delete",
+    "remove",
+    "bin",
+    "garbage",
+    "waste",
+    "destroy"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M5 7 L6 19 A2 2 0 0 0 8 21 H16 A2 2 0 0 0 18 19 L19 7",
+      "plate": "K"
+    },
+    {
+      "d": "M9 7 V4.5 A1.5 1.5 0 0 1 10.5 3 H13.5 A1.5 1.5 0 0 1 15 4.5 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M10 11 V17",
+      "plate": "A"
+    },
+    {
+      "d": "M14 11 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 7 L6 19 A2 2 0 0 0 8 21 H16 A2 2 0 0 0 18 19 L19 7 Z"
+  ],
+  "cutouts": [
+    "M10 11 V17",
+    "M14 11 V17"
+  ],
+  "synonyms": [
+    "trashcan",
+    "trash can",
+    "garbage can",
+    "rubbish bin",
+    "waste basket",
+    "litter",
+    "litter bin",
+    "throw away",
+    "throw out",
+    "get rid of",
+    "clear",
+    "clean up",
+    "erase",
+    "destroy",
+    "dump",
+    "junk",
+    "bin it",
+    "deleted",
+    "deleted items",
+    "trash bin",
+    "delete file",
+    "delete item",
+    "remove item",
+    "empty trash",
+    "recycle",
+    "wheelie bin",
+    "can",
+    "rubish",
+    "garbige",
+    "delet",
+    "deleat"
+  ]
+}

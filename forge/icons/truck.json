@@ -1,0 +1,89 @@
+{
+  "name": "truck",
+  "category": "commerce",
+  "description": "A delivery truck with a cargo box and cab, for shipping options and order-in-transit status.",
+  "aliases": [
+    "shipping",
+    "delivery",
+    "freight",
+    "logistics",
+    "in-transit",
+    "courier",
+    "lorry",
+    "van",
+    "delivery-truck",
+    "shipment"
+  ],
+  "tags": [
+    "shipping",
+    "delivery",
+    "transport",
+    "vehicle",
+    "order",
+    "dispatch"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 18 H3.5 A1.5 1.5 0 0 1 2 16.5 V7 A2 2 0 0 1 4 5 H12 A2 2 0 0 1 14 7 V18",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M14 9.5 H17.5 L22 14 V16.5 A1.5 1.5 0 0 1 20.5 18 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18 A2 2 0 1 1 4.5 18 A2 2 0 1 1 8.5 18 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20 18 A2 2 0 1 1 16 18 A2 2 0 1 1 20 18 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 7 A2 2 0 0 1 4 5 H12 A2 2 0 0 1 14 7 V9.5 H17.5 L22 14 V18 H21.5 A3.5 3.5 0 0 0 14.5 18 H10 A3.5 3.5 0 0 0 3 18 H2 Z",
+    "M8.5 18 A2 2 0 1 1 4.5 18 A2 2 0 1 1 8.5 18 Z",
+    "M20 18 A2 2 0 1 1 16 18 A2 2 0 1 1 20 18 Z"
+  ],
+  "cutouts": [
+    "M7.5 18 A1 1 0 1 1 5.5 18 A1 1 0 1 1 7.5 18 Z",
+    "M19 18 A1 1 0 1 1 17 18 A1 1 0 1 1 19 18 Z"
+  ],
+  "synonyms": [
+    "trucks",
+    "lorries",
+    "deliver",
+    "delivered",
+    "out for delivery",
+    "on its way",
+    "on the way",
+    "dispatch",
+    "dispatched",
+    "ship",
+    "shipped",
+    "postage",
+    "parcel delivery",
+    "free shipping",
+    "free delivery",
+    "track order",
+    "order tracking",
+    "transport",
+    "transportation",
+    "moving",
+    "move house",
+    "removal",
+    "haulage",
+    "cargo",
+    "fleet",
+    "vehicle",
+    "semi",
+    "18 wheeler",
+    "pickup truck",
+    "truk",
+    "shiping"
+  ]
+}

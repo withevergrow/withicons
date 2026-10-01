@@ -1,0 +1,77 @@
+{
+  "name": "credit-card",
+  "category": "commerce",
+  "description": "A payment card with a magnetic stripe for billing details and card-on-file settings.",
+  "aliases": [
+    "card",
+    "payment",
+    "debit-card",
+    "bank-card",
+    "payment-method",
+    "pay",
+    "billing",
+    "checkout",
+    "visa",
+    "mastercard",
+    "card-payment"
+  ],
+  "tags": [
+    "payment",
+    "billing",
+    "finance",
+    "card",
+    "purchase"
+  ],
+  "paths": [
+    {
+      "d": "M4 5 H20 A2 2 0 0 1 22 7 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V7 A2 2 0 0 1 4 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 9.5 H22",
+      "plate": "A"
+    },
+    {
+      "d": "M6 15 H9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 5 H20 A2 2 0 0 1 22 7 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V7 A2 2 0 0 1 4 5 Z"
+  ],
+  "cutouts": [
+    "M2 9.5 H22",
+    "M6 15 H9.5"
+  ],
+  "synonyms": [
+    "credit",
+    "debit",
+    "pay by card",
+    "card details",
+    "buy",
+    "purchase",
+    "charge",
+    "charges",
+    "subscription",
+    "bank",
+    "banking",
+    "finance",
+    "transaction",
+    "contactless",
+    "tap to pay",
+    "amex",
+    "american express",
+    "plastic",
+    "swipe",
+    "chip card",
+    "payment info",
+    "card on file",
+    "add card",
+    "credit card",
+    "creditcard",
+    "credit-cart",
+    "cradit card",
+    "paying",
+    "expense"
+  ]
+}

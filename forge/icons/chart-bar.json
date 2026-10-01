@@ -1,0 +1,69 @@
+{
+  "name": "chart-bar",
+  "category": "charts",
+  "description": "Vertical bars representing analytics dashboards and comparisons.",
+  "aliases": [
+    "bar-chart",
+    "column-chart",
+    "bar-graph",
+    "histogram",
+    "bars",
+    "stats"
+  ],
+  "tags": [
+    "chart",
+    "bars",
+    "analytics",
+    "data",
+    "comparison",
+    "report"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 20.5 V13.5 A1.5 1.5 0 0 1 6 12 H9.5 V5.5 A1.5 1.5 0 0 1 11 4 H13 A1.5 1.5 0 0 1 14.5 5.5 V8.5 H18 A1.5 1.5 0 0 1 19.5 10 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 12 V20.5 M14.5 8.5 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 20.5 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 20.5 V13.5 A1.5 1.5 0 0 1 6 12 H9.5 V5.5 A1.5 1.5 0 0 1 11 4 H13 A1.5 1.5 0 0 1 14.5 5.5 V8.5 H18 A1.5 1.5 0 0 1 19.5 10 V20.5 Z"
+  ],
+  "cutouts": [
+    "M1 18 H8.25 V10.75 H6 V2 H11.75 V2.5 A2 2.5 0 0 0 9.75 5 V18 H14.25 V5 A2 2.5 0 0 0 12.25 2.5 V2 H18 V7.25 H15.75 V18 H23 V19.5 H1 Z"
+  ],
+  "synonyms": [
+    "statistics",
+    "analytics",
+    "data",
+    "report",
+    "reports",
+    "insights",
+    "metrics",
+    "comparison",
+    "compare",
+    "results",
+    "survey results",
+    "poll",
+    "sales",
+    "performance",
+    "dashboard",
+    "numbers",
+    "graph",
+    "chart",
+    "figures",
+    "bar diagram",
+    "growth",
+    "levels",
+    "ranking",
+    "kpi",
+    "visualisation",
+    "visualization"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "download",
+  "category": "actions",
+  "description": "Arrow into a tray for pulling a file onto the user's device.",
+  "aliases": [
+    "arrow-down-tray",
+    "file-download",
+    "save-to-device",
+    "export",
+    "export-file",
+    "get",
+    "fetch",
+    "download-file",
+    "tray-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "down",
+    "tray",
+    "save",
+    "transfer"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 14.5 V18.5 A2 2 0 0 0 5.5 20.5 H18.5 A2 2 0 0 0 20.5 18.5 V14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 3.5 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7 9.5 L12 14.5 L17 9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 14.5 H20.5 V18.5 A2 2 0 0 1 18.5 20.5 H5.5 A2 2 0 0 1 3.5 18.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "save to computer",
+    "save as",
+    "get file",
+    "grab",
+    "offline",
+    "install",
+    "arrow down",
+    "down arrow",
+    "receive",
+    "incoming",
+    "retrieve",
+    "downloads",
+    "downloading",
+    "downlaod",
+    "donwload",
+    "dowload",
+    "keep a copy",
+    "get the app",
+    "store locally",
+    "attachment",
+    "pdf download",
+    "free download",
+    "get it"
+  ]
+}

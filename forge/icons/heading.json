@@ -1,0 +1,53 @@
+{
+  "name": "heading",
+  "category": "text",
+  "description": "A capital H marking a heading or title in text formatting.",
+  "aliases": [
+    "title",
+    "header",
+    "h1",
+    "headline",
+    "text-heading",
+    "section-title",
+    "h2",
+    "subheading"
+  ],
+  "tags": [
+    "text",
+    "title",
+    "typography",
+    "editor",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M6 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M18 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M6 12 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "heading text",
+    "big text",
+    "large text",
+    "page title",
+    "section",
+    "rich text",
+    "text editor",
+    "formatting",
+    "font size",
+    "heading 1",
+    "heading 2",
+    "heding",
+    "letter h"
+  ]
+}

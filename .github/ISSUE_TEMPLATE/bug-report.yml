@@ -1,0 +1,35 @@
+name: Bug report
+description: Something renders wrong, a package fails to install/import, or the website misbehaves.
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [icon drawing (one icon looks wrong), style renderer (a whole style), "@withicons/react", "@withicons/vue", "@withicons/svelte", "@withicons/angular", "@withicons/solid", "@withicons/web (element / classes)", "@withicons/static", "@withicons/core", "@withicons/search", "@withicons/mcp", withicons CLI, website, other]
+    validations:
+      required: true
+  - type: input
+    id: icon
+    attributes:
+      label: Icon name(s) and style(s)
+      placeholder: lock / solid
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Screenshots help a lot for drawing bugs (include the size it was shown at).
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Code snippet, StackBlitz/CodeSandbox link or steps.
+      render: tsx
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Package version, framework version, browser.
+      placeholder: "@withicons/react 0.1.0, react 19.1, Chrome 140"

@@ -1,0 +1,63 @@
+{
+  "name": "heart",
+  "category": "status",
+  "description": "A heart for likes, wishlists, and saved-for-later actions.",
+  "aliases": [
+    "like",
+    "love",
+    "favorite",
+    "favourite",
+    "wishlist",
+    "affection",
+    "romance"
+  ],
+  "tags": [
+    "love",
+    "like",
+    "favourite",
+    "health",
+    "care"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "favorites",
+    "favourites",
+    "love it",
+    "i like this",
+    "liked",
+    "save for later",
+    "valentine",
+    "valentines day",
+    "romantic",
+    "dating",
+    "relationship",
+    "crush",
+    "care",
+    "kindness",
+    "charity",
+    "donate",
+    "follow",
+    "heart shape",
+    "red heart",
+    "emotion",
+    "feelings",
+    "passion",
+    "wish list",
+    "add to wishlist",
+    "loved",
+    "hart",
+    "heart icon",
+    "adore",
+    "saved",
+    "reaction"
+  ]
+}

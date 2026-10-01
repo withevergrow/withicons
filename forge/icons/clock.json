@@ -1,0 +1,75 @@
+{
+  "name": "clock",
+  "category": "time",
+  "description": "An analog clock face for times, durations, and time pickers.",
+  "aliases": [
+    "time",
+    "hour",
+    "analog-clock",
+    "time-picker",
+    "timestamp",
+    "current-time",
+    "wall-clock",
+    "clock-face",
+    "o-clock"
+  ],
+  "tags": [
+    "time",
+    "hour",
+    "minute",
+    "clock-face",
+    "schedule",
+    "duration"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 V12 L16 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 V12 L16 14"
+  ],
+  "synonyms": [
+    "minute",
+    "minutes",
+    "hours",
+    "schedule",
+    "duration",
+    "time of day",
+    "what time",
+    "opening hours",
+    "hours of operation",
+    "late",
+    "early",
+    "waiting",
+    "wait",
+    "pending",
+    "recent",
+    "punctual",
+    "deadline",
+    "due",
+    "appointment",
+    "time zone",
+    "timezone",
+    "clok",
+    "tick tock",
+    "24 hours",
+    "overtime",
+    "shift",
+    "working hours",
+    "business hours",
+    "time left",
+    "time spent",
+    "elapsed",
+    "am pm",
+    "temporal"
+  ]
+}

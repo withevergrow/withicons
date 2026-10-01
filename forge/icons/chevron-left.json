@@ -1,0 +1,46 @@
+{
+  "name": "chevron-left",
+  "category": "navigation",
+  "description": "Small left-pointing chevron for going back or collapsing a panel.",
+  "aliases": [
+    "caret-left",
+    "angle-left",
+    "previous",
+    "prev",
+    "go-back",
+    "collapse-left"
+  ],
+  "tags": [
+    "chevron",
+    "left",
+    "back",
+    "previous",
+    "caret"
+  ],
+  "paths": [
+    {
+      "d": "M15 6 L9 12 L15 18",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "back",
+    "return",
+    "before",
+    "last",
+    "earlier",
+    "left",
+    "backward",
+    "previous page",
+    "previous slide",
+    "previous photo",
+    "carousel",
+    "slider",
+    "pagination",
+    "navigate back",
+    "close panel",
+    "less than"
+  ]
+}

@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build, lint icons, test packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build every icon x style, packages and site
+        run: node forge/build.mjs
+
+      - name: Lint skeletons and render through every style
+        run: node forge/tools/check.mjs
+
+      - name: Package tests (all workspaces that define "test")
+        run: npm test --workspaces --if-present
+
+      - name: Search engine tests (packages/search)
+        if: hashFiles('packages/search/package.json') != ''
+        run: npm test --workspace packages/search
+
+      - name: Pack every package (npm publish --dry-run)
+        run: node scripts/publish.mjs --dry-run
+
+      - name: Deploy plan (no AWS credentials, prints what would upload)
+        run: node scripts/deploy.mjs --dry-run --skip-build
+
+      - name: Generated files up to date?
+        run: |
+          if [ -n "$(git status --porcelain -- site packages ':!packages/*/dist')" ]; then
+            echo "::warning::node forge/build.mjs changed committed files. Run the build locally and commit the result."
+            git status --short -- site packages ':!packages/*/dist' | head -50
+          fi
+
+  infra:
+    name: Lint CloudFormation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet cfn-lint
+      - run: cfn-lint --regions us-east-1 -- infra/*.yaml

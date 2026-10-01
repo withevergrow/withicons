@@ -1,0 +1,62 @@
+{
+  "name": "activity",
+  "category": "charts",
+  "description": "A pulse line for live activity, health checks, and monitoring.",
+  "aliases": [
+    "pulse",
+    "heartbeat",
+    "ecg",
+    "ekg",
+    "monitoring",
+    "live-metrics",
+    "uptime",
+    "vitals",
+    "health-check",
+    "waveform",
+    "pulse-line"
+  ],
+  "tags": [
+    "pulse",
+    "monitoring",
+    "health",
+    "live",
+    "heart-rate"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 H6 L9.5 4.5 L14.5 19.5 L18 12 H21.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "heart rate",
+    "heart beat",
+    "cardiogram",
+    "electrocardiogram",
+    "heart monitor",
+    "pulse rate",
+    "fitness",
+    "exercise",
+    "workout",
+    "health",
+    "medical",
+    "hospital",
+    "live",
+    "real time",
+    "status",
+    "stats",
+    "analytics",
+    "signal line",
+    "wave",
+    "zigzag",
+    "tracker",
+    "activity tracker",
+    "steps",
+    "performance",
+    "system health",
+    "server status",
+    "beat"
+  ]
+}

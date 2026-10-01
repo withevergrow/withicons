@@ -1,0 +1,60 @@
+{
+  "name": "power",
+  "category": "devices",
+  "description": "The power symbol, a circle broken at the top by an upright stroke, for on, off and shutdown.",
+  "aliases": [
+    "on-off",
+    "shutdown",
+    "power-off",
+    "power-button",
+    "standby",
+    "turn-off",
+    "switch-off",
+    "power-on",
+    "shut-down"
+  ],
+  "tags": [
+    "on",
+    "off",
+    "shutdown",
+    "standby",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M6.21 5.61 A9 9 0 1 0 17.79 5.61",
+      "plate": "K"
+    },
+    {
+      "d": "M12 3.5 V12",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6.21 5.61 L5.57 4.84 A10 10 0 0 1 18.43 4.84 L17.79 5.61 A9 9 0 1 1 6.21 5.61 Z"
+  ],
+  "cutouts": [
+    "M8.46 8.29 A5.5 5.5 0 1 0 15.54 8.29",
+    "M12 6.5 V12"
+  ],
+  "synonyms": [
+    "turn on",
+    "switch on",
+    "turn off",
+    "switch off",
+    "boot",
+    "reboot",
+    "restart",
+    "sleep",
+    "start up",
+    "startup",
+    "off",
+    "on",
+    "quit",
+    "exit",
+    "energy",
+    "power down",
+    "power up",
+    "shutdwn"
+  ]
+}

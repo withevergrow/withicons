@@ -1,0 +1,60 @@
+{
+  "name": "pill",
+  "category": "objects",
+  "description": "A two-part medicine capsule, for medication, pharmacy and prescriptions.",
+  "aliases": [
+    "capsule",
+    "medicine",
+    "medication",
+    "drug",
+    "pharmacy",
+    "prescription",
+    "vitamin",
+    "tablet-pill"
+  ],
+  "tags": [
+    "health",
+    "medical",
+    "pharmacy",
+    "treatment",
+    "capsule",
+    "supplement"
+  ],
+  "paths": [
+    {
+      "d": "M9.33 20.33 L20.33 9.33 A4 4 0 0 0 14.67 3.67 L3.67 14.67 A4 4 0 0 0 9.33 20.33 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.17 9.17 L14.83 14.83",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.17 9.17 L14.67 3.67 A4 4 0 0 1 20.33 9.33 L14.83 14.83 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "meds",
+    "medicines",
+    "dose",
+    "dosage",
+    "pills",
+    "supplement",
+    "health",
+    "healthcare",
+    "medical",
+    "doctor",
+    "chemist",
+    "drugstore",
+    "painkiller",
+    "treatment",
+    "remedy",
+    "sick",
+    "illness",
+    "take meds",
+    "rx",
+    "antibiotic",
+    "capsul"
+  ]
+}

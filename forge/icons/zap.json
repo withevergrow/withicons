@@ -1,0 +1,59 @@
+{
+  "name": "zap",
+  "category": "objects",
+  "description": "A lightning bolt for power, energy, speed, and instant actions.",
+  "aliases": [
+    "lightning",
+    "flash",
+    "electric",
+    "lightning-bolt",
+    "thunderbolt",
+    "bolt"
+  ],
+  "tags": [
+    "lightning",
+    "power",
+    "electricity",
+    "speed",
+    "storm",
+    "charge"
+  ],
+  "paths": [
+    {
+      "d": "M13.5 2.5 L4.5 14 H11 L10.5 21.5 L19.5 10 H13 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M13.5 2.5 L4.5 14 H11 L10.5 21.5 L19.5 10 H13 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "energy",
+    "thunder",
+    "instant",
+    "fast",
+    "quick",
+    "speed",
+    "powerful",
+    "electricity",
+    "charge",
+    "charging",
+    "boost",
+    "turbo",
+    "high voltage",
+    "voltage",
+    "storm",
+    "shock",
+    "spark",
+    "energize",
+    "quick action",
+    "express",
+    "priority",
+    "premium",
+    "strike",
+    "thunderstorm",
+    "lighting",
+    "electrical"
+  ]
+}

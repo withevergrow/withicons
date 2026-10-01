@@ -1,0 +1,63 @@
+{
+  "name": "align-center",
+  "category": "text",
+  "description": "Centered lines aligning text or content to the middle.",
+  "aliases": [
+    "center-align",
+    "text-center",
+    "centered",
+    "center-text",
+    "text-align-center",
+    "align-middle",
+    "centre",
+    "centre-align",
+    "text-align-middle"
+  ],
+  "tags": [
+    "text",
+    "alignment",
+    "paragraph",
+    "center",
+    "formatting",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M6 9.5 H18",
+      "plate": "K"
+    },
+    {
+      "d": "M3 14.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M6 19.5 H18",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "center",
+    "middle",
+    "centre text",
+    "centred",
+    "center alignment",
+    "centre alignment",
+    "align text center",
+    "middle align",
+    "symmetrical",
+    "title text",
+    "heading align",
+    "paragraph",
+    "text formatting",
+    "word processor",
+    "document",
+    "writing",
+    "format text"
+  ]
+}

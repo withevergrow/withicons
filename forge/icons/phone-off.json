@@ -1,0 +1,59 @@
+{
+  "name": "phone-off",
+  "category": "communication",
+  "description": "A struck-through handset for ending, declining or disabling calls.",
+  "aliases": [
+    "hang-up",
+    "end-call",
+    "decline-call",
+    "call-ended",
+    "phone-disabled",
+    "no-calls",
+    "reject-call",
+    "phone-slash"
+  ],
+  "tags": [
+    "phone",
+    "call",
+    "hang up",
+    "decline",
+    "disabled",
+    "off"
+  ],
+  "paths": [
+    {
+      "d": "M8.82 10.59 A7 7 0 0 1 8.5 8.5 C8.5 7.25 9.5 7.25 9.5 6 V4.5 A1.5 1.5 0 0 0 8 3 H5 A2 2 0 0 0 3 5 A16 16 0 0 0 5.62 13.78",
+      "plate": "K"
+    },
+    {
+      "d": "M13.41 15.18 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 10.22 18.38",
+      "plate": "K"
+    },
+    {
+      "d": "M21 3 L3 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6.06 14.41 A16 16 0 0 1 3 5 A2 2 0 0 1 5 3 H8 A1.5 1.5 0 0 1 9.5 4.5 V6 C9.5 7.25 8.5 7.25 8.5 8.5 A7 7 0 0 0 9.11 11.36 Z",
+    "M12.64 14.89 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 9.59 17.94 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "hang up",
+    "end call",
+    "decline",
+    "reject",
+    "missed call",
+    "do not call",
+    "do not disturb",
+    "mute calls",
+    "no phone",
+    "block calls",
+    "phone off",
+    "call failed",
+    "disconnected",
+    "unavailable",
+    "busy"
+  ]
+}

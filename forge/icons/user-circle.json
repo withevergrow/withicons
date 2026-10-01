@@ -1,0 +1,65 @@
+{
+  "name": "user-circle",
+  "category": "users",
+  "description": "A person inside a circle, the default avatar and account entry point.",
+  "aliases": [
+    "avatar",
+    "account-circle",
+    "profile-picture",
+    "profile-pic",
+    "my-account",
+    "circle-user",
+    "person-circle",
+    "default-avatar"
+  ],
+  "tags": [
+    "person",
+    "profile",
+    "account",
+    "avatar",
+    "circle"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 9.5 A3 3 0 1 1 9 9.5 A3 3 0 1 1 15 9.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 19.5 A3.5 3.5 0 0 1 10 16 H14 A3.5 3.5 0 0 1 17.5 19.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M15.75 9.5 A3.75 3.75 0 1 1 8.25 9.5 A3.75 3.75 0 1 1 15.75 9.5 Z",
+    "M10 15.25 H14 A4.25 4.25 0 0 1 17.99 18.03 A8.5 8.5 0 0 1 6.01 18.03 A4.25 4.25 0 0 1 10 15.25 Z"
+  ],
+  "synonyms": [
+    "my profile",
+    "account",
+    "profile photo",
+    "headshot",
+    "user icon",
+    "user image",
+    "sign in",
+    "login",
+    "account settings",
+    "my page",
+    "dp",
+    "display picture",
+    "pfp",
+    "me",
+    "person",
+    "placeholder avatar",
+    "circle person",
+    "profile icon",
+    "your account",
+    "avtar"
+  ]
+}

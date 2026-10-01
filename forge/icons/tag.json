@@ -1,0 +1,75 @@
+{
+  "name": "tag",
+  "category": "commerce",
+  "description": "A price tag with a hole at its tip, for labels, categories, pricing, and promotions.",
+  "aliases": [
+    "price-tag",
+    "label",
+    "price",
+    "discount",
+    "sale",
+    "category",
+    "keyword",
+    "pricing",
+    "tags"
+  ],
+  "tags": [
+    "price",
+    "label",
+    "category",
+    "promotion",
+    "offer",
+    "taxonomy"
+  ],
+  "paths": [
+    {
+      "d": "M3 5 A2 2 0 0 1 5 3 H13 L20.5 10.5 A2.83 2.83 0 0 1 20.5 14.5 L14.5 20.5 A2.83 2.83 0 0 1 10.5 20.5 L3 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 7.75 V8.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 5 A2 2 0 0 1 5 3 H13 L20.5 10.5 A2.83 2.83 0 0 1 20.5 14.5 L14.5 20.5 A2.83 2.83 0 0 1 10.5 20.5 L3 13 Z"
+  ],
+  "cutouts": [
+    "M9.5 8 A1.5 1.5 0 1 1 6.5 8 A1.5 1.5 0 1 1 9.5 8 Z"
+  ],
+  "synonyms": [
+    "price tag",
+    "tagged",
+    "tagging",
+    "labels",
+    "labelled",
+    "labeled",
+    "cost",
+    "how much",
+    "offer",
+    "deal",
+    "promo",
+    "promotion",
+    "coupon",
+    "special offer",
+    "on sale",
+    "bargain",
+    "sticker",
+    "topic",
+    "hashtag",
+    "classify",
+    "categorise",
+    "categorize",
+    "group",
+    "organise",
+    "organize",
+    "mark",
+    "marker",
+    "product",
+    "shopping",
+    "retail",
+    "sku",
+    "clearance",
+    "markdown"
+  ]
+}

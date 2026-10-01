@@ -1,0 +1,74 @@
+{
+  "name": "monitor",
+  "category": "devices",
+  "description": "A desktop display on a stand for desktop devices, screens and display settings.",
+  "aliases": [
+    "desktop",
+    "screen",
+    "display",
+    "computer",
+    "pc",
+    "external-display",
+    "computer-screen",
+    "desktop-computer",
+    "imac",
+    "workstation"
+  ],
+  "tags": [
+    "device",
+    "hardware",
+    "display",
+    "desktop",
+    "screen"
+  ],
+  "paths": [
+    {
+      "d": "M4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z"
+  ],
+  "cutouts": [
+    "M5 5.5 H19 A1 1 0 0 1 20 6.5 V12.5 A1 1 0 0 1 19 13.5 H5 A1 1 0 0 1 4 12.5 V6.5 A1 1 0 0 1 5 5.5 Z"
+  ],
+  "synonyms": [
+    "device",
+    "hardware",
+    "desktop view",
+    "desktop version",
+    "screen size",
+    "resolution",
+    "display settings",
+    "screen settings",
+    "second screen",
+    "dual monitor",
+    "projector",
+    "computer monitor",
+    "lcd",
+    "led screen",
+    "office",
+    "work",
+    "workspace",
+    "setup",
+    "gaming pc",
+    "tech",
+    "it support",
+    "remote desktop",
+    "screen share",
+    "share screen",
+    "monitors",
+    "monitior",
+    "moniter",
+    "screan"
+  ]
+}

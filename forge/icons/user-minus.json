@@ -1,0 +1,54 @@
+{
+  "name": "user-minus",
+  "category": "users",
+  "description": "A person with a minus for removing a member or unfollowing.",
+  "aliases": [
+    "remove-user",
+    "remove-member",
+    "unfollow",
+    "unfriend",
+    "remove-person",
+    "remove-contact",
+    "delete-member"
+  ],
+  "tags": [
+    "person",
+    "remove",
+    "minus",
+    "member",
+    "account"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 10 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "leave group",
+    "kick",
+    "kick out",
+    "remove from team",
+    "remove friend",
+    "unsubscribe person",
+    "fewer people",
+    "minus person",
+    "exclude",
+    "drop member",
+    "remove follower",
+    "unfollowing"
+  ]
+}

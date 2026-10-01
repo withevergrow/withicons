@@ -1,0 +1,50 @@
+{
+  "name": "bookmark",
+  "category": "actions",
+  "description": "A ribbon with a notched V cut into its bottom edge.",
+  "aliases": [
+    "save-for-later",
+    "read-later",
+    "saved",
+    "ribbon",
+    "marker",
+    "bookmarked",
+    "page-marker"
+  ],
+  "tags": [
+    "save",
+    "ribbon",
+    "reading",
+    "later",
+    "collection"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "saved items",
+    "keep",
+    "remember",
+    "reading list",
+    "favourite",
+    "favorite",
+    "add to list",
+    "mark page",
+    "collection",
+    "wishlist",
+    "watch later",
+    "my list",
+    "bookmarks",
+    "book mark",
+    "save this",
+    "flag page",
+    "later"
+  ]
+}

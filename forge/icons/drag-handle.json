@@ -1,0 +1,75 @@
+{
+  "name": "drag-handle",
+  "category": "layout",
+  "description": "A grip of dots that makes a row or card draggable.",
+  "aliases": [
+    "grip",
+    "grip-vertical",
+    "drag",
+    "reorder",
+    "sortable",
+    "handle",
+    "dots-grid",
+    "move-handle",
+    "gripper",
+    "six-dots"
+  ],
+  "tags": [
+    "drag",
+    "grip",
+    "reorder",
+    "sort",
+    "dots",
+    "handle"
+  ],
+  "paths": [
+    {
+      "d": "M9.88 5 A0.875 0.875 0 1 1 8.13 5 A0.875 0.875 0 1 1 9.88 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.88 5 A0.875 0.875 0 1 1 14.13 5 A0.875 0.875 0 1 1 15.88 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.88 12 A0.875 0.875 0 1 1 8.13 12 A0.875 0.875 0 1 1 9.88 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.88 12 A0.875 0.875 0 1 1 14.13 12 A0.875 0.875 0 1 1 15.88 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.88 19 A0.875 0.875 0 1 1 8.13 19 A0.875 0.875 0 1 1 9.88 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.88 19 A0.875 0.875 0 1 1 14.13 19 A0.875 0.875 0 1 1 15.88 19 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M9.88 5 A0.875 0.875 0 1 1 8.13 5 A0.875 0.875 0 1 1 9.88 5 Z",
+    "M15.88 5 A0.875 0.875 0 1 1 14.13 5 A0.875 0.875 0 1 1 15.88 5 Z",
+    "M9.88 12 A0.875 0.875 0 1 1 8.13 12 A0.875 0.875 0 1 1 9.88 12 Z",
+    "M15.88 12 A0.875 0.875 0 1 1 14.13 12 A0.875 0.875 0 1 1 15.88 12 Z",
+    "M9.88 19 A0.875 0.875 0 1 1 8.13 19 A0.875 0.875 0 1 1 9.88 19 Z",
+    "M15.88 19 A0.875 0.875 0 1 1 14.13 19 A0.875 0.875 0 1 1 15.88 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "drag and drop",
+    "drag to reorder",
+    "rearrange",
+    "reorder list",
+    "grab",
+    "hold",
+    "dots",
+    "dotted handle",
+    "slide",
+    "organize",
+    "order",
+    "draggable",
+    "grabber"
+  ]
+}

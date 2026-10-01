@@ -1,0 +1,71 @@
+{
+  "name": "compass",
+  "category": "maps",
+  "description": "A compass rose for explore, discover, or wayfinding sections.",
+  "aliases": [
+    "explore",
+    "discover",
+    "navigate",
+    "directions",
+    "wayfinding",
+    "orientation",
+    "north",
+    "compass-rose",
+    "browse"
+  ],
+  "tags": [
+    "needle",
+    "bearing",
+    "travel",
+    "safari",
+    "adventure",
+    "direction"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 8 L14 14 L8 16 L10 10 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+    "M16 8 L14 14 L10 10 Z"
+  ],
+  "cutouts": [
+    "M16 8 L14 14 L8 16",
+    "M8 16 L10 10 L16 8",
+    "M16 8 L14 14 L10 10 Z"
+  ],
+  "synonyms": [
+    "direction",
+    "bearing",
+    "needle",
+    "north south east west",
+    "travel",
+    "safari",
+    "adventure",
+    "journey",
+    "hike",
+    "hiking",
+    "outdoors",
+    "camping",
+    "orienteering",
+    "find your way",
+    "lost",
+    "guide",
+    "trip",
+    "exploration",
+    "discovery",
+    "magnetic",
+    "scout",
+    "sailing",
+    "true north",
+    "navigator",
+    "kompass",
+    "compas"
+  ]
+}

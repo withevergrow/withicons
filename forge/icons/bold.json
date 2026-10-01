@@ -1,0 +1,59 @@
+{
+  "name": "bold",
+  "category": "text",
+  "description": "A heavy B applying bold weight to selected text.",
+  "aliases": [
+    "strong",
+    "text-bold",
+    "bold-text",
+    "embolden",
+    "font-weight",
+    "heavy-text",
+    "b"
+  ],
+  "tags": [
+    "text",
+    "formatting",
+    "font",
+    "weight",
+    "emphasis",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 4 H12.5 A3.5 3.5 0 0 1 12.5 11 H13 A4.5 4.5 0 0 1 13 20 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11 H12.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6.5 4 H12.5 A3.5 3.5 0 0 1 12.5 11 H13 A4.5 4.5 0 0 1 13 20 H6.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 6 H12.5 A1.75 1.75 0 0 1 12.5 9.5 H9.5 Z",
+    "M9.5 12.5 H13 A2.75 2.75 0 0 1 13 18 H9.5 Z"
+  ],
+  "synonyms": [
+    "bold font",
+    "make bold",
+    "thick text",
+    "darker text",
+    "heavy",
+    "weight",
+    "emphasis",
+    "emphasize",
+    "emphasise",
+    "highlight text",
+    "text formatting",
+    "format text",
+    "rich text",
+    "editor",
+    "typography",
+    "fat letters",
+    "bolder",
+    "ctrl b"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "terminal",
+  "category": "development",
+  "description": "A command prompt caret and cursor inside a window, for terminals, shells and CLI output.",
+  "aliases": [
+    "console",
+    "shell",
+    "cli",
+    "command-line",
+    "prompt",
+    "bash",
+    "command-prompt",
+    "tty",
+    "cmd",
+    "powershell"
+  ],
+  "tags": [
+    "developer",
+    "command",
+    "shell",
+    "console",
+    "script",
+    "run"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 8.5 L10 12 L6.5 15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 15.5 H17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M6.5 8.5 L10 12 L6.5 15.5",
+    "M12.5 15.5 H17.5"
+  ],
+  "synonyms": [
+    "command",
+    "commands",
+    "terminal window",
+    "run command",
+    "script",
+    "scripts",
+    "developer",
+    "dev tools",
+    "coding",
+    "programming",
+    "zsh",
+    "linux",
+    "unix",
+    "ssh",
+    "hacker",
+    "run",
+    "execute",
+    "logs",
+    "output",
+    "prompt window",
+    "terminal app",
+    "command window",
+    "dos",
+    "admin console",
+    "git bash"
+  ]
+}

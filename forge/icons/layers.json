@@ -1,0 +1,62 @@
+{
+  "name": "layers",
+  "category": "layout",
+  "description": "Stacked sheets representing layers, overlays, and grouped objects.",
+  "aliases": [
+    "stack",
+    "z-order",
+    "z-index",
+    "overlays",
+    "layer-panel",
+    "levels",
+    "sheets",
+    "stacked"
+  ],
+  "tags": [
+    "stack",
+    "layers",
+    "depth",
+    "overlay",
+    "group",
+    "arrange"
+  ],
+  "paths": [
+    {
+      "d": "M12.67 2.84 L19.71 6.36 A1 1 0 0 1 19.71 8.14 L12.67 11.66 A1.5 1.5 0 0 1 11.33 11.66 L4.29 8.14 A1 1 0 0 1 4.29 6.36 L11.33 2.84 A1.5 1.5 0 0 1 12.67 2.84 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 11.75 L11.33 16.16 A1.5 1.5 0 0 0 12.67 16.16 L21.5 11.75",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 16.25 L11.33 20.66 A1.5 1.5 0 0 0 12.67 20.66 L21.5 16.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.67 2.84 L19.71 6.36 A1 1 0 0 1 19.71 8.14 L12.67 11.66 A1.5 1.5 0 0 1 11.33 11.66 L4.29 8.14 A1 1 0 0 1 4.29 6.36 L11.33 2.84 A1.5 1.5 0 0 1 12.67 2.84 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "layer",
+    "arrange",
+    "bring to front",
+    "send to back",
+    "depth",
+    "elevation",
+    "map layers",
+    "group",
+    "collection",
+    "pile",
+    "tiers",
+    "design",
+    "photoshop",
+    "figma",
+    "blend",
+    "overlap",
+    "multiple pages",
+    "papers",
+    "stackable"
+  ]
+}

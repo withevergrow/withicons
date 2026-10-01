@@ -1,0 +1,70 @@
+{
+  "name": "eye",
+  "category": "security",
+  "description": "An open eye for showing hidden values, previews and view counts.",
+  "aliases": [
+    "view",
+    "visible",
+    "show",
+    "preview",
+    "reveal",
+    "views",
+    "show-password",
+    "visibility",
+    "look",
+    "see"
+  ],
+  "tags": [
+    "vision",
+    "look",
+    "see",
+    "password",
+    "eyeball",
+    "observe"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 C4.5 7.5 8 5 12 5 C16 5 19.5 7.5 21.5 12 C19.5 16.5 16 19 12 19 C8 19 4.5 16.5 2.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 12 C4.5 7.5 8 5 12 5 C16 5 19.5 7.5 21.5 12 C19.5 16.5 16 19 12 19 C8 19 4.5 16.5 2.5 12 Z"
+  ],
+  "cutouts": [
+    "M16.25 12 A4.25 4.25 0 1 1 7.75 12 A4.25 4.25 0 1 1 16.25 12 Z M14.75 12 A2.75 2.75 0 1 1 9.25 12 A2.75 2.75 0 1 1 14.75 12 Z"
+  ],
+  "synonyms": [
+    "observe",
+    "vision",
+    "sight",
+    "eyeball",
+    "look at",
+    "view count",
+    "seen",
+    "read receipt",
+    "show more",
+    "inspect",
+    "peek",
+    "glance",
+    "spy",
+    "spectate",
+    "display",
+    "viewer",
+    "eyesight",
+    "optic",
+    "show details",
+    "open preview",
+    "stare",
+    "viewing",
+    "impressions",
+    "visable",
+    "show password",
+    "watching",
+    "eyes"
+  ]
+}

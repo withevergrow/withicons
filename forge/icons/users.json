@@ -1,0 +1,77 @@
+{
+  "name": "users",
+  "category": "users",
+  "description": "Two people, one in front of the other, for teams, groups, and audience counts.",
+  "aliases": [
+    "group",
+    "team",
+    "people",
+    "members",
+    "community",
+    "audience",
+    "persons",
+    "user-group"
+  ],
+  "tags": [
+    "people",
+    "team",
+    "group",
+    "members",
+    "accounts",
+    "social"
+  ],
+  "paths": [
+    {
+      "d": "M12.5 8 A3.5 3.5 0 1 1 5.5 8 A3.5 3.5 0 1 1 12.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 V19.5 A4 4 0 0 1 6.5 15.5 H11.5 A4 4 0 0 1 15.5 19.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M14.54 3.32 A3.5 3.5 0 1 1 15.97 10",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 14 A4 4 0 0 1 21.5 18 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.5 8 A3.5 3.5 0 1 1 5.5 8 A3.5 3.5 0 1 1 12.5 8 Z",
+    "M2.5 21 V19.5 A4 4 0 0 1 6.5 15.5 H11.5 A4 4 0 0 1 15.5 19.5 V21 Z",
+    "M13.69 3.87 A3.5 3.5 0 1 1 14.97 9.85 A6.25 6.25 0 0 0 13.69 3.87 Z",
+    "M17.5 14 A4 4 0 0 1 21.5 18 V21 H18.25 V19.5 C18.25 17.25 17.5 15.5 17.5 14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "friends",
+    "family",
+    "colleagues",
+    "coworkers",
+    "staff",
+    "crowd",
+    "followers",
+    "contacts",
+    "participants",
+    "attendees",
+    "teammates",
+    "organization",
+    "club",
+    "social",
+    "network",
+    "collaborators",
+    "employees",
+    "customers",
+    "clients",
+    "share with people",
+    "everyone",
+    "multiple users",
+    "two people",
+    "groups",
+    "teams",
+    "audiance",
+    "membership"
+  ]
+}

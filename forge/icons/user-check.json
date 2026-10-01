@@ -1,0 +1,57 @@
+{
+  "name": "user-check",
+  "category": "users",
+  "description": "A person with a checkmark for verified, approved, or followed members.",
+  "aliases": [
+    "verified-user",
+    "user-verified",
+    "approved-user",
+    "user-approved",
+    "confirmed-user",
+    "user-checked"
+  ],
+  "tags": [
+    "person",
+    "verified",
+    "approved",
+    "account",
+    "check"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M16 10 L18 12 L21.5 8.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "verified",
+    "approved",
+    "accepted",
+    "confirmed",
+    "following",
+    "followed",
+    "friend added",
+    "friends",
+    "attendee",
+    "checked in",
+    "attending",
+    "member confirmed",
+    "trusted",
+    "identity verified",
+    "validated user",
+    "rsvp yes"
+  ]
+}

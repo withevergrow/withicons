@@ -1,0 +1,64 @@
+{
+  "name": "thumbs-down",
+  "category": "status",
+  "description": "A lowered thumb for disapproval, downvotes and negative feedback.",
+  "aliases": [
+    "dislike",
+    "downvote",
+    "disapprove",
+    "disagree",
+    "negative",
+    "bad",
+    "unhelpful",
+    "thumb-down",
+    "not-helpful"
+  ],
+  "tags": [
+    "feedback",
+    "rejection",
+    "hand",
+    "vote",
+    "negative"
+  ],
+  "paths": [
+    {
+      "d": "M7 14 L9.97 20.22 A2.25 2.25 0 0 0 14.25 19.12 L14 15 H18.5 C19.9 15 20.9 13.7 20.6 12.3 L19.2 4.9 C19 3.8 18.1 3 17 3 H7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 14 H4.5 A1.5 1.5 0 0 1 3 12.5 V4.5 A1.5 1.5 0 0 1 4.5 3 H7",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 14 L9.97 20.22 A2.25 2.25 0 0 0 14.25 19.12 L14 15 H18.5 C19.9 15 20.9 13.7 20.6 12.3 L19.2 4.9 C19 3.8 18.1 3 17 3 H7 Z",
+    "M7 14 H4.5 A1.5 1.5 0 0 1 3 12.5 V4.5 A1.5 1.5 0 0 1 4.5 3 H7 Z"
+  ],
+  "cutouts": [
+    "M7 14 V3"
+  ],
+  "synonyms": [
+    "thumbs down",
+    "no",
+    "nope",
+    "reject",
+    "rejected",
+    "unlike",
+    "hate",
+    "poor",
+    "not good",
+    "not useful",
+    "negative feedback",
+    "vote down",
+    "down vote",
+    "bad review",
+    "unhappy",
+    "unsatisfied",
+    "dissatisfied",
+    "fail",
+    "boo",
+    "thumb down",
+    "didnt like",
+    "not for me"
+  ]
+}

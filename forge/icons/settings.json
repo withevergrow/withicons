@@ -1,0 +1,72 @@
+{
+  "name": "settings",
+  "category": "actions",
+  "description": "A gear opening app, account, or component settings.",
+  "aliases": [
+    "gear",
+    "cog",
+    "preferences",
+    "options",
+    "configuration",
+    "config",
+    "setup",
+    "cogwheel",
+    "gearwheel",
+    "prefs"
+  ],
+  "tags": [
+    "gear",
+    "cog",
+    "preferences",
+    "options",
+    "configure"
+  ],
+  "paths": [
+    {
+      "d": "M18.99 10.26 L21.5 10.65 L21.5 13.35 L18.99 13.74 A7.2 7.2 0 0 1 18.17 15.71 L19.68 17.76 L17.76 19.68 L15.71 18.17 A7.2 7.2 0 0 1 13.74 18.99 L13.35 21.5 L10.65 21.5 L10.26 18.99 A7.2 7.2 0 0 1 8.29 18.17 L6.24 19.68 L4.32 17.76 L5.83 15.71 A7.2 7.2 0 0 1 5.01 13.74 L2.5 13.35 L2.5 10.65 L5.01 10.26 A7.2 7.2 0 0 1 5.83 8.29 L4.32 6.24 L6.24 4.32 L8.29 5.83 A7.2 7.2 0 0 1 10.26 5.01 L10.65 2.5 L13.35 2.5 L13.74 5.01 A7.2 7.2 0 0 1 15.71 5.83 L17.76 4.32 L19.68 6.24 L18.17 8.29 A7.2 7.2 0 0 1 18.99 10.26 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M18.99 10.26 L21.5 10.65 L21.5 13.35 L18.99 13.74 A7.2 7.2 0 0 1 18.17 15.71 L19.68 17.76 L17.76 19.68 L15.71 18.17 A7.2 7.2 0 0 1 13.74 18.99 L13.35 21.5 L10.65 21.5 L10.26 18.99 A7.2 7.2 0 0 1 8.29 18.17 L6.24 19.68 L4.32 17.76 L5.83 15.71 A7.2 7.2 0 0 1 5.01 13.74 L2.5 13.35 L2.5 10.65 L5.01 10.26 A7.2 7.2 0 0 1 5.83 8.29 L4.32 6.24 L6.24 4.32 L8.29 5.83 A7.2 7.2 0 0 1 10.26 5.01 L10.65 2.5 L13.35 2.5 L13.74 5.01 A7.2 7.2 0 0 1 15.71 5.83 L17.76 4.32 L19.68 6.24 L18.17 8.29 A7.2 7.2 0 0 1 18.99 10.26 Z M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "settings page",
+    "account settings",
+    "app settings",
+    "system settings",
+    "control panel",
+    "configure",
+    "customize",
+    "customise",
+    "personalize",
+    "personalise",
+    "adjust",
+    "manage",
+    "tools",
+    "admin",
+    "administration",
+    "properties",
+    "advanced",
+    "engine",
+    "mechanics",
+    "maintenance",
+    "tweak",
+    "change settings",
+    "edit settings",
+    "options menu",
+    "setting",
+    "seting",
+    "settigns",
+    "setings",
+    "sprocket",
+    "toothed wheel",
+    "gear icon",
+    "cog icon"
+  ]
+}

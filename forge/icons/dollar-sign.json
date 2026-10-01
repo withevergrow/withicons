@@ -1,0 +1,72 @@
+{
+  "name": "dollar-sign",
+  "category": "commerce",
+  "description": "The dollar currency glyph for monetary amounts, pricing, and revenue.",
+  "aliases": [
+    "money",
+    "dollar",
+    "usd",
+    "currency",
+    "price",
+    "cost",
+    "pricing",
+    "revenue",
+    "dollar-symbol",
+    "money-sign"
+  ],
+  "tags": [
+    "money",
+    "currency",
+    "finance",
+    "price",
+    "symbol"
+  ],
+  "paths": [
+    {
+      "d": "M16.5 7.5 C15.9 5.9 14.2 5 12 5 C9.2 5 7.5 6.4 7.5 8.4 C7.5 10.5 9.4 11.3 12 11.9 C14.6 12.5 16.5 13.3 16.5 15.6 C16.5 17.7 14.6 19 12 19 C9.6 19 7.9 18.1 7.5 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 V5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 19 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "cash",
+    "dollars",
+    "bucks",
+    "payment",
+    "pay",
+    "paid",
+    "finance",
+    "financial",
+    "sales",
+    "income",
+    "profit",
+    "earnings",
+    "salary",
+    "wage",
+    "budget",
+    "fund",
+    "funding",
+    "fee",
+    "charge",
+    "bill",
+    "expensive",
+    "cheap",
+    "value",
+    "economy",
+    "us dollar",
+    "american dollar",
+    "buck",
+    "$",
+    "doller",
+    "dolar"
+  ]
+}

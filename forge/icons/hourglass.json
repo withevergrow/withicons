@@ -1,0 +1,69 @@
+{
+  "name": "hourglass",
+  "category": "time",
+  "description": "An hourglass for pending, queued, or long-running states.",
+  "aliases": [
+    "sandglass",
+    "sand-timer",
+    "egg-timer",
+    "pending",
+    "waiting",
+    "time-left",
+    "time-remaining",
+    "loading-time"
+  ],
+  "tags": [
+    "time",
+    "waiting",
+    "pending",
+    "sand",
+    "progress",
+    "patience"
+  ],
+  "paths": [
+    {
+      "d": "M5 2.5 H19",
+      "plate": "K"
+    },
+    {
+      "d": "M5 21.5 H19",
+      "plate": "K"
+    },
+    {
+      "d": "M7 2.5 V6 C7 9 9.5 10.2 12 12 C14.5 13.8 17 15 17 18 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17 2.5 V6 C17 9 14.5 10.2 12 12 C9.5 13.8 7 15 7 18 V21.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 2.5 H17 V6 C17 9 14.5 10.2 12 12 C14.5 13.8 17 15 17 18 V21.5 H7 V18 C7 15 9.5 13.8 12 12 C9.5 10.2 7 9 7 6 Z"
+  ],
+  "cutouts": [
+    "M9 4.5 H15 V5.75 C15 6.5 14.6 7 14 7.5 H10 C9.4 7 9 6.5 9 5.75 Z"
+  ],
+  "synonyms": [
+    "wait",
+    "please wait",
+    "loading",
+    "in progress",
+    "processing",
+    "countdown",
+    "time running out",
+    "deadline",
+    "patience",
+    "busy",
+    "queue",
+    "expiring",
+    "limited time",
+    "time is up",
+    "sand clock",
+    "slow",
+    "hold on",
+    "later",
+    "hour glass",
+    "houreglass"
+  ]
+}

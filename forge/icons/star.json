@@ -1,0 +1,64 @@
+{
+  "name": "star",
+  "category": "status",
+  "description": "A five-point star for ratings, favorites and featured items.",
+  "aliases": [
+    "favorite",
+    "favourite",
+    "rating",
+    "rate",
+    "starred",
+    "featured",
+    "review",
+    "highlight",
+    "bookmark-star",
+    "rank"
+  ],
+  "tags": [
+    "rating",
+    "favorite",
+    "featured",
+    "bookmark",
+    "award"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.95 L14.79 9.11 L21.51 9.86 L16.52 14.42 L17.88 21.04 L12 17.7 L6.12 21.04 L7.48 14.42 L2.49 9.86 L9.21 9.11 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 2.95 L14.79 9.11 L21.51 9.86 L16.52 14.42 L17.88 21.04 L12 17.7 L6.12 21.04 L7.48 14.42 L2.49 9.86 L9.21 9.11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "favourites",
+    "favorites",
+    "stars",
+    "five star",
+    "5 star",
+    "star rating",
+    "rated",
+    "top",
+    "best",
+    "popular",
+    "important",
+    "special",
+    "save for later",
+    "like",
+    "love",
+    "feature",
+    "shining star",
+    "gold star",
+    "excellent",
+    "reviews",
+    "feedback",
+    "score",
+    "wishlist",
+    "starr",
+    "favorit",
+    "favourit",
+    "pick",
+    "recommended"
+  ]
+}

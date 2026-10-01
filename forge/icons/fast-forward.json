@@ -1,0 +1,52 @@
+{
+  "name": "fast-forward",
+  "category": "media",
+  "description": "Two forward triangles that scrub playback ahead.",
+  "aliases": [
+    "ff",
+    "seek-forward",
+    "scan-forward",
+    "speed-up",
+    "skip-ahead",
+    "ffwd"
+  ],
+  "tags": [
+    "media",
+    "playback",
+    "forward",
+    "seek",
+    "speed"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 5.5 V18.5 L11 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13 5.5 V18.5 L21.5 12 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M2.5 5.5 V18.5 L11 12 Z",
+    "M13 5.5 V18.5 L21.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "forward",
+    "fast forward",
+    "fastforward",
+    "go faster",
+    "faster",
+    "double speed",
+    "2x",
+    "jump ahead",
+    "move ahead",
+    "playback speed",
+    "media controls",
+    "music player",
+    "video player",
+    "scrub forward",
+    "advance"
+  ]
+}

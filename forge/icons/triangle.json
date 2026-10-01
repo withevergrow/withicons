@@ -1,0 +1,49 @@
+{
+  "name": "triangle",
+  "category": "objects",
+  "description": "A plain rounded triangle for deltas, markers, and directional cues.",
+  "aliases": [
+    "delta",
+    "pyramid",
+    "play-shape",
+    "warning-shape",
+    "pointer-shape",
+    "cone",
+    "polygon",
+    "shape-triangle"
+  ],
+  "tags": [
+    "shape",
+    "geometry",
+    "delta",
+    "three-sided"
+  ],
+  "paths": [
+    {
+      "d": "M10.27 4 A2 2 0 0 1 13.73 4 L21.53 17.5 A2 2 0 0 1 19.8 20.5 L4.2 20.5 A2 2 0 0 1 2.47 17.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M10.27 4 A2 2 0 0 1 13.73 4 L21.53 17.5 A2 2 0 0 1 19.8 20.5 L4.2 20.5 A2 2 0 0 1 2.47 17.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "triangles",
+    "shape",
+    "basic shape",
+    "geometric",
+    "geometry",
+    "three sides",
+    "three sided",
+    "point",
+    "pointer",
+    "caret",
+    "up arrow",
+    "dropdown arrow",
+    "indicator",
+    "tent",
+    "mountain shape",
+    "trinagle"
+  ]
+}

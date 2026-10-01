@@ -1,0 +1,60 @@
+{
+  "name": "rss",
+  "category": "communication",
+  "description": "A dot radiating two broadcast arcs, for RSS feeds and content subscriptions.",
+  "aliases": [
+    "feed",
+    "rss-feed",
+    "syndication",
+    "atom",
+    "news-feed",
+    "blog-feed",
+    "web-feed",
+    "podcast-feed",
+    "subscribe-feed"
+  ],
+  "tags": [
+    "rss",
+    "feed",
+    "subscribe",
+    "news",
+    "blog",
+    "broadcast"
+  ],
+  "paths": [
+    {
+      "d": "M6.375 18.5 A0.875 0.875 0 1 1 4.625 18.5 A0.875 0.875 0 1 1 6.375 18.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 11 A7.5 7.5 0 0 1 13 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 4.5 A14 14 0 0 1 19.5 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.375 18.5 A0.875 0.875 0 1 1 4.625 18.5 A0.875 0.875 0 1 1 6.375 18.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "subscribe",
+    "follow blog",
+    "blog",
+    "news",
+    "newsletter",
+    "updates",
+    "latest posts",
+    "news reader",
+    "feed reader",
+    "podcast",
+    "xml feed",
+    "broadcast",
+    "radio waves",
+    "content feed",
+    "rrs",
+    "rss feed icon"
+  ]
+}

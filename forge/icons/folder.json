@@ -1,0 +1,60 @@
+{
+  "name": "folder",
+  "category": "files",
+  "description": "A closed folder representing a directory or a group of files.",
+  "aliases": [
+    "directory",
+    "dir",
+    "collection",
+    "project-folder",
+    "closed-folder",
+    "file-folder",
+    "binder"
+  ],
+  "tags": [
+    "folder",
+    "directory",
+    "storage",
+    "organize",
+    "files"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "category",
+    "folders",
+    "group",
+    "organize",
+    "organise",
+    "storage",
+    "my files",
+    "documents folder",
+    "project",
+    "workspace",
+    "drive",
+    "album",
+    "catalog",
+    "catalogue",
+    "section",
+    "container",
+    "filing",
+    "file cabinet",
+    "manila folder",
+    "save to folder",
+    "move to folder",
+    "documents",
+    "location",
+    "path",
+    "fodler",
+    "foler",
+    "holder"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "name": "lightbulb",
+  "category": "objects",
+  "description": "A light bulb with a glowing filament and a screw base, for ideas, tips and hints.",
+  "aliases": [
+    "idea",
+    "bulb",
+    "light-bulb",
+    "tip",
+    "hint",
+    "insight",
+    "suggestion",
+    "inspiration",
+    "lamp",
+    "brainstorm"
+  ],
+  "tags": [
+    "light",
+    "idea",
+    "lamp",
+    "electricity",
+    "creativity",
+    "innovation"
+  ],
+  "paths": [
+    {
+      "d": "M9 15.5 C9 13.75 5 12.25 5 9 A7 7 0 0 1 19 9 C19 12.25 15 13.75 15 15.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 15.5 V19 A2 2 0 0 0 11 21 H13 A2 2 0 0 0 15 19 V15.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 15.5 V12.5 M9.75 10.25 L12 12.5 L14.25 10.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 15.5 C9 13.75 5 12.25 5 9 A7 7 0 0 1 19 9 C19 12.25 15 13.75 15 15.5 Z",
+    "M9 15.5 H15 V19 A2 2 0 0 1 13 21 H11 A2 2 0 0 1 9 19 Z"
+  ],
+  "cutouts": [
+    "M12 13.5 V12.5 M9.75 10.25 L12 12.5 L14.25 10.25",
+    "M8 16 H16"
+  ],
+  "synonyms": [
+    "light",
+    "bright idea",
+    "creativity",
+    "creative",
+    "innovation",
+    "innovate",
+    "think",
+    "thinking",
+    "smart",
+    "solution",
+    "eureka",
+    "aha",
+    "clever",
+    "genius",
+    "tips and tricks",
+    "pro tip",
+    "did you know",
+    "learn",
+    "knowledge",
+    "electricity",
+    "energy",
+    "lighting",
+    "light on",
+    "turn on light",
+    "invention",
+    "quick tip",
+    "help tip",
+    "lightbulb moment",
+    "light blub",
+    "ligthbulb",
+    "bulb idea",
+    "discover",
+    "imagine",
+    "concept",
+    "guide"
+  ]
+}

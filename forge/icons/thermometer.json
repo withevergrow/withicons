@@ -1,0 +1,65 @@
+{
+  "name": "thermometer",
+  "category": "weather",
+  "description": "A thermometer for temperature readings and climate controls.",
+  "aliases": [
+    "temperature",
+    "degrees",
+    "heat",
+    "climate",
+    "temp",
+    "fever",
+    "celsius",
+    "fahrenheit",
+    "thermostat"
+  ],
+  "tags": [
+    "weather",
+    "temperature",
+    "measure",
+    "health",
+    "climate"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 13.88 V5.5 A2.5 2.5 0 0 1 11.5 5.5 V13.88 A4 4 0 1 1 6.5 13.88 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 5 H19.5 M16 9 H18 M16 13 H19.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 13.88 V5.5 A2.5 2.5 0 0 1 11.5 5.5 V13.88 A4 4 0 1 1 6.5 13.88 Z"
+  ],
+  "cutouts": [
+    "M7.75 10.5 V5.75 A1.25 1.25 0 0 1 10.25 5.75 V10.5 A1.25 1.25 0 0 1 7.75 10.5 Z"
+  ],
+  "synonyms": [
+    "hot",
+    "cold",
+    "warm",
+    "weather",
+    "temperature reading",
+    "body temperature",
+    "heating",
+    "cooling",
+    "degree",
+    "sick",
+    "ill",
+    "illness",
+    "flu",
+    "medical",
+    "health",
+    "forecast",
+    "room temperature",
+    "climate control",
+    "hvac",
+    "measure temperature",
+    "thermometre",
+    "termometer",
+    "centigrade",
+    "high temperature"
+  ]
+}

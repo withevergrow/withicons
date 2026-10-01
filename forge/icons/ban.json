@@ -1,0 +1,66 @@
+{
+  "name": "ban",
+  "category": "status",
+  "description": "A circle crossed by a slash for blocked, disabled, or forbidden states.",
+  "aliases": [
+    "blocked",
+    "forbidden",
+    "prohibited",
+    "no-entry",
+    "not-allowed",
+    "restricted",
+    "disabled",
+    "block",
+    "deny",
+    "cancel-circle"
+  ],
+  "tags": [
+    "ban",
+    "block",
+    "forbidden",
+    "prohibited",
+    "stop",
+    "deny"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 5.5 L18.5 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M8.13 5.87 L18.13 15.87 A7.25 7.25 0 0 0 8.13 5.87 Z",
+    "M5.87 8.13 L15.87 18.13 A7.25 7.25 0 0 1 5.87 8.13 Z"
+  ],
+  "synonyms": [
+    "no",
+    "not permitted",
+    "no access",
+    "access denied",
+    "denied",
+    "banned",
+    "blacklist",
+    "blocklist",
+    "block user",
+    "not available",
+    "unavailable",
+    "prohibition",
+    "no symbol",
+    "restrict",
+    "off limits",
+    "barred",
+    "refuse",
+    "rejected",
+    "none",
+    "never",
+    "forbiden",
+    "prohibitted"
+  ]
+}

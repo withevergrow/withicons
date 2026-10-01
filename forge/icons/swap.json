@@ -1,0 +1,64 @@
+{
+  "name": "swap",
+  "category": "arrows",
+  "description": "Two parallel arrows pointing in opposite directions.",
+  "aliases": [
+    "exchange",
+    "transfer",
+    "trade",
+    "reverse",
+    "interchange",
+    "arrows-left-right",
+    "swap-horizontal",
+    "switch-places"
+  ],
+  "tags": [
+    "exchange",
+    "transfer",
+    "switch",
+    "trade",
+    "bidirectional"
+  ],
+  "paths": [
+    {
+      "d": "M4 7.5 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M16 3.5 L20 7.5 L16 11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20 16.5 H4",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12.5 L4 16.5 L8 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "swap places",
+    "switch sides",
+    "flip",
+    "trade places",
+    "convert",
+    "conversion",
+    "currency exchange",
+    "back and forth",
+    "two way",
+    "two-way arrows",
+    "replace",
+    "substitute",
+    "alternate",
+    "change",
+    "toggle direction",
+    "transfer money",
+    "exchange rate",
+    "barter",
+    "switch over",
+    "swop"
+  ]
+}

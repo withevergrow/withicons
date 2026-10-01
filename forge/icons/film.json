@@ -1,0 +1,82 @@
+{
+  "name": "film",
+  "category": "media",
+  "description": "A film strip frame with sprocket holes for video, movies and footage.",
+  "aliases": [
+    "movie",
+    "cinema",
+    "filmstrip",
+    "reel",
+    "footage",
+    "motion-picture",
+    "film-strip",
+    "movies"
+  ],
+  "tags": [
+    "movie",
+    "video",
+    "cinema",
+    "media",
+    "strip"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 8 H22",
+      "plate": "A"
+    },
+    {
+      "d": "M2 16 H22",
+      "plate": "A"
+    },
+    {
+      "d": "M7 4 V8 M12 4 V8 M17 4 V8",
+      "plate": "A"
+    },
+    {
+      "d": "M7 16 V20 M12 16 V20 M17 16 V20",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M3.25 5 H5.75 V7 H3.25 Z",
+    "M8.25 5 H10.75 V7 H8.25 Z",
+    "M13.25 5 H15.75 V7 H13.25 Z",
+    "M18.25 5 H20.75 V7 H18.25 Z",
+    "M3.25 17 H5.75 V19 H3.25 Z",
+    "M8.25 17 H10.75 V19 H8.25 Z",
+    "M13.25 17 H15.75 V19 H13.25 Z",
+    "M18.25 17 H20.75 V19 H18.25 Z",
+    "M5 9.5 H19 A1 1 0 0 1 20 10.5 V13.5 A1 1 0 0 1 19 14.5 H5 A1 1 0 0 1 4 13.5 V10.5 A1 1 0 0 1 5 9.5 Z"
+  ],
+  "synonyms": [
+    "video",
+    "films",
+    "theater",
+    "theatre",
+    "watch movie",
+    "movie night",
+    "hollywood",
+    "director",
+    "camera roll",
+    "35mm",
+    "negative",
+    "frames",
+    "slideshow",
+    "animation",
+    "entertainment",
+    "streaming",
+    "tv show",
+    "flick",
+    "documentary",
+    "short film",
+    "flim",
+    "clip"
+  ]
+}

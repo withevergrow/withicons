@@ -1,0 +1,77 @@
+{
+  "name": "edit",
+  "category": "actions",
+  "description": "A pencil writing into a square, putting content into an editable state.",
+  "aliases": [
+    "write",
+    "modify",
+    "compose",
+    "rename",
+    "update",
+    "square-pen",
+    "pencil-square",
+    "edit-square",
+    "edit-document",
+    "editor"
+  ],
+  "tags": [
+    "pencil",
+    "write",
+    "modify",
+    "change",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M9 15 L10.06 10.4 L17.13 3.33 A2.5 2.5 0 0 1 20.67 6.87 L13.6 13.94 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.06 10.4 L13.6 13.94",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 5 H5 A2 2 0 0 0 3 7 V19 A2 2 0 0 0 5 21 H17 A2 2 0 0 0 19 19 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 15 L10.06 10.4 L17.13 3.33 A2.5 2.5 0 0 1 20.67 6.87 L13.6 13.94 Z",
+    "M12.64 5 H5 A2 2 0 0 0 3 7 V19 A2 2 0 0 0 5 21 H17 A2 2 0 0 0 19 19 V11.36 L15.01 15.35 L14.56 15.69 L14.05 15.89 L9.45 16.95 L8.55 16.95 L7.59 16.41 L7.05 15.45 L7.05 14.55 L8.11 9.95 L8.31 9.44 L8.65 8.99 Z"
+  ],
+  "cutouts": [
+    "M10.06 10.4 L13.6 13.94"
+  ],
+  "synonyms": [
+    "change",
+    "revise",
+    "rewrite",
+    "correct",
+    "fix",
+    "adjust",
+    "note",
+    "draft",
+    "new post",
+    "new message",
+    "write message",
+    "fill in",
+    "edit text",
+    "edit profile",
+    "edit details",
+    "pen",
+    "writing",
+    "editing",
+    "typing",
+    "journal",
+    "diary",
+    "customize",
+    "customise",
+    "tweak",
+    "alter",
+    "amend",
+    "edits",
+    "eddit",
+    "edt",
+    "make changes"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "log-in",
+  "category": "users",
+  "description": "An arrow entering a door frame, for signing in to an account.",
+  "aliases": [
+    "sign-in",
+    "login",
+    "signin",
+    "log-on",
+    "logon",
+    "enter",
+    "authenticate",
+    "access",
+    "session-start",
+    "sign-on"
+  ],
+  "tags": [
+    "login",
+    "sign in",
+    "enter",
+    "account",
+    "door",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M14.5 3.5 H18.5 A2 2 0 0 1 20.5 5.5 V18.5 A2 2 0 0 1 18.5 20.5 H14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11.5 7 L16.5 12 L11.5 17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14.5 3.5 H18.5 A2 2 0 0 1 20.5 5.5 V18.5 A2 2 0 0 1 18.5 20.5 H14.5 V17.25 L18 13.75 A2.3 2.3 0 0 0 18 10.25 L14.5 6.75 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "sign in",
+    "log in",
+    "logging in",
+    "login button",
+    "member login",
+    "account",
+    "my account",
+    "enter site",
+    "come in",
+    "join",
+    "get in",
+    "welcome",
+    "go in",
+    "access account",
+    "authentication",
+    "auth",
+    "portal",
+    "credentials",
+    "single sign on",
+    "sso",
+    "login page",
+    "returning user",
+    "existing user",
+    "log into",
+    "signin page",
+    "entrance",
+    "door",
+    "arrow in",
+    "loggin",
+    "loign",
+    "start session",
+    "open account"
+  ]
+}

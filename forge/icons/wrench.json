@@ -1,0 +1,65 @@
+{
+  "name": "wrench",
+  "category": "development",
+  "description": "An open-ended spanner set on a diagonal, for tools, repairs, maintenance and configuration.",
+  "aliases": [
+    "spanner",
+    "fix",
+    "configure",
+    "tools",
+    "service",
+    "wrench-tool"
+  ],
+  "tags": [
+    "tool",
+    "repair",
+    "fix",
+    "maintenance",
+    "mechanic",
+    "utilities"
+  ],
+  "paths": [
+    {
+      "d": "M6.87 20.32 L11.55 15.64 A1.5 1.5 0 0 1 13.02 15.26 A6.25 6.25 0 0 0 20.88 8.02 L15.75 10.98 A2 2 0 0 1 13.75 7.52 L18.88 4.56 A6.25 6.25 0 0 0 8.74 10.98 A1.5 1.5 0 0 1 8.36 12.45 L3.68 17.13 A2.25 2.25 0 0 0 6.87 20.32 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6.87 20.32 L11.55 15.64 A1.5 1.5 0 0 1 13.02 15.26 A6.25 6.25 0 0 0 20.88 8.02 L15.75 10.98 A2 2 0 0 1 13.75 7.52 L18.88 4.56 A6.25 6.25 0 0 0 8.74 10.98 A1.5 1.5 0 0 1 8.36 12.45 L3.68 17.13 A2.25 2.25 0 0 0 6.87 20.32 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "tool",
+    "repair",
+    "maintenance",
+    "repairs",
+    "fixing",
+    "mechanic",
+    "plumber",
+    "plumbing",
+    "handyman",
+    "diy",
+    "build",
+    "builder",
+    "toolbox",
+    "tighten",
+    "bolt",
+    "adjust",
+    "options",
+    "preferences",
+    "customize",
+    "setup",
+    "under maintenance",
+    "service center",
+    "troubleshoot",
+    "admin",
+    "workshop",
+    "garage",
+    "hardware",
+    "spaner",
+    "rench",
+    "screwdriver",
+    "screw driver",
+    "fix it"
+  ]
+}

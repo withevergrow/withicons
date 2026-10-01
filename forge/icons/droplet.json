@@ -1,0 +1,63 @@
+{
+  "name": "droplet",
+  "category": "weather",
+  "description": "A water droplet for humidity, water usage, and liquid values.",
+  "aliases": [
+    "water",
+    "drop",
+    "water-drop",
+    "raindrop",
+    "humidity",
+    "moisture",
+    "liquid",
+    "fluid",
+    "opacity"
+  ],
+  "tags": [
+    "water",
+    "liquid",
+    "humidity",
+    "weather",
+    "ink"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 C14.5 6 19 10 19 14.5 A7 7 0 0 1 5 14.5 C5 10 9.5 6 12 2.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 2.5 C14.5 6 19 10 19 14.5 A7 7 0 0 1 5 14.5 C5 10 9.5 6 12 2.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 14.5 A3.5 3.5 0 0 0 12 18"
+  ],
+  "synonyms": [
+    "wet",
+    "tear",
+    "teardrop",
+    "blood",
+    "blood drop",
+    "oil",
+    "ink",
+    "fluid level",
+    "hydrate",
+    "hydration",
+    "drink water",
+    "water intake",
+    "dew",
+    "splash",
+    "plumbing",
+    "leak",
+    "damp",
+    "aqua",
+    "transparency",
+    "eyedropper",
+    "color fill",
+    "colour fill",
+    "skincare",
+    "serum",
+    "sweat",
+    "hydro"
+  ]
+}

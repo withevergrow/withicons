@@ -1,0 +1,57 @@
+{
+  "name": "strikethrough",
+  "category": "text",
+  "description": "A struck-through S marking text as deleted or done.",
+  "aliases": [
+    "strike",
+    "line-through",
+    "crossed-out",
+    "deleted-text",
+    "cross-out",
+    "text-strike",
+    "strike-through",
+    "strikeout"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "deleted",
+    "editor",
+    "typography"
+  ],
+  "paths": [
+    {
+      "d": "M17 6 C16 4.75 14.25 4 12 4 C8.75 4 6.5 5.75 6.5 8 C6.5 10.25 8.5 12 11 12",
+      "plate": "K"
+    },
+    {
+      "d": "M13 12 C15.5 12 17.5 13.75 17.5 16 C17.5 18.25 15.25 20 12 20 C9.75 20 8 19.25 7 18",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 12 H20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "cross out",
+    "crossed out",
+    "struck",
+    "strike out",
+    "line through text",
+    "delete text",
+    "done",
+    "completed",
+    "scratch out",
+    "remove text",
+    "text formatting",
+    "formatting",
+    "edit text",
+    "font style",
+    "striked",
+    "strickthrough",
+    "strikethru"
+  ]
+}

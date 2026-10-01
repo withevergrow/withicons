@@ -1,0 +1,70 @@
+{
+  "name": "user",
+  "category": "users",
+  "description": "A single silhouette representing a person or account.",
+  "aliases": [
+    "person",
+    "account",
+    "profile",
+    "member",
+    "individual",
+    "human",
+    "me",
+    "single-user",
+    "people-single"
+  ],
+  "tags": [
+    "person",
+    "profile",
+    "account",
+    "avatar",
+    "member"
+  ],
+  "paths": [
+    {
+      "d": "M16 7.5 A4 4 0 1 1 8 7.5 A4 4 0 1 1 16 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 21 V19.5 A4.5 4.5 0 0 1 8.5 15 H15.5 A4.5 4.5 0 0 1 20 19.5 V21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M16 7.5 A4 4 0 1 1 8 7.5 A4 4 0 1 1 16 7.5 Z",
+    "M4 21 V19.5 A4.5 4.5 0 0 1 8.5 15 H15.5 A4.5 4.5 0 0 1 20 19.5 V21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "my account",
+    "user profile",
+    "sign in",
+    "login",
+    "customer",
+    "client",
+    "owner",
+    "author",
+    "guest",
+    "contact",
+    "someone",
+    "username",
+    "member profile",
+    "personal",
+    "identity",
+    "silhouette",
+    "man",
+    "woman",
+    "body",
+    "participant",
+    "visitor",
+    "student",
+    "employee",
+    "player",
+    "persona",
+    "acount",
+    "profil",
+    "usr",
+    "myself",
+    "self"
+  ]
+}

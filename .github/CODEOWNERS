@@ -1,0 +1,14 @@
+# Default reviewers for everything. Replace/extend with a team (e.g. @withevergrow/withicons-maintainers)
+# once more maintainers join. Branch protection on main requires a CODEOWNERS review.
+*                         @SoumyaSwaraj
+
+# Icon geometry and style renderers
+/forge/icons/             @SoumyaSwaraj
+/forge/styles/            @SoumyaSwaraj
+/forge/kernel/            @SoumyaSwaraj
+
+# Release, infra and CI: changes here can publish packages or touch production
+/.github/                 @SoumyaSwaraj
+/infra/                   @SoumyaSwaraj
+/scripts/                 @SoumyaSwaraj
+/packages/*/package.json  @SoumyaSwaraj

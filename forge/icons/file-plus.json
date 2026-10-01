@@ -1,0 +1,65 @@
+{
+  "name": "file-plus",
+  "category": "files",
+  "description": "A page with a plus for creating or adding a new file.",
+  "aliases": [
+    "new-file",
+    "add-file",
+    "create-file",
+    "new-document",
+    "add-document",
+    "new-page",
+    "create-document",
+    "blank-document"
+  ],
+  "tags": [
+    "file",
+    "new",
+    "add",
+    "create",
+    "document",
+    "page"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M12 11.5 V17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 14.5 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M12 11.5 V17.5",
+    "M9 14.5 H15"
+  ],
+  "synonyms": [
+    "add new",
+    "create new",
+    "new doc",
+    "start new",
+    "add page",
+    "new note",
+    "new draft",
+    "attach file",
+    "new report",
+    "insert file",
+    "compose",
+    "write new",
+    "new entry",
+    "add attachment"
+  ]
+}

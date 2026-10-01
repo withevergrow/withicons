@@ -1,0 +1,68 @@
+{
+  "name": "calculator",
+  "category": "commerce",
+  "description": "A pocket calculator with a display and a keypad for totals, estimates, and pricing tools.",
+  "aliases": [
+    "calc",
+    "math",
+    "maths",
+    "arithmetic",
+    "compute",
+    "calculate"
+  ],
+  "tags": [
+    "math",
+    "finance",
+    "numbers",
+    "accounting",
+    "tool"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V19.5 A2 2 0 0 1 17.5 21.5 H6.5 A2 2 0 0 1 4.5 19.5 V4.5 A2 2 0 0 1 6.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 6.5 H14.5 A1 1 0 0 1 15.5 7.5 V9 A1 1 0 0 1 14.5 10 H9.5 A1 1 0 0 1 8.5 9 V7.5 A1 1 0 0 1 9.5 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 14 V14.01 M12 14 V14.01 M15.5 14 V14.01 M8.5 17.5 V17.51 M12 17.5 V17.51 M15.5 17.5 V17.51",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V19.5 A2 2 0 0 1 17.5 21.5 H6.5 A2 2 0 0 1 4.5 19.5 V4.5 A2 2 0 0 1 6.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 6.5 H14.5 A1 1 0 0 1 15.5 7.5 V9 A1 1 0 0 1 14.5 10 H9.5 A1 1 0 0 1 8.5 9 V7.5 A1 1 0 0 1 9.5 6.5 Z",
+    "M9.5 14 A1 1 0 1 1 7.5 14 A1 1 0 1 1 9.5 14 Z",
+    "M13 14 A1 1 0 1 1 11 14 A1 1 0 1 1 13 14 Z",
+    "M16.5 14 A1 1 0 1 1 14.5 14 A1 1 0 1 1 16.5 14 Z",
+    "M9.5 17.5 A1 1 0 1 1 7.5 17.5 A1 1 0 1 1 9.5 17.5 Z",
+    "M13 17.5 A1 1 0 1 1 11 17.5 A1 1 0 1 1 13 17.5 Z",
+    "M16.5 17.5 A1 1 0 1 1 14.5 17.5 A1 1 0 1 1 16.5 17.5 Z"
+  ],
+  "synonyms": [
+    "accounting",
+    "sum",
+    "total",
+    "estimate",
+    "add up",
+    "budget",
+    "finance",
+    "numbers",
+    "pricing",
+    "cost",
+    "price calculator",
+    "tax",
+    "mortgage",
+    "loan calculator",
+    "tip",
+    "invoice",
+    "count",
+    "calculation",
+    "calculater",
+    "bills"
+  ]
+}

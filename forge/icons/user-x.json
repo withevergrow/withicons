@@ -1,0 +1,63 @@
+{
+  "name": "user-x",
+  "category": "users",
+  "description": "A person with an X for blocking, deleting, or revoking a member.",
+  "aliases": [
+    "block-user",
+    "delete-user",
+    "ban-user",
+    "revoke-access",
+    "user-blocked",
+    "deactivate-user",
+    "user-remove"
+  ],
+  "tags": [
+    "person",
+    "block",
+    "delete",
+    "revoke",
+    "account"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M17 8 L21 12",
+      "plate": "S"
+    },
+    {
+      "d": "M21 8 L17 12",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "block",
+    "blocked",
+    "banned",
+    "delete account",
+    "deactivate",
+    "disable account",
+    "suspend",
+    "suspended",
+    "reject member",
+    "denied user",
+    "remove access",
+    "unauthorized",
+    "report user",
+    "kick user",
+    "close account",
+    "restricted user",
+    "no access"
+  ]
+}

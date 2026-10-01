@@ -1,0 +1,64 @@
+{
+  "name": "smartphone",
+  "category": "devices",
+  "description": "A slim handheld phone with a home bar for mobile devices and small breakpoints.",
+  "aliases": [
+    "mobile",
+    "cellphone",
+    "cell-phone",
+    "iphone",
+    "android",
+    "mobile-device",
+    "handheld",
+    "mobile-phone",
+    "cell"
+  ],
+  "tags": [
+    "mobile",
+    "device",
+    "touchscreen",
+    "responsive",
+    "breakpoint",
+    "app"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 2.5 H15.5 A2.5 2.5 0 0 1 18 5 V19 A2.5 2.5 0 0 1 15.5 21.5 H8.5 A2.5 2.5 0 0 1 6 19 V5 A2.5 2.5 0 0 1 8.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 17.5 H13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.5 2.5 H15.5 A2.5 2.5 0 0 1 18 5 V19 A2.5 2.5 0 0 1 15.5 21.5 H8.5 A2.5 2.5 0 0 1 6 19 V5 A2.5 2.5 0 0 1 8.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M9 4.5 H15 A1 1 0 0 1 16 5.5 V14 A1 1 0 0 1 15 15 H9 A1 1 0 0 1 8 14 V5.5 A1 1 0 0 1 9 4.5 Z",
+    "M10.5 17.5 H13.5"
+  ],
+  "synonyms": [
+    "smart phone",
+    "phone",
+    "telephone",
+    "device",
+    "touchscreen",
+    "touch screen",
+    "app",
+    "mobile app",
+    "download app",
+    "sms",
+    "mobile view",
+    "responsive",
+    "small screen",
+    "portable",
+    "gadget",
+    "galaxy",
+    "pixel",
+    "handset",
+    "smarphone",
+    "smartfone",
+    "moblie"
+  ]
+}

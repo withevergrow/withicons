@@ -1,0 +1,76 @@
+{
+  "name": "sliders",
+  "category": "layout",
+  "description": "Horizontal tracks each carrying a draggable knob.",
+  "aliases": [
+    "adjust",
+    "equalizer",
+    "equaliser",
+    "tuning",
+    "settings-panel",
+    "adjustments",
+    "controls-panel",
+    "faders",
+    "mixer"
+  ],
+  "tags": [
+    "controls",
+    "adjust",
+    "filters",
+    "equalizer",
+    "tune"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 18 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M16 3.5 V8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8 9.5 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13 15.5 V20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "slider",
+    "filters panel",
+    "filter options",
+    "refine",
+    "refine results",
+    "sort and filter",
+    "customize",
+    "customise",
+    "fine tune",
+    "tweak",
+    "tune",
+    "levels",
+    "sound mixer",
+    "audio mixer",
+    "mixing desk",
+    "sound board",
+    "brightness",
+    "contrast",
+    "image adjustments",
+    "range",
+    "knobs",
+    "control panel",
+    "slidders"
+  ]
+}

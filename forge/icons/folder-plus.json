@@ -1,0 +1,55 @@
+{
+  "name": "folder-plus",
+  "category": "files",
+  "description": "A folder with a plus for creating a new directory.",
+  "aliases": [
+    "new-folder",
+    "add-folder",
+    "create-folder",
+    "create-directory",
+    "mkdir",
+    "new-directory",
+    "add-directory"
+  ],
+  "tags": [
+    "folder",
+    "new",
+    "add",
+    "create",
+    "directory"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 10.5 V16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 13.5 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [
+    "M12 10.5 V16.5",
+    "M9 13.5 H15"
+  ],
+  "synonyms": [
+    "make folder",
+    "new collection",
+    "add collection",
+    "new project",
+    "create project",
+    "organize",
+    "organise",
+    "new group",
+    "add category",
+    "new album",
+    "new space"
+  ]
+}

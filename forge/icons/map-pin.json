@@ -1,0 +1,77 @@
+{
+  "name": "map-pin",
+  "category": "navigation",
+  "description": "Teardrop pin marking a location on a map or an address field.",
+  "aliases": [
+    "location",
+    "marker",
+    "place",
+    "gps",
+    "address",
+    "pin-drop",
+    "map-marker",
+    "geolocation",
+    "location-pin",
+    "placemark"
+  ],
+  "tags": [
+    "location",
+    "map",
+    "marker",
+    "place",
+    "pin"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 10 A3 3 0 1 1 9 10 A3 3 0 1 1 15 10 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z"
+  ],
+  "cutouts": [
+    "M15 10 A3 3 0 1 1 9 10 A3 3 0 1 1 15 10 Z"
+  ],
+  "synonyms": [
+    "where",
+    "where am i",
+    "find location",
+    "my location",
+    "current location",
+    "nearby",
+    "near me",
+    "store locator",
+    "find us",
+    "our location",
+    "destination",
+    "spot",
+    "point",
+    "venue",
+    "directions",
+    "location marker",
+    "drop pin",
+    "dropped pin",
+    "map point",
+    "place marker",
+    "position",
+    "locate",
+    "geotag",
+    "check in",
+    "visit us",
+    "office address",
+    "city",
+    "travel",
+    "pinpoint",
+    "locaton",
+    "adress",
+    "location icon",
+    "maps",
+    "google maps",
+    "tear drop"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "table",
+  "category": "layout",
+  "description": "A ruled grid with a header row, for tabular data views and table layouts.",
+  "aliases": [
+    "data-table",
+    "datagrid",
+    "data-grid",
+    "spreadsheet",
+    "sheet",
+    "rows-columns",
+    "tabular",
+    "cells",
+    "grid-table",
+    "table-view"
+  ],
+  "tags": [
+    "grid",
+    "rows",
+    "columns",
+    "data",
+    "spreadsheet",
+    "cells"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 9 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 15 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V21 M15 9 V21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V9 H3 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "tables",
+    "grid",
+    "rows",
+    "column",
+    "data",
+    "records",
+    "list view",
+    "excel",
+    "sheets",
+    "google sheets",
+    "matrix",
+    "schedule",
+    "timetable",
+    "database view",
+    "csv",
+    "cell",
+    "table layout",
+    "insert table",
+    "tabel",
+    "tabular data"
+  ]
+}

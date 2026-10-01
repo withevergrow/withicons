@@ -1,0 +1,72 @@
+{
+  "name": "close",
+  "category": "navigation",
+  "description": "An X mark for closing dialogs, panels, and dismissible chips.",
+  "aliases": [
+    "x",
+    "cancel",
+    "dismiss",
+    "exit",
+    "times",
+    "cross",
+    "multiply",
+    "x-mark",
+    "close-button",
+    "cross-mark"
+  ],
+  "tags": [
+    "close",
+    "x",
+    "dismiss",
+    "cancel",
+    "cross"
+  ],
+  "paths": [
+    {
+      "d": "M6 6 L18 18",
+      "plate": "K"
+    },
+    {
+      "d": "M18 6 L6 18",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "clear",
+    "remove",
+    "shut",
+    "quit",
+    "abort",
+    "no",
+    "wrong",
+    "incorrect",
+    "reject",
+    "decline",
+    "deny",
+    "discard",
+    "hide",
+    "close window",
+    "close tab",
+    "close dialog",
+    "close popup",
+    "go away",
+    "get rid of",
+    "x button",
+    "cross out",
+    "false",
+    "fail",
+    "error",
+    "invalid",
+    "not allowed",
+    "nope",
+    "cancel button",
+    "clos",
+    "colse",
+    "times sign",
+    "multiplication",
+    "dismiss notification",
+    "delete tag"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "anchor",
+  "category": "maps",
+  "description": "A ship's anchor with a ring, stock and curved flukes, for harbours, marine and nautical places.",
+  "aliases": [
+    "ship-anchor",
+    "nautical",
+    "marine",
+    "harbor",
+    "harbour",
+    "port",
+    "dock",
+    "maritime",
+    "moor",
+    "mooring"
+  ],
+  "tags": [
+    "sea",
+    "sailing",
+    "navy",
+    "harbour",
+    "moor",
+    "ocean"
+  ],
+  "paths": [
+    {
+      "d": "M14.5 5 A2.5 2.5 0 1 1 9.5 5 A2.5 2.5 0 1 1 14.5 5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 11.5 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M5 14.5 A7 7 0 0 0 19 14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 17 L5 14.5 L7 17",
+      "plate": "K"
+    },
+    {
+      "d": "M17 17 L19 14.5 L21 17",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 17 L5 14.5 L7 17 Z",
+    "M17 17 L19 14.5 L21 17 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "ship",
+    "boat",
+    "sea",
+    "ocean",
+    "sailing",
+    "sailor",
+    "navy",
+    "naval",
+    "yacht",
+    "marina",
+    "beach",
+    "coast",
+    "seaside",
+    "pier",
+    "cruise",
+    "fishing",
+    "pirate",
+    "tattoo",
+    "stable",
+    "steady",
+    "grounded",
+    "hold",
+    "stay",
+    "link anchor",
+    "jump link",
+    "page anchor",
+    "anker",
+    "ancor"
+  ]
+}

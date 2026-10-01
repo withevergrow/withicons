@@ -1,0 +1,74 @@
+{
+  "name": "globe",
+  "category": "maps",
+  "description": "A globe with a meridian and the equator for language pickers, regions, public visibility, and the open web.",
+  "aliases": [
+    "world",
+    "earth",
+    "internet",
+    "web",
+    "worldwide",
+    "international",
+    "global",
+    "planet",
+    "website"
+  ],
+  "tags": [
+    "world",
+    "earth",
+    "planet",
+    "internet",
+    "locale",
+    "public"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 C9.25 5.25 8 8.5 8 12 C8 15.5 9.25 18.75 12 21.5 C14.75 18.75 16 15.5 16 12 C16 8.5 14.75 5.25 12 2.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 12 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 1.5 C9 4.5 8 8.5 8 12 C8 15.5 9 19.5 12 22.5",
+    "M12 1.5 C15 4.5 16 8.5 16 12 C16 15.5 15 19.5 12 22.5",
+    "M1.5 12 H22.5"
+  ],
+  "synonyms": [
+    "globe icon",
+    "world map",
+    "around the world",
+    "travel",
+    "public",
+    "everyone",
+    "online",
+    "browser",
+    "region",
+    "country",
+    "countries",
+    "geography",
+    "earth day",
+    "world wide web",
+    "www",
+    "network",
+    "abroad",
+    "overseas",
+    "map of the world",
+    "international shipping",
+    "time zone",
+    "location",
+    "visibility public",
+    "global reach",
+    "wordl",
+    "glob"
+  ]
+}

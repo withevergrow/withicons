@@ -1,0 +1,78 @@
+{
+  "name": "cloud-sun",
+  "category": "weather",
+  "description": "A rayed sun peeking out from behind a cloud for partly cloudy weather.",
+  "aliases": [
+    "partly-cloudy",
+    "partly-sunny",
+    "mostly-sunny",
+    "sun-behind-cloud",
+    "sunny-intervals",
+    "fair-weather",
+    "sun-cloud",
+    "cloudy-sun"
+  ],
+  "tags": [
+    "weather",
+    "sun",
+    "cloud",
+    "forecast",
+    "daytime"
+  ],
+  "paths": [
+    {
+      "d": "M11.1 21 A3.24 3.24 0 0 1 10.52 14.59 A4.46 4.46 0 0 1 19.09 14.95 A3.06 3.06 0 0 1 18.48 21 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.77 12.25 A3.25 3.25 0 1 1 12.62 8.6",
+      "plate": "A"
+    },
+    {
+      "d": "M4.9 14.1 L4.2 14.8",
+      "plate": "A"
+    },
+    {
+      "d": "M3 9.5 L2 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.9 4.9 L4.2 4.2",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 3 L9.5 2",
+      "plate": "A"
+    },
+    {
+      "d": "M14.1 4.9 L14.8 4.2",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M11.1 21 A3.24 3.24 0 0 1 10.52 14.59 A4.46 4.46 0 0 1 19.09 14.95 A3.06 3.06 0 0 1 18.48 21 Z",
+    "M8.62 12.63 A3.25 3.25 0 1 1 12.75 9.35 A6.96 6.96 0 0 0 8.62 12.63 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "weather",
+    "forecast",
+    "partly cloudy",
+    "partly sunny",
+    "mostly cloudy",
+    "sunny spells",
+    "mild",
+    "day weather",
+    "daytime",
+    "spring",
+    "sunny with clouds",
+    "clouds and sun",
+    "weather app",
+    "sun and clouds",
+    "pleasant",
+    "bright intervals",
+    "some sun",
+    "partly cloud",
+    "morning weather"
+  ]
+}

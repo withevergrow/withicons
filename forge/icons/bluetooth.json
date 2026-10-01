@@ -1,0 +1,53 @@
+{
+  "name": "bluetooth",
+  "category": "devices",
+  "description": "The Bluetooth rune for device pairing and short-range wireless links.",
+  "aliases": [
+    "bt",
+    "pairing",
+    "pair-device",
+    "bluetooth-connect",
+    "wireless-device",
+    "blue-tooth",
+    "ble"
+  ],
+  "tags": [
+    "bluetooth",
+    "pairing",
+    "wireless",
+    "connection",
+    "device"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 7.5 L17.5 16.5 L12 21 V3 L17.5 7.5 L6.5 16.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 3 L17.5 7.5 L12 12 Z",
+    "M12 12 L17.5 16.5 L12 21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "pair",
+    "pair headphones",
+    "connect headphones",
+    "earbuds",
+    "airpods",
+    "wireless headphones",
+    "wireless speaker",
+    "speaker",
+    "car audio",
+    "connect device",
+    "wireless",
+    "short range",
+    "nearby",
+    "devices",
+    "bluetooth on",
+    "bluetooth off",
+    "blutooth",
+    "bluetoth",
+    "bluetoof"
+  ]
+}

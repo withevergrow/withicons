@@ -1,0 +1,76 @@
+{
+  "name": "megaphone",
+  "category": "communication",
+  "description": "A handheld megaphone, horn raised up and to the right, for announcements.",
+  "aliases": [
+    "bullhorn",
+    "announcement",
+    "announce",
+    "loudspeaker",
+    "loud-hailer",
+    "broadcast",
+    "promote",
+    "marketing",
+    "campaign",
+    "shout"
+  ],
+  "tags": [
+    "announce",
+    "marketing",
+    "news",
+    "loud",
+    "promotion",
+    "speaker"
+  ],
+  "paths": [
+    {
+      "d": "M5.35 9.89 L8.64 8.7 C11.53 7.42 13 5.43 14.54 3.21 A1 1 0 0 1 16.3 3.44 L20.11 13.9 A1 1 0 0 1 18.91 15.21 C16.3 14.5 13.89 13.93 10.86 14.8 L7.57 16 A2 2 0 0 1 5.01 14.81 L4.15 12.46 A2 2 0 0 1 5.35 9.89 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.55 15.28 L9.62 19.38 A1.75 1.75 0 0 1 6.12 19.45 L6.06 15.94",
+      "plate": "A"
+    },
+    {
+      "d": "M8.64 8.7 L10.86 14.8",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.35 9.89 L8.64 8.7 C11.53 7.42 13 5.43 14.54 3.21 A1 1 0 0 1 16.3 3.44 L20.11 13.9 A1 1 0 0 1 18.91 15.21 C16.3 14.5 13.89 13.93 10.86 14.8 L7.57 16 A2 2 0 0 1 5.01 14.81 L4.15 12.46 A2 2 0 0 1 5.35 9.89 Z",
+    "M9.53 14.68 L9.62 19.38 A1.75 1.75 0 0 1 6.12 19.45 L6.05 15.34 Z"
+  ],
+  "cutouts": [
+    "M8.3 7.76 L11.2 15.74"
+  ],
+  "synonyms": [
+    "announcements",
+    "news",
+    "whats new",
+    "what's new",
+    "update",
+    "updates",
+    "promotion",
+    "advertise",
+    "advertising",
+    "ads",
+    "publicity",
+    "public address",
+    "speaker",
+    "loud",
+    "yell",
+    "cheer",
+    "attention",
+    "alert everyone",
+    "spread the word",
+    "press release",
+    "call out",
+    "rally",
+    "protest",
+    "megafone",
+    "megaphon",
+    "marketing campaign",
+    "launch",
+    "hype"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "volume",
+  "category": "media",
+  "description": "A speaker sending out sound waves for audio output and volume.",
+  "aliases": [
+    "speaker",
+    "sound",
+    "volume-up",
+    "sound-on",
+    "volume-high",
+    "loud"
+  ],
+  "tags": [
+    "media",
+    "audio",
+    "sound",
+    "speaker",
+    "level"
+  ],
+  "paths": [
+    {
+      "d": "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.49 8.99 A5 5 0 0 1 15.49 15.01",
+      "plate": "A"
+    },
+    {
+      "d": "M17.86 5.64 A9 9 0 0 1 17.86 18.36",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "audio",
+    "loudspeaker",
+    "louder",
+    "turn up",
+    "unmute",
+    "audio on",
+    "noise",
+    "hear",
+    "listen",
+    "speakers",
+    "music volume",
+    "volume control",
+    "audio settings",
+    "play sound",
+    "sound effects",
+    "ring",
+    "amplify",
+    "increase volume",
+    "volum",
+    "vol"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "toggle",
+  "category": "layout",
+  "description": "A pill-shaped switch track with its round knob resting at the on end.",
+  "aliases": [
+    "switch",
+    "toggle-switch",
+    "toggle-on",
+    "on-off",
+    "enable",
+    "enabled",
+    "feature-flag",
+    "switch-on"
+  ],
+  "tags": [
+    "switch",
+    "setting",
+    "on",
+    "boolean",
+    "control",
+    "preference"
+  ],
+  "paths": [
+    {
+      "d": "M9 5.5 H15 A6.5 6.5 0 0 1 15 18.5 H9 A6.5 6.5 0 0 1 9 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 12 A2.5 2.5 0 1 1 12.5 12 A2.5 2.5 0 1 1 17.5 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 5.5 H15 A6.5 6.5 0 0 1 15 18.5 H9 A6.5 6.5 0 0 1 9 5.5 Z M18.5 12 A3.5 3.5 0 1 1 11.5 12 A3.5 3.5 0 1 1 18.5 12 Z"
+  ],
+  "cutouts": [
+    "M18.5 12 A3.5 3.5 0 1 1 11.5 12 A3.5 3.5 0 1 1 18.5 12 Z"
+  ],
+  "synonyms": [
+    "turn on",
+    "turn off",
+    "on",
+    "off",
+    "activate",
+    "deactivate",
+    "disable",
+    "enable setting",
+    "preferences",
+    "options",
+    "setting",
+    "toggle button",
+    "switch button",
+    "flip switch",
+    "dark mode switch",
+    "opt in",
+    "opt out",
+    "yes no",
+    "active",
+    "feature toggle",
+    "togle"
+  ]
+}

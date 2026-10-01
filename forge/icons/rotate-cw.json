@@ -1,0 +1,52 @@
+{
+  "name": "rotate-cw",
+  "category": "arrows",
+  "description": "Circular arrow turning clockwise",
+  "aliases": [
+    "rotate-right",
+    "clockwise",
+    "rotate",
+    "turn-right",
+    "spin",
+    "redo-rotate",
+    "rotate-clockwise"
+  ],
+  "tags": [
+    "rotate",
+    "clockwise",
+    "turn",
+    "orientation",
+    "transform"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 13 A8.5 8.5 0 1 1 19 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M19 2.5 L19 7.5 L14 7.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "rotate image right",
+    "rotate photo",
+    "turn image",
+    "turn picture",
+    "flip right",
+    "rotate 90 right",
+    "90 degrees",
+    "circular arrow right",
+    "orientation",
+    "landscape",
+    "portrait",
+    "spin right",
+    "turn around",
+    "revolve",
+    "twist",
+    "roatate",
+    "rotat"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "bell-ring",
+  "category": "status",
+  "description": "A bell with ringing strokes on either side, for active or new notifications.",
+  "aliases": [
+    "ringing",
+    "notification-ring",
+    "bell-alert",
+    "ring",
+    "new-notification",
+    "ringing-bell",
+    "active-notification",
+    "ding"
+  ],
+  "tags": [
+    "bell",
+    "notification",
+    "ring",
+    "alert",
+    "sound",
+    "reminder"
+  ],
+  "paths": [
+    {
+      "d": "M6 16.5 V11 A6 6 0 0 1 18 11 V16.5 L19.5 18.5 H4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 18.5 A2.5 2.5 0 0 0 14.5 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 9.5 A10 10 0 0 1 5.5 3.5",
+      "plate": "S"
+    },
+    {
+      "d": "M21.5 9.5 A10 10 0 0 0 18.5 3.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6 16.5 V11 A6 6 0 0 1 18 11 V16.5 L19.5 18.5 H4.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "new alert",
+    "new message",
+    "you have mail",
+    "unread",
+    "incoming",
+    "notification sound",
+    "doorbell",
+    "door bell",
+    "school bell",
+    "service bell",
+    "reception",
+    "alarm",
+    "wake up",
+    "alert on",
+    "notify me",
+    "important update",
+    "ding dong",
+    "jingle",
+    "chime",
+    "buzz",
+    "ring ring",
+    "nudge",
+    "notificaton"
+  ]
+}

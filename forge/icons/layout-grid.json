@@ -1,0 +1,71 @@
+{
+  "name": "layout-grid",
+  "category": "layout",
+  "description": "Equal tiles switching a collection into grid or card view.",
+  "aliases": [
+    "grid-view",
+    "grid",
+    "tiles",
+    "cards",
+    "apps",
+    "modules",
+    "thumbnails-view",
+    "app-grid",
+    "four-squares"
+  ],
+  "tags": [
+    "grid",
+    "tiles",
+    "layout",
+    "view",
+    "gallery",
+    "cards"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V8.5 A1.5 1.5 0 0 1 8.5 10 H4.5 A1.5 1.5 0 0 1 3 8.5 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 3 H19.5 A1.5 1.5 0 0 1 21 4.5 V8.5 A1.5 1.5 0 0 1 19.5 10 H15.5 A1.5 1.5 0 0 1 14 8.5 V4.5 A1.5 1.5 0 0 1 15.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 14 H19.5 A1.5 1.5 0 0 1 21 15.5 V19.5 A1.5 1.5 0 0 1 19.5 21 H15.5 A1.5 1.5 0 0 1 14 19.5 V15.5 A1.5 1.5 0 0 1 15.5 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 14 H8.5 A1.5 1.5 0 0 1 10 15.5 V19.5 A1.5 1.5 0 0 1 8.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V15.5 A1.5 1.5 0 0 1 4.5 14 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M4.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V8.5 A1.5 1.5 0 0 1 8.5 10 H4.5 A1.5 1.5 0 0 1 3 8.5 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+    "M15.5 3 H19.5 A1.5 1.5 0 0 1 21 4.5 V8.5 A1.5 1.5 0 0 1 19.5 10 H15.5 A1.5 1.5 0 0 1 14 8.5 V4.5 A1.5 1.5 0 0 1 15.5 3 Z",
+    "M15.5 14 H19.5 A1.5 1.5 0 0 1 21 15.5 V19.5 A1.5 1.5 0 0 1 19.5 21 H15.5 A1.5 1.5 0 0 1 14 19.5 V15.5 A1.5 1.5 0 0 1 15.5 14 Z",
+    "M4.5 14 H8.5 A1.5 1.5 0 0 1 10 15.5 V19.5 A1.5 1.5 0 0 1 8.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V15.5 A1.5 1.5 0 0 1 4.5 14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "gallery view",
+    "tile view",
+    "card view",
+    "thumbnail view",
+    "icons view",
+    "app launcher",
+    "app drawer",
+    "all apps",
+    "categories",
+    "collection",
+    "catalog",
+    "products grid",
+    "view as grid",
+    "switch view",
+    "squares",
+    "mosaic",
+    "blocks",
+    "layout",
+    "boxes",
+    "menu grid"
+  ]
+}

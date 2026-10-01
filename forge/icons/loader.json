@@ -1,0 +1,93 @@
+{
+  "name": "loader",
+  "category": "status",
+  "description": "A ring of radial spokes that animates during loading or pending work.",
+  "aliases": [
+    "spinner",
+    "loading",
+    "busy",
+    "wait",
+    "pending",
+    "throbber",
+    "processing",
+    "progress-spinner",
+    "activity-indicator",
+    "working"
+  ],
+  "tags": [
+    "loading",
+    "spinner",
+    "progress",
+    "waiting",
+    "activity"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L12 6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M18.72 5.28 L15.89 8.11",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 12 L17.5 12",
+      "plate": "K"
+    },
+    {
+      "d": "M18.72 18.72 L15.89 15.89",
+      "plate": "A"
+    },
+    {
+      "d": "M12 21.5 L12 17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.28 18.72 L8.11 15.89",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 12 L6.5 12",
+      "plate": "K"
+    },
+    {
+      "d": "M5.28 5.28 L8.11 8.11",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "please wait",
+    "waiting",
+    "in progress",
+    "progress",
+    "load",
+    "loading icon",
+    "spinning",
+    "spin",
+    "buffering",
+    "buffer",
+    "syncing",
+    "sync",
+    "refreshing",
+    "fetching",
+    "thinking",
+    "computing",
+    "preparing",
+    "hold on",
+    "one moment",
+    "uploading",
+    "downloading",
+    "running",
+    "busy indicator",
+    "wheel",
+    "circle spinner",
+    "starburst",
+    "not ready",
+    "stand by",
+    "standby",
+    "lodaing",
+    "laoding"
+  ]
+}

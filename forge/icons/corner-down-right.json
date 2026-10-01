@@ -1,0 +1,56 @@
+{
+  "name": "corner-down-right",
+  "category": "arrows",
+  "description": "An elbow arrow for replies, nested items, and indented threads.",
+  "aliases": [
+    "reply-arrow",
+    "nested",
+    "indent-arrow",
+    "sub-item",
+    "child-arrow",
+    "branch-arrow",
+    "enter-arrow",
+    "return-arrow",
+    "elbow-arrow",
+    "turn-right"
+  ],
+  "tags": [
+    "reply",
+    "nested",
+    "indent",
+    "thread",
+    "hierarchy"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 4 V11 A4 4 0 0 0 8.5 15 H19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 10 L19.5 15 L14.5 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "indent",
+    "nested reply",
+    "thread",
+    "threaded",
+    "hierarchy",
+    "child",
+    "subtask",
+    "subcategory",
+    "sub-category",
+    "level down",
+    "tree",
+    "turn",
+    "bent arrow",
+    "redirect",
+    "next step",
+    "follow up",
+    "continues",
+    "arrow right down"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "name": "mail",
+  "category": "communication",
+  "description": "A sealed envelope for email addresses, messages, and contact links.",
+  "aliases": [
+    "email",
+    "envelope",
+    "letter",
+    "e-mail",
+    "mailto",
+    "post",
+    "send-email",
+    "email-address",
+    "contact-email",
+    "electronic-mail"
+  ],
+  "tags": [
+    "email",
+    "envelope",
+    "letter",
+    "message",
+    "post",
+    "contact"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V17.5 A2 2 0 0 1 19.5 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V17.5 A2 2 0 0 1 19.5 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "message",
+    "emails",
+    "mailbox",
+    "mail box",
+    "contact",
+    "contact us",
+    "get in touch",
+    "write to us",
+    "email us",
+    "send mail",
+    "compose",
+    "new email",
+    "correspondence",
+    "newsletter",
+    "subscribe",
+    "subscription",
+    "postal",
+    "postage",
+    "post office",
+    "letters",
+    "gmail",
+    "outlook",
+    "webmail",
+    "unread mail",
+    "notification",
+    "invite",
+    "invitation",
+    "reach out",
+    "enquiry",
+    "inquiry",
+    "emial",
+    "emali",
+    "mial",
+    "envalope",
+    "e mail"
+  ]
+}

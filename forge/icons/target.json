@@ -1,0 +1,75 @@
+{
+  "name": "target",
+  "category": "objects",
+  "description": "Concentric rings around a solid centre dot, for goals, aims, and objectives.",
+  "aliases": [
+    "goal",
+    "aim",
+    "bullseye",
+    "objective",
+    "focus",
+    "precision",
+    "dartboard",
+    "goals",
+    "bulls-eye"
+  ],
+  "tags": [
+    "goal",
+    "aim",
+    "accuracy",
+    "objective",
+    "marketing"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 12 A5.5 5.5 0 1 1 6.5 12 A5.5 5.5 0 1 1 17.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.9 12 A0.9 0.9 0 1 1 11.1 12 A0.9 0.9 0 1 1 12.9 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M20.5 12 A8.5 8.5 0 1 1 3.5 12 A8.5 8.5 0 1 1 20.5 12 Z M19 12 A7 7 0 1 1 5 12 A7 7 0 1 1 19 12 Z",
+    "M16.25 12 A4.25 4.25 0 1 1 7.75 12 A4.25 4.25 0 1 1 16.25 12 Z M14.5 12 A2.5 2.5 0 1 1 9.5 12 A2.5 2.5 0 1 1 14.5 12 Z"
+  ],
+  "synonyms": [
+    "targets",
+    "aiming",
+    "darts",
+    "dart",
+    "hit the target",
+    "on target",
+    "milestone",
+    "mission",
+    "purpose",
+    "intention",
+    "accuracy",
+    "accurate",
+    "kpi",
+    "okr",
+    "achieve",
+    "achievement",
+    "success",
+    "strategy",
+    "plan",
+    "ambition",
+    "focus mode",
+    "archery",
+    "shooting",
+    "center",
+    "centre",
+    "ring",
+    "rings",
+    "marketing target",
+    "audience"
+  ]
+}

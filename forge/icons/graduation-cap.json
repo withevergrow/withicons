@@ -1,0 +1,67 @@
+{
+  "name": "graduation-cap",
+  "category": "objects",
+  "description": "A mortarboard cap with a tassel hanging from one corner.",
+  "aliases": [
+    "education",
+    "school",
+    "graduation",
+    "mortarboard",
+    "student",
+    "academy",
+    "diploma",
+    "university",
+    "college"
+  ],
+  "tags": [
+    "education",
+    "school",
+    "university",
+    "degree",
+    "diploma"
+  ],
+  "paths": [
+    {
+      "d": "M12 4.5 L21 9 L12 13.5 L3 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 11 V16 C7 18 9.25 19.5 12 19.5 C14.75 19.5 17 18 17 16 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M21 9 V14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 4.5 L21 9 L12 13.5 L3 9 Z",
+    "M7 11 V16 C7 18 9.25 19.5 12 19.5 C14.75 19.5 17 18 17 16 V11 L12 13.5 Z"
+  ],
+  "cutouts": [
+    "M7 11 L12 13.5 L17 11"
+  ],
+  "synonyms": [
+    "learning",
+    "course",
+    "class",
+    "study",
+    "degree",
+    "graduate",
+    "alumni",
+    "teacher",
+    "training",
+    "e-learning",
+    "online course",
+    "lesson",
+    "academic",
+    "knowledge",
+    "campus",
+    "tuition",
+    "grad cap",
+    "scholarship",
+    "school hat",
+    "certificate",
+    "exam"
+  ]
+}

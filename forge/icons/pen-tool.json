@@ -1,0 +1,66 @@
+{
+  "name": "pen-tool",
+  "category": "actions",
+  "description": "A vector pen nib, the bezier drawing tool.",
+  "aliases": [
+    "vector",
+    "bezier",
+    "pen",
+    "nib",
+    "path-tool",
+    "draw-path",
+    "anchor-point",
+    "fountain-pen",
+    "vector-pen"
+  ],
+  "tags": [
+    "vector",
+    "bezier",
+    "design",
+    "draw",
+    "path"
+  ],
+  "paths": [
+    {
+      "d": "M12.03 6.82 L6.49 8.01 C3.52 10.98 3.92 16.12 3.52 20.48 C7.88 20.08 13.02 20.48 15.99 17.51 L17.18 11.97",
+      "plate": "K"
+    },
+    {
+      "d": "M11.04 5.83 L18.17 12.96 L20.15 10.98 A1.12 1.12 0 0 0 20.15 9.39 L14.61 3.85 A1.12 1.12 0 0 0 13.02 3.85 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M11.64 15.13 A1.96 1.96 0 1 1 8.87 12.36 A1.96 1.96 0 1 1 11.64 15.13 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8.87 15.13 L3.52 20.48",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.03 6.82 L6.49 8.01 C3.52 10.98 3.92 16.12 3.52 20.48 C7.88 20.08 13.02 20.48 15.99 17.51 L17.18 11.97 Z",
+    "M11.04 5.83 L18.17 12.96 L20.15 10.98 A1.12 1.12 0 0 0 20.15 9.39 L14.61 3.85 A1.12 1.12 0 0 0 13.02 3.85 Z"
+  ],
+  "cutouts": [
+    "M11.64 15.13 A1.96 1.96 0 1 1 8.87 12.36 A1.96 1.96 0 1 1 11.64 15.13 Z",
+    "M8.87 15.13 L3.52 20.48"
+  ],
+  "synonyms": [
+    "illustrator",
+    "design",
+    "graphic design",
+    "drawing",
+    "illustration",
+    "curve",
+    "path",
+    "vector graphics",
+    "calligraphy",
+    "ink",
+    "signature",
+    "sign",
+    "logo design",
+    "creative",
+    "penn"
+  ]
+}

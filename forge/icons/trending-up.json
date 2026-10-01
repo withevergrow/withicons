@@ -1,0 +1,71 @@
+{
+  "name": "trending-up",
+  "category": "charts",
+  "description": "A zigzag line climbing to an up-right arrowhead for growth, gains, and positive deltas.",
+  "aliases": [
+    "growth",
+    "increase",
+    "rise",
+    "gain",
+    "uptrend",
+    "profit",
+    "improvement",
+    "chart-up",
+    "trend-up",
+    "bullish"
+  ],
+  "tags": [
+    "chart",
+    "trend",
+    "analytics",
+    "finance",
+    "stocks",
+    "positive"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 17.5 L8.5 11.5 L12.5 15.5 L21 7",
+      "plate": "K"
+    },
+    {
+      "d": "M15 7 H21 V13",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "going up",
+    "goes up",
+    "up",
+    "higher",
+    "more",
+    "grow",
+    "growing",
+    "rising",
+    "rose",
+    "boost",
+    "climb",
+    "climbing",
+    "improve",
+    "improving",
+    "success",
+    "progress",
+    "positive trend",
+    "stock up",
+    "price up",
+    "market up",
+    "sales up",
+    "revenue",
+    "earnings",
+    "better",
+    "winning",
+    "graph up",
+    "stonks",
+    "increasing",
+    "trending",
+    "popular",
+    "hot",
+    "skyrocket"
+  ]
+}

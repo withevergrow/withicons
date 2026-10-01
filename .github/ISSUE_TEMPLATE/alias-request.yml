@@ -1,0 +1,26 @@
+name: Name or alias suggestion
+description: You searched for a word and did not find the icon you expected.
+title: "Alias: <word> -> <icon>"
+labels: ["search", "alias"]
+body:
+  - type: input
+    id: word
+    attributes:
+      label: What you typed
+      placeholder: rubbish
+    validations:
+      required: true
+  - type: input
+    id: icon
+    attributes:
+      label: The icon it should find
+      description: Canonical name from withicons.com (e.g. `trash`).
+      placeholder: trash
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did you search?
+      multiple: true
+      options: [withicons.com search, "npx withicons search", MCP server (AI agent), "@withicons/core resolve()", component name / import, other]

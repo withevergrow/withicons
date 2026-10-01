@@ -1,0 +1,74 @@
+{
+  "name": "tv",
+  "category": "devices",
+  "description": "A television screen with a rabbit-ear antenna for TV, channels and streaming.",
+  "aliases": [
+    "television",
+    "telly",
+    "smart-tv",
+    "streaming",
+    "live-tv",
+    "channel",
+    "broadcast",
+    "tv-show",
+    "tv-set"
+  ],
+  "tags": [
+    "television",
+    "screen",
+    "video",
+    "entertainment",
+    "media",
+    "viewing"
+  ],
+  "paths": [
+    {
+      "d": "M4 7 H20 A2 2 0 0 1 22 9 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V9 A2 2 0 0 1 4 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 2.5 L12 6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 2.5 L12 6.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 7 H20 A2 2 0 0 1 22 9 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V9 A2 2 0 0 1 4 7 Z"
+  ],
+  "cutouts": [
+    "M5 9 H19 A1 1 0 0 1 20 10 V17 A1 1 0 0 1 19 18 H5 A1 1 0 0 1 4 17 V10 A1 1 0 0 1 5 9 Z"
+  ],
+  "synonyms": [
+    "tv shows",
+    "shows",
+    "watching",
+    "watch tv",
+    "movies",
+    "films",
+    "series",
+    "episodes",
+    "netflix",
+    "streaming service",
+    "video",
+    "media",
+    "entertainment",
+    "cable",
+    "satellite",
+    "antenna",
+    "aerial",
+    "channels",
+    "box",
+    "telly box",
+    "living room",
+    "screen",
+    "retro tv",
+    "old tv",
+    "news",
+    "on air",
+    "televison",
+    "telivision"
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "name": "@withicons/solid",
+  "version": "0.1.0",
+  "description": "300 icons x 7 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/solid"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "solid",
+    "solid-js",
+    "solidjs",
+    "solid-start",
+    "svg-icons"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "solid": "./dist/index.js",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./line": {
+      "solid": "./dist/line/index.js",
+      "import": {
+        "types": "./dist/line/index.d.ts",
+        "default": "./dist/line/index.js"
+      },
+      "require": {
+        "types": "./dist/line/index.d.cts",
+        "default": "./dist/line/index.cjs"
+      }
+    },
+    "./solid": {
+      "solid": "./dist/solid/index.js",
+      "import": {
+        "types": "./dist/solid/index.d.ts",
+        "default": "./dist/solid/index.js"
+      },
+      "require": {
+        "types": "./dist/solid/index.d.cts",
+        "default": "./dist/solid/index.cjs"
+      }
+    },
+    "./duo": {
+      "solid": "./dist/duo/index.js",
+      "import": {
+        "types": "./dist/duo/index.d.ts",
+        "default": "./dist/duo/index.js"
+      },
+      "require": {
+        "types": "./dist/duo/index.d.cts",
+        "default": "./dist/duo/index.cjs"
+      }
+    },
+    "./gloss": {
+      "solid": "./dist/gloss/index.js",
+      "import": {
+        "types": "./dist/gloss/index.d.ts",
+        "default": "./dist/gloss/index.js"
+      },
+      "require": {
+        "types": "./dist/gloss/index.d.cts",
+        "default": "./dist/gloss/index.cjs"
+      }
+    },
+    "./engrave": {
+      "solid": "./dist/engrave/index.js",
+      "import": {
+        "types": "./dist/engrave/index.d.ts",
+        "default": "./dist/engrave/index.js"
+      },
+      "require": {
+        "types": "./dist/engrave/index.d.cts",
+        "default": "./dist/engrave/index.cjs"
+      }
+    },
+    "./blueprint": {
+      "solid": "./dist/blueprint/index.js",
+      "import": {
+        "types": "./dist/blueprint/index.d.ts",
+        "default": "./dist/blueprint/index.js"
+      },
+      "require": {
+        "types": "./dist/blueprint/index.d.cts",
+        "default": "./dist/blueprint/index.cjs"
+      }
+    },
+    "./sketch": {
+      "solid": "./dist/sketch/index.js",
+      "import": {
+        "types": "./dist/sketch/index.d.ts",
+        "default": "./dist/sketch/index.js"
+      },
+      "require": {
+        "types": "./dist/sketch/index.d.cts",
+        "default": "./dist/sketch/index.cjs"
+      }
+    },
+    "./icon": {
+      "types": "./dist/icon.d.ts",
+      "solid": "./dist/icon.js",
+      "default": "./dist/icon.js"
+    },
+    "./icons/*": {
+      "types": "./dist/line/icons/*.d.ts",
+      "solid": "./dist/line/icons/*.js",
+      "default": "./dist/line/icons/*.js"
+    },
+    "./line/icons/*": {
+      "types": "./dist/line/icons/*.d.ts",
+      "solid": "./dist/line/icons/*.js",
+      "default": "./dist/line/icons/*.js"
+    },
+    "./solid/icons/*": {
+      "types": "./dist/solid/icons/*.d.ts",
+      "solid": "./dist/solid/icons/*.js",
+      "default": "./dist/solid/icons/*.js"
+    },
+    "./duo/icons/*": {
+      "types": "./dist/duo/icons/*.d.ts",
+      "solid": "./dist/duo/icons/*.js",
+      "default": "./dist/duo/icons/*.js"
+    },
+    "./gloss/icons/*": {
+      "types": "./dist/gloss/icons/*.d.ts",
+      "solid": "./dist/gloss/icons/*.js",
+      "default": "./dist/gloss/icons/*.js"
+    },
+    "./engrave/icons/*": {
+      "types": "./dist/engrave/icons/*.d.ts",
+      "solid": "./dist/engrave/icons/*.js",
+      "default": "./dist/engrave/icons/*.js"
+    },
+    "./blueprint/icons/*": {
+      "types": "./dist/blueprint/icons/*.d.ts",
+      "solid": "./dist/blueprint/icons/*.js",
+      "default": "./dist/blueprint/icons/*.js"
+    },
+    "./sketch/icons/*": {
+      "types": "./dist/sketch/icons/*.d.ts",
+      "solid": "./dist/sketch/icons/*.js",
+      "default": "./dist/sketch/icons/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "icon": [
+        "./dist/icon.d.ts"
+      ],
+      "icons/*": [
+        "./dist/line/icons/*.d.ts"
+      ],
+      "line": [
+        "./dist/line/index.d.ts"
+      ],
+      "line/icons/*": [
+        "./dist/line/icons/*.d.ts"
+      ],
+      "solid": [
+        "./dist/solid/index.d.ts"
+      ],
+      "solid/icons/*": [
+        "./dist/solid/icons/*.d.ts"
+      ],
+      "duo": [
+        "./dist/duo/index.d.ts"
+      ],
+      "duo/icons/*": [
+        "./dist/duo/icons/*.d.ts"
+      ],
+      "gloss": [
+        "./dist/gloss/index.d.ts"
+      ],
+      "gloss/icons/*": [
+        "./dist/gloss/icons/*.d.ts"
+      ],
+      "engrave": [
+        "./dist/engrave/index.d.ts"
+      ],
+      "engrave/icons/*": [
+        "./dist/engrave/icons/*.d.ts"
+      ],
+      "blueprint": [
+        "./dist/blueprint/index.d.ts"
+      ],
+      "blueprint/icons/*": [
+        "./dist/blueprint/icons/*.d.ts"
+      ],
+      "sketch": [
+        "./dist/sketch/index.d.ts"
+      ],
+      "sketch/icons/*": [
+        "./dist/sketch/icons/*.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "solid-js": "^1.6.0"
+  }
+}

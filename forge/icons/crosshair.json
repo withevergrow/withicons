@@ -1,0 +1,68 @@
+{
+  "name": "crosshair",
+  "category": "maps",
+  "description": "A circle with crosshair ticks for locate-me, aiming and centring on a point.",
+  "aliases": [
+    "locate",
+    "my-location",
+    "current-location",
+    "gps",
+    "aim",
+    "reticle",
+    "scope",
+    "recenter",
+    "locate-me",
+    "target-cross"
+  ],
+  "tags": [
+    "location",
+    "position",
+    "focus",
+    "bullseye",
+    "center",
+    "sight"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 12 A7.5 7.5 0 1 1 4.5 12 A7.5 7.5 0 1 1 19.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2 V7 M12 17 V22 M2 12 H7 M17 12 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M13 12 A1 1 0 1 1 11 12 A1 1 0 1 1 13 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 12 A7.5 7.5 0 1 1 4.5 12 A7.5 7.5 0 1 1 19.5 12 Z"
+  ],
+  "cutouts": [
+    "M13 5.58 A6.5 6.5 0 0 1 18.42 11 H17 A1 1 0 0 0 17 13 H18.42 A6.5 6.5 0 0 1 13 18.42 V17 A1 1 0 0 0 11 17 V18.42 A6.5 6.5 0 0 1 5.58 13 H7 A1 1 0 0 0 7 11 H5.58 A6.5 6.5 0 0 1 11 5.58 V7 A1 1 0 0 0 13 7 Z M14 12 A2 2 0 1 1 10 12 A2 2 0 1 1 14 12 Z"
+  ],
+  "synonyms": [
+    "find me",
+    "where am i",
+    "location",
+    "position",
+    "focus",
+    "bullseye",
+    "center",
+    "centre",
+    "sight",
+    "sniper",
+    "shoot",
+    "shooting",
+    "pinpoint",
+    "gps fix",
+    "track",
+    "precision",
+    "accuracy",
+    "targeting",
+    "zero in",
+    "game",
+    "fps"
+  ]
+}

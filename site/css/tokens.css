@@ -1,0 +1,185 @@
+/* with icons — design tokens (v2). Shared by every page.
+   Token NAMES are a stable contract: add, never rename. Self-hosted fonts only (site/fonts). */
+
+/* ───────── fonts ───────── */
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-stretch: 75% 100%; font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-stretch: 75% 100%; font-display: swap;
+  src: url('../fonts/bricolage-grotesque-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Caveat'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../fonts/caveat-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Caveat'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../fonts/caveat-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* 4 KB subset holding only "with" — preloaded so the logo never swaps */
+@font-face { font-family: 'Caveat Logo'; font-style: normal; font-weight: 400 700; font-display: block;
+  src: url('../fonts/caveat-logo.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('../fonts/instrument-serif-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('../fonts/instrument-serif-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap;
+  src: url('../fonts/instrument-serif-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url('../fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* metric-matched fallback so the swap does not shift layout */
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial'); size-adjust: 104%; ascent-override: 90%; descent-override: 24%; line-gap-override: 0%; }
+
+:root {
+  color-scheme: light;
+  /* ───────── brand ───────── */
+  --paper: #FBF8F3;          /* page ground */
+  --paper-2: #F3EEE5;        /* sunken bands, wells */
+  --paper-3: #EAE3D6;
+  --card: #FFFFFF;
+  --ink: #111318;            /* text, dark slabs */
+  --ink-2: #3A3F4B;          /* body text */
+  --muted: #5F6573;          /* secondary text (AA on paper) */
+  --faint: #9AA0AC;          /* decorative only, not for text */
+  --rule: #E6DFD3;
+  --rule-strong: #D3CABA;
+  --sun: #FFD23F;            /* highlight, focus, "new" */
+  --sun-soft: #FFF1BF;
+  --evergrow: #D5B473;       /* the Powered by Evergrow mark only */
+  --evergrow-ink: #8A6A2C;
+
+  /* ───────── one signature colour per style ─────────
+     --c-<style>       the colour (fills, chips, accents, the nav morph)
+     --c-<style>-text  a darker/brighter twin that passes AA as text on --paper
+     --c-<style>-soft  a pale tint for backgrounds */
+  --c-line: #2F5BFF;      --c-line-text: #2448D8;      --c-line-soft: #E3E9FF;
+  --c-solid: #FF5A36;     --c-solid-text: #C93512;     --c-solid-soft: #FFE5DE;
+  --c-duo: #7B5CFF;       --c-duo-text: #5B3CE0;       --c-duo-soft: #ECE6FF;
+  --c-gloss: #FF4FA3;     --c-gloss-text: #C4166C;     --c-gloss-soft: #FFE2F0;
+  --c-engrave: #C9962B;   --c-engrave-text: #8A6414;   --c-engrave-soft: #F6ECD4;
+  --c-blueprint: #00A3C4; --c-blueprint-text: #00728A; --c-blueprint-soft: #D9F3F8;
+  --c-sketch: #22A861;    --c-sketch-text: #157A43;    --c-sketch-soft: #DDF3E6;
+  /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
+     or use the helper classes .s-line … .s-sketch (they also set --style-text and --style-soft) */
+  --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft);
+
+  /* legacy semantic names (kept so older CSS keeps working) */
+  --accent: var(--sun);
+  --accent-ink: var(--ink);
+  --accent-soft: var(--sun-soft);
+  --accent-text: var(--c-line-text);
+  --cool: var(--c-sketch);
+  --cool-soft: var(--c-sketch-soft);
+  --dark: #111318;           /* always-dark slab (stays dark in both themes) */
+  --dark-2: #1B1E26;
+  --on-dark: #F7F3EC;
+  --on-dark-2: rgba(247, 243, 236, .74);
+  --on-dark-rule: rgba(247, 243, 236, .12);
+
+  /* icon colour hooks (consumed by the icon CSS / runtime) */
+  --with-duo: currentColor;
+  --eg-duo: var(--with-duo);
+
+  /* ───────── type ───────── */
+  --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-display);
+  --font-hand: 'Caveat', 'Caveat Logo', 'Segoe Print', 'Bradley Hand', cursive;
+  --font-logo-hand: 'Caveat Logo', 'Caveat', 'Segoe Print', cursive;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-italic: var(--font-serif);
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --step--2: clamp(0.7rem, 0.68rem + 0.08vw, 0.76rem);
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
+  --step-0: clamp(0.98rem, 0.94rem + 0.18vw, 1.06rem);
+  --step-1: clamp(1.15rem, 1.07rem + 0.38vw, 1.38rem);
+  --step-2: clamp(1.45rem, 1.27rem + 0.85vw, 2rem);
+  --step-3: clamp(1.95rem, 1.55rem + 1.9vw, 3.15rem);
+  --step-4: clamp(2.55rem, 1.8rem + 3.6vw, 4.9rem);
+  --step-5: clamp(3rem, 1.6rem + 6.6vw, 7.6rem);
+  --step-6: clamp(3.4rem, 1.2rem + 10vw, 10.5rem);
+
+  /* ───────── shape, depth, motion ───────── */
+  --radius-s: 10px;
+  --radius: 18px;
+  --radius-l: 28px;
+  --radius-xl: 40px;
+  --pill: 999px;
+  --shadow-s: 0 1px 0 rgba(17, 19, 24, .05), 0 4px 14px -8px rgba(17, 19, 24, .22);
+  --shadow: 0 1px 0 rgba(17, 19, 24, .04), 0 12px 32px -14px rgba(17, 19, 24, .24);
+  --shadow-l: 0 2px 0 rgba(17, 19, 24, .04), 0 40px 80px -36px rgba(17, 19, 24, .42);
+  --ring: 0 0 0 3px var(--sun);
+  --e-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --e-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --e-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --e-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: var(--e-out);
+  --ease-spring: var(--e-spring);
+  --dur: 240ms;
+  --maxw: 1240px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 72px;
+  --dot-grid: radial-gradient(circle at 1px 1px, rgba(17, 19, 24, .12) 1px, transparent 1.4px) 0 0 / 22px 22px;
+  --dot-grid-dark: radial-gradient(circle at 1px 1px, rgba(247, 243, 236, .09) 1px, transparent 1.4px) 0 0 / 22px 22px;
+}
+
+/* ───────── dark theme ───────── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0D0F14; --paper-2: #14171F; --paper-3: #1C2029; --card: #171A22;
+  --ink: #F4F0E8; --ink-2: #C8CBD3; --muted: #969CAA; --faint: #5A606D;
+  --rule: #242833; --rule-strong: #323745;
+  --sun-soft: #3A3014;
+  --evergrow-ink: #D5B473;
+  --c-line: #5B7FFF;      --c-line-text: #8EA6FF;      --c-line-soft: #18204A;
+  --c-solid: #FF6B4A;     --c-solid-text: #FF9479;     --c-solid-soft: #3A1810;
+  --c-duo: #8E73FF;       --c-duo-text: #B3A1FF;       --c-duo-soft: #231A4A;
+  --c-gloss: #FF5FAE;     --c-gloss-text: #FF8DC4;     --c-gloss-soft: #3D1328;
+  --c-engrave: #D9A94A;   --c-engrave-text: #E7C17A;   --c-engrave-soft: #33280F;
+  --c-blueprint: #19B8D8; --c-blueprint-text: #63D3EA; --c-blueprint-soft: #0B2B33;
+  --c-sketch: #34BF73;    --c-sketch-text: #6FD99C;    --c-sketch-soft: #10301E;
+  --accent-text: var(--c-line-text);
+  --dark: #07080B; --dark-2: #12141B;
+  --shadow-s: 0 1px 0 rgba(0,0,0,.3), 0 4px 14px -8px rgba(0,0,0,.7);
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 12px 32px -14px rgba(0,0,0,.75);
+  --shadow-l: 0 2px 0 rgba(0,0,0,.3), 0 40px 80px -36px rgba(0,0,0,.9);
+  --dot-grid: radial-gradient(circle at 1px 1px, rgba(247, 243, 236, .08) 1px, transparent 1.4px) 0 0 / 22px 22px;
+}
+/* light by default: dark applies only via [data-theme="dark"] (the toggle) */
+
+/* style helper classes: set the "current style" colour trio on any element */
+.s-line { --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft); }
+.s-solid { --style: var(--c-solid); --style-text: var(--c-solid-text); --style-soft: var(--c-solid-soft); }
+.s-duo { --style: var(--c-duo); --style-text: var(--c-duo-text); --style-soft: var(--c-duo-soft); }
+.s-gloss { --style: var(--c-gloss); --style-text: var(--c-gloss-text); --style-soft: var(--c-gloss-soft); }
+.s-engrave { --style: var(--c-engrave); --style-text: var(--c-engrave-text); --style-soft: var(--c-engrave-soft); }
+.s-blueprint { --style: var(--c-blueprint); --style-text: var(--c-blueprint-text); --style-soft: var(--c-blueprint-soft); }
+.s-sketch { --style: var(--c-sketch); --style-text: var(--c-sketch-text); --style-soft: var(--c-sketch-soft); }
+
+/* ───────── base ───────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 var(--step-0)/1.6 var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img, svg, video, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+p { text-wrap: pretty; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--sun); color: #111318; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

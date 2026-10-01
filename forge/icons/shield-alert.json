@@ -1,0 +1,70 @@
+{
+  "name": "shield-alert",
+  "category": "security",
+  "description": "A shield with an exclamation mark for security warnings, threats, and vulnerabilities.",
+  "aliases": [
+    "security-warning",
+    "threat",
+    "vulnerability",
+    "unsafe",
+    "insecure",
+    "breach",
+    "risk",
+    "shield-warning",
+    "security-alert"
+  ],
+  "tags": [
+    "security",
+    "warning",
+    "danger",
+    "exclamation",
+    "protection"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7.5 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V12.5",
+    "M12 16 V16.5"
+  ],
+  "synonyms": [
+    "security issue",
+    "danger",
+    "warning",
+    "caution",
+    "threat detected",
+    "virus",
+    "malware",
+    "virus found",
+    "hacked",
+    "hack",
+    "attack",
+    "not secure",
+    "unprotected",
+    "exposed",
+    "data breach",
+    "compromised",
+    "firewall alert",
+    "fraud",
+    "scam",
+    "phishing",
+    "suspicious",
+    "exclamation",
+    "risky",
+    "alert shield"
+  ]
+}

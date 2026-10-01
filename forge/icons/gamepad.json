@@ -1,0 +1,66 @@
+{
+  "name": "gamepad",
+  "category": "devices",
+  "description": "A game controller with a d-pad and face buttons, for games and play modes.",
+  "aliases": [
+    "controller",
+    "game-controller",
+    "joystick",
+    "gaming",
+    "games",
+    "joypad",
+    "video-game",
+    "game"
+  ],
+  "tags": [
+    "game",
+    "controller",
+    "gaming",
+    "console",
+    "entertainment"
+  ],
+  "paths": [
+    {
+      "d": "M8 5.5 H16 C19.25 5.5 20.75 7.75 21.5 11 C22 13.25 22.5 19.5 19.5 19.5 C17.75 19.5 17 16 15 16 H9 C7 16 6.25 19.5 4.5 19.5 C1.5 19.5 2 13.25 2.5 11 C3.25 7.75 4.75 5.5 8 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 11.5 H9.5 M7.5 9.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.75 13 H15.25 M17.75 10 H18.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 5.5 H16 C19.25 5.5 20.75 7.75 21.5 11 C22 13.25 22.5 19.5 19.5 19.5 C17.75 19.5 17 16 15 16 H9 C7 16 6.25 19.5 4.5 19.5 C1.5 19.5 2 13.25 2.5 11 C3.25 7.75 4.75 5.5 8 5.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 11.5 H9.5 M7.5 9.5 V13.5",
+    "M16.25 13 A1.25 1.25 0 1 1 13.75 13 A1.25 1.25 0 1 1 16.25 13 Z",
+    "M19.25 10 A1.25 1.25 0 1 1 16.75 10 A1.25 1.25 0 1 1 19.25 10 Z"
+  ],
+  "synonyms": [
+    "console",
+    "play games",
+    "gamer",
+    "xbox",
+    "playstation",
+    "ps5",
+    "nintendo",
+    "arcade",
+    "esports",
+    "fun",
+    "entertainment",
+    "play mode",
+    "multiplayer",
+    "steam",
+    "level",
+    "d-pad",
+    "dpad",
+    "controler",
+    "gamming",
+    "video games"
+  ]
+}

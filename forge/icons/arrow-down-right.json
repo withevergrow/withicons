@@ -1,0 +1,46 @@
+{
+  "name": "arrow-down-right",
+  "category": "arrows",
+  "description": "Diagonal arrow pointing down and to the right",
+  "aliases": [
+    "arrow-bottom-right",
+    "down-right",
+    "south-east",
+    "southeast",
+    "diagonal-down-right",
+    "arrow-se",
+    "bottom-right"
+  ],
+  "tags": [
+    "arrow",
+    "diagonal",
+    "down",
+    "right",
+    "direction"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 6.5 L17.5 17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 8 V17.5 H8",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "diagonal arrow",
+    "decline",
+    "decrease",
+    "falling",
+    "going down",
+    "drop",
+    "lower right",
+    "corner",
+    "pointing down right",
+    "expand corner",
+    "resize"
+  ]
+}

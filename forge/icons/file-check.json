@@ -1,0 +1,63 @@
+{
+  "name": "file-check",
+  "category": "files",
+  "description": "A page with a checkmark for an approved, verified or completed document.",
+  "aliases": [
+    "approved-file",
+    "document-check",
+    "file-done",
+    "verified-file",
+    "file-ok",
+    "file-approved",
+    "completed-document",
+    "document-approved"
+  ],
+  "tags": [
+    "document",
+    "approved",
+    "done",
+    "verified",
+    "complete",
+    "check"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 14.75 L11 17.25 L15.5 12.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M8.5 14.75 L11 17.25 L15.5 12.25"
+  ],
+  "synonyms": [
+    "approved",
+    "verified",
+    "completed",
+    "done",
+    "finished",
+    "signed",
+    "signed document",
+    "validated",
+    "reviewed",
+    "accepted",
+    "document ready",
+    "contract signed",
+    "tick",
+    "checked",
+    "file uploaded",
+    "submitted",
+    "compliance"
+  ]
+}

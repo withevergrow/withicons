@@ -1,0 +1,75 @@
+{
+  "name": "search",
+  "category": "navigation",
+  "description": "Magnifying glass for search fields, filters, and find-in-page.",
+  "aliases": [
+    "magnifier",
+    "find",
+    "lookup",
+    "magnifying-glass",
+    "query",
+    "explore",
+    "look-up",
+    "search-bar",
+    "seek"
+  ],
+  "tags": [
+    "magnifier",
+    "find",
+    "lookup",
+    "zoom",
+    "query"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.6 15.6 L20.5 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z"
+  ],
+  "cutouts": [
+    "M7 10.5 A3.5 3.5 0 0 1 10.5 7"
+  ],
+  "synonyms": [
+    "search bar",
+    "search box",
+    "search field",
+    "find in page",
+    "look for",
+    "looking for",
+    "discover",
+    "browse",
+    "google",
+    "research",
+    "investigate",
+    "inspect",
+    "examine",
+    "detect",
+    "detective",
+    "scan",
+    "spyglass",
+    "hand lens",
+    "loupe",
+    "lens",
+    "zoom",
+    "filter results",
+    "results",
+    "keyword",
+    "where is",
+    "locate",
+    "hunt",
+    "ctrl f",
+    "ctrl+f",
+    "serch",
+    "searh",
+    "seach",
+    "magnifing glass",
+    "magnify"
+  ]
+}

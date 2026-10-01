@@ -1,0 +1,71 @@
+{
+  "name": "battery-charging",
+  "category": "devices",
+  "description": "A battery split by a lightning bolt, for charging and plugged-in power states.",
+  "aliases": [
+    "charging",
+    "charger",
+    "recharge",
+    "battery-bolt",
+    "plugged-in",
+    "power-charging",
+    "battery-charge",
+    "charge-battery"
+  ],
+  "tags": [
+    "battery",
+    "charging",
+    "energy",
+    "bolt",
+    "power"
+  ],
+  "paths": [
+    {
+      "d": "M7 7 H4 A2 2 0 0 0 2 9 V15 A2 2 0 0 0 4 17 H6",
+      "plate": "K"
+    },
+    {
+      "d": "M15 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H14",
+      "plate": "K"
+    },
+    {
+      "d": "M22 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 4 L8.5 12 H12.5 L8.5 20",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8 7 H4 A2 2 0 0 0 2 9 V15 A2 2 0 0 0 4 17 H7 L5.5 12 Z",
+    "M13 17 H17 A2 2 0 0 0 19 15 V9 A2 2 0 0 0 17 7 H14 L15.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "charge",
+    "charging battery",
+    "charge phone",
+    "fast charge",
+    "quick charge",
+    "power bank",
+    "powerbank",
+    "adapter",
+    "cable",
+    "outlet",
+    "electric",
+    "electricity",
+    "energy",
+    "lightning",
+    "bolt",
+    "refill",
+    "recharging",
+    "power up",
+    "juice",
+    "ev",
+    "electric car",
+    "solar",
+    "chargin",
+    "chargeing"
+  ]
+}

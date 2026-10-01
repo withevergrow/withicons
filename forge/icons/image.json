@@ -1,0 +1,75 @@
+{
+  "name": "image",
+  "category": "media",
+  "description": "A framed picture containing a small sun and a mountain.",
+  "aliases": [
+    "picture",
+    "photo",
+    "img",
+    "photograph",
+    "gallery",
+    "thumbnail",
+    "graphic",
+    "pic",
+    "artwork"
+  ],
+  "tags": [
+    "photo",
+    "picture",
+    "landscape",
+    "media",
+    "gallery"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 17 L7 12 A1.41 1.41 0 0 1 9 12 L17 20",
+      "plate": "A"
+    },
+    {
+      "d": "M16.25 9.5 A1.75 1.75 0 1 1 12.75 9.5 A1.75 1.75 0 1 1 16.25 9.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M16.75 9.5 A2.25 2.25 0 1 1 12.25 9.5 A2.25 2.25 0 1 1 16.75 9.5 Z",
+    "M3.25 15.75 L7 12 A1.41 1.41 0 0 1 9 12 L15.75 18.75 H3.25 Z"
+  ],
+  "synonyms": [
+    "pictures",
+    "photos",
+    "images",
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "media",
+    "photography",
+    "album",
+    "camera roll",
+    "snapshot",
+    "wallpaper",
+    "background image",
+    "illustration",
+    "scenery",
+    "mountain view",
+    "view",
+    "portrait",
+    "frame",
+    "photo frame",
+    "preview",
+    "visual",
+    "placeholder image",
+    "image file",
+    "foto",
+    "imgae",
+    "pciture",
+    "landscape"
+  ]
+}

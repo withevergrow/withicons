@@ -1,0 +1,68 @@
+{
+  "name": "save",
+  "category": "actions",
+  "description": "A floppy disk that commits pending changes to storage.",
+  "aliases": [
+    "floppy",
+    "floppy-disk",
+    "disk",
+    "diskette",
+    "save-file",
+    "save-changes",
+    "persist",
+    "keep"
+  ],
+  "tags": [
+    "floppy",
+    "disk",
+    "storage",
+    "save",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H16 L21 8 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 3 V6.5 A1.5 1.5 0 0 0 9 8 H13 A1.5 1.5 0 0 0 14.5 6.5 V3",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 21 V15 A1.5 1.5 0 0 1 8 13.5 H16 A1.5 1.5 0 0 1 17.5 15 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H16 L21 8 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M8.5 4.5 H13.5 V6 A1 1 0 0 1 12.5 7 H9.5 A1 1 0 0 1 8.5 6 Z",
+    "M9 14.5 H15 A1.5 1.5 0 0 1 16.5 16 V19.5 H7.5 V16 A1.5 1.5 0 0 1 9 14.5 Z"
+  ],
+  "synonyms": [
+    "save document",
+    "save work",
+    "save progress",
+    "save as",
+    "ctrl s",
+    "ctrl+s",
+    "cmd s",
+    "save button",
+    "saved",
+    "store data",
+    "keep changes",
+    "commit changes",
+    "backup",
+    "back up",
+    "storage",
+    "computer disk",
+    "retro computer",
+    "document",
+    "write to disk",
+    "apply changes",
+    "savee",
+    "sav",
+    "floppy disc"
+  ]
+}

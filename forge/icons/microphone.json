@@ -1,0 +1,74 @@
+{
+  "name": "microphone",
+  "category": "devices",
+  "description": "A studio microphone on a cradle and stem for voice input, recording and push-to-talk.",
+  "aliases": [
+    "mic",
+    "mike",
+    "voice",
+    "record",
+    "dictation",
+    "voice-input",
+    "speak",
+    "push-to-talk",
+    "podcast",
+    "voice-recorder"
+  ],
+  "tags": [
+    "audio",
+    "voice",
+    "recording",
+    "input",
+    "sound"
+  ],
+  "paths": [
+    {
+      "d": "M9 5.5 A3 3 0 0 1 15 5.5 V11.5 A3 3 0 0 1 9 11.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 11 A6.5 6.5 0 0 0 18.5 11",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.5 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 5.5 A3 3 0 0 1 15 5.5 V11.5 A3 3 0 0 1 9 11.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "recording",
+    "record audio",
+    "voice recording",
+    "voice memo",
+    "voice note",
+    "voice message",
+    "voice search",
+    "speech",
+    "speech to text",
+    "talk",
+    "talking",
+    "say",
+    "sing",
+    "singing",
+    "karaoke",
+    "audio",
+    "sound",
+    "input",
+    "turn on mic",
+    "broadcast",
+    "radio",
+    "interview",
+    "studio",
+    "presenter",
+    "speaker",
+    "live",
+    "stream",
+    "microphne",
+    "micophone",
+    "mircophone"
+  ]
+}

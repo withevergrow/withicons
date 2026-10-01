@@ -1,0 +1,63 @@
+{
+  "name": "receipt",
+  "category": "commerce",
+  "description": "A paper slip with a torn zigzag edge and printed lines, for invoices, receipts and billing history.",
+  "aliases": [
+    "invoice",
+    "bill",
+    "proof-of-purchase",
+    "sales-slip",
+    "order-receipt",
+    "statement",
+    "transaction",
+    "till-receipt"
+  ],
+  "tags": [
+    "invoice",
+    "billing",
+    "purchase",
+    "payment",
+    "paper",
+    "expense"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V21.5 L17 19.5 L14.5 21.5 L12 19.5 L9.5 21.5 L7 19.5 L4.5 21.5 V4.5 A2 2 0 0 1 6.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7.5 H15.5 M8.5 11.5 H15.5 M8.5 15.5 H12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V21.5 L17 19.5 L14.5 21.5 L12 19.5 L9.5 21.5 L7 19.5 L4.5 21.5 V4.5 A2 2 0 0 1 6.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 7.5 H15.5",
+    "M8.5 11.5 H15.5",
+    "M8.5 15.5 H12.5"
+  ],
+  "synonyms": [
+    "billing",
+    "billing history",
+    "purchase",
+    "payment",
+    "paid",
+    "order",
+    "orders",
+    "expense",
+    "expenses",
+    "checkout",
+    "total",
+    "tax",
+    "accounting",
+    "refund",
+    "proof of payment",
+    "paper slip",
+    "shopping",
+    "reciept",
+    "recipt",
+    "reciepts"
+  ]
+}

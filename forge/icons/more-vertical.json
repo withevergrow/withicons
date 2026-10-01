@@ -1,0 +1,70 @@
+{
+  "name": "more-vertical",
+  "category": "navigation",
+  "description": "Three vertical dots for per-row or per-card action menus.",
+  "aliases": [
+    "kebab",
+    "kebab-menu",
+    "dots-vertical",
+    "three-dots-vertical",
+    "overflow-vertical",
+    "row-actions",
+    "vertical-ellipsis",
+    "vertical-dots",
+    "more-menu"
+  ],
+  "tags": [
+    "more",
+    "dots",
+    "kebab",
+    "menu",
+    "overflow"
+  ],
+  "paths": [
+    {
+      "d": "M12.875 5 A0.875 0.875 0 1 1 11.125 5 A0.875 0.875 0 1 1 12.875 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.875 12 A0.875 0.875 0 1 1 11.125 12 A0.875 0.875 0 1 1 12.875 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.875 19 A0.875 0.875 0 1 1 11.125 19 A0.875 0.875 0 1 1 12.875 19 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12.875 5 A0.875 0.875 0 1 1 11.125 5 A0.875 0.875 0 1 1 12.875 5 Z",
+    "M12.875 12 A0.875 0.875 0 1 1 11.125 12 A0.875 0.875 0 1 1 12.875 12 Z",
+    "M12.875 19 A0.875 0.875 0 1 1 11.125 19 A0.875 0.875 0 1 1 12.875 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "more options",
+    "more actions",
+    "options menu",
+    "actions",
+    "context menu",
+    "card menu",
+    "item menu",
+    "dropdown",
+    "drop down",
+    "three dot menu",
+    "3 dots",
+    "vertical dots menu",
+    "dots menu",
+    "android menu",
+    "app menu",
+    "overflow menu",
+    "row menu",
+    "item actions",
+    "edit options",
+    "secondary actions",
+    "kebab icon",
+    "cebab",
+    "vertical elipsis",
+    "ellipsis vertical",
+    "dot menu"
+  ]
+}

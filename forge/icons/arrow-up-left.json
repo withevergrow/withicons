@@ -1,0 +1,44 @@
+{
+  "name": "arrow-up-left",
+  "category": "arrows",
+  "description": "A diagonal arrow pointing up and to the left, for back-out and return-to-origin moves.",
+  "aliases": [
+    "northwest",
+    "north-west",
+    "up-left",
+    "top-left",
+    "diagonal-up-left",
+    "upper-left",
+    "arrow-nw"
+  ],
+  "tags": [
+    "diagonal",
+    "direction",
+    "back",
+    "corner",
+    "return"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 17.5 L6.5 6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16 6.5 H6.5 V16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "diagonal arrow",
+    "corner",
+    "pointing up left",
+    "back out",
+    "return to origin",
+    "move up left",
+    "upper corner",
+    "collapse",
+    "shrink"
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "$comment": "Source of truth for 'Add with icons to your AI tool' (site/data/integrations.js via forge/tools/site-integrations.mjs) and for packages/cli/src/init.mjs. Every fact is from the tool's official docs (see sources) as of `verified`. Re-check before changing; never guess a command. `mcp.json` is pretty-printed into mcp.snippet by the generator; deeplinks are computed from `servers`.",
+  "name": "withicons",
+  "verified": "2026-10-01",
+  "servers": {
+    "remote": { "url": "https://withicons.com/mcp" },
+    "local": { "command": "npx", "args": ["-y", "@withicons/mcp"] },
+    "vscode-remote": { "type": "http", "url": "https://withicons.com/mcp" },
+    "vscode-local": { "type": "stdio", "command": "npx", "args": ["-y", "@withicons/mcp"] }
+  },
+  "tools": [
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "logo": "claude-mark",
+      "blurb": "Skill in .claude/skills plus the MCP server, so Claude Code searches icons by meaning and pastes the right import.",
+      "oneLiner": "npx withicons init claude-code",
+      "steps": [
+        { "title": "One command", "text": "Run in your project. It copies the skill to .claude/skills/with-icons/ and adds the server to .mcp.json. Add --global for every project.", "code": "npx withicons init claude-code", "lang": "sh" },
+        { "title": "Or add the server with Claude Code's own CLI", "text": "Remote, no install. Use --scope user for all projects or --scope project to share it through .mcp.json.", "code": "claude mcp add --transport http withicons https://withicons.com/mcp", "lang": "sh" },
+        { "title": "Run it locally instead", "text": "The same server over stdio (Node 18+).", "code": "claude mcp add --transport stdio withicons -- npx -y @withicons/mcp", "lang": "sh" },
+        { "title": "Check", "text": "Type /mcp in Claude Code to see the withicons tools, and ask for \"an icon for deleting things, in React\"." }
+      ],
+      "mcp": { "kind": "remote", "path": ".mcp.json", "json": { "mcpServers": { "withicons": { "type": "http", "url": "https://withicons.com/mcp" } } } },
+      "mcpLocal": { "kind": "local", "path": ".mcp.json", "json": { "mcpServers": { "withicons": { "command": "npx", "args": ["-y", "@withicons/mcp"] } } } },
+      "skill": { "path": ".claude/skills/with-icons/SKILL.md", "globalPath": "~/.claude/skills/with-icons/SKILL.md" },
+      "docs": "https://code.claude.com/docs/en/mcp",
+      "sources": ["https://code.claude.com/docs/en/mcp", "https://code.claude.com/docs/en/skills"]
+    },
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "logo": "codex-mark",
+      "blurb": "For the Codex CLI, IDE extension and app: the skill in .agents/skills and the server in config.toml.",
+      "oneLiner": "npx withicons init codex",
+      "steps": [
+        { "title": "One command", "text": "Copies the skill to .agents/skills/with-icons/ and adds [mcp_servers.withicons] to .codex/config.toml (Codex reads project config in trusted projects). Add --global to use ~/.codex/config.toml and ~/.agents/skills.", "code": "npx withicons init codex", "lang": "sh" },
+        { "title": "Or use the Codex CLI", "text": "Streamable HTTP, no install.", "code": "codex mcp add withicons --url https://withicons.com/mcp", "lang": "sh" },
+        { "title": "Run it locally instead", "text": "stdio via npx (Node 18+).", "code": "codex mcp add withicons -- npx -y @withicons/mcp", "lang": "sh" },
+        { "title": "IDE extension", "text": "The CLI, IDE extension and app share config.toml. In the extension: gear menu > MCP servers > Add server > Streamable HTTP, then restart the extension." }
+      ],
+      "mcp": { "kind": "remote", "path": "~/.codex/config.toml", "snippet": "[mcp_servers.withicons]\nurl = \"https://withicons.com/mcp\"", "lang": "toml" },
+      "mcpLocal": { "kind": "local", "path": "~/.codex/config.toml", "snippet": "[mcp_servers.withicons]\ncommand = \"npx\"\nargs = [\"-y\", \"@withicons/mcp\"]", "lang": "toml" },
+      "skill": { "path": ".agents/skills/with-icons/SKILL.md", "globalPath": "~/.agents/skills/with-icons/SKILL.md" },
+      "docs": "https://developers.openai.com/codex/mcp",
+      "sources": ["https://developers.openai.com/codex/mcp", "https://developers.openai.com/codex/skills", "https://developers.openai.com/codex/guides/agents-md"]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "logo": "cursor-mark",
+      "blurb": "One click adds the server to Cursor. The skill goes in .agents/skills, which Cursor loads automatically.",
+      "oneLiner": "npx withicons init cursor",
+      "steps": [
+        { "title": "One click", "text": "Use the Add to Cursor button. Cursor opens and asks you to confirm the withicons server." },
+        { "title": "Or one command", "text": "Copies the skill to .agents/skills/with-icons/ and adds the server to .cursor/mcp.json. Add --global for ~/.cursor/mcp.json.", "code": "npx withicons init cursor", "lang": "sh" },
+        { "title": "Or edit mcp.json yourself", "text": "Project: .cursor/mcp.json. Everywhere: ~/.cursor/mcp.json." }
+      ],
+      "mcp": { "kind": "remote", "path": ".cursor/mcp.json", "json": { "mcpServers": { "withicons": { "url": "https://withicons.com/mcp" } } } },
+      "mcpLocal": { "kind": "local", "path": ".cursor/mcp.json", "json": { "mcpServers": { "withicons": { "command": "npx", "args": ["-y", "@withicons/mcp"] } } } },
+      "skill": { "path": ".agents/skills/with-icons/SKILL.md", "globalPath": "~/.agents/skills/with-icons/SKILL.md" },
+      "deeplinks": [
+        { "label": "Add to Cursor", "kind": "cursor", "server": "remote" },
+        { "label": "Add to Cursor (local, npx)", "kind": "cursor", "server": "local" }
+      ],
+      "docs": "https://cursor.com/docs/context/mcp",
+      "sources": ["https://cursor.com/docs/context/mcp", "https://cursor.com/docs/mcp/install-links", "https://cursor.com/docs/context/skills"]
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "logo": "opencode-mark",
+      "wordmark": "opencode-wordmark",
+      "blurb": "Adds a remote MCP entry to opencode.json and the skill to .agents/skills, which OpenCode discovers on its own.",
+      "oneLiner": "npx withicons init opencode",
+      "steps": [
+        { "title": "One command", "text": "Copies the skill to .agents/skills/with-icons/ and adds \"withicons\" under \"mcp\" in opencode.json. Add --global for ~/.config/opencode/opencode.json and ~/.agents/skills.", "code": "npx withicons init opencode", "lang": "sh" },
+        { "title": "Or edit opencode.json", "text": "OpenCode merges project and global config. opencode mcp add also walks you through it interactively." },
+        { "title": "Check", "text": "Run opencode mcp list." , "code": "opencode mcp list", "lang": "sh" }
+      ],
+      "mcp": { "kind": "remote", "path": "opencode.json", "json": { "$schema": "https://opencode.ai/config.json", "mcp": { "withicons": { "type": "remote", "url": "https://withicons.com/mcp", "enabled": true } } } },
+      "mcpLocal": { "kind": "local", "path": "opencode.json", "json": { "$schema": "https://opencode.ai/config.json", "mcp": { "withicons": { "type": "local", "command": ["npx", "-y", "@withicons/mcp"], "enabled": true } } } },
+      "skill": { "path": ".agents/skills/with-icons/SKILL.md", "globalPath": "~/.agents/skills/with-icons/SKILL.md" },
+      "docs": "https://opencode.ai/docs/mcp-servers/",
+      "sources": ["https://opencode.ai/docs/mcp-servers/", "https://opencode.ai/docs/skills/", "https://opencode.ai/docs/config/", "https://opencode.ai/docs/cli/"]
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "logo": "lovable-mark",
+      "wordmark": "lovable-wordmark",
+      "blurb": "Connect the remote server as a chat connector and import the skill from GitHub. No install.",
+      "oneLiner": null,
+      "steps": [
+        { "title": "Add the MCP server", "text": "Open Connectors, choose + (top right) > MCP server. Name: with icons. URL: https://withicons.com/mcp. Authentication: none. Available on all plans; each teammate connects their own.", "code": "https://withicons.com/mcp", "lang": "text" },
+        { "title": "Add the skill (owners and admins)", "text": "Workspace settings > Skills > Add > Import from GitHub, and paste this link. It is shared with every project in the workspace.", "code": "https://github.com/withevergrow/withicons/tree/main/skills/with-icons", "lang": "text" },
+        { "title": "Or add project knowledge", "text": "Project settings > Knowledge (up to 10,000 characters). Paste the note below." }
+      ],
+      "mcp": { "kind": "remote", "snippet": "https://withicons.com/mcp", "lang": "text" },
+      "skill": { "path": "https://github.com/withevergrow/withicons/tree/main/skills/with-icons", "snippet": "Icons: use the \"with icons\" library (https://withicons.com, MIT). Read https://withicons.com/skill/SKILL.md before adding icons. Find names with the withicons MCP server (search_icons) or https://withicons.com/api/search?q=<words>; never invent an icon name. React: npm i @withicons/react, then import { Home } from '@withicons/react'. Use the line style for UI, solid for active states, and one style per region. Icon-only buttons need an aria-label." },
+      "deeplinks": [
+        { "label": "Open Lovable Connectors", "href": "https://lovable.dev/dashboard?connectors" }
+      ],
+      "docs": "https://docs.lovable.dev/integrations/custom-mcp",
+      "sources": ["https://docs.lovable.dev/integrations/custom-mcp", "https://docs.lovable.dev/integrations/mcp-servers", "https://docs.lovable.dev/features/skills", "https://docs.lovable.dev/features/knowledge"]
+    },
+    {
+      "id": "claude-desktop",
+      "name": "Claude Desktop",
+      "logo": "claude-mark",
+      "blurb": "Add the remote server as a custom connector, or run it locally from claude_desktop_config.json. Upload the skill as a zip.",
+      "oneLiner": "npx withicons init claude-desktop",
+      "steps": [
+        { "title": "Remote connector", "text": "Customize > Connectors > + > Add custom connector, then paste the URL. Free plans allow one custom connector.", "code": "https://withicons.com/mcp", "lang": "text" },
+        { "title": "Or run it locally", "text": "This command adds the npx server to claude_desktop_config.json (Claude menu > Settings > Developer > Edit Config). Quit and reopen Claude afterwards.", "code": "npx withicons init claude-desktop", "lang": "sh" },
+        { "title": "Upload the skill", "text": "Make the zip, then go to Customize > Skills > + > Create skill > Upload a skill. Code execution must be on.", "code": "npx withicons skill --zip", "lang": "sh" }
+      ],
+      "mcp": { "kind": "remote", "snippet": "https://withicons.com/mcp", "lang": "text" },
+      "mcpLocal": { "kind": "local", "path": "claude_desktop_config.json", "json": { "mcpServers": { "withicons": { "command": "npx", "args": ["-y", "@withicons/mcp"] } } } },
+      "skill": { "path": "with-icons.zip" },
+      "docs": "https://support.claude.com/en/articles/11175166",
+      "sources": ["https://support.claude.com/en/articles/11175166", "https://modelcontextprotocol.io/docs/develop/connect-local-servers", "https://support.claude.com/en/articles/12512180"]
+    },
+    {
+      "id": "vscode",
+      "name": "VS Code (Copilot)",
+      "logo": null,
+      "blurb": "Install the server in one click for Copilot agent mode. The skill goes in .agents/skills, which VS Code loads.",
+      "oneLiner": "npx withicons init vscode",
+      "steps": [
+        { "title": "One click", "text": "Use Install in VS Code. VS Code asks you to confirm and trust the server." },
+        { "title": "Or one command", "text": "Copies the skill to .agents/skills/with-icons/ and adds the server to .vscode/mcp.json.", "code": "npx withicons init vscode", "lang": "sh" },
+        { "title": "Or the VS Code CLI (user profile)", "code": "code --add-mcp \"{\\\"name\\\":\\\"withicons\\\",\\\"command\\\":\\\"npx\\\",\\\"args\\\":[\\\"-y\\\",\\\"@withicons/mcp\\\"]}\"", "lang": "sh", "text": "Adds the local server to your user mcp.json." }
+      ],
+      "mcp": { "kind": "remote", "path": ".vscode/mcp.json", "json": { "servers": { "withicons": { "type": "http", "url": "https://withicons.com/mcp" } } } },
+      "mcpLocal": { "kind": "local", "path": ".vscode/mcp.json", "json": { "servers": { "withicons": { "type": "stdio", "command": "npx", "args": ["-y", "@withicons/mcp"] } } } },
+      "skill": { "path": ".agents/skills/with-icons/SKILL.md", "globalPath": "~/.agents/skills/with-icons/SKILL.md" },
+      "deeplinks": [
+        { "label": "Install in VS Code", "kind": "vscode", "server": "vscode-remote" },
+        { "label": "Install in VS Code Insiders", "kind": "vscode-insiders", "server": "vscode-remote" }
+      ],
+      "docs": "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
+      "sources": ["https://code.visualstudio.com/docs/copilot/customization/mcp-servers", "https://code.visualstudio.com/docs/copilot/reference/mcp-configuration", "https://code.visualstudio.com/api/extension-guides/ai/mcp", "https://code.visualstudio.com/docs/agent-customization/agent-skills"]
+    },
+    {
+      "id": "windsurf",
+      "name": "Windsurf",
+      "logo": null,
+      "blurb": "Windsurf is now Devin Desktop. Its Cascade agent reads MCP servers from your user mcp_config.json and skills from .agents/skills.",
+      "oneLiner": "npx withicons init windsurf",
+      "steps": [
+        { "title": "One command", "text": "Copies the skill to .agents/skills/with-icons/ and adds the server to your user mcp_config.json (~/.config/devin/, or %APPDATA%\\devin\\ on Windows; an existing ~/.codeium/windsurf/mcp_config.json is updated too).", "code": "npx withicons init windsurf", "lang": "sh" },
+        { "title": "Or edit mcp_config.json", "text": "Cascade has no one-click install. Remote servers use serverUrl. Refresh the MCP list afterwards." }
+      ],
+      "mcp": { "kind": "remote", "path": "~/.config/devin/mcp_config.json", "json": { "mcpServers": { "withicons": { "serverUrl": "https://withicons.com/mcp" } } } },
+      "mcpLocal": { "kind": "local", "path": "~/.config/devin/mcp_config.json", "json": { "mcpServers": { "withicons": { "command": "npx", "args": ["-y", "@withicons/mcp"] } } } },
+      "skill": { "path": ".agents/skills/with-icons/SKILL.md", "globalPath": "~/.agents/skills/with-icons/SKILL.md" },
+      "docs": "https://docs.devin.ai/desktop/cascade/mcp",
+      "sources": ["https://docs.devin.ai/desktop/cascade/mcp", "https://docs.devin.ai/desktop/devin-desktop-faq", "https://docs.devin.ai/desktop/cascade/skills"]
+    }
+  ]
+}

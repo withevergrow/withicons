@@ -1,0 +1,73 @@
+{
+  "name": "home",
+  "category": "navigation",
+  "description": "A house marking the root or dashboard destination of an app.",
+  "aliases": [
+    "house",
+    "homepage",
+    "index",
+    "main",
+    "home-page",
+    "landing",
+    "root"
+  ],
+  "tags": [
+    "house",
+    "building",
+    "start",
+    "main",
+    "dashboard"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 11 L12 3.5 L21.5 11",
+      "plate": "K"
+    },
+    {
+      "d": "M5 9.5 V19 A2 2 0 0 0 7 21 H17 A2 2 0 0 0 19 19 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 21 V16 A1.5 1.5 0 0 1 11 14.5 H13 A1.5 1.5 0 0 1 14.5 16 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 9.6 L12 4.1 L19 9.6 V19 A2 2 0 0 1 17 21 H7 A2 2 0 0 1 5 19 Z"
+  ],
+  "cutouts": [
+    "M9.5 21 V16 A1.5 1.5 0 0 1 11 14.5 H13 A1.5 1.5 0 0 1 14.5 16 V21 Z"
+  ],
+  "synonyms": [
+    "home screen",
+    "go home",
+    "back to home",
+    "main page",
+    "front page",
+    "start page",
+    "dashboard home",
+    "residence",
+    "property",
+    "real estate",
+    "apartment",
+    "live",
+    "household",
+    "family",
+    "address",
+    "place",
+    "shelter",
+    "housing",
+    "mortgage",
+    "rent",
+    "return home",
+    "welcome",
+    "front door",
+    "hom",
+    "hosue",
+    "my home",
+    "base",
+    "home button",
+    "real estate listing",
+    "start"
+  ]
+}

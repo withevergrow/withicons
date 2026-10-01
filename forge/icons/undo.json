@@ -1,0 +1,53 @@
+{
+  "name": "undo",
+  "category": "actions",
+  "description": "An arrow that hooks back to the left, reversing the last action.",
+  "aliases": [
+    "revert",
+    "rollback",
+    "undo-arrow",
+    "ctrl-z",
+    "undo-last"
+  ],
+  "tags": [
+    "undo",
+    "revert",
+    "back",
+    "edit",
+    "history",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 9.5 H15 A5.5 5.5 0 0 1 15 20.5 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 4.5 L3.5 9.5 L8.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "back",
+    "go back",
+    "step back",
+    "reverse",
+    "take back",
+    "oops",
+    "mistake",
+    "cancel last",
+    "previous step",
+    "restore",
+    "reset change",
+    "turn back",
+    "return",
+    "u-turn",
+    "arrow back",
+    "left arrow curve",
+    "change back",
+    "cmd z",
+    "unod"
+  ]
+}

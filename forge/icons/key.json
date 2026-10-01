@@ -1,0 +1,70 @@
+{
+  "name": "key",
+  "category": "security",
+  "description": "A key for passwords, API keys, and access credentials.",
+  "aliases": [
+    "password",
+    "api-key",
+    "credential",
+    "secret",
+    "passkey",
+    "access-key",
+    "keys"
+  ],
+  "tags": [
+    "password",
+    "access",
+    "credential",
+    "security",
+    "authentication"
+  ],
+  "paths": [
+    {
+      "d": "M13 16 A5 5 0 1 1 3 16 A5 5 0 1 1 13 16 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 12.5 L20.5 3.5",
+      "plate": "K"
+    },
+    {
+      "d": "M18.5 5.5 L20.5 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 8.5 L17.5 10.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M13 16 A5 5 0 1 1 3 16 A5 5 0 1 1 13 16 Z"
+  ],
+  "cutouts": [
+    "M9.5 16 A1.5 1.5 0 1 1 6.5 16 A1.5 1.5 0 1 1 9.5 16 Z"
+  ],
+  "synonyms": [
+    "login",
+    "sign in",
+    "security",
+    "private key",
+    "key icon",
+    "house key",
+    "car key",
+    "door key",
+    "entry",
+    "admin access",
+    "permission",
+    "authorization",
+    "authentication",
+    "encryption",
+    "secure",
+    "license key",
+    "product key",
+    "master key",
+    "password manager",
+    "keychain",
+    "rental",
+    "realtor",
+    "access"
+  ]
+}

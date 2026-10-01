@@ -1,0 +1,60 @@
+{
+  "name": "unlock",
+  "category": "security",
+  "description": "An open padlock for unlocked or publicly accessible content.",
+  "aliases": [
+    "unlocked",
+    "lock-open",
+    "open-lock",
+    "unsecured",
+    "padlock-open",
+    "unprotected"
+  ],
+  "tags": [
+    "padlock",
+    "open",
+    "unlocked",
+    "access",
+    "security"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 11 V7.5 A4.5 4.5 0 0 1 16 5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 11 H18 A2 2 0 0 1 20 13 V19 A2 2 0 0 1 18 21 H6 A2 2 0 0 1 4 19 V13 A2 2 0 0 1 6 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 15 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 11 H18 A2 2 0 0 1 20 13 V19 A2 2 0 0 1 18 21 H6 A2 2 0 0 1 4 19 V13 A2 2 0 0 1 6 11 Z"
+  ],
+  "cutouts": [
+    "M12 15 V17"
+  ],
+  "synonyms": [
+    "access",
+    "access granted",
+    "open",
+    "public",
+    "unlock account",
+    "free access",
+    "get access",
+    "unlocked content",
+    "unrestricted",
+    "opened",
+    "padlock",
+    "release",
+    "allow access",
+    "password removed",
+    "unblock",
+    "decrypt",
+    "not secure",
+    "unlok"
+  ]
+}

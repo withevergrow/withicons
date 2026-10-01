@@ -1,0 +1,66 @@
+{
+  "name": "package",
+  "category": "commerce",
+  "description": "A sealed, taped box for products, shipments and inventory records.",
+  "aliases": [
+    "box",
+    "parcel",
+    "shipment",
+    "delivery-box",
+    "cardboard-box",
+    "product",
+    "inventory",
+    "package-box"
+  ],
+  "tags": [
+    "box",
+    "shipping",
+    "delivery",
+    "product",
+    "cube",
+    "logistics"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L21 7 V17 L12 21.5 L3 17 V7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 4.75 L16.5 9.25 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L21 7 V17 L12 21.5 L3 17 V7 Z"
+  ],
+  "cutouts": [
+    "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+    "M7.5 4.75 L16.5 9.25 V13.5"
+  ],
+  "synonyms": [
+    "shipping",
+    "delivery",
+    "order",
+    "courier",
+    "mail order",
+    "post",
+    "postal",
+    "tracking",
+    "track order",
+    "logistics",
+    "warehouse",
+    "stock",
+    "goods",
+    "cube",
+    "moving box",
+    "send package",
+    "unbox",
+    "dispatch",
+    "pakage",
+    "packet"
+  ]
+}

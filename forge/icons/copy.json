@@ -1,0 +1,58 @@
+{
+  "name": "copy",
+  "category": "actions",
+  "description": "Two overlapping sheets for duplicating a value or object.",
+  "aliases": [
+    "duplicate",
+    "clone",
+    "copy-to-clipboard",
+    "clipboard-copy",
+    "content-copy",
+    "replicate",
+    "copy-text",
+    "copies"
+  ],
+  "tags": [
+    "duplicate",
+    "clone",
+    "pages",
+    "sheets",
+    "clipboard"
+  ],
+  "paths": [
+    {
+      "d": "M11 9 H19 A2 2 0 0 1 21 11 V19 A2 2 0 0 1 19 21 H11 A2 2 0 0 1 9 19 V11 A2 2 0 0 1 11 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 5 A2 2 0 0 0 13 3 H5 A2 2 0 0 0 3 5 V13 A2 2 0 0 0 5 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M11 9 H19 A2 2 0 0 1 21 11 V19 A2 2 0 0 1 19 21 H11 A2 2 0 0 1 9 19 V11 A2 2 0 0 1 11 9 Z",
+    "M5 3 H13 A2 2 0 0 1 15 5 V7 H11 L9.47 7.3 L8.17 8.17 L7.3 9.47 L7 11 V15 H5 A2 2 0 0 1 3 13 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "copy paste",
+    "copy and paste",
+    "ctrl c",
+    "cmd c",
+    "make a copy",
+    "reproduce",
+    "double",
+    "twin",
+    "pages",
+    "sheets",
+    "overlapping",
+    "second copy",
+    "backup copy",
+    "copy link",
+    "copy code",
+    "duplicate page",
+    "copying",
+    "copie",
+    "coppy"
+  ]
+}

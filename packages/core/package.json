@@ -1,0 +1,150 @@
+{
+  "name": "@withicons/core",
+  "version": "0.1.0",
+  "description": "300 icons x 7 styles as standalone SVGs, IconNode data, metadata, alias resolution and search.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "svg-icons",
+    "icon-search"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./nodes/line": {
+      "import": {
+        "types": "./dist/nodes/line.d.ts",
+        "default": "./dist/nodes/line.js"
+      },
+      "require": {
+        "types": "./dist/nodes/line.d.cts",
+        "default": "./dist/nodes/line.cjs"
+      }
+    },
+    "./nodes/solid": {
+      "import": {
+        "types": "./dist/nodes/solid.d.ts",
+        "default": "./dist/nodes/solid.js"
+      },
+      "require": {
+        "types": "./dist/nodes/solid.d.cts",
+        "default": "./dist/nodes/solid.cjs"
+      }
+    },
+    "./nodes/duo": {
+      "import": {
+        "types": "./dist/nodes/duo.d.ts",
+        "default": "./dist/nodes/duo.js"
+      },
+      "require": {
+        "types": "./dist/nodes/duo.d.cts",
+        "default": "./dist/nodes/duo.cjs"
+      }
+    },
+    "./nodes/gloss": {
+      "import": {
+        "types": "./dist/nodes/gloss.d.ts",
+        "default": "./dist/nodes/gloss.js"
+      },
+      "require": {
+        "types": "./dist/nodes/gloss.d.cts",
+        "default": "./dist/nodes/gloss.cjs"
+      }
+    },
+    "./nodes/engrave": {
+      "import": {
+        "types": "./dist/nodes/engrave.d.ts",
+        "default": "./dist/nodes/engrave.js"
+      },
+      "require": {
+        "types": "./dist/nodes/engrave.d.cts",
+        "default": "./dist/nodes/engrave.cjs"
+      }
+    },
+    "./nodes/blueprint": {
+      "import": {
+        "types": "./dist/nodes/blueprint.d.ts",
+        "default": "./dist/nodes/blueprint.js"
+      },
+      "require": {
+        "types": "./dist/nodes/blueprint.d.cts",
+        "default": "./dist/nodes/blueprint.cjs"
+      }
+    },
+    "./nodes/sketch": {
+      "import": {
+        "types": "./dist/nodes/sketch.d.ts",
+        "default": "./dist/nodes/sketch.js"
+      },
+      "require": {
+        "types": "./dist/nodes/sketch.d.cts",
+        "default": "./dist/nodes/sketch.cjs"
+      }
+    },
+    "./svg/*": "./dist/svg/*",
+    "./icons.json": "./dist/icons.json",
+    "./aliases.json": "./dist/aliases.json",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "nodes/line": [
+        "./dist/nodes/line.d.ts"
+      ],
+      "nodes/solid": [
+        "./dist/nodes/solid.d.ts"
+      ],
+      "nodes/duo": [
+        "./dist/nodes/duo.d.ts"
+      ],
+      "nodes/gloss": [
+        "./dist/nodes/gloss.d.ts"
+      ],
+      "nodes/engrave": [
+        "./dist/nodes/engrave.d.ts"
+      ],
+      "nodes/blueprint": [
+        "./dist/nodes/blueprint.d.ts"
+      ],
+      "nodes/sketch": [
+        "./dist/nodes/sketch.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

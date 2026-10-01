@@ -1,0 +1,53 @@
+{
+  "name": "navigation",
+  "category": "maps",
+  "description": "A navigation arrowhead pointing north-east for current location, heading, and turn-by-turn directions.",
+  "aliases": [
+    "location-arrow",
+    "navigate",
+    "gps",
+    "my-location",
+    "direction",
+    "bearing",
+    "current-location",
+    "direction-arrow",
+    "sat-nav"
+  ],
+  "tags": [
+    "arrow",
+    "location",
+    "gps",
+    "direction",
+    "maps",
+    "travel"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 3.5 L13.5 21 L10.5 13.5 L3 10.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M20.5 3.5 L13.5 21 L10.5 13.5 L3 10.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "directions",
+    "turn by turn",
+    "maps",
+    "where am i",
+    "find me",
+    "locate me",
+    "travel",
+    "route guidance",
+    "satnav",
+    "driving directions",
+    "arrow",
+    "pointer",
+    "north",
+    "go",
+    "wayfinding",
+    "navigator",
+    "navagation"
+  ]
+}

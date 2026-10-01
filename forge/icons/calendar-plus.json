@@ -1,0 +1,71 @@
+{
+  "name": "calendar-plus",
+  "category": "time",
+  "description": "A calendar with a plus for booking or creating an event.",
+  "aliases": [
+    "add-event",
+    "new-event",
+    "add-to-calendar",
+    "create-event",
+    "schedule-event",
+    "new-appointment",
+    "book-meeting"
+  ],
+  "tags": [
+    "calendar",
+    "event",
+    "add",
+    "create",
+    "booking",
+    "schedule"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13.5 V17.5 M10 15.5 H14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M3 10 H21",
+    "M12 13.5 V17.5",
+    "M10 15.5 H14"
+  ],
+  "synonyms": [
+    "create meeting",
+    "booking",
+    "reserve",
+    "book now",
+    "make appointment",
+    "schedule",
+    "plan",
+    "invite",
+    "set a date",
+    "add date",
+    "new booking",
+    "save the date",
+    "rsvp",
+    "add reminder",
+    "new meeting",
+    "book a call",
+    "schedule a call"
+  ]
+}

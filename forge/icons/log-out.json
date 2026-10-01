@@ -1,0 +1,71 @@
+{
+  "name": "log-out",
+  "category": "users",
+  "description": "An arrow leaving a door for signing out and ending a session.",
+  "aliases": [
+    "sign-out",
+    "logout",
+    "signout",
+    "log-off",
+    "logoff",
+    "exit",
+    "leave",
+    "end-session",
+    "quit",
+    "sign-off"
+  ],
+  "tags": [
+    "session",
+    "account",
+    "door",
+    "exit",
+    "auth"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 3.5 H5.5 A2 2 0 0 0 3.5 5.5 V18.5 A2 2 0 0 0 5.5 20.5 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 12 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M16 7 L21 12 L16 17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.5 3.5 H5.5 A2 2 0 0 0 3.5 5.5 V18.5 A2 2 0 0 0 5.5 20.5 H9.5 V14 H7.5 A2 2 0 0 1 7.5 10 H9.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "sign out",
+    "log out",
+    "logging out",
+    "log me out",
+    "exit account",
+    "leave site",
+    "go out",
+    "close session",
+    "disconnect",
+    "switch account",
+    "switch user",
+    "goodbye",
+    "bye",
+    "depart",
+    "door",
+    "arrow out",
+    "exit door",
+    "exit app",
+    "close app",
+    "leave account",
+    "logout button",
+    "session end",
+    "lougout",
+    "logut",
+    "loggout",
+    "sign out of account",
+    "leave room"
+  ]
+}

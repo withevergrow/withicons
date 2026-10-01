@@ -1,0 +1,158 @@
+{
+  "name": "@withicons/angular",
+  "version": "0.1.0",
+  "description": "300 icons x 7 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/angular"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "angular",
+    "angular-icons",
+    "standalone",
+    "svg-icons"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "module": "./dist/index.mjs",
+  "typings": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./line": {
+      "types": "./dist/line/index.d.ts",
+      "default": "./dist/line/index.mjs"
+    },
+    "./solid": {
+      "types": "./dist/solid/index.d.ts",
+      "default": "./dist/solid/index.mjs"
+    },
+    "./duo": {
+      "types": "./dist/duo/index.d.ts",
+      "default": "./dist/duo/index.mjs"
+    },
+    "./gloss": {
+      "types": "./dist/gloss/index.d.ts",
+      "default": "./dist/gloss/index.mjs"
+    },
+    "./engrave": {
+      "types": "./dist/engrave/index.d.ts",
+      "default": "./dist/engrave/index.mjs"
+    },
+    "./blueprint": {
+      "types": "./dist/blueprint/index.d.ts",
+      "default": "./dist/blueprint/index.mjs"
+    },
+    "./sketch": {
+      "types": "./dist/sketch/index.d.ts",
+      "default": "./dist/sketch/index.mjs"
+    },
+    "./icons/*": {
+      "types": "./dist/line/icons/*.d.ts",
+      "default": "./dist/line/icons/*.mjs"
+    },
+    "./line/icons/*": {
+      "types": "./dist/line/icons/*.d.ts",
+      "default": "./dist/line/icons/*.mjs"
+    },
+    "./solid/icons/*": {
+      "types": "./dist/solid/icons/*.d.ts",
+      "default": "./dist/solid/icons/*.mjs"
+    },
+    "./duo/icons/*": {
+      "types": "./dist/duo/icons/*.d.ts",
+      "default": "./dist/duo/icons/*.mjs"
+    },
+    "./gloss/icons/*": {
+      "types": "./dist/gloss/icons/*.d.ts",
+      "default": "./dist/gloss/icons/*.mjs"
+    },
+    "./engrave/icons/*": {
+      "types": "./dist/engrave/icons/*.d.ts",
+      "default": "./dist/engrave/icons/*.mjs"
+    },
+    "./blueprint/icons/*": {
+      "types": "./dist/blueprint/icons/*.d.ts",
+      "default": "./dist/blueprint/icons/*.mjs"
+    },
+    "./sketch/icons/*": {
+      "types": "./dist/sketch/icons/*.d.ts",
+      "default": "./dist/sketch/icons/*.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "icons/*": [
+        "./dist/line/icons/*.d.ts"
+      ],
+      "line": [
+        "./dist/line/index.d.ts"
+      ],
+      "line/icons/*": [
+        "./dist/line/icons/*.d.ts"
+      ],
+      "solid": [
+        "./dist/solid/index.d.ts"
+      ],
+      "solid/icons/*": [
+        "./dist/solid/icons/*.d.ts"
+      ],
+      "duo": [
+        "./dist/duo/index.d.ts"
+      ],
+      "duo/icons/*": [
+        "./dist/duo/icons/*.d.ts"
+      ],
+      "gloss": [
+        "./dist/gloss/index.d.ts"
+      ],
+      "gloss/icons/*": [
+        "./dist/gloss/icons/*.d.ts"
+      ],
+      "engrave": [
+        "./dist/engrave/index.d.ts"
+      ],
+      "engrave/icons/*": [
+        "./dist/engrave/icons/*.d.ts"
+      ],
+      "blueprint": [
+        "./dist/blueprint/index.d.ts"
+      ],
+      "blueprint/icons/*": [
+        "./dist/blueprint/icons/*.d.ts"
+      ],
+      "sketch": [
+        "./dist/sketch/index.d.ts"
+      ],
+      "sketch/icons/*": [
+        "./dist/sketch/icons/*.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@angular/core": ">=17.0.0"
+  }
+}

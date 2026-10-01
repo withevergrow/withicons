@@ -1,0 +1,57 @@
+{
+  "name": "type",
+  "category": "text",
+  "description": "A serif capital T standing for text and typeface.",
+  "aliases": [
+    "font",
+    "typeface",
+    "text",
+    "typography",
+    "text-tool",
+    "font-family",
+    "letter-t",
+    "add-text"
+  ],
+  "tags": [
+    "font",
+    "text",
+    "letter",
+    "typography",
+    "editor",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 6.5 V4 H19.5 V6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 20 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "fonts",
+    "lettering",
+    "typing",
+    "write text",
+    "text box",
+    "font size",
+    "text style",
+    "serif",
+    "letters",
+    "characters",
+    "words",
+    "title text",
+    "caption",
+    "format text",
+    "typeface picker",
+    "txt"
+  ]
+}

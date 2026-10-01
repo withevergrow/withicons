@@ -1,0 +1,3861 @@
+{
+ "count": 300,
+ "categories": [
+  "navigation",
+  "arrows",
+  "actions",
+  "status",
+  "media",
+  "files",
+  "communication",
+  "users",
+  "commerce",
+  "time",
+  "devices",
+  "layout",
+  "text",
+  "maps",
+  "development",
+  "security",
+  "charts",
+  "weather",
+  "objects"
+ ],
+ "icons": [
+  {
+   "name": "chevron-down",
+   "category": "navigation",
+   "description": "Downward chevron marking dropdowns, selects, and expandable sections.",
+   "aliases": [
+    "caret-down",
+    "dropdown",
+    "expand",
+    "accordion-open",
+    "select-arrow",
+    "open",
+    "angle-down",
+    "accordion"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "chevron-left",
+   "category": "navigation",
+   "description": "Small left-pointing chevron for going back or collapsing a panel.",
+   "aliases": [
+    "caret-left",
+    "previous",
+    "back-chevron",
+    "disclosure-left",
+    "back",
+    "angle-left",
+    "collapse"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "chevron-right",
+   "category": "navigation",
+   "description": "Small right-pointing chevron for next steps, list disclosure, and breadcrumbs.",
+   "aliases": [
+    "caret-right",
+    "next",
+    "forward",
+    "disclosure-right",
+    "expand-right",
+    "angle-right",
+    "disclosure",
+    "expand"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "chevron-up",
+   "category": "navigation",
+   "description": "Upward chevron for collapsing an expanded section or scrolling to top.",
+   "aliases": [
+    "caret-up",
+    "collapse",
+    "accordion-close",
+    "dropdown-up",
+    "close-dropdown",
+    "angle-up",
+    "scroll-top"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "close",
+   "category": "navigation",
+   "description": "An X mark for closing dialogs, panels, and dismissible chips.",
+   "aliases": [
+    "x",
+    "cancel",
+    "dismiss",
+    "exit",
+    "times",
+    "cross"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "cursor",
+   "category": "navigation",
+   "description": "An arrow pointer for selection tools, clicks, and cursor states.",
+   "aliases": [
+    "mouse-pointer",
+    "pointer",
+    "select-tool",
+    "arrow-cursor",
+    "click"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "external-link",
+   "category": "navigation",
+   "description": "Arrow leaving a box, signalling a link that opens outside the current view.",
+   "aliases": [
+    "open-in-new",
+    "new-tab",
+    "launch",
+    "outbound",
+    "popout",
+    "new-window"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "home",
+   "category": "navigation",
+   "description": "A house marking the root or dashboard destination of an app.",
+   "aliases": [
+    "house",
+    "dashboard",
+    "index",
+    "start",
+    "homepage",
+    "main"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "map-pin",
+   "category": "navigation",
+   "description": "Teardrop pin marking a location on a map or an address field.",
+   "aliases": [
+    "location",
+    "marker",
+    "place",
+    "gps",
+    "address",
+    "pin-drop"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "menu",
+   "category": "navigation",
+   "description": "Three stacked bars that open the primary navigation drawer.",
+   "aliases": [
+    "hamburger",
+    "nav",
+    "bars",
+    "navigation",
+    "hamburger-menu",
+    "nav-toggle",
+    "three-lines"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "more-horizontal",
+   "category": "navigation",
+   "description": "Three horizontal dots opening an overflow menu of secondary actions.",
+   "aliases": [
+    "ellipsis",
+    "dots",
+    "overflow",
+    "kebab-horizontal",
+    "options",
+    "three-dots",
+    "meatball-menu"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "more-vertical",
+   "category": "navigation",
+   "description": "Three vertical dots for per-row or per-card action menus.",
+   "aliases": [
+    "kebab",
+    "dots-vertical",
+    "overflow-vertical",
+    "meatball",
+    "row-actions",
+    "kebab-menu",
+    "overflow",
+    "options"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "search",
+   "category": "navigation",
+   "description": "Magnifying glass for search fields, filters, and find-in-page.",
+   "aliases": [
+    "magnifier",
+    "find",
+    "lookup",
+    "magnifying-glass",
+    "query",
+    "explore"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "arrow-down",
+   "category": "arrows",
+   "description": "A straight downward arrow for moving down or descending sort.",
+   "aliases": [
+    "down",
+    "descend",
+    "move-down",
+    "sort-descending",
+    "south",
+    "scroll-down",
+    "decrease",
+    "drop"
+   ],
+   "batch": 1
+  },
+  {
+   "name": "arrow-down-right",
+   "category": "arrows",
+   "description": "Diagonal arrow pointing down and to the right",
+   "aliases": [],
+   "batch": 1
+  },
+  {
+   "name": "arrow-left",
+   "category": "arrows",
+   "description": "A straight leftward arrow for back navigation and previous steps.",
+   "aliases": [
+    "left",
+    "back",
+    "go-back",
+    "previous-arrow",
+    "west",
+    "previous",
+    "return"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "arrow-right",
+   "category": "arrows",
+   "description": "A straight rightward arrow for forward navigation and calls to action.",
+   "aliases": [
+    "right",
+    "forward",
+    "continue",
+    "next-arrow",
+    "east",
+    "next",
+    "go",
+    "proceed"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "arrow-up",
+   "category": "arrows",
+   "description": "A straight upward arrow for moving up or ascending sort.",
+   "aliases": [
+    "up",
+    "ascend",
+    "move-up",
+    "sort-ascending",
+    "north",
+    "top",
+    "scroll-up",
+    "increase"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "arrow-up-left",
+   "category": "arrows",
+   "description": "Diagonal arrow pointing up and to the left",
+   "aliases": [],
+   "batch": 2
+  },
+  {
+   "name": "arrow-up-right",
+   "category": "arrows",
+   "description": "A diagonal arrow for outbound links, growth deltas, and drill-through.",
+   "aliases": [
+    "diagonal-arrow",
+    "northeast",
+    "outbound-arrow",
+    "grow-arrow",
+    "open-arrow",
+    "diagonal",
+    "outbound",
+    "growth"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "chevrons-up-down",
+   "category": "arrows",
+   "description": "Stacked up and down chevrons, a select/sort affordance",
+   "aliases": [],
+   "batch": 2
+  },
+  {
+   "name": "corner-down-right",
+   "category": "arrows",
+   "description": "An elbow arrow for replies, nested items, and indented threads.",
+   "aliases": [
+    "reply-arrow",
+    "nested",
+    "indent-arrow",
+    "branch-arrow",
+    "enter-arrow"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "move",
+   "category": "arrows",
+   "description": "Four-way arrows for dragging or repositioning an element.",
+   "aliases": [
+    "drag",
+    "reposition",
+    "pan",
+    "four-arrows",
+    "translate",
+    "relocate"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "refresh",
+   "category": "arrows",
+   "description": "Circular arrows that reload data or retry a failed request.",
+   "aliases": [
+    "reload",
+    "sync",
+    "retry",
+    "rotate-cw",
+    "update",
+    "restart",
+    "rotate"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "rotate-ccw",
+   "category": "arrows",
+   "description": "Circular arrow turning counter-clockwise",
+   "aliases": [],
+   "batch": 2
+  },
+  {
+   "name": "rotate-cw",
+   "category": "arrows",
+   "description": "Circular arrow turning clockwise",
+   "aliases": [],
+   "batch": 2
+  },
+  {
+   "name": "swap",
+   "category": "arrows",
+   "description": "Two parallel arrows pointing in opposite directions.",
+   "aliases": [
+    "exchange",
+    "transfer",
+    "switch",
+    "trade",
+    "reverse"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "bookmark",
+   "category": "actions",
+   "description": "A ribbon with a notched V cut into its bottom edge.",
+   "aliases": [
+    "save-for-later",
+    "read-later",
+    "ribbon",
+    "marker",
+    "favorite"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "check",
+   "category": "actions",
+   "description": "A bare checkmark for selection, completion, and confirm buttons.",
+   "aliases": [
+    "tick",
+    "done",
+    "confirm",
+    "accept",
+    "checkmark",
+    "complete",
+    "yes"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "clipboard",
+   "category": "actions",
+   "description": "A clipboard for pasting or for clipboard-backed actions.",
+   "aliases": [
+    "paste",
+    "board",
+    "copy-buffer",
+    "clipboard-paste",
+    "notes",
+    "tasks",
+    "checklist",
+    "copy-board"
+   ],
+   "batch": 2
+  },
+  {
+   "name": "copy",
+   "category": "actions",
+   "description": "Overlapping pages for duplicating a value or object.",
+   "aliases": [
+    "duplicate",
+    "clone",
+    "copy-to-clipboard",
+    "two-pages",
+    "clipboard-copy"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "download",
+   "category": "actions",
+   "description": "Arrow into a tray for pulling a file onto the user's device.",
+   "aliases": [
+    "save-to-device",
+    "get",
+    "arrow-down-tray",
+    "export-file",
+    "fetch",
+    "save-file",
+    "export"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "edit",
+   "category": "actions",
+   "description": "A pencil that puts content into an editable state.",
+   "aliases": [
+    "pencil",
+    "write",
+    "modify",
+    "compose",
+    "rename",
+    "update"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "eraser",
+   "category": "actions",
+   "description": "A block eraser, angled",
+   "aliases": [],
+   "batch": 3
+  },
+  {
+   "name": "link",
+   "category": "actions",
+   "description": "Interlocking chain links for inserting or displaying a hyperlink.",
+   "aliases": [
+    "hyperlink",
+    "url",
+    "chain",
+    "anchor",
+    "insert-link",
+    "permalink",
+    "copy-link"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "minus",
+   "category": "actions",
+   "description": "A minus sign for removing an item or decrementing a value.",
+   "aliases": [
+    "subtract",
+    "remove",
+    "decrement",
+    "dash",
+    "collapse-item",
+    "collapse"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "minus-circle",
+   "category": "actions",
+   "description": "Minus sign inside a circle",
+   "aliases": [],
+   "batch": 3
+  },
+  {
+   "name": "paste",
+   "category": "actions",
+   "description": "A clipboard with a page laid onto its face.",
+   "aliases": [
+    "clipboard-paste",
+    "insert",
+    "apply-clipboard"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "pen-tool",
+   "category": "actions",
+   "description": "Vector pen nib, the bezier drawing tool",
+   "aliases": [],
+   "batch": 3
+  },
+  {
+   "name": "pencil",
+   "category": "actions",
+   "description": "A pencil on its own, angled for writing",
+   "aliases": [],
+   "batch": 3
+  },
+  {
+   "name": "pin",
+   "category": "actions",
+   "description": "A pushpin pressed in at an angle with its needle showing.",
+   "aliases": [
+    "pushpin",
+    "stick",
+    "keep-on-top",
+    "tack",
+    "sticky"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "plus",
+   "category": "actions",
+   "description": "A plus sign for creating or adding a new item.",
+   "aliases": [
+    "add",
+    "new",
+    "create",
+    "increment",
+    "insert"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "plus-circle",
+   "category": "actions",
+   "description": "Plus sign inside a circle",
+   "aliases": [],
+   "batch": 3
+  },
+  {
+   "name": "redo",
+   "category": "actions",
+   "description": "Forward-curving arrow that reapplies an undone action.",
+   "aliases": [
+    "rotate-right",
+    "reapply",
+    "step-forward",
+    "repeat-action",
+    "forward",
+    "restore"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "save",
+   "category": "actions",
+   "description": "A floppy disk that commits pending changes to storage.",
+   "aliases": [
+    "floppy",
+    "disk",
+    "store",
+    "persist",
+    "write-file",
+    "floppy-disk",
+    "keep"
+   ],
+   "batch": 3
+  },
+  {
+   "name": "scissors",
+   "category": "actions",
+   "description": "An open pair of scissors with crossed blades.",
+   "aliases": [
+    "cut",
+    "trim",
+    "snip",
+    "clip",
+    "shears"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "settings",
+   "category": "actions",
+   "description": "A gear opening app, account, or component settings.",
+   "aliases": [
+    "gear",
+    "cog",
+    "preferences",
+    "options",
+    "configuration",
+    "controls"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "share",
+   "category": "actions",
+   "description": "Connected nodes for sharing an item with people or other apps.",
+   "aliases": [
+    "share-node",
+    "distribute",
+    "send-to",
+    "social-share",
+    "forward-item",
+    "send",
+    "share-network",
+    "export"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "trash",
+   "category": "actions",
+   "description": "A waste bin for deleting records, files, or list rows.",
+   "aliases": [
+    "delete",
+    "bin",
+    "remove",
+    "garbage",
+    "discard",
+    "rubbish"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "undo",
+   "category": "actions",
+   "description": "Backward-curving arrow that reverses the last action.",
+   "aliases": [
+    "revert",
+    "rotate-left",
+    "step-back",
+    "unchange",
+    "rollback",
+    "back",
+    "history-back"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "unlink",
+   "category": "actions",
+   "description": "Two chain links pulled apart",
+   "aliases": [],
+   "batch": 4
+  },
+  {
+   "name": "upload",
+   "category": "actions",
+   "description": "Arrow out of a tray for sending a local file to a service.",
+   "aliases": [
+    "send-file",
+    "arrow-up-tray",
+    "import",
+    "attach-upload",
+    "push-file",
+    "publish",
+    "add-file"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "alert-circle",
+   "category": "status",
+   "description": "An exclamation in a circle for inline errors and important notices.",
+   "aliases": [
+    "important",
+    "notice",
+    "exclamation-circle",
+    "attention",
+    "error-notice",
+    "error",
+    "warning",
+    "exclamation"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "alert-triangle",
+   "category": "status",
+   "description": "An exclamation in a triangle for warnings and risky actions.",
+   "aliases": [
+    "warning",
+    "caution",
+    "warn",
+    "danger",
+    "exclamation-triangle",
+    "risk"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "badge-check",
+   "category": "status",
+   "description": "A checkmark inside a scalloped badge rosette.",
+   "aliases": [
+    "verified",
+    "approved",
+    "certified",
+    "trusted",
+    "official",
+    "seal"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "ban",
+   "category": "status",
+   "description": "A circle with a slash for blocked, disabled, or forbidden states.",
+   "aliases": [
+    "blocked",
+    "forbidden",
+    "prohibited",
+    "disabled",
+    "no-entry",
+    "restricted"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "bell-ring",
+   "category": "status",
+   "description": "Bell with ringing strokes either side",
+   "aliases": [],
+   "batch": 4
+  },
+  {
+   "name": "check-circle",
+   "category": "status",
+   "description": "A checkmark in a circle signalling a successful or completed state.",
+   "aliases": [
+    "success",
+    "complete",
+    "verified",
+    "done-circle",
+    "ok",
+    "done",
+    "confirmed",
+    "valid"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "check-square",
+   "category": "status",
+   "description": "Checkmark inside a rounded square, a ticked checkbox",
+   "aliases": [],
+   "batch": 4
+  },
+  {
+   "name": "flag",
+   "category": "status",
+   "description": "A pennant attached to a vertical pole.",
+   "aliases": [
+    "report",
+    "mark",
+    "milestone",
+    "banner",
+    "flagged",
+    "country"
+   ],
+   "batch": 4
+  },
+  {
+   "name": "heart",
+   "category": "status",
+   "description": "A heart for likes, wishlists, and saved-for-later actions.",
+   "aliases": [
+    "like",
+    "love",
+    "favorite",
+    "wishlist",
+    "save",
+    "reaction"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "help-circle",
+   "category": "status",
+   "description": "A question mark in a circle linking to help and documentation.",
+   "aliases": [
+    "question",
+    "support",
+    "faq",
+    "question-mark",
+    "assist",
+    "assistance",
+    "unknown",
+    "tooltip"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "info-circle",
+   "category": "status",
+   "description": "An 'i' in a circle for explanatory notes and tooltips.",
+   "aliases": [
+    "information",
+    "details",
+    "about",
+    "tooltip",
+    "info",
+    "note",
+    "tip",
+    "hint"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "loader",
+   "category": "status",
+   "description": "A segmented ring that animates during loading or pending work.",
+   "aliases": [
+    "spinner",
+    "loading",
+    "busy",
+    "progress-spinner",
+    "wait",
+    "progress",
+    "pending"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "star",
+   "category": "status",
+   "description": "A five-point star for ratings, favorites, and featured items.",
+   "aliases": [
+    "favorite",
+    "rating",
+    "featured",
+    "bookmark-star",
+    "highlight",
+    "rate",
+    "like"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "thumbs-down",
+   "category": "status",
+   "description": "A lowered thumb for disapproval, downvotes, and negative feedback.",
+   "aliases": [
+    "dislike",
+    "downvote",
+    "reject-feedback",
+    "negative",
+    "bad",
+    "reject",
+    "unhelpful"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "thumbs-up",
+   "category": "status",
+   "description": "A raised thumb for approval, upvotes, and positive feedback.",
+   "aliases": [
+    "like",
+    "upvote",
+    "approve",
+    "positive",
+    "good",
+    "helpful"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "x-circle",
+   "category": "status",
+   "description": "An X in a circle signalling failure or a rejected item.",
+   "aliases": [
+    "error",
+    "failed",
+    "reject",
+    "close-circle",
+    "denied",
+    "fail",
+    "invalid",
+    "cancel-circle"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "fast-forward",
+   "category": "media",
+   "description": "Double triangles that scrub playback forward.",
+   "aliases": [
+    "seek-forward",
+    "scan-forward",
+    "ff",
+    "speed-up"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "film",
+   "category": "media",
+   "description": "Film strip frame with sprocket holes",
+   "aliases": [],
+   "batch": 5
+  },
+  {
+   "name": "image",
+   "category": "media",
+   "description": "A framed rectangle containing a small sun and mountain.",
+   "aliases": [
+    "picture",
+    "photo",
+    "img",
+    "graphic",
+    "thumbnail",
+    "media"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "image-plus",
+   "category": "media",
+   "description": "Picture frame with a plus badge",
+   "aliases": [],
+   "batch": 5
+  },
+  {
+   "name": "microphone-off",
+   "category": "media",
+   "description": "A microphone crossed out by a diagonal slash.",
+   "aliases": [
+    "mute-mic",
+    "mic-muted",
+    "voice-off",
+    "no-mic",
+    "silence"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "music-note",
+   "category": "media",
+   "description": "An eighth note marking music content, playlists, and audio tracks.",
+   "aliases": [
+    "song",
+    "audio-track",
+    "tune",
+    "melody",
+    "music",
+    "audio",
+    "track",
+    "sound"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "pause",
+   "category": "media",
+   "description": "Two vertical bars that pause the current media or process.",
+   "aliases": [
+    "hold",
+    "suspend",
+    "break",
+    "pause-button",
+    "halt",
+    "two-bars",
+    "freeze"
+   ],
+   "batch": 5
+  },
+  {
+   "name": "play",
+   "category": "media",
+   "description": "A right-pointing triangle that starts or resumes playback.",
+   "aliases": [
+    "start",
+    "resume",
+    "playback",
+    "play-button",
+    "watch",
+    "begin",
+    "video-play",
+    "triangle"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "repeat",
+   "category": "media",
+   "description": "A looping arrow rectangle for repeating a track or playlist.",
+   "aliases": [
+    "loop",
+    "replay",
+    "repeat-all",
+    "cycle-playback"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "rewind",
+   "category": "media",
+   "description": "Double reversed triangles that scrub playback backward.",
+   "aliases": [
+    "seek-back",
+    "scan-back",
+    "rw",
+    "reverse-scrub"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "shuffle",
+   "category": "media",
+   "description": "Crossing arrows that randomize playback order.",
+   "aliases": [
+    "random",
+    "mix",
+    "shuffle-play",
+    "crossed-arrows"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "skip-back",
+   "category": "media",
+   "description": "Bar-capped triangle jumping to the previous track or chapter.",
+   "aliases": [
+    "previous-track",
+    "previous",
+    "back-track",
+    "skip-previous",
+    "rewind",
+    "back",
+    "restart-track"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "skip-forward",
+   "category": "media",
+   "description": "Bar-capped triangle jumping to the next track or chapter.",
+   "aliases": [
+    "next-track",
+    "next",
+    "forward-track",
+    "skip-next",
+    "fast-forward",
+    "advance",
+    "end-of-track"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "stop",
+   "category": "media",
+   "description": "A filled square that stops playback or a running job outright.",
+   "aliases": [
+    "halt",
+    "end",
+    "stop-button",
+    "square-stop",
+    "terminate",
+    "square",
+    "finish"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "video-camera",
+   "category": "media",
+   "description": "A rounded rectangle with a lens barrel jutting from one side.",
+   "aliases": [
+    "video",
+    "record-video",
+    "camcorder",
+    "webcam",
+    "film",
+    "movie"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "volume",
+   "category": "media",
+   "description": "Speaker with waves indicating audio output and volume level.",
+   "aliases": [
+    "speaker",
+    "audio",
+    "sound",
+    "volume-up",
+    "loudspeaker",
+    "loud",
+    "unmute"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "volume-off",
+   "category": "media",
+   "description": "Speaker with an X or slash for muted audio.",
+   "aliases": [
+    "mute",
+    "muted",
+    "silent",
+    "speaker-off",
+    "no-sound",
+    "volume-mute",
+    "sound-off",
+    "no-audio"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "archive",
+   "category": "files",
+   "description": "A lidded box for archiving items or representing compressed bundles.",
+   "aliases": [
+    "zip",
+    "box",
+    "compress",
+    "storage-box",
+    "archived",
+    "store",
+    "stash",
+    "backup"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "book",
+   "category": "files",
+   "description": "A closed book seen at an angle with a visible spine.",
+   "aliases": [
+    "manual",
+    "docs",
+    "guide",
+    "library",
+    "reading",
+    "handbook"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "cloud-download",
+   "category": "files",
+   "description": "A cloud with a down arrow for restoring or pulling remote data.",
+   "aliases": [
+    "restore",
+    "sync-down",
+    "pull-from-cloud",
+    "cloud-restore",
+    "download-cloud"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "cloud-upload",
+   "category": "files",
+   "description": "A cloud with an up arrow for backing up or syncing data upward.",
+   "aliases": [
+    "backup",
+    "sync-up",
+    "push-to-cloud",
+    "cloud-backup",
+    "upload-cloud"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "file",
+   "category": "files",
+   "description": "A generic page representing an untyped file or document.",
+   "aliases": [
+    "document",
+    "page",
+    "blank-file",
+    "doc",
+    "item-file",
+    "blank-page",
+    "item"
+   ],
+   "batch": 6
+  },
+  {
+   "name": "file-archive",
+   "category": "files",
+   "description": "Document with a zipper, a compressed archive",
+   "aliases": [],
+   "batch": 7
+  },
+  {
+   "name": "file-check",
+   "category": "files",
+   "description": "Document with a checkmark",
+   "aliases": [],
+   "batch": 7
+  },
+  {
+   "name": "file-code",
+   "category": "files",
+   "description": "A page with angle brackets for source code files.",
+   "aliases": [
+    "code-file",
+    "source-file",
+    "script",
+    "snippet-file",
+    "dev-file",
+    "code-document",
+    "program"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-image",
+   "category": "files",
+   "description": "A page containing a picture, for image assets and uploads.",
+   "aliases": [
+    "image-file",
+    "photo-file",
+    "picture-file",
+    "media-file"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-pdf",
+   "category": "files",
+   "description": "A page badged PDF for printable document downloads.",
+   "aliases": [
+    "pdf",
+    "pdf-document",
+    "acrobat",
+    "portable-document"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-plus",
+   "category": "files",
+   "description": "A page with a plus for creating a new file.",
+   "aliases": [
+    "new-file",
+    "add-file",
+    "create-document",
+    "new-document",
+    "create-file",
+    "new-page",
+    "blank-new"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-search",
+   "category": "files",
+   "description": "Document with a magnifying glass",
+   "aliases": [],
+   "batch": 7
+  },
+  {
+   "name": "file-spreadsheet",
+   "category": "files",
+   "description": "A page with a grid for spreadsheet and CSV exports.",
+   "aliases": [
+    "csv",
+    "excel",
+    "sheet",
+    "xls",
+    "table-file"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-text",
+   "category": "files",
+   "description": "A page with text lines for written documents and notes.",
+   "aliases": [
+    "document-text",
+    "text-file",
+    "article",
+    "txt",
+    "notes-file",
+    "document",
+    "notes",
+    "report"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "file-video",
+   "category": "files",
+   "description": "Document with a play triangle",
+   "aliases": [],
+   "batch": 7
+  },
+  {
+   "name": "files",
+   "category": "files",
+   "description": "Two stacked documents",
+   "aliases": [],
+   "batch": 7
+  },
+  {
+   "name": "folder",
+   "category": "files",
+   "description": "A closed folder representing a directory or grouping.",
+   "aliases": [
+    "directory",
+    "dir",
+    "group-files",
+    "collection",
+    "group",
+    "category"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "folder-open",
+   "category": "files",
+   "description": "An open folder marking the directory currently being viewed.",
+   "aliases": [
+    "open-directory",
+    "expanded-folder",
+    "browse",
+    "current-folder",
+    "opened"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "folder-plus",
+   "category": "files",
+   "description": "A folder with a plus for creating a new directory.",
+   "aliases": [
+    "new-folder",
+    "add-folder",
+    "create-directory",
+    "mkdir"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "paperclip",
+   "category": "files",
+   "description": "A paperclip for attaching files to messages, issues, or records.",
+   "aliases": [
+    "attach",
+    "clip",
+    "add-file-inline",
+    "enclosure",
+    "attachment",
+    "file-attach"
+   ],
+   "batch": 7
+  },
+  {
+   "name": "sticky-note",
+   "category": "files",
+   "description": "A square note with one dog-eared corner.",
+   "aliases": [
+    "note",
+    "memo",
+    "reminder",
+    "annotation",
+    "post-it"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "at-sign",
+   "category": "communication",
+   "description": "An @ symbol for mentions, handles, and email identifiers.",
+   "aliases": [
+    "mention",
+    "handle",
+    "username",
+    "email-at",
+    "tag-person",
+    "email-symbol"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "bell",
+   "category": "communication",
+   "description": "A bell for the notification center and alert subscriptions.",
+   "aliases": [
+    "notification",
+    "alert",
+    "notify",
+    "reminder",
+    "ring-bell",
+    "ring",
+    "announcement"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "bell-off",
+   "category": "communication",
+   "description": "A struck-through bell for muted or snoozed notifications.",
+   "aliases": [
+    "mute-notifications",
+    "silence",
+    "do-not-disturb",
+    "notifications-off",
+    "snooze-alerts",
+    "mute",
+    "snooze"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "headset",
+   "category": "communication",
+   "description": "Headphones fitted with a boom microphone.",
+   "aliases": [
+    "support",
+    "customer-service",
+    "call-center",
+    "agent",
+    "live-help"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "inbox",
+   "category": "communication",
+   "description": "An open tray holding incoming messages, tasks, or requests.",
+   "aliases": [
+    "tray",
+    "incoming",
+    "received",
+    "message-tray",
+    "queue",
+    "mailbox"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "mail",
+   "category": "communication",
+   "description": "A sealed envelope for email addresses, messages, and contact links.",
+   "aliases": [
+    "email",
+    "envelope",
+    "message",
+    "letter",
+    "inbox-item",
+    "contact",
+    "inbox"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "mail-open",
+   "category": "communication",
+   "description": "An opened envelope marking a message that has been read.",
+   "aliases": [
+    "email-read",
+    "opened-envelope",
+    "read-message",
+    "newsletter-open"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "megaphone",
+   "category": "communication",
+   "description": "A handheld megaphone pointing up and to the right.",
+   "aliases": [
+    "announcement",
+    "broadcast",
+    "promote",
+    "marketing",
+    "campaign",
+    "shout"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "message-circle",
+   "category": "communication",
+   "description": "A rounded speech bubble for chat threads and conversations.",
+   "aliases": [
+    "chat",
+    "comment",
+    "bubble",
+    "conversation",
+    "talk",
+    "direct-message"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "message-square",
+   "category": "communication",
+   "description": "A squared speech bubble for comments, feedback, and discussion counts.",
+   "aliases": [
+    "comment-box",
+    "chat-box",
+    "feedback",
+    "note-bubble",
+    "discussion",
+    "comment",
+    "chat",
+    "note"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "messages",
+   "category": "communication",
+   "description": "Two overlapping speech bubbles, a conversation",
+   "aliases": [],
+   "batch": 8
+  },
+  {
+   "name": "phone",
+   "category": "communication",
+   "description": "A handset for phone numbers and placing voice calls.",
+   "aliases": [
+    "call",
+    "telephone",
+    "dial",
+    "ring",
+    "voice-call",
+    "contact"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "phone-call",
+   "category": "communication",
+   "description": "Handset with outgoing signal arcs",
+   "aliases": [],
+   "batch": 8
+  },
+  {
+   "name": "phone-off",
+   "category": "communication",
+   "description": "A struck-through handset for ending or declining a call.",
+   "aliases": [
+    "hang-up",
+    "end-call",
+    "decline-call",
+    "call-ended",
+    "no-calls"
+   ],
+   "batch": 8
+  },
+  {
+   "name": "reply",
+   "category": "communication",
+   "description": "An arrow curving back to the left over a baseline.",
+   "aliases": [
+    "respond",
+    "answer",
+    "re",
+    "back-to-sender",
+    "comment-back"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "rss",
+   "category": "communication",
+   "description": "Broadcast arcs for RSS feeds and content subscriptions.",
+   "aliases": [
+    "feed",
+    "syndication",
+    "subscribe",
+    "atom",
+    "news-feed"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "send",
+   "category": "communication",
+   "description": "A paper plane that dispatches a composed message.",
+   "aliases": [
+    "paper-plane",
+    "submit-message",
+    "deliver",
+    "send-message",
+    "submit",
+    "message-send",
+    "dispatch"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "video-call",
+   "category": "communication",
+   "description": "A camera in a frame for video meetings and calls.",
+   "aliases": [
+    "video-chat",
+    "meeting",
+    "webcam-call",
+    "join-call",
+    "conference"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "address-book",
+   "category": "users",
+   "description": "A bound book with edge tabs and a person on the cover.",
+   "aliases": [
+    "contacts",
+    "phonebook",
+    "directory",
+    "contact-list",
+    "people-list"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "id-card",
+   "category": "users",
+   "description": "A photo badge for identity documents and profile cards.",
+   "aliases": [
+    "badge",
+    "identity",
+    "credentials",
+    "profile-card",
+    "license",
+    "pass"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "log-in",
+   "category": "users",
+   "description": "An arrow entering a door for signing in to an account.",
+   "aliases": [
+    "sign-in",
+    "enter",
+    "login",
+    "authenticate",
+    "session-start",
+    "access"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "log-out",
+   "category": "users",
+   "description": "An arrow leaving a door for signing out and ending a session.",
+   "aliases": [
+    "sign-out",
+    "exit",
+    "logout",
+    "leave",
+    "end-session",
+    "quit",
+    "disconnect"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "smile",
+   "category": "users",
+   "description": "A smiling face for emoji pickers and reaction controls.",
+   "aliases": [
+    "emoji",
+    "reaction",
+    "emoticon",
+    "happy",
+    "face",
+    "feedback"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "user",
+   "category": "users",
+   "description": "A single silhouette representing a person or account.",
+   "aliases": [
+    "person",
+    "account",
+    "profile",
+    "avatar",
+    "member",
+    "individual"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "user-check",
+   "category": "users",
+   "description": "A person silhouette with a checkmark beside it.",
+   "aliases": [
+    "verified-user",
+    "approved",
+    "following",
+    "member-confirmed",
+    "accepted"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "user-circle",
+   "category": "users",
+   "description": "A person inside a circle, the default avatar and account entry point.",
+   "aliases": [
+    "avatar-placeholder",
+    "profile-picture",
+    "account-circle",
+    "headshot",
+    "my-account",
+    "avatar",
+    "person-circle"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "user-minus",
+   "category": "users",
+   "description": "Person with a minus badge",
+   "aliases": [],
+   "batch": 9
+  },
+  {
+   "name": "user-plus",
+   "category": "users",
+   "description": "A person with a plus for invitations and following someone.",
+   "aliases": [
+    "add-user",
+    "invite",
+    "new-member",
+    "follow",
+    "add-contact",
+    "add-person"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "user-x",
+   "category": "users",
+   "description": "A person with an X for removing, blocking, or revoking a member.",
+   "aliases": [
+    "remove-user",
+    "block-user",
+    "unfollow",
+    "revoke-access",
+    "deactivate"
+   ],
+   "batch": 9
+  },
+  {
+   "name": "users",
+   "category": "users",
+   "description": "Multiple silhouettes for teams, groups, and audience counts.",
+   "aliases": [
+    "group",
+    "team",
+    "people",
+    "members",
+    "community",
+    "audience"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "banknote",
+   "category": "commerce",
+   "description": "Paper banknote with a centre circle",
+   "aliases": [],
+   "batch": 10
+  },
+  {
+   "name": "barcode",
+   "category": "commerce",
+   "description": "Vertical barcode bars",
+   "aliases": [],
+   "batch": 10
+  },
+  {
+   "name": "calculator",
+   "category": "commerce",
+   "description": "Calculator with display and keypad",
+   "aliases": [],
+   "batch": 10
+  },
+  {
+   "name": "coins",
+   "category": "commerce",
+   "description": "Stack of coins",
+   "aliases": [],
+   "batch": 10
+  },
+  {
+   "name": "credit-card",
+   "category": "commerce",
+   "description": "A payment card for billing details and card-on-file settings.",
+   "aliases": [
+    "card",
+    "payment",
+    "debit-card",
+    "pay",
+    "billing",
+    "checkout",
+    "debit"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "dollar-sign",
+   "category": "commerce",
+   "description": "A currency glyph for monetary amounts, pricing, and revenue.",
+   "aliases": [
+    "money",
+    "currency",
+    "price",
+    "cost",
+    "usd",
+    "revenue",
+    "payment"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "gift",
+   "category": "commerce",
+   "description": "A ribboned box for gifts, rewards, referrals, and perks.",
+   "aliases": [
+    "present",
+    "reward",
+    "gift-box",
+    "bonus",
+    "referral",
+    "gift-card",
+    "surprise"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "landmark",
+   "category": "commerce",
+   "description": "Classical bank building with columns and pediment",
+   "aliases": [],
+   "batch": 10
+  },
+  {
+   "name": "package",
+   "category": "commerce",
+   "description": "A sealed box for products, shipments, and inventory records.",
+   "aliases": [
+    "box",
+    "parcel",
+    "shipment",
+    "product",
+    "inventory-item",
+    "inventory",
+    "delivery-box"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "percent",
+   "category": "commerce",
+   "description": "The % symbol, two small circles split by a diagonal stroke.",
+   "aliases": [
+    "discount",
+    "sale",
+    "offer",
+    "rate",
+    "interest",
+    "off"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "qr-code",
+   "category": "commerce",
+   "description": "A square matrix of modules with three large corner markers.",
+   "aliases": [
+    "scan",
+    "barcode",
+    "code",
+    "ticket",
+    "check-in",
+    "link-code"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "receipt",
+   "category": "commerce",
+   "description": "A scalloped slip for invoices, receipts, and billing history.",
+   "aliases": [
+    "invoice",
+    "bill",
+    "order-receipt",
+    "proof-of-purchase",
+    "statement",
+    "transaction"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "shopping-bag",
+   "category": "commerce",
+   "description": "A handled bag for purchases, orders, and storefront entry points.",
+   "aliases": [
+    "bag",
+    "purchase",
+    "tote",
+    "store-bag",
+    "order-bag",
+    "shop",
+    "order"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "shopping-cart",
+   "category": "commerce",
+   "description": "A wheeled cart for the shopping cart and checkout flow.",
+   "aliases": [
+    "cart",
+    "basket-cart",
+    "checkout",
+    "trolley",
+    "buy",
+    "basket",
+    "add-to-cart"
+   ],
+   "batch": 10
+  },
+  {
+   "name": "store",
+   "category": "commerce",
+   "description": "An awninged storefront for merchants, shops, and business profiles.",
+   "aliases": [
+    "shop",
+    "storefront",
+    "retail",
+    "market",
+    "business",
+    "merchant"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "tag",
+   "category": "commerce",
+   "description": "A price tag for labels, categories, pricing, and promotions.",
+   "aliases": [
+    "price-tag",
+    "label",
+    "discount",
+    "sale",
+    "category-tag",
+    "price",
+    "category",
+    "keyword"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "ticket",
+   "category": "commerce",
+   "description": "Admission ticket with notched sides",
+   "aliases": [],
+   "batch": 11
+  },
+  {
+   "name": "truck",
+   "category": "commerce",
+   "description": "A delivery truck for shipping options and order-in-transit status.",
+   "aliases": [
+    "shipping",
+    "delivery",
+    "freight",
+    "logistics",
+    "in-transit",
+    "transport",
+    "courier"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "wallet",
+   "category": "commerce",
+   "description": "A wallet representing stored balance, payout methods, or credits.",
+   "aliases": [
+    "purse",
+    "balance",
+    "funds",
+    "billfold",
+    "account-balance",
+    "money",
+    "payment-method"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "alarm-clock",
+   "category": "time",
+   "description": "A belled clock for alarms and time-based reminders.",
+   "aliases": [
+    "wake",
+    "reminder",
+    "snooze",
+    "ring-time",
+    "alarm",
+    "ring",
+    "wake-up"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "calendar",
+   "category": "time",
+   "description": "A month grid for dates, schedules, and calendar views.",
+   "aliases": [
+    "date",
+    "schedule",
+    "month",
+    "planner",
+    "events",
+    "event",
+    "agenda"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "calendar-check",
+   "category": "time",
+   "description": "A calendar with a checkmark for confirmed bookings and completed dates.",
+   "aliases": [
+    "booked",
+    "scheduled",
+    "event-confirmed",
+    "rsvp",
+    "date-done"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "calendar-days",
+   "category": "time",
+   "description": "Calendar page showing a grid of days",
+   "aliases": [],
+   "batch": 11
+  },
+  {
+   "name": "calendar-plus",
+   "category": "time",
+   "description": "A calendar with a plus for booking or creating an event.",
+   "aliases": [
+    "add-event",
+    "new-event",
+    "book",
+    "schedule-add",
+    "create-meeting",
+    "schedule-event",
+    "reserve"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "clock",
+   "category": "time",
+   "description": "An analog clock face for times, durations, and time pickers.",
+   "aliases": [
+    "time",
+    "watch",
+    "hour",
+    "schedule-time",
+    "duration",
+    "schedule",
+    "current-time"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "history",
+   "category": "time",
+   "description": "A clock with a backward arrow for recent activity and revision history.",
+   "aliases": [
+    "recent",
+    "past",
+    "revisions",
+    "clock-rewind",
+    "activity-log",
+    "previous-versions",
+    "revert",
+    "timeline"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "hourglass",
+   "category": "time",
+   "description": "An hourglass for pending, queued, or long-running states.",
+   "aliases": [
+    "pending",
+    "waiting",
+    "sandglass",
+    "in-progress",
+    "time-remaining",
+    "time-left"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "timer",
+   "category": "time",
+   "description": "A stopwatch for countdowns, timers, and measured durations.",
+   "aliases": [
+    "stopwatch",
+    "countdown",
+    "chronometer",
+    "lap",
+    "elapsed",
+    "duration"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "battery",
+   "category": "devices",
+   "description": "A battery cell showing charge level or power status.",
+   "aliases": [
+    "power-level",
+    "charge",
+    "energy",
+    "battery-status",
+    "power",
+    "remaining",
+    "charging"
+   ],
+   "batch": 11
+  },
+  {
+   "name": "battery-charging",
+   "category": "devices",
+   "description": "Battery with a lightning bolt",
+   "aliases": [],
+   "batch": 12
+  },
+  {
+   "name": "bluetooth",
+   "category": "devices",
+   "description": "The Bluetooth rune for device pairing and short-range links.",
+   "aliases": [
+    "bt",
+    "pairing",
+    "wireless-device",
+    "bluetooth-connect"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "camera",
+   "category": "devices",
+   "description": "A camera body for taking photos and capturing screenshots.",
+   "aliases": [
+    "photo",
+    "snapshot",
+    "capture",
+    "take-picture",
+    "dslr",
+    "shot"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "cpu",
+   "category": "devices",
+   "description": "A square chip with pins for processors, compute, and hardware specs.",
+   "aliases": [
+    "chip",
+    "processor",
+    "microchip",
+    "silicon",
+    "hardware",
+    "compute",
+    "performance"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "gamepad",
+   "category": "devices",
+   "description": "Game controller with d-pad and buttons",
+   "aliases": [],
+   "batch": 12
+  },
+  {
+   "name": "headphones",
+   "category": "devices",
+   "description": "Over-ear headphones for audio output devices and listening modes.",
+   "aliases": [
+    "headset",
+    "earphones",
+    "listen",
+    "audio-device",
+    "podcast",
+    "audio",
+    "music",
+    "sound"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "keyboard",
+   "category": "devices",
+   "description": "A key grid for typing, input settings, and keyboard shortcuts.",
+   "aliases": [
+    "keys",
+    "typing",
+    "keypad",
+    "input-device",
+    "shortcuts",
+    "input",
+    "type",
+    "shortcut"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "laptop",
+   "category": "devices",
+   "description": "An open laptop representing portable computers and desktop breakpoints.",
+   "aliases": [
+    "notebook",
+    "portable-computer",
+    "macbook",
+    "device-laptop",
+    "computer",
+    "pc",
+    "workstation",
+    "device"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "microphone",
+   "category": "devices",
+   "description": "A microphone for voice input, recording, and push-to-talk.",
+   "aliases": [
+    "mic",
+    "voice",
+    "audio-input",
+    "record-voice",
+    "talk",
+    "record",
+    "speak"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "monitor",
+   "category": "devices",
+   "description": "A desktop screen for desktop devices and display settings.",
+   "aliases": [
+    "desktop",
+    "screen",
+    "display",
+    "computer",
+    "pc",
+    "computer-screen",
+    "television"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "mouse",
+   "category": "devices",
+   "description": "Computer mouse with a scroll wheel",
+   "aliases": [],
+   "batch": 12
+  },
+  {
+   "name": "plug",
+   "category": "devices",
+   "description": "A plug for integrations, connected apps, and power connections.",
+   "aliases": [
+    "connector",
+    "integration",
+    "outlet",
+    "adapter",
+    "power-connect"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "power",
+   "category": "devices",
+   "description": "A circle broken at the top by an upright stroke.",
+   "aliases": [
+    "on-off",
+    "shutdown",
+    "standby",
+    "restart",
+    "toggle-power"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "printer",
+   "category": "devices",
+   "description": "A printer for print actions and printable document views.",
+   "aliases": [
+    "print",
+    "hardcopy",
+    "printing",
+    "print-preview",
+    "output-device",
+    "output",
+    "paper"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "server",
+   "category": "devices",
+   "description": "Stacked rack units representing servers and backend infrastructure.",
+   "aliases": [
+    "host",
+    "backend",
+    "rack",
+    "node",
+    "infrastructure",
+    "hosting",
+    "machine"
+   ],
+   "batch": 12
+  },
+  {
+   "name": "signal",
+   "category": "devices",
+   "description": "Ascending bars showing cellular reception or signal strength.",
+   "aliases": [
+    "cellular",
+    "bars",
+    "reception",
+    "mobile-signal",
+    "strength"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "smartphone",
+   "category": "devices",
+   "description": "A handheld phone for mobile devices and responsive breakpoints.",
+   "aliases": [
+    "mobile",
+    "phone-device",
+    "cell",
+    "handset",
+    "ios-android",
+    "cell-phone",
+    "device",
+    "touchscreen"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "tablet",
+   "category": "devices",
+   "description": "A tablet slab for tablet devices and mid-size breakpoints.",
+   "aliases": [
+    "ipad",
+    "slate",
+    "pad",
+    "tablet-device",
+    "medium-screen",
+    "touchscreen",
+    "e-reader",
+    "device"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "tv",
+   "category": "devices",
+   "description": "Television screen on a small stand",
+   "aliases": [],
+   "batch": 13
+  },
+  {
+   "name": "watch",
+   "category": "devices",
+   "description": "Wristwatch with strap",
+   "aliases": [],
+   "batch": 13
+  },
+  {
+   "name": "wifi",
+   "category": "devices",
+   "description": "Signal arcs indicating a wireless network connection.",
+   "aliases": [
+    "wireless",
+    "network",
+    "hotspot",
+    "internet",
+    "connected",
+    "signal",
+    "connection"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "wifi-off",
+   "category": "devices",
+   "description": "Struck-through signal arcs for offline or lost connectivity.",
+   "aliases": [
+    "offline",
+    "disconnected",
+    "no-network",
+    "network-off",
+    "no-internet"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "columns",
+   "category": "layout",
+   "description": "Vertical panes for split or multi-column layouts.",
+   "aliases": [
+    "split-view",
+    "two-pane",
+    "side-by-side",
+    "panes",
+    "split-screen"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "crop",
+   "category": "layout",
+   "description": "Two overlapping L-shaped rulers forming a crop frame.",
+   "aliases": [
+    "trim",
+    "frame",
+    "resize-image",
+    "aspect-ratio",
+    "cut-image"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "drag-handle",
+   "category": "layout",
+   "description": "A grip of dots that makes a row or card draggable.",
+   "aliases": [
+    "grip",
+    "reorder-handle",
+    "move-handle",
+    "dots-grid",
+    "sortable",
+    "reorder",
+    "handle"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "filter",
+   "category": "layout",
+   "description": "A funnel for narrowing a list or table by criteria.",
+   "aliases": [
+    "funnel",
+    "refine",
+    "facets",
+    "narrow",
+    "filter-list",
+    "sift"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "kanban",
+   "category": "layout",
+   "description": "Three columns of cards, a kanban board",
+   "aliases": [],
+   "batch": 13
+  },
+  {
+   "name": "layers",
+   "category": "layout",
+   "description": "Stacked sheets representing layers, overlays, and grouped objects.",
+   "aliases": [
+    "stack",
+    "z-order",
+    "overlays",
+    "groups",
+    "layer-panel",
+    "levels",
+    "z-index",
+    "elevation"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "layout-dashboard",
+   "category": "layout",
+   "description": "Dashboard of four panels of unequal size",
+   "aliases": [],
+   "batch": 13
+  },
+  {
+   "name": "layout-grid",
+   "category": "layout",
+   "description": "Equal tiles switching a collection into grid or card view.",
+   "aliases": [
+    "grid-view",
+    "tiles",
+    "gallery-view",
+    "apps",
+    "cards",
+    "grid",
+    "gallery",
+    "modules"
+   ],
+   "batch": 13
+  },
+  {
+   "name": "layout-list",
+   "category": "layout",
+   "description": "Stacked rows switching a collection into list view.",
+   "aliases": [
+    "list-view",
+    "rows",
+    "compact-view",
+    "feed-view",
+    "table-rows"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "maximize",
+   "category": "layout",
+   "description": "Outward corner arrows that expand a view to fullscreen.",
+   "aliases": [
+    "fullscreen",
+    "expand",
+    "enlarge",
+    "full-view",
+    "grow",
+    "full-screen"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "minimize",
+   "category": "layout",
+   "description": "Inward corner arrows that exit fullscreen or shrink a panel.",
+   "aliases": [
+    "exit-fullscreen",
+    "shrink",
+    "collapse-view",
+    "restore",
+    "contract",
+    "collapse",
+    "restore-down",
+    "reduce"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "sidebar",
+   "category": "layout",
+   "description": "A frame with a side rail for toggling the navigation panel.",
+   "aliases": [
+    "side-panel",
+    "drawer",
+    "nav-panel",
+    "toggle-sidebar",
+    "rail",
+    "panel",
+    "navigation-panel",
+    "aside"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "sliders",
+   "category": "layout",
+   "description": "Horizontal tracks each carrying a draggable knob.",
+   "aliases": [
+    "controls",
+    "adjust",
+    "equalizer",
+    "tuning",
+    "filters",
+    "settings-panel"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "sort",
+   "category": "layout",
+   "description": "Stacked lines with arrows for changing sort order of a collection.",
+   "aliases": [
+    "order",
+    "arrange",
+    "reorder",
+    "sort-list",
+    "asc-desc",
+    "ascending",
+    "descending"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "table",
+   "category": "layout",
+   "description": "A ruled grid for tabular data views and table layouts.",
+   "aliases": [
+    "datagrid",
+    "rows-columns",
+    "spreadsheet-view",
+    "grid-data",
+    "sheet",
+    "spreadsheet",
+    "data-grid",
+    "rows-and-columns"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "toggle",
+   "category": "layout",
+   "description": "A pill-shaped track with a round knob resting at one end.",
+   "aliases": [
+    "switch",
+    "on-off",
+    "enable",
+    "flip",
+    "feature-flag"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "zoom-in",
+   "category": "layout",
+   "description": "A magnifier with a plus for zooming into content.",
+   "aliases": [
+    "magnify",
+    "enlarge-view",
+    "scale-up",
+    "zoom-plus",
+    "closer",
+    "enlarge",
+    "search-plus"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "zoom-out",
+   "category": "layout",
+   "description": "A magnifier with a minus for zooming out of content.",
+   "aliases": [
+    "reduce",
+    "shrink-view",
+    "scale-down",
+    "zoom-minus",
+    "wider",
+    "shrink",
+    "search-minus"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "align-center",
+   "category": "text",
+   "description": "Centered lines aligning text or content to the middle.",
+   "aliases": [
+    "center-align",
+    "text-center",
+    "centered",
+    "middle-align",
+    "center-text",
+    "justify-center"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "align-justify",
+   "category": "text",
+   "description": "Text lines all of equal length",
+   "aliases": [],
+   "batch": 14
+  },
+  {
+   "name": "align-left",
+   "category": "text",
+   "description": "Left-flush lines aligning text or content to the left edge.",
+   "aliases": [
+    "left-align",
+    "text-left",
+    "ragged-right",
+    "justify-left"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "align-right",
+   "category": "text",
+   "description": "Right-flush lines aligning text or content to the right edge.",
+   "aliases": [
+    "right-align",
+    "text-right",
+    "ragged-left",
+    "justify-right"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "bold",
+   "category": "text",
+   "description": "A heavy B applying bold weight to selected text.",
+   "aliases": [
+    "strong",
+    "heavy",
+    "bold-text",
+    "b",
+    "weight",
+    "text-bold"
+   ],
+   "batch": 14
+  },
+  {
+   "name": "hash",
+   "category": "text",
+   "description": "A hash symbol for topics, tags, and chat channels.",
+   "aliases": [
+    "hashtag",
+    "topic",
+    "channel",
+    "pound",
+    "number-sign"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "heading",
+   "category": "text",
+   "description": "Heading letter H",
+   "aliases": [],
+   "batch": 15
+  },
+  {
+   "name": "italic",
+   "category": "text",
+   "description": "A slanted I applying italic emphasis to selected text.",
+   "aliases": [
+    "emphasis",
+    "slanted",
+    "italic-text",
+    "i",
+    "oblique",
+    "cursive"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "language",
+   "category": "text",
+   "description": "A Latin letter set beside a non-Latin character.",
+   "aliases": [
+    "translate",
+    "localization",
+    "internationalization",
+    "dictionary",
+    "multilingual"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "list-checks",
+   "category": "text",
+   "description": "Checklist with checkmarks beside lines",
+   "aliases": [],
+   "batch": 15
+  },
+  {
+   "name": "list-ordered",
+   "category": "text",
+   "description": "Numbered lines for ordered lists and step sequences.",
+   "aliases": [
+    "numbered-list",
+    "ol",
+    "ordered-list",
+    "steps",
+    "enumerate",
+    "ranking"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "quote",
+   "category": "text",
+   "description": "Quotation marks for block quotes and cited passages.",
+   "aliases": [
+    "blockquote",
+    "quotation",
+    "citation",
+    "pull-quote",
+    "cite",
+    "testimonial"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "strikethrough",
+   "category": "text",
+   "description": "A struck-through S marking text as deleted or done.",
+   "aliases": [
+    "strike",
+    "line-through",
+    "crossed-out",
+    "deleted-text",
+    "cross-out",
+    "s"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "type",
+   "category": "text",
+   "description": "A serif capital T standing for text and typeface.",
+   "aliases": [
+    "font",
+    "text",
+    "typography",
+    "letter",
+    "characters",
+    "heading"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "underline",
+   "category": "text",
+   "description": "An underscored U applying an underline to selected text.",
+   "aliases": [
+    "underlined",
+    "u",
+    "underscore-text",
+    "text-underline",
+    "decorate",
+    "line-under"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "anchor",
+   "category": "maps",
+   "description": "Ship anchor",
+   "aliases": [],
+   "batch": 15
+  },
+  {
+   "name": "building",
+   "category": "maps",
+   "description": "A tall block building with a grid of windows and a doorway.",
+   "aliases": [
+    "office",
+    "company",
+    "business",
+    "city",
+    "apartment",
+    "organization"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "car",
+   "category": "maps",
+   "description": "A car viewed from the side with two visible wheels.",
+   "aliases": [
+    "vehicle",
+    "drive",
+    "auto",
+    "ride",
+    "transport",
+    "parking"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "compass",
+   "category": "maps",
+   "description": "A compass rose for explore, discover, or wayfinding sections.",
+   "aliases": [
+    "explore",
+    "discover",
+    "navigate",
+    "directions",
+    "browse",
+    "direction",
+    "orientation",
+    "north"
+   ],
+   "batch": 15
+  },
+  {
+   "name": "crosshair",
+   "category": "maps",
+   "description": "Circle with crosshair ticks, locate me",
+   "aliases": [],
+   "batch": 15
+  },
+  {
+   "name": "globe",
+   "category": "maps",
+   "description": "A globe for language pickers, regions, public visibility, and the open web.",
+   "aliases": [
+    "world",
+    "internet",
+    "language",
+    "international",
+    "region",
+    "web",
+    "earth"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "map",
+   "category": "maps",
+   "description": "A folded paper map with visible fold creases.",
+   "aliases": [
+    "atlas",
+    "directions",
+    "area",
+    "guide",
+    "route-map"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "mountain",
+   "category": "maps",
+   "description": "Mountain peaks",
+   "aliases": [],
+   "batch": 16
+  },
+  {
+   "name": "navigation",
+   "category": "maps",
+   "description": "Navigation arrowhead pointing north-east",
+   "aliases": [],
+   "batch": 16
+  },
+  {
+   "name": "plane",
+   "category": "maps",
+   "description": "An aeroplane seen from above with its nose angled up.",
+   "aliases": [
+    "flight",
+    "travel",
+    "airplane",
+    "airport",
+    "trip",
+    "departure"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "route",
+   "category": "maps",
+   "description": "A winding route between two points",
+   "aliases": [],
+   "batch": 16
+  },
+  {
+   "name": "bot",
+   "category": "development",
+   "description": "A robot head representing assistants, agents, and automated senders.",
+   "aliases": [
+    "robot",
+    "assistant",
+    "chatbot",
+    "agent",
+    "ai-bot",
+    "ai",
+    "automation"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "braces",
+   "category": "development",
+   "description": "Curly braces, code block",
+   "aliases": [],
+   "batch": 16
+  },
+  {
+   "name": "brain",
+   "category": "development",
+   "description": "A brain for models, reasoning modes, and machine learning features.",
+   "aliases": [
+    "intelligence",
+    "model",
+    "neural",
+    "reasoning",
+    "ml"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "bug",
+   "category": "development",
+   "description": "A beetle for bug reports, defects, and debugging tools.",
+   "aliases": [
+    "defect",
+    "issue",
+    "debug",
+    "problem",
+    "error-report",
+    "error",
+    "crash"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "code",
+   "category": "development",
+   "description": "Angle brackets for code blocks, snippets, and developer views.",
+   "aliases": [
+    "source",
+    "snippet",
+    "angle-brackets",
+    "programming",
+    "dev",
+    "brackets",
+    "developer",
+    "markup"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "git-branch",
+   "category": "development",
+   "description": "A forking line representing a branch in version control.",
+   "aliases": [
+    "branch",
+    "fork",
+    "version-control",
+    "vcs",
+    "checkout",
+    "merge",
+    "commit-tree",
+    "repository"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "git-commit",
+   "category": "development",
+   "description": "A node on a line representing a single commit or revision.",
+   "aliases": [
+    "commit",
+    "revision",
+    "changeset",
+    "sha",
+    "snapshot"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "git-merge",
+   "category": "development",
+   "description": "Two branches merging into one",
+   "aliases": [],
+   "batch": 16
+  },
+  {
+   "name": "git-pull-request",
+   "category": "development",
+   "description": "A merging branch representing a pull or merge request.",
+   "aliases": [
+    "pr",
+    "merge-request",
+    "pull",
+    "code-review",
+    "mr"
+   ],
+   "batch": 16
+  },
+  {
+   "name": "sparkles",
+   "category": "development",
+   "description": "Clustered sparkles marking AI-generated or auto-enhanced actions.",
+   "aliases": [
+    "ai",
+    "magic",
+    "generate",
+    "enhance",
+    "smart",
+    "autofill",
+    "auto",
+    "stars"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "terminal",
+   "category": "development",
+   "description": "A prompt caret in a window for terminals and CLI output.",
+   "aliases": [
+    "console",
+    "shell",
+    "cli",
+    "command-line",
+    "prompt",
+    "bash"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "wand",
+   "category": "development",
+   "description": "Magic wand with sparkle, AI or auto action",
+   "aliases": [],
+   "batch": 17
+  },
+  {
+   "name": "webhook",
+   "category": "development",
+   "description": "Three linked nodes, a webhook",
+   "aliases": [],
+   "batch": 17
+  },
+  {
+   "name": "wrench",
+   "category": "development",
+   "description": "An open-ended spanner set on a diagonal.",
+   "aliases": [
+    "tools",
+    "fix",
+    "repair",
+    "maintenance",
+    "configure",
+    "build"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "eye",
+   "category": "security",
+   "description": "An open eye for showing hidden values and view counts.",
+   "aliases": [
+    "view",
+    "visible",
+    "show",
+    "preview",
+    "watch",
+    "reveal"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "eye-off",
+   "category": "security",
+   "description": "A struck-through eye for hiding passwords and sensitive values.",
+   "aliases": [
+    "hide",
+    "hidden",
+    "invisible",
+    "conceal",
+    "mask",
+    "private"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "fingerprint",
+   "category": "security",
+   "description": "A fingerprint whorl for biometric authentication and identity.",
+   "aliases": [
+    "biometric",
+    "touch-id",
+    "identity-scan",
+    "authentication",
+    "biometrics",
+    "identity",
+    "scan",
+    "privacy"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "key",
+   "category": "security",
+   "description": "A key for passwords, API keys, and access credentials.",
+   "aliases": [
+    "password",
+    "api-key",
+    "credential",
+    "access",
+    "secret",
+    "unlock"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "lock",
+   "category": "security",
+   "description": "A closed padlock for secured, private, or restricted content.",
+   "aliases": [
+    "locked",
+    "secure",
+    "private",
+    "padlock",
+    "restricted",
+    "encrypted",
+    "protected"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "shield",
+   "category": "security",
+   "description": "A plain shield representing security features and protection.",
+   "aliases": [
+    "protection",
+    "security",
+    "guard",
+    "safety",
+    "defense",
+    "antivirus"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "shield-alert",
+   "category": "security",
+   "description": "Shield with an exclamation mark",
+   "aliases": [],
+   "batch": 17
+  },
+  {
+   "name": "shield-check",
+   "category": "security",
+   "description": "A shield with a checkmark for verified, protected, or compliant status.",
+   "aliases": [
+    "verified",
+    "protected",
+    "trusted",
+    "secure-check",
+    "compliant",
+    "safe",
+    "secured"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "unlock",
+   "category": "security",
+   "description": "An open padlock for unlocked or publicly accessible content.",
+   "aliases": [
+    "unlocked",
+    "open-lock",
+    "unsecured",
+    "access-granted",
+    "public",
+    "unprotected"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "activity",
+   "category": "charts",
+   "description": "A pulse line for live activity, health checks, and monitoring.",
+   "aliases": [
+    "pulse",
+    "heartbeat",
+    "live-metrics",
+    "monitoring",
+    "uptime"
+   ],
+   "batch": 17
+  },
+  {
+   "name": "chart-area",
+   "category": "charts",
+   "description": "Area chart, a filled line graph",
+   "aliases": [],
+   "batch": 18
+  },
+  {
+   "name": "chart-bar",
+   "category": "charts",
+   "description": "Vertical bars representing analytics dashboards and comparisons.",
+   "aliases": [
+    "column-chart",
+    "graph",
+    "analytics",
+    "stats",
+    "histogram",
+    "bar-chart",
+    "bar-graph",
+    "statistics"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "chart-line",
+   "category": "charts",
+   "description": "A rising polyline for time-series metrics and trend views.",
+   "aliases": [
+    "trend-graph",
+    "time-series",
+    "analytics-line",
+    "plot",
+    "metrics",
+    "line-chart",
+    "line-graph",
+    "trend"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "chart-pie",
+   "category": "charts",
+   "description": "A segmented circle showing composition or share of total.",
+   "aliases": [
+    "donut-chart",
+    "proportions",
+    "share-chart",
+    "segments",
+    "breakdown",
+    "pie-chart",
+    "pie-graph",
+    "donut"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "database",
+   "category": "charts",
+   "description": "Stacked cylinders representing a database or persistent datastore.",
+   "aliases": [
+    "db",
+    "datastore",
+    "records",
+    "sql",
+    "storage-stack",
+    "data",
+    "storage"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "gauge",
+   "category": "charts",
+   "description": "A dial with a needle for scores, quotas, and performance readings.",
+   "aliases": [
+    "meter",
+    "speedometer",
+    "dial",
+    "score",
+    "performance",
+    "usage"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "list",
+   "category": "charts",
+   "description": "Bulleted lines representing an unordered list or item collection.",
+   "aliases": [
+    "bullet-list",
+    "items",
+    "listing",
+    "ul",
+    "feed-list",
+    "list-view",
+    "rows",
+    "bullets"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "trending-down",
+   "category": "charts",
+   "description": "A downward arrow over a line for negative deltas and losses.",
+   "aliases": [
+    "decline",
+    "decrease",
+    "drop",
+    "loss",
+    "down-trend",
+    "fall"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "trending-up",
+   "category": "charts",
+   "description": "An upward arrow over a line for positive deltas and growth.",
+   "aliases": [
+    "growth",
+    "increase",
+    "rise",
+    "gain",
+    "up-trend",
+    "improvement"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "cloud",
+   "category": "weather",
+   "description": "A simple cloud for cloudy weather and generic cloud services.",
+   "aliases": [
+    "cloudy",
+    "overcast",
+    "sky",
+    "weather-cloud",
+    "cloud-service",
+    "sync",
+    "online",
+    "remote"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "cloud-lightning",
+   "category": "weather",
+   "description": "Cloud with a lightning bolt",
+   "aliases": [],
+   "batch": 18
+  },
+  {
+   "name": "cloud-rain",
+   "category": "weather",
+   "description": "A cloud with falling drops for rain and precipitation forecasts.",
+   "aliases": [
+    "rain",
+    "rainy",
+    "showers",
+    "precipitation",
+    "wet",
+    "weather",
+    "shower",
+    "forecast"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "cloud-snow",
+   "category": "weather",
+   "description": "A cloud with flakes for snow and winter conditions.",
+   "aliases": [
+    "snow",
+    "snowy",
+    "winter",
+    "flurries",
+    "snowfall"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "cloud-sun",
+   "category": "weather",
+   "description": "Sun partly behind a cloud",
+   "aliases": [],
+   "batch": 18
+  },
+  {
+   "name": "droplet",
+   "category": "weather",
+   "description": "A water droplet for humidity, water usage, and liquid values.",
+   "aliases": [
+    "water",
+    "humidity",
+    "drop",
+    "moisture",
+    "liquid",
+    "opacity",
+    "blood"
+   ],
+   "batch": 18
+  },
+  {
+   "name": "leaf",
+   "category": "weather",
+   "description": "A leaf for nature, eco modes, and sustainability indicators.",
+   "aliases": [
+    "nature",
+    "eco",
+    "plant",
+    "green",
+    "sustainability",
+    "organic"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "moon",
+   "category": "weather",
+   "description": "A crescent moon for night, dark theme, and quiet hours.",
+   "aliases": [
+    "night",
+    "dark-mode",
+    "nighttime",
+    "crescent",
+    "sleep",
+    "dark-theme",
+    "bedtime"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "snowflake",
+   "category": "weather",
+   "description": "Six-armed snowflake",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "sun",
+   "category": "weather",
+   "description": "A rayed sun for clear weather and the light theme toggle.",
+   "aliases": [
+    "sunny",
+    "day",
+    "light-mode",
+    "bright",
+    "clear-sky",
+    "brightness",
+    "daylight"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "thermometer",
+   "category": "weather",
+   "description": "A thermometer for temperature readings and climate controls.",
+   "aliases": [
+    "temperature",
+    "degrees",
+    "heat",
+    "climate",
+    "temp"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "umbrella",
+   "category": "weather",
+   "description": "Open umbrella",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "wind",
+   "category": "weather",
+   "description": "Flowing wind lines with curls",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "award",
+   "category": "objects",
+   "description": "A ribboned medal for achievements, badges, and recognition.",
+   "aliases": [
+    "medal",
+    "achievement",
+    "prize",
+    "ribbon",
+    "recognition"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "book-open",
+   "category": "objects",
+   "description": "Open book, two facing pages",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "briefcase",
+   "category": "objects",
+   "description": "Briefcase with handle",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "circle",
+   "category": "objects",
+   "description": "A plain circle used for radio controls, status dots, and bullets.",
+   "aliases": [
+    "dot",
+    "ring",
+    "round",
+    "radio-shape",
+    "status-dot"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "coffee",
+   "category": "objects",
+   "description": "Cup of coffee with steam",
+   "aliases": [],
+   "batch": 19
+  },
+  {
+   "name": "crown",
+   "category": "objects",
+   "description": "A crown marking premium tiers, owners, and privileged roles.",
+   "aliases": [
+    "premium",
+    "pro",
+    "vip",
+    "upgrade",
+    "owner",
+    "admin",
+    "paid-plan"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "flame",
+   "category": "objects",
+   "description": "A single teardrop-shaped flame with an inner tongue.",
+   "aliases": [
+    "fire",
+    "hot",
+    "trending",
+    "streak",
+    "burn",
+    "popular"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "graduation-cap",
+   "category": "objects",
+   "description": "A mortarboard cap with a tassel hanging from one corner.",
+   "aliases": [
+    "education",
+    "learning",
+    "course",
+    "student",
+    "academy",
+    "tutorial"
+   ],
+   "batch": 19
+  },
+  {
+   "name": "hammer",
+   "category": "objects",
+   "description": "Claw hammer",
+   "aliases": [],
+   "batch": 20
+  },
+  {
+   "name": "heart-pulse",
+   "category": "objects",
+   "description": "Heart with a heartbeat line through it",
+   "aliases": [],
+   "batch": 20
+  },
+  {
+   "name": "hexagon",
+   "category": "objects",
+   "description": "A hexagon used for badges, node diagrams, and shape libraries.",
+   "aliases": [
+    "hex",
+    "polygon",
+    "badge-shape",
+    "six-sided",
+    "node-shape"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "lightbulb",
+   "category": "objects",
+   "description": "A bulb with a visible filament and a screw base.",
+   "aliases": [
+    "idea",
+    "tip",
+    "hint",
+    "insight",
+    "suggestion",
+    "inspiration"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "paintbrush",
+   "category": "objects",
+   "description": "Paintbrush",
+   "aliases": [],
+   "batch": 20
+  },
+  {
+   "name": "palette",
+   "category": "objects",
+   "description": "An artist's palette with paint wells and a thumb hole.",
+   "aliases": [
+    "color",
+    "theme",
+    "design",
+    "paint",
+    "swatches",
+    "appearance"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "pill",
+   "category": "objects",
+   "description": "Capsule pill, split in two halves",
+   "aliases": [],
+   "batch": 20
+  },
+  {
+   "name": "puzzle-piece",
+   "category": "objects",
+   "description": "A puzzle piece for plugins, extensions, and pluggable modules.",
+   "aliases": [
+    "plugin",
+    "extension",
+    "addon",
+    "module",
+    "integration-piece",
+    "puzzle",
+    "integration",
+    "component"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "rocket",
+   "category": "objects",
+   "description": "A rocket for deployments, launches, and release actions.",
+   "aliases": [
+    "deploy",
+    "launch",
+    "ship",
+    "boost",
+    "release",
+    "startup",
+    "fast"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "ruler",
+   "category": "objects",
+   "description": "Ruler with tick marks, angled",
+   "aliases": [],
+   "batch": 20
+  },
+  {
+   "name": "square",
+   "category": "objects",
+   "description": "A plain square used for checkboxes, swatches, and placeholders.",
+   "aliases": [
+    "box-shape",
+    "rectangle",
+    "checkbox-shape",
+    "stop-shape",
+    "rect"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "target",
+   "category": "objects",
+   "description": "Concentric circles around a solid center dot.",
+   "aliases": [
+    "goal",
+    "aim",
+    "focus",
+    "objective",
+    "bullseye",
+    "precision"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "triangle",
+   "category": "objects",
+   "description": "A plain triangle used for deltas, markers, and directional cues.",
+   "aliases": [
+    "delta",
+    "play-shape",
+    "warning-shape",
+    "cone",
+    "pointer-shape"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "trophy",
+   "category": "objects",
+   "description": "A two-handled cup standing on a plinth.",
+   "aliases": [
+    "award",
+    "winner",
+    "achievement",
+    "prize",
+    "leaderboard",
+    "champion"
+   ],
+   "batch": 20
+  },
+  {
+   "name": "zap",
+   "category": "objects",
+   "description": "A lightning bolt for storms, power, and speed or instant actions.",
+   "aliases": [
+    "lightning",
+    "bolt",
+    "thunder",
+    "flash",
+    "fast",
+    "energy",
+    "instant",
+    "power"
+   ],
+   "batch": 20
+  }
+ ]
+}

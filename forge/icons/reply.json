@@ -1,0 +1,57 @@
+{
+  "name": "reply",
+  "category": "communication",
+  "description": "An arrow pointing back to the left whose tail curves down, for answering a message.",
+  "aliases": [
+    "respond",
+    "answer",
+    "mail-reply",
+    "reply-back",
+    "back-to-sender",
+    "reply-arrow",
+    "re"
+  ],
+  "tags": [
+    "reply",
+    "respond",
+    "message",
+    "email",
+    "arrow",
+    "conversation"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 9.5 H13 A7 7 0 0 1 20 16.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 4.5 L3.5 9.5 L8.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "reply to email",
+    "reply to message",
+    "respond to message",
+    "write back",
+    "answer email",
+    "answer back",
+    "get back to",
+    "talk back",
+    "response",
+    "message",
+    "email",
+    "chat",
+    "conversation",
+    "thread",
+    "comment",
+    "feedback",
+    "curved arrow left",
+    "return message",
+    "reply all",
+    "replying",
+    "repy"
+  ]
+}

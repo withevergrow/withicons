@@ -1,0 +1,64 @@
+{
+  "name": "shopping-cart",
+  "category": "commerce",
+  "description": "A wheeled shopping cart for the cart page and the checkout flow.",
+  "aliases": [
+    "cart",
+    "trolley",
+    "basket",
+    "checkout",
+    "add-to-cart",
+    "buy",
+    "shopping-trolley",
+    "shopping-basket"
+  ],
+  "tags": [
+    "cart",
+    "ecommerce",
+    "checkout",
+    "retail",
+    "purchase"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 3.5 H3.7 A1 1 0 0 1 4.68 4.3 L6.7 13.8 A1 1 0 0 0 7.68 14.5 H17.3 A1 1 0 0 0 18.25 13.8 L20.5 7 H5.25",
+      "plate": "K"
+    },
+    {
+      "d": "M10 19.5 A1.5 1.5 0 1 1 7 19.5 A1.5 1.5 0 1 1 10 19.5 Z M18.5 19.5 A1.5 1.5 0 1 1 15.5 19.5 A1.5 1.5 0 1 1 18.5 19.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.25 7 H20.5 L18.25 13.8 A1 1 0 0 1 17.3 14.5 H7.68 A1 1 0 0 1 6.7 13.8 Z",
+    "M10 19.5 A1.5 1.5 0 1 1 7 19.5 A1.5 1.5 0 1 1 10 19.5 Z",
+    "M18.5 19.5 A1.5 1.5 0 1 1 15.5 19.5 A1.5 1.5 0 1 1 18.5 19.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "my cart",
+    "view cart",
+    "your cart",
+    "add to basket",
+    "buy now",
+    "purchase",
+    "order",
+    "pay",
+    "checkout page",
+    "online shopping",
+    "ecommerce",
+    "e-commerce",
+    "shop",
+    "supermarket",
+    "grocery",
+    "groceries",
+    "retail",
+    "items",
+    "products",
+    "shopping",
+    "shoping",
+    "cart icon",
+    "shopping trolly",
+    "trolly"
+  ]
+}

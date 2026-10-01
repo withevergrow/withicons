@@ -1,0 +1,60 @@
+{
+  "name": "headphones",
+  "category": "devices",
+  "description": "Over-ear headphones for audio output devices and listening modes.",
+  "aliases": [
+    "earphones",
+    "over-ear",
+    "earbuds",
+    "cans",
+    "listen",
+    "headphone"
+  ],
+  "tags": [
+    "audio",
+    "music",
+    "listen",
+    "sound",
+    "headphones"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 14.5 V12 A8.5 8.5 0 0 1 20.5 12 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 13.5 H7 A1.5 1.5 0 0 1 8.5 15 V19.5 A1.5 1.5 0 0 1 7 21 H5.5 A2 2 0 0 1 3.5 19 V15.5 A2 2 0 0 1 5.5 13.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M18.5 13.5 H17 A1.5 1.5 0 0 0 15.5 15 V19.5 A1.5 1.5 0 0 0 17 21 H18.5 A2 2 0 0 0 20.5 19 V15.5 A2 2 0 0 0 18.5 13.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5.5 13.5 H7 A1.5 1.5 0 0 1 8.5 15 V19.5 A1.5 1.5 0 0 1 7 21 H5.5 A2 2 0 0 1 3.5 19 V15.5 A2 2 0 0 1 5.5 13.5 Z",
+    "M18.5 13.5 H17 A1.5 1.5 0 0 0 15.5 15 V19.5 A1.5 1.5 0 0 0 17 21 H18.5 A2 2 0 0 0 20.5 19 V15.5 A2 2 0 0 0 18.5 13.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "music",
+    "listening",
+    "sound",
+    "audio output",
+    "podcast",
+    "audiobook",
+    "noise cancelling",
+    "wireless headphones",
+    "dj",
+    "playlist",
+    "spotify",
+    "hear",
+    "quiet mode",
+    "focus mode",
+    "gaming audio",
+    "audio settings",
+    "hedphones",
+    "head phones",
+    "audio"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "trophy",
+  "category": "objects",
+  "description": "A two-handled cup on a plinth, for winners, rankings, and achievements.",
+  "aliases": [
+    "winner",
+    "cup",
+    "prize",
+    "champion",
+    "achievement",
+    "leaderboard",
+    "reward",
+    "first-place",
+    "trophy-cup"
+  ],
+  "tags": [
+    "award",
+    "win",
+    "competition",
+    "achievement",
+    "prize",
+    "sports"
+  ],
+  "paths": [
+    {
+      "d": "M7 3.5 H17 V8.5 A5 5 0 0 1 7 8.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 5 H5 A2.75 2.75 0 0 0 5 10.5 H7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17 5 H19 A2.75 2.75 0 0 1 19 10.5 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 13.5 V17",
+      "plate": "K"
+    },
+    {
+      "d": "M9 17 H15 A1 1 0 0 1 16 18 V20 A1 1 0 0 1 15 21 H9 A1 1 0 0 1 8 20 V18 A1 1 0 0 1 9 17 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 3.5 H17 V8.5 A5 5 0 0 1 7 8.5 Z",
+    "M9 17 H15 A1 1 0 0 1 16 18 V20 A1 1 0 0 1 15 21 H9 A1 1 0 0 1 8 20 V18 A1 1 0 0 1 9 17 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "trophies",
+    "win",
+    "winning",
+    "won",
+    "victory",
+    "champions",
+    "championship",
+    "gold",
+    "gold cup",
+    "award ceremony",
+    "first",
+    "number one",
+    "best",
+    "top",
+    "success",
+    "accomplishment",
+    "milestone",
+    "competition",
+    "contest",
+    "tournament",
+    "league",
+    "sports",
+    "game",
+    "high score",
+    "goal reached",
+    "celebrate",
+    "congratulations",
+    "congrats",
+    "troffy"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "crop",
+  "category": "layout",
+  "description": "Two overlapping L-shaped rulers forming a crop frame.",
+  "aliases": [
+    "trim",
+    "crop-image",
+    "crop-photo",
+    "frame",
+    "resize-image",
+    "cut-image",
+    "clip-image",
+    "aspect-ratio"
+  ],
+  "tags": [
+    "image",
+    "edit",
+    "photo",
+    "trim",
+    "frame",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 2.5 V15.5 A2 2 0 0 0 8.5 17.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 6.5 H15.5 A2 2 0 0 1 17.5 8.5 V21.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6.5 6.5 H15.5 A2 2 0 0 1 17.5 8.5 V17.5 H8.5 A2 2 0 0 1 6.5 15.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "cut out",
+    "cut photo",
+    "trim photo",
+    "edit photo",
+    "photo editing",
+    "image editing",
+    "resize",
+    "reframe",
+    "cropping",
+    "cropped",
+    "straighten",
+    "picture",
+    "photo",
+    "ratio",
+    "square crop",
+    "selection",
+    "croop",
+    "cropp"
+  ]
+}

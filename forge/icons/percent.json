@@ -1,0 +1,62 @@
+{
+  "name": "percent",
+  "category": "commerce",
+  "description": "The percent sign: two small circles split by a diagonal stroke.",
+  "aliases": [
+    "percentage",
+    "discount",
+    "sale",
+    "offer",
+    "promo",
+    "percent-sign",
+    "percentage-off"
+  ],
+  "tags": [
+    "percentage",
+    "discount",
+    "math",
+    "ratio",
+    "promotion"
+  ],
+  "paths": [
+    {
+      "d": "M19 5 L5 19",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7 A3 3 0 1 1 4 7 A3 3 0 1 1 10 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20 17 A3 3 0 1 1 14 17 A3 3 0 1 1 20 17 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 7 A3 3 0 1 1 4 7 A3 3 0 1 1 10 7 Z",
+    "M20 17 A3 3 0 1 1 14 17 A3 3 0 1 1 20 17 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "% off",
+    "deal",
+    "deals",
+    "rate",
+    "interest",
+    "interest rate",
+    "tax",
+    "vat",
+    "tip",
+    "ratio",
+    "proportion",
+    "math",
+    "maths",
+    "markdown",
+    "coupon",
+    "savings",
+    "bargain",
+    "per cent",
+    "precent",
+    "percnt"
+  ]
+}

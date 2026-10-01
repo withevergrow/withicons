@@ -1,0 +1,59 @@
+{
+  "name": "file-video",
+  "category": "files",
+  "description": "A page with a play triangle for video and movie files.",
+  "aliases": [
+    "video-file",
+    "movie-file",
+    "mp4",
+    "video-clip",
+    "film-file",
+    "media-video",
+    "mov-file"
+  ],
+  "tags": [
+    "video",
+    "movie",
+    "media",
+    "play",
+    "file",
+    "clip"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M10 11 V18 L16 14.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M10 11 V18 L16 14.5 Z"
+  ],
+  "synonyms": [
+    "video",
+    "movie",
+    "clip",
+    "recording",
+    "footage",
+    "upload video",
+    "video attachment",
+    "avi",
+    "mkv",
+    "webm",
+    "mov",
+    "screen recording",
+    "vlog",
+    "media"
+  ]
+}

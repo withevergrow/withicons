@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  with icons - Route 53 public hosted zone for withicons.com ($0.50/month).
+  Deploy ONCE, before site.yaml. Copy the NameServers output to the domain registrar
+  (or skip this stack entirely if the domain is registered with Route 53 Domains, which
+  creates the zone for you). Region: any (hosted zones are global); use us-east-1.
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: withicons.com
+    AllowedPattern: '^[a-z0-9.-]+\.[a-z]{2,}$'
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: with icons (managed by infra/dns.yaml)
+
+  # Mail hardening for a domain that sends no mail: reject spoofed mail claiming to be from withicons.com.
+  # Remove/replace these if you later add a mail provider.
+  NullSpf:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: TXT
+      TTL: '3600'
+      ResourceRecords:
+        - '"v=spf1 -all"'
+  NullDmarc:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Sub '_dmarc.${DomainName}'
+      Type: TXT
+      TTL: '3600'
+      ResourceRecords:
+        - '"v=DMARC1; p=reject; adkim=s; aspf=s"'
+  # Only Amazon may issue certificates for this domain.
+  Caa:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: CAA
+      TTL: '3600'
+      ResourceRecords:
+        - '0 issue "amazon.com"'
+        - '0 issuewild ";"'
+
+Outputs:
+  HostedZoneId:
+    Description: Pass to site.yaml as HostedZoneId
+    Value: !Ref HostedZone
+  NameServers:
+    Description: Set these 4 name servers at the domain registrar
+    Value: !Join [', ', !GetAtt HostedZone.NameServers]

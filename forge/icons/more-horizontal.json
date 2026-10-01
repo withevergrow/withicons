@@ -1,0 +1,79 @@
+{
+  "name": "more-horizontal",
+  "category": "navigation",
+  "description": "Three horizontal dots opening an overflow menu of secondary actions.",
+  "aliases": [
+    "ellipsis",
+    "dots",
+    "dots-horizontal",
+    "three-dots",
+    "overflow",
+    "meatball-menu",
+    "options",
+    "more",
+    "horizontal-ellipsis",
+    "more-options"
+  ],
+  "tags": [
+    "more",
+    "dots",
+    "ellipsis",
+    "menu",
+    "overflow"
+  ],
+  "paths": [
+    {
+      "d": "M5.875 12 A0.875 0.875 0 1 1 4.125 12 A0.875 0.875 0 1 1 5.875 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.875 12 A0.875 0.875 0 1 1 11.125 12 A0.875 0.875 0 1 1 12.875 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.875 12 A0.875 0.875 0 1 1 18.125 12 A0.875 0.875 0 1 1 19.875 12 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5.875 12 A0.875 0.875 0 1 1 4.125 12 A0.875 0.875 0 1 1 5.875 12 Z",
+    "M12.875 12 A0.875 0.875 0 1 1 11.125 12 A0.875 0.875 0 1 1 12.875 12 Z",
+    "M19.875 12 A0.875 0.875 0 1 1 18.125 12 A0.875 0.875 0 1 1 19.875 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "more actions",
+    "see more",
+    "show more",
+    "view more",
+    "read more",
+    "other options",
+    "extra",
+    "additional",
+    "actions",
+    "actions menu",
+    "context menu",
+    "dropdown",
+    "drop down",
+    "overflow menu",
+    "settings menu",
+    "secondary actions",
+    "meatballs",
+    "meatball",
+    "three dot menu",
+    "dot dot dot",
+    "...",
+    "etc",
+    "and so on",
+    "continue",
+    "truncated",
+    "more button",
+    "menu dots",
+    "3 dots",
+    "three dots menu",
+    "ellipses",
+    "elipsis",
+    "ellipsis menu",
+    "tools"
+  ]
+}

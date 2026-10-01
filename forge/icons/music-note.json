@@ -1,0 +1,57 @@
+{
+  "name": "music-note",
+  "category": "media",
+  "description": "An eighth note marking music content, playlists and audio tracks.",
+  "aliases": [
+    "music",
+    "song",
+    "audio",
+    "melody",
+    "tune",
+    "track",
+    "note",
+    "eighth-note",
+    "musical-note"
+  ],
+  "tags": [
+    "music",
+    "audio",
+    "sound",
+    "song",
+    "media"
+  ],
+  "paths": [
+    {
+      "d": "M11.5 17.5 A3.5 3.5 0 1 1 4.5 17.5 A3.5 3.5 0 1 1 11.5 17.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 17.5 V3 C12.5 6 18 6.5 18 11",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M11.5 17.5 A3.5 3.5 0 1 1 4.5 17.5 A3.5 3.5 0 1 1 11.5 17.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "sound",
+    "playlist",
+    "singing",
+    "sing",
+    "band",
+    "concert",
+    "radio",
+    "album",
+    "listen",
+    "tunes",
+    "beat",
+    "rhythm",
+    "composer",
+    "soundtrack",
+    "karaoke",
+    "musik",
+    "muzic",
+    "quaver"
+  ]
+}

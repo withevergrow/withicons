@@ -1,0 +1,56 @@
+{
+  "name": "plane",
+  "category": "maps",
+  "description": "An aeroplane seen from above with its nose angled up to the north-east, for flights, travel, and airports.",
+  "aliases": [
+    "airplane",
+    "aeroplane",
+    "flight",
+    "aircraft",
+    "airport",
+    "jet",
+    "airliner",
+    "flights"
+  ],
+  "tags": [
+    "flight",
+    "travel",
+    "airline",
+    "vacation",
+    "transport",
+    "fly"
+  ],
+  "paths": [
+    {
+      "d": "M16.6 4.58 C17.83 3.34 19.18 3.27 20.13 3.87 C20.73 4.82 20.66 6.17 19.42 7.4 L15.89 10.94 L18.19 20.66 L16.95 21.9 L12.18 14.65 L8.82 18.01 L9.35 21.37 L8.82 21.9 L5.99 18.01 L2.1 15.18 L2.63 14.65 L5.99 15.18 L9.35 11.82 L2.1 7.05 L3.34 5.81 L13.06 8.11 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M16.6 4.58 C17.83 3.34 19.18 3.27 20.13 3.87 C20.73 4.82 20.66 6.17 19.42 7.4 L15.89 10.94 L18.19 20.66 L16.95 21.9 L12.18 14.65 L8.82 18.01 L9.35 21.37 L8.82 21.9 L5.99 18.01 L2.1 15.18 L2.63 14.65 L5.99 15.18 L9.35 11.82 L2.1 7.05 L3.34 5.81 L13.06 8.11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "travel",
+    "trip",
+    "departure",
+    "departures",
+    "arrival",
+    "fly",
+    "flying",
+    "airline",
+    "holiday",
+    "vacation",
+    "boarding",
+    "boarding pass",
+    "book a flight",
+    "air travel",
+    "abroad",
+    "journey",
+    "take off",
+    "airplane mode",
+    "aeroplane mode",
+    "aiplane",
+    "aeroplan"
+  ]
+}

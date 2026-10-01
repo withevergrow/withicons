@@ -1,0 +1,71 @@
+{
+  "name": "brain",
+  "category": "development",
+  "description": "A two-hemisphere brain for AI models, reasoning modes, and machine learning features.",
+  "aliases": [
+    "mind",
+    "intelligence",
+    "neural",
+    "thinking",
+    "machine-learning",
+    "ml"
+  ],
+  "tags": [
+    "brain",
+    "ai",
+    "mind",
+    "neural",
+    "learning",
+    "cognition",
+    "smart"
+  ],
+  "paths": [
+    {
+      "d": "M12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 12 19 A3.25 3.25 0 0 0 18 18 A3.5 3.5 0 0 0 20.5 12 A3.5 3.5 0 0 0 17.5 6 A3 3 0 0 0 12 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 5.5 V19",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 6 C7.5 6.75 8 7.75 8 9 M3.5 12 C5.5 12 7 12.75 7.5 14.5 M17.5 6 C16.5 6.75 16 7.75 16 9 M20.5 12 C18.5 12 17 12.75 16.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 12 19 A3.25 3.25 0 0 0 18 18 A3.5 3.5 0 0 0 20.5 12 A3.5 3.5 0 0 0 17.5 6 A3 3 0 0 0 12 5.5 Z"
+  ],
+  "cutouts": [
+    "M12 4 V20.5",
+    "M6.5 6 C7.5 6.75 8 7.75 8 9",
+    "M3.5 12 C5.5 12 7 12.75 7.5 14.5",
+    "M17.5 6 C16.5 6.75 16 7.75 16 9",
+    "M20.5 12 C18.5 12 17 12.75 16.5 14.5"
+  ],
+  "synonyms": [
+    "ai",
+    "artificial intelligence",
+    "smart",
+    "think",
+    "reasoning",
+    "idea",
+    "memory",
+    "knowledge",
+    "learning",
+    "psychology",
+    "mental health",
+    "neuroscience",
+    "genius",
+    "brainstorm",
+    "cognition",
+    "clever",
+    "iq",
+    "model",
+    "deep learning",
+    "mindset",
+    "creativity",
+    "focus",
+    "wisdom"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "leaf",
+  "category": "weather",
+  "description": "A leaf for nature, eco modes, and sustainability indicators.",
+  "aliases": [
+    "nature",
+    "eco",
+    "plant",
+    "foliage",
+    "eco-friendly",
+    "green",
+    "sustainability",
+    "organic",
+    "leaves"
+  ],
+  "tags": [
+    "nature",
+    "eco",
+    "plant",
+    "environment",
+    "botanical"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 18.5 C3.5 10.5 9.5 3.5 20.5 3.5 C20.5 14.5 13.5 20.5 5.5 18.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 21 C7 17 11 12 16 8",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 18.5 C3.5 10.5 9.5 3.5 20.5 3.5 C20.5 14.5 13.5 20.5 5.5 18.5 Z"
+  ],
+  "cutouts": [
+    "M7.24 16.52 C9.92 13.62 12.75 10.6 16 8"
+  ],
+  "synonyms": [
+    "environment",
+    "environmental",
+    "vegan",
+    "vegetarian",
+    "natural",
+    "botanical",
+    "garden",
+    "gardening",
+    "tree",
+    "herb",
+    "spring",
+    "autumn",
+    "fall",
+    "recycle",
+    "climate",
+    "earth",
+    "fresh",
+    "plant based",
+    "go green",
+    "carbon neutral",
+    "low energy",
+    "eco mode",
+    "growth",
+    "grow",
+    "bio",
+    "tea",
+    "salad",
+    "healthy",
+    "leef"
+  ]
+}

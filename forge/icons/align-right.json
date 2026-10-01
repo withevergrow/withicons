@@ -1,0 +1,57 @@
+{
+  "name": "align-right",
+  "category": "text",
+  "description": "Right-flush lines aligning text or content to the right edge.",
+  "aliases": [
+    "right-align",
+    "text-right",
+    "flush-right",
+    "ragged-left",
+    "text-align-right",
+    "align-end",
+    "justify-right",
+    "right-aligned"
+  ],
+  "tags": [
+    "text",
+    "alignment",
+    "paragraph",
+    "right",
+    "formatting",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 14.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 19.5 H21",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "align text right",
+    "right alignment",
+    "right side",
+    "rtl",
+    "right to left",
+    "paragraph",
+    "text formatting",
+    "word processor",
+    "document",
+    "format text",
+    "lines of text",
+    "numbers column"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "skip-forward",
+  "category": "media",
+  "description": "A triangle capped by a bar that jumps to the next track or chapter.",
+  "aliases": [
+    "next",
+    "next-track",
+    "skip-next",
+    "forward-track",
+    "advance",
+    "next-song",
+    "go-to-end",
+    "skip"
+  ],
+  "tags": [
+    "media",
+    "player",
+    "control",
+    "next",
+    "track"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 7.73 A1.75 1.75 0 0 1 7.21 6.26 L13.75 10.53 A1.75 1.75 0 0 1 13.75 13.47 L7.21 17.74 A1.75 1.75 0 0 1 4.5 16.27 L4.5 7.73 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.5 5 V19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 7.73 A1.75 1.75 0 0 1 7.21 6.26 L13.75 10.53 A1.75 1.75 0 0 1 13.75 13.47 L7.21 17.74 A1.75 1.75 0 0 1 4.5 16.27 L4.5 7.73 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "next episode",
+    "next chapter",
+    "next video",
+    "skip song",
+    "skip ad",
+    "skip intro",
+    "go forward",
+    "forward",
+    "move on",
+    "media control",
+    "music player",
+    "video player",
+    "audio player",
+    "playback",
+    "playlist",
+    "next button",
+    "nxt",
+    "skip foward"
+  ]
+}

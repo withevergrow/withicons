@@ -1,0 +1,68 @@
+{
+  "name": "image-plus",
+  "category": "media",
+  "description": "A framed picture with a plus badge for adding or uploading an image.",
+  "aliases": [
+    "add-image",
+    "add-photo",
+    "insert-image",
+    "new-image",
+    "upload-image",
+    "add-picture",
+    "photo-plus",
+    "image-add"
+  ],
+  "tags": [
+    "photo",
+    "picture",
+    "add",
+    "insert",
+    "upload"
+  ],
+  "paths": [
+    {
+      "d": "M22 11.5 V6 A2 2 0 0 0 20 4 H4 A2 2 0 0 0 2 6 V18 A2 2 0 0 0 4 20 H10.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 17 L7 12 A1.41 1.41 0 0 1 9 12 L11 14",
+      "plate": "A"
+    },
+    {
+      "d": "M14 9 A1.5 1.5 0 1 1 11 9 A1.5 1.5 0 1 1 14 9 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 17.5 A4 4 0 1 1 13.5 17.5 A4 4 0 1 1 21.5 17.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 15.5 V19.5 M15.5 17.5 H19.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V12.81 A6.5 6.5 0 0 0 11.5 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+    "M21.5 17.5 A4 4 0 1 1 13.5 17.5 A4 4 0 1 1 21.5 17.5 Z"
+  ],
+  "cutouts": [
+    "M14.25 9 A1.75 1.75 0 1 1 10.75 9 A1.75 1.75 0 1 1 14.25 9 Z",
+    "M3.25 15.75 L7 12 A1.41 1.41 0 0 1 9 12 L11.33 14.33 A6.3 6.3 0 0 0 11.2 18.75 H3.25 Z",
+    "M17.5 15.5 V19.5",
+    "M15.5 17.5 H19.5"
+  ],
+  "synonyms": [
+    "add a photo",
+    "upload photo",
+    "upload picture",
+    "insert picture",
+    "attach image",
+    "attach photo",
+    "choose image",
+    "add media",
+    "new photo",
+    "import image",
+    "add to gallery",
+    "post photo"
+  ]
+}

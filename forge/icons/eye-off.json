@@ -1,0 +1,72 @@
+{
+  "name": "eye-off",
+  "category": "security",
+  "description": "An eye struck through by a slash, for hiding passwords, values and sensitive content.",
+  "aliases": [
+    "hide",
+    "hidden",
+    "invisible",
+    "conceal",
+    "hide-password",
+    "not-visible",
+    "eye-slash",
+    "eye-closed",
+    "unseen"
+  ],
+  "tags": [
+    "visibility",
+    "hidden",
+    "password",
+    "private",
+    "blind",
+    "mask"
+  ],
+  "paths": [
+    {
+      "d": "M10.14 5.19 C10.74 5.06 11.36 5 12 5 C16 5 19.5 7.5 21.5 12 C21.02 13.07 20.46 14.03 19.82 14.87",
+      "plate": "K"
+    },
+    {
+      "d": "M13.86 18.81 C13.26 18.94 12.64 19 12 19 C8 19 4.5 16.5 2.5 12 C2.98 10.93 3.54 9.97 4.18 9.13",
+      "plate": "K"
+    },
+    {
+      "d": "M14.12 14.12 A3 3 0 0 1 9.88 14.12 A3 3 0 0 1 9.88 9.88",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.29 5.4 C10.16 5.14 11.07 5 12 5 C16 5 19.5 7.5 21.5 12 C20.91 13.33 20.18 14.49 19.35 15.46 Z",
+    "M14.71 18.6 C13.84 18.86 12.93 19 12 19 C8 19 4.5 16.5 2.5 12 C3.09 10.67 3.82 9.51 4.65 8.54 Z"
+  ],
+  "cutouts": [
+    "M16.25 12 A4.25 4.25 0 1 1 7.75 12 A4.25 4.25 0 1 1 16.25 12 Z M14.75 12 A2.75 2.75 0 1 1 9.25 12 A2.75 2.75 0 1 1 14.75 12 Z"
+  ],
+  "synonyms": [
+    "hide password",
+    "mask",
+    "masked",
+    "private",
+    "privacy",
+    "secret",
+    "censor",
+    "blind",
+    "cant see",
+    "unsee",
+    "eye crossed out",
+    "crossed out eye",
+    "no view",
+    "turn off visibility",
+    "hide content",
+    "hide details",
+    "obscure",
+    "cover up",
+    "incognito",
+    "invisable",
+    "spoiler"
+  ]
+}

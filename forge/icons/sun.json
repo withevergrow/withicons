@@ -1,0 +1,70 @@
+{
+  "name": "sun",
+  "category": "weather",
+  "description": "A rayed sun for clear weather and the light theme toggle.",
+  "aliases": [
+    "sunny",
+    "day",
+    "light-mode",
+    "bright",
+    "clear-sky",
+    "brightness",
+    "daylight",
+    "light-theme",
+    "sunshine",
+    "daytime"
+  ],
+  "tags": [
+    "weather",
+    "day",
+    "light",
+    "theme",
+    "summer"
+  ],
+  "paths": [
+    {
+      "d": "M16.5 12 A4.5 4.5 0 1 1 7.5 12 A4.5 4.5 0 1 1 16.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4 L12 2 M17.66 6.34 L19.07 4.93 M20 12 L22 12 M17.66 17.66 L19.07 19.07 M12 20 L12 22 M6.34 17.66 L4.93 19.07 M4 12 L2 12 M6.34 6.34 L4.93 4.93",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M16.5 12 A4.5 4.5 0 1 1 7.5 12 A4.5 4.5 0 1 1 16.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "sun light",
+    "sunlight",
+    "summer",
+    "hot",
+    "warm",
+    "weather",
+    "clear",
+    "clear weather",
+    "good weather",
+    "morning",
+    "sunrise",
+    "noon",
+    "light",
+    "light theme",
+    "day mode",
+    "bright mode",
+    "screen brightness",
+    "display brightness",
+    "theme toggle",
+    "solar",
+    "beach",
+    "holiday",
+    "vacation",
+    "heat",
+    "uv",
+    "sunlit",
+    "sunn",
+    "forecast",
+    "outdoors",
+    "energy"
+  ]
+}

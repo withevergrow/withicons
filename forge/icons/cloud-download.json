@@ -1,0 +1,58 @@
+{
+  "name": "cloud-download",
+  "category": "files",
+  "description": "A cloud with a down arrow for restoring or pulling remote data.",
+  "aliases": [
+    "download-cloud",
+    "cloud-restore",
+    "restore",
+    "sync-down",
+    "pull",
+    "cloud-fetch",
+    "fetch-from-cloud"
+  ],
+  "tags": [
+    "files",
+    "cloud",
+    "download",
+    "sync",
+    "storage"
+  ],
+  "paths": [
+    {
+      "d": "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 V21.5 L8.5 18",
+      "plate": "S"
+    },
+    {
+      "d": "M12 21.5 L15.5 18",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "download from cloud",
+    "get from cloud",
+    "restore backup",
+    "retrieve",
+    "recover",
+    "sync",
+    "icloud",
+    "google drive",
+    "dropbox",
+    "onedrive",
+    "online storage",
+    "cloud storage",
+    "import",
+    "offline copy",
+    "get files",
+    "bring down",
+    "grab"
+  ]
+}

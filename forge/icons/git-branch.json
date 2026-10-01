@@ -1,0 +1,63 @@
+{
+  "name": "git-branch",
+  "category": "development",
+  "description": "A second line forking off the main line, for branches in version control.",
+  "aliases": [
+    "branch",
+    "fork",
+    "version-control",
+    "vcs",
+    "source-control",
+    "new-branch",
+    "branching"
+  ],
+  "tags": [
+    "git",
+    "branch",
+    "version-control",
+    "fork",
+    "vcs",
+    "source-control"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 6 A3 3 0 1 1 3.5 6 A3 3 0 1 1 9.5 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 18 A3 3 0 1 1 3.5 18 A3 3 0 1 1 9.5 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M20.5 6 A3 3 0 1 1 14.5 6 A3 3 0 1 1 20.5 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 9 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 9 V10 A8 8 0 0 1 9.5 18",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M9.5 6 A3 3 0 1 1 3.5 6 A3 3 0 1 1 9.5 6 Z",
+    "M9.5 18 A3 3 0 1 1 3.5 18 A3 3 0 1 1 9.5 18 Z",
+    "M20.5 6 A3 3 0 1 1 14.5 6 A3 3 0 1 1 20.5 6 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "git",
+    "checkout",
+    "split",
+    "diverge",
+    "feature branch",
+    "github",
+    "gitlab",
+    "repository",
+    "repo",
+    "versions",
+    "workflow"
+  ]
+}

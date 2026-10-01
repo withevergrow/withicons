@@ -1,0 +1,78 @@
+{
+  "name": "server",
+  "category": "devices",
+  "description": "Two stacked rack units with status lights for servers, hosting and backend infrastructure.",
+  "aliases": [
+    "host",
+    "backend",
+    "rack",
+    "infrastructure",
+    "hosting",
+    "datacenter",
+    "data-center",
+    "server-rack",
+    "mainframe"
+  ],
+  "tags": [
+    "hardware",
+    "backend",
+    "hosting",
+    "network",
+    "cloud-computing"
+  ],
+  "paths": [
+    {
+      "d": "M5 2.5 H19 A2 2 0 0 1 21 4.5 V8 A2 2 0 0 1 19 10 H5 A2 2 0 0 1 3 8 V4.5 A2 2 0 0 1 5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 14 H19 A2 2 0 0 1 21 16 V19.5 A2 2 0 0 1 19 21.5 H5 A2 2 0 0 1 3 19.5 V16 A2 2 0 0 1 5 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 6.25 V6.26 M11 6.25 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.75 V17.76 M11 17.75 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 2.5 H19 A2 2 0 0 1 21 4.5 V8 A2 2 0 0 1 19 10 H5 A2 2 0 0 1 3 8 V4.5 A2 2 0 0 1 5 2.5 Z",
+    "M5 14 H19 A2 2 0 0 1 21 16 V19.5 A2 2 0 0 1 19 21.5 H5 A2 2 0 0 1 3 19.5 V16 A2 2 0 0 1 5 14 Z"
+  ],
+  "cutouts": [
+    "M8 6.25 A1 1 0 1 1 6 6.25 A1 1 0 1 1 8 6.25 Z",
+    "M8 17.75 A1 1 0 1 1 6 17.75 A1 1 0 1 1 8 17.75 Z",
+    "M11 6.25 H17",
+    "M11 17.75 H17"
+  ],
+  "synonyms": [
+    "web server",
+    "web hosting",
+    "host website",
+    "cloud server",
+    "computer",
+    "machine",
+    "node",
+    "storage",
+    "database server",
+    "network",
+    "it",
+    "devops",
+    "api server",
+    "self hosted",
+    "on premise",
+    "on prem",
+    "server room",
+    "data centre",
+    "rack mount",
+    "vps",
+    "dedicated server",
+    "status lights",
+    "uptime",
+    "sever",
+    "servers"
+  ]
+}

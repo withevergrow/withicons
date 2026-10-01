@@ -1,0 +1,67 @@
+{
+  "name": "gauge",
+  "category": "charts",
+  "description": "A dial with a needle for scores, quotas, and performance readings.",
+  "aliases": [
+    "meter",
+    "speedometer",
+    "performance",
+    "speed",
+    "tachometer",
+    "gage"
+  ],
+  "tags": [
+    "meter",
+    "dial",
+    "speed",
+    "performance",
+    "measure",
+    "level"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 19 A9 9 0 1 1 19.5 19",
+      "plate": "K"
+    },
+    {
+      "d": "M12 14 L15.5 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13 14 A1 1 0 1 1 11 14 A1 1 0 1 1 13 14 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 19 A9 9 0 1 1 19.5 19 V20 H4.5 Z"
+  ],
+  "cutouts": [
+    "M12 14 L15.5 10.5",
+    "M13.75 14 A1.75 1.75 0 1 1 10.25 14 A1.75 1.75 0 1 1 13.75 14 Z"
+  ],
+  "synonyms": [
+    "measure",
+    "dial",
+    "score",
+    "usage",
+    "quota",
+    "limit",
+    "capacity",
+    "level",
+    "rating",
+    "credit score",
+    "health score",
+    "fuel",
+    "pressure",
+    "rpm",
+    "benchmark",
+    "speed test",
+    "internet speed",
+    "how fast",
+    "load",
+    "metrics",
+    "kpi",
+    "fast",
+    "slow"
+  ]
+}

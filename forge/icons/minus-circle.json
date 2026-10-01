@@ -1,0 +1,63 @@
+{
+  "name": "minus-circle",
+  "category": "actions",
+  "description": "A minus sign inside a circle for removing or decreasing an item.",
+  "aliases": [
+    "remove-circle",
+    "circle-minus",
+    "minus-circled",
+    "subtract-circle",
+    "remove-item",
+    "decrease-circle",
+    "minus-round",
+    "negative-circle"
+  ],
+  "tags": [
+    "remove",
+    "subtract",
+    "decrease",
+    "circle",
+    "delete"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M8 12 H16"
+  ],
+  "synonyms": [
+    "remove",
+    "subtract",
+    "decrease",
+    "reduce",
+    "less",
+    "take away",
+    "take out",
+    "delete item",
+    "remove from cart",
+    "fewer",
+    "lower",
+    "negative",
+    "deduct",
+    "quantity down",
+    "decrement",
+    "exclude",
+    "unselect",
+    "unfollow",
+    "remove button",
+    "minus button",
+    "minus sign",
+    "substract",
+    "minis"
+  ]
+}

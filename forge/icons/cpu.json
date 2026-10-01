@@ -1,0 +1,66 @@
+{
+  "name": "cpu",
+  "category": "devices",
+  "description": "A square chip with pins for processors, compute, and hardware specs.",
+  "aliases": [
+    "chip",
+    "processor",
+    "microchip",
+    "silicon",
+    "integrated-circuit",
+    "hardware",
+    "compute",
+    "central-processing-unit",
+    "microprocessor"
+  ],
+  "tags": [
+    "chip",
+    "processor",
+    "hardware",
+    "computer",
+    "semiconductor"
+  ],
+  "paths": [
+    {
+      "d": "M7 5 H17 A2 2 0 0 1 19 7 V17 A2 2 0 0 1 17 19 H7 A2 2 0 0 1 5 17 V7 A2 2 0 0 1 7 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 2.5 V5 M15 2.5 V5 M9 19 V21.5 M15 19 V21.5 M2.5 9 H5 M2.5 15 H5 M19 9 H21.5 M19 15 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10 9 H14 A1 1 0 0 1 15 10 V14 A1 1 0 0 1 14 15 H10 A1 1 0 0 1 9 14 V10 A1 1 0 0 1 10 9 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 5 H17 A2 2 0 0 1 19 7 V17 A2 2 0 0 1 17 19 H7 A2 2 0 0 1 5 17 V7 A2 2 0 0 1 7 5 Z"
+  ],
+  "cutouts": [
+    "M10 8.25 H14 A1.75 1.75 0 0 1 15.75 10 V14 A1.75 1.75 0 0 1 14 15.75 H10 A1.75 1.75 0 0 1 8.25 14 V10 A1.75 1.75 0 0 1 10 8.25 Z M10 9.75 H14 A0.25 0.25 0 0 1 14.25 10 V14 A0.25 0.25 0 0 1 14 14.25 H10 A0.25 0.25 0 0 1 9.75 14 V10 A0.25 0.25 0 0 1 10 9.75 Z"
+  ],
+  "synonyms": [
+    "computer chip",
+    "computer",
+    "performance",
+    "speed",
+    "specs",
+    "specifications",
+    "ram",
+    "memory",
+    "motherboard",
+    "electronics",
+    "semiconductor",
+    "circuit",
+    "tech",
+    "technology",
+    "gpu",
+    "processing",
+    "ai chip",
+    "machine",
+    "core",
+    "cores",
+    "pc"
+  ]
+}

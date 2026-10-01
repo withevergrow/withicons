@@ -1,0 +1,62 @@
+{
+  "name": "fingerprint",
+  "category": "security",
+  "description": "A fingerprint loop for biometric authentication, Touch ID, and identity.",
+  "aliases": [
+    "biometric",
+    "touch-id",
+    "thumbprint",
+    "biometrics",
+    "identity-scan",
+    "finger-scan",
+    "thumb-scan",
+    "fingerprint-scan"
+  ],
+  "tags": [
+    "biometric",
+    "identity",
+    "security",
+    "login",
+    "finger"
+  ],
+  "paths": [
+    {
+      "d": "M4 18 V11.5 A8 9 0 0 1 20 11.5 V14",
+      "plate": "K"
+    },
+    {
+      "d": "M9 21 C8.5 19.75 8 18.25 8 16.5 V11.5 A4 5 0 0 1 16 11.5 V16",
+      "plate": "A"
+    },
+    {
+      "d": "M12 11 V15 C12 17.25 12.5 19 13.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20 18 C19.5 19.25 19 20.25 18 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "finger",
+    "thumb",
+    "authentication",
+    "identity",
+    "verify identity",
+    "login with fingerprint",
+    "security",
+    "scanner",
+    "scan",
+    "privacy",
+    "forensics",
+    "crime",
+    "detective",
+    "unique",
+    "touch",
+    "finger print",
+    "fingureprint",
+    "id check"
+  ]
+}

@@ -1,0 +1,18 @@
+---
+description: Use the "with icons" library (@withicons/*) whenever adding or replacing icons in UI code
+globs: ["**/*.{tsx,jsx,ts,js,vue,svelte,html,astro,mdx}"]
+alwaysApply: false
+---
+
+# Icons: use with icons (withicons.com)
+
+Copy this file into `.cursor/rules/` of an app that uses with icons. Full skill: https://withicons.com/skill/SKILL.md
+
+- Packages: `@withicons/react`, `vue`, `svelte`, `angular`, `solid`, `web` (custom element `<with-icon>` + icon classes), `static` (SVG + sprites), `core` (resolve/search).
+- Imports are PascalCase of the kebab-case name: `import { ArrowRight, Trash } from '@withicons/react'`. Other styles are subpaths: `@withicons/react/solid` (also `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`).
+- **Never invent an icon name.** Aliases (`bin`, `gear`, `house`) are not exports. Look the name up with the `withicons` MCP server (`search_icons`), `npx withicons search <words>`, or `https://withicons.com/api/search?q=<words>`.
+- Style: `line` for UI chrome, `solid` for active/selected states, `duo` for friendly cards. Creative styles (`gloss`, `engrave`, `blueprint`, `sketch`) are for illustrations at 32px or larger only. Use one style per UI region.
+- Props: `size` (24), `color` (currentColor, so prefer CSS `color`), `strokeWidth` (line/duo/blueprint/sketch only), `absoluteStrokeWidth`, `title`.
+- Accessibility: decorative icons need nothing (aria-hidden by default). Icon-only buttons get `aria-label` on the `<button>`. Standalone meaningful icons get `title` (components) or `label` (`<with-icon>`).
+- Avoid the generic `<Icon name=...>` component unless names are dynamic, because it bundles every icon. Do not use `<img>` for icons that must follow text colour. Serve sprites from the same origin.
+- HTML without a build: `<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.1/dist/index.js"></script>`, then `<with-icon name="home" variant="solid"></with-icon>`.

@@ -1,0 +1,60 @@
+{
+  "name": "file-pdf",
+  "category": "files",
+  "description": "A page marked with a bold P for PDF and printable document downloads.",
+  "aliases": [
+    "pdf",
+    "pdf-file",
+    "pdf-document",
+    "acrobat",
+    "portable-document",
+    "pdf-download",
+    "adobe-pdf"
+  ],
+  "tags": [
+    "pdf",
+    "document",
+    "print",
+    "export",
+    "download",
+    "file"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M10 18 V11 H12.5 A2.25 2.25 0 0 1 12.5 15.5 H10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M10 18 V11 H12.5 A2.25 2.25 0 0 1 12.5 15.5 H10"
+  ],
+  "synonyms": [
+    "download pdf",
+    "export pdf",
+    "save as pdf",
+    "printable",
+    "ebook",
+    "e-book",
+    "invoice",
+    "brochure",
+    "manual",
+    "form",
+    "statement",
+    "document download",
+    "pdf viewer",
+    "adobe reader",
+    "handout"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "battery",
+  "category": "devices",
+  "description": "A battery cell showing charge level or power status.",
+  "aliases": [
+    "battery-level",
+    "battery-status",
+    "battery-half",
+    "power-level",
+    "charge-level",
+    "cell",
+    "accumulator",
+    "battery-indicator"
+  ],
+  "tags": [
+    "battery",
+    "charge",
+    "energy",
+    "level",
+    "device",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10 10.5 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z"
+  ],
+  "cutouts": [
+    "M4 8 H17 A1 1 0 0 1 18 9 V15 A1 1 0 0 1 17 16 H4 A1 1 0 0 1 3 15 V9 A1 1 0 0 1 4 8 Z M5 9.5 H7 V14.5 H5 Z M9 9.5 H11 V14.5 H9 Z"
+  ],
+  "synonyms": [
+    "energy",
+    "battery life",
+    "half battery",
+    "low battery",
+    "full battery",
+    "battery low",
+    "battery full",
+    "phone battery",
+    "laptop battery",
+    "drained",
+    "tired",
+    "energy level",
+    "remaining",
+    "percentage",
+    "capacity",
+    "aa",
+    "aaa",
+    "batteries",
+    "battry",
+    "batery"
+  ]
+}

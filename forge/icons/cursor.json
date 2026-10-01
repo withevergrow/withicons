@@ -1,0 +1,56 @@
+{
+  "name": "cursor",
+  "category": "navigation",
+  "description": "An arrow pointer for selection tools, clicks, and cursor states.",
+  "aliases": [
+    "mouse-pointer",
+    "pointer",
+    "arrow-cursor",
+    "select-tool",
+    "click",
+    "mouse-arrow",
+    "selection",
+    "arrow-pointer",
+    "select"
+  ],
+  "tags": [
+    "cursor",
+    "pointer",
+    "select",
+    "click",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M5 2.5 L19 12.5 L11.5 13.5 L7.5 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 13.5 L15.5 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 2.5 L19 12.5 L11.5 13.5 L7.5 19.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "point",
+    "choose",
+    "pick",
+    "tap",
+    "hover",
+    "mouse click",
+    "arrow",
+    "computer mouse",
+    "clicking",
+    "interact",
+    "interactive",
+    "press",
+    "cursor arrow",
+    "pointer tool",
+    "curser",
+    "cursur",
+    "coursor"
+  ]
+}

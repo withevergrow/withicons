@@ -1,0 +1,78 @@
+{
+  "name": "id-card",
+  "category": "users",
+  "description": "An identity card with a portrait photo and text lines, for identity documents and profile cards.",
+  "aliases": [
+    "identity",
+    "identification",
+    "id-badge",
+    "credentials",
+    "profile-card",
+    "license",
+    "driver-license",
+    "access-card",
+    "id"
+  ],
+  "tags": [
+    "id",
+    "identity",
+    "card",
+    "person",
+    "profile",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 10 A2 2 0 1 1 6.5 10 A2 2 0 1 1 10.5 10 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M5 20 V18.5 A2.5 2.5 0 0 1 7.5 16 H9.5 A2.5 2.5 0 0 1 12 18.5 V20",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 10 H18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 14 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M11.25 10 A2.75 2.75 0 1 1 5.75 10 A2.75 2.75 0 1 1 11.25 10 Z",
+    "M4 19 V18.5 A3.5 3.5 0 0 1 7.5 15 H9.5 A3.5 3.5 0 0 1 13 18.5 V19 Z",
+    "M14.5 10 H18.5",
+    "M14.5 14 H17"
+  ],
+  "synonyms": [
+    "identity card",
+    "id card",
+    "national id",
+    "passport",
+    "employee badge",
+    "staff id",
+    "name badge",
+    "membership card",
+    "member card",
+    "student id",
+    "verify identity",
+    "kyc",
+    "personal details",
+    "contact card",
+    "business card",
+    "vcard",
+    "drivers licence",
+    "driving licence",
+    "badge",
+    "know your customer",
+    "identity verification"
+  ]
+}

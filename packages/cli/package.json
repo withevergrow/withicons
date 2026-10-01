@@ -1,0 +1,47 @@
+{
+  "name": "withicons",
+  "version": "0.1.0",
+  "description": "with icons from the terminal: search 300 icons x 7 styles in plain English, print SVG or framework code, get import lines, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command. `npx withicons init`.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "cli",
+    "icon-search",
+    "mcp"
+  ],
+  "type": "module",
+  "bin": {
+    "withicons": "dist/cli.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@withicons/mcp": "0.1.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

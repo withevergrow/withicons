@@ -1,0 +1,58 @@
+{
+  "name": "filter",
+  "category": "layout",
+  "description": "A funnel for narrowing a list or table by criteria.",
+  "aliases": [
+    "funnel",
+    "refine",
+    "facets",
+    "narrow",
+    "filter-list",
+    "sift",
+    "sieve",
+    "narrow-down",
+    "filters"
+  ],
+  "tags": [
+    "funnel",
+    "refine",
+    "narrow",
+    "sort",
+    "criteria",
+    "search"
+  ],
+  "paths": [
+    {
+      "d": "M4.64 3.5 L19.36 3.5 A1 1 0 0 1 20.13 5.14 L14.35 12.08 A1.5 1.5 0 0 0 14 13.04 L14 18.69 A0.5 0.5 0 0 1 13.72 19.14 L10.72 20.64 A0.5 0.5 0 0 1 10 20.19 L10 13.04 A1.5 1.5 0 0 0 9.65 12.08 L3.87 5.14 A1 1 0 0 1 4.64 3.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M4.64 3.5 L19.36 3.5 A1 1 0 0 1 20.13 5.14 L14.35 12.08 A1.5 1.5 0 0 0 14 13.04 L14 18.69 A0.5 0.5 0 0 1 13.72 19.14 L10.72 20.64 A0.5 0.5 0 0 1 10 20.19 L10 13.04 A1.5 1.5 0 0 0 9.65 12.08 L3.87 5.14 A1 1 0 0 1 4.64 3.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "refine search",
+    "narrow results",
+    "search filter",
+    "filtering",
+    "criteria",
+    "options",
+    "faceted search",
+    "include",
+    "exclude",
+    "screen",
+    "select",
+    "segment",
+    "conditions",
+    "drill down",
+    "show only",
+    "advanced search",
+    "filtr",
+    "fliter",
+    "query",
+    "strainer",
+    "reduce",
+    "shortlist"
+  ]
+}

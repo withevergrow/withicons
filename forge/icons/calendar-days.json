@@ -1,0 +1,74 @@
+{
+  "name": "calendar-days",
+  "category": "time",
+  "description": "A calendar page with a grid of day dots for date pickers and month views.",
+  "aliases": [
+    "month-view",
+    "dates",
+    "days",
+    "date-grid",
+    "calendar-grid",
+    "monthly"
+  ],
+  "tags": [
+    "calendar",
+    "month",
+    "days",
+    "grid",
+    "schedule",
+    "date"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M8 13.5 H8.01 M12 13.5 H12.01 M16 13.5 H16.01",
+      "plate": "A"
+    },
+    {
+      "d": "M8 17.5 H8.01 M12 17.5 H12.01 M16 17.5 H16.01",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M3 10 H21",
+    "M9 13.5 A1 1 0 1 1 7 13.5 A1 1 0 1 1 9 13.5 Z",
+    "M13 13.5 A1 1 0 1 1 11 13.5 A1 1 0 1 1 13 13.5 Z",
+    "M17 13.5 A1 1 0 1 1 15 13.5 A1 1 0 1 1 17 13.5 Z",
+    "M9 17.5 A1 1 0 1 1 7 17.5 A1 1 0 1 1 9 17.5 Z",
+    "M13 17.5 A1 1 0 1 1 11 17.5 A1 1 0 1 1 13 17.5 Z",
+    "M17 17.5 A1 1 0 1 1 15 17.5 A1 1 0 1 1 17 17.5 Z"
+  ],
+  "synonyms": [
+    "month",
+    "calendar view",
+    "date picker",
+    "pick a date",
+    "choose date",
+    "days of the month",
+    "schedule",
+    "planner",
+    "full month",
+    "timetable",
+    "agenda",
+    "roster",
+    "weekdays"
+  ]
+}

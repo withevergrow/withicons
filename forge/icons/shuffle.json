@@ -1,0 +1,65 @@
+{
+  "name": "shuffle",
+  "category": "media",
+  "description": "Two crossing arrows that randomize playback order.",
+  "aliases": [
+    "random",
+    "randomize",
+    "randomise",
+    "mix",
+    "shuffle-play",
+    "crossed-arrows",
+    "scramble"
+  ],
+  "tags": [
+    "media",
+    "player",
+    "random",
+    "playlist",
+    "order"
+  ],
+  "paths": [
+    {
+      "d": "M3 17.5 H5 C10.5 17.5 12 6.5 17.5 6.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 3 L21 6.5 L17.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M3 6.5 H5 C6.76 6.5 8.11 7.63 9.31 9.16",
+      "plate": "K"
+    },
+    {
+      "d": "M13.19 14.84 C14.39 16.37 15.74 17.5 17.5 17.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 14 L21 17.5 L17.5 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "shuffle songs",
+    "shuffle playlist",
+    "random order",
+    "random play",
+    "mix up",
+    "mixed",
+    "jumble",
+    "reorder",
+    "rearrange",
+    "crossing arrows",
+    "music player",
+    "playlist",
+    "dj",
+    "surprise",
+    "chance",
+    "any order",
+    "shufle",
+    "suffle"
+  ]
+}

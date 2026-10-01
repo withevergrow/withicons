@@ -1,0 +1,44 @@
+{
+  "name": "underline",
+  "category": "text",
+  "description": "An underscored U applying an underline to selected text.",
+  "aliases": [
+    "underlined",
+    "text-underline",
+    "underscore",
+    "format-underline",
+    "letter-u"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "style",
+    "editor",
+    "typography",
+    "decoration"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 4 V10 A5.5 5.5 0 0 0 17.5 10 V4",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 20 H19.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "underline text",
+    "line under text",
+    "emphasize",
+    "emphasis",
+    "highlight text",
+    "text formatting",
+    "font style",
+    "ctrl u",
+    "word formatting",
+    "underlne"
+  ]
+}

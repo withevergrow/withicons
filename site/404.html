@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found — with icons</title>
+  <meta name="description" content="This page wandered off. Search 300 free icons in 7 styles instead.">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <!-- served by CloudFront for any missing path, so every URL here is root-absolute -->
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/caveat-logo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/chrome.css">
+  <script>try{var t=localStorage.getItem('with-theme-v2');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}</script>
+  <style>
+    .nf { min-height: calc(100vh - var(--header-h)); display: grid; place-items: center; text-align: center; padding: 40px var(--gutter) 80px; position: relative; overflow: hidden; }
+    .nf .nf-num { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 22px); margin: 0 0 10px; font: 800 clamp(6rem, 3rem + 16vw, 15rem)/.85 var(--font-display); letter-spacing: -.06em; }
+    .nf-o { display: inline-grid; place-items: center; width: .82em; height: .82em; border-radius: .22em; background: var(--style-soft); color: var(--style); transition: background-color .6s, color .6s; }
+    .nf-o svg { width: 62%; height: 62%; }
+    .nf-o svg.pop { animation: nf-pop .6s var(--e-spring); }
+    @keyframes nf-pop { from { transform: scale(.3) rotate(-40deg); opacity: 0; } }
+    .nf h1 { margin: 0 0 12px; font: 800 var(--step-3)/1 var(--font-display); letter-spacing: -.04em; }
+    .nf h1 .hand { color: var(--c-solid-text); font-size: 1.1em; display: inline-block; transform: rotate(-3deg); }
+    .nf p:not(.nf-num) { margin: 0 auto 28px; max-width: 42ch; color: var(--ink-2); font-size: var(--step-1); }
+    .nf-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  </style>
+</head>
+<body data-page="404">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <a class="logo" href="/index.html" aria-label="with icons — home">
+      <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
+      <span class="logo-type">
+        <span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span>
+        <span class="logo-by">powered by <b>evergrow</b></span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/icons.html">Icons</a><a href="/guides/index.html">How to use</a>
+      <a href="/developers.html">Developers</a><a href="/ai.html">For AI</a><a href="/about.html">About</a>
+    </nav>
+    <div class="site-actions">
+      <button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"></button>
+      <a class="cta" href="/icons.html">Browse icons</a>
+    </div>
+  </header>
+  <main id="main" class="nf">
+    <div>
+      <p class="nf-num" aria-label="404"><span aria-hidden="true">4</span><span class="nf-o s-line" aria-hidden="true" data-nf></span><span aria-hidden="true">4</span></p>
+      <h1>This page <span class="hand">wandered off.</span></h1>
+      <p>But 300 icons are right here. Search for the one you came for.</p>
+      <div class="nf-actions">
+        <button class="btn btn-ink btn-lg" type="button" data-search-open>Search icons</button>
+        <a class="btn btn-ghost btn-lg" href="/index.html">Go home</a>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <div class="foot-base" style="margin-top:0;border-top:0;padding-top:0">
+        <span>© 2026 with icons · MIT License</span>
+        <a class="evergrow-link" href="https://withevergrow.com"><span data-evergrow-mark></span>Powered by Evergrow</a>
+      </div>
+    </div>
+  </footer>
+  <script src="/js/site.js" defer></script>
+  <script src="/data/meta.js" defer></script>
+  <script src="/data/style-line.js" defer></script>
+  <script>
+    addEventListener('DOMContentLoaded', function () {
+      var WI = window.WI, el = document.querySelector('[data-nf]'); if (!WI || !el) return
+      var seq = [['search', 'line'], ['compass', 'duo'], ['map-pin', 'solid'], ['help-circle', 'sketch'], ['smile', 'gloss'], ['route', 'blueprint']], i = 0
+      function show() {
+        var f = seq[i % seq.length]; i++
+        WI.loadStyle(f[1]).then(function () {
+          var s = WI.svg(f[0], f[1], 24, { 'class': 'pop' }); if (!s) { show(); return }
+          WI.ORDER.forEach(function (o) { el.classList.remove('s-' + o) }); el.classList.add('s-' + f[1]); el.innerHTML = s
+        })
+      }
+      show(); if (!WI.reduced) setInterval(function () { if (!document.hidden) show() }, 2200)
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "name": "umbrella",
+  "category": "weather",
+  "description": "An open umbrella for rain protection, insurance, and coverage.",
+  "aliases": [
+    "parasol",
+    "insurance",
+    "rain-protection",
+    "brolly",
+    "sunshade"
+  ],
+  "tags": [
+    "weather",
+    "rain",
+    "protection",
+    "insurance",
+    "safety"
+  ],
+  "paths": [
+    {
+      "d": "M3 12 A9 9 0 0 1 21 12 A3.75 3.75 0 0 0 15 12 A3.75 3.75 0 0 0 9 12 A3.75 3.75 0 0 0 3 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 10.5 V19 A2 2 0 0 1 8 19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 12 A9 9 0 0 1 21 12 A3.75 3.75 0 0 0 15 12 A3.75 3.75 0 0 0 9 12 A3.75 3.75 0 0 0 3 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "rain",
+    "rainy",
+    "rainy day",
+    "wet weather",
+    "coverage",
+    "protection",
+    "protected",
+    "insured",
+    "safety net",
+    "policy",
+    "cover",
+    "shelter",
+    "forecast",
+    "monsoon",
+    "drizzle",
+    "umberella",
+    "umbrela",
+    "beach umbrella",
+    "raincoat"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "move",
+  "category": "arrows",
+  "description": "Four-way arrows for dragging or repositioning an element.",
+  "aliases": [
+    "drag",
+    "reposition",
+    "pan",
+    "four-arrows",
+    "arrows-move",
+    "relocate",
+    "translate",
+    "move-arrows"
+  ],
+  "tags": [
+    "drag",
+    "pan",
+    "position",
+    "arrows",
+    "four-way"
+  ],
+  "paths": [
+    {
+      "d": "M12 3 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 6 L12 3 L15 6",
+      "plate": "A"
+    },
+    {
+      "d": "M18 9 L21 12 L18 15",
+      "plate": "A"
+    },
+    {
+      "d": "M15 18 L12 21 L9 18",
+      "plate": "A"
+    },
+    {
+      "d": "M6 15 L3 12 L6 9",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "drag and drop",
+    "move around",
+    "position",
+    "rearrange",
+    "shift",
+    "all directions",
+    "arrows",
+    "four way",
+    "grab",
+    "hand tool",
+    "nudge",
+    "adjust position",
+    "scroll around",
+    "moving"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "arrow-right",
+  "category": "arrows",
+  "description": "A straight rightward arrow for forward navigation and calls to action.",
+  "aliases": [
+    "right",
+    "forward",
+    "continue",
+    "next",
+    "east",
+    "go",
+    "proceed",
+    "right-arrow",
+    "next-arrow"
+  ],
+  "tags": [
+    "next",
+    "forward",
+    "go",
+    "proceed",
+    "direction"
+  ],
+  "paths": [
+    {
+      "d": "M4 12 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 5.5 L20 12 L13.5 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "go forward",
+    "next page",
+    "next step",
+    "onward",
+    "onwards",
+    "advance",
+    "move on",
+    "get started",
+    "start",
+    "submit",
+    "enter",
+    "call to action",
+    "cta",
+    "learn more",
+    "read more",
+    "see more",
+    "view more",
+    "rightward",
+    "point right",
+    "pointer right",
+    "slide right",
+    "swipe right",
+    "carousel next",
+    "later",
+    "then",
+    "forwards",
+    "nxt"
+  ]
+}

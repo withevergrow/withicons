@@ -1,0 +1,52 @@
+name: Icon request
+description: Ask for a new icon (it will be drawn once and rendered in all 7 styles).
+title: "Icon: <name>"
+labels: ["icon request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Before you submit: search https://withicons.com/icons.html (and try a synonym - `bin` finds `trash`).
+        One icon per issue, please. Upvote existing requests with a 👍 reaction instead of commenting "+1".
+  - type: input
+    id: name
+    attributes:
+      label: Suggested name
+      description: kebab-case, the word most people would type first (e.g. `shopping-bag`, `cloud-upload`).
+      placeholder: shopping-bag
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: What is it for?
+      description: Where would you use it? Which UI, slide or document? This decides the metaphor.
+    validations:
+      required: true
+  - type: input
+    id: aliases
+    attributes:
+      label: Other words people might search for
+      description: Comma separated. These become aliases so the icon is found by any of them.
+      placeholder: bag, purchase, checkout, store
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [navigation, arrows, actions, status, media, files, communication, users, commerce, time, devices, layout, text, maps, development, security, charts, weather, objects, not sure]
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: References (optional)
+      description: Screenshots or links showing the concept. Do not paste SVG code from other icon sets - every icon here is drawn from scratch.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the library (including synonyms) and this icon does not exist.
+          required: true
+        - label: This is a generic concept, not a company logo or trademark (brand logos are out of scope).
+          required: true

@@ -1,0 +1,65 @@
+{
+  "name": "repeat",
+  "category": "media",
+  "description": "Two arrows looping round a rectangle to repeat a track or playlist.",
+  "aliases": [
+    "loop",
+    "replay",
+    "repeat-all",
+    "looping",
+    "recurring",
+    "play-again",
+    "cycle-arrows"
+  ],
+  "tags": [
+    "media",
+    "player",
+    "loop",
+    "playlist",
+    "cycle"
+  ],
+  "paths": [
+    {
+      "d": "M4 11.5 V10 A3.5 3.5 0 0 1 7.5 6.5 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 3 L20 6.5 L16.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M20 12.5 V14 A3.5 3.5 0 0 1 16.5 17.5 H4",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 14 L4 17.5 L7.5 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "repeat song",
+    "repeat track",
+    "repeat playlist",
+    "loop playlist",
+    "on repeat",
+    "replay song",
+    "continuous play",
+    "endless",
+    "again",
+    "recurring event",
+    "repeat event",
+    "recurrence",
+    "every week",
+    "every day",
+    "retweet",
+    "repost",
+    "reshare",
+    "cycle",
+    "rotation",
+    "repeat mode",
+    "music player",
+    "reapeat"
+  ]
+}

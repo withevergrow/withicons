@@ -1,0 +1,64 @@
+{
+  "name": "plug",
+  "category": "devices",
+  "description": "An electric plug with two prongs and a cord for integrations, plugins and power connections.",
+  "aliases": [
+    "connector",
+    "electric-plug",
+    "power-plug",
+    "power-cord",
+    "adapter",
+    "plug-in",
+    "socket"
+  ],
+  "tags": [
+    "electricity",
+    "connect",
+    "integration",
+    "cable",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M9 2.5 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M15 2.5 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 7 H18.5 A1 1 0 0 1 19.5 8 V11 A5.5 5.5 0 0 1 14 16.5 H10 A5.5 5.5 0 0 1 4.5 11 V8 A1 1 0 0 1 5.5 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 7 H18.5 A1 1 0 0 1 19.5 8 V11 A5.5 5.5 0 0 1 14 16.5 H10 A5.5 5.5 0 0 1 4.5 11 V8 A1 1 0 0 1 5.5 7 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "plugin",
+    "integration",
+    "integrations",
+    "connect",
+    "connection",
+    "electric",
+    "electricity",
+    "electrical",
+    "outlet",
+    "wall socket",
+    "charger",
+    "charging",
+    "cable",
+    "energy",
+    "power supply",
+    "mains",
+    "unplug",
+    "plugged in",
+    "connected"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "maximize",
+  "category": "layout",
+  "description": "Two diagonal arrows pointing out to opposite corners, expanding a view to fullscreen.",
+  "aliases": [
+    "fullscreen",
+    "full-screen",
+    "enter-fullscreen",
+    "expand",
+    "enlarge",
+    "maximise",
+    "arrows-out",
+    "go-fullscreen",
+    "blow-up"
+  ],
+  "tags": [
+    "fullscreen",
+    "expand",
+    "window",
+    "view",
+    "enlarge",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 3.5 L14 10",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 3.5 H20.5 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 20.5 L10 14",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 20.5 H3.5 V14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "full screen",
+    "make bigger",
+    "bigger",
+    "larger",
+    "grow",
+    "scale up",
+    "zoom to fit",
+    "expand view",
+    "open wide",
+    "widen",
+    "stretch",
+    "resize",
+    "pop out",
+    "theater mode",
+    "cinema mode",
+    "full view",
+    "full size",
+    "view larger",
+    "expand window",
+    "expand video",
+    "max",
+    "maximum",
+    "maximize window",
+    "fullscreeen"
+  ]
+}

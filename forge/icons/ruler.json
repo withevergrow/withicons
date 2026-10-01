@@ -1,0 +1,84 @@
+{
+  "name": "ruler",
+  "category": "objects",
+  "description": "An angled ruler with tick marks for measuring, dimensions, and layout tools.",
+  "aliases": [
+    "measure",
+    "measurement",
+    "length",
+    "scale",
+    "dimensions",
+    "straightedge",
+    "tape-measure",
+    "measuring-tool"
+  ],
+  "tags": [
+    "measure",
+    "length",
+    "tool",
+    "drafting",
+    "units"
+  ],
+  "paths": [
+    {
+      "d": "M3 16 L16 3 A1.41 1.41 0 0 1 18 3 L21 6 A1.41 1.41 0 0 1 21 8 L8 21 A1.41 1.41 0 0 1 6 21 L3 18 A1.41 1.41 0 0 1 3 16 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 14 L7 16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 11 L9 12",
+      "plate": "A"
+    },
+    {
+      "d": "M11 8 L13 10",
+      "plate": "A"
+    },
+    {
+      "d": "M14 5 L15 6",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 16 L16 3 A1.41 1.41 0 0 1 18 3 L21 6 A1.41 1.41 0 0 1 21 8 L8 21 A1.41 1.41 0 0 1 6 21 L3 18 A1.41 1.41 0 0 1 3 16 Z"
+  ],
+  "cutouts": [
+    "M3.5 12.5 L7.25 16.25",
+    "M6.5 9.5 L9.25 12.25",
+    "M9.5 6.5 L13.25 10.25",
+    "M12.5 3.5 L15.25 6.25"
+  ],
+  "synonyms": [
+    "size",
+    "sizing",
+    "size guide",
+    "size chart",
+    "width",
+    "height",
+    "distance",
+    "inches",
+    "centimeters",
+    "centimetres",
+    "cm",
+    "mm",
+    "metric",
+    "units",
+    "drafting",
+    "drawing",
+    "architecture",
+    "engineering",
+    "geometry",
+    "math",
+    "school",
+    "stationery",
+    "precision",
+    "layout",
+    "grid",
+    "diy",
+    "carpentry",
+    "rular",
+    "ruller"
+  ]
+}

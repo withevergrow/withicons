@@ -1,0 +1,68 @@
+{
+  "name": "camera",
+  "category": "devices",
+  "description": "A photo camera body with a lens, for taking photos and capturing screenshots.",
+  "aliases": [
+    "photo",
+    "take-photo",
+    "take-picture",
+    "snapshot",
+    "capture",
+    "photography",
+    "photo-camera"
+  ],
+  "tags": [
+    "camera",
+    "photo",
+    "capture",
+    "lens",
+    "picture"
+  ],
+  "paths": [
+    {
+      "d": "M4 6.5 H7.5 L9 4 H15 L16.5 6.5 H20 A2 2 0 0 1 22 8.5 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V8.5 A2 2 0 0 1 4 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 13.5 A3 3 0 1 1 9 13.5 A3 3 0 1 1 15 13.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 6.5 H7.5 L9 4 H15 L16.5 6.5 H20 A2 2 0 0 1 22 8.5 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V8.5 A2 2 0 0 1 4 6.5 Z"
+  ],
+  "cutouts": [
+    "M15.75 13.5 A3.75 3.75 0 1 1 8.25 13.5 A3.75 3.75 0 1 1 15.75 13.5 Z M14.25 13.5 A2.25 2.25 0 1 1 9.75 13.5 A2.25 2.25 0 1 1 14.25 13.5 Z"
+  ],
+  "synonyms": [
+    "picture",
+    "pic",
+    "selfie",
+    "shoot",
+    "shot",
+    "snap",
+    "click a picture",
+    "dslr",
+    "lens",
+    "photographer",
+    "camera roll",
+    "gallery",
+    "screenshot",
+    "scan",
+    "upload photo",
+    "profile photo",
+    "change photo",
+    "instagram",
+    "shutter",
+    "point and shoot",
+    "webcam",
+    "cam",
+    "kamera",
+    "camara",
+    "pictures",
+    "photo booth",
+    "memories",
+    "tourist",
+    "digital camera"
+  ]
+}

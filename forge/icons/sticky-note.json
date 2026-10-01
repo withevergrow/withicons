@@ -1,0 +1,71 @@
+{
+  "name": "sticky-note",
+  "category": "files",
+  "description": "A square sticky note with two lines of writing and a peeled-up bottom corner.",
+  "aliases": [
+    "note",
+    "memo",
+    "post-it",
+    "sticky",
+    "notepad",
+    "annotation",
+    "stickies",
+    "postit"
+  ],
+  "tags": [
+    "note",
+    "memo",
+    "reminder",
+    "paper",
+    "writing",
+    "annotation"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V15 L15 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M21 15 H16.5 A1.5 1.5 0 0 0 15 16.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 8 H16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 12 H12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V15 L15 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M22 15 H16.5 A1.5 1.5 0 0 0 15 16.5 V22",
+    "M7.5 8 H16.5",
+    "M7.5 12 H12.5"
+  ],
+  "synonyms": [
+    "notes",
+    "sticky notes",
+    "reminder",
+    "jot",
+    "jot down",
+    "quick note",
+    "write note",
+    "scribble",
+    "to do",
+    "todo",
+    "comment",
+    "remark",
+    "note pad",
+    "postit note",
+    "post it",
+    "memo pad",
+    "notice board",
+    "stick note",
+    "notes app",
+    "idea"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "briefcase",
+  "category": "objects",
+  "description": "A briefcase with a carry handle for work, jobs, and business.",
+  "aliases": [
+    "work",
+    "job",
+    "business",
+    "portfolio",
+    "career",
+    "employment",
+    "work-bag"
+  ],
+  "tags": [
+    "work",
+    "business",
+    "job",
+    "office",
+    "career"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7.5 V5.5 A2 2 0 0 1 10.5 3.5 H13.5 A2 2 0 0 1 15.5 5.5 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 12.5 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12.5 V14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M2.5 12.5 H21.5",
+    "M12 12.5 V14.5"
+  ],
+  "synonyms": [
+    "office",
+    "jobs",
+    "job search",
+    "hiring",
+    "careers",
+    "professional",
+    "company",
+    "workplace",
+    "occupation",
+    "position",
+    "vacancy",
+    "resume",
+    "cv",
+    "experience",
+    "work history",
+    "linkedin",
+    "briefcase bag",
+    "attache case",
+    "luggage",
+    "suitcase",
+    "travel bag",
+    "corporate",
+    "employer",
+    "business trip",
+    "work mode",
+    "brief case"
+  ]
+}

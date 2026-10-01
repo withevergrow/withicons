@@ -1,0 +1,69 @@
+{
+  "name": "crown",
+  "category": "objects",
+  "description": "A crown marking premium tiers, owners, and privileged roles.",
+  "aliases": [
+    "premium",
+    "vip",
+    "pro",
+    "royal",
+    "king",
+    "queen",
+    "owner",
+    "upgrade",
+    "royalty",
+    "tiara",
+    "admin"
+  ],
+  "tags": [
+    "premium",
+    "royalty",
+    "king",
+    "queen",
+    "vip"
+  ],
+  "paths": [
+    {
+      "d": "M5 16 L3 7 L8 10.5 L12 4 L16 10.5 L21 7 L19 16 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 20 H19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 16 L3 7 L8 10.5 L12 4 L16 10.5 L21 7 L19 16 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "crown jewels",
+    "monarch",
+    "prince",
+    "princess",
+    "gold",
+    "luxury",
+    "exclusive",
+    "elite",
+    "best",
+    "winner",
+    "champion",
+    "leader",
+    "top",
+    "first place",
+    "number one",
+    "top rated",
+    "special",
+    "member",
+    "membership",
+    "subscription",
+    "paid plan",
+    "boss",
+    "majesty",
+    "kingdom",
+    "throne",
+    "fancy",
+    "crwon",
+    "crowne"
+  ]
+}

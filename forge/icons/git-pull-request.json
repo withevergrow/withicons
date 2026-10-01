@@ -1,0 +1,70 @@
+{
+  "name": "git-pull-request",
+  "category": "development",
+  "description": "A branch feeding back into the main line with an arrow, for pull and merge requests.",
+  "aliases": [
+    "pr",
+    "pull-request",
+    "merge-request",
+    "mr",
+    "code-review",
+    "contribution",
+    "propose-changes"
+  ],
+  "tags": [
+    "git",
+    "pull-request",
+    "code-review",
+    "merge",
+    "collaboration",
+    "vcs"
+  ],
+  "paths": [
+    {
+      "d": "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 18 A3 3 0 1 1 2 18 A3 3 0 1 1 8 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 9 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6 H17 A2 2 0 0 1 19 8 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 3.5 L12 6 L14.5 8.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+    "M8 18 A3 3 0 1 1 2 18 A3 3 0 1 1 8 18 Z",
+    "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "pull request",
+    "merge request",
+    "review code",
+    "github",
+    "gitlab",
+    "open pr",
+    "submit changes",
+    "patch",
+    "contribute",
+    "code changes",
+    "branch merge",
+    "peer review",
+    "diff",
+    "approve changes"
+  ]
+}

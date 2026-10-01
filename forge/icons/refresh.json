@@ -1,0 +1,66 @@
+{
+  "name": "refresh",
+  "category": "arrows",
+  "description": "Circular arrows that reload data or retry a failed request.",
+  "aliases": [
+    "reload",
+    "sync",
+    "retry",
+    "refresh-cw",
+    "renew",
+    "update",
+    "reset-arrows",
+    "try-again"
+  ],
+  "tags": [
+    "reload",
+    "sync",
+    "retry",
+    "update",
+    "cycle"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 11 A8.5 8.5 0 0 1 19 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M19 2.5 L19 7.5 L14 7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 13 A8.5 8.5 0 0 1 5 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 21.5 L5 16.5 L10 16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "refresh page",
+    "reload page",
+    "synchronize",
+    "synchronise",
+    "resync",
+    "sync now",
+    "update data",
+    "fetch again",
+    "get latest",
+    "check for updates",
+    "pull to refresh",
+    "circular arrows",
+    "arrows in circle",
+    "recycle",
+    "loading again",
+    "restart",
+    "f5",
+    "spin arrows",
+    "refesh",
+    "relaod",
+    "syncing",
+    "reconnect"
+  ]
+}

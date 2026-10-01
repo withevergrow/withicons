@@ -1,0 +1,80 @@
+{
+  "name": "smile",
+  "category": "users",
+  "description": "A smiling face for emoji pickers and reaction controls.",
+  "aliases": [
+    "emoji",
+    "smiley",
+    "emoticon",
+    "happy",
+    "happy-face",
+    "smiley-face",
+    "face",
+    "reaction",
+    "satisfied",
+    "emoji-picker"
+  ],
+  "tags": [
+    "face",
+    "emotion",
+    "mood",
+    "happy",
+    "emoji"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M8 14 A5 5 0 0 0 16 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 9.5 A1 1.25 0 1 1 8 9.5 A1 1.25 0 1 1 10 9.5 Z",
+    "M16 9.5 A1 1.25 0 1 1 14 9.5 A1 1.25 0 1 1 16 9.5 Z",
+    "M8 14 A5 5 0 0 0 16 14"
+  ],
+  "synonyms": [
+    "smile face",
+    "smiling",
+    "grin",
+    "joy",
+    "cheerful",
+    "glad",
+    "pleased",
+    "content",
+    "positive",
+    "mood",
+    "feeling",
+    "feelings",
+    "emotion",
+    "friendly",
+    "fun",
+    "laugh",
+    "good",
+    "nice",
+    "feedback",
+    "rate experience",
+    "sticker",
+    "add reaction",
+    "emojis",
+    "smilie",
+    "smily",
+    "happy face",
+    "customer satisfaction",
+    "welcome"
+  ]
+}

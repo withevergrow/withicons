@@ -1,0 +1,77 @@
+{
+  "name": "ticket",
+  "category": "commerce",
+  "description": "An admission ticket with notched sides and a perforated tear line.",
+  "aliases": [
+    "admission",
+    "pass",
+    "coupon",
+    "voucher",
+    "event-ticket",
+    "entry",
+    "raffle",
+    "boarding-pass",
+    "tickets"
+  ],
+  "tags": [
+    "event",
+    "admission",
+    "cinema",
+    "concert",
+    "booking",
+    "entry"
+  ],
+  "paths": [
+    {
+      "d": "M4 5 H20 A2 2 0 0 1 22 7 V9.5 A2.5 2.5 0 0 0 22 14.5 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V14.5 A2.5 2.5 0 0 0 2 9.5 V7 A2 2 0 0 1 4 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 8.5 V8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 12 V12",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 15.5 V15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 5 H20 A2 2 0 0 1 22 7 V9.5 A2.5 2.5 0 0 0 22 14.5 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V14.5 A2.5 2.5 0 0 0 2 9.5 V7 A2 2 0 0 1 4 5 Z"
+  ],
+  "cutouts": [
+    "M15.5 8.25 V8.75",
+    "M15.5 11.75 V12.25",
+    "M15.5 15.25 V15.75"
+  ],
+  "synonyms": [
+    "ticket stub",
+    "admit one",
+    "movie ticket",
+    "cinema",
+    "film ticket",
+    "concert",
+    "concert ticket",
+    "show",
+    "event",
+    "events",
+    "festival",
+    "theatre",
+    "theater",
+    "booking",
+    "reservation",
+    "book tickets",
+    "gig",
+    "lottery",
+    "entrance",
+    "support ticket",
+    "stub",
+    "match ticket",
+    "travel pass",
+    "tikcet",
+    "tix"
+  ]
+}

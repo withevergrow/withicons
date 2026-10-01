@@ -1,0 +1,71 @@
+{
+  "name": "code",
+  "category": "development",
+  "description": "Angle brackets around a slash for code blocks, snippets, and developer views.",
+  "aliases": [
+    "source-code",
+    "angle-brackets",
+    "snippet",
+    "programming",
+    "developer",
+    "markup",
+    "html",
+    "embed",
+    "dev",
+    "coding",
+    "embed-code",
+    "xml"
+  ],
+  "tags": [
+    "code",
+    "html",
+    "xml",
+    "developer",
+    "programming",
+    "markup",
+    "embed"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 7 L2.5 12 L7.5 17",
+      "plate": "K"
+    },
+    {
+      "d": "M13 4.5 L11 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16.5 7 L21.5 12 L16.5 17",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "code block",
+    "source",
+    "script",
+    "software",
+    "web development",
+    "programmer",
+    "tags",
+    "brackets",
+    "less than greater than",
+    "chevrons",
+    "view source",
+    "html code",
+    "css",
+    "javascript",
+    "js",
+    "json",
+    "api",
+    "technical",
+    "hacker",
+    "build",
+    "engineering",
+    "coder",
+    "code view",
+    "computer code",
+    "website code"
+  ]
+}

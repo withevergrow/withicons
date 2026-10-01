@@ -1,0 +1,75 @@
+{
+  "name": "file-spreadsheet",
+  "category": "files",
+  "description": "A page ruled into a grid for spreadsheets, tables and CSV exports.",
+  "aliases": [
+    "csv",
+    "excel",
+    "xls",
+    "xlsx",
+    "spreadsheet",
+    "workbook",
+    "google-sheets",
+    "table-file"
+  ],
+  "tags": [
+    "spreadsheet",
+    "grid",
+    "data",
+    "rows",
+    "columns",
+    "export"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M5 12.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M5 17 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 12.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M6 13.5 H9.5 V16 H6 Z",
+    "M11.5 13.5 H18 V16 H11.5 Z",
+    "M6 18 H9.5 V20.5 H7 A1 1 0 0 1 6 19.5 Z",
+    "M11.5 18 H18 V19.5 A1 1 0 0 1 17 20.5 H11.5 Z"
+  ],
+  "synonyms": [
+    "excel file",
+    "csv export",
+    "export csv",
+    "data export",
+    "rows and columns",
+    "grid",
+    "ledger",
+    "accounts",
+    "budget",
+    "numbers",
+    "cells",
+    "tabular data",
+    "data sheet",
+    "worksheet",
+    "spread sheet",
+    "spredsheet",
+    "sheet",
+    "finance"
+  ]
+}

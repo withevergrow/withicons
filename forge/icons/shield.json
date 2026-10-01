@@ -1,0 +1,58 @@
+{
+  "name": "shield",
+  "category": "security",
+  "description": "A plain shield representing security features and protection.",
+  "aliases": [
+    "protection",
+    "security",
+    "guard",
+    "safety",
+    "defense",
+    "defence",
+    "antivirus",
+    "protect",
+    "safeguard"
+  ],
+  "tags": [
+    "security",
+    "protection",
+    "guard",
+    "defense",
+    "safe"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "secure",
+    "safe",
+    "safety first",
+    "privacy",
+    "firewall",
+    "insurance",
+    "cover",
+    "coverage",
+    "armor",
+    "armour",
+    "knight",
+    "crest",
+    "emblem",
+    "police",
+    "bodyguard",
+    "immunity",
+    "shelter",
+    "defend",
+    "resist",
+    "strength",
+    "shiled",
+    "sheild",
+    "security shield"
+  ]
+}

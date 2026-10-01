@@ -1,0 +1,71 @@
+{
+  "name": "moon",
+  "category": "weather",
+  "description": "A crescent moon for night, dark theme, and quiet hours.",
+  "aliases": [
+    "night",
+    "dark-mode",
+    "crescent",
+    "crescent-moon",
+    "dark-theme",
+    "night-mode",
+    "bedtime",
+    "nighttime",
+    "lunar",
+    "sleep"
+  ],
+  "tags": [
+    "night",
+    "dark",
+    "sleep",
+    "theme",
+    "sky"
+  ],
+  "paths": [
+    {
+      "d": "M21 13 A9 9 0 1 1 11 3 A7.1 7.1 0 0 0 21 13 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M21 13 A9 9 0 1 1 11 3 A7.1 7.1 0 0 0 21 13 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "dark",
+    "darkmode",
+    "night theme",
+    "night time",
+    "evening",
+    "midnight",
+    "late",
+    "sleep mode",
+    "sleeping",
+    "go to sleep",
+    "rest",
+    "do not disturb",
+    "dnd",
+    "quiet hours",
+    "quiet",
+    "calm",
+    "dream",
+    "dreams",
+    "sky",
+    "stars",
+    "astronomy",
+    "space",
+    "ramadan",
+    "eid",
+    "half moon",
+    "new moon",
+    "moonlight",
+    "theme toggle",
+    "switch theme",
+    "appearance",
+    "moon phase",
+    "bed",
+    "night shift",
+    "mooon",
+    "nite"
+  ]
+}

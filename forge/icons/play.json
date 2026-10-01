@@ -1,0 +1,51 @@
+{
+  "name": "play",
+  "category": "media",
+  "description": "A right-pointing triangle that starts or resumes playback.",
+  "aliases": [
+    "start",
+    "resume",
+    "playback",
+    "play-button",
+    "run",
+    "begin",
+    "media-play",
+    "video-play"
+  ],
+  "tags": [
+    "media",
+    "video",
+    "audio",
+    "player",
+    "control"
+  ],
+  "paths": [
+    {
+      "d": "M6 6.53 A2 2 0 0 1 9.03 4.82 L18.14 10.29 A2 2 0 0 1 18.14 13.71 L9.03 19.18 A2 2 0 0 1 6 17.47 L6 6.53 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6 6.53 A2 2 0 0 1 9.03 4.82 L18.14 10.29 A2 2 0 0 1 18.14 13.71 L9.03 19.18 A2 2 0 0 1 6 17.47 L6 6.53 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "play video",
+    "play music",
+    "play song",
+    "watch",
+    "listen",
+    "go",
+    "launch",
+    "player",
+    "media",
+    "video",
+    "audio",
+    "triangle button",
+    "preview",
+    "continue",
+    "press play",
+    "unpause",
+    "plya"
+  ]
+}

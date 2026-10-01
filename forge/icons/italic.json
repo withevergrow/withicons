@@ -1,0 +1,53 @@
+{
+  "name": "italic",
+  "category": "text",
+  "description": "A slanted I applying italic emphasis to selected text.",
+  "aliases": [
+    "emphasis",
+    "slanted",
+    "oblique",
+    "italic-text",
+    "text-italic",
+    "em",
+    "italics"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "style",
+    "typography",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M15 4 L9 20",
+      "plate": "K"
+    },
+    {
+      "d": "M11 4 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M5 20 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "italicize",
+    "italicise",
+    "slant text",
+    "lean text",
+    "cursive",
+    "stylized text",
+    "formatting",
+    "text style",
+    "font style",
+    "rich text",
+    "ctrl i",
+    "emphasize",
+    "emphasise",
+    "italic font"
+  ]
+}

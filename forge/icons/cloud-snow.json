@@ -1,0 +1,73 @@
+{
+  "name": "cloud-snow",
+  "category": "weather",
+  "description": "A cloud shedding a scatter of snowflakes for snow and winter conditions.",
+  "aliases": [
+    "snow",
+    "snowy",
+    "snowfall",
+    "flurries",
+    "snow-cloud",
+    "snowing",
+    "blizzard"
+  ],
+  "tags": [
+    "weather",
+    "snow",
+    "winter",
+    "forecast",
+    "cold"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 17.25 V17.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.25 V17.75",
+      "plate": "A"
+    },
+    {
+      "d": "M16 17.25 V17.75",
+      "plate": "A"
+    },
+    {
+      "d": "M10 20.75 V21.25",
+      "plate": "A"
+    },
+    {
+      "d": "M14 20.75 V21.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "winter",
+    "cold",
+    "freezing",
+    "frost",
+    "frosty",
+    "sleet",
+    "snow storm",
+    "snowstorm",
+    "weather",
+    "forecast",
+    "winter weather",
+    "snow day",
+    "chilly",
+    "icy",
+    "christmas",
+    "holiday season",
+    "december",
+    "below zero",
+    "white christmas",
+    "ice"
+  ]
+}

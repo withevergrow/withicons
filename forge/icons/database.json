@@ -1,0 +1,67 @@
+{
+  "name": "database",
+  "category": "charts",
+  "description": "Stacked cylinders representing a database or persistent datastore.",
+  "aliases": [
+    "db",
+    "datastore",
+    "sql",
+    "data-storage",
+    "records",
+    "cylinder",
+    "persistence",
+    "data-store",
+    "data-base"
+  ],
+  "tags": [
+    "data",
+    "storage",
+    "backend",
+    "sql",
+    "records",
+    "persistence"
+  ],
+  "paths": [
+    {
+      "d": "M20 5.5 A8 3 0 1 1 4 5.5 A8 3 0 1 1 20 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 5.5 V18.5 A8 3 0 0 0 20 18.5 V5.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 12 A8 3 0 0 0 20 12",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 5.5 A8 3 0 0 1 20 5.5 V18.5 A8 3 0 0 1 4 18.5 Z"
+  ],
+  "cutouts": [
+    "M2.5 5.5 H4 A8 3 0 0 0 20 5.5 H21.5",
+    "M2.5 12 H4 A8 3 0 0 0 20 12 H21.5"
+  ],
+  "synonyms": [
+    "data",
+    "storage",
+    "backend",
+    "back end",
+    "tables",
+    "mysql",
+    "postgres",
+    "postgresql",
+    "mongodb",
+    "oracle",
+    "sqlite",
+    "warehouse",
+    "data warehouse",
+    "big data",
+    "information",
+    "repository",
+    "stored data",
+    "disk",
+    "databse",
+    "datbase"
+  ]
+}

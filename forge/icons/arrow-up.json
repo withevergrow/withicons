@@ -1,0 +1,55 @@
+{
+  "name": "arrow-up",
+  "category": "arrows",
+  "description": "A straight upward arrow for moving up or ascending sort.",
+  "aliases": [
+    "up",
+    "ascend",
+    "move-up",
+    "sort-ascending",
+    "north",
+    "scroll-up",
+    "upward",
+    "up-arrow",
+    "back-to-top"
+  ],
+  "tags": [
+    "up",
+    "ascending",
+    "direction",
+    "raise",
+    "top"
+  ],
+  "paths": [
+    {
+      "d": "M12 20 V4",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 10.5 L12 4 L18.5 10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "go up",
+    "top",
+    "above",
+    "higher",
+    "raise",
+    "rise",
+    "lift",
+    "climb",
+    "boost",
+    "upgrade",
+    "ascending",
+    "scroll to top",
+    "to top",
+    "point up",
+    "pointer up",
+    "overhead",
+    "upwards",
+    "more"
+  ]
+}

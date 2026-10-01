@@ -1,0 +1,59 @@
+{
+  "name": "wind",
+  "category": "weather",
+  "description": "Flowing wind lines with curls for breeze, airflow, and ventilation.",
+  "aliases": [
+    "breeze",
+    "windy",
+    "air",
+    "gust",
+    "airflow",
+    "ventilation"
+  ],
+  "tags": [
+    "weather",
+    "air",
+    "breeze",
+    "flow",
+    "climate"
+  ],
+  "paths": [
+    {
+      "d": "M3 8 H9 A2.75 2.75 0 1 0 6.62 3.87",
+      "plate": "A"
+    },
+    {
+      "d": "M3 12 H18 A3 3 0 1 0 15.4 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 16 H13.5 A2.75 2.75 0 1 1 11.12 20.13",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "blowing",
+    "blow",
+    "wind speed",
+    "gale",
+    "storm",
+    "weather",
+    "fan",
+    "air conditioning",
+    "fresh air",
+    "breath",
+    "breathe",
+    "draft",
+    "draught",
+    "cool air",
+    "tornado",
+    "hurricane",
+    "typhoon",
+    "wind power",
+    "wind energy",
+    "windy day",
+    "breezy"
+  ]
+}

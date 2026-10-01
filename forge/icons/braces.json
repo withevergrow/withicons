@@ -1,0 +1,48 @@
+{
+  "name": "braces",
+  "category": "development",
+  "description": "A pair of curly braces for code blocks, objects, JSON, and scopes.",
+  "aliases": [
+    "curly-braces",
+    "curly-brackets",
+    "code-block",
+    "json",
+    "object",
+    "brackets"
+  ],
+  "tags": [
+    "code",
+    "programming",
+    "syntax",
+    "developer",
+    "json",
+    "block"
+  ],
+  "paths": [
+    {
+      "d": "M9 3.5 H8.5 A2.5 2.5 0 0 0 6 6 V9.5 C6 11 5 12 3.5 12 C5 12 6 13 6 14.5 V18 A2.5 2.5 0 0 0 8.5 20.5 H9",
+      "plate": "K"
+    },
+    {
+      "d": "M15 3.5 H15.5 A2.5 2.5 0 0 1 18 6 V9.5 C18 11 19 12 20.5 12 C19 12 18 13 18 14.5 V18 A2.5 2.5 0 0 1 15.5 20.5 H15",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "curly brace",
+    "squiggly brackets",
+    "snippet",
+    "scope",
+    "variable",
+    "developer",
+    "programming",
+    "javascript",
+    "api response",
+    "data structure",
+    "template",
+    "embed",
+    "config"
+  ]
+}

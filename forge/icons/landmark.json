@@ -1,0 +1,67 @@
+{
+  "name": "landmark",
+  "category": "commerce",
+  "description": "A classical bank building with a pediment, four columns and a base.",
+  "aliases": [
+    "bank",
+    "courthouse",
+    "museum",
+    "government",
+    "institution",
+    "capitol",
+    "columns-building",
+    "temple"
+  ],
+  "tags": [
+    "bank",
+    "columns",
+    "pediment",
+    "finance",
+    "government",
+    "classical"
+  ],
+  "paths": [
+    {
+      "d": "M3 9 L12 3.5 L21 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 13 V17 M10 13 V17 M14 13 V17 M18 13 V17",
+      "plate": "A"
+    },
+    {
+      "d": "M3 21 H21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 9 L12 3.5 L21 9 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "finance",
+    "banking",
+    "city hall",
+    "town hall",
+    "court",
+    "law",
+    "legal",
+    "justice",
+    "public building",
+    "library",
+    "university building",
+    "monument",
+    "historic building",
+    "parthenon",
+    "pillars",
+    "tax",
+    "federal",
+    "parliament",
+    "embassy",
+    "classical",
+    "architecture",
+    "heritage",
+    "tourist attraction",
+    "bank account"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "coins",
+  "category": "commerce",
+  "description": "Two coins in perspective, one behind the other, for money, credits, balances, and rewards.",
+  "aliases": [
+    "coin",
+    "cash",
+    "change",
+    "credits",
+    "tokens",
+    "savings",
+    "loose-change",
+    "coin-stack",
+    "coin-pile"
+  ],
+  "tags": [
+    "money",
+    "finance",
+    "currency",
+    "payment",
+    "balance"
+  ],
+  "paths": [
+    {
+      "d": "M22 15 A6 2.5 0 1 1 10 15 A6 2.5 0 1 1 22 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 15 V19 A6 2.5 0 0 0 22 19 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M14 5 A6 2.5 0 1 1 2 5 A6 2.5 0 1 1 14 5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M2 5 V9 A6 2.5 0 0 0 7.69 11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 5 V8.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 15 A6 2.5 0 0 1 22 15 V19 A6 2.5 0 0 1 10 19 Z",
+    "M2 5 A6 2.5 0 0 1 14 5 V9 A6 2.5 0 0 1 13.21 10.24 A8.5 5 0 0 0 9.88 11.37 A6 2.5 0 0 1 2 9 Z"
+  ],
+  "cutouts": [
+    "M10 15 A6 2.5 0 0 0 22 15",
+    "M2 5 A6 2.5 0 0 0 14 5"
+  ],
+  "synonyms": [
+    "money",
+    "currency",
+    "coins stack",
+    "stack of coins",
+    "pennies",
+    "cents",
+    "penny",
+    "gold",
+    "gold coins",
+    "points",
+    "rewards",
+    "balance",
+    "earn",
+    "earnings",
+    "pay",
+    "payment",
+    "finance",
+    "budget",
+    "piggy bank",
+    "save money",
+    "in-game currency",
+    "gems",
+    "token",
+    "bitcoin",
+    "crypto",
+    "wealth",
+    "rich",
+    "fee"
+  ]
+}

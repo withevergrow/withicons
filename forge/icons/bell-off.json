@@ -1,0 +1,70 @@
+{
+  "name": "bell-off",
+  "category": "communication",
+  "description": "A bell struck through by a slash for muted or snoozed notifications.",
+  "aliases": [
+    "notifications-off",
+    "mute-notifications",
+    "silence",
+    "do-not-disturb",
+    "dnd",
+    "alerts-off",
+    "bell-slash",
+    "mute-bell",
+    "quiet"
+  ],
+  "tags": [
+    "bell",
+    "notification",
+    "mute",
+    "silent",
+    "disabled",
+    "snooze"
+  ],
+  "paths": [
+    {
+      "d": "M9.96 5.36 A6 6 0 0 1 18 11 V13.4",
+      "plate": "K"
+    },
+    {
+      "d": "M6.01 10.61 A6 6 0 0 0 6 11 V16.5 L4.5 18.5 H13.9",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 18.5 A2.5 2.5 0 0 0 14.44 19.04",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.1 5.75 A6 6 0 0 1 18 11 V14.64 Z",
+    "M6.18 9.54 A6 6 0 0 0 6 11 V16.5 L4.5 18.5 H15.14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "mute",
+    "muted",
+    "silent",
+    "silent mode",
+    "turn off notifications",
+    "stop notifications",
+    "no notifications",
+    "no alerts",
+    "unsubscribe",
+    "disable alerts",
+    "quiet hours",
+    "quiet mode",
+    "focus mode",
+    "sleep mode",
+    "snooze notifications",
+    "leave me alone",
+    "hush",
+    "shh",
+    "notification off",
+    "unfollow",
+    "notfications off"
+  ]
+}

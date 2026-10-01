@@ -1,0 +1,83 @@
+{
+  "name": "alarm-clock",
+  "category": "time",
+  "description": "A round clock with twin bells and feet, for alarms and time-based reminders.",
+  "aliases": [
+    "alarm",
+    "wake-up",
+    "snooze",
+    "wake",
+    "bedside-clock",
+    "morning-alarm",
+    "alarm-time",
+    "wakeup-call"
+  ],
+  "tags": [
+    "time",
+    "alarm",
+    "wake",
+    "reminder",
+    "morning",
+    "schedule"
+  ],
+  "paths": [
+    {
+      "d": "M19 12.5 A7 7 0 1 1 5 12.5 A7 7 0 1 1 19 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 9 V12.5 L14.5 14",
+      "plate": "A"
+    },
+    {
+      "d": "M3 7 A2.83 2.83 0 0 1 7 3 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17 3 A2.83 2.83 0 0 1 21 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.5 L4.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17 17.5 L19.5 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 12.5 A7 7 0 1 1 5 12.5 A7 7 0 1 1 19 12.5 Z",
+    "M3 7 A2.83 2.83 0 0 1 7 3 Z",
+    "M17 3 A2.83 2.83 0 0 1 21 7 Z"
+  ],
+  "cutouts": [
+    "M12 9 V12.5 L14.5 14"
+  ],
+  "synonyms": [
+    "wake me up",
+    "set alarm",
+    "alarm set",
+    "ringing clock",
+    "get up",
+    "morning",
+    "sleep",
+    "bedtime",
+    "deadline",
+    "time's up",
+    "due time",
+    "schedule",
+    "countdown",
+    "early",
+    "late",
+    "oversleep",
+    "time",
+    "o'clock",
+    "rise and shine",
+    "daily routine",
+    "appointment",
+    "alarm clok",
+    "allarm",
+    "reminder time"
+  ]
+}

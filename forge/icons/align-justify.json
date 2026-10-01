@@ -1,0 +1,59 @@
+{
+  "name": "align-justify",
+  "category": "text",
+  "description": "Text lines all of equal length, justified to both edges.",
+  "aliases": [
+    "justify",
+    "justified",
+    "text-justify",
+    "justify-text",
+    "full-justify",
+    "text-align-justify",
+    "block-align",
+    "flush-both"
+  ],
+  "tags": [
+    "text",
+    "alignment",
+    "paragraph",
+    "justified",
+    "formatting",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 9.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 14.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 19.5 H21",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "justify alignment",
+    "fill line",
+    "even edges",
+    "both sides",
+    "newspaper columns",
+    "block text",
+    "full width text",
+    "straight edges",
+    "paragraph",
+    "text formatting",
+    "word processor",
+    "document",
+    "format text",
+    "lines of text"
+  ]
+}

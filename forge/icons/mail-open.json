@@ -1,0 +1,62 @@
+{
+  "name": "mail-open",
+  "category": "communication",
+  "description": "An opened envelope with its flap up, marking a message that has been read.",
+  "aliases": [
+    "email-read",
+    "envelope-open",
+    "open-envelope",
+    "email-open",
+    "read-message",
+    "mark-as-read",
+    "opened-mail",
+    "read-mail",
+    "opened-email"
+  ],
+  "tags": [
+    "email",
+    "envelope",
+    "read",
+    "opened",
+    "letter",
+    "message"
+  ],
+  "paths": [
+    {
+      "d": "M12 3.5 L21.5 10 V19 A2 2 0 0 1 19.5 21 H4.5 A2 2 0 0 1 2.5 19 V10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 10 L12 16.5 L21.5 10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 10 L12 16.5 L21.5 10 V19 A2 2 0 0 1 19.5 21 H4.5 A2 2 0 0 1 2.5 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "read",
+    "read email",
+    "opened",
+    "open mail",
+    "open letter",
+    "letter opened",
+    "seen",
+    "viewed",
+    "already read",
+    "read receipt",
+    "unread",
+    "mark unread",
+    "message read",
+    "newsletter",
+    "correspondence",
+    "opened message",
+    "inbox read",
+    "postal",
+    "post opened",
+    "open post",
+    "reading mail",
+    "email opened"
+  ]
+}

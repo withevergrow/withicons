@@ -1,0 +1,68 @@
+{
+  "name": "user-plus",
+  "category": "users",
+  "description": "A person with a plus for invitations and following someone.",
+  "aliases": [
+    "add-user",
+    "add-person",
+    "add-member",
+    "invite",
+    "follow",
+    "add-friend",
+    "add-contact",
+    "new-user",
+    "invite-user"
+  ],
+  "tags": [
+    "person",
+    "add",
+    "invite",
+    "member",
+    "plus"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M19 7.5 V12.5",
+      "plate": "S"
+    },
+    {
+      "d": "M16.5 10 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H10.5 A4.5 4.5 0 0 1 15 19.5 V21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "invite people",
+    "invite friends",
+    "new member",
+    "new contact",
+    "sign up",
+    "register",
+    "join",
+    "recruit",
+    "onboard",
+    "add to team",
+    "add teammate",
+    "friend request",
+    "follow request",
+    "add follower",
+    "add people",
+    "plus person",
+    "create account",
+    "enroll",
+    "referral",
+    "refer a friend"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "file-image",
+  "category": "files",
+  "description": "A page containing a picture, for image assets and uploads.",
+  "aliases": [
+    "image-file",
+    "photo-file",
+    "picture-file",
+    "jpg",
+    "png",
+    "graphic-file",
+    "jpeg",
+    "gif-file"
+  ],
+  "tags": [
+    "image",
+    "photo",
+    "picture",
+    "media",
+    "asset",
+    "file"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M11.25 11.25 A1.5 1.5 0 1 1 8.25 11.25 A1.5 1.5 0 1 1 11.25 11.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M19 16.5 L16 13.5 L8 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M11.75 11.25 A2 2 0 1 1 7.75 11.25 A2 2 0 1 1 11.75 11.25 Z",
+    "M19 16.5 L16 13.5 L8 21.5"
+  ],
+  "synonyms": [
+    "photo",
+    "picture",
+    "pic",
+    "img",
+    "image upload",
+    "photo upload",
+    "attachment",
+    "screenshot",
+    "artwork",
+    "svg",
+    "webp",
+    "media file",
+    "pictures",
+    "foto",
+    "snapshot"
+  ]
+}

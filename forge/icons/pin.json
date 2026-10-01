@@ -1,0 +1,52 @@
+{
+  "name": "pin",
+  "category": "actions",
+  "description": "A pushpin pressed in at an angle with its needle showing.",
+  "aliases": [
+    "pushpin",
+    "thumbtack",
+    "tack",
+    "pin-to-top",
+    "keep-on-top",
+    "push-pin",
+    "pinned"
+  ],
+  "tags": [
+    "pin",
+    "fix",
+    "favorite",
+    "board",
+    "keep"
+  ],
+  "paths": [
+    {
+      "d": "M14.93 3.88 L20.12 9.07 A1.58 1.58 0 0 1 20.12 11.3 A1.58 1.58 0 0 1 17.9 11.3 L14.93 14.27 L14.56 19.1 A1.05 1.05 0 0 1 13.26 19.28 L4.72 10.74 A1.05 1.05 0 0 1 4.9 9.44 L9.73 9.07 L12.7 6.1 A1.58 1.58 0 0 1 12.7 3.88 A1.58 1.58 0 0 1 14.93 3.88 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.99 15.01 L3.42 20.58",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14.93 3.88 L20.12 9.07 A1.58 1.58 0 0 1 20.12 11.3 A1.58 1.58 0 0 1 17.9 11.3 L14.93 14.27 L14.56 19.1 A1.05 1.05 0 0 1 13.26 19.28 L4.72 10.74 A1.05 1.05 0 0 1 4.9 9.44 L9.73 9.07 L12.7 6.1 A1.58 1.58 0 0 1 12.7 3.88 A1.58 1.58 0 0 1 14.93 3.88 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "stick",
+    "sticky",
+    "pin it",
+    "pin this",
+    "unpin",
+    "notice board",
+    "bulletin board",
+    "corkboard",
+    "favourite",
+    "favorite",
+    "keep",
+    "important",
+    "save for later",
+    "fixed",
+    "stay on top"
+  ]
+}

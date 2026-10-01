@@ -1,0 +1,84 @@
+{
+  "name": "list",
+  "category": "charts",
+  "description": "Bulleted lines representing an unordered list or item collection.",
+  "aliases": [
+    "bullet-list",
+    "bullets",
+    "bulleted",
+    "unordered-list",
+    "ul",
+    "items",
+    "listing",
+    "itemize",
+    "bullet-points",
+    "list-lines"
+  ],
+  "tags": [
+    "bullets",
+    "items",
+    "text",
+    "collection",
+    "lines"
+  ],
+  "paths": [
+    {
+      "d": "M9 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 18 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M5 6 A0.75 0.75 0 1 1 3.5 6 A0.75 0.75 0 1 1 5 6 Z M4 6 H4.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5 12 A0.75 0.75 0 1 1 3.5 12 A0.75 0.75 0 1 1 5 12 Z M4 12 H4.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5 18 A0.75 0.75 0 1 1 3.5 18 A0.75 0.75 0 1 1 5 18 Z M4 18 H4.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "bullet points",
+    "dot points",
+    "points",
+    "unordered",
+    "lines",
+    "text list",
+    "items list",
+    "collection",
+    "overview",
+    "contents",
+    "table of contents",
+    "summary",
+    "notes",
+    "outline",
+    "catalog",
+    "catalogue",
+    "inventory",
+    "entries",
+    "records",
+    "directory",
+    "all items",
+    "show all",
+    "lists",
+    "lsit",
+    "agenda",
+    "options",
+    "choices",
+    "enumeration",
+    "reading list",
+    "list format"
+  ]
+}

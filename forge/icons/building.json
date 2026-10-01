@@ -1,0 +1,79 @@
+{
+  "name": "building",
+  "category": "maps",
+  "description": "A tall block building with a grid of windows and a doorway.",
+  "aliases": [
+    "office-building",
+    "company",
+    "organization",
+    "organisation",
+    "skyscraper",
+    "apartment",
+    "tower"
+  ],
+  "tags": [
+    "office",
+    "workplace",
+    "corporate",
+    "real-estate",
+    "urban",
+    "architecture"
+  ],
+  "paths": [
+    {
+      "d": "M5 21.5 V4.5 A2 2 0 0 1 7 2.5 H17 A2 2 0 0 1 19 4.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 21.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 6.5 H10 M14 6.5 H15 M9 10.5 H10 M14 10.5 H15 M9 14.5 H10 M14 14.5 H15",
+      "plate": "A"
+    },
+    {
+      "d": "M10 21.5 V19 A1 1 0 0 1 11 18 H13 A1 1 0 0 1 14 19 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 21.5 V4.5 A2 2 0 0 1 7 2.5 H17 A2 2 0 0 1 19 4.5 V21.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 5.75 H10.5 V7.25 H8.5 Z",
+    "M13.5 5.75 H15.5 V7.25 H13.5 Z",
+    "M8.5 9.75 H10.5 V11.25 H8.5 Z",
+    "M13.5 9.75 H15.5 V11.25 H13.5 Z",
+    "M8.5 13.75 H10.5 V15.25 H8.5 Z",
+    "M13.5 13.75 H15.5 V15.25 H13.5 Z",
+    "M10 21.5 V19 A1 1 0 0 1 11 18 H13 A1 1 0 0 1 14 19 V21.5 Z"
+  ],
+  "synonyms": [
+    "office",
+    "business",
+    "corporate",
+    "headquarters",
+    "hq",
+    "enterprise",
+    "city",
+    "block",
+    "flat",
+    "apartments",
+    "real estate",
+    "property",
+    "architecture",
+    "workplace",
+    "employer",
+    "condo",
+    "hotel",
+    "high rise",
+    "urban",
+    "downtown",
+    "residence",
+    "company address",
+    "tenant",
+    "department",
+    "institution"
+  ]
+}

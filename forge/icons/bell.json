@@ -1,0 +1,67 @@
+{
+  "name": "bell",
+  "category": "communication",
+  "description": "A bell for the notification center and alert subscriptions.",
+  "aliases": [
+    "notification",
+    "notifications",
+    "notify",
+    "alerts",
+    "subscribe",
+    "announcement",
+    "notification-bell",
+    "reminders",
+    "reminder"
+  ],
+  "tags": [
+    "notification",
+    "alert",
+    "reminder",
+    "subscribe",
+    "sound",
+    "ring"
+  ],
+  "paths": [
+    {
+      "d": "M6 16.5 V11 A6 6 0 0 1 18 11 V16.5 L19.5 18.5 H4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 18.5 A2.5 2.5 0 0 0 14.5 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 16.5 V11 A6 6 0 0 1 18 11 V16.5 L19.5 18.5 H4.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "notification center",
+    "alert",
+    "notification centre",
+    "updates",
+    "news",
+    "activity feed",
+    "new",
+    "unread",
+    "ringing bell",
+    "church bell",
+    "hand bell",
+    "sound",
+    "get notified",
+    "turn on notifications",
+    "alerts on",
+    "push notification",
+    "heads up",
+    "ping",
+    "what's new",
+    "feed",
+    "attention",
+    "bel",
+    "notifcation",
+    "notifcations",
+    "nofitication",
+    "follow",
+    "bells"
+  ]
+}

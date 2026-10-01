@@ -1,0 +1,46 @@
+{
+  "name": "chevrons-up-down",
+  "category": "arrows",
+  "description": "Stacked up and down chevrons, the affordance for a select, picker, or sortable column.",
+  "aliases": [
+    "selector",
+    "picker",
+    "up-down",
+    "unfold",
+    "expand-collapse",
+    "select-arrows",
+    "sort-toggle"
+  ],
+  "tags": [
+    "select",
+    "dropdown",
+    "combobox",
+    "sort",
+    "expand"
+  ],
+  "paths": [
+    {
+      "d": "M7 9 L12 4 L17 9",
+      "plate": "K"
+    },
+    {
+      "d": "M7 15 L12 20 L17 15",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "select",
+    "choose",
+    "drop down",
+    "switch",
+    "combobox",
+    "reorder",
+    "toggle order",
+    "options",
+    "change selection",
+    "pick one",
+    "sort order"
+  ]
+}

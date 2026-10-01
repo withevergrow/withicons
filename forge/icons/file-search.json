@@ -1,0 +1,65 @@
+{
+  "name": "file-search",
+  "category": "files",
+  "description": "A page with a magnifying glass for finding files or searching inside documents.",
+  "aliases": [
+    "find-file",
+    "search-document",
+    "file-lookup",
+    "document-search",
+    "find-in-files",
+    "search-files",
+    "find-document"
+  ],
+  "tags": [
+    "file",
+    "search",
+    "find",
+    "magnifier",
+    "lookup",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 13.75 A3.25 3.25 0 1 1 8 13.75 A3.25 3.25 0 1 1 14.5 13.75 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13.55 16.05 L16 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M14.5 13.75 A3.25 3.25 0 1 1 8 13.75 A3.25 3.25 0 1 1 14.5 13.75",
+    "M13.55 16.05 L16 18.5"
+  ],
+  "synonyms": [
+    "find",
+    "lookup",
+    "look up",
+    "locate",
+    "search inside",
+    "browse files",
+    "scan document",
+    "review document",
+    "inspect file",
+    "audit",
+    "discover",
+    "file explorer",
+    "where is my file",
+    "search docs",
+    "magnifying glass"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "stop",
+  "category": "media",
+  "description": "A rounded square that stops playback or a running job outright.",
+  "aliases": [
+    "halt",
+    "stop-button",
+    "square-stop",
+    "end",
+    "terminate",
+    "abort",
+    "stop-playback",
+    "stop-recording"
+  ],
+  "tags": [
+    "media",
+    "player",
+    "control",
+    "halt",
+    "end"
+  ],
+  "paths": [
+    {
+      "d": "M7 5 H17 A2 2 0 0 1 19 7 V17 A2 2 0 0 1 17 19 H7 A2 2 0 0 1 5 17 V7 A2 2 0 0 1 7 5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 5 H17 A2 2 0 0 1 19 7 V17 A2 2 0 0 1 17 19 H7 A2 2 0 0 1 5 17 V7 A2 2 0 0 1 7 5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "stop button",
+    "stop music",
+    "stop video",
+    "end call",
+    "cancel",
+    "kill",
+    "quit",
+    "finish",
+    "stop process",
+    "stop task",
+    "cease",
+    "interrupt",
+    "stop sign",
+    "media stop",
+    "player",
+    "end recording",
+    "stopp"
+  ]
+}

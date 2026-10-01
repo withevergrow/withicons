@@ -1,0 +1,63 @@
+{
+  "name": "pencil",
+  "category": "actions",
+  "description": "A pencil on its own, angled for writing.",
+  "aliases": [
+    "draw",
+    "write",
+    "sketch",
+    "annotate",
+    "graphite",
+    "pencil-edit",
+    "writing"
+  ],
+  "tags": [
+    "write",
+    "draw",
+    "sketch",
+    "stationery",
+    "tool"
+  ],
+  "paths": [
+    {
+      "d": "M3.37 20.63 L4.97 15.15 L15.93 4.19 A2.75 2.75 0 0 1 19.81 8.07 L8.85 19.03 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.97 15.15 L8.85 19.03",
+      "plate": "A"
+    },
+    {
+      "d": "M13.1 7.01 L16.99 10.9",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.37 20.63 L4.97 15.15 L15.93 4.19 A2.75 2.75 0 0 1 19.81 8.07 L8.85 19.03 Z"
+  ],
+  "cutouts": [
+    "M4.97 15.15 L8.85 19.03",
+    "M13.1 7.01 L16.99 10.9"
+  ],
+  "synonyms": [
+    "drawing",
+    "sketching",
+    "rename",
+    "change",
+    "modify",
+    "compose",
+    "note",
+    "notes",
+    "doodle",
+    "scribble",
+    "homework",
+    "school",
+    "stationery",
+    "art",
+    "handwriting",
+    "fill in",
+    "jot",
+    "penci",
+    "pensil"
+  ]
+}

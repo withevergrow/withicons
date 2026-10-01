@@ -1,0 +1,57 @@
+{
+  "name": "mouse",
+  "category": "devices",
+  "description": "A computer mouse with a button seam and scroll wheel, for clicks, pointing and scroll input.",
+  "aliases": [
+    "computer-mouse",
+    "scroll-wheel",
+    "pointing-device",
+    "pc-mouse",
+    "wireless-mouse",
+    "click"
+  ],
+  "tags": [
+    "device",
+    "hardware",
+    "input",
+    "click",
+    "computer"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 A6.5 6.5 0 0 1 18.5 9 V15 A6.5 6.5 0 0 1 5.5 15 V9 A6.5 6.5 0 0 1 12 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 V9",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 13 H18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 A6.5 6.5 0 0 1 18.5 9 V15 A6.5 6.5 0 0 1 5.5 15 V9 A6.5 6.5 0 0 1 12 2.5 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 V9",
+    "M5 13 H19"
+  ],
+  "synonyms": [
+    "scroll",
+    "right click",
+    "left click",
+    "peripheral",
+    "input device",
+    "computer",
+    "desktop",
+    "pc",
+    "hardware",
+    "trackball",
+    "mice",
+    "mouse button",
+    "gaming mouse",
+    "mous"
+  ]
+}

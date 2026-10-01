@@ -1,0 +1,54 @@
+{
+  "name": "pause",
+  "category": "media",
+  "description": "Two vertical bars that pause the current media or process.",
+  "aliases": [
+    "hold",
+    "suspend",
+    "halt",
+    "freeze",
+    "pause-button",
+    "paused",
+    "break"
+  ],
+  "tags": [
+    "media",
+    "playback",
+    "stop",
+    "control",
+    "bars"
+  ],
+  "paths": [
+    {
+      "d": "M7 4 H8.5 A1.5 1.5 0 0 1 10 5.5 V18.5 A1.5 1.5 0 0 1 8.5 20 H7 A1.5 1.5 0 0 1 5.5 18.5 V5.5 A1.5 1.5 0 0 1 7 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 4 H17 A1.5 1.5 0 0 1 18.5 5.5 V18.5 A1.5 1.5 0 0 1 17 20 H15.5 A1.5 1.5 0 0 1 14 18.5 V5.5 A1.5 1.5 0 0 1 15.5 4 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 4 H8.5 A1.5 1.5 0 0 1 10 5.5 V18.5 A1.5 1.5 0 0 1 8.5 20 H7 A1.5 1.5 0 0 1 5.5 18.5 V5.5 A1.5 1.5 0 0 1 7 4 Z",
+    "M15.5 4 H17 A1.5 1.5 0 0 1 18.5 5.5 V18.5 A1.5 1.5 0 0 1 17 20 H15.5 A1.5 1.5 0 0 1 14 18.5 V5.5 A1.5 1.5 0 0 1 15.5 4 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "wait",
+    "stop for now",
+    "take a break",
+    "on hold",
+    "pause video",
+    "pause music",
+    "pause song",
+    "media",
+    "player",
+    "temporarily stop",
+    "interrupt",
+    "resume later",
+    "two bars",
+    "standby",
+    "paws",
+    "pase"
+  ]
+}

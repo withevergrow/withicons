@@ -1,0 +1,57 @@
+{
+  "name": "video-camera",
+  "category": "media",
+  "description": "A rounded camera body with a lens barrel jutting from one side.",
+  "aliases": [
+    "camcorder",
+    "record-video",
+    "webcam",
+    "movie-camera",
+    "video-recorder",
+    "cam"
+  ],
+  "tags": [
+    "media",
+    "video",
+    "record",
+    "camera",
+    "stream"
+  ],
+  "paths": [
+    {
+      "d": "M4 6 H14 A2 2 0 0 1 16 8 V16 A2 2 0 0 1 14 18 H4 A2 2 0 0 1 2 16 V8 A2 2 0 0 1 4 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 10.5 L22 7 V17 L16 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 6 H14 A2 2 0 0 1 16 8 V16 A2 2 0 0 1 14 18 H4 A2 2 0 0 1 2 16 V8 A2 2 0 0 1 4 6 Z",
+    "M16 10.5 L22 7 V17 L16 13.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "recording",
+    "record",
+    "filming",
+    "video",
+    "shoot video",
+    "movie",
+    "clip",
+    "vlog",
+    "youtube",
+    "livestream",
+    "stream",
+    "cctv",
+    "camera on",
+    "video on",
+    "start video",
+    "reel",
+    "vlogging",
+    "videography",
+    "vid",
+    "vidoe"
+  ]
+}

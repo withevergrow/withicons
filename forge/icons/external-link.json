@@ -1,0 +1,65 @@
+{
+  "name": "external-link",
+  "category": "navigation",
+  "description": "Arrow leaving a box, signalling a link that opens outside the current view.",
+  "aliases": [
+    "open-in-new",
+    "new-tab",
+    "new-window",
+    "outbound-link",
+    "popout",
+    "open-external",
+    "external",
+    "open-link"
+  ],
+  "tags": [
+    "link",
+    "external",
+    "open",
+    "new tab",
+    "outside",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M10.5 5 H5.5 A2 2 0 0 0 3.5 7 V18.5 A2 2 0 0 0 5.5 20.5 H17 A2 2 0 0 0 19 18.5 V13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M11 13 L20.5 3.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 3.5 H20.5 V9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10.5 5 H5.5 A2 2 0 0 0 3.5 7 V18.5 A2 2 0 0 0 5.5 20.5 H17 A2 2 0 0 0 19 18.5 V13.5 L16.5 11 L12.75 14.75 A2.475 2.475 0 0 1 9.25 11.25 L13 7.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "launch",
+    "open in new tab",
+    "open in new window",
+    "leave site",
+    "go to website",
+    "visit site",
+    "visit",
+    "outside link",
+    "external url",
+    "website link",
+    "offsite",
+    "pop out",
+    "open externally",
+    "redirect",
+    "go to page",
+    "arrow out of box",
+    "hyperlink",
+    "web link",
+    "jump to",
+    "navigate away",
+    "outbound",
+    "extrenal link"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "name": "at-sign",
+  "category": "communication",
+  "description": "An @ symbol for mentions, handles, and email identifiers.",
+  "aliases": [
+    "at",
+    "mention",
+    "handle",
+    "username",
+    "arroba",
+    "at-symbol",
+    "email-symbol",
+    "commercial-at"
+  ],
+  "tags": [
+    "mention",
+    "handle",
+    "email",
+    "symbol",
+    "username",
+    "social"
+  ],
+  "paths": [
+    {
+      "d": "M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 8 V13.5 A2.75 2.75 0 0 0 21.5 13.5 V12 A9.5 9.5 0 1 0 16.46 20.39",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "@",
+    "at symbol",
+    "at sign",
+    "tag someone",
+    "tag a friend",
+    "email address",
+    "email",
+    "e-mail",
+    "contact",
+    "reply to",
+    "social media",
+    "twitter handle",
+    "user name",
+    "account name",
+    "profile name",
+    "shout out",
+    "dm"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "plus",
+  "category": "actions",
+  "description": "A plus sign for creating or adding a new item.",
+  "aliases": [
+    "add",
+    "new",
+    "create",
+    "increment",
+    "addition",
+    "plus-sign",
+    "add-new"
+  ],
+  "tags": [
+    "add",
+    "new",
+    "create",
+    "increase",
+    "math"
+  ],
+  "paths": [
+    {
+      "d": "M12 5 V19",
+      "plate": "K"
+    },
+    {
+      "d": "M5 12 H19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "insert",
+    "more",
+    "increase",
+    "extra",
+    "expand",
+    "add more",
+    "new item",
+    "sum",
+    "math",
+    "maths",
+    "positive",
+    "addition sign",
+    "new post",
+    "new file",
+    "additional",
+    "append",
+    "pluss"
+  ]
+}

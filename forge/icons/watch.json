@@ -1,0 +1,66 @@
+{
+  "name": "watch",
+  "category": "devices",
+  "description": "A wristwatch with a round analog face and strap.",
+  "aliases": [
+    "wristwatch",
+    "smartwatch",
+    "timepiece",
+    "wearable",
+    "analog-watch",
+    "fitness-tracker",
+    "apple-watch"
+  ],
+  "tags": [
+    "time",
+    "wearable",
+    "wrist",
+    "accessory",
+    "device",
+    "analog"
+  ],
+  "paths": [
+    {
+      "d": "M18.5 12 A6.5 6.5 0 1 1 5.5 12 A6.5 6.5 0 1 1 18.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 6.523 L9 3.5 A1 1 0 0 1 10 2.5 H14 A1 1 0 0 1 15 3.5 L15.5 6.523",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 17.477 L9 20.5 A1 1 0 0 0 10 21.5 H14 A1 1 0 0 0 15 20.5 L15.5 17.477",
+      "plate": "K"
+    },
+    {
+      "d": "M12 9 V12 L14 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M18.5 12 A6.5 6.5 0 1 1 5.5 12 A6.5 6.5 0 1 1 18.5 12 Z",
+    "M8.5 6.523 L9 3.5 A1 1 0 0 1 10 2.5 H14 A1 1 0 0 1 15 3.5 L15.5 6.523 A6.5 6.5 0 0 0 8.5 6.523 Z",
+    "M8.5 17.477 L9 20.5 A1 1 0 0 0 10 21.5 H14 A1 1 0 0 0 15 20.5 L15.5 17.477 A6.5 6.5 0 0 1 8.5 17.477 Z"
+  ],
+  "cutouts": [
+    "M12 9 V12 L14 13.5"
+  ],
+  "synonyms": [
+    "wrist",
+    "time",
+    "watches",
+    "fitness",
+    "tracker",
+    "fitbit",
+    "activity tracker",
+    "band",
+    "jewellery",
+    "jewelry",
+    "accessory",
+    "luxury watch",
+    "check time",
+    "gadget",
+    "what time",
+    "hand watch"
+  ]
+}

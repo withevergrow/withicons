@@ -1,0 +1,911 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  with icons - withicons.com static site (private S3 + CloudFront OAC), the MCP/search API
+  (Lambda Function URL behind the same distribution at /mcp and /api/*), GitHub Actions OIDC
+  deploy role, budget alarms. MUST be deployed in us-east-1 (CloudFront certificate + WAF scope).
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label: { default: Domain }
+        Parameters: [DomainName, HostedZoneId]
+      - Label: { default: Alerts and budget }
+        Parameters: [AlertEmail, MonthlyBudgetUsd, ApiInvocationsAlarmPerHour]
+      - Label: { default: API (Lambda) }
+        Parameters: [OriginVerifySecret, LambdaMemoryMb, LambdaReservedConcurrency]
+      - Label: { default: CloudFront }
+        Parameters: [PriceClass, ContentSecurityPolicy, HstsPreload, EnableAccessLogs, EnableWaf, WafRateLimitPer5Min]
+      - Label: { default: GitHub Actions }
+        Parameters: [GitHubOrg, GitHubRepo, GitHubOidcProviderArn]
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: withicons.com
+    AllowedPattern: '^[a-z0-9.-]+\.[a-z]{2,}$'
+  HostedZoneId:
+    Type: String
+    Default: ''
+    Description: >-
+      Route 53 hosted zone id for DomainName (output of infra/dns.yaml). Leave empty if DNS stays at
+      another registrar: then add the ACM validation CNAMEs (shown in the stack events / ACM console)
+      and the apex/www records by hand (see docs/LAUNCH.md).
+  AlertEmail:
+    Type: String
+    AllowedPattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+    Description: Receives budget alerts and API alarms (confirm the SNS subscription email).
+  MonthlyBudgetUsd:
+    Type: Number
+    Default: 50
+    MinValue: 1
+  ApiInvocationsAlarmPerHour:
+    Type: Number
+    Default: 20000
+    Description: Email when the API Lambda is invoked more than this many times in one hour (cache misses only).
+  OriginVerifySecret:
+    Type: String
+    NoEcho: true
+    MinLength: 32
+    AllowedPattern: '^[A-Za-z0-9_-]+$'
+    Description: >-
+      Random secret CloudFront sends to the Lambda origin in x-origin-verify; the Lambda rejects
+      requests without it, so the Function URL is only usable through CloudFront.
+      Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+  LambdaMemoryMb:
+    Type: Number
+    Default: 512
+    AllowedValues: [256, 384, 512]
+  LambdaReservedConcurrency:
+    Type: Number
+    Default: 10
+    MinValue: 0
+    Description: >-
+      Hard cap on concurrent API executions (bounds worst-case cost). 0 = no reservation
+      (needed on new accounts whose total concurrency quota is 10; request a quota increase).
+  PriceClass:
+    Type: String
+    Default: PriceClass_All
+    AllowedValues: [PriceClass_100, PriceClass_200, PriceClass_All]
+    Description: >-
+      All edges. Expected traffic sits inside the CloudFront always-free tier (1 TB, 10M requests),
+      so the cheaper classes save nothing until then; drop to PriceClass_100 only if paying per GB.
+  ContentSecurityPolicy:
+    Type: String
+    Default: >-
+      default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: blob: https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;
+      worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
+      frame-ancestors 'none'; upgrade-insecure-requests
+    Description: >-
+      Sent on every response. 'unsafe-inline' in script-src is deliberate: the static pages carry a few
+      inline scripts (theme bootstrap etc.) and are edited by many hands. For a strict policy run
+      "node scripts/deploy.mjs --print-csp" (replaces 'unsafe-inline' with sha256 hashes of every
+      inline script in site/) and pass its output here; re-run it whenever inline scripts change.
+  HstsPreload:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: Add the HSTS preload directive. Turn on after a few weeks of stable HTTPS, then submit to hstspreload.org.
+  EnableAccessLogs:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: CloudFront standard logs to an S3 bucket (30-day expiry). Off by default (storage + request cost).
+  EnableWaf:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: AWS WAF web ACL with a per-IP rate limit (~$6/month + $0.60 per million requests).
+  WafRateLimitPer5Min:
+    Type: Number
+    Default: 2000
+    MinValue: 100
+  GitHubOrg:
+    Type: String
+    Default: withevergrow
+  GitHubRepo:
+    Type: String
+    Default: withicons
+  GitHubOidcProviderArn:
+    Type: String
+    Default: ''
+    Description: >-
+      ARN of an existing token.actions.githubusercontent.com OIDC provider in this account.
+      Leave empty to create one (only one may exist per account).
+
+Conditions:
+  HasZone: !Not [!Equals [!Ref HostedZoneId, '']]
+  CreateOidcProvider: !Equals [!Ref GitHubOidcProviderArn, '']
+  HasReservedConcurrency: !Not [!Equals [!Ref LambdaReservedConcurrency, 0]]
+  AccessLogs: !Equals [!Ref EnableAccessLogs, 'true']
+  Waf: !Equals [!Ref EnableWaf, 'true']
+  Preload: !Equals [!Ref HstsPreload, 'true']
+
+Rules:
+  UsEast1Only:
+    Assertions:
+      - Assert: !Equals [!Ref 'AWS::Region', us-east-1]
+        AssertDescription: Deploy this stack in us-east-1 (CloudFront ACM certificates and CLOUDFRONT-scope WAF live there).
+
+Resources:
+  # ---------------------------------------------------------------- S3 (private, versioned)
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-old-versions
+            Status: Enabled
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 30
+              NewerNoncurrentVersions: 3
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+          - Id: clean-delete-markers
+            Status: Enabled
+            ExpiredObjectDeleteMarker: true
+
+  SiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: CloudFrontOacRead
+            Effect: Allow
+            Principal: { Service: cloudfront.amazonaws.com }
+            Action: s3:GetObject
+            Resource: !Sub '${SiteBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}'
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource: [!GetAtt SiteBucket.Arn, !Sub '${SiteBucket.Arn}/*']
+            Condition:
+              Bool: { aws:SecureTransport: 'false' }
+
+  SiteOac:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub '${AWS::StackName}-s3'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  LogsBucket:
+    Type: AWS::S3::Bucket
+    Condition: AccessLogs
+    DeletionPolicy: Delete
+    Properties:
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred   # CloudFront standard logging writes with an ACL
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-logs
+            Status: Enabled
+            ExpirationInDays: 30
+
+  # ---------------------------------------------------------------- TLS
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      SubjectAlternativeNames: [!Sub 'www.${DomainName}']
+      ValidationMethod: DNS
+      DomainValidationOptions: !If
+        - HasZone
+        - - DomainName: !Ref DomainName
+            HostedZoneId: !Ref HostedZoneId
+          - DomainName: !Sub 'www.${DomainName}'
+            HostedZoneId: !Ref HostedZoneId
+        - !Ref AWS::NoValue
+
+  # ---------------------------------------------------------------- CloudFront Function (viewer request, HTML behaviour only)
+  # www -> apex 301, directory index rewrite (/guides/ -> /guides/index.html),
+  # extensionless directory URLs get a trailing slash (/guides -> /guides/) so relative links keep working.
+  # Security headers are NOT set here: a response headers policy does it for every behaviour at no per-request cost.
+  ViewerRequestFunction:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: !Sub '${AWS::StackName}-viewer-request'
+      AutoPublish: true
+      FunctionConfig:
+        Comment: www->apex redirect and directory index rewrite
+        Runtime: cloudfront-js-2.0
+      FunctionCode: !Sub |
+        function qs(q) {
+          var parts = [];
+          for (var k in q) {
+            var v = q[k];
+            if (v.multiValue) {
+              for (var i = 0; i < v.multiValue.length; i++) parts.push(v.multiValue[i].value === '' ? k : k + '=' + v.multiValue[i].value);
+            } else {
+              parts.push(v.value === '' ? k : k + '=' + v.value);
+            }
+          }
+          return parts.length ? '?' + parts.join('&') : '';
+        }
+        function redirect(location) {
+          return {
+            statusCode: 301,
+            statusDescription: 'Moved Permanently',
+            headers: {
+              location: { value: location },
+              'cache-control': { value: 'public, max-age=86400' }
+            }
+          };
+        }
+        function handler(event) {
+          var request = event.request;
+          var host = request.headers.host ? request.headers.host.value.toLowerCase() : '';
+          if (host === 'www.${DomainName}') {
+            return redirect('https://${DomainName}' + request.uri + qs(request.querystring));
+          }
+          var uri = request.uri;
+          if (uri.charAt(uri.length - 1) === '/') {
+            request.uri = uri + 'index.html';
+            return request;
+          }
+          var last = uri.substring(uri.lastIndexOf('/') + 1);
+          if (last.indexOf('.') === -1) {
+            return redirect(uri + '/' + qs(request.querystring));
+          }
+          return request;
+        }
+
+  # ---------------------------------------------------------------- Cache policies
+  # TTLs: the S3 objects carry Cache-Control set by scripts/deploy.mjs per file class
+  # (max-age for browsers, s-maxage for CloudFront, stale-while-revalidate). These policies
+  # only supply defaults for objects uploaded without headers.
+  HtmlCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub '${AWS::StackName}-html'
+        Comment: HTML - short default TTL, honours origin Cache-Control (s-maxage, stale-while-revalidate)
+        MinTTL: 0
+        DefaultTTL: 300
+        MaxTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig: { CookieBehavior: none }
+          HeadersConfig: { HeaderBehavior: none }
+          QueryStringsConfig: { QueryStringBehavior: none }   # ?utm_* etc. never fragment the cache
+
+  AssetsCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub '${AWS::StackName}-assets'
+        Comment: Static assets - long default TTL, honours origin Cache-Control
+        MinTTL: 0
+        DefaultTTL: 86400
+        MaxTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig: { CookieBehavior: none }
+          HeadersConfig: { HeaderBehavior: none }
+          QueryStringsConfig: { QueryStringBehavior: none }
+
+  ApiSearchCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub '${AWS::StackName}-api-search'
+        Comment: /api/search - cached per query string; MinTTL forces caching even if the origin says no-cache
+        MinTTL: 300
+        DefaultTTL: 3600
+        MaxTTL: 86400
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig: { CookieBehavior: none }
+          HeadersConfig: { HeaderBehavior: none }
+          QueryStringsConfig:
+            QueryStringBehavior: whitelist
+            QueryStrings: [q, limit, style, category]
+
+  ApiIconCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub '${AWS::StackName}-api-icon'
+        Comment: /api/* (icon lookups) - deterministic per path + query, cache for a day
+        MinTTL: 300
+        DefaultTTL: 86400
+        MaxTTL: 604800
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig: { CookieBehavior: none }
+          HeadersConfig: { HeaderBehavior: none }
+          QueryStringsConfig: { QueryStringBehavior: all }
+
+  # ---------------------------------------------------------------- Response headers
+  SiteHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub '${AWS::StackName}-site'
+        Comment: Security headers + CSP for the website
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000
+            IncludeSubdomains: true
+            Preload: !If [Preload, true, false]
+            Override: true
+          ContentTypeOptions: { Override: true }
+          FrameOptions: { FrameOption: DENY, Override: true }
+          ReferrerPolicy: { ReferrerPolicy: strict-origin-when-cross-origin, Override: true }
+          XSSProtection: { Protection: false, Override: true }
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: !Ref ContentSecurityPolicy
+            Override: true
+        CustomHeadersConfig:
+          Items:
+            - Header: Permissions-Policy
+              Value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()'
+              Override: true
+            - Header: Cross-Origin-Opener-Policy
+              Value: same-origin
+              Override: true
+        RemoveHeadersConfig:
+          Items:
+            - Header: x-amz-server-side-encryption
+            - Header: x-amz-version-id
+
+  # Public machine-readable files (icons.json, llms*.txt, data/*.js, sprites, vendor) - CORS * so other sites and tools can fetch them.
+  PublicDataHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub '${AWS::StackName}-public-data'
+        Comment: Security headers + CORS * for public data files
+        CorsConfig:
+          AccessControlAllowOrigins: { Items: ['*'] }
+          AccessControlAllowMethods: { Items: [GET, HEAD] }
+          AccessControlAllowHeaders: { Items: ['*'] }
+          AccessControlAllowCredentials: false
+          AccessControlMaxAgeSec: 86400
+          OriginOverride: true
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000
+            IncludeSubdomains: true
+            Preload: !If [Preload, true, false]
+            Override: true
+          ContentTypeOptions: { Override: true }
+          ReferrerPolicy: { ReferrerPolicy: strict-origin-when-cross-origin, Override: true }
+        RemoveHeadersConfig:
+          Items:
+            - Header: x-amz-server-side-encryption
+            - Header: x-amz-version-id
+
+  # API + MCP. OriginOverride false: CORS headers from the Lambda win when it sets them.
+  ApiHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub '${AWS::StackName}-api'
+        Comment: CORS + security headers for /api and /mcp
+        CorsConfig:
+          AccessControlAllowOrigins: { Items: ['*'] }
+          AccessControlAllowMethods: { Items: [GET, HEAD, POST, DELETE, OPTIONS] }
+          AccessControlAllowHeaders: { Items: ['*'] }
+          AccessControlExposeHeaders: { Items: [mcp-session-id, mcp-protocol-version] }
+          AccessControlAllowCredentials: false
+          AccessControlMaxAgeSec: 86400
+          OriginOverride: false
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 63072000
+            IncludeSubdomains: true
+            Preload: !If [Preload, true, false]
+            Override: true
+          ContentTypeOptions: { Override: true }
+          ReferrerPolicy: { ReferrerPolicy: no-referrer, Override: true }
+
+  # ---------------------------------------------------------------- Lambda API (MCP + search)
+  ApiFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: logs
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub '${ApiLogGroup.Arn}:*'
+
+  ApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-api'
+      RetentionInDays: 14
+
+  # Code is a placeholder: scripts/deploy.mjs uploads the real bundle with lambda:UpdateFunctionCode
+  # (index.mjs = infra/lambda/index.mjs origin guard + packages/mcp/dist under mcp/).
+  # CloudFormation leaves the deployed code alone on later stack updates unless ZipFile below changes.
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-api'
+      Description: with icons MCP server (Streamable HTTP, stateless) + search/icon JSON API
+      Runtime: nodejs22.x
+      Architectures: [arm64]
+      MemorySize: !Ref LambdaMemoryMb
+      Timeout: 10
+      Handler: index.handler
+      Role: !GetAtt ApiFunctionRole.Arn
+      ReservedConcurrentExecutions: !If [HasReservedConcurrency, !Ref LambdaReservedConcurrency, !Ref AWS::NoValue]
+      LoggingConfig:
+        LogGroup: !Ref ApiLogGroup
+        LogFormat: Text
+      Environment:
+        Variables:
+          ORIGIN_VERIFY_SECRET: !Ref OriginVerifySecret
+          PUBLIC_BASE_URL: !Sub 'https://${DomainName}'
+          NODE_OPTIONS: --enable-source-maps
+      Code:
+        ZipFile: |
+          exports.handler = async () => ({
+            statusCode: 503,
+            headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+            body: JSON.stringify({ error: 'with icons API not deployed yet - run scripts/deploy.mjs' })
+          })
+
+  ApiFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !Ref ApiFunction
+      AuthType: NONE      # guarded by infra/lambda/index.mjs; OAC (AWS_IAM) would break MCP POSTs (docs/LAUNCH.md 6.6)
+      InvokeMode: BUFFERED
+
+  ApiFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+
+  ApiFunctionInvokeViaUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunction
+      Principal: '*'
+      InvokedViaFunctionUrl: true
+
+  # ---------------------------------------------------------------- Distribution
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: !Sub '${DomainName} (with icons)'
+        Enabled: true
+        Aliases: [!Ref DomainName, !Sub 'www.${DomainName}']
+        ViewerCertificate:
+          AcmCertificateArn: !Ref Certificate
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
+        HttpVersion: http2and3
+        IPV6Enabled: true
+        PriceClass: !Ref PriceClass
+        DefaultRootObject: index.html
+        WebACLId: !If [Waf, !GetAtt WebAcl.Arn, !Ref AWS::NoValue]
+        Logging: !If
+          - AccessLogs
+          - Bucket: !GetAtt LogsBucket.DomainName
+            Prefix: cloudfront/
+            IncludeCookies: false
+          - !Ref AWS::NoValue
+        Origins:
+          - Id: s3-site
+            DomainName: !GetAtt SiteBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt SiteOac.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+          - Id: lambda-api
+            DomainName: !Select [2, !Split ['/', !GetAtt ApiFunctionUrl.FunctionUrl]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols: [TLSv1.2]
+              HTTPSPort: 443
+              OriginReadTimeout: 30
+              OriginKeepaliveTimeout: 5
+            OriginCustomHeaders:
+              - HeaderName: x-origin-verify
+                HeaderValue: !Ref OriginVerifySecret
+        # S3 answers 403 for a missing key (the OAC role has no s3:ListBucket) -> serve /404.html with a 404.
+        # Only 403 is mapped so JSON 404s from the API pass through untouched (the API must not use 403).
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+            ErrorCachingMinTTL: 60
+        DefaultCacheBehavior:     # HTML pages
+          TargetOriginId: s3-site
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD]
+          CachedMethods: [GET, HEAD]
+          Compress: true
+          CachePolicyId: !Ref HtmlCachePolicy
+          ResponseHeadersPolicyId: !Ref SiteHeadersPolicy
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt ViewerRequestFunction.FunctionMetadata.FunctionARN
+        CacheBehaviors:
+          # --- remote MCP (Streamable HTTP): never cached, every method, no compression (SSE friendly)
+          - PathPattern: /mcp
+            TargetOriginId: lambda-api
+            ViewerProtocolPolicy: https-only
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+            CachedMethods: [GET, HEAD]
+            Compress: false
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad          # Managed-CachingDisabled
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac  # Managed-AllViewerExceptHostHeader
+            ResponseHeadersPolicyId: !Ref ApiHeadersPolicy
+          - PathPattern: /mcp/*
+            TargetOriginId: lambda-api
+            ViewerProtocolPolicy: https-only
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+            CachedMethods: [GET, HEAD]
+            Compress: false
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+            ResponseHeadersPolicyId: !Ref ApiHeadersPolicy
+          # --- JSON API: cached at the edge, keyed by the query string
+          - PathPattern: /api/search*
+            TargetOriginId: lambda-api
+            ViewerProtocolPolicy: https-only
+            AllowedMethods: [GET, HEAD, OPTIONS]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref ApiSearchCachePolicy
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+            ResponseHeadersPolicyId: !Ref ApiHeadersPolicy
+          - PathPattern: /api/*
+            TargetOriginId: lambda-api
+            ViewerProtocolPolicy: https-only
+            AllowedMethods: [GET, HEAD, OPTIONS]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref ApiIconCachePolicy
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+            ResponseHeadersPolicyId: !Ref ApiHeadersPolicy
+          # --- static assets: no viewer function (saves invocations), long cache via object Cache-Control
+          - PathPattern: /css/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref SiteHeadersPolicy
+          - PathPattern: /js/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref SiteHeadersPolicy
+          - PathPattern: /fonts/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref SiteHeadersPolicy
+          - PathPattern: /og/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: false
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /data/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /sprites/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /vendor/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /icons.json
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /llms*.txt
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+          - PathPattern: /skill/*
+            TargetOriginId: s3-site
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            Compress: true
+            CachePolicyId: !Ref AssetsCachePolicy
+            ResponseHeadersPolicyId: !Ref PublicDataHeadersPolicy
+
+  # ---------------------------------------------------------------- Optional WAF (per-IP rate limit)
+  WebAcl:
+    Type: AWS::WAFv2::WebACL
+    Condition: Waf
+    Properties:
+      Name: !Sub '${AWS::StackName}-acl'
+      Scope: CLOUDFRONT
+      DefaultAction: { Allow: {} }
+      VisibilityConfig:
+        SampledRequestsEnabled: true
+        CloudWatchMetricsEnabled: true
+        MetricName: !Sub '${AWS::StackName}-acl'
+      Rules:
+        - Name: per-ip-rate-limit
+          Priority: 0
+          Action: { Block: {} }
+          Statement:
+            RateBasedStatement:
+              Limit: !Ref WafRateLimitPer5Min
+              AggregateKeyType: IP
+          VisibilityConfig:
+            SampledRequestsEnabled: true
+            CloudWatchMetricsEnabled: true
+            MetricName: per-ip-rate-limit
+
+  # ---------------------------------------------------------------- DNS (only when the zone is in Route 53)
+  ApexA:
+    Type: AWS::Route53::RecordSet
+    Condition: HasZone
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget: { DNSName: !GetAtt Distribution.DomainName, HostedZoneId: Z2FDTNDATAQYW2 }
+  ApexAAAA:
+    Type: AWS::Route53::RecordSet
+    Condition: HasZone
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Ref DomainName
+      Type: AAAA
+      AliasTarget: { DNSName: !GetAtt Distribution.DomainName, HostedZoneId: Z2FDTNDATAQYW2 }
+  WwwA:
+    Type: AWS::Route53::RecordSet
+    Condition: HasZone
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Sub 'www.${DomainName}'
+      Type: A
+      AliasTarget: { DNSName: !GetAtt Distribution.DomainName, HostedZoneId: Z2FDTNDATAQYW2 }
+  WwwAAAA:
+    Type: AWS::Route53::RecordSet
+    Condition: HasZone
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Sub 'www.${DomainName}'
+      Type: AAAA
+      AliasTarget: { DNSName: !GetAtt Distribution.DomainName, HostedZoneId: Z2FDTNDATAQYW2 }
+
+  # ---------------------------------------------------------------- Alerts + budget
+  AlertsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: with icons alerts
+      Subscription:
+        - Protocol: email
+          Endpoint: !Ref AlertEmail
+
+  ApiInvocationsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: >-
+        API Lambda invocations (cache misses) unusually high - possible abuse. Kill switch:
+        aws lambda put-function-concurrency --function-name <fn> --reserved-concurrent-executions 0
+      Namespace: AWS/Lambda
+      MetricName: Invocations
+      Dimensions: [{ Name: FunctionName, Value: !Ref ApiFunction }]
+      Statistic: Sum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: !Ref ApiInvocationsAlarmPerHour
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertsTopic]
+
+  ApiErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: API Lambda errors or throttles > 50 in an hour
+      Metrics:
+        - Id: errors
+          ReturnData: false
+          MetricStat:
+            Metric:
+              Namespace: AWS/Lambda
+              MetricName: Errors
+              Dimensions: [{ Name: FunctionName, Value: !Ref ApiFunction }]
+            Period: 3600
+            Stat: Sum
+        - Id: throttles
+          ReturnData: false
+          MetricStat:
+            Metric:
+              Namespace: AWS/Lambda
+              MetricName: Throttles
+              Dimensions: [{ Name: FunctionName, Value: !Ref ApiFunction }]
+            Period: 3600
+            Stat: Sum
+        - Id: total
+          Expression: errors + throttles
+          Label: errors + throttles
+          ReturnData: true
+      EvaluationPeriods: 1
+      Threshold: 50
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertsTopic]
+
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: !Sub '${AWS::StackName}-monthly'
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit: { Amount: !Ref MonthlyBudgetUsd, Unit: USD }
+      NotificationsWithSubscribers:
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 20, ThresholdType: ABSOLUTE_VALUE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 40, ThresholdType: ABSOLUTE_VALUE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: ABSOLUTE_VALUE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
+        - Notification: { NotificationType: FORECASTED, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: ABSOLUTE_VALUE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
+
+  # ---------------------------------------------------------------- GitHub Actions OIDC deploy role
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateOidcProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList: [sts.amazonaws.com]
+      ThumbprintList:   # ignored by AWS for this provider (it uses its own trust store) but kept for older validators
+        - 6938fd4d98bab03faadb97b34396831e3780aea1
+        - 1c58a3a8518e8759bf075b76b750d4f2df264fcd
+
+  GitHubDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AWS::StackName}-github-deploy'
+      Description: Assumed by GitHub Actions (deploy-site.yml) via OIDC. Site sync, invalidation, Lambda code update only.
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !If [CreateOidcProvider, !Ref GitHubOidcProvider, !Ref GitHubOidcProviderArn]
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+              StringLike:
+                token.actions.githubusercontent.com:sub:
+                  - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/main'
+                  - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:environment:production'
+      Policies:
+        - PolicyName: deploy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: ListSite
+                Effect: Allow
+                Action: s3:ListBucket
+                Resource: !GetAtt SiteBucket.Arn
+              - Sid: WriteSite
+                Effect: Allow
+                Action: [s3:GetObject, s3:PutObject, s3:DeleteObject]
+                Resource: !Sub '${SiteBucket.Arn}/*'
+              - Sid: Invalidate
+                Effect: Allow
+                Action: [cloudfront:CreateInvalidation, cloudfront:GetInvalidation]
+                Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}'
+              - Sid: UpdateApiCode
+                Effect: Allow
+                Action: [lambda:UpdateFunctionCode, lambda:GetFunction, lambda:GetFunctionConfiguration]
+                Resource: !GetAtt ApiFunction.Arn
+              - Sid: ReadStackOutputs
+                Effect: Allow
+                Action: cloudformation:DescribeStacks
+                Resource: !Ref AWS::StackId
+
+Outputs:
+  SiteUrl:
+    Value: !Sub 'https://${DomainName}'
+  BucketName:
+    Value: !Ref SiteBucket
+  DistributionId:
+    Value: !Ref Distribution
+  DistributionDomainName:
+    Description: Point apex (ALIAS/ANAME) and www (CNAME) here if DNS is not in Route 53
+    Value: !GetAtt Distribution.DomainName
+  ApiFunctionName:
+    Value: !Ref ApiFunction
+  ApiFunctionUrl:
+    Description: Direct Function URL - rejects requests without the CloudFront origin secret
+    Value: !GetAtt ApiFunctionUrl.FunctionUrl
+  DeployRoleArn:
+    Description: Set as the GitHub repository variable AWS_DEPLOY_ROLE_ARN
+    Value: !GetAtt GitHubDeployRole.Arn
+  CertificateArn:
+    Value: !Ref Certificate
+  AlertsTopicArn:
+    Value: !Ref AlertsTopic

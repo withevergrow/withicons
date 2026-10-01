@@ -1,0 +1,49 @@
+{
+  "name": "chevron-right",
+  "category": "navigation",
+  "description": "Small right-pointing chevron for next steps, list disclosure, and breadcrumbs.",
+  "aliases": [
+    "caret-right",
+    "angle-right",
+    "next",
+    "forward",
+    "disclosure",
+    "breadcrumb"
+  ],
+  "tags": [
+    "chevron",
+    "right",
+    "next",
+    "disclosure",
+    "caret"
+  ],
+  "paths": [
+    {
+      "d": "M9 6 L15 12 L9 18",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "continue",
+    "proceed",
+    "go",
+    "more",
+    "see all",
+    "view details",
+    "open",
+    "next page",
+    "next slide",
+    "next photo",
+    "carousel",
+    "slider",
+    "pagination",
+    "onward",
+    "right",
+    "go forward",
+    "greater than",
+    "step",
+    "further"
+  ]
+}
