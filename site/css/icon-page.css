@@ -38,12 +38,15 @@
 .ip-hero { padding: clamp(18px, 3vw, 32px) 0 0; }
 .ip-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: start; margin-top: clamp(18px, 3vw, 36px); }
 .ip-intro { min-width: 0 }
-.ip-pick { display: flex; flex-wrap: wrap; gap: 6px; margin: 26px 0 0; }
-.ip-pick-b { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 14px 0 10px; border-radius: 999px; border: 1.5px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 600 14px/1 var(--font-sans); cursor: pointer; transition: transform .25s var(--ip-spring), background .25s, border-color .25s, color .25s; }
-.ip-pick-b svg { width: 22px; height: 22px; color: var(--sc) }
+.ip-pick { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; max-width: 560px; margin: 26px 0 0; }
+.ip-pick-b { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-width: 0; padding: 11px 2px 9px; border-radius: 16px; border: 1.5px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 600 12.5px/1 var(--font-sans); cursor: pointer; transition: transform .25s var(--ip-spring), background .25s, border-color .25s, color .25s; }
+.ip-pick-b span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.ip-pick-now { max-width: 560px; margin: 10px 0 0; font-size: 14px; line-height: 1.45; color: var(--muted) }
+.ip-pick-now b { color: var(--style-text, var(--ink)); font-weight: 700; margin-right: 2px }
+.ip-pick-b svg { width: 24px; height: 24px; color: var(--sc) }
 .ip-pick-b:hover { transform: translateY(-2px); border-color: var(--sc) }
-.ip-pick-b[aria-checked="true"] { background: var(--sc); border-color: var(--sc); color: #fff; box-shadow: 0 10px 22px -12px var(--sc) }
-.ip-pick-b[aria-checked="true"] svg { color: #fff }
+.ip-pick-b[aria-checked="true"] { background: var(--sc-fill, var(--sc)); border-color: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); box-shadow: 0 10px 22px -12px var(--sc) }
+.ip-pick-b[aria-checked="true"] svg { color: inherit }
 .ip-pick-b:focus-visible, .ip-btn:focus-visible, .ip-seg button:focus-visible, .ip-sw button:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px }
 
 .ip-actions { display: grid; gap: 10px; margin-top: 18px; max-width: 560px; }
@@ -52,8 +55,8 @@
 .ip-btn small { font: 500 13px/1.3 var(--font-sans); color: var(--muted) }
 .ip-btn:hover { transform: translateY(-2px); border-color: var(--sc) }
 .ip-btn:active { transform: scale(.97) }
-.ip-btn.is-primary { background: var(--sc); border-color: var(--sc); color: #fff; padding: 18px 22px; font-size: 22px; box-shadow: 0 18px 36px -18px var(--sc); transition: transform .25s var(--ip-spring), background .5s var(--ip-e), border-color .5s var(--ip-e), box-shadow .3s; }
-.ip-btn.is-primary small { color: rgba(255, 255, 255, .88) }
+.ip-btn.is-primary { background: var(--sc-fill, var(--sc)); border-color: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); padding: 18px 22px; font-size: 22px; box-shadow: 0 18px 36px -18px var(--sc); transition: transform .25s var(--ip-spring), background .5s var(--ip-e), border-color .5s var(--ip-e), box-shadow .3s; }
+.ip-btn.is-primary small { color: inherit; opacity: 1 }
 .ip-btn.is-primary svg { width: 28px; height: 28px }
 .ip-btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
 .ip-opts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
@@ -97,7 +100,7 @@
 .ip-app:hover { transform: translateY(-4px); border-color: var(--app); box-shadow: 0 20px 40px -26px var(--app) }
 .ip-app h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 750 19px/1.1 var(--font-display); letter-spacing: -.01em }
 .ip-app-dot { width: 14px; height: 14px; border-radius: 5px; background: var(--app); transform: rotate(45deg) }
-.ip-app ol { margin: 0 0 14px; padding-left: 20px; display: grid; gap: 7px; font-size: 14.5px; line-height: 1.45; color: var(--ink-2, var(--ink)); flex: 1 }
+.ip-app ol { margin: 0 0 14px; padding-left: 20px; display: grid; gap: 7px; font-size: 14.5px; line-height: 1.45; color: var(--ink-2, var(--ink)); flex: 1; align-content: start }
 .ip-app ol li::marker { font: 700 12px var(--font-mono); color: var(--muted) }
 .ip-app kbd { font-size: 11.5px }
 .ip-app > a { font-size: 14px; text-decoration-color: var(--app) }
@@ -113,13 +116,13 @@
 .ip-sc h3 { margin: 0; display: flex; align-items: baseline; gap: 8px; font: 750 20px/1.1 var(--font-display) }
 .ip-sc h3 a { color: inherit; text-decoration: none }
 .ip-sc h3 a:hover { text-decoration: underline; text-decoration-color: var(--sc) }
-.ip-sc h3 small { font: 600 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--sc) }
+.ip-sc h3 small { font: 600 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--style-text, var(--sc)) }
 .ip-sc p { margin: 6px 0 14px; font-size: 14px; line-height: 1.45; color: var(--muted); flex: 1 }
 .ip-sc-act { display: flex; gap: 6px }
 .ip-sc-act button { flex: 1; display: grid; place-items: center; height: 38px; border-radius: 11px; border: 1.5px solid var(--rule-strong); background: none; color: var(--ink); font: 700 13.5px/1 var(--font-sans); cursor: pointer; transition: background .2s, border-color .2s, color .2s }
 .ip-sc-act button:last-child { flex: none; width: 44px }
 .ip-sc-act button svg { width: 18px; height: 18px }
-.ip-sc-act button:hover { background: var(--sc); border-color: var(--sc); color: #fff }
+.ip-sc-act button:hover { background: var(--sc-fill, var(--sc)); border-color: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff) }
 
 /* ─────────── also known as ─────────── */
 .ip-names { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: start }
@@ -176,7 +179,7 @@
 .ip-grid a { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; aspect-ratio: 1; padding: 12px 8px; border-radius: 18px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; text-align: center; transition: transform .3s var(--ip-spring), border-color .2s, box-shadow .3s }
 .ip-grid a svg { width: 32px; height: 32px; transition: transform .35s var(--ip-spring), color .2s }
 .ip-grid a span { font: 550 12.5px/1.2 var(--font-sans); color: var(--muted) }
-.ip-grid a small { font: 500 11px/1.2 var(--font-sans); color: var(--muted); opacity: .75; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.ip-grid a small { font: 500 11px/1.2 var(--font-sans); color: var(--muted); max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
 .ip-grid a:hover { transform: translateY(-3px); border-color: var(--sc); box-shadow: 0 16px 32px -22px var(--sc) }
 .ip-grid a:hover svg { transform: scale(1.15); color: var(--sc) }
 .ip-grid a:hover span { color: var(--ink) }
@@ -185,10 +188,10 @@
 /* faq */
 .ip-faq { display: grid; gap: 10px; max-width: 900px }
 .ip-q { border-radius: 18px; background: var(--card); border: 1px solid var(--rule); }
-.ip-q summary { list-style: none; display: flex; justify-content: space-between; gap: 16px; padding: 18px 20px; cursor: pointer; font: 680 17px/1.35 var(--font-display) }
+.ip-q summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; cursor: pointer; font: 680 17px/1.35 var(--font-display) }
 .ip-q summary::-webkit-details-marker { display: none }
 .ip-q summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--paper-2); font: 600 18px/1 var(--font-mono); transition: transform .3s var(--ip-spring), background .2s }
-.ip-q[open] summary::after { transform: rotate(45deg); background: var(--sc); color: #fff }
+.ip-q[open] summary::after { transform: rotate(45deg); background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff) }
 .ip-q p { margin: 0; padding: 0 20px 20px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2, var(--ink)); max-width: 72ch }
 .ip-q code { font: 500 .88em var(--font-mono); background: var(--paper-2); padding: .1em .4em; border-radius: 6px }
 
@@ -214,10 +217,10 @@
 .hub-strip.is-mono span { background: var(--card); color: var(--sc); border: 1px solid var(--rule); box-shadow: none }
 .hub-strip.is-mono span:nth-child(5) { background: var(--sc); color: #fff }
 .hub-hero.is-style { position: relative }
-.hub-style .ip-hand, .hub-style .ip-dot { color: var(--sc) }
+.hub-style .ip-hand { color: var(--style-text, var(--sc)) }
 .hub-when { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
 .hub-when article { padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule) }
-.hub-when h3 { margin: 0 0 8px; font: 600 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--sc) }
+.hub-when h3 { margin: 0 0 8px; font: 600 12px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--style-text, var(--sc)) }
 .hub-when p { margin: 0; font-size: 15px; line-height: 1.55 }
 .hub-when code { font: 500 .85em var(--font-mono); background: var(--paper-2); padding: .1em .35em; border-radius: 5px }
 .hub-group { margin-top: 32px }
@@ -245,9 +248,9 @@
 .hub-styles a svg { width: 40px; height: 40px; color: var(--sc); margin-bottom: 6px; transition: transform .4s var(--ip-spring), color .25s }
 .hub-styles b { font: 720 16px/1 var(--font-display) }
 .hub-styles small { font: 600 10.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
-.hub-styles a:hover, .hub-styles a[aria-current] { background: var(--sc); color: #fff; transform: translateY(-3px) }
-.hub-styles a:hover svg, .hub-styles a[aria-current] svg { color: #fff; transform: rotate(-6deg) scale(1.08) }
-.hub-styles a:hover small, .hub-styles a[aria-current] small { color: rgba(255, 255, 255, .85) }
+.hub-styles a:hover, .hub-styles a[aria-current] { background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); transform: translateY(-3px) }
+.hub-styles a:hover svg, .hub-styles a[aria-current] svg { color: inherit; transform: rotate(-6deg) scale(1.08) }
+.hub-styles a:hover small, .hub-styles a[aria-current] small { color: inherit }
 .hub > .ip-section:last-child { padding-bottom: clamp(48px, 8vw, 96px) }
 
 /* fallback toast (site.js provides the shared one) */
@@ -270,9 +273,9 @@
 @media (max-width: 640px) {
   .ip-app-list { grid-template-columns: minmax(0, 1fr) }
   .ip-h1 { font-size: clamp(40px, 12vw, 60px) }
-  .ip-pick-b { height: 38px; padding: 0 10px 0 8px; font-size: 13px }
-  .ip-pick-b span { display: none }
-  .ip-pick-b[aria-checked="true"] span { display: inline }
+  .ip-pick { gap: 5px }
+  .ip-pick-b { padding: 10px 0; border-radius: 14px }
+  .ip-pick-b span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
   .ip-btn.is-primary { font-size: 19px; padding: 16px 18px }
   .ip-btn { padding: 12px 14px; font-size: 16px }
   .ip-opts { flex-direction: column; align-items: stretch }
@@ -321,8 +324,8 @@
 .ip-side-links li a { display: grid; justify-items: center; gap: 6px; padding: 10px 4px 8px; border-radius: 14px; background: var(--paper-2); color: var(--ink); text-decoration: none; transition: transform .25s var(--ip-spring), background .2s, color .2s }
 .ip-side-links li svg { width: 26px; height: 26px }
 .ip-side-links li span { max-width: 100%; font: 550 11px/1.15 var(--font-sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-.ip-side-links li a:hover { transform: translateY(-2px); background: var(--sc); color: #fff }
-.ip-side-links li a:hover span { color: rgba(255, 255, 255, .9) }
+.ip-side-links li a:hover { transform: translateY(-2px); background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff) }
+.ip-side-links li a:hover span { color: inherit }
 .ip-lib-link { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; border: 1.5px solid var(--rule-strong); color: var(--ink); text-decoration: none; transition: border-color .2s, transform .25s var(--ip-spring) }
 .ip-lib-link > svg:first-child { width: 22px; height: 22px; color: var(--sc) }
 .ip-lib-link b { display: block; font: 720 16px/1.2 var(--font-display) }
@@ -349,7 +352,7 @@ a.ip-textbtn { text-decoration: none }
 .ip-ask-bubble.is-user { justify-self: end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 6px }
 .ip-ask-bubble.is-ai { display: flex; align-items: center; gap: 12px; background: var(--paper-2); color: var(--ink); border-bottom-left-radius: 6px }
 .ip-ask-bubble i { font-style: normal; font-weight: 650 }
-.ip-ask-tile { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--sc); color: #fff; transition: background .5s var(--ip-e) }
+.ip-ask-tile { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); transition: background .5s var(--ip-e) }
 .ip-ask-tile svg { width: 32px; height: 32px; scale: var(--opt, 1) }
 .ip-ask-widget { grid-column: 1 / -1; min-width: 0; min-height: 64px }
 .ip-ask { scroll-margin-top: calc(var(--header-h, 72px) + 16px) }
@@ -382,7 +385,7 @@ a.ip-textbtn { text-decoration: none }
 .ip-tag-k { grid-area: k; display: inline-flex; align-items: center; gap: 8px; font: 650 12.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--on-dark-2, rgba(247, 243, 236, .75)) }
 .ip-tag-k svg { width: 16px; height: 16px; color: var(--sc); transition: color .5s var(--ip-e) }
 .ip-tag-btn code { grid-area: code; min-width: 0; font: 600 clamp(14px, 1.45vw, 17px)/1.35 var(--font-mono); color: #fff; overflow-wrap: anywhere }
-.ip-tag-go { grid-area: go; display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border-radius: 13px; background: var(--sc); color: #fff; font: 750 16px/1 var(--font-display); transition: background .5s var(--ip-e) }
+.ip-tag-go { grid-area: go; display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border-radius: 13px; background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); font: 750 16px/1 var(--font-display); transition: background .5s var(--ip-e) }
 .ip-tag-go svg { width: 18px; height: 18px }
 .ip-tag-btn.is-done .ip-tag-go { background: #22A861 }
 .ip-tag-hint { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted) }
@@ -395,7 +398,7 @@ a.ip-textbtn { text-decoration: none }
 .ip-tag-hint .ip-soon-tag { padding: 3px 7px; font-size: 10px; vertical-align: middle }
 .ip-opt { display: grid; gap: 6px }
 .ip-opt-l { font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
-.ip-opt-l small { text-transform: none; letter-spacing: 0; font: 500 11.5px/1 var(--font-sans); opacity: .85 }
+.ip-opt-l small { text-transform: none; letter-spacing: 0; font: 500 11.5px/1 var(--font-sans) }
 .ip-seg button { min-width: 0; padding: 0 10px }
 @media (max-width: 640px) {
   .ip-tag-btn { grid-template-columns: minmax(0, 1fr); grid-template-areas: "k" "code" "go"; }
@@ -403,9 +406,97 @@ a.ip-textbtn { text-decoration: none }
 }
 .ip-styles { gap: 10px }
 .ip-sc { padding: 12px }
-.ip-sc h3 { flex-wrap: wrap; gap: 2px 8px }
+.ip-sc h3 { flex-direction: column; align-items: flex-start; gap: 6px }
 .ip-sc-act { gap: 5px }
 .ip-sc-act button { min-width: 0; height: 36px; font-size: 12.5px }
 .ip-sc-act button:last-child { width: 36px }
 .ip-tag-btn { border: 1px solid rgba(255, 255, 255, .12) }
 .ip-ask .ip-hand { margin-right: .14em }
+
+/* ─────────── text on a style-coloured fill: AA in every style ───────────
+   bright fills (solid, gloss, engrave, blueprint, sketch) take ink; cobalt and violet take white */
+.s-line, .s-duo, .ip[data-style="line"], .ip[data-style="duo"] { --sc-on: #fff }
+.s-solid, .s-gloss, .s-engrave, .s-blueprint, .s-sketch,
+.ip[data-style="solid"], .ip[data-style="gloss"], .ip[data-style="engrave"], .ip[data-style="blueprint"], .ip[data-style="sketch"] { --sc-on: #111318 }
+.s-duo, .ip[data-style="duo"] { --sc-fill: color-mix(in srgb, var(--sc) 86%, #000) }
+.s-line, .s-solid, .s-gloss, .s-engrave, .s-blueprint, .s-sketch,
+.ip[data-style="line"], .ip[data-style="solid"], .ip[data-style="gloss"], .ip[data-style="engrave"], .ip[data-style="blueprint"], .ip[data-style="sketch"] { --sc-fill: var(--sc) }
+
+/* ─────────── final review (2026-10-02) ─────────── */
+/* stylesheet hint: label line, then the copyable line full width */
+.ip-tag-hint { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px }
+.ip-tag-css { display: flex; width: 100%; justify-content: space-between; gap: 10px; margin: 0; padding: 8px 10px }
+.ip-tag-css code { min-width: 0 }
+/* related: 12 icons, always full rows */
+.ip-grid:not(.is-hub) { grid-template-columns: repeat(6, minmax(0, 1fr)) }
+.ip-grid:not(.is-hub) a { aspect-ratio: auto; min-height: 118px }
+/* FAQ: heading column + questions */
+@media (min-width: 1000px) {
+  .ip-faq-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.5fr); gap: clamp(32px, 5vw, 80px); align-items: start }
+  .ip-faq-grid > .ip-head { position: sticky; top: calc(var(--header-h, 72px) + 24px); flex-direction: column; align-items: flex-start; margin: 0 }
+  .ip-faq-grid .ip-faq { max-width: none }
+}
+@media (max-width: 900px) {
+  .ip-stage-art { aspect-ratio: auto; height: clamp(190px, 50vw, 340px) }
+  .ip-stage-art svg { width: clamp(150px, 40vw, 272px); height: auto }
+  .ip-grid:not(.is-hub) { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+}
+@media (max-width: 640px) {
+  .ip-grid:not(.is-hub) { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .ip-btn-row .ip-btn { column-gap: 10px; font-size: 15px }
+  .ip-btn-row .ip-btn svg { width: 20px; height: 20px }
+  .ip-btn-row .ip-btn small { font-size: 12px }
+}
+@media (max-width: 640px) { .ip-pick-now { min-height: 2.9em } }
+@media (max-width: 640px) {
+  .ip-ask-widget .ask-ai-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .ip-ask-widget .ask-ai-btn { justify-content: center; padding: 0 10px }
+}
+.ip-app .nw { white-space: nowrap }
+@media (max-width: 640px) {
+  .ip-app-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter, 16px)); padding: 4px var(--gutter, 16px) 12px; scroll-padding-inline: var(--gutter, 16px) }
+  .ip-app-list::-webkit-scrollbar { display: none }
+  .ip-app { scroll-snap-align: start }
+}
+/* every-style cards: one row of 7 on desktop, a snap row on tablets, compact rows on phones (never an orphan card) */
+@media (min-width: 1100px) { .ip-styles { grid-template-columns: repeat(7, minmax(0, 1fr)) } }
+@media (min-width: 641px) and (max-width: 1099px) {
+  .ip-styles { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 200px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; margin-inline: calc(-1 * var(--gutter, 16px)); padding: 6px var(--gutter, 16px) 14px; scroll-padding-inline: var(--gutter, 16px) }
+  .ip-sc { scroll-snap-align: start }
+}
+@media (max-width: 640px) {
+  .ip-styles { grid-template-columns: minmax(0, 1fr); gap: 8px }
+  .ip-sc { display: grid; grid-template-columns: 92px minmax(0, 1fr); grid-template-areas: "art h" "art p" "art act"; column-gap: 14px; padding: 10px; border-radius: 20px }
+  .ip-sc-art { grid-area: art; height: 92px; padding: 0; margin: 0; align-self: center; border-radius: 14px }
+  .ip-sc-art svg { width: 50px; height: 50px }
+  .ip-sc h3 { grid-area: h; flex-direction: row; align-items: baseline; gap: 8px; font-size: 18px; margin-top: 2px }
+  .ip-sc p { grid-area: p; margin: 3px 0 8px; font-size: 13.5px; line-height: 1.4 }
+  .ip-sc-act { grid-area: act }
+  .ip-sc-act button { height: 34px }
+}
+@media (min-width: 641px) and (max-width: 1199px) { .ip-pick-b { font-size: 11.5px; letter-spacing: -.01em } }
+@media (max-width: 640px) { .ip-grid:not(.is-hub) a { min-height: 96px } }
+@media (min-width: 641px) and (max-width: 1099px) {
+  .ip-app-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 272px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; margin-inline: calc(-1 * var(--gutter, 16px)); padding: 6px var(--gutter, 16px) 14px; scroll-padding-inline: var(--gutter, 16px) }
+  .ip-app { scroll-snap-align: start }
+}
+/* code is copied verbatim: never let the mono font turn -- or <!-- into ligatures */
+.ip-page code, .ip-page pre, .ip-page kbd { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0 }
+.ip-note code, .ip-soon code, .ip-panel > p code { white-space: nowrap }
+.ip-q code { overflow-wrap: anywhere }
+/* dark theme: the developer slab must still read as a slab on a near-black page */
+[data-theme="dark"] .ip-dev { background: var(--dark-2); border: 1px solid var(--rule-strong) }
+[data-theme="dark"] .ip-tag-btn { background: var(--dark-2) }
+@media (max-width: 640px) {
+  .hub-cta { flex-wrap: nowrap; gap: 8px }
+  .hub-cta .btn { flex: 1 1 auto; justify-content: center; min-width: 0; padding-inline: 16px; font-size: 16px; white-space: nowrap }
+  .hub-cta .btn-ghost { flex: 0 0 auto }
+}
+.hub-dev { display: grid; gap: 6px; margin: 0 0 10px; padding: 0; list-style: none }
+.hub-dev code { display: inline-block; max-width: 100%; font-size: 12.5px; line-height: 1.4; overflow-wrap: anywhere; white-space: normal }
+.hub-dev-more { font-size: 14px !important; color: var(--muted) }
+/* style hubs: show the style in its own colour, a touch larger (creative styles read best at 32px+) */
+.ip-grid.is-hub a svg { width: 36px; height: 36px }
+.hub-style .ip-grid a svg { color: var(--style-text, var(--sc)) }
+.hub-style .ip-grid a:hover svg { color: var(--ink) }
+.ip-tag-btn code .nw { white-space: nowrap }

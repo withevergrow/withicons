@@ -399,7 +399,7 @@ ${prefixed(FOOTER, P)}
 
   /* ───────────── "use it in…" quick tips ───────────── */
   const APPS = [
-    { id: 'google-slides', name: 'Google Slides', color: '#F4B400', steps: ['Press <b>Copy image</b> above.', 'Click on your slide and paste (<kbd>Ctrl</kbd> <kbd>V</kbd>, or <kbd>⌘</kbd> <kbd>V</kbd> on Mac).', 'Or drag the big preview straight onto the slide.'] },
+    { id: 'google-slides', name: 'Google Slides', color: '#F4B400', steps: ['Press <b>Copy image</b> above.', 'Click your slide and paste with <span class="nw"><kbd>Ctrl</kbd>+<kbd>V</kbd></span> <span class="nw">(<kbd>⌘</kbd>+<kbd>V</kbd> on a Mac).</span>', 'Or drag the big preview straight onto the slide.'] },
     { id: 'powerpoint', name: 'PowerPoint', color: '#D24726', steps: ['Press <b>Download SVG</b>.', 'Drag the file onto your slide (or Insert → Pictures).', 'Recolour it any time: Graphics Format → Graphics Fill.'] },
     { id: 'canva', name: 'Canva', color: '#00C4CC', steps: ['Press <b>Download SVG</b>.', 'In Canva open Uploads → Upload files.', 'Click the icon in your design to change its colour.'] },
     { id: 'figma', name: 'Figma', color: '#A259FF', steps: ['Press <b>Copy SVG code</b>.', 'Paste into your Figma canvas.', 'It arrives as an editable vector, ready to resize and recolour.'] },
@@ -475,7 +475,7 @@ ${prefixed(FOOTER, P)}
       { name: catTitle(cat), href: `../categories/${cat}.html`, url: catUrl(cat) },
       { name: T, url },
     ]
-    const data = { name: n, title: T, cdn: `${CDN}/${SCOPE}/web/dist/classes/`, styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, inner: INNER(n)[s], hex: STYLE[s].hex, title: STYLE[s].title, sw: STYLE[s].strokeWidth }])) }
+    const data = { name: n, title: T, cdn: `${CDN}/${SCOPE}/web/dist/classes/`, styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, inner: INNER(n)[s], hex: STYLE[s].hex, title: STYLE[s].title, say: STYLE[s].say, sw: STYLE[s].strokeWidth }])) }
     const lede = `${esc(cap(depicts(i.description)))}. Free to use in slides, documents, websites and apps. No sign-up, no credit needed.`
     const main = `
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>${st.map(s => `<symbol id="s-${s}" viewBox="0 0 24 24">${INNER(n)[s]}</symbol>`).join('')}</defs></svg>
@@ -487,12 +487,14 @@ ${crumbs(crumbItems)}
     <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>Free icon · <a href="../categories/${cat}.html">${esc(catTitle(cat))}</a> · ${st.length} styles</p>
     <h1 class="ip-h1" id="ip-h1">${esc(T)} <span class="ip-hand">icon</span></h1>
     <p class="ip-lede">${lede}</p>
-    ${aka.length ? `<p class="ip-aka-line"><b>Also known as</b> ${aka.slice(0, 8).map(a => esc(a)).join(' · ')}</p>` : ''}
-    <div class="ip-pick" role="radiogroup" aria-label="Choose a style">${st.map(s => `<button type="button" role="radio" class="ip-pick-b s-${s}" data-pick="${s}" aria-checked="${s === first}" style="--sc:${STYLE[s].hex}">${useEl(s, { size: 22 })}<span>${esc(STYLE[s].title)}</span></button>`).join('')}</div>
+    ${aka.length ? `<p class="ip-aka-line"><b>Also known as</b> ${aka.slice(0, 8).map(a => esc(a)).join('&nbsp;· ')}</p>` : ''}
+    <div class="ip-pick" role="radiogroup" aria-label="Choose a style">${st.map(s => `<button type="button" role="radio" class="ip-pick-b s-${s}" data-pick="${s}" aria-checked="${s === first}" style="--sc:${STYLE[s].hex}">${useEl(s, { size: 24 })}<span>${esc(STYLE[s].title)}</span></button>`).join('')}</div>
+    <p class="ip-pick-now" aria-live="polite"><b data-pick-name>${esc(STYLE[first].title)}</b> <span data-pick-say>${esc(STYLE[first].say)}</span></p>
     <div class="ip-actions" data-actions>
       <div class="ip-tag">
-        <button type="button" class="ip-tag-btn" data-act="copy-tag" aria-describedby="ip-tag-hint"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${esc(tagFor(n, first))}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
-        <p class="ip-tag-hint" id="ip-tag-hint"><b>First time?</b> Add this line once to your page’s <code>&lt;head&gt;</code>: <button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the stylesheet line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}</button> <span class="ip-soon-tag">launching soon</span></p>
+        <button type="button" class="ip-tag-btn" data-act="copy-tag" aria-describedby="ip-tag-hint"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
+        <p class="ip-tag-hint" id="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p>
+        <button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the stylesheet line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the stylesheet line</span></button>
       </div>
       <button type="button" class="ip-btn is-primary" data-act="copy-img">${I.copy}<span>Copy image</span><small>paste into Slides, Docs, Notion</small></button>
       <div class="ip-btn-row">
@@ -591,8 +593,8 @@ ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" ar
   </details>
 </div></section>
 
-<section class="ip-section" id="faq" aria-labelledby="faq-h"><div class="wrap">
-  <div class="ip-head"><h2 class="ip-h2" id="faq-h">Questions about the <span class="ip-hand">${esc(T)}</span> icon</h2></div>
+<section class="ip-section ip-faqsec" id="faq" aria-labelledby="faq-h"><div class="wrap ip-faq-grid">
+  <div class="ip-head"><h2 class="ip-h2" id="faq-h">Questions about the <span class="ip-hand">${esc(T)}</span> icon</h2><p>Free to use, easy to recolour, and ready for your slides or your code. <a href="../faq.html">All questions ${I.arr}</a></p></div>
   <div class="ip-faq">${faqs.map(f => `<details class="ip-q"><summary>${esc(f.q)}</summary><p>${md(f.a)}</p></details>`).join('')}</div>
 </div></section>
 
@@ -698,7 +700,7 @@ ${crumbs(crumbItems)}
     <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>${esc(cap(S.kind))} style · ${items.length} icons</p>
     <h1 class="ip-h1">${esc(S.title)} <span class="ip-hand">icons</span></h1>
     <p class="ip-lede">${esc(S.say)} Great for ${esc(S.good)}.</p>
-    <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html?style=${s}">Open ${esc(S.title)} in the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="#all">See all ${items.length}</a></p>
+    <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html?style=${s}">Open in the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="#all">See all ${items.length}</a></p>
   </div>
   <div class="hub-strip is-mono" aria-hidden="true">${SHOWCASE.slice(0, 9).map((n, k) => `<span style="--i:${k}">${svgEl(n, s)}</span>`).join('')}</div>
 </div>
@@ -709,7 +711,7 @@ ${crumbs(crumbItems)}
     <article><h3>Good for</h3><p>${esc(cap(S.good))}.</p></article>
     <article><h3>Sizes</h3><p>${S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
     <article><h3>Colour</h3><p>${s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
-    <article><h3>For developers</h3><p><code>${SCOPE}/react${subpath}</code>, <code>&lt;with-icon variant="${s}"&gt;</code> or <code>with with-home${s === 'line' ? '' : ` with-${s}`}</code>. <a href="../developers.html">Docs</a> (launching soon).</p></article>
+    <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · launching soon</p></article>
   </div>
 </div></section>
 <section class="ip-section" id="all" aria-labelledby="all-h"><div class="wrap">

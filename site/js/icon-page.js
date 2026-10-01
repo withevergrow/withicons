@@ -81,6 +81,8 @@
     var inner = c ? s.inner.replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, c) : s.inner
     return '<svg xmlns="http://www.w3.org/2000/svg" width="' + (px || 24) + '" height="' + (px || 24) + '" viewBox="0 0 24 24"' + attrString(s.root, c) + '>' + inner + '</svg>'
   }
+  // keep each token whole when the tag wraps (never break inside with-user-plus)
+  function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
   function tagText(st) { return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"></i>' }
   function cssText(st) { return '<link rel="stylesheet" href="' + (DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/') + 'with-' + st + '.css">' }
   function colorName() { return S.color === 'ink' ? 'black' : S.color === 'style' ? DATA.styles[S.style].title.toLowerCase() + ' colour' : S.color === '#FFFFFF' ? 'white' : S.color.toUpperCase() }
@@ -151,7 +153,9 @@
     $$('[data-px]', root).forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-px') === S.px ? 'true' : 'false') })
     var lbl = $('[data-px-label]', root); if (lbl) lbl.textContent = S.px + ' px'
     $$('[data-color-label]', root).forEach(function (c) { c.textContent = colorName() })
-    var tc = $('[data-tag-code]', root); if (tc) tc.textContent = tagText(S.style)
+    var pn = $('[data-pick-name]', root); if (pn) pn.textContent = s.title
+    var ps = $('[data-pick-say]', root); if (ps && s.say) ps.textContent = s.say
+    var tc = $('[data-tag-code]', root); if (tc) tc.innerHTML = nowrapTokens(tagText(S.style))
     var cc = $('[data-tag-css]', root); if (cc) cc.textContent = cssText(S.style)
     root.classList.toggle('is-white', S.color === '#FFFFFF')
     askAI()
