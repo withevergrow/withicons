@@ -531,7 +531,9 @@ export function create(index) {
       }
     }
     const max = maxTypos(w.length)
-    if (w.length >= 3 && (exact === undefined || w.length >= 5) && (max > 0 || out.size === 0)) {
+    // a word that exists verbatim in the vocabulary is not a misspelling ("wallet" must not pull in mallet/pallet),
+    // unless the data itself marks it as a known misspelling ("calender")
+    if (w.length >= 3 && (exact === undefined || knownFix(w)) && (max > 0 || out.size === 0)) {
       // integer edits up to max, plus one more when the extra edit is a cheap slip (adjacent key, doubled letter)
       // the extra edit is only tried for words nothing else explains (keeps "cat" from turning into car/chat)
       let known = false

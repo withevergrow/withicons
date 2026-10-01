@@ -291,7 +291,7 @@
     toastEl.innerHTML = '<span class="toast-ic" aria-hidden="true">' + (o.icon ? glyph(svgMap(o.st || 'line') ? (o.st || 'line') : 'line', o.icon) : '') + '</span><span class="toast-msg">' + html + '</span>' + (o.action ? '<button type="button" class="toast-act">' + esc(o.action.label) + '</button>' : '')
     if (o.action) $('.toast-act', toastEl).onclick = function () { o.action.run(); hideToast() }
     toastEl.classList.toggle('is-err', !!o.err)
-    toastEl.style.setProperty('--sc', 'var(--s-' + (o.st || S.style) + ')')
+    toastEl.style.setProperty('--sc', 'var(--s-' + (o.st || S.style) + ')'); toastEl.style.setProperty('--on-sc', 'var(--on-' + (o.st || S.style) + ')')
     toastEl.classList.add('is-on')
     clearTimeout(toastTimer); toastTimer = setTimeout(hideToast, o.ms || 4200)
   }
@@ -527,7 +527,7 @@
     if (S.view !== 'compare' || !L.headH) { if (compareHead) { compareHead.remove(); compareHead = null } return }
     if (!compareHead) {
       compareHead = D.createElement('div'); compareHead.className = 'cmp-head'; compareHead.setAttribute('aria-hidden', 'true')
-      compareHead.innerHTML = SNAMES.map(function (s) { return '<span style="--sc:var(--s-' + s + ')"><i></i>' + esc(STYLE[s].title) + '</span>' }).join('')
+      compareHead.innerHTML = SNAMES.map(function (s) { return '<span style="--sc:var(--s-' + s + ');--sc-text:var(--t-' + s + ')"><i></i>' + esc(STYLE[s].title) + '</span>' }).join('')
       grid.appendChild(compareHead)
     }
     compareHead.style.left = L.labelW + 'px'
@@ -551,10 +551,19 @@
     fillTile(n, it)
     return n
   }
-  function whyHtml(m) {
+  function lev(a, b) {
+    if (Math.abs(a.length - b.length) > 2) return 9
+    var p = [], i, j; for (j = 0; j <= b.length; j++) p[j] = j
+    for (i = 1; i <= a.length; i++) { var c = [i]; for (j = 1; j <= b.length; j++) c[j] = Math.min(p[j] + 1, c[j - 1] + 1, p[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); p = c }
+    return p[b.length]
+  }
+  function whyHtml(m, name) {
     if (!m || !m.field) return ''
+    // a misspelling kept as a synonym ("calender" on Calendar) is not a meaning: the name already says it
+    if (name && name.length >= 5 && (m.field === 'synonym' || m.field === 'alias') && m.term && lev(norm(m.term).replace(/-/g, ' '), name.replace(/-/g, ' ')) <= 2) return ''
     var term = esc(String(m.field === 'description' ? S.q.trim() : (m.term || '')).replace(/-/g, ' '))
     if (m.field === 'synonym' || m.field === 'alias') { if (norm(m.term).replace(/-/g, ' ') === norm(S.q).replace(/-/g, ' ')) return (m.field === 'alias' ? 'also called' : 'means') + ' <b>' + term + '</b>' }
+    if (name && m.term && norm(m.term).replace(/-/g, ' ') === name.replace(/-/g, ' ')) return ''
     if (m.kind === 'phonetic') return 'sounds like <b>' + term + '</b>'
     if (m.kind === 'similar') return 'similar to <b>' + term + '</b>'
     if (m.typo || m.kind === 'typo') return '≈ <b>' + term + '</b>'
@@ -570,9 +579,9 @@
   }
   function fillTile(n, it) {
     var ic = BY[it.name], m = it.r && it.r.match
-    var why = S.view === 'grid' ? whyHtml(m) : ''
+    var why = S.view === 'grid' ? whyHtml(m, it.name) : ''
     var label = S.view === 'compare' ? esc(STYLE[it.st].title) : hiName(ic.title)
-    n.style.setProperty('--sc', 'var(--s-' + it.st + ')')
+    n.style.setProperty('--sc', 'var(--s-' + it.st + ')'); n.style.setProperty('--sc-text', 'var(--t-' + it.st + ')'); n.style.setProperty('--on-sc', 'var(--on-' + it.st + ')')
     n.innerHTML = '<span class="t-card"><span class="t-ic">' + glyph(it.st, it.name) + '</span><span class="t-name">' + label + '</span>' + (why ? '<span class="t-why">' + why + '</span>' : '') + '</span>' +
       '<span class="t-chk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17 L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'
     var whyTxt = why ? why.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&') : ''
@@ -758,6 +767,15 @@
       b.classList.toggle('is-zero', !k)
       $('small', b).textContent = k
     })
+    // horizontal chip row (narrow screens): keep the picked category in view
+    if (S.cat !== paintCats._last) {
+      paintCats._last = S.cat
+      var on = $('[aria-pressed="true"]', catNav)
+      if (on && catNav.scrollWidth > catNav.clientWidth + 2 && getComputedStyle(catNav).flexDirection === 'row') raf(function () {
+        var l = on.offsetLeft - catNav.offsetLeft, r = l + on.offsetWidth
+        if (l < catNav.scrollLeft || r > catNav.scrollLeft + catNav.clientWidth - 24) catNav.scrollTo({ left: Math.max(0, l - 16), behavior: reduced ? 'auto' : 'smooth' })
+      })
+    }
   }
 
   /* ───────────────────────── style switcher ───────────────────────── */
@@ -865,8 +883,10 @@
     $$('button', selbar).forEach(function (b) { b.tabIndex = n ? 0 : -1 })
     $('[data-sel-n]', selbar).textContent = n
     $('[data-sel-s]', selbar).textContent = n === 1 ? '' : 's'
-    $('[data-sel-prev]', selbar).innerHTML = Array.from(S.sel).slice(-5).map(function (k) { var p = k.split('|'); return '<span style="--sc:var(--s-' + p[1] + ')">' + glyph(p[1], p[0]) + '</span>' }).join('')
+    $('[data-sel-prev]', selbar).innerHTML = Array.from(S.sel).slice(-5).map(function (k) { var p = k.split('|'); return '<span style="--sc:var(--s-' + p[1] + ');--on-sc:var(--on-' + p[1] + ')">' + glyph(p[1], p[0]) + '</span>' }).join('')
     $$('[data-zip-px]', selbar).forEach(function (el) { el.textContent = S.px })
+    // toasts sit above the bar, whatever height it wraps to
+    if (n) toastEl.style.setProperty('--selbar-h', selbar.offsetHeight + 'px')
   }
   function refreshTabStops() { mounted.forEach(function (n) { n.tabIndex = n._idx === S.fi ? 0 : -1 }) }
 
@@ -1021,7 +1041,7 @@
             '<div class="vw-bgs" role="radiogroup" aria-label="Preview background">' + BG_LIST.map(function (b) { return '<button type="button" role="radio" class="vw-bg is-' + b[0] + '" data-vw-bg="' + b[0] + '" aria-label="' + b[1] + ' background" title="' + b[1] + '"><span></span></button>' }).join('') + '</div>' +
             '<output class="vw-readout" data-vw-readout></output>' +
           '</div>' +
-          '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" style="--sc:var(--s-' + s + ')" title="' + esc(STYLE[s].title) + ' (' + (i + 1) + ')"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
+          '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" style="--sc:var(--s-' + s + ');--on-sc:var(--on-' + s + ')" title="' + esc(STYLE[s].title) + ' (' + (i + 1) + ')"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
           '<section class="vw-sec vw-mocks" aria-labelledby="vw-mk-h"><h3 class="vw-h3" id="vw-mk-h">See it in use</h3><div class="mk-grid" data-vw-mocks></div></section>' +
         '</div>' +
         '<div class="vw-col-b">' +
@@ -1151,6 +1171,7 @@
     if (!viewer._built || !V.name) return
     var name = V.name, st = V.st, ic = BY[name], b = vwBody
     viewer.style.setProperty('--sc', 'var(--s-' + st + ')')
+    viewer.style.setProperty('--on-sc', 'var(--on-' + st + ')'); viewer.style.setProperty('--sc-text', 'var(--t-' + st + ')')
     viewer.style.setProperty('--sc-soft', 'var(--c-' + st + '-soft, color-mix(in srgb, var(--s-' + st + ') 14%, transparent))')
     viewer.setAttribute('data-st', st)
     if (part === 'all') {
@@ -1585,22 +1606,24 @@
   /* ───────────────────────── placeholder: rotating examples ───────────────────────── */
   var EXAMPLES = ['throw away', 'money', 'settings', 'send email', 'happy', 'calendar', 'upload', 'warning', 'shopping', 'rocket']
   function placeholderLoop() {
-    var base = 'Search ' + ICONS.length + ' icons… try “', i = 0, ch = 0, del = false, pause = 0
-    if (reduced) { input.placeholder = base + EXAMPLES[0] + '”'; return }
+    // narrow fields (phones: the Ask AI pill eats the right side) get a short lead-in so the example is never cut
+    var full = 'Search ' + ICONS.length + ' icons… try “', i = 0, ch = 0, del = false, pause = 0
+    function base() { return input.clientWidth && input.clientWidth < 520 ? 'Try “' : full }
+    if (reduced) { input.placeholder = base() + EXAMPLES[0] + '”'; W.addEventListener('resize', function () { input.placeholder = base() + EXAMPLES[0] + '”' }); return }
     setInterval(function () {
       if (D.activeElement === input || input.value || D.hidden) return
       var w = EXAMPLES[i]
       if (pause) { pause--; return }
       if (!del) { ch++; if (ch >= w.length) { del = true; pause = 22 } }
       else { ch--; if (ch <= 0) { del = false; i = (i + 1) % EXAMPLES.length; pause = 3 } }
-      input.placeholder = base + w.slice(0, ch) + '”'
+      input.placeholder = base() + w.slice(0, ch) + '”'
     }, 70)
   }
 
   /* ───────────────────────── boot ───────────────────────── */
   function buildChrome() {
     stylesEl.insertAdjacentHTML('afterbegin', '<span class="sp-ink" aria-hidden="true"></span>' + STYLES.map(function (s) {
-      return '<button type="button" class="sp" role="radio" data-style-pill="' + s.name + '" style="--sc:var(--s-' + s.name + ')" aria-checked="false" title="' + esc(s.description) + '"><span class="sp-g" aria-hidden="true"></span><span class="sp-t">' + esc(s.title) + '</span></button>'
+      return '<button type="button" class="sp" role="radio" data-style-pill="' + s.name + '" style="--sc:var(--s-' + s.name + ');--on-sc:var(--on-' + s.name + ')" aria-checked="false" title="' + esc(s.description) + '"><span class="sp-g" aria-hidden="true"></span><span class="sp-t">' + esc(s.title) + '</span></button>'
     }).join(''))
     catNav.innerHTML = '<button type="button" class="cat" data-cat="" aria-pressed="true"><span class="cat-g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg></span><span class="cat-t">All icons</span><small>' + ICONS.length + '</small></button>' +
       CATS.map(function (c) { return '<button type="button" class="cat" data-cat="' + c + '" aria-pressed="false"><span class="cat-g" aria-hidden="true" data-cat-g="' + catIcon(c) + '"></span><span class="cat-t">' + esc(cap(c)) + '</span><small></small></button>' }).join('')
