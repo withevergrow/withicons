@@ -9,7 +9,7 @@ export const ORIGIN = 'https://withicons.com'
 export const GITHUB = 'https://github.com/withevergrow/withicons'
 export const STYLES = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
 export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7B5CFF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861' }
-export const cvar = s => `var(--c-${s});--gt:var(--c-${s}-text);--gs:var(--c-${s}-soft)`
+export const cvar = s => `var(--c-${s});--gt:var(--c-${s}-text);--gs:var(--c-${s}-soft);--go:var(--c-${s}-on)`
 
 const ctx = { window: {} }
 vm.createContext(ctx)
@@ -183,6 +183,18 @@ ${scripts.map(s => `<script src="${p}${s}" defer></script>`).join('\n')}
 
 export function write(rel, html) {
   fs.mkdirSync(SITE + '/' + rel.split('/').slice(0, -1).join('/'), { recursive: true })
+  // inline code (not code blocks) wraps (pages.css), so give long tokens sensible break points: after / . _ (inside a
+  // word) and before ? or & in URLs. Hyphens already break. overflow-wrap only kicks in as a last resort.
+  html = html.replace(/(?<!<pre>)(<code(?: class="[^"]*")?>)([^<]{16,})(<\/code>)/g, (m, o, t, c) =>
+    o + t.replace(/\/(?!\/)/g, '/<wbr>').replace(/(\w)([._])(?=\w)/g, '$1$2<wbr>').replace(/(\w)(\?|&amp;)/g, '$1<wbr>$2') + c)
+  // tables: label every cell with its column header so narrow screens can stack rows into cards (pages.css)
+  html = html.replace(/<table class="pg-table">([\s\S]*?)<\/table>/g, (m, inner) => {
+    const labels = [...inner.matchAll(/<th>([\s\S]*?)<\/th>/g)].map(x => x[1].replace(/<[^>]+>/g, '').replace(/"/g, '&quot;'))
+    return '<table class="pg-table pg-table--stack">' + inner.replace(/<tr>([\s\S]*?)<\/tr>/g, (r, cells) => {
+      let i = 0
+      return '<tr>' + cells.replace(/<td>/g, () => `<td data-label="${labels[i++] || ''}">`) + '</tr>'
+    }) + '</table>'
+  })
   fs.writeFileSync(SITE + '/' + rel, html)
 }
 

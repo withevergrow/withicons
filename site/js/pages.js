@@ -54,16 +54,37 @@
   function initTabs() {
     $$('[data-tabs]').forEach(function (box) {
       var tabs = $$('[role="tab"]', box)
+      var useHash = box.hasAttribute('data-tabs-hash')
       function select(t, focus) {
         tabs.forEach(function (x) {
           var on = x === t
           x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1
-          var p = doc.getElementById(x.getAttribute('aria-controls')); if (p) p.hidden = !on
+          var p = doc.getElementById(x.getAttribute('aria-controls'))
+          if (p) { p.hidden = !on; p.removeAttribute('data-off') }
         })
+        // keep the selected tab in view inside a scrolling tab strip
+        var list = t.parentNode
+        if (list && list.scrollWidth > list.clientWidth) list.scrollTo({ left: t.offsetLeft - (list.clientWidth - t.offsetWidth) / 2, behavior: reduced ? 'auto' : 'smooth' })
         if (focus) t.focus()
       }
+      // panels without JS are all visible (data-off hides them only once .js is set); normalise to [hidden] now
+      var start = tabs.filter(function (x) { return x.getAttribute('aria-selected') === 'true' })[0] || tabs[0]
+      if (useHash && location.hash) {
+        var hit = tabs.filter(function (x) { return '#' + x.getAttribute('aria-controls') === location.hash })[0]
+        if (hit) {
+          start = hit
+          // land on the tab strip (not the bare panel) once layout and the browser's own fragment scroll have settled
+          var land = function () { box.scrollIntoView({ block: 'start' }) }
+          setTimeout(land, 60)
+          if (doc.readyState !== 'complete') W.addEventListener('load', function () { setTimeout(land, 120) })
+        }
+      }
+      if (start) select(start)
       tabs.forEach(function (t, i) {
-        t.addEventListener('click', function () { select(t) })
+        t.addEventListener('click', function () {
+          select(t)
+          if (useHash && W.history && history.replaceState) history.replaceState(null, '', '#' + t.getAttribute('aria-controls'))
+        })
         t.addEventListener('keydown', function (e) {
           var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null
           if (n == null) return
@@ -84,7 +105,7 @@
           var g = list[+b.getAttribute('data-helper')]; if (!g) return
           btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b) })
           var size = /any|copy/.test(g.size) ? '' : ' · ' + g.size
-          out.style.setProperty('--g', getComputedStyle(b).getPropertyValue('--g'))
+          var cs = getComputedStyle(b); ['--g', '--gt', '--gs', '--go'].forEach(function (k) { var v = cs.getPropertyValue(k); if (v) out.style.setProperty(k, v) })
           out.innerHTML = '<span class="gi-helper-file"><b>' + esc(g.best.split(' ')[0]) + '</b></span><span><b>' + esc(g.best + size) + '</b> ' + esc(g.why) + ' <a href="' + esc(g.slug) + '.html">Open the ' + esc(g.app) + ' guide →</a></span>'
           out.classList.remove('is-swap'); void out.offsetWidth; out.classList.add('is-swap')
         })

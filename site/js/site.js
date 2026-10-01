@@ -1187,7 +1187,10 @@
   var AI_SKILL = AI_SITE + '/skill/SKILL.md'
   var PREFILL_MAX = 1800
   var IS_MAC = /Mac|iPhone|iPad|iPod/.test((navigator.platform || '') + ' ' + (navigator.userAgent || ''))
-  var PASTE_KEY = IS_MAC ? '⌘V' : 'Ctrl+V'
+  // touch-only devices have no paste shortcut: say "Paste" and explain the tap instead
+  var IS_TOUCH = !!(W.matchMedia && W.matchMedia('(hover: none) and (pointer: coarse)').matches)
+  var PASTE_KEY = IS_TOUCH ? 'Paste' : IS_MAC ? '⌘V' : 'Ctrl+V'
+  var PASTE_HOW = IS_TOUCH ? 'tap the message box, choose Paste, then send' : 'press ' + PASTE_KEY + ' then Enter'
   var INTENTS = {
     find: { label: 'Find the right icon', ph: 'Describe what it’s for…' },
     code: { label: 'Code it for my app', desc: 'Exact code for your stack, size, label and states', ph: 'e.g. delete button in my React table' },
@@ -1372,7 +1375,7 @@
       gemEl.setAttribute('role', 'status'); gemEl.setAttribute('aria-live', 'polite')
       var k = IS_MAC ? '<kbd>⌘</kbd><kbd>V</kbd>' : '<kbd>Ctrl</kbd>+<kbd>V</kbd>'
       gemEl.innerHTML = '<div class="gem-head"><span class="gem-logo">' + geminiSvg() + '</span><div class="gem-txt"><p class="gem-t">Prompt copied</p>' +
-        '<p class="gem-s">In Gemini, press ' + k + ' then <kbd>Enter</kbd>.</p></div>' +
+        '<p class="gem-s">' + (IS_TOUCH ? 'In Gemini, tap the message box, choose <b>Paste</b>, then send.' : 'In Gemini, press ' + k + ' then <kbd>Enter</kbd>.') + '</p></div>' +
         '<button type="button" class="gem-x" data-gem-close aria-label="Close">' + sized(ICON.close || '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>', 16) + '</button></div>' +
         '<pre class="gem-pre" tabindex="0" aria-label="The copied prompt"></pre>' +
         '<div class="gem-row"><button type="button" class="gem-btn" data-gem-copy>' + COPY_ICON + '<span>Copy again</span></button>' +
@@ -1395,7 +1398,7 @@
     $('.gem-pre', gemEl).textContent = text
     $('[data-gem-open]', gemEl).href = url
     gemEl.classList.remove('is-on'); void gemEl.offsetWidth; gemEl.classList.add('is-on')
-    announce('Prompt copied. In Gemini, press ' + PASTE_KEY + ' then Enter.')
+    announce('Prompt copied. In Gemini, ' + PASTE_HOW + '.')
   }
 
   function askOpts(el) {
@@ -1453,12 +1456,12 @@
         '<input class="ask-need-in" type="text" maxlength="200" autocomplete="off" placeholder="' + esc(INTENTS[intent].ph) + '" value="' + esc(opts.query || askMem.need || '') + '"></label>' +
         (opts.compact ? '' : '<p class="ask-step-l">Ask your assistant</p>') +
         '<div class="ask-ai-row">' + aiButtons(!!opts.compact) + '</div>'
-      if (!opts.compact) h += '<p class="ask-ai-note">The brief is copied and the assistant opens in a new tab. Gemini can’t be pre-filled: paste with ' + PASTE_KEY + '. Nothing is sent to us.</p>' +
+      if (!opts.compact) h += '<p class="ask-ai-note">The brief is copied and the assistant opens in a new tab. Gemini can’t be pre-filled, so ' + PASTE_HOW + '. Nothing is sent to us.</p>' +
         '<details class="ask-peek"><summary>Preview the brief</summary><pre class="ask-preview"></pre></details>'
     } else {
       h = mode === 'compact' ? '<span class="ask-ai-label"><span class="ask-ai-spark" aria-hidden="true">✦</span>Ask AI</span>' : ''
       h += '<div class="ask-ai-row">' + aiButtons(mode === 'compact') + '</div>'
-      if (mode !== 'compact') h += '<p class="ask-ai-note">We copy a ready brief and open the assistant in a new tab — it reads our skill file, searches with icons and replies with the best fit and code or steps. Gemini can’t be pre-filled: paste with ' + PASTE_KEY + '.</p>'
+      if (mode !== 'compact') h += '<p class="ask-ai-note">We copy a ready brief and open the assistant in a new tab — it reads our skill file, searches with icons and replies with the best fit and code or steps. Gemini can’t be pre-filled, so ' + PASTE_HOW + '.</p>'
     }
     el.innerHTML = h
     askLinks(el)

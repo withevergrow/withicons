@@ -1,5 +1,5 @@
 // Guide content. Plain language first. UI labels in <b class="ui">, menu paths via P().
-export const P = (...xs) => `<span class="ui-path">${xs.map(x => `<b>${x}</b>`).join('<i aria-hidden="true">›</i>')}</span>`
+export const P = (...xs) => `<span class="ui-path">${xs.map(x => `<b>${x}</b>`).join('<i aria-hidden="true">›</i><wbr>')}</span>`
 export const UI = x => `<b class="ui">${x}</b>`
 export const K = (...ks) => ks.map(k => `<kbd>${k}</kbd>`).join('+')
 

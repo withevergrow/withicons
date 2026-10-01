@@ -301,7 +301,7 @@ npx withicons get trash --size 32 > trash.svg`, 'sh', 'Terminal')}
     <section class="pg-cta" data-reveal>
       <h2>Source &amp; issues</h2>
       <p>with icons is MIT licensed and developed in the open. The repository opens at launch.</p>
-      <a class="btn btn-ink" href="${GITHUB}">${I('git-branch', 'line', 18)} github.com/withevergrow/withicons</a>
+      <a class="btn btn-ink" href="${GITHUB}">${I('git-branch', 'line', 18)} <span>github.com/<wbr>withevergrow/<wbr>withicons</span></a>
     </section>
     </div>
   </div>
@@ -326,34 +326,78 @@ function loadIntegrations() {
 const siteHas = rel => rel && !/^https?:/.test(rel) && fs.existsSync(ROOT + '/site/' + rel.replace(/^\.?\//, ''))
 function integrationsSection() {
   const list = loadIntegrations()
-  const head = `<h2 id="tools-h">Add with icons to your AI tool</h2>
-    <p>Coding agents work best with the real thing: connect with icons once and your assistant searches by meaning, uses the right package for your stack and never invents an icon name.</p>`
+  const head = `<div class="ai-tk-intro">
+      <h2 id="tools-h">Add with icons to your AI tool</h2>
+      <p>Coding agents work best with the real thing: connect with icons once and your assistant searches by meaning, uses the right package for your stack and never invents an icon name. Pick your tool.</p>
+    </div>`
   if (!list) return `<section id="tools" class="ai-sec ai-tools-sec" aria-labelledby="tools-h">
     ${head}
     <div class="ai-int-empty" data-reveal>${I('plug', 'duo', 40)}<div><b>One-click setup guides are on their way.</b><p>Until then, the <a href="#mcp">MCP server</a> below works with Claude Code, Codex, Cursor, VS Code, Windsurf and any client that speaks MCP.</p></div></div>
   </section>`
-  const logo = L => {
-    if (!L) return ''
+  const img = (src, cls, size) => `<img class="${cls}" src="${esc(src)}" alt="" width="${size}" height="${size}" decoding="async">`
+  const logo = (t, size) => {
+    const L = t.logo
+    const fallback = `<span class="ai-tk-glyph">${I(t.id === 'windsurf' ? 'wind' : 'code', 'line', Math.round(size * .8))}</span>`
+    if (!L) return fallback
     const light = typeof L === 'string' ? L : L.light, dark = typeof L === 'string' ? null : L.dark
-    if (!siteHas(light)) return ''
+    if (!siteHas(light)) return fallback
     return dark && dark !== light && siteHas(dark)
-      ? `<img class="ai-int-logo eg-on-light" src="${esc(light)}" alt="" width="36" height="36" loading="lazy" decoding="async"><img class="ai-int-logo eg-on-dark" src="${esc(dark)}" alt="" width="36" height="36" loading="lazy" decoding="async">`
-      : `<img class="ai-int-logo" src="${esc(light)}" alt="" width="36" height="36" loading="lazy" decoding="async">`
+      ? img(light, 'ai-tk-img eg-on-light', size) + img(dark, 'ai-tk-img eg-on-dark', size)
+      : img(light, 'ai-tk-img', size)
   }
-  const card = (t, i) => `<li class="ai-int" id="tool-${esc(t.id)}" data-reveal style="--i:${i}">
-      <div class="ai-int-head"><span class="ai-int-mark" aria-hidden="true">${logo(t.logo) || `<b>${esc(String(t.name || t.id).charAt(0))}</b>`}</span><div><h3>${esc(t.name || t.id)}</h3>${t.blurb ? `<p>${esc(t.blurb)}</p>` : ''}</div></div>
-      ${t.oneLiner ? code(t.oneLiner, 'sh', 'One line') : ''}
-      <div class="ai-int-actions">${t.deeplink && t.deeplink.href ? `<a class="btn btn-ink btn-sm" href="${esc(t.deeplink.href)}" rel="noopener">${esc(t.deeplink.label || 'Add to ' + (t.name || t.id))}</a>` : ''}${t.docs ? `<a class="btn btn-ghost btn-sm" href="${esc(t.docs)}" rel="noopener">${esc(t.name || t.id)} docs</a>` : ''}</div>
-      ${(t.steps && t.steps.length) || (t.mcp && t.mcp.snippet) || (t.skill && (t.skill.snippet || t.skill.path)) ? `<details class="ai-int-more"><summary>Step by step</summary>
-        ${(t.steps || []).length ? `<ol class="ai-int-steps">${t.steps.map(st => `<li><b>${esc(st.title || '')}</b>${st.text ? `<p>${esc(st.text)}</p>` : ''}${st.code ? code(st.code, st.lang || 'sh') : ''}</li>`).join('')}</ol>` : ''}
-        ${t.mcp && t.mcp.snippet ? `<p class="ai-int-k">MCP (${esc(t.mcp.kind || 'local')})${t.mcp.path ? ` · <code>${esc(t.mcp.path)}</code>` : ''}</p>${code(t.mcp.snippet, t.mcp.lang || 'json')}` : ''}
-        ${t.skill && (t.skill.snippet || t.skill.path) ? `<p class="ai-int-k">Agent skill${t.skill.path ? ` · <code>${esc(t.skill.path)}</code>` : ''}</p>${t.skill.snippet ? code(t.skill.snippet, 'sh') : ''}` : ''}
-      </details>` : ''}
-      ${t.verified ? `<p class="ai-int-verified">Checked ${esc(t.verified)}</p>` : ''}
-    </li>`
+  // plain step text -> wrap paths, flags, config keys and URLs in <code> so they read (and wrap) as code
+  const TOKEN = /^(https?:\/\/\S+|%\w+%\\S*|~?[\w.@-]*\/[\w.\/%~@-]*|\[[\w.]+\]|--[a-z][\w-]*|[\w.-]+\.(?:json|toml|md|zip|txt))$/
+  const rich = s => String(s).split(/(\s+)/).map(w => {
+    const m = /^([("]*)(.*?)([.,;:)"]*)$/.exec(w), lead = m[1], core = m[2], tail = m[3]
+    if (core && TOKEN.test(core) && !/^[A-Za-z]+\/[A-Za-z]+$/.test(core)) return `${esc(lead)}<code${core.length > 18 ? ' class="brk"' : ''}>${esc(core)}</code>${esc(tail)}`
+    return esc(w)
+  }).join('').replace(/ &gt; /g, ' › ')
+  const btns = t => {
+    const dl = (t.deeplinks && t.deeplinks.length ? t.deeplinks : t.deeplink ? [t.deeplink] : []).filter(d => d && d.href)
+    return dl.map((d, i) => `<a class="btn ${i ? 'btn-ghost' : 'btn-ink'} btn-sm" href="${esc(d.href)}" rel="noopener">${i ? '' : I('zap', 'solid', 16)}${esc(d.label || 'Add to ' + t.name)}</a>`).join('')
+  }
+  const wrapCode = (src, lang, label) => code(src, lang, label).replace('class="code pg-code"', 'class="code pg-code pg-code--wrap"')
+  const snip = (src, lang, label) => (/\n/.test(src) || src.length < 64 || lang !== 'text') ? code(src, lang, label) : wrapCode(src, lang, label)
+  const mcpBlocks = t => [t.mcp && t.mcp.snippet && [t.mcp, 'Remote · recommended'], t.mcpLocal && t.mcpLocal.snippet && [t.mcpLocal, 'Local · npx']].filter(x => x && !(t.steps || []).some(st => st.code === x[0].snippet))
+    .map(([m, k]) => `<div class="ai-tp-file"><p class="ai-tp-k">${k}</p>${code(m.snippet, m.lang || 'json', m.path || m.lang || 'json')}</div>`).join('')
+  const panel = (t, i) => {
+    let usedMcp = false, usedSkill = false
+    const steps = (t.steps || []).map(st => {
+      let extra = ''
+      if (/^one click/i.test(st.title || '') && btns(t)) extra = `<div class="ai-tp-actions">${btns(t)}</div>`
+      if (!st.code && /^or edit/i.test(st.title || '') && mcpBlocks(t)) { extra = `<div class="ai-tp-files">${mcpBlocks(t)}</div>`; usedMcp = true }
+      if (!st.code && /note below/i.test(st.text || '') && t.skill && t.skill.snippet) { extra = wrapCode(t.skill.snippet, 'text', 'Project knowledge'); usedSkill = true }
+      const fast = t.oneLiner && st.code === t.oneLiner
+      return `<li><h4>${esc(st.title || '')}${fast ? ` <span class="ai-tp-fast">${I('zap', 'solid', 12)} fastest</span>` : ''}</h4>${st.text ? `<p>${rich(st.text)}</p>` : ''}${st.code ? snip(st.code, st.lang || 'sh', st.lang === 'text' ? (/^https?:/.test(st.code) ? 'URL' : 'Text') : 'Terminal') : ''}${extra}</li>`
+    }).join('')
+    const files = !usedMcp && mcpBlocks(t)
+    const skillSnip = !usedSkill && t.skill && t.skill.snippet
+    const facts = [
+      t.mcp && t.mcp.path ? ['MCP server', t.mcp.path] : t.mcpLocal && t.mcpLocal.path ? ['MCP server', t.mcpLocal.path] : null,
+      t.skill && t.skill.path && !/^https?:/.test(t.skill.path) ? ['Agent skill', t.skill.path] : null,
+    ].filter(Boolean)
+    const host = s => { try { return new URL(s).hostname.replace(/^www\./, '') } catch { return s } }
+    return `<div class="ai-tp" role="tabpanel" id="tool-${esc(t.id)}" aria-labelledby="tk-${esc(t.id)}" tabindex="-1"${i ? ' data-off' : ''}>
+      <div class="ai-tp-aside">
+        <div class="ai-tp-head"><span class="ai-tp-mark" aria-hidden="true">${logo(t, 34)}</span><h3>${esc(t.name || t.id)}</h3></div>
+        ${t.blurb ? `<p class="ai-tp-blurb">${rich(t.blurb)}</p>` : ''}
+        ${!(t.steps || []).some(st => /^one click/i.test(st.title || '')) && btns(t) ? `<div class="ai-tp-actions">${btns(t)}</div>` : ''}
+        ${facts.length ? `<dl class="ai-tp-facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd><code>${esc(v)}</code></dd></div>`).join('')}</dl>` : ''}
+        <p class="ai-tp-meta">${t.verified ? `${I('check', 'line', 14)} Checked against ${t.docs ? `<a href="${esc(t.docs)}" rel="noopener">${esc(host(t.docs))}</a>` : 'the official docs'} on ${esc(t.verified)}` : t.docs ? `<a href="${esc(t.docs)}" rel="noopener">${esc(t.name)} docs</a>` : ''}</p>
+      </div>
+      <div class="ai-tp-body">
+        <p class="ai-tp-k">Step by step</p>
+        <ol class="ai-tp-steps">${steps}</ol>
+        ${files || skillSnip ? `<details class="ai-tp-more"><summary>Prefer to edit the config yourself?</summary><div class="ai-tp-files">${files || ''}${skillSnip ? `<div class="ai-tp-file"><p class="ai-tp-k">Agent skill</p>${wrapCode(t.skill.snippet, 'text', 'Text')}</div>` : ''}</div></details>` : ''}
+      </div>
+    </div>`
+  }
   return `<section id="tools" class="ai-sec ai-tools-sec" aria-labelledby="tools-h">
     ${head}
-    <ul class="ai-ints">${list.map(card).join('\n    ')}</ul>
+    <div class="ai-tk" data-tabs data-tabs-hash>
+      <div class="ai-tk-list" role="tablist" aria-label="AI tool">${list.map((t, i) => `<button type="button" role="tab" id="tk-${esc(t.id)}" aria-controls="tool-${esc(t.id)}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span class="ai-tk-logo" aria-hidden="true">${logo(t, 22)}</span><span class="ai-tk-name">${esc(t.name || t.id)}</span></button>`).join('')}</div>
+      ${list.map(panel).join('\n      ')}
+    </div>
   </section>`
 }
 
@@ -362,14 +406,6 @@ async function ai() {
   const path = 'ai.html'
   const local = { mcpServers: { withicons: { command: 'npx', args: ['-y', '@withicons/mcp'] } } }
   const winNote = `<p class="pg-note">On Windows, if <code>npx</code> isn’t found, use <code>"command": "cmd", "args": ["/c", "npx", "-y", "@withicons/mcp"]</code>.</p>`
-  const cfg = [
-    ['claude-desktop', 'Claude Desktop', `<p>Open <b>Settings › Developer › Edit Config</b> and add this to <code>claude_desktop_config.json</code>, then restart Claude.</p>` + code(JSON.stringify(local, null, 2), 'json', 'claude_desktop_config.json') + winNote],
-    ['claude-code', 'Claude Code', `<p>Run once in your terminal:</p>` + code('claude mcp add withicons -- npx -y @withicons/mcp', 'sh', 'Terminal') + `<p>Prefer the hosted server?</p>` + code('claude mcp add --transport http withicons https://withicons.com/mcp', 'sh', 'Terminal')],
-    ['cursor', 'Cursor', `<p>Add to <code>~/.cursor/mcp.json</code> (all projects) or <code>.cursor/mcp.json</code> (this project):</p>` + code(JSON.stringify(local, null, 2), 'json', '.cursor/mcp.json') + `<p>Hosted instead: <code>{ "mcpServers": { "withicons": { "url": "https://withicons.com/mcp" } } }</code></p>`],
-    ['vscode', 'VS Code', `<p>For Copilot agent mode, add to <code>.vscode/mcp.json</code>:</p>` + code(JSON.stringify({ servers: { withicons: { type: 'stdio', command: 'npx', args: ['-y', '@withicons/mcp'] } } }, null, 2), 'json', '.vscode/mcp.json') + `<p>Hosted instead: <code>{ "servers": { "withicons": { "type": "http", "url": "https://withicons.com/mcp" } } }</code></p>`],
-    ['windsurf', 'Windsurf', `<p>Add to <code>~/.codeium/windsurf/mcp_config.json</code>:</p>` + code(JSON.stringify(local, null, 2), 'json', 'mcp_config.json') + `<p>Hosted instead: <code>{ "mcpServers": { "withicons": { "serverUrl": "https://withicons.com/mcp" } } }</code></p>`],
-    ['remote', 'Remote URL', `<p>The same server also runs as a stateless Streamable HTTP endpoint, so there’s nothing to install. Point any client that supports remote MCP servers at:</p>` + code('https://withicons.com/mcp', 'text', 'Endpoint') + `<p class="pg-note">Clients send MCP JSON-RPC with <code>POST /mcp</code>. Each client’s exact setting is on its tab.</p>`],
-  ]
   const fmts = 'svg | react | vue | svelte | angular | solid | html-class | web-component | data-uri'
   const tools = [
     ['search_icons', '{ query, limit?, style?, category?, format? }', 'Find icons by meaning: “throw away” finds trash. Ranked and typo-tolerant. Each result comes with why it matched, a ready-to-paste snippet (React unless you pass <code>format</code>) and a link. Default limit: 10.'],
@@ -449,11 +485,11 @@ async function ai() {
         <label class="pg-sr" for="ai-q">Query</label>
         <input id="ai-q" type="text" value="throw away" autocomplete="off" spellcheck="false" data-ai-q>
         <div class="ai-demo-tries">${['throw away', 'settings', 'money', 'go home', 'bin', 'hoem', 'expand', 'rainy day'].map(x => `<button type="button" data-ai-try="${x}">${x}</button>`).join('')}</div>
+        <div class="ai-demo-found"><span class="ai-demo-label">What it found</span><div class="ai-demo-icons" data-ai-icons aria-hidden="true"></div></div>
       </div>
       <div class="ai-demo-out">
         <div class="ai-demo-call"><span class="ai-demo-label">Tool call</span><pre data-ai-call></pre></div>
         <div class="ai-demo-res"><span class="ai-demo-label">Response <span data-ai-ms></span></span><pre data-ai-res aria-live="polite"></pre></div>
-        <div class="ai-demo-icons" data-ai-icons aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -461,9 +497,14 @@ async function ai() {
   <section id="mcp" class="ai-sec" aria-labelledby="mcp-h">
     <h2 id="mcp-h">The MCP server</h2>
     <p>The <a href="https://modelcontextprotocol.io">Model Context Protocol</a> lets AI apps use tools. Add with icons once and your assistant can search, resolve and fetch icons on its own. ${soon}</p>
-    ${code('npx -y @withicons/mcp', 'sh', 'Run locally')}
+    <div class="ai-mcp-run">
+      <div>${code('https://withicons.com/mcp', 'text', 'Remote · Streamable HTTP')}</div>
+      <div>${code('npx -y @withicons/mcp', 'sh', 'Local · stdio')}</div>
+    </div>
     <h3>Add it to your app</h3>
-    ${tabs('cfg', cfg, 'AI app')}
+    <p>Exact, checked setup for Claude Code, Codex, Cursor, OpenCode, Lovable, Claude Desktop, VS Code and Windsurf is in <a href="#tools">Add with icons to your AI tool</a> above. Any other client that speaks MCP: give it the remote URL, or this local config.</p>
+    ${code(JSON.stringify(local, null, 2), 'json', 'mcp.json')}
+    ${winNote}
     <h3>Tools</h3>
     <ul class="ai-tools">${tools.map(([n, a, d], i) => `<li data-reveal style="--i:${i}"><code class="ai-tool-name">${n}</code><code class="ai-tool-args">${esc(a)}</code><p>${d}</p></li>`).join('')}</ul>
     <h3>Resources</h3>
@@ -676,7 +717,7 @@ function license() {
 
   <section class="lc-full" aria-labelledby="full-h">
     <div class="lc-full-head"><h2 id="full-h">The full licence</h2><button class="btn btn-ghost" type="button" data-copy-btn data-copy="${esc(text)}">${COPY_ICON}<span>Copy licence</span></button></div>
-    <pre class="lc-text" id="license-text">${esc(text)}</pre>
+    <div class="lc-text" id="license-text">${text.split(/\n\s*\n/).map(p => `<p>${esc(p.replace(/\s*\n\s*/g, ' '))}</p>`).join('')}</div>
   </section>
 
   <section class="pg-cta" data-reveal>
