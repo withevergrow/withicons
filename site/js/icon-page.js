@@ -60,6 +60,8 @@
   var DATA; try { DATA = JSON.parse(dataEl.textContent) } catch (e) { return }
   var S = { style: root.getAttribute('data-style'), color: 'ink', px: 256 }
   try { var p = JSON.parse(localStorage.getItem('with-ip') || '{}'); if ([64, 128, 256, 512, 1024].indexOf(p.px) >= 0) S.px = p.px; if (p.color) S.color = p.color; if (p.style && DATA.styles[p.style]) S.style = p.style } catch (e) { }
+  // a shared link (?style=solid) wins over the visitor's remembered style
+  try { var qs = new URLSearchParams(location.search).get('style'); if (qs && DATA.styles[qs]) S.style = qs } catch (e) { }
   function save() { try { localStorage.setItem('with-ip', JSON.stringify({ px: S.px, color: S.color, style: S.style })) } catch (e) { } }
 
   function hexFor(st) {
