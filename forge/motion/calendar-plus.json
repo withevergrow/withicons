@@ -1,36 +1,9 @@
 {
   "name": "calendar-plus",
-  "intent": "pulses like an invite, pops when you add an event",
-  "loop": {
-    "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "pop",
-    "amount": 1.2
-  },
-  "alt": [
-    {
-      "preset": "bounce",
-      "amount": 0.6
-    },
-    {
-      "preset": "jelly"
-    }
-  ],
-  "swap": [
-    {
-      "to": "calendar-check",
-      "effect": "morph"
-    },
-    {
-      "to": "calendar",
-      "effect": "fade"
-    },
-    {
-      "to": "calendar-plus@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the plus pops onto the page like a new event being added",
+  "loop": { "preset": "pulse", "origin": [12, 13], "amount": 0.25, "duration": 2.6 },
+  "hover": { "preset": "pop", "origin": [12, 15.5], "amount": 0.9 },
+  "parts": { "A": { "preset": "pop", "origin": [12, 15.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "bounce", "amount": 0.6 }, { "preset": "jelly" }],
+  "swap": [{ "to": "calendar-check", "effect": "morph" }, { "to": "calendar", "effect": "fade" }, { "to": "calendar-plus@solid", "effect": "scale" }]
 }

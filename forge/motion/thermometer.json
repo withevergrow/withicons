@@ -1,16 +1,29 @@
 {
   "name": "thermometer",
-  "intent": "reading rises and falls like a changing temperature",
+  "intent": "bulb warms while the scale lights up; the reading jumps on touch",
   "loop": {
-    "preset": "fill",
-    "duration": 2.6
+    "preset": "pulse",
+    "origin": [
+      9,
+      17.5
+    ],
+    "amount": 0.5,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nudge",
     "dir": 270,
-    "amount": 0.4,
+    "amount": 0.35,
     "duration": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 2.8,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

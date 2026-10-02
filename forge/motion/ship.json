@@ -1,8 +1,44 @@
 {
   "name": "ship",
   "intent": "rocks on the waves, then sails off and back on hover",
-  "loop": { "preset": "rock", "origin": [12, 16.5], "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "pass", "dir": 0, "duration": 1 },
-  "alt": [ { "preset": "float", "amount": 0.5 }, { "preset": "nudge", "dir": 0, "amount": 0.5 } ],
-  "swap": [ { "to": "anchor", "effect": "slide-down" }, { "to": "plane", "effect": "slide-up" }, { "to": "ship@solid", "effect": "scale" } ]
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 1.1
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.5
+    },
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "anchor",
+      "effect": "slide-down"
+    },
+    {
+      "to": "plane",
+      "effect": "slide-up"
+    },
+    {
+      "to": "ship@solid",
+      "effect": "scale"
+    }
+  ]
 }

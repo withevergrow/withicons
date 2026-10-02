@@ -1,8 +1,44 @@
 {
   "name": "syringe",
-  "intent": "pushes forward along its needle like giving a shot",
-  "loop": { "preset": "nudge", "dir": 135, "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 135, "amount": 1, "duration": 0.7 },
-  "alt": [ { "preset": "tilt", "origin": [9, 15] }, { "preset": "pulse", "amount": 0.6 } ],
-  "swap": [ { "to": "syringe@solid", "effect": "fade" }, { "to": "pill", "effect": "morph" } ]
+  "intent": "presses forward along its needle, plunger a beat behind, like a shot",
+  "loop": {
+    "preset": "nudge",
+    "dir": 135,
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 135,
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [9, 15],
+      "amount": 0.6
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "syringe@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "pill",
+      "effect": "morph"
+    }
+  ]
 }

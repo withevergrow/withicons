@@ -5,6 +5,8 @@ let CHECKED = CHECKED_ALL, CHECKED_HUMAN = CHECKED_HUMAN_ALL
 import { LIBS, FACT_ROWS, US, US_HUB } from './libraries.mjs'
 import { N_STYLES as NS, N_TOTAL, num, PRESETS } from '../site-pages/lib.mjs'
 import { LANDERS } from './free.mjs'
+import { rivalSet, writeRivalLicenses } from './rivals.mjs'
+import { SITE } from '../site-pages/lib.mjs'
 
 const N = ICON_NAMES.length
 const pascal = n => n.split('-').map(x => x[0].toUpperCase() + x.slice(1)).join('')
@@ -33,12 +35,13 @@ function convSpec(l) {
   return { mode: m.mode, map, prefixes: m.prefixes, suffixes: m.suffixes, tokens: m.tokens, importRe: m.importRe, stripRe: m.stripRe, solidPkg: m.solidPkg }
 }
 
-const useCode = (l, o) => {
-  const m = l.migrate.mode
-  if (m === 'component') return `<code>&lt;${pascal(o)} /&gt;</code>`
-  if (m === 'webcomponent' || m === 'iconify') return `<code>&lt;with-icon name="${o}"&gt;</code>`
-  return `<code>with-${o}</code>`
+// the with icons code for one icon in one style; the name map's style switcher swaps it client-side (data-map-code)
+const codeFor = (mode, o, s = 'line') => {
+  if (mode === 'component') return `<${pascal(o)} />${s === 'line' ? '' : ` · /${s}`}`
+  if (mode === 'webcomponent' || mode === 'iconify') return `<with-icon name="${o}"${s === 'line' ? '' : ` variant="${s}"`}>`
+  return `with-${o}${s === 'line' ? '' : ` with-${s}`}`
 }
+const useCode = (l, o, s = 'line') => `<code data-map-code="${l.migrate.mode || 'class'}" data-name="${o}">${esc(codeFor(l.migrate.mode, o, s))}</code>`
 
 function sup(l, refs) {
   return (refs || []).map(n => { if (!l.sources[n - 1]) throw new Error(`${l.slug}: missing source ${n}`); return `<a class="ax-src" href="#src-${n}" aria-label="Source ${n}: ${esc(l.sources[n - 1][0])}">[${n}]</a>` }).join('')
@@ -52,7 +55,8 @@ function libPage(l) {
   assertIcons(l.migrate.map.map(r => r[1]), l.slug)
   const name = l.name, sn = short(l)
   const title = `${name} alternative: free MIT icons in ${NS} styles · with icons`
-  const desc = `Looking for a ${name} alternative? Compare ${name} and with icons side by side (licence, price, icon count, styles, frameworks, AI), with a name map and converter to switch. Checked ${CHECKED_HUMAN}.`
+  const hasMap = !!l.migrate.concept || !!rivalSet(l.slug)
+  const desc = `Looking for a ${name} alternative? Compare ${name} and with icons side by side (licence, price, icon count, styles, frameworks, AI), with ${hasMap ? "a name map and " : ""}a converter to switch. Checked ${CHECKED_HUMAN}.`
   const spec = convSpec(l)
   const isConcept = !!l.migrate.concept
   const others = OPEN.filter(x => x.slug !== l.slug).slice(0, 3)
@@ -74,11 +78,32 @@ function libPage(l) {
   </table></div>
   <p class="ax-table-note">${esc(name)} facts were checked on <time datetime="${CHECKED}">${CHECKED_HUMAN}</time> against the official sources numbered below. Prices and counts change, so follow the links for the latest. “None found” means we couldn’t find an official offering, not that none exists.</p>`
 
-  const mapTable = `<div class="pg-table-wrap ax-map-wrap"><table class="pg-table ax-map">
-    <caption class="pg-sr">${isConcept ? `Common searches and the matching with icons` : `${esc(name)} names and their with icons names`}</caption>
-    <thead><tr><th scope="col">${isConcept ? 'You’d search for' : `${esc(name)}`}</th><th scope="col" class="ax-arrow"><span class="pg-sr">becomes</span></th><th scope="col">with icons</th>${isConcept ? '' : '<th scope="col">Use it</th>'}</tr></thead>
-    <tbody>${l.migrate.map.map(([t, o]) => `<tr><td><code>${esc(t)}</code></td><td class="ax-arrow">${I('arrow-right', 'line', 16)}</td><td><a href="${p}icons/${o}.html"><span class="ax-map-ic">${I(o, 'line', 22)}</span>${o}</a></td>${isConcept ? '' : `<td>${useCode(l, o)}</td>`}</tr>`).join('')}</tbody>
-  </table></div>`
+  // name map: two columns, each showing the REAL icon. Theirs comes from their official package (credited, licence
+  // linked); ours links to its icon page and follows the style switcher above the table.
+  const R = isConcept ? null : rivalSet(l.slug)
+  const themCell = t => {
+    const svg = R ? R.svg(t, 24) : ''
+    const mark = svg ? `<span class="ax-map-ic is-them">${svg}</span>`
+      : isConcept ? `<span class="ax-map-ic is-q">${I('search', 'line', 20)}</span>`
+      : '<span class="ax-map-ic is-none" title="Not shown: see the note under the table">–</span>'
+    const label = isConcept ? `<span class="ax-map-term">${esc(t)}</span>` : `<code>${esc(t)}</code>`
+    return `<td><span class="ax-map-cell">${mark}${label}</span></td>`
+  }
+  const usCell = o => `<td><a class="ax-map-cell" href="${p}icons/${o}.html"><span class="ax-map-ic is-us" data-map-ic="${o}">${I(o, 'line', 24)}</span><span class="ax-map-names"><b>${o}</b>${isConcept ? '' : useCode(l, o)}</span></a></td>`
+  const mapStyles = ['line', 'solid', 'duo', ...STYLES.filter(s => !['line', 'solid', 'duo'].includes(s))]
+  const missing = R && l.migrate.map.some(([t]) => !R.icons[t])
+  const mapNote = isConcept ? `${esc(name)} sells icons by many different artists, so there is no single ${esc(sn)} icon to show: the left column is what you would search for there.`
+    : R ? `${esc(name)} icons © ${esc(R.credit)}, <a href="licenses/${l.slug}.txt">${esc(R.license)}</a> (v${esc(R.version)}), from the official package and shown only for comparison.${missing ? ' A dash means that name is not in this version of the package.' : ''}`
+    : ''
+  // no real icons we're allowed to show (Flaticon UIcons' licence forbids redistribution): no name map at all
+  const showMap = isConcept || !!R
+  const mapTable = !showMap ? '' : `<div class="ax-map-tools"><span class="ax-map-tools-label">Show with icons in</span><div class="ax-seg ax-map-styles" role="group" aria-label="with icons style in the name map">${mapStyles.map(s => `<button type="button" class="chip s-${s}" data-map-style="${s}" aria-pressed="${s === 'line'}">${STYLE_TITLE[s]}</button>`).join('')}</div></div>
+  <div class="pg-table-wrap ax-map-wrap" data-map><table class="pg-table ax-map">
+    <caption class="pg-sr">${isConcept ? 'Common searches and the matching with icons' : `${esc(name)} icons and their with icons equivalents`}</caption>
+    <thead><tr><th scope="col">${isConcept ? 'You’d search for' : esc(name)}</th><th scope="col" class="ax-map-us">with icons</th></tr></thead>
+    <tbody>${l.migrate.map.map(([t, o]) => `<tr>${themCell(t)}${usCell(o)}</tr>`).join('')}</tbody>
+  </table></div>
+  <p class="ax-map-note">${mapNote}</p>`
 
   const converter = spec ? `<div class="ax-conv" data-converter>
     <h3>${I('wand', 'duo', 24)} Paste your ${esc(name)} code</h3>
@@ -99,10 +124,10 @@ function libPage(l) {
       <div>
         <p class="pg-eyebrow"><span class="hand">switching from ${esc(sn)}?</span></p>
         <h1 class="pg-title ax-title">A free <span class="pg-hl" style="--g:${cvar(l.color)}">${esc(name)}</span> alternative</h1>
-        ${answer(`Looking for a ${esc(name)} alternative? <b>with icons</b> is a free, MIT-licensed set of <b>${N} icons in ${NS} styles</b>: copy them as SVG or PNG, use <code>&lt;i class="with with-home"&gt;</code> tags, or install them for React, Vue, Svelte, Angular and Solid (npm packages launching soon). ${esc(name)}${l.also ? ` (and ${esc(l.also)})` : ''} is ${l.known} Below: a side-by-side table, when to choose each, and a name map${spec ? ' with a converter' : ''} to switch.`, { date: [CHECKED, CHECKED_HUMAN] })}
+        ${answer(`Looking for a ${esc(name)} alternative? <b>with icons</b> is a free, MIT-licensed set of <b>${N} icons in ${NS} styles</b>: copy them as SVG or PNG, use <code>&lt;i class="with with-home"&gt;</code> tags, or install them for React, Vue, Svelte, Angular and Solid (npm packages launching soon). ${esc(name)}${l.also ? ` (and ${esc(l.also)})` : ''} is ${l.known} Below: a side-by-side table, when to choose each, and ${hasMap ? `a name map${spec ? ' with a converter' : ''}` : 'a converter'} to switch.`, { date: [CHECKED, CHECKED_HUMAN] })}
       </div>
       <div class="ax-hero-art" aria-hidden="true">
-        <div class="ax-swap">${swapRows.map(([t, o], i) => `<div class="ax-swap-row" style="--i:${i}"><code>${esc(t.replace(/\s*\(.*\)$/, ''))}</code><span class="ax-swap-arr">${I('arrow-right', 'line', 18)}</span><span class="ax-swap-ic s-${swapStyles[i]}">${I(o, swapStyles[i], 28)}</span></div>`).join('')}</div>
+        <div class="ax-swap">${swapRows.map(([t, o], i) => `<div class="ax-swap-row" style="--i:${i}"><span class="ax-swap-them">${R && R.svg(t, 22) ? `<span class="ax-swap-ic is-them">${R.svg(t, 22)}</span>` : ''}${R || isConcept ? `<code>${esc(t.replace(/\s*\(.*\)$/, '').split(' / ')[0])}</code>` : `<b class="ax-swap-word">${esc(o)}</b>`}</span><span class="ax-swap-arr">${I('arrow-right', 'line', 18)}</span><span class="ax-swap-ic s-${swapStyles[i]}">${I(o, swapStyles[i], 28)}</span></div>`).join('')}</div>
         <p class="ax-swap-note hand">same idea, ${NS} styles</p>
       </div>
     </div>
@@ -126,8 +151,8 @@ function libPage(l) {
     ${l.migrate.before ? `<div class="ax-before-after">${code(l.migrate.before[1], l.migrate.before[0], `Before · ${name}`)}${code(l.migrate.after[1], l.migrate.after[0], 'After · with icons')}</div>` : ''}
     ${l.migrate.styleNote ? `<p class="pg-note">${l.migrate.styleNote}</p>` : ''}
     ${converter}
-    <h3 class="ax-h3" id="map-h" style="margin:34px 0 0;font:750 var(--step-1)/1.2 var(--font-display);letter-spacing:-.02em">${isConcept ? 'Common icons, matched' : 'Name map: common icons'}</h3>
-    ${mapTable}
+    ${showMap ? `<h3 class="ax-h3" id="map-h" style="margin:34px 0 0;font:750 var(--step-1)/1.2 var(--font-display);letter-spacing:-.02em">${isConcept ? 'Common icons, matched' : 'Name map: common icons'}</h3>
+    ${mapTable}` : ''}
   </section>
 
   ${picker({ id: 'find', p, actions: l.migrate.mode === 'component' ? ['jsx', 'svg', 'png'] : ['class', 'svg', 'png'], groups: [[null, [...new Set(l.migrate.map.map(r => r[1]))].slice(0, 24)]], q: '', heading: `Find the with icons version of any ${esc(sn)} icon`, intro: `Type the ${esc(sn)} name or just what it means (“${esc(l.searchQ)}”). Search understands synonyms and typos across all ${N} icons.`, placeholder: `Try “${l.searchQ}” or any ${sn} name` })}
@@ -226,5 +251,6 @@ function hub() {
 }
 
 export function buildAlternatives() {
+  writeRivalLicenses(SITE)
   return [hub(), ...LIBS.map(libPage)]
 }

@@ -232,3 +232,45 @@ export function swapLoopStops(effect, cycle, d, o) {
   const b = [[0, st.b], [P(h1 + lag), st.b, enterEase], [P(h1 + f), vb], [P(h2), vb, exitEase], [P(h2 + ex), st.b], [100, st.b]]
   return { a, b }
 }
+
+// ---- parts choreography (forge/MOTION.md "Parts choreography"): decorations and cast shadows move on their own.
+// Deco loops: gentle, never the main preset. Values are literal (no --_k): a sparkle twinkles the same however hard
+// the object moves. They run on `transform-box: fill-box` about each decoration's own centre; lengths are in user
+// units of the 24 grid (CSS px inside an SVG).
+export const DECO_STOPS = {
+  'breathe': [[0, { transform: 'scale(1)', opacity: 1 }, E.sine], [50, { transform: 'scale(1.07)', opacity: 0.78 }, E.sine], [100, { transform: 'scale(1)', opacity: 1 }]],
+  'float': [[0, T('translate(0px, 0px) rotate(0deg)'), E.sine], [25, T('translate(.25px, -.55px) rotate(2deg)'), E.sine], [50, T('translate(0px, -1.1px) rotate(0deg)'), E.sine],
+    [75, T('translate(-.25px, -.55px) rotate(-2deg)'), E.sine], [100, T('translate(0px, 0px) rotate(0deg)')]],
+  'twinkle': [[0, { transform: 'scale(1) rotate(0deg)', opacity: 1 }, E.sine], [34, { transform: 'scale(.62) rotate(-14deg)', opacity: 0.45 }, E.back],
+    [66, { transform: 'scale(1.16) rotate(10deg)', opacity: 1 }, E.sine], [100, { transform: 'scale(1) rotate(0deg)', opacity: 1 }]],
+}
+export const DECOS = Object.keys(DECO_STOPS)
+
+// Ground shadows: for presets that lift the object off the ground the shadow stays on the ground (it never travels
+// with the object) and shrinks / fades as the object rises, widens as it squashes. Same stops as the object's preset,
+// so they stay in sync; scaled about a point on the ground (transform-origin in the keyframes, % of the 24 grid).
+const G = '50% 92%'
+const gs = (v, s, o, sy) => ({ 'transform-origin': G, transform: `scale(${s ? v.sc(s) : 1}, ${sy ? v.sc(sy) : (s ? v.sc(s) : 1)})`, opacity: o ? v.sc(o) : 1 })
+export const SHADOW_STOPS = {
+  'bounce': v => {
+    const b = (y, sx) => gs(v, (sx - 1) + y * 0.011, y * 0.013, (sx - 1) * 0.4 + y * 0.011)
+    return [[0, b(0, 1), E.out], [9, b(0, 1.07), E.lift], [36, b(-30, 0.95), E.fall], [58, b(0, 1.1), E.out],
+      [70, b(-7, 0.98), E.fall], [81, b(0, 1.03), E.out], [100, b(0, 1)]]
+  },
+  'float': v => [[0, gs(v, 0, 0), E.sineIn], [25, gs(v, -0.06, -0.08), E.sineOut], [50, gs(v, -0.12, -0.16), E.sineIn],
+    [75, gs(v, -0.06, -0.08), E.sineOut], [100, gs(v, 0, 0)]],
+  'rise': v => [[0, gs(v, 0, 0), E.in], [44, gs(v, -0.5, -1), 'step-end'], [44.01, gs(v, -0.6, -1), E.back], [86, gs(v, 0, 0)], [100, gs(v, 0, 0)]],
+  'drop': v => [[0, gs(v, 0, 0), E.fall], [44, gs(v, 0.12, -1), 'step-end'], [44.01, gs(v, -0.35, -1), E.out], [86, gs(v, 0, 0)], [100, gs(v, 0, 0)]],
+  'jelly': v => {
+    const j = a => gs(v, a, 0, a ? -a * 0.2 : 0)
+    return [[0, j(0), E.out], [24, j(0.2), E.sine], [42, j(-0.15), E.sine], [58, j(0.08), E.sine], [72, j(-0.04), E.sine], [86, j(0.015), E.sine], [100, j(0)]]
+  },
+}
+export const GROUND = Object.keys(SHADOW_STOPS)
+export function shadowStops(preset, loop, mode) {
+  if (!SHADOW_STOPS[preset]) return null
+  const stops = SHADOW_STOPS[preset](valuesFor(mode))
+  if (!loop || !hasLoopVariant(preset)) return stops
+  const d = PRESET_DEFAULTS[preset]
+  return loopStops(stops, d.shot / d.cycle)
+}

@@ -1,24 +1,28 @@
 {
   "name": "square",
-  "intent": "pulses softly like a selectable box",
+  "intent": "floats calmly like a selectable box, pops when ticked",
   "loop": {
-    "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.4
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 3.4
   },
   "hover": {
     "preset": "pop",
-    "amount": 1.1
+    "amount": 1.1,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    },
     {
       "preset": "jelly"
     },
     {
-      "preset": "spin-once"
-    },
-    {
-      "preset": "breathe"
+      "preset": "pulse",
+      "amount": 0.5
     }
   ],
   "swap": [

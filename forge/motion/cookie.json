@@ -1,7 +1,8 @@
 {
   "name": "cookie",
-  "intent": "rolls slowly like a cookie on the counter",
-  "loop": { "preset": "rock", "origin": [12, 12], "amount": 0.6, "duration": 3.2 },
+  "intent": "rolls slowly back and forth like a cookie on the counter",
+  "loop": { "preset": "rock", "origin": [12, 12], "amount": 0.5, "duration": 3.2 },
   "hover": { "preset": "spin-once", "origin": [12, 12], "amount": 1, "duration": 0.8 },
+  "deco": "breathe",
   "alt": [ { "preset": "wiggle", "amount": 0.7 }, { "preset": "pop" }, { "preset": "bounce", "amount": 0.6 } ]
 }

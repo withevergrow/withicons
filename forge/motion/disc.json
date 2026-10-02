@@ -1,8 +1,48 @@
 {
   "name": "disc",
-  "intent": "spins like a record playing",
-  "loop": { "preset": "spin", "origin": [12, 12], "duration": 4 },
-  "hover": { "preset": "spin-once", "origin": [12, 12] },
-  "alt": [ { "preset": "spin", "origin": [12, 12], "duration": 1.2 }, { "preset": "flip" } ],
-  "swap": [ { "to": "music-note", "effect": "spin" }, { "to": "play", "effect": "morph" }, { "to": "disc@solid", "effect": "scale" } ]
+  "intent": "spins on its centre like a record playing, the glint sweeping round",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.7
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin",
+      "origin": [
+        12,
+        12
+      ],
+      "duration": 1.2
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "music-note",
+      "effect": "spin"
+    },
+    {
+      "to": "play",
+      "effect": "morph"
+    },
+    {
+      "to": "disc@solid",
+      "effect": "scale"
+    }
+  ]
 }

@@ -1,23 +1,27 @@
 {
   "name": "hexagon",
-  "intent": "turns slowly like a nut or a honeycomb cell",
+  "intent": "swells softly like a honeycomb cell, pops when picked",
   "loop": {
-    "preset": "spin",
-    "duration": 6
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "spin-once",
-    "amount": 1
+    "preset": "pop",
+    "amount": 1.1,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "pop"
+      "preset": "spin-once"
+    },
+    {
+      "preset": "breathe",
+      "amount": 0.6
     },
     {
       "preset": "flip"
-    },
-    {
-      "preset": "breathe"
     }
   ],
   "swap": [

@@ -18,6 +18,7 @@
     ],
     "amount": 0.6
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "bounce",

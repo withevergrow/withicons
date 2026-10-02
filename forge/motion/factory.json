@@ -1,8 +1,48 @@
 {
   "name": "factory",
-  "intent": "hums with a steady pulse like a working production line",
-  "loop": { "preset": "pulse", "origin": [12, 21], "amount": 0.35, "duration": 2.4 },
-  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.7 },
-  "alt": [ { "preset": "type", "amount": 0.6 }, { "preset": "bounce", "origin": [12, 21], "amount": 0.5 } ],
-  "swap": [ { "to": "warehouse", "effect": "slide-right" }, { "to": "building", "effect": "fade" }, { "to": "factory@solid", "effect": "scale" } ]
+  "intent": "hums on its foundations while the window lights flicker at work",
+  "loop": {
+    "preset": "pulse",
+    "origin": [12, 21],
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [12, 21],
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 0.5,
+      "duration": 2.4
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.5
+    },
+    {
+      "preset": "bounce",
+      "origin": [12, 21],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "warehouse",
+      "effect": "slide-right"
+    },
+    {
+      "to": "building",
+      "effect": "fade"
+    },
+    {
+      "to": "factory@solid",
+      "effect": "scale"
+    }
+  ]
 }

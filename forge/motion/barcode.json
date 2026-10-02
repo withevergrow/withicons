@@ -1,21 +1,24 @@
 {
   "name": "barcode",
-  "intent": "flickers like a scanner reading the code",
+  "intent": "the bars dim and light like a scanner reading the code",
   "loop": {
     "preset": "fill",
     "duration": 2.4
   },
   "hover": {
-    "preset": "flicker",
-    "amount": 1,
-    "duration": 0.7
+    "preset": "zoom",
+    "amount": 0.5,
+    "duration": 0.6
   },
+  "deco": "still",
   "alt": [
     {
-      "preset": "pulse"
+      "preset": "flicker",
+      "amount": 0.6
     },
     {
-      "preset": "type"
+      "preset": "pulse",
+      "amount": 0.5
     }
   ],
   "swap": [

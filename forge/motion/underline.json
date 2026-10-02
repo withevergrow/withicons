@@ -1,19 +1,37 @@
 {
   "name": "underline",
-  "intent": "draws its underline beneath the letter",
+  "intent": "the letter bobs while its underline swells beneath it",
   "loop": {
     "preset": "float",
-    "amount": 0.4,
+    "amount": 0.3,
     "duration": 3.2
   },
   "hover": {
-    "preset": "draw",
-    "duration": 0.9
+    "preset": "nod",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.6,
+    "duration": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "zoom",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.5,
+      "duration": 3.2,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "nod",
-      "amount": 0.6
+      "preset": "draw",
+      "duration": 0.9
     },
     {
       "preset": "pop"

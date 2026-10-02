@@ -1,16 +1,53 @@
 {
   "name": "piggy-bank",
-  "intent": "swells with savings, hops when a coin goes in",
-  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "bounce", "origin": [11, 21.5], "amount": 0.7 },
+  "intent": "swells with savings and blinks now and then; pops as a coin goes in",
+  "loop": {
+    "preset": "pulse",
+    "origin": [14.75, 11],
+    "amount": 0.35,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [14.75, 11],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [14.75, 11],
+      "duration": 3.6,
+      "delay": 0.4
+    }
+  },
+  "deco": "twinkle",
   "alt": [
-    { "preset": "rock", "origin": [11, 21.5], "amount": 0.5 },
-    { "preset": "wiggle", "origin": [11, 21.5] },
-    { "preset": "jelly" }
+    {
+      "preset": "rock",
+      "origin": [11, 21.5],
+      "amount": 0.5
+    },
+    {
+      "preset": "wiggle",
+      "origin": [11, 21.5]
+    },
+    {
+      "preset": "jelly",
+      "origin": [11, 21.5]
+    }
   ],
   "swap": [
-    { "to": "coins", "effect": "slide-down" },
-    { "to": "wallet", "effect": "fade" },
-    { "to": "piggy-bank@solid", "effect": "scale" }
+    {
+      "to": "coins",
+      "effect": "slide-down"
+    },
+    {
+      "to": "wallet",
+      "effect": "fade"
+    },
+    {
+      "to": "piggy-bank@solid",
+      "effect": "scale"
+    }
   ]
 }

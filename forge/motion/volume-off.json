@@ -3,7 +3,11 @@
   "intent": "sits quietly muted, shakes its head when touched",
   "loop": {
     "preset": "breathe",
-    "amount": 0.5,
+    "origin": [
+      7,
+      12
+    ],
+    "amount": 0.4,
     "duration": 3.4
   },
   "hover": {
@@ -11,6 +15,18 @@
     "amount": 0.6,
     "duration": 0.5
   },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        18,
+        12
+      ],
+      "amount": 0.5,
+      "delay": 0.2
+    }
+  },
+  "deco": "still",
   "alt": [
     {
       "preset": "pop"
@@ -22,6 +38,10 @@
   "swap": [
     {
       "to": "volume",
+      "effect": "fade"
+    },
+    {
+      "to": "volume-1",
       "effect": "fade"
     }
   ]

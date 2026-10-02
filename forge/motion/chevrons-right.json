@@ -1,8 +1,17 @@
 {
   "name": "chevrons-right",
-  "intent": "nudges right to say skip ahead",
-  "loop": { "preset": "nudge", "dir": 0, "amount": 0.6, "duration": 1.8 },
-  "hover": { "preset": "pass", "dir": 0, "duration": 0.7 },
-  "alt": [ { "preset": "nudge", "dir": 0, "amount": 1.4 } ],
-  "swap": [ { "to": "chevrons-left", "effect": "rotate" }, { "to": "chevron-right", "effect": "scale" }, { "to": "chevron-last", "effect": "slide-right" } ]
+  "intent": "skips ahead, the front chevron leaping and the back one following",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.6, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.8, "duration": 0.6 },
+  "parts": {
+    "A": { "preset": "nudge", "dir": 0, "amount": 0.35, "delay": 0.04 }
+  },
+  "alt": [
+    { "preset": "pass", "dir": 0, "duration": 0.7 }
+  ],
+  "swap": [
+    { "to": "chevrons-left", "effect": "rotate" },
+    { "to": "chevron-right", "effect": "scale" },
+    { "to": "chevron-last", "effect": "slide-right" }
+  ]
 }

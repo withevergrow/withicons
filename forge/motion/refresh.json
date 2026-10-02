@@ -1,43 +1,14 @@
 {
   "name": "refresh",
-  "intent": "spins around to reload, one full turn on hover",
-  "loop": {
-    "preset": "spin",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 2
-  },
-  "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 0.7
-  },
+  "intent": "turns once to reload, then rests; a quick spin on hover",
+  "loop": { "preset": "spin-once", "origin": [12, 12], "duration": 3 },
+  "hover": { "preset": "spin-once", "origin": [12, 12], "duration": 0.7 },
   "alt": [
-    {
-      "preset": "tick",
-      "origin": [
-        12,
-        12
-      ],
-      "steps": 8
-    },
-    {
-      "preset": "flip"
-    }
+    { "preset": "spin", "origin": [12, 12], "duration": 1.6 },
+    { "preset": "tick", "origin": [12, 12], "steps": 8 }
   ],
   "swap": [
-    {
-      "to": "check",
-      "effect": "scale"
-    },
-    {
-      "to": "loader",
-      "effect": "rotate"
-    }
+    { "to": "check", "effect": "scale" },
+    { "to": "loader", "effect": "rotate" }
   ]
 }

@@ -1,14 +1,14 @@
 {
   "name": "hourglass",
-  "intent": "rocks and turns over while you wait, like sand running out",
+  "intent": "rocks gently while the sand runs, turns over on hover",
   "loop": {
     "preset": "rock",
     "origin": [
       12,
       12
     ],
-    "amount": 0.6,
-    "duration": 3.2
+    "amount": 0.5,
+    "duration": 3.6
   },
   "hover": {
     "preset": "spin-once",
@@ -27,8 +27,7 @@
         12
       ],
       "steps": 2,
-      "duration": 2.4,
-      "amount": 0.5
+      "duration": 4
     },
     {
       "preset": "breathe"

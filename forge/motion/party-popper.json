@@ -1,8 +1,10 @@
 {
   "name": "party-popper",
-  "intent": "rocks with excitement, then pops a celebration when you point at it",
-  "loop": { "preset": "rock", "origin": [3, 21], "amount": 0.5, "duration": 2.6 },
-  "hover": { "preset": "tada", "origin": [3, 21], "amount": 1, "duration": 1 },
+  "intent": "rocks with excitement while confetti bursts from the cone",
+  "loop": { "preset": "rock", "origin": [3, 21], "amount": 0.25, "duration": 2.8 },
+  "hover": { "preset": "tada", "origin": [3, 21], "amount": 0.8, "duration": 1 },
+  "parts": { "A": { "preset": "pop", "origin": [11, 13], "amount": 1.2, "delay": 0.1 }, "S": { "preset": "twinkle", "origin": [19, 5], "amount": 0.8, "delay": 0.2 } },
+  "deco": "twinkle",
   "alt": [ { "preset": "pop", "origin": [5, 19] }, { "preset": "twinkle", "origin": [12, 12], "amount": 0.7 }, { "preset": "wiggle", "origin": [3, 21] } ],
   "swap": [ { "to": "party-popper@solid", "effect": "scale" }, { "to": "gift", "effect": "flip" } ]
 }

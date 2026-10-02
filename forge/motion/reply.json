@@ -1,10 +1,10 @@
 {
   "name": "reply",
-  "intent": "swoops back to the left like an answer heading home",
+  "intent": "the arrowhead reaches back to the left, the tail following",
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.6,
+    "amount": 0.4,
     "duration": 2.2
   },
   "hover": {
@@ -13,6 +13,16 @@
     "amount": 1.2,
     "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.8,
+      "duration": 2.2,
+      "delay": 0
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "pass",

@@ -9,7 +9,7 @@
   function $$(s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)) }
   function WI() { return W.WI || W.EG || null }
   function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
-  var TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch', glass: 'Glass', kawaii: 'Kawaii', sticker: 'Sticker', pixel: 'Pixel', retro: 'Retro' }
+  var TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch', glass: 'Glass', kawaii: 'Kawaii', sticker: 'Sticker', pixel: 'Pixel', retro: 'Retro', luxe: 'Luxe', bauhaus: 'Bauhaus', skeuo: 'Skeuo' }
   function title(s) { var w = WI(), i = w && w.styleInfo && w.styleInfo[s]; return (i && i.title) || TITLE[s] || (s.charAt(0).toUpperCase() + s.slice(1)) }
   /* motion landers: the icon's own hover motion as wm classes + CSS variables (forge/MOTION.md) */
   function motionAttrs(n) {
@@ -293,7 +293,37 @@
     upd()
   }
 
+  /* name map: switch the "with icons" column between styles (their real icons stay as they are) */
+  function pascal(n) { return n.split('-').map(function (x) { return x.charAt(0).toUpperCase() + x.slice(1) }).join('') }
+  function mapCode(mode, n, s) {
+    if (mode === 'component') return '<' + pascal(n) + ' />' + (s === 'line' ? '' : ' · /' + s)
+    if (mode === 'webcomponent' || mode === 'iconify') return '<with-icon name="' + n + '"' + (s === 'line' ? '' : ' variant="' + s + '"') + '>'
+    return 'with-' + n + (s === 'line' ? '' : ' with-' + s)
+  }
+  function initNameMap(tools) {
+    var wrap = tools.nextElementSibling, table = wrap && $('.ax-map', wrap)
+    if (!table) return
+    var btns = $$('[data-map-style]', tools), seq = 0
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var s = b.getAttribute('data-map-style'), mine = ++seq
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)) })
+        $$('[data-map-code]', table).forEach(function (c) { c.textContent = mapCode(c.getAttribute('data-map-code'), c.getAttribute('data-name'), s) })
+        table.setAttribute('data-busy', '')
+        withStyle(s).then(function () {
+          var w = WI()
+          if (mine !== seq || !w || !w.svg) return
+          $$('[data-map-ic]', table).forEach(function (el) {
+            var svg = w.svg(el.getAttribute('data-map-ic'), s, 24)
+            if (svg) el.innerHTML = svg
+          })
+        }).then(function () { if (mine === seq) table.removeAttribute('data-busy') })
+      })
+    })
+  }
+
   function init() {
+    $$('.ax-map-tools').forEach(initNameMap)
     $$('.ax-compare').forEach(initScrollHint)
     $$('[data-picker]').forEach(initPicker)
     $$('[data-converter]').forEach(initConverter)

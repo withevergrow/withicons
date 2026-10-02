@@ -1,15 +1,10 @@
 {
   "name": "scroll-text",
-  "intent": "floats like an old parchment, unrolling its message",
-  "loop": { "preset": "float", "amount": 0.5, "duration": 3.4 },
-  "hover": { "preset": "zoom", "amount": 0.6, "duration": 0.7 },
-  "alt": [
-    { "preset": "sway", "origin": [12, 4.5], "amount": 0.6 },
-    { "preset": "flip", "duration": 1 },
-    { "preset": "draw", "duration": 1.6 }
-  ],
-  "swap": [
-    { "to": "file-text", "effect": "slide-down" },
-    { "to": "scroll-text@solid", "effect": "scale" }
-  ]
+  "intent": "an old parchment drifting, its text lagging, writes itself on hover",
+  "loop": {"preset": "float", "amount": 0.3, "duration": 3.6},
+  "parts": {"A": {"preset": "float", "amount": 0.4, "duration": 3.6, "delay": 0.2}},
+  "deco": "float",
+  "hover": {"preset": "draw", "duration": 1.3},
+  "alt": [ {"preset": "zoom", "amount": 0.6, "duration": 0.7}, {"preset": "sway", "origin": [12, 4.5], "amount": 0.5}, {"preset": "flip", "duration": 1} ],
+  "swap": [ {"to": "file-text", "effect": "slide-down"}, {"to": "scroll-text@solid", "effect": "scale"} ]
 }

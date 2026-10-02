@@ -1,26 +1,28 @@
 {
   "name": "map-pin",
-  "intent": "drops onto the map and settles on its point",
+  "intent": "hovers over the map, then drops and lands on its point",
   "loop": {
-    "preset": "bounce",
-    "origin": [
-      12,
-      21.5
-    ],
-    "amount": 0.6,
-    "duration": 1.6
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 2.8
   },
   "hover": {
     "preset": "bounce",
     "origin": [
       12,
       21.5
-    ]
+    ],
+    "amount": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "float",
-      "amount": 0.6
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.5
     },
     {
       "preset": "pulse",

@@ -1,8 +1,10 @@
 {
   "name": "soup",
-  "intent": "a warm bowl breathes out steam, then lifts like it is served",
-  "loop": { "preset": "breathe", "origin": [12, 21], "amount": 0.7, "duration": 3.4 },
-  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.9 },
+  "intent": "steam rises from a warm bowl, then the bowl is served",
+  "loop": { "preset": "pulse", "origin": [12, 21], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.6, "duration": 0.9 },
+  "parts": { "A": { "preset": "rise", "amount": 0.5, "duration": 2.4 } },
+  "deco": "float",
   "alt": [ { "preset": "rise", "amount": 0.5 }, { "preset": "float", "amount": 0.5 }, { "preset": "pop" } ],
   "swap": [ { "to": "soup@solid", "effect": "scale" }, { "to": "salad", "effect": "fade" }, { "to": "cooking-pot", "effect": "slide-down" } ]
 }

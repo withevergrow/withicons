@@ -1,32 +1,10 @@
 {
   "name": "alert-triangle",
-  "intent": "glows like a warning light, shakes on hover",
-  "loop": {
-    "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.2
-  },
-  "hover": {
-    "preset": "shake",
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "glow"
-    },
-    {
-      "preset": "flicker",
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "check-circle",
-      "effect": "morph"
-    },
-    {
-      "to": "alert-triangle@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "glows like a warning light, the mark flickering inside",
+  "loop": { "preset": "glow", "amount": 0.6, "duration": 2.4 },
+  "hover": { "preset": "glow", "amount": 1, "duration": 0.9 },
+  "parts": { "A": { "preset": "flicker", "amount": 0.5, "duration": 2.4 } },
+  "deco": "still",
+  "alt": [{ "preset": "shake", "amount": 0.8 }, { "preset": "pulse", "amount": 0.5 }, { "preset": "flicker", "amount": 0.6 }],
+  "swap": [{ "to": "check-circle", "effect": "morph" }, { "to": "alert-triangle@solid", "effect": "scale" }]
 }

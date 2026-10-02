@@ -1,32 +1,10 @@
 {
   "name": "check-square",
-  "intent": "ticks itself like a checkbox being checked",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.6,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "draw",
-    "duration": 0.8
-  },
-  "alt": [
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "jelly",
-      "amount": 0.7
-    }
-  ],
-  "swap": [
-    {
-      "to": "square",
-      "effect": "fade"
-    },
-    {
-      "to": "check-square@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the box rests while its tick snaps in, like a checkbox just checked",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "draw", "duration": 0.8 },
+  "parts": { "A": { "preset": "pop", "origin": [10.75, 15.25], "amount": 1.2, "duration": 3.2, "delay": 0.15 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "pop", "origin": [12, 12] }, { "preset": "jelly", "origin": [12, 21], "amount": 0.7 }],
+  "swap": [{ "to": "square", "effect": "fade" }, { "to": "check-square@solid", "effect": "scale" }]
 }

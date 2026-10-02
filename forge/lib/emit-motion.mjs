@@ -142,6 +142,12 @@ async function loadSpecs(iconList) {
       const s = { name, intent: raw.intent, loop: raw.loop, hover: raw.hover }
       if (raw.alt && raw.alt.length) s.alt = raw.alt.filter(a => meta.PRESET_DEFAULTS[a.preset])
       if (raw.swap && raw.swap.length) s.swap = raw.swap
+      if (raw.parts && typeof raw.parts === 'object') {
+        const parts = {}
+        for (const k of ['A', 'S']) if (raw.parts[k] && typeof raw.parts[k] === 'object') parts[k] = raw.parts[k]
+        if (Object.keys(parts).length) s.parts = parts
+      }
+      if (meta.DECO_KINDS.includes(raw.deco)) s.deco = raw.deco
       specs[name] = s; hand++
     } else specs[name] = autoSpec(name, category, meta.PRESET_DEFAULTS)
   }
@@ -234,7 +240,48 @@ function swapCss(K, M, { wrap, on, preview = [], loops = true }) {
   return out.join('\n')
 }
 
-function buildMotionCss(K, M, version) {
+// ------------------------------------------------------------------ parts choreography
+// Wrapper variables for the parts of one slot (L loop, H one-shot), resolved on the wrapper and inherited by the nodes.
+// Order everywhere: --wm-* (yours) > explicit preset (--wmP-*) > the icon's part (--wm<S>-a-*) > the object's value.
+function partWrapVars(s) {
+  const L = s === 'L'
+  const v = [
+    '--_dur:max(var(--_ad), var(--_am))', '--_dl:var(--wm-delay, 0s)',
+    `--_sh:var(--wmP-sh${L ? 'l' : 's'}, var(--wm${s}-sh, var(--_an)))`,
+    `--_dk:var(--wm-deco, var(--wmP-dc, var(--wm${s}-dc, wm-deco-breathe)))`,
+    L ? '--_dd:var(--wmP-dd, var(--wmL-dd, 2.8s));--_ddl:calc(var(--_dl) - var(--_dd) / 2)' : '--_dd:var(--_dur);--_ddl:calc(var(--_dl) + .08s)',
+  ]
+  for (const x of ['a', 's']) {
+    const q = `--wm${s}-${x}`
+    v.push(`--_p${x}n:var(--wmP-${L ? 'l' : 's'}, var(${q}, var(--_an)))`,
+      `--_p${x}d:${L ? `var(--wm-dur, var(--wmP-dl, var(${q}-d, var(--_dur))))` : 'var(--_dur)'}`,
+      `--_p${x}k:${chain('--wm-k', '--wmP-k', q + '-k', 'var(--_k)')}`,
+      `--_p${x}x:${chain('--wm-dx', '--wmP-dx', q + '-dx', 'var(--_dx)')}`,
+      `--_p${x}y:${chain('--wm-dy', '--wmP-dy', q + '-dy', 'var(--_dy)')}`,
+      `--_p${x}e:${chain('--wm-ease', '--wmP-e', q + '-e', 'var(--_ae)')}`,
+      `--_p${x}ox:${chain('--wm-ox', '--wmP-ox', q + '-ox', 'var(--_ox)')}`,
+      `--_p${x}oy:${chain('--wm-oy', '--wmP-oy', q + '-oy', 'var(--_oy)')}`,
+      `--_p${x}dl:calc(var(--_dl) + var(--wmP-z, var(${q}-dl, 0s)))`)
+  }
+  return v.join(';')
+}
+// Children only animate while the wrapper's rule (loop / one-shot) hands them --_an: an idle wrapper resets it, so the
+// node rules need no copy of the trigger selectors.
+const WRAPS = '.wm,.wm-loop,.wm-hover,.wm-once,.wm-run,with-icon'
+function partsCss(PC) {
+  const TAGS = PC.PART_TAGS, partNodeRules = PC.partNodeRules
+  const A = `:is(${WRAPS}):not(.wm-swap,.wm-drawing)`
+  const H = `:has(>svg>:is(${TAGS}))`, HS = `:has(>:is(${TAGS}))`
+  const out = []
+  // 1. a wrapper the runtime marked (.wm-parts); 2. the same through :has() for CSS-only use, in rules of their own
+  // (a browser without :has() drops only those and keeps animating the whole icon)
+  out.push(`${A}.wm-parts{animation-name:none}`, `${A}${H},svg${A}${HS}{animation-name:none}`)
+  out.push(partNodeRules([`${A}.wm-parts>svg>`, `svg${A}.wm-parts>`]))
+  out.push(partNodeRules([`${A}${H}>svg>`, `svg${A}${HS}>`]))
+  return out.join('\n')
+}
+
+function buildMotionCss(K, M, version, PC) {
   const { PRESET_DEFAULTS, PRESETS, keyframeName, hasLoopVariant, pct } = M
   const out = []
   out.push(`/* @withicons/motion ${version} — motion.css. MIT. https://withicons.com\n` +
@@ -249,6 +296,7 @@ function buildMotionCss(K, M, version) {
     if (hasLoopVariant(p)) kf.push(K.keyframesCss('wm-' + p + '-loop', K.presetStops(p, true)))
   }
   for (const [n, stops] of Object.entries(K.DRAW_KEYFRAMES)) kf.push(K.keyframesCss(n, stops))
+  kf.push(PC.partKeyframes())
   out.push(kf.join('\n'))
   // base
   out.push(`:where(span,i).wm{display:inline-block;line-height:0}`)
@@ -256,6 +304,7 @@ function buildMotionCss(K, M, version) {
   out.push(`.wm[style*="--wm-steps"]{--wm-ease:steps(var(--wm-steps))}`)
   // loop
   const LOOP = '.wm-loop,with-icon[motion="loop"]'
+  out.push(`:where(${WRAPS}){--_an:initial}`)
   // duration with a floor (--_am): flicker never runs faster than PRESET_DEFAULTS.flicker.min (WCAG 2.3.1 flashes)
   const DUR = 'max(var(--_ad), var(--_am))'
   const vars = s => [
@@ -265,15 +314,22 @@ function buildMotionCss(K, M, version) {
     `--_ad:${chain('--wm-dur', s === 'L' ? '--wmP-dl' : '--wmP-ds', `--wm${s}-d`, '1s')}`,
     `--_ae:${chain('--wm-ease', '--wmP-e', `--wm${s}-e`, 'linear')}`,
     `--_am:var(--wmP-m, var(--wm${s}-m, 0s))`,
-    `transform-origin:${chain('--wm-ox', '--wmP-ox', `--wm${s}-ox`, '50%')} ${chain('--wm-oy', '--wmP-oy', `--wm${s}-oy`, '50%')}`,
+    `--_ox:${chain('--wm-ox', '--wmP-ox', `--wm${s}-ox`, '50%')}`,
+    `--_oy:${chain('--wm-oy', '--wmP-oy', `--wm${s}-oy`, '50%')}`,
+    'transform-origin:var(--_ox) var(--_oy)',
+    partWrapVars(s),
   ].join(';')
-  out.push(`:is(${LOOP}){${vars('L')};--_an:var(--wmP-l, var(--wmL, none));animation:var(--_an) ${DUR} var(--_ae) var(--wm-delay, 0s) infinite both}`)
+  out.push(`:is(${LOOP}){${vars('L')};--_an:var(--wmP-l, var(--wmL, none));--_ai:infinite;animation:var(--_an) ${DUR} var(--_ae) var(--wm-delay, 0s) infinite both}`)
   // one-shots: hover/focus of the element or of a .wm-trigger ancestor (CSS), once on load, or .wm-run (JS)
   const H = '.wm-hover:not(.wm-js)', WH = 'with-icon[motion="hover"]:not(.wm-js)'
   const SHOT = [`${H}:hover`, `${H}:focus-visible`, `.wm-trigger:hover ${H}`, `.wm-trigger:focus-visible ${H}`,
     `${WH}:hover`, `.wm-trigger:hover ${WH}`, `.wm-trigger:focus-visible ${WH}`,
     '.wm-once', 'with-icon[motion="once"]', '.wm-run'].join(',')
-  out.push(`:is(${SHOT}){${vars('H')};--_an:var(--wmP-s, var(--wmH, none));animation:var(--_an) ${DUR} var(--_ae) var(--wm-delay, 0s) 1 both}`)
+  out.push(`:is(${SHOT}){${vars('H')};--_an:var(--wmP-s, var(--wmH, none));--_ai:1;animation:var(--_an) ${DUR} var(--_ae) var(--wm-delay, 0s) 1 both}`)
+  // parts: inside an inline SVG whose renderer tagged its nodes, each part plays its own role (MOTION.md "Parts
+  // choreography"): the wrapper stands still, object nodes play the preset, plates their override, decorations their
+  // own counter-phased loop, cast shadows stay on the ground. .wm-parts (set by motion() / the element) or :has().
+  out.push(partsCss(PC))
   // draw: strokes draw on when the runtime prepared them (.wm-drawing); the element itself stays still
   out.push(`.wm-drawing{animation-name:none!important}`)
   out.push(`:is(${LOOP}).wm-drawing [data-wm-pl]{stroke-dasharray:1 1.5;animation:wm-draw-path-loop var(--_ad) linear var(--wm-delay, 0s) infinite both}`)
@@ -281,7 +337,7 @@ function buildMotionCss(K, M, version) {
   out.push(`:is(${SHOT}).wm-drawing [data-wm-pl]{stroke-dasharray:1 1.5;animation:wm-draw-path var(--_ad) linear var(--wm-delay, 0s) 1 both}`)
   out.push(`:is(${SHOT}).wm-drawing [data-wm-fill]{animation:wm-draw-fill var(--_ad) linear var(--wm-delay, 0s) 1 both}`)
   // wm-offscreen: set by the JS helper / element while a loop is scrolled out of view (IntersectionObserver)
-  out.push(`:is(.wm-paused,.wm-offscreen),:is(.wm-paused,.wm-offscreen) :is([data-wm-pl],[data-wm-fill]),with-icon[paused]{animation-play-state:paused!important}`)
+  out.push(`:is(.wm-paused,.wm-offscreen),:is(.wm-paused,.wm-offscreen) :is([data-wm-pl],[data-wm-fill],svg>*),with-icon[paused]{animation-play-state:paused!important}`)
   // explicit presets
   const fmt = n => String(Math.round(n * 1e4) / 1e4).replace(/^0\./, '.')
   out.push(PRESETS.map(p => {
@@ -289,7 +345,9 @@ function buildMotionCss(K, M, version) {
     const o = d.origin || [12, 12]
     const [dx, dy] = M.dirVec(d.dir || 0)
     return `.wm-p-${p},with-icon[preset="${p}"]{--wmP-l:${keyframeName(p, true)};--wmP-s:${keyframeName(p, false)};--wmP-dl:${fmt(d.cycle)}s;--wmP-ds:${fmt(d.shot)}s;` +
-      `--wmP-e:${d.ease || 'linear'};--wmP-ox:${pct(o[0])};--wmP-oy:${pct(o[1])};--wmP-k:1;--wmP-dx:${fmt(dx)};--wmP-dy:${fmt(dy)};--wmP-m:${fmt(d.min || 0)}s}`
+      `--wmP-e:${d.ease || 'linear'};--wmP-ox:${pct(o[0])};--wmP-oy:${pct(o[1])};--wmP-k:1;--wmP-dx:${fmt(dx)};--wmP-dy:${fmt(dy)};--wmP-m:${fmt(d.min || 0)}s;` +
+      `--wmP-shl:${M.GROUND_PRESETS.includes(p) ? 'wm-shadow-' + p + (hasLoopVariant(p) ? '-loop' : '') : keyframeName(p, true)};--wmP-shs:${M.GROUND_PRESETS.includes(p) ? 'wm-shadow-' + p : keyframeName(p, false)};` +
+      `--wmP-dc:wm-deco-${M.decoOf(p)};--wmP-dd:${fmt(d.cycle * M.decoTimes(d.cycle))}s;--wmP-z:0s}`
   }).join('\n'))
   // glow / twinkle halo without color-mix() (Safari < 16.2, Chromium < 111): a later @keyframes of the same name wins
   out.push(`@supports not (color:color-mix(in srgb,red,red)){` + ['glow', 'twinkle'].flatMap(p => {
@@ -353,12 +411,13 @@ function mustReplace(s, a, b) { if (!s.includes(a)) throw new Error(`emit-motion
 function buildSiteJs(version, shadowCss) {
   let index = classic(src('index.js'))
   index = mustReplace(index, 'const specTable = () => SPECS', "const specTable = () => (typeof window !== 'undefined' && window.WITH_MOTION) || {}")
-  const parts = [classic(src('meta.js')), classic(src('keyframes.js')), index, `const SHADOW_CSS = ${J(shadowCss)}`,
+  const parts = [classic(src('meta.js')), classic(src('keyframes.js')), classic(src('parts.js')), classic(src('parts-css.js')), index, `const SHADOW_CSS = ${J(shadowCss)}`,
     classic(src('element.js')), classic(src('export.js'))]
   const api = ['motionFor', 'motion', 'motionAttrs', 'swap', 'prepareDraw', 'unprepareDraw', 'upgradeMotion', 'PRESETS', 'EFFECTS', 'PRESET_DEFAULTS', 'EFFECT_DEFAULTS',
     'specVars', 'slotVars', 'keyframeName', 'presetStops', 'keyframesCss', 'swapLoopStops', 'parseSvg', 'resolveMotion', 'animatedSvg', 'animatedSwapSvg',
     'exportDuration', 'frameSvg', 'renderFrames', 'encodeGif', 'gif', 'video', 'webm', 'pauseWhenOffscreen',
-    'SWAP_HOLD', 'SWAP_EASES', 'swapEase', 'swapCycle', 'EFFECT_STATES', 'SWAP_EASE']
+    'SWAP_HOLD', 'SWAP_EASES', 'swapEase', 'swapCycle', 'EFFECT_STATES', 'SWAP_EASE',
+    'partsPlan', 'resolveSpecMotion', 'sampleRole', 'sampleMatrix', 'easeFn', 'partRole', 'hasParts', 'partsSvg', 'partVars', 'decoOf', 'DECO_KINDS', 'shadowPartsCss']
   return `/* @withicons/motion ${version} — website build: window.WithMotion (same API as the npm package + export helpers). MIT. Generated, do not edit. */\n` +
     `;(function () {\n'use strict'\n${parts.join('\n')}\n` +
     `const api = { version: ${J(version)}, ${api.join(', ')} }\nif (typeof window !== 'undefined') window.WithMotion = api\n})();\n`
@@ -385,7 +444,8 @@ export default async function emit(ctx) {
   const iconList = ctx.icons ? ctx.icons.map(i => ({ name: i.name, category: i.category })) : iconsFromDisk()
   const { specs, hand, auto, warn } = await loadSpecs(iconList)
 
-  const motionCss = buildMotionCss(K, M, version)
+  const PC = await imp('parts-css.js')
+  const motionCss = buildMotionCss(K, M, version, PC)
   const iconsCss = buildIconsCss(M, specs, version)
   const shadowCss = buildShadowCss(K, M)
   const header = `// @withicons/motion ${version} — generated from packages/motion/src, do not edit. MIT.\n`
@@ -398,7 +458,7 @@ export default async function emit(ctx) {
     'icons.d.ts': dtsIcons(Object.keys(specs)),
     'shadow-css.js': `${header}export const SHADOW_CSS = ${J(shadowCss)}\n`,
   }
-  for (const f of ['meta.js', 'keyframes.js', 'index.js', 'element.js', 'export.js']) files[f] = header + src(f)
+  for (const f of ['meta.js', 'keyframes.js', 'parts.js', 'parts-css.js', 'index.js', 'element.js', 'export.js']) files[f] = header + src(f)
   for (const f of fs.readdirSync(SRC).filter(f => f.endsWith('.d.ts'))) files[f] = src(f)
   const distDir = path.join(ROOT, D)
   if (fs.existsSync(distDir)) for (const f of fs.readdirSync(distDir)) if (!files[f]) fs.rmSync(path.join(distDir, f), { recursive: true, force: true })

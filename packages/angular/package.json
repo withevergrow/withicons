@@ -1,7 +1,7 @@
 {
   "name": "@withicons/angular",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
+  "description": "500 icons x 15 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -39,7 +39,10 @@
     "kawaii-icons",
     "sticker-icons",
     "pixel-icons",
-    "retro-icons"
+    "retro-icons",
+    "luxe-icons",
+    "bauhaus-icons",
+    "skeuo-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -98,6 +101,18 @@
       "types": "./dist/retro/index.d.ts",
       "default": "./dist/retro/index.mjs"
     },
+    "./luxe": {
+      "types": "./dist/luxe/index.d.ts",
+      "default": "./dist/luxe/index.mjs"
+    },
+    "./bauhaus": {
+      "types": "./dist/bauhaus/index.d.ts",
+      "default": "./dist/bauhaus/index.mjs"
+    },
+    "./skeuo": {
+      "types": "./dist/skeuo/index.d.ts",
+      "default": "./dist/skeuo/index.mjs"
+    },
     "./icons/*": {
       "types": "./dist/line/icons/*.d.ts",
       "default": "./dist/line/icons/*.mjs"
@@ -149,6 +164,18 @@
     "./retro/icons/*": {
       "types": "./dist/retro/icons/*.d.ts",
       "default": "./dist/retro/icons/*.mjs"
+    },
+    "./luxe/icons/*": {
+      "types": "./dist/luxe/icons/*.d.ts",
+      "default": "./dist/luxe/icons/*.mjs"
+    },
+    "./bauhaus/icons/*": {
+      "types": "./dist/bauhaus/icons/*.d.ts",
+      "default": "./dist/bauhaus/icons/*.mjs"
+    },
+    "./skeuo/icons/*": {
+      "types": "./dist/skeuo/icons/*.d.ts",
+      "default": "./dist/skeuo/icons/*.mjs"
     },
     "./package.json": "./package.json"
   },
@@ -228,6 +255,24 @@
       ],
       "retro/icons/*": [
         "./dist/retro/icons/*.d.ts"
+      ],
+      "luxe": [
+        "./dist/luxe/index.d.ts"
+      ],
+      "luxe/icons/*": [
+        "./dist/luxe/icons/*.d.ts"
+      ],
+      "bauhaus": [
+        "./dist/bauhaus/index.d.ts"
+      ],
+      "bauhaus/icons/*": [
+        "./dist/bauhaus/icons/*.d.ts"
+      ],
+      "skeuo": [
+        "./dist/skeuo/index.d.ts"
+      ],
+      "skeuo/icons/*": [
+        "./dist/skeuo/icons/*.d.ts"
       ]
     }
   },

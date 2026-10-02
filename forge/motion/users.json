@@ -1,27 +1,32 @@
 {
   "name": "users",
-  "intent": "sways together like a friendly group",
+  "intent": "the front person breathes and the one behind nods along, a team",
   "loop": {
-    "preset": "sway",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.5,
+    "preset": "float",
+    "amount": 0.3,
     "duration": 3.4
   },
   "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.9,
-    "duration": 0.8
+    "preset": "nod",
+    "amount": 0.8,
+    "duration": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        17,
+        21
+      ],
+      "amount": 0.7,
+      "duration": 3.4,
+      "delay": 0.14
+    }
+  },
+  "deco": "float",
   "alt": [
     {
-      "preset": "breathe",
+      "preset": "jelly",
       "origin": [
         12,
         21

@@ -1,8 +1,46 @@
 {
   "name": "layout-template",
-  "intent": "blocks settle into place like a page being laid out",
-  "loop":  { "preset": "jelly", "amount": 0.4, "duration": 3 },
-  "hover": { "preset": "jelly", "amount": 0.8, "duration": 0.7 },
-  "alt":   [ { "preset": "draw" }, { "preset": "pop", "amount": 0.8 } ],
-  "swap":  [ { "to": "layout-dashboard", "effect": "morph" }, { "to": "layout-grid", "effect": "fade" }, { "to": "layout-list", "effect": "slide-up" } ]
+  "intent": "blocks hold still while the text lines fill in like a page loading",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.7,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 0.8,
+      "duration": 1.5,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-dashboard",
+      "effect": "morph"
+    },
+    {
+      "to": "layout-grid",
+      "effect": "fade"
+    },
+    {
+      "to": "layout-list",
+      "effect": "slide-up"
+    }
+  ]
 }

@@ -1,15 +1,10 @@
 {
   "name": "circle-arrow-up",
-  "intent": "lifts gently upward, like back to top or level up",
-  "loop": { "preset": "nudge", "dir": 270, "amount": 0.4, "duration": 2 },
-  "hover": { "preset": "nudge", "dir": 270, "amount": 0.9, "duration": 0.6 },
-  "alt": [
-    { "preset": "float" },
-    { "preset": "pop" }
-  ],
-  "swap": [
-    { "to": "circle-arrow-down", "effect": "rotate" },
-    { "to": "circle-arrow-up@solid", "effect": "scale" },
-    { "to": "arrow-up", "effect": "slide-up" }
-  ]
+  "intent": "the arrow lifts inside its button, like back to top or level up",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.2 },
+  "hover": { "preset": "pop", "amount": 0.6, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 270, "amount": 0.4, "duration": 2.2, "delay": 0.08 } },
+  "deco": "float",
+  "alt": [{ "preset": "rise", "amount": 0.5 }, { "preset": "pop" }],
+  "swap": [{ "to": "circle-arrow-down", "effect": "rotate" }, { "to": "circle-arrow-up@solid", "effect": "scale" }, { "to": "arrow-up", "effect": "slide-up" }]
 }

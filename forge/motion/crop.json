@@ -1,23 +1,23 @@
 {
   "name": "crop",
-  "intent": "the frame tightens in like you are cropping a photo",
+  "intent": "the frame tightens around the picture like a crop being set",
   "loop": {
     "preset": "zoom",
-    "amount": 0.4,
-    "duration": 2.8
+    "amount": 0.35,
+    "duration": 3
   },
   "hover": {
-    "preset": "zoom",
-    "amount": 0.8,
-    "duration": 0.7
+    "preset": "pop",
+    "amount": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "spin-once"
+      "preset": "pulse",
+      "amount": 0.5
     },
     {
-      "preset": "pulse",
-      "amount": 0.6
+      "preset": "draw"
     }
   ],
   "swap": [

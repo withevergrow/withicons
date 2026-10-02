@@ -58,7 +58,8 @@ export function resolveMotion(options?: ExportOptions): ResolvedMotion
 /** A self-contained animated SVG string (only the keyframes it needs, scoped by a unique class). */
 export function animatedSvg(svg: string, options?: ExportOptions): string
 export function animatedSwapSvg(a: string, b: string, options?: ExportOptions): string
-export function exportDuration(options?: ExportOptions): number
+/** svg: the icon, so loops whose tagged decorations run longer than one cycle record until everything lines up. */
+export function exportDuration(options?: ExportOptions, svg?: string): number
 export function frameSvg(svg: string, options: ExportOptions | undefined, time: number): string
 export function renderFrames(svg: string, options?: ExportOptions, frame?: FrameOptions): Promise<HTMLCanvasElement[]>
 export function encodeGif(frames: (HTMLCanvasElement | ImageData)[], options?: { delay?: number; loop?: number }): Uint8Array

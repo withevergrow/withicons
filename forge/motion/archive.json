@@ -1,10 +1,10 @@
 {
   "name": "archive",
-  "intent": "settles into storage with a soft bounce",
+  "intent": "rests in storage, drops onto the shelf with a soft bounce",
   "loop": {
     "preset": "float",
-    "amount": 0.4,
-    "duration": 3
+    "amount": 0.3,
+    "duration": 3.2
   },
   "hover": {
     "preset": "bounce",
@@ -15,6 +15,7 @@
     "amount": 0.6,
     "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "jelly",

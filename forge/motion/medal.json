@@ -1,8 +1,55 @@
 {
   "name": "medal",
-  "intent": "swings gently from its ribbon, then celebrates a win",
-  "loop": { "preset": "sway", "origin": [12, 2.5], "amount": 0.6, "duration": 3.2 },
-  "hover": { "preset": "tada" },
-  "alt": [ { "preset": "glow", "amount": 0.7 }, { "preset": "twinkle" }, { "preset": "flip" } ],
-  "swap": [ { "to": "medal@solid", "effect": "scale" }, { "to": "trophy", "effect": "morph" }, { "to": "award", "effect": "flip" } ]
+  "intent": "swings from its ribbon, then swings high when awarded",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 1.5,
+    "duration": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "delay": 0.06
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.7
+    },
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "medal@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "trophy",
+      "effect": "morph"
+    },
+    {
+      "to": "award",
+      "effect": "flip"
+    }
+  ]
 }

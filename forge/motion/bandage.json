@@ -1,8 +1,34 @@
 {
   "name": "bandage",
-  "intent": "breathes gently like a wound healing, pops on as if stuck down",
-  "loop": { "preset": "breathe", "amount": 0.7, "duration": 3.2 },
-  "hover": { "preset": "pop", "amount": 1 },
-  "alt": [ { "preset": "jelly", "amount": 0.8 }, { "preset": "wiggle", "amount": 0.6 } ],
-  "swap": [ { "to": "bandage@solid", "effect": "scale" }, { "to": "heart", "effect": "morph" } ]
+  "intent": "breathes gently like a wound healing, squishes down as if stuck on",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop",
+      "amount": 0.8
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "bandage@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "heart",
+      "effect": "morph"
+    }
+  ]
 }

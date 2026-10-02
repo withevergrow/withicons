@@ -1,44 +1,10 @@
 {
   "name": "compass",
-  "intent": "swings around like a needle settling on north",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.8,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 1
-  },
-  "alt": [
-    {
-      "preset": "orbit",
-      "amount": 0.5
-    },
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        12
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "navigation",
-      "effect": "rotate"
-    },
-    {
-      "to": "map",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the needle swings and settles on north inside a steady case",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 3 },
+  "hover": { "preset": "pop", "amount": 0.5, "duration": 1 },
+  "parts": { "A": { "preset": "rock", "origin": [12, 12], "amount": 1, "duration": 3, "delay": 0.06 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "spin-once", "origin": [12, 12] }, { "preset": "tilt", "origin": [12, 12] }],
+  "swap": [{ "to": "navigation", "effect": "rotate" }, { "to": "map", "effect": "fade" }]
 }

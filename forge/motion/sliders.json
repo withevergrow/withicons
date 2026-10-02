@@ -1,20 +1,31 @@
 {
   "name": "sliders",
-  "intent": "knobs slide side to side like a setting being tuned",
+  "intent": "the knobs glide along their tracks like a setting being tuned",
   "loop": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.4,
-    "duration": 2.6
+    "amount": 0.25,
+    "duration": 2.8
   },
   "hover": {
-    "preset": "wiggle",
-    "amount": 0.8
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.3,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.9,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "shake",
-      "amount": 0.4
+      "preset": "wiggle",
+      "amount": 0.6
     },
     {
       "preset": "jelly",

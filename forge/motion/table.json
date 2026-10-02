@@ -1,18 +1,23 @@
 {
   "name": "table",
-  "intent": "breathes gently like a grid of data refreshing",
+  "intent": "swells gently like a grid of data refreshing",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
     "duration": 3.6
   },
   "hover": {
-    "preset": "pop"
+    "preset": "pop",
+    "amount": 0.8
   },
+  "deco": "float",
   "alt": [
     {
-      "preset": "zoom",
-      "amount": 0.6
+      "preset": "fill"
     },
     {
       "preset": "flip"

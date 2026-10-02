@@ -1,15 +1,17 @@
 {
   "name": "file",
-  "intent": "floats like a fresh page, pops when picked",
+  "intent": "floats like a loose page, the folded corner trailing a beat behind",
   "loop": {
     "preset": "float",
-    "amount": 0.4,
-    "duration": 3
+    "amount": 0.3,
+    "duration": 3.2
   },
   "hover": {
     "preset": "pop",
-    "amount": 0.8
+    "amount": 0.7,
+    "duration": 0.45
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tilt",

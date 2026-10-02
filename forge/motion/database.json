@@ -1,30 +1,46 @@
 {
   "name": "database",
-  "intent": "breathes like stored data, then settles on its base",
+  "intent": "stack squashes on its base, the middle band lagging like data settling",
   "loop": {
-    "preset": "breathe",
+    "preset": "jelly",
     "origin": [
       12,
       21.5
     ],
-    "amount": 0.6,
+    "amount": 0.35,
     "duration": 3.2
   },
   "hover": {
-    "preset": "bounce",
+    "preset": "jelly",
     "origin": [
       12,
       21.5
     ],
-    "amount": 0.7
+    "amount": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
-      "preset": "fill"
+      "preset": "breathe",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.4
     },
     {
-      "preset": "pulse",
-      "amount": 0.5
+      "preset": "fill"
     }
   ],
   "swap": [

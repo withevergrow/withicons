@@ -3,13 +3,15 @@
   "intent": "rests quietly hung up, shakes no when you hover",
   "loop": {
     "preset": "breathe",
-    "amount": 0.4,
+    "amount": 0.3,
     "duration": 3.6
   },
   "hover": {
     "preset": "shake",
-    "amount": 0.7
+    "amount": 0.7,
+    "duration": 0.5
   },
+  "deco": "still",
   "alt": [
     {
       "preset": "pop"

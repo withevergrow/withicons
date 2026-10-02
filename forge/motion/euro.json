@@ -1,17 +1,9 @@
 {
   "name": "euro",
-  "intent": "spins like a euro coin, money changing hands",
-  "loop": { "preset": "flip", "duration": 3.6 },
-  "hover": { "preset": "tada", "amount": 0.8 },
-  "alt": [
-    { "preset": "pop" },
-    { "preset": "glow" },
-    { "preset": "spin-once" }
-  ],
-  "swap": [
-    { "to": "dollar-sign", "effect": "flip" },
-    { "to": "pound-sterling", "effect": "flip" },
-    { "to": "indian-rupee", "effect": "flip" },
-    { "to": "coins", "effect": "fade" }
-  ]
+  "intent": "flips like a euro coin now and then",
+  "loop": { "preset": "flip", "duration": 4 },
+  "hover": { "preset": "flip", "duration": 0.9 },
+  "deco": "breathe",
+  "alt": [{ "preset": "tada", "amount": 0.8 }, { "preset": "glow" }, { "preset": "pop" }],
+  "swap": [{ "to": "dollar-sign", "effect": "flip" }, { "to": "pound-sterling", "effect": "flip" }, { "to": "indian-rupee", "effect": "flip" }, { "to": "coins", "effect": "fade" }]
 }

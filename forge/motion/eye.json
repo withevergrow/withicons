@@ -7,7 +7,7 @@
       12,
       12
     ],
-    "duration": 4
+    "duration": 4.2
   },
   "hover": {
     "preset": "blink",
@@ -17,6 +17,17 @@
     ],
     "duration": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        12
+      ],
+      "delay": 0.03
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "zoom",

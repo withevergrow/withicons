@@ -1,40 +1,10 @@
 {
   "name": "thumbs-down",
-  "intent": "gives a little shake of disapproval",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      7,
-      14
-    ],
-    "amount": 0.4,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "nudge",
-    "dir": 90,
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "shake"
-    },
-    {
-      "preset": "wiggle",
-      "origin": [
-        7,
-        14
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "thumbs-down@solid",
-      "effect": "scale"
-    },
-    {
-      "to": "thumbs-up",
-      "effect": "flip"
-    }
-  ]
+  "intent": "the hand dips from the wrist in quiet disapproval",
+  "loop": { "preset": "rock", "origin": [7, 8.5], "amount": 0.35, "duration": 3.2 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.8, "duration": 0.6 },
+  "parts": { "A": { "preset": "rock", "origin": [7, 8.5], "amount": 0.25, "duration": 3.2, "delay": 0.12 } },
+  "deco": "float",
+  "alt": [ { "preset": "shake" }, { "preset": "wiggle", "origin": [7, 8.5] } ],
+  "swap": [ { "to": "thumbs-down@solid", "effect": "scale" }, { "to": "thumbs-up", "effect": "flip" } ]
 }

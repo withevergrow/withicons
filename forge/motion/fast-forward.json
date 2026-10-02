@@ -1,34 +1,10 @@
 {
   "name": "fast-forward",
-  "intent": "races ahead like scrubbing a video forward",
-  "loop": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.6,
-    "duration": 1.4
-  },
-  "hover": {
-    "preset": "pass",
-    "dir": 0,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "pass",
-      "dir": 0
-    },
-    {
-      "preset": "pulse"
-    }
-  ],
-  "swap": [
-    {
-      "to": "rewind",
-      "effect": "flip"
-    },
-    {
-      "to": "skip-forward",
-      "effect": "slide-left"
-    }
-  ]
+  "intent": "the front arrow leads and the back one chases, like scrubbing ahead",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.5, "duration": 1.4 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.9, "duration": 0.6 },
+  "parts": { "A": { "preset": "nudge", "dir": 0, "delay": 0.06 } },
+  "deco": "still",
+  "alt": [{ "preset": "pass", "dir": 0 }, { "preset": "pulse" }],
+  "swap": [{ "to": "rewind", "effect": "flip" }, { "to": "skip-forward", "effect": "slide-left" }]
 }

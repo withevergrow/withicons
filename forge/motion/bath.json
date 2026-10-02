@@ -1,49 +1,9 @@
 {
   "name": "bath",
-  "intent": "rocks gently like warm water settling in the tub",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      12,
-      20.5
-    ],
-    "amount": 0.35,
-    "duration": 3.6
-  },
-  "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      20.5
-    ],
-    "amount": 0.9
-  },
-  "alt": [
-    {
-      "preset": "breathe",
-      "origin": [
-        12,
-        19
-      ],
-      "amount": 0.6
-    },
-    {
-      "preset": "float",
-      "amount": 0.4
-    }
-  ],
-  "swap": [
-    {
-      "to": "droplet",
-      "effect": "scale"
-    },
-    {
-      "to": "bath@solid",
-      "effect": "fade"
-    },
-    {
-      "to": "toilet",
-      "effect": "fade"
-    }
-  ]
+  "intent": "settles like warm water in the tub, splashing when you hover",
+  "loop": { "preset": "breathe", "origin": [12, 19], "amount": 0.35, "duration": 4 },
+  "hover": { "preset": "jelly", "origin": [12, 20.5], "amount": 0.9 },
+  "deco": "float",
+  "alt": [{ "preset": "rock", "origin": [12, 20.5], "amount": 0.35 }, { "preset": "float", "amount": 0.4 }],
+  "swap": [{ "to": "droplet", "effect": "scale" }, { "to": "bath@solid", "effect": "fade" }, { "to": "toilet", "effect": "fade" }]
 }

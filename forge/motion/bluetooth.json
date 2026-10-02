@@ -1,10 +1,10 @@
 {
   "name": "bluetooth",
-  "intent": "pulses like it is searching for a device to pair",
+  "intent": "pulses softly like it is searching for a device to pair",
   "loop": {
     "preset": "pulse",
-    "amount": 0.6,
-    "duration": 2.2
+    "amount": 0.45,
+    "duration": 2.4
   },
   "hover": {
     "preset": "glow",

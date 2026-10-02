@@ -3,7 +3,7 @@
   "intent": "floats gently like a cited line of speech",
   "loop": {
     "preset": "float",
-    "amount": 0.5,
+    "amount": 0.45,
     "duration": 3.2
   },
   "hover": {
@@ -11,8 +11,10 @@
     "origin": [
       12,
       19.5
-    ]
+    ],
+    "amount": 0.9
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "pop"

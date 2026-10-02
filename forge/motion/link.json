@@ -1,37 +1,10 @@
 {
   "name": "link",
-  "intent": "rocks gently, snaps together on hover",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.4,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "jelly",
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "nudge",
-      "dir": 315,
-      "amount": 0.4
-    }
-  ],
-  "swap": [
-    {
-      "to": "unlink",
-      "effect": "rotate"
-    },
-    {
-      "to": "check",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the two links tug apart and click back together",
+  "loop": { "preset": "nudge", "dir": 135, "amount": 0.35, "duration": 2.8 },
+  "hover": { "preset": "jelly", "amount": 0.8 },
+  "parts": { "A": { "preset": "nudge", "dir": 315, "amount": 0.35, "duration": 2.8, "delay": 0 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "rock", "amount": 0.4 }, { "preset": "pop" } ],
+  "swap": [ { "to": "unlink", "effect": "rotate" }, { "to": "check", "effect": "scale" } ]
 }

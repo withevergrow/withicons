@@ -181,3 +181,30 @@ Hand-written sources: `packages/motion/src/{meta,keyframes,index,element,export}
   use (`initial` when not customised), so palettes never leak between Before and After or in from the page. After's
   drawing in any style comes from its own icon page (`site/icons/<name>.html` symbols, ~110 KB) before falling back to a
   style data file.
+
+## Parts choreography (run 9)
+
+Whole-element motion made decorations spin with the object (a Bauhaus backdrop square spinning with the sun).
+From run 9, **renderers tag what they draw** and **motion animates parts**:
+
+| class on an SVG node | meaning | default behaviour while the icon animates |
+|---|---|---|
+| `wm-k` / `wm-a` / `wm-s` | the object, by skeleton plate (K body, A moving/secondary part, S badge/modifier) — only where a style keeps plates as separate nodes | the main preset (K), optionally a part override (A/S) |
+| (no class) | object geometry a style fuses together | treated as `wm-k` |
+| `wm-deco` | decoration that is not the object: backdrop shapes, sparkles, hearts, stars, confetti, accent dots | its own gentle loop (`breathe` / `float` / `twinkle`, counter-phased), never the main preset |
+| `wm-shadow` | cast/drop shadow, ground, extrusion that sits under the object | stays put; squashes/fades in sync for `bounce`, `float`, `rise`, `drop`, `jelly` |
+| `wm-shine` | specular highlight on the object | moves with the object; may glint once per loop |
+
+Classes are tiny (`class="wm-deco"`), harmless without motion CSS, and preserved by every package. Rotations use
+`transform-box: view-box` so every part pivots around the same `origin` in icon coordinates.
+
+Spec additions in `forge/motion/<name>.json` (all optional; validated by check-motion):
+
+```json
+{ "parts": { "A": { "preset": "ring", "origin": [12, 18], "amount": 1.6, "delay": 0.08 } },
+  "deco": "float" }
+```
+
+- `parts.A` / `parts.S`: a motion object (+ `delay` seconds, 0–1) for that plate, applied when the style exposes plates;
+  otherwise the whole object plays the main preset.
+- `deco`: `"breathe" | "float" | "twinkle" | "still"` (default: chosen by the engine per preset).

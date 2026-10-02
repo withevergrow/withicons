@@ -1,47 +1,10 @@
 {
   "name": "help-circle",
-  "intent": "question mark tilts curiously, asking if you need help",
-  "loop": {
-    "preset": "tilt",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.5,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "wiggle",
-    "origin": [
-      12,
-      12
-    ]
-  },
-  "alt": [
-    {
-      "preset": "pulse",
-      "origin": [
-        12,
-        12
-      ],
-      "amount": 0.6
-    },
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        21.5
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "info-circle",
-      "effect": "flip"
-    },
-    {
-      "to": "check-circle",
-      "effect": "morph"
-    }
-  ]
+  "intent": "the question mark tilts its head curiously inside a calm circle",
+  "loop": { "preset": "tilt", "origin": [12, 12], "amount": 0.6, "duration": 3.6 },
+  "hover": { "preset": "wiggle", "origin": [12, 12], "amount": 0.8, "duration": 0.7 },
+  "parts": { "A": { "preset": "tilt", "origin": [12, 17], "amount": 1.1, "duration": 3.6, "delay": 0.12 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "pulse", "origin": [12, 12], "amount": 0.6 }, { "preset": "jelly", "origin": [12, 21.5] } ],
+  "swap": [ { "to": "info-circle", "effect": "flip" }, { "to": "check-circle", "effect": "morph" } ]
 }

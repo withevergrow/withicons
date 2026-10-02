@@ -1,20 +1,21 @@
 {
   "name": "smartphone",
-  "intent": "buzzes softly like a phone getting a message",
+  "intent": "buzzes softly like a message just came in",
   "loop": {
     "preset": "wiggle",
     "origin": [
       12,
-      21.5
+      12
     ],
-    "amount": 0.35,
-    "duration": 2.6
+    "amount": 0.3,
+    "duration": 2.8
   },
   "hover": {
     "preset": "shake",
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 0.5
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "float",

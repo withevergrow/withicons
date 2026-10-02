@@ -1,19 +1,27 @@
 {
   "name": "shuffle",
-  "intent": "arrows cross and mix things up",
+  "intent": "the arrowheads push ahead as the tracks cross and mix",
   "loop": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.5,
-    "duration": 1.8
+    "amount": 0.25,
+    "duration": 2.2
   },
   "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      12
-    ]
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.9,
+    "duration": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "flip",

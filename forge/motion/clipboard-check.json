@@ -1,16 +1,10 @@
 {
   "name": "clipboard-check",
-  "intent": "the check mark writes itself on, like a task just signed off",
-  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "draw", "duration": 0.9 },
-  "alt": [
-    { "preset": "nod", "origin": [12, 21.5] },
-    { "preset": "pop" },
-    { "preset": "tada", "amount": 0.6 }
-  ],
-  "swap": [
-    { "to": "clipboard-list", "effect": "flip" },
-    { "to": "clipboard", "effect": "fade" },
-    { "to": "clipboard-check@solid", "effect": "scale" }
-  ]
+  "intent": "the check pops on the board now and then, writes itself on hover",
+  "loop": {"preset": "float", "amount": 0.25, "duration": 3.2},
+  "parts": {"A": {"preset": "pop", "origin": [12, 12], "amount": 0.7, "duration": 3.2, "delay": 0.1}},
+  "deco": "twinkle",
+  "hover": {"preset": "draw", "duration": 0.9},
+  "alt": [ {"preset": "nod", "origin": [12, 21.5]}, {"preset": "pop"}, {"preset": "tada", "amount": 0.6} ],
+  "swap": [ {"to": "clipboard-list", "effect": "flip"}, {"to": "clipboard", "effect": "fade"}, {"to": "clipboard-check@solid", "effect": "scale"} ]
 }

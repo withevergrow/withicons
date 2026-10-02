@@ -1,8 +1,49 @@
 {
   "name": "gallery-horizontal",
-  "intent": "slides sideways like a carousel moving to the next slide",
-  "loop":  { "preset": "pass", "dir": 180, "amount": 0.5, "duration": 3 },
-  "hover": { "preset": "nudge", "dir": 180, "amount": 0.8, "duration": 0.6 },
-  "alt":   [ { "preset": "nudge", "dir": 0, "amount": 0.6 }, { "preset": "flip" } ],
-  "swap":  [ { "to": "images", "effect": "fade" }, { "to": "layout-grid", "effect": "morph" }, { "to": "image", "effect": "slide-left" } ]
+  "intent": "the slides glide left like a carousel moving to the next one",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.35,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.9,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 180,
+      "amount": 0.5
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "images",
+      "effect": "fade"
+    },
+    {
+      "to": "layout-grid",
+      "effect": "morph"
+    },
+    {
+      "to": "image",
+      "effect": "slide-left"
+    }
+  ]
 }

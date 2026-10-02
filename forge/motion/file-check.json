@@ -1,31 +1,10 @@
 {
   "name": "file-check",
-  "intent": "nods yes when the document is approved",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "nod",
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "draw"
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "file",
-      "effect": "fade"
-    },
-    {
-      "to": "file-check@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the page rests while its checkmark pops to confirm",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "pop", "origin": [12, 14.75], "amount": 0.5, "duration": 0.5 },
+  "parts": { "A": { "preset": "pop", "origin": [12, 14.75], "amount": 0.5 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "nod", "amount": 0.7 }, { "preset": "draw" }],
+  "swap": [{ "to": "file", "effect": "fade" }, { "to": "file-check@solid", "effect": "scale" }]
 }

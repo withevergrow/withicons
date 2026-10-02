@@ -1,10 +1,14 @@
 {
   "name": "share",
-  "intent": "sends a little push outward to people and apps",
+  "intent": "swells out from the source node toward people and apps",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.6,
-    "duration": 3
+    "preset": "pulse",
+    "origin": [
+      6.5,
+      12
+    ],
+    "amount": 0.4,
+    "duration": 2.6
   },
   "hover": {
     "preset": "nudge",
@@ -12,6 +16,7 @@
     "amount": 0.9,
     "duration": 0.5
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "pop"

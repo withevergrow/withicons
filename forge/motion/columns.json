@@ -1,15 +1,26 @@
 {
   "name": "columns",
-  "intent": "panes breathe gently, then jiggle like a resized layout",
+  "intent": "the divider slides like a pane being resized",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 3.4
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
   },
   "hover": {
     "preset": "jelly",
-    "amount": 0.8
+    "amount": 0.5,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.35,
+      "duration": 3.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "flip"

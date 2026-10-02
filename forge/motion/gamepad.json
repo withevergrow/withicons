@@ -1,13 +1,13 @@
 {
   "name": "gamepad",
-  "intent": "jiggles in your hands like a game in play",
+  "intent": "tilts in your hands while the buttons get pressed",
   "loop": {
     "preset": "rock",
     "origin": [
       12,
       14
     ],
-    "amount": 0.5,
+    "amount": 0.35,
     "duration": 2.6
   },
   "hover": {
@@ -16,16 +16,20 @@
       12,
       14
     ],
-    "amount": 1
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.4,
+      "duration": 1.3,
+      "delay": 0.1
+    }
   },
   "alt": [
     {
       "preset": "jelly",
       "amount": 0.7
-    },
-    {
-      "preset": "shake",
-      "amount": 0.5
     },
     {
       "preset": "tada",

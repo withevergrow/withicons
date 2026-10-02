@@ -11,13 +11,15 @@ export const ORIGIN = 'https://withicons.com'
 export const GITHUB = 'https://github.com/withevergrow/withicons'
 
 /** Display order of the styles everywhere on the site (unknown future styles sort after these). */
-export const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+export const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
 /** The playful palette styles (CONTRACT.md "Palette styles"): their own default colours, the ink still currentColor. */
 export const PLAYFUL = ['glass', 'kawaii', 'sticker', 'pixel', 'retro']
+/** The studio styles (CONTRACT.md "Run 7"): art-directed premium looks with role-named colour variables. */
+export const STUDIO = ['luxe', 'bauhaus', 'skeuo']
 // Literal fallbacks, used only while tokens.css doesn't define a style's --c-<style> yet (the brand layer owns the values).
-export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#4C8DFF', kawaii: '#FF6FAE', sticker: '#A855F7', pixel: '#16A34A', retro: '#F97316' }
-const STYLE_TEXT = { glass: '#2563C9', kawaii: '#C2185B', sticker: '#7E2FC9', pixel: '#0F7A35', retro: '#B4480B' }
-const STYLE_ON = { glass: '#FFFFFF', kawaii: '#111318', sticker: '#FFFFFF', pixel: '#FFFFFF', retro: '#111318' }
+export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#4C8DFF', kawaii: '#FF6FAE', sticker: '#A855F7', pixel: '#16A34A', retro: '#F97316', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
+const STYLE_TEXT = { glass: '#2563C9', kawaii: '#C2185B', sticker: '#7E2FC9', pixel: '#0F7A35', retro: '#B4480B', luxe: '#2B3FB8', bauhaus: '#B81E12', skeuo: '#4A5C71' }
+const STYLE_ON = { glass: '#FFFFFF', kawaii: '#111318', sticker: '#FFFFFF', pixel: '#FFFFFF', retro: '#111318', luxe: '#FFFFFF', bauhaus: '#FFFFFF', skeuo: '#FFFFFF' }
 const BASE7 = ORDER.slice(0, 7)
 /** Inline custom properties for a style accent: --g (colour), --gt (AA text), --gs (soft tint), --go (ink on the colour). */
 export const cvar = s => BASE7.includes(s)
@@ -32,7 +34,7 @@ for (const n of listIcons()) {
 }
 // a style counts once it renders a few probe icons, so a renderer still under construction never breaks the pages
 const probeOk = s => ['home', 'heart', 'settings'].filter(n => SKEL.has(n)).every(n => { try { return renderIcon(MODS[s], SKEL.get(n)).length > 0 } catch { return false } })
-/** Styles in display order (line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro). */
+/** Styles in display order (line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo). */
 export const STYLES = Object.keys(MODS).filter(probeOk).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
 const manifest = (() => { try { return readManifest() } catch { return { categories: [] } } })()
 export const META = {
@@ -42,8 +44,8 @@ export const META = {
 }
 export const ICON_NAMES = META.icons.map(i => i.name)
 const styleMeta = Object.fromEntries(META.styles.map(s => [s.name, s]))
-/** { name: { title, kind, description, group: 'universal' | 'creative' | 'playful' } } */
-export const STYLE_INFO = Object.fromEntries(META.styles.map(s => [s.name, { ...s, group: PLAYFUL.includes(s.name) ? 'playful' : s.kind === 'universal' ? 'universal' : 'creative' }]))
+/** { name: { title, kind, description, group: 'universal' | 'creative' | 'playful' | 'studio' } } */
+export const STYLE_INFO = Object.fromEntries(META.styles.map(s => [s.name, { ...s, group: PLAYFUL.includes(s.name) ? 'playful' : STUDIO.includes(s.name) ? 'studio' : s.kind === 'universal' ? 'universal' : 'creative' }]))
 export const styleTitle = s => (STYLE_INFO[s] && STYLE_INFO[s].title) || s[0].toUpperCase() + s.slice(1)
 export const stylesIn = g => STYLES.filter(s => STYLE_INFO[s].group === g)
 export const hasStyle = s => STYLES.includes(s)
@@ -105,7 +107,7 @@ export function rawSvg(name, style = 'line', size = 24) {
 }
 
 export function header(p, current) {
-  const nav = [['icons.html', 'Icons', 'icons'], ['guides/index.html', 'How to use', 'guides'], ['developers.html', 'Developers', 'developers'], ['ai.html', 'For AI', 'ai'], ['about.html', 'About', 'about']]
+  const nav = [['icons.html', 'Icons', 'icons'], ['live.html', 'Live icons<span class="nav-new">New</span>', 'live'], ['guides/index.html', 'How to use', 'guides'], ['developers.html', 'Developers', 'developers'], ['ai.html', 'For AI', 'ai'], ['about.html', 'About', 'about']]
   return `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
   <a class="logo" href="${p}index.html" aria-label="with icons — home">
@@ -116,7 +118,7 @@ export function header(p, current) {
     </span>
   </a>
   <nav class="site-nav" aria-label="Primary">
-    ${nav.map(([h, l, k]) => `<a href="${p}${h}"${k === current ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
+    ${nav.map(([h, l, k]) => `<a href="${p}${h}"${k === 'live' ? ' class="nav-live"' : ''}${k === current ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
   </nav>
   <div class="site-actions">
     <button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button>

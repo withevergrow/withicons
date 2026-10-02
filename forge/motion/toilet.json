@@ -1,44 +1,10 @@
 {
   "name": "toilet",
   "intent": "wobbles softly on its base, like a flush just finished",
-  "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.45,
-    "duration": 3.8
-  },
-  "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "drop",
-      "amount": 0.4
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "bath",
-      "effect": "fade"
-    },
-    {
-      "to": "droplet",
-      "effect": "scale"
-    },
-    {
-      "to": "toilet@solid",
-      "effect": "fade"
-    }
-  ]
+  "loop": {"preset": "jelly", "origin": [12,21], "amount": 0.3, "duration": 4.4},
+  "hover": {"preset": "jelly", "origin": [12,21], "amount": 0.9},
+  "parts": {"A": {"preset": "jelly", "amount": 0.25}},
+  "deco": "float",
+  "alt": [ {"preset": "drop", "amount": 0.4}, {"preset": "breathe", "origin": [12,21], "amount": 0.45} ],
+  "swap": [ {"to": "bath", "effect": "fade"}, {"to": "droplet", "effect": "scale"}, {"to": "toilet@solid", "effect": "fade"} ]
 }

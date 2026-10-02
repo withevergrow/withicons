@@ -1,7 +1,7 @@
 {
   "name": "@withicons/solid",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
+  "description": "500 icons x 15 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -44,7 +44,10 @@
     "kawaii-icons",
     "sticker-icons",
     "pixel-icons",
-    "retro-icons"
+    "retro-icons",
+    "luxe-icons",
+    "bauhaus-icons",
+    "skeuo-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -195,6 +198,39 @@
         "default": "./dist/retro/index.cjs"
       }
     },
+    "./luxe": {
+      "solid": "./dist/luxe/index.js",
+      "import": {
+        "types": "./dist/luxe/index.d.ts",
+        "default": "./dist/luxe/index.js"
+      },
+      "require": {
+        "types": "./dist/luxe/index.d.cts",
+        "default": "./dist/luxe/index.cjs"
+      }
+    },
+    "./bauhaus": {
+      "solid": "./dist/bauhaus/index.js",
+      "import": {
+        "types": "./dist/bauhaus/index.d.ts",
+        "default": "./dist/bauhaus/index.js"
+      },
+      "require": {
+        "types": "./dist/bauhaus/index.d.cts",
+        "default": "./dist/bauhaus/index.cjs"
+      }
+    },
+    "./skeuo": {
+      "solid": "./dist/skeuo/index.js",
+      "import": {
+        "types": "./dist/skeuo/index.d.ts",
+        "default": "./dist/skeuo/index.js"
+      },
+      "require": {
+        "types": "./dist/skeuo/index.d.cts",
+        "default": "./dist/skeuo/index.cjs"
+      }
+    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "solid": "./dist/icon.js",
@@ -264,6 +300,21 @@
       "types": "./dist/retro/icons/*.d.ts",
       "solid": "./dist/retro/icons/*.js",
       "default": "./dist/retro/icons/*.js"
+    },
+    "./luxe/icons/*": {
+      "types": "./dist/luxe/icons/*.d.ts",
+      "solid": "./dist/luxe/icons/*.js",
+      "default": "./dist/luxe/icons/*.js"
+    },
+    "./bauhaus/icons/*": {
+      "types": "./dist/bauhaus/icons/*.d.ts",
+      "solid": "./dist/bauhaus/icons/*.js",
+      "default": "./dist/bauhaus/icons/*.js"
+    },
+    "./skeuo/icons/*": {
+      "types": "./dist/skeuo/icons/*.d.ts",
+      "solid": "./dist/skeuo/icons/*.js",
+      "default": "./dist/skeuo/icons/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -346,6 +397,24 @@
       ],
       "retro/icons/*": [
         "./dist/retro/icons/*.d.ts"
+      ],
+      "luxe": [
+        "./dist/luxe/index.d.ts"
+      ],
+      "luxe/icons/*": [
+        "./dist/luxe/icons/*.d.ts"
+      ],
+      "bauhaus": [
+        "./dist/bauhaus/index.d.ts"
+      ],
+      "bauhaus/icons/*": [
+        "./dist/bauhaus/icons/*.d.ts"
+      ],
+      "skeuo": [
+        "./dist/skeuo/index.d.ts"
+      ],
+      "skeuo/icons/*": [
+        "./dist/skeuo/icons/*.d.ts"
       ]
     }
   },

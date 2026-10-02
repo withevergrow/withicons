@@ -1,21 +1,28 @@
 {
   "name": "circle",
-  "intent": "pulses softly like a live status dot",
+  "intent": "breathes softly like a live status dot, squishes when pressed",
   "loop": {
-    "preset": "pulse",
+    "preset": "breathe",
     "amount": 0.6,
-    "duration": 2.2
+    "duration": 3.2
   },
   "hover": {
-    "preset": "pop",
-    "amount": 1.1
+    "preset": "jelly",
+    "amount": 0.7,
+    "duration": 0.7
   },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "breathe"
+      "preset": "pulse",
+      "amount": 0.6
     },
     {
-      "preset": "jelly"
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
     }
   ],
   "swap": [

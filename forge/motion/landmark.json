@@ -1,22 +1,33 @@
 {
   "name": "landmark",
-  "intent": "stands steady and calm like a trusted bank",
+  "intent": "stands steady like a trusted bank; settles firmly on hover",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
+    "preset": "pulse",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.25,
     "duration": 4
   },
   "hover": {
-    "preset": "pop",
-    "amount": 0.8
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.35,
+    "duration": 0.7
   },
+  "deco": "still",
   "alt": [
     {
-      "preset": "glow"
+      "preset": "glow",
+      "amount": 0.6
     },
     {
-      "preset": "zoom",
-      "amount": 0.6
+      "preset": "pop",
+      "amount": 0.8
     }
   ],
   "swap": [

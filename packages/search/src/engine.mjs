@@ -203,9 +203,12 @@ const STYLE_WORDS = {
   vintage: 'retro', '70s': 'retro', '80s': 'retro', seventies: 'retro', eighties: 'retro', '1970s': 'retro', '1980s': 'retro',
   twotone: 'duo', bicolor: 'duo', bicolour: 'duo', shiny: 'gloss', etched: 'engrave', engraving: 'engrave', etching: 'engrave',
   schematic: 'blueprint', doodle: 'sketch', doodles: 'sketch', lineart: 'line',
+  '3d': 'luxe', luxury: 'luxe', luxurious: 'luxe', premium: 'luxe', gold: 'luxe', golden: 'luxe', deluxe: 'luxe', opulent: 'luxe', lux: 'luxe',
+  geometric: 'bauhaus', modernist: 'bauhaus', modernism: 'bauhaus', constructivist: 'bauhaus', midcentury: 'bauhaus',
+  skeuomorphic: 'skeuo', skeuomorphism: 'skeuo', skeuomorph: 'skeuo', skeuomorphous: 'skeuo', realistic: 'skeuo', tactile: 'skeuo', photorealistic: 'skeuo', lifelike: 'skeuo',
 }
 // two-word style phrases are joined before parsing: "8 bit" (from "8-bit") -> "8bit"
-const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart' }
+const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart', '3 d': '3d', 'mid century': 'midcentury' }
 // words after a style word that mark it as a style request ("glass style home", "pixel look")
 const STYLE_MARK = new Set(['style', 'styled', 'look', 'effect', 'version', 'variant', 'theme', 'aesthetic'])
 // the original seven styles and their words keep their exact 1.1 parsing

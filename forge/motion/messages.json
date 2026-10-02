@@ -1,14 +1,29 @@
 {
   "name": "messages",
-  "intent": "bubbles bob like a lively conversation",
+  "intent": "two bubbles bob in turn like a back-and-forth chat",
   "loop": {
     "preset": "float",
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 2.6
   },
   "hover": {
-    "preset": "jelly"
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.7,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.5,
+      "duration": 2.6,
+      "delay": 1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "type",

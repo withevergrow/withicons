@@ -1,20 +1,38 @@
 {
   "name": "shield-check",
-  "intent": "glows softly and draws its tick to show you are protected",
+  "intent": "shield rests calmly while its tick nods yes: you are protected",
   "loop": {
-    "preset": "glow",
-    "duration": 2.8
+    "preset": "pulse",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.4
   },
   "hover": {
-    "preset": "draw",
-    "duration": 0.7
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "amount": 0.6,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "nod"
+      "preset": "draw",
+      "duration": 0.7
     },
     {
-      "preset": "pop"
+      "preset": "glow"
     }
   ],
   "swap": [

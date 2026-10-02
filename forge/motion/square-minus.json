@@ -1,8 +1,46 @@
 {
   "name": "square-minus",
-  "intent": "presses in gently, ready to remove or collapse",
-  "loop": { "preset": "breathe", "amount": 0.6, "duration": 3.2 },
-  "hover": { "preset": "pop", "amount": 0.8 },
-  "alt": [ { "preset": "jelly" }, { "preset": "pulse", "amount": 0.5 } ],
-  "swap": [ { "to": "square-plus", "effect": "rotate" }, { "to": "square", "effect": "fade" }, { "to": "minus", "effect": "scale" } ]
+  "intent": "the minus squashes like a fold, ready to collapse",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "jelly",
+      "amount": 0.8,
+      "duration": 3.2,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop",
+      "amount": 0.8
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "square-plus",
+      "effect": "rotate"
+    },
+    {
+      "to": "square",
+      "effect": "fade"
+    },
+    {
+      "to": "minus",
+      "effect": "scale"
+    }
+  ]
 }

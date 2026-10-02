@@ -1,8 +1,18 @@
 {
   "name": "chevrons-up",
-  "intent": "nudges upward to say back to top",
-  "loop": { "preset": "nudge", "dir": 270, "amount": 0.6, "duration": 1.8 },
-  "hover": { "preset": "pass", "dir": 270, "duration": 0.7 },
-  "alt": [ { "preset": "rise" }, { "preset": "nudge", "dir": 270, "amount": 1.4 } ],
-  "swap": [ { "to": "chevrons-down", "effect": "rotate" }, { "to": "chevron-up", "effect": "scale" }, { "to": "chevrons-up-down", "effect": "fade" } ]
+  "intent": "climbs to the top, the upper chevron leaping ahead of the lower",
+  "loop": { "preset": "nudge", "dir": 270, "amount": 0.6, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 270, "amount": 0.8, "duration": 0.6 },
+  "parts": {
+    "A": { "preset": "nudge", "dir": 270, "amount": 0.35, "delay": 0.04 }
+  },
+  "alt": [
+    { "preset": "pass", "dir": 270, "duration": 0.7 },
+    { "preset": "rise" }
+  ],
+  "swap": [
+    { "to": "chevrons-down", "effect": "rotate" },
+    { "to": "chevron-up", "effect": "scale" },
+    { "to": "chevrons-up-down", "effect": "fade" }
+  ]
 }

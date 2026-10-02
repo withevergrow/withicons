@@ -7,7 +7,7 @@
 //   node scripts/publish.mjs --expect 0.2.0         fail unless every package is at 0.2.0 (CI passes the tag)
 //   node scripts/publish.mjs --only @withicons/core,withicons
 //
-// Packages (lockstep, one version): core react vue svelte angular solid web static search mcp motion + the `withicons` CLI.
+// Packages (lockstep, one version): core react vue svelte angular solid web static search mcp motion dynamic + the `withicons` CLI.
 // The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
 // git tag v<version> already exists on a different commit: that version was released with other content, so bump first.
 //
@@ -45,7 +45,7 @@ const only = opt('only')?.split(',')
 const names = new Set(pkgs.map(p => p.json.name))
 // every package of the lockstep release; a missing one means its emitter did not run (node forge/build.mjs)
 const EXPECTED = ['@withicons/core', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
-  '@withicons/web', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', 'withicons']
+  '@withicons/web', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
 const missing = EXPECTED.filter(n => !names.has(n))
 
 // --- checks: same version everywhere, built output present, repository url (provenance needs it)

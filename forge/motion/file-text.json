@@ -1,32 +1,10 @@
 {
   "name": "file-text",
-  "intent": "writes itself line by line",
-  "loop": {
-    "preset": "type",
-    "amount": 0.4,
-    "duration": 1.6
-  },
-  "hover": {
-    "preset": "draw",
-    "duration": 0.9
-  },
-  "alt": [
-    {
-      "preset": "float",
-      "amount": 0.4
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "file",
-      "effect": "fade"
-    },
-    {
-      "to": "file-check",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the page rests while its lines write themselves on",
+  "loop": {"preset": "pulse", "origin": [12,12], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "draw", "origin": [13,11], "amount": 0.3, "duration": 0.9},
+  "parts": {"A": {"preset": "draw", "origin": [13,11], "amount": 0.25}},
+  "deco": "breathe",
+  "alt": [ {"preset": "type", "amount": 0.4}, {"preset": "pop"} ],
+  "swap": [ {"to": "file", "effect": "fade"}, {"to": "file-check", "effect": "scale"} ]
 }

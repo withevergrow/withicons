@@ -1,20 +1,28 @@
 {
   "name": "chevron-right",
-  "intent": "nudges right to say go forward",
+  "intent": "steps right to say go forward",
   "loop": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.6,
-    "duration": 1.8
+    "amount": 0.5,
+    "duration": 2.2
   },
   "hover": {
     "preset": "nudge",
-    "dir": 0
+    "dir": 0,
+    "amount": 1,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pass",
-      "dir": 0
+      "dir": 0,
+      "duration": 0.8
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
     }
   ],
   "swap": [

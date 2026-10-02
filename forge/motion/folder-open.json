@@ -1,32 +1,10 @@
 {
   "name": "folder-open",
-  "intent": "hovers open, bounces as you browse inside",
-  "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "bounce",
-    "amount": 0.7
-  },
-  "alt": [
-    {
-      "preset": "breathe",
-      "amount": 0.6
-    },
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        20
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "folder",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the folder swings open on its hinge as you browse inside",
+  "loop": {"preset": "sway", "origin": [5,20], "amount": 0.6, "duration": 3.4},
+  "hover": {"preset": "sway", "origin": [5,20], "amount": 0.9, "duration": 0.9},
+  "parts": {"A": {"preset": "sway", "origin": [5,20], "delay": 0.06}},
+  "deco": "breathe",
+  "alt": [ {"preset": "tilt", "origin": [5,20], "amount": 0.5}, {"preset": "jelly", "origin": [12,20], "amount": 0.6} ],
+  "swap": [ {"to": "folder", "effect": "fade"} ]
 }

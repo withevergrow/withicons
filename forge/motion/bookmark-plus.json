@@ -1,19 +1,28 @@
 {
   "name": "bookmark-plus",
-  "intent": "floats gently, then pops when you save it",
+  "intent": "the ribbon rests while its plus swells, then pops on save",
   "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 3
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 3.2
   },
   "hover": {
     "preset": "pop",
-    "origin": [
-      12,
-      12
-    ],
     "amount": 1.1
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        9.5
+      ],
+      "amount": 0.8,
+      "duration": 3.2,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "bounce",

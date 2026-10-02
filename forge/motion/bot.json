@@ -1,43 +1,10 @@
 {
   "name": "bot",
-  "intent": "hovers like a friendly robot and blinks at you",
-  "loop": {
-    "preset": "float",
-    "amount": 0.6,
-    "duration": 2.8
-  },
-  "hover": {
-    "preset": "blink",
-    "origin": [
-      12,
-      14
-    ],
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "wiggle",
-      "origin": [
-        12,
-        20.5
-      ]
-    },
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        20.5
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "brain",
-      "effect": "morph"
-    },
-    {
-      "to": "user",
-      "effect": "fade"
-    }
-  ]
+  "intent": "hovers like a friendly robot, antenna and eyes bobbing a beat behind",
+  "loop": { "preset": "float", "amount": 0.5, "duration": 2.8 },
+  "hover": { "preset": "float", "amount": 1, "duration": 0.9 },
+  "parts": { "A": { "preset": "float", "amount": 0.7, "delay": 0.14 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "blink", "origin": [12, 14] }, { "preset": "wiggle", "origin": [12, 20.5] }],
+  "swap": [{ "to": "brain", "effect": "morph" }, { "to": "user", "effect": "fade" }]
 }

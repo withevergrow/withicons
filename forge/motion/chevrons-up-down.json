@@ -1,38 +1,15 @@
 {
   "name": "chevrons-up-down",
-  "intent": "breathes open and closed, hinting at a list of choices",
-  "loop": {
-    "preset": "zoom",
-    "amount": 0.4,
-    "duration": 2.6
-  },
-  "hover": {
-    "preset": "jelly",
-    "amount": 0.8
-  },
+  "intent": "opens and settles, hinting at a list of choices",
+  "loop": { "preset": "zoom", "amount": 0.35, "duration": 2.8 },
+  "hover": { "preset": "pop", "amount": 1.1, "duration": 0.5 },
   "alt": [
-    {
-      "preset": "nudge",
-      "dir": 90,
-      "amount": 0.5
-    },
-    {
-      "preset": "nudge",
-      "dir": 270,
-      "amount": 0.5
-    },
-    {
-      "preset": "pulse"
-    }
+    { "preset": "nudge", "dir": 90, "amount": 0.5 },
+    { "preset": "nudge", "dir": 270, "amount": 0.5 },
+    { "preset": "jelly", "amount": 0.8 }
   ],
   "swap": [
-    {
-      "to": "chevron-down",
-      "effect": "fade"
-    },
-    {
-      "to": "sort",
-      "effect": "fade"
-    }
+    { "to": "chevron-down", "effect": "fade" },
+    { "to": "sort", "effect": "fade" }
   ]
 }

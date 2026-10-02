@@ -1,0 +1,136 @@
+{
+  "name": "@withicons/dynamic",
+  "version": "0.2.0",
+  "description": "Live icons for with icons: 50 icons whose content you set (calendar date, clock time, badge count, battery level, weather, labels), drawn in all 15 styles at runtime. Custom element, React and Vue wrappers.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/dynamic"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "dynamic-icons",
+    "live-icons",
+    "calendar-icon",
+    "clock-icon",
+    "battery-icon",
+    "notification-badge",
+    "weather-icons",
+    "svg-generator",
+    "web-components",
+    "custom-element",
+    "react",
+    "vue",
+    "ssr"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/index.cjs",
+    "./dist/lite.js",
+    "./dist/element.js",
+    "./dist/react.js",
+    "./dist/vue.js",
+    "./dist/styles/*.js",
+    "./dist/chunks/*.js",
+    "./dist/cdn/*.js",
+    "./dist/cdn/styles/*.js"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/cdn/dynamic.js",
+  "jsdelivr": "./dist/cdn/dynamic.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./lite": {
+      "types": "./dist/lite.d.ts",
+      "default": "./dist/lite.js"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "default": "./dist/element.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "default": "./dist/vue.js"
+    },
+    "./styles/*": {
+      "types": "./dist/styles/*.d.ts",
+      "default": "./dist/styles/*.js"
+    },
+    "./cdn": "./dist/cdn/dynamic.js",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "lite": [
+        "./dist/lite.d.ts"
+      ],
+      "element": [
+        "./dist/element.d.ts"
+      ],
+      "react": [
+        "./dist/react.d.ts"
+      ],
+      "vue": [
+        "./dist/vue.d.ts"
+      ],
+      "styles/*": [
+        "./dist/styles/*.d.ts"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "vue": ">=3.2"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

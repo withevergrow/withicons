@@ -1,8 +1,40 @@
 {
   "name": "basketball",
   "intent": "dribbles up and down, spins on a finger when touched",
-  "loop": { "preset": "bounce", "amount": 0.6, "duration": 1.4 },
-  "hover": { "preset": "spin-once" },
-  "alt": [ { "preset": "spin", "duration": 3.5 }, { "preset": "jelly" }, { "preset": "rise" } ],
-  "swap": [ { "to": "basketball@solid", "effect": "spin" }, { "to": "trophy", "effect": "slide-up" } ]
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin",
+      "duration": 3.5
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "rise"
+    }
+  ],
+  "swap": [
+    {
+      "to": "basketball@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    }
+  ]
 }

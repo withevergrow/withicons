@@ -1,14 +1,23 @@
 {
   "name": "fingerprint",
-  "intent": "glows like a sensor reading your fingerprint",
+  "intent": "glows like a sensor as its ridges light up for a reading",
   "loop": {
     "preset": "glow",
-    "duration": 2.4
+    "amount": 0.7,
+    "duration": 2.8
   },
   "hover": {
     "preset": "draw",
     "duration": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 2.8,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

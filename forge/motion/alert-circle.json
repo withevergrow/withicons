@@ -1,36 +1,10 @@
 {
   "name": "alert-circle",
-  "intent": "pulses to draw attention, shakes on hover",
-  "loop": {
-    "preset": "pulse",
-    "amount": 0.6,
-    "duration": 2
-  },
-  "hover": {
-    "preset": "shake",
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "glow"
-    },
-    {
-      "preset": "flicker",
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "check-circle",
-      "effect": "morph"
-    },
-    {
-      "to": "info-circle",
-      "effect": "flip"
-    },
-    {
-      "to": "alert-circle@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "pulses for attention, the mark echoing it; pops up on hover",
+  "loop": { "preset": "pulse", "amount": 0.4, "duration": 2.2 },
+  "hover": { "preset": "pop", "amount": 0.9 },
+  "parts": { "A": { "preset": "pulse", "origin": [12, 12], "amount": 0.8, "duration": 2.2, "delay": 0.12 } },
+  "deco": "still",
+  "alt": [{ "preset": "shake", "amount": 0.8 }, { "preset": "flicker", "amount": 0.6 }],
+  "swap": [{ "to": "check-circle", "effect": "morph" }, { "to": "info-circle", "effect": "flip" }, { "to": "alert-circle@solid", "effect": "scale" }]
 }

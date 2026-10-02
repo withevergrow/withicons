@@ -1,14 +1,14 @@
 {
   "name": "sparkles",
-  "intent": "twinkles like a fresh bit of magic",
+  "intent": "the big star glints while the small ones twinkle in turn",
   "loop": {
     "preset": "twinkle",
     "origin": [
       9.5,
       13
     ],
-    "amount": 0.7,
-    "duration": 2.4
+    "amount": 0.6,
+    "duration": 2.8
   },
   "hover": {
     "preset": "twinkle",
@@ -16,9 +16,21 @@
       9.5,
       13
     ],
-    "amount": 1.2,
+    "amount": 1.1,
     "duration": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        18.25,
+        11.25
+      ],
+      "amount": 0.5,
+      "delay": 0.4
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "glow"

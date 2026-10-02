@@ -2,10 +2,9 @@
   "name": "share-2",
   "intent": "the arrow lifts up out of the box, ready to share",
   "loop": {
-    "preset": "nudge",
-    "dir": 270,
-    "amount": 0.5,
-    "duration": 2.4
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 2.6
   },
   "hover": {
     "preset": "nudge",
@@ -13,6 +12,16 @@
     "amount": 1,
     "duration": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.7,
+      "duration": 2.6,
+      "delay": 0.06
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "rise",

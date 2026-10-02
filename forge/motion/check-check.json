@@ -1,8 +1,10 @@
 {
   "name": "check-check",
-  "intent": "both ticks draw in, like a message that was just read",
+  "intent": "one tick, then the second follows, like a message just read",
   "loop": { "preset": "draw", "duration": 2.8 },
   "hover": { "preset": "draw", "duration": 0.7 },
+  "parts": { "A": { "preset": "draw", "duration": 2.8, "delay": 0.3 } },
+  "deco": "still",
   "alt": [ { "preset": "nod" }, { "preset": "pop" } ],
   "swap": [ { "to": "check", "effect": "scale" }, { "to": "check-check@solid", "effect": "fade" } ]
 }

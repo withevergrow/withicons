@@ -1,8 +1,49 @@
 {
   "name": "square-x",
-  "intent": "shakes its head no, ready to close or cancel",
-  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "shake", "amount": 0.8 },
-  "alt": [ { "preset": "pop" }, { "preset": "spin-once", "duration": 0.6 } ],
-  "swap": [ { "to": "square-plus", "effect": "rotate" }, { "to": "square", "effect": "fade" }, { "to": "close", "effect": "scale" } ]
+  "intent": "the X rocks gently in its box, shakes no on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "rock",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.5,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "spin-once",
+      "duration": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "square-plus",
+      "effect": "rotate"
+    },
+    {
+      "to": "square",
+      "effect": "fade"
+    },
+    {
+      "to": "close",
+      "effect": "scale"
+    }
+  ]
 }

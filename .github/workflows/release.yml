@@ -1,7 +1,7 @@
 name: Release to npm
 
 # Tag-driven, lockstep release of every public package under packages/* (core, react, vue, svelte, angular,
-# solid, web, static, search, mcp, motion and the `withicons` CLI; scripts/publish.mjs fails if one is missing):
+# solid, web, static, search, mcp, motion, dynamic and the `withicons` CLI; scripts/publish.mjs fails if one is missing):
 #   1. bump the version in the root package.json (forge/build.mjs stamps it into every package)
 #   2. node forge/build.mjs, update CHANGELOG.md, commit, then:  git tag v0.2.0 && git push origin v0.2.0
 #   3. this workflow builds, tests, verifies all packages are at 0.2.0 and publishes them in
@@ -52,9 +52,10 @@ jobs:
       - run: node forge/build.mjs
       - run: node forge/tools/check.mjs
       - run: node forge/tools/check-motion.mjs
+      - run: node forge/tools/check-dynamic.mjs   # Live icons (@withicons/dynamic): every generator x every style
       - run: node forge/tools/check-palettes.mjs --quiet
       - run: node scripts/skill-sync.mjs --check
-      - run: npm test --workspaces --if-present
+      - run: npm test --workspaces --if-present   # every package, @withicons/dynamic included
 
       - name: Publish (dry run)
         if: github.event_name == 'workflow_dispatch' && inputs.dry_run

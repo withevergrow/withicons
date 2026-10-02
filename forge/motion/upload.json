@@ -1,10 +1,11 @@
 {
   "name": "upload",
-  "intent": "lifts upward, sending a file out of the tray",
+  "intent": "the arrow lifts out of the tray, sending a file up",
   "loop": {
-    "preset": "rise",
-    "amount": 0.6,
-    "duration": 2.2
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.3,
+    "duration": 2.4
   },
   "hover": {
     "preset": "nudge",
@@ -12,6 +13,15 @@
     "amount": 1,
     "duration": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "rise",
+      "amount": 0.7,
+      "duration": 2.4,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "pass",

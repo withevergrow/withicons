@@ -1,8 +1,10 @@
 {
   "name": "file-down",
-  "intent": "drops gently, like a file landing on your device",
-  "loop": { "preset": "drop", "amount": 0.4, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 90, "amount": 0.9, "duration": 0.6 },
-  "alt": [ { "preset": "bounce", "origin": [12, 21.5], "amount": 0.5 }, { "preset": "pass", "dir": 90, "amount": 0.6 } ],
-  "swap": [ { "to": "file-check", "effect": "slide-down" }, { "to": "file-up", "effect": "flip" }, { "to": "download", "effect": "fade" } ]
+  "intent": "the page holds steady while its arrow dips, landing on your device",
+  "loop": { "preset": "float", "amount": 0.25, "duration": 2.6 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.4, "duration": 0.6 },
+  "parts": { "A": { "preset": "nudge", "dir": 90, "amount": 0.3, "duration": 2.6, "delay": 0.08 } },
+  "deco": "float",
+  "alt": [{ "preset": "bounce", "origin": [12, 21.5], "amount": 0.45 }, { "preset": "drop", "amount": 0.4, "duration": 2.4 }, { "preset": "pass", "dir": 90, "amount": 0.6 }],
+  "swap": [{ "to": "file-check", "effect": "slide-down" }, { "to": "file-up", "effect": "flip" }, { "to": "download", "effect": "fade" }]
 }

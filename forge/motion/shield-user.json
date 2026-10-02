@@ -1,8 +1,53 @@
 {
   "name": "shield-user",
-  "intent": "breathes calmly to show the account is protected",
-  "loop": { "preset": "breathe", "amount": 0.6, "duration": 3.4 },
-  "hover": { "preset": "nod", "amount": 0.8 },
-  "alt": [ { "preset": "pop" }, { "preset": "glow", "amount": 0.7 } ],
-  "swap": [ { "to": "shield-check", "effect": "flip" }, { "to": "user-check", "effect": "fade" }, { "to": "shield-user@solid", "effect": "scale" } ]
+  "intent": "shield rests calmly while the person inside nods, verified",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "amount": 0.3,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.7
+    },
+    {
+      "preset": "nod",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    },
+    {
+      "to": "user-check",
+      "effect": "fade"
+    },
+    {
+      "to": "shield-user@solid",
+      "effect": "scale"
+    }
+  ]
 }

@@ -1,8 +1,9 @@
 {
   "name": "file-up",
-  "intent": "lifts gently, like a file heading up to the cloud",
-  "loop": { "preset": "rise", "amount": 0.4, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 270, "amount": 0.9, "duration": 0.6 },
-  "alt": [ { "preset": "pass", "dir": 270, "amount": 0.6 }, { "preset": "float", "amount": 0.5 } ],
-  "swap": [ { "to": "file-check", "effect": "slide-up" }, { "to": "file-down", "effect": "flip" }, { "to": "upload", "effect": "fade" } ]
+  "intent": "the page lifts and settles, heading up to the cloud",
+  "loop": {"preset": "nudge", "dir": 270, "amount": 0.3, "duration": 2.6},
+  "hover": {"preset": "nudge", "dir": 270, "amount": 0.7, "duration": 0.6},
+  "deco": "float",
+  "alt": [ {"preset": "rise", "amount": 0.4, "duration": 2.4}, {"preset": "pass", "dir": 270, "amount": 0.6} ],
+  "swap": [ {"to": "file-check", "effect": "slide-up"}, {"to": "file-down", "effect": "flip"}, {"to": "upload", "effect": "fade"} ]
 }

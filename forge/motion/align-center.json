@@ -1,21 +1,23 @@
 {
   "name": "align-center",
-  "intent": "settles its lines toward the middle",
+  "intent": "its lines gather gently toward the middle",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3.2
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 2.8
   },
   "hover": {
-    "preset": "jelly"
+    "preset": "jelly",
+    "amount": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pop"
     },
     {
-      "preset": "nod",
-      "amount": 0.6
+      "preset": "breathe",
+      "amount": 0.5
     }
   ],
   "swap": [

@@ -1,8 +1,42 @@
 {
   "name": "train",
-  "intent": "rumbles gently on the rails, then pulls into the station on hover",
-  "loop": { "preset": "shake", "amount": 0.25, "duration": 1.2 },
-  "hover": { "preset": "zoom", "amount": 0.8, "duration": 0.6 },
-  "alt": [ { "preset": "bounce", "origin": [12, 21.5], "amount": 0.3 }, { "preset": "pop" } ],
-  "swap": [ { "to": "bus", "effect": "slide-left" }, { "to": "plane", "effect": "slide-up" }, { "to": "train@solid", "effect": "scale" } ]
+  "intent": "chugs gently on the rails, pulls into the station on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 1
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.3
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bus",
+      "effect": "slide-left"
+    },
+    {
+      "to": "plane",
+      "effect": "slide-up"
+    },
+    {
+      "to": "train@solid",
+      "effect": "scale"
+    }
+  ]
 }

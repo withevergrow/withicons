@@ -1,36 +1,10 @@
 {
   "name": "bell-off",
-  "intent": "stays quietly muted, shakes softly if you try to ring it",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 3.6
-  },
-  "hover": {
-    "preset": "shake",
-    "amount": 0.6
-  },
-  "alt": [
-    {
-      "preset": "sway",
-      "origin": [
-        12,
-        4.5
-      ],
-      "amount": 0.5
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "bell",
-      "effect": "flip"
-    },
-    {
-      "to": "bell-ring",
-      "effect": "fade"
-    }
-  ]
+  "intent": "rests muted, the silent clapper drifts; shakes no if you ring",
+  "loop": { "preset": "pulse", "amount": 0.3, "duration": 3.6 },
+  "hover": { "preset": "shake", "amount": 0.6, "duration": 0.5 },
+  "parts": { "A": { "preset": "sway", "origin": [12, 4.5], "amount": 0.35, "duration": 3.6, "delay": 0.2 } },
+  "deco": "still",
+  "alt": [{ "preset": "sway", "origin": [12, 4.5], "amount": 0.5 }, { "preset": "pop" }],
+  "swap": [{ "to": "bell", "effect": "flip" }, { "to": "bell-ring", "effect": "fade" }]
 }

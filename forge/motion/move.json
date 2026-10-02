@@ -1,31 +1,8 @@
 {
   "name": "move",
-  "intent": "drifts in a small circle, ready to be dragged anywhere",
-  "loop": {
-    "preset": "orbit",
-    "amount": 0.6,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "zoom",
-    "amount": 0.8,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "pulse"
-    },
-    {
-      "preset": "jelly"
-    }
-  ],
-  "swap": [
-    {
-      "to": "drag-handle",
-      "effect": "fade"
-    }
-  ]
+  "intent": "its four heads reach outward together, ready to drag any way",
+  "loop": {"preset": "pulse", "origin": [12,12], "amount": 0.4, "duration": 2.4},
+  "hover": {"preset": "pop", "amount": 0.9, "duration": 0.5},
+  "alt": [ {"preset": "orbit", "amount": 0.6, "duration": 3}, {"preset": "jelly"}, {"preset": "zoom"} ],
+  "swap": [ {"to": "drag-handle", "effect": "fade"} ]
 }

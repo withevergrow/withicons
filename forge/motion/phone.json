@@ -1,15 +1,21 @@
 {
   "name": "phone",
-  "intent": "rocks softly like it's ringing, rattles when you hover",
+  "intent": "rattles softly like it is ringing, jiggles hard on hover",
   "loop": {
     "preset": "ring",
-    "amount": 0.5,
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.45,
     "duration": 2.4
   },
   "hover": {
     "preset": "wiggle",
-    "amount": 1.2
+    "amount": 1.1,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "shake",

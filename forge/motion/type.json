@@ -1,14 +1,25 @@
 {
   "name": "type",
-  "intent": "jitters softly like text being typed",
+  "intent": "taps like a key being typed, its foot serif landing a beat later",
   "loop": {
     "preset": "type",
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 1.6
   },
   "hover": {
-    "preset": "type"
+    "preset": "type",
+    "amount": 1.2,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.7,
+      "duration": 1.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "pop"

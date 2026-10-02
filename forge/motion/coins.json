@@ -1,25 +1,44 @@
 {
   "name": "coins",
-  "intent": "spins and glints like coins being counted",
+  "intent": "the top coin hops on the stack, like coins being counted",
   "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 3
+    "preset": "pulse",
+    "origin": [
+      16,
+      21.5
+    ],
+    "amount": 0.25,
+    "duration": 2.6
   },
   "hover": {
-    "preset": "flip",
-    "duration": 0.8
+    "preset": "nod",
+    "origin": [
+      16,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 0.7
   },
-  "alt": [
-    {
+  "parts": {
+    "A": {
       "preset": "bounce",
       "origin": [
-        16,
-        21.5
-      ]
+        8,
+        11.5
+      ],
+      "amount": 0.3,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "flip"
     },
     {
-      "preset": "twinkle"
+      "preset": "float",
+      "amount": 0.5
     }
   ],
   "swap": [

@@ -1,22 +1,21 @@
 {
   "name": "search",
-  "intent": "lens tilts and scans as if looking for something",
+  "intent": "lens sweeps in small circles, scanning for something",
   "loop": {
     "preset": "orbit",
-    "origin": [
-      10.5,
-      10.5
-    ],
-    "amount": 0.6,
-    "duration": 3
+    "amount": 0.5,
+    "duration": 3.2
   },
   "hover": {
     "preset": "tilt",
     "origin": [
-      10.5,
-      10.5
-    ]
+      20.5,
+      20.5
+    ],
+    "amount": 0.9,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "zoom",
@@ -28,8 +27,8 @@
     {
       "preset": "wiggle",
       "origin": [
-        10.5,
-        10.5
+        20.5,
+        20.5
       ]
     }
   ],

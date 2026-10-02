@@ -1,8 +1,43 @@
 {
   "name": "motorcycle",
-  "intent": "revs in place, then pops a wheelie on hover",
-  "loop": { "preset": "nudge", "dir": 0, "amount": 0.35, "duration": 1.6 },
-  "hover": { "preset": "tilt", "origin": [5.5, 20], "amount": 1, "duration": 0.8 },
-  "alt": [ { "preset": "pass", "dir": 0 }, { "preset": "shake", "amount": 0.3 } ],
-  "swap": [ { "to": "car", "effect": "slide-left" }, { "to": "truck", "effect": "slide-left" }, { "to": "motorcycle@solid", "effect": "scale" } ]
+  "intent": "idles with a light engine purr, pops a wheelie on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 0.9
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      5.5,
+      20
+    ],
+    "amount": 1,
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "shake",
+      "amount": 0.3
+    }
+  ],
+  "swap": [
+    {
+      "to": "car",
+      "effect": "slide-left"
+    },
+    {
+      "to": "truck",
+      "effect": "slide-left"
+    },
+    {
+      "to": "motorcycle@solid",
+      "effect": "scale"
+    }
+  ]
 }

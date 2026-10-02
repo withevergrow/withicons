@@ -1,8 +1,10 @@
 {
   "name": "images",
-  "intent": "drifts softly like a stack of photos",
-  "loop": { "preset": "float", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "tilt", "origin": [10, 21], "amount": 0.7 },
-  "alt": [ { "preset": "zoom", "origin": [10, 14.5], "amount": 0.6 }, { "preset": "pop" } ],
-  "swap": [ { "to": "image", "effect": "slide-left" }, { "to": "gallery-horizontal", "effect": "slide-left" }, { "to": "image-plus", "effect": "scale" }, { "to": "images@solid", "effect": "scale" } ]
+  "intent": "the stack rests while the picture slowly zooms in like a slideshow",
+  "loop": {"preset": "pulse", "origin": [10,15], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "zoom", "origin": [9,18], "amount": 0.3, "duration": 0.7},
+  "parts": {"A": {"preset": "zoom", "origin": [9,18], "amount": 0.3}},
+  "deco": "float",
+  "alt": [ {"preset": "tilt", "origin": [10,21], "amount": 0.7}, {"preset": "float", "amount": 0.35} ],
+  "swap": [ {"to": "image", "effect": "slide-left"}, {"to": "gallery-horizontal", "effect": "slide-left"}, {"to": "image-plus", "effect": "scale"}, {"to": "images@solid", "effect": "scale"} ]
 }

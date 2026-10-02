@@ -30,6 +30,20 @@ const CASES = [
   ['80s music', 'retro', 'music'],
   ['retro camera', 'retro', 'camera'],
   ['home in retro style', 'retro', 'home'],
+  ['3d rocket', 'luxe', 'rocket'],
+  ['3-d trophy', 'luxe', 'trophy'],
+  ['luxury gift', 'luxe', 'gift'],
+  ['premium crown', 'luxe', 'crown'],
+  ['gold star', 'luxe', 'star'],
+  ['luxe heart', 'luxe', 'heart'],
+  ['bauhaus home', 'bauhaus', 'home'],
+  ['geometric star', 'bauhaus', 'star'],
+  ['modernist clock', 'bauhaus', 'clock'],
+  ['skeuomorphic camera', 'skeuo', 'camera'],
+  ['skeuomorphism calendar', 'skeuo', 'calendar'],
+  ['realistic lock', 'skeuo', 'lock'],
+  ['tactile button', 'skeuo', 'button'],
+  ['skeuo bell', 'skeuo', 'bell'],
 ]
 for (const [q, style, word] of CASES) {
   test(`"${q}" -> style ${style}`, { skip: !has.has(style) && `index has no ${style} style yet` }, () => {
@@ -52,6 +66,12 @@ test('the original style words parse exactly as before', () => {
   assert.deepEqual(parsed('heart gloss'), { style: 'gloss', required: ['heart'], soft: ['gloss'] })
   assert.equal(parsed('glossy heart').style, 'gloss')
   assert.equal(engine.search('line chart', { limit: 1 })[0].name, 'chart-line')
+})
+
+test('premium and gold alone still find crowns and coins (the word stays required content)', { skip: !has.has('luxe') && 'no luxe style' }, () => {
+  assert.deepEqual(parsed('gold').required, ['gold'])
+  assert.ok(engine.search('gold', { limit: 5 }).some(r => r.name === 'coins'))
+  assert.ok(engine.search('premium', { limit: 5 }).some(r => r.name === 'crown'))
 })
 
 test('style filter accepts every style in the index', () => {

@@ -135,5 +135,71 @@ export function cssSlot(el, loop) {
 }
 // Both slots of a spec -> one flat object of custom properties.
 export function specVars(spec, full) {
-  return Object.assign({}, slotVars(spec && spec.loop, 'L', full), slotVars(spec && spec.hover, 'H', full))
+  return Object.assign({}, slotVars(spec && spec.loop, 'L', full), slotVars(spec && spec.hover, 'H', full), partVars(spec, 'L'), partVars(spec, 'H'))
+}
+
+// ---- parts choreography (forge/MOTION.md). Renderers tag SVG nodes: wm-k / wm-a / wm-s (object plates), wm-deco
+// (decoration: backdrop shapes, sparkles, accent dots), wm-shadow (cast shadow / ground), wm-shine (highlight).
+// Untagged nodes and wm-k / wm-shine are the object and play the main preset.
+export const PART_CLASSES = ['wm-a', 'wm-s', 'wm-deco', 'wm-shadow']
+/** The role of a node from its class attribute: 'obj' | 'a' | 's' | 'deco' | 'shadow'. */
+export function partRole(cls) {
+  const c = ' ' + String(cls || '').replace(/\s+/g, ' ') + ' '
+  return c.includes(' wm-deco ') ? 'deco' : c.includes(' wm-shadow ') ? 'shadow' : c.includes(' wm-a ') ? 'a' : c.includes(' wm-s ') ? 's' : 'obj'
+}
+/** True when SVG markup carries part tags (then motion animates parts instead of the whole icon). */
+export function hasParts(markup) { return /\sclass="[^"]*\bwm-(?:a|s|deco|shadow)\b/.test(String(markup || '')) }
+// The decoration loop chosen by the engine when a spec has no `deco`: turning objects keep their backdrop calm
+// (breathe), swinging / shaking ones let it drift (float), lifting / beating ones make sparkles twinkle.
+export const DECO_DEFAULT = {
+  'spin': 'breathe', 'spin-once': 'breathe', 'tick': 'breathe', 'orbit': 'breathe', 'flip': 'breathe', 'nudge': 'breathe', 'pass': 'breathe',
+  'draw': 'breathe', 'fill': 'breathe', 'blink': 'breathe', 'glow': 'breathe', 'flicker': 'breathe', 'twinkle': 'breathe', 'zoom': 'breathe',
+  'ring': 'float', 'wiggle': 'float', 'shake': 'float', 'nod': 'float', 'type': 'float', 'tilt': 'float', 'sway': 'float', 'rock': 'float', 'breathe': 'float',
+  'bounce': 'twinkle', 'float': 'twinkle', 'rise': 'twinkle', 'drop': 'twinkle', 'jelly': 'twinkle', 'beat': 'twinkle', 'pulse': 'twinkle', 'pop': 'twinkle', 'tada': 'twinkle',
+}
+export const DECO_KINDS = ['breathe', 'float', 'twinkle', 'still']
+export function decoOf(preset, deco) { return DECO_KINDS.includes(deco) ? deco : (DECO_DEFAULT[preset] || 'breathe') }
+// A deco loop lasts a whole number of the object's cycles (~2.8 s), so exports of n cycles loop seamlessly.
+export const DECO_CYCLE = 2.8
+export function decoTimes(cycle) { return Math.max(1, Math.round(DECO_CYCLE / (Number(cycle) || DECO_CYCLE))) }
+// Ground-shadow presets (keyframes wm-shadow-<preset>[-loop] in motion.css); kept in step with keyframes.js SHADOW_STOPS.
+export const GROUND_PRESETS = ['bounce', 'float', 'rise', 'drop', 'jelly']
+const PART_KEYS = ['A', 'S']
+// The parts variables of one slot ('L' loop / 'H' one-shot) of a spec: decoration loop, ground shadow and plate overrides.
+//   --wm<S>-dc (deco keyframes, when not breathe) --wmL-dd (deco loop length) --wm<S>-sh (ground shadow keyframes)
+//   --wm<S>-a / -s (plate keyframes) + -a-d -a-k -a-ox -a-oy -a-e -a-dx -a-dy -a-dl (only what differs from the object)
+export function partVars(spec, slot) {
+  const o = {}
+  const loop = slot === 'L'
+  const m = spec && (loop ? spec.loop : spec.hover)
+  if (!m || !PRESET_DEFAULTS[m.preset]) return o
+  const p = '--wm' + slot
+  const d = PRESET_DEFAULTS[m.preset]
+  const kind = decoOf(m.preset, spec.deco)
+  if (kind !== 'breathe') o[p + '-dc'] = kind === 'still' ? 'none' : 'wm-deco-' + kind
+  if (loop) {
+    const dur = Math.max(d.min || 0, m.duration > 0 ? m.duration : d.cycle)
+    const dd = r4(dur * decoTimes(dur))
+    if (dd !== DECO_CYCLE) o[p + '-dd'] = fmt(dd) + 's'
+  }
+  if (GROUND_PRESETS.includes(m.preset)) o[p + '-sh'] = 'wm-shadow-' + m.preset + (loop && hasLoopVariant(m.preset) ? '-loop' : '')
+  const parts = spec.parts || {}
+  for (const K of PART_KEYS) {
+    const q = parts[K]
+    if (!q || typeof q !== 'object') continue
+    const x = p + '-' + K.toLowerCase()
+    const preset = PRESET_DEFAULTS[q.preset] ? q.preset : m.preset
+    const same = preset === m.preset, pd = PRESET_DEFAULTS[preset]
+    o[x] = keyframeName(preset, loop)
+    if (loop && q.duration > 0) o[x + '-d'] = fmt(Math.max(pd.min || 0, q.duration)) + 's'
+    if (q.amount != null) o[x + '-k'] = fmt(Number(q.amount))
+    else if (!same) o[x + '-k'] = '1'
+    const origin = q.origin || (!same && pd.origin) || null
+    if (origin) { o[x + '-ox'] = pct(origin[0]); o[x + '-oy'] = pct(origin[1]) }
+    if (q.steps > 0) o[x + '-e'] = 'steps(' + Math.round(q.steps) + ')'
+    else if (!same) o[x + '-e'] = pd.ease || 'linear'
+    if (q.dir != null) { const [dx, dy] = dirVec(q.dir); o[x + '-dx'] = fmt(dx); o[x + '-dy'] = fmt(dy) }
+    if (q.delay > 0) o[x + '-dl'] = fmt(Number(q.delay)) + 's'
+  }
+  return o
 }

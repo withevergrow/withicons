@@ -1,16 +1,25 @@
 {
   "name": "cloud-rain",
-  "intent": "floats while it rains, then shakes loose a shower",
+  "intent": "cloud drifts while rain keeps falling; a shake lets a shower go",
   "loop": {
     "preset": "float",
-    "amount": 0.7,
+    "amount": 0.6,
     "duration": 3.2
   },
   "hover": {
-    "preset": "drop",
+    "preset": "shake",
     "amount": 0.35,
-    "duration": 0.8
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.45,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "shake",

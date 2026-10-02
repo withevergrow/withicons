@@ -77,13 +77,14 @@
   function emit(ev, arg) { var l = (subs[ev] || []).slice(); for (var i = 0; i < l.length; i++) { try { l[i](arg) } catch (e) { if (W.console) console.error(e) } } }
 
   /* ───────────── data + styles ───────────── */
-  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful palette styles
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful + 3 studio styles
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
   // how the home page and pickers group them (kind stays 'universal' | 'creative' for the data contract)
   var GROUPS = [
     { id: 'everyday', title: 'Everyday', blurb: 'Clean and quiet. For interfaces, docs and slides.', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', blurb: 'Illustrated looks with character.', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
-    { id: 'playful', title: 'Playful', blurb: 'Colourful, cute and nostalgic. New!', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] }
+    { id: 'playful', title: 'Playful', blurb: 'Colourful, cute and nostalgic.', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
+    { id: 'studio', title: 'Studio', blurb: 'Art-directed and premium: layered 3D, Bauhaus geometry, real materials. New!', styles: ['luxe', 'bauhaus', 'skeuo'] }
   ]
   // plain-language copy for each style (shared by every page)
   var INFO = {
@@ -108,21 +109,30 @@
     sketch: { title: 'Sketch', kind: 'creative', color: '#22A861', description: 'Hand-drawn marker.',
       plain: 'Hand-drawn marker lines, like a whiteboard doodle.', good: 'Classes, workshops, notes, friendly brands',
       who: 'Whiteboards, onboarding, education and friendly products.', why: 'Warmth on purpose: hand-made, yet identical on every build.' },
-    glass: { title: 'Glass', kind: 'creative', color: '#5B9DFF', description: 'Layered frosted glass.', group: 'playful', isNew: true,
+    glass: { title: 'Glass', kind: 'creative', color: '#5B9DFF', description: 'Layered frosted glass.', group: 'playful',
       plain: 'Layers of frosted glass with soft light. Modern and airy.', good: 'App screens, dashboards, tech launches, dark mode',
       who: 'Modern apps, fintech, dashboards and product launches.', why: 'Depth from stacked translucent panes, no blur filters needed.' },
-    kawaii: { title: 'Kawaii', kind: 'creative', color: '#FF7A9A', description: 'Chubby, cute, with a tiny face.', group: 'playful', isNew: true,
+    kawaii: { title: 'Kawaii', kind: 'creative', color: '#FF7A9A', description: 'Chubby, cute, with a tiny face.', group: 'playful',
       plain: 'Chubby, soft and cute, with a tiny smiling face and rosy cheeks.', good: 'Journals, kids, cafés, stickers, social posts',
       who: 'Creators, planners, small shops and anything that should feel friendly.', why: 'Every object gets a personality, so a set feels like a family.' },
-    sticker: { title: 'Sticker', kind: 'creative', color: '#B57CFF', description: 'Die-cut Y2K sticker.', group: 'playful', isNew: true,
+    sticker: { title: 'Sticker', kind: 'creative', color: '#B57CFF', description: 'Die-cut Y2K sticker.', group: 'playful',
       plain: 'Shiny die-cut stickers with a puffy white border and sparkles.', good: 'Social posts, merch, scrapbooks, Gen Z brands',
       who: 'Social media, scrapbooks, merch and bold consumer brands.', why: 'A white border makes icons pop on photos and busy backgrounds.' },
-    pixel: { title: 'Pixel', kind: 'creative', color: '#4FAE0C', description: 'Crisp 16×16 pixel art.', group: 'playful', isNew: true,
+    pixel: { title: 'Pixel', kind: 'creative', color: '#4FAE0C', description: 'Crisp 16×16 pixel art.', group: 'playful',
       plain: 'Crisp pixel art, like an old video game.', good: 'Games, hackathons, retro tech, fun UIs',
       who: 'Games, developer fun, hackathons and nostalgic brands.', why: 'Snapped to a 16×16 grid, so edges stay razor sharp.' },
-    retro: { title: 'Retro', kind: 'creative', color: '#F57C12', description: '70s sunset stripes.', group: 'playful', isNew: true,
+    retro: { title: 'Retro', kind: 'creative', color: '#F57C12', description: '70s sunset stripes.', group: 'playful',
       plain: 'Chunky 70s shapes with warm sunset stripes.', good: 'Posters, events, cafés, music, vintage brands',
-      who: 'Events, hospitality, music and vintage-flavoured brands.', why: 'Warm stripes and a chunky outline: instant nostalgia.' }
+      who: 'Events, hospitality, music and vintage-flavoured brands.', why: 'Warm stripes and a chunky outline: instant nostalgia.' },
+    luxe: { title: 'Luxe', kind: 'creative', color: '#2B3FB8', description: 'Premium layered 3D.', group: 'studio', isNew: true,
+      plain: 'Rich, layered 3D with gold trim and soft studio light. Premium.', good: 'Hero sections, app tiles, pricing, luxury brands',
+      who: 'Premium products, fintech, pricing tiers and launch moments.', why: 'Stacked tonal layers give real depth, with no filters or gradients.' },
+    bauhaus: { title: 'Bauhaus', kind: 'creative', color: '#D62718', description: 'Primary colours, pure geometry.', group: 'studio', isNew: true,
+      plain: 'Circles, squares and triangles in red, yellow and blue. Bold modernist design.', good: 'Posters, portfolios, galleries, design studios',
+      who: 'Design studios, editorial, art and culture, bold brands.', why: 'Every icon rebuilt from pure geometry, composed like a 1920s poster.' },
+    skeuo: { title: 'Skeuo', kind: 'creative', color: '#5A6E86', description: 'Real materials and depth.', group: 'studio', isNew: true,
+      plain: 'Real materials, bevels and shadows, like objects you could pick up.', good: 'App icons, dashboards, music and photo apps',
+      who: 'App icons, tools, dashboards and nostalgic product UIs.', why: 'Light, material and texture make each icon feel touchable.' }
   }
   ;['line', 'solid', 'duo'].forEach(function (n) { INFO[n].group = 'everyday' })
   ;['gloss', 'engrave', 'blueprint', 'sketch'].forEach(function (n) { INFO[n].group = 'crafted' })
@@ -208,7 +218,8 @@
     sketch: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
     // palette styles carry explicit fills/strokes per shape; data/meta.js supplies the real root when loaded
     glass: { fill: 'none' }, kawaii: { fill: 'currentColor' }, sticker: { fill: 'currentColor' },
-    pixel: { fill: 'currentColor', 'shape-rendering': 'crispEdges' }, retro: { fill: 'currentColor' }
+    pixel: { fill: 'currentColor', 'shape-rendering': 'crispEdges' }, retro: { fill: 'currentColor' },
+    luxe: { fill: 'none' }, bauhaus: { fill: 'currentColor' }, skeuo: { fill: 'none' }
   }
   function rootAttrs(style) { var m = styleMeta(style); return (m && m.root) || ROOTS[style] || { fill: 'currentColor' } }
   function svgFrom(inner, style, size, opts) {
@@ -645,9 +656,9 @@
   }
 
   /* ═════════════════════ LOGO MORPH ═════════════════════
-     Cycles real icons through all twelve styles. line/duo/blueprint/sketch draw themselves on, solid/engrave
+     Cycles real icons through every style. line/duo/blueprint/sketch draw themselves on, solid/engrave
      fill up, gloss gets a highlight sweep; glass clears from frost, kawaii bounces in, a sticker is slapped on,
-     pixel resolves in steps and retro rises like a sunset. Each frame tints the tile and the hand-written "with" in the style colour.
+     pixel resolves in steps and retro rises like a sunset; luxe lifts into the light, bauhaus snaps into place, skeuo is pressed in. Each frame tints the tile and the hand-written "with" in the style colour.
      Frames live in brand/logo-frames.js (≈27 KB, loaded when idle). Pauses off-screen, in hidden tabs, and for
      reduced motion (then it only changes on hover). */
   var FIRST_FRAME = ['heart', 'line', '<path pathLength="1" d="M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"/>']
@@ -665,7 +676,7 @@
   }
   var DRAW = { line: 1, duo: 1, blueprint: 1, sketch: 1 }
   var FILL = { solid: 1, engrave: 1 }
-  var ENTER = { glass: 'lm-frost', kawaii: 'lm-bounce', sticker: 'lm-slap', pixel: 'lm-pixel', retro: 'lm-rise' }
+  var ENTER = { glass: 'lm-frost', kawaii: 'lm-bounce', sticker: 'lm-slap', pixel: 'lm-pixel', retro: 'lm-rise', luxe: 'lm-lift', bauhaus: 'lm-snap', skeuo: 'lm-press' }
   var morphs = []
   function initLogoMorph() {
     $$('[data-logo-morph]').forEach(function (el, idx) {
@@ -757,7 +768,7 @@
     return hit
   }
   // nav links and the mobile menu cycle through the signature colours (old and new styles interleaved)
-  var NAV_STYLE = ['line', 'kawaii', 'solid', 'pixel', 'duo', 'retro', 'gloss', 'glass', 'sketch', 'sticker', 'blueprint', 'engrave']
+  var NAV_STYLE = ['line', 'luxe', 'kawaii', 'solid', 'pixel', 'duo', 'retro', 'gloss', 'bauhaus', 'glass', 'sketch', 'sticker', 'skeuo', 'blueprint', 'engrave']
   function initHeader() {
     var header = $('[data-header]') || $('.site-header')
     if (!header) return
@@ -777,6 +788,13 @@
     if (cta && !cta.querySelector('svg')) cta.innerHTML = '<span class="cta-label">' + esc(cta.textContent) + '</span>'
     // nav: current link + sliding indicator
     if (nav) {
+      // pages written before Live icons existed get the link too (the generators write it statically)
+      var first = $('a', nav)
+      if (first && !$('a[href$="live.html"]', nav)) {
+        var live = doc.createElement('a'); live.className = 'nav-live'
+        live.href = first.getAttribute('href').replace(/icons.html.*$/, 'live.html'); live.innerHTML = 'Live icons<span class="nav-new">New</span>'
+        if (/live.html$/.test(sitePath(live.getAttribute('href'))) && first.nextSibling) nav.insertBefore(live, first.nextSibling)
+      }
       var links = $$('a', nav)
       links.forEach(function (a, i) { a.style.setProperty('--style', 'var(--c-' + NAV_STYLE[i % NAV_STYLE.length] + ')') })
       var cur = markCurrent(links)
@@ -826,6 +844,8 @@
     el.addEventListener('pointerleave', function () { cancelAnimationFrame(raf); raf = 0; el.style.transform = '' })
   }
   W.WI_magnetic = magnetic
+  // a nav link's label without its NEW tag
+  function navText(a) { var c = a.cloneNode(true); $$('.nav-new', c).forEach(function (t) { t.parentNode.removeChild(t) }); return c.textContent }
   function buildMobileMenu(header, links) {
     var actions = $('.site-actions', header)
     if (!actions || $('.nav-toggle', header)) return
@@ -838,7 +858,7 @@
     var h = '<nav aria-label="Mobile">'
     links.forEach(function (a, i) {
       var s = NAV_STYLE[i % NAV_STYLE.length]
-      h += '<a class="mm-link s-' + s + '" style="--i:' + i + '" href="' + esc(a.getAttribute('href')) + '"' + (a.getAttribute('aria-current') ? ' aria-current="' + a.getAttribute('aria-current') + '"' : '') + '>' + esc(a.textContent) + '<span class="mm-dot" aria-hidden="true"></span></a>'
+      h += '<a class="mm-link s-' + s + '" style="--i:' + i + '" href="' + esc(a.getAttribute('href')) + '"' + (a.getAttribute('aria-current') ? ' aria-current="' + a.getAttribute('aria-current') + '"' : '') + '><span>' + esc(navText(a)) + (a.querySelector('.nav-new') ? '<span class="nav-new">New</span>' : '') + '</span><span class="mm-dot" aria-hidden="true"></span></a>'
     })
     h += '</nav><p class="mm-hand" data-count-line>' + countLine() + '</p><div class="mm-foot"><a class="btn btn-sun" href="' + esc(rel('icons.html')) + '">Browse icons ' + ICON.arrow + '</a>' + stillButton('on-light') + '<span>Powered by Evergrow</span></div>'
     sheet.innerHTML = h
@@ -1383,7 +1403,7 @@
       add('Reply with:')
       add('1. Best fit: exact name + one line on why my users will read it right.')
       add('2. Up to 2 alternatives, one line each.')
-      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro — only at 32px+).')
+      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo — only at 32px+).')
       add('4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
       add('5. A link for each pick: ' + AI_SITE + '/icons/NAME.html')
     } else if (intent === 'code') {

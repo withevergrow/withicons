@@ -1,16 +1,25 @@
 {
   "name": "cloud-snow",
-  "intent": "hangs softly in the air while snow drifts down",
+  "intent": "cloud hangs softly while snow drifts slowly down",
   "loop": {
     "preset": "float",
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 3.6
   },
   "hover": {
-    "preset": "drop",
+    "preset": "shake",
     "amount": 0.3,
-    "duration": 0.8
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.3,
+      "duration": 3.6,
+      "delay": 0.3
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "breathe"

@@ -1,23 +1,28 @@
 {
   "name": "chevron-down",
-  "intent": "nudges down to hint that more opens below",
+  "intent": "dips down to hint that more opens below",
   "loop": {
     "preset": "nudge",
     "dir": 90,
-    "amount": 0.6,
-    "duration": 1.8
+    "amount": 0.5,
+    "duration": 2.2
   },
   "hover": {
     "preset": "nudge",
-    "dir": 90
+    "dir": 90,
+    "amount": 1,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "bounce",
-      "amount": 0.6
+      "amount": 0.5
     },
     {
-      "preset": "flip"
+      "preset": "pass",
+      "dir": 90,
+      "duration": 0.8
     }
   ],
   "swap": [

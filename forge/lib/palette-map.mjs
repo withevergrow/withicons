@@ -24,6 +24,9 @@ const FIXED = {
   '--with-pixel-fill': 'c1', '--with-pixel-shine': 'shine',
   '--with-retro-shadow': 'shadow',
 }
+// generic role-named variables (styles from run 7 on: luxe, bauhaus, skeuo, and any later style):
+// --with-<style>-<role> where <role> is one of ROLES maps straight to that role
+const GENERIC = /^--with-[a-z0-9]+-(ink|c1|c2|c3|c4|tint|accent|shadow|shine|edge)$/
 // slot families: matched to c1..c4 by order of first appearance
 const SLOT = [/^--with-kawaii-fill-\d+$/, /^--with-sticker-(bubblegum|grape|lemon|mint|peach|sky)$/, /^--with-retro-\d+$/]
 const SLOTS = ['c1', 'c2', 'c3', 'c4']
@@ -41,6 +44,8 @@ export function rolesFor(markup) {
   const n = SLOT.map(() => 0)
   for (const v of varsIn(markup)) {
     if (FIXED[v]) { out[v] = FIXED[v]; continue }
+    const g = GENERIC.exec(v)
+    if (g) { out[v] = g[1]; continue }
     const f = SLOT.findIndex(re => re.test(v))
     if (f >= 0) out[v] = SLOTS[Math.min(n[f]++, SLOTS.length - 1)]
   }

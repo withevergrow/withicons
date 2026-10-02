@@ -1,16 +1,18 @@
 {
   "name": "zap",
-  "intent": "flickers with crackling electric energy",
+  "intent": "crackles with electric energy, then strikes down along its path",
   "loop": {
     "preset": "flicker",
     "amount": 0.8,
-    "duration": 2
+    "duration": 2.2
   },
   "hover": {
-    "preset": "flicker",
-    "amount": 1.4,
-    "duration": 0.7
+    "preset": "nudge",
+    "dir": 115,
+    "amount": 0.6,
+    "duration": 0.5
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "glow"

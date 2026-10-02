@@ -1,19 +1,29 @@
 {
   "name": "list-ordered",
-  "intent": "steps down its numbered items one by one",
+  "intent": "its numbers tap out a count while the lines wait in order",
   "loop": {
-    "preset": "nudge",
-    "dir": 90,
-    "amount": 0.4,
+    "preset": "pulse",
+    "amount": 0.25,
     "duration": 2.8
   },
   "hover": {
-    "preset": "nod"
+    "preset": "nod",
+    "amount": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.8,
+      "duration": 1.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "type",
-      "amount": 0.6
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.4
     },
     {
       "preset": "pop"

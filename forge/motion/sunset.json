@@ -1,17 +1,36 @@
 {
   "name": "sunset",
-  "intent": "glows like golden hour and sinks down when touched",
+  "intent": "golden hour glows as the arrow sinks; the sun drops on touch",
   "loop": {
     "preset": "glow",
-    "duration": 3.2,
-    "amount": 0.7
+    "amount": 0.7,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "nudge",
-    "dir": 90,
-    "amount": 0.8,
-    "duration": 0.7
+    "preset": "glow",
+    "amount": 1,
+    "duration": 0.9
   },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.5,
+      "duration": 3.2,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "breathe",
+      "origin": [
+        12,
+        17
+      ],
+      "amount": 0.9,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "drop",

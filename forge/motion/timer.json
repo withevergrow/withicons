@@ -1,25 +1,45 @@
 {
   "name": "timer",
-  "intent": "pulses like a stopwatch counting down",
+  "intent": "counts down with a steady beat, the crown clicks to start",
   "loop": {
     "preset": "pulse",
     "origin": [
       12,
       13.5
     ],
-    "amount": 0.5,
+    "amount": 0.3,
     "duration": 2
   },
   "hover": {
-    "preset": "ring",
+    "preset": "nod",
     "origin": [
       12,
-      2
+      13.5
     ],
     "amount": 0.6,
-    "duration": 0.9
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.5,
+      "delay": 0.08
+    }
   },
   "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        2
+      ],
+      "amount": 0.6,
+      "duration": 0.9
+    },
     {
       "preset": "tick",
       "origin": [
@@ -28,10 +48,6 @@
       ],
       "steps": 12,
       "duration": 6
-    },
-    {
-      "preset": "shake",
-      "amount": 0.4
     }
   ],
   "swap": [

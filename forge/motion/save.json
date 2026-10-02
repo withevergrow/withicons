@@ -1,16 +1,37 @@
 {
   "name": "save",
-  "intent": "presses down like a save button being committed",
+  "intent": "presses down to commit, the label settling a beat later",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.6,
-    "duration": 3.2
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nod",
-    "amount": 0.8,
-    "duration": 0.6
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.55
   },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.4,
+      "duration": 2.8,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pop"

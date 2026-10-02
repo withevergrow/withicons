@@ -42,6 +42,10 @@
 .ax-swap-ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--style-soft); color: var(--style-text); }
 .ax-swap-ic svg { grid-area: 1 / 1; width: 28px; height: 28px; }
 .ax-swap-row b { grid-column: 1 / -1; display: none; }
+.ax-swap-row b.ax-swap-word { display: inline; grid-column: auto; font-weight: 650; }
+.ax-swap-them { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ax-swap-ic.is-them { flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--paper-2); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); }
+.ax-swap-ic.is-them svg { width: 22px; height: 22px; }
 .ax-swap-note { text-align: center; font-size: 26px; color: var(--muted); margin: 4px 0 0; transform: rotate(-2deg); }
 
 /* ───────── picker ───────── */
@@ -161,18 +165,31 @@
 .ax-choose-card.is-us a { color: var(--sun) !important; }
 
 /* migration */
-.ax-map-wrap { overflow-x: auto; }
-.ax-map td:first-child, .ax-map td:nth-child(3) { white-space: nowrap; }
-.ax-map td code { word-break: normal !important; overflow-wrap: anywhere; }
-.ax-map td:nth-child(4) code { white-space: nowrap !important; }
-.ax-map td { vertical-align: middle; padding-block: 8px; }
+/* name map: their real icon + name | our real icon + name + code (style switchable) */
+.ax-map-tools { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin: 16px 0 12px; }
+.ax-map-tools-label { font: 700 12px/1.2 var(--font-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ax-map-wrap { overflow-x: visible; }
+.ax-map { table-layout: fixed; width: 100%; }
+.ax-map th, .ax-map td { width: 50%; vertical-align: middle; padding: 10px 16px; }
 .ax-map thead th { position: sticky; top: 0; z-index: 1; }
-.ax-map .ax-map-ic { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--paper-2); color: var(--ink); vertical-align: middle; margin-right: 8px; }
-.ax-map .ax-map-ic svg { width: 22px; height: 22px; }
-.ax-map .ax-arrow { color: var(--muted); width: 16px; padding-inline: 4px; }
-.ax-map .ax-arrow svg { display: block; width: 16px; height: 16px; max-width: none; }
+.ax-map thead .ax-map-us { background: color-mix(in srgb, var(--gs, var(--paper-2)) 70%, var(--paper)); }
+.ax-map .ax-map-cell { display: flex; align-items: center; gap: 14px; min-width: 0; color: inherit; text-decoration: none; }
+.ax-map a.ax-map-cell:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.ax-map .ax-map-ic { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; color: var(--ink); }
+.ax-map .ax-map-ic svg { width: 24px; height: 24px; max-width: none; }
+.ax-map .ax-map-ic.is-them { background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--rule); }
+.ax-map .ax-map-ic.is-us { background: color-mix(in srgb, var(--gs, var(--paper-2)) 80%, var(--paper)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--g, var(--ink)) 25%, transparent); transition: transform .25s; }
+.ax-map a.ax-map-cell:hover .ax-map-ic.is-us { transform: scale(1.06) rotate(-3deg); }
+.ax-map .ax-map-ic.is-none, .ax-map .ax-map-ic.is-q { background: transparent; color: var(--muted); border: 1px dashed var(--rule); }
+.ax-map .ax-map-names { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ax-map .ax-map-names b { font-weight: 650; }
+.ax-map code { word-break: normal !important; overflow-wrap: anywhere; white-space: normal !important; }
+.ax-map .ax-map-term { font-weight: 600; }
 .ax-map tbody tr { transition: background .2s; }
-.ax-map tbody tr:hover { background: color-mix(in srgb, var(--gs) 55%, transparent); }
+.ax-map tbody tr:hover { background: color-mix(in srgb, var(--gs) 40%, transparent); }
+.ax-map[data-busy] .ax-map-ic.is-us svg { opacity: .35; }
+.ax-map-note { font-size: 13.5px; color: var(--muted); margin: 10px 2px 0; line-height: 1.5; }
+.ax-map-note a { color: inherit; }
 .ax-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
 .ax-before-after .pg-code { margin: 0; }
 .ax-conv { margin-top: 22px; padding: clamp(16px, 2.4vw, 24px); border-radius: var(--radius-l); background: var(--gs); }
@@ -274,17 +291,15 @@
   .ax-compare .ax-table:not(.ax-matrix) tbody th { grid-column: 1 / -1; width: auto; border-bottom: 0; padding-bottom: 6px; }
   .ax-compare .ax-table:not(.ax-matrix) td { width: auto; }
   .ax-compare .ax-table:not(.ax-matrix) td::before { content: attr(data-col); display: block; font: 700 11px/1.2 var(--font-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 6px; }
-  /* name map reflows: their name | our icon, with "use it" under ours; no horizontal scroll, no mid-word breaks */
-  .ax-map, .ax-map thead, .ax-map tbody { display: block; }
-  .ax-map tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); border-bottom: 1px solid var(--rule); }
-  .ax-map tbody tr:last-child { border-bottom: 0; }
-  .ax-map th, .ax-map td { border-bottom: 0 !important; }
-  .ax-map td:nth-child(2), .ax-map th:nth-child(2), .ax-map th:nth-child(4) { display: none; }
-  .ax-map td:first-child { grid-row: 1 / span 2; align-self: center; white-space: normal; }
-  .ax-map td:nth-child(3) { white-space: normal; padding-bottom: 2px; }
-  .ax-map td:nth-child(4) { grid-column: 2; padding-top: 0; }
-  .ax-map td:nth-child(3) a { display: inline-flex; align-items: center; overflow-wrap: anywhere; }
-  .ax-map .ax-map-ic { flex: none; width: 30px; height: 30px; margin-right: 8px; }
+  /* name map: the two columns stay side by side; codes wrap instead of scrolling */
+  .ax-map th, .ax-map td { padding: 10px; }
+  .ax-map .ax-map-cell { gap: 10px; }
+  .ax-map .ax-map-ic { width: 38px; height: 38px; }
+  .ax-map-tools { align-items: stretch; flex-direction: column; min-width: 0; max-width: 100%; }
+  .ax-map-styles { flex-wrap: nowrap; overflow-x: auto; min-width: 0; max-width: calc(100% + 8px); padding-bottom: 4px; margin-inline: -4px; padding-inline: 4px; scrollbar-width: none; }
+  .ax-map-styles .chip { flex: none; }
+  .ax-map code { font-size: 11.5px !important; overflow-wrap: break-word; }
+  .ax-map .ax-map-names b { font-size: 15px; }
   .ax-strip span { width: 38px; height: 38px; border-radius: 11px; }
   .ax-strip svg { width: 24px; height: 24px; }
 }

@@ -1,8 +1,9 @@
 {
   "name": "gem",
-  "intent": "sparkles softly, then turns to flash its facets on hover",
-  "loop": { "preset": "twinkle", "origin": [12, 12], "amount": 0.6, "duration": 2.6 },
+  "intent": "glints softly like a cut stone, turns to flash its facets on hover",
+  "loop": { "preset": "twinkle", "origin": [12, 12], "amount": 0.45, "duration": 2.8 },
   "hover": { "preset": "flip", "origin": [12, 12], "duration": 0.9 },
+  "deco": "twinkle",
   "alt": [ { "preset": "glow", "amount": 0.8 }, { "preset": "pop", "origin": [12, 21] }, { "preset": "float", "amount": 0.6 } ],
   "swap": [ { "to": "gem@solid", "effect": "scale" }, { "to": "crown", "effect": "morph" } ]
 }

@@ -1,8 +1,9 @@
 {
   "name": "fish",
-  "intent": "swishes its tail as it swims along",
-  "loop": { "preset": "sway", "origin": [16, 12], "amount": 0.8, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 0, "amount": 1, "duration": 0.7 },
-  "alt": [ { "preset": "float", "amount": 0.7 }, { "preset": "pass", "dir": 0, "duration": 2.2 }, { "preset": "wiggle", "origin": [16, 12], "amount": 0.7 } ],
-  "swap": [ { "to": "fish@solid", "effect": "scale" } ]
+  "intent": "swishes its tail from the head and darts ahead when you hover",
+  "loop": {"preset": "sway", "origin": [16,12], "amount": 0.8, "duration": 2.4},
+  "hover": {"preset": "nudge", "dir": 0, "amount": 1, "duration": 0.7},
+  "deco": "float",
+  "alt": [ {"preset": "float", "amount": 0.7}, {"preset": "pass", "dir": 0, "duration": 2.2}, {"preset": "wiggle", "origin": [16,12], "amount": 0.7} ],
+  "swap": [ {"to": "fish@solid", "effect": "scale"} ]
 }

@@ -24,6 +24,7 @@
 // CSS variables fall back to currentColor.
 import { bbox, pointInRing, distToPolyline } from '../kernel/geom.mjs'
 import { parseSegs, segPt, segTan, segFlat, segLen, trimStart, trimEnd, chainLen, chainD, nums } from './_blueprint-path.mjs'
+import { textInfo } from './_live-text.mjs'
 
 const D2R = Math.PI / 180
 const K = {
@@ -182,17 +183,36 @@ const dashArc = (c, r, t0, t1) => {
 const ringD = (p, r) => 'M' + nums([p[0] + r, p[1]]) + 'A' + nums([r, r, 0, '1', '0', p[0] - r, p[1]]) + 'A' + nums([r, r, 0, '1', '0', p[0] + r, p[1]])
 
 // ---------------------------------------------------------------------------
+// do two plates' centrelines run together (within 0.3u) for more than 0.9u?
+function platesOverlap(lines) {
+  for (const pl of new Set(lines.map(s => s.plate))) {
+    const others = lines.filter(s => s.plate !== pl)
+    if (!others.length) continue
+    const near = makeIndex(others.map(s => s.flat.pts))
+    for (const s of lines.filter(q => q.plate === pl)) {
+      let run = 0
+      const P = s.flat.pts
+      for (let k = 0; k < P.length; k++) {
+        const step = k ? d2(P[k], P[k - 1]) : 0
+        if (near(P[k], 0.5) < 0.3) { run += step; if (run > 0.9) return true } else run = 0
+      }
+    }
+  }
+  return false
+}
+
 function analyse(icon) {
   const subs = []
   for (const p of icon.paths || []) {
     let parsed = []
     try { parsed = parseSegs(p.d || '') } catch { parsed = [] }
-    for (const s of parsed) subs.push({ ...s, plate: p.plate || 'K' })
+    const text = !!textInfo(p)
+    for (const s of parsed) subs.push({ ...s, plate: p.plate || 'K', text })
   }
   const lines = [], dots = []
   for (const s of subs) {
     const L = chainLen(s.segs)
-    if (L < 0.45) dots.push(segPt(s.segs[0], 0.5))
+    if (L < 0.45) { const p = segPt(s.segs[0], 0.5); p.plate = s.plate; dots.push(p) }
     else { s.L = L; s.flat = flatChain(s.segs); lines.push(s) }
   }
   return { lines, dots }
@@ -295,6 +315,7 @@ function objectD(lines, nodes) {
   const G = K.node.gap + K.obj / 2   // square caps reach half a stroke past the cut
   let d = ''
   lines.forEach((s, si) => {
+    if (s.skip) return
     const c = cut[si], S = s.segs
     const J = [...c.joints].sort((a, b) => a - b)
     if (!J.length && !c.start && !c.end) { d += chainD(S, s.closed); return }
@@ -384,7 +405,9 @@ function render(icon) {
     for (const r of fillRings) if (distToPolyline(p, r, true) < 1.6) return false
     return true
   }
-  const nodes = pickNodes(candidates(lines), lines, dots, axes, interior)
+  // Live-icon text is lettering, not geometry: no control nodes, centre marks or fillet construction on it
+  const shapes = lines.filter(s => !s.text)
+  const nodes = pickNodes(candidates(shapes), lines, dots, axes, interior)
 
   // ---- construction
   const [lo, hi] = K.canvas
@@ -411,7 +434,7 @@ function render(icon) {
   }
   // circle centre marks
   const marks = []
-  for (const g of centres(lines)) {
+  for (const g of centres(shapes)) {
     if (marks.length >= 2) break
     if (marks.some(m => d2(m.c, g.c) < 1.5)) continue
     marks.push(g)
@@ -424,7 +447,7 @@ function render(icon) {
 
   // fillets: a rounded corner shows the sharp corner it was cut from
   const fil = []
-  for (const s of lines) {
+  for (const s of shapes) {
     const S = s.segs, n = S.length
     for (let j = 0; j < n; j++) {
       const g = S[j]
@@ -469,17 +492,34 @@ function render(icon) {
   }
 
   // ---- emit (back to front)
-  const con = op => ({ color: ACCENT, stroke: 'currentColor', 'stroke-width': K.con.w, 'stroke-opacity': op })
+  // Motion parts (forge/MOTION.md "Parts choreography"): construction, centre lines and ticks are scaffolding,
+  // not the object (wm-deco). The object line, its dots and its control nodes are emitted per skeleton plate
+  // (wm-k / wm-a / wm-s) when the icon has more than one plate; a node shared by two plates stays with K.
+  const deco = { class: 'wm-deco' }
+  const con = op => ({ color: ACCENT, stroke: 'currentColor', 'stroke-width': K.con.w, 'stroke-opacity': op, ...deco })
   if (key) out.push(['path', { d: key, ...con(K.con.key) }])
   if (thin) out.push(['path', { d: thin, ...con(K.con.op) }])
   if (chain) out.push(['path', { d: chain, ...con(K.con.op) }])
-  if (ticks) out.push(['path', { d: ticks, color: ACCENT, stroke: 'currentColor', 'stroke-width': K.dim.w, 'stroke-opacity': K.dim.op }])
-  const obj = objectD(lines, nodes)
-  if (obj) out.push(['path', { d: obj }])
-  // dots: a tiny ring under the inherited stroke reads as a solid disc that follows strokeWidth
-  if (dots.length) out.push(['path', { d: dots.map(p => ringD(p, 0.3)).join('') }])
-  const nd = nodes.map(n => ringD(n.p, K.node.r)).join('')
-  if (nd) out.push(['path', { d: nd, color: ACCENT, stroke: 'currentColor', 'stroke-width': K.node.w }])
+  if (ticks) out.push(['path', { d: ticks, color: ACCENT, stroke: 'currentColor', 'stroke-width': K.dim.w, 'stroke-opacity': K.dim.op, ...deco }])
+  const nodePlate = n => { const ps = new Set(n.inc.map(v => lines[v.si].plate)); return ps.size === 1 ? [...ps][0] : 'K' }
+  const plates = [...new Set([...lines.map(s => s.plate), ...dots.map(p => p.plate)])]
+  // plates that run along each other (a lid on a rim) would double-paint the shared edge: keep those fused
+  const split = plates.length > 1 && !platesOverlap(lines)
+  const groups = split ? ['K', 'A', 'S'].filter(p => plates.includes(p)).concat(plates.filter(p => !'KAS'.includes(p))) : [null]
+  const tag = p => split && 'KAS'.includes(p) ? { class: 'wm-' + p.toLowerCase() } : {}
+  const objParts = [], dotParts = [], nodeParts = []
+  for (const pl of groups) {
+    const mine = s => pl === null || s.plate === pl
+    // objectD indexes nodes by line, so it is given the full line list with other plates' lines blanked
+    const obj = objectD(lines.map(s => mine(s) ? s : { ...s, segs: [], skip: true }), nodes)
+    if (obj) objParts.push(['path', { d: obj, ...tag(pl) }])
+    // dots: a tiny ring under the inherited stroke reads as a solid disc that follows strokeWidth
+    const dd = dots.filter(mine).map(p => ringD(p, 0.3)).join('')
+    if (dd) dotParts.push(['path', { d: dd, ...tag(pl) }])
+    const nd = nodes.filter(n => pl === null || nodePlate(n) === pl).map(n => ringD(n.p, K.node.r)).join('')
+    if (nd) nodeParts.push(['path', { d: nd, color: ACCENT, stroke: 'currentColor', 'stroke-width': K.node.w, ...tag(pl) }])
+  }
+  out.push(...objParts, ...dotParts, ...nodeParts)
   return out
 }
 

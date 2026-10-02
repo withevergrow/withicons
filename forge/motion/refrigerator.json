@@ -1,26 +1,32 @@
 {
   "name": "refrigerator",
-  "intent": "hums quietly like a fridge keeping food cold",
+  "intent": "stands steady with a quiet hum like a fridge keeping food cold",
   "loop": {
-    "preset": "breathe",
+    "preset": "pulse",
     "origin": [
       12,
       21.5
     ],
-    "amount": 0.4,
-    "duration": 4
+    "amount": 0.25,
+    "duration": 3.6
   },
   "hover": {
-    "preset": "shake",
-    "amount": 0.5
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "type",
       "amount": 0.5
     },
     {
-      "preset": "pop"
+      "preset": "shake",
+      "amount": 0.5
     }
   ],
   "swap": [

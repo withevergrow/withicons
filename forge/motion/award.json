@@ -1,38 +1,10 @@
 {
   "name": "award",
-  "intent": "shines like a medal, then celebrates a win",
-  "loop": {
-    "preset": "glow",
-    "amount": 0.7,
-    "duration": 2.6
-  },
-  "hover": {
-    "preset": "tada"
-  },
-  "alt": [
-    {
-      "preset": "twinkle"
-    },
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "sway",
-      "origin": [
-        12,
-        2.5
-      ],
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "award@solid",
-      "effect": "scale"
-    },
-    {
-      "to": "badge-check",
-      "effect": "flip"
-    }
-  ]
+  "intent": "medal shines while its ribbon flutters; pops proudly on hover",
+  "loop": { "preset": "glow", "amount": 0.7, "duration": 2.8 },
+  "hover": { "preset": "pop", "amount": 1.1 },
+  "parts": { "A": { "preset": "sway", "origin": [12, 14.5], "amount": 0.5, "duration": 2.8, "delay": 0.2 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "tada" }, { "preset": "twinkle" }, { "preset": "sway", "origin": [12, 2.5], "amount": 0.6 }],
+  "swap": [{ "to": "award@solid", "effect": "scale" }, { "to": "badge-check", "effect": "flip" }]
 }

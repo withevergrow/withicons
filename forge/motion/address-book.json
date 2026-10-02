@@ -1,40 +1,10 @@
 {
   "name": "address-book",
-  "intent": "opens up a little like you're flipping to a contact",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      3.5,
-      21.5
-    ],
-    "amount": 0.4,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "tilt",
-    "origin": [
-      3.5,
-      21.5
-    ],
-    "amount": 1,
-    "duration": 0.8
-  },
-  "alt": [
-    {
-      "preset": "flip"
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "user",
-      "effect": "flip"
-    },
-    {
-      "to": "phone",
-      "effect": "fade"
-    }
-  ]
+  "intent": "book rests while the contact on its cover nods hello",
+  "loop": { "preset": "float", "amount": 0.25, "duration": 3.4 },
+  "hover": { "preset": "nod", "amount": 0.8, "duration": 0.7 },
+  "parts": { "A": { "preset": "nod", "origin": [11, 12], "amount": 0.6, "duration": 3.4, "delay": 0.1 } },
+  "deco": "float",
+  "alt": [{ "preset": "tilt", "origin": [3.5, 21.5], "amount": 0.7 }, { "preset": "flip" }, { "preset": "pop" }],
+  "swap": [{ "to": "user", "effect": "flip" }, { "to": "phone", "effect": "fade" }]
 }

@@ -1,32 +1,36 @@
 {
   "name": "hammer",
-  "intent": "swings from the handle like it's tapping a nail",
+  "intent": "rocks on its grip, then taps a nail with a quick rebound",
   "loop": {
     "preset": "rock",
     "origin": [
       5.4,
       19.3
     ],
-    "amount": 0.7,
-    "duration": 1.8
+    "amount": 0.45,
+    "duration": 2.6
   },
   "hover": {
-    "preset": "wiggle",
+    "preset": "ring",
     "origin": [
       5.4,
       19.3
     ],
-    "amount": 1.4,
-    "duration": 0.6
+    "amount": 0.9,
+    "duration": 0.8
   },
+  "deco": "still",
   "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        5.4,
+        19.3
+      ]
+    },
     {
       "preset": "nod",
       "amount": 0.8
-    },
-    {
-      "preset": "shake",
-      "amount": 0.5
     }
   ],
   "swap": [

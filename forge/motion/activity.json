@@ -1,22 +1,24 @@
 {
   "name": "activity",
-  "intent": "traces its pulse line like a live monitor",
+  "intent": "traces its pulse like a live monitor; thumps like a heartbeat",
   "loop": {
     "preset": "draw",
-    "duration": 2.2
+    "duration": 2.4
   },
   "hover": {
-    "preset": "draw",
+    "preset": "beat",
+    "amount": 0.8,
     "duration": 0.8
   },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "pass",
+      "dir": 180
+    },
     {
       "preset": "pulse",
       "amount": 0.6
-    },
-    {
-      "preset": "pass",
-      "dir": 0
     }
   ],
   "swap": [

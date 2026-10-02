@@ -1,30 +1,32 @@
 {
   "name": "shopping-bag",
-  "intent": "swings from its handle like a bag being carried",
+  "intent": "swings from its handle like a bag set down, body a beat behind",
   "loop": {
-    "preset": "sway",
-    "origin": [
-      12,
-      3
-    ],
-    "amount": 0.5,
-    "duration": 3
+    "preset": "ring",
+    "origin": [12, 3],
+    "amount": 0.3,
+    "duration": 3.4
   },
   "hover": {
     "preset": "ring",
-    "origin": [
-      12,
-      3
-    ],
+    "origin": [12, 3],
     "amount": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "ring",
+      "delay": 0.06
+    }
+  },
+  "deco": "float",
   "alt": [
     {
-      "preset": "pop"
+      "preset": "bounce",
+      "origin": [12, 21.5],
+      "amount": 0.6
     },
     {
-      "preset": "bounce",
-      "amount": 0.7
+      "preset": "pop"
     }
   ],
   "swap": [

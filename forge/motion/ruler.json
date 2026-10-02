@@ -1,11 +1,11 @@
 {
   "name": "ruler",
-  "intent": "slides along its edge like it's measuring",
+  "intent": "slides along its edge like it is measuring",
   "loop": {
     "preset": "nudge",
     "dir": 315,
-    "amount": 0.5,
-    "duration": 2.6
+    "amount": 0.4,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nudge",
@@ -13,6 +13,7 @@
     "amount": 1,
     "duration": 0.7
   },
+  "deco": "still",
   "alt": [
     {
       "preset": "tilt",

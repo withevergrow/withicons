@@ -1,10 +1,10 @@
 {
   "name": "skip-forward",
-  "intent": "jumps ahead to the next track",
+  "intent": "the arrow bumps into the bar: on to the next track",
   "loop": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 2.2
   },
   "hover": {
@@ -13,6 +13,18 @@
     "amount": 0.8,
     "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        19.5,
+        12
+      ],
+      "amount": 0.4,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "nudge",

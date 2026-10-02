@@ -1,21 +1,42 @@
 {
   "name": "calendar-check",
-  "intent": "pulses gently, ticks the date off on hover",
+  "intent": "the check stamps onto the page, confirming the date",
   "loop": {
     "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.4
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.25,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "draw",
-    "duration": 0.9
+    "preset": "pop",
+    "origin": [
+      12,
+      15
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12.25,
+        15.25
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
   },
   "alt": [
     {
-      "preset": "nod"
+      "preset": "draw",
+      "duration": 0.9
     },
     {
-      "preset": "pop"
+      "preset": "nod",
+      "amount": 0.5
     }
   ],
   "swap": [

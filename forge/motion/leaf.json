@@ -19,6 +19,7 @@
     "amount": 1.4,
     "duration": 1
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "breathe"

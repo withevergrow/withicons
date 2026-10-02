@@ -1,17 +1,27 @@
 {
   "name": "sort",
-  "intent": "nudges downward as the list reorders",
+  "intent": "the arrow slides down past the rows as the list reorders",
   "loop": {
     "preset": "nudge",
     "dir": 90,
-    "amount": 0.5,
+    "amount": 0.25,
     "duration": 2.6
   },
   "hover": {
     "preset": "nudge",
     "dir": 90,
-    "amount": 1.1
+    "amount": 0.35,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.8,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pass",

@@ -1,20 +1,29 @@
 {
   "name": "user-x",
-  "intent": "shakes no like access was refused",
+  "intent": "person rests while the X twitches no, shakes no on hover",
   "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.5,
+    "preset": "float",
+    "amount": 0.3,
     "duration": 3.4
   },
   "hover": {
     "preset": "shake",
-    "amount": 1,
+    "amount": 0.8,
     "duration": 0.6
   },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        19,
+        10
+      ],
+      "amount": 1,
+      "duration": 3.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "wiggle"

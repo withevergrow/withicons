@@ -1,34 +1,10 @@
 {
   "name": "redo",
-  "intent": "leans forward, stepping the last action ahead again",
-  "loop": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.5,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 1,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        15
-      ]
-    },
-    {
-      "preset": "spin-once"
-    }
-  ],
-  "swap": [
-    {
-      "to": "undo",
-      "effect": "flip"
-    }
-  ]
+  "intent": "the arrowhead leads the curve forward, stepping the action ahead",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.3, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 1, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 0, "amount": 0.45, "duration": 2.4, "delay": 0.06 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "tilt", "origin": [9, 15] }, { "preset": "spin-once" } ],
+  "swap": [ { "to": "undo", "effect": "flip" } ]
 }

@@ -1,8 +1,9 @@
 {
   "name": "angry",
-  "intent": "fumes quietly, then shakes with rage when you poke it",
-  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.5, "duration": 1.8 },
-  "hover": { "preset": "shake", "amount": 1.2, "duration": 0.6 },
-  "alt": [ { "preset": "wiggle", "origin": [12, 21.5] }, { "preset": "flicker", "amount": 0.6 }, { "preset": "zoom", "amount": 0.6 } ],
-  "swap": [ { "to": "meh", "effect": "morph" }, { "to": "smile", "effect": "morph" }, { "to": "angry@solid", "effect": "fade" } ]
+  "intent": "swells red as it fumes, then shakes with rage on hover",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.4, "duration": 1.8 },
+  "hover": { "preset": "shake", "amount": 1.1, "duration": 0.6 },
+  "deco": "still",
+  "alt": [{ "preset": "wiggle", "origin": [12, 21.5] }, { "preset": "zoom", "amount": 0.6 }],
+  "swap": [{ "to": "meh", "effect": "morph" }, { "to": "smile", "effect": "morph" }, { "to": "angry@solid", "effect": "fade" }]
 }

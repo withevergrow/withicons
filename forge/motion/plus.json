@@ -1,35 +1,9 @@
 {
   "name": "plus",
-  "intent": "pops forward, ready to add something new",
-  "loop": {
-    "preset": "pulse",
-    "amount": 0.6,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "spin-once",
-      "duration": 0.6
-    },
-    {
-      "preset": "breathe"
-    }
-  ],
-  "swap": [
-    {
-      "to": "minus",
-      "effect": "rotate"
-    },
-    {
-      "to": "close",
-      "effect": "rotate"
-    },
-    {
-      "to": "check",
-      "effect": "morph"
-    }
-  ]
+  "intent": "pulses softly, pops forward, ready to add something new",
+  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "pop" },
+  "deco": "twinkle",
+  "alt": [ { "preset": "spin-once", "duration": 0.6 }, { "preset": "breathe" } ],
+  "swap": [ { "to": "minus", "effect": "rotate" }, { "to": "close", "effect": "rotate" }, { "to": "check", "effect": "morph" } ]
 }

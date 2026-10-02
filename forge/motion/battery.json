@@ -1,16 +1,22 @@
 {
   "name": "battery",
-  "intent": "fills up with charge, cell by cell",
+  "intent": "the cells refill with charge inside a steady case",
   "loop": {
-    "preset": "fill",
-    "duration": 2.4,
-    "amount": 0.8
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
   },
   "hover": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.5,
-    "duration": 0.5
+    "preset": "fill",
+    "amount": 1,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "delay": 0.15
+    }
   },
   "alt": [
     {

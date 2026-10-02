@@ -1,9 +1,13 @@
 {
   "name": "message-square",
-  "intent": "breathes like a comment waiting, pops from its tail",
+  "intent": "swells from its tail like a comment waiting, pops on hover",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
+    "preset": "pulse",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 0.3,
     "duration": 3
   },
   "hover": {
@@ -11,8 +15,10 @@
     "origin": [
       3,
       21
-    ]
+    ],
+    "duration": 0.5
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "type",

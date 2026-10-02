@@ -1,37 +1,10 @@
 {
   "name": "file-image",
-  "intent": "floats like a photo, zooms in when you look",
-  "loop": {
-    "preset": "float",
-    "amount": 0.4,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "zoom",
-    "amount": 0.6,
-    "duration": 0.7
-  },
-  "alt": [
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        21.5
-      ],
-      "amount": 0.6
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "image",
-      "effect": "scale"
-    },
-    {
-      "to": "file",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the page rests while its picture slowly zooms like a slideshow",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "zoom", "origin": [12, 15], "amount": 0.25, "duration": 0.6 },
+  "parts": { "A": { "preset": "zoom", "origin": [12, 15], "amount": 0.25 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "tilt", "origin": [12, 21.5], "amount": 0.6 }, { "preset": "pop" }],
+  "swap": [{ "to": "image", "effect": "scale" }, { "to": "file", "effect": "fade" }]
 }

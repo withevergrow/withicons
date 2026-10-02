@@ -1,8 +1,9 @@
 {
   "name": "arrow-up-down",
-  "intent": "bobs up and down to show it goes both ways",
-  "loop": { "preset": "float", "amount": 0.6, "duration": 2.6 },
-  "hover": { "preset": "nod", "amount": 1.2, "duration": 0.6 },
-  "alt": [ { "preset": "nudge", "dir": 270, "amount": 0.8 }, { "preset": "flip" } ],
-  "swap": [ { "to": "arrow-left-right", "effect": "rotate" }, { "to": "sort", "effect": "fade" } ]
+  "intent": "stretches up and down at once",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "pulse", "amount": 0.7, "duration": 0.6 },
+  "parts": { "A": { "preset": "pulse", "amount": 0.7 } },
+  "alt": [{ "preset": "float", "amount": 0.6 }, { "preset": "flip" }],
+  "swap": [{ "to": "arrow-left-right", "effect": "rotate" }, { "to": "sort", "effect": "fade" }]
 }

@@ -1,7 +1,47 @@
 {
   "name": "school",
-  "intent": "the flag flutters gently over the school",
-  "loop":  { "preset": "sway", "origin": [12, 21], "amount": 0.35, "duration": 3.4 },
-  "hover": { "preset": "tada", "origin": [12, 21], "amount": 0.7 },
-  "alt":   [ { "preset": "bounce", "amount": 0.6 }, { "preset": "pop" } ]
+  "intent": "stands firm while the flag on its roof flutters in the breeze",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.25,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.6,
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ]
 }

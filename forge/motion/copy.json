@@ -1,32 +1,10 @@
 {
   "name": "copy",
-  "intent": "breathes softly, pops when you copy",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.6,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "nudge",
-      "dir": 315,
-      "amount": 0.5
-    },
-    {
-      "preset": "jelly"
-    }
-  ],
-  "swap": [
-    {
-      "to": "check",
-      "effect": "scale"
-    },
-    {
-      "to": "paste",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the two sheets spread apart as a copy is made, then settle",
+  "loop": { "preset": "nudge", "dir": 45, "amount": 0.25, "duration": 2.6 },
+  "hover": { "preset": "nudge", "dir": 45, "amount": 0.7, "duration": 0.5 },
+  "parts": { "A": { "preset": "nudge", "dir": 225, "amount": 0.25, "duration": 2.6, "delay": 0.06 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "pop" }, { "preset": "jelly" } ],
+  "swap": [ { "to": "check", "effect": "scale" }, { "to": "paste", "effect": "fade" } ]
 }

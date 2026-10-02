@@ -1,14 +1,14 @@
 {
   "name": "handshake",
-  "intent": "the hands pump up and down, sealing the deal",
+  "intent": "the clasped hands pump up and down, sealing the deal",
   "loop": {
     "preset": "nod",
     "origin": [
       12,
       12.5
     ],
-    "amount": 0.4,
-    "duration": 2.4
+    "amount": 0.35,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nod",
@@ -16,16 +16,18 @@
       12,
       12.5
     ],
-    "amount": 1,
+    "amount": 0.9,
     "duration": 0.7
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "jelly",
       "origin": [
         12,
         17
-      ]
+      ],
+      "amount": 0.6
     },
     {
       "preset": "pop"

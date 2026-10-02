@@ -1,46 +1,9 @@
 {
   "name": "star",
   "intent": "twinkles like a little star in the night sky",
-  "loop": {
-    "preset": "twinkle",
-    "origin": [
-      12,
-      12.6
-    ],
-    "amount": 0.7,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "pop",
-    "origin": [
-      12,
-      12.6
-    ],
-    "amount": 1.2
-  },
-  "alt": [
-    {
-      "preset": "spin-once",
-      "origin": [
-        12,
-        12.6
-      ]
-    },
-    {
-      "preset": "glow"
-    },
-    {
-      "preset": "tada",
-      "origin": [
-        12,
-        12.6
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "star@solid",
-      "effect": "scale"
-    }
-  ]
+  "loop": { "preset": "twinkle", "origin": [12, 12.6], "amount": 0.6, "duration": 2.6 },
+  "hover": { "preset": "pop", "origin": [12, 12.6], "amount": 1.2 },
+  "deco": "twinkle",
+  "alt": [ { "preset": "spin-once", "origin": [12, 12.6] }, { "preset": "glow" }, { "preset": "tada", "origin": [12, 12.6] } ],
+  "swap": [ { "to": "star@solid", "effect": "scale" } ]
 }

@@ -5,7 +5,8 @@ This file is for coding agents (Claude Code, Cursor, Codex, Copilot) that change
 
 ## What this repo is
 
-500 icons x 12 styles = 6,000 icons, all generated from 500 hand-authored skeletons, plus one optional animation spec and 20-30 colour palettes per icon.
+500 icons x 15 styles = 7,500 icons, all generated from 500 hand-authored skeletons, plus one optional animation spec and 20-30 colour palettes per icon,
+and a separate set of up to 50 **live icons** (content you set: dates, times, counts, labels) whose generators every style renders.
 
 ```
 forge/icons/<name>.json     the ONLY hand-drawn input: one skeleton per icon (paths + plates, fills, cutouts, aliases, synonyms, tags)
@@ -13,9 +14,12 @@ forge/manifest.json         icon list + categories
 forge/motion/<name>.json     hand-authored animation spec per icon (loop, hover, alt presets, swaps); contract: forge/MOTION.md
 forge/palettes/<name>.json   20-30 colour palettes picked per icon (ten roles: ink c1-c4 tint accent shadow shine edge);
                              contract: forge/PALETTES.md; ships as @withicons/core/palettes/* (+ palette-map.js)
-forge/styles/<style>.mjs    12 deterministic renderers, in this order everywhere (STYLE_ORDER in forge/lib/emit-core.mjs):
+forge/styles/<style>.mjs    15 deterministic renderers, in this order everywhere (STYLE_ORDER in forge/lib/emit-core.mjs):
                             line solid duo gloss engrave blueprint sketch | palette styles: glass kawaii sticker pixel retro
+                            | studio styles: luxe bauhaus skeuo (site group "Studio"; role-named vars --with-<style>-<role>)
                             (palette colours are var(--with-<style>-<role>, #hex), ink stays currentColor)
+forge/dynamic/<name>.mjs    live icon generators: params -> skeleton, rendered by every style (forge/DYNAMIC.md);
+                            ships as @withicons/dynamic (emit-dynamic) and site/vendor/dynamic/dynamic.js (live.html)
 forge/kernel/**             geometry + boolean ops shared by renderers
 forge/lib/load.mjs          loads/prepares skeletons
 forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generated, gitignored); emit-motion -> packages/motion
@@ -23,7 +27,7 @@ forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generate
 forge/tools/site-data.mjs   site data (site/data/meta.js, style-<name>.js); build.mjs calls its build(ctx)
 forge/tools/site-seo.mjs    generated pages: site/icons/*.html, categories/, styles/, sitemap, robots, llms*.txt, icons.json, og/
 forge/build.mjs             renders everything once, runs every emitter, then site-data + site-seo
-packages/*                  npm packages @withicons/{core,react,vue,svelte,angular,solid,web,static,search,mcp,motion} + CLI `withicons`
+packages/*                  npm packages @withicons/{core,react,vue,svelte,angular,solid,web,static,search,mcp,motion,dynamic} + CLI `withicons`
 site/                       zero-build static website (vanilla HTML/CSS/JS), deployed to withicons.com
 skills/with-icons/          the agent skill for USERS of the library (reference/icons.md is generated)
 infra/                      AWS CloudFormation (S3 + CloudFront + Lambda API + OIDC role + budget)
@@ -56,6 +60,11 @@ real 16/24px (`--small`), on light and `--dark`.
 
 - **Read `forge/CONTRACT.md` before touching icons or styles.** Grid, keylines, plates, fills/cutouts, renderer contract.
   Reuse the shared parts in `forge/PARTS.md` exactly.
+- **Adding a style** touches more than its renderer: `STYLE_ORDER`/`PALETTE_STYLES` (forge/lib/emit-core.mjs), the site lists
+  (`ORDER`, `GROUPS`, `INFO`, `ROOTS` in site/js/site.js; `ORDER`/`GROUPS`/`HEX`/`SAY` in library.js; `ORDER`/`HEX`/`CLABEL`
+  in editor.js), its colour trio + `-on` in site/css/tokens.css (light and dark) and library.css, forge/tools/site-seo.mjs,
+  forge/tools/site-pages/lib.mjs, the home packs (`LANES` in forge/tools/site-data.mjs) and the search words
+  (packages/search/src/engine.mjs `STYLE_WORDS` + test). Counts and copy are data-driven; never hard-code "15".
 - **Originality**: never copy path data from Lucide, Feather, Heroicons, Tabler, Phosphor, Material, Font Awesome
   or any other set.
 - **Deterministic**: same input, byte-identical output. Use the kernel `rng(seed)`, never `Math.random()` or dates.

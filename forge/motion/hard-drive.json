@@ -1,8 +1,55 @@
 {
   "name": "hard-drive",
-  "intent": "hums softly while reading and writing data",
-  "loop": { "preset": "type", "amount": 0.5, "duration": 1.4 },
-  "hover": { "preset": "jelly", "origin": [12, 22], "amount": 0.6, "duration": 0.6 },
-  "alt": [ { "preset": "pulse", "origin": [12, 13.5], "amount": 0.4 }, { "preset": "glow", "amount": 0.6 } ],
-  "swap": [ { "to": "save", "effect": "fade" }, { "to": "database", "effect": "flip" }, { "to": "server", "effect": "slide-up" } ]
+  "intent": "the read arm sweeps across the platter while data moves",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      22
+    ],
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "rock",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.8,
+      "duration": 2.8,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.5
+    },
+    {
+      "preset": "glow",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "save",
+      "effect": "fade"
+    },
+    {
+      "to": "database",
+      "effect": "flip"
+    },
+    {
+      "to": "server",
+      "effect": "slide-up"
+    }
+  ]
 }

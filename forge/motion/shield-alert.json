@@ -1,22 +1,42 @@
 {
   "name": "shield-alert",
-  "intent": "pulses like a security warning that needs attention",
+  "intent": "shield holds steady while its warning mark throbs for attention",
   "loop": {
     "preset": "pulse",
-    "amount": 0.6,
-    "duration": 1.8
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2
   },
   "hover": {
-    "preset": "shake",
-    "amount": 0.8,
-    "duration": 0.5
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 1
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 1.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "glow"
+      "preset": "shake",
+      "amount": 0.7
     },
     {
-      "preset": "flicker"
+      "preset": "glow"
     }
   ],
   "swap": [

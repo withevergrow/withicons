@@ -1,23 +1,31 @@
 {
   "name": "battery-charging",
-  "intent": "fills with power while the bolt flickers",
+  "intent": "the bolt flickers with current while the cell charges",
   "loop": {
-    "preset": "fill",
-    "duration": 1.8
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
   },
   "hover": {
-    "preset": "flicker",
+    "preset": "glow",
     "amount": 1,
     "duration": 0.8
   },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "amount": 0.8,
+      "duration": 2.4
+    }
+  },
   "alt": [
-    {
-      "preset": "glow",
-      "amount": 0.8
-    },
     {
       "preset": "pulse",
       "amount": 0.5
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.6
     }
   ],
   "swap": [

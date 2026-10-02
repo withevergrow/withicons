@@ -1,25 +1,34 @@
 {
   "name": "flower",
-  "intent": "breathes softly like a bloom opening, twirls when touched",
+  "intent": "the bloom swells softly, its heart pulsing a beat behind",
   "loop": {
-    "preset": "breathe",
-    "duration": 3.4,
-    "amount": 0.8
+    "preset": "pulse",
+    "origin": [12, 12],
+    "amount": 0.35,
+    "duration": 3.4
   },
   "hover": {
     "preset": "spin-once",
+    "origin": [12, 12],
     "duration": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [12, 12],
+      "amount": 0.8,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "pop"
     },
     {
-      "preset": "twinkle"
-    },
-    {
-      "preset": "spin",
-      "duration": 6
+      "preset": "sway",
+      "origin": [12, 21],
+      "amount": 0.5
     }
   ],
   "swap": [

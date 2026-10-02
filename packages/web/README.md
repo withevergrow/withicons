@@ -1,6 +1,6 @@
 # @withicons/web
 
-`<with-icon>`: a dependency-free custom element for 500 icons x 12 styles. Works in any framework or none.
+`<with-icon>`: a dependency-free custom element for 500 icons x 15 styles. Works in any framework or none.
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/index.js"></script>
@@ -23,7 +23,7 @@ import '@withicons/web'   // registers <with-icon>; each style's data loads on f
 | attribute | default | notes |
 |---|---|---|
 | `name` | — | canonical name or unambiguous alias (`bin` -> `trash`) |
-| `variant` | `line` | `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro` (`style` is reserved in HTML) |
+| `variant` | `line` | `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo` (`style` is reserved in HTML) |
 | `size` | `24` | px number or any CSS length |
 | `color` | `currentColor` | inherits the CSS text color by default |
 | `stroke-width` | style default | only styles with live strokes (line, duo, blueprint, sketch, kawaii) |
@@ -46,10 +46,12 @@ Unknown names render nothing and log one console warning with the nearest matche
 
 | import | what | size |
 |---|---|---|
-| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`) | 11 KB (4 KB gzip) + one chunk per style used: `line` 103 KB (23 KB gzip), the largest 1466 KB (360 KB gzip) |
-| `@withicons/web/full` (`dist/full.js`) | one file, every style inline, adds sync `svg(name, opts)` | ~8177 KB (1855 KB gzip) |
+| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`) | 25 KB (5 KB gzip) + one chunk per style used: `line` 116 KB (23 KB gzip), the largest 344 KB (32 KB gzip); a heavy style loads one small shard per icon used (~39 KB, at most 76 KB / 23 KB gzip) |
+| `@withicons/web/full` (`dist/full.js`) | one file, every style inline, adds sync `svg(name, opts)` | ~690 KB (84 KB gzip) |
 
-A style's chunk loads once, the first time an icon of that style renders. Aliases and typos also load `dist/data/meta.js`
+A style's chunk loads once, the first time an icon of that style renders. The heavy styles (`solid`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `retro`, `luxe`, `bauhaus`, `skeuo`)
+are split into shards of a few icons each (`dist/data/<style>/<n>.js`): an icon loads only its own shard, so one `luxe`
+icon costs a few KB instead of the whole style. `loadVariant()` and `@withicons/web/data/<style>` still return the whole style. Aliases and typos also load `dist/data/meta.js`
 (113 KB, 28 KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
 chunks automatically. Use `full` only where a single file matters more than size.
 
@@ -63,8 +65,8 @@ const markup = await loadSvg('home', { variant: 'solid', size: 20 })
 
 ## Palette styles
 
-`glass`, `kawaii`, `sticker`, `pixel`, `retro` paint a default multi-colour palette. The main ink stays `currentColor`
-(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead) and every other colour is a CSS custom property with a built-in default,
+`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo` paint a default multi-colour palette. The main ink stays `currentColor`
+(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead, `luxe` draws its bold outline with `--with-luxe-ink` instead, `skeuo` draws its bold outline with `--with-skeuo-ink` instead) and every other colour is a CSS custom property with a built-in default,
 so you can re-theme a page, a section or one icon without touching the SVG:
 
 ```css
@@ -78,6 +80,9 @@ so you can re-theme a page, a section or one icon without touching the SVG:
 | `sticker` | `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
 | `pixel` | `--with-pixel-fill` currentColor, `--with-pixel-shine` #FFFFFF |
 | `retro` | `--with-retro-1` #F4B53F, `--with-retro-2` #EF7D2D, `--with-retro-3` #DE4B3A, `--with-retro-4` #178A86, `--with-retro-shadow` #6B3323 |
+| `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
+| `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #E9772E, `--with-bauhaus-ink` currentColor, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
+| `skeuo` | `--with-skeuo-accent` #F1CF98, `--with-skeuo-c1` #2F72E4, `--with-skeuo-c2` #BFC7D0, `--with-skeuo-c3` #E0483A, `--with-skeuo-c4` #1E2B3B, `--with-skeuo-edge` currentColor, `--with-skeuo-ink` #4F4638, `--with-skeuo-shadow` #15110D, `--with-skeuo-shine` #FFFFFF, `--with-skeuo-tint` #FFFFFF |
 
 Inline SVG (components, `<with-icon>`, sprites, IconNode data) keeps the variables. Standalone `.svg` files have them
 flattened to the defaults, because `<img>`, design tools and rasterizers cannot see CSS.
@@ -124,7 +129,7 @@ Plain `<i>`/`<span>` elements with classes, no build step. Two interchangeable w
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`) or every style at once:
+One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`) or every style at once:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">
@@ -138,7 +143,7 @@ bare `with with-<name>` uses that style). Each icon is an SVG data-URI used as a
 element's `::after`), so it takes the text colour and font size (`1em` square, `vertical-align: -.125em`). In mono styles the duo tint
 and blueprint construction lines render as translucent `currentColor`.
 
-**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`) keep their colours in CSS-only mode too: the palette is the element's
+**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`) keep their colours in CSS-only mode too: the palette is the element's
 `background-image` (default colours baked in) and the ink is the `currentColor` mask on top, with the original stacking order
 preserved, so `color` still recolours the outline. The `--with-<style>-<role>` variables cannot reach into a data URI, so to
 re-theme a palette use the JS runtime below (or a component), where every variable works.
@@ -147,19 +152,22 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
-| `with-line.css` | 199 KB | 25 KB |
-| `with-solid.css` | 647 KB | 186 KB |
-| `with-duo.css` | 309 KB | 32 KB |
-| `with-gloss.css` | 759 KB | 179 KB |
-| `with-engrave.css` | 1129 KB | 290 KB |
-| `with-blueprint.css` | 595 KB | 94 KB |
-| `with-sketch.css` | 614 KB | 142 KB |
-| `with-glass.css` | 2711 KB | 403 KB |
-| `with-kawaii.css` | 846 KB | 126 KB |
-| `with-sticker.css` | 2103 KB | 227 KB |
-| `with-pixel.css` | 514 KB | 39 KB |
-| `with-retro.css` | 1103 KB | 256 KB |
-| `with-all.css` | 11381 KB | 1959 KB |
+| `with-line.css` | 209 KB | 26 KB |
+| `with-solid.css` | 655 KB | 186 KB |
+| `with-duo.css` | 320 KB | 33 KB |
+| `with-gloss.css` | 767 KB | 180 KB |
+| `with-engrave.css` | 1178 KB | 294 KB |
+| `with-blueprint.css` | 646 KB | 97 KB |
+| `with-sketch.css` | 649 KB | 144 KB |
+| `with-glass.css` | 2740 KB | 404 KB |
+| `with-kawaii.css` | 891 KB | 128 KB |
+| `with-sticker.css` | 2161 KB | 228 KB |
+| `with-pixel.css` | 555 KB | 40 KB |
+| `with-retro.css` | 1113 KB | 256 KB |
+| `with-luxe.css` | 2907 KB | 828 KB |
+| `with-bauhaus.css` | 632 KB | 112 KB |
+| `with-skeuo.css` | 4544 KB | 581 KB |
+| `with-all.css` | 19779 KB | 3487 KB |
 | `with-icons.js` | 14 KB | 5 KB |
 
 ### 2. JS runtime (inline SVG)

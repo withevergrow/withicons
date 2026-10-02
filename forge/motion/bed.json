@@ -1,45 +1,10 @@
 {
   "name": "bed",
-  "intent": "breathes slowly like someone sound asleep",
-  "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      19.5
-    ],
-    "amount": 0.5,
-    "duration": 4.2
-  },
-  "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      19.5
-    ],
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "float",
-      "amount": 0.4,
-      "duration": 4
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "moon",
-      "effect": "slide-up"
-    },
-    {
-      "to": "sofa",
-      "effect": "morph"
-    },
-    {
-      "to": "bed@solid",
-      "effect": "fade"
-    }
-  ]
+  "intent": "breathes slowly like someone sound asleep, the pillow rising",
+  "loop": { "preset": "pulse", "origin": [12, 19.5], "amount": 0.35, "duration": 4.2 },
+  "hover": { "preset": "float", "amount": 0.6, "duration": 0.9 },
+  "parts": { "A": { "preset": "float", "amount": 0.25, "delay": 0.2 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "jelly", "origin": [12, 19.5], "amount": 0.8 }, { "preset": "pop" }],
+  "swap": [{ "to": "moon", "effect": "slide-up" }, { "to": "sofa", "effect": "morph" }, { "to": "bed@solid", "effect": "fade" }]
 }

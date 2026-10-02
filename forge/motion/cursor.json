@@ -1,27 +1,33 @@
 {
   "name": "cursor",
-  "intent": "leans in like it is about to click",
+  "intent": "leans on its tip, then pokes forward like a click",
   "loop": {
     "preset": "tilt",
     "origin": [
       5,
       2.5
     ],
-    "amount": 0.6,
-    "duration": 2.4
+    "amount": 0.5,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nudge",
-    "dir": 315,
-    "amount": 0.8
+    "dir": 225,
+    "amount": 0.7,
+    "duration": 0.45
   },
+  "deco": "float",
   "alt": [
     {
-      "preset": "pop"
+      "preset": "pop",
+      "origin": [
+        5,
+        2.5
+      ]
     },
     {
       "preset": "float",
-      "amount": 0.6
+      "amount": 0.5
     }
   ],
   "swap": [

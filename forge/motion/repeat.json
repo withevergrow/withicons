@@ -1,31 +1,34 @@
 {
   "name": "repeat",
-  "intent": "turns around again, playing on repeat",
+  "intent": "goes round once more, then rests, like a track on repeat",
   "loop": {
-    "preset": "spin",
+    "preset": "spin-once",
     "origin": [
       12,
       12
     ],
-    "duration": 4
+    "duration": 3.6
   },
   "hover": {
     "preset": "spin-once",
     "origin": [
       12,
       12
-    ]
+    ],
+    "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "flip",
+      "preset": "spin",
       "origin": [
         12,
         12
-      ]
+      ],
+      "duration": 5
     },
     {
-      "preset": "pulse",
+      "preset": "flip",
       "origin": [
         12,
         12
@@ -33,6 +36,10 @@
     }
   ],
   "swap": [
+    {
+      "to": "repeat-1",
+      "effect": "fade"
+    },
     {
       "to": "shuffle",
       "effect": "rotate"

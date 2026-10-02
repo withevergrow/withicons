@@ -1,50 +1,9 @@
 {
   "name": "loader",
-  "intent": "spins step by step while something loads",
-  "loop": {
-    "preset": "tick",
-    "origin": [
-      12,
-      12
-    ],
-    "steps": 8,
-    "duration": 1
-  },
-  "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      12
-    ]
-  },
-  "alt": [
-    {
-      "preset": "spin",
-      "origin": [
-        12,
-        12
-      ]
-    },
-    {
-      "preset": "breathe",
-      "origin": [
-        12,
-        12
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "check",
-      "effect": "morph"
-    },
-    {
-      "to": "check-circle",
-      "effect": "scale"
-    },
-    {
-      "to": "x-circle",
-      "effect": "scale"
-    }
-  ]
+  "intent": "spokes step round like a spinner while something loads",
+  "loop": { "preset": "tick", "origin": [12, 12], "steps": 8, "duration": 1 },
+  "hover": { "preset": "spin-once", "origin": [12, 12], "duration": 0.7 },
+  "deco": "still",
+  "alt": [ { "preset": "spin", "origin": [12, 12] }, { "preset": "breathe", "origin": [12, 12] } ],
+  "swap": [ { "to": "check", "effect": "morph" }, { "to": "check-circle", "effect": "scale" }, { "to": "x-circle", "effect": "scale" } ]
 }

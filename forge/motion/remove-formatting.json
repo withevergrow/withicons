@@ -1,12 +1,50 @@
 {
   "name": "remove-formatting",
-  "intent": "shakes off its styling, back to plain text",
-  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "shake", "amount": 0.8 },
-  "alt": [ { "preset": "wiggle", "amount": 0.8 }, { "preset": "pop" } ],
+  "intent": "the T stays calm while the little x scrubs its styling away",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        17.75,
+        17.75
+      ],
+      "amount": 1.1,
+      "duration": 3.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.8
+    },
+    {
+      "preset": "pop"
+    }
+  ],
   "swap": [
-    { "to": "type", "effect": "blur" },
-    { "to": "eraser", "effect": "fade" },
-    { "to": "bold", "effect": "morph" }
+    {
+      "to": "type",
+      "effect": "blur"
+    },
+    {
+      "to": "eraser",
+      "effect": "fade"
+    },
+    {
+      "to": "bold",
+      "effect": "morph"
+    }
   ]
 }

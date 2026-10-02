@@ -1,18 +1,25 @@
 {
   "name": "message-circle",
-  "intent": "breathes like a chat waiting, jiggles on a new message",
+  "intent": "swells from its tail like a chat waiting, jiggles on new messages",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
+    "preset": "pulse",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 0.3,
     "duration": 3
   },
   "hover": {
     "preset": "jelly",
     "origin": [
-      4,
-      20
-    ]
+      3,
+      21
+    ],
+    "amount": 0.7,
+    "duration": 0.6
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "type",
@@ -21,8 +28,8 @@
     {
       "preset": "pop",
       "origin": [
-        4,
-        20
+        3,
+        21
       ]
     }
   ],

@@ -1,21 +1,33 @@
 {
   "name": "microphone",
-  "intent": "pulses like it is picking up your voice",
+  "intent": "the capsule pulses with your voice on a steady stand",
   "loop": {
     "preset": "pulse",
     "origin": [
       12,
-      21
+      8.5
     ],
-    "amount": 0.5,
-    "duration": 1.6
+    "amount": 0.4,
+    "duration": 1.8
   },
   "hover": {
     "preset": "pop",
     "origin": [
       12,
-      21
-    ]
+      8.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.25,
+      "delay": 0.1
+    }
   },
   "alt": [
     {

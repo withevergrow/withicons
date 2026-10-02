@@ -1,8 +1,10 @@
 {
   "name": "camera-off",
-  "intent": "dims quietly: no photos here",
-  "loop": { "preset": "breathe", "origin": [12, 13.5], "amount": 0.5, "duration": 3.6 },
-  "hover": { "preset": "shake", "amount": 0.6 },
-  "alt": [ { "preset": "pulse", "origin": [12, 13.5], "amount": 0.5 }, { "preset": "pop", "origin": [12, 13.5] } ],
-  "swap": [ { "to": "camera", "effect": "draw" }, { "to": "eye-off", "effect": "fade" }, { "to": "video-off", "effect": "slide-left" } ]
+  "intent": "the lens tries to blink but stays shut: no photos here",
+  "loop": { "preset": "pulse", "origin": [12, 13.5], "amount": 0.3, "duration": 3.6 },
+  "hover": { "preset": "pop", "origin": [12, 13.5], "amount": 0.6, "duration": 0.5 },
+  "parts": { "A": { "preset": "blink", "origin": [11, 14], "amount": 0.8, "duration": 3.6, "delay": 0.1 }, "S": { "preset": "pulse", "origin": [12, 12], "amount": 0.25, "duration": 3.6, "delay": 0.15 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "shake", "amount": 0.5 }, { "preset": "pulse", "origin": [12, 13.5], "amount": 0.5 }],
+  "swap": [{ "to": "camera", "effect": "draw" }, { "to": "eye-off", "effect": "fade" }, { "to": "video-off", "effect": "slide-left" }]
 }

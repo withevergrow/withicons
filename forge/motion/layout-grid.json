@@ -1,35 +1,9 @@
 {
   "name": "layout-grid",
-  "intent": "tiles breathe calmly, then pop into a grid view",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 3.4
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "jelly",
-      "amount": 0.7
-    },
-    {
-      "preset": "spin-once"
-    }
-  ],
-  "swap": [
-    {
-      "to": "layout-list",
-      "effect": "flip"
-    },
-    {
-      "to": "layout-dashboard",
-      "effect": "morph"
-    },
-    {
-      "to": "kanban",
-      "effect": "fade"
-    }
-  ]
+  "intent": "tiles swell calmly, then snap into a grid view",
+  "loop": {"preset": "pulse", "origin": [12,12], "amount": 0.3, "duration": 3.4},
+  "hover": {"preset": "jelly", "amount": 0.7},
+  "deco": "float",
+  "alt": [ {"preset": "pop"}, {"preset": "fill"} ],
+  "swap": [ {"to": "layout-list", "effect": "flip"}, {"to": "layout-dashboard", "effect": "morph"}, {"to": "kanban", "effect": "fade"} ]
 }

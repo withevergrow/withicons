@@ -1,30 +1,9 @@
 {
   "name": "check",
-  "intent": "draws itself in like a tick being written",
-  "loop": {
-    "preset": "draw",
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "draw",
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "nod"
-    }
-  ],
-  "swap": [
-    {
-      "to": "check-circle",
-      "effect": "scale"
-    },
-    {
-      "to": "close",
-      "effect": "rotate"
-    }
-  ]
+  "intent": "draws itself in like a tick being written, nods yes on hover",
+  "loop": { "preset": "draw", "duration": 2.4 },
+  "hover": { "preset": "nod", "origin": [9.5, 17.5], "amount": 0.9, "duration": 0.6 },
+  "deco": "twinkle",
+  "alt": [ { "preset": "draw", "duration": 0.6 }, { "preset": "pop" } ],
+  "swap": [ { "to": "check-circle", "effect": "scale" }, { "to": "close", "effect": "rotate" } ]
 }

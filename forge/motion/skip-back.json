@@ -1,18 +1,30 @@
 {
   "name": "skip-back",
-  "intent": "jumps back to the start of the previous track",
+  "intent": "the arrow knocks back against the bar: previous track",
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.5,
-    "duration": 1.8
+    "amount": 0.4,
+    "duration": 2.2
   },
   "hover": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 1.2,
+    "amount": 1,
     "duration": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        4.5,
+        12
+      ],
+      "amount": 0.4,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pass",

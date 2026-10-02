@@ -1,8 +1,10 @@
 {
   "name": "cat",
-  "intent": "gives you a slow, friendly cat blink",
-  "loop": { "preset": "blink", "origin": [12, 12.5], "duration": 4.5 },
-  "hover": { "preset": "tilt", "origin": [12, 20.5], "amount": 1 },
-  "alt": [ { "preset": "breathe", "origin": [12, 20.5], "amount": 0.7 }, { "preset": "jelly", "origin": [12, 20.5] }, { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.6 } ],
-  "swap": [ { "to": "dog", "effect": "morph" }, { "to": "cat@solid", "effect": "scale" }, { "to": "paw-print", "effect": "slide-up" } ]
+  "intent": "breathes calmly and gives you a slow, friendly cat blink",
+  "loop": { "preset": "pulse", "origin": [12, 20.5], "amount": 0.35, "duration": 4.4 },
+  "hover": { "preset": "nod", "origin": [12, 20.5], "amount": 0.5, "duration": 0.7 },
+  "parts": { "A": { "preset": "blink", "origin": [12, 14.5], "amount": 0.5, "delay": 0.1 } },
+  "deco": "float",
+  "alt": [{ "preset": "tilt", "origin": [12, 20.5], "amount": 1 }, { "preset": "jelly", "origin": [12, 20.5] }, { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.6 }],
+  "swap": [{ "to": "dog", "effect": "morph" }, { "to": "cat@solid", "effect": "scale" }, { "to": "paw-print", "effect": "slide-up" }]
 }

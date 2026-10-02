@@ -1,14 +1,14 @@
 {
   "name": "zoom-in",
-  "intent": "magnifies, as if zooming into the details",
+  "intent": "the lens magnifies and the plus grows, zooming into the details",
   "loop": {
     "preset": "zoom",
     "origin": [
       10.5,
       10.5
     ],
-    "amount": 0.6,
-    "duration": 2.6
+    "amount": 0.45,
+    "duration": 2.8
   },
   "hover": {
     "preset": "zoom",
@@ -16,8 +16,21 @@
       10.5,
       10.5
     ],
-    "amount": 1.2
+    "amount": 0.9,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "zoom",
+      "origin": [
+        10.5,
+        10.5
+      ],
+      "amount": 0.6,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tilt",

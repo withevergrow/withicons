@@ -1,8 +1,9 @@
 {
   "name": "rabbit",
-  "intent": "hops up and down like a bouncy bunny",
-  "loop": { "preset": "bounce", "origin": [12, 21], "amount": 0.55, "duration": 1.4 },
-  "hover": { "preset": "bounce", "origin": [12, 21], "amount": 1.1, "duration": 0.7 },
-  "alt": [ { "preset": "wiggle", "origin": [12, 21], "amount": 0.6 }, { "preset": "jelly", "origin": [12, 21] }, { "preset": "pop" } ],
-  "swap": [ { "to": "turtle", "effect": "morph" }, { "to": "rabbit@solid", "effect": "scale" }, { "to": "egg", "effect": "slide-up" } ]
+  "intent": "hops up and down like a bouncy bunny, with a big hop on hover",
+  "loop": {"preset": "bounce", "origin": [12,21], "amount": 0.45, "duration": 1.8},
+  "hover": {"preset": "bounce", "origin": [12,21], "amount": 1.1, "duration": 0.7},
+  "deco": "twinkle",
+  "alt": [ {"preset": "wiggle", "origin": [12,21], "amount": 0.6}, {"preset": "jelly", "origin": [12,21]}, {"preset": "pop"} ],
+  "swap": [ {"to": "turtle", "effect": "morph"}, {"to": "rabbit@solid", "effect": "scale"}, {"to": "egg", "effect": "slide-up"} ]
 }

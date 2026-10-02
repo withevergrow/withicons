@@ -1,6 +1,6 @@
 {
   "name": "moon",
-  "intent": "glows softly like a calm night sky",
+  "intent": "glows softly in a calm night sky, rocks on its crescent when touched",
   "loop": {
     "preset": "breathe",
     "amount": 0.8,
@@ -8,8 +8,13 @@
   },
   "hover": {
     "preset": "tilt",
+    "origin": [
+      12,
+      12
+    ],
     "amount": 1.2
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "glow"

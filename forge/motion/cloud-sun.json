@@ -1,15 +1,30 @@
 {
   "name": "cloud-sun",
-  "intent": "sun glows behind a drifting cloud",
+  "intent": "cloud drifts while the sun warms behind it, peeks out on touch",
   "loop": {
     "preset": "float",
-    "amount": 0.7,
-    "duration": 3.4
+    "amount": 0.6,
+    "duration": 3.6
   },
   "hover": {
-    "preset": "glow",
-    "duration": 0.9
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        9.5,
+        9.5
+      ],
+      "amount": 0.6,
+      "duration": 3.6,
+      "delay": 0.3
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "breathe"

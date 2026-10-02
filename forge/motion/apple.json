@@ -1,7 +1,9 @@
 {
   "name": "apple",
-  "intent": "sways like fresh fruit hanging from its stem",
-  "loop": { "preset": "sway", "origin": [10.5, 3.5], "amount": 0.6, "duration": 3.2 },
-  "hover": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.8, "duration": 0.9 },
+  "intent": "hangs from its stem and sways, the leaf fluttering behind",
+  "loop": { "preset": "sway", "origin": [10.5, 3.5], "amount": 0.45, "duration": 3.4 },
+  "hover": { "preset": "wiggle", "origin": [10.5, 3.5], "amount": 0.9, "duration": 0.8 },
+  "parts": { "A": { "preset": "sway", "origin": [10.5, 3.5], "amount": 0.65, "delay": 0.15 } },
+  "deco": "float",
   "alt": [ { "preset": "breathe", "amount": 0.6 }, { "preset": "pop" }, { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.6 } ]
 }

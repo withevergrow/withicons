@@ -1,10 +1,10 @@
 {
   "name": "send",
-  "intent": "flies off along its path like a message being sent",
+  "intent": "edges forward along its heading, flies off and back on hover",
   "loop": {
     "preset": "nudge",
     "dir": 315,
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 2.4
   },
   "hover": {
@@ -13,13 +13,14 @@
     "amount": 1,
     "duration": 0.7
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "float"
     },
     {
-      "preset": "nudge",
-      "dir": 315
+      "preset": "rise",
+      "amount": 0.6
     }
   ],
   "swap": [

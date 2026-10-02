@@ -125,13 +125,14 @@ export function build(icon) {
   if (cutLine.length) F.subtract(fill, F.strokes(cutLine, K.CUT_LINE, 1.2))
 
   // --- S overlays: clear a moat through everything below, then lay them on top
-  let badgeFill = null, lens = null
+  let badgeFill = null, lens = null, sMoat = null
   if (badges.length || freeS.length) {
     const moat = F.field(1.2)
     for (const b of badges) { F.region([b.pts], 1.2, moat); F.strokes([b], W + 2 * K.GAP_S, 1.2, moat) }
     if (freeS.length) F.strokes(freeS, W + 2 * K.GAP_S, 1.2, moat)
     F.subtract(ink, moat)
     F.subtract(fill, moat)
+    sMoat = moat
     if (badges.length) {
       // a badge is a teal disc out to the ring's outer edge, rimmed with a lighter ink ring
       const disc = F.field(2)
@@ -158,7 +159,8 @@ export function build(icon) {
   const ext = F.extent(vis, 0.6)
   const lineOnly = T.echo === true || (T.echo !== false && !badgeFill && ext.area < K.MIN_FILL)
 
-  const out = { ink, stripes: [], badge: null, lens: null, shadow: null, echo: null }
+  // moat: the S overlays' cleared region (negative inside); retro.mjs uses it to tag S ink as its own node
+  const out = { ink, stripes: [], badge: null, lens: null, shadow: null, echo: null, moat: sMoat }
 
   if (!lineOnly) {
     const col = F.subtract(F.copy(fill), under)

@@ -1,8 +1,54 @@
 {
   "name": "webcam",
-  "intent": "looks around on its stand, ready for a video call",
-  "loop": { "preset": "sway", "origin": [12, 21], "amount": 0.5, "duration": 3.4 },
-  "hover": { "preset": "zoom", "origin": [12, 10], "amount": 0.6, "duration": 0.5 },
-  "alt": [ { "preset": "blink", "origin": [12, 10] }, { "preset": "pulse", "origin": [12, 10], "amount": 0.5 } ],
-  "swap": [ { "to": "camera-off", "effect": "fade" }, { "to": "video-off", "effect": "fade" }, { "to": "video-camera", "effect": "flip" } ]
+  "intent": "looks around on its stand; the lens focuses when you look",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.45,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "zoom",
+    "origin": [
+      12,
+      10
+    ],
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "blink",
+      "origin": [
+        12,
+        10
+      ]
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        10
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "camera-off",
+      "effect": "fade"
+    },
+    {
+      "to": "video-off",
+      "effect": "fade"
+    },
+    {
+      "to": "video-camera",
+      "effect": "flip"
+    }
+  ]
 }

@@ -1,28 +1,29 @@
 {
   "name": "car",
-  "intent": "idles forward and drives off on hover",
+  "intent": "idles with a soft engine rumble and drives off on hover",
   "loop": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.5,
-    "duration": 1.8
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 1.4
   },
   "hover": {
     "preset": "pass",
     "dir": 0,
     "duration": 0.9
   },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    },
     {
       "preset": "bounce",
       "origin": [
         12,
         19
       ],
-      "amount": 0.4
-    },
-    {
-      "preset": "shake",
       "amount": 0.4
     }
   ],

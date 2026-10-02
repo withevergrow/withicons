@@ -1,41 +1,9 @@
 {
   "name": "lamp",
-  "intent": "glows warmly like a reading lamp switched on",
-  "loop": {
-    "preset": "glow",
-    "amount": 0.8,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "flicker",
-    "amount": 1
-  },
-  "alt": [
-    {
-      "preset": "sway",
-      "origin": [
-        12,
-        21
-      ],
-      "amount": 0.5
-    },
-    {
-      "preset": "pulse",
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "lamp@solid",
-      "effect": "fade"
-    },
-    {
-      "to": "lightbulb",
-      "effect": "scale"
-    },
-    {
-      "to": "moon",
-      "effect": "rotate"
-    }
-  ]
+  "intent": "glows warmly like a reading lamp, flickering on when you hover",
+  "loop": {"preset": "glow", "amount": 0.8, "duration": 3.2},
+  "hover": {"preset": "flicker", "origin": [12,21], "amount": 1},
+  "deco": "breathe",
+  "alt": [ {"preset": "sway", "origin": [12,21], "amount": 0.5}, {"preset": "pulse", "amount": 0.6} ],
+  "swap": [ {"to": "lamp@solid", "effect": "fade"}, {"to": "lightbulb", "effect": "scale"}, {"to": "moon", "effect": "rotate"} ]
 }

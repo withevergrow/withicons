@@ -1,24 +1,27 @@
 {
   "name": "user-cog",
-  "intent": "the little gear turns as if settings are being adjusted",
+  "intent": "person floats calmly while only the gear turns slowly: account settings",
   "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.5,
-    "duration": 3.6
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3
   },
   "hover": {
-    "preset": "wiggle",
-    "origin": [
-      17.5,
-      16.5
-    ],
-    "amount": 0.9,
-    "duration": 0.7
+    "preset": "nod",
+    "amount": 0.5,
+    "duration": 0.8
   },
+  "parts": {
+    "S": {
+      "preset": "spin",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "duration": 6
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tick",
@@ -31,12 +34,12 @@
       "duration": 2
     },
     {
-      "preset": "tilt",
+      "preset": "wiggle",
       "origin": [
         17.5,
         16.5
       ],
-      "amount": 0.7
+      "amount": 0.9
     }
   ],
   "swap": [

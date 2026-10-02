@@ -1,8 +1,40 @@
 {
   "name": "circle-dot",
-  "intent": "pulses softly like a selected option or a live recording point",
-  "loop": { "preset": "pulse", "amount": 0.6, "duration": 2.2 },
-  "hover": { "preset": "pop" },
-  "alt": [ { "preset": "breathe" }, { "preset": "glow", "duration": 2.4 } ],
-  "swap": [ { "to": "circle", "effect": "scale" }, { "to": "circle-dot@solid", "effect": "fade" } ]
+  "intent": "the centre dot pulses inside a calm ring, like a selected option",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 1.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "glow",
+      "duration": 2.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle",
+      "effect": "scale"
+    },
+    {
+      "to": "circle-dot@solid",
+      "effect": "fade"
+    }
+  ]
 }

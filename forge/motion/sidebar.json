@@ -1,18 +1,19 @@
 {
   "name": "sidebar",
-  "intent": "leans toward its rail like a panel sliding open",
+  "intent": "leans toward its rail like a side panel sliding open",
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.4,
-    "duration": 2.4
+    "amount": 0.3,
+    "duration": 2.8
   },
   "hover": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.8,
-    "duration": 0.6
+    "amount": 0.7,
+    "duration": 0.55
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "jelly",

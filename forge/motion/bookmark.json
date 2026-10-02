@@ -1,27 +1,9 @@
 {
   "name": "bookmark",
-  "intent": "floats gently, then pops when you save it",
-  "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "bounce",
-      "amount": 0.6
-    },
-    {
-      "preset": "nod"
-    }
-  ],
-  "swap": [
-    {
-      "to": "bookmark@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the ribbon sways from the page top, pops when you save it",
+  "loop": { "preset": "sway", "origin": [12, 3], "amount": 0.45, "duration": 3.2 },
+  "hover": { "preset": "pop", "origin": [12, 3] },
+  "deco": "float",
+  "alt": [ { "preset": "bounce", "amount": 0.6 }, { "preset": "nod" } ],
+  "swap": [ { "to": "bookmark@solid", "effect": "scale" } ]
 }

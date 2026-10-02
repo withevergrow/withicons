@@ -2,7 +2,7 @@
 // The animations themselves are pure CSS (motion.css + icons.css); this file only toggles classes and
 // CSS variables, prepares strokes for `draw`, and builds swaps. SSR-safe: nothing touches the DOM on import.
 import SPECS from './icons.js'
-import { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, DIRECTIONAL, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, dirVec, pct, keyframeName, cssSlot } from './meta.js'
+import { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, DIRECTIONAL, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, dirVec, pct, keyframeName, cssSlot, DECO_KINDS } from './meta.js'
 
 export { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, keyframeName }
 
@@ -80,6 +80,7 @@ function plan(nameOrSpec, o, fallbackName, slotOf) {
   if (has(dir)) { const [dx, dy] = dirVec(dir); vars['--wm-dx'] = String(dx); vars['--wm-dy'] = String(dy) }
   if (o.steps > 0) vars['--wm-ease'] = 'steps(' + Math.round(o.steps) + ')'
   if (has(o.delay)) vars['--wm-delay'] = Number(o.delay) + 's'
+  if (DECO_KINDS.includes(o.deco)) vars['--wm-deco'] = o.deco === 'still' ? 'none' : 'wm-deco-' + o.deco
   if (o.force) classes.push('wm-force')
   return { trigger, name, classes, vars, preset: preset || (slot && slot.preset) || null }
 }
@@ -98,6 +99,18 @@ export function motionAttrs(nameOrSpec, options) {
   if (style) out.style = style
   return out
 }
+
+// Parts choreography: an inline SVG whose renderer tagged its nodes (wm-deco, wm-shadow, wm-a, wm-s) animates per part.
+const PART_SEL = ':scope>:is(.wm-deco,.wm-shadow,.wm-a,.wm-s)'
+/** The element's own icon <svg> (itself, a child, or in its shadow root) when its nodes carry part tags, else null. */
+export function partsSvg(el) {
+  if (!el || !el.querySelector) return null
+  const scope = el.shadowRoot || el
+  const svg = el.localName === 'svg' ? el : Array.from(scope.children || []).find(n => n.localName === 'svg')
+  try { return svg && svg.querySelector(PART_SEL) ? svg : null } catch { return null }
+}
+// true while any animation of the element or of its parts is still running (a one-shot's parts end at different times)
+const busy = el => { try { return !!el.getAnimations && el.getAnimations({ subtree: true }).some(a => a.playState === 'running') } catch { return false } }
 
 const HANDLES = typeof WeakMap !== 'undefined' ? new WeakMap() : null
 
@@ -144,6 +157,7 @@ export function motion(target, nameOrSpec, options) {
   p.classes.forEach(add)
   for (const k in p.vars) setVar(k, p.vars[k])
   if (p.preset === 'draw' && prepareDraw(el)) { add('wm-drawing'); drawn = true }
+  else if (el.localName !== 'with-icon' && partsSvg(el)) add('wm-parts')
 
   const restart = () => {
     el.classList.remove('wm-run')
@@ -158,7 +172,7 @@ export function motion(target, nameOrSpec, options) {
     if (!running) restart()
   }
   const stop = () => { running = false; el.classList.remove('wm-run') }
-  on(el, 'animationend', e => { if (String(e.animationName).indexOf('wm-') === 0) { running = false; el.classList.remove('wm-run') } })
+  on(el, 'animationend', e => { if (String(e.animationName).indexOf('wm-') === 0 && !(el.classList.contains('wm-parts') && busy(el))) { running = false; el.classList.remove('wm-run') } })
   if (trigger === 'hover') {
     add('wm-js')
     const t = (el.closest && el.closest('.wm-trigger')) || el

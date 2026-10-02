@@ -1,6 +1,6 @@
 {
   "name": "umbrella",
-  "intent": "sways gently from the handle as if held in the rain",
+  "intent": "sways gently from the hand as if held in the rain, pops open on touch",
   "loop": {
     "preset": "sway",
     "origin": [
@@ -14,9 +14,22 @@
     "preset": "jelly",
     "origin": [
       12,
-      12
-    ]
+      11
+    ],
+    "amount": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        19
+      ],
+      "amount": 0.6,
+      "delay": 0.12
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "rock",

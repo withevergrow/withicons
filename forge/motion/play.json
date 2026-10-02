@@ -1,21 +1,19 @@
 {
   "name": "play",
-  "intent": "pulses forward, ready to start playing",
+  "intent": "leans forward, ready to start playing",
   "loop": {
-    "preset": "pulse",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.6,
-    "duration": 1.8
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.35,
+    "duration": 2.4
   },
   "hover": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.6,
-    "duration": 0.6
+    "amount": 0.9,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pop",
@@ -23,6 +21,10 @@
         12,
         12
       ]
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
     },
     {
       "preset": "glow"
@@ -36,6 +38,10 @@
     {
       "to": "stop",
       "effect": "scale"
+    },
+    {
+      "to": "play@solid",
+      "effect": "fade"
     }
   ]
 }

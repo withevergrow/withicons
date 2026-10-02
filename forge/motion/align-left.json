@@ -1,17 +1,19 @@
 {
   "name": "align-left",
-  "intent": "slides its lines over to the left edge",
+  "intent": "its lines slide over to the left edge",
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 2.6
   },
   "hover": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 1.1
+    "amount": 1,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "jelly"

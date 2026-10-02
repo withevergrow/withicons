@@ -1,8 +1,9 @@
 {
   "name": "bird",
   "intent": "hops lightly in place like a little songbird",
-  "loop": { "preset": "bounce", "origin": [11.75, 21], "amount": 0.45, "duration": 1.8 },
-  "hover": { "preset": "tilt", "origin": [11.75, 21], "amount": 1.1, "duration": 0.9 },
-  "alt": [ { "preset": "float", "amount": 0.8 }, { "preset": "nod", "origin": [11.75, 21] }, { "preset": "pass", "dir": 0, "amount": 0.8 } ],
-  "swap": [ { "to": "bird@solid", "effect": "scale" }, { "to": "egg", "effect": "morph" } ]
+  "loop": {"preset": "bounce", "origin": [11.75,21], "amount": 0.4, "duration": 2},
+  "hover": {"preset": "bounce", "origin": [11.75,21], "amount": 1, "duration": 0.7},
+  "deco": "float",
+  "alt": [ {"preset": "float", "amount": 0.8}, {"preset": "nod", "origin": [11.75,21]}, {"preset": "pass", "dir": 0, "amount": 0.8} ],
+  "swap": [ {"to": "bird@solid", "effect": "scale"}, {"to": "egg", "effect": "morph"} ]
 }

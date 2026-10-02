@@ -1,16 +1,17 @@
 {
   "name": "plane",
-  "intent": "cruises through the air and takes off on hover",
+  "intent": "cruises on steady air and takes off on hover",
   "loop": {
     "preset": "float",
-    "amount": 0.6,
-    "duration": 3
+    "amount": 0.5,
+    "duration": 3.2
   },
   "hover": {
     "preset": "pass",
     "dir": 315,
     "duration": 1
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "nudge",

@@ -5,10 +5,12 @@ import { parseSegs, fillet, snapEnds, writeSubs, nums } from './_kawaii-path.mjs
 import { N, NN, H, gx, gi, segsOf, distField, maskOf, sample, contours } from './_kawaii-field.mjs'
 import { placeFace, drawFace, cheeksD, ellipseD, heartD, sparkleD, discD, faceMetrics } from './_kawaii-face.mjs'
 import { PALETTE, BLUSH, BLUSH_OPACITY, SHINE, ACCENT, SPARKLE, colorFor, NO_FACE, TUNE } from './_kawaii-tune.mjs'
+import { textInfo } from './_live-text.mjs'
 
 export const INK = 2.2          // outline weight
 const R_INK = 1.75              // fillet radius of sharp corners (centreline)
 const HALF = INK / 2
+const TEXT_INK = 1.9            // Live-icon text (forge/styles/_live-text.mjs)
 const BAND = 3.6           // fields only need to see this far (largest probe ~2.1u)
 
 const v = ([role, hex], fb) => `var(--with-kawaii-${role}, ${fb || hex})`
@@ -59,12 +61,16 @@ export function render(icon) {
     if (hide.has(pi)) continue
     let subs = []
     try { subs = parseSegs(p.d) } catch { subs = [] }
-    for (const s of subs) { s.plate = p.plate || 'K'; inkSubs.push(s) }
+    const text = !!textInfo(p)
+    for (const s of subs) { s.plate = p.plate || 'K'; s.text = text; inkSubs.push(s) }
   }
-  const corners = fillet(inkSubs, R_INK, HALF + 0.05)
-  snapEnds(inkSubs, corners)
-  const inkD = writeSubs(inkSubs)
-  const inkLines = parsePath(inkD).map(s => ({ pts: simplify(s.pts, 0.02, s.closed), closed: s.closed }))
+  // Live-icon text keeps the font's crisp corners and a lighter pen: filleted at 2.2 it fills in
+  const textSubs = inkSubs.filter(s => s.text), drawSubs = inkSubs.filter(s => !s.text)
+  const corners = fillet(drawSubs, R_INK, HALF + 0.05)
+  snapEnds(drawSubs, corners)
+  const inkD = writeSubs(drawSubs)
+  const textD = textSubs.length ? writeSubs(textSubs) : ''
+  const inkLines = parsePath(inkD + textD).map(s => ({ pts: simplify(s.pts, 0.02, s.closed), closed: s.closed }))
   for (const s of inkSubs) if (s.dot) inkLines.push({ pts: [s.dot], closed: false })
   const sLines = []
   for (const s of inkSubs) if (s.plate === 'S' && !s.dot) for (const q of parsePath(writeSubs([s]))) sLines.push({ pts: q.pts, closed: q.closed })
@@ -117,16 +123,21 @@ export function render(icon) {
     }
   }
 
+  // Parts choreography (forge/MOTION.md): the outline is written per skeleton plate when the icon has more than
+  // one, so motion can move a part; the S badge body follows its plate. One plate stays a plain, untagged path.
+  const plateOf = s => s.plate === 'A' || s.plate === 'S' ? s.plate : 'K'
+  const inkPlates = ['K', 'A', 'S'].filter(P => drawSubs.some(s => plateOf(s) === P))
+  const split = inkPlates.length > 1
   const ci = colorFor(name, h)
   const di = (ci + 3) % PALETTE.length
   const si = ci === 0 ? 5 : 0
-  const paint = (set, i) => {
+  const paint = (set, i, cls) => {
     const d = ringsD(set)
-    if (d) out.push(['path', { d, fill: fillVar(i), 'fill-opacity': PALETTE[i][2], stroke: 'none', 'fill-rule': 'evenodd' }])
+    if (d) out.push(['path', { d, fill: fillVar(i), 'fill-opacity': PALETTE[i][2], stroke: 'none', 'fill-rule': 'evenodd', ...(cls ? { class: cls } : {}) }])
   }
   paint(main, ci)
   paint(detail, di)
-  paint(sBody, si)
+  paint(sBody, si, split && inkPlates.includes('S') ? 'wm-s' : null)
 
   // ---- clearance field inside the main body ---------------------------------
   const mainRings = [...main, ...detail].filter(r => r.length > 2)
@@ -148,7 +159,8 @@ export function render(icon) {
   }
 
   // ---- face ---------------------------------------------------------------
-  const wantFace = C && tune.face !== false && (tune.face || !NO_FACE.test(name))
+  // a face beside text (a date, a count, a label) reads as clutter: those get the heart / sparkle accent
+  const wantFace = C && tune.face !== false && (tune.face || (!NO_FACE.test(name) && !textSubs.some(s => s.plate !== 'S')))
   if (wantFace) {
     try {
       if (tune.face && tune.face.x !== undefined && tune.face.y !== undefined) faceInfo = { x: tune.face.x, y: tune.face.y, s: tune.face.s || 0.8, blush: tune.face.blush !== false && tune.blush !== false }
@@ -177,17 +189,23 @@ export function render(icon) {
 
   // shine: a short white arc on the lit (upper-left) inside of the body
   if (C) {
-    try { const d = shine(C, faceInfo); if (d) out.push(['path', { d, stroke: v(SHINE), 'stroke-width': 0.85, 'stroke-opacity': 0.9 }]) } catch { /* optional */ }
+    try { const d = shine(C, faceInfo); if (d) out.push(['path', { d, stroke: v(SHINE), 'stroke-width': 0.85, 'stroke-opacity': 0.9, class: 'wm-shine' }]) } catch { /* optional */ }
   }
 
-  if (inkD) out.push(['path', { d: inkD }])
+  if (inkD && split) {
+    for (const P of inkPlates) {
+      const d = writeSubs(drawSubs.filter(s => plateOf(s) === P))
+      if (d) out.push(['path', { d, class: 'wm-' + P.toLowerCase() }])
+    }
+  } else if (inkD) out.push(['path', { d: inkD }])
+  if (textD) out.push(['path', { d: textD, 'stroke-width': TEXT_INK }])
 
   if (faceInfo) {
     const f = drawFace(faceInfo, expr)
     const ink = 'var(--with-kawaii-face, currentColor)'
     if (f.fill) out.push(['path', { d: f.fill, fill: ink, stroke: 'none' }])
     if (f.stroke) out.push(['path', { d: f.stroke, stroke: ink, 'stroke-width': Math.round(f.lw * 100) / 100 }])
-    if (f.shine) out.push(['path', { d: f.shine, fill: v(SHINE), stroke: 'none' }])
+    if (f.shine) out.push(['path', { d: f.shine, fill: v(SHINE), stroke: 'none', class: 'wm-shine' }])
   } else if (tune.accent !== false && inkLines.length) {
     try {
       const a = accent(dInk, inkLines, main, sBody, detail, tune.accent || (C ? 'heart' : (h & 1 ? 'sparkle' : 'heart')))
@@ -296,8 +314,8 @@ function accent(dInk, inkLines, main, sBody, detail, kind) {
     }
     if (best) {
       return kind === 'heart'
-        ? ['path', { d: heartD(best[0], best[1], z), fill: v(ACCENT), stroke: 'none' }]
-        : ['path', { d: sparkleD(best[0], best[1], z), fill: v(SPARKLE), stroke: 'none' }]
+        ? ['path', { d: heartD(best[0], best[1], z), fill: v(ACCENT), stroke: 'none', class: 'wm-deco' }]
+        : ['path', { d: sparkleD(best[0], best[1], z), fill: v(SPARKLE), stroke: 'none', class: 'wm-deco' }]
     }
   }
   return null

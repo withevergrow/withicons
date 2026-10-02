@@ -1,8 +1,10 @@
 {
   "name": "plane-takeoff",
-  "intent": "climbs away from the runway on departure",
-  "loop": { "preset": "nudge", "dir": 335, "amount": 0.5, "duration": 2.6 },
-  "hover": { "preset": "pass", "dir": 335, "amount": 1, "duration": 1 },
-  "alt": [ { "preset": "rise", "amount": 0.7 }, { "preset": "float" } ],
-  "swap": [ { "to": "plane-landing", "effect": "fade" }, { "to": "plane", "effect": "slide-up" } ]
+  "intent": "climbs away on departure while the runway streams below",
+  "loop": {"preset": "nudge", "dir": 335, "amount": 0.5, "duration": 2.6},
+  "hover": {"preset": "pass", "dir": 335, "amount": 1, "duration": 1},
+  "parts": {"A": {"preset": "pass", "dir": 180, "amount": 0.5, "duration": 1.3}},
+  "deco": "breathe",
+  "alt": [ {"preset": "rise", "amount": 0.7}, {"preset": "float"} ],
+  "swap": [ {"to": "plane-landing", "effect": "fade"}, {"to": "plane", "effect": "slide-up"} ]
 }

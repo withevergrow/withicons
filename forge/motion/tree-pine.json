@@ -1,43 +1,35 @@
 {
   "name": "tree-pine",
-  "intent": "sways gently from its trunk like a pine in the wind",
+  "intent": "the pine bends gently in the wind over a steady trunk",
   "loop": {
     "preset": "sway",
-    "origin": [
-      12,
-      21.5
-    ],
-    "amount": 0.5,
+    "origin": [12, 21.5],
+    "amount": 0.45,
     "duration": 3.8
   },
   "hover": {
     "preset": "sway",
-    "origin": [
-      12,
-      21.5
-    ],
-    "amount": 1.2,
+    "origin": [12, 21.5],
+    "amount": 1.1,
     "duration": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "amount": 0.25,
+      "delay": 0.06
+    }
+  },
+  "deco": "twinkle",
   "alt": [
+    {
+      "preset": "rock",
+      "origin": [12, 21.5],
+      "amount": 0.4
+    },
     {
       "preset": "twinkle",
       "duration": 2.2
-    },
-    {
-      "preset": "breathe",
-      "origin": [
-        12,
-        21.5
-      ]
-    },
-    {
-      "preset": "rock",
-      "origin": [
-        12,
-        21.5
-      ],
-      "amount": 0.5
     }
   ],
   "swap": [

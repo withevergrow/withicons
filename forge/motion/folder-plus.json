@@ -1,35 +1,10 @@
 {
   "name": "folder-plus",
-  "intent": "gently pulses, pops when you create a folder",
-  "loop": {
-    "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        20
-      ]
-    },
-    {
-      "preset": "bounce",
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "folder",
-      "effect": "scale"
-    },
-    {
-      "to": "check",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the plus pops inside a calm folder, like a new one being made",
+  "loop": {"preset": "pulse", "origin": [12,13], "amount": 0.25, "duration": 3},
+  "hover": {"preset": "pop", "origin": [12,13.5]},
+  "parts": {"A": {"preset": "pop", "origin": [12,13.5], "amount": 0.9, "duration": 3, "delay": 0.1}},
+  "deco": "twinkle",
+  "alt": [ {"preset": "jelly", "origin": [12,20]}, {"preset": "bounce", "origin": [12,20], "amount": 0.6} ],
+  "swap": [ {"to": "folder", "effect": "scale"}, {"to": "check", "effect": "scale"} ]
 }

@@ -1,17 +1,20 @@
 {
   "name": "more-vertical",
-  "intent": "dots ripple like more options are waiting",
+  "intent": "dots swell softly like more options are waiting",
   "loop": {
-    "preset": "type",
-    "amount": 0.6,
-    "duration": 1.4
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 2.6
   },
   "hover": {
-    "preset": "jelly"
+    "preset": "jelly",
+    "amount": 0.8
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "pulse"
+      "preset": "type",
+      "amount": 0.5
     },
     {
       "preset": "nudge",

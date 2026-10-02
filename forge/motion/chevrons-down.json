@@ -1,8 +1,18 @@
 {
   "name": "chevrons-down",
-  "intent": "nudges downward to say there is more below",
-  "loop": { "preset": "nudge", "dir": 90, "amount": 0.6, "duration": 1.8 },
-  "hover": { "preset": "pass", "dir": 90, "duration": 0.7 },
-  "alt": [ { "preset": "drop" }, { "preset": "nudge", "dir": 90, "amount": 1.4 } ],
-  "swap": [ { "to": "chevrons-up", "effect": "rotate" }, { "to": "chevron-down", "effect": "scale" }, { "to": "chevrons-up-down", "effect": "fade" } ]
+  "intent": "steps down for more below, the lower chevron leading",
+  "loop": { "preset": "nudge", "dir": 90, "amount": 0.35, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.4, "duration": 0.6 },
+  "parts": {
+    "A": { "preset": "nudge", "dir": 90, "amount": 0.75 }
+  },
+  "alt": [
+    { "preset": "pass", "dir": 90, "duration": 0.7 },
+    { "preset": "drop" }
+  ],
+  "swap": [
+    { "to": "chevrons-up", "effect": "rotate" },
+    { "to": "chevron-down", "effect": "scale" },
+    { "to": "chevrons-up-down", "effect": "fade" }
+  ]
 }

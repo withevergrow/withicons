@@ -1,37 +1,48 @@
 {
   "name": "chart-pie",
-  "intent": "turns slowly like shares settling into place",
+  "intent": "one slice slides out from the pie, then settles back in",
   "loop": {
-    "preset": "spin",
+    "preset": "pulse",
     "origin": [
-      11,
-      13
+      10,
+      14
     ],
-    "duration": 6
+    "amount": 0.25,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "spin-once",
+    "preset": "pop",
     "origin": [
-      11,
-      13
+      10,
+      14
     ],
-    "duration": 0.9
+    "amount": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.6,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "pop",
-      "origin": [
-        11,
-        13
-      ]
-    },
-    {
-      "preset": "pulse",
+      "preset": "spin-once",
       "origin": [
         11,
         13
       ],
-      "amount": 0.6
+      "duration": 0.9
+    },
+    {
+      "preset": "spin",
+      "origin": [
+        11,
+        13
+      ],
+      "duration": 6
     }
   ],
   "swap": [

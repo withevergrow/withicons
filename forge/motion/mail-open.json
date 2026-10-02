@@ -1,31 +1,9 @@
 {
   "name": "mail-open",
-  "intent": "breathes softly as a read letter, pops when opened",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "float",
-      "amount": 0.5
-    },
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        21
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "mail",
-      "effect": "flip"
-    }
-  ]
+  "intent": "an opened letter drifts gently; pops on hover",
+  "loop": {"preset": "float", "amount": 0.3, "duration": 3.2},
+  "hover": {"preset": "pop", "origin": [12,21], "duration": 0.5},
+  "deco": "breathe",
+  "alt": [ {"preset": "float", "amount": 0.5}, {"preset": "jelly", "origin": [12,21]} ],
+  "swap": [ {"to": "mail", "effect": "flip"} ]
 }

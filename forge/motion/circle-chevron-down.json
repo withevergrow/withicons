@@ -1,15 +1,10 @@
 {
   "name": "circle-chevron-down",
-  "intent": "bobs downward to hint there is more to open",
-  "loop": { "preset": "nudge", "dir": 90, "amount": 0.35, "duration": 2.2 },
-  "hover": { "preset": "nudge", "dir": 90, "amount": 0.8, "duration": 0.6 },
-  "alt": [
-    { "preset": "pop" },
-    { "preset": "bounce", "amount": 0.5 }
-  ],
-  "swap": [
-    { "to": "circle-chevron-right", "effect": "rotate" },
-    { "to": "circle-chevron-down@solid", "effect": "scale" },
-    { "to": "chevron-down", "effect": "fade" }
-  ]
+  "intent": "chevron dips inside its ring to hint there is more below",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "pop", "amount": 0.6, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 90, "amount": 0.45, "delay": 0.05 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "pop" }, { "preset": "bounce", "amount": 0.5 }],
+  "swap": [{ "to": "circle-chevron-right", "effect": "rotate" }, { "to": "circle-chevron-down@solid", "effect": "scale" }, { "to": "chevron-down", "effect": "fade" }]
 }

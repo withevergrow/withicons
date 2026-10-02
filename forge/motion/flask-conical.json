@@ -1,8 +1,40 @@
 {
   "name": "flask-conical",
-  "intent": "swirls the liquid like a reaction is brewing",
-  "loop":  { "preset": "rock", "origin": [12, 21], "amount": 0.5, "duration": 3 },
-  "hover": { "preset": "wiggle", "origin": [12, 21], "amount": 0.9 },
-  "alt":   [ { "preset": "bounce", "amount": 0.6 }, { "preset": "glow" }, { "preset": "flicker" } ],
-  "swap":  [ { "to": "flask-conical@solid", "effect": "fade" } ]
+  "intent": "rocks on its base while the liquid inside sloshes behind",
+  "loop": {
+    "preset": "rock",
+    "origin": [12, 21],
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [12, 21],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "rock",
+      "origin": [12, 14.5],
+      "amount": 0.7,
+      "delay": 0.12
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [12, 21],
+      "amount": 0.5
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "flask-conical@solid",
+      "effect": "fade"
+    }
+  ]
 }

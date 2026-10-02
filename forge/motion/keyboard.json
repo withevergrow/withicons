@@ -1,15 +1,22 @@
 {
   "name": "keyboard",
-  "intent": "jitters softly like keys being typed",
+  "intent": "the keys press down as if someone is typing",
   "loop": {
     "preset": "type",
-    "amount": 0.6,
-    "duration": 1.2
+    "amount": 0.25,
+    "duration": 1.4
   },
   "hover": {
     "preset": "type",
-    "amount": 1,
+    "amount": 0.6,
     "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.9,
+      "delay": 0.1
+    }
   },
   "alt": [
     {

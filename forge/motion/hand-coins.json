@@ -1,17 +1,51 @@
 {
   "name": "hand-coins",
-  "intent": "offers up a coin, a payment on its way",
-  "loop": { "preset": "float", "amount": 0.4, "duration": 3 },
-  "hover": { "preset": "nudge", "dir": 270, "amount": 0.7, "duration": 0.7 },
+  "intent": "the hand offers, the coin lifting a beat later; a payment on its way",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.8,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
   "alt": [
-    { "preset": "bounce", "origin": [12, 21], "amount": 0.6 },
-    { "preset": "flip" },
-    { "preset": "pop" }
+    {
+      "preset": "bounce",
+      "origin": [12, 21],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
   ],
   "swap": [
-    { "to": "coins", "effect": "slide-up" },
-    { "to": "banknote", "effect": "fade" },
-    { "to": "wallet", "effect": "slide-down" },
-    { "to": "hand-heart", "effect": "fade" }
+    {
+      "to": "coins",
+      "effect": "slide-up"
+    },
+    {
+      "to": "banknote",
+      "effect": "fade"
+    },
+    {
+      "to": "wallet",
+      "effect": "slide-down"
+    },
+    {
+      "to": "hand-heart",
+      "effect": "fade"
+    }
   ]
 }

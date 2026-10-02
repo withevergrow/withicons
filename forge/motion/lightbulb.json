@@ -1,16 +1,28 @@
 {
   "name": "lightbulb",
-  "intent": "glows softly, like an idea switching on",
+  "intent": "glows softly as its filament flickers on, like an idea",
   "loop": {
     "preset": "glow",
     "amount": 0.8,
-    "duration": 2.6
+    "duration": 2.8
   },
   "hover": {
     "preset": "glow",
     "amount": 1.4,
-    "duration": 0.9
+    "duration": 1.2
   },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        12.5
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "flicker",

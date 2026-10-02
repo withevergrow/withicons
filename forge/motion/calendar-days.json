@@ -1,18 +1,38 @@
 {
   "name": "calendar-days",
-  "intent": "breathes calmly, flips to the month on hover",
+  "intent": "the day dots swell softly, a calm month at a glance",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 4
+    "preset": "pulse",
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.25,
+    "duration": 3.6
   },
   "hover": {
-    "preset": "flip",
-    "duration": 0.8
+    "preset": "pop",
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        15.5
+      ],
+      "amount": 0.5,
+      "delay": 0.15
+    }
   },
   "alt": [
     {
-      "preset": "pop"
+      "preset": "flip",
+      "duration": 0.8
     },
     {
       "preset": "zoom",

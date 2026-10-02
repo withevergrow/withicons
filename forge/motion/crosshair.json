@@ -1,14 +1,14 @@
 {
   "name": "crosshair",
-  "intent": "pulses as it locks on to a target",
+  "intent": "the sight holds steady while the centre dot pulses, locked on",
   "loop": {
     "preset": "pulse",
     "origin": [
       12,
       12
     ],
-    "amount": 0.7,
-    "duration": 1.8
+    "amount": 0.3,
+    "duration": 2.4
   },
   "hover": {
     "preset": "zoom",
@@ -16,8 +16,22 @@
       12,
       12
     ],
+    "amount": 0.8,
     "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 1.4,
+      "duration": 1.2,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "spin-once",

@@ -1,13 +1,13 @@
 {
   "name": "video-call",
-  "intent": "pulses gently like a call that is live",
+  "intent": "pulses gently like a live call, bounces when you join",
   "loop": {
     "preset": "pulse",
     "origin": [
-      12,
+      9,
       12
     ],
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 2.4
   },
   "hover": {
@@ -16,9 +16,10 @@
       9,
       19.5
     ],
-    "amount": 0.9,
-    "duration": 0.7
+    "amount": 0.7,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "glow"

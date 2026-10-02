@@ -1,14 +1,10 @@
 {
   "name": "user-plus",
-  "intent": "pops in like a new friend joining",
+  "intent": "person rests while the plus pops like an invite, new friend",
   "loop": {
-    "preset": "pulse",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.5,
-    "duration": 2.6
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3.2
   },
   "hover": {
     "preset": "pop",
@@ -16,9 +12,22 @@
       12,
       21
     ],
-    "amount": 1.1,
+    "amount": 1,
     "duration": 0.5
   },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        19,
+        10
+      ],
+      "amount": 1.2,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "jelly",

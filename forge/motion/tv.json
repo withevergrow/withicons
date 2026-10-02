@@ -1,9 +1,9 @@
 {
   "name": "tv",
-  "intent": "screen flickers softly like a TV that is on",
+  "intent": "screen glows softly while the antenna ears jiggle for signal",
   "loop": {
     "preset": "flicker",
-    "amount": 0.4,
+    "amount": 0.3,
     "duration": 3
   },
   "hover": {
@@ -12,8 +12,22 @@
       12,
       20
     ],
-    "amount": 0.8
+    "amount": 0.6,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "ring",
+      "origin": [
+        12,
+        6.5
+      ],
+      "amount": 0.7,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "glow",

@@ -1,8 +1,44 @@
 {
   "name": "square-plus",
-  "intent": "pops forward, ready to add a new item",
-  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "pop" },
-  "alt": [ { "preset": "jelly" }, { "preset": "breathe" } ],
-  "swap": [ { "to": "square-minus", "effect": "rotate" }, { "to": "square-x", "effect": "rotate" }, { "to": "plus", "effect": "scale" } ]
+  "intent": "the plus swells inside a calm box, ready to add",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.8,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "square-minus",
+      "effect": "rotate"
+    },
+    {
+      "to": "square-x",
+      "effect": "rotate"
+    },
+    {
+      "to": "plus",
+      "effect": "scale"
+    }
+  ]
 }

@@ -1,8 +1,46 @@
 {
   "name": "network",
-  "intent": "pulses from the hub out to every connected device",
-  "loop": { "preset": "pulse", "origin": [12, 5], "amount": 0.4, "duration": 2.4 },
-  "hover": { "preset": "nod", "amount": 0.6, "duration": 0.6 },
-  "alt": [ { "preset": "draw" }, { "preset": "glow", "amount": 0.6 } ],
-  "swap": [ { "to": "router", "effect": "flip" }, { "to": "server", "effect": "fade" }, { "to": "globe", "effect": "scale" } ]
+  "intent": "links light up from the hub out to every device",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 0.8,
+      "duration": 2.4,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "glow",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "router",
+      "effect": "flip"
+    },
+    {
+      "to": "server",
+      "effect": "fade"
+    },
+    {
+      "to": "globe",
+      "effect": "scale"
+    }
+  ]
 }

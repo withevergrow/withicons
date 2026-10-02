@@ -4,6 +4,7 @@
 // of it as real holes, all lit by one light from the upper-left.
 import { N, NN, H, X0, gx, segsOf, distField, evenOddMask, maxFilter, sample, contours, ringsToD } from './_gloss-field.mjs'
 import { resample, pointInRing } from '../kernel/geom.mjs'
+import { splitText, textNodes } from './_live-text.mjs'
 
 // ---- constants (one light, one width, one inset for every icon) -----------
 const R = 1.35            // tube radius  (stroke 2.7u)
@@ -39,19 +40,79 @@ export default {
   description: 'Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour.',
   strokeWidth: false,
   root: { fill: 'currentColor' },
-  render(icon) {
+  render(full) {
+    // Live icons: free text (no frame behind it) would inflate into blobs; it is drawn as a crisp round stroke
+    const { icon, free } = splitText(full)
+    const text = textNodes(free, { 'stroke-width': 2.25 })
     let B = null
-    try { B = body(icon) } catch { return [] }
-    if (!B) return []
+    try { B = body(icon) } catch { return text }
+    if (!B) return text
     let S = B.depth
     try {
       const hl = highlights(B)
       S = new Float32Array(NN)
       for (let k = 0; k < NN; k++) S[k] = Math.min(B.depth[k], hl[k])
     } catch { /* never throw: fall back to the unlit body */ }
-    const path = ringsToD(contours(S, 0))
-    return path ? [['path', { d: path, 'fill-rule': 'evenodd' }]] : []
+    const rings = contours(S, 0)
+    let parts = null
+    try { parts = plateParts(icon, B, S, rings) } catch { parts = null }
+    if (parts) return [...parts, ...text]
+    const path = ringsToD(rings)
+    return [...(path ? [['path', { d: path, 'fill-rule': 'evenodd' }]] : []), ...text]
   },
+}
+
+// ---------------------------------------------------------------------------
+// MOTION PARTS (forge/MOTION.md "Parts choreography"). The inflated mass is one field, so plates that touch
+// fuse into one blob. Every separate blob whose skeleton is a single plate (an S badge behind its moat, a
+// detached A part) becomes its own path tagged wm-k / wm-a / wm-s; a blob mixing plates counts as K.
+// Separate blobs never overlap, so the split paints the same shapes (only anti-aliased pixels shared across a
+// sub-pixel gap composite a shade differently). Returns null when nothing splits.
+// (The carved highlights are holes in the mass, so there is no separate wm-shine node.)
+function plateParts(icon, B, S, rings) {
+  const lines = (icon.lines || []).filter(l => l.pts && l.pts.length)
+  const platesIn = new Set(lines.map(l => l.plate || 'K'))
+  if (platesIn.size < 2) return null
+  const lab = labelsOf(B.depth)
+  const seen = new Map()     // depth blob -> Set of plates
+  const mark = (x, y, pl) => {
+    const i0 = ci(x), j0 = ci(y)
+    let bk = -1, bv = 0
+    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { const k = (j0 + dy) * N + i0 + dx; if (k >= 0 && k < NN && B.depth[k] > bv) { bv = B.depth[k]; bk = k } }
+    if (bk < 0 || lab[bk] < 0) return
+    if (!seen.has(lab[bk])) seen.set(lab[bk], new Set())
+    seen.get(lab[bk]).add(pl)
+  }
+  for (const l of lines) for (const p of resample(l.pts, 0.5, l.closed)) mark(p.p[0], p.p[1], l.plate || 'K')
+  // fills: a fill traced by an A or S path belongs to that plate, any other fill to the body
+  const byPl = {}
+  for (const l of lines) if (l.plate === 'A' || l.plate === 'S') (byPl[l.plate] ||= []).push(l)
+  const dPl = Object.entries(byPl).map(([pl, ls]) => [pl, distField(segsOf(ls), 1)])
+  for (const f of icon.fills || []) {
+    const rs = (f.set && f.set.length ? f.set : (f.subs || []).map(q => q.pts)).filter(r => r && r.length > 2)
+    const pts = rs.flat()
+    if (!pts.length) continue
+    let pl = 'K'
+    for (const [p, dF] of dPl) if (pts.filter(q => sample(dF, q[0], q[1]) < 0.35).length / pts.length > 0.5) { pl = p; break }
+    for (const q of pts) mark(q[0], q[1], pl)
+  }
+  const plateOf = b => { const ps = seen.get(b); return ps && ps.size === 1 ? [...ps][0] : 'K' }
+  const groups = { K: [], A: [], S: [] }
+  for (const r of rings) {
+    // the blob this ring bounds: the deepest body cell beside its first point
+    const i0 = ci(r[0][0]), j0 = ci(r[0][1])
+    let bk = -1, bv = 0
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const k = (j0 + dy) * N + i0 + dx; if (k >= 0 && k < NN && S[k] > bv) { bv = S[k]; bk = k } }
+    const pl = bk >= 0 && lab[bk] >= 0 ? plateOf(lab[bk]) : 'K'
+    groups[pl === 'A' || pl === 'S' ? pl : 'K'].push(r)
+  }
+  if ((groups.K.length > 0) + (groups.A.length > 0) + (groups.S.length > 0) < 2) return null
+  const out = []
+  for (const pl of ['K', 'A', 'S']) {
+    const d = groups[pl].length ? ringsToD(groups[pl]) : ''
+    if (d) out.push(['path', { d, 'fill-rule': 'evenodd', class: 'wm-' + pl.toLowerCase() }])
+  }
+  return out.length > 1 ? out : null
 }
 
 // ---------------------------------------------------------------------------

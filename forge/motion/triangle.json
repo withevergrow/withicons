@@ -1,37 +1,36 @@
 {
   "name": "triangle",
-  "intent": "breathes calmly, then spins round on its centre",
+  "intent": "floats calmly, then nudges up like a rising delta",
   "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      14
-    ],
-    "amount": 0.7,
-    "duration": 3.2
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 3.4
   },
   "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      14
-    ]
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.7,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "nudge",
-      "dir": 270,
+      "preset": "breathe",
+      "origin": [
+        12,
+        14.7
+      ],
       "amount": 0.6
-    },
-    {
-      "preset": "flip"
     },
     {
       "preset": "pulse",
       "origin": [
         12,
-        14
+        14.7
       ]
+    },
+    {
+      "preset": "flip"
     }
   ],
   "swap": [

@@ -108,8 +108,8 @@ test('flicker can not be sped past its flash-safe minimum', () => {
   assert.match(css, /animation:var\(--_an\) max\(var\(--_ad\), var\(--_am\)\) var\(--_ae\) var\(--wm-delay, 0s\) infinite both/)
   assert.match(css, /animation:var\(--_an\) max\(var\(--_ad\), var\(--_am\)\) var\(--_ae\) var\(--wm-delay, 0s\) 1 both/)
   assert.ok(css.includes('--_am:var(--wmP-m, var(--wmL-m, 0s))') && css.includes('--_am:var(--wmP-m, var(--wmH-m, 0s))'))
-  assert.ok(/\.wm-p-flicker,with-icon\[preset="flicker"\]\{[^}]*--wmP-m:1\.2s\}/.test(css))
-  assert.ok(/\.wm-p-pop,with-icon\[preset="pop"\]\{[^}]*--wmP-m:0s\}/.test(css))
+  assert.ok(/\.wm-p-flicker,with-icon\[preset="flicker"\]\{[^}]*--wmP-m:1\.2s[;}]/.test(css))
+  assert.ok(/\.wm-p-pop,with-icon\[preset="pop"\]\{[^}]*--wmP-m:0s[;}]/.test(css))
 })
 
 test('loops pause offscreen (wm-offscreen) like wm-paused', () => {

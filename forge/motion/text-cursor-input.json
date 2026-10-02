@@ -1,8 +1,44 @@
 {
   "name": "text-cursor-input",
-  "intent": "twitches like keystrokes landing in the field as you type",
-  "loop": { "preset": "type", "amount": 0.6, "duration": 1.6 },
-  "hover": { "preset": "type" },
-  "alt": [ { "preset": "flicker", "amount": 0.6 }, { "preset": "tilt", "origin": [14.5, 20.5] } ],
-  "swap": [ { "to": "type", "effect": "fade" } ]
+  "intent": "the cursor blinks in a still field, then keystrokes land on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "type",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        14.5,
+        12
+      ],
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        14.5,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "type",
+      "effect": "fade"
+    }
+  ]
 }

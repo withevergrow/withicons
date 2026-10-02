@@ -72,7 +72,7 @@ hand and everything after that is published by GitHub Actions without tokens.
 1. **Before the first push**, review history for anything private: `git log --stat`, plus `forge/.claims/` and `.preview/`
    (internal working files; delete or `.gitignore` them). The old name *egopenicons* in history is harmless.
 2. **[you] Push** `main`. Repository settings:
-   - Description: *"500 free icons in 12 styles, with animations, for websites, apps, slides and docs. React, Vue, Svelte, Angular, Solid, web component, MCP."*
+   - Description: *"500 free icons in 15 styles (incl. 3D luxe, Bauhaus and skeuomorphic), with animations and live icons, for websites, apps, slides and docs. React, Vue, Svelte, Angular, Solid, web component, MCP."*
    - Website `https://withicons.com`. Topics: `icons svg icon-library react vue svelte angular solidjs web-components mcp design`.
    - Social preview: an OG image (1280x640) from `site/og/`.
    - Features: Issues ✓, Discussions ✓ (categories: Q&A, Ideas, Show and tell), Wiki ✗, Projects optional.
@@ -102,7 +102,7 @@ hand and everything after that is published by GitHub Actions without tokens.
     prop/attribute/export changes, visible geometry changes to a whole style.
   - `0.x.PATCH` bump means additive or fixes: new icons, new aliases, drawing fixes to single icons, docs.
   - A renamed icon keeps its old name as an alias for at least one minor version.
-- **1.0** once names, props, the 12 styles and the motion classes have been stable for about two minors with no breaking reports.
+- **1.0** once names, props, the 15 styles and the motion classes have been stable for about two minors with no breaking reports.
 - Prereleases (`0.3.0-beta.1`) publish under the `next` dist-tag automatically.
 - `CHANGELOG.md` (Keep a Changelog format): every user-facing PR adds a line under *Unreleased*. GitHub
   Release notes are generated from PR titles by `release.yml`.
@@ -118,7 +118,7 @@ hand and everything after that is published by GitHub Actions without tokens.
 ## 4. First npm release checklist (0.2.0)
 
 `v0.1.0` (300 icons x 7 styles) is already tagged and released on GitHub, but nothing is on npm yet. The tree now has
-500 icons x 12 styles, motion and palettes, so the first npm publish is **0.2.0**: bump `withiconsVersion` in the root
+500 icons x 15 styles, motion, palettes and live icons, so the first npm publish is **0.2.0**: bump `withiconsVersion` in the root
 `package.json`, run `node forge/build.mjs`, move CHANGELOG "Unreleased" to `## 0.2.0 - YYYY-MM-DD`, commit, then publish
 by hand (section 1.5). `scripts/publish.mjs` refuses to publish a version whose tag sits on another commit.
 
@@ -266,12 +266,12 @@ pitch, and "why another icon set" (one skeleton, 7 renderers, aliases for humans
 | T-1 | MCP directories | **official MCP Registry** (`mcp-publisher publish`, namespace `io.github.withevergrow/withicons` or DNS-verified `com.withicons/*`), Smithery, Glama, PulseMCP, mcp.so, mcpservers.org, `punkpeye/awesome-mcp-servers` PR |
 | T-1 | agent skill/rules directories | Claude skills lists (e.g. awesome-claude-skills PRs), cursor.directory (MCP + rules from `.cursor/rules/with-icons.mdc`), Cline MCP marketplace, Windsurf/Continue hubs |
 | T0 | Product Hunt | reply to every comment all day |
-| T0 | **Show HN** | "Show HN: with icons - 500 icons drawn once, rendered in 12 styles by code, with animations". Post 8-10 AM ET, link the site (not the repo), first comment explains the forge, stay for questions |
-| T0 | X, Bluesky, Mastodon, LinkedIn | video first; thread: problem, the 12 styles (kawaii, pixel, glass...), hover and swap animations, aliases ("bin" finds trash), AI agents (MCP + skill), MIT |
+| T0 | **Show HN** | "Show HN: with icons - 500 icons drawn once, rendered in 15 styles by code, with animations". Post 8-10 AM ET, link the site (not the repo), first comment explains the forge, stay for questions |
+| T0 | X, Bluesky, Mastodon, LinkedIn | video first; thread: problem, the 15 styles (kawaii, pixel, glass, 3D luxe, Bauhaus, skeuo...), live icons (a calendar that shows today), hover and swap animations, aliases ("bin" finds trash), AI agents (MCP + skill), MIT |
 | T0..T+7 | Reddit | r/webdev (Showoff Saturday only), r/web_design, r/SideProject, r/opensource, r/reactjs, r/vuejs, r/sveltejs, r/angular, r/solidjs, r/UI_Design, r/ClaudeAI, r/cursor. Read each sub's self-promo rules, one post per sub, spaced out |
 | T+1 | newsletters (submit) | JavaScript Weekly, Frontend Focus, React Status, Node Weekly, Bytes, TLDR Web Dev, Sidebar.io, Smashing, CSS Weekly, Console.dev, Changelog News, Designer News |
 | T+3 | awesome lists (PRs) | awesome-react-components, awesome-vue, awesome-svelte, awesome-angular, awesome-solid-js, awesome-web-components, awesome-design-systems, awesome-svg, awesome-opensource-design |
-| T+7 | write-up | blog post or dev.to: "How we generate 6,000 icons from 500 skeletons" (Hacker News second chance, Lobsters) |
+| T+7 | write-up | blog post or dev.to: "How we generate 7,500 icons from 500 skeletons" (Hacker News second chance, Lobsters) |
 
 ## 9. Post-launch metrics (review weekly for the first 8 weeks)
 

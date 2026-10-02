@@ -610,14 +610,17 @@ export default async function emit(ctx) {
   }
   site.set('data/meta.js', `${dh}export default ${J({ names: ctx.icons.map(i => i.name), aliases })}\n`)
 
-  const writeDir = (rel, map) => {
+  // keep: files other emitters put in the same folder (emit-search writes site/vendor/with/search.js)
+  const writeDir = (rel, map, keep = []) => {
     const dir = path.join(ctx.root, rel)
+    const saved = keep.map(k => [k, path.join(dir, k)]).filter(([, p]) => fs.existsSync(p)).map(([k, p]) => [k, fs.readFileSync(p)])
     fs.rmSync(dir, { recursive: true, force: true })
+    for (const [k, buf] of saved) { const p = path.join(dir, k); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, buf) }
     for (const [f, t] of map) { const p = path.join(dir, f); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, t) }
   }
   const writeAll = () => writeDir('packages/web/dist/classes', files)
   writeAll()
-  writeDir('site/vendor/with', site)
+  writeDir('site/vendor/with', site, ['search.js'])
 
   // package.json / README were just (re)written by emit-web; patch in the classes exports + docs
   const P = f => path.join(ctx.root, 'packages/web', f)

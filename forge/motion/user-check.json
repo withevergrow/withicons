@@ -1,20 +1,29 @@
 {
   "name": "user-check",
-  "intent": "nods yes like a member just approved",
+  "intent": "person rests while the check pops now and then: approved",
   "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.6,
+    "preset": "float",
+    "amount": 0.3,
     "duration": 3.4
   },
   "hover": {
     "preset": "nod",
-    "amount": 1,
+    "amount": 0.8,
     "duration": 0.6
   },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        18.75,
+        10.25
+      ],
+      "amount": 1,
+      "duration": 3.4,
+      "delay": 0.12
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "draw"

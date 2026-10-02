@@ -1,26 +1,22 @@
 {
   "name": "tag",
-  "intent": "swings from its hole like a price tag on a shelf",
+  "intent": "swings from its hole like a price tag on a shelf hook",
   "loop": {
     "preset": "sway",
-    "origin": [
-      8,
-      8
-    ],
+    "origin": [8, 8],
     "amount": 0.6,
     "duration": 3
   },
   "hover": {
     "preset": "ring",
-    "origin": [
-      8,
-      8
-    ],
+    "origin": [8, 8],
     "amount": 0.8
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "wiggle",
+      "origin": [8, 8],
       "amount": 0.7
     },
     {
@@ -33,7 +29,7 @@
       "effect": "scale"
     },
     {
-      "to": "percent",
+      "to": "badge-percent",
       "effect": "fade"
     },
     {

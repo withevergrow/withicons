@@ -1,47 +1,9 @@
 {
   "name": "heart-pulse",
-  "intent": "beats steadily like a healthy heart",
-  "loop": {
-    "preset": "beat",
-    "origin": [
-      12,
-      12.5
-    ],
-    "amount": 0.7,
-    "duration": 1.4
-  },
-  "hover": {
-    "preset": "beat",
-    "origin": [
-      12,
-      12.5
-    ],
-    "amount": 1.2
-  },
-  "alt": [
-    {
-      "preset": "pulse",
-      "origin": [
-        12,
-        12.5
-      ]
-    },
-    {
-      "preset": "draw"
-    }
-  ],
-  "swap": [
-    {
-      "to": "heart",
-      "effect": "fade"
-    },
-    {
-      "to": "activity",
-      "effect": "fade"
-    },
-    {
-      "to": "heart-pulse@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "beats steadily with the heartbeat trace riding along",
+  "loop": {"preset": "beat", "origin": [12,12.5], "amount": 0.7, "duration": 1.4},
+  "hover": {"preset": "beat", "origin": [12,12.5], "amount": 1.2},
+  "deco": "float",
+  "alt": [ {"preset": "pulse", "origin": [12,12.5]}, {"preset": "draw"} ],
+  "swap": [ {"to": "heart", "effect": "fade"}, {"to": "activity", "effect": "fade"}, {"to": "heart-pulse@solid", "effect": "scale"} ]
 }

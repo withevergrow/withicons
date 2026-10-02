@@ -1,8 +1,47 @@
 {
   "name": "parking",
-  "intent": "pulses softly like a sign showing a free space",
-  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "pop", "duration": 0.5 },
-  "alt": [ { "preset": "flip" }, { "preset": "glow" } ],
-  "swap": [ { "to": "car", "effect": "slide-down" }, { "to": "map-pin", "effect": "flip" }, { "to": "parking@solid", "effect": "scale" } ]
+  "intent": "sign glows softly while the P pulses like a free space",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        11.25,
+        12
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "car",
+      "effect": "slide-down"
+    },
+    {
+      "to": "map-pin",
+      "effect": "flip"
+    },
+    {
+      "to": "parking@solid",
+      "effect": "scale"
+    }
+  ]
 }

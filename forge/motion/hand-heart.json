@@ -1,34 +1,41 @@
 {
   "name": "hand-heart",
-  "intent": "the heart beats softly in an open, caring hand",
+  "intent": "the heart beats softly above a steady, open hand",
   "loop": {
-    "preset": "beat",
+    "preset": "pulse",
     "origin": [
       12,
       21
     ],
-    "amount": 0.5,
-    "duration": 2
+    "amount": 0.25,
+    "duration": 2.4
   },
   "hover": {
-    "preset": "beat",
+    "preset": "pop",
     "origin": [
       12,
       21
     ],
-    "amount": 1.1
+    "amount": 0.4,
+    "duration": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "beat",
+      "origin": [
+        12,
+        7
+      ],
+      "amount": 0.7,
+      "duration": 2.4,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "float",
       "amount": 0.5
-    },
-    {
-      "preset": "breathe",
-      "origin": [
-        12,
-        21
-      ]
     },
     {
       "preset": "rise",

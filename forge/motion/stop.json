@@ -1,19 +1,29 @@
 {
   "name": "stop",
-  "intent": "pulses softly while something runs, stops with a firm tap",
+  "intent": "stands by with a slow pulse, squashes like a pressed button",
   "loop": {
     "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.4
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.4,
+    "duration": 2.6
   },
   "hover": {
-    "preset": "pop",
-    "amount": 0.8
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "jelly",
-      "amount": 0.6
+      "preset": "pop",
+      "amount": 0.8
     },
     {
       "preset": "breathe"

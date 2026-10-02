@@ -1,53 +1,8 @@
 {
   "name": "headphones",
-  "intent": "bops along to the beat of the music",
-  "loop": {
-    "preset": "beat",
-    "origin": [
-      12,
-      17
-    ],
-    "amount": 0.5,
-    "duration": 1.4
-  },
-  "hover": {
-    "preset": "jelly",
-    "origin": [
-      12,
-      17
-    ],
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "rock",
-      "origin": [
-        12,
-        17
-      ],
-      "amount": 0.5
-    },
-    {
-      "preset": "pulse",
-      "amount": 0.5
-    }
-  ],
-  "swap": [
-    {
-      "to": "music-note",
-      "effect": "scale"
-    },
-    {
-      "to": "volume-off",
-      "effect": "fade"
-    },
-    {
-      "to": "headset",
-      "effect": "fade"
-    },
-    {
-      "to": "headphones@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "bops to the beat on your head, wobbles when you point at it",
+  "loop": {"preset": "beat", "origin": [12,17], "amount": 0.4, "duration": 1.6},
+  "hover": {"preset": "jelly", "origin": [12,17], "amount": 0.8},
+  "alt": [ {"preset": "rock", "origin": [12,17], "amount": 0.5}, {"preset": "pulse", "amount": 0.5} ],
+  "swap": [ {"to": "music-note", "effect": "scale"}, {"to": "volume-off", "effect": "fade"}, {"to": "headset", "effect": "fade"}, {"to": "headphones@solid", "effect": "scale"} ]
 }

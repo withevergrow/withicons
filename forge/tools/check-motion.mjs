@@ -19,7 +19,7 @@ export function lint(name, raw, icons, styles) {
   if (raw.name !== name) bad(`name "${raw.name}" != filename`)
   if (!icons.has(name)) bad('no such icon in forge/icons')
   if (typeof raw.intent !== 'string' || !raw.intent.trim() || raw.intent.length > 80) bad('intent must be 1-80 chars')
-  const obj = (o, where) => {
+  const obj = (o, where, part) => {
     if (!o || typeof o !== 'object') return bad(`${where} missing`)
     if (!PRESETS.includes(o.preset)) bad(`${where}.preset "${o.preset}" unknown`)
     if (o.origin !== undefined && !(Array.isArray(o.origin) && o.origin.length === 2 && o.origin.every(v => typeof v === 'number' && v >= 0 && v <= 24))) bad(`${where}.origin must be [x,y] in 0..24`)
@@ -27,7 +27,8 @@ export function lint(name, raw, icons, styles) {
     if (o.amount !== undefined && !(typeof o.amount === 'number' && o.amount >= 0.25 && o.amount <= 2)) bad(`${where}.amount must be 0.25..2`)
     if (o.duration !== undefined && !(typeof o.duration === 'number' && o.duration >= 0.3 && o.duration <= 6)) bad(`${where}.duration must be 0.3..6`)
     if (o.steps !== undefined && !(Number.isInteger(o.steps) && o.steps >= 0 && o.steps <= 12)) bad(`${where}.steps must be int 0..12`)
-    const extra = Object.keys(o).filter(k => !['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].includes(k))
+    if (part && o.delay !== undefined && !(typeof o.delay === 'number' && o.delay >= 0 && o.delay <= 1)) bad(`${where}.delay must be 0..1`)
+    const extra = Object.keys(o).filter(k => !['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].concat(part ? ['delay'] : []).includes(k))
     if (extra.length) bad(`${where} unknown keys: ${extra.join(',')}`)
   }
   obj(raw.loop, 'loop'); obj(raw.hover, 'hover')
@@ -42,7 +43,13 @@ export function lint(name, raw, icons, styles) {
       if (!EFFECTS.includes(s && s.effect)) bad(`swap[${i}].effect "${s && s.effect}" unknown`)
     })
   }
-  const extra = Object.keys(raw).filter(k => !['name', 'intent', 'loop', 'hover', 'alt', 'swap'].includes(k))
+  // parts choreography (MOTION.md, run 9)
+  if (raw.parts !== undefined) {
+    if (!raw.parts || typeof raw.parts !== 'object' || Array.isArray(raw.parts)) bad('parts must be an object')
+    else for (const [k, v] of Object.entries(raw.parts)) { if (!['A', 'S'].includes(k)) bad(`parts.${k}: only A and S`); else obj(v, `parts.${k}`, true) }
+  }
+  if (raw.deco !== undefined && !['breathe', 'float', 'twinkle', 'still'].includes(raw.deco)) bad('deco must be breathe|float|twinkle|still')
+  const extra = Object.keys(raw).filter(k => !['name', 'intent', 'loop', 'hover', 'alt', 'swap', 'parts', 'deco'].includes(k))
   if (extra.length) bad(`unknown keys: ${extra.join(',')}`)
   return out
 }

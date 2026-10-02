@@ -1,13 +1,10 @@
 {
   "name": "smile",
-  "intent": "blinks and grins like a happy friend",
+  "intent": "squints a happy blink now and then, wobbles with joy on hover",
   "loop": {
-    "preset": "blink",
-    "origin": [
-      12,
-      9.5
-    ],
-    "duration": 4
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.6
   },
   "hover": {
     "preset": "jelly",
@@ -15,9 +12,21 @@
       12,
       21.5
     ],
-    "amount": 1,
     "duration": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        9.5
+      ],
+      "amount": 0.8,
+      "duration": 3.6,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "tada"
@@ -26,7 +35,11 @@
       "preset": "nod"
     },
     {
-      "preset": "breathe"
+      "preset": "blink",
+      "origin": [
+        12,
+        9.5
+      ]
     }
   ],
   "swap": [

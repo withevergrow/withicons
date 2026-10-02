@@ -1,19 +1,29 @@
 {
   "name": "calculator",
-  "intent": "taps away like keys adding up a total",
+  "intent": "the keys tap away inside a steady case, adding up a total",
   "loop": {
-    "preset": "type",
-    "amount": 0.6,
+    "preset": "pulse",
+    "amount": 0.25,
     "duration": 1.6
   },
   "hover": {
     "preset": "type",
-    "amount": 1,
-    "duration": 0.6
+    "amount": 0.5,
+    "duration": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.9,
+      "duration": 1.6,
+      "delay": 0.05
+    }
+  },
+  "deco": "still",
   "alt": [
     {
-      "preset": "nod"
+      "preset": "type",
+      "amount": 0.6
     },
     {
       "preset": "pop"

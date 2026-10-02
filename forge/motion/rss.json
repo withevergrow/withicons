@@ -1,12 +1,13 @@
 {
   "name": "rss",
-  "intent": "broadcasts waves outward like a live feed",
+  "intent": "the source dot pulses and the feed waves light up after it",
   "loop": {
-    "preset": "fill",
+    "preset": "pulse",
     "origin": [
       5.5,
       18.5
     ],
+    "amount": 0.5,
     "duration": 2.4
   },
   "hover": {
@@ -18,6 +19,18 @@
     "amount": 1.2,
     "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "origin": [
+        5.5,
+        18.5
+      ],
+      "duration": 2.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "glow",

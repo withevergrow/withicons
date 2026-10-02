@@ -1,6 +1,6 @@
 # @withicons/react
 
-500 icons x 12 styles for React. Tree-shakable, typed, `currentColor` by default.
+500 icons x 15 styles for React. Tree-shakable, typed, `currentColor` by default.
 
 ```bash
 npm i @withicons/react
@@ -53,13 +53,16 @@ export function Toolbar() {
 | `sticker` | `@withicons/react/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
 | `pixel` | `@withicons/react/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
 | `retro` | `@withicons/react/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
+| `luxe` | `@withicons/react/luxe` | creative | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
+| `bauhaus` | `@withicons/react/bauhaus` | creative | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
+| `skeuo` | `@withicons/react/skeuo` | creative | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
 
 Duo's tint can be recoloured with the CSS variable `--with-duo`.
 
 ### Palette styles
 
-`glass`, `kawaii`, `sticker`, `pixel`, `retro` paint a default multi-colour palette. The main ink stays `currentColor`
-(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead) and every other colour is a CSS custom property with a built-in default,
+`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo` paint a default multi-colour palette. The main ink stays `currentColor`
+(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead, `luxe` draws its bold outline with `--with-luxe-ink` instead, `skeuo` draws its bold outline with `--with-skeuo-ink` instead) and every other colour is a CSS custom property with a built-in default,
 so you can re-theme a page, a section or one icon without touching the SVG:
 
 ```css
@@ -73,6 +76,9 @@ so you can re-theme a page, a section or one icon without touching the SVG:
 | `sticker` | `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
 | `pixel` | `--with-pixel-fill` currentColor, `--with-pixel-shine` #FFFFFF |
 | `retro` | `--with-retro-1` #F4B53F, `--with-retro-2` #EF7D2D, `--with-retro-3` #DE4B3A, `--with-retro-4` #178A86, `--with-retro-shadow` #6B3323 |
+| `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
+| `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #E9772E, `--with-bauhaus-ink` currentColor, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
+| `skeuo` | `--with-skeuo-accent` #F1CF98, `--with-skeuo-c1` #2F72E4, `--with-skeuo-c2` #BFC7D0, `--with-skeuo-c3` #E0483A, `--with-skeuo-c4` #1E2B3B, `--with-skeuo-edge` currentColor, `--with-skeuo-ink` #4F4638, `--with-skeuo-shadow` #15110D, `--with-skeuo-shine` #FFFFFF, `--with-skeuo-tint` #FFFFFF |
 
 Inline SVG (components, `<with-icon>`, sprites, IconNode data) keeps the variables. Standalone `.svg` files have them
 flattened to the defaults, because `<img>`, design tools and rasterizers cannot see CSS.
@@ -172,10 +178,10 @@ import { Icon } from '@withicons/react'
 ```
 
 `name` accepts canonical names and unambiguous aliases (`bin` -> `trash`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** `Icon` references every icon in every style (500 x 12). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+**Bundle cost:** `Icon` references every icon in every style (500 x 15). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
 
 ## Custom icons
 
 `createWithIcon(name, style, displayName, iconNode)` builds a component from IconNode data (`[tag, attrs][]`, 24x24 grid).
 
-MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, 12 deterministic styles, 6,000 icons. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, 15 deterministic styles, 7,500 icons. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

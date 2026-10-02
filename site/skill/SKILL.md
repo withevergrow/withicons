@@ -1,11 +1,11 @@
 ---
 name: with-icons
-description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 12 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel and retro) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, and optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism icon, or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
+description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 15 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel, retro and the studio styles luxe (premium 3D), bauhaus and skeuo (skeuomorphic)) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps), and live icons whose content you set (@withicons/dynamic: a calendar showing a date, a clock showing a time, a notification count, a battery level, a short label). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism/3D/Bauhaus/skeuomorphic icon, a calendar/clock/badge/battery icon with its own date, time, number or text, or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
 ---
 
 # with icons
 
-500 icons, each drawn once and rendered in 12 styles. Every icon uses `currentColor` for its ink, sits on a 24x24 grid and
+500 icons, each drawn once and rendered in 15 styles. Every icon uses `currentColor` for its ink, sits on a 24x24 grid and
 has a default size of 24. Site: https://withicons.com · Repo: https://github.com/withevergrow/withicons · MIT.
 
 ## 1. Choose the package for the stack
@@ -39,13 +39,22 @@ Full snippets for each framework are in [reference/frameworks.md](https://github
   - **sticker**: Y2K die-cut sticker with a white border and sparkles; scrapbook, social, creator and fandom vibes.
   - **pixel**: crisp 8-bit pixel art; games, retro tech, playful dev tools.
   - **retro**: 70s sunset stripes, chunky outline and offset shadow; vintage brands, music, food, posters.
+- **luxe, bauhaus, skeuo** are *studio* styles: art-directed and premium, full colour, at **48px or larger**.
+  - **luxe**: multi-layered 3D, sapphire enamel with polished gold and a jewel; heroes, pricing tiers, fintech, luxury.
+  - **bauhaus**: pure circles, squares and bars in red, yellow and blue, overprinted; posters, portfolios, design, culture.
+  - **skeuo**: skeuomorphic objects in real materials (paper, leather, metal, brass, glass) with bevels and soft shadows;
+    app icons, music/photo/note apps, tactile dashboards.
   Their colours are CSS variables with defaults (`--with-<style>-<role>`, listed in [reference/styles.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/styles.md));
-  the ink stays `currentColor`. Re-theme with CSS on any parent: `.hero { --with-kawaii-body: #c4b5fd }`.
+  the ink stays `currentColor`. Re-theme with CSS on any parent: `.hero { --with-kawaii-fill-1: #c4b5fd }`.
+  Studio styles name every variable after its palette role (`--with-luxe-c1`, `--with-bauhaus-c3`, `--with-skeuo-shadow`;
+  roles: ink c1 c2 c3 c4 tint accent shadow shine edge), so one palette from `withicons palettes <icon>` fits all of them.
 
 Rule: one style per UI region. The only routine mix is line plus solid for inactive and active states. Every style is a subpath:
-`@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`.
+`@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`,
+`/luxe`, `/bauhaus`, `/skeuo`.
 Style words in a search pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "frosted bell" -> glass, "y2k" -> sticker,
-"vintage camera" -> retro). More in [reference/styles.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/styles.md).
+"vintage camera" -> retro, "3d rocket" or "luxury gift" -> luxe, "bauhaus clock" or "geometric star" -> bauhaus,
+"skeuomorphic camera" or "realistic lock" -> skeuo). More in [reference/styles.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/styles.md).
 
 ## 3. Names
 
@@ -124,10 +133,32 @@ import '@withicons/motion/icons.css'    // each icon's tuned motion (pivot, dire
 - An animated icon is still decorative: keep the accessible name on the button, never in the animation.
   Full list of tuned icons: [reference/motion.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/motion.md).
 
+## 7b. Live icons (content you set, separate package)
+
+A separate set of up to 50 **live icons** draws content you choose inside the icon: a calendar with a date, a clock with a
+time, a bell with a count, a battery at a level, a weather icon with a temperature, a tag with a short label. Each is a
+generator that builds a normal skeleton, so it renders in **every style** (line through luxe, bauhaus and skeuo).
+Text is limited to 4 characters so it stays legible at 24px; counts fall back to "99+".
+
+```js
+import { render, list, paramsOf } from '@withicons/dynamic'
+list()                                   // the live icon names
+paramsOf('calendar-date')                // { day: { type: 'int', min: 1, max: 31, … }, month: { type: 'enum', … } }
+render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // -> SVG string
+```
+```html
+<with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii"></with-live-icon>
+```
+
+- A "today" calendar or a ticking clock is the app's job: pass today's values (or re-render each minute). The
+  generators are pure and never read the clock.
+- Live icons need an accessible name that says the value ("17 March", "3 unread"), since the text is drawn, not typed.
+- Try them and copy code at https://withicons.com/live.html. Spec: `forge/DYNAMIC.md` in the repo.
+
 ## 8. Pitfalls
 
 - `import { Bin } from '@withicons/react'` fails because aliases are not exports. Resolve to `Trash` first.
-- The generic `<Icon name=... variant=...>` component bundles **all 6,500 icons**. Use it only for truly dynamic names
+- The generic `<Icon name=... variant=...>` component bundles **all 7,500 icons**. Use it only for truly dynamic names
   (CMS data). Otherwise use named imports, which tree-shake down to the icons you use.
 - `<img src=".../home.svg">` cannot inherit `currentColor` and renders black. Inline the SVG, use the component,
   the sprite or the classes when the colour must follow text.

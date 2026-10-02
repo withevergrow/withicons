@@ -1,39 +1,9 @@
 {
   "name": "film",
-  "intent": "film strip rolls past like a movie reel",
-  "loop": {
-    "preset": "pass",
-    "dir": 0,
-    "amount": 0.5,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "flip",
-    "origin": [
-      12,
-      12
-    ]
-  },
-  "alt": [
-    {
-      "preset": "type"
-    },
-    {
-      "preset": "zoom",
-      "origin": [
-        12,
-        12
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "video-camera",
-      "effect": "flip"
-    },
-    {
-      "to": "image",
-      "effect": "slide-left"
-    }
-  ]
+  "intent": "the strip judders like film running through a projector gate",
+  "loop": { "preset": "type", "amount": 0.5, "duration": 1.2 },
+  "hover": { "preset": "pass", "dir": 0, "amount": 0.6, "duration": 0.7 },
+  "deco": "still",
+  "alt": [ { "preset": "type" }, { "preset": "zoom", "origin": [12, 12] } ],
+  "swap": [ { "to": "video-camera", "effect": "flip" }, { "to": "image", "effect": "slide-left" } ]
 }

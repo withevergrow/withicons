@@ -1,8 +1,9 @@
 {
   "name": "corner-down-left",
-  "intent": "nudges left like pressing Enter",
-  "loop": { "preset": "nudge", "dir": 180, "amount": 0.5, "duration": 2 },
-  "hover": { "preset": "nudge", "dir": 180, "amount": 1.2, "duration": 0.5 },
-  "alt": [ { "preset": "draw" }, { "preset": "pop" } ],
-  "swap": [ { "to": "check", "effect": "scale" }, { "to": "corner-down-right", "effect": "flip" } ]
+  "intent": "presses left like the Enter key, the head leading",
+  "loop": { "preset": "nudge", "dir": 180, "amount": 0.6, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 0.75, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 180, "amount": 0.68 } },
+  "alt": [{ "preset": "draw" }, { "preset": "pop" }],
+  "swap": [{ "to": "check", "effect": "scale" }, { "to": "corner-down-right", "effect": "flip" }]
 }

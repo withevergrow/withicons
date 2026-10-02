@@ -1,14 +1,51 @@
 {
   "name": "phone-missed",
-  "intent": "pulses softly like a missed call waiting, shakes no on hover",
-  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.2 },
-  "hover": { "preset": "shake", "amount": 0.8 },
+  "intent": "rings unanswered while the missed-call mark pulses for attention",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        17.5,
+        5.5
+      ],
+      "amount": 0.9,
+      "duration": 1.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
-    { "preset": "ring", "amount": 0.6 },
-    { "preset": "pop" }
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "shake",
+      "amount": 0.6
+    }
   ],
   "swap": [
-    { "to": "phone-outgoing", "effect": "fade" },
-    { "to": "phone-call", "effect": "rotate" }
+    {
+      "to": "phone-outgoing",
+      "effect": "fade"
+    },
+    {
+      "to": "phone-call",
+      "effect": "rotate"
+    }
   ]
 }

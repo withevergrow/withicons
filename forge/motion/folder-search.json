@@ -1,8 +1,10 @@
 {
   "name": "folder-search",
-  "intent": "tilts its lens, looking through the folder",
-  "loop": { "preset": "tilt", "origin": [11.75, 13], "amount": 0.5, "duration": 2.6 },
-  "hover": { "preset": "tilt", "origin": [11.75, 13], "amount": 1, "duration": 0.8 },
-  "alt": [ { "preset": "zoom", "origin": [11.75, 13], "amount": 0.6 }, { "preset": "orbit", "amount": 0.5 } ],
-  "swap": [ { "to": "folder-open", "effect": "fade" }, { "to": "search", "effect": "scale" }, { "to": "folder", "effect": "fade" } ]
+  "intent": "the lens sweeps side to side searching a still folder, peers closer on hover",
+  "loop": {"preset": "pulse", "origin": [12,13], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "zoom", "origin": [11.75,13], "amount": 0.6, "duration": 0.6},
+  "parts": {"A": {"preset": "tilt", "origin": [11.75,13], "amount": 0.8, "duration": 3.2, "delay": 0.1}},
+  "deco": "breathe",
+  "alt": [ {"preset": "tilt", "origin": [11.75,13], "amount": 0.6}, {"preset": "orbit", "amount": 0.5} ],
+  "swap": [ {"to": "folder-open", "effect": "fade"}, {"to": "search", "effect": "scale"}, {"to": "folder", "effect": "fade"} ]
 }

@@ -1,8 +1,33 @@
 {
   "name": "passport",
-  "intent": "flips open at the border, then rests ready to travel",
-  "loop": { "preset": "float", "amount": 0.4, "duration": 3.4 },
-  "hover": { "preset": "flip", "duration": 0.9 },
-  "alt": [ { "preset": "pop" }, { "preset": "nod", "amount": 0.7 } ],
-  "swap": [ { "to": "id-card", "effect": "flip" }, { "to": "globe", "effect": "fade" } ]
+  "intent": "floats ready to travel, pops like a fresh stamp on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.55
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nod",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "id-card",
+      "effect": "flip"
+    },
+    {
+      "to": "globe",
+      "effect": "fade"
+    }
+  ]
 }

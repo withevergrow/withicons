@@ -1,21 +1,23 @@
 {
   "name": "truck",
-  "intent": "rolls along the road, drives off on hover",
+  "intent": "rumbles over bumps in the road; drives off on hover",
   "loop": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.5,
-    "duration": 2.4
+    "preset": "bounce",
+    "origin": [12, 20],
+    "amount": 0.25,
+    "duration": 1.8
   },
   "hover": {
     "preset": "pass",
     "dir": 0,
     "duration": 1
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "bounce",
-      "amount": 0.4
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
     },
     {
       "preset": "float",

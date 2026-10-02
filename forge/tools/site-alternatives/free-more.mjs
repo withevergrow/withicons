@@ -1,4 +1,5 @@
-// "Free … icons" landers for the playful styles (glass, kawaii, sticker, pixel, retro) and for animated icons.
+// "Free … icons" landers for the playful styles (glass, kawaii, sticker, pixel, retro), the studio styles (luxe as
+// "3D icons", bauhaus, skeuo) and for animated icons.
 // A style lander only exists once its renderer does (hasStyle); curated icon lists keep only icons that exist,
 // so names from the 200-icon expansion appear automatically as they land.
 import { I, esc, cvar, code, STYLES } from './render.mjs'
@@ -174,6 +175,73 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
       ['Can I change the stripe colours?', 'The outline follows the colour you pick. On a website the stripe colours are CSS variables; in design apps, paste the SVG and recolour the stripes.'],
     ],
     related: ['pixel-icons', 'sticker-icons', 'hand-drawn-icons'],
+  })
+
+  /* ───── the studio styles: luxe (3D), bauhaus, skeuo ───── */
+  const STU = stylesIn('studio')
+  const sibS = s => `${styleTitle(s)} is one of ${word(STU.length)} studio styles (${STU.filter(x => x !== s).map(x => `<a href="../styles/${x}.html">${styleTitle(x)}</a>`).join(', ')}): art-directed looks whose colours are role-named CSS variables, so one palette recolours them all. <a href="../styles/${s}.html">See every ${styleTitle(s)} icon</a>.`
+  S('luxe', {
+    slug: '3d-icons', short: 'Free 3D icons', icon: 'gem',
+    title: 'Free 3D icons: premium layered SVG & PNG icons · with icons',
+    desc: `Free 3D icons: ${N} premium icons with real depth, sapphire enamel, polished gold and soft light, as SVG or transparent PNG. Pure vector, no renders. MIT licensed.`,
+    h1: ['Free 3D icons,', 'luxe and layered'], q: 'free 3d icons',
+    answer: () => `The <b>Luxe</b> style turns all ${N} icons into small precious objects: an enamel slab with an extruded side wall, polished gold trim, lit chamfers and a crisp highlight. It is all flat vector layers, so it stays sharp at any size and weighs a few kilobytes. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'luxe', groups: [['Premium favourites', pick(['crown', 'gem', 'trophy', 'medal', 'gift', 'key', 'wallet', 'credit-card', 'coins', 'diamond', 'rocket', 'star', 'heart', 'bell', 'shield-check', 'lock', 'sparkles', 'award', 'badge-check', 'shopping-bag', 'chart-line', 'globe', 'camera', 'home'], 24)], ['Everyday', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="lx-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="lx-where">Hero sections, app tiles and pricing</h2>
+  <p>Landing-page heroes, premium and pricing tiers, fintech and banking apps, onboarding, launch posts and luxury brands. The depth reads best from 48 px up; under that, use Solid or Duo for the same icon.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibS('luxe')], ['Not a render', 'Real vectors: no images, filters or gradients, so it stays crisp and tiny on any screen']])}</div>
+  ${demo(['crown', 'gem', 'trophy', 'gift', 'rocket', 'wallet', 'key', 'heart'], 'luxe')}
+</section>`,
+    faq: p => [
+      ['Are these real 3D models?', 'No, and that is the point: each icon is a stack of flat vector layers (shadow, side wall, face, chamfer, highlight) drawn to read as 3D. That keeps the files small, sharp at any size and editable in Figma, Illustrator or Canva.'],
+      ['Can I change the colours?', `Yes. Pick a palette in the icon editor (sapphire and gold is the default) and every layer follows. On a website each colour is a CSS variable like <code>--with-luxe-c1</code>. <a href="${p}guides/index.html">How-to guides</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['skeuomorphic-icons', 'glassmorphism-icons', 'png-icons'],
+  })
+  S('bauhaus', {
+    slug: 'bauhaus-icons', short: 'Free Bauhaus icons', icon: 'palette',
+    title: 'Free Bauhaus icons: geometric SVG & PNG icons · with icons',
+    desc: `Free Bauhaus icons: ${N} geometric icons built from circles, squares and triangles in red, yellow and blue, as SVG or transparent PNG. Modernist, bold, MIT licensed.`,
+    h1: ['Free Bauhaus icons,', 'pure geometry'], q: 'free bauhaus icons',
+    answer: () => `The <b>Bauhaus</b> style rebuilds all ${N} icons from pure geometry, composed like a 1920s poster: circles, squares and bars in the primaries, overprinting where they meet. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'bauhaus', groups: [['Bauhaus favourites', pick(['home', 'clock', 'music-note', 'camera', 'sun', 'moon', 'compass', 'palette', 'globe', 'book-open', 'lightbulb', 'chart-pie', 'star', 'heart', 'eye', 'key', 'bell', 'coffee', 'bike', 'plane', 'flower', 'leaf', 'umbrella', 'shapes'], 24)], ['Everyday', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="bh-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="bh-where">Posters, portfolios and galleries</h2>
+  <p>Exhibition and event posters, design-studio and architecture portfolios, museums, editorial layouts, book covers and bold brand systems. Large and confident: 48 px and up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibS('bauhaus')], ['Colours', 'Red, yellow and blue on black and paper by default; swap the primaries for your brand with one palette']])}</div>
+  ${demo(['clock', 'music-note', 'sun', 'compass', 'camera', 'palette', 'globe', 'home'], 'bauhaus')}
+</section>`,
+    faq: p => [
+      ['Are these traced from real Bauhaus designs?', 'No. Every icon is drawn from scratch for with icons, rebuilt from circles, squares and bars in the spirit of the Bauhaus school. Nothing is copied from historical works or other icon sets.'],
+      ['Can I use my brand colours instead of the primaries?', `Yes. Pick a palette in the icon editor or, on a website, set <code>--with-bauhaus-c1</code> to <code>c3</code>. The black parts follow the colour you choose. <a href="${p}developers.html">Developer docs</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['retro-icons', 'svg-icons', 'icons-for-canva'],
+  })
+  S('skeuo', {
+    slug: 'skeuomorphic-icons', short: 'Free skeuomorphic icons', icon: 'camera',
+    title: 'Free skeuomorphic icons: realistic SVG & PNG icons · with icons',
+    desc: `Free skeuomorphic icons: ${N} realistic, tactile icons in real materials (paper, leather, brushed metal, brass, glass) with bevels and soft shadows, as SVG or PNG. MIT licensed.`,
+    h1: ['Free skeuomorphic icons,', 'real materials'], q: 'free skeuomorphic icons',
+    answer: () => `The <b>Skeuo</b> style makes all ${N} icons look like objects you could pick up: each is made of a real material, lit from the upper left, with inner walls, debossed detail and a soft contact shadow. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'skeuo', groups: [['Skeuo favourites', pick(['camera', 'calendar', 'clock', 'mail', 'phone', 'settings', 'folder', 'notebook', 'music-note', 'microphone', 'headphones', 'lock', 'key', 'wallet', 'briefcase', 'calculator', 'radio', 'tv', 'battery', 'lightbulb', 'compass', 'book-open', 'coffee', 'gift'], 24)], ['Everyday', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="sk-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="sk-where">App icons, tools and nostalgic UIs</h2>
+  <p>App and dock icons, music, photo and note apps, dashboards with physical-feeling controls, product mock-ups and anything that should feel crafted and touchable. Best from 48 px up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibS('skeuo')], ['Materials', 'Paper, leather, brushed metal, brass, wood, ceramic, plastic and glass, chosen per object']])}</div>
+  ${demo(['camera', 'calendar', 'clock', 'notebook', 'microphone', 'lock', 'radio', 'folder'], 'skeuo')}
+</section>`,
+    faq: p => [
+      ['What does skeuomorphic mean?', 'A skeuomorphic icon imitates the real object it stands for: the leather of a notebook, the brushed metal of a camera, the glass of a lens. It was the look of early iPhone apps and is back as a warm alternative to flat design.'],
+      ['Are these photos or 3D renders?', 'Neither. They are pure vector layers (light, shade, bevels and grain), so they stay sharp at any size, stay small and can be edited in Figma, Illustrator or Canva.'],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['3d-icons', 'bauhaus-icons', 'icons-for-figma'],
   })
   return out
 }

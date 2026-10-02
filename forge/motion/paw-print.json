@@ -1,8 +1,10 @@
 {
   "name": "paw-print",
-  "intent": "pads along softly like a pet taking a step",
-  "loop": { "preset": "bounce", "origin": [12, 20.5], "amount": 0.45, "duration": 1.8 },
-  "hover": { "preset": "pop", "origin": [12, 16.5], "amount": 1.1 },
-  "alt": [ { "preset": "nudge", "dir": 270, "amount": 0.6 }, { "preset": "beat", "origin": [12, 16.5], "amount": 0.7 }, { "preset": "jelly", "origin": [12, 20.5] } ],
-  "swap": [ { "to": "paw-print@solid", "effect": "scale" }, { "to": "heart", "effect": "morph" } ]
+  "intent": "presses down in a soft step, toes landing a beat after the pad",
+  "loop": {"preset": "nod", "origin": [12,20.5], "amount": 0.4, "duration": 2.4},
+  "hover": {"preset": "nod", "origin": [12,20.5], "amount": 0.9, "duration": 0.7},
+  "parts": {"A": {"preset": "nod", "origin": [12,20.5], "amount": 0.6, "delay": 0.06}},
+  "deco": "twinkle",
+  "alt": [ {"preset": "nudge", "dir": 270, "amount": 0.6}, {"preset": "beat", "origin": [12,16.5], "amount": 0.7}, {"preset": "jelly", "origin": [12,20.5]} ],
+  "swap": [ {"to": "paw-print@solid", "effect": "scale"}, {"to": "heart", "effect": "morph"} ]
 }

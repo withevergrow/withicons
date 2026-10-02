@@ -1,26 +1,28 @@
 {
   "name": "headset",
-  "intent": "bobs gently while a support call is live",
+  "intent": "bobs gently while listening, nods when you ask for help",
   "loop": {
     "preset": "float",
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 3
   },
   "hover": {
-    "preset": "tilt",
-    "origin": [
-      12,
-      12
-    ]
+    "preset": "nod",
+    "amount": 0.8,
+    "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        12
+      ]
+    },
     {
       "preset": "pulse",
       "amount": 0.5
-    },
-    {
-      "preset": "nod",
-      "amount": 0.7
     }
   ],
   "swap": [

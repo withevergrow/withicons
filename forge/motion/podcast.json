@@ -1,8 +1,56 @@
 {
   "name": "podcast",
-  "intent": "pulses like a show broadcasting live",
-  "loop": { "preset": "pulse", "origin": [12, 11.5], "amount": 0.6, "duration": 2 },
-  "hover": { "preset": "pop", "origin": [12, 11.5] },
-  "alt": [ { "preset": "fill" }, { "preset": "glow", "amount": 0.8 } ],
-  "swap": [ { "to": "microphone", "effect": "fade" }, { "to": "headphones", "effect": "morph" }, { "to": "podcast@solid", "effect": "scale" } ]
+  "intent": "broadcast waves ripple out from the mic like a live show",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      11.5
+    ],
+    "amount": 0.3,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      11.5
+    ],
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "breathe",
+      "origin": [
+        12,
+        11.5
+      ],
+      "amount": 0.8,
+      "delay": 0.12
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "glow",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "microphone",
+      "effect": "fade"
+    },
+    {
+      "to": "headphones",
+      "effect": "morph"
+    },
+    {
+      "to": "podcast@solid",
+      "effect": "scale"
+    }
+  ]
 }

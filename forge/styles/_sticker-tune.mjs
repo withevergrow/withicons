@@ -50,6 +50,8 @@ const SEMANTIC = [
 //   panelColours       { <index into icon.cutouts>: palette name | 'paper' } prints that closed cutout in its own colour
 //   tubePaths          indexes into icon.paths drawn as candy tubes on top (forks, handlebars);  tube: their colour
 export const TUNE = {
+  // Live icons (forge/DYNAMIC.md): the dry part of a humidity drop is empty paper, not a second colour
+  'humidity': { primary: 'sky', panel: 'paper' },
   'x-circle': { primary: 'peach' },
   'close': { primary: 'peach' },
   'minus-circle': { primary: 'peach' },

@@ -1,8 +1,46 @@
 {
   "name": "captions",
-  "intent": "subtitle lines flicker in like captions being typed",
-  "loop": { "preset": "type", "duration": 1.4 },
-  "hover": { "preset": "pop", "origin": [12, 12], "duration": 0.5 },
-  "alt": [ { "preset": "draw" }, { "preset": "fill" } ],
-  "swap": [ { "to": "captions@solid", "effect": "fade" }, { "to": "type", "effect": "fade" } ]
+  "intent": "subtitle lines fade in one after another like live captions",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "captions@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "type",
+      "effect": "fade"
+    }
+  ]
 }

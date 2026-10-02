@@ -1,14 +1,14 @@
 {
   "name": "trash",
-  "intent": "rocks on its base, then wiggles like it is being emptied",
+  "intent": "rocks on its base, then wobbles as it is filled",
   "loop": {
     "preset": "rock",
     "origin": [
       12,
       21
     ],
-    "amount": 0.35,
-    "duration": 3
+    "amount": 0.3,
+    "duration": 3.2
   },
   "hover": {
     "preset": "wiggle",
@@ -19,6 +19,7 @@
     "amount": 1,
     "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "shake",

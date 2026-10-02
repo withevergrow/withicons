@@ -1,39 +1,10 @@
 {
   "name": "download",
-  "intent": "drops into the tray like a file arriving",
-  "loop": {
-    "preset": "drop",
-    "amount": 0.6,
-    "duration": 2.2
-  },
-  "hover": {
-    "preset": "nudge",
-    "dir": 90,
-    "amount": 1,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "bounce",
-      "amount": 0.7
-    },
-    {
-      "preset": "pass",
-      "dir": 90
-    }
-  ],
-  "swap": [
-    {
-      "to": "check",
-      "effect": "scale"
-    },
-    {
-      "to": "loader",
-      "effect": "fade"
-    },
-    {
-      "to": "upload",
-      "effect": "slide-down"
-    }
-  ]
+  "intent": "the arrow drops into the tray, which dips as the file lands",
+  "loop": { "preset": "nudge", "dir": 90, "amount": 0.25, "duration": 2.2 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 1, "duration": 0.6 },
+  "parts": { "A": { "preset": "drop", "amount": 0.45, "duration": 2.2, "delay": 0 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "drop", "amount": 0.6 }, { "preset": "bounce", "amount": 0.7 } ],
+  "swap": [ { "to": "check", "effect": "scale" }, { "to": "loader", "effect": "fade" }, { "to": "upload", "effect": "slide-down" } ]
 }

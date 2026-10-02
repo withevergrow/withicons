@@ -1,39 +1,9 @@
 {
   "name": "globe",
-  "intent": "turns slowly like the world spinning",
-  "loop": {
-    "preset": "spin",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 6
-  },
-  "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 1
-  },
-  "alt": [
-    {
-      "preset": "orbit",
-      "amount": 0.5
-    },
-    {
-      "preset": "breathe"
-    }
-  ],
-  "swap": [
-    {
-      "to": "language",
-      "effect": "flip"
-    },
-    {
-      "to": "map",
-      "effect": "fade"
-    }
-  ]
+  "intent": "tilts gently on its axis like the world turning slowly",
+  "loop": {"preset": "rock", "origin": [12,12], "amount": 0.3, "duration": 6},
+  "hover": {"preset": "pop", "amount": 0.5, "duration": 1.2},
+  "deco": "twinkle",
+  "alt": [ {"preset": "spin", "origin": [12,12], "duration": 6}, {"preset": "spin-once", "origin": [12,12]} ],
+  "swap": [ {"to": "language", "effect": "flip"}, {"to": "map", "effect": "fade"} ]
 }

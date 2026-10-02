@@ -1,8 +1,56 @@
 {
   "name": "audio-lines",
   "intent": "sound bars bounce like a voice is speaking",
-  "loop": { "preset": "jelly", "origin": [12, 12], "amount": 0.6, "duration": 1.6 },
-  "hover": { "preset": "pulse", "origin": [12, 12], "amount": 1, "duration": 0.5 },
-  "alt": [ { "preset": "fill" }, { "preset": "beat", "amount": 0.6 }, { "preset": "draw" } ],
-  "swap": [ { "to": "microphone", "effect": "morph" }, { "to": "microphone-off", "effect": "fade" } ]
+  "loop": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 1.1,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "jelly",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.8,
+      "delay": 0.18
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "microphone",
+      "effect": "morph"
+    },
+    {
+      "to": "microphone-off",
+      "effect": "fade"
+    }
+  ]
 }

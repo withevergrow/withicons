@@ -1,15 +1,16 @@
 {
   "name": "book-open",
-  "intent": "rests open and lifts gently, ready to be read",
+  "intent": "rests open and lifts gently, turns a page when touched",
   "loop": {
     "preset": "float",
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 3.6
   },
   "hover": {
     "preset": "flip",
     "duration": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "breathe"

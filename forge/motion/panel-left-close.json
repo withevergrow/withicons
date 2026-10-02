@@ -1,8 +1,50 @@
 {
   "name": "panel-left-close",
-  "intent": "pulls left to fold the sidebar away",
-  "loop":  { "preset": "nudge", "dir": 180, "amount": 0.4, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 180, "amount": 0.9, "duration": 0.6 },
-  "alt":   [ { "preset": "pass", "dir": 180, "amount": 0.5 }, { "preset": "jelly", "amount": 0.6 } ],
-  "swap":  [ { "to": "panel-left-open", "effect": "flip" }, { "to": "sidebar", "effect": "slide-left" }, { "to": "chevron-left", "effect": "morph" } ]
+  "intent": "the arrow pulls left to fold the sidebar away, the frame stays put",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.4,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 1.1,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 180,
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "panel-left-open",
+      "effect": "flip"
+    },
+    {
+      "to": "sidebar",
+      "effect": "slide-left"
+    },
+    {
+      "to": "chevron-left",
+      "effect": "morph"
+    }
+  ]
 }

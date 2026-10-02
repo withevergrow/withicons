@@ -1,17 +1,25 @@
 {
   "name": "cloud-upload",
-  "intent": "lifts data up into the cloud",
+  "intent": "the cloud drifts while the arrow keeps lifting data up",
   "loop": {
     "preset": "float",
-    "amount": 0.4,
-    "duration": 3
+    "amount": 0.3,
+    "duration": 2.4
   },
   "hover": {
     "preset": "nudge",
     "dir": 270,
-    "amount": 0.8,
+    "amount": 0.7,
     "duration": 0.6
   },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.5,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "rise",

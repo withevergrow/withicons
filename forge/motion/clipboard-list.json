@@ -1,15 +1,10 @@
 {
   "name": "clipboard-list",
-  "intent": "ticks through its list like someone checking items off",
-  "loop": { "preset": "type", "amount": 0.6, "duration": 2.4 },
-  "hover": { "preset": "nod", "origin": [12, 21.5], "amount": 0.8 },
-  "alt": [
-    { "preset": "tilt", "origin": [12, 21.5], "amount": 0.7 },
-    { "preset": "float", "amount": 0.5, "duration": 3 },
-    { "preset": "pop" }
-  ],
-  "swap": [
-    { "to": "clipboard-check", "effect": "flip" },
-    { "to": "list-checks", "effect": "fade" }
-  ]
+  "intent": "the list jitters like items being ticked off, nods when done",
+  "loop": { "preset": "type", "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "type", "amount": 0.6, "duration": 0.7 },
+  "parts": { "A": { "preset": "type", "amount": 0.45, "duration": 2.4, "delay": 0.06 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "draw", "duration": 1.2 }, { "preset": "tilt", "origin": [12, 21.5], "amount": 0.6 }, { "preset": "pop" }],
+  "swap": [{ "to": "clipboard-check", "effect": "flip" }, { "to": "list-checks", "effect": "fade" }]
 }

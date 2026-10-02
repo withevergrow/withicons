@@ -5,7 +5,7 @@ an arrow that nudges the way it points, a play button that flips into pause.
 
 - **Optional and separate.** The icons never depend on it. Add it only where you want motion.
 - **Pure CSS at its core.** Add a class and the icon moves. The small JavaScript helper is optional.
-- **Works with all 500 icons, in all 12 styles, from every package.** It animates the element that holds the icon: an inline `<svg>`,
+- **Works with all 500 icons, in all 15 styles, from every package.** It animates the element that holds the icon: an inline `<svg>`,
   a `<with-icon>`, an `<i class="with ...">` or any wrapper.
 - **Every icon already knows how to move.** Each of the 500 has its own continuous loop and hover animation, tuned by hand.
 - **Respects people.** When someone asks their system for reduced motion, everything stops (unless you opt in with `wm-force`).
@@ -114,6 +114,24 @@ Filters repaint every frame, so keep looping glows to one or two per screen.
 | `draw` | strokes draw themselves on (outline styles; others pop) | signature, chart line, check |
 | `type` | jitters like keystrokes | keyboard, terminal, chat |
 | `fill` | dims and fills up again, like charging | battery, signal, volume |
+
+### Parts move on their own
+
+Styles that compose more than the object (a Bauhaus backdrop square, sticker sparkles, a luxe cast shadow) tag those
+shapes, and an inline SVG then animates part by part instead of as one block:
+
+| class on a node | while the icon animates |
+|---|---|
+| none, `wm-k`, `wm-shine` | the object: plays the preset about the icon's origin |
+| `wm-a`, `wm-s` | a moving part / badge: the icon's own override (a bell's clapper rings a beat later), else follows the object |
+| `wm-deco` | a decoration: its own gentle loop (`breathe`, `float` or `twinkle`, counter-phased), never the main preset |
+| `wm-shadow` | stays on the ground and shrinks / fades for `bounce`, `float`, `rise`, `drop`, `jelly`; otherwise stays attached |
+
+So a spinning Bauhaus sun turns while its square breathes, and a rising rocket leaves its shadow behind. Nothing to
+set up: `motion.css` detects tagged SVGs with `:has()` (`motion()` and `<with-icon>` also mark them `wm-parts`, so
+older browsers get it too). Choose the decorations' loop with `motion(el, 'sun', { deco: 'float' })` or
+`style="--wm-deco: wm-deco-twinkle"` (`none` keeps them still). `<img>` and CSS-class icons (`<i class="with …">`)
+cannot reach their shapes and move as a whole. Exports (animated SVG, frames, GIF, video) move the same way.
 
 ## Swap: turn one icon into another
 

@@ -1,15 +1,10 @@
 {
   "name": "circle-arrow-right",
-  "intent": "nudges right like a next button saying go on",
-  "loop": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 2 },
-  "hover": { "preset": "nudge", "dir": 0, "amount": 0.9, "duration": 0.6 },
-  "alt": [
-    { "preset": "pop" },
-    { "preset": "pass", "dir": 0, "duration": 0.8 }
-  ],
-  "swap": [
-    { "to": "circle-arrow-left", "effect": "rotate" },
-    { "to": "circle-arrow-right@solid", "effect": "scale" },
-    { "to": "check", "effect": "morph" }
-  ]
+  "intent": "the arrow leads inside its button, saying next, go on",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.2 },
+  "hover": { "preset": "pop", "amount": 0.6, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 2.2, "delay": 0.08 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "pass", "dir": 0, "duration": 0.8 }, { "preset": "pop" }],
+  "swap": [{ "to": "circle-arrow-left", "effect": "rotate" }, { "to": "circle-arrow-right@solid", "effect": "scale" }, { "to": "check", "effect": "morph" }]
 }

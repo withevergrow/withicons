@@ -1,18 +1,30 @@
 {
   "name": "kanban",
-  "intent": "the board breathes calmly, then bounces like a moved card",
+  "intent": "the board holds still while its card columns stretch and settle",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 3.4
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "jelly",
-    "amount": 0.8
+    "preset": "pop",
+    "amount": 0.5
   },
+  "parts": {
+    "A": {
+      "preset": "jelly",
+      "origin": [
+        12,
+        7
+      ],
+      "amount": 1.5,
+      "delay": 0.12
+    }
+  },
+  "deco": "float",
   "alt": [
     {
-      "preset": "type",
+      "preset": "jelly",
       "amount": 0.6
     },
     {

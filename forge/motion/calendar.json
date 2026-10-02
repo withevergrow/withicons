@@ -1,36 +1,10 @@
 {
   "name": "calendar",
-  "intent": "turns its page like a new day arriving",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
-    "duration": 4
-  },
-  "hover": {
-    "preset": "flip",
-    "duration": 0.8
-  },
-  "alt": [
-    {
-      "preset": "pop"
-    },
-    {
-      "preset": "float",
-      "amount": 0.5
-    }
-  ],
-  "swap": [
-    {
-      "to": "calendar-check",
-      "effect": "scale"
-    },
-    {
-      "to": "calendar-plus",
-      "effect": "fade"
-    },
-    {
-      "to": "calendar-days",
-      "effect": "flip"
-    }
-  ]
+  "intent": "hangs on the wall, binder rings bobbing; nods to a new date on hover",
+  "loop": { "preset": "pulse", "origin": [12, 5], "amount": 0.25, "duration": 4 },
+  "hover": { "preset": "nod", "amount": 0.7, "duration": 0.7 },
+  "parts": { "A": { "preset": "nod", "origin": [12, 5], "amount": 0.4, "duration": 4, "delay": 0.2 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "flip", "duration": 0.8 }, { "preset": "pop" }, { "preset": "float", "amount": 0.5 }],
+  "swap": [{ "to": "calendar-check", "effect": "scale" }, { "to": "calendar-plus", "effect": "fade" }, { "to": "calendar-days", "effect": "flip" }]
 }

@@ -1,10 +1,10 @@
 {
   "name": "crown",
-  "intent": "floats proudly, then celebrates when you point at it",
+  "intent": "floats proudly among sparkles, then celebrates a win",
   "loop": {
     "preset": "float",
-    "amount": 0.6,
-    "duration": 3
+    "amount": 0.45,
+    "duration": 3.2
   },
   "hover": {
     "preset": "tada",
@@ -13,13 +13,10 @@
       20
     ]
   },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "twinkle",
-      "origin": [
-        12,
-        12
-      ]
+      "preset": "twinkle"
     },
     {
       "preset": "glow"

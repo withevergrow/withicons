@@ -1,8 +1,63 @@
 {
   "name": "speaker",
-  "intent": "thumps gently to the beat, like music is playing",
-  "loop": { "preset": "beat", "origin": [12, 14.5], "amount": 0.5, "duration": 1.6 },
-  "hover": { "preset": "pulse", "origin": [12, 14.5], "amount": 1.2, "duration": 0.5 },
-  "alt": [ { "preset": "jelly", "origin": [12, 22], "amount": 0.6 }, { "preset": "shake", "amount": 0.4 } ],
-  "swap": [ { "to": "volume-off", "effect": "fade" }, { "to": "music-note", "effect": "scale" }, { "to": "volume", "effect": "slide-right" } ]
+  "intent": "the cone thumps to the beat while the cabinet stays put",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      22
+    ],
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "beat",
+      "origin": [
+        12,
+        14.5
+      ],
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.05
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "beat",
+      "origin": [
+        12,
+        14.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "volume-off",
+      "effect": "fade"
+    },
+    {
+      "to": "music-note",
+      "effect": "scale"
+    },
+    {
+      "to": "volume",
+      "effect": "slide-right"
+    }
+  ]
 }

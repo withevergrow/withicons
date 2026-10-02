@@ -1,17 +1,49 @@
 {
   "name": "pound-sterling",
-  "intent": "spins like a pound coin, money changing hands",
-  "loop": { "preset": "flip", "duration": 3.6 },
-  "hover": { "preset": "tada", "amount": 0.8 },
+  "intent": "flips like a pound coin now and then, its bar a beat behind",
+  "loop": {
+    "preset": "flip",
+    "duration": 4
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "flip",
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
   "alt": [
-    { "preset": "pop" },
-    { "preset": "glow" },
-    { "preset": "spin-once" }
+    {
+      "preset": "tada",
+      "amount": 0.8
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    }
   ],
   "swap": [
-    { "to": "euro", "effect": "flip" },
-    { "to": "dollar-sign", "effect": "flip" },
-    { "to": "indian-rupee", "effect": "flip" },
-    { "to": "coins", "effect": "fade" }
+    {
+      "to": "euro",
+      "effect": "flip"
+    },
+    {
+      "to": "dollar-sign",
+      "effect": "flip"
+    },
+    {
+      "to": "indian-rupee",
+      "effect": "flip"
+    },
+    {
+      "to": "coins",
+      "effect": "fade"
+    }
   ]
 }

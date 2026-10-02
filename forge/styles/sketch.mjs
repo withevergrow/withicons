@@ -463,10 +463,14 @@ function renderSketch(icon) {
     return (plen(l.pts) < 0.5 || (l.closed && R < 1.3)) ? { c: [(x0 + x1) / 2, (y0 + y1) / 2], R: Math.max(R, 0.7) } : null
   })
   const plans = lines.map((l, i) => dots[i] ? null : planStrokes(l))
-  const pens = [null, new Pen(), new Pen()], ink = []
+  // one pen per pass and skeleton plate, so motion can move a part (MOTION.md "Parts choreography")
+  const PLATES = ['K', 'A', 'S']
+  const plateOf = l => PLATES.includes(l.plate) ? l.plate : 'K'
+  const pens = [null, {}, {}], ink = []
+  for (let pass = 1; pass <= 2; pass++) for (const P of PLATES) pens[pass][P] = new Pen()
   for (let pass = 1; pass <= 2; pass++) {
-    const pen = pens[pass]
     lines.forEach((line, li) => {
+      const pen = pens[pass][plateOf(line)]
       const r = rng(`${icon.name}|${line.pathId || 'p'}|${li}|${pass}`)
       if (!plans[li]) {
         if (pass === 1) ink.push(drawDot(pen, dots[li].c, dots[li].R, r))
@@ -482,8 +486,11 @@ function renderSketch(icon) {
   const nodes = []
   const hd = hatch(icon, ink, rng(icon.name + '|hatch'))
   if (hd) nodes.push(['path', { d: hd, 'stroke-width': K.hatch.w, 'stroke-opacity': K.hatch.op }])
-  if (pens[2].d) nodes.push(['path', { d: pens[2].d, 'stroke-width': K.w2, 'stroke-opacity': K.op2 }])
-  nodes.push(['path', { d: pens[1].d }])
+  // plates are tagged only when the icon has more than one (a lone K stays a plain path)
+  const used = PLATES.filter(P => pens[1][P].d || pens[2][P].d)
+  const tag = P => used.length > 1 ? { class: 'wm-' + P.toLowerCase() } : {}
+  for (const P of used) if (pens[2][P].d) nodes.push(['path', { d: pens[2][P].d, 'stroke-width': K.w2, 'stroke-opacity': K.op2, ...tag(P) }])
+  for (const P of used) if (pens[1][P].d) nodes.push(['path', { d: pens[1][P].d, ...tag(P) }])
   return nodes
 }
 

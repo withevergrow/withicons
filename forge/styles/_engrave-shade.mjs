@@ -50,17 +50,19 @@ function clearOf(q, segs, r) {
 }
 
 // returns rings (crescent polygons)
-export function shadeCrescents({ lines, lineSegs, fillRings }, HW, delta, light) {
+// Every crescent carries .plate: the skeleton plate of the line it swells (fill rings: fillPlates[i], else 'K').
+export function shadeCrescents({ lines, lineSegs, fillRings, fillPlates }, HW, delta, light) {
   if (!(delta > 0)) return []
   const loops = []
+  const tagged = (loop, plate) => { loop.plate = plate || 'K'; return loop }
   for (const ln of lines) {
     const P = simplify(ln.pts, 0.01, ln.closed)
     if (P.length < 2) continue
-    if (ln.closed) { loops.push(offsetLoop(P, HW)); loops.push(offsetLoop([...P].reverse(), HW)) }
-    else loops.push(offsetLoop([...P, ...P.slice(1, -1).reverse()], HW))
+    if (ln.closed) { loops.push(tagged(offsetLoop(P, HW), ln.plate)); loops.push(tagged(offsetLoop([...P].reverse(), HW), ln.plate)) }
+    else loops.push(tagged(offsetLoop([...P, ...P.slice(1, -1).reverse()], HW), ln.plate))
   }
-  for (const r of fillRings) {
-    const loop = offsetLoop(simplify(r, 0.01, true), 0)
+  for (const [ri, r] of fillRings.entries()) {
+    const loop = tagged(offsetLoop(simplify(r, 0.01, true), 0), fillPlates && fillPlates[ri])
     if (!loop.length) continue
     // orient once per ring: normals must point away from the filled side
     let best = loop[0], bl = -1
@@ -95,7 +97,7 @@ export function shadeCrescents({ lines, lineSegs, fillRings }, HW, delta, light)
         inn.push([q.p[0] - q.n[0] * ins, q.p[1] - q.n[1] * ins])
       })
       const ring = simplify([...o, ...inn.reverse()], 0.03, true)
-      if (ring.length > 2) out.push(ring)
+      if (ring.length > 2) { ring.plate = loop.plate; out.push(ring) }
     }
   }
   return out

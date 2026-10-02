@@ -167,7 +167,7 @@
           if (ST.want !== name) return
           ST.icon = name; ST.locked = true; ST.si = 0
           show('line', 'new')
-          // the searched icon morphs too: fetch each style file just ahead of its turn (never all twelve at once)
+          // the searched icon morphs too: fetch each style file just ahead of its turn (never all of them at once)
           prefetch(0)
           schedule()
         })
@@ -323,7 +323,7 @@
       try { var q0 = new URLSearchParams(location.search).get('q'); if (q0) { input.value = q0; run() } } catch (err) { /* noop */ }
     }
 
-    /* ───────── pick a style: grouped tabs (Everyday · Crafted · Playful) ───────── */
+    /* ───────── pick a style: grouped tabs (Everyday · Crafted · Playful · Studio) ───────── */
     var picker = $('[data-picker]')
     if (picker) {
       var tabs = $('[data-picker-tabs]', picker), pgrid = $('[data-picker-grid]', picker)
@@ -399,7 +399,7 @@
       tStyles.innerHTML = AV.map(function (s) { return '<button type="button" class="chip s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === T.style) + '">' + INFO[s].title + '</button>' }).join('')
       tColors.innerHTML = COLORS.map(function (c, i) { return '<button type="button" class="sw' + (i === 0 ? ' auto' : '') + '" style="--sw:' + (c[1] || 'transparent') + '" data-c="' + i + '" aria-pressed="' + (i === 0) + '" aria-label="' + c[2] + '" title="' + c[2] + '"></button>' }).join('')
       tArt.setAttribute('draggable', 'true')
-      tArt.setAttribute('aria-label', 'Icon preview — drag me')
+      tArt.setAttribute('role', 'img'); tArt.setAttribute('aria-label', 'Icon preview — drag me')
       var paintTry = function () {
         setStyleClass(prev, T.style)
         prev.style.setProperty('--style', 'var(--c-' + T.style + ')'); prev.style.setProperty('--style-soft', 'var(--c-' + T.style + '-soft)')
@@ -525,7 +525,7 @@
     var orbit = $('[data-orbit]')
     if (orbit) {
       var ORB = [['heart', 'gloss'], ['star', 'solid'], ['rocket', 'retro'], ['gift', 'duo'], ['coffee', 'sketch'], ['cloud', 'glass'], ['camera', 'blueprint'], ['smile', 'kawaii'],
-        ['trophy', 'engrave'], ['zap', 'sticker'], ['star', 'pixel'], ['lightbulb', 'glass'], ['music-note', 'kawaii'], ['calendar', 'line'], ['mail', 'retro'], ['search', 'pixel'],
+        ['trophy', 'engrave'], ['zap', 'sticker'], ['star', 'pixel'], ['crown', 'luxe'], ['music-note', 'bauhaus'], ['calendar', 'line'], ['mail', 'retro'], ['camera', 'skeuo'],
         ['settings', 'blueprint'], ['home', 'sticker'], ['user', 'engrave'], ['rocket', 'line']].filter(function (o) { return hasIc(o[0], o[1]) })
       var orbs = ORB.map(function (o, i) {
         var el = doc.createElement('span'); el.className = 'orb' + (i % 3 === 1 ? ' ghost' : '')
@@ -551,6 +551,95 @@
       }
       if (reduced) { frame(t0); cancelAnimationFrame(oraf) }
       else WI.visibility(orbit, function (v) { cancelAnimationFrame(oraf); if (v) oraf = requestAnimationFrame(frame) }, '100px')
+    }
+
+    /* ───────── live icons teaser: real live icons (vendor/dynamic/dynamic.js, window.WithLive) set to today, now and
+       a few sample values, cycling through the styles; plain Line icons stand in until (or unless) the runtime loads ───────── */
+    var lvSec = $('[data-live-teaser]')
+    if (lvSec) {
+      var LV = {
+        // name: the preferred live icon; re: any other one that fits, should the catalogue change; fb: the static stand-in
+        calendar: { name: 'calendar-date', re: /^calendar/, fb: 'calendar' }, clock: { name: 'clock-time', re: /clock|watch|time/, fb: 'clock' },
+        bell: { name: 'bell-count', re: /bell|notif|badge|count/, fb: 'bell' }, battery: { name: 'battery-level', re: /^battery/, fb: 'battery', level: 0.72 },
+        weather: { name: 'weather', re: /weather|temp|forecast/, fb: 'cloud-sun' }, label: { name: 'tag-label', re: /label|tag|text|sticker/, fb: 'tag' }
+      }
+      var LV_STYLES = ['luxe', 'bauhaus', 'skeuo', 'line', 'kawaii', 'glass', 'retro', 'duo'].filter(function (s) { return INFO[s] })
+      var lvTiles = $$('[data-lv]', lvSec), lvStyleEl = $('[data-lv-style]', lvSec), lvBoard = $('.live-board', lvSec)
+      var MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+      var DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+      var two = function (n) { return (n < 10 ? '0' : '') + n }
+      // a live icon's parameters for "right now": dates and times from the clock, everything else its own default
+      var paramsFor = function (L, name, key) {
+        var spec = {}, out = {}, now = new Date()
+        try { spec = L.paramsOf(name) || {} } catch (e) { spec = {} }
+        Object.keys(spec).forEach(function (k) {
+          var p = spec[k] || {}, opts = (p.options || []).map(function (o) { return String(o).toUpperCase() }), v
+          if (p.type === 'time') v = two(now.getHours()) + ':' + two(now.getMinutes())
+          else if (/^(day|date)$/i.test(k) && p.type !== 'enum') v = now.getDate()
+          else if (/month/i.test(k) && opts.length) { var mi = opts.indexOf(MONTHS[now.getMonth()]); if (mi >= 0) v = p.options[mi] }
+          else if (/weekday|dow/i.test(k) && opts.length) { var di = opts.indexOf(DAYS[now.getDay()]); if (di >= 0) v = p.options[di] }
+          else if (p.type === 'level' && LV[key].level != null) v = LV[key].level
+          if (v != null) out[k] = v
+        })
+        return out
+      }
+      var lvSub = function (tile, key) {
+        var el = $('[data-lv-sub]', tile), now = new Date()
+        if (!el) return
+        if (key === 'calendar') el.textContent = DAYS[now.getDay()].charAt(0) + DAYS[now.getDay()].slice(1).toLowerCase() + ' ' + now.getDate() + ' ' + MONTHS[now.getMonth()].charAt(0) + MONTHS[now.getMonth()].slice(1).toLowerCase()
+        else if (key === 'clock') el.textContent = two(now.getHours()) + ':' + two(now.getMinutes())
+      }
+      var lvNames = null, lvK = 0, lvTimer = 0, lvLive = false
+      // the runtime ships each style on demand: load it, then draw (a style that fails to load keeps the last frame)
+      var paint = function (style) {
+        var L = W.WithLive
+        if (lvLive && L && typeof L.load === 'function' && !(L.loaded && safe(function () { return L.loaded(style) }))) {
+          Promise.resolve(safe(function () { return L.load(style) })).then(function () { draw(style) }, function () {})
+          return
+        }
+        draw(style)
+      }
+      var safe = function (fn) { try { return fn() } catch (e) { return null } }
+      var draw = function (style) {
+        var L = W.WithLive
+        lvTiles.forEach(function (tile) {
+          var key = tile.getAttribute('data-lv'), box = $('[data-lv-ic]', tile), html = ''
+          var name = lvNames && lvNames[key]
+          if (L && name) { try { html = L.render(name, paramsFor(L, name, key), style, { size: 80 }) } catch (e) { html = '' } }
+          if (html) tile.classList.add('is-live')
+          else html = ic(LV[key].fb, 'line', 64)
+          box.innerHTML = html
+          lvSub(tile, key)
+        })
+        setStyleClass(lvBoard, lvShow(style))
+        if (lvStyleEl) lvStyleEl.textContent = INFO[lvShow(style)].title
+      }
+      var lvShow = function (s) { return lvLive ? s : 'line' }
+      var lvStart = function () {
+        var L = W.WithLive
+        if (L && typeof L.render === 'function' && typeof L.list === 'function') {
+          var all = []
+          try { all = (L.list() || []).map(function (x) { return typeof x === 'string' ? x : x && x.name }).filter(Boolean) } catch (e) { all = [] }
+          lvNames = {}
+          Object.keys(LV).forEach(function (k) {
+            if (all.indexOf(LV[k].name) >= 0) { lvNames[k] = LV[k].name; return }
+            for (var i = 0; i < all.length; i++) if (LV[k].re.test(all[i])) { lvNames[k] = all[i]; break }
+          })
+          lvLive = Object.keys(lvNames).length > 0
+        }
+        paint(LV_STYLES[0])
+        if (!lvLive) return
+        WI.visibility(lvSec, function (v) {
+          clearInterval(lvTimer)
+          if (v) lvTimer = setInterval(function () { if (reduced) return; lvK = (lvK + 1) % LV_STYLES.length; paint(LV_STYLES[lvK]) }, 2800)
+        })
+      }
+      // Line stand-ins first (cheap), then the runtime once the section is near
+      WI.loadStyle('line').then(function () { if (!lvLive) paint('line') })
+      WI.whenVisible(lvSec, function () {
+        if (W.WithLive) { lvStart(); return }
+        WI.loadScript((WI.base || '') + 'vendor/dynamic/dynamic.js').then(lvStart, function () { /* no runtime yet: keep the stand-ins */ })
+      }, '400px')
     }
 
     /* ───────── part 2 of the pack: picker grid + "Icons that move" ───────── */

@@ -1,22 +1,33 @@
 {
   "name": "percent",
-  "intent": "pulses like a sale badge, turns on hover",
+  "intent": "the two dots drift apart and back like a sale badge breathing",
   "loop": {
     "preset": "pulse",
-    "amount": 0.6,
+    "amount": 0.25,
     "duration": 2.4
   },
   "hover": {
-    "preset": "spin-once",
-    "duration": 0.7
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.7,
+      "duration": 2.4,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
   "alt": [
+    {
+      "preset": "spin-once",
+      "duration": 0.7
+    },
     {
       "preset": "tada",
       "amount": 0.8
-    },
-    {
-      "preset": "flip"
     }
   ],
   "swap": [

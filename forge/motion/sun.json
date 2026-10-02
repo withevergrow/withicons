@@ -1,15 +1,32 @@
 {
   "name": "sun",
-  "intent": "rays turn slowly as the sun shines",
+  "intent": "the disc glows calmly while only the rays turn; on touch it swells, rays whirl",
   "loop": {
-    "preset": "spin",
-    "duration": 6
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 3
   },
   "hover": {
-    "preset": "glow",
-    "duration": 0.9,
-    "amount": 1.2
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "origin": [
+        12,
+        12
+      ],
+      "duration": 6,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "spin-once"

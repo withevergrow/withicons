@@ -1,7 +1,7 @@
 // guides/animate-icons.html — beginner guide: animate an icon for a website, Notion or slides.
 // Matches the Customize editor on icon pages (site/js/editor.js: Motion tab, "Animated SVG" download).
 import { icon, esc, page, write, crumbs, cvar, code, ORIGIN, askAI, MOTION, PRESETS, N_ICONS, N_STYLES, word, hasStyle, siteExists } from './lib.mjs'
-import { wm, demoFor, motionAssets } from './motion.mjs'
+import { wm, wmOwn, demoFor, motionAssets } from './motion.mjs'
 import { ICON_NAMES, EFFECTS, styleTitle } from './lib.mjs'
 import { hasFmt } from './formats.mjs'
 const ICON_SET = new Set(ICON_NAMES)
@@ -23,6 +23,7 @@ export function buildAnimateGuide() {
     ['Go to Customize, then Motion', 'On the icon’s page, open the <b class="ui">Customize</b> panel and its <b class="ui">Motion</b> tab. You’ll see a sentence describing how this icon likes to move.', 'sliders', null],
     ['Choose when it moves', '<b class="ui">Always</b> keeps it moving gently, <b class="ui">On hover</b> plays when someone points at it, and <b class="ui">Once</b> plays a single time. For a file you upload as an image, pick <b>Always</b> or <b>Once</b>.', 'clock', null],
     ['Pick how it moves', 'The icon’s own motion is already selected. Hover the others to preview them, then use the <b class="ui">Speed</b> and <b class="ui">Intensity</b> sliders until it feels right. Calm is usually better.', 'wand', null],
+    ['Check how its parts move', 'Icons move in parts. Under <b class="ui">Moves in parts</b> you can see what each piece does: a sun turns while its backdrop only breathes, sparkles twinkle on their own, and a shadow stays on the ground. If the extras are too busy, set <b class="ui">Decorations</b> to <b>Keep still</b> and only the icon itself moves, in the preview, the code and every download.', 'layers', null],
     ['Download it', `Choose your colour and style on the <b class="ui">Look</b> tab, then pick a moving file in the <b class="ui">Download</b> area: <b>Animated SVG</b> for a website or Notion (one small file, for example <code>bell-animated-ring.svg</code>), <b>GIF</b> for slides and email${hasFmt('mp4') ? ', <b>MP4</b> for Keynote, PowerPoint and video' : ''}${hasFmt('lottie') ? ', <b>Lottie</b> for apps' : ''}. <a href="which-file.html#for-motion">Which one?</a>`, 'download', null],
   ]
   // Turn into: before -> after, each side with its own style and colour (site/js/editor.js "Turn into" tab)
@@ -61,6 +62,7 @@ export function buildAnimateGuide() {
     ['The switch is too fast or too slow.', 'On the Turn into tab, try <b>Slow</b> for a calm change or <b>Snappy</b> for buttons. When it switches on its own, a longer pause on each icon makes it easier to follow.'],
     ['It doesn’t move on my website.', 'Check the file name contains “animated” (the plain SVG doesn’t move). Some builders turn uploads into PNGs; if so, paste the SVG code into an HTML or embed block instead. Also check your device: if <b>reduce motion</b> is turned on, the icon politely stays still.'],
     ['“On hover” never plays.', 'Hover only works when the SVG code is in the page itself. An uploaded image can’t see the mouse, so choose <b>Always</b> or <b>Once</b> for uploads.'],
+    ['The sparkles or the shape behind the icon don’t move with it.', 'That’s on purpose: decorations have their own gentle loop, so a backdrop never spins along with a turning sun. Prefer them still? On the Motion tab, set <b>Decorations</b> to <b>Keep still</b>.'],
     ['It’s too fast or too much.', 'Go back to Motion and lower <b>Speed</b> and <b>Intensity</b>, or try a calmer move like Float, Breathe or Pulse.'],
     ['WordPress says “Sorry, you are not allowed to upload this file type”.', 'That’s WordPress blocking SVG uploads. Paste the SVG code into a Custom HTML block, or install an SVG-upload plugin you trust.'],
   ]
@@ -79,7 +81,7 @@ export function buildAnimateGuide() {
         </div>
       </div>
       <div class="ga-hero-art" aria-hidden="true" data-motion-area>
-        ${heroIcons.map((n, i) => { const s = st(['duo', 'kawaii', 'sticker', 'glass'][i]); return `<span class="ga-hero-ic" style="--g:${cvar(s)};--i:${i}">${wm(n, s, 64, MOTION[n].loop)}</span>` }).join('')}
+        ${heroIcons.map((n, i) => { const s = st(['duo', 'kawaii', 'sticker', 'glass'][i]); return `<span class="ga-hero-ic" style="--g:${cvar(s)};--i:${i}">${wmOwn(n, s, 64, MOTION[n])}</span>` }).join('')}
       </div>
     </div>
     <dl class="g-meta">

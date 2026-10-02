@@ -1,47 +1,14 @@
 {
   "name": "rotate-cw",
-  "intent": "turns clockwise, one full spin on hover",
-  "loop": {
-    "preset": "spin",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 3
-  },
-  "hover": {
-    "preset": "spin-once",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 0.7
-  },
+  "intent": "turns once clockwise, then rests",
+  "loop": { "preset": "spin-once", "origin": [12, 12], "duration": 3.2 },
+  "hover": { "preset": "spin-once", "origin": [12, 12], "duration": 0.7 },
   "alt": [
-    {
-      "preset": "rock",
-      "origin": [
-        12,
-        12
-      ]
-    },
-    {
-      "preset": "tick",
-      "origin": [
-        12,
-        12
-      ],
-      "steps": 8
-    }
+    { "preset": "spin", "origin": [12, 12], "duration": 3 },
+    { "preset": "tick", "origin": [12, 12], "steps": 8 }
   ],
   "swap": [
-    {
-      "to": "rotate-ccw",
-      "effect": "flip"
-    },
-    {
-      "to": "redo",
-      "effect": "fade"
-    }
+    { "to": "rotate-ccw", "effect": "flip" },
+    { "to": "redo", "effect": "fade" }
   ]
 }

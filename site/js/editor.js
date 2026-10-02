@@ -23,13 +23,14 @@
      switching animates); ed.swapHost(el) makes el's live swaps follow hover / focus / the shared state;
      ed.swapPress(el) · ed.swapToggle(on?) · ed.swapPlay() · ed.exportCtx() (the WithExport ctx, ctx.swap included)
    The mounted editor is also on its host element: host.withEditor.
-   WI.Editor.motionAttrs(entry, { speed, amount, style }) -> { preset, cls, style } for any wrapper
+   WI.Editor.motionAttrs(entry, { speed, amount, style, deco: 'still', spec }) -> { preset, cls, style } for any wrapper
+     (spec: the icon's motion spec, so an inline SVG with part tags keeps its own plate moves and decoration loop)
    Events: 'wied:change' (CustomEvent, detail { state }) bubbles from el. */
 (function () {
   'use strict'
   var W = window, D = document
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12' }
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
   var INK = '#111318', INK_D = '#F4F0E8'
   var CDN = 'https://cdn.jsdelivr.net/npm/@withicons'
   var CLASH = ['Map', 'Image', 'History', 'File', 'Link', 'Navigation', 'Clipboard', 'Keyboard', 'Bluetooth', 'Screen', 'Option', 'Text', 'Location', 'Range', 'Selection', 'Notification', 'Set', 'Date', 'Error', 'Symbol', 'Proxy', 'Worker', 'Lock', 'Headers', 'Request', 'Response']
@@ -95,6 +96,8 @@
     { id: 'web', title: 'Websites & apps', say: 'Websites, iPhone and Android apps, code', use: 'For websites, iPhone and Android apps, and code.', ids: ['svg-flat', 'svg', 'webp', 'avif', 'favicon-pack', 'ico', 'android', 'ios'], code: ['jsx', 'tsx', 'vue', 'svelte', 'angular', 'react-native', 'html', 'css', 'data-uri', 'base64'] },
     { id: 'animated', title: 'Animated', say: 'GIF, video, animated PNG and SVG, Lottie', use: 'Moving files: GIF, video, animated PNG and SVG, Lottie.', ids: ['gif', 'apng', 'webp-animated', 'webm', 'mp4', 'animated-svg', 'png-sequence', 'lottie', 'dotlottie'] }
   ]
+  // the three files most people want for each goal; the rest of a group (and its code files) wait behind "More formats"
+  var DL_TOP = { slides: ['png', 'pptx', 'docx'], design: ['svg-flat', 'pdf', 'svg'], web: ['svg-flat', 'webp', 'favicon-pack'], animated: ['gif', 'mp4', 'animated-svg'] }
   // [short name, what it is for, the badge on its card]
   var DL_FMT = {
     png: ['PNG', 'Slides, docs, chat, Canva', 'PNG'], pptx: ['PowerPoint', 'A ready slide, icon centred', 'PPTX'], 'pptx-sheet': ['PowerPoint, every style', 'Pick a look with your team', 'PPTX'],
@@ -243,7 +246,7 @@
     if (svgStore(style)) return Promise.resolve(true)
     return loadScript(siteUrl('data/style-' + style + '.js')).then(function () { return !!svgStore(style) })
   }
-  // One icon in all twelve styles, cheaply: its own page (site/icons/<name>.html, ~110 KB) carries every style as a
+  // One icon in every style, cheaply: its own page (site/icons/<name>.html, ~110 KB) carries every style as a
   // <symbol>, while a style's data file holds all 500 icons (up to 1.5 MB). Used for "Turn into" targets. Needs http(s):
   // from file:// the fetch fails and callers fall back to the style data files.
   var XS = {}, xsLoading = {}
@@ -316,7 +319,49 @@
     var steps = entry.steps || 0
     if (steps) v['--wm-steps'] = steps
     var cls = 'wm wm-' + trig + ' wm-p-' + preset + (preset === 'draw' ? ' wm-drawing' : '')
-    return { preset: preset, trigger: trig, cls: cls, vars: v, dur: dur, k: k, steps: steps, origin: entry.origin || null, dir: entry.dir, style: Object.keys(v).map(function (x) { return x + ':' + v[x] }).join(';') }
+    // parts choreography (forge/MOTION.md): decorations kept still
+    if (o.deco === 'still' && preset !== 'draw') v['--wm-deco'] = 'none'
+    var out = { preset: preset, trigger: trig, cls: cls, vars: v, dur: dur, k: k, steps: steps, origin: entry.origin || null, dir: entry.dir, deco: o.deco === 'still' ? 'still' : '' }
+    // an icon whose drawing has tagged parts, playing its OWN motion: no preset class (it would make every plate play
+    // the main preset), the spec's slot + parts variables instead, so a plate keeps its own move (a bell's clapper rings
+    // a beat behind) and the decorations their own loop. Code uses data-wm + icons.css for the same thing (out.own).
+    // o.spec: the icon's motion spec (o.parts: false when the drawing has no part tags, which keeps the classic form)
+    var m = WM()
+    if (o.spec && o.parts !== false && preset !== 'draw' && m && m.specVars) {
+      var slot = trig === 'loop' ? '--wmL' : '--wmH', own = trig === 'loop' ? o.spec.loop : o.spec.hover
+      if (own && own.preset === preset) {
+        var sv = {}
+        try { var all = m.specVars(o.spec); for (var x in all) if (x.indexOf(slot) === 0) sv[x] = all[x] } catch (e) { sv = null }
+        if (sv) {
+          var keep = {}
+          if (v['--wm-dur'] && Math.abs(speed - 1) > 0.001) keep['--wm-dur'] = v['--wm-dur']
+          if (Math.abs((o.amount || 1) - 1) > 0.001) keep['--wm-k'] = v['--wm-k'] || '1'
+          if (v['--wm-deco']) keep['--wm-deco'] = v['--wm-deco']
+          out.own = true; out.ownVars = keep
+          out.cls = 'wm wm-' + trig
+          out.vars = Object.assign(sv, keep)
+        }
+      }
+    }
+    out.style = Object.keys(out.vars).map(function (x) { return x + ':' + out.vars[x] }).join(';')
+    return out
+  }
+  // the part tags a drawing carries (forge/MOTION.md "Parts choreography"): { a, s, deco, shadow, any }
+  function partTags(inner) {
+    var s = String(inner || ''), has = function (t) { return new RegExp('\\sclass="[^"]*\\bwm-' + t + '\\b').test(s) }
+    var o = { a: has('a'), s: has('s'), deco: has('deco'), shadow: has('shadow') }
+    o.any = o.a || o.s || o.deco || o.shadow
+    return o
+  }
+  // the decoration loop the engine picks for a preset when the spec names none (packages/motion/src/meta.js DECO_DEFAULT)
+  var DECO_DEFAULT = { spin: 'breathe', 'spin-once': 'breathe', tick: 'breathe', orbit: 'breathe', flip: 'breathe', nudge: 'breathe', pass: 'breathe', draw: 'breathe', fill: 'breathe', blink: 'breathe', glow: 'breathe', flicker: 'breathe', twinkle: 'breathe', zoom: 'breathe',
+    ring: 'float', wiggle: 'float', shake: 'float', nod: 'float', type: 'float', tilt: 'float', sway: 'float', rock: 'float', breathe: 'float',
+    bounce: 'twinkle', float: 'twinkle', rise: 'twinkle', drop: 'twinkle', jelly: 'twinkle', beat: 'twinkle', pulse: 'twinkle', pop: 'twinkle', tada: 'twinkle' }
+  var GROUND = ['bounce', 'float', 'rise', 'drop', 'jelly']
+  function decoKind(preset, specDeco) {
+    var m = WM(), d = m && m.DECO_DEFAULT
+    if (['breathe', 'float', 'twinkle', 'still'].indexOf(specDeco) >= 0) return specDeco
+    return (d && d[preset]) || DECO_DEFAULT[preset] || 'breathe'
   }
   // the draw preset: every stroked shape gets pathLength="1" (same rule as WithMotion.prepareDraw)
   function prepareDraw(rootEl) {
@@ -358,12 +403,13 @@
     var remember = opts.remember !== false
     var subs = []
     var I = { name: '', title: '', data: null, motion: null }   // the current icon
-    var S = { style: 'line', color: 'ink', size: 24, px: 256, stroke: null, bg: 'light', anim: 'loop', preset: '', speed: 1, amount: 1, code: 'tag', tab: 'look', flat: false }
+    var S = { style: 'line', color: 'ink', size: 24, px: 256, stroke: null, bg: 'light', anim: 'loop', preset: '', speed: 1, amount: 1, deco: '', code: 'tag', tab: 'look', flat: false }
     var saved = remember ? (store(KEY) || {}) : {}
     if (remember && !store(KEY)) { var old = store('with-ip'); if (old) saved = { px: old.px, color: old.color, style: old.style } }
-    ;['color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'code', 'style', 'flat'].forEach(function (k) { if (saved[k] != null) S[k] = saved[k] })
+    ;['color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco', 'code', 'style', 'flat'].forEach(function (k) { if (saved[k] != null) S[k] = saved[k] })
     if (PX.indexOf(S.px) < 0) S.px = 256
     if (['none', 'loop', 'hover', 'once'].indexOf(S.anim) < 0) S.anim = 'loop'
+    if (S.deco !== 'still') S.deco = ''
     if (opts.anim) S.anim = opts.anim
 
     /* "Turn into": the one source of truth for the swap. Every live copy (preview, placements, the library stage, effect
@@ -514,20 +560,48 @@
       kawaii: { ink: 'Outline', slot: ['Body', 'Second colour', 'Third colour', 'Fourth colour', 'Fifth colour', 'Sixth colour'], '--with-kawaii-face': 'Face', '--with-kawaii-blush': 'Blush', '--with-kawaii-sparkle': 'Sparkle', '--with-kawaii-accent': 'Accent', '--with-kawaii-shine': 'Shine' },
       sticker: { ink: 'Outline', merge: ['--with-sticker-ink'], slot: ['Main colour', 'Second colour', 'Third colour', 'Fourth colour', 'Fifth colour', 'Sixth colour'], '--with-sticker-edge': 'Border', '--with-sticker-shadow': 'Shadow', '--with-sticker-shine': 'Shine' },
       pixel: { ink: 'Outline', '--with-pixel-fill': 'Fill', '--with-pixel-shine': 'Highlight' },
-      retro: { ink: 'Outline', slot: ['Stripe 1', 'Stripe 2', 'Stripe 3', 'Stripe 4', 'Stripe 5', 'Stripe 6'], '--with-retro-shadow': 'Shadow' }
+      retro: { ink: 'Outline', slot: ['Stripe 1', 'Stripe 2', 'Stripe 3', 'Stripe 4', 'Stripe 5', 'Stripe 6'], '--with-retro-shadow': 'Shadow' },
+      // the studio styles use role-named variables (--with-<style>-<role>): label the ROLE, so any variable a
+      // renderer adds later is named too
+      luxe: { ink: 'Outline', role: { c1: 'Main', c2: 'Jewel', c3: 'Depth', c4: 'Gold shade', accent: 'Gold trim', tint: 'Gold light', edge: 'Rim light', shadow: 'Shadow', shine: 'Highlight' } },
+      // Bauhaus colours are named after what they are by default (Red, Yellow, Blue, Black, Paper), whichever role holds them
+      // (the overlaps where two inks overprint are named after their colour too: "Orange overlap")
+      bauhaus: { ink: 'Black', role: function (role, def) { var h = hueName(def); if (h && (role === 'c4' || role === 'accent')) return h + ' overlap'; return h || ({ c1: 'Main colour', c2: 'Second colour', c3: 'Third colour', c4: 'Overlap', accent: 'Overlap', tint: 'Paper', edge: 'Border', shadow: 'Shadow', shine: 'Shine' })[role] } },
+      skeuo: { ink: 'Outline', role: { c1: 'Main material', c2: 'Second material', c3: 'Third material', c4: 'Fourth material', tint: 'Glass', edge: 'Rim', accent: 'Stitching', shadow: 'Shadow', shine: 'Gloss' } }
+    }
+    // plain colour name of a default (#hex) for the Bauhaus labels
+    function hueName(hex) {
+      var m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(hex || '').trim()); if (!m) return ''
+      var h = m[1].length === 3 ? m[1].replace(/./g, '$&$&') : m[1]
+      var r = parseInt(h.slice(0, 2), 16) / 255, g = parseInt(h.slice(2, 4), 16) / 255, b = parseInt(h.slice(4, 6), 16) / 255
+      var mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn
+      if (l > 0.86) return 'Paper'
+      if (d < 0.12) return l < 0.25 ? 'Black' : 'Grey'
+      var hu = (mx === r ? ((g - b) / d + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4) * 60
+      return hu < 18 || hu >= 330 ? 'Red' : hu < 42 ? 'Orange' : hu < 70 ? 'Yellow' : hu < 165 ? 'Green' : hu < 255 ? 'Blue' : 'Violet'
+    }
+    // variables painted together with the outline: a style's own list, plus the role-named ink of the studio styles
+    // (--with-luxe-ink …), so "Outline" is one row
+    function mergeOf(style, m) {
+      var L = CLABEL[style] || {}, out = (L.merge || []).slice()
+      if (L.role && m) m.order.forEach(function (v) { if (m.roles[v] === 'ink' && out.indexOf(v) < 0) out.push(v) })
+      return out
     }
     var RRANK = { c1: 1, c2: 2, c3: 3, c4: 4, edge: 5, tint: 6, ink: 7, accent: 8, shadow: 9, shine: 10 }
     function rowsFor(style, name) {
       var m = rmap(name || I.name, style); if (!m) return []
-      var L = CLABEL[style] || {}, merge = L.merge || [], slot = 0
+      var L = CLABEL[style] || {}, merge = mergeOf(style, m), slot = 0
       var rest = []
       m.order.forEach(function (v, i) {
         if (merge.indexOf(v) >= 0) return
         var role = m.roles[v], lab = L[v]
         if (!lab && L.slot && /^c\d$/.test(role)) lab = L.slot[slot++]
+        if (!lab && L.role) lab = typeof L.role === 'function' ? L.role(role, m.defs[v]) : L.role[role]
         rest.push({ key: v, label: lab || (PL().ROLE_LABELS[role]) || v, role: role, i: i })
       })
       rest.sort(function (a, b) { return ((RRANK[a.role] || 20) - (RRANK[b.role] || 20)) || a.i - b.i })
+      // two rows with one name (two reds in a Bauhaus icon): number them
+      var seenL = {}; rest.forEach(function (r) { var n = (seenL[r.label] = (seenL[r.label] || 0) + 1); if (n > 1) r.label += ' ' + n })
       return [{ key: 'ink', label: L.ink || 'Outline', role: 'ink', merge: merge.filter(function (v) { return v in m.roles }) }].concat(rest)
     }
     // the colours to paint: { vars: {var: hex}, ink: hex|null } or null when nothing is customised.
@@ -537,7 +611,7 @@
       if (!hasCustom(c) || !PL()) return null
       var m = rmap(name, style); if (!m || !m.order.length) return null
       var tw = (c.name || I.name) === name ? (c.tw[style] || {}) : {}
-      var base = PL().applyPalette(innerOf(name, style), c.roles).vars, merge = (CLABEL[style] || {}).merge || []
+      var base = PL().applyPalette(innerOf(name, style), c.roles).vars, merge = mergeOf(style, m)
       var vars = {}, ink = tw.ink || c.roles.ink || null, n = 0
       m.order.forEach(function (v) { var x = tw[v] || (merge.indexOf(v) >= 0 && tw.ink) || base[v]; if (x) { vars[v] = x; n++ } })
       return n || ink ? { vars: vars, ink: ink } : null
@@ -858,8 +932,15 @@
     function motionInfo(trigger) {
       trigger = trigger || S.anim
       if (trigger === 'none') return null
-      var o = { trigger: trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked }
+      var o = { trigger: trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco, spec: S.preset ? null : I.motion, parts: parts().any }
       return motionAttrs(currentEntry(trigger), o) || motionAttrs({ preset: trigger === 'loop' ? 'float' : 'pop' }, o)
+    }
+    // the part tags of the current drawing (style), cached per drawing
+    var partsKey = '', partsVal = null
+    function parts(style) {
+      var inner = innerOf(I.name, style || S.style) || '', k = I.name + '|' + (style || S.style) + '|' + inner.length
+      if (k !== partsKey) { partsKey = k; partsVal = partTags(inner) }
+      return partsVal
     }
     function presetsOrdered() {
       var sp = spec(), own = []
@@ -878,7 +959,7 @@
       return { name: n, style: st, want: want, title: title, label: title + (st !== S.style ? ' (' + info(st).title + ')' : '') }
     }
     function swapReady() { var t = swapTarget(); return !!t && innerOf(t.name, t.style) != null }
-    // After's drawing in a style: its own page first (all twelve styles, small), else that style's data file
+    // After's drawing in a style: its own page first (every style, small), else that style's data file
     function ensureB(n, st) {
       var key = n + '|' + st
       if (innerOf(n, st) != null || bTried[key]) return
@@ -943,6 +1024,7 @@
       var col = o.color ? 'color:' + o.color + ';' : ''
       if (!mi) return '<span class="wied-ic" style="' + col + 'width:' + px + 'px;height:' + px + 'px">' + inner + '</span>'
       var force = forced ? ' wm-force' : ''
+      if (!t && mi.preset !== 'draw' && parts().any) force += ' wm-parts'
       return '<span class="wied-ic ' + mi.cls + force + '" style="' + col + mi.style + (mi.style ? ';' : '') + 'width:' + px + 'px;height:' + px + 'px">' + inner + '</span>'
     }
     var forced = false
@@ -1106,13 +1188,14 @@
               '</div></div>' +
               '<div class="wied-f" data-cpanel hidden></div>' +
               '<div class="wied-f" data-monof><p class="wied-l" id="' + uid + '-cl">Colour <small>in every download</small></p>' + monoHtml('a', uid + '-cl') + '</div>' +
-              '<div class="wied-f wied-sliders">' +
-                range('size', 'Size', 12, 128, 4, 'px') +
-                range('stroke', 'Line thickness', 0.75, 3, 0.25, '') +
-              '</div>' +
-              '<div class="wied-f"><p class="wied-l" id="' + uid + '-bgl">Background <small>for the preview and the examples</small></p><div class="wied-seg is-3" role="group" aria-labelledby="' + uid + '-bgl">' +
-                [['light', 'Light'], ['dark', 'Dark'], ['brand', 'Tinted']].map(function (b) { return '<button type="button" data-bg="' + b[0] + '" aria-pressed="false">' + b[1] + '</button>' }).join('') +
-              '</div></div>' +
+              layer('fine', 'Size, line and background',
+                '<div class="wied-f wied-sliders">' +
+                  range('size', 'Size', 12, 128, 4, 'px') +
+                  range('stroke', 'Line thickness', 0.75, 3, 0.25, '') +
+                '</div>' +
+                '<div class="wied-f"><p class="wied-l" id="' + uid + '-bgl">Background <small>for the preview and the examples</small></p><div class="wied-seg is-3" role="group" aria-labelledby="' + uid + '-bgl">' +
+                  [['light', 'Light'], ['dark', 'Dark'], ['brand', 'Tinted']].map(function (b) { return '<button type="button" data-bg="' + b[0] + '" aria-pressed="false">' + b[1] + '</button>' }).join('') +
+                '</div></div>') +
             '</div>' +
             '<div class="wied-pane" role="tabpanel" id="' + uid + '-p-motion" aria-labelledby="' + uid + '-t-motion" data-pane="motion" hidden>' +
               '<p class="wied-intent" data-intent></p>' +
@@ -1120,7 +1203,11 @@
                 [['none', 'Still'], ['loop', 'Always'], ['hover', 'On hover'], ['once', 'Once']].map(function (a) { return '<button type="button" data-anim="' + a[0] + '" aria-pressed="false">' + a[1] + '</button>' }).join('') +
               '</div></div>' +
               '<div class="wied-f"><p class="wied-l" id="' + uid + '-pl">Move <small>' + (touchMq.matches ? 'tap one to try it' : 'hover one to preview it') + '</small></p><div data-presets></div></div>' +
-              '<div class="wied-f wied-sliders">' + range('speed', 'Speed', 0.25, 2.5, 0.25, '×') + range('amount', 'Intensity', 0.25, 2, 0.25, '×') + '</div>' +
+              '<div class="wied-f" data-partsf hidden><p class="wied-l" id="' + uid + '-ptl">Moves in parts <small data-parts-say></small></p><ul class="wied-parts" data-parts aria-labelledby="' + uid + '-ptl"></ul>' +
+                '<div data-decof hidden><p class="wied-l wied-l2" id="' + uid + '-dl">Decorations <small>sparkles, backdrops and accent dots</small></p><div class="wied-seg is-2" role="group" aria-labelledby="' + uid + '-dl">' +
+                  [['', 'Animate'], ['still', 'Keep still']].map(function (a) { return '<button type="button" data-deco="' + a[0] + '" aria-pressed="false">' + a[1] + '</button>' }).join('') +
+                '</div></div></div>' +
+              layer('pace', 'Speed and intensity', '<div class="wied-f wied-sliders">' + range('speed', 'Speed', 0.25, 2.5, 0.25, '×') + range('amount', 'Intensity', 0.25, 2, 0.25, '×') + '</div>') +
               '<p class="wied-reduced" data-reduced hidden>Your device asks for less motion, so previews stay still. <button type="button" data-force>Play them anyway</button></p>' +
             '</div>' +
             swapPaneHtml(list) +
@@ -1128,6 +1215,7 @@
         '</div>' +
         '<div class="wied-out">' +
           (opts.downloads === false ? '' : '<div class="wied-dlhost" data-dl-host></div>') +
+          (opts.codeFold ? '<details class="wied-codefold"><summary><span class="wied-codefold-i" aria-hidden="true">' + G.code + '</span><span class="wied-codefold-t"><b>Copy it as code</b><small>&lt;i&gt; tag, HTML + SVG, React, Vue or a web component, with your colours and motion</small></span><span class="wied-codefold-x" aria-hidden="true"></span></summary>' : '') +
           '<div class="wied-code">' +
             '<div class="wied-code-head"><p class="wied-l">Copy the code</p><div class="wied-ctabs" role="tablist" aria-label="Code format">' +
               [['tag', '&lt;i&gt; tag'], ['html', 'HTML + SVG'], ['react', 'React'], ['vue', 'Vue'], ['web', 'Web component']].map(function (c) { return '<button type="button" role="tab" data-code="' + c[0] + '" aria-selected="false" tabindex="-1">' + c[1] + '</button>' }).join('') +
@@ -1139,7 +1227,7 @@
               '<div data-setup-lines></div>' +
               '<p class="wied-setup-more">Prefer not to add anything? <button type="button" class="wied-link" data-do="copy-svg">Copy the SVG code</button> instead: it works anywhere, today.</p>' +
             '</details>' +
-          '</div>' +
+          '</div>' + (opts.codeFold ? '</details>' : '') +
         '</div>' +
         '<p class="visually-hidden" aria-live="polite" data-live></p>'
       built = true
@@ -1152,7 +1240,7 @@
       // the Download panel (hosts that place their own, like the library drawer, pass downloads: false and mount one)
       if (ownDl) ownDl.destroy()
       var dh = $('[data-dl-host]', root)
-      ownDl = dh ? downloadPanel(dh, { anchor: D.getElementById('download') ? '' : 'download' }) : null
+      ownDl = dh ? downloadPanel(dh, { anchor: D.getElementById('download') ? '' : 'download', quick: opts.dlQuick === false ? false : undefined, title: opts.dlTitle }) : null
       selectTab(S.tab, false)
       paintStyleIcons()
       buildPresets()
@@ -1251,6 +1339,10 @@
         '</div>' +
       '</div>'
     }
+    function layer(k, title, inner) {
+      if (!opts.layers) return inner
+      return '<details class="wied-layer" data-layer="' + k + '"><summary><span class="wied-layer-t"><b>' + title + '</b><small data-layer-sum="' + k + '"></small></span><span class="wied-layer-x" aria-hidden="true"></span></summary><div class="wied-layer-in">' + inner + '</div></details>'
+    }
     function range(k, label, min, max, step, unit) {
       return '<label class="wied-range" data-range-wrap="' + k + '"><span class="wied-l">' + label + ' <output data-out="' + k + '"></output></span>' +
         '<input type="range" min="' + min + '" max="' + max + '" step="' + step + '" data-range="' + k + '" data-unit="' + unit + '"></label>'
@@ -1259,12 +1351,13 @@
       copy: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5 V6 A2.5 2.5 0 0 0 13 3.5 H6 A2.5 2.5 0 0 0 3.5 6 V13 A2.5 2.5 0 0 0 6 15.5 H8.5"/></svg>',
       down: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5 V15 M7 10.5 L12 15.5 L17 10.5 M4.5 19.5 H19.5"/></svg>',
       play: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 4.8 V19.2 L19 12 Z"/></svg>',
+      code: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 7 L3.5 12 L8.5 17 M15.5 7 L20.5 12 L15.5 17"/></svg>',
       film: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M10 9.5 V14.5 L14.5 12 Z"/></svg>',
       arrow: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12 H19 M13 6 L19 12 L13 18"/></svg>'
     }
     function paintStyleIcons() {
-      // a host that hides the Look pane (the library drawer has its own style strip) must not pull in all twelve style
-      // files: there the icon's own page (all twelve styles, ~110 KB) fills the "Before" style chips instead
+      // a host that hides the Look pane (the library drawer has its own style strip) must not pull in every style
+      // files: there the icon's own page (every style, ~110 KB) fills the "Before" style chips instead
       var lookHidden = !!($('[data-pane="look"]', root) || {}).hidden
       var draw = function (el, s) { el.innerHTML = buildSvg(I.name, s, { size: 22, mode: 'live', full: true }); el.removeAttribute('data-wait') }
       var missing = []
@@ -1284,14 +1377,38 @@
       })
     }
     var presetKey = ''
+    // "Moves in parts": what each tagged part of this drawing does (forge/MOTION.md "Parts choreography"), so it is clear
+    // that only the object plays the move: a backdrop breathes on its own loop and a shadow stays on the ground
+    var DECO_SAY = { breathe: 'breathe in place, on their own loop', float: 'drift gently, on their own loop', twinkle: 'twinkle, on their own loop', still: 'keep still' }
+    function renderParts(mi) {
+      var f = $('[data-partsf]', root); if (!f) return
+      var pt = parts(), on = S.anim !== 'none' && !!mi && mi.preset !== 'draw' && pt.any && !(swapReady() && swapTarget())
+      f.hidden = !on
+      $('[data-decof]', root).hidden = !(on && pt.deco)
+      $$('[data-deco]', root).forEach(function (b) { b.setAttribute('aria-pressed', (b.getAttribute('data-deco') || '') === (S.deco || '')) })
+      if (!on) return
+      var sp = spec(), P = (mi.own && sp.parts) || {}, mv = PRESETS[mi.preset].label.toLowerCase()
+      var rows = [['obj', I.title, mv]]
+      var plate = function (k, nm) {
+        var q = P[k], p = q && PRESETS[q.preset] ? q.preset : mi.preset
+        if (!q) return [k.toLowerCase(), nm, 'moves with it']
+        return [k.toLowerCase(), nm, (p === mi.preset ? mv : PRESETS[p].label.toLowerCase()) + (q.delay > 0 ? ', a beat behind' : '') + (q.amount != null && q.amount > (mi.k || 1) ? ', a little more' : '')]
+      }
+      if (pt.a) rows.push(plate('A', 'Moving part'))
+      if (pt.s) rows.push(plate('S', 'Badge'))
+      if (pt.deco) rows.push(['deco', 'Decorations', DECO_SAY[S.deco === 'still' ? 'still' : decoKind(mi.preset, mi.own ? sp.deco : null)]])
+      if (pt.shadow) rows.push(['shadow', 'Shadow', GROUND.indexOf(mi.preset) >= 0 ? 'stays on the ground and shrinks as it lifts' : 'moves with it'])
+      $('[data-parts-say]', root).textContent = 'in ' + info(S.style).title
+      $('[data-parts]', root).innerHTML = rows.map(function (r) { return '<li class="is-' + r[0] + '"><i aria-hidden="true"></i><b>' + esc(r[1]) + '</b><span>' + esc(r[2]) + '</span></li>' }).join('')
+    }
     function buildPresets() {
       var box = $('[data-presets]', root); if (!box) return
-      var key = I.name + '|' + S.style + '|' + S.color + '|' + S.bg + '|' + colorKey()
+      var key = I.name + '|' + S.style + '|' + S.color + '|' + S.bg + '|' + colorKey() + '|' + S.deco
       if (key === presetKey) return
       presetKey = key
       var o = presetsOrdered()
       var chip = function (p, own) {
-        var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked })
+        var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, deco: S.deco })
         return '<button type="button" class="wied-pchip wm-trigger' + (own ? ' is-own' : '') + '" data-preset="' + p + '" aria-pressed="false"><span class="wied-pchip-i ' + (mi ? mi.cls : '') + '" style="' + (mi ? mi.style : '') + '">' + buildSvg(I.name, S.style, { size: 20, mode: 'live' }) + '</span><span>' + esc(PRESETS[p].label) + '</span></button>'
       }
       box.innerHTML = '<div class="wied-pgroup"><p class="wied-sub">Made for ' + esc(I.title) + '</p><div class="wied-pchips">' + o.own.map(function (p) { return chip(p, true) }).join('') + '</div></div>' +
@@ -1403,7 +1520,7 @@
       }
       paintRadios('data-fx', swEffect(), box)
     }
-    // After's style chips: "Same as before" + the twelve styles, each drawn with After in that style when its drawing is here
+    // After's style chips: "Same as before" + every style, each drawn with After in that style when its drawing is here
     var bstKey = ''
     function paintBStyles(t) {
       var box = $('[data-sw-bst]', root); if (!box) return
@@ -1540,10 +1657,13 @@
       setRange('stroke', S.stroke != null ? S.stroke : (sw || 1.75), sw ? (S.stroke != null ? S.stroke : sw) + ' px' : 'fixed')
       setRange('speed', S.speed, S.speed + '×')
       setRange('amount', S.amount, S.amount + '×')
+      var lf = $('[data-layer-sum="fine"]', root); if (lf) lf.textContent = S.size + ' px · ' + (sw ? (S.stroke != null ? S.stroke : sw) + ' line' : 'fixed line') + ' · ' + ({ light: 'light', dark: 'dark', brand: 'tinted' })[S.bg] + ' background'
+      var lp = $('[data-layer-sum="pace"]', root); if (lp) lp.textContent = (S.speed === 1 ? 'normal speed' : S.speed + '× speed') + ' · ' + (S.amount === 1 ? 'normal intensity' : S.amount + '× intensity')
       $$('[data-anim]', root).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-anim') === S.anim) })
       var mi = motionInfo(S.anim === 'none' ? 'loop' : S.anim)
       var cur = S.preset || (motionInfo(S.anim === 'none' ? 'loop' : S.anim) || {}).preset
       $$('[data-preset]', root).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-preset') === cur) })
+      renderParts(mi)
       var it = $('[data-intent]', root), sp = spec()
       it.innerHTML = '<b>' + esc(I.title) + '</b> ' + esc(sp.intent || 'moves gently to draw the eye') + '.'
       $('[data-reduced]', root).hidden = !(reducedMq.matches && !forced)
@@ -1573,7 +1693,7 @@
       buildPresets()
       dlPanels.forEach(function (p) { p.update() })
       if (place) place.render()
-      if (remember) store(KEY, { style: S.style, color: S.color, size: S.size, px: S.px, bg: S.bg, anim: S.anim, speed: S.speed, amount: S.amount, code: S.code, flat: S.flat })
+      if (remember) store(KEY, { style: S.style, color: S.color, size: S.size, px: S.px, bg: S.bg, anim: S.anim, speed: S.speed, amount: S.amount, deco: S.deco, code: S.code, flat: S.flat })
       if (!o.silent) emit()
     }
     function setRange(k, v, txt) {
@@ -1648,6 +1768,14 @@
 
     /* ───────── code output ───────── */
     function motionTagCls(mi) { return mi ? ' ' + mi.cls : '' }
+    // code for an inline SVG playing the icon's own parts motion: data-wm + icons.css carry the spec (slot, plates, decorations);
+    // only what the visitor changed (speed, intensity, decorations kept still) goes inline
+    function ownCode(mi) { return !!(mi && mi.own) }
+    function ownList(mi) { return Object.keys(mi.ownVars || {}).map(function (k) { return k + ': ' + mi.ownVars[k] }) }
+    function wrapOpen(mi, jsx) {
+      if (ownCode(mi)) return '<span ' + (jsx ? 'className' : 'class') + '="' + mi.cls + '" data-wm="' + I.name + '"'
+      return '<span ' + (jsx ? 'className' : 'class') + '="' + mi.cls + '"'
+    }
     function styleAttr(parts) { parts = parts.filter(Boolean); return parts.length ? ' style="' + parts.join('; ') + '"' : '' }
     function varsList(mi) { return mi ? Object.keys(mi.vars).map(function (k) { return k + ': ' + mi.vars[k] }) : [] }
     function setupLines() {
@@ -1656,10 +1784,13 @@
       var tb = swapReady() ? swapTarget() : null, bcz = tb ? bColors(tb).cz : null
       if (S.code === 'tag' && ((isMulti() && colorsFor()) || bcz)) lines.push('<script src="' + CDN + '/web/dist/classes/with-icons.js" defer></script>')
       if (S.anim !== 'none' || swapTarget()) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/motion.css">')
+      if (S.code !== 'tag' && !swapReady() && ownCode(motionInfo())) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/icons.css">')
       return lines
     }
     function codeFor(kind) {
       var n = I.name, st = S.style, mi = motionInfo(), t = swapReady() ? swapTarget() : null
+      // a swap pair is never animated part by part: the whole-icon form of the motion
+      if (t && ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked })
       var cz = isMulti(st) ? colorsFor(st) : null
       var col = cz && cz.ink ? cz.ink : S.color === 'ink' ? null : colorHex()
       var cvars = cz ? Object.keys(cz.vars).map(function (k) { return k + ': ' + cz.vars[k] }) : []
@@ -1694,6 +1825,7 @@
             ind + '  <i class="' + cls(n, st) + ' wm-a"' + styleAttr([col ? 'color: ' + col : ''].concat(cvars)) + '></i>\n' +
             ind + '  <i class="' + cls(t.name, t.style) + ' wm-b"' + styleAttr([colB ? 'color: ' + colB : ''].concat(bvars)) + '></i>\n' + ind + '</span>' + close('') + palNote
         }
+        if (ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked })
         var sty = styleAttr([col ? 'color: ' + col : '', fs].concat(cvars, varsList(mi)))
         return '<i class="' + cls(n, st) + motionTagCls(mi) + '"' + sty + '></i>' + (mi && mi.trigger === 'hover' ? '\n<!-- plays on hover. To play when a parent is hovered or focused, give that button or link class="wm-trigger".\n     Touch screens: tapping a button or link with class="wm-trigger" plays it (a bare <i> never gets :hover on iOS), or use the JS runtime: motion() from @withicons/motion -->' : '') + palNote
       }
@@ -1706,6 +1838,7 @@
           return head + trigNote + open('') + i2 + '<span' + wrapAttrs() + '>\n' + i2 + '  ' + svgA.replace('<svg ', '<svg class="wm-a" ') + '\n' + i2 + '  ' + svgB.replace('<svg ', '<svg class="wm-b" ') + '\n' + i2 + '</span>' + close('')
         }
         if (!mi) return svgA
+        if (ownCode(mi)) return '<!-- motion: ' + CDN + '/motion/dist/motion.css + icons.css (data-wm plays ' + esc(I.title) + '’s own moves, part by part) -->\n' + wrapOpen(mi) + styleAttr(ownList(mi)) + '>\n  ' + svgA + '\n</span>'
         return head + '<span class="' + mi.cls + '"' + styleAttr(varsList(mi)) + '>\n  ' + svgA + '\n</span>'
       }
       var imports = function (fw) {
@@ -1717,6 +1850,7 @@
           else lines.push("import { " + CT + (CT === C ? ' as ' + CT + cap(t.style) : '') + " } from '@withicons/" + fw + tsub + "'")
         }
         if (mi || t) lines.push("import '@withicons/motion/motion.css'")
+        if (!t && ownCode(mi)) lines.push("import '@withicons/motion/icons.css'   // " + I.title + "’s own moves, part by part (data-wm)")
         return lines.join('\n')
       }
       var bName = t ? (comp(t.name) === C && t.style !== st ? comp(t.name) + cap(t.style) : comp(t.name)) : ''
@@ -1724,7 +1858,8 @@
       if (kind === 'react') {
         var sw0 = S.stroke != null && info(st).sw ? ' strokeWidth={' + S.stroke + '}' : ''
         var props = ' size={' + S.size + '}' + (col ? ' color="' + col + '"' : '') + sw0 + (cz && Object.keys(cz.vars).length ? ' style=' + jsObj(cz.vars) : '')
-        var rv = mi ? ' style={{ ' + Object.keys(mi.vars).map(function (k) { return "'" + k + "': '" + mi.vars[k] + "'" }).join(', ') + ' }}' : ''
+        var rvars = mi ? (ownCode(mi) ? mi.ownVars : mi.vars) : {}
+        var rv = mi && Object.keys(rvars).length ? ' style={{ ' + Object.keys(rvars).map(function (k) { return "'" + k + "': '" + rvars[k] + "'" }).join(', ') + ' }}' : ''
         if (t) {
           var propsB = ' size={' + S.size + '}' + (colB ? ' color="' + colB + '"' : '') + (S.stroke != null && info(t.style).sw ? ' strokeWidth={' + S.stroke + '}' : '') + (bc.cz && Object.keys(bc.cz.vars).length ? ' style=' + jsObj(bc.cz.vars) : '')
           var wsty = Object.keys(sv).length ? ' style=' + jsObj(sv) : ''
@@ -1735,11 +1870,12 @@
           return imports('react') + '\n\n// shows ' + t.title + (trig === 'hover' ? ' on hover and keyboard focus' : ' while focused') + '\nexport const ' + C + 'Button = () => (\n  <button className="wm-trigger" type="button" aria-label="' + I.title + '">\n    ' + pair.replace(/\n {6}/g, '\n    ').replace(/\n {8}/g, '\n      ') + '\n  </button>\n)'
         }
         if (!mi) return imports('react') + '\n\nexport const Example = () => <' + C + props + ' />'
-        return imports('react') + '\n\nexport const Example = () => (\n  <span className="' + mi.cls + '"' + (rv ? rv.replace(/^ /, ' ') : '') + '>\n    <' + C + props + ' />\n  </span>\n)'
+        return imports('react') + '\n\nexport const Example = () => (\n  ' + wrapOpen(mi, true) + rv + '>\n    <' + C + props + ' />\n  </span>\n)'
       }
       if (kind === 'vue') {
         var vp = ' :size="' + S.size + '"' + (col ? ' color="' + col + '"' : '') + (S.stroke != null && info(st).sw ? ' :stroke-width="' + S.stroke + '"' : '') + (cvars.length ? ' style="' + cvars.join('; ') + '"' : '')
-        var vs = mi && Object.keys(mi.vars).length ? ' style="' + varsList(mi).join('; ') + '"' : ''
+        var vl = mi ? (ownCode(mi) ? ownList(mi) : varsList(mi)) : []
+        var vs = vl.length ? ' style="' + vl.join('; ') + '"' : ''
         if (t) {
           var vpB = ' :size="' + S.size + '"' + (colB ? ' color="' + colB + '"' : '') + (S.stroke != null && info(t.style).sw ? ' :stroke-width="' + S.stroke + '"' : '') + (bvars.length ? ' style="' + bvars.join('; ') + '"' : '')
           var vpair = function (ind) { return ind + '<span' + wrapAttrs() + '>\n' + ind + '  <' + C + ' class="wm-a"' + vp + ' />\n' + ind + '  <' + bName + ' class="wm-b"' + vpB + ' />\n' + ind + '</span>' }
@@ -1747,11 +1883,12 @@
           if (trig === 'auto') return '<script setup>\n' + imports('vue') + '\n</script>\n\n<template>\n  <!-- turns into ' + t.title + ' and back on its own -->\n' + vpair('  ') + '\n</template>'
           return '<script setup>\n' + imports('vue') + '\n</script>\n\n<template>\n  <button class="wm-trigger" type="button" aria-label="' + I.title + '">\n' + vpair('    ') + '\n  </button>\n</template>'
         }
-        return '<script setup>\n' + imports('vue') + '\n</script>\n\n<template>\n' + (mi ? '  <span class="' + mi.cls + '"' + vs + '>\n    <' + C + vp + ' />\n  </span>' : '  <' + C + vp + ' />') + '\n</template>'
+        return '<script setup>\n' + imports('vue') + '\n</script>\n\n<template>\n' + (mi ? '  ' + wrapOpen(mi) + vs + '>\n    <' + C + vp + ' />\n  </span>' : '  <' + C + vp + ' />') + '\n</template>'
       }
       if (kind === 'web') {
         var at = ' name="' + n + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + (S.size !== 24 ? ' size="' + S.size + '"' : '')
-        if (mi) at += ' motion="' + mi.trigger + '" preset="' + mi.preset + '"'
+        // the icon's own motion: no preset attribute, so with-icon[name] in icons.css plays it part by part
+        if (mi) at += ' motion="' + mi.trigger + '"' + (ownCode(mi) && !t ? '' : ' preset="' + mi.preset + '"')
         if (t) {
           at += '\n  swap-to="' + t.name + (t.style !== st ? '@' + t.style : '') + '" swap-effect="' + fx + '" swap-trigger="' + trig + '"'
           var extra = []
@@ -1764,7 +1901,7 @@
           if (bvars.length) extra.push('swap-colors="' + bvars.join('; ') + '"')
           if (extra.length) at += '\n  ' + extra.join(' ')
         }
-        var ws = styleAttr([col ? 'color: ' + col : ''].concat(cvars, mi ? varsList(mi).filter(function (v) { return !/--wm-(ox|oy|dx|dy|steps)/.test(v) }) : []))
+        var ws = styleAttr([col ? 'color: ' + col : ''].concat(cvars, mi ? (ownCode(mi) && !t ? ownList(mi) : varsList(mi).filter(function (v) { return !/--wm-(ox|oy|dx|dy|steps)/.test(v) })) : []))
         return '<script type="module" src="' + CDN + '/web/dist/index.js"></script>\n' + (mi || t ? '<script type="module" src="' + CDN + '/motion/dist/element.js"></script>\n' : '') + '\n<with-icon' + at + (t ? '\n ' : '') + ' label="' + I.title + '"' + ws + '></with-icon>'
       }
       return ''
@@ -1782,7 +1919,7 @@
     // hovered, so "On hover" exports its hover move on a loop; a GIF cannot play "once" either, so it loops too.
     function exportMotion(gif) {
       var trig = S.anim === 'none' ? 'loop' : S.anim
-      if (trig === 'hover' || (gif && trig === 'once')) return motionAttrs(currentEntry('hover'), { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked }) || motionInfo('loop')
+      if (trig === 'hover' || (gif && trig === 'once')) return motionAttrs(currentEntry('hover'), { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco }) || motionInfo('loop')
       return motionInfo(trig)
     }
     function exportLabel() {
@@ -1819,6 +1956,9 @@
       if (mi.origin) o.origin = mi.origin
       if (mi.dir != null) o.dir = mi.dir
       if (mi.steps) o.steps = mi.steps
+      // parts: the icon's own plates and decoration loop come from its spec; "Keep still" holds the decorations
+      if (mi.own && I.motion) o.spec = Object.assign({}, I.motion, mi.deco === 'still' ? { deco: 'still' } : {})
+      else if (mi.deco === 'still') o.spec = { deco: 'still' }
       return o
     }
     function animatedExport() {
@@ -1890,6 +2030,7 @@
       if ((v = b.getAttribute('data-st'))) set({ style: v })
       else if (b.hasAttribute('data-mono-c')) setMono(b.closest('[data-mono]').getAttribute('data-mono'), b.getAttribute('data-mono-c'))
       else if ((v = b.getAttribute('data-anim'))) { set({ anim: v }); if (v !== 'none') setTimeout(replay, 20) }
+      else if (b.hasAttribute('data-deco')) { set({ deco: b.getAttribute('data-deco') === 'still' ? 'still' : '' }); say(S.deco === 'still' ? 'Decorations keep still.' : 'Decorations move on their own.') }
       else if (b.hasAttribute('data-bg') && b.tagName === 'BUTTON') set({ bg: b.getAttribute('data-bg') })
       else if ((v = b.getAttribute('data-preset'))) { set({ preset: v, anim: S.anim === 'none' ? 'loop' : S.anim }); setTimeout(replay, 20) }
       else if ((v = b.getAttribute('data-px'))) set({ px: +v })
@@ -2013,11 +2154,11 @@
         bg: /^(none|white|page|custom)$/.test(sv.bg) ? sv.bg : 'none', bgHex: isHex(sv.bgHex) ? sv.bgHex.toUpperCase() : '#2F5BFF',
         matte: /^(white|page|black|custom)$/.test(sv.matte) ? sv.matte : 'white', matteHex: isHex(sv.matteHex) ? sv.matteHex.toUpperCase() : '#FFFFFF',
         pad: obj(sv.pad), size: obj(sv.size), custom: {}, x2: !!sv.x2, motion: '', fps: obj(sv.fps), loop: [0, 1, 3].indexOf(sv.loop) >= 0 ? sv.loop : 0,
-        loops: [1, 2, 3, 5].indexOf(sv.loops) >= 0 ? sv.loops : 1, which: 'a', busy: 0, bkey: '', okey: '', akey: '', na: {}, t0: 0, tick: 0
+        loops: [1, 2, 3, 5].indexOf(sv.loops) >= 0 ? sv.loops : 1, adv: !!sv.adv, more: false, which: 'a', busy: 0, bkey: '', okey: '', akey: '', na: {}, t0: 0, tick: 0
       }
       function save() {
         if (!remember) return
-        store(DLKEY, { group: P.group, pick: P.pick, bg: P.bg, bgHex: P.bgHex, matte: P.matte, matteHex: P.matteHex, pad: P.pad, size: P.size, x2: P.x2, fps: P.fps, loop: P.loop, loops: P.loops })
+        store(DLKEY, { adv: P.adv, group: P.group, pick: P.pick, bg: P.bg, bgHex: P.bgHex, matte: P.matte, matteHex: P.matteHex, pad: P.pad, size: P.size, x2: P.x2, fps: P.fps, loop: P.loop, loops: P.loops })
       }
       var X = function () { return W.WithExport || null }
       function desc(f) { var x = X(); return x && x.get ? x.get(f) : null }
@@ -2026,7 +2167,8 @@
       function isCode(f) { return (groupOf('web').code || []).indexOf(f) >= 0 }
       function kind(f) { return isCode(f) ? 'code' : DL_KIND[f] || null }
       function moving(f) { return DL_FRAMES.indexOf(f) >= 0 || f === 'animated-svg' || f === 'lottie' || f === 'dotlottie' }
-      function cur() { var l = idsOf(P.group), f = P.pick[P.group]; return l.indexOf(f) >= 0 ? f : l[0] }
+      function tops(g) { var l = idsOf(g); return (DL_TOP[g] || l.slice(0, 3)).filter(function (x) { return l.indexOf(x) >= 0 }) }
+      function cur() { var l = idsOf(P.group), f = P.pick[P.group]; return l.indexOf(f) >= 0 ? f : tops(P.group)[0] || l[0] }
       // can this browser make it? (only known once the scripts are here; until then everything looks available)
       function avail(f) {
         if (!exportReady()) return true
@@ -2064,8 +2206,8 @@
       function fpsVal(f) { var l = fpsList(f), k = f === 'gif' ? 'gif' : 'v', v = +P.fps[k]; return l.indexOf(v) >= 0 ? v : f === 'gif' ? 25 : 30 }
       // the motions a file can carry: "Turn into" (when set), the icon's loop, its hover move (looped: files can't sense hover)
       function motions(f) {
-        var t = swapReady() ? swapTarget() : null, out = [], o = { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked }
-        var lo = motionAttrs(currentEntry('loop'), o), hv = motionAttrs(currentEntry('hover'), o)
+        var t = swapReady() ? swapTarget() : null, out = [], o = { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco }
+        var lo = motionAttrs(currentEntry('loop'), Object.assign({ spec: S.preset ? null : I.motion, parts: parts().any }, o)), hv = motionAttrs(currentEntry('hover'), o)
         if (t) out.push(['swap', 'Turns into ' + t.title])
         if (lo) out.push(['loop', PRESETS[lo.preset].label])
         if (hv && (!lo || hv.preset !== lo.preset)) out.push(['hover', PRESETS[hv.preset].label + ' (hover move)'])
@@ -2174,7 +2316,8 @@
             '<div class="wdl-side">' +
               '<div class="wdl-prev"><div class="wdl-box" role="img" data-dl-box><span class="wdl-art" data-dl-art></span></div>' +
                 '<div class="wdl-about"><p class="wdl-name"><span class="wdl-badge" data-dl-badge aria-hidden="true"></span><b data-dl-name></b></p><p class="wdl-note" data-dl-note></p><p class="wdl-aud" data-dl-aud></p></div></div>' +
-              '<div class="wdl-opts" data-dl-opts></div>' +
+              '<button type="button" class="wdl-adj" data-dl-adj aria-expanded="false" aria-controls="' + id + '-opts"><span class="wdl-adj-i" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="wdl-adj-t"><b>Options</b><small data-dl-adjsum></small></span><span class="wdl-adj-x" aria-hidden="true"></span></button>' +
+              '<div class="wdl-opts" id="' + id + '-opts" data-dl-opts></div>' +
               '<div class="wdl-go">' +
                 '<button type="button" class="wdl-dl" data-dl-go><span class="wdl-dl-i">' + G.down + '<i class="wdl-spin" aria-hidden="true"></i></span><span class="wdl-dl-t"><b data-dl-gol>Download</b><small id="' + id + '-sum" data-dl-sum></small></span><span class="wdl-bar" aria-hidden="true"></span></button>' +
                 '<button type="button" class="wdl-copy" data-dl-copy hidden>' + G.copy + '<span>Copy</span></button>' +
@@ -2300,21 +2443,28 @@
         var box = $('[data-dl-fmts]', sec)
         if (bk !== P.bkey) {
           P.bkey = bk
-          var g = groupOf(P.group)
-          box.innerHTML = g.ids.map(fmtBtn).join('') + (g.code ? '<p class="wdl-sep" aria-hidden="true">Code files</p>' + g.code.map(fmtBtn).join('') : '')
+          var g = groupOf(P.group), top = tops(P.group), rest = g.ids.filter(function (x) { return top.indexOf(x) < 0 })
+          box.innerHTML = top.map(fmtBtn).join('') + rest.map(fmtBtn).join('') + (g.code ? '<p class="wdl-sep" aria-hidden="true">Code files</p>' + g.code.map(fmtBtn).join('') : '')
           var mb = $('[data-dl-more]', sec)
-          if (g.code && !mb) {
+          var extra = rest.concat(g.code || [])
+          if (extra.length && !mb) {
             mb = D.createElement('button'); mb.type = 'button'; mb.className = 'wdl-more'; mb.setAttribute('data-dl-more', ''); mb.setAttribute('aria-expanded', 'false'); mb.setAttribute('aria-controls', id + '-f')
-            mb.innerHTML = '<span class="wdl-more-i" aria-hidden="true">+</span><span><b>Code files</b><small>React, Vue, Svelte, Angular, React Native, HTML, CSS and more</small></span>'
             box.parentNode.appendChild(mb)
-          } else if (!g.code && mb) mb.remove()
+          } else if (!extra.length && mb) mb.remove()
+          if (mb) {
+            var nm = rest.map(function (x) { return DL_FMT[x] ? DL_FMT[x][0] : x }).concat(g.code ? ['code files'] : [])
+            mb.innerHTML = '<span class="wdl-more-i" aria-hidden="true">+</span><span><b data-dl-morel></b><small>' + esc(nm.length > 3 ? nm.slice(0, 3).join(' · ') + ' + ' + (nm.length - 3) + ' more' : nm.join(' · ')) + '</small></span>'
+            mb._n = extra.length
+          }
         }
-        var mbt = $('[data-dl-more]', sec)
+        var mbt = $('[data-dl-more]', sec), topNow = tops(P.group)
+        var moreOpen = P.more || topNow.indexOf(f) < 0
         if (mbt) {
-          var codeOpen = P.code || isCode(f)
-          mbt.setAttribute('aria-expanded', codeOpen ? 'true' : 'false'); mbt.hidden = isCode(f)
-          $$('.wdl-sep, [data-dlf]', box).forEach(function (b) { var c = b.classList.contains('wdl-sep') || isCode(b.getAttribute('data-dlf')); if (c) b.hidden = !codeOpen })
+          mbt.setAttribute('aria-expanded', moreOpen ? 'true' : 'false'); mbt.classList.toggle('is-open', moreOpen)
+          var ml = $('[data-dl-morel]', mbt); if (ml) ml.textContent = moreOpen ? 'Fewer formats' : mbt._n + ' more formats'
+          mbt.hidden = moreOpen && topNow.indexOf(f) < 0   // a format from the "more" list is chosen: keep them all in view
         }
+        $$('.wdl-sep, [data-dlf]', box).forEach(function (b) { var x = b.getAttribute('data-dlf'); var isTop = !!x && topNow.indexOf(x) >= 0; b.classList.toggle('is-top', isTop); b.hidden = !isTop && !moreOpen })
         $$('[data-dlf]', box).forEach(function (b) { var on = b.getAttribute('data-dlf') === f; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
         // what it is
         var dd = DL_FMT[f] || [f, '', f]
@@ -2333,6 +2483,12 @@
           oe.innerHTML = ok ? optsHtml(f) : ''
           if (had) { var back = $('[data-dl-o="' + had + '"][aria-checked="true"]', oe) || $('[data-dl-o="' + had + '"][data-v="' + hadV + '"]', oe); if (back) back.focus() }
         }
+        // options fold: "Options" names what can be changed for this format; open or closed is remembered
+        var adj = $('[data-dl-adj]', sec), has = ok && !!oe.children.length
+        adj.hidden = !has
+        oe.hidden = !has || !P.adv
+        adj.setAttribute('aria-expanded', P.adv ? 'true' : 'false')
+        if (has) $('[data-dl-adjsum]', sec).textContent = $$('.wdl-o > .wdl-l', oe).map(function (l) { return (l.firstChild && l.firstChild.nodeType === 3 ? l.firstChild.nodeValue : l.textContent).trim() }).filter(Boolean).join(' · ')
         // the preview: checkerboard when see-through, the file's colour otherwise; the icon sits inside its padding
         var bm = bgMode(f), bg = bm ? bgHex(f) : null, boxEl = $('[data-dl-box]', sec)
         boxEl.classList.toggle('is-alpha', !bg && bm !== null)
@@ -2498,11 +2654,23 @@
       function onClick(e) {
         var b = e.target.closest('button'); if (!b || !sec.contains(b)) return
         var v
-        if ((v = b.getAttribute('data-dlg'))) { P.group = v; save(); update() }
+        if ((v = b.getAttribute('data-dlg'))) { P.group = v; P.more = false; save(); update() }
         else if ((v = b.getAttribute('data-dlf'))) { P.pick[P.group] = v; save(); err(''); status('', ''); update() }
         else if ((v = b.getAttribute('data-dl-o'))) { if (!b.disabled) pick(v, b.getAttribute('data-v')) }
         else if (b.hasAttribute('data-dl-x2')) { P.x2 = !P.x2; save(); update() }
-        else if (b.hasAttribute('data-dl-more')) { P.code = !P.code; update(); if (P.code) { var fc = $('[data-dlf="' + groupOf('web').code[0] + '"]', sec); if (fc) fc.focus() } }
+        else if (b.hasAttribute('data-dl-more')) {
+          P.more = !P.more; update()
+          var shown = P.more ? $$('[data-dlf]:not(.is-top):not([hidden]), .wdl-sep:not([hidden])', sec) : []
+          if (shown.length) {
+            var first = $('[data-dlf]:not(.is-top):not([hidden])', sec); if (first) first.focus()
+            if (!reducedMq.matches && first && first.animate) shown.forEach(function (x, i) { x.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: i * 25, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' }) })
+          }
+        }
+        else if (b.hasAttribute('data-dl-adj')) {
+          P.adv = !P.adv; save(); update()
+          var oe2 = $('[data-dl-opts]', sec)
+          if (P.adv && !reducedMq.matches && oe2.animate) oe2.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'cubic-bezier(.22,1,.36,1)' })
+        }
         else if (b.hasAttribute('data-dl-go')) { if (b.getAttribute('aria-disabled') !== 'true') download(cur(), b) }
         else if (b.hasAttribute('data-dl-copy')) copy(cur(), b)
         else if (b.hasAttribute('data-dl-cancel')) { P.busy = 0; setBusy(null); status('Cancelled.', ''); $('[data-dl-go]', sec).focus() }
@@ -2548,7 +2716,7 @@
       var api3 = {
         el: el, update: update,
         download: function (f, o) { return make(f, o).then(function (r) { X().download(r.data, r.filename, r.mime); return r }) },
-        make: make, select: function (g, f) { if (g) P.group = g; if (f) P.pick[P.group] = f; update() },
+        make: make, select: function (g, f) { if (g && g !== P.group) { P.group = g; P.more = false } if (f) P.pick[P.group] = f; save(); update() },
         destroy: function () {
           if (io) io.disconnect(); clearInterval(P.tick)
           sec.removeEventListener('click', onClick); sec.removeEventListener('keydown', onKey); sec.removeEventListener('keydown', onKeyField); sec.removeEventListener('input', onInput); sec.removeEventListener('change', onChange)

@@ -1,22 +1,22 @@
 {
   "name": "megaphone",
-  "intent": "pulses like it's announcing, kicks back when you shout",
+  "intent": "pumps out an announcement, kicks back when you shout",
   "loop": {
     "preset": "pulse",
     "origin": [
-      7,
-      15
+      6,
+      13
     ],
-    "amount": 0.6,
-    "duration": 1.8
+    "amount": 0.5,
+    "duration": 2
   },
   "hover": {
-    "preset": "wiggle",
-    "origin": [
-      7,
-      16
-    ]
+    "preset": "nudge",
+    "dir": 162,
+    "amount": 0.6,
+    "duration": 0.5
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "tada",

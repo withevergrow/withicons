@@ -1,22 +1,33 @@
 {
   "name": "log-in",
-  "intent": "steps through the door like someone signing in",
+  "intent": "the arrow steps in through the door while the frame stays put",
   "loop": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.6,
+    "amount": 0.25,
     "duration": 2.2
   },
   "hover": {
-    "preset": "pass",
+    "preset": "nudge",
     "dir": 0,
-    "amount": 0.9,
-    "duration": 0.7
+    "amount": 0.4,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 1,
+      "duration": 2.2,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "nudge",
-      "dir": 0
+      "preset": "pass",
+      "dir": 0,
+      "amount": 0.8
     },
     {
       "preset": "pop"

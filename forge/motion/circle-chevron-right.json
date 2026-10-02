@@ -1,15 +1,10 @@
 {
   "name": "circle-chevron-right",
-  "intent": "nudges right to invite you to continue or open details",
-  "loop": { "preset": "nudge", "dir": 0, "amount": 0.35, "duration": 2.2 },
-  "hover": { "preset": "nudge", "dir": 0, "amount": 0.8, "duration": 0.6 },
-  "alt": [
-    { "preset": "pop" },
-    { "preset": "pass", "dir": 0, "duration": 0.8 }
-  ],
-  "swap": [
-    { "to": "circle-chevron-down", "effect": "rotate" },
-    { "to": "circle-chevron-right@solid", "effect": "scale" },
-    { "to": "chevron-right", "effect": "fade" }
-  ]
+  "intent": "chevron steps right inside its ring to invite you onward",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "pop", "amount": 0.6, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 0, "amount": 0.45, "delay": 0.05 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "pop" }, { "preset": "pass", "dir": 0, "duration": 0.8 }],
+  "swap": [{ "to": "circle-chevron-down", "effect": "rotate" }, { "to": "circle-chevron-right@solid", "effect": "scale" }, { "to": "chevron-right", "effect": "fade" }]
 }

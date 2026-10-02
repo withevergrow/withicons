@@ -1,8 +1,9 @@
 {
   "name": "file-x",
-  "intent": "shakes no when a file is rejected",
-  "loop": { "preset": "breathe", "amount": 0.4, "duration": 3.2 },
-  "hover": { "preset": "shake", "amount": 0.8 },
-  "alt": [ { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.6 }, { "preset": "pop" } ],
-  "swap": [ { "to": "file-check", "effect": "rotate" }, { "to": "file", "effect": "fade" }, { "to": "file-x@solid", "effect": "scale" } ]
+  "intent": "rests quietly, shakes no when a file is rejected",
+  "loop": {"preset": "float", "amount": 0.25, "duration": 3.4},
+  "hover": {"preset": "shake", "amount": 0.7},
+  "deco": "breathe",
+  "alt": [ {"preset": "wiggle", "origin": [12,21.5], "amount": 0.6}, {"preset": "pop"} ],
+  "swap": [ {"to": "file-check", "effect": "rotate"}, {"to": "file", "effect": "fade"}, {"to": "file-x@solid", "effect": "scale"} ]
 }

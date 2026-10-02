@@ -4,7 +4,7 @@
   "loop": {
     "preset": "nudge",
     "dir": 315,
-    "amount": 0.5,
+    "amount": 0.35,
     "duration": 2.4
   },
   "hover": {
@@ -13,6 +13,7 @@
     "amount": 1,
     "duration": 1
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "shake",

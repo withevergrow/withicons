@@ -1,16 +1,17 @@
 {
   "name": "git-pull-request",
-  "intent": "sends changes back toward the main line",
+  "intent": "draws changes being sent back toward the main line",
   "loop": {
     "preset": "draw",
-    "duration": 3
+    "duration": 3.2
   },
   "hover": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.8,
+    "amount": 0.7,
     "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

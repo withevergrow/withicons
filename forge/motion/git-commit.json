@@ -7,8 +7,8 @@
       12,
       12
     ],
-    "amount": 0.6,
-    "duration": 2
+    "amount": 0.5,
+    "duration": 2.4
   },
   "hover": {
     "preset": "pop",
@@ -17,6 +17,7 @@
       12
     ]
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pass",

@@ -1,20 +1,30 @@
 {
   "name": "user-minus",
-  "intent": "shakes off a member like an unfollow",
+  "intent": "person rests while the minus slides away: member removed",
   "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      21
-    ],
-    "amount": 0.5,
+    "preset": "float",
+    "amount": 0.3,
     "duration": 3.4
   },
   "hover": {
     "preset": "shake",
-    "amount": 0.7,
+    "amount": 0.5,
     "duration": 0.5
   },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "origin": [
+        19,
+        10
+      ],
+      "dir": 0,
+      "amount": 0.7,
+      "duration": 1.7,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
   "alt": [
     {
       "preset": "pop"

@@ -2,6 +2,8 @@
 import { parsePath } from '../kernel/geom.mjs'
 import * as G from './_pixel-core.mjs'
 import { TUNE } from './_pixel-tune.mjs'
+import { pixelText, stampText, clearShine } from './_pixel-text.mjs'
+import { pixelStars, stampStars } from './_pixel-star.mjs'
 
 const { N } = G
 
@@ -220,6 +222,12 @@ const cellsOf = str => String(str || '').trim().split(/[\s;]+/).filter(Boolean).
 
 export function build(icon, tune = TUNE[icon.name] || {}) {
   if (tune.map) return fromMap(tune.map)
+  // Live-icon text is re-set in a bitmap font after the drawing is rasterised (_pixel-text.mjs)
+  const T = pixelText(icon)
+  if (T) icon = T.icon
+  // so are five-point stars: drawn from sprites (_pixel-star.mjs)
+  const S = pixelStars(icon)
+  if (S) icon = S.icon
   const L = tune.mode === 'sil' ? silhouette(icon, tune) : raster(icon, tune)
   if (tune.notone) { L.tone = G.grid(); L.glint = G.grid() }
   if (tune.ink || tune.del || tune.tone || tune.clear) {
@@ -228,8 +236,12 @@ export function build(icon, tune = TUNE[icon.name] || {}) {
     for (const [i, j] of cellsOf(tune.ink)) { L.ink[G.ix(i, j)] = 1; L.tone[G.ix(i, j)] = 0 }
     for (const [i, j] of cellsOf(tune.tone)) { L.tone[G.ix(i, j)] = 1; L.ink[G.ix(i, j)] = 0 }
   }
-  return finish(L.ink, L.tone, L.glint)
+  if (S) stampStars(L, S.stars, tune.shift || [0, 0])
+  const plates = tune.noPlates ? null : L.plates
+  if (T) { stampText(L, T.lines, icon, tune.shift || [0, 0]); return withPlates(clearShine(finish(L.ink, L.tone, L.glint), L.text), plates) }
+  return withPlates(finish(L.ink, L.tone, L.glint), plates)
 }
+const withPlates = (out, plates) => { if (plates) Object.defineProperty(out, 'plates', { value: plates, enumerable: false }); return out }
 
 // silhouette mode: the outline is traced from the mass itself (clean for complex
 // filled shapes such as a plane), and only secondary/signal lines are drawn on top
@@ -248,8 +260,12 @@ function silhouette(icon, tune) {
     if (edge) ink[k] = 1; else tone[k] = 1
   }
   const lines = [...(icon.lines || []).filter(l => l.pts && l.pts.length), ...dots(icon)]
-  for (const l of lines) if (l.plate !== 'K' || tune.all) for (const [i, j] of rasterLine(l, sh)) if (G.inb(i, j)) { ink[G.ix(i, j)] = 1; tone[G.ix(i, j)] = 0 }
-  return { ink, tone, glint: G.grid() }
+  const k = G.copy(ink), a = G.grid(), s = G.grid()
+  for (const l of lines) if (l.plate !== 'K' || tune.all) for (const [i, j] of rasterLine(l, sh)) if (G.inb(i, j)) {
+    ink[G.ix(i, j)] = 1; tone[G.ix(i, j)] = 0
+    ;(l.plate === 'S' ? s : l.plate === 'A' ? a : k)[G.ix(i, j)] = 1
+  }
+  return { ink, tone, glint: G.grid(), plates: { k, a, s } }
 }
 
 function raster(icon, tune) {
@@ -370,7 +386,7 @@ function raster(icon, tune) {
     if (!gl[G.ix(i, j)]) continue
     for (let b = -1; b <= 1; b++) for (let a = -1; a <= 1; a++) if (G.get(ink, i + a, j + b)) gl[G.ix(i, j)] = 0
   }
-  return { ink, tone, glint: gl }
+  return { ink, tone, glint: gl, plates: { k: G.or(...parts.filter(p => p.plate === 'K').map(p => p.g)), a: G.or(...parts.filter(p => p.plate === 'A').map(p => p.g)), s: sig } }
 }
 
 const comps = (g) => {
@@ -457,11 +473,46 @@ export function finish(ink, tone, glint = G.grid()) {
 }
 
 // layered grids -> IconNodes (tone, shade, ink, shine; one merged path each)
+// Parts choreography (forge/MOTION.md): every layer is a set of whole, disjoint cells, so the sprite can be split
+// by skeleton plate without changing a pixel. S-plate ink (badges, slashes; cleared by a moat) is `wm-s`; ink
+// drawn only by A-plate lines, with the body cells mostly held by that ink, is `wm-a`; the highlight is `wm-shine`.
+// Everything else (K, and cells K shares with A) stays untagged = the object.
+function plateMasks(L) {
+  const P = L.plates, NN = N * N
+  if (!P) return null
+  const s = G.and(L.ink, P.s)
+  const aInk = G.minus(G.minus(G.and(L.ink, P.a), P.k), s)
+  const a = G.copy(aInk)
+  if (G.count(aInk)) {
+    // body (tone + shade) regions held mostly by A-only ink go with the A part (a door's panel, a lid)
+    const body = G.or(L.tone, L.shade)
+    for (const comp of comps(body)) {
+      let na = 0, no = 0
+      for (const [i, j] of comp) for (const [u, v] of [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]]) {
+        if (!G.inb(u, v) || !L.ink[G.ix(u, v)]) continue
+        if (aInk[G.ix(u, v)]) na++; else no++
+      }
+      if (na > no) for (const [i, j] of comp) a[G.ix(i, j)] = 1
+    }
+  }
+  let any = false
+  for (let k = 0; k < NN; k++) if (a[k] || s[k]) { any = true; break }
+  return any ? { a, s } : null
+}
 export function nodes(L) {
   const out = []
-  const t = G.gridD(L.tone); if (t) out.push(['path', { d: t, fill: 'var(--with-pixel-fill, currentColor)', 'fill-opacity': 0.28 }])
-  const h = G.gridD(L.shade); if (h) out.push(['path', { d: h, fill: 'var(--with-pixel-fill, currentColor)', 'fill-opacity': 0.55 }])
-  const k = G.gridD(L.ink); if (k) out.push(['path', { d: k }])
-  const s = G.gridD(L.shine); if (s) out.push(['path', { d: s, fill: 'var(--with-pixel-shine, #FFFFFF)' }])
+  const TONE = { fill: 'var(--with-pixel-fill, currentColor)', 'fill-opacity': 0.28 }
+  const SHADE = { fill: 'var(--with-pixel-fill, currentColor)', 'fill-opacity': 0.55 }
+  const push = (g, attrs, cls) => { const d = G.gridD(g); if (d) out.push(['path', cls ? { d, ...attrs, class: cls } : { d, ...attrs }]) }
+  const M = plateMasks(L)
+  if (!M) {
+    push(L.tone, TONE); push(L.shade, SHADE); push(L.ink, {})
+  } else {
+    const rest = G.or(M.a, M.s)
+    push(G.minus(L.tone, rest), TONE); push(G.minus(L.shade, rest), SHADE); push(G.minus(L.ink, rest), {})
+    push(G.and(L.tone, M.a), TONE, 'wm-a'); push(G.and(L.shade, M.a), SHADE, 'wm-a'); push(G.and(L.ink, M.a), {}, 'wm-a')
+    push(G.and(L.ink, M.s), {}, 'wm-s')
+  }
+  push(L.shine, { fill: 'var(--with-pixel-shine, #FFFFFF)' }, 'wm-shine')
   return out
 }

@@ -1,14 +1,53 @@
 {
   "name": "phone-outgoing",
-  "intent": "leans out toward the arrow like a call heading out",
-  "loop": { "preset": "nudge", "dir": 315, "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "nudge", "dir": 315, "amount": 1.2, "duration": 0.6 },
+  "intent": "handset buzzes softly while the arrow shoots out, a call heading out",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7,
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.9,
+      "duration": 1.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
   "alt": [
-    { "preset": "ring", "amount": 0.5 },
-    { "preset": "wiggle", "amount": 0.8 }
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.8
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.8
+    }
   ],
   "swap": [
-    { "to": "phone-call", "effect": "fade" },
-    { "to": "phone-off", "effect": "rotate" }
+    {
+      "to": "phone-call",
+      "effect": "fade"
+    },
+    {
+      "to": "phone-off",
+      "effect": "rotate"
+    }
   ]
 }

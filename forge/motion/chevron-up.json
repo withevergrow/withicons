@@ -1,20 +1,28 @@
 {
   "name": "chevron-up",
-  "intent": "nudges up to hint that the section collapses",
+  "intent": "lifts up to hint that the section collapses",
   "loop": {
     "preset": "nudge",
     "dir": 270,
-    "amount": 0.6,
-    "duration": 1.8
+    "amount": 0.5,
+    "duration": 2.2
   },
   "hover": {
     "preset": "nudge",
-    "dir": 270
+    "dir": 270,
+    "amount": 1,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "rise",
-      "amount": 0.6
+      "amount": 0.5
+    },
+    {
+      "preset": "pass",
+      "dir": 270,
+      "duration": 0.8
     }
   ],
   "swap": [

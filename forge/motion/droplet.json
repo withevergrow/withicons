@@ -1,18 +1,20 @@
 {
   "name": "droplet",
-  "intent": "drips like water falling from a tap",
+  "intent": "drips like water from a tap, splashes when touched",
   "loop": {
     "preset": "drop",
-    "amount": 0.5,
-    "duration": 2.6
+    "amount": 0.4,
+    "duration": 2.8
   },
   "hover": {
     "preset": "jelly",
     "origin": [
       12,
       21.5
-    ]
+    ],
+    "amount": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "bounce",

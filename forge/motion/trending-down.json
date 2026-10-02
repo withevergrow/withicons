@@ -1,24 +1,35 @@
 {
   "name": "trending-down",
-  "intent": "line dips down and to the right, showing a drop",
+  "intent": "line dips down and right, its arrowhead following through",
   "loop": {
     "preset": "nudge",
     "dir": 45,
     "amount": 0.5,
-    "duration": 2.2
+    "duration": 2.4
   },
   "hover": {
-    "preset": "draw",
-    "duration": 0.9
+    "preset": "nudge",
+    "dir": 45,
+    "amount": 0.7,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 45,
+      "amount": 0.6,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "draw",
+      "duration": 0.9
+    },
     {
       "preset": "pass",
       "dir": 45
-    },
-    {
-      "preset": "shake",
-      "amount": 0.5
     }
   ],
   "swap": [

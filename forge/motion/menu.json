@@ -1,32 +1,9 @@
 {
   "name": "menu",
-  "intent": "bars wobble softly, ready to open navigation",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "jelly"
-  },
-  "alt": [
-    {
-      "preset": "nudge",
-      "dir": 180,
-      "amount": 0.5
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "close",
-      "effect": "morph"
-    },
-    {
-      "to": "sidebar",
-      "effect": "fade"
-    }
-  ]
+  "intent": "bars swell quietly, then wobble ready to open navigation",
+  "loop": {"preset": "pulse", "origin": [12,12], "amount": 0.3, "duration": 3.6},
+  "hover": {"preset": "jelly", "amount": 0.8},
+  "deco": "breathe",
+  "alt": [ {"preset": "nudge", "dir": 180, "amount": 0.5}, {"preset": "pop"} ],
+  "swap": [ {"to": "close", "effect": "morph"}, {"to": "sidebar", "effect": "fade"} ]
 }

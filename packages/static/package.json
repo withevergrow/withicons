@@ -1,7 +1,7 @@
 {
   "name": "@withicons/static",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles as SVG sprites and standalone SVG files. No JavaScript.",
+  "description": "500 icons x 15 styles as SVG sprites and standalone SVG files. No JavaScript.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -38,7 +38,10 @@
     "kawaii",
     "sticker",
     "pixel",
-    "retro"
+    "retro",
+    "luxe",
+    "bauhaus",
+    "skeuo"
   ],
   "sideEffects": false,
   "files": [

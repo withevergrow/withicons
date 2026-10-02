@@ -1,22 +1,24 @@
 {
   "name": "gift",
-  "intent": "rocks with excitement, a present waiting to be opened",
+  "intent": "rocks with excitement on its base; jumps for joy on hover",
   "loop": {
     "preset": "rock",
     "origin": [
       12,
       21
     ],
-    "amount": 0.5,
-    "duration": 2.6
+    "amount": 0.35,
+    "duration": 2.8
   },
   "hover": {
     "preset": "tada",
     "origin": [
       12,
       21
-    ]
+    ],
+    "amount": 0.9
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "pop"
@@ -26,7 +28,11 @@
       "amount": 0.7
     },
     {
-      "preset": "jelly"
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
     }
   ],
   "swap": [

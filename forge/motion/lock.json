@@ -1,30 +1,49 @@
 {
   "name": "lock",
-  "intent": "rests calmly, then shakes when access is denied",
+  "intent": "shackle clicks down into the body; tugs shut on hover",
   "loop": {
-    "preset": "breathe",
+    "preset": "nod",
     "origin": [
       12,
-      16
+      21
     ],
-    "amount": 0.6,
+    "amount": 0.3,
     "duration": 3.2
   },
   "hover": {
-    "preset": "shake",
-    "amount": 0.7,
-    "duration": 0.5
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.9,
+    "duration": 0.6
   },
-  "alt": [
-    {
-      "preset": "pop",
+  "parts": {
+    "A": {
+      "preset": "nod",
       "origin": [
         12,
-        16
-      ]
+        21
+      ],
+      "amount": 1.1,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.7,
+      "duration": 0.5
     },
     {
-      "preset": "glow"
+      "preset": "breathe",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5
     }
   ],
   "swap": [

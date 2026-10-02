@@ -1,7 +1,7 @@
 {
   "name": "@withicons/svelte",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles as tree-shakable Svelte components (Svelte 4 and 5).",
+  "description": "500 icons x 15 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -40,7 +40,10 @@
     "kawaii-icons",
     "sticker-icons",
     "pixel-icons",
-    "retro-icons"
+    "retro-icons",
+    "luxe-icons",
+    "bauhaus-icons",
+    "skeuo-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -111,6 +114,21 @@
       "types": "./dist/retro/index.d.ts",
       "svelte": "./dist/retro/index.js",
       "default": "./dist/retro/index.js"
+    },
+    "./luxe": {
+      "types": "./dist/luxe/index.d.ts",
+      "svelte": "./dist/luxe/index.js",
+      "default": "./dist/luxe/index.js"
+    },
+    "./bauhaus": {
+      "types": "./dist/bauhaus/index.d.ts",
+      "svelte": "./dist/bauhaus/index.js",
+      "default": "./dist/bauhaus/index.js"
+    },
+    "./skeuo": {
+      "types": "./dist/skeuo/index.d.ts",
+      "svelte": "./dist/skeuo/index.js",
+      "default": "./dist/skeuo/index.js"
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
@@ -247,6 +265,36 @@
       "svelte": "./dist/retro/icons/*.svelte",
       "default": "./dist/retro/icons/*.svelte"
     },
+    "./luxe/icons/*.svelte": {
+      "types": "./dist/luxe/icons/*.svelte.d.ts",
+      "svelte": "./dist/luxe/icons/*.svelte",
+      "default": "./dist/luxe/icons/*.svelte"
+    },
+    "./luxe/icons/*": {
+      "types": "./dist/luxe/icons/*.svelte.d.ts",
+      "svelte": "./dist/luxe/icons/*.svelte",
+      "default": "./dist/luxe/icons/*.svelte"
+    },
+    "./bauhaus/icons/*.svelte": {
+      "types": "./dist/bauhaus/icons/*.svelte.d.ts",
+      "svelte": "./dist/bauhaus/icons/*.svelte",
+      "default": "./dist/bauhaus/icons/*.svelte"
+    },
+    "./bauhaus/icons/*": {
+      "types": "./dist/bauhaus/icons/*.svelte.d.ts",
+      "svelte": "./dist/bauhaus/icons/*.svelte",
+      "default": "./dist/bauhaus/icons/*.svelte"
+    },
+    "./skeuo/icons/*.svelte": {
+      "types": "./dist/skeuo/icons/*.svelte.d.ts",
+      "svelte": "./dist/skeuo/icons/*.svelte",
+      "default": "./dist/skeuo/icons/*.svelte"
+    },
+    "./skeuo/icons/*": {
+      "types": "./dist/skeuo/icons/*.svelte.d.ts",
+      "svelte": "./dist/skeuo/icons/*.svelte",
+      "default": "./dist/skeuo/icons/*.svelte"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -341,6 +389,27 @@
       "retro/icons/*": [
         "./dist/retro/icons/*.svelte.d.ts",
         "./dist/retro/icons/*.d.ts"
+      ],
+      "luxe": [
+        "./dist/luxe/index.d.ts"
+      ],
+      "luxe/icons/*": [
+        "./dist/luxe/icons/*.svelte.d.ts",
+        "./dist/luxe/icons/*.d.ts"
+      ],
+      "bauhaus": [
+        "./dist/bauhaus/index.d.ts"
+      ],
+      "bauhaus/icons/*": [
+        "./dist/bauhaus/icons/*.svelte.d.ts",
+        "./dist/bauhaus/icons/*.d.ts"
+      ],
+      "skeuo": [
+        "./dist/skeuo/index.d.ts"
+      ],
+      "skeuo/icons/*": [
+        "./dist/skeuo/icons/*.svelte.d.ts",
+        "./dist/skeuo/icons/*.d.ts"
       ]
     }
   },

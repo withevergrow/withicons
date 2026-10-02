@@ -1,8 +1,10 @@
 {
   "name": "list-music",
-  "intent": "the music note sways gently to the beat of the playlist",
-  "loop": { "preset": "sway", "origin": [17.5, 20], "amount": 0.6, "duration": 2.4 },
-  "hover": { "preset": "wiggle", "origin": [17.5, 20], "amount": 0.8, "duration": 0.6 },
-  "alt": [ { "preset": "float", "amount": 0.5 }, { "preset": "beat", "origin": [15, 17.5], "amount": 0.5 } ],
-  "swap": [ { "to": "list", "effect": "fade" }, { "to": "music-note", "effect": "morph" } ]
+  "intent": "the music note sways to the beat beside the playlist",
+  "loop": {"preset": "pulse", "origin": [8,12], "amount": 0.25, "duration": 2.4},
+  "hover": {"preset": "wiggle", "origin": [15,20], "amount": 0.8, "duration": 0.6},
+  "parts": {"A": {"preset": "sway", "origin": [15,20], "amount": 0.8, "delay": 0.1}},
+  "deco": "float",
+  "alt": [ {"preset": "sway", "origin": [15,20], "amount": 0.6}, {"preset": "beat", "origin": [15,17.5], "amount": 0.5} ],
+  "swap": [ {"to": "list", "effect": "fade"}, {"to": "music-note", "effect": "morph"} ]
 }

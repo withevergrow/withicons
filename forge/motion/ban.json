@@ -1,15 +1,16 @@
 {
   "name": "ban",
-  "intent": "shakes no: this is blocked or not allowed",
+  "intent": "a steady stop sign that pulses calmly, shakes no on hover",
   "loop": {
     "preset": "pulse",
-    "amount": 0.4,
-    "duration": 2.4
+    "amount": 0.3,
+    "duration": 2.6
   },
   "hover": {
     "preset": "shake",
     "amount": 0.9
   },
+  "deco": "still",
   "alt": [
     {
       "preset": "spin-once"

@@ -1,6 +1,6 @@
 {
   "name": "paintbrush",
-  "intent": "sweeps gently like it's painting a stroke",
+  "intent": "sweeps from the grip like it is painting a stroke",
   "loop": {
     "preset": "sway",
     "origin": [
@@ -16,8 +16,10 @@
       17,
       7
     ],
-    "amount": 1.2
+    "amount": 1.1,
+    "duration": 0.8
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "draw"

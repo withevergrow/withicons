@@ -1,23 +1,35 @@
 {
   "name": "store",
-  "intent": "breathes calmly like a shop open for business",
+  "intent": "the shop stands calm while its door and awning stripes swell in welcome",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
+    "preset": "pulse",
+    "origin": [12, 21],
+    "amount": 0.25,
     "duration": 4
   },
   "hover": {
     "preset": "jelly",
-    "amount": 0.8,
-    "duration": 0.8
+    "origin": [12, 21],
+    "amount": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [12, 13],
+      "amount": 0.5,
+      "duration": 4,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pop"
     },
     {
       "preset": "bounce",
-      "amount": 0.6
+      "origin": [12, 21],
+      "amount": 0.5
     }
   ],
   "swap": [

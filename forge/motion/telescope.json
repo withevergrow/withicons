@@ -1,7 +1,35 @@
 {
   "name": "telescope",
-  "intent": "scans the sky, tilting on its tripod",
-  "loop":  { "preset": "tilt", "origin": [12, 11], "amount": 0.5, "duration": 3.6 },
-  "hover": { "preset": "tilt", "origin": [12, 11], "amount": 0.9, "duration": 0.7 },
-  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "twinkle", "amount": 0.6 } ]
+  "intent": "the tube scans the sky, tilting on a steady tripod",
+  "loop": {
+    "preset": "tilt",
+    "origin": [12, 11],
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [12, 11],
+    "amount": 1,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "tilt",
+      "amount": 0.25,
+      "delay": 0.06
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [12, 11],
+      "amount": 0.4
+    },
+    {
+      "preset": "zoom",
+      "amount": 0.5
+    }
+  ]
 }

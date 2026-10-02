@@ -1,8 +1,36 @@
 {
   "name": "usb",
   "intent": "plugs in: slides up into the port and back",
-  "loop": { "preset": "nudge", "dir": 270, "amount": 0.5, "duration": 2.2 },
-  "hover": { "preset": "nudge", "dir": 270, "amount": 0.9, "duration": 0.6 },
-  "alt": [ { "preset": "glow", "amount": 0.6 }, { "preset": "pop" } ],
-  "swap": [ { "to": "plug", "effect": "slide-up" }, { "to": "check", "effect": "scale" } ]
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.45,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "plug",
+      "effect": "slide-up"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
 }

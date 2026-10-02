@@ -1,8 +1,43 @@
 {
   "name": "tooth",
-  "intent": "sparkles like a freshly cleaned tooth",
-  "loop": { "preset": "twinkle", "amount": 0.5, "duration": 3 },
-  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.9 },
-  "alt": [ { "preset": "wiggle", "origin": [12, 21], "amount": 0.6 }, { "preset": "pop" }, { "preset": "glow" } ],
-  "swap": [ { "to": "smile", "effect": "fade" }, { "to": "sparkles", "effect": "morph" }, { "to": "tooth@solid", "effect": "scale" } ]
+  "intent": "gleams like a freshly brushed tooth, wobbles when tapped",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [12, 21],
+    "amount": 0.8
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle",
+      "amount": 0.5
+    },
+    {
+      "preset": "wiggle",
+      "origin": [12, 21],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "smile",
+      "effect": "fade"
+    },
+    {
+      "to": "sparkles",
+      "effect": "morph"
+    },
+    {
+      "to": "tooth@solid",
+      "effect": "scale"
+    }
+  ]
 }

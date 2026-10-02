@@ -1,16 +1,50 @@
 {
   "name": "badge-percent",
-  "intent": "pulses like a sale sticker that wants your attention",
-  "loop": { "preset": "pulse", "amount": 0.6, "duration": 2 },
-  "hover": { "preset": "tada", "amount": 0.8 },
+  "intent": "the sale badge rocks gently while its percent pulses; turns on hover",
+  "loop": {
+    "preset": "rock",
+    "origin": [12, 12],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
-    { "preset": "spin", "duration": 6 },
-    { "preset": "pop" },
-    { "preset": "twinkle", "amount": 0.7 }
+    {
+      "preset": "spin",
+      "duration": 6
+    },
+    {
+      "preset": "tada",
+      "amount": 0.8
+    },
+    {
+      "preset": "pop"
+    }
   ],
   "swap": [
-    { "to": "percent", "effect": "fade" },
-    { "to": "badge-check", "effect": "flip" },
-    { "to": "badge-percent@solid", "effect": "scale" }
+    {
+      "to": "percent",
+      "effect": "fade"
+    },
+    {
+      "to": "badge-check",
+      "effect": "flip"
+    },
+    {
+      "to": "badge-percent@solid",
+      "effect": "scale"
+    }
   ]
 }

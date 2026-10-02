@@ -1,15 +1,27 @@
 {
   "name": "cpu",
-  "intent": "hums with a steady pulse like a working processor",
+  "intent": "the core glows with work while the chip hums",
   "loop": {
     "preset": "pulse",
-    "amount": 0.4,
-    "duration": 1.8
+    "amount": 0.25,
+    "duration": 2
   },
   "hover": {
     "preset": "glow",
     "amount": 1,
     "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "glow",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.9,
+      "duration": 1,
+      "delay": 0.2
+    }
   },
   "alt": [
     {

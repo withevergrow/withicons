@@ -1,15 +1,10 @@
 {
   "name": "message-circle-more",
-  "intent": "jitters like someone typing, wobbles from its tail on hover",
-  "loop": { "preset": "type", "amount": 0.6, "duration": 1.2 },
-  "hover": { "preset": "jelly", "origin": [2.5, 21.5] },
-  "alt": [
-    { "preset": "breathe", "amount": 0.5 },
-    { "preset": "pop", "origin": [2.5, 21.5] }
-  ],
-  "swap": [
-    { "to": "message-circle", "effect": "fade" },
-    { "to": "check", "effect": "scale" },
-    { "to": "message-circle-more@solid", "effect": "fade" }
-  ]
+  "intent": "the bubble swells from its tail while the dots pulse like someone typing",
+  "loop": {"preset": "pulse", "origin": [3,21], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "jelly", "origin": [2.5,21.5], "duration": 0.8},
+  "parts": {"A": {"preset": "pulse", "origin": [12.5,11.5], "amount": 0.8, "duration": 1.6, "delay": 0.06}},
+  "deco": "twinkle",
+  "alt": [ {"preset": "type", "amount": 0.6}, {"preset": "pop", "origin": [2.5,21.5]} ],
+  "swap": [ {"to": "message-circle", "effect": "fade"}, {"to": "check", "effect": "scale"}, {"to": "message-circle-more@solid", "effect": "fade"} ]
 }

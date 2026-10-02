@@ -86,7 +86,8 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
 }
 
 const readme = (root, pkg, vars) => {
-  const f = path.join(root, 'packages', pkg, 'README.src.md')
+  // The template lives in src/, not the package root: npm always packs README* files whatever `files` says.
+  const f = path.join(root, 'packages', pkg, 'src', 'readme.template.md')
   return fs.existsSync(f) ? fill(fs.readFileSync(f, 'utf8'), vars) : `# ${pkg}\n`
 }
 

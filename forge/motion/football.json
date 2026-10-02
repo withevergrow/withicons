@@ -1,8 +1,40 @@
 {
   "name": "football",
   "intent": "rolls slowly like a ball in play, bounces when kicked",
-  "loop": { "preset": "spin", "duration": 4.5 },
-  "hover": { "preset": "bounce", "amount": 1.1 },
-  "alt": [ { "preset": "spin-once" }, { "preset": "rock", "amount": 0.7 }, { "preset": "pop" } ],
-  "swap": [ { "to": "football@solid", "effect": "spin" }, { "to": "trophy", "effect": "slide-up" } ]
+  "loop": {
+    "preset": "spin",
+    "duration": 5
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 1,
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "rock",
+      "amount": 0.7
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "football@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    }
+  ]
 }

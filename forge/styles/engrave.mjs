@@ -1,5 +1,5 @@
 // ENGRAVE — creative. Intaglio: crisp contour + shade-side swell + swelling burin hatch.
-import { pointInRing, simplify } from '../kernel/geom.mjs'
+import { pointInRing, simplify, resample } from '../kernel/geom.mjs'
 import { merge, subtract, ringsT, capsulesT, segsOf, ringD } from './_engrave-core.mjs'
 import { shadeCrescents } from './_engrave-shade.mjs'
 
@@ -252,6 +252,51 @@ function shadowHatch(R, P) {
   return polys
 }
 
+// Skeleton plate of every fill ring: a ring traced by an A or S path (within 0.35u for most of its points)
+// belongs to that plate, everything else to the body (K).
+function fillPlatesOf(R) {
+  const by = {}
+  for (const l of R.lines) if (l.plate === 'A' || l.plate === 'S') (by[l.plate] ||= []).push(l)
+  const segs = Object.fromEntries(Object.entries(by).map(([p, ls]) => [p, segsOf(ls)]))
+  return R.fillRings.map(r => {
+    for (const [p, sg] of Object.entries(segs)) {
+      let on = 0
+      for (const q of r) for (const g of sg) {
+        const ex = g[2] - g[0], ey = g[3] - g[1], px = q[0] - g[0], py = q[1] - g[1], L2 = ex * ex + ey * ey
+        const t = L2 > 1e-12 ? Math.max(0, Math.min(1, (px * ex + py * ey) / L2)) : 0
+        if (Math.hypot(px - ex * t, py - ey * t) < 0.35) { on++; break }
+      }
+      if (on / r.length > 0.5) return p
+    }
+    return 'K'
+  })
+}
+// do two plates' centrelines run together (within 0.3u) for more than 0.9u?
+function platesOverlap(lines) {
+  const dist = (q, sg) => {
+    let best = Infinity
+    for (const g of sg) {
+      const ex = g[2] - g[0], ey = g[3] - g[1], px = q[0] - g[0], py = q[1] - g[1], L2 = ex * ex + ey * ey
+      const t = L2 > 1e-12 ? Math.max(0, Math.min(1, (px * ex + py * ey) / L2)) : 0
+      const d = Math.hypot(px - ex * t, py - ey * t); if (d < best) best = d
+    }
+    return best
+  }
+  for (const pl of new Set(lines.map(l => l.plate || 'K'))) {
+    const sg = segsOf(lines.filter(l => (l.plate || 'K') !== pl))
+    if (!sg.length) continue
+    for (const l of lines.filter(q => (q.plate || 'K') === pl)) {
+      const P = resample(l.pts, 0.15, l.closed).map(o => o.p)
+      let run = 0
+      for (let k = 1; k < P.length; k++) {
+        if (dist(P[k], sg) < 0.3) { run += Math.hypot(P[k][0] - P[k - 1][0], P[k][1] - P[k - 1][1]); if (run > 0.9) return true } else run = 0
+      }
+    }
+  }
+  return false
+}
+const ringArea = r => { let a = 0; for (let k = 0; k < r.length; k++) { const p = r[k], q = r[(k + 1) % r.length]; a += p[0] * q[1] - q[0] * p[1] } return Math.abs(a / 2) }
+
 export function makeEngrave(over = {}) {
   const P = { ...DEFAULTS, ...over }
   return {
@@ -263,18 +308,37 @@ export function makeEngrave(over = {}) {
     root: { fill: 'none', stroke: 'currentColor', 'stroke-width': P.SW, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
     render(icon) {
       const R = prepareRegions(icon)
+      // Motion parts (forge/MOTION.md "Parts choreography"): with more than one skeleton plate, the ink of each
+      // plate (contour, dots, swell, body hatch) is its own node tagged wm-k / wm-a / wm-s; the cast shade is wm-shadow.
+      // plates whose lines run along each other (a lid on a rim) would double-paint the shared edge: kept fused
+      const plated = new Set(icon.paths.map(p => p.plate || 'K')).size > 1 && !platesOverlap(R.lines)
+      if (plated) R.fillPlates = fillPlatesOf(R)
       R.crescents = shadeCrescents(R, P.SW / 2, P.SWELL, LIGHT)
       R.crescentSegs = segsOf(R.crescents.map(r => ({ pts: r, closed: true })))
       const out = []
       // tiny closed contours (dots) would show a pinhole inside the stroke: fill them
-      const dots = R.lines.filter(l => l.closed && bboxMax(l.pts) < P.SW + 1.2).map(l => simplify(l.pts, 0.03, true))
-      const polys = [...dots, ...R.crescents, ...bodyHatch(R, P)]
-      const d = polys.map(p => ringD(p)).join('')
-      if (d) out.push(['path', { d, fill: 'currentColor', stroke: 'none' }])
+      const dotLines = R.lines.filter(l => l.closed && bboxMax(l.pts) < P.SW + 1.2)
+      const dots = dotLines.map(l => simplify(l.pts, 0.03, true))
+      const hatch = bodyHatch(R, P)
+      const polys = [...dots, ...R.crescents, ...hatch]
+      const tag = pl => plated ? { class: 'wm-' + (pl === 'A' || pl === 'S' ? pl : 'K').toLowerCase() } : {}
+      if (!plated) {
+        const d = polys.map(p => ringD(p)).join('')
+        if (d) out.push(['path', { d, fill: 'currentColor', stroke: 'none' }])
+      } else {
+        // a hatch cut belongs to the plate of the smallest fill ring around its entry point
+        const rings = R.fillRings.map((r, i) => ({ r, pl: R.fillPlates[i], a: ringArea(r) })).sort((a, b) => a.a - b.a)
+        const hatchPlate = c => (rings.find(o => pointInRing(c[0], o.r)) || { pl: 'K' }).pl
+        const plates = [...dotLines.map(l => l.plate), ...R.crescents.map(c => c.plate), ...hatch.map(hatchPlate)]
+        for (const pl of ['K', 'A', 'S']) {
+          const d = polys.filter((_, i) => (plates[i] === 'A' || plates[i] === 'S' ? plates[i] : 'K') === pl).map(p => ringD(p)).join('')
+          if (d) out.push(['path', { d, fill: 'currentColor', stroke: 'none', ...tag(pl) }])
+        }
+      }
       // cast shade: short constant-width cuts, cheapest as one stroked path
       const sd = shadowHatch(R, P).map(s => ringD(s, false)).join('')
-      if (sd) out.push(['path', { d: sd, 'stroke-width': P.S_W }])
-      for (const p of icon.paths) out.push(['path', { d: p.d }])
+      if (sd) out.push(['path', { d: sd, 'stroke-width': P.S_W, class: 'wm-shadow' }])
+      for (const p of icon.paths) out.push(['path', { d: p.d, ...tag(p.plate) }])
       return out
     },
   }

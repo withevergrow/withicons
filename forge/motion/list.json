@@ -1,32 +1,10 @@
 {
   "name": "list",
-  "intent": "lines fill in like items loading into the list",
-  "loop": {
-    "preset": "fill",
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "draw",
-    "duration": 0.9
-  },
-  "alt": [
-    {
-      "preset": "nudge",
-      "dir": 0,
-      "amount": 0.5
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "list-checks",
-      "effect": "fade"
-    },
-    {
-      "to": "list-ordered",
-      "effect": "slide-left"
-    }
-  ]
+  "intent": "the lines hold still while their bullets light up like items loading",
+  "loop": {"preset": "pulse", "origin": [12,12], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "fill", "origin": [12,12], "duration": 0.7},
+  "parts": {"A": {"preset": "fill", "amount": 0.25, "delay": 0.1}},
+  "deco": "breathe",
+  "alt": [ {"preset": "nudge", "dir": 0, "amount": 0.5}, {"preset": "draw", "duration": 0.9}, {"preset": "pop"} ],
+  "swap": [ {"to": "list-checks", "effect": "fade"}, {"to": "list-ordered", "effect": "slide-left"} ]
 }

@@ -1,15 +1,9 @@
 {
   "name": "circle-arrow-left",
-  "intent": "nudges left like a back button inviting a tap",
-  "loop": { "preset": "nudge", "dir": 180, "amount": 0.4, "duration": 2 },
-  "hover": { "preset": "nudge", "dir": 180, "amount": 0.9, "duration": 0.6 },
-  "alt": [
-    { "preset": "pop" },
-    { "preset": "pass", "dir": 180, "duration": 0.8 }
-  ],
-  "swap": [
-    { "to": "circle-arrow-right", "effect": "rotate" },
-    { "to": "circle-arrow-left@solid", "effect": "scale" },
-    { "to": "arrow-left", "effect": "fade" }
-  ]
+  "intent": "the arrow steps left inside its button, inviting a tap",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.2 },
+  "hover": { "preset": "pop", "amount": 0.6, "duration": 0.55 },
+  "parts": { "A": { "preset": "nudge", "dir": 180, "amount": 0.4, "delay": 0.06 } },
+  "alt": [{ "preset": "nudge", "dir": 180, "amount": 0.8 }, { "preset": "pass", "dir": 180, "duration": 0.8 }],
+  "swap": [{ "to": "circle-arrow-right", "effect": "rotate" }, { "to": "circle-arrow-left@solid", "effect": "scale" }, { "to": "arrow-left", "effect": "fade" }]
 }

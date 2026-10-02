@@ -1,13 +1,13 @@
 {
   "name": "wand",
-  "intent": "waves from the handle to cast a sparkle",
+  "intent": "waves from the handle while its sparkles twinkle",
   "loop": {
     "preset": "sway",
     "origin": [
       5,
       19.5
     ],
-    "amount": 0.8,
+    "amount": 0.6,
     "duration": 3
   },
   "hover": {
@@ -16,8 +16,21 @@
       5,
       19.5
     ],
-    "amount": 1.2
+    "amount": 1.1
   },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        13.5,
+        5.5
+      ],
+      "amount": 0.6,
+      "duration": 3,
+      "delay": 0.25
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "twinkle",

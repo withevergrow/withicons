@@ -1,8 +1,10 @@
 {
   "name": "folder-minus",
-  "intent": "squashes softly as a folder is removed or collapsed",
-  "loop": { "preset": "breathe", "amount": 0.4, "duration": 3.2 },
-  "hover": { "preset": "jelly", "origin": [12, 20], "amount": 0.6 },
-  "alt": [ { "preset": "shake", "amount": 0.5 }, { "preset": "pop" } ],
-  "swap": [ { "to": "folder-plus", "effect": "rotate" }, { "to": "folder", "effect": "fade" } ]
+  "intent": "rests calmly, the minus pinches in as a folder is removed",
+  "loop": {"preset": "pulse", "origin": [12,13], "amount": 0.25, "duration": 3.4},
+  "hover": {"preset": "jelly", "origin": [12,20], "amount": 0.6},
+  "parts": {"A": {"preset": "pulse", "origin": [12,13.5], "amount": 0.4, "duration": 3.4, "delay": 0.1}},
+  "deco": "breathe",
+  "alt": [ {"preset": "shake", "amount": 0.5}, {"preset": "pop"} ],
+  "swap": [ {"to": "folder-plus", "effect": "rotate"}, {"to": "folder", "effect": "fade"} ]
 }

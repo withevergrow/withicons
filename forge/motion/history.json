@@ -1,33 +1,44 @@
 {
   "name": "history",
-  "intent": "winds back like rewinding time",
+  "intent": "winds back and forth, the hands sweeping wider behind it",
   "loop": {
     "preset": "rock",
     "origin": [
       12,
-      12.5
+      12
     ],
-    "amount": 0.5,
+    "amount": 0.35,
     "duration": 3.2
   },
   "hover": {
-    "preset": "spin-once",
+    "preset": "rock",
     "origin": [
       12,
-      12.5
+      12
     ],
-    "amount": 0.6
+    "amount": 1,
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "rock",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 1.6,
+      "delay": 0.12
+    }
   },
   "alt": [
     {
       "preset": "tick",
       "origin": [
         12,
-        12.5
+        12
       ],
       "steps": 12,
-      "duration": 6,
-      "amount": 0.5
+      "duration": 6
     },
     {
       "preset": "nudge",

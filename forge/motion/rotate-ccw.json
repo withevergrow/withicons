@@ -1,44 +1,14 @@
 {
   "name": "rotate-ccw",
-  "intent": "rocks back and forth to undo the last turn",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.9,
-    "duration": 2.8
-  },
-  "hover": {
-    "preset": "rock",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 1.6,
-    "duration": 0.8
-  },
+  "intent": "leans back counter-clockwise, like undoing a turn",
+  "loop": { "preset": "tilt", "origin": [12, 12], "amount": 1.1, "duration": 2.8 },
+  "hover": { "preset": "tilt", "origin": [12, 12], "amount": 1.8, "duration": 0.7 },
   "alt": [
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        12
-      ]
-    },
-    {
-      "preset": "flip"
-    }
+    { "preset": "rock", "origin": [12, 12] },
+    { "preset": "flip" }
   ],
   "swap": [
-    {
-      "to": "rotate-cw",
-      "effect": "flip"
-    },
-    {
-      "to": "undo",
-      "effect": "fade"
-    }
+    { "to": "rotate-cw", "effect": "flip" },
+    { "to": "undo", "effect": "fade" }
   ]
 }

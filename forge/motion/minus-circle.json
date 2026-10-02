@@ -1,35 +1,10 @@
 {
   "name": "minus-circle",
-  "intent": "breathes softly, pops when you remove an item",
-  "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "pop",
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "jelly"
-    },
-    {
-      "preset": "pulse"
-    }
-  ],
-  "swap": [
-    {
-      "to": "plus-circle",
-      "effect": "rotate"
-    },
-    {
-      "to": "x-circle",
-      "effect": "rotate"
-    },
-    {
-      "to": "minus-circle@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the bar swells inside a steady ring, pops when you remove an item",
+  "loop": { "preset": "pulse", "amount": 0.3, "duration": 3 },
+  "hover": { "preset": "pop", "amount": 0.8 },
+  "parts": { "A": { "preset": "pulse", "amount": 0.9, "duration": 3, "delay": 0.15 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "jelly" }, { "preset": "pulse" } ],
+  "swap": [ { "to": "plus-circle", "effect": "rotate" }, { "to": "x-circle", "effect": "rotate" }, { "to": "minus-circle@solid", "effect": "scale" } ]
 }

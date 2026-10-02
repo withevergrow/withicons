@@ -1,6 +1,7 @@
 // node --test packages/mcp/test/*.test.mjs   (needs the bundles: node packages/mcp/scripts/dev-build.mjs or the forge build)
 import { test, describe, before, after } from 'node:test'
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
@@ -102,7 +103,10 @@ describe('stdio server (SDK client)', () => {
   })
   test('every style x every format works', async () => {
     const styles = parse(await client.callTool({ name: 'list_styles', arguments: {} })).styles.map(s => s.name)
-    assert.equal(styles.length, 12)
+    // every style the build rendered (the core package's style list), studio styles included
+    const built = JSON.parse(fs.readFileSync(path.join(dist, '..', '..', 'core', 'dist', 'styles.json'), 'utf8')).map(s => s.name)
+    assert.deepEqual(styles, built)
+    for (const s of ['luxe', 'bauhaus', 'skeuo']) assert.ok(styles.includes(s), s)
     for (const style of styles) for (const format of ['svg', 'react', 'vue', 'svelte', 'angular', 'solid', 'html-class', 'web-component', 'data-uri']) {
       const r = await client.callTool({ name: 'get_icon', arguments: { name: 'star', style, format } })
       assert.ok(!r.isError, `${style} ${format}`)

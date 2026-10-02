@@ -1,7 +1,31 @@
 {
   "name": "atom",
-  "intent": "electron orbits turn slowly around the nucleus",
-  "loop":  { "preset": "spin", "origin": [12, 12], "duration": 6 },
-  "hover": { "preset": "spin-once", "origin": [12, 12] },
-  "alt":   [ { "preset": "orbit" }, { "preset": "pulse", "amount": 0.6 }, { "preset": "glow" } ]
+  "intent": "electron orbits turn slowly while the nucleus pulses",
+  "loop": {
+    "preset": "spin",
+    "origin": [12, 12],
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [12, 12],
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [12, 12],
+      "amount": 0.9,
+      "duration": 2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "orbit"
+    },
+    {
+      "preset": "glow"
+    }
+  ]
 }

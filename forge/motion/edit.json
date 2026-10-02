@@ -1,42 +1,10 @@
 {
   "name": "edit",
-  "intent": "the pencil sways at its tip, ready to write",
-  "loop": {
-    "preset": "sway",
-    "origin": [
-      9,
-      15
-    ],
-    "amount": 0.6,
-    "duration": 2.6
-  },
-  "hover": {
-    "preset": "wiggle",
-    "origin": [
-      9,
-      15
-    ]
-  },
-  "alt": [
-    {
-      "preset": "draw"
-    },
-    {
-      "preset": "tilt",
-      "origin": [
-        9,
-        15
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "check",
-      "effect": "scale"
-    },
-    {
-      "to": "save",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the pencil sways on its tip over a calm page, ready to write",
+  "loop": { "preset": "sway", "origin": [9, 15], "amount": 0.55, "duration": 2.6 },
+  "hover": { "preset": "wiggle", "origin": [9, 15], "duration": 0.7 },
+  "parts": { "A": { "preset": "sway", "origin": [9, 15], "amount": 0.25, "duration": 2.6, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "draw" }, { "preset": "tilt", "origin": [9, 15] } ],
+  "swap": [ { "to": "check", "effect": "scale" }, { "to": "save", "effect": "fade" } ]
 }

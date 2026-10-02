@@ -1,8 +1,10 @@
 {
   "name": "microscope",
-  "intent": "nods down to focus on the sample",
-  "loop":  { "preset": "tilt", "origin": [12, 21], "amount": 0.4, "duration": 3.2 },
-  "hover": { "preset": "nod", "origin": [12, 21], "amount": 0.7 },
-  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "wiggle", "origin": [12, 21] } ],
-  "swap":  [ { "to": "microscope@solid", "effect": "fade" } ]
+  "intent": "the eyepiece tube slides down to focus on the sample",
+  "loop": {"preset": "pulse", "origin": [12,21], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "nod", "origin": [12,21], "amount": 0.5},
+  "parts": {"A": {"preset": "nudge", "dir": 60, "amount": 0.25, "delay": 0.1}},
+  "deco": "float",
+  "alt": [ {"preset": "breathe", "origin": [12,21], "amount": 0.4}, {"preset": "zoom", "amount": 0.5} ],
+  "swap": [ {"to": "microscope@solid", "effect": "fade"} ]
 }

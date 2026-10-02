@@ -1,15 +1,17 @@
 {
   "name": "power",
-  "intent": "glows like a device switching on",
+  "intent": "glows softly like a device that is on; pops like a press",
   "loop": {
     "preset": "glow",
     "amount": 0.7,
-    "duration": 2.6
+    "duration": 2.8
   },
   "hover": {
     "preset": "pop",
-    "amount": 1
+    "amount": 0.9,
+    "duration": 0.5
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "breathe"

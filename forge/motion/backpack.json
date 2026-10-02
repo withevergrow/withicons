@@ -1,7 +1,34 @@
 {
   "name": "backpack",
-  "intent": "swings gently from its top handle",
-  "loop":  { "preset": "sway", "origin": [12, 2.5], "amount": 0.6, "duration": 3 },
-  "hover": { "preset": "ring", "origin": [12, 2.5], "amount": 0.55 },
-  "alt":   [ { "preset": "bounce", "amount": 0.7 }, { "preset": "jelly" }, { "preset": "float" } ]
+  "intent": "hangs from its top handle and swings, pocket a beat behind",
+  "loop": {
+    "preset": "sway",
+    "origin": [12, 2.5],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [12, 2.5],
+    "amount": 1.2,
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [12, 21.5],
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly",
+      "origin": [12, 21.5]
+    }
+  ]
 }

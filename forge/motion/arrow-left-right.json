@@ -1,8 +1,9 @@
 {
   "name": "arrow-left-right",
-  "intent": "rocks side to side to show it goes both ways",
-  "loop": { "preset": "nudge", "dir": 0, "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "shake", "amount": 0.6, "duration": 0.6 },
-  "alt": [ { "preset": "flip" }, { "preset": "zoom", "amount": 0.6 } ],
-  "swap": [ { "to": "arrow-up-down", "effect": "rotate" }, { "to": "swap", "effect": "fade" } ]
+  "intent": "stretches out both ways at once",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "pulse", "amount": 0.7, "duration": 0.6 },
+  "parts": { "A": { "preset": "pulse", "amount": 0.7 } },
+  "alt": [{ "preset": "nudge", "dir": 0, "amount": 0.5 }, { "preset": "flip" }],
+  "swap": [{ "to": "arrow-up-down", "effect": "rotate" }, { "to": "swap", "effect": "fade" }]
 }

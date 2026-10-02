@@ -33,9 +33,15 @@ export interface MotionSpec {
   alt?: MotionObject[]
   /** Icons this one naturally turns into: 'name' or 'name@style'. */
   swap?: { to: string; effect: SwapEffect }[]
+  /** Parts choreography: overrides for the plates a style keeps apart (A moving part, S badge), each with a delay in seconds. */
+  parts?: { A?: MotionObject & { delay?: number }; S?: MotionObject & { delay?: number } }
+  /** The decorations' own loop (default: chosen per preset). */
+  deco?: DecoKind
   /** true when derived automatically (no hand-written spec yet). */
   auto?: boolean
 }
+/** How decorations (nodes tagged wm-deco: backdrops, sparkles, accent dots) move while the icon animates. */
+export type DecoKind = 'breathe' | 'float' | 'twinkle' | 'still'
 export interface PresetDefaults {
   /** One-shot length in seconds. */
   shot: number
@@ -81,6 +87,8 @@ export interface MotionOptions {
   delay?: number
   /** Keep animating even when the user prefers reduced motion. */
   force?: boolean
+  /** The decorations' loop (overrides the icon's / the preset's default). */
+  deco?: DecoKind
   /** inview: play again each time it re-enters the viewport. Default true. */
   repeat?: boolean
   /** loop: 'pause' (default) pauses while scrolled out of view; 'run' keeps it running. */
@@ -152,6 +160,8 @@ export function prepareDraw(root: Element): boolean
 export function unprepareDraw(root: Element): void
 /** The CSS custom properties for a spec (what icons.css writes for it). */
 export function specVars(spec: MotionSpec, full?: boolean): Record<string, string>
+/** The element's icon <svg> when its nodes carry part tags (wm-deco, wm-shadow, wm-a, wm-s), else null. */
+export function partsSvg(el: Element): SVGSVGElement | null
 export function slotVars(m: MotionObject, slot: 'L' | 'H', full?: boolean): Record<string, string>
 /** 'wm-<preset>' or 'wm-<preset>-loop'. */
 export function keyframeName(preset: Preset, loop: boolean): string

@@ -3,14 +3,15 @@
   "intent": "draws two branches coming together into one",
   "loop": {
     "preset": "draw",
-    "duration": 3
+    "duration": 3.2
   },
   "hover": {
     "preset": "nudge",
     "dir": 0,
-    "amount": 0.8,
+    "amount": 0.7,
     "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

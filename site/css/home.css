@@ -756,3 +756,45 @@ body[data-page="home"] .site-footer { margin-top: 0; z-index: 3; }
   .lane-tile { background: rgba(255,255,255,.07); }
   .mo-bar { background: var(--card); }
 }
+
+/* ───────── live icons teaser (#live → live.html) ─────────
+   Copy on the left; on the right a dark "board" of six live icons (today's date, the time, a count, a level…) that
+   cycles through the styles. The board takes the current style's colour as a soft glow (.s-<style> set by home.js). */
+.live-sec { position: relative; }
+.live-sec .eyebrow::before { display: none; }
+.live-sec .hand-accent { color: var(--c-luxe-text); }
+.live-wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.live-copy .lede { margin-bottom: 18px; }
+.live-points { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 9px; color: var(--ink-2); }
+.live-points li { position: relative; padding-left: 26px; }
+.live-points li::before { content: ''; position: absolute; left: 2px; top: .52em; width: 12px; height: 12px; border-radius: 4px; transform: rotate(45deg);
+  background: conic-gradient(from 45deg, var(--c-luxe), var(--c-bauhaus), var(--c-skeuo), var(--c-luxe)); }
+.live-board { --style: var(--c-line); position: relative; padding: clamp(14px, 2.2vw, 22px); border-radius: var(--radius-xl, 28px); background: var(--dark, #0D0F14);
+  box-shadow: var(--shadow-l); isolation: isolate; overflow: hidden; transition: background-color .6s var(--e-out); }
+.live-board::before { content: ''; position: absolute; inset: -30%; z-index: -1; pointer-events: none;
+  background: radial-gradient(40% 40% at 78% 18%, color-mix(in srgb, var(--style) 46%, transparent), transparent 70%),
+    radial-gradient(36% 36% at 12% 92%, color-mix(in srgb, var(--style) 26%, transparent), transparent 70%);
+  transition: background .8s var(--e-out); }
+.lv-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 14px); }
+.lv-tile { display: grid; justify-items: center; gap: 10px; padding: clamp(14px, 2vw, 20px) 8px 14px; border-radius: 20px; text-align: center;
+  background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); color: #F4F0E8;
+  transition: transform .5s var(--e-spring), background-color .3s; }
+.lv-tile:hover { transform: translateY(-3px); background: rgba(255,255,255,.1); }
+.lv-ic { width: clamp(56px, 6.4vw, 80px); aspect-ratio: 1; display: grid; place-items: center; color: color-mix(in srgb, var(--style) 55%, #fff); }
+.lv-ic svg { width: 100%; height: 100%; overflow: visible; }
+.lv-tile.is-live .lv-ic svg { animation: lv-in .55s var(--e-out) both; animation-delay: calc(var(--i) * 45ms); }
+@keyframes lv-in { from { opacity: 0; transform: translateY(6px) scale(.9); } }
+.lv-cap { display: grid; gap: 3px; }
+.lv-cap b { font: 650 13.5px/1.1 var(--font-sans); }
+.lv-cap small { font: 500 11.5px/1.25 var(--font-sans); color: rgba(244,240,232,.66); }
+.live-style { position: absolute; right: clamp(16px, 2.4vw, 24px); top: -11px; margin: 0; padding: 5px 12px; border-radius: var(--pill);
+  background: var(--card); color: var(--muted); font: 500 12px/1 var(--font-sans); box-shadow: var(--shadow-s); }
+.live-board .live-style { position: static; justify-self: end; display: inline-flex; gap: 5px; margin: 14px 2px 0 auto; width: max-content; background: rgba(255,255,255,.08);
+  color: rgba(244,240,232,.7); box-shadow: none; }
+.live-style b { color: #fff; font-weight: 650; }
+.live-board { display: grid; }
+:root[data-theme="dark"] .live-board { background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--rule-strong), var(--shadow-l); }
+@media (max-width: 900px) { .live-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .lv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { .lv-tile.is-live .lv-ic svg { animation: none; } .lv-tile { transition: none; } }
+html.reduced .lv-tile.is-live .lv-ic svg { animation: none; }

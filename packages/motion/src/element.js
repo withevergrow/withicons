@@ -12,9 +12,10 @@
 // button around, the icon itself becomes a focusable toggle button (Enter / Space). Hover previews need a real
 // hover; on touch a tap toggles instead.
 // Import once, anywhere: import '@withicons/motion/element'
-import { prepareDraw, pauseWhenOffscreen, EFFECTS, EFFECT_DEFAULTS, SWAP_HOLD, swapEase } from './index.js'
+import { prepareDraw, pauseWhenOffscreen, partsSvg, EFFECTS, EFFECT_DEFAULTS, SWAP_HOLD, swapEase } from './index.js'
 import { cssSlot } from './meta.js'
 import { SHADOW_CSS } from './shadow-css.js'
+import { shadowPartsCss } from './parts-css.js'
 
 const TIMING = ['swap-duration', 'swap-ease', 'swap-delay', 'swap-hold']
 const ATTRS = ['motion', 'preset', 'swap-to', 'swap-effect', 'swap-trigger', 'name', 'variant', 'offscreen', 'swap-color', 'swap-colors'].concat(TIMING)
@@ -32,7 +33,7 @@ function stateOf(host) {
 function teardown(host, s) {
   s.offs.forEach(f => f()); s.offs = []
   if (s.io) { s.io.disconnect(); s.io = null }
-  host.classList.remove('wm-js', 'wm-run', 'wm-drawing')
+  host.classList.remove('wm-js', 'wm-run', 'wm-drawing', 'wm-parts')
   host.removeAttribute('data-wm-on')
 }
 function listen(s, t, type, fn) { t.addEventListener(type, fn); s.offs.push(() => t.removeEventListener(type, fn)) }
@@ -71,6 +72,16 @@ function decorate(host) {
   }
   if (motion && effectivePreset(host) === 'draw' && svg && prepareDraw(svg)) host.classList.add('wm-drawing')
   else host.classList.remove('wm-drawing')
+  // parts choreography: tagged nodes move on their own; the document's @keyframes are not visible in a shadow root,
+  // so it gets its own copy (one shared string, built on first use)
+  const parts = !!motion && !to && !host.classList.contains('wm-drawing') && !!partsSvg(host)
+  host.classList.toggle('wm-parts', parts)
+  if (parts && !root.querySelector('style[data-wm-parts]')) {
+    const st = document.createElement('style')
+    st.setAttribute('data-wm-parts', '')
+    st.textContent = shadowPartsCss()
+    root.appendChild(st)
+  }
   if (to && svg && !root.querySelector('.wm-swap')) {
     const wrap = document.createElement('span')
     wrap.setAttribute('part', 'swap')

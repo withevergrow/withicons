@@ -1,9 +1,9 @@
 {
   "name": "server",
-  "intent": "blinks its status lights like a busy server",
+  "intent": "status lights blink while the rack hums along",
   "loop": {
-    "preset": "flicker",
-    "amount": 0.4,
+    "preset": "pulse",
+    "amount": 0.25,
     "duration": 2.4
   },
   "hover": {
@@ -12,8 +12,18 @@
       12,
       21.5
     ],
-    "amount": 0.6
+    "amount": 0.5,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "fill",

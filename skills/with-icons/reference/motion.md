@@ -69,504 +69,504 @@ or `GET https://withicons.com/api/motion/<name>?trigger=hover&format=react`.
 
 | icon | loop | hover | swaps to | what it says |
 |---|---|---|---|---|
-| `accessibility` | pulse | jelly | `user`, `accessibility@solid` | opens its arms in a calm welcome, wobbles happily when you reach for it |
-| `activity` | draw | draw | `heart-pulse` | traces its pulse line like a live monitor |
-| `address-book` | rock | tilt | `user`, `phone` | opens up a little like you're flipping to a contact |
-| `alarm-clock` | ring | ring | `bell-ring`, `check`, `clock`, `timer` | rattles on its feet like an alarm going off |
-| `alert-circle` | pulse | shake | `check-circle`, `info-circle`, `alert-circle@solid` | pulses to draw attention, shakes on hover |
-| `alert-triangle` | pulse | shake | `check-circle`, `alert-triangle@solid` | glows like a warning light, shakes on hover |
-| `align-center` | breathe | jelly | `align-left`, `align-right`, `align-justify` | settles its lines toward the middle |
-| `align-justify` | breathe | jelly | `align-left`, `align-center`, `align-right` | stretches its even lines edge to edge |
-| `align-left` | nudge | nudge | `align-center`, `align-right`, `align-justify` | slides its lines over to the left edge |
-| `align-right` | nudge | nudge | `align-center`, `align-left`, `align-justify` | slides its lines over to the right edge |
+| `accessibility` | pulse | pop | `user`, `accessibility@solid` | the figure opens its arms in a calm welcome inside a steady ring |
+| `activity` | draw | beat | `heart-pulse` | traces its pulse like a live monitor; thumps like a heartbeat |
+| `address-book` | float | nod | `user`, `phone` | book rests while the contact on its cover nods hello |
+| `alarm-clock` | ring | ring | `bell-ring`, `check`, `clock`, `timer` | rattles on its feet like an alarm going off, bells a beat behind |
+| `alert-circle` | pulse | pop | `check-circle`, `info-circle`, `alert-circle@solid` | pulses for attention, the mark echoing it; pops up on hover |
+| `alert-triangle` | glow | glow | `check-circle`, `alert-triangle@solid` | glows like a warning light, the mark flickering inside |
+| `align-center` | pulse | jelly | `align-left`, `align-right`, `align-justify` | its lines gather gently toward the middle |
+| `align-justify` | jelly | jelly | `align-left`, `align-center`, `align-right` | its even lines stretch edge to edge |
+| `align-left` | nudge | nudge | `align-center`, `align-right`, `align-justify` | its lines slide over to the left edge |
+| `align-right` | nudge | nudge | `align-center`, `align-left`, `align-justify` | its lines slide over to the right edge |
 | `ambulance` | nudge | pass | `siren`, `truck`, `ambulance@solid` | idles forward, then races off and comes back on hover |
-| `anchor` | rock | rock |  | rocks gently on its chain like a moored ship |
-| `angry` | pulse | shake | `meh`, `smile`, `angry@solid` | fumes quietly, then shakes with rage when you poke it |
-| `app-window` | breathe | pop | `maximize`, `monitor`, `layout-template` | pops open like an app window launching |
-| `apple` | sway | bounce |  | sways like fresh fruit hanging from its stem |
-| `archive` | float | bounce | `package`, `inbox` | settles into storage with a soft bounce |
-| `arrow-down-left` | nudge | pass | `arrow-up-right`, `arrow-down-right` | nudges down and left to show where it points |
-| `arrow-down-right` | nudge | pass | `arrow-up-left` | nudges down and right to show where it points |
-| `arrow-down` | nudge | pass | `arrow-up` | nudges down to show where it points |
-| `arrow-left-right` | nudge | shake | `arrow-up-down`, `swap` | rocks side to side to show it goes both ways |
-| `arrow-left` | nudge | pass | `arrow-right` | nudges left to show where it points |
-| `arrow-right` | nudge | pass | `arrow-left`, `check` | nudges right to show where it points |
-| `arrow-up-down` | float | nod | `arrow-left-right`, `sort` | bobs up and down to show it goes both ways |
-| `arrow-up-left` | nudge | pass | `arrow-down-right` | nudges up and left to show where it points |
-| `arrow-up-right` | nudge | pass | `arrow-down-right` | nudges up and right to show where it points |
-| `arrow-up` | nudge | pass | `arrow-down` | nudges up to show where it points |
-| `at-sign` | breathe | spin-once | `mail`, `hash` | breathes calmly, spins round when you mention someone |
-| `atom` | spin | spin-once |  | electron orbits turn slowly around the nucleus |
-| `audio-lines` | jelly | pulse | `microphone`, `microphone-off` | sound bars bounce like a voice is speaking |
-| `award` | glow | tada | `award@solid`, `badge-check` | shines like a medal, then celebrates a win |
-| `backpack` | sway | ring |  | swings gently from its top handle |
-| `badge-check` | breathe | pop | `badge-check@solid` | swells proudly, a verified seal of approval |
-| `badge-percent` | pulse | tada | `percent`, `badge-check`, `badge-percent@solid` | pulses like a sale sticker that wants your attention |
+| `anchor` | rock | rock |  | hangs from its ring and rocks gently like a moored ship |
+| `angry` | pulse | shake | `meh`, `smile`, `angry@solid` | swells red as it fumes, then shakes with rage on hover |
+| `app-window` | pulse | pop | `maximize`, `monitor`, `layout-template` | the window rests while its title-bar dots pulse; pops open on hover |
+| `apple` | sway | wiggle |  | hangs from its stem and sways, the leaf fluttering behind |
+| `archive` | float | bounce | `package`, `inbox` | rests in storage, drops onto the shelf with a soft bounce |
+| `arrow-down-left` | nudge | nudge | `arrow-up-right`, `arrow-down-right` | reaches down and left, its head leading the way |
+| `arrow-down-right` | nudge | pass | `arrow-up-left` | pushes down and right to show where it points |
+| `arrow-down` | nudge | pass | `arrow-up` | pushes down to show where it points |
+| `arrow-left-right` | pulse | pulse | `arrow-up-down`, `swap` | stretches out both ways at once |
+| `arrow-left` | nudge | pass | `arrow-right` | pushes left to show where it points |
+| `arrow-right` | nudge | nudge | `arrow-left`, `check` | reaches right, its head leading the way it points |
+| `arrow-up-down` | pulse | pulse | `arrow-left-right`, `sort` | stretches up and down at once |
+| `arrow-up-left` | nudge | nudge | `arrow-down-right` | reaches up and left, its head leading the way |
+| `arrow-up-right` | nudge | nudge | `arrow-down-right` | reaches up and right, like a link heading out |
+| `arrow-up` | nudge | nudge | `arrow-down` | reaches up, its head leading the way it points |
+| `at-sign` | pulse | spin-once | `mail`, `hash` | pings softly, swirls round once when you mention someone |
+| `atom` | spin | spin-once |  | electron orbits turn slowly while the nucleus pulses |
+| `audio-lines` | jelly | jelly | `microphone`, `microphone-off` | sound bars bounce like a voice is speaking |
+| `award` | glow | pop | `award@solid`, `badge-check` | medal shines while its ribbon flutters; pops proudly on hover |
+| `backpack` | sway | sway |  | hangs from its top handle and swings, pocket a beat behind |
+| `badge-check` | rock | pop | `badge-check@solid` | the seal sways gently while its check stays proud |
+| `badge-percent` | rock | spin-once | `percent`, `badge-check`, `badge-percent@solid` | the sale badge rocks gently while its percent pulses; turns on hover |
 | `balloon` | float | rise | `balloon@solid`, `party-popper` | bobs gently in the air, then floats up and away on hover |
-| `ban` | pulse | shake | `check-circle` | shakes no: this is blocked or not allowed |
-| `bandage` | breathe | pop | `bandage@solid`, `heart` | breathes gently like a wound healing, pops on as if stuck down |
-| `banknote` | float | flip | `coins`, `wallet`, `credit-card` | flutters like fresh cash in your hand |
-| `barcode` | fill | flicker | `qr-code`, `check` | flickers like a scanner reading the code |
+| `ban` | pulse | shake | `check-circle` | a steady stop sign that pulses calmly, shakes no on hover |
+| `bandage` | breathe | jelly | `bandage@solid`, `heart` | breathes gently like a wound healing, squishes down as if stuck on |
+| `banknote` | float | flip | `coins`, `wallet`, `credit-card` | drifts like a fresh note in your hand; flips over on hover |
+| `barcode` | fill | zoom | `qr-code`, `check` | the bars dim and light like a scanner reading the code |
 | `basketball` | bounce | spin-once | `basketball@solid`, `trophy` | dribbles up and down, spins on a finger when touched |
-| `bath` | rock | jelly | `droplet`, `bath@solid`, `toilet` | rocks gently like warm water settling in the tub |
-| `battery-charging` | fill | flicker | `battery`, `zap`, `plug` | fills with power while the bolt flickers |
-| `battery-low` | fill | shake | `battery-charging`, `battery`, `plug` | fades in and out to warn that power is running low |
-| `battery` | fill | nudge | `battery-charging`, `zap`, `plug` | fills up with charge, cell by cell |
-| `bed` | breathe | jelly | `moon`, `sofa`, `bed@solid` | breathes slowly like someone sound asleep |
-| `beer` | rock | tilt |  | rocks gently, then tips like a mug raised for cheers |
-| `bell-off` | breathe | shake | `bell`, `bell-ring` | stays quietly muted, shakes softly if you try to ring it |
-| `bell-ring` | ring | ring | `bell-off`, `bell` | rings from its hook like a fresh notification |
-| `bell` | ring | ring | `bell-off`, `bell-ring`, `bell@solid` | rings from its hook like a notification just arrived |
-| `bike` | pass | nudge | `bike@solid`, `motorcycle`, `car` | rides along the road, rolls forward when you point at it |
-| `binoculars` | tilt | zoom | `eye`, `search` | scans the horizon, then zooms in on what it found |
-| `bird` | bounce | tilt | `bird@solid`, `egg` | hops lightly in place like a little songbird |
-| `bluetooth` | pulse | glow | `wifi`, `link`, `bluetooth@solid` | pulses like it is searching for a device to pair |
+| `bath` | breathe | jelly | `droplet`, `bath@solid`, `toilet` | settles like warm water in the tub, splashing when you hover |
+| `battery-charging` | pulse | glow | `battery`, `zap`, `plug` | the bolt flickers with current while the cell charges |
+| `battery-low` | pulse | flicker | `battery-charging`, `battery`, `plug` | the last bar blinks to warn that power is running low |
+| `battery` | pulse | fill | `battery-charging`, `zap`, `plug` | the cells refill with charge inside a steady case |
+| `bed` | pulse | float | `moon`, `sofa`, `bed@solid` | breathes slowly like someone sound asleep, the pillow rising |
+| `beer` | rock | rock |  | rocks gently with the foam sloshing a beat behind, swings up for cheers |
+| `bell-off` | pulse | shake | `bell`, `bell-ring` | rests muted, the silent clapper drifts; shakes no if you ring |
+| `bell-ring` | ring | ring | `bell-off`, `bell` | swings from its hook, clapper lagging, ring marks buzzing |
+| `bell` | ring | ring | `bell-off`, `bell-ring`, `bell@solid` | swings from its hook while the clapper rings a beat behind |
+| `bike` | float | pass | `bike@solid`, `motorcycle`, `car` | rolls over the road with a light bump, rides off and back on hover |
+| `binoculars` | sway | zoom | `eye`, `search` | scans the horizon side to side, then zooms in on what it found |
+| `bird` | bounce | bounce | `bird@solid`, `egg` | hops lightly in place like a little songbird |
+| `bluetooth` | pulse | glow | `wifi`, `link`, `bluetooth@solid` | pulses softly like it is searching for a device to pair |
 | `bold` | pulse | pop | `bold@solid`, `italic`, `underline` | swells with weight like text turning bold |
-| `book-open` | float | flip | `book`, `bookmark`, `book-open@solid` | rests open and lifts gently, ready to be read |
-| `book` | sway | tilt | `book-open`, `bookmark` | leans gently like a book on a shelf |
-| `bookmark-plus` | float | pop | `bookmark-plus@solid`, `bookmark`, `check` | floats gently, then pops when you save it |
-| `bookmark` | float | pop | `bookmark@solid` | floats gently, then pops when you save it |
-| `bot` | float | blink | `brain`, `user` | hovers like a friendly robot and blinks at you |
-| `braces` | breathe | jelly | `code`, `terminal` | opens up softly like a code block wrapping content |
-| `brain` | breathe | glow | `bot`, `lightbulb`, `sparkles` | glows softly as if it is thinking |
-| `briefcase-medical` | sway | rock | `briefcase`, `briefcase-medical@solid` | sways from its handle like a kit being carried to help |
+| `book-open` | float | flip | `book`, `bookmark`, `book-open@solid` | rests open and lifts gently, turns a page when touched |
+| `book` | sway | tilt | `book-open`, `bookmark` | leans gently on the shelf, tips toward you when picked |
+| `bookmark-plus` | pulse | pop | `bookmark-plus@solid`, `bookmark`, `check` | the ribbon rests while its plus swells, then pops on save |
+| `bookmark` | sway | pop | `bookmark@solid` | the ribbon sways from the page top, pops when you save it |
+| `bot` | float | float | `brain`, `user` | hovers like a friendly robot, antenna and eyes bobbing a beat behind |
+| `braces` | pulse | jelly | `code`, `terminal` | swells softly like a code block wrapping its content |
+| `brain` | pulse | glow | `bot`, `lightbulb`, `sparkles` | swells calmly while its folds spark like thoughts firing |
+| `briefcase-medical` | sway | sway | `briefcase`, `briefcase-medical@solid` | swings from its handle like a kit being carried to help |
 | `briefcase` | rock | ring | `briefcase@solid` | swings from its handle like a bag being carried |
-| `bug` | wiggle | wiggle | `check-circle`, `check` | twitches like a little beetle on the move |
-| `building` | breathe | pop | `home`, `store`, `landmark` | stands tall with a calm presence, rises on hover |
-| `burger` | jelly | bounce | `burger@solid`, `pizza` | the stacked burger squishes softly like a juicy bite |
-| `bus` | bounce | zoom | `train`, `car`, `bus@solid` | idles at the stop with a gentle engine hum, then pulls up close on hover |
-| `butterfly` | float | jelly | `flower`, `butterfly@solid`, `sprout` | flutters gently on a breeze |
-| `cake` | flicker | tada |  | candle flickers softly, like a birthday wish is coming |
-| `calculator` | type | type | `percent`, `receipt` | taps away like keys adding up a total |
-| `calendar-check` | pulse | draw | `calendar`, `calendar-check@solid` | pulses gently, ticks the date off on hover |
-| `calendar-days` | breathe | flip | `calendar`, `calendar-check`, `calendar-plus` | breathes calmly, flips to the month on hover |
-| `calendar-plus` | pulse | pop | `calendar-check`, `calendar`, `calendar-plus@solid` | pulses like an invite, pops when you add an event |
-| `calendar` | breathe | flip | `calendar-check`, `calendar-plus`, `calendar-days` | turns its page like a new day arriving |
-| `camera-off` | breathe | shake | `camera`, `eye-off`, `video-off` | dims quietly: no photos here |
-| `camera` | breathe | pop | `image`, `video-camera`, `check`, `camera@solid` | snaps like a photo being taken |
-| `captions` | type | pop | `captions@solid`, `type` | subtitle lines flicker in like captions being typed |
-| `car` | nudge | pass | `truck` | idles forward and drives off on hover |
-| `cast` | fill | nudge | `tv`, `monitor`, `cast@solid` | sends signal waves out to the screen |
-| `cat` | blink | tilt | `dog`, `cat@solid`, `paw-print` | gives you a slow, friendly cat blink |
-| `chart-area` | fill | pop | `chart-line`, `chart-bar` | fills in like volume adding up over time |
-| `chart-bar` | fill | jelly | `chart-line`, `chart-pie` | fills up like a live dashboard and springs from its baseline |
-| `chart-line` | draw | draw | `chart-area`, `trending-up`, `chart-bar` | draws its trend line left to right like new data arriving |
-| `chart-pie` | spin | spin-once | `chart-bar`, `chart-pie@solid` | turns slowly like shares settling into place |
-| `check-check` | draw | draw | `check`, `check-check@solid` | both ticks draw in, like a message that was just read |
-| `check-circle` | breathe | draw | `check-circle@solid`, `x-circle`, `circle` | draws its tick as a task completes |
-| `check-square` | breathe | draw | `square`, `check-square@solid` | ticks itself like a checkbox being checked |
-| `check` | draw | draw | `check-circle`, `close` | draws itself in like a tick being written |
-| `chef-hat` | sway | jelly | `chef-hat@solid`, `cooking-pot`, `utensils` | the puffy toque sways and wobbles like a busy chef |
-| `chevron-down` | nudge | nudge | `chevron-up` | nudges down to hint that more opens below |
-| `chevron-first` | nudge | nudge | `chevron-last`, `chevron-left`, `skip-back` | leans back toward the start, like it's heading to page one |
-| `chevron-last` | nudge | nudge | `chevron-first`, `chevron-right`, `skip-forward` | leans ahead toward the end, like it's jumping to the last page |
-| `chevron-left` | nudge | nudge | `chevron-right` | nudges left to say go back |
-| `chevron-right` | nudge | nudge | `chevron-left`, `chevron-down` | nudges right to say go forward |
-| `chevron-up` | nudge | nudge | `chevron-down` | nudges up to hint that the section collapses |
-| `chevrons-down` | nudge | pass | `chevrons-up`, `chevron-down`, `chevrons-up-down` | nudges downward to say there is more below |
-| `chevrons-left` | nudge | pass | `chevrons-right`, `chevron-left`, `chevron-first` | nudges left to say jump back |
-| `chevrons-right` | nudge | pass | `chevrons-left`, `chevron-right`, `chevron-last` | nudges right to say skip ahead |
-| `chevrons-up-down` | zoom | jelly | `chevron-down`, `sort` | breathes open and closed, hinting at a list of choices |
-| `chevrons-up` | nudge | pass | `chevrons-down`, `chevron-up`, `chevrons-up-down` | nudges upward to say back to top |
-| `circle-arrow-down` | nudge | nudge | `circle-arrow-up`, `circle-arrow-down@solid`, `check` | dips downward, like scroll down or save to your device |
-| `circle-arrow-left` | nudge | nudge | `circle-arrow-right`, `circle-arrow-left@solid`, `arrow-left` | nudges left like a back button inviting a tap |
-| `circle-arrow-right` | nudge | nudge | `circle-arrow-left`, `circle-arrow-right@solid`, `check` | nudges right like a next button saying go on |
-| `circle-arrow-up` | nudge | nudge | `circle-arrow-down`, `circle-arrow-up@solid`, `arrow-up` | lifts gently upward, like back to top or level up |
-| `circle-chevron-down` | nudge | nudge | `circle-chevron-right`, `circle-chevron-down@solid`, `chevron-down` | bobs downward to hint there is more to open |
-| `circle-chevron-right` | nudge | nudge | `circle-chevron-down`, `circle-chevron-right@solid`, `chevron-right` | nudges right to invite you to continue or open details |
-| `circle-dot` | pulse | pop | `circle`, `circle-dot@solid` | pulses softly like a selected option or a live recording point |
-| `circle-pause` | breathe | pop | `circle-play`, `circle-stop`, `circle-pause@solid` | breathes slowly while playback is on hold |
-| `circle-play` | pulse | pop | `circle-pause`, `circle-stop`, `circle-play@solid` | gently pulses like a play button inviting you to start |
-| `circle-stop` | pulse | jelly | `circle-play`, `circle-pause`, `circle-stop@solid` | pulses softly like a recording you can stop |
-| `circle` | pulse | pop | `circle@solid`, `check-circle`, `x-circle` | pulses softly like a live status dot |
-| `clapperboard` | ring | ring | `film`, `play`, `video-camera` | snaps shut like a scene starting: action! |
-| `clipboard-check` | breathe | draw | `clipboard-list`, `clipboard`, `clipboard-check@solid` | the check mark writes itself on, like a task just signed off |
-| `clipboard-list` | type | nod | `clipboard-check`, `list-checks` | ticks through its list like someone checking items off |
-| `clipboard` | float | nod | `check`, `paste` | floats gently and nods when something lands on it |
-| `clock` | tick | spin-once | `alarm-clock`, `timer`, `history` | its hands tick round the face like passing time |
-| `close` | breathe | spin-once | `menu`, `plus`, `check` | spins away on hover to say this will close |
-| `cloud-download` | float | nudge | `check`, `loader`, `cloud-upload` | pulls data down from the cloud |
-| `cloud-lightning` | flicker | shake | `cloud-rain`, `cloud` | flashes like a storm cloud about to strike |
+| `bug` | wiggle | wiggle | `check-circle`, `check` | twitches like a little beetle, antennae a beat behind |
+| `building` | pulse | glow | `home`, `store`, `landmark` | stands steady while its windows light up for the evening |
+| `burger` | jelly | jelly | `burger@solid`, `pizza` | the stacked burger squishes softly, the patty a beat behind, like a bite |
+| `bus` | float | zoom | `train`, `car`, `bus@solid` | idles at the stop with a soft engine hum, pulls up close on hover |
+| `butterfly` | float | flip | `flower`, `butterfly@solid`, `sprout` | drifts on a breeze and flaps its wings when you come near |
+| `cake` | pulse | glow |  | the candle flickers on a steady cake, glowing for a wish |
+| `calculator` | pulse | type | `percent`, `receipt` | the keys tap away inside a steady case, adding up a total |
+| `calendar-check` | pulse | pop | `calendar`, `calendar-check@solid` | the check stamps onto the page, confirming the date |
+| `calendar-days` | pulse | pop | `calendar`, `calendar-check`, `calendar-plus` | the day dots swell softly, a calm month at a glance |
+| `calendar-plus` | pulse | pop | `calendar-check`, `calendar`, `calendar-plus@solid` | the plus pops onto the page like a new event being added |
+| `calendar` | pulse | nod | `calendar-check`, `calendar-plus`, `calendar-days` | hangs on the wall, binder rings bobbing; nods to a new date on hover |
+| `camera-off` | pulse | pop | `camera`, `eye-off`, `video-off` | the lens tries to blink but stays shut: no photos here |
+| `camera` | pulse | pop | `image`, `video-camera`, `check`, `camera@solid` | the lens focuses in and out, the shutter snaps on hover |
+| `captions` | pulse | pop | `captions@solid`, `type` | subtitle lines fade in one after another like live captions |
+| `car` | float | pass | `truck` | idles with a soft engine rumble and drives off on hover |
+| `cast` | pulse | pulse | `tv`, `monitor`, `cast@solid` | the screen holds still while signal waves ripple out from its corner |
+| `cat` | pulse | nod | `dog`, `cat@solid`, `paw-print` | breathes calmly and gives you a slow, friendly cat blink |
+| `chart-area` | fill | fill | `chart-line`, `chart-bar` | area fills in like volume adding up, axes stay put |
+| `chart-bar` | jelly | pop | `chart-line`, `chart-pie` | bars stretch up from a steady baseline like live data updating |
+| `chart-line` | draw | nudge | `chart-area`, `trending-up`, `chart-bar` | draws its trend line like new data arriving; ticks up on hover |
+| `chart-pie` | pulse | pop | `chart-bar`, `chart-pie@solid` | one slice slides out from the pie, then settles back in |
+| `check-check` | draw | draw | `check`, `check-check@solid` | one tick, then the second follows, like a message just read |
+| `check-circle` | pulse | draw | `check-circle@solid`, `x-circle`, `circle` | the tick writes itself inside a calm ring; draws on hover |
+| `check-square` | pulse | draw | `square`, `check-square@solid` | the box rests while its tick snaps in, like a checkbox just checked |
+| `check` | draw | nod | `check-circle`, `close` | draws itself in like a tick being written, nods yes on hover |
+| `chef-hat` | pulse | jelly | `chef-hat@solid`, `cooking-pot`, `utensils` | the puffy toque rises like dough on a steady band |
+| `chevron-down` | nudge | nudge | `chevron-up` | dips down to hint that more opens below |
+| `chevron-first` | nudge | nudge | `chevron-last`, `chevron-left`, `skip-back` | chevron runs back and bumps the wall at page one |
+| `chevron-last` | nudge | nudge | `chevron-first`, `chevron-right`, `skip-forward` | chevron runs ahead and bumps the wall at the last page |
+| `chevron-left` | nudge | nudge | `chevron-right` | steps left to say go back |
+| `chevron-right` | nudge | nudge | `chevron-left`, `chevron-down` | steps right to say go forward |
+| `chevron-up` | nudge | nudge | `chevron-down` | lifts up to hint that the section collapses |
+| `chevrons-down` | nudge | nudge | `chevrons-up`, `chevron-down`, `chevrons-up-down` | steps down for more below, the lower chevron leading |
+| `chevrons-left` | nudge | nudge | `chevrons-right`, `chevron-left`, `chevron-first` | jumps back, the lead chevron leaping and the rear one following |
+| `chevrons-right` | nudge | nudge | `chevrons-left`, `chevron-right`, `chevron-last` | skips ahead, the front chevron leaping and the back one following |
+| `chevrons-up-down` | zoom | pop | `chevron-down`, `sort` | opens and settles, hinting at a list of choices |
+| `chevrons-up` | nudge | nudge | `chevrons-down`, `chevron-up`, `chevrons-up-down` | climbs to the top, the upper chevron leaping ahead of the lower |
+| `circle-arrow-down` | pulse | pop | `circle-arrow-up`, `circle-arrow-down@solid`, `check` | the arrow dips inside its button, like scroll down or save |
+| `circle-arrow-left` | pulse | pop | `circle-arrow-right`, `circle-arrow-left@solid`, `arrow-left` | the arrow steps left inside its button, inviting a tap |
+| `circle-arrow-right` | pulse | pop | `circle-arrow-left`, `circle-arrow-right@solid`, `check` | the arrow leads inside its button, saying next, go on |
+| `circle-arrow-up` | pulse | pop | `circle-arrow-down`, `circle-arrow-up@solid`, `arrow-up` | the arrow lifts inside its button, like back to top or level up |
+| `circle-chevron-down` | pulse | pop | `circle-chevron-right`, `circle-chevron-down@solid`, `chevron-down` | chevron dips inside its ring to hint there is more below |
+| `circle-chevron-right` | pulse | pop | `circle-chevron-down`, `circle-chevron-right@solid`, `chevron-right` | chevron steps right inside its ring to invite you onward |
+| `circle-dot` | pulse | pop | `circle`, `circle-dot@solid` | the centre dot pulses inside a calm ring, like a selected option |
+| `circle-pause` | pulse | pop | `circle-play`, `circle-stop`, `circle-pause@solid` | breathes slowly while playback is on hold |
+| `circle-play` | pulse | pop | `circle-pause`, `circle-stop`, `circle-play@solid` | the triangle leans forward inside its ring, inviting a start |
+| `circle-stop` | pulse | jelly | `circle-play`, `circle-pause`, `circle-stop@solid` | the square breathes inside its ring, ready to stop |
+| `circle` | breathe | jelly | `circle@solid`, `check-circle`, `x-circle` | breathes softly like a live status dot, squishes when pressed |
+| `clapperboard` | pop | pop | `film`, `play`, `video-camera` | the clapper stick snaps down on its hinge: action! |
+| `clipboard-check` | float | draw | `clipboard-list`, `clipboard`, `clipboard-check@solid` | the check pops on the board now and then, writes itself on hover |
+| `clipboard-list` | type | type | `clipboard-check`, `list-checks` | the list jitters like items being ticked off, nods when done |
+| `clipboard` | float | nod | `check`, `paste` | the board floats, its clip clamps down a beat later |
+| `clock` | pulse | spin-once | `alarm-clock`, `timer`, `history` | the hands tick round a steady face in even steps, like passing time |
+| `close` | breathe | spin-once | `menu`, `plus`, `check` | rests calmly, then twists shut on hover to say this will close |
+| `cloud-download` | float | nudge | `check`, `loader`, `cloud-upload` | the cloud drifts while the arrow keeps pulling data down |
+| `cloud-lightning` | float | shake | `cloud-rain`, `cloud` | storm cloud hangs heavy while the bolt flashes; it strikes on touch |
 | `cloud-off` | float | shake | `cloud`, `wifi-off`, `cloud-upload` | drifts quietly, waiting for the connection to come back |
-| `cloud-rain` | float | drop | `cloud-snow`, `cloud-lightning`, `cloud` | floats while it rains, then shakes loose a shower |
-| `cloud-snow` | float | drop | `cloud-rain`, `snowflake`, `cloud` | hangs softly in the air while snow drifts down |
-| `cloud-sun` | float | glow | `sun`, `cloud` | sun glows behind a drifting cloud |
-| `cloud-upload` | float | nudge | `check`, `loader`, `cloud-download` | lifts data up into the cloud |
-| `cloud` | float | nudge | `cloud-sun`, `cloud-rain`, `cloud@solid` | drifts gently like a cloud in the sky |
-| `code` | type | jelly | `braces`, `terminal`, `file-code` | ticks along like code being typed |
-| `coffee` | breathe | tilt |  | steams gently like a fresh hot cup |
-| `coins` | float | flip | `banknote`, `wallet`, `dollar-sign` | spins and glints like coins being counted |
-| `columns` | breathe | jelly | `sidebar`, `layout-grid`, `kanban` | panes breathe gently, then jiggle like a resized layout |
-| `compass` | rock | spin-once | `navigation`, `map` | swings around like a needle settling on north |
-| `cookie` | rock | spin-once |  | rolls slowly like a cookie on the counter |
-| `cooking-pot` | breathe | shake | `cooking-pot@solid`, `soup`, `chef-hat` | the pot simmers softly, then its lid rattles at the boil |
-| `copy` | breathe | pop | `check`, `paste` | breathes softly, pops when you copy |
-| `corner-down-left` | nudge | nudge | `check`, `corner-down-right` | nudges left like pressing Enter |
-| `corner-down-right` | nudge | nudge | `reply` | steps right, like a reply tucking in under its thread |
-| `cpu` | pulse | glow | `server`, `cpu@solid` | hums with a steady pulse like a working processor |
-| `credit-card` | float | flip | `check`, `wallet`, `credit-card@solid` | flips over like a card being tapped to pay |
-| `crop` | zoom | zoom | `maximize`, `image` | the frame tightens in like you are cropping a photo |
-| `crosshair` | pulse | zoom | `target`, `map-pin` | pulses as it locks on to a target |
-| `crown` | float | tada | `crown@solid` | floats proudly, then celebrates when you point at it |
-| `cup-soda` | float | wiggle |  | fizzes with a gentle bob, like a cold drink ready to sip |
-| `cursor` | tilt | nudge | `mouse` | leans in like it is about to click |
-| `database` | breathe | bounce | `server` | breathes like stored data, then settles on its base |
-| `disc` | spin | spin-once | `music-note`, `play`, `disc@solid` | spins like a record playing |
-| `dna` | flip | flip |  | the double helix twists around its axis |
-| `dog` | tilt | nod | `cat`, `dog@solid`, `paw-print` | tilts its head like a puppy listening to you |
-| `dollar-sign` | flip | tada | `coins`, `percent`, `banknote` | spins like a coin, money coming in |
-| `donut` | spin | spin-once |  | turns slowly to show off its sprinkles |
-| `door-open` | nudge | nudge | `log-in`, `home`, `key` | beckons you through, like a door inviting you in |
-| `download` | drop | nudge | `check`, `loader`, `upload` | drops into the tray like a file arriving |
-| `drag-handle` | nudge | nudge | `move`, `menu` | lifts up and down to show it can be dragged |
-| `droplet` | drop | jelly | `droplet@solid` | drips like water falling from a tap |
-| `dumbbell` | float | nod | `dumbbell@solid`, `heart-pulse` | lifts up and down like steady reps at the gym |
-| `edit` | sway | wiggle | `check`, `save` | the pencil sways at its tip, ready to write |
-| `egg` | rock | wiggle | `egg@solid` | the egg rocks on its base as if about to hatch |
-| `eraser` | rock | shake | `pencil` | rubs back and forth to wipe something clean |
-| `euro` | flip | tada | `dollar-sign`, `pound-sterling`, `indian-rupee`, `coins` | spins like a euro coin, money changing hands |
-| `external-link` | nudge | nudge | `link` | arrow heads out of the box to open elsewhere |
-| `eye-off` | blink | shake | `eye` | blinks slowly, keeping things hidden |
+| `cloud-rain` | float | shake | `cloud-snow`, `cloud-lightning`, `cloud` | cloud drifts while rain keeps falling; a shake lets a shower go |
+| `cloud-snow` | float | shake | `cloud-rain`, `snowflake`, `cloud` | cloud hangs softly while snow drifts slowly down |
+| `cloud-sun` | float | nudge | `sun`, `cloud` | cloud drifts while the sun warms behind it, peeks out on touch |
+| `cloud-upload` | float | nudge | `check`, `loader`, `cloud-download` | the cloud drifts while the arrow keeps lifting data up |
+| `cloud` | float | jelly | `cloud-sun`, `cloud-rain`, `cloud@solid` | drifts calmly across the sky, squishes softly when touched |
+| `code` | type | jelly | `braces`, `terminal`, `file-code` | brackets tick like typing while the slash blinks like a cursor |
+| `coffee` | breathe | tilt |  | swells softly like a fresh hot cup, then tips up for a sip |
+| `coins` | pulse | nod | `banknote`, `wallet`, `dollar-sign` | the top coin hops on the stack, like coins being counted |
+| `columns` | pulse | jelly | `sidebar`, `layout-grid`, `kanban` | the divider slides like a pane being resized |
+| `compass` | pulse | pop | `navigation`, `map` | the needle swings and settles on north inside a steady case |
+| `cookie` | rock | spin-once |  | rolls slowly back and forth like a cookie on the counter |
+| `cooking-pot` | pulse | bounce | `cooking-pot@solid`, `soup`, `chef-hat` | the pot simmers while its lid lifts on the steam |
+| `copy` | nudge | nudge | `check`, `paste` | the two sheets spread apart as a copy is made, then settle |
+| `corner-down-left` | nudge | nudge | `check`, `corner-down-right` | presses left like the Enter key, the head leading |
+| `corner-down-right` | nudge | nudge | `reply`, `corner-down-left` | tucks right under its thread, the head leading like a reply |
+| `cpu` | pulse | glow | `server`, `cpu@solid` | the core glows with work while the chip hums |
+| `credit-card` | float | flip | `check`, `wallet`, `credit-card@solid` | hovers like a card held to a reader; flips over on hover |
+| `crop` | zoom | pop | `maximize`, `image` | the frame tightens around the picture like a crop being set |
+| `crosshair` | pulse | zoom | `target`, `map-pin` | the sight holds steady while the centre dot pulses, locked on |
+| `crown` | float | tada | `crown@solid` | floats proudly among sparkles, then celebrates a win |
+| `cup-soda` | pulse | pop |  | a cold drink: the straw bobs as if someone is sipping |
+| `cursor` | tilt | nudge | `mouse` | leans on its tip, then pokes forward like a click |
+| `database` | jelly | jelly | `server` | stack squashes on its base, the middle band lagging like data settling |
+| `disc` | spin | spin-once | `music-note`, `play`, `disc@solid` | spins on its centre like a record playing, the glint sweeping round |
+| `dna` | flip | flip |  | the double helix twists slowly around its axis |
+| `dog` | tilt | nod | `cat`, `dog@solid`, `paw-print` | tilts its head to listen, eyes and nose scrunching in a happy blink |
+| `dollar-sign` | glow | flip | `coins`, `percent`, `banknote` | shines quietly like money coming in; flips like a coin on hover |
+| `donut` | pulse | pop |  | the soft donut swells gently while its sprinkles glint |
+| `door-open` | nudge | nudge | `log-in`, `home`, `key` | beckons you through while its handle gives a little turn |
+| `download` | nudge | nudge | `check`, `loader`, `upload` | the arrow drops into the tray, which dips as the file lands |
+| `drag-handle` | float | nudge | `move`, `menu` | lifts gently off the surface, ready to be dragged |
+| `droplet` | drop | jelly | `droplet@solid` | drips like water from a tap, splashes when touched |
+| `dumbbell` | float | nod | `dumbbell@solid`, `heart-pulse` | lifts up and down like steady reps, does a quick rep on hover |
+| `edit` | sway | wiggle | `check`, `save` | the pencil sways on its tip over a calm page, ready to write |
+| `egg` | wiggle | wiggle | `egg@solid` | twitches on its base now and then, as if about to hatch |
+| `eraser` | sway | wiggle | `pencil` | rocks on its rubbing edge to wipe the line clean |
+| `euro` | flip | flip | `dollar-sign`, `pound-sterling`, `indian-rupee`, `coins` | flips like a euro coin now and then |
+| `external-link` | pulse | nudge | `link` | arrow slips out of the box to open somewhere else |
+| `eye-off` | pulse | shake | `eye` | rests shut while the slash taps down, keeping things hidden |
 | `eye` | blink | blink | `eye-off`, `eye@solid` | blinks now and then like it is watching |
-| `factory` | pulse | jelly | `warehouse`, `building`, `factory@solid` | hums with a steady pulse like a working production line |
-| `fast-forward` | nudge | pass | `rewind`, `skip-forward` | races ahead like scrubbing a video forward |
-| `file-archive` | breathe | jelly | `file`, `archive` | squeezes down like a zipped bundle |
-| `file-audio` | sway | bounce | `music-note`, `file` | sways and bops along to the music |
-| `file-check` | breathe | nod | `file`, `file-check@solid` | nods yes when the document is approved |
-| `file-code` | type | wiggle | `code`, `file` | ticks like code being typed |
-| `file-down` | drop | nudge | `file-check`, `file-up`, `download` | drops gently, like a file landing on your device |
-| `file-image` | float | zoom | `image`, `file` | floats like a photo, zooms in when you look |
-| `file-lock` | breathe | shake | `file`, `lock`, `unlock` | jiggles like a locked door when you try to open it |
-| `file-minus` | breathe | jelly | `file-plus`, `file` | squashes softly as a file is taken out |
-| `file-pdf` | float | pop | `download`, `file` | floats like a ready-to-print page |
-| `file-plus` | pulse | pop | `file-check`, `file` | pops a new file into being |
-| `file-search` | tilt | tilt | `search`, `file-check` | tilts like it is scanning the page |
-| `file-spreadsheet` | fill | pop | `file`, `download` | fills in like rows of data loading |
-| `file-text` | type | draw | `file`, `file-check` | writes itself line by line |
-| `file-up` | rise | nudge | `file-check`, `file-down`, `upload` | lifts gently, like a file heading up to the cloud |
-| `file-video` | pulse | pop | `play`, `file` | pulses like a video ready to play |
-| `file-x` | breathe | shake | `file-check`, `file`, `file-x@solid` | shakes no when a file is rejected |
-| `file` | float | pop | `file-plus`, `file-check`, `files` | floats like a fresh page, pops when picked |
-| `files` | float | pop | `copy`, `file` | floats like a stack of papers, pops when picked |
-| `film` | pass | flip | `video-camera`, `image` | film strip rolls past like a movie reel |
-| `filter` | drop | nod | `sort`, `filter@solid`, `sliders` | sifts items down through the funnel |
-| `fingerprint` | glow | draw | `unlock`, `shield-check` | glows like a sensor reading your fingerprint |
-| `fish` | sway | nudge | `fish@solid` | swishes its tail as it swims along |
-| `flag` | sway | sway | `flag@solid` | sways in the wind from the foot of its pole |
-| `flame` | flicker | sway | `flame@solid` | flickers and dances like a real flame |
-| `flask-conical` | rock | wiggle | `flask-conical@solid` | swirls the liquid like a reaction is brewing |
-| `flower` | breathe | spin-once | `flower@solid`, `sprout` | breathes softly like a bloom opening, twirls when touched |
-| `folder-minus` | breathe | jelly | `folder-plus`, `folder` | squashes softly as a folder is removed or collapsed |
-| `folder-open` | float | bounce | `folder` | hovers open, bounces as you browse inside |
-| `folder-plus` | pulse | pop | `folder`, `check` | gently pulses, pops when you create a folder |
-| `folder-search` | tilt | tilt | `folder-open`, `search`, `folder` | tilts its lens, looking through the folder |
-| `folder` | breathe | jelly | `folder-open`, `folder-plus`, `folder@solid` | rests calmly, squishes open when you point at it |
+| `factory` | pulse | jelly | `warehouse`, `building`, `factory@solid` | hums on its foundations while the window lights flicker at work |
+| `fast-forward` | nudge | nudge | `rewind`, `skip-forward` | the front arrow leads and the back one chases, like scrubbing ahead |
+| `file-archive` | breathe | jelly | `file`, `archive` | a zipped page that squeezes snug, wobbles when tapped |
+| `file-audio` | sway | beat | `music-note`, `file` | the page sways while its note bops along to the music |
+| `file-check` | pulse | pop | `file`, `file-check@solid` | the page rests while its checkmark pops to confirm |
+| `file-code` | pulse | wiggle | `code`, `file` | the page rests while its brackets wiggle like code being edited |
+| `file-down` | float | nudge | `file-check`, `file-up`, `download` | the page holds steady while its arrow dips, landing on your device |
+| `file-image` | pulse | zoom | `image`, `file` | the page rests while its picture slowly zooms like a slideshow |
+| `file-lock` | float | shake | `file`, `lock`, `unlock` | rests sealed and safe, the padlock jiggles when you try to open it |
+| `file-minus` | float | jelly | `file-plus`, `file` | rests calmly, squishes as a file is taken out of the set |
+| `file-pdf` | float | nudge | `download`, `file` | floats like a ready-to-print page, dips down when you grab it |
+| `file-plus` | pop | pop | `file-check`, `file` | pops gently now and then, offering a new file |
+| `file-search` | orbit | tilt | `search`, `file-check` | drifts in a small circle like a lens scanning the page; leans in on hover |
+| `file-spreadsheet` | pulse | fill | `file`, `download` | the page rests while its grid fills in like data loading |
+| `file-text` | pulse | draw | `file`, `file-check` | the page rests while its lines write themselves on |
+| `file-up` | nudge | nudge | `file-check`, `file-down`, `upload` | the page lifts and settles, heading up to the cloud |
+| `file-video` | pulse | pop | `play`, `file` | swells softly like a clip ready to play, pops when you point at it |
+| `file-x` | float | shake | `file-check`, `file`, `file-x@solid` | rests quietly, shakes no when a file is rejected |
+| `file` | float | pop | `file-plus`, `file-check`, `files` | floats like a loose page, the folded corner trailing a beat behind |
+| `files` | float | nudge | `copy`, `file` | floats like a loose stack of papers, slides along when you point at it |
+| `film` | type | pass | `video-camera`, `image` | the strip judders like film running through a projector gate |
+| `filter` | sway | nod | `sort`, `filter@solid`, `sliders` | the funnel swirls gently as it sifts, then taps down |
+| `fingerprint` | glow | draw | `unlock`, `shield-check` | glows like a sensor as its ridges light up for a reading |
+| `fish` | sway | nudge | `fish@solid` | swishes its tail from the head and darts ahead when you hover |
+| `flag` | sway | sway | `flag@solid` | the cloth ripples in the wind while the pole stands firm |
+| `flame` | flicker | flicker | `flame@solid` | flickers from its base, the inner tongue dancing out of step |
+| `flask-conical` | rock | wiggle | `flask-conical@solid` | rocks on its base while the liquid inside sloshes behind |
+| `flower` | pulse | spin-once | `flower@solid`, `sprout` | the bloom swells softly, its heart pulsing a beat behind |
+| `folder-minus` | pulse | jelly | `folder-plus`, `folder` | rests calmly, the minus pinches in as a folder is removed |
+| `folder-open` | sway | sway | `folder` | the folder swings open on its hinge as you browse inside |
+| `folder-plus` | pulse | pop | `folder`, `check` | the plus pops inside a calm folder, like a new one being made |
+| `folder-search` | pulse | zoom | `folder-open`, `search`, `folder` | the lens sweeps side to side searching a still folder, peers closer on hover |
+| `folder` | pulse | jelly | `folder-open`, `folder-plus`, `folder@solid` | swells softly on its base, squishes as if being stuffed on hover |
 | `football` | spin | bounce | `football@solid`, `trophy` | rolls slowly like a ball in play, bounces when kicked |
-| `forward` | nudge | nudge | `reply`, `send`, `check` | pushes ahead to the right like a message passed along |
-| `frown` | breathe | nod | `smile`, `meh`, `frown@solid` | sighs slowly, then droops its head when you point at it |
-| `fuel` | fill | wiggle | `battery-charging`, `droplet`, `fuel@solid` | fills up like a tank being refuelled |
-| `gallery-horizontal` | pass | nudge | `images`, `layout-grid`, `image` | slides sideways like a carousel moving to the next slide |
-| `gamepad` | rock | wiggle | `trophy`, `play`, `gamepad@solid` | jiggles in your hands like a game in play |
-| `gauge` | rock | tilt |  | needle sways across the dial like a live reading |
-| `gem` | twinkle | flip | `gem@solid`, `crown` | sparkles softly, then turns to flash its facets on hover |
-| `gift` | rock | tada | `gift@solid`, `check-circle`, `package` | rocks with excitement, a present waiting to be opened |
+| `forward` | nudge | nudge | `reply`, `send`, `check` | pushes ahead to the right, passing the message on |
+| `frown` | pulse | nod | `smile`, `meh`, `frown@solid` | sighs slowly, features drooping; hangs its head on hover |
+| `fuel` | pulse | pop | `battery-charging`, `droplet`, `fuel@solid` | the pump stands ready while its hose sways on the hook |
+| `gallery-horizontal` | nudge | nudge | `images`, `layout-grid`, `image` | the slides glide left like a carousel moving to the next one |
+| `gamepad` | rock | wiggle | `trophy`, `play`, `gamepad@solid` | tilts in your hands while the buttons get pressed |
+| `gauge` | pulse | pop |  | needle swings to a new reading and settles while the dial holds still |
+| `gem` | twinkle | flip | `gem@solid`, `crown` | glints softly like a cut stone, turns to flash its facets on hover |
+| `gift` | rock | tada | `gift@solid`, `check-circle`, `package` | rocks with excitement on its base; jumps for joy on hover |
 | `git-branch` | draw | draw | `git-merge`, `git-pull-request` | draws the branch forking off the main line |
 | `git-commit` | pulse | pop | `check-circle`, `git-branch` | pulses like a new commit landing on the line |
 | `git-merge` | draw | nudge | `git-pull-request`, `check-circle`, `git-branch` | draws two branches coming together into one |
-| `git-pull-request` | draw | nudge | `git-merge`, `git-branch`, `check-circle` | sends changes back toward the main line |
-| `globe` | spin | spin-once | `language`, `map` | turns slowly like the world spinning |
+| `git-pull-request` | draw | nudge | `git-merge`, `git-branch`, `check-circle` | draws changes being sent back toward the main line |
+| `globe` | rock | pop | `language`, `map` | tilts gently on its axis like the world turning slowly |
 | `graduation-cap` | float | tada | `graduation-cap@solid` | bobs proudly, then gets tossed in celebration |
-| `hammer` | rock | wiggle | `wrench` | swings from the handle like it's tapping a nail |
-| `hand-coins` | float | nudge | `coins`, `banknote`, `wallet`, `hand-heart` | offers up a coin, a payment on its way |
-| `hand-heart` | beat | beat | `hand-heart@solid`, `heart`, `hand-coins` | the heart beats softly in an open, caring hand |
-| `handshake` | nod | nod | `handshake@solid`, `check`, `hand-heart` | the hands pump up and down, sealing the deal |
-| `hard-drive` | type | jelly | `save`, `database`, `server` | hums softly while reading and writing data |
-| `hash` | sway | wiggle | `at-sign`, `tag` | wiggles like a fresh tag being added |
-| `heading` | breathe | pop | `type`, `bold` | stands up tall like a title on the page |
-| `headphones` | beat | jelly | `music-note`, `volume-off`, `headset`, `headphones@solid` | bops along to the beat of the music |
-| `headset` | float | tilt | `headphones`, `phone-call` | bobs gently while a support call is live |
-| `heart-crack` | breathe | shake | `heart`, `heart-crack@solid` | aches with a slow, heavy breath, then shudders as it breaks |
-| `heart-pulse` | beat | beat | `heart`, `activity`, `heart-pulse@solid` | beats steadily like a healthy heart |
-| `heart` | beat | beat | `heart@solid`, `heart-pulse` | beats like a heart full of love |
-| `help-circle` | tilt | wiggle | `info-circle`, `check-circle` | question mark tilts curiously, asking if you need help |
-| `hexagon` | spin | spin-once | `hexagon@solid` | turns slowly like a nut or a honeycomb cell |
-| `highlighter` | sway | wiggle | `eraser`, `pencil`, `highlighter@solid` | swipes its tip back and forth as if marking a line of text |
-| `history` | rock | spin-once | `clock`, `undo`, `rotate-ccw` | winds back like rewinding time |
-| `home` | breathe | pop | `home@solid` | settles in with a soft welcoming bounce |
-| `hospital` | glow | pop | `hospital@solid`, `building` | glows softly like a beacon of care, pops when pointed at |
-| `hotel` | breathe | pop | `bed`, `building` | breathes softly like a guest asleep inside |
-| `hourglass` | rock | spin-once | `check`, `loader`, `timer` | rocks and turns over while you wait, like sand running out |
-| `ice-cream` | sway | jelly |  | sways gently from the cone tip, like a treat held in hand |
-| `id-card` | float | flip | `user-check`, `shield-check` | flips over like a card being shown at the door |
-| `image-plus` | pulse | pop | `image`, `check` | pops softly, inviting you to add a picture |
-| `image` | breathe | zoom | `image-plus`, `film` | picture gently zooms in like a photo coming into focus |
-| `images` | float | tilt | `image`, `gallery-horizontal`, `image-plus`, `images@solid` | drifts softly like a stack of photos |
-| `inbox` | drop | bounce | `mail`, `check` | new mail drops softly into the tray |
-| `indent-decrease` | nudge | nudge | `indent-increase`, `align-left` | pulls the lines back out, one tab to the left |
-| `indent-increase` | nudge | nudge | `indent-decrease`, `align-left` | pushes the lines inward, one tab to the right |
-| `indian-rupee` | flip | tada | `dollar-sign`, `euro`, `pound-sterling`, `coins` | spins like a rupee coin, money changing hands |
-| `info-circle` | pulse | pop | `help-circle`, `x-circle` | gently pulses to draw your eye to a helpful note |
-| `italic` | tilt | tilt | `bold`, `underline`, `type` | leans over like text turning italic |
-| `kanban` | breathe | jelly | `columns`, `layout-grid`, `table` | the board breathes calmly, then bounces like a moved card |
-| `key` | sway | nudge | `unlock`, `lock` | sways from its ring and slides in like entering a lock |
-| `keyboard` | type | type | `type`, `terminal`, `keyboard@solid` | jitters softly like keys being typed |
-| `lamp` | glow | flicker | `lamp@solid`, `lightbulb`, `moon` | glows warmly like a reading lamp switched on |
-| `landmark` | breathe | pop | `building`, `banknote` | stands steady and calm like a trusted bank |
-| `language` | breathe | flip | `globe`, `message-circle` | flips between scripts like a word being translated |
-| `laptop` | breathe | nod | `monitor`, `tablet`, `smartphone`, `laptop@solid` | glows softly like a screen waking up |
+| `hammer` | rock | ring | `wrench` | rocks on its grip, then taps a nail with a quick rebound |
+| `hand-coins` | float | nudge | `coins`, `banknote`, `wallet`, `hand-heart` | the hand offers, the coin lifting a beat later; a payment on its way |
+| `hand-heart` | pulse | pop | `hand-heart@solid`, `heart`, `hand-coins` | the heart beats softly above a steady, open hand |
+| `handshake` | nod | nod | `handshake@solid`, `check`, `hand-heart` | the clasped hands pump up and down, sealing the deal |
+| `hard-drive` | pulse | jelly | `save`, `database`, `server` | the read arm sweeps across the platter while data moves |
+| `hash` | pop | pop | `at-sign`, `tag` | stamps itself down now and then like a fresh tag |
+| `heading` | pulse | pop | `type`, `bold` | rises softly from its baseline like a title standing tall |
+| `headphones` | beat | jelly | `music-note`, `volume-off`, `headset`, `headphones@solid` | bops to the beat on your head, wobbles when you point at it |
+| `headset` | float | nod | `headphones`, `phone-call` | bobs gently while listening, nods when you ask for help |
+| `heart-crack` | breathe | shake | `heart`, `heart-crack@solid` | a slow, heavy breath of heartbreak, then it shudders |
+| `heart-pulse` | beat | beat | `heart`, `activity`, `heart-pulse@solid` | beats steadily with the heartbeat trace riding along |
+| `heart` | beat | beat | `heart@solid`, `heart-pulse` | beats softly like a heart full of love |
+| `help-circle` | tilt | wiggle | `info-circle`, `check-circle` | the question mark tilts its head curiously inside a calm circle |
+| `hexagon` | pulse | pop | `hexagon@solid` | swells softly like a honeycomb cell, pops when picked |
+| `highlighter` | sway | pop | `eraser`, `pencil`, `highlighter@solid` | the marker leans on its tip while the fresh ink glows on |
+| `history` | rock | rock | `clock`, `undo`, `rotate-ccw` | winds back and forth, the hands sweeping wider behind it |
+| `home` | pulse | pop | `home@solid` | swells warmly on its foundation, welcomes you with a hop |
+| `hospital` | glow | pop | `hospital@solid`, `building` | stands still while its cross glows like a beacon of care |
+| `hotel` | pulse | pop | `bed`, `building` | stands still while the guest inside breathes softly in their sleep |
+| `hourglass` | rock | spin-once | `check`, `loader`, `timer` | rocks gently while the sand runs, turns over on hover |
+| `ice-cream` | sway | sway |  | the scoop sways on its cone like a treat held in hand |
+| `id-card` | float | flip | `user-check`, `shield-check` | floats like a card held up, flips over to show itself on hover |
+| `image-plus` | float | pop | `image`, `check` | the plus badge pulses, inviting you to add a picture |
+| `image` | float | zoom | `image-plus`, `film` | the scene drifts gently inside its frame, like a living photo |
+| `images` | pulse | zoom | `image`, `gallery-horizontal`, `image-plus`, `images@solid` | the stack rests while the picture slowly zooms in like a slideshow |
+| `inbox` | bounce | jelly | `mail`, `check` | the tray bumps softly as mail lands, squishes when you point at it |
+| `indent-decrease` | nudge | nudge | `indent-increase`, `align-left` | the arrow pulls the lines back out one tab to the left |
+| `indent-increase` | nudge | nudge | `indent-decrease`, `align-left` | the arrow pushes the lines one tab to the right |
+| `indian-rupee` | flip | flip | `dollar-sign`, `euro`, `pound-sterling`, `coins` | flips like a rupee coin now and then, its bar a beat behind |
+| `info-circle` | pulse | pop | `help-circle`, `x-circle` | the i nods softly inside a steady circle: here is a helpful note |
+| `italic` | tilt | tilt | `bold`, `underline`, `type` | leans over like text turning italic, its serifs following |
+| `kanban` | pulse | pop | `columns`, `layout-grid`, `table` | the board holds still while its card columns stretch and settle |
+| `key` | sway | nudge | `unlock`, `lock` | dangles from its ring, then slides forward as if into a lock |
+| `keyboard` | type | type | `type`, `terminal`, `keyboard@solid` | the keys press down as if someone is typing |
+| `lamp` | glow | flicker | `lamp@solid`, `lightbulb`, `moon` | glows warmly like a reading lamp, flickering on when you hover |
+| `landmark` | pulse | nod | `building`, `banknote` | stands steady like a trusted bank; settles firmly on hover |
+| `language` | pulse | flip | `globe`, `message-circle` | the glyph turns over and the translated letter pops in |
+| `laptop` | glow | zoom | `monitor`, `tablet`, `smartphone`, `laptop@solid` | its screen glows softly like it just woke up |
 | `laugh` | jelly | tada | `smile`, `laugh@solid` | giggles with a happy wobble, then bursts out laughing on hover |
-| `layers` | float | bounce | `layers@solid`, `files` | the stack floats like sheets settling on each other |
-| `layout-dashboard` | breathe | pop | `layout-grid`, `layout-list`, `kanban` | panels breathe gently, then pop like a refreshed dashboard |
-| `layout-grid` | breathe | pop | `layout-list`, `layout-dashboard`, `kanban` | tiles breathe calmly, then pop into a grid view |
-| `layout-list` | breathe | pop | `layout-grid`, `list`, `table` | rows breathe calmly, then pop into a list view |
-| `layout-template` | jelly | jelly | `layout-dashboard`, `layout-grid`, `layout-list` | blocks settle into place like a page being laid out |
+| `layers` | float | nudge | `layers@solid`, `files` | the top sheet floats while the layers below follow a beat later |
+| `layout-dashboard` | pulse | pop | `layout-grid`, `layout-list`, `kanban` | panels swell calmly, then pop like a refreshed dashboard |
+| `layout-grid` | pulse | jelly | `layout-list`, `layout-dashboard`, `kanban` | tiles swell calmly, then snap into a grid view |
+| `layout-list` | pulse | pop | `layout-grid`, `list`, `table` | thumbnails stay put while the text rows slide in beside them |
+| `layout-template` | pulse | jelly | `layout-dashboard`, `layout-grid`, `layout-list` | blocks hold still while the text lines fill in like a page loading |
 | `leaf` | sway | sway | `leaf@solid` | sways from its stem like a leaf in a breeze |
-| `library` | rock | tilt | `book-open`, `book` | the leaning book rocks on the shelf as if being pulled out |
-| `lightbulb` | glow | glow | `lightbulb@solid` | glows softly, like an idea switching on |
-| `link` | rock | jelly | `unlink`, `check` | rocks gently, snaps together on hover |
-| `list-checks` | nod | draw | `list`, `list-ordered`, `check-square` | ticks off tasks like a to-do list getting done |
+| `library` | sway | sway | `book-open`, `book` | the leaning book rocks on its corner as if being pulled from the shelf |
+| `lightbulb` | glow | glow | `lightbulb@solid` | glows softly as its filament flickers on, like an idea |
+| `link` | nudge | jelly | `unlink`, `check` | the two links tug apart and click back together |
+| `list-checks` | pulse | draw | `list`, `list-ordered`, `check-square` | its checkmarks tick in one after another like tasks getting done |
 | `list-filter` | nudge | nudge | `filter`, `list` | sifts downward, narrowing a long list to what you need |
-| `list-music` | sway | wiggle | `list`, `music-note` | the music note sways gently to the beat of the playlist |
-| `list-ordered` | nudge | nod | `list`, `list-checks` | steps down its numbered items one by one |
+| `list-music` | pulse | wiggle | `list`, `music-note` | the music note sways to the beat beside the playlist |
+| `list-ordered` | pulse | nod | `list`, `list-checks` | its numbers tap out a count while the lines wait in order |
 | `list-plus` | pulse | pop | `list-checks`, `list` | the plus pops in, adding one more item to the list |
-| `list` | fill | draw | `list-checks`, `list-ordered` | lines fill in like items loading into the list |
-| `loader` | tick | spin-once | `check`, `check-circle`, `x-circle` | spins step by step while something loads |
-| `lock` | breathe | shake | `unlock`, `lock@solid` | rests calmly, then shakes when access is denied |
-| `log-in` | nudge | pass | `log-out`, `user-check` | steps through the door like someone signing in |
-| `log-out` | nudge | pass | `log-in`, `user-x` | steps out the door like someone signing out |
+| `list` | pulse | fill | `list-checks`, `list-ordered` | the lines hold still while their bullets light up like items loading |
+| `loader` | tick | spin-once | `check`, `check-circle`, `x-circle` | spokes step round like a spinner while something loads |
+| `lock` | nod | nod | `unlock`, `lock@solid` | shackle clicks down into the body; tugs shut on hover |
+| `log-in` | nudge | nudge | `log-out`, `user-check` | the arrow steps in through the door while the frame stays put |
+| `log-out` | nudge | nudge | `log-in`, `user-x` | the arrow steps out of the door while the frame stays put |
 | `luggage` | rock | pass | `backpack`, `briefcase` | rocks on its wheels, then rolls off on a trip |
-| `mail-check` | breathe | nod | `mail`, `mail-open`, `mail-check@solid` | breathes calmly like mail that's done, nods yes on hover |
-| `mail-open` | breathe | pop | `mail` | breathes softly as a read letter, pops when opened |
-| `mail` | float | wiggle | `mail-open`, `send`, `check` | floats like a letter on its way, wiggles when new |
-| `map-pin` | bounce | bounce | `map-pin@solid`, `navigation` | drops onto the map and settles on its point |
-| `map` | breathe | flip | `map-pin`, `route`, `compass` | unfolds and settles like a paper map |
-| `maximize` | zoom | zoom | `minimize`, `zoom-in` | grows outward like a window going fullscreen |
-| `medal` | sway | tada | `medal@solid`, `trophy`, `award` | swings gently from its ribbon, then celebrates a win |
-| `megaphone` | pulse | wiggle | `bell-ring`, `volume-off` | pulses like it's announcing, kicks back when you shout |
-| `meh` | blink | tilt | `smile`, `frown`, `meh@solid` | blinks blankly, then gives an unimpressed little shrug |
-| `menu` | breathe | jelly | `close`, `sidebar` | bars wobble softly, ready to open navigation |
-| `message-circle-more` | type | jelly | `message-circle`, `check`, `message-circle-more@solid` | jitters like someone typing, wobbles from its tail on hover |
-| `message-circle` | breathe | jelly | `messages`, `message-circle@solid` | breathes like a chat waiting, jiggles on a new message |
-| `message-square-text` | type | pop | `message-square`, `message-square-text@solid`, `check` | quivers like text being typed, pops from its tail on hover |
-| `message-square` | breathe | pop | `messages`, `message-square@solid`, `check` | breathes like a comment waiting, pops from its tail |
-| `messages` | float | jelly | `message-circle`, `message-square` | bubbles bob like a lively conversation |
-| `microphone-off` | breathe | shake | `microphone` | stays quiet with a small shake: you are muted |
-| `microphone` | pulse | pop | `microphone-off`, `stop`, `microphone@solid` | pulses like it is picking up your voice |
-| `microscope` | tilt | nod | `microscope@solid` | nods down to focus on the sample |
-| `minimize` | breathe | pop | `maximize`, `zoom-out` | draws inward like a window leaving fullscreen |
-| `minus-circle` | breathe | pop | `plus-circle`, `x-circle`, `minus-circle@solid` | breathes softly, pops when you remove an item |
-| `minus` | breathe | pop | `plus` | breathes softly, pops when something is taken away |
-| `monitor` | breathe | zoom | `laptop`, `tv`, `smartphone`, `monitor@solid` | glows softly like a screen that is on |
-| `moon` | breathe | tilt | `sun`, `moon@solid` | glows softly like a calm night sky |
-| `more-horizontal` | type | jelly | `more-vertical`, `close` | dots ripple like more is waiting |
-| `more-vertical` | type | jelly | `more-horizontal`, `close` | dots ripple like more options are waiting |
-| `motorcycle` | nudge | tilt | `car`, `truck`, `motorcycle@solid` | revs in place, then pops a wheelie on hover |
-| `mountain` | breathe | pop | `flag` | stands still and calm, pops on hover |
-| `mouse` | float | nod | `cursor`, `keyboard`, `mouse@solid` | clicks and glides like it is being moved |
-| `move` | orbit | zoom | `drag-handle` | drifts in a small circle, ready to be dragged anywhere |
-| `music-note` | sway | bounce | `volume`, `play` | bops along to the beat of a song |
-| `navigation` | nudge | pass | `map-pin`, `compass` | heads forward toward where you are going |
-| `network` | pulse | nod | `router`, `server`, `globe` | pulses from the hub out to every connected device |
-| `newspaper` | float | nudge | `file-text`, `newspaper@solid` | slides in like the morning paper landing on the doorstep |
-| `notebook` | rock | flip | `book-open`, `notepad-text`, `notebook@solid` | rocks gently on its spine, ready for new notes |
-| `notepad-text` | type | wiggle | `sticky-note`, `pencil`, `notepad-text@solid` | jitters softly like notes being typed out |
-| `package-open` | float | bounce | `package`, `package-open@solid` | bobs gently like a freshly opened box |
-| `package` | bounce | bounce | `check-circle`, `truck`, `package@solid` | bounces softly like a parcel being delivered |
-| `paintbrush` | sway | wiggle | `palette`, `pencil` | sweeps gently like it's painting a stroke |
-| `palette` | rock | jelly | `paintbrush`, `palette@solid` | sways softly like a palette in an artist's hand |
-| `palm-tree` | sway | sway | `palm-tree@solid`, `sun` | sways in a warm island breeze |
-| `panel-bottom` | nudge | nudge | `panel-right`, `layout-list`, `panel-bottom@solid` | eases down toward its bottom pane like a sheet rising into view |
-| `panel-left-close` | nudge | nudge | `panel-left-open`, `sidebar`, `chevron-left` | pulls left to fold the sidebar away |
-| `panel-left-open` | nudge | nudge | `panel-left-close`, `sidebar`, `chevron-right` | pushes right to slide the sidebar open |
-| `panel-right` | nudge | nudge | `sidebar`, `columns`, `panel-right@solid` | eases toward its right pane like a details drawer sliding in |
-| `paperclip` | sway | wiggle | `link`, `check` | sways like a clip on a page, wiggles to attach |
-| `parking` | pulse | pop | `car`, `map-pin`, `parking@solid` | pulses softly like a sign showing a free space |
-| `party-popper` | rock | tada | `party-popper@solid`, `gift` | rocks with excitement, then pops a celebration when you point at it |
-| `passport` | float | flip | `id-card`, `globe` | flips open at the border, then rests ready to travel |
-| `paste` | float | bounce | `check`, `clipboard` | floats gently, the page lands with a bounce on hover |
-| `pause` | breathe | pop | `play`, `stop` | bars breathe gently while playback rests |
-| `paw-print` | bounce | pop | `paw-print@solid`, `heart` | pads along softly like a pet taking a step |
+| `mail-check` | pulse | nod | `mail`, `mail-open`, `mail-check@solid` | the envelope rests while its check pops now and then: mail delivered |
+| `mail-open` | float | pop | `mail` | an opened letter drifts gently; pops on hover |
+| `mail` | float | wiggle | `mail-open`, `send`, `check` | floats like a letter on its way, wiggles when you point at it |
+| `map-pin` | float | bounce | `map-pin@solid`, `navigation` | hovers over the map, then drops and lands on its point |
+| `map` | float | jelly | `map-pin`, `route`, `compass` | the paper map flexes gently along its folds |
+| `maximize` | zoom | zoom | `minimize`, `zoom-in` | swells outward like a window going fullscreen |
+| `medal` | sway | sway | `medal@solid`, `trophy`, `award` | swings from its ribbon, then swings high when awarded |
+| `megaphone` | pulse | nudge | `bell-ring`, `volume-off` | pumps out an announcement, kicks back when you shout |
+| `meh` | pulse | tilt | `smile`, `frown`, `meh@solid` | glances blankly side to side, then gives a little shrug |
+| `menu` | pulse | jelly | `close`, `sidebar` | bars swell quietly, then wobble ready to open navigation |
+| `message-circle-more` | pulse | jelly | `message-circle`, `check`, `message-circle-more@solid` | the bubble swells from its tail while the dots pulse like someone typing |
+| `message-circle` | pulse | jelly | `messages`, `message-circle@solid` | swells from its tail like a chat waiting, jiggles on new messages |
+| `message-square-text` | pulse | pop | `message-square`, `message-square-text@solid`, `check` | the bubble swells from its tail while its lines jitter like text being typed |
+| `message-square` | pulse | pop | `messages`, `message-square@solid`, `check` | swells from its tail like a comment waiting, pops on hover |
+| `messages` | float | jelly | `message-circle`, `message-square` | two bubbles bob in turn like a back-and-forth chat |
+| `microphone-off` | float | shake | `microphone` | the mic rests quietly as the slash strikes it out: you are muted |
+| `microphone` | pulse | pop | `microphone-off`, `stop`, `microphone@solid` | the capsule pulses with your voice on a steady stand |
+| `microscope` | pulse | nod | `microscope@solid` | the eyepiece tube slides down to focus on the sample |
+| `minimize` | pop | pop | `maximize`, `zoom-out` | snaps inward now and then like a window leaving fullscreen |
+| `minus-circle` | pulse | pop | `plus-circle`, `x-circle`, `minus-circle@solid` | the bar swells inside a steady ring, pops when you remove an item |
+| `minus` | pulse | jelly | `plus` | pulses softly, squashes when something is taken away |
+| `monitor` | glow | zoom | `laptop`, `tv`, `smartphone`, `monitor@solid` | its screen glows softly like a display that is on |
+| `moon` | breathe | tilt | `sun`, `moon@solid` | glows softly in a calm night sky, rocks on its crescent when touched |
+| `more-horizontal` | pulse | jelly | `more-vertical`, `close` | dots swell softly like more is waiting |
+| `more-vertical` | pulse | jelly | `more-horizontal`, `close` | dots swell softly like more options are waiting |
+| `motorcycle` | float | tilt | `car`, `truck`, `motorcycle@solid` | idles with a light engine purr, pops a wheelie on hover |
+| `mountain` | pulse | pop | `flag` | stands calm on the horizon, its peaks rising on hover |
+| `mouse` | nod | nod | `cursor`, `keyboard`, `mouse@solid` | clicks softly now and then like a hand resting on it |
+| `move` | pulse | pop | `drag-handle` | its four heads reach outward together, ready to drag any way |
+| `music-note` | sway | bounce | `volume`, `play` | bops along to the beat from the base of the note |
+| `navigation` | nudge | pass | `map-pin`, `compass` | points ahead and edges toward where you are going |
+| `network` | pulse | nod | `router`, `server`, `globe` | links light up from the hub out to every device |
+| `newspaper` | float | nudge | `file-text`, `newspaper@solid` | floats like the fresh morning paper, slides in when you point at it |
+| `notebook` | rock | flip | `book-open`, `notepad-text`, `notebook@solid` | rocks on its spine, the spiral rings trailing, flips open on hover |
+| `notepad-text` | type | draw | `sticky-note`, `pencil`, `notepad-text@solid` | the lines jitter like notes being jotted, they write on when hovered |
+| `package-open` | pulse | jelly | `package`, `package-open@solid` | the opened box swells from its base, wobbles as you unpack it |
+| `package` | bounce | bounce | `check-circle`, `truck`, `package@solid` | hops softly like a parcel being delivered |
+| `paintbrush` | sway | wiggle | `palette`, `pencil` | sweeps from the grip like it is painting a stroke |
+| `palette` | rock | jelly | `paintbrush`, `palette@solid` | rocks in a painter's thumb hold, wobbles when picked up |
+| `palm-tree` | sway | sway | `palm-tree@solid`, `sun` | the palm sways in a warm breeze on its little island |
+| `panel-bottom` | nudge | nudge | `panel-right`, `layout-list`, `panel-bottom@solid` | its bottom sheet eases up into view |
+| `panel-left-close` | nudge | nudge | `panel-left-open`, `sidebar`, `chevron-left` | the arrow pulls left to fold the sidebar away, the frame stays put |
+| `panel-left-open` | nudge | nudge | `panel-left-close`, `sidebar`, `chevron-right` | the arrow pushes right to slide the sidebar open, the frame stays put |
+| `panel-right` | nudge | nudge | `sidebar`, `columns`, `panel-right@solid` | its details pane eases in from the right like a drawer |
+| `paperclip` | sway | wiggle | `link`, `check` | hangs from its grip and sways, wiggles as it snaps onto a page |
+| `parking` | glow | pop | `car`, `map-pin`, `parking@solid` | sign glows softly while the P pulses like a free space |
+| `party-popper` | rock | tada | `party-popper@solid`, `gift` | rocks with excitement while confetti bursts from the cone |
+| `passport` | float | pop | `id-card`, `globe` | floats ready to travel, pops like a fresh stamp on hover |
+| `paste` | float | bounce | `check`, `clipboard` | the page hovers over the board, lands with a bounce on hover |
+| `pause` | pulse | pop | `play`, `stop` | the bars pulse slowly, holding their place while playback rests |
+| `paw-print` | nod | nod | `paw-print@solid`, `heart` | presses down in a soft step, toes landing a beat after the pad |
 | `pen-tool` | sway | draw | `pencil` | the nib sways at its point, then draws a curve on hover |
-| `pencil` | sway | wiggle | `eraser`, `check` | sways at its tip like it is about to write |
-| `percent` | pulse | spin-once | `tag`, `dollar-sign` | pulses like a sale badge, turns on hover |
-| `person-running` | float | nudge | `person-running@solid`, `timer`, `trophy` | bobs along at a steady jog, dashes forward on hover |
-| `phone-call` | ring | wiggle | `phone-off`, `phone` | rings like an incoming call |
-| `phone-incoming` | ring | nudge | `phone-call`, `phone-off`, `phone-missed` | rings gently like a call coming in, the arrow dips in on hover |
-| `phone-missed` | pulse | shake | `phone-outgoing`, `phone-call` | pulses softly like a missed call waiting, shakes no on hover |
+| `pencil` | sway | wiggle | `eraser`, `check` | sways on its tip like it is about to write, scribbles on hover |
+| `percent` | pulse | pop | `tag`, `dollar-sign` | the two dots drift apart and back like a sale badge breathing |
+| `person-running` | float | nudge | `person-running@solid`, `timer`, `trophy` | bobs along at a steady jog, dashes ahead on hover |
+| `phone-call` | ring | ring | `phone-off`, `phone` | the handset rings while its signal waves pulse outward |
+| `phone-incoming` | ring | ring | `phone-call`, `phone-off`, `phone-missed` | rings softly while the arrow dips into the handset |
+| `phone-missed` | ring | shake | `phone-outgoing`, `phone-call` | rings unanswered while the missed-call mark pulses for attention |
 | `phone-off` | breathe | shake | `phone`, `phone-call` | rests quietly hung up, shakes no when you hover |
-| `phone-outgoing` | nudge | nudge | `phone-call`, `phone-off` | leans out toward the arrow like a call heading out |
-| `phone` | ring | wiggle | `phone-call`, `phone-off` | rocks softly like it's ringing, rattles when you hover |
-| `picture-in-picture` | float | zoom | `maximize`, `minimize`, `monitor` | the screen gently drifts like a floating mini player |
-| `piggy-bank` | breathe | bounce | `coins`, `wallet`, `piggy-bank@solid` | swells with savings, hops when a coin goes in |
-| `pilcrow` | breathe | pop | `pilcrow@solid`, `type`, `wrap-text` | fades softly in and out like hidden marks being shown |
-| `pill` | rock | wiggle | `pill@solid` | rocks gently, then rattles like a capsule in a bottle |
-| `pin` | bounce | nudge | `pin@solid`, `map-pin` | presses in gently, like pinning a note to a board |
-| `pizza` | rock | jelly | `pizza@solid`, `burger` | the slice tips gently from its point, then wobbles cheesily |
-| `plane-landing` | nudge | bounce | `plane-takeoff`, `plane` | glides down toward the runway and touches down |
-| `plane-takeoff` | nudge | pass | `plane-landing`, `plane` | climbs away from the runway on departure |
-| `plane` | float | pass | `send` | cruises through the air and takes off on hover |
-| `play` | pulse | nudge | `pause`, `stop` | pulses forward, ready to start playing |
-| `plug` | nudge | nudge | `zap`, `battery-charging`, `puzzle-piece`, `plug@solid` | pushes up like it is plugging into the socket |
-| `plus-circle` | breathe | pop | `minus-circle`, `check-circle`, `x-circle`, `plus-circle@solid` | swells softly, inviting you to add an item |
-| `plus` | pulse | pop | `minus`, `close`, `check` | pops forward, ready to add something new |
-| `podcast` | pulse | pop | `microphone`, `headphones`, `podcast@solid` | pulses like a show broadcasting live |
-| `pound-sterling` | flip | tada | `euro`, `dollar-sign`, `indian-rupee`, `coins` | spins like a pound coin, money changing hands |
-| `power` | glow | pop | `power@solid`, `toggle`, `check` | glows like a device switching on |
-| `presentation` | draw | draw |  | the chart on the board draws itself like a live pitch |
-| `printer` | type | nod | `file-text`, `check`, `printer@solid` | chugs gently like a page is printing |
-| `puzzle-piece` | float | nudge | `puzzle-piece@solid` | floats, then snaps into place like a fitting piece |
-| `qr-code` | breathe | zoom | `check`, `barcode`, `qr-code@solid` | glows softly, ready to be scanned |
+| `phone-outgoing` | ring | ring | `phone-call`, `phone-off` | handset buzzes softly while the arrow shoots out, a call heading out |
+| `phone` | ring | wiggle | `phone-call`, `phone-off` | rattles softly like it is ringing, jiggles hard on hover |
+| `picture-in-picture` | pulse | pop | `maximize`, `minimize`, `monitor` | the screen stays put while the mini player floats in its corner |
+| `piggy-bank` | pulse | pop | `coins`, `wallet`, `piggy-bank@solid` | swells with savings and blinks now and then; pops as a coin goes in |
+| `pilcrow` | pulse | fill | `pilcrow@solid`, `type`, `wrap-text` | rests while its second stem fades in, like hidden marks being shown |
+| `pill` | rock | shake | `pill@solid` | rocks gently, then rattles like a capsule in a bottle |
+| `pin` | nudge | nudge | `pin@solid`, `map-pin` | the head presses down its needle, like pinning a note to a board |
+| `pizza` | rock | jelly | `pizza@solid`, `burger` | the slice droops from the crust, then wobbles cheesily |
+| `plane-landing` | nudge | bounce | `plane-takeoff`, `plane` | glides down onto the runway; the runway stays put, touches down on hover |
+| `plane-takeoff` | nudge | pass | `plane-landing`, `plane` | climbs away on departure while the runway streams below |
+| `plane` | float | pass | `send` | cruises on steady air and takes off on hover |
+| `play` | nudge | nudge | `pause`, `stop`, `play@solid` | leans forward, ready to start playing |
+| `plug` | nudge | nudge | `zap`, `battery-charging`, `puzzle-piece`, `plug@solid` | pushes up into the socket and eases back out |
+| `plus-circle` | pulse | pop | `minus-circle`, `check-circle`, `x-circle`, `plus-circle@solid` | the plus pulses inside a steady ring, inviting you to add an item |
+| `plus` | pulse | pop | `minus`, `close`, `check` | pulses softly, pops forward, ready to add something new |
+| `podcast` | pulse | pop | `microphone`, `headphones`, `podcast@solid` | broadcast waves ripple out from the mic like a live show |
+| `pound-sterling` | flip | flip | `euro`, `dollar-sign`, `indian-rupee`, `coins` | flips like a pound coin now and then, its bar a beat behind |
+| `power` | glow | pop | `power@solid`, `toggle`, `check` | glows softly like a device that is on; pops like a press |
+| `presentation` | draw | draw |  | the board appears, then the chart on it draws itself like a pitch |
+| `printer` | type | nod | `file-text`, `check`, `printer@solid` | hums while the page feeds out of the tray |
+| `puzzle-piece` | float | nudge | `puzzle-piece@solid` | floats, then snaps sideways into place like a fitting piece |
+| `qr-code` | pulse | fill | `check`, `barcode`, `qr-code@solid` | the data modules shimmer as if being read; scans on hover |
 | `quote` | float | tilt | `message-square`, `message-circle` | floats gently like a cited line of speech |
-| `rabbit` | bounce | bounce | `turtle`, `rabbit@solid`, `egg` | hops up and down like a bouncy bunny |
-| `radio` | pulse | wiggle | `music-note`, `podcast`, `radio@solid` | thumps gently like music playing from its speaker |
-| `rainbow` | breathe | draw | `cloud-rain`, `rainbow@solid` | glows softly after the rain, arcs draw on when touched |
-| `receipt` | float | draw | `check`, `file-text`, `receipt@solid` | floats gently, prints its lines on hover |
-| `redo` | nudge | nudge | `undo` | leans forward, stepping the last action ahead again |
-| `refresh` | spin | spin-once | `check`, `loader` | spins around to reload, one full turn on hover |
-| `refrigerator` | breathe | shake | `snowflake`, `thermometer`, `refrigerator@solid` | hums quietly like a fridge keeping food cold |
-| `remove-formatting` | breathe | shake | `type`, `eraser`, `bold` | shakes off its styling, back to plain text |
-| `repeat-1` | spin | spin-once | `repeat`, `shuffle` | turns around and around like a song on repeat |
-| `repeat` | spin | spin-once | `shuffle` | turns around again, playing on repeat |
-| `reply-all` | nudge | nudge | `reply`, `forward`, `check` | sweeps back to the left like an answer sent to everyone |
-| `reply` | nudge | nudge | `send`, `check` | swoops back to the left like an answer heading home |
+| `rabbit` | bounce | bounce | `turtle`, `rabbit@solid`, `egg` | hops up and down like a bouncy bunny, with a big hop on hover |
+| `radio` | pulse | wiggle | `music-note`, `podcast`, `radio@solid` | bops on the table, its speaker and antenna following the music |
+| `rainbow` | breathe | draw | `cloud-rain`, `rainbow@solid` | bands glow in a soft ripple after the rain, arcs draw on when touched |
+| `receipt` | pulse | nudge | `check`, `file-text`, `receipt@solid` | the lines print in on a steady slip; feeds out on hover |
+| `redo` | nudge | nudge | `undo` | the arrowhead leads the curve forward, stepping the action ahead |
+| `refresh` | spin-once | spin-once | `check`, `loader` | turns once to reload, then rests; a quick spin on hover |
+| `refrigerator` | pulse | jelly | `snowflake`, `thermometer`, `refrigerator@solid` | stands steady with a quiet hum like a fridge keeping food cold |
+| `remove-formatting` | float | shake | `type`, `eraser`, `bold` | the T stays calm while the little x scrubs its styling away |
+| `repeat-1` | spin-once | spin-once | `repeat`, `shuffle` | the arrows go round once more while the 1 stays put |
+| `repeat` | spin-once | spin-once | `repeat-1`, `shuffle` | goes round once more, then rests, like a track on repeat |
+| `reply-all` | nudge | nudge | `reply`, `forward`, `check` | arrowheads lead back to the left, the tail follows: reply to all |
+| `reply` | nudge | nudge | `send`, `check` | the arrowhead reaches back to the left, the tail following |
 | `rewind` | nudge | pass | `fast-forward`, `skip-back` | rushes back like scrubbing a video backward |
 | `rocket` | nudge | pass | `rocket@solid` | hums on the launchpad, then blasts off up and away |
-| `rotate-ccw` | rock | rock | `rotate-cw`, `undo` | rocks back and forth to undo the last turn |
-| `rotate-cw` | spin | spin-once | `rotate-ccw`, `redo` | turns clockwise, one full spin on hover |
-| `route` | draw | draw | `map-pin`, `map` | traces the path from start to finish |
-| `router` | fill | jelly | `wifi`, `wifi-off`, `network` | status lights blink as the internet comes and goes |
-| `rss` | fill | pulse | `wifi`, `bell-ring` | broadcasts waves outward like a live feed |
-| `ruler` | nudge | nudge |  | slides along its edge like it's measuring |
-| `salad` | sway | wiggle | `salad@solid`, `soup`, `leaf` | the leafy bowl sways fresh, then gets a quick toss |
-| `save` | breathe | nod | `check`, `save@solid` | presses down like a save button being committed |
-| `scale` | rock | tilt | `scale@solid` | rocks its beam gently like weighing two options |
-| `scan-face` | pulse | zoom | `user-check`, `shield-check`, `smile` | pulses gently like a face scan in progress |
-| `school` | sway | tada |  | the flag flutters gently over the school |
-| `scissors` | nudge | wiggle | `paste` | snips about the blade pivot, cutting forward |
-| `scroll-text` | float | zoom | `file-text`, `scroll-text@solid` | floats like an old parchment, unrolling its message |
-| `search` | orbit | tilt | `close`, `zoom-in` | lens tilts and scans as if looking for something |
-| `send` | nudge | pass | `check`, `mail` | flies off along its path like a message being sent |
-| `server` | flicker | jelly | `database`, `cloud`, `cpu` | blinks its status lights like a busy server |
+| `rotate-ccw` | tilt | tilt | `rotate-cw`, `undo` | leans back counter-clockwise, like undoing a turn |
+| `rotate-cw` | spin-once | spin-once | `rotate-ccw`, `redo` | turns once clockwise, then rests |
+| `route` | draw | draw | `map-pin`, `map` | traces the path between its two stops |
+| `router` | pulse | jelly | `wifi`, `wifi-off`, `network` | antennas and status lights blink while the box sits steady |
+| `rss` | pulse | pulse | `wifi`, `bell-ring` | the source dot pulses and the feed waves light up after it |
+| `ruler` | nudge | nudge |  | slides along its edge like it is measuring |
+| `salad` | pulse | jelly | `salad@solid`, `soup`, `leaf` | the leaves rustle fresh in a steady bowl, tossed on hover |
+| `save` | nod | nod | `check`, `save@solid` | presses down to commit, the label settling a beat later |
+| `scale` | rock | rock | `scale@solid` | the beam weighs two options, pans swinging a beat behind |
+| `scan-face` | pulse | pop | `user-check`, `shield-check`, `smile` | scan corners focus in and out; the face nods once recognised |
+| `school` | pulse | sway |  | stands firm while the flag on its roof flutters in the breeze |
+| `scissors` | rock | wiggle | `paste` | the two blades snip open and shut about their pivot |
+| `scroll-text` | float | draw | `file-text`, `scroll-text@solid` | an old parchment drifting, its text lagging, writes itself on hover |
+| `search` | orbit | tilt | `close`, `zoom-in` | lens sweeps in small circles, scanning for something |
+| `send` | nudge | pass | `check`, `mail` | edges forward along its heading, flies off and back on hover |
+| `server` | pulse | jelly | `database`, `cloud`, `cpu` | status lights blink while the rack hums along |
 | `settings` | spin | spin-once | `settings@solid`, `sliders` | turns slowly like a working gear |
-| `share-2` | nudge | nudge | `check`, `share`, `link` | the arrow lifts up out of the box, ready to share |
-| `share` | breathe | nudge | `check`, `link` | sends a little push outward to people and apps |
-| `shield-alert` | pulse | shake | `shield-check`, `shield` | pulses like a security warning that needs attention |
-| `shield-check` | glow | draw | `shield-alert`, `shield`, `shield-check@solid` | glows softly and draws its tick to show you are protected |
-| `shield-off` | flicker | shake | `shield`, `shield-check`, `shield-alert` | flickers weakly like protection that has been switched off |
-| `shield-user` | breathe | nod | `shield-check`, `user-check`, `shield-user@solid` | breathes calmly to show the account is protected |
-| `shield` | breathe | pop | `shield-check`, `shield-alert`, `shield@solid` | breathes calmly like a guard on duty |
+| `share-2` | pulse | nudge | `check`, `share`, `link` | the arrow lifts up out of the box, ready to share |
+| `share` | pulse | nudge | `check`, `link` | swells out from the source node toward people and apps |
+| `shield-alert` | pulse | pop | `shield-check`, `shield` | shield holds steady while its warning mark throbs for attention |
+| `shield-check` | pulse | pop | `shield-alert`, `shield`, `shield-check@solid` | shield rests calmly while its tick nods yes: you are protected |
+| `shield-off` | flicker | shake | `shield`, `shield-check`, `shield-alert` | shield flickers weakly, its slash twitches: protection is off |
+| `shield-user` | pulse | pop | `shield-check`, `user-check`, `shield-user@solid` | shield rests calmly while the person inside nods, verified |
+| `shield` | pulse | pop | `shield-check`, `shield-alert`, `shield@solid` | stands guard with a calm, firm swell; braces with a pop |
 | `ship` | rock | pass | `anchor`, `plane`, `ship@solid` | rocks on the waves, then sails off and back on hover |
-| `shopping-bag` | sway | ring | `shopping-bag@solid`, `check`, `shopping-cart` | swings from its handle like a bag being carried |
-| `shopping-basket` | bounce | bounce | `check`, `shopping-cart`, `shopping-bag`, `shopping-basket@solid` | hops softly as items drop into the basket |
-| `shopping-cart-plus` | nudge | pop | `check`, `shopping-cart`, `shopping-cart-plus@solid` | rolls along, then pops as an item is added |
-| `shopping-cart` | nudge | pass | `check`, `shopping-bag`, `shopping-cart@solid` | rolls forward, then zooms off on hover |
-| `shuffle` | nudge | jelly | `repeat` | arrows cross and mix things up |
-| `sidebar` | nudge | nudge | `columns`, `layout-dashboard`, `menu` | leans toward its rail like a panel sliding open |
-| `signal` | fill | fill | `wifi`, `wifi-off` | bars fill up as the signal gets stronger |
-| `signature` | draw | draw | `check`, `pen-tool` | the signature writes itself out, as if signed live |
-| `signpost` | sway | rock | `map`, `route` | sways on its post while pointing the way |
-| `siren` | glow | flicker | `bell-ring`, `shield-alert` | flashes its light like an alarm going off |
-| `skip-back` | nudge | nudge | `skip-forward`, `rewind` | jumps back to the start of the previous track |
-| `skip-forward` | nudge | pass | `skip-back`, `play` | jumps ahead to the next track |
-| `sliders` | nudge | wiggle | `settings`, `filter`, `toggle` | knobs slide side to side like a setting being tuned |
-| `smartphone` | wiggle | shake | `tablet`, `phone` | buzzes softly like a phone getting a message |
-| `smile` | blink | jelly | `heart`, `smile@solid` | blinks and grins like a happy friend |
+| `shopping-bag` | ring | ring | `shopping-bag@solid`, `check`, `shopping-cart` | swings from its handle like a bag set down, body a beat behind |
+| `shopping-basket` | bounce | bounce | `check`, `shopping-cart`, `shopping-bag`, `shopping-basket@solid` | hops softly as items drop in, handle and slats a beat behind |
+| `shopping-cart-plus` | pop | pop | `check`, `shopping-cart`, `shopping-cart-plus@solid` | pops now and then like an item just added to the cart |
+| `shopping-cart` | nudge | pass | `shopping-cart-plus`, `check`, `shopping-bag`, `shopping-cart@solid` | rolls forward and back; zooms off on hover |
+| `shuffle` | nudge | nudge | `repeat` | the arrowheads push ahead as the tracks cross and mix |
+| `sidebar` | nudge | nudge | `columns`, `layout-dashboard`, `menu` | leans toward its rail like a side panel sliding open |
+| `signal` | fill | fill | `wifi`, `wifi-off` | bars fill up from the base as the signal gets stronger |
+| `signature` | draw | draw | `check`, `pen-tool` | the signature writes itself out above a steady line |
+| `signpost` | sway | wiggle | `map`, `route` | leans gently in the breeze from its foot as one post, wiggles on hover |
+| `siren` | glow | pop | `bell-ring`, `shield-alert` | dome glows like a flashing light while its rays pulse outward |
+| `skip-back` | nudge | nudge | `skip-forward`, `rewind` | the arrow knocks back against the bar: previous track |
+| `skip-forward` | nudge | pass | `skip-back`, `play` | the arrow bumps into the bar: on to the next track |
+| `sliders` | nudge | nudge | `settings`, `filter`, `toggle` | the knobs glide along their tracks like a setting being tuned |
+| `smartphone` | wiggle | shake | `tablet`, `phone` | buzzes softly like a message just came in |
+| `smile` | pulse | jelly | `heart`, `smile@solid` | squints a happy blink now and then, wobbles with joy on hover |
 | `snowflake` | spin | spin-once | `sun`, `cloud-snow` | turns slowly like a snowflake drifting down |
-| `sofa` | breathe | jelly | `bed`, `sofa@solid`, `home` | sinks softly like someone just sat down to relax |
-| `sort` | nudge | nudge | `chevrons-up-down`, `filter` | nudges downward as the list reorders |
-| `soup` | breathe | jelly | `soup@solid`, `salad`, `cooking-pot` | a warm bowl breathes out steam, then lifts like it is served |
-| `sparkles` | twinkle | twinkle | `wand`, `sparkles@solid` | twinkles like a fresh bit of magic |
-| `speaker` | beat | pulse | `volume-off`, `music-note`, `volume` | thumps gently to the beat, like music is playing |
-| `sprout` | sway | zoom | `flower`, `leaf`, `sprout@solid` | sways from the soil and springs up as it grows |
-| `square-minus` | breathe | pop | `square-plus`, `square`, `minus` | presses in gently, ready to remove or collapse |
-| `square-plus` | pulse | pop | `square-minus`, `square-x`, `plus` | pops forward, ready to add a new item |
-| `square-x` | breathe | shake | `square-plus`, `square`, `close` | shakes its head no, ready to close or cancel |
-| `square` | pulse | pop | `check-square`, `square@solid`, `stop`, `circle` | pulses softly like a selectable box |
-| `star-half` | twinkle | pop | `star@solid`, `star` | twinkles softly, halfway to a full rating |
+| `sofa` | jelly | jelly | `bed`, `sofa@solid`, `home` | cushions squish softly now and then, like someone sinking in |
+| `sort` | nudge | nudge | `chevrons-up-down`, `filter` | the arrow slides down past the rows as the list reorders |
+| `soup` | pulse | jelly | `soup@solid`, `salad`, `cooking-pot` | steam rises from a warm bowl, then the bowl is served |
+| `sparkles` | twinkle | twinkle | `wand`, `sparkles@solid` | the big star glints while the small ones twinkle in turn |
+| `speaker` | pulse | jelly | `volume-off`, `music-note`, `volume` | the cone thumps to the beat while the cabinet stays put |
+| `sprout` | sway | pop | `flower`, `leaf`, `sprout@solid` | sways from the soil and pops up as it grows |
+| `square-minus` | pulse | jelly | `square-plus`, `square`, `minus` | the minus squashes like a fold, ready to collapse |
+| `square-plus` | pulse | pop | `square-minus`, `square-x`, `plus` | the plus swells inside a calm box, ready to add |
+| `square-x` | pulse | shake | `square-plus`, `square`, `close` | the X rocks gently in its box, shakes no on hover |
+| `square` | float | pop | `check-square`, `square@solid`, `stop`, `circle` | floats calmly like a selectable box, pops when ticked |
+| `star-half` | twinkle | flip | `star@solid`, `star` | twinkles softly, then turns over like a rating being set |
 | `star` | twinkle | pop | `star@solid` | twinkles like a little star in the night sky |
-| `stethoscope` | sway | beat | `heart-pulse`, `stethoscope@solid` | swings from the earpieces, then thumps like it hears a heartbeat |
-| `sticky-note` | sway | wiggle | `check`, `sticky-note@solid` | flutters from its top edge like a stuck-on note |
-| `stop` | pulse | pop | `play`, `pause` | pulses softly while something runs, stops with a firm tap |
-| `store` | breathe | jelly | `store@solid`, `building`, `shopping-bag` | breathes calmly like a shop open for business |
-| `strikethrough` | breathe | draw | `underline`, `bold`, `eraser` | strikes a line through text marked as done |
-| `subscript` | nudge | bounce | `superscript`, `type` | dips down below the line, like the 2 in H2O |
-| `sun-moon` | rock | spin-once | `moon`, `sun`, `sun-moon@solid` | rocks between day and night, turns over when touched |
-| `sun` | spin | glow | `moon`, `cloud-sun`, `sun@solid` | rays turn slowly as the sun shines |
-| `sunrise` | glow | nudge | `sunset`, `sun` | warms with morning light and lifts up when touched |
-| `sunset` | glow | nudge | `sunrise`, `moon` | glows like golden hour and sinks down when touched |
-| `superscript` | float | nudge | `subscript`, `type` | lifts up above the line, like a power or footnote |
-| `swap` | flip | flip | `repeat`, `shuffle` | flips over to trade places, back and forth |
-| `syringe` | nudge | nudge | `syringe@solid`, `pill` | pushes forward along its needle like giving a shot |
-| `table` | breathe | pop | `layout-grid`, `columns`, `layout-list` | breathes gently like a grid of data refreshing |
+| `stethoscope` | sway | beat | `heart-pulse`, `stethoscope@solid` | hangs from its earpieces and swings, thumps like a heartbeat on hover |
+| `sticky-note` | sway | wiggle | `check`, `sticky-note@solid` | flutters from its sticky top edge, the peeled corner trailing |
+| `stop` | pulse | jelly | `play`, `pause` | stands by with a slow pulse, squashes like a pressed button |
+| `store` | pulse | jelly | `store@solid`, `building`, `shopping-bag` | the shop stands calm while its door and awning stripes swell in welcome |
+| `strikethrough` | nudge | nudge | `underline`, `bold`, `eraser` | the strike swipes through the letter, marking it done |
+| `subscript` | nudge | nudge | `superscript`, `type` | the small 2 dips below the line, like the 2 in H2O |
+| `sun-moon` | rock | spin-once | `moon`, `sun`, `sun-moon@solid` | rocks gently between day and night, turns over when touched |
+| `sun` | pulse | pop | `moon`, `cloud-sun`, `sun@solid` | the disc glows calmly while only the rays turn; on touch it swells, rays whirl |
+| `sunrise` | glow | glow | `sunset`, `sun` | morning light glows as the arrow climbs; the sun lifts on touch |
+| `sunset` | glow | glow | `sunrise`, `moon` | golden hour glows as the arrow sinks; the sun drops on touch |
+| `superscript` | nudge | nudge | `subscript`, `type` | the small 2 lifts above the line, like a power or footnote |
+| `swap` | spin-once | spin-once | `repeat`, `shuffle` | the two arrows circle round and trade places |
+| `syringe` | nudge | nudge | `syringe@solid`, `pill` | presses forward along its needle, plunger a beat behind, like a shot |
+| `table` | pulse | pop | `layout-grid`, `columns`, `layout-list` | swells gently like a grid of data refreshing |
 | `tablet` | float | tilt | `smartphone`, `laptop` | floats gently, then tilts like it is being picked up |
-| `tag` | sway | ring | `tag@solid`, `percent`, `check` | swings from its hole like a price tag on a shelf |
-| `target` | pulse | zoom | `crosshair`, `check-circle` | pulses like a goal in focus, then locks on |
-| `taxi` | nudge | pass | `car`, `map-pin`, `taxi@solid` | idles at the kerb, then drives off and comes back on hover |
-| `telescope` | tilt | tilt |  | scans the sky, tilting on its tripod |
+| `tag` | sway | ring | `tag@solid`, `badge-percent`, `check` | swings from its hole like a price tag on a shelf hook |
+| `target` | pulse | zoom | `crosshair`, `check-circle` | rings pulse inward like focusing on a goal, then lock on |
+| `taxi` | float | pass | `car`, `map-pin`, `taxi@solid` | idles at the kerb with a soft rumble, drives off and back on hover |
+| `telescope` | tilt | tilt |  | the tube scans the sky, tilting on a steady tripod |
 | `tennis` | rock | ring | `tennis@solid`, `trophy` | swings the racket from its handle like a forehand |
-| `tent` | sway | jelly | `mountain` | canvas sways in a light breeze at camp |
-| `terminal` | type | type | `code` | jitters like keys being typed at the prompt |
-| `text-cursor-input` | type | type | `type` | twitches like keystrokes landing in the field as you type |
-| `thermometer` | fill | nudge | `snowflake`, `sun` | reading rises and falls like a changing temperature |
-| `thumbs-down` | rock | nudge | `thumbs-down@solid`, `thumbs-up` | gives a little shake of disapproval |
-| `thumbs-up` | rock | nudge | `thumbs-up@solid`, `thumbs-down` | gives an approving nod and a little lift |
-| `ticket` | float | jelly | `check-circle`, `ticket@solid` | floats gently, wobbles like a ticket being punched |
-| `timer` | pulse | ring | `clock`, `alarm-clock`, `check`, `timer@solid` | pulses like a stopwatch counting down |
-| `toggle` | jelly | jelly | `toggle@solid`, `sliders` | squishes like a switch being flipped |
-| `toilet` | breathe | jelly | `bath`, `droplet`, `toilet@solid` | wobbles softly on its base, like a flush just finished |
-| `tooth` | twinkle | jelly | `smile`, `sparkles`, `tooth@solid` | sparkles like a freshly cleaned tooth |
-| `traffic-cone` | rock | wiggle | `alert-triangle`, `ban`, `traffic-cone@solid` | wobbles on its base, a calm under-construction sign |
-| `train` | shake | zoom | `bus`, `plane`, `train@solid` | rumbles gently on the rails, then pulls into the station on hover |
-| `trash` | rock | wiggle | `check`, `trash@solid` | rocks on its base, then wiggles like it is being emptied |
-| `tree-pine` | sway | sway | `tree-pine@solid` | sways gently from its trunk like a pine in the wind |
-| `trending-down` | nudge | draw | `trending-up` | line dips down and to the right, showing a drop |
-| `trending-up` | nudge | draw | `trending-down` | line climbs up and to the right, showing growth |
-| `triangle` | breathe | spin-once | `play`, `triangle@solid` | breathes calmly, then spins round on its centre |
+| `tent` | sway | jelly | `mountain` | canvas sways in a light breeze while the door flap flutters |
+| `terminal` | pulse | pop | `code` | window rests while the prompt and cursor tick like typing |
+| `text-cursor-input` | pulse | type | `type` | the cursor blinks in a still field, then keystrokes land on hover |
+| `thermometer` | pulse | nudge | `snowflake`, `sun` | bulb warms while the scale lights up; the reading jumps on touch |
+| `thumbs-down` | rock | nudge | `thumbs-down@solid`, `thumbs-up` | the hand dips from the wrist in quiet disapproval |
+| `thumbs-up` | rock | nudge | `thumbs-up@solid`, `thumbs-down` | the hand rocks from the wrist, then lifts in approval |
+| `ticket` | float | jelly | `check-circle`, `ticket@solid` | floats like a ticket in hand, its tear line pulsing; punched on hover |
+| `timer` | pulse | nod | `clock`, `alarm-clock`, `check`, `timer@solid` | counts down with a steady beat, the crown clicks to start |
+| `toggle` | jelly | jelly | `toggle@solid`, `sliders` | the knob slides across the track like a switch being flipped |
+| `toilet` | jelly | jelly | `bath`, `droplet`, `toilet@solid` | wobbles softly on its base, like a flush just finished |
+| `tooth` | glow | jelly | `smile`, `sparkles`, `tooth@solid` | gleams like a freshly brushed tooth, wobbles when tapped |
+| `traffic-cone` | jelly | jelly | `alert-triangle`, `ban`, `traffic-cone@solid` | wobbles on its base now and then, jiggles when bumped |
+| `train` | float | zoom | `bus`, `plane`, `train@solid` | chugs gently on the rails, pulls into the station on hover |
+| `trash` | rock | wiggle | `check`, `trash@solid` | rocks on its base, then wobbles as it is filled |
+| `tree-pine` | sway | sway | `tree-pine@solid` | the pine bends gently in the wind over a steady trunk |
+| `trending-down` | nudge | nudge | `trending-up` | line dips down and right, its arrowhead following through |
+| `trending-up` | nudge | nudge | `trending-down` | line climbs up and right, its arrowhead following through |
+| `triangle` | float | nudge | `play`, `triangle@solid` | floats calmly, then nudges up like a rising delta |
 | `trophy` | glow | tada | `trophy@solid`, `award` | shines with pride, then celebrates a win |
-| `truck` | nudge | pass | `package`, `check-circle`, `map-pin` | rolls along the road, drives off on hover |
-| `turtle` | rock | nudge | `rabbit`, `turtle@solid` | plods along slowly and steadily, side to side |
-| `tv` | flicker | jelly | `monitor`, `film` | screen flickers softly like a TV that is on |
-| `type` | type | type | `heading`, `keyboard`, `bold` | jitters softly like text being typed |
-| `umbrella` | sway | jelly | `cloud-rain`, `umbrella@solid` | sways gently from the handle as if held in the rain |
-| `underline` | float | draw | `strikethrough`, `italic`, `bold` | draws its underline beneath the letter |
-| `undo` | nudge | nudge | `redo` | leans back, stepping the last action back |
-| `unlink` | breathe | shake | `link` | shudders as the two links come apart |
-| `unlock` | float | pop | `lock`, `key` | floats gently with its shackle open |
-| `upload` | rise | nudge | `check`, `download`, `cloud-upload` | lifts upward, sending a file out of the tray |
+| `truck` | bounce | pass | `package`, `check-circle`, `map-pin` | rumbles over bumps in the road; drives off on hover |
+| `turtle` | rock | nudge | `rabbit`, `turtle@solid` | plods slowly side to side, bobbing its head as it goes |
+| `tv` | flicker | jelly | `monitor`, `film` | screen glows softly while the antenna ears jiggle for signal |
+| `type` | type | type | `heading`, `keyboard`, `bold` | taps like a key being typed, its foot serif landing a beat later |
+| `umbrella` | sway | jelly | `cloud-rain`, `umbrella@solid` | sways gently from the hand as if held in the rain, pops open on touch |
+| `underline` | float | nod | `strikethrough`, `italic`, `bold` | the letter bobs while its underline swells beneath it |
+| `undo` | nudge | nudge | `redo` | steps back, the arrowhead leading the way |
+| `unlink` | pulse | shake | `link` | the links hold apart while the break marks spark |
+| `unlock` | float | pop | `lock`, `key` | floats free with its shackle open, unlocked; pops on hover |
+| `upload` | nudge | nudge | `check`, `download`, `cloud-upload` | the arrow lifts out of the tray, sending a file up |
 | `usb` | nudge | nudge | `plug`, `check` | plugs in: slides up into the port and back |
-| `user-check` | breathe | nod | `user`, `user-x`, `user-minus` | nods yes like a member just approved |
-| `user-circle` | breathe | pop | `user`, `log-out` | breathes softly like an avatar waiting for you |
-| `user-cog` | breathe | wiggle | `settings`, `user`, `user-check` | the little gear turns as if settings are being adjusted |
-| `user-minus` | breathe | shake | `user-plus`, `user` | shakes off a member like an unfollow |
-| `user-pen` | wiggle | wiggle | `user-check`, `pencil`, `user` | the pen scribbles as if profile details are being edited |
-| `user-plus` | pulse | pop | `user-check`, `user-minus`, `users` | pops in like a new friend joining |
-| `user-search` | tilt | tilt | `user-check`, `search`, `users` | leans in with the lens, looking for someone |
-| `user-x` | breathe | shake | `user-check`, `user` | shakes no like access was refused |
-| `user` | breathe | nod | `user-check`, `user-plus`, `user-circle`, `users` | nods hello like a person saying hi |
-| `users` | sway | jelly | `user`, `user-plus` | sways together like a friendly group |
-| `utensils` | rock | wiggle | `utensils@solid`, `chef-hat` | fork and knife rock gently, ready for the next meal |
-| `video-call` | pulse | jelly | `video-camera`, `phone`, `phone-off` | pulses gently like a call that is live |
-| `video-camera` | pulse | tilt | `camera`, `video-call` | records with a steady pulse like a live camera |
-| `video-off` | breathe | shake | `video-camera`, `eye-off`, `microphone-off` | dims quietly while the camera is off |
-| `volleyball` | spin | nudge | `volleyball@solid`, `trophy` | spins slowly through the air, pops up like a bump |
-| `volume-1` | fill | pulse | `volume`, `volume-off` | a soft sound wave hums out of the speaker |
-| `volume-off` | breathe | shake | `volume` | sits quietly muted, shakes its head when touched |
-| `volume` | fill | pulse | `volume-off` | sound waves swell out from the speaker |
-| `wallet` | breathe | pop | `wallet@solid`, `credit-card`, `coins` | breathes calmly, pops open on hover |
-| `wand` | sway | wiggle | `sparkles`, `wand@solid` | waves from the handle to cast a sparkle |
-| `warehouse` | breathe | jelly | `store`, `package`, `warehouse@solid` | breathes slowly like a busy storage depot |
-| `washing-machine` | type | shake | `droplet`, `check`, `washing-machine@solid` | rumbles on its feet like a wash cycle running |
-| `watch` | pulse | tilt | `clock`, `timer` | ticks along with each second, tilts like a glance at the wrist |
-| `webcam` | sway | zoom | `camera-off`, `video-off`, `video-camera` | looks around on its stand, ready for a video call |
-| `webhook` | spin | spin-once | `link` | slowly circles its three hooks like events flowing round |
-| `wifi-off` | flicker | shake | `wifi`, `signal` | flickers like a connection that keeps dropping |
+| `user-check` | float | nod | `user`, `user-x`, `user-minus` | person rests while the check pops now and then: approved |
+| `user-circle` | float | nod | `user`, `log-out` | avatar floats softly as one piece, nods hello on hover |
+| `user-cog` | float | nod | `settings`, `user`, `user-check` | person floats calmly while only the gear turns slowly: account settings |
+| `user-minus` | float | shake | `user-plus`, `user` | person rests while the minus slides away: member removed |
+| `user-pen` | pulse | nod | `user-check`, `pencil`, `user` | the pen scribbles beside a calm profile, editing its details |
+| `user-plus` | float | pop | `user-check`, `user-minus`, `users` | person rests while the plus pops like an invite, new friend |
+| `user-search` | pulse | pop | `user-check`, `search`, `users` | the lens circles, scanning for someone; sweeps once on hover |
+| `user-x` | float | shake | `user-check`, `user` | person rests while the X twitches no, shakes no on hover |
+| `user` | float | nod | `user-check`, `user-plus`, `user-circle`, `users` | floats calmly like someone present, nods hello on hover |
+| `users` | float | nod | `user`, `user-plus` | the front person breathes and the one behind nods along, a team |
+| `utensils` | rock | rock | `utensils@solid`, `chef-hat` | fork and knife lean in turn, then clink together, ready for the meal |
+| `video-call` | pulse | jelly | `video-camera`, `phone`, `phone-off` | pulses gently like a live call, bounces when you join |
+| `video-camera` | pulse | tilt | `camera`, `video-call` | the lens zooms in and out while the camera rolls |
+| `video-off` | breathe | shake | `video-camera`, `eye-off`, `microphone-off` | dims quietly while the camera is off, shakes no when tapped |
+| `volleyball` | spin | nudge | `volleyball@solid`, `trophy` | turns slowly through the air, pops up like a bump on hover |
+| `volume-1` | pulse | pulse | `volume`, `volume-off` | a soft sound wave hums out of the speaker |
+| `volume-off` | breathe | shake | `volume`, `volume-1` | sits quietly muted, shakes its head when touched |
+| `volume` | pulse | pulse | `volume-off`, `volume-1` | the speaker thumps and its sound waves swell out |
+| `wallet` | pulse | pop | `wallet@solid`, `credit-card`, `coins` | rests calmly while its clasp tab eases open; pops on hover |
+| `wand` | sway | wiggle | `sparkles`, `wand@solid` | waves from the handle while its sparkles twinkle |
+| `warehouse` | pulse | jelly | `store`, `package`, `warehouse@solid` | the depot stands firm while its roller door eases up and down |
+| `washing-machine` | type | shake | `droplet`, `check`, `washing-machine@solid` | rumbles on its feet while the drum tumbles round |
+| `watch` | pulse | tilt | `clock`, `timer` | hands tick round the dial; tilts like a glance at the wrist |
+| `webcam` | sway | zoom | `camera-off`, `video-off`, `video-camera` | looks around on its stand; the lens focuses when you look |
+| `webhook` | spin | spin-once | `link` | slowly circles its three hooks like events passing round |
+| `wifi-off` | flicker | shake | `wifi`, `signal` | arcs flicker like a dropping connection while the slash holds |
 | `wifi` | fill | fill | `wifi-off`, `signal` | arcs light up from the dot like a signal reaching you |
-| `wind` | nudge | pass | `cloud`, `leaf` | streams to the right like a passing breeze |
-| `wine` | rock | tilt |  | swirls gently on its stem, then tips for a toast |
-| `wrap-text` | nudge | draw | `align-left`, `corner-down-left`, `pilcrow` | rolls the long line around and down onto the next row |
-| `wrench` | rock | wiggle | `settings`, `hammer` | turns about the bolt in its jaw like tightening a nut |
-| `x-circle` | pulse | shake | `check-circle`, `alert-circle` | shakes no to say something went wrong |
-| `zap` | flicker | flicker | `zap@solid`, `battery-charging` | flickers with crackling electric energy |
-| `zoom-in` | zoom | zoom | `zoom-out`, `search`, `maximize` | magnifies, as if zooming into the details |
-| `zoom-out` | zoom | zoom | `zoom-in`, `search`, `minimize` | pulls back, as if zooming out to see more |
+| `wind` | nudge | pass | `cloud`, `leaf` | gusts stream to the right in staggered waves |
+| `wine` | rock | rock |  | swirls gently on its stem, the wine sloshing a beat behind |
+| `wrap-text` | nudge | nudge | `align-left`, `corner-down-left`, `pilcrow` | the long line bends round and settles onto the next row |
+| `wrench` | rock | tilt | `settings`, `hammer` | turns about the nut in its jaw like tightening a bolt |
+| `x-circle` | pulse | shake | `check-circle`, `alert-circle` | the X throbs in a steady ring, then shakes no: something went wrong |
+| `zap` | flicker | nudge | `zap@solid`, `battery-charging` | crackles with electric energy, then strikes down along its path |
+| `zoom-in` | zoom | zoom | `zoom-out`, `search`, `maximize` | the lens magnifies and the plus grows, zooming into the details |
+| `zoom-out` | pop | pop | `zoom-in`, `search`, `minimize` | the lens dips back, as if zooming out to see more |
 <!-- motion:end -->

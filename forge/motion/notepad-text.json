@@ -1,16 +1,10 @@
 {
   "name": "notepad-text",
-  "intent": "jitters softly like notes being typed out",
-  "loop": { "preset": "type", "amount": 0.5, "duration": 2.4 },
-  "hover": { "preset": "wiggle", "origin": [12, 4], "amount": 0.8 },
-  "alt": [
-    { "preset": "draw", "duration": 1.4 },
-    { "preset": "float", "amount": 0.5, "duration": 3 },
-    { "preset": "pop" }
-  ],
-  "swap": [
-    { "to": "sticky-note", "effect": "flip" },
-    { "to": "pencil", "effect": "rotate" },
-    { "to": "notepad-text@solid", "effect": "scale" }
-  ]
+  "intent": "the lines jitter like notes being jotted, they write on when hovered",
+  "loop": {"preset": "type", "amount": 0.25, "duration": 2.4},
+  "parts": {"A": {"preset": "type", "amount": 0.4, "duration": 2.4, "delay": 0.06}},
+  "deco": "breathe",
+  "hover": {"preset": "draw", "duration": 1.2},
+  "alt": [ {"preset": "wiggle", "origin": [12, 4], "amount": 0.7}, {"preset": "float", "amount": 0.4, "duration": 3}, {"preset": "pop"} ],
+  "swap": [ {"to": "sticky-note", "effect": "flip"}, {"to": "pencil", "effect": "rotate"}, {"to": "notepad-text@solid", "effect": "scale"} ]
 }

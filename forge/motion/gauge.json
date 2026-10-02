@@ -1,33 +1,51 @@
 {
   "name": "gauge",
-  "intent": "needle sways across the dial like a live reading",
+  "intent": "needle swings to a new reading and settles while the dial holds still",
   "loop": {
-    "preset": "rock",
+    "preset": "pulse",
     "origin": [
       12,
       14
     ],
-    "amount": 0.5,
+    "amount": 0.25,
     "duration": 3.2
   },
   "hover": {
-    "preset": "tilt",
+    "preset": "pop",
     "origin": [
       12,
       14
     ],
-    "amount": 1.3
+    "amount": 0.4
   },
-  "alt": [
-    {
-      "preset": "fill"
-    },
-    {
-      "preset": "pulse",
+  "parts": {
+    "A": {
+      "preset": "ring",
       "origin": [
         12,
         14
-      ]
+      ],
+      "amount": 1.3,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 1.3
     }
   ]
 }

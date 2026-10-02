@@ -1,22 +1,36 @@
 {
   "name": "strikethrough",
-  "intent": "strikes a line through text marked as done",
+  "intent": "the strike swipes through the letter, marking it done",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.4,
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.25,
     "duration": 3.2
   },
   "hover": {
-    "preset": "draw",
-    "duration": 0.8
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.4,
+    "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.9,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
   "alt": [
+    {
+      "preset": "draw",
+      "duration": 0.8
+    },
     {
       "preset": "shake",
       "amount": 0.4
-    },
-    {
-      "preset": "pop"
     }
   ],
   "swap": [

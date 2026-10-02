@@ -1,16 +1,24 @@
 {
   "name": "target",
-  "intent": "pulses like a goal in focus, then locks on",
+  "intent": "rings pulse inward like focusing on a goal, then lock on",
   "loop": {
     "preset": "pulse",
-    "amount": 0.6,
-    "duration": 2.2
+    "amount": 0.5,
+    "duration": 2.4
   },
   "hover": {
     "preset": "zoom",
     "amount": 0.9,
     "duration": 0.6
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.9,
+      "delay": 0.25
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "glow"
@@ -18,9 +26,6 @@
     {
       "preset": "shake",
       "amount": 0.4
-    },
-    {
-      "preset": "spin-once"
     }
   ],
   "swap": [

@@ -615,7 +615,7 @@
         if (b) { mo.swapTo = b; swapTiming(ctx, m, mo) }
         var a = WE.svgString(ctx, { size: 24, flat: true })
         var px = fo.size, fps = fo.fps
-        var seconds = Number(opts.seconds) > 0 ? Number(opts.seconds) : WM.exportDuration(mo)
+        var seconds = Number(opts.seconds) > 0 ? Number(opts.seconds) : WM.exportDuration(mo, a)
         var n = Math.max(1, Math.round(seconds * fps))
         if (n > MAX_FRAMES) throw new Error('That is ' + n + ' frames; the limit is ' + MAX_FRAMES + '. Use a lower frame rate or a shorter duration.')
         if (n * px * px > PIXEL_BUDGET) throw new Error('Too many pixels for one animation (' + n + ' frames at ' + px + ' px). Try ' + Math.floor(Math.sqrt(PIXEL_BUDGET / n)) + ' px or a lower frame rate.')
@@ -925,7 +925,7 @@
               var px = Math.max(1, Math.round(Number(opts.size) || 256))
               // measure the travel of the played motion (a hover export measures its one-shot)
               var still = Object.assign({}, mo, { trigger: mo.trigger === 'hover' ? 'once' : mo.trigger })
-              var measure = hasDom() ? padding(opts, WM, a, still, WM.exportDuration(still)) : Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
+              var measure = hasDom() ? padding(opts, WM, a, still, WM.exportDuration(still, a)) : Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
               return measure.then(function (pad) {
                 var anim = WM.animatedSvg(a, Object.assign({}, mo, { size: 24 }))
                 var out = pad || opts.background ? wrap(anim, px, pad, opts.background) : WM.animatedSvg(a, Object.assign({}, mo, { size: px }))

@@ -1,10 +1,14 @@
 {
   "name": "filter",
-  "intent": "sifts items down through the funnel",
+  "intent": "the funnel swirls gently as it sifts, then taps down",
   "loop": {
-    "preset": "drop",
-    "amount": 0.4,
-    "duration": 2.6
+    "preset": "sway",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.45,
+    "duration": 3.2
   },
   "hover": {
     "preset": "nod",
@@ -14,14 +18,11 @@
     ],
     "amount": 0.8
   },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "sway",
-      "origin": [
-        12,
-        20
-      ],
-      "amount": 0.7
+      "preset": "drop",
+      "amount": 0.4
     },
     {
       "preset": "pop"

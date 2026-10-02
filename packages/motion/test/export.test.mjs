@@ -20,12 +20,14 @@ test('animatedSvg: every preset yields one literal, scoped keyframes block (glow
   }
 })
 
-test('animatedSvg: deterministic, uses the icon spec, honours options', () => {
+test('animatedSvg: deterministic, uses the icon spec, honours options', async () => {
   assert.equal(X.animatedSvg(LINE, { name: 'bell' }), X.animatedSvg(LINE, { name: 'bell' }))
+  const spec = (await load('index.js')).motionFor('bell')
   const bell = X.animatedSvg(LINE, { name: 'bell' })
-  assert.match(bell, /-ring\{/)
-  assert.match(bell, /animation:wm\w+-ring 2\.4s linear 0s infinite both/)
-  const hover = X.animatedSvg(LINE, { name: 'bell', trigger: 'hover' })
+  assert.ok(bell.includes(`-${spec.loop.preset}{`))
+  assert.match(bell, new RegExp('animation:wm\\w+-' + spec.loop.preset + ' ' + (spec.loop.duration || 1.4) + 's linear 0s infinite both'))
+  const fixed = { name: 'x', intent: 'x', loop: { preset: 'ring', duration: 2.4 }, hover: { preset: 'ring' } }
+  const hover = X.animatedSvg(LINE, { spec: fixed, trigger: 'hover' })
   assert.match(hover, /:hover \.wm\w+-g\{animation:wm\w+-ring 1\.4s/)
   const custom = X.animatedSvg(LINE, { preset: 'spin', duration: 3, steps: 6, size: 64, color: '#f00' })
   assert.match(custom, /3s steps\(6\)/)

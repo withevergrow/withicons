@@ -1,28 +1,41 @@
 {
   "name": "user-search",
-  "intent": "leans in with the lens, looking for someone",
+  "intent": "the lens circles, scanning for someone; sweeps once on hover",
   "loop": {
-    "preset": "tilt",
+    "preset": "pulse",
     "origin": [
-      16.5,
-      16
+      7.5,
+      14
     ],
-    "amount": 0.6,
+    "amount": 0.25,
     "duration": 3.2
   },
   "hover": {
-    "preset": "tilt",
+    "preset": "pop",
     "origin": [
-      16.5,
-      16
+      7.5,
+      14
     ],
-    "amount": 1.1,
+    "amount": 0.5,
     "duration": 0.8
   },
+  "parts": {
+    "S": {
+      "preset": "orbit",
+      "amount": 0.4,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
-      "preset": "orbit",
-      "amount": 0.5
+      "preset": "tilt",
+      "origin": [
+        16.5,
+        16
+      ],
+      "amount": 0.8
     },
     {
       "preset": "zoom",

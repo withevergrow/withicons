@@ -1,17 +1,21 @@
 {
   "name": "cloud",
-  "intent": "drifts gently like a cloud in the sky",
+  "intent": "drifts calmly across the sky, squishes softly when touched",
   "loop": {
     "preset": "float",
-    "amount": 0.8,
-    "duration": 3.4
+    "amount": 0.7,
+    "duration": 3.6
   },
   "hover": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.6,
+    "preset": "jelly",
+    "origin": [
+      12,
+      19
+    ],
+    "amount": 0.7,
     "duration": 0.8
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "breathe"

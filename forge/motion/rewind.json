@@ -4,21 +4,23 @@
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.6,
-    "duration": 1.4
+    "amount": 0.45,
+    "duration": 2
   },
   "hover": {
     "preset": "pass",
     "dir": 180,
     "duration": 0.6
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pass",
       "dir": 180
     },
     {
-      "preset": "pulse"
+      "preset": "pulse",
+      "amount": 0.5
     }
   ],
   "swap": [

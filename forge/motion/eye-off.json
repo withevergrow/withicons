@@ -1,32 +1,10 @@
 {
   "name": "eye-off",
-  "intent": "blinks slowly, keeping things hidden",
-  "loop": {
-    "preset": "blink",
-    "origin": [
-      12,
-      12
-    ],
-    "duration": 5
-  },
-  "hover": {
-    "preset": "shake",
-    "amount": 0.5,
-    "duration": 0.5
-  },
-  "alt": [
-    {
-      "preset": "breathe",
-      "amount": 0.6
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "eye",
-      "effect": "fade"
-    }
-  ]
+  "intent": "rests shut while the slash taps down, keeping things hidden",
+  "loop": { "preset": "pulse", "amount": 0.3, "duration": 3.6 },
+  "hover": { "preset": "shake", "amount": 0.5, "duration": 0.5 },
+  "parts": { "S": { "preset": "pop", "amount": 0.6, "duration": 3.6, "delay": 0.12 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "blink", "origin": [12, 12] }, { "preset": "pop" }],
+  "swap": [{ "to": "eye", "effect": "fade" }]
 }

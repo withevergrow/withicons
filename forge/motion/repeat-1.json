@@ -1,8 +1,50 @@
 {
   "name": "repeat-1",
-  "intent": "turns around and around like a song on repeat",
-  "loop": { "preset": "spin", "origin": [12, 12], "duration": 5 },
-  "hover": { "preset": "spin-once", "origin": [12, 12], "duration": 0.8 },
-  "alt": [ { "preset": "flip" }, { "preset": "pop" } ],
-  "swap": [ { "to": "repeat", "effect": "fade" }, { "to": "shuffle", "effect": "flip" } ]
+  "intent": "the arrows go round once more while the 1 stays put",
+  "loop": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.7
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        11.5,
+        12
+      ],
+      "amount": 0.6,
+      "delay": 0.3
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "repeat",
+      "effect": "fade"
+    },
+    {
+      "to": "shuffle",
+      "effect": "flip"
+    }
+  ]
 }

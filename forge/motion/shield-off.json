@@ -1,8 +1,54 @@
 {
   "name": "shield-off",
-  "intent": "flickers weakly like protection that has been switched off",
-  "loop": { "preset": "flicker", "amount": 0.5, "duration": 3 },
-  "hover": { "preset": "shake", "amount": 0.7 },
-  "alt": [ { "preset": "breathe", "amount": 0.5 }, { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.6 } ],
-  "swap": [ { "to": "shield", "effect": "fade" }, { "to": "shield-check", "effect": "flip" }, { "to": "shield-alert", "effect": "scale" } ]
+  "intent": "shield flickers weakly, its slash twitches: protection is off",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.5,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.5
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield",
+      "effect": "fade"
+    },
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    },
+    {
+      "to": "shield-alert",
+      "effect": "scale"
+    }
+  ]
 }

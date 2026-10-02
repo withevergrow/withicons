@@ -1,16 +1,16 @@
 {
   "name": "plug",
-  "intent": "pushes up like it is plugging into the socket",
+  "intent": "pushes up into the socket and eases back out",
   "loop": {
     "preset": "nudge",
     "dir": 270,
-    "amount": 0.5,
-    "duration": 2.2
+    "amount": 0.4,
+    "duration": 2.4
   },
   "hover": {
     "preset": "nudge",
     "dir": 270,
-    "amount": 1,
+    "amount": 0.8,
     "duration": 0.5
   },
   "alt": [

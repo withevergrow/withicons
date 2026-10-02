@@ -71,22 +71,28 @@
   --c-sticker: #B57CFF;   --c-sticker-text: #7A3FD6;   --c-sticker-soft: #F2E8FF; /* candy lilac */
   --c-pixel: #4FAE0C;     --c-pixel-text: #3B7300;     --c-pixel-soft: #E6F5D6;   /* arcade green */
   --c-retro: #F57C12;     --c-retro-text: #AD4C00;     --c-retro-soft: #FFEBD6;   /* sunset orange */
+  /* run 7: the three studio styles (role-named palettes, --with-<style>-<role>) */
+  --c-luxe: #2B3FB8;      --c-luxe-text: #2B3FB8;      --c-luxe-soft: #F5EBD3;    /* sapphire enamel on champagne */
+  --c-bauhaus: #D62718;   --c-bauhaus-text: #B81E12;   --c-bauhaus-soft: #FCE3DF; /* Bauhaus red */
+  --c-skeuo: #5A6E86;     --c-skeuo-text: #4A5C71;     --c-skeuo-soft: #E5EAF0;   /* brushed steel */
   /* text/icon colour ON a filled style colour (AA): white on the deep ones, ink on the bright ones */
   --c-line-on: #FFFFFF; --c-solid-on: #111318; --c-duo-on: #FFFFFF; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
+  --c-luxe-on: #FFFFFF; --c-bauhaus-on: #FFFFFF; --c-skeuo-on: #FFFFFF;
   --c-duo-fill: var(--c-duo); /* kept for compatibility: violet is now deep enough (4.8:1 with white) */
   --style-on: var(--c-line-on);
   /* short aliases (library.css relies on these names) */
   --on-line: var(--c-line-on); --on-solid: var(--c-solid-on); --on-duo: var(--c-duo-on); --on-gloss: var(--c-gloss-on);
   --on-engrave: var(--c-engrave-on); --on-blueprint: var(--c-blueprint-on); --on-sketch: var(--c-sketch-on);
   --on-glass: var(--c-glass-on); --on-kawaii: var(--c-kawaii-on); --on-sticker: var(--c-sticker-on); --on-pixel: var(--c-pixel-on); --on-retro: var(--c-retro-on);
-  /* all twelve signature colours as one sweep (rings, dials, the CTA hover) */
-  --spectrum: var(--c-line), var(--c-glass), var(--c-blueprint), var(--c-sketch), var(--c-pixel), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-line);
+  --on-luxe: var(--c-luxe-on); --on-bauhaus: var(--c-bauhaus-on); --on-skeuo: var(--c-skeuo-on);
+  /* every signature colour as one hue sweep (rings, dials, the CTA hover) */
+  --spectrum: var(--c-line), var(--c-glass), var(--c-blueprint), var(--c-sketch), var(--c-pixel), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-bauhaus), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-luxe), var(--c-skeuo), var(--c-line);
   /* focus: ink ring (17:1 on paper) inside a sun halo; dark theme flips the ring to sun */
   --focus-ring: #111318; --focus-halo: var(--sun);
   /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
-     or use the helper classes .s-line … .s-retro (they also set --style-text and --style-soft) */
+     or use the helper classes .s-line … .s-skeuo (they also set --style-text and --style-soft) */
   --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft);
 
   /* legacy semantic names (kept so older CSS keeps working) */
@@ -169,9 +175,13 @@
   --c-sticker: #C292FF;   --c-sticker-text: #D4B3FF;   --c-sticker-soft: #2A1A45;
   --c-pixel: #7FDB2E;     --c-pixel-text: #A8EE6E;     --c-pixel-soft: #172E0A;
   --c-retro: #FF9A3C;     --c-retro-text: #FFB878;     --c-retro-soft: #3A2210;
+  --c-luxe: #9AA8FF;      --c-luxe-text: #C3CCFF;      --c-luxe-soft: #2A2312;
+  --c-bauhaus: #FF5A47;   --c-bauhaus-text: #FF8A7A;   --c-bauhaus-soft: #3A1310;
+  --c-skeuo: #9FB2C9;     --c-skeuo-text: #C3D2E4;     --c-skeuo-soft: #1C232D;
   --c-line-on: #111318; --c-solid-on: #111318; --c-duo-on: #111318; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
+  --c-luxe-on: #111318; --c-bauhaus-on: #111318; --c-skeuo-on: #111318;
   --c-duo-fill: var(--c-duo);
   --focus-ring: var(--sun); --focus-halo: rgba(255, 210, 63, .28);
   /* duo previews on dark grounds: a light-ink tint at 20% reads as muddy grey, so tint with the duo violet */
@@ -205,6 +215,9 @@
 .s-sticker { --style: var(--c-sticker); --style-text: var(--c-sticker-text); --style-soft: var(--c-sticker-soft); --style-on: var(--c-sticker-on); --style-fill: initial; }
 .s-pixel { --style: var(--c-pixel); --style-text: var(--c-pixel-text); --style-soft: var(--c-pixel-soft); --style-on: var(--c-pixel-on); --style-fill: initial; }
 .s-retro { --style: var(--c-retro); --style-text: var(--c-retro-text); --style-soft: var(--c-retro-soft); --style-on: var(--c-retro-on); --style-fill: initial; }
+.s-luxe { --style: var(--c-luxe); --style-text: var(--c-luxe-text); --style-soft: var(--c-luxe-soft); --style-on: var(--c-luxe-on); --style-fill: initial; }
+.s-bauhaus { --style: var(--c-bauhaus); --style-text: var(--c-bauhaus-text); --style-soft: var(--c-bauhaus-soft); --style-on: var(--c-bauhaus-on); --style-fill: initial; }
+.s-skeuo { --style: var(--c-skeuo); --style-text: var(--c-skeuo-text); --style-soft: var(--c-skeuo-soft); --style-on: var(--c-skeuo-on); --style-fill: initial; }
 
 /* ───────── base ───────── */
 *, *::before, *::after { box-sizing: border-box; }

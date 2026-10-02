@@ -3,17 +3,18 @@
   "intent": "turns slowly like a working gear",
   "loop": {
     "preset": "spin",
-    "duration": 4
+    "duration": 6
   },
   "hover": {
     "preset": "spin-once",
     "duration": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tick",
       "steps": 8,
-      "duration": 2
+      "duration": 2.4
     },
     {
       "preset": "wiggle"

@@ -1,13 +1,13 @@
 {
   "name": "coffee",
-  "intent": "steams gently like a fresh hot cup",
+  "intent": "swells softly like a fresh hot cup, then tips up for a sip",
   "loop": {
     "preset": "breathe",
     "origin": [
       9.75,
       21
     ],
-    "amount": 0.7,
+    "amount": 0.3,
     "duration": 3.4
   },
   "hover": {
@@ -17,12 +17,13 @@
       21
     ],
     "amount": 0.9,
-    "duration": 1.2
+    "duration": 1.1
   },
+  "deco": "float",
   "alt": [
     {
       "preset": "float",
-      "amount": 0.5
+      "amount": 0.4
     },
     {
       "preset": "wiggle",

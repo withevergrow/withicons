@@ -1,11 +1,44 @@
 {
   "name": "subscript",
-  "intent": "dips down below the line, like the 2 in H2O",
-  "loop": { "preset": "nudge", "dir": 90, "amount": 0.4, "duration": 2.8 },
-  "hover": { "preset": "bounce", "amount": 0.8 },
-  "alt": [ { "preset": "drop", "amount": 0.6 }, { "preset": "pop" } ],
+  "intent": "the small 2 dips below the line, like the 2 in H2O",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.3,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.9,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
   "swap": [
-    { "to": "superscript", "effect": "slide-up" },
-    { "to": "type", "effect": "fade" }
+    {
+      "to": "superscript",
+      "effect": "slide-up"
+    },
+    {
+      "to": "type",
+      "effect": "fade"
+    }
   ]
 }

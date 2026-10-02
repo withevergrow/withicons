@@ -1,8 +1,51 @@
 {
   "name": "bike",
-  "intent": "rides along the road, rolls forward when you point at it",
-  "loop": { "preset": "pass", "dir": 0, "amount": 0.8, "duration": 3 },
-  "hover": { "preset": "nudge", "dir": 0, "amount": 1.2 },
-  "alt": [ { "preset": "tilt", "origin": [5.5, 20] }, { "preset": "float", "amount": 0.4, "duration": 1.6 }, { "preset": "rock", "origin": [12, 20], "amount": 0.4 } ],
-  "swap": [ { "to": "bike@solid", "effect": "scale" }, { "to": "motorcycle", "effect": "slide-left" }, { "to": "car", "effect": "fade" } ]
+  "intent": "rolls over the road with a light bump, rides off and back on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 1
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        5.5,
+        20
+      ]
+    },
+    {
+      "preset": "float",
+      "amount": 0.4,
+      "duration": 1.6
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "bike@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "motorcycle",
+      "effect": "slide-left"
+    },
+    {
+      "to": "car",
+      "effect": "fade"
+    }
+  ]
 }

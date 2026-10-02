@@ -1,25 +1,27 @@
 {
   "name": "arrow-down",
-  "intent": "nudges down to show where it points",
+  "intent": "pushes down to show where it points",
   "loop": {
     "preset": "nudge",
     "dir": 90,
-    "amount": 0.6,
-    "duration": 1.8
+    "amount": 0.5,
+    "duration": 2.2
   },
   "hover": {
     "preset": "pass",
     "dir": 90,
     "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "drop"
+    },
     {
       "preset": "nudge",
       "dir": 90,
-      "amount": 1.4
-    },
-    {
-      "preset": "drop"
+      "amount": 1.2,
+      "duration": 0.5
     }
   ],
   "swap": [

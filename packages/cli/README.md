@@ -1,6 +1,6 @@
 # withicons
 
-**with icons** from the terminal — search 500 icons x 12 styles in plain English, print SVG, framework or animation code,
+**with icons** from the terminal — search 500 icons x 15 styles in plain English, print SVG, framework or animation code,
 and get import lines. Works offline; everything ships in the package.
 
 > Not published to npm yet — launching soon.
@@ -41,7 +41,7 @@ Options: `--style/-s`, `--format/-f` (svg, react, vue, svelte, angular, solid, h
 
 ## Colours
 
-Seven styles paint with more than one colour (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`). Every colour
+Ten styles paint with more than one colour (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`). Every colour
 is a CSS variable with a default, and `get` can set **all of them**, not just one:
 
 - `--palette <id>`: one of the palettes picked for that icon (`withicons palettes <name>` lists them).

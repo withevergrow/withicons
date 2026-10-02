@@ -104,6 +104,8 @@ console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-
 await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-pages.mjs')).href)
 // alternatives + 'free icons for…' landers (SEO/GEO) — before site-seo, which sitemaps them and lists them in llms.txt
 await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-alternatives.mjs')).href)
+// live (editable) icons pages — before site-seo, which sitemaps them (forge/DYNAMIC.md)
+if (fs.existsSync(path.join(ROOT, 'forge', 'tools', 'site-dynamic.mjs'))) await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-dynamic.mjs')).href)
 // per-icon SEO/GEO pages, hubs, sitemap, robots, llms*.txt, icons.json, OG images (content-hash cached)
 await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-seo.mjs')).href)
 console.log(`build done in ${Date.now() - t0} ms`)

@@ -1,18 +1,28 @@
 {
   "name": "undo",
-  "intent": "leans back, stepping the last action back",
+  "intent": "steps back, the arrowhead leading the way",
   "loop": {
     "preset": "nudge",
     "dir": 180,
-    "amount": 0.5,
-    "duration": 2.4
+    "amount": 0.4,
+    "duration": 2.6
   },
   "hover": {
     "preset": "nudge",
     "dir": 180,
     "amount": 1,
-    "duration": 0.6
+    "duration": 0.55
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.8,
+      "duration": 2.6,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tilt",

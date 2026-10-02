@@ -1,32 +1,9 @@
 {
   "name": "files",
-  "intent": "floats like a stack of papers, pops when picked",
-  "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "pop"
-  },
-  "alt": [
-    {
-      "preset": "nudge",
-      "dir": 315,
-      "amount": 0.5
-    },
-    {
-      "preset": "jelly"
-    }
-  ],
-  "swap": [
-    {
-      "to": "copy",
-      "effect": "fade"
-    },
-    {
-      "to": "file",
-      "effect": "slide-left"
-    }
-  ]
+  "intent": "floats like a loose stack of papers, slides along when you point at it",
+  "loop": {"preset": "float", "amount": 0.35, "duration": 3.2},
+  "hover": {"preset": "nudge", "dir": 315, "amount": 0.45, "duration": 0.6},
+  "deco": "breathe",
+  "alt": [ {"preset": "pop"}, {"preset": "jelly", "origin": [12,21.5], "amount": 0.6} ],
+  "swap": [ {"to": "copy", "effect": "fade"}, {"to": "file", "effect": "slide-left"} ]
 }

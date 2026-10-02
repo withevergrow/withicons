@@ -1,40 +1,10 @@
 {
   "name": "sticky-note",
-  "intent": "flutters from its top edge like a stuck-on note",
-  "loop": {
-    "preset": "sway",
-    "origin": [
-      12,
-      3
-    ],
-    "amount": 0.5,
-    "duration": 3.2
-  },
-  "hover": {
-    "preset": "wiggle",
-    "origin": [
-      12,
-      3
-    ],
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "float",
-      "amount": 0.5
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "check",
-      "effect": "scale"
-    },
-    {
-      "to": "sticky-note@solid",
-      "effect": "fade"
-    }
-  ]
+  "intent": "flutters from its sticky top edge, the peeled corner trailing",
+  "loop": {"preset": "sway", "origin": [12, 3], "amount": 0.4, "duration": 3.4},
+  "parts": {"A": {"preset": "sway", "origin": [12, 3], "amount": 0.55, "duration": 3.4, "delay": 0.12}},
+  "deco": "float",
+  "hover": {"preset": "wiggle", "origin": [12, 3], "amount": 0.7},
+  "alt": [ {"preset": "float", "amount": 0.4}, {"preset": "pop"} ],
+  "swap": [ {"to": "check", "effect": "scale"}, {"to": "sticky-note@solid", "effect": "fade"} ]
 }

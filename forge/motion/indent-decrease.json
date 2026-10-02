@@ -1,11 +1,45 @@
 {
   "name": "indent-decrease",
-  "intent": "pulls the lines back out, one tab to the left",
-  "loop": { "preset": "nudge", "dir": 180, "amount": 0.5, "duration": 2.6 },
-  "hover": { "preset": "nudge", "dir": 180, "amount": 1.1 },
-  "alt": [ { "preset": "pass", "dir": 180, "amount": 0.6 }, { "preset": "pop" } ],
+  "intent": "the arrow pulls the lines back out one tab to the left",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.4,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 1,
+      "duration": 2.6,
+      "delay": 0.06
+    }
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 180,
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
   "swap": [
-    { "to": "indent-increase", "effect": "slide-right" },
-    { "to": "align-left", "effect": "fade" }
+    {
+      "to": "indent-increase",
+      "effect": "slide-right"
+    },
+    {
+      "to": "align-left",
+      "effect": "fade"
+    }
   ]
 }

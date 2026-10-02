@@ -3,13 +3,14 @@
   "intent": "swells with weight like text turning bold",
   "loop": {
     "preset": "pulse",
-    "amount": 0.5,
-    "duration": 2.4
+    "amount": 0.45,
+    "duration": 2.6
   },
   "hover": {
     "preset": "pop",
     "amount": 1.2
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "jelly"

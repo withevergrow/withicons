@@ -3,12 +3,13 @@
   "intent": "draws the branch forking off the main line",
   "loop": {
     "preset": "draw",
-    "duration": 3
+    "duration": 3.2
   },
   "hover": {
     "preset": "draw",
     "duration": 1.2
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

@@ -37,16 +37,17 @@
 
   /* ───────────────────────── data ───────────────────────── */
   // the contract order (forge/CONTRACT.md); styles the data adds later sort after these, missing ones are skipped
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
   var rankOf = function (n) { var i = ORDER.indexOf(n); return i < 0 ? 99 : i }
   var STYLES = META.styles.slice().sort(function (a, b) { return rankOf(a.name) - rankOf(b.name) })
   var STYLE = {}; STYLES.forEach(function (s) { STYLE[s.name] = s })
   var SNAMES = STYLES.map(function (s) { return s.name })
-  // how the switchers group them (same three families as the home page and icon pages)
+  // how the switchers group them (same four families as the home page and icon pages)
   var GROUPS = [
     { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
-    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'], isNew: true },
+    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
+    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'], isNew: true },
   ].map(function (g) { return { id: g.id, title: g.title, isNew: g.isNew, styles: g.styles.filter(function (n) { return STYLE[n] }) } })
   SNAMES.forEach(function (n) { if (!GROUPS.some(function (g) { return g.styles.indexOf(n) >= 0 })) GROUPS[GROUPS.length - 1].styles.push(n) })
   GROUPS = GROUPS.filter(function (g) { return g.styles.length })
@@ -59,8 +60,8 @@
   CATS = CATS.filter(function (c) { return ICONS.some(function (ic) { return ic.category === c }) })
   var CAT_RANK = {}; CATS.forEach(function (c, i) { CAT_RANK[c] = i })
   var BROWSE = ICONS.slice().sort(function (a, b) { return (CAT_RANK[a.category] - CAT_RANK[b.category]) || (a.name < b.name ? -1 : 1) })
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12' }
-  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
+  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes', luxe: 'Premium layered 3D with gold trim', bauhaus: 'Pure geometry in the Bauhaus primaries', skeuo: 'Real materials, bevels and depth' }
   var sayOf = function (st) { var wi = W.WI && W.WI.styleInfo && W.WI.styleInfo[st]; return SAY[st] || (wi && wi.description && wi.description.replace(/\.$/, '')) || (STYLE[st] && STYLE[st].description) || '' }
   var INK = '#111318', PAPER = '#FBF8F3'
   var styleHex = function (st) { return HEX[st] || INK }
@@ -318,7 +319,7 @@
   var root = $('[data-lib]')
   if (!root) return
   var input = $('#lib-q'), grid = $('[data-grid]'), meta = $('[data-meta]'), empty = $('[data-empty]'), body = $('[data-body]')
-  var catNav = $('[data-cats]'), stylesEl = $('[data-styles]'), viewer = $('[data-viewer]'), vwBody = $('[data-vw-body]'), vwPanel = $('[data-vw-panel]')
+  var catNav = $('[data-cats]'), stylesEl = $('[data-styles]'), stylesWrap = $('[data-styles-wrap]'), viewer = $('[data-viewer]'), vwBody = $('[data-vw-body]'), vwPanel = $('[data-vw-panel]')
   var selbar = $('[data-selbar]'), toastEl = $('[data-toast]'), scrim = $('[data-vw-scrim]'), tools = $('[data-tools]')
 
   /* ───────────────────────── toast ───────────────────────── */
@@ -536,7 +537,7 @@
       var narrow = w < 640
       L.gap = narrow ? 5 : 10; L.cols = SNAMES.length
       L.labelW = narrow ? 0 : Math.round(clamp(w * 0.17, 132, 210)); L.labelH = narrow ? 30 : 0
-      // every style of an icon sits on one line; when that would make tiles too small (12 styles on a phone or
+      // every style of an icon sits on one line; when that would make tiles too small (15 styles on a phone or
       // beside the open drawer) the line wraps into two rows of six
       var fit = function (per) { return Math.floor(Math.min(d.min, (w - L.labelW - L.gap * (per - 1)) / per)) }
       L.per = L.cols; L.tw = fit(L.cols)
@@ -633,7 +634,6 @@
       '<span class="t-chk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17 L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'
     var whyTxt = why ? why.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&') : ''
     n.setAttribute('aria-label', ic.title + ', ' + STYLE[it.st].title + ' style' + (whyTxt ? ', ' + whyTxt : ''))
-    n.title = ic.title + (S.view === 'compare' ? ' · ' + STYLE[it.st].title : '') + (whyTxt ? ' (' + whyTxt + ')' : '') + ' — click to copy'
     n._st = it.st
     paintTileState(n)
   }
@@ -751,6 +751,7 @@
   function update(o) {
     o = o || {}
     var prev = snapshot()
+    peekHide(true)
     runSearch(); buildItems(); layout()
     if (o.newQuery) gen++
     render({ anim: o.anim !== false, prev: prev, refill: o.refill !== false })
@@ -829,43 +830,76 @@
     }
   }
 
-  /* ───────────────────────── style switcher ───────────────────────── */
-  var SAMPLE = ['heart', 'star', 'home', 'bell'].filter(function (n) { return BY[n] })[0] || ICONS[0].name
+  /* ───────────────────────── style switcher ─────────────────────────
+     Every style is always visible: four groups (Everyday · Crafted · Playful · Studio), each option a live mini icon in
+     that style + its name. One row on wide bars, two balanced rows on tablets (CSS container query), and on phones a
+     compact trigger that opens a panel listing all of them (no sideways scrolling anywhere). The selected option wears
+     a sliding, colour-morphing indicator (.sb-ink). Mini icons come from an inline snapshot (#lib-style-samples) until
+     each style's own file arrives, then switch to the live drawing. */
+  var SAMPLE = BY.heart ? 'heart' : ['star', 'home', 'bell'].filter(function (n) { return BY[n] })[0] || ICONS[0].name
+  var SNAP = (function () { try { var el = D.getElementById('lib-style-samples'); return el ? JSON.parse(el.textContent) : {} } catch (e) { return {} } })()
+  function sampleSvg(st) {
+    if (svgMap(st) && svgMap(st)[SAMPLE] != null) return glyph(st, SAMPLE)
+    var inner = SAMPLE === 'heart' && SNAP[st]
+    return inner ? '<svg viewBox="0 0 24 24"' + ROOT_ATTR[st] + ' aria-hidden="true" focusable="false">' + inner + '</svg>' : ''
+  }
+  function paintSample(g, st) {
+    if (!g) return
+    var live = !!svgMap(st)
+    if (g.firstElementChild && g._live === live && g._st === st) return
+    var h = sampleSvg(st); if (!h) return
+    g.innerHTML = h; g._live = live; g._st = st
+  }
+  var CMP_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4" height="16" rx="1.5" fill="currentColor" opacity=".35"/><rect x="10" y="4" width="4" height="16" rx="1.5" fill="currentColor" opacity=".65"/><rect x="17" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>'
   function paintStylePills() {
     $$('[data-style-pill]', stylesEl).forEach(function (b) {
       var st = b.getAttribute('data-style-pill')
       var on = S.view === 'grid' && st === S.style
       b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on || (S.view === 'compare' && st === S.style) ? 0 : -1
-      var g = $('.sp-g', b); if (g && !g.firstElementChild && svgMap(st)) g.innerHTML = glyph(st, SAMPLE)
+      paintSample($('.sb-ic', b), st)
     })
-    var cmp = $('[data-compare]'); if (cmp) { cmp.setAttribute('aria-pressed', S.view === 'compare' ? 'true' : 'false'); if (S.view === 'compare' && stylesEl.scrollWidth > stylesEl.clientWidth) stylesEl.scrollLeft = stylesEl.scrollWidth }
-    moveInk()
-    // twelve pills may not all fit (tablets, phones, beside the drawer): keep the picked one in view
-    var onP = S.view === 'grid' && $('[aria-checked="true"]', stylesEl)
-    if (onP && stylesEl.scrollWidth > stylesEl.clientWidth + 2 && paintStylePills._last !== S.style) {
-      paintStylePills._last = S.style
-      var l = onP.offsetLeft, r = l + onP.offsetWidth
-      if (l < stylesEl.scrollLeft + 8 || r > stylesEl.scrollLeft + stylesEl.clientWidth - 28) stylesEl.scrollTo({ left: Math.max(0, l - 48), behavior: reduced || !root.classList.contains('is-ready') ? 'auto' : 'smooth' })
+    var cmp = $('[data-compare]', stylesWrap); if (cmp) cmp.setAttribute('aria-pressed', S.view === 'compare' ? 'true' : 'false')
+    // phone trigger: the current style (or "All styles" in compare)
+    var cur = $('[data-sb-cur]', stylesWrap), curG = $('[data-sb-cur-g]', stylesWrap), curIc = $('[data-sb-cur-ic]', stylesWrap)
+    if (cur) {
+      var all = S.view === 'compare'
+      cur.textContent = all ? 'All ' + SNAMES.length + ' styles' : STYLE[S.style].title
+      curG.textContent = all ? 'Compare' : (GROUP_OF[S.style] ? GROUP_OF[S.style].title : 'Style') + ' style'
+      if (all) { if (curIc._st !== 'all') { curIc.innerHTML = CMP_SVG; curIc._st = 'all'; curIc._live = null } } else paintSample(curIc, S.style)
+      $$('i', $('[data-sb-dots]', stylesWrap)).forEach(function (d) { d.classList.toggle('is-on', all || d.getAttribute('data-st') === S.style) })
+      $('[data-sb-toggle]', stylesWrap).setAttribute('aria-label', 'Icon style: ' + (all ? 'comparing all ' + SNAMES.length + ' styles' : STYLE[S.style].title) + '. Show all ' + SNAMES.length + ' styles')
     }
-    paintStyleEdge()
+    moveInk()
     root.setAttribute('data-style', S.view === 'compare' ? 'all' : S.style)
     paintTools()
   }
-  function paintStyleEdge() {
-    var over = stylesEl.scrollWidth > stylesEl.clientWidth + 2
-    stylesEl.classList.toggle('is-over', over && stylesEl.scrollLeft + stylesEl.clientWidth < stylesEl.scrollWidth - 4)
-    stylesEl.classList.toggle('is-scrolled', over && stylesEl.scrollLeft > 4)
-  }
   function moveInk() {
-    var ink = $('.sp-ink', stylesEl), on = $('[aria-checked="true"]', stylesEl)
-    if (!ink || !on) { if (ink) ink.style.opacity = 0; return }
-    ink.style.opacity = 1
-    ink.style.transform = 'translateX(' + on.offsetLeft + 'px)'; ink.style.width = on.offsetWidth + 'px'
+    var ink = $('.sb-ink', stylesEl), on = S.view === 'grid' && $('[aria-checked="true"]', stylesEl)
+    if (!ink) return
+    if (!on || !on.offsetWidth) { ink.style.opacity = 0; return }
+    var tr = 'translate(' + on.offsetLeft + 'px,' + on.offsetTop + 'px)'
+    // the first placement (and a jump between rows) lands without sliding across the bar
+    var jump = !ink._placed || (ink._y != null && ink._y !== on.offsetTop)
+    if (jump) ink.classList.add('is-jump')
+    ink.style.opacity = 1; ink.style.transform = tr; ink.style.width = on.offsetWidth + 'px'; ink.style.height = on.offsetHeight + 'px'
+    ink._y = on.offsetTop
+    if (jump) { void ink.offsetWidth; ink.classList.remove('is-jump') }
+    ink._placed = true
+  }
+  // phones: the panel opens from the trigger and closes on pick / Escape / outside tap
+  function sbSheet() { var t = $('[data-sb-toggle]', stylesWrap); return !!(t && t.offsetWidth) }
+  function sbOpen(open, focus) {
+    var t = $('[data-sb-toggle]', stylesWrap); if (!t) return
+    if (open && !sbSheet()) open = false
+    stylesWrap.classList.toggle('is-open', open); t.setAttribute('aria-expanded', open ? 'true' : 'false')
+    if (open) { raf(moveInk); if (focus) { var on = $('[aria-checked="true"]', stylesEl) || $('[data-compare]', stylesWrap); setTimeout(function () { on.focus({ preventScroll: true }) }, 40) } }
+    else if (focus) t.focus({ preventScroll: true })
   }
   function setStyle(st, fromEl) {
     if (!STYLE[st]) return
     var wasCompare = S.view === 'compare'
     if (st === S.style && !wasCompare) return
+    peekHide(true)
     S.style = st; S.view = 'grid'; store.set('style', st)
     if (V.open && !wasCompare) setViewerStyle(st, true)
     root.classList.add('is-loading')
@@ -899,6 +933,7 @@
   function setView(v) {
     if (S.view === v) return
     S.view = v
+    peekHide(true)
     root.classList.add('is-loading')
     paintStylePills()
     ;(v === 'compare' ? loadAll() : loadStyle(S.style)).then(function () {
@@ -924,6 +959,7 @@
     if (e.shiftKey && lastClickIdx >= 0) { selectRange(lastClickIdx, idx); return }
     if (e.metaKey || e.ctrlKey || e.target.closest('.t-chk') || root.classList.contains('is-selecting')) { toggleSel(it.k); lastClickIdx = idx; return }
     lastClickIdx = idx
+    peekHide(true)
     // desktop: copy + show details beside the grid. phones: open the sheet (it has a big Copy button)
     if (!isSheet()) copyImage(it.st, it.name)
     openViewer(it.name, it.st, { from: n })
@@ -957,6 +993,8 @@
   // keyboard: roving focus over the virtual grid
   grid.addEventListener('keydown', function (e) {
     var n = tileFromEvent(e); if (!n) return
+    // the hover card names the keys for the icon under the pointer: they act on that one, not on a tile clicked earlier
+    if (PK.on && !PK.kb && PK.tile && PK.tile !== n && PK.tile.isConnected && /^(Enter|c|C|d|D|s|S)$/.test(e.key) && !e.ctrlKey && !e.metaKey) n = PK.tile
     var idx = n._idx, cols = L.cols, next = idx
     switch (e.key) {
       case 'ArrowRight': next = idx + 1; break
@@ -967,7 +1005,7 @@
       case 'End': next = e.ctrlKey ? ITEMS.length - 1 : Math.min(ITEMS.length - 1, idx - (idx % cols) + cols - 1); break
       case 'PageDown': next = idx + cols * Math.max(1, Math.floor(W.innerHeight / L.rowH) - 1); break
       case 'PageUp': next = idx - cols * Math.max(1, Math.floor(W.innerHeight / L.rowH) - 1); break
-      case 'Enter': e.preventDefault(); if (!isSheet()) copyImage(ITEMS[idx].st, ITEMS[idx].name); openViewer(ITEMS[idx].name, ITEMS[idx].st, { from: n, keyboard: true }); return
+      case 'Enter': e.preventDefault(); peekHide(true); if (!isSheet()) copyImage(ITEMS[idx].st, ITEMS[idx].name); openViewer(ITEMS[idx].name, ITEMS[idx].st, { from: n, keyboard: true }); return
       case ' ': e.preventDefault(); toggleSel(ITEMS[idx].k); return
       case 'a': case 'A': if (e.ctrlKey || e.metaKey) { e.preventDefault(); selectRange(0, ITEMS.length - 1) } return
       case 'd': case 'D': if (!e.ctrlKey && !e.metaKey) downloadPng(ITEMS[idx].st, ITEMS[idx].name); return
@@ -1003,9 +1041,18 @@
     var n = tileFromEvent(e); if (!n || e.pointerType !== 'mouse') return
     if (S.animate && !(e.relatedTarget && n.contains(e.relatedTarget))) playTile(n)
     if (!n._warm) { n._warm = 1; renderPng(n._st, n._name, S.px).catch(function () { }) }
+    peekOver(n)
   })
+  grid.addEventListener('pointerout', function (e) {
+    if (e.pointerType !== 'mouse') return
+    var to = e.relatedTarget, t = to && to.closest && to.closest('.tile')
+    if (!t || !grid.contains(t)) peekLeave()
+  })
+  grid.addEventListener('focusin', function (e) { var n = tileFromEvent(e); if (n) peekFocus(n) })
+  grid.addEventListener('focusout', function (e) { if (PK.kb && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.tile'))) peekHide() })
   grid.addEventListener('dragstart', function (e) {
     var n = tileFromEvent(e); if (!n) return
+    peekHide(true); PK.sup = n
     dragData(e, n._st, n._name, n.querySelector('.t-ic svg'))
     n.classList.add('is-drag')
   })
@@ -1026,6 +1073,167 @@
     if (ghost && dt.setDragImage) { try { dt.setDragImage(ghost, ghost.clientWidth / 2, ghost.clientHeight / 2) } catch (err) { } }
     bump(name)
   }
+
+  /* ───────────────────────── hover card ─────────────────────────
+     A rich preview of the icon under the pointer (or the keyboard-focused tile): a big drawing in the current style on a
+     tinted stage, its name + category, why it matched, its motion (intent + a tiny looping preview), the icon in all
+     styles, aliases and the keys that act on it. One fixed element, reused: it opens after a short rest, switches
+     instantly while it is up (no flicker moving across tiles), closes fast, never covers the sticky bar and never leaves
+     the viewport. Not on touch (a tap opens the drawer). Reduced motion: no scale-in, no looping preview. */
+  var PK = { el: null, tile: null, key: '', t: 0, ct: 0, on: false, kb: false, at: 0, sup: null }
+  var canHover = function () { return mq('(hover: hover) and (pointer: fine)') }
+  function peekBuild() {
+    if (PK.el) return PK.el
+    var el = D.createElement('div')
+    el.className = 'lib-peek'; el.id = 'lib-peek'; el.setAttribute('role', 'tooltip')
+    el.innerHTML = '<div class="pk-in">' +
+      '<div class="pk-stage"><span class="pk-art" data-pk-art></span><span class="pk-style" data-pk-style></span></div>' +
+      '<div class="pk-body">' +
+        '<p class="pk-cat" data-pk-cat></p>' +
+        '<p class="pk-name" data-pk-name></p>' +
+        '<p class="pk-why" data-pk-why hidden></p>' +
+        '<div class="pk-motion" data-pk-motion><span class="pk-mo" data-pk-mo aria-hidden="true"></span><span class="pk-mo-t"><b data-pk-mo-l>Moves</b><span data-pk-intent></span></span></div>' +
+        '<div class="pk-strip" data-pk-strip aria-hidden="true"></div>' +
+        '<p class="pk-also" data-pk-also></p>' +
+      '</div>' +
+      '<p class="pk-keys" data-pk-keys></p>' +
+    '</div>'
+    D.body.appendChild(el)
+    PK.el = el
+    syncPeekLook()
+    return el
+  }
+  // the card lives outside .lib: it copies the grid's colour / stroke so its drawing matches the tiles
+  function syncPeekLook() {
+    if (!PK.el) return
+    PK.el.style.setProperty('--ic', root.style.getPropertyValue('--ic') || 'var(--l-fg)')
+    PK.el.classList.toggle('has-sw', S.sw != null)
+    if (S.sw == null) PK.el.style.removeProperty('--l-sw'); else PK.el.style.setProperty('--l-sw', S.sw)
+  }
+  function peekOver(n) {
+    if (!canHover() || n === PK.sup) return
+    PK.sup = null
+    clearTimeout(PK.ct)
+    if (PK.on && PK.tile === n) return
+    // already up (or only just closed): follow the pointer at once; otherwise wait for a short rest
+    var warm = PK.on || performance.now() - PK.at < 360
+    clearTimeout(PK.t)
+    if (warm) peekShow(n, false)
+    else PK.t = setTimeout(function () { if (n.isConnected && n.matches(':hover')) peekShow(n, false) }, 420)
+  }
+  function peekLeave() { clearTimeout(PK.t); clearTimeout(PK.ct); if (PK.on && !PK.kb) PK.ct = setTimeout(function () { peekHide() }, 90) }
+  function peekFocus(n) {
+    if (!n.matches(':focus-visible')) return
+    clearTimeout(PK.t); clearTimeout(PK.ct)
+    if (PK.on) peekShow(n, true)
+    else PK.t = setTimeout(function () { if (D.activeElement === n) peekShow(n, true) }, 520)
+  }
+  function peekHide(now) {
+    clearTimeout(PK.t); clearTimeout(PK.ct)
+    if (!PK.on) return false
+    PK.on = false; PK.at = performance.now()
+    if (PK.tile) PK.tile.removeAttribute('aria-describedby')
+    PK.tile = null; PK.kb = false
+    PK.el.classList.remove('is-on')
+    if (now) PK.el.classList.add('is-instant')
+    var mo = $('[data-pk-mo]', PK.el); if (mo) mo.innerHTML = ''   // stop the looping preview
+    return true
+  }
+  function peekShow(n, kb) {
+    var it = itemOf(n); if (!it) return
+    var el = peekBuild()
+    if (PK.tile && PK.tile !== n) PK.tile.removeAttribute('aria-describedby')
+    var was = PK.on
+    PK.tile = n; PK.kb = !!kb; PK.on = true
+    peekFill(it)
+    n.setAttribute('aria-describedby', 'lib-peek')
+    peekPlace(n)
+    el.classList.toggle('is-instant', was)
+    if (!was) { el.classList.remove('is-on'); void el.offsetWidth }
+    el.classList.add('is-on')
+    // the card wants every style (the strip) and the motion data: fetch them now if the visitor has not warmed up yet
+    idleLoadRest(); if (!W.WITH_MOTION) loadMotion().then(function () { if (PK.on && PK.tile) { peekFill(itemOf(PK.tile), true); peekPlace(PK.tile) } })
+  }
+  function peekFill(it, force) {
+    if (!it || !PK.el) return
+    var el = PK.el, name = it.name, st = it.st, ic = BY[name], key = name + '|' + st + '|' + S.q + '|' + Object.keys(W.WITH_SVG || {}).length + '|' + (W.WITH_MOTION ? 1 : 0) + '|' + PK.kb
+    if (!force && key === PK.key) return
+    var same = PK.key.split('|')[0] === name && PK.key.split('|')[1] === st
+    PK.key = key
+    el.style.setProperty('--sc', 'var(--s-' + st + ')'); el.style.setProperty('--sc-text', 'var(--t-' + st + ')')
+    var art = $('[data-pk-art]', el)
+    art.innerHTML = svgMap(st) ? svgInline(st, name) : '<span class="t-skel" aria-hidden="true"></span>'
+    if (!same && !reduced && el.classList.contains('is-on')) art.animate([{ transform: 'scale(.86)', opacity: 0.35 }, { transform: 'none', opacity: 1 }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' })
+    var g = GROUP_OF[st]
+    $('[data-pk-style]', el).innerHTML = '<i aria-hidden="true"></i>' + esc(STYLE[st].title) + (g ? '<small>' + esc(g.title) + '</small>' : '')
+    $('[data-pk-cat]', el).innerHTML = (svgMap('line') ? glyph('line', catIcon(ic.category)) : '') + '<span>' + esc(cap(ic.category)) + '</span>'
+    $('[data-pk-name]', el).textContent = ic.title
+    var why = S.view === 'grid' ? whyHtml(it.r && it.r.match, name) : '', whyEl = $('[data-pk-why]', el)
+    whyEl.hidden = !why; whyEl.innerHTML = why ? 'Found because it ' + why.replace(/^≈/, 'is close to') : ''
+    // motion: what the icon does, and a tiny loop of it
+    var spec = W.WITH_MOTION && W.WITH_MOTION[name], mo = $('[data-pk-mo]', el), moBox = $('[data-pk-motion]', el)
+    var entry = spec && (spec.loop || spec.hover), P = W.WithEditor && W.WithEditor.PRESETS
+    moBox.classList.toggle('is-wait', !spec)
+    if (spec && entry) {
+      var mi = W.WithEditor && W.WithEditor.motionAttrs(entry, { trigger: 'loop', stroked: !!DRAWABLE[st] })
+      mo.innerHTML = mi && svgMap(st) ? '<span class="pk-mo-in ' + mi.cls + '" style="' + esc(mi.style) + '">' + svgInline(st, name) + '</span>' : (svgMap(st) ? svgInline(st, name) : '')
+      if (mi && mi.preset === 'draw' && W.WithEditor.prepareDraw) W.WithEditor.prepareDraw(mo)
+      $('[data-pk-mo-l]', el).textContent = (mi && P && P[mi.preset] ? P[mi.preset].label : 'Animated')
+      $('[data-pk-intent]', el).textContent = spec.intent ? cap(spec.intent) : 'Moves gently to draw the eye'
+    } else {
+      mo.innerHTML = ''
+      $('[data-pk-mo-l]', el).textContent = 'Animation'
+      $('[data-pk-intent]', el).textContent = spec ? 'Still by design' : 'Getting its animation…'
+    }
+    // the same icon in every style; the current one is ringed
+    $('[data-pk-strip]', el).innerHTML = SNAMES.map(function (s2) {
+      var m = svgMap(s2), body = m && m[name] != null ? glyph(s2, name) : '<i class="pk-dot"></i>'
+      return '<span class="pk-s' + (s2 === st ? ' is-on' : '') + '" style="--sc:var(--s-' + s2 + ')">' + body + '</span>'
+    }).join('')
+    var al = (ic.aliases || []).filter(function (a) { return norm(a).replace(/-/g, ' ') !== name.replace(/-/g, ' ') }).slice(0, 4)
+    var alEl = $('[data-pk-also]', el); alEl.hidden = !al.length
+    alEl.innerHTML = al.length ? '<span>Also</span>' + al.map(function (a) { return '<b>' + esc(String(a).replace(/-/g, ' ')) + '</b>' }).join('') : ''
+    var k = function (x) { return '<kbd>' + x + '</kbd>' }
+    $('[data-pk-keys]', el).innerHTML = PK.kb
+      ? '<span>' + k('↵') + ' copy &amp; open</span><span>' + k('C') + ' SVG</span><span>' + k('D') + ' PNG</span><span>' + k('Space') + ' select</span>'
+      : '<span class="pk-click">' + ICO.copy + 'Click to copy</span><span>' + k('↵') + ' open</span><span>' + k('C') + ' SVG</span><span>' + k('D') + ' PNG</span>'
+  }
+  function peekPlace(n) {
+    var el = PK.el, r = n.getBoundingClientRect(), w = el.offsetWidth, h = el.offsetHeight
+    var bar = $('[data-bar]'), stuck = bar && bar.classList.contains('is-stuck')
+    // below the sticky bar once it is stuck; below the site header otherwise
+    var vw = D.documentElement.clientWidth, vh = W.innerHeight, m = 12, gap = 12, top0 = (stuck ? Math.max(0, barBottom()) : parseFloat(root.style.getPropertyValue('--lib-top')) || 0) + 8
+    var x, y, side
+    // the docked details panel is a wall too: the card prefers the side that leaves it uncovered
+    var vr = V.open && !V.full && !isSheet() && !viewer.hidden ? viewer.getBoundingClientRect() : null, right = vr && vr.width ? Math.min(vw, vr.left) : vw
+    if (r.right + gap + w <= right - m) { x = r.right + gap; side = 'r' }
+    else if (r.left - gap - w >= m) { x = r.left - gap - w; side = 'l' }
+    else { x = clamp(r.left + r.width / 2 - w / 2, m, vw - m - w); side = r.top - gap - h >= top0 ? 't' : 'b' }
+    if (side === 'r' || side === 'l') y = clamp(r.top + r.height / 2 - h / 2, top0, Math.max(top0, vh - m - h))
+    else y = side === 't' ? r.top - gap - h : Math.min(r.bottom + gap, vh - m - h)
+    x = Math.round(x); y = Math.round(y)
+    el.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+    el.setAttribute('data-side', side)
+    // the caret points at the tile's centre, wherever the card had to settle
+    el.style.setProperty('--pk-ay', clamp(r.top + r.height / 2 - y, 22, h - 22) + 'px')
+    el.style.setProperty('--pk-ax', clamp(r.left + r.width / 2 - x, 22, w - 22) + 'px')
+  }
+  // keys while the pointer rests on a tile (the focused tile has its own, in the grid's keydown)
+  W.addEventListener('keydown', function (e) {
+    if (!PK.on || PK.kb || !PK.tile || e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return
+    // only when nothing else has focus: a focused tile handles its own keys, fields and buttons keep theirs
+    var a = D.activeElement
+    if (a && a !== D.body && a !== D.documentElement) return
+    var it = itemOf(PK.tile); if (!it) return
+    var k = e.key.toLowerCase(), n = PK.tile
+    if (k === 'enter') { e.preventDefault(); peekHide(true); if (!isSheet()) copyImage(it.st, it.name); openViewer(it.name, it.st, { from: n }) }
+    else if (k === 'c') { e.preventDefault(); copySvgCode(it.st, it.name) }
+    else if (k === 'd') { e.preventDefault(); downloadPng(it.st, it.name) }
+    else if (k === 's') { e.preventDefault(); downloadSvg(it.st, it.name) }
+  })
+  W.addEventListener('scroll', function () { if (PK.on) { peekHide(true); PK.at = 0 } }, { passive: true })
+  D.addEventListener('pointerdown', function (e) { if (PK.on || PK.t) { var t = e.target.closest && e.target.closest('.tile'); peekHide(true); PK.sup = t || null } }, true)
+  W.addEventListener('blur', function () { peekHide(true) })
 
   /* ═════════════════════════ DETAILS VIEWER ═════════════════════════ */
   var ICO = {
@@ -1179,7 +1387,7 @@
     viewer._built = true
   }
 
-  // the drawer's strip shows this icon in all twelve styles. Desktop: fetch them now. Phones and tablets: once the drawer
+  // the drawer's strip shows this icon in every style. Desktop: fetch them now. Phones and tablets: once the drawer
   // has settled, one style at a time in idle time. Save-Data / 2G: only the styles the visitor reaches for (a dot meanwhile).
   var stripLazy = lowData()
   function loadViewerStyles() {
@@ -1632,6 +1840,7 @@
     })
   }
   function paintEdge() { if (edge) { edge.setAttribute('aria-valuenow', Math.round(V.w)); edge.setAttribute('aria-valuemin', 340); edge.setAttribute('aria-valuemax', 900) } }
+  paintEdge()   // a focusable separator needs its value from the start
   function setFull(on) {
     if (isSheet()) on = false
     V.full = on
@@ -1783,19 +1992,30 @@
     var gtop = grid.getBoundingClientRect().top
     if (gtop < barBottom()) W.scrollTo({ top: W.scrollY + gtop - barBottom() - 80, behavior: reduced ? 'auto' : 'smooth' })
   }
-  stylesEl.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-style-pill]'); if (b) { setStyle(b.getAttribute('data-style-pill'), b); return }
-    if (e.target.closest('[data-compare]')) setView(S.view === 'compare' ? 'grid' : 'compare')
+  stylesWrap.addEventListener('click', function (e) {
+    if (e.target.closest('[data-sb-toggle]')) { sbOpen(!stylesWrap.classList.contains('is-open'), true); return }
+    var b = e.target.closest('[data-style-pill]')
+    if (b) { setStyle(b.getAttribute('data-style-pill'), b); if (e.detail && stylesWrap.classList.contains('is-open')) setTimeout(function () { sbOpen(false) }, reduced ? 0 : 220); return }
+    if (e.target.closest('[data-compare]')) { setView(S.view === 'compare' ? 'grid' : 'compare'); if (stylesWrap.classList.contains('is-open')) setTimeout(function () { sbOpen(false) }, reduced ? 0 : 220) }
   })
-  stylesEl.addEventListener('scroll', function () { raf(paintStyleEdge) }, { passive: true })
+  D.addEventListener('pointerdown', function (e) { if (stylesWrap.classList.contains('is-open') && !stylesWrap.contains(e.target)) sbOpen(false) })
+  stylesWrap.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && stylesWrap.classList.contains('is-open')) { e.preventDefault(); e.stopPropagation(); sbOpen(false, true) }
+  })
   // reaching for a style (pointer over it, or keyboard focus) starts its download before the click
   function prefetchStyle(e) { var b = e.target.closest && e.target.closest('[data-style-pill], [data-vw-st]'); if (b) loadStyle(b.getAttribute('data-style-pill') || b.getAttribute('data-vw-st')) }
   stylesEl.addEventListener('pointerover', prefetchStyle, { passive: true }); stylesEl.addEventListener('focusin', prefetchStyle)
   viewer.addEventListener('pointerover', prefetchStyle, { passive: true }); viewer.addEventListener('focusin', prefetchStyle)
+  // radiogroup keys: arrows move and pick (wrapping), Home / End jump to the ends
   stylesEl.addEventListener('keydown', function (e) {
     if (!e.target.hasAttribute('data-style-pill')) return
-    var pills = $$('[data-style-pill]', stylesEl), i = pills.indexOf(e.target)
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); var n = pills[(i + (e.key === 'ArrowRight' ? 1 : -1) + pills.length) % pills.length]; n.focus(); n.click() }
+    var pills = $$('[data-style-pill]', stylesEl), i = pills.indexOf(e.target), n = null
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = pills[(i + 1) % pills.length]
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = pills[(i - 1 + pills.length) % pills.length]
+    else if (e.key === 'Home') n = pills[0]
+    else if (e.key === 'End') n = pills[pills.length - 1]
+    if (!n) return
+    e.preventDefault(); n.focus(); n.click()
   })
 
   // toolbar: tile size, colour popover (+ stroke), select mode
@@ -1808,6 +2028,7 @@
     root.classList.toggle('has-sw', S.sw != null)
     if (S.sw == null) root.style.removeProperty('--l-sw'); else root.style.setProperty('--l-sw', S.sw)
     var dot = $('[data-tools-dot]', tools); if (dot) dot.style.background = c === 'ink' ? 'var(--l-fg)' : c === 'style' ? 'var(--acc)' : c
+    syncPeekLook()
   }
   function paintTools() {
     $$('[data-density]', tools).forEach(function (b) { b.setAttribute('aria-pressed', S.density === b.getAttribute('data-density') ? 'true' : 'false') })
@@ -1871,6 +2092,8 @@
       return
     }
     if (e.key === 'Escape') {
+      if (stylesWrap.classList.contains('is-open')) { e.preventDefault(); sbOpen(false, true); return }
+      if (peekHide(true)) { if (PK.kb) PK.kb = false; e.preventDefault(); return }
       var pop = $('[data-pop].is-open', tools)
       if (pop) { togglePop(pop, false); $('[data-pop-toggle]', pop).focus(); return }
       if (typing && e.target === input) return
@@ -1914,14 +2137,16 @@
 
   /* ───────────────────────── boot ───────────────────────── */
   function buildChrome() {
-    // grouped pills (Everyday · Crafted · Playful): an icon each, the picked one also shows its name
-    stylesEl.insertAdjacentHTML('afterbegin', '<span class="sp-ink" aria-hidden="true"></span>' + GROUPS.map(function (g, gi) {
-      return (gi ? '<span class="sp-sep" aria-hidden="true"></span>' : '') + g.styles.map(function (n, i) {
+    // the grouped switcher: every style visible, a live mini icon + name each (see "style switcher")
+    stylesEl.innerHTML = '<span class="sb-ink" aria-hidden="true"></span>' + GROUPS.map(function (g) {
+      return '<div class="sb-g" data-group="' + g.id + '" style="--n:' + g.styles.length + '"><p class="sb-gl" aria-hidden="true"><span>' + esc(g.title) + '</span>' + (g.isNew ? '<b class="sb-new">New</b>' : '') + '</p><div class="sb-opts">' + g.styles.map(function (n) {
         var s = STYLE[n]
-        return '<button type="button" class="sp' + (g.isNew && !i ? ' is-new' : '') + '" role="radio" data-style-pill="' + n + '" data-group="' + g.id + '" style="--sc:var(--s-' + n + ');--on-sc:var(--on-' + n + ')" aria-checked="false" aria-label="' + esc(s.title) + ' style, ' + esc(g.title.toLowerCase()) + '" title="' + esc(s.title) + ' · ' + esc(sayOf(n)) + '"><span class="sp-g" aria-hidden="true"></span><span class="sp-t">' + esc(s.title) + '</span>' + (g.isNew && !i ? '<span class="sp-new" aria-hidden="true">new</span>' : '') + '</button>'
-      }).join('')
-    }).join(''))
-    var cmpT = $('[data-compare]'); if (cmpT) cmpT.title = 'See every icon in all ' + SNAMES.length + ' styles side by side'
+        return '<button type="button" class="sb-o" role="radio" data-style-pill="' + n + '" data-group="' + g.id + '" style="--sc:var(--s-' + n + ');--sc-text:var(--t-' + n + ')" aria-checked="false" aria-label="' + esc(s.title) + ', ' + esc(g.title.toLowerCase()) + ' style' + (g.isNew ? ', new' : '') + '" title="' + esc(s.title) + ': ' + esc(sayOf(n)) + '"><span class="sb-ic" aria-hidden="true"></span><span class="sb-t">' + esc(s.title) + '</span></button>'
+      }).join('') + '</div></div>'
+    }).join('')
+    var dotsEl = $('[data-sb-dots]', stylesWrap); if (dotsEl) dotsEl.innerHTML = SNAMES.map(function (n) { return '<i data-st="' + n + '" style="--sc:var(--s-' + n + ')"></i>' }).join('')
+    $$('.sb-o', stylesEl).forEach(function (b) { paintSample($('.sb-ic', b), b.getAttribute('data-style-pill')) })
+    var cmpT = $('[data-compare]', stylesWrap); if (cmpT) cmpT.title = 'See every icon in all ' + SNAMES.length + ' styles side by side'
     catNav.innerHTML = '<button type="button" class="cat" data-cat="" aria-pressed="true"><span class="cat-g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg></span><span class="cat-t">All icons</span><small>' + ICONS.length + '</small></button>' +
       CATS.map(function (c) { return '<button type="button" class="cat" data-cat="' + c + '" aria-pressed="false"><span class="cat-g" aria-hidden="true" data-cat-g="' + catIcon(c) + '"></span><span class="cat-t">' + esc(cap(c)) + '</span><small></small></button>' }).join('')
     $$('[data-icon-total]').forEach(function (el) { el.textContent = fmt(ICONS.length) })
@@ -1939,6 +2164,7 @@
     if (st === 'line') paintCatGlyphs()
     paintStylePills()
     if (V.open && viewer._built) paintViewer('style')
+    if (PK.on && PK.tile) { peekFill(itemOf(PK.tile)); peekPlace(PK.tile) }
     if (S.view === 'compare' || st === S.style) mounted.forEach(function (n) { if (n._st === st && n.querySelector('.t-skel')) { var it = itemOf(n); if (it) fillTile(n, it) } })
   })
 
@@ -1980,9 +2206,13 @@
     if (roQ) return; roQ = true
     raf(function () { roQ = false; var w = Math.floor(grid.clientWidth); if (w && Math.abs(w - L.w) > 0.5 && !root.classList.contains('is-resizing')) { relayout(false); moveInk() } })
   }).observe(grid)
+  // the switcher reflows (stuck / unstuck, one or two rows, fonts): the selection indicator follows
+  var inkQ = false
+  if (W.ResizeObserver) new ResizeObserver(function () { if (inkQ) return; inkQ = true; raf(function () { inkQ = false; moveInk() }) }).observe(stylesEl)
   var wasSheet = isSheet()
   W.addEventListener('resize', function () {
-    measureTop(); moveInk(); updateBodyCols(); moveTInk(); paintStyleEdge()
+    measureTop(); moveInk(); updateBodyCols(); moveTInk()
+    if (stylesWrap.classList.contains('is-open') && !sbSheet()) sbOpen(false)
     var nowSheet = isSheet()
     if (nowSheet !== wasSheet) {
       wasSheet = nowSheet

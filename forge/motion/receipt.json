@@ -1,23 +1,36 @@
 {
   "name": "receipt",
-  "intent": "floats gently, prints its lines on hover",
+  "intent": "the lines print in on a steady slip; feeds out on hover",
   "loop": {
-    "preset": "float",
-    "amount": 0.5,
+    "preset": "pulse",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 0.25,
     "duration": 3
   },
   "hover": {
-    "preset": "draw",
-    "duration": 1
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.4,
+    "duration": 0.8
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 3,
+      "delay": 0.15
+    }
+  },
+  "deco": "still",
   "alt": [
     {
-      "preset": "nudge",
-      "dir": 90,
-      "amount": 0.6
+      "preset": "draw"
     },
     {
-      "preset": "pop"
+      "preset": "float",
+      "amount": 0.5
     }
   ],
   "swap": [

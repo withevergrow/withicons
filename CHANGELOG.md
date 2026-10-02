@@ -12,6 +12,19 @@ version from another commit).
 
 ### Added
 
+- **3 new studio styles** (15 styles and 7,500 icons in all): `luxe` (premium multi-layered 3D: sapphire enamel, polished
+  gold, a jewel, lit chamfers, all stacked vector geometry), `bauhaus` (pure circles, squares and bars in red, yellow and
+  blue, overprinted) and `skeuo` (skeuomorphic objects in real materials with bevels and soft shadows). Their colours are
+  role-named variables (`--with-luxe-c1`, `--with-bauhaus-accent`, `--with-skeuo-shadow`), so every per-icon palette and
+  the editor's colour pickers work with them out of the box. Every package exposes them (`@withicons/react/luxe`,
+  `<with-icon variant="bauhaus">`, `sprite-skeuo.svg`…). Search understands their words: "3d", "luxury", "premium", "gold"
+  pick luxe; "bauhaus", "geometric", "modernist" pick bauhaus; "skeuomorphic", "realistic", "tactile" pick skeuo.
+- **Live icons** (`@withicons/dynamic`, new package): up to 50 icons whose content you set, such as a calendar's date, a
+  clock's time, a notification count, a battery level, a temperature or a short label, drawn with a stroke font so they render
+  in every style. `render(name, params, style)`, `list()`, `paramsOf(name)` and a `<with-live-icon>` element. Spec:
+  `forge/DYNAMIC.md`.
+- Website: the studio styles everywhere (library, icon pages, editor, home), "Free 3D icons", "Free Bauhaus icons" and
+  "Free skeuomorphic icons" pages, and a Live icons page (`live.html`) linked from the main navigation.
 - **200 new icons** (500 in all), drawn as skeletons like the first 300, with aliases, synonyms and tags, and 7 new
   categories: food, health, education, nature, home, travel, sports (26 in all).
 - **5 new styles**, all multi-colour *palette* styles: `glass` (layered frosted glass / glassmorphism), `kawaii` (chubby,

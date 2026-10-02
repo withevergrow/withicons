@@ -1,20 +1,23 @@
 {
   "name": "dollar-sign",
-  "intent": "spins like a coin, money coming in",
+  "intent": "shines quietly like money coming in; flips like a coin on hover",
   "loop": {
-    "preset": "flip",
-    "duration": 3.6
+    "preset": "glow",
+    "amount": 0.6,
+    "duration": 2.8
   },
   "hover": {
-    "preset": "tada",
-    "amount": 0.8
+    "preset": "flip",
+    "duration": 0.8
   },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "pop"
+      "preset": "tada",
+      "amount": 0.8
     },
     {
-      "preset": "glow"
+      "preset": "pop"
     }
   ],
   "swap": [

@@ -1,15 +1,24 @@
 {
   "name": "package",
-  "intent": "bounces softly like a parcel being delivered",
+  "intent": "hops softly like a parcel being delivered",
   "loop": {
     "preset": "bounce",
-    "amount": 0.45,
-    "duration": 1.8
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 2.6
   },
   "hover": {
     "preset": "bounce",
-    "amount": 1
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "rock",
@@ -20,7 +29,11 @@
       "amount": 0.6
     },
     {
-      "preset": "jelly"
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
     },
     {
       "preset": "pass",

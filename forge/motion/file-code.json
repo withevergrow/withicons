@@ -1,33 +1,10 @@
 {
   "name": "file-code",
-  "intent": "ticks like code being typed",
-  "loop": {
-    "preset": "type",
-    "amount": 0.5,
-    "duration": 1.4
-  },
-  "hover": {
-    "preset": "wiggle",
-    "amount": 0.6,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "float",
-      "amount": 0.4
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "code",
-      "effect": "flip"
-    },
-    {
-      "to": "file",
-      "effect": "fade"
-    }
-  ]
+  "intent": "the page rests while its brackets wiggle like code being edited",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "wiggle", "origin": [12, 14.5], "amount": 0.4, "duration": 0.6 },
+  "parts": { "A": { "preset": "wiggle", "origin": [12, 14.5], "amount": 0.4 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "type", "amount": 0.5 }, { "preset": "pop" }],
+  "swap": [{ "to": "code", "effect": "flip" }, { "to": "file", "effect": "fade" }]
 }

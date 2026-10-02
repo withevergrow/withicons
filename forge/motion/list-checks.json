@@ -1,21 +1,35 @@
 {
   "name": "list-checks",
-  "intent": "ticks off tasks like a to-do list getting done",
+  "intent": "its checkmarks tick in one after another like tasks getting done",
   "loop": {
-    "preset": "nod",
-    "amount": 0.5,
-    "duration": 2.6
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
   },
   "hover": {
     "preset": "draw",
     "duration": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        5.25,
+        12
+      ],
+      "amount": 0.9,
+      "duration": 1.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
-      "preset": "pop"
+      "preset": "nod",
+      "amount": 0.6
     },
     {
-      "preset": "draw"
+      "preset": "pop"
     }
   ],
   "swap": [

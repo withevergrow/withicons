@@ -1,19 +1,31 @@
 {
   "name": "rainbow",
-  "intent": "glows softly after the rain, arcs draw on when touched",
+  "intent": "bands glow in a soft ripple after the rain, arcs draw on when touched",
   "loop": {
     "preset": "breathe",
     "origin": [
       12,
       18
     ],
-    "duration": 3.4,
-    "amount": 0.8
+    "amount": 0.8,
+    "duration": 3.4
   },
   "hover": {
     "preset": "draw",
     "duration": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "breathe",
+      "origin": [
+        12,
+        18
+      ],
+      "amount": 1,
+      "delay": 0.35
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "glow"

@@ -1,37 +1,10 @@
 {
   "name": "chart-area",
-  "intent": "fills in like volume adding up over time",
-  "loop": {
-    "preset": "fill",
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "pop",
-    "origin": [
-      12,
-      20.5
-    ]
-  },
-  "alt": [
-    {
-      "preset": "draw"
-    },
-    {
-      "preset": "breathe",
-      "origin": [
-        12,
-        20.5
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "chart-line",
-      "effect": "fade"
-    },
-    {
-      "to": "chart-bar",
-      "effect": "slide-up"
-    }
-  ]
+  "intent": "area fills in like volume adding up, axes stay put",
+  "loop": { "preset": "fill", "duration": 3 },
+  "hover": { "preset": "fill", "duration": 0.9 },
+  "parts": { "A": { "preset": "pulse", "origin": [3.5, 20.5], "amount": 0.25 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "jelly", "origin": [14, 16.5], "amount": 0.8 }, { "preset": "draw" }],
+  "swap": [{ "to": "chart-line", "effect": "fade" }, { "to": "chart-bar", "effect": "slide-up" }]
 }

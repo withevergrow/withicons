@@ -1,16 +1,24 @@
 {
   "name": "cloud-lightning",
-  "intent": "flashes like a storm cloud about to strike",
+  "intent": "storm cloud hangs heavy while the bolt flashes; it strikes on touch",
   "loop": {
-    "preset": "flicker",
-    "amount": 0.7,
-    "duration": 2.6
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
   },
   "hover": {
     "preset": "shake",
-    "amount": 0.6,
-    "duration": 0.5
+    "amount": 0.45,
+    "duration": 0.55
   },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "float",

@@ -1,8 +1,10 @@
 {
   "name": "fuel",
-  "intent": "fills up like a tank being refuelled",
-  "loop": { "preset": "fill", "duration": 2.2 },
-  "hover": { "preset": "wiggle", "origin": [8, 21], "amount": 0.6, "duration": 0.6 },
-  "alt": [ { "preset": "pulse", "amount": 0.6 }, { "preset": "pop" } ],
-  "swap": [ { "to": "battery-charging", "effect": "fade" }, { "to": "droplet", "effect": "slide-down" }, { "to": "fuel@solid", "effect": "scale" } ]
+  "intent": "the pump stands ready while its hose sways on the hook",
+  "loop": {"preset": "pulse", "origin": [12,21], "amount": 0.25, "duration": 2.8},
+  "hover": {"preset": "pop", "origin": [12.5,12], "amount": 0.5, "duration": 0.5},
+  "parts": {"A": {"preset": "sway", "origin": [12.5,12], "amount": 0.6, "delay": 0.15, "duration": 2.8}},
+  "deco": "breathe",
+  "alt": [ {"preset": "pulse", "amount": 0.6}, {"preset": "pop"} ],
+  "swap": [ {"to": "battery-charging", "effect": "fade"}, {"to": "droplet", "effect": "slide-down"}, {"to": "fuel@solid", "effect": "scale"} ]
 }

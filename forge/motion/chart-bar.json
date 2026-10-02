@@ -1,18 +1,38 @@
 {
   "name": "chart-bar",
-  "intent": "fills up like a live dashboard and springs from its baseline",
+  "intent": "bars stretch up from a steady baseline like live data updating",
   "loop": {
-    "preset": "fill",
-    "duration": 2
-  },
-  "hover": {
     "preset": "jelly",
     "origin": [
       12,
       20.5
-    ]
+    ],
+    "amount": 0.45,
+    "duration": 3
   },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.25
+    }
+  },
+  "deco": "breathe",
   "alt": [
+    {
+      "preset": "fill"
+    },
     {
       "preset": "bounce",
       "origin": [
@@ -20,13 +40,6 @@
         20.5
       ],
       "amount": 0.6
-    },
-    {
-      "preset": "pop",
-      "origin": [
-        12,
-        20.5
-      ]
     }
   ],
   "swap": [

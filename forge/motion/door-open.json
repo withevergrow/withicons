@@ -1,42 +1,10 @@
 {
   "name": "door-open",
-  "intent": "beckons you through, like a door inviting you in",
-  "loop": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 0.4,
-    "duration": 2.6
-  },
-  "hover": {
-    "preset": "nudge",
-    "dir": 0,
-    "amount": 1
-  },
-  "alt": [
-    {
-      "preset": "flip",
-      "origin": [
-        14,
-        12
-      ],
-      "duration": 1.6
-    },
-    {
-      "preset": "pop"
-    }
-  ],
-  "swap": [
-    {
-      "to": "log-in",
-      "effect": "slide-left"
-    },
-    {
-      "to": "home",
-      "effect": "fade"
-    },
-    {
-      "to": "key",
-      "effect": "rotate"
-    }
-  ]
+  "intent": "beckons you through while its handle gives a little turn",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.3, "duration": 2.8 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 0.6 },
+  "parts": { "A": { "preset": "wiggle", "origin": [16.5, 11.5], "amount": 0.9, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "flip", "origin": [14, 12], "duration": 1.6 }, { "preset": "pop" }],
+  "swap": [{ "to": "log-in", "effect": "slide-left" }, { "to": "home", "effect": "fade" }, { "to": "key", "effect": "rotate" }]
 }

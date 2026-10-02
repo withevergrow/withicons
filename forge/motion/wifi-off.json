@@ -1,15 +1,29 @@
 {
   "name": "wifi-off",
-  "intent": "flickers like a connection that keeps dropping",
+  "intent": "arcs flicker like a dropping connection while the slash holds",
   "loop": {
     "preset": "flicker",
-    "amount": 0.6,
-    "duration": 2.8
+    "amount": 0.45,
+    "duration": 3.2
   },
   "hover": {
     "preset": "shake",
-    "amount": 0.6
+    "amount": 0.5,
+    "duration": 0.5
   },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.25,
+      "duration": 3.2,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "breathe",

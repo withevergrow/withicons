@@ -1,8 +1,60 @@
 {
   "name": "clapperboard",
-  "intent": "snaps shut like a scene starting: action!",
-  "loop": { "preset": "ring", "origin": [3, 11], "amount": 0.5, "duration": 2.6 },
-  "hover": { "preset": "ring", "origin": [3, 11], "amount": 0.9 },
-  "alt": [ { "preset": "tada" }, { "preset": "pop", "origin": [12, 16] } ],
-  "swap": [ { "to": "film", "effect": "fade" }, { "to": "play", "effect": "scale" }, { "to": "video-camera", "effect": "flip" } ]
+  "intent": "the clapper stick snaps down on its hinge: action!",
+  "loop": {
+    "preset": "pop",
+    "origin": [
+      3,
+      11
+    ],
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      3,
+      11
+    ],
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "ring",
+      "origin": [
+        3,
+        11
+      ],
+      "amount": 1.2
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        3,
+        11
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "film",
+      "effect": "fade"
+    },
+    {
+      "to": "play",
+      "effect": "scale"
+    },
+    {
+      "to": "video-camera",
+      "effect": "flip"
+    }
+  ]
 }

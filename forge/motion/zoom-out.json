@@ -1,8 +1,8 @@
 {
   "name": "zoom-out",
-  "intent": "pulls back, as if zooming out to see more",
+  "intent": "the lens dips back, as if zooming out to see more",
   "loop": {
-    "preset": "zoom",
+    "preset": "pop",
     "origin": [
       10.5,
       10.5
@@ -11,13 +11,25 @@
     "duration": 2.8
   },
   "hover": {
-    "preset": "zoom",
+    "preset": "pop",
     "origin": [
       10.5,
       10.5
     ],
     "amount": 0.9
   },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        10.5,
+        10.5
+      ],
+      "amount": 0.8,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tilt",

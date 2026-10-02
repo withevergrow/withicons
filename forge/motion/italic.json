@@ -1,13 +1,13 @@
 {
   "name": "italic",
-  "intent": "leans over like text turning italic",
+  "intent": "leans over like text turning italic, its serifs following",
   "loop": {
     "preset": "tilt",
     "origin": [
       12,
       20
     ],
-    "amount": 0.6,
+    "amount": 0.5,
     "duration": 2.8
   },
   "hover": {
@@ -16,8 +16,19 @@
       12,
       20
     ],
-    "amount": 1.2
+    "amount": 1.1
   },
+  "parts": {
+    "A": {
+      "preset": "tilt",
+      "origin": [
+        12,
+        20
+      ],
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "sway",

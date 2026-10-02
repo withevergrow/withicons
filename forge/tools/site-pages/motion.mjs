@@ -2,7 +2,8 @@ import fs from 'fs'
 import zlib from 'zlib'
 // developers.html#motion — docs for @withicons/motion (contract: forge/MOTION.md). Live demos use the site's copy of the
 // runtime (site/vendor/motion/motion.css + motion.js, site/data/motion.js) when those files exist.
-import { SITE, icon, esc, code, cvar, siteExists, MOTION, PRESETS, EFFECTS, motionVars, ICON_NAMES, STYLES, hasStyle, styleTitle } from './lib.mjs'
+import { SITE, icon, esc, code, cvar, siteExists, MOTION, PRESETS, EFFECTS, motionVars, ICON_NAMES, STYLES, hasStyle, styleTitle, innerSvg } from './lib.mjs'
+import { specVars, decoOf, GROUND_PRESETS } from '../../../packages/motion/src/meta.js'
 
 const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
 const HAS = new Set(ICON_NAMES)
@@ -51,6 +52,80 @@ function pickDemo(preset, taken) {
 export function wm(name, style, size, m, trigger = 'loop', extra = '') {
   const v = motionVars(m)
   return `<span class="wm wm-${trigger} wm-p-${m.preset}${extra ? ' ' + extra : ''}" data-wm-preset="${m.preset}"${v ? ` style="${v}"` : ''}>${I(name, style, size)}</span>`
+}
+
+/** The icon's OWN motion, part by part: no preset class, the spec's loop + parts variables inline (what data-wm and
+ *  icons.css do), so plates keep their own move, decorations their own loop and shadows stay on the ground. */
+export function wmOwn(name, style, size, spec, extra = '') {
+  const v = Object.entries(specVars(spec)).filter(([k]) => k.startsWith('--wmL')).map(([k, x]) => k + ':' + x)
+  if (extra) v.push(extra)
+  return `<span class="wm wm-loop" data-wm-preset="${spec.loop.preset}" style="${v.join(';')}">${I(name, style, size)}</span>`
+}
+
+// ---- parts choreography (forge/MOTION.md): demos picked at build time from what the renderers actually tag
+const tagged = (n, s, t) => { try { return new RegExp('\\sclass="[^"]*\\bwm-' + t + '\\b').test(innerSvg(n, s)) } catch { return false } }
+const PART_NAMES = ['bell', 'trash', 'sun', 'heart', 'rocket', 'gift', 'star', 'cloud', 'trophy', 'mail', 'lock', 'coffee', 'moon', 'flame', 'package', 'balloon', 'camera', 'music', 'lightbulb', 'leaf', 'smile', 'crown', 'sparkles', 'plane', 'cake']
+function partsDemos() {
+  const names = PART_NAMES.filter(n => has(n) && MOTION[n] && MOTION[n].loop)
+  const out = [], used = new Set()
+  const take = (kind, list) => { for (const [n, s] of list) if (!used.has(n) && hasStyle(s) && tagged(n, s, kind === 'plate' ? 'a' : kind)) { used.add(n); out.push({ kind, n, s }); return } }
+  // a moving part with its own move in the spec (a clapper that rings a beat behind)
+  take('plate', names.filter(n => MOTION[n].parts && MOTION[n].parts.A).flatMap(n => [[n, 'line'], [n, 'solid']]))
+  // decorations: backdrop shapes, sparkles, hearts
+  take('deco', ['bauhaus', 'sticker', 'kawaii'].flatMap(s => names.map(n => [n, s])))
+  // a ground shadow under a lift (float, bounce, rise…)
+  take('shadow', ['luxe', 'sticker', 'skeuo', 'retro'].flatMap(s => names.filter(n => GROUND_PRESETS.includes(MOTION[n].loop.preset)).map(n => [n, s])))
+  const sparkly = ['heart', 'star', 'gift', 'trophy', 'balloon', 'cake', 'crown', 'sparkles'].filter(n => names.includes(n))
+  take('deco', ['sticker', 'kawaii', 'bauhaus'].flatMap(s => sparkly.concat(names).map(n => [n, s])))
+  return out
+}
+const DECO_SAY = { breathe: 'breathe in place', float: 'drift gently', twinkle: 'twinkle', still: 'keep still' }
+function partsSay(d) {
+  const sp = MOTION[d.n], m = sp.loop, A = sp.parts && sp.parts.A
+  const say = [`The ${esc(d.n)} plays <code>${m.preset}</code>`]
+  if (tagged(d.n, d.s, 'a')) say.push(A ? `its moving part plays <code>${A.preset || m.preset}</code>${A.delay ? ' a beat behind' : ''}` : 'its moving part follows')
+  if (tagged(d.n, d.s, 'deco')) { const k = decoOf(m.preset, sp.deco); say.push(k === 'still' ? 'its decorations keep still' : `its decorations ${DECO_SAY[k]} on their own loop`) }
+  if (tagged(d.n, d.s, 'shadow')) say.push(GROUND_PRESETS.includes(m.preset) ? 'its shadow stays on the ground and shrinks as it lifts' : 'its shadow moves with it')
+  return say.length > 2 ? say.slice(0, -1).join(', ') + ' and ' + say.at(-1) + '.' : say.join(' and ') + '.'
+}
+function partsSection() {
+  const demos = partsDemos()
+  const deco = demos.find(d => d.kind === 'deco')
+  const card = (d, extra, label, desc) => `<li><div class="mo-preset" style="cursor:auto">
+          <span class="mo-demo" aria-hidden="true" style="height:96px;color:${cvar(d.s)}">${wmOwn(d.n, d.s, 56, MOTION[d.n], extra)}</span>
+          <code class="mo-name">${label}</code>
+          <span class="mo-desc">${desc}</span>
+        </div></li>`
+  const tags = [
+    ['(no class), <code>wm-k</code>', 'the object itself', 'plays the move, about the icon’s pivot'],
+    ['<code>wm-a</code>, <code>wm-s</code>', 'a moving part (clapper, lid, hand) and a badge', 'follows the object, or plays its own move from the spec’s <code>parts</code>, with a delay'],
+    ['<code>wm-deco</code>', 'decoration: backdrop shapes, sparkles, hearts, stars, confetti, accent dots', 'its own gentle loop (<code>breathe</code>, <code>float</code> or <code>twinkle</code>) about its own centre, out of step with the object. It never spins along'],
+    ['<code>wm-shadow</code>', 'cast shadow or ground', 'stays on the ground and shrinks or fades as the object lifts (<code>float</code>, <code>bounce</code>, <code>rise</code>, <code>drop</code>, <code>jelly</code>); otherwise moves with it'],
+    ['<code>wm-shine</code>', 'highlight on the object', 'moves with the object'],
+  ]
+  return `<h3 id="motion-parts">Parts: each piece moves its own way</h3>
+      <p>Spinning a whole drawing makes its backdrop square, its sparkles and its shadow spin too, and the icon looks broken. So every style <b>tags what it draws</b>, and the motion moves the parts: a sun turns while its backdrop only breathes, a heart beats while its sparkles twinkle on their own, a rocket lifts while its shadow stays on the ground, and a bell’s clapper rings a beat behind the bell.</p>
+      <p>You don’t add anything. It happens whenever an <b>inline SVG</b> sits directly inside a <code>wm</code> wrapper, or in <code>&lt;with-icon&gt;</code>. Icons in <code>&lt;img&gt;</code> and <code>&lt;i class="with …"&gt;</code> tags, swaps and the <code>draw</code> preset still move as one piece.</p>
+      ${demos.length ? `<ul class="mo-presets" data-motion-area>
+        ${demos.map(d => card(d, '', `${esc(d.n)} · ${esc(styleTitle(d.s))}`, partsSay(d))).join('\n        ')}
+        ${deco ? card(deco, '--wm-deco:none', `${esc(deco.n)} · --wm-deco: none`, 'The same icon with its decorations kept still: only the object moves.') : ''}
+      </ul>` : ''}
+      <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>Tag on an SVG node</th><th>What it is</th><th>While the icon moves</th></tr></thead><tbody>
+        ${tags.map(([c, w, d]) => `<tr><td>${c}</td><td>${w}</td><td>${d}</td></tr>`).join('')}
+      </tbody></table></div>
+      ${code(`<!-- the icon's own moves, part by part (needs icons.css) -->
+<span class="wm wm-loop" data-wm="sun"><svg …sun, bauhaus…></svg></span>
+
+<!-- keep the decorations still: only the object moves -->
+<span class="wm wm-loop" data-wm="sun" style="--wm-deco: none"><svg …></svg></span>
+
+<!-- or choose their loop: wm-deco-breathe | wm-deco-float | wm-deco-twinkle -->
+<span class="wm wm-loop wm-p-spin" style="--wm-deco: wm-deco-float"><svg …></svg></span>`, 'html', 'Decorations')}
+      ${code(`import { motion } from '@withicons/motion'
+
+motion(el, 'sun')                       // the sun turns, its backdrop breathes
+motion(el, 'sun', { deco: 'still' })    // 'breathe' | 'float' | 'twinkle' | 'still'`, 'js', 'JavaScript')}
+      <p class="pg-note">The tags are plain classes (<code>class="wm-deco"</code>): harmless without the motion CSS and kept by every package. A preset you pick (<code>wm-p-spin</code>) moves the object and its parts together, while decorations and shadows keep their own behaviour. Animated SVG, GIF, video and Lottie downloads move part by part too, and record until the decoration loop comes back round.</p>`
 }
 
 const SWAPS = [['play', 'pause', 'flip'], ['eye', 'eye-off', 'blur'], ['menu', 'close', 'rotate'], ['sun', 'moon', 'spin'], ['lock', 'unlock', 'slide-up'], ['heart', 'heart@solid', 'scale'], ['bell', 'bell-off', 'morph'], ['copy', 'check', 'fade'], ['volume', 'volume-x', 'slide-left'], ['plus', 'minus', 'rotate']]
@@ -194,18 +269,19 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
     ['wm-paused', 'Holds still. Toggle it to pause and resume.'],
     ['data-wm="bell"', 'Uses that icon’s own motion from <code>icons.css</code>: the right pivot, direction and speed.'],
     ['wm-p-&lt;preset&gt;', 'Picks any preset yourself, e.g. <code>wm-p-tada</code>. Overrides the icon’s own.'],
+    ['wm-parts', 'Set for you by <code>motion()</code> and <code>&lt;with-icon&gt;</code> when the SVG has <a href="#motion-parts">part tags</a>. Only needed by hand in browsers without <code>:has()</code>.'],
     ['wm-force', 'Keeps moving even when the visitor asked for reduced motion. Use only for essential feedback like a loader.'],
   ]
-  const vars = [['--wm-dur', 'seconds per cycle', '<code>--wm-dur: 2s</code>'], ['--wm-k', 'intensity, 0.25 to 2', '<code>--wm-k: 1.5</code>'], ['--wm-ox / --wm-oy', 'pivot point, in % of the icon', '<code>--wm-ox: 50%; --wm-oy: 15%</code>'], ['--wm-dx / --wm-dy', 'direction for nudge, pass, rise…', '<code>--wm-dx: 0.7; --wm-dy: -0.7</code>'], ['--wm-steps', 'stepped motion (clock hands)', '<code>--wm-steps: 12</code>']]
+  const vars = [['--wm-dur', 'seconds per cycle', '<code>--wm-dur: 2s</code>'], ['--wm-k', 'intensity, 0.25 to 2', '<code>--wm-k: 1.5</code>'], ['--wm-ox / --wm-oy', 'pivot point, in % of the icon', '<code>--wm-ox: 50%; --wm-oy: 15%</code>'], ['--wm-dx / --wm-dy', 'direction for nudge, pass, rise…', '<code>--wm-dx: 0.7; --wm-dy: -0.7</code>'], ['--wm-steps', 'stepped motion (clock hands)', '<code>--wm-steps: 12</code>'], ['--wm-deco', 'how decorations move (none keeps them still)', '<code>--wm-deco: none</code>']]
   return `<section id="motion" class="dv-sec dv-motion" aria-labelledby="motion-h">
       <h2 id="motion-h">Animations <code class="dv-pkgname">@withicons/motion</code> ${soon}</h2>
       <div class="mo-intro">
         <div class="mo-intro-copy">
           <p class="mo-lede">Make any icon move: a bell that rings, a heart that beats, a play button that flips into pause.</p>
-          <p>Animations are a <b>separate, optional add-on</b>. Your icons never need it, and it works with every style and every package, because it moves the element that <em>holds</em> the icon rather than the drawing inside. Every icon comes with its own animation chosen to fit what it means, and you can pick from ${PRESETS.length} presets and ${EFFECTS.length} swap transitions.</p>
+          <p>Animations are a <b>separate, optional add-on</b>. Your icons never need it, and it works with every style and every package: put the classes on the element that <em>holds</em> the icon. Inline SVGs move <a href="#motion-parts">part by part</a>, so decorations and shadows never spin along with the object. Every icon comes with its own animation chosen to fit what it means, and you can pick from ${PRESETS.length} presets and ${EFFECTS.length} swap transitions.</p>
           <p class="pg-note">Not a developer? Open any icon, go to <b>Customize › Motion</b> and download an <b>Animated SVG</b> for your website or Notion, or a <b>GIF</b> for your slides. <a href="free/animated-icons.html">Free animated icons</a>. <a href="guides/animate-icons.html">Step-by-step guide</a>.</p>
         </div>
-        <div class="mo-stage" aria-hidden="true" data-motion-stage>${heroPicks.map((n, i) => { const s = heroStyles[i % heroStyles.length]; return `<span class="mo-stage-ic" style="--g:${cvar(s)};--i:${i}">${wm(n, s, 40, MOTION[n].loop)}<small>${esc(n)}</small></span>` }).join('')}</div>
+        <div class="mo-stage" aria-hidden="true" data-motion-stage>${heroPicks.map((n, i) => { const s = heroStyles[i % heroStyles.length]; return `<span class="mo-stage-ic" style="--g:${cvar(s)};--i:${i}">${wmOwn(n, s, 40, MOTION[n])}<small>${esc(n)}</small></span>` }).join('')}</div>
       </div>
 
       <h3 id="motion-install">Install</h3>
@@ -234,6 +310,8 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>Variable</th><th>Changes</th><th>Example</th></tr></thead><tbody>
         ${vars.map(([v, d, e]) => `<tr><td><code>${v}</code></td><td>${d}</td><td>${e}</td></tr>`).join('')}
       </tbody></table></div>
+
+      ${partsSection()}
 
       <h3 id="motion-presets">The ${PRESETS.length} presets</h3>
       <p>Each preset is one CSS animation that works on every icon. Click a card to copy its classes.</p>
@@ -278,7 +356,7 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
       ${tabs('mo', fw, 'Framework')}
 
       ${spec ? `<h3 id="motion-spec">Every icon’s own motion</h3>
-      <p>Each icon ships a small spec saying how it should move, in plain words and in numbers: its loop, its hover, good alternatives and the icons it naturally turns into. <code>motionFor(name)</code> returns it.</p>
+      <p>Each icon ships a small spec saying how it should move, in plain words and in numbers: its loop, its hover, how its parts move (<code>parts.A</code> for a moving part, <code>parts.S</code> for a badge, each with an optional <code>delay</code>), how its decorations move (<code>deco</code>), good alternatives and the icons it naturally turns into. <code>motionFor(name)</code> returns it.</p>
       ${code(JSON.stringify(spec, null, 2), 'json', `motionFor('${spec.name}')`)}` : ''}
 
       <h3 id="motion-a11y">Reduced motion</h3>

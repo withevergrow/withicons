@@ -25,6 +25,9 @@ export const K = {
   AUTO: true,      // knock out interior lines when an icon has fills but no cutouts
   HEADS: true,     // close arrowheads into solid triangles
   RESPECT: true,   // leave plate joins alone where the author's cutouts already resolve them
+  PARTS: true,     // emit free-standing A / S pieces as their own wm-a / wm-s nodes (motion parts).
+                   // Geometry is loop-for-loop identical; only anti-aliasing where two pieces share a
+                   // pixel can differ (<= 12/255 alpha on a few pixels at 16px, none from 32px up)
 }
 
 const LO = 0.5   // field reach where only the edge matters
@@ -222,6 +225,12 @@ function build(icon) {
   }
   const mass = kMass
   for (const pt of parts) F.union(mass, pt.P)
+  // ink that belongs to the A plate (outer parts) and the S plate (badges, modifiers,
+  // slashes): only used to tag separate pieces for motion, never to shape the mass
+  const aInk = parts.length ? F.field(1) : null
+  if (aInk) for (const pt of parts) F.union(aInk, pt.P)
+  let sInk = null
+  const addS = G => { if (!sInk) sInk = F.field(1); F.union(sInk, G) }
 
   // --- knockouts
   const cutArea = [], cutLine = []
@@ -255,27 +264,75 @@ function build(icon) {
     F.subtract(disc, knock)
     F.subtract(disc, cuts)
     F.union(mass, disc)
+    addS(disc)
   }
   // --- free modifiers (S glyphs outside any badge): separated bold strokes
   const free = glyphs.filter(g => !badgeOf(g))
   if (free.length) {
     cut = true
     F.subtract(mass, F.strokes(free, K.W + 2 * K.GAP_S))
-    F.union(mass, F.strokes(free, K.W))
+    const G = F.strokes(free, K.W)
+    F.union(mass, G)
+    addS(G)
   }
   // --- slashes: a clean gap either side, then the slash itself
   for (const s of slashes) {
     cut = true
     F.subtract(mass, F.strokes([s], K.W + 2 * K.GAP_S))
-    F.union(mass, F.strokes([s], K.W))
+    const G = F.strokes([s], K.W)
+    F.union(mass, G)
+    addS(G)
   }
-  return { mass, cut }
+  return { mass, cut, aInk, sInk }
 }
 
 export function solidLoops(icon) {
-  let { mass, cut } = build(icon)
+  return solidPlates(icon).flatMap(p => p.loops)
+}
+
+// The mass split by plate for motion (forge/MOTION.md "Parts choreography"): every
+// separate piece of ink (8-connected on the field grid) that is made only of A-part
+// ink becomes plate A, only of S ink plate S, everything else (and every piece where
+// a part runs into the object) stays K. Pieces never touch, so tracing each plate's
+// pieces on its own yields exactly the loops of the whole mass.
+export function solidPlates(icon) {
+  let { mass, cut, aInk, sInk } = build(icon)
   if (cut && K.SLIVER > 0) mass = F.open(mass, K.SLIVER)
-  return F.trace(mass, K.TOL)
+  if (!K.PARTS || (!aInk && !sInk)) return [{ plate: 'K', loops: F.trace(mass, K.TOL) }]
+  const N = F.N, NN = N * N
+  const comp = new Int32Array(NN).fill(-1)
+  const stats = [] // per piece: [cells, aCells, sCells]
+  const stack = []
+  for (let s = 0; s < NN; s++) {
+    if (!(mass[s] < 0) || comp[s] >= 0) continue
+    const id = stats.length, st = [0, 0, 0]
+    stats.push(st)
+    comp[s] = id; stack.push(s)
+    while (stack.length) {
+      const c = stack.pop(), j = (c / N) | 0, i = c - j * N
+      st[0]++
+      if (sInk && sInk[c] < 0) st[2]++
+      else if (aInk && aInk[c] < 0) st[1]++
+      for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) {
+        const ii = i + di, jj = j + dj
+        if (ii < 0 || jj < 0 || ii >= N || jj >= N) continue
+        const q = jj * N + ii
+        if (comp[q] < 0 && mass[q] < 0) { comp[q] = id; stack.push(q) }
+      }
+    }
+  }
+  const plateOf = stats.map(([n, a, s]) => {
+    const k = n - a - s
+    if (k > n * 0.02) return 'K'
+    return s >= a ? 'S' : 'A'
+  })
+  const plates = ['K', 'A', 'S'].filter(p => plateOf.includes(p))
+  if (plates.length < 2) return [{ plate: plates[0] || 'K', loops: F.trace(mass, K.TOL) }]
+  return plates.map(p => {
+    const G = Float32Array.from(mass)
+    for (let c = 0; c < NN; c++) if (comp[c] >= 0 && plateOf[comp[c]] !== p) G[c] = 1
+    return { plate: p, loops: F.trace(G, K.TOL) }
+  }).filter(p => p.loops.length)
 }
 
 export default {
@@ -286,13 +343,20 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor' },
   render(icon) {
-    let loops = []
-    try { loops = solidLoops(icon) } catch (e) { loops = [] }
-    if (!loops.length) {
+    let plates = []
+    try { plates = solidPlates(icon) } catch (e) { plates = [] }
+    if (!plates.some(p => p.loops.length)) {
       // last resort: the plain centrelines, so nothing ever renders empty
+      let loops = []
       try { loops = F.trace(F.strokes(icon.lines || [], K.W), K.TOL) } catch { loops = [] }
+      plates = [{ plate: 'K', loops }]
     }
-    const d = loops.map(l => polyD(l, true)).join('')
-    return [['path', { d, 'fill-rule': 'evenodd' }]]
+    // K stays untagged (motion treats untagged geometry as wm-k); A and S pieces that
+    // stand apart from the object become their own nodes
+    return plates.map(({ plate, loops }) => {
+      const a = { d: loops.map(l => polyD(l, true)).join(''), 'fill-rule': 'evenodd' }
+      if (plate !== 'K') a.class = plate === 'A' ? 'wm-a' : 'wm-s'
+      return ['path', a]
+    })
   },
 }

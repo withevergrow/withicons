@@ -62,7 +62,63 @@ export function build(ctx) {
     if (!fs.existsSync(f) || fs.readFileSync(f, 'utf8') !== js) fs.writeFileSync(f, js)
     report.push(`${s.name}: ${Object.keys(map).length} icons, ${(js.length / 1024).toFixed(0)} KB${fails ? `, ${fails} FAILED` : ''}`)
   }
+  report.push(homePacks(ctx))
   return `site data: ${icons.length} icons x ${ctx.styles.length} styles\n  ` + report.join('\n  ')
+}
+
+// Home page packs (site/js/home-icons.js = window.WITH_HOME, site/js/home-icons-more.js = window.WITH_HOME_MORE) carry
+// only what the home page animates, per style. Styles already in a pack are left byte-identical (their entries were
+// hand-tuned, e.g. pathLength for draw-on); a style the packs do not have yet is ADDED from this build's renders:
+// its showcase lane (LANES, falling back to the hero/stage icons), the stage, the hero icons it is listed under, and in
+// the second pack every other icon the picker grid and "Icons that move" use.
+const LANES = {
+  luxe: ['crown', 'gem', 'trophy', 'gift', 'key', 'wallet', 'credit-card', 'rocket', 'heart', 'star', 'bell', 'shield-check'],
+  bauhaus: ['home', 'clock', 'music-note', 'camera', 'sun', 'compass', 'palette', 'globe', 'book-open', 'lightbulb', 'chart-pie', 'star'],
+  skeuo: ['camera', 'calendar', 'clock', 'mail', 'phone', 'settings', 'folder', 'music-note', 'lock', 'headphones', 'notebook', 'microphone'],
+}
+// the hero headline icons a new style joins (index.html data-ht-styles must list it too)
+const HERO = { luxe: 'globe', bauhaus: 'chart-bar', skeuo: 'smartphone' }
+function homePacks(ctx) {
+  const files = [['home-icons.js', 'WITH_HOME'], ['home-icons-more.js', 'WITH_HOME_MORE']].map(([f, g]) => {
+    const file = path.join(ROOT, 'site', 'js', f)
+    if (!fs.existsSync(file)) return null
+    const src = fs.readFileSync(file, 'utf8')
+    const at = src.indexOf(`window.${g}=`)
+    if (at < 0) return null
+    return { file, g, head: src.slice(0, at), data: JSON.parse(src.slice(at + g.length + 8).trim().replace(/;$/, '')) }
+  })
+  const [A, B] = files
+  if (!A) return 'home packs: none found'
+  const byName = new Map(ctx.icons.map(i => [i.name, i]))
+  const innerOf = (n, s) => { const i = byName.get(n); return i && i.render[s] ? i.render[s].inner : null }
+  const added = []
+  for (const st of ctx.styles) {
+    const s = st.name
+    if (A.data.svg[s] && !LANES[s]) continue // the original twelve stay as they are; LANES styles follow their renderer
+    const ok = n => innerOf(n, s) != null
+    const lane = (LANES[s] || A.data.stage.concat(A.data.grid)).filter(ok).filter((n, i, a) => a.indexOf(n) === i).slice(0, 12)
+    if (lane.length < 6) continue // a renderer still being built: leave it out until it draws enough
+    const hero = HERO[s] && A.data.hero[HERO[s]] ? [HERO[s]] : []
+    const main = [...new Set([...lane, ...A.data.stage, ...hero])].filter(ok).sort()
+    A.data.svg[s] = Object.fromEntries(main.map(n => [n, innerOf(n, s)]))
+    A.data.roots[s] = st.root || { fill: 'currentColor' }
+    A.data.lanes[s] = lane
+    if (hero.length && !A.data.hero[hero[0]].includes(s)) A.data.hero[hero[0]].push(s)
+    if (!A.data.styles.includes(s)) A.data.styles.push(s)
+    if (B) {
+      const mv = B.data.moves || {}
+      const want = [...(B.data.grid || []), ...Object.keys(B.data.motion || {}), ...(mv.loops || []), ...(mv.hover || []),
+        ...(mv.swaps || []).flat().map(n => String(n).split('@')[0])]
+      const rest = [...new Set(want)].filter(n => ok(n) && !main.includes(n)).sort()
+      B.data.svg[s] = Object.fromEntries(rest.map(n => [n, innerOf(n, s)]))
+    }
+    added.push(`${s} (${main.length}+${B ? Object.keys(B.data.svg[s]).length : 0} icons)`)
+  }
+  for (const p of files) if (p) {
+    const js = `${p.head}window.${p.g}=${JSON.stringify(p.data)};\n`
+    if (fs.readFileSync(p.file, 'utf8') !== js) fs.writeFileSync(p.file, js)
+  }
+  return `home packs: ${added.length ? 'added ' + added.join(', ') : 'up to date'}`
 }
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {

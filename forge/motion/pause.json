@@ -1,46 +1,9 @@
 {
   "name": "pause",
-  "intent": "bars breathe gently while playback rests",
-  "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.6,
-    "duration": 3
-  },
-  "hover": {
-    "preset": "pop",
-    "origin": [
-      12,
-      12
-    ]
-  },
-  "alt": [
-    {
-      "preset": "pulse",
-      "origin": [
-        12,
-        12
-      ]
-    },
-    {
-      "preset": "jelly",
-      "origin": [
-        12,
-        20
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "play",
-      "effect": "morph"
-    },
-    {
-      "to": "stop",
-      "effect": "scale"
-    }
-  ]
+  "intent": "the bars pulse slowly, holding their place while playback rests",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.35, "duration": 3 },
+  "hover": { "preset": "pop", "origin": [12, 12], "amount": 0.8 },
+  "deco": "breathe",
+  "alt": [ { "preset": "pulse", "origin": [12, 12] }, { "preset": "jelly", "origin": [12, 20] } ],
+  "swap": [ { "to": "play", "effect": "morph" }, { "to": "stop", "effect": "scale" } ]
 }

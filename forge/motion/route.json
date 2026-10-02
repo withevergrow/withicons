@@ -1,18 +1,31 @@
 {
   "name": "route",
-  "intent": "traces the path from start to finish",
+  "intent": "traces the path between its two stops",
   "loop": {
     "preset": "draw",
-    "duration": 3
+    "duration": 3.2
   },
   "hover": {
     "preset": "draw",
     "duration": 1.2
   },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",
       "amount": 0.6
+    },
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
     }
   ],
   "swap": [

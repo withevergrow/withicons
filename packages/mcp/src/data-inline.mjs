@@ -17,8 +17,11 @@ import s8 from '../dist/data/svg-kawaii.json?text'
 import s9 from '../dist/data/svg-sticker.json?text'
 import s10 from '../dist/data/svg-pixel.json?text'
 import s11 from '../dist/data/svg-retro.json?text'
+import s12 from '../dist/data/svg-luxe.json?text'
+import s13 from '../dist/data/svg-bauhaus.json?text'
+import s14 from '../dist/data/svg-skeuo.json?text'
 
-const raw = { "line": s0, "solid": s1, "duo": s2, "gloss": s3, "engrave": s4, "blueprint": s5, "sketch": s6, "glass": s7, "kawaii": s8, "sticker": s9, "pixel": s10, "retro": s11 }
+const raw = { "line": s0, "solid": s1, "duo": s2, "gloss": s3, "engrave": s4, "blueprint": s5, "sketch": s6, "glass": s7, "kawaii": s8, "sticker": s9, "pixel": s10, "retro": s11, "luxe": s12, "bauhaus": s13, "skeuo": s14 }
 const svgs = {}
 let palettes = null
 export function loadData() {

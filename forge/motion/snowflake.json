@@ -9,6 +9,7 @@
     "preset": "spin-once",
     "duration": 0.9
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "twinkle"

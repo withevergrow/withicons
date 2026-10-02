@@ -1,7 +1,7 @@
 {
   "name": "@withicons/mcp",
   "version": "0.2.0",
-  "description": "MCP server for with icons: search 500 icons x 12 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, and animation code (@withicons/motion). stdio (npx) and AWS Lambda.",
+  "description": "MCP server for with icons: search 500 icons x 15 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, and animation code (@withicons/motion). stdio (npx) and AWS Lambda.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -45,7 +45,10 @@
     "kawaii-icons",
     "sticker-icons",
     "pixel-icons",
-    "retro-icons"
+    "retro-icons",
+    "luxe-icons",
+    "bauhaus-icons",
+    "skeuo-icons"
   ],
   "type": "module",
   "bin": {

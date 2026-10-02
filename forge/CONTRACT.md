@@ -26,7 +26,19 @@ One **skeleton** per icon. Seven **style renderers** turn every skeleton into a 
 | `pixel` | creative | `forge/styles/pixel.mjs` — crisp pixel art on a 16×16 grid |
 | `retro` | creative | `forge/styles/retro.mjs` — 70s sunset stripes and chunky outline |
 
-Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro`.
+| `luxe` | creative | `forge/styles/luxe.mjs` — premium, luxurious, multi-layered 3D |
+| `bauhaus` | creative | `forge/styles/bauhaus.mjs` — Bauhaus: primary colours, pure geometry, bold composition |
+| `skeuo` | creative | `forge/styles/skeuo.mjs` — skeuomorphic: real materials, depth, light and texture |
+
+Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo`.
+
+### Run 7 styles (luxe, bauhaus, skeuo)
+Palette styles too, with **role-named variables**: `--with-<style>-<role>` where role is one of the palette roles
+`ink c1 c2 c3 c4 tint accent shadow shine edge` (e.g. `fill="var(--with-luxe-c1, #1E2A5A)"`), so per-icon palettes and the
+editor's colour pickers work automatically (forge/lib/palette-map.mjs). Same ban on defs/ids/gradients/filters/masks: smooth
+3D shading and material comes from stacked tonal layers (4–8 inset/offset contours with stepped colour/opacity read as a
+smooth ramp at icon sizes), specular shapes and cast shadows built from real geometry. Size: target < 6 KB, ceiling 14 KB.
+
 
 ### Palette styles (glass, kawaii, sticker, pixel, retro)
 These five may use a **default palette**, but every colour must be a CSS custom property with a literal fallback,

@@ -1,14 +1,16 @@
 {
   "name": "at-sign",
-  "intent": "breathes calmly, spins round when you mention someone",
+  "intent": "pings softly, swirls round once when you mention someone",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 3.2
   },
   "hover": {
-    "preset": "spin-once"
+    "preset": "spin-once",
+    "duration": 0.7
   },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "spin",

@@ -1,14 +1,14 @@
 {
   "name": "monitor",
-  "intent": "glows softly like a screen that is on",
+  "intent": "its screen glows softly like a display that is on",
   "loop": {
-    "preset": "breathe",
+    "preset": "glow",
     "origin": [
       12,
       21
     ],
-    "amount": 0.5,
-    "duration": 3.6
+    "amount": 0.6,
+    "duration": 3.2
   },
   "hover": {
     "preset": "zoom",
@@ -16,13 +16,17 @@
       12,
       10
     ],
-    "amount": 0.5,
+    "amount": 0.4,
     "duration": 0.6
   },
   "alt": [
     {
-      "preset": "glow",
-      "amount": 0.7
+      "preset": "breathe",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5
     },
     {
       "preset": "pop"

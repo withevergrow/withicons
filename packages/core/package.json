@@ -1,7 +1,7 @@
 {
   "name": "@withicons/core",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.",
+  "description": "500 icons x 15 styles as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -37,7 +37,10 @@
     "kawaii",
     "sticker",
     "pixel",
-    "retro"
+    "retro",
+    "luxe",
+    "bauhaus",
+    "skeuo"
   ],
   "type": "module",
   "sideEffects": false,
@@ -175,6 +178,36 @@
         "default": "./dist/nodes/retro.cjs"
       }
     },
+    "./nodes/luxe": {
+      "import": {
+        "types": "./dist/nodes/luxe.d.ts",
+        "default": "./dist/nodes/luxe.js"
+      },
+      "require": {
+        "types": "./dist/nodes/luxe.d.cts",
+        "default": "./dist/nodes/luxe.cjs"
+      }
+    },
+    "./nodes/bauhaus": {
+      "import": {
+        "types": "./dist/nodes/bauhaus.d.ts",
+        "default": "./dist/nodes/bauhaus.js"
+      },
+      "require": {
+        "types": "./dist/nodes/bauhaus.d.cts",
+        "default": "./dist/nodes/bauhaus.cjs"
+      }
+    },
+    "./nodes/skeuo": {
+      "import": {
+        "types": "./dist/nodes/skeuo.d.ts",
+        "default": "./dist/nodes/skeuo.js"
+      },
+      "require": {
+        "types": "./dist/nodes/skeuo.d.cts",
+        "default": "./dist/nodes/skeuo.cjs"
+      }
+    },
     "./svg/*": "./dist/svg/*",
     "./icons.json": "./dist/icons.json",
     "./aliases.json": "./dist/aliases.json",
@@ -230,6 +263,15 @@
       ],
       "nodes/retro": [
         "./dist/nodes/retro.d.ts"
+      ],
+      "nodes/luxe": [
+        "./dist/nodes/luxe.d.ts"
+      ],
+      "nodes/bauhaus": [
+        "./dist/nodes/bauhaus.d.ts"
+      ],
+      "nodes/skeuo": [
+        "./dist/nodes/skeuo.d.ts"
       ],
       "palettes/*": [
         "./dist/palettes/*"

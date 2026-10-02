@@ -1,6 +1,6 @@
 {
   "name": "signal",
-  "intent": "bars fill up as the signal gets stronger",
+  "intent": "bars fill up from the base as the signal gets stronger",
   "loop": {
     "preset": "fill",
     "origin": [
@@ -15,8 +15,9 @@
       12,
       19.5
     ],
-    "duration": 0.9
+    "duration": 0.8
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pulse",

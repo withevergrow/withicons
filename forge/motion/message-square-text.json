@@ -1,15 +1,10 @@
 {
   "name": "message-square-text",
-  "intent": "quivers like text being typed, pops from its tail on hover",
-  "loop": { "preset": "type", "amount": 0.5, "duration": 1.4 },
-  "hover": { "preset": "pop", "origin": [3, 21] },
-  "alt": [
-    { "preset": "breathe", "amount": 0.5 },
-    { "preset": "jelly", "origin": [3, 21] }
-  ],
-  "swap": [
-    { "to": "message-square", "effect": "fade" },
-    { "to": "message-square-text@solid", "effect": "fade" },
-    { "to": "check", "effect": "scale" }
-  ]
+  "intent": "the bubble swells from its tail while its lines jitter like text being typed",
+  "loop": {"preset": "pulse", "origin": [3,21], "amount": 0.25, "duration": 3.2},
+  "hover": {"preset": "pop", "origin": [3,21], "duration": 0.55},
+  "parts": {"A": {"preset": "type", "amount": 0.9, "duration": 1.6, "delay": 0.06}},
+  "deco": "twinkle",
+  "alt": [ {"preset": "type", "amount": 0.5}, {"preset": "jelly", "origin": [3,21]} ],
+  "swap": [ {"to": "message-square", "effect": "fade"}, {"to": "message-square-text@solid", "effect": "fade"}, {"to": "check", "effect": "scale"} ]
 }

@@ -1,8 +1,51 @@
 {
   "name": "app-window",
-  "intent": "pops open like an app window launching",
-  "loop":  { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
-  "hover": { "preset": "pop", "amount": 0.9, "duration": 0.5 },
-  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "float", "amount": 0.5 } ],
-  "swap":  [ { "to": "maximize", "effect": "scale" }, { "to": "monitor", "effect": "morph" }, { "to": "layout-template", "effect": "fade" } ]
+  "intent": "the window rests while its title-bar dots pulse; pops open on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.9,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        9.75,
+        7
+      ],
+      "amount": 0.8,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    },
+    {
+      "preset": "float",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "maximize",
+      "effect": "scale"
+    },
+    {
+      "to": "monitor",
+      "effect": "morph"
+    },
+    {
+      "to": "layout-template",
+      "effect": "fade"
+    }
+  ]
 }

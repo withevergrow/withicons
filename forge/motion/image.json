@@ -1,47 +1,10 @@
 {
   "name": "image",
-  "intent": "picture gently zooms in like a photo coming into focus",
-  "loop": {
-    "preset": "breathe",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.6,
-    "duration": 3.6
-  },
-  "hover": {
-    "preset": "zoom",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.8
-  },
-  "alt": [
-    {
-      "preset": "pop",
-      "origin": [
-        12,
-        12
-      ]
-    },
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        20
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "image-plus",
-      "effect": "fade"
-    },
-    {
-      "to": "film",
-      "effect": "slide-right"
-    }
-  ]
+  "intent": "the scene drifts gently inside its frame, like a living photo",
+  "loop": { "preset": "float", "amount": 0.25, "duration": 3.6 },
+  "hover": { "preset": "zoom", "origin": [12, 12], "amount": 0.6, "duration": 0.7 },
+  "parts": { "A": { "preset": "float", "amount": 0.6, "duration": 3.6, "delay": 0.2 } },
+  "deco": "float",
+  "alt": [ { "preset": "pop", "origin": [12, 12] }, { "preset": "tilt", "origin": [12, 20] } ],
+  "swap": [ { "to": "image-plus", "effect": "fade" }, { "to": "film", "effect": "slide-right" } ]
 }

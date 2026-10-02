@@ -1,10 +1,16 @@
 // emit-web — @withicons/web: a dependency-free <with-icon> custom element.
 //   dist/index.js         element + lazy per-style data chunks (auto-defines <with-icon>; SSR-safe)
 //   dist/full.js          element + every style inline, single file, for a CDN <script type="module">
-//   dist/data/<style>.js  { name: '<inner svg markup>' }   (lazy chunk)
+//   dist/data/<style>.js  { name: '<inner svg markup>' }   (lazy chunk; a sharded style's file re-exports its shards)
+//   dist/data/<style>/<i>.js  shard i of a heavy style: the icons whose withShard(name, count) === i
 //   dist/data/meta.js     { names, aliases }                (lazy chunk, only for alias/typo resolution)
 import zlib from 'zlib'
 import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
+
+// A style whose chunk is over SHARD_OVER bytes ships as shards of about SHARD_TARGET bytes (~10 KB gzip) each,
+// so one luxe icon costs one shard instead of the whole 3 MB style.
+const SHARD_OVER = 400 * 1024
+const SHARD_TARGET = 40 * 1024
 
 // ---- runtime (serialized with .toString(); free vars: STYLES, DEFAULT_STYLE, LOADERS, LOAD_META)
 function withWarnOnce(msg) {
@@ -36,20 +42,52 @@ function withRenderSvg(inner, variant, options) {
   for (const k in a) s += ' ' + k + '="' + esc(a[k]) + '"'
   return s + '>' + (inner || '') + '</svg>'
 }
+// Heavy styles are split into shards (LOADERS[style] is an array): an icon lives in shard withShard(name, count),
+// so one icon of a heavy style costs one small shard, not the whole style. Light styles are one chunk (a function).
+function withShard(name, n) {
+  let h = 2166136261
+  for (let i = 0; i < name.length; i++) { h ^= name.charCodeAt(i); h = Math.imul(h, 16777619) }
+  return (h >>> 0) % n
+}
+// loaded data under, then registerVariant() icons over (yours always win)
+function withMerge(v, map) { WITH_DATA[v] = Object.assign(WITH_DATA[v] || {}, map, WITH_USER[v] || {}); return WITH_DATA[v] }
+function withOnce(key, load, v) {
+  return WITH_PENDING[key] || (WITH_PENDING[key] = load().then(m => withMerge(v, m.default), e => { delete WITH_PENDING[key]; throw e }))
+}
 function loadVariant(variant) {
   const v = variant || DEFAULT_STYLE
-  if (WITH_DATA[v]) return Promise.resolve(WITH_DATA[v])
+  if (WITH_LOADED[v] || (WITH_DATA[v] && !withHas(LOADERS, v))) return Promise.resolve(WITH_DATA[v])
   if (!withHas(LOADERS, v)) return Promise.reject(new Error('with icons: unknown variant "' + v + '". Use one of: ' + Object.keys(STYLES).join(', ') + '.'))
-  return WITH_PENDING[v] || (WITH_PENDING[v] = LOADERS[v]().then(m => (WITH_DATA[v] = Object.assign(m.default, WITH_DATA[v] || {}))))
+  const L = LOADERS[v]
+  return (Array.isArray(L) ? Promise.all(L.map((f, i) => withOnce(v + '/' + i, f, v))) : withOnce(v, L, v))
+    .then(() => { WITH_LOADED[v] = 1; return WITH_DATA[v] })
 }
-function registerVariant(variant, map) { WITH_DATA[variant] = Object.assign(WITH_DATA[variant] || {}, map) }
+// the data that holds `name` (if that icon exists): its shard for a sharded style, else the whole style
+function withLoadFor(v, name) {
+  const L = withHas(LOADERS, v) ? LOADERS[v] : null
+  if (withHas(WITH_DATA[v], name)) return Promise.resolve(WITH_DATA[v])
+  if (!Array.isArray(L) || WITH_LOADED[v]) return loadVariant(v)
+  const i = withShard(name, L.length)
+  return withOnce(v + '/' + i, L[i], v)
+}
+function registerVariant(variant, map) {
+  WITH_USER[variant] = Object.assign(WITH_USER[variant] || {}, map)
+  WITH_DATA[variant] = Object.assign(WITH_DATA[variant] || {}, map)
+}
 function withLoadMeta() {
   if (WITH_META.value) return Promise.resolve(WITH_META.value)
   return WITH_META.pending || (WITH_META.pending = LOAD_META().then(m => (WITH_META.value = m.default)))
 }
 function withResolveName(name, variant) {
-  return loadVariant(variant).then(map => withHas(map, name) ? name
-    : withLoadMeta().then(meta => withLookup(name, k => withHas(map, k), meta.names, meta.aliases)))
+  const v = variant || DEFAULT_STYLE
+  return withLoadFor(v, name).then(map => withHas(map, name) ? name
+    : withLoadMeta().then(meta => {
+      // a sharded style has not loaded every icon: canonical names come from meta
+      const sharded = Array.isArray(withHas(LOADERS, v) ? LOADERS[v] : null) && !WITH_LOADED[v]
+      const known = sharded ? (WITH_META.set || (WITH_META.set = new Set(meta.names))) : null
+      const n = withLookup(name, k => withHas(WITH_DATA[v], k) || (!!known && known.has(k)), meta.names, meta.aliases)
+      return withLoadFor(v, n).then(() => n)
+    }))
 }
 function loadSvg(name, options) {
   const o = options || {}
@@ -128,14 +166,15 @@ function withProps() {
 }
 
 const RUNTIME = [LOOKUP_SRC, withWarnOnce, 'withWarnOnce.seen = {}', withHas, withRenderSvg,
-  'const WITH_DATA = {}', 'const WITH_PENDING = {}', 'const WITH_META = { value: null, pending: null }',
-  loadVariant, registerVariant, withLoadMeta, withResolveName, loadSvg,
+  'const WITH_DATA = {}', 'const WITH_USER = {}', 'const WITH_LOADED = {}', 'const WITH_PENDING = {}',
+  'const WITH_META = { value: null, pending: null, set: null }',
+  withShard, withMerge, withOnce, loadVariant, withLoadFor, registerVariant, withLoadMeta, withResolveName, loadSvg,
   "const WithBase = typeof HTMLElement === 'undefined' ? class {} : HTMLElement", WithIconElement, defineWithIcon, withProps, 'withProps()',
 ].map(String).join('\n')
 
 export default async function emit(ctx) {
   const P = 'packages/web'
-  const out = distWriter(ctx, P + '/dist')
+  const out = distWriter(ctx, P + '/dist', { keep: ['classes'] })   // dist/classes belongs to emit-web-classes
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/web ${ctx.version} — generated, do not edit. MIT.\n`
   const head = `const DEFAULT_STYLE = ${J(ctx.defaultStyle)}\nconst STYLES = ${J(styleTable(ctx))}\nconst styleNames = ${J(styleNames)}\n`
@@ -143,17 +182,36 @@ export default async function emit(ctx) {
   for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
   const meta = { names: ctx.icons.map(i => i.name), aliases }
   const data = {}
+  const shards = {}   // style -> shard count, only for the styles too heavy for one chunk
+  const shardJson = []
   for (const s of styleNames) {
     data[s] = {}
     for (const i of ctx.icons) data[s][i.name] = innerOf(ctx, i, s)
-    out.add(`data/${s}.js`, `${header}export default ${J(data[s])}\n`)
+    const raw = Buffer.byteLength(J(data[s]))
+    if (raw <= SHARD_OVER) out.add(`data/${s}.js`, `${header}export default ${J(data[s])}\n`)
+    else {
+      const n = shards[s] = Math.ceil(raw / SHARD_TARGET)
+      const parts = Array.from({ length: n }, () => ({}))
+      for (const i of ctx.icons) parts[withShard(i.name, n)][i.name] = data[s][i.name]
+      parts.forEach(p => shardJson.push(J(p)))
+      parts.forEach((p, k) => out.add(`data/${s}/${k}.js`, `${header}export default ${J(p)}\n`))
+      // the whole style still imports as one module (loadVariant, the class runtime, `@withicons/web/data/<style>`),
+      // in canonical icon order
+      out.add(`data/${s}.js`, header + parts.map((_, k) => `import p${k} from './${s}/${k}.js'\n`).join('') +
+        `const all = Object.assign({}, ${parts.map((_, k) => 'p' + k).join(', ')})\n` +
+        `export default Object.fromEntries(${J(ctx.icons.map(i => i.name))}.map(n => [n, all[n]]))\n`)
+    }
     out.add(`data/${s}.d.ts`, `import type { IconName } from '../index.js'\ndeclare const data: Record<IconName, string>\nexport default data\n`)
   }
   out.add('data/meta.js', `${header}export default ${J(meta)}\n`)
   out.add('data/meta.d.ts', `import type { IconName } from '../index.js'\ndeclare const meta: { names: IconName[]; aliases: Record<string, IconName[]> }\nexport default meta\n`)
 
   const exportsList = 'WithIconElement, defineWithIcon, loadVariant, registerVariant, loadSvg, styleNames'
-  const indexJs = `${header}${head}const LOADERS = { ${styleNames.map(s => `${J(s)}: () => import('./data/${s}.js')`).join(', ')} }\n` +
+  // literal import() paths so every bundler (Vite, webpack, Rollup, esbuild) sees and splits each chunk
+  const loader = s => shards[s]
+    ? `  ${J(s)}: [${Array.from({ length: shards[s] }, (_, k) => `() => import('./data/${s}/${k}.js')`).join(', ')}],`
+    : `  ${J(s)}: () => import('./data/${s}.js'),`
+  const indexJs = `${header}${head}const LOADERS = {\n${styleNames.map(loader).join('\n')}\n}\n` +
     `const LOAD_META = () => import('./data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
   out.add('index.js', indexJs)
   const fullData = styleNames.map(s => `registerVariant(${J(s)}, ${J(data[s])})`).join('\n')
@@ -225,11 +283,14 @@ declare global {
   }
   const kb = f => Math.round(Buffer.byteLength(f) / 1024)
   const gz = f => Math.round(zlib.gzipSync(f, { level: 9 }).length / 1024)
-  const chunks = styleNames.map(s => J(data[s]))
+  const chunks = styleNames.filter(s => !shards[s]).map(s => J(data[s]))
+  const sharded = styleNames.filter(s => shards[s])
   const sizes = {
     entry: kb(indexJs), entryGz: Math.max(1, gz(indexJs)),
     line: kb(J(data[ctx.defaultStyle])), lineGz: gz(J(data[ctx.defaultStyle])),
     max: Math.max(...chunks.map(kb)), maxGz: Math.max(...chunks.map(gz)),
+    sharded, shardMax: kb(shardJson.reduce((a, b) => b.length > a.length ? b : a, '')), shardMaxGz: Math.max(0, ...shardJson.map(gz)),
+    shardAvg: Math.round(shardJson.reduce((a, b) => a + Buffer.byteLength(b), 0) / Math.max(1, shardJson.length) / 1024),
     meta: kb(J(meta)), metaGz: gz(J(meta)),
     full: kb(chunks.join('')), fullGz: gz(chunks.join('')),
   }
@@ -291,10 +352,12 @@ Unknown names render nothing and log one console warning with the nearest matche
 
 | import | what | size |
 |---|---|---|
-| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`) | ${z.entry} KB (${z.entryGz} KB gzip) + one chunk per style used: \`${ctx.defaultStyle}\` ${z.line} KB (${z.lineGz} KB gzip), the largest ${z.max} KB (${z.maxGz} KB gzip) |
+| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`) | ${z.entry} KB (${z.entryGz} KB gzip) + one chunk per style used: \`${ctx.defaultStyle}\` ${z.line} KB (${z.lineGz} KB gzip), the largest ${z.max} KB (${z.maxGz} KB gzip)${z.sharded.length ? `; a heavy style loads one small shard per icon used (~${z.shardAvg} KB, at most ${z.shardMax} KB / ${z.shardMaxGz} KB gzip)` : ''} |
 | \`@withicons/web/full\` (\`dist/full.js\`) | one file, every style inline, adds sync \`svg(name, opts)\` | ~${z.full} KB (${z.fullGz} KB gzip) |
 
-A style's chunk loads once, the first time an icon of that style renders. Aliases and typos also load \`dist/data/meta.js\`
+A style's chunk loads once, the first time an icon of that style renders.${z.sharded.length ? ` The heavy styles (${z.sharded.map(s => '`' + s + '`').join(', ')})
+are split into shards of a few icons each (\`dist/data/<style>/<n>.js\`): an icon loads only its own shard, so one \`luxe\`
+icon costs a few KB instead of the whole style. \`loadVariant()\` and \`@withicons/web/data/<style>\` still return the whole style.` : ''} Aliases and typos also load \`dist/data/meta.js\`
 (${z.meta} KB, ${z.metaGz} KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
 chunks automatically. Use \`full\` only where a single file matters more than size.
 

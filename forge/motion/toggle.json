@@ -1,15 +1,24 @@
 {
   "name": "toggle",
-  "intent": "squishes like a switch being flipped",
+  "intent": "the knob slides across the track like a switch being flipped",
   "loop": {
     "preset": "jelly",
-    "amount": 0.5,
+    "amount": 0.3,
     "duration": 2.8
   },
   "hover": {
     "preset": "jelly",
-    "amount": 1.1
+    "amount": 0.7
   },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 2,
+      "delay": 0.05
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "pop"

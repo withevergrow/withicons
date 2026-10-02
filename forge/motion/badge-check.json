@@ -1,15 +1,28 @@
 {
   "name": "badge-check",
-  "intent": "swells proudly, a verified seal of approval",
+  "intent": "the seal sways gently while its check stays proud",
   "loop": {
-    "preset": "breathe",
-    "amount": 0.6,
-    "duration": 3
+    "preset": "rock",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.35,
+    "duration": 3.2
   },
   "hover": {
     "preset": "pop",
     "amount": 1.1
   },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
   "alt": [
     {
       "preset": "draw"

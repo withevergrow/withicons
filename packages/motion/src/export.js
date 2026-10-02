@@ -1,7 +1,8 @@
 // @withicons/motion/export — self-contained animated SVGs, frame rendering and GIF / WebM encoding.
 // animatedSvg() works anywhere (string in, string out). renderFrames(), gif(), video() and webm() need a browser.
 import { motionFor } from './index.js'
-import { PRESET_DEFAULTS, EFFECT_DEFAULTS, EFFECTS, DIRECTIONAL, dirVec, pct, swapEase, swapCycle } from './meta.js'
+import { resolveSpecMotion, partsPlan } from './parts.js'
+import { EFFECT_DEFAULTS, EFFECTS, dirVec, pct, swapEase, swapCycle, hasParts } from './meta.js'
 import { presetStops, keyframesCss, DRAW_KEYFRAMES, swapLoopStops, EFFECT_STATES, GLOW0, GLOW_HALO } from './keyframes.js'
 
 const num = n => String(Math.round(n * 1000) / 1000)
@@ -38,28 +39,7 @@ function markDraw(inner, rootStroked) {
 /** Resolves preset, timing and geometry for an export from an icon spec and/or explicit options. */
 export function resolveMotion(o) {
   o = o || {}
-  const trigger = ['loop', 'hover', 'once'].includes(o.trigger) ? o.trigger : 'loop'
-  const spec = o.spec || (o.name ? motionFor(o.name) : null)
-  const slot = spec ? (trigger === 'loop' ? spec.loop : spec.hover) : null
-  const preset = PRESET_DEFAULTS[o.preset] ? o.preset : (slot && PRESET_DEFAULTS[slot.preset] ? slot.preset : 'pop')
-  const base = slot && slot.preset === preset ? slot : {}
-  const d = PRESET_DEFAULTS[preset]
-  const loop = trigger === 'loop'
-  const pick = (a, b, c) => a != null && a !== '' ? Number(a) : b != null ? b : c
-  let dir = o.dir != null ? Number(o.dir) : base.dir
-  if (dir == null && DIRECTIONAL.includes(preset) && slot && slot.dir != null) dir = slot.dir
-  if (dir == null) dir = d.dir || 0
-  const steps = pick(o.steps, base.steps, 0)
-  return {
-    preset, trigger, loop,
-    // d.min: flicker never exports faster than its flash-safe minimum (WCAG 2.3.1, large GIFs / slides)
-    duration: Math.max(d.min || 0, pick(o.duration, base.duration, loop ? d.cycle : d.shot)),
-    k: pick(o.amount, base.amount, 1),
-    origin: o.origin || base.origin || d.origin || [12, 12],
-    dir, steps,
-    ease: steps > 0 ? `steps(${Math.round(steps)})` : (d.ease || 'linear'),
-    delay: pick(o.delay, null, 0),
-  }
+  return resolveSpecMotion(o.spec || (o.name ? motionFor(o.name) : null), o)
 }
 
 /**
@@ -76,7 +56,8 @@ export function animatedSvg(svg, opts) {
   if (o.swapTo) return animatedSwapSvg(svg, o.swapTo, o)
   const { attrs, inner } = parseSvg(svg)
   const m = resolveMotion(o)
-  const id = 'wm' + hash(svg + '|' + JSON.stringify(m))
+  const spec = o.spec || (o.name ? motionFor(o.name) : null)
+  const id = 'wm' + hash(svg + '|' + JSON.stringify(m) + (spec && (spec.parts || spec.deco) ? JSON.stringify([spec.parts, spec.deco]) : ''))
   const rootStroked = isStroke(attrs.stroke)
   const anyStroke = rootStroked || /\sstroke="(?!none")/.test(inner)
   let body = inner
@@ -95,6 +76,8 @@ export function animatedSvg(svg, opts) {
     const p = m.loop ? 'wm-draw-path-loop' : 'wm-draw-path', f = m.loop ? 'wm-draw-fill-loop' : 'wm-draw-fill'
     css += keyframesCss(`${id}-dp`, DRAW_KEYFRAMES[p]) + keyframesCss(`${id}-df`, DRAW_KEYFRAMES[f])
     css += `${on}[data-wm-pl]{stroke-dasharray:1 1.5;animation:${id}-dp ${timing}}${on}[data-wm-fill]{animation:${id}-df ${timing}}`
+  } else if (hasParts(inner)) {
+    css += partsCss(id, partsPlan(m, spec), on, frozen ? Number(o.time) : null)
   } else {
     const stops = presetStops(m.preset, m.loop, { k: m.k, dx, dy, em: 16 })
     // glow / twinkle: Safari ignores CSS `filter` on SVG child elements (WebKit bug 246106), so the halo is not
@@ -120,6 +103,33 @@ export function animatedSvg(svg, opts) {
   if (o.size) { a.width = o.size; a.height = o.size }
   if (o.color) a.color = o.color
   return `<svg${attrStr(a)}><style>${css}</style><g class="${id}-g">${body}</g></svg>`
+}
+
+// Parts choreography in an export: the <g> stands still and each tagged child plays its role (parts.js partsPlan),
+// with literal keyframes. time != null freezes every part at that moment (frame export).
+const ROLE_SEL = {
+  obj: ':not(.wm-deco,.wm-shadow,.wm-a,.wm-s,defs,title,desc,style)', a: '.wm-a', s: '.wm-s', shadow: '.wm-shadow', deco: '.wm-deco',
+}
+function partsCss(id, plan, on, time) {
+  let css = ''
+  const named = {}
+  for (const role of ['obj', 'shadow', 'a', 's', 'deco']) {
+    const r = plan[role]
+    if (!r) continue
+    const [dx, dy] = dirVec(r.dir || 0)
+    const key = r.key + '|' + r.k + '|' + r.dir
+    let name = named[key]
+    if (!name) {
+      name = named[key] = `${id}-${Object.keys(named).length}`
+      // the glow / twinkle halo stays a drop-shadow here: per part, so only the parts that glow get one
+      css += keyframesCss(name, r.stops({ k: r.k == null ? 1 : r.k, dx, dy, em: 16 }))
+    }
+    const delay = time != null ? -time + r.delay : r.delay
+    const origin = r.box === 'fill-box' || !r.origin ? '50% 50%' : `${pct(r.origin[0])} ${pct(r.origin[1])}`
+    css += `.${id}-g>${ROLE_SEL[role]}{transform-box:${r.box};transform-origin:${origin}}`
+    css += `${on}.${id}-g>${ROLE_SEL[role]}{animation:${name} ${num(r.duration)}s ${r.ease} ${num(delay)}s ${r.iter} both${time != null ? ';animation-play-state:paused' : ''}}`
+  }
+  return css
 }
 
 // The glow / twinkle halo as an SVG filter: two blurs of the icon's alpha, tinted --wm-glow (default currentColor)
@@ -173,11 +183,15 @@ export function animatedSwapSvg(aSvg, bSvg, opts) {
 }
 
 /** The total length of one cycle (loop) or one play (+ a short rest) for an export, in seconds. */
-export function exportDuration(opts) {
+export function exportDuration(opts, svg) {
   const o = opts || {}
   if (o.swapTo) return swapTiming(o).cycle
   const m = resolveMotion(o)
-  return m.loop ? m.duration : m.duration + 0.3
+  if (!m.loop) return m.duration + 0.3
+  // parts: the decorations loop over a whole number of object cycles; record until everything is back in place
+  const inner = svg ? parseSvg(svg).inner : ''
+  if (m.preset !== 'draw' && hasParts(inner) && /\sclass="[^"]*\bwm-deco\b/.test(inner)) return partsPlan(m, o.spec || (o.name ? motionFor(o.name) : null)).cycle
+  return m.duration
 }
 
 /** A frozen frame at `time` seconds. */
@@ -236,7 +250,7 @@ async function eachFrame(svg, opts, f, times, cb) {
 export async function renderFrames(svg, opts, frameOpts) {
   const f = frameOpts || {}
   const size = Math.round(f.size || 256), fps = f.fps || 30
-  const { times } = timeline(f.seconds || exportDuration(opts), fps, f.maxFrames || 600)
+  const { times } = timeline(f.seconds || exportDuration(opts, svg), fps, f.maxFrames || 600)
   const frames = []
   await eachFrame(svg, opts, Object.assign({}, f, { size }), times, d => {
     const c = document.createElement('canvas')
@@ -387,7 +401,7 @@ export function encodeGif(frames, opts) {
 export async function gif(svg, opts, frameOpts) {
   const f = Object.assign({ fps: 25, size: 128, maxFrames: 150 }, frameOpts)
   f.size = Math.round(f.size)
-  const seconds = f.seconds || exportDuration(opts)
+  const seconds = f.seconds || exportDuration(opts, svg)
   // GIF delays are whole centiseconds and browsers slow anything under 2 cs down to 10 cs: at most 50 fps
   const { n, times, step } = timeline(seconds, Math.min(50, f.fps), Math.max(1, f.maxFrames))
   const cs = i => Math.round((i + 1) * step * 100) - Math.round(i * step * 100)   // per-frame delays add up exactly
@@ -442,7 +456,7 @@ export async function video(svg, opts, frameOpts) {
   const type = candidates.find(t => MediaRecorder.isTypeSupported(t))
   if (!type && f.mimeTypes) throw new Error('with icons motion: this browser cannot record ' + candidates.join(' or '))
   const size = Math.round(f.size)
-  const { times } = timeline(f.seconds || exportDuration(opts), f.fps, f.maxFrames || 600)
+  const { times } = timeline(f.seconds || exportDuration(opts, svg), f.fps, f.maxFrames || 600)
   const o = Object.assign({}, opts, { size, color: f.color || (opts && opts.color) || '#000' })
   const frames = []
   let last = nowMs()

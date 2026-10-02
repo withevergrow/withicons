@@ -24,6 +24,9 @@
  *   flicker        CSS scales after rotating, Lottie before; the rotation is <= 1.5deg so the gap is sub-pixel
  * Not representable: the pixel style's shape-rendering=crispEdges (Lottie players always anti-alias); motion that
  * overshoots the 24 box (twinkle, zoom, bounce...) is cut at the canvas edge, so use opts.padding for those.
+ * Parts: when the drawing carries part tags (wm-deco, wm-shadow, wm-a, wm-s) and the motion runtime is on the page
+ * (window.WithMotion), each run of same-role elements is its own layer driven by the runtime's partsPlan / sampleRole
+ * (the same plan as motion.css), sampled twice per frame; see buildParts. Without the runtime: one layer, as before.
  * Trigger: ctx.motion.trigger 'loop' (default) exports the loop cycle; 'hover' / 'once' export the one-shot.
  * Static: opts.static === true, ctx.motion === false or ctx.motion.preset 'none' -> a one-frame still Lottie.
  * Swaps ("Turn into", ctx.swap { name, style, inner, root, color, vars, effect, duration, ease, hold, cycle } from the
@@ -543,7 +546,7 @@
       if (u) return u[1] ? resolveColor(u[1], st) : st.color
       return v
     }
-    function walk(node, inh, mtx, op) {
+    function walk(node, inh, mtx, op, role) {
       var a = {}
       for (var k2 in node.attrs) a[k2] = bake(node.attrs[k2])
       if (a.display === 'none') return
@@ -552,21 +555,22 @@
       if (a.color != null) st.color = resolveColor(a.color, { color: inh.color })
       var m = a.transform ? mul(mtx, parseTransform(a.transform)) : mtx
       var o = op * (a.opacity != null ? Math.max(0, Math.min(1, num0(a.opacity, 1))) : 1)
+      if (a['class'] && partRole(a['class']) !== 'obj') role = partRole(a['class'])
       if (node.tag === 'g' || node.tag === 'svg' || node.tag === 'root' || node.tag === 'a') {
-        node.children.forEach(function (c) { walk(c, st, m, o) })
+        node.children.forEach(function (c) { walk(c, st, m, o, role) })
         return
       }
       var d = shapeToPath(node.tag, a)
       if (!d || st.visibility === 'hidden') return
       var subs = parsePath(d).filter(function (sp) { return sp.segs.length || sp.closed })
       if (!subs.length) return
-      out.push({ tag: node.tag, id: a.id || null, subs: subs, m: m, opacity: o,
+      out.push({ tag: node.tag, id: a.id || null, subs: subs, m: m, opacity: o, role: role || 'obj',
         fill: parseColor(resolveColor(st.fill, st)), stroke: parseColor(resolveColor(st.stroke, st)), st: st })
     }
     var start = {}
     INHERIT.forEach(function (p) { start[p] = rootAttrs[p] != null ? rootAttrs[p] : base[p] })
     if (rootAttrs.color) start.color = rootAttrs.color === 'currentColor' ? base.color : rootAttrs.color
-    walk(tree, start, I, 1)
+    walk(tree, start, I, 1, 'obj')
     return out
   }
 
@@ -767,6 +771,109 @@
   }
 
   /* ───────────────────────── the composition ───────────────────────── */
+  /* ───────────────────────── parts choreography ───────────────────────── */
+  // Renderers tag SVG nodes (wm-deco, wm-shadow, wm-a, wm-s; forge/MOTION.md "Parts choreography"). With the motion
+  // runtime on the page (window.WithMotion: the same partsPlan / sampleRole the CSS, previews and frame exports use),
+  // each run of same-role elements becomes its own layer: the object plays the preset, plates their override,
+  // decorations their own counter-phased loop, ground shadows stay put. Values are sampled twice per frame (linear),
+  // so they match the CSS at every instant. Without the runtime (Node) the icon moves as one layer, as before.
+  function partRole(cls) {
+    var c = ' ' + String(cls || '').replace(/\s+/g, ' ') + ' '
+    return c.indexOf(' wm-deco ') >= 0 ? 'deco' : c.indexOf(' wm-shadow ') >= 0 ? 'shadow' : c.indexOf(' wm-a ') >= 0 ? 'a' : c.indexOf(' wm-s ') >= 0 ? 's' : 'obj'
+  }
+  function motionRuntime() {
+    var g = typeof self !== 'undefined' ? self : typeof globalThis !== 'undefined' ? globalThis : {}
+    var W = g.WithMotion
+    return W && W.partsPlan && W.sampleRole && W.sampleMatrix ? W : null
+  }
+  function buildParts(ctx, opts, mo, els, geo, size, WM) {
+    var s = geo.s, off = geo.off
+    var st = /^steps\((\d+)/.exec(mo.ease || '')
+    var m = { preset: mo.preset, trigger: mo.trigger, loop: mo.loop, duration: mo.duration, k: mo.k, origin: mo.origin,
+      dir: (Math.atan2(mo.dy, mo.dx) * 180 / Math.PI + 360) % 360, steps: st ? +st[1] : 0, ease: mo.ease, delay: 0 }
+    var plan = WM.partsPlan(m, ctx.motionSpec || null, { deco: els.some(function (e) { return e.role === 'deco' }) })
+    var secs = mo.loop ? plan.cycle : mo.duration + (plan.deco ? Math.max(0, plan.deco.delay) : 0)
+    var op = r4(secs * FPS)
+    var LIN = parseEase('linear')
+    var P = function (x, y) { return [r3(x * s + off), r3(y * s + off)] }
+    // runs of consecutive elements with the same role keep the drawing order
+    var runs = []
+    els.forEach(function (el) {
+      var last = runs[runs.length - 1]
+      if (last && last.role === el.role) last.els.push(el)
+      else runs.push({ role: el.role, els: [el] })
+    })
+    var layers = []
+    runs.forEach(function (run, ri) {
+      var shapes = []
+      run.els.forEach(function (el, i) { var g = elementGroup(el, i, geo, null); if (g) shapes.unshift(g) })
+      var r = plan[run.role]
+      var C = [r3(12 * s + off), r3(12 * s + off), 0]
+      var ks = { o: { a: 0, k: 100 }, r: { a: 0, k: 0 }, p: { a: 0, k: C.slice() }, a: { a: 0, k: C.slice() }, s: { a: 0, k: [100, 100, 100] } }
+      var mask = null
+      if (r) {
+        // the reference box: the icon grid, or (decorations) the run's own bounds
+        var box = [0, 0, 24, 24]
+        if (r.box === 'fill-box') {
+          var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+          run.els.forEach(function (el) {
+            el.subs.forEach(function (sp) {
+              sp.segs.forEach(function (sg) {
+                for (var j = 0; j < 6; j += 2) { var q = apply(el.m, sg[j], sg[j + 1]); x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]) }
+              })
+            })
+          })
+          if (x1 > x0) box = [x0, y0, x1 - x0, y1 - y0]
+        }
+        var o = r.origin ? r.origin : [box[0] + box[2] / 2, box[1] + box[3] / 2]
+        var ang = (r.dir || 0) * Math.PI / 180
+        var mode = { k: r.k == null ? 1 : r.k, dx: Math.cos(ang), dy: Math.sin(ang), em: 16 }
+        var samples = [], prevR = null
+        for (var f = 0; f <= Math.round(op * 2); f++) {
+          var sm = WM.sampleRole(r, mode, f / 2 / FPS)
+          var M = WM.sampleMatrix(sm, o, box)
+          var pos = [M[0] * o[0] + M[2] * o[1] + M[4], M[1] * o[0] + M[3] * o[1] + M[5]]
+          var sx = Math.sqrt(M[0] * M[0] + M[1] * M[1]), rot = Math.atan2(M[1], M[0]) * 180 / Math.PI
+          var sy = sx ? (M[0] * M[3] - M[1] * M[2]) / sx : 1
+          if (prevR != null) rot += Math.round((prevR - rot) / 360) * 360   // unwrap: no 179 -> -179 jumps
+          prevR = rot
+          samples.push({ t: f / 2, ease: LIN, c: { p: pos, r: rot, sx: sx, sy: sy, o: sm.opacity, clip: sm.clip } })
+        }
+        var A = P(o[0], o[1])
+        var ch = function (fn, dims) { return prop(samples.map(function (x) { return { t: x.t, v: fn(x.c), ease: x.ease } }), dims, lerpN) }
+        ks = { a: { a: 0, k: [A[0], A[1], 0] }, p: ch(function (c) { var q = P(c.p[0], c.p[1]); return [q[0], q[1], 0] }, 3),
+          r: ch(function (c) { return r3(c.r) }, 1), s: ch(function (c) { return [r3(c.sx * 100), r3(c.sy * 100), 100] }, 3), o: ch(function (c) { return r3(c.o * 100) }, 1) }
+        if (samples.some(function (x) { return x.c.clip })) {
+          // CSS clip-path: inset(...) of `pass`, in the layer's own (untransformed) space
+          mask = { inv: false, mode: 'a', nm: 'Clip', o: { a: 0, k: 100 }, x: { a: 0, k: 0 },
+            pt: prop(samples.map(function (x) {
+              var c = x.c.clip || [0, 0, 0, 0], B = 24 * s, u = 0.24 * s
+              var X0 = off + c[3] * u, X1 = Math.max(X0, off + B - c[1] * u), Y0 = off + c[0] * u, Y1 = Math.max(Y0, off + B - c[2] * u)
+              return { t: x.t, ease: LIN, v: [{ i: [[0, 0], [0, 0], [0, 0], [0, 0]], o: [[0, 0], [0, 0], [0, 0], [0, 0]], v: [[r3(X0), r3(Y0)], [r3(X1), r3(Y0)], [r3(X1), r3(Y1)], [r3(X0), r3(Y1)]], c: true }] }
+            }), 1, function (q) { return q }) }
+          if (mask.pt.a === 0) mask.pt.k = mask.pt.k[0]
+        }
+      }
+      var nm = { obj: 'Object', a: 'Part A', s: 'Part S', deco: 'Decoration', shadow: 'Shadow' }[run.role] + (runs.length > 1 ? ' ' + (ri + 1) : '')
+      var L = { ddd: 0, ind: 0, ty: 4, nm: nm, sr: 1, ks: ks, ao: 0, shapes: shapes, ip: 0, op: op, st: 0, bm: 0 }
+      if (mask) { L.hasMask = true; L.masksProperties = [mask] }
+      layers.unshift(L)   // Lottie: the first layer is on top
+    })
+    var bg = opts.background ? parseColor(opts.background) : null
+    if (bg) {
+      layers.push({ ddd: 0, ind: 0, ty: 4, nm: 'Background', sr: 1, ao: 0, ip: 0, op: op, st: 0, bm: 0,
+        ks: { o: { a: 0, k: 100 }, r: { a: 0, k: 0 }, p: { a: 0, k: [0, 0, 0] }, a: { a: 0, k: [0, 0, 0] }, s: { a: 0, k: [100, 100, 100] } },
+        shapes: [group('Background', [{ ty: 'rc', nm: 'Rect', d: 1, s: { a: 0, k: [size, size] }, p: { a: 0, k: [size / 2, size / 2] }, r: { a: 0, k: 0 } },
+          { ty: 'fl', nm: 'Fill', c: { a: 0, k: colorK(bg) }, o: { a: 0, k: r3(bg[3] * 100) }, r: 1, bm: 0 }])] })
+    }
+    layers.forEach(function (L, i) { L.ind = i + 1 })
+    var title = (ctx.title || ctx.name || 'icon') + ' (' + mo.preset + ')'
+    return {
+      v: '5.7.4', fr: FPS, ip: 0, op: op, w: size, h: size, nm: title, ddd: 0, assets: [], layers: layers, markers: [],
+      meta: { g: 'with icons (withicons.com)', a: 'with icons', d: (ctx.name || '') + ' / ' + (ctx.style || '') + ' / ' + mo.preset + ' ' + mo.trigger + ' / parts', k: 'icon, ' + (ctx.name || '') }
+    }
+  }
+
   function build(ctx, opts) {
     opts = opts || {}
     var sw = resolveSwap(ctx, opts)
@@ -808,6 +915,8 @@
         }
       }
     }
+    var WM = mo && !isDraw ? motionRuntime() : null
+    if (WM && els.some(function (e) { return e.role !== 'obj' })) return buildParts(ctx, opts, mo, els, geo, size, WM)
     var shapes = []
     els.forEach(function (el, i) { var g = elementGroup(el, i, geo, draw); if (g) shapes.unshift(g) }) // Lottie: first item is on top
 

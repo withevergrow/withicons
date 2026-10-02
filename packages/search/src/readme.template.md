@@ -3,7 +3,7 @@
 The search engine behind [withicons.com](https://withicons.com), the `withicons` CLI and the `@withicons/mcp` server:
 a fast, typo-tolerant, dependency-free search over all {{icons}} icons of **with icons** ({{styles}} styles: {{styleList}}), with a prebuilt index.
 Style words in a query pick a style: `cute heart` -> kawaii, `8-bit star` -> pixel, `frosted bell` -> glass, `y2k star` -> sticker,
-`vintage camera` -> retro, `two tone heart` -> duo, `etched coin` -> engrave, `doodle cat` -> sketch, `blueprint home` -> blueprint,
+`vintage camera` -> retro, `3d rocket` -> luxe, `bauhaus clock` -> bauhaus, `skeuomorphic camera` -> skeuo, `two tone heart` -> duo, `etched coin` -> engrave, `doodle cat` -> sketch, `blueprint home` -> blueprint,
 `outline star` -> line (see `parse(query).style`).
 
 ```bash

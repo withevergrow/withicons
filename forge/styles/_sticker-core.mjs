@@ -12,10 +12,13 @@
 //   shine    one glossy dash + dot on the top-left of the biggest colour area
 //   signals  badges, slashes and modifiers: mini stickers with their own paper rim
 //   sparkle  1-2 four-point sparkles (sometimes a heart or star) in free corners
+// Parts choreography (forge/MOTION.md): shadow = wm-shadow, shine = wm-shine, signals = wm-s, sparkles = wm-deco.
+// Everything else is fused object (untagged = K): the die-cut paper is one piece, so A parts are not split off.
 import { parsePath, simplify, area, pointInRing, distToPolyline, arclen, bbox, rng, fmt, resample, V } from '../kernel/geom.mjs'
 import * as F from './_sticker-field.mjs'
 import { subpaths, emit, raw, tp, splineD, sparkleD, heartD, starD } from './_sticker-path.mjs'
 import { colours, signalColour, VAR, EDGE, INK, SHINE, SHADOW } from './_sticker-tune.mjs'
+import { textInfo } from './_live-text.mjs'
 
 export const K = {
   SCALE: 0.84,            // art scale about the centre
@@ -70,7 +73,7 @@ function read(icon) {
       const m = sp.cmds[0]
       if (!pts.length || (pts.length === 1)) pts = [[m[1], m[2]]]
       const closed = sp.closed && pts.length > 2
-      items.push({ sp, pts, closed, plate, pi, len: arclen(pts, closed) })
+      items.push({ sp, pts, closed, plate, pi, len: arclen(pts, closed), text: !!textInfo(p) })
     }
   }
   const fills = (icon.fills || []).map((f, fi) => {
@@ -141,6 +144,8 @@ export function build(icon) {
   const loops = base.filter(l => l.closed && l.pts.length > 2)
   const tubeIdx = col.tune.tubePaths || []
   for (const l of base) {
+    // Live-icon text is printed in ink, never puffed into candy tubes (glyphs would fill in)
+    if (l.text) { inks.push(l); continue }
     if (!baseFills.length || col.tune.tubes) { tubes.push(l); continue }
     if (tubeIdx.includes(l.pi)) { l.over = true; tubes.push(l); continue }
     if (l.closed) { inks.push(l); continue }
@@ -203,7 +208,7 @@ export function build(icon) {
   const nodes = []
   const cutD = cut.map(r => splineD(r)).join('')
   const shD = cut.map(r => splineD(r.map(p => [p[0] + K.SHADOW[0], p[1] + K.SHADOW[1]]))).join('')
-  nodes.push(['path', { d: shD, fill: SHADOW, 'fill-opacity': K.SHADOW_OP }])
+  nodes.push(['path', { d: shD, fill: SHADOW, 'fill-opacity': K.SHADOW_OP, class: 'wm-shadow' }])
   nodes.push(['path', { d: cutD, fill: EDGE, stroke: 'currentColor', 'stroke-opacity': K.HAIR_OP, 'stroke-width': K.HAIR }])
 
   // --- tubes that tuck behind the mass
@@ -262,7 +267,7 @@ export function build(icon) {
   if (!col.tune.noShine) {
     try {
       const sh = shine(baseFills.filter(f => fc[f.fi] !== 'ink'), tubes, inks, cutouts, sig, X, xl)
-      if (sh) nodes.push(['path', { d: sh.d, stroke: SHINE, 'stroke-width': fmt(sh.w), 'stroke-opacity': 0.92 }])
+      if (sh) nodes.push(['path', { d: sh.d, stroke: SHINE, 'stroke-width': fmt(sh.w), 'stroke-opacity': 0.92, class: 'wm-shine' }])
     } catch { /* a missing shine is fine */ }
   }
 
@@ -271,20 +276,20 @@ export function build(icon) {
   if (sc === col.primary) sc = col.accent
   for (const b of badges) {
     const d = emit([b.sp], T)
-    nodes.push(['path', { d, fill: EDGE, stroke: EDGE, 'stroke-width': fmt(K.INK + 2 * K.HALO) }])
-    nodes.push(['path', { d, fill: C(sc), stroke: INK, 'stroke-width': K.INK }])
+    nodes.push(['path', { d, fill: EDGE, stroke: EDGE, 'stroke-width': fmt(K.INK + 2 * K.HALO), class: 'wm-s' }])
+    nodes.push(['path', { d, fill: C(sc), stroke: INK, 'stroke-width': K.INK, class: 'wm-s' }])
     const gl = glyphs.filter(gg => badgeOf(gg) === b)
-    if (gl.length) nodes.push(['path', { d: emit(gl.map(x => x.sp), T), stroke: INK, 'stroke-width': fmt(K.INK * 0.9) }])
+    if (gl.length) nodes.push(['path', { d: emit(gl.map(x => x.sp), T), stroke: INK, 'stroke-width': fmt(K.INK * 0.9), class: 'wm-s' }])
   }
   if (sOpen.length) {
     const d = emit(sOpen.map(l => l.sp), T)
-    nodes.push(['path', { d, stroke: EDGE, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O + 2 * K.HALO) }])
-    nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O) }])
-    nodes.push(['path', { d, stroke: C(sc), 'stroke-width': K.TUBE }])
+    nodes.push(['path', { d, stroke: EDGE, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O + 2 * K.HALO), class: 'wm-s' }])
+    nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O), class: 'wm-s' }])
+    nodes.push(['path', { d, stroke: C(sc), 'stroke-width': K.TUBE, class: 'wm-s' }])
   }
 
   // --- sparkles
-  for (const dc of decos) nodes.push(['path', { d: dc.d, fill: C(dc.c) }])
+  for (const dc of decos) nodes.push(['path', { d: dc.d, fill: C(dc.c), class: 'wm-deco' }])
   return nodes
 }
 

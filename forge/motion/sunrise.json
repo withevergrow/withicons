@@ -1,17 +1,36 @@
 {
   "name": "sunrise",
-  "intent": "warms with morning light and lifts up when touched",
+  "intent": "morning light glows as the arrow climbs; the sun lifts on touch",
   "loop": {
     "preset": "glow",
-    "duration": 3,
-    "amount": 0.8
+    "amount": 0.8,
+    "duration": 3
   },
   "hover": {
-    "preset": "nudge",
-    "dir": 270,
-    "amount": 0.8,
-    "duration": 0.7
+    "preset": "glow",
+    "amount": 1,
+    "duration": 0.9
   },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "breathe",
+      "origin": [
+        12,
+        17
+      ],
+      "amount": 1,
+      "duration": 3,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "rise",

@@ -1,42 +1,10 @@
 {
   "name": "info-circle",
-  "intent": "gently pulses to draw your eye to a helpful note",
-  "loop": {
-    "preset": "pulse",
-    "origin": [
-      12,
-      12
-    ],
-    "amount": 0.5,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "pop",
-    "origin": [
-      12,
-      12
-    ]
-  },
-  "alt": [
-    {
-      "preset": "glow"
-    },
-    {
-      "preset": "nod",
-      "origin": [
-        12,
-        12
-      ]
-    }
-  ],
-  "swap": [
-    {
-      "to": "help-circle",
-      "effect": "flip"
-    },
-    {
-      "to": "x-circle",
-      "effect": "rotate"
-    }
-  ]
+  "intent": "the i nods softly inside a steady circle: here is a helpful note",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.3, "duration": 3.4 },
+  "hover": { "preset": "pop", "origin": [12, 12], "amount": 0.8 },
+  "parts": { "A": { "preset": "nod", "origin": [12, 16.5], "amount": 0.8, "duration": 3.4, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "glow" }, { "preset": "nod", "origin": [12, 12] } ],
+  "swap": [ { "to": "help-circle", "effect": "flip" }, { "to": "x-circle", "effect": "rotate" } ]
 }

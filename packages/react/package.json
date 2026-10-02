@@ -1,7 +1,7 @@
 {
   "name": "@withicons/react",
   "version": "0.2.0",
-  "description": "500 icons x 12 styles as tree-shakable React components.",
+  "description": "500 icons x 15 styles as tree-shakable React components.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -42,7 +42,10 @@
     "kawaii-icons",
     "sticker-icons",
     "pixel-icons",
-    "retro-icons"
+    "retro-icons",
+    "luxe-icons",
+    "bauhaus-icons",
+    "skeuo-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -180,6 +183,36 @@
         "default": "./dist/retro/index.cjs"
       }
     },
+    "./luxe": {
+      "import": {
+        "types": "./dist/luxe/index.d.ts",
+        "default": "./dist/luxe/index.js"
+      },
+      "require": {
+        "types": "./dist/luxe/index.d.cts",
+        "default": "./dist/luxe/index.cjs"
+      }
+    },
+    "./bauhaus": {
+      "import": {
+        "types": "./dist/bauhaus/index.d.ts",
+        "default": "./dist/bauhaus/index.js"
+      },
+      "require": {
+        "types": "./dist/bauhaus/index.d.cts",
+        "default": "./dist/bauhaus/index.cjs"
+      }
+    },
+    "./skeuo": {
+      "import": {
+        "types": "./dist/skeuo/index.d.ts",
+        "default": "./dist/skeuo/index.js"
+      },
+      "require": {
+        "types": "./dist/skeuo/index.d.cts",
+        "default": "./dist/skeuo/index.cjs"
+      }
+    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "default": "./dist/icon.js"
@@ -235,6 +268,18 @@
     "./retro/icons/*": {
       "types": "./dist/retro/icons/*.d.ts",
       "default": "./dist/retro/icons/*.js"
+    },
+    "./luxe/icons/*": {
+      "types": "./dist/luxe/icons/*.d.ts",
+      "default": "./dist/luxe/icons/*.js"
+    },
+    "./bauhaus/icons/*": {
+      "types": "./dist/bauhaus/icons/*.d.ts",
+      "default": "./dist/bauhaus/icons/*.js"
+    },
+    "./skeuo/icons/*": {
+      "types": "./dist/skeuo/icons/*.d.ts",
+      "default": "./dist/skeuo/icons/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -317,6 +362,24 @@
       ],
       "retro/icons/*": [
         "./dist/retro/icons/*.d.ts"
+      ],
+      "luxe": [
+        "./dist/luxe/index.d.ts"
+      ],
+      "luxe/icons/*": [
+        "./dist/luxe/icons/*.d.ts"
+      ],
+      "bauhaus": [
+        "./dist/bauhaus/index.d.ts"
+      ],
+      "bauhaus/icons/*": [
+        "./dist/bauhaus/icons/*.d.ts"
+      ],
+      "skeuo": [
+        "./dist/skeuo/index.d.ts"
+      ],
+      "skeuo/icons/*": [
+        "./dist/skeuo/icons/*.d.ts"
       ]
     }
   },

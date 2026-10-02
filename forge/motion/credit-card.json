@@ -1,15 +1,16 @@
 {
   "name": "credit-card",
-  "intent": "flips over like a card being tapped to pay",
+  "intent": "hovers like a card held to a reader; flips over on hover",
   "loop": {
     "preset": "float",
-    "amount": 0.5,
+    "amount": 0.3,
     "duration": 3.2
   },
   "hover": {
     "preset": "flip",
     "duration": 0.8
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "nudge",
@@ -17,7 +18,12 @@
       "amount": 0.8
     },
     {
-      "preset": "pop"
+      "preset": "tilt",
+      "origin": [
+        2,
+        19
+      ],
+      "amount": 0.6
     }
   ],
   "swap": [

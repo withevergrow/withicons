@@ -1,15 +1,16 @@
 {
   "name": "id-card",
-  "intent": "flips over like a card being shown at the door",
+  "intent": "floats like a card held up, flips over to show itself on hover",
   "loop": {
     "preset": "float",
-    "amount": 0.5,
-    "duration": 3.2
+    "amount": 0.4,
+    "duration": 3.4
   },
   "hover": {
     "preset": "flip",
     "duration": 0.9
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "tilt",

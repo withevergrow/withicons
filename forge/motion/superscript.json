@@ -1,11 +1,44 @@
 {
   "name": "superscript",
-  "intent": "lifts up above the line, like a power or footnote",
-  "loop": { "preset": "float", "amount": 0.6, "duration": 2.8 },
-  "hover": { "preset": "nudge", "dir": 270, "amount": 1 },
-  "alt": [ { "preset": "rise", "amount": 0.6 }, { "preset": "pop" } ],
+  "intent": "the small 2 lifts above the line, like a power or footnote",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.3,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.9,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
   "swap": [
-    { "to": "subscript", "effect": "slide-down" },
-    { "to": "type", "effect": "fade" }
+    {
+      "to": "subscript",
+      "effect": "slide-down"
+    },
+    {
+      "to": "type",
+      "effect": "fade"
+    }
   ]
 }

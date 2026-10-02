@@ -1,38 +1,10 @@
 {
   "name": "eraser",
-  "intent": "rubs back and forth to wipe something clean",
-  "loop": {
-    "preset": "rock",
-    "origin": [
-      12,
-      20.5
-    ],
-    "amount": 0.5,
-    "duration": 2.4
-  },
-  "hover": {
-    "preset": "shake",
-    "amount": 0.6,
-    "duration": 0.6
-  },
-  "alt": [
-    {
-      "preset": "wiggle",
-      "origin": [
-        9,
-        20.5
-      ]
-    },
-    {
-      "preset": "nudge",
-      "dir": 180,
-      "amount": 0.5
-    }
-  ],
-  "swap": [
-    {
-      "to": "pencil",
-      "effect": "flip"
-    }
-  ]
+  "intent": "rocks on its rubbing edge to wipe the line clean",
+  "loop": { "preset": "sway", "origin": [9, 20.5], "amount": 0.6, "duration": 2 },
+  "hover": { "preset": "wiggle", "origin": [9, 20.5], "amount": 0.8, "duration": 0.7 },
+  "parts": { "A": { "preset": "sway", "origin": [9, 20.5], "amount": 0.25, "duration": 2, "delay": 0.06 } },
+  "deco": "breathe",
+  "alt": [ { "preset": "nudge", "dir": 180, "amount": 0.4 }, { "preset": "shake", "amount": 0.5 } ],
+  "swap": [ { "to": "pencil", "effect": "flip" } ]
 }

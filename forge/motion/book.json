@@ -1,14 +1,14 @@
 {
   "name": "book",
-  "intent": "leans gently like a book on a shelf",
+  "intent": "leans gently on the shelf, tips toward you when picked",
   "loop": {
     "preset": "sway",
     "origin": [
       12,
       21.5
     ],
-    "amount": 0.5,
-    "duration": 3.4
+    "amount": 0.4,
+    "duration": 3.6
   },
   "hover": {
     "preset": "tilt",
@@ -17,8 +17,9 @@
       21.5
     ],
     "amount": 0.8,
-    "duration": 0.8
+    "duration": 0.7
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "flip"

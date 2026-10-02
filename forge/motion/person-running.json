@@ -1,8 +1,43 @@
 {
   "name": "person-running",
-  "intent": "bobs along at a steady jog, dashes forward on hover",
-  "loop": { "preset": "float", "amount": 0.5, "duration": 1.1 },
-  "hover": { "preset": "nudge", "dir": 0, "amount": 1.2 },
-  "alt": [ { "preset": "pass", "dir": 0 }, { "preset": "bounce", "amount": 0.6 }, { "preset": "jelly" } ],
-  "swap": [ { "to": "person-running@solid", "effect": "scale" }, { "to": "timer", "effect": "slide-left" }, { "to": "trophy", "effect": "slide-up" } ]
+  "intent": "bobs along at a steady jog, dashes ahead on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 1.1
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 1.2,
+    "duration": 0.7
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "person-running@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "timer",
+      "effect": "slide-left"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    }
+  ]
 }

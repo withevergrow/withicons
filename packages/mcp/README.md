@@ -1,7 +1,7 @@
 # @withicons/mcp
 
-An [MCP](https://modelcontextprotocol.io) server for **with icons** — 500 MIT icons, each drawn in 12 styles
-(line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro). Your AI assistant can search icons in plain English
+An [MCP](https://modelcontextprotocol.io) server for **with icons** — 500 MIT icons, each drawn in 15 styles
+(line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo). Your AI assistant can search icons in plain English
 ("throw away", "settigns", "money", "cute heart", "8-bit star") and get paste-ready SVG, React, Vue, Svelte, Angular,
 Solid, web-component, CSS-class or data-URI code, plus animation code for the optional `@withicons/motion` package
 (500 icons have a tuned animation; every icon can use any preset) and every icon's 20-30 hand-picked colour
@@ -19,7 +19,7 @@ Self-contained: the search engine, the MCP SDK and every icon are bundled — no
 | `get_icon` | `name` (name **or alias**), `style?` (line), `format?` (svg), `size?` (24), `color?`, `flat?`, `palette?`, `colors?` | the code: `svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`; for multi-colour styles the icon's colour variables (role + default) and its palette ids; with `palette` / `colors`, the code recoloured (every colour, not just one) plus the CSS; a `motion` summary when the icon has a tuned animation |
 | `list_palettes` | `name`, `style?`, `tag?`, `limit?` | the icon's 20-30 palettes (id, name, tags, ten role colours); with `style`, the exact `--with-*` variables and a CSS rule per palette |
 | `animate_icon` | `name`, `trigger?` (`loop` · `hover` · `once` · `inview` · `swap`), `preset?`, `to?`, `effect?`, `style?`, `format?` (html), `duration?` | paste-ready animation code (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), the icon's motion spec and install lines. `inview` and the `draw` preset come wired to the JS runtime (`motion(el, name, options)` in a mount hook / module script) |
-| `list_styles` | — | the 12 styles, what they look like, and the colour variables of palette styles |
+| `list_styles` | — | the 15 styles, what they look like, and the colour variables of palette styles |
 | `list_categories` | `category?` | categories with counts, or every icon in one category |
 | `resolve_icon` | `name` | `resolved` (+ via alias), `ambiguous` (+ candidates) or `unknown` (+ nearest) |
 
@@ -154,7 +154,7 @@ import { Heart as HeartKawaii } from '@withicons/vue/kawaii'
 
 ## AWS Lambda (Function URL)
 
-`dist/lambda.mjs` is **one self-contained ES module** (MCP SDK, search engine, all 6,000 SVGs and the palettes inlined as JSON strings that are parsed on first use). It exports `handler` (also the default export).
+`dist/lambda.mjs` is **one self-contained ES module** (MCP SDK, search engine, all 7,500 SVGs and the palettes inlined as JSON strings that are parsed on first use). It exports `handler` (also the default export).
 
 | setting | value |
 |---|---|

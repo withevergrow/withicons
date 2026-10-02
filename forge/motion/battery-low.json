@@ -1,8 +1,10 @@
 {
   "name": "battery-low",
-  "intent": "fades in and out to warn that power is running low",
-  "loop": { "preset": "fill", "amount": 1, "duration": 2 },
-  "hover": { "preset": "shake", "amount": 0.5, "duration": 0.5 },
-  "alt": [ { "preset": "pulse", "amount": 0.4 }, { "preset": "flicker", "amount": 0.6 } ],
-  "swap": [ { "to": "battery-charging", "effect": "fade" }, { "to": "battery", "effect": "fade" }, { "to": "plug", "effect": "slide-left" } ]
+  "intent": "the last bar blinks to warn that power is running low",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 4 },
+  "hover": { "preset": "flicker", "amount": 0.8, "duration": 0.8 },
+  "parts": { "A": { "preset": "fill", "amount": 1, "duration": 2, "delay": 0.05 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "shake", "amount": 0.45 }, { "preset": "fill" }],
+  "swap": [{ "to": "battery-charging", "effect": "fade" }, { "to": "battery", "effect": "fade" }, { "to": "plug", "effect": "slide-left" }]
 }

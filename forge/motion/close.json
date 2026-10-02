@@ -1,21 +1,23 @@
 {
   "name": "close",
-  "intent": "spins away on hover to say this will close",
+  "intent": "rests calmly, then twists shut on hover to say this will close",
   "loop": {
     "preset": "breathe",
-    "amount": 0.5,
-    "duration": 3.2
+    "amount": 0.4,
+    "duration": 3.6
   },
   "hover": {
     "preset": "spin-once",
-    "duration": 0.5
+    "duration": 0.45
   },
+  "deco": "breathe",
   "alt": [
     {
       "preset": "pop"
     },
     {
-      "preset": "shake"
+      "preset": "shake",
+      "amount": 0.6
     }
   ],
   "swap": [

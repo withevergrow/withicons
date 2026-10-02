@@ -1,47 +1,8 @@
 {
   "name": "mouse",
-  "intent": "clicks and glides like it is being moved",
-  "loop": {
-    "preset": "float",
-    "amount": 0.5,
-    "duration": 2.8
-  },
-  "hover": {
-    "preset": "nod",
-    "origin": [
-      12,
-      21.5
-    ],
-    "amount": 0.6,
-    "duration": 0.5
-  },
-  "alt": [
-    {
-      "preset": "nudge",
-      "dir": 270,
-      "amount": 0.5
-    },
-    {
-      "preset": "tilt",
-      "origin": [
-        12,
-        21.5
-      ],
-      "amount": 0.6
-    }
-  ],
-  "swap": [
-    {
-      "to": "cursor",
-      "effect": "scale"
-    },
-    {
-      "to": "keyboard",
-      "effect": "fade"
-    },
-    {
-      "to": "mouse@solid",
-      "effect": "scale"
-    }
-  ]
+  "intent": "clicks softly now and then like a hand resting on it",
+  "loop": {"preset": "nod", "origin": [12,21.5], "amount": 0.3, "duration": 2.6},
+  "hover": {"preset": "nod", "origin": [12,21.5], "amount": 0.6, "duration": 0.5},
+  "alt": [ {"preset": "nudge", "dir": 270, "amount": 0.5}, {"preset": "tilt", "origin": [12,21.5], "amount": 0.6} ],
+  "swap": [ {"to": "cursor", "effect": "scale"}, {"to": "keyboard", "effect": "fade"}, {"to": "mouse@solid", "effect": "scale"} ]
 }
