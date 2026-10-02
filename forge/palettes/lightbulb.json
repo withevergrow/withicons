@@ -1,0 +1,465 @@
+{
+  "name": "lightbulb",
+  "palettes": [
+    {
+      "id": "warm-idea",
+      "name": "Warm idea",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#FFD54A",
+        "c2": "#FFF1B0",
+        "c3": "#F59E0B",
+        "c4": "#9AA0A6",
+        "tint": "#FFF7DB",
+        "accent": "#FFF1B0",
+        "shadow": "#755B16",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "edison",
+      "name": "Edison amber",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E1A05",
+        "c1": "#F2A33A",
+        "c2": "#FFD9A0",
+        "c3": "#C97A1C",
+        "c4": "#B08D57",
+        "tint": "#FCEDD8",
+        "accent": "#FFD9A0",
+        "shadow": "#694315",
+        "shine": "#FBE3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cool-led",
+      "name": "Cool LED",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2540",
+        "c1": "#CFEBFF",
+        "c2": "#8FD3FF",
+        "c3": "#4FA8E8",
+        "c4": "#A9B1BA",
+        "tint": "#F5FBFF",
+        "accent": "#FFFFFF",
+        "shadow": "#466079",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bulb-off",
+      "name": "Switched off",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1C1C1E",
+        "c1": "#D4D4D8",
+        "c2": "#A1A1AA",
+        "c3": "#71717A",
+        "c4": "#52525B",
+        "tint": "#F6F6F7",
+        "accent": "#F4F4F5",
+        "shadow": "#535356",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "eco-bulb",
+      "name": "Eco bulb",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0F2E12",
+        "c1": "#8BD346",
+        "c2": "#D9F99D",
+        "c3": "#3F8F2A",
+        "c4": "#A9B1BA",
+        "tint": "#E8F6DA",
+        "accent": "#D9F99D",
+        "shadow": "#346022",
+        "shine": "#DCF2C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "smart-rgb",
+      "name": "Smart bulb",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A0B3D",
+        "c1": "#8B5CF6",
+        "c2": "#22D3EE",
+        "c3": "#F472B6",
+        "c4": "#CBD5E1",
+        "tint": "#E8DEFD",
+        "accent": "#22D3EE",
+        "shadow": "#3C2375",
+        "shine": "#DCCEFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bright-spark",
+      "name": "Bright spark",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1A00",
+        "c1": "#FFE600",
+        "c2": "#FF8A00",
+        "c3": "#FF2E93",
+        "c4": "#3A3A3A",
+        "tint": "#FFFACC",
+        "accent": "#FF8A00",
+        "shadow": "#6A5700",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-idea",
+      "name": "Pastel idea",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A3B2A",
+        "c1": "#FFE7A8",
+        "c2": "#F9C6D3",
+        "c3": "#C9E4F6",
+        "c4": "#D9C8F2",
+        "tint": "#FFFAEE",
+        "accent": "#F9C6D3",
+        "shadow": "#806F50",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-bulb",
+      "name": "Candy bulb",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FFD23F",
+        "c2": "#FF4FA3",
+        "c3": "#3ED2C8",
+        "c4": "#9B6BFF",
+        "tint": "#FFF6D9",
+        "accent": "#FF4FA3",
+        "shadow": "#804833",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-bulb",
+      "name": "Y2K bulb",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23224A",
+        "c1": "#F7FF8A",
+        "c2": "#FF9EE8",
+        "c3": "#A8C8FF",
+        "c4": "#C9CEF5",
+        "tint": "#FDFFE8",
+        "accent": "#FF9EE8",
+        "shadow": "#63645D",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-sign",
+      "name": "Neon sign",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFE14D",
+        "c1": "#1A1405",
+        "c2": "#FF3DCB",
+        "c3": "#3DF2FF",
+        "c4": "#8A5CFF",
+        "tint": "#766622",
+        "accent": "#FF3DCB",
+        "shadow": "#0A0802",
+        "shine": "#FFF2AF",
+        "edge": "#171412"
+      }
+    },
+    {
+      "id": "lantern",
+      "name": "Paper lantern",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#E9A04B",
+        "c2": "#F3D6A4",
+        "c3": "#C2553E",
+        "c4": "#6E5B45",
+        "tint": "#FBECDB",
+        "accent": "#F3D6A4",
+        "shadow": "#663E1E",
+        "shine": "#F8E3C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-lamp",
+      "name": "70s lamp",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#F2B134",
+        "c2": "#E05A2B",
+        "c3": "#A6373F",
+        "c4": "#2F7F7A",
+        "tint": "#FCEFD6",
+        "accent": "#F2B134",
+        "shadow": "#664317",
+        "shine": "#FBE8C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "apothecary",
+      "name": "Apothecary",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#22281F",
+        "c1": "#C9B26B",
+        "c2": "#EDE3C2",
+        "c3": "#6E8B5C",
+        "c4": "#7A5C3E",
+        "tint": "#F4F0E1",
+        "accent": "#EDE3C2",
+        "shadow": "#545136",
+        "shine": "#EFE8D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "amber-ramp",
+      "name": "Amber ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2E1A00",
+        "c1": "#F59E0B",
+        "c2": "#FCD34D",
+        "c3": "#B45309",
+        "c4": "#FEF3C7",
+        "tint": "#FDECCE",
+        "accent": "#FCD34D",
+        "shadow": "#6A4203",
+        "shine": "#FCE2B6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "moonlight",
+      "name": "Moonlight",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B1E3A",
+        "c1": "#A5C9F2",
+        "c2": "#E3EEFB",
+        "c3": "#5D8FD0",
+        "c4": "#2B4A75",
+        "tint": "#EDF4FC",
+        "accent": "#FFFFFF",
+        "shadow": "#395171",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "firefly",
+      "name": "Firefly",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#15200C",
+        "c1": "#D9F25E",
+        "c2": "#F5FFC2",
+        "c3": "#8CB33A",
+        "c4": "#3F4F2A",
+        "tint": "#F7FCDF",
+        "accent": "#F5FFC2",
+        "shadow": "#505F25",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-filament",
+      "name": "Gold filament",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A1F05",
+        "c1": "#E9C46A",
+        "c2": "#FFF0C2",
+        "c3": "#B8902F",
+        "c4": "#1A1A1A",
+        "tint": "#FBF3E1",
+        "accent": "#FFF0C2",
+        "shadow": "#635123",
+        "shine": "#F8EDD2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#E6C25A",
+        "c1": "#18181B",
+        "c2": "#E6C25A",
+        "c3": "#F6E7B0",
+        "c4": "#3A3A3F",
+        "tint": "#6A5C34",
+        "accent": "#E6C25A",
+        "shadow": "#000000",
+        "shine": "#F4E4B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "festive",
+      "name": "Festive lights",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#E53935",
+        "c2": "#43A047",
+        "c3": "#FDD835",
+        "c4": "#8D6E63",
+        "tint": "#FAD7D7",
+        "accent": "#FDD835",
+        "shadow": "#621814",
+        "shine": "#F7C4C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pumpkin-glow",
+      "name": "Pumpkin glow",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F97316",
+        "c2": "#FDBA74",
+        "c3": "#7C2D12",
+        "c4": "#4D5A3A",
+        "tint": "#FEE3D0",
+        "accent": "#FDBA74",
+        "shadow": "#6B2F0B",
+        "shine": "#FDD5B9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFFFFF",
+        "c3": "#0050EF",
+        "c4": "#6B6B6B",
+        "tint": "#FFF6CC",
+        "accent": "#0050EF",
+        "shadow": "#4D4000",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "insight-blue",
+      "name": "Insight blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#3B82F6",
+        "c2": "#BFDBFE",
+        "c3": "#F59E0B",
+        "c4": "#64748B",
+        "tint": "#D8E6FD",
+        "accent": "#F59E0B",
+        "shadow": "#193975",
+        "shine": "#C4DAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine idea",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A3D",
+        "c1": "#FF5F1F",
+        "c2": "#FFE600",
+        "c3": "#00C2FF",
+        "c4": "#FF2E93",
+        "tint": "#FFDFD2",
+        "accent": "#FFE600",
+        "shadow": "#6B2434",
+        "shine": "#FFCFBC",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

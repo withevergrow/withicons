@@ -1,0 +1,8 @@
+{
+  "name": "scale",
+  "intent": "rocks its beam gently like weighing two options",
+  "loop": { "preset": "rock", "origin": [12, 6.5], "amount": 0.45, "duration": 3.2 },
+  "hover": { "preset": "tilt", "origin": [12, 6.5], "amount": 0.8 },
+  "alt": [ { "preset": "sway", "origin": [12, 21], "amount": 0.5 }, { "preset": "nod", "amount": 0.6 } ],
+  "swap": [ { "to": "scale@solid", "effect": "scale" } ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "circle-pause",
+  "intent": "breathes slowly while playback is on hold",
+  "loop": { "preset": "breathe", "origin": [12, 12], "amount": 0.6, "duration": 3.2 },
+  "hover": { "preset": "pop", "origin": [12, 12], "duration": 0.5 },
+  "alt": [ { "preset": "pulse", "amount": 0.5 }, { "preset": "glow" } ],
+  "swap": [ { "to": "circle-play", "effect": "morph" }, { "to": "circle-stop", "effect": "scale" }, { "to": "circle-pause@solid", "effect": "fade" } ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "minus",
+  "intent": "breathes softly, pops when something is taken away",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "plus",
+      "effect": "rotate"
+    }
+  ]
+}

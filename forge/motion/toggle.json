@@ -1,0 +1,36 @@
+{
+  "name": "toggle",
+  "intent": "squishes like a switch being flipped",
+  "loop": {
+    "preset": "jelly",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        15,
+        12
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "toggle@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "sliders",
+      "effect": "fade"
+    }
+  ]
+}

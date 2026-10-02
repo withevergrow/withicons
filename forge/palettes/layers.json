@@ -1,0 +1,27 @@
+{
+  "name": "layers",
+  "palettes": [
+    {"id":"design-tool-violet","name":"Design tool violet","tags":["true-to-life","vivid"],"colors":{"ink":"#170C52","c1":"#7B61FF","c2":"#A594FF","c3":"#D3CAFF","c4":"#FF6B9A","tint":"#E5DFFF","accent":"#FF6B9A","shadow":"#44358C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rock-strata","name":"Rock strata","tags":["true-to-life","earthy"],"colors":{"ink":"#2E1C10","c1":"#C98C5A","c2":"#8F5B3A","c3":"#E7C9A0","c4":"#6E6E5E","tint":"#F4E8DE","accent":"#8F5B3A","shadow":"#6F4D32","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"map-layers","name":"Map layers","tags":["true-to-life","nature"],"colors":{"ink":"#173320","c1":"#4DA167","c2":"#6BB4E8","c3":"#EFD9A0","c4":"#E26D5A","tint":"#DBECE1","accent":"#E26D5A","shadow":"#2A5939","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"layer-cake","name":"Layer cake","tags":["true-to-life","candy"],"colors":{"ink":"#3A1F14","c1":"#F7C6D9","c2":"#7B4A2E","c3":"#FFF2E0","c4":"#D94F70","tint":"#FDF4F7","accent":"#D94F70","shadow":"#886D77","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"paper-stack","name":"Paper stack","tags":["true-to-life","vintage"],"colors":{"ink":"#2C2A24","c1":"#F5F1E6","c2":"#DCD3BE","c3":"#B8AC8E","c4":"#E05A47","tint":"#FFFDF8","accent":"#E05A47","shadow":"#87857F","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"lasagna","name":"Lasagna","tags":["true-to-life"],"colors":{"ink":"#3A1E0A","c1":"#E6A23C","c2":"#C0392B","c3":"#F7E6B0","c4":"#5E8C31","tint":"#FAECD8","accent":"#C0392B","shadow":"#7F5921","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-depths","name":"Ocean depths","tags":["ocean","mono"],"colors":{"ink":"#082A3A","c1":"#4FC3D9","c2":"#2386A8","c3":"#0E4C6E","c4":"#B9EEF5","tint":"#DCF3F7","accent":"#2386A8","shadow":"#2B6B77","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-strata","name":"Sunset strata","tags":["sunset"],"colors":{"ink":"#3A1F00","c1":"#FFB347","c2":"#FF6F61","c3":"#B24C8A","c4":"#4B3F8C","tint":"#FFF0DA","accent":"#FF6F61","shadow":"#8C6227","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"frosted-panes","name":"Frosted panes","tags":["pastel"],"colors":{"ink":"#1D3A52","c1":"#A9D6F5","c2":"#D7ECFB","c3":"#6FA9D8","c4":"#F7B7D2","tint":"#EEF7FD","accent":"#F7B7D2","shadow":"#5D7687","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rainbow-sherbet","name":"Rainbow sherbet","tags":["candy","pastel"],"colors":{"ink":"#4A1A1E","c1":"#FF9AA2","c2":"#FFDAC1","c3":"#B5EAD7","c4":"#C7CEEA","tint":"#FFEBEC","accent":"#FF6F7D","shadow":"#8C5559","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forest-floor","name":"Forest floor","tags":["nature","earthy"],"colors":{"ink":"#162108","c1":"#6A8D3A","c2":"#3E5A26","c3":"#A67C52","c4":"#D9C58B","tint":"#E1E8D8","accent":"#D9C58B","shadow":"#3A4E20","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"rainbow-70s","name":"Rainbow 70s","tags":["retro"],"colors":{"ink":"#2B1B0C","c1":"#F2B134","c2":"#ED553B","c3":"#3CAEA3","c4":"#20639B","tint":"#FCEFD6","accent":"#ED553B","shadow":"#85611D","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"emerald-ramp","name":"Emerald ramp","tags":["mono"],"colors":{"ink":"#022C1F","c1":"#10B981","c2":"#047857","c3":"#6EE7B7","c4":"#D1FAE5","tint":"#CFF1E6","accent":"#047857","shadow":"#096647","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ash-stack","name":"Ash stack","tags":["grayscale"],"colors":{"ink":"#101010","c1":"#9E9E9E","c2":"#5C5C5C","c3":"#CFCFCF","c4":"#303030","tint":"#ECECEC","accent":"#5C5C5C","shadow":"#575757","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"iridescent","name":"Iridescent","tags":["y2k"],"colors":{"ink":"#2A1F66","c1":"#C9B6FF","c2":"#9EF0FF","c3":"#FFC2E9","c4":"#F2F7A1","tint":"#F4F0FF","accent":"#FFC2E9","shadow":"#6F648C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"onyx-and-gold","name":"Onyx & gold","tags":["luxe"],"colors":{"ink":"#1A1A1A","c1":"#CBA135","c2":"#2B2B2B","c3":"#F0DC9A","c4":"#7F6421","tint":"#F5ECD7","accent":"#7F6421","shadow":"#70591D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"colour-blind-safe","name":"Colour-blind safe","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFB000","c2":"#648FFF","c3":"#DC267F","c4":"#785EF0","tint":"#FFEFCC","accent":"#DC267F","shadow":"#8C6100","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"snowdrift","name":"Snowdrift","tags":["seasonal"],"colors":{"ink":"#1A2E45","c1":"#CFE3F3","c2":"#8DB6DA","c3":"#4F7CAC","c4":"#F2F7FB","tint":"#F5F9FD","accent":"#4F7CAC","shadow":"#727D86","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"product-blue","name":"Product blue","tags":["corporate"],"colors":{"ink":"#071A4A","c1":"#2563EB","c2":"#93C5FD","c3":"#1E3A8A","c4":"#F59E0B","tint":"#D3E0FB","accent":"#F59E0B","shadow":"#143681","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine-stack","name":"Dopamine stack","tags":["vivid"],"colors":{"ink":"#2B0A2A","c1":"#FF5DA2","c2":"#FFC300","c3":"#00C2A8","c4":"#7A5CFF","tint":"#FFDFEC","accent":"#FFC300","shadow":"#8C3359","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"polar-night","name":"Polar night","tags":["dark"],"colors":{"ink":"#0E1116","c1":"#3B4252","c2":"#88C0D0","c3":"#81A1C1","c4":"#EBCB8B","tint":"#D8D9DC","accent":"#88C0D0","shadow":"#20242D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-depth","name":"Neon depth","tags":["neon","on-dark"],"colors":{"ink":"#00E5FF","c1":"#141A33","c2":"#FF4FD8","c3":"#B6FF3B","c4":"#FFD23F","tint":"#0E5770","accent":"#FF4FD8","shadow":"#080A14","shine":"#A6F6FF","edge":"#30354B"}}
+  ]
+}

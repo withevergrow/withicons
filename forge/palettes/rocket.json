@@ -1,0 +1,464 @@
+{
+  "name": "rocket",
+  "palettes": [
+    {
+      "id": "classic-red",
+      "name": "Classic rocket",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A0509",
+        "c1": "#E8EBEF",
+        "c2": "#E63946",
+        "c3": "#4FA8E8",
+        "c4": "#F59E0B",
+        "tint": "#FAFBFC",
+        "accent": "#E63946",
+        "shadow": "#634A4E",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "retro-red",
+      "name": "Retro red rocket",
+      "tags": [
+        "true-to-life",
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A0509",
+        "c1": "#E63946",
+        "c2": "#F2F2EE",
+        "c3": "#F59E0B",
+        "c4": "#3B82F6",
+        "tint": "#FAD7DA",
+        "accent": "#F59E0B",
+        "shadow": "#62151B",
+        "shine": "#F8C4C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "shuttle",
+      "name": "Shuttle white",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#141A24",
+        "c1": "#F2F4F7",
+        "c2": "#2B2F36",
+        "c3": "#F97316",
+        "c4": "#8FA3BF",
+        "tint": "#FCFDFD",
+        "accent": "#F97316",
+        "shadow": "#575B63",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "silver-age",
+      "name": "Silver age",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1E26",
+        "c1": "#B8C0CC",
+        "c2": "#2F6FAE",
+        "c3": "#F2B134",
+        "c4": "#E3E7ED",
+        "tint": "#F1F2F5",
+        "accent": "#F2B134",
+        "shadow": "#494F58",
+        "shine": "#EAECF0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toy-rocket",
+      "name": "Toy rocket",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2A0A3D",
+        "c1": "#3EC1D3",
+        "c2": "#FF4F7B",
+        "c3": "#FFD23F",
+        "c4": "#8BD346",
+        "tint": "#D8F3F6",
+        "accent": "#FFD23F",
+        "shadow": "#30416A",
+        "shine": "#C5ECF2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "launch-orange",
+      "name": "Launch orange",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E1300",
+        "c1": "#FF7A1A",
+        "c2": "#1E293B",
+        "c3": "#FFD166",
+        "c4": "#60A5FA",
+        "tint": "#FFE4D1",
+        "accent": "#FFD166",
+        "shadow": "#6D3208",
+        "shine": "#FFD7BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "startup",
+      "name": "Startup launch",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#1A0B3D",
+        "c1": "#7C3AED",
+        "c2": "#F472B6",
+        "c3": "#FBBF24",
+        "c4": "#EDE9FE",
+        "tint": "#E5D8FB",
+        "accent": "#FBBF24",
+        "shadow": "#371972",
+        "shine": "#D8C4FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-rocket",
+      "name": "Pastel rocket",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3D3550",
+        "c1": "#D9C8F2",
+        "c2": "#F9C6D3",
+        "c3": "#C9E4F6",
+        "c4": "#FFE7A8",
+        "tint": "#F7F4FC",
+        "accent": "#F9C6D3",
+        "shadow": "#6C6181",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-rocket",
+      "name": "Candy rocket",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FF8AC2",
+        "c2": "#57D9C9",
+        "c3": "#FFD84D",
+        "c4": "#9B6BFF",
+        "tint": "#FFE8F3",
+        "accent": "#FFD84D",
+        "shadow": "#80335A",
+        "shine": "#FFDCED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-rocket",
+      "name": "Y2K rocket",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23224A",
+        "c1": "#C7D2FF",
+        "c2": "#FF8BE0",
+        "c3": "#C9FF6B",
+        "c4": "#8EE3F5",
+        "tint": "#F4F6FF",
+        "accent": "#FF8BE0",
+        "shadow": "#545780",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-launch",
+      "name": "Neon launch",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#3DF2FF",
+        "c1": "#0A1220",
+        "c2": "#FF3DCB",
+        "c3": "#FFE14D",
+        "c4": "#8A5CFF",
+        "tint": "#1E6C79",
+        "accent": "#FF3DCB",
+        "shadow": "#04070D",
+        "shine": "#A8F9FF",
+        "edge": "#0F1320"
+      }
+    },
+    {
+      "id": "rust-rocket",
+      "name": "Rust bucket",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1308",
+        "c1": "#B5703F",
+        "c2": "#6E7F4F",
+        "c3": "#E8C468",
+        "c4": "#4E3A2A",
+        "tint": "#F0E2D9",
+        "accent": "#E8C468",
+        "shadow": "#542F19",
+        "shine": "#E9D4C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "space-age",
+      "name": "Space age",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#F2B134",
+        "c2": "#E05A2B",
+        "c3": "#2F7F7A",
+        "c4": "#A6373F",
+        "tint": "#FCEFD6",
+        "accent": "#E05A2B",
+        "shadow": "#664317",
+        "shine": "#FBE8C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pulp-scifi",
+      "name": "Pulp sci-fi",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1F2A2A",
+        "c1": "#7FB5A8",
+        "c2": "#C2553E",
+        "c3": "#F2E4C9",
+        "c4": "#3E5F59",
+        "tint": "#E5F0EE",
+        "accent": "#C2553E",
+        "shadow": "#3C5450",
+        "shine": "#D9E9E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-ramp",
+      "name": "Blue ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#3B82F6",
+        "c2": "#1E40AF",
+        "c3": "#93C5FD",
+        "c4": "#DBEAFE",
+        "tint": "#D8E6FD",
+        "accent": "#93C5FD",
+        "shadow": "#193975",
+        "shine": "#C4DAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gunmetal",
+      "name": "Gunmetal",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#0F0F12",
+        "c1": "#8A8F99",
+        "c2": "#3A3D44",
+        "c3": "#D4D6DA",
+        "c4": "#F2F2F4",
+        "tint": "#E8E9EB",
+        "accent": "#D4D6DA",
+        "shadow": "#34353B",
+        "shine": "#DCDDE0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-sea",
+      "name": "Deep-sea probe",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#1597BB",
+        "c2": "#F4A261",
+        "c3": "#8FE3CF",
+        "c4": "#0E3B4F",
+        "tint": "#D0EAF1",
+        "accent": "#F4A261",
+        "shadow": "#0B4963",
+        "shine": "#B9E0EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "nebula",
+      "name": "Nebula",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#160A2E",
+        "c1": "#6D28D9",
+        "c2": "#EC4899",
+        "c3": "#22D3EE",
+        "c4": "#FDE68A",
+        "tint": "#E2D4F7",
+        "accent": "#22D3EE",
+        "shadow": "#301361",
+        "shine": "#D3BFF4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunrise-launch",
+      "name": "Sunrise launch",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0618",
+        "c1": "#FDBA74",
+        "c2": "#F43F5E",
+        "c3": "#9D174D",
+        "c4": "#FDE68A",
+        "tint": "#FFF1E3",
+        "accent": "#F43F5E",
+        "shadow": "#753C34",
+        "shine": "#FEEAD5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-rocket",
+      "name": "Gold rocket",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A1F05",
+        "c1": "#D4AF37",
+        "c2": "#1F1F22",
+        "c3": "#F5E7A1",
+        "c4": "#9B111E",
+        "tint": "#F6EFD7",
+        "accent": "#F5E7A1",
+        "shadow": "#5D4A14",
+        "shine": "#F2E7C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#E6C25A",
+        "c1": "#18181B",
+        "c2": "#E6C25A",
+        "c3": "#F6E7B0",
+        "c4": "#3A3A3F",
+        "tint": "#6A5C34",
+        "accent": "#E6C25A",
+        "shadow": "#000000",
+        "shine": "#F4E4B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "new-year",
+      "name": "New Year rocket",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1A0B3D",
+        "c1": "#6D28D9",
+        "c2": "#FDD835",
+        "c3": "#E53935",
+        "c4": "#F2F4F7",
+        "tint": "#E2D4F7",
+        "accent": "#FDD835",
+        "shadow": "#33146C",
+        "shine": "#D3BFF4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFFFFF",
+        "c2": "#D10000",
+        "c3": "#0050EF",
+        "c4": "#FFD400",
+        "tint": "#F2F2F2",
+        "accent": "#FFD400",
+        "shadow": "#4D4D4D",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine launch",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A3D",
+        "c1": "#FF2E93",
+        "c2": "#00C2FF",
+        "c3": "#FFE600",
+        "c4": "#7CFF4F",
+        "tint": "#FFD5E9",
+        "accent": "#FFE600",
+        "shadow": "#6B1557",
+        "shine": "#FFC0DF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

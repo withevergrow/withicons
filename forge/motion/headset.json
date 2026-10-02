@@ -1,0 +1,36 @@
+{
+  "name": "headset",
+  "intent": "bobs gently while a support call is live",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "nod",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "headphones",
+      "effect": "fade"
+    },
+    {
+      "to": "phone-call",
+      "effect": "flip"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "layout-dashboard",
+  "palettes": [
+    {"id":"analytics-blue","name":"Analytics blue","tags":["true-to-life","corporate"],"colors":{"ink":"#0B1E4A","c1":"#3B82F6","c2":"#10B981","c3":"#F59E0B","c4":"#EF4444","tint":"#D8E6FD","accent":"#F59E0B","shadow":"#204887","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"admin-slate","name":"Admin slate","tags":["true-to-life","corporate"],"colors":{"ink":"#0B1220","c1":"#475569","c2":"#94A3B8","c3":"#0EA5E9","c4":"#E2E8F0","tint":"#DADDE1","accent":"#0EA5E9","shadow":"#272F3A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"car-dashboard","name":"Car dashboard","tags":["true-to-life","dark"],"colors":{"ink":"#0A0E12","c1":"#3A4552","c2":"#FF8A00","c3":"#3DD6F5","c4":"#E8EEF2","tint":"#D8DADC","accent":"#FF8A00","shadow":"#20262D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"growth-green","name":"Growth green","tags":["true-to-life"],"colors":{"ink":"#04240F","c1":"#16A34A","c2":"#BBF7D0","c3":"#065F46","c4":"#FACC15","tint":"#D0EDDB","accent":"#FACC15","shadow":"#0C5A29","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"health-stats","name":"Health stats","tags":["true-to-life"],"colors":{"ink":"#3A0712","c1":"#F43F5E","c2":"#FDA4AF","c3":"#14B8A6","c4":"#FDE68A","tint":"#FDD9DF","accent":"#14B8A6","shadow":"#862334","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fintech-violet","name":"Fintech violet","tags":["vivid"],"colors":{"ink":"#0A2540","c1":"#635BFF","c2":"#00D4FF","c3":"#FFB3C7","c4":"#0A2540","tint":"#E0DEFF","accent":"#00D4FF","shadow":"#36328C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"revenue-gold","name":"Revenue gold","tags":["luxe"],"colors":{"ink":"#2B1E04","c1":"#E0A82E","c2":"#2B2B2B","c3":"#F6DD8F","c4":"#2E7D5B","tint":"#F9EED5","accent":"#2E7D5B","shadow":"#7B5C19","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"widget-pastels","name":"Widget pastels","tags":["pastel"],"colors":{"ink":"#2C3E50","c1":"#B5D8F7","c2":"#F7C5D9","c3":"#C9F2C7","c4":"#FFE5A5","tint":"#F0F7FD","accent":"#F79BBE","shadow":"#647788","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sky-ramp","name":"Sky ramp","tags":["mono"],"colors":{"ink":"#031E30","c1":"#0284C7","c2":"#7DD3FC","c3":"#075985","c4":"#E0F2FE","tint":"#CCE6F4","accent":"#7DD3FC","shadow":"#01496D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"steel-gray","name":"Steel gray","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#A8A8A8","c2":"#616161","c3":"#D6D6D6","c4":"#383838","tint":"#EEEEEE","accent":"#616161","shadow":"#5C5C5C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mainframe-70s","name":"Mainframe 70s","tags":["retro"],"colors":{"ink":"#2C1C10","c1":"#E1A23A","c2":"#B5462F","c3":"#4F7F6E","c4":"#EADBB8","tint":"#F9ECD8","accent":"#B5462F","shadow":"#7C5920","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"y2k-portal","name":"Y2K portal","tags":["y2k"],"colors":{"ink":"#1D2470","c1":"#8FB8FF","c2":"#FF9CF2","c3":"#9CFFD9","c4":"#FFF59C","tint":"#E9F1FF","accent":"#FF9CF2","shadow":"#4F658C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"terracotta-studio","name":"Terracotta studio","tags":["earthy"],"colors":{"ink":"#2E140A","c1":"#C4704F","c2":"#E9C9A8","c3":"#7D8A5A","c4":"#3E3A36","tint":"#F3E2DC","accent":"#7D8A5A","shadow":"#6C3E2B","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"okabe-ito-panels","name":"Okabe-Ito panels","tags":["accessible"],"colors":{"ink":"#000000","c1":"#56B4E9","c2":"#E69F00","c3":"#009E73","c4":"#CC79A7","tint":"#DDF0FB","accent":"#E69F00","shadow":"#2F6380","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-kpis","name":"Sunset KPIs","tags":["sunset"],"colors":{"ink":"#3A1206","c1":"#FF7E5F","c2":"#FEB47B","c3":"#6A4C93","c4":"#FFE3D3","tint":"#FFE5DF","accent":"#6A4C93","shadow":"#8C4534","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forest-report","name":"Forest report","tags":["nature"],"colors":{"ink":"#0B1A12","c1":"#2F6E4F","c2":"#8DBF8B","c3":"#D8C38A","c4":"#1B3B2B","tint":"#D5E2DC","accent":"#D8C38A","shadow":"#1A3D2B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"berry-metrics","name":"Berry metrics","tags":["vivid"],"colors":{"ink":"#2A0A1D","c1":"#B83280","c2":"#F49AC2","c3":"#5B2A86","c4":"#FCD5E5","tint":"#F1D6E6","accent":"#F49AC2","shadow":"#651C46","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"citrus-board","name":"Citrus board","tags":["vivid"],"colors":{"ink":"#3A2600","c1":"#FFB400","c2":"#FF6F3C","c3":"#9BC53D","c4":"#FFF1BF","tint":"#FFF0CC","accent":"#FF6F3C","shadow":"#8C6300","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-widgets","name":"Candy widgets","tags":["candy"],"colors":{"ink":"#4A0F3B","c1":"#FF8AD8","c2":"#7FE7FF","c3":"#FFE57A","c4":"#B794FF","tint":"#FFE8F7","accent":"#7FE7FF","shadow":"#8C4C77","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holiday-sales","name":"Holiday sales","tags":["seasonal"],"colors":{"ink":"#2A080B","c1":"#C62F3B","c2":"#2F7D4A","c3":"#F2C14E","c4":"#F7EFE2","tint":"#F4D5D8","accent":"#F2C14E","shadow":"#6D1A20","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-ops","name":"Night ops","tags":["dark"],"colors":{"ink":"#07090C","c1":"#343B46","c2":"#4F9DFF","c3":"#2EC27E","c4":"#F6B93B","tint":"#D6D8DA","accent":"#4F9DFF","shadow":"#1D2027","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-telemetry","name":"Neon telemetry","tags":["neon","on-dark"],"colors":{"ink":"#3DF5FF","c1":"#0E1A2B","c2":"#FF4D9D","c3":"#A3FF4D","c4":"#FFC24D","tint":"#1C5C6B","accent":"#FF4D9D","shadow":"#060A11","shine":"#BBFCFF","edge":"#2B3544"}}
+  ]
+}

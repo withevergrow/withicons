@@ -1,0 +1,16 @@
+{
+  "name": "badge-percent",
+  "intent": "pulses like a sale sticker that wants your attention",
+  "loop": { "preset": "pulse", "amount": 0.6, "duration": 2 },
+  "hover": { "preset": "tada", "amount": 0.8 },
+  "alt": [
+    { "preset": "spin", "duration": 6 },
+    { "preset": "pop" },
+    { "preset": "twinkle", "amount": 0.7 }
+  ],
+  "swap": [
+    { "to": "percent", "effect": "fade" },
+    { "to": "badge-check", "effect": "flip" },
+    { "to": "badge-percent@solid", "effect": "scale" }
+  ]
+}

@@ -1,0 +1,446 @@
+{
+  "name": "align-right",
+  "palettes": [
+    {
+      "id": "receipt-total",
+      "name": "Receipt total",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E1E1E",
+        "c1": "#5A5A5A",
+        "c2": "#F2EEE6",
+        "c3": "#2F8A5A",
+        "c4": "#FFFDF8",
+        "tint": "#E1E1E1",
+        "accent": "#2F8A5A",
+        "shadow": "#2D2D2D",
+        "shine": "#DEDEDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "invoice-blue",
+      "name": "Invoice blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E1F3A",
+        "c1": "#2F64C9",
+        "c2": "#A4BFF2",
+        "c3": "#19407F",
+        "c4": "#E9F0FC",
+        "tint": "#DAE3F5",
+        "accent": "#F2A33A",
+        "shadow": "#183265",
+        "shine": "#D5E0F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "right-to-left",
+      "name": "Right-to-left",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#132A2A",
+        "c1": "#1E8A7E",
+        "c2": "#F2D49A",
+        "c3": "#B8463A",
+        "c4": "#E8F7F5",
+        "tint": "#D7EAE8",
+        "accent": "#B8463A",
+        "shadow": "#0F453F",
+        "shine": "#D2E8E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "price-tag",
+      "name": "Price tag",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E0E10",
+        "c1": "#E2483F",
+        "c2": "#FFD0C9",
+        "c3": "#F2B33D",
+        "c4": "#FFF1EE",
+        "tint": "#FADEDC",
+        "accent": "#F2B33D",
+        "shadow": "#712420",
+        "shine": "#F9DAD9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "signature-line",
+      "name": "Signature line",
+      "tags": [
+        "vintage",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1E1A2E",
+        "c1": "#3E3A7A",
+        "c2": "#E9DFC6",
+        "c3": "#A88A4A",
+        "c4": "#F7F2E6",
+        "tint": "#DCDCE7",
+        "accent": "#A88A4A",
+        "shadow": "#1F1D3D",
+        "shine": "#D8D8E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spreadsheet",
+      "name": "Spreadsheet",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0F2A1A",
+        "c1": "#1F8A4C",
+        "c2": "#B8E6C8",
+        "c3": "#F2C232",
+        "c4": "#EAF7EF",
+        "tint": "#D7EADF",
+        "accent": "#F2C232",
+        "shadow": "#104526",
+        "shine": "#D2E8DB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-ledger",
+      "name": "Dark ledger",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E7E9EF",
+        "c1": "#2C3244",
+        "c2": "#6CC3A0",
+        "c3": "#E5B565",
+        "c4": "#E07A7A",
+        "tint": "#9699A2",
+        "accent": "#6CC3A0",
+        "shadow": "#161922",
+        "shine": "#D5D6DA",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "lavender-note",
+      "name": "Lavender note",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#352B54",
+        "c1": "#BCAAF2",
+        "c2": "#FFD7E5",
+        "c3": "#C8EEDD",
+        "c4": "#FAF7FF",
+        "tint": "#F3F0FD",
+        "accent": "#8A6FE6",
+        "shadow": "#5E5579",
+        "shine": "#F2EEFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "apricot",
+      "name": "Apricot",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#45261A",
+        "c1": "#FFC09F",
+        "c2": "#FFE7AE",
+        "c3": "#A9D8CF",
+        "c4": "#FFF7F1",
+        "tint": "#FFF4EE",
+        "accent": "#E86F4F",
+        "shadow": "#806050",
+        "shine": "#FFEFE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jelly-beans",
+      "name": "Jelly beans",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#35102E",
+        "c1": "#8E5CFF",
+        "c2": "#FF6FB8",
+        "c3": "#FFDA4A",
+        "c4": "#5BE0C2",
+        "tint": "#EBE2FF",
+        "accent": "#FF6FB8",
+        "shadow": "#472E80",
+        "shine": "#E8DEFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-receipt",
+      "name": "Y2K receipt",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#181C3F",
+        "c1": "#7FE0FF",
+        "c2": "#E0B3FF",
+        "c3": "#FFF27A",
+        "c4": "#EEFBFF",
+        "tint": "#E8F9FF",
+        "accent": "#FF5CC2",
+        "shadow": "#407080",
+        "shine": "#DFF7FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-price",
+      "name": "Neon price",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFF7F2",
+        "c1": "#FF6A00",
+        "c2": "#00F0FF",
+        "c3": "#FF2EC4",
+        "c4": "#1A0D05",
+        "tint": "#FFB580",
+        "accent": "#00F0FF",
+        "shadow": "#803500",
+        "shine": "#FFE1CC",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "adobe",
+      "name": "Adobe",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1910",
+        "c1": "#B5623C",
+        "c2": "#E5C29A",
+        "c3": "#6B6E44",
+        "c4": "#F6EADB",
+        "tint": "#F2E3DC",
+        "accent": "#2F6266",
+        "shadow": "#5B311E",
+        "shine": "#F0E0D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-ledger",
+      "name": "70s ledger",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1506",
+        "c1": "#B8601E",
+        "c2": "#E9B04A",
+        "c3": "#6A7A3A",
+        "c4": "#8E3420",
+        "tint": "#F2E2D7",
+        "accent": "#2F7470",
+        "shadow": "#5C300F",
+        "shine": "#F1DFD2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "golden-hour",
+      "name": "Golden hour",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#331908",
+        "c1": "#F28B30",
+        "c2": "#FFD06A",
+        "c3": "#C2413A",
+        "c4": "#FFF0D9",
+        "tint": "#FDEADA",
+        "accent": "#5A4B8C",
+        "shadow": "#794618",
+        "shine": "#FCE8D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "reef",
+      "name": "Reef",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283A",
+        "c1": "#1F84B0",
+        "c2": "#FF8C6E",
+        "c3": "#9FE0F0",
+        "c4": "#E4F4FA",
+        "tint": "#D7E9F1",
+        "accent": "#FF8C6E",
+        "shadow": "#104258",
+        "shine": "#D2E6EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lichen",
+      "name": "Lichen",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E2A16",
+        "c1": "#7D9A4A",
+        "c2": "#E2E3B8",
+        "c3": "#5A4A2E",
+        "c4": "#F3F6E8",
+        "tint": "#E8EDDE",
+        "accent": "#C9653A",
+        "shadow": "#3F4D25",
+        "shine": "#E5EBDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cranberry",
+      "name": "Cranberry",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0710",
+        "c1": "#A51F3D",
+        "c2": "#F28CA2",
+        "c3": "#5A1124",
+        "c4": "#FCE6EA",
+        "tint": "#EFD7DC",
+        "accent": "#E8B84A",
+        "shadow": "#53101F",
+        "shine": "#EDD2D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "onyx-gold",
+      "name": "Onyx & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A150D",
+        "c1": "#C29A45",
+        "c2": "#232019",
+        "c3": "#EEDDB0",
+        "c4": "#7A6230",
+        "tint": "#F4EDDE",
+        "accent": "#6E1E2E",
+        "shadow": "#614D23",
+        "shine": "#F3EBDA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-ramp",
+      "name": "Copper ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2A1206",
+        "c1": "#A8521E",
+        "c2": "#DB8B55",
+        "c3": "#F2C6A3",
+        "c4": "#5E2A0C",
+        "tint": "#EFE0D7",
+        "accent": "#3E8A86",
+        "shadow": "#54290F",
+        "shine": "#EEDCD2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ash",
+      "name": "Ash",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#7E7E7E",
+        "c2": "#C8C8C8",
+        "c3": "#4A4A4A",
+        "c4": "#EFEFEF",
+        "tint": "#E8E8E8",
+        "accent": "#A8A8A8",
+        "shadow": "#3F3F3F",
+        "shine": "#E5E5E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#E00000",
+        "c2": "#FFD400",
+        "c3": "#0050FF",
+        "c4": "#FFFFFF",
+        "tint": "#F9D1D1",
+        "accent": "#0050FF",
+        "shadow": "#700000",
+        "shine": "#F9CCCC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "winter-ledger",
+      "name": "Winter ledger",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1B2639",
+        "c1": "#A3BCDB",
+        "c2": "#E9EFF7",
+        "c3": "#B8394A",
+        "c4": "#5A7399",
+        "tint": "#EEF3F9",
+        "accent": "#B8394A",
+        "shadow": "#525E6E",
+        "shine": "#EDF2F8",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

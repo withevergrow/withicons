@@ -1,0 +1,8 @@
+{
+  "name": "ambulance",
+  "intent": "idles forward, then races off and comes back on hover",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 1.8 },
+  "hover": { "preset": "pass", "dir": 0, "duration": 0.9 },
+  "alt": [ { "preset": "shake", "amount": 0.4 }, { "preset": "bounce", "origin": [12, 20], "amount": 0.4 } ],
+  "swap": [ { "to": "siren", "effect": "fade" }, { "to": "truck", "effect": "slide-right" }, { "to": "ambulance@solid", "effect": "scale" } ]
+}

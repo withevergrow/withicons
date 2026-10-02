@@ -1,0 +1,68 @@
+{
+  "name": "shield-off",
+  "category": "security",
+  "description": "A shield struck through by a slash for disabled protection, unsecured states, or no coverage.",
+  "aliases": [
+    "security-off",
+    "no-shield",
+    "protection-off",
+    "shield-disabled",
+    "shield-slash",
+    "no-protection",
+    "security-disabled"
+  ],
+  "tags": [
+    "security",
+    "protection",
+    "disabled",
+    "off",
+    "unsafe",
+    "vulnerable"
+  ],
+  "paths": [
+    {
+      "d": "M8.75 3.8 L12 2.5 L19.5 5.5 V12 C19.5 12.8 19.41 13.56 19.23 14.28",
+      "plate": "K"
+    },
+    {
+      "d": "M15.02 19.97 C14.12 20.57 13.1 21.08 12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V9.45",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.74 4.2 L12 2.5 L19.5 5.5 V12 C19.5 13.2 19.29 14.32 18.89 15.35 Z",
+    "M15.83 19.37 C14.74 20.24 13.45 20.95 12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V8.04 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "unsecured",
+    "unprotected",
+    "insecure",
+    "protection disabled",
+    "antivirus off",
+    "firewall off",
+    "not protected",
+    "not secure",
+    "unsafe",
+    "at risk",
+    "vulnerable",
+    "vulnerability",
+    "exposed",
+    "no insurance",
+    "no coverage",
+    "uninsured",
+    "turn off protection",
+    "disable security",
+    "security warning",
+    "breach",
+    "unguarded",
+    "defenceless",
+    "defenseless",
+    "shiled off",
+    "sheild off"
+  ]
+}

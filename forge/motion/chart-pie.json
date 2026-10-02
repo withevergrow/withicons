@@ -1,0 +1,47 @@
+{
+  "name": "chart-pie",
+  "intent": "turns slowly like shares settling into place",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      11,
+      13
+    ],
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      11,
+      13
+    ],
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pop",
+      "origin": [
+        11,
+        13
+      ]
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        11,
+        13
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-bar",
+      "effect": "rotate"
+    },
+    {
+      "to": "chart-pie@solid",
+      "effect": "scale"
+    }
+  ]
+}

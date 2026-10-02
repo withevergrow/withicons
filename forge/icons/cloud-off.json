@@ -1,0 +1,67 @@
+{
+  "name": "cloud-off",
+  "category": "devices",
+  "description": "A cloud struck through by a slash for offline mode and sync that is unavailable.",
+  "aliases": [
+    "no-cloud",
+    "cloud-slash",
+    "sync-off",
+    "no-sync",
+    "cloud-disconnected",
+    "cloud-unavailable",
+    "cloud-offline",
+    "disconnected-cloud",
+    "cloud-error"
+  ],
+  "tags": [
+    "devices",
+    "cloud",
+    "offline",
+    "sync",
+    "disconnected",
+    "error"
+  ],
+  "paths": [
+    {
+      "d": "M14.4 19 H7 A4.5 4.5 0 0 1 5.66 10.25",
+      "plate": "K"
+    },
+    {
+      "d": "M10.64 6.04 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 21.07 16.47",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M15.64 19 H7 A4.5 4.5 0 0 1 6.2 10.1 A6.2 6.2 0 0 1 6.35 9.71 Z",
+    "M9.71 6.35 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 20.62 17.26 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "offline",
+    "offline mode",
+    "work offline",
+    "not synced",
+    "sync paused",
+    "sync failed",
+    "sync error",
+    "no connection",
+    "connection lost",
+    "disconnected",
+    "unavailable",
+    "server down",
+    "outage",
+    "service down",
+    "upload failed",
+    "not backed up",
+    "storage unavailable",
+    "no internet",
+    "local only",
+    "cloud off",
+    "icloud off",
+    "cloud disabled"
+  ]
+}

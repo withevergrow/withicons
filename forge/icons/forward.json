@@ -1,0 +1,63 @@
+{
+  "name": "forward",
+  "category": "communication",
+  "description": "An arrow pointing ahead to the right whose tail curves down, for forwarding a message or email.",
+  "aliases": [
+    "mail-forward",
+    "forward-message",
+    "forward-email",
+    "pass-along",
+    "send-on",
+    "fwd",
+    "fw",
+    "email-forward",
+    "message-forward",
+    "pass-on",
+    "relay",
+    "forward-to"
+  ],
+  "tags": [
+    "forward",
+    "email",
+    "message",
+    "share",
+    "arrow",
+    "send"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 9.5 H11 A7 7 0 0 0 4 16.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 4.5 L20.5 9.5 L15.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "forward email",
+    "forward message",
+    "forward to",
+    "forwarding",
+    "send to someone else",
+    "pass it on",
+    "share",
+    "share message",
+    "resend",
+    "send again",
+    "redirect",
+    "relay message",
+    "fw:",
+    "fwd:",
+    "email",
+    "message",
+    "chat",
+    "curved arrow right",
+    "arrow right curved",
+    "onward",
+    "foward",
+    "forword"
+  ]
+}

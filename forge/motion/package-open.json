@@ -1,0 +1,8 @@
+{
+  "name": "package-open",
+  "intent": "bobs gently like a freshly opened box",
+  "loop": { "preset": "float", "amount": 0.5, "duration": 3 },
+  "hover": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.8 },
+  "alt": [ { "preset": "jelly", "origin": [12, 21.5] }, { "preset": "tada", "amount": 0.6 } ],
+  "swap": [ { "to": "package", "effect": "slide-down" }, { "to": "package-open@solid", "effect": "scale" } ]
+}

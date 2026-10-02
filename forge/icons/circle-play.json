@@ -1,0 +1,70 @@
+{
+  "name": "circle-play",
+  "category": "media",
+  "description": "A play triangle inside a circle for video thumbnails and big play buttons.",
+  "aliases": [
+    "play-circle",
+    "play-button-circle",
+    "video-play-circle",
+    "start-circle",
+    "round-play",
+    "play-round",
+    "circled-play",
+    "watch-video",
+    "play-video",
+    "start-video"
+  ],
+  "tags": [
+    "play",
+    "media",
+    "video",
+    "circle",
+    "button",
+    "start"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11 8.85 L14.98 11.13 A1 1 0 0 1 14.98 12.87 L11 15.15 A1 1 0 0 1 9.5 14.28 L9.5 9.72 A1 1 0 0 1 11 8.85 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M11 8.85 L14.98 11.13 A1 1 0 0 1 14.98 12.87 L11 15.15 A1 1 0 0 1 9.5 14.28 L9.5 9.72 A1 1 0 0 1 11 8.85 Z"
+  ],
+  "synonyms": [
+    "big play button",
+    "watch now",
+    "start playback",
+    "resume",
+    "begin",
+    "video player",
+    "media player",
+    "youtube button",
+    "video thumbnail",
+    "preview video",
+    "demo video",
+    "trailer",
+    "tutorial video",
+    "launch",
+    "run",
+    "go",
+    "player",
+    "playback",
+    "listen",
+    "play icon",
+    "round play button",
+    "play circle button",
+    "playbutton",
+    "play buton",
+    "video",
+    "movie",
+    "play button"
+  ]
+}

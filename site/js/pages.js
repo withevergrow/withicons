@@ -350,6 +350,103 @@
     })
   }
 
+  /* ───────── animations demos (@withicons/motion: developers#motion, about, animate guide) ───────── */
+  function initMotion() {
+    var hasCss = !!$('link[href*="vendor/motion/motion.css"]')
+    if (hasCss) doc.documentElement.classList.add('has-motion')
+    var rm = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // every motion demo area pauses while off-screen or in a hidden tab
+    $$('[data-motion-grid], [data-motion-stage], .ab-move-art, [data-motion-area]').forEach(function (area) {
+      visibility(area, function (on) { area.classList.toggle('mo-offscreen', !on); $$('.wm', area).forEach(function (w) { w.classList.toggle('wm-paused', !on || area._userPaused === true) }) })
+    })
+    var ctl = $('[data-motion-ctl]'), grid = $('[data-motion-grid]')
+    if (ctl && grid) {
+      var wms = $$('.wm', grid), pause = $('[data-motion-pause]', ctl), note = $('[data-motion-rm]', ctl)
+      $$('[data-motion-mode]', ctl).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var mode = b.getAttribute('data-motion-mode')
+          $$('[data-motion-mode]', ctl).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
+          wms.forEach(function (w) { w.classList.remove('wm-loop', 'wm-hover'); void w.offsetWidth; w.classList.add('wm-' + mode) })
+        })
+      })
+      if (pause) {
+        var label = $('span', pause)
+        if (rm) {
+          // reduced motion: demos start still; the button opts in for this page only
+          if (note) note.hidden = false
+          label.textContent = 'Play demos'
+          pause.addEventListener('click', function () {
+            var on = pause.getAttribute('aria-pressed') !== 'true'
+            pause.setAttribute('aria-pressed', on ? 'true' : 'false')
+            label.textContent = on ? 'Stop demos' : 'Play demos'
+            $$('[data-motion-grid] .wm, [data-motion-stage] .wm, [data-swap-demo] .wm-swap').forEach(function (w) { w.classList.toggle('wm-force', on) })
+          })
+        } else {
+          pause.addEventListener('click', function () {
+            var on = pause.getAttribute('aria-pressed') !== 'true'
+            pause.setAttribute('aria-pressed', on ? 'true' : 'false')
+            label.textContent = on ? 'Play all' : 'Pause all'
+            grid._userPaused = on
+            wms.forEach(function (w) { w.classList.toggle('wm-paused', on) })
+          })
+        }
+      }
+      // a card's copy button also replays its demo
+      grid.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.mo-preset'); if (!b) return
+        var w = $('.wm', b); if (!w) return
+        var cls = w.className; w.className = cls.replace(/\bwm-(loop|hover)\b/, ''); void w.offsetWidth; w.className = cls
+      })
+    }
+    $$('[data-swap-demo]').forEach(function (box) {
+      $$('[data-swap-toggle]', box).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var on = b.getAttribute('aria-pressed') !== 'true'
+          b.setAttribute('aria-pressed', on ? 'true' : 'false')
+          var s = $('.wm-swap', b); if (s) s.classList.toggle('is-on', on)
+        })
+      })
+      $$('[data-swap-fx]', box).forEach(function (f) {
+        f.addEventListener('click', function () {
+          var fx = f.getAttribute('data-swap-fx')
+          $$('[data-swap-fx]', box).forEach(function (x) { x.setAttribute('aria-pressed', x === f ? 'true' : 'false') })
+          $$('.wm-swap', box).forEach(function (s) {
+            var use = fx === 'auto' ? s.getAttribute('data-fx') : fx
+            s.className = s.className.replace(/\bwm-fx-[\w-]+/g, '').trim() + ' wm-fx-' + use
+            var lab = $('[data-fx-label]', s.parentNode); if (lab) lab.textContent = use
+          })
+        })
+      })
+    })
+  }
+
+  /* ───────── which-file guide: slide colour for the see-through demo; animate guide: Turn into timing ───────── */
+  function initFormats() {
+    $$('[data-clear]').forEach(function (box) {
+      var demo = $('.wf-clear-demo', box), btns = $$('[data-clear-bg]', box)
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
+          demo.style.setProperty('--slide', b.getAttribute('data-clear-bg'))
+          demo.style.setProperty('--slide-ink', b.getAttribute('data-clear-ink') || '#fff')
+        })
+      })
+    })
+    $$('[data-swap-speed]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var box = b.closest('[data-swap-demo]'); if (!box) return
+        $$('[data-swap-speed]', box).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
+        // a multiplier of each effect's own duration, like the editor's Snappy / Smooth / Slow
+        var k = parseFloat(b.getAttribute('data-swap-speed')) || 1
+        $$('.wm-swap', box).forEach(function (s) {
+          if (!s.hasAttribute('data-base-dur')) s.setAttribute('data-base-dur', parseFloat(getComputedStyle(s).getPropertyValue('--_sd')) || 0.45)
+          var base = parseFloat(s.getAttribute('data-base-dur'))
+          if (k === 1) s.style.removeProperty('--wm-swap-dur'); else s.style.setProperty('--wm-swap-dur', Math.round(base * k * 100) / 100 + 's')
+        })
+      })
+    })
+  }
+
   /* open a <details> targeted by the URL hash */
   function openHash() {
     var id = location.hash.slice(1); if (!id) return
@@ -357,7 +454,7 @@
   }
 
   function init() {
-    initSteps(); initTabs(); initGuideIndex(); initDevelopers(); initAI(); initAbout(); initFAQ(); openHash()
+    initSteps(); initTabs(); initGuideIndex(); initDevelopers(); initAI(); initAbout(); initFAQ(); initMotion(); initFormats(); openHash()
     var w = WI()
     // the shared search engine may arrive after us (lazy) — re-run demos once it does
     if (!getEngine() && w && w.ensureSearch) w.ensureSearch().then(function () { var q = $('[data-ai-q]'); if (q) q.dispatchEvent(new Event('input')); var r = $('[data-resolve-in]'); if (r) r.dispatchEvent(new Event('input')) }, function () { })

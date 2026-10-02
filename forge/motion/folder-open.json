@@ -1,0 +1,32 @@
+{
+  "name": "folder-open",
+  "intent": "hovers open, bounces as you browse inside",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "fade"
+    }
+  ]
+}

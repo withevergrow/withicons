@@ -1,0 +1,73 @@
+{
+  "name": "briefcase-medical",
+  "category": "health",
+  "description": "A medical bag with a cross for first aid kits, doctor visits, and health supplies.",
+  "aliases": [
+    "first-aid-kit",
+    "medical-kit",
+    "medkit",
+    "health-kit",
+    "emergency-kit",
+    "doctor-bag",
+    "aid-kit",
+    "first-aid",
+    "medical-bag",
+    "med-kit"
+  ],
+  "tags": [
+    "health",
+    "first aid",
+    "medical",
+    "emergency",
+    "kit",
+    "doctor"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7.5 V5.5 A2 2 0 0 1 10.5 3.5 H13.5 A2 2 0 0 1 15.5 5.5 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 11.5 V16.5 M9.5 14 H14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M12 11.5 V16.5",
+    "M9.5 14 H14.5"
+  ],
+  "synonyms": [
+    "first aid box",
+    "first aid kit",
+    "medicine box",
+    "medicine cabinet",
+    "medical supplies",
+    "supplies",
+    "emergency supplies",
+    "survival kit",
+    "doctors bag",
+    "house call",
+    "home visit",
+    "medical case",
+    "medical briefcase",
+    "health insurance",
+    "medical insurance",
+    "health",
+    "healthcare",
+    "nurse",
+    "paramedic bag",
+    "safety",
+    "treatment",
+    "emergency",
+    "red cross",
+    "medkits",
+    "frist aid"
+  ]
+}

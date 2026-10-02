@@ -1,0 +1,36 @@
+{
+  "name": "chart-line",
+  "intent": "draws its trend line left to right like new data arriving",
+  "loop": {
+    "preset": "draw",
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.5
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-area",
+      "effect": "fade"
+    },
+    {
+      "to": "trending-up",
+      "effect": "morph"
+    },
+    {
+      "to": "chart-bar",
+      "effect": "slide-up"
+    }
+  ]
+}

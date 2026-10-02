@@ -1,0 +1,15 @@
+{
+  "name": "clipboard-list",
+  "intent": "ticks through its list like someone checking items off",
+  "loop": { "preset": "type", "amount": 0.6, "duration": 2.4 },
+  "hover": { "preset": "nod", "origin": [12, 21.5], "amount": 0.8 },
+  "alt": [
+    { "preset": "tilt", "origin": [12, 21.5], "amount": 0.7 },
+    { "preset": "float", "amount": 0.5, "duration": 3 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "clipboard-check", "effect": "flip" },
+    { "to": "list-checks", "effect": "fade" }
+  ]
+}

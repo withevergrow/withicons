@@ -1,0 +1,27 @@
+{
+  "name": "crop",
+  "palettes": [
+    {"id":"photo-editor-blue","name":"Photo editor blue","tags":["true-to-life","corporate"],"colors":{"ink":"#0F2347","c1":"#4C8DF6","c2":"#F5B83D","c3":"#2B5FB8","c4":"#DCE9FF","tint":"#DBE8FD","accent":"#F5B83D","shadow":"#2A4E87","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"darkroom-safelight","name":"Darkroom safelight","tags":["true-to-life","dark"],"colors":{"ink":"#1A0B0A","c1":"#D6453D","c2":"#2A2A2E","c3":"#F2A17A","c4":"#6E1F1B","tint":"#F7DAD8","accent":"#F2A17A","shadow":"#762622","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"instant-photo","name":"Instant photo","tags":["true-to-life","retro"],"colors":{"ink":"#23263A","c1":"#7EC4CF","c2":"#F2D16B","c3":"#E07A5F","c4":"#3D405B","tint":"#E5F3F5","accent":"#E07A5F","shadow":"#456C72","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"golden-hour","name":"Golden hour","tags":["true-to-life","sunset"],"colors":{"ink":"#2C1D0E","c1":"#F6A04D","c2":"#E5604A","c3":"#FCD486","c4":"#7A3B5E","tint":"#FDECDB","accent":"#E5604A","shadow":"#87582A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"film-negative","name":"Film negative","tags":["vintage"],"colors":{"ink":"#2B1A0E","c1":"#E07B39","c2":"#3B2A20","c3":"#F6C89F","c4":"#9C4A1A","tint":"#F9E5D7","accent":"#9C4A1A","shadow":"#7B441F","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"gallery-mat","name":"Gallery mat","tags":["vintage","earthy"],"colors":{"ink":"#2D2A24","c1":"#E8E1D3","c2":"#A39882","c3":"#5E5546","c4":"#C9B99A","tint":"#FAF9F6","accent":"#A39882","shadow":"#807C74","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"cyanotype","name":"Cyanotype","tags":["true-to-life","mono"],"colors":{"ink":"#0A1428","c1":"#2F5D9E","c2":"#9CC3E6","c3":"#E9F1F8","c4":"#173A6B","tint":"#D5DFEC","accent":"#9CC3E6","shadow":"#1A3357","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"designer-violet","name":"Designer violet","tags":["vivid"],"colors":{"ink":"#1E0B4A","c1":"#8B5CF6","c2":"#F472B6","c3":"#34D399","c4":"#FBBF24","tint":"#E8DEFD","accent":"#F472B6","shadow":"#4C3387","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-crop","name":"Pastel crop","tags":["pastel"],"colors":{"ink":"#2F4A44","c1":"#B8E0D2","c2":"#F6C6D0","c3":"#D6C7F2","c4":"#FFE7A8","tint":"#F1F9F6","accent":"#F6A5B6","shadow":"#657B74","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum-snap","name":"Bubblegum snap","tags":["candy"],"colors":{"ink":"#4A1036","c1":"#FF8FC7","c2":"#8AD7FF","c3":"#FFE066","c4":"#B79CFF","tint":"#FFE9F4","accent":"#FF4F9A","shadow":"#8C4F6D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seaside-print","name":"Seaside print","tags":["ocean"],"colors":{"ink":"#0D2C38","c1":"#3FA7C9","c2":"#F4E3B5","c3":"#1D5F7A","c4":"#F28C6B","tint":"#D9EDF4","accent":"#F28C6B","shadow":"#235C6F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"field-shoot","name":"Field shoot","tags":["nature"],"colors":{"ink":"#18260F","c1":"#6E9B4E","c2":"#3E5F2C","c3":"#D6C68A","c4":"#A3C4DC","tint":"#E2EBDC","accent":"#D6C68A","shadow":"#3D552B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"autumn-roll","name":"Autumn roll","tags":["seasonal","earthy"],"colors":{"ink":"#2E1508","c1":"#C8652B","c2":"#8F3B1B","c3":"#E8B04B","c4":"#556B2F","tint":"#F4E0D5","accent":"#E8B04B","shadow":"#6E3818","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"70s-slide-film","name":"70s slide film","tags":["retro"],"colors":{"ink":"#3B2416","c1":"#E9A23B","c2":"#C8553D","c3":"#588B8B","c4":"#F2D0A4","tint":"#FBECD8","accent":"#C8553D","shadow":"#805920","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"teal-ramp","name":"Teal ramp","tags":["mono"],"colors":{"ink":"#06302B","c1":"#2BB3A3","c2":"#12766C","c3":"#8FE0D6","c4":"#D7F5F1","tint":"#D5F0ED","accent":"#12766C","shadow":"#18625A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"silver-gelatin","name":"Silver gelatin","tags":["grayscale"],"colors":{"ink":"#121212","c1":"#B5B5B5","c2":"#6B6B6B","c3":"#DCDCDC","c4":"#3F3F3F","tint":"#F0F0F0","accent":"#6B6B6B","shadow":"#646464","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"chrome-y2k","name":"Chrome Y2K","tags":["y2k"],"colors":{"ink":"#2B2D6E","c1":"#B9C6FF","c2":"#FF8DE1","c3":"#8CF5E8","c4":"#E3E8F5","tint":"#F1F4FF","accent":"#FF8DE1","shadow":"#666D8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-and-gold","name":"Black & gold","tags":["luxe"],"colors":{"ink":"#1E1B18","c1":"#D4AF37","c2":"#1E1B18","c3":"#F3DE9A","c4":"#8A6D1F","tint":"#F6EFD7","accent":"#8A6D1F","shadow":"#75601E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#0047AB","c3":"#FFFFFF","c4":"#D50000","tint":"#FFF6CC","accent":"#D50000","shadow":"#8C7500","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"slate-ui","name":"Slate UI","tags":["corporate"],"colors":{"ink":"#0F172A","c1":"#64748B","c2":"#3B82F6","c3":"#CBD5E1","c4":"#1E293B","tint":"#E0E3E8","accent":"#3B82F6","shadow":"#37404C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-editor","name":"Dark editor","tags":["dark"],"colors":{"ink":"#0B0D12","c1":"#3A3F4B","c2":"#7AA2F7","c3":"#22252C","c4":"#BB9AF7","tint":"#D8D9DB","accent":"#7AA2F7","shadow":"#202329","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"viewfinder-neon","name":"Viewfinder neon","tags":["neon","on-dark"],"colors":{"ink":"#39F0FF","c1":"#12213A","c2":"#FF3D9A","c3":"#F9F871","c4":"#7CFF6B","tint":"#1E5F75","accent":"#FF3D9A","shadow":"#070D17","shine":"#BAFAFF","edge":"#2E3C52"}}
+  ]
+}

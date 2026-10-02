@@ -1,0 +1,15 @@
+{
+  "name": "circle-arrow-right",
+  "intent": "nudges right like a next button saying go on",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.9, "duration": 0.6 },
+  "alt": [
+    { "preset": "pop" },
+    { "preset": "pass", "dir": 0, "duration": 0.8 }
+  ],
+  "swap": [
+    { "to": "circle-arrow-left", "effect": "rotate" },
+    { "to": "circle-arrow-right@solid", "effect": "scale" },
+    { "to": "check", "effect": "morph" }
+  ]
+}

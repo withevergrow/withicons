@@ -1,0 +1,8 @@
+{
+  "name": "radio",
+  "intent": "thumps gently like music playing from its speaker",
+  "loop": { "preset": "pulse", "origin": [12, 20.5], "amount": 0.45, "duration": 1.6 },
+  "hover": { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.8 },
+  "alt": [ { "preset": "rock", "origin": [12, 20.5], "amount": 0.5 }, { "preset": "fill" } ],
+  "swap": [ { "to": "music-note", "effect": "morph" }, { "to": "podcast", "effect": "fade" }, { "to": "radio@solid", "effect": "scale" } ]
+}

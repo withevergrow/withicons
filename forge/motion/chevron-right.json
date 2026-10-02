@@ -1,0 +1,30 @@
+{
+  "name": "chevron-right",
+  "intent": "nudges right to say go forward",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "chevron-left",
+      "effect": "rotate"
+    },
+    {
+      "to": "chevron-down",
+      "effect": "rotate"
+    }
+  ]
+}

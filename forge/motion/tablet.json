@@ -1,0 +1,35 @@
+{
+  "name": "tablet",
+  "intent": "floats gently, then tilts like it is being picked up",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.9
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "smartphone",
+      "effect": "scale"
+    },
+    {
+      "to": "laptop",
+      "effect": "morph"
+    }
+  ]
+}

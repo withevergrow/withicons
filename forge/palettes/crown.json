@@ -1,0 +1,447 @@
+{
+  "name": "crown",
+  "palettes": [
+    {
+      "id": "royal-gold",
+      "name": "Royal gold",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#F5B700",
+        "c2": "#FFD54A",
+        "c3": "#C8102E",
+        "c4": "#1E4FBF",
+        "tint": "#FDF1CC",
+        "accent": "#C8102E",
+        "shadow": "#725200",
+        "shine": "#FCE9B3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose-gold",
+      "name": "Rose gold",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#4A2328",
+        "c1": "#E8A88F",
+        "c2": "#F2C2B0",
+        "c3": "#B76E79",
+        "c4": "#FFF3EC",
+        "tint": "#FAEEE9",
+        "accent": "#B76E79",
+        "shadow": "#794B47",
+        "shine": "#F8E5DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "silver-tiara",
+      "name": "Silver tiara",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#262B33",
+        "c1": "#C9CED6",
+        "c2": "#E3E7ED",
+        "c3": "#8EC9FF",
+        "c4": "#F2B8D8",
+        "tint": "#F4F5F7",
+        "accent": "#8EC9FF",
+        "shadow": "#575C64",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "emerald-crown",
+      "name": "Emerald crown",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E2205",
+        "c1": "#E3B53C",
+        "c2": "#F0CE6A",
+        "c3": "#138A5E",
+        "c4": "#0C5A3E",
+        "tint": "#F9F0D8",
+        "accent": "#138A5E",
+        "shadow": "#644E16",
+        "shine": "#F7E9C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sapphire",
+      "name": "Sapphire diadem",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1A3A",
+        "c1": "#E9C46A",
+        "c2": "#F4D98E",
+        "c3": "#1D3FBB",
+        "c4": "#7FA7FF",
+        "tint": "#FBF3E1",
+        "accent": "#1D3FBB",
+        "shadow": "#584D48",
+        "shine": "#F8EDD2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ruby-velvet",
+      "name": "Ruby velvet",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A0612",
+        "c1": "#D9A521",
+        "c2": "#E8BE4A",
+        "c3": "#8B1E3F",
+        "c4": "#F4E2B0",
+        "tint": "#F7EDD3",
+        "accent": "#E0446A",
+        "shadow": "#5F3617",
+        "shine": "#F4E4BC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "party-crown",
+      "name": "Party crown",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1A00",
+        "c1": "#FFD23F",
+        "c2": "#FF5E7E",
+        "c3": "#3EC1D3",
+        "c4": "#8BD346",
+        "tint": "#FFF6D9",
+        "accent": "#FF5E7E",
+        "shadow": "#6A5113",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-princess",
+      "name": "Pastel princess",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A2A44",
+        "c1": "#F9C5DB",
+        "c2": "#C7B8F5",
+        "c3": "#FFF0B3",
+        "c4": "#B8E6F0",
+        "tint": "#FEF3F8",
+        "accent": "#FF9FC8",
+        "shadow": "#7F5971",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-tiara",
+      "name": "Candy tiara",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FF7AB8",
+        "c2": "#FFE45C",
+        "c3": "#6EE7F9",
+        "c4": "#A78BFA",
+        "tint": "#FFE4F1",
+        "accent": "#FFE45C",
+        "shadow": "#802E57",
+        "shine": "#FFD7EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holo-crown",
+      "name": "Holo crown",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2250",
+        "c1": "#D9D2FF",
+        "c2": "#FF8BE0",
+        "c3": "#9FFFE0",
+        "c4": "#F0EDFF",
+        "tint": "#F7F6FF",
+        "accent": "#FF8BE0",
+        "shadow": "#5F5785",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-king",
+      "name": "Neon royalty",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFE14D",
+        "c1": "#1A1405",
+        "c2": "#FF3DCB",
+        "c3": "#3DF2FF",
+        "c4": "#8A5CFF",
+        "tint": "#766622",
+        "accent": "#FF3DCB",
+        "shadow": "#0A0802",
+        "shine": "#FFF2AF",
+        "edge": "#171412"
+      }
+    },
+    {
+      "id": "bronze-age",
+      "name": "Bronze age",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1A0C",
+        "c1": "#B07A3C",
+        "c2": "#C99459",
+        "c3": "#6E7F4F",
+        "c4": "#E8D3A9",
+        "tint": "#EFE4D8",
+        "accent": "#6E7F4F",
+        "shadow": "#52371A",
+        "shine": "#E7D7C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "disco-queen",
+      "name": "Disco queen",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#F2B134",
+        "c2": "#E05A2B",
+        "c3": "#A6373F",
+        "c4": "#2F7F7A",
+        "tint": "#FCEFD6",
+        "accent": "#F2B134",
+        "shadow": "#664317",
+        "shine": "#FBE8C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "antique",
+      "name": "Antique regalia",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2414",
+        "c1": "#C6A15B",
+        "c2": "#D7B97A",
+        "c3": "#7A2E2E",
+        "c4": "#4E6B5C",
+        "tint": "#F4ECDE",
+        "accent": "#7A2E2E",
+        "shadow": "#5C4A29",
+        "shine": "#EEE3CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "violet-ramp",
+      "name": "Violet ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#1E0B4B",
+        "c1": "#8B5CF6",
+        "c2": "#C4B5FD",
+        "c3": "#5B21B6",
+        "c4": "#EDE9FE",
+        "tint": "#E8DEFD",
+        "accent": "#C4B5FD",
+        "shadow": "#3F237E",
+        "shine": "#DCCEFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pewter",
+      "name": "Pewter",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1C1C1E",
+        "c1": "#A1A1AA",
+        "c2": "#D4D4D8",
+        "c3": "#52525B",
+        "c4": "#F4F4F5",
+        "tint": "#ECECEE",
+        "accent": "#E4E4E7",
+        "shadow": "#444448",
+        "shine": "#E3E3E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mermaid",
+      "name": "Mermaid crown",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0E3B43",
+        "c1": "#7FD1CF",
+        "c2": "#2C8C99",
+        "c3": "#FFB5A7",
+        "c4": "#F4F1EA",
+        "tint": "#E5F6F5",
+        "accent": "#FFB5A7",
+        "shadow": "#30686D",
+        "shine": "#D9F1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "woodland",
+      "name": "Woodland crown",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1F2E15",
+        "c1": "#7FA650",
+        "c2": "#D96C4A",
+        "c3": "#F2E0B5",
+        "c4": "#3F6B3A",
+        "tint": "#E5EDDC",
+        "accent": "#D96C4A",
+        "shadow": "#3C5227",
+        "shine": "#D9E4CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#E6C25A",
+        "c1": "#141414",
+        "c2": "#2A2418",
+        "c3": "#E6C25A",
+        "c4": "#F6E7B0",
+        "tint": "#685A30",
+        "accent": "#E6C25A",
+        "shadow": "#000000",
+        "shine": "#F4E4B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday",
+      "name": "Holiday king",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2E1A00",
+        "c1": "#E2B33C",
+        "c2": "#F0CC6B",
+        "c3": "#C62828",
+        "c4": "#1B6B3A",
+        "tint": "#F9F0D8",
+        "accent": "#C62828",
+        "shadow": "#644812",
+        "shine": "#F6E8C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFE866",
+        "c3": "#D10000",
+        "c4": "#0050EF",
+        "tint": "#FFF6CC",
+        "accent": "#D10000",
+        "shadow": "#4D4000",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "premium-plan",
+      "name": "Premium plan",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#1A0B3D",
+        "c1": "#6D28D9",
+        "c2": "#8B5CF6",
+        "c3": "#FBBF24",
+        "c4": "#EDE9FE",
+        "tint": "#E2D4F7",
+        "accent": "#FBBF24",
+        "shadow": "#33146C",
+        "shine": "#D3BFF4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine crown",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B1600",
+        "c1": "#FFB800",
+        "c2": "#FF2E93",
+        "c3": "#00D1FF",
+        "c4": "#7CFF4F",
+        "tint": "#FFF1CC",
+        "accent": "#FF2E93",
+        "shadow": "#6B4700",
+        "shine": "#FFEAB3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

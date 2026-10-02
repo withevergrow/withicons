@@ -1,0 +1,32 @@
+{
+  "name": "list",
+  "intent": "lines fill in like items loading into the list",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list-checks",
+      "effect": "fade"
+    },
+    {
+      "to": "list-ordered",
+      "effect": "slide-left"
+    }
+  ]
+}

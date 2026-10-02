@@ -1,0 +1,74 @@
+{
+  "name": "bandage",
+  "category": "health",
+  "description": "An adhesive bandage for first aid, minor injuries, fixes, and patches.",
+  "aliases": [
+    "band-aid",
+    "bandaid",
+    "plaster",
+    "adhesive-bandage",
+    "injury",
+    "wound",
+    "patch",
+    "sticking-plaster",
+    "elastoplast"
+  ],
+  "tags": [
+    "health",
+    "first aid",
+    "injury",
+    "heal",
+    "patch",
+    "fix"
+  ],
+  "paths": [
+    {
+      "d": "M10 20 L20 10 A4.25 4.25 0 0 0 14 4 L4 14 A4.25 4.25 0 0 0 10 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 11 L13 17 M11 7 L17 13",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 V12.01",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 20 L20 10 A4.25 4.25 0 0 0 14 4 L4 14 A4.25 4.25 0 0 0 10 20 Z"
+  ],
+  "cutouts": [
+    "M7 11 L13 17",
+    "M11 7 L17 13",
+    "M11.5 12 A0.5 0.5 0 1 1 12.5 12 A0.5 0.5 0 1 1 11.5 12 Z"
+  ],
+  "synonyms": [
+    "bandages",
+    "plasters",
+    "band aid",
+    "first aid",
+    "cut",
+    "scrape",
+    "graze",
+    "boo boo",
+    "ouch",
+    "hurt",
+    "heal",
+    "healing",
+    "recovery",
+    "get well",
+    "get well soon",
+    "repair",
+    "fix",
+    "hotfix",
+    "quick fix",
+    "patch up",
+    "bug fix",
+    "dressing",
+    "wound care",
+    "pain",
+    "bandaje",
+    "bandadge"
+  ]
+}

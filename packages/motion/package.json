@@ -1,0 +1,98 @@
+{
+  "name": "@withicons/motion",
+  "version": "0.2.0",
+  "description": "Optional animations for with icons: 32 CSS presets, per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/motion"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "animation",
+    "animated-icons",
+    "css-animation",
+    "micro-interactions",
+    "motion",
+    "hover",
+    "keyframes",
+    "icon-animation",
+    "animated-svg",
+    "svg-animation",
+    "gif",
+    "web-components",
+    "react",
+    "vue",
+    "svelte",
+    "reduced-motion"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "./dist/element.js"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "default": "./dist/element.js"
+    },
+    "./export": {
+      "types": "./dist/export.d.ts",
+      "default": "./dist/export.js"
+    },
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "default": "./dist/icons.js"
+    },
+    "./motion.css": "./dist/motion.css",
+    "./icons.css": "./dist/icons.css",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "element": [
+        "./dist/element.d.ts"
+      ],
+      "export": [
+        "./dist/export.d.ts"
+      ],
+      "icons": [
+        "./dist/icons.d.ts"
+      ]
+    }
+  },
+  "style": "./dist/motion.css",
+  "unpkg": "./dist/motion.css",
+  "jsdelivr": "./dist/motion.css",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

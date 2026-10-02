@@ -68,3 +68,11 @@ export function renderIcon(style, icon) {
   if (!Array.isArray(nodes)) throw new Error(`style ${style.name} returned non-array for ${icon.name}`)
   return nodes.filter(n => n && n[1] && (n[0] !== 'path' || (n[1].d && n[1].d.length > 1)))
 }
+
+// Resolve CSS custom-property paints to their fallbacks for rasterizers that don't do CSS (resvg):
+// var(--with-x, #fff) -> #fff, nested fallbacks unwrap, var(--x) with no fallback -> currentColor.
+export function resolveVars(s) {
+  let prev
+  do { prev = s; s = s.replace(/var\(\s*--[\w-]+\s*,\s*([^()]*?)\s*\)/g, '$1').replace(/var\(\s*--[\w-]+\s*\)/g, 'currentColor') } while (s !== prev)
+  return s
+}

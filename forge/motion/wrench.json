@@ -1,0 +1,44 @@
+{
+  "name": "wrench",
+  "intent": "turns about the bolt in its jaw like tightening a nut",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      17,
+      8
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      17,
+      8
+    ],
+    "amount": 1.3
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        17,
+        8
+      ]
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "settings",
+      "effect": "rotate"
+    },
+    {
+      "to": "hammer",
+      "effect": "fade"
+    }
+  ]
+}

@@ -2,10 +2,14 @@
 import { GUIDES } from '../site-pages/guides-data.mjs'
 import { crumbs } from '../site-pages/lib.mjs'
 import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, styleStrip, STYLES, STYLE_TITLE, ICON_NAMES, META, rawSvgSize, CHECKED } from './render.mjs'
+import { moreLanders } from './free-more.mjs'
+import { N_STYLES, word, stylesIn, listTitles, styleTitle, hasStyle } from '../site-pages/lib.mjs'
+import { motionAssets } from '../site-pages/motion.mjs'
 
 const G = Object.fromEntries(GUIDES.map(g => [g.slug, g]))
 const N = ICON_NAMES.length, T = N * STYLES.length
 const TOTAL = `${N} icons × ${STYLES.length} styles (${T.toLocaleString('en-US')} in all)`
+const NS = N_STYLES
 
 /* curated sets (validated against the icon data at build time) */
 const SETS = {
@@ -42,13 +46,13 @@ const BASE_FACTS = p => [
   ['Icons', `${TOTAL}, every style on the same 24 × 24 grid.`],
 ]
 
-export const LANDERS = [
+const BASE_LANDERS = [
   {
     slug: 'svg-icons', short: 'Free SVG icons', icon: 'file-code', color: 'line',
-    title: 'Free SVG icons: 300 icons in 7 styles, MIT licensed · with icons',
-    desc: `Free SVG icons you can copy or download in one click: ${N} icons in 7 styles on a 24 × 24 grid, currentColor, MIT licensed, no account or attribution needed.`,
+    title: `Free SVG icons: ${N} icons in ${NS} styles, MIT licensed · with icons`,
+    desc: `Free SVG icons you can copy or download in one click: ${N} icons in ${NS} styles on a 24 × 24 grid, currentColor, MIT licensed, no account or attribution needed.`,
     h1: ['Free SVG icons,', 'copy in one click'], q: 'free SVG icons',
-    answer: () => `with icons gives you <b>${N} free SVG icons in 7 styles</b> (${T.toLocaleString('en-US')} files in all), MIT licensed, with no sign-up and no credit required. Every icon is a clean <code>viewBox="0 0 24 24"</code> SVG that uses <code>currentColor</code>, so it takes the colour of the text around it. Click any icon below to copy its SVG code, or download the file.`,
+    answer: () => `with icons gives you <b>${N} free SVG icons in ${NS} styles</b> (${T.toLocaleString('en-US')} files in all), MIT licensed, with no sign-up and no credit required. Every icon is a clean <code>viewBox="0 0 24 24"</code> SVG that uses <code>currentColor</code>, so it takes the colour of the text around it. Click any icon below to copy its SVG code, or download the file.`,
     picker: { actions: ['svg', 'dlsvg', 'png'], groups: [['Interface', SETS.ui], ['Arrows', SETS.arrows], ['Files', SETS.files], ['Status', SETS.status]] },
     body: p => `
 <section class="ax-split" aria-labelledby="svg-why">
@@ -75,9 +79,9 @@ export const LANDERS = [
   {
     slug: 'png-icons', short: 'Free PNG icons', icon: 'file-image', color: 'solid',
     title: 'Free PNG icons with a transparent background, any colour · with icons',
-    desc: `Download free PNG icons with a transparent background at 256, 512 or 1024 px, in any colour: ${N} icons in 7 styles for slides, docs, Notion and email. No account.`,
+    desc: `Download free PNG icons with a transparent background at 256, 512 or 1024 px, in any colour: ${N} icons in ${NS} styles for slides, docs, Notion and email. No account.`,
     h1: ['Free PNG icons,', 'see-through background'], q: 'free PNG icons with a transparent background',
-    answer: () => `Pick an icon below, choose a colour and a size (256, 512 or 1024 px), and click it: you get a <b>PNG with a transparent background</b>, made right in your browser. All ${N} icons in 7 styles are free and MIT licensed, with no account and no credit needed.`,
+    answer: () => `Pick an icon below, choose a colour and a size (256, 512 or 1024 px), and click it: you get a <b>PNG with a transparent background</b>, made right in your browser. All ${N} icons in ${NS} styles are free and MIT licensed, with no account and no credit needed.`,
     picker: { actions: ['dl', 'png'], groups: [['Business', SETS.business.slice(0, 12)], ['People & contact', [...SETS.people.slice(0, 6), ...SETS.contact.slice(0, 6)]], ['Everyday', SETS.ui.slice(0, 12)]] },
     body: p => `
 <section class="ax-split" aria-labelledby="png-size">
@@ -97,9 +101,9 @@ export const LANDERS = [
   {
     slug: 'icons-for-powerpoint', short: 'Icons for PowerPoint', icon: 'chart-bar', color: 'solid', guide: 'powerpoint',
     title: 'Free icons for PowerPoint: SVG you can recolour · with icons',
-    desc: `Free icons for PowerPoint presentations: download SVGs you can recolour with Graphics Fill, or copy a PNG and paste. ${N} business-ready icons in 7 styles, no credit needed.`,
+    desc: `Free icons for PowerPoint presentations: download SVGs you can recolour with Graphics Fill, or copy a PNG and paste. ${N} business-ready icons in ${NS} styles, no credit needed.`,
     h1: ['Free icons for', 'PowerPoint'], q: 'free icons for PowerPoint',
-    answer: () => `Download any icon below as an <b>SVG</b> and insert it with <b>Insert › Pictures › This Device</b>; PowerPoint (Microsoft 365, 2019 and newer) keeps it sharp and lets you recolour it with Graphics Fill. In a hurry? Choose <b>Copy PNG</b>, click an icon and paste it onto your slide. All ${N} icons in 7 styles are free, with no credit needed.`,
+    answer: () => `Download any icon below as an <b>SVG</b> and insert it with <b>Insert › Pictures › This Device</b>; PowerPoint (Microsoft 365, 2019 and newer) keeps it sharp and lets you recolour it with Graphics Fill. In a hurry? Choose <b>Copy PNG</b>, click an icon and paste it onto your slide. All ${N} icons in ${NS} styles are free, with no credit needed.`,
     picker: { actions: ['dlsvg', 'png', 'dl'], groups: [['Business & results', SETS.business], ['People', SETS.people], ['Contact & agenda', SETS.contact]] },
     body: p => `
 <section class="ax-split" aria-labelledby="pp-how">
@@ -121,9 +125,9 @@ export const LANDERS = [
   {
     slug: 'icons-for-google-slides', short: 'Icons for Google Slides', icon: 'monitor', color: 'line', guide: 'google-slides',
     title: 'Free icons for Google Slides: transparent PNGs, any colour · with icons',
-    desc: `Free icons for Google Slides: copy a transparent PNG and paste it, or download one at 512 px. ${N} icons in 7 styles in any colour. No account, no credit needed.`,
+    desc: `Free icons for Google Slides: copy a transparent PNG and paste it, or download one at 512 px. ${N} icons in ${NS} styles in any colour. No account, no credit needed.`,
     h1: ['Free icons for', 'Google Slides'], q: 'free icons for Google Slides', px: 512,
-    answer: () => `Google Slides doesn’t accept SVG files, so use a <b>PNG</b>. Pick a colour, click an icon below to copy it as a transparent PNG and paste it onto your slide with <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on Mac). Or download a 512 px PNG and use <b>Insert › Image › Upload from computer</b>. All ${N} icons in 7 styles are free and need no credit.`,
+    answer: () => `Google Slides doesn’t accept SVG files, so use a <b>PNG</b>. Pick a colour, click an icon below to copy it as a transparent PNG and paste it onto your slide with <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on Mac). Or download a 512 px PNG and use <b>Insert › Image › Upload from computer</b>. All ${N} icons in ${NS} styles are free and need no credit.`,
     picker: { actions: ['png', 'dl'], groups: [['Business & results', SETS.business], ['School & ideas', SETS.doc], ['Contact', SETS.contact]] },
     body: p => `
 <section class="ax-split" aria-labelledby="gs-how">
@@ -145,15 +149,15 @@ export const LANDERS = [
   {
     slug: 'icons-for-canva', short: 'Icons for Canva', icon: 'palette', color: 'gloss', guide: 'canva',
     title: 'Free icons for Canva: upload SVGs and recolour them · with icons',
-    desc: `Free icons for Canva designs: download SVGs, upload them to Canva and change their colour in the editor. ${N} icons in 7 styles, including hand-drawn and glossy ones.`,
+    desc: `Free icons for Canva designs: download SVGs, upload them to Canva and change their colour in the editor. ${N} icons in ${NS} styles, including hand-drawn and glossy ones.`,
     h1: ['Free icons for', 'Canva'], q: 'free icons for Canva', style: 'gloss',
-    answer: () => `Download an icon below as an <b>SVG</b>, upload it in Canva’s <b>Uploads</b> panel, then click it to add it to your design; Canva lets you change an SVG’s colour from the toolbar. All ${N} icons come in 7 styles, from clean Line to glossy, engraved and hand-drawn, free and with no credit needed.`,
+    answer: () => `Download an icon below as an <b>SVG</b>, upload it in Canva’s <b>Uploads</b> panel, then click it to add it to your design; Canva lets you change an SVG’s colour from the toolbar. All ${N} icons come in ${NS} styles, from clean Line to glossy, engraved and hand-drawn, free and with no credit needed.`,
     picker: { actions: ['dlsvg', 'dl', 'png'], style: 'gloss', groups: [['Social & fun', SETS.fun], ['Business', SETS.business.slice(0, 12)], ['Nature & weather', SETS.nature]] },
     body: p => `
 <section class="ax-split" aria-labelledby="cv-how">
   <div><p class="ax-kicker">How</p><h2 id="cv-how">From this page to your design</h2>${howFromGuide('canva', p)}</div>
   <div>${steps([
-    ['Pick a style with personality', 'Gloss for playful posts, Sketch for a hand-made feel, Engrave for classic invitations, Line for clean infographics.'],
+    ['Pick a style with personality', `Gloss for playful posts, Sketch for a hand-made feel, Engrave for classic invitations, Line for clean infographics${hasStyle('kawaii') ? ', Kawaii or Sticker for cute social posts' : ''}${hasStyle('retro') ? ', Retro for vintage flyers' : ''}.`],
     ['Download the SVG and upload it', 'Uploads › Upload files. Your icons stay in Uploads for every design.'],
     ['Recolour it in Canva', 'Select the icon and click the colour swatch in the top toolbar.'],
   ])}</div>
@@ -168,9 +172,9 @@ export const LANDERS = [
   {
     slug: 'icons-for-figma', short: 'Icons for Figma', icon: 'pen-tool', color: 'engrave', guide: 'figma',
     title: 'Free icons for Figma: copy SVG, paste as vectors · with icons',
-    desc: `Free icons for Figma: click Copy SVG and paste onto the canvas as editable vectors. ${N} icons in 7 styles on one 24 × 24 grid, ready to turn into components. MIT.`,
+    desc: `Free icons for Figma: click Copy SVG and paste onto the canvas as editable vectors. ${N} icons in ${NS} styles on one 24 × 24 grid, ready to turn into components. MIT.`,
     h1: ['Free icons for', 'Figma'], q: 'free icons for Figma',
-    answer: () => `Click any icon below to copy its SVG, then press <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd>) on your Figma canvas: it pastes as <b>editable vector layers</b>, no plugin or download needed. All ${N} icons share one 24 × 24 grid across 7 styles, so you can swap Line for Solid without nudging a pixel.`,
+    answer: () => `Click any icon below to copy its SVG, then press <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd>) on your Figma canvas: it pastes as <b>editable vector layers</b>, no plugin or download needed. All ${N} icons share one 24 × 24 grid across ${NS} styles, so you can swap Line for Solid without nudging a pixel.`,
     picker: { actions: ['svg', 'dlsvg'], groups: [['Interface', SETS.ui], ['Design tools', SETS.design], ['Arrows', SETS.arrows]] },
     body: p => `
 <section class="ax-split" aria-labelledby="fg-how">
@@ -191,9 +195,9 @@ export const LANDERS = [
   {
     slug: 'icons-for-notion', short: 'Icons for Notion', icon: 'sticky-note', color: 'sketch', guide: 'notion', px: 256,
     title: 'Free Notion icons: custom page and callout icons (PNG) · with icons',
-    desc: `Free custom icons for Notion pages and callouts: download a 256 px transparent PNG in any colour and upload it. ${N} icons in 7 styles, including hand-drawn. No credit needed.`,
+    desc: `Free custom icons for Notion pages and callouts: download a 256 px transparent PNG in any colour and upload it. ${N} icons in ${NS} styles, including hand-drawn. No credit needed.`,
     h1: ['Free icons for', 'Notion'], q: 'free Notion icons', style: 'sketch',
-    answer: () => `Pick a colour, click an icon below to download a <b>256 px transparent PNG</b>, then in Notion hover over the page title, click <b>Add icon</b>, open <b>Upload</b> and choose the file. The same works for callout icons. All ${N} icons in 7 styles are free with no credit needed; a mid-tone colour looks good in both light and dark mode.`,
+    answer: () => `Pick a colour, click an icon below to download a <b>256 px transparent PNG</b>, then in Notion hover over the page title, click <b>Add icon</b>, open <b>Upload</b> and choose the file. The same works for callout icons. All ${N} icons in ${NS} styles are free with no credit needed; a mid-tone colour looks good in both light and dark mode.`,
     picker: { actions: ['dl', 'png'], style: 'sketch', px: 256, groups: [['Pages & projects', SETS.doc], ['Life & fun', SETS.fun.slice(0, 12)], ['Work', SETS.business.slice(0, 12)]] },
     body: p => `
 <section class="ax-split" aria-labelledby="nt-how">
@@ -214,9 +218,9 @@ export const LANDERS = [
   {
     slug: 'icons-for-react', short: 'Icons for React', icon: 'code', color: 'duo', dev: true,
     title: 'Free React icons: copy as JSX today, @withicons/react soon · with icons',
-    desc: `Free icons for React: copy any of ${N} icons in 7 styles as a ready JSX component now; the tree-shakable @withicons/react package is launching on npm soon. MIT licensed.`,
+    desc: `Free icons for React: copy any of ${N} icons in ${NS} styles as a ready JSX component now; the tree-shakable @withicons/react package is launching on npm soon. MIT licensed.`,
     h1: ['Free icons for', 'React'], q: 'free React icons',
-    answer: () => `Click any icon below to copy it as a <b>ready React component</b> (JSX, <code>currentColor</code>, props spread onto the svg) and paste it into your project today. A typed, tree-shakable package, <code>@withicons/react</code>, with all ${N} icons in 7 styles is <b>launching on npm soon</b>. Everything is MIT licensed.`,
+    answer: () => `Click any icon below to copy it as a <b>ready React component</b> (JSX, <code>currentColor</code>, props spread onto the svg) and paste it into your project today. A typed, tree-shakable package, <code>@withicons/react</code>, with all ${N} icons in ${NS} styles is <b>launching on npm soon</b>. Everything is MIT licensed.`,
     picker: { actions: ['jsx', 'svg'], groups: [['Interface', SETS.ui], ['Status', SETS.status], ['Developer', SETS.dev]] },
     body: p => `
 <section class="ax-split" aria-labelledby="re-pkg">
@@ -247,9 +251,9 @@ export function Toolbar() {
   {
     slug: 'icons-for-vue', short: 'Icons for Vue', icon: 'code', color: 'sketch', dev: true,
     title: 'Free Vue icons: paste SVG in templates, @withicons/vue soon · with icons',
-    desc: `Free icons for Vue 3: copy any of ${N} icons in 7 styles as inline SVG for your templates today; the @withicons/vue component package is launching on npm soon. MIT.`,
+    desc: `Free icons for Vue 3: copy any of ${N} icons in ${NS} styles as inline SVG for your templates today; the @withicons/vue component package is launching on npm soon. MIT.`,
     h1: ['Free icons for', 'Vue'], q: 'free Vue icons',
-    answer: () => `Click an icon below to copy its <b>SVG</b> and paste it straight into a Vue template: it uses <code>currentColor</code>, so it follows your text colour and dark mode. The component package <code>@withicons/vue</code> (Vue 3) with all ${N} icons in 7 styles is <b>launching on npm soon</b>. MIT licensed.`,
+    answer: () => `Click an icon below to copy its <b>SVG</b> and paste it straight into a Vue template: it uses <code>currentColor</code>, so it follows your text colour and dark mode. The component package <code>@withicons/vue</code> (Vue 3) with all ${N} icons in ${NS} styles is <b>launching on npm soon</b>. MIT licensed.`,
     picker: { actions: ['vue', 'dlsvg'], groups: [['Interface', SETS.ui], ['Commerce', SETS.commerce], ['Developer', SETS.dev]] },
     body: p => `
 <section class="ax-split" aria-labelledby="vu-pkg">
@@ -277,9 +281,9 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   {
     slug: 'font-awesome-style-icon-classes', short: 'Icon classes (<i> tags)', icon: 'hash', color: 'blueprint', dev: true,
     title: 'Font Awesome-style icon classes: <i class="with with-home"> · with icons',
-    desc: `Use free icons the Font Awesome way: one stylesheet, then <i class="with with-home"></i>. ${N} icons in 7 styles as CSS classes, no JavaScript, plus size, spin and flip modifiers.`,
+    desc: `Use free icons the Font Awesome way: one stylesheet, then <i class="with with-home"></i>. ${N} icons in ${NS} styles as CSS classes, no JavaScript, plus size, spin and flip modifiers.`,
     h1: ['Icon classes,', 'the Font Awesome way'], q: 'icon classes like Font Awesome',
-    answer: () => `Add one stylesheet, then write <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code> anywhere in your HTML: that’s the same pattern Font Awesome made popular, with no JavaScript. Add a style class such as <code>with-solid</code> or <code>with-sketch</code> for the other 6 styles, and modifiers like <code>with-2x</code>, <code>with-spin</code> or <code>with-flip-h</code>. Click an icon below to copy its tag.`,
+    answer: () => `Add one stylesheet, then write <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code> anywhere in your HTML: that’s the same pattern Font Awesome made popular, with no JavaScript. Add a style class such as <code>with-solid</code> or <code>with-sketch</code> for the other ${NS - 1} styles, and modifiers like <code>with-2x</code>, <code>with-spin</code> or <code>with-flip-h</code>. Click an icon below to copy its tag.`,
     picker: { actions: ['class'], colors: false, groups: [['Interface', SETS.ui], ['Arrows', SETS.arrows], ['Commerce', SETS.commerce]] },
     body: p => `
 <section class="ax-split" aria-labelledby="ic-setup">
@@ -304,16 +308,16 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   },
   {
     slug: 'hand-drawn-icons', short: 'Hand-drawn icons', icon: 'pencil', color: 'sketch',
-    title: 'Free hand-drawn icons: 300 sketch-style SVG & PNG icons · with icons',
+    title: `Free hand-drawn icons: ${N} sketch-style SVG & PNG icons · with icons`,
     desc: `Free hand-drawn (sketch style) icons: ${N} marker-drawn icons as SVG or transparent PNG for slides, social posts, notes and friendly websites. MIT licensed, no credit.`,
     h1: ['Free hand-drawn', 'icons'], q: 'free hand-drawn icons', style: 'sketch',
-    answer: () => `The <b>Sketch</b> style draws all ${N} icons as if by hand with a marker: wobbly, warm and human, as real SVG vectors. Click an icon below to copy its SVG, copy a PNG or download one in any colour. Free, MIT licensed, no credit needed. Because Sketch shares names and grid with the other 6 styles, you can switch to a clean Line version of the same icon at any time.`,
+    answer: () => `The <b>Sketch</b> style draws all ${N} icons as if by hand with a marker: wobbly, warm and human, as real SVG vectors. Click an icon below to copy its SVG, copy a PNG or download one in any colour. Free, MIT licensed, no credit needed. Because Sketch shares names and grid with the other ${NS - 1} styles, you can switch to a clean Line version of the same icon at any time.`,
     picker: { actions: ['svg', 'png', 'dl'], style: 'sketch', groups: [['Ideas & notes', SETS.doc], ['Fun', SETS.fun], ['Nature', SETS.nature]] },
     body: p => `
 <section class="ax-split" aria-labelledby="hd-where">
   <div><p class="ax-kicker">Where they shine</p><h2 id="hd-where">Made for big, friendly moments</h2>
   <p>Hand-drawn icons have fine detail, so they look best at 32 px and larger: slides, posters, social posts, onboarding screens, notes and empty states. For tiny interface buttons, use Line or Solid.</p>
-  ${facts([...BASE_FACTS(p), ['Style family', `Sketch is one of 4 creative styles (with <a href="${p}styles/gloss.html">Gloss</a>, <a href="${p}styles/engrave.html">Engrave</a> and <a href="${p}styles/blueprint.html">Blueprint</a>). <a href="${p}styles/sketch.html">See every Sketch icon</a>.`]])}</div>
+  ${facts([...BASE_FACTS(p), ['Style family', `Sketch is one of ${word(stylesIn('creative').length)} creative styles (with ${stylesIn('creative').filter(s => s !== 'sketch').map(s => `<a href="${p}styles/${s}.html">${styleTitle(s)}</a>`).join(', ')}). <a href="${p}styles/sketch.html">See every Sketch icon</a>.`]])}</div>
   <div class="ax-sketch-demo" aria-hidden="true">${['lightbulb', 'rocket', 'heart', 'coffee', 'star', 'smile'].map((n, i) => `<span style="--i:${i}">${I(n, 'sketch', 56)}</span>`).join('')}<p class="hand">drawn, not traced</p></div>
 </section>`,
     faq: p => [
@@ -324,6 +328,8 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
     related: ['icons-for-canva', 'icons-for-notion', 'png-icons'],
   },
 ]
+
+export const LANDERS = [...BASE_LANDERS, ...moreLanders({ steps, facts, BASE_FACTS, N, T })]
 
 function rawSvgCode(n) { return rawSvgSize.raw(n) }
 
@@ -344,7 +350,7 @@ function lander(L, all, libs) {
       <div class="ax-hero-art" aria-hidden="true"><div class="ax-hero-badge s-${L.color}">${I(L.icon, style === 'line' ? 'duo' : style, 120)}</div>${styleStrip(L.icon, 30)}</div>
     </div>
   </section>
-  ${picker({ id: 'pick', p, style, px: L.px || L.picker.px || 512, ...L.picker, heading: L.dev ? 'Pick an icon, copy the code' : 'Pick an icon, click to get it', intro: `A starter set for ${esc(L.short.replace(/^Free /, '').replace(/^Icons for /, ''))}. Search to find any of all ${N}.` })}
+  ${picker({ id: 'pick', p, style, px: L.px || L.picker.px || 512, motion: !!L.motion, ...L.picker, heading: L.dev ? 'Pick an icon, copy the code' : 'Pick an icon, click to get it', intro: `A starter set for ${esc(L.short.replace(/^Free /, '').replace(/^Icons for /, ''))}. Search to find any of all ${N}.` })}
   ${L.body(p)}
   ${faqBlock('faq-h', qs)}
   <section class="ax-more" aria-label="Related pages">
@@ -354,20 +360,21 @@ function lander(L, all, libs) {
   ${cta(p)}
 </div>`
   const ld = [webPageLd({ path, name: L.title.replace(/ · with icons$/, ''), description: L.desc }), faqLd(qs)]
-  shell({ path, title: L.title, desc: L.desc, current: '', body, ld, crumbsLd: [['Home', ''], ['Free icons', 'free/index.html'], [L.short, path]], bodyClass: 'ax-free', modified: CHECKED })
+  shell({ path, title: L.title, desc: L.desc, current: '', body, ld, crumbsLd: [['Home', ''], ['Free icons', 'free/index.html'], [L.short, path]], bodyClass: 'ax-free' + (L.motion ? ' ax-motion' : ''), modified: CHECKED, motion: !!L.motion })
   return { url: '/' + path, title: L.title.replace(/ · with icons$/, ''), summary: L.desc }
 }
 
 function hub(all, libs) {
   const path = 'free/index.html', p = '../'
   const title = 'Free icons for slides, docs, design tools and code · with icons'
-  const desc = `Free icon pages by task: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, Font Awesome-style classes and hand-drawn icons. ${N} icons × 7 styles, MIT.`
+  const desc = `Free icon pages by task and style: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, icon classes, hand-drawn, cute, sticker, pixel, glass, retro and animated icons. ${N} icons × ${NS} styles, MIT.`
   const qs = [
-    ['Are all of these icons free?', `Yes. Every one of the ${N} icons in all 7 styles is free under the MIT licence, for personal and commercial use, with no credit required.`],
+    ['Are all of these icons free?', `Yes. Every one of the ${N} icons in all ${NS} styles is free under the MIT licence, for personal and commercial use, with no credit required.`],
     ['Do I need an account?', 'No. Click an icon to copy or download it. That’s it.'],
     ['Which file format should I use?', 'SVG when your app accepts it (PowerPoint, Word, Canva, Figma, websites). PNG for Google Slides, Google Docs, Notion and email.'],
   ]
-  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'hand-drawn-icons', 'svg-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
+  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'svg-icons']], ['By style & motion', ['animated-icons', 'hand-drawn-icons', 'cute-icons', 'sticker-icons', 'pixel-icons', 'glassmorphism-icons', 'retro-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
+    .map(([g, slugs]) => [g, slugs.filter(s => all.some(l => l.slug === s))]).filter(([, s]) => s.length)
   const by = Object.fromEntries(all.map(l => [l.slug, l]))
   const body = `
 <div class="ax-page">
@@ -386,7 +393,7 @@ function hub(all, libs) {
     </div>
   </section>
   ${groups.map(([g, slugs], gi) => `<section class="ax-cards-sec" aria-labelledby="fg-${gi}"><h2 id="fg-${gi}" class="ax-h2">${g}</h2>
-    <ul class="ax-cards">${slugs.map((s, i) => { const l = by[s]; return `<li data-reveal style="--d:${i};--g:${cvar(l.color)}"><a class="ax-card" href="${s}.html"><span class="ax-card-ic">${I(l.icon, l.style || 'duo', 36)}</span><b>${esc(l.short)}</b><span>${esc(l.desc.split('. ')[0].replace(/^[^:]*: /, '')).replace(/^./, c => c.toUpperCase())}</span>${I('arrow-right', 'line', 18, 'ax-card-arr')}</a></li>` }).join('')}</ul></section>`).join('')}
+    <ul class="ax-cards">${slugs.map((s, i) => { const l = by[s]; return `<li data-reveal style="--d:${i % 4};--g:${cvar(l.color)}"><a class="ax-card" href="${s}.html"><span class="ax-card-ic">${I(l.icon, l.style && l.style !== 'line' ? l.style : 'duo', 36)}</span><b>${esc(l.short)}</b><span>${esc(l.desc.split('. ')[0].replace(/^[^:]*: /, '')).replace(/^./, c => c.toUpperCase())}</span>${I('arrow-right', 'line', 18, 'ax-card-arr')}</a></li>` }).join('')}</ul></section>`).join('')}
   ${faqBlock('faq-h', qs)}
   <section class="ax-more" aria-label="Related pages">${altLinks(p, libs, null, 'Looking for an alternative to another icon library?')}</section>
   ${cta(p)}

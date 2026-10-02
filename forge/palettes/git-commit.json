@@ -1,0 +1,426 @@
+{
+  "name": "git-commit",
+  "palettes": [
+    {
+      "id": "commit-hash-orange",
+      "name": "Commit hash orange",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#95511F",
+        "c1": "#F0883E",
+        "c2": "#2DA44E",
+        "c3": "#8250DF",
+        "c4": "#FFE4CF",
+        "tint": "#FCE7D8",
+        "accent": "#2DA44E",
+        "shadow": "#603619",
+        "shine": "#FDEDE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "main-line-green",
+      "name": "Main line green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#196032",
+        "c1": "#2DA44E",
+        "c2": "#F2C94C",
+        "c3": "#0969DA",
+        "c4": "#D6F2E0",
+        "tint": "#D5EDDC",
+        "accent": "#F2C94C",
+        "shadow": "#12421F",
+        "shine": "#E0F1E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "signed-blue",
+      "name": "Signed blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B3774",
+        "c1": "#0969DA",
+        "c2": "#2DA44E",
+        "c3": "#F78166",
+        "c4": "#DDEBFB",
+        "tint": "#CEE1F8",
+        "accent": "#2DA44E",
+        "shadow": "#042A57",
+        "shine": "#DAE9F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "revert-red",
+      "name": "Revert red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#6E1218",
+        "c1": "#CF222E",
+        "c2": "#FFB4B6",
+        "c3": "#F2C94C",
+        "c4": "#FCE0E2",
+        "tint": "#F5D3D5",
+        "accent": "#F2C94C",
+        "shadow": "#530E12",
+        "shine": "#F8DEE0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tagged-violet",
+      "name": "Tagged violet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#45267E",
+        "c1": "#8250DF",
+        "c2": "#F2C94C",
+        "c3": "#3FB950",
+        "c4": "#E9DFFB",
+        "tint": "#E6DCF9",
+        "accent": "#F2C94C",
+        "shadow": "#342059",
+        "shine": "#ECE5FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-log",
+      "name": "Dark log",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6EDF3",
+        "c1": "#3D4553",
+        "c2": "#F0883E",
+        "c3": "#58A6FF",
+        "c4": "#161B22",
+        "tint": "#4C5568",
+        "accent": "#F0883E",
+        "shadow": "#0B0E12",
+        "shine": "#79849A",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-checkpoint",
+      "name": "Neon checkpoint",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF2BD6",
+        "c1": "#00F0FF",
+        "c2": "#FFE600",
+        "c3": "#B6FF3D",
+        "c4": "#7B2CFF",
+        "tint": "#CCFCFF",
+        "accent": "#FFE600",
+        "shadow": "#003A40",
+        "shine": "#D9FDFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "bead-on-a-string",
+      "name": "Bead on a string",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#6B4B24",
+        "c1": "#B5833A",
+        "c2": "#C8553D",
+        "c3": "#5C7A64",
+        "c4": "#F2E2C2",
+        "tint": "#F0E6D8",
+        "accent": "#C8553D",
+        "shadow": "#483417",
+        "shine": "#F4ECE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-bead",
+      "name": "Pastel bead",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#5E7384",
+        "c1": "#A0E7E5",
+        "c2": "#CDB4FF",
+        "c3": "#FFC8DD",
+        "c4": "#FFF1B8",
+        "tint": "#ECFAFA",
+        "accent": "#FFC8DD",
+        "shadow": "#405C5C",
+        "shine": "#F1FBFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-dot",
+      "name": "Candy dot",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#587C6B",
+        "c1": "#7DFFB2",
+        "c2": "#FF5FA2",
+        "c3": "#FFE066",
+        "c4": "#6FE3FF",
+        "tint": "#E5FFF0",
+        "accent": "#FF5FA2",
+        "shadow": "#326647",
+        "shine": "#ECFFF3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-pearl",
+      "name": "Y2K pearl",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#5A7A91",
+        "c1": "#9EF0E8",
+        "c2": "#B8A6FF",
+        "c3": "#FF8AE2",
+        "c4": "#F6EEFF",
+        "tint": "#ECFCFA",
+        "accent": "#FF8AE2",
+        "shadow": "#3F605D",
+        "shine": "#F0FDFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-bead",
+      "name": "70s bead",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#363D34",
+        "c1": "#2E7D7A",
+        "c2": "#E9A23B",
+        "c3": "#D2452B",
+        "c4": "#F3D9A4",
+        "tint": "#D5E5E4",
+        "accent": "#E9A23B",
+        "shadow": "#123231",
+        "shine": "#E0ECEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "old-abacus",
+      "name": "Old abacus",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#4A3A2A",
+        "c1": "#8C6E54",
+        "c2": "#A33B2B",
+        "c3": "#D9C7A8",
+        "c4": "#4D6B53",
+        "tint": "#E8E2DD",
+        "accent": "#A33B2B",
+        "shadow": "#382C22",
+        "shine": "#EEE9E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pearl-and-tide",
+      "name": "Pearl & tide",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#116374",
+        "c1": "#1FA2B8",
+        "c2": "#F6D7A7",
+        "c3": "#F2795B",
+        "c4": "#D4F2F6",
+        "tint": "#D2ECF1",
+        "accent": "#F2795B",
+        "shadow": "#0C414A",
+        "shine": "#DDF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seed-pod",
+      "name": "Seed pod",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#41652C",
+        "c1": "#6FA84A",
+        "c2": "#8B5A2B",
+        "c3": "#E8B04B",
+        "c4": "#E3F0D5",
+        "tint": "#E2EEDB",
+        "accent": "#E8B04B",
+        "shadow": "#2C431E",
+        "shine": "#E9F2E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-bead",
+      "name": "Sunset bead",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#9D5135",
+        "c1": "#FF8C42",
+        "c2": "#7A3EB1",
+        "c3": "#FF3C78",
+        "c4": "#FFE1C2",
+        "tint": "#FFE8D9",
+        "accent": "#FF3C78",
+        "shadow": "#66381A",
+        "shine": "#FFEEE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-pin",
+      "name": "Berry pin",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#71133A",
+        "c1": "#D81B60",
+        "c2": "#8E24AA",
+        "c3": "#FFC145",
+        "c4": "#FCE4EC",
+        "tint": "#F7D1DF",
+        "accent": "#FFC145",
+        "shadow": "#560B26",
+        "shine": "#F9DDE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ruby-on-gold",
+      "name": "Ruby on gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#796320",
+        "c1": "#D4AF37",
+        "c2": "#B0182E",
+        "c3": "#F5E6A8",
+        "c4": "#8A6D1C",
+        "tint": "#F6EFD7",
+        "accent": "#B0182E",
+        "shadow": "#554616",
+        "shine": "#F9F3E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "indigo-ramp",
+      "name": "Indigo ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#27206E",
+        "c1": "#4F46E5",
+        "c2": "#312E81",
+        "c3": "#A5B4FC",
+        "c4": "#E0E7FF",
+        "tint": "#DCDAFA",
+        "accent": "#A5B4FC",
+        "shadow": "#201C5C",
+        "shine": "#E5E3FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#A0A0A0",
+        "c2": "#505050",
+        "c3": "#D6D6D6",
+        "c4": "#EEEEEE",
+        "tint": "#ECECEC",
+        "accent": "#D6D6D6",
+        "shadow": "#404040",
+        "shine": "#F1F1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast-commit",
+      "name": "High-contrast commit",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#00A3FF",
+        "c2": "#FFD400",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#CCEDFF",
+        "accent": "#FFD400",
+        "shadow": "#004166",
+        "shine": "#D9F1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-dot",
+      "name": "Dopamine dot",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#337A78",
+        "c1": "#3BE8B0",
+        "c2": "#FF4FA3",
+        "c3": "#FFD43B",
+        "c4": "#6C63FF",
+        "tint": "#D8FAEF",
+        "accent": "#FF4FA3",
+        "shadow": "#185D46",
+        "shine": "#E2FCF3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

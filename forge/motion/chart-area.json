@@ -1,0 +1,37 @@
+{
+  "name": "chart-area",
+  "intent": "fills in like volume adding up over time",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      20.5
+    ]
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-line",
+      "effect": "fade"
+    },
+    {
+      "to": "chart-bar",
+      "effect": "slide-up"
+    }
+  ]
+}

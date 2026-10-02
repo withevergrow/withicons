@@ -1,0 +1,27 @@
+{
+  "name": "microscope",
+  "palettes": [
+    {"id":"lab-white","name":"Lab white","tags":["true-to-life"],"colors":{"ink":"#1E242C","c1":"#EEF1F4","c2":"#2F3540","c3":"#7FB2FF","c4":"#B9C2CC","tint":"#FAFBFC","accent":"#7FB2FF","shadow":"#838586","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"antique-brass","name":"Antique brass","tags":["true-to-life","vintage"],"colors":{"ink":"#614D21","c1":"#C9A044","c2":"#3A2A1A","c3":"#F2E1B0","c4":"#7A5A1A","tint":"#F0E4CB","accent":"#4F8C88","shadow":"#6F5825","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-enamel","name":"Black enamel","tags":["true-to-life"],"colors":{"ink":"#000000","c1":"#3A3D44","c2":"#C9A227","c3":"#D6DBE2","c4":"#202226","tint":"#C8C9CB","accent":"#C9A227","shadow":"#202225","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"school-lab-blue","name":"School lab blue","tags":["true-to-life"],"colors":{"ink":"#22477C","c1":"#3A7BD5","c2":"#EEF1F4","c3":"#F2B134","c4":"#B5D0F2","tint":"#C8DAF3","accent":"#F2B134","shadow":"#204475","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"biolab-green","name":"Biolab green","tags":["true-to-life","nature"],"colors":{"ink":"#1A5A3B","c1":"#2EA36B","c2":"#EEF4EF","c3":"#A3E635","c4":"#155A3A","tint":"#C4E5D6","accent":"#A3E635","shadow":"#195A3B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cell-stain","name":"Cell stain","tags":["vivid"],"colors":{"ink":"#471F5B","c1":"#8E3FB8","c2":"#F28AC0","c3":"#4FC3E0","c4":"#E6D2F2","tint":"#DFC9EB","accent":"#F28AC0","shadow":"#4E2365","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"petri-dish","name":"Petri dish","tags":["pastel"],"colors":{"ink":"#2E3A33","c1":"#F2E8C9","c2":"#F2A07A","c3":"#9AD4B0","c4":"#FFF7E0","tint":"#FBF9F0","accent":"#F2A07A","shadow":"#85806F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fluorescence","name":"Fluorescence","tags":["neon","on-dark"],"colors":{"ink":"#F2FFF6","c1":"#2BD96A","c2":"#FF2BD6","c3":"#2BF0FF","c4":"#FFE45E","tint":"#C4F4D5","accent":"#FF2BD6","shadow":"#18773A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pharma-teal","name":"Pharma teal","tags":["corporate"],"colors":{"ink":"#125456","c1":"#1F8E92","c2":"#F2F4F5","c3":"#F2B134","c4":"#8CD0D2","tint":"#C0DFE0","accent":"#F2B134","shadow":"#114E50","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"victorian-lab","name":"Victorian lab","tags":["vintage","luxe"],"colors":{"ink":"#1A0F08","c1":"#6E4A2E","c2":"#C9A044","c3":"#EFE2C6","c4":"#3E2716","tint":"#D6CCC4","accent":"#C9A044","shadow":"#3D2919","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"marine-biology","name":"Marine biology","tags":["ocean"],"colors":{"ink":"#124F62","c1":"#1E88A8","c2":"#F2E6C9","c3":"#FF8A65","c4":"#0E4F63","tint":"#C0DEE7","accent":"#FF8A65","shadow":"#114B5C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"botany","name":"Botany","tags":["nature","earthy"],"colors":{"ink":"#375540","c1":"#5C8F6B","c2":"#C4733E","c3":"#F2E6C9","c4":"#2F4A2C","tint":"#D1E0D6","accent":"#C4733E","shadow":"#334F3B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-lab","name":"Pastel lab","tags":["pastel"],"colors":{"ink":"#534C66","c1":"#C9B8F5","c2":"#FFD3C2","c3":"#B8E8D6","c4":"#FFF2C2","tint":"#F0EBFC","accent":"#FFD3C2","shadow":"#6F6587","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-lab","name":"Candy lab","tags":["candy"],"colors":{"ink":"#72405A","c1":"#FF8FC8","c2":"#7ED7FF","c3":"#FFF1A8","c4":"#C8B6FF","tint":"#FFE0F0","accent":"#7ED7FF","shadow":"#8C4F6E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-mode","name":"Dark mode","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#444B58","c2":"#9FE3C9","c3":"#2A2F38","c4":"#8C95A5","tint":"#CBCDD0","accent":"#9FE3C9","shadow":"#252930","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"graphite","name":"Graphite","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#9A9A9A","c2":"#3E3E3E","c3":"#E6E6E6","c4":"#C4C4C4","tint":"#E3E3E3","accent":"#3E3E3E","shadow":"#555555","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cobalt-ramp","name":"Cobalt ramp","tags":["mono"],"colors":{"ink":"#172F64","c1":"#2F5FC8","c2":"#DCE5F8","c3":"#1A3678","c4":"#8FAAE6","tint":"#C5D2F0","accent":"#8FAAE6","shadow":"#1A346E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"science-fair","name":"70s science fair","tags":["retro"],"colors":{"ink":"#7E3E20","c1":"#E2703A","c2":"#3E8C84","c3":"#F3C64B","c4":"#9C3D23","tint":"#F7D7C8","accent":"#F3C64B","shadow":"#7C3E20","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset","name":"Sunset","tags":["sunset"],"colors":{"ink":"#7E3D30","c1":"#F2765C","c2":"#5A2A6E","c3":"#FFD07A","c4":"#FFE6C7","tint":"#FBD9D1","accent":"#FFD07A","shadow":"#854133","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k","name":"Y2K","tags":["y2k"],"colors":{"ink":"#454E6F","c1":"#9FB4FF","c2":"#FF8AD8","c3":"#7AF2E0","c4":"#FFF07A","tint":"#E4EAFF","accent":"#FF8AD8","shadow":"#57638C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine","name":"Dopamine brights","tags":["vivid"],"colors":{"ink":"#88314A","c1":"#FF5C8A","c2":"#5C7CFF","c3":"#FFD23F","c4":"#3DDC97","tint":"#FFD1DE","accent":"#FFD23F","shadow":"#8C334C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#0046C7","c2":"#FFD200","c3":"#FFFFFF","c4":"#D4002A","tint":"#B8CBEF","accent":"#FFD200","shadow":"#00276D","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

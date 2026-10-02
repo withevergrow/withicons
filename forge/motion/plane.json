@@ -1,0 +1,29 @@
+{
+  "name": "plane",
+  "intent": "cruises through the air and takes off on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315
+    },
+    {
+      "preset": "rise"
+    }
+  ],
+  "swap": [
+    {
+      "to": "send",
+      "effect": "slide-right"
+    }
+  ]
+}

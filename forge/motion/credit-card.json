@@ -1,0 +1,37 @@
+{
+  "name": "credit-card",
+  "intent": "flips over like a card being tapped to pay",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.8
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "wallet",
+      "effect": "slide-up"
+    },
+    {
+      "to": "credit-card@solid",
+      "effect": "flip"
+    }
+  ]
+}

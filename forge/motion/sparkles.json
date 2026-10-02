@@ -1,0 +1,44 @@
+{
+  "name": "sparkles",
+  "intent": "twinkles like a fresh bit of magic",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      9.5,
+      13
+    ],
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "twinkle",
+    "origin": [
+      9.5,
+      13
+    ],
+    "amount": 1.2,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        9.5,
+        13
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "wand",
+      "effect": "morph"
+    },
+    {
+      "to": "sparkles@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "door-open",
+  "category": "home",
+  "description": "A door swung open in its frame for entrances, check-in, exits, and rooms.",
+  "aliases": [
+    "door",
+    "entrance",
+    "doorway",
+    "open-door",
+    "exit-door",
+    "room",
+    "front-door",
+    "way-in",
+    "doorway-open"
+  ],
+  "tags": [
+    "door",
+    "entrance",
+    "exit",
+    "room",
+    "access",
+    "open"
+  ],
+  "paths": [
+    {
+      "d": "M14 3 H7 A2 2 0 0 0 5 5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14 3 L19.5 4.5 V19.5 L14 21 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 11.5 V13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 3 L19.5 4.5 V19.5 L14 21 Z"
+  ],
+  "cutouts": [
+    "M16.5 11.5 V13"
+  ],
+  "synonyms": [
+    "doors",
+    "entry",
+    "enter",
+    "open door",
+    "door open",
+    "opened",
+    "come in",
+    "welcome",
+    "walk in",
+    "go in",
+    "way out",
+    "exit",
+    "leave",
+    "check in",
+    "check out",
+    "checkout",
+    "access",
+    "enter room",
+    "join room",
+    "meeting room",
+    "breakout room",
+    "lobby",
+    "escape",
+    "opening",
+    "gate",
+    "portal",
+    "open house",
+    "move in",
+    "dor",
+    "dooor"
+  ]
+}

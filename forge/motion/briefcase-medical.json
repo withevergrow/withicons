@@ -1,0 +1,8 @@
+{
+  "name": "briefcase-medical",
+  "intent": "sways from its handle like a kit being carried to help",
+  "loop": { "preset": "sway", "origin": [12, 3.5], "amount": 0.5, "duration": 3.2 },
+  "hover": { "preset": "rock", "origin": [12, 3.5], "amount": 1.1, "duration": 1 },
+  "alt": [ { "preset": "pulse", "origin": [12, 14], "amount": 0.6 }, { "preset": "bounce", "origin": [12, 20.5], "amount": 0.5 } ],
+  "swap": [ { "to": "briefcase", "effect": "fade" }, { "to": "briefcase-medical@solid", "effect": "scale" } ]
+}

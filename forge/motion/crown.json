@@ -1,0 +1,41 @@
+{
+  "name": "crown",
+  "intent": "floats proudly, then celebrates when you point at it",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      20
+    ]
+  },
+  "alt": [
+    {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        20
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "crown@solid",
+      "effect": "scale"
+    }
+  ]
+}

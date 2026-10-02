@@ -1,0 +1,450 @@
+{
+  "name": "wrench",
+  "palettes": [
+    {
+      "id": "chrome-steel",
+      "name": "Chrome steel",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1E252D",
+        "c1": "#A9B4BF",
+        "c2": "#DCE2E8",
+        "c3": "#5E6A76",
+        "c4": "#F0F3F6",
+        "tint": "#EEF0F2",
+        "accent": "#E1523D",
+        "shadow": "#44484C",
+        "shine": "#F2F4F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "safety-orange",
+      "name": "Safety orange",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A1700",
+        "c1": "#FF6B00",
+        "c2": "#FFC08A",
+        "c3": "#2B2B2B",
+        "c4": "#FFE3CC",
+        "tint": "#FFE1CC",
+        "accent": "#2F80ED",
+        "shadow": "#662B00",
+        "shine": "#FFE9D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brass-spanner",
+      "name": "Brass spanner",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2E2008",
+        "c1": "#C9A23A",
+        "c2": "#F2DFA0",
+        "c3": "#7D6420",
+        "c4": "#8C6B3F",
+        "tint": "#F4ECD8",
+        "accent": "#E1523D",
+        "shadow": "#504117",
+        "shine": "#F7F1E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rusty-spanner",
+      "name": "Rusty spanner",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A0F",
+        "c1": "#B5652E",
+        "c2": "#8A4B2A",
+        "c3": "#E3B04B",
+        "c4": "#5E6A76",
+        "tint": "#F0E0D5",
+        "accent": "#E3B04B",
+        "shadow": "#482812",
+        "shine": "#F4E8E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tool-shop-red",
+      "name": "Tool-shop red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A0A0C",
+        "c1": "#D7263D",
+        "c2": "#F4A6B0",
+        "c3": "#1F2A44",
+        "c4": "#FCE3E6",
+        "tint": "#F7D4D8",
+        "accent": "#F4C430",
+        "shadow": "#560F18",
+        "shine": "#F9DEE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "maintenance-blue",
+      "name": "Maintenance blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B2A5B",
+        "c1": "#2F6FDB",
+        "c2": "#9DC0F5",
+        "c3": "#F2C94C",
+        "c4": "#DCE8FB",
+        "tint": "#D5E2F8",
+        "accent": "#F2C94C",
+        "shadow": "#132C58",
+        "shine": "#E0E9FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "workshop-yellow",
+      "name": "Workshop yellow",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A2200",
+        "c1": "#F5C400",
+        "c2": "#2B2B2B",
+        "c3": "#E2574C",
+        "c4": "#FFF1A6",
+        "tint": "#FDF3CC",
+        "accent": "#E2574C",
+        "shadow": "#624E00",
+        "shine": "#FEF6D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "garage-night",
+      "name": "Garage night",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6EAF2",
+        "c1": "#3A4252",
+        "c2": "#FFB020",
+        "c3": "#4FC3F7",
+        "c4": "#1A1F2A",
+        "tint": "#4A5466",
+        "accent": "#FFB020",
+        "shadow": "#0B0E16",
+        "shine": "#7A8499",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-toolkit",
+      "name": "Neon toolkit",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF2BD6",
+        "c1": "#00F0FF",
+        "c2": "#FFE600",
+        "c3": "#B6FF3D",
+        "c4": "#8B5CFF",
+        "tint": "#CCFCFF",
+        "accent": "#FFE600",
+        "shadow": "#003A40",
+        "shine": "#D9FDFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-fix",
+      "name": "Pastel fix",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3550",
+        "c1": "#FFC8DD",
+        "c2": "#FFF1B8",
+        "c3": "#CDB4FF",
+        "c4": "#BDE0FE",
+        "tint": "#FFF4F8",
+        "accent": "#BDE0FE",
+        "shadow": "#665058",
+        "shine": "#FFF7FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toy-toolbox",
+      "name": "Toy toolbox",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2A1640",
+        "c1": "#FF5A5F",
+        "c2": "#FFD23F",
+        "c3": "#3DB7FF",
+        "c4": "#3DDC97",
+        "tint": "#FFDEDF",
+        "accent": "#FFD23F",
+        "shadow": "#662426",
+        "shine": "#FFE6E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-chrome",
+      "name": "Y2K chrome",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1D2040",
+        "c1": "#C9D3F2",
+        "c2": "#FF6AD5",
+        "c3": "#6EF3FF",
+        "c4": "#8B7CFF",
+        "tint": "#F4F6FC",
+        "accent": "#FF6AD5",
+        "shadow": "#505461",
+        "shine": "#F7F8FD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-workshop",
+      "name": "70s workshop",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A1A0E",
+        "c1": "#E9873A",
+        "c2": "#F2C14E",
+        "c3": "#C8402B",
+        "c4": "#2E7D7A",
+        "tint": "#FBE7D8",
+        "accent": "#F2C14E",
+        "shadow": "#5D3617",
+        "shine": "#FCEDE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grandads-toolbox",
+      "name": "Grandad's toolbox",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A2420",
+        "c1": "#7C8B6F",
+        "c2": "#C9A27E",
+        "c3": "#A33B2B",
+        "c4": "#4D5B66",
+        "tint": "#E5E8E2",
+        "accent": "#C9A27E",
+        "shadow": "#32382C",
+        "shine": "#EBEEE9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ships-engine-room",
+      "name": "Ship's engine room",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#052F3C",
+        "c1": "#1B9AAA",
+        "c2": "#F4D35E",
+        "c3": "#EE6352",
+        "c4": "#0B5E78",
+        "tint": "#D1EBEE",
+        "accent": "#F4D35E",
+        "shadow": "#0B3E44",
+        "shine": "#DDF0F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "garden-tool-green",
+      "name": "Garden tool green",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#14301C",
+        "c1": "#4E8B3A",
+        "c2": "#C9A227",
+        "c3": "#8B5A2B",
+        "c4": "#A7C957",
+        "tint": "#DCE8D8",
+        "accent": "#C9A227",
+        "shadow": "#1F3817",
+        "shine": "#E4EEE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-garage",
+      "name": "Sunset garage",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A1528",
+        "c1": "#FF8C42",
+        "c2": "#FFD166",
+        "c3": "#B24592",
+        "c4": "#FF3C78",
+        "tint": "#FFE8D9",
+        "accent": "#FFD166",
+        "shadow": "#66381A",
+        "shine": "#FFEEE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-wrench",
+      "name": "Berry wrench",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0E25",
+        "c1": "#C2185B",
+        "c2": "#FFC145",
+        "c3": "#7B1FA2",
+        "c4": "#F48FB1",
+        "tint": "#F3D1DE",
+        "accent": "#FFC145",
+        "shadow": "#4E0A24",
+        "shine": "#F6DCE6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-and-teal",
+      "name": "Copper & teal",
+      "tags": [
+        "luxe",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A1608",
+        "c1": "#B87333",
+        "c2": "#E8C07D",
+        "c3": "#3E6B5E",
+        "c4": "#F3E0CC",
+        "tint": "#F1E3D6",
+        "accent": "#3E6B5E",
+        "shadow": "#4A2E14",
+        "shine": "#F4EAE0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-steel-ramp",
+      "name": "Blue steel ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0B2447",
+        "c1": "#4A6FA5",
+        "c2": "#A9C1E3",
+        "c3": "#1F3D6B",
+        "c4": "#DCE6F5",
+        "tint": "#DBE2ED",
+        "accent": "#A9C1E3",
+        "shadow": "#1E2C42",
+        "shine": "#E4E9F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#8F8F8F",
+        "c2": "#CFCFCF",
+        "c3": "#4A4A4A",
+        "c4": "#6E6E6E",
+        "tint": "#E9E9E9",
+        "accent": "#CFCFCF",
+        "shadow": "#393939",
+        "shine": "#EEEEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-vis-wrench",
+      "name": "High-vis wrench",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0057FF",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#FFF6CC",
+        "accent": "#0057FF",
+        "shadow": "#665500",
+        "shine": "#FFF9D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-fix",
+      "name": "Dopamine fix",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0B3F",
+        "c1": "#FF4FA3",
+        "c2": "#FFD43B",
+        "c3": "#3BE8B0",
+        "c4": "#6C63FF",
+        "tint": "#FFDCED",
+        "accent": "#3BE8B0",
+        "shadow": "#662041",
+        "shine": "#FFE5F1",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

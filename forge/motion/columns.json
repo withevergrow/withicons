@@ -1,0 +1,35 @@
+{
+  "name": "columns",
+  "intent": "panes breathe gently, then jiggle like a resized layout",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sidebar",
+      "effect": "fade"
+    },
+    {
+      "to": "layout-grid",
+      "effect": "morph"
+    },
+    {
+      "to": "kanban",
+      "effect": "fade"
+    }
+  ]
+}

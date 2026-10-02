@@ -1,6 +1,6 @@
 # @withicons/solid
 
-300 icons x 7 styles for SolidJS. Tree-shakable, typed, `currentColor` by default.
+500 icons x 12 styles for SolidJS. Tree-shakable, typed, `currentColor` by default.
 
 ```bash
 npm i @withicons/solid
@@ -34,7 +34,7 @@ export function Toolbar() {
 |---|---|---|---|
 | `size` | `number \| string` | `24` | width and height |
 | `color` | `string` | `'currentColor'` | inherits the CSS text color by default |
-| `strokeWidth` | `number \| string` | style default (`1.75`) | only styles with live strokes (line, duo, blueprint, sketch) |
+| `strokeWidth` | `number \| string` | the style's own: line and duo `1.75`, blueprint `1.25`, sketch `1.3`, kawaii `2.2` | only these live-stroke styles; the others ignore it |
 | `absoluteStrokeWidth` | `boolean` | `false` | keep the stroke width constant in px at any size |
 | `title` | `string` | — | renders `<title>` and sets `role="img"`; otherwise `aria-hidden="true"` |
 | `class` | `string` | — | appended to `withi withi-<name>` |
@@ -51,8 +51,132 @@ export function Toolbar() {
 | `engrave` | `@withicons/solid/engrave` | creative | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
 | `blueprint` | `@withicons/solid/blueprint` | creative | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
 | `sketch` | `@withicons/solid/sketch` | creative | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
+| `glass` | `@withicons/solid/glass` | creative | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
+| `kawaii` | `@withicons/solid/kawaii` | creative | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
+| `sticker` | `@withicons/solid/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
+| `pixel` | `@withicons/solid/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
+| `retro` | `@withicons/solid/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
 
 Duo's tint can be recoloured with the CSS variable `--with-duo`.
+
+### Palette styles
+
+`glass`, `kawaii`, `sticker`, `pixel`, `retro` paint a default multi-colour palette. The main ink stays `currentColor`
+(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead) and every other colour is a CSS custom property with a built-in default,
+so you can re-theme a page, a section or one icon without touching the SVG:
+
+```css
+.brand { --with-kawaii-fill-1: #c4b5fd; --with-retro-1: #fde047; }
+```
+
+| style | variables (default) |
+|---|---|
+| `glass` | `--with-glass-accent` #FF4D8D, `--with-glass-back` #3D5AFE, `--with-glass-etch` #1B2390, `--with-glass-frost` #FFFFFF, `--with-glass-pane` #C7D0FF, `--with-glass-shine` #FFFFFF |
+| `kawaii` | `--with-kawaii-accent` #FF5C9A, `--with-kawaii-blush` #FF6F9C, `--with-kawaii-face` currentColor, `--with-kawaii-fill-1` #FF6FA5, `--with-kawaii-fill-2` #FF9A66, `--with-kawaii-fill-3` #FFD23A, `--with-kawaii-fill-4` #45D99A, `--with-kawaii-fill-5` #5AB4FF, `--with-kawaii-fill-6` #A98BFF, `--with-kawaii-shine` #FFFFFF, `--with-kawaii-sparkle` #FFB627 |
+| `sticker` | `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
+| `pixel` | `--with-pixel-fill` currentColor, `--with-pixel-shine` #FFFFFF |
+| `retro` | `--with-retro-1` #F4B53F, `--with-retro-2` #EF7D2D, `--with-retro-3` #DE4B3A, `--with-retro-4` #178A86, `--with-retro-shadow` #6B3323 |
+
+Inline SVG (components, `<with-icon>`, sprites, IconNode data) keeps the variables. Standalone `.svg` files have them
+flattened to the defaults, because `<img>`, design tools and rasterizers cannot see CSS.
+
+### Change every colour in Solid
+
+`color` sets the outline (it is `currentColor`); every other colour of a palette style is an inherited CSS variable,
+so the `style` prop (typed for `--*` keys, no cast needed) or any CSS rule re-themes one icon:
+
+```tsx
+import { Pizza } from '@withicons/solid/retro'
+
+<Pizza size={48} color="#3b1f12" style={{
+  '--with-retro-1': '#f4b942',
+  '--with-retro-2': '#d9412b',
+  '--with-retro-3': '#2f8f4e',
+  '--with-retro-4': '#f7e3b5',
+  '--with-retro-shadow': '#5b2a12',
+}} />
+```
+
+Every icon also has 20-30 colour palettes picked for it in [`@withicons/core`](https://www.npmjs.com/package/@withicons/core)
+(`npm i @withicons/core`). Every component carries its drawing as `iconNode`, and `applyPalette` maps a palette onto
+the variables that icon uses, in any style:
+
+```tsx
+import { For } from 'solid-js'
+import { Pizza } from '@withicons/solid/retro'
+import pizza from '@withicons/core/palettes/pizza.json'
+import { applyPalette } from '@withicons/core/palettes/palette-map.js'
+
+const looks = pizza.palettes.map(p => ({ ...p, ...applyPalette(JSON.stringify(Pizza.iconNode), p.colors) }))
+
+<For each={looks}>{p => <Pizza size={40} style={p.vars} color={p.color ?? undefined} title={p.name} />}</For>
+```
+
+## Animation (optional)
+
+Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/package/@withicons/motion), so icons never pay for them.
+They work with every style and every package because they animate the element that holds the icon:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+
+<span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
+<button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->
+<span class="wm-swap wm-fx-flip"><svg class="wm-a">…play…</svg><svg class="wm-b">…pause…</svg></span>  <!-- icon to icon -->
+```
+
+`prefers-reduced-motion` turns every animation off. JS API: `import { motion, swap, motionFor } from '@withicons/motion'`.
+
+## Animation in Solid
+
+Import the two stylesheets of [`@withicons/motion`](https://www.npmjs.com/package/@withicons/motion) once, then put the
+classes on a wrapper (or straight on the icon: `class` and `data-*` reach its `<svg>`). `motionAttrs` returns plain
+`class` / `data-wm` / `style` strings, so it spreads in JSX and renders on the server:
+
+```tsx
+import '@withicons/motion/motion.css'
+import '@withicons/motion/icons.css'
+import { motionAttrs } from '@withicons/motion'
+import { Bell } from '@withicons/solid'
+
+<span class="wm wm-loop" data-wm="bell"><Bell /></span>
+<button class="wm-trigger"><span {...motionAttrs('bell', { trigger: 'hover' })}><Bell /></span> Alerts</button>
+```
+
+For the JS-only triggers (`inview`, a hover that always finishes) call `motion(el, name, options)` in `onMount` with a
+`ref`, and `destroy()` the handle in `onCleanup`.
+
+## Right-to-left
+
+Icons are drawn for left-to-right text. In Arabic, Hebrew, Persian or Urdu layouts, mirror the directional ones (arrows,
+chevrons, undo/redo, reply, send, log-in/out) with a class; symmetric icons and logos stay as they are:
+
+```css
+[dir="rtl"] .with-rtl { transform: scaleX(-1); }   /* every browser */
+.with-rtl:dir(rtl) { transform: scaleX(-1); }      /* also follows inherited direction (Chrome 120+, Safari 16.4+, Firefox) */
+```
+
+```tsx
+<ChevronRight class="with-rtl" />
+
+// animated: mirror the icon, and point nudge / pass the other way on the wrapper
+<span class="wm wm-hover" data-wm="arrow-right" style={{ '--wm-dx': isRtl() ? -1 : 1 }}>
+  <ArrowRight class="with-rtl" />
+</span>
+```
+
+## SSR, SolidStart and module formats
+
+- Components are plain ESM built on `solid-js/web`'s `Dynamic`: no JSX compile step inside the package. They render with
+  `renderToString` / `renderToStream` and SolidStart, and hydrate onto the server markup (the `<title>` is created in the
+  SVG namespace on both sides). Works with `solid-js` 1.6 and later; SSR and hydration are tested on 1.6 and 1.9.
+- Every entry has a `solid` export condition, so `vite-plugin-solid` bundles the icons with your app and they always
+  share its `solid-js` instance.
+- The root and every style subpath ship ESM (`import`) and CommonJS (`require`) with matching types.
+  The per-icon deep paths (`icons/*`, `<style>/icons/*`) and `/icon` are ESM only.
+- `sideEffects: false` and one module per icon: a bundler keeps only the icons you import (the shared runtime plus
+  about 0.1 kB gzipped per line icon).
 
 ## Generic icon (dynamic names)
 
@@ -63,10 +187,10 @@ import { Icon } from '@withicons/solid'
 ```
 
 `name` accepts canonical names and unambiguous aliases (`bin` -> `trash`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** `Icon` references every icon in every style (300 x 7). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+**Bundle cost:** `Icon` references every icon in every style (500 x 12). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
 
 ## Custom icons
 
 `createWithIcon(name, style, displayName, iconNode)` builds a component from IconNode data (`[tag, attrs][]`, 24x24 grid).
 
-MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, seven deterministic styles. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, 12 deterministic styles, 6,000 icons. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

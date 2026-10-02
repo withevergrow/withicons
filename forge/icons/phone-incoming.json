@@ -1,0 +1,59 @@
+{
+  "name": "phone-incoming",
+  "category": "communication",
+  "description": "A telephone handset with an arrow pointing down into it, for received calls.",
+  "aliases": [
+    "call-received",
+    "inbound-call",
+    "receive-call",
+    "call-in",
+    "received-call",
+    "phone-in",
+    "call-incoming",
+    "incoming-phone",
+    "phone-received",
+    "answer-call"
+  ],
+  "tags": [
+    "call",
+    "phone",
+    "incoming",
+    "received",
+    "inbound",
+    "call log"
+  ],
+  "paths": [
+    {
+      "d": "M3 5 A2 2 0 0 1 5 3 H8 A1.5 1.5 0 0 1 9.5 4.5 V6 C9.5 7.25 8.5 7.25 8.5 8.5 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 3 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M20 4 L14.5 9.5 M14.5 4.5 V9.5 H19.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3 5 A2 2 0 0 1 5 3 H8 A1.5 1.5 0 0 1 9.5 4.5 V6 C9.5 7.25 8.5 7.25 8.5 8.5 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 3 5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "incoming call",
+    "received call",
+    "inbound",
+    "receive",
+    "answer",
+    "pick up",
+    "someone calling",
+    "caller",
+    "ringing",
+    "call log",
+    "call history",
+    "recent calls",
+    "calls",
+    "telephone",
+    "phone call",
+    "incomming call",
+    "incoming phone call",
+    "received calls"
+  ]
+}

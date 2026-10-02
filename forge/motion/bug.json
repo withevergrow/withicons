@@ -1,0 +1,43 @@
+{
+  "name": "bug",
+  "intent": "twitches like a little beetle on the move",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "check",
+      "effect": "draw"
+    }
+  ]
+}

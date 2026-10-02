@@ -1,0 +1,73 @@
+{
+  "name": "podcast",
+  "category": "media",
+  "description": "A microphone head on a stand inside two broadcast rings for podcasts and audio shows.",
+  "aliases": [
+    "podcasts",
+    "audio-show",
+    "episode",
+    "broadcast-mic",
+    "on-air",
+    "audiobook-show",
+    "radio-show",
+    "podcast-app",
+    "netcast"
+  ],
+  "tags": [
+    "media",
+    "audio",
+    "broadcast",
+    "microphone",
+    "show"
+  ],
+  "paths": [
+    {
+      "d": "M13.5 11.5 A1.5 1.5 0 1 1 10.5 11.5 A1.5 1.5 0 1 1 13.5 11.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.75 15 A5.5 5.5 0 1 1 16.25 15",
+      "plate": "A"
+    },
+    {
+      "d": "M6.25 19 A9.5 9.5 0 1 1 17.75 19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M13.5 11.5 A1.5 1.5 0 1 1 10.5 11.5 A1.5 1.5 0 1 1 13.5 11.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "podcast episode",
+    "episodes",
+    "listen",
+    "listening",
+    "audio series",
+    "talk show",
+    "show",
+    "shows",
+    "host",
+    "guest",
+    "interview",
+    "recording",
+    "broadcast",
+    "live audio",
+    "audio stream",
+    "subscribe",
+    "pod",
+    "pods",
+    "podcaster",
+    "podcasting",
+    "mic",
+    "spoken word",
+    "audio content",
+    "new episode",
+    "podacst",
+    "podcats"
+  ]
+}

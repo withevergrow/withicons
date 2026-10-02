@@ -1,0 +1,37 @@
+{
+  "name": "git-pull-request",
+  "intent": "sends changes back toward the main line",
+  "loop": {
+    "preset": "draw",
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-merge",
+      "effect": "morph"
+    },
+    {
+      "to": "git-branch",
+      "effect": "fade"
+    },
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    }
+  ]
+}

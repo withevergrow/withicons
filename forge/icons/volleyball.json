@@ -1,0 +1,86 @@
+{
+  "name": "volleyball",
+  "category": "sports",
+  "description": "Volleyball for beach volleyball, sport, and team games.",
+  "aliases": [
+    "volleyball-ball",
+    "beach-volleyball",
+    "volley",
+    "net-sport",
+    "ball-sport",
+    "spike"
+  ],
+  "tags": [
+    "sports",
+    "ball",
+    "beach",
+    "team",
+    "game"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 A9.5 9.5 0 0 0 20.23 7.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 A9.5 9.5 0 0 0 12 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 A9.5 9.5 0 0 0 3.77 7.25",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 12.09 A13.5 13.5 0 0 1 10.76 15.94",
+      "plate": "A"
+    },
+    {
+      "d": "M7.17 20.18 A13.5 13.5 0 0 1 9.2 8.96",
+      "plate": "A"
+    },
+    {
+      "d": "M7.33 3.73 A13.5 13.5 0 0 1 16.03 11.1",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 12 A9.5 9.5 0 0 0 20.93 6.48",
+    "M12 12 A9.5 9.5 0 0 0 12.31 22.5",
+    "M12 12 A9.5 9.5 0 0 0 2.75 7.03",
+    "M22.24 11.3 A13.5 13.5 0 0 1 10.76 15.94",
+    "M7.49 21.21 A13.5 13.5 0 0 1 9.2 8.96",
+    "M6.28 3.48 A13.5 13.5 0 0 1 16.03 11.1"
+  ],
+  "synonyms": [
+    "volley ball",
+    "voleyball",
+    "volleybal",
+    "vollyball",
+    "beach ball",
+    "beach sport",
+    "summer",
+    "serve",
+    "set",
+    "bump",
+    "dig",
+    "block",
+    "net",
+    "sand",
+    "team sport",
+    "sport",
+    "sports",
+    "ball",
+    "sports ball",
+    "indoor volleyball",
+    "olympics",
+    "tournament",
+    "holiday"
+  ]
+}

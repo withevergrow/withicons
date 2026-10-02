@@ -1,0 +1,30 @@
+{
+  "name": "terminal",
+  "intent": "jitters like keys being typed at the prompt",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "type",
+    "amount": 1.1,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "code",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "bluetooth",
+  "intent": "pulses like it is searching for a device to pair",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 1,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "fill",
+      "duration": 2
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "fade"
+    },
+    {
+      "to": "link",
+      "effect": "scale"
+    },
+    {
+      "to": "bluetooth@solid",
+      "effect": "scale"
+    }
+  ]
+}

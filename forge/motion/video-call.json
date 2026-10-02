@@ -1,0 +1,45 @@
+{
+  "name": "video-call",
+  "intent": "pulses gently like a call that is live",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      9,
+      19.5
+    ],
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "nudge",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "video-camera",
+      "effect": "fade"
+    },
+    {
+      "to": "phone",
+      "effect": "flip"
+    },
+    {
+      "to": "phone-off",
+      "effect": "scale"
+    }
+  ]
+}

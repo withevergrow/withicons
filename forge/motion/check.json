@@ -1,0 +1,30 @@
+{
+  "name": "check",
+  "intent": "draws itself in like a tick being written",
+  "loop": {
+    "preset": "draw",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "close",
+      "effect": "rotate"
+    }
+  ]
+}

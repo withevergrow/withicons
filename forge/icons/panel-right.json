@@ -1,0 +1,63 @@
+{
+  "name": "panel-right",
+  "category": "layout",
+  "description": "A window frame with a pane on the right, for inspectors, details panels and side drawers.",
+  "aliases": [
+    "sidebar-right",
+    "right-panel",
+    "inspector",
+    "details-pane",
+    "right-drawer",
+    "side-sheet",
+    "right-sidebar",
+    "panel-right-open",
+    "properties-panel",
+    "aside-right"
+  ],
+  "tags": [
+    "layout",
+    "panel",
+    "window",
+    "inspector",
+    "split",
+    "drawer"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 3 V21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M15 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "side panel",
+    "details panel",
+    "info panel",
+    "properties",
+    "property panel",
+    "settings panel",
+    "inspector panel",
+    "toggle right panel",
+    "show details",
+    "hide details",
+    "open drawer",
+    "drawer",
+    "split view",
+    "pane",
+    "panes",
+    "layout",
+    "window layout",
+    "secondary panel",
+    "comments panel",
+    "righthand panel",
+    "right hand pane",
+    "sidepanel"
+  ]
+}

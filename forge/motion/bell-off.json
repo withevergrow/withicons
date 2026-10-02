@@ -1,0 +1,36 @@
+{
+  "name": "bell-off",
+  "intent": "stays quietly muted, shakes softly if you try to ring it",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        4.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell",
+      "effect": "flip"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "fade"
+    }
+  ]
+}

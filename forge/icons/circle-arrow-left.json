@@ -1,0 +1,69 @@
+{
+  "name": "circle-arrow-left",
+  "category": "arrows",
+  "description": "A left arrow inside a circle for back buttons and carousel controls.",
+  "aliases": [
+    "arrow-left-circle",
+    "circled-arrow-left",
+    "round-arrow-left",
+    "back-circle",
+    "previous-circle",
+    "arrow-circle-left",
+    "back-button",
+    "circle-left",
+    "prev-circle"
+  ],
+  "tags": [
+    "arrow",
+    "left",
+    "back",
+    "previous",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 12 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8 L8 12 L12 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M16 12 H8",
+    "M12 8 L8 12 L12 16"
+  ],
+  "synonyms": [
+    "back",
+    "go back",
+    "previous",
+    "prev",
+    "return",
+    "left",
+    "west",
+    "previous page",
+    "previous slide",
+    "previous photo",
+    "carousel previous",
+    "slider back",
+    "swipe left",
+    "round button",
+    "round back button",
+    "circle button",
+    "step back",
+    "backward",
+    "backwards",
+    "arrow in circle",
+    "left arrow button",
+    "bak"
+  ]
+}

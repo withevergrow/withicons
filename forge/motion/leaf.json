@@ -1,0 +1,37 @@
+{
+  "name": "leaf",
+  "intent": "sways from its stem like a leaf in a breeze",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 0.7,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 1.4,
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "float",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "leaf@solid",
+      "effect": "scale"
+    }
+  ]
+}

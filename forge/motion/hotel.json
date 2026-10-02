@@ -1,0 +1,8 @@
+{
+  "name": "hotel",
+  "intent": "breathes softly like a guest asleep inside",
+  "loop": { "preset": "breathe", "origin": [12, 21.5], "amount": 0.5, "duration": 4 },
+  "hover": { "preset": "pop", "origin": [12, 21.5], "amount": 0.8 },
+  "alt": [ { "preset": "glow", "amount": 0.7 }, { "preset": "jelly", "origin": [12, 21.5] } ],
+  "swap": [ { "to": "bed", "effect": "fade" }, { "to": "building", "effect": "slide-up" } ]
+}

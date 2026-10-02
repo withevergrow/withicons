@@ -1,0 +1,96 @@
+{
+  "name": "hotel",
+  "category": "travel",
+  "description": "A hotel building with a sign band and a guest asleep in bed, for stays, lodging, and bookings.",
+  "aliases": [
+    "lodging",
+    "inn",
+    "motel",
+    "resort",
+    "hostel",
+    "stay",
+    "lodge",
+    "hotel-building",
+    "guesthouse",
+    "bnb"
+  ],
+  "tags": [
+    "travel",
+    "stay",
+    "booking",
+    "accommodation",
+    "room",
+    "holiday"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 21.5 V5 A2 2 0 0 1 5.5 3 H18.5 A2 2 0 0 1 20.5 5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21.5 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11 V21.5 M6.5 17.5 H17.5 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 14.5 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.5 V16.5 A2 2 0 0 1 14 14.5 H15.5 A2 2 0 0 1 17.5 16.5 V17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 7 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 21.5 V5 A2 2 0 0 1 5.5 3 H18.5 A2 2 0 0 1 20.5 5 V21.5 Z"
+  ],
+  "cutouts": [
+    "M6.5 11 V21.5",
+    "M6.5 17.5 H17.5 V21.5",
+    "M9.5 14.25 V14.75",
+    "M12 17.5 V16.5 A2 2 0 0 1 14 14.5 H15.5 A2 2 0 0 1 17.5 16.5 V17.5 Z",
+    "M9 7 H15"
+  ],
+  "synonyms": [
+    "hotels",
+    "accommodation",
+    "hotel room",
+    "room",
+    "rooms",
+    "book a room",
+    "booking",
+    "reservation",
+    "check in",
+    "check out",
+    "overnight",
+    "sleep",
+    "bed and breakfast",
+    "b&b",
+    "airbnb",
+    "holiday rental",
+    "vacation rental",
+    "accommodations",
+    "accomodation",
+    "lodgings",
+    "where to stay",
+    "place to stay",
+    "travel",
+    "trip",
+    "vacation",
+    "holiday",
+    "hospitality",
+    "concierge",
+    "reception",
+    "suite",
+    "guest",
+    "hotle",
+    "hotell"
+  ]
+}

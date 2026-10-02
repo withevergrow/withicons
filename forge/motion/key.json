@@ -1,0 +1,41 @@
+{
+  "name": "key",
+  "intent": "sways from its ring and slides in like entering a lock",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      8,
+      16
+    ],
+    "amount": 0.7,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        8,
+        16
+      ]
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "unlock",
+      "effect": "rotate"
+    },
+    {
+      "to": "lock",
+      "effect": "rotate"
+    }
+  ]
+}

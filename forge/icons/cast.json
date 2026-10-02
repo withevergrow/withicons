@@ -1,0 +1,71 @@
+{
+  "name": "cast",
+  "category": "media",
+  "description": "A screen with signal waves rising from its corner for casting to a TV or external display.",
+  "aliases": [
+    "screencast",
+    "cast-screen",
+    "cast-to-tv",
+    "screen-mirroring",
+    "stream-to-tv",
+    "mirror-screen",
+    "chromecast",
+    "cast-device",
+    "screen-cast"
+  ],
+  "tags": [
+    "media",
+    "screen",
+    "wireless",
+    "stream",
+    "tv"
+  ],
+  "paths": [
+    {
+      "d": "M2 7.5 V6 A2 2 0 0 1 4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 18.5 A1.5 1.5 0 0 1 3.5 20 H2 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M2 15 A5 5 0 0 1 7 20",
+      "plate": "A"
+    },
+    {
+      "d": "M2 11 A9 9 0 0 1 11 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 8.5 V6 A2 2 0 0 1 4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H13.5 A11.5 11.5 0 0 0 2 8.5 Z",
+    "M2 18.5 A1.5 1.5 0 0 1 3.5 20 H2 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "casting",
+    "cast to tv",
+    "mirror",
+    "mirroring",
+    "screen share",
+    "stream",
+    "streaming",
+    "tv",
+    "television",
+    "smart tv",
+    "external display",
+    "second screen",
+    "projector",
+    "connect to tv",
+    "wireless display",
+    "send to tv",
+    "play on tv",
+    "airplay",
+    "google cast",
+    "big screen",
+    "cast icon",
+    "chrome cast",
+    "castt"
+  ]
+}

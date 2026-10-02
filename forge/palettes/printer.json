@@ -1,0 +1,447 @@
+{
+  "name": "printer",
+  "palettes": [
+    {
+      "id": "office-white",
+      "name": "Office white",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1F2430",
+        "c1": "#E6E8EC",
+        "c2": "#FFFFFF",
+        "c3": "#8A93A3",
+        "c4": "#2F80ED",
+        "tint": "#FAFAFB",
+        "accent": "#2F80ED",
+        "shadow": "#6B6E77",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cyan-cartridge",
+      "name": "Cyan cartridge",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0B2B36",
+        "c1": "#00AEEF",
+        "c2": "#FFFFFF",
+        "c3": "#EC008C",
+        "c4": "#FFF200",
+        "tint": "#CCEFFC",
+        "accent": "#EC008C",
+        "shadow": "#066D93",
+        "shine": "#B8E8FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "magenta-cartridge",
+      "name": "Magenta cartridge",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0024",
+        "c1": "#EC008C",
+        "c2": "#FFFFFF",
+        "c3": "#00AEEF",
+        "c4": "#FFF200",
+        "tint": "#FBCCE8",
+        "accent": "#00AEEF",
+        "shadow": "#930058",
+        "shine": "#FAB8DF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "laser-black",
+      "name": "Laser black",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#0A0B0E",
+        "c1": "#4A4E57",
+        "c2": "#F7F7F7",
+        "c3": "#22252B",
+        "c4": "#34C759",
+        "tint": "#DBDCDD",
+        "accent": "#34C759",
+        "shadow": "#2A2D33",
+        "shine": "#CCCDD0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "home-inkjet-grey",
+      "name": "Home inkjet grey",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#22262E",
+        "c1": "#8E96A3",
+        "c2": "#FDFDFD",
+        "c3": "#4B5260",
+        "c4": "#FF8C42",
+        "tint": "#E8EAED",
+        "accent": "#FF8C42",
+        "shadow": "#585E69",
+        "shine": "#DFE2E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "riso-pink-and-blue",
+      "name": "Riso pink & blue",
+      "tags": [
+        "retro",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1530",
+        "c1": "#FF48B0",
+        "c2": "#FFF5E6",
+        "c3": "#0078BF",
+        "c4": "#FFE800",
+        "tint": "#FFDAEF",
+        "accent": "#0078BF",
+        "shadow": "#952F70",
+        "shine": "#FFCCE9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "riso-green-and-orange",
+      "name": "Riso green & orange",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#10302A",
+        "c1": "#00A95C",
+        "c2": "#FFF5E6",
+        "c3": "#FF6C2F",
+        "c4": "#765BA7",
+        "tint": "#CCEEDE",
+        "accent": "#FF6C2F",
+        "shadow": "#086D43",
+        "shine": "#B8E7D1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dot-matrix-greenbar",
+      "name": "Dot-matrix greenbar",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2A22",
+        "c1": "#D8CFB8",
+        "c2": "#E3F2DA",
+        "c3": "#8F8572",
+        "c4": "#6FA35A",
+        "tint": "#F7F5F1",
+        "accent": "#6FA35A",
+        "shadow": "#6F695B",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "recycled-paper",
+      "name": "Recycled paper",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3B3226",
+        "c1": "#C7B48E",
+        "c2": "#F6EEDC",
+        "c3": "#8A7553",
+        "c4": "#5E8C4A",
+        "tint": "#F4F0E8",
+        "accent": "#5E8C4A",
+        "shadow": "#81735A",
+        "shine": "#EFEADF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plotter-blueprint",
+      "name": "Plotter blueprint",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0C2340",
+        "c1": "#2E6FBF",
+        "c2": "#E9F2FF",
+        "c3": "#F4C430",
+        "c4": "#12447F",
+        "tint": "#D5E2F2",
+        "accent": "#F4C430",
+        "shadow": "#1D4980",
+        "shine": "#C4D7ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "darkroom-red",
+      "name": "Darkroom red",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A0505",
+        "c1": "#C1272D",
+        "c2": "#FFE9D6",
+        "c3": "#6B0F14",
+        "c4": "#FFB000",
+        "tint": "#F3D4D5",
+        "accent": "#FFB000",
+        "shadow": "#761619",
+        "shine": "#EEC3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-desk",
+      "name": "Pastel desk",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3E2F5B",
+        "c1": "#CDB8F5",
+        "c2": "#FFFFFF",
+        "c3": "#FFB7C9",
+        "c4": "#9EE0D0",
+        "tint": "#F5F1FD",
+        "accent": "#9EE0D0",
+        "shadow": "#746396",
+        "shine": "#F1EBFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "peach-stationery",
+      "name": "Peach stationery",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A2A1E",
+        "c1": "#FFB49A",
+        "c2": "#FFF7F0",
+        "c3": "#FF7F9E",
+        "c4": "#FFE08A",
+        "tint": "#FFF0EB",
+        "accent": "#FF7F9E",
+        "shadow": "#8F5E4D",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-receipt",
+      "name": "Neon receipt",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#7C4DFF",
+        "c2": "#E8F8FF",
+        "c3": "#00F0FF",
+        "c4": "#FF2BD6",
+        "tint": "#E5DBFF",
+        "accent": "#00F0FF",
+        "shadow": "#3E2780",
+        "shine": "#DACDFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "70s-office",
+      "name": "70s office",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A1F0C",
+        "c1": "#D97B29",
+        "c2": "#F7E7C6",
+        "c3": "#8C4A1A",
+        "c4": "#4E7A3A",
+        "tint": "#F7E5D4",
+        "accent": "#8C4A1A",
+        "shadow": "#8A4D1B",
+        "shine": "#F4DAC3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lagoon",
+      "name": "Lagoon",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0A2E3A",
+        "c1": "#2A9BB5",
+        "c2": "#F0FBFD",
+        "c3": "#156E85",
+        "c4": "#FFB86B",
+        "tint": "#D4EBF0",
+        "accent": "#FFB86B",
+        "shadow": "#1A6578",
+        "shine": "#C3E3EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "forest-print",
+      "name": "Forest print",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13281A",
+        "c1": "#3E7C4E",
+        "c2": "#F2F7EE",
+        "c3": "#A6C48A",
+        "c4": "#C98B3E",
+        "tint": "#D8E5DC",
+        "accent": "#C98B3E",
+        "shadow": "#295234",
+        "shine": "#C9DACD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-and-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0E0C06",
+        "c1": "#4A4436",
+        "c2": "#F7EFD8",
+        "c3": "#C9A54A",
+        "c4": "#2A251C",
+        "tint": "#DBDAD7",
+        "accent": "#C9A54A",
+        "shadow": "#2C281E",
+        "shine": "#CCCBC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#9E9E9E",
+        "c2": "#FAFAFA",
+        "c3": "#5E5E5E",
+        "c4": "#D0D0D0",
+        "tint": "#ECECEC",
+        "accent": "#5E5E5E",
+        "shadow": "#585858",
+        "shine": "#E4E4E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFFFFF",
+        "c3": "#0047BA",
+        "c4": "#D00000",
+        "tint": "#FFF6CC",
+        "accent": "#0047BA",
+        "shadow": "#615100",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-press",
+      "name": "Berry press",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#35102A",
+        "c1": "#9C2F6B",
+        "c2": "#FFF0F6",
+        "c3": "#F28BB5",
+        "c4": "#FFC857",
+        "tint": "#EBD5E1",
+        "accent": "#FFC857",
+        "shadow": "#69204B",
+        "shine": "#E3C5D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunny-side",
+      "name": "Sunny side",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#FFCE3A",
+        "c2": "#FFFFFF",
+        "c3": "#FF7A45",
+        "c4": "#3E8EDE",
+        "tint": "#FFF5D8",
+        "accent": "#FF7A45",
+        "shadow": "#856616",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-frosted",
+      "name": "Y2K frosted",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23104A",
+        "c1": "#C8F0FF",
+        "c2": "#FFFFFF",
+        "c3": "#FF9CE8",
+        "c4": "#A88BFF",
+        "tint": "#F4FCFF",
+        "accent": "#A88BFF",
+        "shadow": "#62658F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "video-camera",
+  "intent": "records with a steady pulse like a live camera",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      9,
+      18
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "camera",
+      "effect": "flip"
+    },
+    {
+      "to": "video-call",
+      "effect": "fade"
+    }
+  ]
+}

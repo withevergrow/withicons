@@ -1,0 +1,50 @@
+{
+  "name": "clock",
+  "intent": "its hands tick round the face like passing time",
+  "loop": {
+    "preset": "tick",
+    "origin": [
+      12,
+      12
+    ],
+    "steps": 12,
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        12,
+        12
+      ],
+      "steps": 12,
+      "duration": 6,
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "alarm-clock",
+      "effect": "fade"
+    },
+    {
+      "to": "timer",
+      "effect": "scale"
+    },
+    {
+      "to": "history",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "cloud-lightning",
+  "intent": "flashes like a storm cloud about to strike",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.7,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.8
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud",
+      "effect": "blur"
+    }
+  ]
+}

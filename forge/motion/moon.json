@@ -1,0 +1,32 @@
+{
+  "name": "moon",
+  "intent": "glows softly like a calm night sky",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.8,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "tilt",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "rock",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "sun",
+      "effect": "rotate"
+    },
+    {
+      "to": "moon@solid",
+      "effect": "scale"
+    }
+  ]
+}

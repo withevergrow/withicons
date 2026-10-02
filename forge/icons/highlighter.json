@@ -1,0 +1,69 @@
+{
+  "name": "highlighter",
+  "category": "text",
+  "description": "A chisel-tip highlighter marker over a bright stroke for highlighting and marking text.",
+  "aliases": [
+    "text-highlight",
+    "highlight-pen",
+    "highlighter-pen",
+    "marker-pen",
+    "felt-tip",
+    "highlight-text",
+    "text-marker"
+  ],
+  "synonyms": [
+    "highlight",
+    "marker",
+    "highlighter pen",
+    "highlight text",
+    "mark text",
+    "emphasize",
+    "emphasise",
+    "color text",
+    "colour text",
+    "background color",
+    "background colour",
+    "fluorescent",
+    "neon pen",
+    "study",
+    "annotate",
+    "annotation",
+    "notes",
+    "markup",
+    "review",
+    "school",
+    "stationery",
+    "text formatting",
+    "editor toolbar",
+    "hilighter",
+    "highliter"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "editor",
+    "pen",
+    "annotate",
+    "stationery"
+  ],
+  "paths": [
+    {
+      "d": "M10 10 L15.94 4.06 A1.5 1.5 0 0 1 18.06 4.06 L19.94 5.94 A1.5 1.5 0 0 1 19.94 8.06 L14 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 10 L7.5 13.5 L10.5 16.5 L14 14",
+      "plate": "A"
+    },
+    {
+      "d": "M3 20.5 H12",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 10 L15.94 4.06 A1.5 1.5 0 0 1 18.06 4.06 L19.94 5.94 A1.5 1.5 0 0 1 19.94 8.06 L14 14 L10.5 16.5 L7.5 13.5 Z"
+  ],
+  "cutouts": [
+    "M10 10 L14 14"
+  ]
+}

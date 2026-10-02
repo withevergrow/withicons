@@ -1,0 +1,68 @@
+{
+  "name": "battery-low",
+  "category": "devices",
+  "description": "A battery with a single low bar for low power and needs-charging states.",
+  "aliases": [
+    "low-battery",
+    "battery-empty",
+    "battery-alert",
+    "battery-warning",
+    "low-power",
+    "battery-1",
+    "battery-dying",
+    "battery-critical",
+    "almost-empty"
+  ],
+  "tags": [
+    "devices",
+    "battery",
+    "power",
+    "energy",
+    "status",
+    "warning"
+  ],
+  "paths": [
+    {
+      "d": "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10.5 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z"
+  ],
+  "cutouts": [
+    "M4 8 H17 A1 1 0 0 1 18 9 V15 A1 1 0 0 1 17 16 H4 A1 1 0 0 1 3 15 V9 A1 1 0 0 1 4 8 Z M5 9.5 H7 V14.5 H5 Z"
+  ],
+  "synonyms": [
+    "low power",
+    "low charge",
+    "battery low",
+    "battery almost dead",
+    "dead battery",
+    "flat battery",
+    "drained",
+    "running out",
+    "needs charging",
+    "charge soon",
+    "plug in",
+    "power saving",
+    "low power mode",
+    "battery saver",
+    "energy saver",
+    "10 percent",
+    "tired",
+    "exhausted",
+    "empty",
+    "batteries",
+    "batery low",
+    "battry"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "badge-check",
+  "intent": "swells proudly, a verified seal of approval",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.7
+    },
+    {
+      "preset": "spin-once"
+    }
+  ],
+  "swap": [
+    {
+      "to": "badge-check@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "fuel",
+  "intent": "fills up like a tank being refuelled",
+  "loop": { "preset": "fill", "duration": 2.2 },
+  "hover": { "preset": "wiggle", "origin": [8, 21], "amount": 0.6, "duration": 0.6 },
+  "alt": [ { "preset": "pulse", "amount": 0.6 }, { "preset": "pop" } ],
+  "swap": [ { "to": "battery-charging", "effect": "fade" }, { "to": "droplet", "effect": "slide-down" }, { "to": "fuel@solid", "effect": "scale" } ]
+}

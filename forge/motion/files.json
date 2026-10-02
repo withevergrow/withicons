@@ -1,0 +1,32 @@
+{
+  "name": "files",
+  "intent": "floats like a stack of papers, pops when picked",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "copy",
+      "effect": "fade"
+    },
+    {
+      "to": "file",
+      "effect": "slide-left"
+    }
+  ]
+}

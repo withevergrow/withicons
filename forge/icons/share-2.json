@@ -1,0 +1,74 @@
+{
+  "name": "share-2",
+  "category": "actions",
+  "description": "A box with an arrow rising out of its open top, the system share sheet for sending to other apps.",
+  "aliases": [
+    "share-box",
+    "share-sheet",
+    "share-up",
+    "system-share",
+    "share-out",
+    "export-share",
+    "share-arrow-up",
+    "ios-share",
+    "share-ios",
+    "native-share",
+    "share-square"
+  ],
+  "tags": [
+    "share",
+    "export",
+    "send",
+    "arrow",
+    "box",
+    "mobile"
+  ],
+  "paths": [
+    {
+      "d": "M9 10 H7 A2 2 0 0 0 5 12 V19 A2 2 0 0 0 7 21 H17 A2 2 0 0 0 19 19 V12 A2 2 0 0 0 17 10 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M12 15 V3",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 6.5 L12 3 L15.5 6.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 10 H17 A2 2 0 0 1 19 12 V19 A2 2 0 0 1 17 21 H7 A2 2 0 0 1 5 19 V12 A2 2 0 0 1 7 10 Z"
+  ],
+  "cutouts": [
+    "M12 15 V9"
+  ],
+  "synonyms": [
+    "share to apps",
+    "share via",
+    "send to",
+    "share this",
+    "share sheet ios",
+    "iphone share",
+    "apple share",
+    "safari share",
+    "share menu",
+    "share button",
+    "open in",
+    "export to",
+    "send out",
+    "share link",
+    "share file",
+    "share photo",
+    "share page",
+    "post to",
+    "add to home screen",
+    "airdrop",
+    "forward",
+    "distribute",
+    "publish",
+    "sharing",
+    "shair",
+    "sahre"
+  ]
+}

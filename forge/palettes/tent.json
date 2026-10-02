@@ -1,0 +1,27 @@
+{
+  "name": "tent",
+  "palettes": [
+    {"id":"forest-green-tent","name":"Forest green tent","tags":["true-to-life","nature"],"colors":{"ink":"#0A1E10","c1":"#3E7A4A","c2":"#E8C35A","c3":"#C8B27A","c4":"#1E3A24","tint":"#C9DACC","accent":"#F28C28","shadow":"#1C3721","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"expedition-orange","name":"Expedition orange","tags":["true-to-life","vivid"],"colors":{"ink":"#2E1205","c1":"#F07A2A","c2":"#2E3A4A","c3":"#F2D9B0","c4":"#A84A10","tint":"#FBDAC3","accent":"#FFD23F","shadow":"#6C3713","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"canvas-bell-tent","name":"Canvas bell tent","tags":["true-to-life","earthy"],"colors":{"ink":"#2A2216","c1":"#E8DCC0","c2":"#B5834F","c3":"#F7F0DF","c4":"#6E5A3A","tint":"#F5EFE3","accent":"#E8873A","shadow":"#7D7360","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tipi","name":"Tipi","tags":["true-to-life","earthy"],"colors":{"ink":"#2A1A0C","c1":"#D9B48A","c2":"#B5442E","c3":"#2E7A8C","c4":"#6E4626","tint":"#F4EADE","accent":"#E8B04A","shadow":"#62513E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"circus-big-top","name":"Circus big top","tags":["true-to-life","vivid"],"colors":{"ink":"#2E0508","c1":"#D7263D","c2":"#F2EDE3","c3":"#F2C14E","c4":"#2E5A9E","tint":"#F4C2C9","accent":"#F2C14E","shadow":"#61111B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"blue-dome","name":"Blue dome","tags":["true-to-life"],"colors":{"ink":"#06183A","c1":"#2E7AD1","c2":"#F2C14E","c3":"#C2DCF7","c4":"#1E3A6B","tint":"#C4DAF2","accent":"#F28C28","shadow":"#15375E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"arctic-expedition","name":"Arctic expedition","tags":["true-to-life","seasonal"],"colors":{"ink":"#2E2405","c1":"#F2C230","c2":"#2E4A6B","c3":"#E8EEF5","c4":"#9E7A10","tint":"#F9E4A2","accent":"#E8483A","shadow":"#6D5716","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"festival-field","name":"Festival field","tags":["vivid"],"colors":{"ink":"#3A0A20","c1":"#FF5DA2","c2":"#FFD23F","c3":"#7A5CFF","c4":"#3DDC97","tint":"#FFD2E5","accent":"#3DD8FF","shadow":"#732A49","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-camp","name":"Night camp","tags":["dark"],"colors":{"ink":"#05081A","c1":"#2A3566","c2":"#F2A23A","c3":"#F2E6B0","c4":"#141A3A","tint":"#C3C6D4","accent":"#F2A23A","shadow":"#13182E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"army-canvas","name":"Army canvas","tags":["earthy"],"colors":{"ink":"#1A1C0A","c1":"#6E7040","c2":"#B5A47A","c3":"#D9D3B0","c4":"#3A3C1E","tint":"#D6D7CA","accent":"#C8693F","shadow":"#31321D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"beach-cabana","name":"Beach cabana","tags":["ocean"],"colors":{"ink":"#0A2840","c1":"#3E9CD6","c2":"#F2EDE3","c3":"#F2C14E","c4":"#1E5E8A","tint":"#C9E3F4","accent":"#FF7F6B","shadow":"#1C4660","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"autumn-camp","name":"Autumn camp","tags":["seasonal"],"colors":{"ink":"#2B1206","c1":"#C8662B","c2":"#E8B33A","c3":"#7A2E1A","c4":"#6E7A3A","tint":"#F0D4C4","accent":"#E8B33A","shadow":"#5A2E13","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"desert-sunset","name":"Desert sunset","tags":["retro","sunset"],"colors":{"ink":"#2B1610","c1":"#E76F51","c2":"#F4A261","c3":"#E9C46A","c4":"#264653","tint":"#F8D7CE","accent":"#E9C46A","shadow":"#683224","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"play-tent","name":"Play tent","tags":["candy","pastel"],"colors":{"ink":"#4A1036","c1":"#FFB3D9","c2":"#A0F0D8","c3":"#FFE08A","c4":"#B8A6FF","tint":"#FFDDEE","accent":"#A0F0D8","shadow":"#735162","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-meadow","name":"Pastel meadow","tags":["pastel"],"colors":{"ink":"#1E3A10","c1":"#C8E6B0","c2":"#FFD6E0","c3":"#FFF3C4","c4":"#8FC27A","tint":"#E6F4DB","accent":"#FF9EB5","shadow":"#5A674F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"wild-berry","name":"Wild berry","tags":["vivid"],"colors":{"ink":"#200716","c1":"#9C2F6E","c2":"#F27BAA","c3":"#F7C8DB","c4":"#4E1338","tint":"#E3C5D6","accent":"#8BD06A","shadow":"#461531","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"safari-luxe","name":"Safari luxe","tags":["luxe"],"colors":{"ink":"#241C0C","c1":"#E3D3B0","c2":"#6E4626","c3":"#D4AF37","c4":"#2E2418","tint":"#F2EBDB","accent":"#D4AF37","shadow":"#7A6A4A","shine":"#FFFFFF","edge":"#FFF8E8"}},
+    {"id":"pine-ramp","name":"Pine ramp","tags":["mono","nature"],"colors":{"ink":"#0A2014","c1":"#2E7A4E","c2":"#175236","c3":"#B8E0C8","c4":"#6FB58A","tint":"#C4DACD","accent":"#175236","shadow":"#153723","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"stone-gray","name":"Stone gray","tags":["grayscale"],"colors":{"ink":"#141414","c1":"#9A9A9A","c2":"#5A5A5A","c3":"#D8D8D8","c4":"#777777","tint":"#E3E3E3","accent":"#C2C2C2","shadow":"#454545","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-camp","name":"Y2K camp","tags":["y2k"],"colors":{"ink":"#22155A","c1":"#C4B5FF","c2":"#9DF7E5","c3":"#FFB8E8","c4":"#7B6CFF","tint":"#E4DEFF","accent":"#9DF7E5","shadow":"#585173","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"glowstick-camp","name":"Glowstick camp","tags":["neon","on-dark"],"colors":{"ink":"#0A0716","c1":"#C6FF3D","c2":"#FF3DCB","c3":"#3DD8FF","c4":"#8A3DFF","tint":"#E5FFA8","accent":"#FF3DCB","shadow":"#4E6A14","shine":"#FFFFFF","edge":"#141420"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#0050B5","c3":"#FFFFFF","c4":"#111111","tint":"#FFEC8C","accent":"#0050B5","shadow":"#735F00","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "lamp",
+  "category": "home",
+  "description": "A table lamp with a shade, stem, and base for lighting, interiors, and reading light.",
+  "aliases": [
+    "table-lamp",
+    "desk-lamp",
+    "floor-lamp",
+    "light-fixture",
+    "lampshade",
+    "reading-lamp",
+    "lighting",
+    "bedside-lamp",
+    "lamp-shade"
+  ],
+  "tags": [
+    "light",
+    "lighting",
+    "interior",
+    "furniture",
+    "decor",
+    "reading"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 3 H15.5 L19.5 12 H4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 V18.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7 21 A5 2.5 0 0 1 17 21 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8.5 3 H15.5 L19.5 12 H4.5 Z",
+    "M7 21 A5 2.5 0 0 1 17 21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "lamps",
+    "light",
+    "lights",
+    "light on",
+    "light off",
+    "turn on light",
+    "bedside light",
+    "night light",
+    "nightstand",
+    "side table",
+    "lamp light",
+    "shade",
+    "interior lighting",
+    "home decor",
+    "light bulb",
+    "illumination",
+    "study",
+    "reading",
+    "cozy",
+    "cosy",
+    "ambience",
+    "mood lighting",
+    "lampe",
+    "lamp post",
+    "lamb"
+  ]
+}

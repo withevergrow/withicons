@@ -1,0 +1,43 @@
+{
+  "name": "rainbow",
+  "intent": "glows softly after the rain, arcs draw on when touched",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      18
+    ],
+    "duration": 3.4,
+    "amount": 0.8
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        18
+      ]
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "rainbow@solid",
+      "effect": "scale"
+    }
+  ]
+}

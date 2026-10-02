@@ -1,0 +1,27 @@
+{
+  "name": "id-card",
+  "palettes": [
+    {"id":"passport-navy","name":"Passport navy","tags":["true-to-life"],"colors":{"ink":"#08122B","c1":"#23407A","c2":"#F4D9B0","c3":"#C9A227","c4":"#8FA3CC","tint":"#C1CADA","accent":"#C9A227","shadow":"#14274F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"passport-burgundy","name":"Passport burgundy","tags":["true-to-life"],"colors":{"ink":"#22050C","c1":"#7E1F33","c2":"#F2D9B5","c3":"#D4AF37","c4":"#C98A97","tint":"#DBC0C6","accent":"#D4AF37","shadow":"#4B111E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"staff-badge","name":"Staff badge","tags":["true-to-life","corporate"],"colors":{"ink":"#0F1D36","c1":"#2F7BF6","c2":"#FFD166","c3":"#EF476F","c4":"#BCD4FD","tint":"#C5DAFC","accent":"#EF476F","shadow":"#1D478C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"drivers-licence","name":"Driver's licence","tags":["true-to-life"],"colors":{"ink":"#1A2633","c1":"#A9C8E8","c2":"#E85D4A","c3":"#3B7DD8","c4":"#DCE8F4","tint":"#E7F0F9","accent":"#E85D4A","shadow":"#5A6F84","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"student-card","name":"Student card","tags":["true-to-life","vivid"],"colors":{"ink":"#341F15","c1":"#FF8A3D","c2":"#4A90E2","c3":"#FFD23F","c4":"#FFD0B0","tint":"#FFDEC9","accent":"#4A90E2","shadow":"#8F4F27","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"visitor-pass","name":"Visitor pass","tags":["true-to-life"],"colors":{"ink":"#2B2200","c1":"#FFCA28","c2":"#E53935","c3":"#1E88E5","c4":"#FFF0B3","tint":"#FFF0C3","accent":"#E53935","shadow":"#8A6E12","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"member-green","name":"Member green","tags":["true-to-life"],"colors":{"ink":"#0E271F","c1":"#2BB673","c2":"#FFD447","c3":"#FF6B6B","c4":"#BDEBD3","tint":"#C4EBD8","accent":"#FF6B6B","shadow":"#1B6745","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"press-pass","name":"Press pass","tags":["true-to-life"],"colors":{"ink":"#1A0505","c1":"#D62828","c2":"#F4F4F4","c3":"#1D3557","c4":"#F2B8B8","tint":"#F4C3C3","accent":"#1D3557","shadow":"#6F1515","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-badge","name":"Night badge","tags":["dark"],"colors":{"ink":"#0B0E14","c1":"#374151","c2":"#A5B4FC","c3":"#FCA5A5","c4":"#9CA3AF","tint":"#C7CACE","accent":"#A5B4FC","shadow":"#1F252F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-badge","name":"Pastel badge","tags":["pastel"],"colors":{"ink":"#2E3448","c1":"#B8E1FF","c2":"#FFD6E0","c3":"#FFF1B8","c4":"#C8F2D8","tint":"#EBF7FF","accent":"#FFD6E0","shadow":"#6C829A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-access","name":"Neon access","tags":["neon","on-dark"],"colors":{"ink":"#070A12","c1":"#2BF0FF","c2":"#FF2BD6","c3":"#B8FF3B","c4":"#FFE45E","tint":"#95F8FF","accent":"#FF2BD6","shadow":"#17717D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"library-card","name":"Library card","tags":["retro","vintage"],"colors":{"ink":"#2A1A0B","c1":"#EFD9A8","c2":"#C2402F","c3":"#2E6B8A","c4":"#D9A441","tint":"#FBF4E7","accent":"#C2402F","shadow":"#837052","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"terracotta-pass","name":"Terracotta pass","tags":["earthy"],"colors":{"ink":"#2E1A12","c1":"#D08158","c2":"#F3E3C6","c3":"#5E7D5A","c4":"#9C5236","tint":"#F2DCD0","accent":"#5E7D5A","shadow":"#774832","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"teal-ramp","name":"Teal ramp","tags":["mono"],"colors":{"ink":"#04282A","c1":"#1AA39C","c2":"#0C6662","c3":"#8EDDD8","c4":"#D5F3F1","tint":"#BFE5E3","accent":"#0C6662","shadow":"#0E5F5D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"laminated-grey","name":"Laminated grey","tags":["grayscale"],"colors":{"ink":"#121214","c1":"#B0B3BA","c2":"#4C4F57","c3":"#E2E3E7","c4":"#808590","tint":"#E9EAEC","accent":"#4C4F57","shadow":"#595A5F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holographic","name":"Holographic","tags":["y2k"],"colors":{"ink":"#1E1745","c1":"#C7B8FF","c2":"#7DF9FF","c3":"#FF9AE6","c4":"#F5F0FF","tint":"#EFEBFF","accent":"#FF9AE6","shadow":"#6A5F99","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-card","name":"Black card gold","tags":["luxe"],"colors":{"ink":"#000000","c1":"#3A3A40","c2":"#D4AF37","c3":"#8A8A8F","c4":"#F3E5AB","tint":"#C8C8CA","accent":"#D4AF37","shadow":"#1A1A1D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"coastal","name":"Coastal","tags":["ocean"],"colors":{"ink":"#06263A","c1":"#3A9BD9","c2":"#FFE0B5","c3":"#FF7B5C","c4":"#BFE2F5","tint":"#C8E3F4","accent":"#FF7B5C","shadow":"#1D5B82","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum-id","name":"Bubblegum ID","tags":["candy"],"colors":{"ink":"#3A0D2C","c1":"#FF7EB6","c2":"#FFF0A8","c3":"#7AD7F0","c4":"#FFD0E6","tint":"#FFDBEB","accent":"#7AD7F0","shadow":"#93406A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ranger-badge","name":"Ranger badge","tags":["nature"],"colors":{"ink":"#13220F","c1":"#5A7D3A","c2":"#F2E3B3","c3":"#A4572A","c4":"#C8D9B0","tint":"#D1DBC8","accent":"#A4572A","shadow":"#334B22","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"winter-campus","name":"Winter campus","tags":["seasonal"],"colors":{"ink":"#0E2235","c1":"#7FB3D5","c2":"#F6F2EA","c3":"#C0392B","c4":"#2E4A62","tint":"#DBEAF3","accent":"#C0392B","shadow":"#41637D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#FFFFFF","c3":"#0040FF","c4":"#D4002A","tint":"#FFF3B8","accent":"#0040FF","shadow":"#735F00","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

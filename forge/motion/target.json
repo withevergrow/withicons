@@ -1,0 +1,36 @@
+{
+  "name": "target",
+  "intent": "pulses like a goal in focus, then locks on",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.9,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "spin-once"
+    }
+  ],
+  "swap": [
+    {
+      "to": "crosshair",
+      "effect": "rotate"
+    },
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    }
+  ]
+}

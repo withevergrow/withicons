@@ -1,0 +1,75 @@
+{
+  "name": "medal",
+  "category": "sports",
+  "description": "Medal hanging from a ribbon for winners, sports, and first place.",
+  "aliases": [
+    "gold-medal",
+    "winner-medal",
+    "olympic-medal",
+    "champion-medal",
+    "podium",
+    "victory",
+    "medallion",
+    "sports-medal",
+    "achievement-medal",
+    "first-place-medal"
+  ],
+  "tags": [
+    "sports",
+    "award",
+    "winner",
+    "achievement",
+    "competition"
+  ],
+  "paths": [
+    {
+      "d": "M9 12 L4.5 2.5 H9.5 L12 7 L14.5 2.5 H19.5 L15 12",
+      "plate": "A"
+    },
+    {
+      "d": "M17 16 A5 5 0 1 1 7 16 A5 5 0 1 1 17 16 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M17 16 A5 5 0 1 1 7 16 A5 5 0 1 1 17 16 Z",
+    "M9 12 L4.5 2.5 H9.5 L12 7 L14.5 2.5 H19.5 L15 12 Z"
+  ],
+  "cutouts": [
+    "M14.75 16 A2.75 2.75 0 1 1 9.25 16 A2.75 2.75 0 1 1 14.75 15.99",
+    "M6.15 12.63 A6.75 6.75 0 0 1 17.85 12.63"
+  ],
+  "synonyms": [
+    "medals",
+    "gold",
+    "silver",
+    "bronze",
+    "olympics",
+    "olympic games",
+    "first place",
+    "second place",
+    "third place",
+    "winner",
+    "champion",
+    "prize",
+    "achievement",
+    "accomplishment",
+    "honor",
+    "honour",
+    "reward",
+    "recognition",
+    "badge",
+    "top rank",
+    "competition",
+    "race finish",
+    "finisher",
+    "leaderboard",
+    "gamification",
+    "metal",
+    "medel",
+    "best",
+    "excellence",
+    "well done",
+    "congratulations"
+  ]
+}

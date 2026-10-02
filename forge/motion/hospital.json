@@ -1,0 +1,8 @@
+{
+  "name": "hospital",
+  "intent": "glows softly like a beacon of care, pops when pointed at",
+  "loop": { "preset": "glow", "amount": 0.7, "duration": 2.8 },
+  "hover": { "preset": "pop", "origin": [12, 21] },
+  "alt": [ { "preset": "pulse", "origin": [12, 21], "amount": 0.5 }, { "preset": "jelly", "origin": [12, 21], "amount": 0.6 } ],
+  "swap": [ { "to": "hospital@solid", "effect": "scale" }, { "to": "building", "effect": "fade" } ]
+}

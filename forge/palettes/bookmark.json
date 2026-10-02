@@ -1,0 +1,30 @@
+{
+  "name": "bookmark",
+  "palettes": [
+    {"id":"satin-red","name":"Satin red","tags":["true-to-life"],"colors":{"ink":"#3A0A10","c1":"#D7263D","c2":"#F7A1AC","c3":"#9E1B2E","c4":"#F4C95D","tint":"#F6CFD4","accent":"#F4C95D","shadow":"#530F17","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"library-navy","name":"Library navy","tags":["true-to-life"],"colors":{"ink":"#0A1226","c1":"#2E5199","c2":"#8DA6D8","c3":"#F2C14E","c4":"#C9D6EE","tint":"#D1D9E9","accent":"#F2C14E","shadow":"#111E3A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"saved-gold","name":"Saved gold","tags":["true-to-life"],"colors":{"ink":"#3A2800","c1":"#F6B40E","c2":"#FFE7A0","c3":"#C47F00","c4":"#FFF6D6","tint":"#FDEFCA","accent":"#FF6B6B","shadow":"#5C4304","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"leather","name":"Leather","tags":["true-to-life","vintage"],"colors":{"ink":"#2A160A","c1":"#8E5431","c2":"#D9A97A","c3":"#5C3317","c4":"#C7A15A","tint":"#E6D9D2","accent":"#E8D5B0","shadow":"#382012","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"racing-green","name":"Racing green","tags":["true-to-life"],"colors":{"ink":"#0A2016","c1":"#1F7A4D","c2":"#A8DABC","c3":"#0F4D2F","c4":"#D9B44A","tint":"#CEE2D8","accent":"#D9B44A","shadow":"#0D2F1E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"favourite-pink","name":"Favourite pink","tags":["vivid"],"colors":{"ink":"#3A0B2B","c1":"#FF4F9A","c2":"#FFC2DD","c3":"#C2186B","c4":"#FFD166","tint":"#FFD8E9","accent":"#FFD166","shadow":"#5F1B3C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"paperback","name":"Paperback","tags":["vintage"],"colors":{"ink":"#2E2620","c1":"#E8DCC4","c2":"#C26B4E","c3":"#6B8F8A","c4":"#3E4A61","tint":"#FAF7F2","accent":"#C26B4E","shadow":"#544E44","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"read-later","name":"Read later","tags":["corporate"],"colors":{"ink":"#0C2140","c1":"#3A7BF2","c2":"#C9DCFF","c3":"#1B4FB8","c4":"#FFB547","tint":"#D4E2FC","accent":"#FFB547","shadow":"#152F5D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lilac","name":"Lilac","tags":["pastel"],"colors":{"ink":"#3B2A55","c1":"#C7B3F5","c2":"#F5E1FF","c3":"#9A7FE0","c4":"#FFE3B3","tint":"#F3EEFD","accent":"#FF9CC2","shadow":"#4F4365","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cotton-candy","name":"Cotton candy","tags":["candy"],"colors":{"ink":"#4A1A40","c1":"#FF9ED8","c2":"#9EE7FF","c3":"#FFF08A","c4":"#C5A3FF","tint":"#FFEAF6","accent":"#9EE7FF","shadow":"#653755","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-tag","name":"Neon tag","tags":["neon","on-dark"],"colors":{"ink":"#FFE6FA","c1":"#FF2BD6","c2":"#00F0FF","c3":"#FFE600","c4":"#8A2BFF","tint":"#FFD0F6","accent":"#00F0FF","shadow":"#731360","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mustard-and-teal","name":"Mustard & teal","tags":["retro"],"colors":{"ink":"#2A2210","c1":"#E3B23C","c2":"#2A9D8F","c3":"#E76F51","c4":"#264653","tint":"#F9EED4","accent":"#F4E3B5","shadow":"#514017","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"terracotta-clay","name":"Terracotta clay","tags":["earthy"],"colors":{"ink":"#3A1A10","c1":"#C1663F","c2":"#E9C6A8","c3":"#7F8F5A","c4":"#8A3B22","tint":"#F1DDD5","accent":"#F2D0A4","shadow":"#4D2718","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sage","name":"Sage","tags":["nature","pastel"],"colors":{"ink":"#26352A","c1":"#A3C4A8","c2":"#E3EFE2","c3":"#6E8F72","c4":"#E8C9A0","tint":"#EBF2EC","accent":"#E8A3A3","shadow":"#3D4C40","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#121212","c1":"#8A8A8A","c2":"#D9D9D9","c3":"#4D4D4D","c4":"#2B2B2B","tint":"#E5E5E5","accent":"#F0F0F0","shadow":"#2F2F2F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"crimson-ramp","name":"Crimson ramp","tags":["mono"],"colors":{"ink":"#3A0810","c1":"#C8102E","c2":"#F5A3AE","c3":"#8C0B20","c4":"#E85A6E","tint":"#F3CAD1","accent":"#FFD9DE","shadow":"#4F0713","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-and-gold","name":"Black & gold","tags":["luxe","dark"],"colors":{"ink":"#D4AF37","c1":"#151515","c2":"#D4AF37","c3":"#8B6F23","c4":"#F1E2A6","tint":"#E9DFC0","accent":"#F1E2A6","shadow":"#000000","shine":"#3D3D3D","edge":"#FFFFFF"}},
+    {"id":"emerald-velvet","name":"Emerald velvet","tags":["luxe"],"colors":{"ink":"#04140E","c1":"#0F7B5A","c2":"#8CD9B9","c3":"#D4AF37","c4":"#064030","tint":"#CAE2DB","accent":"#D4AF37","shadow":"#062B1F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pumpkin-spice","name":"Pumpkin spice","tags":["seasonal"],"colors":{"ink":"#3A1A05","c1":"#E07B24","c2":"#F6C28B","c3":"#8C3B12","c4":"#5A7D3A","tint":"#F8E2CF","accent":"#F6E05E","shadow":"#562D0C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holly","name":"Holly","tags":["seasonal"],"colors":{"ink":"#2A0B0B","c1":"#B3202E","c2":"#2D6A4F","c3":"#F4E3B1","c4":"#E9C46A","tint":"#EECED1","accent":"#E9C46A","shadow":"#430D12","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-ribbon","name":"Ocean ribbon","tags":["ocean"],"colors":{"ink":"#082F3F","c1":"#168AAD","c2":"#A9E2EE","c3":"#0B5D7A","c4":"#F7D08A","tint":"#CCE5ED","accent":"#F7D08A","shadow":"#093949","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFCC00","c2":"#0033CC","c3":"#FFFFFF","c4":"#CC0000","tint":"#FFF4C7","accent":"#0033CC","shadow":"#4B3C00","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"midnight-read","name":"Midnight read","tags":["dark","on-dark"],"colors":{"ink":"#EDE8FF","c1":"#24203A","c2":"#6E5BD8","c3":"#3A3456","c4":"#A99BF0","tint":"#CEC8EE","accent":"#FFD27A","shadow":"#0D0B18","shine":"#4A4370","edge":"#FFFFFF"}},
+    {"id":"y2k-holo","name":"Y2K holo","tags":["y2k"],"colors":{"ink":"#2D1B69","c1":"#A6C1FF","c2":"#FFB3EC","c3":"#B3FFF0","c4":"#FFF5A6","tint":"#EBF1FF","accent":"#FF7ACB","shadow":"#414270","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-ribbon","name":"Sunset ribbon","tags":["sunset"],"colors":{"ink":"#3A1020","c1":"#FF7E5F","c2":"#FEB47B","c3":"#C04867","c4":"#6B2D5C","tint":"#FFE3DC","accent":"#FFE29A","shadow":"#5F2B27","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

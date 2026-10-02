@@ -1,0 +1,8 @@
+{
+  "name": "volleyball",
+  "intent": "spins slowly through the air, pops up like a bump",
+  "loop": { "preset": "spin", "duration": 5 },
+  "hover": { "preset": "nudge", "dir": 270, "amount": 1.2 },
+  "alt": [ { "preset": "bounce", "amount": 0.8 }, { "preset": "float" }, { "preset": "spin-once" } ],
+  "swap": [ { "to": "volleyball@solid", "effect": "spin" }, { "to": "trophy", "effect": "slide-up" } ]
+}

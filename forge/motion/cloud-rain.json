@@ -1,0 +1,37 @@
+{
+  "name": "cloud-rain",
+  "intent": "floats while it rains, then shakes loose a shower",
+  "loop": {
+    "preset": "float",
+    "amount": 0.7,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "drop",
+    "amount": 0.35,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-snow",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud-lightning",
+      "effect": "blur"
+    },
+    {
+      "to": "cloud",
+      "effect": "slide-up"
+    }
+  ]
+}

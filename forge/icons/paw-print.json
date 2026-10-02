@@ -1,0 +1,88 @@
+{
+  "name": "paw-print",
+  "category": "nature",
+  "description": "An animal paw print with four toe pads for pets, vets, animal shelters and pet care.",
+  "aliases": [
+    "paw",
+    "pets",
+    "pet",
+    "animal",
+    "footprint-paw",
+    "pet-friendly",
+    "vet",
+    "paw-mark",
+    "pawprint",
+    "animal-track",
+    "pet-care"
+  ],
+  "tags": [
+    "animal",
+    "pet",
+    "paw",
+    "footprint",
+    "vet"
+  ],
+  "paths": [
+    {
+      "d": "M12 12.5 C14.5 12.5 15.75 14.5 17.5 16.5 C18.75 18 18 20.5 15.5 20.5 C14 20.5 13.25 19.5 12 19.5 C10.75 19.5 10 20.5 8.5 20.5 C6 20.5 5.25 18 6.5 16.5 C8.25 14.5 9.5 12.5 12 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.25 5.5 A1.75 2.25 0 1 1 6.75 5.5 A1.75 2.25 0 1 1 10.25 5.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17.25 5.5 A1.75 2.25 0 1 1 13.75 5.5 A1.75 2.25 0 1 1 17.25 5.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M5.75 11 A1.75 2.25 0 1 1 2.25 11 A1.75 2.25 0 1 1 5.75 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21.75 11 A1.75 2.25 0 1 1 18.25 11 A1.75 2.25 0 1 1 21.75 11 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 12.5 C14.5 12.5 15.75 14.5 17.5 16.5 C18.75 18 18 20.5 15.5 20.5 C14 20.5 13.25 19.5 12 19.5 C10.75 19.5 10 20.5 8.5 20.5 C6 20.5 5.25 18 6.5 16.5 C8.25 14.5 9.5 12.5 12 12.5 Z",
+    "M10.25 5.5 A1.75 2.25 0 1 1 6.75 5.5 A1.75 2.25 0 1 1 10.25 5.5 Z",
+    "M17.25 5.5 A1.75 2.25 0 1 1 13.75 5.5 A1.75 2.25 0 1 1 17.25 5.5 Z",
+    "M5.75 11 A1.75 2.25 0 1 1 2.25 11 A1.75 2.25 0 1 1 5.75 11 Z",
+    "M21.75 11 A1.75 2.25 0 1 1 18.25 11 A1.75 2.25 0 1 1 21.75 11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "paw print",
+    "paw prints",
+    "pawprints",
+    "pet friendly",
+    "pets allowed",
+    "pets welcome",
+    "pet shop",
+    "pet store",
+    "pet supplies",
+    "pet food",
+    "veterinarian",
+    "veterinary",
+    "vet clinic",
+    "animal shelter",
+    "adopt a pet",
+    "pet adoption",
+    "rescue",
+    "dog paw",
+    "cat paw",
+    "footprint",
+    "animal footprint",
+    "animal tracks",
+    "toe beans",
+    "paws",
+    "grooming",
+    "pet sitter",
+    "dog walker",
+    "furry friend",
+    "puppy paw",
+    "paw pint",
+    "pawprnt"
+  ]
+}

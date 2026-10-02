@@ -1,0 +1,45 @@
+{
+  "name": "crosshair",
+  "intent": "pulses as it locks on to a target",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "zoom",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "spin-once",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "tick",
+      "steps": 4,
+      "duration": 2
+    }
+  ],
+  "swap": [
+    {
+      "to": "target",
+      "effect": "scale"
+    },
+    {
+      "to": "map-pin",
+      "effect": "slide-down"
+    }
+  ]
+}

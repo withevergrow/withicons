@@ -29,8 +29,9 @@ Tools (confirm with `tools/list`; arguments are documented in each tool's schema
 |---|---|
 | `search_icons` | `query`, optional `limit`, `style`, `category`, `format`. Returns ranked icons with why they matched and a ready-to-paste import/usage line |
 | `get_icon` | `name` (alias ok), `style`, `format` (`svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `web-component`, `html-class`, `data-uri`), optional `size`, `color`, `strokeWidth` |
+| `animate_icon` | `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
 | `resolve_icon` | alias, PascalCase or typo, which returns the canonical name, or candidates if ambiguous |
-| `list_styles` | the 7 styles with descriptions |
+| `list_styles` | the 12 styles with descriptions (palette styles list their colour variables) |
 | `list_categories` | categories, or the icons in one category |
 
 Typical agent loop: `search_icons("upload file")`, pick the top result that fits, then `get_icon(name, style, format: "react")`.
@@ -41,6 +42,8 @@ Paste the import and keep the canonical name.
 ```bash
 npx withicons search "throw away"        # ranked names + aliases
 npx withicons search cart --limit 5
+npx withicons search "cute heart"        # style words pick the style: kawaii
+npx withicons animate bell --trigger hover --format react
 ```
 
 ## HTTP API (cached at the edge, CORS enabled)
@@ -48,6 +51,8 @@ npx withicons search cart --limit 5
 ```bash
 curl "https://withicons.com/api/search?q=throw+away&limit=5"
 curl "https://withicons.com/api/icon/trash"
+curl "https://withicons.com/api/icon/heart.svg?style=kawaii"          # image/svg+xml, palette baked in
+curl "https://withicons.com/api/motion/bell?trigger=hover&format=react" # animation code
 ```
 
 `/api/search` takes `q`, `limit`, `style`, `category` and returns JSON results
@@ -60,7 +65,7 @@ curl "https://withicons.com/api/icon/trash"
 | https://withicons.com/icons.json | every icon: name, category, description, aliases, tags, styles |
 | https://withicons.com/llms.txt | short guide for LLMs; `llms-full.txt` adds the complete list |
 | https://withicons.com/skill/SKILL.md | this skill |
-| [icons.md](icons.md) | all 300 canonical names with categories and aliases (offline) |
+| [icons.md](icons.md) | all 500 canonical names with categories and aliases (offline) |
 
 ## In code
 

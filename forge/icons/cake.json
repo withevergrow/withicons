@@ -1,0 +1,85 @@
+{
+  "name": "cake",
+  "category": "food",
+  "description": "A layered birthday cake with icing and a lit candle for birthdays, celebrations, and desserts.",
+  "aliases": [
+    "birthday-cake",
+    "birthday",
+    "dessert",
+    "anniversary",
+    "celebration-cake",
+    "bakery",
+    "party-cake",
+    "gateau",
+    "birthday-party"
+  ],
+  "tags": [
+    "birthday",
+    "celebration",
+    "dessert",
+    "party",
+    "candle",
+    "bakery"
+  ],
+  "paths": [
+    {
+      "d": "M4 21 V13 A2 2 0 0 1 6 11 H18 A2 2 0 0 1 20 13 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 15 A2 2 0 0 0 8 15 A2 2 0 0 0 12 15 A2 2 0 0 0 16 15 A2 2 0 0 0 20 15",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8.5 V11",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2.5 C13 3.5 13.5 4.25 13.5 4.75 A1.5 1.5 0 0 1 10.5 4.75 C10.5 4.25 11 3.5 12 2.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 21 V13 A2 2 0 0 1 6 11 H18 A2 2 0 0 1 20 13 V21 Z",
+    "M12 2.5 C13 3.5 13.5 4.25 13.5 4.75 A1.5 1.5 0 0 1 10.5 4.75 C10.5 4.25 11 3.5 12 2.5 Z"
+  ],
+  "cutouts": [
+    "M4 15 A2 2 0 0 0 8 15 A2 2 0 0 0 12 15 A2 2 0 0 0 16 15 A2 2 0 0 0 20 15"
+  ],
+  "synonyms": [
+    "happy birthday",
+    "birthday party",
+    "birthday candle",
+    "candle",
+    "party",
+    "celebrate",
+    "celebration",
+    "cupcake",
+    "pastry",
+    "baking",
+    "sweet",
+    "sweets",
+    "treat",
+    "bake",
+    "wedding cake",
+    "layer cake",
+    "sponge cake",
+    "cheesecake",
+    "icing",
+    "frosting",
+    "b-day",
+    "bday",
+    "special day",
+    "event",
+    "festive",
+    "patisserie",
+    "cakes",
+    "birthdays",
+    "caek",
+    "birthdy"
+  ]
+}

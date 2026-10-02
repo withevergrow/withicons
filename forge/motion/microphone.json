@@ -1,0 +1,44 @@
+{
+  "name": "microphone",
+  "intent": "pulses like it is picking up your voice",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.8
+    },
+    {
+      "preset": "nod",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "microphone-off",
+      "effect": "fade"
+    },
+    {
+      "to": "stop",
+      "effect": "scale"
+    },
+    {
+      "to": "microphone@solid",
+      "effect": "scale"
+    }
+  ]
+}

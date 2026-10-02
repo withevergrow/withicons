@@ -1,0 +1,8 @@
+{
+  "name": "parking",
+  "intent": "pulses softly like a sign showing a free space",
+  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "pop", "duration": 0.5 },
+  "alt": [ { "preset": "flip" }, { "preset": "glow" } ],
+  "swap": [ { "to": "car", "effect": "slide-down" }, { "to": "map-pin", "effect": "flip" }, { "to": "parking@solid", "effect": "scale" } ]
+}

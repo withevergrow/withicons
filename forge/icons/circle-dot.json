@@ -1,0 +1,78 @@
+{
+  "name": "circle-dot",
+  "category": "layout",
+  "description": "A circle with a solid dot in the centre, the selected radio button or a recording point.",
+  "aliases": [
+    "radio-button",
+    "radio-checked",
+    "radio-selected",
+    "radio-on",
+    "option-selected",
+    "dot-circle",
+    "record-dot",
+    "circle-filled-dot",
+    "selected-option"
+  ],
+  "tags": [
+    "radio button",
+    "selected",
+    "option",
+    "choice",
+    "form",
+    "dot",
+    "circle"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.25 12 A2.25 2.25 0 1 1 9.75 12 A2.25 2.25 0 1 1 14.25 12 Z M12.75 12 A0.75 0.75 0 1 1 11.25 12 A0.75 0.75 0 1 1 12.75 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M19 12 A7 7 0 1 1 5 12 A7 7 0 1 1 19 12 Z M15.5 12 A3.5 3.5 0 1 1 8.5 12 A3.5 3.5 0 1 1 15.5 12 Z"
+  ],
+  "synonyms": [
+    "radio input",
+    "radio option",
+    "selected radio button",
+    "single choice",
+    "pick one",
+    "chosen",
+    "choose",
+    "choice",
+    "option",
+    "select",
+    "selection",
+    "active option",
+    "checked option",
+    "poll",
+    "vote",
+    "survey answer",
+    "multiple choice",
+    "quiz answer",
+    "record",
+    "recording",
+    "rec",
+    "live",
+    "point",
+    "dot in circle",
+    "circle with dot",
+    "center point",
+    "centre point",
+    "bullseye",
+    "target dot",
+    "focus point",
+    "origin",
+    "location point",
+    "you are here",
+    "radiobutton",
+    "radio buton"
+  ]
+}

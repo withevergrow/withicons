@@ -1,0 +1,67 @@
+{
+  "name": "indent-increase",
+  "category": "text",
+  "description": "Lines of text with a right-pointing arrow for increasing the indent and nesting text.",
+  "aliases": [
+    "indent",
+    "increase-indent",
+    "indent-more",
+    "indent-right",
+    "tab-right",
+    "nest",
+    "text-indent",
+    "add-indent"
+  ],
+  "synonyms": [
+    "increase indent",
+    "indent text",
+    "move right",
+    "tab",
+    "tab in",
+    "nest list",
+    "sub item",
+    "child item",
+    "shift right",
+    "paragraph indent",
+    "bullet level",
+    "list level",
+    "text formatting",
+    "word processor",
+    "editor toolbar",
+    "indentation",
+    "ident",
+    "indnet"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "indent",
+    "editor",
+    "list",
+    "typography"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 9.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 14.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 19.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H9 M6 9 L9 12 L6 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

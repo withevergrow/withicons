@@ -1,0 +1,90 @@
+{
+  "name": "school",
+  "category": "education",
+  "description": "School building with a flag for schools, campuses, and education.",
+  "aliases": [
+    "school-building",
+    "schoolhouse",
+    "campus",
+    "elementary",
+    "primary-school",
+    "institute",
+    "high-school",
+    "secondary-school",
+    "kindergarten",
+    "school-house"
+  ],
+  "tags": [
+    "education",
+    "building",
+    "school",
+    "learning",
+    "campus",
+    "students"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V16 A2 2 0 0 1 5 14 H7 V12 L12 8 L17 12 V14 H19 A2 2 0 0 1 21 16 V21 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 14 V21 M17 14 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M10 21 V18 A2 2 0 0 1 14 18 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8 V2.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 L16.5 4 L12 5.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V16 A2 2 0 0 1 5 14 H7 V12 L12 8 L17 12 V14 H19 A2 2 0 0 1 21 16 V21 Z",
+    "M12 2.5 L16.5 4 L12 5.5 Z"
+  ],
+  "cutouts": [
+    "M10 21 V18 A2 2 0 0 1 14 18 V21 Z",
+    "M7 15 V21",
+    "M17 15 V21"
+  ],
+  "synonyms": [
+    "school house",
+    "school building",
+    "classroom",
+    "education",
+    "learning",
+    "students",
+    "pupils",
+    "teacher",
+    "teachers",
+    "class",
+    "classes",
+    "academy",
+    "college",
+    "university",
+    "academic",
+    "k-12",
+    "k12",
+    "public school",
+    "private school",
+    "elementary school",
+    "middle school",
+    "preschool",
+    "nursery school",
+    "back to school",
+    "enrol",
+    "enroll",
+    "enrollment",
+    "enrolment",
+    "institution",
+    "schools",
+    "schol",
+    "shcool"
+  ]
+}

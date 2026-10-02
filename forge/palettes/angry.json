@@ -1,0 +1,26 @@
+{
+  "name": "angry",
+  "palettes": [
+    {"id":"seeing-red","name":"Seeing red","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0505","c1":"#F2453D","c2":"#F57A5E","c3":"#FF9A8A","c4":"#FFB54A","tint":"#FCDAD8","accent":"#FFC933","shadow":"#6D1F1B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hot-head","name":"Hot head","tags":["true-to-life"],"colors":{"ink":"#2A0E05","c1":"#FF6B2C","c2":"#F24A3A","c3":"#FFC48A","c4":"#FFA03C","tint":"#FFE1D5","accent":"#FFE14D","shadow":"#733014","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"emoji-fume","name":"Emoji fume","tags":["true-to-life"],"colors":{"ink":"#2A1405","c1":"#FFB13D","c2":"#F2653D","c3":"#FFE0A3","c4":"#FF8A4A","tint":"#FFEFD8","accent":"#F2453D","shadow":"#73501B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grumpy-orange","name":"Grumpy orange","tags":["vivid"],"colors":{"ink":"#2E1205","c1":"#FF8A3D","c2":"#F26A3A","c3":"#FFD0A8","c4":"#C9A0F0","tint":"#FFE8D8","accent":"#7A4FC2","shadow":"#733E1B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cold-fury","name":"Cold fury","tags":["true-to-life"],"colors":{"ink":"#0E1640","c1":"#7B95FA","c2":"#5E7AF0","c3":"#BFD0FF","c4":"#F57A72","tint":"#E5EAFE","accent":"#F2453D","shadow":"#374371","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"furious-purple","name":"Furious purple","tags":["true-to-life","vivid"],"colors":{"ink":"#1F0A2E","c1":"#B57AEB","c2":"#F2655E","c3":"#D9B8F7","c4":"#FFC933","tint":"#F0E4FB","accent":"#FFC933","shadow":"#51376A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lava","name":"Lava","tags":["vivid","sunset"],"colors":{"ink":"#1F0505","c1":"#E8341C","c2":"#FF9A1F","c3":"#FFD23F","c4":"#FF6A2E","tint":"#FAD6D2","accent":"#FFD23F","shadow":"#68170D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"chili","name":"Chili pepper","tags":["nature","vivid"],"colors":{"ink":"#2A0505","c1":"#E0332B","c2":"#5FB04A","c3":"#FF8A6B","c4":"#F57A3A","tint":"#F9D6D5","accent":"#3A8A2E","shadow":"#651713","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rage-quit","name":"Rage quit","tags":["y2k","vivid"],"colors":{"ink":"#2A0520","c1":"#FF3D8A","c2":"#FF8A1F","c3":"#FFD0E2","c4":"#6FE8F2","tint":"#FFD8E8","accent":"#3DF5FF","shadow":"#731B3E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"blush-mad","name":"Blush mad","tags":["pastel","candy"],"colors":{"ink":"#3A0E14","c1":"#FF9AA2","c2":"#FF6F7D","c3":"#FFD6D9","c4":"#FFC48A","tint":"#FFEBEC","accent":"#FFB86B","shadow":"#734549","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"peachy-pout","name":"Peachy pout","tags":["pastel"],"colors":{"ink":"#3A1A10","c1":"#FFB38A","c2":"#F28E70","c3":"#FFE2D1","c4":"#FFD08A","tint":"#FFF0E8","accent":"#F27A5E","shadow":"#73513E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"brick-temper","name":"Brick temper","tags":["earthy"],"colors":{"ink":"#2A120A","c1":"#C8603A","c2":"#D98A5A","c3":"#E8B49A","c4":"#E8A33C","tint":"#F4DFD8","accent":"#E8A33C","shadow":"#5A2B1A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-steam","name":"70s steam","tags":["retro","sunset"],"colors":{"ink":"#2A100A","c1":"#E85A2E","c2":"#F2A13C","c3":"#F27A4A","c4":"#F2D06B","tint":"#FADED5","accent":"#F2D06B","shadow":"#682815","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-rouge","name":"Vintage rouge","tags":["vintage"],"colors":{"ink":"#2E1214","c1":"#C8645E","c2":"#D98A80","c3":"#E8C2B8","c4":"#D9B26A","tint":"#F4E0DF","accent":"#D9B26A","shadow":"#5A2D2A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"storm-gray","name":"Storm gray","tags":["grayscale"],"colors":{"ink":"#121418","c1":"#9AA0AA","c2":"#7E8590","c3":"#D1D5DB","c4":"#F27A72","tint":"#EBECEE","accent":"#E8453C","shadow":"#45484C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mono-red","name":"Mono red","tags":["mono"],"colors":{"ink":"#2A0505","c1":"#F27A72","c2":"#E85550","c3":"#FBC8C2","c4":"#F5A29A","tint":"#FCE4E3","accent":"#C8302A","shadow":"#6D3733","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"toxic-green","name":"Toxic green","tags":["vivid","nature"],"colors":{"ink":"#0E2A05","c1":"#8CD93C","c2":"#E8D93C","c3":"#D3F2A8","c4":"#6FBF3C","tint":"#E8F7D8","accent":"#E8453C","shadow":"#3F621B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"winter-chill","name":"Winter grump","tags":["seasonal"],"colors":{"ink":"#0E1E33","c1":"#8CB8E8","c2":"#F57A72","c3":"#D3E6F7","c4":"#6FA0DE","tint":"#E8F1FA","accent":"#E8453C","shadow":"#3F5368","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holiday-grinch","name":"Holiday grinch","tags":["seasonal"],"colors":{"ink":"#102A0E","c1":"#6FBF3C","c2":"#F2524A","c3":"#C8EBA8","c4":"#F2C14E","tint":"#E2F2D8","accent":"#D7261E","shadow":"#32561B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-rage","name":"Neon rage","tags":["neon","on-dark"],"colors":{"ink":"#FF3D5A","c1":"#2A060C","c2":"#FFE14D","c3":"#FF8A3D","c4":"#4A0E18","tint":"#6A4A50","accent":"#FFE14D","shadow":"#0E0205","shine":"#FFB3BF","edge":"#1A1A26"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FF3B30","c2":"#FFD60A","c3":"#FFFFFF","c4":"#FF8A00","tint":"#FFD8D6","accent":"#FFD60A","shadow":"#731B16","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "watch",
+  "intent": "ticks along with each second, tilts like a glance at the wrist",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 1
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "steps": 12,
+      "duration": 6
+    },
+    {
+      "preset": "nod",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "clock",
+      "effect": "fade"
+    },
+    {
+      "to": "timer",
+      "effect": "rotate"
+    }
+  ]
+}

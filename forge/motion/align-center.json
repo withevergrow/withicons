@@ -1,0 +1,35 @@
+{
+  "name": "align-center",
+  "intent": "settles its lines toward the middle",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly"
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nod",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "align-left",
+      "effect": "slide-left"
+    },
+    {
+      "to": "align-right",
+      "effect": "slide-right"
+    },
+    {
+      "to": "align-justify",
+      "effect": "fade"
+    }
+  ]
+}

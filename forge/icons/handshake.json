@@ -1,0 +1,91 @@
+{
+  "name": "handshake",
+  "category": "users",
+  "description": "Two hands clasped in a handshake for deals, partnerships, and agreements.",
+  "aliases": [
+    "deal",
+    "partnership",
+    "agreement",
+    "partners",
+    "collaboration",
+    "shake-hands",
+    "alliance",
+    "contract-deal",
+    "hand-shake",
+    "handshaking",
+    "shaking-hands",
+    "greeting"
+  ],
+  "tags": [
+    "deal",
+    "partnership",
+    "agreement",
+    "hands",
+    "business",
+    "trust"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 8.5 V16",
+      "plate": "K"
+    },
+    {
+      "d": "M21.5 8.5 V16",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 10 H6 L9.5 7.5 C10.4 6.9 11.6 6.9 12.5 7.5 L17.5 11 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M21.5 14 H18.5 L14.5 18 A1.75 1.75 0 0 1 12 15.5 L13 14.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13 14.5 L11.5 16 A1.75 1.75 0 0 1 9 13.5 L11.5 11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 14 H5 L8 17",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M2.5 10 H6 L9.5 7.5 C10.4 6.9 11.6 6.9 12.5 7.5 L17.5 11 H21.5 V14 H18.5 L14.5 18 A1.75 1.75 0 0 1 12 15.5 L11.5 16 A1.75 1.75 0 0 1 9 13.5 L8 17 L5 14 H2.5 Z"
+  ],
+  "cutouts": [
+    "M12 15.5 L13 14.5",
+    "M9 13.5 L11.5 11"
+  ],
+  "synonyms": [
+    "handshakes",
+    "shake on it",
+    "it's a deal",
+    "done deal",
+    "agree",
+    "agreed",
+    "cooperation",
+    "collaborate",
+    "teamwork",
+    "join forces",
+    "together",
+    "union",
+    "trust",
+    "contract",
+    "negotiation",
+    "business deal",
+    "b2b",
+    "partner program",
+    "affiliate",
+    "welcome",
+    "meet",
+    "introduction",
+    "hello",
+    "peace",
+    "respect",
+    "sponsor",
+    "merger",
+    "handshak",
+    "hand shake icon"
+  ]
+}

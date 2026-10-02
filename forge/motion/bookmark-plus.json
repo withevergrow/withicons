@@ -1,0 +1,41 @@
+{
+  "name": "bookmark-plus",
+  "intent": "floats gently, then pops when you save it",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "nod",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "bookmark-plus@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "bookmark",
+      "effect": "morph"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    }
+  ]
+}

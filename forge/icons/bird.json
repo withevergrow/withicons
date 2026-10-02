@@ -1,0 +1,84 @@
+{
+  "name": "bird",
+  "category": "nature",
+  "description": "A small songbird in profile for birds, tweets, nature and freedom.",
+  "aliases": [
+    "songbird",
+    "sparrow",
+    "tweet-bird",
+    "robin",
+    "birdwatching",
+    "avian",
+    "dove",
+    "birdie",
+    "finch",
+    "chirp"
+  ],
+  "tags": [
+    "animal",
+    "bird",
+    "nature",
+    "wildlife",
+    "tweet"
+  ],
+  "paths": [
+    {
+      "d": "M19 8 C19 13.5 15.5 18 10.5 18 C7.75 18 5.75 16.75 4.75 14.5 L2.5 9.5 L7.25 11.25 C8.75 10.25 10.25 9.5 12 9 C12 6.5 13.5 4.5 15.5 4.5 C17.4 4.5 19 6 19 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19 6.75 L21.5 8 L19 9.25",
+      "plate": "A"
+    },
+    {
+      "d": "M14.75 11 C14.75 14 12 15.5 8.25 14",
+      "plate": "A"
+    },
+    {
+      "d": "M15.75 7.5 V8",
+      "plate": "A"
+    },
+    {
+      "d": "M10 18 V21 M13.5 17.25 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 8 C19 13.5 15.5 18 10.5 18 C7.75 18 5.75 16.75 4.75 14.5 L2.5 9.5 L7.25 11.25 C8.75 10.25 10.25 9.5 12 9 C12 6.5 13.5 4.5 15.5 4.5 C17.4 4.5 19 6 19 8 Z",
+    "M19 6.75 L21.5 8 L19 9.25 Z"
+  ],
+  "cutouts": [
+    "M14.75 11 C14.75 14 12 15.5 8.25 14",
+    "M16.65 7.75 A0.9 0.9 0 1 1 14.85 7.75 A0.9 0.9 0 1 1 16.65 7.75 Z"
+  ],
+  "synonyms": [
+    "birds",
+    "tweet",
+    "tweeting",
+    "twitter",
+    "chirping",
+    "birdsong",
+    "bird watching",
+    "birding",
+    "bluebird",
+    "canary",
+    "parrot",
+    "budgie",
+    "pigeon",
+    "wren",
+    "tit",
+    "feather",
+    "wings",
+    "flight",
+    "freedom",
+    "free as a bird",
+    "peace",
+    "spring",
+    "garden bird",
+    "wildlife",
+    "nest",
+    "early bird",
+    "brid",
+    "birb"
+  ]
+}

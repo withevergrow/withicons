@@ -1,0 +1,84 @@
+{
+  "name": "person-running",
+  "category": "sports",
+  "description": "Running person for running, jogging, activity, and exercise.",
+  "aliases": [
+    "running",
+    "run-person",
+    "jogging",
+    "runner",
+    "sprint",
+    "jog",
+    "athlete",
+    "running-man",
+    "jogger",
+    "marathon",
+    "person-run"
+  ],
+  "tags": [
+    "sports",
+    "person",
+    "fitness",
+    "activity",
+    "movement"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 4.5 A2 2 0 1 1 13.5 4.5 A2 2 0 1 1 17.5 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13 8.5 L10.5 14 L14 16.5 L12.5 21",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 14 L8 18 L4 18.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7 11.5 L9.5 8.5 H13 L15.5 12 L18.5 10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 4.5 A2 2 0 1 1 13.5 4.5 A2 2 0 1 1 17.5 4.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "run",
+    "running person",
+    "man running",
+    "woman running",
+    "sprinter",
+    "sprinting",
+    "race",
+    "racing",
+    "marathon runner",
+    "5k",
+    "10k",
+    "fun run",
+    "track and field",
+    "track",
+    "athletics",
+    "cardio",
+    "workout",
+    "fitness",
+    "exercise",
+    "active",
+    "activity",
+    "move",
+    "moving",
+    "hurry",
+    "rush",
+    "fast",
+    "quick",
+    "speed",
+    "escape",
+    "steps",
+    "health",
+    "training",
+    "physical activity",
+    "runing",
+    "excercise"
+  ]
+}

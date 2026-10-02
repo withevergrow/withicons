@@ -1,0 +1,82 @@
+{
+  "name": "hand-heart",
+  "category": "users",
+  "description": "An open hand holding a heart for charity, donations, care, and volunteering.",
+  "aliases": [
+    "charity",
+    "donate",
+    "donation",
+    "volunteer",
+    "care",
+    "kindness",
+    "giving",
+    "nonprofit",
+    "heart-hand",
+    "hand-holding-heart",
+    "give-love"
+  ],
+  "tags": [
+    "charity",
+    "donate",
+    "care",
+    "heart",
+    "hand",
+    "volunteer"
+  ],
+  "paths": [
+    {
+      "d": "M3 13 V22",
+      "plate": "K"
+    },
+    {
+      "d": "M3 14.5 H7.5 C8.6 14.5 9.6 14.9 10.4 15.6 L11.15 16.25 H14 A1.5 1.5 0 0 1 14 19.25 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 21 H13.5 C14.6 21 15.6 20.6 16.4 19.9 L20.6 16.2 A1.6 1.6 0 0 0 18.4 13.9 L15.4 16.4",
+      "plate": "K"
+    },
+    {
+      "d": "M12 11.28 C12 11.28 7.05 8.36 7.05 4.9 C7.05 3.41 8.21 2.2 9.69 2.2 C10.68 2.2 11.51 2.75 12 3.58 C12.5 2.75 13.32 2.2 14.31 2.2 C15.79 2.2 16.95 3.41 16.95 4.9 C16.95 8.36 12 11.28 12 11.28 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 11.28 C12 11.28 7.05 8.36 7.05 4.9 C7.05 3.41 8.21 2.2 9.69 2.2 C10.68 2.2 11.51 2.75 12 3.58 C12.5 2.75 13.32 2.2 14.31 2.2 C15.79 2.2 16.95 3.41 16.95 4.9 C16.95 8.36 12 11.28 12 11.28 Z",
+    "M3 14.5 H7.5 C8.6 14.5 9.6 14.9 10.4 15.6 L11.15 16.25 H14 L15.4 16.4 L18.4 13.9 A1.6 1.6 0 0 1 20.6 16.2 L16.4 19.9 C15.6 20.6 14.6 21 13.5 21 H3 Z"
+  ],
+  "cutouts": [
+    "M9.5 19.25 H14 A1.5 1.5 0 0 0 14 16.25"
+  ],
+  "synonyms": [
+    "make a donation",
+    "donate now",
+    "give back",
+    "fundraising",
+    "fundraiser",
+    "non-profit",
+    "non profit",
+    "ngo",
+    "foundation",
+    "support us",
+    "help others",
+    "volunteering",
+    "community service",
+    "social good",
+    "philanthropy",
+    "compassion",
+    "caring",
+    "healthcare",
+    "wellbeing",
+    "well-being",
+    "love",
+    "generosity",
+    "tip",
+    "sponsor",
+    "contribute",
+    "gift of love",
+    "crowdfunding",
+    "donnate",
+    "volunteer work"
+  ]
+}

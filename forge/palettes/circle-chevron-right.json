@@ -1,0 +1,449 @@
+{
+  "name": "circle-chevron-right",
+  "palettes": [
+    {
+      "id": "next-button-blue",
+      "name": "Next button blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E1A3A",
+        "c1": "#2563EB",
+        "c2": "#93C5FD",
+        "c3": "#1E40AF",
+        "c4": "#DBEAFE",
+        "tint": "#D3E0FB",
+        "accent": "#FBBF24",
+        "shadow": "#1A3F93",
+        "shine": "#D8E3FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "proceed-green",
+      "name": "Proceed green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A2A14",
+        "c1": "#16A34A",
+        "c2": "#86EFAC",
+        "c3": "#166534",
+        "c4": "#DCFCE7",
+        "tint": "#D0EDDB",
+        "accent": "#FACC15",
+        "shadow": "#10672F",
+        "shine": "#D5EEDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "play-red",
+      "name": "Play red",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A0A",
+        "c1": "#EF4444",
+        "c2": "#FCA5A5",
+        "c3": "#B91C1C",
+        "c4": "#FEE2E2",
+        "tint": "#FCDADA",
+        "accent": "#FDE047",
+        "shadow": "#8D2727",
+        "shine": "#FCDDDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "carousel-coral",
+      "name": "Carousel coral",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A120C",
+        "c1": "#FF6F59",
+        "c2": "#FFC2B5",
+        "c3": "#C2412D",
+        "c4": "#FFF0EB",
+        "tint": "#FFE2DE",
+        "accent": "#2EC4B6",
+        "shadow": "#9D4133",
+        "shine": "#FFE5E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "go-signal",
+      "name": "Go signal",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0F2010",
+        "c1": "#2ECC71",
+        "c2": "#F1C40F",
+        "c3": "#E74C3C",
+        "c4": "#ECFFF3",
+        "tint": "#D5F5E3",
+        "accent": "#F1C40F",
+        "shadow": "#1F7641",
+        "shine": "#D9F6E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jukebox",
+      "name": "Jukebox",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A1408",
+        "c1": "#E2442F",
+        "c2": "#F7B32B",
+        "c3": "#2F7F7A",
+        "c4": "#F4E3C6",
+        "tint": "#F9DAD5",
+        "accent": "#2F7F7A",
+        "shadow": "#862C1C",
+        "shine": "#FADDDA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "orange-slice",
+      "name": "Orange slice",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E2A05",
+        "c1": "#FFB627",
+        "c2": "#FFE48A",
+        "c3": "#F5761A",
+        "c4": "#FFF6D6",
+        "tint": "#FFF0D4",
+        "accent": "#6CBF3F",
+        "shadow": "#826213",
+        "shine": "#FFF2D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kiwi",
+      "name": "Kiwi",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1F2A0E",
+        "c1": "#8DBF3C",
+        "c2": "#E9F0C2",
+        "c3": "#4E7A1F",
+        "c4": "#3B2A1A",
+        "tint": "#E8F2D8",
+        "accent": "#5C3A21",
+        "shadow": "#567525",
+        "shine": "#EAF3DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seashell",
+      "name": "Seashell",
+      "tags": [
+        "ocean",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2A2A3E",
+        "c1": "#F7C6B7",
+        "c2": "#9FD8E6",
+        "c3": "#F2A08C",
+        "c4": "#FFF3EE",
+        "tint": "#FDF4F1",
+        "accent": "#6CB6CC",
+        "shadow": "#7C686E",
+        "shine": "#FEF5F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lagoon",
+      "name": "Lagoon",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06303A",
+        "c1": "#0FA3A3",
+        "c2": "#8BE0DC",
+        "c3": "#08666B",
+        "c4": "#E0F7F6",
+        "tint": "#CFEDED",
+        "accent": "#FF7F66",
+        "shadow": "#0B6A6F",
+        "shine": "#D4EEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pine-cone",
+      "name": "Pine cone",
+      "tags": [
+        "earthy",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A1A0E",
+        "c1": "#8A5A2E",
+        "c2": "#D7B07E",
+        "c3": "#4E3016",
+        "c4": "#4C7A4C",
+        "tint": "#E8DED5",
+        "accent": "#4C7A4C",
+        "shadow": "#5A3A1E",
+        "shine": "#EAE1D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sandstone",
+      "name": "Sandstone",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A2618",
+        "c1": "#D8A87A",
+        "c2": "#F3D9BE",
+        "c3": "#A0643C",
+        "c4": "#FBF1E7",
+        "tint": "#F7EEE4",
+        "accent": "#5A7D8C",
+        "shadow": "#896749",
+        "shine": "#F8EFE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "laser-lime",
+      "name": "Laser lime",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#7A5CFF",
+        "c2": "#D4FF3A",
+        "c3": "#00E0FF",
+        "c4": "#FF3DCB",
+        "tint": "#C3B6FF",
+        "accent": "#D4FF3A",
+        "shadow": "#433489",
+        "shine": "#E7E2FF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6EAF2",
+        "c1": "#2F3A52",
+        "c2": "#6C7FA8",
+        "c3": "#1C2335",
+        "c4": "#A8B5D1",
+        "tint": "#A1A6B1",
+        "accent": "#8AB4FF",
+        "shadow": "#1D2332",
+        "shine": "#DADCE0",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "bubblegum",
+      "name": "Bubblegum",
+      "tags": [
+        "candy",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A1A3C",
+        "c1": "#FF9ACF",
+        "c2": "#FFD6EC",
+        "c3": "#D35E9F",
+        "c4": "#FFF3FA",
+        "tint": "#FFEBF5",
+        "accent": "#8EDCF5",
+        "shadow": "#A55A86",
+        "shine": "#FFEDF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lilac",
+      "name": "Lilac",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#33264D",
+        "c1": "#B8A3F0",
+        "c2": "#E6DCFF",
+        "c3": "#7C63C8",
+        "c4": "#FFE9A8",
+        "tint": "#F1EDFC",
+        "accent": "#F6B8D0",
+        "shadow": "#76659F",
+        "shine": "#F2EEFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "emerald",
+      "name": "Emerald",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#06261A",
+        "c1": "#0E7A50",
+        "c2": "#6FD3A5",
+        "c3": "#054530",
+        "c4": "#E3F7EE",
+        "tint": "#CFE4DC",
+        "accent": "#D4AF37",
+        "shadow": "#0A5035",
+        "shine": "#D4E7E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose-gold",
+      "name": "Rose gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3A2420",
+        "c1": "#E2A792",
+        "c2": "#F6DED3",
+        "c3": "#A5654F",
+        "c4": "#FFF8F5",
+        "tint": "#F9EDE9",
+        "accent": "#7A2E3E",
+        "shadow": "#8E6659",
+        "shine": "#FAEFEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "indigo-ramp",
+      "name": "Indigo ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#14123A",
+        "c1": "#4338CA",
+        "c2": "#8B85E6",
+        "c3": "#C9C6F5",
+        "c4": "#EFEEFD",
+        "tint": "#D9D7F4",
+        "accent": "#8B85E6",
+        "shadow": "#2C2582",
+        "shine": "#DDDBF5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fog",
+      "name": "Fog",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1C1C1C",
+        "c1": "#A3A3A3",
+        "c2": "#DADADA",
+        "c3": "#666666",
+        "c4": "#F5F5F5",
+        "tint": "#EDEDED",
+        "accent": "#7A7A7A",
+        "shadow": "#606060",
+        "shine": "#EEEEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#00C2FF",
+        "c2": "#FFFFFF",
+        "c3": "#FFE600",
+        "c4": "#1A1A1A",
+        "tint": "#CCF3FF",
+        "accent": "#FFE600",
+        "shadow": "#006180",
+        "shine": "#D1F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-meadow",
+      "name": "Spring meadow",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1E3315",
+        "c1": "#9ACD5A",
+        "c2": "#F7D35A",
+        "c3": "#F49AC1",
+        "c4": "#EFF8E2",
+        "tint": "#EBF5DE",
+        "accent": "#F49AC1",
+        "shadow": "#507131",
+        "shine": "#EDF6E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-groove",
+      "name": "70s groove",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A1E0E",
+        "c1": "#F28C28",
+        "c2": "#D1495B",
+        "c3": "#F9C74F",
+        "c4": "#2A9D8F",
+        "tint": "#FCE8D4",
+        "accent": "#2A9D8F",
+        "shadow": "#96551B",
+        "shine": "#FDEAD8",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

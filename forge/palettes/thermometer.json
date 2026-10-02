@@ -1,0 +1,26 @@
+{
+  "name": "thermometer",
+  "palettes": [
+    {"id":"classic-red","name":"Classic red","tags":["true-to-life"],"colors":{"ink":"#1B2430","c1":"#E6F0F7","c2":"#E5322D","c3":"#FFC94A","c4":"#8FA6BF","tint":"#F8FBFD","accent":"#E5322D","shadow":"#818A94","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fever","name":"Fever","tags":["true-to-life"],"colors":{"ink":"#2E0A10","c1":"#FFD9CF","c2":"#D7263D","c3":"#FF8A3D","c4":"#FFE6A3","tint":"#FFF4F2","accent":"#D7263D","shadow":"#977270","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hot-day","name":"Hot day","tags":["vivid"],"colors":{"ink":"#2E1203","c1":"#FFB347","c2":"#E8412C","c3":"#FFE066","c4":"#C2185B","tint":"#FFEACB","accent":"#E8412C","shadow":"#976325","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cold-snap","name":"Cold snap","tags":["true-to-life"],"colors":{"ink":"#0D2340","c1":"#CFE7FA","c2":"#2F7DD1","c3":"#9EE6FF","c4":"#6C7FA6","tint":"#F2F8FE","accent":"#9EE6FF","shadow":"#6E859D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"freezing","name":"Freezing","tags":["seasonal"],"colors":{"ink":"#13283F","c1":"#E8F4FC","c2":"#5AB0F0","c3":"#B7A9E6","c4":"#2C4F7C","tint":"#F9FCFE","accent":"#5AB0F0","shadow":"#7E8E9E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"room-temp","name":"Room temp","tags":["corporate"],"colors":{"ink":"#0E2E21","c1":"#DDF3E8","c2":"#2DB37A","c3":"#FFC94A","c4":"#4A8FD6","tint":"#F5FCF9","accent":"#2DB37A","shadow":"#769185","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clinic-blue","name":"Clinic blue","tags":["corporate"],"colors":{"ink":"#0B2340","c1":"#EAF2FB","c2":"#0067C5","c3":"#E5322D","c4":"#9DB9D9","tint":"#F9FBFE","accent":"#E5322D","shadow":"#7B8B9E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFFFFF","c2":"#D50000","c3":"#FFC20E","c4":"#0050C8","tint":"#F4F4F4","accent":"#D50000","shadow":"#808080","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"heat-map","name":"Heat map","tags":["vivid"],"colors":{"ink":"#2A1205","c1":"#FFE08A","c2":"#F2542D","c3":"#5B2A86","c4":"#2EC4B6","tint":"#FFF6DE","accent":"#F2542D","shadow":"#957948","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel","name":"Pastel","tags":["pastel"],"colors":{"ink":"#2E3550","c1":"#D7E9FA","c2":"#FFB3B3","c3":"#FFE8A3","c4":"#CBB8F5","tint":"#F4F9FE","accent":"#FF9EB8","shadow":"#838FA5","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy","name":"Candy","tags":["candy"],"colors":{"ink":"#3D0F26","c1":"#FFD6EA","c2":"#FF4F8B","c3":"#FFE45E","c4":"#8FD8FF","tint":"#FFF4F9","accent":"#FF4F8B","shadow":"#9E7388","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-gauge","name":"Neon gauge","tags":["neon","on-dark"],"colors":{"ink":"#08081A","c1":"#8A7BFF","c2":"#FF2E63","c3":"#F8FF3A","c4":"#2DF6FF","tint":"#DEDAFF","accent":"#FF2E63","shadow":"#484086","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-gauge","name":"Y2K gauge","tags":["y2k"],"colors":{"ink":"#261F4A","c1":"#E2DBFF","c2":"#FF6FD8","c3":"#C9FF5A","c4":"#7CEBFF","tint":"#F7F5FF","accent":"#FF6FD8","shadow":"#847DA5","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"70s-heat","name":"70s heat","tags":["retro"],"colors":{"ink":"#2D1709","c1":"#F3D9A4","c2":"#D2462F","c3":"#E8A33D","c4":"#3E7C8C","tint":"#FCF4E6","accent":"#D2462F","shadow":"#907857","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lab-glass","name":"Lab glass","tags":["vintage"],"colors":{"ink":"#2A2520","c1":"#E4DED0","c2":"#A8432F","c3":"#C9A45A","c4":"#5E7480","tint":"#F7F6F2","accent":"#A8432F","shadow":"#878278","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"clay-rust","name":"Clay & rust","tags":["earthy"],"colors":{"ink":"#301B10","c1":"#E9D3B8","c2":"#B4532A","c3":"#D9A35B","c4":"#6E7A52","tint":"#F9F3EB","accent":"#B4532A","shadow":"#8D7764","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"red-ramp","name":"Red ramp","tags":["mono"],"colors":{"ink":"#2B0606","c1":"#F6C6C3","c2":"#C62828","c3":"#EE7B74","c4":"#7F1515","tint":"#FCEFEE","accent":"#C62828","shadow":"#916665","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#121212","c1":"#E0E0E0","c2":"#4A4A4A","c3":"#9A9A9A","c4":"#BEBEBE","tint":"#F6F6F6","accent":"#4A4A4A","shadow":"#797979","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sea-temp","name":"Sea temperature","tags":["ocean"],"colors":{"ink":"#0A2533","c1":"#CDEBF0","c2":"#FF6B57","c3":"#2EA3B8","c4":"#1D4E6E","tint":"#F1F9FB","accent":"#FF6B57","shadow":"#6C8892","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"warm-evening","name":"Warm evening","tags":["sunset"],"colors":{"ink":"#33162A","c1":"#FFE0C2","c2":"#E8546B","c3":"#FFB04A","c4":"#6A3D8F","tint":"#FFF6EE","accent":"#E8546B","shadow":"#997B76","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"brass-gauge","name":"Brass gauge","tags":["luxe"],"colors":{"ink":"#1A1406","c1":"#E9D9A6","c2":"#8E1B1B","c3":"#C9A33A","c4":"#2B2B2B","tint":"#F9F4E6","accent":"#8E1B1B","shadow":"#827756","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

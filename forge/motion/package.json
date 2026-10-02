@@ -1,0 +1,44 @@
+{
+  "name": "package",
+  "intent": "bounces softly like a parcel being delivered",
+  "loop": {
+    "preset": "bounce",
+    "amount": 0.45,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pass",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "truck",
+      "effect": "slide-right"
+    },
+    {
+      "to": "package@solid",
+      "effect": "scale"
+    }
+  ]
+}

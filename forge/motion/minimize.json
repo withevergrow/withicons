@@ -1,0 +1,33 @@
+{
+  "name": "minimize",
+  "intent": "draws inward like a window leaving fullscreen",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.5
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "maximize",
+      "effect": "morph"
+    },
+    {
+      "to": "zoom-out",
+      "effect": "fade"
+    }
+  ]
+}

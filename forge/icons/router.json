@@ -1,0 +1,80 @@
+{
+  "name": "router",
+  "category": "devices",
+  "description": "A wireless router with two antennas and status lights for home networks and internet hubs.",
+  "aliases": [
+    "wifi-router",
+    "wireless-router",
+    "modem",
+    "access-point",
+    "gateway",
+    "internet-box",
+    "hotspot-device",
+    "hub",
+    "broadband-router",
+    "home-hub"
+  ],
+  "tags": [
+    "devices",
+    "network",
+    "wifi",
+    "internet",
+    "hardware",
+    "wireless"
+  ],
+  "paths": [
+    {
+      "d": "M4 13 H20 A2 2 0 0 1 22 15 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V15 A2 2 0 0 1 4 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 13 L5 6",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 13 L19 6",
+      "plate": "A"
+    },
+    {
+      "d": "M6 16.75 V16.76 M9 16.75 V16.76 M13 16.75 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 13 H20 A2 2 0 0 1 22 15 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V15 A2 2 0 0 1 4 13 Z"
+  ],
+  "cutouts": [
+    "M7 16.75 A1 1 0 1 1 5 16.75 A1 1 0 1 1 7 16.75 Z",
+    "M10 16.75 A1 1 0 1 1 8 16.75 A1 1 0 1 1 10 16.75 Z",
+    "M13 16.75 H18"
+  ],
+  "synonyms": [
+    "internet",
+    "wifi",
+    "wi-fi",
+    "wireless",
+    "home network",
+    "broadband",
+    "isp",
+    "lan",
+    "wan",
+    "network device",
+    "antenna",
+    "antennas",
+    "connection",
+    "online",
+    "fibre",
+    "fiber",
+    "cable modem",
+    "dsl",
+    "mesh wifi",
+    "extender",
+    "repeater",
+    "status lights",
+    "restart router",
+    "reset router",
+    "routers",
+    "rooter",
+    "ruter"
+  ]
+}

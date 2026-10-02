@@ -1,0 +1,8 @@
+{
+  "name": "circle-play",
+  "intent": "gently pulses like a play button inviting you to start",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.5, "duration": 2 },
+  "hover": { "preset": "pop", "origin": [12, 12], "duration": 0.5 },
+  "alt": [ { "preset": "glow" }, { "preset": "nudge", "dir": 0, "amount": 0.4 }, { "preset": "zoom", "amount": 0.6 } ],
+  "swap": [ { "to": "circle-pause", "effect": "morph" }, { "to": "circle-stop", "effect": "scale" }, { "to": "circle-play@solid", "effect": "fade" } ]
+}

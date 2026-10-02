@@ -1,0 +1,91 @@
+{
+  "name": "tennis",
+  "category": "sports",
+  "description": "Tennis racket and ball for tennis, padel, and racket sports.",
+  "aliases": [
+    "tennis-racket",
+    "racket",
+    "racquet",
+    "tennis-racquet",
+    "tennis-ball",
+    "padel",
+    "badminton",
+    "squash",
+    "pickleball",
+    "racket-sport"
+  ],
+  "tags": [
+    "sports",
+    "racket",
+    "ball",
+    "game",
+    "court"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 A7.07 5.5 45 1 1 14 14 A7.07 5.5 45 1 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 14 L20.5 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 4.5 L13.5 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 7.5 L10.5 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.75 8.25 L8.25 12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M9.75 5.25 L5.25 9.75",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 5 A2.5 2.5 0 1 1 16.5 5 A2.5 2.5 0 1 1 21.5 5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 A7.07 5.5 45 1 1 14 14 A7.07 5.5 45 1 1 4 4 Z",
+    "M21.5 5 A2.5 2.5 0 1 1 16.5 5 A2.5 2.5 0 1 1 21.5 5 Z"
+  ],
+  "cutouts": [
+    "M7.5 4.5 L13.5 10.5",
+    "M4.5 7.5 L10.5 13.5",
+    "M12.75 8.25 L8.25 12.75",
+    "M9.75 5.25 L5.25 9.75"
+  ],
+  "synonyms": [
+    "tennis court",
+    "play tennis",
+    "serve",
+    "ace",
+    "match point",
+    "set",
+    "grand slam",
+    "table tennis",
+    "ping pong",
+    "raquet",
+    "rackett",
+    "tenis",
+    "tennnis",
+    "racket sports",
+    "racquet sports",
+    "court",
+    "net",
+    "ball",
+    "sport",
+    "sports",
+    "lesson",
+    "club",
+    "game set match",
+    "strings",
+    "shuttlecock"
+  ]
+}

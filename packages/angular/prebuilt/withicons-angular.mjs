@@ -20,7 +20,7 @@ var WithAttrsDirective = class WithAttrsDirective {
 	}
 	static ɵfac = i0.ɵɵngDeclareFactory({
 		minVersion: "12.0.0",
-		version: "22.2.0",
+		version: "22.2.1",
 		ngImport: i0,
 		type: WithAttrsDirective,
 		deps: [],
@@ -28,7 +28,7 @@ var WithAttrsDirective = class WithAttrsDirective {
 	});
 	static ɵdir = i0.ɵɵngDeclareDirective({
 		minVersion: "14.0.0",
-		version: "22.2.0",
+		version: "22.2.1",
 		type: WithAttrsDirective,
 		isStandalone: true,
 		selector: "[withAttrs]",
@@ -39,7 +39,7 @@ var WithAttrsDirective = class WithAttrsDirective {
 };
 i0.ɵɵngDeclareClassMetadata({
 	minVersion: "12.0.0",
-	version: "22.2.0",
+	version: "22.2.1",
 	ngImport: i0,
 	type: WithAttrsDirective,
 	decorators: [{
@@ -111,7 +111,7 @@ function shapeToD(tag, a) {
 		case "line": return `M${n("x1")} ${n("y1")}L${n("x2")} ${n("y2")}`;
 		case "polyline":
 		case "polygon": {
-			const v = String(a["points"] ?? "").trim().split(/[s,]+/).map(Number);
+			const v = String(a["points"] ?? "").trim().split(/[\s,]+/).map(Number);
 			const pts = [];
 			for (let i = 0; i + 1 < v.length; i += 2) pts.push(`${v[i]} ${v[i + 1]}`);
 			return pts.length ? "M" + pts.join("L") + (tag === "polygon" ? "Z" : "") : null;
@@ -156,6 +156,8 @@ var WithIconComponent = class WithIconComponent {
 	strokeWidth;
 	absoluteStrokeWidth = false;
 	title;
+	ariaLabel;
+	ariaLabelledby;
 	registry = inject(WITH_ICONS, { optional: true });
 	rootAttrs = {};
 	paths = [];
@@ -198,7 +200,9 @@ var WithIconComponent = class WithIconComponent {
 		}
 		if (color !== "currentColor") a["color"] = color;
 		a["class"] = `withi withi-${data ? data.name : this.name || "unknown"}`;
-		if (this.title) a["role"] = "img";
+		if (this.ariaLabel) a["aria-label"] = this.ariaLabel;
+		if (this.ariaLabelledby) a["aria-labelledby"] = this.ariaLabelledby;
+		if (this.title || this.ariaLabel || this.ariaLabelledby) a["role"] = "img";
 		else a["aria-hidden"] = "true";
 		this.rootAttrs = a;
 		this.paths = data ? pathsOf(data.node) : [];
@@ -206,7 +210,7 @@ var WithIconComponent = class WithIconComponent {
 	}
 	static ɵfac = i0.ɵɵngDeclareFactory({
 		minVersion: "12.0.0",
-		version: "22.2.0",
+		version: "22.2.1",
 		ngImport: i0,
 		type: WithIconComponent,
 		deps: [],
@@ -214,7 +218,7 @@ var WithIconComponent = class WithIconComponent {
 	});
 	static ɵcmp = i0.ɵɵngDeclareComponent({
 		minVersion: "17.0.0",
-		version: "22.2.0",
+		version: "22.2.1",
 		type: WithIconComponent,
 		isStandalone: true,
 		selector: "with-icon",
@@ -230,10 +234,16 @@ var WithIconComponent = class WithIconComponent {
 				"absoluteStrokeWidth",
 				booleanAttribute
 			],
-			title: "title"
+			title: "title",
+			ariaLabel: ["aria-label", "ariaLabel"],
+			ariaLabelledby: ["aria-labelledby", "ariaLabelledby"]
 		},
 		host: {
-			properties: { "attr.title": "null" },
+			properties: {
+				"attr.title": "null",
+				"attr.aria-label": "null",
+				"attr.aria-labelledby": "null"
+			},
 			classAttribute: "with-icon"
 		},
 		usesOnChanges: true,
@@ -253,7 +263,7 @@ var WithIconComponent = class WithIconComponent {
 };
 i0.ɵɵngDeclareClassMetadata({
 	minVersion: "12.0.0",
-	version: "22.2.0",
+	version: "22.2.1",
 	ngImport: i0,
 	type: WithIconComponent,
 	decorators: [{
@@ -265,7 +275,9 @@ i0.ɵɵngDeclareClassMetadata({
 			changeDetection: ChangeDetectionStrategy.OnPush,
 			host: {
 				class: "with-icon",
-				"[attr.title]": "null"
+				"[attr.title]": "null",
+				"[attr.aria-label]": "null",
+				"[attr.aria-labelledby]": "null"
 			},
 			encapsulation: ViewEncapsulation.None,
 			template: "@if (found) {<svg [withAttrs]=\"rootAttrs\">@if (title) {<svg:title>{{ title }}</svg:title>}@for (p of paths; track $index) {<svg:path [withAttrs]=\"p\" />}<ng-content /></svg>}",
@@ -283,7 +295,15 @@ i0.ɵɵngDeclareClassMetadata({
 			type: Input,
 			args: [{ transform: booleanAttribute }]
 		}],
-		title: [{ type: Input }]
+		title: [{ type: Input }],
+		ariaLabel: [{
+			type: Input,
+			args: ["aria-label"]
+		}],
+		ariaLabelledby: [{
+			type: Input,
+			args: ["aria-labelledby"]
+		}]
 	}
 });
 export { WITH_ICONS, WithAttrsDirective, WithIconComponent, isWithIconData, lookupWithIcon, provideWithIcons };

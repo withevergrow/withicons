@@ -1,0 +1,94 @@
+{
+  "name": "angry",
+  "category": "users",
+  "description": "An angry face with furrowed brows and a frown for frustration and very negative feedback.",
+  "aliases": [
+    "mad",
+    "furious",
+    "angry-face",
+    "rage",
+    "upset",
+    "frustrated",
+    "annoyed-face",
+    "enraged",
+    "irate",
+    "mad-face"
+  ],
+  "tags": [
+    "face",
+    "emotion",
+    "mood",
+    "angry",
+    "feedback",
+    "emoji"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 7.5 L10.5 9.25",
+      "plate": "A"
+    },
+    {
+      "d": "M17 7.5 L13.5 9.25",
+      "plate": "A"
+    },
+    {
+      "d": "M9 12 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 12 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 17.5 A3.5 3.5 0 0 1 15 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M7 7.5 L10.5 9.25",
+    "M17 7.5 L13.5 9.25",
+    "M10 12.25 A1 1.25 0 1 1 8 12.25 A1 1.25 0 1 1 10 12.25 Z",
+    "M16 12.25 A1 1.25 0 1 1 14 12.25 A1 1.25 0 1 1 16 12.25 Z",
+    "M9 17.5 A3.5 3.5 0 0 1 15 17.5"
+  ],
+  "synonyms": [
+    "anger",
+    "angry emoji",
+    "annoyed",
+    "irritated",
+    "livid",
+    "fuming",
+    "outraged",
+    "hate",
+    "hostile",
+    "temper",
+    "bad mood",
+    "very unhappy",
+    "very dissatisfied",
+    "worst rating",
+    "terrible",
+    "complaint",
+    "complain",
+    "negative feedback",
+    "emoji",
+    "emoticon",
+    "smiley",
+    "mood",
+    "emotion",
+    "feelings",
+    "grumpy",
+    "grr",
+    "pissed off",
+    "red face",
+    "furrowed brows",
+    "angery",
+    "angy"
+  ]
+}

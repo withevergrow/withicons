@@ -1,0 +1,44 @@
+{
+  "name": "bell",
+  "intent": "rings from its hook like a notification just arrived",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      4.5
+    ],
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      4.5
+    ],
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell-off",
+      "effect": "flip"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "fade"
+    },
+    {
+      "to": "bell@solid",
+      "effect": "scale"
+    }
+  ]
+}

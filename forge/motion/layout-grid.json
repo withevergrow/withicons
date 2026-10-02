@@ -1,0 +1,35 @@
+{
+  "name": "layout-grid",
+  "intent": "tiles breathe calmly, then pop into a grid view",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    },
+    {
+      "preset": "spin-once"
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-list",
+      "effect": "flip"
+    },
+    {
+      "to": "layout-dashboard",
+      "effect": "morph"
+    },
+    {
+      "to": "kanban",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "shuffle",
+  "intent": "arrows cross and mix things up",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "flip",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "repeat",
+      "effect": "rotate"
+    }
+  ]
+}

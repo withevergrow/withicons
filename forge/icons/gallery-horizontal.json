@@ -1,0 +1,69 @@
+{
+  "name": "gallery-horizontal",
+  "category": "layout",
+  "description": "A centred slide between two peeking neighbours, for carousels and sliders.",
+  "aliases": [
+    "carousel",
+    "slider",
+    "slideshow",
+    "swiper",
+    "image-slider",
+    "slides-strip",
+    "gallery-strip",
+    "image-carousel",
+    "photo-slider",
+    "horizontal-scroll"
+  ],
+  "tags": [
+    "gallery",
+    "carousel",
+    "slider",
+    "slides",
+    "media",
+    "scroll"
+  ],
+  "paths": [
+    {
+      "d": "M9 4 H15 A2 2 0 0 1 17 6 V18 A2 2 0 0 1 15 20 H9 A2 2 0 0 1 7 18 V6 A2 2 0 0 1 9 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 V17",
+      "plate": "A"
+    },
+    {
+      "d": "M21 7 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 4 H15 A2 2 0 0 1 17 6 V18 A2 2 0 0 1 15 20 H9 A2 2 0 0 1 7 18 V6 A2 2 0 0 1 9 4 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "photo gallery",
+    "image gallery",
+    "slides",
+    "swipe",
+    "swipe left",
+    "swipe right",
+    "scroll sideways",
+    "horizontal list",
+    "cards",
+    "card slider",
+    "stories",
+    "featured",
+    "hero slider",
+    "banner rotator",
+    "rotating banner",
+    "product slider",
+    "reel",
+    "filmstrip",
+    "pager",
+    "paging",
+    "next slide",
+    "previous slide",
+    "caroussel",
+    "carosel"
+  ]
+}

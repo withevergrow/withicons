@@ -1,0 +1,7 @@
+{
+  "name": "atom",
+  "intent": "electron orbits turn slowly around the nucleus",
+  "loop":  { "preset": "spin", "origin": [12, 12], "duration": 6 },
+  "hover": { "preset": "spin-once", "origin": [12, 12] },
+  "alt":   [ { "preset": "orbit" }, { "preset": "pulse", "amount": 0.6 }, { "preset": "glow" } ]
+}

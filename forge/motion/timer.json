@@ -1,0 +1,55 @@
+{
+  "name": "timer",
+  "intent": "pulses like a stopwatch counting down",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      13.5
+    ],
+    "amount": 0.5,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 0.6,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        12,
+        13.5
+      ],
+      "steps": 12,
+      "duration": 6
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "clock",
+      "effect": "scale"
+    },
+    {
+      "to": "alarm-clock",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "timer@solid",
+      "effect": "scale"
+    }
+  ]
+}

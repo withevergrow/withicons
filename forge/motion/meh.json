@@ -1,0 +1,8 @@
+{
+  "name": "meh",
+  "intent": "blinks blankly, then gives an unimpressed little shrug",
+  "loop": { "preset": "blink", "origin": [12, 9.5], "duration": 5 },
+  "hover": { "preset": "tilt", "origin": [12, 21.5], "amount": 0.7, "duration": 1 },
+  "alt": [ { "preset": "shake", "amount": 0.4 }, { "preset": "breathe", "amount": 0.5 } ],
+  "swap": [ { "to": "smile", "effect": "morph" }, { "to": "frown", "effect": "morph" }, { "to": "meh@solid", "effect": "fade" } ]
+}

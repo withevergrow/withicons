@@ -1,0 +1,27 @@
+{
+  "name": "bookmark",
+  "intent": "floats gently, then pops when you save it",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bookmark@solid",
+      "effect": "scale"
+    }
+  ]
+}

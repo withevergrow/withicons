@@ -1,0 +1,36 @@
+{
+  "name": "calendar",
+  "intent": "turns its page like a new day arriving",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "float",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "calendar-check",
+      "effect": "scale"
+    },
+    {
+      "to": "calendar-plus",
+      "effect": "fade"
+    },
+    {
+      "to": "calendar-days",
+      "effect": "flip"
+    }
+  ]
+}

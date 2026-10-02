@@ -1,0 +1,8 @@
+{
+  "name": "stethoscope",
+  "intent": "swings from the earpieces, then thumps like it hears a heartbeat",
+  "loop": { "preset": "sway", "origin": [9, 3], "amount": 0.6, "duration": 3.4 },
+  "hover": { "preset": "beat", "origin": [19, 11], "amount": 0.9 },
+  "alt": [ { "preset": "pulse", "origin": [19, 11], "amount": 0.7 }, { "preset": "rock", "origin": [9, 3], "amount": 0.7 } ],
+  "swap": [ { "to": "heart-pulse", "effect": "fade" }, { "to": "stethoscope@solid", "effect": "scale" } ]
+}

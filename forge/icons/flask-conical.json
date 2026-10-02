@@ -1,0 +1,76 @@
+{
+  "name": "flask-conical",
+  "category": "education",
+  "description": "Conical flask for chemistry, experiments, and lab tests.",
+  "aliases": [
+    "flask",
+    "beaker",
+    "chemistry",
+    "experiment",
+    "erlenmeyer",
+    "potion",
+    "lab-flask",
+    "conical-flask",
+    "erlenmeyer-flask",
+    "chemical"
+  ],
+  "tags": [
+    "science",
+    "chemistry",
+    "lab",
+    "experiment",
+    "liquid",
+    "education"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 3 V9 L4.25 18.25 A1.75 1.75 0 0 0 5.75 21 H18.25 A1.75 1.75 0 0 0 19.75 18.25 L14.5 9 V3",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M7 14.5 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.5 3 H14.5 V9 L19.75 18.25 A1.75 1.75 0 0 1 18.25 21 H5.75 A1.75 1.75 0 0 1 4.25 18.25 L9.5 9 Z"
+  ],
+  "cutouts": [
+    "M6 14.5 H18"
+  ],
+  "synonyms": [
+    "lab",
+    "laboratory",
+    "science",
+    "test",
+    "testing",
+    "trial",
+    "beta",
+    "experimental",
+    "labs",
+    "beta features",
+    "chemist",
+    "chemicals",
+    "reaction",
+    "solution",
+    "liquid",
+    "formula",
+    "mix",
+    "brew",
+    "magic potion",
+    "pharmacy",
+    "research",
+    "stem",
+    "test tube",
+    "a/b test",
+    "ab test",
+    "chem",
+    "flasks",
+    "erlenmeier",
+    "falsk"
+  ]
+}

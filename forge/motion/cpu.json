@@ -1,0 +1,34 @@
+{
+  "name": "cpu",
+  "intent": "hums with a steady pulse like a working processor",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 1,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flicker",
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "server",
+      "effect": "fade"
+    },
+    {
+      "to": "cpu@solid",
+      "effect": "scale"
+    }
+  ]
+}

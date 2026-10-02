@@ -1,0 +1,42 @@
+{
+  "name": "door-open",
+  "intent": "beckons you through, like a door inviting you in",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "flip",
+      "origin": [
+        14,
+        12
+      ],
+      "duration": 1.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "log-in",
+      "effect": "slide-left"
+    },
+    {
+      "to": "home",
+      "effect": "fade"
+    },
+    {
+      "to": "key",
+      "effect": "rotate"
+    }
+  ]
+}

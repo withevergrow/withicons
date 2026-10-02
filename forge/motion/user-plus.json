@@ -1,0 +1,48 @@
+{
+  "name": "user-plus",
+  "intent": "pops in like a new friend joining",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1.1,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user-check",
+      "effect": "morph"
+    },
+    {
+      "to": "user-minus",
+      "effect": "rotate"
+    },
+    {
+      "to": "users",
+      "effect": "slide-left"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "thermometer",
+  "intent": "reading rises and falls like a changing temperature",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.4,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        9,
+        17
+      ]
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "snowflake",
+      "effect": "fade"
+    },
+    {
+      "to": "sun",
+      "effect": "fade"
+    }
+  ]
+}

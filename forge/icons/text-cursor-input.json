@@ -1,0 +1,83 @@
+{
+  "name": "text-cursor-input",
+  "category": "layout",
+  "description": "A text box with a typing cursor for input fields, forms and anything you can type into.",
+  "aliases": [
+    "input-field",
+    "text-field",
+    "text-input",
+    "textbox",
+    "text-box",
+    "input-box",
+    "form-field",
+    "entry-field",
+    "edit-field",
+    "type-here"
+  ],
+  "tags": [
+    "input",
+    "text field",
+    "form",
+    "typing",
+    "cursor",
+    "editable"
+  ],
+  "paths": [
+    {
+      "d": "M11.5 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 H11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 7 H20 A2 2 0 0 1 22 9 V15 A2 2 0 0 1 20 17 H17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 12 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 3.5 H16.5 M14.5 3.5 V20.5 M12.5 20.5 H16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M11.5 7 H4 A2 2 0 0 0 2 9 V15 A2 2 0 0 0 4 17 H11.5 Z",
+    "M17.5 7 H20 A2 2 0 0 1 22 9 V15 A2 2 0 0 1 20 17 H17.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 12 H9"
+  ],
+  "synonyms": [
+    "text",
+    "type",
+    "typing",
+    "type here",
+    "enter text",
+    "write",
+    "edit text",
+    "editable",
+    "input text",
+    "text entry",
+    "form input",
+    "form",
+    "field",
+    "search box",
+    "search field",
+    "name field",
+    "email field",
+    "placeholder",
+    "caret",
+    "text cursor",
+    "i-beam",
+    "ibeam",
+    "insertion point",
+    "blinking cursor",
+    "textarea",
+    "text area",
+    "fill in",
+    "fill out",
+    "single line input",
+    "inupt",
+    "textfeild"
+  ]
+}

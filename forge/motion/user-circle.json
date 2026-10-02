@@ -1,0 +1,32 @@
+{
+  "name": "user-circle",
+  "intent": "breathes softly like an avatar waiting for you",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "scale"
+    },
+    {
+      "to": "log-out",
+      "effect": "fade"
+    }
+  ]
+}

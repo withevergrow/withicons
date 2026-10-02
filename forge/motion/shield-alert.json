@@ -1,0 +1,32 @@
+{
+  "name": "shield-alert",
+  "intent": "pulses like a security warning that needs attention",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "flicker"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    },
+    {
+      "to": "shield",
+      "effect": "fade"
+    }
+  ]
+}

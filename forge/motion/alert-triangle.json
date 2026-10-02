@@ -1,0 +1,32 @@
+{
+  "name": "alert-triangle",
+  "intent": "glows like a warning light, shakes on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "alert-triangle@solid",
+      "effect": "scale"
+    }
+  ]
+}

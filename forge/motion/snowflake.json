@@ -1,0 +1,30 @@
+{
+  "name": "snowflake",
+  "intent": "turns slowly like a snowflake drifting down",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sun",
+      "effect": "morph"
+    },
+    {
+      "to": "cloud-snow",
+      "effect": "fade"
+    }
+  ]
+}

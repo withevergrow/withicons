@@ -1,0 +1,34 @@
+{
+  "name": "rewind",
+  "intent": "rushes back like scrubbing a video backward",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 180,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 180
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "fast-forward",
+      "effect": "flip"
+    },
+    {
+      "to": "skip-back",
+      "effect": "slide-right"
+    }
+  ]
+}

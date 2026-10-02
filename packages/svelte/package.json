@@ -1,7 +1,7 @@
 {
   "name": "@withicons/svelte",
-  "version": "0.1.0",
-  "description": "300 icons x 7 styles as tree-shakable Svelte components (Svelte 4 and 5).",
+  "version": "0.2.0",
+  "description": "500 icons x 12 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -23,9 +23,24 @@
     "withicons",
     "with-icons",
     "svelte",
+    "svelte5",
     "sveltekit",
     "svelte-icons",
-    "svg-icons"
+    "svelte-components",
+    "svg-icons",
+    "animated-icons",
+    "line-icons",
+    "solid-icons",
+    "duo-icons",
+    "gloss-icons",
+    "engrave-icons",
+    "blueprint-icons",
+    "sketch-icons",
+    "glass-icons",
+    "kawaii-icons",
+    "sticker-icons",
+    "pixel-icons",
+    "retro-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -71,6 +86,31 @@
       "types": "./dist/sketch/index.d.ts",
       "svelte": "./dist/sketch/index.js",
       "default": "./dist/sketch/index.js"
+    },
+    "./glass": {
+      "types": "./dist/glass/index.d.ts",
+      "svelte": "./dist/glass/index.js",
+      "default": "./dist/glass/index.js"
+    },
+    "./kawaii": {
+      "types": "./dist/kawaii/index.d.ts",
+      "svelte": "./dist/kawaii/index.js",
+      "default": "./dist/kawaii/index.js"
+    },
+    "./sticker": {
+      "types": "./dist/sticker/index.d.ts",
+      "svelte": "./dist/sticker/index.js",
+      "default": "./dist/sticker/index.js"
+    },
+    "./pixel": {
+      "types": "./dist/pixel/index.d.ts",
+      "svelte": "./dist/pixel/index.js",
+      "default": "./dist/pixel/index.js"
+    },
+    "./retro": {
+      "types": "./dist/retro/index.d.ts",
+      "svelte": "./dist/retro/index.js",
+      "default": "./dist/retro/index.js"
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
@@ -157,6 +197,56 @@
       "svelte": "./dist/sketch/icons/*.svelte",
       "default": "./dist/sketch/icons/*.svelte"
     },
+    "./glass/icons/*.svelte": {
+      "types": "./dist/glass/icons/*.svelte.d.ts",
+      "svelte": "./dist/glass/icons/*.svelte",
+      "default": "./dist/glass/icons/*.svelte"
+    },
+    "./glass/icons/*": {
+      "types": "./dist/glass/icons/*.svelte.d.ts",
+      "svelte": "./dist/glass/icons/*.svelte",
+      "default": "./dist/glass/icons/*.svelte"
+    },
+    "./kawaii/icons/*.svelte": {
+      "types": "./dist/kawaii/icons/*.svelte.d.ts",
+      "svelte": "./dist/kawaii/icons/*.svelte",
+      "default": "./dist/kawaii/icons/*.svelte"
+    },
+    "./kawaii/icons/*": {
+      "types": "./dist/kawaii/icons/*.svelte.d.ts",
+      "svelte": "./dist/kawaii/icons/*.svelte",
+      "default": "./dist/kawaii/icons/*.svelte"
+    },
+    "./sticker/icons/*.svelte": {
+      "types": "./dist/sticker/icons/*.svelte.d.ts",
+      "svelte": "./dist/sticker/icons/*.svelte",
+      "default": "./dist/sticker/icons/*.svelte"
+    },
+    "./sticker/icons/*": {
+      "types": "./dist/sticker/icons/*.svelte.d.ts",
+      "svelte": "./dist/sticker/icons/*.svelte",
+      "default": "./dist/sticker/icons/*.svelte"
+    },
+    "./pixel/icons/*.svelte": {
+      "types": "./dist/pixel/icons/*.svelte.d.ts",
+      "svelte": "./dist/pixel/icons/*.svelte",
+      "default": "./dist/pixel/icons/*.svelte"
+    },
+    "./pixel/icons/*": {
+      "types": "./dist/pixel/icons/*.svelte.d.ts",
+      "svelte": "./dist/pixel/icons/*.svelte",
+      "default": "./dist/pixel/icons/*.svelte"
+    },
+    "./retro/icons/*.svelte": {
+      "types": "./dist/retro/icons/*.svelte.d.ts",
+      "svelte": "./dist/retro/icons/*.svelte",
+      "default": "./dist/retro/icons/*.svelte"
+    },
+    "./retro/icons/*": {
+      "types": "./dist/retro/icons/*.svelte.d.ts",
+      "svelte": "./dist/retro/icons/*.svelte",
+      "default": "./dist/retro/icons/*.svelte"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -165,49 +255,92 @@
         "./dist/icon.d.ts"
       ],
       "icons/*": [
-        "./dist/line/icons/*.svelte.d.ts"
+        "./dist/line/icons/*.svelte.d.ts",
+        "./dist/line/icons/*.d.ts"
       ],
       "line": [
         "./dist/line/index.d.ts"
       ],
       "line/icons/*": [
-        "./dist/line/icons/*.svelte.d.ts"
+        "./dist/line/icons/*.svelte.d.ts",
+        "./dist/line/icons/*.d.ts"
       ],
       "solid": [
         "./dist/solid/index.d.ts"
       ],
       "solid/icons/*": [
-        "./dist/solid/icons/*.svelte.d.ts"
+        "./dist/solid/icons/*.svelte.d.ts",
+        "./dist/solid/icons/*.d.ts"
       ],
       "duo": [
         "./dist/duo/index.d.ts"
       ],
       "duo/icons/*": [
-        "./dist/duo/icons/*.svelte.d.ts"
+        "./dist/duo/icons/*.svelte.d.ts",
+        "./dist/duo/icons/*.d.ts"
       ],
       "gloss": [
         "./dist/gloss/index.d.ts"
       ],
       "gloss/icons/*": [
-        "./dist/gloss/icons/*.svelte.d.ts"
+        "./dist/gloss/icons/*.svelte.d.ts",
+        "./dist/gloss/icons/*.d.ts"
       ],
       "engrave": [
         "./dist/engrave/index.d.ts"
       ],
       "engrave/icons/*": [
-        "./dist/engrave/icons/*.svelte.d.ts"
+        "./dist/engrave/icons/*.svelte.d.ts",
+        "./dist/engrave/icons/*.d.ts"
       ],
       "blueprint": [
         "./dist/blueprint/index.d.ts"
       ],
       "blueprint/icons/*": [
-        "./dist/blueprint/icons/*.svelte.d.ts"
+        "./dist/blueprint/icons/*.svelte.d.ts",
+        "./dist/blueprint/icons/*.d.ts"
       ],
       "sketch": [
         "./dist/sketch/index.d.ts"
       ],
       "sketch/icons/*": [
-        "./dist/sketch/icons/*.svelte.d.ts"
+        "./dist/sketch/icons/*.svelte.d.ts",
+        "./dist/sketch/icons/*.d.ts"
+      ],
+      "glass": [
+        "./dist/glass/index.d.ts"
+      ],
+      "glass/icons/*": [
+        "./dist/glass/icons/*.svelte.d.ts",
+        "./dist/glass/icons/*.d.ts"
+      ],
+      "kawaii": [
+        "./dist/kawaii/index.d.ts"
+      ],
+      "kawaii/icons/*": [
+        "./dist/kawaii/icons/*.svelte.d.ts",
+        "./dist/kawaii/icons/*.d.ts"
+      ],
+      "sticker": [
+        "./dist/sticker/index.d.ts"
+      ],
+      "sticker/icons/*": [
+        "./dist/sticker/icons/*.svelte.d.ts",
+        "./dist/sticker/icons/*.d.ts"
+      ],
+      "pixel": [
+        "./dist/pixel/index.d.ts"
+      ],
+      "pixel/icons/*": [
+        "./dist/pixel/icons/*.svelte.d.ts",
+        "./dist/pixel/icons/*.d.ts"
+      ],
+      "retro": [
+        "./dist/retro/index.d.ts"
+      ],
+      "retro/icons/*": [
+        "./dist/retro/icons/*.svelte.d.ts",
+        "./dist/retro/icons/*.d.ts"
       ]
     }
   },

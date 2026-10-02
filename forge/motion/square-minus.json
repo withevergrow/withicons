@@ -1,0 +1,8 @@
+{
+  "name": "square-minus",
+  "intent": "presses in gently, ready to remove or collapse",
+  "loop": { "preset": "breathe", "amount": 0.6, "duration": 3.2 },
+  "hover": { "preset": "pop", "amount": 0.8 },
+  "alt": [ { "preset": "jelly" }, { "preset": "pulse", "amount": 0.5 } ],
+  "swap": [ { "to": "square-plus", "effect": "rotate" }, { "to": "square", "effect": "fade" }, { "to": "minus", "effect": "scale" } ]
+}

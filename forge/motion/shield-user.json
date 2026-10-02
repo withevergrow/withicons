@@ -1,0 +1,8 @@
+{
+  "name": "shield-user",
+  "intent": "breathes calmly to show the account is protected",
+  "loop": { "preset": "breathe", "amount": 0.6, "duration": 3.4 },
+  "hover": { "preset": "nod", "amount": 0.8 },
+  "alt": [ { "preset": "pop" }, { "preset": "glow", "amount": 0.7 } ],
+  "swap": [ { "to": "shield-check", "effect": "flip" }, { "to": "user-check", "effect": "fade" }, { "to": "shield-user@solid", "effect": "scale" } ]
+}

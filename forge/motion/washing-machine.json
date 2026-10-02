@@ -1,0 +1,45 @@
+{
+  "name": "washing-machine",
+  "intent": "rumbles on its feet like a wash cycle running",
+  "loop": {
+    "preset": "type",
+    "amount": 0.5,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "droplet",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "washing-machine@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "file-text",
+  "intent": "writes itself line by line",
+  "loop": {
+    "preset": "type",
+    "amount": 0.4,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file",
+      "effect": "fade"
+    },
+    {
+      "to": "file-check",
+      "effect": "scale"
+    }
+  ]
+}

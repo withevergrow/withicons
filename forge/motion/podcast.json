@@ -1,0 +1,8 @@
+{
+  "name": "podcast",
+  "intent": "pulses like a show broadcasting live",
+  "loop": { "preset": "pulse", "origin": [12, 11.5], "amount": 0.6, "duration": 2 },
+  "hover": { "preset": "pop", "origin": [12, 11.5] },
+  "alt": [ { "preset": "fill" }, { "preset": "glow", "amount": 0.8 } ],
+  "swap": [ { "to": "microphone", "effect": "fade" }, { "to": "headphones", "effect": "morph" }, { "to": "podcast@solid", "effect": "scale" } ]
+}

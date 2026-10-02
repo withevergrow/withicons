@@ -1,7 +1,7 @@
 {
   "name": "withicons",
-  "version": "0.1.0",
-  "description": "with icons from the terminal: search 300 icons x 7 styles in plain English, print SVG or framework code, get import lines, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command. `npx withicons init`.",
+  "version": "0.2.0",
+  "description": "with icons from the terminal: search 500 icons x 12 styles in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie) for apps and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -24,7 +24,12 @@
     "with-icons",
     "cli",
     "icon-search",
-    "mcp"
+    "mcp",
+    "icon-export",
+    "favicon",
+    "lottie",
+    "svg-to-png",
+    "vectordrawable"
   ],
   "type": "module",
   "bin": {
@@ -39,7 +44,10 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@withicons/mcp": "0.1.0"
+    "@withicons/mcp": "0.2.0"
+  },
+  "optionalDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"

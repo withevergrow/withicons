@@ -1,0 +1,70 @@
+{
+  "name": "disc",
+  "category": "media",
+  "description": "A compact disc with a centre hole and a light reflection for CDs, albums and disk media.",
+  "aliases": [
+    "cd",
+    "dvd",
+    "compact-disc",
+    "album",
+    "vinyl",
+    "optical-disc",
+    "cd-rom",
+    "blu-ray",
+    "record-disc",
+    "dvd-rom"
+  ],
+  "tags": [
+    "media",
+    "music",
+    "storage",
+    "album",
+    "round"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 12 A2.5 2.5 0 1 1 9.5 12 A2.5 2.5 0 1 1 14.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6 12 A6 6 0 0 1 12 6",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z M14.5 12 A2.5 2.5 0 1 1 9.5 12 A2.5 2.5 0 1 1 14.5 12 Z"
+  ],
+  "cutouts": [
+    "M6 12 A6 6 0 0 1 12 6"
+  ],
+  "synonyms": [
+    "disk",
+    "discs",
+    "disks",
+    "record",
+    "records",
+    "lp",
+    "vinyl record",
+    "music album",
+    "album art",
+    "soundtrack",
+    "cd player",
+    "dvd player",
+    "optical media",
+    "rom",
+    "burn",
+    "burn disc",
+    "install disc",
+    "media",
+    "mixtape",
+    "playlist",
+    "compact disk",
+    "cds",
+    "dvds",
+    "disck"
+  ]
+}

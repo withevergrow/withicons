@@ -1,0 +1,37 @@
+{
+  "name": "receipt",
+  "intent": "floats gently, prints its lines on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "file-text",
+      "effect": "slide-up"
+    },
+    {
+      "to": "receipt@solid",
+      "effect": "scale"
+    }
+  ]
+}

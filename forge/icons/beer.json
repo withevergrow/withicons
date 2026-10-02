@@ -1,0 +1,92 @@
+{
+  "name": "beer",
+  "category": "food",
+  "description": "A foaming beer mug for pubs, bars, brewing, and happy hour.",
+  "aliases": [
+    "beer-mug",
+    "pint",
+    "pub",
+    "bar",
+    "brewery",
+    "ale",
+    "happy-hour",
+    "cheers",
+    "lager",
+    "stein",
+    "beer-glass",
+    "pint-glass"
+  ],
+  "tags": [
+    "drink",
+    "alcohol",
+    "pub",
+    "bar",
+    "nightlife",
+    "brewery"
+  ],
+  "paths": [
+    {
+      "d": "M4 9.5 V19.5 A2 2 0 0 0 6 21.5 H14 A2 2 0 0 0 16 19.5 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16 11.5 H18 A2 2 0 0 1 20 13.5 V16 A2 2 0 0 1 18 18 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M4 9.5 C2.5 7.5 4.5 4.5 7 5.5 C8 3 12.5 2.5 13.5 5 C15.5 4.5 17.5 7 16 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4 9.5 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 13.5 V17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13.5 V17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 9.5 C2.5 7.5 4.5 4.5 7 5.5 C8 3 12.5 2.5 13.5 5 C15.5 4.5 17.5 7 16 9.5 V19.5 A2 2 0 0 1 14 21.5 H6 A2 2 0 0 1 4 19.5 Z"
+  ],
+  "cutouts": [
+    "M4 9.5 H16",
+    "M8 13.5 V17.5",
+    "M12 13.5 V17.5"
+  ],
+  "synonyms": [
+    "beers",
+    "pint of beer",
+    "draught",
+    "draft beer",
+    "craft beer",
+    "brew",
+    "brewing",
+    "ipa",
+    "stout",
+    "bitter",
+    "tavern",
+    "beer garden",
+    "oktoberfest",
+    "alcohol",
+    "booze",
+    "drinks",
+    "night out",
+    "nightlife",
+    "party",
+    "celebrate",
+    "toast",
+    "friday",
+    "after work",
+    "cheers mate",
+    "froth",
+    "foam",
+    "mug",
+    "bier",
+    "beeer"
+  ]
+}

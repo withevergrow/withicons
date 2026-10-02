@@ -4,12 +4,12 @@ import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { ROOT, listIcons, loadIcon, loadStyles, renderIcon, toSvg, nodesToMarkup } from '../../../forge/lib/load.mjs'
+import { sortStyles, styleVars, isPalette } from '../../../forge/lib/emit-core.mjs'
 
 const t0 = Date.now()
-const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
 const version = pkg.withiconsVersion || pkg.egopeniconsVersion || '0.1.0'
-const styles = Object.values(await loadStyles()).sort((a, b) => ((ORDER.indexOf(a.name) + 99) % 99) - ((ORDER.indexOf(b.name) + 99) % 99))
+const styles = sortStyles(Object.values(await loadStyles()))
 const pascal = n => n.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('')
 const icons = listIcons().map(name => {
   const icon = loadIcon(name)
@@ -20,7 +20,7 @@ const icons = listIcons().map(name => {
 })
 const ctx = {
   version, root: ROOT, defaultStyle: 'line',
-  styles: styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root })),
+  styles: styles.map(s => { const vars = styleVars(icons, s.name); return { name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: isPalette(s, vars), vars } }),
   icons, aliasIndex: {},
   write(rel, text) { const f = path.join(ROOT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) },
 }

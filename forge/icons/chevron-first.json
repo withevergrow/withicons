@@ -1,0 +1,65 @@
+{
+  "name": "chevron-first",
+  "category": "navigation",
+  "description": "A left chevron against a bar for jumping to the first page, item, or track.",
+  "aliases": [
+    "first-page",
+    "page-first",
+    "to-start",
+    "jump-first",
+    "chevron-bar-left",
+    "go-to-first",
+    "chevron-left-bar",
+    "first-item",
+    "jump-to-start"
+  ],
+  "tags": [
+    "pagination",
+    "first",
+    "start",
+    "beginning",
+    "chevron",
+    "navigation"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 6 L11.5 12 L17.5 18",
+      "plate": "K"
+    },
+    {
+      "d": "M7 6 V18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "first",
+    "beginning",
+    "start",
+    "go to start",
+    "back to start",
+    "back to beginning",
+    "jump to beginning",
+    "first page",
+    "page 1",
+    "page one",
+    "first slide",
+    "first record",
+    "first result",
+    "first step",
+    "skip to start",
+    "rewind to start",
+    "start of list",
+    "top of list",
+    "pagination",
+    "table pagination",
+    "pager",
+    "home key",
+    "begin",
+    "earliest",
+    "oldest",
+    "fist page",
+    "leftmost"
+  ]
+}

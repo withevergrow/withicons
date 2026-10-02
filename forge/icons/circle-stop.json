@@ -1,0 +1,60 @@
+{
+  "name": "circle-stop",
+  "category": "media",
+  "description": "A square inside a circle for stopping playback or a recording.",
+  "aliases": [
+    "stop-circle",
+    "round-stop",
+    "end-recording",
+    "halt-circle",
+    "stop-round",
+    "circled-stop",
+    "end-playback"
+  ],
+  "tags": [
+    "stop",
+    "media",
+    "recording",
+    "circle",
+    "button",
+    "end"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 8.5 H14 A1.5 1.5 0 0 1 15.5 10 V14 A1.5 1.5 0 0 1 14 15.5 H10 A1.5 1.5 0 0 1 8.5 14 V10 A1.5 1.5 0 0 1 10 8.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 8.5 H14 A1.5 1.5 0 0 1 15.5 10 V14 A1.5 1.5 0 0 1 14 15.5 H10 A1.5 1.5 0 0 1 8.5 14 V10 A1.5 1.5 0 0 1 10 8.5 Z"
+  ],
+  "synonyms": [
+    "stop button",
+    "halt",
+    "end",
+    "finish",
+    "terminate",
+    "cancel",
+    "abort",
+    "stop recording",
+    "end call recording",
+    "stop video",
+    "stop music",
+    "stop playback",
+    "stop timer",
+    "end session",
+    "media player",
+    "recorder",
+    "square in circle",
+    "round stop button",
+    "stopbutton",
+    "stop buton"
+  ]
+}

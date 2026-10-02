@@ -1,0 +1,90 @@
+{
+  "name": "donut",
+  "category": "food",
+  "description": "A glazed doughnut with sprinkles for snacks, bakeries, and sweets.",
+  "aliases": [
+    "doughnut",
+    "pastry",
+    "sprinkles",
+    "glazed",
+    "bakery-sweet",
+    "dessert-ring",
+    "sweets",
+    "donuts",
+    "doughnuts"
+  ],
+  "tags": [
+    "dessert",
+    "bakery",
+    "sweet",
+    "snack",
+    "pastry",
+    "breakfast"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11 5.5 L12.5 6",
+      "plate": "A"
+    },
+    {
+      "d": "M18 11 L18.5 12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7 15.5 L8 17",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 10 L7 8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 18 L15.5 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z"
+  ],
+  "cutouts": [
+    "M11 5.5 L12.5 6",
+    "M18 11 L18.5 12.5",
+    "M7 15.5 L8 17",
+    "M6.5 10 L7 8.5",
+    "M14 18 L15.5 17.5"
+  ],
+  "synonyms": [
+    "glazed donut",
+    "iced doughnut",
+    "ring doughnut",
+    "frosted",
+    "sprinkle",
+    "pastries",
+    "bakery",
+    "sweet",
+    "treat",
+    "dessert",
+    "snack",
+    "breakfast",
+    "coffee and donut",
+    "cop",
+    "junk food",
+    "sugar",
+    "sugary",
+    "fried dough",
+    "krispy",
+    "dunkin",
+    "national donut day",
+    "donnut",
+    "dougnut",
+    "donught"
+  ]
+}

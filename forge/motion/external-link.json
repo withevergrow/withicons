@@ -1,0 +1,26 @@
+{
+  "name": "external-link",
+  "intent": "arrow heads out of the box to open elsewhere",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 315
+    }
+  ],
+  "swap": [
+    {
+      "to": "link",
+      "effect": "fade"
+    }
+  ]
+}

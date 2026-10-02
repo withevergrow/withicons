@@ -1,0 +1,85 @@
+{
+  "name": "frown",
+  "category": "users",
+  "description": "A frowning face for sad moods, unhappy reactions, and negative feedback.",
+  "aliases": [
+    "sad",
+    "unhappy",
+    "sad-face",
+    "frowning",
+    "disappointed",
+    "bad-rating",
+    "dissatisfied",
+    "frowny",
+    "sad-emoji",
+    "frown-face"
+  ],
+  "tags": [
+    "face",
+    "emotion",
+    "mood",
+    "sad",
+    "feedback",
+    "emoji"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M8 17 A5 5 0 0 1 16 17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 9.5 A1 1.25 0 1 1 8 9.5 A1 1.25 0 1 1 10 9.5 Z",
+    "M16 9.5 A1 1.25 0 1 1 14 9.5 A1 1.25 0 1 1 16 9.5 Z",
+    "M8 17 A5 5 0 0 1 16 17"
+  ],
+  "synonyms": [
+    "sadness",
+    "sorrow",
+    "feeling down",
+    "down",
+    "blue",
+    "not happy",
+    "bad",
+    "poor",
+    "negative",
+    "negative feedback",
+    "unsatisfied",
+    "bad experience",
+    "rate experience",
+    "customer satisfaction",
+    "mood",
+    "emotion",
+    "feelings",
+    "emoji",
+    "emoticon",
+    "smiley",
+    "frowning face",
+    "sad smiley",
+    "gloomy",
+    "miserable",
+    "depressed",
+    "sorry",
+    "oops",
+    "displeased",
+    "pout",
+    "sulk",
+    "frwon",
+    "sad emoticon"
+  ]
+}

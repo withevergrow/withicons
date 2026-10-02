@@ -12,13 +12,50 @@
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path from 'path'
+import { resolveVars } from './load.mjs'
 
 export const J = v => JSON.stringify(v)
 export const SVG_NS = 'http://www.w3.org/2000/svg'
 
+// ---------------------------------------------------------------- styles: order, palettes, counts
+// The ONE style order used everywhere (build, packages, search index, site data). Unknown styles sort last, by name.
+export const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+// Styles that paint a default multi-colour palette: every colour is var(--with-<style>-<role>, #hex), the ink stays currentColor.
+export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro']
+export const styleRank = name => { const i = STYLE_ORDER.indexOf(name); return i < 0 ? STYLE_ORDER.length : i }
+export const sortStyles = (list, key = s => s.name) =>
+  list.slice().sort((a, b) => styleRank(key(a)) - styleRank(key(b)) || (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0))
+// var(--x, #hex) -> #hex, var(--x, currentColor) -> currentColor: for standalone files, data URIs and rasterizers (no CSS cascade there)
+export const flattenVars = s => resolveVars(String(s))
+
+// The CSS custom properties a style reads, with their default (fallback) values, found in its rendered output:
+// { '--with-retro-1': '#F4B53F', '--with-duo': 'currentColor' }. The most frequent fallback wins per variable.
+const VAR_RE = /var\(\s*(--with-[\w-]+)\s*,\s*(#[0-9a-fA-F]{3,8}|currentColor|[a-zA-Z]+)\s*\)/g
+export function styleVars(icons, styleName) {
+  const seen = {}
+  for (const i of icons) {
+    const r = i.render && i.render[styleName]
+    if (!r) continue
+    for (const m of r.inner.matchAll(VAR_RE)) { const c = (seen[m[1]] ||= {}); c[m[2]] = (c[m[2]] || 0) + 1 }
+  }
+  const out = {}
+  for (const k of Object.keys(seen).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))) {
+    out[k] = Object.entries(seen[k]).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0]
+  }
+  return out
+}
+export const isPalette = (style, vars) => PALETTE_STYLES.includes(style.name) || Object.values(vars || style.vars || {}).some(v => v !== 'currentColor')
+
+// "500 icons x 12 styles" and "6,000" — never hard-code the counts in generated text
+export const countText = ctx => `${ctx.icons.length} icons x ${ctx.styles.length} styles`
+export const totalText = ctx => (ctx.icons.length * ctx.styles.length).toLocaleString('en-US')
+export const liveStrokeStyles = ctx => ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name)
+export const paletteStyles = ctx => ctx.styles.filter(s => s.palette)
+
 // Collects files for one dist directory, then writes them in parallel and deletes stale files
 // (icons that were renamed or removed) so deep imports never serve outdated output.
-export function distWriter(ctx, distRel) {
+// keep: top-level subdirectories another emitter owns (e.g. 'palettes', written by emit-palettes), never pruned here
+export function distWriter(ctx, distRel, { keep = [] } = {}) {
   const files = new Map()
   return {
     add(rel, text) { files.set(rel, text) },
@@ -29,7 +66,8 @@ export function distWriter(ctx, distRel) {
       const dirs = new Set([...want].map(f => path.dirname(f)))
       for (const d of dirs) fs.mkdirSync(d, { recursive: true })
       const walk = d => fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]) : []
-      const stale = walk(root).filter(f => !want.has(f))
+      const kept = keep.map(k => path.join(root, k) + path.sep)
+      const stale = walk(root).filter(f => !want.has(f) && !kept.some(k => f.startsWith(k)))
       // unchanged files are left alone: far fewer writes (and virus-scanner hits) on rebuilds
       const jobs = [...files].map(([rel, text]) => async () => {
         const f = path.join(root, rel)
@@ -45,6 +83,8 @@ export function distWriter(ctx, distRel) {
   }
 }
 
+// first year of publication (deterministic build: never the clock)
+export const FIRST_YEAR = 2026
 export const LICENSE = year => `MIT License
 
 Copyright (c) ${year} with icons contributors
@@ -108,7 +148,7 @@ export function basePkg(ctx, name, description, keywords) {
 export function writePkg(ctx, dir, pkg, readme) {
   ctx.write(`packages/${dir}/package.json`, JSON.stringify(pkg, null, 2) + '\n')
   ctx.write(`packages/${dir}/README.md`, readme)
-  ctx.write(`packages/${dir}/LICENSE`, LICENSE(new Date().getFullYear()))
+  ctx.write(`packages/${dir}/LICENSE`, LICENSE(FIRST_YEAR))   // fixed year: output must not depend on the clock
 }
 
 // Conditional export entry with separate ESM / CJS type files.
@@ -277,15 +317,18 @@ function withToSvg(iconNode, style, options) {
   if (o.title) a.role = 'img'
   else a['aria-hidden'] = 'true'
   const attrs = obj => Object.keys(obj).filter(k => obj[k] != null && obj[k] !== false).map(k => ' ' + k + '="' + esc(obj[k]) + '"').join('')
-  return '<svg' + attrs(a) + '>' + (o.title ? '<title>' + esc(o.title) + '</title>' : '') +
+  let out = '<svg' + attrs(a) + '>' + (o.title ? '<title>' + esc(o.title) + '</title>' : '') +
     iconNode.map(n => '<' + n[0] + attrs(n[1]) + '/>').join('') + '</svg>'
+  // flat: CSS variables -> their default colours (for files, <img>, design tools and rasterizers)
+  if (o.flat) { let p; do { p = out; out = out.replace(/var\(\s*--[\w-]+\s*,\s*([^()]*?)\s*\)/g, '$1').replace(/var\(\s*--[\w-]+\s*\)/g, 'currentColor') } while (out !== p) }
+  return out
 }
 
 // ---------------------------------------------------------------- core emitter
 
 export default async function emit(ctx) {
   const P = 'packages/core'
-  const out = distWriter(ctx, P + '/dist')
+  const out = distWriter(ctx, P + '/dist', { keep: ['palettes'] })   // dist/palettes/** belongs to emit-palettes
   const W = (rel, text) => out.add(rel.slice(P.length + 6), text)
   const styleNames = ctx.styles.map(s => s.name)
   const meta = ctx.icons.map(i => ({
@@ -294,7 +337,7 @@ export default async function emit(ctx) {
   }))
   const aliases = {}
   for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
-  const stylesMeta = ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root }))
+  const stylesMeta = ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: !!s.palette, vars: s.vars || {} }))
   const categories = [...new Set(meta.map(m => m.category))]
 
   let svgCount = 0
@@ -302,18 +345,36 @@ export default async function emit(ctx) {
     const nodes = {}
     for (const i of ctx.icons) {
       const r = renderOf(ctx, i, s)
-      if (i.render[s]) { W(`${P}/dist/svg/${s}/${i.name}.svg`, r.svg + '\n'); svgCount++ }
+      // standalone files are flattened (no CSS variables): <img>, design tools and rasterizers cannot see the cascade
+      if (i.render[s]) { W(`${P}/dist/svg/${s}/${i.name}.svg`, flattenVars(r.svg) + '\n'); svgCount++ }
       if (i.render[s]) nodes[i.name] = r.nodes
     }
-    const body = `const style = ${J(stylesMeta.find(x => x.name === s))}\nconst nodes = ${J(nodes)}\n`
-    W(`${P}/dist/nodes/${s}.js`, `// @withicons/core — ${s} IconNode data\n${body}export { style, nodes }\nexport default nodes\n`)
-    W(`${P}/dist/nodes/${s}.cjs`, `'use strict'\n${body}module.exports = nodes\nmodule.exports.default = nodes\nmodule.exports.nodes = nodes\nmodule.exports.style = style\n`)
-    const dts = ext => `import type { IconName, IconNode, StyleMeta } from '../index.${ext}'\n/** ${s} style metadata */\nexport declare const style: StyleMeta\n/** IconNode data for every icon in the ${s} style, keyed by canonical name. */\nexport declare const nodes: Record<IconName, IconNode>\n`
+    // ESM: one named export per icon (PascalCase, like the component packages) so a bundler keeps only the icons you
+    // import: `import { Home } from '@withicons/core/nodes/line'` is ~1 KB. `nodes` / default (keyed by canonical name)
+    // reference the same constants, so they cost nothing when unused.
+    const list = ctx.icons.filter(i => nodes[i.name])
+    const consts = list.map(i => `const ${i.pascal} = ${J(nodes[i.name])}`).join('\n')
+    const map = `{ ${list.map(i => `${J(i.name)}: ${i.pascal}`).join(', ')} }`
+    const styleJson = J(stylesMeta.find(x => x.name === s))
+    W(`${P}/dist/nodes/${s}.js`, `// @withicons/core ${ctx.version} — ${s} IconNode data\nconst style = ${styleJson}\n${consts}\n` +
+      `/** every ${s} icon, keyed by canonical name */\nconst nodes = ${map}\n` +
+      `export { style, nodes, ${list.map(i => i.pascal).join(', ')} }\nexport default nodes\n`)
+    // CJS: the canonical-name map is module.exports; style, nodes, default and the PascalCase names are non-enumerable,
+    // so Object.keys(require('@withicons/core/nodes/line')) is exactly the icon names.
+    const pascalMap = J(Object.fromEntries(list.map(i => [i.name, i.pascal])))
+    W(`${P}/dist/nodes/${s}.cjs`, `'use strict'\n// @withicons/core ${ctx.version} — ${s} IconNode data\nconst style = ${styleJson}\nconst nodes = ${J(nodes)}\n` +
+      `const PASCAL = ${pascalMap}\nconst hide = (k, v) => Object.defineProperty(nodes, k, { value: v, enumerable: false })\n` +
+      `for (const k of Object.keys(nodes)) hide(PASCAL[k], nodes[k])\nhide('style', style)\nhide('nodes', nodes)\nhide('default', nodes)\nhide('__esModule', true)\nmodule.exports = nodes\n`)
+    const named = list.map(i => `/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: IconNode`).join('\n')
+    const dts = ext => `import type { IconName, IconNode, StyleMeta } from '../index.${ext}'\n/** ${s} style metadata */\nexport declare const style: StyleMeta\n/** IconNode data for every icon in the ${s} style, keyed by canonical name. Prefer the named exports to keep bundles small. */\nexport declare const nodes: Record<IconName, IconNode>\n${named}\n`
     W(`${P}/dist/nodes/${s}.d.ts`, dts('js') + 'export default nodes\n')
-    W(`${P}/dist/nodes/${s}.d.cts`, `import type { IconName, IconNode, StyleMeta } from '../index.cjs'\ntype Nodes = Record<IconName, IconNode>\n/** IconNode data for every icon in the ${s} style, keyed by canonical name. */\ndeclare const nodes: Nodes & { nodes: Nodes; style: StyleMeta; default: Nodes }\nexport = nodes\n`)
+    W(`${P}/dist/nodes/${s}.d.cts`, `import type { IconName, IconNode, StyleMeta } from '../index.cjs'\ntype Nodes = Record<IconName, IconNode>\n` +
+      `type Named = { ${list.map(i => `${i.pascal}: IconNode`).join('; ')} }\n` +
+      `/** IconNode data for every icon in the ${s} style, keyed by canonical name (and by PascalCase name). */\ndeclare const nodes: Nodes & Named & { nodes: Nodes; style: StyleMeta; default: Nodes }\nexport = nodes\n`)
   }
   W(`${P}/dist/icons.json`, JSON.stringify(meta, null, 1) + '\n')
   W(`${P}/dist/aliases.json`, JSON.stringify(aliases, null, 1) + '\n')
+  W(`${P}/dist/styles.json`, JSON.stringify(stylesMeta, null, 1) + '\n')
 
   const body = `const VERSION = ${J(ctx.version)}
 const DEFAULT_STYLE = ${J(ctx.defaultStyle)}
@@ -322,16 +383,20 @@ const STYLES = ${J(styleTable(ctx))}
 const icons = ${J(meta)}
 const aliases = ${J(aliases)}
 const categories = ${J(categories)}
-const iconNames = icons.map(i => i.name)
-const styleNames = styles.map(s => s.name)
-const BY_NAME = Object.create(null)
-for (const i of icons) BY_NAME[i.name] = i
+// pure + lazy: a bundle that only imports toSvg drops the metadata
+const iconNames = /*#__PURE__*/ icons.map(i => i.name)
+const styleNames = /*#__PURE__*/ styles.map(s => s.name)
+let BY_NAME = null
+function byName() {
+  if (!BY_NAME) { BY_NAME = Object.create(null); for (const i of icons) BY_NAME[i.name] = i }
+  return BY_NAME
+}
 ${LOOKUP_SRC}
 ${withScore}
 ${withSearch}
 ${withToSvg}
 /** Resolve a name or alias to its icon. Throws on ambiguous aliases and unknown names. */
-function resolve(name) { return BY_NAME[withLookup(name, k => k in BY_NAME, iconNames, aliases)] }
+function resolve(name) { const m = byName(); return m[withLookup(name, k => k in m, iconNames, aliases)] }
 /** Like resolve() but returns null instead of throwing. */
 function find(name) { try { return resolve(name) } catch (e) { return null } }
 /** Rank icons by name, alias, tag, category and description. */
@@ -356,6 +421,10 @@ export interface StyleMeta {
   strokeWidth: number | false
   /** Attributes set on the root <svg>. */
   root: Record<string, string | number>
+  /** true for multi-colour palette styles (${ctx.styles.filter(s => s.palette).map(s => s.name).join(', ') || 'none'}): colours come from CSS variables, the ink stays currentColor. */
+  palette: boolean
+  /** CSS custom properties this style reads, with their defaults, e.g. { '--with-duo': 'currentColor' }. */
+  vars: Record<string, string>
 }
 export interface IconMeta {
   name: IconName
@@ -366,6 +435,12 @@ export interface IconMeta {
   styles: StyleName[]
 }
 export interface SearchOptions { limit?: number; category?: string }
+/** A colour role of a palette (see @withicons/core/palettes/palette-map.js and the README, "Colour palettes"). */
+export type PaletteRole = 'ink' | 'c1' | 'c2' | 'c3' | 'c4' | 'tint' | 'accent' | 'shadow' | 'shine' | 'edge'
+/** One suggested palette, as in @withicons/core/palettes/<name>.json. */
+export interface Palette { id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>> }
+/** @withicons/core/palettes/<name>.json: the palettes picked for that icon (auto: true = the general fallback set). */
+export interface IconPalettes { name: IconName; auto: boolean; palettes: Palette[] }
 export interface ToSvgOptions {
   size?: number | string
   color?: string
@@ -373,6 +448,8 @@ export interface ToSvgOptions {
   absoluteStrokeWidth?: boolean
   title?: string
   class?: string
+  /** Replace CSS variables (palette colours, --with-duo, --with-accent) with their default values. For files, <img> and rasterizers. */
+  flat?: boolean
 }
 /** Error thrown by resolve(): code 'WITH_AMBIGUOUS_ICON' (see candidates) or 'WITH_UNKNOWN_ICON' (see suggestions). */
 export interface IconResolveError extends Error {
@@ -411,12 +488,17 @@ export declare function toSvg(iconNode: IconNode, style?: StyleName, options?: T
   ex['./svg/*'] = './dist/svg/*'
   ex['./icons.json'] = './dist/icons.json'
   ex['./aliases.json'] = './dist/aliases.json'
+  ex['./styles.json'] = './dist/styles.json'
+  // exact keys win over the pattern: palette-map ships as .mjs/.cjs (see emit-palettes) but keeps its documented .js path
+  ex['./palettes/palette-map'] = ex['./palettes/palette-map.js'] = { types: './dist/palettes/palette-map.d.ts', import: './dist/palettes/palette-map.mjs', require: './dist/palettes/palette-map.cjs' }
+  ex['./palettes/*'] = './dist/palettes/*'
   ex['./dist/*'] = './dist/*'
   ex['./package.json'] = './package.json'
   const tv = {}
   for (const s of styleNames) tv[`nodes/${s}`] = [`./dist/nodes/${s}.d.ts`]
+  tv['palettes/*'] = ['./dist/palettes/*']   // TypeScript without "exports" support (moduleResolution node10)
   const pkg = {
-    ...basePkg(ctx, '@withicons/core', `${ctx.icons.length} icons x ${styleNames.length} styles as standalone SVGs, IconNode data, metadata, alias resolution and search.`, ['svg-icons', 'icon-search']),
+    ...basePkg(ctx, '@withicons/core', `${countText(ctx)} as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.`, ['svg-icons', 'icon-search', 'multicolor-icons', 'color-palettes', ...styleNames]),
     type: 'module', sideEffects: false,
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports: ex, typesVersions: { '*': tv },
@@ -431,16 +513,16 @@ function coreReadme(ctx) {
   const styles = ctx.styles.map(s => '`' + s.name + '`').join(', ')
   return `# @withicons/core
 
-Framework-free data for with icons: ${ctx.icons.length} icons in ${ctx.styles.length} styles (${styles}) as standalone SVG files, IconNode data, metadata, alias resolution and search.
+Framework-free data for with icons: ${ctx.icons.length} icons in ${ctx.styles.length} styles (${styles}), ${totalText(ctx)} SVGs in all, as standalone SVG files, IconNode data, metadata, alias resolution and search.
 
 \`\`\`bash
 npm i @withicons/core
 \`\`\`
 
 \`\`\`js
-import { resolve, search, toSvg, icons } from '@withicons/core'
-import solid from '@withicons/core/nodes/solid'
-
+import { resolve, search, toSvg } from '@withicons/core'
+import { Home } from '@withicons/core/nodes/solid'       // one icon: only it ends up in your bundle
+${ctx.styles.some(s => s.name === 'kawaii') ? "import kawaii from '@withicons/core/nodes/kawaii'        // every kawaii icon, keyed by canonical name\n" : ''}
 resolve('trash').name        // 'trash'   (canonical name)
 resolve('bin').name          // 'trash'   (alias with one match)
 resolve('ArrowRight').name   // 'arrow-right'
@@ -448,17 +530,21 @@ resolve('expand')            // throws: ambiguous alias, err.candidates = ['chev
 resolve('hoem')              // throws: unknown icon, err.suggestions = ['home', ...]
 
 search('delete')             // ranked IconMeta[] (name, alias, tag, category, description)
-toSvg(solid.home, 'solid', { size: 32, color: '#e11d48', title: 'Home' })  // '<svg ...>'
-\`\`\`
+toSvg(Home, 'solid', { size: 32, color: '#e11d48', title: 'Home' })  // '<svg ...>'
+${ctx.styles.some(s => s.name === 'kawaii') ? "toSvg(kawaii[resolve('bin').name], 'kawaii', { flat: true })  // palette defaults baked in, for files and rasterizers\n" : ''}\`\`\`
 
 ## Files
 
 | path | contents |
 |---|---|
-| \`dist/svg/<style>/<name>.svg\` | optimized standalone SVG (\`currentColor\`, 24x24) |
+| \`dist/svg/<style>/<name>.svg\` | optimized standalone SVG (\`currentColor\`, 24x24; CSS variables flattened to their defaults) |
 | \`dist/icons.json\` | \`[{ name, category, description, aliases, tags, styles }]\` |
 | \`dist/aliases.json\` | \`{ alias: [canonical names] }\` (more than one name = ambiguous) |
-| \`dist/nodes/<style>.js\` | \`{ [name]: IconNode }\` where IconNode = \`[tag, attrs][]\` |
+| \`dist/styles.json\` | \`[{ name, title, kind, description, strokeWidth, root, palette, vars }]\` |
+| \`dist/nodes/<style>.js\` | IconNode data (\`[tag, attrs][]\`, keeps the CSS variables): one tree-shakable named export per icon (\`Home\`, \`ArrowRight\`) plus \`nodes\` / default \`{ [name]: IconNode }\` |
+| \`dist/palettes/<name>.json\` | \`{ name, auto, palettes: [{ id, name, tags, colors }] }\`: colour palettes picked for that icon (see below) |
+| \`dist/palettes/index.json\` | \`{ roles, roleLabels, tags, icons: { [name]: { count, auto, tags } } }\` |
+| \`dist/palettes/palette-map.mjs\` (import it as \`@withicons/core/palettes/palette-map.js\`) | \`rolesFor\`, \`applyPalette\`, \`bakePalette\` (also \`palette-map.cjs\` and \`palette-map.d.ts\`) |
 
 Import a file: \`import url from '@withicons/core/svg/solid/home.svg'\`.
 CDN: \`https://cdn.jsdelivr.net/npm/@withicons/core@${ctx.version}/dist/svg/line/home.svg\`
@@ -471,14 +557,125 @@ CDN: \`https://cdn.jsdelivr.net/npm/@withicons/core@${ctx.version}/dist/svg/line
 | \`find(name)\` | like \`resolve\`, returns \`null\` instead of throwing |
 | \`search(query, { limit, category })\` | ranked \`IconMeta[]\` |
 | \`suggest(name, count = 3)\` | nearest canonical names |
-| \`toSvg(iconNode, style, { size, color, strokeWidth, absoluteStrokeWidth, title, class })\` | SVG string |
+| \`toSvg(iconNode, style, { size, color, strokeWidth, absoluteStrokeWidth, title, class, flat })\` | SVG string (\`flat\`: CSS variables -> default colours) |
 | \`icons\`, \`iconNames\`, \`styles\`, \`styleNames\`, \`aliases\`, \`categories\` | metadata |
 
 ## Styles
 
-${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}) — ${s.description}`).join('\n')}
-
+${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}${s.palette ? ', palette' : ''}) — ${s.description}`).join('\n')}
+${paletteDoc(ctx)}${palettesDoc(ctx)}${rtlDoc('js', "import { ArrowRight } from '@withicons/core/nodes/line'\ntoSvg(ArrowRight, 'line', { class: 'with-rtl' })")}${motionDoc(ctx)}
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+`
+}
+
+// @withicons/core README: the per-icon palette suggestions written by emit-palettes (dist/palettes/**).
+function palettesDoc(ctx) {
+  const t = '`', fence = '```'
+  const multi = ctx.styles.filter(s => Object.keys(s.vars || {}).length).map(s => t + s.name + t).join(', ')
+  return [
+    '',
+    '## Colour palettes',
+    '',
+    'Every icon ships 20-30 colour palettes picked for it (pizza: Margherita, Pepperoni…; heart: Classic red, Rose…), for the',
+    `styles that paint with more than one colour (${multi}). A palette sets colour **roles**; each style maps the roles onto its`,
+    'own CSS variables, so one palette works in every style:',
+    '',
+    '| role | paints |',
+    '|---|---|',
+    `| ${t}ink${t} | outlines and faces (${t}color${t} / ${t}currentColor${t}) |`,
+    `| ${t}c1${t} | the main body colour (duo tint, glass back, kawaii body, sticker 1st colour, pixel fill, retro 1st stripe) |`,
+    `| ${t}c2${t} ${t}c3${t} ${t}c4${t} | 2nd-4th colours in order of appearance (sticker, kawaii, retro stripes) |`,
+    `| ${t}tint${t} · ${t}accent${t} · ${t}shadow${t} · ${t}shine${t} · ${t}edge${t} | glass pane · blush and sparkles · drop shadows · highlights · sticker border |`,
+    '',
+    fence + 'js',
+    "import pizza from '@withicons/core/palettes/pizza.json' with { type: 'json' }",
+    "import { applyPalette, bakePalette } from '@withicons/core/palettes/palette-map.js'",
+    "import retro from '@withicons/core/nodes/retro'",
+    "import { toSvg } from '@withicons/core'",
+    '',
+    "const svg = toSvg(retro.pizza, 'retro')",
+    'const colors = pizza.palettes[0].colors   // { ink, c1, c2, c3, c4, tint, accent, shadow, shine, edge }',
+    "applyPalette(svg, colors)   // { vars: { '--with-retro-1': '#F4B942', … }, color: '#3B1F12' }: set them as inline CSS",
+    'bakePalette(svg, colors)    // the same SVG with the colours written in, for files, design tools and rasterizers',
+    fence,
+    '',
+    `${t}dist/palettes/index.json${t} lists every icon with its palette count and tags (${t}auto: true${t} marks the general fallback set).`,
+    '',
+  ].join('\n')
+}
+
+// Markdown shared by every package README: how palette styles take colour, with the real variable list.
+export function paletteDoc(ctx, heading = '##') {
+  const pal = ctx.styles.filter(s => s.palette)
+  if (!pal.length) return ''
+  const vars = s => Object.entries(s.vars || {}).filter(([, v]) => v !== 'currentColor')
+  // styles whose outline is its own fixed-colour variable (sticker's dark ink), not currentColor
+  const inked = pal.map(s => [s, vars(s).map(([k]) => k).find(k => /-ink$/.test(k))]).filter(([, k]) => k)
+  // every variable, including those that default to currentColor (kawaii face, pixel fill): they can be set too
+  const rows = pal.map(s => `| \`${s.name}\` | ${Object.entries(s.vars || {}).map(([k, v]) => `\`${k}\` ${v}`).join(', ') || '—'} |`).join('\n')
+  // example: a main body colour of two palette styles (kawaii and retro when present)
+  const main = s => vars(s).find(([k]) => !/(accent|shine|edge|shadow|frost|etch|sparkle|blush|ink)$/.test(k)) || vars(s)[0]
+  const pick = [...pal.filter(s => s.name === 'kawaii' || s.name === 'retro'), ...pal].filter((s, i, a) => a.indexOf(s) === i)
+  const ex = pick.map(main).filter(Boolean).slice(0, 2).map(([k], i) => `${k}: ${['#c4b5fd', '#fde047'][i]};`).join(' ')
+  return `
+${heading} Palette styles
+
+${pal.map(s => '`' + s.name + '`').join(', ')} paint a default multi-colour palette. The main ink stays \`currentColor\`
+(so \`color\` still recolours the outline${inked.length ? `; ${inked.map(([s, k]) => `\`${s.name}\` draws its bold outline with \`${k}\` instead`).join(', ')}` : ''}) and every other colour is a CSS custom property with a built-in default,
+so you can re-theme a page, a section or one icon without touching the SVG${ex ? `:
+
+\`\`\`css
+.brand { ${ex} }
+\`\`\`` : '.'}
+
+| style | variables (default) |
+|---|---|
+${rows}
+
+Inline SVG (components, \`<with-icon>\`, sprites, IconNode data) keeps the variables. Standalone \`.svg\` files have them
+flattened to the defaults, because \`<img>\`, design tools and rasterizers cannot see CSS.
+`
+}
+
+// Markdown for the string/file packages (core, static): mirroring directional icons in right-to-left text.
+// `example` is code (in `lang`) that puts the class on an icon. :dir() is Baseline only since Dec 2023 (Safari 16.4),
+// so [dir=rtl] is a separate rule (a selector list with :dir() would be dropped whole by older iOS).
+export function rtlDoc(lang, example, heading = '##') {
+  return `
+${heading} Right-to-left
+
+Icons are drawn for left-to-right text. In Arabic, Hebrew, Persian or Urdu layouts, mirror the directional ones (arrows,
+chevrons, undo/redo, reply, send, log-in/out) with a class; symmetric icons and logos stay as they are:
+
+\`\`\`css
+[dir="rtl"] .with-rtl { transform: scaleX(-1); }   /* every browser */
+.with-rtl:dir(rtl) { transform: scaleX(-1); }      /* also follows inherited direction (Chrome 120+, Safari 16.4+, Firefox) */
+\`\`\`
+
+\`\`\`${lang}
+${example}
+\`\`\`
+`
+}
+
+// Markdown shared by every package README: the separate, optional animation package.
+export function motionDoc(ctx, heading = '##') {
+  return `
+${heading} Animation (optional)
+
+Animations ship separately in [\`@withicons/motion\`](https://www.npmjs.com/package/@withicons/motion), so icons never pay for them.
+They work with every style and every package because they animate the element that holds the icon:
+
+\`\`\`html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+
+<span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
+<button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->
+<span class="wm-swap wm-fx-flip"><svg class="wm-a">…play…</svg><svg class="wm-b">…pause…</svg></span>  <!-- icon to icon -->
+\`\`\`
+
+\`prefers-reduced-motion\` turns every animation off. JS API: \`import { motion, swap, motionFor } from '@withicons/motion'\`.
 `
 }
 
@@ -518,7 +715,7 @@ export async function emitComponentPackage(ctx, spec) {
   const D = ctx.defaultStyle
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/${spec.dir} ${ctx.version} — generated, do not edit\n`
-  const types = namesAndAliasesDts(ctx) + spec.typesDts
+  const types = namesAndAliasesDts(ctx) + spec.typesDts.replace('(line, duo)', `(${liveStrokeStyles(ctx).join(', ')})`)
   W(`${P}/types.d.ts`, types)
   W(`${P}/types.d.cts`, types)
 

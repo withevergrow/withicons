@@ -1,0 +1,27 @@
+{
+  "name": "ambulance",
+  "palettes": [
+    {"id":"red-stripe","name":"Red stripe","tags":["true-to-life"],"colors":{"ink":"#1A1A22","c1":"#F4F5F7","c2":"#D7262E","c3":"#2F5FD0","c4":"#C9CED6","tint":"#FCFCFD","accent":"#D7262E","shadow":"#868788","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hi-vis-yellow","name":"Hi-vis yellow","tags":["true-to-life","vivid"],"colors":{"ink":"#1A1E05","c1":"#D8E21F","c2":"#1F4FB8","c3":"#F2F2F2","c4":"#8E9614","tint":"#F4F7C0","accent":"#1F4FB8","shadow":"#777C11","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"paramedic-green","name":"Paramedic green","tags":["true-to-life"],"colors":{"ink":"#06281A","c1":"#2EA36B","c2":"#FFE135","c3":"#FFFFFF","c4":"#155A3A","tint":"#C4E5D6","accent":"#FFE135","shadow":"#195A3B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"star-of-life","name":"Star of life","tags":["true-to-life"],"colors":{"ink":"#0E1A2E","c1":"#F4F5F7","c2":"#F26B1D","c3":"#1F5FBF","c4":"#C9CED6","tint":"#FCFCFD","accent":"#1F5FBF","shadow":"#868788","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fire-red-rig","name":"Fire-red rig","tags":["true-to-life"],"colors":{"ink":"#2A0606","c1":"#C8202A","c2":"#F4F4F6","c3":"#FFC93C","c4":"#7A1218","tint":"#F0C1C3","accent":"#FFC93C","shadow":"#6E1217","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rescue-orange","name":"Rescue orange","tags":["true-to-life","vivid"],"colors":{"ink":"#2E1405","c1":"#FF7A1A","c2":"#FFFFFF","c3":"#1C2E4A","c4":"#FFC08A","tint":"#FFDABF","accent":"#1C2E4A","shadow":"#8C430E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"coast-rescue","name":"Coast rescue","tags":["ocean"],"colors":{"ink":"#06213A","c1":"#1F4E8C","c2":"#E85A2A","c3":"#FFFFFF","c4":"#A8C3E0","tint":"#C0CDDF","accent":"#E85A2A","shadow":"#112B4D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fifties-cream","name":"1950s cream","tags":["vintage","retro"],"colors":{"ink":"#2B2018","c1":"#EADFC4","c2":"#B7372F","c3":"#5B7A86","c4":"#C9B48E","tint":"#F9F6EE","accent":"#B7372F","shadow":"#817B6C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-run","name":"Night run","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#3B4252","c2":"#FF4D57","c3":"#4D9BFF","c4":"#1F242D","tint":"#C8CACF","accent":"#4D9BFF","shadow":"#20242D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"siren-neon","name":"Siren neon","tags":["neon","on-dark"],"colors":{"ink":"#F2F6FF","c1":"#FF2E63","c2":"#2B8CFF","c3":"#FFE45E","c4":"#2BF0FF","tint":"#FFC4D3","accent":"#2B8CFF","shadow":"#8C1936","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"medical-blue","name":"Medical blue","tags":["corporate"],"colors":{"ink":"#0A1A3A","c1":"#2563EB","c2":"#FFFFFF","c3":"#F59E0B","c4":"#93B4F6","tint":"#C2D3F9","accent":"#F59E0B","shadow":"#143681","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"toy-ambulance","name":"Toy ambulance","tags":["candy"],"colors":{"ink":"#3A0F2A","c1":"#FFB3CF","c2":"#7ED7FF","c3":"#FFE36E","c4":"#B9F2C5","tint":"#FFEAF2","accent":"#7ED7FF","shadow":"#8C6272","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-van","name":"Pastel van","tags":["pastel"],"colors":{"ink":"#343A55","c1":"#BFD7F5","c2":"#F7A8B8","c3":"#FFF2C2","c4":"#D2F0E2","tint":"#EDF4FC","accent":"#F7A8B8","shadow":"#697687","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-van","name":"70s van","tags":["retro"],"colors":{"ink":"#2A1608","c1":"#F2C14E","c2":"#D9532B","c3":"#2F6B5E","c4":"#A8652C","tint":"#FBEECD","accent":"#D9532B","shadow":"#856A2B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"desert-rescue","name":"Desert rescue","tags":["earthy"],"colors":{"ink":"#2B1E12","c1":"#D9B98A","c2":"#B4483C","c3":"#556B45","c4":"#8C6A43","tint":"#F4EBDE","accent":"#B4483C","shadow":"#77664C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"red-ramp","name":"Red ramp","tags":["mono"],"colors":{"ink":"#2A0508","c1":"#D63A3A","c2":"#FBDADA","c3":"#8C1C1C","c4":"#F09898","tint":"#F4C8C8","accent":"#F09898","shadow":"#762020","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"graphite","name":"Graphite","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#BDBDBD","c2":"#4A4A4A","c3":"#F2F2F2","c4":"#7E7E7E","tint":"#EDEDED","accent":"#4A4A4A","shadow":"#686868","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubble-rescue","name":"Bubble rescue","tags":["y2k"],"colors":{"ink":"#1D1240","c1":"#B48CFF","c2":"#FFF07A","c3":"#5CF2D6","c4":"#FF7AD9","tint":"#EADFFF","accent":"#5CF2D6","shadow":"#634D8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vip-transfer","name":"VIP transfer","tags":["luxe"],"colors":{"ink":"#0D0D0D","c1":"#4A4F5A","c2":"#C9A227","c3":"#F3E7C4","c4":"#6E6A60","tint":"#CCCED1","accent":"#C9A227","shadow":"#292B32","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"snow-route","name":"Snow route","tags":["seasonal"],"colors":{"ink":"#102A3D","c1":"#E6EFF7","c2":"#C0392B","c3":"#3E6E94","c4":"#FFFFFF","tint":"#F8FBFD","accent":"#C0392B","shadow":"#7F8388","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine","name":"Dopamine brights","tags":["vivid"],"colors":{"ink":"#1A0B2E","c1":"#FF5C8A","c2":"#5C7CFF","c3":"#FFD23F","c4":"#3DDC97","tint":"#FFD1DE","accent":"#FFD23F","shadow":"#8C334C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD200","c2":"#D4002A","c3":"#0046C7","c4":"#FFFFFF","tint":"#FFF2B8","accent":"#0046C7","shadow":"#8C7400","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "highlighter",
+  "intent": "swipes its tip back and forth as if marking a line of text",
+  "loop": { "preset": "sway", "origin": [9, 15], "amount": 0.6, "duration": 2.8 },
+  "hover": { "preset": "wiggle", "origin": [9, 15], "amount": 1 },
+  "alt": [ { "preset": "draw" }, { "preset": "glow" }, { "preset": "nudge", "dir": 180, "amount": 0.6 } ],
+  "swap": [
+    { "to": "eraser", "effect": "rotate" },
+    { "to": "pencil", "effect": "fade" },
+    { "to": "highlighter@solid", "effect": "scale" }
+  ]
+}

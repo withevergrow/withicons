@@ -1,0 +1,8 @@
+{
+  "name": "corner-down-left",
+  "intent": "nudges left like pressing Enter",
+  "loop": { "preset": "nudge", "dir": 180, "amount": 0.5, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 1.2, "duration": 0.5 },
+  "alt": [ { "preset": "draw" }, { "preset": "pop" } ],
+  "swap": [ { "to": "check", "effect": "scale" }, { "to": "corner-down-right", "effect": "flip" } ]
+}

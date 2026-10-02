@@ -1,0 +1,76 @@
+{
+  "name": "sofa",
+  "category": "home",
+  "description": "A sofa with a backrest and rounded armrests for living rooms, lounges, and relaxing.",
+  "aliases": [
+    "couch",
+    "settee",
+    "living-room",
+    "lounge",
+    "furniture",
+    "loveseat",
+    "relax",
+    "chesterfield",
+    "divan",
+    "sectional"
+  ],
+  "tags": [
+    "furniture",
+    "living room",
+    "seat",
+    "interior",
+    "lounge",
+    "relax"
+  ],
+  "paths": [
+    {
+      "d": "M6 12 V8 A2 2 0 0 1 8 6 H16 A2 2 0 0 1 18 8 V12",
+      "plate": "K"
+    },
+    {
+      "d": "M6 14 V12 A2 2 0 0 0 2 12 V16 A2 2 0 0 0 4 18 H20 A2 2 0 0 0 22 16 V12 A2 2 0 0 0 18 12 V14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 18 V20 M19 18 V20",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6 14 V8 A2 2 0 0 1 8 6 H16 A2 2 0 0 1 18 8 V14 Z",
+    "M6 14 V12 A2 2 0 0 0 2 12 V16 A2 2 0 0 0 4 18 H20 A2 2 0 0 0 22 16 V12 A2 2 0 0 0 18 12 V14 Z"
+  ],
+  "cutouts": [
+    "M6 11 V14 H18 V11"
+  ],
+  "synonyms": [
+    "couches",
+    "sofas",
+    "sofa bed",
+    "sofabed",
+    "love seat",
+    "living room furniture",
+    "lounge area",
+    "waiting room",
+    "seating",
+    "armchair",
+    "seat",
+    "chill",
+    "chill out",
+    "netflix and chill",
+    "relaxation",
+    "comfort",
+    "cosy",
+    "cozy",
+    "home decor",
+    "interior design",
+    "furnishing",
+    "furnished",
+    "lounge room",
+    "family room",
+    "den",
+    "sit down",
+    "sofaa",
+    "couh"
+  ]
+}

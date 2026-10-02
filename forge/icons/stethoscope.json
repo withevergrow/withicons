@@ -1,0 +1,75 @@
+{
+  "name": "stethoscope",
+  "category": "health",
+  "description": "A stethoscope for doctors, checkups, and medical consultations.",
+  "aliases": [
+    "doctor",
+    "physician",
+    "checkup",
+    "medical",
+    "clinic",
+    "diagnosis",
+    "gp",
+    "medic",
+    "check-up"
+  ],
+  "tags": [
+    "health",
+    "medical",
+    "doctor",
+    "checkup",
+    "diagnosis",
+    "care"
+  ],
+  "paths": [
+    {
+      "d": "M4 3 H5.5 V8.5 A3.5 3.5 0 0 0 12.5 8.5 V3 H14",
+      "plate": "K"
+    },
+    {
+      "d": "M9 12 V16 A5 5 0 0 0 19 16 V14",
+      "plate": "K"
+    },
+    {
+      "d": "M22 11 A3 3 0 1 1 16 11 A3 3 0 1 1 22 11 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M22 11 A3 3 0 1 1 16 11 A3 3 0 1 1 22 11 Z"
+  ],
+  "cutouts": [
+    "M20 11 A1 1 0 1 1 18 11 A1 1 0 1 1 20 11 Z"
+  ],
+  "synonyms": [
+    "doctors",
+    "doctor visit",
+    "see a doctor",
+    "medical appointment",
+    "appointment",
+    "consultation",
+    "examination",
+    "exam",
+    "health check",
+    "listen to heart",
+    "heartbeat",
+    "nurse",
+    "healthcare",
+    "health care",
+    "hospital",
+    "medicine",
+    "cardiology",
+    "general practitioner",
+    "family doctor",
+    "pediatrician",
+    "paediatrician",
+    "vet",
+    "veterinarian",
+    "telehealth",
+    "telemedicine",
+    "patient",
+    "stethoscopes",
+    "stethescope",
+    "stethoscop"
+  ]
+}

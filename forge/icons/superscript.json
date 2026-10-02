@@ -1,0 +1,55 @@
+{
+  "name": "superscript",
+  "category": "text",
+  "description": "Letter x with a small raised 2 for exponents, footnotes and superscript text.",
+  "aliases": [
+    "sup",
+    "exponent",
+    "text-superscript",
+    "power-of",
+    "x-squared",
+    "superscript-text",
+    "footnote-mark"
+  ],
+  "synonyms": [
+    "small text above",
+    "raised text",
+    "squared",
+    "to the power",
+    "math",
+    "formula",
+    "footnote",
+    "ordinal",
+    "trademark",
+    "index above",
+    "text formatting",
+    "font style",
+    "word processor",
+    "editor toolbar",
+    "super script",
+    "superscipt"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "typography",
+    "math",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 9 L12.5 20",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 9 L3.5 20",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 5.75 A2.25 2.25 0 0 1 21 5.75 C21 7.25 19.75 8.25 16.5 11 H21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

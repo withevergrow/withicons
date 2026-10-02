@@ -1,6 +1,6 @@
 # withicons
 
-**with icons** from the terminal — search 300 icons x 7 styles in plain English, print SVG or framework code,
+**with icons** from the terminal — search {{icons}} icons x {{styles}} styles in plain English, print SVG, framework or animation code,
 and get import lines. Works offline; everything ships in the package.
 
 > Not published to npm yet — launching soon.
@@ -12,6 +12,12 @@ npx withicons get home --style solid --format react
 npx withicons add home settings delete --framework react
 #   import { Home, Settings, Trash } from '@withicons/react'
 npx withicons get trash --size 32 > trash.svg
+npx withicons animate bell --trigger hover --format react
+npx withicons get heart --style kawaii --flat > heart.svg   # palette colours baked in
+npx withicons palettes heart --style retro                  # the colour palettes picked for this icon
+npx withicons get heart --style retro --palette classic-red --format react
+npx withicons get heart --style sticker --c1 "#16a34a" --ink navy --flat > heart.svg
+npx withicons export home settings --format svg,pdf,png --out icons   # files, for designers, apps and CI
 ```
 
 | command | |
@@ -19,15 +25,77 @@ npx withicons get trash --size 32 > trash.svg
 | `search <words...>` | ranked icons, typo-tolerant (`settigns`), synonyms (`bin`), phrases (`recycle bin`), natural language (`money`) |
 | `get <name...>` | code for one or more icons; names or aliases (`delete` -> trash) |
 | `add <name...>` | import line + usage for `--framework` react (default), vue, svelte, angular, solid, web-component, html-class, svg |
+| `palettes <name>` | the colour palettes picked for that icon (swatches in the terminal); `--style` shows the CSS variables each one sets, `--tag pastel` filters |
+| `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate --list` shows presets and effects |
+| `export <name...>` | save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React/Vue/Svelte/Angular components, PowerPoint, Word, Lottie ([below](#export-files)) |
 | `resolve <name>` | does a name/alias map to one icon? |
-| `styles` · `categories [category]` | the catalogue |
+| `styles` · `categories [category]` | the catalogue; `styles` also lists every colour variable of the multi-colour styles |
 | `mcp` | run the MCP server over stdio (same as `npx -y @withicons/mcp`) |
 | `init [tool...]` | add the agent skill + MCP server to your AI coding tools (below) |
 | `skill` | print the agent skill; `--zip` (upload to Claude / Lovable), `--out <dir>`, `--path` |
 
 Options: `--style/-s`, `--format/-f` (svg, react, vue, svelte, angular, solid, html-class, web-component, data-uri),
-`--framework/--fw`, `--size`, `--color`, `--limit/-n`, `--category/-c`, and **`--json`** for scripts and AI agents
-(stable JSON on stdout; exit code 0 = found, 1 = not found / ambiguous, 2 = usage error).
+`--framework/--fw`, `--size`, `--stroke-width`, `--color`, `--flat` (bake palette colours into the SVG), `--limit/-n`, `--category/-c`,
+`--no-color`, and **`--json`** for scripts and AI agents (stable JSON on stdout; exit code 0 = found, 1 = not found / ambiguous,
+2 = usage error: an unknown option, a missing value or a value that is not allowed).
+
+## Colours
+
+Seven styles paint with more than one colour (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`). Every colour
+is a CSS variable with a default, and `get` can set **all of them**, not just one:
+
+- `--palette <id>`: one of the palettes picked for that icon (`withicons palettes <name>` lists them).
+- `--ink`, `--c1`, `--c2`, `--c3`, `--c4`, `--tint`, `--accent`, `--shadow`, `--shine`, `--edge`: one colour role each (on top of
+  a palette, or alone). `c1` is always the icon's main colour; the CLI maps roles to the variables this icon uses in this style.
+- `--colors "c1=#e11d48,ink=#111,retro-2=#0ea5e9"`: several at once, by role or by variable name.
+
+What you get depends on `--format`: `svg` keeps the variables and sets them on the root `<svg style>` (add `--flat` to bake
+plain hex colours in, for files, `<img>`, Figma and slides); `data-uri` is always baked; `web-component` sets them on
+`<with-icon style>`; react, vue, svelte, solid and angular add a class and print its CSS rule. One-colour styles (line, solid,
+gloss, engrave, sketch) and `html-class` take only the ink.
+
+## Export files
+
+`withicons export` writes the same files as the download button on withicons.com, so designers, app builds and CI
+can make them without a browser:
+
+```sh
+npx withicons export home settings --format svg,pdf,png --out icons
+npx withicons export star --style sticker --format favicon-pack --background "#ffffff" --out public
+npx withicons export bell --format lottie --motion hover          # bell-line-ring-hover.json
+npx withicons export heart --style retro --palette classic-red --format android,ios --out app/icons
+npx withicons export heart --all-styles --format png --size 256 --out hearts
+npx withicons export trash --format jsx --out - > src/icons/Trash.jsx
+npx withicons export home --format all --out everything            # every format below
+```
+
+| `--format` | you get |
+|---|---|
+| `svg` (default) | SVG that keeps `currentColor` and the `--with-*` colour variables (your colours as defaults), for code |
+| `svg-flat` | SVG with every colour baked in: Figma, Illustrator, Canva, Keynote, `<img>` |
+| `pdf` · `eps` | true vector files for print and older design tools (EPS has no transparency) |
+| `png` | a PNG, 512 px unless `--size` |
+| `png-set` | ZIP: @1x, @2x, @3x, @4x (`--size` is the 1x size, default 24) + a README on which file goes where |
+| `ico` | `.ico` with 16, 32, 48, 64 and 256 px inside |
+| `favicon-pack` | ZIP: favicon.ico, favicon.svg, Apple touch icon, PWA icons, site.webmanifest and the `<link>` tags to paste |
+| `android` | VectorDrawable XML for `res/drawable` |
+| `ios` | ZIP: an Xcode `.imageset` with a vector PDF (one-colour icons tint like SF Symbols) |
+| `jsx` · `tsx` · `vue` · `svelte` · `react-native` · `angular` | a ready component file with size, color and title props |
+| `html` · `css` · `data-uri` · `base64` | an inline SVG snippet, a CSS class (+ a `-mask` class that takes the text colour), or one line of text |
+| `pptx` · `pptx-sheet` · `docx` | a PowerPoint slide, a deck with the icon in every style, a Word document (vector in Office 365, PNG elsewhere) |
+| `lottie` · `dotlottie` | the icon's animation as Lottie JSON or a `.lottie` package |
+
+Options: `--style`, `--all-styles` (one file per style), `--size <px>`, `--background transparent|#hex`,
+`--padding <0-0.4>` (space around the icon), colours exactly as for `get` (`--palette <id>`, `--color` = the ink,
+`--c1` … `--edge`, `--colors`), `--motion loop|hover|once|none|<preset>` (e.g. `ring`, `hover:ring`; for `lottie`,
+`dotlottie` and the code formats; `--duration <s>`), `--out <folder>` (default: here; `-` prints one file to stdout),
+and `--json` (the list of files written, for scripts). Several formats at once: `--format svg,png,android`, or `all`.
+
+PNG-based formats (`png`, `png-set`, `ico`, `favicon-pack`, `pptx`, `pptx-sheet`, `docx`) are drawn by
+[`@resvg/resvg-js`](https://www.npmjs.com/package/@resvg/resvg-js), an optional dependency that npm installs with withicons
+wherever it has a prebuilt binary. If it is missing, those formats say so and tell you to run
+`npm install --save-dev @resvg/resvg-js`; everything else works without it. GIF, WebP, JPG, AVIF and video need a
+browser: download them from the icon's page on withicons.com.
 
 ## Add with icons to your AI coding tool
 

@@ -1,0 +1,35 @@
+{
+  "name": "circle",
+  "intent": "pulses softly like a live status dot",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "x-circle",
+      "effect": "rotate"
+    }
+  ]
+}

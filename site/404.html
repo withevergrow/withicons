@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Page not found — with icons</title>
-  <meta name="description" content="This page wandered off. Search 300 free icons in 7 styles instead.">
+  <meta name="description" content="This page wandered off. Search 500 free icons in 12 styles instead.">
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="light dark">
   <!-- served by CloudFront for any missing path, so every URL here is root-absolute -->
@@ -51,7 +51,7 @@
     <div>
       <p class="nf-num" aria-label="404"><span aria-hidden="true">4</span><span class="nf-o s-line" aria-hidden="true" data-nf></span><span aria-hidden="true">4</span></p>
       <h1>This page <span class="hand">wandered off.</span></h1>
-      <p>But 300 icons are right here. Search for the one you came for.</p>
+      <p>But <span data-count="icons">500</span> icons in <span data-count="styles">12</span> styles are right here. Search for the one you came for.</p>
       <div class="nf-actions">
         <button class="btn btn-ink btn-lg" type="button" data-search-open>Search icons</button>
         <a class="btn btn-ghost btn-lg" href="/index.html">Go home</a>
@@ -69,16 +69,29 @@
   <script src="/js/site.js" defer></script>
   <script src="/data/meta.js" defer></script>
   <script src="/data/style-line.js" defer></script>
+  <script src="/js/home-icons.js" defer></script>
   <script>
     addEventListener('DOMContentLoaded', function () {
       var WI = window.WI, el = document.querySelector('[data-nf]'); if (!WI || !el) return
-      var seq = [['search', 'line'], ['compass', 'duo'], ['map-pin', 'solid'], ['help-circle', 'sketch'], ['smile', 'gloss'], ['route', 'blueprint']], i = 0
+      // a lost icon trying on every style (drawn from the home page's small icon pack; the full style files are big)
+      var P = window.WITH_HOME || { svg: {}, roots: {} }
+      var seq = [['search', 'line'], ['compass', 'engrave'], ['map-pin', 'pixel'], ['smile', 'kawaii'], ['cloud', 'glass'], ['heart', 'retro'],
+        ['star', 'sticker'], ['rocket', 'solid'], ['gift', 'duo'], ['sparkles', 'gloss'], ['lightbulb', 'sketch'], ['globe', 'blueprint']].filter(function (f) {
+        return (P.svg[f[1]] && P.svg[f[1]][f[0]] != null) || WI.has(f[0], f[1])
+      }), i = 0
+      if (!seq.length) seq = [['search', 'line']]
+      function draw(n, st) {
+        var inner = P.svg[st] && P.svg[st][n]
+        var r = P.roots && P.roots[st]
+        if (inner == null) return WI.svg(n, st, 24, { 'class': 'pop' })
+        if (!r) return WI.svgFrom(inner, st, 24, { 'class': 'pop' })
+        var a = ''; for (var k in r) a += ' ' + k + '="' + WI.esc(r[k]) + '"'
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"' + a + ' class="pop" aria-hidden="true" focusable="false">' + inner + '</svg>'
+      }
       function show() {
         var f = seq[i % seq.length]; i++
-        WI.loadStyle(f[1]).then(function () {
-          var s = WI.svg(f[0], f[1], 24, { 'class': 'pop' }); if (!s) { show(); return }
-          WI.ORDER.forEach(function (o) { el.classList.remove('s-' + o) }); el.classList.add('s-' + f[1]); el.innerHTML = s
-        })
+        var s = draw(f[0], f[1]); if (!s) return
+        WI.ORDER.forEach(function (o) { el.classList.remove('s-' + o) }); el.classList.add('s-' + f[1]); el.innerHTML = s
       }
       show(); if (!WI.reduced) setInterval(function () { if (!document.hidden) show() }, 2200)
     })

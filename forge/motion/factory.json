@@ -1,0 +1,8 @@
+{
+  "name": "factory",
+  "intent": "hums with a steady pulse like a working production line",
+  "loop": { "preset": "pulse", "origin": [12, 21], "amount": 0.35, "duration": 2.4 },
+  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.7 },
+  "alt": [ { "preset": "type", "amount": 0.6 }, { "preset": "bounce", "origin": [12, 21], "amount": 0.5 } ],
+  "swap": [ { "to": "warehouse", "effect": "slide-right" }, { "to": "building", "effect": "fade" }, { "to": "factory@solid", "effect": "scale" } ]
+}

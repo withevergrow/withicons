@@ -1,0 +1,64 @@
+{
+  "name": "panel-bottom",
+  "category": "layout",
+  "description": "A window frame with a pane along the bottom, for consoles, trays and bottom sheets.",
+  "aliases": [
+    "bottom-panel",
+    "bottom-sheet",
+    "console-pane",
+    "footer-panel",
+    "dock-bottom",
+    "bottom-drawer",
+    "bottom-bar",
+    "terminal-panel",
+    "panel-bottom-open"
+  ],
+  "tags": [
+    "layout",
+    "panel",
+    "window",
+    "console",
+    "sheet",
+    "split"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 15 H21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 15 H21 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "bottom pane",
+    "lower panel",
+    "footer",
+    "console",
+    "terminal",
+    "output panel",
+    "debug panel",
+    "problems panel",
+    "status tray",
+    "tray",
+    "drawer",
+    "action sheet",
+    "mobile sheet",
+    "toggle panel",
+    "show panel",
+    "hide panel",
+    "split horizontal",
+    "horizontal split",
+    "layout",
+    "window layout",
+    "pane",
+    "panes",
+    "dock",
+    "docked panel"
+  ]
+}

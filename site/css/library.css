@@ -11,6 +11,11 @@
   --s-engrave: var(--c-engrave, #C9962B);
   --s-blueprint: var(--c-blueprint, #00A3C4);
   --s-sketch: var(--c-sketch, #22A861);
+  --s-glass: var(--c-glass, #5B9DFF);
+  --s-kawaii: var(--c-kawaii, #FF7A9A);
+  --s-sticker: var(--c-sticker, #B57CFF);
+  --s-pixel: var(--c-pixel, #4FAE0C);
+  --s-retro: var(--c-retro, #F57C12);
   --l-bg: var(--paper, #FBF8F3);
   --l-fg: var(--ink, #111318);
   --l-card: var(--card, #FFFFFF);
@@ -32,10 +37,12 @@
   --mk-ink: #111318;
   /* text/glyph colour ON a style-colour fill, picked for WCAG AA (white only where it reaches 4.5:1) */
   --on-line: #fff; --on-duo: #fff; --on-solid: #111318; --on-gloss: #111318; --on-engrave: #111318; --on-blueprint: #111318; --on-sketch: #111318;
+  --on-glass: #111318; --on-kawaii: #111318; --on-sticker: #111318; --on-pixel: #111318; --on-retro: #111318;
   --on-acc: var(--on-line);
   /* AA text twins of the style colours (tokens.css: brighter in dark) */
   --t-line: var(--c-line-text, #2448D8); --t-solid: var(--c-solid-text, #C93512); --t-duo: var(--c-duo-text, #5B3CE0); --t-gloss: var(--c-gloss-text, #C4166C);
   --t-engrave: var(--c-engrave-text, #8A6414); --t-blueprint: var(--c-blueprint-text, #00728A); --t-sketch: var(--c-sketch-text, #157A43);
+  --t-glass: var(--c-glass-text, #2F65C8); --t-kawaii: var(--c-kawaii-text, #C2335A); --t-sticker: var(--c-sticker-text, #7A3FD6); --t-pixel: var(--c-pixel-text, #3B7300); --t-retro: var(--c-retro-text, #AD4C00);
   --acc-text: var(--t-line);
 }
 :root[data-theme="dark"] :is(.lib, .lib-selbar, .lib-toast) { --on-line: #111318; --on-duo: #111318; }
@@ -46,6 +53,11 @@
 .lib[data-style="engrave"] { --acc: var(--s-engrave); --on-acc: var(--on-engrave); --acc-text: var(--t-engrave) }
 .lib[data-style="blueprint"] { --acc: var(--s-blueprint); --on-acc: var(--on-blueprint); --acc-text: var(--t-blueprint) }
 .lib[data-style="sketch"] { --acc: var(--s-sketch); --on-acc: var(--on-sketch); --acc-text: var(--t-sketch) }
+.lib[data-style="glass"] { --acc: var(--s-glass); --on-acc: var(--on-glass); --acc-text: var(--t-glass) }
+.lib[data-style="kawaii"] { --acc: var(--s-kawaii); --on-acc: var(--on-kawaii); --acc-text: var(--t-kawaii) }
+.lib[data-style="sticker"] { --acc: var(--s-sticker); --on-acc: var(--on-sticker); --acc-text: var(--t-sticker) }
+.lib[data-style="pixel"] { --acc: var(--s-pixel); --on-acc: var(--on-pixel); --acc-text: var(--t-pixel) }
+.lib[data-style="retro"] { --acc: var(--s-retro); --on-acc: var(--on-retro); --acc-text: var(--t-retro) }
 .lib[data-style="all"] { --acc: var(--l-fg); --acc-text: var(--l-fg); --on-acc: var(--l-bg) }
 .lib { transition: --acc .7s var(--ease); }
 
@@ -58,7 +70,7 @@
   color: var(--l-fg); font-family: var(--f-ui);
   --ic: var(--l-fg);
 }
-.lib button { font-family: inherit }
+:where(.lib) button { font-family: inherit }
 .lib kbd, .lib-selbar kbd, .lib-toast kbd {
   font: 600 .78em/1 var(--f-mono); padding: .28em .45em; border-radius: 6px;
   background: var(--l-card); border: 1px solid var(--l-rule-2); box-shadow: 0 1px 0 var(--l-rule-2); color: inherit;
@@ -76,9 +88,11 @@
 }
 .lib-eyebrow { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 18px; padding: 7px 14px 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--l-card) 80%, transparent); border: 1px solid var(--l-rule); font: 600 12.5px/1 var(--f-mono); letter-spacing: .03em; text-transform: uppercase; color: var(--l-muted); }
 .lib-dots { display: inline-flex; gap: 3px }
-.lib-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--s-line) }
+.lib-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--s-line) }
 .lib-dots i:nth-child(2) { background: var(--s-solid) } .lib-dots i:nth-child(3) { background: var(--s-duo) } .lib-dots i:nth-child(4) { background: var(--s-gloss) }
 .lib-dots i:nth-child(5) { background: var(--s-engrave) } .lib-dots i:nth-child(6) { background: var(--s-blueprint) } .lib-dots i:nth-child(7) { background: var(--s-sketch) }
+.lib-dots i:nth-child(8) { background: var(--s-glass) } .lib-dots i:nth-child(9) { background: var(--s-kawaii) } .lib-dots i:nth-child(10) { background: var(--s-sticker) }
+.lib-dots i:nth-child(11) { background: var(--s-pixel) } .lib-dots i:nth-child(12) { background: var(--s-retro) }
 .lib-nw { white-space: nowrap }
 .lib-h1 { margin: 0 auto; max-width: 20ch; font: 800 clamp(38px, 5.4vw, 84px)/.95 var(--f-ui); letter-spacing: -.04em; text-wrap: balance; }
 .lib-hand {
@@ -119,7 +133,7 @@
 .lib-search input {
   width: 100%; height: 66px; padding: 0 96px 0 62px; border-radius: 22px;
   font: 500 clamp(17px, 1.6vw, 21px)/1 var(--f-ui); color: var(--l-fg); letter-spacing: -.01em;
-  background: var(--l-card); border: 2px solid var(--l-rule-2); outline: none;
+  background: var(--l-card); border: 2px solid var(--l-rule-2); outline: 2px solid transparent;
   box-shadow: 0 1px 0 var(--l-rule), 0 22px 44px -32px rgba(17, 19, 24, .55);
   transition: border-color .2s, box-shadow .25s; -webkit-appearance: none; appearance: none;
 }
@@ -155,6 +169,21 @@
 .sp[aria-checked="true"]:hover { background: transparent }
 .sp[aria-checked="true"] .sp-g { color: var(--on-sc, #fff); transform: rotate(-8deg) scale(1.08) }
 .sp-compare { flex: 0 0 auto; order: 99; margin-left: 4px; }
+/* twelve styles: every pill is an icon, the picked one also shows its name (it grows, the ink follows) */
+.lib-styles .sp:not(.sp-compare) { flex: 0 0 auto; padding: 0 9px; gap: 0 }
+.lib-styles .sp:not(.sp-compare) .sp-t { max-width: 0; overflow: hidden; opacity: 0 }
+.lib-styles .sp[aria-checked="true"] { padding: 0 15px 0 11px; gap: 8px }
+.lib-styles .sp[aria-checked="true"] .sp-t { max-width: 12ch; opacity: 1 }
+.lib-styles .sp:not([aria-checked="true"]):hover .sp-g { transform: translateY(-2px) scale(1.08) }
+.sp-sep { flex: none; align-self: center; width: 1px; height: 22px; margin: 0 4px; background: var(--l-rule-2); }
+.sp-new { position: absolute; top: 1px; right: -2px; padding: 2px 4px; border-radius: 6px; background: var(--l-sun); color: #111318; font: 800 8px/1 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; pointer-events: none; box-shadow: 0 0 0 2px var(--l-card); transition: opacity .2s }
+.sp.is-new[aria-checked="true"] .sp-new { opacity: 0 }
+.lib-styles .sp-compare { margin-left: 2px }
+.lib-styles .sp-compare .sp-t { max-width: none }
+/* more pills than room: soft fades show there is more to scroll to */
+.lib-styles.is-over { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 34px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 34px), transparent) }
+.lib-styles.is-scrolled { -webkit-mask-image: linear-gradient(90deg, transparent, #000 34px); mask-image: linear-gradient(90deg, transparent, #000 34px) }
+.lib-styles.is-over.is-scrolled { -webkit-mask-image: linear-gradient(90deg, transparent, #000 34px, #000 calc(100% - 34px), transparent); mask-image: linear-gradient(90deg, transparent, #000 34px, #000 calc(100% - 34px), transparent) }
 .sp-compare::before { content: ""; position: absolute; left: -3px; top: 10px; bottom: 10px; width: 1px; background: var(--l-rule-2) }
 .sp-compare[aria-pressed="true"] { background: var(--l-fg); color: var(--l-bg) }
 .sp-compare[aria-pressed="true"] .sp-g { color: var(--l-bg) }
@@ -172,6 +201,9 @@
 .tool-btn .chev { width: 15px; height: 15px; color: var(--l-muted); transition: transform .25s }
 .tool-btn[aria-expanded="true"] .chev { transform: rotate(180deg) }
 .tool-btn[aria-pressed="true"] { background: var(--l-fg); color: var(--l-bg); border-color: var(--l-fg) }
+.tool-anim[aria-pressed="true"] { background: var(--acc); color: var(--on-acc, #fff); border-color: var(--acc); box-shadow: 0 10px 22px -14px var(--acc) }
+.tool-anim[aria-pressed="true"] svg path:first-child { fill: currentColor }
+.lib.is-animate .tile:hover .t-ic { transform: none }
 .tools-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--l-fg); box-shadow: 0 0 0 2px var(--l-card), 0 0 0 3px var(--l-rule-2); }
 .pop { position: relative }
 .pop-panel {
@@ -236,7 +268,7 @@
 .cat[aria-pressed="true"] .cat-g, .cat[aria-pressed="true"] small { color: inherit }
 .cat.is-zero { opacity: .38 }
 .lib.has-query .cat.is-zero:not([aria-pressed="true"]) { display: none }
-.lib-body.cats-top .lib-cats { position: static; max-height: none; flex-direction: row; overflow-x: auto; scrollbar-width: none; gap: 6px; padding: 2px 0 4px; mask-image: linear-gradient(90deg, #000 92%, transparent); }
+.lib-body.cats-top .lib-cats { position: static; max-height: none; flex-direction: row; overflow-x: auto; scrollbar-width: none; gap: 6px; padding: 2px 0 4px; -webkit-mask-image: linear-gradient(90deg, #000 92%, transparent); mask-image: linear-gradient(90deg, #000 92%, transparent); }
 .lib-body.cats-top .lib-cats::-webkit-scrollbar { display: none }
 .lib-body.cats-top .cat { width: auto; flex: none; padding: 8px 13px 8px 10px; border-radius: 999px; background: var(--l-card); border: 1px solid var(--l-rule) }
 .lib-body.cats-top .cat[aria-pressed="true"] { background: var(--l-fg); border-color: var(--l-fg) }
@@ -250,6 +282,7 @@
 .meta-line q { color: var(--l-fg); font-weight: 650 }
 .meta-sep { opacity: .5 }
 .meta-sc { color: var(--acc-text, var(--acc)); font-weight: 700 }
+.meta-say { color: var(--l-muted) }
 .meta-speed { margin-left: auto; font: 500 11.5px/1 var(--f-mono); color: var(--l-muted) }
 .meta-chip, .meta-link { border: 0; cursor: pointer; font: inherit; }
 .meta-chip { display: inline-flex; gap: 6px; align-items: center; padding: 4px 10px; border-radius: 999px; background: var(--l-fg); color: var(--l-bg); font-weight: 600; font-size: 13px }
@@ -311,12 +344,13 @@
 
 /* compare rows */
 .cmp-head { position: absolute; top: 0; display: grid; height: 24px; z-index: 2 }
-.cmp-head span { display: flex; align-items: center; justify-content: center; gap: 6px; font: 650 11px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--sc-text, color-mix(in srgb, var(--sc) 80%, var(--l-fg))); white-space: nowrap; overflow: hidden }
+.cmp-head span { display: flex; align-items: center; justify-content: center; gap: 5px; font: 650 10.5px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .03em; color: var(--sc-text, color-mix(in srgb, var(--sc) 80%, var(--l-fg))); white-space: nowrap; overflow: hidden }
 .cmp-head i { width: 7px; height: 7px; border-radius: 50%; background: var(--sc); flex: none }
 .lib-grid[data-view="compare"] .t-name { top: auto; bottom: 6px; font: 600 10px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--sc-text, var(--sc)); opacity: 0; transition: opacity .2s }
 .lib-grid[data-view="compare"] .tile:hover .t-name, .lib-grid[data-view="compare"] .tile:focus-visible .t-name { opacity: 1 }
 .lib-grid[data-view="compare"] .t-card::before { content: ""; position: absolute; left: 30%; right: 30%; top: -1px; height: 3px; border-radius: 0 0 3px 3px; background: var(--sc); opacity: .75 }
 .lib-grid[data-view="compare"] .tile { border-radius: 14px }
+.lib-grid[data-wrap] .crow-l { align-items: flex-start; justify-content: flex-start; padding-top: 6px }
 .crow-l { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 5px; padding: 0 8px 0 2px; border: 0; background: none; color: var(--l-fg); text-align: left; cursor: pointer; overflow: hidden; font-family: var(--f-ui) }
 .crow-l b { max-width: 100%; font: 650 15px/1.15 var(--f-ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .crow-l b mark { background: color-mix(in srgb, var(--l-sun) 80%, transparent); color: #111318; border-radius: 3px }
@@ -386,7 +420,7 @@
 .vw-ib[data-vw="close"] { background: var(--l-card-2) }
 .vw-ib[data-vw="close"]:hover { background: var(--l-fg); color: var(--l-bg) }
 .vw-title { margin: 0; font: 800 clamp(28px, 7cqi, 40px)/1 var(--f-ui); letter-spacing: -.035em; outline: none; text-wrap: balance }
-.vw-title:focus, .vw-title:focus-visible { outline: none }
+.vw-title:focus, .vw-title:focus-visible { outline: none; box-shadow: none }
 .vw-desc { margin: 8px 0 0; font-size: 14.5px; line-height: 1.45; color: var(--l-muted); max-width: 52ch }
 
 /* main: single column by default, two columns once the panel is wide */
@@ -402,7 +436,7 @@
   box-shadow: inset 0 0 0 1px rgba(17, 19, 24, .08);
 }
 .vw-stage:active { cursor: grabbing }
-.vw-stage::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 1px 1px, rgba(17, 19, 24, .10) 1px, transparent 1.4px) 0 0 / 20px 20px; mask-image: radial-gradient(closest-side, #000 40%, transparent); }
+.vw-stage::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 1px 1px, rgba(17, 19, 24, .10) 1px, transparent 1.4px) 0 0 / 20px 20px; -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent); mask-image: radial-gradient(closest-side, #000 40%, transparent); }
 .vw-stage[data-bg="white"] { --stage-bg: #FFFFFF }
 .vw-stage[data-bg="dark"] { --stage-bg: #111318 }
 .vw-stage[data-bg="dark"]::before, .vw-stage[data-bg="brand"]::before { background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .14) 1px, transparent 1.4px) }
@@ -425,13 +459,24 @@
 .vw-bg[aria-checked="true"] { border-color: #111318 }
 .vw-readout { position: absolute; right: 12px; bottom: 13px; padding: 6px 10px; border-radius: 999px; background: rgba(255, 255, 255, .86); color: #111318; font: 500 11.5px/1 var(--f-mono); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .3) }
 .vw-readout b { font-weight: 700 }
+.vw-play { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px 0 10px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .9); color: #111318; font: 650 12.5px/1 var(--f-ui); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .35); cursor: pointer; transition: transform .25s var(--ease-spring) }
+.vw-play svg { width: 15px; height: 15px; transition: transform .5s var(--ease) }
+.vw-play:hover { transform: translateY(-1px) }
+.vw-play:active svg { transform: rotate(-200deg) }
+.vw-play[hidden] { display: none }
+.lib-viewer.has-studio .vw-art { cursor: pointer }
+.vw-art > .wied-ic { width: 100% !important; height: 100% !important; display: grid }
+.vw-art > .wied-ic > svg, .vw-art .wm-swap, .vw-art .wm-swap > span, .vw-art .wm-swap svg { width: 100%; height: 100%; display: block; overflow: visible }
+.vw-art .wm-swap { display: grid }
 
 /* style switcher */
-.vw-styles { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px }
+.vw-styles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px }
+.vw-st[data-group="playful"] { background: linear-gradient(160deg, color-mix(in srgb, var(--sc) 8%, var(--l-card)), var(--l-card) 60%) }
 .vw-st { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 0 8px; border-radius: 16px; border: 1px solid var(--l-rule); background: var(--l-card); color: var(--l-fg); cursor: pointer; min-width: 0; transition: transform .25s var(--ease-spring), border-color .2s, background .2s, color .2s }
 .vw-st-g { width: 28px; height: 28px; display: grid; place-items: center; color: var(--sc) }
 .vw-st-g svg { width: 28px; height: 28px }
 .vw-st-g .t-skel { width: 22px; height: 22px }
+.vw-st-dot { width: 12px; height: 12px; border-radius: 50%; background: currentColor }  /* Save-Data: the style loads when picked */
 .vw-st-t { font: 600 10.5px/1 var(--f-ui); letter-spacing: -.015em; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--l-muted) }
 .vw-st:hover { transform: translateY(-2px); border-color: var(--sc) }
 .vw-st[aria-checked="true"] { background: var(--sc); border-color: var(--sc); box-shadow: 0 12px 22px -14px var(--sc) }
@@ -475,11 +520,50 @@
 .vw-h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 700 12px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .07em; color: var(--l-muted) }
 .vw-tune { display: grid; gap: 14px }
 .vw-tune .vw-h3 { margin-bottom: 0 }
+.vw-ttabs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; padding: 4px; border-radius: 16px; background: var(--l-card-2) }
+.vw-ttabs button { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 38px; border: 0; border-radius: 12px; background: none; color: var(--l-muted); font: 680 14px/1 var(--f-ui); cursor: pointer; transition: color .25s }
+.vw-ttabs button:hover, .vw-ttabs button[aria-selected="true"] { color: var(--l-fg) }
+.vw-ttab-ink { position: absolute; z-index: 0; left: 0; top: 4px; bottom: 4px; width: 0; border-radius: 12px; background: var(--l-card); box-shadow: 0 1px 2px rgba(17, 19, 24, .08), 0 6px 16px -10px rgba(17, 19, 24, .35); transition: transform .45s var(--ease-spring), width .45s var(--ease) }
+.vw-newdot { width: 7px; height: 7px; border-radius: 50%; background: var(--sc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sc) 22%, transparent) }
+.vw-tpane { display: grid; gap: 14px; animation: vw-pane .4s var(--ease) both }
+.vw-tpane[hidden] { display: none }
+@keyframes vw-pane { from { opacity: 0; transform: translateY(6px) } }
+.vw-ed-wait { display: flex; align-items: center; gap: 10px; margin: 6px 0; font-size: 14px; color: var(--l-muted) }
+.vw-ed-wait .t-skel { width: 28px; height: 28px; flex: none }
+/* the studio inside the drawer: no stage (the drawer's stage plays it), no tab bar (the drawer's tabs drive it);
+   its Download panel lives in its own drawer section (.vw-dl), the code box stays */
+.vw-ed .wied { gap: 12px; --sc: var(--sc) }
+.vw-ed .wied-stagecol, .vw-ed .wied-tabs { display: none }
+.vw-ed .wied-main { grid-template-columns: minmax(0, 1fr) }
+.vw-ed .wied-panel { padding: 0; border: 0; border-radius: 0; background: none }
+.vw-ed .wied-out { padding: 0; border: 0; border-radius: 0; background: none; gap: 10px }
+/* "Download in any format": the studio's Download panel, sized for the drawer */
+.vw-dlsec[hidden] { display: none }
+.vw-dl { display: grid; gap: 12px; min-width: 0 }
+.vw-dl .wdl { --dl-sc: var(--sc); --dl-on: var(--on-sc, #fff); gap: 12px }
+.vw-dl .wdl-top { display: grid; gap: 6px }
+.vw-dl .wdl-h { font: 700 12px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .07em; color: var(--l-muted) }
+.vw-dl .wdl-sub { font-size: 13.5px }
+.vw-dl .wdl-body { padding: 8px; border-radius: 22px }
+.vw-ed .wied-intent { margin-bottom: 16px; font-size: 14px; padding: 10px 12px }
+.vw-ed .wied-f + .wied-f { margin-top: 18px }
+.vw-ed .wied-sliders { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) }
+.vw-ed .wied-seg button { font-size: 13px }
+.vw-ed .wied-codebox pre { max-height: 220px; font-size: 12px }
+.vw-ed .wied-code { border-radius: 16px }
+@container (max-width: 420px) {
+  .vw-ed .wied-sliders { grid-template-columns: minmax(0, 1fr); gap: 4px }
+  .vw-ed .wied-sugg { grid-template-columns: minmax(0, 1fr) }
+}
 .vw-field { display: grid; grid-template-columns: 64px minmax(0, 1fr) 76px; align-items: center; gap: 4px 12px }
 .vw-out { font: 600 12px/1 var(--f-mono); color: var(--l-fg); display: flex; align-items: center; gap: 4px; justify-content: flex-end; white-space: nowrap }
 .vw-out .vw-reset { padding: 2px }
 .vw-label { font: 650 13.5px/1.2 var(--f-ui) }
 .vw-swatches { display: flex; flex-wrap: wrap; gap: 4px; grid-column: 2 / -1 }
+.vw-hexrow { grid-column: 2 / -1; display: inline-flex; align-items: center; gap: 8px; justify-self: start; font: 600 12px/1 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--l-muted) }
+.vw-hex { width: 92px; height: 30px; padding: 0 8px; border-radius: 9px; border: 1px solid var(--l-rule-2); background: var(--l-card); color: var(--l-fg); font: 600 12.5px/1 var(--f-mono); letter-spacing: .02em; text-transform: uppercase }
+.vw-hex:focus { border-color: var(--sc, var(--acc)) }
+.vw-hex[aria-invalid="true"] { border-color: #D93A3F; background: color-mix(in srgb, #D93A3F 8%, var(--l-card)) }
 .vw-sw { width: 30px; height: 30px }
 .vw-reset { border: 0; background: none; color: var(--l-muted); font: 500 12px/1 var(--f-ui); text-decoration: underline; cursor: pointer; padding: 4px }
 .vw-check { display: flex; align-items: center; gap: 10px; font-size: 13.5px; line-height: 1.35; cursor: pointer; color: var(--l-fg) }
@@ -530,6 +614,20 @@
 .dc-li { margin: 0; display: flex; align-items: center; gap: 7px }
 .dc-li i { flex: 1 }
 
+/* the studio's ten placements: a swipeable row in the narrow drawer, a grid once it is wide */
+.vw-h3row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px }
+.vw-h3row .vw-h3 { margin: 0 }
+.vw-h3note { font: 700 15px/1 var(--f-hand); color: var(--sc-text, var(--l-muted)); transform: rotate(-2deg); white-space: nowrap }
+.vw-places.wied-places { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(232px, 78%); gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; margin: 0 -20px; padding: 2px 20px 14px; scroll-padding-inline: 20px }
+.vw-places .wied-pl { scroll-snap-align: start; border-radius: 20px }
+.vw-places .wied-pl.is-slide, .vw-places .wied-pl.is-input { grid-column: auto }
+.vw-places .wied-pl-box { min-height: 156px; padding: 18px 14px }
+.vw-places .wied-pl figcaption { padding: 10px 14px; font-size: 11px }
+.vw-places .pl-slide-in b { font-size: 17px }
+.vw-places .pl-slide-ic { width: 46px; height: 46px }
+.vw-places .pl-btn { height: 44px; padding: 0 18px 0 14px; font-size: 15px }
+.vw-places .wied-pl:hover { transform: translateY(-2px) }
+
 /* chips, related, ai, dev */
 .vw-chips { margin: 0; display: flex; flex-wrap: wrap; gap: 6px }
 .vw-chip { height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--l-rule); background: var(--l-card-2); color: var(--l-fg); font: 500 13px/1 var(--f-ui); cursor: pointer; transition: border-color .2s, background .2s, color .2s }
@@ -573,10 +671,14 @@
   .vw-col-a { position: sticky; top: 0 }
   .vw-stage { aspect-ratio: 5 / 4; max-height: none }
   .vw-col-a .vw-mocks { border-top: 0; padding-top: 4px }
+  .vw-places.wied-places { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-columns: auto; overflow: visible; margin: 0; padding: 0 }
+  .vw-places .wied-pl.is-slide, .vw-places .wied-pl.is-input { grid-column: span 2 }
+  .lib-viewer.has-studio .vw-col-a { position: static }
 }
 @container (max-width: 380px) {
   .vw-styles { gap: 4px }
   .vw-st-t { font-size: 9.5px; letter-spacing: -.03em }
+  .vw-places.wied-places { margin: 0 -16px; padding-inline: 16px; scroll-padding-inline: 16px; grid-auto-columns: 82% }
 }
 @container (min-width: 1100px) {
   .mk-grid { grid-template-columns: repeat(4, 1fr) }
@@ -625,6 +727,8 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
   transition: transform .5s var(--ease-spring); visibility: hidden;
 }
 .lib-selbar.is-on { transform: translate(-50%, 0); visibility: visible }
+/* tablets: five actions + the picked icons don't fit one line, so the bar wraps instead of pushing "Clear" off screen */
+@media (max-width: 980px) { .lib-selbar { flex-wrap: wrap; justify-content: center; border-radius: 22px; padding: 10px } }
 .sel-prev { display: flex; }
 .sel-prev span { width: 34px; height: 34px; margin-left: -10px; border-radius: 50%; background: var(--sc); color: var(--on-sc, #fff); display: grid; place-items: center; border: 2px solid var(--l-slab) }
 .sel-prev span:first-child { margin-left: 0 }
@@ -672,13 +776,16 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 
 /* ─────────── responsive ─────────── */
 @media (max-width: 1240px) {
-  .sp { padding: 0 11px 0 9px; gap: 6px; font-size: 13.5px }
-  .sp:not([aria-checked="true"]) .sp-t { display: none }
-  .sp { flex: 1 0 auto; padding: 0 10px }
+  .sp { font-size: 13.5px }
+  .sp-compare { padding: 0 11px 0 9px; gap: 6px }
 }
 @media (max-width: 1023px) {
   .tool-btn span { display: none }
   .tool-btn { padding: 0 14px }
+  .lib-styles .sp:not(.sp-compare) { padding: 0 7px }
+  .lib-styles .sp[aria-checked="true"] { padding: 0 12px 0 9px }
+  .seg button { width: 34px }
+  .sp-compare .sp-t { display: none }
 }
 @media (max-width: 720px) {
   .lib-hero { padding-top: 18px; padding-bottom: 12px }
@@ -695,8 +802,12 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
   .lib-hints::-webkit-scrollbar { display: none }
   .lib-hints button { flex: none }
   .lib-row { gap: 6px }
-  .sp { height: 38px; padding: 0 9px }
+  .sp { height: 38px }
+  .lib-styles .sp:not(.sp-compare) { padding: 0 8px }
+  .lib-styles .sp[aria-checked="true"] { padding: 0 12px 0 9px }
   .sp-compare .sp-t { display: none }
+  .sp-sep { margin: 0 3px }
+  .meta-say { display: none }
   .seg button { width: 34px; height: 38px }
   .seg { padding: 3px }
   .tool-btn { height: 46px; padding: 0 12px }
@@ -713,13 +824,14 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
   .t-name { left: 5px; right: 5px; font-size: 12px; letter-spacing: -.01em }
   .lib-dots { display: none }
   .lib-eyebrow { font-size: 10px; letter-spacing: .02em }
-  .sp { padding: 0 7px }
+  .lib-styles .sp:not(.sp-compare) { padding: 0 7px }
   .sp-g, .sp-g svg { width: 20px; height: 20px }
   .vw-duo { grid-template-columns: 1fr }
   .vw-field { grid-template-columns: 60px minmax(0, 1fr) auto }
 }
 @media (hover: none) {
   .tile:hover .t-card { transform: none; box-shadow: none }
+  .tool-anim { display: none }   /* hover-to-play has no meaning on touch screens; every drawer still animates */
 }
 @media (prefers-reduced-motion: reduce) {
   .lib, .lib *, .lib-selbar, .lib-toast, .vw-scrim { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
@@ -733,9 +845,17 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 .vw-btn.is-tag code { font: 500 12.5px/1.3 var(--f-mono); color: var(--l-fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block }
 .vw-btn > .vw-pill { flex: none; height: 30px; padding: 0 13px; border-radius: 999px; display: grid; place-items: center; background: var(--l-fg); color: var(--l-bg); font: 650 12.5px/1 var(--f-ui); transition: background .2s }
 .vw-btn.is-done .vw-pill { background: var(--s-sketch); color: #fff }
-.vw-once { margin: 0 2px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 8px; font-size: 12px; color: var(--l-muted) }
-.vw-once span { grid-column: 1 / -1 }
-.vw-once code { font: 500 11px/1.35 var(--f-mono); color: var(--l-fg); padding: 6px 8px; border-radius: 8px; background: var(--l-card-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.vw-once { margin: 0 2px; font-size: 12.5px; color: var(--l-muted) }
+.vw-once > summary { display: inline-flex; align-items: center; gap: 6px; padding: 4px 2px; list-style: none; cursor: pointer; font: 600 12.5px/1.2 var(--f-ui); color: var(--l-muted) }
+.vw-once > summary::-webkit-details-marker { display: none }
+.vw-once > summary::before { content: "+"; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--l-card-2); font: 600 12px/1 var(--f-mono); color: var(--l-fg); transition: transform .3s var(--ease-spring) }
+.vw-once[open] > summary::before { transform: rotate(45deg) }
+.vw-once > summary:hover { color: var(--l-fg) }
+.vw-once > p { margin: 4px 0 2px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 8px }
+.vw-once > p > span { grid-column: 1 / -1; line-height: 1.4 }
+.vw-once > p > span code { font: 500 11px/1 var(--f-mono); color: var(--l-fg) }
+.vw-soon-tag { padding: 2px 6px; border-radius: 999px; background: var(--l-sun); color: #111318; font: 700 9.5px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap }
+.vw-once > p > code { font: 500 11px/1.35 var(--f-mono); color: var(--l-fg); padding: 6px 8px; border-radius: 8px; background: var(--l-card-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
 .vw-mini { height: 28px; padding: 0 11px; border-radius: 9px; border: 1px solid var(--l-rule-2); background: var(--l-card); color: var(--l-fg); font: 600 12px/1 var(--f-ui); cursor: pointer }
 .vw-mini.is-done { background: var(--s-sketch); border-color: var(--s-sketch); color: #fff }
 
@@ -755,3 +875,35 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 .vw-ai .ask-task { min-height: 34px; padding: 0 12px; font-size: 12.5px }
 .vw-ai .ask-need-in { height: 42px; font-size: 14px }
 .em-ai .ask-ai-note { display: none }
+
+/* Colours panel (js/editor.js colorsPanel) in the drawer's Look tab: every colour of a multi-colour style + palettes */
+.vw-colors { margin-bottom: 4px; padding-bottom: 16px; border-bottom: 1px solid var(--l-rule) }
+.vw-colors .wcp-row { background: var(--l-card-2, var(--paper-2)) }
+.vw-colors .wcp-hex, .vw-colors .wcp-tag, .vw-colors .wcp-resetall { background: var(--l-card, var(--card)) }
+.vw-field[hidden] { display: none }
+
+/* ───────── Windows High Contrast / forced colours ─────────
+   Backgrounds become system colours and box-shadows disappear: colour chips would all be the same empty circle and
+   selected states (filled backgrounds) would vanish. The chip's colour is the information, so it keeps it; selection
+   becomes a Highlight outline; style colours on glyphs stay so the twelve styles still look different. */
+@media (forced-colors: active) {
+  .swatches .sw > span, .vw-sw > span, .vw-bg span, .t-chk, .vw-st-g, .vw-check-ui { forced-color-adjust: none }
+  .vw-st[aria-checked="true"] .vw-st-g { color: CanvasText }
+  .swatches .sw > span, .vw-sw > span, .vw-bg span { border: 1px solid CanvasText }
+  .swatches .sw[aria-pressed="true"], .swatches .sw.is-on, .vw-sw[aria-checked="true"], .vw-sw.is-on, .vw-bg[aria-checked="true"],
+  .sp[aria-checked="true"], .sp-compare[aria-pressed="true"], .seg button[aria-pressed="true"], .tool-btn[aria-pressed="true"], .tool-anim[aria-pressed="true"],
+  .cat[aria-pressed="true"], .vw-st[aria-checked="true"], .vw-presets button[aria-checked="true"], .vw-tabs button[aria-selected="true"],
+  .vw-ttabs button[aria-selected="true"] { outline: 3px solid Highlight; outline-offset: 1px }
+  .sp[aria-checked="true"], .cat[aria-pressed="true"], .vw-st[aria-checked="true"] .vw-st-t, .vw-ttabs button[aria-selected="true"] { color: Highlight }
+  .vw-ttab-ink { display: none }
+  .tile.is-sel .t-card, .tile.is-active .t-card { outline: 3px solid Highlight; outline-offset: -3px }
+  .tools-dot { forced-color-adjust: none; border: 1px solid CanvasText }
+  .vw-check-ui { border: 1px solid CanvasText; background: Canvas }
+  .vw-check input:checked + .vw-check-ui { background: Highlight }
+  .vw-range { appearance: auto; -webkit-appearance: auto }
+  .vw-range::-webkit-slider-runnable-track { background: ButtonText }
+  .vw-range::-moz-range-track { background: ButtonText }
+  .lib :focus-visible, .lib-selbar :focus-visible, .tile:focus-visible { outline: 3px solid CanvasText; outline-offset: 3px }
+}
+/* iOS Safari zooms the page into any focused field under 16px */
+@media (pointer: coarse) { .vw-hex { font-size: 16px } }

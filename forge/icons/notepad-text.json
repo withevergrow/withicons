@@ -1,0 +1,96 @@
+{
+  "name": "notepad-text",
+  "category": "files",
+  "description": "A ring-bound notepad with ruled lines for quick notes, memos and drafts.",
+  "aliases": [
+    "notes-pad",
+    "writing-pad",
+    "ruled-paper",
+    "note-sheet",
+    "jot",
+    "legal-pad",
+    "memo-pad",
+    "scratch-pad",
+    "notepad-lines"
+  ],
+  "tags": [
+    "notepad",
+    "notes",
+    "memo",
+    "writing",
+    "draft",
+    "paper"
+  ],
+  "paths": [
+    {
+      "d": "M6 4 H18 A2 2 0 0 1 20 6 V19.5 A2 2 0 0 1 18 21.5 H6 A2 2 0 0 1 4 19.5 V6 A2 2 0 0 1 6 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 2.5 V6",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2.5 V6",
+      "plate": "A"
+    },
+    {
+      "d": "M16 2.5 V6",
+      "plate": "A"
+    },
+    {
+      "d": "M8 10 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 14 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 18 H12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 4 H18 A2 2 0 0 1 20 6 V19.5 A2 2 0 0 1 18 21.5 H6 A2 2 0 0 1 4 19.5 V6 A2 2 0 0 1 6 4 Z"
+  ],
+  "cutouts": [
+    "M8 2.5 V6",
+    "M12 2.5 V6",
+    "M16 2.5 V6",
+    "M8 10 H16",
+    "M8 14 H16",
+    "M8 18 H12.5"
+  ],
+  "synonyms": [
+    "notepad",
+    "note pad",
+    "notes",
+    "note",
+    "memo",
+    "memos",
+    "quick note",
+    "jot down",
+    "draft",
+    "drafts",
+    "scratch",
+    "scratchpad",
+    "text",
+    "text editor",
+    "plain text",
+    "write",
+    "writing",
+    "lined paper",
+    "ruled",
+    "lines",
+    "minutes",
+    "meeting notes",
+    "reminder",
+    "list",
+    "shopping list",
+    "notpad",
+    "note-pad",
+    "stationery",
+    "paper"
+  ]
+}

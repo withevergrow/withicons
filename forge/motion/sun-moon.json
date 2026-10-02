@@ -1,0 +1,51 @@
+{
+  "name": "sun-moon",
+  "intent": "rocks between day and night, turns over when touched",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      13,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      13,
+      12
+    ],
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "spin",
+      "origin": [
+        13,
+        12
+      ],
+      "duration": 6
+    }
+  ],
+  "swap": [
+    {
+      "to": "moon",
+      "effect": "rotate"
+    },
+    {
+      "to": "sun",
+      "effect": "rotate"
+    },
+    {
+      "to": "sun-moon@solid",
+      "effect": "scale"
+    }
+  ]
+}

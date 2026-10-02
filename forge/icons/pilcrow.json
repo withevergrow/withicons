@@ -1,0 +1,57 @@
+{
+  "name": "pilcrow",
+  "category": "text",
+  "description": "The paragraph mark, a filled bowl beside two tall stems, for paragraphs and showing hidden characters.",
+  "aliases": [
+    "paragraph",
+    "paragraph-mark",
+    "paragraph-sign",
+    "show-formatting",
+    "formatting-marks",
+    "hidden-characters",
+    "blind-p",
+    "show-invisibles"
+  ],
+  "synonyms": [
+    "paragraph symbol",
+    "new paragraph",
+    "line break",
+    "show hidden",
+    "show all",
+    "formatting symbols",
+    "nonprinting characters",
+    "invisible characters",
+    "return character",
+    "text block",
+    "typography",
+    "word processor",
+    "editor toolbar",
+    "pilcro",
+    "pillcrow"
+  ],
+  "tags": [
+    "text",
+    "typography",
+    "paragraph",
+    "editor",
+    "symbol"
+  ],
+  "paths": [
+    {
+      "d": "M13.5 3.5 H10.5 A4.25 4.25 0 0 0 10.5 12 H13.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 3.5 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 3.5 H18 V20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M13.5 3.5 H10.5 A4.25 4.25 0 0 0 10.5 12 H13.5 Z"
+  ],
+  "cutouts": []
+}

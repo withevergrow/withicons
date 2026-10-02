@@ -1,0 +1,8 @@
+{
+  "name": "panel-right",
+  "intent": "eases toward its right pane like a details drawer sliding in",
+  "loop":  { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 2.6 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.8, "duration": 0.6 },
+  "alt":   [ { "preset": "jelly", "amount": 0.6 }, { "preset": "zoom", "amount": 0.5 } ],
+  "swap":  [ { "to": "sidebar", "effect": "flip" }, { "to": "columns", "effect": "fade" }, { "to": "panel-right@solid", "effect": "scale" } ]
+}

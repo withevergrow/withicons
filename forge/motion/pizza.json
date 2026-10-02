@@ -1,0 +1,8 @@
+{
+  "name": "pizza",
+  "intent": "the slice tips gently from its point, then wobbles cheesily",
+  "loop": { "preset": "rock", "origin": [3, 21], "amount": 0.35, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [10, 15], "amount": 1 },
+  "alt": [ { "preset": "pop" }, { "preset": "tilt", "origin": [3, 21] }, { "preset": "bounce", "origin": [12, 21] } ],
+  "swap": [ { "to": "pizza@solid", "effect": "scale" }, { "to": "burger", "effect": "morph" } ]
+}

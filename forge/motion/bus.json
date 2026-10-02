@@ -1,0 +1,8 @@
+{
+  "name": "bus",
+  "intent": "idles at the stop with a gentle engine hum, then pulls up close on hover",
+  "loop": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.3, "duration": 1.6 },
+  "hover": { "preset": "zoom", "amount": 0.8, "duration": 0.6 },
+  "alt": [ { "preset": "float", "amount": 0.4 }, { "preset": "pop" } ],
+  "swap": [ { "to": "train", "effect": "slide-left" }, { "to": "car", "effect": "slide-left" }, { "to": "bus@solid", "effect": "scale" } ]
+}

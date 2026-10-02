@@ -1,0 +1,35 @@
+{
+  "name": "table",
+  "intent": "breathes gently like a grid of data refreshing",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-grid",
+      "effect": "fade"
+    },
+    {
+      "to": "columns",
+      "effect": "slide-left"
+    },
+    {
+      "to": "layout-list",
+      "effect": "fade"
+    }
+  ]
+}

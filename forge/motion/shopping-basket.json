@@ -1,0 +1,17 @@
+{
+  "name": "shopping-basket",
+  "intent": "hops softly as items drop into the basket",
+  "loop": { "preset": "bounce", "origin": [12, 21], "amount": 0.4, "duration": 2.4 },
+  "hover": { "preset": "bounce", "origin": [12, 21], "amount": 0.8 },
+  "alt": [
+    { "preset": "sway", "origin": [12, 3.5], "amount": 0.7 },
+    { "preset": "jelly" },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "check", "effect": "scale" },
+    { "to": "shopping-cart", "effect": "slide-left" },
+    { "to": "shopping-bag", "effect": "fade" },
+    { "to": "shopping-basket@solid", "effect": "scale" }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "hammer",
+  "intent": "swings from the handle like it's tapping a nail",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      5.4,
+      19.3
+    ],
+    "amount": 0.7,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      5.4,
+      19.3
+    ],
+    "amount": 1.4,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.8
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "wrench",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "arrow-up-down",
+  "category": "arrows",
+  "description": "A single two-headed vertical arrow for sorting, height, and moving up or down.",
+  "aliases": [
+    "arrows-vertical",
+    "sort-arrows",
+    "vertical-swap",
+    "swap-vertical",
+    "import-export",
+    "up-down-arrow",
+    "vertical-arrows",
+    "move-vertical",
+    "resize-vertical",
+    "height-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "vertical",
+    "both ways",
+    "sort",
+    "height",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M12 3 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 8.5 L12 3 L17.5 8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 15.5 L12 21 L17.5 15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "up and down",
+    "both ways",
+    "two directions",
+    "north south",
+    "height",
+    "taller",
+    "stretch",
+    "resize height",
+    "row resize",
+    "vertical resize",
+    "scroll",
+    "scroll both ways",
+    "sort order",
+    "ascending descending",
+    "reorder",
+    "rearrange",
+    "move up or down",
+    "raise or lower",
+    "data transfer",
+    "upload download",
+    "sync",
+    "elevator",
+    "lift",
+    "double arrow",
+    "two headed arrow",
+    "up down arrow",
+    "arrows"
+  ]
+}

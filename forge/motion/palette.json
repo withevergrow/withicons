@@ -1,0 +1,42 @@
+{
+  "name": "palette",
+  "intent": "sways softly like a palette in an artist's hand",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        18,
+        18
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "paintbrush",
+      "effect": "fade"
+    },
+    {
+      "to": "palette@solid",
+      "effect": "scale"
+    }
+  ]
+}

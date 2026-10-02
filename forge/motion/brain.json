@@ -1,0 +1,40 @@
+{
+  "name": "brain",
+  "intent": "glows softly as if it is thinking",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "glow",
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.7
+    },
+    {
+      "preset": "twinkle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bot",
+      "effect": "morph"
+    },
+    {
+      "to": "lightbulb",
+      "effect": "fade"
+    },
+    {
+      "to": "sparkles",
+      "effect": "scale"
+    }
+  ]
+}

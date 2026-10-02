@@ -1,0 +1,84 @@
+{
+  "name": "syringe",
+  "category": "health",
+  "description": "A syringe with a needle for vaccines, injections, shots, and blood tests.",
+  "aliases": [
+    "injection",
+    "vaccine",
+    "vaccination",
+    "needle",
+    "jab",
+    "immunization",
+    "immunisation",
+    "inject"
+  ],
+  "tags": [
+    "health",
+    "medical",
+    "vaccine",
+    "injection",
+    "needle",
+    "medicine"
+  ],
+  "paths": [
+    {
+      "d": "M17 11 L11 17 L7 13 L13 7",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 5.5 L18.5 12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 9 L19 5 M17 3 L21 7",
+      "plate": "A"
+    },
+    {
+      "d": "M9 15 L4 20",
+      "plate": "A"
+    },
+    {
+      "d": "M9 11 L10 12 M11 9 L12 10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17 11 L11 17 L7 13 L13 7 Z"
+  ],
+  "cutouts": [
+    "M9 11 L10 12",
+    "M11 9 L12 10"
+  ],
+  "synonyms": [
+    "shot",
+    "vaccines",
+    "get vaccinated",
+    "flu shot",
+    "booster",
+    "booster shot",
+    "covid vaccine",
+    "inoculation",
+    "dose",
+    "insulin",
+    "diabetes",
+    "blood test",
+    "blood draw",
+    "blood sample",
+    "lab test",
+    "drug",
+    "medicine",
+    "medication",
+    "anesthesia",
+    "anaesthesia",
+    "botox",
+    "filler",
+    "tattoo",
+    "hypodermic",
+    "syringes",
+    "needles",
+    "nurse",
+    "clinic",
+    "serynge",
+    "syring"
+  ]
+}

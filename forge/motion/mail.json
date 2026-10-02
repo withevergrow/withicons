@@ -1,0 +1,36 @@
+{
+  "name": "mail",
+  "intent": "floats like a letter on its way, wiggles when new",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle"
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail-open",
+      "effect": "flip"
+    },
+    {
+      "to": "send",
+      "effect": "slide-right"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

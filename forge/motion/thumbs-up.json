@@ -1,0 +1,47 @@
+{
+  "name": "thumbs-up",
+  "intent": "gives an approving nod and a little lift",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      7,
+      10
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        7,
+        21
+      ]
+    },
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "thumbs-up@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "thumbs-down",
+      "effect": "flip"
+    }
+  ]
+}

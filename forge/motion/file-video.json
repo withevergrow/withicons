@@ -1,0 +1,32 @@
+{
+  "name": "file-video",
+  "intent": "pulses like a video ready to play",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "play",
+      "effect": "scale"
+    },
+    {
+      "to": "file",
+      "effect": "fade"
+    }
+  ]
+}

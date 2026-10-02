@@ -1,0 +1,44 @@
+{
+  "name": "filter",
+  "intent": "sifts items down through the funnel",
+  "loop": {
+    "preset": "drop",
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.7
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sort",
+      "effect": "fade"
+    },
+    {
+      "to": "filter@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "sliders",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "pill",
+  "intent": "rocks gently, then rattles like a capsule in a bottle",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "pill@solid",
+      "effect": "scale"
+    }
+  ]
+}

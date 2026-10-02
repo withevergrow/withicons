@@ -1,0 +1,56 @@
+{
+  "name": "user-cog",
+  "intent": "the little gear turns as if settings are being adjusted",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      17.5,
+      16.5
+    ],
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "steps": 8,
+      "amount": 0.5,
+      "duration": 2
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "settings",
+      "effect": "spin"
+    },
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "user-check",
+      "effect": "morph"
+    }
+  ]
+}

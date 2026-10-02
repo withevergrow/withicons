@@ -1,0 +1,39 @@
+{
+  "name": "wind",
+  "intent": "streams to the right like a passing breeze",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        3,
+        12
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud",
+      "effect": "slide-right"
+    },
+    {
+      "to": "leaf",
+      "effect": "fade"
+    }
+  ]
+}

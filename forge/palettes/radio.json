@@ -1,0 +1,149 @@
+{
+  "name": "radio",
+  "palettes": [
+    {
+      "id": "bakelite-cream",
+      "name": "Bakelite cream",
+      "tags": ["true-to-life", "vintage"],
+      "colors": { "ink": "#3B2A1A", "c1": "#EADDC0", "c2": "#8B5A2B", "c3": "#C0392B", "c4": "#5C3A1E", "tint": "#F5EEE0", "accent": "#C0392B", "shadow": "#5C491F", "shine": "#FFFFFF", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "walnut-cabinet",
+      "name": "Walnut cabinet",
+      "tags": ["true-to-life", "vintage"],
+      "colors": { "ink": "#2C1E11", "c1": "#8B5A2B", "c2": "#B07040", "c3": "#E8D5B0", "c4": "#C9A227", "tint": "#DFD1C4", "accent": "#C9A227", "shadow": "#462D15", "shine": "#EFE8E1", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "mint-transistor",
+      "name": "Mint transistor",
+      "tags": ["true-to-life", "retro"],
+      "colors": { "ink": "#112C24", "c1": "#7FD1B9", "c2": "#F5F0E1", "c3": "#E85D4A", "c4": "#2F6B5E", "tint": "#DBF2EB", "accent": "#E85D4A", "shadow": "#205A49", "shine": "#EDF9F5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "cherry-radio",
+      "name": "Cherry radio",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1111", "c1": "#D62828", "c2": "#F4A261", "c3": "#F1FAEE", "c4": "#7F1414", "tint": "#F4C3C3", "accent": "#F4A261", "shadow": "#671313", "shine": "#F9E1E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sticker-radio",
+      "name": "Sticker radio",
+      "tags": ["candy"],
+      "colors": { "ink": "#19112C", "c1": "#8B5CF6", "c2": "#FDE047", "c3": "#22D3EE", "c4": "#F472B6", "tint": "#DFD1FC", "accent": "#22D3EE", "shadow": "#2D1268", "shine": "#EFE8FE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "field-radio",
+      "name": "Field radio",
+      "tags": ["earthy"],
+      "colors": { "ink": "#252716", "c1": "#5B6236", "c2": "#C2B280", "c3": "#D9822B", "c4": "#2F3320", "tint": "#D1D3C7", "accent": "#D9822B", "shadow": "#2E311B", "shine": "#E8E9E3", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "chrome-portable",
+      "name": "Chrome portable",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#1B1D22", "c1": "#B8BCC6", "c2": "#6B7280", "c3": "#EF4444", "c4": "#1F2937", "tint": "#EBECEF", "accent": "#EF4444", "shadow": "#373A44", "shine": "#F5F6F7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sky-blue-retro",
+      "name": "Sky blue retro",
+      "tags": ["retro"],
+      "colors": { "ink": "#111D2C", "c1": "#60A5FA", "c2": "#FDE68A", "c3": "#F97316", "c4": "#1E3A8A", "tint": "#D2E6FE", "accent": "#F97316", "shadow": "#123968", "shine": "#E9F2FE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pirate-radio",
+      "name": "Pirate radio",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF0F8", "c1": "#FF3CAC", "c2": "#00D4FF", "c3": "#FFE66D", "c4": "#7A2BF0", "tint": "#FFC8E8", "accent": "#00D4FF", "shadow": "#681244", "shine": "#FFE4F3", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pastel-portable",
+      "name": "Pastel portable",
+      "tags": ["pastel"],
+      "colors": { "ink": "#4E3239", "c1": "#F7CAD0", "c2": "#CDE7B0", "c3": "#A3CEF1", "c4": "#FFF1B5", "tint": "#FBE5E8", "accent": "#A3CEF1", "shadow": "#68121E", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "jelly-bean",
+      "name": "Jelly bean",
+      "tags": ["candy"],
+      "colors": { "ink": "#3E1222", "c1": "#FF7096", "c2": "#70E0FF", "c3": "#FFE270", "c4": "#A970FF", "tint": "#FFD7E2", "accent": "#70E0FF", "shadow": "#681229", "shine": "#FFEBF0", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "translucent-y2k",
+      "name": "Translucent Y2K",
+      "tags": ["y2k"],
+      "colors": { "ink": "#26305A", "c1": "#8EC5FC", "c2": "#E0C3FC", "c3": "#98F5E1", "c4": "#FFB3E6", "tint": "#DFEFFE", "accent": "#98F5E1", "shadow": "#123D68", "shine": "#EFF7FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "diner-aqua",
+      "name": "Diner aqua",
+      "tags": ["retro"],
+      "colors": { "ink": "#112C29", "c1": "#5EC4B6", "c2": "#E63946", "c3": "#F1FAEE", "c4": "#1D3557", "tint": "#D2EEEB", "accent": "#E63946", "shadow": "#215A52", "shine": "#E8F7F5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "seventies-wood",
+      "name": "Seventies wood",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1F11", "c1": "#D9822B", "c2": "#6B4226", "c3": "#F2C14E", "c4": "#A63D40", "tint": "#F4DCC4", "accent": "#F2C14E", "shadow": "#683D13", "shine": "#FAEEE1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "beach-radio",
+      "name": "Beach radio",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11262C", "c1": "#0E7490", "c2": "#FDE68A", "c3": "#22D3EE", "c4": "#083344", "tint": "#BCD8E0", "accent": "#22D3EE", "shadow": "#0C3743", "shine": "#DDECEF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "camp-radio",
+      "name": "Camp radio",
+      "tags": ["nature"],
+      "colors": { "ink": "#162819", "c1": "#386641", "c2": "#F2E8CF", "c3": "#BC4749", "c4": "#1E3522", "tint": "#C7D4CA", "accent": "#BC4749", "shadow": "#1C3320", "shine": "#E3EAE4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "raspberry",
+      "name": "Raspberry",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1119", "c1": "#A4133C", "c2": "#FFCCD5", "c3": "#FF758F", "c4": "#590D22", "tint": "#E6BDC8", "accent": "#FF758F", "shadow": "#4E0E20", "shine": "#F2DEE4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "orange-transistor",
+      "name": "Orange transistor",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1F11", "c1": "#FB8500", "c2": "#FFB703", "c3": "#023047", "c4": "#8ECAE6", "tint": "#FEDDB8", "accent": "#FFB703", "shadow": "#684012", "shine": "#FEEEDB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "teal-ramp",
+      "name": "Teal ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#112C2A", "c1": "#0F766E", "c2": "#5EEAD4", "c3": "#CCFBF1", "c4": "#134E4A", "tint": "#BCD9D6", "accent": "#5EEAD4", "shadow": "#0A3935", "shine": "#DDECEB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "night-dj",
+      "name": "Night DJ",
+      "tags": ["dark"],
+      "colors": { "ink": "#09090B", "c1": "#52525B", "c2": "#F59E0B", "c3": "#A1A1AA", "c4": "#18181B", "tint": "#CFCFD1", "accent": "#F59E0B", "shadow": "#29292E", "shine": "#E7E7E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gold-dial",
+      "name": "Gold dial",
+      "tags": ["luxe"],
+      "colors": { "ink": "#2B2118", "c1": "#C9A227", "c2": "#8A6A1E", "c3": "#F3E5AB", "c4": "#2B2118", "tint": "#F0E5C3", "accent": "#8A6A1E", "shadow": "#655114", "shine": "#F7F2E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#0050B5", "c2": "#FFC000", "c3": "#FFFFFF", "c4": "#000000", "tint": "#B8CEEA", "accent": "#FFC000", "shadow": "#0E2A4D", "shine": "#DBE7F5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "holiday-broadcast",
+      "name": "Holiday broadcast",
+      "tags": ["seasonal"],
+      "colors": { "ink": "#2C1111", "c1": "#B91C1C", "c2": "#166534", "c3": "#FEF3C7", "c4": "#FACC15", "tint": "#EBBFBF", "accent": "#FACC15", "shadow": "#5B1010", "shine": "#F5DFDF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "spring-tune",
+      "name": "Spring tune",
+      "tags": ["seasonal", "pastel"],
+      "colors": { "ink": "#4A1030", "c1": "#F9A8D4", "c2": "#86EFAC", "c3": "#FDE68A", "c4": "#9D174D", "tint": "#FDE7F3", "accent": "#9D174D", "shadow": "#681241", "shine": "#FEF3F9", "edge": "#FFFFFF" }
+    }
+  ]
+}

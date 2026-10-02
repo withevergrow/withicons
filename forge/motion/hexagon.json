@@ -1,0 +1,29 @@
+{
+  "name": "hexagon",
+  "intent": "turns slowly like a nut or a honeycomb cell",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "hexagon@solid",
+      "effect": "scale"
+    }
+  ]
+}

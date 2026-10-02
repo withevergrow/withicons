@@ -1,0 +1,73 @@
+{
+  "name": "arrow-left-right",
+  "category": "arrows",
+  "description": "A single two-headed horizontal arrow for exchange, width, and moving between two sides.",
+  "aliases": [
+    "arrows-horizontal",
+    "left-right",
+    "two-way",
+    "bidirectional",
+    "switch-horizontal",
+    "horizontal-arrows",
+    "double-headed-arrow",
+    "move-horizontal",
+    "resize-horizontal",
+    "width-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "horizontal",
+    "both ways",
+    "resize",
+    "width",
+    "exchange"
+  ],
+  "paths": [
+    {
+      "d": "M3 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 6.5 L3 12 L8.5 17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 6.5 L21 12 L15.5 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "both ways",
+    "two directions",
+    "back and forth",
+    "side to side",
+    "left and right",
+    "east west",
+    "width",
+    "widen",
+    "stretch",
+    "resize width",
+    "horizontal resize",
+    "column resize",
+    "drag sideways",
+    "pan",
+    "slide",
+    "scrub",
+    "exchange",
+    "trade",
+    "swap sides",
+    "switch",
+    "convert",
+    "compare",
+    "range",
+    "span",
+    "distance",
+    "measure width",
+    "double arrow",
+    "two headed arrow",
+    "left right arrow",
+    "arrows"
+  ]
+}

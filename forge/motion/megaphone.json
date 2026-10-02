@@ -1,0 +1,44 @@
+{
+  "name": "megaphone",
+  "intent": "pulses like it's announcing, kicks back when you shout",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      7,
+      15
+    ],
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      7,
+      16
+    ]
+  },
+  "alt": [
+    {
+      "preset": "tada",
+      "amount": 0.7
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        7,
+        16
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell-ring",
+      "effect": "fade"
+    },
+    {
+      "to": "volume-off",
+      "effect": "scale"
+    }
+  ]
+}

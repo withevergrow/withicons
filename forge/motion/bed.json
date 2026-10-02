@@ -1,0 +1,45 @@
+{
+  "name": "bed",
+  "intent": "breathes slowly like someone sound asleep",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      19.5
+    ],
+    "amount": 0.5,
+    "duration": 4.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      19.5
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4,
+      "duration": 4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "moon",
+      "effect": "slide-up"
+    },
+    {
+      "to": "sofa",
+      "effect": "morph"
+    },
+    {
+      "to": "bed@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "reply",
+  "intent": "swoops back to the left like an answer heading home",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 180
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        3.5,
+        9.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "send",
+      "effect": "slide-left"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

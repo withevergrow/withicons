@@ -1,0 +1,43 @@
+{
+  "name": "refresh",
+  "intent": "spins around to reload, one full turn on hover",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 2
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        12,
+        12
+      ],
+      "steps": 8
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "loader",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,451 @@
+{
+  "name": "store",
+  "palettes": [
+    {
+      "id": "classic-red-awning",
+      "name": "Classic red awning",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E0A0A",
+        "c1": "#D9302C",
+        "c2": "#F6EFE3",
+        "c3": "#7A3B1E",
+        "c4": "#F7C548",
+        "tint": "#F7D6D5",
+        "accent": "#F6EFE3",
+        "shadow": "#691716",
+        "shine": "#F8DAD9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greengrocer",
+      "name": "Greengrocer",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0F2E1A",
+        "c1": "#2E8B57",
+        "c2": "#F4EEDC",
+        "c3": "#7A5230",
+        "c4": "#F2C14E",
+        "tint": "#D5E8DD",
+        "accent": "#F4EEDC",
+        "shadow": "#18492D",
+        "shine": "#D9EAE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seaside-kiosk",
+      "name": "Seaside kiosk",
+      "tags": [
+        "true-to-life",
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0A2A3D",
+        "c1": "#2C7BB6",
+        "c2": "#F8F4EA",
+        "c3": "#E8574A",
+        "c4": "#F6C85F",
+        "tint": "#D5E5F0",
+        "accent": "#F8F4EA",
+        "shadow": "#164160",
+        "shine": "#D9E7F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bakery-butter",
+      "name": "Bakery butter",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A2810",
+        "c1": "#F6C453",
+        "c2": "#F9EBDD",
+        "c3": "#C8794A",
+        "c4": "#E88FA0",
+        "tint": "#FDF3DD",
+        "accent": "#F9EBDD",
+        "shadow": "#795F28",
+        "shine": "#FDF4E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-shop",
+      "name": "Candy shop",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0F2E",
+        "c1": "#FF7EB6",
+        "c2": "#FFF1F6",
+        "c3": "#7AD9F5",
+        "c4": "#FFD84A",
+        "tint": "#FFE5F0",
+        "accent": "#FFF1F6",
+        "shadow": "#83395B",
+        "shine": "#FFE8F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "flower-shop",
+      "name": "Flower shop",
+      "tags": [
+        "nature",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E1E3A",
+        "c1": "#C59BF0",
+        "c2": "#FBF6EE",
+        "c3": "#6FA86A",
+        "c4": "#FFB5C9",
+        "tint": "#F3EBFC",
+        "accent": "#FBF6EE",
+        "shadow": "#614A77",
+        "shine": "#F5EDFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coffee-house",
+      "name": "Coffee house",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1A10",
+        "c1": "#6F4E37",
+        "c2": "#EADBC8",
+        "c3": "#C49A6C",
+        "c4": "#2F4A3A",
+        "tint": "#E2DCD7",
+        "accent": "#EADBC8",
+        "shadow": "#3C291C",
+        "shine": "#E5DFDB",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "corner-bodega",
+      "name": "Corner bodega",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E1E1E",
+        "c1": "#E8B23A",
+        "c2": "#3A4F6B",
+        "c3": "#D8D2C4",
+        "c4": "#B5452F",
+        "tint": "#FAF0D8",
+        "accent": "#3A4F6B",
+        "shadow": "#6A5322",
+        "shine": "#FBF1DC",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "parisian-bistro",
+      "name": "Parisian bistro",
+      "tags": [
+        "vintage",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0A0F1C",
+        "c1": "#26467A",
+        "c2": "#F3E9D6",
+        "c3": "#B8963A",
+        "c4": "#9E2B25",
+        "tint": "#D4DAE4",
+        "accent": "#F3E9D6",
+        "shadow": "#13223C",
+        "shine": "#D8DEE7",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "pop-up-neon",
+      "name": "Pop-up neon",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#0A0A14",
+        "c1": "#FF2E9A",
+        "c2": "#21F5FF",
+        "c3": "#FFE600",
+        "c4": "#8A5CFF",
+        "tint": "#FFD5EB",
+        "accent": "#21F5FF",
+        "shadow": "#6D1747",
+        "shine": "#FFD9ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-boutique",
+      "name": "Y2K boutique",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2B2350",
+        "c1": "#F7B8FF",
+        "c2": "#C9F2FF",
+        "c3": "#E6FF8A",
+        "c4": "#A79BFF",
+        "tint": "#FDF1FF",
+        "accent": "#C9F2FF",
+        "shadow": "#745884",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "record-store",
+      "name": "Record store",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#F28C28",
+        "c2": "#F7C548",
+        "c3": "#C6322B",
+        "c4": "#4A2A5E",
+        "tint": "#FCE8D4",
+        "accent": "#F7C548",
+        "shadow": "#744114",
+        "shine": "#FDEAD8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "farmhouse-market",
+      "name": "Farmhouse market",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#33240F",
+        "c1": "#B5452F",
+        "c2": "#E9DCC0",
+        "c3": "#6E8B3D",
+        "c4": "#3D2A18",
+        "tint": "#F0DAD5",
+        "accent": "#E9DCC0",
+        "shadow": "#5C2919",
+        "shine": "#F2DEDA",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "ice-cream-parlor",
+      "name": "Ice cream parlor",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#1F3A33",
+        "c1": "#8FE0C6",
+        "c2": "#FFF6E8",
+        "c3": "#FF9EB5",
+        "c4": "#C78B5A",
+        "tint": "#E9F9F4",
+        "accent": "#FFF6E8",
+        "shadow": "#467063",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "teal-ramp",
+      "name": "Teal ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0B3335",
+        "c1": "#1F9A96",
+        "c2": "#D7F2F0",
+        "c3": "#0F5E5B",
+        "c4": "#7FCFCB",
+        "tint": "#D2EBEA",
+        "accent": "#D7F2F0",
+        "shadow": "#115150",
+        "shine": "#D7EDEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#8C8C8C",
+        "c2": "#EDEDED",
+        "c3": "#474747",
+        "c4": "#BDBDBD",
+        "tint": "#E8E8E8",
+        "accent": "#EDEDED",
+        "shadow": "#414141",
+        "shine": "#EAEAEA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-market",
+      "name": "Holiday market",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1F0A0A",
+        "c1": "#C8102E",
+        "c2": "#F7EEDB",
+        "c3": "#1E7B43",
+        "c4": "#E2B33C",
+        "tint": "#F4CFD5",
+        "accent": "#F7EEDB",
+        "shadow": "#5D0A17",
+        "shine": "#F5D4D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-harvest",
+      "name": "Autumn harvest",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#3A1A0A",
+        "c1": "#D2691E",
+        "c2": "#F7E6CC",
+        "c3": "#7A2E1A",
+        "c4": "#8C8C2E",
+        "tint": "#F6E1D2",
+        "accent": "#F7E6CC",
+        "shadow": "#6B3410",
+        "shine": "#F7E4D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-market",
+      "name": "Night market",
+      "tags": [
+        "dark"
+      ],
+      "colors": {
+        "ink": "#0E0A1F",
+        "c1": "#3A2E6E",
+        "c2": "#F2C14E",
+        "c3": "#E8574A",
+        "c4": "#1B1440",
+        "tint": "#D8D5E2",
+        "accent": "#F2C14E",
+        "shadow": "#1D1738",
+        "shine": "#DCD9E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E9D9A6",
+        "c1": "#1A1A1A",
+        "c2": "#F4EEDF",
+        "c3": "#C9A227",
+        "c4": "#4A4A4A",
+        "tint": "#D1D1D1",
+        "accent": "#F4EEDF",
+        "shadow": "#0C0C0C",
+        "shine": "#D6D6D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#E00000",
+        "c2": "#FFFFFF",
+        "c3": "#0047BB",
+        "c4": "#FFD500",
+        "tint": "#F9CCCC",
+        "accent": "#FFFFFF",
+        "shadow": "#5C0000",
+        "shine": "#F9D1D1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "corporate-storefront",
+      "name": "Corporate storefront",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E2240",
+        "c1": "#2F6FDE",
+        "c2": "#EEF3FB",
+        "c3": "#F2A93A",
+        "c4": "#1F3F73",
+        "tint": "#D5E2F8",
+        "accent": "#EEF3FB",
+        "shadow": "#183971",
+        "shine": "#DAE5F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-pop-up",
+      "name": "Dopamine pop-up",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#25103A",
+        "c1": "#FF5A36",
+        "c2": "#FFE7D6",
+        "c3": "#00C2A8",
+        "c4": "#7B4DFF",
+        "tint": "#FFDED7",
+        "accent": "#FFE7D6",
+        "shadow": "#762B2A",
+        "shine": "#FFE1DB",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

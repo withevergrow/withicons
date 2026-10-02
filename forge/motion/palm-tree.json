@@ -1,0 +1,46 @@
+{
+  "name": "palm-tree",
+  "intent": "sways in a warm island breeze",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      11.5,
+      20.5
+    ],
+    "amount": 0.6,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      11.5,
+      20.5
+    ],
+    "amount": 1.3,
+    "duration": 1.1
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        11.5,
+        20.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "palm-tree@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "sun",
+      "effect": "fade"
+    }
+  ]
+}

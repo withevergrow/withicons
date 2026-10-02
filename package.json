@@ -2,7 +2,7 @@
   "name": "egopenicons-monorepo",
   "private": true,
   "type": "module",
-  "withiconsVersion": "0.1.0",
+  "withiconsVersion": "0.2.0",
   "workspaces": [
     "packages/*"
   ],
@@ -14,5 +14,8 @@
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "polybooljs": "^1.2.2"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.12.0"
   }
 }

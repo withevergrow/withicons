@@ -1,0 +1,8 @@
+{
+  "name": "cat",
+  "intent": "gives you a slow, friendly cat blink",
+  "loop": { "preset": "blink", "origin": [12, 12.5], "duration": 4.5 },
+  "hover": { "preset": "tilt", "origin": [12, 20.5], "amount": 1 },
+  "alt": [ { "preset": "breathe", "origin": [12, 20.5], "amount": 0.7 }, { "preset": "jelly", "origin": [12, 20.5] }, { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.6 } ],
+  "swap": [ { "to": "dog", "effect": "morph" }, { "to": "cat@solid", "effect": "scale" }, { "to": "paw-print", "effect": "slide-up" } ]
+}

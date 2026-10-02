@@ -1,5 +1,6 @@
 /* with icons — alternatives & free-icon landers runtime.
-   Icon picker (search all 300 via WithSearch, style / colour / click action) and the migration converter.
+   Icon picker (search the whole set via WithSearch, style / colour / click action; on motion landers each tile
+   plays its own hover animation from window.WITH_MOTION) and the migration converter.
    Vanilla, no build, works from file://. Runs after site.js (DOMContentLoaded) and degrades to static HTML. */
 (function () {
   'use strict'
@@ -8,8 +9,20 @@
   function $$(s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)) }
   function WI() { return W.WI || W.EG || null }
   function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
-  var TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch' }
-  var HINT = { svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', 'class': 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
+  var TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch', glass: 'Glass', kawaii: 'Kawaii', sticker: 'Sticker', pixel: 'Pixel', retro: 'Retro' }
+  function title(s) { var w = WI(), i = w && w.styleInfo && w.styleInfo[s]; return (i && i.title) || TITLE[s] || (s.charAt(0).toUpperCase() + s.slice(1)) }
+  /* motion landers: the icon's own hover motion as wm classes + CSS variables (forge/MOTION.md) */
+  function motionAttrs(n) {
+    var sp = W.WITH_MOTION && W.WITH_MOTION[n], m = sp && (sp.hover || sp.loop); if (!m) return ''
+    var v = [], o = m.origin || [12, 12]
+    if (o[0] !== 12 || o[1] !== 12) v.push('--wm-ox:' + (o[0] / 24 * 100).toFixed(2) + '%', '--wm-oy:' + (o[1] / 24 * 100).toFixed(2) + '%')
+    if (m.dir != null) { var r = m.dir * Math.PI / 180; v.push('--wm-dx:' + Math.cos(r).toFixed(3), '--wm-dy:' + Math.sin(r).toFixed(3)) }
+    if (m.amount != null && m.amount !== 1) v.push('--wm-k:' + m.amount)
+    if (m.duration != null) v.push('--wm-dur:' + m.duration + 's')
+    if (m.steps) v.push('--wm-steps:' + m.steps)
+    return ' wm wm-hover wm-p-' + esc(m.preset) + '"' + (v.length ? ' style="' + v.join(';') + '"' : '') + ' data-wm-preset="' + esc(m.preset)
+  }
+  var HINT = { anim: 'download it as an animated SVG', gif: 'download an animated GIF for your slides', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', 'class': 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
 
   var engine = null
   function getEngine() {
@@ -68,8 +81,9 @@
       grid.style.setProperty('--ax-ink', hasColors ? st.color : '')
     }
     tint()
+    var moving = box.hasAttribute('data-pick-motion')
     function tile(n) {
-      return '<li><button class="ax-tile is-new" type="button" data-name="' + esc(n) + '"><span class="ax-tile-ic"></span><span class="ax-tile-n">' + esc(n) + '</span></button>' +
+      return '<li><button class="ax-tile is-new' + (moving ? ' wm-trigger' : '') + '" type="button" data-name="' + esc(n) + '"><span class="ax-tile-ic' + (moving ? motionAttrs(n) : '') + '"></span><span class="ax-tile-n">' + esc(n) + '</span></button>' +
         '<a class="ax-tile-go" href="' + root + 'icons/' + esc(n) + '.html" aria-label="' + esc(n) + ' icon page"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>'
     }
     function search(q) {
@@ -121,7 +135,21 @@
       if (!w || !w.svgFile) { location.href = root + 'icons/' + n + '.html'; return }
       withStyle(st.style).then(function () {
         var color = st.colorSet ? st.color : null
-        var label = n + ' · ' + TITLE[st.style]
+        var label = n + ' · ' + title(st.style)
+        if (st.act === 'anim' || st.act === 'gif') {
+          // animated exports come from the motion runtime (vendor/motion/motion.js + data/motion.js)
+          var M = W.WithMotion
+          if (!M || !M.animatedSvg) { location.href = root + 'icons/' + n + '.html'; return }
+          var ink = color || '#111318', base = w.svgFile(n, st.style, { color: ink, size: 24 })
+          var mo = { name: n, trigger: 'loop', color: ink }
+          if (st.act === 'anim') {
+            var fn = n + (st.style === 'line' ? '' : '-' + st.style) + '-animated.svg'
+            w.download(fn, M.animatedSvg(base, Object.assign({ size: 96 }, mo)), 'image/svg+xml'); toast('Downloaded ' + fn + '. It plays on websites, in Notion and in browsers.'); return
+          }
+          var gpx = Math.min(st.px, 512), gfn = n + (st.style === 'line' ? '' : '-' + st.style) + '-' + gpx + '.gif'
+          toast('Making your GIF…')
+          return M.gif(base, mo, { size: gpx, fps: 25, background: lum(ink) > 0.85 ? '#111318' : '#FFFFFF' }).then(function (bl) { saveBlob(gfn, bl); toast('Downloaded ' + gfn + '. Insert it like a picture: it plays in PowerPoint, Google Slides and Keynote.') }, function () { toast('Couldn’t make the GIF in this browser. Try the animated SVG.') })
+        }
         if (st.act === 'svg' || st.act === 'vue') return copyText(w.svgFile(n, st.style, { color: color }), 'Copied ' + label + ' SVG')
         if (st.act === 'jsx') return copyText(toJsx(w.svgFile(n, st.style, { color: color }), pascal(n)), 'Copied ' + label + ' as JSX')
         if (st.act === 'dlsvg') { w.download(n + '-' + st.style + '.svg', w.svgFile(n, st.style, { color: color })); toast('Downloaded ' + n + '-' + st.style + '.svg'); return }

@@ -1,0 +1,32 @@
+{
+  "name": "list-ordered",
+  "intent": "steps down its numbered items one by one",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nod"
+  },
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "list-checks",
+      "effect": "slide-left"
+    }
+  ]
+}

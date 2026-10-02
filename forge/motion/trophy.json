@@ -1,0 +1,43 @@
+{
+  "name": "trophy",
+  "intent": "shines with pride, then celebrates a win",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.7,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        10
+      ]
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "trophy@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "award",
+      "effect": "flip"
+    }
+  ]
+}

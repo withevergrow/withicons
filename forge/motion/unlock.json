@@ -1,0 +1,38 @@
+{
+  "name": "unlock",
+  "intent": "floats gently with its shackle open",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      16
+    ]
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "lock",
+      "effect": "slide-down"
+    },
+    {
+      "to": "key",
+      "effect": "rotate"
+    }
+  ]
+}

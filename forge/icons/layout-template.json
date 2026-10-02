@@ -1,0 +1,76 @@
+{
+  "name": "layout-template",
+  "category": "layout",
+  "description": "A page wireframe with a header block, a side block and lines of text, for templates and mockups.",
+  "aliases": [
+    "template",
+    "wireframe",
+    "page-layout",
+    "mockup",
+    "page-template",
+    "layout-blocks",
+    "site-template",
+    "page-builder",
+    "landing-page",
+    "web-template"
+  ],
+  "tags": [
+    "layout",
+    "template",
+    "wireframe",
+    "page",
+    "design",
+    "mockup"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 3 H19.5 A1.5 1.5 0 0 1 21 4.5 V7 A1.5 1.5 0 0 1 19.5 8.5 H4.5 A1.5 1.5 0 0 1 3 7 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 12.5 H8.5 A1.5 1.5 0 0 1 10 14 V19.5 A1.5 1.5 0 0 1 8.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V14 A1.5 1.5 0 0 1 4.5 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 13 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M14 17 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M14 21 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 3 H19.5 A1.5 1.5 0 0 1 21 4.5 V7 A1.5 1.5 0 0 1 19.5 8.5 H4.5 A1.5 1.5 0 0 1 3 7 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+    "M4.5 12.5 H8.5 A1.5 1.5 0 0 1 10 14 V19.5 A1.5 1.5 0 0 1 8.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V14 A1.5 1.5 0 0 1 4.5 12.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "templates",
+    "page design",
+    "web design",
+    "website layout",
+    "website template",
+    "page structure",
+    "page sections",
+    "sections",
+    "blocks",
+    "content blocks",
+    "header and content",
+    "hero section",
+    "prototype",
+    "sketch",
+    "draft layout",
+    "ui kit",
+    "design system",
+    "theme",
+    "website builder",
+    "layout",
+    "lay out",
+    "templete"
+  ]
+}

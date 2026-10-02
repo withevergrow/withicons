@@ -1,0 +1,78 @@
+{
+  "name": "radio",
+  "category": "media",
+  "description": "A portable radio with a speaker grille, a tuning panel and an antenna.",
+  "aliases": [
+    "broadcast-radio",
+    "fm",
+    "fm-radio",
+    "am-radio",
+    "transistor",
+    "radio-station",
+    "wireless-set",
+    "tuner",
+    "transistor-radio"
+  ],
+  "tags": [
+    "media",
+    "audio",
+    "broadcast",
+    "device",
+    "music"
+  ],
+  "paths": [
+    {
+      "d": "M4 8.5 H20 A2 2 0 0 1 22 10.5 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V10.5 A2 2 0 0 1 4 8.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 8.5 L18 3.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 14.5 A2.5 2.5 0 1 1 5.5 14.5 A2.5 2.5 0 1 1 10.5 14.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M14 12.5 H18 M14 16.5 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 8.5 H20 A2 2 0 0 1 22 10.5 V18.5 A2 2 0 0 1 20 20.5 H4 A2 2 0 0 1 2 18.5 V10.5 A2 2 0 0 1 4 8.5 Z"
+  ],
+  "cutouts": [
+    "M11.25 14.5 A3.25 3.25 0 1 1 4.75 14.5 A3.25 3.25 0 1 1 11.25 14.5 Z M9.75 14.5 A1.75 1.75 0 1 1 6.25 14.5 A1.75 1.75 0 1 1 9.75 14.5 Z",
+    "M14 12.5 H18",
+    "M14 16.5 H18"
+  ],
+  "synonyms": [
+    "radio set",
+    "live radio",
+    "internet radio",
+    "station",
+    "stations",
+    "broadcast",
+    "am",
+    "am fm",
+    "frequency",
+    "antenna",
+    "aerial",
+    "listen live",
+    "tune in",
+    "talk radio",
+    "music station",
+    "audio",
+    "stereo",
+    "boombox",
+    "ghetto blaster",
+    "portable radio",
+    "vintage radio",
+    "retro radio",
+    "news radio",
+    "dj",
+    "airwaves",
+    "raido",
+    "radios"
+  ]
+}

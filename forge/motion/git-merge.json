@@ -1,0 +1,37 @@
+{
+  "name": "git-merge",
+  "intent": "draws two branches coming together into one",
+  "loop": {
+    "preset": "draw",
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-pull-request",
+      "effect": "morph"
+    },
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "git-branch",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "name": "shuffle",
+  "palettes": [
+    {
+      "id": "mix-green",
+      "name": "Mix green",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#112C1C", "c1": "#1FB35A", "c2": "#0EA5E9", "c3": "#BBF7D0", "c4": "#14532D", "tint": "#C0EAD1", "accent": "#0EA5E9", "shadow": "#10592D", "shine": "#E0F4E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "party-mix",
+      "name": "Party mix",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C111E", "c1": "#EC4899", "c2": "#8B5CF6", "c3": "#FDE047", "c4": "#22D3EE", "tint": "#FACCE2", "accent": "#22D3EE", "shadow": "#68123D", "shine": "#FCE5F1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "lucky-dice",
+      "name": "Lucky dice",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1111", "c1": "#DC2626", "c2": "#1F2937", "c3": "#FECACA", "c4": "#7F1D1D", "tint": "#F5C2C2", "accent": "#FACC15", "shadow": "#681212", "shine": "#FAE1E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "card-table",
+      "name": "Card table",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#112C1B", "c1": "#15803D", "c2": "#B91C1C", "c3": "#F5F5F4", "c4": "#111827", "tint": "#BDDBC9", "accent": "#B91C1C", "shadow": "#0B3F1F", "shine": "#DEEDE4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "random-blue",
+      "name": "Random blue",
+      "tags": ["corporate"],
+      "colors": { "ink": "#11192C", "c1": "#2563EB", "c2": "#F97316", "c3": "#DBEAFE", "c4": "#1E3A8A", "tint": "#C2D3F9", "accent": "#F97316", "shadow": "#122D68", "shine": "#E0E9FC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "confetti",
+      "name": "Confetti",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1116", "c1": "#F43F5E", "c2": "#FACC15", "c3": "#22C55E", "c4": "#3B82F6", "tint": "#FCC9D2", "accent": "#FACC15", "shadow": "#681221", "shine": "#FDE4E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "neon-crossfade",
+      "name": "Neon crossfade",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF0FB", "c1": "#FF00A8", "c2": "#00F0FF", "c3": "#FFF200", "c4": "#8000FF", "tint": "#FFB8E7", "accent": "#00F0FF", "shadow": "#68124B", "shine": "#FFDBF3", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "club-lights",
+      "name": "Club lights",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#F2E8FF", "c1": "#6A00FF", "c2": "#FF4D00", "c3": "#00FFC6", "c4": "#FF00C8", "tint": "#D5B8FF", "accent": "#FF4D00", "shadow": "#361268", "shine": "#EADBFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pastel-mix",
+      "name": "Pastel mix",
+      "tags": ["pastel"],
+      "colors": { "ink": "#3E3354", "c1": "#C3B1E1", "c2": "#A8E6CF", "c3": "#FFD3B6", "c4": "#FFAAA5", "tint": "#EEE9F7", "accent": "#FFAAA5", "shadow": "#362258", "shine": "#F7F4FB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gummy-bears",
+      "name": "Gummy bears",
+      "tags": ["candy"],
+      "colors": { "ink": "#3A1426", "c1": "#FF5D8F", "c2": "#FFB627", "c3": "#4ADE80", "c4": "#7C83FD", "tint": "#FFD2E0", "accent": "#FFB627", "shadow": "#68122D", "shine": "#FFE8EF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "millennium-chrome",
+      "name": "Millennium chrome",
+      "tags": ["y2k"],
+      "colors": { "ink": "#1F2A3D", "c1": "#B8C6DB", "c2": "#F5A9E1", "c3": "#7AE2FF", "c4": "#5D6D8A", "tint": "#EBEFF5", "accent": "#7AE2FF", "shadow": "#293951", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "disco-70s",
+      "name": "Disco 70s",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1F11", "c1": "#D9822B", "c2": "#A63D40", "c3": "#E9B872", "c4": "#90A959", "tint": "#F4DCC4", "accent": "#E9B872", "shadow": "#683D13", "shine": "#FAEEE1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "spice-market",
+      "name": "Spice market",
+      "tags": ["earthy"],
+      "colors": { "ink": "#2C1911", "c1": "#C2410C", "c2": "#A16207", "c3": "#FDBA74", "c4": "#7C2D12", "tint": "#EECABB", "accent": "#A16207", "shadow": "#58240F", "shine": "#F6E4DD", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "lagoon",
+      "name": "Lagoon",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11272C", "c1": "#0891B2", "c2": "#34D399", "c3": "#CFFAFE", "c4": "#164E63", "tint": "#BAE0E9", "accent": "#34D399", "shadow": "#0E424F", "shine": "#DCF0F4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "wildflower",
+      "name": "Wildflower",
+      "tags": ["nature", "vivid"],
+      "colors": { "ink": "#1B112C", "c1": "#7C3AED", "c2": "#F59E0B", "c3": "#84CC16", "c4": "#F472B6", "tint": "#DAC8FA", "accent": "#F59E0B", "shadow": "#321268", "shine": "#EDE3FC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "fruit-sorbet",
+      "name": "Fruit sorbet",
+      "tags": ["candy"],
+      "colors": { "ink": "#2C1711", "c1": "#FF8C69", "c2": "#FFD166", "c3": "#EF476F", "c4": "#06D6A0", "tint": "#FFDFD5", "accent": "#06D6A0", "shadow": "#682612", "shine": "#FFEFEA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "coral-ramp",
+      "name": "Coral ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#2C1411", "c1": "#F97362", "c2": "#FCA5A5", "c3": "#FEE2E2", "c4": "#9F2D20", "tint": "#FDD8D3", "accent": "#9F2D20", "shadow": "#681C12", "shine": "#FEEBE9", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#1D1D20", "c1": "#71717A", "c2": "#A1A1AA", "c3": "#E4E4E7", "c4": "#3F3F46", "tint": "#D7D7DA", "accent": "#A1A1AA", "shadow": "#39393D", "shine": "#EBEBEC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": ["dark"],
+      "colors": { "ink": "#0F172A", "c1": "#64748B", "c2": "#A78BFA", "c3": "#E2E8F0", "c4": "#1E293B", "tint": "#D4D8DF", "accent": "#A78BFA", "shadow": "#323A46", "shine": "#E9ECEF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gold-and-onyx",
+      "name": "Gold & onyx",
+      "tags": ["luxe"],
+      "colors": { "ink": "#1C1917", "c1": "#CFA23A", "c2": "#1C1917", "c3": "#F5E7B2", "c4": "#78350F", "tint": "#F2E5C8", "accent": "#78350F", "shadow": "#624C18", "shine": "#F8F2E3", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "colorblind-safe",
+      "name": "Colorblind safe",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#0072B2", "c2": "#E69F00", "c3": "#009E73", "c4": "#000000", "tint": "#B8D8E9", "accent": "#E69F00", "shadow": "#0D354C", "shine": "#DBEBF4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "summer-festival",
+      "name": "Summer festival",
+      "tags": ["seasonal", "vivid"],
+      "colors": { "ink": "#2C1E11", "c1": "#FF7A00", "c2": "#00B4D8", "c3": "#FFD000", "c4": "#E63946", "tint": "#FFDAB8", "accent": "#FFD000", "shadow": "#683B12", "shine": "#FFECDB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "mint-and-cherry",
+      "name": "Mint & cherry",
+      "tags": ["vivid"],
+      "colors": { "ink": "#112C2A", "c1": "#2EC4B6", "c2": "#E71D36", "c3": "#CBF3F0", "c4": "#011627", "tint": "#C4EEEB", "accent": "#E71D36", "shadow": "#17625B", "shine": "#E2F7F5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "holiday-shuffle",
+      "name": "Holiday shuffle",
+      "tags": ["seasonal"],
+      "colors": { "ink": "#2C1113", "c1": "#C1121F", "c2": "#2D6A4F", "c3": "#FDF0D5", "c4": "#780000", "tint": "#EEBDC0", "accent": "#2D6A4F", "shadow": "#5A1015", "shine": "#F6DEE0", "edge": "#FFFFFF" }
+    }
+  ]
+}

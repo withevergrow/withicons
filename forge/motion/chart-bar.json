@@ -1,0 +1,42 @@
+{
+  "name": "chart-bar",
+  "intent": "fills up like a live dashboard and springs from its baseline",
+  "loop": {
+    "preset": "fill",
+    "duration": 2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ]
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-line",
+      "effect": "fade"
+    },
+    {
+      "to": "chart-pie",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "@withicons/angular",
-  "version": "0.1.0",
-  "description": "300 icons x 7 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
+  "version": "0.2.0",
+  "description": "500 icons x 12 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -25,7 +25,21 @@
     "angular",
     "angular-icons",
     "standalone",
-    "svg-icons"
+    "svg-icons",
+    "multicolor-icons",
+    "animated-icons",
+    "line-icons",
+    "solid-icons",
+    "duo-icons",
+    "gloss-icons",
+    "engrave-icons",
+    "blueprint-icons",
+    "sketch-icons",
+    "glass-icons",
+    "kawaii-icons",
+    "sticker-icons",
+    "pixel-icons",
+    "retro-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -64,6 +78,26 @@
       "types": "./dist/sketch/index.d.ts",
       "default": "./dist/sketch/index.mjs"
     },
+    "./glass": {
+      "types": "./dist/glass/index.d.ts",
+      "default": "./dist/glass/index.mjs"
+    },
+    "./kawaii": {
+      "types": "./dist/kawaii/index.d.ts",
+      "default": "./dist/kawaii/index.mjs"
+    },
+    "./sticker": {
+      "types": "./dist/sticker/index.d.ts",
+      "default": "./dist/sticker/index.mjs"
+    },
+    "./pixel": {
+      "types": "./dist/pixel/index.d.ts",
+      "default": "./dist/pixel/index.mjs"
+    },
+    "./retro": {
+      "types": "./dist/retro/index.d.ts",
+      "default": "./dist/retro/index.mjs"
+    },
     "./icons/*": {
       "types": "./dist/line/icons/*.d.ts",
       "default": "./dist/line/icons/*.mjs"
@@ -95,6 +129,26 @@
     "./sketch/icons/*": {
       "types": "./dist/sketch/icons/*.d.ts",
       "default": "./dist/sketch/icons/*.mjs"
+    },
+    "./glass/icons/*": {
+      "types": "./dist/glass/icons/*.d.ts",
+      "default": "./dist/glass/icons/*.mjs"
+    },
+    "./kawaii/icons/*": {
+      "types": "./dist/kawaii/icons/*.d.ts",
+      "default": "./dist/kawaii/icons/*.mjs"
+    },
+    "./sticker/icons/*": {
+      "types": "./dist/sticker/icons/*.d.ts",
+      "default": "./dist/sticker/icons/*.mjs"
+    },
+    "./pixel/icons/*": {
+      "types": "./dist/pixel/icons/*.d.ts",
+      "default": "./dist/pixel/icons/*.mjs"
+    },
+    "./retro/icons/*": {
+      "types": "./dist/retro/icons/*.d.ts",
+      "default": "./dist/retro/icons/*.mjs"
     },
     "./package.json": "./package.json"
   },
@@ -144,6 +198,36 @@
       ],
       "sketch/icons/*": [
         "./dist/sketch/icons/*.d.ts"
+      ],
+      "glass": [
+        "./dist/glass/index.d.ts"
+      ],
+      "glass/icons/*": [
+        "./dist/glass/icons/*.d.ts"
+      ],
+      "kawaii": [
+        "./dist/kawaii/index.d.ts"
+      ],
+      "kawaii/icons/*": [
+        "./dist/kawaii/icons/*.d.ts"
+      ],
+      "sticker": [
+        "./dist/sticker/index.d.ts"
+      ],
+      "sticker/icons/*": [
+        "./dist/sticker/icons/*.d.ts"
+      ],
+      "pixel": [
+        "./dist/pixel/index.d.ts"
+      ],
+      "pixel/icons/*": [
+        "./dist/pixel/icons/*.d.ts"
+      ],
+      "retro": [
+        "./dist/retro/index.d.ts"
+      ],
+      "retro/icons/*": [
+        "./dist/retro/icons/*.d.ts"
       ]
     }
   },
@@ -152,6 +236,9 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
   "peerDependencies": {
     "@angular/core": ">=17.0.0"
   }

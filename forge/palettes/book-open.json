@@ -1,0 +1,27 @@
+{
+  "name": "book-open",
+  "palettes": [
+    {"id":"paperback","name":"Paperback","tags":["true-to-life"],"colors":{"ink":"#2E2418","c1":"#F6EBCF","c2":"#C2412D","c3":"#E8D3A0","c4":"#3B5F8A","tint":"#FCF9F2","accent":"#C2412D","shadow":"#928874","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"old-library","name":"Old library","tags":["vintage","true-to-life"],"colors":{"ink":"#2A1F12","c1":"#E8D9B5","c2":"#7A2E2E","c3":"#B58A4E","c4":"#3F5A4E","tint":"#F9F4EA","accent":"#7A2E2E","shadow":"#897C64","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"textbook-blue","name":"Textbook blue","tags":["true-to-life"],"colors":{"ink":"#0A1F44","c1":"#4A86D9","c2":"#FFC93C","c3":"#B9D3F5","c4":"#1F4FA8","tint":"#CCDDF4","accent":"#FFC93C","shadow":"#2A538F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"crisp-white","name":"Crisp white","tags":["true-to-life"],"colors":{"ink":"#1C1C24","c1":"#FAFAF7","c2":"#3A86FF","c3":"#E6E6E0","c4":"#FF5A5F","tint":"#FEFEFD","accent":"#FF5A5F","shadow":"#8B8B8E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"chalkboard","name":"Chalkboard","tags":["true-to-life"],"colors":{"ink":"#0C1E15","c1":"#3F6B55","c2":"#F2E8C9","c3":"#8FBFA4","c4":"#E3B341","tint":"#C9D6CF","accent":"#E3B341","shadow":"#264535","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"storybook","name":"Storybook","tags":["pastel"],"colors":{"ink":"#3A2A1A","c1":"#FFE3B0","c2":"#FF8FA3","c3":"#9FD8F5","c4":"#B9E5A3","tint":"#FFF7E9","accent":"#FF8FA3","shadow":"#9D8765","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lilac-pages","name":"Lilac pages","tags":["pastel"],"colors":{"ink":"#2A2050","c1":"#D8C9F5","c2":"#FFC4D8","c3":"#B5E8D8","c4":"#8C79C9","tint":"#F4F0FC","accent":"#FF9EC4","shadow":"#8175A3","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"kids-corner","name":"Kids corner","tags":["vivid"],"colors":{"ink":"#26200A","c1":"#FFD23F","c2":"#3A86FF","c3":"#FF5A5F","c4":"#2EC27E","tint":"#FFF2C9","accent":"#3A86FF","shadow":"#937925","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum","name":"Bubblegum","tags":["candy"],"colors":{"ink":"#3D1233","c1":"#FFB4D6","c2":"#FFE36E","c3":"#8DE1FF","c4":"#C49BFF","tint":"#FFEAF4","accent":"#FFE36E","shadow":"#9E6385","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-reader","name":"Night reader","tags":["neon","on-dark"],"colors":{"ink":"#08101A","c1":"#2DEBFF","c2":"#FF3E9E","c3":"#F8FF3A","c4":"#8A5CFF","tint":"#C4F9FF","accent":"#FF3E9E","shadow":"#197886","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holo-diary","name":"Holo diary","tags":["y2k"],"colors":{"ink":"#261F4A","c1":"#E2DBFF","c2":"#FF9CEB","c3":"#9CF6FF","c4":"#CFFF6A","tint":"#F7F5FF","accent":"#FF9CEB","shadow":"#847DA5","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"70s-paperback","name":"70s paperback","tags":["retro"],"colors":{"ink":"#2D1709","c1":"#E8A33D","c2":"#D2462F","c3":"#F3DDB0","c4":"#2E7D7A","tint":"#F9E5C9","accent":"#D2462F","shadow":"#8B5D23","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"kraft-journal","name":"Kraft journal","tags":["earthy"],"colors":{"ink":"#2A1A0C","c1":"#C9A27A","c2":"#6E4A2E","c3":"#E8D5BC","c4":"#7E8C5C","tint":"#F0E5DA","accent":"#6E4A2E","shadow":"#7A5E43","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"teal-ramp","name":"Teal ramp","tags":["mono"],"colors":{"ink":"#062824","c1":"#3FB5A8","c2":"#127068","c3":"#A6E3DB","c4":"#E2F7F4","tint":"#C9EAE7","accent":"#127068","shadow":"#236F66","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#E2E2E2","c2":"#5A5A5A","c3":"#A6A6A6","c4":"#858585","tint":"#F7F7F7","accent":"#5A5A5A","shadow":"#7A7A7A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFFFFF","c2":"#0050C8","c3":"#FFC20E","c4":"#D50000","tint":"#F4F4F4","accent":"#D50000","shadow":"#808080","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"docs-blue","name":"Docs blue","tags":["corporate"],"colors":{"ink":"#0D2241","c1":"#E3EEFB","c2":"#1D63D6","c3":"#9DBDEB","c4":"#F2B134","tint":"#F7FAFE","accent":"#F2B134","shadow":"#78889E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gilt-edge","name":"Gilt edge","tags":["luxe"],"colors":{"ink":"#14110A","c1":"#F4ECD8","c2":"#C9A33A","c3":"#1F2A44","c4":"#7A2E2E","tint":"#FCFAF4","accent":"#C9A33A","shadow":"#847F71","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sea-log","name":"Sea log","tags":["ocean"],"colors":{"ink":"#06283A","c1":"#BFE6EE","c2":"#1F7A9C","c3":"#F6F1E5","c4":"#E55934","tint":"#EDF8FA","accent":"#1F7A9C","shadow":"#638794","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"field-guide","name":"Field guide","tags":["nature"],"colors":{"ink":"#18260F","c1":"#8FB36A","c2":"#F2E8C9","c3":"#3F6B3A","c4":"#C8693F","tint":"#E0EAD5","accent":"#F2E8C9","shadow":"#546D3D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"evening-read","name":"Evening read","tags":["sunset"],"colors":{"ink":"#33162A","c1":"#FFC9A3","c2":"#E8546B","c3":"#FFE8A3","c4":"#6A3D8F","tint":"#FFF0E5","accent":"#E8546B","shadow":"#997067","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"berry-jam","name":"Berry jam","tags":["vivid"],"colors":{"ink":"#1C0517","c1":"#B23A7A","c2":"#FFD1E3","c3":"#6A1B5A","c4":"#F2C14E","tint":"#E9C8DA","accent":"#FFD1E3","shadow":"#672049","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

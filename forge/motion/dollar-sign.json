@@ -1,0 +1,34 @@
+{
+  "name": "dollar-sign",
+  "intent": "spins like a coin, money coming in",
+  "loop": {
+    "preset": "flip",
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "coins",
+      "effect": "fade"
+    },
+    {
+      "to": "percent",
+      "effect": "rotate"
+    },
+    {
+      "to": "banknote",
+      "effect": "flip"
+    }
+  ]
+}

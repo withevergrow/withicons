@@ -1,0 +1,47 @@
+{
+  "name": "rss",
+  "intent": "broadcasts waves outward like a live feed",
+  "loop": {
+    "preset": "fill",
+    "origin": [
+      5.5,
+      18.5
+    ],
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pulse",
+    "origin": [
+      5.5,
+      18.5
+    ],
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "origin": [
+        5.5,
+        18.5
+      ]
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        5.5,
+        18.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "fade"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "scale"
+    }
+  ]
+}

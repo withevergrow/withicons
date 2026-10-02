@@ -1,0 +1,83 @@
+{
+  "name": "square-x",
+  "category": "actions",
+  "description": "An X inside a rounded square for closing a tab, removing an entry or a disabled option.",
+  "aliases": [
+    "x-square",
+    "close-square",
+    "cross-square",
+    "close-box",
+    "box-x",
+    "cancel-square",
+    "disabled-box",
+    "x-box",
+    "close-tab",
+    "square-close",
+    "cross-box"
+  ],
+  "tags": [
+    "close",
+    "cancel",
+    "remove",
+    "cross",
+    "square",
+    "disabled"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 L15 15",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 L9 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M9 9 L15 15",
+    "M15 9 L9 15"
+  ],
+  "synonyms": [
+    "close",
+    "cancel",
+    "dismiss",
+    "exit",
+    "quit",
+    "remove",
+    "delete",
+    "clear",
+    "discard",
+    "reject",
+    "decline",
+    "deny",
+    "no",
+    "wrong",
+    "incorrect",
+    "false",
+    "failed",
+    "error",
+    "disabled",
+    "unavailable",
+    "not allowed",
+    "blocked",
+    "unchecked",
+    "x mark",
+    "cross",
+    "cross mark",
+    "x in box",
+    "boxed x",
+    "x button",
+    "close button",
+    "close window",
+    "close panel",
+    "ballot x",
+    "sqaure x"
+  ]
+}

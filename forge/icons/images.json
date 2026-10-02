@@ -1,0 +1,76 @@
+{
+  "name": "images",
+  "category": "media",
+  "description": "A photo stacked in front of another for galleries, albums and multiple images.",
+  "aliases": [
+    "photos",
+    "photo-library",
+    "album-photos",
+    "pictures",
+    "collection-photos",
+    "multiple-images",
+    "photo-gallery",
+    "image-gallery",
+    "media-library",
+    "photo-album",
+    "image-stack"
+  ],
+  "tags": [
+    "media",
+    "photo",
+    "gallery",
+    "collection",
+    "picture"
+  ],
+  "paths": [
+    {
+      "d": "M4 8 H16 A2 2 0 0 1 18 10 V19 A2 2 0 0 1 16 21 H4 A2 2 0 0 1 2 19 V10 A2 2 0 0 1 4 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 4 H20 A2 2 0 0 1 22 6 V17",
+      "plate": "K"
+    },
+    {
+      "d": "M2 18.5 L6 14.5 A1.41 1.41 0 0 1 8 14.5 L14.5 21",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12.5 A1.5 1.5 0 1 1 11.5 12.5 A1.5 1.5 0 1 1 14.5 12.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 8 H16 A2 2 0 0 1 18 10 V19 A2 2 0 0 1 16 21 H4 A2 2 0 0 1 2 19 V10 A2 2 0 0 1 4 8 Z"
+  ],
+  "cutouts": [
+    "M15 12.5 A2 2 0 1 1 11 12.5 A2 2 0 1 1 15 12.5 Z",
+    "M3.25 17.25 L6 14.5 A1.41 1.41 0 0 1 8 14.5 L13.25 19.75 H3.25 Z"
+  ],
+  "synonyms": [
+    "gallery",
+    "album",
+    "albums",
+    "photo collection",
+    "pics",
+    "camera roll",
+    "photo roll",
+    "slideshow",
+    "portfolio",
+    "media",
+    "image library",
+    "stack of photos",
+    "many photos",
+    "photo stack",
+    "snapshots",
+    "memories",
+    "upload photos",
+    "browse photos",
+    "pictures folder",
+    "library",
+    "imgs",
+    "immages",
+    "photograph",
+    "photographs"
+  ]
+}

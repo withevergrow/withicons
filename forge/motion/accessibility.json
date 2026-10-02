@@ -1,0 +1,8 @@
+{
+  "name": "accessibility",
+  "intent": "opens its arms in a calm welcome, wobbles happily when you reach for it",
+  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.8 },
+  "hover": { "preset": "jelly", "amount": 0.9 },
+  "alt": [ { "preset": "spin-once" }, { "preset": "nod", "amount": 0.7 }, { "preset": "breathe" } ],
+  "swap": [ { "to": "user", "effect": "fade" }, { "to": "accessibility@solid", "effect": "scale" } ]
+}

@@ -5,7 +5,6 @@
   "aliases": [
     "launch",
     "deploy",
-    "ship",
     "release",
     "spaceship",
     "liftoff",
@@ -71,6 +70,7 @@
     "rocket ship",
     "missile",
     "roket",
-    "rockit"
+    "rockit",
+    "ship"
   ]
 }

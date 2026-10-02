@@ -1,0 +1,77 @@
+{
+  "name": "shield-user",
+  "category": "security",
+  "description": "A shield holding a person for admins, account protection, and privacy settings.",
+  "aliases": [
+    "admin-shield",
+    "user-shield",
+    "protected-user",
+    "privacy-user",
+    "guardian",
+    "moderator",
+    "administrator",
+    "account-security",
+    "protected-account",
+    "bodyguard"
+  ],
+  "tags": [
+    "security",
+    "user",
+    "admin",
+    "privacy",
+    "account",
+    "protection"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 8.5 A2.5 2.5 0 1 1 9.5 8.5 A2.5 2.5 0 1 1 14.5 8.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6.73 18 A5.72 5.72 0 0 1 17.27 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [
+    "M14.5 8.5 A2.5 2.5 0 1 1 9.5 8.5 A2.5 2.5 0 1 1 14.5 8.5 Z",
+    "M6.73 18 A5.72 5.72 0 0 1 17.27 18"
+  ],
+  "synonyms": [
+    "admin",
+    "admin panel",
+    "admin rights",
+    "admin access",
+    "superuser",
+    "super user",
+    "root user",
+    "mod",
+    "moderation",
+    "privacy settings",
+    "account protection",
+    "secure account",
+    "protected profile",
+    "identity protection",
+    "personal data",
+    "data protection",
+    "gdpr",
+    "security officer",
+    "security guard",
+    "guard",
+    "trusted user",
+    "verified user",
+    "role",
+    "permissions",
+    "user permissions",
+    "safe user",
+    "profile security",
+    "shield person",
+    "shield profile"
+  ]
+}

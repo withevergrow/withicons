@@ -1,0 +1,38 @@
+{
+  "name": "sun",
+  "intent": "rays turn slowly as the sun shines",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "glow",
+    "duration": 0.9,
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "moon",
+      "effect": "rotate"
+    },
+    {
+      "to": "cloud-sun",
+      "effect": "fade"
+    },
+    {
+      "to": "sun@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "user-pen",
+  "category": "users",
+  "description": "A person with a pencil for editing a profile or account details.",
+  "aliases": [
+    "edit-user",
+    "edit-profile",
+    "user-edit",
+    "profile-edit",
+    "update-profile",
+    "account-edit",
+    "person-edit",
+    "user-pencil",
+    "edit-account",
+    "modify-user"
+  ],
+  "tags": [
+    "person",
+    "edit",
+    "profile",
+    "account",
+    "pencil"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13 21 L14 17 L18 13 A2.12 2.12 0 0 1 21 16 L17 20 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M14 17 L17 20",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M13 21 L14 17 L18 13 A2.12 2.12 0 0 1 21 16 L17 20 Z"
+  ],
+  "cutouts": [
+    "M14 17 L17 20"
+  ],
+  "synonyms": [
+    "change profile",
+    "edit my profile",
+    "update details",
+    "personal details",
+    "change name",
+    "edit bio",
+    "update account",
+    "edit member",
+    "author",
+    "writer",
+    "contributor",
+    "editor",
+    "signature",
+    "rename user",
+    "update info",
+    "edit personal info",
+    "edit contact",
+    "change details",
+    "edit profil"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "chevron-last",
+  "intent": "leans ahead toward the end, like it's jumping to the last page",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.45, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 1.1, "duration": 0.6 },
+  "alt": [
+    { "preset": "pass", "dir": 0, "duration": 0.8 },
+    { "preset": "shake", "amount": 0.5 }
+  ],
+  "swap": [
+    { "to": "chevron-first", "effect": "flip" },
+    { "to": "chevron-right", "effect": "slide-right" },
+    { "to": "skip-forward", "effect": "morph" }
+  ]
+}

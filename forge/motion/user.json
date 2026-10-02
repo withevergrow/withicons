@@ -1,0 +1,52 @@
+{
+  "name": "user",
+  "intent": "nods hello like a person saying hi",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.9,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "user-check",
+      "effect": "fade"
+    },
+    {
+      "to": "user-plus",
+      "effect": "fade"
+    },
+    {
+      "to": "user-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "users",
+      "effect": "slide-left"
+    }
+  ]
+}

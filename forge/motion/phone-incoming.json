@@ -1,0 +1,15 @@
+{
+  "name": "phone-incoming",
+  "intent": "rings gently like a call coming in, the arrow dips in on hover",
+  "loop": { "preset": "ring", "origin": [12, 12], "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 135, "amount": 1.1, "duration": 0.6 },
+  "alt": [
+    { "preset": "wiggle", "amount": 0.8 },
+    { "preset": "pulse", "amount": 0.6 }
+  ],
+  "swap": [
+    { "to": "phone-call", "effect": "fade" },
+    { "to": "phone-off", "effect": "rotate" },
+    { "to": "phone-missed", "effect": "fade" }
+  ]
+}

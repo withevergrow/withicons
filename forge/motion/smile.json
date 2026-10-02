@@ -1,0 +1,42 @@
+{
+  "name": "smile",
+  "intent": "blinks and grins like a happy friend",
+  "loop": {
+    "preset": "blink",
+    "origin": [
+      12,
+      9.5
+    ],
+    "duration": 4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 1,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "scale"
+    },
+    {
+      "to": "smile@solid",
+      "effect": "fade"
+    }
+  ]
+}

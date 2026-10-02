@@ -1,0 +1,55 @@
+{
+  "name": "arrow-down-left",
+  "category": "arrows",
+  "description": "A diagonal arrow pointing down and to the left, for south-west moves and collapsing toward a corner.",
+  "aliases": [
+    "arrow-bottom-left",
+    "down-left",
+    "south-west",
+    "southwest",
+    "arrow-sw",
+    "diagonal-down-left",
+    "bottom-left",
+    "lower-left",
+    "down-left-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "diagonal",
+    "down",
+    "left",
+    "direction",
+    "corner"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 6.5 L6.5 17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 8 V17.5 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "diagonal arrow",
+    "pointing down left",
+    "lower left corner",
+    "bottom left corner",
+    "move down left",
+    "go down left",
+    "collapse",
+    "shrink",
+    "dock",
+    "send to corner",
+    "incoming",
+    "received",
+    "inbound",
+    "south west",
+    "down and left",
+    "diagonal down",
+    "arrows"
+  ]
+}

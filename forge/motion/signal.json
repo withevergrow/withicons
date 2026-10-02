@@ -1,0 +1,43 @@
+{
+  "name": "signal",
+  "intent": "bars fill up as the signal gets stronger",
+  "loop": {
+    "preset": "fill",
+    "origin": [
+      12,
+      19.5
+    ],
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "fill",
+    "origin": [
+      12,
+      19.5
+    ],
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        19.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "fade"
+    },
+    {
+      "to": "wifi-off",
+      "effect": "blur"
+    }
+  ]
+}

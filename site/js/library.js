@@ -36,22 +36,37 @@
   var isSheet = function () { return mq('(max-width: 899px)') }
 
   /* ───────────────────────── data ───────────────────────── */
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
-  var STYLES = META.styles.slice().sort(function (a, b) { return ((ORDER.indexOf(a.name) + 99) % 99) - ((ORDER.indexOf(b.name) + 99) % 99) })
+  // the contract order (forge/CONTRACT.md); styles the data adds later sort after these, missing ones are skipped
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+  var rankOf = function (n) { var i = ORDER.indexOf(n); return i < 0 ? 99 : i }
+  var STYLES = META.styles.slice().sort(function (a, b) { return rankOf(a.name) - rankOf(b.name) })
   var STYLE = {}; STYLES.forEach(function (s) { STYLE[s.name] = s })
   var SNAMES = STYLES.map(function (s) { return s.name })
+  // how the switchers group them (same three families as the home page and icon pages)
+  var GROUPS = [
+    { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
+    { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
+    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'], isNew: true },
+  ].map(function (g) { return { id: g.id, title: g.title, isNew: g.isNew, styles: g.styles.filter(function (n) { return STYLE[n] }) } })
+  SNAMES.forEach(function (n) { if (!GROUPS.some(function (g) { return g.styles.indexOf(n) >= 0 })) GROUPS[GROUPS.length - 1].styles.push(n) })
+  GROUPS = GROUPS.filter(function (g) { return g.styles.length })
+  var GROUP_OF = {}; GROUPS.forEach(function (g) { g.styles.forEach(function (n) { GROUP_OF[n] = g }) })
   var ICONS = META.icons
   var BY = {}; ICONS.forEach(function (ic, i) { ic.i = i; ic.title = ic.title || titleOf(ic.name); BY[ic.name] = ic })
   var CATS = (META.categories || []).slice()
   ICONS.forEach(function (ic) { if (CATS.indexOf(ic.category) < 0) CATS.push(ic.category) })
+  // a category is listed once it has icons (new ones are announced in the data before their icons land)
+  CATS = CATS.filter(function (c) { return ICONS.some(function (ic) { return ic.category === c }) })
   var CAT_RANK = {}; CATS.forEach(function (c, i) { CAT_RANK[c] = i })
   var BROWSE = ICONS.slice().sort(function (a, b) { return (CAT_RANK[a.category] - CAT_RANK[b.category]) || (a.name < b.name ? -1 : 1) })
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7B5CFF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12' }
+  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes' }
+  var sayOf = function (st) { var wi = W.WI && W.WI.styleInfo && W.WI.styleInfo[st]; return SAY[st] || (wi && wi.description && wi.description.replace(/\.$/, '')) || (STYLE[st] && STYLE[st].description) || '' }
   var INK = '#111318', PAPER = '#FBF8F3'
   var styleHex = function (st) { return HEX[st] || INK }
   var CLASH = { Map: 1, Image: 1, History: 1, File: 1, Link: 1, Navigation: 1, Clipboard: 1, Keyboard: 1, Bluetooth: 1, Screen: 1, Option: 1, Text: 1, Location: 1, Range: 1, Selection: 1, Notification: 1, Set: 1, Date: 1, Error: 1, Symbol: 1, Proxy: 1, Worker: 1, Lock: 1, Headers: 1, Request: 1, Response: 1 }
   var comp = function (n) { var p = pascal(n); return CLASH[p] ? p + 'Icon' : p }
-  var CAT_ICON = { navigation: 'home', arrows: 'arrow-up-right', actions: 'pencil', status: 'check-circle', media: 'play', files: 'file', communication: 'mail', users: 'user', commerce: 'shopping-cart', time: 'clock', devices: 'smartphone', layout: 'layout-grid', text: 'type', maps: 'map-pin', development: 'code', security: 'lock', charts: 'chart-bar', weather: 'sun', objects: 'gift' }
+  var CAT_ICON = { navigation: 'home', arrows: 'arrow-up-right', actions: 'pencil', status: 'check-circle', media: 'play', files: 'file', communication: 'mail', users: 'user', commerce: 'shopping-cart', time: 'clock', devices: 'smartphone', layout: 'layout-grid', text: 'type', maps: 'map-pin', development: 'code', security: 'lock', charts: 'chart-bar', weather: 'sun', objects: 'gift', food: 'pizza', health: 'stethoscope', education: 'graduation-cap', nature: 'leaf', home: 'sofa', travel: 'luggage', sports: 'trophy' }
   function catIcon(c) { var n = CAT_ICON[c]; if (n && BY[n]) return n; for (var i = 0; i < BROWSE.length; i++) if (BROWSE[i].category === c) return BROWSE[i].name; return ICONS[0].name }
   var numericSW = function (st) { return !!(STYLE[st] && typeof STYLE[st].strokeWidth === 'number') }
 
@@ -72,7 +87,14 @@
   function loadAll() { return Promise.all(SNAMES.map(loadStyle)) }
   var styleHooks = []
   function onStyleLoaded(st) { styleHooks.forEach(function (f) { try { f(st) } catch (e) { if (W.console) console.error(e) } }) }
-  function idleLoadRest() {
+  // Every style file is 0.1-1.5 MB of JS (8 MB together). Only desktop-class devices on a normal connection fetch them
+  // all in the background; phones, tablets and Save-Data fetch a style when it is needed or the visitor reaches for it.
+  // navigator.connection only exists in Chromium, so the hover/pointer check is the main gate.
+  function lowData() { var c = navigator.connection; return !!(c && (c.saveData || /2g/.test(c.effectiveType || ''))) }
+  function richDevice() { return !lowData() && mq('(hover: hover) and (pointer: fine)') }
+  function idleLoadRest(force) {
+    if ((!force && !richDevice()) || idleLoadRest.on) return
+    idleLoadRest.on = true
     var rest = SNAMES.filter(function (n) { return !svgMap(n) })
     var idle = W.requestIdleCallback ? function (f) { W.requestIdleCallback(f, { timeout: 2500 }) } : function (f) { setTimeout(f, 300) }
     ;(function next() { var n = rest.shift(); if (n) idle(function () { loadStyle(n).then(next) }) })()
@@ -98,17 +120,29 @@
     return (gCache[key] = '<svg viewBox="0 0 24 24"' + ROOT_ATTR[st] + (numericSW(st) ? ' class="sw"' : '') + ' aria-hidden="true" focusable="false">' + inner + '</svg>')
   }
   function rawInner(st, name) { var m = svgMap(st); return (m && m[name]) || '' }
+  // var(--x, fallback) -> fallback (nested too); a bare var(--x) -> currentColor
+  function resolveVars(s) { var prev; do { prev = s; s = s.replace(/var\(\s*--[\w-]+\s*,\s*([^()]*?)\s*\)/g, '$1').replace(/var\(\s*--[\w-]+\s*\)/g, 'currentColor') } while (s !== prev); return s }
   // Standalone SVG. mode 'code' keeps currentColor + CSS hooks (for developers); 'file' bakes the chosen colour in.
+  // o.resolve (code mode, for apps): every var() resolved to its colour, currentColor kept (see appSvg).
   function svgText(st, name, o) {
     o = o || {}
     var s = STYLE[st], root = { xmlns: 'http://www.w3.org/2000/svg', width: o.px || 24, height: o.px || 24, viewBox: '0 0 24 24' }
     Object.keys(s.root || {}).forEach(function (k) { root[k] = s.root[k] })
     if (numericSW(st) && S.sw != null) root['stroke-width'] = S.sw
     var inner = rawInner(st, name)
+    var cz = o.mode === 'file' ? edColors(st, name) : null
+    if (cz) {
+      // every colour the visitor picked for the open icon, baked in (var(--with-x, d) -> hex, currentColor -> ink)
+      inner = ED.bakeColors(inner, cz)
+      if (cz.ink) Object.keys(root).forEach(function (k) { if (typeof root[k] === 'string') root[k] = root[k].replace(/currentColor/g, cz.ink) })
+    }
     if (o.mode === 'file') {
       var c = o.color || INK
-      inner = inner.replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, c)
-      Object.keys(root).forEach(function (k) { if (typeof root[k] === 'string') root[k] = root[k].replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, c) })
+      inner = resolveVars(inner).replace(/currentColor/g, c)
+      Object.keys(root).forEach(function (k) { if (typeof root[k] === 'string') root[k] = resolveVars(root[k]).replace(/currentColor/g, c) })
+    } else if (o.resolve) {
+      inner = resolveVars(inner)
+      Object.keys(root).forEach(function (k) { if (typeof root[k] === 'string') root[k] = resolveVars(root[k]) })
     }
     var a = Object.keys(root).filter(function (k) { return root[k] !== false && root[k] != null }).map(function (k) { return ' ' + k + '="' + esc(root[k]) + '"' }).join('')
     if (o.bg) {
@@ -247,6 +281,7 @@
     sw: null,
     density: /^[sml]$/.test(store.get('dens2', 'm')) ? store.get('dens2', 'm') : 'm',
     sel: new Set(),
+    animate: !!store.get('animate', false),
     fi: 0,
     results: [], counts: {}, total: 0, fix: null,
   }
@@ -256,6 +291,8 @@
     bgInc: !!store.get('bginc', false),
     w: clamp(+store.get('vw', 440) || 440, 340, 900),
     tab: store.get('devtab', 'react'),
+    ttab: /^(look|motion|swap)$/.test(store.get('ttab', 'look')) ? store.get('ttab', 'look') : 'look',
+    anim: /^(none|loop|hover|once)$/.test(store.get('anim', 'hover')) ? store.get('anim', 'hover') : 'hover',
     returnFocus: null,
   }
   var initialIcon = params.get('icon') && BY[params.get('icon')] ? params.get('icon') : null
@@ -322,11 +359,14 @@
   }
   function fileSvg(st, name, px) { return svgText(st, name, { mode: 'file', color: exportColor(st), bg: exportBg(st), px: px || S.px }) }
   function codeSvg(st, name) { return svgText(st, name, { mode: 'code', pretty: true }) }
+  // "Copy SVG code — for Figma, Canva, HTML": design apps import SVG without a CSS engine, so var(--with-x, #hex) would
+  // paint black there. Resolve the variables; currentColor stays, so pasted HTML still follows `color`.
+  function appSvg(st, name) { return svgText(st, name, { mode: 'code', pretty: true, resolve: true }) }
   function fname(st, name, ext, px) { return name + (st === 'line' ? '' : '-' + st) + (px ? '-' + px : '') + '.' + ext }
 
   /* ───────────────────────── export: png, clipboard, files, zip ───────────────────────── */
   var pngCache = new Map()
-  function pngKey(st, name, px) { return [st, name, px, exportColor(st), exportBg(st) || '', S.sw == null ? '' : S.sw].join('|') }
+  function pngKey(st, name, px) { return [st, name, px, exportColor(st), exportBg(st) || '', S.sw == null ? '' : S.sw, edCss(st, name)].join('|') }
   function renderPng(st, name, px) {
     px = px || S.px
     var key = pngKey(st, name, px)
@@ -390,7 +430,7 @@
     }).catch(clipFail)
   }
   function copySvgCode(st, name) {
-    return copyText(S.color === 'ink' && !V.bgInc ? codeSvg(st, name) : fileSvg(st, name, 24)).then(function () {
+    return copyText(S.color === 'ink' && !V.bgInc && !edColors(st, name) ? appSvg(st, name) : fileSvg(st, name, 24)).then(function () {
       bump(name); toast('Copied <b>' + esc(BY[name].title) + '</b> as SVG code. Paste it into Figma, Canva or your HTML.', { icon: name, st: st })
     }, function () { toast('Couldn’t reach the clipboard. Try the download button.', { err: true }) })
   }
@@ -496,10 +536,16 @@
       var narrow = w < 640
       L.gap = narrow ? 5 : 10; L.cols = SNAMES.length
       L.labelW = narrow ? 0 : Math.round(clamp(w * 0.17, 132, 210)); L.labelH = narrow ? 30 : 0
-      L.headH = narrow ? 0 : 34
-      L.tw = Math.floor(Math.min(d.min, (w - L.labelW - L.gap * (L.cols - 1)) / L.cols)); L.th = L.tw
+      // every style of an icon sits on one line; when that would make tiles too small (12 styles on a phone or
+      // beside the open drawer) the line wraps into two rows of six
+      var fit = function (per) { return Math.floor(Math.min(d.min, (w - L.labelW - L.gap * (per - 1)) / per)) }
+      L.per = L.cols; L.tw = fit(L.cols)
+      if (L.tw < (narrow ? 40 : 58) && L.cols > 6) { L.per = Math.ceil(L.cols / 2); L.tw = fit(L.per) }
+      L.sub = Math.ceil(L.cols / L.per)
+      L.headH = narrow || L.sub > 1 ? 0 : 34
+      L.th = L.tw
       L.ib = Math.round(Math.min(d.ib, L.tw * 0.46))
-      L.rowH = L.th + L.labelH + L.gap
+      L.rowH = L.sub * (L.th + L.gap) + L.labelH + (L.sub > 1 ? 8 : 0)
       L.rows = S.results.length
     } else {
       L.gap = d.gap; L.labelW = 0; L.labelH = 0; L.headH = 0
@@ -514,11 +560,12 @@
     grid.style.setProperty('--tw', L.tw + 'px'); grid.style.setProperty('--th', L.th + 'px')
     grid.style.setProperty('--ib', L.ib + 'px'); grid.style.setProperty('--la', L.la + 'px')
     grid.setAttribute('data-view', S.view); grid.setAttribute('data-density', S.density)
+    if (S.view === 'compare' && L.sub > 1) grid.setAttribute('data-wrap', ''); else grid.removeAttribute('data-wrap')
     paintCompareHead()
   }
   function pos(idx) {
     var it = ITEMS[idx]
-    if (S.view === 'compare') return { x: L.labelW + it.col * (L.tw + L.gap), y: L.headH + it.row * L.rowH + L.labelH, row: it.row, col: it.col }
+    if (S.view === 'compare') { var c = it.col % L.per, sr = Math.floor(it.col / L.per); return { x: L.labelW + c * (L.tw + L.gap), y: L.headH + it.row * L.rowH + L.labelH + sr * (L.th + L.gap), row: it.row, col: it.col } }
     var row = Math.floor(idx / L.cols), col = idx % L.cols
     return { x: col * (L.tw + L.gap), y: row * L.rowH, row: row, col: col }
   }
@@ -594,7 +641,11 @@
     var sel = S.sel.has(n._k)
     n.classList.toggle('is-sel', sel)
     n.setAttribute('aria-selected', sel ? 'true' : 'false')
-    n.classList.toggle('is-active', !!(V.open && V.name === n._name && (S.view === 'grid' || V.st === n._st)))
+    var act = !!(V.open && V.name === n._name && (S.view === 'grid' || V.st === n._st))
+    n.classList.toggle('is-active', act)
+    // the open icon's tile wears its custom colours too
+    var svg = n.querySelector('.t-ic svg'), css = act ? edCss(n._st, n._name) : ''
+    if (svg && (css || svg._cz)) { svg.style.cssText = css.replace(/: /g, ':'); svg._cz = !!css }
   }
   function hiName(text) {
     var q = norm(S.q)
@@ -680,7 +731,7 @@
       }
       l.style.transform = 'translate(0,' + (L.headH + r * L.rowH) + 'px)'
       l.style.width = (L.labelW ? L.labelW - 14 : L.w) + 'px'
-      l.style.height = (L.labelW ? L.th : L.labelH) + 'px'
+      l.style.height = (L.labelW ? L.th * L.sub + L.gap * (L.sub - 1) : L.labelH) + 'px'
     }
     labels.forEach(function (l, k) { if (!want.has(k)) { l.remove(); labels.delete(k) } })
   }
@@ -714,7 +765,7 @@
     var q = S.q.trim(), n = S.results.length
     var catTxt = S.cat ? ' in <button type="button" class="meta-chip" data-clear-cat>' + esc(cap(S.cat)) + ' <span aria-hidden="true">×</span><span class="vh">remove category filter</span></button>' : ''
     var head
-    if (!q) head = '<b>' + fmt(n) + '</b> icon' + (n === 1 ? '' : 's') + catTxt + (S.view === 'compare' ? ' <span class="meta-sep">·</span> <b>' + fmt(n * SNAMES.length) + '</b> in all ' + SNAMES.length + ' styles' : ' <span class="meta-sep">·</span> <span class="meta-sc">' + esc(STYLE[S.style].title) + '</span> style')
+    if (!q) head = '<b>' + fmt(n) + '</b> icon' + (n === 1 ? '' : 's') + catTxt + (S.view === 'compare' ? ' <span class="meta-sep">·</span> <b>' + fmt(n * SNAMES.length) + '</b> in all ' + SNAMES.length + ' styles' : ' <span class="meta-sep">·</span> <span class="meta-sc">' + esc(STYLE[S.style].title) + '</span> style' + (sayOf(S.style) ? '<span class="meta-say"> · ' + esc(sayOf(S.style)) + '</span>' : ''))
     else head = '<b>' + fmt(n) + '</b> icon' + (n === 1 ? '' : 's') + ' for <q>' + esc(S.fix && S.fix.used ? S.fix.to : q) + '</q>' + catTxt + (S.cat && S.total > n ? ' <button type="button" class="meta-link" data-clear-cat>+' + (S.total - n) + ' in other categories</button>' : '')
     var fix = ''
     if (q && S.fix && n) {
@@ -734,7 +785,7 @@
     if (n) lastEmptyQ = null
     root.classList.toggle('has-query', !!q)
   }
-  var POP_CATS = ['actions', 'communication', 'commerce', 'files', 'users', 'weather', 'objects', 'charts']
+  var POP_CATS = ['actions', 'communication', 'commerce', 'files', 'users', 'food', 'travel', 'nature', 'weather', 'objects']
   function paintEmpty(q) {
     var sug = q ? suggestions(q, 8).slice(0, 6) : []
     var reqUrl = 'https://github.com/withevergrow/withicons/issues/new?title=' + encodeURIComponent('Icon request: ' + (q || '')) + '&labels=icon-request'
@@ -745,7 +796,7 @@
         '<p class="em-p">Try a simpler word (“money” instead of “invoice payment”), check the spelling, or pick one of these.</p>' +
         (sug.length ? '<div class="em-row"><span class="em-l">Did you mean</span>' + sug.map(function (s) { return '<button type="button" class="dym" data-q="' + esc(BY[s].title.toLowerCase()) + '" style="--sc:var(--s-' + S.style + ')">' + glyph(S.style, s) + esc(BY[s].title) + '</button>' }).join('') + '</div>' : '') +
         '<div class="em-row"><span class="em-l">Or browse</span>' + POP_CATS.filter(function (c) { return CAT_RANK[c] != null }).map(function (c) { return '<button type="button" class="dym is-cat" data-pick-cat="' + c + '">' + glyph('line', catIcon(c)) + esc(cap(c)) + '</button>' }).join('') + '</div>' +
-        '<div class="em-ai"><div class="em-ai-h"><span class="em-ai-ic" aria-hidden="true">' + ICO.spark + '</span><div><h3>Ask an AI to pick the right icon</h3><p>Describe what you need in your own words. We’ll hand your assistant a ready prompt that knows all 300 icons.</p></div></div>' +
+        '<div class="em-ai"><div class="em-ai-h"><span class="em-ai-ic" aria-hidden="true">' + ICO.spark + '</span><div><h3>Ask an AI to pick the right icon</h3><p>Describe what you need in your own words. We’ll hand your assistant a ready prompt that knows all ' + fmt(ICONS.length) + ' icons.</p></div></div>' +
           '<div data-ask-ai data-intent="find" data-query="' + esc(q) + '"></div></div>' +
         '<p class="em-actions"><button type="button" class="btn-pill" data-q="">Show all icons</button><a class="btn-pill is-ghost" href="' + esc(reqUrl) + '" target="_blank" rel="noopener">Request this icon ' + ICO.ext + '</a></p>' +
       '</div>'
@@ -789,8 +840,21 @@
     })
     var cmp = $('[data-compare]'); if (cmp) { cmp.setAttribute('aria-pressed', S.view === 'compare' ? 'true' : 'false'); if (S.view === 'compare' && stylesEl.scrollWidth > stylesEl.clientWidth) stylesEl.scrollLeft = stylesEl.scrollWidth }
     moveInk()
+    // twelve pills may not all fit (tablets, phones, beside the drawer): keep the picked one in view
+    var onP = S.view === 'grid' && $('[aria-checked="true"]', stylesEl)
+    if (onP && stylesEl.scrollWidth > stylesEl.clientWidth + 2 && paintStylePills._last !== S.style) {
+      paintStylePills._last = S.style
+      var l = onP.offsetLeft, r = l + onP.offsetWidth
+      if (l < stylesEl.scrollLeft + 8 || r > stylesEl.scrollLeft + stylesEl.clientWidth - 28) stylesEl.scrollTo({ left: Math.max(0, l - 48), behavior: reduced || !root.classList.contains('is-ready') ? 'auto' : 'smooth' })
+    }
+    paintStyleEdge()
     root.setAttribute('data-style', S.view === 'compare' ? 'all' : S.style)
     paintTools()
+  }
+  function paintStyleEdge() {
+    var over = stylesEl.scrollWidth > stylesEl.clientWidth + 2
+    stylesEl.classList.toggle('is-over', over && stylesEl.scrollLeft + stylesEl.clientWidth < stylesEl.scrollWidth - 4)
+    stylesEl.classList.toggle('is-scrolled', over && stylesEl.scrollLeft > 4)
   }
   function moveInk() {
     var ink = $('.sp-ink', stylesEl), on = $('[aria-checked="true"]', stylesEl)
@@ -920,7 +984,7 @@
     scrollToIndex(i)
     render()
     var n = mounted.get(ITEMS[i].k); refreshTabStops()
-    if (n && !noFocus) n.focus({ preventScroll: true })
+    if (n && !noFocus) { n.focus({ preventScroll: true }); playTile(n) }
     // the docked viewer follows the keyboard
     if (V.open && !isSheet() && !V.full) setViewerIcon(ITEMS[i].name, S.view === 'compare' ? ITEMS[i].st : V.st)
   }
@@ -935,7 +999,11 @@
   function barBottom() { var b = $('[data-bar]'); return b ? b.getBoundingClientRect().bottom : 0 }
 
   // drag out: PNG via DownloadURL (Chrome/Edge to desktop), image HTML + SVG text for apps
-  grid.addEventListener('pointerover', function (e) { var n = tileFromEvent(e); if (n && !n._warm && e.pointerType === 'mouse') { n._warm = 1; renderPng(n._st, n._name, S.px).catch(function () { }) } })
+  grid.addEventListener('pointerover', function (e) {
+    var n = tileFromEvent(e); if (!n || e.pointerType !== 'mouse') return
+    if (S.animate && !(e.relatedTarget && n.contains(e.relatedTarget))) playTile(n)
+    if (!n._warm) { n._warm = 1; renderPng(n._st, n._name, S.px).catch(function () { }) }
+  })
   grid.addEventListener('dragstart', function (e) {
     var n = tileFromEvent(e); if (!n) return
     dragData(e, n._st, n._name, n.querySelector('.t-ic svg'))
@@ -998,19 +1066,31 @@
   function snippets(st, name) {
     var C = comp(name), sub = st === 'line' ? '' : '/' + st, T = BY[name].title, alias = st === 'line' ? C : C + cap(st)
     var imp = function (pkg) { return st === 'line' ? "import { " + C + " } from '" + pkg + "'" : "import { " + C + " as " + alias + " } from '" + pkg + sub + "'" }
+    // the open icon's custom colours: CSS variables in a style attribute / prop (they reach the inline SVG)
+    var css = edCss(st, name), cz = css ? edColors(st, name) : null
+    var sa = css ? ' style="' + css + '"' : ''
+    var sj = css ? ' style={{ ' + (cz.ink ? "color: '" + cz.ink + "', " : '') + Object.keys(cz.vars).map(function (k) { return "'" + k + "': '" + cz.vars[k] + "'" }).join(', ') + ' }}' : ''
     return [
-      { id: 'react', label: 'React', file: 'App.jsx', code: imp('@withicons/react') + "\n\nexport const Example = () => <" + alias + " size={24} title=\"" + T + "\" />" },
-      { id: 'vue', label: 'Vue', file: 'Example.vue', code: "<script setup>\n" + imp('@withicons/vue') + "\n</script>\n\n<template>\n  <" + alias + " :size=\"24\" />\n</template>" },
-      { id: 'svelte', label: 'Svelte', file: 'Example.svelte', code: "<script>\n  " + imp('@withicons/svelte') + "\n</script>\n\n<" + alias + " size={24} />" },
+      { id: 'react', label: 'React', file: 'App.jsx', code: imp('@withicons/react') + "\n\nexport const Example = () => <" + alias + " size={24} title=\"" + T + "\"" + sj + " />" },
+      { id: 'vue', label: 'Vue', file: 'Example.vue', code: "<script setup>\n" + imp('@withicons/vue') + "\n</script>\n\n<template>\n  <" + alias + " :size=\"24\"" + sa + " />\n</template>" },
+      { id: 'svelte', label: 'Svelte', file: 'Example.svelte', code: "<script>\n  " + imp('@withicons/svelte') + "\n</script>\n\n<" + alias + " size={24}" + sa + " />" },
       { id: 'angular', label: 'Angular', file: 'example.component.ts', code: "import { Component } from '@angular/core'\nimport { WithIconComponent } from '@withicons/angular'\n" + imp('@withicons/angular') + "\n\n@Component({\n  selector: 'app-example',\n  imports: [WithIconComponent],\n  template: `<with-icon [icon]=\"icon\" [size]=\"24\" />`,\n})\nexport class ExampleComponent { icon = " + alias + " }" },
-      { id: 'solid', label: 'Solid', file: 'Example.tsx', code: imp('@withicons/solid') + "\n\nexport const Example = () => <" + alias + " size={24} />" },
-      { id: 'wc', label: 'Web component', file: 'index.html', code: '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>\n\n<with-icon name="' + name + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + ' label="' + T + '"></with-icon>' },
-      { id: 'classes', label: 'Icon classes', file: 'index.html', code: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-' + (st === 'line' ? 'line' : 'all') + '.css">\n\n<i class="with with-' + name + (st === 'line' ? '' : ' with-' + st) + '"></i>' },
-      { id: 'svg', label: 'SVG', file: fname(st, name, 'svg'), code: codeSvg(st, name) },
+      { id: 'solid', label: 'Solid', file: 'Example.tsx', code: imp('@withicons/solid') + "\n\nexport const Example = () => <" + alias + " size={24}" + (css ? ' style={{ ' + (cz.ink ? "color: '" + cz.ink + "', " : '') + Object.keys(cz.vars).map(function (k) { return "'" + k + "': '" + cz.vars[k] + "'" }).join(', ') + ' }}' : '') + " />" },
+      { id: 'wc', label: 'Web component', file: 'index.html', code: '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>\n\n<with-icon name="' + name + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + ' label="' + T + '"' + sa + '></with-icon>' },
+      { id: 'classes', label: 'Icon classes', file: 'index.html', code: cssLink(st) + '\n' + (css ? '<!-- custom colours need the runtime: CSS-only icons can’t see CSS variables -->\n' + RUNTIME + '\n' : '') + '\n' + iTag(name, st) },
+      { id: 'svg', label: 'SVG', file: fname(st, name, 'svg'), code: css ? svgText(st, name, { mode: 'file', color: exportColor(st), pretty: true }) : codeSvg(st, name) },
     ]
   }
-  var CSS_LINK = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">'
-  function iTag(name, st) { return '<i class="with with-' + name + (st && st !== 'line' ? ' with-' + st : '') + '"></i>' }
+  // one stylesheet per style: with-line.css is ~26 KB gzipped, with-all.css ~2 MB and render-blocking. A single style file
+  // also draws that style's bare tags, and several style files can share a page.
+  function cssLink(st) { return '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-' + (STYLE[st] ? st : 'line') + '.css">' }
+  function cssLinks(styles) { return styles.filter(function (x, i, a) { return a.indexOf(x) === i }).map(cssLink).join(String.fromCharCode(10)) }
+  function headLines(st, name) { return cssLink(st) + (edCss(st, name) ? String.fromCharCode(10) + RUNTIME : '') }
+  function iTag(name, st, plain) { var c = plain ? '' : edCss(st, name); return '<i class="with with-' + name + (st && st !== 'line' ? ' with-' + st : '') + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
+  // the open icon's own colours (Colours panel in the Look tab, owned by the studio in js/editor.js) for exports and code
+  function edColors(st, name) { if (!ED || !V.open || name !== V.name) return null; var e = ED.get(); return e.name === name ? ED.colorsFor(st, name) : null }
+  function edCss(st, name) { var cz = edColors(st, name); if (!cz) return ''; var p = cz.ink ? ['color: ' + cz.ink] : []; Object.keys(cz.vars).forEach(function (k) { p.push(k + ': ' + cz.vars[k]) }); return p.join('; ') }
+  var RUNTIME = '<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-icons.js" defer></script>'
   function flash(btn, label) { var p = btn.querySelector('[data-vw-tagdone]') || btn; var old = p.textContent; btn.classList.add('is-done'); p.textContent = label || 'Copied'; clearTimeout(btn._ft); btn._ft = setTimeout(function () { btn.classList.remove('is-done'); p.textContent = old === (label || 'Copied') ? 'Copy' : old }, 1500) }
   function hl(code) { var w = WI(); return w && w.highlight ? w.highlight(code) : esc(code) }
 
@@ -1040,16 +1120,17 @@
             '<span class="vw-drag-hint" aria-hidden="true">drag me out ↘</span>' +
             '<div class="vw-bgs" role="radiogroup" aria-label="Preview background">' + BG_LIST.map(function (b) { return '<button type="button" role="radio" class="vw-bg is-' + b[0] + '" data-vw-bg="' + b[0] + '" aria-label="' + b[1] + ' background" title="' + b[1] + '"><span></span></button>' }).join('') + '</div>' +
             '<output class="vw-readout" data-vw-readout></output>' +
+            '<button type="button" class="vw-play" data-vw="play" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12 A7.5 7.5 0 1 0 7 6.4 M4 3.5 V7.5 H8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-vw-playl>Play</span></button>' +
           '</div>' +
-          '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" style="--sc:var(--s-' + s + ');--on-sc:var(--on-' + s + ')" title="' + esc(STYLE[s].title) + ' (' + (i + 1) + ')"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
-          '<section class="vw-sec vw-mocks" aria-labelledby="vw-mk-h"><h3 class="vw-h3" id="vw-mk-h">See it in use</h3><div class="mk-grid" data-vw-mocks></div></section>' +
+          '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { var g = GROUP_OF[s]; return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" data-group="' + (g ? g.id : '') + '" style="--sc:var(--s-' + s + ');--on-sc:var(--on-' + s + ')" title="' + esc(STYLE[s].title) + ' · ' + esc(sayOf(s)) + (i < 10 ? ' (' + ((i + 1) % 10) + ')' : '') + '"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
+          '<section class="vw-sec vw-mocks" aria-labelledby="vw-mk-h"><div class="vw-h3row"><h3 class="vw-h3" id="vw-mk-h">See it in use</h3><span class="vw-h3note" data-vw-mknote>Ten everyday places</span></div><div class="mk-grid" data-vw-mocks></div></section>' +
         '</div>' +
         '<div class="vw-col-b">' +
           '<div class="vw-actions">' +
             '<button type="button" class="vw-btn is-primary" data-vw="copy-img">' + ICO.copy + '<span><b>Copy image</b><small>Paste into Slides, Docs, Notion, Canva</small></span><kbd class="vw-kbd">Enter</kbd></button>' +
             '<div class="vw-itag">' +
               '<button type="button" class="vw-btn is-tag" data-vw="copy-tag">' + ICO.code + '<span><b>Copy &lt;i&gt; tag</b><code data-vw-tag></code></span><span class="vw-pill" data-vw-tagdone>Copy</span></button>' +
-              '<p class="vw-once"><span>First time on a page? Add this once:</span><code data-vw-css></code><button type="button" class="vw-mini" data-vw="copy-css">Copy</button></p>' +
+              '<details class="vw-once" data-vw-once><summary>First time? Show setup</summary><p><span>Add this line once inside your page’s <code>&lt;head&gt;</code> <small class="vw-soon-tag">launching soon</small></span><code data-vw-css></code><button type="button" class="vw-mini" data-vw="copy-css">Copy</button></p></details>' +
             '</div>' +
             '<div class="vw-png">' +
               '<button type="button" class="vw-btn" data-vw="png">' + ICO.down + '<span><b>Download PNG</b><small data-vw-pngsize></small></span></button>' +
@@ -1062,16 +1143,28 @@
             '<a class="vw-page" data-vw-page href="#"><span><b data-vw-pagetitle>Open the icon page</b><small>Every style, guides and a shareable page</small></span>' + ICO.arrow + '</a>' +
           '</div>' +
           '<section class="vw-sec vw-tune" aria-labelledby="vw-tune-h"><h3 class="vw-h3" id="vw-tune-h">Make it yours</h3>' +
-            '<div class="vw-field"><span class="vw-label" id="vw-col-l">Colour</span>' +
+            '<div class="vw-ttabs" role="tablist" aria-label="Customize" data-vw-ttabs><span class="vw-ttab-ink" aria-hidden="true"></span>' +
+              [['look', 'Look'], ['motion', 'Animate'], ['swap', 'Turn into']].map(function (t) { return '<button type="button" role="tab" id="vwtt-' + t[0] + '" data-vw-ttab="' + t[0] + '" aria-controls="' + (t[0] === 'look' ? 'vw-tp-look' : 'vw-tp-ed') + '" aria-selected="false" tabindex="-1">' + t[1] + (t[0] === 'motion' ? '<i class="vw-newdot" aria-hidden="true"></i>' : '') + '</button>' }).join('') +
+            '</div>' +
+            '<div class="vw-tpane" role="tabpanel" id="vw-tp-look" aria-labelledby="vwtt-look" data-vw-tpane="look">' +
+            '<div class="vw-colors" data-vw-colors hidden></div>' +
+            '<div class="vw-field" data-vw-monocol><span class="vw-label" id="vw-col-l">Colour</span>' +
               '<div class="vw-swatches" role="radiogroup" aria-labelledby="vw-col-l">' + PALETTE.map(function (p) { return '<button type="button" role="radio" class="vw-sw' + (p[0] === 'ink' ? ' is-auto' : p[0] === 'style' ? ' is-style' : '') + '" data-vw-color="' + p[0] + '" title="' + p[1] + '" aria-label="' + p[1] + '"' + (p[0][0] === '#' ? ' style="--c:' + p[0] + '"' : '') + '><span></span></button>' }).join('') +
                 '<label class="vw-sw is-custom" title="Any colour"><input type="color" data-vw-custom value="#FF5A36" aria-label="Pick any colour"><span>' + ICO.pick + '</span></label>' +
-              '</div></div>' +
+              '</div>' +
+              // typed hex: exact brand colours, keyboards and screen readers, Firefox for Android (its picker offers presets only)
+              '<label class="vw-hexrow"><span>Hex code</span><input class="vw-hex" data-vw-hex type="text" inputmode="text" maxlength="7" spellcheck="false" autocomplete="off" placeholder="#2F5BFF" title="Type or paste a hex code"></label>' +
+              '</div>' +
             '<div class="vw-field"><label class="vw-label" for="vw-size">Size</label>' +
               '<input class="vw-range" id="vw-size" type="range" min="0" max="' + (SIZES.length - 1) + '" step="1" data-vw-size aria-valuetext=""><output class="vw-out" data-vw-sizeout></output></div>' +
             '<div class="vw-field" data-vw-swrow><label class="vw-label" for="vw-sw">Stroke</label>' +
               '<input class="vw-range" id="vw-sw" type="range" min="0.75" max="3" step="0.25" data-vw-sw><span class="vw-out"><output data-vw-swout></output><button type="button" class="vw-reset" data-vw="sw-reset">reset</button></span></div>' +
             '<label class="vw-check"><input type="checkbox" data-vw-bginc><span class="vw-check-ui" aria-hidden="true"></span><span>Put the preview background in downloads <small>(rounded tile)</small></span></label>' +
+            '</div>' +
+            '<div class="vw-tpane" role="tabpanel" id="vw-tp-ed" aria-labelledby="vwtt-motion" data-vw-tpane="ed" hidden><div class="vw-ed" data-vw-ed><p class="vw-ed-wait"><span class="t-skel" aria-hidden="true"></span>Getting the animations ready…</p></div></div>' +
           '</section>' +
+          // every download format (the studio's Download panel, mounted with the studio; its scripts load on first use)
+          '<section class="vw-sec vw-dlsec" data-vw-dlsec><div class="vw-dl" data-vw-dl><h3 class="vw-h3">Download in any format</h3><p class="vw-ed-wait"><span class="t-skel" aria-hidden="true"></span>Getting the formats ready…</p></div></section>' +
           '<section class="vw-sec" data-vw-akasec aria-labelledby="vw-aka-h"><h3 class="vw-h3" id="vw-aka-h">Also known as</h3><p class="vw-chips" data-vw-aka></p></section>' +
           '<section class="vw-sec" aria-labelledby="vw-rel-h"><h3 class="vw-h3" id="vw-rel-h">Related icons</h3><div class="vw-rel" data-vw-rel></div></section>' +
           '<section class="vw-sec vw-ai" aria-labelledby="vw-ai-h"><h3 class="vw-h3" id="vw-ai-h"><span class="vw-ai-ic" aria-hidden="true">' + ICO.spark + '</span>Ask AI to help with it</h3><p class="vw-ai-p">Pick a task. Your assistant gets a ready brief about this icon and style.</p><div data-vw-ai></div></section>' +
@@ -1086,6 +1179,15 @@
     viewer._built = true
   }
 
+  // the drawer's strip shows this icon in all twelve styles. Desktop: fetch them now. Phones and tablets: once the drawer
+  // has settled, one style at a time in idle time. Save-Data / 2G: only the styles the visitor reaches for (a dot meanwhile).
+  var stripLazy = lowData()
+  function loadViewerStyles() {
+    if (stripLazy) return Promise.resolve()
+    if (richDevice()) return loadAll()
+    setTimeout(function () { idleLoadRest(true) }, 900)
+    return Promise.resolve()
+  }
   function openViewer(name, st, o) {
     o = o || {}
     if (!BY[name]) return
@@ -1094,7 +1196,8 @@
     V.open = true
     if (!wasOpen) V.returnFocus = o.from || D.activeElement
     setViewerIcon(name, st || V.st || S.style, true)
-    loadAll()
+    loadViewerStyles()
+    loadMotion().then(mountEditor)
     if (!wasOpen) {
       viewer.hidden = false
       root.classList.add('has-vw'); body.classList.add('has-vw')
@@ -1190,11 +1293,11 @@
       $$('[data-vw-st]', b).forEach(function (btn) {
         var s = btn.getAttribute('data-vw-st'), on = s === st
         btn.setAttribute('aria-checked', on ? 'true' : 'false'); btn.tabIndex = on ? 0 : -1
-        $('.vw-st-g', btn).innerHTML = svgMap(s) ? glyph(s, name) : '<span class="t-skel" aria-hidden="true"></span>'
+        $('.vw-st-g', btn).innerHTML = svgMap(s) ? glyph(s, name) : stripLazy ? '<span class="vw-st-dot" aria-hidden="true"></span>' : '<span class="t-skel" aria-hidden="true"></span>'
       })
       $('[data-vw-rel]', b).innerHTML = (viewer._rel || []).map(function (n) { return '<button type="button" class="vw-relb" data-vw-open="' + n + '" title="' + esc(BY[n].title) + '" aria-label="' + esc(BY[n].title) + '">' + (svgMap(st) ? glyph(st, n) : '') + '<span>' + esc(BY[n].title) + '</span></button>' }).join('')
       $('[data-vw-tag]', b).textContent = iTag(name, st)
-      $('[data-vw-css]', b).textContent = CSS_LINK
+      $('[data-vw-css]', b).textContent = headLines(st, name)
       paintDev()
       var ai = $('[data-vw-ai]', b)
       var host = D.createElement('div')
@@ -1202,6 +1305,7 @@
       ai.innerHTML = ''; ai.appendChild(host)
       renderAskAI(host, { icon: name, style: st, mode: 'tasks', compact: true })
     }
+    if (part === 'all') { paintTTabs(); if (!reduced) V.pendingPlay = true }
     paintLook()
   }
   function paintLook() {
@@ -1210,14 +1314,16 @@
     var stage = $('[data-vw-stage]', b)
     stage.setAttribute('data-bg', V.bg)
     stage.style.setProperty('--stage-ic', stageColor(st))
+    syncEditor()
     var art = $('[data-vw-art]', b)
-    art.innerHTML = svgMap(st) ? svgInline(st, name) : '<span class="t-skel" aria-hidden="true"></span>'
+    paintArt()
     art.style.setProperty('--disp', S.px + 'px')
     var bgHexV = exportBg(st)
     art.classList.toggle('has-tile', !!bgHexV); art.style.setProperty('--tile', bgHexV || 'transparent'); if (bgHexV) stage.setAttribute('data-tile', ''); else stage.removeAttribute('data-tile')
     $('[data-vw-readout]', b).innerHTML = '<b>' + S.px + '</b> × ' + S.px + ' px'
     $$('[data-vw-bg]', b).forEach(function (x) { var on = x.getAttribute('data-vw-bg') === V.bg; x.setAttribute('aria-checked', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1 })
     $$('[data-vw-color]', b).forEach(function (x) { var on = x.getAttribute('data-vw-color') === S.color; x.setAttribute('aria-checked', on ? 'true' : 'false'); x.tabIndex = on || (!isPreset(S.color) && x.getAttribute('data-vw-color') === 'ink') ? 0 : -1 })
+    var hx = $('[data-vw-hex]', b); if (hx && D.activeElement !== hx) { hx.value = shownHex(st); hx.removeAttribute('aria-invalid') }
     var cust = $('[data-vw-custom]', b), isC = !isPreset(S.color)
     cust.closest('.vw-sw').classList.toggle('is-on', isC); if (isC) { cust.value = S.color; cust.closest('.vw-sw').style.setProperty('--c', S.color) }
     var si = sizeIndex(S.px), sr = $('[data-vw-size]', b)
@@ -1234,10 +1340,23 @@
       $('[data-vw="sw-reset"]', b).hidden = S.sw == null
     }
     $('[data-vw-bginc]', b).checked = V.bgInc
+    // multi-colour styles: the Colours panel (every part + palettes) replaces the single colour row
+    var multi = !!(ED && ED.get().name === name && ED.isMulti(st))
+    $('[data-vw-monocol]', b).hidden = multi
     paintMocks()
+  }
+  function shownHex(st) { return (S.color === 'ink' ? INK : S.color === 'style' ? styleHex(st) : /^#[0-9a-f]{6}$/i.test(S.color) ? S.color : INK).toUpperCase() }
+  function normHex(v) { v = String(v || '').trim().replace(/^#?/, '#'); if (/^#[0-9a-f]{3}$/i.test(v)) v = '#' + v.slice(1).replace(/./g, '$&$&'); return /^#[0-9a-f]{6}$/i.test(v) ? v.toUpperCase() : null }
+  // the hex field: live while typing a full code, committed on Enter / change, reverted when it isn't a colour
+  function hexField(t, commit) {
+    var h = normHex(t.value), full = t.value.replace('#', '').length >= 6
+    t.setAttribute('aria-invalid', h || (!commit && !full) ? 'false' : 'true')
+    if (h && (commit || full)) { if (commit) t.value = h; if (h !== S.color) { S.color = h; store.set('color', h); afterLook(!commit) } else if (commit) afterLook() }
+    else if (commit) { t.value = shownHex(V.st); t.removeAttribute('aria-invalid') }
   }
   function isPreset(c) { return PALETTE.some(function (p) { return p[0] === c }) }
   function paintMocks() {
+    if (ED) return   // the studio's ten live placements took over
     var name = V.name, st = V.st, g = svgMap(st) ? svgInline(st, name) : ''
     var col = S.color === 'ink' ? 'var(--mk-ink)' : S.color === 'style' ? 'var(--s-' + st + ')' : S.color
     var tabCol = S.color === 'ink' ? 'var(--s-' + st + ')' : col
@@ -1261,20 +1380,178 @@
     var code = $('[data-vw-code]', vwBody); code.innerHTML = hl(cur.code); code._raw = cur.code
   }
 
+  /* ── motion + the Icon Studio (js/editor.js), loaded on demand: Animate / Turn into tabs, ten placements, grid hover moves ── */
+  var motionP = null
+  function loadCss(href) {
+    return new Promise(function (res) {
+      if (D.querySelector('link[href="' + href + '"]')) { res(); return }
+      var l = D.createElement('link'); l.rel = 'stylesheet'; l.href = href; l.onload = l.onerror = function () { res() }; D.head.appendChild(l)
+    })
+  }
+  function loadJs(src, ready) {
+    if (ready()) return Promise.resolve()
+    return new Promise(function (res) { var e = D.createElement('script'); e.src = src; e.async = false; e.onload = e.onerror = function () { res() }; D.head.appendChild(e) })
+  }
+  function loadMotion() {
+    if (motionP) return motionP
+    motionP = Promise.all([
+      loadCss('vendor/motion/motion.css'), loadCss('css/editor.css'),
+      loadJs('vendor/motion/motion.js', function () { return !!W.WithMotion }),
+      loadJs('data/motion.js', function () { return !!W.WITH_MOTION }),
+      loadJs('js/palette-map.js', function () { return !!W.WithPalette }),
+      loadJs('js/editor.js', function () { return !!W.WithEditor }),
+    ]).then(function () { return !!W.WithEditor })
+    return motionP
+  }
+  var ED = null
+  function edBg() { return V.bg === 'dark' ? 'dark' : V.bg === 'brand' ? 'brand' : 'light' }
+  function mountEditor() {
+    if (ED || !W.WithEditor || !viewer._built || !V.name) return
+    var host = $('[data-vw-ed]', vwBody), place = $('[data-vw-mocks]', vwBody)
+    place.className = 'vw-places'; place.innerHTML = ''
+    try {
+      ED = W.WithEditor.mount(host, { name: V.name, title: BY[V.name].title, style: V.st, remember: false, anim: V.anim, placements: place, onChange: onEdChange, colorsPanel: false, downloads: false })
+    } catch (err) { ED = null; if (W.console) console.error(err) }
+    if (!ED) { place.className = 'mk-grid'; paintMocks(); var ds = $('[data-vw-dlsec]', vwBody); if (ds) ds.hidden = true; return }
+    viewer.classList.add('has-studio')
+    // every colour + palettes of multi-colour styles live in the drawer's own Look tab (same studio state)
+    try { ED.colorsPanel($('[data-vw-colors]', vwBody)) } catch (err) { if (W.console) console.error(err) }
+    // the Download panel: every format (slides, design tools, websites, animated), from the same state as the studio.
+    // The drawer's own buttons above already cover Copy image, PNG and SVG, so it comes without the quick row.
+    try { if (ED.downloadPanel) ED.downloadPanel($('[data-vw-dl]', vwBody), { quick: false, title: 'Download in any format', motionTab: 'Animate' }) } catch (err) { if (W.console) console.error(err) }
+    V.ck = ED.get().colorsKey
+    // the stage's live swap follows the studio's shared state (and its own hover / focus): switching animates in place
+    try { if (ED.swapHost) ED.swapHost($('[data-vw-art]', vwBody)) } catch (err) { }
+    ED.tab(V.ttab === 'swap' ? 'swap' : 'motion')
+    syncEditor()
+    paintArt(); paintPlay()
+  }
+  // the drawer owns the look (style, colour, stroke, background, PNG size); the studio owns motion and "turn into"
+  function syncEditor() {
+    if (!ED || !V.name) return
+    var cur = ED.get()
+    if (cur.name !== V.name) { ED.setIcon(V.name, { title: BY[V.name].title, style: V.st }); if (!reduced) V.pendingPlay = true }
+    else if (cur.style !== V.st) ED.set({ style: V.st })
+    var want = { color: S.color, bg: edBg(), px: S.px, stroke: numericSW(V.st) ? S.sw : null }, now = ED.get(), patch = {}, any = false
+    Object.keys(want).forEach(function (k) { if (now[k] !== want[k]) { patch[k] = want[k]; any = true } })
+    if (any) ED.set(patch)
+  }
+  function onEdChange(st) {
+    if (st.anim !== V.anim) { V.anim = st.anim; store.set('anim', V.anim) }
+    // "Turn into" edits Before's style and colour inside the studio: the drawer follows (it owns the look)
+    if (st.name === V.name && st.style !== V.st && STYLE[st.style]) { setViewerStyle(st.style); return }
+    if (st.name === V.name && st.color !== S.color) { S.color = st.color; store.set('color', S.color); afterLook() }
+    if (st.colorsKey !== V.ck && st.name === V.name) {
+      V.ck = st.colorsKey
+      var b = vwBody
+      $('[data-vw-tag]', b).textContent = iTag(V.name, V.st); $('[data-vw-css]', b).textContent = headLines(V.st, V.name)
+      paintDev(); mounted.forEach(paintTileState)
+    }
+    var mono = $('[data-vw-monocol]', vwBody); if (mono && st.name === V.name) mono.hidden = ED.isMulti(V.st)
+    paintArt(); paintPlay()
+    var note = $('[data-vw-mknote]', vwBody)
+    if (note) note.textContent = st.swap && st.swap.ready ? (st.swap.trigger === 'click' ? 'Press the round button to switch' : st.swap.trigger === 'hover' ? (mq('(hover: none)') ? 'Tap a card’s button to switch' : 'Point at a button to switch') : st.swap.trigger === 'auto' ? 'Switching on its own' : 'Focus a button to switch') : st.anim === 'hover' ? 'Point at a card to see it move' : 'Ten everyday places'
+    if (V.pendingPlay && st.name === V.name && st.style === V.st) { V.pendingPlay = false; clearTimeout(V.playT); V.playT = setTimeout(replayStage, 280) }
+  }
+  function stageHtml(trigger) {
+    var st = V.st, name = V.name
+    if (!svgMap(st)) return '<span class="t-skel" aria-hidden="true"></span>'
+    if (ED) {
+      var e = ED.get()
+      if (e.name === name && e.style === st) { var h = ED.liveIcon({ px: 120, trigger: trigger || 'auto', on: false }); if (h && h.indexOf('<svg') >= 0) return h }
+    }
+    return svgInline(st, name)
+  }
+  function paintArt(force, trigger) {
+    var art = viewer._built && $('[data-vw-art]', vwBody); if (!art || !V.name) return
+    // the studio draws its live icon here and keeps it in step: only a changed drawing repaints, and switching a swap
+    // on and off is a class, so it animates (and reverses mid-way) instead of jumping
+    if (ED && ED.paintLive) {
+      var e = ED.get()
+      if (e.name === V.name && e.style === V.st && svgMap(V.st)) { if (force) art._wk = ''; ED.paintLive(art, { px: 120, trigger: trigger || 'auto' }); art._h = null; return }
+    }
+    var h = stageHtml(trigger)
+    if (force || h !== art._h) {
+      art.innerHTML = h; art._h = trigger ? null : h; art._wk = ''
+      if (W.WithEditor && W.WithEditor.prepareDraw) W.WithEditor.prepareDraw(art)
+    }
+  }
+  function replayStage() {
+    var e = ED && ED.get(); if (!e || e.anim === 'none' || !V.open) return
+    var once = e.anim === 'hover'
+    paintArt(true, once ? 'once' : 'auto')
+    clearTimeout(V.rt)
+    if (once) { var mi = ED.motionInfo('hover'); V.rt = setTimeout(function () { paintArt(true) }, ((mi && mi.dur) || 1) * 1000 + 160) }
+  }
+  function paintPlay() {
+    var b = viewer._built && $('[data-vw="play"]', vwBody); if (!b) return
+    var e = ED && ED.get()
+    var sw = e && e.swap && e.swap.ready ? e.swap : null
+    b.hidden = !e || (e.anim === 'none' && !sw)
+    if (b.hidden) return
+    var mi = e.anim === 'none' ? null : ED.motionInfo(), P = W.WithEditor.PRESETS || {}
+    var lab = sw ? (sw.trigger === 'auto' ? ((sw.held != null ? sw.held : sw.paused || reduced) ? 'Play · ' + sw.title : 'Pause switching') : sw.trigger === 'click' ? (sw.on ? 'Switch back' : 'Switch to ' + sw.title) : 'Play · ' + sw.title) : (mi && P[mi.preset] ? P[mi.preset].label : 'Play') + (e.anim === 'loop' ? ' · always' : e.anim === 'hover' ? (mq('(hover: none)') ? ' · on tap' : ' · on hover') : ' · once')
+    $('[data-vw-playl]', b).textContent = lab
+    b.setAttribute('aria-label', sw ? lab : 'Replay the animation: ' + lab)
+  }
+  function paintTTabs() {
+    $$('[data-vw-ttab]', vwBody).forEach(function (b) { var on = b.getAttribute('data-vw-ttab') === V.ttab; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+    $('[data-vw-tpane="look"]', vwBody).hidden = V.ttab !== 'look'
+    var ep = $('[data-vw-tpane="ed"]', vwBody); ep.hidden = V.ttab === 'look'; ep.setAttribute('aria-labelledby', 'vwtt-' + V.ttab)
+    raf(moveTInk)
+  }
+  function moveTInk() {
+    var ink = viewer._built && $('.vw-ttab-ink', vwBody), on = ink && $('[data-vw-ttab][aria-selected="true"]', vwBody)
+    if (!ink || !on || !on.offsetWidth) return
+    ink.style.width = on.offsetWidth + 'px'; ink.style.transform = 'translateX(' + on.offsetLeft + 'px)'
+  }
+  function setTTab(t) {
+    V.ttab = t; store.set('ttab', t)
+    paintTTabs()
+    if (t !== 'look') { if (ED) ED.tab(t); else loadMotion().then(mountEditor) }
+  }
+  // grid: with "Animate" on, the tile under the pointer (or keyboard focus) plays its icon's own one-shot
+  function playTile(n) {
+    if (!S.animate || reduced || !n || n._playing || !W.WithEditor || !W.WITH_MOTION) return
+    var svg = n.querySelector('.t-ic svg'); if (!svg) return
+    var spec = W.WITH_MOTION[n._name], entry = spec && (spec.hover || spec.loop); if (!entry) return
+    n._playing = true
+    if (entry.preset === 'draw' && DRAWABLE[n._st] && svg.querySelector('[pathLength]')) {
+      n.style.setProperty('--dd', '0ms'); n.style.setProperty('--dl', '720ms'); n.classList.add('is-draw')
+      setTimeout(function () { n.classList.remove('is-draw'); n._playing = false }, 760); return
+    }
+    if (entry.preset === 'draw') entry = { preset: 'pop' }
+    var mi = W.WithEditor.motionAttrs(entry, { trigger: 'hover' }); if (!mi) { n._playing = false; return }
+    var cls = ['wm', 'wm-p-' + mi.preset, 'wm-run'], keys = Object.keys(mi.vars)
+    cls.forEach(function (c) { svg.classList.add(c) }); keys.forEach(function (k) { svg.style.setProperty(k, mi.vars[k]) })
+    setTimeout(function () { cls.forEach(function (c) { svg.classList.remove(c) }); keys.forEach(function (k) { svg.style.removeProperty(k) }); n._playing = false }, mi.dur * 1000 + 80)
+  }
+  function setAnimate(on, quiet) {
+    S.animate = on; store.set('animate', on)
+    root.classList.toggle('is-animate', on)
+    var b = $('[data-animate]', tools); if (b) b.setAttribute('aria-pressed', on ? 'true' : 'false')
+    if (on) loadMotion().then(function () { if (!quiet) toast(reduced ? 'Your device asks for less motion, so icons stay still here. Open an icon to preview its animation.' : 'Point at any icon to see it move. Open one to pick a different animation.', { ms: 3400 }) })
+  }
+
   viewer.addEventListener('click', function (e) {
     if (!V.name) return
+    var artEl = e.target.closest && e.target.closest('[data-vw-art]')
+    if (artEl && ED) { var es = ED.get(); if (!(es.swap && es.swap.ready && ED.swapPress(artEl))) replayStage(); return }
     var t = e.target.closest('button, a'); if (!t || !viewer.contains(t)) return
+    if (t.closest('.wied, .wied-cpanel')) return   // the studio handles its own controls
     var act = t.getAttribute('data-vw'), name = V.name, st = V.st
     if (act === 'copy-img') copyImage(st, name)
     else if (act === 'png') downloadPng(st, name)
     else if (act === 'svg') downloadSvg(st, name)
     else if (act === 'copy-svg') copySvgCode(st, name)
-    else if (act === 'copy-tag') { copyText(iTag(name, st)).then(function () { flash(t); bump(name); toast('Copied <code>' + esc(iTag(name, st)) + '</code>. First time on a page? Also add the stylesheet line once.', { icon: name, st: st, action: { label: 'Copy stylesheet', run: function () { copyText(CSS_LINK).then(function () { toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once.') }, clipFail) } } }) }, clipFail) }
-    else if (act === 'copy-css') { copyText(CSS_LINK).then(function () { flash(t); toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once, then every &lt;i&gt; tag works.') }, clipFail) }
+    else if (act === 'copy-tag') { copyText(iTag(name, st)).then(function () { flash(t); bump(name); toast('Copied <code>' + esc(iTag(name, st)) + '</code>. First time on a page? Also add the stylesheet line once.', { icon: name, st: st, action: { label: 'Copy stylesheet', run: function () { copyText(headLines(st, name)).then(function () { toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once.') }, clipFail) } } }) }, clipFail) }
+    else if (act === 'copy-css') { copyText(headLines(st, name)).then(function () { flash(t); toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once, then every &lt;i&gt; tag works.') }, clipFail) }
     else if (act === 'close') closeViewer()
     else if (act === 'prev') stepViewer(-1)
     else if (act === 'next') stepViewer(1)
     else if (act === 'full') setFull(!V.full)
+    else if (act === 'play') { var ps = ED && ED.get(), pw = ps && ps.swap && ps.swap.ready ? ps.swap : null; if (pw && pw.trigger === 'click') ED.swapToggle(); else if (pw) ED.swapPlay(); else replayStage() }
+    else if (t.hasAttribute('data-vw-ttab')) setTTab(t.getAttribute('data-vw-ttab'))
     else if (act === 'sw-reset') { S.sw = null; afterLook() }
     else if (act === 'share') {
       var url = location.href.split('?')[0].split('#')[0] + urlQuery(true)
@@ -1293,17 +1570,23 @@
   })
   viewer.addEventListener('input', function (e) {
     var t = e.target
+    if (t.closest('.wied, .wied-cpanel')) return
     if (t.hasAttribute('data-vw-size')) setPx(SIZES[+t.value], true)
     else if (t.hasAttribute('data-vw-sw')) { S.sw = +t.value; afterLook(true) }
     else if (t.hasAttribute('data-vw-custom')) { S.color = t.value; store.set('color', S.color); afterLook(true) }
+    else if (t.hasAttribute('data-vw-hex')) hexField(t, false)
   })
   viewer.addEventListener('change', function (e) {
     var t = e.target
+    if (t.closest('.wied, .wied-cpanel')) return
     if (t.hasAttribute('data-vw-bginc')) { V.bgInc = t.checked; store.set('bginc', V.bgInc); afterLook() }
+    else if (t.hasAttribute('data-vw-hex')) hexField(t, true)
     else if (t.hasAttribute('data-vw-size') || t.hasAttribute('data-vw-sw')) paintTools()
   })
   viewer.addEventListener('keydown', function (e) {
     var t = e.target
+    if (t.closest && t.closest('.wied, .wied-cpanel, .vw-places')) return   // the studio has its own keyboard handling
+    if (t.hasAttribute && t.hasAttribute('data-vw-hex')) { if (e.key === 'Enter') { e.preventDefault(); hexField(t, true); t.select() } return }
     // arrow keys inside radio groups / tab lists
     var group = t.closest && t.closest('[role="radiogroup"], [role="tablist"]')
     if (group && (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
@@ -1388,7 +1671,7 @@
     var drag = null
     vwPanel.addEventListener('pointerdown', function (e) {
       if (!isSheet() || !V.open || e.button !== 0) return
-      var inBody = vwBody.contains(e.target), onControl = e.target.closest('input, select, textarea, .vw-styles, .vw-presets, .vw-tabs, .vw-rel, pre')
+      var inBody = vwBody.contains(e.target), onControl = e.target.closest('input, select, textarea, .vw-styles, .vw-presets, .vw-tabs, .vw-ttabs, .vw-rel, .vw-places, .wied-pchips, .wied-ctabs, .wied-chips, pre')
       if (onControl) return
       // at "full", the content scrolls: only the grip/header drag the sheet (or a pull-down from the very top)
       var head = e.target.closest('[data-vw-grip], .vw-head')
@@ -1504,6 +1787,11 @@
     var b = e.target.closest('[data-style-pill]'); if (b) { setStyle(b.getAttribute('data-style-pill'), b); return }
     if (e.target.closest('[data-compare]')) setView(S.view === 'compare' ? 'grid' : 'compare')
   })
+  stylesEl.addEventListener('scroll', function () { raf(paintStyleEdge) }, { passive: true })
+  // reaching for a style (pointer over it, or keyboard focus) starts its download before the click
+  function prefetchStyle(e) { var b = e.target.closest && e.target.closest('[data-style-pill], [data-vw-st]'); if (b) loadStyle(b.getAttribute('data-style-pill') || b.getAttribute('data-vw-st')) }
+  stylesEl.addEventListener('pointerover', prefetchStyle, { passive: true }); stylesEl.addEventListener('focusin', prefetchStyle)
+  viewer.addEventListener('pointerover', prefetchStyle, { passive: true }); viewer.addEventListener('focusin', prefetchStyle)
   stylesEl.addEventListener('keydown', function (e) {
     if (!e.target.hasAttribute('data-style-pill')) return
     var pills = $$('[data-style-pill]', stylesEl), i = pills.indexOf(e.target)
@@ -1540,6 +1828,7 @@
     }
     if (b.hasAttribute('data-color')) { S.color = b.getAttribute('data-color'); store.set('color', S.color) }
     else if (b.hasAttribute('data-sw-reset')) { S.sw = null }
+    else if (b.hasAttribute('data-animate')) { setAnimate(!S.animate); return }
     else if (b.hasAttribute('data-select-mode')) { var on = !root.classList.contains('is-selecting'); root.classList.toggle('is-selecting', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) toast('Selection mode: tap icons to pick several, then download them as one ZIP.', { ms: 3200 }); return }
     else if (b.hasAttribute('data-pop-toggle')) { togglePop(b.closest('[data-pop]')); return }
     else return
@@ -1563,8 +1852,9 @@
     var b = e.target.closest('button'); if (!b) return
     if (b.hasAttribute('data-zip')) zipSelected(b.getAttribute('data-zip'))
     else if (b.hasAttribute('data-sel-tags')) {
-      var tags = Array.from(S.sel).map(function (k) { var p = k.split('|'); return iTag(p[0], p[1]) }).join('\n')
-      copyText(tags).then(function () { toast('Copied ' + S.sel.size + ' &lt;i&gt; tag' + (S.sel.size > 1 ? 's' : '') + '. First time on a page? Add the stylesheet line once.', { action: { label: 'Copy stylesheet', run: function () { copyText(CSS_LINK).then(function () { toast('Copied the stylesheet line.') }, clipFail) } } }) }, clipFail)
+      var tags = Array.from(S.sel).map(function (k) { var p = k.split('|'); return iTag(p[0], p[1], true) }).join('\n')
+      var links = cssLinks(Array.from(S.sel).map(function (k) { return k.split('|')[1] })), nl = links.split(String.fromCharCode(10)).length
+      copyText(tags).then(function () { toast('Copied ' + S.sel.size + ' &lt;i&gt; tag' + (S.sel.size > 1 ? 's' : '') + '. First time on a page? Add the stylesheet line' + (nl > 1 ? 's' : '') + ' once.', { action: { label: 'Copy stylesheet' + (nl > 1 ? 's' : ''), run: function () { copyText(links).then(function () { toast('Copied ' + (nl > 1 ? nl + ' stylesheet lines, one per style' : 'the stylesheet line') + '.') }, clipFail) } } }) }, clipFail)
     }
     else if (b.hasAttribute('data-sel-clear')) clearSel()
     else if (b.hasAttribute('data-sel-all')) selectRange(0, ITEMS.length - 1)
@@ -1584,6 +1874,8 @@
       var pop = $('[data-pop].is-open', tools)
       if (pop) { togglePop(pop, false); $('[data-pop-toggle]', pop).focus(); return }
       if (typing && e.target === input) return
+      // Escape in a field inside the drawer (the studio's icon search) leaves the field, not the drawer
+      if (typing && viewer.contains(e.target)) { e.target.blur(); return }
       if (V.full) { setFull(false); return }
       if (V.open && (isSheet() || viewer.contains(e.target) || !S.sel.size)) { closeViewer(); return }
       if (S.sel.size) { clearSel(); return }
@@ -1596,7 +1888,7 @@
     if ((e.key === 'ArrowRight' || e.key === ']') && !inWidget) { e.preventDefault(); stepViewer(1) }
     else if ((e.key === 'ArrowLeft' || e.key === '[') && !inWidget) { e.preventDefault(); stepViewer(-1) }
     else if ((e.key === 'f' || e.key === 'F') && !isSheet()) { e.preventDefault(); setFull(!V.full) }
-    else if (inViewer && /^[1-7]$/.test(e.key) && SNAMES[+e.key - 1]) { e.preventDefault(); setViewerStyle(SNAMES[+e.key - 1]) }
+    else if (inViewer && /^[0-9]$/.test(e.key) && SNAMES[(+e.key + 9) % 10]) { e.preventDefault(); setViewerStyle(SNAMES[(+e.key + 9) % 10]) }
     else if (inViewer && e.key === 'Enter' && e.target === $('[data-vw-title]', vwBody)) { e.preventDefault(); copyImage(V.st, V.name) }
   }, true)
   $$('[data-search-open]').forEach(function (b) {
@@ -1622,12 +1914,19 @@
 
   /* ───────────────────────── boot ───────────────────────── */
   function buildChrome() {
-    stylesEl.insertAdjacentHTML('afterbegin', '<span class="sp-ink" aria-hidden="true"></span>' + STYLES.map(function (s) {
-      return '<button type="button" class="sp" role="radio" data-style-pill="' + s.name + '" style="--sc:var(--s-' + s.name + ');--on-sc:var(--on-' + s.name + ')" aria-checked="false" title="' + esc(s.description) + '"><span class="sp-g" aria-hidden="true"></span><span class="sp-t">' + esc(s.title) + '</span></button>'
+    // grouped pills (Everyday · Crafted · Playful): an icon each, the picked one also shows its name
+    stylesEl.insertAdjacentHTML('afterbegin', '<span class="sp-ink" aria-hidden="true"></span>' + GROUPS.map(function (g, gi) {
+      return (gi ? '<span class="sp-sep" aria-hidden="true"></span>' : '') + g.styles.map(function (n, i) {
+        var s = STYLE[n]
+        return '<button type="button" class="sp' + (g.isNew && !i ? ' is-new' : '') + '" role="radio" data-style-pill="' + n + '" data-group="' + g.id + '" style="--sc:var(--s-' + n + ');--on-sc:var(--on-' + n + ')" aria-checked="false" aria-label="' + esc(s.title) + ' style, ' + esc(g.title.toLowerCase()) + '" title="' + esc(s.title) + ' · ' + esc(sayOf(n)) + '"><span class="sp-g" aria-hidden="true"></span><span class="sp-t">' + esc(s.title) + '</span>' + (g.isNew && !i ? '<span class="sp-new" aria-hidden="true">new</span>' : '') + '</button>'
+      }).join('')
     }).join(''))
+    var cmpT = $('[data-compare]'); if (cmpT) cmpT.title = 'See every icon in all ' + SNAMES.length + ' styles side by side'
     catNav.innerHTML = '<button type="button" class="cat" data-cat="" aria-pressed="true"><span class="cat-g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg></span><span class="cat-t">All icons</span><small>' + ICONS.length + '</small></button>' +
       CATS.map(function (c) { return '<button type="button" class="cat" data-cat="' + c + '" aria-pressed="false"><span class="cat-g" aria-hidden="true" data-cat-g="' + catIcon(c) + '"></span><span class="cat-t">' + esc(cap(c)) + '</span><small></small></button>' }).join('')
-    $$('[data-icon-total]').forEach(function (el) { el.textContent = ICONS.length })
+    $$('[data-icon-total]').forEach(function (el) { el.textContent = fmt(ICONS.length) })
+    $$('[data-style-total]').forEach(function (el) { el.textContent = SNAMES.length })
+    var dots = $('.lib-dots'); if (dots) dots.innerHTML = SNAMES.map(function (n) { return '<i style="background:var(--s-' + n + ')"></i>' }).join('')
   }
   function paintCatGlyphs() { $$('[data-cat-g]', catNav).forEach(function (g) { if (!g.firstChild && svgMap('line')) g.innerHTML = glyph('line', g.getAttribute('data-cat-g')) }) }
   function measureTop() {
@@ -1660,9 +1959,20 @@
       openViewer(initialIcon, initialVSt || S.style, {})
       if (!isSheet()) { var k = KEYS.get(initialIcon + '|' + (S.view === 'compare' ? V.st : S.style)); if (k != null) { S.fi = k; raf(function () { scrollToIndex(k, true); render(); refreshTabStops() }) } }
     }
-    idleLoadRest()
+    if (S.animate) setAnimate(true, true)
     var idleRun = W.requestIdleCallback ? function (f) { W.requestIdleCallback(f, { timeout: 1500 }) } : function (f) { setTimeout(f, 200) }
     idleRun(function () { try { var en = getEngine(); if (typeof en.warm === 'function') en.warm(); else en.search('warm', { limit: 1 }) } catch (e) { } })
+    // the other eleven style files (~1.9 MB compressed) and the studio + motion runtime (~0.6 MB) wait for the visitor's
+    // first click, key, wheel or touch: a page that is only looked at (or measured) stays at the line style it shows,
+    // and anyone who starts browsing still has them before they reach for them
+    var warmed = false, warmEvts = ['pointerdown', 'keydown', 'wheel', 'touchstart']
+    var warm = function () {
+      if (warmed) return; warmed = true
+      warmEvts.forEach(function (t) { W.removeEventListener(t, warm, true) })
+      idleLoadRest()
+      setTimeout(function () { idleRun(function () { loadMotion() }) }, 600)
+    }
+    warmEvts.forEach(function (t) { W.addEventListener(t, warm, { capture: true, passive: true }) })
   })
   W.addEventListener('scroll', onScroll, { passive: true })
   var roQ = false
@@ -1672,7 +1982,7 @@
   }).observe(grid)
   var wasSheet = isSheet()
   W.addEventListener('resize', function () {
-    measureTop(); moveInk(); updateBodyCols()
+    measureTop(); moveInk(); updateBodyCols(); moveTInk(); paintStyleEdge()
     var nowSheet = isSheet()
     if (nowSheet !== wasSheet) {
       wasSheet = nowSheet
@@ -1689,5 +1999,5 @@
   // engine may arrive after us (deferred script order): swap it in and re-run the query
   if (!(W.WithSearch && W.WITH_SEARCH_INDEX)) W.addEventListener('load', function () { if (W.WithSearch && W.WITH_SEARCH_INDEX && !(engine && engine.isShared)) { engine = null; if (S.q) update({ anim: false }) } })
   // public hook for debugging / other scripts
-  W.WITH_LIBRARY = { _m: function () { return mounted }, state: S, viewer: V, open: openViewer, close: closeViewer, search: function (q) { setQuery(q) }, zip: zip, png: renderPng, svg: fileSvg, engine: getEngine }
+  W.WITH_LIBRARY = { _m: function () { return mounted }, state: S, viewer: V, studio: function () { return ED }, animate: setAnimate, open: openViewer, close: closeViewer, search: function (q) { setQuery(q) }, zip: zip, png: renderPng, svg: fileSvg, engine: getEngine }
 })()

@@ -1,0 +1,41 @@
+{
+  "name": "repeat",
+  "intent": "turns around again, playing on repeat",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "flip",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "shuffle",
+      "effect": "rotate"
+    }
+  ]
+}

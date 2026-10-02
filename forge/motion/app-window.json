@@ -1,0 +1,8 @@
+{
+  "name": "app-window",
+  "intent": "pops open like an app window launching",
+  "loop":  { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
+  "hover": { "preset": "pop", "amount": 0.9, "duration": 0.5 },
+  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "float", "amount": 0.5 } ],
+  "swap":  [ { "to": "maximize", "effect": "scale" }, { "to": "monitor", "effect": "morph" }, { "to": "layout-template", "effect": "fade" } ]
+}

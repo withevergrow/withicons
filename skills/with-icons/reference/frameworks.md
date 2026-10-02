@@ -2,7 +2,8 @@
 
 Every framework package exposes the same thing: one component per icon, PascalCase of the kebab-case name, exported as
 `Name` and `NameIcon`. The default path is the **line** style; each other style is a subpath
-(`/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`). Deep imports: `<pkg>/icons/<name>` and `<pkg>/<style>/icons/<name>`.
+(`/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`).
+Animation is a separate, optional package for every framework: see [motion.md](motion.md). Deep imports: `<pkg>/icons/<name>` and `<pkg>/<style>/icons/<name>`.
 
 ## React (also Next.js, Remix, Vite, React Native Web)
 

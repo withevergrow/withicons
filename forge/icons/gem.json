@@ -1,0 +1,90 @@
+{
+  "name": "gem",
+  "category": "objects",
+  "description": "A faceted gemstone for premium plans, rewards, value, and jewellery.",
+  "aliases": [
+    "diamond",
+    "jewel",
+    "gemstone",
+    "jewelry",
+    "jewellery",
+    "precious",
+    "treasure",
+    "crystal",
+    "diamond-gem",
+    "ruby",
+    "emerald",
+    "sapphire",
+    "gems"
+  ],
+  "tags": [
+    "premium",
+    "value",
+    "jewelry",
+    "reward",
+    "luxury",
+    "diamond"
+  ],
+  "paths": [
+    {
+      "d": "M7 3.5 H17 L21.5 9 L12 21 L2.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 9 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10 3.5 L8.5 9 L12 21",
+      "plate": "A"
+    },
+    {
+      "d": "M14 3.5 L15.5 9 L12 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 3.5 H17 L21.5 9 L12 21 L2.5 9 Z"
+  ],
+  "cutouts": [
+    "M2.5 9 H21.5",
+    "M10 3.5 L8.5 9 L12 20",
+    "M14 3.5 L15.5 9 L12 20"
+  ],
+  "synonyms": [
+    "precious stone",
+    "jewels",
+    "ring",
+    "engagement ring",
+    "wedding",
+    "luxury",
+    "luxurious",
+    "premium",
+    "vip",
+    "valuable",
+    "value",
+    "wealth",
+    "rich",
+    "expensive",
+    "quality",
+    "pro",
+    "upgrade",
+    "reward",
+    "rewards",
+    "points",
+    "loyalty",
+    "in-game currency",
+    "shiny",
+    "sparkle",
+    "bling",
+    "rare",
+    "prize",
+    "faceted",
+    "carat",
+    "karat",
+    "brilliant",
+    "daimond",
+    "diamon",
+    "jewlery"
+  ]
+}

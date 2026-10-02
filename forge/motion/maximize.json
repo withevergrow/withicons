@@ -1,0 +1,33 @@
+{
+  "name": "maximize",
+  "intent": "grows outward like a window going fullscreen",
+  "loop": {
+    "preset": "zoom",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 1,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.7
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "minimize",
+      "effect": "morph"
+    },
+    {
+      "to": "zoom-in",
+      "effect": "fade"
+    }
+  ]
+}

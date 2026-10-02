@@ -1,0 +1,73 @@
+{
+  "name": "bath",
+  "category": "home",
+  "description": "A bathtub with a tap and feet for bathrooms, baths, spa, and self-care.",
+  "aliases": [
+    "bathtub",
+    "bathroom",
+    "tub",
+    "spa",
+    "shower-bath",
+    "self-care",
+    "soak",
+    "bath-tub",
+    "bathe"
+  ],
+  "tags": [
+    "bathroom",
+    "wash",
+    "relax",
+    "hygiene",
+    "spa",
+    "water"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 11.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 11.5 V14 A5 5 0 0 0 8.5 19 H15.5 A5 5 0 0 0 20.5 14 V11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 11.5 V6.5 A2.5 2.5 0 0 1 10 6.5 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 18.5 L5.5 20.5 M17.5 18.5 L18.5 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 11.5 V14 A5 5 0 0 0 8.5 19 H15.5 A5 5 0 0 0 20.5 14 V11.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "baths",
+    "bathtubs",
+    "bath tub",
+    "bubble bath",
+    "hot tub",
+    "jacuzzi",
+    "bath time",
+    "bathing",
+    "take a bath",
+    "washing",
+    "hygiene",
+    "clean",
+    "relax",
+    "relaxation",
+    "wellness",
+    "pamper",
+    "me time",
+    "en suite",
+    "ensuite",
+    "shower",
+    "beds and baths",
+    "number of bathrooms",
+    "plumbing",
+    "clawfoot tub",
+    "bathrom"
+  ]
+}

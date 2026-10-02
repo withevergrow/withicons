@@ -1,0 +1,32 @@
+{
+  "name": "landmark",
+  "intent": "stands steady and calm like a trusted bank",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "building",
+      "effect": "fade"
+    },
+    {
+      "to": "banknote",
+      "effect": "slide-up"
+    }
+  ]
+}

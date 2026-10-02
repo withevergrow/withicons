@@ -1,0 +1,44 @@
+{
+  "name": "flag",
+  "intent": "sways in the wind from the foot of its pole",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      5,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      5,
+      21.5
+    ],
+    "amount": 1.1,
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        5,
+        21.5
+      ]
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        5,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "flag@solid",
+      "effect": "scale"
+    }
+  ]
+}

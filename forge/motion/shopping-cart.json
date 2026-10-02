@@ -1,0 +1,38 @@
+{
+  "name": "shopping-cart",
+  "intent": "rolls forward, then zooms off on hover",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "shopping-bag",
+      "effect": "fade"
+    },
+    {
+      "to": "shopping-cart@solid",
+      "effect": "scale"
+    }
+  ]
+}

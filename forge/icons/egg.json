@@ -1,0 +1,64 @@
+{
+  "name": "egg",
+  "category": "food",
+  "description": "A whole egg for breakfast, protein, Easter, and baking.",
+  "aliases": [
+    "eggs",
+    "breakfast",
+    "easter-egg",
+    "protein",
+    "ovum",
+    "hatch",
+    "chicken-egg",
+    "boiled-egg"
+  ],
+  "tags": [
+    "food",
+    "breakfast",
+    "easter",
+    "protein",
+    "baking"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 C16.25 2.5 19 8.75 19 13.75 C19 18.5 16 21.5 12 21.5 C8 21.5 5 18.5 5 13.75 C5 8.75 7.75 2.5 12 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.75 14 C8.75 15.75 9.75 17.5 11.5 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 C16.25 2.5 19 8.75 19 13.75 C19 18.5 16 21.5 12 21.5 C8 21.5 5 18.5 5 13.75 C5 8.75 7.75 2.5 12 2.5 Z"
+  ],
+  "cutouts": [
+    "M8.75 14 C8.75 15.75 9.75 17.5 11.5 18"
+  ],
+  "synonyms": [
+    "easter",
+    "easter egg",
+    "boiled egg",
+    "hard boiled",
+    "soft boiled",
+    "chicken egg",
+    "free range",
+    "eggshell",
+    "egg shell",
+    "yolk",
+    "omelette",
+    "omelet",
+    "scrambled",
+    "baking",
+    "bake",
+    "ingredient",
+    "dairy",
+    "farm",
+    "brunch",
+    "oval",
+    "new life",
+    "egg hunt",
+    "eg",
+    "eggg"
+  ]
+}

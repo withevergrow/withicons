@@ -1,0 +1,8 @@
+{
+  "name": "picture-in-picture",
+  "intent": "the screen gently drifts like a floating mini player",
+  "loop":  { "preset": "float", "amount": 0.4, "duration": 3 },
+  "hover": { "preset": "zoom", "origin": [18, 16], "amount": 0.6, "duration": 0.6 },
+  "alt":   [ { "preset": "pop", "amount": 0.8 }, { "preset": "orbit", "amount": 0.5 } ],
+  "swap":  [ { "to": "maximize", "effect": "scale" }, { "to": "minimize", "effect": "scale" }, { "to": "monitor", "effect": "fade" } ]
+}

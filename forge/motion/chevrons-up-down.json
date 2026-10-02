@@ -1,0 +1,38 @@
+{
+  "name": "chevrons-up-down",
+  "intent": "breathes open and closed, hinting at a list of choices",
+  "loop": {
+    "preset": "zoom",
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.5
+    },
+    {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.5
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chevron-down",
+      "effect": "fade"
+    },
+    {
+      "to": "sort",
+      "effect": "fade"
+    }
+  ]
+}

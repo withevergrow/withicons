@@ -1,0 +1,8 @@
+{
+  "name": "chevrons-down",
+  "intent": "nudges downward to say there is more below",
+  "loop": { "preset": "nudge", "dir": 90, "amount": 0.6, "duration": 1.8 },
+  "hover": { "preset": "pass", "dir": 90, "duration": 0.7 },
+  "alt": [ { "preset": "drop" }, { "preset": "nudge", "dir": 90, "amount": 1.4 } ],
+  "swap": [ { "to": "chevrons-up", "effect": "rotate" }, { "to": "chevron-down", "effect": "scale" }, { "to": "chevrons-up-down", "effect": "fade" } ]
+}

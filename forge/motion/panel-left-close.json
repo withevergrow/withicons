@@ -1,0 +1,8 @@
+{
+  "name": "panel-left-close",
+  "intent": "pulls left to fold the sidebar away",
+  "loop":  { "preset": "nudge", "dir": 180, "amount": 0.4, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 0.9, "duration": 0.6 },
+  "alt":   [ { "preset": "pass", "dir": 180, "amount": 0.5 }, { "preset": "jelly", "amount": 0.6 } ],
+  "swap":  [ { "to": "panel-left-open", "effect": "flip" }, { "to": "sidebar", "effect": "slide-left" }, { "to": "chevron-left", "effect": "morph" } ]
+}

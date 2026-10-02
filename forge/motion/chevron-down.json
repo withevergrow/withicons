@@ -1,0 +1,29 @@
+{
+  "name": "chevron-down",
+  "intent": "nudges down to hint that more opens below",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 90
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chevron-up",
+      "effect": "rotate"
+    }
+  ]
+}

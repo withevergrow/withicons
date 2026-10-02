@@ -1,0 +1,78 @@
+{
+  "name": "flower",
+  "category": "nature",
+  "description": "A five-petal flower in bloom for spring, gardens, beauty, and growth.",
+  "aliases": [
+    "blossom",
+    "bloom",
+    "daisy",
+    "floral",
+    "petals",
+    "garden",
+    "spring-flower",
+    "flowers",
+    "florist",
+    "blooming"
+  ],
+  "synonyms": [
+    "spring",
+    "springtime",
+    "petal",
+    "flower head",
+    "botanical",
+    "botany",
+    "plant",
+    "gardening",
+    "nature",
+    "beauty",
+    "pretty",
+    "cute",
+    "bouquet",
+    "florist shop",
+    "flower shop",
+    "wedding",
+    "valentine",
+    "mothers day",
+    "romance",
+    "love",
+    "rose",
+    "tulip",
+    "sunflower",
+    "lotus",
+    "cherry blossom",
+    "sakura",
+    "bee",
+    "pollen",
+    "spa",
+    "wellness",
+    "fragrance",
+    "perfume",
+    "decoration",
+    "flowr",
+    "flour",
+    "flowe"
+  ],
+  "tags": [
+    "nature",
+    "spring",
+    "garden",
+    "plant",
+    "beauty"
+  ],
+  "paths": [
+    {
+      "d": "M7.76 6.17 A4.25 4.25 0 1 1 16.24 6.17 A4.25 4.25 0 1 1 18.86 14.23 A4.25 4.25 0 1 1 12 19.21 A4.25 4.25 0 1 1 5.14 14.23 A4.25 4.25 0 1 1 7.76 6.17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.76 6.17 A4.25 4.25 0 1 1 16.24 6.17 A4.25 4.25 0 1 1 18.86 14.23 A4.25 4.25 0 1 1 12 19.21 A4.25 4.25 0 1 1 5.14 14.23 A4.25 4.25 0 1 1 7.76 6.17 Z"
+  ],
+  "cutouts": [
+    "M16.5 12 A4.5 4.5 0 1 1 7.5 12 A4.5 4.5 0 1 1 16.5 12 Z M14 12 A2 2 0 1 0 10 12 A2 2 0 1 0 14 12 Z"
+  ]
+}

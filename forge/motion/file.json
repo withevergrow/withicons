@@ -1,0 +1,40 @@
+{
+  "name": "file",
+  "intent": "floats like a fresh page, pops when picked",
+  "loop": {
+    "preset": "float",
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-plus",
+      "effect": "fade"
+    },
+    {
+      "to": "file-check",
+      "effect": "scale"
+    },
+    {
+      "to": "files",
+      "effect": "slide-up"
+    }
+  ]
+}

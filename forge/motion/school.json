@@ -1,0 +1,7 @@
+{
+  "name": "school",
+  "intent": "the flag flutters gently over the school",
+  "loop":  { "preset": "sway", "origin": [12, 21], "amount": 0.35, "duration": 3.4 },
+  "hover": { "preset": "tada", "origin": [12, 21], "amount": 0.7 },
+  "alt":   [ { "preset": "bounce", "amount": 0.6 }, { "preset": "pop" } ]
+}

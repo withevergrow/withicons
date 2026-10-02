@@ -1,0 +1,8 @@
+{
+  "name": "balloon",
+  "intent": "bobs gently in the air, then floats up and away on hover",
+  "loop": { "preset": "float", "amount": 0.8, "duration": 3.2 },
+  "hover": { "preset": "rise", "amount": 0.8, "duration": 1.2 },
+  "alt": [ { "preset": "sway", "origin": [12.75, 21.5], "amount": 0.7 }, { "preset": "pop", "origin": [12, 9] }, { "preset": "rock", "origin": [12.75, 21.5], "amount": 0.5 } ],
+  "swap": [ { "to": "balloon@solid", "effect": "scale" }, { "to": "party-popper", "effect": "flip" } ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "layout-list",
+  "intent": "rows breathe calmly, then pop into a list view",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-grid",
+      "effect": "flip"
+    },
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "table",
+      "effect": "fade"
+    }
+  ]
+}

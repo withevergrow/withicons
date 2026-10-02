@@ -133,14 +133,51 @@ const lineD = ([a, b]) => {
   if (f(a[1]) === f(b[1])) return 'M' + nums([a[0], a[1]]) + 'H' + nums([b[0]])
   return 'M' + nums([a[0], a[1]]) + 'L' + nums([b[0], b[1]])
 }
-const arcD = (c, r, t0, t1) => {
-  const P = t => [c[0] + r * Math.cos(t), c[1] + r * Math.sin(t)]
-  if (t1 - t0 > 2 * Math.PI - 1e-6) {
-    const a = P(0), b = P(Math.PI)
-    return 'M' + nums([a[0], a[1]]) + 'A' + nums([r, r, 0, '0', '1', b[0], b[1]]) + 'A' + nums([r, r, 0, '0', '1', a[0], a[1]])
+// Chain (dash-dot) lines are written into the geometry, one subpath per dash,
+// instead of stroke-dasharray: Android VectorDrawable, Figma/Canva/PowerPoint
+// importers and other SVG Tiny consumers drop dash arrays and would draw the
+// centre lines solid. The pattern restarts at the start of every line, exactly
+// as SVG restarts a dash array per subpath, and the dashes inherit the root's
+// square caps, so browsers paint the same pixels as the old dasharray did.
+const DASH = K.chain.trim().split(/\s+/).map(Number)
+function dashRuns(L) {
+  const runs = []
+  for (let s = 0, i = 0; s < L - 1e-6; i++) {
+    const len = DASH[i % DASH.length]
+    if (i % 2 === 0) { const e = Math.min(L, s + len); if (e - s > 0.005) runs.push([s, e]) }
+    s += len
   }
-  const a = P(t0), b = P(t1)
-  return 'M' + nums([a[0], a[1]]) + 'A' + nums([r, r, 0, t1 - t0 > Math.PI ? '1' : '0', '1', b[0], b[1]])
+  return runs
+}
+const r2 = v => Math.round(v * 100) / 100
+// runs: [[A, B, arcRadius | 0]] -> 'M A l|a ... m ... l|a ...' (relative after the first point,
+// with deltas taken between rounded absolute points so nothing drifts)
+function dashD(runs) {
+  let d = '', cur = null
+  for (const [A0, B0, r] of runs) {
+    const A = [r2(A0[0]), r2(A0[1])], B = [r2(B0[0]), r2(B0[1])]
+    const dx = r2(B[0] - A[0]), dy = r2(B[1] - A[1])
+    if (!dx && !dy) continue
+    d += cur ? 'm' + nums([r2(A[0] - cur[0]), r2(A[1] - cur[1])]) : 'M' + nums(A)
+    if (r) d += 'a' + nums([r, r, 0, '0', '1', dx, dy])
+    else if (!dy) d += 'h' + nums([dx])
+    else if (!dx) d += 'v' + nums([dy])
+    else d += 'l' + nums([dx, dy])
+    cur = B
+  }
+  return d
+}
+const dashLine = ([a, b]) => {
+  const L = d2(a, b), at = s => [a[0] + (b[0] - a[0]) * s / L, a[1] + (b[1] - a[1]) * s / L]
+  return dashD(dashRuns(L).map(([s, e]) => [at(s), at(e), 0]))
+}
+// an arc from t0 to t1 (increasing angle = sweep 1) as one dashed subpath; a full ring starts at angle 0
+const dashArc = (c, r, t0, t1) => {
+  const P = t => [c[0] + r * Math.cos(t), c[1] + r * Math.sin(t)]
+  const span = Math.min(t1 - t0, 2 * Math.PI)
+  if (span > 2 * Math.PI - 1e-6) t0 = 0
+  // short pieces (the dots) are chords: a 0.4u chord on r10 sags 0.002u
+  return dashD(dashRuns(span * r).map(([s, e]) => [P(t0 + s / r), P(t0 + e / r), e - s > 1 ? r : 0]))
 }
 const ringD = (p, r) => 'M' + nums([p[0] + r, p[1]]) + 'A' + nums([r, r, 0, '1', '0', p[0] - r, p[1]]) + 'A' + nums([r, r, 0, '1', '0', p[0] + r, p[1]])
 
@@ -364,13 +401,13 @@ function render(icon) {
     for (let k = 0; k < n; k++) { tot++; if (near([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n], 1.3) < 1.25) hit++ }
   }
   const boxy = hit / tot >= 0.72 && B.w >= 8 && B.h >= 8
-  if (!boxy && fillRings.length) for (const [t0, t1] of clipCircle([12, 12], 10, keep)) key += arcD([12, 12], 10, t0, t1)
+  if (!boxy && fillRings.length) for (const [t0, t1] of clipCircle([12, 12], 10, keep)) key += dashArc([12, 12], 10, t0, t1)
 
   // axes of symmetry
   for (const { axis, c } of axes) {
     if ((axis === 'x' ? B.h : B.w) < 3) continue   // stubs across a flat bar read as a '+'
     const L = axis === 'x' ? [[c, B.y0 - K.axis], [c, B.y1 + K.axis]] : [[B.x0 - K.axis, c], [B.x1 + K.axis, c]]
-    for (const r of clipLine(L[0], L[1], keep)) chain += lineD(r)
+    for (const r of clipLine(L[0], L[1], keep)) chain += dashLine(r)
   }
   // circle centre marks
   const marks = []
@@ -381,8 +418,8 @@ function render(icon) {
     const e = g.r + K.mark
     const hx = axes.some(a => a.axis === 'y' && Math.abs(a.c - g.c[1]) < 0.3)
     const vx = axes.some(a => a.axis === 'x' && Math.abs(a.c - g.c[0]) < 0.3)
-    if (!hx) for (const r of clipLine([g.c[0] - e, g.c[1]], [g.c[0] + e, g.c[1]], keep)) chain += lineD(r)
-    if (!vx) for (const r of clipLine([g.c[0], g.c[1] - e], [g.c[0], g.c[1] + e], keep)) chain += lineD(r)
+    if (!hx) for (const r of clipLine([g.c[0] - e, g.c[1]], [g.c[0] + e, g.c[1]], keep)) chain += dashLine(r)
+    if (!vx) for (const r of clipLine([g.c[0], g.c[1] - e], [g.c[0], g.c[1] + e], keep)) chain += dashLine(r)
   }
 
   // fillets: a rounded corner shows the sharp corner it was cut from
@@ -433,9 +470,9 @@ function render(icon) {
 
   // ---- emit (back to front)
   const con = op => ({ color: ACCENT, stroke: 'currentColor', 'stroke-width': K.con.w, 'stroke-opacity': op })
-  if (key) out.push(['path', { d: key, ...con(K.con.key), 'stroke-dasharray': K.chain }])
+  if (key) out.push(['path', { d: key, ...con(K.con.key) }])
   if (thin) out.push(['path', { d: thin, ...con(K.con.op) }])
-  if (chain) out.push(['path', { d: chain, ...con(K.con.op), 'stroke-dasharray': K.chain }])
+  if (chain) out.push(['path', { d: chain, ...con(K.con.op) }])
   if (ticks) out.push(['path', { d: ticks, color: ACCENT, stroke: 'currentColor', 'stroke-width': K.dim.w, 'stroke-opacity': K.dim.op }])
   const obj = objectD(lines, nodes)
   if (obj) out.push(['path', { d: obj }])

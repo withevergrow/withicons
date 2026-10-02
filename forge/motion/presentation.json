@@ -1,0 +1,7 @@
+{
+  "name": "presentation",
+  "intent": "the chart on the board draws itself like a live pitch",
+  "loop":  { "preset": "draw", "duration": 3.2 },
+  "hover": { "preset": "draw", "duration": 0.9 },
+  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "pop" }, { "preset": "breathe" } ]
+}

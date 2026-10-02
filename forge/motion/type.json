@@ -1,0 +1,34 @@
+{
+  "name": "type",
+  "intent": "jitters softly like text being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "type"
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "heading",
+      "effect": "fade"
+    },
+    {
+      "to": "keyboard",
+      "effect": "slide-up"
+    },
+    {
+      "to": "bold",
+      "effect": "flip"
+    }
+  ]
+}

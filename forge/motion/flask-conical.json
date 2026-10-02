@@ -1,0 +1,8 @@
+{
+  "name": "flask-conical",
+  "intent": "swirls the liquid like a reaction is brewing",
+  "loop":  { "preset": "rock", "origin": [12, 21], "amount": 0.5, "duration": 3 },
+  "hover": { "preset": "wiggle", "origin": [12, 21], "amount": 0.9 },
+  "alt":   [ { "preset": "bounce", "amount": 0.6 }, { "preset": "glow" }, { "preset": "flicker" } ],
+  "swap":  [ { "to": "flask-conical@solid", "effect": "fade" } ]
+}

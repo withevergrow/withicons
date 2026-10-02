@@ -1,0 +1,35 @@
+{
+  "name": "close",
+  "intent": "spins away on hover to say this will close",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "shake"
+    }
+  ],
+  "swap": [
+    {
+      "to": "menu",
+      "effect": "morph"
+    },
+    {
+      "to": "plus",
+      "effect": "rotate"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

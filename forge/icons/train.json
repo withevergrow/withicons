@@ -1,0 +1,97 @@
+{
+  "name": "train",
+  "category": "travel",
+  "description": "The front of a train with a rounded cab, split windscreen, headlights and rails, for rail travel and stations.",
+  "aliases": [
+    "train-front",
+    "railway",
+    "metro",
+    "subway",
+    "station",
+    "locomotive",
+    "railroad",
+    "tram",
+    "underground",
+    "light-rail",
+    "trains"
+  ],
+  "tags": [
+    "vehicle",
+    "rail",
+    "transit",
+    "transport",
+    "commute",
+    "travel"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 2.5 H15.5 A4.5 4.5 0 0 1 20 7 V15.5 A2 2 0 0 1 18 17.5 H6 A2 2 0 0 1 4 15.5 V7 A4.5 4.5 0 0 1 8.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 10 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M8 13.75 H8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 13.75 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 17.5 L5.5 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 17.5 L18.5 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.5 2.5 H15.5 A4.5 4.5 0 0 1 20 7 V15.5 A2 2 0 0 1 18 17.5 H6 A2 2 0 0 1 4 15.5 V7 A4.5 4.5 0 0 1 8.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 9 V7.5 A3 3 0 0 1 8.5 4.5 H11 V9 Z",
+    "M13 4.5 H15.5 A3 3 0 0 1 18.5 7.5 V9 H13 Z",
+    "M9.5 13.75 A1.25 1.25 0 1 1 7 13.75 A1.25 1.25 0 1 1 9.5 13.75 Z",
+    "M17 13.75 A1.25 1.25 0 1 1 14.5 13.75 A1.25 1.25 0 1 1 17 13.75 Z"
+  ],
+  "synonyms": [
+    "rail",
+    "train station",
+    "railway station",
+    "rail travel",
+    "tube",
+    "the tube",
+    "commuter rail",
+    "commuter train",
+    "high speed rail",
+    "bullet train",
+    "express",
+    "intercity",
+    "monorail",
+    "streetcar",
+    "trolley",
+    "platform",
+    "track",
+    "tracks",
+    "train ticket",
+    "rail pass",
+    "timetable",
+    "departures",
+    "public transport",
+    "transit",
+    "transport",
+    "transportation",
+    "commute",
+    "journey",
+    "trian",
+    "tarin"
+  ]
+}

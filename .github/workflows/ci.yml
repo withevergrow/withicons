@@ -34,6 +34,13 @@ jobs:
       - name: Lint skeletons and render through every style
         run: node forge/tools/check.mjs
 
+      - name: Lint animation specs (forge/motion/*.json)
+        if: hashFiles('forge/tools/check-motion.mjs') != ''
+        run: node forge/tools/check-motion.mjs
+
+      - name: Agent skill up to date (names, palettes, animated icons)
+        run: node scripts/skill-sync.mjs --check
+
       - name: Package tests (all workspaces that define "test")
         run: npm test --workspaces --if-present
 

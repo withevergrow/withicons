@@ -1,0 +1,31 @@
+{
+  "name": "cloud-sun",
+  "intent": "sun glows behind a drifting cloud",
+  "loop": {
+    "preset": "float",
+    "amount": 0.7,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "glow",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sun",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud",
+      "effect": "slide-right"
+    }
+  ]
+}

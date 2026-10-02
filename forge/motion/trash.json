@@ -1,0 +1,42 @@
+{
+  "name": "trash",
+  "intent": "rocks on its base, then wiggles like it is being emptied",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.35,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.7
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "morph"
+    },
+    {
+      "to": "trash@solid",
+      "effect": "scale"
+    }
+  ]
+}

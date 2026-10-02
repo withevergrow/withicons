@@ -1,0 +1,79 @@
+{
+  "name": "backpack",
+  "category": "education",
+  "description": "Backpack for school, students, hiking, and travel gear.",
+  "aliases": [
+    "rucksack",
+    "schoolbag",
+    "bag-pack",
+    "knapsack",
+    "school-bag",
+    "daypack",
+    "hiking-bag",
+    "back-pack",
+    "bookbag",
+    "haversack"
+  ],
+  "tags": [
+    "bag",
+    "school",
+    "travel",
+    "hiking",
+    "student",
+    "gear"
+  ],
+  "paths": [
+    {
+      "d": "M7 21.5 H17 A2 2 0 0 0 19 19.5 V11 A5 5 0 0 0 14 6 H10 A5 5 0 0 0 5 11 V19.5 A2 2 0 0 0 7 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 6 V4.5 A2 2 0 0 1 11.5 2.5 H12.5 A2 2 0 0 1 14.5 4.5 V6",
+      "plate": "A"
+    },
+    {
+      "d": "M9 21.5 V17 A2 2 0 0 1 11 15 H13 A2 2 0 0 1 15 17 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5 11 H19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 21.5 H17 A2 2 0 0 0 19 19.5 V11 A5 5 0 0 0 14 6 H10 A5 5 0 0 0 5 11 V19.5 A2 2 0 0 0 7 21.5 Z"
+  ],
+  "cutouts": [
+    "M9 21.5 V17 A2 2 0 0 1 11 15 H13 A2 2 0 0 1 15 17 V21.5",
+    "M5 11 H19"
+  ],
+  "synonyms": [
+    "back pack",
+    "school bag",
+    "book bag",
+    "bag",
+    "backpacks",
+    "rucksacks",
+    "travel bag",
+    "laptop bag",
+    "kit bag",
+    "travel",
+    "hiking",
+    "trekking",
+    "camping",
+    "outdoor",
+    "adventure",
+    "backpacking",
+    "student",
+    "back to school",
+    "gear",
+    "packing",
+    "pack",
+    "carry",
+    "luggage",
+    "explorer",
+    "bagpack",
+    "backpak",
+    "bakpack"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "arrow-up-down",
+  "intent": "bobs up and down to show it goes both ways",
+  "loop": { "preset": "float", "amount": 0.6, "duration": 2.6 },
+  "hover": { "preset": "nod", "amount": 1.2, "duration": 0.6 },
+  "alt": [ { "preset": "nudge", "dir": 270, "amount": 0.8 }, { "preset": "flip" } ],
+  "swap": [ { "to": "arrow-left-right", "effect": "rotate" }, { "to": "sort", "effect": "fade" } ]
+}

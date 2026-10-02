@@ -1,0 +1,75 @@
+{
+  "name": "accessibility",
+  "category": "health",
+  "description": "A universal access figure in a circle for accessibility, inclusion, and a11y settings.",
+  "aliases": [
+    "a11y",
+    "universal-access",
+    "accessible",
+    "inclusive",
+    "disability",
+    "wheelchair",
+    "inclusion",
+    "accessibility-options",
+    "ada"
+  ],
+  "tags": [
+    "accessibility",
+    "inclusion",
+    "a11y",
+    "settings",
+    "person",
+    "universal"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 10.5 H16.5 M12 10.5 V14 M9.5 17.5 L12 14 L14.5 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 7 V7.5",
+    "M7.5 10.5 H16.5",
+    "M12 10.5 V14",
+    "M9.5 17.5 L12 14 L14.5 17.5"
+  ],
+  "synonyms": [
+    "accessibility settings",
+    "accessibility menu",
+    "accessibility options",
+    "ease of access",
+    "assistive",
+    "assistive technology",
+    "screen reader",
+    "disabled",
+    "disabled access",
+    "handicap",
+    "handicapped",
+    "special needs",
+    "impairment",
+    "visually impaired",
+    "equal access",
+    "barrier free",
+    "inclusive design",
+    "universal design",
+    "wcag",
+    "aria",
+    "person",
+    "human",
+    "figure",
+    "accessable",
+    "accesibility",
+    "accessiblity"
+  ]
+}

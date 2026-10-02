@@ -1,0 +1,43 @@
+{
+  "name": "paperclip",
+  "intent": "sways like a clip on a page, wiggles to attach",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      18.75,
+      5.5
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "link",
+      "effect": "rotate"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

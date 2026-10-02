@@ -1,0 +1,8 @@
+{
+  "name": "disc",
+  "intent": "spins like a record playing",
+  "loop": { "preset": "spin", "origin": [12, 12], "duration": 4 },
+  "hover": { "preset": "spin-once", "origin": [12, 12] },
+  "alt": [ { "preset": "spin", "origin": [12, 12], "duration": 1.2 }, { "preset": "flip" } ],
+  "swap": [ { "to": "music-note", "effect": "spin" }, { "to": "play", "effect": "morph" }, { "to": "disc@solid", "effect": "scale" } ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "square",
+  "intent": "pulses softly like a selectable box",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-square",
+      "effect": "scale"
+    },
+    {
+      "to": "square@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "stop",
+      "effect": "fade"
+    },
+    {
+      "to": "circle",
+      "effect": "morph"
+    }
+  ]
+}

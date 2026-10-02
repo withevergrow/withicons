@@ -1,0 +1,8 @@
+{
+  "name": "gallery-horizontal",
+  "intent": "slides sideways like a carousel moving to the next slide",
+  "loop":  { "preset": "pass", "dir": 180, "amount": 0.5, "duration": 3 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 0.8, "duration": 0.6 },
+  "alt":   [ { "preset": "nudge", "dir": 0, "amount": 0.6 }, { "preset": "flip" } ],
+  "swap":  [ { "to": "images", "effect": "fade" }, { "to": "layout-grid", "effect": "morph" }, { "to": "image", "effect": "slide-left" } ]
+}

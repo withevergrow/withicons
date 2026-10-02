@@ -1,0 +1,8 @@
+{
+  "name": "egg",
+  "intent": "the egg rocks on its base as if about to hatch",
+  "loop": { "preset": "rock", "origin": [12, 21.5], "amount": 0.4, "duration": 3 },
+  "hover": { "preset": "wiggle", "origin": [12, 21.5], "amount": 1.1 },
+  "alt": [ { "preset": "shake", "amount": 0.5 }, { "preset": "bounce", "origin": [12, 21.5] }, { "preset": "pop" } ],
+  "swap": [ { "to": "egg@solid", "effect": "scale" } ]
+}

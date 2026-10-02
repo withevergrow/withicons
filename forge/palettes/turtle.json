@@ -1,0 +1,27 @@
+{
+  "name": "turtle",
+  "palettes": [
+    {"id":"green-sea-turtle","name":"Green sea turtle","tags":["true-to-life","ocean"],"colors":{"ink":"#0E2418","c1":"#4E8F6A","c2":"#C8B27A","c3":"#2E5A40","c4":"#A8D8B8","tint":"#CDE0D5","accent":"#F2C14E","shadow":"#234030","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"box-turtle","name":"Box turtle","tags":["true-to-life","earthy"],"colors":{"ink":"#24140A","c1":"#8A5A2E","c2":"#F2B33D","c3":"#5A3A1E","c4":"#D9C08A","tint":"#DED1C4","accent":"#F2B33D","shadow":"#3E2815","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"red-eared-slider","name":"Red-eared slider","tags":["true-to-life"],"colors":{"ink":"#0F1A0A","c1":"#4E7A3A","c2":"#D8382E","c3":"#C9D67A","c4":"#2A4220","tint":"#CDDAC8","accent":"#D8382E","shadow":"#23371A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hawksbill","name":"Hawksbill","tags":["true-to-life"],"colors":{"ink":"#2A1406","c1":"#C17A2F","c2":"#E8B04A","c3":"#5A3418","c4":"#D9C9A8","tint":"#EEDAC5","accent":"#3FA7C9","shadow":"#573715","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"leatherback","name":"Leatherback","tags":["true-to-life","dark"],"colors":{"ink":"#0E1216","c1":"#4A5560","c2":"#B9C4CE","c3":"#2A3038","c4":"#8FA2B3","tint":"#CCCFD2","accent":"#6EC6E0","shadow":"#21262B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"galapagos-tortoise","name":"Galapagos tortoise","tags":["true-to-life","earthy"],"colors":{"ink":"#1E1A12","c1":"#7A6A55","c2":"#A89A80","c3":"#4A3E30","c4":"#D3C8B2","tint":"#DAD5CF","accent":"#9AB85A","shadow":"#373026","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mossback","name":"Mossback","tags":["nature"],"colors":{"ink":"#1A200A","c1":"#6E7F3A","c2":"#B5A15A","c3":"#D8DDB0","c4":"#3E4A1E","tint":"#D6DBC8","accent":"#C9583A","shadow":"#31391A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"reef-lagoon","name":"Reef lagoon","tags":["ocean"],"colors":{"ink":"#06302C","c1":"#2EB5A5","c2":"#F2C14E","c3":"#9DE8DF","c4":"#15706A","tint":"#C4EAE6","accent":"#FF7F6B","shadow":"#15514A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"deep-current","name":"Deep current","tags":["mono","ocean"],"colors":{"ink":"#0A1C30","c1":"#2D6FA8","c2":"#12406B","c3":"#B5D3EE","c4":"#6FA0D2","tint":"#C4D7E7","accent":"#FFD166","shadow":"#14324C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mint-shell","name":"Mint shell","tags":["pastel"],"colors":{"ink":"#1E4434","c1":"#A8E6CF","c2":"#FFD3B6","c3":"#FFAAA5","c4":"#6CC4A1","tint":"#D8F4E9","accent":"#FF8B94","shadow":"#4C675D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gumdrop-turtle","name":"Gumdrop turtle","tags":["candy"],"colors":{"ink":"#4A0A2E","c1":"#FF6FB5","c2":"#6FE3FF","c3":"#FFE45E","c4":"#9B6CFF","tint":"#FFD7EA","accent":"#6FE3FF","shadow":"#733251","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"terracotta-shell","name":"Terracotta shell","tags":["earthy"],"colors":{"ink":"#2A1208","c1":"#C2673E","c2":"#8A9A5B","c3":"#EBD3B4","c4":"#6B3420","tint":"#EED4C9","accent":"#E0A84A","shadow":"#572E1C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"slow-and-groovy","name":"Slow & groovy","tags":["retro"],"colors":{"ink":"#2B1605","c1":"#D98E2B","c2":"#2A7F6F","c3":"#E9C46A","c4":"#B5442E","tint":"#F4DFC4","accent":"#E9C46A","shadow":"#624013","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"spring-pond","name":"Spring pond","tags":["seasonal","nature"],"colors":{"ink":"#1A3410","c1":"#8BD06A","c2":"#FFD1E0","c3":"#FFF3A8","c4":"#4E9A3A","tint":"#CBEABC","accent":"#FF8FAB","shadow":"#3F5E30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"frosty-shell","name":"Frosty shell","tags":["seasonal"],"colors":{"ink":"#1A2E44","c1":"#9CC3E0","c2":"#E8F1F8","c3":"#5A86B0","c4":"#D7C2F0","tint":"#D2E4F1","accent":"#FF9AB0","shadow":"#465865","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"wild-berry","name":"Wild berry","tags":["vivid"],"colors":{"ink":"#200716","c1":"#9C2F6E","c2":"#F27BAA","c3":"#F7C8DB","c4":"#4E1338","tint":"#E3C5D6","accent":"#8BD06A","shadow":"#461531","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"jade-and-gold","name":"Jade & gold","tags":["luxe"],"colors":{"ink":"#041A12","c1":"#1F7A5A","c2":"#D4AF37","c3":"#9FD9C0","c4":"#0E3D2C","tint":"#C0DAD1","accent":"#D4AF37","shadow":"#0E3728","shine":"#FFFFFF","edge":"#FFF8E1"}},
+    {"id":"river-stone","name":"River stone","tags":["grayscale"],"colors":{"ink":"#141414","c1":"#9A9A9A","c2":"#555555","c3":"#D8D8D8","c4":"#777777","tint":"#E3E3E3","accent":"#C2C2C2","shadow":"#454545","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"holo-shell","name":"Holo shell","tags":["y2k","pastel"],"colors":{"ink":"#1E3A44","c1":"#B9F0E6","c2":"#E2B8FF","c3":"#FFE0F5","c4":"#7FD8FF","tint":"#E0F8F4","accent":"#E2B8FF","shadow":"#536C67","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bioluminescent","name":"Bioluminescent","tags":["neon","on-dark"],"colors":{"ink":"#041218","c1":"#2BFFD0","c2":"#FF3DCB","c3":"#3D8BFF","c4":"#E8FF3D","tint":"#A0FFEA","accent":"#FF3DCB","shadow":"#0E6E58","shine":"#FFFFFF","edge":"#121822"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#00A86B","c2":"#FFD400","c3":"#FFFFFF","c4":"#111111","tint":"#B8E7D6","accent":"#FFD400","shadow":"#004C30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"turbo-turtle","name":"Turbo turtle","tags":["vivid","candy"],"colors":{"ink":"#3A1605","c1":"#FF8A1F","c2":"#2EC4B6","c3":"#FF4F9A","c4":"#FFE14D","tint":"#FFDEC0","accent":"#2EC4B6","shadow":"#733E0E","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

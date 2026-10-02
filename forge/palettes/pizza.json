@@ -1,0 +1,471 @@
+{
+  "name": "pizza",
+  "palettes": [
+    {
+      "id": "margherita",
+      "name": "Margherita",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3B1F12",
+        "c1": "#F4B942",
+        "c2": "#E2522F",
+        "c3": "#4E9F3D",
+        "c4": "#F7E3B5",
+        "tint": "#FDF1D9",
+        "accent": "#E2522F",
+        "shadow": "#855D25",
+        "shine": "#FCEAC6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pepperoni",
+      "name": "Pepperoni",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1408",
+        "c1": "#F7C64B",
+        "c2": "#C0392B",
+        "c3": "#E8A35A",
+        "c4": "#7A2416",
+        "tint": "#FDF4DB",
+        "accent": "#C0392B",
+        "shadow": "#865B23",
+        "shine": "#FDEEC9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pesto-verde",
+      "name": "Pesto verde",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1A2A0E",
+        "c1": "#F2D27A",
+        "c2": "#5B8C2A",
+        "c3": "#F6EED5",
+        "c4": "#A8C66C",
+        "tint": "#FCF6E4",
+        "accent": "#5B8C2A",
+        "shadow": "#706D39",
+        "shine": "#FBF2D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "quattro-formaggi",
+      "name": "Quattro formaggi",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2A08",
+        "c1": "#FBE3A0",
+        "c2": "#F2B544",
+        "c3": "#FFF6DC",
+        "c4": "#C98A3A",
+        "tint": "#FEF9EC",
+        "accent": "#F2B544",
+        "shadow": "#877445",
+        "shine": "#FEF7E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hawaiian",
+      "name": "Hawaiian",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A1A08",
+        "c1": "#F9C74F",
+        "c2": "#F48FA1",
+        "c3": "#FFE066",
+        "c4": "#D9534F",
+        "tint": "#FEF4DC",
+        "accent": "#F48FA1",
+        "shadow": "#865F24",
+        "shine": "#FDEECA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bbq-chicken",
+      "name": "BBQ chicken",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#E6A75A",
+        "c2": "#7A2E16",
+        "c3": "#F3D7A7",
+        "c4": "#6B8E4E",
+        "tint": "#FAEDDE",
+        "accent": "#7A2E16",
+        "shadow": "#784E28",
+        "shine": "#F8E5CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "veggie-supreme",
+      "name": "Veggie supreme",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E2A10",
+        "c1": "#F4C552",
+        "c2": "#4E9F3D",
+        "c3": "#8E3B8A",
+        "c4": "#E2522F",
+        "tint": "#FDF3DC",
+        "accent": "#4E9F3D",
+        "shadow": "#74682A",
+        "shine": "#FCEECB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "marinara",
+      "name": "Marinara",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A0E06",
+        "c1": "#D9482B",
+        "c2": "#F2C46B",
+        "c3": "#6B8E4E",
+        "c4": "#FBE6C2",
+        "tint": "#F7DAD5",
+        "accent": "#F2C46B",
+        "shadow": "#7A2515",
+        "shine": "#F4C8BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "new-york-slice",
+      "name": "New York slice",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1A0A",
+        "c1": "#F6CF6A",
+        "c2": "#D24A2E",
+        "c3": "#E9B067",
+        "c4": "#8A5A2B",
+        "tint": "#FDF5E1",
+        "accent": "#D24A2E",
+        "shadow": "#7E6230",
+        "shine": "#FCF1D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "white-pizza",
+      "name": "White pizza",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A2E22",
+        "c1": "#FBF3E0",
+        "c2": "#9DBF6E",
+        "c3": "#F2C46B",
+        "c4": "#C9A27A",
+        "tint": "#FEFDF9",
+        "accent": "#9DBF6E",
+        "shadow": "#877D6E",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "detroit-crust",
+      "name": "Detroit crust",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1406",
+        "c1": "#E09A3E",
+        "c2": "#B23A1E",
+        "c3": "#F7DCA4",
+        "c4": "#6A3414",
+        "tint": "#F9EBD8",
+        "accent": "#B23A1E",
+        "shadow": "#734A1C",
+        "shine": "#F6E1C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "nduja-heat",
+      "name": "'Nduja heat",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0606",
+        "c1": "#FF6B2C",
+        "c2": "#C1121F",
+        "c3": "#FFD166",
+        "c4": "#6A040F",
+        "tint": "#FFE1D5",
+        "accent": "#FFD166",
+        "shadow": "#7F2E15",
+        "shine": "#FFD3C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neapolitan-oven",
+      "name": "Wood-fired oven",
+      "tags": [
+        "earthy",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#24140A",
+        "c1": "#E8B66A",
+        "c2": "#A33B20",
+        "c3": "#3A2A1E",
+        "c4": "#F4E3C1",
+        "tint": "#FAF0E1",
+        "accent": "#A33B20",
+        "shadow": "#725530",
+        "shine": "#F8E9D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pizzeria-sign",
+      "name": "Pizzeria sign",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#14240F",
+        "c1": "#F2C14E",
+        "c2": "#D62828",
+        "c3": "#2E8B57",
+        "c4": "#FAF3E3",
+        "tint": "#FCF3DC",
+        "accent": "#D62828",
+        "shadow": "#6D6328",
+        "shine": "#FBECCA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-slice",
+      "name": "70s slice",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#F4A940",
+        "c2": "#D9542B",
+        "c3": "#8E3B2E",
+        "c4": "#3F6F63",
+        "tint": "#FDEED9",
+        "accent": "#D9542B",
+        "shadow": "#7B501E",
+        "shine": "#FCE5C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-pizzeria",
+      "name": "Neon pizzeria",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFE14D",
+        "c1": "#1A0E08",
+        "c2": "#FF3D6E",
+        "c3": "#3DFF9A",
+        "c4": "#FF9F3D",
+        "tint": "#D1CFCE",
+        "accent": "#FF3D6E",
+        "shadow": "#0A0603",
+        "shine": "#BAB7B5",
+        "edge": "#040201"
+      }
+    },
+    {
+      "id": "kawaii-slice",
+      "name": "Kawaii slice",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A2A20",
+        "c1": "#FFE2A8",
+        "c2": "#FF9AA8",
+        "c3": "#B8E6A8",
+        "c4": "#FFC49B",
+        "tint": "#FFF9EE",
+        "accent": "#FF9AA8",
+        "shadow": "#927456",
+        "shine": "#FFF6E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dessert-pizza",
+      "name": "Dessert pizza",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1028",
+        "c1": "#F7B2C8",
+        "c2": "#6B3A26",
+        "c3": "#FFE066",
+        "c4": "#8FD8F0",
+        "tint": "#FDF0F4",
+        "accent": "#FFE066",
+        "shadow": "#865168",
+        "shine": "#FDE8EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-slice",
+      "name": "Y2K slice",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#FFD6F2",
+        "c2": "#B8A9FF",
+        "c3": "#C9FF6B",
+        "c4": "#FF8AD8",
+        "tint": "#FFF7FC",
+        "accent": "#C9FF6B",
+        "shadow": "#7F6B91",
+        "shine": "#FFF3FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pop-art",
+      "name": "Pop art",
+      "tags": [
+        "vivid",
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#E4002B",
+        "c3": "#0050EF",
+        "c4": "#FFFFFF",
+        "tint": "#FFF6CC",
+        "accent": "#E4002B",
+        "shadow": "#665500",
+        "shine": "#FFF2B3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mozzarella-ramp",
+      "name": "Mozzarella ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3A2A08",
+        "c1": "#F6D27A",
+        "c2": "#FBE8B8",
+        "c3": "#C9962E",
+        "c4": "#8A6418",
+        "tint": "#FDF6E4",
+        "accent": "#FBE8B8",
+        "shadow": "#856D36",
+        "shine": "#FCF2D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale-slice",
+      "name": "Charcoal slice",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#CFCFCF",
+        "c2": "#6E6E6E",
+        "c3": "#A0A0A0",
+        "c4": "#F0F0F0",
+        "tint": "#F5F5F5",
+        "accent": "#6E6E6E",
+        "shadow": "#5F5F5F",
+        "shine": "#F1F1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pumpkin-harvest",
+      "name": "Harvest slice",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F2A54A",
+        "c2": "#8C3B1A",
+        "c3": "#6B8E4E",
+        "c4": "#F6D7B0",
+        "tint": "#FCEDDB",
+        "accent": "#8C3B1A",
+        "shadow": "#7C4D21",
+        "shine": "#FBE4C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-slice",
+      "name": "Holiday slice",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#F7E1A8",
+        "c2": "#B3202A",
+        "c3": "#1E6B45",
+        "c4": "#FFFFFF",
+        "tint": "#FDF9EE",
+        "accent": "#B3202A",
+        "shadow": "#7C6047",
+        "shine": "#FDF6E5",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

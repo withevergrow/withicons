@@ -1,0 +1,28 @@
+{
+  "name": "route",
+  "intent": "traces the path from start to finish",
+  "loop": {
+    "preset": "draw",
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 1.2
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "map-pin",
+      "effect": "scale"
+    },
+    {
+      "to": "map",
+      "effect": "fade"
+    }
+  ]
+}

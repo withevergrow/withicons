@@ -1,0 +1,27 @@
+{
+  "name": "syringe",
+  "palettes": [
+    {"id":"vaccine-blue","name":"Vaccine blue","tags":["true-to-life"],"colors":{"ink":"#385268","c1":"#7DB8E8","c2":"#E8F3FC","c3":"#2F7BC0","c4":"#C9E2F7","tint":"#DBEBF9","accent":"#FF6B8B","shadow":"#456580","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"flu-shot","name":"Flu shot","tags":["true-to-life"],"colors":{"ink":"#3A5547","c1":"#8FD3B0","c2":"#F2FBF6","c3":"#2E9C6A","c4":"#D3F0E1","tint":"#E0F3E9","accent":"#FFB347","shadow":"#4F7461","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"insulin-orange","name":"Insulin orange","tags":["true-to-life"],"colors":{"ink":"#70461B","c1":"#F59A3A","c2":"#FFF4E6","c3":"#C2410C","c4":"#FFD6A8","tint":"#FCE3C8","accent":"#3A86FF","shadow":"#875520","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"blood-draw","name":"Blood draw","tags":["true-to-life"],"colors":{"ink":"#7C2128","c1":"#D93A45","c2":"#F6F1F1","c3":"#8C1420","c4":"#F6C3C8","tint":"#F4C8CB","accent":"#7FB2FF","shadow":"#772026","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clear-barrel","name":"Clear barrel","tags":["true-to-life"],"colors":{"ink":"#18222C","c1":"#B9C6D2","c2":"#F7FAFC","c3":"#5B6B7B","c4":"#E3E9EF","tint":"#EBEFF2","accent":"#E5484D","shadow":"#666D74","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"booster-violet","name":"Booster violet","tags":["true-to-life"],"colors":{"ink":"#523F84","c1":"#8B6CE0","c2":"#F1ECFF","c3":"#4E36A3","c4":"#D4C8F8","tint":"#DFD6F6","accent":"#FFC94A","shadow":"#4C3B7B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"flu-season","name":"Flu season","tags":["seasonal"],"colors":{"ink":"#37526C","c1":"#6FA8DC","c2":"#F3F8FD","c3":"#C0392B","c4":"#D8E8F6","tint":"#D7E7F5","accent":"#C0392B","shadow":"#3D5C79","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pharmacy-green","name":"Pharmacy green","tags":["corporate"],"colors":{"ink":"#115B34","c1":"#1E9E5A","c2":"#EAF7EF","c3":"#0D5C34","c4":"#B8E5CB","tint":"#C0E4D1","accent":"#F2C14E","shadow":"#115732","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hospital-blue","name":"Hospital blue","tags":["corporate"],"colors":{"ink":"#14357F","c1":"#2563EB","c2":"#E6EEFD","c3":"#0F3A8C","c4":"#B5CBFA","tint":"#C2D3F9","accent":"#F59E0B","shadow":"#143681","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vitamin-c","name":"Vitamin C","tags":["vivid"],"colors":{"ink":"#6A4A0D","c1":"#FFB020","c2":"#FFF4D1","c3":"#FF6A3D","c4":"#9BD94A","tint":"#FFE9C1","accent":"#FF6A3D","shadow":"#8C6112","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"berry-tonic","name":"Berry tonic","tags":["vivid"],"colors":{"ink":"#651432","c1":"#C2275F","c2":"#FFD9E6","c3":"#6A1B9A","c4":"#FF9EC2","tint":"#EEC3D2","accent":"#FFC94A","shadow":"#6B1534","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-serum","name":"Gold serum","tags":["luxe"],"colors":{"ink":"#604E13","c1":"#C9A227","c2":"#FBF3DC","c3":"#2B2B2B","c4":"#E8D79A","tint":"#F0E5C3","accent":"#2B2B2B","shadow":"#6F5915","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"apothecary","name":"Apothecary","tags":["vintage"],"colors":{"ink":"#4C3924","c1":"#8C6A43","c2":"#EFE2C6","c3":"#4F6B5A","c4":"#C7A97A","tint":"#DFD5CA","accent":"#B5543C","shadow":"#4D3A25","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"retro-pharmacy","name":"Retro pharmacy","tags":["retro"],"colors":{"ink":"#7E3E20","c1":"#E2703A","c2":"#F3C64B","c3":"#3E8C84","c4":"#9C3D23","tint":"#F7D7C8","accent":"#F3C64B","shadow":"#7C3E20","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-shot","name":"Candy shot","tags":["candy"],"colors":{"ink":"#72405A","c1":"#FF8FC8","c2":"#FFF1A8","c3":"#8FE3FF","c4":"#C8B6FF","tint":"#FFE0F0","accent":"#FFF1A8","shadow":"#8C4F6E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-dose","name":"Pastel dose","tags":["pastel"],"colors":{"ink":"#534C66","c1":"#C9B8F5","c2":"#FFE6EE","c3":"#B8E8D6","c4":"#FFD8B0","tint":"#F0EBFC","accent":"#FF9EB8","shadow":"#6F6587","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lab-neon","name":"Lab neon","tags":["neon","on-dark"],"colors":{"ink":"#F2FFF8","c1":"#10E07A","c2":"#FF2BD6","c3":"#2BF0FF","c4":"#FFE45E","tint":"#BCF6DA","accent":"#FF2BD6","shadow":"#097B43","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-gel","name":"Y2K gel","tags":["y2k"],"colors":{"ink":"#2D555E","c1":"#7AE7FF","c2":"#F3FDFF","c3":"#FF7AD9","c4":"#C6A8FF","tint":"#DAF8FF","accent":"#FF7AD9","shadow":"#437F8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"teal-ramp","name":"Teal ramp","tags":["mono"],"colors":{"ink":"#125456","c1":"#1F8E92","c2":"#DDF3F3","c3":"#115458","c4":"#8CD0D2","tint":"#C0DFE0","accent":"#8CD0D2","shadow":"#114E50","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"surgical-steel","name":"Surgical steel","tags":["grayscale"],"colors":{"ink":"#15181C","c1":"#8C939C","c2":"#EEF0F2","c3":"#4A5058","c4":"#C4C9CF","tint":"#DFE1E3","accent":"#4A5058","shadow":"#4D5156","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-mode","name":"Dark mode","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#4A5262","c2":"#9FE3C9","c3":"#2A2F38","c4":"#8C95A5","tint":"#CCCFD3","accent":"#9FE3C9","shadow":"#292D36","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#0057D9","c2":"#FFFFFF","c3":"#FFD200","c4":"#D4002A","tint":"#B8D0F4","accent":"#FFD200","shadow":"#003077","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

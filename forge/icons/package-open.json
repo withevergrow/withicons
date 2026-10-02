@@ -1,0 +1,75 @@
+{
+  "name": "package-open",
+  "category": "commerce",
+  "description": "An open cardboard box with its flaps folded back for unboxing, returns, and opened deliveries.",
+  "aliases": [
+    "open-box",
+    "unbox",
+    "unboxing",
+    "box-open",
+    "opened-package",
+    "returns",
+    "inventory-open",
+    "open-package",
+    "opened-box",
+    "parcel-open",
+    "open-parcel"
+  ],
+  "tags": [
+    "box",
+    "package",
+    "open",
+    "unboxing",
+    "delivery",
+    "returns"
+  ],
+  "paths": [
+    {
+      "d": "M4 11 L12 15 L20 11 V17.5 L12 21.5 L4 17.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 15 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 11 L12 7 L20 11",
+      "plate": "K"
+    },
+    {
+      "d": "M4 11 L2 6.5 L10 2.5 L12 7 L14 2.5 L22 6.5 L20 11",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 11 L2 6.5 L10 2.5 L12 7 L14 2.5 L22 6.5 L20 11 V17.5 L12 21.5 L4 17.5 Z"
+  ],
+  "cutouts": [
+    "M4 11 L12 15 L20 11 M12 15 V21.5",
+    "M4 11 L12 7 L20 11"
+  ],
+  "synonyms": [
+    "unpack",
+    "unpacking",
+    "opened delivery",
+    "delivered",
+    "order received",
+    "return",
+    "return item",
+    "return order",
+    "refund",
+    "empty box",
+    "cardboard box",
+    "moving box",
+    "packing",
+    "pack",
+    "gift box",
+    "what is inside",
+    "product reveal",
+    "new arrival",
+    "inventory",
+    "stock",
+    "pakage open",
+    "packege"
+  ]
+}

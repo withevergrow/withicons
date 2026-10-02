@@ -1,0 +1,31 @@
+{
+  "name": "messages",
+  "intent": "bubbles bob like a lively conversation",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "jelly"
+  },
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "message-square",
+      "effect": "fade"
+    }
+  ]
+}

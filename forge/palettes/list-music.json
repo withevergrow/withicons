@@ -1,0 +1,149 @@
+{
+  "name": "list-music",
+  "palettes": [
+    {
+      "id": "playlist-green",
+      "name": "Playlist green",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#112C1B", "c1": "#1FBF5C", "c2": "#191414", "c3": "#B3F5CC", "c4": "#0B5D2A", "tint": "#C0EDD1", "accent": "#F472B6", "shadow": "#115E2E", "shine": "#E0F6E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pink-radio",
+      "name": "Pink radio",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1116", "c1": "#FA3E5F", "c2": "#8B5CF6", "c3": "#FFD5DC", "c4": "#7A0E22", "tint": "#FEC9D2", "accent": "#8B5CF6", "shadow": "#681221", "shine": "#FEE4E9", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sheet-music",
+      "name": "Sheet music",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#0A0A0A", "c1": "#3F3F46", "c2": "#C9A227", "c3": "#F5F5F4", "c4": "#18181B", "tint": "#C9C9CB", "accent": "#C9A227", "shadow": "#202023", "shine": "#E4E4E5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "mint-melody",
+      "name": "Mint melody",
+      "tags": ["candy"],
+      "colors": { "ink": "#112C22", "c1": "#34D399", "c2": "#F472B6", "c3": "#FDE68A", "c4": "#065F46", "tint": "#C6F3E2", "accent": "#F472B6", "shadow": "#166548", "shine": "#E3F9F1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "queue-blue",
+      "name": "Queue blue",
+      "tags": ["corporate"],
+      "colors": { "ink": "#111B2C", "c1": "#3B82F6", "c2": "#F59E0B", "c3": "#DBEAFE", "c4": "#1E3A8A", "tint": "#C8DCFC", "accent": "#F59E0B", "shadow": "#123368", "shine": "#E4EEFE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "indie-violet",
+      "name": "Indie violet",
+      "tags": ["vivid"],
+      "colors": { "ink": "#1B112C", "c1": "#7C3AED", "c2": "#FB7185", "c3": "#EDE9FE", "c4": "#4C1D95", "tint": "#DAC8FA", "accent": "#FB7185", "shadow": "#321268", "shine": "#EDE3FC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "club-playlist",
+      "name": "Club playlist",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF0F7", "c1": "#FF1F8E", "c2": "#1FFFE1", "c3": "#FFF01F", "c4": "#6B00FF", "tint": "#FFC0DF", "accent": "#6B00FF", "shadow": "#68123D", "shine": "#FFE0EF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "laser-playlist",
+      "name": "Laser playlist",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#EEF0FF", "c1": "#4D4DFF", "c2": "#FF4DFF", "c3": "#4DFFB8", "c4": "#0A0A3D", "tint": "#CDCDFF", "accent": "#FF4DFF", "shadow": "#121268", "shine": "#E6E6FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "lo-fi-pastel",
+      "name": "Lo-fi pastel",
+      "tags": ["pastel"],
+      "colors": { "ink": "#3D2E4A", "c1": "#CDB4DB", "c2": "#FFC8DD", "c3": "#BDE0FE", "c4": "#A2D2FF", "tint": "#F1EAF5", "accent": "#A2D2FF", "shadow": "#432853", "shine": "#F8F5FA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "bubblegum-pop",
+      "name": "Bubblegum pop",
+      "tags": ["candy"],
+      "colors": { "ink": "#3E1626", "c1": "#FF7AA2", "c2": "#FFE066", "c3": "#7BDFF2", "c4": "#B2F7EF", "tint": "#FFDAE5", "accent": "#FFE066", "shadow": "#68122C", "shine": "#FFECF2", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "burned-cd",
+      "name": "Burned CD",
+      "tags": ["y2k"],
+      "colors": { "ink": "#240046", "c1": "#9D4EDD", "c2": "#00F5D4", "c3": "#FF70A6", "c4": "#FEE440", "tint": "#E4CDF5", "accent": "#00F5D4", "shadow": "#421467", "shine": "#F1E6FA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "vinyl-seventies",
+      "name": "Vinyl seventies",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1B11", "c1": "#D97941", "c2": "#F2C14E", "c3": "#5A3E2B", "c4": "#9DBF9E", "tint": "#F4D9CA", "accent": "#F2C14E", "shadow": "#663214", "shine": "#FAECE4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "jazz-club",
+      "name": "Jazz club",
+      "tags": ["vintage"],
+      "colors": { "ink": "#1E120A", "c1": "#7A4E2D", "c2": "#C9A227", "c3": "#EDE1C8", "c4": "#3B2414", "tint": "#DACDC4", "accent": "#C9A227", "shadow": "#3D2716", "shine": "#ECE6E2", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "surf-rock",
+      "name": "Surf rock",
+      "tags": ["ocean"],
+      "colors": { "ink": "#112A2C", "c1": "#0E7C86", "c2": "#4FC3C7", "c3": "#D5F5F6", "c4": "#0A3D44", "tint": "#BCDADD", "accent": "#4FC3C7", "shadow": "#0B3B3F", "shine": "#DDEDEE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "folk-forest",
+      "name": "Folk forest",
+      "tags": ["nature"],
+      "colors": { "ink": "#1D2C11", "c1": "#4F772D", "c2": "#90A955", "c3": "#ECF39E", "c4": "#31572C", "tint": "#CED9C4", "accent": "#ECF39E", "shadow": "#283C17", "shine": "#E6ECE2", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "merlot",
+      "name": "Merlot",
+      "tags": ["vintage"],
+      "colors": { "ink": "#2C1115", "c1": "#9B2335", "c2": "#E8A0BF", "c3": "#FCE4EC", "c4": "#4E0F1B", "tint": "#E3C1C6", "accent": "#E8A0BF", "shadow": "#4E121B", "shine": "#F1E0E3", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "citrus-hits",
+      "name": "Citrus hits",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C2211", "c1": "#F59E0B", "c2": "#84CC16", "c3": "#FEF3C7", "c4": "#78350F", "tint": "#FCE4BB", "accent": "#84CC16", "shadow": "#684812", "shine": "#FEF1DD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "coral-ramp",
+      "name": "Coral ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#2C1111", "c1": "#F25F5C", "c2": "#FFA69E", "c3": "#FFE0DC", "c4": "#8A2423", "tint": "#FBD2D1", "accent": "#8A2423", "shadow": "#681412", "shine": "#FDE9E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "liner-notes",
+      "name": "Liner notes",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#0A0A0A", "c1": "#737373", "c2": "#A3A3A3", "c3": "#E5E5E5", "c4": "#262626", "tint": "#D8D8D8", "accent": "#A3A3A3", "shadow": "#3A3A3A", "shine": "#EBEBEB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": ["dark"],
+      "colors": { "ink": "#020617", "c1": "#475569", "c2": "#22D3EE", "c3": "#CBD5E1", "c4": "#0F172A", "tint": "#CBCFD5", "accent": "#22D3EE", "shadow": "#242B35", "shine": "#E5E7EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gold-record",
+      "name": "Gold record",
+      "tags": ["luxe"],
+      "colors": { "ink": "#141414", "c1": "#D4AF37", "c2": "#141414", "c3": "#F5E6B8", "c4": "#7A5C12", "tint": "#F3E9C7", "accent": "#7A5C12", "shadow": "#655216", "shine": "#F9F4E3", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#0057B7", "c2": "#FFD700", "c3": "#FFFFFF", "c4": "#000000", "tint": "#B8D0EB", "accent": "#FFD700", "shadow": "#0E2C4E", "shine": "#DBE7F5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "autumn-mixtape",
+      "name": "Autumn mixtape",
+      "tags": ["seasonal"],
+      "colors": { "ink": "#2C1911", "c1": "#C2410C", "c2": "#854D0E", "c3": "#FCD9B8", "c4": "#431407", "tint": "#EECABB", "accent": "#854D0E", "shadow": "#58240F", "shine": "#F6E4DD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sunset-drive",
+      "name": "Sunset drive",
+      "tags": ["sunset"],
+      "colors": { "ink": "#2C1311", "c1": "#FF6F61", "c2": "#6B5B95", "c3": "#FFD1BA", "c4": "#3D2C5E", "tint": "#FFD7D3", "accent": "#FFD1BA", "shadow": "#681A12", "shine": "#FFEBE9", "edge": "#FFFFFF" }
+    }
+  ]
+}

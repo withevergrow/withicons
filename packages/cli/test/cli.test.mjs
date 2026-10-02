@@ -46,7 +46,94 @@ test('errors: unknown icon exits 1 with suggestions, bad usage exits 2', () => {
 })
 test('resolve, styles, categories, help', () => {
   assert.match(run('resolve', 'bin').stdout, /trash/)
-  assert.equal(JSON.parse(run('styles', '--json').stdout).styles.length, 7)
+  const styles = JSON.parse(run('styles', '--json').stdout).styles
+  assert.ok(styles.length >= 7)
+  assert.equal(styles[0].name, 'line')
   assert.ok(JSON.parse(run('categories', 'weather', '--json').stdout).icons.length > 3)
   assert.match(run('--help').stdout, /withicons search/)
+})
+test('animate: loop / hover / swap code, --list, errors', () => {
+  const loop = run('animate', 'bell')
+  assert.equal(loop.status, 0)
+  assert.match(loop.stdout, /class="wm wm-loop[^"]*"/)
+  assert.match(loop.stdout, /motion\.css/)
+  const hover = run('animate', 'bell', '--trigger', 'hover', '--format', 'react')
+  assert.match(hover.stdout, /className="wm-trigger"/)
+  assert.match(hover.stdout, /<Bell \/>/)
+  const swap = JSON.parse(run('animate', 'play', '--trigger', 'swap', '--to', 'pause', '--effect', 'flip', '--json').stdout)
+  assert.equal(swap.to, 'pause')
+  assert.match(swap.code, /wm-swap wm-fx-flip/)
+  assert.match(swap.code, /class="wm-a"/)
+  assert.match(swap.code, /class="wm-b"/)
+  assert.equal(run('animate', '--list').status, 0)
+  assert.equal(run('animate', 'bell', '--preset', 'nope').status, 2)
+  assert.equal(run('animate', 'nope-icon-xyz').status, 1)
+})
+test('get --flat bakes CSS-variable colours in', () => {
+  const r = run('get', 'home', '--style', 'duo', '--flat')
+  assert.equal(r.status, 0)
+  assert.doesNotMatch(r.stdout, /var\(--/)
+})
+test('usage errors exit 2: unknown option, missing value, bad numbers, bad option values', () => {
+  const bad = run('get', 'home', '--styel', 'solid')
+  assert.equal(bad.status, 2)
+  assert.match(bad.stderr, /unknown option "--styel".*--style/)
+  assert.equal(run('get', 'home', '--style').status, 2)
+  assert.equal(run('get', 'home', '--size', 'abc').status, 2)
+  assert.equal(run('search', 'home', '-n', '0').status, 2)
+  assert.equal(run('get', 'home', '--style', 'bogus').status, 2)
+  assert.equal(run('add', 'home', '--fw', 'data-uri').status, 2)
+  assert.equal(run('resolve').status, 2)
+  assert.equal(JSON.parse(run('get', 'home', '--nope', '--json').stdout).code, 'usage')
+  // a missing icon is "not found" (1), not a usage error
+  assert.equal(run('get', 'no-such-icon-xyz').status, 1)
+})
+test('--stroke-width and --no-color', () => {
+  assert.match(run('get', 'home', '--stroke-width', '2.5').stdout, /stroke-width="2.5"/)
+  assert.equal(run('styles', '--no-color').status, 0)
+})
+test('styles lists the colour variables of multi-colour styles', () => {
+  const r = run('styles')
+  assert.match(r.stdout, /--with-retro-1/)
+  assert.match(r.stdout, /--with-sticker-edge/)
+})
+
+// palettes need a @withicons/mcp with palette data (packages/mcp/dist/data/palettes.json)
+const hasPalettes = (() => { const r = run('palettes', 'heart', '--json'); return r.status === 0 && JSON.parse(r.stdout).total > 0 })()
+test('palettes <name>: list, --style variables, --tag, --json', { skip: !hasPalettes && 'no palette data in this @withicons/mcp build' }, () => {
+  const j = JSON.parse(run('palettes', 'heart', '--style', 'retro', '--json').stdout)
+  assert.equal(j.name, 'heart')
+  assert.ok(j.total >= 20 && j.total <= 30, `20-30 palettes, got ${j.total}`)
+  assert.ok(j.variables.some(v => v.var === '--with-retro-1' && v.role === 'c1'))
+  assert.ok(j.palettes[0].vars['--with-retro-1'])
+  const txt = run('palettes', 'heart', '--style', 'retro')
+  assert.equal(txt.status, 0)
+  assert.match(txt.stdout, new RegExp('^  ' + j.palettes[0].id + ' ', 'm'))
+  assert.match(txt.stdout, /--palette /)
+  const tag = j.palettes[0].tags[0]
+  const t = JSON.parse(run('palettes', 'heart', '--tag', tag, '--json').stdout)
+  assert.ok(t.palettes.every(p => p.tags.includes(tag)))
+  assert.equal(run('palettes', 'heart', '--tag', 'not-a-tag').status, 2)
+  assert.equal(run('palettes').status, 2)
+})
+test('get --palette / colour roles recolour every colour', { skip: !hasPalettes && 'no palette data in this @withicons/mcp build' }, () => {
+  const p = JSON.parse(run('palettes', 'heart', '--style', 'retro', '--json').stdout).palettes[0]
+  const svg = run('get', 'heart', '--style', 'retro', '--palette', p.id).stdout
+  assert.match(svg, new RegExp(`^<svg style="color: ${p.colors.ink}; --with-retro-`))
+  const flat = run('get', 'heart', '--style', 'retro', '--palette', p.id, '--flat').stdout
+  assert.doesNotMatch(flat, /var\(--|currentColor/)
+  for (const v of Object.values(p.vars)) assert.ok(flat.includes(`"${v}"`), `${v} baked in`)
+  // roles on top of a palette, a variable by short name, and --color as the ink
+  const react = run('get', 'heart', '-s', 'sticker', '--palette', p.id, '--c1', '#00ff00', '--colors', 'sticker-edge=#000000', '-f', 'react').stdout
+  assert.match(react, /className="icon-heart-[\w-]+-custom"/)
+  assert.match(react, /--with-sticker-\w+: #00ff00/)
+  assert.match(react, /--with-sticker-edge: #000000/)
+  assert.match(run('get', 'heart', '-s', 'kawaii', '--c2', '#123456', '--color', 'red').stdout, /color: red/)
+  assert.equal(run('get', 'heart', '-s', 'retro', '--palette', 'nope').status, 1)
+  assert.equal(run('get', 'heart', '-s', 'retro', '--c1', 'url(x)').status, 2)
+  assert.equal(run('get', 'heart', '-s', 'retro', '--colors', 'c1').status, 2)
+  // one-colour style: only the ink applies, and the CLI says so
+  const line = run('get', 'heart', '--palette', p.id)
+  assert.match(line.stdout, new RegExp(`color: ${p.colors.ink}`))
+  assert.match(line.stderr, /one colour/)
 })

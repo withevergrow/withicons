@@ -1,0 +1,8 @@
+{
+  "name": "tent",
+  "intent": "canvas sways in a light breeze at camp",
+  "loop": { "preset": "sway", "origin": [12, 20], "amount": 0.4, "duration": 3.4 },
+  "hover": { "preset": "jelly", "origin": [12, 20], "amount": 0.9 },
+  "alt": [ { "preset": "breathe", "origin": [12, 20] }, { "preset": "rock", "origin": [12, 20], "amount": 0.6 } ],
+  "swap": [ { "to": "mountain", "effect": "fade" } ]
+}

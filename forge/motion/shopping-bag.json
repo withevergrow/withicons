@@ -1,0 +1,44 @@
+{
+  "name": "shopping-bag",
+  "intent": "swings from its handle like a bag being carried",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "shopping-bag@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "shopping-cart",
+      "effect": "fade"
+    }
+  ]
+}

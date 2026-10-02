@@ -1,0 +1,60 @@
+{
+  "name": "reply-all",
+  "category": "communication",
+  "description": "Two arrowheads pointing back to the left with a tail that curves down, for replying to everyone in a thread.",
+  "aliases": [
+    "respond-all",
+    "answer-all",
+    "reply-everyone",
+    "double-reply",
+    "group-reply",
+    "mail-reply-all",
+    "reply-to-all",
+    "replyall",
+    "email-reply-all",
+    "respond-to-all"
+  ],
+  "tags": [
+    "reply",
+    "all",
+    "email",
+    "group",
+    "respond",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 9.5 H13.5 A7 7 0 0 1 20.5 16.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 4.5 L8.5 9.5 L13.5 14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 4.5 L2.5 9.5 L7.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "reply all",
+    "reply to all",
+    "respond to everyone",
+    "reply to everybody",
+    "answer everyone",
+    "all recipients",
+    "everyone",
+    "group email",
+    "group chat",
+    "cc",
+    "thread",
+    "conversation",
+    "email",
+    "message",
+    "double arrow back",
+    "reply al",
+    "replay all"
+  ]
+}

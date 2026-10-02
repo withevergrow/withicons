@@ -1,0 +1,66 @@
+{
+  "name": "bookmark-plus",
+  "category": "actions",
+  "description": "A bookmark ribbon with a plus for saving an item to a reading list.",
+  "aliases": [
+    "add-bookmark",
+    "bookmark-add",
+    "save-item",
+    "add-to-saved",
+    "new-bookmark",
+    "favorite-add",
+    "bookmark-new",
+    "save-for-later-add",
+    "add-to-reading-list"
+  ],
+  "tags": [
+    "bookmark",
+    "save",
+    "add",
+    "ribbon",
+    "later"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V12",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 9.5 H14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z"
+  ],
+  "cutouts": [
+    "M12 7 V12",
+    "M9.5 9.5 H14.5"
+  ],
+  "synonyms": [
+    "save for later",
+    "read later",
+    "add to list",
+    "add to collection",
+    "add to wishlist",
+    "save post",
+    "save article",
+    "save this",
+    "keep for later",
+    "add to saved",
+    "mark page",
+    "bookmark this",
+    "bookmark page",
+    "add favourite",
+    "add favorite",
+    "watch later",
+    "new saved item",
+    "bookmarks",
+    "book mark plus",
+    "bookmrk"
+  ]
+}

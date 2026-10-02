@@ -1,7 +1,7 @@
 {
   "name": "@withicons/vue",
-  "version": "0.1.0",
-  "description": "300 icons x 7 styles as tree-shakable Vue 3 components.",
+  "version": "0.2.0",
+  "description": "500 icons x 12 styles as tree-shakable Vue 3 components.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -24,7 +24,22 @@
     "with-icons",
     "vue",
     "vue3",
-    "svg-icons"
+    "vue-icons",
+    "nuxt",
+    "svg-icons",
+    "animated-icons",
+    "line-icons",
+    "solid-icons",
+    "duo-icons",
+    "gloss-icons",
+    "engrave-icons",
+    "blueprint-icons",
+    "sketch-icons",
+    "glass-icons",
+    "kawaii-icons",
+    "sticker-icons",
+    "pixel-icons",
+    "retro-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -112,6 +127,56 @@
         "default": "./dist/sketch/index.cjs"
       }
     },
+    "./glass": {
+      "import": {
+        "types": "./dist/glass/index.d.ts",
+        "default": "./dist/glass/index.js"
+      },
+      "require": {
+        "types": "./dist/glass/index.d.cts",
+        "default": "./dist/glass/index.cjs"
+      }
+    },
+    "./kawaii": {
+      "import": {
+        "types": "./dist/kawaii/index.d.ts",
+        "default": "./dist/kawaii/index.js"
+      },
+      "require": {
+        "types": "./dist/kawaii/index.d.cts",
+        "default": "./dist/kawaii/index.cjs"
+      }
+    },
+    "./sticker": {
+      "import": {
+        "types": "./dist/sticker/index.d.ts",
+        "default": "./dist/sticker/index.js"
+      },
+      "require": {
+        "types": "./dist/sticker/index.d.cts",
+        "default": "./dist/sticker/index.cjs"
+      }
+    },
+    "./pixel": {
+      "import": {
+        "types": "./dist/pixel/index.d.ts",
+        "default": "./dist/pixel/index.js"
+      },
+      "require": {
+        "types": "./dist/pixel/index.d.cts",
+        "default": "./dist/pixel/index.cjs"
+      }
+    },
+    "./retro": {
+      "import": {
+        "types": "./dist/retro/index.d.ts",
+        "default": "./dist/retro/index.js"
+      },
+      "require": {
+        "types": "./dist/retro/index.d.cts",
+        "default": "./dist/retro/index.cjs"
+      }
+    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "default": "./dist/icon.js"
@@ -147,6 +212,26 @@
     "./sketch/icons/*": {
       "types": "./dist/sketch/icons/*.d.ts",
       "default": "./dist/sketch/icons/*.js"
+    },
+    "./glass/icons/*": {
+      "types": "./dist/glass/icons/*.d.ts",
+      "default": "./dist/glass/icons/*.js"
+    },
+    "./kawaii/icons/*": {
+      "types": "./dist/kawaii/icons/*.d.ts",
+      "default": "./dist/kawaii/icons/*.js"
+    },
+    "./sticker/icons/*": {
+      "types": "./dist/sticker/icons/*.d.ts",
+      "default": "./dist/sticker/icons/*.js"
+    },
+    "./pixel/icons/*": {
+      "types": "./dist/pixel/icons/*.d.ts",
+      "default": "./dist/pixel/icons/*.js"
+    },
+    "./retro/icons/*": {
+      "types": "./dist/retro/icons/*.d.ts",
+      "default": "./dist/retro/icons/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -199,6 +284,36 @@
       ],
       "sketch/icons/*": [
         "./dist/sketch/icons/*.d.ts"
+      ],
+      "glass": [
+        "./dist/glass/index.d.ts"
+      ],
+      "glass/icons/*": [
+        "./dist/glass/icons/*.d.ts"
+      ],
+      "kawaii": [
+        "./dist/kawaii/index.d.ts"
+      ],
+      "kawaii/icons/*": [
+        "./dist/kawaii/icons/*.d.ts"
+      ],
+      "sticker": [
+        "./dist/sticker/index.d.ts"
+      ],
+      "sticker/icons/*": [
+        "./dist/sticker/icons/*.d.ts"
+      ],
+      "pixel": [
+        "./dist/pixel/index.d.ts"
+      ],
+      "pixel/icons/*": [
+        "./dist/pixel/icons/*.d.ts"
+      ],
+      "retro": [
+        "./dist/retro/index.d.ts"
+      ],
+      "retro/icons/*": [
+        "./dist/retro/icons/*.d.ts"
       ]
     }
   },

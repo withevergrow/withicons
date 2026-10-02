@@ -7,6 +7,10 @@
 // Shape: { slug, name, kind, color, mark, url, known, hub: {...short matrix values}, facts: { key: [html, [src]] },
 //          sources: [[label, url]], them: [...], us: [...], migrate: {...}, faq: [[q, a]] }
 
+import { N_ICONS as N, N_STYLES as NS, N_TOTAL, num, listTitles, STYLES, PRESETS, EFFECTS, styleTitle } from '../site-pages/lib.mjs'
+/** "about three times our 500" — a hedged ratio for the "choose them if" lists. */
+export const timesOurs = n => { const r = n / N; return r >= 1.75 ? `about ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'][Math.round(r)] || Math.round(r)} times our ${N}` : `more than our ${N}` }
+
 export const FACT_ROWS = [
   ['license', 'Licence'], ['price', 'Price'], ['count', 'Icons'], ['styles', 'Styles'], ['frameworks', 'Frameworks'],
   ['classes', 'CSS classes / icon font'], ['selfhost', 'Self-hosting'], ['design', 'Design tools'], ['ai', 'AI / MCP'], ['attribution', 'Credit required?'],
@@ -16,8 +20,8 @@ export const FACT_ROWS = [
 export const US = p => ({
   license: 'MIT, for the icons and the code',
   price: 'Free. No paid tier, no account',
-  count: '300 icons × 7 styles (2,100 SVGs)',
-  styles: `7 styles on one 24 × 24 grid: <a href="${p}styles/line.html">Line</a>, Solid, Duo, Gloss, Engrave, Blueprint, Sketch`,
+  count: `${N} icons × ${NS} styles (${num(N_TOTAL)} SVGs)`,
+  styles: `${NS} styles on one 24 × 24 grid: <a href="${p}styles/line.html">Line</a>, ${listTitles(STYLES.slice(1))}. Every icon can also move: ${PRESETS.length} CSS animations and ${EFFECTS.length} swap transitions (<a href="${p}developers.html#motion">@withicons/motion</a>)`,
   frameworks: 'React, Vue, Svelte, Angular, Solid and a <code>&lt;with-icon&gt;</code> web component (on npm soon); SVG, PNG and sprites today',
   classes: 'Yes: <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>, add <code>with-solid</code> etc. for other styles',
   selfhost: `Yes: download SVGs, sprites and CSS (<a href="${p}developers.html#cdn">developers</a>)`,
@@ -25,7 +29,7 @@ export const US = p => ({
   ai: `<a href="${p}llms.txt">llms.txt</a> and an <a href="${p}ai.html#skill">agent skill</a> today; an MCP server (<code>@withicons/mcp</code>) arrives with the npm launch`,
   attribution: 'No',
 })
-export const US_HUB = { license: 'MIT', price: 'Free', count: '300 × 7 styles', styles: '7 (line to sketch)', classes: 'Yes (with-*)', ai: 'llms.txt, skill; MCP soon' }
+export const US_HUB = { license: 'MIT', price: 'Free', count: `${N} × ${NS} styles`, styles: `${NS} (line to ${styleTitle(STYLES.at(-1)).toLowerCase()}) + animations`, classes: 'Yes (with-*)', ai: 'llms.txt, skill; MCP soon' }
 
 import { OPEN_LIBS } from './libraries-open.mjs'
 
@@ -58,7 +62,7 @@ export const LIBS = [...OPEN_LIBS,
     them: [
       'You build with Ionic Framework: Ionicons is already there and matches the platform look.',
       'You want iOS- and Material-flavoured app icons with filled, outline and sharp variants.',
-      'You want about 1,300 icons, more than 4 times our 300, including many brand logos.',
+      `You want about 1,300 icons, ${timesOurs(1300)}, including many brand logos.`,
     ],
     us: [
       'You want the same icon set to work in slides, docs and design tools, not just in code.',
@@ -75,7 +79,7 @@ export const LIBS = [...OPEN_LIBS,
       styleNote: 'Ionicons <b>outline</b> → our <b>Line</b>; Ionicons <b>filled</b> → our <b>Solid</b>. Sharp has no direct twin; Line or Solid are closest.',
     },
     faq: [
-      ['Does with icons work like the ion-icon web component?', 'Yes. <code>&lt;with-icon name="home"&gt;&lt;/with-icon&gt;</code> works in any framework, and <code>variant="solid"</code> (or any of the 7 styles) replaces the Ionicons name suffix. The package is launching on npm soon.'],
+      ['Does with icons work like the ion-icon web component?', `Yes. <code>&lt;with-icon name="home"&gt;&lt;/with-icon&gt;</code> works in any framework, and <code>variant="solid"</code> (or any of the ${NS} styles) replaces the Ionicons name suffix. The package is launching on npm soon.`],
     ],
   },
 
@@ -215,7 +219,7 @@ export const LIBS = [...OPEN_LIBS,
       'You want to mix icons from several open-source families in one project.',
     ],
     us: [
-      'You want one consistent family where every icon shares the same grid, names and stroke, in 7 styles.',
+      `You want one consistent family where every icon shares the same grid, names and stroke, in ${NS} styles.`,
       'You want a single licence (MIT) instead of checking each icon set’s terms.',
       'You also need icons for slides, docs and design tools, with copy and download in any colour.',
     ],
@@ -266,7 +270,7 @@ export const LIBS = [...OPEN_LIBS,
     us: [
       'You don’t want to credit anyone: with icons is MIT, so no attribution, ever.',
       'You need SVG for free: every icon is free as SVG and PNG (Flaticon’s free downloads are PNG; SVG comes with Premium).',
-      'You want a consistent family where every icon matches, with the same names in 7 styles.',
+      `You want a consistent family where every icon matches, with the same names in ${NS} styles.`,
     ],
     migrate: {
       mode: 'class',
@@ -318,7 +322,7 @@ export const LIBS = [...OPEN_LIBS,
     ],
     us: [
       'You want free SVG with no link back: with icons is MIT (Icons8’s free plan is PNG with a link; SVG is paid).',
-      'You want a small, focused set where every icon matches across 7 styles.',
+      `You want a small, focused set where every icon matches across ${NS} styles.`,
       'You want open packages for React, Vue, Svelte, Angular and Solid.',
     ],
     migrate: {
@@ -367,7 +371,7 @@ export const LIBS = [...OPEN_LIBS,
     ],
     us: [
       'You don’t want to credit anyone: with icons is MIT, no attribution.',
-      'You need a matching family for an interface: one grid, one stroke, the same names in 7 styles.',
+      `You need a matching family for an interface: one grid, one stroke, the same names in ${NS} styles.`,
       'You want developer packages and CSS classes as well as downloads.',
     ],
     migrate: {
@@ -414,7 +418,7 @@ export const LIBS = [...OPEN_LIBS,
     us: [
       'You want unlimited free use with no credit and no per-project icon limit (MIT).',
       'You want open-source packages and CSS classes, not only downloads.',
-      'You want a smaller set where every icon matches across 7 styles.',
+      `You want a smaller set where every icon matches across ${NS} styles.`,
     ],
     migrate: {
       mode: null,
@@ -426,4 +430,49 @@ export const LIBS = [...OPEN_LIBS,
       ['Is there a limit on free Streamline icons?', 'The Streamline Free License allows up to 50 icons per project, with credit to Streamline. with icons has no limit and needs no credit.'],
     ],
   },
+  /* ───────────────────────── Lordicon (animated icons) ───────────────────────── */
+  {
+    slug: 'lordicon', name: 'Lordicon', kind: 'marketplace', checked: '2026-10-02', color: 'duo', mark: 'Lo', url: 'https://lordicon.com', searchQ: 'notification',
+    known: 'a large library of richly illustrated animated icons, delivered as Lottie files and played with the <code>&lt;lord-icon&gt;</code> element, with a free plan (credit required) and paid PRO plans.',
+    hub: { license: 'Free (credit) or PRO licence', price: 'Free with credit; PRO from $8/mo (yearly)', count: '47,900+ animated (9,700 free)', styles: 'Animated, adjustable colours & stroke', classes: 'No (<lord-icon> element)', ai: 'API; no official MCP found' },
+    facts: {
+      license: ['Free licence: commercial use allowed, author credit required, no redistribution of the icons as files. PRO licence: no credit needed', [2]],
+      price: ['Free plan; PRO $8/month billed annually ($16 monthly); Team PRO $39/month billed annually (as listed)', [1]],
+      count: ['“47,900+ premium and free animated icons”, of which 9,700 are free', [1]],
+      styles: ['Animated icons whose colours and stroke weight (light, regular, bold) can be set per use', [3]],
+      frameworks: ['A <code>&lt;lord-icon&gt;</code> web component from <code>@lordicon/element</code>, plus React and Flutter docs', [3, 4]],
+      classes: ['No CSS classes or icon font; icons are JSON (Lottie) files loaded by the element', [3]],
+      selfhost: ['Yes: download Lottie, GIF, MP4, WebP, PNG or SVG', [1]],
+      design: ['Figma plugin, a Google Slides & Docs plugin and a WordPress plugin', [4]],
+      ai: ['A developer API (with an API key); no official MCP server or llms.txt found', [4]],
+      attribution: ['Yes on the free plan; not with PRO', [2]],
+    },
+    sources: [
+      ['Lordicon pricing', 'https://lordicon.com/pricing'],
+      ['Lordicon licences', 'https://lordicon.com/licenses'],
+      ['Lordicon web docs (lord-icon element)', 'https://lordicon.com/docs/web'],
+      ['Lordicon documentation', 'https://lordicon.com/docs'],
+    ],
+    them: [
+      'You want rich, illustrated, multi-colour animations with a lot of character.',
+      'You need tens of thousands of animated icons, including very specific concepts.',
+      'You want triggers like morph, boomerang or sequence, or GIF and MP4 exports for video.',
+    ],
+    us: [
+      'You want animated icons with no credit and no plan: with icons and its animations are MIT.',
+      'You want light motion made of plain CSS: animated SVGs carry their own stylesheet, with no Lottie player or script.',
+      `You want the same ${N} icons still or moving, in ${NS} matching styles, with one name everywhere.`,
+    ],
+    migrate: {
+      mode: null,
+      intro: 'Lordicon icons are animation files, not class names, so there’s nothing to rename in code. Search by meaning below to find each icon’s with icons twin, then pick its motion in the icon’s Customize panel (or add <code>wm</code> classes in code). The table lists common searches.',
+      concept: true,
+      map: [['notification', 'bell'], ['home', 'home'], ['search', 'search'], ['heart', 'heart'], ['trash', 'trash'], ['settings', 'settings'], ['loading', 'loader'], ['mail', 'mail'], ['download', 'download'], ['upload', 'upload'], ['lock', 'lock'], ['shopping cart', 'shopping-cart'], ['star', 'star'], ['check', 'check-circle'], ['error', 'x-circle'], ['rocket', 'rocket'], ['gift', 'gift'], ['calendar', 'calendar'], ['chat', 'message-circle'], ['location', 'map-pin']],
+    },
+    faq: [
+      ['Is Lordicon free?', 'Lordicon has a free plan with 9,700 animated icons that requires credit to the author; PRO plans remove the credit and unlock the full library (checked on the pricing and licence pages). with icons is entirely free under MIT, animations included, with no credit.'],
+      ['How is with icons’ animation different from Lordicon’s?', 'Lordicon animations are hand-made Lottie files played by its <code>&lt;lord-icon&gt;</code> element, which allows rich, illustrated motion. with icons animates any of its icons with small CSS keyframes (ring, beat, spin, float and more), so there is no player to load and every style can move.'],
+    ],
+  },
 ]
+

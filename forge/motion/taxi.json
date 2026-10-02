@@ -1,0 +1,8 @@
+{
+  "name": "taxi",
+  "intent": "idles at the kerb, then drives off and comes back on hover",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.35, "duration": 1.8 },
+  "hover": { "preset": "pass", "dir": 0, "duration": 0.9 },
+  "alt": [ { "preset": "bounce", "origin": [12, 20.75], "amount": 0.3 }, { "preset": "glow" } ],
+  "swap": [ { "to": "car", "effect": "fade" }, { "to": "map-pin", "effect": "slide-down" }, { "to": "taxi@solid", "effect": "scale" } ]
+}

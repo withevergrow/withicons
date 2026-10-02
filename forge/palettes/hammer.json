@@ -1,0 +1,465 @@
+{
+  "name": "hammer",
+  "palettes": [
+    {
+      "id": "steel-oak",
+      "name": "Steel & oak",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E232A",
+        "c1": "#8A939E",
+        "c2": "#C68B59",
+        "c3": "#5A626B",
+        "c4": "#E7D3B0",
+        "tint": "#E8E9EC",
+        "accent": "#E7D3B0",
+        "shadow": "#3E454D",
+        "shine": "#DCDFE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "red-grip",
+      "name": "Red claw",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A0505",
+        "c1": "#D62828",
+        "c2": "#4A4F57",
+        "c3": "#2A2A2E",
+        "c4": "#F2C14E",
+        "tint": "#F7D4D4",
+        "accent": "#F2C14E",
+        "shadow": "#521010",
+        "shine": "#F3BFBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "site-yellow",
+      "name": "Site yellow",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1400",
+        "c1": "#FFC93C",
+        "c2": "#2A2A2E",
+        "c3": "#E5E7EB",
+        "c4": "#F97316",
+        "tint": "#FFF4D8",
+        "accent": "#F97316",
+        "shadow": "#5F4A12",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blacksmith",
+      "name": "Hot iron",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F0A02",
+        "c1": "#E8662A",
+        "c2": "#5A4030",
+        "c3": "#FDBA74",
+        "c4": "#3A3F47",
+        "tint": "#FAE0D4",
+        "accent": "#FDBA74",
+        "shadow": "#5B260E",
+        "shine": "#F8D1BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rubber-mallet",
+      "name": "Rubber mallet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A0B0D",
+        "c1": "#50545C",
+        "c2": "#D9B38C",
+        "c3": "#9CA3AF",
+        "c4": "#E5E7EB",
+        "tint": "#DCDDDE",
+        "accent": "#D9B38C",
+        "shadow": "#1F2125",
+        "shine": "#CBCCCE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "carpenter",
+      "name": "Carpenter green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A2416",
+        "c1": "#2F7D4F",
+        "c2": "#D9A066",
+        "c3": "#9AA3AE",
+        "c4": "#EAD9BE",
+        "tint": "#D5E5DC",
+        "accent": "#D9A066",
+        "shadow": "#153F27",
+        "shine": "#C1D8CA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-mallet",
+      "name": "Copper mallet",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1308",
+        "c1": "#C8763E",
+        "c2": "#6E4B2E",
+        "c3": "#F2C79A",
+        "c4": "#4E5D52",
+        "tint": "#F4E4D8",
+        "accent": "#F2C79A",
+        "shadow": "#593118",
+        "shine": "#EFD6C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gavel",
+      "name": "Judge's gavel",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E0F08",
+        "c1": "#7A4A2B",
+        "c2": "#B88454",
+        "c3": "#E8C99A",
+        "c4": "#3F2416",
+        "tint": "#E4DBD5",
+        "accent": "#E8C99A",
+        "shadow": "#3A2113",
+        "shine": "#D7C9BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toy-hammer",
+      "name": "Toy hammer",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2A0A3D",
+        "c1": "#FF4F7B",
+        "c2": "#FFD23F",
+        "c3": "#3EC1D3",
+        "c4": "#8BD346",
+        "tint": "#FFDCE5",
+        "accent": "#FFD23F",
+        "shadow": "#6A1F50",
+        "shine": "#FFCAD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-tool",
+      "name": "Pastel toolbox",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3B3550",
+        "c1": "#B8C4E8",
+        "c2": "#F6C1CF",
+        "c3": "#FFE7A8",
+        "c4": "#C6EBD8",
+        "tint": "#F1F3FA",
+        "accent": "#F6C1CF",
+        "shadow": "#61607E",
+        "shine": "#EAEDF8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-hammer",
+      "name": "Chrome hammer",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1F2340",
+        "c1": "#C9D2EA",
+        "c2": "#FF8BE0",
+        "c3": "#8EE3F5",
+        "c4": "#F0F3FA",
+        "tint": "#F4F6FB",
+        "accent": "#FF8BE0",
+        "shadow": "#525873",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-forge",
+      "name": "Neon forge",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF7A1F",
+        "c1": "#1A0E05",
+        "c2": "#3DF2FF",
+        "c3": "#FFE14D",
+        "c4": "#FF2E7E",
+        "tint": "#76390F",
+        "accent": "#3DF2FF",
+        "shadow": "#0A0602",
+        "shine": "#FFC39A",
+        "edge": "#171112"
+      }
+    },
+    {
+      "id": "seventies-shop",
+      "name": "70s workshop",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#E9A23B",
+        "c2": "#C8582B",
+        "c3": "#3D7068",
+        "c4": "#8E3B2E",
+        "tint": "#FBECD8",
+        "accent": "#F6D8A8",
+        "shadow": "#633F19",
+        "shine": "#F8E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "barn-tools",
+      "name": "Barn tools",
+      "tags": [
+        "vintage",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F1A14",
+        "c1": "#8C3B2E",
+        "c2": "#C9A46B",
+        "c3": "#4E6B5C",
+        "c4": "#EADBC5",
+        "tint": "#E8D8D5",
+        "accent": "#C9A46B",
+        "shadow": "#40241C",
+        "shine": "#DDC4C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-ramp",
+      "name": "Blue steel ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0B1A33",
+        "c1": "#4F7CAC",
+        "c2": "#9FBCDD",
+        "c3": "#2C4F78",
+        "c4": "#DCE7F3",
+        "tint": "#DCE5EE",
+        "accent": "#9FBCDD",
+        "shadow": "#1F3757",
+        "shine": "#CAD8E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "iron",
+      "name": "Cast iron",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#0A0A0A",
+        "c1": "#6B6B6B",
+        "c2": "#B5B5B5",
+        "c3": "#3A3A3A",
+        "c4": "#E6E6E6",
+        "tint": "#E1E1E1",
+        "accent": "#E6E6E6",
+        "shadow": "#272727",
+        "shine": "#D3D3D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "shipwright",
+      "name": "Shipwright",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062A3A",
+        "c1": "#2F7E9A",
+        "c2": "#C6A27A",
+        "c3": "#0F4C63",
+        "c4": "#EAF4F7",
+        "tint": "#D5E5EB",
+        "accent": "#F2B25C",
+        "shadow": "#124357",
+        "shine": "#C1D8E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "forester",
+      "name": "Forester",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#16261A",
+        "c1": "#5B7F4A",
+        "c2": "#A0703F",
+        "c3": "#2F4A2A",
+        "c4": "#E2D9B5",
+        "tint": "#DEE5DB",
+        "accent": "#E2D9B5",
+        "shadow": "#2B4128",
+        "shine": "#CED9C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-hammer",
+      "name": "Golden hammer",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A1F05",
+        "c1": "#D4AF37",
+        "c2": "#2A2A2A",
+        "c3": "#F5E7A1",
+        "c4": "#8C6D1F",
+        "tint": "#F6EFD7",
+        "accent": "#FFF3B0",
+        "shadow": "#5D4A14",
+        "shine": "#F2E7C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#E6C25A",
+        "c1": "#18181B",
+        "c2": "#E6C25A",
+        "c3": "#3A3A3F",
+        "c4": "#F6E7B0",
+        "tint": "#6A5C34",
+        "accent": "#E6C25A",
+        "shadow": "#000000",
+        "shine": "#F4E4B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-split",
+      "name": "Autumn split",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A1004",
+        "c1": "#B45309",
+        "c2": "#78350F",
+        "c3": "#FCD34D",
+        "c4": "#65A30D",
+        "tint": "#F0DDCE",
+        "accent": "#FCD34D",
+        "shadow": "#532406",
+        "shine": "#E9CBB5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0050EF",
+        "c3": "#FFFFFF",
+        "c4": "#D10000",
+        "tint": "#FFF6CC",
+        "accent": "#0050EF",
+        "shadow": "#4D4000",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "build-blue",
+      "name": "Build blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#2563EB",
+        "c2": "#F59E0B",
+        "c3": "#DBEAFE",
+        "c4": "#1E3A8A",
+        "tint": "#D3E0FB",
+        "accent": "#F59E0B",
+        "shadow": "#133071",
+        "shine": "#BED0F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine tool",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A3D",
+        "c1": "#00C2FF",
+        "c2": "#FF2E93",
+        "c3": "#FFE600",
+        "c4": "#FF5F1F",
+        "tint": "#CCF3FF",
+        "accent": "#FFE600",
+        "shadow": "#1E4177",
+        "shine": "#B3EDFF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

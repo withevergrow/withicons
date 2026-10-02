@@ -1,5 +1,9 @@
-import { icon, esc, page, write, crumbs, cvar, code, ORIGIN, STYLES, askAI } from './lib.mjs'
+import { icon, esc, page, write, crumbs, cvar, code, ORIGIN, STYLES, askAI, N_ICONS, N_STYLES, word } from './lib.mjs'
 import { GUIDES, GROUPS } from './guides-data.mjs'
+import { buildAnimateGuide, ANIMATE } from './guide-animate.mjs'
+import { buildFormatsGuide, WHICH } from './guide-formats.mjs'
+import { MOTION, PRESETS, hasStyle } from './lib.mjs'
+import { wm, motionAssets } from './motion.mjs'
 
 const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
 const bars = n => Array.from({ length: n }, (_, i) => `<span class="mk-ph" style="--w:${[62, 78, 54, 70, 46][i % 5]}%"></span>`).join('')
@@ -162,7 +166,7 @@ function guidePage(g) {
 
   <section class="pg-cta" data-reveal>
     <h2>Ready? Find your icon.</h2>
-    <p>300 icons, seven styles, all free.</p>
+    <p>${N_ICONS} icons, ${word(N_STYLES)} styles, all free.</p>
     <a class="btn btn-ink" href="../icons.html">${I('search', 'line', 18)} Browse icons</a>
   </section>
 </div>`
@@ -186,10 +190,20 @@ function indexPage() {
     </div>
   </section>
 
+  <section class="gi-feature" aria-labelledby="feat-h" data-reveal style="--g:${cvar(ANIMATE.color)}">
+    <div class="gi-feature-art" aria-hidden="true" data-motion-area>${['bell', 'heart', 'star'].filter(n => MOTION[n] && MOTION[n].loop).map((n, i) => { const s = [hasStyle('kawaii') ? 'kawaii' : 'duo', 'solid', hasStyle('sticker') ? 'sticker' : 'gloss'][i]; return `<span style="--g:${cvar(s)}">${wm(n, s, 44, MOTION[n].loop)}</span>` }).join('')}</div>
+    <div class="gi-feature-copy">
+      <span class="gi-feature-tag">New</span>
+      <h2 id="feat-h">Make an icon move</h2>
+      <p>Bells that ring, hearts that beat: pick from ${PRESETS.length} motions, then download an animated SVG for your website or a GIF for your slides. No code.</p>
+    </div>
+    <a class="btn btn-ink" href="${ANIMATE.slug}.html">Animate an icon <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </section>
+
   <section class="gi-helper" data-reveal aria-labelledby="helper-h">
     <div>
       <h2 id="helper-h">Not sure which file to download?</h2>
-      <p>Tap where your icon is going.</p>
+      <p>Tap where your icon is going. For GIF, MP4, Lottie, PowerPoint and every other format, read <a href="${WHICH.slug}.html">which file should I use?</a></p>
     </div>
     <div class="gi-helper-btns" role="group" aria-label="Where is the icon going?">
       ${GUIDES.map((g, i) => `<button type="button" data-helper="${i}"${i === 0 ? ' aria-pressed="true"' : ' aria-pressed="false"'} style="--g:${cvar(g.color)}">${esc(g.app)}</button>`).join('')}
@@ -226,7 +240,7 @@ function indexPage() {
       <article data-reveal style="--g:${cvar('line')}">
         <div class="gi-b-art" aria-hidden="true"><span class="gi-file-chip">SVG</span><span class="gi-file-chip png">PNG</span></div>
         <h3>SVG or PNG?</h3>
-        <p><b>SVG</b> stays sharp at any size and can often be recoloured inside the app. <b>PNG</b> is a normal picture that works everywhere. If the app takes SVG, use it. If not, use a PNG at least twice the size you’ll show it.</p>
+        <p><b>SVG</b> stays sharp at any size and can often be recoloured inside the app. <b>PNG</b> is a normal picture that works everywhere. If the app takes SVG, use it. If not, use a PNG at least twice the size you’ll show it. GIF, MP4 or Lottie? <a href="${WHICH.slug}.html">See every format</a>.</p>
       </article>
       <article data-reveal style="--g:${cvar('solid')}">
         <div class="gi-b-art gi-b-colors" aria-hidden="true">${['#2F5BFF', '#FF5A36', '#7B5CFF', '#22A861'].map(c => `<span style="color:${c}">${I('heart', 'solid', 30)}</span>`).join('')}</div>
@@ -251,12 +265,13 @@ function indexPage() {
     <a class="btn btn-ink" href="../icons.html">${I('search', 'line', 18)} Browse icons</a>
   </section>
 </div>`
-  const ld = [{ '@type': 'CollectionPage', name: 'Use with icons anywhere', description: 'Step-by-step guides for adding free icons to slides, documents, design tools, websites and email signatures.', url: ORIGIN + '/' + path, hasPart: GUIDES.map(g => ({ '@type': 'HowTo', name: g.title, url: `${ORIGIN}/guides/${g.slug}.html` })) }]
-  write(path, page({ path, current: 'guides', title: 'How to use free icons in Slides, Canva, Word, websites and more · with icons', ogTitle: 'Use with icons anywhere', desc: 'Simple, illustrated guides for adding free icons to Google Slides, PowerPoint, Keynote, Canva, Figma, Docs, Word, Notion, WordPress, Webflow, Framer, Wix, Squarespace, email signatures and HTML.', body, ld, crumbsLd: [['Home', ''], ['How to use', path]], bodyClass: 'pg-guides' }))
+  const ld = [{ '@type': 'CollectionPage', name: 'Use with icons anywhere', description: 'Step-by-step guides for adding free icons to slides, documents, design tools, websites and email signatures.', url: ORIGIN + '/' + path, hasPart: [...GUIDES, ANIMATE, WHICH].map(g => ({ '@type': 'HowTo', name: g.title, url: `${ORIGIN}/guides/${g.slug}.html` })) }]
+  write(path, page({ path, current: 'guides', title: 'How to use free icons in Slides, Canva, Word, websites and more · with icons', ogTitle: 'Use with icons anywhere', desc: 'Simple, illustrated guides for adding free icons to Google Slides, PowerPoint, Keynote, Canva, Figma, Docs, Word, Notion, WordPress, Webflow, Framer, Wix, Squarespace, email signatures and HTML.', body, ld, crumbsLd: [['Home', ''], ['How to use', path]], bodyClass: 'pg-guides', styles: motionAssets().css, scripts: motionAssets().js }))
 }
 
 export function buildGuides() {
   GUIDES.forEach(guidePage)
+  const extra = [buildAnimateGuide(), buildFormatsGuide()]
   indexPage()
-  return GUIDES.map(g => g.slug)
+  return [...GUIDES.map(g => g.slug), ...extra]
 }

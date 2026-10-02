@@ -1,0 +1,81 @@
+{
+  "name": "network",
+  "category": "devices",
+  "description": "One node branching to three connected nodes for networks, LAN, topology and infrastructure.",
+  "aliases": [
+    "lan",
+    "topology",
+    "network-tree",
+    "ethernet",
+    "intranet",
+    "local-network",
+    "network-diagram",
+    "connected-devices",
+    "nodes",
+    "infrastructure-map"
+  ],
+  "tags": [
+    "devices",
+    "network",
+    "infrastructure",
+    "topology",
+    "hierarchy",
+    "connection"
+  ],
+  "paths": [
+    {
+      "d": "M10 2.5 H14 A1.5 1.5 0 0 1 15.5 4 V6 A1.5 1.5 0 0 1 14 7.5 H10 A1.5 1.5 0 0 1 8.5 6 V4 A1.5 1.5 0 0 1 10 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 17 H5 A1 1 0 0 1 6 18 V20 A1 1 0 0 1 5 21 H3 A1 1 0 0 1 2 20 V18 A1 1 0 0 1 3 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11 17 H13 A1 1 0 0 1 14 18 V20 A1 1 0 0 1 13 21 H11 A1 1 0 0 1 10 20 V18 A1 1 0 0 1 11 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19 17 H21 A1 1 0 0 1 22 18 V20 A1 1 0 0 1 21 21 H19 A1 1 0 0 1 18 20 V18 A1 1 0 0 1 19 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7.5 V17 M4 17 V12.5 H20 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 2.5 H14 A1.5 1.5 0 0 1 15.5 4 V6 A1.5 1.5 0 0 1 14 7.5 H10 A1.5 1.5 0 0 1 8.5 6 V4 A1.5 1.5 0 0 1 10 2.5 Z",
+    "M3 17 H5 A1 1 0 0 1 6 18 V20 A1 1 0 0 1 5 21 H3 A1 1 0 0 1 2 20 V18 A1 1 0 0 1 3 17 Z",
+    "M11 17 H13 A1 1 0 0 1 14 18 V20 A1 1 0 0 1 13 21 H11 A1 1 0 0 1 10 20 V18 A1 1 0 0 1 11 17 Z",
+    "M19 17 H21 A1 1 0 0 1 22 18 V20 A1 1 0 0 1 21 21 H19 A1 1 0 0 1 18 20 V18 A1 1 0 0 1 19 17 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "networking",
+    "network map",
+    "network topology",
+    "computer network",
+    "devices",
+    "connected",
+    "connections",
+    "hub",
+    "switch",
+    "network switch",
+    "hierarchy",
+    "org chart",
+    "structure",
+    "tree",
+    "branches",
+    "distribution",
+    "system architecture",
+    "architecture",
+    "infrastructure",
+    "it",
+    "sitemap",
+    "site map",
+    "subnet",
+    "networks",
+    "netwrok"
+  ]
+}

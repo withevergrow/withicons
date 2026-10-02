@@ -1,0 +1,71 @@
+{
+  "name": "file-up",
+  "category": "files",
+  "description": "A page with an up arrow for uploading or exporting a file.",
+  "aliases": [
+    "file-export",
+    "file-arrow-up",
+    "upload-document",
+    "document-upload",
+    "file-send",
+    "export-document",
+    "document-export",
+    "send-file",
+    "share-file"
+  ],
+  "tags": [
+    "file",
+    "upload",
+    "export",
+    "arrow",
+    "document",
+    "send"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M12 18 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 14.5 L12 11.5 L15 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M12 18 V11.5",
+    "M9 14.5 L12 11.5 L15 14.5"
+  ],
+  "synonyms": [
+    "upload",
+    "upload file",
+    "export",
+    "send",
+    "share",
+    "attach",
+    "attach file",
+    "submit document",
+    "publish",
+    "push",
+    "save to cloud",
+    "send document",
+    "outgoing file",
+    "submit",
+    "hand in",
+    "file transfer",
+    "upload attachment",
+    "arrow up",
+    "uplaod"
+  ]
+}

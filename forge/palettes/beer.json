@@ -1,0 +1,434 @@
+{
+  "name": "beer",
+  "palettes": [
+    {
+      "id": "golden-lager",
+      "name": "Golden lager",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2400",
+        "c1": "#F5B82E",
+        "c2": "#FFF6DC",
+        "c3": "#E39A1A",
+        "c4": "#FFE08A",
+        "tint": "#FDF1D5",
+        "accent": "#FFF6DC",
+        "shadow": "#855F12",
+        "shine": "#FCEAC0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pilsner",
+      "name": "Pilsner",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3000",
+        "c1": "#F9DC5C",
+        "c2": "#FFFDF2",
+        "c3": "#E8C23A",
+        "c4": "#FFF0A8",
+        "tint": "#FEF8DE",
+        "accent": "#FFFDF2",
+        "shadow": "#867525",
+        "shine": "#FDF5CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "amber-ale",
+      "name": "Amber ale",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#D9822B",
+        "c2": "#FBF1DE",
+        "c3": "#B85F12",
+        "c4": "#F2B05A",
+        "tint": "#F7E6D5",
+        "accent": "#FBF1DE",
+        "shadow": "#723F15",
+        "shine": "#F4DABF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hazy-ipa",
+      "name": "Hazy IPA",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A2400",
+        "c1": "#F7A928",
+        "c2": "#FFF3D6",
+        "c3": "#FFC95A",
+        "c4": "#6B8E4E",
+        "tint": "#FDEED4",
+        "accent": "#6B8E4E",
+        "shadow": "#865910",
+        "shine": "#FDE5BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "irish-stout",
+      "name": "Irish stout",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#5A3A28",
+        "c2": "#F2E2C4",
+        "c3": "#2E1C12",
+        "c4": "#8A6A50",
+        "tint": "#DED8D4",
+        "accent": "#F2E2C4",
+        "shadow": "#241710",
+        "shine": "#CEC4BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wheat-beer",
+      "name": "Wheat beer",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2A08",
+        "c1": "#F2C66A",
+        "c2": "#FFFBF0",
+        "c3": "#E0A83E",
+        "c4": "#F9E0A8",
+        "tint": "#FCF4E1",
+        "accent": "#F28C38",
+        "shadow": "#84682F",
+        "shine": "#FBEED2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brown-ale",
+      "name": "Brown ale",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#24120A",
+        "c1": "#8C4A26",
+        "c2": "#F4E3C8",
+        "c3": "#B5672E",
+        "c4": "#5A2E16",
+        "tint": "#E8DBD4",
+        "accent": "#F4E3C8",
+        "shadow": "#4E2815",
+        "shine": "#DDC9BE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fruit-sour",
+      "name": "Raspberry sour",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0614",
+        "c1": "#E0457A",
+        "c2": "#FFF0F4",
+        "c3": "#FF8FB1",
+        "c4": "#A3214B",
+        "tint": "#F9DAE4",
+        "accent": "#FFF0F4",
+        "shadow": "#731F3D",
+        "shine": "#F6C7D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cider",
+      "name": "Hard cider",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A06",
+        "c1": "#E8B54A",
+        "c2": "#FFF6E0",
+        "c3": "#C8452E",
+        "c4": "#6B8E4E",
+        "tint": "#FAF0DB",
+        "accent": "#C8452E",
+        "shadow": "#785821",
+        "shine": "#F8E9C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "oktoberfest",
+      "name": "Oktoberfest",
+      "tags": [
+        "seasonal",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B1F3A",
+        "c1": "#F2A928",
+        "c2": "#FFFFFF",
+        "c3": "#2F6DB5",
+        "c4": "#DCE7F5",
+        "tint": "#FCEED4",
+        "accent": "#2F6DB5",
+        "shadow": "#675633",
+        "shine": "#FBE5BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-mug",
+      "name": "Copper tankard",
+      "tags": [
+        "vintage",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2E1406",
+        "c1": "#C9773A",
+        "c2": "#F6E0CD",
+        "c3": "#8A4718",
+        "c4": "#E8B38A",
+        "tint": "#F4E4D8",
+        "accent": "#F6E0CD",
+        "shadow": "#6C3C1B",
+        "shine": "#EFD6C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pewter-stein",
+      "name": "Pewter stein",
+      "tags": [
+        "grayscale",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#141A20",
+        "c1": "#A5B0BC",
+        "c2": "#F2F2EE",
+        "c3": "#6B7785",
+        "c4": "#D2D9E0",
+        "tint": "#EDEFF2",
+        "accent": "#F2F2EE",
+        "shadow": "#4E565E",
+        "shine": "#E4E7EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "root-beer",
+      "name": "Root beer float",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E0E06",
+        "c1": "#7A3E1E",
+        "c2": "#FFF6E6",
+        "c3": "#C8102E",
+        "c4": "#B5672E",
+        "tint": "#E4D8D2",
+        "accent": "#C8102E",
+        "shadow": "#432110",
+        "shine": "#D7C5BC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "st-patricks",
+      "name": "St. Patrick's",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#0E2E14",
+        "c1": "#3FA34D",
+        "c2": "#FFFFFF",
+        "c3": "#F2C14E",
+        "c4": "#1E6B2E",
+        "tint": "#D9EDDB",
+        "accent": "#F2C14E",
+        "shadow": "#225D2B",
+        "shine": "#C5E3CA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-taproom",
+      "name": "Neon taproom",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFB13D",
+        "c1": "#1A0E08",
+        "c2": "#3DF2FF",
+        "c3": "#FF3DCB",
+        "c4": "#FFE14D",
+        "tint": "#D1CFCE",
+        "accent": "#3DF2FF",
+        "shadow": "#0A0603",
+        "shine": "#BAB7B5",
+        "edge": "#040201"
+      }
+    },
+    {
+      "id": "seventies-pub",
+      "name": "70s pub sign",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E9A23B",
+        "c2": "#F4E3B5",
+        "c3": "#C2552D",
+        "c4": "#3D7068",
+        "tint": "#FBECD8",
+        "accent": "#C2552D",
+        "shadow": "#774D1C",
+        "shine": "#F8E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "craft-label",
+      "name": "Craft label",
+      "tags": [
+        "earthy",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E2A1A",
+        "c1": "#C9A86A",
+        "c2": "#F2EAD8",
+        "c3": "#3E6B3A",
+        "c4": "#8C3B2E",
+        "tint": "#F4EEE1",
+        "accent": "#8C3B2E",
+        "shadow": "#625C3A",
+        "shine": "#EFE5D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kawaii-brew",
+      "name": "Kawaii brew",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A2A20",
+        "c1": "#FFD98A",
+        "c2": "#FFF8EC",
+        "c3": "#FFADC6",
+        "c4": "#B5E3C3",
+        "tint": "#FFF7E8",
+        "accent": "#FFADC6",
+        "shadow": "#92704A",
+        "shine": "#FFF4DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-brew",
+      "name": "Y2K brew",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#C9BEFF",
+        "c2": "#FFFFFF",
+        "c3": "#FF9EE8",
+        "c4": "#C9FF6B",
+        "tint": "#F4F2FF",
+        "accent": "#FF9EE8",
+        "shadow": "#6A6196",
+        "shine": "#EFECFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "honey-ramp",
+      "name": "Honey ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3A2400",
+        "c1": "#F2B52E",
+        "c2": "#FBE2A0",
+        "c3": "#B07A0A",
+        "c4": "#FFF6DC",
+        "tint": "#FCF0D5",
+        "accent": "#FBE2A0",
+        "shadow": "#845E12",
+        "shine": "#FBE9C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "summer-shandy",
+      "name": "Summer shandy",
+      "tags": [
+        "seasonal",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3000",
+        "c1": "#FFE36E",
+        "c2": "#FFFFFF",
+        "c3": "#FFB347",
+        "c4": "#9DBF6E",
+        "tint": "#FFF9E2",
+        "accent": "#FFB347",
+        "shadow": "#89782C",
+        "shine": "#FFF7D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFFFFF",
+        "c3": "#A35A00",
+        "c4": "#0050EF",
+        "tint": "#FFF6CC",
+        "accent": "#0050EF",
+        "shadow": "#665500",
+        "shine": "#FFF2B3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

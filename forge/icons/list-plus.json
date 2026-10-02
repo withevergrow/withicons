@@ -1,0 +1,81 @@
+{
+  "name": "list-plus",
+  "category": "actions",
+  "description": "Lines of a list with a plus sign for adding a new item or adding to a playlist.",
+  "aliases": [
+    "add-to-list",
+    "list-add",
+    "playlist-add",
+    "add-to-playlist",
+    "new-list-item",
+    "queue-add",
+    "add-to-queue",
+    "append-item",
+    "list-append",
+    "add-list-item"
+  ],
+  "tags": [
+    "list",
+    "add",
+    "playlist",
+    "queue",
+    "new item",
+    "append"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M3 18 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M18 15 V21",
+      "plate": "S"
+    },
+    {
+      "d": "M15 18 H21",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "append",
+    "add item",
+    "add to list",
+    "new item",
+    "new entry",
+    "new task",
+    "add task",
+    "add todo",
+    "add to-do",
+    "add row",
+    "add line",
+    "add song",
+    "add track",
+    "add to playlist",
+    "save to playlist",
+    "add to queue",
+    "play next",
+    "queue",
+    "wishlist",
+    "add to wishlist",
+    "add to collection",
+    "save for later",
+    "shopping list",
+    "add bullet",
+    "insert item",
+    "list plus",
+    "plus list",
+    "grow list",
+    "list ad",
+    "playlist"
+  ]
+}

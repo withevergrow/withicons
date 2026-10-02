@@ -1,0 +1,35 @@
+{
+  "name": "list-checks",
+  "intent": "ticks off tasks like a to-do list getting done",
+  "loop": {
+    "preset": "nod",
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "list-ordered",
+      "effect": "slide-right"
+    },
+    {
+      "to": "check-square",
+      "effect": "scale"
+    }
+  ]
+}

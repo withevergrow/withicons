@@ -1,0 +1,8 @@
+{
+  "name": "dog",
+  "intent": "tilts its head like a puppy listening to you",
+  "loop": { "preset": "tilt", "origin": [12, 20.5], "amount": 0.7, "duration": 3.2 },
+  "hover": { "preset": "nod", "origin": [12, 20.5], "amount": 1.1 },
+  "alt": [ { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.8 }, { "preset": "bounce", "amount": 0.6 }, { "preset": "jelly", "origin": [12, 20.5] } ],
+  "swap": [ { "to": "cat", "effect": "morph" }, { "to": "dog@solid", "effect": "scale" }, { "to": "paw-print", "effect": "slide-up" } ]
+}

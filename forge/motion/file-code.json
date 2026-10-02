@@ -1,0 +1,33 @@
+{
+  "name": "file-code",
+  "intent": "ticks like code being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.5,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "code",
+      "effect": "flip"
+    },
+    {
+      "to": "file",
+      "effect": "fade"
+    }
+  ]
+}

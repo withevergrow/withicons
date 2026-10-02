@@ -1,0 +1,425 @@
+{
+  "name": "parking",
+  "palettes": [
+    {
+      "id": "euro-blue",
+      "name": "Euro blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A1838",
+        "c1": "#1F5BBF",
+        "c2": "#F4F6FA",
+        "c3": "#A9C4EE",
+        "c4": "#F2B134",
+        "tint": "#D2DEF2",
+        "accent": "#F2B134",
+        "shadow": "#0E2754",
+        "shine": "#AAC1E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "us-green",
+      "name": "US green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#08200F",
+        "c1": "#1E7A3E",
+        "c2": "#F3F6F2",
+        "c3": "#A6D4B4",
+        "c4": "#F2C230",
+        "tint": "#D2E4D8",
+        "accent": "#F2C230",
+        "shadow": "#0D341A",
+        "shine": "#AACCB6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "permit-red",
+      "name": "Permit red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#250808",
+        "c1": "#D3262E",
+        "c2": "#F7F3F0",
+        "c3": "#1F4FA8",
+        "c4": "#F3B9BC",
+        "tint": "#F6D4D5",
+        "accent": "#1F4FA8",
+        "shadow": "#551013",
+        "shine": "#EEADB0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "garage-concrete",
+      "name": "Garage concrete",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1A1C1F",
+        "c1": "#9AA0A6",
+        "c2": "#F2C230",
+        "c3": "#4A5058",
+        "c4": "#E3E6E9",
+        "tint": "#EBECED",
+        "accent": "#F2C230",
+        "shadow": "#3E4043",
+        "shine": "#D9DBDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ev-charging",
+      "name": "EV charging",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#062A22",
+        "c1": "#1FC28C",
+        "c2": "#F2FFF9",
+        "c3": "#2D7FF9",
+        "c4": "#A8F0D6",
+        "tint": "#D2F3E8",
+        "accent": "#2D7FF9",
+        "shadow": "#0D513B",
+        "shine": "#AAE8D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "valet-black",
+      "name": "Valet black",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#050507",
+        "c1": "#45454F",
+        "c2": "#D4AF37",
+        "c3": "#F2EBD5",
+        "c4": "#8A8A96",
+        "tint": "#DADADC",
+        "accent": "#D4AF37",
+        "shadow": "#1A1A1E",
+        "shine": "#B8B8BC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "accessible-bay",
+      "name": "Accessible bay",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050B5",
+        "c2": "#FFFFFF",
+        "c3": "#FFD200",
+        "c4": "#E00000",
+        "tint": "#CCDCF0",
+        "accent": "#FFD200",
+        "shadow": "#001C40",
+        "shine": "#9EBDE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "office-park",
+      "name": "Office park",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A33",
+        "c1": "#2A5DA8",
+        "c2": "#EEF2F8",
+        "c3": "#6C7A8C",
+        "c4": "#00A3A3",
+        "tint": "#D4DFEE",
+        "accent": "#00A3A3",
+        "shadow": "#12294A",
+        "shine": "#AEC1DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-lot",
+      "name": "Pastel lot",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#39375A",
+        "c1": "#B9D3FF",
+        "c2": "#FFD3E2",
+        "c3": "#FFF2B3",
+        "c4": "#C7F0DC",
+        "tint": "#F1F6FF",
+        "accent": "#FFD3E2",
+        "shadow": "#525B75",
+        "shine": "#E4EEFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-p",
+      "name": "Candy P",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3E1238",
+        "c1": "#FF6FB0",
+        "c2": "#FFF1A8",
+        "c3": "#86E8FF",
+        "c4": "#B892FF",
+        "tint": "#FFE2EF",
+        "accent": "#86E8FF",
+        "shadow": "#6C2D4E",
+        "shine": "#FFC8E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-garage",
+      "name": "Neon garage",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F2F6FF",
+        "c1": "#2D6BFF",
+        "c2": "#FF3DB4",
+        "c3": "#39FFD2",
+        "c4": "#F8F04A",
+        "tint": "#ABC4FF",
+        "accent": "#FF3DB4",
+        "shadow": "#173680",
+        "shine": "#AFC7FF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "retro-motel",
+      "name": "Retro motel",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2C1608",
+        "c1": "#E8622E",
+        "c2": "#F4C14A",
+        "c3": "#2F7B78",
+        "c4": "#F3E5C3",
+        "tint": "#FAE0D5",
+        "accent": "#F4C14A",
+        "shadow": "#5E2913",
+        "shine": "#F6C3B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-enamel",
+      "name": "Vintage enamel",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1C2633",
+        "c1": "#3E6A8C",
+        "c2": "#F1E9D6",
+        "c3": "#B23A2E",
+        "c4": "#C9A24A",
+        "tint": "#D8E1E8",
+        "accent": "#B23A2E",
+        "shadow": "#1E3140",
+        "shine": "#B6C6D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-lot",
+      "name": "Sunset lot",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2A0E1E",
+        "c1": "#FF7A4A",
+        "c2": "#FFD27A",
+        "c3": "#B33D6B",
+        "c4": "#48306E",
+        "tint": "#FFE4DB",
+        "accent": "#FFD27A",
+        "shadow": "#662F23",
+        "shine": "#FFCCBA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "park-and-ride",
+      "name": "Park & ride",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#12230F",
+        "c1": "#4A9A4A",
+        "c2": "#F5F0DC",
+        "c3": "#E8B840",
+        "c4": "#2D5A2D",
+        "tint": "#DBEBDB",
+        "accent": "#E8B840",
+        "shadow": "#1F401E",
+        "shine": "#BAD9BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-pier",
+      "name": "Ocean pier",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#082A3A",
+        "c1": "#1F95B8",
+        "c2": "#F4EBD3",
+        "c3": "#F27058",
+        "c4": "#9DDCE8",
+        "tint": "#D2EAF1",
+        "accent": "#F27058",
+        "shadow": "#0E4152",
+        "shine": "#AAD7E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "snow-day",
+      "name": "Snow day",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#13243A",
+        "c1": "#8FB8E0",
+        "c2": "#FFFFFF",
+        "c3": "#D23A3A",
+        "c4": "#4A7AA8",
+        "tint": "#E9F1F9",
+        "accent": "#D23A3A",
+        "shadow": "#384B60",
+        "shine": "#D4E4F3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-leaves",
+      "name": "Autumn leaves",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2B130A",
+        "c1": "#C0562A",
+        "c2": "#F4E2C2",
+        "c3": "#E8A83E",
+        "c4": "#6E7A38",
+        "tint": "#F2DDD4",
+        "accent": "#E8A83E",
+        "shadow": "#502412",
+        "shine": "#E7BFAE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-indigo",
+      "name": "Mono indigo",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0E0F33",
+        "c1": "#4A4FB8",
+        "c2": "#A6A9E8",
+        "c3": "#262A80",
+        "c4": "#E3E4F8",
+        "tint": "#DBDCF1",
+        "accent": "#262A80",
+        "shadow": "#1E2150",
+        "shine": "#BABCE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#707070",
+        "c2": "#F2F2F2",
+        "c3": "#B5B5B5",
+        "c4": "#3A3A3A",
+        "tint": "#E2E2E2",
+        "accent": "#B5B5B5",
+        "shadow": "#2D2D2D",
+        "shine": "#C9C9C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-p",
+      "name": "Dopamine P",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C1236",
+        "c1": "#FF4F8B",
+        "c2": "#FFE24A",
+        "c3": "#2EC4B6",
+        "c4": "#7B5CFF",
+        "tint": "#FFDCE8",
+        "accent": "#2EC4B6",
+        "shadow": "#622141",
+        "shine": "#FFBCD3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-lot",
+      "name": "Y2K lot",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#221A4C",
+        "c1": "#A6B8FF",
+        "c2": "#FF92E0",
+        "c3": "#9CFFF2",
+        "c4": "#FFF59A",
+        "tint": "#EDF1FF",
+        "accent": "#FF92E0",
+        "shadow": "#444870",
+        "shine": "#DDE4FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

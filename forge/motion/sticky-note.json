@@ -1,0 +1,40 @@
+{
+  "name": "sticky-note",
+  "intent": "flutters from its top edge like a stuck-on note",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "sticky-note@solid",
+      "effect": "fade"
+    }
+  ]
+}

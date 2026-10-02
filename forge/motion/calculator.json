@@ -1,0 +1,32 @@
+{
+  "name": "calculator",
+  "intent": "taps away like keys adding up a total",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "type",
+    "amount": 1,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "percent",
+      "effect": "fade"
+    },
+    {
+      "to": "receipt",
+      "effect": "slide-up"
+    }
+  ]
+}

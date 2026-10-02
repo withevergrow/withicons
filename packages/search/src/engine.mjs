@@ -2,7 +2,7 @@
 // This file is the single source; forge/lib/emit-search.mjs wraps it into ESM, CJS and a browser global.
 // Keep it free of imports and of anything environment-specific.
 
-export const ENGINE_VERSION = '1.1.0'
+export const ENGINE_VERSION = '1.3.0'
 
 // ---------------------------------------------------------------- text normalisation
 const FOLD = { 'ß': 'ss', 'æ': 'ae', 'œ': 'oe', 'ø': 'o', 'ł': 'l', 'đ': 'd', 'ð': 'd', 'þ': 'th', 'ı': 'i' }
@@ -194,7 +194,23 @@ const STOP = new Set(('a an the of for to in on at by with and or my your our me
 // UI modifiers: they may score, but a result never has to contain them.
 const SOFT = new Set(['button', 'btn', 'ui', 'outline', 'outlined', 'filled', 'fill', 'stroke', 'small', 'big', 'large',
   'simple', 'basic', 'flat', 'style', 'colored', 'coloured', 'mono', 'monochrome'])
-const STYLE_WORDS = { outline: 'line', outlined: 'line', stroke: 'line', filled: 'solid', fill: 'solid', duotone: 'duo', glossy: 'gloss', engraved: 'engrave', sketchy: 'sketch', handdrawn: 'sketch' }
+const STYLE_WORDS = {
+  outline: 'line', outlined: 'line', stroke: 'line', filled: 'solid', fill: 'solid', duotone: 'duo', glossy: 'gloss', engraved: 'engrave', sketchy: 'sketch', handdrawn: 'sketch',
+  glassmorphism: 'glass', glassmorphic: 'glass', glassy: 'glass', frosted: 'glass', frostedglass: 'glass', translucent: 'glass',
+  cute: 'kawaii', kawai: 'kawaii', chibi: 'kawaii', adorable: 'kawaii',
+  stickers: 'sticker', y2k: 'sticker', scrapbook: 'sticker', diecut: 'sticker',
+  '8bit': 'pixel', '16bit': 'pixel', pixelated: 'pixel', pixelart: 'pixel', pixels: 'pixel',
+  vintage: 'retro', '70s': 'retro', '80s': 'retro', seventies: 'retro', eighties: 'retro', '1970s': 'retro', '1980s': 'retro',
+  twotone: 'duo', bicolor: 'duo', bicolour: 'duo', shiny: 'gloss', etched: 'engrave', engraving: 'engrave', etching: 'engrave',
+  schematic: 'blueprint', doodle: 'sketch', doodles: 'sketch', lineart: 'line',
+}
+// two-word style phrases are joined before parsing: "8 bit" (from "8-bit") -> "8bit"
+const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart' }
+// words after a style word that mark it as a style request ("glass style home", "pixel look")
+const STYLE_MARK = new Set(['style', 'styled', 'look', 'effect', 'version', 'variant', 'theme', 'aesthetic'])
+// the original seven styles and their words keep their exact 1.1 parsing
+const LEGACY_STYLE_WORDS = new Set(['outline', 'outlined', 'stroke', 'filled', 'fill', 'duotone', 'glossy', 'engraved', 'sketchy', 'handdrawn',
+  'line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch'])
 
 // Small concept map for natural-language queries. Keys and values are plain vocabulary, never icon names
 // by fiat: an expansion only helps an icon that itself carries that word in its name/aliases/synonyms/tags.
@@ -293,6 +309,17 @@ const CONCEPTS = [
   ['history past recent', 'history clock recent'],
   ['game games gaming play controller', 'gamepad game controller'],
   ['weather forecast climate', 'weather cloud sun rain'],
+  ['meal meals lunch dinner supper brunch eat eating hungry dining cuisine dish dishes plate', 'food meal restaurant dinner utensils'],
+  ['candy candies sweet sweets lollipop chocolate treat treats', 'dessert sweet cake donut cookie'],
+  ['bread toast pastry pastries baguette croissant bakery', 'bakery bread cake cookie'],
+  ['meat steak bbq barbecue grill grilled chicken beef', 'food meal dinner burger'],
+  ['cocktail cocktails booze liquor drinks', 'alcohol drink wine beer'],
+  ['sport sports athletics athlete nba nfl fifa league tournament olympic', 'sports sport ball medal'],
+  ['yoga meditation pilates stretching training', 'fitness exercise workout gym'],
+  ['zoo wildlife creature creatures', 'animal animals wildlife pet'],
+  ['tourism tourist sightseeing', 'travel tourist binoculars map camera'],
+  ['autumn fall', 'autumn leaf'],
+  ['pool swim swimming', 'swimming water beach'],
 ]
 
 // field weights: name > alias > synonym > tag > category > description
@@ -417,6 +444,8 @@ export function create(index) {
   }
   // a token that names something (name/alias/synonym/tag word, or a compact phrase of one)
   const useful = id => fields()[id] < 9 || phraseOf.has(tokens[id])
+  // the word names something in the library (name/alias/synonym/tag), so it is content, not just a style word
+  const namesThing = w => { const id = vocab.get(w); return id !== undefined && fields()[id] < 9 }
   let phon = null
   function phonIndex() {
     if (phon) return phon
@@ -477,9 +506,13 @@ export function create(index) {
       if (s > bs) { bs = s; best = [w.slice(0, k), w.slice(k)] }
     }
     // a near-miss of one real word beats two short ones ("shoppng" is shopping, not shop + png)
-    if (best) for (const m of matchToken(w, false)) if (m.kind === 3 && m.d <= 1 && useful(m.id)) return null
+    // ("microfone" is microphone, not micro + fone: with a short half, a two-edit near-miss still wins)
+    const near = best && Math.min(best[0].length, best[1].length) <= 4 ? 2 : 1
+    if (best) for (const m of matchToken(w, false)) if (m.kind === 3 && m.d <= near && useful(m.id)) return null
     return best
   }
+  // a style name or style word this index has ("kawaii", "blueprint", "vintage") -> the style, else null
+  const styleOf = w => (styleIdx.has(w) ? w : STYLE_WORDS[w] && styleIdx.has(STYLE_WORDS[w]) ? STYLE_WORDS[w] : null)
   const hasPrefix = w => {
     let lo = 0, hi = T
     while (lo < hi) { const m = (lo + hi) >> 1; if (tokens[sorted[m]] < w) lo = m + 1; else hi = m }
@@ -531,9 +564,12 @@ export function create(index) {
       }
     }
     const max = maxTypos(w.length)
+    // a real word the engine knows without the vocabulary (a concept-map word or a style word: "dinner", "kawaii")
+    // is not a misspelling of a nearby one (diner, hawaii)
+    const real = exact === undefined && (concept.has(w) || !!styleOf(w))
     // a word that exists verbatim in the vocabulary is not a misspelling ("wallet" must not pull in mallet/pallet),
     // unless the data itself marks it as a known misspelling ("calender")
-    if (w.length >= 3 && (exact === undefined || knownFix(w)) && (max > 0 || out.size === 0)) {
+    if (w.length >= 3 && !real && (exact === undefined || knownFix(w)) && (max > 0 || out.size === 0)) {
       // integer edits up to max, plus one more when the extra edit is a cheap slip (adjacent key, doubled letter)
       // the extra edit is only tried for words nothing else explains (keeps "cat" from turning into car/chat)
       let known = false
@@ -569,7 +605,7 @@ export function create(index) {
     // similarity layer: only when nothing exact, stem, prefix or a one-edit typo explains the word
     let known = false, strong = false
     for (const o of out.values()) { if (o.kind < 3 || o.d === 0) known = true; if (o.kind < 3 || o.d <= 1) strong = true }
-    if (!known && w.length >= 3 && !/[0-9]/.test(w)) {
+    if (!known && !real && w.length >= 3 && !/[0-9]/.test(w)) {
       const key = phonetic(w)
       const lim = w.length <= 3 ? 1 : Math.max(2, Math.floor(w.length / 3) + 1)
       if (key.length >= (w.length <= 4 ? 3 : 2)) for (const id of phonIndex().get(key) || []) {
@@ -604,21 +640,46 @@ export function create(index) {
     let all = words(query)
     // missing spaces: "lightbulbidea" -> "lightbulb idea" (only unknown words that split into two real words)
     let split = false
-    if (all.some(w => w.length >= 6)) all = all.flatMap(w => { const sp = splitWord(w); if (sp) split = true; return sp || [w] })
+    if (all.some(w => w.length >= 6)) all = all.flatMap(w => { const sp = styleOf(w) ? null : splitWord(w); if (sp) split = true; return sp || [w] })
     // "a picture of a house", "icon of a cat": the meta word names the medium, not the subject
     all = all.filter((w, k) => !(META.has(w) && all[k + 1] === 'of' && k + 2 < all.length))
+    // "8 bit heart" -> "8bit heart": only phrases whose joined form maps to a style this index has
+    for (let k = 0; k + 1 < all.length; k++) {
+      const j = STYLE_PHRASES[all[k] + ' ' + all[k + 1]]
+      if (j && styleIdx.has(STYLE_WORDS[j] || j)) { all = all.slice(0, k).concat([j], all.slice(k + 2)); k-- }
+    }
     let style = null
     const content = all.map((w, pos) => ({ w, pos })).filter(t => !STOP.has(t.w))
     const ws = content.length ? content : all.map((w, pos) => ({ w, pos }))
     const required = [], soft = []
-    for (const t of ws) {
+    let prevStyle = false
+    ws.forEach((t, k) => {
       const w = t.w
-      if (STYLE_WORDS[w] && styleIdx.has(STYLE_WORDS[w])) style = STYLE_WORDS[w]
-      if (styleIdx.has(w) && ws.length > 1) { style = style || w; soft.push(t) }
-      else if (SOFT.has(w) && ws.length > 1) soft.push(t)
+      const wasStyle = prevStyle
+      prevStyle = false
+      if (LEGACY_STYLE_WORDS.has(w)) { // the original seven styles' words: unchanged behaviour
+        if (STYLE_WORDS[w] && styleIdx.has(STYLE_WORDS[w])) style = STYLE_WORDS[w]
+        if (styleIdx.has(w) && ws.length > 1) { style = style || w; soft.push(t) }
+        else if (STYLE_WORDS[w] && styleIdx.has(STYLE_WORDS[w]) && ws.length > 1) soft.push(t) // "glossy button"
+        else if (SOFT.has(w) && ws.length > 1) soft.push(t)
+        else required.push(t)
+        return
+      }
+      const target = styleOf(w)
+      // a style word that also names a thing ("wine glass", "pixel ruler") is only a style when it leads the
+      // query or is followed by "style"/"look" -- and never as "glass of water"
+      if (target && !(all[t.pos + 1] === 'of' && namesThing(w)) && (k === 0 || !namesThing(w) || (ws[k + 1] && STYLE_MARK.has(ws[k + 1].w)))) {
+        style = style || target
+        prevStyle = true
+        if (ws.length > 1) soft.push(t)
+        else required.push(t)
+        return
+      }
+      if ((SOFT.has(w) || (wasStyle && STYLE_MARK.has(w))) && ws.length > 1) soft.push(t)
       else required.push(t)
-    }
-    if (!required.length && soft.length) required.push(soft.shift())
+    })
+    // only soft words: the content one is required ("glossy button" -> button), else the first
+    if (!required.length && soft.length) { const c = soft.findIndex(t => !styleOf(t.w)); required.push(soft.splice(c < 0 ? 0 : c, 1)[0]) }
     return { all, required, soft, style, split, words: ws.map(t => t.w) }
   }
 
@@ -807,17 +868,35 @@ export function create(index) {
     if (fixCache.has(w)) return fixCache.get(w)
     let best = null
     const id = vocab.get(w)
-    if (id !== undefined && w.length >= 3 && fields()[id] !== F_NAME && !/[0-9]/.test(w)) {
+    // a concept-map word is a real word, never a misspelling ("dinner" is not "diner")
+    if (id !== undefined && w.length >= 3 && fields()[id] !== F_NAME && !/[0-9]/.test(w) && !concept.has(w) && !styleOf(w)) {
       const kw = phonetic(w), post = postings[id], names = new Set()
-      for (let x = 0; x < post.length; x += 2) if (post[x + 1] >= 0 && eField[post[x]] < F_CAT) names.add(eIcon[post[x]])
+      // a word used in a description is a real word ("metal" is not "medal")
+      let real = false
+      for (let x = 0; x < post.length; x += 2) {
+        if (post[x + 1] < 0) continue
+        if (eField[post[x]] >= F_CAT) { real = true; break }
+        names.add(eIcon[post[x]])
+      }
+      // a real misspelling sits next to the word it misspells on EVERY icon that carries it ("setings" on settings
+      // and user-cog); "hurt" (bandage, heart-crack) or "track" (music, truck, ...) are words in their own right
       let bd = 9
-      for (const i of names) {
-        const ic = icons[i]
-        for (const nw of ic.name.split('-').concat(...ic.aliases.map(words))) {
+      for (const i of real ? [] : names) {
+        let ib = 9, iw = null
+        const own = icons[i].name.split('-')
+        for (const nw of own.concat(...icons[i].aliases.map(words))) {
+          // a form of the icon's own word is not a misspelling: "beers" is beer (not cheers), "gamer" is game,
+          // "externally" is external, "gmail" / "ebike" are mail / bike
+          if ((own.includes(nw) && (inflection(w, nw) || variant(w, nw))) || (nw.length >= 3 && w.startsWith(nw) && /^(r|er|s|es|y|d|ed|ly)$/.test(w.slice(nw.length))) ||
+            (nw.length >= 4 && w.length === nw.length + 1 && w.endsWith(nw))) { ib = 9; iw = null; break }
           if (nw === w || nw.length < 3 || variant(w, nw) || inflection(w, nw) || fields()[vocab.get(nw)] > F_ALIAS) continue
           const d = weightedDistance(w, nw, 1.5)
-          if ((d <= 1.5 || (phonetic(nw) === kw && distance(w, nw, 2) <= 2)) && d < bd) { bd = d; best = nw }
+          const sound = phonetic(nw) === kw && distance(w, nw, 2) <= 2
+          // short words must also sound alike ("gpu" is not "cpu", "joke" is not "joy"; "fone" is "phone")
+          if ((w.length <= 4 ? sound : d <= 1.5 || sound) && d < ib) { ib = d; iw = nw }
         }
+        if (!iw) { best = null; break }
+        if (ib < bd) { bd = ib; best = iw }
       }
       if (best && fields()[id] === F_ALIAS && bd > 0.75) best = null // aliases are mostly real words: only obvious slips
     }
@@ -835,12 +914,15 @@ export function create(index) {
     let changed = !!p.split
     if (top) for (const { pos, b } of top.trace.tokens) {
       if (!b) continue
-      let t = all[pos]
-      if (CORRECTED(b.kind)) t = b.w
+      let t = all[pos], fix = null
+      if (CORRECTED(b.kind)) fix = b.w
       // "bagg", "calendarr": a stem match on a non-word that is no real inflection is a slip too
-      else if (b.kind === 2 && !vocab.has(t) && !/(s|ed|ing|er)$/.test(t) && b.w.length < t.length) t = b.w
+      else if (b.kind === 2 && !vocab.has(t) && !/(s|ed|ing|er)$/.test(t) && b.w.length < t.length) fix = b.w
       else if (b.kind !== 0) continue
-      t = shown(knownFix(t) || t)
+      fix = knownFix(fix || t) || fix
+      // only a corrected word is re-spelled: a word typed as is stays ("login" is not "log in")
+      if (!fix) continue
+      t = shown(fix)
       if (t !== all[pos]) { all[pos] = t; changed = true }
     }
     return changed ? all.join(' ') : null

@@ -1,0 +1,27 @@
+{
+  "name": "hotel",
+  "palettes": [
+    {"id":"brick-hotel","name":"Brick hotel","tags":["true-to-life","earthy"],"colors":{"ink":"#2A0E06","c1":"#B5513A","c2":"#F2D9A0","c3":"#2E3A4A","c4":"#E8DCC8","tint":"#EACEC8","accent":"#F2C14E","shadow":"#51241A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grand-hotel","name":"Grand hotel","tags":["true-to-life","luxe"],"colors":{"ink":"#2A2216","c1":"#F2E6CF","c2":"#C9A44C","c3":"#8A2A2E","c4":"#5A4A3A","tint":"#F8F2E6","accent":"#C9A44C","shadow":"#7D7360","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"art-deco-pastel","name":"Art deco pastel","tags":["true-to-life","pastel"],"colors":{"ink":"#3E1420","c1":"#F7C6CF","c2":"#7FD6C9","c3":"#FFF0B8","c4":"#E07A9A","tint":"#FBE5E9","accent":"#7FD6C9","shadow":"#6F595D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"glass-tower","name":"Glass tower","tags":["true-to-life","corporate"],"colors":{"ink":"#0A2440","c1":"#6EA8D9","c2":"#C8E4F7","c3":"#2E5A8A","c4":"#B9C3CC","tint":"#D6E7F4","accent":"#FFD166","shadow":"#314C62","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"roadside-motel","name":"Roadside motel","tags":["true-to-life","retro"],"colors":{"ink":"#06302A","c1":"#2E9C8C","c2":"#F2C14E","c3":"#E8483A","c4":"#F2EDE3","tint":"#C4E3DF","accent":"#E8483A","shadow":"#15463F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"boutique-emerald","name":"Boutique emerald","tags":["luxe"],"colors":{"ink":"#03120D","c1":"#1F5E4A","c2":"#D4AF37","c3":"#E8DCC8","c4":"#0E2E24","tint":"#C0D2CC","accent":"#D4AF37","shadow":"#0E2A21","shine":"#FFFFFF","edge":"#FFF8E1"}},
+    {"id":"booking-blue","name":"Booking blue","tags":["corporate"],"colors":{"ink":"#061838","c1":"#1E5ED6","c2":"#FFC72C","c3":"#C2D6FA","c4":"#0E2E6E","tint":"#C0D2F4","accent":"#FFC72C","shadow":"#0E2A60","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"resort-terracotta","name":"Resort terracotta","tags":["true-to-life","sunset"],"colors":{"ink":"#2E1206","c1":"#D27A50","c2":"#F2E2CC","c3":"#3E8E9E","c4":"#8A3E22","tint":"#F2DACE","accent":"#3E8E9E","shadow":"#5E3724","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ski-lodge","name":"Ski lodge","tags":["seasonal"],"colors":{"ink":"#1E0E04","c1":"#7A4A2A","c2":"#F2EDE3","c3":"#C8202E","c4":"#3A2414","tint":"#DACCC3","accent":"#F2C14E","shadow":"#372113","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"adobe-inn","name":"Adobe inn","tags":["earthy"],"colors":{"ink":"#2A1E0C","c1":"#D9B48A","c2":"#4E7A6A","c3":"#F2E6D6","c4":"#8A5A36","tint":"#F4EADE","accent":"#C66A45","shadow":"#62513E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"city-at-night","name":"City at night","tags":["dark"],"colors":{"ink":"#05081A","c1":"#2A3566","c2":"#F2D16B","c3":"#8C9AD9","c4":"#141A3A","tint":"#C3C6D4","accent":"#F2D16B","shadow":"#13182E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"powder-blue","name":"Powder blue","tags":["pastel"],"colors":{"ink":"#1E3A5A","c1":"#B8D8F0","c2":"#FFD6E0","c3":"#FFF1B5","c4":"#8AAED0","tint":"#DFEDF8","accent":"#FF9EB5","shadow":"#53616C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-hotel","name":"Candy hotel","tags":["candy"],"colors":{"ink":"#4A0A30","c1":"#FF8AC4","c2":"#FFE680","c3":"#7ADFFF","c4":"#B48CFF","tint":"#FFDEEE","accent":"#7ADFFF","shadow":"#733E58","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-strip","name":"Sunset strip","tags":["retro","sunset"],"colors":{"ink":"#2B1610","c1":"#E76F51","c2":"#F4A261","c3":"#E9C46A","c4":"#264653","tint":"#F8D7CE","accent":"#E9C46A","shadow":"#683224","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seaside-inn","name":"Seaside inn","tags":["ocean"],"colors":{"ink":"#0A2840","c1":"#3E9CD6","c2":"#F2EDE3","c3":"#F2C14E","c4":"#1E5E8A","tint":"#C9E3F4","accent":"#FF7F6B","shadow":"#1C4660","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"berry-suite","name":"Berry suite","tags":["vivid"],"colors":{"ink":"#26061A","c1":"#9E2A5A","c2":"#F2C8DA","c3":"#F2C14E","c4":"#4E0E2A","tint":"#E4C3D1","accent":"#F2C14E","shadow":"#471328","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"violet-ramp","name":"Violet ramp","tags":["mono"],"colors":{"ink":"#160E3A","c1":"#7A5CE0","c2":"#C9BDF7","c3":"#3E2A8A","c4":"#A896F0","tint":"#DAD1F6","accent":"#3E2A8A","shadow":"#372965","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"concrete","name":"Concrete","tags":["grayscale"],"colors":{"ink":"#141414","c1":"#A0A0A0","c2":"#5A5A5A","c3":"#DCDCDC","c4":"#7A7A7A","tint":"#E4E4E4","accent":"#C8C8C8","shadow":"#484848","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-resort","name":"Y2K resort","tags":["y2k"],"colors":{"ink":"#251A5A","c1":"#B9C6FF","c2":"#FF8AE2","c3":"#C6FFF1","c4":"#7A7FFF","tint":"#E0E5FF","accent":"#FF8AE2","shadow":"#535973","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"motel-sign","name":"Motel sign","tags":["neon","on-dark"],"colors":{"ink":"#FF3D6E","c1":"#2A0814","c2":"#3DF5FF","c3":"#5A1430","c4":"#120208","tint":"#6E1E3A","accent":"#3DF5FF","shadow":"#0E0206","shine":"#FFB8CA","edge":"#1A1A26"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#0050B5","c3":"#FFFFFF","c4":"#111111","tint":"#FFEC8C","accent":"#0050B5","shadow":"#735F00","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine-stay","name":"Dopamine stay","tags":["vivid","candy"],"colors":{"ink":"#2E0A05","c1":"#FF6B4A","c2":"#FFD23F","c3":"#3DDC97","c4":"#3D7BFF","tint":"#FFD6CC","accent":"#FF4F9A","shadow":"#733021","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

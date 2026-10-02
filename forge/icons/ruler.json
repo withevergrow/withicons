@@ -6,7 +6,6 @@
     "measure",
     "measurement",
     "length",
-    "scale",
     "dimensions",
     "straightedge",
     "tape-measure",
@@ -79,6 +78,7 @@
     "diy",
     "carpentry",
     "rular",
-    "ruller"
+    "ruller",
+    "scale"
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "name": "wallet",
+  "intent": "breathes calmly, pops open on hover",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "wallet@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "credit-card",
+      "effect": "slide-up"
+    },
+    {
+      "to": "coins",
+      "effect": "fade"
+    }
+  ]
+}

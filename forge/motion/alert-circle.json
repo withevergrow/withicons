@@ -1,0 +1,36 @@
+{
+  "name": "alert-circle",
+  "intent": "pulses to draw attention, shakes on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "info-circle",
+      "effect": "flip"
+    },
+    {
+      "to": "alert-circle@solid",
+      "effect": "scale"
+    }
+  ]
+}

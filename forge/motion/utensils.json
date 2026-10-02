@@ -1,0 +1,8 @@
+{
+  "name": "utensils",
+  "intent": "fork and knife rock gently, ready for the next meal",
+  "loop": { "preset": "rock", "origin": [12, 21.5], "amount": 0.4, "duration": 3 },
+  "hover": { "preset": "wiggle", "origin": [12, 20], "amount": 1 },
+  "alt": [ { "preset": "pop" }, { "preset": "jelly", "origin": [12, 21.5] }, { "preset": "tada" } ],
+  "swap": [ { "to": "utensils@solid", "effect": "scale" }, { "to": "chef-hat", "effect": "fade" } ]
+}

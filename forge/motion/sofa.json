@@ -1,0 +1,44 @@
+{
+  "name": "sofa",
+  "intent": "sinks softly like someone just sat down to relax",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.9
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bed",
+      "effect": "morph"
+    },
+    {
+      "to": "sofa@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "home",
+      "effect": "fade"
+    }
+  ]
+}

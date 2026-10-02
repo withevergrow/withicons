@@ -1,0 +1,28 @@
+{
+  "name": "coins",
+  "palettes": [
+    {"id":"gold-coins","name":"Gold coins","tags":["true-to-life","luxe"],"colors":{"ink":"#2A1E05","c1":"#F2C230","c2":"#E3A11A","c3":"#FFE48A","c4":"#C8861A","tint":"#FCF3D6","accent":"#FFFFFF","shadow":"#6D5716","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-and-silver","name":"Gold & silver","tags":["true-to-life"],"colors":{"ink":"#1F1A10","c1":"#F2C230","c2":"#C3CCD6","c3":"#FFE48A","c4":"#9AA5B1","tint":"#FCF3D6","accent":"#FFFFFF","shadow":"#6D5716","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"copper-pennies","name":"Copper pennies","tags":["true-to-life","earthy"],"colors":{"ink":"#2A1208","c1":"#D9824A","c2":"#B8602E","c3":"#F2B88A","c4":"#8A4420","tint":"#F7E6DB","accent":"#FFE48A","shadow":"#623B21","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bronze-medal","name":"Bronze & brass","tags":["true-to-life","vintage"],"colors":{"ink":"#2A1A08","c1":"#C9944A","c2":"#D9B45A","c3":"#8A6430","c4":"#E8C88A","tint":"#F4EADB","accent":"#FFFFFF","shadow":"#5A4321","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"silver-change","name":"Silver change","tags":["true-to-life","grayscale"],"colors":{"ink":"#1A1E24","c1":"#C3CCD6","c2":"#9AA5B1","c3":"#E4E9EE","c4":"#7B8794","tint":"#F3F5F7","accent":"#5AA9E6","shadow":"#585C60","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bimetal-euro","name":"Bimetal euro","tags":["true-to-life"],"colors":{"ink":"#1F1A10","c1":"#E3C25A","c2":"#C3CCD6","c3":"#F2DF9A","c4":"#A8AFBA","tint":"#F9F3DE","accent":"#4A7AC8","shadow":"#665728","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"arcade-tokens","name":"Arcade tokens","tags":["vivid"],"colors":{"ink":"#1A1033","c1":"#FFD23F","c2":"#FF4F9A","c3":"#3DD6F5","c4":"#7A3DF0","tint":"#FFF6D9","accent":"#3DD6F5","shadow":"#735E1C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"game-coins","name":"Game coins","tags":["vivid","y2k"],"colors":{"ink":"#2A1E05","c1":"#FFC933","c2":"#FF8A1F","c3":"#FFE98A","c4":"#F2453D","tint":"#FFF4D6","accent":"#3FA7F5","shadow":"#735A17","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"crypto-orange","name":"Crypto orange","tags":["vivid"],"colors":{"ink":"#2A1405","c1":"#F7931A","c2":"#5A6E9A","c3":"#FFD0A0","c4":"#C8C8D0","tint":"#FDE9D1","accent":"#5A6E9A","shadow":"#6F420C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rose-gold","name":"Rose gold","tags":["luxe","pastel"],"colors":{"ink":"#3A1A1A","c1":"#E8A89A","c2":"#D4AF37","c3":"#F7D8D0","c4":"#C8806E","tint":"#FAEEEB","accent":"#F7D8D0","shadow":"#684C45","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-tokens","name":"Pastel tokens","tags":["pastel"],"colors":{"ink":"#2A2440","c1":"#FFE6A3","c2":"#F7B8CF","c3":"#B8E0F7","c4":"#C8F2B8","tint":"#FFFAED","accent":"#F7B8CF","shadow":"#736749","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-coins","name":"Candy coins","tags":["candy"],"colors":{"ink":"#3A0E2A","c1":"#FF9ED2","c2":"#7AD7F0","c3":"#FFE36E","c4":"#B8A6F5","tint":"#FFECF6","accent":"#7AD7F0","shadow":"#73475E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"chocolate-coins","name":"Chocolate coins","tags":["seasonal"],"colors":{"ink":"#2A1408","c1":"#E3B341","c2":"#8A5A3A","c3":"#C8302A","c4":"#3A8A4A","tint":"#F9F0D9","accent":"#C8302A","shadow":"#66511D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-stack","name":"Sunset stack","tags":["sunset"],"colors":{"ink":"#2A0F1A","c1":"#FFB13D","c2":"#F2546B","c3":"#FF8A5B","c4":"#7A4FC2","tint":"#FFEFD8","accent":"#7A4FC2","shadow":"#73501B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-change","name":"70s change","tags":["retro"],"colors":{"ink":"#2A170A","c1":"#F0A830","c2":"#D9572B","c3":"#7D8F3A","c4":"#A8572B","tint":"#FCEED6","accent":"#F2D58A","shadow":"#6C4C16","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-brass","name":"Vintage brass","tags":["vintage"],"colors":{"ink":"#2A2010","c1":"#C9AE6A","c2":"#8A9A8A","c3":"#E6D8A8","c4":"#A8574A","tint":"#F4EFE1","accent":"#A8574A","shadow":"#5A4E30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-treasure","name":"Ocean treasure","tags":["ocean"],"colors":{"ink":"#062433","c1":"#F2C14E","c2":"#48B8C8","c3":"#FFE48A","c4":"#1E7A8A","tint":"#FCF3DC","accent":"#48B8C8","shadow":"#6D5723","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"jade-coins","name":"Jade coins","tags":["nature"],"colors":{"ink":"#0E2A1E","c1":"#5CBF8A","c2":"#E3B341","c3":"#B4E6CC","c4":"#2E8A5A","tint":"#DEF2E8","accent":"#E3B341","shadow":"#29563E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-chrome","name":"Y2K chrome","tags":["y2k"],"colors":{"ink":"#1F1A40","c1":"#C8D0F7","c2":"#FF8ADB","c3":"#8AF5E0","c4":"#A8B4E8","tint":"#F4F6FD","accent":"#FF8ADB","shadow":"#5A5E6F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-tokens","name":"Neon tokens","tags":["neon","on-dark"],"colors":{"ink":"#FFE14D","c1":"#1F1A05","c2":"#3DF5FF","c3":"#FF3DCB","c4":"#4A3D0A","tint":"#5F5A40","accent":"#3DF5FF","shadow":"#0A0802","shine":"#FFF3A8","edge":"#1A1A26"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#141416","c1":"#C8C8CE","c2":"#9A9AA2","c3":"#E2E2E6","c4":"#6A6A72","tint":"#F4F4F5","accent":"#6A6A72","shadow":"#5A5A5D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mono-amber","name":"Mono amber","tags":["mono"],"colors":{"ink":"#2A1A05","c1":"#F2B84A","c2":"#D9902A","c3":"#FBDDA0","c4":"#B8701A","tint":"#FCF1DB","accent":"#B8701A","shadow":"#6D5321","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD60A","c2":"#FFFFFF","c3":"#FF9F1C","c4":"#0057B8","tint":"#FFF7CE","accent":"#0057B8","shadow":"#736005","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

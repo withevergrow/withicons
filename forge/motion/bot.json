@@ -1,0 +1,43 @@
+{
+  "name": "bot",
+  "intent": "hovers like a friendly robot and blinks at you",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "blink",
+    "origin": [
+      12,
+      14
+    ],
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "brain",
+      "effect": "morph"
+    },
+    {
+      "to": "user",
+      "effect": "fade"
+    }
+  ]
+}

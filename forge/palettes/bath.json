@@ -1,0 +1,26 @@
+{
+  "name": "bath",
+  "palettes": [
+    {"id":"clawfoot-classic","name":"Clawfoot classic","tags":["true-to-life"],"colors":{"ink":"#2A2A2A","c1":"#F4F2EE","c2":"#8FC9E8","c3":"#C9A44C","c4":"#3A3A3A","tint":"#F9F8F6","accent":"#C9A44C","shadow":"#7A776F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubble-bath","name":"Bubble bath","tags":["true-to-life","pastel"],"colors":{"ink":"#12364A","c1":"#BEE6F7","c2":"#F7B2D2","c3":"#E8F7FD","c4":"#5AAED6","tint":"#E2F4FB","accent":"#F7B2D2","shadow":"#55676F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rubber-duck","name":"Rubber duck","tags":["true-to-life","vivid"],"colors":{"ink":"#3A2E05","c1":"#FFD93D","c2":"#7FD3F7","c3":"#F28C28","c4":"#FFF3B0","tint":"#FFEEA8","accent":"#F28C28","shadow":"#73621B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"eucalyptus-spa","name":"Eucalyptus spa","tags":["true-to-life","nature"],"colors":{"ink":"#1E3A30","c1":"#A8CFC0","c2":"#D8EAE0","c3":"#6E9F8A","c4":"#D9C8A8","tint":"#D8E9E3","accent":"#6E9F8A","shadow":"#4C5D56","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fifties-pink","name":"Fifties pink","tags":["vintage","retro"],"colors":{"ink":"#3E1420","c1":"#F2A7B5","c2":"#4FB8B0","c3":"#2E2E2E","c4":"#F7E3E8","tint":"#FBE6EA","accent":"#4FB8B0","shadow":"#6D4B51","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"avocado-suite","name":"Avocado suite","tags":["retro"],"colors":{"ink":"#1E2208","c1":"#8A9A3A","c2":"#C98A3A","c3":"#E8D9A8","c4":"#5A3A1E","tint":"#DEE3C8","accent":"#C98A3A","shadow":"#3E451A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"copper-tub","name":"Copper tub","tags":["luxe"],"colors":{"ink":"#2A1406","c1":"#B87333","c2":"#8FC9E8","c3":"#E8C9A0","c4":"#5A3418","tint":"#EBD8C6","accent":"#8FC9E8","shadow":"#533417","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-and-gold","name":"Black & gold","tags":["luxe","dark"],"colors":{"ink":"#08080A","c1":"#3A3A42","c2":"#C9A44C","c3":"#E8E2D6","c4":"#1A1A1E","tint":"#C8C8CA","accent":"#C9A44C","shadow":"#1A1A1E","shine":"#FFFFFF","edge":"#FFF8E1"}},
+    {"id":"terrazzo","name":"Terrazzo","tags":["earthy"],"colors":{"ink":"#2A2622","c1":"#EDE6DC","c2":"#E07A5F","c3":"#81B29A","c4":"#3D405B","tint":"#F7F4EF","accent":"#F2CC8F","shadow":"#7A7266","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"delft-blue","name":"Delft blue","tags":["vintage"],"colors":{"ink":"#0E1A36","c1":"#2A5DB0","c2":"#F2F2F0","c3":"#8FB4E8","c4":"#1A2E5A","tint":"#C3D2E9","accent":"#E8B33A","shadow":"#132A4F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sea-bath","name":"Sea bath","tags":["ocean"],"colors":{"ink":"#06283A","c1":"#2E8AB8","c2":"#7FD3F7","c3":"#F2E6CF","c4":"#145A80","tint":"#C4DEEB","accent":"#FF7F6B","shadow":"#153E53","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"stone-soak","name":"Stone soak","tags":["earthy"],"colors":{"ink":"#221E16","c1":"#B9AE9C","c2":"#8A9A7A","c3":"#E8E2D6","c4":"#5A5040","tint":"#EBE8E3","accent":"#D98E6B","shadow":"#534E46","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sorbet-soak","name":"Sorbet soak","tags":["pastel"],"colors":{"ink":"#4A2232","c1":"#FFD6E0","c2":"#BDE0FE","c3":"#FFF1B5","c4":"#CDB4DB","tint":"#FFEDF1","accent":"#FF9EB5","shadow":"#736065","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bath-bomb","name":"Bath bomb","tags":["candy"],"colors":{"ink":"#26145A","c1":"#B48CFF","c2":"#FF7AC0","c3":"#7ADFFF","c4":"#FFE45E","tint":"#EADFFF","accent":"#FFE45E","shadow":"#513F73","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rose-soak","name":"Rose soak","tags":["vivid"],"colors":{"ink":"#3A0A18","c1":"#D65A7A","c2":"#F7B2C6","c3":"#FFE0E8","c4":"#7A1E3A","tint":"#F4D1DA","accent":"#F2C14E","shadow":"#602837","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"citrus-soak","name":"Citrus soak","tags":["seasonal","vivid"],"colors":{"ink":"#3A1E05","c1":"#FFB347","c2":"#FFE066","c3":"#9BD770","c4":"#E8742A","tint":"#FFDDAC","accent":"#9BD770","shadow":"#735120","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"aqua-ramp","name":"Aqua ramp","tags":["mono"],"colors":{"ink":"#06303A","c1":"#3FB3C9","c2":"#1E7A8C","c3":"#C2EDF5","c4":"#88D4E2","tint":"#C9EAF0","accent":"#1E7A8C","shadow":"#1C515A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"porcelain-gray","name":"Porcelain gray","tags":["grayscale"],"colors":{"ink":"#151515","c1":"#C2C2C2","c2":"#8A8A8A","c3":"#EEEEEE","c4":"#4A4A4A","tint":"#E4E4E4","accent":"#DADADA","shadow":"#575757","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-suds","name":"Y2K suds","tags":["y2k"],"colors":{"ink":"#23155A","c1":"#C8B8FF","c2":"#8CF5E6","c3":"#FFB8EC","c4":"#F0FF8C","tint":"#E6DFFF","accent":"#8CF5E6","shadow":"#5A5373","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"glow-bath","name":"Glow bath","tags":["neon","on-dark"],"colors":{"ink":"#0A0716","c1":"#3DE8FF","c2":"#FF3DCB","c3":"#C6FF3D","c4":"#8A3DFF","tint":"#A8F5FF","accent":"#FF3DCB","shadow":"#146A7A","shine":"#FFFFFF","edge":"#15121F"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#0050B5","c3":"#FFFFFF","c4":"#111111","tint":"#FFEC8C","accent":"#0050B5","shadow":"#735F00","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

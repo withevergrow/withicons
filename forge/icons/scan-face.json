@@ -1,0 +1,89 @@
+{
+  "name": "scan-face",
+  "category": "security",
+  "description": "A smiling face framed by four scan corners for face recognition, face unlock, and selfie checks.",
+  "aliases": [
+    "face-id",
+    "face-scan",
+    "face-recognition",
+    "face-unlock",
+    "biometric-face",
+    "face-detection",
+    "selfie-scan",
+    "facial-recognition",
+    "face-login",
+    "face-auth",
+    "scan-selfie"
+  ],
+  "tags": [
+    "face",
+    "scan",
+    "biometric",
+    "recognition",
+    "unlock",
+    "identity"
+  ],
+  "paths": [
+    {
+      "d": "M3 7.5 V5 A2 2 0 0 1 5 3 H7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 3 H19 A2 2 0 0 1 21 5 V7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M21 16.5 V19 A2 2 0 0 1 19 21 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 21 H5 A2 2 0 0 1 3 19 V16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 V10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 14.5 A3.5 3.5 0 0 0 15 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M18.5 12 A6.5 6.5 0 1 1 5.5 12 A6.5 6.5 0 1 1 18.5 12 Z"
+  ],
+  "cutouts": [
+    "M9.75 9.75 A0.75 1.25 0 1 1 8.25 9.75 A0.75 1.25 0 1 1 9.75 9.75 Z",
+    "M15.75 9.75 A0.75 1.25 0 1 1 14.25 9.75 A0.75 1.25 0 1 1 15.75 9.75 Z",
+    "M9 14.5 A3.5 3.5 0 0 0 15 14.5"
+  ],
+  "synonyms": [
+    "faceid",
+    "facial scan",
+    "face verification",
+    "verify face",
+    "identity verification",
+    "id check",
+    "kyc",
+    "liveness check",
+    "selfie",
+    "selfie check",
+    "biometrics",
+    "biometric login",
+    "biometric authentication",
+    "unlock with face",
+    "phone unlock",
+    "camera scan",
+    "face tracking",
+    "face detect",
+    "ai face",
+    "recognise face",
+    "recognize face",
+    "scan your face",
+    "authentication"
+  ]
+}

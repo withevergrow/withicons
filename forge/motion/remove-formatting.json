@@ -1,0 +1,12 @@
+{
+  "name": "remove-formatting",
+  "intent": "shakes off its styling, back to plain text",
+  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3.2 },
+  "hover": { "preset": "shake", "amount": 0.8 },
+  "alt": [ { "preset": "wiggle", "amount": 0.8 }, { "preset": "pop" } ],
+  "swap": [
+    { "to": "type", "effect": "blur" },
+    { "to": "eraser", "effect": "fade" },
+    { "to": "bold", "effect": "morph" }
+  ]
+}

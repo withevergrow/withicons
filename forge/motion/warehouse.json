@@ -1,0 +1,8 @@
+{
+  "name": "warehouse",
+  "intent": "breathes slowly like a busy storage depot",
+  "loop": { "preset": "breathe", "origin": [12, 21], "amount": 0.4, "duration": 3.6 },
+  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 0.7 },
+  "alt": [ { "preset": "pop" }, { "preset": "bounce", "origin": [12, 21], "amount": 0.5 } ],
+  "swap": [ { "to": "store", "effect": "fade" }, { "to": "package", "effect": "slide-up" }, { "to": "warehouse@solid", "effect": "scale" } ]
+}

@@ -2,7 +2,7 @@
 //   dist/sprite-<style>.svg        <symbol id="with-<name>">
 //   dist/svg/<style>/<name>.svg    standalone files (jsDelivr-friendly)
 //   dist/icons.json                metadata
-import { distWriter, basePkg, writePkg, innerOf } from './emit-core.mjs'
+import { distWriter, basePkg, writePkg, innerOf, flattenVars, countText, totalText, paletteDoc, rtlDoc, motionDoc } from './emit-core.mjs'
 
 const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 const attrs = o => Object.entries(o || {}).filter(([, v]) => v !== undefined && v !== null && v !== false).map(([k, v]) => ` ${k}="${esc(v)}"`).join('')
@@ -17,7 +17,9 @@ export default async function emit(ctx) {
     const symbols = []
     for (const i of ctx.icons) {
       symbols.push(`<symbol id="with-${i.name}" viewBox="0 0 24 24"${attrs(st.root)}>${innerOf(ctx, i, st.name)}</symbol>`)
-      if (i.render[st.name]) { out.add(`svg/${st.name}/${i.name}.svg`, i.render[st.name].svg + '\n'); svgs++ }
+      // standalone files: CSS variables flattened to their defaults (<img>, design tools and rasterizers have no cascade);
+      // the sprite keeps them, so <use> icons can be re-themed from the page
+      if (i.render[st.name]) { out.add(`svg/${st.name}/${i.name}.svg`, flattenVars(i.render[st.name].svg) + '\n'); svgs++ }
     }
     const sprite = `<svg xmlns="http://www.w3.org/2000/svg">\n${symbols.join('\n')}\n</svg>\n`
     sizes[st.name] = Math.round(Buffer.byteLength(sprite) / 1024)
@@ -28,7 +30,7 @@ export default async function emit(ctx) {
   await out.flush()
 
   const pkg = {
-    ...basePkg(ctx, '@withicons/static', `${ctx.icons.length} icons x ${styleNames.length} styles as SVG sprites and standalone SVG files. No JavaScript.`, ['svg-sprite', 'static', 'cdn']),
+    ...basePkg(ctx, '@withicons/static', `${countText(ctx)} as SVG sprites and standalone SVG files. No JavaScript.`, ['svg-sprite', 'static', 'cdn', 'svg-icons', 'multicolor-icons', ...styleNames]),
     sideEffects: false,
     files: ['dist', 'README.md', 'LICENSE'],
   }
@@ -40,7 +42,7 @@ function readme(ctx, sizes) {
   const v = ctx.version
   return `# @withicons/static
 
-${ctx.icons.length} icons x ${ctx.styles.length} styles as plain SVG: one sprite per style plus standalone files. No JavaScript.
+${countText(ctx)} (${totalText(ctx)} SVGs) as plain SVG: one sprite per style plus standalone files. No JavaScript.
 
 \`\`\`bash
 npm i @withicons/static
@@ -71,12 +73,14 @@ https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/solid/home.svg
 <img src="https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/line/home.svg" width="24" height="24" alt="Home">
 \`\`\`
 
-(An \`<img>\` cannot inherit \`currentColor\`; it renders black. Inline the SVG or use the sprite to recolour.)
+(An \`<img>\` cannot inherit \`currentColor\`; its ink renders black. Inline the SVG or use the sprite to recolour.
+Standalone files have CSS variables flattened to their default colours, so palette styles look right in \`<img>\`,
+Figma, PowerPoint, Keynote and rasterizers such as sharp or resvg.)
 
 ## Styles
 
-${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}) — ${s.description}`).join('\n')}
-
+${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}${s.palette ? ', palette' : ''}) — ${s.description}`).join('\n')}
+${paletteDoc(ctx)}${rtlDoc('html', '<svg class="with-rtl" width="24" height="24"><use href="sprite-line.svg#with-arrow-right"/></svg>')}${motionDoc(ctx)}
 \`dist/icons.json\` lists every icon's name, category, description, aliases, tags and styles.
 
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

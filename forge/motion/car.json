@@ -1,0 +1,35 @@
+{
+  "name": "car",
+  "intent": "idles forward and drives off on hover",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        19
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "truck",
+      "effect": "slide-right"
+    }
+  ]
+}

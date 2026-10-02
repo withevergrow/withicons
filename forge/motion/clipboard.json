@@ -1,0 +1,35 @@
+{
+  "name": "clipboard",
+  "intent": "floats gently and nods when something lands on it",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "paste",
+      "effect": "slide-up"
+    }
+  ]
+}

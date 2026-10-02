@@ -1,0 +1,429 @@
+{
+  "name": "plane",
+  "palettes": [
+    {
+      "id": "sky-liner",
+      "name": "Sky liner",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2545",
+        "c1": "#4A90E2",
+        "c2": "#B9D8F7",
+        "c3": "#1F5FAD",
+        "c4": "#E8F2FD",
+        "tint": "#DBE9F9",
+        "accent": "#FF6B6B",
+        "shadow": "#1E3A5A",
+        "shine": "#E4EEFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "white-jet",
+      "name": "White jet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2A38",
+        "c1": "#E9EEF3",
+        "c2": "#C8102E",
+        "c3": "#1F3A93",
+        "c4": "#9AA8B6",
+        "tint": "#F6F8FA",
+        "accent": "#C8102E",
+        "shadow": "#5B6B7C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "airline-red",
+      "name": "Airline red",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0A10",
+        "c1": "#D7263D",
+        "c2": "#F4A6B0",
+        "c3": "#1B2A4A",
+        "c4": "#FCE3E6",
+        "tint": "#F7D4D8",
+        "accent": "#F4C430",
+        "shadow": "#560F18",
+        "shine": "#F9DEE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brushed-aluminium",
+      "name": "Brushed aluminium",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#20252B",
+        "c1": "#A7B1BC",
+        "c2": "#D9DFE5",
+        "c3": "#5C6772",
+        "c4": "#F0F3F6",
+        "tint": "#EDEFF2",
+        "accent": "#E1523D",
+        "shadow": "#43474B",
+        "shine": "#F2F3F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-departure",
+      "name": "Sunset departure",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A1626",
+        "c1": "#FF7E5F",
+        "c2": "#FEB47B",
+        "c3": "#B24592",
+        "c4": "#FFE3D3",
+        "tint": "#FFE5DF",
+        "accent": "#FFD166",
+        "shadow": "#663226",
+        "shine": "#FFECE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-flight",
+      "name": "Night flight",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#DCE6F5",
+        "c1": "#22314F",
+        "c2": "#FFD166",
+        "c3": "#FF5A5F",
+        "c4": "#0E1626",
+        "tint": "#3A4C70",
+        "accent": "#FFD166",
+        "shadow": "#070B14",
+        "shine": "#7389B3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "air-force-olive",
+      "name": "Air force olive",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F2414",
+        "c1": "#6B7A3A",
+        "c2": "#A8B47A",
+        "c3": "#3E4A22",
+        "c4": "#DCE3C2",
+        "tint": "#E1E4D8",
+        "accent": "#E6A23C",
+        "shadow": "#2B3117",
+        "shine": "#E9EBE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "barnstormer",
+      "name": "Barnstormer",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#3A1F12",
+        "c1": "#C8553D",
+        "c2": "#F2D0A4",
+        "c3": "#2E5E4E",
+        "c4": "#F7EBDD",
+        "tint": "#F4DDD8",
+        "accent": "#F2A541",
+        "shadow": "#502218",
+        "shine": "#F7E6E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "paper-plane",
+      "name": "Paper plane",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2B3A55",
+        "c1": "#F7F4EC",
+        "c2": "#8FB8DE",
+        "c3": "#E86A5A",
+        "c4": "#D9D2C3",
+        "tint": "#FBFAF6",
+        "accent": "#8FB8DE",
+        "shadow": "#8C8577",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-turquoise",
+      "name": "Holiday turquoise",
+      "tags": [
+        "seasonal",
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#04343B",
+        "c1": "#18B7BE",
+        "c2": "#FFD6A5",
+        "c3": "#F76C5E",
+        "c4": "#D9F6F5",
+        "tint": "#D1F1F2",
+        "accent": "#F76C5E",
+        "shadow": "#0A494C",
+        "shine": "#DCF4F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-jet",
+      "name": "Neon jet",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF3DCB",
+        "c1": "#3DF2FF",
+        "c2": "#FFE600",
+        "c3": "#B6FF3D",
+        "c4": "#8B5CFF",
+        "tint": "#D8FCFF",
+        "accent": "#FFE600",
+        "shadow": "#003B44",
+        "shine": "#E2FDFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-skies",
+      "name": "Pastel skies",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3B3A5A",
+        "c1": "#B5D8FF",
+        "c2": "#FFC8DD",
+        "c3": "#CDB4FF",
+        "c4": "#FFF3B0",
+        "tint": "#F0F7FF",
+        "accent": "#FFAFCC",
+        "shadow": "#485666",
+        "shine": "#F4F9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-holo-wings",
+      "name": "Y2K holo wings",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23194A",
+        "c1": "#9EB7FF",
+        "c2": "#FF9CEE",
+        "c3": "#8CF8E6",
+        "c4": "#FDF1FF",
+        "tint": "#ECF1FF",
+        "accent": "#FF9CEE",
+        "shadow": "#3F4966",
+        "shine": "#F0F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-jet-set",
+      "name": "70s jet set",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3B1C0C",
+        "c1": "#E8762B",
+        "c2": "#F2B134",
+        "c3": "#C8402B",
+        "c4": "#4F8A8B",
+        "tint": "#FAE4D5",
+        "accent": "#F2B134",
+        "shadow": "#5D2F11",
+        "shine": "#FCEADF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "storm-front",
+      "name": "Storm front",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#18222D",
+        "c1": "#5D7389",
+        "c2": "#A7B8C9",
+        "c3": "#34475A",
+        "c4": "#E3EAF1",
+        "tint": "#DFE3E7",
+        "accent": "#F2C14E",
+        "shadow": "#252E37",
+        "shine": "#E7EAED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "private-jet-gold",
+      "name": "Private jet gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A2108",
+        "c1": "#C9A54A",
+        "c2": "#111111",
+        "c3": "#F2DFA0",
+        "c4": "#7D6420",
+        "tint": "#F4EDDB",
+        "accent": "#F2DFA0",
+        "shadow": "#50421E",
+        "shine": "#F7F2E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "indigo-ramp",
+      "name": "Indigo ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#1A1446",
+        "c1": "#4F46E5",
+        "c2": "#A5B4FC",
+        "c3": "#312E81",
+        "c4": "#E0E7FF",
+        "tint": "#DCDAFA",
+        "accent": "#A5B4FC",
+        "shadow": "#201C5C",
+        "shine": "#E5E3FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#9E9E9E",
+        "c2": "#D6D6D6",
+        "c3": "#575757",
+        "c4": "#F0F0F0",
+        "tint": "#ECECEC",
+        "accent": "#D6D6D6",
+        "shadow": "#3F3F3F",
+        "shine": "#F0F0F0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "runway-high-contrast",
+      "name": "Runway high-contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#00A3FF",
+        "c2": "#FFD400",
+        "c3": "#FF2D2D",
+        "c4": "#FFFFFF",
+        "tint": "#CCEDFF",
+        "accent": "#FFD400",
+        "shadow": "#004166",
+        "shine": "#D9F1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-flight",
+      "name": "Dopamine flight",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0B3F",
+        "c1": "#7B61FF",
+        "c2": "#FF4FA3",
+        "c3": "#FFD43B",
+        "c4": "#3BE8B0",
+        "tint": "#E5DFFF",
+        "accent": "#FF4FA3",
+        "shadow": "#312766",
+        "shine": "#EBE7FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cherry-blossom-trip",
+      "name": "Cherry blossom trip",
+      "tags": [
+        "seasonal",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3C1F33",
+        "c1": "#F7A8C8",
+        "c2": "#B5E48C",
+        "c3": "#FFE5EC",
+        "c4": "#C8A2E8",
+        "tint": "#FDEEF4",
+        "accent": "#B5E48C",
+        "shadow": "#634350",
+        "shine": "#FEF2F7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "winter-frost",
+      "name": "Winter frost",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#12304A",
+        "c1": "#A9D6F5",
+        "c2": "#5A9BD4",
+        "c3": "#E4F4FF",
+        "c4": "#FFFFFF",
+        "tint": "#EEF7FD",
+        "accent": "#9DE2FF",
+        "shadow": "#445662",
+        "shine": "#F2F9FE",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

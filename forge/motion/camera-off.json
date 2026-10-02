@@ -1,0 +1,8 @@
+{
+  "name": "camera-off",
+  "intent": "dims quietly: no photos here",
+  "loop": { "preset": "breathe", "origin": [12, 13.5], "amount": 0.5, "duration": 3.6 },
+  "hover": { "preset": "shake", "amount": 0.6 },
+  "alt": [ { "preset": "pulse", "origin": [12, 13.5], "amount": 0.5 }, { "preset": "pop", "origin": [12, 13.5] } ],
+  "swap": [ { "to": "camera", "effect": "draw" }, { "to": "eye-off", "effect": "fade" }, { "to": "video-off", "effect": "slide-left" } ]
+}

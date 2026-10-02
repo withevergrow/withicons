@@ -1,7 +1,7 @@
 {
   "name": "@withicons/core",
-  "version": "0.1.0",
-  "description": "300 icons x 7 styles as standalone SVGs, IconNode data, metadata, alias resolution and search.",
+  "version": "0.2.0",
+  "description": "500 icons x 12 styles as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -23,7 +23,21 @@
     "withicons",
     "with-icons",
     "svg-icons",
-    "icon-search"
+    "icon-search",
+    "multicolor-icons",
+    "color-palettes",
+    "line",
+    "solid",
+    "duo",
+    "gloss",
+    "engrave",
+    "blueprint",
+    "sketch",
+    "glass",
+    "kawaii",
+    "sticker",
+    "pixel",
+    "retro"
   ],
   "type": "module",
   "sideEffects": false,
@@ -111,9 +125,71 @@
         "default": "./dist/nodes/sketch.cjs"
       }
     },
+    "./nodes/glass": {
+      "import": {
+        "types": "./dist/nodes/glass.d.ts",
+        "default": "./dist/nodes/glass.js"
+      },
+      "require": {
+        "types": "./dist/nodes/glass.d.cts",
+        "default": "./dist/nodes/glass.cjs"
+      }
+    },
+    "./nodes/kawaii": {
+      "import": {
+        "types": "./dist/nodes/kawaii.d.ts",
+        "default": "./dist/nodes/kawaii.js"
+      },
+      "require": {
+        "types": "./dist/nodes/kawaii.d.cts",
+        "default": "./dist/nodes/kawaii.cjs"
+      }
+    },
+    "./nodes/sticker": {
+      "import": {
+        "types": "./dist/nodes/sticker.d.ts",
+        "default": "./dist/nodes/sticker.js"
+      },
+      "require": {
+        "types": "./dist/nodes/sticker.d.cts",
+        "default": "./dist/nodes/sticker.cjs"
+      }
+    },
+    "./nodes/pixel": {
+      "import": {
+        "types": "./dist/nodes/pixel.d.ts",
+        "default": "./dist/nodes/pixel.js"
+      },
+      "require": {
+        "types": "./dist/nodes/pixel.d.cts",
+        "default": "./dist/nodes/pixel.cjs"
+      }
+    },
+    "./nodes/retro": {
+      "import": {
+        "types": "./dist/nodes/retro.d.ts",
+        "default": "./dist/nodes/retro.js"
+      },
+      "require": {
+        "types": "./dist/nodes/retro.d.cts",
+        "default": "./dist/nodes/retro.cjs"
+      }
+    },
     "./svg/*": "./dist/svg/*",
     "./icons.json": "./dist/icons.json",
     "./aliases.json": "./dist/aliases.json",
+    "./styles.json": "./dist/styles.json",
+    "./palettes/palette-map.js": {
+      "types": "./dist/palettes/palette-map.d.ts",
+      "import": "./dist/palettes/palette-map.mjs",
+      "require": "./dist/palettes/palette-map.cjs"
+    },
+    "./palettes/palette-map": {
+      "types": "./dist/palettes/palette-map.d.ts",
+      "import": "./dist/palettes/palette-map.mjs",
+      "require": "./dist/palettes/palette-map.cjs"
+    },
+    "./palettes/*": "./dist/palettes/*",
     "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
@@ -139,6 +215,24 @@
       ],
       "nodes/sketch": [
         "./dist/nodes/sketch.d.ts"
+      ],
+      "nodes/glass": [
+        "./dist/nodes/glass.d.ts"
+      ],
+      "nodes/kawaii": [
+        "./dist/nodes/kawaii.d.ts"
+      ],
+      "nodes/sticker": [
+        "./dist/nodes/sticker.d.ts"
+      ],
+      "nodes/pixel": [
+        "./dist/nodes/pixel.d.ts"
+      ],
+      "nodes/retro": [
+        "./dist/nodes/retro.d.ts"
+      ],
+      "palettes/*": [
+        "./dist/palettes/*"
       ]
     }
   },

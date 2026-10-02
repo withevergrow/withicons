@@ -1,0 +1,84 @@
+{
+  "name": "bed",
+  "category": "home",
+  "description": "A bed with a headboard, pillow, and mattress for bedrooms, sleep, and accommodation.",
+  "aliases": [
+    "bedroom",
+    "rest",
+    "double-bed",
+    "accommodation",
+    "overnight",
+    "nap",
+    "single-bed",
+    "guest-room",
+    "bunk"
+  ],
+  "tags": [
+    "sleep",
+    "bedroom",
+    "furniture",
+    "rest",
+    "night",
+    "stay"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H19 A2 2 0 0 1 21 14 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 16 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 12 V10.5 A1.5 1.5 0 0 1 9 9 H12 A1.5 1.5 0 0 1 13.5 10.5 V12",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 12 H19 A2 2 0 0 1 21 14 V16 H3 Z",
+    "M7.5 12 V10.5 A1.5 1.5 0 0 1 9 9 H12 A1.5 1.5 0 0 1 13.5 10.5 V12 Z"
+  ],
+  "cutouts": [
+    "M7.5 12 H13.5"
+  ],
+  "synonyms": [
+    "beds",
+    "sleep",
+    "sleeping",
+    "go to sleep",
+    "bedtime",
+    "night",
+    "night stay",
+    "hotel room",
+    "room",
+    "rooms",
+    "bed and breakfast",
+    "b&b",
+    "airbnb",
+    "hostel",
+    "motel",
+    "guest house",
+    "stay",
+    "check in",
+    "bunk bed",
+    "king size",
+    "queen size",
+    "twin bed",
+    "mattress",
+    "pillow",
+    "sleep mode",
+    "nap time",
+    "lie down",
+    "rest day",
+    "bedrooms",
+    "number of bedrooms",
+    "beds and baths",
+    "bedd",
+    "lodging"
+  ]
+}

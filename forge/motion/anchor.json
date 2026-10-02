@@ -1,0 +1,35 @@
+{
+  "name": "anchor",
+  "intent": "rocks gently on its chain like a moored ship",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "rock",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 1.2,
+    "duration": 1.2
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        2.5
+      ]
+    },
+    {
+      "preset": "drop",
+      "amount": 0.6
+    }
+  ]
+}

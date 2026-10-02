@@ -1,0 +1,32 @@
+// PIXEL — creative. Authentic pixel art on a 16x16 grid (1.5u per pixel).
+//
+// Every centreline is rasterised into a clean one-pixel line (a generalised
+// Bresenham on the true curve + "pixel-perfect" corner thinning), 45deg runs are
+// drawn with a two-pixel brush so diagonals weigh the same as straight lines,
+// circles and arcs become canonical mirrored pixel rings, rectangles keep straight
+// edges with a one-pixel corner cut, tiny closed shapes become solid blocks, and
+// the object's mass becomes a 4-tone sprite lit from the top left:
+//   ink    currentColor                                   outline + detail
+//   tone   var(--with-pixel-fill, currentColor) @ .28     body
+//   shade  var(--with-pixel-fill, currentColor) @ .6      inner bottom-right rim
+//   shine  var(--with-pixel-shine, #FFFFFF)               highlight pixel(s)
+// Signals (S plate) clear a one-pixel moat. The hardest icons get hand-drawn
+// pixel maps (_pixel-maps.mjs) or pixel fixes (_pixel-tune.mjs). Output: one merged h/v path per
+// tone, root shape-rendering="crispEdges".
+// crispEdges snaps every cell to whole device pixels, so cells are even only when
+// the rendered size is a multiple of 16 device px (16/32/48 px at 1x, 2x, 3x; 24 px
+// at 2x). At 24 px on a 1x screen, or 16 px at 1.25x/1.5x, cells alternate 1 and 2 px.
+// Keep crispEdges anyway: anti-aliased cells look worse than uneven ones.
+import { build, nodes } from './_pixel-render.mjs'
+
+export default {
+  name: 'pixel',
+  title: 'Pixel',
+  kind: 'creative',
+  description: 'Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens.',
+  strokeWidth: false,
+  root: { fill: 'currentColor', 'shape-rendering': 'crispEdges' },
+  render(icon) {
+    try { return nodes(build(icon)) } catch { return [] }
+  },
+}

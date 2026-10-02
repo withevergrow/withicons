@@ -1,0 +1,8 @@
+{
+  "name": "hard-drive",
+  "intent": "hums softly while reading and writing data",
+  "loop": { "preset": "type", "amount": 0.5, "duration": 1.4 },
+  "hover": { "preset": "jelly", "origin": [12, 22], "amount": 0.6, "duration": 0.6 },
+  "alt": [ { "preset": "pulse", "origin": [12, 13.5], "amount": 0.4 }, { "preset": "glow", "amount": 0.6 } ],
+  "swap": [ { "to": "save", "effect": "fade" }, { "to": "database", "effect": "flip" }, { "to": "server", "effect": "slide-up" } ]
+}

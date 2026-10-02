@@ -5,7 +5,6 @@
   "aliases": [
     "camcorder",
     "record-video",
-    "webcam",
     "movie-camera",
     "video-recorder",
     "cam"
@@ -52,6 +51,7 @@
     "vlogging",
     "videography",
     "vid",
-    "vidoe"
+    "vidoe",
+    "webcam"
   ]
 }

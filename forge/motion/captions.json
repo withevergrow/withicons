@@ -1,0 +1,8 @@
+{
+  "name": "captions",
+  "intent": "subtitle lines flicker in like captions being typed",
+  "loop": { "preset": "type", "duration": 1.4 },
+  "hover": { "preset": "pop", "origin": [12, 12], "duration": 0.5 },
+  "alt": [ { "preset": "draw" }, { "preset": "fill" } ],
+  "swap": [ { "to": "captions@solid", "effect": "fade" }, { "to": "type", "effect": "fade" } ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "language",
+  "intent": "flips between scripts like a word being translated",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "orbit",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "globe",
+      "effect": "flip"
+    },
+    {
+      "to": "message-circle",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "turtle",
+  "intent": "plods along slowly and steadily, side to side",
+  "loop": { "preset": "rock", "origin": [10, 19], "amount": 0.45, "duration": 4.2 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.7, "duration": 1 },
+  "alt": [ { "preset": "float", "amount": 0.6, "duration": 4 }, { "preset": "pass", "dir": 0, "duration": 4 }, { "preset": "nod", "origin": [10, 19], "amount": 0.6 } ],
+  "swap": [ { "to": "rabbit", "effect": "morph" }, { "to": "turtle@solid", "effect": "scale" } ]
+}

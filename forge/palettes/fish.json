@@ -1,0 +1,28 @@
+{
+  "name": "fish",
+  "palettes": [
+    {"id":"goldfish","name":"Goldfish","tags":["true-to-life","vivid"],"colors":{"ink":"#3A1805","c1":"#F28A1E","c2":"#FFC857","c3":"#FBE0B8","c4":"#C2560E","tint":"#FBDEC0","accent":"#FFC857","shadow":"#6D3E0E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clownfish","name":"Clownfish","tags":["true-to-life","ocean"],"colors":{"ink":"#2E1004","c1":"#F26B1D","c2":"#FFFFFF","c3":"#1E1E1E","c4":"#FFA94D","tint":"#FBD6C0","accent":"#4FC3F7","shadow":"#6D300D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"blue-tang","name":"Blue tang","tags":["true-to-life","ocean"],"colors":{"ink":"#0A1A3D","c1":"#2E6FE0","c2":"#F5D320","c3":"#0E1E4A","c4":"#8FB8F5","tint":"#C4D7F6","accent":"#F5D320","shadow":"#153265","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"koi","name":"Koi","tags":["true-to-life"],"colors":{"ink":"#2A1A10","c1":"#F7F2EA","c2":"#E6461E","c3":"#1E1E1E","c4":"#F2A35A","tint":"#FBF8F3","accent":"#E6461E","shadow":"#7C6F5F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"betta","name":"Betta","tags":["true-to-life","vivid"],"colors":{"ink":"#1E0638","c1":"#7A2BD1","c2":"#E0247A","c3":"#3AA8E8","c4":"#B98CF5","tint":"#DAC4F2","accent":"#E0247A","shadow":"#37135E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"salmon","name":"Salmon","tags":["true-to-life"],"colors":{"ink":"#3A160C","c1":"#E9876B","c2":"#8A9AA8","c3":"#FBD5C8","c4":"#B5513A","tint":"#F9DDD6","accent":"#F6C143","shadow":"#693D30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rainbow-trout","name":"Rainbow trout","tags":["true-to-life","nature"],"colors":{"ink":"#1E2510","c1":"#8DA06A","c2":"#E66F8A","c3":"#E8E3C8","c4":"#4E5E36","tint":"#DFE4D5","accent":"#E66F8A","shadow":"#3F4830","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"yellow-tang","name":"Yellow tang","tags":["true-to-life","vivid"],"colors":{"ink":"#3A2E00","c1":"#FFD21E","c2":"#FFF5B8","c3":"#3A7BD5","c4":"#C9A100","tint":"#FFEB9A","accent":"#3A7BD5","shadow":"#735E0E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"coral-reef","name":"Coral reef","tags":["ocean","vivid"],"colors":{"ink":"#3A0E0A","c1":"#FF7F6B","c2":"#2EC4B6","c3":"#FFD6A5","c4":"#E8505B","tint":"#FFDBD6","accent":"#2EC4B6","shadow":"#733930","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lagoon","name":"Lagoon","tags":["ocean"],"colors":{"ink":"#06302C","c1":"#2EC4B6","c2":"#FFE66D","c3":"#B8F2E6","c4":"#0E7C72","tint":"#C4EEEB","accent":"#FF6B6B","shadow":"#155852","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"summer-splash","name":"Summer splash","tags":["seasonal","ocean"],"colors":{"ink":"#06304A","c1":"#2FB5F0","c2":"#FFD23F","c3":"#FF6F91","c4":"#C4F1FF","tint":"#C5EAFB","accent":"#FF6F91","shadow":"#15516C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"river-pike","name":"River pike","tags":["nature","earthy"],"colors":{"ink":"#1A220E","c1":"#6E8A4A","c2":"#C9B25A","c3":"#DCE3C3","c4":"#3A4A28","tint":"#D6DECC","accent":"#C9B25A","shadow":"#313E21","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sardine-tin","name":"Sardine tin","tags":["vintage"],"colors":{"ink":"#1A222B","c1":"#9AA8B5","c2":"#C9442E","c3":"#E9DFC8","c4":"#3E5A78","tint":"#E3E7EA","accent":"#C9442E","shadow":"#454C51","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"retro-aquarium","name":"Retro aquarium","tags":["retro"],"colors":{"ink":"#2B1A05","c1":"#E9A23B","c2":"#2A9D8F","c3":"#E76F51","c4":"#F4E3B5","tint":"#F9E5C8","accent":"#E76F51","shadow":"#69491B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mermaid-pastel","name":"Mermaid pastel","tags":["pastel"],"colors":{"ink":"#1E4A44","c1":"#B5E8E0","c2":"#D8B4F8","c3":"#FFD1E8","c4":"#7FCCC0","tint":"#DEF5F1","accent":"#FF9EC7","shadow":"#516865","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gummy-fish","name":"Gummy fish","tags":["candy","vivid"],"colors":{"ink":"#3A0512","c1":"#FF4D6D","c2":"#FFD23F","c3":"#4CD964","c4":"#4F9CFF","tint":"#FFCDD6","accent":"#FFD23F","shadow":"#732331","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"golden-koi","name":"Golden koi","tags":["luxe"],"colors":{"ink":"#2A1F05","c1":"#E0B23A","c2":"#1E1E1E","c3":"#F8E7B0","c4":"#A33A22","tint":"#F6E9C8","accent":"#A33A22","shadow":"#65501A","shine":"#FFFFFF","edge":"#FFF8E1"}},
+    {"id":"deep-blue-ramp","name":"Deep blue ramp","tags":["mono","ocean"],"colors":{"ink":"#081B33","c1":"#2B6CB0","c2":"#123B66","c3":"#BBD6F2","c4":"#6FA0D6","tint":"#C4D6E9","accent":"#123B66","shadow":"#13314F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"silver-scale","name":"Silver scale","tags":["grayscale"],"colors":{"ink":"#151515","c1":"#9C9C9C","c2":"#4E4E4E","c3":"#DADADA","c4":"#727272","tint":"#E3E3E3","accent":"#C4C4C4","shadow":"#464646","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubble-y2k","name":"Bubble Y2K","tags":["y2k"],"colors":{"ink":"#1E2A66","c1":"#A9C8FF","c2":"#FFB3F0","c3":"#B8FFE6","c4":"#7C83FF","tint":"#D8E6FF","accent":"#FFB3F0","shadow":"#4C5A73","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"anglerfish","name":"Anglerfish","tags":["neon","on-dark"],"colors":{"ink":"#7DF9FF","c1":"#0A2233","c2":"#FFE45E","c3":"#1A4A66","c4":"#04121C","tint":"#1C5470","accent":"#FFE45E","shadow":"#030B12","shine":"#C8FCFF","edge":"#1A1A26"}},
+    {"id":"glowfish","name":"Glowfish","tags":["neon","on-dark"],"colors":{"ink":"#07051A","c1":"#FF3DCB","c2":"#3DF5FF","c3":"#C6FF3D","c4":"#8A3DFF","tint":"#FFC9F0","accent":"#3DF5FF","shadow":"#6E1A58","shine":"#FFFFFF","edge":"#15121F"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FF8C00","c2":"#005FCC","c3":"#FFFFFF","c4":"#111111","tint":"#FFDFB8","accent":"#005FCC","shadow":"#733F00","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

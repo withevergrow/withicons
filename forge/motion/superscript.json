@@ -1,0 +1,11 @@
+{
+  "name": "superscript",
+  "intent": "lifts up above the line, like a power or footnote",
+  "loop": { "preset": "float", "amount": 0.6, "duration": 2.8 },
+  "hover": { "preset": "nudge", "dir": 270, "amount": 1 },
+  "alt": [ { "preset": "rise", "amount": 0.6 }, { "preset": "pop" } ],
+  "swap": [
+    { "to": "subscript", "effect": "slide-down" },
+    { "to": "type", "effect": "fade" }
+  ]
+}

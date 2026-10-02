@@ -1,0 +1,139 @@
+// @withicons/motion — preset + effect metadata and the spec -> CSS-variable mapping.
+// Shared by the runtime (index.js), the build (icons.css) and the website (motion.js).
+// Keep this file tiny: no keyframe data here (that lives in keyframes.js).
+
+// shot  = length of the one-shot action in seconds (hover / once / inview)
+// cycle = default loop cycle in seconds. When cycle > shot the loop plays the action, then rests
+//         (keyframes `wm-<preset>-loop`); otherwise the loop and the one-shot share `wm-<preset>`.
+// origin = default pivot in the 24x24 grid, dir = default direction (deg, 0 = right, 90 = down),
+// min   = shortest allowed duration in seconds (flicker: its opacity dips must stay under 3 flashes per second,
+//         WCAG 2.3.1, however far it is sped up);
+// ease  = element-level timing function (most presets ease per keyframe and ignore it; `steps`
+//         applies to spin / tick / orbit, which use it).
+export const PRESET_DEFAULTS = {
+  'spin':      { shot: 1.2,  cycle: 1.2, ease: 'linear', intent: 'spins steadily' },
+  'spin-once': { shot: 0.8,  cycle: 2.0, intent: 'turns once and settles' },
+  'tick':      { shot: 1,    cycle: 1,   ease: 'steps(12)', intent: 'ticks round step by step' },
+  'pulse':     { shot: 1.4,  cycle: 1.4, intent: 'pulses softly' },
+  'beat':      { shot: 0.72, cycle: 1.2, intent: 'beats like a heart' },
+  'breathe':   { shot: 3,    cycle: 3,   intent: 'breathes slowly and calmly' },
+  'float':     { shot: 2.6,  cycle: 2.6, intent: 'floats gently up and down' },
+  'bounce':    { shot: 1,    cycle: 1.15, origin: [12, 21], intent: 'bounces with a little squash' },
+  'sway':      { shot: 2.8,  cycle: 2.8, origin: [12, 21], intent: 'sways from its base' },
+  'ring':      { shot: 1.4,  cycle: 2.6, origin: [12, 3], intent: 'rings and settles' },
+  'wiggle':    { shot: 0.8,  cycle: 2.0, intent: 'wiggles playfully' },
+  'shake':     { shot: 0.6,  cycle: 1.8, intent: 'shakes no' },
+  'nod':       { shot: 0.8,  cycle: 2.0, intent: 'nods yes' },
+  'nudge':     { shot: 0.9,  cycle: 1.2, dir: 0, intent: 'nudges the way it points' },
+  'pass':      { shot: 1.4,  cycle: 1.4, dir: 0, intent: 'slides through and comes back round' },
+  'rise':      { shot: 1.6,  cycle: 1.6, intent: 'rises, fades and comes back' },
+  'drop':      { shot: 1.6,  cycle: 1.6, intent: 'drops, fades and comes back' },
+  'blink':     { shot: 0.42, cycle: 3.5, intent: 'blinks now and then' },
+  'flicker':   { shot: 1.6,  cycle: 1.6, origin: [12, 21], min: 1.2, intent: 'flickers like a flame' },
+  'twinkle':   { shot: 1.2,  cycle: 1.8, intent: 'twinkles and glints' },
+  'pop':       { shot: 0.5,  cycle: 1.6, intent: 'pops with a springy bounce' },
+  'tada':      { shot: 1,    cycle: 2.4, intent: 'celebrates with a tada' },
+  'jelly':     { shot: 0.9,  cycle: 2.2, intent: 'wobbles like jelly' },
+  'flip':      { shot: 1.2,  cycle: 2.4, intent: 'flips over like a coin' },
+  'rock':      { shot: 2.4,  cycle: 2.4, origin: [12, 20], intent: 'rocks gently side to side' },
+  'tilt':      { shot: 1.6,  cycle: 2.6, intent: 'leans in and holds' },
+  'zoom':      { shot: 1.2,  cycle: 2.0, intent: 'zooms in and back' },
+  'orbit':     { shot: 2.4,  cycle: 2.4, ease: 'linear', intent: 'drifts in a small circle' },
+  'glow':      { shot: 1.8,  cycle: 1.8, intent: 'glows with a soft halo' },
+  'draw':      { shot: 1.6,  cycle: 3.2, intent: 'draws itself on' },
+  'type':      { shot: 0.9,  cycle: 1.4, intent: 'jitters like keystrokes' },
+  'fill':      { shot: 1.6,  cycle: 2.0, intent: 'fills up like it is charging' },
+}
+export const PRESETS = Object.keys(PRESET_DEFAULTS)
+// presets that read --wm-dx / --wm-dy
+export const DIRECTIONAL = ['nudge', 'pass']
+
+// Swap effects: duration in seconds of one A -> B transition.
+export const EFFECT_DEFAULTS = {
+  'fade': { dur: 0.3 }, 'scale': { dur: 0.45 }, 'rotate': { dur: 0.5 }, 'flip': { dur: 0.6 },
+  'slide-up': { dur: 0.42 }, 'slide-down': { dur: 0.42 }, 'slide-left': { dur: 0.42 }, 'slide-right': { dur: 0.42 },
+  'blur': { dur: 0.45 }, 'spin': { dur: 0.55 }, 'morph': { dur: 0.55 }, 'draw': { dur: 0.75 },
+}
+export const EFFECTS = Object.keys(EFFECT_DEFAULTS)
+
+// Swap timing. A swap that turns into B and back on its own (trigger 'auto', class wm-swap-auto) rests `hold`
+// seconds on each icon: one cycle = 2 x (transition + hold). SWAP_HOLD makes the default fade cycle 2.4 s, the same as
+// the original .wm-swap.wm-loop.
+export const SWAP_HOLD = 0.9
+export function swapCycle(dur, hold) { return r4(2 * ((Number(dur) || 0) + (hold == null || hold === '' ? SWAP_HOLD : Math.max(0, Number(hold) || 0)))) }
+// Named feels for --wm-swap-ease (the easing of the incoming icon). 'natural' = no override: each effect keeps its own
+// tuned easing (a spring for scale / rotate / spin / morph, a soft landing for the rest).
+export const SWAP_EASES = {
+  natural: null,
+  springy: 'cubic-bezier(.3,1.75,.5,1)',
+  smooth: 'cubic-bezier(.65,0,.35,1)',
+  snappy: 'cubic-bezier(.12,.9,.18,1)',
+  gentle: 'cubic-bezier(.4,0,.2,1)',
+  linear: 'linear',
+}
+/** A named feel (SWAP_EASES) or any CSS easing -> a CSS easing string, or null for the effect's own. */
+export function swapEase(e) {
+  if (e == null || e === '' || e === 'natural' || e === 'auto') return null
+  return Object.prototype.hasOwnProperty.call(SWAP_EASES, e) ? SWAP_EASES[e] : String(e)
+}
+
+const r4 = n => Math.round(n * 1e4) / 1e4
+const fmt = n => String(r4(n)).replace(/^0\./, '.').replace(/^-0\./, '-.')
+export const pct = v => fmt(v / 24 * 100) + '%'
+export function dirVec(deg) {
+  const a = (Number(deg) || 0) * Math.PI / 180
+  return [r4(Math.cos(a)), r4(Math.sin(a))]
+}
+export function hasLoopVariant(preset) {
+  const d = PRESET_DEFAULTS[preset]
+  return !!d && (preset === 'draw' || d.cycle > d.shot + 1e-9)
+}
+export function keyframeName(preset, loop) {
+  return 'wm-' + preset + (loop && hasLoopVariant(preset) ? '-loop' : '')
+}
+
+// A motion object ({ preset, origin, dir, amount, duration, steps }) -> the CSS custom properties for one slot.
+//   slot 'L' (loop) or 'H' (hover / one-shot);  full = also emit values equal to the defaults.
+// Emits: --wm<S> (keyframes) --wm<S>-d (duration) [-m minimum duration] [-e ease] [-ox -oy origin] [-k amount] [-dx -dy direction]
+export function slotVars(m, slot, full) {
+  const o = {}
+  if (!m || !PRESET_DEFAULTS[m.preset]) return o
+  const d = PRESET_DEFAULTS[m.preset]
+  const loop = slot === 'L'
+  const p = '--wm' + slot
+  o[p] = keyframeName(m.preset, loop)
+  o[p + '-d'] = fmt(Math.max(d.min || 0, m.duration > 0 ? m.duration : (loop ? d.cycle : d.shot))) + 's'
+  if (d.min) o[p + '-m'] = fmt(d.min) + 's'
+  const ease = m.steps > 0 ? 'steps(' + Math.round(m.steps) + ')' : d.ease
+  if (ease && (full || ease !== 'linear')) o[p + '-e'] = ease
+  const origin = m.origin || d.origin
+  if (origin && (full || origin[0] !== 12 || origin[1] !== 12)) { o[p + '-ox'] = pct(origin[0]); o[p + '-oy'] = pct(origin[1]) }
+  else if (full) { o[p + '-ox'] = '50%'; o[p + '-oy'] = '50%' }
+  const k = m.amount == null ? 1 : Number(m.amount)
+  if (full || k !== 1) o[p + '-k'] = fmt(k)
+  if (DIRECTIONAL.includes(m.preset) || m.dir != null) {
+    const [dx, dy] = dirVec(m.dir != null ? m.dir : (d.dir || 0))
+    if (full || dx !== 1 || dy !== 0) { o[p + '-dx'] = fmt(dx); o[p + '-dy'] = fmt(dy) }
+  }
+  return o
+}
+// The reverse, on a live element: the icon's own preset (and direction) for one slot, read from what icons.css set
+// on it ([data-wm="<name>"] / with-icon[name="<name>"]). This is how the runtime knows an icon's defaults without
+// bundling the 500-icon spec table. null when icons.css is not loaded or the element is not in the document.
+export function cssSlot(el, loop) {
+  if (!el || typeof getComputedStyle !== 'function') return null
+  let cs
+  try { cs = getComputedStyle(el) } catch { return null }
+  if (!cs || !cs.getPropertyValue) return null
+  const p = '--wm' + (loop ? 'L' : 'H')
+  const m = /^wm-([a-z-]+?)(?:-loop)?$/.exec(String(cs.getPropertyValue(p) || '').trim())
+  if (!m || !PRESET_DEFAULTS[m[1]]) return null
+  const out = { preset: m[1] }
+  const dx = parseFloat(cs.getPropertyValue(p + '-dx')), dy = parseFloat(cs.getPropertyValue(p + '-dy'))
+  if (!isNaN(dx) && !isNaN(dy)) out.dir = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360
+  return out
+}
+// Both slots of a spec -> one flat object of custom properties.
+export function specVars(spec, full) {
+  return Object.assign({}, slotVars(spec && spec.loop, 'L', full), slotVars(spec && spec.hover, 'H', full))
+}

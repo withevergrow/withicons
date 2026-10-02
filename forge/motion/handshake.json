@@ -1,0 +1,48 @@
+{
+  "name": "handshake",
+  "intent": "the hands pump up and down, sealing the deal",
+  "loop": {
+    "preset": "nod",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        17
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "handshake@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    },
+    {
+      "to": "hand-heart",
+      "effect": "fade"
+    }
+  ]
+}

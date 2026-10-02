@@ -1,0 +1,75 @@
+{
+  "name": "check-check",
+  "category": "status",
+  "description": "Two overlapping check marks for read receipts, all done and fully verified.",
+  "aliases": [
+    "double-check",
+    "double-tick",
+    "checks",
+    "checkmarks",
+    "done-all",
+    "all-done",
+    "read-receipt",
+    "seen",
+    "delivered",
+    "ticks",
+    "check-double",
+    "two-checks"
+  ],
+  "tags": [
+    "read",
+    "seen",
+    "delivered",
+    "done",
+    "complete",
+    "verified",
+    "message status"
+  ],
+  "paths": [
+    {
+      "d": "M2 13 L6.5 17.5 L16 7",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 16.5 L12.5 17.5 L22 7",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "double tick",
+    "two ticks",
+    "blue ticks",
+    "grey ticks",
+    "gray ticks",
+    "read",
+    "message read",
+    "message seen",
+    "seen by",
+    "delivered message",
+    "message delivered",
+    "read receipt",
+    "mark all as read",
+    "mark as read",
+    "all read",
+    "all complete",
+    "everything done",
+    "all checked",
+    "completed",
+    "finished",
+    "approved",
+    "confirmed",
+    "verified",
+    "double confirmed",
+    "both done",
+    "sent and read",
+    "whatsapp ticks",
+    "tick tick",
+    "checkmark",
+    "check marks",
+    "tick marks",
+    "doble check",
+    "dubble check"
+  ]
+}

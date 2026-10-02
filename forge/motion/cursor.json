@@ -1,0 +1,33 @@
+{
+  "name": "cursor",
+  "intent": "leans in like it is about to click",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      5,
+      2.5
+    ],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "mouse",
+      "effect": "fade"
+    }
+  ]
+}

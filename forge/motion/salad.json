@@ -1,0 +1,8 @@
+{
+  "name": "salad",
+  "intent": "the leafy bowl sways fresh, then gets a quick toss",
+  "loop": { "preset": "sway", "origin": [12, 21], "amount": 0.5, "duration": 3.4 },
+  "hover": { "preset": "wiggle", "origin": [12, 21], "amount": 1 },
+  "alt": [ { "preset": "breathe" }, { "preset": "pop" }, { "preset": "jelly", "origin": [12, 21] } ],
+  "swap": [ { "to": "salad@solid", "effect": "scale" }, { "to": "soup", "effect": "fade" }, { "to": "leaf", "effect": "morph" } ]
+}

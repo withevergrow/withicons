@@ -1,0 +1,41 @@
+{
+  "name": "pin",
+  "intent": "presses in gently, like pinning a note to a board",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      4,
+      20
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 135,
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        3.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "pin@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "map-pin",
+      "effect": "slide-down"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "book-open",
+  "intent": "rests open and lifts gently, ready to be read",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "book",
+      "effect": "flip"
+    },
+    {
+      "to": "bookmark",
+      "effect": "fade"
+    },
+    {
+      "to": "book-open@solid",
+      "effect": "scale"
+    }
+  ]
+}

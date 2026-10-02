@@ -1,0 +1,39 @@
+{
+  "name": "mountain",
+  "intent": "stands still and calm, pops on hover",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.5,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      20
+    ]
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "flag",
+      "effect": "slide-up"
+    }
+  ]
+}

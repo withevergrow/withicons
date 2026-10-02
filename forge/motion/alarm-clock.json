@@ -1,0 +1,50 @@
+{
+  "name": "alarm-clock",
+  "intent": "rattles on its feet like an alarm going off",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.7
+    },
+    {
+      "preset": "tick",
+      "steps": 12,
+      "duration": 6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell-ring",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "clock",
+      "effect": "fade"
+    },
+    {
+      "to": "timer",
+      "effect": "flip"
+    }
+  ]
+}

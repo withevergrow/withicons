@@ -84,6 +84,10 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--e-out), transform .9s var(--e-out); transition-delay: calc(var(--d, 0) * 70ms); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 .reduced [data-reveal] { opacity: 1 !important; transform: none !important; }
+/* failsafe: if site.js never runs (an engine that cannot parse it, a blocked request) nothing stays hidden.
+   site.js adds html.wi-ready as its first act, which cancels this before it fires. */
+.js:not(.wi-ready) [data-reveal] { animation: wi-unhide .6s var(--e-out) 3s forwards; }
+@keyframes wi-unhide { to { opacity: 1; transform: none; } }
 
 /* ═════════════════════ HEADER ═════════════════════ */
 .site-header { position: sticky; top: 0; z-index: 100; height: var(--header-h); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
@@ -113,6 +117,18 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 @keyframes lm-fill { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 .logo-morph .lm-frame.is-fade { transform: scale(.92); }
 @keyframes lm-draw { to { stroke-dashoffset: 0; } }
+/* the five palette styles each arrive their own way: frost clears, kawaii bounces in, a sticker is slapped on,
+   pixels resolve in steps, retro rises like a sunset */
+.logo-morph .lm-frost { animation: lm-frost .9s var(--e-out) both; }
+@keyframes lm-frost { from { opacity: 0; filter: blur(5px); transform: scale(1.12); } }
+.logo-morph .lm-bounce { animation: lm-bounce .8s var(--e-spring) both; }
+@keyframes lm-bounce { 0% { transform: translateY(-9px) scale(.6, .7); opacity: 0; } 55% { transform: translateY(1px) scale(1.12, .9); opacity: 1; } 100% { transform: none; } }
+.logo-morph .lm-slap { animation: lm-slap .65s var(--e-spring) both; }
+@keyframes lm-slap { from { transform: scale(1.7) rotate(-22deg); opacity: 0; } }
+.logo-morph .lm-pixel { animation: lm-pixel .7s steps(6, end) both; }
+@keyframes lm-pixel { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+.logo-morph .lm-rise { animation: lm-rise .9s var(--e-out) both; }
+@keyframes lm-rise { from { clip-path: inset(100% 0 0 0 round 12px); transform: translateY(4px); } to { clip-path: inset(0 0 0 0 round 0); transform: none; } }
 .logo-morph .lm-shine { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
 .logo-morph .lm-shine::after { content: ''; position: absolute; top: -20%; bottom: -20%; width: 40%; left: -60%; transform: skewX(-20deg);
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent); }
@@ -146,6 +162,7 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 .search-trigger svg { width: 18px; height: 18px; color: var(--ink); }
 .search-trigger:hover { border-color: var(--ink); color: var(--ink); box-shadow: var(--shadow-s); }
 .search-trigger kbd { font-size: 12px; }
+.search-trigger .st-label { white-space: nowrap; }
 .theme-toggle, .nav-toggle { width: 42px; height: 42px; flex: none; display: inline-grid; place-items: center; border-radius: 50%; border: 1px solid var(--rule-strong);
   background: var(--card); color: var(--ink); cursor: pointer; transition: transform .4s var(--e-spring), border-color .2s; }
 .theme-toggle svg, .nav-toggle svg { width: 19px; height: 19px; }
@@ -154,7 +171,7 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 .cta { --btn-bg: var(--ink); flex: none; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--pill);
   background: var(--ink); color: var(--paper); font: 650 14.5px/1 var(--font-sans); text-decoration: none; white-space: nowrap; position: relative; overflow: hidden;
   transition: transform .4s var(--e-out), box-shadow .3s; will-change: transform; }
-.cta::before { content: ''; position: absolute; inset: 0; background: conic-gradient(from var(--cta-a, 0deg), var(--c-line), var(--c-solid), var(--c-duo), var(--c-gloss), var(--c-engrave), var(--c-blueprint), var(--c-sketch), var(--c-line));
+.cta::before { content: ''; position: absolute; inset: 0; background: conic-gradient(from var(--cta-a, 0deg), var(--spectrum));
   opacity: 0; transition: opacity .35s; }
 .cta > * { position: relative; }
 .cta:hover::before { opacity: 1; }
@@ -178,6 +195,8 @@ html.menu-open { overflow: hidden; }
 html.menu-open .site-header { z-index: 200; }
 html.menu-open .site-header::before { inset: 0; border-radius: 0; box-shadow: none; border-color: transparent; background: var(--paper); }
 
+/* the label needs ~170px; between 1081 and ~1340px the side column is narrower, so it went to two lines */
+@media (max-width: 1299px) { .search-trigger .st-label { display: none; } .search-trigger { padding: 0 6px 0 12px; } }
 @media (max-width: 1080px) {
   .search-trigger .st-label { display: none; }
   .search-trigger { padding: 0 6px 0 12px; }
@@ -197,6 +216,20 @@ html.menu-open .site-header::before { inset: 0; border-radius: 0; box-shadow: no
   .logo-with { font-size: 25px; }
   .logo-icons { font-size: 20px; }
   .site-header[data-condensed]::before { inset: 6px; }
+}
+/* small phones and 400% zoom (WCAG 1.4.10 at 320 CSS px): the three round buttons must stay on screen */
+@media (max-width: 374px) {
+  .site-header { gap: 8px; }
+  .site-actions { gap: 4px; }
+  .logo { gap: 8px; padding-right: 2px; }
+  .search-trigger, .theme-toggle, .nav-toggle { width: 40px; height: 40px; }
+}
+@media (max-width: 359px) {
+  .search-trigger, .theme-toggle, .nav-toggle { width: 38px; height: 38px; }
+  .logo-morph { width: 30px; height: 30px; border-radius: 9px; }
+  .logo-morph > svg { width: 21px; height: 21px; }
+  .site-header .logo-by { display: none; }
+  .site-header .logo-words, .site-header[data-condensed] .logo-words { transform: none; }
 }
 
 /* ═════════════════════ SEARCH OVERLAY ═════════════════════
@@ -488,6 +521,7 @@ html.search-open { overflow: hidden; }
   background: var(--ink); color: var(--paper); font: 600 14px/1 var(--font-sans); box-shadow: var(--shadow-l);
   transform: translate(-50%, 140%); transition: transform .5s var(--e-spring); pointer-events: none; }
 .toast.is-on { transform: translate(-50%, 0); }
+.toast { bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 12px)); }
 .toast svg { width: 20px; height: 20px; color: var(--c-sketch); }
 
 /* ═════════════════════ FOOTER ═════════════════════ */
@@ -544,6 +578,18 @@ html.search-open { overflow: hidden; }
   .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+/* "Pause animations" (injected by site.js into every footer and the mobile menu) */
+.still-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px 0 10px; border-radius: var(--pill); cursor: pointer;
+  border: 1px solid var(--on-dark-rule); background: transparent; color: var(--on-dark-2); font: 600 13.5px/1 var(--font-sans); transition: color .2s, border-color .2s, background-color .2s; }
+.still-toggle:hover { color: #fff; border-color: var(--on-dark-2); }
+.still-toggle[aria-pressed="true"] { background: rgba(255,255,255,.1); color: #fff; border-color: var(--on-dark-2); }
+.still-toggle[hidden] { display: none; }
+.still-ic { display: inline-grid; place-items: center; width: 18px; height: 18px; }
+.still-ic svg { width: 14px; height: 14px; }
+.still-toggle.on-light { border-color: var(--rule-strong); color: var(--ink-2); background: var(--card); }
+.still-toggle.on-light:hover, .still-toggle.on-light[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+.still-toggle.on-light[aria-pressed="true"] { background: var(--paper-3); }
+
 /* print */
 @media print { .site-header, .site-footer, .search-overlay, .toast { display: none !important; } }
 
@@ -567,6 +613,34 @@ html.search-open { overflow: hidden; }
   .ask-task-d { font-size: 12px; }
 }
 
+/* ───────── device fallbacks ─────────
+   1. Notched phones: pages use viewport-fit=cover, so pad for the safe-area insets (landscape notch, home indicator).
+      Gated, because max(var(), env()) would compute to 0 padding on an engine that lacks either. */
+@supports (padding: max(1px, env(safe-area-inset-left, 0px))) {
+  .wrap, .wrap-wide, .site-header, .foot-inner {
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+  .site-header[data-condensed] {
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px), calc((100vw - var(--maxw)) / 2 + 12px));
+    padding-right: max(var(--gutter), env(safe-area-inset-right, 0px), calc((100vw - var(--maxw)) / 2 + 12px)); }
+  .foot-inner { padding-bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 16px)); }
+  .mobile-menu { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+    padding-bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 16px)); }
+  .search-overlay { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .gem-note { bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 12px)); }
+  @media (max-width: 600px) {
+    .search-overlay { padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
+    .so-foot { padding-bottom: max(8px, env(safe-area-inset-bottom, 0px)); }
+  }
+}
+/* 2. color-mix() arrived in Safari 16.2 / Chrome 111 / Firefox 113. With var() inside, an older engine computes the
+      whole background to transparent (no cascade fallback), so give the frosted surfaces a solid colour there. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .site-header::before { background: var(--paper); }
+  .site-header[data-condensed]::before { background: var(--card); }
+  .foot-strip span { background: rgba(255,255,255,.08); }
+}
+
 /* footer sits on --dark in both themes: the logo's morphing "with" must use the bright (dark-theme) text twins */
 .site-footer .logo { --c-line-text: #8EA6FF; --c-solid-text: #FF9479; --c-duo-text: #B3A1FF; --c-gloss-text: #FF8DC4;
-  --c-engrave-text: #E7C17A; --c-blueprint-text: #63D3EA; --c-sketch-text: #6FD99C; }
+  --c-engrave-text: #E7C17A; --c-blueprint-text: #63D3EA; --c-sketch-text: #6FD99C;
+  --c-glass-text: #A9CBFF; --c-kawaii-text: #FFB3C4; --c-sticker-text: #D4B3FF; --c-pixel-text: #A8EE6E; --c-retro-text: #FFB878; }

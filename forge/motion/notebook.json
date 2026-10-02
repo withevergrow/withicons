@@ -1,0 +1,16 @@
+{
+  "name": "notebook",
+  "intent": "rocks gently on its spine, ready for new notes",
+  "loop": { "preset": "rock", "origin": [6, 21.5], "amount": 0.4, "duration": 3.6 },
+  "hover": { "preset": "flip", "duration": 0.9 },
+  "alt": [
+    { "preset": "tilt", "origin": [6, 21.5], "amount": 0.8 },
+    { "preset": "float", "amount": 0.5, "duration": 3 },
+    { "preset": "wiggle", "amount": 0.6 }
+  ],
+  "swap": [
+    { "to": "book-open", "effect": "flip" },
+    { "to": "notepad-text", "effect": "slide-up" },
+    { "to": "notebook@solid", "effect": "scale" }
+  ]
+}

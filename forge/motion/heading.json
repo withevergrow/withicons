@@ -1,0 +1,32 @@
+{
+  "name": "heading",
+  "intent": "stands up tall like a title on the page",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "type",
+      "effect": "fade"
+    },
+    {
+      "to": "bold",
+      "effect": "flip"
+    }
+  ]
+}

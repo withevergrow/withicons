@@ -1,0 +1,70 @@
+{
+  "name": "tree-pine",
+  "category": "nature",
+  "description": "A tiered pine tree for forests, camping, the outdoors, and Christmas.",
+  "aliases": [
+    "pine",
+    "pine-tree",
+    "fir",
+    "fir-tree",
+    "evergreen",
+    "christmas-tree",
+    "xmas-tree",
+    "conifer",
+    "forest",
+    "spruce",
+    "tree"
+  ],
+  "synonyms": [
+    "woods",
+    "woodland",
+    "trees",
+    "nature",
+    "outdoors",
+    "camping",
+    "campsite",
+    "hiking",
+    "trail",
+    "national park",
+    "park",
+    "wilderness",
+    "cabin",
+    "lumber",
+    "timber",
+    "christmas",
+    "xmas",
+    "holiday season",
+    "winter",
+    "festive",
+    "december",
+    "noel",
+    "eco",
+    "environment",
+    "reforestation",
+    "plant a tree",
+    "pinetree",
+    "chrismas tree",
+    "pine cone"
+  ],
+  "tags": [
+    "nature",
+    "tree",
+    "forest",
+    "outdoors",
+    "christmas"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L7 8.5 H9.5 L5.5 13.5 H8 L4 18.5 H20 L16 13.5 H18.5 L14.5 8.5 H17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 18.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L7 8.5 H9.5 L5.5 13.5 H8 L4 18.5 H20 L16 13.5 H18.5 L14.5 8.5 H17 Z"
+  ],
+  "cutouts": []
+}

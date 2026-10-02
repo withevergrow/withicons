@@ -4,7 +4,6 @@
   "description": "A clipboard for pasting or for clipboard-backed actions.",
   "aliases": [
     "clip-board",
-    "clipboard-list",
     "pasteboard",
     "board",
     "clipboard-text",
@@ -54,6 +53,7 @@
     "notepad",
     "record",
     "audit",
-    "plan"
+    "plan",
+    "clipboard-list"
   ]
 }

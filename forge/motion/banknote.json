@@ -1,0 +1,36 @@
+{
+  "name": "banknote",
+  "intent": "flutters like fresh cash in your hand",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "coins",
+      "effect": "flip"
+    },
+    {
+      "to": "wallet",
+      "effect": "slide-down"
+    },
+    {
+      "to": "credit-card",
+      "effect": "flip"
+    }
+  ]
+}

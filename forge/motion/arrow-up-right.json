@@ -1,0 +1,28 @@
+{
+  "name": "arrow-up-right",
+  "intent": "nudges up and right to show where it points",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 1.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "arrow-down-right",
+      "effect": "rotate"
+    }
+  ]
+}

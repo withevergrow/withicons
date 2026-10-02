@@ -1,0 +1,7 @@
+{
+  "name": "ice-cream",
+  "intent": "sways gently from the cone tip, like a treat held in hand",
+  "loop": { "preset": "sway", "origin": [12, 21.5], "amount": 0.7, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [12, 21.5], "amount": 0.9, "duration": 0.8 },
+  "alt": [ { "preset": "float", "amount": 0.5 }, { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.7 }, { "preset": "pop" } ]
+}

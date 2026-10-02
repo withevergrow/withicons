@@ -1,0 +1,427 @@
+{
+  "name": "server",
+  "palettes": [
+    {
+      "id": "rack-black",
+      "name": "Rack black",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#0A0B0E",
+        "c1": "#3E434C",
+        "c2": "#3DDC84",
+        "c3": "#1F2228",
+        "c4": "#F5A524",
+        "tint": "#D8D9DB",
+        "accent": "#F5A524",
+        "shadow": "#24272D",
+        "shine": "#C9CACD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "datacenter-grey",
+      "name": "Datacenter grey",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1F27",
+        "c1": "#9AA3AF",
+        "c2": "#39D98A",
+        "c3": "#5D6673",
+        "c4": "#E4E7EB",
+        "tint": "#EBEDEF",
+        "accent": "#39D98A",
+        "shadow": "#5A616B",
+        "shine": "#E3E5E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "all-systems-go",
+      "name": "All systems go",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0E2A1B",
+        "c1": "#22A46B",
+        "c2": "#B8F5D4",
+        "c3": "#136B44",
+        "c4": "#FFD34D",
+        "tint": "#D3EDE1",
+        "accent": "#FFD34D",
+        "shadow": "#186743",
+        "shine": "#C1E6D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "outage-red",
+      "name": "Outage red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#330A0A",
+        "c1": "#D93636",
+        "c2": "#FFC2C2",
+        "c3": "#8A1C1C",
+        "c4": "#FFB020",
+        "tint": "#F7D7D7",
+        "accent": "#FFB020",
+        "shadow": "#862020",
+        "shine": "#F4C7C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cloud-host-blue",
+      "name": "Cloud host blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0C1F45",
+        "c1": "#3570E6",
+        "c2": "#A8C8FF",
+        "c3": "#1C3F96",
+        "c4": "#4FE3C1",
+        "tint": "#D7E2FA",
+        "accent": "#4FE3C1",
+        "shadow": "#214896",
+        "shine": "#C6D7F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cold-aisle",
+      "name": "Cold aisle",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#12304A",
+        "c1": "#CBE6F7",
+        "c2": "#5EC8F2",
+        "c3": "#8DB8D6",
+        "c4": "#2E7FBF",
+        "tint": "#F5FAFD",
+        "accent": "#5EC8F2",
+        "shadow": "#58758C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hosting-violet",
+      "name": "Hosting violet",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1F1145",
+        "c1": "#6B4CE6",
+        "c2": "#C8BBFF",
+        "c3": "#3D2A99",
+        "c4": "#34E0C9",
+        "tint": "#E1DBFA",
+        "accent": "#34E0C9",
+        "shadow": "#452F96",
+        "shine": "#D6CDF8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "terminal-green",
+      "name": "Terminal green",
+      "tags": [
+        "neon",
+        "on-dark",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#B6FF3B",
+        "c1": "#0F1A0F",
+        "c2": "#39FF14",
+        "c3": "#1F3A1F",
+        "c4": "#00E5A0",
+        "tint": "#CFD1CF",
+        "accent": "#39FF14",
+        "shadow": "#080D08",
+        "shine": "#BCBFBC",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "neon-rack",
+      "name": "Neon rack",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#3A1FA8",
+        "c2": "#00F0FF",
+        "c3": "#FF2BD6",
+        "c4": "#B6FF3B",
+        "tint": "#D8D2EE",
+        "accent": "#00F0FF",
+        "shadow": "#1D1054",
+        "shine": "#C8C0E7",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "beige-mainframe",
+      "name": "Beige mainframe",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2A23",
+        "c1": "#D9CDB0",
+        "c2": "#E86A2C",
+        "c3": "#9C8F72",
+        "c4": "#4C8C6E",
+        "tint": "#F7F5EF",
+        "accent": "#E86A2C",
+        "shadow": "#6F6859",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-mainframe",
+      "name": "70s mainframe",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2C1A0E",
+        "c1": "#C8732F",
+        "c2": "#F2C14E",
+        "c3": "#6E3B1A",
+        "c4": "#3F6E6A",
+        "tint": "#F4E3D5",
+        "accent": "#F2C14E",
+        "shadow": "#7A471F",
+        "shine": "#F0D8C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-stack",
+      "name": "Pastel stack",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2B3A55",
+        "c1": "#A9C8F2",
+        "c2": "#FFD6E8",
+        "c3": "#7FA3D9",
+        "c4": "#CFF5E3",
+        "tint": "#EEF4FC",
+        "accent": "#7FA3D9",
+        "shadow": "#5B7091",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-stack",
+      "name": "Candy stack",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1F3D",
+        "c1": "#FF9ECF",
+        "c2": "#A0F0E0",
+        "c3": "#E86AAE",
+        "c4": "#FFF09A",
+        "tint": "#FFECF5",
+        "accent": "#E86AAE",
+        "shadow": "#8F4F74",
+        "shine": "#FFE4F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-sea-cable",
+      "name": "Deep sea cable",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#04303A",
+        "c1": "#0E8A9E",
+        "c2": "#7FF0F0",
+        "c3": "#075566",
+        "c4": "#FFC75F",
+        "tint": "#CFE8EC",
+        "accent": "#FFC75F",
+        "shadow": "#095D6C",
+        "shine": "#BCDEE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-datacenter",
+      "name": "Green datacenter",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#142A14",
+        "c1": "#4E8B3A",
+        "c2": "#C5F08A",
+        "c3": "#2E5A22",
+        "c4": "#E8C547",
+        "tint": "#DCE8D8",
+        "accent": "#E8C547",
+        "shadow": "#315B27",
+        "shine": "#CDDFC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "onyx-and-gold",
+      "name": "Onyx & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0E0C06",
+        "c1": "#4A4436",
+        "c2": "#D4A845",
+        "c3": "#2C2C33",
+        "c4": "#EDE0B8",
+        "tint": "#DBDAD7",
+        "accent": "#D4A845",
+        "shadow": "#2C281E",
+        "shine": "#CCCBC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#7A7A7A",
+        "c2": "#E0E0E0",
+        "c3": "#444444",
+        "c4": "#B0B0B0",
+        "tint": "#E4E4E4",
+        "accent": "#B0B0B0",
+        "shadow": "#464646",
+        "shine": "#DADADA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cobalt-ramp",
+      "name": "Cobalt ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#081640",
+        "c1": "#2449B8",
+        "c2": "#8FA8F0",
+        "c3": "#142C75",
+        "c4": "#5C7BDE",
+        "tint": "#D3DBF1",
+        "accent": "#8FA8F0",
+        "shadow": "#16307C",
+        "shine": "#C2CCEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#00A651",
+        "c3": "#0047BA",
+        "c4": "#FFFFFF",
+        "tint": "#FFF6CC",
+        "accent": "#00A651",
+        "shadow": "#615100",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-deploy",
+      "name": "Sunset deploy",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0F1F",
+        "c1": "#F2665A",
+        "c2": "#FFC66B",
+        "c3": "#A8325E",
+        "c4": "#5A2A6E",
+        "tint": "#FCE0DE",
+        "accent": "#FFC66B",
+        "shadow": "#963B3D",
+        "shine": "#FBD4D1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lime-uptime",
+      "name": "Lime uptime",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E3300",
+        "c1": "#B5D334",
+        "c2": "#FFF06A",
+        "c3": "#6E8A12",
+        "c4": "#FF8F2E",
+        "tint": "#F0F6D6",
+        "accent": "#FFF06A",
+        "shadow": "#617014",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-brights",
+      "name": "Dopamine brights",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#160F33",
+        "c1": "#2E5BFF",
+        "c2": "#FFDD3C",
+        "c3": "#FF4F7B",
+        "c4": "#2BE0B0",
+        "tint": "#D5DEFF",
+        "accent": "#FFDD3C",
+        "shadow": "#223599",
+        "shine": "#C4D1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

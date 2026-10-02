@@ -1,0 +1,35 @@
+{
+  "name": "send",
+  "intent": "flies off along its path like a message being sent",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "amount": 1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "nudge",
+      "dir": 315
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "slide-up"
+    },
+    {
+      "to": "mail",
+      "effect": "fade"
+    }
+  ]
+}

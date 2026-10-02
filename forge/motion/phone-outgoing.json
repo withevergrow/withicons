@@ -1,0 +1,14 @@
+{
+  "name": "phone-outgoing",
+  "intent": "leans out toward the arrow like a call heading out",
+  "loop": { "preset": "nudge", "dir": 315, "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 315, "amount": 1.2, "duration": 0.6 },
+  "alt": [
+    { "preset": "ring", "amount": 0.5 },
+    { "preset": "wiggle", "amount": 0.8 }
+  ],
+  "swap": [
+    { "to": "phone-call", "effect": "fade" },
+    { "to": "phone-off", "effect": "rotate" }
+  ]
+}

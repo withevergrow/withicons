@@ -1,0 +1,76 @@
+{
+  "name": "burger",
+  "category": "food",
+  "description": "A burger with a domed bun, patty, and base for fast food and meals.",
+  "aliases": [
+    "hamburger-food",
+    "cheeseburger",
+    "fastfood",
+    "sandwich-burger",
+    "beef-burger",
+    "junk-food",
+    "diner",
+    "burgers",
+    "veggie-burger",
+    "fast-food-burger"
+  ],
+  "tags": [
+    "food",
+    "fast-food",
+    "meal",
+    "takeaway",
+    "sandwich"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 10 A8.5 6.5 0 0 1 20.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 14 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 18 H20.5 V19 A2.5 2.5 0 0 1 18 21.5 H6 A2.5 2.5 0 0 1 3.5 19 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3.5 10 A8.5 6.5 0 0 1 20.5 10 Z",
+    "M3.5 18 H20.5 V19 A2.5 2.5 0 0 1 18 21.5 H6 A2.5 2.5 0 0 1 3.5 19 Z"
+  ],
+  "cutouts": [
+    "M9 7 L10 6.5",
+    "M14 6.5 L15 7",
+    "M11.75 5.25 H12.25"
+  ],
+  "synonyms": [
+    "hamburger",
+    "cheese burger",
+    "beef burger",
+    "veggie burger",
+    "chicken burger",
+    "fast food",
+    "junk food",
+    "takeaway",
+    "take away",
+    "takeout",
+    "drive thru",
+    "drive through",
+    "food truck",
+    "grill",
+    "bbq",
+    "barbecue",
+    "bun",
+    "patty",
+    "sandwich",
+    "lunch",
+    "dinner",
+    "meal deal",
+    "american food",
+    "street food",
+    "burgr",
+    "buger",
+    "hamberger"
+  ]
+}

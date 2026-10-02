@@ -1,0 +1,47 @@
+{
+  "name": "star-half",
+  "intent": "twinkles softly, halfway to a full rating",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      12,
+      12.6
+    ],
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12.6
+    ],
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "fill",
+      "duration": 2
+    },
+    {
+      "preset": "flip",
+      "origin": [
+        12,
+        12.6
+      ]
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "star@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "star",
+      "effect": "fade"
+    }
+  ]
+}

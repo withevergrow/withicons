@@ -1,0 +1,89 @@
+{
+  "name": "scale",
+  "category": "objects",
+  "description": "A balance scale with two hanging pans for law, justice, fairness, and comparing options.",
+  "aliases": [
+    "justice",
+    "law",
+    "legal",
+    "libra",
+    "weigh",
+    "fairness",
+    "scales-of-justice",
+    "balance-scale",
+    "scales",
+    "court"
+  ],
+  "tags": [
+    "law",
+    "justice",
+    "balance",
+    "legal",
+    "compare",
+    "weight"
+  ],
+  "paths": [
+    {
+      "d": "M12 3 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 21 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 6.5 H19",
+      "plate": "K"
+    },
+    {
+      "d": "M5 6.5 L2.5 13.5 M5 6.5 L7.5 13.5 M19 6.5 L16.5 13.5 M19 6.5 L21.5 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2 13.5 H8 A3 3 0 0 1 2 13.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M16 13.5 H22 A3 3 0 0 1 16 13.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 13.5 H8 A3 3 0 0 1 2 13.5 Z",
+    "M16 13.5 H22 A3 3 0 0 1 16 13.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "lawyer",
+    "attorney",
+    "courtroom",
+    "judge",
+    "judgement",
+    "judgment",
+    "verdict",
+    "legal advice",
+    "law firm",
+    "terms",
+    "terms and conditions",
+    "policy",
+    "compliance",
+    "equality",
+    "equal",
+    "fair",
+    "ethics",
+    "balanced",
+    "compare",
+    "comparison",
+    "pros and cons",
+    "trade off",
+    "weigh up",
+    "weighing",
+    "balance",
+    "justice scale",
+    "libra zodiac",
+    "rights",
+    "human rights",
+    "legislation",
+    "regulation"
+  ]
+}

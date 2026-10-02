@@ -1,0 +1,15 @@
+{
+  "name": "mail-check",
+  "intent": "breathes calmly like mail that's done, nods yes on hover",
+  "loop": { "preset": "breathe", "amount": 0.5, "duration": 3 },
+  "hover": { "preset": "nod", "amount": 1 },
+  "alt": [
+    { "preset": "draw" },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "mail", "effect": "fade" },
+    { "to": "mail-open", "effect": "flip" },
+    { "to": "mail-check@solid", "effect": "scale" }
+  ]
+}

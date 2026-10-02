@@ -1,0 +1,44 @@
+{
+  "name": "wifi",
+  "intent": "arcs light up from the dot like a signal reaching you",
+  "loop": {
+    "preset": "fill",
+    "origin": [
+      12,
+      18.5
+    ],
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "fill",
+    "origin": [
+      12,
+      18.5
+    ],
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        18.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "glow",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi-off",
+      "effect": "fade"
+    },
+    {
+      "to": "signal",
+      "effect": "blur"
+    }
+  ]
+}

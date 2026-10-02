@@ -1,0 +1,74 @@
+{
+  "name": "tent",
+  "category": "travel",
+  "description": "A camping tent with crossed poles and an open door, for camping, the outdoors, and festivals.",
+  "aliases": [
+    "camping",
+    "campsite",
+    "camp",
+    "outdoors",
+    "shelter",
+    "glamping",
+    "festival",
+    "teepee",
+    "tipi",
+    "campground",
+    "bivouac"
+  ],
+  "tags": [
+    "camping",
+    "outdoors",
+    "nature",
+    "adventure",
+    "travel",
+    "shelter"
+  ],
+  "paths": [
+    {
+      "d": "M4 20 L14 2.5 M20 20 L10 2.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 20 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M9 20 L12 14 L15 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 20 L12 6 L20 20 Z"
+  ],
+  "cutouts": [
+    "M9 20 L12 14 L15 20 Z"
+  ],
+  "synonyms": [
+    "tents",
+    "camp site",
+    "camping trip",
+    "go camping",
+    "campfire",
+    "campout",
+    "outdoor",
+    "wilderness",
+    "hiking",
+    "backpacking",
+    "nature",
+    "adventure",
+    "scouts",
+    "summer camp",
+    "music festival",
+    "fair",
+    "circus",
+    "marquee",
+    "pavilion",
+    "canvas",
+    "wigwam",
+    "base camp",
+    "national park",
+    "overnight",
+    "tnet",
+    "tetn"
+  ]
+}

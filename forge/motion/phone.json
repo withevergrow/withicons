@@ -1,0 +1,32 @@
+{
+  "name": "phone",
+  "intent": "rocks softly like it's ringing, rattles when you hover",
+  "loop": {
+    "preset": "ring",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "phone-call",
+      "effect": "fade"
+    },
+    {
+      "to": "phone-off",
+      "effect": "rotate"
+    }
+  ]
+}

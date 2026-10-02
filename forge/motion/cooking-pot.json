@@ -1,0 +1,8 @@
+{
+  "name": "cooking-pot",
+  "intent": "the pot simmers softly, then its lid rattles at the boil",
+  "loop": { "preset": "breathe", "origin": [12, 21], "amount": 0.6, "duration": 3 },
+  "hover": { "preset": "shake", "amount": 0.5, "duration": 0.6 },
+  "alt": [ { "preset": "type", "amount": 0.5 }, { "preset": "jelly", "origin": [12, 21] }, { "preset": "float", "amount": 0.4 } ],
+  "swap": [ { "to": "cooking-pot@solid", "effect": "scale" }, { "to": "soup", "effect": "slide-up" }, { "to": "chef-hat", "effect": "slide-down" } ]
+}

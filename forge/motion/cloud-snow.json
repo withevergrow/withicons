@@ -1,0 +1,37 @@
+{
+  "name": "cloud-snow",
+  "intent": "hangs softly in the air while snow drifts down",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "drop",
+    "amount": 0.3,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "snowflake",
+      "effect": "morph"
+    },
+    {
+      "to": "cloud",
+      "effect": "slide-up"
+    }
+  ]
+}

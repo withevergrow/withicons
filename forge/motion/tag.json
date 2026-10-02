@@ -1,0 +1,44 @@
+{
+  "name": "tag",
+  "intent": "swings from its hole like a price tag on a shelf",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      8,
+      8
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      8,
+      8
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.7
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "tag@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "percent",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "settings",
+  "intent": "turns slowly like a working gear",
+  "loop": {
+    "preset": "spin",
+    "duration": 4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "steps": 8,
+      "duration": 2
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "settings@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "sliders",
+      "effect": "morph"
+    }
+  ]
+}

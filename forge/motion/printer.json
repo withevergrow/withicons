@@ -1,0 +1,41 @@
+{
+  "name": "printer",
+  "intent": "chugs gently like a page is printing",
+  "loop": {
+    "preset": "type",
+    "amount": 0.4,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      17.5
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.5
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-text",
+      "effect": "slide-down"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "printer@solid",
+      "effect": "scale"
+    }
+  ]
+}

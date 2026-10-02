@@ -1,0 +1,149 @@
+{
+  "name": "captions",
+  "palettes": [
+    {
+      "id": "subtitle-black",
+      "name": "Subtitle black",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#09090B", "c1": "#3F3F46", "c2": "#FFFFFF", "c3": "#FACC15", "c4": "#18181B", "tint": "#C9C9CB", "accent": "#FACC15", "shadow": "#202023", "shine": "#E4E4E5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "yellow-subs",
+      "name": "Yellow subs",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C2711", "c1": "#FACC15", "c2": "#1F2937", "c3": "#FEF9C3", "c4": "#713F12", "tint": "#FDE68A", "accent": "#713F12", "shadow": "#685712", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "paper-caption",
+      "name": "Paper caption",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#27272A", "c1": "#F4F4F5", "c2": "#27272A", "c3": "#3B82F6", "c4": "#A1A1AA", "tint": "#FAFAFA", "accent": "#3B82F6", "shadow": "#3A3A40", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "access-blue",
+      "name": "Access blue",
+      "tags": ["accessible"],
+      "colors": { "ink": "#11182C", "c1": "#1D4ED8", "c2": "#FFFFFF", "c3": "#93C5FD", "c4": "#1E3A8A", "tint": "#C0CDF4", "accent": "#FACC15", "shadow": "#122968", "shine": "#DFE6FA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pink-caption",
+      "name": "Pink caption",
+      "tags": ["candy"],
+      "colors": { "ink": "#2C111F", "c1": "#F472B6", "c2": "#FDE68A", "c3": "#818CF8", "c4": "#831843", "tint": "#FCD8EB", "accent": "#818CF8", "shadow": "#68123F", "shine": "#FDEBF5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "broadcast-red",
+      "name": "Broadcast red",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1111", "c1": "#DC2626", "c2": "#FFFFFF", "c3": "#FCA5A5", "c4": "#7F1D1D", "tint": "#F5C2C2", "accent": "#7F1D1D", "shadow": "#681212", "shine": "#FAE1E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "teletext",
+      "name": "Teletext",
+      "tags": ["retro", "vivid"],
+      "colors": { "ink": "#000000", "c1": "#2B2BFF", "c2": "#FFFF00", "c3": "#00FFFF", "c4": "#00C000", "tint": "#C4C4FF", "accent": "#00FFFF", "shadow": "#121268", "shine": "#E1E1FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "neon-marquee",
+      "name": "Neon marquee",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF0F7", "c1": "#FF2E88", "c2": "#00F0FF", "c3": "#FFE14D", "c4": "#3A005E", "tint": "#FFC4DE", "accent": "#00F0FF", "shadow": "#681237", "shine": "#FFE2EE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "night-screen",
+      "name": "Night screen",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#F2EBFF", "c1": "#6C2BD9", "c2": "#4DFFDF", "c3": "#FF7AE8", "c4": "#1B0640", "tint": "#D6C4F4", "accent": "#4DFFDF", "shadow": "#321368", "shine": "#EAE1FA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "soft-subtitle",
+      "name": "Soft subtitle",
+      "tags": ["pastel"],
+      "colors": { "ink": "#3A3F5C", "c1": "#C7CEEA", "c2": "#FFDAC1", "c3": "#E2F0CB", "c4": "#FFB7B2", "tint": "#E3E7F5", "accent": "#FFB7B2", "shadow": "#212D59", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sugar-screen",
+      "name": "Sugar screen",
+      "tags": ["candy"],
+      "colors": { "ink": "#4A1838", "c1": "#FF9BCE", "c2": "#9BE8FF", "c3": "#FFF59B", "c4": "#C59BFF", "tint": "#FFE3F1", "accent": "#9BE8FF", "shadow": "#68123E", "shine": "#FFF1F8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "frosted-screen",
+      "name": "Frosted screen",
+      "tags": ["y2k"],
+      "colors": { "ink": "#1E2B57", "c1": "#7FB3FF", "c2": "#F3B6FF", "c3": "#B6FFE0", "c4": "#FFE9A6", "tint": "#DBEAFF", "accent": "#FFE9A6", "shadow": "#123568", "shine": "#EDF4FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "retro-tv",
+      "name": "Retro TV",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1711", "c1": "#E07A5F", "c2": "#F2CC8F", "c3": "#81B29A", "c4": "#3D405B", "tint": "#F6DAD2", "accent": "#F2CC8F", "shadow": "#672514", "shine": "#FBECE9", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "silent-film",
+      "name": "Silent film",
+      "tags": ["vintage"],
+      "colors": { "ink": "#2A2118", "c1": "#C2B280", "c2": "#5C4B37", "c3": "#EFE6D2", "c4": "#8A7650", "tint": "#EEE9DB", "accent": "#8A7650", "shadow": "#534828", "shine": "#F6F4ED", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "ocean-screen",
+      "name": "Ocean screen",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11232C", "c1": "#0369A1", "c2": "#E0F2FE", "c3": "#38BDF8", "c4": "#082F49", "tint": "#B8D5E5", "accent": "#38BDF8", "shadow": "#0C3146", "shine": "#DCEAF2", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "fern-green",
+      "name": "Fern green",
+      "tags": ["nature"],
+      "colors": { "ink": "#202C11", "c1": "#3F6212", "c2": "#F7FEE7", "c3": "#A3E635", "c4": "#1A2E05", "tint": "#C9D3BD", "accent": "#A3E635", "shadow": "#203109", "shine": "#E4E9DE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "berry-label",
+      "name": "Berry label",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C111C", "c1": "#9D174D", "c2": "#FDF2F8", "c3": "#F472B6", "c4": "#500724", "tint": "#E4BECD", "accent": "#F472B6", "shadow": "#4D0E27", "shine": "#F1DFE6", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "orange-slice",
+      "name": "Orange slice",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1D11", "c1": "#FB923C", "c2": "#FFF7ED", "c3": "#FDE047", "c4": "#9A3412", "tint": "#FEE0C8", "accent": "#FDE047", "shadow": "#683912", "shine": "#FEF0E4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "indigo-ramp",
+      "name": "Indigo ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#13112C", "c1": "#4338CA", "c2": "#E0E7FF", "c3": "#818CF8", "c4": "#1E1B4B", "tint": "#CAC7F0", "accent": "#818CF8", "shadow": "#1F1A61", "shine": "#E5E3F8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "newsprint",
+      "name": "Newsprint",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#1B1E22", "c1": "#9CA3AF", "c2": "#111827", "c3": "#E5E7EB", "c4": "#4B5563", "tint": "#E3E5E9", "accent": "#4B5563", "shadow": "#373B44", "shine": "#F1F2F4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gold-title-card",
+      "name": "Gold title card",
+      "tags": ["luxe"],
+      "colors": { "ink": "#1A1A1A", "c1": "#C8A951", "c2": "#1A1A1A", "c3": "#F4EAC8", "c4": "#6C5A1E", "tint": "#F0E7CE", "accent": "#6C5A1E", "shadow": "#5D4C1D", "shine": "#F7F3E7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "dark-theater",
+      "name": "Dark theater",
+      "tags": ["dark"],
+      "colors": { "ink": "#020617", "c1": "#475569", "c2": "#E2E8F0", "c3": "#818CF8", "c4": "#1E293B", "tint": "#CBCFD5", "accent": "#818CF8", "shadow": "#242B35", "shine": "#E5E7EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-vis-subtitle",
+      "name": "High-vis subtitle",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#FFFF00", "c2": "#000000", "c3": "#FFFFFF", "c4": "#0000CC", "tint": "#FFFF80", "accent": "#0000CC", "shadow": "#686812", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "meeting-captions",
+      "name": "Meeting captions",
+      "tags": ["corporate"],
+      "colors": { "ink": "#111E2C", "c1": "#2B6CB0", "c2": "#EBF8FF", "c3": "#90CDF4", "c4": "#1A365D", "tint": "#C4D6E9", "accent": "#90CDF4", "shadow": "#163658", "shine": "#E1EAF4", "edge": "#FFFFFF" }
+    }
+  ]
+}

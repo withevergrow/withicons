@@ -1,0 +1,406 @@
+{
+  "name": "webcam",
+  "palettes": [
+    {
+      "id": "classic-black",
+      "name": "Classic black",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A0B0E",
+        "c1": "#464A53",
+        "c2": "#6FA8FF",
+        "c3": "#22252B",
+        "c4": "#3DDC84",
+        "tint": "#DADBDD",
+        "accent": "#6FA8FF",
+        "shadow": "#282B31",
+        "shine": "#CBCCCF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "clip-on-silver",
+      "name": "Clip-on silver",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2229",
+        "c1": "#E2E5EA",
+        "c2": "#4A5260",
+        "c3": "#9AA2AE",
+        "c4": "#E5484D",
+        "tint": "#F9FAFB",
+        "accent": "#E5484D",
+        "shadow": "#686C72",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "on-air-red",
+      "name": "On-air red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A0B0D",
+        "c1": "#E04848",
+        "c2": "#FFC2C2",
+        "c3": "#8A1C1C",
+        "c4": "#2E2E2E",
+        "tint": "#F9DADA",
+        "accent": "#8A1C1C",
+        "shadow": "#8D2A2B",
+        "shine": "#F6CCCC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "meeting-blue",
+      "name": "Meeting blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1E45",
+        "c1": "#3A6FD8",
+        "c2": "#B4CCFF",
+        "c3": "#1A3E96",
+        "c4": "#3DDC84",
+        "tint": "#D8E2F7",
+        "accent": "#1A3E96",
+        "shadow": "#23478F",
+        "shine": "#C8D7F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "streamer-purple",
+      "name": "Streamer purple",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C0F40",
+        "c1": "#8A4BFF",
+        "c2": "#D9C6FF",
+        "c3": "#4F1FB0",
+        "c4": "#FF4F9A",
+        "tint": "#E8DBFF",
+        "accent": "#FF4F9A",
+        "shadow": "#532DA0",
+        "shine": "#DECDFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lagoon-lens",
+      "name": "Lagoon lens",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#04283A",
+        "c1": "#2A9BC9",
+        "c2": "#C2ECFF",
+        "c3": "#135A80",
+        "c4": "#FFB84D",
+        "tint": "#D4EBF4",
+        "accent": "#FFB84D",
+        "shadow": "#176282",
+        "shine": "#C3E3F0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-stream",
+      "name": "Neon stream",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#FF2BD6",
+        "c2": "#00F0FF",
+        "c3": "#B6FF3B",
+        "c4": "#7A2BFF",
+        "tint": "#FFD5F7",
+        "accent": "#00F0FF",
+        "shadow": "#80166B",
+        "shine": "#FFC4F4",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "late-night-call",
+      "name": "Late-night call",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8ECF4",
+        "c1": "#2A2E37",
+        "c2": "#FF4D5E",
+        "c3": "#14161B",
+        "c4": "#8A93A6",
+        "tint": "#D4D5D7",
+        "accent": "#FF4D5E",
+        "shadow": "#15171C",
+        "shine": "#C3C4C7",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "early-web-beige",
+      "name": "Early-web beige",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2A23",
+        "c1": "#D8CCB0",
+        "c2": "#3A5A8A",
+        "c3": "#9A8E74",
+        "c4": "#C2452E",
+        "tint": "#F7F5EF",
+        "accent": "#C2452E",
+        "shadow": "#6F6859",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-home-movie",
+      "name": "70s home movie",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#33180A",
+        "c1": "#E07A2E",
+        "c2": "#F5D08A",
+        "c3": "#8A3A1A",
+        "c4": "#4F7A70",
+        "tint": "#F9E4D5",
+        "accent": "#F5D08A",
+        "shadow": "#8A491C",
+        "shine": "#F6DAC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-cam",
+      "name": "Pastel cam",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#33285A",
+        "c1": "#C6B6F2",
+        "c2": "#FFE0EE",
+        "c3": "#94D6E8",
+        "c4": "#FFF2B8",
+        "tint": "#F4F0FC",
+        "accent": "#94D6E8",
+        "shadow": "#6B5E94",
+        "shine": "#EFEBFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kawaii-cam",
+      "name": "Kawaii cam",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A2E",
+        "c1": "#FF9EC6",
+        "c2": "#8FE6FF",
+        "c3": "#E05A8E",
+        "c4": "#FFF09A",
+        "tint": "#FFECF4",
+        "accent": "#8FE6FF",
+        "shadow": "#A55C7A",
+        "shine": "#FFE4EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cabin-call",
+      "name": "Cabin call",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#15280F",
+        "c1": "#557F3A",
+        "c2": "#E0EECB",
+        "c3": "#304A1E",
+        "c4": "#D9763A",
+        "tint": "#DDE5D8",
+        "accent": "#D9763A",
+        "shadow": "#355425",
+        "shine": "#CFDBC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "studio-gold",
+      "name": "Studio gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0E0C06",
+        "c1": "#3E392D",
+        "c2": "#EBD597",
+        "c3": "#1E1C16",
+        "c4": "#C9A24A",
+        "tint": "#D8D7D5",
+        "accent": "#EBD597",
+        "shadow": "#26231A",
+        "shine": "#C9C8C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#7C7C7C",
+        "c2": "#E0E0E0",
+        "c3": "#404040",
+        "c4": "#B0B0B0",
+        "tint": "#E5E5E5",
+        "accent": "#B0B0B0",
+        "shadow": "#474747",
+        "shine": "#DADADA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-ramp",
+      "name": "Green ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0A2A14",
+        "c1": "#2E9E52",
+        "c2": "#B8EAC6",
+        "c3": "#156A32",
+        "c4": "#6FCC8A",
+        "tint": "#D5ECDC",
+        "accent": "#6FCC8A",
+        "shadow": "#1C6433",
+        "shine": "#C4E4CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0047BA",
+        "c2": "#FFFFFF",
+        "c3": "#FFD400",
+        "c4": "#D00000",
+        "tint": "#CCDAF1",
+        "accent": "#FFD400",
+        "shadow": "#00245D",
+        "shine": "#B8CBEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "golden-hour-call",
+      "name": "Golden-hour call",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0F1F",
+        "c1": "#F06E54",
+        "c2": "#FFD08A",
+        "c3": "#A3335E",
+        "c4": "#5A2D82",
+        "tint": "#FCE2DD",
+        "accent": "#FFD08A",
+        "shadow": "#953F3A",
+        "shine": "#FBD6CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-webcam-ball",
+      "name": "Y2K webcam ball",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#24124A",
+        "c1": "#A8E0FF",
+        "c2": "#FFB3EC",
+        "c3": "#C3A8FF",
+        "c4": "#E6FF8A",
+        "tint": "#EEF9FF",
+        "accent": "#E6FF8A",
+        "shadow": "#56608F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-pop",
+      "name": "Dopamine pop",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#160C30",
+        "c1": "#FFB627",
+        "c2": "#FF4F6E",
+        "c3": "#3F6BFF",
+        "c4": "#2EE6A8",
+        "tint": "#FFF0D4",
+        "accent": "#FF4F6E",
+        "shadow": "#6F4D2D",
+        "shine": "#FFEBC3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-stream",
+      "name": "Berry stream",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#33102E",
+        "c1": "#A0397E",
+        "c2": "#FFD0EA",
+        "c3": "#5E1A4A",
+        "c4": "#FFB84D",
+        "tint": "#ECD7E5",
+        "accent": "#FFB84D",
+        "shadow": "#6A2556",
+        "shine": "#E4C8DB",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

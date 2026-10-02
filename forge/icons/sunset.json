@@ -1,0 +1,79 @@
+{
+  "name": "sunset",
+  "category": "weather",
+  "description": "A sun setting below the horizon with a downward arrow for evening, dusk, and endings.",
+  "aliases": [
+    "dusk",
+    "evening",
+    "sundown",
+    "twilight",
+    "sun-down",
+    "golden-hour",
+    "nightfall",
+    "sun-set",
+    "end-of-day"
+  ],
+  "synonyms": [
+    "sunset time",
+    "setting sun",
+    "sun setting",
+    "good evening",
+    "late",
+    "night",
+    "pm",
+    "west",
+    "horizon",
+    "end of day",
+    "close of business",
+    "cob",
+    "wind down",
+    "relax",
+    "romantic",
+    "beach sunset",
+    "afterglow",
+    "vespers",
+    "magic hour",
+    "weather",
+    "forecast",
+    "daylight",
+    "sunsett",
+    "sun set time"
+  ],
+  "tags": [
+    "weather",
+    "sun",
+    "evening",
+    "horizon",
+    "time"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 17 A4.5 4.5 0 0 1 16.5 17",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 17 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11.5 L5.25 10.25 M17.5 11.5 L18.75 10.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2.5 V8.5",
+      "plate": "S"
+    },
+    {
+      "d": "M9 5.5 L12 8.5 L15 5.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.5 17 A4.5 4.5 0 0 1 16.5 17 Z"
+  ],
+  "cutouts": []
+}

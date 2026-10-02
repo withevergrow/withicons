@@ -1,0 +1,46 @@
+{
+  "name": "search",
+  "intent": "lens tilts and scans as if looking for something",
+  "loop": {
+    "preset": "orbit",
+    "origin": [
+      10.5,
+      10.5
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      10.5,
+      10.5
+    ]
+  },
+  "alt": [
+    {
+      "preset": "zoom",
+      "origin": [
+        10.5,
+        10.5
+      ]
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        10.5,
+        10.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "close",
+      "effect": "rotate"
+    },
+    {
+      "to": "zoom-in",
+      "effect": "scale"
+    }
+  ]
+}

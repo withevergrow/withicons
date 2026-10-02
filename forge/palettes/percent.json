@@ -1,0 +1,27 @@
+{
+  "name": "percent",
+  "palettes": [
+    {"id":"sale-red","name":"Sale red","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0505","c1":"#E8352E","c2":"#FFC933","c3":"#FBC8C2","c4":"#F57A72","tint":"#FAD7D5","accent":"#FFC933","shadow":"#681815","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"discount-orange","name":"Discount orange","tags":["true-to-life"],"colors":{"ink":"#2A1205","c1":"#FF7A1F","c2":"#2E6AE0","c3":"#FFD0A8","c4":"#FFB06A","tint":"#FFE4D2","accent":"#2E6AE0","shadow":"#73370E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-friday","name":"Black Friday","tags":["true-to-life","dark"],"colors":{"ink":"#000000","c1":"#F2C14E","c2":"#E8352E","c3":"#FFE48A","c4":"#8A8A92","tint":"#FCF3DC","accent":"#E8352E","shadow":"#6D5723","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"interest-green","name":"Interest green","tags":["true-to-life","corporate"],"colors":{"ink":"#0D2A1A","c1":"#2FA86A","c2":"#F2C14E","c3":"#B4E6C8","c4":"#7FD0A2","tint":"#D5EEE1","accent":"#F2C14E","shadow":"#154C30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tax-blue","name":"Tax blue","tags":["corporate"],"colors":{"ink":"#0A1430","c1":"#3E6FD8","c2":"#F27D62","c3":"#A9C6FB","c4":"#7FA6EE","tint":"#D8E2F7","accent":"#F27D62","shadow":"#1C3261","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"analytics-violet","name":"Analytics violet","tags":["corporate"],"colors":{"ink":"#1E1238","c1":"#7C5CE6","c2":"#2FD9B0","c3":"#CFC2FA","c4":"#B8A6F5","tint":"#E5DEFA","accent":"#2FD9B0","shadow":"#382967","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"coupon-yellow","name":"Coupon yellow","tags":["vivid"],"colors":{"ink":"#2A1E05","c1":"#FFC933","c2":"#FF4F9A","c3":"#FFE98A","c4":"#FF8A3D","tint":"#FFF4D6","accent":"#FF4F9A","shadow":"#735A17","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clearance-pink","name":"Clearance pink","tags":["candy","vivid"],"colors":{"ink":"#3A0E2A","c1":"#FF4F9A","c2":"#FFE36E","c3":"#FFC0DA","c4":"#7AD7F0","tint":"#FFDCEB","accent":"#7AD7F0","shadow":"#732445","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-promo","name":"Pastel promo","tags":["pastel"],"colors":{"ink":"#2A2440","c1":"#F7A8C8","c2":"#B8E0F7","c3":"#FFE6A3","c4":"#C8B8F5","tint":"#FDEEF4","accent":"#B8E0F7","shadow":"#6F4C5A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mint-deal","name":"Mint deal","tags":["pastel"],"colors":{"ink":"#10302A","c1":"#6FD0AA","c2":"#FFB0C0","c3":"#DDF7EC","c4":"#FFD6A3","tint":"#E2F6EE","accent":"#FFB0C0","shadow":"#325E4C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-markdown","name":"Sunset markdown","tags":["sunset"],"colors":{"ink":"#2A0F1A","c1":"#F2546B","c2":"#FFB13D","c3":"#FFD0BC","c4":"#7A4FC2","tint":"#FCDDE1","accent":"#7A4FC2","shadow":"#6D2630","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-sale","name":"70s sale","tags":["retro"],"colors":{"ink":"#2A170A","c1":"#D9572B","c2":"#F0A830","c3":"#7D8F3A","c4":"#F5D49A","tint":"#F7DDD5","accent":"#F0A830","shadow":"#622713","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-tag","name":"Vintage price tag","tags":["vintage"],"colors":{"ink":"#2A2418","c1":"#B8504E","c2":"#D9B26A","c3":"#E6D8C2","c4":"#6E8A7A","tint":"#F1DCDC","accent":"#D9B26A","shadow":"#532423","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-rate","name":"Ocean rate","tags":["ocean"],"colors":{"ink":"#062433","c1":"#1E9AC0","c2":"#F2C14E","c3":"#A6DAF0","c4":"#48C8D9","tint":"#D2EBF2","accent":"#F2C14E","shadow":"#0E4556","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forest-yield","name":"Forest yield","tags":["nature","earthy"],"colors":{"ink":"#13240F","c1":"#5E9A4A","c2":"#E8B04A","c3":"#C4E0B8","c4":"#C98A3A","tint":"#DFEBDB","accent":"#E8B04A","shadow":"#2A4521","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"summer-sale","name":"Summer sale","tags":["seasonal","vivid"],"colors":{"ink":"#2A1205","c1":"#FF8A3D","c2":"#2EC4B6","c3":"#FFE0A8","c4":"#EF476F","tint":"#FFE8D8","accent":"#2EC4B6","shadow":"#733E1B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cyber-monday","name":"Cyber Monday","tags":["y2k","vivid"],"colors":{"ink":"#141A40","c1":"#4A6AF0","c2":"#3DF5FF","c3":"#C8D0FF","c4":"#FF3DCB","tint":"#DBE1FC","accent":"#3DF5FF","shadow":"#21306C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-discount","name":"Neon discount","tags":["neon","on-dark"],"colors":{"ink":"#FF3DCB","c1":"#2A0624","c2":"#FFE14D","c3":"#3DF5FF","c4":"#B4FF3D","tint":"#6A4A64","accent":"#FFE14D","shadow":"#0E020C","shine":"#FFB8EC","edge":"#1A1A26"}},
+    {"id":"gold-rate","name":"Gold rate","tags":["luxe"],"colors":{"ink":"#1F1606","c1":"#D4AF37","c2":"#6A6A74","c3":"#F2E2A8","c4":"#8A6414","tint":"#F6EFD7","accent":"#2A2A30","shadow":"#5F4F19","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mono-red","name":"Mono red","tags":["mono"],"colors":{"ink":"#2A0505","c1":"#E8524A","c2":"#F5A29A","c3":"#FBC8C2","c4":"#B8302A","tint":"#FADCDB","accent":"#B8302A","shadow":"#682521","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#141416","c1":"#8A8A92","c2":"#C8C8CE","c3":"#E2E2E6","c4":"#5A5A62","tint":"#E8E8E9","accent":"#5A5A62","shadow":"#3E3E42","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#E8001C","c2":"#FFD60A","c3":"#FFFFFF","c4":"#0057B8","tint":"#FACCD2","accent":"#0057B8","shadow":"#68000D","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

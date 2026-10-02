@@ -1,0 +1,35 @@
+{
+  "name": "skip-forward",
+  "intent": "jumps ahead to the next track",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "skip-back",
+      "effect": "flip"
+    },
+    {
+      "to": "play",
+      "effect": "slide-left"
+    }
+  ]
+}

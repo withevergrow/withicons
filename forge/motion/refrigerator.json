@@ -1,0 +1,40 @@
+{
+  "name": "refrigerator",
+  "intent": "hums quietly like a fridge keeping food cold",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5
+  },
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "snowflake",
+      "effect": "spin"
+    },
+    {
+      "to": "thermometer",
+      "effect": "fade"
+    },
+    {
+      "to": "refrigerator@solid",
+      "effect": "fade"
+    }
+  ]
+}

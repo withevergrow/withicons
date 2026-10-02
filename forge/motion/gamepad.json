@@ -1,0 +1,49 @@
+{
+  "name": "gamepad",
+  "intent": "jiggles in your hands like a game in play",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "tada",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "trophy",
+      "effect": "scale"
+    },
+    {
+      "to": "play",
+      "effect": "fade"
+    },
+    {
+      "to": "gamepad@solid",
+      "effect": "scale"
+    }
+  ]
+}

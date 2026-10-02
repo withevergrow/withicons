@@ -1,0 +1,83 @@
+{
+  "name": "library",
+  "category": "files",
+  "description": "A row of books standing on a shelf, one leaning, for libraries, collections and reading lists.",
+  "aliases": [
+    "books",
+    "bookshelf",
+    "book-collection",
+    "shelf",
+    "reading-list",
+    "catalogue-books",
+    "archive-books",
+    "bookcase",
+    "book-shelf",
+    "stacks"
+  ],
+  "tags": [
+    "books",
+    "shelf",
+    "reading",
+    "collection",
+    "knowledge",
+    "education"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 20.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 20.5 V4.5 A1 1 0 0 1 4.5 3.5 H7.5 A1 1 0 0 1 8.5 4.5 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7.5 A1 1 0 0 1 9.5 6.5 H11.5 A1 1 0 0 1 12.5 7.5 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.97 20.24 L19.38 19.59 A1 1 0 0 0 20.09 18.37 L17.11 7.26 A1 1 0 0 0 15.89 6.55 L13.47 7.2 A1 1 0 0 0 12.76 8.43 L15.74 19.53 A1 1 0 0 0 16.97 20.24 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 20.5 V4.5 A1 1 0 0 1 4.5 3.5 H7.5 A1 1 0 0 1 8.5 4.5 V6.5 H11.5 A1 1 0 0 1 12.5 7.5 V20.5 Z",
+    "M16.97 20.24 L19.38 19.59 A1 1 0 0 0 20.09 18.37 L17.11 7.26 A1 1 0 0 0 15.89 6.55 L13.47 7.2 A1 1 0 0 0 12.76 8.43 L15.74 19.53 A1 1 0 0 0 16.97 20.24 Z"
+  ],
+  "cutouts": [
+    "M8.5 8 V20"
+  ],
+  "synonyms": [
+    "public library",
+    "my library",
+    "collection",
+    "catalog",
+    "catalogue",
+    "reading",
+    "study",
+    "learning",
+    "education",
+    "knowledge",
+    "literature",
+    "resources",
+    "docs",
+    "documentation",
+    "references",
+    "reference",
+    "encyclopedia",
+    "school",
+    "university",
+    "bibliography",
+    "ebooks",
+    "e-books",
+    "audiobooks",
+    "playlist",
+    "saved items",
+    "media library",
+    "book case",
+    "libary",
+    "librery",
+    "volumes",
+    "records"
+  ]
+}

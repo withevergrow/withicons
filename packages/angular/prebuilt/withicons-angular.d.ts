@@ -1,7 +1,7 @@
 import * as i0 from "@angular/core";
 import { InjectionToken, OnChanges, OnInit, Provider } from "@angular/core";
-/** The seven with icons styles. */
-type WithIconVariant = 'line' | 'solid' | 'duo' | 'gloss' | 'engrave' | 'blueprint' | 'sketch';
+/** The 12 with icons styles. */
+type WithIconVariant = 'line' | 'solid' | 'duo' | 'gloss' | 'engrave' | 'blueprint' | 'sketch' | 'glass' | 'kawaii' | 'sticker' | 'pixel' | 'retro';
 /** Flat list of SVG child elements: [tag, attributes]. */
 type WithIconNode = ReadonlyArray<readonly [tag: string, attrs: Readonly<Record<string, string | number>>]>;
 /** How a style dresses the root <svg>. */
@@ -43,6 +43,10 @@ export declare class WithIconComponent implements OnChanges, OnInit {
   absoluteStrokeWidth: boolean;
   /** accessible name: renders <title> and role="img" (otherwise aria-hidden) */
   title?: string | null;
+  /** accessible name without a tooltip: moved to the <svg>, which gets role="img" (otherwise aria-hidden) */
+  ariaLabel?: string | null;
+  /** id(s) of the element(s) that name the icon: moved to the <svg>, which gets role="img" */
+  ariaLabelledby?: string | null;
   private readonly registry;
   protected rootAttrs: Attrs;
   protected paths: ReadonlyArray<Attrs>;
@@ -83,6 +87,14 @@ export declare class WithIconComponent implements OnChanges, OnInit {
     };
     "title": {
       "alias": "title";
+      "required": false;
+    };
+    "ariaLabel": {
+      "alias": "aria-label";
+      "required": false;
+    };
+    "ariaLabelledby": {
+      "alias": "aria-labelledby";
       "required": false;
     };
   }, {}, never, ["*"], true, never>;

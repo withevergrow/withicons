@@ -1,0 +1,467 @@
+{
+  "name": "picture-in-picture",
+  "palettes": [
+    {
+      "id": "now-playing",
+      "name": "Now playing",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1A1F",
+        "c1": "#E8E8EE",
+        "c2": "#E5383B",
+        "c3": "#2E2E38",
+        "c4": "#FFD166",
+        "tint": "#FBFBFC",
+        "accent": "#E5383B",
+        "shadow": "#747477",
+        "shine": "#F9F9FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "video-call",
+      "name": "Video call",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0F2140",
+        "c1": "#3C78E8",
+        "c2": "#F2B48A",
+        "c3": "#1E3F7A",
+        "c4": "#E8F0FD",
+        "tint": "#DCE7FB",
+        "accent": "#2ED47A",
+        "shadow": "#1E3C74",
+        "shine": "#D8E4FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "movie-night",
+      "name": "Movie night",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F2EEE6",
+        "c1": "#2A2235",
+        "c2": "#E3B23C",
+        "c3": "#B3283A",
+        "c4": "#5E4B7A",
+        "tint": "#95919A",
+        "accent": "#E3B23C",
+        "shadow": "#130F18",
+        "shine": "#D4D3D7",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "sports-stream",
+      "name": "Sports stream",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0F2414",
+        "c1": "#2F9E4A",
+        "c2": "#FFFFFF",
+        "c3": "#F2C230",
+        "c4": "#1A5C2A",
+        "tint": "#DAEEDE",
+        "accent": "#F2C230",
+        "shadow": "#184F25",
+        "shine": "#D5ECDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "live-red",
+      "name": "Live red",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#36090C",
+        "c1": "#E0383F",
+        "c2": "#FFFFFF",
+        "c3": "#2B2B2B",
+        "c4": "#FFE1E2",
+        "tint": "#F9DBDC",
+        "accent": "#FFD43B",
+        "shadow": "#701C20",
+        "shine": "#F9D7D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "streaming-violet",
+      "name": "Streaming violet",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C0F38",
+        "c1": "#8045F0",
+        "c2": "#FF5CA8",
+        "c3": "#2BD9C4",
+        "c4": "#EEE6FF",
+        "tint": "#E8DEFC",
+        "accent": "#2BD9C4",
+        "shadow": "#402378",
+        "shine": "#E6DAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cooking-show",
+      "name": "Cooking show",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1C0E",
+        "c1": "#F2A44B",
+        "c2": "#D9472B",
+        "c3": "#6FA64A",
+        "c4": "#FFF2DE",
+        "tint": "#FDEFDF",
+        "accent": "#D9472B",
+        "shadow": "#795226",
+        "shine": "#FCEDDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "nature-doc",
+      "name": "Nature doc",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#162616",
+        "c1": "#6FA35A",
+        "c2": "#F2D27A",
+        "c3": "#3F6B8C",
+        "c4": "#EEF6E6",
+        "tint": "#E5EEE1",
+        "accent": "#F2D27A",
+        "shadow": "#38522D",
+        "shine": "#E2EDDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "popcorn",
+      "name": "Popcorn",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1210",
+        "c1": "#FFE29A",
+        "c2": "#E53945",
+        "c3": "#FFFFFF",
+        "c4": "#F7B32B",
+        "tint": "#FFFAED",
+        "accent": "#E53945",
+        "shadow": "#B5862E",
+        "shine": "#FFF8E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cartoon-hour",
+      "name": "Cartoon hour",
+      "tags": [
+        "candy",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1238",
+        "c1": "#FFD43B",
+        "c2": "#FF6FB1",
+        "c3": "#3FC9F2",
+        "c4": "#9D5CF2",
+        "tint": "#FFF7DC",
+        "accent": "#FF6FB1",
+        "shadow": "#806A1E",
+        "shine": "#FFF4CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cotton-sky",
+      "name": "Cotton sky",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E3550",
+        "c1": "#B9D3F5",
+        "c2": "#FFC9DE",
+        "c3": "#FFF0B3",
+        "c4": "#F7FAFF",
+        "tint": "#F2F7FD",
+        "accent": "#FF8FB3",
+        "shadow": "#5D6A7B",
+        "shine": "#EEF4FD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mint-tea",
+      "name": "Mint tea",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#1E3A30",
+        "c1": "#A6E3C8",
+        "c2": "#F7D9A8",
+        "c3": "#E3A6C0",
+        "c4": "#F5FFFA",
+        "tint": "#EFFAF5",
+        "accent": "#E07A9A",
+        "shadow": "#537264",
+        "shine": "#E9F8F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-player",
+      "name": "Y2K player",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1A1A3D",
+        "c1": "#B3C7FF",
+        "c2": "#FF8FDB",
+        "c3": "#C2FFE8",
+        "c4": "#EEF2FF",
+        "tint": "#F1F5FF",
+        "accent": "#5B5CFF",
+        "shadow": "#5A6480",
+        "shine": "#F0F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "crt-glow",
+      "name": "CRT glow",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#EFFFF5",
+        "c1": "#00C26E",
+        "c2": "#FF3D7F",
+        "c3": "#2DE2FF",
+        "c4": "#071510",
+        "tint": "#80E1B7",
+        "accent": "#2DE2FF",
+        "shadow": "#006137",
+        "shine": "#CCF3E2",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "drive-in",
+      "name": "Drive-in",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2B1209",
+        "c1": "#E2622B",
+        "c2": "#F5B843",
+        "c3": "#3E7C82",
+        "c4": "#A8322A",
+        "tint": "#FAE3D9",
+        "accent": "#3E7C82",
+        "shadow": "#713116",
+        "shine": "#F9E0D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sepia-reel",
+      "name": "Sepia reel",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A2016",
+        "c1": "#B88A5E",
+        "c2": "#E9D7B7",
+        "c3": "#5E4330",
+        "c4": "#8C3B2E",
+        "tint": "#F2EAE2",
+        "accent": "#8C3B2E",
+        "shadow": "#5C452F",
+        "shine": "#F1E8DF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-blue",
+      "name": "Deep blue",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#04263A",
+        "c1": "#1B6E99",
+        "c2": "#7CC4E0",
+        "c3": "#F2A65A",
+        "c4": "#E2F2FA",
+        "tint": "#D6E5ED",
+        "accent": "#F2A65A",
+        "shadow": "#0E374D",
+        "shine": "#D1E2EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "desert-screen",
+      "name": "Desert screen",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1C10",
+        "c1": "#CF8A5A",
+        "c2": "#ECCFA6",
+        "c3": "#6F7A4A",
+        "c4": "#F8EBDA",
+        "tint": "#F6EAE1",
+        "accent": "#4A7A7E",
+        "shadow": "#68452D",
+        "shine": "#F5E8DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "velvet-theatre",
+      "name": "Velvet theatre",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1E0A0E",
+        "c1": "#8C1D2E",
+        "c2": "#D9B45A",
+        "c3": "#2A1418",
+        "c4": "#F2E2C4",
+        "tint": "#EAD6D9",
+        "accent": "#D9B45A",
+        "shadow": "#460F17",
+        "shine": "#E8D2D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plum-tv",
+      "name": "Plum TV",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#270F2B",
+        "c1": "#9B3A9E",
+        "c2": "#F2B84B",
+        "c3": "#4AC2B0",
+        "c4": "#F9E8F9",
+        "tint": "#EDDCEE",
+        "accent": "#F2B84B",
+        "shadow": "#4E1D4F",
+        "shine": "#EBD8EC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-ramp",
+      "name": "Night ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0E1230",
+        "c1": "#353C8C",
+        "c2": "#7A82D6",
+        "c3": "#BFC3F0",
+        "c4": "#1A1F5C",
+        "tint": "#DBDCEA",
+        "accent": "#FF9E5E",
+        "shadow": "#1B1E46",
+        "shine": "#D7D8E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "silver-screen",
+      "name": "Silver screen",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#8A8A8A",
+        "c2": "#D6D6D6",
+        "c3": "#444444",
+        "c4": "#F0F0F0",
+        "tint": "#EAEAEA",
+        "accent": "#BDBDBD",
+        "shadow": "#454545",
+        "shine": "#E8E8E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0050FF",
+        "c3": "#FFFFFF",
+        "c4": "#E00000",
+        "tint": "#FFF7D1",
+        "accent": "#0050FF",
+        "shadow": "#806A00",
+        "shine": "#FFF4BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-special",
+      "name": "Holiday special",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1E0F0A",
+        "c1": "#C42B3A",
+        "c2": "#F2E6CF",
+        "c3": "#1E6B47",
+        "c4": "#E6C35C",
+        "tint": "#F4D9DC",
+        "accent": "#E6C35C",
+        "shadow": "#62161D",
+        "shine": "#F3D5D8",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

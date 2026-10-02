@@ -1,0 +1,72 @@
+{
+  "name": "list-filter",
+  "category": "layout",
+  "description": "Three centred lines that get shorter toward the bottom, for filtering and narrowing down a list.",
+  "aliases": [
+    "filter-lines",
+    "filter-options",
+    "filter-bars",
+    "results-filter",
+    "filter-rows",
+    "funnel-lines",
+    "filter-menu"
+  ],
+  "tags": [
+    "filter",
+    "refine",
+    "narrow",
+    "sort",
+    "options",
+    "results",
+    "lines"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 12 H17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 18 H14.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "filter",
+    "filters",
+    "filtering",
+    "refine",
+    "narrow down",
+    "filter list",
+    "refine results",
+    "narrow results",
+    "narrow search",
+    "filter results",
+    "filter by",
+    "show only",
+    "advanced filter",
+    "faceted search",
+    "facets",
+    "criteria",
+    "options",
+    "settings lines",
+    "sort and filter",
+    "sieve",
+    "screen",
+    "reduce list",
+    "drill down",
+    "shortlist",
+    "preferences",
+    "adjust",
+    "search filter",
+    "product filter",
+    "filter icon",
+    "fliter",
+    "filtre"
+  ]
+}

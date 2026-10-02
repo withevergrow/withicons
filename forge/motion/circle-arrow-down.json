@@ -1,0 +1,15 @@
+{
+  "name": "circle-arrow-down",
+  "intent": "dips downward, like scroll down or save to your device",
+  "loop": { "preset": "nudge", "dir": 90, "amount": 0.4, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.9, "duration": 0.6 },
+  "alt": [
+    { "preset": "bounce", "amount": 0.6 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "circle-arrow-up", "effect": "rotate" },
+    { "to": "circle-arrow-down@solid", "effect": "scale" },
+    { "to": "check", "effect": "morph" }
+  ]
+}

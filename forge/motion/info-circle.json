@@ -1,0 +1,42 @@
+{
+  "name": "info-circle",
+  "intent": "gently pulses to draw your eye to a helpful note",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "nod",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "help-circle",
+      "effect": "flip"
+    },
+    {
+      "to": "x-circle",
+      "effect": "rotate"
+    }
+  ]
+}

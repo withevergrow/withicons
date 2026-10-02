@@ -1,0 +1,36 @@
+{
+  "name": "strikethrough",
+  "intent": "strikes a line through text marked as done",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "underline",
+      "effect": "slide-down"
+    },
+    {
+      "to": "bold",
+      "effect": "flip"
+    },
+    {
+      "to": "eraser",
+      "effect": "fade"
+    }
+  ]
+}

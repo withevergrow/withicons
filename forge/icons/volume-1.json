@@ -1,0 +1,61 @@
+{
+  "name": "volume-1",
+  "category": "media",
+  "description": "A speaker with one small sound wave for low or reduced volume.",
+  "aliases": [
+    "volume-low",
+    "volume-down",
+    "low-sound",
+    "soft-volume",
+    "sound-low",
+    "volume-quiet",
+    "speaker-low",
+    "quiet-sound",
+    "volume-medium"
+  ],
+  "tags": [
+    "volume",
+    "audio",
+    "sound",
+    "speaker",
+    "quiet",
+    "low"
+  ],
+  "paths": [
+    {
+      "d": "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.49 8.99 A5 5 0 0 1 15.49 15.01",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.84 5.98 A1 1 0 0 1 11.5 6.73 L11.5 17.27 A1 1 0 0 1 9.84 18.02 L7 15.5 L4.5 15.5 A1.5 1.5 0 0 1 3 14 L3 10 A1.5 1.5 0 0 1 4.5 8.5 L7 8.5 L9.84 5.98 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "quiet",
+    "quieter",
+    "soft",
+    "softer",
+    "turn down",
+    "lower volume",
+    "decrease volume",
+    "reduce volume",
+    "turn it down",
+    "low volume",
+    "medium volume",
+    "half volume",
+    "speaker",
+    "loudspeaker",
+    "audio",
+    "sound settings",
+    "volume control",
+    "audio level",
+    "hush",
+    "volum low",
+    "vol down"
+  ]
+}

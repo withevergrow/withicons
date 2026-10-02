@@ -1,0 +1,39 @@
+{
+  "name": "plus-circle",
+  "intent": "swells softly, inviting you to add an item",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.7,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "spin-once",
+      "duration": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "minus-circle",
+      "effect": "rotate"
+    },
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "x-circle",
+      "effect": "rotate"
+    },
+    {
+      "to": "plus-circle@solid",
+      "effect": "scale"
+    }
+  ]
+}

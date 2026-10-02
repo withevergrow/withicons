@@ -1,5 +1,5 @@
 // emit-vue — @withicons/vue. One functional component per icon per style (Vue 3); see emitComponentPackage.
-import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount } from './emit-core.mjs'
+import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount, rtlDoc } from './emit-core.mjs'
 import { frameworkReadme } from './emit-react.mjs'
 
 const clean = a => { const o = {}; for (const [k, v] of Object.entries(a)) if (v !== undefined && v !== null && v !== false) o[k] = v; return o }
@@ -36,6 +36,7 @@ function createWithIcon(name, style, displayName, iconNode) {
   }
   Component.props = WITH_PROPS
   Component.displayName = displayName
+  Component.iconNode = iconNode
   return Component
 }`
 
@@ -61,7 +62,10 @@ export interface WithIconProps extends Partial<SVGAttributes> {
   /** Accessible name: renders <title> and sets role="img". Without it the icon is aria-hidden. */
   title?: string
 }
-export type WithIcon = FunctionalComponent<WithIconProps>
+export type WithIcon = FunctionalComponent<WithIconProps> & {
+  /** The icon's drawing as [tag, attrs][] (24x24 grid). Feed it to applyPalette() from @withicons/core/palettes/palette-map.js. */
+  readonly iconNode: IconNode
+}
 export interface IconProps extends WithIconProps {
   /** Canonical name ('home') or an unambiguous alias ('house'). */
   name: IconName | IconAlias
@@ -83,14 +87,14 @@ export default async function emit(ctx) {
   })
   const { exports, typesVersions } = componentExports(ctx)
   const pkg = {
-    ...basePkg(ctx, '@withicons/vue', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable Vue 3 components.`, ['vue', 'vue3', 'svg-icons']),
+    ...basePkg(ctx, '@withicons/vue', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable Vue 3 components.`, ['vue', 'vue3', 'vue-icons', 'nuxt', 'svg-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports, typesVersions,
     files: ['dist', 'README.md', 'LICENSE'],
     peerDependencies: { vue: '>=3.2.0' },
   }
-  writePkg(ctx, 'vue', pkg, frameworkReadme(ctx, {
+  writePkg(ctx, 'vue', pkg, vueSections(ctx, frameworkReadme(ctx, {
     pkg: '@withicons/vue', framework: 'Vue 3', lang: 'vue', classProp: 'class',
     example: `<script setup>
 import { Home, Search } from '@withicons/vue'          // line (default style)
@@ -109,7 +113,81 @@ import { Icon } from '@withicons/vue'
 <template>
   <Icon name="home" variant="solid" :size="20" />
 </template>`,
-  }))
+  })))
   const fb = fallbackCount(ctx)
   return `${files} icon files, ${ctx.styles.length} styles${fb ? `, ${fb} fell back to ${ctx.defaultStyle}` : ''}`
 }
+
+// Vue-specific README sections, spliced into the shared framework README:
+// palettes (before the generic "Animation" section) and animation + RTL (before "Generic icon").
+function vueSections(ctx, md) {
+  const pal = ctx.styles.some(s => s.name === 'retro' && s.palette) && ctx.icons.some(i => i.name === 'pizza')
+  const palette = pal ? `
+### Change every colour in Vue
+
+The palette variables are inherited CSS custom properties, so a \`:style\` binding (or any CSS rule) re-themes one icon,
+and \`color\` sets the outline:
+
+\`\`\`vue
+<script setup>
+import { Pizza } from '@withicons/vue/retro'
+</script>
+
+<template>
+  <Pizza :size="48" color="#3b1f12"
+         :style="{ '--with-retro-1': '#f4b942', '--with-retro-2': '#d9412b', '--with-retro-3': '#2f8f4e' }" />
+</template>
+\`\`\`
+
+Every icon also has 20-30 colour palettes picked for it in [\`@withicons/core\`](https://www.npmjs.com/package/@withicons/core)
+(\`npm i @withicons/core\`). Every component carries its drawing as \`iconNode\`, and \`applyPalette\` maps a palette onto
+the variables that icon uses, in any style:
+
+\`\`\`vue
+<script setup>
+import { Pizza } from '@withicons/vue/retro'
+import pizza from '@withicons/core/palettes/pizza.json'
+import { applyPalette } from '@withicons/core/palettes/palette-map.js'
+
+const looks = pizza.palettes.map(p => ({ id: p.id, name: p.name, ...applyPalette(JSON.stringify(Pizza.iconNode), p.colors) }))
+</script>
+
+<template>
+  <Pizza v-for="p in looks" :key="p.id" :size="40" :style="p.vars" :color="p.color ?? undefined" :title="p.name" />
+</template>
+\`\`\`
+` : ''
+  const motion = `
+### Animation in Vue
+
+Import the two stylesheets once (for example in \`main.js\`), then wrap the icon. \`motionAttrs\` builds the wrapper's
+attributes for you, and works in SSR (Nuxt) because it only returns classes and a style string:
+
+\`\`\`vue
+<script setup>
+import '@withicons/motion/motion.css'
+import '@withicons/motion/icons.css'
+import { motionAttrs } from '@withicons/motion'
+import { Bell, Loader } from '@withicons/vue'
+</script>
+
+<template>
+  <span class="wm wm-loop" data-wm="bell"><Bell /></span>
+  <button class="wm-trigger"><span v-bind="motionAttrs('bell', { trigger: 'hover' })"><Bell /></span> Alerts</button>
+  <span v-bind="motionAttrs(null, { preset: 'spin', duration: 1.2 })" class="wm-force"><Loader title="Loading" /></span>
+</template>
+\`\`\`
+
+For the JS-only triggers (\`inview\`, a hover that always finishes) call \`motion(el, name, options)\` from \`@withicons/motion\`
+in \`onMounted\` on a template ref, and \`destroy()\` the handle in \`onBeforeUnmount\`.
+`
+  const rtl = rtlDoc('vue', `<ChevronRight class="with-rtl" />
+
+<!-- animated: mirror the icon, and point nudge / pass the other way on the wrapper -->
+<span class="wm wm-hover" data-wm="arrow-right" :style="{ '--wm-dx': isRtl ? -1 : 1 }">
+  <ArrowRight class="with-rtl" />
+</span>`, '###')
+  const put = (text, marker, add) => text.includes(marker) ? text.replace(marker, add.replace(/^\n/, '') + '\n' + marker) : text + add
+  return put(put(md, '## Animation (optional)', palette), '## Generic icon', motion + rtl)
+}
+

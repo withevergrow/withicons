@@ -1,0 +1,8 @@
+{
+  "name": "clapperboard",
+  "intent": "snaps shut like a scene starting: action!",
+  "loop": { "preset": "ring", "origin": [3, 11], "amount": 0.5, "duration": 2.6 },
+  "hover": { "preset": "ring", "origin": [3, 11], "amount": 0.9 },
+  "alt": [ { "preset": "tada" }, { "preset": "pop", "origin": [12, 16] } ],
+  "swap": [ { "to": "film", "effect": "fade" }, { "to": "play", "effect": "scale" }, { "to": "video-camera", "effect": "flip" } ]
+}

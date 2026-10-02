@@ -1,0 +1,29 @@
+{
+  "name": "flower",
+  "palettes": [
+    {"id":"daisy","name":"Daisy","tags":["true-to-life"],"colors":{"ink":"#2E2A1E","c1":"#FFFFFF","c2":"#F6C431","c3":"#7BB661","c4":"#FFF4C2","tint":"#FFFFFF","accent":"#F6C431","shadow":"#8C8C8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunflower","name":"Sunflower","tags":["true-to-life"],"colors":{"ink":"#2E1A02","c1":"#FFC20E","c2":"#6B3F1C","c3":"#5E9C3A","c4":"#FFE58A","tint":"#FFEEBC","accent":"#6B3F1C","shadow":"#8C6B08","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"red-rose","name":"Red rose","tags":["true-to-life"],"colors":{"ink":"#2A0508","c1":"#D61F3A","c2":"#F6C431","c3":"#2E7D4F","c4":"#F7A8B5","tint":"#F4C0C8","accent":"#F6C431","shadow":"#761120","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cherry-blossom","name":"Cherry blossom","tags":["true-to-life","seasonal"],"colors":{"ink":"#3A1A26","c1":"#F8C8D8","c2":"#E8547A","c3":"#8C5A4A","c4":"#FFE6EE","tint":"#FDF0F4","accent":"#E8547A","shadow":"#886E77","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lavender","name":"Lavender","tags":["true-to-life"],"colors":{"ink":"#2A1F44","c1":"#A98FE0","c2":"#F6E39A","c3":"#6E8C5A","c4":"#E2D8F8","tint":"#E7E0F6","accent":"#F6E39A","shadow":"#5D4F7B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forget-me-not","name":"Forget-me-not","tags":["true-to-life"],"colors":{"ink":"#0A2240","c1":"#6FA8F0","c2":"#FFE35E","c3":"#FFFFFF","c4":"#D6E8FB","tint":"#D7E7FB","accent":"#FFE35E","shadow":"#3D5C84","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"poppy","name":"Poppy","tags":["true-to-life","vivid"],"colors":{"ink":"#1A0506","c1":"#E8332A","c2":"#1A1A1A","c3":"#4E8C3A","c4":"#F7A49E","tint":"#F9C6C3","accent":"#FFD23F","shadow":"#801C17","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"marigold","name":"Marigold","tags":["true-to-life"],"colors":{"ink":"#2E1405","c1":"#F58A1F","c2":"#C2410C","c3":"#FFD23F","c4":"#FFC08A","tint":"#FCDEC0","accent":"#C2410C","shadow":"#874C11","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hibiscus","name":"Hibiscus","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0718","c1":"#E8366F","c2":"#FFE35E","c3":"#2E9C6A","c4":"#FFB3CC","tint":"#F9C7D7","accent":"#FFE35E","shadow":"#801E3D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lotus","name":"Lotus","tags":["true-to-life","pastel"],"colors":{"ink":"#3A1A2E","c1":"#F4A6C8","c2":"#FFE6A8","c3":"#6FB59A","c4":"#FCE0EE","tint":"#FCE6F0","accent":"#FFE6A8","shadow":"#865B6E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"wild-violet","name":"Wild violet","tags":["true-to-life"],"colors":{"ink":"#1F0A33","c1":"#7A3FB8","c2":"#FFD23F","c3":"#E6D2F2","c4":"#4E1A8C","tint":"#DAC9EB","accent":"#FFD23F","shadow":"#432365","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"autumn-mum","name":"Autumn mum","tags":["seasonal"],"colors":{"ink":"#2B1206","c1":"#B8452A","c2":"#F4D06F","c3":"#6E7A3A","c4":"#E59A6A","tint":"#EBCBC3","accent":"#F4D06F","shadow":"#652617","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-bouquet","name":"Pastel bouquet","tags":["pastel"],"colors":{"ink":"#3A3550","c1":"#FFC9D9","c2":"#FFF2C2","c3":"#B8E8D6","c4":"#C9B8F5","tint":"#FFF0F4","accent":"#B8E8D6","shadow":"#8C6F77","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum-bloom","name":"Bubblegum bloom","tags":["candy"],"colors":{"ink":"#3A0F2A","c1":"#FF8FC8","c2":"#FFF1A8","c3":"#8FE3FF","c4":"#C8B6FF","tint":"#FFE0F0","accent":"#8FE3FF","shadow":"#8C4F6E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-bloom","name":"Neon bloom","tags":["neon","on-dark"],"colors":{"ink":"#FFF2FA","c1":"#FF2BD6","c2":"#FFE45E","c3":"#39FF88","c4":"#2BF0FF","tint":"#FFC4F4","accent":"#FFE45E","shadow":"#8C1876","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-daisy","name":"Y2K daisy","tags":["y2k"],"colors":{"ink":"#1D1240","c1":"#C6B8FF","c2":"#FFF07A","c3":"#FF7AD9","c4":"#7AF2E0","tint":"#EFEBFF","accent":"#FF7AD9","shadow":"#6D658C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"flower-power","name":"Flower power","tags":["retro"],"colors":{"ink":"#2A1608","c1":"#F28C28","c2":"#F4D06F","c3":"#D9532B","c4":"#6E8C3A","tint":"#FBDFC3","accent":"#F4D06F","shadow":"#854D16","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pressed-flower","name":"Pressed flower","tags":["vintage"],"colors":{"ink":"#2B2420","c1":"#C99A8A","c2":"#E8D2A0","c3":"#7D8C6A","c4":"#EADFC8","tint":"#F0E3DE","accent":"#7D8C6A","shadow":"#6F554C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dried-terracotta","name":"Dried terracotta","tags":["earthy"],"colors":{"ink":"#2B140C","c1":"#C4673F","c2":"#E8C26A","c3":"#6E7A4A","c4":"#F2D6C2","tint":"#EED4C9","accent":"#E8C26A","shadow":"#6C3923","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rose-ramp","name":"Rose ramp","tags":["mono"],"colors":{"ink":"#3A0A1E","c1":"#D94A7A","c2":"#7A1A3E","c3":"#F7B8CE","c4":"#FCE0EB","tint":"#F4CCDA","accent":"#F7B8CE","shadow":"#772943","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"graphite","name":"Graphite","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#BDBDBD","c2":"#3E3E3E","c3":"#7A7A7A","c4":"#E6E6E6","tint":"#EDEDED","accent":"#3E3E3E","shadow":"#686868","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"midnight-bloom","name":"Midnight bloom","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#4A3A6E","c2":"#F2C14E","c3":"#8C7AB8","c4":"#2A2240","tint":"#CCC8D6","accent":"#F2C14E","shadow":"#29203D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-leaf-bloom","name":"Gold leaf bloom","tags":["luxe"],"colors":{"ink":"#1A1408","c1":"#D4AF37","c2":"#1A1A1A","c3":"#F6E7B2","c4":"#8C6E1B","tint":"#F3E9C7","accent":"#1A1A1A","shadow":"#75601E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#D4002A","c2":"#FFD200","c3":"#0046C7","c4":"#FFFFFF","tint":"#F3B8C3","accent":"#FFD200","shadow":"#750017","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

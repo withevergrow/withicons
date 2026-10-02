@@ -8,15 +8,18 @@
 // Runs inside forge/build.mjs, or standalone: `node forge/lib/emit-search.mjs` (reads skeleton JSON only).
 import fs from 'fs'
 import path from 'path'
+import zlib from 'zlib'
 import { fileURLToPath, pathToFileURL } from 'url'
-import { basePkg, writePkg, dual } from './emit-core.mjs'
+import { basePkg, writePkg, dual, sortStyles } from './emit-core.mjs'
 
 // site/vendor/with/ is wiped and rewritten by emit-web-classes — write after it
 export const after = ['web-classes']
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
-const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
 const DESC_STOP = new Set('a an the of for to in on at by with and or as is are its it that this from into onto over under used use showing shows one two any each per'.split(' '))
+
+// README template (packages/search/src/readme.template.md: npm ships every root README*, so it lives in src/) placeholders: {{version}} {{icons}} {{styles}} {{styleList}} {{total}} {{indexKB}} {{indexGzKB}}
+export const fill = (text, vars) => text.replace(/\{\{(\w+)\}\}/g, (m, k) => (k in vars ? String(vars[k]) : m))
 
 const clean = list => {
   const out = [], seen = new Set()
@@ -55,13 +58,18 @@ export function engineBuilds(src, version) {
   return { esm, cjs, umd }
 }
 
-const DTS = `export interface SearchIndex { format: string; version: string; styles: [string, string][]; categories: string[]; icons: unknown[] }
+const DTS = `// readonly arrays, so the raw JSON index (import index from '@withicons/search/index.json') type-checks too
+export interface SearchIndex { format: string; version: string; styles: ReadonlyArray<ReadonlyArray<string>>; categories: ReadonlyArray<string>; icons: ReadonlyArray<unknown> }
 export type MatchField = 'name' | 'alias' | 'synonym' | 'tag' | 'category' | 'description'
 export type MatchKind = 'exact' | 'prefix' | 'stem' | 'typo' | 'similar' | 'phonetic' | 'concept'
 export interface SearchResult { name: string; title: string; category: string; score: number; match: { field: MatchField; term: string; typo: boolean; kind: MatchKind } }
 export interface SearchOptions { limit?: number; category?: string; style?: string }
 export type Resolution = { name: string; alias?: string } | { ambiguous: string[] } | { unknown: true; nearest: string[] }
-export interface ParsedQuery { words: string[]; required: string[]; soft: string[]; style: string | null; split: boolean }
+/** A query word and its position in ParsedQuery.all */
+export interface QueryToken { w: string; pos: number }
+/** all: every word after normalisation; words: the meaningful ones; required: must all match; soft: only add score;
+ *  style: a style named in the query ('cute heart' -> 'kawaii'); split: a run-together word was split */
+export interface ParsedQuery { all: string[]; words: string[]; required: QueryToken[]; soft: QueryToken[]; style: string | null; split: boolean }
 export interface Engine {
   version: string; dataVersion: string; size: number
   search(query: string, options?: SearchOptions): SearchResult[]
@@ -113,9 +121,10 @@ export default async function emit(ctx) {
   write('site/vendor/with/search.js', umd)
   write('site/data/search-index.js', `window.WITH_SEARCH_INDEX=${json};\n`)
   const pkg = {
-    ...basePkg({ version }, '@withicons/search', 'Fast, typo-tolerant, dependency-free search engine and prebuilt index for the with icons library (300 icons x 7 styles).',
+    ...basePkg({ version }, '@withicons/search', `Fast, typo-tolerant, dependency-free search engine and prebuilt index for the with icons library (${icons.length} icons x ${ctx.styles.length} styles).`,
       ['search', 'icon-search', 'fuzzy-search', 'typo-tolerant', 'mcp']),
-    type: 'module', sideEffects: false,
+    // the classic-script build sets window.WithSearch: a bare import of '@withicons/search/browser' must survive tree shaking
+    type: 'module', sideEffects: ['./dist/with-search.js'],
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     unpkg: './dist/with-search.js', jsdelivr: './dist/with-search.js',
     exports: {
@@ -129,8 +138,9 @@ export default async function emit(ctx) {
     publishConfig: { access: 'public' },
     scripts: { test: 'node --test test/*.test.mjs' },
   }
-  const readmeSrc = path.join(root, 'packages', 'search', 'README.src.md')
-  const readme = fs.existsSync(readmeSrc) ? fs.readFileSync(readmeSrc, 'utf8').split('{{version}}').join(version) : '# @withicons/search\n'
+  const readmeSrc = path.join(root, 'packages', 'search', 'src', 'readme.template.md')
+  const readme = fs.existsSync(readmeSrc) ? fill(fs.readFileSync(readmeSrc, 'utf8'), { version, icons: icons.length, styles: ctx.styles.length, styleList: ctx.styles.map(s => s.name).join(', '), total: (icons.length * ctx.styles.length).toLocaleString('en-US'),
+    indexKB: Math.round(json.length / 1024), indexGzKB: Math.round(zlib.gzipSync(json, { level: 9 }).length / 1024) }) : '# @withicons/search\n'
   writePkg({ write, version }, 'search', pkg, readme)
   const syn = icons.reduce((n, i) => n + (i.synonyms || []).length, 0)
   return `search index ${(json.length / 1024).toFixed(1)} KB (${icons.length} icons, ${syn} synonyms), engine ${(umd.length / 1024).toFixed(1)} KB`
@@ -140,8 +150,7 @@ export default async function emit(ctx) {
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   const names = fs.readdirSync(path.join(ROOT, 'forge', 'icons')).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)).sort()
   const icons = names.map(name => { const r = JSON.parse(fs.readFileSync(path.join(ROOT, 'forge', 'icons', `${name}.json`), 'utf8')); return { name, category: r.category } })
-  const styleNames = fs.readdirSync(path.join(ROOT, 'forge', 'styles')).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).map(f => f.slice(0, -4))
-  styleNames.sort((a, b) => ((STYLE_ORDER.indexOf(a) + 99) % 99) - ((STYLE_ORDER.indexOf(b) + 99) % 99))
+  const styleNames = sortStyles(fs.readdirSync(path.join(ROOT, 'forge', 'styles')).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).map(f => f.slice(0, -4)), n => n)
   const titles = {}
   for (const s of styleNames) { try { const m = await import(pathToFileURL(path.join(ROOT, 'forge', 'styles', s + '.mjs')).href); titles[s] = m.default?.title } catch {} }
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))

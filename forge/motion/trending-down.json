@@ -1,0 +1,30 @@
+{
+  "name": "trending-down",
+  "intent": "line dips down and to the right, showing a drop",
+  "loop": {
+    "preset": "nudge",
+    "dir": 45,
+    "amount": 0.5,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 45
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "trending-up",
+      "effect": "morph"
+    }
+  ]
+}

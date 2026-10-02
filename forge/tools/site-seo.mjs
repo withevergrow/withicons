@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // SEO + GEO layer for withicons.com. Deterministic, self-sufficient, fast on re-runs.
-//   site/icons/<name>.html        one crawlable page per icon (download first, then how-to tips, then developer tabs)
+//   site/icons/<name>.html        one crawlable page per icon: see it -> pick a style -> grab it -> customize (js/editor.js)
+//                                 -> see it in use -> apps, styles, related, names -> developers -> FAQ
 //   site/categories/<cat>.html    category hubs          site/styles/<style>.html   style hubs
 //   site/sprites/<style>.svg      symbol sprites (ids with-<name>)
 //   site/og/*.png                 Open Graph cards (resvg): default, one per icon, style and category
@@ -16,7 +17,7 @@ import crypto from 'crypto'
 import zlib from 'zlib'
 import { fileURLToPath } from 'url'
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads'
-import { ROOT, ICON_DIR, STYLE_DIR, listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest, attrs } from '../lib/load.mjs'
+import { ROOT, ICON_DIR, STYLE_DIR, listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest, attrs, resolveVars } from '../lib/load.mjs'
 
 const SELF = fileURLToPath(import.meta.url)
 
@@ -24,9 +25,9 @@ const SELF = fileURLToPath(import.meta.url)
 if (!isMainThread && workerData && workerData.withSeoWorker) {
   const styles = await loadStyles()
   const out = {}
-  for (const n of workerData.names) {
+  for (const [n, want] of workerData.jobs) {
     const icon = loadIcon(n), svg = {}
-    for (const s of Object.values(styles)) { try { svg[s.name] = nodesToMarkup(renderIcon(s, icon)) } catch { /* style failed for this icon */ } }
+    for (const sn of want) { svg[sn] = null; const st = styles[sn]; if (!st) continue; try { svg[sn] = nodesToMarkup(renderIcon(st, icon)) } catch { /* style failed for this icon */ } }
     out[n] = svg
   }
   parentPort.postMessage(out)
@@ -92,8 +93,19 @@ async function main() {
   const sha = s => crypto.createHash('sha1').update(s).digest('hex')
 
   /* ───────────── styles ───────────── */
-  const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
-  const HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7B5CFF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861' }
+  // canonical order (forge/CONTRACT.md); styles found in forge/styles but not listed here go last
+  const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+  const GROUPS = [
+    { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
+    { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
+    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
+  ]
+  const PALETTE = new Set(['glass', 'kawaii', 'sticker', 'pixel', 'retro'])
+  // signature colours come from the design tokens (site/css/tokens.css, light theme) so pages, OG cards and data agree
+  const TOKENS = (() => { try { const t = fs.readFileSync(path.join(ROOT, 'site', 'css', 'tokens.css'), 'utf8'); const i = t.indexOf(':root[data-theme'); return i > 0 ? t.slice(0, i) : t } catch { return '' } })()
+  const HEX_FALLBACK = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12' }
+  const tokenHex = n => (TOKENS.match(new RegExp(`--c-${n}:\\s*(#[0-9A-Fa-f]{6})\\b`)) || [])[1]
+  const HEX = new Proxy({}, { get: (_, n) => tokenHex(n) || HEX_FALLBACK[n] || '#111318' })
   const PLAIN = {
     line: { say: 'Clean outlines. The everyday choice for apps, websites and slides.', good: 'menus, toolbars, buttons, dashboards, any size from 16px up' },
     solid: { say: 'Filled shapes with bold weight. Reads instantly, even tiny.', good: 'selected states, tab bars, small sizes, high contrast' },
@@ -102,14 +114,28 @@ async function main() {
     engrave: { say: 'Banknote-style engraving with fine hatching. Classic and premium.', good: 'editorial, finance, certificates, print, premium brands' },
     blueprint: { say: 'A technical drawing with construction lines. Precise and nerdy.', good: 'docs, engineering, architecture, developer tools' },
     sketch: { say: 'Loose marker strokes, like a whiteboard doodle. Warm and human.', good: 'education, workshops, onboarding, friendly products' },
+    glass: { say: 'Layers of frosted glass with soft light. Modern and airy.', good: 'app screens, dashboards, tech launches, dark mode' },
+    kawaii: { say: 'Chubby, soft and cute, with a tiny smiling face and rosy cheeks.', good: 'journals, kids, cafés, stickers, social posts' },
+    sticker: { say: 'Shiny die-cut stickers with a puffy white border and sparkles.', good: 'social posts, merch, scrapbooks, Gen Z brands' },
+    pixel: { say: 'Crisp pixel art, like an old video game.', good: 'games, hackathons, retro tech, fun interfaces' },
+    retro: { say: 'Chunky 70s shapes with warm sunset stripes.', good: 'posters, events, cafés, music, vintage brands' },
   }
+  const NUMW = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen']
+  const numw = k => NUMW[k] || String(k)
+  // text colour that reads on a filled swatch (AA): ink or white, whichever contrasts more
+  const lumOf = h => hexRgb(h).map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4 }).reduce((a, c, k) => a + c * [0.2126, 0.7152, 0.0722][k], 0)
+  function hexRgb(h) { h = h.replace('#', ''); const v = parseInt(h, 16); return [(v >> 16) & 255, (v >> 8) & 255, v & 255] }
+  const onOf = h => { const L = lumOf(h); return (1.05 / (L + 0.05)) >= ((L + 0.05) / (lumOf('#111318') + 0.05)) ? '#FFFFFF' : '#111318' }
   const styleMods = await loadStyles()
   const STYLES = Object.values(styleMods).sort((a, b) => rank(a.name) - rank(b.name)).map(s => ({
     name: s.name, title: s.title || cap(s.name), kind: s.kind || 'creative', description: s.description || '', root: s.root || {}, strokeWidth: s.strokeWidth || false,
-    hex: HEX[s.name] || '#111318', ...(PLAIN[s.name] || { say: s.description, good: '' }),
+    hex: HEX[s.name], on: onOf(HEX[s.name]), group: (GROUPS.find(g => g.styles.includes(s.name)) || { id: 'more' }).id, palette: PALETTE.has(s.name),
+    ...(PLAIN[s.name] || { say: s.description, good: '' }),
   }))
   function rank(n) { const i = ORDER.indexOf(n); return i < 0 ? 99 : i }
   const STYLE = Object.fromEntries(STYLES.map(s => [s.name, s]))
+  // theme-aware style colour for inline use: the token (brighter in dark mode) with the light hex as fallback
+  const scv = n => `--sc:var(--c-${n}, ${STYLE[n] ? STYLE[n].hex : HEX[n]});--sc-on:var(--c-${n}-on, ${STYLE[n] ? STYLE[n].on : '#FFFFFF'})`
   const NS = STYLES.length
 
   /* ───────────── icons ───────────── */
@@ -151,41 +177,59 @@ async function main() {
   }
   function lev(a, b) { const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i]); for (let j = 1; j <= n; j++) d[0][j] = j; for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[m][n] }
 
-  /* ───────────── render (cached by content hash) ───────────── */
-  const styleSrcHash = sha([
-    ...listDir(STYLE_DIR, '.mjs').map(f => fs.readFileSync(path.join(STYLE_DIR, f), 'utf8')),
-    ...listDir(path.join(ROOT, 'forge', 'kernel'), '.mjs').map(f => fs.readFileSync(path.join(ROOT, 'forge', 'kernel', f), 'utf8')),
-    fs.readFileSync(path.join(ROOT, 'forge', 'lib', 'load.mjs'), 'utf8'), STYLES.map(s => s.name).join(),
-  ].join('\u0000'))
-  const RC_FILE = path.join(CACHE_DIR, 'render-cache.json')
-  let rc = readJSON(RC_FILE)
-  if (FORCE || !rc || rc.styleHash !== styleSrcHash) rc = { styleHash: styleSrcHash, icons: {} }
-  const misses = names.filter(n => !rc.icons[n] || rc.icons[n].h !== sha(rawText[n]))
-  if (misses.length) {
-    const tr = Date.now()
-    const rendered = await renderMany(misses)
-    for (const n of misses) rc.icons[n] = { h: sha(rawText[n]), svg: rendered[n] || {} }
-    for (const k of Object.keys(rc.icons)) if (!BY[k]) delete rc.icons[k]
-    fs.writeFileSync(RC_FILE, JSON.stringify(rc))
-    console.log(`  site-seo: rendered ${misses.length} icons x ${NS} styles in ${Date.now() - tr} ms`)
+  /* ───────────── render (cached per icon x style by content hash) ───────────── */
+  // a style's hash covers its own file and every helper it imports (recursively), plus the kernel and loader,
+  // so editing one renderer re-renders one column, not all ${NS} of them
+  const SHARED_SRC = sha([...listDir(path.join(ROOT, 'forge', 'kernel'), '.mjs').map(fl => fs.readFileSync(path.join(ROOT, 'forge', 'kernel', fl), 'utf8')), fs.readFileSync(path.join(ROOT, 'forge', 'lib', 'load.mjs'), 'utf8')].join('\u0000'))
+  function styleSources(file, seen = new Set()) {
+    if (seen.has(file) || !fs.existsSync(file)) return seen
+    seen.add(file)
+    for (const m of fs.readFileSync(file, 'utf8').matchAll(/from\s+['"](\.\/[^'"]+)['"]/g)) styleSources(path.join(path.dirname(file), m[1]), seen)
+    return seen
   }
+  const STYLE_HASH = Object.fromEntries(STYLES.map(st => [st.name, sha(SHARED_SRC + [...styleSources(path.join(STYLE_DIR, `${st.name}.mjs`))].sort().map(fl => fs.readFileSync(fl, 'utf8')).join('\u0000'))]))
+  const RC_FILE = path.join(CACHE_DIR, 'render-cache-v2.json')
+  let rc = (!FORCE && readJSON(RC_FILE)) || { icons: {} }
+  const jobs = []
+  for (const n of names) {
+    const h = sha(rawText[n]), e = rc.icons[n] && rc.icons[n].h === h ? rc.icons[n] : (rc.icons[n] = { h, svg: {}, sh: {} })
+    const want = STYLES.map(st => st.name).filter(sn => e.sh[sn] !== STYLE_HASH[sn])
+    if (want.length) jobs.push([n, want])
+  }
+  if (jobs.length) {
+    const tr = Date.now()
+    const rendered = await renderMany(jobs)
+    for (const [n, want] of jobs) for (const sn of want) { rc.icons[n].svg[sn] = rendered[n] ? rendered[n][sn] : null; rc.icons[n].sh[sn] = STYLE_HASH[sn] }
+    console.log(`  site-seo: rendered ${jobs.reduce((a, j) => a + j[1].length, 0)} icon-styles (${jobs.length} icons) in ${Date.now() - tr} ms`)
+  }
+  for (const k of Object.keys(rc.icons)) if (!BY[k]) delete rc.icons[k]
+  for (const e of Object.values(rc.icons)) for (const sn of Object.keys(e.svg)) if (!STYLE_HASH[sn]) { delete e.svg[sn]; delete e.sh[sn] }
+  if (jobs.length) fs.writeFileSync(RC_FILE, JSON.stringify(rc))
   const INNER = n => rc.icons[n].svg
-  for (const i of ICONS) i.styles = STYLES.map(s => s.name).filter(s => INNER(i.name)[s])
+  for (const i of ICONS) i.styles = STYLES.map(st => st.name).filter(sn => INNER(i.name)[sn])
 
   async function renderMany(list) {
-    const threads = Math.max(1, Math.min(8, (os.cpus()?.length || 2) - 1, Math.ceil(list.length / 12)))
+    const cost = list.reduce((a, j) => a + j[1].length, 0)
+    const threads = Math.max(1, Math.min(8, (os.cpus()?.length || 2) - 1, Math.ceil(cost / 40)))
     if (threads === 1) {
       const out = {}
-      for (const n of list) { const icon = loadIcon(n), svg = {}; for (const s of Object.values(styleMods)) { try { svg[s.name] = nodesToMarkup(renderIcon(s, icon)) } catch { } } out[n] = svg }
+      for (const [n, want] of list) { const icon = loadIcon(n), svg = {}; for (const sn of want) { svg[sn] = null; try { svg[sn] = nodesToMarkup(renderIcon(styleMods[sn], icon)) } catch { } } out[n] = svg }
       return out
     }
     const slices = Array.from({ length: threads }, (_, k) => list.filter((_, i) => i % threads === k))
     const parts = await Promise.all(slices.map(sl => new Promise((ok, fail) => {
-      const w = new Worker(SELF, { workerData: { withSeoWorker: true, names: sl } })
+      const w = new Worker(SELF, { workerData: { withSeoWorker: true, jobs: sl } })
       w.once('message', m => { ok(m); w.terminate() }); w.once('error', fail)
     })))
     return Object.assign({}, ...parts)
   }
+
+  /* ───────────── motion specs (forge/motion/<name>.json, see forge/MOTION.md) ───────────── */
+  const MOTION_DIR = path.join(ROOT, 'forge', 'motion')
+  const MOTION = {}
+  for (const n of names) { const j = readJSON(path.join(MOTION_DIR, `${n}.json`)); if (j && j.loop && j.loop.preset) MOTION[n] = j }
+  const MOTION_PRESETS = ['spin', 'spin-once', 'tick', 'pulse', 'beat', 'breathe', 'float', 'bounce', 'sway', 'ring', 'wiggle', 'shake', 'nod', 'nudge', 'pass', 'rise', 'drop', 'blink', 'flicker', 'twinkle', 'pop', 'tada', 'jelly', 'flip', 'rock', 'tilt', 'zoom', 'orbit', 'glow', 'draw', 'type', 'fill']
+  const MOTION_EFFECTS = ['fade', 'scale', 'rotate', 'flip', 'slide-up', 'slide-down', 'slide-left', 'slide-right', 'blur', 'spin', 'morph', 'draw']
 
   /* ───────────── helpers ───────────── */
   function readJSON(f) { try { return JSON.parse(fs.readFileSync(f, 'utf8')) } catch { return null } }
@@ -212,6 +256,8 @@ async function main() {
   const cdnSvg = (style, n) => `${CDN}/${SCOPE}/core/dist/svg/${style}/${n}.svg`
   const WEB_JS = `${CDN}/${SCOPE}/web/dist/index.js`
   const CLASSES_CSS = `${CDN}/${SCOPE}/web/dist/classes/with-all.css`
+  // one stylesheet per style is the recommended setup (with-line.css ~25 KB gzipped; with-all.css ~2 MB, render-blocking)
+  const classCss = st => `${CDN}/${SCOPE}/web/dist/classes/with-${st}.css`
   const pageUrl = n => `${BASE}/icons/${n}.html`
   const catUrl = c => `${BASE}/categories/${c}.html`
   const styleUrl = s => `${BASE}/styles/${s}.html`
@@ -289,6 +335,9 @@ async function main() {
   </div>
 </header>`
   const FOOTER = readFooter()
+    .replace(/\b\d+ free icons in \d+ styles/, `${ICONS.length} free icons in ${NS} styles`)
+    .replace(/Browse all \d+</, `Browse all ${ICONS.length}<`)
+    .replace(/The \d+ styles</, `The ${NS} styles<`)
   function readFooter() {
     // the footer is owned by the brand layer; take it verbatim from DESIGN.md so every page matches
     try {
@@ -299,8 +348,15 @@ async function main() {
   }
   const prefixed = (html, pre) => html.replace(/(href|src|srcset)="(?!https?:|#|\/|mailto:|data:)([^"]*)"/g, (m, k, v) => `${k}="${k === 'srcset' ? v.split(/,\s*/).map(x => pre + x).join(', ') : pre + v}"`)
 
-  function page({ title, description, canonical, og, ogAlt, jsonld, main, bodyClass = 'ip-page', styleCls = 's-line', keywords }) {
+  function page({ title, description, canonical, og, ogAlt, jsonld, main, bodyClass = 'ip-page', styleCls = 's-line', keywords, editor = false, palettes = '' }) {
     const P = '../'
+    // no data/motion.js (the motion table of all 500 icons) here: the page's own JSON carries this icon's motion, and the
+    // editor fetches the table with the download formats (js/editor.js loadExports)
+    const MCSS = exists('vendor/motion/motion.css'), MJS = exists('vendor/motion/motion.js')
+    // every colour + per-icon palettes in the studio (forge/lib/emit-palettes.mjs): the role mapper, then this icon's palettes
+    const PAL = editor && palettes && exists('js/palette-map.js')
+      ? `<script src="${P}js/palette-map.js" defer></script>\n` + (exists(`data/palettes/${palettes}.js`) ? `<script src="${P}data/palettes/${palettes}.js" defer></script>\n` : '')
+      : ''
     return `<!doctype html>
 <html lang="en">
 <head>
@@ -326,12 +382,13 @@ ${keywords ? `<meta name="keywords" content="${esc(keywords)}">\n` : ''}<link re
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${og}">
-<script>try{var t=localStorage.getItem('with-theme-v2');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}</script>
+<script>document.documentElement.className+=' js';try{var t=localStorage.getItem('with-theme-v2');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}</script>
 <link rel="preload" href="${P}fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="${P}fonts/caveat-logo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${P}css/tokens.css">
 <link rel="stylesheet" href="${P}css/chrome.css">
 <link rel="stylesheet" href="${P}css/icon-page.css">
+${editor ? `<link rel="stylesheet" href="${P}css/editor.css">\n${MCSS ? `<link rel="stylesheet" href="${P}vendor/motion/motion.css">\n` : ''}` : ''}
 <link rel="icon" href="${P}favicon.svg" type="image/svg+xml">
 ${exists('brand/apple-touch-icon.png') ? `<link rel="apple-touch-icon" href="${P}brand/apple-touch-icon.png">\n` : ''}${exists('site.webmanifest') ? `<link rel="manifest" href="${P}site.webmanifest">\n` : ''}<link rel="alternate" type="text/plain" title="llms.txt" href="${P}llms.txt">
 <script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>
@@ -342,8 +399,8 @@ ${prefixed(HEADER, P)}
 ${main}
 </main>
 ${prefixed(FOOTER, P)}
-<script src="${P}js/site.js" defer></script>
-<script src="${P}js/icon-page.js" defer></script>
+${editor && MJS ? `<script src="${P}vendor/motion/motion.js" defer></script>\n` : ''}<script src="${P}js/site.js" defer></script>
+${PAL}${editor ? `<script src="${P}js/editor.js" defer></script>\n` : ''}<script src="${P}js/icon-page.js" defer></script>
 </body>
 </html>
 `
@@ -412,12 +469,12 @@ ${prefixed(FOOTER, P)}
     const clashNote = C !== pascal(n) ? `  // ${C}: avoids shadowing the global ${pascal(n)}` : '          // line (default style)'
     const imp = pkg => `import { ${C} } from '${SCOPE}/${pkg}'${clashNote}\nimport { ${C} as ${pascal(n)}Solid } from '${SCOPE}/${pkg}/solid'`
     return [
-      { id: 'react', lang: 'jsx', name: 'React', install: `npm i ${SCOPE}/react`, lead: `Named import, tree-shaken. The package root is the line style; <code>/solid</code>, <code>/duo</code>, <code>/gloss</code>, <code>/engrave</code>, <code>/blueprint</code> and <code>/sketch</code> export the same names.`,
+      { id: 'react', lang: 'jsx', name: 'React', install: `npm i ${SCOPE}/react`, lead: `Named import, tree-shaken. The package root is the line style; ${list(STYLES.slice(1).map(x => `<code>/${x.name}</code>`))} export the same names.`,
         code: `${imp('react')}\n\nexport function Example() {\n  return (\n    <>\n      <${C} size={24} />\n      <${pascal(n)}Solid size={24} color="${HEX.solid}" title="${T}" />\n    </>\n  )\n}`,
         note: `Props: <code>size</code>, <code>color</code>, <code>strokeWidth</code>, <code>absoluteStrokeWidth</code>, <code>title</code>, <code>className</code>. Deep import: <code>${SCOPE}/react/icons/${n}</code>.` },
-      { id: 'html', lang: 'html', name: 'HTML class', install: '', lead: 'One stylesheet, then an <code>&lt;i&gt;</code> tag. The icon takes the current text colour and font size.',
-        code: `<link rel="stylesheet" href="${CLASSES_CSS}">\n\n<i class="with with-${n}"></i>              <!-- line -->\n<i class="with with-${n} with-solid"></i>   <!-- also with-duo, with-gloss, with-engrave, with-blueprint, with-sketch -->`,
-        note: 'Only need one style? Load <code>with-line.css</code> (or <code>with-solid.css</code>, …) instead of <code>with-all.css</code>. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.' },
+      { id: 'html', lang: 'html', name: 'HTML class', install: '', lead: 'One stylesheet per style you use, then an <code>&lt;i&gt;</code> tag. The icon takes the current text colour and font size.',
+        code: `<link rel="stylesheet" href="${classCss('line')}">\n<link rel="stylesheet" href="${classCss('solid')}">\n\n<i class="with with-${n}"></i>              <!-- line -->\n<i class="with with-${n} with-solid"></i>   <!-- also ${STYLES.slice(2).map(x => `with-${x.name}`).join(', ')}, each with its own file -->`,
+        note: 'Load only the styles you use: <code>with-line.css</code> is about 25 KB gzipped. <code>with-all.css</code> holds every style at once (about 2 MB gzipped), so keep it for prototypes. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.' },
       { id: 'web', lang: 'html', name: 'Web component', install: `npm i ${SCOPE}/web`, lead: 'A dependency-free custom element for any framework or plain HTML. Use <code>variant</code> for the style and <code>label</code> for an accessible name.',
         code: `<script type="module" src="${WEB_JS}"></script>\n\n<with-icon name="${n}"></with-icon>\n<with-icon name="${n}" variant="solid" size="32" label="${T}"></with-icon>`,
         note: `Unique aliases resolve too: <code>&lt;with-icon name="${uniqueAlias(i) || n}"&gt;</code> renders <code>${n}</code>.` },
@@ -431,9 +488,18 @@ ${prefixed(FOOTER, P)}
         code: `${imp('solid')}\n\nexport const Example = () => <${C} size={24} />` },
       { id: 'svg', lang: 'svg', name: 'SVG / CDN', install: '', lead: 'Every style as a standalone 24×24 file. An <code>&lt;img&gt;</code> can’t inherit <code>currentColor</code>, so paste the markup inline when you need to recolour.',
         code: `<img src="${cdnSvg('line', n)}" width="24" height="24" alt="${T}">\n\n${svgFile(n, 'line')}`, highlight: false },
+      motionUsage(i),
       { id: 'ai', lang: 'shell', name: 'AI & CLI', install: '', lead: 'Let your coding agent find and insert icons: the MCP server and CLI share the same search as this site.',
         code: `npx -y ${SCOPE}/mcp                 # MCP server for Claude, Cursor, Copilot…\nnpx withicons search "${(akaOf(i)[0] || n)}"   # finds: ${n}\ncurl "${BASE}/api/search?q=${encodeURIComponent(akaOf(i)[0] || n)}"`, highlight: false },
     ]
+  }
+  function motionUsage(i) {
+    const n = i.name, T = i.title, mo = MOTION[n], sw = mo && (mo.swap || []).find(x => BY[String(x.to).split('@')[0]])
+    const swapCode = sw ? (() => { const [to, s2] = String(sw.to).split('@'); return `\n\n<!-- click to turn ${n} into ${to}${s2 ? ` (${s2})` : ''}: the button's aria-pressed decides the icon.\n     Timing: --wm-swap-dur, --wm-swap-ease, --wm-swap-delay. On its own: wm-swap-auto (+ --wm-swap-hold) -->\n<button class="wm-trigger" type="button" aria-pressed="false" aria-label="${T}"\n        onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">\n  <span class="wm-swap wm-fx-${sw.effect || 'fade'}">\n    <i class="with with-${n} wm-a"></i>\n    <i class="with with-${to}${s2 && s2 !== 'line' ? ` with-${s2}` : ''} wm-b"></i>\n  </span>\n</button>` })() : ''
+    return { id: 'motion', lang: 'html', name: 'Motion', install: `npm i ${SCOPE}/motion`,
+      lead: `Optional animations, imported separately. They move the element around the icon, so they work with every style and every package.${mo ? ` This icon’s own animation ${esc(mo.intent)}.` : ''}`,
+      code: `<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">\n<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/icons.css">  <!-- each icon's own moves -->\n\n<!-- always moving${mo ? `: ${mo.loop.preset}` : ''} -->\n<span class="wm wm-loop" data-wm="${n}"><i class="with with-${n}"></i></span>\n\n<!-- moves when the button is hovered or focused${mo ? `: ${mo.hover.preset}` : ''} -->\n<button class="wm-trigger"><span class="wm wm-hover" data-wm="${n}"><i class="with with-${n}"></i></span> ${T}</button>${swapCode}`,
+      note: `Pick another move with <code>wm-p-&lt;preset&gt;</code> (${MOTION_PRESETS.length} presets) and tune it with <code>--wm-dur</code> and <code>--wm-k</code>. JavaScript: <code>import { motion, swap } from '${SCOPE}/motion'</code>. Everything stops for visitors who ask for reduced motion.` }
   }
   function uniqueAlias(i) { return i.aliases.find(a => aliasIndex[a] && aliasIndex[a].length === 1 && !a.includes(' ')) }
 
@@ -445,18 +511,19 @@ ${prefixed(FOOTER, P)}
       { q: `How do I put the ${T} icon in Google Slides or PowerPoint?`, a: `On this page press Copy image, then paste it onto your slide. For PowerPoint, Keynote and Canva, Download SVG gives you a file that stays sharp at any size and can be recoloured inside the app.` },
       { q: `Can I change the colour or size of the ${T} icon?`, a: `Yes. Pick a colour above before you download, choose a PNG size (64, 256 or 1024 pixels), or download the SVG, which scales to any size without getting blurry.` },
       { q: `What is the ${T} icon also called?`, a: aka.length ? `People also search for it as ${list(aka.slice(0, 10).map(a => `“${a}”`), 'or')}. Its name in code is \`${n}\`.` : `Its name in code is \`${n}\`.` },
-      { q: `How do I use the ${T} icon in React?`, a: `Install \`${SCOPE}/react\` (launching soon), then \`import { ${C} } from '${SCOPE}/react'\` and render \`<${C} size={24} />\`. Import from \`${SCOPE}/react/solid\` (or \`/duo\`, \`/gloss\`, \`/engrave\`, \`/blueprint\`, \`/sketch\`) for another style. Until the packages are published, copy the SVG code from this page.` },
+      { q: `Can I animate the ${T} icon?`, a: MOTION[n] ? `Yes. Its built-in animation ${MOTION[n].intent}. Open Customize on this page, choose Always, On hover or Once, try any of the ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package (launching soon) and switch off for people who ask for reduced motion.` : `Yes. Open Customize on this page, choose Always, On hover or Once and pick one of ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package (launching soon).` },
+      { q: `How do I use the ${T} icon in React?`, a: `Install \`${SCOPE}/react\` (launching soon), then \`import { ${C} } from '${SCOPE}/react'\` and render \`<${C} size={24} />\`. Import from \`${SCOPE}/react/solid\` (or ${list(STYLES.slice(2).map(x => `\`/${x.name}\``), 'or')}) for another style. Until the packages are published, copy the SVG code from this page.` },
     ]
   }
 
   /* ───────────── icon page ───────────── */
   function iconTitle(i) {
     const T = i.title
-    const opts = [`${T} icon — free SVG & PNG in 7 styles | ${BRAND}`, `${T} icon — free SVG & PNG | ${BRAND}`, `${T} icon — free SVG | ${BRAND}`, `${T} icon | ${BRAND}`]
+    const opts = [`${T} icon — free SVG & PNG in ${NS} styles | ${BRAND}`, `${T} icon — free SVG & PNG | ${BRAND}`, `${T} icon — free SVG | ${BRAND}`, `${T} icon | ${BRAND}`]
     return opts.find(o => o.length <= 64) || opts[opts.length - 1]
   }
   function iconDesc(i) {
-    const head = `Free ${i.title.toLowerCase()} icon in 7 styles. Download SVG or PNG, or copy it into Slides, Docs, Canva or Figma.`
+    const head = `Free ${i.title.toLowerCase()} icon in ${NS} styles${MOTION[i.name] ? ', animated' : ''}. Download SVG or PNG, or copy it into Slides, Docs, Canva or Figma.`
     let al = [], aka = akaOf(i)
     for (const a of aka) { const t = `${head} Also: ${[...al, a].join(', ')}.`; if (t.length > 158) break; al.push(a) }
     return al.length ? `${head} Also: ${al.join(', ')}.` : head + ' MIT licensed.'
@@ -468,6 +535,7 @@ ${prefixed(FOOTER, P)}
     const n = i.name, T = i.title, url = pageUrl(n), cat = i.category
     const st = i.styles, first = st[0]
     const rel = related(i), faqs = faq(i), U = usage(i), aka = akaOf(i)
+    const mo = MOTION[n] || null
     const prev = ICONS[(idx - 1 + ICONS.length) % ICONS.length], next = ICONS[(idx + 1) % ICONS.length]
     const crumbItems = [
       { name: 'Home', href: '../index.html', url: `${BASE}/` },
@@ -475,59 +543,78 @@ ${prefixed(FOOTER, P)}
       { name: catTitle(cat), href: `../categories/${cat}.html`, url: catUrl(cat) },
       { name: T, url },
     ]
-    const data = { name: n, title: T, cdn: `${CDN}/${SCOPE}/web/dist/classes/`, styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, inner: INNER(n)[s], hex: STYLE[s].hex, title: STYLE[s].title, say: STYLE[s].say, sw: STYLE[s].strokeWidth }])) }
+    // what the editor needs without loading any data file (each style's markup is read from the <symbol>s above),
+    // and line thumbnails for its swap targets and placement neighbours
+    const swapTo = mo ? uniq((mo.swap || []).map(x => String(x.to).split('@')[0])).filter(x => x !== n && BY[x]) : []
+    const thumbs = Object.fromEntries(uniq([...swapTo, ...rel.slice(0, 3).map(j => j.name)]).filter(x => INNER(x).line).map(x => [x, INNER(x).line]))
+    const data = { name: n, title: T, component: comp(n), cdn: `${CDN}/${SCOPE}/web/dist/classes/`, motion: mo,
+      styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, hex: STYLE[s].hex, on: STYLE[s].on, title: STYLE[s].title, say: STYLE[s].say, sw: STYLE[s].strokeWidth }])),
+      related: rel.slice(0, 3).map(j => ({ name: j.name, title: j.title })), thumbs }
     const lede = `${esc(cap(depicts(i.description)))}. Free to use in slides, documents, websites and apps. No sign-up, no credit needed.`
+    const groups = GROUPS.map(g => ({ ...g, styles: g.styles.filter(x => st.includes(x)) })).filter(g => g.styles.length)
+    const extra = st.filter(x => !GROUPS.some(g => g.styles.includes(x)))
+    if (extra.length) groups.push({ id: 'more', title: 'More', styles: extra })
+    const pickBtn = s => `<button type="button" role="radio" class="ip-pick-b s-${s}" data-pick="${s}" aria-checked="${s === first}" style="${scv(s)}" title="${esc(STYLE[s].title)}: ${esc(STYLE[s].say)}">${useEl(s, { size: 24 })}<span>${esc(STYLE[s].title)}</span></button>`
+    const toc = [['customize', 'Customize'], ['in-use', 'See it in use'], ['ask-ai', 'Ask AI'], ['apps', 'Use in apps'], ['styles', 'All styles'], ['related', 'Related'], ['names', 'Other names'], ['developers', 'Developers'], ['faq', 'FAQ']]
+    const tagSetup = `<details class="ip-setup"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><p class="ip-setup-line"><code>${esc(cssFor(first))}</code></p></details>`
     const main = `
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>${st.map(s => `<symbol id="s-${s}" viewBox="0 0 24 24">${INNER(n)[s]}</symbol>`).join('')}</defs></svg>
-<div class="ip" data-ip="${n}" data-style="${first}">
+<div class="ip" data-ip="${n}" data-style="${first}" style="${scv(first)}">
 <section class="ip-hero" aria-labelledby="ip-h1"><div class="wrap">
 ${crumbs(crumbItems)}
 <div class="ip-hero-grid">
   <div class="ip-intro">
-    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>Free icon · <a href="../categories/${cat}.html">${esc(catTitle(cat))}</a> · ${st.length} styles</p>
+    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>Free icon · <a href="../categories/${cat}.html">${esc(catTitle(cat))}</a> · ${st.length} styles${mo ? ' · animated' : ''}</p>
     <h1 class="ip-h1" id="ip-h1">${esc(T)} <span class="ip-hand">icon</span></h1>
     <p class="ip-lede">${lede}</p>
     ${aka.length ? `<p class="ip-aka-line"><b>Also known as</b> ${aka.slice(0, 8).map(a => esc(a)).join('&nbsp;· ')}</p>` : ''}
-    <div class="ip-pick" role="radiogroup" aria-label="Choose a style">${st.map(s => `<button type="button" role="radio" class="ip-pick-b s-${s}" data-pick="${s}" aria-checked="${s === first}" style="--sc:${STYLE[s].hex}">${useEl(s, { size: 24 })}<span>${esc(STYLE[s].title)}</span></button>`).join('')}</div>
-    <p class="ip-pick-now" aria-live="polite"><b data-pick-name>${esc(STYLE[first].title)}</b> <span data-pick-say>${esc(STYLE[first].say)}</span></p>
-    <div class="ip-actions" data-actions>
-      <div class="ip-tag">
-        <button type="button" class="ip-tag-btn" data-act="copy-tag" aria-describedby="ip-tag-hint"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
-        <p class="ip-tag-hint" id="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p>
-        <button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the stylesheet line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the stylesheet line</span></button>
+    <div class="ip-step">
+      <p class="ip-step-l" id="ip-step1"><span class="ip-step-n" aria-hidden="true">1</span>Pick a style</p>
+      <div class="ip-pick" role="radiogroup" aria-labelledby="ip-step1">${groups.map(g => `<div class="ip-pick-g is-${g.id}"><span class="ip-pick-gl" aria-hidden="true">${esc(g.title)}${g.id === 'playful' ? ' <em>new</em>' : ''}</span><div class="ip-pick-row">${g.styles.map(pickBtn).join('')}</div></div>`).join('')}</div>
+      <p class="ip-pick-now" aria-live="polite"><b data-pick-name>${esc(STYLE[first].title)}</b> <span data-pick-say>${esc(STYLE[first].say)}</span></p>
+    </div>
+    <div class="ip-step">
+      <p class="ip-step-l"><span class="ip-step-n" aria-hidden="true">2</span>Grab it</p>
+      <div class="ip-actions" data-actions>
+        <button type="button" class="ip-btn is-primary" data-act="copy-img">${I.copy}<span>Copy image</span><small>paste into Slides, Docs, Notion</small></button>
+        <div class="ip-btn-row">
+          <button type="button" class="ip-btn" data-act="svg">${I.down}<span>Download SVG</span><small>sharp at any size · <span data-color-label>black</span></small></button>
+          <button type="button" class="ip-btn" data-act="png">${I.down}<span>Download PNG</span><small><span data-px-label>256 px</span> · <span data-color-label>black</span></small></button>
+        </div>
+        <div class="ip-textrow"><a class="ip-textbtn is-strong" href="#customize" data-jump>${I.spark}Change colour, size or animation</a><a class="ip-textbtn" href="#download" data-jump data-jump-focus=".wdl [role=tab][aria-selected=&quot;true&quot;]" data-more-formats hidden>${I.down}More formats <small>PowerPoint, GIF, PDF, video…</small></a><button type="button" class="ip-textbtn" data-act="copy-svg">${I.code}Copy SVG code <small>for Figma, Canva and HTML</small></button><a class="ip-textbtn" href="../icons.html?icon=${n}">${I.grid}Open in the library</a></div>
+        <a class="ip-ask-jump" href="#ask-ai" data-ask-jump>${I.spark}<span><b>Ask AI</b> to code it, build a matching set, check the fit or put it in your slides</span>${I.arr}</a>
+        <noscript><p class="ip-note">Downloads need JavaScript. You can still <a href="${cdnSvg('line', n)}">open the SVG file</a>.</p></noscript>
       </div>
-      <button type="button" class="ip-btn is-primary" data-act="copy-img">${I.copy}<span>Copy image</span><small>paste into Slides, Docs, Notion</small></button>
-      <div class="ip-btn-row">
-        <button type="button" class="ip-btn" data-act="svg">${I.down}<span>Download SVG</span><small>sharp at any size · <span data-color-label>black</span></small></button>
-        <button type="button" class="ip-btn" data-act="png">${I.down}<span>Download PNG</span><small><span data-px-label>256 px</span> · <span data-color-label>black</span></small></button>
-      </div>
-      <div class="ip-opts">
-        <div class="ip-opt"><span class="ip-opt-l" id="ip-px-l">PNG size</span><div class="ip-seg" role="group" aria-labelledby="ip-px-l">${[64, 128, 256, 512, 1024].map(p => `<button type="button" data-px="${p}" aria-pressed="${p === 256}">${p}</button>`).join('')}</div></div>
-        <div class="ip-opt"><span class="ip-opt-l" id="ip-col-l">Colour <small>in every download</small></span><div class="ip-sw" role="group" aria-labelledby="ip-col-l">
-          <button type="button" data-color="ink" aria-pressed="true" title="Black"><span style="background:#111318"></span><i class="visually-hidden">Black</i></button>
-          <button type="button" data-color="style" aria-pressed="false" title="Style colour"><span class="is-style"></span><i class="visually-hidden">Style colour</i></button>
-          <button type="button" data-color="#FFFFFF" aria-pressed="false" title="White"><span style="background:#fff"></span><i class="visually-hidden">White</i></button>
-          <label class="ip-sw-custom" title="Any colour"><input type="color" value="#ff5a36" data-color-input aria-label="Pick any colour"><span></span></label>
-        </div></div>
-      </div>
-      <div class="ip-textrow"><button type="button" class="ip-textbtn" data-act="copy-svg">${I.code}Copy SVG code <small>for Figma, Canva and HTML</small></button><a class="ip-textbtn" href="../icons.html?icon=${n}">${I.grid}Open in the library</a></div>
-      <a class="ip-ask-jump" href="#ask-ai" data-ask-jump>${I.spark}<span><b>Ask AI</b> to code it, build a matching set, check the fit or put it in your slides</span>${I.arr}</a>
-      <noscript><p class="ip-note">Downloads need JavaScript. You can still <a href="${cdnSvg('line', n)}">open the SVG file</a>.</p></noscript>
     </div>
   </div>
   <div class="ip-side">
-  <div class="ip-stage" data-stage>
-    <div class="ip-stage-art" draggable="true" data-drag title="Drag me into your slides or doc">${useEl(first, { label: `${T} icon`, dataRoot: true })}</div>
-    <p class="ip-stage-hint" aria-hidden="true">drag me into your slide ↘</p>
-    <div class="ip-sizes" aria-label="${esc(T)} icon at 16, 24, 32 and 48 pixels">${[16, 24, 32, 48].map(px => `<figure>${useEl(first, { size: px, dataRoot: true })}<figcaption>${px}</figcaption></figure>`).join('')}</div>
-  </div>
-  <nav class="ip-side-links" aria-label="Related icons">
-    <p><b>Related</b><a href="#related">See all ${I.arr}</a></p>
-    <ul>${rel.slice(0, 6).map(j => `<li><a href="${j.name}.html" title="${esc(j.title)}">${svgEl(j.name, 'line')}<span>${esc(j.title)}</span></a></li>`).join('')}</ul>
-    <a class="ip-lib-link" href="../icons.html?icon=${n}">${I.grid}<span><b>See it in the library</b><small>next to all ${ICONS.length} icons, in any style</small></span>${I.arr}</a>
-  </nav>
+    <div class="ip-stage wm-trigger" data-stage>
+      <div class="ip-stage-art" draggable="true" data-drag title="Drag me into your slides or doc"><span class="ip-mo" data-mo>${useEl(first, { label: `${T} icon`, dataRoot: true })}</span></div>
+      <p class="ip-stage-hint" aria-hidden="true">drag me into your slide ↘</p>
+      ${mo ? `<button type="button" class="ip-intent" data-intent aria-pressed="false"><span class="ip-intent-ic" aria-hidden="true"></span><span class="ip-intent-t"><b data-intent-b>Play animation</b><small>${esc(cap(mo.intent))}</small></span></button>` : ''}
+      <div class="ip-sizes" aria-label="${esc(T)} icon at 16, 24, 32 and 48 pixels">${[16, 24, 32, 48].map(px => `<figure>${useEl(first, { size: px, dataRoot: true })}<figcaption>${px}</figcaption></figure>`).join('')}</div>
+    </div>
   </div>
 </div>
+</div></section>
+
+<nav class="ip-toc" aria-label="On this page"><div class="wrap"><ul>${toc.map(([id, label]) => `<li><a href="#${id}">${label}</a></li>`).join('')}</ul></div></nav>
+
+<section class="ip-section ip-studio-sec" id="customize" aria-labelledby="cz-h"><div class="wrap">
+  <div class="ip-head"><div><p class="ip-kicker"><span class="ip-dot" aria-hidden="true"></span>Optional · live preview</p><h2 class="ip-h2" id="cz-h">Make it <span class="ip-hand">yours</span></h2></div><p>Try a style, colour, size and a little movement. The preview, the downloads and the code below all follow along.</p></div>
+  <div class="ip-studio" data-editor>
+    <noscript><div class="ip-studio-static">
+      <p>The live editor needs JavaScript. Here is the quickest way to use this icon on a website:</p>
+      <div class="ip-tag"><code class="ip-tag-code">${esc(tagFor(n, first))}</code></div>
+      ${tagSetup}
+      <p><a href="${cdnSvg(first, n)}">Open the SVG file</a> · <a href="#developers">All code options</a></p>
+    </div></noscript>
+  </div>
+</div></section>
+
+<section class="ip-section ip-use-sec" id="in-use" aria-labelledby="use-h"><div class="wrap">
+  <div class="ip-head"><div><p class="ip-kicker"><span class="ip-dot" aria-hidden="true"></span>Ten everyday places</p><h2 class="ip-h2" id="use-h">See it <span class="ip-hand">in use</span></h2></div><p>Buttons, slides, lists and cards, drawn live with your choices above. Hover or tap a card to see the animation.</p></div>
+  <div class="ip-places" data-placements><noscript><p class="ip-note">Turn on JavaScript to preview ${esc(T)} in buttons, slides, lists and cards.</p></noscript></div>
 </div></section>
 
 <section class="ip-section ip-ask" id="ask-ai" aria-labelledby="ask-h"><div class="wrap"><div class="ip-ask-card">
@@ -543,15 +630,15 @@ ${crumbs(crumbItems)}
   <div class="ip-ask-widget" data-ask-ai data-ask-mode="tasks" data-icon="${n}" data-style="${first}"><noscript><p class="ip-note">Turn on JavaScript for one-click buttons, or paste <a href="../llms.txt">withicons.com/llms.txt</a> into your assistant.</p></noscript></div>
 </div></div></section>
 
-<section class="ip-section ip-apps" aria-labelledby="apps-h"><div class="wrap">
+<section class="ip-section ip-apps" id="apps" aria-labelledby="apps-h"><div class="wrap">
   <div class="ip-head"><h2 class="ip-h2" id="apps-h">Use it in your <span class="ip-hand">favourite app</span></h2><p>Quick steps for the tools most people use. <a href="../guides/index.html">All step-by-step guides ${I.arr}</a></p></div>
-  <ol class="ip-app-list">${APPS.map(a => `<li class="ip-app" style="--app:${a.color}"><h3><span class="ip-app-dot" aria-hidden="true"></span>${esc(a.name)}</h3><ol>${a.steps.map(s => `<li>${s}</li>`).join('')}</ol><a href="../${guide(a.id)}">${esc(a.name)} guide ${I.arr}</a></li>`).join('')}</ol>
+  <ol class="ip-app-list">${APPS.map(a => `<li class="ip-app" style="--app:${a.color}"><h3><span class="ip-app-dot" aria-hidden="true"></span>${esc(a.name)}</h3><ol>${a.steps.map(x => `<li>${x}</li>`).join('')}</ol><a href="../${guide(a.id)}">${esc(a.name)} guide ${I.arr}</a></li>`).join('')}</ol>
 </div></section>
 
 <section class="ip-section" id="styles" aria-labelledby="styles-h"><div class="wrap">
-  <div class="ip-head"><h2 class="ip-h2" id="styles-h">${esc(T)} in <span class="ip-hand">all ${st.length} styles</span></h2><p>Same icon, seven personalities. Download whichever fits your design.</p></div>
+  <div class="ip-head"><h2 class="ip-h2" id="styles-h">${esc(T)} in <span class="ip-hand">all ${st.length} styles</span></h2><p>Same icon, ${numw(st.length)} personalities. Download whichever fits your design.</p></div>
   <ul class="ip-styles">${st.map(s => `
-    <li class="ip-sc s-${s}" style="--sc:${STYLE[s].hex}" id="style-${s}">
+    <li class="ip-sc s-${s}" style="${scv(s)}" id="style-${s}">
       <div class="ip-sc-art">${useEl(s, { label: `${T} icon, ${STYLE[s].title.toLowerCase()} style` })}</div>
       <h3><a href="../styles/${s}.html">${esc(STYLE[s].title)}</a> <small>${esc(STYLE[s].kind)}</small></h3>
       <p>${esc(STYLE[s].say)}</p>
@@ -563,6 +650,7 @@ ${crumbs(crumbItems)}
 <section class="ip-section" id="related" aria-labelledby="related-h"><div class="wrap">
   <div class="ip-head"><h2 class="ip-h2" id="related-h">Goes well <span class="ip-hand">with</span></h2><p><a href="../categories/${cat}.html">All ${inCat(cat).length} ${esc(cat)} icons ${I.arr}</a> · <a href="../icons.html?icon=${n}">Open in the library ${I.arr}</a></p></div>
   <ul class="ip-grid">${rel.map(j => `<li><a href="${j.name}.html">${svgEl(j.name, 'line')}<span>${esc(j.title)}</span></a></li>`).join('')}</ul>
+  <a class="ip-lib-link" href="../icons.html?icon=${n}">${I.grid}<span><b>See it in the library</b><small>next to all ${ICONS.length} icons, in any style</small></span>${I.arr}</a>
 </div></section>
 
 <section class="ip-section" id="names" aria-labelledby="names-h"><div class="wrap">
@@ -573,6 +661,7 @@ ${crumbs(crumbItems)}
       <div><dt>Name in code</dt><dd><code>${n}</code></dd></div>
       <div><dt>Category</dt><dd><a href="../categories/${cat}.html">${esc(catTitle(cat))}</a></dd></div>
       <div><dt>Tags</dt><dd>${i.tags.map(t => esc(t)).join(', ')}</dd></div>
+      ${mo ? `<div><dt>Animation</dt><dd>${esc(cap(mo.intent))} <small class="ip-fact-code">(<code>${mo.loop.preset}</code> loop · <code>${mo.hover.preset}</code> on hover)</small></dd></div>` : ''}
       <div><dt>Grid</dt><dd>24 × 24, scales to any size</dd></div>
       <div><dt>License</dt><dd><a href="../${exists('license.html') ? 'license.html' : 'about.html'}">MIT, free for commercial use</a></dd></div>
     </dl>
@@ -581,7 +670,7 @@ ${crumbs(crumbItems)}
 
 <section class="ip-section ip-devsec" id="developers" aria-labelledby="dev-h"><div class="wrap">
   <details class="ip-dev">
-    <summary><span class="ip-dev-t"><span class="ip-h2" id="dev-h">For developers</span><small>React, HTML class, web component, Vue, Svelte, Angular, Solid, SVG, AI agents</small></span><span class="ip-dev-plus" aria-hidden="true"></span></summary>
+    <summary><span class="ip-dev-t"><span class="ip-h2" id="dev-h">For developers</span><small>${U.map(u => u.name).join(', ')}</small></span><span class="ip-dev-plus" aria-hidden="true"></span></summary>
     <p class="ip-soon"><b>npm packages are launching soon.</b> The SVG, PNG and copy buttons above work today. Name in code: <code>${n}</code> · component <code>${comp(n)}</code>.</p>
     <div class="ip-tabs" role="tablist" aria-label="Framework">${U.map((u, k) => `<button type="button" role="tab" id="tab-${u.id}" data-tab="${u.id}" aria-controls="use-${u.id}" aria-selected="${k === 0}"${k ? ' tabindex="-1"' : ''}>${esc(u.name)}</button>`).join('')}</div>
 ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" aria-labelledby="tab-${u.id}"${k ? ' hidden' : ''}>
@@ -590,6 +679,11 @@ ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" ar
       ${codeBlock(`code-${u.id}`, u.code, { lang: u.lang, highlight: u.highlight !== false })}
       ${u.note ? `<p class="ip-note">${u.note}</p>` : ''}
     </div>`).join('\n')}
+    <div class="ip-dev-tag">
+      <p class="ip-dev-tag-l">The quickest copy for websites: one <code>&lt;i&gt;</code> tag</p>
+      <button type="button" class="ip-tag-btn" data-act="copy-tag"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
+      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the stylesheet line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the stylesheet line</span></button></details>
+    </div>
   </details>
 </div></section>
 
@@ -625,20 +719,20 @@ ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" ar
       ...imgs,
       { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: plain(f.a) } })) },
     ] }
-    return page({ title: iconTitle(i), description: iconDesc(i), canonical: url, og, ogAlt: `${T} icon from ${BRAND} in ${st.length} styles: ${list(st)}.`, jsonld, main, styleCls: `s-${first}`, keywords: uniq([`${n} icon`, ...aka.slice(0, 12)]).join(', ') })
+    return page({ title: iconTitle(i), description: iconDesc(i), canonical: url, og, ogAlt: `${T} icon from ${BRAND} in ${st.length} styles: ${list(st)}.`, jsonld, main, styleCls: `s-${first}`, keywords: uniq([`${n} icon`, ...aka.slice(0, 12)]).join(', '), editor: true, palettes: n })
   }
 
   /* ───────────── hub pages ───────────── */
   const SHOWCASE = ['home', 'search', 'heart', 'bell', 'settings', 'user', 'star', 'camera', 'rocket', 'calendar', 'mail', 'trash'].filter(n => BY[n])
   const catNav = cur => `<ul class="hub-cats">${CATS.map(c => `<li><a href="../categories/${c}.html"${c === cur ? ' aria-current="page"' : ''}>${svgEl(inCat(c)[0].name, 'line')}${esc(catTitle(c))} <small>${inCat(c).length}</small></a></li>`).join('')}</ul>`
-  const styleNav = cur => `<ul class="hub-styles">${STYLES.map(x => `<li class="s-${x.name}" style="--sc:${x.hex}"><a href="../styles/${x.name}.html"${x.name === cur ? ' aria-current="page"' : ''}>${svgEl('home', x.name)}<b>${esc(x.title)}</b><small>${esc(x.kind)}</small></a></li>`).join('')}</ul>`
+  const styleNav = cur => `<ul class="hub-styles">${STYLES.map(x => `<li class="s-${x.name}" style="${scv(x.name)}"><a href="../styles/${x.name}.html"${x.name === cur ? ' aria-current="page"' : ''}>${svgEl('home', x.name)}<b>${esc(x.title)}</b><small>${esc(x.kind)}</small></a></li>`).join('')}</ul>`
   const hubGrid = (items, s, withWhy) => `<ul class="ip-grid is-hub">${items.map(j => `<li><a href="../icons/${j.name}.html" title="${esc(j.description)}">${svgEl(j.name, s)}<span>${esc(j.title)}</span>${withWhy && akaOf(j)[0] ? `<small>${esc(akaOf(j).slice(0, 2).join(', '))}</small>` : ''}</a></li>`).join('')}</ul>`
 
   function categoryPage(c) {
     const items = inCat(c), url = catUrl(c), C = catTitle(c)
     const crumbItems = [{ name: 'Home', href: '../index.html', url: `${BASE}/` }, { name: 'Icons', href: '../icons.html', url: `${BASE}/icons.html` }, { name: C, url }]
-    const title = [`${C} icons — ${items.length} free SVG & PNG icons in 7 styles | ${BRAND}`, `${C} icons — ${items.length} free SVG & PNG icons | ${BRAND}`, `${C} icons | ${BRAND}`].find(t => t.length <= 70) || `${C} icons | ${BRAND}`
-    const mk = k => `${items.length} free ${c} icons in 7 styles: ${items.slice(0, k).map(i => i.title.toLowerCase()).join(', ')} and more. Download SVG or PNG, or copy into your slides.`
+    const title = [`${C} icons — ${items.length} free SVG & PNG icons in ${NS} styles | ${BRAND}`, `${C} icons — ${items.length} free SVG & PNG icons | ${BRAND}`, `${C} icons | ${BRAND}`].find(t => t.length <= 70) || `${C} icons | ${BRAND}`
+    const mk = k => `${items.length} free ${c} icons in ${NS} styles: ${items.slice(0, k).map(i => i.title.toLowerCase()).join(', ')} and more. Download SVG or PNG, or copy into your slides.`
     let k = 6; while (k > 1 && mk(k).length > 160) k--
     const desc = mk(k)
     const main = `
@@ -652,11 +746,11 @@ ${crumbs(crumbItems)}
     <p class="ip-lede">${esc(catIntro(c))} Every one is free, comes in ${NS} styles, and downloads as SVG or PNG in any colour.</p>
     <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html?cat=${c}">Open in the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="#all">See all ${items.length}</a></p>
   </div>
-  <div class="hub-strip" aria-hidden="true">${items.slice(0, 9).map((j, k) => { const s = STYLES[k % NS]; return `<span class="s-${s.name}" style="--sc:${s.hex};--i:${k}">${svgEl(j.name, s.name)}</span>` }).join('')}</div>
+  <div class="hub-strip" aria-hidden="true">${items.slice(0, 9).map((j, k) => { const s = STYLES[k % NS]; return `<span class="s-${s.name}" style="${scv(s.name)};--i:${k}">${svgEl(j.name, s.name)}</span>` }).join('')}</div>
 </div>
 </div></section>
 <section class="ip-section" id="all" aria-labelledby="all-h"><div class="wrap">
-  <div class="ip-head"><h2 class="ip-h2" id="all-h">Every ${esc(c)} <span class="ip-hand">icon</span></h2><p>Click any icon for downloads in all seven styles, colours and sizes.</p></div>
+  <div class="ip-head"><h2 class="ip-h2" id="all-h">Every ${esc(c)} <span class="ip-hand">icon</span></h2><p>Click any icon for downloads in all ${numw(NS)} styles, colours, sizes and animations.</p></div>
   ${hubGrid(items, 'line', true)}
 </div></section>
 <section class="ip-section" aria-labelledby="ref-h"><div class="wrap">
@@ -692,7 +786,7 @@ ${items.map(j => `  <tr><th scope="row"><a href="../icons/${j.name}.html">${svgE
     const desc = `${items.length} free ${s} style icons. ${S.say} Download SVG or PNG in any colour, or copy into Slides, Docs and Figma.`.slice(0, 165)
     const subpath = s === 'line' ? '' : `/${s}`
     const main = `
-<div class="hub hub-style" data-hub style="--sc:${S.hex}">
+<div class="hub hub-style" data-hub style="${scv(s)}">
 <section class="hub-hero is-style"><div class="wrap">
 ${crumbs(crumbItems)}
 <div class="hub-hero-grid">
@@ -709,8 +803,8 @@ ${crumbs(crumbItems)}
   <div class="ip-head"><h2 class="ip-h2" id="when-h">When to use <span class="ip-hand">${esc(S.title)}</span></h2></div>
   <div class="hub-when">
     <article><h3>Good for</h3><p>${esc(cap(S.good))}.</p></article>
-    <article><h3>Sizes</h3><p>${S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
-    <article><h3>Colour</h3><p>${s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
+    <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn on a 16×16 pixel grid, so it is sharpest at 16, 32 and 48px: tiny UI, games and big retro posters.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
+    <article><h3>Colour</h3><p>${S.palette ? 'Arrives with its own cheerful palette; the outline follows any colour you pick. Developers can retint every part with CSS variables.' : s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
     <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · launching soon</p></article>
   </div>
 </div></section>
@@ -720,7 +814,7 @@ ${CATS.map(c => { const g = items.filter(i => i.category === c); return g.length
   ${hubGrid(g, s, false)}</div>` : '' }).join('\n')}
 </div></section>
 <section class="ip-section" aria-labelledby="more-h"><div class="wrap">
-  <div class="ip-head"><h2 class="ip-h2" id="more-h">All seven <span class="ip-hand">styles</span></h2></div>
+  <div class="ip-head"><h2 class="ip-h2" id="more-h">All ${numw(NS)} <span class="ip-hand">styles</span></h2></div>
   ${styleNav(s)}
 </div></section>
 </div>`
@@ -783,13 +877,17 @@ ${CATS.map(c => `          <section class="ix-cat" aria-labelledby="ix-${c}"><h3
     name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'launching soon', version: VERSION, license: 'MIT', repository: REPO,
     search: { api: `${BASE}/api/search?q=`, mcp: `npx -y ${SCOPE}/mcp`, cli: 'npx withicons search <query>' },
     classes: { stylesheet: CLASSES_CSS, pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">',
-    total: ICONS.length, defaultStyle: 'line',
-    styles: STYLES.map(s => ({ name: s.name, title: s.title, kind: s.kind, color: s.hex, description: s.description, plain: s.say, goodFor: s.good, strokeWidth: s.strokeWidth, page: styleUrl(s.name) })),
+    total: ICONS.length, defaultStyle: 'line', styleCount: NS,
+    motion: { package: `${SCOPE}/motion`, status: 'launching soon', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
+      classes: 'wm wm-loop|wm-hover|wm-once [wm-p-<preset>]; data-wm="<name>"; swap: wm-swap wm-fx-<effect> [wm-swap-auto|wm-swap-focus|wm-loop] > .wm-a + .wm-b', vars: ['--wm-dur', '--wm-k', '--wm-ox', '--wm-oy', '--wm-dx', '--wm-dy', '--wm-steps'],
+      swapVars: ['--wm-swap-dur', '--wm-swap-ease', '--wm-swap-delay', '--wm-swap-hold'], swapTriggers: ['click (aria-pressed / is-on)', 'hover (.wm-trigger)', 'focus (wm-swap-focus)', 'auto (wm-swap-auto)'] },
+    styles: STYLES.map(s => ({ name: s.name, title: s.title, kind: s.kind, group: s.group, palette: s.palette, color: s.hex, description: s.description, plain: s.say, goodFor: s.good, strokeWidth: s.strokeWidth, page: styleUrl(s.name) })),
     categories: CATS.map(c => ({ name: c, title: catTitle(c), count: inCat(c).length, page: catUrl(c) })),
     aliases: Object.fromEntries(Object.keys(aliasIndex).sort().map(a => [a, aliasIndex[a]])),
     icons: ICONS.map(i => ({
       name: i.name, title: i.title, component: pascal(i.name), category: i.category, description: i.description, aliases: i.aliases, synonyms: i.synonyms, tags: i.tags, styles: i.styles,
       page: pageUrl(i.name), og: `${BASE}/og/${i.name}.png`,
+      ...(MOTION[i.name] ? { motion: { intent: MOTION[i.name].intent, loop: MOTION[i.name].loop, hover: MOTION[i.name].hover, alt: MOTION[i.name].alt || [], swap: MOTION[i.name].swap || [] } } : {}),
       svg: Object.fromEntries(i.styles.map(s => [s, cdnSvg(s, i.name)])),
       usage: {
         react: `import { ${comp(i.name)} } from '${SCOPE}/react'`,
@@ -824,14 +922,14 @@ ${sec.pages.map(a => `- [${a.title}](${absUrl(a.url)})${a.summary ? `: ${String(
 `).join('')
 
   // Same wording as WI.askAI.prompt({ intent: 'find' }) in site/js/site.js (the "Ask AI" buttons), with no need typed yet.
-  const ASK_PROMPT = `First, open and follow ${BASE}/skill/SKILL.md — the guide to "with icons" (${BASE}): 300 free, MIT-licensed icons, each drawn in 7 styles (line, solid, duo, gloss, engrave, blueprint, sketch). Look icons up with ${BASE}/api/search?q=WORDS (it understands synonyms and typos; overview: ${BASE}/llms.txt). Only use icon names that exist there — never invent one.
+  const ASK_PROMPT = `First, open and follow ${BASE}/skill/SKILL.md — the guide to "with icons" (${BASE}): ${ICONS.length} free, MIT-licensed icons, each drawn in ${NS} styles (${STYLES.map(x => x.name).join(', ')}), with optional animations. Look icons up with ${BASE}/api/search?q=WORDS (it understands synonyms and typos; overview: ${BASE}/llms.txt). Only use icon names that exist there — never invent one.
 
 MY TASK: find the best icon for what I’m making. Ask me first, in one short question, what it is and what the icon must say.
 
 Reply with:
 1. Best fit: exact name + one line on why my users will read it right.
 2. Up to 2 alternatives, one line each.
-3. The best style for this context, and why (line or solid for UI controls; gloss, engrave, blueprint and sketch only at 32px+).
+3. The best style for this context, and why (line or solid for UI controls; ${list(STYLES.filter(x => x.kind !== 'universal').map(x => x.name))} only at 32px+).
 4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.
 5. A link for each pick: ${BASE}/icons/NAME.html
 
@@ -840,7 +938,7 @@ If you can’t open links, say so instead of guessing. What I know: names are ke
 Keep it short and practical.`
   const llmsCore = `# ${BRAND}
 
-> ${BRAND} (${BASE}/, powered by ${PUB.name}) is a free, MIT-licensed SVG icon library: ${ICONS.length} icons x ${NS} styles = ${(ICONS.length * NS).toLocaleString('en-US')} icons. Every icon is one hand-drawn skeleton on a 24x24 grid rendered by ${NS} style renderers, so all styles share names, grid and props. People copy icons as images, drag them into Google Slides, PowerPoint, Canva, Figma and Notion, or download SVG/PNG at any size and colour. Developers get packages for React, Vue 3, Svelte 4/5, Angular 17+, SolidJS, a \`<with-icon>\` web component, CSS icon classes, SVG sprites and plain SVG files.
+> ${BRAND} (${BASE}/, powered by ${PUB.name}) is a free, MIT-licensed SVG icon library: ${ICONS.length} icons x ${NS} styles = ${(ICONS.length * NS).toLocaleString('en-US')} icons. Every icon is one hand-drawn skeleton on a 24x24 grid rendered by ${NS} style renderers, so all styles share names, grid and props. People copy icons as images, drag them into Google Slides, PowerPoint, Canva, Figma and Notion, or download SVG/PNG at any size and colour. Developers get packages for React, Vue 3, Svelte 4/5, Angular 17+, SolidJS, a \`<with-icon>\` web component, CSS icon classes, SVG sprites and plain SVG files, plus optional animations (\`${SCOPE}/motion\`): ${Object.keys(MOTION).length} icons ship their own loop, hover move and "turns into" transitions, and every icon can use any of ${MOTION_PRESETS.length} presets.
 
 Website: ${BASE}/ · Library: ${BASE}/icons.html · Source: ${REPO} · Publisher: ${PUB.name} (${PUB.url}) · Version: ${VERSION}
 
@@ -882,7 +980,7 @@ Assistants answering any of them: read the skill first, look icons up with ${BAS
 - Angular 17+: \`npm i ${SCOPE}/angular\`
 - SolidJS: \`npm i ${SCOPE}/solid\`
 - Web component (any framework or none): \`npm i ${SCOPE}/web\` or \`<script type="module" src="${WEB_JS}"></script>\`
-- Icon classes (CSS only): \`<link rel="stylesheet" href="${CLASSES_CSS}">\`
+- Icon classes (CSS only): one stylesheet per style you use, e.g. \`<link rel="stylesheet" href="${classCss('line')}">\` (\`with-<style>.css\`; \`with-all.css\` has every style at once, ~2 MB gzipped, for prototypes)
 - SVG sprites and standalone files: \`npm i ${SCOPE}/static\`
 - Data, metadata, alias resolution, search, toSvg(): \`npm i ${SCOPE}/core\` (search engine alone: \`${SCOPE}/search\`)
 
@@ -900,7 +998,7 @@ import { Icon } from '${SCOPE}/react'                    // <Icon name="home" va
 \`\`\`
 
 - Web component: \`<with-icon name="home" variant="solid" size="24" label="Home"></with-icon>\` (use \`variant\`, not \`style\`; \`label\` for an accessible name).
-- Icon classes: \`<i class="with with-home"></i>\` (line), \`<i class="with with-home with-solid"></i>\` (also \`with-duo\`, \`with-gloss\`, \`with-engrave\`, \`with-blueprint\`, \`with-sketch\`). One style only: \`with-line.css\`, \`with-solid.css\`, … instead of \`with-all.css\`.
+- Icon classes: \`<i class="with with-home"></i>\` (line), \`<i class="with with-home with-solid"></i>\` (also ${STYLES.slice(2).map(x => `\`with-${x.name}\``).join(', ')}). One style only: \`with-line.css\`, \`with-solid.css\`, … instead of \`with-all.css\`.
 - Angular: \`import { WithIconComponent, Home } from '${SCOPE}/angular'\`, then \`<with-icon [icon]="Home" />\`.
 - Sprite: \`<svg width="24" height="24"><use href="/sprite-line.svg#with-home"/></svg>\` (symbol ids are \`with-<name>\`).
 - Single SVG: \`${CDN}/${SCOPE}/core/dist/svg/<style>/<name>.svg\`
@@ -909,6 +1007,28 @@ import { Icon } from '${SCOPE}/react'                    // <Icon name="home" va
 ## Styles (subpath = style name)
 
 ${STYLES.map(s => `- \`${s.name}\` (${s.kind}${s.name === 'line' ? ', default' : ''}, colour ${s.hex}): ${s.say} Good for ${s.good}. Page: ${styleUrl(s.name)}`).join('\n')}
+
+## Motion (optional, imported separately; launching soon)
+
+Animations live in \`${SCOPE}/motion\` and never change the icons. They animate the element that holds the icon, so they work with every style and package. Each icon page has a live editor ("Customize") that previews them, exports an animated SVG and copies the code.
+
+\`\`\`html
+<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">
+<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/icons.css">   <!-- per-icon defaults -->
+<span class="wm wm-loop" data-wm="bell"><i class="with with-bell"></i></span>               <!-- the icon's own loop -->
+<button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- plays on hover/focus -->
+<span class="wm wm-loop wm-p-spin" style="--wm-dur:2s">…</span>                              <!-- any preset -->
+<span class="wm-swap wm-fx-flip"><svg class="wm-a">…play…</svg><svg class="wm-b">…pause…</svg></span>  <!-- icon A turns into B -->
+<span class="wm-swap wm-fx-morph wm-swap-auto" style="--wm-swap-dur:.8s;--wm-swap-hold:1.2s">…</span>    <!-- A -> B -> A on its own -->
+\`\`\`
+
+- Triggers: \`wm-loop\` (continuous), \`wm-hover\` (hover/focus of the icon or of a \`.wm-trigger\` ancestor), \`wm-once\` (on load), \`wm-inview\` (JS). Reduced motion turns everything off unless \`wm-force\`.
+- Presets (\`wm-p-<name>\`): ${MOTION_PRESETS.join(', ')}.
+- Swap effects (\`wm-fx-<name>\`): ${MOTION_EFFECTS.join(', ')}. The swap shows B on hover of \`.wm-trigger\`, or when the wrapper has \`.is-on\` / \`aria-pressed="true"\`. \`wm-swap-focus\` shows B while focused, \`wm-swap-auto\` switches on its own.
+- Swap timing vars: \`--wm-swap-dur\` (one transition, s), \`--wm-swap-ease\` (easing of the incoming icon), \`--wm-swap-delay\`, \`--wm-swap-hold\` (auto: rest on each icon). Each icon of a swap can have its own style (\`swap-to="pause@kawaii"\`) and colours (style / \`swap-color\` / \`swap-colors\`).
+- Tuning vars: \`--wm-dur\` (s), \`--wm-k\` (intensity), \`--wm-ox/--wm-oy\` (pivot), \`--wm-dx/--wm-dy\` (direction), \`--wm-steps\`.
+- JS: \`import { motion, swap, motionFor } from '${SCOPE}/motion'\`; web component: \`<with-icon name="bell" motion="hover" swap-to="bell-off" swap-effect="flip">\` after importing \`${SCOPE}/motion/element\`.
+- Per-icon specs (intent, loop, hover, alternatives, swap targets) are in icons.json under \`icons[].motion\`.
 
 ## Props (identical in React, Vue, Svelte, Angular, Solid)
 
@@ -950,6 +1070,10 @@ MIT. Free for personal and commercial use; no attribution required. Credit line 
 Format: name | category | also known as | page URL. Component = PascalCase(name). SVG = ${CDN}/${SCOPE}/core/dist/svg/<style>/<name>.svg
 
 ${ICONS.map(i => `${i.name} | ${i.category} | ${akaOf(i).join(', ')} | ${pageUrl(i.name)}`).join('\n')}
+
+## Motion intents (what each icon's animation says)
+
+${ICONS.filter(i => MOTION[i.name]).map(i => `- \`${i.name}\`: ${MOTION[i.name].intent} (loop ${MOTION[i.name].loop.preset}, hover ${MOTION[i.name].hover.preset}${(MOTION[i.name].swap || []).length ? `; turns into ${MOTION[i.name].swap.map(x => x.to).join(', ')}` : ''})`).join('\n') || '- none yet'}
 
 ## Icon descriptions
 
@@ -1011,7 +1135,7 @@ ${urls.map(u => `  <url><loc>${esc(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><
       const fontOpt = fontFiles.length >= 2 ? { fontFiles, loadSystemFonts: false, defaultFontFamily: 'Segoe UI' } : { loadSystemFonts: true, defaultFontFamily: 'DejaVu Sans' }
       const SANS = "'Segoe UI', 'DejaVu Sans', Arial, sans-serif", MONO = "Consolas, 'DejaVu Sans Mono', monospace"
       const PAPER = '#FBF8F3', INK = '#111318', MUTED = '#5F6573', SUN = '#FFD23F', GOLD = '#B8965A'
-      const colorize = (m, c) => m.replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, c)
+      const colorize = (m, c) => resolveVars(m).replace(/currentColor/g, c)
       const nested = (n, s, x, y, size, c) => {
         const root = { ...STYLE[s].root }
         return `<svg${attrs({ x, y, width: size, height: size, viewBox: '0 0 24 24', overflow: 'visible' })}><g${attrs(Object.fromEntries(Object.entries(root).map(([k, v]) => [k, typeof v === 'string' ? colorize(v, c) : v])))}>${colorize(INNER(n)[s], c)}</g></svg>`
@@ -1028,7 +1152,12 @@ ${urls.map(u => `  <url><loc>${esc(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><
         return `<text x="${x}" y="${y + 52 * scale}" font-family="${SANS}" font-weight="900" font-size="${50 * scale}" fill="${iconsC}"><tspan fill="${withC}" font-style="italic">with</tspan>icons</text>`
       }
       const bg = (c = PAPER) => `<rect width="1200" height="630" fill="${c}"/>`
-      const tiles = (n, x0, y0, size, gap) => STYLES.map((s, k) => { const x = x0 + k * (size + gap); return `<rect x="${x}" y="${y0}" width="${size}" height="${size + 34}" rx="30" fill="${s.hex}"/>${nested(n, s.name, x + size * .22, y0 + size * .16, size * .56, '#FFFFFF')}<text x="${x + size / 2}" y="${y0 + size + 14}" text-anchor="middle" font-family="${MONO}" font-weight="700" font-size="16" letter-spacing="2" fill="#FFFFFF">${s.name.toUpperCase()}</text>` }).join('')
+      // one row when it fits (7 styles), otherwise two rows filling the same 1072px band
+      const tiles = (n, x0, y0) => {
+        const own = STYLES.filter(s => INNER(n)[s.name]), cols = own.length <= 8 ? own.length : Math.ceil(own.length / 2), rows = Math.ceil(own.length / cols)
+        const gap = rows > 1 ? 14 : 15.3, w = (1072 - (cols - 1) * gap) / cols, h = rows > 1 ? 112 : w + 34, ic = rows > 1 ? 56 : w * .56
+        return own.map((s, k) => { const x = x0 + (k % cols) * (w + gap), y = y0 + Math.floor(k / cols) * (h + 12); const ink = lumOf(s.hex) > 0.55 ? '#111318' : '#FFFFFF'; return `<rect x="${x.toFixed(1)}" y="${y}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${rows > 1 ? 24 : 30}" fill="${s.hex}"/>${nested(n, s.name, x + (w - ic) / 2, y + (rows > 1 ? 14 : w * .16), ic, ink)}<text x="${(x + w / 2).toFixed(1)}" y="${(y + h - (rows > 1 ? 14 : 20)).toFixed(1)}" text-anchor="middle" font-family="${MONO}" font-weight="700" font-size="${rows > 1 ? 13 : 16}" letter-spacing="${rows > 1 ? 1.5 : 2}" fill="${ink}">${s.name.toUpperCase()}</text>` }).join('')
+      }
       const foot = (y = 596) => `<text x="64" y="${y}" font-family="${MONO}" font-size="20" letter-spacing="1" fill="${MUTED}">withicons.com · free · MIT · powered by <tspan fill="${GOLD}" font-weight="700">Evergrow</tspan></text>`
       const fitTitle = (t, max = 1072, base = 92) => Math.min(base, Math.floor(max / (t.length * 0.56)))
       const cards = []
@@ -1069,12 +1198,12 @@ ${wordmark(64, 48, 1.1, HEX.line)}
 <text x="1136" y="88" text-anchor="end" font-family="${MONO}" font-size="20" letter-spacing="3" fill="${MUTED}">${xmlEsc(i.category.toUpperCase())} · FREE · SVG &amp; PNG</text>
 <text x="62" y="236" font-family="${SANS}" font-weight="900" font-size="${fitTitle(T, 1072, 96)}" letter-spacing="-3" fill="${INK}">${xmlEsc(T)}</text>
 ${aka ? `<text x="66" y="292" font-family="${SANS}" font-size="28" fill="${MUTED}">also: ${xmlEsc(aka)}</text>` : ''}
-${tiles(i.name, 64, 340, 140, 15.3)}${foot(604)}</svg>`
+${tiles(i.name, 64, NS > 8 ? 318 : 340)}${foot(604)}</svg>`
       }])
       fs.mkdirSync(path.join(SITE, 'og'), { recursive: true })
       const keep = new Set(), jobs = []
       for (const [key, make] of cards) {
-        const svg = make(), h = sha('png8-v2/' + svg + JSON.stringify(fontOpt.fontFiles || 'sys')), f = path.join(SITE, 'og', `${key}.png`)
+        const svg = make(), h = sha('png8-v3/' + svg + JSON.stringify(fontOpt.fontFiles || 'sys')), f = path.join(SITE, 'og', `${key}.png`)
         keep.add(`${key}.png`)
         if (ogc[key] !== h || !fs.existsSync(f)) { jobs.push({ svg, file: f }); ogc[key] = h }
       }

@@ -1,0 +1,90 @@
+{
+  "name": "hand-coins",
+  "category": "commerce",
+  "description": "An open hand holding a coin for payments, salary, tips, and lending.",
+  "aliases": [
+    "payment-hand",
+    "salary",
+    "loan",
+    "earn",
+    "cash-out",
+    "hand-money",
+    "receive-money",
+    "give-money",
+    "pay-out",
+    "hand-coin"
+  ],
+  "tags": [
+    "money",
+    "payment",
+    "salary",
+    "hand",
+    "coins",
+    "finance"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12.5 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 13 H10.5 A2 2 0 0 1 10.5 17 H8",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 21 H12.5 A2 2 0 0 0 13.62 20.66 L19.9 16.4 A1.75 1.75 0 0 0 18 13.5 L12.5 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M20 4.5 A5 2.5 0 1 1 10 4.5 A5 2.5 0 1 1 20 4.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10 4.5 V8 A5 2.5 0 0 0 20 8 V4.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 13 H10.5 A2 2 0 0 1 12.45 14.55 L18 13.5 A1.75 1.75 0 0 1 19.9 16.4 L13.62 20.66 A2 2 0 0 1 12.5 21 H5.5 Z",
+    "M10 4.5 A5 2.5 0 0 1 20 4.5 V8 A5 2.5 0 0 1 10 8 Z"
+  ],
+  "cutouts": [
+    "M10 4.5 A5 2.5 0 0 0 20 4.5",
+    "M5.5 17 H10.5 A2 2 0 0 0 12.4 15.6"
+  ],
+  "synonyms": [
+    "payout",
+    "pay",
+    "payment",
+    "paid",
+    "wage",
+    "wages",
+    "income",
+    "earnings",
+    "revenue",
+    "donation",
+    "donate",
+    "charity",
+    "tip",
+    "tips",
+    "gratuity",
+    "lend",
+    "lending",
+    "borrow",
+    "credit",
+    "cashback",
+    "cash back",
+    "refund",
+    "reward",
+    "allowance",
+    "payday",
+    "money in hand",
+    "hand holding coins",
+    "coins",
+    "funding",
+    "grant",
+    "compensation",
+    "payroll",
+    "cash"
+  ]
+}

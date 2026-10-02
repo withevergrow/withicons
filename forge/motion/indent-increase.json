@@ -1,0 +1,11 @@
+{
+  "name": "indent-increase",
+  "intent": "pushes the lines inward, one tab to the right",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.5, "duration": 2.6 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 1.1 },
+  "alt": [ { "preset": "pass", "dir": 0, "amount": 0.6 }, { "preset": "pop" } ],
+  "swap": [
+    { "to": "indent-decrease", "effect": "slide-left" },
+    { "to": "align-left", "effect": "fade" }
+  ]
+}

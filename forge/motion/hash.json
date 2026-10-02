@@ -1,0 +1,30 @@
+{
+  "name": "hash",
+  "intent": "wiggles like a fresh tag being added",
+  "loop": {
+    "preset": "sway",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle"
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "at-sign",
+      "effect": "rotate"
+    },
+    {
+      "to": "tag",
+      "effect": "fade"
+    }
+  ]
+}

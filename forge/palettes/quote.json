@@ -1,0 +1,448 @@
+{
+  "name": "quote",
+  "palettes": [
+    {
+      "id": "pull-quote",
+      "name": "Pull quote",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1A1A",
+        "c1": "#E3342F",
+        "c2": "#F2EEE6",
+        "c3": "#2B2B2B",
+        "c4": "#FFF0EF",
+        "tint": "#FADADA",
+        "accent": "#E3342F",
+        "shadow": "#721A18",
+        "shine": "#F9D6D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "testimonial",
+      "name": "Testimonial",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E1F3D",
+        "c1": "#2D6FE0",
+        "c2": "#A6C4F7",
+        "c3": "#F2A93B",
+        "c4": "#E9F1FD",
+        "tint": "#D9E5F9",
+        "accent": "#F2A93B",
+        "shadow": "#173870",
+        "shine": "#D5E2F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "book-review",
+      "name": "Book review",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#22160E",
+        "c1": "#8A3A26",
+        "c2": "#E9D9B8",
+        "c3": "#2E4A42",
+        "c4": "#F6EEDF",
+        "tint": "#EADCD8",
+        "accent": "#C9A24A",
+        "shadow": "#451D13",
+        "shine": "#E8D8D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "typewriter-quote",
+      "name": "Typewriter quote",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#141210",
+        "c1": "#57524C",
+        "c2": "#E6DCC8",
+        "c3": "#A83030",
+        "c4": "#F5EFE2",
+        "tint": "#E1E0DF",
+        "accent": "#A83030",
+        "shadow": "#2C2926",
+        "shine": "#DDDCDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "love-letter",
+      "name": "Love letter",
+      "tags": [
+        "true-to-life",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A0C1E",
+        "c1": "#E8456F",
+        "c2": "#FFC2D1",
+        "c3": "#F2E3C4",
+        "c4": "#FFF2F5",
+        "tint": "#FBDEE5",
+        "accent": "#C9A24A",
+        "shadow": "#742338",
+        "shine": "#FADAE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "speech-bubble",
+      "name": "Speech bubble",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0F38",
+        "c1": "#8A4DF0",
+        "c2": "#FFD23F",
+        "c3": "#FF6FA8",
+        "c4": "#F1EBFF",
+        "tint": "#EADFFC",
+        "accent": "#FFD23F",
+        "shadow": "#452778",
+        "shine": "#E8DBFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chalk-quote",
+      "name": "Chalk quote",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F2F0E6",
+        "c1": "#34493E",
+        "c2": "#E8C76A",
+        "c3": "#F2A0A0",
+        "c4": "#A8C9F2",
+        "tint": "#9AA49F",
+        "accent": "#E8C76A",
+        "shadow": "#1A251F",
+        "shine": "#D6DBD8",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "blush-pastel",
+      "name": "Blush pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#45222D",
+        "c1": "#F7AFC0",
+        "c2": "#FFE0B5",
+        "c3": "#B5DCEB",
+        "c4": "#FFF3F6",
+        "tint": "#FEF1F4",
+        "accent": "#D95F7E",
+        "shadow": "#7C5860",
+        "shine": "#FDEFF2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sage-pastel",
+      "name": "Sage pastel",
+      "tags": [
+        "pastel",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#213224",
+        "c1": "#A9D1A2",
+        "c2": "#F5D6B3",
+        "c3": "#C7B5EE",
+        "c4": "#F5FBF3",
+        "tint": "#F0F7EE",
+        "accent": "#D9776A",
+        "shadow": "#556951",
+        "shine": "#EEF6EC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gummy-quote",
+      "name": "Gummy quote",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A0F2E",
+        "c1": "#FF5FA8",
+        "c2": "#FFC93D",
+        "c3": "#4ED6C6",
+        "c4": "#8E5CFF",
+        "tint": "#FFE2EF",
+        "accent": "#4ED6C6",
+        "shadow": "#803054",
+        "shine": "#FFDFEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-quote",
+      "name": "Y2K quote",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1B1A40",
+        "c1": "#9EA6FF",
+        "c2": "#FFA8E6",
+        "c3": "#A8FFE0",
+        "c4": "#F1F2FF",
+        "tint": "#EEEFFF",
+        "accent": "#FF5CC8",
+        "shadow": "#4F5380",
+        "shine": "#ECEDFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-quote",
+      "name": "Neon quote",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFF5FC",
+        "c1": "#FF2E9B",
+        "c2": "#FFE135",
+        "c3": "#2DE2FF",
+        "c4": "#170514",
+        "tint": "#FF97CD",
+        "accent": "#2DE2FF",
+        "shadow": "#80174E",
+        "shine": "#FFD5EB",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "terracotta-quote",
+      "name": "Terracotta quote",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2C160C",
+        "c1": "#BC5E3C",
+        "c2": "#EBCBA6",
+        "c3": "#5E7450",
+        "c4": "#F7E8DA",
+        "tint": "#F3E2DC",
+        "accent": "#2E5F63",
+        "shadow": "#5E2F1E",
+        "shine": "#F2DFD8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-quote",
+      "name": "70s quote",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2A1206",
+        "c1": "#E05A26",
+        "c2": "#F3AE3A",
+        "c3": "#9E2E1C",
+        "c4": "#2F5C6E",
+        "tint": "#F9E1D8",
+        "accent": "#2F5C6E",
+        "shadow": "#702D13",
+        "shine": "#F9DED4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-words",
+      "name": "Sunset words",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#331126",
+        "c1": "#EF5A68",
+        "c2": "#FFAC61",
+        "c3": "#82307C",
+        "c4": "#FFE3DC",
+        "tint": "#FCE1E4",
+        "accent": "#38ABA2",
+        "shadow": "#782D34",
+        "shine": "#FCDEE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sea-breeze",
+      "name": "Sea breeze",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062C38",
+        "c1": "#1B86A8",
+        "c2": "#96DCEA",
+        "c3": "#FF967A",
+        "c4": "#E5F7FB",
+        "tint": "#D6E9EF",
+        "accent": "#FF967A",
+        "shadow": "#0E4354",
+        "shine": "#D1E7EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fern-quote",
+      "name": "Fern quote",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#11241A",
+        "c1": "#387D52",
+        "c2": "#B2D9AE",
+        "c3": "#C47A3A",
+        "c4": "#EAF5EC",
+        "tint": "#DBE8E0",
+        "accent": "#C47A3A",
+        "shadow": "#1C3F29",
+        "shine": "#D7E5DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wine-quote",
+      "name": "Wine quote",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#25070F",
+        "c1": "#9C1F3C",
+        "c2": "#F2A3B4",
+        "c3": "#F2C14E",
+        "c4": "#FCE6EB",
+        "tint": "#EDD7DC",
+        "accent": "#F2C14E",
+        "shadow": "#4E101E",
+        "shine": "#EBD2D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gilt-quote",
+      "name": "Gilt quote",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1E1608",
+        "c1": "#C2963A",
+        "c2": "#1D1A15",
+        "c3": "#F2DFAF",
+        "c4": "#73561C",
+        "tint": "#F4ECDC",
+        "accent": "#7E1C30",
+        "shadow": "#614B1D",
+        "shine": "#F3EAD8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "navy-ramp",
+      "name": "Navy ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#081633",
+        "c1": "#1E3E8A",
+        "c2": "#5677CC",
+        "c3": "#A6BAE8",
+        "c4": "#102766",
+        "tint": "#D7DCEA",
+        "accent": "#F2A14A",
+        "shadow": "#0F1F45",
+        "shine": "#D2D8E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grey-quote",
+      "name": "Grey quote",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#6C6C6C",
+        "c2": "#B7B7B7",
+        "c3": "#353535",
+        "c4": "#E9E9E9",
+        "tint": "#E5E5E5",
+        "accent": "#929292",
+        "shadow": "#363636",
+        "shine": "#E2E2E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0050FF",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#FFF7D1",
+        "accent": "#0050FF",
+        "shadow": "#806A00",
+        "shine": "#FFF4BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-quote",
+      "name": "Autumn quote",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2D1407",
+        "c1": "#C2541F",
+        "c2": "#E9AE44",
+        "c3": "#6E7C36",
+        "c4": "#F8E6CF",
+        "tint": "#F4E0D7",
+        "accent": "#6E7C36",
+        "shadow": "#612A10",
+        "shine": "#F3DDD2",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

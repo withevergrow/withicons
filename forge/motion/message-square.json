@@ -1,0 +1,43 @@
+{
+  "name": "message-square",
+  "intent": "breathes like a comment waiting, pops from its tail",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      3,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        3,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "messages",
+      "effect": "scale"
+    },
+    {
+      "to": "message-square@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

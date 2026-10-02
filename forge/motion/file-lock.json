@@ -1,0 +1,8 @@
+{
+  "name": "file-lock",
+  "intent": "jiggles like a locked door when you try to open it",
+  "loop": { "preset": "breathe", "amount": 0.4, "duration": 3.4 },
+  "hover": { "preset": "shake", "amount": 0.6 },
+  "alt": [ { "preset": "pulse", "amount": 0.5 }, { "preset": "nod", "amount": 0.6 } ],
+  "swap": [ { "to": "file", "effect": "fade" }, { "to": "lock", "effect": "flip" }, { "to": "unlock", "effect": "morph" } ]
+}

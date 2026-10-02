@@ -1,0 +1,68 @@
+{
+  "name": "circle-pause",
+  "category": "media",
+  "description": "Two pause bars inside a circle for pausing playback, timers, or campaigns.",
+  "aliases": [
+    "pause-circle",
+    "round-pause",
+    "hold-circle",
+    "pause-round",
+    "circled-pause",
+    "pause-video",
+    "pause-playback"
+  ],
+  "tags": [
+    "pause",
+    "media",
+    "playback",
+    "circle",
+    "button",
+    "hold"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 8.5 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 8.5 V15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M9.5 7.5 H9.5 A1 1 0 0 1 10.5 8.5 V15.5 A1 1 0 0 1 9.5 16.5 H9.5 A1 1 0 0 1 8.5 15.5 V8.5 A1 1 0 0 1 9.5 7.5 Z",
+    "M14.5 7.5 H14.5 A1 1 0 0 1 15.5 8.5 V15.5 A1 1 0 0 1 14.5 16.5 H14.5 A1 1 0 0 1 13.5 15.5 V8.5 A1 1 0 0 1 14.5 7.5 Z"
+  ],
+  "synonyms": [
+    "pause button",
+    "hold",
+    "on hold",
+    "wait",
+    "break",
+    "suspend",
+    "freeze",
+    "stop for now",
+    "take a break",
+    "pause timer",
+    "pause campaign",
+    "pause subscription",
+    "pause video",
+    "pause music",
+    "media player",
+    "playback",
+    "interrupt",
+    "idle",
+    "round pause button",
+    "pausebutton",
+    "pause buton",
+    "puase",
+    "paused"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "map-pin",
+  "intent": "drops onto the map and settles on its point",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.6
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "map-pin@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "navigation",
+      "effect": "fade"
+    }
+  ]
+}

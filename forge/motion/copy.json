@@ -1,0 +1,32 @@
+{
+  "name": "copy",
+  "intent": "breathes softly, pops when you copy",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "paste",
+      "effect": "fade"
+    }
+  ]
+}

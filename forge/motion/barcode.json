@@ -1,0 +1,31 @@
+{
+  "name": "barcode",
+  "intent": "flickers like a scanner reading the code",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "flicker",
+    "amount": 1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "type"
+    }
+  ],
+  "swap": [
+    {
+      "to": "qr-code",
+      "effect": "flip"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

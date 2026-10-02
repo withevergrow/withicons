@@ -7,7 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { Resvg } from '@resvg/resvg-js'
-import { loadIcon, listIcons, loadStyles, renderIcon, nodesToMarkup, attrs, ROOT } from '../lib/load.mjs'
+import { loadIcon, listIcons, loadStyles, renderIcon, nodesToMarkup, attrs, ROOT, resolveVars } from '../lib/load.mjs'
 
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, v, i, arr) => {
   if (v.startsWith('--')) a.push([v.slice(2), arr[i + 1] && !arr[i + 1].startsWith('--') ? arr[i + 1] : true]); return a
@@ -52,7 +52,7 @@ for (const sn of styleNames) {
   y += 6
 }
 const W = LABEL + cols * (SIZE + PAD) + 8, H = y + 8
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="100%" height="100%" fill="${bg}"/>${body.replaceAll('currentColor', fg)}</svg>`
+const svg = resolveVars(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="100%" height="100%" fill="${bg}"/>${body.replaceAll('currentColor', fg)}</svg>`)
 const out = path.resolve(ROOT, String(args.out || '.preview/preview.png'))
 fs.mkdirSync(path.dirname(out), { recursive: true })
 const png = new Resvg(svg, { font: { loadSystemFonts: true, defaultFontFamily: 'Segoe UI' }, background: bg }).render().asPng()

@@ -1,0 +1,36 @@
+{
+  "name": "bold",
+  "intent": "swells with weight like text turning bold",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "nod",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bold@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "italic",
+      "effect": "flip"
+    },
+    {
+      "to": "underline",
+      "effect": "slide-up"
+    }
+  ]
+}

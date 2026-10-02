@@ -1,0 +1,95 @@
+{
+  "name": "scroll-text",
+  "category": "files",
+  "description": "An unrolled scroll between two rollers with lines of text for terms, contracts, history and long reads.",
+  "aliases": [
+    "scroll",
+    "parchment",
+    "terms",
+    "manuscript",
+    "decree",
+    "history-scroll",
+    "papyrus",
+    "proclamation",
+    "charter",
+    "terms-of-service"
+  ],
+  "tags": [
+    "scroll",
+    "document",
+    "terms",
+    "history",
+    "legal",
+    "ancient"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 3 H19.5 A1.5 1.5 0 0 1 19.5 6 H4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 18 H19.5 A1.5 1.5 0 0 1 19.5 21 H4.5 A1.5 1.5 0 0 1 4.5 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 6 V18",
+      "plate": "K"
+    },
+    {
+      "d": "M18 6 V18",
+      "plate": "K"
+    },
+    {
+      "d": "M9 10 H15",
+      "plate": "A"
+    },
+    {
+      "d": "M9 14 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 3 H19.5 A1.5 1.5 0 0 1 19.5 6 H4.5 A1.5 1.5 0 0 1 4.5 3 Z M4.5 18 H19.5 A1.5 1.5 0 0 1 19.5 21 H4.5 A1.5 1.5 0 0 1 4.5 18 Z",
+    "M6 6 H18 V18 H6 Z"
+  ],
+  "cutouts": [
+    "M9 10 H15",
+    "M9 14 H13",
+    "M4.5 6 H19.5",
+    "M4.5 18 H19.5"
+  ],
+  "synonyms": [
+    "terms and conditions",
+    "t&c",
+    "tos",
+    "terms of use",
+    "policy",
+    "privacy policy",
+    "license",
+    "licence",
+    "contract",
+    "agreement",
+    "legal",
+    "law",
+    "rules",
+    "constitution",
+    "edict",
+    "certificate",
+    "diploma",
+    "deed",
+    "history",
+    "ancient",
+    "medieval",
+    "old document",
+    "story",
+    "lore",
+    "quest",
+    "long read",
+    "changelog",
+    "release notes",
+    "roll",
+    "scrol",
+    "parchement",
+    "rolled paper"
+  ]
+}

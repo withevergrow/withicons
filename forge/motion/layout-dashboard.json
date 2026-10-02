@@ -1,0 +1,35 @@
+{
+  "name": "layout-dashboard",
+  "intent": "panels breathe gently, then pop like a refreshed dashboard",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-grid",
+      "effect": "morph"
+    },
+    {
+      "to": "layout-list",
+      "effect": "fade"
+    },
+    {
+      "to": "kanban",
+      "effect": "fade"
+    }
+  ]
+}

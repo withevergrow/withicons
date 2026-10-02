@@ -1,0 +1,15 @@
+{
+  "name": "chevron-first",
+  "intent": "leans back toward the start, like it's heading to page one",
+  "loop": { "preset": "nudge", "dir": 180, "amount": 0.45, "duration": 2 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 1.1, "duration": 0.6 },
+  "alt": [
+    { "preset": "pass", "dir": 180, "duration": 0.8 },
+    { "preset": "shake", "amount": 0.5 }
+  ],
+  "swap": [
+    { "to": "chevron-last", "effect": "flip" },
+    { "to": "chevron-left", "effect": "slide-left" },
+    { "to": "skip-back", "effect": "morph" }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "graduation-cap",
+  "intent": "bobs proudly, then gets tossed in celebration",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "rise"
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "graduation-cap@solid",
+      "effect": "scale"
+    }
+  ]
+}

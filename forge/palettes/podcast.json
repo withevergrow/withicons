@@ -1,0 +1,149 @@
+{
+  "name": "podcast",
+  "palettes": [
+    {
+      "id": "podcast-purple",
+      "name": "Podcast purple",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#22112C", "c1": "#9B3FD1", "c2": "#F3E8FF", "c3": "#E879F9", "c4": "#4A1470", "tint": "#E3C9F2", "accent": "#E879F9", "shadow": "#471863", "shine": "#F1E4F9", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "on-air",
+      "name": "On air",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1111", "c1": "#DC2626", "c2": "#FDE68A", "c3": "#FCA5A5", "c4": "#7F1D1D", "tint": "#F5C2C2", "accent": "#FDE68A", "shadow": "#681212", "shine": "#FAE1E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "broadcast-blue",
+      "name": "Broadcast blue",
+      "tags": ["corporate"],
+      "colors": { "ink": "#11192C", "c1": "#2563EB", "c2": "#38BDF8", "c3": "#DBEAFE", "c4": "#1E3A8A", "tint": "#C2D3F9", "accent": "#38BDF8", "shadow": "#122D68", "shine": "#E0E9FC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "studio-mic",
+      "name": "Studio mic",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#09090B", "c1": "#52525B", "c2": "#F59E0B", "c3": "#D4D4D8", "c4": "#18181B", "tint": "#CFCFD1", "accent": "#F59E0B", "shadow": "#29292E", "shine": "#E7E7E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sky-waves",
+      "name": "Sky waves",
+      "tags": ["candy"],
+      "colors": { "ink": "#11242C", "c1": "#38BDF8", "c2": "#A78BFA", "c3": "#FDE68A", "c4": "#0C4A6E", "tint": "#C7EDFD", "accent": "#FDE68A", "shadow": "#124E68", "shine": "#E3F6FE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "morning-show",
+      "name": "Morning show",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1C11", "c1": "#F97316", "c2": "#FDE047", "c3": "#FFEDD5", "c4": "#7C2D12", "tint": "#FDD8BE", "accent": "#FDE047", "shadow": "#683512", "shine": "#FEEBDE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "late-night-show",
+      "name": "Late night show",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#F7EBFF", "c1": "#B026FF", "c2": "#00F0FF", "c3": "#FF3CAC", "c4": "#2A0A4A", "tint": "#E9C2FF", "accent": "#00F0FF", "shadow": "#491268", "shine": "#F4E1FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "signal-flare",
+      "name": "Signal flare",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF2EA", "c1": "#FF4F00", "c2": "#FFE600", "c3": "#00E0B0", "c4": "#3D1300", "tint": "#FFCEB8", "accent": "#FFE600", "shadow": "#682D12", "shine": "#FFE6DB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "cozy-chat",
+      "name": "Cozy chat",
+      "tags": ["pastel"],
+      "colors": { "ink": "#3B2A5E", "c1": "#CBB2FE", "c2": "#FFCAD4", "c3": "#B8F2E6", "c4": "#FFF3B0", "tint": "#F0E9FF", "accent": "#B8F2E6", "shadow": "#2F1268", "shine": "#F8F4FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gumdrop",
+      "name": "Gumdrop",
+      "tags": ["candy"],
+      "colors": { "ink": "#451133", "c1": "#FF7EC7", "c2": "#7EF2FF", "c3": "#FFE77E", "c4": "#C49BFF", "tint": "#FFDBEF", "accent": "#7EF2FF", "shadow": "#681243", "shine": "#FFEDF7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "webcast-2000",
+      "name": "Webcast 2000",
+      "tags": ["y2k"],
+      "colors": { "ink": "#10123A", "c1": "#4361EE", "c2": "#F72585", "c3": "#4CC9F0", "c4": "#B5179E", "tint": "#CAD3FA", "accent": "#F72585", "shadow": "#122168", "shine": "#E5E9FD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "retro-radio-show",
+      "name": "Retro radio show",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1611", "c1": "#E76F51", "c2": "#2A9D8F", "c3": "#E9C46A", "c4": "#264653", "tint": "#F8D7CE", "accent": "#E9C46A", "shadow": "#682312", "shine": "#FCEBE7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "old-time-radio",
+      "name": "Old time radio",
+      "tags": ["vintage"],
+      "colors": { "ink": "#281A15", "c1": "#8D5B4C", "c2": "#D7B49E", "c3": "#F2E6D8", "c4": "#4A2E25", "tint": "#DFD1CD", "accent": "#D7B49E", "shadow": "#472E26", "shine": "#EFE8E6", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "ocean-signal",
+      "name": "Ocean signal",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11262C", "c1": "#0096C7", "c2": "#48CAE4", "c3": "#ADE8F4", "c4": "#023E8A", "tint": "#B8E2EF", "accent": "#48CAE4", "shadow": "#0F4355", "shine": "#DBF0F7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "nature-walk",
+      "name": "Nature walk",
+      "tags": ["nature"],
+      "colors": { "ink": "#132A20", "c1": "#40916C", "c2": "#74C69D", "c3": "#D8F3DC", "c4": "#1B4332", "tint": "#CAE0D6", "accent": "#74C69D", "shadow": "#204936", "shine": "#E4F0EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "wine-night",
+      "name": "Wine night",
+      "tags": ["vintage"],
+      "colors": { "ink": "#2C1119", "c1": "#7F1D3A", "c2": "#D97798", "c3": "#F7D6E0", "c4": "#3F0A1C", "tint": "#DBC0C8", "accent": "#D97798", "shadow": "#400F1D", "shine": "#EDDFE3", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "lime-signal",
+      "name": "Lime signal",
+      "tags": ["vivid"],
+      "colors": { "ink": "#212C11", "c1": "#84CC16", "c2": "#FACC15", "c3": "#ECFCCB", "c4": "#3F6212", "tint": "#DDF1BE", "accent": "#FACC15", "shadow": "#416011", "shine": "#EEF8DE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "amber-ramp",
+      "name": "Amber ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#2C1D11", "c1": "#B45309", "c2": "#F59E0B", "c3": "#FDE68A", "c4": "#78350F", "tint": "#EACFBA", "accent": "#F59E0B", "shadow": "#502B0E", "shine": "#F5E7DD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "static-gray",
+      "name": "Static gray",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#1D1D20", "c1": "#71717A", "c2": "#A1A1AA", "c3": "#E4E4E7", "c4": "#27272A", "tint": "#D7D7DA", "accent": "#A1A1AA", "shadow": "#39393D", "shine": "#EBEBEC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "midnight-episode",
+      "name": "Midnight episode",
+      "tags": ["dark"],
+      "colors": { "ink": "#020617", "c1": "#475569", "c2": "#A78BFA", "c3": "#CBD5E1", "c4": "#0F172A", "tint": "#CBCFD5", "accent": "#A78BFA", "shadow": "#242B35", "shine": "#E5E7EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "golden-mic",
+      "name": "Golden mic",
+      "tags": ["luxe"],
+      "colors": { "ink": "#161616", "c1": "#CFA94A", "c2": "#F4E7C1", "c3": "#161616", "c4": "#6F5517", "tint": "#F2E7CC", "accent": "#6F5517", "shadow": "#614C1A", "shine": "#F8F3E6", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#6A0DAD", "c2": "#FFD700", "c3": "#FFFFFF", "c4": "#000000", "tint": "#D5BBE8", "accent": "#FFD700", "shadow": "#340E4F", "shine": "#EADDF4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "sunset-stream",
+      "name": "Sunset stream",
+      "tags": ["sunset"],
+      "colors": { "ink": "#2C1811", "c1": "#F4845F", "c2": "#F25C54", "c3": "#F7B267", "c4": "#6D2E46", "tint": "#FCDDD2", "accent": "#F25C54", "shadow": "#682812", "shine": "#FDEEE9", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "fireside-chat",
+      "name": "Fireside chat",
+      "tags": ["seasonal", "earthy"],
+      "colors": { "ink": "#2C1411", "c1": "#A44A3F", "c2": "#D4A373", "c3": "#F5E1C8", "c4": "#5C2018", "tint": "#E6CCC9", "accent": "#D4A373", "shadow": "#522520", "shine": "#F2E6E4", "edge": "#FFF8EC" }
+    }
+  ]
+}

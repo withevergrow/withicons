@@ -1,0 +1,471 @@
+{
+  "name": "soup",
+  "palettes": [
+    {
+      "id": "tomato-soup",
+      "name": "Tomato soup",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A0E06",
+        "c1": "#E04B2E",
+        "c2": "#F4F1E8",
+        "c3": "#6B8E4E",
+        "c4": "#F7C59F",
+        "tint": "#F9DBD5",
+        "accent": "#6B8E4E",
+        "shadow": "#7C2616",
+        "shine": "#F6C9C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pumpkin-bisque",
+      "name": "Pumpkin bisque",
+      "tags": [
+        "true-to-life",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F2963A",
+        "c2": "#F6E7D2",
+        "c3": "#6B8E4E",
+        "c4": "#B85A1A",
+        "tint": "#FCEAD8",
+        "accent": "#F6E7D2",
+        "shadow": "#7C471B",
+        "shine": "#FBE0C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pea-soup",
+      "name": "Split pea",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E2A10",
+        "c1": "#9DBF4E",
+        "c2": "#F2EFE4",
+        "c3": "#D9A84A",
+        "c4": "#5B7A2E",
+        "tint": "#EBF2DC",
+        "accent": "#D9A84A",
+        "shadow": "#516629",
+        "shine": "#E2ECCA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "miso",
+      "name": "Miso",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A08",
+        "c1": "#D9A35E",
+        "c2": "#2B2B2E",
+        "c3": "#7FB045",
+        "c4": "#F4E3C1",
+        "tint": "#F7EDDF",
+        "accent": "#7FB045",
+        "shadow": "#72512A",
+        "shine": "#F4E3CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ramen-red",
+      "name": "Ramen bowl",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0606",
+        "c1": "#F5D37A",
+        "c2": "#C8102E",
+        "c3": "#2B2B2E",
+        "c4": "#F9F1DE",
+        "tint": "#FDF6E4",
+        "accent": "#C8102E",
+        "shadow": "#7B5834",
+        "shine": "#FCF2D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pho",
+      "name": "Pho",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1A08",
+        "c1": "#E8C47A",
+        "c2": "#F4F1E8",
+        "c3": "#4E9F3D",
+        "c4": "#C8102E",
+        "tint": "#FAF3E4",
+        "accent": "#4E9F3D",
+        "shadow": "#785E36",
+        "shine": "#F8EDD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "borscht",
+      "name": "Borscht",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0614",
+        "c1": "#B5214E",
+        "c2": "#F7F1E8",
+        "c3": "#6B8E4E",
+        "c4": "#F4C2D2",
+        "tint": "#F0D3DC",
+        "accent": "#F4C2D2",
+        "shadow": "#62112B",
+        "shine": "#E9BCCA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chicken-noodle",
+      "name": "Chicken noodle",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2A08",
+        "c1": "#F6D27A",
+        "c2": "#3B6FB6",
+        "c3": "#E07A2E",
+        "c4": "#FBF3E0",
+        "tint": "#FDF6E4",
+        "accent": "#E07A2E",
+        "shadow": "#856D36",
+        "shine": "#FCF2D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "curry-laksa",
+      "name": "Curry laksa",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F2A33A",
+        "c2": "#1F6E5C",
+        "c3": "#E04B2E",
+        "c4": "#F6E1B5",
+        "tint": "#FCEDD8",
+        "accent": "#E04B2E",
+        "shadow": "#7C4C1B",
+        "shine": "#FBE3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mushroom-cream",
+      "name": "Mushroom cream",
+      "tags": [
+        "earthy",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2B1F14",
+        "c1": "#D8C3A5",
+        "c2": "#6E5A44",
+        "c3": "#8FA67A",
+        "c4": "#F4ECDF",
+        "tint": "#F7F3ED",
+        "accent": "#8FA67A",
+        "shadow": "#70614E",
+        "shine": "#F3EDE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-willow",
+      "name": "Blue willow",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#0B1F3A",
+        "c1": "#E9EEF6",
+        "c2": "#2F55A4",
+        "c3": "#D9A84A",
+        "c4": "#9FB3D9",
+        "tint": "#FBFCFD",
+        "accent": "#D9A84A",
+        "shadow": "#647285",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "diner-mug",
+      "name": "Diner soup",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E85D3A",
+        "c2": "#F4D58D",
+        "c3": "#3D7068",
+        "c4": "#C2552D",
+        "tint": "#FADFD8",
+        "accent": "#F4D58D",
+        "shadow": "#77311C",
+        "shine": "#F8CEC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-stew",
+      "name": "70s stew",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E58B2A",
+        "c2": "#8E3B2E",
+        "c3": "#F4D06F",
+        "c4": "#3F6F63",
+        "tint": "#FAE8D4",
+        "accent": "#F4D06F",
+        "shadow": "#754416",
+        "shine": "#F7DCBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kawaii-broth",
+      "name": "Kawaii broth",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A2A20",
+        "c1": "#FFD6A5",
+        "c2": "#FFADC6",
+        "c3": "#B5E3C3",
+        "c4": "#FFF2B3",
+        "tint": "#FFF7ED",
+        "accent": "#FFADC6",
+        "shadow": "#926F55",
+        "shine": "#FFF3E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-bowl",
+      "name": "Pastel bowl",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3150",
+        "c1": "#FFC9B5",
+        "c2": "#C7E3FF",
+        "c3": "#CDB8F5",
+        "c4": "#FFF1A8",
+        "tint": "#FFF4F0",
+        "accent": "#C7E3FF",
+        "shadow": "#8C6E78",
+        "shine": "#FFEFE9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-soup",
+      "name": "Candy bowl",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1028",
+        "c1": "#FF77B4",
+        "c2": "#7FE3F0",
+        "c3": "#FFE066",
+        "c4": "#B388FF",
+        "tint": "#FFE4F0",
+        "accent": "#FFE066",
+        "shadow": "#893960",
+        "shine": "#FFD6E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-soup",
+      "name": "Y2K bowl",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#C2B4FF",
+        "c2": "#FF9EE8",
+        "c3": "#C9FF6B",
+        "c4": "#8FF0FF",
+        "tint": "#F3F0FF",
+        "accent": "#C9FF6B",
+        "shadow": "#675D96",
+        "shine": "#EDE9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-noodle",
+      "name": "Neon noodle bar",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF3D6E",
+        "c1": "#1A0810",
+        "c2": "#FFE14D",
+        "c3": "#3DF2FF",
+        "c4": "#7CFF6B",
+        "tint": "#D1CECF",
+        "accent": "#3DF2FF",
+        "shadow": "#0A0306",
+        "shine": "#BAB5B7",
+        "edge": "#040102"
+      }
+    },
+    {
+      "id": "winter-stew",
+      "name": "Winter stew",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#24120A",
+        "c1": "#A8542E",
+        "c2": "#EDE7DC",
+        "c3": "#4E6B3A",
+        "c4": "#E8C068",
+        "tint": "#EEDDD5",
+        "accent": "#E8C068",
+        "shadow": "#592C18",
+        "shine": "#E5CCC0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-broth",
+      "name": "Spring broth",
+      "tags": [
+        "seasonal",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E3010",
+        "c1": "#CDE89A",
+        "c2": "#FBF6E9",
+        "c3": "#F49AC1",
+        "c4": "#6E9F3D",
+        "tint": "#F5FAEB",
+        "accent": "#F49AC1",
+        "shadow": "#647A47",
+        "shine": "#F0F8E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-chowder",
+      "name": "Ocean chowder",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B2A33",
+        "c1": "#F1E6CC",
+        "c2": "#1F6E8C",
+        "c3": "#F28C6B",
+        "c4": "#8AD1C2",
+        "tint": "#FCFAF5",
+        "accent": "#F28C6B",
+        "shadow": "#677570",
+        "shine": "#FBF8F0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "saffron-ramp",
+      "name": "Saffron ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3A2400",
+        "c1": "#F2B52E",
+        "c2": "#FBE2A0",
+        "c3": "#B07A0A",
+        "c4": "#6A4800",
+        "tint": "#FCF0D5",
+        "accent": "#FBE2A0",
+        "shadow": "#845E12",
+        "shine": "#FBE9C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale-bowl",
+      "name": "Greyscale bowl",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#B5B5B5",
+        "c2": "#E8E8E8",
+        "c3": "#5E5E5E",
+        "c4": "#888888",
+        "tint": "#F0F0F0",
+        "accent": "#E8E8E8",
+        "shadow": "#545454",
+        "shine": "#E9E9E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#E4002B",
+        "c2": "#FFFFFF",
+        "c3": "#FFD400",
+        "c4": "#0050EF",
+        "tint": "#FACCD5",
+        "accent": "#FFD400",
+        "shadow": "#5B0011",
+        "shine": "#F7B3BF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

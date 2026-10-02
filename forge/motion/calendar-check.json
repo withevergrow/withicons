@@ -1,0 +1,31 @@
+{
+  "name": "calendar-check",
+  "intent": "pulses gently, ticks the date off on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "calendar",
+      "effect": "fade"
+    },
+    {
+      "to": "calendar-check@solid",
+      "effect": "scale"
+    }
+  ]
+}

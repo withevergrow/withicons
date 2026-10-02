@@ -1,0 +1,87 @@
+{
+  "name": "cooking-pot",
+  "category": "food",
+  "description": "A lidded cooking pot with side handles for recipes and home kitchens.",
+  "aliases": [
+    "pot",
+    "saucepan",
+    "casserole",
+    "stockpot",
+    "boil",
+    "cook-pot",
+    "kitchen-pot",
+    "stew-pot",
+    "cookware",
+    "dutch-oven"
+  ],
+  "tags": [
+    "food",
+    "cooking",
+    "kitchen",
+    "recipe",
+    "pot"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 10 H19.5 V18 A3 3 0 0 1 16.5 21 H7.5 A3 3 0 0 1 4.5 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 10 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 10 A6.5 4 0 0 1 18.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6 V3.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 14 H2.5",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 14 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 10 H19.5 V18 A3 3 0 0 1 16.5 21 H7.5 A3 3 0 0 1 4.5 18 Z",
+    "M5.5 10 A6.5 4 0 0 1 18.5 10 Z"
+  ],
+  "cutouts": [
+    "M5 12 H19"
+  ],
+  "synonyms": [
+    "cooking pot",
+    "cook pot",
+    "sauce pan",
+    "stock pot",
+    "pot with lid",
+    "pan",
+    "lid",
+    "boiling",
+    "simmer",
+    "stew",
+    "soup pot",
+    "pasta",
+    "cook",
+    "cooking",
+    "cookery",
+    "recipe",
+    "recipes",
+    "kitchen",
+    "home cooking",
+    "meal prep",
+    "dinner",
+    "crockpot",
+    "slow cooker",
+    "hot pot",
+    "cauldron",
+    "pots",
+    "cookin",
+    "sospan"
+  ]
+}

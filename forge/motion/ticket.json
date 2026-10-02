@@ -1,0 +1,32 @@
+{
+  "name": "ticket",
+  "intent": "floats gently, wobbles like a ticket being punched",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "ticket@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "ice-cream",
+  "category": "food",
+  "description": "A scoop of ice cream in a cone for desserts, summer, and sweet treats.",
+  "aliases": [
+    "ice-cream-cone",
+    "gelato",
+    "dessert-cone",
+    "frozen-treat",
+    "soft-serve",
+    "sundae",
+    "icecream",
+    "frozen-yogurt",
+    "gelato-cone"
+  ],
+  "tags": [
+    "dessert",
+    "summer",
+    "sweet",
+    "frozen",
+    "treat",
+    "cone"
+  ],
+  "paths": [
+    {
+      "d": "M6 11.5 A6.5 6.5 0 1 1 18 11.5 A2 2 0 0 1 14 11.5 A2 2 0 0 1 10 11.5 A2 2 0 0 1 6 11.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 13.5 L12 21.5 L16 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 11.5 A6.5 6.5 0 1 1 18 11.5 A2 2 0 0 1 14 11.5 A2 2 0 0 1 10 11.5 A2 2 0 0 1 6 11.5 Z",
+    "M8 13.5 L12 21.5 L16 13.5 Z"
+  ],
+  "cutouts": [
+    "M18 11.5 A2 2 0 0 1 14 11.5 A2 2 0 0 1 10 11.5 A2 2 0 0 1 6 11.5"
+  ],
+  "synonyms": [
+    "ice cream",
+    "cone",
+    "ice-cream cone",
+    "ice lolly",
+    "scoop",
+    "waffle cone",
+    "sorbet",
+    "froyo",
+    "frozen yoghurt",
+    "soft serve",
+    "vanilla",
+    "chocolate",
+    "strawberry",
+    "dessert",
+    "desserts",
+    "sweet",
+    "sweets",
+    "treat",
+    "summer",
+    "hot weather",
+    "beach",
+    "parlour",
+    "parlor",
+    "creamery",
+    "ice creams",
+    "icecrem",
+    "ice cram"
+  ]
+}

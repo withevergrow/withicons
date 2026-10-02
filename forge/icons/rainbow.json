@@ -1,0 +1,81 @@
+{
+  "name": "rainbow",
+  "category": "weather",
+  "description": "A three-band rainbow arc for weather, hope, diversity, and pride.",
+  "aliases": [
+    "arc",
+    "pride",
+    "colors",
+    "spectrum",
+    "after-rain",
+    "hope",
+    "colourful",
+    "colorful",
+    "lgbt",
+    "lgbtq"
+  ],
+  "synonyms": [
+    "colours",
+    "color",
+    "colour",
+    "rainbow arc",
+    "rainbow colors",
+    "pride month",
+    "pride flag",
+    "lgbtqia",
+    "queer",
+    "gay",
+    "inclusion",
+    "inclusive",
+    "diversity",
+    "equality",
+    "love",
+    "kids",
+    "children",
+    "happy",
+    "joy",
+    "magic",
+    "fantasy",
+    "dream",
+    "unicorn",
+    "weather",
+    "after the rain",
+    "sky",
+    "optimism",
+    "positivity",
+    "spectral",
+    "prism",
+    "gradient",
+    "rainbo",
+    "rianbow"
+  ],
+  "tags": [
+    "weather",
+    "sky",
+    "pride",
+    "color",
+    "hope"
+  ],
+  "paths": [
+    {
+      "d": "M2 18 A10 10 0 0 1 22 18",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 18 A6.5 6.5 0 0 1 18.5 18",
+      "plate": "K"
+    },
+    {
+      "d": "M9 18 A3 3 0 0 1 15 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 18 A10 10 0 0 1 22 18 Z"
+  ],
+  "cutouts": [
+    "M3 18 A9 9 0 0 1 21 18 H19.5 A7.5 7.5 0 0 0 4.5 18 Z",
+    "M6.5 18 A5.5 5.5 0 0 1 17.5 18 H16 A4 4 0 0 0 8 18 Z",
+    "M10 18 A2 2 0 0 1 14 18 Z"
+  ]
+}

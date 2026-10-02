@@ -1,0 +1,8 @@
+{
+  "name": "burger",
+  "intent": "the stacked burger squishes softly like a juicy bite",
+  "loop": { "preset": "jelly", "origin": [12, 21.5], "amount": 0.5, "duration": 2.6 },
+  "hover": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.9 },
+  "alt": [ { "preset": "pop" }, { "preset": "tada" }, { "preset": "float", "amount": 0.6 } ],
+  "swap": [ { "to": "burger@solid", "effect": "scale" }, { "to": "pizza", "effect": "morph" } ]
+}

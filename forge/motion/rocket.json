@@ -1,0 +1,34 @@
+{
+  "name": "rocket",
+  "intent": "hums on the launchpad, then blasts off up and away",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "amount": 1,
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "rise"
+    }
+  ],
+  "swap": [
+    {
+      "to": "rocket@solid",
+      "effect": "scale"
+    }
+  ]
+}

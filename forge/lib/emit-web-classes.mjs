@@ -14,21 +14,28 @@
 import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, styleTable, innerOf, namesAndAliasesDts } from './emit-core.mjs'
+import { J, LOOKUP_SRC, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc } from './emit-core.mjs'
 
 const MODIFIERS = ['xs', 'sm', 'lg', '2x', '3x', '4x', '5x', 'fw', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270',
-  'flip-h', 'flip-v', 'flip-both']
+  'flip-h', 'flip-v', 'flip-both', 'rtl']
 // class suffixes that are never icon names (modifiers + internal / future-proof words)
 const RESERVED = [...MODIFIERS, 'svg', 'js', 'css', 'all', 'icons', 'skip']
 
 // ---------------------------------------------------------------- CSS
-const MASK = 'var(--with-i,linear-gradient(#0000 0 0)) center/contain no-repeat'
+// Two layers per icon, both CSS-only:
+//   .with           background-image  --with-p : the palette colours (palette styles only), CSS variables baked to their defaults
+//   .with::after    currentColor masked by --with-i : the ink, so `color` still recolours it
+// Ink that the original drawing covers with later palette shapes is knocked out of the mask, so the
+// stacking order of the real SVG is preserved. Mono styles only set --with-i (exactly the old single mask).
+const EMPTY = 'linear-gradient(#0000 0 0)'
+const MASK = `var(--with-i,${EMPTY}) center/contain no-repeat`
 function baseCss() {
   const sizes = { xs: '.75em', sm: '.875em', '2x': '2em', '3x': '3em', '4x': '4em', '5x': '5em' }
   return [
     // .with keeps real (0,1,0) specificity; modifiers use .with.with-x (0,2,0) so they win regardless of file order
-    `.with{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0;font-style:normal;line-height:1;background-color:currentColor;-webkit-mask:${MASK};mask:${MASK}}`,
-    `.with[data-with-svg]{background:none;-webkit-mask:none;mask:none}`,
+    `.with{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0;font-style:normal;line-height:1;background:var(--with-p,none) center/contain no-repeat}`,
+    `.with::after{content:"";display:block;width:100%;height:100%;background-color:currentColor;-webkit-mask:${MASK};mask:${MASK}}`,
+    `.with[data-with-svg]{background:none}.with[data-with-svg]::after{content:none}`,
     `.with>.with-svg{display:block;width:100%;height:100%;overflow:visible}`,
     Object.entries(sizes).map(([k, v]) => `.with.with-${k}{font-size:${v}}`).join(''),
     `.with.with-lg{font-size:1.33em;vertical-align:-.25em}`,
@@ -37,7 +44,19 @@ function baseCss() {
     `@keyframes with-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}`,
     `.with.with-rotate-90{rotate:90deg}.with.with-rotate-180{rotate:180deg}.with.with-rotate-270{rotate:270deg}`,
     `.with.with-flip-h{scale:-1 1}.with.with-flip-v{scale:1 -1}.with.with-flip-both{scale:-1 -1}`,
+    // with-rtl: mirror only in right-to-left text (directional icons); [dir=rtl] fallback where :dir() is missing (iOS < 16.4)
+    `.with.with-rtl:dir(rtl){scale:-1 1}`,
+    `@supports not selector(:dir(rtl)){[dir=rtl] .with.with-rtl{scale:-1 1}[dir=rtl] [dir=ltr] .with.with-rtl{scale:none}}`,
+    // browsers without the individual transform properties (Chrome < 104, Samsung Internet < 20): a flipped arrow
+    // must still point the right way, so fall back to transform (spin then replaces it, which is only cosmetic)
+    `@supports not (scale:1){.with.with-rotate-90{transform:rotate(90deg)}.with.with-rotate-180{transform:rotate(180deg)}.with.with-rotate-270{transform:rotate(270deg)}` +
+      `.with.with-flip-h,[dir=rtl] .with.with-rtl{transform:scaleX(-1)}.with.with-flip-v{transform:scaleY(-1)}.with.with-flip-both{transform:scale(-1)}}`,
     `@media (prefers-reduced-motion:reduce){.with.with-spin,.with.with-pulse{animation:none}}`,
+    // Windows High Contrast / forced colours would repaint the masked background as Canvas (invisible ink): keep
+    // currentColor, which is itself the forced CanvasText / LinkText / ButtonText
+    `@media (forced-colors:active){.with::after{forced-color-adjust:none;background-color:currentColor}}`,
+    // both layers are backgrounds, which printing drops by default ("Background graphics" off)
+    `.with,.with::after{-webkit-print-color-adjust:exact;print-color-adjust:exact}`,
   ].join('\n')
 }
 
@@ -50,6 +69,59 @@ function maskUri(style, inner) {
   s = s.replace(/var\(--[\w-]+,\s*currentColor\)/g, 'black').replace(/currentColor/g, 'black')
   s = s.replace(/[%#"\\\r\n\t]|[^\x20-\x7e]/g, c => encodeURIComponent(c))
   return `url("data:image/svg+xml,${s}")`
+}
+
+// Palette styles: split the drawing into a palette picture and an ink mask (see the CSS comment above).
+// Returns null when the style paints only currentColor (then maskUri() alone is exact).
+const PAINT_DROP = new Set(['fill', 'stroke', 'color'])
+function paintKind(v) {
+  if (v == null) return 'none'
+  const r = flattenVars(String(v)).trim()
+  return r === 'none' || r === 'transparent' ? 'none' : /^currentcolor$/i.test(r) ? 'ink' : 'pal'
+}
+const q = v => String(v).replace(/'/g, '&#39;').replace(/"/g, "'").replace(/</g, '&lt;')
+const nodeMarkup = (tag, a) => `<${tag}${Object.entries(a).filter(([, v]) => v != null && v !== false).map(([k, v]) => ` ${k}='${q(v)}'`).join('')}/>`
+const encodeSvg = s => `url("data:image/svg+xml,${s.replace(/[%#"\\\r\n\t]|[^\x20-\x7e]/g, c => encodeURIComponent(c))}")`
+export function layerUris(style, nodes) {
+  const root = style.root || {}
+  const rootFill = root.fill == null ? 'black' : root.fill, rootStroke = root.stroke == null ? 'none' : root.stroke
+  const parts = []
+  for (const [tag, a] of nodes) {
+    const fill = a.fill == null ? rootFill : a.fill, stroke = a.stroke == null ? rootStroke : a.stroke
+    const fk = paintKind(fill), sk = paintKind(stroke)
+    const base = {}
+    for (const [k, v] of Object.entries(a)) if (!PAINT_DROP.has(k)) base[k] = typeof v === 'string' ? flattenVars(v) : v
+    // fill and stroke of one element can belong to different layers: split it (fill is painted first)
+    if (fk !== 'none') parts.push({ ink: fk === 'ink', tag, a: base, fill: flattenVars(String(fill)), stroke: 'none' })
+    if (sk !== 'none') {
+      if (fk !== 'none' && fk === sk) { parts[parts.length - 1].stroke = flattenVars(String(stroke)); continue }
+      parts.push({ ink: sk === 'ink', tag, a: base, fill: 'none', stroke: flattenVars(String(stroke)) })
+    }
+  }
+  if (!parts.some(p => !p.ink)) return null
+  const rootAttrs = Object.entries(root).filter(([k]) => !PAINT_DROP.has(k)).map(([k, v]) => ` ${k}='${q(v)}'`).join('')
+  const open = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'${rootAttrs}>`
+  const paint = (p, col) => nodeMarkup(p.tag, { ...p.a, fill: p.fill === 'none' ? 'none' : col || p.fill, stroke: p.stroke === 'none' ? 'none' : col || p.stroke })
+  const pal = parts.filter(p => !p.ink).map(p => paint(p)).join('')
+  // ink runs, each knocked out by the palette shapes drawn after it
+  let ink = '', masks = '', run = [], n = 0
+  const flush = end => {
+    if (!run.length) return
+    const later = parts.slice(end).filter(p => !p.ink)
+    const body = run.map(p => paint(p, 'black')).join('')
+    if (later.length) {
+      const id = 'k' + n++
+      masks += `<mask id='${id}' maskUnits='userSpaceOnUse' x='-4' y='-4' width='32' height='32'><rect x='-4' y='-4' width='32' height='32' fill='white'/>${later.map(p => paint(p, 'black')).join('')}</mask>`
+      ink += `<g mask='url(#${id})'>${body}</g>`
+    } else ink += body
+    run = []
+  }
+  parts.forEach((p, i) => { if (p.ink) run.push(p); else flush(i) })
+  flush(parts.length)
+  return {
+    p: encodeSvg(`${open}${pal}</svg>`),
+    i: ink ? encodeSvg(`${open}${masks}${ink}</svg>`) : EMPTY,
+  }
 }
 
 // ---------------------------------------------------------------- JS runtime (serialized; free vars:
@@ -268,6 +340,7 @@ function classesDoc(ctx, sizes) {
   const styles = ctx.styles.map(s => s.name)
   const sw = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => '`' + s.name + '`').join(', ')
   const kb = n => (n / 1024).toFixed(0) + ' KB'
+  const pal = ctx.styles.filter(s => s.palette)
   return `## Icon classes (Font Awesome style)
 
 Plain \`<i>\`/\`<span>\` elements with classes, no build step. Two interchangeable ways to render them:
@@ -291,9 +364,16 @@ One file per style (\`${styles.map(s => 'with-' + s + '.css').join('`, `')}\`) o
 \`\`\`
 
 Without a style class an icon is \`line\` (when \`with-line.css\` or \`with-all.css\` is loaded; if you load a single other style file,
-bare \`with with-<name>\` uses that style). Each icon is an SVG data-URI used as a CSS \`mask\` over \`background-color: currentColor\`,
-so it takes the text colour and font size (\`1em\` square, \`vertical-align: -.125em\`). Masks are single-colour: the duo tint
-and blueprint construction lines render as translucent \`currentColor\`. Use the JS runtime for real multi-colour and stroke width.
+bare \`with with-<name>\` uses that style). Each icon is an SVG data-URI used as a CSS \`mask\` over \`currentColor\` (drawn in the
+element's \`::after\`), so it takes the text colour and font size (\`1em\` square, \`vertical-align: -.125em\`). In mono styles the duo tint
+and blueprint construction lines render as translucent \`currentColor\`.
+${pal.length ? `
+**Palette styles** (${pal.map(s => '`' + s.name + '`').join(', ')}) keep their colours in CSS-only mode too: the palette is the element's
+\`background-image\` (default colours baked in) and the ink is the \`currentColor\` mask on top, with the original stacking order
+preserved, so \`color\` still recolours the outline. The \`--with-<style>-<role>\` variables cannot reach into a data URI, so to
+re-theme a palette use the JS runtime below (or a component), where every variable works.
+` : ''}
+Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
@@ -331,6 +411,7 @@ It can be combined with the CSS files: the mask shows until the SVG arrives, the
 | \`with-spin\` / \`with-pulse\` | rotate continuously (1.6s linear) / in 8 steps; disabled under \`prefers-reduced-motion\` |
 | \`with-rotate-90\` / \`-180\` / \`-270\` | rotate |
 | \`with-flip-h\` / \`with-flip-v\` / \`with-flip-both\` | mirror (combines with rotate and spin) |
+| \`with-rtl\` | mirror only inside right-to-left text (\`dir="rtl"\`), for directional icons (\`with-arrow-right\`, \`with-undo\`…) |
 
 ### Accessibility
 
@@ -338,10 +419,13 @@ Icons are decorative by default (empty element; the JS-rendered svg is \`aria-hi
 a name: \`<i class="with with-trash" role="img" aria-label="Delete"></i>\`. With the JS runtime, an \`aria-label\` also becomes the
 svg's \`role="img"\` + \`<title>\`. Inside a labelled button keep the icon decorative.
 
+CSS-only icons stay visible in Windows High Contrast (forced colours: the ink takes the system text, link or button colour)
+and they print even with the browser's "Background graphics" option off.
+
 ### CSS or JS?
 
-- **CSS**: zero JS, works in emails-to-web, static sites, CMS content; one HTTP request; single-colour.
-- **JS**: true multi-colour (\`--with-duo\`, \`--with-accent\`), \`data-with-stroke-width\`, aliases and typo hints, only the styles you use are fetched.
+- **CSS**: zero JS, works in emails-to-web, static sites, CMS content; one HTTP request; palette styles in their default colours.
+- **JS**: live CSS variables (\`--with-duo\`, \`--with-accent\`${pal.length ? ', \`--with-<style>-<role>\`' : ''}), \`data-with-stroke-width\`, aliases and typo hints, only the styles you use are fetched.
 - Using a framework? Prefer the component packages (\`@withicons/react\`, \`vue\`, \`svelte\`…) or \`<with-icon>\`.
 `
 }
@@ -481,17 +565,26 @@ export default async function emit(ctx) {
 
   const header = `/*! @withicons/web ${ctx.version} — icon classes. MIT. Generated, do not edit. */\n`
   const css = baseCss()
-  const rules = {}   // style -> [selector-less pieces]
-  for (const s of ctx.styles) rules[s.name] = ctx.icons.map(i => [i.name, maskUri(s, innerOf(ctx, i, s.name))])
+  const rules = {}   // style -> [[name, declarations]]
+  let layered = 0
+  for (const s of ctx.styles) {
+    rules[s.name] = ctx.icons.map(i => {
+      const r = renderOf(ctx, i, s.name)
+      const st = ctx.styles.find(x => x.name === r.style) || s
+      const L = layerUris(st, r.nodes)
+      if (L) { layered++; return [i.name, `--with-i:${L.i};--with-p:${L.p}`] }
+      return [i.name, `--with-i:${maskUri(s, innerOf(ctx, i, s.name))}`]
+    })
+  }
 
   const files = new Map()
   for (const s of ctx.styles) {
     const isDef = s.name === ctx.defaultStyle
     // non-default file: `.with-solid.with-home` + zero-specificity `:where(.with-home)` so bare classes work when it is the only file
-    const body = rules[s.name].map(([n, u]) => (isDef ? `.with-${n}` : `:where(.with-${n}),.with-${s.name}.with-${n}`) + `{--with-i:${u}}`).join('\n')
+    const body = rules[s.name].map(([n, d]) => (isDef ? `.with-${n}` : `:where(.with-${n}),.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')
     files.set(`with-${s.name}.css`, `${header}${css}\n${body}\n`)
   }
-  const all = ctx.styles.map(s => rules[s.name].map(([n, u]) => (s.name === ctx.defaultStyle ? `.with-${n}` : `.with-${s.name}.with-${n}`) + `{--with-i:${u}}`).join('\n')).join('\n')
+  const all = ctx.styles.map(s => rules[s.name].map(([n, d]) => (s.name === ctx.defaultStyle ? `.with-${n}` : `.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')).join('\n')
   files.set('with-all.css', `${header}${css}\n${all}\n`)
 
   const sizes = {}
@@ -531,5 +624,5 @@ export default async function emit(ctx) {
   if (fs.existsSync(P('package.json'))) fs.writeFileSync(P('package.json'), patchPkg(fs.readFileSync(P('package.json'), 'utf8')))
   if (fs.existsSync(P('README.md'))) fs.writeFileSync(P('README.md'), patchReadme(fs.readFileSync(P('README.md'), 'utf8'), doc))
   const k = n => (n / 1024).toFixed(0) + 'K'
-  return `${files.size} files; line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}; site/vendor/with mirrored`
+  return `${files.size} files; line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}; ${layered} palette icons as 2 layers; site/vendor/with mirrored`
 }

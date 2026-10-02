@@ -1,0 +1,72 @@
+{
+  "name": "circle-arrow-up",
+  "category": "arrows",
+  "description": "An up arrow inside a circle for upload, increase, and back-to-top buttons.",
+  "aliases": [
+    "arrow-up-circle",
+    "circled-arrow-up",
+    "round-arrow-up",
+    "up-circle",
+    "arrow-circle-up",
+    "raise",
+    "up-button",
+    "circle-up",
+    "top-button"
+  ],
+  "tags": [
+    "arrow",
+    "up",
+    "top",
+    "increase",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16 V8",
+      "plate": "A"
+    },
+    {
+      "d": "M8 12 L12 8 L16 12",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 16 V8",
+    "M8 12 L12 8 L16 12"
+  ],
+  "synonyms": [
+    "up",
+    "go up",
+    "back to top",
+    "to top",
+    "scroll up",
+    "scroll top",
+    "upload file",
+    "send up",
+    "increase",
+    "rise",
+    "higher",
+    "grow",
+    "boost",
+    "upgrade",
+    "level up",
+    "promote",
+    "upvote",
+    "north",
+    "ascending",
+    "move up",
+    "round button",
+    "circle button",
+    "arrow in circle",
+    "up arrow button",
+    "upwards"
+  ]
+}

@@ -14,7 +14,16 @@
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
-import { J, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable } from './emit-core.mjs'
+import { J, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable, paletteDoc, motionDoc, totalText, liveStrokeStyles } from './emit-core.mjs'
+
+// The prebuilt component's d.ts names the styles it was compiled with; the style list is data, so the
+// union (and the live-stroke note) are rewritten here from ctx.styles instead of recompiling the component.
+function patchTypes(dts, ctx) {
+  return dts
+    .replace(/(type WithIconVariant = )[^;]+;/, `$1${ctx.styles.map(s => J(s.name).replace(/"/g, "'")).join(' | ')};`)
+    .replace(/\/\*\* The \w+ with icons styles\. \*\//, `/** The ${ctx.styles.length} with icons styles. */`)
+    .replace(/styles with live strokes \(line, duo\)/g, `styles with live strokes (${liveStrokeStyles(ctx).join(', ')})`)
+}
 
 export default async function emit(ctx) {
   const P = 'packages/angular'
@@ -33,7 +42,7 @@ export default async function emit(ctx) {
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/angular ${ctx.version} — generated, do not edit\n`
   W('fesm2022/withicons-angular.mjs', fs.readFileSync(pre('withicons-angular.mjs'), 'utf8'))
-  W('types/withicons-angular.d.ts', fs.readFileSync(pre('withicons-angular.d.ts'), 'utf8'))
+  W('types/withicons-angular.d.ts', patchTypes(fs.readFileSync(pre('withicons-angular.d.ts'), 'utf8'), ctx))
 
   const id = n => 'with_' + n.replace(/[^A-Za-z0-9_$]/g, '_')
   const table = styleTable(ctx)
@@ -89,11 +98,12 @@ export { iconNames, styleNames } from './meta'
   for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = [`./dist/${s}/icons/*.d.ts`] }
   const major = (info.partialMinVersion || '17.0.0').split('.')[0]
   const pkg = {
-    ...basePkg(ctx, '@withicons/angular', `${ctx.icons.length} icons x ${ctx.styles.length} styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.`, ['angular', 'angular-icons', 'standalone', 'svg-icons']),
+    ...basePkg(ctx, '@withicons/angular', `${ctx.icons.length} icons x ${ctx.styles.length} styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.`, ['angular', 'angular-icons', 'standalone', 'svg-icons', 'multicolor-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     module: './dist/index.mjs', typings: './dist/index.d.ts',
     exports: ex, typesVersions: { '*': tv },
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
     peerDependencies: { '@angular/core': `>=${major}.0.0` },
   }
   writePkg(ctx, 'angular', pkg, angularReadme(ctx, info))
@@ -106,6 +116,9 @@ function angularReadme(ctx, info) {
   const major = (info.partialMinVersion || '17.0.0').split('.')[0]
   const styleRows = ctx.styles.map(s => `| \`${s.name}\` | \`@withicons/angular${s.name === ctx.defaultStyle ? '' : '/' + s.name}\` | ${s.kind} | ${s.description} |`).join('\n')
   const live = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name).join(', ')
+  const variantList = ctx.styles.map(s => '`' + s.name + '`').join(', ')
+  // the Angular palette example uses retro + pizza; only print it when both exist
+  const pal = ctx.styles.some(s => s.name === 'retro' && s.palette) && ctx.icons.some(i => i.name === 'pizza')
   return `# @withicons/angular
 
 ${ctx.icons.length} icons x ${ctx.styles.length} styles for Angular: one standalone \`<with-icon>\` component plus
@@ -158,7 +171,7 @@ export const appConfig: ApplicationConfig = { providers: [provideWithIcons(Home,
 <with-icon name="home" variant="solid" [size]="20" />
 \`\`\`
 
-\`name\` takes canonical names (\`arrow-right\`). An unregistered name renders an empty \`<svg>\` and warns once in dev mode.
+\`name\` takes canonical names (\`arrow-right\`). An unregistered name renders nothing and warns once in dev mode.
 
 ## Inputs
 
@@ -166,15 +179,22 @@ export const appConfig: ApplicationConfig = { providers: [provideWithIcons(Home,
 |---|---|---|---|
 | \`icon\` | \`WithIconData\` | — | \`Home\`, \`HomeIcon\`, \`@withicons/angular/<style>/icons/<name>\`; wins over \`name\` |
 | \`name\` | \`string\` | — | resolved against \`provideWithIcons(...)\` |
-| \`variant\` | \`string\` | \`'line'\` | style used with \`name\` |
+| \`variant\` | \`WithIconVariant\` | \`'line'\` | style used with \`name\`: ${variantList} |
 | \`size\` | \`number \\| string\` | \`24\` | width and height |
 | \`color\` | \`string\` | \`'currentColor'\` | inherits the CSS text color by default |
 | \`strokeWidth\` | \`number \\| string\` | style default (\`1.75\`) | only styles with live strokes (${live}) |
 | \`absoluteStrokeWidth\` | \`boolean\` | \`false\` | keep the stroke width constant in px at any size |
-| \`title\` | \`string\` | — | renders \`<title>\` and sets \`role="img"\`; otherwise \`aria-hidden="true"\` |
+| \`title\` | \`string\` | — | renders \`<title>\` (a tooltip) and sets \`role="img"\`; otherwise \`aria-hidden="true"\` |
+| \`aria-label\` | \`string\` | — | accessible name without a tooltip; moved to the \`<svg role="img">\` |
+| \`aria-labelledby\` | \`string\` | — | id(s) of the element(s) that name the icon; moved to the \`<svg role="img">\` |
 
 \`class\`, \`style\`, \`id\` and event bindings apply to the \`<with-icon>\` host element (\`display: inline-flex\`), as with
-any Angular component. The inner \`<svg>\` carries \`class="withi withi-<name>"\`.
+any Angular component. The inner \`<svg>\` carries \`class="withi withi-<name>"\`. \`title\`, \`aria-label\` and
+\`aria-labelledby\` are moved from the host to the \`<svg>\`, so a screen reader announces one image with that name:
+
+\`\`\`html
+<button type="button" (click)="remove()"><with-icon [icon]="Trash" aria-label="Delete" /></button>
+\`\`\`
 
 ## Styles
 
@@ -186,6 +206,68 @@ ${styleRows}
   \`@withicons/angular/icons/home\`, \`@withicons/angular/solid/icons/home\`.
 - Duo's tint can be recoloured with the CSS variable \`--with-duo\`.
 
+${paletteDoc(ctx)}${pal ? `
+### Change every colour in Angular
+
+CSS variables set on the \`<with-icon>\` host reach the SVG, so a \`[style]\` binding (or any CSS rule) re-themes one icon:
+
+\`\`\`ts
+import { Pizza } from '@withicons/angular/retro'
+\`\`\`
+
+\`\`\`html
+<with-icon [icon]="Pizza" [size]="48" color="#3b1f12"
+           [style]="{ '--with-retro-1': '#f4b942', '--with-retro-2': '#d9412b', '--with-retro-3': '#2f8f4e' }" />
+\`\`\`
+
+Every icon also has 20-30 colour palettes picked for it in [\`@withicons/core\`](https://www.npmjs.com/package/@withicons/core)
+(\`npm i @withicons/core\`). \`applyPalette\` maps a palette onto the variables this icon uses, in any style:
+
+\`\`\`ts
+import { Component } from '@angular/core'
+import { WithIconComponent } from '@withicons/angular'
+import { Pizza } from '@withicons/angular/retro'
+import pizza from '@withicons/core/palettes/pizza.json'          // needs "resolveJsonModule": true
+import { applyPalette } from '@withicons/core/palettes/palette-map.js'
+
+@Component({
+  selector: 'app-menu',
+  imports: [WithIconComponent],
+  template: \`
+    @for (p of looks; track p.id) {
+      <with-icon [icon]="Pizza" [size]="40" [style]="p.vars" [color]="p.color" [title]="p.name" />
+    }
+  \`,
+})
+export class MenuComponent {
+  Pizza = Pizza
+  looks = pizza.palettes.map(p => ({ id: p.id, name: p.name, ...applyPalette(JSON.stringify(Pizza.node), p.colors) }))
+}
+\`\`\`
+` : ''}${motionDoc(ctx)}
+### Animation in Angular
+
+Put the motion classes on the \`<with-icon>\` host, and add the two stylesheets to \`angular.json\`
+(\`"styles": ["src/styles.css", "node_modules/@withicons/motion/dist/motion.css", "node_modules/@withicons/motion/dist/icons.css"]\`):
+
+\`\`\`html
+<with-icon class="wm wm-loop" data-wm="bell" [icon]="Bell" />
+<button class="wm-trigger"><with-icon class="wm wm-hover" data-wm="bell" [icon]="Bell" /> Alerts</button>
+\`\`\`
+
+## Right-to-left layouts
+
+Icons are drawn left to right. Mirror the directional ones (arrows, chevrons, undo/redo, send, log-in/out) in RTL
+with one rule on the inner \`<svg>\`, which leaves the host free for motion transforms:
+
+\`\`\`css
+[dir="rtl"] with-icon.rtl-mirror > svg { transform: scaleX(-1); }
+\`\`\`
+
+\`\`\`html
+<with-icon class="rtl-mirror" [icon]="ChevronRight" />
+\`\`\`
+
 ## No Angular compiler?
 
 \`@withicons/web\` is a framework-free \`<with-icon>\` custom element; use it (instead of this package, never both)
@@ -194,9 +276,10 @@ with \`schemas: [CUSTOM_ELEMENTS_SCHEMA]\`.
 ## Maintainers
 
 \`src/\` is the component source. \`node packages/angular/scripts/build-component.mjs\` compiles it with ng-packagr
-in an isolated toolchain (\`.tmp/angular-toolchain\`) into \`prebuilt/\`; \`node forge/build.mjs angular\` writes
-\`dist/\` (prebuilt component + generated icon data) and warns when \`prebuilt/\` is older than \`src/\`.
+in an isolated toolchain (\`.tmp/angular-toolchain\`, or \`WITH_ANGULAR_TOOLCHAIN=<dir>\`) into \`prebuilt/\`;
+\`node forge/build.mjs angular\` writes \`dist/\` (prebuilt component + generated icon data) and warns when
+\`prebuilt/\` is older than \`src/\`.
 
-MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, seven deterministic styles. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, ${ctx.styles.length} deterministic styles, ${totalText(ctx)} icons. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
 `
 }

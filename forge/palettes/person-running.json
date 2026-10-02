@@ -1,0 +1,426 @@
+{
+  "name": "person-running",
+  "palettes": [
+    {
+      "id": "track-red",
+      "name": "Track red",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#200606",
+        "c1": "#E2392E",
+        "c2": "#F2C230",
+        "c3": "#1F4FA8",
+        "c4": "#F7F2E8",
+        "tint": "#F9D7D5",
+        "accent": "#F2C230",
+        "shadow": "#591612",
+        "shine": "#F4B4B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "running-club-blue",
+      "name": "Running club blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#08142E",
+        "c1": "#2E6BD6",
+        "c2": "#FF8A3D",
+        "c3": "#F5F7FA",
+        "c4": "#8FB5F0",
+        "tint": "#D5E1F7",
+        "accent": "#FF8A3D",
+        "shadow": "#132C59",
+        "shine": "#B0C7EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hi-vis-runner",
+      "name": "Hi-vis runner",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A2005",
+        "c1": "#D4F02E",
+        "c2": "#FF6A2E",
+        "c3": "#3A3A40",
+        "c4": "#F5F5EE",
+        "tint": "#F6FCD5",
+        "accent": "#FF6A2E",
+        "shadow": "#525E12",
+        "shine": "#EFF9B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "marathon-orange",
+      "name": "Marathon orange",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1004",
+        "c1": "#FF7A1F",
+        "c2": "#1F3A8A",
+        "c3": "#FFD6B0",
+        "c4": "#F7F2EA",
+        "tint": "#FFE4D2",
+        "accent": "#1F3A8A",
+        "shadow": "#66300C",
+        "shine": "#FFCCAA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "trail-runner",
+      "name": "Trail runner",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#10230F",
+        "c1": "#3F8A4A",
+        "c2": "#E8B840",
+        "c3": "#8A5A2E",
+        "c4": "#DDEBC9",
+        "tint": "#D9E8DB",
+        "accent": "#E8B840",
+        "shadow": "#1B3B1E",
+        "shine": "#B6D3BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coral-and-teal",
+      "name": "Coral & teal",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0E0E",
+        "c1": "#FF6F61",
+        "c2": "#2EC4B6",
+        "c3": "#FFE8E0",
+        "c4": "#264653",
+        "tint": "#FFE2DF",
+        "accent": "#2EC4B6",
+        "shadow": "#662B27",
+        "shine": "#FFC8C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "raspberry-pace",
+      "name": "Raspberry pace",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0614",
+        "c1": "#C2185B",
+        "c2": "#FFB3D1",
+        "c3": "#4A148C",
+        "c4": "#FFCA28",
+        "tint": "#F3D1DE",
+        "accent": "#FFCA28",
+        "shadow": "#510A26",
+        "shine": "#E8A7C1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-medalist",
+      "name": "Gold medalist",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1205",
+        "c1": "#E2B32A",
+        "c2": "#2A2A30",
+        "c3": "#F5EBC8",
+        "c4": "#8A6A12",
+        "tint": "#F9F0D4",
+        "accent": "#2A2A30",
+        "shadow": "#574410",
+        "shine": "#F4E2AE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "varsity-vintage",
+      "name": "Varsity vintage",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A1E14",
+        "c1": "#8C2A38",
+        "c2": "#E6D3A8",
+        "c3": "#2E4A3A",
+        "c4": "#C9A04A",
+        "tint": "#E8D4D7",
+        "accent": "#C9A04A",
+        "shadow": "#3E181A",
+        "shine": "#D3AEB3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-track",
+      "name": "70s track",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#E8622E",
+        "c2": "#F4C24A",
+        "c3": "#2F7E7A",
+        "c4": "#F3E4C2",
+        "tint": "#FAE0D5",
+        "accent": "#F4C24A",
+        "shadow": "#5F2813",
+        "shine": "#F6C3B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunrise-run",
+      "name": "Sunrise run",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2A0E1C",
+        "c1": "#FF8A4A",
+        "c2": "#FFD06A",
+        "c3": "#C23B6B",
+        "c4": "#FFE6C8",
+        "tint": "#FFE8DB",
+        "accent": "#FFD06A",
+        "shadow": "#663522",
+        "shine": "#FFD3BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beach-run",
+      "name": "Beach run",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#072A36",
+        "c1": "#1EA3C2",
+        "c2": "#FFC85C",
+        "c3": "#FF6F5E",
+        "c4": "#E8F6F8",
+        "tint": "#D2EDF3",
+        "accent": "#FF6F5E",
+        "shadow": "#0D4654",
+        "shine": "#AADCE8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-night-run",
+      "name": "Neon night run",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#08140C",
+        "c1": "#2DFF8A",
+        "c2": "#FF2E9A",
+        "c3": "#2DE1FF",
+        "c4": "#FFE53D",
+        "tint": "#ABFFD0",
+        "accent": "#FF2E9A",
+        "shadow": "#136034",
+        "shine": "#AFFFD3",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-jog",
+      "name": "Pastel jog",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3554",
+        "c1": "#B8A8F2",
+        "c2": "#FFC9DD",
+        "c3": "#BFE8DC",
+        "c4": "#FFF1B5",
+        "tint": "#F1EEFC",
+        "accent": "#FFC9DD",
+        "shadow": "#524B6E",
+        "shine": "#E4DEFA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-sprint",
+      "name": "Candy sprint",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3E1238",
+        "c1": "#FF6FB5",
+        "c2": "#86E8FF",
+        "c3": "#FFE36A",
+        "c4": "#B892FF",
+        "tint": "#FFE2F0",
+        "accent": "#86E8FF",
+        "shadow": "#6C2D51",
+        "shine": "#FFC8E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "winter-run",
+      "name": "Winter run",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#13243A",
+        "c1": "#2F6BB8",
+        "c2": "#E05A4A",
+        "c3": "#F4F8FB",
+        "c4": "#9EC0E0",
+        "tint": "#D5E1F1",
+        "accent": "#E05A4A",
+        "shadow": "#173152",
+        "shine": "#B0C7E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-trail",
+      "name": "Autumn trail",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B140A",
+        "c1": "#C0562A",
+        "c2": "#E8A83E",
+        "c3": "#6E7A38",
+        "c4": "#F4E2C2",
+        "tint": "#F2DDD4",
+        "accent": "#E8A83E",
+        "shadow": "#502412",
+        "shine": "#E7BFAE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-teal",
+      "name": "Mono teal",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#062A2C",
+        "c1": "#1A9A94",
+        "c2": "#7FD8D0",
+        "c3": "#0E5A56",
+        "c4": "#D6F2EF",
+        "tint": "#D1EBEA",
+        "accent": "#0E5A56",
+        "shadow": "#0B4341",
+        "shine": "#A8D9D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#6A6A6A",
+        "c2": "#B8B8B8",
+        "c3": "#E2E2E2",
+        "c4": "#3A3A3A",
+        "tint": "#E1E1E1",
+        "accent": "#B8B8B8",
+        "shadow": "#2B2B2B",
+        "shine": "#C6C6C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050B5",
+        "c2": "#FFD200",
+        "c3": "#FFFFFF",
+        "c4": "#E00000",
+        "tint": "#CCDCF0",
+        "accent": "#FFD200",
+        "shadow": "#001C40",
+        "shine": "#9EBDE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-dash",
+      "name": "Dopamine dash",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C1236",
+        "c1": "#7B5CFF",
+        "c2": "#FF5C9A",
+        "c3": "#FFD23F",
+        "c4": "#32E0B0",
+        "tint": "#E5DEFF",
+        "accent": "#FF5C9A",
+        "shadow": "#34266A",
+        "shine": "#CDC1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-sprint",
+      "name": "Y2K sprint",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#241A4C",
+        "c1": "#FF9AE0",
+        "c2": "#B8A8FF",
+        "c3": "#8FF7FF",
+        "c4": "#F2FF8A",
+        "tint": "#FFEBF9",
+        "accent": "#8FF7FF",
+        "shadow": "#643E65",
+        "shine": "#FFD9F3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

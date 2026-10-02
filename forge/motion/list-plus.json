@@ -1,0 +1,8 @@
+{
+  "name": "list-plus",
+  "intent": "the plus pops in, adding one more item to the list",
+  "loop": { "preset": "pulse", "origin": [18, 18], "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "pop", "origin": [18, 18] },
+  "alt": [ { "preset": "nudge", "dir": 90, "amount": 0.6 }, { "preset": "draw" } ],
+  "swap": [ { "to": "list-checks", "effect": "morph" }, { "to": "list", "effect": "fade" } ]
+}

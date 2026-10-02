@@ -1,0 +1,8 @@
+{
+  "name": "volume-1",
+  "intent": "a soft sound wave hums out of the speaker",
+  "loop": { "preset": "fill", "duration": 2.2 },
+  "hover": { "preset": "pulse", "origin": [7, 12], "amount": 0.8, "duration": 0.6 },
+  "alt": [ { "preset": "beat", "origin": [7, 12], "amount": 0.5 }, { "preset": "nudge", "dir": 0, "amount": 0.3 } ],
+  "swap": [ { "to": "volume", "effect": "fade" }, { "to": "volume-off", "effect": "fade" } ]
+}

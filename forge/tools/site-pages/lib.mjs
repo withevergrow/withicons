@@ -1,39 +1,102 @@
 // Shared helpers for the with icons content-page generator (D3).
+// Everything is derived from the forge (forge/styles + forge/icons via forge/lib/load.mjs), so counts, style lists and
+// icon art follow the real set: new icons and new style renderers appear here without editing this file.
 import fs from 'fs'
-import vm from 'vm'
 import { fileURLToPath } from 'url'
+import { listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest } from '../../lib/load.mjs'
 
 export const ROOT = fileURLToPath(new URL('../../../', import.meta.url)).split('\\').join('/').replace(/\/+$/, '')
 export const SITE = ROOT + '/site'
 export const ORIGIN = 'https://withicons.com'
 export const GITHUB = 'https://github.com/withevergrow/withicons'
-export const STYLES = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
-export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7B5CFF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861' }
-export const cvar = s => `var(--c-${s});--gt:var(--c-${s}-text);--gs:var(--c-${s}-soft);--go:var(--c-${s}-on)`
 
-const ctx = { window: {} }
-vm.createContext(ctx)
-const run = f => vm.runInContext(fs.readFileSync(f, 'utf8'), ctx)
-run(SITE + '/data/meta.js')
-for (const s of STYLES) run(`${SITE}/data/style-${s}.js`)
-export const META = ctx.window.WITH || ctx.window.EGI
-export const SVGS = ctx.window.WITH_SVG || ctx.window.EGI_SVG
+/** Display order of the styles everywhere on the site (unknown future styles sort after these). */
+export const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+/** The playful palette styles (CONTRACT.md "Palette styles"): their own default colours, the ink still currentColor. */
+export const PLAYFUL = ['glass', 'kawaii', 'sticker', 'pixel', 'retro']
+// Literal fallbacks, used only while tokens.css doesn't define a style's --c-<style> yet (the brand layer owns the values).
+export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#4C8DFF', kawaii: '#FF6FAE', sticker: '#A855F7', pixel: '#16A34A', retro: '#F97316' }
+const STYLE_TEXT = { glass: '#2563C9', kawaii: '#C2185B', sticker: '#7E2FC9', pixel: '#0F7A35', retro: '#B4480B' }
+const STYLE_ON = { glass: '#FFFFFF', kawaii: '#111318', sticker: '#FFFFFF', pixel: '#FFFFFF', retro: '#111318' }
+const BASE7 = ORDER.slice(0, 7)
+/** Inline custom properties for a style accent: --g (colour), --gt (AA text), --gs (soft tint), --go (ink on the colour). */
+export const cvar = s => BASE7.includes(s)
+  ? `var(--c-${s});--gt:var(--c-${s}-text);--gs:var(--c-${s}-soft);--go:var(--c-${s}-on)`
+  : `var(--c-${s}, ${STYLE_COLOR[s] || '#2F5BFF'});--gt:var(--c-${s}-text, ${STYLE_TEXT[s] || STYLE_COLOR[s] || '#2448D8'});--gs:var(--c-${s}-soft, color-mix(in srgb, ${STYLE_COLOR[s] || '#2F5BFF'} 16%, transparent));--go:var(--c-${s}-on, ${STYLE_ON[s] || '#FFFFFF'})`
+
+const rank = n => { const i = ORDER.indexOf(n); return i < 0 ? 99 : i }
+const MODS = await loadStyles()
+const SKEL = new Map()
+for (const n of listIcons()) {
+  try { SKEL.set(n, loadIcon(n)) } catch (e) { console.warn(`  site-pages: skeleton ${n} skipped (${String(e.message).split(/\r?\n/)[0]})`) }
+}
+// a style counts once it renders a few probe icons, so a renderer still under construction never breaks the pages
+const probeOk = s => ['home', 'heart', 'settings'].filter(n => SKEL.has(n)).every(n => { try { return renderIcon(MODS[s], SKEL.get(n)).length > 0 } catch { return false } })
+/** Styles in display order (line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro). */
+export const STYLES = Object.keys(MODS).filter(probeOk).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
+const manifest = (() => { try { return readManifest() } catch { return { categories: [] } } })()
+export const META = {
+  categories: manifest.categories || [],
+  styles: STYLES.map(s => { const m = MODS[s]; return { name: s, title: m.title || s[0].toUpperCase() + s.slice(1), kind: m.kind || 'creative', description: m.description || '', strokeWidth: m.strokeWidth || false, root: m.root || { fill: 'currentColor' } } }),
+  icons: [...SKEL.values()].map(r => ({ name: r.name, category: r.category, description: r.description || '', aliases: r.aliases || [], tags: r.tags || [] })),
+}
 export const ICON_NAMES = META.icons.map(i => i.name)
 const styleMeta = Object.fromEntries(META.styles.map(s => [s.name, s]))
+/** { name: { title, kind, description, group: 'universal' | 'creative' | 'playful' } } */
+export const STYLE_INFO = Object.fromEntries(META.styles.map(s => [s.name, { ...s, group: PLAYFUL.includes(s.name) ? 'playful' : s.kind === 'universal' ? 'universal' : 'creative' }]))
+export const styleTitle = s => (STYLE_INFO[s] && STYLE_INFO[s].title) || s[0].toUpperCase() + s.slice(1)
+export const stylesIn = g => STYLES.filter(s => STYLE_INFO[s].group === g)
+export const hasStyle = s => STYLES.includes(s)
+
+/** Counts for copy, always from the data. */
+export const N_ICONS = ICON_NAMES.length, N_STYLES = STYLES.length, N_TOTAL = N_ICONS * N_STYLES
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen']
+export const word = n => WORDS[n] || String(n)
+export const Word = n => { const w = word(n); return w[0].toUpperCase() + w.slice(1) }
+export const num = n => n.toLocaleString('en-US')
+/** ['line','solid','duo'] -> "Line, Solid and Duo" */
+export const listTitles = (list, and = 'and') => { const t = list.map(styleTitle); return t.length < 2 ? t.join('') : t.slice(0, -1).join(', ') + ' ' + and + ' ' + t.at(-1) }
+
+/** Per-icon motion specs (forge/motion/<name>.json, see forge/MOTION.md), for icons that exist. */
+export const MOTION = (() => {
+  const dir = ROOT + '/forge/motion', out = {}
+  if (!fs.existsSync(dir)) return out
+  for (const f of fs.readdirSync(dir).sort()) if (f.endsWith('.json')) {
+    try { const j = JSON.parse(fs.readFileSync(dir + '/' + f, 'utf8')); if (j && j.name && SKEL.has(j.name)) out[j.name] = j } catch { }
+  }
+  return out
+})()
+export const siteExists = rel => fs.existsSync(SITE + '/' + rel)
+
+const CACHE = new Map(), warned = new Set()
+/** Inner SVG markup of an icon in a style, rendered from its skeleton (falls back to Line if a renderer fails). */
+export function innerSvg(name, style = 'line') {
+  const k = style + '/' + name
+  if (CACHE.has(k)) return CACHE.get(k)
+  if (!SKEL.has(name)) throw new Error(`missing icon ${style}/${name}`)
+  let out
+  try { out = nodesToMarkup(renderIcon(MODS[style], SKEL.get(name))) }
+  catch (e) {
+    if (!warned.has(k)) { warned.add(k); console.warn(`  site-pages: ${k} failed to render, using line (${String(e.message).split(/\r?\n/)[0]})`) }
+    out = style === 'line' ? '' : innerSvg(name, 'line')
+  }
+  CACHE.set(k, out)
+  return out
+}
 
 export const esc = v => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 /** Inline SVG for an icon, rendered at build time from the real icon data. */
 export function icon(name, style = 'line', o = {}) {
-  const inner = SVGS[style] && SVGS[style][name]
-  if (inner == null) throw new Error(`missing icon ${style}/${name}`)
+  if (!styleMeta[style]) throw new Error(`unknown style ${style} (have: ${STYLES.join(' ')})`)
+  const body = innerSvg(name, style)
   const size = o.size ?? 24
   const a = { xmlns: 'http://www.w3.org/2000/svg', width: size, height: size, viewBox: '0 0 24 24', ...(styleMeta[style].root || { fill: 'currentColor' }) }
   if (o.sw != null && a['stroke-width'] != null) a['stroke-width'] = o.sw
   if (o.cls) a.class = o.cls
   let t = ''
   if (o.title) { a.role = 'img'; t = `<title>${esc(o.title)}</title>` } else { a['aria-hidden'] = 'true'; a.focusable = 'false' }
-  return '<svg' + Object.entries(a).map(([k, v]) => ` ${k}="${esc(v)}"`).join('') + '>' + t + inner + '</svg>'
+  return '<svg' + Object.entries(a).map(([k, v]) => ` ${k}="${esc(v)}"`).join('') + '>' + t + body + '</svg>'
 }
 
 /** Raw svg string as a user would copy it (for code samples). */
@@ -73,9 +136,11 @@ function designFooter() {
   return null
 }
 export const prefixed = (html, p) => p ? html.replace(/(href|src|srcset)="(?!https?:|#|\/|mailto:|data:)([^"]*)"/g, (m, k, v) => `${k}="${k === 'srcset' ? v.split(/,\s*/).map(x => p + x).join(', ') : p + v}"`) : html
+// the brand layer's footer copy names the counts: keep them true to the data
+const liveCounts = h => h.replace(/\b[\d,]+ free icons in \d+ styles\b/g, `${N_ICONS} free icons in ${N_STYLES} styles`).replace(/Browse all [\d,]+\b/g, `Browse all ${N_ICONS}`).replace(/The \d+ styles/g, `The ${N_STYLES} styles`)
 export function footer(p) {
   const f = designFooter()
-  if (f) return prefixed(f, p)
+  if (f) return prefixed(liveCounts(f), p)
   return fallbackFooter(p)
 }
 function fallbackFooter(p) {
@@ -87,12 +152,12 @@ function fallbackFooter(p) {
           <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
           <span class="logo-type"><span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span><span class="logo-by">powered by <b>evergrow</b></span></span>
         </a>
-        <p>300 free icons in 7 styles for slides, docs, websites and apps. Find one, copy it, done.</p>
+        <p>${N_ICONS} free icons in ${N_STYLES} styles for slides, docs, websites and apps. Find one, copy it, done.</p>
         <a class="btn btn-sun btn-sm" href="${p}icons.html">Browse all icons</a>
       </div>
       <nav class="foot-cols" aria-label="Footer">
         <div class="foot-col s-line"><h2>Icons</h2><ul>
-          <li><a href="${p}icons.html">Browse all 300</a></li><li><a href="${p}styles/line.html">The 7 styles</a></li>
+          <li><a href="${p}icons.html">Browse all ${N_ICONS}</a></li><li><a href="${p}styles/line.html">The ${N_STYLES} styles</a></li>
           <li><a href="${p}categories/navigation.html">Categories</a></li><li><a href="${p}icons.html?style=gloss">Gloss icons</a></li></ul></div>
         <div class="foot-col s-solid"><h2>Use them</h2><ul>
           <li><a href="${p}guides/index.html">All guides</a></li><li><a href="${p}guides/powerpoint.html">PowerPoint</a></li>
@@ -128,7 +193,7 @@ export function crumbs(trail) {
   return `<nav class="pg-crumbs" aria-label="Breadcrumb"><ol>${trail.map(([n, h], i) => `<li>${h && i < trail.length - 1 ? `<a href="${h}">${n}</a>` : `<span aria-current="page">${n}</span>`}</li>`).join('')}</ol></nav>`
 }
 
-export function page({ path, title, desc, current, body, ld = [], crumbsLd, scripts = [], bodyClass = '', ogTitle }) {
+export function page({ path, title, desc, current, body, ld = [], crumbsLd, scripts = [], styles = [], bodyClass = '', ogTitle }) {
   const depth = path.split('/').length - 1
   const p = '../'.repeat(depth)
   const graph = { '@context': 'https://schema.org', '@graph': [...ld, crumbsLd ? breadcrumbLd(crumbsLd) : null].filter(Boolean) }
@@ -162,7 +227,7 @@ export function page({ path, title, desc, current, body, ld = [], crumbsLd, scri
   <link rel="stylesheet" href="${p}css/tokens.css">
   <link rel="stylesheet" href="${p}css/chrome.css">
   <link rel="stylesheet" href="${p}css/pages.css">
-  <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
+${styles.map(c => `  <link rel="stylesheet" href="${p}${c}">\n`).join('')}  <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="${p}brand/apple-touch-icon.png">
   <link rel="manifest" href="${p}site.webmanifest">
   <script type="application/ld+json">${JSON.stringify(graph)}</script>
@@ -234,4 +299,53 @@ export function askAI({ id, eyebrow = 'stuck?', title, text, attrs = '', cls = '
   </div>
   <div class="pg-ask-widget" data-ask-ai${attrs ? ' ' + attrs : ''}><noscript><p class="pg-note">Turn on JavaScript for one-click buttons, or paste <a href="${p}llms.txt">withicons.com/llms.txt</a> into your assistant.</p></noscript></div>
 </section>`
+}
+
+/* ───────── motion vocabulary (forge/MOTION.md §2) ───────── */
+/** [preset, plain description, default seconds, good for, one-shot friendly] */
+export const PRESETS = [
+  ['spin', 'Turns round and round', 1.2, 'loaders, refresh, settings'],
+  ['spin-once', 'One smooth turn, then rests', 0.8, 'refresh or rotate on hover', true],
+  ['tick', 'Turns in small steps, like a clock', 1, 'clocks, timers, step loaders'],
+  ['pulse', 'Swells a little and back', 1.4, 'record, live, notification dots'],
+  ['beat', 'A heartbeat: double thump', 1.2, 'hearts, likes, health'],
+  ['breathe', 'A slow, calm swell', 3, 'moon, leaf, calm things'],
+  ['float', 'Bobs gently up and down', 2.6, 'clouds, balloons, planes, bots'],
+  ['bounce', 'Drops and squashes', 1, 'balls, packages, pins'],
+  ['sway', 'Leans slowly side to side', 2.8, 'plants, flags, trees'],
+  ['ring', 'Swings like a ringing bell', 1.4, 'bells, alarm clocks'],
+  ['wiggle', 'A quick little jiggle', 0.8, 'pencils, brushes, bugs', true],
+  ['shake', 'Shakes its head: no', 0.6, 'errors, denied, ban', true],
+  ['nod', 'Nods: yes', 0.8, 'check, thumbs up', true],
+  ['nudge', 'Points the way and comes back', 1.2, 'arrows, send, external links'],
+  ['pass', 'Slides out and back in from the other side', 1.4, 'arrows, upload, download'],
+  ['rise', 'Floats up and fades, then returns', 1.6, 'upload, rockets, steam'],
+  ['drop', 'Falls down and fades, then returns', 1.6, 'download, droplets, rain'],
+  ['blink', 'Blinks like an eye', 3.5, 'eyes, smiles, bots'],
+  ['flicker', 'Flickers like a flame', 1.6, 'flames, lightning, bulbs'],
+  ['twinkle', 'Sparkles and glints', 1.8, 'stars, sparkles, gems'],
+  ['pop', 'Pops in with a tiny overshoot', 0.5, 'add, gifts, badges, likes', true],
+  ['tada', 'A celebration wiggle', 1, 'trophies, awards, parties', true],
+  ['jelly', 'Wobbles like jelly', 0.9, 'toggles, buttons, smiles', true],
+  ['flip', 'Flips over like a coin', 1.2, 'coins, cards, swaps'],
+  ['rock', 'Rocks slowly like a boat', 2.4, 'boats, anchors, hourglasses'],
+  ['tilt', 'Leans in and holds', 1.6, 'search, magnets, cursors', true],
+  ['zoom', 'Zooms in and back', 1.2, 'zoom, maximize, focus'],
+  ['orbit', 'Drifts in a small circle', 2.4, 'planets, satellites, compasses'],
+  ['glow', 'A soft halo pulses around it', 1.8, 'bulbs, suns, power'],
+  ['draw', 'Draws its own lines (outline styles)', 1.6, 'signatures, routes, checks', true],
+  ['type', 'Tiny jitters, like keystrokes', 0.9, 'keyboards, terminals, chat'],
+  ['fill', 'Fills up, like charging', 1.6, 'battery, signal, wifi, volume'],
+]
+export const EFFECTS = ['fade', 'scale', 'rotate', 'flip', 'slide-up', 'slide-down', 'slide-left', 'slide-right', 'blur', 'spin', 'morph', 'draw']
+/** CSS custom properties for a motion object (MOTION.md: --wm-ox --wm-oy in %, --wm-dx --wm-dy unit vector, --wm-k, --wm-dur, --wm-steps). */
+export function motionVars(m = {}) {
+  const v = []
+  const o = m.origin || [12, 12]
+  if (o[0] !== 12 || o[1] !== 12) v.push(`--wm-ox:${+(o[0] / 24 * 100).toFixed(2)}%`, `--wm-oy:${+(o[1] / 24 * 100).toFixed(2)}%`)
+  if (m.dir != null) { const r = m.dir * Math.PI / 180; v.push(`--wm-dx:${+Math.cos(r).toFixed(3)}`, `--wm-dy:${+Math.sin(r).toFixed(3)}`) }
+  if (m.amount != null && m.amount !== 1) v.push(`--wm-k:${m.amount}`)
+  if (m.duration != null) v.push(`--wm-dur:${m.duration}s`)
+  if (m.steps) v.push(`--wm-steps:${m.steps}`)
+  return v.join(';')
 }

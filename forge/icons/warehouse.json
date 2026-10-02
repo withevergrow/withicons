@@ -1,0 +1,73 @@
+{
+  "name": "warehouse",
+  "category": "commerce",
+  "description": "A wide warehouse with a low pitched roof and a roller door for storage, inventory, and fulfilment.",
+  "aliases": [
+    "storage-building",
+    "depot",
+    "distribution-center",
+    "fulfillment",
+    "stock-room",
+    "inventory-building",
+    "logistics-hub",
+    "distribution-centre",
+    "fulfilment",
+    "storehouse",
+    "storage-unit"
+  ],
+  "tags": [
+    "building",
+    "storage",
+    "inventory",
+    "logistics",
+    "shipping",
+    "industry"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V9 L12 4 L21 9 V21 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 21 V13.5 A1 1 0 0 1 8 12.5 H16 A1 1 0 0 1 17 13.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V9 L12 4 L21 9 V21 Z"
+  ],
+  "cutouts": [
+    "M8 12.5 H16 A1 1 0 0 1 17 13.5 V16.25 H7 V13.5 A1 1 0 0 1 8 12.5 Z",
+    "M7 17.75 H17 V21 H7 Z"
+  ],
+  "synonyms": [
+    "warehousing",
+    "storage",
+    "stock",
+    "stockroom",
+    "inventory",
+    "supply chain",
+    "logistics",
+    "distribution",
+    "fulfilment centre",
+    "fulfillment center",
+    "3pl",
+    "shipping center",
+    "dispatch",
+    "depot building",
+    "storage facility",
+    "self storage",
+    "barn",
+    "shed",
+    "hangar",
+    "loading dock",
+    "roller door",
+    "garage door",
+    "wherehouse",
+    "warehous"
+  ]
+}

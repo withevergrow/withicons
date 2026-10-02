@@ -1,0 +1,39 @@
+{
+  "name": "code",
+  "intent": "ticks along like code being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "braces",
+      "effect": "flip"
+    },
+    {
+      "to": "terminal",
+      "effect": "fade"
+    },
+    {
+      "to": "file-code",
+      "effect": "slide-up"
+    }
+  ]
+}

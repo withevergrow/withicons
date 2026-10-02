@@ -1,0 +1,32 @@
+{
+  "name": "more-vertical",
+  "intent": "dots ripple like more options are waiting",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "jelly"
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "more-horizontal",
+      "effect": "rotate"
+    },
+    {
+      "to": "close",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "cup-soda",
+  "intent": "fizzes with a gentle bob, like a cold drink ready to sip",
+  "loop": { "preset": "float", "amount": 0.4, "duration": 3 },
+  "hover": { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.8, "duration": 0.7 },
+  "alt": [ { "preset": "jelly", "origin": [12, 21.5], "amount": 0.7 }, { "preset": "tilt", "origin": [12, 21.5], "amount": 0.7 }, { "preset": "pop" } ]
+}

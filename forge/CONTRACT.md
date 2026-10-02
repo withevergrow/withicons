@@ -1,17 +1,13 @@
 # with icons — authoring contract
 
-> ## ⚠ BATCH CLAIMS — read before anything else
-> Icon batches 8–20 were **reassigned** to two faster parallel runs (run-2, run-3), split into halves.
-> Their claims are in `forge/.claims/batch-<N><a|b>.json` (`owner`, `batch`, `icons`, `status`).
-> - **If you are an icon author for batch N and any claim file has `"batch": N`, and you are not the named owner: STOP NOW.**
->   Do not create, edit or review any file of that batch. Return immediately with `done: []`, `problems: []`, `notes: "batch N reassigned"`.
-> - The owning agent writes `forge/.claims/batch-<id>.done` when finished.
-> - **Anyone else** (style polishers, QA): never edit a skeleton listed in a claim whose `.done` marker does not exist yet —
->   re-check every 60 s (up to 30 min) until it appears.
-
+> ## Run 4 (2026-10-02): 200 new icons, 5 new styles, motion
+> - New icons are claimed in `forge/.claims/new-<NN>.json` (`batch`, `icons`). Only the named batch's author creates those skeletons;
+>   the author writes `forge/.claims/new-<NN>.done` when finished. Style polishers: never edit a skeleton.
+> - Per-icon animation specs live in `forge/motion/<name>.json` — see `forge/MOTION.md`. Motion authors own only their icons' files.
+> - New style renderers: `glass`, `kawaii`, `sticker`, `pixel`, `retro` (see the table and **Palette styles** below).
 
 One **skeleton** per icon. Seven **style renderers** turn every skeleton into a finished icon.
-300 icons × 7 styles = 2,100 icons, all generated from 300 hand-authored JSON files.
+500 icons × 12 styles = 6,000 icons, all generated from 500 hand-authored JSON files.
 
 ## Styles
 
@@ -24,6 +20,21 @@ One **skeleton** per icon. Seven **style renderers** turn every skeleton into a 
 | `engrave` | creative | `forge/styles/engrave.mjs` |
 | `blueprint` | creative | `forge/styles/blueprint.mjs` |
 | `sketch` | creative | `forge/styles/sketch.mjs` |
+| `glass` | creative | `forge/styles/glass.mjs` — multi-layer frosted glass (glassmorphism) |
+| `kawaii` | creative | `forge/styles/kawaii.mjs` — chubby, soft, with a tiny face and blush |
+| `sticker` | creative | `forge/styles/sticker.mjs` — Y2K die-cut sticker with puffy border and sparkles |
+| `pixel` | creative | `forge/styles/pixel.mjs` — crisp pixel art on a 16×16 grid |
+| `retro` | creative | `forge/styles/retro.mjs` — 70s sunset stripes and chunky outline |
+
+Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro`.
+
+### Palette styles (glass, kawaii, sticker, pixel, retro)
+These five may use a **default palette**, but every colour must be a CSS custom property with a literal fallback,
+named `--with-<style>-<role>` (e.g. `fill="var(--with-kawaii-blush, #FF9EB8)"`), and the main ink (outline/body) stays
+`currentColor` so `color` still recolours the icon. They must read well on white **and** on `#0B0B12`.
+Same ban on `<defs>`, ids, gradients, filters, masks, `<text>`, `<image>`: depth, frost and gloss come from layered
+geometry and `fill-opacity`/`opacity`. Per-icon tuning (e.g. where kawaii puts the face) lives in the style's own helper
+file (`forge/styles/_<style>-tune.mjs`), never in skeletons. Size: target < 4 KB, ceiling 10 KB per icon.
 
 ## Skeleton format — `forge/icons/<name>.json`
 

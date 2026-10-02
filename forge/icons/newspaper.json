@@ -1,0 +1,87 @@
+{
+  "name": "newspaper",
+  "category": "files",
+  "description": "A folded newspaper with a headline block for news, articles, press and blog feeds.",
+  "aliases": [
+    "news",
+    "press",
+    "article-feed",
+    "headlines",
+    "gazette",
+    "media-coverage",
+    "daily-news",
+    "press-release",
+    "newsprint",
+    "journalism"
+  ],
+  "tags": [
+    "news",
+    "press",
+    "articles",
+    "media",
+    "publication",
+    "reading"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 20 H19 A2 2 0 0 0 21 18 V6 A2 2 0 0 0 19 4 H9 A2 2 0 0 0 7 6 V17.5 A2.5 2.5 0 0 1 4.5 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 9 H4.5 A1.5 1.5 0 0 0 3 10.5 V18.5 A1.5 1.5 0 0 0 4.5 20",
+      "plate": "K"
+    },
+    {
+      "d": "M11 7.5 H17 A1 1 0 0 1 18 8.5 V10.5 A1 1 0 0 1 17 11.5 H11 A1 1 0 0 1 10 10.5 V8.5 A1 1 0 0 1 11 7.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 15.5 H17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 20 H19 A2 2 0 0 0 21 18 V6 A2 2 0 0 0 19 4 H9 A2 2 0 0 0 7 6 V9 H4.5 A1.5 1.5 0 0 0 3 10.5 V18.5 A1.5 1.5 0 0 0 4.5 20 Z"
+  ],
+  "cutouts": [
+    "M11 7.5 H17 A1 1 0 0 1 18 8.5 V10.5 A1 1 0 0 1 17 11.5 H11 A1 1 0 0 1 10 10.5 V8.5 A1 1 0 0 1 11 7.5 Z",
+    "M10.5 15.5 H17.5",
+    "M7 9.5 V17.5 A2.5 2.5 0 0 1 4.5 20"
+  ],
+  "synonyms": [
+    "newsletter",
+    "blog",
+    "blog post",
+    "posts",
+    "articles",
+    "stories",
+    "story",
+    "headline",
+    "breaking news",
+    "latest news",
+    "updates",
+    "announcements",
+    "media",
+    "press kit",
+    "newsroom",
+    "editorial",
+    "magazine",
+    "publication",
+    "tabloid",
+    "daily",
+    "times",
+    "journal",
+    "column",
+    "read later",
+    "reader",
+    "feed",
+    "news paper",
+    "newpaper",
+    "newspapper",
+    "current events",
+    "report",
+    "bulletin",
+    "periodical",
+    "digest"
+  ]
+}

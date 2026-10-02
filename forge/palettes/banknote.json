@@ -1,0 +1,28 @@
+{
+  "name": "banknote",
+  "palettes": [
+    {"id":"greenback","name":"Greenback","tags":["true-to-life"],"colors":{"ink":"#14240E","c1":"#8DBB6A","c2":"#4E7A3A","c3":"#D8E8C4","c4":"#C9D9A8","tint":"#E8F1E1","accent":"#E8D9A0","shadow":"#3F5430","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"euro-fifty","name":"Euro fifty","tags":["true-to-life"],"colors":{"ink":"#2A1405","c1":"#F2A04A","c2":"#C8641E","c3":"#FBDDB5","c4":"#F7C48A","tint":"#FCECDB","accent":"#4A7AC8","shadow":"#6D4821","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"euro-twenty","name":"Euro twenty","tags":["true-to-life"],"colors":{"ink":"#0E1A3A","c1":"#6F9AE0","c2":"#2E5AB8","c3":"#C8DAF7","c4":"#A8C4F0","tint":"#E2EBF9","accent":"#F2C14E","shadow":"#324565","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pound-purple","name":"Pound purple","tags":["true-to-life"],"colors":{"ink":"#1E0E33","c1":"#A47FD9","c2":"#6A3FB0","c3":"#E0D2F5","c4":"#C8B0EB","tint":"#EDE5F7","accent":"#E8B04A","shadow":"#4A3962","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rupee-magenta","name":"Rupee magenta","tags":["true-to-life"],"colors":{"ink":"#2E0820","c1":"#E06AA8","c2":"#A82A70","c3":"#F7C8E0","c4":"#F09AC8","tint":"#F9E1EE","accent":"#6AB04A","shadow":"#65304C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"yen-ten-thousand","name":"Yen ten thousand","tags":["true-to-life","earthy"],"colors":{"ink":"#2A1A0E","c1":"#C9A57A","c2":"#8A6440","c3":"#EEDFC8","c4":"#DEC4A0","tint":"#F4EDE4","accent":"#6A8A5A","shadow":"#5A4A37","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"polymer-note","name":"Polymer note","tags":["true-to-life"],"colors":{"ink":"#0E2A33","c1":"#5CC2D9","c2":"#F2B84A","c3":"#C4ECF5","c4":"#F28AB0","tint":"#DEF3F7","accent":"#F28AB0","shadow":"#295762","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"play-money","name":"Play money","tags":["candy","pastel"],"colors":{"ink":"#2A2440","c1":"#FFB8D4","c2":"#9EDCF7","c3":"#FFE6A3","c4":"#C8F2B8","tint":"#FFF1F6","accent":"#9EDCF7","shadow":"#73535F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"monopoly-gold","name":"Board game gold","tags":["vintage"],"colors":{"ink":"#2E2310","c1":"#F2D46A","c2":"#D9603B","c3":"#FBEFC0","c4":"#A8C88A","tint":"#FCF6E1","accent":"#D9603B","shadow":"#6D5F30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-bullion","name":"Gold bullion","tags":["luxe"],"colors":{"ink":"#1F1606","c1":"#E3B341","c2":"#A8741A","c3":"#F6DC8A","c4":"#F2CC6A","tint":"#F9F0D9","accent":"#FFFFFF","shadow":"#66511D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-card-cash","name":"Black & gold","tags":["luxe","on-dark"],"colors":{"ink":"#F2DCA0","c1":"#2A2A30","c2":"#D4AF37","c3":"#4A4A52","c4":"#8A7A4A","tint":"#D9D9DE","accent":"#D4AF37","shadow":"#0A0A0E","shine":"#5A5A64","edge":"#FFFFFF"}},
+    {"id":"mint-cash","name":"Mint cash","tags":["pastel"],"colors":{"ink":"#10302A","c1":"#9EE6C8","c2":"#4AB894","c3":"#DDF7EC","c4":"#FFD6A3","tint":"#ECFAF4","accent":"#FFB0C0","shadow":"#47675A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"salary-day","name":"Salary day","tags":["vivid"],"colors":{"ink":"#0D2A1A","c1":"#34C46E","c2":"#FFC933","c3":"#B4EFC8","c4":"#3FA7F5","tint":"#D6F3E2","accent":"#FFC933","shadow":"#175831","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-tips","name":"Sunset tips","tags":["sunset"],"colors":{"ink":"#2A0F1A","c1":"#FF9A5B","c2":"#F2546B","c3":"#FFD0A8","c4":"#FFC24A","tint":"#FFEBDE","accent":"#7A4FC2","shadow":"#734529","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-wallet","name":"70s wallet","tags":["retro"],"colors":{"ink":"#2A170A","c1":"#D9A04A","c2":"#A8572B","c3":"#7D8F3A","c4":"#F2D58A","tint":"#F7ECDB","accent":"#A8572B","shadow":"#624821","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-bill","name":"Vintage bill","tags":["vintage"],"colors":{"ink":"#2A2418","c1":"#C2C49A","c2":"#7A7A52","c3":"#E8E8D2","c4":"#D9C8A0","tint":"#F3F3EB","accent":"#A8574A","shadow":"#575845","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-tender","name":"Ocean tender","tags":["ocean"],"colors":{"ink":"#062433","c1":"#48B8C8","c2":"#1E7A8A","c3":"#B5E6EC","c4":"#F2C14E","tint":"#DAF1F4","accent":"#F2C14E","shadow":"#20535A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forest-fund","name":"Forest fund","tags":["nature","earthy"],"colors":{"ink":"#13240F","c1":"#7AAA5A","c2":"#3E6A2E","c3":"#CDE6BC","c4":"#E8B04A","tint":"#E4EEDE","accent":"#C98A3A","shadow":"#374C28","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-cash","name":"Y2K cash","tags":["y2k"],"colors":{"ink":"#2A1A4A","c1":"#B8F2A8","c2":"#FF8ADB","c3":"#E8FFE0","c4":"#A8C8FF","tint":"#F1FCEE","accent":"#FF8ADB","shadow":"#536D4C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-cash","name":"Neon cash","tags":["neon","on-dark"],"colors":{"ink":"#3DFF8A","c1":"#08240F","c2":"#FFE14D","c3":"#3DF5FF","c4":"#124A24","tint":"#3C5A44","accent":"#FFE14D","shadow":"#030E06","shine":"#B8FFD4","edge":"#1A1A26"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#141416","c1":"#B8B8BE","c2":"#6A6A72","c3":"#E2E2E6","c4":"#9A9AA2","tint":"#F1F1F2","accent":"#6A6A72","shadow":"#535355","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mono-green","name":"Mono green","tags":["mono"],"colors":{"ink":"#0E2414","c1":"#6FBF7A","c2":"#2E7A3E","c3":"#CDECD2","c4":"#A8DCB0","tint":"#E2F2E4","accent":"#2E7A3E","shadow":"#325637","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#3BD16F","c2":"#FFD60A","c3":"#FFFFFF","c4":"#0057B8","tint":"#D8F6E2","accent":"#FFD60A","shadow":"#1B5E32","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

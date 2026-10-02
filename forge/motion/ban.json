@@ -1,0 +1,28 @@
+{
+  "name": "ban",
+  "intent": "shakes no: this is blocked or not allowed",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.9
+  },
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    }
+  ]
+}

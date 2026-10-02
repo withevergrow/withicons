@@ -1,0 +1,449 @@
+{
+  "name": "bug",
+  "palettes": [
+    {
+      "id": "ladybird",
+      "name": "Ladybird",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A0A0A",
+        "c1": "#E0281E",
+        "c2": "#9E1B14",
+        "c3": "#F6C3BE",
+        "c4": "#2B2B2B",
+        "tint": "#F9D4D2",
+        "accent": "#FFD166",
+        "shadow": "#5A0F0A",
+        "shine": "#FADFDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-shield-bug",
+      "name": "Green shield bug",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#132A10",
+        "c1": "#4E9A2E",
+        "c2": "#2F6B1C",
+        "c3": "#C5E3A5",
+        "c4": "#8C5A2B",
+        "tint": "#DCEBD5",
+        "accent": "#F2C14E",
+        "shadow": "#1F3E12",
+        "shine": "#E4F0E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "stag-beetle",
+      "name": "Stag beetle",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1A100A",
+        "c1": "#8A4B2A",
+        "c2": "#5A2E18",
+        "c3": "#D9A880",
+        "c4": "#2E2420",
+        "tint": "#E8DBD4",
+        "accent": "#E3B04B",
+        "shadow": "#371E11",
+        "shine": "#EDE4DF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jewel-beetle",
+      "name": "Jewel beetle",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0A2A24",
+        "c1": "#16A085",
+        "c2": "#6C3BD8",
+        "c3": "#F1C40F",
+        "c4": "#D4F4EC",
+        "tint": "#D0ECE7",
+        "accent": "#F1C40F",
+        "shadow": "#094035",
+        "shine": "#DCF1ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "firefly",
+      "name": "Firefly",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1B1A10",
+        "c1": "#7A6E3A",
+        "c2": "#E8FF59",
+        "c3": "#FF9F1C",
+        "c4": "#D9E68C",
+        "tint": "#E4E2D8",
+        "accent": "#E8FF59",
+        "shadow": "#312C17",
+        "shine": "#8E8C6A",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bug-report-red",
+      "name": "Bug report red",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0A0C",
+        "c1": "#E5484D",
+        "c2": "#FFB4B6",
+        "c3": "#8E1E22",
+        "c4": "#FDE2E3",
+        "tint": "#FADADB",
+        "accent": "#FFB020",
+        "shadow": "#5C1D1F",
+        "shine": "#FBE4E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fixed-it-green",
+      "name": "Fixed it green",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0B3320",
+        "c1": "#22B573",
+        "c2": "#A7F0C9",
+        "c3": "#0E7C4A",
+        "c4": "#D6F7E6",
+        "tint": "#D3F0E3",
+        "accent": "#FFD23F",
+        "shadow": "#0E482E",
+        "shine": "#DEF4EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "warning-amber",
+      "name": "Warning amber",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A2400",
+        "c1": "#F5A524",
+        "c2": "#FFD88A",
+        "c3": "#B86E00",
+        "c4": "#FFF0CC",
+        "tint": "#FDEDD3",
+        "accent": "#E5484D",
+        "shadow": "#62420E",
+        "shine": "#FEF2DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "debug-console",
+      "name": "Debug console",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8ECF3",
+        "c1": "#2E3546",
+        "c2": "#FF6B6B",
+        "c3": "#4ADE80",
+        "c4": "#161B26",
+        "tint": "#3E475C",
+        "accent": "#FFD166",
+        "shadow": "#0B0E16",
+        "shine": "#707B95",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-glitch",
+      "name": "Neon glitch",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#00F0FF",
+        "c1": "#FF2BD6",
+        "c2": "#B6FF3D",
+        "c3": "#FFE600",
+        "c4": "#7B2CFF",
+        "tint": "#FFD5F7",
+        "accent": "#B6FF3D",
+        "shadow": "#4D0A40",
+        "shine": "#FFDFF9",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-critter",
+      "name": "Pastel critter",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3550",
+        "c1": "#FFC8DD",
+        "c2": "#BDE0FE",
+        "c3": "#CAFFBF",
+        "c4": "#FFF1B8",
+        "tint": "#FFF4F8",
+        "accent": "#FFADAD",
+        "shadow": "#665058",
+        "shine": "#FFF7FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-beetle",
+      "name": "Candy beetle",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1030",
+        "c1": "#FF6FB5",
+        "c2": "#6FE3FF",
+        "c3": "#FFE066",
+        "c4": "#B9F18C",
+        "tint": "#FFE2F0",
+        "accent": "#FFE066",
+        "shadow": "#662C48",
+        "shine": "#FFE9F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-holo-bug",
+      "name": "Y2K holo bug",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#221A4A",
+        "c1": "#A6B8FF",
+        "c2": "#FF8AE2",
+        "c3": "#7CF4E1",
+        "c4": "#F6EEFF",
+        "tint": "#EDF1FF",
+        "accent": "#7CF4E1",
+        "shadow": "#424A66",
+        "shine": "#F2F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-bug",
+      "name": "70s bug",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A1A0E",
+        "c1": "#E9873A",
+        "c2": "#2E7D7A",
+        "c3": "#F2C14E",
+        "c4": "#C8402B",
+        "tint": "#FBE7D8",
+        "accent": "#F2C14E",
+        "shadow": "#5D3617",
+        "shine": "#FCEDE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "museum-specimen",
+      "name": "Museum specimen",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2418",
+        "c1": "#A07C52",
+        "c2": "#5E4A34",
+        "c3": "#D9C7A8",
+        "c4": "#6F7F5C",
+        "tint": "#ECE5DC",
+        "accent": "#A33B2B",
+        "shadow": "#403221",
+        "shine": "#F1EBE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sea-slug",
+      "name": "Sea slug",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B2E3D",
+        "c1": "#3A86FF",
+        "c2": "#FF8FAB",
+        "c3": "#FFD6A5",
+        "c4": "#8338EC",
+        "tint": "#D8E7FF",
+        "accent": "#FFD6A5",
+        "shadow": "#173666",
+        "shine": "#E1EDFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-beetle",
+      "name": "Berry beetle",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#330A26",
+        "c1": "#B5307A",
+        "c2": "#5E2B7E",
+        "c3": "#FF9EC9",
+        "c4": "#F9DDEB",
+        "tint": "#F0D6E4",
+        "accent": "#FFC145",
+        "shadow": "#481331",
+        "shine": "#F4E0EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "citrus-bug",
+      "name": "Citrus bug",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A2900",
+        "c1": "#FFC93C",
+        "c2": "#FF7A1A",
+        "c3": "#8ACB2E",
+        "c4": "#FFF2C4",
+        "tint": "#FFF4D8",
+        "accent": "#FF7A1A",
+        "shadow": "#665018",
+        "shine": "#FFF7E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "scarab-gold",
+      "name": "Scarab gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1C1606",
+        "c1": "#CFA43A",
+        "c2": "#1E5F5A",
+        "c3": "#F5E3A3",
+        "c4": "#7A5C12",
+        "tint": "#F5EDD8",
+        "accent": "#F5E3A3",
+        "shadow": "#534217",
+        "shine": "#F8F1E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "teal-ramp",
+      "name": "Teal ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#063437",
+        "c1": "#14A3A3",
+        "c2": "#0B6B6B",
+        "c3": "#7FD6D2",
+        "c4": "#D4F3F1",
+        "tint": "#D0EDED",
+        "accent": "#7FD6D2",
+        "shadow": "#084141",
+        "shine": "#DCF1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#9A9A9A",
+        "c2": "#555555",
+        "c3": "#D4D4D4",
+        "c4": "#EEEEEE",
+        "tint": "#EBEBEB",
+        "accent": "#D4D4D4",
+        "shadow": "#3E3E3E",
+        "shine": "#F0F0F0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast-bug",
+      "name": "High-contrast bug",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FF2D2D",
+        "c2": "#FFD400",
+        "c3": "#0057FF",
+        "c4": "#FFFFFF",
+        "tint": "#FFD5D5",
+        "accent": "#FFD400",
+        "shadow": "#661212",
+        "shine": "#FFE0E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-beetle",
+      "name": "Autumn beetle",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A1A0D",
+        "c1": "#C8622A",
+        "c2": "#7E3A1E",
+        "c3": "#E8B04B",
+        "c4": "#F4DCC5",
+        "tint": "#F4E0D4",
+        "accent": "#E8B04B",
+        "shadow": "#502711",
+        "shine": "#F7E7DF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

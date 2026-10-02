@@ -1,0 +1,84 @@
+{
+  "name": "cookie",
+  "category": "food",
+  "description": "A bitten chocolate chip cookie for snacks, treats, and browser cookie consent.",
+  "aliases": [
+    "biscuit",
+    "cookies",
+    "snack",
+    "chocolate-chip",
+    "cookie-consent",
+    "treat",
+    "baked-goods",
+    "cookie-banner",
+    "cookie-policy",
+    "browser-cookie"
+  ],
+  "tags": [
+    "snack",
+    "treat",
+    "biscuit",
+    "bakery",
+    "privacy",
+    "consent"
+  ],
+  "paths": [
+    {
+      "d": "M15 3 A9.5 9.5 0 1 0 21 9 A2.25 2.25 0 0 1 18 6 A2.25 2.25 0 0 1 15 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 9 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 10 H14",
+      "plate": "A"
+    },
+    {
+      "d": "M9 15.5 H9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 16 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M15 3 A9.5 9.5 0 1 0 21 9 A2.25 2.25 0 0 1 18 6 A2.25 2.25 0 0 1 15 3 Z"
+  ],
+  "cutouts": [
+    "M10 9 A1.25 1.25 0 1 1 7.5 9 A1.25 1.25 0 1 1 10 9 Z",
+    "M15 10 A1.25 1.25 0 1 1 12.5 10 A1.25 1.25 0 1 1 15 10 Z",
+    "M10.5 15.5 A1.25 1.25 0 1 1 8 15.5 A1.25 1.25 0 1 1 10.5 15.5 Z",
+    "M16 16 A1.25 1.25 0 1 1 13.5 16 A1.25 1.25 0 1 1 16 16 Z"
+  ],
+  "synonyms": [
+    "chocolate chip cookie",
+    "choc chip",
+    "cookie jar",
+    "biscuits",
+    "shortbread",
+    "baked",
+    "baking",
+    "sweet",
+    "dessert",
+    "bite",
+    "bitten",
+    "crumbs",
+    "cracker",
+    "oreo",
+    "cookie settings",
+    "accept cookies",
+    "cookie notice",
+    "gdpr",
+    "tracking",
+    "consent banner",
+    "privacy settings",
+    "web cookie",
+    "http cookie",
+    "cooky",
+    "coockie",
+    "cokie"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "meh",
+  "category": "users",
+  "description": "A neutral face with a flat mouth for indifferent, okay, or average feedback.",
+  "aliases": [
+    "neutral",
+    "neutral-face",
+    "indifferent",
+    "so-so",
+    "okay-face",
+    "whatever",
+    "average-rating",
+    "expressionless",
+    "straight-face",
+    "poker-face"
+  ],
+  "tags": [
+    "face",
+    "emotion",
+    "mood",
+    "neutral",
+    "feedback",
+    "emoji"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M15 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 15.5 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 9.5 A1 1.25 0 1 1 8 9.5 A1 1.25 0 1 1 10 9.5 Z",
+    "M16 9.5 A1 1.25 0 1 1 14 9.5 A1 1.25 0 1 1 16 9.5 Z",
+    "M8.5 15.5 H15.5"
+  ],
+  "synonyms": [
+    "okay",
+    "ok",
+    "fine",
+    "average",
+    "mediocre",
+    "not bad",
+    "nothing special",
+    "unimpressed",
+    "bored",
+    "boring",
+    "shrug",
+    "undecided",
+    "mixed feelings",
+    "no opinion",
+    "middle rating",
+    "neutral feedback",
+    "rate experience",
+    "emoji",
+    "emoticon",
+    "smiley",
+    "mood",
+    "emotion",
+    "feelings",
+    "flat",
+    "unsure",
+    "alright",
+    "deadpan",
+    "meh face",
+    "blank face"
+  ]
+}

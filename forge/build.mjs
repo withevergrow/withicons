@@ -6,7 +6,9 @@
 //   ctx.version            package version for every @withicons/* package
 //   ctx.root               repo root
 //   ctx.defaultStyle       'line'
-//   ctx.styles[]           { name, title, kind, description, strokeWidth, root }
+//   ctx.styles[]           { name, title, kind, description, strokeWidth, root,
+//                            palette: true for multi-colour palette styles, vars: { '--with-x': default } the style reads }
+//                          in STYLE_ORDER (forge/lib/emit-core.mjs): line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro
 //   ctx.icons[]            { name, category, description, aliases, tags,
 //                            pascal ('ArrowRight'), camel ('arrowRight'),
 //                            render: { [style]: { nodes: [[tag, attrs]], svg: '<svg ...>...</svg>', inner: '<path/>...' } } }
@@ -15,14 +17,17 @@
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
+import { spawnSync } from 'child_process'
 import { ROOT, listIcons, loadIcon, loadStyles, renderIcon, toSvg, nodesToMarkup } from './lib/load.mjs'
+import { STYLE_ORDER, sortStyles, styleVars, isPalette } from './lib/emit-core.mjs'
 
 const t0 = Date.now()
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
 const version = pkg.withiconsVersion || '0.1.0'
-const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
 const stylesMap = await loadStyles()
-const styles = Object.values(stylesMap).sort((a, b) => ((ORDER.indexOf(a.name) + 99) % 99) - ((ORDER.indexOf(b.name) + 99) % 99))
+const styles = sortStyles(Object.values(stylesMap))
+const unknownStyles = styles.map(s => s.name).filter(n => !STYLE_ORDER.includes(n))
+if (unknownStyles.length) console.log(`  note: styles missing from STYLE_ORDER (forge/lib/emit-core.mjs), sorted last: ${unknownStyles.join(', ')}`)
 const pascal = n => n.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('')
 
 const failures = []
@@ -46,14 +51,19 @@ for (const i of icons) for (const a of i.aliases) if (!canon.has(a)) (aliasIndex
 
 const ctx = {
   version, root: ROOT, defaultStyle: 'line',
-  styles: styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root })),
+  styles: styles.map(s => {
+    const vars = styleVars(icons, s.name)
+    return { name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: isPalette(s, vars), vars }
+  }),
   icons, aliasIndex,
   write(rel, text) { const f = path.join(ROOT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) },
 }
 console.log(`rendered ${icons.length} icons x ${styles.length} styles in ${Date.now() - t0} ms${failures.length ? ` — ${failures.length} FAILURES` : ''}`)
 failures.slice(0, 20).forEach(f => console.log('  FAIL ' + f))
 
-const only = process.argv.slice(2)
+// `--no-site` skips the website generators (site data, pages, SEO) — for package-only rebuilds
+const NO_SITE = process.argv.includes('--no-site')
+const only = process.argv.slice(2).filter(a => !a.startsWith('--'))
 const emitterFiles = fs.readdirSync(path.join(ROOT, 'forge', 'lib')).filter(f => /^emit-.*\.mjs$/.test(f)).sort()
 // load all, then order: an emitter may declare `export const after = ['web']` to run after those emitters
 const mods = []
@@ -73,8 +83,20 @@ for (const { name, mod } of ordered) {
     console.log(`  emit-${name}: ${res || 'ok'} (${Date.now() - t} ms)`)
   } catch (e) { console.log(`  emit-${name}: FAILED — ${String(e.stack).split(/\r?\n/).slice(0, 3).join(' | ')}`); process.exitCode = 1 }
 }
-// site data is always regenerated last
-await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-data.mjs')).href)
+// agent skill: counts, palette variables (from this build's core styles.json) and animated icons; when it changed,
+// re-bundle the CLI so `withicons init` / `withicons skill` ship the same text
+{
+  const r = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'skill-sync.mjs')], { cwd: ROOT, encoding: 'utf8' })
+  const out = (r.stdout || '').trim()
+  console.log(`  skill-sync: ${out.replace(/\r?\n/g, '; ') || (r.stderr || '').split('\n')[0]}`)
+  if (/wrote skills/.test(out) && (!only.length || only.includes('mcp'))) {
+    const { bundle } = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'emit-mcp.mjs')).href)
+    console.log(`  emit-mcp (skill changed, re-bundled): ${await bundle({ root: ROOT, version })}`)
+  }
+}
+if (NO_SITE) { console.log(`build done (packages only) in ${Date.now() - t0} ms`); process.exit(process.exitCode || 0) }
+// site data is always regenerated last (reuses this build's renders instead of rendering everything again)
+console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-data.mjs')).href)).build(ctx))
 // AI coding-tool integrations data (site/data/integrations.js) — read by the home page and ai.html
 // (that script only self-runs when launched directly, so call its exported build() here)
 console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-integrations.mjs')).href)).build())

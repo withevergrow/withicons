@@ -9,8 +9,7 @@
     "checkout",
     "add-to-cart",
     "buy",
-    "shopping-trolley",
-    "shopping-basket"
+    "shopping-trolley"
   ],
   "tags": [
     "cart",
@@ -59,6 +58,7 @@
     "shoping",
     "cart icon",
     "shopping trolly",
-    "trolly"
+    "trolly",
+    "shopping-basket"
   ]
 }

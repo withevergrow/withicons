@@ -1,0 +1,77 @@
+{
+  "name": "soup",
+  "category": "food",
+  "description": "A steaming bowl for soup, ramen, broth, and warm meals.",
+  "aliases": [
+    "bowl",
+    "ramen",
+    "noodles",
+    "broth",
+    "stew",
+    "hot-meal",
+    "soup-bowl",
+    "hot-soup",
+    "bowl-of-soup",
+    "chowder"
+  ],
+  "tags": [
+    "food",
+    "bowl",
+    "hot",
+    "meal",
+    "soup"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 H21.5 A9.5 9 0 0 1 2.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 8.5 C6.25 7.5 9.75 5.5 8 4.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8.5 C10.25 7.5 13.75 5.5 12 4.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 8.5 C14.25 7.5 17.75 5.5 16 4.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 12 H21.5 A9.5 9 0 0 1 2.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "soup bowl",
+    "bowl of soup",
+    "hot soup",
+    "noodle soup",
+    "pho",
+    "miso",
+    "chicken soup",
+    "tomato soup",
+    "stew pot",
+    "porridge",
+    "oatmeal",
+    "cereal",
+    "curry",
+    "warm",
+    "warm meal",
+    "hot food",
+    "comfort food",
+    "steaming",
+    "steam",
+    "winter food",
+    "lunch",
+    "dinner",
+    "starter",
+    "appetizer",
+    "sick day",
+    "soups",
+    "soop",
+    "supe",
+    "ramyun"
+  ]
+}

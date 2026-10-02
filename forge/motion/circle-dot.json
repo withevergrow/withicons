@@ -1,0 +1,8 @@
+{
+  "name": "circle-dot",
+  "intent": "pulses softly like a selected option or a live recording point",
+  "loop": { "preset": "pulse", "amount": 0.6, "duration": 2.2 },
+  "hover": { "preset": "pop" },
+  "alt": [ { "preset": "breathe" }, { "preset": "glow", "duration": 2.4 } ],
+  "swap": [ { "to": "circle", "effect": "scale" }, { "to": "circle-dot@solid", "effect": "fade" } ]
+}

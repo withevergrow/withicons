@@ -1,0 +1,80 @@
+{
+  "name": "luggage",
+  "category": "travel",
+  "description": "A rolling suitcase with a pull handle and wheels, for travel, trips, baggage, and holidays.",
+  "aliases": [
+    "suitcase",
+    "baggage",
+    "travel-bag",
+    "trolley-bag",
+    "bags",
+    "holiday",
+    "rolling-suitcase",
+    "luggage-bag",
+    "carry-on",
+    "trolley-case"
+  ],
+  "tags": [
+    "travel",
+    "trip",
+    "baggage",
+    "holiday",
+    "airport",
+    "packing"
+  ],
+  "paths": [
+    {
+      "d": "M7 5.5 H17 A2 2 0 0 1 19 7.5 V16.5 A2 2 0 0 1 17 18.5 H7 A2 2 0 0 1 5 16.5 V7.5 A2 2 0 0 1 7 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 5.5 V3.5 A1 1 0 0 1 10.5 2.5 H13.5 A1 1 0 0 1 14.5 3.5 V5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 9 V15 M14.5 9 V15",
+      "plate": "A"
+    },
+    {
+      "d": "M8 21.5 V21.5 M16 21.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 5.5 H17 A2 2 0 0 1 19 7.5 V16.5 A2 2 0 0 1 17 18.5 H7 A2 2 0 0 1 5 16.5 V7.5 A2 2 0 0 1 7 5.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 9 V15",
+    "M14.5 9 V15"
+  ],
+  "synonyms": [
+    "suitcases",
+    "travel",
+    "trip",
+    "trips",
+    "vacation",
+    "holidays",
+    "packing",
+    "pack your bags",
+    "check in",
+    "checked bag",
+    "bag drop",
+    "baggage claim",
+    "lost luggage",
+    "hand luggage",
+    "cabin bag",
+    "carry on bag",
+    "overnight bag",
+    "airport",
+    "journey",
+    "getaway",
+    "weekend away",
+    "business trip",
+    "travel insurance",
+    "lugage",
+    "luggae",
+    "suit case",
+    "roller bag",
+    "wheelie bag"
+  ]
+}

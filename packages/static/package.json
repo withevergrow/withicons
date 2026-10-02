@@ -1,7 +1,7 @@
 {
   "name": "@withicons/static",
-  "version": "0.1.0",
-  "description": "300 icons x 7 styles as SVG sprites and standalone SVG files. No JavaScript.",
+  "version": "0.2.0",
+  "description": "500 icons x 12 styles as SVG sprites and standalone SVG files. No JavaScript.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -24,7 +24,21 @@
     "with-icons",
     "svg-sprite",
     "static",
-    "cdn"
+    "cdn",
+    "svg-icons",
+    "multicolor-icons",
+    "line",
+    "solid",
+    "duo",
+    "gloss",
+    "engrave",
+    "blueprint",
+    "sketch",
+    "glass",
+    "kawaii",
+    "sticker",
+    "pixel",
+    "retro"
   ],
   "sideEffects": false,
   "files": [

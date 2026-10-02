@@ -1,0 +1,63 @@
+{
+  "name": "chevrons-left",
+  "category": "arrows",
+  "description": "A double chevron pointing left for jumping back further, rewinding, or collapsing a panel.",
+  "aliases": [
+    "double-chevron-left",
+    "angles-left",
+    "double-arrow-left",
+    "angle-double-left",
+    "collapse-all-left",
+    "skip-left",
+    "double-caret-left",
+    "guillemet-left",
+    "chevron-double-left"
+  ],
+  "tags": [
+    "chevron",
+    "double",
+    "left",
+    "back",
+    "collapse",
+    "navigation"
+  ],
+  "paths": [
+    {
+      "d": "M12 6 L6 12 L12 18",
+      "plate": "K"
+    },
+    {
+      "d": "M18 6 L12 12 L18 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "jump back",
+    "go back further",
+    "back faster",
+    "rewind",
+    "previous section",
+    "first",
+    "start",
+    "beginning",
+    "collapse panel",
+    "hide sidebar",
+    "close drawer",
+    "fold left",
+    "scroll left",
+    "pagination",
+    "previous page",
+    "back two",
+    "double back",
+    "left angle quote",
+    "guillemet",
+    "laquo",
+    "much less than",
+    "faster back",
+    "chevrons",
+    "angles left",
+    "collapse-sidebar"
+  ]
+}

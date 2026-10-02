@@ -1,0 +1,35 @@
+{
+  "name": "folder-plus",
+  "intent": "gently pulses, pops when you create a folder",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20
+      ]
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

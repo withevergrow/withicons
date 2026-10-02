@@ -1,0 +1,8 @@
+{
+  "name": "chevrons-right",
+  "intent": "nudges right to say skip ahead",
+  "loop": { "preset": "nudge", "dir": 0, "amount": 0.6, "duration": 1.8 },
+  "hover": { "preset": "pass", "dir": 0, "duration": 0.7 },
+  "alt": [ { "preset": "nudge", "dir": 0, "amount": 1.4 } ],
+  "swap": [ { "to": "chevrons-left", "effect": "rotate" }, { "to": "chevron-right", "effect": "scale" }, { "to": "chevron-last", "effect": "slide-right" } ]
+}

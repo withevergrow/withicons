@@ -1,5 +1,5 @@
 {
- "count": 300,
+ "count": 500,
  "categories": [
   "navigation",
   "arrows",
@@ -19,7 +19,14 @@
   "security",
   "charts",
   "weather",
-  "objects"
+  "objects",
+  "food",
+  "health",
+  "education",
+  "nature",
+  "home",
+  "travel",
+  "sports"
  ],
  "icons": [
   {
@@ -60,7 +67,6 @@
    "aliases": [
     "caret-right",
     "next",
-    "forward",
     "disclosure-right",
     "expand-right",
     "angle-right",
@@ -257,7 +263,6 @@
    "description": "A straight rightward arrow for forward navigation and calls to action.",
    "aliases": [
     "right",
-    "forward",
     "continue",
     "next-arrow",
     "east",
@@ -578,7 +583,6 @@
     "reapply",
     "step-forward",
     "repeat-action",
-    "forward",
     "restore"
    ],
    "batch": 3
@@ -1104,7 +1108,6 @@
     "video",
     "record-video",
     "camcorder",
-    "webcam",
     "film",
     "movie"
    ],
@@ -1115,7 +1118,6 @@
    "category": "media",
    "description": "Speaker with waves indicating audio output and volume level.",
    "aliases": [
-    "speaker",
     "audio",
     "sound",
     "volume-up",
@@ -1165,7 +1167,6 @@
     "manual",
     "docs",
     "guide",
-    "library",
     "reading",
     "handbook"
    ],
@@ -1600,7 +1601,6 @@
     "feed",
     "syndication",
     "subscribe",
-    "atom",
     "news-feed"
    ],
    "batch": 9
@@ -2230,7 +2230,6 @@
     "earphones",
     "listen",
     "audio-device",
-    "podcast",
     "audio",
     "music",
     "sound"
@@ -2258,7 +2257,6 @@
    "category": "devices",
    "description": "An open laptop representing portable computers and desktop breakpoints.",
    "aliases": [
-    "notebook",
     "portable-computer",
     "macbook",
     "device-laptop",
@@ -2427,7 +2425,6 @@
    "description": "Signal arcs indicating a wireless network connection.",
    "aliases": [
     "wireless",
-    "network",
     "hotspot",
     "internet",
     "connected",
@@ -2910,8 +2907,7 @@
     "drive",
     "auto",
     "ride",
-    "transport",
-    "parking"
+    "transport"
    ],
    "batch": 15
   },
@@ -3360,8 +3356,7 @@
     "segments",
     "breakdown",
     "pie-chart",
-    "pie-graph",
-    "donut"
+    "pie-graph"
    ],
    "batch": 18
   },
@@ -3595,7 +3590,6 @@
    "category": "objects",
    "description": "A ribboned medal for achievements, badges, and recognition.",
    "aliases": [
-    "medal",
     "achievement",
     "prize",
     "ribbon",
@@ -3772,7 +3766,6 @@
    "aliases": [
     "deploy",
     "launch",
-    "ship",
     "boost",
     "release",
     "startup",
@@ -3856,6 +3849,2879 @@
     "power"
    ],
    "batch": 20
+  },
+  {
+   "name": "arrow-down-left",
+   "category": "arrows",
+   "description": "Diagonal arrow pointing to the lower left, for south-west moves and collapsing toward a corner.",
+   "aliases": [
+    "arrow-bottom-left",
+    "down-left",
+    "south-west",
+    "southwest",
+    "arrow-sw",
+    "diagonal-down-left"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "arrow-left-right",
+   "category": "arrows",
+   "description": "Opposing horizontal arrows for exchange, transfer, and switching between two sides.",
+   "aliases": [
+    "arrows-horizontal",
+    "left-right",
+    "two-way",
+    "bidirectional",
+    "switch-horizontal"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "arrow-up-down",
+   "category": "arrows",
+   "description": "Opposing vertical arrows for sorting, reordering, and up-down toggles.",
+   "aliases": [
+    "arrows-vertical",
+    "sort-arrows",
+    "vertical-swap",
+    "swap-vertical",
+    "import-export"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "chevrons-left",
+   "category": "arrows",
+   "description": "Double left chevron for rewinding a step further, collapsing panels, or jumping back.",
+   "aliases": [
+    "double-chevron-left",
+    "angles-left",
+    "double-arrow-left",
+    "angle-double-left",
+    "collapse-all-left",
+    "skip-left"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "chevrons-right",
+   "category": "arrows",
+   "description": "Double right chevron for jumping ahead, expanding panels, or showing more.",
+   "aliases": [
+    "double-chevron-right",
+    "angles-right",
+    "double-arrow-right",
+    "angle-double-right",
+    "expand-all-right",
+    "skip-right"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "chevrons-up",
+   "category": "arrows",
+   "description": "Double up chevron for collapse-all, back to top, and priority raised.",
+   "aliases": [
+    "double-chevron-up",
+    "angles-up",
+    "double-arrow-up",
+    "angle-double-up",
+    "collapse-all",
+    "high-priority"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "chevrons-down",
+   "category": "arrows",
+   "description": "Double down chevron for expand-all, scroll further, and priority lowered.",
+   "aliases": [
+    "double-chevron-down",
+    "angles-down",
+    "double-arrow-down",
+    "angle-double-down",
+    "expand-all",
+    "low-priority"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "corner-down-left",
+   "category": "arrows",
+   "description": "Arrow turning down and back to the left, the Enter or Return key and line break.",
+   "aliases": [
+    "return-key",
+    "enter-key",
+    "keyboard-return",
+    "line-break",
+    "carriage-return",
+    "submit-key"
+   ],
+   "batch": "n01"
+  },
+  {
+   "name": "chevron-first",
+   "category": "navigation",
+   "description": "Chevron against a bar for jumping to the first page, item, or track.",
+   "aliases": [
+    "first-page",
+    "page-first",
+    "to-start",
+    "jump-first",
+    "chevron-bar-left"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "chevron-last",
+   "category": "navigation",
+   "description": "Chevron against a bar for jumping to the last page, item, or track.",
+   "aliases": [
+    "last-page",
+    "page-last",
+    "to-end",
+    "jump-last",
+    "chevron-bar-right"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-arrow-left",
+   "category": "arrows",
+   "description": "Left arrow inside a circle for back buttons and carousel controls.",
+   "aliases": [
+    "arrow-left-circle",
+    "circled-arrow-left",
+    "round-arrow-left",
+    "back-circle",
+    "previous-circle",
+    "arrow-circle-left"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-arrow-right",
+   "category": "arrows",
+   "description": "Right arrow inside a circle for next buttons, proceed, and carousel controls.",
+   "aliases": [
+    "arrow-right-circle",
+    "circled-arrow-right",
+    "round-arrow-right",
+    "next-circle",
+    "arrow-circle-right",
+    "go-circle"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-arrow-up",
+   "category": "arrows",
+   "description": "Up arrow inside a circle for upload, increase, and back-to-top buttons.",
+   "aliases": [
+    "arrow-up-circle",
+    "circled-arrow-up",
+    "round-arrow-up",
+    "up-circle",
+    "arrow-circle-up",
+    "raise"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-arrow-down",
+   "category": "arrows",
+   "description": "Down arrow inside a circle for download, decrease, and scroll-down buttons.",
+   "aliases": [
+    "arrow-down-circle",
+    "circled-arrow-down",
+    "round-arrow-down",
+    "down-circle",
+    "arrow-circle-down",
+    "lower"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-chevron-down",
+   "category": "navigation",
+   "description": "Down chevron inside a circle for expandable cards and show-more buttons.",
+   "aliases": [
+    "chevron-down-circle",
+    "expand-circle",
+    "expand-circle-down",
+    "circled-chevron-down",
+    "show-more-circle",
+    "dropdown-circle"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-chevron-right",
+   "category": "navigation",
+   "description": "Right chevron inside a circle for next, continue, and list disclosure.",
+   "aliases": [
+    "chevron-right-circle",
+    "circled-chevron-right",
+    "next-circle-chevron",
+    "continue-circle",
+    "forward-circle",
+    "navigate-next-circle"
+   ],
+   "batch": "n02"
+  },
+  {
+   "name": "circle-dot",
+   "category": "layout",
+   "description": "Circle with a centered dot, the selected radio button or a recording point.",
+   "aliases": [
+    "radio-button",
+    "radio-checked",
+    "radio-selected",
+    "option-selected",
+    "dot-circle",
+    "record-dot",
+    "bullseye-dot"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "square-plus",
+   "category": "actions",
+   "description": "Plus inside a rounded square for add item, new entry, and expand tree node.",
+   "aliases": [
+    "plus-square",
+    "add-box",
+    "add-square",
+    "expand-node",
+    "box-plus"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "square-minus",
+   "category": "actions",
+   "description": "Minus inside a rounded square for remove item, collapse node, or indeterminate checkbox.",
+   "aliases": [
+    "minus-square",
+    "indeterminate",
+    "checkbox-indeterminate",
+    "collapse-node",
+    "remove-box",
+    "box-minus",
+    "partial-select"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "square-x",
+   "category": "actions",
+   "description": "X inside a rounded square for close tab, disabled, and remove entry.",
+   "aliases": [
+    "x-square",
+    "close-square",
+    "cross-square",
+    "close-box",
+    "disabled-box",
+    "box-x",
+    "cancel-square"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "check-check",
+   "category": "status",
+   "description": "Two stacked check marks for read receipts, done all, and fully verified.",
+   "aliases": [
+    "double-check",
+    "checks",
+    "done-all",
+    "read-receipt",
+    "seen",
+    "delivered",
+    "all-done",
+    "checkmarks"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "list-plus",
+   "category": "actions",
+   "description": "List with a plus for add to list, add to playlist, and new list item.",
+   "aliases": [
+    "add-to-list",
+    "playlist-add",
+    "list-add",
+    "new-list-item",
+    "append",
+    "queue-add"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "list-filter",
+   "category": "layout",
+   "description": "Three shortening lines for filter options and refining a list of results.",
+   "aliases": [
+    "filter-lines",
+    "filter-options",
+    "sort-filter",
+    "results-filter",
+    "filter-bars"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "text-cursor-input",
+   "category": "layout",
+   "description": "Text field with a blinking cursor for inputs, forms, and editable fields.",
+   "aliases": [
+    "input-field",
+    "text-field",
+    "form-field",
+    "textbox",
+    "text-input",
+    "input-box",
+    "entry-field"
+   ],
+   "batch": "n03"
+  },
+  {
+   "name": "indent-increase",
+   "category": "text",
+   "description": "Lines with a right arrow for increasing indent and nesting text.",
+   "aliases": [
+    "indent",
+    "tab-right",
+    "increase-indent",
+    "nest",
+    "outdent-right",
+    "indent-more"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "indent-decrease",
+   "category": "text",
+   "description": "Lines with a left arrow for decreasing indent and un-nesting text.",
+   "aliases": [
+    "outdent",
+    "tab-left",
+    "decrease-indent",
+    "unnest",
+    "indent-less",
+    "dedent"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "subscript",
+   "category": "text",
+   "description": "Letter with a small lowered index for subscript text and chemical formulas.",
+   "aliases": [
+    "sub",
+    "lower-index",
+    "chemical-formula",
+    "text-subscript",
+    "x-sub",
+    "small-below"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "superscript",
+   "category": "text",
+   "description": "Letter with a small raised index for exponents, footnotes, and superscript text.",
+   "aliases": [
+    "sup",
+    "exponent",
+    "power-of",
+    "footnote-mark",
+    "text-superscript",
+    "x-squared"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "highlighter",
+   "category": "text",
+   "description": "Highlighter marker for highlighting, marking, and emphasizing text.",
+   "aliases": [
+    "text-highlight",
+    "felt-tip",
+    "color-text",
+    "highlighter-pen",
+    "marker-pen"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "pilcrow",
+   "category": "text",
+   "description": "Paragraph mark for paragraph formatting and showing hidden characters.",
+   "aliases": [
+    "paragraph",
+    "paragraph-mark",
+    "show-formatting",
+    "formatting-marks",
+    "blind-p",
+    "section-mark"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "remove-formatting",
+   "category": "text",
+   "description": "Struck-through letter for clearing formatting and returning to plain text.",
+   "aliases": [
+    "format-clear",
+    "plain-text",
+    "reset-style",
+    "no-format",
+    "unstyle"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "wrap-text",
+   "category": "text",
+   "description": "Line bending back onto the next row for word wrap and text flow.",
+   "aliases": [
+    "word-wrap",
+    "text-wrap",
+    "line-wrap",
+    "soft-wrap",
+    "wrap",
+    "reflow"
+   ],
+   "batch": "n04"
+  },
+  {
+   "name": "clipboard-list",
+   "category": "files",
+   "description": "Clipboard with list lines for checklists, tasks, forms, and inventories.",
+   "aliases": [
+    "assignment",
+    "clipboard-text-lines",
+    "inventory-list",
+    "survey",
+    "clipboard-lines"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "clipboard-check",
+   "category": "files",
+   "description": "Clipboard with a check for completed tasks, approved forms, and passed inspections.",
+   "aliases": [
+    "task-done",
+    "assignment-done",
+    "checklist-done",
+    "inspection-passed",
+    "clipboard-tick",
+    "completed-form"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "notebook",
+   "category": "files",
+   "description": "Spiral-bound notebook for notes, journals, and course work.",
+   "aliases": [
+    "notes-book",
+    "journal",
+    "spiral-notebook",
+    "exercise-book",
+    "notepad-book",
+    "jotter",
+    "diary-book"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "newspaper",
+   "category": "files",
+   "description": "Folded newspaper for news, articles, press, and blog feeds.",
+   "aliases": [
+    "news",
+    "press",
+    "article-feed",
+    "headlines",
+    "gazette",
+    "media-coverage",
+    "daily-news",
+    "press-release"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "library",
+   "category": "files",
+   "description": "Row of books on a shelf for libraries, collections, and reading lists.",
+   "aliases": [
+    "books",
+    "bookshelf",
+    "book-collection",
+    "shelf",
+    "reading-list",
+    "catalogue-books",
+    "archive-books"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "signature",
+   "category": "text",
+   "description": "Handwritten signature on a line for signing, e-sign, and approvals.",
+   "aliases": [
+    "sign",
+    "e-sign",
+    "esign",
+    "autograph",
+    "sign-here",
+    "signed",
+    "handwriting"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "notepad-text",
+   "category": "files",
+   "description": "Notepad with ruled lines for quick notes, memos, and drafts.",
+   "aliases": [
+    "notes-pad",
+    "writing-pad",
+    "ruled-paper",
+    "note-sheet",
+    "jot"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "scroll-text",
+   "category": "files",
+   "description": "Rolled scroll with text for terms, contracts, history, and long reads.",
+   "aliases": [
+    "scroll",
+    "parchment",
+    "terms",
+    "manuscript",
+    "decree",
+    "history-scroll"
+   ],
+   "batch": "n05"
+  },
+  {
+   "name": "file-up",
+   "category": "files",
+   "description": "Document with an up arrow for uploading or exporting a file.",
+   "aliases": [
+    "file-export",
+    "file-arrow-up",
+    "upload-document",
+    "document-upload",
+    "file-send"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "file-down",
+   "category": "files",
+   "description": "Document with a down arrow for downloading or importing a file.",
+   "aliases": [
+    "import-file",
+    "file-import",
+    "save-file-down",
+    "file-arrow-down",
+    "document-download"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "file-x",
+   "category": "files",
+   "description": "Document with an X for invalid, rejected, or removed files.",
+   "aliases": [
+    "file-remove",
+    "file-error",
+    "file-delete",
+    "invalid-file",
+    "file-close",
+    "file-rejected",
+    "file-cross"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "file-minus",
+   "category": "files",
+   "description": "Document with a minus for removing a file or reducing a set.",
+   "aliases": [
+    "file-subtract",
+    "remove-file",
+    "file-dash",
+    "exclude-file",
+    "file-reduce",
+    "minus-file"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "file-lock",
+   "category": "files",
+   "description": "Document with a padlock for protected, private, or encrypted files.",
+   "aliases": [
+    "locked-file",
+    "secure-file",
+    "file-secure",
+    "private-file",
+    "protected-document",
+    "encrypted-file",
+    "file-protected"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "file-audio",
+   "category": "files",
+   "description": "Document with a music note for audio files, recordings, and songs.",
+   "aliases": [
+    "audio-file",
+    "file-music",
+    "music-file",
+    "sound-file",
+    "mp3",
+    "song-file",
+    "file-sound"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "folder-minus",
+   "category": "files",
+   "description": "Folder with a minus for removing a folder or collapsing a directory.",
+   "aliases": [
+    "remove-folder",
+    "folder-remove",
+    "folder-dash",
+    "delete-folder",
+    "folder-subtract",
+    "collapse-folder"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "folder-search",
+   "category": "files",
+   "description": "Folder with a magnifier for searching in folders and browsing files.",
+   "aliases": [
+    "search-folder",
+    "find-in-folder",
+    "folder-find",
+    "browse-files",
+    "folder-lookup",
+    "explore-folder",
+    "file-finder"
+   ],
+   "batch": "n06"
+  },
+  {
+   "name": "panel-right",
+   "category": "layout",
+   "description": "Window with a right-hand pane for inspectors, details, and side drawers.",
+   "aliases": [
+    "sidebar-right",
+    "right-panel",
+    "inspector",
+    "details-pane",
+    "right-drawer",
+    "side-sheet"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "panel-bottom",
+   "category": "layout",
+   "description": "Window with a bottom pane for consoles, trays, and bottom sheets.",
+   "aliases": [
+    "bottom-panel",
+    "bottom-sheet",
+    "console-pane",
+    "footer-panel",
+    "dock-bottom",
+    "bottom-drawer"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "panel-left-close",
+   "category": "layout",
+   "description": "Left sidebar with an inward chevron for collapsing the navigation pane.",
+   "aliases": [
+    "sidebar-collapse",
+    "collapse-sidebar",
+    "hide-sidebar",
+    "close-sidebar",
+    "sidebar-close",
+    "menu-collapse",
+    "nav-collapse"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "panel-left-open",
+   "category": "layout",
+   "description": "Left sidebar with an outward chevron for expanding the navigation pane.",
+   "aliases": [
+    "sidebar-expand",
+    "expand-sidebar",
+    "show-sidebar",
+    "open-sidebar",
+    "sidebar-open",
+    "menu-expand",
+    "nav-expand"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "app-window",
+   "category": "layout",
+   "description": "Application window with a title bar for apps, web pages, and browser views.",
+   "aliases": [
+    "window",
+    "browser",
+    "webpage",
+    "application",
+    "browser-window",
+    "web-app"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "layout-template",
+   "category": "layout",
+   "description": "Page wireframe with header and blocks for templates, mockups, and page layouts.",
+   "aliases": [
+    "template",
+    "wireframe",
+    "page-layout",
+    "mockup",
+    "page-template",
+    "layout-blocks",
+    "site-template"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "gallery-horizontal",
+   "category": "layout",
+   "description": "Centered slide between peeking neighbours for carousels and sliders.",
+   "aliases": [
+    "carousel",
+    "slider",
+    "slideshow",
+    "swiper",
+    "image-slider",
+    "slides-strip",
+    "gallery-strip"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "picture-in-picture",
+   "category": "layout",
+   "description": "Screen with a small inset window for picture-in-picture and floating video.",
+   "aliases": [
+    "pip",
+    "mini-player",
+    "floating-window",
+    "inset-video",
+    "overlay-window",
+    "pop-out-video"
+   ],
+   "batch": "n07"
+  },
+  {
+   "name": "circle-play",
+   "category": "media",
+   "description": "Play triangle inside a circle for video thumbnails and big play buttons.",
+   "aliases": [
+    "play-circle",
+    "play-button-circle",
+    "video-play-circle",
+    "start-circle",
+    "round-play",
+    "play-round"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "circle-pause",
+   "category": "media",
+   "description": "Pause bars inside a circle for pausing playback, timers, or campaigns.",
+   "aliases": [
+    "pause-circle",
+    "round-pause",
+    "hold-circle",
+    "pause-round",
+    "paused"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "circle-stop",
+   "category": "media",
+   "description": "Square inside a circle for stopping playback or a recording.",
+   "aliases": [
+    "stop-circle",
+    "round-stop",
+    "end-recording",
+    "halt-circle",
+    "stop-round"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "volume-1",
+   "category": "media",
+   "description": "Speaker with one sound wave for low or reduced volume.",
+   "aliases": [
+    "volume-low",
+    "volume-down",
+    "low-sound",
+    "soft-volume",
+    "sound-low"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "repeat-1",
+   "category": "media",
+   "description": "Loop arrows with a 1 for repeating a single track.",
+   "aliases": [
+    "repeat-one",
+    "loop-one",
+    "repeat-single",
+    "replay-one",
+    "loop-track",
+    "repeat-song"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "list-music",
+   "category": "media",
+   "description": "Lines with a music note for playlists, queues, and track lists.",
+   "aliases": [
+    "playlist",
+    "music-list",
+    "queue-music",
+    "tracklist",
+    "song-list",
+    "album-tracks",
+    "music-queue"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "captions",
+   "category": "media",
+   "description": "Box with text lines for closed captions and subtitles.",
+   "aliases": [
+    "subtitles",
+    "closed-captions",
+    "cc",
+    "caption",
+    "transcript-lines",
+    "subtitle-track"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "audio-lines",
+   "category": "media",
+   "description": "Vertical bars of varying height for audio, voice input, and sound waves.",
+   "aliases": [
+    "sound-wave",
+    "audio-wave",
+    "voice-wave",
+    "audio-bars",
+    "soundbars"
+   ],
+   "batch": "n08"
+  },
+  {
+   "name": "radio",
+   "category": "media",
+   "description": "Radio with an antenna for broadcast, live radio, and stations.",
+   "aliases": [
+    "broadcast-radio",
+    "fm",
+    "am-radio",
+    "transistor",
+    "radio-station",
+    "wireless-set",
+    "boombox"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "podcast",
+   "category": "media",
+   "description": "Microphone with broadcast rings for podcasts, shows, and audio episodes.",
+   "aliases": [
+    "podcasts",
+    "audio-show",
+    "episode",
+    "broadcast-mic",
+    "on-air",
+    "audiobook-show",
+    "radio-show"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "cast",
+   "category": "media",
+   "description": "Screen with signal arcs for casting to a TV or external display.",
+   "aliases": [
+    "screencast",
+    "cast-screen",
+    "cast-to-tv",
+    "screen-mirroring",
+    "stream-to-tv",
+    "mirror-screen"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "disc",
+   "category": "media",
+   "description": "Compact disc for albums, CDs, records, and disk media.",
+   "aliases": [
+    "cd",
+    "dvd",
+    "compact-disc",
+    "album",
+    "vinyl",
+    "optical-disc"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "clapperboard",
+   "category": "media",
+   "description": "Film slate with a striped clapper for movies, production, and takes.",
+   "aliases": [
+    "clapper",
+    "movie-slate",
+    "film-production",
+    "action",
+    "take",
+    "cinema-clapper",
+    "director"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "video-off",
+   "category": "media",
+   "description": "Crossed-out video camera for camera off and video disabled in calls.",
+   "aliases": [
+    "camera-video-off",
+    "no-video",
+    "videocam-off",
+    "stop-video",
+    "video-disabled",
+    "turn-off-camera"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "camera-off",
+   "category": "devices",
+   "description": "Crossed-out photo camera for no photos, camera blocked, or privacy.",
+   "aliases": [
+    "no-camera",
+    "photo-off",
+    "no-photos",
+    "camera-disabled",
+    "camera-blocked",
+    "no-photography"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "images",
+   "category": "media",
+   "description": "Stacked photos for photo galleries, albums, and multiple images.",
+   "aliases": [
+    "photos",
+    "photo-library",
+    "album-photos",
+    "pictures",
+    "collection-photos",
+    "multiple-images"
+   ],
+   "batch": "n09"
+  },
+  {
+   "name": "speaker",
+   "category": "devices",
+   "description": "Loudspeaker box with woofer and tweeter for speakers and sound systems.",
+   "aliases": [
+    "smart-speaker",
+    "sound-system",
+    "hifi",
+    "subwoofer",
+    "audio-speaker",
+    "stereo"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "hard-drive",
+   "category": "devices",
+   "description": "Hard disk drive for storage, disks, and backups.",
+   "aliases": [
+    "hdd",
+    "storage-drive",
+    "ssd",
+    "disk-drive",
+    "local-disk"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "usb",
+   "category": "devices",
+   "description": "USB trident symbol for USB ports, cables, and connected devices.",
+   "aliases": [
+    "usb-port",
+    "usb-cable",
+    "usb-drive",
+    "thumb-drive",
+    "flash-drive",
+    "usb-connection",
+    "pen-drive"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "router",
+   "category": "devices",
+   "description": "Wireless router with antennas for home networks and internet hubs.",
+   "aliases": [
+    "wifi-router",
+    "modem",
+    "access-point",
+    "gateway",
+    "internet-box",
+    "hotspot-device",
+    "hub"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "webcam",
+   "category": "devices",
+   "description": "Webcam on a stand for video calls, streaming, and camera access.",
+   "aliases": [
+    "web-camera",
+    "pc-camera",
+    "video-chat-camera",
+    "streaming-camera",
+    "facecam",
+    "computer-camera"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "battery-low",
+   "category": "devices",
+   "description": "Battery with one low bar for low power and needs charging.",
+   "aliases": [
+    "low-battery",
+    "battery-empty",
+    "battery-alert",
+    "battery-warning",
+    "low-power",
+    "battery-1"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "cloud-off",
+   "category": "devices",
+   "description": "Crossed-out cloud for offline mode and sync unavailable.",
+   "aliases": [
+    "no-cloud",
+    "sync-off",
+    "cloud-disconnected",
+    "no-sync",
+    "cloud-unavailable"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "network",
+   "category": "devices",
+   "description": "Connected nodes in a tree for networks, LAN, topology, and infrastructure.",
+   "aliases": [
+    "lan",
+    "topology",
+    "network-tree",
+    "ethernet",
+    "intranet",
+    "local-network",
+    "network-diagram"
+   ],
+   "batch": "n10"
+  },
+  {
+   "name": "phone-incoming",
+   "category": "communication",
+   "description": "Handset with an incoming arrow for received calls.",
+   "aliases": [
+    "call-received",
+    "inbound-call",
+    "receive-call",
+    "call-in",
+    "ringing-in"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "phone-outgoing",
+   "category": "communication",
+   "description": "Handset with an outgoing arrow for dialed calls.",
+   "aliases": [
+    "call-made",
+    "outbound-call",
+    "dial-out",
+    "call-out",
+    "outgoing-phone"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "phone-missed",
+   "category": "communication",
+   "description": "Handset with a bent arrow for missed and unanswered calls.",
+   "aliases": [
+    "missed-call",
+    "call-missed",
+    "unanswered-call",
+    "declined-call",
+    "no-answer",
+    "missed"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "message-square-text",
+   "category": "communication",
+   "description": "Square speech bubble with text lines for SMS, messages, and comments.",
+   "aliases": [
+    "sms",
+    "chat-text",
+    "comment-text",
+    "message-lines",
+    "texting",
+    "notes-bubble"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "message-circle-more",
+   "category": "communication",
+   "description": "Round speech bubble with dots for typing indicator and ongoing chats.",
+   "aliases": [
+    "chat-dots",
+    "chat-typing",
+    "message-dots",
+    "speech-dots",
+    "conversation-ongoing",
+    "chat-more"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "mail-check",
+   "category": "communication",
+   "description": "Envelope with a check for read, verified, or confirmed email.",
+   "aliases": [
+    "mail-read",
+    "email-verified",
+    "email-confirmed",
+    "mail-sent",
+    "verified-email",
+    "email-check"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "reply-all",
+   "category": "communication",
+   "description": "Double curved arrow pointing back for replying to everyone in a thread.",
+   "aliases": [
+    "respond-all",
+    "answer-all",
+    "reply-everyone",
+    "double-reply",
+    "group-reply",
+    "mail-reply-all"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "forward",
+   "category": "communication",
+   "description": "Curved arrow pointing ahead for forwarding a message or email.",
+   "aliases": [
+    "mail-forward",
+    "forward-message",
+    "forward-email",
+    "pass-along",
+    "send-on",
+    "fwd"
+   ],
+   "batch": "n11"
+  },
+  {
+   "name": "user-cog",
+   "category": "users",
+   "description": "Person with a cog for account settings and managing users.",
+   "aliases": [
+    "user-settings",
+    "account-settings",
+    "manage-account",
+    "profile-settings",
+    "admin-user",
+    "user-gear",
+    "manage-users"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "user-search",
+   "category": "users",
+   "description": "Person with a magnifier for finding people and member search.",
+   "aliases": [
+    "find-user",
+    "search-user",
+    "people-search",
+    "person-search",
+    "lookup-user",
+    "find-people",
+    "member-search"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "user-pen",
+   "category": "users",
+   "description": "Person with a pencil for editing a profile or account details.",
+   "aliases": [
+    "edit-user",
+    "edit-profile",
+    "user-edit",
+    "profile-edit",
+    "update-profile",
+    "account-edit",
+    "person-edit"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "share-2",
+   "category": "actions",
+   "description": "Box with an upward arrow, the system share sheet for sending to apps.",
+   "aliases": [
+    "share-box",
+    "share-sheet",
+    "share-up",
+    "system-share",
+    "share-out",
+    "export-share",
+    "share-arrow-up"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "bookmark-plus",
+   "category": "actions",
+   "description": "Bookmark with a plus for save for later, add to list, and add bookmark.",
+   "aliases": [
+    "add-bookmark",
+    "bookmark-add",
+    "save-item",
+    "add-to-saved",
+    "new-bookmark",
+    "favorite-add"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "star-half",
+   "category": "status",
+   "description": "Half-filled star for partial ratings and review scores.",
+   "aliases": [
+    "half-star",
+    "rating-half",
+    "star-half-filled",
+    "partial-rating",
+    "review-score",
+    "half-rating"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "handshake",
+   "category": "users",
+   "description": "Clasped hands for deals, partnerships, agreements, and welcome.",
+   "aliases": [
+    "deal",
+    "partnership",
+    "agreement",
+    "partners",
+    "collaboration",
+    "shake-hands",
+    "alliance",
+    "contract-deal"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "hand-heart",
+   "category": "users",
+   "description": "Open hand holding a heart for charity, donations, care, and volunteering.",
+   "aliases": [
+    "charity",
+    "donate",
+    "donation",
+    "volunteer",
+    "care",
+    "kindness",
+    "giving",
+    "nonprofit"
+   ],
+   "batch": "n12"
+  },
+  {
+   "name": "shopping-basket",
+   "category": "commerce",
+   "description": "Handled basket for groceries, shopping, and quick add to basket.",
+   "aliases": [
+    "grocery-basket",
+    "market-basket",
+    "shop-basket",
+    "groceries",
+    "picnic-basket"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "shopping-cart-plus",
+   "category": "commerce",
+   "description": "Shopping cart with a plus for add to cart.",
+   "aliases": [
+    "cart-plus",
+    "cart-add",
+    "add-cart",
+    "buy-now",
+    "add-to-basket",
+    "cart-new"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "euro",
+   "category": "commerce",
+   "description": "Euro sign for prices, payments, and money in EUR.",
+   "aliases": [
+    "euro-sign",
+    "eur",
+    "euros",
+    "currency-euro",
+    "money-euro",
+    "euro-symbol"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "pound-sterling",
+   "category": "commerce",
+   "description": "Pound sterling sign for prices and money in GBP.",
+   "aliases": [
+    "gbp",
+    "sterling",
+    "pound-sign",
+    "currency-pound",
+    "british-pound",
+    "quid"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "indian-rupee",
+   "category": "commerce",
+   "description": "Indian rupee sign for prices and money in INR.",
+   "aliases": [
+    "rupee",
+    "inr",
+    "rupee-sign",
+    "currency-rupee",
+    "rupees",
+    "rs",
+    "money-inr"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "piggy-bank",
+   "category": "commerce",
+   "description": "Piggy bank with a coin slot for savings, budgets, and deposits.",
+   "aliases": [
+    "save-money",
+    "money-box",
+    "piggy",
+    "budget",
+    "deposit",
+    "nest-egg"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "hand-coins",
+   "category": "commerce",
+   "description": "Hand with stacked coins for payments, salary, tips, and lending.",
+   "aliases": [
+    "payment-hand",
+    "salary",
+    "loan",
+    "earn",
+    "cash-out",
+    "hand-money"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "badge-percent",
+   "category": "commerce",
+   "description": "Scalloped badge with a percent sign for discounts, sales, and offers.",
+   "aliases": [
+    "discount-badge",
+    "sale-badge",
+    "coupon-badge",
+    "deal-badge",
+    "percent-off"
+   ],
+   "batch": "n13"
+  },
+  {
+   "name": "shield-off",
+   "category": "security",
+   "description": "Crossed-out shield for unprotected, disabled security, or no coverage.",
+   "aliases": [
+    "security-off",
+    "no-shield",
+    "protection-off",
+    "shield-disabled",
+    "unsecured"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "shield-user",
+   "category": "security",
+   "description": "Shield with a person for admins, privacy, and account protection.",
+   "aliases": [
+    "admin-shield",
+    "user-shield",
+    "protected-user",
+    "privacy-user",
+    "guardian",
+    "moderator"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "scan-face",
+   "category": "security",
+   "description": "Face inside corner brackets for face recognition and face unlock.",
+   "aliases": [
+    "face-id",
+    "face-scan",
+    "face-recognition",
+    "face-unlock",
+    "biometric-face",
+    "face-detection",
+    "selfie-scan"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "siren",
+   "category": "security",
+   "description": "Rotating alarm light for emergencies, alerts, and incidents.",
+   "aliases": [
+    "alarm-light",
+    "emergency",
+    "police-light",
+    "beacon",
+    "alert-light",
+    "incident",
+    "warning-light"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "package-open",
+   "category": "commerce",
+   "description": "Open box for unboxing, returns, and opened deliveries.",
+   "aliases": [
+    "open-box",
+    "unbox",
+    "unboxing",
+    "box-open",
+    "opened-package",
+    "returns",
+    "inventory-open"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "warehouse",
+   "category": "commerce",
+   "description": "Warehouse building with a roller door for inventory, storage, and fulfilment.",
+   "aliases": [
+    "storage-building",
+    "depot",
+    "distribution-center",
+    "fulfillment",
+    "stock-room",
+    "inventory-building",
+    "logistics-hub"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "scale",
+   "category": "objects",
+   "description": "Balance scale for law, justice, fairness, and comparing options.",
+   "aliases": [
+    "justice",
+    "law",
+    "legal",
+    "libra",
+    "weigh",
+    "fairness",
+    "scales-of-justice"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "factory",
+   "category": "commerce",
+   "description": "Factory with a chimney for manufacturing, industry, and production.",
+   "aliases": [
+    "industry",
+    "manufacturing",
+    "production",
+    "mill",
+    "industrial",
+    "manufacture"
+   ],
+   "batch": "n14"
+  },
+  {
+   "name": "utensils",
+   "category": "food",
+   "description": "Fork and knife for restaurants, meals, dining, and menus.",
+   "aliases": [
+    "fork-knife",
+    "restaurant",
+    "dining",
+    "cutlery",
+    "meal",
+    "eat",
+    "food-menu",
+    "silverware"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "chef-hat",
+   "category": "food",
+   "description": "Chef's toque for cooking, recipes, chefs, and kitchens.",
+   "aliases": [
+    "cooking",
+    "chef",
+    "cook",
+    "toque",
+    "recipe",
+    "kitchen",
+    "baker"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "pizza",
+   "category": "food",
+   "description": "Slice of pizza for fast food, takeaway, and Italian food.",
+   "aliases": [
+    "pizza-slice",
+    "takeaway",
+    "italian-food",
+    "slice",
+    "pepperoni",
+    "fast-food"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "burger",
+   "category": "food",
+   "description": "Hamburger with bun and patty for fast food and meals.",
+   "aliases": [
+    "hamburger-food",
+    "cheeseburger",
+    "fastfood",
+    "sandwich-burger",
+    "beef-burger",
+    "junk-food",
+    "diner"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "salad",
+   "category": "food",
+   "description": "Bowl of leafy salad for healthy food, vegan, and diets.",
+   "aliases": [
+    "salad-bowl",
+    "healthy-food",
+    "vegan",
+    "vegetarian",
+    "greens",
+    "diet",
+    "fresh-food"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "soup",
+   "category": "food",
+   "description": "Steaming bowl for soup, ramen, broth, and warm meals.",
+   "aliases": [
+    "bowl",
+    "ramen",
+    "noodles",
+    "broth",
+    "stew",
+    "hot-meal",
+    "soup-bowl"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "egg",
+   "category": "food",
+   "description": "Egg for breakfast, protein, Easter, and baking.",
+   "aliases": [
+    "eggs",
+    "breakfast",
+    "easter-egg",
+    "protein",
+    "ovum",
+    "hatch"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "cooking-pot",
+   "category": "food",
+   "description": "Lidded cooking pot for recipes, cooking, and home kitchens.",
+   "aliases": [
+    "pot",
+    "saucepan",
+    "casserole",
+    "stockpot",
+    "boil",
+    "cook-pot",
+    "kitchen-pot"
+   ],
+   "batch": "n15"
+  },
+  {
+   "name": "cake",
+   "category": "food",
+   "description": "Layered cake with a candle for birthdays, celebrations, and desserts.",
+   "aliases": [
+    "birthday-cake",
+    "birthday",
+    "dessert",
+    "anniversary",
+    "celebration-cake",
+    "bakery",
+    "party-cake"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "ice-cream",
+   "category": "food",
+   "description": "Ice cream cone for desserts, summer, and sweet treats.",
+   "aliases": [
+    "ice-cream-cone",
+    "gelato",
+    "dessert-cone",
+    "frozen-treat",
+    "soft-serve",
+    "sundae"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "cookie",
+   "category": "food",
+   "description": "Chocolate chip cookie for snacks, treats, and browser cookies.",
+   "aliases": [
+    "biscuit",
+    "cookies",
+    "snack",
+    "chocolate-chip",
+    "cookie-consent",
+    "treat",
+    "baked-goods"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "donut",
+   "category": "food",
+   "description": "Glazed doughnut with sprinkles for snacks, bakeries, and sweets.",
+   "aliases": [
+    "doughnut",
+    "pastry",
+    "sprinkles",
+    "glazed",
+    "bakery-sweet",
+    "dessert-ring",
+    "sweets"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "apple",
+   "category": "food",
+   "description": "Apple with a leaf for fruit, healthy eating, school, and nutrition.",
+   "aliases": [
+    "fruit",
+    "healthy-snack",
+    "nutrition",
+    "red-apple",
+    "teacher-apple",
+    "produce",
+    "orchard"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "cup-soda",
+   "category": "food",
+   "description": "Takeaway cup with a straw for soft drinks, soda, and smoothies.",
+   "aliases": [
+    "soda",
+    "soft-drink",
+    "drink",
+    "beverage",
+    "smoothie",
+    "milkshake",
+    "takeaway-cup",
+    "pop"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "beer",
+   "category": "food",
+   "description": "Foaming beer mug for pubs, bars, beer, and happy hour.",
+   "aliases": [
+    "beer-mug",
+    "pint",
+    "pub",
+    "bar",
+    "brewery",
+    "ale",
+    "happy-hour",
+    "cheers"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "wine",
+   "category": "food",
+   "description": "Wine glass for wine, drinks, dinner, and celebrations.",
+   "aliases": [
+    "wine-glass",
+    "glass-of-wine",
+    "winery",
+    "toast",
+    "drinks",
+    "cocktail-glass",
+    "vineyard"
+   ],
+   "batch": "n16"
+  },
+  {
+   "name": "stethoscope",
+   "category": "health",
+   "description": "Stethoscope for doctors, checkups, and medical consultations.",
+   "aliases": [
+    "doctor",
+    "physician",
+    "checkup",
+    "medical",
+    "clinic",
+    "diagnosis"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "syringe",
+   "category": "health",
+   "description": "Syringe for vaccines, injections, shots, and blood tests.",
+   "aliases": [
+    "injection",
+    "vaccine",
+    "vaccination",
+    "needle",
+    "jab",
+    "immunization"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "hospital",
+   "category": "health",
+   "description": "Hospital building with a medical cross for hospitals and clinics.",
+   "aliases": [
+    "hospital-building",
+    "clinic-building",
+    "medical-center",
+    "emergency-room",
+    "infirmary",
+    "health-center",
+    "healthcare"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "ambulance",
+   "category": "health",
+   "description": "Ambulance with a medical cross for emergencies and urgent care.",
+   "aliases": [
+    "emergency-vehicle",
+    "paramedic",
+    "ems",
+    "rescue",
+    "urgent-care",
+    "emergency-services",
+    "first-responder"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "bandage",
+   "category": "health",
+   "description": "Adhesive bandage for first aid, minor injuries, fixes, and patches.",
+   "aliases": [
+    "band-aid",
+    "plaster",
+    "first-aid",
+    "adhesive-bandage",
+    "injury",
+    "wound",
+    "patch"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "briefcase-medical",
+   "category": "health",
+   "description": "Medical kit with a cross for first aid and health supplies.",
+   "aliases": [
+    "first-aid-kit",
+    "medical-kit",
+    "medkit",
+    "health-kit",
+    "emergency-kit",
+    "doctor-bag",
+    "aid-kit"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "tooth",
+   "category": "health",
+   "description": "Tooth for dentists, dental care, and oral hygiene.",
+   "aliases": [
+    "dental",
+    "dentist",
+    "teeth",
+    "molar",
+    "oral-care",
+    "dentistry",
+    "orthodontics"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "accessibility",
+   "category": "health",
+   "description": "Universal access figure for accessibility, inclusion, and a11y settings.",
+   "aliases": [
+    "a11y",
+    "universal-access",
+    "accessible",
+    "inclusive",
+    "disability",
+    "wheelchair",
+    "inclusion"
+   ],
+   "batch": "n17"
+  },
+  {
+   "name": "school",
+   "category": "education",
+   "description": "School building with a flag for schools, campuses, and education.",
+   "aliases": [
+    "school-building",
+    "schoolhouse",
+    "campus",
+    "elementary",
+    "primary-school",
+    "institute"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "backpack",
+   "category": "education",
+   "description": "Backpack for school, students, hiking, and travel gear.",
+   "aliases": [
+    "rucksack",
+    "schoolbag",
+    "bag-pack",
+    "knapsack",
+    "school-bag",
+    "daypack",
+    "hiking-bag"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "presentation",
+   "category": "education",
+   "description": "Presentation board on a stand for lectures, pitches, and slides.",
+   "aliases": [
+    "slides",
+    "whiteboard",
+    "lecture",
+    "pitch",
+    "slideshow-board",
+    "training",
+    "seminar"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "microscope",
+   "category": "education",
+   "description": "Microscope for science, labs, research, and biology.",
+   "aliases": [
+    "lab",
+    "laboratory",
+    "research",
+    "biology",
+    "science",
+    "magnify-cells",
+    "analysis"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "flask-conical",
+   "category": "education",
+   "description": "Conical flask for chemistry, experiments, and lab tests.",
+   "aliases": [
+    "flask",
+    "beaker",
+    "chemistry",
+    "experiment",
+    "erlenmeyer",
+    "potion",
+    "lab-flask"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "atom",
+   "category": "education",
+   "description": "Atom with orbiting electrons for physics, science, and nuclear energy.",
+   "aliases": [
+    "physics",
+    "nucleus",
+    "electron",
+    "nuclear",
+    "molecule",
+    "science-atom",
+    "quantum"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "telescope",
+   "category": "education",
+   "description": "Telescope on a tripod for astronomy, discovery, and vision.",
+   "aliases": [
+    "astronomy",
+    "stargazing",
+    "observatory",
+    "spyglass",
+    "space",
+    "vision"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "dna",
+   "category": "education",
+   "description": "DNA double helix for genetics, biology, and identity.",
+   "aliases": [
+    "double-helix",
+    "genetics",
+    "gene",
+    "genome",
+    "biotech",
+    "helix",
+    "heredity"
+   ],
+   "batch": "n18"
+  },
+  {
+   "name": "tree-pine",
+   "category": "nature",
+   "description": "Pine tree for forests, nature, camping, and Christmas.",
+   "aliases": [
+    "pine",
+    "fir",
+    "evergreen",
+    "christmas-tree",
+    "conifer",
+    "forest",
+    "spruce"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "flower",
+   "category": "nature",
+   "description": "Blooming flower for spring, gardens, beauty, and growth.",
+   "aliases": [
+    "blossom",
+    "bloom",
+    "daisy",
+    "floral",
+    "petals",
+    "garden",
+    "spring-flower"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "sprout",
+   "category": "nature",
+   "description": "Seedling with two leaves for growth, new beginnings, and sustainability.",
+   "aliases": [
+    "seedling",
+    "sapling",
+    "seed",
+    "young-plant",
+    "new-growth"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "palm-tree",
+   "category": "nature",
+   "description": "Palm tree for beaches, tropical holidays, and vacations.",
+   "aliases": [
+    "palm",
+    "tropical",
+    "beach",
+    "island",
+    "vacation",
+    "coconut-tree",
+    "summer-holiday"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "rainbow",
+   "category": "weather",
+   "description": "Rainbow arc for weather, hope, diversity, and pride.",
+   "aliases": [
+    "arc",
+    "pride",
+    "colors",
+    "spectrum",
+    "after-rain",
+    "hope",
+    "colourful"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "sunrise",
+   "category": "weather",
+   "description": "Sun rising over the horizon for morning, dawn, and new starts.",
+   "aliases": [
+    "dawn",
+    "morning",
+    "sun-up",
+    "daybreak",
+    "new-day",
+    "early",
+    "sunrise-horizon"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "sunset",
+   "category": "weather",
+   "description": "Sun setting below the horizon for evening, dusk, and endings.",
+   "aliases": [
+    "dusk",
+    "evening",
+    "sundown",
+    "twilight",
+    "sun-down",
+    "golden-hour",
+    "nightfall"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "sun-moon",
+   "category": "weather",
+   "description": "Half sun, half moon for theme toggles and light or dark mode.",
+   "aliases": [
+    "theme-toggle",
+    "light-dark",
+    "day-night",
+    "auto-theme",
+    "color-scheme"
+   ],
+   "batch": "n19"
+  },
+  {
+   "name": "paw-print",
+   "category": "nature",
+   "description": "Animal paw print for pets, vets, animal shelters, and pet care.",
+   "aliases": [
+    "paw",
+    "pets",
+    "pet",
+    "animal",
+    "footprint-paw",
+    "vet",
+    "pet-friendly"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "dog",
+   "category": "nature",
+   "description": "Dog head for dogs, puppies, pet services, and dog-friendly places.",
+   "aliases": [
+    "puppy",
+    "canine",
+    "doggo",
+    "hound",
+    "pup",
+    "dog-friendly",
+    "pooch"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "cat",
+   "category": "nature",
+   "description": "Cat head for cats, kittens, pets, and cute content.",
+   "aliases": [
+    "kitten",
+    "kitty",
+    "feline",
+    "pussycat",
+    "meow",
+    "cat-face"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "bird",
+   "category": "nature",
+   "description": "Small songbird for birds, tweets, nature, and freedom.",
+   "aliases": [
+    "songbird",
+    "sparrow",
+    "tweet-bird",
+    "robin",
+    "birdwatching",
+    "avian",
+    "dove"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "fish",
+   "category": "nature",
+   "description": "Fish for seafood, aquariums, fishing, and the ocean.",
+   "aliases": [
+    "seafood",
+    "aquarium",
+    "fishing",
+    "sea-life",
+    "goldfish",
+    "pescatarian"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "rabbit",
+   "category": "nature",
+   "description": "Rabbit for bunnies, pets, speed, and Easter.",
+   "aliases": [
+    "bunny",
+    "hare",
+    "easter-bunny",
+    "fast-animal",
+    "bunny-rabbit",
+    "cottontail"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "turtle",
+   "category": "nature",
+   "description": "Turtle for slow pace, patience, wildlife, and the ocean.",
+   "aliases": [
+    "tortoise",
+    "slow",
+    "sea-turtle",
+    "shell-animal",
+    "reptile",
+    "patience",
+    "slow-mode"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "butterfly",
+   "category": "nature",
+   "description": "Butterfly for transformation, spring, nature, and beauty.",
+   "aliases": [
+    "moth",
+    "metamorphosis",
+    "transformation",
+    "wings",
+    "monarch",
+    "insect-wings",
+    "flutter"
+   ],
+   "batch": "n20"
+  },
+  {
+   "name": "frown",
+   "category": "users",
+   "description": "Frowning face for sad, unhappy, and negative feedback.",
+   "aliases": [
+    "sad",
+    "unhappy",
+    "sad-face",
+    "frowning",
+    "disappointed",
+    "bad-rating",
+    "dissatisfied"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "laugh",
+   "category": "users",
+   "description": "Laughing face with an open grin for joy, fun, and very happy.",
+   "aliases": [
+    "grin",
+    "lol",
+    "laughing",
+    "joy",
+    "very-happy",
+    "haha"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "meh",
+   "category": "users",
+   "description": "Neutral face with a flat mouth for indifferent, okay, and neutral feedback.",
+   "aliases": [
+    "neutral",
+    "neutral-face",
+    "indifferent",
+    "so-so",
+    "okay-face",
+    "whatever",
+    "average-rating"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "angry",
+   "category": "users",
+   "description": "Angry face with furrowed brows for frustration and very negative feedback.",
+   "aliases": [
+    "mad",
+    "furious",
+    "angry-face",
+    "rage",
+    "upset",
+    "frustrated",
+    "annoyed-face"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "heart-crack",
+   "category": "status",
+   "description": "Broken heart for heartbreak, breakups, and lost favorites.",
+   "aliases": [
+    "broken-heart",
+    "heartbreak",
+    "heart-broken",
+    "sad-heart",
+    "breakup",
+    "unlike",
+    "heartache"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "party-popper",
+   "category": "objects",
+   "description": "Party popper with confetti for celebrations, launches, and congratulations.",
+   "aliases": [
+    "party",
+    "celebrate",
+    "confetti",
+    "tada",
+    "congrats",
+    "celebration",
+    "hooray",
+    "festive"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "balloon",
+   "category": "objects",
+   "description": "Balloon on a string for parties, birthdays, and festivities.",
+   "aliases": [
+    "balloons",
+    "birthday-balloon",
+    "party-balloon",
+    "festivity",
+    "float",
+    "helium",
+    "kids-party"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "gem",
+   "category": "objects",
+   "description": "Faceted gemstone for premium, value, jewelry, and rewards.",
+   "aliases": [
+    "diamond-gem",
+    "jewel",
+    "gemstone",
+    "jewelry",
+    "precious",
+    "treasure",
+    "crystal"
+   ],
+   "batch": "n21"
+  },
+  {
+   "name": "sofa",
+   "category": "home",
+   "description": "Sofa for living rooms, furniture, lounges, and relaxing.",
+   "aliases": [
+    "couch",
+    "settee",
+    "living-room",
+    "lounge",
+    "furniture",
+    "loveseat",
+    "relax"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "bed",
+   "category": "home",
+   "description": "Bed for bedrooms, sleep, hotels, and accommodation.",
+   "aliases": [
+    "bedroom",
+    "rest",
+    "double-bed",
+    "accommodation",
+    "overnight",
+    "nap"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "lamp",
+   "category": "home",
+   "description": "Table lamp with a shade for lighting, interiors, and reading light.",
+   "aliases": [
+    "table-lamp",
+    "desk-lamp",
+    "floor-lamp",
+    "light-fixture",
+    "lampshade",
+    "reading-lamp",
+    "lighting"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "bath",
+   "category": "home",
+   "description": "Bathtub for bathrooms, baths, spa, and self-care.",
+   "aliases": [
+    "bathtub",
+    "bathroom",
+    "tub",
+    "spa",
+    "shower-bath",
+    "self-care",
+    "soak"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "door-open",
+   "category": "home",
+   "description": "Open door for entrances, check-in, exits, and rooms.",
+   "aliases": [
+    "door",
+    "entrance",
+    "doorway",
+    "open-door",
+    "exit-door",
+    "room"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "refrigerator",
+   "category": "home",
+   "description": "Two-door refrigerator for kitchens, cold storage, and groceries.",
+   "aliases": [
+    "fridge",
+    "freezer",
+    "icebox",
+    "cooler",
+    "kitchen-appliance",
+    "cold-storage"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "washing-machine",
+   "category": "home",
+   "description": "Front-loading washing machine for laundry and housekeeping.",
+   "aliases": [
+    "washer",
+    "laundry",
+    "washing",
+    "clothes-washer",
+    "laundromat",
+    "wash"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "toilet",
+   "category": "home",
+   "description": "Toilet for restrooms, bathrooms, and sanitation.",
+   "aliases": [
+    "restroom",
+    "wc",
+    "loo",
+    "lavatory",
+    "bathroom-sign",
+    "washroom",
+    "restrooms"
+   ],
+   "batch": "n22"
+  },
+  {
+   "name": "luggage",
+   "category": "travel",
+   "description": "Rolling suitcase for travel, trips, baggage, and holidays.",
+   "aliases": [
+    "suitcase",
+    "baggage",
+    "travel-bag",
+    "trolley-bag",
+    "bags",
+    "holiday"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "hotel",
+   "category": "travel",
+   "description": "Hotel building with a bed sign for stays, lodging, and bookings.",
+   "aliases": [
+    "lodging",
+    "inn",
+    "motel",
+    "accommodation-building",
+    "resort",
+    "hostel",
+    "stay"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "tent",
+   "category": "travel",
+   "description": "Camping tent for camping, outdoors, festivals, and shelter.",
+   "aliases": [
+    "camping",
+    "campsite",
+    "camp",
+    "outdoors",
+    "shelter",
+    "glamping",
+    "festival"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "plane-takeoff",
+   "category": "travel",
+   "description": "Plane climbing from a runway for departures and takeoff.",
+   "aliases": [
+    "departures",
+    "takeoff",
+    "flight-departure",
+    "airport-departure",
+    "outbound-flight"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "plane-landing",
+   "category": "travel",
+   "description": "Plane descending to a runway for arrivals and landing.",
+   "aliases": [
+    "arrival",
+    "arrivals",
+    "flight-arrival",
+    "airport-arrival",
+    "inbound-flight"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "passport",
+   "category": "travel",
+   "description": "Passport booklet for travel documents, visas, and border control.",
+   "aliases": [
+    "travel-document",
+    "identity-travel",
+    "border",
+    "customs",
+    "immigration",
+    "passport-book"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "binoculars",
+   "category": "travel",
+   "description": "Binoculars for sightseeing, exploration, watching, and discovery.",
+   "aliases": [
+    "field-glasses",
+    "sightseeing",
+    "explore-view",
+    "spotting",
+    "lookout",
+    "observe",
+    "watch-far"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "signpost",
+   "category": "travel",
+   "description": "Signpost with direction boards for directions, choices, and wayfinding.",
+   "aliases": [
+    "sign-post",
+    "direction-sign",
+    "crossroads",
+    "guidepost",
+    "fingerpost"
+   ],
+   "batch": "n23"
+  },
+  {
+   "name": "bus",
+   "category": "travel",
+   "description": "Bus front for public transport, buses, and bus stops.",
+   "aliases": [
+    "bus-stop",
+    "public-transport",
+    "coach",
+    "transit",
+    "school-bus",
+    "city-bus",
+    "autobus"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "train",
+   "category": "travel",
+   "description": "Train front for rail travel, trains, and stations.",
+   "aliases": [
+    "train-front",
+    "railway",
+    "metro",
+    "subway",
+    "station",
+    "locomotive"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "ship",
+   "category": "travel",
+   "description": "Ship on waves for cruises, ferries, shipping, and sea freight.",
+   "aliases": [
+    "boat",
+    "cruise",
+    "ferry",
+    "vessel",
+    "sea-freight",
+    "ocean-liner",
+    "sailing"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "taxi",
+   "category": "travel",
+   "description": "Taxi car with a roof sign for cabs and ride hailing.",
+   "aliases": [
+    "cab",
+    "taxicab",
+    "ride-hailing",
+    "car-service",
+    "hail",
+    "rideshare"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "motorcycle",
+   "category": "travel",
+   "description": "Motorcycle for motorbikes, scooters, and delivery riders.",
+   "aliases": [
+    "motorbike",
+    "scooter",
+    "moped",
+    "bike-motor",
+    "delivery-rider",
+    "two-wheeler"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "fuel",
+   "category": "travel",
+   "description": "Fuel pump for petrol stations, gas, and refuelling.",
+   "aliases": [
+    "gas-station",
+    "petrol",
+    "gas-pump",
+    "fuel-pump",
+    "refuel",
+    "diesel",
+    "filling-station"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "parking",
+   "category": "travel",
+   "description": "P sign in a rounded square for parking and car parks.",
+   "aliases": [
+    "parking-sign",
+    "car-park",
+    "parking-lot",
+    "p-sign",
+    "park-here",
+    "garage-parking",
+    "circle-parking"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "traffic-cone",
+   "category": "travel",
+   "description": "Striped traffic cone for construction, roadworks, and under construction.",
+   "aliases": [
+    "roadworks",
+    "under-construction",
+    "work-in-progress",
+    "road-closed",
+    "safety-cone",
+    "road-cone"
+   ],
+   "batch": "n24"
+  },
+  {
+   "name": "dumbbell",
+   "category": "sports",
+   "description": "Dumbbell for gyms, fitness, workouts, and strength training.",
+   "aliases": [
+    "gym",
+    "fitness",
+    "workout",
+    "weights",
+    "exercise",
+    "barbell"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "medal",
+   "category": "sports",
+   "description": "Medal hanging from a ribbon for winners, sports, and first place.",
+   "aliases": [
+    "gold-medal",
+    "winner-medal",
+    "olympic-medal",
+    "podium",
+    "champion-medal",
+    "victory"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "football",
+   "category": "sports",
+   "description": "Soccer ball for football, soccer, and team sports.",
+   "aliases": [
+    "soccer",
+    "soccer-ball",
+    "football-ball",
+    "futbol",
+    "goal-sport",
+    "team-sport",
+    "match"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "basketball",
+   "category": "sports",
+   "description": "Basketball for hoops, courts, and team sports.",
+   "aliases": [
+    "basketball-ball",
+    "hoops",
+    "court",
+    "dribble",
+    "slam-dunk",
+    "ball-game"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "volleyball",
+   "category": "sports",
+   "description": "Volleyball for beach volleyball, sport, and team games.",
+   "aliases": [
+    "volleyball-ball",
+    "beach-volleyball",
+    "volley",
+    "net-sport",
+    "ball-sport",
+    "spike"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "tennis",
+   "category": "sports",
+   "description": "Tennis racket and ball for tennis, padel, and racket sports.",
+   "aliases": [
+    "tennis-racket",
+    "racket",
+    "racquet",
+    "padel",
+    "tennis-ball",
+    "badminton"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "person-running",
+   "category": "sports",
+   "description": "Running person for running, jogging, activity, and exercise.",
+   "aliases": [
+    "running",
+    "run-person",
+    "jogging",
+    "runner",
+    "sprint",
+    "jog",
+    "athlete"
+   ],
+   "batch": "n25"
+  },
+  {
+   "name": "bike",
+   "category": "sports",
+   "description": "Bicycle for cycling, bike lanes, rides, and commuting.",
+   "aliases": [
+    "bicycle",
+    "cycling",
+    "cycle",
+    "bike-ride",
+    "biking",
+    "pushbike",
+    "cyclist"
+   ],
+   "batch": "n25"
   }
  ]
 }

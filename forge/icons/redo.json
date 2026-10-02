@@ -47,6 +47,7 @@
     "reapply change",
     "reverse undo",
     "re-do",
-    "redu"
+    "redu",
+    "forward"
   ]
 }

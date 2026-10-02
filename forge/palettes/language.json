@@ -1,0 +1,448 @@
+{
+  "name": "language",
+  "palettes": [
+    {
+      "id": "translate-blue",
+      "name": "Translate blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E1E3D",
+        "c1": "#2F6FE0",
+        "c2": "#F2B33A",
+        "c3": "#A8C4F7",
+        "c4": "#E9F1FD",
+        "tint": "#DAE5F9",
+        "accent": "#F2B33A",
+        "shadow": "#183870",
+        "shine": "#D5E2F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ink-and-seal",
+      "name": "Ink & seal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1414",
+        "c1": "#C8302E",
+        "c2": "#2A2422",
+        "c3": "#F2E6D0",
+        "c4": "#8A1E1C",
+        "tint": "#F5DAD9",
+        "accent": "#C8302E",
+        "shadow": "#641817",
+        "shine": "#F4D6D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "passport",
+      "name": "Passport",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1430",
+        "c1": "#2E3A80",
+        "c2": "#C9A24A",
+        "c3": "#A23A3A",
+        "c4": "#E6E9F7",
+        "tint": "#D9DCE8",
+        "accent": "#C9A24A",
+        "shadow": "#171D40",
+        "shine": "#D5D8E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dictionary",
+      "name": "Dictionary",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#22140E",
+        "c1": "#7E2A22",
+        "c2": "#E8DABB",
+        "c3": "#2E4A3E",
+        "c4": "#F6EFDF",
+        "tint": "#E8D9D7",
+        "accent": "#C9A24A",
+        "shadow": "#3F1511",
+        "shine": "#E5D4D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "classroom",
+      "name": "Classroom",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1E2A16",
+        "c1": "#3E7A3A",
+        "c2": "#F2C230",
+        "c3": "#E5533D",
+        "c4": "#F2F0E2",
+        "tint": "#DCE7DC",
+        "accent": "#F2C230",
+        "shadow": "#1F3D1D",
+        "shine": "#D8E4D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "subtitles",
+      "name": "Subtitles",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#F2D23A",
+        "c2": "#2B2B2B",
+        "c3": "#FFFFFF",
+        "c4": "#A68A1A",
+        "tint": "#FDF7DC",
+        "accent": "#2B2B2B",
+        "shadow": "#79691D",
+        "shine": "#FCF4CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "globe-teal",
+      "name": "Globe teal",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062B2E",
+        "c1": "#129A95",
+        "c2": "#F2C14E",
+        "c3": "#9BE3DE",
+        "c4": "#E6F8F7",
+        "tint": "#D4EDEC",
+        "accent": "#F2C14E",
+        "shadow": "#094D4B",
+        "shine": "#D0EBEA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "world-night",
+      "name": "World night",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#EEF1F6",
+        "c1": "#2A3046",
+        "c2": "#82AAFF",
+        "c3": "#FFCB6B",
+        "c4": "#F78C6C",
+        "tint": "#9598A3",
+        "accent": "#C3E88D",
+        "shadow": "#151823",
+        "shine": "#D4D6DA",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-phrasebook",
+      "name": "Pastel phrasebook",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#33294E",
+        "c1": "#B6A6F2",
+        "c2": "#FFCBA8",
+        "c3": "#B8E8D6",
+        "c4": "#FFF5D1",
+        "tint": "#F2EFFD",
+        "accent": "#F28DB3",
+        "shadow": "#5B5379",
+        "shine": "#F0EDFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mochi",
+      "name": "Mochi",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3E2433",
+        "c1": "#F7B7CC",
+        "c2": "#D6EFC7",
+        "c3": "#FFF1D0",
+        "c4": "#C9B8F2",
+        "tint": "#FEF2F6",
+        "accent": "#F28DAE",
+        "shadow": "#7C5C66",
+        "shine": "#FDF1F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lollipop",
+      "name": "Lollipop",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#360D2E",
+        "c1": "#FF4FA6",
+        "c2": "#FFC93D",
+        "c3": "#44D1C7",
+        "c4": "#8E5CFF",
+        "tint": "#FFDFEF",
+        "accent": "#44D1C7",
+        "shadow": "#802853",
+        "shine": "#FFDCED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-chat",
+      "name": "Y2K chat",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1B1A40",
+        "c1": "#A3A0FF",
+        "c2": "#FF9BE3",
+        "c3": "#9FF8E5",
+        "c4": "#F2F1FF",
+        "tint": "#EEEEFF",
+        "accent": "#FF5CC8",
+        "shadow": "#525080",
+        "shine": "#EDECFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-city",
+      "name": "Neon city",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFF3FA",
+        "c1": "#FF2E7E",
+        "c2": "#2DD8FF",
+        "c3": "#FFE45C",
+        "c4": "#120614",
+        "tint": "#FF97BF",
+        "accent": "#2DD8FF",
+        "shadow": "#80173F",
+        "shine": "#FFD5E5",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "silk-road",
+      "name": "Silk road",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A0E",
+        "c1": "#C27A36",
+        "c2": "#A63A2E",
+        "c3": "#2E6E6A",
+        "c4": "#F3E2C6",
+        "tint": "#F4E7DB",
+        "accent": "#2E6E6A",
+        "shadow": "#613D1B",
+        "shine": "#F3E4D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-lingo",
+      "name": "70s lingo",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A1406",
+        "c1": "#DA6A26",
+        "c2": "#F2B13E",
+        "c3": "#8E3220",
+        "c4": "#4E7A5E",
+        "tint": "#F8E4D8",
+        "accent": "#4E7A5E",
+        "shadow": "#6D3513",
+        "shine": "#F8E1D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "travel-poster",
+      "name": "Travel poster",
+      "tags": [
+        "vintage",
+        "retro"
+      ],
+      "colors": {
+        "ink": "#1E2836",
+        "c1": "#E06A3B",
+        "c2": "#F2D59A",
+        "c3": "#2F6F8C",
+        "c4": "#F7EEDD",
+        "tint": "#F9E4DC",
+        "accent": "#2F6F8C",
+        "shadow": "#70351E",
+        "shine": "#F9E1D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-phrase",
+      "name": "Sunset phrase",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#321128",
+        "c1": "#EF5B6A",
+        "c2": "#FFAD62",
+        "c3": "#84307A",
+        "c4": "#FFE3DC",
+        "tint": "#FCE1E4",
+        "accent": "#3AAEA3",
+        "shadow": "#782E35",
+        "shine": "#FCDEE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bamboo",
+      "name": "Bamboo",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#16261A",
+        "c1": "#5E9A4A",
+        "c2": "#E8D99A",
+        "c3": "#A35A2E",
+        "c4": "#EFF6E8",
+        "tint": "#E2EDDE",
+        "accent": "#A35A2E",
+        "shadow": "#2F4D25",
+        "shine": "#DFEBDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jade-and-gold",
+      "name": "Jade & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0C2218",
+        "c1": "#1E7A55",
+        "c2": "#D4AF5A",
+        "c3": "#0F3F2C",
+        "c4": "#E6F4EE",
+        "tint": "#D7E7E0",
+        "accent": "#D4AF5A",
+        "shadow": "#0F3D2B",
+        "shine": "#D2E4DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "crimson-ramp",
+      "name": "Crimson ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2B060C",
+        "c1": "#A81C30",
+        "c2": "#E06272",
+        "c3": "#F5B8C0",
+        "c4": "#5E0E1A",
+        "tint": "#EFD6DA",
+        "accent": "#3A8C8A",
+        "shadow": "#540E18",
+        "shine": "#EED2D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "newsprint",
+      "name": "Newsprint",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#616161",
+        "c2": "#AEAEAE",
+        "c3": "#303030",
+        "c4": "#E8E8E8",
+        "tint": "#E3E3E3",
+        "accent": "#8A8A8A",
+        "shadow": "#313131",
+        "shine": "#DFDFDF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050FF",
+        "c2": "#FFD400",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#D1E0FF",
+        "accent": "#FFD400",
+        "shadow": "#002880",
+        "shine": "#CCDCFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-festival",
+      "name": "Spring festival",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2B1A22",
+        "c1": "#F29BB5",
+        "c2": "#8CC56A",
+        "c3": "#FFE08A",
+        "c4": "#FFF4F8",
+        "tint": "#FDEDF2",
+        "accent": "#E5536F",
+        "shadow": "#794E5B",
+        "shine": "#FCEBF0",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

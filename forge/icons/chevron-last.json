@@ -1,0 +1,62 @@
+{
+  "name": "chevron-last",
+  "category": "navigation",
+  "description": "A right chevron against a bar for jumping to the last page, item, or track.",
+  "aliases": [
+    "last-page",
+    "page-last",
+    "to-end",
+    "jump-last",
+    "chevron-bar-right",
+    "go-to-last",
+    "chevron-right-bar",
+    "last-item",
+    "jump-to-end"
+  ],
+  "tags": [
+    "pagination",
+    "last",
+    "end",
+    "final",
+    "chevron",
+    "navigation"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 6 L12.5 12 L6.5 18",
+      "plate": "K"
+    },
+    {
+      "d": "M17 6 V18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "last",
+    "end",
+    "final",
+    "go to end",
+    "skip to end",
+    "jump to the end",
+    "last page",
+    "final page",
+    "last slide",
+    "last record",
+    "last result",
+    "final step",
+    "end of list",
+    "bottom of list",
+    "pagination",
+    "table pagination",
+    "pager",
+    "end key",
+    "finish",
+    "latest",
+    "newest",
+    "most recent",
+    "rightmost",
+    "lst page"
+  ]
+}

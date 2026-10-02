@@ -1,0 +1,82 @@
+{
+  "name": "speaker",
+  "category": "devices",
+  "description": "A loudspeaker box with a tweeter and a woofer cone for speakers and sound systems.",
+  "aliases": [
+    "smart-speaker",
+    "sound-system",
+    "hifi",
+    "subwoofer",
+    "audio-speaker",
+    "stereo",
+    "woofer",
+    "speaker-box",
+    "sound-box",
+    "boombox"
+  ],
+  "tags": [
+    "devices",
+    "audio",
+    "sound",
+    "music",
+    "hardware",
+    "hifi"
+  ],
+  "paths": [
+    {
+      "d": "M7 2 H17 A2 2 0 0 1 19 4 V20 A2 2 0 0 1 17 22 H7 A2 2 0 0 1 5 20 V4 A2 2 0 0 1 7 2 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 14.5 A4 4 0 1 1 8 14.5 A4 4 0 1 1 16 14.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 14.5 V14.51",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6.5 V6.51",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 2 H17 A2 2 0 0 1 19 4 V20 A2 2 0 0 1 17 22 H7 A2 2 0 0 1 5 20 V4 A2 2 0 0 1 7 2 Z"
+  ],
+  "cutouts": [
+    "M16.75 14.5 A4.75 4.75 0 1 1 7.25 14.5 A4.75 4.75 0 1 1 16.75 14.5 Z M15.25 14.5 A3.25 3.25 0 1 1 8.75 14.5 A3.25 3.25 0 1 1 15.25 14.5 Z",
+    "M13 14.5 A1 1 0 1 1 11 14.5 A1 1 0 1 1 13 14.5 Z",
+    "M13 6.5 A1 1 0 1 1 11 6.5 A1 1 0 1 1 13 6.5 Z"
+  ],
+  "synonyms": [
+    "loudspeaker",
+    "speakers",
+    "speaker system",
+    "sound",
+    "audio",
+    "music",
+    "playback",
+    "bluetooth speaker",
+    "wireless speaker",
+    "home theatre",
+    "home theater",
+    "surround sound",
+    "bass",
+    "tweeter",
+    "amplifier",
+    "amp",
+    "hi-fi",
+    "audio output",
+    "sound output",
+    "smart home",
+    "alexa",
+    "echo",
+    "homepod",
+    "sonos",
+    "party",
+    "dj",
+    "loud",
+    "speeker",
+    "speakr"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "mail-check",
+  "category": "communication",
+  "description": "An envelope with a check mark at its corner, for read, sent or verified email.",
+  "aliases": [
+    "mail-read",
+    "email-verified",
+    "email-confirmed",
+    "mail-sent",
+    "verified-email",
+    "email-check",
+    "mail-verified",
+    "mail-confirmed",
+    "envelope-check",
+    "email-sent",
+    "email-done",
+    "mail-done"
+  ],
+  "tags": [
+    "email",
+    "envelope",
+    "check",
+    "verified",
+    "confirmed",
+    "sent"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 11.5 V6.5 A2 2 0 0 0 19.5 4.5 H4.5 A2 2 0 0 0 2.5 6.5 V17.5 A2 2 0 0 0 4.5 19.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 17.5 L17 20 L21.5 15",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V12.5 A7 7 0 0 0 12 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "email verified",
+    "verify email",
+    "email confirmation",
+    "confirm email",
+    "email sent",
+    "message sent",
+    "message read",
+    "read email",
+    "read receipt",
+    "delivered",
+    "approved",
+    "done",
+    "checked mail",
+    "inbox zero",
+    "all read",
+    "subscription confirmed",
+    "e-mail",
+    "validated email",
+    "emial check"
+  ]
+}

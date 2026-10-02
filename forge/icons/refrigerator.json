@@ -1,0 +1,73 @@
+{
+  "name": "refrigerator",
+  "category": "home",
+  "description": "A two-door refrigerator with a freezer on top for kitchens, cold storage, and groceries.",
+  "aliases": [
+    "fridge",
+    "freezer",
+    "icebox",
+    "cooler",
+    "kitchen-appliance",
+    "cold-storage",
+    "fridge-freezer",
+    "refridgerator",
+    "appliance"
+  ],
+  "tags": [
+    "kitchen",
+    "appliance",
+    "cold",
+    "food",
+    "storage",
+    "groceries"
+  ],
+  "paths": [
+    {
+      "d": "M7 2.5 H17 A2 2 0 0 1 19 4.5 V19.5 A2 2 0 0 1 17 21.5 H7 A2 2 0 0 1 5 19.5 V4.5 A2 2 0 0 1 7 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 9.5 H19",
+      "plate": "K"
+    },
+    {
+      "d": "M9 5 V7 M9 12.5 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 2.5 H17 A2 2 0 0 1 19 4.5 V19.5 A2 2 0 0 1 17 21.5 H7 A2 2 0 0 1 5 19.5 V4.5 A2 2 0 0 1 7 2.5 Z"
+  ],
+  "cutouts": [
+    "M5 9.5 H19",
+    "M9 5 V7",
+    "M9 12.5 V16.5"
+  ],
+  "synonyms": [
+    "fridges",
+    "refrigerators",
+    "refrigerate",
+    "refrigerated",
+    "chilled",
+    "chill",
+    "keep cold",
+    "cold",
+    "frozen",
+    "frozen food",
+    "ice",
+    "kitchen",
+    "groceries",
+    "food storage",
+    "leftovers",
+    "fresh food",
+    "dairy",
+    "cold chain",
+    "home appliance",
+    "white goods",
+    "american fridge",
+    "refrigirator",
+    "refrigerater",
+    "frige",
+    "friedge"
+  ]
+}

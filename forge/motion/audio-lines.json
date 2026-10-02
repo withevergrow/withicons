@@ -1,0 +1,8 @@
+{
+  "name": "audio-lines",
+  "intent": "sound bars bounce like a voice is speaking",
+  "loop": { "preset": "jelly", "origin": [12, 12], "amount": 0.6, "duration": 1.6 },
+  "hover": { "preset": "pulse", "origin": [12, 12], "amount": 1, "duration": 0.5 },
+  "alt": [ { "preset": "fill" }, { "preset": "beat", "amount": 0.6 }, { "preset": "draw" } ],
+  "swap": [ { "to": "microphone", "effect": "morph" }, { "to": "microphone-off", "effect": "fade" } ]
+}

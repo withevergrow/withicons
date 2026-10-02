@@ -1,0 +1,27 @@
+{
+  "name": "dollar-sign",
+  "palettes": [
+    {"id":"money-green","name":"Money green","tags":["true-to-life"],"colors":{"ink":"#0D2A12","c1":"#3BAA4A","c2":"#F2C14E","c3":"#B4E6BC","c4":"#8AD094","tint":"#D8EEDB","accent":"#F2C14E","shadow":"#1B4C21","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-dollar","name":"Gold dollar","tags":["true-to-life","luxe"],"colors":{"ink":"#2A1E05","c1":"#E8B931","c2":"#FFE48A","c3":"#8A6414","c4":"#F6DC8A","tint":"#FAF1D6","accent":"#FFFFFF","shadow":"#685316","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"greenback","name":"Greenback","tags":["true-to-life","vintage"],"colors":{"ink":"#14240E","c1":"#85BB65","c2":"#4E7A3A","c3":"#D8E8C4","c4":"#E8D9A0","tint":"#E7F1E0","accent":"#E8D9A0","shadow":"#3C542D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"profit","name":"Profit","tags":["accessible","true-to-life"],"colors":{"ink":"#062A16","c1":"#1FAA5A","c2":"#FFD23F","c3":"#B7EFC9","c4":"#0E7A3E","tint":"#D2EEDE","accent":"#FFD23F","shadow":"#0E4C28","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"price-red","name":"Price red","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0505","c1":"#E8352E","c2":"#FFC933","c3":"#FBC8C2","c4":"#F57A72","tint":"#FAD7D5","accent":"#FFC933","shadow":"#681815","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fintech-blue","name":"Fintech blue","tags":["corporate"],"colors":{"ink":"#0A1430","c1":"#2E6AE0","c2":"#2FD9B0","c3":"#A9C6FB","c4":"#6F9AF0","tint":"#D5E1F9","accent":"#2FD9B0","shadow":"#153065","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"casino-chip","name":"Casino chip","tags":["vivid"],"colors":{"ink":"#1A0505","c1":"#D7261E","c2":"#FFFFFF","c3":"#F2C14E","c4":"#1A1A1A","tint":"#F7D4D2","accent":"#F2C14E","shadow":"#61110E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"emerald-luxe","name":"Emerald luxe","tags":["luxe"],"colors":{"ink":"#0A2216","c1":"#1E8A5A","c2":"#D4AF37","c3":"#A8E0C4","c4":"#0E5A38","tint":"#D2E8DE","accent":"#D4AF37","shadow":"#0E3E28","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rose-gold","name":"Rose gold","tags":["luxe","pastel"],"colors":{"ink":"#3A1A1A","c1":"#E09A8A","c2":"#D4AF37","c3":"#F7D8D0","c4":"#F2C0B0","tint":"#F9EBE8","accent":"#D4AF37","shadow":"#65453E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-mint","name":"Pastel mint","tags":["pastel"],"colors":{"ink":"#10302A","c1":"#8EDDBE","c2":"#FFD6A3","c3":"#DDF7EC","c4":"#FFB0C0","tint":"#E8F8F2","accent":"#FFB0C0","shadow":"#406355","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-cash","name":"Candy cash","tags":["candy"],"colors":{"ink":"#3A0E2A","c1":"#FF6FB5","c2":"#FFE36E","c3":"#FFD1E5","c4":"#7AD7F0","tint":"#FFE2F0","accent":"#7AD7F0","shadow":"#733251","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-sale","name":"Sunset sale","tags":["sunset"],"colors":{"ink":"#2A0F1A","c1":"#FF7A4A","c2":"#FFC24A","c3":"#FFD0BC","c4":"#F2546B","tint":"#FFE4DB","accent":"#7A4FC2","shadow":"#733721","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-bucks","name":"70s bucks","tags":["retro"],"colors":{"ink":"#2A170A","c1":"#D9902A","c2":"#7D8F3A","c3":"#F5D49A","c4":"#D9572B","tint":"#F7E9D4","accent":"#D9572B","shadow":"#624113","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-ledger","name":"Vintage ledger","tags":["vintage"],"colors":{"ink":"#2A2418","c1":"#8A9A5A","c2":"#C9A26A","c3":"#E6E4C8","c4":"#A8574A","tint":"#E8EBDE","accent":"#A8574A","shadow":"#3E4528","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ocean-coin","name":"Ocean","tags":["ocean"],"colors":{"ink":"#062433","c1":"#1E9AC0","c2":"#F2C14E","c3":"#A6DAF0","c4":"#48C8D9","tint":"#D2EBF2","accent":"#F2C14E","shadow":"#0E4556","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"forest-fund","name":"Forest fund","tags":["nature","earthy"],"colors":{"ink":"#13240F","c1":"#4E8A3A","c2":"#E8B04A","c3":"#C4E0B8","c4":"#8AC06A","tint":"#DCE8D8","accent":"#C98A3A","shadow":"#233E1A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-bling","name":"Y2K bling","tags":["y2k"],"colors":{"ink":"#2A1A4A","c1":"#B88AFF","c2":"#7BE8FF","c3":"#E8DCFF","c4":"#FF8ADB","tint":"#F1E8FF","accent":"#FF8ADB","shadow":"#533E73","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine","name":"Dopamine brights","tags":["vivid"],"colors":{"ink":"#1A1033","c1":"#7A3DF0","c2":"#FFD23F","c3":"#D8C8FF","c4":"#FF4F9A","tint":"#E4D8FC","accent":"#FFD23F","shadow":"#371B6C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-cash","name":"Neon cash","tags":["neon","on-dark"],"colors":{"ink":"#3DFF8A","c1":"#08240F","c2":"#FFE14D","c3":"#3DF5FF","c4":"#FF3DCB","tint":"#3C5A44","accent":"#FFE14D","shadow":"#030E06","shine":"#B8FFD4","edge":"#1A1A26"}},
+    {"id":"mono-green","name":"Mono green","tags":["mono"],"colors":{"ink":"#0E2414","c1":"#4FAA5E","c2":"#A8DCB0","c3":"#CDECD2","c4":"#2E7A3E","tint":"#DCEEDF","accent":"#2E7A3E","shadow":"#244C2A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#141416","c1":"#8A8A92","c2":"#C8C8CE","c3":"#E2E2E6","c4":"#5A5A62","tint":"#E8E8E9","accent":"#5A5A62","shadow":"#3E3E42","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#008A3A","c2":"#FFD60A","c3":"#FFFFFF","c4":"#0057B8","tint":"#CCE8D8","accent":"#FFD60A","shadow":"#003E1A","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

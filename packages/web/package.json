@@ -1,7 +1,7 @@
 {
   "name": "@withicons/web",
-  "version": "0.1.0",
-  "description": "<with-icon> custom element: 300 icons x 7 styles, zero dependencies, lazy per-style data.",
+  "version": "0.2.0",
+  "description": "<with-icon> custom element: 500 icons x 12 styles, zero dependencies, lazy per-style data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -24,7 +24,24 @@
     "with-icons",
     "web-components",
     "custom-elements",
-    "cdn"
+    "cdn",
+    "css-icons",
+    "icon-classes",
+    "font-awesome-alternative",
+    "line",
+    "solid",
+    "duo",
+    "gloss",
+    "engrave",
+    "blueprint",
+    "sketch",
+    "glass",
+    "kawaii",
+    "sticker",
+    "pixel",
+    "retro",
+    "multicolor-icons",
+    "animated-icons"
   ],
   "type": "module",
   "sideEffects": [

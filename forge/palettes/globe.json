@@ -1,0 +1,429 @@
+{
+  "name": "globe",
+  "palettes": [
+    {
+      "id": "blue-marble",
+      "name": "Blue marble",
+      "tags": [
+        "true-to-life",
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062F4A",
+        "c1": "#2E86DE",
+        "c2": "#3DBE6E",
+        "c3": "#F2E6C2",
+        "c4": "#E8F4FD",
+        "tint": "#D5E7F8",
+        "accent": "#3DBE6E",
+        "shadow": "#17436F",
+        "shine": "#C4DDF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "earth-day",
+      "name": "Earth day",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0E3B22",
+        "c1": "#3DBE6E",
+        "c2": "#2E86DE",
+        "c3": "#F2E6C2",
+        "c4": "#A8E6BF",
+        "tint": "#D8F2E2",
+        "accent": "#2E86DE",
+        "shadow": "#1F5F37",
+        "shine": "#C9EDD6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "antique-globe",
+      "name": "Antique globe",
+      "tags": [
+        "vintage",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E2216",
+        "c1": "#D9C79A",
+        "c2": "#6E8B74",
+        "c3": "#A0674B",
+        "c4": "#4A6670",
+        "tint": "#F7F4EB",
+        "accent": "#A0674B",
+        "shadow": "#6D644D",
+        "shine": "#F4EFE3",
+        "edge": "#FBF6EA"
+      }
+    },
+    {
+      "id": "night-lights",
+      "name": "Night lights",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6F1FF",
+        "c1": "#12264A",
+        "c2": "#FFD166",
+        "c3": "#2E6FB5",
+        "c4": "#070F22",
+        "tint": "#D0D4DB",
+        "accent": "#FFD166",
+        "shadow": "#070E1C",
+        "shine": "#BDC2CC",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "internet-blue",
+      "name": "Internet blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B2A5B",
+        "c1": "#2563EB",
+        "c2": "#22D3EE",
+        "c3": "#F59E0B",
+        "c4": "#DBEAFE",
+        "tint": "#D3E0FB",
+        "accent": "#22D3EE",
+        "shadow": "#133276",
+        "shine": "#C2D3F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "language-picker",
+      "name": "Language picker",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#2A1259",
+        "c1": "#7C4DFF",
+        "c2": "#FFB020",
+        "c3": "#C7B6FF",
+        "c4": "#E5DBFF",
+        "tint": "#E5DBFF",
+        "accent": "#FFB020",
+        "shadow": "#3E2780",
+        "shine": "#DACDFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "open-web",
+      "name": "Open web",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#073B3A",
+        "c1": "#14A3A0",
+        "c2": "#FFC145",
+        "c3": "#A6E6E3",
+        "c4": "#E6FAF8",
+        "tint": "#D0EDEC",
+        "accent": "#FFC145",
+        "shadow": "#0A5250",
+        "shine": "#BDE5E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cyber-web",
+      "name": "Cyber web",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#2A6BFF",
+        "c2": "#39FF14",
+        "c3": "#FF2BD6",
+        "c4": "#00E5FF",
+        "tint": "#D4E1FF",
+        "accent": "#39FF14",
+        "shadow": "#102961",
+        "shine": "#C3D6FF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-planet",
+      "name": "Pastel planet",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3A5A",
+        "c1": "#A0C4FF",
+        "c2": "#CAFFBF",
+        "c3": "#FFC6FF",
+        "c4": "#FDFFB6",
+        "tint": "#ECF3FF",
+        "accent": "#FFC6FF",
+        "shadow": "#506280",
+        "shine": "#E4EEFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-planet",
+      "name": "Candy planet",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3B0A2A",
+        "c1": "#5CE1E6",
+        "c2": "#FF5DA2",
+        "c3": "#FFE45E",
+        "c4": "#9D7BFF",
+        "tint": "#DEF9FA",
+        "accent": "#FF5DA2",
+        "shadow": "#2E7173",
+        "shine": "#D1F7F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "disco-planet",
+      "name": "Disco planet",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3E1F0E",
+        "c1": "#F5B841",
+        "c2": "#E8663D",
+        "c3": "#C2364B",
+        "c4": "#5A2A4A",
+        "tint": "#FDF1D9",
+        "accent": "#E8663D",
+        "shadow": "#7B5C21",
+        "shine": "#FCEBCA",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "red-planet",
+      "name": "Red planet",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A1206",
+        "c1": "#C1440E",
+        "c2": "#E8915A",
+        "c3": "#6B2A10",
+        "c4": "#F5D0B5",
+        "tint": "#F3DACF",
+        "accent": "#E8915A",
+        "shadow": "#612207",
+        "shine": "#EECBBC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gas-giant",
+      "name": "Gas giant",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A2414",
+        "c1": "#D9A066",
+        "c2": "#A0522D",
+        "c3": "#F3DFBF",
+        "c4": "#8C6A43",
+        "tint": "#F7ECE0",
+        "accent": "#A0522D",
+        "shadow": "#6D5033",
+        "shine": "#F4E4D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ice-planet",
+      "name": "Ice planet",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#0C2B3A",
+        "c1": "#6FC3DF",
+        "c2": "#B4A7D6",
+        "c3": "#2E6E80",
+        "c4": "#E8F8FE",
+        "tint": "#E2F3F9",
+        "accent": "#B4A7D6",
+        "shadow": "#386270",
+        "shine": "#D7EEF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gilded-sphere",
+      "name": "Gilded sphere",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1406",
+        "c1": "#D4A62A",
+        "c2": "#1A1A1A",
+        "c3": "#F3E6C3",
+        "c4": "#7A5C14",
+        "tint": "#F6EDD4",
+        "accent": "#1A1A1A",
+        "shadow": "#6A5315",
+        "shine": "#F3E6C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-ramp",
+      "name": "Ocean ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0A2540",
+        "c1": "#2457C5",
+        "c2": "#8FB3F0",
+        "c3": "#142F6E",
+        "c4": "#E3ECFB",
+        "tint": "#D3DDF3",
+        "accent": "#8FB3F0",
+        "shadow": "#122C63",
+        "shine": "#C2D0EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#18181B",
+        "c1": "#A1A1AA",
+        "c2": "#52525B",
+        "c3": "#E4E4E7",
+        "c4": "#71717A",
+        "tint": "#ECECEE",
+        "accent": "#52525B",
+        "shadow": "#515155",
+        "shine": "#E5E5E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0047FF",
+        "c2": "#00A651",
+        "c3": "#FFE600",
+        "c4": "#FFFFFF",
+        "tint": "#CCDAFF",
+        "accent": "#FFE600",
+        "shadow": "#002480",
+        "shine": "#B8CBFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holo-world",
+      "name": "Holo world",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2D1B4E",
+        "c1": "#7FF0E8",
+        "c2": "#FF9ED8",
+        "c3": "#B69CFF",
+        "c4": "#FFFFFF",
+        "tint": "#E5FCFA",
+        "accent": "#FF5EC4",
+        "shadow": "#407874",
+        "shine": "#DBFBF9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tropical",
+      "name": "Tropical",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#04293A",
+        "c1": "#0FA3B1",
+        "c2": "#F7B267",
+        "c3": "#F25F5C",
+        "c4": "#B5E9E9",
+        "tint": "#CFEDEF",
+        "accent": "#F25F5C",
+        "shadow": "#085259",
+        "shine": "#BCE5E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rainforest",
+      "name": "Rainforest",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1A2A1C",
+        "c1": "#2E6B3F",
+        "c2": "#8FB9A8",
+        "c3": "#E9A23B",
+        "c4": "#F5E6B8",
+        "tint": "#D5E1D9",
+        "accent": "#E9A23B",
+        "shadow": "#173620",
+        "shine": "#C4D6C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-pop",
+      "name": "Dopamine pop",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1A40",
+        "c1": "#5B5BFF",
+        "c2": "#3DDC97",
+        "c3": "#FF4D8D",
+        "c4": "#FFD23F",
+        "tint": "#DEDEFF",
+        "accent": "#3DDC97",
+        "shadow": "#2E2E80",
+        "shine": "#D1D1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

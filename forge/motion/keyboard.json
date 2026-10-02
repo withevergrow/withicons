@@ -1,0 +1,38 @@
+{
+  "name": "keyboard",
+  "intent": "jitters softly like keys being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "type",
+    "amount": 1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.4
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "type",
+      "effect": "fade"
+    },
+    {
+      "to": "terminal",
+      "effect": "slide-up"
+    },
+    {
+      "to": "keyboard@solid",
+      "effect": "scale"
+    }
+  ]
+}

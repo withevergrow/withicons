@@ -1,0 +1,8 @@
+{
+  "name": "list-filter",
+  "intent": "sifts downward, narrowing a long list to what you need",
+  "loop": { "preset": "nudge", "dir": 90, "amount": 0.5, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.8, "duration": 0.6 },
+  "alt": [ { "preset": "jelly" }, { "preset": "draw" } ],
+  "swap": [ { "to": "filter", "effect": "morph" }, { "to": "list", "effect": "fade" } ]
+}

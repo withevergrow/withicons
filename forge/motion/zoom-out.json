@@ -1,0 +1,51 @@
+{
+  "name": "zoom-out",
+  "intent": "pulls back, as if zooming out to see more",
+  "loop": {
+    "preset": "zoom",
+    "origin": [
+      10.5,
+      10.5
+    ],
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "zoom",
+    "origin": [
+      10.5,
+      10.5
+    ],
+    "amount": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        10.5,
+        10.5
+      ]
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        10.5,
+        10.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "zoom-in",
+      "effect": "rotate"
+    },
+    {
+      "to": "search",
+      "effect": "fade"
+    },
+    {
+      "to": "minimize",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,446 @@
+{
+  "name": "heart-pulse",
+  "palettes": [
+    {
+      "id": "cardio-red",
+      "name": "Cardio red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3B0A12",
+        "c1": "#E5243F",
+        "c2": "#FF8FA3",
+        "c3": "#B0122D",
+        "c4": "#FFD6DC",
+        "tint": "#FAD3D9",
+        "accent": "#FFC2CB",
+        "shadow": "#6E1220",
+        "shine": "#F7BDC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ecg-monitor",
+      "name": "ECG monitor",
+      "tags": [
+        "true-to-life",
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#39FF88",
+        "c1": "#04140B",
+        "c2": "#9BFFC4",
+        "c3": "#1EB863",
+        "c4": "#E0FFE9",
+        "tint": "#19723D",
+        "accent": "#9BFFC4",
+        "shadow": "#020804",
+        "shine": "#A6FFC9",
+        "edge": "#0C1415"
+      }
+    },
+    {
+      "id": "clinic-teal",
+      "name": "Clinic teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#042F2E",
+        "c1": "#14B8A6",
+        "c2": "#99F6E4",
+        "c3": "#0F766E",
+        "c4": "#F0FDFA",
+        "tint": "#D0F1ED",
+        "accent": "#F43F5E",
+        "shadow": "#095852",
+        "shine": "#B9EAE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "care-blue",
+      "name": "Care blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#3B82F6",
+        "c2": "#BFDBFE",
+        "c3": "#1E40AF",
+        "c4": "#EFF6FF",
+        "tint": "#D8E6FD",
+        "accent": "#F43F5E",
+        "shadow": "#193975",
+        "shine": "#C4DAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fitness-ring",
+      "name": "Fitness ring",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0610",
+        "c1": "#FF3B5C",
+        "c2": "#22C55E",
+        "c3": "#FFB4C1",
+        "c4": "#FFE3E8",
+        "tint": "#FFD8DE",
+        "accent": "#22C55E",
+        "shadow": "#6A1627",
+        "shine": "#FFC4CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wellness-sage",
+      "name": "Wellness sage",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1F3324",
+        "c1": "#8DB596",
+        "c2": "#F3E9D2",
+        "c3": "#4F7A5A",
+        "c4": "#D8E8D0",
+        "tint": "#E8F0EA",
+        "accent": "#E8A0A0",
+        "shadow": "#405A46",
+        "shine": "#DDE9E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "first-aid",
+      "name": "First aid",
+      "tags": [
+        "true-to-life",
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#1A0004",
+        "c1": "#D50032",
+        "c2": "#FFFFFF",
+        "c3": "#8C0020",
+        "c4": "#FFD1DA",
+        "tint": "#F7CCD6",
+        "accent": "#FFFFFF",
+        "shadow": "#520012",
+        "shine": "#F2B3C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blush-pastel",
+      "name": "Blush pulse",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A2633",
+        "c1": "#F9B8C8",
+        "c2": "#C9E4F6",
+        "c3": "#FFE3A3",
+        "c4": "#D9C8F2",
+        "tint": "#FEF1F4",
+        "accent": "#FF8FA3",
+        "shadow": "#7F5260",
+        "shine": "#FDEAEF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-heart",
+      "name": "Candy heart",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FF4FA3",
+        "c2": "#FFE45C",
+        "c3": "#57D9C9",
+        "c4": "#9B6BFF",
+        "tint": "#FFDCED",
+        "accent": "#FFE45C",
+        "shadow": "#802151",
+        "shine": "#FFCAE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-pulse",
+      "name": "Y2K pulse",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A1650",
+        "c1": "#FF9EE8",
+        "c2": "#A8C8FF",
+        "c3": "#C9FF6B",
+        "c4": "#F5E8FF",
+        "tint": "#FFECFA",
+        "accent": "#A8C8FF",
+        "shadow": "#6A3F7E",
+        "shine": "#FFE2F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-beat",
+      "name": "Neon beat",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF3DA8",
+        "c1": "#1E0614",
+        "c2": "#3DF2FF",
+        "c3": "#FFE14D",
+        "c4": "#8A5CFF",
+        "tint": "#781C4F",
+        "accent": "#3DF2FF",
+        "shadow": "#0C0208",
+        "shine": "#FFA8D8",
+        "edge": "#190D1A"
+      }
+    },
+    {
+      "id": "terracotta",
+      "name": "Terracotta heart",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#C2553E",
+        "c2": "#E9B872",
+        "c3": "#7A3B22",
+        "c4": "#F3E3CC",
+        "tint": "#F3DDD8",
+        "accent": "#E9B872",
+        "shadow": "#5A281A",
+        "shine": "#EDCCC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "heart-of-70s",
+      "name": "Heart of the 70s",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E4572E",
+        "c2": "#F2A541",
+        "c3": "#A63A50",
+        "c4": "#3B8EA5",
+        "tint": "#FADDD5",
+        "accent": "#F2A541",
+        "shadow": "#632813",
+        "shine": "#F7CDC0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-valentine",
+      "name": "Vintage valentine",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#3A1A1E",
+        "c1": "#C94C5A",
+        "c2": "#EDD9C0",
+        "c3": "#7E2E3A",
+        "c4": "#9DB8A6",
+        "tint": "#F4DBDE",
+        "accent": "#EDD9C0",
+        "shadow": "#652930",
+        "shine": "#EFC9CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose-ramp",
+      "name": "Rose ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3A0A1E",
+        "c1": "#E11D74",
+        "c2": "#F9A8D4",
+        "c3": "#9D174D",
+        "c4": "#FCE7F3",
+        "tint": "#F9D2E3",
+        "accent": "#F9A8D4",
+        "shadow": "#6C1038",
+        "shine": "#F6BBD5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Graphite pulse",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#8F8F8F",
+        "c2": "#D6D6D6",
+        "c3": "#4A4A4A",
+        "c4": "#F2F2F2",
+        "tint": "#E9E9E9",
+        "accent": "#D6D6D6",
+        "shadow": "#373737",
+        "shine": "#DDDDDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coral-reef",
+      "name": "Coral reef",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B2B33",
+        "c1": "#FF6F61",
+        "c2": "#3EC1C9",
+        "c3": "#FFC2B4",
+        "c4": "#0E6E7A",
+        "tint": "#FFE2DF",
+        "accent": "#3EC1C9",
+        "shadow": "#543F41",
+        "shine": "#FFD4D0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-beat",
+      "name": "Berry beat",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0A28",
+        "c1": "#A21C6B",
+        "c2": "#F5A3C7",
+        "c3": "#6B1450",
+        "c4": "#FCE1EF",
+        "tint": "#ECD2E1",
+        "accent": "#F5A3C7",
+        "shadow": "#4E0F3C",
+        "shine": "#E3BBD3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-pulse",
+      "name": "Sunset pulse",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0618",
+        "c1": "#F43F5E",
+        "c2": "#FDBA74",
+        "c3": "#9D174D",
+        "c4": "#FDE68A",
+        "tint": "#FDD9DF",
+        "accent": "#FDBA74",
+        "shadow": "#72172D",
+        "shine": "#FCC5CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ruby-gold",
+      "name": "Ruby & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A0509",
+        "c1": "#9B111E",
+        "c2": "#D4AF37",
+        "c3": "#5C0A13",
+        "c4": "#F5E7A1",
+        "tint": "#EBCFD2",
+        "accent": "#D4AF37",
+        "shadow": "#4C090F",
+        "shine": "#E1B8BC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "valentine",
+      "name": "Valentine",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#3B0614",
+        "c1": "#E11D48",
+        "c2": "#FBCFE8",
+        "c3": "#FFFFFF",
+        "c4": "#9F1239",
+        "tint": "#F9D2DA",
+        "accent": "#FBCFE8",
+        "shadow": "#6D0D24",
+        "shine": "#F6BBC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#E60023",
+        "c2": "#FFFFFF",
+        "c3": "#FFD400",
+        "c4": "#0050EF",
+        "tint": "#FACCD3",
+        "accent": "#FFD400",
+        "shadow": "#45000B",
+        "shine": "#F8B3BD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine pulse",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A1E",
+        "c1": "#FF2E93",
+        "c2": "#00E0FF",
+        "c3": "#FFE600",
+        "c4": "#7CFF4F",
+        "tint": "#FFD5E9",
+        "accent": "#00E0FF",
+        "shadow": "#6B1541",
+        "shine": "#FFC0DF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -13,9 +13,14 @@ export function loadData() {
   const dir = dataDir()
   const read = f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))
   const svgs = {}
+  let palettes = null
   return {
     meta: read('meta.json'),
+    // optional: animation specs from @withicons/motion (absent in older builds)
+    motion: fs.existsSync(path.join(dir, 'motion.json')) ? read('motion.json') : null,
     index: read('search-index.json'),
     svg: style => svgs[style] || (svgs[style] = read(`svg-${style}.json`)),
+    // optional: per-icon colour palettes from @withicons/core (absent in older builds); read on first use
+    palettes: () => palettes || (palettes = fs.existsSync(path.join(dir, 'palettes.json')) ? read('palettes.json') : { roles: [], icons: {} }),
   }
 }

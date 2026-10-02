@@ -1,0 +1,28 @@
+{
+  "name": "volume-off",
+  "intent": "sits quietly muted, shakes its head when touched",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "volume",
+      "effect": "fade"
+    }
+  ]
+}

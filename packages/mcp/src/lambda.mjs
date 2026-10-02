@@ -1,12 +1,15 @@
 // AWS Lambda handler (Function URL, payload format 2.0) — stateless MCP over Streamable HTTP + a small JSON API.
 //   POST /mcp                       MCP JSON-RPC (stateless, JSON responses, no sessions, no SSE)
 //   GET  /api/search?q=&limit=&style=&category=&format=
-//   GET  /api/icon/<name>?style=&format=&size=&color=     (JSON; add &raw=1, or use <name>.svg, for the bare SVG/code)
+//   GET  /api/icon/<name>?style=&format=&size=&color=&palette=&c1=&ink=…   (JSON; add &raw=1, or use <name>.svg, for the bare SVG/code)
+//   GET  /api/palettes/<name>?style=&tag=&limit=                              (the icon's colour palettes)
+//   GET  /api/motion[/<name>]?trigger=&preset=&to=&effect=&style=&format=&duration=   (animation code; &raw=1 for the bare code)
 //   GET  /api/resolve/<name>   GET /api/styles   GET /api/categories[/<category>]   GET /  (health/info)
 // Status codes used: 200 204 400 404 405 500 — never 403 (CloudFront maps 403 to the site's 404 page).
+import { webcrypto } from 'node:crypto'
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { createServer, VERSION } from './server.mjs'
-import { IconError, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, data } from './lib.mjs'
+import { IconError, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, data, animateIcon, listMotion, listPalettes, PALETTE_ROLES } from './lib.mjs'
 
 const CORS = {
   'access-control-allow-origin': '*',
@@ -22,6 +25,9 @@ const reply = (statusCode, body, headers = {}) => ({
   isBase64Encoded: false,
 })
 const cached = (seconds) => ({ 'cache-control': `public, max-age=${seconds}, s-maxage=${seconds}` })
+
+// the MCP transport uses the Web Crypto global, which Node 18 only exposes as require('node:crypto').webcrypto
+if (!globalThis.crypto) globalThis.crypto = webcrypto
 
 data() // warm the data + search engine during cold start (init phase is not billed per request the same way)
 
@@ -67,7 +73,7 @@ export async function handler(event = {}) {
     if (method !== 'GET' && method !== 'HEAD') return reply(405, { error: 'Method not allowed' }, { allow: 'GET, POST, OPTIONS' })
 
     if (p === '/' || p === '/health' || p === '/api') {
-      return reply(200, { ok: true, service: 'withicons', server: VERSION, ...info(), endpoints: { mcp: 'POST /mcp', search: 'GET /api/search?q=', icon: 'GET /api/icon/<name>?style=&format=', resolve: 'GET /api/resolve/<name>', styles: 'GET /api/styles', categories: 'GET /api/categories[/<category>]' } }, cached(300))
+      return reply(200, { ok: true, service: 'withicons', server: VERSION, ...info(), endpoints: { mcp: 'POST /mcp', search: 'GET /api/search?q=', icon: 'GET /api/icon/<name>?style=&format=', motion: 'GET /api/motion[/<name>]?trigger=loop|hover|once|inview|swap&format=', palettes: 'GET /api/palettes/<name>?style=&tag=', resolve: 'GET /api/resolve/<name>', styles: 'GET /api/styles', categories: 'GET /api/categories[/<category>]' } }, cached(300))
     }
     if (p === '/api/search') {
       const q = qs.get('q') || qs.get('query') || ''
@@ -79,13 +85,28 @@ export async function handler(event = {}) {
       let name = decodeURIComponent(m[1]), raw = qs.get('raw') === '1' || qs.get('raw') === 'true'
       let format = qs.get('format') || 'svg'
       if (name.endsWith('.svg')) { name = name.slice(0, -4); raw = true; format = 'svg' }
-      const r = getIcon({ name, style: qs.get('style') || 'line', format, size: qs.get('size') ? +qs.get('size') : undefined, color: qs.get('color') || undefined })
+      // a bare .svg is served as an image: bake the CSS-variable colours in (nothing can theme an <img>)
+      const flat = qs.get('flat') ? qs.get('flat') === '1' || qs.get('flat') === 'true' : raw && format === 'svg'
+      // colours: ?palette=<id> and/or one param per role (?c1=e11d48&ink=111111; the # is optional)
+      const colors = {}
+      for (const r of PALETTE_ROLES) if (qs.get(r)) colors[r] = qs.get(r)
+      const r = getIcon({ name, style: qs.get('style') || 'line', format, size: qs.get('size') ? +qs.get('size') : undefined, color: qs.get('color') || undefined, flat, palette: qs.get('palette') || undefined, colors })
       if (raw) {
         const type = r.format === 'svg' ? 'image/svg+xml' : 'text/plain; charset=utf-8'
         return { statusCode: 200, headers: { ...CORS, ...cached(86400), 'content-type': type }, body: r.code, isBase64Encoded: false }
       }
       return reply(200, r, cached(86400))
     }
+    if (p === '/api/motion') return reply(200, listMotion(), cached(3600))
+    if ((m = p.match(/^\/api\/motion\/([^/]+)$/))) {
+      const r = animateIcon({
+        name: decodeURIComponent(m[1]), trigger: qs.get('trigger') || undefined, preset: qs.get('preset') || undefined, to: qs.get('to') || undefined,
+        effect: qs.get('effect') || undefined, style: qs.get('style') || 'line', format: qs.get('format') || 'html', duration: qs.get('duration') ? +qs.get('duration') : undefined,
+      })
+      if (qs.get('raw') === '1' || qs.get('raw') === 'true') return { statusCode: 200, headers: { ...CORS, ...cached(86400), 'content-type': 'text/plain; charset=utf-8' }, body: r.code, isBase64Encoded: false }
+      return reply(200, r, cached(86400))
+    }
+    if ((m = p.match(/^\/api\/palettes\/([^/]+)$/))) return reply(200, listPalettes({ name: decodeURIComponent(m[1]), style: qs.get('style') || undefined, tag: qs.get('tag') || undefined, limit: qs.get('limit') ? +qs.get('limit') : undefined }), cached(86400))
     if ((m = p.match(/^\/api\/resolve\/([^/]+)$/))) return reply(200, resolveIcon(decodeURIComponent(m[1])), cached(3600))
     if (p === '/api/styles') return reply(200, { styles: listStyles() }, cached(3600))
     if (p === '/api/categories') return reply(200, listCategories(), cached(3600))
@@ -93,6 +114,7 @@ export async function handler(event = {}) {
     return reply(404, { error: `Not found: ${p}` })
   } catch (e) {
     if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return reply(e.code === 'unknown_icon' ? 404 : 400, { error: e.message, ...rest }) }
+    if (e instanceof URIError) return reply(400, { error: 'Malformed URL encoding' })
     console.error(e)
     return reply(500, { error: 'Internal error' })
   }

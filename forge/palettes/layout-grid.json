@@ -1,0 +1,27 @@
+{
+  "name": "layout-grid",
+  "palettes": [
+    {"id":"app-tiles","name":"App tiles","tags":["true-to-life","vivid"],"colors":{"ink":"#0F2150","c1":"#5B8DEF","c2":"#F2C94C","c3":"#6FCF97","c4":"#EB5757","tint":"#DEE8FC","accent":"#F2C94C","shadow":"#324E83","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mosaic-tile","name":"Mosaic tile","tags":["true-to-life"],"colors":{"ink":"#0F2E38","c1":"#6FB7C9","c2":"#F5F2EB","c3":"#2F6F86","c4":"#E8B04A","tint":"#E2F1F4","accent":"#E8B04A","shadow":"#3D656F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bento-box","name":"Bento box","tags":["true-to-life"],"colors":{"ink":"#1C1410","c1":"#E85D4A","c2":"#F5D76E","c3":"#7DBE5A","c4":"#2D2A26","tint":"#FADFDB","accent":"#F5D76E","shadow":"#803329","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"puzzle-cube","name":"Puzzle cube","tags":["true-to-life","vivid"],"colors":{"ink":"#06203D","c1":"#1E88E5","c2":"#E53935","c3":"#43A047","c4":"#FDD835","tint":"#D2E7FA","accent":"#FDD835","shadow":"#114B7E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"waffle","name":"Waffle","tags":["true-to-life","earthy"],"colors":{"ink":"#3A2008","c1":"#E3A857","c2":"#8C5523","c3":"#F8E3B0","c4":"#D94E5B","tint":"#F9EEDD","accent":"#D94E5B","shadow":"#7D5C30","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"garden-beds","name":"Garden beds","tags":["nature"],"colors":{"ink":"#1E2E0E","c1":"#7FB04E","c2":"#8B5E3C","c3":"#F2D16B","c4":"#C84E4E","tint":"#E5EFDC","accent":"#C84E4E","shadow":"#46612B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"terrazzo","name":"Terrazzo","tags":["earthy"],"colors":{"ink":"#2A2620","c1":"#F1E7DC","c2":"#E28C6B","c3":"#5F8C7E","c4":"#2F3B4C","tint":"#FFFBF6","accent":"#E28C6B","shadow":"#857F79","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"sugared-pastels","name":"Sugared pastels","tags":["pastel"],"colors":{"ink":"#44303A","c1":"#FFD6E0","c2":"#C1E7E3","c3":"#E4D9FF","c4":"#FFF2B2","tint":"#FFF5F8","accent":"#FF9DB8","shadow":"#8C767B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"coral-ramp","name":"Coral ramp","tags":["mono"],"colors":{"ink":"#3A0E07","c1":"#FF6F59","c2":"#C2412D","c3":"#FFB3A6","c4":"#FFE3DD","tint":"#FFE2DE","accent":"#C2412D","shadow":"#8C3D31","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"concrete","name":"Concrete","tags":["grayscale"],"colors":{"ink":"#141414","c1":"#B0B0B0","c2":"#6E6E6E","c3":"#DADADA","c4":"#404040","tint":"#EFEFEF","accent":"#6E6E6E","shadow":"#616161","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"kitchen-1972","name":"Kitchen 1972","tags":["retro"],"colors":{"ink":"#2C1608","c1":"#E07A2E","c2":"#F2C14E","c3":"#7A8F3A","c4":"#8C4A2F","tint":"#F9E4D5","accent":"#F2C14E","shadow":"#7B4319","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"frutiger-aero","name":"Frutiger aero","tags":["y2k"],"colors":{"ink":"#0B3A5B","c1":"#6CCFF6","c2":"#A8E063","c3":"#E9F7FF","c4":"#2A93D5","tint":"#E2F5FD","accent":"#A8E063","shadow":"#3B7287","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"colour-safe-tiles","name":"Colour-safe tiles","tags":["accessible"],"colors":{"ink":"#000000","c1":"#0072B2","c2":"#F0E442","c3":"#D55E00","c4":"#009E73","tint":"#CCE3F0","accent":"#F0E442","shadow":"#003F62","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"workspace-slate","name":"Workspace slate","tags":["corporate"],"colors":{"ink":"#0A1622","c1":"#334E68","c2":"#829AB1","c3":"#F0B429","c4":"#D9E2EC","tint":"#D6DCE1","accent":"#F0B429","shadow":"#1C2B39","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"beach-cabana","name":"Beach cabana","tags":["ocean"],"colors":{"ink":"#061C26","c1":"#219EBC","c2":"#8ECAE6","c3":"#023047","c4":"#FFB703","tint":"#D3ECF2","accent":"#FFB703","shadow":"#125767","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"plum-jam","name":"Plum jam","tags":["vivid"],"colors":{"ink":"#16051B","c1":"#7B2D8E","c2":"#E85D9E","c3":"#F7B2D9","c4":"#3A1046","tint":"#E5D5E8","accent":"#E85D9E","shadow":"#44194E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine-tiles","name":"Dopamine tiles","tags":["vivid"],"colors":{"ink":"#2A0612","c1":"#FF3E6C","c2":"#00C2FF","c3":"#FFD600","c4":"#7CFF4F","tint":"#FFD8E2","accent":"#FFD600","shadow":"#8C223B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"autumn-quilt","name":"Autumn quilt","tags":["seasonal","earthy"],"colors":{"ink":"#2E1404","c1":"#D9822B","c2":"#A23E2E","c3":"#F2C57C","c4":"#5D6B2F","tint":"#F7E6D5","accent":"#A23E2E","shadow":"#774818","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"marble-and-ink","name":"Marble & ink","tags":["luxe"],"colors":{"ink":"#141414","c1":"#EDE8E1","c2":"#1C1C1C","c3":"#C6A15B","c4":"#8B8378","tint":"#FAF8F5","accent":"#C6A15B","shadow":"#82807C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"spring-garden","name":"Spring garden","tags":["seasonal","nature"],"colors":{"ink":"#22401A","c1":"#A8D672","c2":"#FFC2D1","c3":"#FFE48A","c4":"#9AD1F5","tint":"#EEF7E3","accent":"#FFC2D1","shadow":"#5C763F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-launcher","name":"Dark launcher","tags":["dark"],"colors":{"ink":"#06080B","c1":"#363C48","c2":"#A78BFA","c3":"#34D399","c4":"#FBBF24","tint":"#D7D8DA","accent":"#A78BFA","shadow":"#1E2128","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-grid","name":"Neon grid","tags":["neon","on-dark"],"colors":{"ink":"#FF3CAC","c1":"#1A1033","c2":"#2BD2FF","c3":"#FAFF00","c4":"#2BFF88","tint":"#5F1D57","accent":"#2BD2FF","shadow":"#0A0614","shine":"#FFBBE2","edge":"#352D4B"}}
+  ]
+}

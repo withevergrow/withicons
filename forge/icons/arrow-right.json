@@ -4,7 +4,6 @@
   "description": "A straight rightward arrow for forward navigation and calls to action.",
   "aliases": [
     "right",
-    "forward",
     "continue",
     "next",
     "east",
@@ -59,6 +58,7 @@
     "later",
     "then",
     "forwards",
-    "nxt"
+    "nxt",
+    "forward"
   ]
 }

@@ -1,0 +1,430 @@
+{
+  "name": "signpost",
+  "palettes": [
+    {
+      "id": "trail-wood",
+      "name": "Trail wood",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1A0E",
+        "c1": "#A9713F",
+        "c2": "#D9B07A",
+        "c3": "#4E7A3E",
+        "c4": "#F2E4C8",
+        "tint": "#EEE3D9",
+        "accent": "#4E7A3E",
+        "shadow": "#48301B",
+        "shine": "#DEC9B6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "highway-green",
+      "name": "Highway green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#08200F",
+        "c1": "#1F7A3E",
+        "c2": "#2F5FA8",
+        "c3": "#F2F4F2",
+        "c4": "#9AA3A8",
+        "tint": "#D2E4D8",
+        "accent": "#F2C230",
+        "shadow": "#0E341A",
+        "shine": "#AACCB6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "motorway-blue",
+      "name": "Motorway blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A1838",
+        "c1": "#1F4FA8",
+        "c2": "#1F7A3E",
+        "c3": "#F3F5F8",
+        "c4": "#F2B90F",
+        "tint": "#D2DCEE",
+        "accent": "#F2B90F",
+        "shadow": "#0E234C",
+        "shine": "#AABCDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tourist-brown",
+      "name": "Tourist brown",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#241509",
+        "c1": "#7A4A26",
+        "c2": "#C9A15A",
+        "c3": "#F2E6D2",
+        "c4": "#3E6B48",
+        "tint": "#E4DBD4",
+        "accent": "#C9A15A",
+        "shadow": "#362010",
+        "shine": "#CCBAAD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "detour-orange",
+      "name": "Detour orange",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A0E05",
+        "c1": "#F57C1F",
+        "c2": "#3A3A40",
+        "c3": "#F2F2F2",
+        "c4": "#FFC93C",
+        "tint": "#FDE5D2",
+        "accent": "#FFC93C",
+        "shadow": "#5E300D",
+        "shine": "#FBCDAA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ski-trail",
+      "name": "Ski trail",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#0E1B2C",
+        "c1": "#3A78C2",
+        "c2": "#D93A3A",
+        "c3": "#F4F8FB",
+        "c4": "#4A4A4A",
+        "tint": "#D8E4F3",
+        "accent": "#D93A3A",
+        "shadow": "#193251",
+        "shine": "#B4CCE8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "route-66",
+      "name": "Route 66",
+      "tags": [
+        "retro",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E1A16",
+        "c1": "#E8E2D0",
+        "c2": "#B22E2E",
+        "c3": "#2B4F7A",
+        "c4": "#D9A441",
+        "tint": "#FAF9F6",
+        "accent": "#B22E2E",
+        "shadow": "#5A574F",
+        "shine": "#F6F4ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "crossroads-pastel",
+      "name": "Crossroads pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3C3550",
+        "c1": "#F5B5C7",
+        "c2": "#A8D8EA",
+        "c3": "#FCE38A",
+        "c4": "#C3B1E1",
+        "tint": "#FDF0F4",
+        "accent": "#A8D8EA",
+        "shadow": "#68505E",
+        "shine": "#FBE3EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-lane",
+      "name": "Candy lane",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A3B",
+        "c1": "#FF7EB6",
+        "c2": "#7AE7C7",
+        "c3": "#FFE36E",
+        "c4": "#B69CFF",
+        "tint": "#FFE5F0",
+        "accent": "#7AE7C7",
+        "shadow": "#703451",
+        "shine": "#FFCEE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-strip",
+      "name": "Neon strip",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFF4FD",
+        "c1": "#FF2E97",
+        "c2": "#21E6FF",
+        "c3": "#F9F871",
+        "c4": "#9D4DFF",
+        "tint": "#FFABD5",
+        "accent": "#21E6FF",
+        "shadow": "#80174C",
+        "shine": "#FFB0D7",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "forest-path",
+      "name": "Forest path",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#12230F",
+        "c1": "#3F7A3A",
+        "c2": "#A67C52",
+        "c3": "#CFE3B5",
+        "c4": "#E8B44A",
+        "tint": "#D9E4D8",
+        "accent": "#E8B44A",
+        "shadow": "#1C3519",
+        "shine": "#B6CCB4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "desert-route",
+      "name": "Desert route",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A0E",
+        "c1": "#D98C4A",
+        "c2": "#F2D4A2",
+        "c3": "#8A5A3B",
+        "c4": "#4F8A8B",
+        "tint": "#F7E8DB",
+        "accent": "#4F8A8B",
+        "shadow": "#5A391E",
+        "shine": "#F1D3BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-sunset",
+      "name": "70s sunset",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2E1307",
+        "c1": "#F08A24",
+        "c2": "#F6C344",
+        "c3": "#D9482B",
+        "c4": "#6E2E59",
+        "tint": "#FCE8D3",
+        "accent": "#F6C344",
+        "shadow": "#62360F",
+        "shine": "#F9D3AC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seaside-promenade",
+      "name": "Seaside promenade",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0C2638",
+        "c1": "#2D8CC4",
+        "c2": "#F6EEDB",
+        "c3": "#F26B5B",
+        "c4": "#8ED1D9",
+        "tint": "#D5E8F3",
+        "accent": "#F26B5B",
+        "shadow": "#143C55",
+        "shine": "#AFD3E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "old-town",
+      "name": "Old town",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2B241E",
+        "c1": "#8C7A5B",
+        "c2": "#C9B79C",
+        "c3": "#6C3A2E",
+        "c4": "#EFE6D5",
+        "tint": "#E8E4DE",
+        "accent": "#6C3A2E",
+        "shadow": "#3E3629",
+        "shine": "#D3CCC1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "autumn-walk",
+      "name": "Autumn walk",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2B140B",
+        "c1": "#C25A2A",
+        "c2": "#E9B04A",
+        "c3": "#7A2E1E",
+        "c4": "#6E7F3A",
+        "tint": "#F3DED4",
+        "accent": "#E9B04A",
+        "shadow": "#512612",
+        "shine": "#E8C0AE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-teal",
+      "name": "Mono teal",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#062A2C",
+        "c1": "#1C8C8C",
+        "c2": "#7FD1CC",
+        "c3": "#0E5555",
+        "c4": "#D3F0EE",
+        "tint": "#D2E8E8",
+        "accent": "#0E5555",
+        "shadow": "#0C3E3E",
+        "shine": "#A9D3D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#7A7A7A",
+        "c2": "#CFCFCF",
+        "c3": "#3F3F3F",
+        "c4": "#EFEFEF",
+        "tint": "#E4E4E4",
+        "accent": "#3F3F3F",
+        "shadow": "#313131",
+        "shine": "#CCCCCC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wayfinding",
+      "name": "Wayfinding",
+      "tags": [
+        "accessible",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD100",
+        "c2": "#0072CE",
+        "c3": "#FFFFFF",
+        "c4": "#E4002B",
+        "tint": "#FFF6CC",
+        "accent": "#0072CE",
+        "shadow": "#5A4A00",
+        "shine": "#FFEE9E",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grand-hotel",
+      "name": "Grand hotel",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0A0A0A",
+        "c1": "#2F5E52",
+        "c2": "#D4AF37",
+        "c3": "#F1E7CF",
+        "c4": "#6B4F2A",
+        "tint": "#D5DFDC",
+        "accent": "#D4AF37",
+        "shadow": "#142420",
+        "shine": "#B0C2BD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-signs",
+      "name": "Dopamine signs",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1B1035",
+        "c1": "#7B5CFF",
+        "c2": "#FF5E8A",
+        "c3": "#FFD23F",
+        "c4": "#2EE6A6",
+        "tint": "#E5DEFF",
+        "accent": "#FF5E8A",
+        "shadow": "#34256A",
+        "shine": "#CDC1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-meadow",
+      "name": "Spring meadow",
+      "tags": [
+        "seasonal",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#23331F",
+        "c1": "#9ED58B",
+        "c2": "#F7C6D9",
+        "c3": "#FFF2A8",
+        "c4": "#7FB6E8",
+        "tint": "#ECF7E8",
+        "accent": "#F7C6D9",
+        "shadow": "#425A3A",
+        "shine": "#DAEFD3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

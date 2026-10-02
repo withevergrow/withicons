@@ -1,0 +1,71 @@
+{
+  "name": "message-circle-more",
+  "category": "communication",
+  "description": "A round speech bubble with three dots inside, for typing indicators and ongoing chats.",
+  "aliases": [
+    "chat-dots",
+    "chat-typing",
+    "message-dots",
+    "speech-dots",
+    "chat-more",
+    "conversation-ongoing",
+    "typing-indicator",
+    "chat-ellipsis",
+    "message-typing",
+    "message-more",
+    "bubble-dots",
+    "is-typing"
+  ],
+  "tags": [
+    "chat",
+    "typing",
+    "message",
+    "dots",
+    "speech bubble",
+    "conversation"
+  ],
+  "paths": [
+    {
+      "d": "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 11.5 H8.01 M12.5 11.5 H12.51 M17 11.5 H17.01",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z"
+  ],
+  "cutouts": [
+    "M9.25 11.5 A1.25 1.25 0 1 1 6.75 11.5 A1.25 1.25 0 1 1 9.25 11.5 Z",
+    "M13.75 11.5 A1.25 1.25 0 1 1 11.25 11.5 A1.25 1.25 0 1 1 13.75 11.5 Z",
+    "M18.25 11.5 A1.25 1.25 0 1 1 15.75 11.5 A1.25 1.25 0 1 1 18.25 11.5 Z"
+  ],
+  "synonyms": [
+    "typing",
+    "someone is typing",
+    "is typing",
+    "typing dots",
+    "three dots",
+    "dots",
+    "ellipsis",
+    "waiting for reply",
+    "pending reply",
+    "ongoing chat",
+    "live chat",
+    "chat",
+    "conversation",
+    "speech bubble",
+    "thinking",
+    "more options",
+    "loading message",
+    "messenger",
+    "reply",
+    "talk",
+    "chatting",
+    "chat bubble dots",
+    "texting",
+    "mesage dots"
+  ]
+}

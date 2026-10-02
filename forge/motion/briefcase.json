@@ -1,0 +1,36 @@
+{
+  "name": "briefcase",
+  "intent": "swings from its handle like a bag being carried",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      3.5
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      3.5
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "briefcase@solid",
+      "effect": "scale"
+    }
+  ]
+}

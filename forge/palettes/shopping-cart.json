@@ -1,0 +1,428 @@
+{
+  "name": "shopping-cart",
+  "palettes": [
+    {
+      "id": "chrome-trolley",
+      "name": "Chrome trolley",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1F2933",
+        "c1": "#C3CCD6",
+        "c2": "#E2433B",
+        "c3": "#7B8794",
+        "c4": "#F2F4F6",
+        "tint": "#F3F5F7",
+        "accent": "#E2433B",
+        "shadow": "#5B626A",
+        "shine": "#F4F6F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "red-plastic",
+      "name": "Red plastic",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E0909",
+        "c1": "#E0262F",
+        "c2": "#2B2B2B",
+        "c3": "#F7B5B0",
+        "c4": "#8A1B17",
+        "tint": "#F9D4D5",
+        "accent": "#FFC93C",
+        "shadow": "#6C1317",
+        "shine": "#F9D8DA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grocery-green",
+      "name": "Grocery green",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0F2E1A",
+        "c1": "#3BAA5C",
+        "c2": "#FFC93C",
+        "c3": "#1E6B3A",
+        "c4": "#C9EFC9",
+        "tint": "#D8EEDE",
+        "accent": "#F26B3A",
+        "shadow": "#1D562F",
+        "shine": "#DCF0E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hypermarket-blue",
+      "name": "Hypermarket blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0A1F44",
+        "c1": "#1F66D1",
+        "c2": "#FFD100",
+        "c3": "#9CC2F7",
+        "c4": "#0E3A80",
+        "tint": "#D2E0F6",
+        "accent": "#FFD100",
+        "shadow": "#11356E",
+        "shine": "#D7E3F7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hardware-orange",
+      "name": "Hardware orange",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1505",
+        "c1": "#F7841E",
+        "c2": "#333333",
+        "c3": "#FFD3A6",
+        "c4": "#8C4510",
+        "tint": "#FDE6D2",
+        "accent": "#333333",
+        "shadow": "#763E0E",
+        "shine": "#FEE9D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kids-cart",
+      "name": "Kid's cart",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2A1440",
+        "c1": "#FFD23F",
+        "c2": "#FF5FA2",
+        "c3": "#4CC9F0",
+        "c4": "#7B4DFF",
+        "tint": "#FFF6D9",
+        "accent": "#FF5FA2",
+        "shadow": "#775E2F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "checkout-teal",
+      "name": "Checkout teal",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B2E33",
+        "c1": "#14A3A3",
+        "c2": "#FF7A59",
+        "c3": "#B8ECEB",
+        "c4": "#0B5E63",
+        "tint": "#D0EDED",
+        "accent": "#FF7A59",
+        "shadow": "#0C5355",
+        "shine": "#D5EEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sorbet",
+      "name": "Sorbet",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A3048",
+        "c1": "#FFB5C9",
+        "c2": "#B5E3FF",
+        "c3": "#FFF0A5",
+        "c4": "#C8B5FF",
+        "tint": "#FFF0F4",
+        "accent": "#FF8FB1",
+        "shadow": "#835B6B",
+        "shine": "#FFF2F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cyber-mall",
+      "name": "Cyber mall",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23204A",
+        "c1": "#B8F2FF",
+        "c2": "#F7B8FF",
+        "c3": "#E6FF8A",
+        "c4": "#9A8CFF",
+        "tint": "#DCF9FF",
+        "accent": "#F7B8FF",
+        "shadow": "#586F83",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "midnight-market",
+      "name": "Midnight market",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#0A0A14",
+        "c1": "#21F5FF",
+        "c2": "#FF2E9A",
+        "c3": "#FFE600",
+        "c4": "#8A5CFF",
+        "tint": "#D3FDFF",
+        "accent": "#FF2E9A",
+        "shadow": "#116870",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "farmers-market",
+      "name": "Farmers market",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#33240F",
+        "c1": "#A9784A",
+        "c2": "#6E8B3D",
+        "c3": "#F0D9A8",
+        "c4": "#B5452F",
+        "tint": "#EEE4DB",
+        "accent": "#6E8B3D",
+        "shadow": "#573E23",
+        "shine": "#F0E7DE",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "disco-cart",
+      "name": "Disco cart",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#E8892B",
+        "c2": "#7D2E68",
+        "c3": "#F7C548",
+        "c4": "#C6322B",
+        "tint": "#FAE7D5",
+        "accent": "#7D2E68",
+        "shadow": "#6F3F15",
+        "shine": "#FBEAD9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "diner-mint",
+      "name": "Diner mint",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#23332E",
+        "c1": "#8FCFB8",
+        "c2": "#E8473E",
+        "c3": "#F4ECD6",
+        "c4": "#2F6B5E",
+        "tint": "#E9F5F1",
+        "accent": "#E8473E",
+        "shadow": "#47675C",
+        "shine": "#EBF6F2",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "cobalt-ramp",
+      "name": "Cobalt ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0D1B4C",
+        "c1": "#3559D6",
+        "c2": "#1C2F8A",
+        "c3": "#A7B7F5",
+        "c4": "#E1E7FD",
+        "tint": "#D7DEF7",
+        "accent": "#1C2F8A",
+        "shadow": "#1A2E72",
+        "shine": "#DBE1F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#9E9E9E",
+        "c2": "#3D3D3D",
+        "c3": "#D4D4D4",
+        "c4": "#6E6E6E",
+        "tint": "#ECECEC",
+        "accent": "#3D3D3D",
+        "shadow": "#474747",
+        "shine": "#EEEEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cyber-monday",
+      "name": "Cyber Monday",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#9DF3FF",
+        "c1": "#1B1F3B",
+        "c2": "#00E5FF",
+        "c3": "#FF4FD8",
+        "c4": "#3A4170",
+        "tint": "#D1D2D8",
+        "accent": "#00E5FF",
+        "shadow": "#0C0E1B",
+        "shine": "#D6D7DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-shopping",
+      "name": "Holiday shopping",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1F0A0A",
+        "c1": "#C8102E",
+        "c2": "#1E7B43",
+        "c3": "#F5C542",
+        "c4": "#F7E7C6",
+        "tint": "#F4CFD5",
+        "accent": "#1E7B43",
+        "shadow": "#5D0A17",
+        "shine": "#F5D4D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-produce",
+      "name": "Spring produce",
+      "tags": [
+        "seasonal",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E3314",
+        "c1": "#9BD46A",
+        "c2": "#FF8FA3",
+        "c3": "#FFE07A",
+        "c4": "#4E8F3A",
+        "tint": "#EBF6E1",
+        "accent": "#FF8FA3",
+        "shadow": "#4A6932",
+        "shine": "#EDF7E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-member",
+      "name": "Gold member",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1405",
+        "c1": "#C9A227",
+        "c2": "#141414",
+        "c3": "#F3E3A0",
+        "c4": "#7A5F12",
+        "tint": "#F4ECD4",
+        "accent": "#141414",
+        "shadow": "#5C4A12",
+        "shine": "#F5EED8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0072CE",
+        "c2": "#FFB000",
+        "c3": "#FFFFFF",
+        "c4": "#D50000",
+        "tint": "#CCE3F5",
+        "accent": "#FFB000",
+        "shadow": "#002F55",
+        "shine": "#D1E6F6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-breeze",
+      "name": "Ocean breeze",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#08304A",
+        "c1": "#3FB6D9",
+        "c2": "#F28F6B",
+        "c3": "#0E6E8C",
+        "c4": "#D9F3FA",
+        "tint": "#D9F0F7",
+        "accent": "#F28F6B",
+        "shadow": "#1D5C73",
+        "shine": "#DCF2F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#25103A",
+        "c1": "#FF7A00",
+        "c2": "#00C2A8",
+        "c3": "#FF3E9D",
+        "c4": "#7B4DFF",
+        "tint": "#FFE4CC",
+        "accent": "#00C2A8",
+        "shadow": "#763814",
+        "shine": "#FFE7D1",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

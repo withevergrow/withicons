@@ -1,0 +1,32 @@
+{
+  "name": "eye-off",
+  "intent": "blinks slowly, keeping things hidden",
+  "loop": {
+    "preset": "blink",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 5
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "eye",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,434 @@
+{
+  "name": "wine",
+  "palettes": [
+    {
+      "id": "cabernet",
+      "name": "Cabernet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A0610",
+        "c1": "#8C1C3A",
+        "c2": "#E6E8EE",
+        "c3": "#5A0E22",
+        "c4": "#C9A3B0",
+        "tint": "#E8D2D8",
+        "accent": "#C9A3B0",
+        "shadow": "#510F21",
+        "shine": "#DDBBC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pinot-noir",
+      "name": "Pinot noir",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A0612",
+        "c1": "#A82A48",
+        "c2": "#E6E8EE",
+        "c3": "#6E1830",
+        "c4": "#F2C6D0",
+        "tint": "#EED4DA",
+        "accent": "#F2C6D0",
+        "shadow": "#5C1428",
+        "shine": "#E5BFC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose",
+      "name": "Rosé",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A1028",
+        "c1": "#F7A1B5",
+        "c2": "#FFE6EC",
+        "c3": "#E06A8A",
+        "c4": "#FFF4F6",
+        "tint": "#FDECF0",
+        "accent": "#FFE6EC",
+        "shadow": "#8F4A60",
+        "shine": "#FDE3E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chardonnay",
+      "name": "Chardonnay",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2E08",
+        "c1": "#F2D774",
+        "c2": "#F7F7F2",
+        "c3": "#C9A83A",
+        "c4": "#FFF6C8",
+        "tint": "#FCF7E3",
+        "accent": "#F7F7F2",
+        "shadow": "#847233",
+        "shine": "#FBF3D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sauvignon-blanc",
+      "name": "Sauvignon blanc",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#26300E",
+        "c1": "#E6EBA0",
+        "c2": "#F7F7F2",
+        "c3": "#A8B84E",
+        "c4": "#FAFCE4",
+        "tint": "#FAFBEC",
+        "accent": "#A8B84E",
+        "shadow": "#737B48",
+        "shine": "#F8F9E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "orange-wine",
+      "name": "Orange wine",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#E8913A",
+        "c2": "#F7F2EA",
+        "c3": "#B85A1A",
+        "c4": "#FBE3C8",
+        "tint": "#FAE9D8",
+        "accent": "#F7F2EA",
+        "shadow": "#78451B",
+        "shine": "#F8DEC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "champagne",
+      "name": "Champagne",
+      "tags": [
+        "luxe",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2A10",
+        "c1": "#F3D9A4",
+        "c2": "#FFFFFF",
+        "c3": "#C9A24B",
+        "c4": "#FFF6E0",
+        "tint": "#FDF7ED",
+        "accent": "#C9A24B",
+        "shadow": "#84704B",
+        "shine": "#FBF4E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "port",
+      "name": "Ruby port",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#6A1028",
+        "c2": "#E8D9C8",
+        "c3": "#3A0614",
+        "c4": "#B5213A",
+        "tint": "#E1CFD4",
+        "accent": "#E8D9C8",
+        "shadow": "#2A0610",
+        "shine": "#D2B7BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sangria",
+      "name": "Sangria",
+      "tags": [
+        "vivid",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0610",
+        "c1": "#C8243A",
+        "c2": "#FFE3D6",
+        "c3": "#FF9F1C",
+        "c4": "#6E9F3D",
+        "tint": "#F4D3D8",
+        "accent": "#FF9F1C",
+        "shadow": "#691221",
+        "shine": "#EFBDC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mulled-wine",
+      "name": "Mulled wine",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0610",
+        "c1": "#9C1B30",
+        "c2": "#F7E6C8",
+        "c3": "#E8913A",
+        "c4": "#5E3519",
+        "tint": "#EBD1D6",
+        "accent": "#E8913A",
+        "shadow": "#580E1D",
+        "shine": "#E1BBC1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "aperol-spritz",
+      "name": "Spritz hour",
+      "tags": [
+        "vivid",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#FF6B1A",
+        "c2": "#FFD6B0",
+        "c3": "#F7F7F2",
+        "c4": "#C24A0A",
+        "tint": "#FFE1D1",
+        "accent": "#FFD6B0",
+        "shadow": "#82360E",
+        "shine": "#FFD3BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-wine",
+      "name": "Blue lagoon",
+      "tags": [
+        "ocean",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#072A40",
+        "c1": "#2E8BFF",
+        "c2": "#E3F2FF",
+        "c3": "#13628F",
+        "c4": "#7FD8F0",
+        "tint": "#D5E8FF",
+        "accent": "#7FD8F0",
+        "shadow": "#17518C",
+        "shine": "#C0DCFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vineyard",
+      "name": "Vineyard",
+      "tags": [
+        "nature",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#7A3468",
+        "c2": "#E8EEDC",
+        "c3": "#8FA86A",
+        "c4": "#3E5E2A",
+        "tint": "#E4D6E1",
+        "accent": "#8FA86A",
+        "shadow": "#31152A",
+        "shine": "#D7C2D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candlelit",
+      "name": "Candlelit dinner",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#6E1A3C",
+        "c2": "#F2E6D8",
+        "c3": "#E8C766",
+        "c4": "#9C2A4E",
+        "tint": "#E2D1D8",
+        "accent": "#E8C766",
+        "shadow": "#2C0A18",
+        "shine": "#D4BAC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-toast",
+      "name": "Pastel toast",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3150",
+        "c1": "#E8C2F0",
+        "c2": "#FFE6EC",
+        "c3": "#B5E3C3",
+        "c4": "#FFF1A8",
+        "tint": "#FAF3FC",
+        "accent": "#FFE6EC",
+        "shadow": "#836B90",
+        "shine": "#F8EDFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-cocktail",
+      "name": "Candy cocktail",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1040",
+        "c1": "#FF77B4",
+        "c2": "#7FE3F0",
+        "c3": "#FFE066",
+        "c4": "#B388FF",
+        "tint": "#FFE4F0",
+        "accent": "#FFE066",
+        "shadow": "#89396E",
+        "shine": "#FFD6E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-glass",
+      "name": "Y2K glass",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#C2B4FF",
+        "c2": "#FF9EE8",
+        "c3": "#C9FF6B",
+        "c4": "#8FF0FF",
+        "tint": "#F3F0FF",
+        "accent": "#FF9EE8",
+        "shadow": "#675D96",
+        "shine": "#EDE9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-wine-bar",
+      "name": "Neon wine bar",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF3DCB",
+        "c1": "#1A0614",
+        "c2": "#3DF2FF",
+        "c3": "#FFE14D",
+        "c4": "#7A3DFF",
+        "tint": "#D1CDD0",
+        "accent": "#3DF2FF",
+        "shadow": "#0A0208",
+        "shine": "#BAB4B9",
+        "edge": "#040103"
+      }
+    },
+    {
+      "id": "seventies-lounge",
+      "name": "70s lounge",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#C2432A",
+        "c2": "#E9A23B",
+        "c3": "#F4E3B5",
+        "c4": "#3D7068",
+        "tint": "#F3D9D4",
+        "accent": "#E9A23B",
+        "shadow": "#672716",
+        "shine": "#EDC7BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-ramp",
+      "name": "Berry ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2A0622",
+        "c1": "#B5306E",
+        "c2": "#F2A6C8",
+        "c3": "#6E1444",
+        "c4": "#FCE2EE",
+        "tint": "#F0D6E2",
+        "accent": "#F2A6C8",
+        "shadow": "#621740",
+        "shine": "#E9C1D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale-glass",
+      "name": "Greyscale glass",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#8A8A8A",
+        "c2": "#E3E3E3",
+        "c3": "#4A4A4A",
+        "c4": "#C4C4C4",
+        "tint": "#E8E8E8",
+        "accent": "#E3E3E3",
+        "shadow": "#434343",
+        "shine": "#DCDCDC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#C8102E",
+        "c2": "#FFFFFF",
+        "c3": "#FFD400",
+        "c4": "#0050EF",
+        "tint": "#F4CFD5",
+        "accent": "#FFD400",
+        "shadow": "#500612",
+        "shine": "#EFB7C0",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

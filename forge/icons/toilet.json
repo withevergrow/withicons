@@ -1,0 +1,82 @@
+{
+  "name": "toilet",
+  "category": "home",
+  "description": "A toilet with a cistern, bowl, and base for restrooms, bathrooms, and sanitation.",
+  "aliases": [
+    "restroom",
+    "wc",
+    "loo",
+    "lavatory",
+    "bathroom-sign",
+    "washroom",
+    "restrooms",
+    "water-closet",
+    "lav",
+    "commode",
+    "potty",
+    "latrine"
+  ],
+  "tags": [
+    "bathroom",
+    "restroom",
+    "hygiene",
+    "sanitation",
+    "plumbing",
+    "facilities"
+  ],
+  "paths": [
+    {
+      "d": "M4 11 V4.5 A2 2 0 0 1 6 2.5 H8 A2 2 0 0 1 10 4.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M4 11 H20 A5 5 0 0 1 15 16 H9 A5 5 0 0 1 4 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 16 L8.5 21 H15.5 L14.5 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 11 V4.5 A2 2 0 0 1 6 2.5 H8 A2 2 0 0 1 10 4.5 V11 Z",
+    "M4 11 H20 A5 5 0 0 1 15 16 H9 A5 5 0 0 1 4 11 Z",
+    "M9.5 16 L8.5 21 H15.5 L14.5 16 Z"
+  ],
+  "cutouts": [
+    "M4.5 11 H10",
+    "M9.5 16 H14.5"
+  ],
+  "synonyms": [
+    "toilets",
+    "bathroom",
+    "bathrooms",
+    "restroom sign",
+    "public toilet",
+    "public restroom",
+    "mens room",
+    "ladies room",
+    "gents",
+    "ladies",
+    "wc sign",
+    "lavatories",
+    "loos",
+    "toilet paper",
+    "flush",
+    "flushing",
+    "go to the toilet",
+    "pee",
+    "poop",
+    "potty training",
+    "plumber",
+    "plumbing",
+    "sanitary",
+    "sanitation",
+    "hygiene",
+    "facilities",
+    "amenities",
+    "tiolet",
+    "toliet",
+    "toilette"
+  ]
+}

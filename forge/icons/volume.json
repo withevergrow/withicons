@@ -3,7 +3,6 @@
   "category": "media",
   "description": "A speaker sending out sound waves for audio output and volume.",
   "aliases": [
-    "speaker",
     "sound",
     "volume-up",
     "sound-on",
@@ -55,6 +54,7 @@
     "amplify",
     "increase volume",
     "volum",
-    "vol"
+    "vol",
+    "speaker"
   ]
 }

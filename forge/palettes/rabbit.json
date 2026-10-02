@@ -1,0 +1,28 @@
+{
+  "name": "rabbit",
+  "palettes": [
+    {"id":"white-rabbit","name":"White rabbit","tags":["true-to-life"],"colors":{"ink":"#2E2622","c1":"#F5F2EC","c2":"#F7B2C1","c3":"#C9BFB2","c4":"#E06B8A","tint":"#FAF8F5","accent":"#F7B2C1","shadow":"#7C766C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"wild-hare","name":"Wild hare","tags":["true-to-life","earthy"],"colors":{"ink":"#2A1A0C","c1":"#A9825A","c2":"#E8D6BE","c3":"#6E4E30","c4":"#F2A7B5","tint":"#E7DCD1","accent":"#F2A7B5","shadow":"#4C3B28","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gray-lop","name":"Gray lop","tags":["true-to-life"],"colors":{"ink":"#1A1816","c1":"#9A9590","c2":"#F2D3D8","c3":"#D6D2CC","c4":"#5A5550","tint":"#E3E1E0","accent":"#F2A7B5","shadow":"#454341","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dutch-rabbit","name":"Dutch rabbit","tags":["true-to-life","dark"],"colors":{"ink":"#0E0C0C","c1":"#4A4444","c2":"#F5F2EC","c3":"#F2A7B5","c4":"#8A8282","tint":"#CCCBCB","accent":"#F2A7B5","shadow":"#211F1F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cinnamon","name":"Cinnamon","tags":["true-to-life"],"colors":{"ink":"#2E1406","c1":"#C8743A","c2":"#F5DCC0","c3":"#8A4A20","c4":"#F2A0A8","tint":"#F0D8C8","accent":"#F2A0A8","shadow":"#5A341A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"arctic-hare","name":"Arctic hare","tags":["true-to-life","seasonal"],"colors":{"ink":"#1E2A38","c1":"#EAF0F6","c2":"#9BB8D3","c3":"#F6C9D3","c4":"#4E6E8E","tint":"#F4F7FA","accent":"#F6C9D3","shadow":"#6E7C8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"easter-pastel","name":"Easter pastel","tags":["seasonal","pastel"],"colors":{"ink":"#4E2232","c1":"#FFD1DC","c2":"#B8E6C1","c3":"#FFF1A8","c4":"#C9B6F2","tint":"#FFEAEF","accent":"#FF9EB5","shadow":"#735E63","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"carrot-patch","name":"Carrot patch","tags":["vivid"],"colors":{"ink":"#3A1A05","c1":"#F28C28","c2":"#4FA63A","c3":"#FFE0B8","c4":"#B5561A","tint":"#FBDFC3","accent":"#4FA63A","shadow":"#6D3F12","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"moon-rabbit","name":"Moon rabbit","tags":["luxe"],"colors":{"ink":"#1C2240","c1":"#F3E9C6","c2":"#2E3A6B","c3":"#D4AF37","c4":"#9AA6CF","tint":"#F8F2DE","accent":"#D4AF37","shadow":"#6D6959","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"velveteen","name":"Velveteen","tags":["vintage"],"colors":{"ink":"#2E241A","c1":"#C9B79C","c2":"#8A6E5A","c3":"#EFE4D2","c4":"#B5636B","tint":"#F0EBE3","accent":"#B5636B","shadow":"#5A5246","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"lavender-bunny","name":"Lavender bunny","tags":["pastel"],"colors":{"ink":"#352650","c1":"#C7B3E8","c2":"#FFC2D9","c3":"#EDE4FA","c4":"#8F76C2","tint":"#E6DDF5","accent":"#FF9EC0","shadow":"#5A5168","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mint-candy","name":"Mint candy","tags":["candy"],"colors":{"ink":"#0F3A2E","c1":"#9EE6CF","c2":"#FF9AC1","c3":"#FFF0A8","c4":"#3FB896","tint":"#D3F4E9","accent":"#FF9AC1","shadow":"#47675D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clover-field","name":"Clover field","tags":["nature"],"colors":{"ink":"#1A2E10","c1":"#8FCB6A","c2":"#F2F2E6","c3":"#F7D24A","c4":"#4E8A34","tint":"#E0F0D5","accent":"#F28CA0","shadow":"#405B30","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"harvest-bunny","name":"Harvest bunny","tags":["seasonal","earthy"],"colors":{"ink":"#2E1808","c1":"#D08C4F","c2":"#A23E2A","c3":"#F2C78A","c4":"#6E7A3A","tint":"#F2DFCE","accent":"#A23E2A","shadow":"#5E3F24","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"groovy-bunny","name":"Groovy bunny","tags":["retro"],"colors":{"ink":"#2B1405","c1":"#E9A23B","c2":"#C8553D","c3":"#F2D7A0","c4":"#588157","tint":"#F9E5C8","accent":"#C8553D","shadow":"#69491B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"strawberry-milk","name":"Strawberry milk","tags":["candy"],"colors":{"ink":"#4A0F1E","c1":"#F7A1B5","c2":"#E23E57","c3":"#FFF0F3","c4":"#7CC07A","tint":"#FDE5EA","accent":"#E23E57","shadow":"#6F4851","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rose-gold","name":"Rose gold","tags":["luxe"],"colors":{"ink":"#3A1E1A","c1":"#E8B4A0","c2":"#B76E79","c3":"#F7E1D7","c4":"#3A2E2E","tint":"#F5DDD4","accent":"#D4AF37","shadow":"#685148","shine":"#FFFFFF","edge":"#FFF6F2"}},
+    {"id":"cocoa-ramp","name":"Cocoa ramp","tags":["mono"],"colors":{"ink":"#22140A","c1":"#9B6B4A","c2":"#5A3A24","c3":"#E2C9B3","c4":"#C29874","tint":"#E3D6CC","accent":"#5A3A24","shadow":"#463021","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"charcoal-sketch","name":"Charcoal sketch","tags":["grayscale"],"colors":{"ink":"#121212","c1":"#B0B0B0","c2":"#5E5E5E","c3":"#E3E3E3","c4":"#858585","tint":"#E9E9E9","accent":"#D6D6D6","shadow":"#4F4F4F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"cyber-bunny","name":"Cyber bunny","tags":["y2k"],"colors":{"ink":"#26145E","c1":"#D2BCFF","c2":"#7DF9E6","c3":"#FFB3E6","c4":"#8C6CFF","tint":"#EBE1FF","accent":"#7DF9E6","shadow":"#5E5573","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"rave-bunny","name":"Rave bunny","tags":["neon","on-dark"],"colors":{"ink":"#3DFF9E","c1":"#0D2E1E","c2":"#FF4FD8","c3":"#1A5A3A","c4":"#041A0E","tint":"#1E6B44","accent":"#FF4FD8","shadow":"#03140A","shine":"#B0FFD4","edge":"#1A1A26"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFE14D","c2":"#C2185B","c3":"#FFFFFF","c4":"#111111","tint":"#FFF2AF","accent":"#C2185B","shadow":"#736523","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hop-pop","name":"Hop pop","tags":["vivid","candy"],"colors":{"ink":"#3A0A28","c1":"#FF7AC6","c2":"#3DDC97","c3":"#FFE14D","c4":"#5B8CFF","tint":"#FFDAEF","accent":"#FFE14D","shadow":"#733759","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

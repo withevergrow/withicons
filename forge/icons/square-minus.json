@@ -1,0 +1,76 @@
+{
+  "name": "square-minus",
+  "category": "actions",
+  "description": "A minus sign inside a rounded square for removing an item, collapsing a node or a partly ticked checkbox.",
+  "aliases": [
+    "minus-square",
+    "box-minus",
+    "remove-box",
+    "collapse-node",
+    "indeterminate",
+    "checkbox-indeterminate",
+    "partial-select",
+    "minus-box",
+    "checkbox-partial",
+    "tree-collapse"
+  ],
+  "tags": [
+    "remove",
+    "minus",
+    "collapse",
+    "checkbox",
+    "indeterminate",
+    "square"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M8 12 H16"
+  ],
+  "synonyms": [
+    "remove",
+    "subtract",
+    "delete item",
+    "remove item",
+    "remove row",
+    "remove entry",
+    "take away",
+    "decrease",
+    "reduce",
+    "less",
+    "fewer",
+    "collapse",
+    "close node",
+    "hide children",
+    "fold",
+    "collapse all",
+    "partially selected",
+    "some selected",
+    "mixed",
+    "mixed state",
+    "tristate",
+    "tri-state",
+    "half checked",
+    "select some",
+    "deselect",
+    "unselect",
+    "minus sign",
+    "minus button",
+    "square minus",
+    "boxed minus",
+    "minus in box",
+    "decrement",
+    "sqaure minus"
+  ]
+}

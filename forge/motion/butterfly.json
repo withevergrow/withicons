@@ -1,0 +1,8 @@
+{
+  "name": "butterfly",
+  "intent": "flutters gently on a breeze",
+  "loop": { "preset": "float", "amount": 0.8, "duration": 2.8 },
+  "hover": { "preset": "jelly", "origin": [12, 12], "amount": 1.1 },
+  "alt": [ { "preset": "sway", "origin": [12, 19], "amount": 0.8 }, { "preset": "twinkle", "amount": 0.7 }, { "preset": "flip", "duration": 1.6 } ],
+  "swap": [ { "to": "flower", "effect": "morph" }, { "to": "butterfly@solid", "effect": "scale" }, { "to": "sprout", "effect": "fade" } ]
+}

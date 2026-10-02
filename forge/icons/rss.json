@@ -6,7 +6,6 @@
     "feed",
     "rss-feed",
     "syndication",
-    "atom",
     "news-feed",
     "blog-feed",
     "web-feed",
@@ -55,6 +54,7 @@
     "radio waves",
     "content feed",
     "rrs",
-    "rss feed icon"
+    "rss feed icon",
+    "atom"
   ]
 }

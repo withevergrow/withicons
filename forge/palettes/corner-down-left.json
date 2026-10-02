@@ -1,0 +1,409 @@
+{
+  "name": "corner-down-left",
+  "palettes": [
+    {
+      "id": "beige-keycap",
+      "name": "Beige keycap",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2A24",
+        "c1": "#D8CFBF",
+        "c2": "#E87A3E",
+        "c3": "#8F8678",
+        "c4": "#EFE9DD",
+        "tint": "#F7F5F2",
+        "accent": "#E87A3E",
+        "shadow": "#68635A",
+        "shine": "#FFFFFF",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "submit-blue",
+      "name": "Submit blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B2A5C",
+        "c1": "#2F6CE5",
+        "c2": "#FFB020",
+        "c3": "#C9DAFB",
+        "c4": "#1D4BB0",
+        "tint": "#D5E2FA",
+        "accent": "#FFB020",
+        "shadow": "#173D83",
+        "shine": "#C5D6F8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "terminal-green",
+      "name": "Terminal green",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#33FF66",
+        "c1": "#0E7C3A",
+        "c2": "#B8FF4D",
+        "c3": "#00D1FF",
+        "c4": "#082C14",
+        "tint": "#CFE5D8",
+        "accent": "#B8FF4D",
+        "shadow": "#06381A",
+        "shine": "#BCDAC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "typewriter",
+      "name": "Typewriter",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1C1C1C",
+        "c1": "#A63A3A",
+        "c2": "#C9B37E",
+        "c3": "#2F2F2F",
+        "c4": "#EFE6D2",
+        "tint": "#EDD8D8",
+        "accent": "#C9B37E",
+        "shadow": "#4D2424",
+        "shine": "#E6C8C8",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "enter-orange",
+      "name": "Enter key orange",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#4A1A00",
+        "c1": "#FF6A00",
+        "c2": "#2EC4B6",
+        "c3": "#FFD0A8",
+        "c4": "#B84C00",
+        "tint": "#FFE1CC",
+        "accent": "#2EC4B6",
+        "shadow": "#843500",
+        "shine": "#FFD5B8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rgb-keyboard",
+      "name": "RGB keyboard",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF4DFF",
+        "c1": "#4DFFF3",
+        "c2": "#FFE14D",
+        "c3": "#7A5CFF",
+        "c4": "#12101F",
+        "tint": "#A6FFF9",
+        "accent": "#FFE14D",
+        "shadow": "#9585D5",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-keyboard",
+      "name": "Dark keyboard",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E5E7EB",
+        "c1": "#374151",
+        "c2": "#60A5FA",
+        "c3": "#6B7280",
+        "c4": "#111827",
+        "tint": "#D7D9DC",
+        "accent": "#60A5FA",
+        "shadow": "#191D24",
+        "shine": "#C7CACE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-keycaps",
+      "name": "Pastel keycaps",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4B3B66",
+        "c1": "#CDB4DB",
+        "c2": "#FF9EC2",
+        "c3": "#BDE0FE",
+        "c4": "#A2D2FF",
+        "tint": "#F5F0F8",
+        "accent": "#FF9EC2",
+        "shadow": "#726084",
+        "shine": "#F1EAF5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-water",
+      "name": "Deep water",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#052B3F",
+        "c1": "#0F6E8C",
+        "c2": "#5FD3C8",
+        "c3": "#F2C14E",
+        "c4": "#BCE6EE",
+        "tint": "#CFE2E8",
+        "accent": "#5FD3C8",
+        "shadow": "#093E53",
+        "shine": "#BCD6DF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "walnut-desk",
+      "name": "Walnut desk",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A190E",
+        "c1": "#8A5A35",
+        "c2": "#C7A06A",
+        "c3": "#4F6B3A",
+        "c4": "#EADBC8",
+        "tint": "#E8DED7",
+        "accent": "#C7A06A",
+        "shadow": "#482E1B",
+        "shine": "#DED1C6",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "fern-gully",
+      "name": "Fern gully",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#12301C",
+        "c1": "#3E8E57",
+        "c2": "#E6C36A",
+        "c3": "#A7D7B4",
+        "c4": "#1C5A33",
+        "tint": "#D8E8DD",
+        "accent": "#E6C36A",
+        "shadow": "#204D2F",
+        "shine": "#C9DFD0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-ramp",
+      "name": "Gold ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3D2E00",
+        "c1": "#CA8A04",
+        "c2": "#FDE047",
+        "c3": "#854D0E",
+        "c4": "#FEF9C3",
+        "tint": "#F4E8CD",
+        "accent": "#FDE047",
+        "shadow": "#694A02",
+        "shine": "#F0DEB9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "keyboard-gray",
+      "name": "Keyboard gray",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1A1A1D",
+        "c1": "#A3A3AA",
+        "c2": "#5C5C63",
+        "c3": "#DADADE",
+        "c4": "#F1F1F3",
+        "tint": "#EDEDEE",
+        "accent": "#5C5C63",
+        "shadow": "#4B4B4E",
+        "shine": "#E5E5E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "enter-contrast",
+      "name": "Enter contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#F0E442",
+        "c2": "#CC79A7",
+        "c3": "#141414",
+        "c4": "#FFFFFF",
+        "tint": "#FCFAD9",
+        "accent": "#CC79A7",
+        "shadow": "#5C581A",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gumball",
+      "name": "Gumball",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A3A",
+        "c1": "#FF5C8A",
+        "c2": "#4CC9F0",
+        "c3": "#FFE066",
+        "c4": "#FFC6D6",
+        "tint": "#FFDEE8",
+        "accent": "#4CC9F0",
+        "shadow": "#843050",
+        "shine": "#FFD1DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "retro-console",
+      "name": "Retro console",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E1A0A",
+        "c1": "#D35400",
+        "c2": "#F39C12",
+        "c3": "#16A085",
+        "c4": "#FBE5C8",
+        "tint": "#F6DDCC",
+        "accent": "#F39C12",
+        "shadow": "#662C05",
+        "shine": "#F3CFB8",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "peach-sunset",
+      "name": "Peach sunset",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3E1424",
+        "c1": "#FF8066",
+        "c2": "#FFC75F",
+        "c3": "#C34A82",
+        "c4": "#FFE4DA",
+        "tint": "#FFE6E0",
+        "accent": "#FFC75F",
+        "shadow": "#7F3B38",
+        "shine": "#FFDBD4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ebony-brass",
+      "name": "Ebony & brass",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#141210",
+        "c1": "#B28F4C",
+        "c2": "#3B2F2F",
+        "c3": "#E8D9B5",
+        "c4": "#6E5427",
+        "tint": "#F0E9DB",
+        "accent": "#3B2F2F",
+        "shadow": "#4D3F25",
+        "shine": "#E9E0CD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tangerine-imac",
+      "name": "Tangerine iMac",
+      "tags": [
+        "y2k",
+        "retro"
+      ],
+      "colors": {
+        "ink": "#4A2200",
+        "c1": "#FF9F45",
+        "c2": "#6CD4FF",
+        "c3": "#FF8FD1",
+        "c4": "#FFE6CC",
+        "tint": "#FFECDA",
+        "accent": "#6CD4FF",
+        "shadow": "#844D1A",
+        "shine": "#FFE4CB",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "lime-key",
+      "name": "Lime key",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24380A",
+        "c1": "#9BD12E",
+        "c2": "#FF5E5B",
+        "c3": "#EAF7CF",
+        "c4": "#5B8A12",
+        "tint": "#EBF6D5",
+        "accent": "#FF5E5B",
+        "shadow": "#4D6A16",
+        "shine": "#E3F2C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hot-cocoa",
+      "name": "Hot cocoa",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1A0C05",
+        "c1": "#A0522D",
+        "c2": "#E8B4B8",
+        "c3": "#6B3E26",
+        "c4": "#F5E6DA",
+        "tint": "#ECDCD5",
+        "accent": "#E8B4B8",
+        "shadow": "#492514",
+        "shine": "#E4CFC4",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

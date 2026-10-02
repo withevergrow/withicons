@@ -1,0 +1,8 @@
+{
+  "name": "tennis",
+  "intent": "swings the racket from its handle like a forehand",
+  "loop": { "preset": "rock", "origin": [20.5, 20.5], "amount": 0.5, "duration": 2.8 },
+  "hover": { "preset": "ring", "origin": [20.5, 20.5], "amount": 0.8 },
+  "alt": [ { "preset": "tilt", "origin": [20.5, 20.5] }, { "preset": "sway", "origin": [20.5, 20.5] }, { "preset": "pop" } ],
+  "swap": [ { "to": "tennis@solid", "effect": "scale" }, { "to": "trophy", "effect": "slide-up" } ]
+}

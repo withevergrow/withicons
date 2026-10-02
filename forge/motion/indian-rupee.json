@@ -1,0 +1,17 @@
+{
+  "name": "indian-rupee",
+  "intent": "spins like a rupee coin, money changing hands",
+  "loop": { "preset": "flip", "duration": 3.6 },
+  "hover": { "preset": "tada", "amount": 0.8 },
+  "alt": [
+    { "preset": "pop" },
+    { "preset": "glow" },
+    { "preset": "spin-once" }
+  ],
+  "swap": [
+    { "to": "dollar-sign", "effect": "flip" },
+    { "to": "euro", "effect": "flip" },
+    { "to": "pound-sterling", "effect": "flip" },
+    { "to": "coins", "effect": "fade" }
+  ]
+}

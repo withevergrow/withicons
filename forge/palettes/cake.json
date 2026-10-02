@@ -1,0 +1,454 @@
+{
+  "name": "cake",
+  "palettes": [
+    {
+      "id": "strawberry-frosting",
+      "name": "Strawberry frosting",
+      "tags": [
+        "true-to-life",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1028",
+        "c1": "#FF8FB1",
+        "c2": "#FFC2D4",
+        "c3": "#FFD166",
+        "c4": "#F7E3C4",
+        "tint": "#FFE9EF",
+        "accent": "#FFD166",
+        "shadow": "#92435F",
+        "shine": "#FFDDE8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "birthday-sprinkles",
+      "name": "Birthday sprinkles",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0F2E",
+        "c1": "#FF5D8F",
+        "c2": "#F9E0B8",
+        "c3": "#FFC93C",
+        "c4": "#3EC1D3",
+        "tint": "#FFDFE9",
+        "accent": "#3EC1D3",
+        "shadow": "#7F2E55",
+        "shine": "#FFCEDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chocolate-fudge",
+      "name": "Chocolate fudge",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E0E06",
+        "c1": "#7A4A2E",
+        "c2": "#A9683E",
+        "c3": "#FFC93C",
+        "c4": "#F2E2C4",
+        "tint": "#E4DBD5",
+        "accent": "#FFC93C",
+        "shadow": "#432616",
+        "shine": "#D7C9C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vanilla-sponge",
+      "name": "Vanilla sponge",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A2A10",
+        "c1": "#FBEFD0",
+        "c2": "#F4D38A",
+        "c3": "#FF8FB1",
+        "c4": "#C9A060",
+        "tint": "#FEFCF6",
+        "accent": "#FF8FB1",
+        "shadow": "#87795D",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "red-velvet",
+      "name": "Red velvet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A0610",
+        "c1": "#B5213A",
+        "c2": "#F7F1E8",
+        "c3": "#FFC93C",
+        "c4": "#7A1426",
+        "tint": "#F0D3D8",
+        "accent": "#F7F1E8",
+        "shadow": "#621121",
+        "shine": "#E9BCC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lemon-drizzle",
+      "name": "Lemon drizzle",
+      "tags": [
+        "true-to-life",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3000",
+        "c1": "#FFE36E",
+        "c2": "#FFF6C8",
+        "c3": "#FF9F1C",
+        "c4": "#9DBF6E",
+        "tint": "#FFF9E2",
+        "accent": "#FF9F1C",
+        "shadow": "#89782C",
+        "shine": "#FFF7D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "matcha-roll",
+      "name": "Matcha layer",
+      "tags": [
+        "nature",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#22320F",
+        "c1": "#A8C878",
+        "c2": "#F4EBD9",
+        "c3": "#F2B8C6",
+        "c4": "#5B7A2E",
+        "tint": "#EEF4E4",
+        "accent": "#F2B8C6",
+        "shadow": "#586E39",
+        "shine": "#E5EFD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-forest",
+      "name": "Black Forest",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#4A2A22",
+        "c2": "#F7F1E8",
+        "c3": "#C8102E",
+        "c4": "#7A4A2E",
+        "tint": "#DBD4D3",
+        "accent": "#C8102E",
+        "shadow": "#1E110E",
+        "shine": "#C9BFBD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "carrot-cake",
+      "name": "Carrot cake",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#E8A15A",
+        "c2": "#F6E9D4",
+        "c3": "#6B8E4E",
+        "c4": "#B8642B",
+        "tint": "#FAECDE",
+        "accent": "#6B8E4E",
+        "shadow": "#784B28",
+        "shine": "#F8E3CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wedding-tier",
+      "name": "Wedding tier",
+      "tags": [
+        "luxe",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A2E22",
+        "c1": "#FBF8F2",
+        "c2": "#F2D6C8",
+        "c3": "#E8C766",
+        "c4": "#C9B48F",
+        "tint": "#FEFEFC",
+        "accent": "#E8C766",
+        "shadow": "#877F75",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose-gold-party",
+      "name": "Rose gold party",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3B1E22",
+        "c1": "#E8A598",
+        "c2": "#F6D2C8",
+        "c3": "#E8C766",
+        "c4": "#B76E79",
+        "tint": "#FAEDEA",
+        "accent": "#E8C766",
+        "shadow": "#805451",
+        "shine": "#F8E4E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "unicorn",
+      "name": "Unicorn",
+      "tags": [
+        "candy",
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2E2050",
+        "c1": "#C9B6FF",
+        "c2": "#FFB5E8",
+        "c3": "#FFF1A8",
+        "c4": "#9EF0E8",
+        "tint": "#F4F0FF",
+        "accent": "#FFB5E8",
+        "shadow": "#6C5C96",
+        "shine": "#EFE9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blueberry-cheesecake",
+      "name": "Blueberry cheesecake",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#141B3A",
+        "c1": "#6C63D9",
+        "c2": "#F7EDD8",
+        "c3": "#FFC93C",
+        "c4": "#3A2E8C",
+        "tint": "#E2E0F7",
+        "accent": "#FFC93C",
+        "shadow": "#37387A",
+        "shine": "#D3D0F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mango-mousse",
+      "name": "Mango mousse",
+      "tags": [
+        "vivid",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A1A00",
+        "c1": "#FFA62B",
+        "c2": "#FFE0A6",
+        "c3": "#FF5D73",
+        "c4": "#C96A00",
+        "tint": "#FFEDD5",
+        "accent": "#FF5D73",
+        "shadow": "#895211",
+        "shine": "#FFE4BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "funfetti",
+      "name": "Funfetti",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2A0F2E",
+        "c1": "#FFF1DC",
+        "c2": "#FF6FA8",
+        "c3": "#57D9C9",
+        "c4": "#FFD84D",
+        "tint": "#FFFCF8",
+        "accent": "#FF6FA8",
+        "shadow": "#7F6974",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-party",
+      "name": "Neon party cake",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF3DCB",
+        "c1": "#1A0A1E",
+        "c2": "#3DF2FF",
+        "c3": "#FFE14D",
+        "c4": "#7CFF6B",
+        "tint": "#D1CED2",
+        "accent": "#FFE14D",
+        "shadow": "#0A040C",
+        "shine": "#BAB6BC",
+        "edge": "#040205"
+      }
+    },
+    {
+      "id": "seventies-bakery",
+      "name": "70s bakery",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#F28C28",
+        "c2": "#F6D365",
+        "c3": "#D64933",
+        "c4": "#7A3B69",
+        "tint": "#FCE8D4",
+        "accent": "#F6D365",
+        "shadow": "#7B4415",
+        "shine": "#FBDDBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "christmas-cake",
+      "name": "Christmas cake",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#F7F3E9",
+        "c2": "#B3202A",
+        "c3": "#1E6B45",
+        "c4": "#E8C068",
+        "tint": "#FDFDFB",
+        "accent": "#B3202A",
+        "shadow": "#7C6761",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pumpkin-layer",
+      "name": "Pumpkin layer",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F2963A",
+        "c2": "#F6E7D2",
+        "c3": "#8C3B1A",
+        "c4": "#6B8E4E",
+        "tint": "#FCEAD8",
+        "accent": "#F6E7D2",
+        "shadow": "#7C471B",
+        "shine": "#FBE0C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "easter-pastel",
+      "name": "Easter pastel",
+      "tags": [
+        "seasonal",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E2050",
+        "c1": "#B5EAD7",
+        "c2": "#FFDAC1",
+        "c3": "#FF9AA2",
+        "c4": "#C7CEEA",
+        "tint": "#F0FBF7",
+        "accent": "#FF9AA2",
+        "shadow": "#647186",
+        "shine": "#E9F9F3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-ramp",
+      "name": "Berry ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3A0328",
+        "c1": "#E0379A",
+        "c2": "#F59CCB",
+        "c3": "#FFD166",
+        "c4": "#8E1460",
+        "tint": "#F9D7EB",
+        "accent": "#F59CCB",
+        "shadow": "#7C1856",
+        "shine": "#F6C3E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale-cake",
+      "name": "Greyscale cake",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#BDBDBD",
+        "c2": "#E6E6E6",
+        "c3": "#707070",
+        "c4": "#3A3A3A",
+        "tint": "#F2F2F2",
+        "accent": "#E6E6E6",
+        "shadow": "#585858",
+        "shine": "#EBEBEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FF4F8B",
+        "c2": "#FFFFFF",
+        "c3": "#FFD400",
+        "c4": "#0050EF",
+        "tint": "#FFDCE8",
+        "accent": "#FFD400",
+        "shadow": "#662038",
+        "shine": "#FFCADC",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

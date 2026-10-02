@@ -10,7 +10,6 @@
     "activity-log",
     "timeline",
     "undo-history",
-    "rewind",
     "log"
   ],
   "tags": [

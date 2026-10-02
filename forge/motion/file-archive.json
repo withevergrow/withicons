@@ -1,0 +1,37 @@
+{
+  "name": "file-archive",
+  "intent": "squeezes down like a zipped bundle",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "float",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "file",
+      "effect": "scale"
+    },
+    {
+      "to": "archive",
+      "effect": "flip"
+    }
+  ]
+}

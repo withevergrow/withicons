@@ -1,0 +1,26 @@
+{
+  "name": "message-square-text",
+  "palettes": [
+    {"id":"sent-blue","name":"Sent bubble blue","tags":["true-to-life"],"colors":{"ink":"#081E38","c1":"#0A84FF","c2":"#FF6FB5","c3":"#FFD60A","c4":"#9CC9FF","tint":"#BADDFF","accent":"#FF6FB5","shadow":"#094C92","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sms-green","name":"SMS green","tags":["true-to-life"],"colors":{"ink":"#0F2A1B","c1":"#30C75E","c2":"#0A84FF","c3":"#FFD60A","c4":"#B3EBC4","tint":"#C5EFD2","accent":"#0A84FF","shadow":"#1E7139","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"received-grey","name":"Received grey","tags":["true-to-life","grayscale"],"colors":{"ink":"#1C1C1E","c1":"#D9DADF","c2":"#0A84FF","c3":"#8E8E93","c4":"#F2F2F7","tint":"#F4F5F6","accent":"#0A84FF","shadow":"#717175","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sticky-note","name":"Sticky note","tags":["true-to-life"],"colors":{"ink":"#3A2E05","c1":"#FFD43B","c2":"#FF7A45","c3":"#4DA3FF","c4":"#FFF1A8","tint":"#FFF3C8","accent":"#FF7A45","shadow":"#93791D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"team-chat-violet","name":"Team chat violet","tags":["corporate"],"colors":{"ink":"#17182E","c1":"#5B5FC7","c2":"#F2C94C","c3":"#E86A92","c4":"#C5C7F2","tint":"#D1D2EF","accent":"#F2C94C","shadow":"#363873","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"aubergine","name":"Aubergine workspace","tags":["corporate"],"colors":{"ink":"#1A061B","c1":"#7A3C7C","c2":"#36C5F0","c3":"#ECB22E","c4":"#E01E5A","tint":"#DAC8DA","accent":"#36C5F0","shadow":"#451E47","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"help-desk-orange","name":"Help desk orange","tags":["corporate","vivid"],"colors":{"ink":"#341D0F","c1":"#FF7A1A","c2":"#1F6FEB","c3":"#FFD166","c4":"#FFC9A3","tint":"#FFDABF","accent":"#1F6FEB","shadow":"#8F4714","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"night-chat","name":"Night chat","tags":["dark"],"colors":{"ink":"#0B0E14","c1":"#3A4458","c2":"#7CC4FF","c3":"#FF8FAB","c4":"#A9B4C8","tint":"#C8CBD0","accent":"#7CC4FF","shadow":"#202633","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"milkshake","name":"Milkshake","tags":["pastel"],"colors":{"ink":"#3B3346","c1":"#BFD7FF","c2":"#FFC4E1","c3":"#C8F5D8","c4":"#FFF0B3","tint":"#EDF4FF","accent":"#FFC4E1","shadow":"#767D99","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-dm","name":"Neon DM","tags":["neon","on-dark"],"colors":{"ink":"#0A0716","c1":"#2BF0FF","c2":"#FF2BD6","c3":"#B8FF3B","c4":"#7B2BFF","tint":"#95F8FF","accent":"#FF2BD6","shadow":"#19707F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vaporwave","name":"Vaporwave","tags":["y2k","retro"],"colors":{"ink":"#1F1033","c1":"#FF71CE","c2":"#01CDFE","c3":"#05FFA1","c4":"#B967FF","tint":"#FFD7F1","accent":"#01CDFE","shadow":"#843C79","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"kraft-letter","name":"Kraft letter","tags":["vintage","earthy"],"colors":{"ink":"#2E2416","c1":"#C9A36B","c2":"#7A4B2A","c3":"#4F6D5A","c4":"#EADCC2","tint":"#F0E5D6","accent":"#7A4B2A","shadow":"#745D3C","shine":"#FFFFFF","edge":"#FFF8EC"}},
+    {"id":"sunset-chat","name":"Sunset chat","tags":["sunset"],"colors":{"ink":"#2A1020","c1":"#FF8C61","c2":"#CE4A7E","c3":"#FFC15E","c4":"#6A3D9A","tint":"#FFDFD3","accent":"#FFC15E","shadow":"#8A483D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ink-blue-ramp","name":"Ink-blue ramp","tags":["mono"],"colors":{"ink":"#0B1A33","c1":"#3D7BE0","c2":"#1B4AA3","c3":"#9DBDF5","c4":"#DCE7FB","tint":"#C9DAF6","accent":"#1B4AA3","shadow":"#224681","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lagoon","name":"Lagoon","tags":["ocean"],"colors":{"ink":"#062A2E","c1":"#22B5B0","c2":"#FF7E67","c3":"#FFD97D","c4":"#B9EDEA","tint":"#C1EAE9","accent":"#FF7E67","shadow":"#136969","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"matcha-latte","name":"Matcha latte","tags":["nature","earthy"],"colors":{"ink":"#1F2A12","c1":"#9CBF6B","c2":"#F2E8CF","c3":"#6B4F3A","c4":"#D2E3B5","tint":"#E3EDD6","accent":"#6B4F3A","shadow":"#576D3A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum-pop","name":"Bubblegum pop","tags":["candy"],"colors":{"ink":"#3A0D2C","c1":"#FF7EB6","c2":"#7AD7F0","c3":"#FFE066","c4":"#FFD0E6","tint":"#FFDBEB","accent":"#7AD7F0","shadow":"#93406A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"spring-bloom","name":"Spring bloom","tags":["seasonal"],"colors":{"ink":"#1E3412","c1":"#8FD16A","c2":"#FF9EC4","c3":"#FFE27A","c4":"#E2F5D3","tint":"#E0F2D5","accent":"#FF9EC4","shadow":"#517B3A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pumpkin-spice","name":"Pumpkin spice","tags":["seasonal"],"colors":{"ink":"#2D1406","c1":"#E07B2E","c2":"#8C3B1E","c3":"#F2C46D","c4":"#F6DEC2","tint":"#F6DAC4","accent":"#8C3B1E","shadow":"#7E4218","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ink-and-brass","name":"Ink & brass","tags":["luxe"],"colors":{"ink":"#0A0A0A","c1":"#2F4F7A","c2":"#C9A24B","c3":"#E7DDC8","c4":"#8C7B5E","tint":"#C5CEDA","accent":"#C9A24B","shadow":"#1B293C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD500","c2":"#0033CC","c3":"#D4002A","c4":"#FFFFFF","tint":"#FFF3B8","accent":"#0033CC","shadow":"#736000","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

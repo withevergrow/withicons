@@ -1,0 +1,60 @@
+{
+  "name": "file-minus",
+  "category": "files",
+  "description": "A page with a minus for removing a file or taking it out of a set.",
+  "aliases": [
+    "file-subtract",
+    "remove-file",
+    "file-dash",
+    "exclude-file",
+    "file-reduce",
+    "minus-file",
+    "document-minus",
+    "remove-document",
+    "detach-file"
+  ],
+  "tags": [
+    "file",
+    "remove",
+    "minus",
+    "subtract",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M9 14.5 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M9 14.5 H15"
+  ],
+  "synonyms": [
+    "remove",
+    "subtract",
+    "take out",
+    "exclude",
+    "detach",
+    "remove attachment",
+    "unattach",
+    "drop file",
+    "less",
+    "minus",
+    "deselect file",
+    "remove page",
+    "remove from list",
+    "dash"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "name": "video-camera",
+  "palettes": [
+    {
+      "id": "camcorder-black",
+      "name": "Camcorder black",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#09090B", "c1": "#52525B", "c2": "#71717A", "c3": "#E11D48", "c4": "#18181B", "tint": "#CFCFD1", "accent": "#E11D48", "shadow": "#29292E", "shine": "#E7E7E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "silver-camcorder",
+      "name": "Silver camcorder",
+      "tags": ["true-to-life", "grayscale"],
+      "colors": { "ink": "#1B1E22", "c1": "#C0C4CC", "c2": "#6B7280", "c3": "#EF4444", "c4": "#3F4451", "tint": "#EDEEF1", "accent": "#EF4444", "shadow": "#373B44", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "recording-red",
+      "name": "Recording red",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1111", "c1": "#EF4444", "c2": "#71717A", "c3": "#FECACA", "c4": "#7F1D1D", "tint": "#FBCBCB", "accent": "#7F1D1D", "shadow": "#681212", "shine": "#FDE5E5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "vlogger-white",
+      "name": "Vlogger white",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#334155", "c1": "#F1F5F9", "c2": "#0EA5E9", "c3": "#F43F5E", "c4": "#334155", "tint": "#F8FAFC", "accent": "#0EA5E9", "shadow": "#253D56", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "studio-blue",
+      "name": "Studio blue",
+      "tags": ["corporate"],
+      "colors": { "ink": "#11192C", "c1": "#2563EB", "c2": "#93C5FD", "c3": "#0F172A", "c4": "#1E3A8A", "tint": "#C2D3F9", "accent": "#F43F5E", "shadow": "#122D68", "shine": "#E0E9FC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "action-cam",
+      "name": "Action cam",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C2711", "c1": "#FACC15", "c2": "#52525B", "c3": "#F97316", "c4": "#713F12", "tint": "#FDE68A", "accent": "#F97316", "shadow": "#685712", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "mint-and-lilac",
+      "name": "Mint & lilac",
+      "tags": ["candy"],
+      "colors": { "ink": "#112C22", "c1": "#34D399", "c2": "#8B5CF6", "c3": "#F472B6", "c4": "#065F46", "tint": "#C6F3E2", "accent": "#8B5CF6", "shadow": "#166548", "shine": "#E3F9F1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "live-stream-glow",
+      "name": "Live stream glow",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#F4EDFF", "c1": "#9146FF", "c2": "#FF4F8B", "c3": "#00F5FF", "c4": "#3A1078", "tint": "#E0CBFF", "accent": "#00F5FF", "shadow": "#351268", "shine": "#F0E5FF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "midnight-broadcast",
+      "name": "Midnight broadcast",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF0F6", "c1": "#FF006E", "c2": "#00F5D4", "c3": "#FEE440", "c4": "#3A0CA3", "tint": "#FFB8D6", "accent": "#00F5D4", "shadow": "#681237", "shine": "#FFDBEB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "baby-blue-cam",
+      "name": "Baby blue cam",
+      "tags": ["pastel"],
+      "colors": { "ink": "#334466", "c1": "#BFD7FF", "c2": "#FFC6D9", "c3": "#D4F5D4", "c4": "#FFF2B3", "tint": "#DFEBFF", "accent": "#FFC6D9", "shadow": "#123268", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "bubble-cam",
+      "name": "Bubble cam",
+      "tags": ["candy"],
+      "colors": { "ink": "#3B1530", "c1": "#FF7EB9", "c2": "#7AFCFF", "c3": "#FEFF9C", "c4": "#B983FF", "tint": "#FFDBEB", "accent": "#7AFCFF", "shadow": "#68123A", "shine": "#FFEDF5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "digicam-silver",
+      "name": "Digicam silver",
+      "tags": ["y2k"],
+      "colors": { "ink": "#1F2430", "c1": "#9AA5B1", "c2": "#C77DFF", "c3": "#72EFDD", "c4": "#F72585", "tint": "#E3E6E9", "accent": "#F72585", "shadow": "#353D45", "shine": "#F1F2F4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "home-movie",
+      "name": "Home movie",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1311", "c1": "#C0392B", "c2": "#E67E22", "c3": "#F4D03F", "c4": "#5D2E0F", "tint": "#EDC8C4", "accent": "#E67E22", "shadow": "#601C16", "shine": "#F6E3E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "leather-and-brass",
+      "name": "Leather & brass",
+      "tags": ["vintage"],
+      "colors": { "ink": "#1E140D", "c1": "#6F4E37", "c2": "#C8A97E", "c3": "#EFE3C8", "c4": "#3C2A1E", "tint": "#D7CDC7", "accent": "#C8A97E", "shadow": "#38271C", "shine": "#EBE6E3", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "underwater-housing",
+      "name": "Underwater housing",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11262C", "c1": "#0E7490", "c2": "#22D3EE", "c3": "#CFFAFE", "c4": "#164E63", "tint": "#BCD8E0", "accent": "#22D3EE", "shadow": "#0C3743", "shine": "#DDECEF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "wildlife-cam",
+      "name": "Wildlife cam",
+      "tags": ["nature"],
+      "colors": { "ink": "#202C11", "c1": "#4D7C0F", "c2": "#A3E635", "c3": "#ECFCCB", "c4": "#1A2E05", "tint": "#CDDABC", "accent": "#A3E635", "shadow": "#263B0A", "shine": "#E6EDDD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "grape-soda",
+      "name": "Grape soda",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2A112C", "c1": "#A21CAF", "c2": "#F472B6", "c3": "#FAE8FF", "c4": "#581C87", "tint": "#E5BFE9", "accent": "#F472B6", "shadow": "#500F56", "shine": "#F2DFF4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "golden-hour",
+      "name": "Golden hour",
+      "tags": ["sunset"],
+      "colors": { "ink": "#2C1C11", "c1": "#F97316", "c2": "#DB2777", "c3": "#FDE68A", "c4": "#7C2D12", "tint": "#FDD8BE", "accent": "#DB2777", "shadow": "#683512", "shine": "#FEEBDE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "amber-ramp",
+      "name": "Amber ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#2C2011", "c1": "#D97706", "c2": "#FBBF24", "c3": "#FEF3C7", "c4": "#78350F", "tint": "#F4D9B9", "accent": "#FBBF24", "shadow": "#5F3B11", "shine": "#FAECDC", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "gold-edition",
+      "name": "Gold edition",
+      "tags": ["luxe"],
+      "colors": { "ink": "#1C1917", "c1": "#C9A44C", "c2": "#F3E3B5", "c3": "#1C1917", "c4": "#6E5317", "tint": "#F0E6CD", "accent": "#6E5317", "shadow": "#5E4B1C", "shine": "#F7F2E6", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#0B57D0", "c2": "#FFC107", "c3": "#FFFFFF", "c4": "#111111", "tint": "#BBD0F2", "accent": "#FFC107", "shadow": "#102E5D", "shine": "#DDE7F8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "night-shoot",
+      "name": "Night shoot",
+      "tags": ["dark"],
+      "colors": { "ink": "#0B1120", "c1": "#475569", "c2": "#F43F5E", "c3": "#CBD5E1", "c4": "#1E293B", "tint": "#CBCFD5", "accent": "#F43F5E", "shadow": "#242B35", "shine": "#E5E7EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "harvest-footage",
+      "name": "Harvest footage",
+      "tags": ["seasonal"],
+      "colors": { "ink": "#2C1D11", "c1": "#B45309", "c2": "#15803D", "c3": "#FCD34D", "c4": "#451A03", "tint": "#EACFBA", "accent": "#FCD34D", "shadow": "#502B0E", "shine": "#F5E7DD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "webinar-teal",
+      "name": "Webinar teal",
+      "tags": ["corporate"],
+      "colors": { "ink": "#112C2A", "c1": "#0F766E", "c2": "#F59E0B", "c3": "#CCFBF1", "c4": "#134E4A", "tint": "#BCD9D6", "accent": "#F59E0B", "shadow": "#0A3935", "shine": "#DDECEB", "edge": "#FFFFFF" }
+    }
+  ]
+}

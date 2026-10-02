@@ -1,0 +1,82 @@
+{
+  "name": "hospital",
+  "category": "health",
+  "description": "A hospital building with a medical cross for hospitals, clinics, and medical centres.",
+  "aliases": [
+    "hospital-building",
+    "clinic-building",
+    "medical-center",
+    "medical-centre",
+    "emergency-room",
+    "infirmary",
+    "health-center",
+    "healthcare",
+    "er"
+  ],
+  "tags": [
+    "health",
+    "medical",
+    "building",
+    "clinic",
+    "emergency",
+    "care"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 21 V5 A2 2 0 0 1 8.5 3 H15.5 A2 2 0 0 1 17.5 5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11 H4.5 A2 2 0 0 0 2.5 13 V21 H21.5 V13 A2 2 0 0 0 19.5 11 H17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6 V11 M9.5 8.5 H14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 21 V17 H13.5 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 21 V5 A2 2 0 0 1 8.5 3 H15.5 A2 2 0 0 1 17.5 5 V11 H19.5 A2 2 0 0 1 21.5 13 V21 Z M2.5 21 V13 A2 2 0 0 1 4.5 11 H6.5 V21 Z"
+  ],
+  "cutouts": [
+    "M12 6 V11",
+    "M9.5 8.5 H14.5",
+    "M10.5 21 V17 H13.5 V21 Z",
+    "M6.5 11 V21",
+    "M17.5 11 V21"
+  ],
+  "synonyms": [
+    "hospitals",
+    "clinic",
+    "clinics",
+    "health centre",
+    "medical facility",
+    "care home",
+    "nursing home",
+    "emergency",
+    "a and e",
+    "a&e",
+    "accident and emergency",
+    "ward",
+    "admission",
+    "admitted",
+    "inpatient",
+    "outpatient",
+    "doctor",
+    "doctors office",
+    "surgery",
+    "sanatorium",
+    "medical building",
+    "nearest hospital",
+    "find a hospital",
+    "health system",
+    "nhs",
+    "red cross",
+    "hopital",
+    "hospitel"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "fish",
+  "category": "nature",
+  "description": "A fish in profile with a forked tail for seafood, aquariums, fishing and the ocean.",
+  "aliases": [
+    "seafood",
+    "aquarium",
+    "sea-life",
+    "goldfish",
+    "pescatarian",
+    "fishing",
+    "fishes",
+    "marine-life",
+    "sea-fish",
+    "fish-tank"
+  ],
+  "tags": [
+    "animal",
+    "fish",
+    "ocean",
+    "seafood",
+    "aquarium"
+  ],
+  "paths": [
+    {
+      "d": "M7 12 C9 8.25 12 6.5 15 6.5 C18.5 6.5 21 9 21.5 12 C21 15 18.5 17.5 15 17.5 C12 17.5 9 15.75 7 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 12 L3.5 9 C3 8.5 2.5 8.75 2.5 9.5 V14.5 C2.5 15.25 3 15.5 3.5 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17 10.5 V11",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 9.75 C13.25 11.25 13.25 12.75 12.5 14.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 12 C9 8.25 12 6.5 15 6.5 C18.5 6.5 21 9 21.5 12 C21 15 18.5 17.5 15 17.5 C12 17.5 9 15.75 7 12 Z",
+    "M7 12 L3.5 9 C3 8.5 2.5 8.75 2.5 9.5 V14.5 C2.5 15.25 3 15.5 3.5 15 Z"
+  ],
+  "cutouts": [
+    "M17.9 10.75 A0.9 0.9 0 1 1 16.1 10.75 A0.9 0.9 0 1 1 17.9 10.75 Z",
+    "M12.5 9.75 C13.25 11.25 13.25 12.75 12.5 14.25"
+  ],
+  "synonyms": [
+    "angler",
+    "angling",
+    "catch of the day",
+    "fish market",
+    "fishmonger",
+    "sushi",
+    "salmon",
+    "tuna",
+    "cod",
+    "fish and chips",
+    "ocean",
+    "sea",
+    "marine",
+    "underwater",
+    "swim",
+    "pet fish",
+    "tropical fish",
+    "koi",
+    "aquatic",
+    "pisces",
+    "ichthys",
+    "omega 3",
+    "fsh",
+    "fisih"
+  ]
+}

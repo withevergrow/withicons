@@ -9,7 +9,7 @@ Fixed names:
 |---|---|
 | website | https://withicons.com (www redirects to the apex) |
 | GitHub | https://github.com/withevergrow/withicons (existing org `withevergrow`) |
-| npm packages | `@withicons/core react vue svelte angular solid web static search mcp`, plus the unscoped CLI `withicons` |
+| npm packages | `@withicons/core react vue svelte angular solid web static search mcp motion`, plus the unscoped CLI `withicons` (one lockstep version; `scripts/publish.mjs` refuses to run if one is missing) |
 | npm publisher | personal npm **user** account `withicons`, which owns the `@withicons` user scope |
 | npm org | `with-icons` (scope `@with-icons`): **reserved, unused** for now |
 | AWS stacks | `withicons-dns`, `withicons-site` (both us-east-1) |
@@ -35,7 +35,8 @@ hand and everything after that is published by GitHub Actions without tokens.
    ```
 4. **Build and inspect** (from a clean checkout of `main`):
    ```bash
-   npm ci && node forge/build.mjs && node forge/tools/check.mjs && npm test --workspaces --if-present
+   npm ci && node forge/build.mjs && node forge/tools/check.mjs && node forge/tools/check-motion.mjs
+   node forge/tools/check-palettes.mjs --quiet && node scripts/skill-sync.mjs --check && npm test --workspaces --if-present
    node scripts/publish.mjs --dry-run        # npm publish --dry-run per package, in dependency order
    ```
    Read the file lists printed by the dry run: only `dist/`, `README.md`, `LICENSE`, `package.json` should ship.
@@ -55,12 +56,12 @@ hand and everything after that is published by GitHub Actions without tokens.
    - Workflow filename: **`release.yml`** · Environment: **`npm`**
    - Then, in the same settings page under **Publishing access**, choose *"Require two-factor authentication and disallow tokens"*.
    Repeat for each package (`@withicons/core`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `static`, `search`,
-   `mcp`, and `withicons`).
+   `mcp`, `motion`, and `withicons`).
 7. **[you] Remove tokens.** If you created an `NPM_TOKEN` (granular, publish-only, 7-day expiry) as a stop-gap,
    delete the GitHub secret and revoke the token at npmjs.com, then Access Tokens. `release.yml` works without it.
 8. **Co-maintainers** (later): they create their own npm accounts with 2FA, then
    ```bash
-   for p in core react vue svelte angular solid web static search mcp; do npm owner add <user> @withicons/$p; done
+   for p in core react vue svelte angular solid web static search mcp motion; do npm owner add <user> @withicons/$p; done
    npm owner add <user> withicons
    ```
 9. **Verify** after the first CI release: `npm audit signatures` in a project that installs a package, and the
@@ -71,7 +72,7 @@ hand and everything after that is published by GitHub Actions without tokens.
 1. **Before the first push**, review history for anything private: `git log --stat`, plus `forge/.claims/` and `.preview/`
    (internal working files; delete or `.gitignore` them). The old name *egopenicons* in history is harmless.
 2. **[you] Push** `main`. Repository settings:
-   - Description: *"300 free icons in 7 styles for websites, apps, slides and docs. React, Vue, Svelte, Angular, Solid, web component, MCP."*
+   - Description: *"500 free icons in 12 styles, with animations, for websites, apps, slides and docs. React, Vue, Svelte, Angular, Solid, web component, MCP."*
    - Website `https://withicons.com`. Topics: `icons svg icon-library react vue svelte angular solidjs web-components mcp design`.
    - Social preview: an OG image (1280x640) from `site/og/`.
    - Features: Issues ✓, Discussions ✓ (categories: Q&A, Ideas, Show and tell), Wiki ✗, Projects optional.
@@ -101,33 +102,49 @@ hand and everything after that is published by GitHub Actions without tokens.
     prop/attribute/export changes, visible geometry changes to a whole style.
   - `0.x.PATCH` bump means additive or fixes: new icons, new aliases, drawing fixes to single icons, docs.
   - A renamed icon keeps its old name as an alias for at least one minor version.
-- **1.0** once names, props and the 7 styles have been stable for about two minors with no breaking reports.
+- **1.0** once names, props, the 12 styles and the motion classes have been stable for about two minors with no breaking reports.
 - Prereleases (`0.3.0-beta.1`) publish under the `next` dist-tag automatically.
 - `CHANGELOG.md` (Keep a Changelog format): every user-facing PR adds a line under *Unreleased*. GitHub
   Release notes are generated from PR titles by `release.yml`.
 - **Release** (after the first manual publish):
   ```bash
-  # bump "withiconsVersion" in the root package.json (e.g. "0.2.0") - every package gets this version
+  # bump "withiconsVersion" in the root package.json (e.g. "0.3.0") - every package gets this version
   node forge/build.mjs && node forge/tools/check.mjs
-  # move CHANGELOG "Unreleased" to "## 0.2.0 - YYYY-MM-DD", open a PR, merge
-  git tag v0.2.0 && git push origin v0.2.0      # release.yml publishes + creates the GitHub Release
+  # move CHANGELOG "Unreleased" to "## 0.3.0 - YYYY-MM-DD", open a PR, merge
+  git tag v0.3.0 && git push origin v0.3.0      # release.yml publishes + creates the GitHub Release
   ```
   For a dry run, open Actions, then *Release to npm*, then *Run workflow* with `dry_run` checked.
 
-## 4. First release checklist (0.1.0)
+## 4. First npm release checklist (0.2.0)
 
+`v0.1.0` (300 icons x 7 styles) is already tagged and released on GitHub, but nothing is on npm yet. The tree now has
+500 icons x 12 styles, motion and palettes, so the first npm publish is **0.2.0**: bump `withiconsVersion` in the root
+`package.json`, run `node forge/build.mjs`, move CHANGELOG "Unreleased" to `## 0.2.0 - YYYY-MM-DD`, commit, then publish
+by hand (section 1.5). `scripts/publish.mjs` refuses to publish a version whose tag sits on another commit.
+
+- [ ] Root `package.json` `withiconsVersion` is `0.2.0` and every `packages/*/package.json` says so (`node scripts/publish.mjs --dry-run`
+      prints no `already tagged` warning).
 - [ ] `npm view` confirms every name is free (section 1).
 - [ ] No `egopenicons` / `eg-` leftovers: `git grep -n -i "egopenicons\|@egopenicons\|<eg-icon"` returns nothing outside history.
 - [ ] Each package README shows the right install line, import path and props, and links to withicons.com.
 - [ ] `node scripts/publish.mjs --dry-run`: tarball contents are sane and sizes match the README tables.
 - [ ] Smoke test in fresh apps: Vite React, Vite Vue, SvelteKit, Angular CLI, SolidStart, and plain HTML with the web
       component from jsDelivr plus the icon classes CSS. Check TypeScript types, tree-shaking (one icon gives a tiny bundle), and SSR.
-- [ ] `npx -y @withicons/mcp` starts and lists tools in an MCP client. `npx withicons search trash` works.
+- [ ] `npx -y @withicons/mcp` starts and lists tools in an MCP client (seven, including `animate_icon` and `list_palettes`). `npx withicons search trash`
+      and `npx withicons animate bell --trigger hover` work.
+- [ ] `@withicons/motion`: `motion.css` + `icons.css` from jsDelivr animate a React icon, a `<with-icon>` and an `<i class="with">`;
+      `prefers-reduced-motion` turns them off; a swap toggles with `.is-on`.
+- [ ] Palette styles: an `<img>` of `core/dist/svg/kawaii/heart.svg` shows its colours; `with-all.css` shows them CSS-only;
+      `--with-kawaii-*` variables re-theme a React icon.
+- [ ] Per-icon palettes: `import { applyPalette } from '@withicons/core/palettes/palette-map.js'` works on Node 18 and 20
+      (palette-map ships as `.mjs` + `.cjs`, so the `package` icon's `dist/palettes/package.json` data file can't change its module type),
+      and `npx withicons get pizza --style retro --palette pepperoni` recolours every part.
+- [ ] Package READMEs: drop the "Not published to npm yet / launching soon" notes (`packages/cli`, `mcp`, `motion`; they ship to npm).
 - [ ] After publishing: jsDelivr URLs resolve (`https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js`).
       Purge if needed: `https://purge.jsdelivr.net/npm/@withicons/web/dist/index.js`.
 - [ ] Site: "launching soon" labels next to install commands are removed (site owners), GitHub links go live.
 - [ ] Trusted Publishing configured for every package (section 1.6), tokens revoked.
-- [ ] Tag `v0.1.0` on the published commit (`git tag v0.1.0 <sha> && git push origin v0.1.0`). The workflow skips
+- [ ] Tag `v0.2.0` on the published commit (`git tag v0.2.0 <sha> && git push origin v0.2.0`). The workflow skips
       already-published versions and only creates the GitHub Release.
 
 ## 5. AWS account setup
@@ -249,12 +266,12 @@ pitch, and "why another icon set" (one skeleton, 7 renderers, aliases for humans
 | T-1 | MCP directories | **official MCP Registry** (`mcp-publisher publish`, namespace `io.github.withevergrow/withicons` or DNS-verified `com.withicons/*`), Smithery, Glama, PulseMCP, mcp.so, mcpservers.org, `punkpeye/awesome-mcp-servers` PR |
 | T-1 | agent skill/rules directories | Claude skills lists (e.g. awesome-claude-skills PRs), cursor.directory (MCP + rules from `.cursor/rules/with-icons.mdc`), Cline MCP marketplace, Windsurf/Continue hubs |
 | T0 | Product Hunt | reply to every comment all day |
-| T0 | **Show HN** | "Show HN: with icons - 300 icons drawn once, rendered in 7 styles by code". Post 8-10 AM ET, link the site (not the repo), first comment explains the forge, stay for questions |
-| T0 | X, Bluesky, Mastodon, LinkedIn | video first; thread: problem, the 7 styles, aliases ("bin" finds trash), AI agents (MCP + skill), MIT |
+| T0 | **Show HN** | "Show HN: with icons - 500 icons drawn once, rendered in 12 styles by code, with animations". Post 8-10 AM ET, link the site (not the repo), first comment explains the forge, stay for questions |
+| T0 | X, Bluesky, Mastodon, LinkedIn | video first; thread: problem, the 12 styles (kawaii, pixel, glass...), hover and swap animations, aliases ("bin" finds trash), AI agents (MCP + skill), MIT |
 | T0..T+7 | Reddit | r/webdev (Showoff Saturday only), r/web_design, r/SideProject, r/opensource, r/reactjs, r/vuejs, r/sveltejs, r/angular, r/solidjs, r/UI_Design, r/ClaudeAI, r/cursor. Read each sub's self-promo rules, one post per sub, spaced out |
 | T+1 | newsletters (submit) | JavaScript Weekly, Frontend Focus, React Status, Node Weekly, Bytes, TLDR Web Dev, Sidebar.io, Smashing, CSS Weekly, Console.dev, Changelog News, Designer News |
 | T+3 | awesome lists (PRs) | awesome-react-components, awesome-vue, awesome-svelte, awesome-angular, awesome-solid-js, awesome-web-components, awesome-design-systems, awesome-svg, awesome-opensource-design |
-| T+7 | write-up | blog post or dev.to: "How we generate 2,100 icons from 300 skeletons" (Hacker News second chance, Lobsters) |
+| T+7 | write-up | blog post or dev.to: "How we generate 6,000 icons from 500 skeletons" (Hacker News second chance, Lobsters) |
 
 ## 9. Post-launch metrics (review weekly for the first 8 weeks)
 

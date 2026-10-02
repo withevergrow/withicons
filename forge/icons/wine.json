@@ -1,0 +1,79 @@
+{
+  "name": "wine",
+  "category": "food",
+  "description": "A stemmed wine glass for wine, drinks, dinner, and celebrations.",
+  "aliases": [
+    "wine-glass",
+    "glass-of-wine",
+    "winery",
+    "toast",
+    "drinks",
+    "red-wine",
+    "white-wine",
+    "vino",
+    "sommelier",
+    "vineyard"
+  ],
+  "tags": [
+    "drink",
+    "alcohol",
+    "dinner",
+    "restaurant",
+    "celebration",
+    "glass"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 2.5 H17.5 C18.5 6 18.5 8.5 17 11 C15.75 13 14 14 12 14 C10 14 8.25 13 7 11 C5.5 8.5 5.5 6 6.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 14 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 21.5 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M6 7 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 2.5 H17.5 C18.5 6 18.5 8.5 17 11 C15.75 13 14 14 12 14 C10 14 8.25 13 7 11 C5.5 8.5 5.5 6 6.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M6 7 H18"
+  ],
+  "synonyms": [
+    "wine glass",
+    "glass of wine",
+    "wines",
+    "red",
+    "rose",
+    "rosé",
+    "champagne",
+    "prosecco",
+    "bar",
+    "wine bar",
+    "wine list",
+    "wine tasting",
+    "dinner",
+    "date night",
+    "restaurant",
+    "fine dining",
+    "alcohol",
+    "cheers",
+    "celebrate",
+    "celebration",
+    "anniversary",
+    "drinks menu",
+    "merlot",
+    "cabernet",
+    "stemware",
+    "goblet",
+    "whine",
+    "wien"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "check-square",
+  "intent": "ticks itself like a checkbox being checked",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "square",
+      "effect": "fade"
+    },
+    {
+      "to": "check-square@solid",
+      "effect": "scale"
+    }
+  ]
+}

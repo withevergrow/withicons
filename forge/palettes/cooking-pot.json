@@ -1,0 +1,475 @@
+{
+  "name": "cooking-pot",
+  "palettes": [
+    {
+      "id": "stainless-steel",
+      "name": "Stainless steel",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1F2933",
+        "c1": "#C9D1D9",
+        "c2": "#A5B0BC",
+        "c3": "#EEF2F5",
+        "c4": "#5A6573",
+        "tint": "#F4F6F7",
+        "accent": "#FFFFFF",
+        "shadow": "#636C75",
+        "shine": "#EFF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cast-iron",
+      "name": "Cast iron",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#46464C",
+        "c2": "#2B2B30",
+        "c3": "#8A8A94",
+        "c4": "#C98A3A",
+        "tint": "#DADADB",
+        "accent": "#C98A3A",
+        "shadow": "#1C1C1E",
+        "shine": "#C8C8C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cerise-enamel",
+      "name": "Cerise enamel",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0606",
+        "c1": "#D7263D",
+        "c2": "#B01E30",
+        "c3": "#F7F1E8",
+        "c4": "#2B2B30",
+        "tint": "#F7D4D8",
+        "accent": "#F7F1E8",
+        "shadow": "#6F131C",
+        "shine": "#F3BEC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "flame-orange",
+      "name": "Flame orange",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#F26A1B",
+        "c2": "#D9531A",
+        "c3": "#F7F1E8",
+        "c4": "#2B2B30",
+        "tint": "#FCE1D1",
+        "accent": "#FFC27A",
+        "shadow": "#7C350E",
+        "shine": "#FBD2BB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dutch-oven-teal",
+      "name": "Dutch oven teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2A2A",
+        "c1": "#2A9D8F",
+        "c2": "#21857A",
+        "c3": "#F7F1E8",
+        "c4": "#E9C46A",
+        "tint": "#D4EBE9",
+        "accent": "#E9C46A",
+        "shadow": "#175852",
+        "shine": "#BFE2DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-pot",
+      "name": "Copper pot",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2E1406",
+        "c1": "#C9773A",
+        "c2": "#A85E28",
+        "c3": "#F6E0CD",
+        "c4": "#D9AE43",
+        "tint": "#F4E4D8",
+        "accent": "#F6E0CD",
+        "shadow": "#6C3C1B",
+        "shine": "#EFD6C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cream-enamel",
+      "name": "Cream enamel",
+      "tags": [
+        "vintage",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2B241A",
+        "c1": "#F2EAD3",
+        "c2": "#E2D6B4",
+        "c3": "#2F5597",
+        "c4": "#C8102E",
+        "tint": "#FCFBF6",
+        "accent": "#2F5597",
+        "shadow": "#7B7364",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sage-enamel",
+      "name": "Sage enamel",
+      "tags": [
+        "nature",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1F2A1A",
+        "c1": "#9CB08A",
+        "c2": "#879C75",
+        "c3": "#F2EDE0",
+        "c4": "#5C6E4E",
+        "tint": "#EBEFE8",
+        "accent": "#E8C59A",
+        "shadow": "#516047",
+        "shine": "#E1E7DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cobalt-enamel",
+      "name": "Cobalt enamel",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#081433",
+        "c1": "#2F55D4",
+        "c2": "#2546B0",
+        "c3": "#F3F6FF",
+        "c4": "#E8B931",
+        "tint": "#D5DDF6",
+        "accent": "#E8B931",
+        "shadow": "#182E73",
+        "shine": "#C1CCF2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "butter-yellow",
+      "name": "Butter yellow",
+      "tags": [
+        "pastel",
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A2E00",
+        "c1": "#F7D774",
+        "c2": "#EBC659",
+        "c3": "#FFF8DC",
+        "c4": "#8A6A00",
+        "tint": "#FDF7E3",
+        "accent": "#F2A7B0",
+        "shadow": "#86722E",
+        "shine": "#FDF3D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blush-pink",
+      "name": "Blush pink",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A2034",
+        "c1": "#F4B6C8",
+        "c2": "#E89DB2",
+        "c3": "#FFF2F5",
+        "c4": "#A85A75",
+        "tint": "#FDF0F4",
+        "accent": "#FFF2F5",
+        "shadow": "#8E5C6F",
+        "shine": "#FCE9EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "speckled-camp",
+      "name": "Speckled camp",
+      "tags": [
+        "vintage",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#0E2236",
+        "c1": "#2F6FAE",
+        "c2": "#255B90",
+        "c3": "#F3F6F9",
+        "c4": "#E0A458",
+        "tint": "#D5E2EF",
+        "accent": "#E0A458",
+        "shadow": "#1B4166",
+        "shine": "#C1D4E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "le-noir-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#3A3A42",
+        "c2": "#2A2A30",
+        "c3": "#E2B33D",
+        "c4": "#9A9AA8",
+        "tint": "#D8D8D9",
+        "accent": "#E2B33D",
+        "shadow": "#17171A",
+        "shine": "#C4C4C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-avocado",
+      "name": "70s avocado",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#1E2A0E",
+        "c1": "#8E9C3A",
+        "c2": "#C2552D",
+        "c3": "#E9A23B",
+        "c4": "#F4E3B5",
+        "tint": "#E8EBD8",
+        "accent": "#E9A23B",
+        "shadow": "#4B5820",
+        "shine": "#DDE1C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-harvest",
+      "name": "Harvest gold",
+      "tags": [
+        "retro",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1A06",
+        "c1": "#E3A23A",
+        "c2": "#C98A1A",
+        "c3": "#8C3B1A",
+        "c4": "#F4E3B5",
+        "tint": "#F9ECD8",
+        "accent": "#8C3B1A",
+        "shadow": "#75501B",
+        "shine": "#F7E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "witch-cauldron",
+      "name": "Witch's cauldron",
+      "tags": [
+        "seasonal",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#3E3550",
+        "c2": "#8CE04A",
+        "c3": "#7A3BB0",
+        "c4": "#FF7A1A",
+        "tint": "#D8D7DC",
+        "accent": "#8CE04A",
+        "shadow": "#191520",
+        "shine": "#C5C2CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-stew",
+      "name": "Holiday stew",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#B3202A",
+        "c2": "#9C1B24",
+        "c3": "#1E6B45",
+        "c4": "#E8C068",
+        "tint": "#F0D2D4",
+        "accent": "#E8C068",
+        "shadow": "#611314",
+        "shine": "#E8BCBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-pot",
+      "name": "Candy pot",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1028",
+        "c1": "#FF77B4",
+        "c2": "#FF9EC8",
+        "c3": "#7FE3F0",
+        "c4": "#FFE066",
+        "tint": "#FFE4F0",
+        "accent": "#FFE066",
+        "shadow": "#893960",
+        "shine": "#FFD6E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-pot",
+      "name": "Y2K pot",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#B8A9FF",
+        "c2": "#A797F2",
+        "c3": "#FF9EE8",
+        "c4": "#C9FF6B",
+        "tint": "#F1EEFF",
+        "accent": "#FF9EE8",
+        "shadow": "#635996",
+        "shine": "#EAE5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-hotpot",
+      "name": "Neon hot pot",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF6B3D",
+        "c1": "#160A08",
+        "c2": "#24120E",
+        "c3": "#3DF2FF",
+        "c4": "#FFE14D",
+        "tint": "#D0CECE",
+        "accent": "#3DF2FF",
+        "shadow": "#090403",
+        "shine": "#B9B6B5",
+        "edge": "#030201"
+      }
+    },
+    {
+      "id": "ocean-pot",
+      "name": "Seaside pot",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#072A40",
+        "c1": "#1B98E0",
+        "c2": "#1784C4",
+        "c3": "#E8F7FB",
+        "c4": "#F4A261",
+        "tint": "#D1EAF9",
+        "accent": "#F4A261",
+        "shadow": "#0F5680",
+        "shine": "#BBE0F6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mint-ramp",
+      "name": "Mint ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0E3A2E",
+        "c1": "#6FD3AE",
+        "c2": "#5BC09B",
+        "c3": "#D6F5EA",
+        "c4": "#2E8A6A",
+        "tint": "#E2F6EF",
+        "accent": "#D6F5EA",
+        "shadow": "#357761",
+        "shine": "#D4F2E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#E4002B",
+        "c2": "#FFD400",
+        "c3": "#FFFFFF",
+        "c4": "#0050EF",
+        "tint": "#FACCD5",
+        "accent": "#FFD400",
+        "shadow": "#5B0011",
+        "shine": "#F7B3BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "terracotta-clay",
+      "name": "Clay pot",
+      "tags": [
+        "earthy",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1A10",
+        "c1": "#C8673F",
+        "c2": "#B35A35",
+        "c3": "#F2D6A8",
+        "c4": "#7E8F6A",
+        "tint": "#F4E1D9",
+        "accent": "#F2D6A8",
+        "shadow": "#733923",
+        "shine": "#EFD1C5",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

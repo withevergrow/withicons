@@ -1,5 +1,7 @@
 // Facts about the most-searched open-source icon libraries (same rules as libraries.mjs: official sources only,
 // checked on CHECKED, hedged numbers, names verified against each library's published icon data).
+import { N_ICONS as N, N_STYLES as NS } from '../site-pages/lib.mjs'
+const timesOurs = n => { const r = n / N; return r >= 1.75 ? `about ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'][Math.round(r)] || Math.round(r)} times our ${N}` : `more than our ${N}` }
 
 export const OPEN_LIBS = [
   /* ───────────────────────── Font Awesome ───────────────────────── */
@@ -37,7 +39,7 @@ export const OPEN_LIBS = [
     us: [
       'You want the Font Awesome way of working (<code>&lt;i class="…"&gt;</code>) under a plain MIT licence, with nothing behind a paywall.',
       'You want expressive styles for free: Duo, Gloss, Engrave, Blueprint and Sketch next to Line and Solid.',
-      'You want a smaller, tidy set (300 icons) that covers everyday interfaces, slides and docs.',
+      `You want a smaller, tidy set (${N} icons) that covers everyday interfaces, slides and docs, in ${NS} styles that can also move.`,
     ],
     migrate: {
       mode: 'class',
@@ -52,7 +54,7 @@ export const OPEN_LIBS = [
       styleNote: 'Font Awesome <b>Regular</b> → our <b>Line</b> (no style class); <b>Solid</b> → <b>with-solid</b>; <b>Duotone</b> → <b>with-duo</b>. Brand logos aren’t part of with icons.',
     },
     faq: [
-      ['Is with icons a drop-in replacement for Font Awesome?', 'Not a drop-in: the class pattern is the same but many names differ, and with icons has 300 icons and no brand logos. For everyday interface icons the switch takes minutes with the name map and converter on this page.'],
+      ['Is with icons a drop-in replacement for Font Awesome?', `Not a drop-in: the class pattern is the same but many names differ, and with icons has ${N} icons and no brand logos. For everyday interface icons the switch takes minutes with the name map and converter on this page.`],
       ['Can I use with icons and Font Awesome on the same page?', 'Yes. The class names don’t clash (<code>with-</code> vs <code>fa-</code>), so you can move over one screen at a time.'],
     ],
   },
@@ -205,7 +207,7 @@ export const OPEN_LIBS = [
       styleNote: 'Lucide’s stroke style → our <b>Line</b> (default import). Want filled or tinted? Import from <code>@withicons/react/solid</code> or <code>/duo</code>.',
     },
     faq: [
-      ['Is with icons a fork of Lucide or Feather?', 'No. with icons is drawn from scratch on its own 24 × 24 skeletons, then rendered in 7 styles. It shares the same kind of API (one component per icon, size/color/strokeWidth props), which makes switching easy.'],
+      ['Is with icons a fork of Lucide or Feather?', `No. with icons is drawn from scratch on its own 24 × 24 skeletons, then rendered in ${NS} styles. It shares the same kind of API (one component per icon, size/color/strokeWidth props), which makes switching easy.`],
     ],
   },
 
@@ -288,7 +290,7 @@ export const OPEN_LIBS = [
     them: [
       'You want six weights of the same icon, from hairline Thin to Bold and Duotone.',
       'You build for mobile and desktop too (React Native, Flutter, Swift).',
-      'You need about 1,500 icons, five times our 300.',
+      `You need about 1,500 icons, ${timesOurs(1500)}.`,
     ],
     us: [
       'You want styles with more character: Gloss, Engrave, Blueprint and Sketch, not just weights.',
@@ -387,11 +389,11 @@ export const OPEN_LIBS = [
     ],
     them: [
       'You want the biggest free MIT stroke set: over 6,000 icons, very actively maintained.',
-      'You need a niche icon that a 300-icon set won’t have.',
+      `You need a niche icon that a ${N}-icon set won’t have.`,
       'You want packages for nearly every framework, plus PNG and PDF exports.',
     ],
     us: [
-      'You want a curated 300 that’s easy to browse, where every icon has a reason to exist.',
+      `You want a curated ${N} that’s easy to browse, where every icon has a reason to exist.`,
       'You want five extra looks with the same names: Duo, Gloss, Engrave, Blueprint and Sketch.',
       'You want an MCP server and agent skill so AI tools pick the right icon.',
     ],
@@ -407,7 +409,7 @@ export const OPEN_LIBS = [
       styleNote: 'Tabler <b>outline</b> → our <b>Line</b>; <code>-filled</code> → <b>with-solid</b>. Tabler strokes are 2 px; ours default to 1.75 and can be changed in the components.',
     },
     faq: [
-      ['Tabler has 6,000+ icons. Why pick a set with 300?', 'Because a smaller set is quicker to search and every icon is drawn in 7 matching styles. If you need a rare icon, Tabler is a great choice, and the two can be used side by side.'],
+      [`Tabler has 6,000+ icons. Why pick a set with ${N}?`, `Because a smaller set is quicker to search and every icon is drawn in ${NS} matching styles. If you need a rare icon, Tabler is a great choice, and the two can be used side by side.`],
     ],
   },
 ]

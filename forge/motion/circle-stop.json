@@ -1,0 +1,8 @@
+{
+  "name": "circle-stop",
+  "intent": "pulses softly like a recording you can stop",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.5, "duration": 1.8 },
+  "hover": { "preset": "jelly", "origin": [12, 12], "amount": 0.8, "duration": 0.6 },
+  "alt": [ { "preset": "pop" }, { "preset": "glow" } ],
+  "swap": [ { "to": "circle-play", "effect": "scale" }, { "to": "circle-pause", "effect": "morph" }, { "to": "circle-stop@solid", "effect": "fade" } ]
+}

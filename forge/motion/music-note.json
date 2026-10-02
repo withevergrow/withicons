@@ -1,0 +1,46 @@
+{
+  "name": "music-note",
+  "intent": "bops along to the beat of a song",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      8,
+      21
+    ],
+    "amount": 1.2,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        8,
+        21
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        8,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "volume",
+      "effect": "fade"
+    },
+    {
+      "to": "play",
+      "effect": "scale"
+    }
+  ]
+}

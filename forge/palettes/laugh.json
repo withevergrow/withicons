@@ -1,0 +1,26 @@
+{
+  "name": "laugh",
+  "palettes": [
+    {"id":"emoji-yellow","name":"Emoji yellow","tags":["true-to-life","vivid"],"colors":{"ink":"#2B1D05","c1":"#FFC933","c2":"#E8453C","c3":"#FFE38A","c4":"#C9731C","tint":"#FFF4D6","accent":"#FF7AA8","shadow":"#735A17","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunshine-joy","name":"Sunshine joy","tags":["true-to-life"],"colors":{"ink":"#2E1A00","c1":"#FFB300","c2":"#FF6F3C","c3":"#FFE082","c4":"#D97706","tint":"#FFF0CC","accent":"#FF4F7B","shadow":"#735100","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"belly-laugh","name":"Belly laugh","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0F05","c1":"#FF8A3D","c2":"#E8453C","c3":"#FFC59B","c4":"#B04A12","tint":"#FFE8D8","accent":"#FFE14D","shadow":"#733E1B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tears-of-joy","name":"Tears of joy","tags":["true-to-life"],"colors":{"ink":"#2B1D05","c1":"#FFD23F","c2":"#5BB8F5","c3":"#FFF0B3","c4":"#E0A100","tint":"#FFF6D9","accent":"#5BB8F5","shadow":"#735E1C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"five-stars","name":"Five-star review","tags":["accessible"],"colors":{"ink":"#062A16","c1":"#3BC46B","c2":"#F5B700","c3":"#B7EFC9","c4":"#1A7A3C","tint":"#D8F3E1","accent":"#F5B700","shadow":"#1B5830","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum-giggle","name":"Bubblegum giggle","tags":["candy","pastel"],"colors":{"ink":"#3A0E2A","c1":"#FF9ED2","c2":"#FF5FA2","c3":"#FFD6EC","c4":"#D04A8A","tint":"#FFECF6","accent":"#7AE1FF","shadow":"#73475E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"peach-fizz","name":"Peach fizz","tags":["pastel"],"colors":{"ink":"#3A1A10","c1":"#FFC4A3","c2":"#FF8C69","c3":"#FFE6D6","c4":"#E07A55","tint":"#FFF3ED","accent":"#FF6FA0","shadow":"#735849","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"citrus-zest","name":"Citrus zest","tags":["vivid","nature"],"colors":{"ink":"#1F2A05","c1":"#C8E63C","c2":"#FFB000","c3":"#EAF7A8","c4":"#6E8F12","tint":"#F4FAD8","accent":"#FF5F3C","shadow":"#5A671B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-sparkle","name":"Y2K sparkle","tags":["y2k","candy"],"colors":{"ink":"#2A1A4A","c1":"#F7A8FF","c2":"#7BE0FF","c3":"#FFE6FF","c4":"#A45CC9","tint":"#FDEEFF","accent":"#FFE14D","shadow":"#6F4C73","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-giggles","name":"Sunset giggles","tags":["sunset","retro"],"colors":{"ink":"#2A0F1A","c1":"#FF9A3C","c2":"#F2546B","c3":"#FFD27A","c4":"#C97ADB","tint":"#FFEBD8","accent":"#7A4FC2","shadow":"#73451B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"groovy-70s","name":"Groovy 70s","tags":["retro"],"colors":{"ink":"#2A170A","c1":"#F0A830","c2":"#D9572B","c3":"#7D8F3A","c4":"#F2C46B","tint":"#FCEED6","accent":"#F2D06B","shadow":"#6C4C16","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"party-confetti","name":"Party confetti","tags":["vivid"],"colors":{"ink":"#1A1033","c1":"#FFD23F","c2":"#FF4F9A","c3":"#3DD6F5","c4":"#7A3DF0","tint":"#FFF6D9","accent":"#3DD6F5","shadow":"#735E1C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pool-party","name":"Pool party","tags":["ocean","vivid"],"colors":{"ink":"#052A33","c1":"#3CC8E6","c2":"#FF8A5B","c3":"#B5EEF7","c4":"#13789A","tint":"#D8F4FA","accent":"#FFD23F","shadow":"#1B5A67","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lime-lol","name":"Lime LOL","tags":["vivid"],"colors":{"ink":"#102A05","c1":"#9BE564","c2":"#FF5FA2","c3":"#D6F7B8","c4":"#4F9A20","tint":"#EBFAE0","accent":"#FF5FA2","shadow":"#46672D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lavender-chuckle","name":"Lavender chuckle","tags":["pastel"],"colors":{"ink":"#2A1F4A","c1":"#CDB8FF","c2":"#FF9ECF","c3":"#EDE4FF","c4":"#8C6FE0","tint":"#F5F1FF","accent":"#FF9ECF","shadow":"#5C5373","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"spring-bloom","name":"Spring bloom","tags":["seasonal","nature"],"colors":{"ink":"#1F2A10","c1":"#FFE066","c2":"#F78FB3","c3":"#B8E89A","c4":"#C9A100","tint":"#FFF9E0","accent":"#F78FB3","shadow":"#73652E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"summer-pop","name":"Summer pop","tags":["seasonal","vivid"],"colors":{"ink":"#2A1205","c1":"#FFA62B","c2":"#2EC4B6","c3":"#FFE0A8","c4":"#C46A00","tint":"#FFEDD5","accent":"#EF476F","shadow":"#734B13","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-cartoon","name":"Vintage cartoon","tags":["vintage"],"colors":{"ink":"#2E2116","c1":"#F2D58A","c2":"#D9603B","c3":"#F7EAD0","c4":"#A8875E","tint":"#FCF7E8","accent":"#D9603B","shadow":"#6D603E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"grayscale","name":"Grayscale","tags":["grayscale"],"colors":{"ink":"#141416","c1":"#D4D4D8","c2":"#7A7A82","c3":"#F0F0F2","c4":"#A8A8AE","tint":"#F6F6F7","accent":"#7A7A82","shadow":"#5F5F61","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-lol","name":"Neon LOL","tags":["neon","on-dark"],"colors":{"ink":"#FFE14D","c1":"#1F1A05","c2":"#FF3DCB","c3":"#3DF5FF","c4":"#4A3D0A","tint":"#5F5A40","accent":"#FF3DCB","shadow":"#0A0802","shine":"#FFF3A8","edge":"#1A1A26"}},
+    {"id":"gold-medal","name":"Gold medal","tags":["luxe"],"colors":{"ink":"#2A1E05","c1":"#E8B931","c2":"#8A5A0F","c3":"#F7E3A1","c4":"#B8860B","tint":"#FAF1D6","accent":"#FFFFFF","shadow":"#685316","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

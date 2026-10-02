@@ -1,0 +1,46 @@
+{
+  "name": "gift",
+  "intent": "rocks with excitement, a present waiting to be opened",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.7
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "gift@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "package",
+      "effect": "flip"
+    }
+  ]
+}

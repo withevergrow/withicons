@@ -1,0 +1,32 @@
+{
+  "name": "file-plus",
+  "intent": "pops a new file into being",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "file",
+      "effect": "fade"
+    }
+  ]
+}

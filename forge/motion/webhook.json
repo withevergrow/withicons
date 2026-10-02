@@ -1,0 +1,38 @@
+{
+  "name": "webhook",
+  "intent": "slowly circles its three hooks like events flowing round",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      13.5
+    ],
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      13.5
+    ],
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        13.5
+      ]
+    },
+    {
+      "preset": "orbit"
+    }
+  ],
+  "swap": [
+    {
+      "to": "link",
+      "effect": "fade"
+    }
+  ]
+}

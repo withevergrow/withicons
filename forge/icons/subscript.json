@@ -1,0 +1,55 @@
+{
+  "name": "subscript",
+  "category": "text",
+  "description": "Letter x with a small lowered 2 for subscript text and chemical formulas.",
+  "aliases": [
+    "sub",
+    "text-subscript",
+    "lower-index",
+    "x-sub",
+    "subscript-text",
+    "chemical-formula",
+    "index-below"
+  ],
+  "synonyms": [
+    "small text below",
+    "lowered text",
+    "baseline",
+    "below the line",
+    "h2o",
+    "chemistry",
+    "formula",
+    "math",
+    "index",
+    "footer number",
+    "text formatting",
+    "font style",
+    "word processor",
+    "editor toolbar",
+    "sub script",
+    "subscipt"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "typography",
+    "math",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 4 L12.5 15",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 4 L3.5 15",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 15.25 A2.25 2.25 0 0 1 21 15.25 C21 16.75 19.75 17.75 16.5 20.5 H21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

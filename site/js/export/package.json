@@ -1,0 +1,1 @@
+{ "type": "commonjs", "private": true, "description": "Lets Node load these UMD export modules (the CLI reuses them); browsers ignore this file." }

@@ -1,0 +1,37 @@
+{
+  "name": "align-left",
+  "intent": "slides its lines over to the left edge",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "align-center",
+      "effect": "slide-right"
+    },
+    {
+      "to": "align-right",
+      "effect": "slide-right"
+    },
+    {
+      "to": "align-justify",
+      "effect": "fade"
+    }
+  ]
+}

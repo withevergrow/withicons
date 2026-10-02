@@ -1,0 +1,94 @@
+{
+  "name": "bus",
+  "category": "travel",
+  "description": "The front of a bus with a destination sign, a wide windscreen and two headlights, for public transport and bus stops.",
+  "aliases": [
+    "bus-stop",
+    "public-transport",
+    "coach",
+    "transit",
+    "school-bus",
+    "city-bus",
+    "autobus",
+    "bus-front",
+    "omnibus",
+    "shuttle",
+    "buses"
+  ],
+  "tags": [
+    "vehicle",
+    "transport",
+    "transit",
+    "commute",
+    "road",
+    "travel"
+  ],
+  "paths": [
+    {
+      "d": "M6 2.5 H18 A2 2 0 0 1 20 4.5 V18 A2 2 0 0 1 18 20 H6 A2 2 0 0 1 4 18 V4.5 A2 2 0 0 1 6 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 6.5 H20",
+      "plate": "A"
+    },
+    {
+      "d": "M4 12.5 H20",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 16.25 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M16 16.25 H16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7 20 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17 20 V21.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M6 2.5 H18 A2 2 0 0 1 20 4.5 V18 A2 2 0 0 1 18 20 H6 A2 2 0 0 1 4 18 V4.5 A2 2 0 0 1 6 2.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 8 H18.5 V11 H5.5 Z",
+    "M9 16.25 A1.25 1.25 0 1 1 6.5 16.25 A1.25 1.25 0 1 1 9 16.25 Z",
+    "M17.5 16.25 A1.25 1.25 0 1 1 15 16.25 A1.25 1.25 0 1 1 17.5 16.25 Z"
+  ],
+  "synonyms": [
+    "bus station",
+    "bus route",
+    "bus timetable",
+    "bus schedule",
+    "bus ticket",
+    "bus pass",
+    "public transit",
+    "mass transit",
+    "commute",
+    "commuter",
+    "transport",
+    "transportation",
+    "shuttle bus",
+    "airport shuttle",
+    "tour bus",
+    "coach travel",
+    "double decker",
+    "minibus",
+    "trolleybus",
+    "school",
+    "field trip",
+    "ride the bus",
+    "catch the bus",
+    "next bus",
+    "route",
+    "busses",
+    "buss",
+    "otobus"
+  ]
+}

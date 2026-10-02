@@ -1,0 +1,33 @@
+{
+  "name": "volume",
+  "intent": "sound waves swell out from the speaker",
+  "loop": {
+    "preset": "fill",
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pulse",
+    "origin": [
+      7,
+      12
+    ],
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "beat",
+      "amount": 0.6
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "volume-off",
+      "effect": "fade"
+    }
+  ]
+}

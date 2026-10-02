@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "intent": "blinks its status lights like a busy server",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "fill",
+      "duration": 2
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "database",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud",
+      "effect": "slide-up"
+    },
+    {
+      "to": "cpu",
+      "effect": "fade"
+    }
+  ]
+}

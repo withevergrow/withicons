@@ -292,3 +292,22 @@
   .ax-hero-badge, .ax-strip span, .ax-swap-row, .ax-apps span { animation: none; }
   .ax-tile, .ax-card, .ax-links a { transition: none; }
 }
+
+/* ───────── style & motion landers (cute, sticker, pixel, glass, retro, animated) ───────── */
+.ax-play-demo, .ax-glass-demo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ax-play-demo span, .ax-glass-demo span { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-l); background: var(--card); border: 1px solid var(--rule); color: var(--gt); animation: ax-pop .6s var(--e-spring) calc(.15s + var(--i) * 70ms) both; }
+.ax-play-demo svg, .ax-glass-demo svg { width: 52%; height: auto; }
+.ax-play-demo.is-tilt span { transform: rotate(calc((var(--i) - 2.5) * 2.4deg)); background: var(--gs); border-color: transparent; }
+.ax-glass-demo { padding: 14px; border-radius: var(--radius-xl); background: linear-gradient(135deg, #6D7CFF 0%, #B66DFF 45%, #FF8BB0 100%); }
+.ax-glass-demo span { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .35); color: #FFFFFF; backdrop-filter: blur(6px); }
+.ax-motion-wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 14px; border-radius: var(--radius-xl); background: var(--dark); }
+.ax-motion-wall > span { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 4px 10px; border-radius: var(--radius); background: color-mix(in srgb, var(--g) 16%, transparent); color: var(--g); --with-duo: var(--g); --with-accent: var(--sun); }
+.ax-motion-wall .wm { display: inline-grid; place-items: center; }
+.ax-motion-wall small { font: 600 11px/1 var(--font-mono); color: var(--on-dark-2); }
+.ax-motion .ax-tile .wm { will-change: transform; }
+@media (max-width: 560px) { .ax-motion-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 10px; } .ax-motion-wall > span { padding: 12px 2px 8px; } .ax-motion-wall svg { width: 32px; height: 32px; } }
+
+/* color-mix() needs Safari 16.2 / Chrome 111 / Firefox 113; with var() inside, older engines compute transparent */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .ax-table td.ax-us, .ax-matrix tr.ax-us-row > *, :root[data-theme="dark"] .ax-pickers li.is-us { background: var(--sun-soft); }
+}

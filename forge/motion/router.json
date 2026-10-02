@@ -1,0 +1,8 @@
+{
+  "name": "router",
+  "intent": "status lights blink as the internet comes and goes",
+  "loop": { "preset": "fill", "amount": 0.6, "duration": 2.4 },
+  "hover": { "preset": "jelly", "origin": [12, 20.5], "amount": 0.7, "duration": 0.6 },
+  "alt": [ { "preset": "glow", "amount": 0.6 }, { "preset": "pulse", "origin": [12, 16.75], "amount": 0.5 } ],
+  "swap": [ { "to": "wifi", "effect": "fade" }, { "to": "wifi-off", "effect": "fade" }, { "to": "network", "effect": "flip" } ]
+}

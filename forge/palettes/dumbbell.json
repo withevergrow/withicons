@@ -1,0 +1,426 @@
+{
+  "name": "dumbbell",
+  "palettes": [
+    {
+      "id": "iron-black",
+      "name": "Iron black",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#050507",
+        "c1": "#484B52",
+        "c2": "#8A8F96",
+        "c3": "#C9CED4",
+        "c4": "#D7262E",
+        "tint": "#DADBDC",
+        "accent": "#D7262E",
+        "shadow": "#1B1C1F",
+        "shine": "#B9BBBD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chrome-gym",
+      "name": "Chrome gym",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#14171C",
+        "c1": "#B9C0C8",
+        "c2": "#3A3F48",
+        "c3": "#E9EDF1",
+        "c4": "#2F7FD8",
+        "tint": "#F1F2F4",
+        "accent": "#2F7FD8",
+        "shadow": "#474A4E",
+        "shine": "#E4E7EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bumper-plates",
+      "name": "Bumper plates",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#12141A",
+        "c1": "#D7262E",
+        "c2": "#1F5FB2",
+        "c3": "#F2C230",
+        "c4": "#2E9A4E",
+        "tint": "#F7D4D5",
+        "accent": "#F2C230",
+        "shadow": "#511318",
+        "shine": "#F0ADB0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neoprene-pink",
+      "name": "Neoprene pink",
+      "tags": [
+        "true-to-life",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A0E28",
+        "c1": "#FF6FA8",
+        "c2": "#FFC2DA",
+        "c3": "#5A5A66",
+        "c4": "#FFE36A",
+        "tint": "#FFE2EE",
+        "accent": "#FFE36A",
+        "shadow": "#6B2B47",
+        "shine": "#FFC8DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cast-iron-rust",
+      "name": "Cast iron rust",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1A120E",
+        "c1": "#6E5A4E",
+        "c2": "#B0562E",
+        "c3": "#C9B9A8",
+        "c4": "#3A2E28",
+        "tint": "#E2DEDC",
+        "accent": "#B0562E",
+        "shadow": "#2E2520",
+        "shine": "#C8C0BC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vinyl-aqua",
+      "name": "Vinyl aqua",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#12343A",
+        "c1": "#6ED3D0",
+        "c2": "#F7F7F2",
+        "c3": "#FFB0A8",
+        "c4": "#2E8F8C",
+        "tint": "#E2F6F6",
+        "accent": "#FFB0A8",
+        "shadow": "#2C5A5A",
+        "shine": "#C8EEED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "energy-lime",
+      "name": "Energy lime",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#10200A",
+        "c1": "#A4E02E",
+        "c2": "#3A3D45",
+        "c3": "#F4F7EE",
+        "c4": "#FF6A3D",
+        "tint": "#EDF9D5",
+        "accent": "#FF6A3D",
+        "shadow": "#3E5813",
+        "shine": "#DCF3B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "old-school-gym",
+      "name": "Old-school gym",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1E0A08",
+        "c1": "#B8282C",
+        "c2": "#E8DCC0",
+        "c3": "#3A3A40",
+        "c4": "#C9A04A",
+        "tint": "#F1D4D5",
+        "accent": "#C9A04A",
+        "shadow": "#491112",
+        "shine": "#E4ADAF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-champion",
+      "name": "Gold champion",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1205",
+        "c1": "#D4A72C",
+        "c2": "#2A2A30",
+        "c3": "#F2E3B0",
+        "c4": "#8A6A18",
+        "tint": "#F6EDD5",
+        "accent": "#F2E3B0",
+        "shadow": "#524011",
+        "shine": "#EFDEAF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-pilates",
+      "name": "Pastel pilates",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3554",
+        "c1": "#C7B8F2",
+        "c2": "#FFD0DE",
+        "c3": "#BFE8DC",
+        "c4": "#FFF1B5",
+        "tint": "#F4F1FC",
+        "accent": "#FFD0DE",
+        "shadow": "#57506E",
+        "shine": "#EAE4FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-hiit",
+      "name": "Neon HIIT",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#08140C",
+        "c1": "#2DFF8A",
+        "c2": "#FF2E8F",
+        "c3": "#2DE1FF",
+        "c4": "#FFE53D",
+        "tint": "#ABFFD0",
+        "accent": "#FF2E8F",
+        "shadow": "#136034",
+        "shine": "#AFFFD3",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "70s-aerobics",
+      "name": "70s aerobics",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E1030",
+        "c1": "#FF5E7E",
+        "c2": "#FFB84A",
+        "c3": "#3EC4C0",
+        "c4": "#8E4FC2",
+        "tint": "#FFDFE5",
+        "accent": "#FFB84A",
+        "shadow": "#67263B",
+        "shine": "#FFC2CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "aqua-fit",
+      "name": "Aqua fit",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#072A36",
+        "c1": "#1E9BB8",
+        "c2": "#E8F6F8",
+        "c3": "#0F5470",
+        "c4": "#FF8A5B",
+        "tint": "#D2EBF1",
+        "accent": "#FF8A5B",
+        "shadow": "#0D4351",
+        "shine": "#AAD9E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "outdoor-bootcamp",
+      "name": "Outdoor bootcamp",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#10230F",
+        "c1": "#3F8A4A",
+        "c2": "#D9C79A",
+        "c3": "#1E4A26",
+        "c4": "#E8B840",
+        "tint": "#D9E8DB",
+        "accent": "#E8B840",
+        "shadow": "#1B3B1E",
+        "shine": "#B6D3BA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-session",
+      "name": "Sunset session",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2A0E1F",
+        "c1": "#FF7448",
+        "c2": "#FFC860",
+        "c3": "#B83A6E",
+        "c4": "#44296E",
+        "tint": "#FFE3DA",
+        "accent": "#FFC860",
+        "shadow": "#662D23",
+        "shine": "#FFCAB9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coral-and-navy",
+      "name": "Coral & navy",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0A1530",
+        "c1": "#FF7A6B",
+        "c2": "#24407A",
+        "c3": "#FFE2DA",
+        "c4": "#F2C14E",
+        "tint": "#FFE4E1",
+        "accent": "#F2C14E",
+        "shadow": "#5D3134",
+        "shine": "#FFCCC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "corporate-wellness",
+      "name": "Corporate wellness",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A33",
+        "c1": "#2A62C2",
+        "c2": "#A9C3EE",
+        "c3": "#EEF3FA",
+        "c4": "#00A69C",
+        "tint": "#D4E0F3",
+        "accent": "#00A69C",
+        "shadow": "#122A53",
+        "shine": "#AEC3E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-violet",
+      "name": "Mono violet",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#1A0E33",
+        "c1": "#6A4FC2",
+        "c2": "#B9A8EE",
+        "c3": "#3A2780",
+        "c4": "#E7E0F8",
+        "tint": "#E1DCF3",
+        "accent": "#3A2780",
+        "shadow": "#2D2053",
+        "shine": "#C6BCE8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#6A6A6A",
+        "c2": "#B5B5B5",
+        "c3": "#E2E2E2",
+        "c4": "#3A3A3A",
+        "tint": "#E1E1E1",
+        "accent": "#B5B5B5",
+        "shadow": "#2B2B2B",
+        "shine": "#C6C6C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD200",
+        "c2": "#0050B5",
+        "c3": "#FFFFFF",
+        "c4": "#E00000",
+        "tint": "#FFF6CC",
+        "accent": "#0050B5",
+        "shadow": "#5A4A00",
+        "shine": "#FFEE9E",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-reps",
+      "name": "Dopamine reps",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C1236",
+        "c1": "#FF4FA0",
+        "c2": "#FFD23F",
+        "c3": "#2EC4B6",
+        "c4": "#6C5CE7",
+        "tint": "#FFDCEC",
+        "accent": "#2EC4B6",
+        "shadow": "#622148",
+        "shine": "#FFBCDB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-workout",
+      "name": "Y2K workout",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#241A4C",
+        "c1": "#B8A8FF",
+        "c2": "#FF9AE0",
+        "c3": "#9CFFF2",
+        "c4": "#F2FF94",
+        "tint": "#F1EEFF",
+        "accent": "#FF9AE0",
+        "shadow": "#4B4370",
+        "shine": "#E4DEFF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

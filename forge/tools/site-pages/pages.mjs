@@ -1,7 +1,10 @@
 import vm from 'vm'
 import { pathToFileURL } from 'url'
 import fs from 'fs'
-import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI } from './lib.mjs'
+import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI, STYLE_INFO, styleTitle, stylesIn, listTitles, N_ICONS, N_STYLES, N_TOTAL, num, word, Word, MOTION, PRESETS, siteExists, hasStyle } from './lib.mjs'
+import { motionSection, MOTION_TOC, motionAssets } from './motion.mjs'
+import { motionVars } from './lib.mjs'
+import { FORMATS, CLI_FORMATS, GROUPS as FMT_GROUPS, seeThrough } from './formats.mjs'
 
 const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
 const STYLE_PLAIN = {
@@ -12,7 +15,16 @@ const STYLE_PLAIN = {
   engrave: ['Engrave', 'Fine lines like the art on a banknote. Classic and a bit fancy.'],
   blueprint: ['Blueprint', 'An architect’s drawing, guides and measurements included.'],
   sketch: ['Sketch', 'Drawn by hand with a marker. Warm and human.'],
+  glass: ['Glass', 'Frosted glass panes stacked in layers. Soft, light and modern.'],
+  kawaii: ['Kawaii', 'Chubby and soft, with a tiny happy face and rosy cheeks.'],
+  sticker: ['Sticker', 'A die-cut sticker with a puffy white border and a sparkle.'],
+  pixel: ['Pixel', 'Crisp pixel art, like your favourite old video game.'],
+  retro: ['Retro', 'Seventies sunset stripes and a chunky outline. Groovy.'],
 }
+const plain = s => STYLE_PLAIN[s] || [styleTitle(s), (STYLE_INFO[s] && STYLE_INFO[s].description) || '']
+const GROUP_LABEL = { universal: 'Universal', creative: 'Creative', playful: 'Playful' }
+const groupOf = s => (STYLE_INFO[s] && STYLE_INFO[s].group) || 'creative'
+const UNI = stylesIn('universal'), CRE = stylesIn('creative'), PLAY = stylesIn('playful')
 const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
   <div class="pg-tablist" role="tablist" aria-label="${esc(label)}">${items.map(([k, l], i) => `<button type="button" role="tab" id="${id}-t-${k}" aria-controls="${id}-p-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join('')}</div>
   ${items.map(([k, , html], i) => `<div class="pg-tabpanel" role="tabpanel" id="${id}-p-${k}" aria-labelledby="${id}-t-${k}" tabindex="0"${i === 0 ? '' : ' hidden'}>${html}</div>`).join('\n  ')}
@@ -119,7 +131,7 @@ export function Toolbar() {
     ${crumbs([['Home', 'index.html'], ['Developers', null]])}
     <p class="pg-eyebrow"><span class="hand">for developers</span></p>
     <h1 class="pg-title">One icon set.<br><span class="pg-hl" style="--g:${cvar('line')}">Every framework.</span></h1>
-    <p class="pg-lede">300 icons × 7 styles with the same names, grid and props everywhere: React, Vue, Svelte, Angular, Solid, a web component, CSS classes and plain SVG. Tree-shakable, typed, <code>currentColor</code> by default, zero runtime dependencies.</p>
+    <p class="pg-lede">${N_ICONS} icons × ${N_STYLES} styles with the same names, grid and props everywhere: React, Vue, Svelte, Angular, Solid, a web component, CSS classes and plain SVG. Tree-shakable, typed, <code>currentColor</code> by default, zero runtime dependencies. Want them to move? Add the optional <a href="#motion">animations package</a>.</p>
     <div class="dv-launch" data-reveal>
       <span class="dv-badge">${I('package', 'solid', 18)} Launching on npm soon</span>
       <span>Download the files today:</span>
@@ -130,16 +142,16 @@ export function Toolbar() {
     <div class="dv-term" aria-hidden="true">
       <div class="dv-term-bar"><i></i><i></i><i></i><span>terminal</span></div>
       <pre><span class="dv-prompt">$</span> <span class="dv-type" data-type="npm i @withicons/react">npm i @withicons/react</span>
-<span class="dv-out">+ @withicons/react · 300 icons × 7 styles</span>
+<span class="dv-out">+ @withicons/react · ${N_ICONS} icons × ${N_STYLES} styles</span>
 <span class="dv-out ok">✓ tree-shaken: only what you import ships</span></pre>
-      <div class="dv-term-icons">${STYLES.map(s => `<span style="--g:${cvar(s)}">${I('rocket', s, 30)}</span>`).join('')}</div>
+      <div class="dv-term-icons" style="--cols:${Math.ceil(STYLES.length / Math.ceil(STYLES.length / 7))}">${STYLES.map((s, i) => `<span style="--g:${cvar(s)};--n:${i}">${I('rocket', s, 30)}</span>`).join('')}</div>
     </div>
   </section>
 
   <div class="dv-layout">
     <nav class="dv-toc" aria-label="On this page">
       <p>On this page</p>
-      <ol>${[['frameworks', 'Quick start'], ['packages', 'Packages'], ['props', 'Props'], ['styles', 'Styles'], ['classes', 'Icon classes'], ['theming', 'Theming'], ['aliases', 'Names & aliases'], ['a11y', 'Accessibility'], ['tree-shaking', 'Bundle size'], ['cdn', 'CDN & downloads'], ['cli', 'CLI']].map(([h, l]) => `<li><a href="#${h}">${l}</a></li>`).join('')}</ol>
+      <ol>${[['frameworks', 'Quick start'], ['packages', 'Packages'], ['props', 'Props'], ['styles', 'Styles'], ...MOTION_TOC, ['classes', 'Icon classes'], ['theming', 'Theming'], ['aliases', 'Names & aliases'], ['a11y', 'Accessibility'], ['tree-shaking', 'Bundle size'], ['cdn', 'CDN & downloads'], ...(FORMATS.length ? [['export', 'Export formats']] : []), ['cli', 'CLI']].map(([h, l]) => `<li><a href="#${h}">${l}</a></li>`).join('')}</ol>
     </nav>
     <div class="dv-main">
 
@@ -175,9 +187,11 @@ export function Toolbar() {
 
     <section id="styles" class="dv-sec">
       <h2>Styles</h2>
-      <p>Seven styles. <b>Universal</b> styles (Line, Solid, Duo) are for interfaces at any size. <b>Creative</b> styles (Gloss, Engrave, Blueprint, Sketch) shine at 32 px and up: marketing pages, empty states, illustrations.</p>
-      <div class="dv-styles">${STYLES.map((s, i) => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${STYLE_PLAIN[s][0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${i < 3 ? 'universal' : 'creative'}</span></div>`).join('')}</div>
+      <p>${Word(N_STYLES)} styles. <b>Universal</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>Creative</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}</p>
+      ${[['universal', UNI], ['creative', CRE], ['playful', PLAY]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${g}</span></div>`).join('')}</div>`).join('\n      ')}
     </section>
+
+    ${motionSection()}
 
     <section id="classes" class="dv-sec">
       <h2>Icon classes</h2>
@@ -189,7 +203,7 @@ export function Toolbar() {
 <i class="with with-trash" role="img" aria-label="Delete"></i>`, 'html')}
       <h3>Modifiers</h3>
       <ul class="dv-mods">${mods.map(([c, d, k]) => `<li data-reveal><span class="dv-mod-demo dm-${k}" aria-hidden="true">${I(modIcon[k], 'line', 24)}</span><code>${c}</code><span>${d}</span></li>`).join('')}</ul>
-      <p class="pg-note">Also <code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-3x</code> to <code>with-5x</code>, <code>with-rotate-180</code>, <code>with-rotate-270</code> and <code>with-flip-both</code>. Spin and pulse switch off for people who prefer reduced motion.</p>
+      <p class="pg-note">Also <code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-3x</code> to <code>with-5x</code>, <code>with-rotate-180</code>, <code>with-rotate-270</code> and <code>with-flip-both</code>. Spin and pulse switch off for people who prefer reduced motion. For richer motion (a bell that rings, a play button that turns into pause) use <a href="#motion">@withicons/motion</a>.</p>
       <h3>Want real multi-colour? Add the runtime</h3>
       ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-icons.js" defer></script>
 
@@ -245,7 +259,7 @@ find('hoem')          // null`, 'js')}
         <article data-reveal><h3>Decorative by default</h3><p>Without a title, icons render <code>aria-hidden="true"</code>, so screen readers skip them. That’s right for icons next to text.</p></article>
         <article data-reveal><h3>Meaningful when you say so</h3><p>Pass <code>title="Delete"</code> (or <code>label</code> on <code>&lt;with-icon&gt;</code>) and the svg gets <code>role="img"</code> and a <code>&lt;title&gt;</code>.</p></article>
         <article data-reveal><h3>Label the button, not the icon</h3><p>For icon-only buttons, put <code>aria-label</code> on the <code>&lt;button&gt;</code> and keep the icon decorative.</p></article>
-        <article data-reveal><h3>Motion-safe</h3><p><code>with-spin</code> and <code>with-pulse</code> stop under <code>prefers-reduced-motion</code>.</p></article>
+        <article data-reveal><h3>Motion-safe</h3><p><code>with-spin</code>, <code>with-pulse</code> and every <a href="#motion">@withicons/motion</a> animation stop under <code>prefers-reduced-motion</code>.</p></article>
       </div>
       ${code(`<button aria-label="Delete file"><Trash /></button>
 <Trash title="Delete" />   // standalone, meaningful`, 'jsx')}
@@ -268,24 +282,41 @@ find('hoem')          // null`, 'js')}
         <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
         <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css</code> (or <code>with-all.css</code>)</td></tr>
         <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js</code></td></tr>
-        <tr><td>Sprites (download now)</td><td>${STYLES.map(s => `<a href="sprites/${s}.svg" download>${s}.svg</a>`).join(' · ')}</td></tr>
-        <tr><td>Class CSS (download now)</td><td>${STYLES.map(s => `<a href="vendor/with/with-${s}.css" download>with-${s}.css</a>`).join(' · ')}</td></tr>
+        <tr><td>Sprites (download now)</td><td>${STYLES.filter(s => siteExists(`sprites/${s}.svg`)).map(s => `<a href="sprites/${s}.svg" download>${s}.svg</a>`).join(' · ')}</td></tr>
+        <tr><td>Class CSS (download now)</td><td>${STYLES.filter(s => siteExists(`vendor/with/with-${s}.css`)).map(s => `<a href="vendor/with/with-${s}.css" download>with-${s}.css</a>`).join(' · ')}</td></tr>
+        <tr><td>Animations</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css</code> (+ <code>icons.css</code> for each icon’s own motion)${siteExists('vendor/motion/motion.css') ? ` · download <a href="vendor/motion/motion.css" download>motion.css</a>${siteExists('vendor/motion/motion.js') ? ` · <a href="vendor/motion/motion.js" download>motion.js</a>` : ''}` : ''}</td></tr>
         <tr><td>Metadata</td><td><a href="icons.json">icons.json</a> · names, categories, aliases, tags</td></tr>
       </tbody></table></div>
       <p class="pg-note">Pin a version in production (<code>@withicons/web@0.1.0</code>). Any single icon can also be copied or downloaded as SVG or PNG from <a href="icons.html">the library</a>.</p>
     </section>
 
-    <section id="cli" class="dv-sec">
+${FORMATS.length ? `    <section id="export" class="dv-sec">
+      <h2>Export formats</h2>
+      <p>Every icon page exports ${FORMATS.length} formats in the browser, in the chosen style, colours, size and motion. Nothing is uploaded: the converters are plain scripts in <code>site/js/export/</code>.${CLI_FORMATS.length ? ` ${CLI_FORMATS.length} of them also come out of <a href="#cli"><code>withicons export</code></a>, so design teams, app builds and CI get the same files without a browser.` : ''} For a plain-language comparison, see <a href="guides/which-file.html">which file should I use?</a></p>
+      ${CLI_FORMATS.length ? code(`npx withicons export home settings --format svg,pdf,png --out icons
+npx withicons export star --style sticker --format favicon-pack --background "#ffffff" --out public
+npx withicons export bell --format lottie --motion hover
+npx withicons export heart --style retro --palette classic-red --format android,ios --out app/icons
+npx withicons export heart --all-styles --format png --size 256 --out hearts
+npx withicons export trash --format jsx --out - > src/icons/Trash.jsx`, 'sh', 'Terminal') : ''}
+      <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>Format</th><th>File</th><th>Transparent</th>${CLI_FORMATS.length ? '<th>CLI</th>' : ''}<th>What it is</th></tr></thead><tbody>
+        ${FMT_GROUPS.flatMap(([g]) => FORMATS.filter(f => f.group === g)).map(f => `<tr><td><code>${esc(f.id)}</code></td><td><code>.${esc(f.ext)}</code></td><td>${f.group === 'code' ? '—' : esc(seeThrough(f)[1].replace('See-through', 'Yes').replace('Solid background', 'No'))}</td>${CLI_FORMATS.length ? `<td>${CLI_FORMATS.includes(f.id) ? 'Yes' : 'Browser only'}</td>` : ''}<td>${esc(f.note)}</td></tr>`).join('\n        ')}
+      </tbody></table></div>
+      ${CLI_FORMATS.length ? `<p class="pg-note">CLI options: <code>--format</code> (comma separated, or <code>all</code>), <code>--style</code> or <code>--all-styles</code>, <code>--size</code>, <code>--background transparent|#hex</code>, <code>--padding 0–0.4</code>, colours as for <code>get</code> (<code>--palette</code>, <code>--color</code>, <code>--c1</code> … <code>--edge</code>), <code>--motion loop|hover|once|none|&lt;preset&gt;</code> for Lottie and the code formats, <code>--out &lt;folder&gt;</code> (<code>-</code> prints one file) and <code>--json</code>. PNG-based formats use <code>@resvg/resvg-js</code>, an optional dependency; GIF, WebP, JPG, AVIF and video are made in the browser only.</p>` : ''}
+    </section>
+
+` : ''}    <section id="cli" class="dv-sec">
       <h2>CLI ${soon}</h2>
       <p>Search the set, print code and get import lines without leaving your terminal. It works offline: everything ships in the package (<code>withicons</code>, unscoped).</p>
       ${code(`npx withicons search "throw away"
 npx withicons get home --style solid --format react
 npx withicons add home settings delete --framework react
 #   import { Home, Settings, Trash } from '@withicons/react'
-npx withicons get trash --size 32 > trash.svg`, 'sh', 'Terminal')}
+npx withicons get trash --size 32 > trash.svg${CLI_FORMATS.length ? '\nnpx withicons export home --format svg,pdf,png --out icons' : ''}`, 'sh', 'Terminal')}
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody>
         <tr><td><code>search &lt;words…&gt;</code></td><td>Ranked icons, typo-tolerant (<code>settigns</code>), synonyms (<code>bin</code>), phrases (<code>recycle bin</code>), plain language (<code>money</code>).</td></tr>
         <tr><td><code>get &lt;name…&gt;</code></td><td>Code for one or more icons; names or aliases (<code>delete</code> → trash).</td></tr>
+${CLI_FORMATS.length ? `<tr><td><code>export &lt;name…&gt;</code></td><td>Save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, components, PowerPoint, Word, Lottie. <a href="#export">All export formats</a>.</td></tr>` : ''}
         <tr><td><code>add &lt;name…&gt;</code></td><td>Import line + usage for <code>--framework</code> react (default), vue, svelte, angular, solid, web-component, html-class, svg.</td></tr>
         <tr><td><code>resolve &lt;name&gt;</code></td><td>Does a name or alias map to exactly one icon?</td></tr>
         <tr><td><code>styles</code> · <code>categories [category]</code></td><td>The catalogue.</td></tr>
@@ -308,7 +339,7 @@ npx withicons get trash --size 32 > trash.svg`, 'sh', 'Terminal')}
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for developers', description: 'Install and use with icons in React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and plain SVG.', url: ORIGIN + '/' + path, proficiencyLevel: 'Beginner' },
     { '@type': 'SoftwareSourceCode', name: 'with icons', codeRepository: GITHUB, license: 'https://opensource.org/licenses/MIT', programmingLanguage: ['JavaScript', 'TypeScript'] }]
-  write(path, page({ path, current: 'developers', title: 'Developers: React, Vue, Svelte, Angular icons and more · with icons', ogTitle: 'with icons for developers', desc: '300 icons × 7 styles for React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and SVG sprites. Tree-shakable, typed, currentColor, MIT.', body, ld, crumbsLd: [['Home', ''], ['Developers', path]], bodyClass: 'pg-dev', scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js'] }))
+  write(path, page({ path, current: 'developers', title: 'Developers: React, Vue, Svelte, Angular icons and more · with icons', ogTitle: 'with icons for developers', desc: `${N_ICONS} icons × ${N_STYLES} styles for React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and SVG sprites, plus optional animations. Tree-shakable, typed, currentColor, MIT.`, body, ld, crumbsLd: [['Home', ''], ['Developers', path]], bodyClass: 'pg-dev', styles: motionAssets().css, scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js', ...motionAssets().js] }))
 }
 
 
@@ -411,7 +442,7 @@ async function ai() {
     ['search_icons', '{ query, limit?, style?, category?, format? }', 'Find icons by meaning: “throw away” finds trash. Ranked and typo-tolerant. Each result comes with why it matched, a ready-to-paste snippet (React unless you pass <code>format</code>) and a link. Default limit: 10.'],
     ['get_icon', `{ name, style?, format?, size?, color? }`, `One icon as paste-ready code. <code>name</code> can be an alias (“delete” → trash). <code>format</code>: ${fmts} (default svg). <code>color</code> replaces currentColor in svg and data-uri.`],
     ['resolve_icon', '{ name }', 'Check a guess: <code>resolved</code> (with the alias it came through), <code>ambiguous</code> (with candidates) or <code>unknown</code> (with the nearest names).'],
-    ['list_styles', '{}', 'The 7 styles, which are universal and which are creative, and what each looks like.'],
+    ['list_styles', '{}', `The ${N_STYLES} styles, which are universal, creative or playful, and what each looks like.`],
     ['list_categories', '{ category? }', 'Every category with icon counts, or, with <code>category</code>, every icon in that category.'],
   ]
   const L = await import(pathToFileURL(ROOT + '/packages/mcp/dist/lib.mjs').href)
@@ -421,7 +452,7 @@ async function ai() {
   const files = [
     ['llms.txt', 'llms.txt', 'A short map of the project for language models: what it is, install lines, canonical imports, links.', 'file-text'],
     ['llms-full.txt', 'llms-full.txt', 'Everything in one file: every icon with its description, aliases and tags. Paste it into any chat.', 'files'],
-    ['icons.json', 'icons.json', 'Machine-readable metadata for all 300 icons: names, categories, aliases, tags, styles.', 'braces'],
+    ['icons.json', 'icons.json', `Machine-readable metadata for all ${N_ICONS} icons: names, categories, aliases, tags, styles.`, 'braces'],
   ]
   const body = `
 <div class="ai">
@@ -558,11 +589,11 @@ npx withicons resolve bin --json`, 'sh', 'Terminal')}
   <section class="ai-sec ai-prompts" aria-labelledby="prompts-h">
     <h2 id="prompts-h">Ask like this</h2>
     <p>Once the server is connected, just talk normally:</p>
-    <ul class="ai-prompt-list">${['Use with icons for all the icons in this app.', 'Add a settings icon in the duo style to the sidebar.', 'Find an icon that means “save for later”.', 'Swap every icon on this page to the solid style.'].map(p => `<li data-reveal><button type="button" data-copy-btn data-copy="${esc(p)}">${COPY_ICON}<span class="ai-p-copy">Copy</span><q>${esc(p)}</q></button></li>`).join('')}</ul>
+    <ul class="ai-prompt-list">${['Use with icons for all the icons in this app.', 'Add a settings icon in the duo style to the sidebar.', 'Find an icon that means “save for later”.', 'Swap every icon on this page to the solid style.', 'Make the bell icon ring when a new notification arrives.', 'Turn the play button into pause with a flip when it’s clicked.'].map(p => `<li data-reveal><button type="button" data-copy-btn data-copy="${esc(p)}">${COPY_ICON}<span class="ai-p-copy">Copy</span><q>${esc(p)}</q></button></li>`).join('')}</ul>
   </section>
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for AI agents: MCP server, skill, llms.txt', description: 'Connect AI assistants to with icons through the MCP server, an agent skill, llms.txt, icons.json and a search API.', url: ORIGIN + '/' + path }]
-  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'with icons — ask your AI', desc: 'One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use 2,100 free icons. Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js'] }))
+  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'with icons — ask your AI', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js'] }))
 }
 
 /* ───────────────────────── about ───────────────────────── */
@@ -592,11 +623,11 @@ function about() {
       <div>
         <p class="pg-eyebrow"><span class="hand">our story</span></p>
         <h1 class="ab-title">Good icons should be <span class="ab-free">free<svg viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 50 12, 120 10, 194 22"/></svg></span>.</h1>
-        <p class="ab-lede"><span class="hand ab-so">so we drew 300 of them</span> and made each one in seven styles. No account, no catch, no credit needed.</p>
+        <p class="ab-lede"><span class="hand ab-so">so we drew ${N_ICONS} of them</span> and made each one in ${word(N_STYLES)} styles. Then we taught them to move. No account, no catch, no credit needed.</p>
       </div>
       <div class="ab-morph" data-morph aria-hidden="true">
         <div class="ab-morph-ring"></div>
-        ${STYLES.map((s, i) => `<span class="ab-mf${i === 0 ? ' is-on' : ''}" style="--g:${cvar(s)}" data-style="${STYLE_PLAIN[s][0]}">${I(hero, s, 180)}</span>`).join('')}
+        ${STYLES.map((s, i) => `<span class="ab-mf${i === 0 ? ' is-on' : ''}" style="--g:${cvar(s)}" data-style="${plain(s)[0]}">${I(hero, s, 180)}</span>`).join('')}
         <span class="ab-morph-tag" data-morph-tag>Line</span>
       </div>
     </div>
@@ -622,8 +653,8 @@ function about() {
 
   <section class="ab-seven" aria-labelledby="seven-h" data-scrolly>
     <div class="ab-seven-head">
-      <h2 id="seven-h" class="ab-h">Drawn once.<br>Rendered seven ways.</h2>
-      <p class="ab-sub">Every icon starts as one careful drawing on a 24 × 24 grid. Then seven “renderers” turn that same drawing into seven styles. Scroll to watch.</p>
+      <h2 id="seven-h" class="ab-h">Drawn once.<br>Rendered ${word(N_STYLES)} ways.</h2>
+      <p class="ab-sub">Every icon starts as one careful drawing on a 24 × 24 grid. Then ${word(N_STYLES)} “renderers” turn that same drawing into ${word(N_STYLES)} styles: clean ones for apps, crafted ones for posters, and playful ones full of colour. Scroll to watch.</p>
     </div>
     <div class="ab-seven-grid">
       <div class="ab-seven-stage" aria-hidden="true">
@@ -636,7 +667,7 @@ function about() {
       </div>
       <ol class="ab-seven-steps">
         <li data-sstep="0"><span class="ab-step-k">The drawing</span><h3>One skeleton</h3><p>Lines, curves and points on a 24 × 24 grid, drawn by hand and checked for balance: every icon looks the same size as its neighbours.</p></li>
-        ${STYLES.map((s, i) => `<li data-sstep="${i + 1}" style="--g:${cvar(s)}"><span class="ab-step-k">${i < 3 ? 'Universal' : 'Creative'} · ${i + 1} of 7</span><h3>${STYLE_PLAIN[s][0]}</h3><p>${STYLE_PLAIN[s][1]}</p></li>`).join('\n        ')}
+        ${STYLES.map((s, i) => `<li data-sstep="${i + 1}" style="--g:${cvar(s)}"><span class="ab-step-k">${GROUP_LABEL[groupOf(s)]} · ${i + 1} of ${N_STYLES}</span><h3>${plain(s)[0]}</h3><p>${plain(s)[1]}</p></li>`).join('\n        ')}
       </ol>
     </div>
   </section>
@@ -644,20 +675,23 @@ function about() {
   <section class="ab-matrix" aria-labelledby="matrix-h">
     <h2 id="matrix-h" class="ab-h">Same name. Same grid. Same size.</h2>
     <p class="ab-sub">Because every style comes from the same drawing, you can switch styles any time and nothing moves.</p>
-    <div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in all seven styles">
-      ${STYLES.map((s, c) => `<div class="ab-col" style="--g:${cvar(s)};--c:${c}"><span class="ab-col-h">${STYLE_PLAIN[s][0]}</span>${matrixIcons.map(n => I(n, s, 40)).join('')}</div>`).join('')}
+    <div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in all ${word(N_STYLES)} styles" style="--cols:${N_STYLES}">
+      ${STYLES.map((s, c) => `<div class="ab-col" style="--g:${cvar(s)};--c:${c}"><span class="ab-col-h">${plain(s)[0]}</span>${matrixIcons.map(n => I(n, s, 40)).join('')}</div>`).join('')}
     </div>
   </section>
 
   <section class="ab-numbers" aria-label="with icons in numbers">
     <ul>
-      <li data-reveal><b data-count="300">300</b><span>icons</span></li>
-      <li data-reveal><b data-count="7">7</b><span>styles</span></li>
-      <li data-reveal><b data-count="2100">2,100</b><span>SVG files</span></li>
+      <li data-reveal><b data-count="${N_ICONS}">${num(N_ICONS)}</b><span>icons</span></li>
+      <li data-reveal><b data-count="${N_STYLES}">${N_STYLES}</b><span>styles</span></li>
+      <li data-reveal><b data-count="${N_TOTAL}">${num(N_TOTAL)}</b><span>SVG files</span></li>
+      <li data-reveal><b data-count="${PRESETS.length}">${PRESETS.length}</b><span>ways to move</span></li>
       <li data-reveal><b data-count="${terms}">${terms.toLocaleString('en')}</b><span>words to search by</span></li>
       <li data-reveal><b>$0</b><span>forever</span></li>
     </ul>
   </section>
+
+${aboutMotion()}
 
   <section class="ab-evergrow" aria-labelledby="eg-h">
     <div class="ab-eg-mark" aria-hidden="true">${I('leaf', 'engrave', 120)}</div>
@@ -675,8 +709,24 @@ function about() {
     <a class="btn btn-ink" href="icons.html">${I('search', 'line', 18)} Browse icons</a>
   </section>
 </div>`
-  const ld = [{ '@type': 'AboutPage', name: 'About with icons', url: ORIGIN + '/' + path, description: 'Why with icons is free, who it is for, and how every icon is drawn once and rendered in seven styles.', publisher: { '@type': 'Organization', name: 'Evergrow', url: 'https://withevergrow.com' } }]
-  write(path, page({ path, current: 'about', title: 'About with icons: free icons, drawn once, rendered seven ways', ogTitle: 'About with icons', desc: 'The story of with icons: 300 free icons drawn once and rendered in seven styles, for slides, websites, apps and AI. Free under MIT. Powered by Evergrow.', body, ld, crumbsLd: [['Home', ''], ['About', path]], bodyClass: 'pg-about' }))
+  const ld = [{ '@type': 'AboutPage', name: 'About with icons', url: ORIGIN + '/' + path, description: `Why with icons is free, who it is for, and how every icon is drawn once and rendered in ${word(N_STYLES)} styles.`, publisher: { '@type': 'Organization', name: 'Evergrow', url: 'https://withevergrow.com' } }]
+  write(path, page({ path, current: 'about', title: `About with icons: free icons, drawn once, rendered ${word(N_STYLES)} ways`, ogTitle: 'About with icons', desc: `The story of with icons: ${N_ICONS} free icons drawn once and rendered in ${word(N_STYLES)} styles, with optional animations, for slides, websites, apps and AI. Free under MIT. Powered by Evergrow.`, body, ld, crumbsLd: [['Home', ''], ['About', path]], bodyClass: 'pg-about', styles: motionAssets().css, scripts: motionAssets().js }))
+}
+
+/** "And now they move": a short band of looping icons on the about page. */
+function aboutMotion() {
+  const picks = ['bell', 'heart', 'star', 'rocket', 'cloud', 'loader', 'sun', 'lightbulb'].filter(n => MOTION[n] && MOTION[n].loop)
+  if (!picks.length) return ''
+  const st = ['duo', 'kawaii', 'solid', 'sticker', 'line', 'glass', 'gloss', 'retro'].map(s => hasStyle(s) ? s : 'line')
+  return `<section class="ab-move" aria-labelledby="move-h">
+    <div class="ab-move-art" aria-hidden="true">${picks.map((n, i) => { const s = st[i % st.length], m = MOTION[n].loop; return `<span class="ab-move-ic" style="--g:${cvar(s)};--i:${i}"><span class="wm wm-loop wm-p-${m.preset}" data-wm-preset="${m.preset}" style="${motionVars(m)}">${I(n, s, 48)}</span></span>` }).join('')}</div>
+    <div>
+      <p class="pg-eyebrow"><span class="hand">and now they move</span></p>
+      <h2 id="move-h" class="ab-h">Icons with a little life in them</h2>
+      <p>A bell that rings. A heart that beats. A play button that flips into pause. Every icon has its own gentle animation, plus ${PRESETS.length} more to choose from, in every style. Download them as animated SVGs or GIFs, or add them in code. They stay still for anyone who prefers less motion.</p>
+      <p><a href="guides/animate-icons.html">Animate an icon, no code needed →</a> · <a href="free/animated-icons.html">Free animated icons</a></p>
+    </div>
+  </section>`
 }
 
 /* ───────────────────────── license ───────────────────────── */
@@ -691,6 +741,7 @@ function license() {
     ['yes', 'Can I put them in something I sell?', 'Yes: templates, themes, apps, slide decks and print designs are fine.'],
     ['careful', 'Can I resell the icons themselves?', 'The licence allows it, as long as the licence text goes with the files. But anyone can get them free here, so it’s rarely worth it.'],
     ['yes', 'Can I use them in apps built with AI?', 'Yes. The same rules apply however the work gets made.'],
+    ['yes', 'Are the animations and playful styles free too?', `Yes. All ${word(N_STYLES)} styles${PLAY.length ? `, including ${listTitles(PLAY)},` : ''} and every animation (animated SVGs, GIFs and the motion package) come under the same MIT licence.`],
   ]
   const badge = { yes: ['Yes', 'check-circle'], no: ['No', 'x-circle'], careful: ['Yes, but…', 'alert-circle'] }
   const body = `
@@ -699,7 +750,7 @@ function license() {
     ${crumbs([['Home', 'index.html'], ['License', null]])}
     <p class="pg-eyebrow"><span class="hand">the MIT licence, in plain words</span></p>
     <h1 class="pg-title">Free for everything.<br><span class="pg-hl" style="--g:${cvar('sketch')}">Really.</span></h1>
-    <p class="pg-lede">Every with icons icon is released under the MIT licence: one of the simplest, most open licences there is. Here’s what it means for you.</p>
+    <p class="pg-lede">Every with icons icon, in all ${word(N_STYLES)} styles and with every animation, is released under the MIT licence: one of the simplest, most open licences there is. Here’s what it means for you.</p>
   </section>
 
   <section class="lc-qa" aria-label="Common questions">
@@ -735,24 +786,38 @@ export const FAQ = [
   ['The basics', [
     ['Is with icons really free?', 'Yes. Every icon is free for personal and commercial use under the MIT licence. There’s no paid tier, no account and no watermark.'],
     ['Do I need an account to download icons?', 'No. Open the library, click an icon, and copy or download it. That’s all.'],
-    ['How many icons are there?', '300 icons, each in 7 styles: 2,100 icons in total. Every style uses the same names and the same 24 × 24 grid.'],
+    ['How many icons are there?', `${num(N_ICONS)} icons, each in ${N_STYLES} styles: ${num(N_TOTAL)} icons in total. Every style uses the same names and the same 24 × 24 grid.`],
     ['Who makes with icons?', 'with icons is made and maintained by <a href="https://withevergrow.com">Evergrow</a>. Read <a href="about.html">our story</a>.'],
     ['Can I request a new icon?', 'Yes. Requests will open on our <a href="' + GITHUB + '">GitHub</a> at launch. Before asking, search with a few different words: icons have dozens of aliases, so “bin”, “delete” and “throw away” all find trash.'],
   ]],
   ['Using icons', [
     ['Should I download SVG or PNG?', 'Use SVG when your app accepts it (PowerPoint, Word, Canva, Figma, websites): it stays sharp at any size. Use PNG for Google Slides, Google Docs, Notion and email. Pick a PNG at least twice the size you’ll show it. See <a href="guides/index.html">the guides</a>.'],
-    ['How do I change an icon’s colour?', 'The easiest way is to pick a colour in the library before you copy or download. SVGs can also be recoloured in apps like PowerPoint, Canva and Figma, and on websites with the CSS colour property.'],
+    ['How do I change an icon’s colour?', 'The easiest way is to pick a colour in the library before you copy or download. SVGs can also be recoloured in apps like PowerPoint and Figma (Canva recolours the filled styles: Solid, Gloss, Retro and Pixel), and on websites with the CSS colour property.'],
     ['Why does my icon look blurry?', 'It’s a PNG shown bigger than it was downloaded. Download a larger PNG (512 or 1024 px), or use the SVG.'],
-    ['Why is there a white box around my icon?', 'You probably used a screenshot or a JPG. Our PNG downloads have a see-through background, so download the PNG again.'],
+    ['Why is there a white box around my icon?', 'You probably used a screenshot, a JPG or an MP4: those can’t be see-through. Our PNG downloads have a see-through background, so download the PNG again (or a GIF for a moving icon).'],
     ['How do I add icons to Google Slides or PowerPoint?', 'Google Slides: download a PNG and use Insert › Image › Upload from computer. PowerPoint: download an SVG and use Insert › Pictures › This Device. Full steps: <a href="guides/google-slides.html">Google Slides</a>, <a href="guides/powerpoint.html">PowerPoint</a>.'],
-    ['Can I use the icons in Canva?', 'Yes. Upload the SVG in Canva’s Uploads panel and you can change its colour right in the editor. <a href="guides/canva.html">See the Canva guide</a>.'],
+    ['Can I use the icons in Canva?', 'Yes. Pick your colour on the icon’s page, download the SVG and upload it in Canva’s Uploads panel. Filled styles (Solid, Gloss, Retro, Pixel) can also be recoloured inside Canva; outline styles keep the colour you chose here. <a href="guides/canva.html">See the Canva guide</a>.'],
     ['What size should my icons be?', 'In apps and websites, 16–24 px next to text. On slides, 48–128 px. For print, use SVG so size never matters. Keep all icons in one design the same size.'],
     ['Can I use the icons in print?', 'Yes. Download the SVG for perfect sharpness at any size, from business cards to banners.'],
   ]],
+  ...(FORMATS.length ? [['Downloads &amp; formats', [
+    ['Which file format should I download?', 'Slides and documents: PNG (or the ready PowerPoint slide or Word document). Design tools and websites: SVG. Moving icons: GIF for slides and email, Animated SVG for websites, Lottie for apps, MP4 for video. <a href="guides/which-file.html">Which file should I use?</a> explains every format.'],
+    ['Do the icons have a transparent background?', 'Yes, almost every download is see-through: PNG, SVG, WebP, AVIF, PDF, APNG, Animated SVG, Lottie and the PowerPoint and Word files. GIF is see-through with hard edges, so choose the colour it will sit on. JPG, MP4 and EPS can’t be see-through: they sit on white, or on the background colour you pick. <a href="guides/which-file.html#see-through">See-through backgrounds, explained</a>.'],
+    ['Can I edit the colours in PowerPoint?', 'Yes, with the SVG or the ready PowerPoint slide, in PowerPoint for Microsoft 365, 2019 or newer. Select the icon and choose Graphics Format › Graphics Fill. For icons with several colours, choose Convert to Shape on the same tab and colour each piece with Shape Fill. PNG, GIF and MP4 files are pictures, so pick the colour before you download.'],
+    ['Can I get an animated icon as a video or for my app?', 'Yes. Pick a motion on the icon’s page, then download an MP4 or WebM video, a GIF, an Animated SVG, or a Lottie file for iPhone, Android and web apps. <a href="guides/animate-icons.html">How to animate an icon</a>.'],
+    ['Can I make a favicon or an app icon?', 'Yes. Download the favicon pack (every size a website needs, plus the lines to paste), an ICO file, an iOS imageset for Xcode or an Android VectorDrawable.'],
+  ]]] : []),
   ['Styles', [
-    ['What’s the difference between universal and creative styles?', 'Universal styles (Line, Solid, Duo) are clear at small sizes and made for interfaces. Creative styles (Gloss, Engrave, Blueprint, Sketch) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.'],
-    ['Which style should I pick?', 'If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the creative styles for big, eye-catching moments.'],
+    ['What’s the difference between universal, creative and playful styles?', `Universal styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. Creative styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}`],
+    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the creative${PLAY.length ? ' and playful' : ''} styles for big, eye-catching moments.`],
+    ...(PLAY.length ? [['Can I change the colours of the playful styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost and so on) have their own defaults, and on a website each one is a CSS variable you can change.']] : []),
     ['Can I mix styles?', 'Yes, they share one grid, so they line up perfectly. A common pattern is Line for normal buttons and Solid for the selected one. Avoid mixing many styles in the same row.'],
+  ]],
+  ['Animations', [
+    ['Can the icons move?', `Yes. Every icon has its own gentle animation (a bell rings, a heart beats, a loader spins), plus ${PRESETS.length} other ways to move and transitions that turn one icon into another, like play into pause. They work in every style. <a href="guides/animate-icons.html">Animate an icon</a>.`],
+    ['Do I need to code to use an animated icon?', 'No. Open any icon, go to Customize › Motion, pick how it moves and download an Animated SVG for your website builder or Notion, or a GIF for your slides. Developers can use the optional <a href="developers.html#motion">@withicons/motion</a> package.'],
+    ['Can I use animated icons in PowerPoint or Google Slides?', 'Yes. Download the icon as a GIF (“GIF for slides” on any icon’s Customize panel or on the <a href="free/animated-icons.html">animated icons page</a>) and insert it like a picture: it plays when you present in PowerPoint, Google Slides and Keynote. Slide apps show SVG files as still pictures, so use the GIF there. One moving icon per slide is plenty.'],
+    ['What about people who get dizzy from motion?', 'Animated SVGs and the motion package stop automatically when someone has turned on “reduce motion” in their device settings. In slides, prefer calm effects (fade, pulse) over spins and shakes.'],
   ]],
   ['Licence', [
     ['Can I use the icons commercially?', 'Yes, in client work, products, apps, ads and merchandise. See <a href="license.html">the licence in plain words</a>.'],
@@ -776,8 +841,9 @@ function faq() {
   const path = 'faq.html'
   const all = FAQ.flatMap(([, qs]) => qs)
   const strip = s => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-  const gIcons = ['help-circle', 'image', 'layers', 'shield-check', 'code', 'bot']
-  const gStyles = ['line', 'solid', 'duo', 'sketch', 'blueprint', 'gloss']
+  const fmtG = FORMATS.length ? 1 : 0
+  const gIcons = ['help-circle', 'image', ...(fmtG ? ['download'] : []), 'layers', 'sparkles', 'shield-check', 'code', 'bot']
+  const gStyles = ['line', 'solid', ...(fmtG ? ['engrave'] : []), 'duo', hasStyle('kawaii') ? 'kawaii' : 'gloss', 'sketch', 'blueprint', 'gloss']
   const body = `
 <div class="fq">
   <section class="pg-hero fq-hero">
@@ -801,7 +867,7 @@ function faq() {
     text: 'Click Claude, ChatGPT, Gemini, Perplexity or Grok. We copy a ready brief that points it to our skill file and open it for you. Tell it what you’re making: it picks the best icon and style, and gives you code or steps for your app. You can ask it anything else about with icons too.' })}
 </div>`
   const ld = [{ '@type': 'FAQPage', mainEntity: all.map(([q, a]) => ({ '@type': 'Question', name: strip(q), acceptedAnswer: { '@type': 'Answer', text: strip(a) } })) }]
-  write(path, page({ path, current: '', title: 'FAQ: free icons, licence, SVG vs PNG, colours and more · with icons', ogTitle: 'with icons FAQ', desc: 'Plain answers about with icons: is it free, do I need to credit, SVG or PNG, how to change colours, styles, packages for developers and AI assistants.', body, ld, crumbsLd: [['Home', ''], ['FAQ', path]], bodyClass: 'pg-faq' }))
+  write(path, page({ path, current: '', title: 'FAQ: free icons, licence, SVG vs PNG, colours and more · with icons', ogTitle: 'with icons FAQ', desc: 'Plain answers about with icons: is it free, do I need to credit, which file format, transparent backgrounds, how to change colours, styles, animations, packages for developers and AI assistants.', body, ld, crumbsLd: [['Home', ''], ['FAQ', path]], bodyClass: 'pg-faq' }))
 }
 
 export async function buildPages() { developers(); await ai(); about(); license(); faq() }

@@ -1,0 +1,428 @@
+{
+  "name": "bus",
+  "palettes": [
+    {
+      "id": "london-red",
+      "name": "London red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#240A0A",
+        "c1": "#D7262E",
+        "c2": "#2D3E50",
+        "c3": "#F3E9D2",
+        "c4": "#F2B134",
+        "tint": "#F7D4D5",
+        "accent": "#F2B134",
+        "shadow": "#561013",
+        "shine": "#F0ADB0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "school-bus",
+      "name": "School bus",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1405",
+        "c1": "#FFC20E",
+        "c2": "#3B4A5A",
+        "c3": "#E03A2E",
+        "c4": "#F5F5F0",
+        "tint": "#FFF3CF",
+        "accent": "#E03A2E",
+        "shadow": "#614A06",
+        "shine": "#FFE8A3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "city-transit",
+      "name": "City transit",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0A1B2E",
+        "c1": "#1F6FB2",
+        "c2": "#A7D3F2",
+        "c3": "#F2F4F7",
+        "c4": "#F2A93B",
+        "tint": "#D2E2F0",
+        "accent": "#F2A93B",
+        "shadow": "#0E2F4C",
+        "shine": "#AAC8E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-line",
+      "name": "Green line",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2214",
+        "c1": "#2E9A5B",
+        "c2": "#B9E4C9",
+        "c3": "#F2C230",
+        "c4": "#1E5A39",
+        "tint": "#D5EBDE",
+        "accent": "#F2C230",
+        "shadow": "#134026",
+        "shine": "#B0D9C1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coach-silver",
+      "name": "Coach silver",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#161B22",
+        "c1": "#B8C2CC",
+        "c2": "#2E6FB5",
+        "c3": "#E84A3C",
+        "c4": "#F2F4F6",
+        "tint": "#F1F3F5",
+        "accent": "#2E6FB5",
+        "shadow": "#474C52",
+        "shine": "#E4E8EC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "electric-bus",
+      "name": "Electric bus",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0A2420",
+        "c1": "#18C29C",
+        "c2": "#E6FFF7",
+        "c3": "#2D7FF9",
+        "c4": "#FFD447",
+        "tint": "#D1F3EB",
+        "accent": "#2D7FF9",
+        "shadow": "#0B4F40",
+        "shine": "#A7E8D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hippie-van",
+      "name": "Hippie van",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E1A0C",
+        "c1": "#F2A541",
+        "c2": "#E0532F",
+        "c3": "#3C8C82",
+        "c4": "#F6E7C1",
+        "tint": "#FCEDD9",
+        "accent": "#E0532F",
+        "shadow": "#63421B",
+        "shine": "#FADDB7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-coach",
+      "name": "Vintage coach",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A2420",
+        "c1": "#7E9C8C",
+        "c2": "#E9DCC0",
+        "c3": "#A3423A",
+        "c4": "#4C5A6B",
+        "tint": "#E5EBE8",
+        "accent": "#A3423A",
+        "shadow": "#39413B",
+        "shine": "#CED9D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-shuttle",
+      "name": "Pastel shuttle",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3B3657",
+        "c1": "#A9D8F5",
+        "c2": "#FFC9DE",
+        "c3": "#FFF1B0",
+        "c4": "#C9F2D4",
+        "tint": "#EEF7FD",
+        "accent": "#FFC9DE",
+        "shadow": "#4D5C70",
+        "shine": "#DEF0FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-bus",
+      "name": "Candy bus",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1838",
+        "c1": "#FF77B7",
+        "c2": "#FFE070",
+        "c3": "#7DE3FF",
+        "c4": "#B6F28C",
+        "tint": "#FFE4F1",
+        "accent": "#7DE3FF",
+        "shadow": "#703151",
+        "shine": "#FFCBE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-bus",
+      "name": "Night bus",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8EDFF",
+        "c1": "#2A3A7A",
+        "c2": "#FFD447",
+        "c3": "#7AA8FF",
+        "c4": "#10183A",
+        "tint": "#AAB0CA",
+        "accent": "#FFD447",
+        "shadow": "#151D3D",
+        "shine": "#AEB4CC",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "neon-express",
+      "name": "Neon express",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F4F0FF",
+        "c1": "#FF3C8E",
+        "c2": "#3CF0FF",
+        "c3": "#FFE83C",
+        "c4": "#8A4CFF",
+        "tint": "#FFB1D2",
+        "accent": "#3CF0FF",
+        "shadow": "#801E47",
+        "shine": "#FFB5D4",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "beach-shuttle",
+      "name": "Beach shuttle",
+      "tags": [
+        "ocean",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#0B2A36",
+        "c1": "#2BB3C0",
+        "c2": "#FFE4A8",
+        "c3": "#FF7A59",
+        "c4": "#0F6B7E",
+        "tint": "#D5F0F2",
+        "accent": "#FF7A59",
+        "shadow": "#134C53",
+        "shine": "#AEE2E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tour-orange",
+      "name": "Tour orange",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A1206",
+        "c1": "#F2672B",
+        "c2": "#FFD7B5",
+        "c3": "#264653",
+        "c4": "#F4C430",
+        "tint": "#FCE1D5",
+        "accent": "#264653",
+        "shadow": "#612A11",
+        "shine": "#FAC5AE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-blue",
+      "name": "Mono blue",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0A1E3A",
+        "c1": "#3B6FB6",
+        "c2": "#A8C4E8",
+        "c3": "#1C3F73",
+        "c4": "#E1EAF6",
+        "tint": "#D8E2F0",
+        "accent": "#1C3F73",
+        "shadow": "#183051",
+        "shine": "#B5C8E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#8A8A8A",
+        "c2": "#3E3E3E",
+        "c3": "#D8D8D8",
+        "c4": "#B0B0B0",
+        "tint": "#E8E8E8",
+        "accent": "#3E3E3E",
+        "shadow": "#363636",
+        "shine": "#D3D3D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD100",
+        "c2": "#003DA5",
+        "c3": "#FFFFFF",
+        "c4": "#E4002B",
+        "tint": "#FFF6CC",
+        "accent": "#003DA5",
+        "shadow": "#5A4A00",
+        "shine": "#FFEE9E",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "luxe-liner",
+      "name": "Luxe liner",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0C0C10",
+        "c1": "#464A56",
+        "c2": "#D4AF37",
+        "c3": "#EDE3C4",
+        "c4": "#8A6B2A",
+        "tint": "#DADBDD",
+        "accent": "#D4AF37",
+        "shadow": "#1C1E23",
+        "shine": "#B9BABF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "forest-route",
+      "name": "Forest route",
+      "tags": [
+        "nature",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#13220F",
+        "c1": "#5E8C3A",
+        "c2": "#E8DDB5",
+        "c3": "#8A5A2E",
+        "c4": "#A9CDE0",
+        "tint": "#DFE8D8",
+        "accent": "#E8DDB5",
+        "shadow": "#273B19",
+        "shine": "#C2D3B4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-express",
+      "name": "Holiday express",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1E0A0A",
+        "c1": "#C42A2A",
+        "c2": "#2E6B3E",
+        "c3": "#F7EEDC",
+        "c4": "#E8B547",
+        "tint": "#F3D4D4",
+        "accent": "#E8B547",
+        "shadow": "#4E1212",
+        "shine": "#E9AEAE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-line",
+      "name": "Berry line",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0B26",
+        "c1": "#A3337E",
+        "c2": "#F7C3DE",
+        "c3": "#3E2D6E",
+        "c4": "#FF9B54",
+        "tint": "#EDD6E5",
+        "accent": "#FF9B54",
+        "shadow": "#461638",
+        "shine": "#DCB1CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-transit",
+      "name": "Y2K transit",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#231A4D",
+        "c1": "#C2B5FF",
+        "c2": "#FF8AD8",
+        "c3": "#8FF7FF",
+        "c4": "#E8FF8A",
+        "tint": "#F3F0FF",
+        "accent": "#FF8AD8",
+        "shadow": "#4E4871",
+        "shine": "#E8E3FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "notebook",
+  "category": "files",
+  "description": "A spiral-bound notebook with a cover label for notes, journals and course work.",
+  "aliases": [
+    "notes-book",
+    "journal",
+    "spiral-notebook",
+    "exercise-book",
+    "notepad-book",
+    "jotter",
+    "diary-book",
+    "copybook",
+    "composition-book",
+    "logbook"
+  ],
+  "tags": [
+    "notebook",
+    "notes",
+    "journal",
+    "school",
+    "writing",
+    "stationery"
+  ],
+  "paths": [
+    {
+      "d": "M8 2.5 H18 A2 2 0 0 1 20 4.5 V19.5 A2 2 0 0 1 18 21.5 H8 A2 2 0 0 1 6 19.5 V4.5 A2 2 0 0 1 8 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 7 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 12 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 17 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M11.5 7.5 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 2.5 H18 A2 2 0 0 1 20 4.5 V19.5 A2 2 0 0 1 18 21.5 H8 A2 2 0 0 1 6 19.5 V4.5 A2 2 0 0 1 8 2.5 Z"
+  ],
+  "cutouts": [
+    "M11.5 7.5 H16",
+    "M6 7 H8",
+    "M6 12 H8",
+    "M6 17 H8"
+  ],
+  "synonyms": [
+    "diary",
+    "journaling",
+    "notes",
+    "note taking",
+    "note-taking",
+    "school",
+    "class notes",
+    "homework",
+    "study",
+    "student",
+    "planner",
+    "sketchbook",
+    "log",
+    "record",
+    "spiral",
+    "spiral bound",
+    "binder",
+    "workbook",
+    "exercise",
+    "writing",
+    "personal notes",
+    "memo book",
+    "note book",
+    "notbook",
+    "notebok",
+    "bullet journal",
+    "bujo",
+    "stationery",
+    "stationary",
+    "lecture notes"
+  ]
+}

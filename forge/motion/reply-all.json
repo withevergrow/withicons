@@ -1,0 +1,15 @@
+{
+  "name": "reply-all",
+  "intent": "sweeps back to the left like an answer sent to everyone",
+  "loop": { "preset": "nudge", "dir": 180, "amount": 0.6, "duration": 2.2 },
+  "hover": { "preset": "nudge", "dir": 180, "amount": 1.2, "duration": 0.6 },
+  "alt": [
+    { "preset": "pass", "dir": 180 },
+    { "preset": "tilt", "origin": [20.5, 19.5] }
+  ],
+  "swap": [
+    { "to": "reply", "effect": "fade" },
+    { "to": "forward", "effect": "flip" },
+    { "to": "check", "effect": "scale" }
+  ]
+}

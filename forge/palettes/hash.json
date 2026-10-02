@@ -1,0 +1,466 @@
+{
+  "name": "hash",
+  "palettes": [
+    {
+      "id": "trending-tag",
+      "name": "Trending tag",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0C24",
+        "c1": "#E8368F",
+        "c2": "#FFB3D6",
+        "c3": "#7A1A55",
+        "c4": "#FFEFF7",
+        "tint": "#FBDBEB",
+        "accent": "#FFC93D",
+        "shadow": "#741B48",
+        "shine": "#FAD7E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "channel-aubergine",
+      "name": "Channel aubergine",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1F0B21",
+        "c1": "#5E2363",
+        "c2": "#36C5AB",
+        "c3": "#ECB22E",
+        "c4": "#E8DAEA",
+        "tint": "#E2D7E3",
+        "accent": "#E01E5A",
+        "shadow": "#2F1232",
+        "shine": "#DFD3E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blurple-server",
+      "name": "Server blurple",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#14163A",
+        "c1": "#5865F2",
+        "c2": "#B8BEFA",
+        "c3": "#EB459E",
+        "c4": "#EEF0FF",
+        "tint": "#E1E3FD",
+        "accent": "#57F287",
+        "shadow": "#2C3379",
+        "shine": "#DEE0FC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "link-blue",
+      "name": "Link blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1E3D",
+        "c1": "#1D72E8",
+        "c2": "#A3C6F7",
+        "c3": "#0F4598",
+        "c4": "#E8F1FD",
+        "tint": "#D6E6FB",
+        "accent": "#F2A93B",
+        "shadow": "#0F3974",
+        "shine": "#D2E3FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tic-tac-toe",
+      "name": "Tic-tac-toe",
+      "tags": [
+        "candy",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1E1E2A",
+        "c1": "#FF5A5F",
+        "c2": "#3EC1D3",
+        "c3": "#FFD15C",
+        "c4": "#F5F5FA",
+        "tint": "#FFE1E2",
+        "accent": "#3EC1D3",
+        "shadow": "#802D30",
+        "shine": "#FFDEDF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "waffle",
+      "name": "Waffle",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1E0A",
+        "c1": "#E0A458",
+        "c2": "#8A4A1E",
+        "c3": "#F7DE9C",
+        "c4": "#FFF4E0",
+        "tint": "#F9EFE1",
+        "accent": "#C92A2A",
+        "shadow": "#70522C",
+        "shine": "#F9EDDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chalk-board",
+      "name": "Chalk board",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1F2A24",
+        "c1": "#3F5E4E",
+        "c2": "#F2F0E6",
+        "c3": "#E8C76A",
+        "c4": "#A8C4B5",
+        "tint": "#DCE2DF",
+        "accent": "#E8C76A",
+        "shadow": "#202F27",
+        "shine": "#D9DFDC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-channel",
+      "name": "Dark channel",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#EDEEF4",
+        "c1": "#2C2F3E",
+        "c2": "#8C9EFF",
+        "c3": "#FF79C6",
+        "c4": "#50FA7B",
+        "tint": "#96979F",
+        "accent": "#F1FA8C",
+        "shadow": "#14151C",
+        "shine": "#D5D5D8",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-tag",
+      "name": "Pastel tag",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A2A4E",
+        "c1": "#C2AFF5",
+        "c2": "#FFC9DC",
+        "c3": "#B8EAD6",
+        "c4": "#FFF0BD",
+        "tint": "#F4F1FD",
+        "accent": "#F28DB3",
+        "shadow": "#61587B",
+        "shine": "#F3EFFD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lemon-mint",
+      "name": "Lemon mint",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E3312",
+        "c1": "#E8E07A",
+        "c2": "#B8EBD0",
+        "c3": "#FFC7B0",
+        "c4": "#FFFDE8",
+        "tint": "#FBF9E7",
+        "accent": "#F28C6A",
+        "shadow": "#74703D",
+        "shine": "#F9F7DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gumball",
+      "name": "Gumball",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3B0F2E",
+        "c1": "#FF4FA0",
+        "c2": "#4FD2FF",
+        "c3": "#FFE04D",
+        "c4": "#9A5CFF",
+        "tint": "#FFDFEE",
+        "accent": "#4FD2FF",
+        "shadow": "#802850",
+        "shine": "#FFDCEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-hashtag",
+      "name": "Y2K hashtag",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1B1840",
+        "c1": "#B08CFF",
+        "c2": "#7FF0FF",
+        "c3": "#FF9AE2",
+        "c4": "#F4EEFF",
+        "tint": "#F1EAFF",
+        "accent": "#E6FF5C",
+        "shadow": "#584680",
+        "shine": "#EFE8FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-hashtag",
+      "name": "Neon hashtag",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFF4FD",
+        "c1": "#FF1F8E",
+        "c2": "#00E5FF",
+        "c3": "#B6FF1F",
+        "c4": "#15051A",
+        "tint": "#FF8FC7",
+        "accent": "#B6FF1F",
+        "shadow": "#801047",
+        "shine": "#FFD2E8",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "terracotta-tile",
+      "name": "Terracotta tile",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E160C",
+        "c1": "#C2593A",
+        "c2": "#EBC9A3",
+        "c3": "#5E7550",
+        "c4": "#F7E6D8",
+        "tint": "#F4E1DC",
+        "accent": "#2E5E62",
+        "shadow": "#612D1D",
+        "shine": "#F3DED8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-tag",
+      "name": "70s tag",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A1306",
+        "c1": "#DD6B20",
+        "c2": "#F2B33A",
+        "c3": "#962E1E",
+        "c4": "#4F7A5C",
+        "tint": "#F9E4D7",
+        "accent": "#4F7A5C",
+        "shadow": "#6F3610",
+        "shine": "#F8E1D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-trend",
+      "name": "Sunset trend",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#331029",
+        "c1": "#F2546B",
+        "c2": "#FFAE5E",
+        "c3": "#8C2E7A",
+        "c4": "#FFE2DE",
+        "tint": "#FDE0E4",
+        "accent": "#3BAFA4",
+        "shadow": "#792A36",
+        "shine": "#FCDDE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "aqua-tag",
+      "name": "Aqua tag",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#05303A",
+        "c1": "#0FA3B5",
+        "c2": "#8EE6EF",
+        "c3": "#FF8A70",
+        "c4": "#E3FAFC",
+        "tint": "#D4EEF2",
+        "accent": "#FF8A70",
+        "shadow": "#08525B",
+        "shine": "#CFEDF0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "leaf-tag",
+      "name": "Leaf tag",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13261A",
+        "c1": "#3F9156",
+        "c2": "#B6E0A2",
+        "c3": "#D9A13B",
+        "c4": "#EAF6EA",
+        "tint": "#DCEBE1",
+        "accent": "#D9A13B",
+        "shadow": "#20492B",
+        "shine": "#D9E9DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grape-tag",
+      "name": "Grape tag",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#220A33",
+        "c1": "#7E2FD6",
+        "c2": "#C9A3FF",
+        "c3": "#FF6FA8",
+        "c4": "#F3EAFF",
+        "tint": "#E8DAF8",
+        "accent": "#FF6FA8",
+        "shadow": "#3F186B",
+        "shine": "#E5D5F7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-hash",
+      "name": "Gold hash",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1E1608",
+        "c1": "#C79A3D",
+        "c2": "#221E17",
+        "c3": "#F2E2B3",
+        "c4": "#7A5C20",
+        "tint": "#F5EDDC",
+        "accent": "#7A1E30",
+        "shadow": "#644D1F",
+        "shine": "#F4EBD8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "magenta-ramp",
+      "name": "Magenta ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2E0624",
+        "c1": "#A3177A",
+        "c2": "#DB5BB4",
+        "c3": "#F5B3E0",
+        "c4": "#5E0E46",
+        "tint": "#EED5E7",
+        "accent": "#3EC1A6",
+        "shadow": "#520C3D",
+        "shine": "#EDD1E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pound-key",
+      "name": "Pound key",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#5E5E5E",
+        "c2": "#ADADAD",
+        "c3": "#2E2E2E",
+        "c4": "#E8E8E8",
+        "tint": "#E2E2E2",
+        "accent": "#8A8A8A",
+        "shadow": "#2F2F2F",
+        "shine": "#DFDFDF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050FF",
+        "c2": "#FFD400",
+        "c3": "#FF2D2D",
+        "c4": "#FFFFFF",
+        "tint": "#D1E0FF",
+        "accent": "#FFD400",
+        "shadow": "#002880",
+        "shine": "#CCDCFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-tag",
+      "name": "Holiday tag",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1D0E0A",
+        "c1": "#C42B36",
+        "c2": "#1F6E47",
+        "c3": "#F2D27A",
+        "c4": "#FFF6EA",
+        "tint": "#F4D9DB",
+        "accent": "#F2D27A",
+        "shadow": "#62161B",
+        "shine": "#F3D5D7",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

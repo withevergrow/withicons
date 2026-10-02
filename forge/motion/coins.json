@@ -1,0 +1,39 @@
+{
+  "name": "coins",
+  "intent": "spins and glints like coins being counted",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        16,
+        21.5
+      ]
+    },
+    {
+      "preset": "twinkle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "banknote",
+      "effect": "flip"
+    },
+    {
+      "to": "wallet",
+      "effect": "slide-down"
+    },
+    {
+      "to": "dollar-sign",
+      "effect": "spin"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "donut",
+  "intent": "turns slowly to show off its sprinkles",
+  "loop": { "preset": "spin", "origin": [12, 12], "amount": 1, "duration": 6 },
+  "hover": { "preset": "spin-once", "origin": [12, 12], "amount": 1, "duration": 0.8 },
+  "alt": [ { "preset": "jelly", "amount": 0.8 }, { "preset": "bounce", "amount": 0.6 }, { "preset": "flip" } ]
+}

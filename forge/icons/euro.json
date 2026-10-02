@@ -1,0 +1,60 @@
+{
+  "name": "euro",
+  "category": "commerce",
+  "description": "The euro sign for prices, payments, and money in EUR.",
+  "aliases": [
+    "euro-sign",
+    "eur",
+    "euros",
+    "currency-euro",
+    "money-euro",
+    "euro-symbol",
+    "euro-currency"
+  ],
+  "tags": [
+    "currency",
+    "money",
+    "price",
+    "payment",
+    "europe",
+    "finance"
+  ],
+  "paths": [
+    {
+      "d": "M18.5 7 A7 7 0 1 0 18.5 17",
+      "plate": "K"
+    },
+    {
+      "d": "M4 10 H13 M4 14 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "€",
+    "money",
+    "price",
+    "pricing",
+    "cost",
+    "cash",
+    "currency",
+    "payment",
+    "pay",
+    "europe",
+    "european",
+    "european union",
+    "eu",
+    "eurozone",
+    "finance",
+    "exchange rate",
+    "salary",
+    "invoice",
+    "bill",
+    "budget",
+    "euro sign",
+    "euro symbol",
+    "eruo",
+    "uero"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "globe",
+  "intent": "turns slowly like the world spinning",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "orbit",
+      "amount": 0.5
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "language",
+      "effect": "flip"
+    },
+    {
+      "to": "map",
+      "effect": "fade"
+    }
+  ]
+}

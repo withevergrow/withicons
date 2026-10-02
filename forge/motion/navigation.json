@@ -1,0 +1,38 @@
+{
+  "name": "navigation",
+  "intent": "heads forward toward where you are going",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "map-pin",
+      "effect": "scale"
+    },
+    {
+      "to": "compass",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "italic",
+  "intent": "leans over like text turning italic",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        20
+      ]
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bold",
+      "effect": "flip"
+    },
+    {
+      "to": "underline",
+      "effect": "slide-up"
+    },
+    {
+      "to": "type",
+      "effect": "fade"
+    }
+  ]
+}

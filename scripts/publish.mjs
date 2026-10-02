@@ -7,6 +7,10 @@
 //   node scripts/publish.mjs --expect 0.2.0         fail unless every package is at 0.2.0 (CI passes the tag)
 //   node scripts/publish.mjs --only @withicons/core,withicons
 //
+// Packages (lockstep, one version): core react vue svelte angular solid web static search mcp motion + the `withicons` CLI.
+// The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
+// git tag v<version> already exists on a different commit: that version was released with other content, so bump first.
+//
 // Prerelease versions (0.2.0-beta.1) publish under the "next" dist-tag, everything else under "latest".
 // Provenance: --provenance is added automatically inside GitHub Actions (needs `id-token: write`);
 // with npm Trusted Publishing it is implied anyway. Requires npm >= 11.5.1 for Trusted Publishing.
@@ -22,7 +26,14 @@ const opt = n => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 1]
 const DRY = flag('dry-run')
 const REPO = 'github.com/withevergrow/withicons'
 const isWin = process.platform === 'win32'
-const npm = (args, cwd, capture) => spawnSync(isWin ? 'npm.cmd' : 'npm', args, { cwd, encoding: 'utf8', shell: isWin, stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' })
+// Windows needs a shell to run npm.cmd. Pass one command string (not an args array with shell: true, which Node 22+
+// deprecates as DEP0190); the arguments are package names, versions and flags, quoted when they hold anything else.
+const winArg = a => /^[\w@./:=^-]+$/.test(a) ? a : `"${String(a).replace(/"/g, '\\"')}"`
+const npm = (args, cwd, capture) => {
+  const o = { cwd, encoding: 'utf8', stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' }
+  return isWin ? spawnSync(['npm', ...args].map(winArg).join(' '), { ...o, shell: true }) : spawnSync('npm', args, o)
+}
+const git = args => { const r = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); return r.status === 0 ? r.stdout.trim() : '' }
 const die = m => { console.error(`publish: ${m}`); process.exit(1) }
 
 const pkgs = fs.readdirSync(path.join(ROOT, 'packages'))
@@ -32,16 +43,33 @@ const pkgs = fs.readdirSync(path.join(ROOT, 'packages'))
   .filter(p => !p.json.private)
 const only = opt('only')?.split(',')
 const names = new Set(pkgs.map(p => p.json.name))
+// every package of the lockstep release; a missing one means its emitter did not run (node forge/build.mjs)
+const EXPECTED = ['@withicons/core', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
+  '@withicons/web', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', 'withicons']
+const missing = EXPECTED.filter(n => !names.has(n))
 
 // --- checks: same version everywhere, built output present, repository url (provenance needs it)
 const expect = opt('expect')?.replace(/^v/, '')
 const problems = []
+if (missing.length && !only) problems.push(`missing packages (no packages/<dir>/package.json): ${missing.join(', ')} - run node forge/build.mjs`)
+const versions = new Set(pkgs.map(p => p.json.version))
+if (versions.size > 1) problems.push(`versions are not in lockstep: ${pkgs.map(p => `${p.json.name}@${p.json.version}`).join(', ')}`)
 for (const { dir, json } of pkgs) {
   if (expect && json.version !== expect) problems.push(`${json.name} is ${json.version}, tag says ${expect}`)
   for (const f of json.files || []) if (!f.includes('*') && !fs.existsSync(path.join(dir, f))) problems.push(`${json.name}: "${f}" listed in files but missing (run node forge/build.mjs)`)
   const repo = typeof json.repository === 'string' ? json.repository : json.repository?.url
   if (!repo || !repo.includes(REPO)) problems.push(`${json.name}: package.json "repository.url" must point to https://${REPO} (npm provenance verifies it)`)
   if (json.name.startsWith('@') && json.publishConfig?.access !== 'public') console.warn(`  note: ${json.name} has no publishConfig.access=public; passing --access public`)
+}
+// a version whose git tag already exists on another commit was released with other content (e.g. v0.1.0 = 300 icons x 7
+// styles on GitHub): publishing this tree under that number would give npm and the GitHub Release different packages.
+const version = pkgs[0]?.json.version
+const tagSha = version ? git(['rev-parse', '-q', '--verify', `refs/tags/v${version}^{commit}`]) : ''
+const headSha = git(['rev-parse', 'HEAD'])
+if (tagSha && headSha && tagSha !== headSha) {
+  const m = `v${version} is already tagged on ${tagSha.slice(0, 7)}, not on this commit (${headSha.slice(0, 7)}): bump "withiconsVersion" in the root package.json, rebuild (node forge/build.mjs) and move CHANGELOG "Unreleased" under the new version`
+  if (DRY) console.warn(`  WARNING: ${m}`)
+  else problems.push(m)
 }
 if (problems.length && !(DRY && flag('lenient'))) die('\n  ' + problems.join('\n  '))
 else if (problems.length) console.warn('  (dry run, --lenient) ' + problems.join('\n  '))

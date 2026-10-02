@@ -1,0 +1,42 @@
+{
+  "name": "image-plus",
+  "intent": "pops softly, inviting you to add a picture",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      17.5,
+      17.5
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "rise"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "image",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    }
+  ]
+}

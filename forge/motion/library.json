@@ -1,0 +1,15 @@
+{
+  "name": "library",
+  "intent": "the leaning book rocks on the shelf as if being pulled out",
+  "loop": { "preset": "rock", "origin": [12, 20.5], "amount": 0.3, "duration": 4 },
+  "hover": { "preset": "tilt", "origin": [12, 20.5], "amount": 0.6, "duration": 0.9 },
+  "alt": [
+    { "preset": "bounce", "amount": 0.5 },
+    { "preset": "breathe", "amount": 0.5 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "book-open", "effect": "slide-up" },
+    { "to": "book", "effect": "fade" }
+  ]
+}

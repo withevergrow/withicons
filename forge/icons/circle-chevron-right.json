@@ -1,0 +1,64 @@
+{
+  "name": "circle-chevron-right",
+  "category": "navigation",
+  "description": "A right chevron inside a circle for next, continue, and list disclosure.",
+  "aliases": [
+    "chevron-right-circle",
+    "circled-chevron-right",
+    "next-circle-chevron",
+    "continue-circle",
+    "forward-circle",
+    "navigate-next-circle",
+    "caret-right-circle",
+    "circle-caret-right"
+  ],
+  "tags": [
+    "chevron",
+    "right",
+    "next",
+    "continue",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7.5 L14.5 12 L10 16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 7.5 L14.5 12 L10 16.5"
+  ],
+  "synonyms": [
+    "next",
+    "continue",
+    "proceed",
+    "go",
+    "go forward",
+    "onward",
+    "open",
+    "view details",
+    "see all",
+    "more",
+    "next page",
+    "next slide",
+    "next step",
+    "carousel next",
+    "slider next",
+    "disclosure",
+    "drill down",
+    "right",
+    "round button",
+    "circle button",
+    "chevron in circle",
+    "play next",
+    "greater than"
+  ]
+}

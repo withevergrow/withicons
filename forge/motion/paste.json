@@ -1,0 +1,33 @@
+{
+  "name": "paste",
+  "intent": "floats gently, the page lands with a bounce on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "drop",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "clipboard",
+      "effect": "fade"
+    }
+  ]
+}

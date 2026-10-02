@@ -1,0 +1,37 @@
+{
+  "name": "qr-code",
+  "intent": "glows softly, ready to be scanned",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "barcode",
+      "effect": "flip"
+    },
+    {
+      "to": "qr-code@solid",
+      "effect": "scale"
+    }
+  ]
+}

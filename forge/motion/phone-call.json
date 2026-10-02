@@ -1,0 +1,33 @@
+{
+  "name": "phone-call",
+  "intent": "rings like an incoming call",
+  "loop": {
+    "preset": "ring",
+    "amount": 0.6,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "phone-off",
+      "effect": "rotate"
+    },
+    {
+      "to": "phone",
+      "effect": "fade"
+    }
+  ]
+}

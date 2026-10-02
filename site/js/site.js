@@ -10,10 +10,20 @@
   var W = window
   html.classList.remove('no-js')
   html.classList.add('js')
+  // wi-ready cancels the CSS failsafe in chrome.css that un-hides [data-reveal] content when this file never runs
+  // (a parse error on an old engine, a blocked request). Arriving after the failsafe fired, leave it: nothing re-hides.
+  if (!(W.performance && W.performance.now && W.performance.now() > 2800)) html.classList.add('wi-ready')
 
+  /* motion: the OS setting (followed live) or the visitor's own "Pause animations" toggle (remembered).
+     Either one makes `reduced` true; site CSS keys off html.reduced / html.is-still (tokens.css). */
   var mqReduced = W.matchMedia ? W.matchMedia('(prefers-reduced-motion: reduce)') : null
-  var reduced = !!(mqReduced && mqReduced.matches)
-  if (reduced) html.classList.add('reduced')
+  var osReduced = !!(mqReduced && mqReduced.matches)
+  var STILL_KEY = 'with-still'
+  var userStill = false
+  try { userStill = localStorage.getItem(STILL_KEY) === '1' } catch (e) { /* private mode */ }
+  var reduced = osReduced || userStill
+  function paintMotion() { html.classList.toggle('reduced', reduced); html.classList.toggle('is-still', userStill && !osReduced) }
+  paintMotion()
 
   /* ───────────── theme (runs immediately) ───────────── */
   var THEME_KEY = 'with-theme-v2'
@@ -67,7 +77,14 @@
   function emit(ev, arg) { var l = (subs[ev] || []).slice(); for (var i = 0; i < l.length; i++) { try { l[i](arg) } catch (e) { if (W.console) console.error(e) } } }
 
   /* ───────────── data + styles ───────────── */
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch']
+  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful palette styles
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']
+  // how the home page and pickers group them (kind stays 'universal' | 'creative' for the data contract)
+  var GROUPS = [
+    { id: 'everyday', title: 'Everyday', blurb: 'Clean and quiet. For interfaces, docs and slides.', styles: ['line', 'solid', 'duo'] },
+    { id: 'crafted', title: 'Crafted', blurb: 'Illustrated looks with character.', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
+    { id: 'playful', title: 'Playful', blurb: 'Colourful, cute and nostalgic. New!', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] }
+  ]
   // plain-language copy for each style (shared by every page)
   var INFO = {
     line: { title: 'Line', kind: 'universal', color: '#2F5BFF', description: 'A clean, even outline.',
@@ -90,14 +107,61 @@
       who: 'Developer tools, docs, engineering and architecture products.', why: 'Shows the construction behind each icon.' },
     sketch: { title: 'Sketch', kind: 'creative', color: '#22A861', description: 'Hand-drawn marker.',
       plain: 'Hand-drawn marker lines, like a whiteboard doodle.', good: 'Classes, workshops, notes, friendly brands',
-      who: 'Whiteboards, onboarding, education and friendly products.', why: 'Warmth on purpose: hand-made, yet identical on every build.' }
+      who: 'Whiteboards, onboarding, education and friendly products.', why: 'Warmth on purpose: hand-made, yet identical on every build.' },
+    glass: { title: 'Glass', kind: 'creative', color: '#5B9DFF', description: 'Layered frosted glass.', group: 'playful', isNew: true,
+      plain: 'Layers of frosted glass with soft light. Modern and airy.', good: 'App screens, dashboards, tech launches, dark mode',
+      who: 'Modern apps, fintech, dashboards and product launches.', why: 'Depth from stacked translucent panes, no blur filters needed.' },
+    kawaii: { title: 'Kawaii', kind: 'creative', color: '#FF7A9A', description: 'Chubby, cute, with a tiny face.', group: 'playful', isNew: true,
+      plain: 'Chubby, soft and cute, with a tiny smiling face and rosy cheeks.', good: 'Journals, kids, cafés, stickers, social posts',
+      who: 'Creators, planners, small shops and anything that should feel friendly.', why: 'Every object gets a personality, so a set feels like a family.' },
+    sticker: { title: 'Sticker', kind: 'creative', color: '#B57CFF', description: 'Die-cut Y2K sticker.', group: 'playful', isNew: true,
+      plain: 'Shiny die-cut stickers with a puffy white border and sparkles.', good: 'Social posts, merch, scrapbooks, Gen Z brands',
+      who: 'Social media, scrapbooks, merch and bold consumer brands.', why: 'A white border makes icons pop on photos and busy backgrounds.' },
+    pixel: { title: 'Pixel', kind: 'creative', color: '#4FAE0C', description: 'Crisp 16×16 pixel art.', group: 'playful', isNew: true,
+      plain: 'Crisp pixel art, like an old video game.', good: 'Games, hackathons, retro tech, fun UIs',
+      who: 'Games, developer fun, hackathons and nostalgic brands.', why: 'Snapped to a 16×16 grid, so edges stay razor sharp.' },
+    retro: { title: 'Retro', kind: 'creative', color: '#F57C12', description: '70s sunset stripes.', group: 'playful', isNew: true,
+      plain: 'Chunky 70s shapes with warm sunset stripes.', good: 'Posters, events, cafés, music, vintage brands',
+      who: 'Events, hospitality, music and vintage-flavoured brands.', why: 'Warm stripes and a chunky outline: instant nostalgia.' }
   }
+  ;['line', 'solid', 'duo'].forEach(function (n) { INFO[n].group = 'everyday' })
+  ;['gloss', 'engrave', 'blueprint', 'sketch'].forEach(function (n) { INFO[n].group = 'crafted' })
+  // live counts: from data/meta.js once loaded, otherwise the published totals
+  var FALLBACK_TOTAL = 500
+  function counts() {
+    var d = W.WITH || W.EGI
+    var n = d && d.icons && d.icons.length ? d.icons.length : (d && d.total) || FALLBACK_TOTAL
+    // styles: the contract order plus anything extra the data declares (a style is announced before every file lands)
+    var st = ORDER.length
+    if (d && d.styles) d.styles.forEach(function (x) { if (x && ORDER.indexOf(x.name) < 0) st++ })
+    return { icons: n, styles: st, svgs: n * st }
+  }
+  var NUM_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen']
+  function numWord(n) { return NUM_WORDS[n] || String(n) }
+  /* Live counts. Put data-count="icons|styles|svgs|styles-word|Styles-word" on any element holding a static number
+     (keep the correct published number as its text: it is the no-JS fallback). Painted when data/meta.js is present. */
+  function paintCounts(root) {
+    if (!(W.WITH || W.EGI)) return
+    var c = counts()
+    $$('[data-count]', root).forEach(function (el) {
+      var k = el.getAttribute('data-count'), v = null
+      if (k === 'icons') v = fmt(c.icons)
+      else if (k === 'styles') v = String(c.styles)
+      else if (k === 'svgs') v = fmt(c.svgs)
+      else if (k === 'styles-word') v = numWord(c.styles)
+      else if (k === 'Styles-word') { v = numWord(c.styles); v = v.charAt(0).toUpperCase() + v.slice(1) }
+      if (v != null && el.textContent !== v) el.textContent = v
+    })
+    $$('[data-count-line]', root).forEach(function (el) { el.textContent = countLine() })
+    if (so && so.input) so.input.setAttribute('placeholder', 'Search ' + fmt(c.icons) + ' icons — try “bin”, “money” or “settigns”')
+  }
+  function countLine() { var c = counts(); return fmt(c.icons) + ' icons, ' + c.styles + ' styles, all free.' }
   var scriptBase = (function () {
     var s = doc.currentScript && doc.currentScript.src
     if (s && /js\/site\.js(\?.*)?$/.test(s)) return s.replace(/js\/site\.js(\?.*)?$/, '')
     return ''
   })()
-  function DATA() { return W.WITH || W.EGI || { version: '1.0.0', total: 300, categories: [], styles: [], icons: [] } }
+  function DATA() { return W.WITH || W.EGI || { version: '1.0.0', total: FALLBACK_TOTAL, categories: [], styles: [], icons: [] } }
   function svgStore() { return W.WITH_SVG || W.EGI_SVG || null }
   function svgMap(style) { var s = svgStore(); return (s && s[style]) || (W.EGI_SVG && W.EGI_SVG[style]) || (W.WITH_SVG && W.WITH_SVG[style]) || null }
   function styleMeta(name) {
@@ -141,7 +205,10 @@
     duo: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.75, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
     engrave: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
     blueprint: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.25, 'stroke-linecap': 'square', 'stroke-linejoin': 'miter' },
-    sketch: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }
+    sketch: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
+    // palette styles carry explicit fills/strokes per shape; data/meta.js supplies the real root when loaded
+    glass: { fill: 'none' }, kawaii: { fill: 'currentColor' }, sticker: { fill: 'currentColor' },
+    pixel: { fill: 'currentColor', 'shape-rendering': 'crispEdges' }, retro: { fill: 'currentColor' }
   }
   function rootAttrs(style) { var m = styleMeta(style); return (m && m.root) || ROOTS[style] || { fill: 'currentColor' } }
   function svgFrom(inner, style, size, opts) {
@@ -446,12 +513,17 @@
   }
 
   /* ───────────── code highlighting (tiny, for our own snippets) ───────────── */
-  var HL = /((?<![:\w])\/\/[^\n]*|^[ \t]*#[^\n]*|<!--[\s\S]*?-->|\/\*[\s\S]*?\*\/)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`[^`]*`)|(<\/?)([A-Za-z][\w.-]*)|\b(import|from|export|default|const|let|return|function|new|class|as|true|false|null)\b|([A-Za-z_:@[\]().-]*[A-Za-z_\]])(?==)|(\b\d+(?:\.\d+)?\b)|([{}[\]()<>/=;:,]|\/?>)/gm
+  // No regex lookbehind: Safari/iOS < 16.4 fails to PARSE it and this whole file would never run.
+  // A // right after a word char or colon (https://…) is not a comment; highlight() checks that by hand.
+  var HL = /(\/\/[^\n]*|^[ \t]*#[^\n]*|<!--[\s\S]*?-->|\/\*[\s\S]*?\*\/)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`[^`]*`)|(<\/?)([A-Za-z][\w.-]*)|\b(import|from|export|default|const|let|return|function|new|class|as|true|false|null)\b|([A-Za-z_:@[\]().-]*[A-Za-z_\]])(?==)|(\b\d+(?:\.\d+)?\b)|([{}[\]()<>/=;:,]|\/?>)/gm
   function highlight(code) {
     var out = '', last = 0, m
     HL.lastIndex = 0
     while ((m = HL.exec(code))) {
       out += esc(code.slice(last, m.index))
+      if (m[1] && m[1].charAt(0) === '/' && m[1].charAt(1) === '/' && m.index > 0 && /[:\w]/.test(code.charAt(m.index - 1))) {
+        out += '<span class="t-p">/</span>'; last = HL.lastIndex = m.index + 1; continue
+      }
       if (m[1]) out += '<span class="t-c">' + esc(m[1]) + '</span>'
       else if (m[2]) out += '<span class="t-s">' + esc(m[2]) + '</span>'
       else if (m[3]) out += '<span class="t-p">' + esc(m[3]) + '</span><span class="t-t">' + esc(m[4]) + '</span>'
@@ -573,8 +645,9 @@
   }
 
   /* ═════════════════════ LOGO MORPH ═════════════════════
-     Cycles real icons through the seven styles. line/duo/blueprint/sketch draw themselves on, solid/engrave
-     fill up, gloss gets a highlight sweep. Each frame tints the tile and the hand-written "with" in the style colour.
+     Cycles real icons through all twelve styles. line/duo/blueprint/sketch draw themselves on, solid/engrave
+     fill up, gloss gets a highlight sweep; glass clears from frost, kawaii bounces in, a sticker is slapped on,
+     pixel resolves in steps and retro rises like a sunset. Each frame tints the tile and the hand-written "with" in the style colour.
      Frames live in brand/logo-frames.js (≈27 KB, loaded when idle). Pauses off-screen, in hidden tabs, and for
      reduced motion (then it only changes on hover). */
   var FIRST_FRAME = ['heart', 'line', '<path pathLength="1" d="M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"/>']
@@ -592,6 +665,7 @@
   }
   var DRAW = { line: 1, duo: 1, blueprint: 1, sketch: 1 }
   var FILL = { solid: 1, engrave: 1 }
+  var ENTER = { glass: 'lm-frost', kawaii: 'lm-bounce', sticker: 'lm-slap', pixel: 'lm-pixel', retro: 'lm-rise' }
   var morphs = []
   function initLogoMorph() {
     $$('[data-logo-morph]').forEach(function (el, idx) {
@@ -631,7 +705,7 @@
   function show(st, f, first) {
     var el = st.el, prev = st.cur
     var sameIcon = prev && prev[0] === f[0]
-    var cls = reduced ? '' : (DRAW[f[1]] ? 'lm-draw' : FILL[f[1]] ? 'lm-fill' : '')
+    var cls = reduced ? '' : (DRAW[f[1]] ? 'lm-draw' : FILL[f[1]] ? 'lm-fill' : ENTER[f[1]] || '')
     if (first) cls = reduced ? '' : 'lm-draw'
     var tmp = doc.createElement('div')
     tmp.innerHTML = frameSvg(f, st.roots, cls + (first || reduced ? '' : ' is-pre'))
@@ -649,7 +723,7 @@
       setTimeout(function () { if (o.parentNode) o.parentNode.removeChild(o) }, reduced ? 0 : 750)
     })
     if (!first && !reduced) requestAnimationFrame(function () { requestAnimationFrame(function () { node.classList.remove('is-pre') }) })
-    if (f[1] === 'gloss' && !reduced) { el.classList.remove('is-shine'); void el.offsetWidth; el.classList.add('is-shine') }
+    if ((f[1] === 'gloss' || f[1] === 'sticker' || f[1] === 'glass') && !reduced) { el.classList.remove('is-shine'); void el.offsetWidth; el.classList.add('is-shine') }
     st.cur = f
   }
 
@@ -682,7 +756,8 @@
     })
     return hit
   }
-  var NAV_STYLE = ['line', 'duo', 'solid', 'sketch', 'gloss', 'blueprint', 'engrave']
+  // nav links and the mobile menu cycle through the signature colours (old and new styles interleaved)
+  var NAV_STYLE = ['line', 'kawaii', 'solid', 'pixel', 'duo', 'retro', 'gloss', 'glass', 'sketch', 'sticker', 'blueprint', 'engrave']
   function initHeader() {
     var header = $('[data-header]') || $('.site-header')
     if (!header) return
@@ -765,7 +840,7 @@
       var s = NAV_STYLE[i % NAV_STYLE.length]
       h += '<a class="mm-link s-' + s + '" style="--i:' + i + '" href="' + esc(a.getAttribute('href')) + '"' + (a.getAttribute('aria-current') ? ' aria-current="' + a.getAttribute('aria-current') + '"' : '') + '>' + esc(a.textContent) + '<span class="mm-dot" aria-hidden="true"></span></a>'
     })
-    h += '</nav><p class="mm-hand">300 icons, 7 styles, all free.</p><div class="mm-foot"><a class="btn btn-sun" href="' + esc(rel('icons.html')) + '">Browse icons ' + ICON.arrow + '</a><span>Powered by Evergrow</span></div>'
+    h += '</nav><p class="mm-hand" data-count-line>' + countLine() + '</p><div class="mm-foot"><a class="btn btn-sun" href="' + esc(rel('icons.html')) + '">Browse icons ' + ICON.arrow + '</a>' + stillButton('on-light') + '<span>Powered by Evergrow</span></div>'
     sheet.innerHTML = h
     doc.body.appendChild(sheet)
     var open = false
@@ -781,6 +856,58 @@
     doc.addEventListener('keydown', function (e) { if (open && e.key === 'Escape') { set(false); btn.focus() } })
     W.addEventListener('resize', function () { if (open && W.innerWidth > 900) set(false) }, { passive: true })
   }
+  /* ───────────── "Pause animations" (WCAG 2.2.2) ─────────────
+     One toggle in every footer and in the mobile menu stops the auto-playing motion site-wide (header logo morph,
+     home hero carousel, lanes, typewriter, decorative loops) and is remembered across pages. */
+  function motionChanged() {
+    var was = reduced
+    reduced = osReduced || userStill
+    paintMotion()
+    paintStillToggles()
+    if (was === reduced) return
+    if (reduced) $$('[data-reveal]').forEach(function (e) { e.classList.add('is-in') })
+    morphs.forEach(function (st) { if (reduced) stop(st); else if (st.visible) start(st) })
+    emit('motion', reduced)
+  }
+  function setStill(v) {
+    userStill = !!v
+    try { if (userStill) localStorage.setItem(STILL_KEY, '1'); else localStorage.removeItem(STILL_KEY) } catch (e) { /* private mode */ }
+    motionChanged()
+    announce(userStill ? 'Animations paused' : 'Animations on')
+  }
+  var STILL_ICON = {
+    pause: '<svg' + SVGA + ' stroke-width="2.25"><path d="M9 6 V18 M15 6 V18"/></svg>',
+    play: '<svg' + SVGA + ' stroke-width="2"><path d="M8 5.5 L18.5 12 L8 18.5 Z"/></svg>'
+  }
+  function paintStillToggles() {
+    $$('[data-still-toggle]').forEach(function (b) {
+      // with the OS asking for reduced motion there is nothing left to pause
+      b.hidden = osReduced && !userStill
+      b.setAttribute('aria-pressed', userStill ? 'true' : 'false')
+      var ic = b.querySelector('.still-ic'); if (ic) ic.innerHTML = userStill ? STILL_ICON.play : STILL_ICON.pause
+    })
+  }
+  function stillButton(extra) {
+    return '<button type="button" class="still-toggle' + (extra ? ' ' + extra : '') + '" data-still-toggle aria-pressed="false">' +
+      '<span class="still-ic" aria-hidden="true"></span><span>Pause animations</span></button>'
+  }
+  function initStillToggle() {
+    $$('.foot-base').forEach(function (fb) {
+      if ($('[data-still-toggle]', fb)) return
+      var tmp = doc.createElement('div'); tmp.innerHTML = stillButton()
+      fb.insertBefore(tmp.firstChild, $('.evergrow-link', fb) || null)
+    })
+    doc.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-still-toggle]')
+      if (b) setStill(!userStill)
+    })
+    if (mqReduced) {
+      var onMq = function (e) { osReduced = !!e.matches; motionChanged() }
+      if (mqReduced.addEventListener) mqReduced.addEventListener('change', onMq); else if (mqReduced.addListener) mqReduced.addListener(onMq)
+    }
+    paintStillToggles()
+  }
+
   function initReveal() {
     var els = $$('[data-reveal]')
     if (!els.length) return
@@ -843,7 +970,7 @@
     el.innerHTML = '<div class="so-backdrop" data-so-close></div>' +
       '<div class="so-panel">' +
       '<div class="so-bar">' + ICON.search +
-      '<input class="so-input" type="search" placeholder="Search 300 icons — try “bin”, “money” or “settigns”" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="so-list" aria-autocomplete="list" aria-label="Search icons">' +
+      '<input class="so-input" type="search" placeholder="Search ' + fmt(counts().icons) + ' icons — try “bin”, “money” or “settigns”" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="so-list" aria-autocomplete="list" aria-label="Search icons">' +
       '<div class="so-ask"></div><button class="so-close" type="button" data-so-close aria-label="Close search">Esc</button><span class="so-progress"></span></div>' +
       '<div class="so-tools"><div class="so-styles" role="group" aria-label="Show results in style">' + chips + '</div>' +
       '<div class="so-view" role="group" aria-label="Result layout">' +
@@ -905,7 +1032,7 @@
         else if (e.altKey) doAction('png', h.name)
         else location.href = iconUrl(h.name)
       } else if (k === 'Tab' && !e.shiftKey && so.hits.length) {
-        // Tab cycles the preview style — a quick way to see the results in all seven
+        // Tab cycles the preview style — a quick way to see the results in every style
         e.preventDefault(); setSoStyle(ORDER[(ORDER.indexOf(so.style) + 1) % ORDER.length], true)
       }
     })
@@ -1233,7 +1360,7 @@
     var app = opts.app && GUIDES[opts.app] ? opts.app : ''
     var P = []
     var add = function (t, drop) { P.push([t, !!drop]) }
-    add('First, open and follow ' + AI_SKILL + ' — the guide to "with icons" (' + AI_SITE + '): 300 free, MIT-licensed icons, each drawn in 7 styles (line, solid, duo, gloss, engrave, blueprint, sketch). Look icons up with ' + AI_SITE + '/api/search?q=WORDS (it understands synonyms and typos; overview: ' + AI_SITE + '/llms.txt). Only use icon names that exist there — never invent one.')
+    add('First, open and follow ' + AI_SKILL + ' — the guide to "with icons" (' + AI_SITE + '): ' + fmt(counts().icons) + ' free, MIT-licensed icons, each drawn in ' + counts().styles + ' styles (' + ORDER.join(', ') + '). Look icons up with ' + AI_SITE + '/api/search?q=WORDS (it understands synonyms and typos; overview: ' + AI_SITE + '/llms.txt). Only use icon names that exist there — never invent one.')
     add('')
     var page = name ? AI_SITE + '/icons/' + name + '.html' : ''
     var iconLine = function () {
@@ -1256,7 +1383,7 @@
       add('Reply with:')
       add('1. Best fit: exact name + one line on why my users will read it right.')
       add('2. Up to 2 alternatives, one line each.')
-      add('3. The best style for this context, and why (line or solid for UI controls; gloss, engrave, blueprint and sketch only at 32px+).')
+      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro — only at 32px+).')
       add('4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
       add('5. A link for each pick: ' + AI_SITE + '/icons/NAME.html')
     } else if (intent === 'code') {
@@ -1667,8 +1794,13 @@
     openSearch: openSearch, closeSearch: closeSearch, theme: currentTheme, toggleTheme: toggleTheme,
     whenVisible: whenVisible, visibility: visibility, idle: idle, pick: pick, fmt: fmt, $: $, $$: $$,
     base: scriptBase, url: rel, iconUrl: iconUrl, magnetic: magnetic, icon_svg: ICON,
-    reduced: reduced, askAI: askAI, copyPng: copyPng, manualCopy: manualCopy
+    askAI: askAI, copyPng: copyPng, manualCopy: manualCopy,
+    GROUPS: GROUPS, counts: counts, numWord: numWord, paintCounts: paintCounts
   }
+  // live: WI.reduced always reads the current state; WI.on('motion', fn(reduced)) hears changes
+  Object.defineProperty(API, 'reduced', { enumerable: true, get: function () { return reduced } })
+  API.setStill = setStill
+  API.isStill = function () { return userStill }
   W.WI = API
   W.EG = API
 
@@ -1680,9 +1812,13 @@
     initSearch()
     initReveal()
     initFooter()
+    initStillToggle()
     initEvergrow()
     initAskAI()
     wireCopy()
+    on('meta', function () { paintCounts() })
+    paintCounts()
+    if ($('[data-count]')) idle(function () { loadMeta().then(function () { paintCounts() }) }, 1500)
     $$('pre[data-code]').forEach(function (p) { p.outerHTML = codeBlock(p.textContent.replace(/^\n/, ''), p.getAttribute('data-code')) })
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { emit('fonts') })
     emit('ready')

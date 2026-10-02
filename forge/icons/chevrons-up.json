@@ -1,0 +1,63 @@
+{
+  "name": "chevrons-up",
+  "category": "arrows",
+  "description": "A double chevron pointing up for collapse-all, back to top, and raised priority.",
+  "aliases": [
+    "double-chevron-up",
+    "angles-up",
+    "double-arrow-up",
+    "angle-double-up",
+    "collapse-all",
+    "high-priority",
+    "double-caret-up",
+    "chevron-double-up",
+    "scroll-to-top",
+    "rank-up"
+  ],
+  "tags": [
+    "chevron",
+    "double",
+    "up",
+    "collapse",
+    "priority",
+    "top"
+  ],
+  "paths": [
+    {
+      "d": "M6 12 L12 6 L18 12",
+      "plate": "K"
+    },
+    {
+      "d": "M6 18 L12 12 L18 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "back to top",
+    "go to top",
+    "jump to top",
+    "top of page",
+    "collapse everything",
+    "fold all",
+    "show less",
+    "hide all",
+    "priority high",
+    "urgent",
+    "important",
+    "level up",
+    "upgrade",
+    "promote",
+    "increase",
+    "boost",
+    "rise",
+    "climb",
+    "higher",
+    "rank",
+    "military rank",
+    "sergeant",
+    "chevrons",
+    "angles up"
+  ]
+}

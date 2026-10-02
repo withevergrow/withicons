@@ -1,0 +1,33 @@
+{
+  "name": "wifi-off",
+  "intent": "flickers like a connection that keeps dropping",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "fade"
+    },
+    {
+      "to": "signal",
+      "effect": "blur"
+    }
+  ]
+}

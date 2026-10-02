@@ -1,0 +1,14 @@
+{
+  "name": "phone-missed",
+  "intent": "pulses softly like a missed call waiting, shakes no on hover",
+  "loop": { "preset": "pulse", "amount": 0.5, "duration": 2.2 },
+  "hover": { "preset": "shake", "amount": 0.8 },
+  "alt": [
+    { "preset": "ring", "amount": 0.6 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "phone-outgoing", "effect": "fade" },
+    { "to": "phone-call", "effect": "rotate" }
+  ]
+}

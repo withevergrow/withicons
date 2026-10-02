@@ -1,0 +1,8 @@
+{
+  "name": "repeat-1",
+  "intent": "turns around and around like a song on repeat",
+  "loop": { "preset": "spin", "origin": [12, 12], "duration": 5 },
+  "hover": { "preset": "spin-once", "origin": [12, 12], "duration": 0.8 },
+  "alt": [ { "preset": "flip" }, { "preset": "pop" } ],
+  "swap": [ { "to": "repeat", "effect": "fade" }, { "to": "shuffle", "effect": "flip" } ]
+}

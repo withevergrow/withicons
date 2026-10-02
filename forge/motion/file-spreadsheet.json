@@ -1,0 +1,31 @@
+{
+  "name": "file-spreadsheet",
+  "intent": "fills in like rows of data loading",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file",
+      "effect": "fade"
+    },
+    {
+      "to": "download",
+      "effect": "slide-down"
+    }
+  ]
+}

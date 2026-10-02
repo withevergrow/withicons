@@ -1,0 +1,39 @@
+{
+  "name": "folder",
+  "intent": "rests calmly, squishes open when you point at it",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20
+    ]
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder-open",
+      "effect": "fade"
+    },
+    {
+      "to": "folder-plus",
+      "effect": "scale"
+    },
+    {
+      "to": "folder@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "microscope",
+  "intent": "nods down to focus on the sample",
+  "loop":  { "preset": "tilt", "origin": [12, 21], "amount": 0.4, "duration": 3.2 },
+  "hover": { "preset": "nod", "origin": [12, 21], "amount": 0.7 },
+  "alt":   [ { "preset": "zoom", "amount": 0.6 }, { "preset": "wiggle", "origin": [12, 21] } ],
+  "swap":  [ { "to": "microscope@solid", "effect": "fade" } ]
+}

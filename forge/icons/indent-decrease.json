@@ -1,0 +1,66 @@
+{
+  "name": "indent-decrease",
+  "category": "text",
+  "description": "Lines of text with a left-pointing arrow for decreasing the indent and un-nesting text.",
+  "aliases": [
+    "outdent",
+    "dedent",
+    "decrease-indent",
+    "indent-less",
+    "indent-left",
+    "tab-left",
+    "unnest",
+    "unindent"
+  ],
+  "synonyms": [
+    "decrease indent",
+    "reduce indent",
+    "remove indent",
+    "move left",
+    "shift tab",
+    "tab out",
+    "un-indent",
+    "unnest list",
+    "parent item",
+    "shift left",
+    "list level",
+    "bullet level",
+    "text formatting",
+    "word processor",
+    "editor toolbar",
+    "indentation",
+    "out dent"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "indent",
+    "editor",
+    "list",
+    "typography"
+  ],
+  "paths": [
+    {
+      "d": "M3 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 9.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 14.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 19.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M9 12 H3 M6 9 L3 12 L6 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

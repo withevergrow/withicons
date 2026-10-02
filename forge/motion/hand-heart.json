@@ -1,0 +1,52 @@
+{
+  "name": "hand-heart",
+  "intent": "the heart beats softly in an open, caring hand",
+  "loop": {
+    "preset": "beat",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "beat",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.5
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "rise",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "hand-heart@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "heart",
+      "effect": "fade"
+    },
+    {
+      "to": "hand-coins",
+      "effect": "slide-up"
+    }
+  ]
+}

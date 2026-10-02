@@ -1,0 +1,28 @@
+{
+  "name": "activity",
+  "intent": "traces its pulse line like a live monitor",
+  "loop": {
+    "preset": "draw",
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "pass",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart-pulse",
+      "effect": "fade"
+    }
+  ]
+}

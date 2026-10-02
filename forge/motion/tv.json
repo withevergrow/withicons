@@ -1,0 +1,41 @@
+{
+  "name": "tv",
+  "intent": "screen flickers softly like a TV that is on",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "monitor",
+      "effect": "fade"
+    },
+    {
+      "to": "film",
+      "effect": "flip"
+    }
+  ]
+}

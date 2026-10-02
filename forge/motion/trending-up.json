@@ -1,0 +1,29 @@
+{
+  "name": "trending-up",
+  "intent": "line climbs up and to the right, showing growth",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.5,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 315
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "trending-down",
+      "effect": "morph"
+    }
+  ]
+}

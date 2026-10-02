@@ -1,7 +1,7 @@
 # Contributing to with icons
 
-Thanks for helping! with icons is 300 icons x 7 styles, all generated from one hand-drawn skeleton
-per icon. Most contributions are one of these:
+Thanks for helping! with icons is 500 icons x 12 styles, all generated from one hand-drawn skeleton
+per icon, plus an optional animation spec per icon. Most contributions are one of these:
 
 | you want to... | do this |
 |---|---|
@@ -9,6 +9,7 @@ per icon. Most contributions are one of these:
 | make search find an icon | open an [alias suggestion](https://github.com/withevergrow/withicons/issues/new?template=alias-request.yml) or edit `aliases`/`synonyms` in `forge/icons/<name>.json` |
 | draw a new icon | add `forge/icons/<name>.json` (see below) |
 | fix how an icon looks | edit its skeleton; never hand-edit generated SVGs |
+| animate an icon | add or edit `forge/motion/<name>.json` (see [`forge/MOTION.md`](forge/MOTION.md)), then `node forge/tools/check-motion.mjs <name>` |
 | fix a package or the site | see "Code" below |
 
 ## Setup
@@ -43,12 +44,14 @@ node forge/tools/preview.mjs --icons my-icon,home,search --size 56 --small --out
 node forge/tools/preview.mjs --icons my-icon --dark --out .preview/my-icon-dark.png
 ```
 
-Attach the preview PNG to your pull request.
+Attach the preview PNG to your pull request. Check the palette styles on a dark background too (`--dark`).
 
 ## Code
 
 - `forge/styles/*.mjs`: style renderers. They must be deterministic, must not throw on any skeleton, and must
-  output `currentColor` paths only (see CONTRACT.md).
+  paint with `currentColor` only; the palette styles (glass, kawaii, sticker, pixel, retro) may add colours, but only as
+  `var(--with-<style>-<role>, #hex)` (see CONTRACT.md).
+- `forge/motion/*.json` + `forge/MOTION.md`: per-icon animation specs (closed preset vocabulary), packaged as `@withicons/motion`.
 - `forge/lib/emit-*.mjs`: one emitter per package. `packages/*/dist` is generated, so do not edit or commit it.
 - `site/`: the zero-build website (vanilla HTML/CSS/JS). Generated pages come from `forge/tools/site-seo.mjs`.
 - `infra/`, `scripts/`, `.github/`: deployment and release (maintainers).

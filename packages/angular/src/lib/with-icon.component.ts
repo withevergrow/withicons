@@ -21,7 +21,7 @@ function shapeToD(tag: string, a: Readonly<Record<string, string | number>>): st
       return `M${n('x1')} ${n('y1')}L${n('x2')} ${n('y2')}`;
     case 'polyline':
     case 'polygon': {
-      const v = String(a['points'] ?? '').trim().split(/[s,]+/).map(Number);
+      const v = String(a['points'] ?? '').trim().split(/[\s,]+/).map(Number);
       const pts: string[] = [];
       for (let i = 0; i + 1 < v.length; i += 2) pts.push(`${v[i]} ${v[i + 1]}`);
       return pts.length ? 'M' + pts.join('L') + (tag === 'polygon' ? 'Z' : '') : null;
@@ -68,11 +68,13 @@ function pathsOf(node: WithIconNode): ReadonlyArray<Attrs> {
   standalone: true,
   imports: [WithAttrsDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'with-icon', '[attr.title]': 'null' },
+  // title / aria-label / aria-labelledby name the inner <svg role="img">: they are removed from the host, whose
+  // role is generic (naming a generic element is prohibited, so assistive technology may drop it there)
+  host: { class: 'with-icon', '[attr.title]': 'null', '[attr.aria-label]': 'null', '[attr.aria-labelledby]': 'null' },
   // no emulated encapsulation: keeps _ngcontent attributes off every <path>; easy to override
   encapsulation: ViewEncapsulation.None,
   styles: ['with-icon{display:inline-flex}'],
-  // Every node is drawn as a <path> (other shapes are converted once, see toPathAttrs), so the
+  // Every node is drawn as a <path> (other shapes are converted once, see pathsOf), so the
   // template needs no per-tag branches and SSR output stays small. Unknown names render nothing
   // inside the host, like the other with icons packages.
   template:
@@ -98,6 +100,10 @@ export class WithIconComponent implements OnChanges, OnInit {
   @Input({ transform: booleanAttribute }) absoluteStrokeWidth = false;
   /** accessible name: renders <title> and role="img" (otherwise aria-hidden) */
   @Input() title?: string | null;
+  /** accessible name without a tooltip: moved to the <svg>, which gets role="img" (otherwise aria-hidden) */
+  @Input('aria-label') ariaLabel?: string | null;
+  /** id(s) of the element(s) that name the icon: moved to the <svg>, which gets role="img" */
+  @Input('aria-labelledby') ariaLabelledby?: string | null;
 
   private readonly registry = inject(WITH_ICONS, { optional: true });
   protected rootAttrs: Attrs = {};
@@ -136,7 +142,9 @@ export class WithIconComponent implements OnChanges, OnInit {
     }
     if (color !== 'currentColor') a['color'] = color;
     a['class'] = `withi withi-${data ? data.name : this.name || 'unknown'}`;
-    if (this.title) a['role'] = 'img';
+    if (this.ariaLabel) a['aria-label'] = this.ariaLabel;
+    if (this.ariaLabelledby) a['aria-labelledby'] = this.ariaLabelledby;
+    if (this.title || this.ariaLabel || this.ariaLabelledby) a['role'] = 'img';
     else a['aria-hidden'] = 'true';
     this.rootAttrs = a;
     this.paths = data ? pathsOf(data.node) : [];

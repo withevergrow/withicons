@@ -1,0 +1,80 @@
+{
+  "name": "traffic-cone",
+  "category": "travel",
+  "description": "A striped traffic cone standing on its base, for roadworks, construction and things that are under construction.",
+  "aliases": [
+    "roadworks",
+    "under-construction",
+    "work-in-progress",
+    "road-closed",
+    "safety-cone",
+    "road-cone",
+    "pylon",
+    "witch-hat",
+    "construction-cone",
+    "wip"
+  ],
+  "tags": [
+    "construction",
+    "road",
+    "warning",
+    "safety",
+    "traffic",
+    "progress"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 20.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 20.5 L10.5 3.5 H13.5 L18.5 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 H15",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 14.5 H16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 20.5 L10.5 3.5 H13.5 L18.5 20.5 Z"
+  ],
+  "cutouts": [
+    "M7 8.25 H17 V9.75 H7 Z",
+    "M5.5 13.75 H18.5 V15.25 H5.5 Z"
+  ],
+  "synonyms": [
+    "cone",
+    "construction",
+    "under construction",
+    "work in progress",
+    "coming soon",
+    "maintenance",
+    "site maintenance",
+    "road works",
+    "roadwork",
+    "detour",
+    "diversion",
+    "hazard",
+    "warning",
+    "caution",
+    "safety",
+    "obstacle",
+    "barrier",
+    "closed",
+    "blocked",
+    "beta",
+    "not ready",
+    "in progress",
+    "traffic",
+    "road",
+    "orange cone",
+    "traffic cones",
+    "trafic cone",
+    "trafic"
+  ]
+}

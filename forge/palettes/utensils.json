@@ -1,0 +1,473 @@
+{
+  "name": "utensils",
+  "palettes": [
+    {
+      "id": "stainless-steel",
+      "name": "Stainless steel",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1F2933",
+        "c1": "#C9D1D9",
+        "c2": "#8A96A3",
+        "c3": "#EEF2F5",
+        "c4": "#4B5563",
+        "tint": "#F4F6F7",
+        "accent": "#FFFFFF",
+        "shadow": "#636C75",
+        "shine": "#EFF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-flatware",
+      "name": "Gold flatware",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3A2A08",
+        "c1": "#D9AE43",
+        "c2": "#F2D98A",
+        "c3": "#9C7718",
+        "c4": "#FFF4CF",
+        "tint": "#F7EFD9",
+        "accent": "#F2D98A",
+        "shadow": "#7A5F20",
+        "shine": "#F4E7C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "matte-black",
+      "name": "Matte black",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#45454C",
+        "c2": "#8A8A94",
+        "c3": "#C9C9CF",
+        "c4": "#1E1E22",
+        "tint": "#DADADB",
+        "accent": "#C9C9CF",
+        "shadow": "#1C1C1E",
+        "shine": "#C7C7C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rose-gold-cutlery",
+      "name": "Rose gold cutlery",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3B1E22",
+        "c1": "#E3A897",
+        "c2": "#F4CFC2",
+        "c3": "#B76E79",
+        "c4": "#FFF0EA",
+        "tint": "#F9EEEA",
+        "accent": "#F4CFC2",
+        "shadow": "#7E5551",
+        "shine": "#F7E5E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-kitchen",
+      "name": "Copper kitchen",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E1406",
+        "c1": "#C9773A",
+        "c2": "#E8B38A",
+        "c3": "#8A4718",
+        "c4": "#F6E0CD",
+        "tint": "#F4E4D8",
+        "accent": "#E8B38A",
+        "shadow": "#6C3C1B",
+        "shine": "#EFD6C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wood-and-steel",
+      "name": "Wood & steel",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1A0C",
+        "c1": "#B8835A",
+        "c2": "#C9D1D9",
+        "c3": "#7A4E2D",
+        "c4": "#EBD5BD",
+        "tint": "#F1E6DE",
+        "accent": "#C9D1D9",
+        "shadow": "#63442B",
+        "shine": "#EADACE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bamboo-picnic",
+      "name": "Bamboo picnic",
+      "tags": [
+        "nature",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E2410",
+        "c1": "#D6B97A",
+        "c2": "#8FA86A",
+        "c3": "#EFE3C2",
+        "c4": "#8B6E3A",
+        "tint": "#F7F1E4",
+        "accent": "#8FA86A",
+        "shadow": "#71603A",
+        "shine": "#F3EAD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "picnic-plastic",
+      "name": "Picnic plastic",
+      "tags": [
+        "vivid",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A0606",
+        "c1": "#E63946",
+        "c2": "#F1FAEE",
+        "c3": "#FFB703",
+        "c4": "#1D3557",
+        "tint": "#FAD7DA",
+        "accent": "#FFB703",
+        "shadow": "#7F1A20",
+        "shine": "#F8C4C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kids-cutlery",
+      "name": "Kids' cutlery",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#1E2A4A",
+        "c1": "#4CC9F0",
+        "c2": "#FF8FAB",
+        "c3": "#FFE066",
+        "c4": "#9BE564",
+        "tint": "#DBF4FC",
+        "accent": "#FF8FAB",
+        "shadow": "#306A8C",
+        "shine": "#C9EFFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "diner-teal",
+      "name": "Diner teal",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#0D2B2B",
+        "c1": "#2BA7A0",
+        "c2": "#F25F5C",
+        "c3": "#FFE066",
+        "c4": "#F7F3E3",
+        "tint": "#D5EDEC",
+        "accent": "#F25F5C",
+        "shadow": "#195D5A",
+        "shine": "#BFE5E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bistro-sage",
+      "name": "Bistro sage",
+      "tags": [
+        "nature",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1F2A1A",
+        "c1": "#9CB08A",
+        "c2": "#E8DFC8",
+        "c3": "#5C6E4E",
+        "c4": "#C97B5A",
+        "tint": "#EBEFE8",
+        "accent": "#C97B5A",
+        "shadow": "#516047",
+        "shine": "#E1E7DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fine-dining",
+      "name": "Fine dining",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#14111F",
+        "c1": "#4B4170",
+        "c2": "#E2C47A",
+        "c3": "#F5ECD4",
+        "c4": "#7B6FA0",
+        "tint": "#DBD9E2",
+        "accent": "#E2C47A",
+        "shadow": "#2A243F",
+        "shine": "#C9C6D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tableware-blue",
+      "name": "Tableware blue",
+      "tags": [
+        "true-to-life",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1F3A",
+        "c1": "#3B6FB6",
+        "c2": "#DCE7F5",
+        "c3": "#1E3F73",
+        "c4": "#F2B33D",
+        "tint": "#D8E2F0",
+        "accent": "#F2B33D",
+        "shadow": "#1E3F6C",
+        "shine": "#C4D4E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-brunch",
+      "name": "Pastel brunch",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3150",
+        "c1": "#BDE0FE",
+        "c2": "#FFC8DD",
+        "c3": "#FFF1B8",
+        "c4": "#CDB4DB",
+        "tint": "#F2F9FF",
+        "accent": "#FFC8DD",
+        "shadow": "#717796",
+        "shine": "#EBF6FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-chrome",
+      "name": "Y2K chrome",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#262A50",
+        "c1": "#C7D2FF",
+        "c2": "#FF9EE8",
+        "c3": "#C9FF6B",
+        "c4": "#8FF0FF",
+        "tint": "#F4F6FF",
+        "accent": "#FF9EE8",
+        "shadow": "#666D96",
+        "shine": "#EEF2FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-diner",
+      "name": "Neon diner",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF4FD8",
+        "c1": "#120A20",
+        "c2": "#3DF2FF",
+        "c3": "#FFE14D",
+        "c4": "#7CFF6B",
+        "tint": "#D0CED2",
+        "accent": "#3DF2FF",
+        "shadow": "#07040D",
+        "shine": "#B8B6BC",
+        "edge": "#030205"
+      }
+    },
+    {
+      "id": "harvest-table",
+      "name": "Harvest table",
+      "tags": [
+        "seasonal",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#D9822B",
+        "c2": "#8C3B1A",
+        "c3": "#F2D3A6",
+        "c4": "#6B8E4E",
+        "tint": "#F7E6D5",
+        "accent": "#F2D3A6",
+        "shadow": "#723F15",
+        "shine": "#F4DABF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-table",
+      "name": "Holiday table",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#B3202A",
+        "c2": "#1E6B45",
+        "c3": "#E8C068",
+        "c4": "#F5EFE3",
+        "tint": "#F0D2D4",
+        "accent": "#E8C068",
+        "shadow": "#611314",
+        "shine": "#E8BCBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-kitchen",
+      "name": "70s kitchen",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1A06",
+        "c1": "#E3A23A",
+        "c2": "#C2552D",
+        "c3": "#6F8F3A",
+        "c4": "#F4E3B5",
+        "tint": "#F9ECD8",
+        "accent": "#F4E3B5",
+        "shadow": "#75501B",
+        "shine": "#F7E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seaside-cafe",
+      "name": "Seaside café",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B2A33",
+        "c1": "#3BA3C7",
+        "c2": "#F2E8D5",
+        "c3": "#1F6E8C",
+        "c4": "#F4A261",
+        "tint": "#D8EDF4",
+        "accent": "#F4A261",
+        "shadow": "#1E5A6E",
+        "shine": "#C4E3EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plum-ramp",
+      "name": "Plum ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2A0E2E",
+        "c1": "#8E4A9C",
+        "c2": "#C99BD3",
+        "c3": "#5A2465",
+        "c4": "#F0E2F3",
+        "tint": "#E8DBEB",
+        "accent": "#C99BD3",
+        "shadow": "#52265A",
+        "shine": "#DDC9E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "charcoal",
+      "name": "Charcoal",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#101010",
+        "c1": "#6E6E6E",
+        "c2": "#BEBEBE",
+        "c3": "#333333",
+        "c4": "#E2E2E2",
+        "tint": "#E2E2E2",
+        "accent": "#BEBEBE",
+        "shadow": "#363636",
+        "shine": "#D4D4D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0050EF",
+        "c3": "#FFFFFF",
+        "c4": "#E4002B",
+        "tint": "#FFF6CC",
+        "accent": "#0050EF",
+        "shadow": "#665500",
+        "shine": "#FFF2B3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "citrus-zest",
+      "name": "Citrus zest",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A2400",
+        "c1": "#F7D02C",
+        "c2": "#FF8C1A",
+        "c3": "#8BC34A",
+        "c4": "#FFF6C7",
+        "tint": "#FDF6D5",
+        "accent": "#FF8C1A",
+        "shadow": "#7C6912",
+        "shine": "#FDF1C0",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

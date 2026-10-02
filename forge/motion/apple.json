@@ -1,0 +1,7 @@
+{
+  "name": "apple",
+  "intent": "sways like fresh fruit hanging from its stem",
+  "loop": { "preset": "sway", "origin": [10.5, 3.5], "amount": 0.6, "duration": 3.2 },
+  "hover": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.8, "duration": 0.9 },
+  "alt": [ { "preset": "breathe", "amount": 0.6 }, { "preset": "pop" }, { "preset": "wiggle", "origin": [12, 21.5], "amount": 0.6 } ]
+}

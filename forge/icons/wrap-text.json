@@ -1,0 +1,57 @@
+{
+  "name": "wrap-text",
+  "category": "text",
+  "description": "A line of text bending back onto the next row for word wrap and text flow.",
+  "aliases": [
+    "word-wrap",
+    "text-wrap",
+    "line-wrap",
+    "soft-wrap",
+    "wrap",
+    "reflow",
+    "wrap-lines",
+    "text-flow"
+  ],
+  "synonyms": [
+    "wrap text",
+    "word wrap",
+    "line wrap",
+    "wrap around",
+    "next line",
+    "new line",
+    "line break",
+    "carriage return",
+    "overflow",
+    "text overflow",
+    "fit text",
+    "spreadsheet",
+    "cell text",
+    "word processor",
+    "editor toolbar",
+    "wordwrap",
+    "wraping"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "wrap",
+    "editor",
+    "layout"
+  ],
+  "paths": [
+    {
+      "d": "M3 5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 19 H8",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H17.5 A3.5 3.5 0 0 1 17.5 19 H12 M14.5 16.5 L12 19 L14.5 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

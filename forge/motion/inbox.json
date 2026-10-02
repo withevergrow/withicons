@@ -1,0 +1,36 @@
+{
+  "name": "inbox",
+  "intent": "new mail drops softly into the tray",
+  "loop": {
+    "preset": "drop",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        19.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "slide-down"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

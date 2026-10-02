@@ -1,0 +1,8 @@
+{
+  "name": "siren",
+  "intent": "flashes its light like an alarm going off",
+  "loop": { "preset": "glow", "amount": 0.9, "duration": 1.4 },
+  "hover": { "preset": "flicker", "amount": 1.2, "duration": 0.8 },
+  "alt": [ { "preset": "shake", "amount": 0.6 }, { "preset": "pulse", "origin": [12, 21.5], "amount": 0.7 } ],
+  "swap": [ { "to": "bell-ring", "effect": "fade" }, { "to": "shield-alert", "effect": "scale" } ]
+}

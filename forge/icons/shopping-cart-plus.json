@@ -1,0 +1,72 @@
+{
+  "name": "shopping-cart-plus",
+  "category": "commerce",
+  "description": "A shopping cart with a plus for the add to cart action.",
+  "aliases": [
+    "cart-plus",
+    "cart-add",
+    "add-cart",
+    "add-to-basket",
+    "cart-new",
+    "add-to-trolley",
+    "trolley-plus",
+    "cart-add-item",
+    "add-item-to-cart"
+  ],
+  "tags": [
+    "cart",
+    "add",
+    "ecommerce",
+    "checkout",
+    "purchase",
+    "retail"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 2.5 H3.7 A1 1 0 0 1 4.68 3.3 L6.9 14.3 A1 1 0 0 0 7.88 15 H17.3 A1 1 0 0 0 18.25 14.3 L20.5 5 H5.02",
+      "plate": "K"
+    },
+    {
+      "d": "M10 20 A1.5 1.5 0 1 1 7 20 A1.5 1.5 0 1 1 10 20 Z M18.5 20 A1.5 1.5 0 1 1 15.5 20 A1.5 1.5 0 1 1 18.5 20 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 8 V12 M10.5 10 H14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.02 5 H20.5 L18.25 14.3 A1 1 0 0 1 17.3 15 H7.88 A1 1 0 0 1 6.9 14.3 Z",
+    "M10 20 A1.5 1.5 0 1 1 7 20 A1.5 1.5 0 1 1 10 20 Z",
+    "M18.5 20 A1.5 1.5 0 1 1 15.5 20 A1.5 1.5 0 1 1 18.5 20 Z"
+  ],
+  "cutouts": [
+    "M12.5 8 V12",
+    "M10.5 10 H14.5"
+  ],
+  "synonyms": [
+    "add to cart",
+    "add to bag",
+    "add item",
+    "add product",
+    "put in cart",
+    "buy now",
+    "buy",
+    "purchase",
+    "order",
+    "shop now",
+    "new item",
+    "ecommerce",
+    "e-commerce",
+    "online shopping",
+    "shopping",
+    "cart",
+    "trolley",
+    "plus",
+    "add",
+    "checkout",
+    "cart plus",
+    "cart add",
+    "add to trolly"
+  ]
+}

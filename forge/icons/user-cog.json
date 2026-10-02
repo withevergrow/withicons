@@ -1,0 +1,76 @@
+{
+  "name": "user-cog",
+  "category": "users",
+  "description": "A person with a small gear for account settings and managing users.",
+  "aliases": [
+    "user-settings",
+    "account-settings",
+    "manage-account",
+    "profile-settings",
+    "admin-user",
+    "user-gear",
+    "manage-users",
+    "user-config",
+    "account-config",
+    "user-preferences",
+    "profile-gear"
+  ],
+  "tags": [
+    "person",
+    "settings",
+    "account",
+    "admin",
+    "gear",
+    "manage"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 16.25 V16.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z"
+  ],
+  "cutouts": [
+    "M19.25 16.5 A1.75 1.75 0 1 1 15.75 16.5 A1.75 1.75 0 1 1 19.25 16.5 Z"
+  ],
+  "synonyms": [
+    "my account settings",
+    "profile options",
+    "account preferences",
+    "edit account",
+    "manage profile",
+    "user management",
+    "admin panel",
+    "administrator",
+    "manage members",
+    "team settings",
+    "member settings",
+    "permissions",
+    "roles",
+    "user admin",
+    "configure user",
+    "personal settings",
+    "account options",
+    "privacy settings",
+    "user setings",
+    "acount settings",
+    "cog",
+    "gear person"
+  ]
+}

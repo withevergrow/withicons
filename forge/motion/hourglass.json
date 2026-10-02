@@ -1,0 +1,51 @@
+{
+  "name": "hourglass",
+  "intent": "rocks and turns over while you wait, like sand running out",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        12,
+        12
+      ],
+      "steps": 2,
+      "duration": 2.4,
+      "amount": 0.5
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "loader",
+      "effect": "fade"
+    },
+    {
+      "to": "timer",
+      "effect": "rotate"
+    }
+  ]
+}

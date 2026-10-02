@@ -1,0 +1,39 @@
+{
+  "name": "eye",
+  "intent": "blinks now and then like it is watching",
+  "loop": {
+    "preset": "blink",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 4
+  },
+  "hover": {
+    "preset": "blink",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.5
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "eye-off",
+      "effect": "draw"
+    },
+    {
+      "to": "eye@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "lock",
+  "intent": "rests calmly, then shakes when access is denied",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      16
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        16
+      ]
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "unlock",
+      "effect": "slide-up"
+    },
+    {
+      "to": "lock@solid",
+      "effect": "scale"
+    }
+  ]
+}

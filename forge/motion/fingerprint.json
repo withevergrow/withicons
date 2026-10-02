@@ -1,0 +1,31 @@
+{
+  "name": "fingerprint",
+  "intent": "glows like a sensor reading your fingerprint",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "unlock",
+      "effect": "morph"
+    },
+    {
+      "to": "shield-check",
+      "effect": "scale"
+    }
+  ]
+}

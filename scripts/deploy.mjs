@@ -197,6 +197,8 @@ if (!flag('skip-lambda')) {
     }
     smokeTestLambda(entries)
     lambdaZip = zip(entries)
+    // update-function-code --zip-file accepts at most 50 MB; every style's SVGs are inlined, so watch the growth
+    if (lambdaZip.length > 45 * 1048576) die(`the API Lambda zip is ${(lambdaZip.length / 1048576).toFixed(1)} MB (limit 50 MB for a direct upload): upload via S3 or slim packages/mcp/dist/lambda.mjs`)
     const sha = crypto.createHash('sha256').update(lambdaZip).digest('base64')
     let current = null
     if (T.fn) current = awsJson(['lambda', 'get-function-configuration', '--function-name', T.fn], { allowFail: true })?.CodeSha256
@@ -263,7 +265,7 @@ function smokeTestLambda(entries) {
         queryStringParameters: Object.fromEntries(new URLSearchParams(rawQueryString)),
         requestContext: { http: { method, path: rawPath, sourceIp: '127.0.0.1' } }, body, isBase64Encoded: false })
       const out = []
-      for (const e of [ev('GET', '/api/search', 'q=home&limit=3'), ev('GET', '/api/icon/home'),
+      for (const e of [ev('GET', '/api/search', 'q=home&limit=3'), ev('GET', '/api/icon/home'), ev('GET', '/api/motion/bell', 'trigger=hover'),
         ev('POST', '/mcp', '', JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }))]) {
         const r = await handler(e, {})
         out.push(e.requestContext.http.method + ' ' + e.rawPath + ' -> ' + (r && r.statusCode))

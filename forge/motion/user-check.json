@@ -1,0 +1,44 @@
+{
+  "name": "user-check",
+  "intent": "nods yes like a member just approved",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 1,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "user-x",
+      "effect": "flip"
+    },
+    {
+      "to": "user-minus",
+      "effect": "fade"
+    }
+  ]
+}

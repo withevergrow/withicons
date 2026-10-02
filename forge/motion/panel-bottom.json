@@ -1,0 +1,8 @@
+{
+  "name": "panel-bottom",
+  "intent": "eases down toward its bottom pane like a sheet rising into view",
+  "loop":  { "preset": "nudge", "dir": 90, "amount": 0.4, "duration": 2.6 },
+  "hover": { "preset": "nudge", "dir": 90, "amount": 0.8, "duration": 0.6 },
+  "alt":   [ { "preset": "jelly", "amount": 0.6 }, { "preset": "bounce", "amount": 0.5 } ],
+  "swap":  [ { "to": "panel-right", "effect": "rotate" }, { "to": "layout-list", "effect": "fade" }, { "to": "panel-bottom@solid", "effect": "scale" } ]
+}

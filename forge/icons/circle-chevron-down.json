@@ -1,0 +1,64 @@
+{
+  "name": "circle-chevron-down",
+  "category": "navigation",
+  "description": "A down chevron inside a circle for expandable cards and show-more buttons.",
+  "aliases": [
+    "chevron-down-circle",
+    "expand-circle",
+    "expand-circle-down",
+    "circled-chevron-down",
+    "show-more-circle",
+    "dropdown-circle",
+    "caret-down-circle",
+    "circle-caret-down",
+    "expand-more"
+  ],
+  "tags": [
+    "chevron",
+    "down",
+    "expand",
+    "dropdown",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 10 L12 14.5 L16.5 10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M7.5 10 L12 14.5 L16.5 10"
+  ],
+  "synonyms": [
+    "expand",
+    "show more",
+    "see more",
+    "read more",
+    "open",
+    "unfold",
+    "reveal",
+    "drop down",
+    "dropdown",
+    "accordion",
+    "collapse toggle",
+    "more options",
+    "select",
+    "scroll down",
+    "next section",
+    "down",
+    "round button",
+    "circle button",
+    "chevron in circle",
+    "expand section",
+    "details",
+    "view more"
+  ]
+}

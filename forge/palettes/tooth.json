@@ -1,0 +1,28 @@
+{
+  "name": "tooth",
+  "palettes": [
+    {"id":"pearly-white","name":"Pearly white","tags":["true-to-life"],"colors":{"ink":"#2A3340","c1":"#F4F6F8","c2":"#F2A7B4","c3":"#BFD9E8","c4":"#E1E6EC","tint":"#FCFCFD","accent":"#F2A7B4","shadow":"#868788","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"natural-ivory","name":"Natural ivory","tags":["true-to-life"],"colors":{"ink":"#3A2E1E","c1":"#F2E6CC","c2":"#F2A7B4","c3":"#D8C49A","c4":"#FFF7E6","tint":"#FBF8F1","accent":"#E58C8C","shadow":"#857F70","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-crown","name":"Gold crown","tags":["true-to-life","luxe"],"colors":{"ink":"#2B1D05","c1":"#E2B53A","c2":"#FFF0B8","c3":"#9C7414","c4":"#F7DB86","tint":"#F7EAC8","accent":"#FFFFFF","shadow":"#7C6420","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"silver-filling","name":"Silver filling","tags":["true-to-life"],"colors":{"ink":"#1E2328","c1":"#C9CED4","c2":"#F6F7F8","c3":"#7C848C","c4":"#E6E9EC","tint":"#F0F1F3","accent":"#7FC8F8","shadow":"#6F7175","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gum-pink","name":"Gum pink","tags":["true-to-life"],"colors":{"ink":"#3A0F1E","c1":"#F7B6C6","c2":"#FFF3F6","c3":"#D96A8A","c4":"#FFE0E8","tint":"#FDEBEF","accent":"#9ED9FF","shadow":"#88646D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"mint-fresh","name":"Mint fresh","tags":["true-to-life"],"colors":{"ink":"#0E3A30","c1":"#9EF0D2","c2":"#FFFFFF","c3":"#3CC9A0","c4":"#D9FBF0","tint":"#E4FBF2","accent":"#3CC9A0","shadow":"#578474","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"toothpaste-stripe","name":"Toothpaste stripe","tags":["vivid"],"colors":{"ink":"#0A1E3A","c1":"#F7FAFF","c2":"#2F7BDB","c3":"#E5484D","c4":"#7ED7FF","tint":"#FDFEFF","accent":"#E5484D","shadow":"#888A8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dental-clinic","name":"Dental clinic","tags":["corporate"],"colors":{"ink":"#0A2240","c1":"#7FB8F0","c2":"#FFFFFF","c3":"#2F6FBF","c4":"#D6E8FB","tint":"#DBEBFB","accent":"#F2B134","shadow":"#466584","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"smile-teal","name":"Smile teal","tags":["corporate"],"colors":{"ink":"#062A2C","c1":"#4FC3C7","c2":"#FFFFFF","c3":"#1F8E92","c4":"#C6EEEF","tint":"#CEEEEF","accent":"#FF8A65","shadow":"#2B6B6D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"baby-tooth","name":"Baby tooth","tags":["candy"],"colors":{"ink":"#3A1F2A","c1":"#FFF6F0","c2":"#FFB3C7","c3":"#9ED9FF","c4":"#FFE88A","tint":"#FFFCFB","accent":"#FFB3C7","shadow":"#8C8784","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tooth-fairy","name":"Tooth fairy","tags":["pastel"],"colors":{"ink":"#3A2E52","c1":"#D9C9FF","c2":"#FFF2A8","c3":"#FFC7DE","c4":"#B8E8F0","tint":"#F4F0FF","accent":"#FFC7DE","shadow":"#776F8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sweet-tooth","name":"Sweet tooth","tags":["candy"],"colors":{"ink":"#3A0F2A","c1":"#FFB0D9","c2":"#FFF1A8","c3":"#8FE3FF","c4":"#C8B6FF","tint":"#FFE9F4","accent":"#8FE3FF","shadow":"#8C6177","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-smile","name":"Neon smile","tags":["neon","on-dark"],"colors":{"ink":"#F2FFFC","c1":"#00C8E0","c2":"#FF2BD6","c3":"#FFE45E","c4":"#39FF88","tint":"#B8F0F6","accent":"#FF2BD6","shadow":"#006E7B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"ice-ramp","name":"Ice ramp","tags":["mono"],"colors":{"ink":"#0A2238","c1":"#CFE3F5","c2":"#7FAEDB","c3":"#2F6FA8","c4":"#EEF5FC","tint":"#F2F7FC","accent":"#7FAEDB","shadow":"#727D87","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"graphite","name":"Graphite","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#9E9E9E","c2":"#E6E6E6","c3":"#4A4A4A","c4":"#CFCFCF","tint":"#E4E4E4","accent":"#4A4A4A","shadow":"#575757","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-mode","name":"Dark mode","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#4A5262","c2":"#BFD9E8","c3":"#2A2F38","c4":"#9AA3B2","tint":"#CCCFD3","accent":"#7FB2FF","shadow":"#292D36","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"seventies-smile","name":"70s smile","tags":["retro"],"colors":{"ink":"#2A1608","c1":"#F3C64B","c2":"#E2703A","c3":"#3E8C84","c4":"#F6E3B4","tint":"#FCEFCD","accent":"#E2703A","shadow":"#866D29","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vintage-dentist","name":"Vintage dentist","tags":["vintage"],"colors":{"ink":"#1E2A26","c1":"#9DB8AC","c2":"#EADFC8","c3":"#B5654A","c4":"#5E7A70","tint":"#E4EBE8","accent":"#B5654A","shadow":"#56655F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sunset-smile","name":"Sunset smile","tags":["sunset"],"colors":{"ink":"#2E0F1F","c1":"#F7A07A","c2":"#FFE2C7","c3":"#D9466F","c4":"#FFD27A","tint":"#FDE4DA","accent":"#D9466F","shadow":"#885843","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-sparkle","name":"Y2K sparkle","tags":["y2k"],"colors":{"ink":"#1D1240","c1":"#B8A8FF","c2":"#FF7AD9","c3":"#7AE7FF","c4":"#FFF07A","tint":"#EBE7FF","accent":"#FF7AD9","shadow":"#655C8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"vampire-fang","name":"Vampire fang","tags":["seasonal"],"colors":{"ink":"#1A0A1E","c1":"#F4EEE6","c2":"#B3202A","c3":"#3A1F4A","c4":"#F28C28","tint":"#FCFAF8","accent":"#B3202A","shadow":"#86837F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine","name":"Dopamine brights","tags":["vivid"],"colors":{"ink":"#1A0B2E","c1":"#5C7CFF","c2":"#FF5C8A","c3":"#FFD23F","c4":"#3DDC97","tint":"#D1DAFF","accent":"#FFD23F","shadow":"#33448C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFFFFF","c2":"#0046C7","c3":"#FFD200","c4":"#D4002A","tint":"#FFFFFF","accent":"#0046C7","shadow":"#8C8C8C","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

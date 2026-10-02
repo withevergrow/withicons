@@ -1,0 +1,42 @@
+{
+  "name": "edit",
+  "intent": "the pencil sways at its tip, ready to write",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      9,
+      15
+    ],
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      9,
+      15
+    ]
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        9,
+        15
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "save",
+      "effect": "fade"
+    }
+  ]
+}

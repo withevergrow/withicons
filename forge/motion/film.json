@@ -1,0 +1,39 @@
+{
+  "name": "film",
+  "intent": "film strip rolls past like a movie reel",
+  "loop": {
+    "preset": "pass",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "flip",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "zoom",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "video-camera",
+      "effect": "flip"
+    },
+    {
+      "to": "image",
+      "effect": "slide-left"
+    }
+  ]
+}

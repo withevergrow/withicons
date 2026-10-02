@@ -1,0 +1,47 @@
+{
+  "name": "help-circle",
+  "intent": "question mark tilts curiously, asking if you need help",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "info-circle",
+      "effect": "flip"
+    },
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "history",
+  "intent": "winds back like rewinding time",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "tick",
+      "origin": [
+        12,
+        12.5
+      ],
+      "steps": 12,
+      "duration": 6,
+      "amount": 0.5
+    },
+    {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "clock",
+      "effect": "rotate"
+    },
+    {
+      "to": "undo",
+      "effect": "fade"
+    },
+    {
+      "to": "rotate-ccw",
+      "effect": "spin"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "panel-left-open",
+  "intent": "pushes right to slide the sidebar open",
+  "loop":  { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.9, "duration": 0.6 },
+  "alt":   [ { "preset": "pass", "dir": 0, "amount": 0.5 }, { "preset": "jelly", "amount": 0.6 } ],
+  "swap":  [ { "to": "panel-left-close", "effect": "flip" }, { "to": "sidebar", "effect": "slide-right" }, { "to": "chevron-right", "effect": "morph" } ]
+}

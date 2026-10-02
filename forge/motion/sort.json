@@ -1,0 +1,35 @@
+{
+  "name": "sort",
+  "intent": "nudges downward as the list reorders",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 90,
+      "amount": 0.6
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chevrons-up-down",
+      "effect": "rotate"
+    },
+    {
+      "to": "filter",
+      "effect": "fade"
+    }
+  ]
+}

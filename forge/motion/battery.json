@@ -1,0 +1,39 @@
+{
+  "name": "battery",
+  "intent": "fills up with charge, cell by cell",
+  "loop": {
+    "preset": "fill",
+    "duration": 2.4,
+    "amount": 0.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "glow",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "battery-charging",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "scale"
+    },
+    {
+      "to": "plug",
+      "effect": "slide-left"
+    }
+  ]
+}

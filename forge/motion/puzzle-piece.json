@@ -1,0 +1,33 @@
+{
+  "name": "puzzle-piece",
+  "intent": "floats, then snaps into place like a fitting piece",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "rock",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "puzzle-piece@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "chevron-up",
+  "intent": "nudges up to hint that the section collapses",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270
+  },
+  "alt": [
+    {
+      "preset": "rise",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "chevron-down",
+      "effect": "rotate"
+    }
+  ]
+}

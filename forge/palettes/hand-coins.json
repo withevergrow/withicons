@@ -1,0 +1,446 @@
+{
+  "name": "hand-coins",
+  "palettes": [
+    {
+      "id": "warm-skin-gold",
+      "name": "Warm skin & gold",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1F10",
+        "c1": "#F2C29A",
+        "c2": "#E3B341",
+        "c3": "#C98A5A",
+        "c4": "#8A6A1C",
+        "tint": "#FCF3EB",
+        "accent": "#E3B341",
+        "shadow": "#775B45",
+        "shine": "#FDF4ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fair-skin-silver",
+      "name": "Fair skin & silver",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#33241C",
+        "c1": "#FBD9C2",
+        "c2": "#C3CCD6",
+        "c3": "#E8A88A",
+        "c4": "#7B8794",
+        "tint": "#FEF7F3",
+        "accent": "#C3CCD6",
+        "shadow": "#796659",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "medium-skin-gold",
+      "name": "Medium skin & gold",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1708",
+        "c1": "#C98A5A",
+        "c2": "#F2C14E",
+        "c3": "#9E6236",
+        "c4": "#FFF0B3",
+        "tint": "#F4E8DE",
+        "accent": "#F2C14E",
+        "shadow": "#624128",
+        "shine": "#F5EAE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-skin-gold",
+      "name": "Deep skin & gold",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A0C05",
+        "c1": "#8A5236",
+        "c2": "#F2C14E",
+        "c3": "#5E3420",
+        "c4": "#FFE6A3",
+        "tint": "#E8DCD7",
+        "accent": "#F2C14E",
+        "shadow": "#422618",
+        "shine": "#EAE0DB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bankers-blue",
+      "name": "Banker's blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0A1F44",
+        "c1": "#6FA0E8",
+        "c2": "#F2C14E",
+        "c3": "#1E4E9C",
+        "c4": "#DCE8FA",
+        "tint": "#E2ECFA",
+        "accent": "#F2C14E",
+        "shadow": "#324D77",
+        "shine": "#E5EEFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "payday-green",
+      "name": "Payday green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0F2E1A",
+        "c1": "#5CBF7A",
+        "c2": "#F2C14E",
+        "c3": "#2E7D4A",
+        "c4": "#E0F5E6",
+        "tint": "#DEF2E4",
+        "accent": "#F2C14E",
+        "shadow": "#2B5F3B",
+        "shine": "#E2F3E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tip-jar-copper",
+      "name": "Tip jar copper",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A1A0C",
+        "c1": "#E3A87A",
+        "c2": "#C8723D",
+        "c3": "#7E3F1D",
+        "c4": "#F3E0D4",
+        "tint": "#F9EEE4",
+        "accent": "#C8723D",
+        "shadow": "#714E37",
+        "shine": "#FAEFE7",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "giving-pink",
+      "name": "Giving pink",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0F2E",
+        "c1": "#FFA8C5",
+        "c2": "#FFD84A",
+        "c3": "#E2457E",
+        "c4": "#FFFFFF",
+        "tint": "#FFEEF3",
+        "accent": "#FFD84A",
+        "shadow": "#834A61",
+        "shine": "#FFEFF5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel",
+      "name": "Pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3E3A55",
+        "c1": "#FFDAC1",
+        "c2": "#B5EAD7",
+        "c3": "#C7CEEA",
+        "c4": "#FFF5BA",
+        "tint": "#FFEDE0",
+        "accent": "#FF9EBB",
+        "shadow": "#7E6E6C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k",
+      "name": "Y2K",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2B2350",
+        "c1": "#C6B8FF",
+        "c2": "#F9F871",
+        "c3": "#B8F7FF",
+        "c4": "#FFB8E6",
+        "tint": "#F4F1FF",
+        "accent": "#F9F871",
+        "shadow": "#605884",
+        "shine": "#F5F2FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon",
+      "name": "Neon",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#0A0A14",
+        "c1": "#21C8FF",
+        "c2": "#FFE600",
+        "c3": "#FF2E9A",
+        "c4": "#39FF88",
+        "tint": "#D3F4FF",
+        "accent": "#FFE600",
+        "shadow": "#115670",
+        "shine": "#D7F5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-sunset",
+      "name": "70s sunset",
+      "tags": [
+        "retro",
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#F2A65A",
+        "c2": "#F7C548",
+        "c3": "#C6322B",
+        "c4": "#7D2E68",
+        "tint": "#FCEDDE",
+        "accent": "#F7C548",
+        "shadow": "#744B29",
+        "shine": "#FDEFE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage",
+      "name": "Vintage",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2F2A22",
+        "c1": "#D9B99B",
+        "c2": "#B58A3C",
+        "c3": "#7A4A3A",
+        "c4": "#EEE3D0",
+        "tint": "#F7F1EB",
+        "accent": "#B58A3C",
+        "shadow": "#6A5B4C",
+        "shine": "#F8F2ED",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "black-gold",
+      "name": "Black & gold",
+      "tags": [
+        "luxe",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8D29A",
+        "c1": "#2A2830",
+        "c2": "#D4AF37",
+        "c3": "#F4E3A1",
+        "c4": "#4A4650",
+        "tint": "#D4D4D6",
+        "accent": "#D4AF37",
+        "shadow": "#131216",
+        "shine": "#D9D8DA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "amber-ramp",
+      "name": "Amber ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3D2600",
+        "c1": "#F5B04A",
+        "c2": "#B86E00",
+        "c3": "#FFD9A0",
+        "c4": "#FFF2DC",
+        "tint": "#FDEFDB",
+        "accent": "#B86E00",
+        "shadow": "#7A561F",
+        "shine": "#FDF1DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#BDBDBD",
+        "c2": "#707070",
+        "c3": "#E3E3E3",
+        "c4": "#949494",
+        "tint": "#F2F2F2",
+        "accent": "#707070",
+        "shadow": "#555555",
+        "shine": "#F3F3F3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "forest",
+      "name": "Forest",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1A2614",
+        "c1": "#8DB87A",
+        "c2": "#E8C34A",
+        "c3": "#3E6B3A",
+        "c4": "#E6F2DE",
+        "tint": "#E8F1E4",
+        "accent": "#E8C34A",
+        "shadow": "#435939",
+        "shine": "#EAF2E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean",
+      "name": "Ocean",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#08304A",
+        "c1": "#7FC9DE",
+        "c2": "#F6C85F",
+        "c3": "#1F7FA8",
+        "c4": "#E3F7FB",
+        "tint": "#E5F4F8",
+        "accent": "#F6C85F",
+        "shadow": "#376374",
+        "shine": "#E8F5F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fintech",
+      "name": "Fintech",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0E1A33",
+        "c1": "#6366F1",
+        "c2": "#34D399",
+        "c3": "#C7D2FE",
+        "c4": "#1E1B4B",
+        "tint": "#E0E0FC",
+        "accent": "#34D399",
+        "shadow": "#2E3375",
+        "shine": "#E3E3FC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6E9F5",
+        "c1": "#343A5C",
+        "c2": "#F2C14E",
+        "c3": "#5E6799",
+        "c4": "#191C2E",
+        "tint": "#D6D8DE",
+        "accent": "#F2C14E",
+        "shadow": "#171A29",
+        "shine": "#DADCE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFFFFF",
+        "c2": "#FFC20E",
+        "c3": "#0047BB",
+        "c4": "#D50000",
+        "tint": "#FFFFFF",
+        "accent": "#FFC20E",
+        "shadow": "#696969",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#25103A",
+        "c1": "#FF8A00",
+        "c2": "#FFE14D",
+        "c3": "#FF3E9D",
+        "c4": "#00C2A8",
+        "tint": "#FFE8CC",
+        "accent": "#FFE14D",
+        "shadow": "#763E14",
+        "shine": "#FFEAD1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry",
+      "name": "Berry",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#2E0B24",
+        "c1": "#E58FB4",
+        "c2": "#FFD166",
+        "c3": "#9C2A63",
+        "c4": "#FFE3EE",
+        "tint": "#FAE9F0",
+        "accent": "#FFD166",
+        "shadow": "#6E3F56",
+        "shine": "#FAEBF2",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

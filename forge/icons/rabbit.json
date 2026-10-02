@@ -1,0 +1,71 @@
+{
+  "name": "rabbit",
+  "category": "nature",
+  "description": "A rabbit head with long upright ears for bunnies, pets, speed and Easter.",
+  "aliases": [
+    "bunny",
+    "hare",
+    "easter-bunny",
+    "fast-animal",
+    "bunny-rabbit",
+    "cottontail",
+    "bunny-face",
+    "rabbit-head"
+  ],
+  "tags": [
+    "animal",
+    "pet",
+    "rabbit",
+    "bunny",
+    "easter"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 11.5 C5.25 13.75 5.25 18 7.5 19.75 C8.75 20.75 10.25 21 12 21 C13.75 21 15.25 20.75 16.5 19.75 C18.75 18 18.75 13.75 15.5 11.5 C17.75 8 18.25 4.5 17.5 3 C16.25 1.25 13.25 4.5 12.5 10 C12.25 10 11.75 10 11.5 10 C10.75 4.5 7.75 1.25 6.5 3 C5.75 4.5 6.25 8 8.5 11.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.75 14.5 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.25 14.5 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11.25 17.5 H12.75 L12 18.25 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.5 11.5 C5.25 13.75 5.25 18 7.5 19.75 C8.75 20.75 10.25 21 12 21 C13.75 21 15.25 20.75 16.5 19.75 C18.75 18 18.75 13.75 15.5 11.5 C17.75 8 18.25 4.5 17.5 3 C16.25 1.25 13.25 4.5 12.5 10 C12.25 10 11.75 10 11.5 10 C10.75 4.5 7.75 1.25 6.5 3 C5.75 4.5 6.25 8 8.5 11.5 Z"
+  ],
+  "cutouts": [
+    "M10.65 15 A0.9 1.25 0 1 1 8.85 15 A0.9 1.25 0 1 1 10.65 15 Z",
+    "M15.15 15 A0.9 1.25 0 1 1 13.35 15 A0.9 1.25 0 1 1 15.15 15 Z",
+    "M10.75 17.25 H13.25 L12 18.5 Z"
+  ],
+  "synonyms": [
+    "rabbits",
+    "bunnies",
+    "easter",
+    "spring",
+    "bunny ears",
+    "pet rabbit",
+    "lop",
+    "leveret",
+    "hop",
+    "hopping",
+    "fast",
+    "quick",
+    "speed",
+    "fast mode",
+    "cute",
+    "pet",
+    "carrot",
+    "year of the rabbit",
+    "chinese zodiac",
+    "rabit",
+    "rabbbit"
+  ]
+}

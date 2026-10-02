@@ -1,0 +1,32 @@
+{
+  "name": "stop",
+  "intent": "pulses softly while something runs, stops with a firm tap",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "play",
+      "effect": "morph"
+    },
+    {
+      "to": "pause",
+      "effect": "scale"
+    }
+  ]
+}

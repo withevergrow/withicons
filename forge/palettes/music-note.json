@@ -1,0 +1,428 @@
+{
+  "name": "music-note",
+  "palettes": [
+    {
+      "id": "music-pink",
+      "name": "Music pink",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3D0A22",
+        "c1": "#FA2D6E",
+        "c2": "#FF8FB1",
+        "c3": "#FFD166",
+        "c4": "#7B2CBF",
+        "tint": "#FED5E2",
+        "accent": "#FFD166",
+        "shadow": "#64122C",
+        "shine": "#FEC4D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "stream-green",
+      "name": "Stream green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#062B17",
+        "c1": "#1DB954",
+        "c2": "#0E7A3A",
+        "c3": "#FFD166",
+        "c4": "#B8F2CF",
+        "tint": "#D2F1DD",
+        "accent": "#FFD166",
+        "shadow": "#0C4A22",
+        "shine": "#C0EBCF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jazz-club",
+      "name": "Jazz club",
+      "tags": [
+        "vintage",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1426",
+        "c1": "#C9A24A",
+        "c2": "#3B2F6B",
+        "c3": "#E85D75",
+        "c4": "#F2E2C4",
+        "tint": "#F4ECDB",
+        "accent": "#E85D75",
+        "shadow": "#50411E",
+        "shine": "#F0E5CC",
+        "edge": "#FAF4EA"
+      }
+    },
+    {
+      "id": "vinyl",
+      "name": "Vinyl",
+      "tags": [
+        "true-to-life",
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8E8E8",
+        "c1": "#1E1E1E",
+        "c2": "#E2412F",
+        "c3": "#F2C14E",
+        "c4": "#6E6E6E",
+        "tint": "#D2D2D2",
+        "accent": "#E2412F",
+        "shadow": "#000000",
+        "shine": "#5A5A5A",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "piano-keys",
+      "name": "Piano keys",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#F5F5F0",
+        "c2": "#1C1C1C",
+        "c3": "#C8102E",
+        "c4": "#D4AF37",
+        "tint": "#FDFDFC",
+        "accent": "#C8102E",
+        "shadow": "#8A8A80",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lofi-beats",
+      "name": "Lo-fi beats",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E2A4A",
+        "c1": "#B8A9E8",
+        "c2": "#F5B7A6",
+        "c3": "#F2D388",
+        "c4": "#7FB7A6",
+        "tint": "#F1EEFA",
+        "accent": "#F5B7A6",
+        "shadow": "#4A445D",
+        "shine": "#EBE7F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rock-red",
+      "name": "Rock red",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A0505",
+        "c1": "#D62828",
+        "c2": "#2B2B2B",
+        "c3": "#F77F00",
+        "c4": "#FCBF49",
+        "tint": "#F7D4D4",
+        "accent": "#F77F00",
+        "shadow": "#561010",
+        "shine": "#F4C3C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "melody-violet",
+      "name": "Melody violet",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0D4F",
+        "c1": "#8B5CF6",
+        "c2": "#EC4899",
+        "c3": "#FDE047",
+        "c4": "#C4B5FD",
+        "tint": "#E8DEFD",
+        "accent": "#EC4899",
+        "shadow": "#382562",
+        "shine": "#DFD1FC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lullaby",
+      "name": "Lullaby",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4B4466",
+        "c1": "#B9D8F5",
+        "c2": "#FFC8DD",
+        "c3": "#FFF1A8",
+        "c4": "#CDEAC0",
+        "tint": "#F1F7FD",
+        "accent": "#FFC8DD",
+        "shadow": "#4A5662",
+        "shine": "#EBF4FC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bubblegum-pop",
+      "name": "Bubblegum pop",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D0A3A",
+        "c1": "#FF7EC7",
+        "c2": "#7AE6FF",
+        "c3": "#FFE45C",
+        "c4": "#A8F59C",
+        "tint": "#FFE5F4",
+        "accent": "#FFE45C",
+        "shadow": "#663250",
+        "shine": "#FFDBEF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-club",
+      "name": "Neon club",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F2F0FF",
+        "c1": "#FF2EC4",
+        "c2": "#00F0FF",
+        "c3": "#FFF000",
+        "c4": "#7A00FF",
+        "tint": "#FFD5F3",
+        "accent": "#FFF000",
+        "shadow": "#66124E",
+        "shine": "#FFC4EE",
+        "edge": "#120A24"
+      }
+    },
+    {
+      "id": "ringtone",
+      "name": "Ringtone",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2F66",
+        "c1": "#A8B8FF",
+        "c2": "#FFA8E0",
+        "c3": "#D4FF8A",
+        "c4": "#B8FFF5",
+        "tint": "#EEF1FF",
+        "accent": "#FFA8E0",
+        "shadow": "#434A66",
+        "shine": "#E7EBFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "folk",
+      "name": "Folk",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A2616",
+        "c1": "#B5713E",
+        "c2": "#6E7F4A",
+        "c3": "#E8C07A",
+        "c4": "#D9C3A3",
+        "tint": "#F0E3D8",
+        "accent": "#E8C07A",
+        "shadow": "#482D19",
+        "shine": "#EAD7C9",
+        "edge": "#FBF3E6"
+      }
+    },
+    {
+      "id": "disco-fever",
+      "name": "Disco fever",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A0E05",
+        "c1": "#F28C28",
+        "c2": "#C4362B",
+        "c3": "#F7D046",
+        "c4": "#6B2E5F",
+        "tint": "#FCE8D4",
+        "accent": "#F7D046",
+        "shadow": "#613810",
+        "shine": "#FBDFC3",
+        "edge": "#FFF6E5"
+      }
+    },
+    {
+      "id": "gramophone",
+      "name": "Gramophone",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2620",
+        "c1": "#B8935A",
+        "c2": "#5C3A2A",
+        "c3": "#A8443A",
+        "c4": "#E8DCC2",
+        "tint": "#F1E9DE",
+        "accent": "#A8443A",
+        "shadow": "#4A3B24",
+        "shine": "#EBE1D1",
+        "edge": "#FAF4EA"
+      }
+    },
+    {
+      "id": "teal-ramp",
+      "name": "Teal ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#06302F",
+        "c1": "#14B8A6",
+        "c2": "#0F766E",
+        "c3": "#99F6E4",
+        "c4": "#134E4A",
+        "tint": "#D0F1ED",
+        "accent": "#99F6E4",
+        "shadow": "#084A42",
+        "shine": "#BDEBE6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "monotone",
+      "name": "Monotone",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#8A8A8A",
+        "c2": "#3A3A3A",
+        "c3": "#D0D0D0",
+        "c4": "#F0F0F0",
+        "tint": "#E8E8E8",
+        "accent": "#D0D0D0",
+        "shadow": "#373737",
+        "shine": "#DEDEDE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "siren-song",
+      "name": "Siren song",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#2BB3C0",
+        "c2": "#1B5E8A",
+        "c3": "#FF9F80",
+        "c4": "#C8F1F5",
+        "tint": "#D5F0F2",
+        "accent": "#FF9F80",
+        "shadow": "#11484D",
+        "shine": "#C4EAED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "summer-anthem",
+      "name": "Summer anthem",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0B12",
+        "c1": "#FF6B4A",
+        "c2": "#FFA630",
+        "c3": "#FFE66D",
+        "c4": "#C2255C",
+        "tint": "#FFE1DB",
+        "accent": "#FFE66D",
+        "shadow": "#662B1E",
+        "shine": "#FFD6CC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-record",
+      "name": "Gold record",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2B1E00",
+        "c1": "#D4AF37",
+        "c2": "#1A1A1A",
+        "c3": "#F5E6A8",
+        "c4": "#8A6D1D",
+        "tint": "#F6EFD7",
+        "accent": "#F5E6A8",
+        "shadow": "#554616",
+        "shine": "#F3E9C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0066FF",
+        "c2": "#FFD400",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#CCE0FF",
+        "accent": "#FFD400",
+        "shadow": "#002966",
+        "shine": "#B8D4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "carol",
+      "name": "Carol",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0808",
+        "c1": "#C8102E",
+        "c2": "#1F5E3A",
+        "c3": "#E0B84B",
+        "c4": "#F5F5F5",
+        "tint": "#F4CFD5",
+        "accent": "#E0B84B",
+        "shadow": "#500612",
+        "shine": "#F0BCC4",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

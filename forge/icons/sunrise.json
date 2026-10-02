@@ -1,0 +1,79 @@
+{
+  "name": "sunrise",
+  "category": "weather",
+  "description": "A sun rising over the horizon with an upward arrow for dawn, morning, and new starts.",
+  "aliases": [
+    "dawn",
+    "morning",
+    "sun-up",
+    "daybreak",
+    "new-day",
+    "early",
+    "sunrise-horizon",
+    "sun-rise",
+    "first-light"
+  ],
+  "synonyms": [
+    "sunrise time",
+    "rising sun",
+    "sun rising",
+    "good morning",
+    "early morning",
+    "wake up",
+    "wake",
+    "alarm",
+    "breakfast",
+    "start of day",
+    "day start",
+    "new beginning",
+    "fresh start",
+    "horizon",
+    "east",
+    "aurora",
+    "morning routine",
+    "am",
+    "weather",
+    "forecast",
+    "daylight",
+    "sunup",
+    "sunrize",
+    "sun rise time"
+  ],
+  "tags": [
+    "weather",
+    "sun",
+    "morning",
+    "horizon",
+    "time"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 17 A4.5 4.5 0 0 1 16.5 17",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 17 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 11.5 L5.25 10.25 M17.5 11.5 L18.75 10.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8.5 V2.5",
+      "plate": "S"
+    },
+    {
+      "d": "M9 5.5 L12 2.5 L15 5.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.5 17 A4.5 4.5 0 0 1 16.5 17 Z"
+  ],
+  "cutouts": []
+}

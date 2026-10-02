@@ -1,0 +1,37 @@
+{
+  "name": "battery-charging",
+  "intent": "fills with power while the bolt flickers",
+  "loop": {
+    "preset": "fill",
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "flicker",
+    "amount": 1,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.8
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "battery",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "scale"
+    },
+    {
+      "to": "plug",
+      "effect": "slide-right"
+    }
+  ]
+}

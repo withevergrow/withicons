@@ -6,7 +6,6 @@
     "caret-right",
     "angle-right",
     "next",
-    "forward",
     "disclosure",
     "breadcrumb"
   ],
@@ -44,6 +43,7 @@
     "go forward",
     "greater than",
     "step",
-    "further"
+    "further",
+    "forward"
   ]
 }

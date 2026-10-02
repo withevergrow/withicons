@@ -1,0 +1,8 @@
+{
+  "name": "luggage",
+  "intent": "rocks on its wheels, then rolls off on a trip",
+  "loop": { "preset": "rock", "origin": [12, 21.5], "amount": 0.4, "duration": 3.2 },
+  "hover": { "preset": "pass", "dir": 0, "amount": 0.8, "duration": 0.9 },
+  "alt": [ { "preset": "nudge", "dir": 0 }, { "preset": "bounce", "amount": 0.6 } ],
+  "swap": [ { "to": "backpack", "effect": "morph" }, { "to": "briefcase", "effect": "fade" } ]
+}

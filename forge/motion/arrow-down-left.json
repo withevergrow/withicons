@@ -1,0 +1,8 @@
+{
+  "name": "arrow-down-left",
+  "intent": "nudges down and left to show where it points",
+  "loop": { "preset": "nudge", "dir": 135, "amount": 0.6, "duration": 1.8 },
+  "hover": { "preset": "pass", "dir": 135, "duration": 0.7 },
+  "alt": [ { "preset": "nudge", "dir": 135, "amount": 1.4 }, { "preset": "drop" } ],
+  "swap": [ { "to": "arrow-up-right", "effect": "rotate" }, { "to": "arrow-down-right", "effect": "rotate" } ]
+}

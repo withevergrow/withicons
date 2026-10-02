@@ -1,0 +1,77 @@
+{
+  "name": "message-square-text",
+  "category": "communication",
+  "description": "A square speech bubble with two lines of text inside, for texts, SMS and comments.",
+  "aliases": [
+    "sms",
+    "chat-text",
+    "comment-text",
+    "message-lines",
+    "texting",
+    "message-text",
+    "text-bubble",
+    "comment-lines",
+    "sms-message",
+    "chat-message",
+    "message-content",
+    "text-chat"
+  ],
+  "tags": [
+    "message",
+    "text",
+    "sms",
+    "chat",
+    "comment",
+    "speech bubble"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 8.5 H16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 12.5 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z"
+  ],
+  "cutouts": [
+    "M7.5 8.5 H16.5",
+    "M7.5 12.5 H13"
+  ],
+  "synonyms": [
+    "text message",
+    "sms message",
+    "texts",
+    "send a text",
+    "txt",
+    "comment",
+    "comments",
+    "reply",
+    "note",
+    "notes",
+    "caption",
+    "transcript",
+    "review",
+    "reviews",
+    "feedback",
+    "message preview",
+    "chat log",
+    "speech bubble with lines",
+    "quote",
+    "annotation",
+    "messages",
+    "messaging",
+    "chat",
+    "imessage",
+    "whatsapp",
+    "mesage",
+    "massage text"
+  ]
+}

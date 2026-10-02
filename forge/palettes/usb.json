@@ -1,0 +1,426 @@
+{
+  "name": "usb",
+  "palettes": [
+    {
+      "id": "port-blue",
+      "name": "Port blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A2148",
+        "c1": "#2C6BE0",
+        "c2": "#A9C6FF",
+        "c3": "#163E96",
+        "c4": "#F2C14E",
+        "tint": "#D5E1F9",
+        "accent": "#F2C14E",
+        "shadow": "#1B4694",
+        "shine": "#C4D6F6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "classic-black-port",
+      "name": "Classic black port",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A0B0E",
+        "c1": "#4A4E57",
+        "c2": "#BFC5CE",
+        "c3": "#22252B",
+        "c4": "#F2C14E",
+        "tint": "#DBDCDD",
+        "accent": "#F2C14E",
+        "shadow": "#2A2D33",
+        "shine": "#CCCDD0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "superspeed-teal",
+      "name": "SuperSpeed teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#04302E",
+        "c1": "#12A6A0",
+        "c2": "#A8EEEA",
+        "c3": "#0A6866",
+        "c4": "#FFB84D",
+        "tint": "#D0EDEC",
+        "accent": "#FFB84D",
+        "shadow": "#0B6B67",
+        "shine": "#BDE6E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "always-on-yellow",
+      "name": "Always-on yellow",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E2400",
+        "c1": "#F2C21A",
+        "c2": "#FFF0A8",
+        "c3": "#B88A00",
+        "c4": "#3A3A3A",
+        "tint": "#FCF3D1",
+        "accent": "#B88A00",
+        "shadow": "#78600A",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "circuit-board-green",
+      "name": "Circuit-board green",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0E2410",
+        "c1": "#2E8B45",
+        "c2": "#D9B04A",
+        "c3": "#1A5A2A",
+        "c4": "#C7E8C2",
+        "tint": "#D5E8DA",
+        "accent": "#D9B04A",
+        "shadow": "#1E582B",
+        "shine": "#C4DFCB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "copper-wire",
+      "name": "Copper wire",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1208",
+        "c1": "#C2703A",
+        "c2": "#F4D6B8",
+        "c3": "#7A3E18",
+        "c4": "#3E8A7A",
+        "tint": "#F3E2D8",
+        "accent": "#3E8A7A",
+        "shadow": "#764121",
+        "shine": "#EED7C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-contacts",
+      "name": "Gold contacts",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1406",
+        "c1": "#D4AB45",
+        "c2": "#F7E7B0",
+        "c3": "#8A6A1C",
+        "c4": "#2A2A2A",
+        "tint": "#F6EEDA",
+        "accent": "#8A6A1C",
+        "shadow": "#776026",
+        "shine": "#F3E7CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fast-lane-violet",
+      "name": "Fast-lane violet",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C1240",
+        "c1": "#6E4BE0",
+        "c2": "#D2C6FF",
+        "c3": "#3E2A99",
+        "c4": "#FFD23F",
+        "tint": "#E2DBF9",
+        "accent": "#FFD23F",
+        "shadow": "#452F90",
+        "shine": "#D6CDF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-plug",
+      "name": "Neon plug",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF2BD6",
+        "c1": "#00F0FF",
+        "c2": "#FFE14D",
+        "c3": "#B6FF3B",
+        "c4": "#7A2BFF",
+        "tint": "#CCFCFF",
+        "accent": "#FFE14D",
+        "shadow": "#005B61",
+        "shine": "#FFFFFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "midnight-port",
+      "name": "Midnight port",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8ECF4",
+        "c1": "#2C303A",
+        "c2": "#4D9BFF",
+        "c3": "#15171C",
+        "c4": "#8A93A6",
+        "tint": "#D5D6D8",
+        "accent": "#4D9BFF",
+        "shadow": "#16181D",
+        "shine": "#C4C5C8",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-plug",
+      "name": "Pastel plug",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E3A5A",
+        "c1": "#A7C2F2",
+        "c2": "#FFE0EC",
+        "c3": "#C6B3F2",
+        "c4": "#C8F0E0",
+        "tint": "#EDF3FC",
+        "accent": "#FFE0EC",
+        "shadow": "#5C6E94",
+        "shine": "#E6EEFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-cable",
+      "name": "Candy cable",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A3A",
+        "c1": "#FF7FB8",
+        "c2": "#FFF09A",
+        "c3": "#8FE0FF",
+        "c4": "#C49BFF",
+        "tint": "#FFE5F1",
+        "accent": "#8FE0FF",
+        "shadow": "#A54D79",
+        "shine": "#FFDBEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-patch-cord",
+      "name": "70s patch cord",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#33180A",
+        "c1": "#DC7A2E",
+        "c2": "#F5D08A",
+        "c3": "#8A3A1A",
+        "c4": "#4F7A70",
+        "tint": "#F8E4D5",
+        "accent": "#F5D08A",
+        "shadow": "#88491C",
+        "shine": "#F5DAC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-terminal",
+      "name": "Vintage terminal",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2A20",
+        "c1": "#7A8A6A",
+        "c2": "#E8DFC4",
+        "c3": "#4A5640",
+        "c4": "#C9764A",
+        "tint": "#E4E8E1",
+        "accent": "#C9764A",
+        "shadow": "#535A45",
+        "shine": "#DADED5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "undersea-cable",
+      "name": "Undersea cable",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#022C40",
+        "c1": "#0B7FBF",
+        "c2": "#A9E6FF",
+        "c3": "#054F7A",
+        "c4": "#3FD9B0",
+        "tint": "#CEE5F2",
+        "accent": "#3FD9B0",
+        "shadow": "#075680",
+        "shine": "#BBDBED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fern",
+      "name": "Fern",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13280F",
+        "c1": "#3E7A2F",
+        "c2": "#D4EDC0",
+        "c3": "#24501A",
+        "c4": "#D9A441",
+        "tint": "#D8E4D5",
+        "accent": "#D9A441",
+        "shadow": "#29511F",
+        "shine": "#C9DAC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#6A6A6A",
+        "c2": "#D0D0D0",
+        "c3": "#3A3A3A",
+        "c4": "#A0A0A0",
+        "tint": "#E1E1E1",
+        "accent": "#A0A0A0",
+        "shadow": "#3E3E3E",
+        "shine": "#D5D5D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "magenta-ramp",
+      "name": "Magenta ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#330A2A",
+        "c1": "#C2307F",
+        "c2": "#F7BEDD",
+        "c3": "#7A1650",
+        "c4": "#E07AB2",
+        "tint": "#F3D6E5",
+        "accent": "#E07AB2",
+        "shadow": "#7B1D55",
+        "shine": "#EEC5DB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0047BA",
+        "c2": "#FFD400",
+        "c3": "#FFFFFF",
+        "c4": "#D00000",
+        "tint": "#CCDAF1",
+        "accent": "#FFD400",
+        "shadow": "#00245D",
+        "shine": "#B8CBEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-sync",
+      "name": "Sunset sync",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0F1F",
+        "c1": "#F06A4A",
+        "c2": "#FFD08A",
+        "c3": "#A3335E",
+        "c4": "#5A2D82",
+        "tint": "#FCE1DB",
+        "accent": "#FFD08A",
+        "shadow": "#953D35",
+        "shine": "#FBD5CC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-memory-stick",
+      "name": "Y2K memory stick",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#251552",
+        "c1": "#8FB8FF",
+        "c2": "#FFB3EC",
+        "c3": "#A8FFE6",
+        "c4": "#E6FF8A",
+        "tint": "#E9F1FF",
+        "accent": "#E6FF8A",
+        "shadow": "#5A67A9",
+        "shine": "#E0EBFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plug-and-play-brights",
+      "name": "Plug & play brights",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#160C30",
+        "c1": "#FF4F9A",
+        "c2": "#FFE14D",
+        "c3": "#2EC4F0",
+        "c4": "#7DE04A",
+        "tint": "#FFDCEB",
+        "accent": "#FFE14D",
+        "shadow": "#8B2E65",
+        "shine": "#FFCEE3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

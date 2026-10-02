@@ -1,5 +1,5 @@
 // emit-react — @withicons/react. One forwardRef component per icon per style; see emitComponentPackage.
-import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount } from './emit-core.mjs'
+import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount, paletteDoc, motionDoc, totalText } from './emit-core.mjs'
 
 // SVG attribute names -> React prop names ('stroke-width' -> strokeWidth, 'class' -> className, style string -> object)
 const camel = k => k.replace(/[-:]([a-z])/g, (_, c) => c.toUpperCase())
@@ -58,8 +58,10 @@ const iconSrc = `const Icon = forwardRef(function Icon(props, ref) {
 Icon.displayName = 'Icon'`
 
 const typesDts = `
-import type { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react'
-export interface WithIconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color' | 'strokeWidth' | 'title'> {
+import type { CSSProperties, ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react'
+/** CSSProperties plus CSS custom properties, so palette variables need no cast: { '--with-retro-1': '#fde047' }. */
+export type WithIconStyle = CSSProperties & { [variable: \`--\${string}\`]: string | number | undefined }
+export interface WithIconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'color' | 'strokeWidth' | 'title' | 'style'> {
   /** Width and height (number = px, or any CSS length). Default 24. */
   size?: number | string
   /** Icon color. Default 'currentColor' (inherits the CSS text color). */
@@ -70,6 +72,8 @@ export interface WithIconProps extends Omit<SVGProps<SVGSVGElement>, 'ref' | 'co
   absoluteStrokeWidth?: boolean
   /** Accessible name: renders <title> and sets role="img". Without it the icon is aria-hidden. */
   title?: string
+  /** Inline style. Takes CSS custom properties too: --with-duo, --with-accent and every palette variable (--with-retro-1, ...). */
+  style?: WithIconStyle
 }
 export type WithIcon = ForwardRefExoticComponent<WithIconProps & RefAttributes<SVGSVGElement>>
 export interface IconProps extends WithIconProps {
@@ -89,13 +93,14 @@ export default async function emit(ctx) {
     importCjs: `const { createElement, forwardRef } = require('react')`,
     mapAttrs: reactAttrs,
     baseSrc, iconSrc, typesDts,
-    typeNames: ['WithIcon', 'WithIconProps', 'IconProps', 'IconComponentProps'],
+    typeNames: ['WithIcon', 'WithIconProps', 'WithIconStyle', 'IconProps', 'IconComponentProps'],
     iconTypeImport: () => `import type { ForwardRefExoticComponent, RefAttributes } from 'react'`,
     iconType: 'ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>',
   })
   const { exports, typesVersions } = componentExports(ctx)
   const pkg = {
-    ...basePkg(ctx, '@withicons/react', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable React components.`, ['react', 'react-icons', 'svg-icons']),
+    ...basePkg(ctx, '@withicons/react', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable React components.`,
+      ['react', 'react-icons', 'react-components', 'nextjs', 'react-server-components', 'svg-icons', 'typescript', 'tree-shakable', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports, typesVersions,
@@ -105,6 +110,13 @@ export default async function emit(ctx) {
   writePkg(ctx, 'react', pkg, readme(ctx))
   const fb = fallbackCount(ctx)
   return `${files} icon files, ${ctx.styles.length} styles${fb ? `, ${fb} fell back to ${ctx.defaultStyle}` : ''}`
+}
+
+// "line and duo `1.75`, blueprint `1.25`, ...": the default stroke width of each live-stroke style, grouped by value.
+function strokeDefaults(ctx) {
+  const by = new Map()
+  for (const s of ctx.styles) if (typeof s.strokeWidth === 'number') by.set(s.strokeWidth, [...(by.get(s.strokeWidth) || []), s.name])
+  return [...by].map(([w, names]) => `${names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names.at(-1) : names[0]} \`${w}\``).join(', ')
 }
 
 export function frameworkReadme(ctx, o) {
@@ -131,7 +143,7 @@ ${o.example}
 |---|---|---|---|
 | \`size\` | \`number \\| string\` | \`24\` | width and height |
 | \`color\` | \`string\` | \`'currentColor'\` | inherits the CSS text color by default |
-| \`strokeWidth\` | \`number \\| string\` | style default (\`1.75\`) | only styles with live strokes (${ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name).join(', ')}) |
+| \`strokeWidth\` | \`number \\| string\` | the style's own: ${strokeDefaults(ctx)} | only these live-stroke styles; the others ignore it |
 | \`absoluteStrokeWidth\` | \`boolean\` | \`false\` | keep the stroke width constant in px at any size |
 | \`title\` | \`string\` | — | renders \`<title>\` and sets \`role="img"\`; otherwise \`aria-hidden="true"\` |
 | \`${o.classProp}\` | \`string\` | — | appended to \`withi withi-<name>\` |
@@ -144,7 +156,7 @@ ${o.example}
 ${styleRows}
 
 Duo's tint can be recoloured with the CSS variable \`--with-duo\`.
-
+${paletteDoc(ctx, '###')}${motionDoc(ctx)}
 ## Generic icon (dynamic names)
 
 \`\`\`${o.lang}
@@ -158,12 +170,12 @@ ${o.generic}
 
 \`createWithIcon(name, style, displayName, iconNode)\` builds a component from IconNode data (\`[tag, attrs][]\`, 24x24 grid).
 
-MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, seven deterministic styles. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+MIT licensed. Part of [with icons](https://withicons.com): one skeleton per icon, ${ctx.styles.length} deterministic styles, ${totalText(ctx)} icons. [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
 `
 }
 
 function readme(ctx) {
-  return frameworkReadme(ctx, {
+  const md = frameworkReadme(ctx, {
     pkg: '@withicons/react', framework: 'React', lang: 'jsx', classProp: 'className',
     example: `import { Home, Search } from '@withicons/react'        // line (default style)
 import { Home as HomeSolid } from '@withicons/react/solid'
@@ -181,4 +193,86 @@ export function Toolbar() {
 
 <Icon name="home" variant="solid" size={20} />`,
   })
+  const marker = '## Generic icon (dynamic names)'
+  return md.includes(marker) ? md.replace(marker, reactSections(ctx) + marker) : md + reactSections(ctx)
+}
+
+// React-only README sections: every palette colour per icon, motion and RTL in JSX, SSR / RSC / module formats.
+function reactSections(ctx) {
+  const pal = ctx.styles.find(s => s.name === 'retro' && s.palette) || ctx.styles.find(s => s.palette)
+  const vars = pal ? Object.entries(pal.vars || {}).filter(([, v]) => v !== 'currentColor').map(([k]) => k) : []
+  const has = n => ctx.icons.some(i => i.name === n)
+  const pick = (...names) => names.find(has) || ctx.icons[0].name
+  const P = n => ctx.icons.find(i => i.name === n).pascal
+  const palIcon = pick('pizza', 'star', 'heart')
+  const colours = ['#fde047', '#fb923c', '#f43f5e', '#0d9488', '#3b0764', '#a78bfa', '#38bdf8', '#4ade80', '#f472b6', '#ffffff']
+  const palette = pal && vars.length ? `
+## Change every colour of one icon
+
+\`color\` sets the outline (it is \`currentColor\`); every other colour of a palette style is a CSS variable, so the
+\`style\` prop (or any CSS rule on an ancestor) re-themes a single icon. \`style\` is typed to accept \`--*\` variables,
+so TypeScript needs no cast:
+
+\`\`\`jsx
+import { ${P(palIcon)} } from '${'@withicons/react/' + pal.name}'
+
+<${P(palIcon)} size={48} color="#3b0764" style={{
+${vars.map((k, i) => `  '${k}': '${colours[i % colours.length]}',`).join('\n')}
+}} />
+\`\`\`
+
+Variables a given icon does not use are simply ignored, so one palette object can theme a whole toolbar.
+` : ''
+  const bell = pick('bell'), play = pick('play'), pause = pick('pause'), chev = pick('chevron-right', 'arrow-right')
+  return `${palette}
+## Animation in React
+
+Import the two stylesheets of [\`@withicons/motion\`](https://www.npmjs.com/package/@withicons/motion) once, then put the
+classes straight on the icon (they are spread onto its \`<svg>\`):
+
+\`\`\`jsx
+import '@withicons/motion/motion.css'
+import '@withicons/motion/icons.css'
+import { useState } from 'react'
+import { ${P(bell)}, ${P(play)}, ${P(pause)} } from '@withicons/react'
+
+export function Controls() {
+  const [playing, setPlaying] = useState(false)
+  return (
+    <>
+      <${P(bell)} className="wm wm-loop" data-wm="${bell}" />
+      <button className="wm-trigger"><${P(bell)} className="wm wm-hover" data-wm="${bell}" /> Alerts</button>
+      <button aria-pressed={playing} aria-label="Play" onClick={() => setPlaying(p => !p)}>
+        <span className="wm-swap wm-fx-flip"><${P(play)} className="wm-a" /><${P(pause)} className="wm-b" /></span>
+      </button>
+    </>
+  )
+}
+\`\`\`
+
+## Right-to-left layouts
+
+Icons are drawn left to right. To mirror the directional ones (arrows, chevrons, undo and redo, send, reply, log in and
+out) in Arabic, Hebrew, Persian or Urdu UIs, give them a class and add one rule. It uses the \`scale\` property, so it
+composes with motion's transforms and a nudge follows the mirrored direction:
+
+\`\`\`css
+.with-rtl:dir(rtl) { scale: -1 1; }
+@supports not selector(:dir(rtl)) { [dir="rtl"] .with-rtl { scale: -1 1; } }  /* iOS 15 to 16.3 */
+\`\`\`
+
+\`\`\`jsx
+<${P(chev)} className="with-rtl" />
+\`\`\`
+
+## SSR, Server Components and module formats
+
+- Components are plain \`forwardRef\` components with no hooks, state or effects. They render in React Server Components
+  (Next.js App Router, no \`'use client'\` needed), with \`react-dom/server\`, and hydrate without mismatches.
+  Works with React 16.8 and later; SSR and hydration are tested on React 18 and 19.
+- The root and every style subpath ship ESM (\`import\`) and CommonJS (\`require\`) with matching types.
+  The per-icon deep paths (\`icons/*\`, \`<style>/icons/*\`) and \`/icon\` are ESM only.
+- \`sideEffects: false\` and one module per icon: a bundler keeps only the icons you import.
+
+`
 }

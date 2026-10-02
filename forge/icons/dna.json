@@ -1,0 +1,79 @@
+{
+  "name": "dna",
+  "category": "education",
+  "description": "DNA double helix for genetics, biology, and identity.",
+  "aliases": [
+    "double-helix",
+    "genetics",
+    "gene",
+    "genome",
+    "biotech",
+    "helix",
+    "heredity",
+    "genetic",
+    "chromosome",
+    "dna-strand"
+  ],
+  "tags": [
+    "science",
+    "biology",
+    "genetics",
+    "health",
+    "research",
+    "identity"
+  ],
+  "paths": [
+    {
+      "d": "M7 2.5 C7 7.5 17 7 17 12 C17 17 7 16.5 7 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M17 2.5 C17 7.5 7 7 7 12 C7 17 17 16.5 17 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9 4 H15 M9.5 10 H14.5 M9.5 14 H14.5 M9 20 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 2.5 C7 7.5 17 7 17 12 C17 17 7 16.5 7 21.5 L17 21.5 C17 16.5 7 17 7 12 C7 7 17 7.5 17 2.5 Z"
+  ],
+  "cutouts": [
+    "M9 4 H15",
+    "M9.5 10 H14.5",
+    "M9.5 14 H14.5",
+    "M9 20 H15"
+  ],
+  "synonyms": [
+    "dna strand",
+    "double helix",
+    "genes",
+    "genomics",
+    "biology",
+    "bioscience",
+    "life science",
+    "biotechnology",
+    "ancestry",
+    "heritage",
+    "identity",
+    "unique",
+    "personal",
+    "evolution",
+    "mutation",
+    "crispr",
+    "gene editing",
+    "sequencing",
+    "health",
+    "medical",
+    "science",
+    "research",
+    "laboratory",
+    "molecule",
+    "deoxyribonucleic acid",
+    "brand dna",
+    "core values",
+    "rna",
+    "d.n.a"
+  ]
+}

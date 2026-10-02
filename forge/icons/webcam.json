@@ -1,0 +1,75 @@
+{
+  "name": "webcam",
+  "category": "devices",
+  "description": "A round webcam on a small stand for video calls, streaming and camera access.",
+  "aliases": [
+    "web-camera",
+    "web-cam",
+    "pc-camera",
+    "computer-camera",
+    "video-chat-camera",
+    "streaming-camera",
+    "facecam",
+    "laptop-camera",
+    "usb-camera"
+  ],
+  "tags": [
+    "devices",
+    "camera",
+    "video",
+    "streaming",
+    "hardware",
+    "meeting"
+  ],
+  "paths": [
+    {
+      "d": "M19 10 A7 7 0 1 1 5 10 A7 7 0 1 1 19 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 10 A3 3 0 1 1 9 10 A3 3 0 1 1 15 10 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 10 A7 7 0 1 1 5 10 A7 7 0 1 1 19 10 Z"
+  ],
+  "cutouts": [
+    "M15.75 10 A3.75 3.75 0 1 1 8.25 10 A3.75 3.75 0 1 1 15.75 10 Z M14.25 10 A2.25 2.25 0 1 1 9.75 10 A2.25 2.25 0 1 1 14.25 10 Z"
+  ],
+  "synonyms": [
+    "cam",
+    "camera",
+    "video call",
+    "video chat",
+    "video conference",
+    "zoom call",
+    "meeting",
+    "online meeting",
+    "facetime",
+    "skype",
+    "teams",
+    "stream",
+    "streaming",
+    "livestream",
+    "go live",
+    "camera access",
+    "camera permission",
+    "turn on camera",
+    "selfie camera",
+    "front camera",
+    "lens",
+    "recording",
+    "webcams",
+    "web cam",
+    "webcamera"
+  ]
+}

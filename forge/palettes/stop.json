@@ -1,0 +1,149 @@
+{
+  "name": "stop",
+  "palettes": [
+    {
+      "id": "stop-red",
+      "name": "Stop red",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1111", "c1": "#DC2626", "c2": "#F87171", "c3": "#FECACA", "c4": "#7F1D1D", "tint": "#F5C2C2", "accent": "#F87171", "shadow": "#681212", "shine": "#FAE1E1", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "emergency-stop",
+      "name": "Emergency stop",
+      "tags": ["true-to-life", "accessible"],
+      "colors": { "ink": "#2C1111", "c1": "#EF4444", "c2": "#FACC15", "c3": "#111827", "c4": "#FEF2F2", "tint": "#FBCBCB", "accent": "#FACC15", "shadow": "#681212", "shine": "#FDE5E5", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "neutral-halt",
+      "name": "Neutral halt",
+      "tags": ["grayscale"],
+      "colors": { "ink": "#1C1E21", "c1": "#6B7280", "c2": "#9CA3AF", "c3": "#D1D5DB", "c4": "#374151", "tint": "#D6D8DB", "accent": "#374151", "shadow": "#363940", "shine": "#EAEBED", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "traffic-sign",
+      "name": "Traffic sign",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C1115", "c1": "#C8102E", "c2": "#FFFFFF", "c3": "#2B2B2B", "c4": "#F2F2F2", "tint": "#F0BCC4", "accent": "#FFD100", "shadow": "#5C101D", "shine": "#F7DEE2", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "caution-amber",
+      "name": "Caution amber",
+      "tags": ["true-to-life"],
+      "colors": { "ink": "#2C2211", "c1": "#F59E0B", "c2": "#FBBF24", "c3": "#FEF3C7", "c4": "#92400E", "tint": "#FCE4BB", "accent": "#EF4444", "shadow": "#684812", "shine": "#FEF1DD", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "on-air",
+      "name": "On air",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1111", "c1": "#B91C1C", "c2": "#1F2937", "c3": "#F59E0B", "c4": "#FEE2E2", "tint": "#EBBFBF", "accent": "#F59E0B", "shadow": "#5B1010", "shine": "#F5DFDF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "brick-wall",
+      "name": "Brick wall",
+      "tags": ["earthy"],
+      "colors": { "ink": "#2C1911", "c1": "#B4532A", "c2": "#D97757", "c3": "#F2C6A0", "c4": "#6B2B14", "tint": "#EACFC3", "accent": "#D97757", "shadow": "#5A2915", "shine": "#F5E7E1", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "neon-sign",
+      "name": "Neon sign",
+      "tags": ["neon", "on-dark"],
+      "colors": { "ink": "#FFF1F3", "c1": "#FF2D55", "c2": "#FF9F0A", "c3": "#5E5CE6", "c4": "#30D158", "tint": "#FFC4CF", "accent": "#FF9F0A", "shadow": "#681223", "shine": "#FFE2E7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "pastel-coral",
+      "name": "Pastel coral",
+      "tags": ["pastel"],
+      "colors": { "ink": "#5A2E2E", "c1": "#FFB4B4", "c2": "#FFDEB4", "c3": "#FDF7C3", "c4": "#B2A4FF", "tint": "#FFEAEA", "accent": "#B2A4FF", "shadow": "#681212", "shine": "#FFFFFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "strawberry-candy",
+      "name": "Strawberry candy",
+      "tags": ["candy"],
+      "colors": { "ink": "#47162A", "c1": "#FF5C8A", "c2": "#FFC2D4", "c3": "#9AD9FF", "c4": "#FFE27A", "tint": "#FFD1DE", "accent": "#FFE27A", "shadow": "#68122B", "shine": "#FFE8EF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "lilac-chrome",
+      "name": "Lilac chrome",
+      "tags": ["y2k"],
+      "colors": { "ink": "#2E1065", "c1": "#C084FC", "c2": "#F0ABFC", "c3": "#67E8F9", "c4": "#FDE68A", "tint": "#EDDDFE", "accent": "#67E8F9", "shadow": "#3D1268", "shine": "#F6EEFF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "orange-crush",
+      "name": "Orange crush",
+      "tags": ["retro"],
+      "colors": { "ink": "#2C1C11", "c1": "#D35400", "c2": "#E67E22", "c3": "#F1C40F", "c4": "#7E5109", "tint": "#F3CFB8", "accent": "#F1C40F", "shadow": "#5A2D10", "shine": "#F9E7DB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "faded-poster",
+      "name": "Faded poster",
+      "tags": ["vintage"],
+      "colors": { "ink": "#281815", "c1": "#A8655B", "c2": "#C9A27E", "c3": "#EDE0C8", "c4": "#5E3A33", "tint": "#E7D4D1", "accent": "#C9A27E", "shadow": "#502F2A", "shine": "#F3E9E8", "edge": "#FFF8EC" }
+    },
+    {
+      "id": "deep-current",
+      "name": "Deep current",
+      "tags": ["ocean"],
+      "colors": { "ink": "#11212C", "c1": "#1E6091", "c2": "#168AAD", "c3": "#99D98C", "c4": "#184E77", "tint": "#C0D2E0", "accent": "#168AAD", "shadow": "#0F3049", "shine": "#E0E9F0", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "meadow",
+      "name": "Meadow",
+      "tags": ["nature"],
+      "colors": { "ink": "#162819", "c1": "#386641", "c2": "#6A994E", "c3": "#A7C957", "c4": "#F2E8CF", "tint": "#C7D4CA", "accent": "#A7C957", "shadow": "#1C3320", "shine": "#E3EAE4", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "mulberry",
+      "name": "Mulberry",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C111D", "c1": "#8E2453", "c2": "#C2185B", "c3": "#F8BBD0", "c4": "#4A0E2B", "tint": "#DFC2CF", "accent": "#C2185B", "shadow": "#47122A", "shine": "#EFE0E7", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "blood-orange",
+      "name": "Blood orange",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C1E11", "c1": "#FF7F11", "c2": "#FFBF46", "c3": "#A1C349", "c4": "#6B2D00", "tint": "#FFDBBC", "accent": "#FFBF46", "shadow": "#683A12", "shine": "#FFEDDE", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "navy-ramp",
+      "name": "Navy ramp",
+      "tags": ["mono"],
+      "colors": { "ink": "#11182C", "c1": "#1E3A8A", "c2": "#3B82F6", "c3": "#93C5FD", "c4": "#DBEAFE", "tint": "#C0C8DE", "accent": "#3B82F6", "shadow": "#0F1D45", "shine": "#E0E3EF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": ["dark"],
+      "colors": { "ink": "#09090B", "c1": "#52525B", "c2": "#EF4444", "c3": "#A1A1AA", "c4": "#18181B", "tint": "#CFCFD1", "accent": "#EF4444", "shadow": "#29292E", "shine": "#E7E7E8", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "velvet-and-gold",
+      "name": "Velvet & gold",
+      "tags": ["luxe"],
+      "colors": { "ink": "#1C0505", "c1": "#7F1D1D", "c2": "#D4AF37", "c3": "#FDF6E3", "c4": "#3B0A0A", "tint": "#DBC0C0", "accent": "#D4AF37", "shadow": "#400F0F", "shine": "#EDDFDF", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": ["accessible"],
+      "colors": { "ink": "#000000", "c1": "#D00000", "c2": "#000000", "c3": "#FFD500", "c4": "#FFFFFF", "tint": "#F2B8B8", "accent": "#FFD500", "shadow": "#581010", "shine": "#F8DBDB", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "holiday-cheer",
+      "name": "Holiday cheer",
+      "tags": ["seasonal"],
+      "colors": { "ink": "#2C1113", "c1": "#C1121F", "c2": "#2D6A4F", "c3": "#F1FAEE", "c4": "#FFB703", "tint": "#EEBDC0", "accent": "#FFB703", "shadow": "#5A1015", "shine": "#F6DEE0", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "slate-office",
+      "name": "Slate office",
+      "tags": ["corporate"],
+      "colors": { "ink": "#141F29", "c1": "#334E68", "c2": "#627D98", "c3": "#D9E2EC", "c4": "#102A43", "tint": "#C6CDD5", "accent": "#627D98", "shadow": "#1A2734", "shine": "#E2E6EA", "edge": "#FFFFFF" }
+    },
+    {
+      "id": "joy-pop",
+      "name": "Joy pop",
+      "tags": ["vivid"],
+      "colors": { "ink": "#2C111A", "c1": "#FF3D7F", "c2": "#3FDFB0", "c3": "#FFD23F", "c4": "#6A4CFF", "tint": "#FFC9DB", "accent": "#FFD23F", "shadow": "#681230", "shine": "#FFE4ED", "edge": "#FFFFFF" }
+    }
+  ]
+}

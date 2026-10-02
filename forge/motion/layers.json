@@ -1,0 +1,36 @@
+{
+  "name": "layers",
+  "intent": "the stack floats like sheets settling on each other",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "breathe",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "layers@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "files",
+      "effect": "fade"
+    }
+  ]
+}

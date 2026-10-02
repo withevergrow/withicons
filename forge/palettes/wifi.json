@@ -1,0 +1,425 @@
+{
+  "name": "wifi",
+  "palettes": [
+    {
+      "id": "connected-blue",
+      "name": "Connected blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A2148",
+        "c1": "#2F80ED",
+        "c2": "#A6CBFF",
+        "c3": "#1452B3",
+        "c4": "#2BD9A0",
+        "tint": "#D5E6FB",
+        "accent": "#1452B3",
+        "shadow": "#1D519B",
+        "shine": "#C5DBFA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "strong-signal",
+      "name": "Strong signal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0C2A1C",
+        "c1": "#22B07D",
+        "c2": "#A8EED3",
+        "c3": "#12744F",
+        "c4": "#FFD34D",
+        "tint": "#D3EFE5",
+        "accent": "#FFD34D",
+        "shadow": "#176D4D",
+        "shine": "#C1E9DB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "weak-signal",
+      "name": "Weak signal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#F5A623",
+        "c2": "#FFE2A6",
+        "c3": "#B86F00",
+        "c4": "#E5484D",
+        "tint": "#FDEDD3",
+        "accent": "#B86F00",
+        "shadow": "#986612",
+        "shine": "#FCE6C1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coffee-shop-hotspot",
+      "name": "Coffee-shop hotspot",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1A0E",
+        "c1": "#A0673A",
+        "c2": "#F2DFC2",
+        "c3": "#E86A3A",
+        "c4": "#5A3A20",
+        "tint": "#ECE1D8",
+        "accent": "#E86A3A",
+        "shadow": "#654124",
+        "shine": "#E4D4C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "public-hotspot",
+      "name": "Public hotspot",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#04302E",
+        "c1": "#10A3A0",
+        "c2": "#A3EDE8",
+        "c3": "#0A6866",
+        "c4": "#FFB84D",
+        "tint": "#CFEDEC",
+        "accent": "#FFB84D",
+        "shadow": "#0A6A67",
+        "shine": "#BCE5E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "office-network",
+      "name": "Office network",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1D3A",
+        "c1": "#1F4E9E",
+        "c2": "#DCE7F7",
+        "c3": "#4F86D6",
+        "c4": "#F2A93B",
+        "tint": "#D2DCEC",
+        "accent": "#F2A93B",
+        "shadow": "#15366C",
+        "shine": "#C0CDE4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "signal-spectrum",
+      "name": "Signal spectrum",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1E1240",
+        "c1": "#7B5CFF",
+        "c2": "#FF5FA2",
+        "c3": "#FFC83D",
+        "c4": "#2EE6C0",
+        "tint": "#E5DEFF",
+        "accent": "#FF5FA2",
+        "shadow": "#4D37A0",
+        "shine": "#DAD1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-broadcast",
+      "name": "Neon broadcast",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF2BD6",
+        "c1": "#00F0FF",
+        "c2": "#FFE14D",
+        "c3": "#B6FF3B",
+        "c4": "#7A2BFF",
+        "tint": "#CCFCFF",
+        "accent": "#FFE14D",
+        "shadow": "#005B61",
+        "shine": "#FFFFFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "router-leds",
+      "name": "Router LEDs",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8F4FF",
+        "c1": "#2B3240",
+        "c2": "#3DA5FF",
+        "c3": "#161A22",
+        "c4": "#4DFFB0",
+        "tint": "#D5D6D9",
+        "accent": "#3DA5FF",
+        "shadow": "#161920",
+        "shine": "#C4C6CA",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "sundown-waves",
+      "name": "Sundown waves",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0E1E",
+        "c1": "#F26A4B",
+        "c2": "#FFC56B",
+        "c3": "#B8336A",
+        "c4": "#5A2D82",
+        "tint": "#FCE1DB",
+        "accent": "#FFC56B",
+        "shadow": "#963C35",
+        "shine": "#FBD5CD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-radio",
+      "name": "70s radio",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#33180A",
+        "c1": "#E07A2E",
+        "c2": "#F5C84E",
+        "c3": "#B5452A",
+        "c4": "#4F7A70",
+        "tint": "#F9E4D5",
+        "accent": "#F5C84E",
+        "shadow": "#8A491C",
+        "shine": "#F6DAC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-transistor",
+      "name": "Vintage transistor",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2A20",
+        "c1": "#6F8A6A",
+        "c2": "#E8DFC4",
+        "c3": "#C9764A",
+        "c4": "#3E4E3A",
+        "tint": "#E2E8E1",
+        "accent": "#C9764A",
+        "shadow": "#4E5A45",
+        "shine": "#D7DED5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-waves",
+      "name": "Pastel waves",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E3A60",
+        "c1": "#9DBDF5",
+        "c2": "#FFD4E6",
+        "c3": "#C8B2F5",
+        "c4": "#BFF0DC",
+        "tint": "#EBF2FD",
+        "accent": "#FFD4E6",
+        "shadow": "#586C99",
+        "shine": "#E4EDFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bubblegum-waves",
+      "name": "Bubblegum waves",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A3A",
+        "c1": "#FF7FC0",
+        "c2": "#FFF09A",
+        "c3": "#8FE0FF",
+        "c4": "#C29BFF",
+        "tint": "#FFE5F2",
+        "accent": "#8FE0FF",
+        "shadow": "#A54D7D",
+        "shine": "#FFDBED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sea-breeze",
+      "name": "Sea breeze",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#022C40",
+        "c1": "#0A84C2",
+        "c2": "#9EE6FF",
+        "c3": "#054F7A",
+        "c4": "#3FD9B0",
+        "tint": "#CEE6F3",
+        "accent": "#3FD9B0",
+        "shadow": "#065881",
+        "shine": "#BADDEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "campsite-signal",
+      "name": "Campsite signal",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13280F",
+        "c1": "#3F8A3A",
+        "c2": "#CFEFB5",
+        "c3": "#245A20",
+        "c4": "#D9B04A",
+        "tint": "#D9E8D8",
+        "accent": "#D9B04A",
+        "shadow": "#295925",
+        "shine": "#C9DEC8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gilded-waves",
+      "name": "Gilded waves",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1406",
+        "c1": "#C9A13E",
+        "c2": "#F5E7B5",
+        "c3": "#8A6A20",
+        "c4": "#2A2A2A",
+        "tint": "#F4ECD8",
+        "accent": "#8A6A20",
+        "shadow": "#725B22",
+        "shine": "#F0E5C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#707070",
+        "c2": "#CFCFCF",
+        "c3": "#3F3F3F",
+        "c4": "#A5A5A5",
+        "tint": "#E2E2E2",
+        "accent": "#A5A5A5",
+        "shadow": "#414141",
+        "shine": "#D7D7D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "violet-ramp",
+      "name": "Violet ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#1C0E40",
+        "c1": "#6A3FD9",
+        "c2": "#CDBDF7",
+        "c3": "#3E1F8C",
+        "c4": "#9F82EE",
+        "tint": "#E1D9F7",
+        "accent": "#9F82EE",
+        "shadow": "#43278D",
+        "shine": "#D5C9F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0047BA",
+        "c2": "#FFD400",
+        "c3": "#00873C",
+        "c4": "#D00000",
+        "tint": "#CCDAF1",
+        "accent": "#FFD400",
+        "shadow": "#00245D",
+        "shine": "#B8CBEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lime-fizz",
+      "name": "Lime fizz",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E3000",
+        "c1": "#8CC63F",
+        "c2": "#FFF06A",
+        "c3": "#FF9F1C",
+        "c4": "#4A7A12",
+        "tint": "#E8F4D9",
+        "accent": "#FFF06A",
+        "shadow": "#5D7B20",
+        "shine": "#DFEFC9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-dial-up",
+      "name": "Y2K dial-up",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#251552",
+        "c1": "#8FE3FF",
+        "c2": "#FFB3EC",
+        "c3": "#C3A8FF",
+        "c4": "#E6FF8A",
+        "tint": "#E9F9FF",
+        "accent": "#E6FF8A",
+        "shadow": "#4D6394",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "flower",
+  "intent": "breathes softly like a bloom opening, twirls when touched",
+  "loop": {
+    "preset": "breathe",
+    "duration": 3.4,
+    "amount": 0.8
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "spin",
+      "duration": 6
+    }
+  ],
+  "swap": [
+    {
+      "to": "flower@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "sprout",
+      "effect": "morph"
+    }
+  ]
+}

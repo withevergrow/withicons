@@ -1,6 +1,7 @@
 /* with icons — generated icon pages (icons/<name>.html) and hubs (categories/, styles/).
-   Style picker, colour + size, Copy image (PNG to clipboard), SVG/PNG downloads, drag-out,
-   developer tabs and code copy. Self-contained; uses window.WI.toast when the shared runtime is present. */
+   The hero (pick a style, grab it), the live "Customize" studio (js/editor.js: WI.Editor.mount) with its
+   real-world placements, the hero's animated stage, drag-out, the in-page section nav and developer tabs.
+   Everything reads fine without JS; the studio and placements appear only when scripts run. */
 (function () {
   'use strict'
   var D = document, W = window
@@ -24,7 +25,7 @@
     }
   }
 
-  /* ───────── code blocks + tabs (icon pages and hubs) ───────── */
+  /* ───────── code blocks + developer tabs (icon pages and hubs) ───────── */
   D.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-ip-copy]'); if (!b) return
     var el = $(b.getAttribute('data-ip-copy')); if (!el) return
@@ -51,123 +52,165 @@
     })
   })
   try { var saved = localStorage.getItem('with-ip-tab'); var st0 = saved && $('.ip-tabs [data-tab="' + saved + '"]'); if (st0) selectTab(st0) } catch (e) { }
-  // open the developer drawer when arriving with #developers or a #use-… hash
   if (/^#(developers|use-)/.test(location.hash)) { var dv = $('.ip-dev'); if (dv) dv.open = true }
 
   /* ───────── icon page ───────── */
   var dataEl = $('#ip-data'), root = $('[data-ip]')
   if (!dataEl || !root) return
   var DATA; try { DATA = JSON.parse(dataEl.textContent) } catch (e) { return }
-  var S = { style: root.getAttribute('data-style'), color: 'ink', px: 256 }
-  try { var p = JSON.parse(localStorage.getItem('with-ip') || '{}'); if ([64, 128, 256, 512, 1024].indexOf(p.px) >= 0) S.px = p.px; if (p.color) S.color = p.color; if (p.style && DATA.styles[p.style]) S.style = p.style } catch (e) { }
-  // a shared link (?style=solid) wins over the visitor's remembered style
-  try { var qs = new URLSearchParams(location.search).get('style'); if (qs && DATA.styles[qs]) S.style = qs } catch (e) { }
-  function save() { try { localStorage.setItem('with-ip', JSON.stringify({ px: S.px, color: S.color, style: S.style })) } catch (e) { } }
+  // each style's markup lives once in the page, in the <symbol>s the previews <use>
+  Object.keys(DATA.styles).forEach(function (s) { var sym = D.getElementById('s-' + s); if (sym && DATA.styles[s].inner == null) DATA.styles[s].inner = sym.innerHTML })
+  var qsStyle = null
+  try { qsStyle = new URLSearchParams(location.search).get('style'); if (!DATA.styles[qsStyle]) qsStyle = null } catch (e) { }
 
-  function hexFor(st) {
-    var c = S.color
-    if (c === 'ink') return INK
-    if (c === 'style') return DATA.styles[st].hex
-    return /^#[0-9a-f]{6}$/i.test(c) ? c : INK
-  }
-  function attrString(root, color) {
-    return Object.keys(root).map(function (k) {
-      var v = root[k]; if (v === false || v == null) return ''
-      if (color && typeof v === 'string') v = v.replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, color)
-      return ' ' + k + '="' + esc(v) + '"'
-    }).join('')
-  }
-  // mode 'file' bakes the colour in; 'code' keeps currentColor for developers
-  function svgText(st, px, mode) {
-    var s = DATA.styles[st], c = mode === 'file' ? hexFor(st) : null
-    var inner = c ? s.inner.replace(/var\(--[\w-]+,\s*([^)]+)\)/g, '$1').replace(/currentColor/g, c) : s.inner
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + (px || 24) + '" height="' + (px || 24) + '" viewBox="0 0 24 24"' + attrString(s.root, c) + '>' + inner + '</svg>'
-  }
-  // keep each token whole when the tag wraps (never break inside with-user-plus)
-  function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
-  function tagText(st) { return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"></i>' }
-  function cssText(st) { return '<link rel="stylesheet" href="' + (DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/') + 'with-' + st + '.css">' }
-  function colorName() { return S.color === 'ink' ? 'black' : S.color === 'style' ? DATA.styles[S.style].title.toLowerCase() + ' colour' : S.color === '#FFFFFF' ? 'white' : S.color.toUpperCase() }
-  function fname(st, ext, px) { return DATA.name + (st === 'line' ? '' : '-' + st) + (px ? '-' + px : '') + '.' + ext }
-  var pngCache = {}
-  function png(st, px) {
-    var key = st + '|' + px + '|' + hexFor(st)
-    if (pngCache[key]) return pngCache[key]
-    var pr = new Promise(function (res, rej) {
-      var img = new Image()
-      img.onload = function () {
-        var c = D.createElement('canvas'); c.width = px; c.height = px
-        c.getContext('2d').drawImage(img, 0, 0, px, px)
-        c.toBlob(function (b) { if (!b) return rej(new Error('png')); var out = { blob: b, dataUrl: null }; try { out.dataUrl = c.toDataURL('image/png') } catch (e) { } res(out) }, 'image/png')
-      }
-      img.onerror = rej
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText(st, px, 'file'))
+  var Editor = (W.WI && W.WI.Editor) || W.WithEditor
+  var ed = null, S = null   // S: the editor state (or the fallback below)
+  var studio = $('[data-editor]')
+  if (Editor && studio) {
+    ed = Editor.mount(studio, {
+      name: DATA.name, title: DATA.title, data: DATA, motion: DATA.motion || (W.WITH_MOTION && W.WITH_MOTION[DATA.name]) || null,
+      style: qsStyle || undefined, placements: $('[data-placements]'), onChange: function (st) { S = st; paint() }
     })
-    pr.then(function (v) { pr.value = v }, function () { delete pngCache[key] })
-    return (pngCache[key] = pr)
+    S = ed.get()
+  } else {
+    S = { style: qsStyle || root.getAttribute('data-style'), color: 'ink', px: 256, size: 24, colorName: 'black' }
   }
-  function save_(blob, name) {
-    var u = URL.createObjectURL(blob), a = D.createElement('a'); a.href = u; a.download = name; D.body.appendChild(a); a.click(); a.remove()
-    setTimeout(function () { URL.revokeObjectURL(u) }, 4000)
+
+  /* fallbacks when the studio is unavailable (editor.js failed to load) */
+  function hexOf(st) { return S.color === 'ink' ? INK : S.color === 'style' ? DATA.styles[st].hex : (/^#[0-9a-f]{6}$/i.test(S.color) ? S.color : INK) }
+  function fileSvg(st, px) {
+    if (ed) return ed.svgText('file', st, px)
+    var s = DATA.styles[st], c = hexOf(st)
+    var attrs = Object.keys(s.root).map(function (k) { return ' ' + k + '="' + esc(String(s.root[k]).replace(/currentColor/g, c)) + '"' }).join('')
+    var inner = s.inner.replace(/var\(--[\w-]+,\s*([^()]*?)\)/g, '$1').replace(/currentColor/g, c)
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + px + '" height="' + px + '" viewBox="0 0 24 24"' + attrs + '>' + inner + '</svg>'
   }
+  function fname(st, ext, px) { return DATA.name + (st === 'line' ? '' : '-' + st) + (px ? '-' + px : '') + '.' + ext }
+  function saveBlob(blob, name) { var u = URL.createObjectURL(blob), a = D.createElement('a'); a.href = u; a.download = name; D.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u) }, 4000) }
+  // custom colours of a multi-colour style ride along as CSS variables (they need the small runtime: CSS-only icons can't see them)
+  function colorCss(st) { return ed && st === S.style && S.colors && S.colors.custom ? S.colors.css : '' }
+  function tagText(st) { var c = colorCss(st); return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
+  function cssText(st) {
+    var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/'
+    return '<link rel="stylesheet" href="' + base + 'with-' + st + '.css">' + (colorCss(st) ? '\n<script src="' + base + 'with-icons.js" defer></script>' : '')
+  }
+  function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
+
   function act(kind, st) {
     st = st || S.style
-    var T = DATA.title
-    if (kind === 'svg') { save_(new Blob([svgText(st, S.px, 'file')], { type: 'image/svg+xml' }), fname(st, 'svg')); toast('Downloaded ' + fname(st, 'svg')) }
-    else if (kind === 'png') { png(st, S.px).then(function (r) { save_(r.blob, fname(st, 'png', S.px)); toast('Downloaded ' + fname(st, 'png', S.px)) }, function () { toast('Couldn’t make the PNG. Try SVG.') }) }
-    else if (kind === 'copy-tag') {
+    if (ed) {
+      // a style card's buttons act on that style without changing the visitor's pick
+      if (kind === 'svg') return ed.actions.downloadSvg(st)
+      if (kind === 'png') return ed.actions.downloadPng(st)
+      if (kind === 'copy-img') return ed.actions.copyImage(st)
+      if (kind === 'copy-svg') return ed.actions.copySvg(st)
+    } else {
+      if (kind === 'svg') { saveBlob(new Blob([fileSvg(st, 24)], { type: 'image/svg+xml' }), fname(st, 'svg')); return toast('Downloaded ' + fname(st, 'svg')) }
+      if (kind === 'copy-svg' || kind === 'copy-img' || kind === 'png') return copyText(fileSvg(st, 24)).then(function (ok) { toast(ok ? 'Copied ' + DATA.title + ' as SVG code.' : 'Couldn’t reach the clipboard.') })
+    }
+    if (kind === 'copy-tag') {
       var tb = $('.ip-tag-btn', root)
-      copyText(tagText(st)).then(function (ok) {
+      return copyText(tagText(st)).then(function (ok) {
         toast(ok ? 'Copied ' + tagText(st) + ' — paste it into your HTML.' : 'Couldn’t reach the clipboard.')
         var gl = tb && $('.ip-tag-go span', tb)
         if (ok && tb) { tb.classList.add('is-done'); if (gl) gl.textContent = 'Copied'; clearTimeout(tb._t); tb._t = setTimeout(function () { tb.classList.remove('is-done'); if (gl) gl.textContent = 'Copy' }, 1600) }
       })
     }
-    else if (kind === 'copy-css') { copyText(cssText(st)).then(function (ok) { toast(ok ? 'Copied the stylesheet line. Add it once inside <head>.' : 'Couldn’t reach the clipboard.') }) }
-    else if (kind === 'copy-svg') { copyText(svgText(st, 24, S.color === 'ink' ? 'code' : 'file')).then(function (ok) { toast(ok ? 'Copied ' + T + ' as SVG code. Paste it into Figma, Canva or HTML.' : 'Couldn’t reach the clipboard.') }) }
-    else if (kind === 'copy-img') {
-      if (!(W.ClipboardItem && navigator.clipboard && navigator.clipboard.write && W.isSecureContext)) {
-        copyText(svgText(st, 24, 'file')).then(function () { toast('Your browser can’t copy images, so we copied the SVG code. Use Download PNG for a picture.') }); return
-      }
-      var blobP = png(st, Math.max(S.px, 256)).then(function (r) { return r.blob })
-      navigator.clipboard.write([new W.ClipboardItem({ 'image/png': blobP })]).then(function () {
-        toast('Copied ' + T + ' as an image. Paste it into Slides, Docs or Notion.')
-      }, function () { copyText(svgText(st, 24, 'file')).then(function () { toast('Image copy was blocked, so we copied the SVG code instead.') }) })
-    }
+    if (kind === 'copy-css') return copyText(cssText(st)).then(function (ok) { toast(ok ? 'Copied the stylesheet line. Add it once inside <head>.' : 'Couldn’t reach the clipboard.') })
   }
 
-  // style picker: swap every preview in the hero to the chosen style
+  /* ───────── hero: mirrors the studio state ───────── */
   var picks = $$('[data-pick]')
-  function paint(animate) {
+  var lastStyle = null
+  function paint() {
     var s = DATA.styles[S.style]; if (!s) return
+    var changed = lastStyle !== null && lastStyle !== S.style
+    lastStyle = S.style
     root.setAttribute('data-style', S.style)
     D.body.className = D.body.className.replace(/\bs-[a-z]+\b/g, '').trim() + ' s-' + S.style
-    root.style.setProperty('--sc', s.hex)
-    root.style.setProperty('--ic', S.color === 'ink' ? 'var(--ink)' : hexFor(S.style))
+    root.style.setProperty('--sc', 'var(--c-' + S.style + ', ' + s.hex + ')')
+    root.style.setProperty('--sc-on', 'var(--c-' + S.style + '-on, ' + (s.on || '#FFFFFF') + ')')
+    root.style.setProperty('--ic', S.colors && S.colors.ink ? S.colors.ink : S.color === 'ink' ? 'var(--ink)' : (S.hex || hexOf(S.style)))
+    // the hero (stage, sizes, style cards) wears the studio's colours: the current style's CSS variables on the page root
+    ;(root._cv || []).forEach(function (k) { root.style.removeProperty(k) })
+    // (a palette's roles carry across styles, so every style card shows, and downloads, the same palette)
+    var cv = {}
+    if (ed && ed.colorsFor) Object.keys(DATA.styles).forEach(function (st) { var cz = ed.colorsFor(st); if (cz) for (var k in cz.vars) cv[k] = cz.vars[k] })
+    root._cv = Object.keys(cv)
+    root._cv.forEach(function (k) { root.style.setProperty(k, cv[k]) })
     $$('svg[data-root]', root).forEach(function (svg) {
-      Object.keys(svg.dataset).length // keep
       ;['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin'].forEach(function (k) { if (s.root[k] == null) svg.removeAttribute(k); else svg.setAttribute(k, s.root[k]) })
+      if (S.stroke != null && s.root['stroke-width'] != null) svg.setAttribute('stroke-width', S.stroke)
       var u = $('use', svg); if (u) u.setAttribute('href', '#s-' + S.style)
     })
-    picks.forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-pick') === S.style ? 'true' : 'false'); b.tabIndex = b.getAttribute('data-pick') === S.style ? 0 : -1 })
-    $$('[data-color]', root).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-color') === S.color ? 'true' : 'false') })
-    var ci = $('[data-color-input]', root); if (ci && /^#/.test(S.color) && S.color !== '#FFFFFF') { ci.value = S.color; ci.closest('label').classList.add('is-on') } else if (ci) ci.closest('label').classList.remove('is-on')
-    $$('[data-px]', root).forEach(function (b) { b.setAttribute('aria-pressed', +b.getAttribute('data-px') === S.px ? 'true' : 'false') })
-    var lbl = $('[data-px-label]', root); if (lbl) lbl.textContent = S.px + ' px'
-    $$('[data-color-label]', root).forEach(function (c) { c.textContent = colorName() })
+    // the big stage icon is inline (not <use>) so the draw preset can reach its strokes
+    var big = $('.ip-stage-art svg', root); if (big && s.inner != null) big.innerHTML = s.inner
+    picks.forEach(function (b) { var on = b.getAttribute('data-pick') === S.style; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+    $$('[data-px-label]', root).forEach(function (l) { l.textContent = S.px + ' px' })
+    $$('[data-color-label]', root).forEach(function (c) { c.textContent = S.colorName || 'black' })
     var pn = $('[data-pick-name]', root); if (pn) pn.textContent = s.title
     var ps = $('[data-pick-say]', root); if (ps && s.say) ps.textContent = s.say
     var tc = $('[data-tag-code]', root); if (tc) tc.innerHTML = nowrapTokens(tagText(S.style))
     var cc = $('[data-tag-css]', root); if (cc) cc.textContent = cssText(S.style)
     root.classList.toggle('is-white', S.color === '#FFFFFF')
     askAI()
-    if (animate && !reduced) {
+    stageMotion()
+    if (changed && !reduced) {
       var art = $('.ip-stage-art', root)
-      art.animate([{ transform: 'scale(.7) rotate(-10deg)', opacity: 0.2 }, { transform: 'scale(1.06) rotate(2deg)', opacity: 1, offset: 0.6 }, { transform: 'none' }], { duration: 560, easing: 'cubic-bezier(.2,.8,.2,1)' })
-      $$('.ip-sizes figure', root).forEach(function (f, i) { f.animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 360, delay: 60 + i * 50, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }) })
+      if (art && art.animate) art.animate([{ transform: 'scale(.7) rotate(-10deg)', opacity: 0.2 }, { transform: 'scale(1.06) rotate(2deg)', opacity: 1, offset: 0.6 }, { transform: 'none' }], { duration: 560, easing: 'cubic-bezier(.2,.8,.2,1)' })
+      $$('.ip-sizes figure', root).forEach(function (f, i) { if (f.animate) f.animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 360, delay: 60 + i * 50, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }) })
     }
   }
-  // "Ask AI" task widget follows the chosen style (site.js renders it; update keeps the visitor's task and text)
+  picks.forEach(function (b, i) {
+    b.addEventListener('click', function () {
+      var v = b.getAttribute('data-pick')
+      if (ed) ed.set({ style: v }); else { S.style = v; paint() }
+    })
+    b.addEventListener('keydown', function (e) {
+      var k = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
+      if (k) { e.preventDefault(); var n = picks[(i + k + picks.length) % picks.length]; n.focus(); n.click() }
+    })
+  })
+  root.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || !root.contains(b) || (studio && studio.contains(b))) return
+    if (b.hasAttribute('data-act')) act(b.getAttribute('data-act'), b.getAttribute('data-style'))
+  })
+
+  /* ───────── the stage: the icon's own motion (forge/motion spec) ───────── */
+  var mo = $('[data-mo]', root), intentBtn = $('[data-intent]', root), looping = false
+  function stageMotion() {
+    if (!mo || !Editor || !DATA.motion) return
+    var stroked = !!(DATA.styles[S.style].root.stroke && DATA.styles[S.style].root.stroke !== 'none')
+    var e = looping ? DATA.motion.loop : DATA.motion.hover
+    var a = Editor.motionAttrs(e, { trigger: looping ? 'loop' : 'hover', stroked: stroked })
+    if (!a) return
+    mo.className = 'ip-mo ' + a.cls + (looping ? ' wm-force' : '')
+    mo.setAttribute('style', a.style)
+    if (Editor.prepareDraw) Editor.prepareDraw(mo.parentNode)
+  }
+  function playOnce() {
+    if (!mo || !Editor || !DATA.motion || reduced || looping) return
+    var a = Editor.motionAttrs(DATA.motion.hover, { trigger: 'once', stroked: !!DATA.styles[S.style].root.stroke })
+    if (!a) return
+    mo.className = 'ip-mo ' + a.cls; mo.setAttribute('style', a.style)
+    if (Editor.prepareDraw) Editor.prepareDraw(mo.parentNode)
+    setTimeout(stageMotion, a.dur * 1000 + 60)
+  }
+  if (intentBtn) {
+    if (!Editor) intentBtn.hidden = true
+    intentBtn.addEventListener('click', function () {
+      looping = !looping
+      intentBtn.setAttribute('aria-pressed', looping ? 'true' : 'false')
+      var b = $('[data-intent-b]', intentBtn); if (b) b.textContent = looping ? 'Pause animation' : 'Play animation'
+      stageMotion()
+    })
+  }
+  if (mo && W.IntersectionObserver) {
+    var played = false
+    new IntersectionObserver(function (es, ob) { es.forEach(function (en) { if (en.isIntersecting && !played) { played = true; setTimeout(playOnce, 450); ob.disconnect() } }) }, { threshold: 0.5 }).observe(mo)
+  }
+
+  /* ───────── Ask-AI task widget follows the chosen style ───────── */
   function askAI() {
     var nm = $('[data-ask-style-name]', root); if (nm) nm.textContent = DATA.styles[S.style].title
     var A = W.WI && W.WI.askAI
@@ -178,15 +221,14 @@
     })
     askDemo()
   }
-  // the little chat demo mirrors the chosen task
   function askDemo(intent) {
     var q = $('[data-ask-demo-q]'), an = $('[data-ask-demo-a]')
     if (!q || !an) return
     if (!intent) { var on = $('.ip-ask-widget .ask-task[aria-checked="true"]'); intent = on ? on.getAttribute('data-ask-intent') : 'set' }
     var n = DATA.name, st = DATA.styles[S.style].title
-    var rel = $$('.ip-side-links li a').map(function (x) { return (x.getAttribute('href') || '').replace(/.html$/, '') }).filter(Boolean).slice(0, 4)
+    var rel = (DATA.related || []).map(function (r) { return r.name }).slice(0, 3)
     var T = {
-      code: ['Code ' + n + ' into my React delete button', 'Here’s <b>' + esc(n) + '</b> at 20px with <i>aria-label</i>, a tooltip, and hover, focus and disabled states…'],
+      code: ['Code ' + n + ' into my React button', 'Here’s <b>' + esc(n) + '</b> at 20px with <i>aria-label</i>, a tooltip, and hover, focus and disabled states…'],
       set: ['What goes with ' + n + ' on my screen?', 'Use these with <b>' + esc(n) + '</b>, all in ' + esc(st) + ': ' + rel.map(function (r) { return '<b>' + esc(r) + '</b>' }).join(', ') + '… here’s why each belongs.'],
       fit: ['Is ' + n + ' right for my meaning?', 'It depends on your users. Here’s how most people read <b>' + esc(n) + '</b>, and two clearer options if you need them…'],
       slides: ['How do I put ' + n + ' on my Google Slides?', 'Press <i>Copy image</i> on its page, paste onto the slide, then drag a corner to resize…']
@@ -194,40 +236,28 @@
     if (!T) return
     q.textContent = T[0]; an.innerHTML = T[1]
   }
-  root.ownerDocument.addEventListener('askai:intent', function (e) { if (e.target.closest && e.target.closest('.ip-ask-widget')) askDemo(e.detail && e.detail.intent) })
-  // the compact entry near the downloads jumps to the task picker and focuses it
-  var jump = $('[data-ask-jump]', root)
-  if (jump) jump.addEventListener('click', function (e) {
-    var sec = $('#ask-ai'); if (!sec) return
-    e.preventDefault()
+  D.addEventListener('askai:intent', function (e) { if (e.target.closest && e.target.closest('.ip-ask-widget')) askDemo(e.detail && e.detail.intent) })
+  function jumpTo(sel, focusSel) {
+    var sec = $(sel); if (!sec) return false
     sec.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
-    var t = $('.ip-ask-widget .ask-task[aria-checked="true"]') || $('.ip-ask-widget .ask-task')
+    var t = focusSel && $(focusSel)
     if (t) setTimeout(function () { t.focus({ preventScroll: true }) }, reduced ? 0 : 450)
-    if (history.replaceState) history.replaceState(null, '', '#ask-ai')
-  })
-  picks.forEach(function (b, i) {
-    b.addEventListener('click', function () { S.style = b.getAttribute('data-pick'); save(); paint(true) })
-    b.addEventListener('keydown', function (e) {
-      var k = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
-      if (k) { e.preventDefault(); var n = picks[(i + k + picks.length) % picks.length]; n.focus(); n.click() }
-    })
-  })
-  root.addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b || !root.contains(b)) return
-    if (b.hasAttribute('data-act')) act(b.getAttribute('data-act'), b.getAttribute('data-style'))
-    else if (b.hasAttribute('data-color')) { S.color = b.getAttribute('data-color'); save(); paint() }
-    else if (b.hasAttribute('data-px')) { S.px = +b.getAttribute('data-px'); save(); paint() }
-  })
-  var ci = $('[data-color-input]', root)
-  if (ci) ci.addEventListener('input', function () { S.color = ci.value; save(); paint() })
+    if (history.replaceState) history.replaceState(null, '', sel)
+    return true
+  }
+  var jump = $('[data-ask-jump]', root)
+  if (jump) jump.addEventListener('click', function (e) { if (jumpTo('#ask-ai', '.ip-ask-widget .ask-task[aria-checked="true"], .ip-ask-widget .ask-task')) e.preventDefault() })
+  $$('[data-jump]', root).forEach(function (a) { a.addEventListener('click', function (e) { if (jumpTo(a.getAttribute('href'), a.getAttribute('data-jump-focus') || '.wied [role=tab][aria-selected="true"]')) e.preventDefault() }) })
+  // "More formats" leads to the studio's Download panel (it only exists once the studio has mounted)
+  if (ed) $$('[data-more-formats]', root).forEach(function (a) { a.hidden = false })
 
-  // drag the big preview out: PNG file (Chrome/Edge), image HTML for apps, SVG text as fallback
-  var drag = $('[data-drag]', root)
+  /* ───────── drag the big preview out: PNG (Chrome/Edge), image HTML for apps, SVG text as fallback ───────── */
+  var drag = $('[data-drag]', root), dragPng = null
   if (drag) {
-    drag.addEventListener('pointerenter', function () { png(S.style, S.px).catch(function () { }) })
+    drag.addEventListener('pointerenter', function () { if (ed) ed.actions.png(S.style, S.px).then(function (r) { dragPng = r }, function () { }) })
     drag.addEventListener('dragstart', function (e) {
-      var dt = e.dataTransfer, svg = svgText(S.style, S.px, 'file'), svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg)
-      var p = pngCache[S.style + '|' + S.px + '|' + hexFor(S.style)], r = p && p.value
+      var dt = e.dataTransfer, svg = fileSvg(S.style, S.px), svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg)
+      var r = dragPng
       dt.effectAllowed = 'copy'
       try { dt.setData('DownloadURL', r && r.dataUrl ? 'image/png:' + fname(S.style, 'png', S.px) + ':' + r.dataUrl : 'image/svg+xml:' + fname(S.style, 'svg') + ':' + svgUrl) } catch (err) { }
       var src = r && r.dataUrl ? r.dataUrl : svgUrl
@@ -236,5 +266,29 @@
       dt.setData('text/plain', svg)
     })
   }
-  paint(false)
+
+  /* ───────── in-page section nav: current section + a sliding marker ───────── */
+  var toc = $('.ip-toc'), links = toc ? $$('a', toc) : []
+  if (toc && W.IntersectionObserver) {
+    var secs = links.map(function (a) { return $(a.getAttribute('href')) }).filter(Boolean)
+    var vis = {}
+    var mark = function (id) {
+      links.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + id
+        if (on) { a.setAttribute('aria-current', 'true'); var ul = a.closest('ul'); if (ul && ul.scrollWidth > ul.clientWidth) { var l = a.offsetLeft - 16; if (l < ul.scrollLeft || a.offsetLeft + a.offsetWidth > ul.scrollLeft + ul.clientWidth) ul.scrollTo({ left: l, behavior: reduced ? 'auto' : 'smooth' }) } }
+        else a.removeAttribute('aria-current')
+      })
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { vis[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0 })
+      var best = null
+      secs.forEach(function (s) { if (vis[s.id] > 0 && !best) best = s.id })
+      if (best) mark(best); else if (W.scrollY < (secs[0] ? secs[0].offsetTop - 200 : 0)) mark('')
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.01, 0.5] })
+    secs.forEach(function (s) { io.observe(s) })
+    var stuck = new IntersectionObserver(function (es) { toc.classList.toggle('is-stuck', !es[0].isIntersecting) }, { rootMargin: '-' + ((parseInt(getComputedStyle(D.documentElement).getPropertyValue('--header-h'), 10) || 72) + 1) + 'px 0px 0px 0px', threshold: 1 })
+    var sentinel = D.createElement('div'); sentinel.className = 'ip-toc-sentinel'; sentinel.setAttribute('aria-hidden', 'true'); toc.parentNode.insertBefore(sentinel, toc); stuck.observe(sentinel)
+  }
+
+  paint()
 })()

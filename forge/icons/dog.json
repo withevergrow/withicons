@@ -1,0 +1,93 @@
+{
+  "name": "dog",
+  "category": "nature",
+  "description": "A front-facing dog head with floppy ears for dogs, puppies, pet services and dog-friendly places.",
+  "aliases": [
+    "puppy",
+    "canine",
+    "doggo",
+    "hound",
+    "pup",
+    "dog-friendly",
+    "pooch",
+    "doggy",
+    "dog-face",
+    "dog-head",
+    "pet-dog"
+  ],
+  "tags": [
+    "animal",
+    "pet",
+    "dog",
+    "puppy",
+    "mammal"
+  ],
+  "paths": [
+    {
+      "d": "M12 4.5 C15 4.5 17 6.5 17 9.5 V14 C17 18 15 20.5 12 20.5 C9 20.5 7 18 7 14 V9.5 C7 6.5 9 4.5 12 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 6.5 C6.5 5 3.5 5.25 3 8 C2.5 10.5 2.75 13.5 4 14.5 C5 15.25 6.25 14.5 7 12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16 6.5 C17.5 5 20.5 5.25 21 8 C21.5 10.5 21.25 13.5 20 14.5 C19 15.25 17.75 14.5 17 12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10 10.5 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 10.5 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 15 H13.25 L12 16.25 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 4.5 C15 4.5 17 6.5 17 9.5 V14 C17 18 15 20.5 12 20.5 C9 20.5 7 18 7 14 V9.5 C7 6.5 9 4.5 12 4.5 Z",
+    "M8 6.5 C6.5 5 3.5 5.25 3 8 C2.5 10.5 2.75 13.5 4 14.5 C5 15.25 6.25 14.5 7 12.5 Z",
+    "M16 6.5 C17.5 5 20.5 5.25 21 8 C21.5 10.5 21.25 13.5 20 14.5 C19 15.25 17.75 14.5 17 12.5 Z"
+  ],
+  "cutouts": [
+    "M11.1 11 A1.1 1.1 0 1 1 8.9 11 A1.1 1.1 0 1 1 11.1 11 Z",
+    "M15.1 11 A1.1 1.1 0 1 1 12.9 11 A1.1 1.1 0 1 1 15.1 11 Z",
+    "M10.25 14.75 H13.75 L12 16.75 Z",
+    "M7.6 7.25 C7 9.5 7 12 6.4 15",
+    "M16.4 7.25 C17 9.5 17 12 17.6 15"
+  ],
+  "synonyms": [
+    "puppies",
+    "dogs",
+    "doggie",
+    "woof",
+    "bark",
+    "labrador",
+    "beagle",
+    "spaniel",
+    "retriever",
+    "puppy love",
+    "dog walking",
+    "dog walker",
+    "dog park",
+    "dog friendly",
+    "dogs allowed",
+    "pet friendly",
+    "kennel",
+    "dog grooming",
+    "dog training",
+    "pet",
+    "pets",
+    "man's best friend",
+    "best friend",
+    "loyal",
+    "animal",
+    "dgo",
+    "dog sitter",
+    "doggy daycare"
+  ]
+}

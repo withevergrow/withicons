@@ -1,0 +1,38 @@
+{
+  "name": "scissors",
+  "intent": "snips about the blade pivot, cutting forward",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      14,
+      12
+    ],
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        14,
+        12
+      ]
+    },
+    {
+      "preset": "nudge",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "paste",
+      "effect": "fade"
+    }
+  ]
+}

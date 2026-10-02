@@ -1,0 +1,27 @@
+{
+  "name": "user",
+  "palettes": [
+    {"id":"default-avatar","name":"Default avatar","tags":["true-to-life","grayscale"],"colors":{"ink":"#1F2329","c1":"#C3C8D0","c2":"#8A929E","c3":"#E6E9EE","c4":"#6B7380","tint":"#EEF0F2","accent":"#8A929E","shadow":"#696D74","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"profile-blue","name":"Profile blue","tags":["true-to-life","corporate"],"colors":{"ink":"#111E36","c1":"#3B82F6","c2":"#93C5FD","c3":"#F59E0B","c4":"#DBEAFE","tint":"#C8DCFC","accent":"#F59E0B","shadow":"#244B8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"member-violet","name":"Member violet","tags":["true-to-life"],"colors":{"ink":"#201736","c1":"#8B5CF6","c2":"#F9A8D4","c3":"#FCD34D","c4":"#DDD6FE","tint":"#DFD1FC","accent":"#F9A8D4","shadow":"#50368C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"denim-tee","name":"Denim & tee","tags":["true-to-life"],"colors":{"ink":"#0E1A2E","c1":"#3E5F8A","c2":"#F4D06F","c3":"#D96C4E","c4":"#BFCDE0","tint":"#C9D2DE","accent":"#D96C4E","shadow":"#243957","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"red-hoodie","name":"Red hoodie","tags":["true-to-life","vivid"],"colors":{"ink":"#2A0A0A","c1":"#D93A3A","c2":"#F2C14E","c3":"#2F5D8A","c4":"#F6C9C4","tint":"#F4C8C8","accent":"#F2C14E","shadow":"#792020","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"olive-jacket","name":"Olive jacket","tags":["true-to-life","earthy"],"colors":{"ink":"#1E200F","c1":"#7A7F3A","c2":"#E3B868","c3":"#B5562E","c4":"#DCDCB8","tint":"#DADBC8","accent":"#B5562E","shadow":"#474B22","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"teal-scrubs","name":"Teal scrubs","tags":["true-to-life"],"colors":{"ink":"#0E2527","c1":"#2BA7A0","c2":"#E8F6F5","c3":"#F2A65A","c4":"#1F6F6A","tint":"#C4E6E4","accent":"#F2A65A","shadow":"#1B605D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dark-profile","name":"Dark profile","tags":["dark"],"colors":{"ink":"#0A0C10","c1":"#3F4654","c2":"#A5B4FC","c3":"#F9A8D4","c4":"#9AA3B2","tint":"#C9CBCF","accent":"#A5B4FC","shadow":"#22262F","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-persona","name":"Pastel persona","tags":["pastel"],"colors":{"ink":"#352E48","c1":"#C9B8FF","c2":"#FFC9DC","c3":"#BDE8FF","c4":"#FFF0B5","tint":"#F0EBFF","accent":"#FFC9DC","shadow":"#786C9A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"neon-avatar","name":"Neon avatar","tags":["neon","on-dark"],"colors":{"ink":"#0A0716","c1":"#B8FF3B","c2":"#FF2BD6","c3":"#2BF0FF","c4":"#8A5CFF","tint":"#DCFF9D","accent":"#FF2BD6","shadow":"#587727","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"retro-sweater","name":"Retro sweater","tags":["retro"],"colors":{"ink":"#2A160D","c1":"#E9A23B","c2":"#C8452F","c3":"#2E7D6E","c4":"#F3D9A9","tint":"#F9E5C8","accent":"#2E7D6E","shadow":"#805522","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"navy-ramp","name":"Navy ramp","tags":["mono"],"colors":{"ink":"#0A1638","c1":"#3557C9","c2":"#1D3487","c3":"#9BB0EE","c4":"#DCE3FA","tint":"#C6D0F0","accent":"#1D3487","shadow":"#1D3379","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"surfer","name":"Surfer","tags":["ocean"],"colors":{"ink":"#05283A","c1":"#1FA2C9","c2":"#FFD27D","c3":"#FF7B5C","c4":"#BCE8F4","tint":"#C0E5F0","accent":"#FF7B5C","shadow":"#115F7A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"hiker","name":"Hiker","tags":["nature"],"colors":{"ink":"#10230F","c1":"#4F8A3B","c2":"#E39B3B","c3":"#A9D19A","c4":"#6B3E26","tint":"#CEDEC8","accent":"#E39B3B","shadow":"#2C5123","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"bubblegum","name":"Bubblegum","tags":["candy"],"colors":{"ink":"#3A0D2C","c1":"#FF7EB6","c2":"#7AD7F0","c3":"#FFE066","c4":"#FFD0E6","tint":"#FFDBEB","accent":"#7AD7F0","shadow":"#93406A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"chrome-kid","name":"Chrome kid","tags":["y2k"],"colors":{"ink":"#1B1A3A","c1":"#A8B5FF","c2":"#FF7AE0","c3":"#7CF6D2","c4":"#E8EBFF","tint":"#E7EAFF","accent":"#FF7AE0","shadow":"#5A6093","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"golden-hour","name":"Golden hour","tags":["sunset"],"colors":{"ink":"#2A1020","c1":"#FF8C61","c2":"#CE4A7E","c3":"#FFC15E","c4":"#FFD9CC","tint":"#FFDFD3","accent":"#FFC15E","shadow":"#8A483D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tuxedo-gold","name":"Tuxedo & gold","tags":["luxe"],"colors":{"ink":"#000000","c1":"#4A4A52","c2":"#D4AF37","c3":"#F3E5AB","c4":"#8A8A92","tint":"#CCCCCF","accent":"#D4AF37","shadow":"#212125","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"winter-coat","name":"Winter coat","tags":["seasonal"],"colors":{"ink":"#0E1E2E","c1":"#2F6E9E","c2":"#E9EEF3","c3":"#C0392B","c4":"#8FB3D1","tint":"#C5D6E4","accent":"#C0392B","shadow":"#1D4260","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"citrus","name":"Citrus","tags":["vivid"],"colors":{"ink":"#2B2A05","c1":"#FFC21A","c2":"#FF6F3C","c3":"#2BB5A0","c4":"#FFF0B0","tint":"#FFEEBF","accent":"#FF6F3C","shadow":"#8A6E0E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sage-linen","name":"Sage linen","tags":["earthy","pastel"],"colors":{"ink":"#1F2A20","c1":"#A9C1A0","c2":"#E8D7B5","c3":"#C98463","c4":"#6F8A6A","tint":"#E7EEE4","accent":"#C98463","shadow":"#5D6E5A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#0040FF","c2":"#FFD400","c3":"#D4002A","c4":"#FFFFFF","tint":"#B8CAFF","accent":"#FFD400","shadow":"#001D73","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

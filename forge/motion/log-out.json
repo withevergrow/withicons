@@ -1,0 +1,35 @@
+{
+  "name": "log-out",
+  "intent": "steps out the door like someone signing out",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0
+    },
+    {
+      "preset": "shake"
+    }
+  ],
+  "swap": [
+    {
+      "to": "log-in",
+      "effect": "slide-left"
+    },
+    {
+      "to": "user-x",
+      "effect": "fade"
+    }
+  ]
+}

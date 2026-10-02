@@ -1,0 +1,39 @@
+{
+  "name": "truck",
+  "intent": "rolls along the road, drives off on hover",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.4
+    },
+    {
+      "preset": "float",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "package",
+      "effect": "slide-left"
+    },
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "map-pin",
+      "effect": "fade"
+    }
+  ]
+}

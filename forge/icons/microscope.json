@@ -1,0 +1,82 @@
+{
+  "name": "microscope",
+  "category": "education",
+  "description": "Microscope for science, labs, research, and biology.",
+  "aliases": [
+    "lab",
+    "laboratory",
+    "research",
+    "biology",
+    "science",
+    "magnify-cells",
+    "analysis",
+    "microscopy",
+    "lab-microscope"
+  ],
+  "tags": [
+    "science",
+    "lab",
+    "biology",
+    "research",
+    "medical",
+    "education"
+  ],
+  "paths": [
+    {
+      "d": "M5.3 5.53 L8.3 10.72 A1 1 0 0 0 9.67 11.09 L11.83 9.84 A1 1 0 0 0 12.2 8.47 L9.2 3.28 A1 1 0 0 0 7.83 2.91 L5.67 4.16 A1 1 0 0 0 5.3 5.53 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 10.46 L11.75 12.2",
+      "plate": "A"
+    },
+    {
+      "d": "M12 5.5 C16.5 6 19 9.5 19 13.25 C19 16.75 17 19.5 14 21",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 21 H19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 15.5 H18.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.3 5.53 L8.3 10.72 A1 1 0 0 0 9.67 11.09 L11.83 9.84 A1 1 0 0 0 12.2 8.47 L9.2 3.28 A1 1 0 0 0 7.83 2.91 L5.67 4.16 A1 1 0 0 0 5.3 5.53 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "medical lab",
+    "lab test",
+    "lab results",
+    "pathology",
+    "cells",
+    "bacteria",
+    "germs",
+    "virus",
+    "microbe",
+    "microbiology",
+    "specimen",
+    "sample",
+    "test",
+    "scientist",
+    "experiment",
+    "magnification",
+    "magnify",
+    "zoom in",
+    "diagnostics",
+    "biotech",
+    "clinic",
+    "forensics",
+    "inspect",
+    "examine",
+    "investigation",
+    "stem",
+    "school science",
+    "micro scope",
+    "microscop",
+    "mircoscope"
+  ]
+}

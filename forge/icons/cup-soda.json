@@ -1,0 +1,79 @@
+{
+  "name": "cup-soda",
+  "category": "food",
+  "description": "A takeaway cup with a lid and straw for soft drinks, soda, and smoothies.",
+  "aliases": [
+    "soda",
+    "soft-drink",
+    "drink",
+    "beverage",
+    "smoothie",
+    "milkshake",
+    "takeaway-cup",
+    "pop",
+    "cola",
+    "fountain-drink",
+    "to-go-cup",
+    "bubble-tea"
+  ],
+  "tags": [
+    "drink",
+    "beverage",
+    "takeaway",
+    "straw",
+    "fast-food",
+    "refreshment"
+  ],
+  "paths": [
+    {
+      "d": "M5 8 L6.5 20 A1.5 1.5 0 0 0 8 21.5 H16 A1.5 1.5 0 0 0 17.5 20 L19 8",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 8 H20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 L13.5 2.5 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 8 L6.5 20 A1.5 1.5 0 0 0 8 21.5 H16 A1.5 1.5 0 0 0 17.5 20 L19 8 Z"
+  ],
+  "cutouts": [
+    "M6.5 12.5 H17.5"
+  ],
+  "synonyms": [
+    "soft drink",
+    "fizzy drink",
+    "fizzy",
+    "coke",
+    "pepsi",
+    "lemonade",
+    "juice",
+    "iced coffee",
+    "iced tea",
+    "boba",
+    "shake",
+    "slushie",
+    "slush",
+    "cold drink",
+    "refreshment",
+    "refreshments",
+    "drinks",
+    "beverages",
+    "straw",
+    "paper cup",
+    "plastic cup",
+    "take away",
+    "take-out",
+    "fast food",
+    "cinema",
+    "movie snack",
+    "concession",
+    "thirsty",
+    "sodas",
+    "sodda"
+  ]
+}

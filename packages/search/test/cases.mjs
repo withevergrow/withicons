@@ -9,7 +9,7 @@ export const CASES = [
   ['hom', 'home', 1],
   ['sett', 'settings', 1],
   ['calen', 'calendar', 1],
-  ['shopping', ['shopping-cart', 'shopping-bag'], 1],
+  ['shopping', ['shopping-cart', 'shopping-bag', 'shopping-basket'], 1], // 2026-10: shopping-basket joined the set
   ['magnif', 'search', 3],
   ['thermo', 'thermometer', 1],
 
@@ -33,7 +33,7 @@ export const CASES = [
   ['messages', ['messages', 'message-square', 'message-circle'], 1],
   ['charts', ['chart-bar', 'chart-line', 'chart-pie', 'chart-area'], 1],
   ['batteries', 'battery', 1],
-  ['bookmarks', 'bookmark', 1],
+  ['bookmarks', ['bookmark', 'bookmark-plus'], 1], // 2026-10: bookmark-plus joined the set
 
   // typos
   ['settigns', 'settings', 1],
@@ -89,7 +89,7 @@ export const CASES = [
   ['bar graph', 'chart-bar', 1],
   ['pie chart', 'chart-pie', 1],
   ['lightning bolt', 'zap', 2],
-  ['speaker', 'volume', 1],
+  ['speaker', ['speaker', 'volume'], 1], // 2026-10: a real speaker icon now exists
   ['mute', 'volume-off', 2],
   ['visible', 'eye', 1],
   ['hidden password', 'eye-off', 2],
@@ -148,12 +148,12 @@ export const CASES = [
   ['reload page', 'refresh', 1],
   ['go back', ['arrow-left', 'undo', 'chevron-left'], 2],
   ['statistics', ['chart-bar', 'chart-line', 'chart-pie', 'activity'], 2],
-  ['school', 'graduation-cap', 1],
+  ['school', ['school', 'graduation-cap'], 1], // 2026-10: a school icon joined the set
   ['programming', ['code', 'terminal'], 2],
-  ['travel', ['plane', 'globe', 'map'], 2],
+  ['travel', ['luggage', 'passport', 'plane', 'globe', 'map'], 2], // 2026-10: luggage and passport joined the set
   ['internet', 'globe', 2],
-  ['doctor', ['heart-pulse', 'pill'], 2],
-  ['birthday', 'gift', 1],
+  ['doctor', ['stethoscope', 'heart-pulse', 'pill'], 2], // 2026-10: stethoscope joined the set
+  ['birthday', ['cake', 'gift'], 1], // 2026-10: cake joined the set
   ['winner', 'trophy', 2],
   ['delivery', 'truck', 1],
   ['weather', ['cloud-sun', 'cloud', 'sun'], 3],
@@ -204,7 +204,7 @@ export const HARD = [
   ['open in new tab', 'external-link', 1],
   ['attach file', 'paperclip', 1],
   ['user settings', ['user', 'settings', 'user-circle'], 3],
-  ['bank', 'landmark', 1],
+  ['bank', ['landmark', 'piggy-bank'], 1], // 2026-10: piggy-bank joined the set
   ['receipt', 'receipt', 1],
   ['invoice', 'receipt', 1],
   ['rainy day', 'cloud-rain', 1],
@@ -289,7 +289,7 @@ export const MISSPELL = [
   ['anker', 'anchor', 3],
   ['wrentch', 'wrench', 1],
   ['fingerprnt', 'fingerprint', 1],
-  ['clipbord', 'clipboard', 1],
+  ['clipbord', ['clipboard', 'clipboard-list'], 1], // 2026-10: clipboard-list joined the set
   ['databaze', 'database', 1],
   ['languaje', 'language', 1],
   ['gaje', 'gauge', 3],

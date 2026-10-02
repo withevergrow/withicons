@@ -1,0 +1,68 @@
+{
+  "name": "plane-landing",
+  "category": "travel",
+  "description": "An aeroplane descending toward a runway, for arrivals, landing, and inbound flights.",
+  "aliases": [
+    "arrival",
+    "arrivals",
+    "flight-arrival",
+    "airport-arrival",
+    "inbound-flight",
+    "arriving-flight",
+    "plane-arrival",
+    "flight-landing",
+    "touchdown"
+  ],
+  "tags": [
+    "flight",
+    "airport",
+    "travel",
+    "arrival",
+    "airline"
+  ],
+  "paths": [
+    {
+      "d": "M19.11 11.98 C20.43 12.45 20.93 13.41 20.82 14.3 C20.33 15.06 19.33 15.46 18.02 14.98 L14.26 13.62 L7.99 18.57 L6.67 18.09 L10.31 12.18 L6.74 10.88 L4.49 12.4 L3.92 12.2 L5.79 8.83 L6.52 5.05 L7.09 5.26 L7.84 7.87 L11.41 9.17 L12.42 2.3 L13.74 2.78 L15.35 10.61 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21.5 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.11 11.98 C20.43 12.45 20.93 13.41 20.82 14.3 C20.33 15.06 19.33 15.46 18.02 14.98 L14.26 13.62 L7.99 18.57 L6.67 18.09 L10.31 12.18 L6.74 10.88 L4.49 12.4 L3.92 12.2 L5.79 8.83 L6.52 5.05 L7.09 5.26 L7.84 7.87 L11.41 9.17 L12.42 2.3 L13.74 2.78 L15.35 10.61 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "arrive",
+    "arriving",
+    "arrived",
+    "inbound",
+    "landing",
+    "land",
+    "lands",
+    "touch down",
+    "descent",
+    "descending",
+    "flight",
+    "flights",
+    "fly",
+    "airplane",
+    "aeroplane",
+    "airport",
+    "runway",
+    "baggage claim",
+    "pick up",
+    "pickup",
+    "welcome",
+    "return flight",
+    "coming home",
+    "arrival time",
+    "arrivals board",
+    "airplane arrival",
+    "aeroplane arrival",
+    "arival",
+    "arrivel"
+  ]
+}

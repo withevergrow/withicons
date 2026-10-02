@@ -1,0 +1,40 @@
+{
+  "name": "git-commit",
+  "intent": "pulses like a new commit landing on the line",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.6,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0,
+      "amount": 0.6
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "git-branch",
+      "effect": "fade"
+    }
+  ]
+}

@@ -64,18 +64,29 @@
   --c-engrave: #C9962B;   --c-engrave-text: #8A6414;   --c-engrave-soft: #F6ECD4;
   --c-blueprint: #00A3C4; --c-blueprint-text: #00728A; --c-blueprint-soft: #D9F3F8;
   --c-sketch: #22A861;    --c-sketch-text: #157A43;    --c-sketch-soft: #DDF3E6;
+  /* run 4 (2026-10-02): the five palette styles. Their icons carry their own default palette
+     (--with-<style>-<role>); these tokens are the site's signature colour for each style. */
+  --c-glass: #5B9DFF;     --c-glass-text: #2F65C8;     --c-glass-soft: #E3EEFF;   /* icy sky */
+  --c-kawaii: #FF7A9A;    --c-kawaii-text: #C2335A;    --c-kawaii-soft: #FFE6EC;  /* strawberry milk */
+  --c-sticker: #B57CFF;   --c-sticker-text: #7A3FD6;   --c-sticker-soft: #F2E8FF; /* candy lilac */
+  --c-pixel: #4FAE0C;     --c-pixel-text: #3B7300;     --c-pixel-soft: #E6F5D6;   /* arcade green */
+  --c-retro: #F57C12;     --c-retro-text: #AD4C00;     --c-retro-soft: #FFEBD6;   /* sunset orange */
   /* text/icon colour ON a filled style colour (AA): white on the deep ones, ink on the bright ones */
   --c-line-on: #FFFFFF; --c-solid-on: #111318; --c-duo-on: #FFFFFF; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
+  --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-duo-fill: var(--c-duo); /* kept for compatibility: violet is now deep enough (4.8:1 with white) */
   --style-on: var(--c-line-on);
   /* short aliases (library.css relies on these names) */
   --on-line: var(--c-line-on); --on-solid: var(--c-solid-on); --on-duo: var(--c-duo-on); --on-gloss: var(--c-gloss-on);
   --on-engrave: var(--c-engrave-on); --on-blueprint: var(--c-blueprint-on); --on-sketch: var(--c-sketch-on);
+  --on-glass: var(--c-glass-on); --on-kawaii: var(--c-kawaii-on); --on-sticker: var(--c-sticker-on); --on-pixel: var(--c-pixel-on); --on-retro: var(--c-retro-on);
+  /* all twelve signature colours as one sweep (rings, dials, the CTA hover) */
+  --spectrum: var(--c-line), var(--c-glass), var(--c-blueprint), var(--c-sketch), var(--c-pixel), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-line);
   /* focus: ink ring (17:1 on paper) inside a sun halo; dark theme flips the ring to sun */
   --focus-ring: #111318; --focus-halo: var(--sun);
   /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
-     or use the helper classes .s-line … .s-sketch (they also set --style-text and --style-soft) */
+     or use the helper classes .s-line … .s-retro (they also set --style-text and --style-soft) */
   --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft);
 
   /* legacy semantic names (kept so older CSS keeps working) */
@@ -153,8 +164,14 @@
   --c-engrave: #D9A94A;   --c-engrave-text: #E7C17A;   --c-engrave-soft: #33280F;
   --c-blueprint: #19B8D8; --c-blueprint-text: #63D3EA; --c-blueprint-soft: #0B2B33;
   --c-sketch: #34BF73;    --c-sketch-text: #6FD99C;    --c-sketch-soft: #10301E;
+  --c-glass: #7DB2FF;     --c-glass-text: #A9CBFF;     --c-glass-soft: #13243F;
+  --c-kawaii: #FF8FAA;    --c-kawaii-text: #FFB3C4;    --c-kawaii-soft: #3D1622;
+  --c-sticker: #C292FF;   --c-sticker-text: #D4B3FF;   --c-sticker-soft: #2A1A45;
+  --c-pixel: #7FDB2E;     --c-pixel-text: #A8EE6E;     --c-pixel-soft: #172E0A;
+  --c-retro: #FF9A3C;     --c-retro-text: #FFB878;     --c-retro-soft: #3A2210;
   --c-line-on: #111318; --c-solid-on: #111318; --c-duo-on: #111318; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
+  --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-duo-fill: var(--c-duo);
   --focus-ring: var(--sun); --focus-halo: rgba(255, 210, 63, .28);
   /* duo previews on dark grounds: a light-ink tint at 20% reads as muddy grey, so tint with the duo violet */
@@ -168,6 +185,13 @@
 }
 /* light by default: dark applies only via [data-theme="dark"] (the toggle) */
 
+/* "more contrast" (macOS/iOS Increase Contrast, Windows contrast themes in Chromium): firmer hairlines and
+   secondary text one step closer to the ink, in both themes */
+@media (prefers-contrast: more) {
+  :root { --muted: #474C58; --faint: #6B717E; --rule: #B9AF9E; --rule-strong: #8F8676; }
+  :root[data-theme="dark"] { --muted: #B9BDC7; --faint: #8A909D; --rule: #4A5061; --rule-strong: #6A7184; }
+}
+
 /* style helper classes: set the "current style" colour trio on any element */
 .s-line { --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft); --style-on: var(--c-line-on); --style-fill: initial; }
 .s-solid { --style: var(--c-solid); --style-text: var(--c-solid-text); --style-soft: var(--c-solid-soft); --style-on: var(--c-solid-on); --style-fill: initial; }
@@ -176,6 +200,11 @@
 .s-engrave { --style: var(--c-engrave); --style-text: var(--c-engrave-text); --style-soft: var(--c-engrave-soft); --style-on: var(--c-engrave-on); --style-fill: initial; }
 .s-blueprint { --style: var(--c-blueprint); --style-text: var(--c-blueprint-text); --style-soft: var(--c-blueprint-soft); --style-on: var(--c-blueprint-on); --style-fill: initial; }
 .s-sketch { --style: var(--c-sketch); --style-text: var(--c-sketch-text); --style-soft: var(--c-sketch-soft); --style-on: var(--c-sketch-on); --style-fill: initial; }
+.s-glass { --style: var(--c-glass); --style-text: var(--c-glass-text); --style-soft: var(--c-glass-soft); --style-on: var(--c-glass-on); --style-fill: initial; }
+.s-kawaii { --style: var(--c-kawaii); --style-text: var(--c-kawaii-text); --style-soft: var(--c-kawaii-soft); --style-on: var(--c-kawaii-on); --style-fill: initial; }
+.s-sticker { --style: var(--c-sticker); --style-text: var(--c-sticker-text); --style-soft: var(--c-sticker-soft); --style-on: var(--c-sticker-on); --style-fill: initial; }
+.s-pixel { --style: var(--c-pixel); --style-text: var(--c-pixel-text); --style-soft: var(--c-pixel-soft); --style-on: var(--c-pixel-on); --style-fill: initial; }
+.s-retro { --style: var(--c-retro); --style-text: var(--c-retro-text); --style-soft: var(--c-retro-soft); --style-on: var(--c-retro-on); --style-fill: initial; }
 
 /* ───────── base ───────── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -195,7 +224,13 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spa
 p { text-wrap: pretty; }
 :focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px; box-shadow: 0 0 0 7px var(--focus-halo, #FFD23F); border-radius: 8px; }
 ::selection { background: var(--sun); color: #111318; }
+/* the visitor's own "Pause animations" (site.js sets html.is-still): the same treatment as the OS setting below */
+html.is-still { scroll-behavior: auto; }
+html.is-still :not(.wm-force, .wm-force *), html.is-still :not(.wm-force, .wm-force *)::before, html.is-still :not(.wm-force, .wm-force *)::after {
+  animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  /* @withicons/motion: an element marked .wm-force (the visitor pressed "play anyway") keeps its animations and swap transitions */
+  :not(.wm-force, .wm-force *), :not(.wm-force, .wm-force *)::before, :not(.wm-force, .wm-force *)::after { transition-duration: .001ms !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
 }

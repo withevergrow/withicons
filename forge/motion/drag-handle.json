@@ -1,0 +1,36 @@
+{
+  "name": "drag-handle",
+  "intent": "lifts up and down to show it can be dragged",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.4,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "move",
+      "effect": "scale"
+    },
+    {
+      "to": "menu",
+      "effect": "rotate"
+    }
+  ]
+}

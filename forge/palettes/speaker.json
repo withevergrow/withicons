@@ -1,0 +1,426 @@
+{
+  "name": "speaker",
+  "palettes": [
+    {
+      "id": "studio-monitor-black",
+      "name": "Studio monitor black",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A0B0E",
+        "c1": "#44484F",
+        "c2": "#8A9099",
+        "c3": "#1E2024",
+        "c4": "#F2A33A",
+        "tint": "#DADADC",
+        "accent": "#F2A33A",
+        "shadow": "#272A2F",
+        "shine": "#CBCCCE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "walnut-hi-fi",
+      "name": "Walnut hi-fi",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A170A",
+        "c1": "#9A6236",
+        "c2": "#E8D2B0",
+        "c3": "#5E3818",
+        "c4": "#2E2E2E",
+        "tint": "#EBE0D7",
+        "accent": "#D9A441",
+        "shadow": "#623D20",
+        "shine": "#E3D3C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "smart-speaker-white",
+      "name": "Smart-speaker white",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2229",
+        "c1": "#EDEEF0",
+        "c2": "#B5BCC6",
+        "c3": "#8A929D",
+        "c4": "#4FA3FF",
+        "tint": "#FBFCFC",
+        "accent": "#4FA3FF",
+        "shadow": "#6D7075",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fabric-mesh-grey",
+      "name": "Fabric mesh grey",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1C2026",
+        "c1": "#9AA0A8",
+        "c2": "#D7DADF",
+        "c3": "#5E646C",
+        "c4": "#FF8A5B",
+        "tint": "#EBECEE",
+        "accent": "#FF8A5B",
+        "shadow": "#5B6067",
+        "shine": "#E3E4E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "boombox-party",
+      "name": "Boombox party",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1033",
+        "c1": "#FF3D7F",
+        "c2": "#FFE14D",
+        "c3": "#2EC4F0",
+        "c4": "#7DE04A",
+        "tint": "#FFD8E5",
+        "accent": "#FFE14D",
+        "shadow": "#8D2759",
+        "shine": "#FFC9DB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "club-bass",
+      "name": "Club bass",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#7A2BFF",
+        "c2": "#00F0FF",
+        "c3": "#FF2BD6",
+        "c4": "#B6FF3B",
+        "tint": "#E4D5FF",
+        "accent": "#00F0FF",
+        "shadow": "#3D1680",
+        "shine": "#DAC4FF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "bass-drop",
+      "name": "Bass drop",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8ECF4",
+        "c1": "#23262E",
+        "c2": "#FF5A3D",
+        "c3": "#121418",
+        "c4": "#6E7686",
+        "tint": "#D3D4D5",
+        "accent": "#FF5A3D",
+        "shadow": "#121317",
+        "shine": "#C1C2C4",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "70s-amp-orange",
+      "name": "70s amp orange",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#33180A",
+        "c1": "#E07A2E",
+        "c2": "#F5D6A0",
+        "c3": "#8A3A1A",
+        "c4": "#3F6E6A",
+        "tint": "#F9E4D5",
+        "accent": "#F5D6A0",
+        "shadow": "#8A491C",
+        "shine": "#F6DAC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vinyl-lounge",
+      "name": "Vinyl lounge",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A0E14",
+        "c1": "#8A2A3A",
+        "c2": "#F2D9B0",
+        "c3": "#4E1420",
+        "c4": "#D9A441",
+        "tint": "#E8D4D8",
+        "accent": "#D9A441",
+        "shadow": "#5A1C27",
+        "shine": "#DEC3C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-tunes",
+      "name": "Pastel tunes",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#2E3A5A",
+        "c1": "#A8C6F0",
+        "c2": "#FFE0EC",
+        "c3": "#7A9AD6",
+        "c4": "#CFF2E2",
+        "tint": "#EEF4FC",
+        "accent": "#7A9AD6",
+        "shadow": "#5C6F93",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bubblegum-pop",
+      "name": "Bubblegum pop",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A1A3A",
+        "c1": "#FF9ED2",
+        "c2": "#A0EFFF",
+        "c3": "#E05A9E",
+        "c4": "#FFF09A",
+        "tint": "#FFECF6",
+        "accent": "#E05A9E",
+        "shadow": "#8F4C74",
+        "shine": "#FFE4F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beach-speaker",
+      "name": "Beach speaker",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#03304A",
+        "c1": "#1A8AB8",
+        "c2": "#B8EEFF",
+        "c3": "#0B5578",
+        "c4": "#FFB86B",
+        "tint": "#D1E8F1",
+        "accent": "#FFB86B",
+        "shadow": "#0F5D81",
+        "shine": "#BFDEEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "outdoor-rugged",
+      "name": "Outdoor rugged",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#14280F",
+        "c1": "#4F7F35",
+        "c2": "#DDEFC8",
+        "c3": "#2E5020",
+        "c4": "#D9A441",
+        "tint": "#DCE5D7",
+        "accent": "#D9A441",
+        "shadow": "#325422",
+        "shine": "#CEDBC6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "concert-hall-gold",
+      "name": "Concert-hall gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0E0C06",
+        "c1": "#4A4436",
+        "c2": "#E8CF8A",
+        "c3": "#1C1A14",
+        "c4": "#C9A24A",
+        "tint": "#DBDAD7",
+        "accent": "#E8CF8A",
+        "shadow": "#2C281E",
+        "shine": "#CCCBC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#7A7A7A",
+        "c2": "#D2D2D2",
+        "c3": "#3E3E3E",
+        "c4": "#ABABAB",
+        "tint": "#E4E4E4",
+        "accent": "#ABABAB",
+        "shadow": "#464646",
+        "shine": "#DADADA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "crimson-ramp",
+      "name": "Crimson ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2E0608",
+        "c1": "#C22A2A",
+        "c2": "#F5B5B5",
+        "c3": "#7A1414",
+        "c4": "#E06A6A",
+        "tint": "#F3D4D4",
+        "accent": "#E06A6A",
+        "shadow": "#781819",
+        "shine": "#EEC3C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFFFFF",
+        "c3": "#0047BA",
+        "c4": "#D00000",
+        "tint": "#FFF6CC",
+        "accent": "#0047BA",
+        "shadow": "#615100",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-festival",
+      "name": "Sunset festival",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0F1F",
+        "c1": "#F26B5B",
+        "c2": "#FFD08A",
+        "c3": "#A33A6B",
+        "c4": "#5A2D82",
+        "tint": "#FCE1DE",
+        "accent": "#FFD08A",
+        "shadow": "#963D3D",
+        "shine": "#FBD6D1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-jelly-speaker",
+      "name": "Y2K jelly speaker",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#24124A",
+        "c1": "#C3D0FF",
+        "c2": "#FFB8F2",
+        "c3": "#8AF2E0",
+        "c4": "#9B7BFF",
+        "tint": "#F3F6FF",
+        "accent": "#9B7BFF",
+        "shadow": "#605A8F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "citrus-beats",
+      "name": "Citrus beats",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#FFB627",
+        "c2": "#FFF1C2",
+        "c3": "#FF6B1F",
+        "c4": "#6BBF4A",
+        "tint": "#FFF0D4",
+        "accent": "#FF6B1F",
+        "shadow": "#855D0F",
+        "shine": "#FFEBC3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mint-fresh",
+      "name": "Mint fresh",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#10352A",
+        "c1": "#3CC79A",
+        "c2": "#D6F7EA",
+        "c3": "#1E8A66",
+        "c4": "#FF7A8A",
+        "tint": "#D8F4EB",
+        "accent": "#FF7A8A",
+        "shadow": "#267E62",
+        "shine": "#C8EFE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-groove",
+      "name": "Berry groove",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#33102E",
+        "c1": "#8E3A7A",
+        "c2": "#F7D2EA",
+        "c3": "#521A46",
+        "c4": "#FFB84D",
+        "tint": "#E8D8E4",
+        "accent": "#FFB84D",
+        "shadow": "#612554",
+        "shine": "#DFC8DA",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

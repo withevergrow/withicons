@@ -1,0 +1,32 @@
+{
+  "name": "percent",
+  "intent": "pulses like a sale badge, turns on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "tada",
+      "amount": 0.8
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "tag",
+      "effect": "fade"
+    },
+    {
+      "to": "dollar-sign",
+      "effect": "rotate"
+    }
+  ]
+}

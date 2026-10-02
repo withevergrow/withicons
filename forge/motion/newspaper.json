@@ -1,0 +1,15 @@
+{
+  "name": "newspaper",
+  "intent": "slides in like the morning paper landing on the doorstep",
+  "loop": { "preset": "float", "amount": 0.5, "duration": 3.2 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.8, "duration": 0.7 },
+  "alt": [
+    { "preset": "flip", "duration": 1 },
+    { "preset": "tilt", "origin": [12, 20], "amount": 0.7 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "file-text", "effect": "slide-left" },
+    { "to": "newspaper@solid", "effect": "scale" }
+  ]
+}

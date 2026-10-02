@@ -1,0 +1,78 @@
+{
+  "name": "washing-machine",
+  "category": "home",
+  "description": "A front-loading washing machine with a control panel and round door for laundry and housekeeping.",
+  "aliases": [
+    "washer",
+    "laundry",
+    "washing",
+    "clothes-washer",
+    "laundromat",
+    "wash",
+    "dryer",
+    "tumble-dryer",
+    "washer-dryer",
+    "launderette"
+  ],
+  "tags": [
+    "laundry",
+    "appliance",
+    "clothes",
+    "clean",
+    "housework",
+    "home"
+  ],
+  "paths": [
+    {
+      "d": "M6 2.5 H18 A2 2 0 0 1 20 4.5 V19.5 A2 2 0 0 1 18 21.5 H6 A2 2 0 0 1 4 19.5 V4.5 A2 2 0 0 1 6 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 6.5 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M16 14.5 A4 4 0 1 1 8 14.5 A4 4 0 1 1 16 14.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 4.5 H7.5 M10 4.5 H10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 2.5 H18 A2 2 0 0 1 20 4.5 V19.5 A2 2 0 0 1 18 21.5 H6 A2 2 0 0 1 4 19.5 V4.5 A2 2 0 0 1 6 2.5 Z"
+  ],
+  "cutouts": [
+    "M4 6.5 H20",
+    "M7 4.5 H7.5",
+    "M10 4.5 H10.5",
+    "M16 14.5 A4 4 0 1 1 8 14.5 A4 4 0 1 1 16 14.5"
+  ],
+  "synonyms": [
+    "washing machines",
+    "washers",
+    "laundry room",
+    "laundry service",
+    "do the laundry",
+    "wash clothes",
+    "washing clothes",
+    "clothes",
+    "dry cleaning",
+    "spin cycle",
+    "wash cycle",
+    "detergent",
+    "housework",
+    "chores",
+    "household chores",
+    "cleaning",
+    "home appliance",
+    "white goods",
+    "utility room",
+    "laundrette",
+    "coin laundry",
+    "washing mashine",
+    "wasing machine",
+    "laundary"
+  ]
+}

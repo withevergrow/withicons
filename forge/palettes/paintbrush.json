@@ -1,0 +1,446 @@
+{
+  "name": "paintbrush",
+  "palettes": [
+    {
+      "id": "artist-red",
+      "name": "Artist red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#C0392B",
+        "c2": "#2E86DE",
+        "c3": "#B0B7C0",
+        "c4": "#E8D2A6",
+        "tint": "#F2D7D5",
+        "accent": "#2E86DE",
+        "shadow": "#571811",
+        "shine": "#ECC4BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "birch-brush",
+      "name": "Birch brush",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#2A1D10",
+        "c1": "#D9B07A",
+        "c2": "#E63946",
+        "c3": "#A8B0BA",
+        "c4": "#F3E3C3",
+        "tint": "#F7EFE4",
+        "accent": "#E63946",
+        "shadow": "#5F4930",
+        "shine": "#F4E7D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "watercolor",
+      "name": "Watercolour",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0E2236",
+        "c1": "#2F6FAE",
+        "c2": "#F2A541",
+        "c3": "#C3CAD2",
+        "c4": "#E3EEF8",
+        "tint": "#D5E2EF",
+        "accent": "#F2A541",
+        "shadow": "#18395A",
+        "shine": "#C1D4E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "house-painter",
+      "name": "House painter",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1A1E",
+        "c1": "#F2F0EA",
+        "c2": "#3B82F6",
+        "c3": "#9CA3AF",
+        "c4": "#1E293B",
+        "tint": "#FCFCFB",
+        "accent": "#3B82F6",
+        "shadow": "#5B5A5B",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sumi-ink",
+      "name": "Sumi ink",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#0D0D0D",
+        "c1": "#8B5E34",
+        "c2": "#1C1C1C",
+        "c3": "#C9A26B",
+        "c4": "#EDE3D0",
+        "tint": "#E8DFD6",
+        "accent": "#C9A26B",
+        "shadow": "#332519",
+        "shine": "#DCCFC2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "enamel-teal",
+      "name": "Enamel teal",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#031F1C",
+        "c1": "#0F766E",
+        "c2": "#F2C14E",
+        "c3": "#B0B7C0",
+        "c4": "#E8F3F1",
+        "tint": "#CFE4E2",
+        "accent": "#F2C14E",
+        "shadow": "#073935",
+        "shine": "#B7D6D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "primary",
+      "name": "Primary kit",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#FFD400",
+        "c2": "#E63946",
+        "c3": "#1D4ED8",
+        "c4": "#E5E7EB",
+        "tint": "#FFF6CC",
+        "accent": "#1D4ED8",
+        "shadow": "#5B4E0E",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-brush",
+      "name": "Pastel studio",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3D3550",
+        "c1": "#C9E4F6",
+        "c2": "#F9C6D3",
+        "c3": "#FFE7A8",
+        "c4": "#D9C8F2",
+        "tint": "#F4FAFD",
+        "accent": "#F9C6D3",
+        "shadow": "#676A82",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-brush",
+      "name": "Candy brush",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FF4FA3",
+        "c2": "#3ED2C8",
+        "c3": "#FFD23F",
+        "c4": "#9B6BFF",
+        "tint": "#FFDCED",
+        "accent": "#3ED2C8",
+        "shadow": "#802151",
+        "shine": "#FFCAE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-brush",
+      "name": "Y2K brush",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23224A",
+        "c1": "#B8C4FF",
+        "c2": "#FF9EE8",
+        "c3": "#C9FF6B",
+        "c4": "#E8ECFF",
+        "tint": "#F1F3FF",
+        "accent": "#C9FF6B",
+        "shadow": "#505380",
+        "shine": "#EAEDFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-graffiti",
+      "name": "Neon graffiti",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#3DF2FF",
+        "c1": "#0A1220",
+        "c2": "#FF3DCB",
+        "c3": "#FFE14D",
+        "c4": "#7CFF4F",
+        "tint": "#1E6C79",
+        "accent": "#FF3DCB",
+        "shadow": "#04070D",
+        "shine": "#A8F9FF",
+        "edge": "#0F1320"
+      }
+    },
+    {
+      "id": "ochre-clay",
+      "name": "Ochre & clay",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E1A10",
+        "c1": "#B5703F",
+        "c2": "#D9A441",
+        "c3": "#8A8F86",
+        "c4": "#F0DCC0",
+        "tint": "#F0E2D9",
+        "accent": "#D9A441",
+        "shadow": "#57341E",
+        "shine": "#E9D4C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-brush",
+      "name": "70s studio",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#D9622B",
+        "c2": "#F2B134",
+        "c3": "#3D7068",
+        "c4": "#8E3B2E",
+        "tint": "#F7E0D5",
+        "accent": "#F2B134",
+        "shadow": "#5F2B14",
+        "shine": "#F4D0BF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "violet-ramp",
+      "name": "Violet ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#1E0B4B",
+        "c1": "#7C3AED",
+        "c2": "#C4B5FD",
+        "c3": "#5B21B6",
+        "c4": "#EDE9FE",
+        "tint": "#E5D8FB",
+        "accent": "#C4B5FD",
+        "shadow": "#3A197C",
+        "shine": "#D8C4FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "charcoal",
+      "name": "Charcoal sketch",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#0F0F0F",
+        "c1": "#7A7A7A",
+        "c2": "#2E2E2E",
+        "c3": "#BDBDBD",
+        "c4": "#EDEDED",
+        "tint": "#E4E4E4",
+        "accent": "#BDBDBD",
+        "shadow": "#2F2F2F",
+        "shine": "#D7D7D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seascape",
+      "name": "Seascape",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#1597BB",
+        "c2": "#F4E1B5",
+        "c3": "#8FE3CF",
+        "c4": "#DFF6FF",
+        "tint": "#D0EAF1",
+        "accent": "#F4E1B5",
+        "shadow": "#0B4963",
+        "shine": "#B9E0EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "botanical",
+      "name": "Botanical",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#16261A",
+        "c1": "#4E7D45",
+        "c2": "#E28FA6",
+        "c3": "#C9CCB0",
+        "c4": "#EAF2DA",
+        "tint": "#DCE5DA",
+        "accent": "#E28FA6",
+        "shadow": "#274027",
+        "shine": "#CAD8C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-stain",
+      "name": "Berry stain",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0A1F",
+        "c1": "#8E3A6E",
+        "c2": "#F5C6DD",
+        "c3": "#C9CED6",
+        "c4": "#4B1D3F",
+        "tint": "#E8D8E2",
+        "accent": "#F5C6DD",
+        "shadow": "#481837",
+        "shine": "#DDC4D4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gilded",
+      "name": "Gilded brush",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#D4AF37",
+        "c1": "#1F1F22",
+        "c2": "#E8C468",
+        "c3": "#F5E7A1",
+        "c4": "#8C6D1F",
+        "tint": "#67592A",
+        "accent": "#E8C468",
+        "shadow": "#000000",
+        "shine": "#ECDBA5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "spring-mural",
+      "name": "Spring mural",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#1F3324",
+        "c1": "#7BC67E",
+        "c2": "#FFB7C5",
+        "c3": "#FFF0A8",
+        "c4": "#C7E9F5",
+        "tint": "#E5F4E5",
+        "accent": "#FFB7C5",
+        "shadow": "#3B5F3F",
+        "shine": "#D7EED8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#0050EF",
+        "c3": "#FFFFFF",
+        "c4": "#D10000",
+        "tint": "#FFF6CC",
+        "accent": "#0050EF",
+        "shadow": "#4D4000",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brand-blue",
+      "name": "Brand blue",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#1D4ED8",
+        "c2": "#F59E0B",
+        "c3": "#93C5FD",
+        "c4": "#DBEAFE",
+        "tint": "#D2DCF7",
+        "accent": "#F59E0B",
+        "shadow": "#102A6C",
+        "shine": "#BBCAF3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine paint",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A3D",
+        "c1": "#FF2E93",
+        "c2": "#00C2FF",
+        "c3": "#FFE600",
+        "c4": "#7CFF4F",
+        "tint": "#FFD5E9",
+        "accent": "#FFE600",
+        "shadow": "#6B1557",
+        "shine": "#FFC0DF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "user-pen",
+  "intent": "the pen scribbles as if profile details are being edited",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      13,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      13,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "nod",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "user-check",
+      "effect": "morph"
+    },
+    {
+      "to": "pencil",
+      "effect": "fade"
+    },
+    {
+      "to": "user",
+      "effect": "fade"
+    }
+  ]
+}

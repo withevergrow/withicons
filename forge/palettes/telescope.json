@@ -1,0 +1,27 @@
+{
+  "name": "telescope",
+  "palettes": [
+    {"id":"white-refractor","name":"White refractor","tags":["true-to-life"],"colors":{"ink":"#1E242C","c1":"#EEF1F4","c2":"#C8CACD","c3":"#3A3D44","c4":"#7FB2FF","tint":"#FAFBFC","accent":"#FFD23F","shadow":"#838586","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"brass-spyglass","name":"Brass spyglass","tags":["true-to-life","vintage"],"colors":{"ink":"#614D21","c1":"#C9A044","c2":"#A98639","c3":"#5E3B1E","c4":"#F2E1B0","tint":"#F0E4CB","accent":"#5E3B1E","shadow":"#6F5825","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"black-tube","name":"Black tube","tags":["true-to-life"],"colors":{"ink":"#000000","c1":"#3A3D44","c2":"#696C71","c3":"#C9CED6","c4":"#E5484D","tint":"#C8C9CB","accent":"#FFD23F","shadow":"#202225","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"observatory-orange","name":"Observatory orange","tags":["true-to-life","vivid"],"colors":{"ink":"#7D3F10","c1":"#F57C1F","c2":"#F79B55","c3":"#2F3540","c4":"#D6DBE2","tint":"#FCDAC0","accent":"#FFE45E","shadow":"#874411","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"navy-stargazer","name":"Navy stargazer","tags":["true-to-life"],"colors":{"ink":"#0A1430","c1":"#2C4A8C","c2":"#5F75A8","c3":"#F2C14E","c4":"#D6DBE2","tint":"#C4CCDF","accent":"#F2C14E","shadow":"#18294D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"junior-astronomer","name":"Junior astronomer","tags":["candy"],"colors":{"ink":"#842222","c1":"#E23B3B","c2":"#E96A6A","c3":"#2F7BDB","c4":"#FFD23F","tint":"#F7C8C8","accent":"#FFD23F","shadow":"#7C2020","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"starry-night","name":"Starry night","tags":["dark"],"colors":{"ink":"#0A0C1A","c1":"#3A4880","c2":"#69749E","c3":"#F2C14E","c4":"#A6B8E8","tint":"#C8CCDB","accent":"#F2C14E","shadow":"#202846","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"galaxy","name":"Galaxy","tags":["neon","on-dark"],"colors":{"ink":"#F6F2FF","c1":"#8A5CFF","c2":"#A683FF","c3":"#FF2BD6","c4":"#2BF0FF","tint":"#DED1FF","accent":"#FFE45E","shadow":"#4C338C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"nebula","name":"Nebula","tags":["vivid"],"colors":{"ink":"#692C69","c1":"#B84DB8","c2":"#C978C9","c3":"#4F6BD8","c4":"#FF9EC2","tint":"#EBCDEB","accent":"#FFD23F","shadow":"#652A65","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"moonlight","name":"Moonlight","tags":["grayscale"],"colors":{"ink":"#111111","c1":"#B8BCC4","c2":"#9B9EA5","c3":"#6E737C","c4":"#E9ECF0","tint":"#EBECEE","accent":"#F2E6A8","shadow":"#65676C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"pastel-cosmos","name":"Pastel cosmos","tags":["pastel"],"colors":{"ink":"#534C66","c1":"#C9B8F5","c2":"#A99BCE","c3":"#B8D8F5","c4":"#FFD3E0","tint":"#F0EBFC","accent":"#FFD3E0","shadow":"#6F6587","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"indigo-ramp","name":"Indigo ramp","tags":["mono"],"colors":{"ink":"#2F2F70","c1":"#5B5BD6","c2":"#8282E0","c3":"#A9A9EE","c4":"#32308A","tint":"#D1D1F4","accent":"#A9A9EE","shadow":"#323276","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"space-age","name":"70s space age","tags":["retro"],"colors":{"ink":"#7E3E20","c1":"#E2703A","c2":"#E99269","c3":"#F3C64B","c4":"#3E8C84","tint":"#F7D7C8","accent":"#F3C64B","shadow":"#7C3E20","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"old-observatory","name":"Old observatory","tags":["vintage"],"colors":{"ink":"#2B2420","c1":"#7D8C8A","c2":"#9CA8A6","c3":"#B5654A","c4":"#EADFC8","tint":"#DBDFDE","accent":"#B5654A","shadow":"#454D4C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dusk-watch","name":"Dusk watch","tags":["sunset"],"colors":{"ink":"#85363F","c1":"#E05A6A","c2":"#E7828E","c3":"#FFB25A","c4":"#5A2A6E","tint":"#F6D1D5","accent":"#FFB25A","shadow":"#7B323A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sea-captain","name":"Sea captain","tags":["ocean"],"colors":{"ink":"#0D283B","c1":"#1E5F8A","c2":"#5485A6","c3":"#C9A044","c4":"#F2E6C9","tint":"#C0D2DE","accent":"#C9A044","shadow":"#11344C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"campsite","name":"Campsite","tags":["nature"],"colors":{"ink":"#2B4228","c1":"#4F7A4A","c2":"#799A75","c3":"#C4733E","c4":"#F2E6C9","tint":"#CEDACC","accent":"#F2C14E","shadow":"#2B4329","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"winter-solstice","name":"Winter solstice","tags":["seasonal"],"colors":{"ink":"#405261","c1":"#8FB9D9","c2":"#789BB6","c3":"#E26D7A","c4":"#F4FAFF","tint":"#E0EBF4","accent":"#E26D7A","shadow":"#4F6677","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k","name":"Y2K","tags":["y2k"],"colors":{"ink":"#59457F","c1":"#B48CFF","c2":"#9776D6","c3":"#5CF2D6","c4":"#FF7AD9","tint":"#EADFFF","accent":"#FF7AD9","shadow":"#634D8C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"gold-black","name":"Gold & black","tags":["luxe"],"colors":{"ink":"#5F4E19","c1":"#D4AF37","c2":"#B2932E","c3":"#3C4049","c4":"#F3E7C4","tint":"#F3E9C7","accent":"#3C4049","shadow":"#75601E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine","name":"Dopamine brights","tags":["vivid"],"colors":{"ink":"#5F4E18","c1":"#FFD23F","c2":"#D6B035","c3":"#FF5C8A","c4":"#5C7CFF","tint":"#FFF2C9","accent":"#FF5C8A","shadow":"#8C7423","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#0046C7","c2":"#3D72D4","c3":"#FFD200","c4":"#FFFFFF","tint":"#B8CBEF","accent":"#FFD200","shadow":"#00276D","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

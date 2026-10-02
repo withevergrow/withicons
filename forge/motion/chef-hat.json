@@ -1,0 +1,8 @@
+{
+  "name": "chef-hat",
+  "intent": "the puffy toque sways and wobbles like a busy chef",
+  "loop": { "preset": "sway", "origin": [12, 21], "amount": 0.6, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [12, 21], "amount": 1 },
+  "alt": [ { "preset": "tada" }, { "preset": "float", "amount": 0.6 }, { "preset": "bounce", "origin": [12, 21] } ],
+  "swap": [ { "to": "chef-hat@solid", "effect": "scale" }, { "to": "cooking-pot", "effect": "slide-up" }, { "to": "utensils", "effect": "fade" } ]
+}

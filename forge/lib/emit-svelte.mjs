@@ -30,15 +30,15 @@ const attrsSrc = `export function svgAttrs(name, s, o, rest) {
   return p
 }`
 
-const svelteTypes = `
-import type { SvelteComponent } from 'svelte'
+const svelteTypes = (ctx) => `
+import type { SvelteComponent, ComponentConstructorOptions } from 'svelte'
 import type { SVGAttributes } from 'svelte/elements'
 export interface WithIconProps extends Omit<SVGAttributes<SVGSVGElement>, 'color' | 'title'> {
   /** Width and height (number = px, or any CSS length). Default 24. */
   size?: number | string
   /** Icon color. Default 'currentColor' (inherits the CSS text color). */
   color?: string
-  /** Stroke width in 24-grid units. Only affects styles with live strokes (line, duo). */
+  /** Stroke width in 24-grid units. Only affects styles with live strokes (${ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name).join(', ')}). */
   strokeWidth?: number | string
   /** Keep the stroke width constant in px as size changes. */
   absoluteStrokeWidth?: boolean
@@ -60,12 +60,22 @@ export interface IconBaseProps extends WithIconProps {
   name?: string
   variant?: StyleName
 }
-export type IconEvents = { [evt: string]: CustomEvent<any> }
+/** Icons dispatch no component events. Svelte 5: pass onclick etc. as props. Svelte 4: put on:click on a wrapping element. */
+export type IconEvents = {}
 export type IconSlots = { default: {} }
-/** Every icon component (class form: understood by Svelte 4 and Svelte 5 tooling). */
+/** Instance type of every icon (Svelte 4 style: ComponentProps<Home>, bind:this). */
 export declare class WithIcon extends SvelteComponent<WithIconProps, IconEvents, IconSlots> {}
 export declare class WithGenericIcon extends SvelteComponent<IconProps, IconEvents, IconSlots> {}
 export declare class WithIconBase extends SvelteComponent<IconBaseProps, IconEvents, IconSlots> {}
+/**
+ * The type of every icon component: a Svelte 4 component class AND a Svelte 5 \`Component\`, so
+ * \`ComponentProps<typeof Home>\` (Svelte 5), \`ComponentProps<Home>\` (Svelte 4) and \`Component<WithIconProps>\` all work.
+ * Type an icon passed as a prop with it: \`export let icon: WithIconComponent\`.
+ */
+export interface WithIconComponent<Props extends Record<string, any> = WithIconProps, Instance = WithIcon> {
+  new (options: ComponentConstructorOptions<Props>): Instance
+  (internal: unknown, props: Props & { $$events?: IconEvents; $$slots?: IconSlots }): {}
+}
 `
 
 export default async function emit(ctx) {
@@ -76,9 +86,9 @@ export default async function emit(ctx) {
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/svelte ${ctx.version} — generated, do not edit\n`
 
-  W('types.d.ts', namesAndAliasesDts(ctx) + svelteTypes)
+  W('types.d.ts', namesAndAliasesDts(ctx) + svelteTypes(ctx))
   W('attrs.js', `${header}export const DEFAULT_STYLE = ${J(D)}\nexport const STYLES = ${J(styleTable(ctx))}\n${attrsSrc}\n`)
-  W('attrs.d.ts', `import type { StyleName } from './types.js'\nexport declare const DEFAULT_STYLE: 'line'\nexport declare const STYLES: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n`)
+  W('attrs.d.ts', `import type { StyleName } from './types.js'\nexport declare const DEFAULT_STYLE: ${J(D)}\nexport declare const STYLES: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n`)
 
   W('IconBase.svelte', `<script>
   // @withicons/svelte — the shared renderer behind every icon (Svelte 4 + 5).
@@ -118,13 +128,13 @@ export default async function emit(ctx) {
 
 <IconBase {...$$props} name="${i.name}" variant="${r.style}" {iconNode}><slot /></IconBase>
 `)
-      W(`${s}/icons/${i.name}.svelte.d.ts`, `import type { WithIcon } from '../../types.js'\n/** ${i.name} (${s}) — ${i.description.replace(/\*\//g, '')} */\ndeclare const ${i.pascal}: typeof WithIcon\nexport default ${i.pascal}\n`)
+      W(`${s}/icons/${i.name}.svelte.d.ts`, `import type { WithIcon, WithIconComponent } from '../../types.js'\n/** ${i.name} (${s}) — ${i.description.replace(/\*\//g, '')} */\ndeclare const ${i.pascal}: WithIconComponent\ntype ${i.pascal} = WithIcon\nexport default ${i.pascal}\n`)
       files += 2
       idx.push(`export { default as ${i.pascal}, default as ${i.pascal}Icon } from './icons/${i.name}.svelte'`)
-      idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: typeof WithIcon\nexport declare const ${i.pascal}Icon: typeof WithIcon`)
+      idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: C\nexport type ${i.pascal} = I\nexport declare const ${i.pascal}Icon: C\nexport type ${i.pascal}Icon = I`)
     }
     W(`${s}/index.js`, `${header}${idx.join('\n')}\n`)
-    W(`${s}/index.d.ts`, `import type { WithIcon } from '../types.js'\n${idxDts.join('\n')}\n`)
+    W(`${s}/index.d.ts`, `import type { WithIcon as I, WithIconComponent as C } from '../types.js'\n${idxDts.join('\n')}\n`)
     W(`${s}/nodes.js`, `${header}export const nodes = ${J(nodes)}\nexport const fallback = ${J(fallback)}\n`)
   }
 
@@ -162,7 +172,7 @@ export function findIcon(name, variant) {
 
 {#if found}<IconBase {...$$restProps} name={found.name} variant={found.variant} iconNode={found.iconNode}><slot /></IconBase>{/if}
 `)
-  W('icon.d.ts', `import type { WithGenericIcon } from './types.js'\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * Bundle cost: imports every icon in every style (${ctx.icons.length} x ${styleNames.length}); prefer named imports.\n */\ndeclare const Icon: typeof WithGenericIcon\nexport default Icon\nexport { Icon }\n`)
+  W('icon.d.ts', `import type { WithGenericIcon, WithIconComponent, IconProps } from './types.js'\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * Bundle cost: imports every icon in every style (${ctx.icons.length} x ${styleNames.length}); prefer named imports.\n */\ndeclare const Icon: WithIconComponent<IconProps, WithGenericIcon>\ntype Icon = WithGenericIcon\nexport default Icon\nexport { Icon }\n`)
 
   W('index.js', `${header}export * from './${D}/index.js'
 export { default as Icon } from './Icon.svelte'
@@ -171,11 +181,12 @@ export { iconNames, styleNames } from './meta.js'
 `)
   W('index.d.ts', `export * from './${D}/index.js'
 export { Icon } from './icon.js'
-import type { WithIconBase } from './types.js'
+import type { WithIconBase, WithIconComponent, IconBaseProps } from './types.js'
 /** Low-level renderer for your own IconNode data: <IconBase iconNode={...} name="my-icon" variant="line" />. */
-export declare const IconBase: typeof WithIconBase
+export declare const IconBase: WithIconComponent<IconBaseProps, WithIconBase>
+export type IconBase = WithIconBase
 export { iconNames, styleNames } from './meta.js'
-export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconProps, IconProps, IconComponentProps, IconBaseProps } from './types.js'
+export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconComponent, WithIconProps, IconProps, IconComponentProps, IconBaseProps } from './types.js'
 `)
   await out.flush()
 
@@ -191,10 +202,12 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconProps,
     ex[`./${s}/icons/*`] = e(`./dist/${s}/icons/*.svelte.d.ts`, `./dist/${s}/icons/*.svelte`)
   }
   ex['./package.json'] = './package.json'
-  const tv = { icon: ['./dist/icon.d.ts'], 'icons/*': [`./dist/${D}/icons/*.svelte.d.ts`] }
-  for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = [`./dist/${s}/icons/*.svelte.d.ts`] }
+  // legacy moduleResolution 'node': '<style>/icons/home' and '<style>/icons/home.svelte' both resolve (fallback list)
+  const deep = s => [`./dist/${s}/icons/*.svelte.d.ts`, `./dist/${s}/icons/*.d.ts`]
+  const tv = { icon: ['./dist/icon.d.ts'], 'icons/*': deep(D) }
+  for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = deep(s) }
   const pkg = {
-    ...basePkg(ctx, '@withicons/svelte', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable Svelte components (Svelte 4 and 5).`, ['svelte', 'sveltekit', 'svelte-icons', 'svg-icons']),
+    ...basePkg(ctx, '@withicons/svelte', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable Svelte components (Svelte 4 and 5).`, ['svelte', 'svelte5', 'sveltekit', 'svelte-icons', 'svelte-components', 'svg-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     svelte: './dist/index.js', types: './dist/index.d.ts',
     exports: ex, typesVersions: { '*': tv },
@@ -231,12 +244,79 @@ function svelteReadme(ctx) {
 \`<IconBase iconNode={[['path', { d: 'M4 12h16' }]]} name="my-icon" variant="line" />\` renders your own IconNode data
 (\`[tag, attrs][]\`, 24x24 grid) with the same props.
 
+## Theming palette styles in Svelte
+
+Set the palette variables with Svelte's \`--css-prop\` syntax, a \`style\` attribute on the icon, or any parent:
+
+\`\`\`svelte
+<script>
+  import { Rocket } from '@withicons/svelte/retro';
+  import { Home } from '@withicons/svelte/sticker';
+</script>
+
+<Rocket --with-retro-1="#fde047" --with-retro-2="#a855f7" />
+<Home style="--with-sticker-sky: #22c55e" size={48} />
+\`\`\`
+
+## Animation in Svelte
+
+\`\`\`svelte
+<script>
+  import '@withicons/motion/motion.css';
+  import '@withicons/motion/icons.css';
+  import { motion } from '@withicons/motion';
+  import { Bell, Rocket } from '@withicons/svelte';
+
+  // optional: a Svelte action for the JS triggers (inview, hover that always finishes)
+  const wm = (el, name) => { const m = motion(el, name, { trigger: 'inview' }); return { destroy: () => m.destroy() } };
+</script>
+
+<span class="wm wm-loop" data-wm="bell"><Bell /></span>
+<button class="wm-trigger"><span class="wm wm-hover" data-wm="bell"><Bell /></span> Alerts</button>
+<span use:wm={'rocket'}><Rocket size={32} /></span>
+\`\`\`
+
+## Right-to-left layouts
+
+Icons are drawn left to right. Mirror the directional ones (arrows, chevrons, undo/redo, send, log-in/out) in RTL
+with one global rule. The icon's own class takes the flip, so a motion wrapper around it can still move:
+
+\`\`\`svelte
+<ChevronRight class="rtl-mirror" />
+
+<style>
+  :global([dir='rtl'] .rtl-mirror) { transform: scaleX(-1); }
+</style>
+\`\`\`
+
+## TypeScript
+
+Every icon is typed as \`WithIconComponent\`: a Svelte 4 component class and a Svelte 5 \`Component\` at once.
+
+\`\`\`ts
+import type { ComponentProps } from 'svelte';
+import type { WithIconComponent, WithIconProps, IconName, StyleName } from '@withicons/svelte';
+import { Home } from '@withicons/svelte';
+
+type Props = ComponentProps<typeof Home>;   // Svelte 5 (Svelte 4: ComponentProps<Home>)
+const nav: { label: string; icon: WithIconComponent }[] = [{ label: 'Home', icon: Home }];
+\`\`\`
+
+\`name\` on \`<Icon>\` is checked against \`IconName | IconAlias\` and \`variant\` against \`StyleName\`.
+
 ## Svelte notes
 
 - Components are shipped as \`.svelte\` source in the classic syntax, which both Svelte 4 and Svelte 5 compile
-  (Svelte 5 runs them in legacy mode; they work inside runes components). Do not force \`compilerOptions.runes: true\`
-  on \`node_modules\` — use \`dynamicCompileOptions\` for your own files instead.
-- Svelte 5 event props (\`onclick\`) spread onto the \`<svg>\`; Svelte 4 \`on:click\` is not forwarded — wrap the icon in a \`<button>\`.
+  (Svelte 5 runs them in legacy mode; they work inside runes components and hydrate cleanly after SSR / SvelteKit).
+  Do not force \`compilerOptions.runes: true\` on \`node_modules\`: use \`dynamicCompileOptions\` for your own files instead.
+- Svelte 5 event props (\`onclick\`) spread onto the \`<svg>\`. Icons dispatch no component events, so Svelte 4 \`on:click\`
+  is not forwarded: put it on a wrapping \`<button>\` (the better pattern for accessibility anyway).
+- Dev-server speed (SvelteKit / Vite SSR): \`import { Home } from '@withicons/svelte'\` makes the dev server compile every
+  icon of that style (${ctx.icons.length} small \`.svelte\` files) on a cold start, which can take tens of seconds. Deep imports compile only
+  what you use: \`import Home from '@withicons/svelte/icons/home'\`, \`import Home from '@withicons/svelte/solid/icons/home'\`.
+  Production builds tree-shake both forms to the same output.
+- Tree-shaking is per icon: the first icon adds about 3 KB gzipped on Svelte 4 and about 9 KB on Svelte 5 (the shared
+  renderer plus Svelte 5's legacy-mode runtime, paid once), and each further icon about 0.2 KB.
 `
   md = custom.test(md) ? md.replace(custom, svelteCustom.trimEnd()) : md + '\n' + svelteCustom
   return md

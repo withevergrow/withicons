@@ -1,0 +1,74 @@
+{
+  "name": "clapperboard",
+  "category": "media",
+  "description": "A film slate with its striped clapper stick raised for movies, video production and takes.",
+  "aliases": [
+    "clapper",
+    "clapboard",
+    "movie-slate",
+    "film-slate",
+    "film-production",
+    "action",
+    "take",
+    "cinema-clapper",
+    "director",
+    "clapper-board",
+    "slate-board"
+  ],
+  "tags": [
+    "media",
+    "film",
+    "movie",
+    "production",
+    "video"
+  ],
+  "paths": [
+    {
+      "d": "M3 11 H21 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 11 L20.5 7 L19.75 3.5 L2.25 7.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 10 L9 6 M11.75 9 L14 5 M16.75 7.75 L18.75 3.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 11 H21 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 Z",
+    "M3 11 L20.5 7 L19.75 3.5 L2.25 7.5 Z"
+  ],
+  "cutouts": [
+    "M7 10 L9 6",
+    "M11.75 9 L14 5",
+    "M16.75 7.75 L18.75 3.75"
+  ],
+  "synonyms": [
+    "movie",
+    "movies",
+    "film",
+    "films",
+    "cinema",
+    "scene",
+    "shoot",
+    "filming",
+    "film making",
+    "filmmaking",
+    "video production",
+    "production",
+    "lights camera action",
+    "hollywood",
+    "entertainment",
+    "premiere",
+    "trailer",
+    "watch movie",
+    "streaming",
+    "tv show",
+    "video editing",
+    "clap",
+    "cut",
+    "clapperbord"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "toilet",
+  "palettes": [
+    {"id":"classic-porcelain","name":"Classic porcelain","tags":["true-to-life"],"colors":{"ink":"#1E2226","c1":"#F4F4F2","c2":"#E2E5E8","c3":"#8FC9E8","c4":"#9AA1A8","tint":"#F9F9F8","accent":"#8FC9E8","shadow":"#7A7C7E","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"restroom-blue","name":"Restroom blue","tags":["true-to-life","corporate"],"colors":{"ink":"#06183A","c1":"#1F5FBF","c2":"#DCE8FA","c3":"#0E2E6E","c4":"#8FB4EB","tint":"#C0D2ED","accent":"#FFD23F","shadow":"#0E2B56","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"avocado-70s","name":"Avocado 70s","tags":["true-to-life","retro"],"colors":{"ink":"#1E2208","c1":"#8A9A3A","c2":"#A6B356","c3":"#E8D9A8","c4":"#4E5A1E","tint":"#DEE3C8","accent":"#C98A3A","shadow":"#3E451A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"fifties-pink","name":"Fifties pink","tags":["true-to-life","vintage"],"colors":{"ink":"#3E1420","c1":"#F2A7B5","c2":"#F7C6CF","c3":"#2E2E2E","c4":"#4FB8B0","tint":"#FBE6EA","accent":"#4FB8B0","shadow":"#6D4B51","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"matte-black","name":"Matte black","tags":["true-to-life","dark"],"colors":{"ink":"#050506","c1":"#3A3A40","c2":"#54545C","c3":"#C9A44C","c4":"#1A1A1E","tint":"#C8C8CA","accent":"#C9A44C","shadow":"#1A1A1D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"clean-mint","name":"Clean mint","tags":["true-to-life","pastel"],"colors":{"ink":"#0F3A2E","c1":"#BEEBDD","c2":"#E6F7F1","c3":"#3FB896","c4":"#8FD6BE","tint":"#E2F6F0","accent":"#7FDBFF","shadow":"#556A63","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"harvest-gold","name":"Harvest gold","tags":["retro"],"colors":{"ink":"#2E1F05","c1":"#D9A21B","c2":"#E8C04A","c3":"#8A4A1E","c4":"#F2E6CF","tint":"#F4E5BF","accent":"#8A4A1E","shadow":"#62490C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"tiled-bathroom","name":"Tiled bathroom","tags":["ocean"],"colors":{"ink":"#0A283A","c1":"#6EB8D9","c2":"#F2F2F0","c3":"#2E6A9E","c4":"#F2C14E","tint":"#D6EBF4","accent":"#F2C14E","shadow":"#315362","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"stoneware","name":"Stoneware","tags":["earthy"],"colors":{"ink":"#221E16","c1":"#B9AE9C","c2":"#D9D0C0","c3":"#6E5A40","c4":"#8A9A7A","tint":"#EBE8E3","accent":"#C66A45","shadow":"#534E46","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"sage-bathroom","name":"Sage bathroom","tags":["nature"],"colors":{"ink":"#1E2814","c1":"#9CAF88","c2":"#B8C8A8","c3":"#E8DCC8","c4":"#4E6040","tint":"#E3E9DE","accent":"#D98E6B","shadow":"#464F3D","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"plum-powder-room","name":"Plum powder room","tags":["vivid"],"colors":{"ink":"#1E0A1A","c1":"#7A3A6E","c2":"#9C5A8E","c3":"#F2D16B","c4":"#E8C8DE","tint":"#DAC8D6","accent":"#F2D16B","shadow":"#371A31","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"lilac-pastel","name":"Lilac pastel","tags":["pastel"],"colors":{"ink":"#2E2252","c1":"#C9B8F0","c2":"#FFD6E0","c3":"#FFF3C4","c4":"#B5E8E0","tint":"#E7DFF8","accent":"#FF9EC0","shadow":"#5A536C","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"candy-loo","name":"Candy loo","tags":["candy"],"colors":{"ink":"#4A0A30","c1":"#FF8AC4","c2":"#FFE680","c3":"#7ADFFF","c4":"#B48CFF","tint":"#FFDEEE","accent":"#7ADFFF","shadow":"#733E58","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"spring-clean","name":"Spring clean","tags":["seasonal"],"colors":{"ink":"#1E3A10","c1":"#D8F0C8","c2":"#FFF5B8","c3":"#7AC46A","c4":"#FFB3C6","tint":"#EDF8E6","accent":"#FFB3C6","shadow":"#616C5A","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"golden-throne","name":"Golden throne","tags":["luxe"],"colors":{"ink":"#1A1405","c1":"#D4AF37","c2":"#E6C65A","c3":"#1E1E22","c4":"#FFF4D0","tint":"#F3E9C7","accent":"#FFF4D0","shadow":"#5F4F19","shine":"#FFFFFF","edge":"#FFF8E1"}},
+    {"id":"teal-ramp","name":"Teal ramp","tags":["mono"],"colors":{"ink":"#062A27","c1":"#2BA8A0","c2":"#7CCFC8","c3":"#13615C","c4":"#BDEBE7","tint":"#C4E7E4","accent":"#13615C","shadow":"#134C48","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"concrete","name":"Concrete","tags":["grayscale"],"colors":{"ink":"#141414","c1":"#A6A6A6","c2":"#C8C8C8","c3":"#5A5A5A","c4":"#E6E6E6","tint":"#E6E6E6","accent":"#7A7A7A","shadow":"#4B4B4B","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"y2k-loo","name":"Y2K loo","tags":["y2k"],"colors":{"ink":"#22155A","c1":"#C4B5FF","c2":"#9DF7E5","c3":"#FFB8E8","c4":"#7B6CFF","tint":"#E4DEFF","accent":"#9DF7E5","shadow":"#585173","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"nightclub-loo","name":"Nightclub loo","tags":["neon","on-dark"],"colors":{"ink":"#0A0716","c1":"#FF3DCB","c2":"#B33DFF","c3":"#3DF5FF","c4":"#FFE53D","tint":"#FFC9F0","accent":"#3DF5FF","shadow":"#6E1A58","shine":"#FFFFFF","edge":"#15121F"}},
+    {"id":"high-contrast","name":"High contrast","tags":["accessible"],"colors":{"ink":"#000000","c1":"#FFD400","c2":"#FFFFFF","c3":"#0050B5","c4":"#111111","tint":"#FFEC8C","accent":"#0050B5","shadow":"#735F00","shine":"#FFFFFF","edge":"#FFFFFF"}},
+    {"id":"dopamine-brights","name":"Dopamine brights","tags":["vivid","candy"],"colors":{"ink":"#0A2E18","c1":"#3DDC97","c2":"#FFD23F","c3":"#FF4F9A","c4":"#3D7BFF","tint":"#A8EFD0","accent":"#FF4F9A","shadow":"#1B6344","shine":"#FFFFFF","edge":"#FFFFFF"}}
+  ]
+}

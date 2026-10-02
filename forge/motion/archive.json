@@ -1,0 +1,42 @@
+{
+  "name": "archive",
+  "intent": "settles into storage with a soft bounce",
+  "loop": {
+    "preset": "float",
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.6,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "drop",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "package",
+      "effect": "flip"
+    },
+    {
+      "to": "inbox",
+      "effect": "fade"
+    }
+  ]
+}

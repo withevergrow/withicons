@@ -1,0 +1,36 @@
+{
+  "name": "database",
+  "intent": "breathes like stored data, then settles on its base",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "server",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "badge-percent",
+  "category": "commerce",
+  "description": "A scalloped badge with a percent sign for discounts, sales, and offers.",
+  "aliases": [
+    "discount-badge",
+    "sale-badge",
+    "coupon-badge",
+    "deal-badge",
+    "percent-off",
+    "percent-badge",
+    "offer-badge",
+    "promo-badge",
+    "discount-sticker"
+  ],
+  "tags": [
+    "discount",
+    "sale",
+    "offer",
+    "promotion",
+    "coupon",
+    "ecommerce"
+  ],
+  "paths": [
+    {
+      "d": "M9.48 3.65 A2.75 2.75 0 0 1 14.52 3.65 A1.25 1.25 0 0 0 16.12 4.31 A2.75 2.75 0 0 1 19.69 7.88 A1.25 1.25 0 0 0 20.35 9.48 A2.75 2.75 0 0 1 20.35 14.52 A1.25 1.25 0 0 0 19.69 16.12 A2.75 2.75 0 0 1 16.12 19.69 A1.25 1.25 0 0 0 14.52 20.35 A2.75 2.75 0 0 1 9.48 20.35 A1.25 1.25 0 0 0 7.88 19.69 A2.75 2.75 0 0 1 4.31 16.12 A1.25 1.25 0 0 0 3.65 14.52 A2.75 2.75 0 0 1 3.65 9.48 A1.25 1.25 0 0 0 4.31 7.88 A2.75 2.75 0 0 1 7.88 4.31 A1.25 1.25 0 0 0 9.48 3.65 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 9 L9 15",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 9.25 V9.75 M14.5 14.25 V14.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.48 3.65 A2.75 2.75 0 0 1 14.52 3.65 A1.25 1.25 0 0 0 16.12 4.31 A2.75 2.75 0 0 1 19.69 7.88 A1.25 1.25 0 0 0 20.35 9.48 A2.75 2.75 0 0 1 20.35 14.52 A1.25 1.25 0 0 0 19.69 16.12 A2.75 2.75 0 0 1 16.12 19.69 A1.25 1.25 0 0 0 14.52 20.35 A2.75 2.75 0 0 1 9.48 20.35 A1.25 1.25 0 0 0 7.88 19.69 A2.75 2.75 0 0 1 4.31 16.12 A1.25 1.25 0 0 0 3.65 14.52 A2.75 2.75 0 0 1 3.65 9.48 A1.25 1.25 0 0 0 4.31 7.88 A2.75 2.75 0 0 1 7.88 4.31 A1.25 1.25 0 0 0 9.48 3.65 Z"
+  ],
+  "cutouts": [
+    "M15 9 L9 15",
+    "M10.5 9.5 A1 1 0 1 1 8.5 9.5 A1 1 0 1 1 10.5 9.5 Z",
+    "M15.5 14.5 A1 1 0 1 1 13.5 14.5 A1 1 0 1 1 15.5 14.5 Z"
+  ],
+  "synonyms": [
+    "discount",
+    "sale",
+    "promo",
+    "offer",
+    "% off",
+    "percent off",
+    "sale tag",
+    "special offer",
+    "promotion",
+    "promo code",
+    "coupon",
+    "voucher",
+    "deals",
+    "savings",
+    "clearance",
+    "black friday",
+    "cyber monday",
+    "limited offer",
+    "markdown",
+    "price drop",
+    "reduced",
+    "bargain",
+    "best deal",
+    "flash sale",
+    "seasonal sale",
+    "offers",
+    "discounts",
+    "coupon code",
+    "rebate",
+    "member discount",
+    "disount",
+    "discout"
+  ]
+}

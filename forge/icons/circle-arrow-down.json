@@ -1,0 +1,72 @@
+{
+  "name": "circle-arrow-down",
+  "category": "arrows",
+  "description": "A down arrow inside a circle for download, decrease, and scroll-down buttons.",
+  "aliases": [
+    "arrow-down-circle",
+    "circled-arrow-down",
+    "round-arrow-down",
+    "down-circle",
+    "arrow-circle-down",
+    "lower",
+    "down-button",
+    "circle-down",
+    "download-circle"
+  ],
+  "tags": [
+    "arrow",
+    "down",
+    "decrease",
+    "scroll",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 V16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 12 L12 16 L16 12",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 8 V16",
+    "M8 12 L12 16 L16 12"
+  ],
+  "synonyms": [
+    "down",
+    "go down",
+    "scroll to bottom",
+    "to bottom",
+    "save file",
+    "get file",
+    "install",
+    "decrease",
+    "drop",
+    "fall",
+    "reduce",
+    "downgrade",
+    "demote",
+    "downvote",
+    "south",
+    "descending",
+    "move down",
+    "see below",
+    "jump down",
+    "round button",
+    "circle button",
+    "arrow in circle",
+    "down arrow button",
+    "downwards",
+    "donwload"
+  ]
+}

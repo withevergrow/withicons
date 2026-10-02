@@ -1,24 +1,26 @@
 // Shared building blocks for the alternatives / free-icon landers (owner: alternatives agent).
 // Reuses the content-page shell from ../site-pages/lib.mjs (header, footer, head, JSON-LD) without editing it.
-import { icon, esc, page, write, cvar, code, ORIGIN, STYLES, ICON_NAMES, META } from '../site-pages/lib.mjs'
+import { icon, esc, page, write, cvar, code, ORIGIN, STYLES, ICON_NAMES, META, N_ICONS, N_STYLES, styleTitle, MOTION, motionVars } from '../site-pages/lib.mjs'
+import { motionAssets } from '../site-pages/motion.mjs'
 
 export { icon, esc, write, cvar, code, ORIGIN, STYLES, ICON_NAMES, META }
 export const CHECKED = '2026-10-01'
 export const CHECKED_HUMAN = '1 October 2026'
 export const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
-export const STYLE_TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch' }
+export const STYLE_TITLE = Object.fromEntries(STYLES.map(s => [s, styleTitle(s)]))
 const HAS = new Set(ICON_NAMES)
 export const has = n => HAS.has(n)
 export const assertIcons = (names, where) => { for (const n of names) if (!HAS.has(n)) throw new Error(`${where}: unknown icon "${n}"`) }
 export const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim()
 
 const SEARCH_SCRIPTS = ['vendor/with/search.js', 'data/search-index.js', 'js/alternatives.js']
+const MOTION_SCRIPTS = () => motionAssets().js
 
 /** Page shell: the shared content-page layout + css/alternatives.css (+ search engine scripts when asked). */
 export function shell(o) {
   const depth = o.path.split('/').length - 1
   const p = '../'.repeat(depth)
-  let html = page({ ...o, scripts: o.search === false ? ['js/alternatives.js'] : SEARCH_SCRIPTS, bodyClass: 'ax ' + (o.bodyClass || '') })
+  let html = page({ ...o, styles: o.motion ? motionAssets().css : [], scripts: [...(o.motion ? MOTION_SCRIPTS() : []), ...(o.search === false ? ['js/alternatives.js'] : SEARCH_SCRIPTS)], bodyClass: 'ax ' + (o.bodyClass || '') })
   html = html.replace(`<link rel="stylesheet" href="${p}css/pages.css">`, `<link rel="stylesheet" href="${p}css/pages.css">\n  <link rel="stylesheet" href="${p}css/alternatives.css">\n  <link rel="alternate" type="text/plain" title="llms.txt" href="${p}llms.txt">`)
   if (o.modified) html = html.replace('<meta name="robots"', `<meta property="article:modified_time" content="${o.modified}">\n  <meta name="robots"`)
   write(o.path, html)
@@ -43,32 +45,36 @@ export function faqBlock(id, qs, title = 'Questions people ask') {
 }
 
 /** "Short answer" card at the top of a page: the GEO-friendly, quotable summary. */
-export function answer(html, { tag = 'Short answer', checked = true } = {}) {
+export const humanDate = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+export function answer(html, { tag = 'Short answer', checked = true, date = [CHECKED, CHECKED_HUMAN] } = {}) {
   return `<div class="ax-answer" data-reveal>
     <span class="ax-answer-tag">${tag}</span>
     <p>${html}</p>
-    ${checked ? `<p class="ax-checked">${I('calendar-check', 'line', 16)} Facts checked <time datetime="${CHECKED}">${CHECKED_HUMAN}</time></p>` : ''}
+    ${checked ? `<p class="ax-checked">${I('calendar-check', 'line', 16)} Facts checked <time datetime="${date[0]}">${date[1]}</time></p>` : ''}
   </div>`
 }
 
 /**
- * Icon picker: curated grid (rendered here in Line) + search across all 300 + style, colour and click action.
+ * Icon picker: curated grid (rendered here in Line) + search across the whole set + style, colour and click action.
+ * motion: true wraps each tile's icon in its own hover animation (forge/motion specs; the tile is the wm-trigger).
  * groups: [[title|null, [names]]]; actions: subset of svg|png|dl|dlsvg|class|jsx|vue (first = default)
  */
-export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = 'Search all 300, e.g. “throw away”', colors = true, q = '', heading, intro, size = 32, px = 512 }) {
-  const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : []
+export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = `Search all ${N_ICONS}, e.g. “throw away”`, colors = true, q = '', heading, intro, size = 32, px = 512, motion = false }) {
+  const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : actions.includes('gif') ? [128, 256, 512] : []
   for (const [, names] of groups) assertIcons(names, 'picker ' + id)
-  const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'] }
+  const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'], anim: ['Animated SVG', 'sparkles'], gif: ['GIF for slides', 'film'] }
+  const HINT = { anim: 'download it as an animated SVG', gif: 'download an animated GIF for your slides', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', class: 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
   const COLORS = [['Ink', '#111318'], ['White', '#FFFFFF'], ['Cobalt', '#2F5BFF'], ['Tomato', '#FF5A36'], ['Violet', '#7B5CFF'], ['Leaf', '#22A861'], ['Gold', '#C9962B']]
-  const tile = n => `<li><button class="ax-tile" type="button" data-name="${n}"><span class="ax-tile-ic">${I(n, style, size)}</span><span class="ax-tile-n">${n}</span></button><a class="ax-tile-go" href="${p}icons/${n}.html" aria-label="${n} icon page">${I('arrow-up-right', 'line', 14)}</a></li>`
+  const mo = n => { const m = motion && MOTION[n] && (MOTION[n].hover || MOTION[n].loop); if (!m) return ''; const v = motionVars(m); return ` wm wm-hover wm-p-${m.preset}"${v ? ` style="${v}"` : ''} data-wm-preset="${m.preset}` }
+  const tile = n => `<li><button class="ax-tile${motion ? ' wm-trigger' : ''}" type="button" data-name="${n}"><span class="ax-tile-ic${mo(n)}">${I(n, style, size)}</span><span class="ax-tile-n">${n}</span></button><a class="ax-tile-go" href="${p}icons/${n}.html" aria-label="${n} icon page">${I('arrow-up-right', 'line', 14)}</a></li>`
   const grid = groups.map(([t, names]) => `${t ? `<li class="ax-grid-h" role="presentation">${t}</li>` : ''}${names.map(tile).join('')}`).join('')
-  return `<section class="ax-pick" id="${id}" data-picker data-style="${style}" data-act="${actions[0]}" data-px="${px}" data-root="${p}"${q ? ` data-q="${esc(q)}"` : ''} aria-labelledby="${id}-h">
+  return `<section class="ax-pick" id="${id}" data-picker${motion ? ' data-pick-motion' : ''} data-style="${style}" data-act="${actions[0]}" data-px="${px}" data-root="${p}"${q ? ` data-q="${esc(q)}"` : ''} aria-labelledby="${id}-h">
   ${heading ? `<div class="ax-sec-head"><h2 id="${id}-h">${heading}</h2>${intro ? `<p>${intro}</p>` : ''}</div>` : `<h2 class="pg-sr" id="${id}-h">Icons</h2>`}
   <div class="ax-pick-box">
     <div class="ax-pick-bar">
       <label class="ax-pick-search"><span class="pg-sr">Search icons</span>${I('search', 'line', 20)}<input type="search" data-pick-q placeholder="${esc(placeholder)}" autocomplete="off" spellcheck="false"${q ? ` value="${esc(q)}"` : ''}></label>
       <div class="ax-pick-row">
-        <div class="ax-seg" role="group" aria-label="Icon style">${styles.map(s => `<button type="button" class="chip s-${s}" data-pick-style="${s}" aria-pressed="${s === style}">${STYLE_TITLE[s]}</button>`).join('')}</div>
+        <div class="ax-seg" role="group" aria-label="Icon style">${styles.map(s => `<button type="button" class="chip s-${s}" data-pick-style="${s}" aria-pressed="${s === style}">${STYLE_TITLE[s] || styleTitle(s)}</button>`).join('')}</div>
       </div>
       <div class="ax-pick-row">
         <div class="ax-seg ax-acts" role="group" aria-label="When I click an icon">${actions.map((a, i) => `<button type="button" class="ax-act" data-pick-act="${a}" aria-pressed="${i === 0}">${I(ACT[a][1], 'line', 16)}${esc(ACT[a][0])}</button>`).join('')}</div>
@@ -76,9 +82,9 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
         ${pxs.length ? `<div class="ax-seg ax-px" role="group" aria-label="PNG size">${pxs.map(x => `<button type="button" class="ax-act" data-pick-px="${x}" aria-pressed="${x === px}">${x} px</button>`).join('')}</div>` : ''}
       </div>
     </div>
-    <p class="ax-pick-status" data-pick-status aria-live="polite">Click an icon to <b data-pick-hint>${esc(ACT[actions[0]][0].toLowerCase())}</b>. The arrow opens its page.</p>
+    <p class="ax-pick-status" data-pick-status aria-live="polite">Click an icon to <b data-pick-hint>${esc(HINT[actions[0]] || ACT[actions[0]][0].toLowerCase())}</b>. The arrow opens its page.</p>
     <ul class="ax-grid" data-pick-grid>${grid}</ul>
-    <p class="ax-pick-empty" data-pick-empty hidden>No icons match yet. Try a simpler word, or <a href="${p}icons.html">browse all 300</a>.</p>
+    <p class="ax-pick-empty" data-pick-empty hidden>No icons match yet. Try a simpler word, or <a href="${p}icons.html">browse all ${N_ICONS}</a>.</p>
     <noscript><p class="pg-note">Turn on JavaScript to search and copy here, or click an icon’s arrow to open its page with copy and download buttons.</p></noscript>
   </div>
 </section>`
@@ -99,7 +105,7 @@ export function freeLinks(p, landers, current, title = 'Free icons for…') {
 </nav>`
 }
 
-export function cta(p, { title = 'Find your icon in seconds', text = '300 free icons, 7 styles, no account. Copy, download or drag them into your work.' } = {}) {
+export function cta(p, { title = 'Find your icon in seconds', text = `${N_ICONS} free icons, ${N_STYLES} styles, no account. Copy, download or drag them into your work.` } = {}) {
   return `<section class="pg-cta" data-reveal>
   <h2>${title}</h2>
   <p>${text}</p>
@@ -107,7 +113,7 @@ export function cta(p, { title = 'Find your icon in seconds', text = '300 free i
 </section>`
 }
 
-/** Style strip used in heroes: one icon in all 7 styles. */
+/** Style strip used in heroes: one icon in every style. */
 export const styleStrip = (n, size = 40) => `<div class="ax-strip" aria-hidden="true">${STYLES.map((s, i) => `<span class="s-${s}" style="--i:${i}">${I(n, s, size)}</span>`).join('')}</div>`
 
 /** Average byte size of a style's standalone SVG (for factual copy), and the raw SVG text of one icon. */

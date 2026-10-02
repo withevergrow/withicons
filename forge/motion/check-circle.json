@@ -1,0 +1,35 @@
+{
+  "name": "check-circle",
+  "intent": "draws its tick as a task completes",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "check-circle@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "x-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "circle",
+      "effect": "fade"
+    }
+  ]
+}

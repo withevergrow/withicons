@@ -1,0 +1,36 @@
+{
+  "name": "underline",
+  "intent": "draws its underline beneath the letter",
+  "loop": {
+    "preset": "float",
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "strikethrough",
+      "effect": "slide-up"
+    },
+    {
+      "to": "italic",
+      "effect": "flip"
+    },
+    {
+      "to": "bold",
+      "effect": "fade"
+    }
+  ]
+}

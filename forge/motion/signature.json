@@ -1,0 +1,15 @@
+{
+  "name": "signature",
+  "intent": "the signature writes itself out, as if signed live",
+  "loop": { "preset": "draw", "duration": 3.2 },
+  "hover": { "preset": "draw", "duration": 1.2 },
+  "alt": [
+    { "preset": "wiggle", "origin": [12, 20.5], "amount": 0.6 },
+    { "preset": "type", "amount": 0.6 },
+    { "preset": "pop" }
+  ],
+  "swap": [
+    { "to": "check", "effect": "draw" },
+    { "to": "pen-tool", "effect": "fade" }
+  ]
+}

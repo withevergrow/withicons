@@ -1,0 +1,98 @@
+{
+  "name": "football",
+  "category": "sports",
+  "description": "Soccer ball for football, soccer, and team sports.",
+  "aliases": [
+    "soccer",
+    "soccer-ball",
+    "football-ball",
+    "futbol",
+    "footy",
+    "match",
+    "goal-sport",
+    "team-sport",
+    "sports-ball"
+  ],
+  "tags": [
+    "sports",
+    "ball",
+    "soccer",
+    "team",
+    "game"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 L16 11 L14.5 15 L9.5 15 L8 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 8 L12 2.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 11 L21 9",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 15 L17.5 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 15 L6.5 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8 11 L3 9",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 8 L16 11 L14.5 15 L9.5 15 L8 11 L12 8 L16 11",
+    "M12 8 L12 1.25",
+    "M16 11 L22.22 8.68",
+    "M14.5 15 L18.32 20.7",
+    "M9.5 15 L5.68 20.7",
+    "M8 11 L1.78 8.68"
+  ],
+  "synonyms": [
+    "ball",
+    "sport",
+    "sports",
+    "soccer game",
+    "soccer match",
+    "football match",
+    "football game",
+    "world cup",
+    "league",
+    "goal",
+    "score a goal",
+    "kick",
+    "kickoff",
+    "pitch",
+    "stadium",
+    "futebol",
+    "calcio",
+    "foot ball",
+    "socer",
+    "soccor",
+    "footbal",
+    "fan",
+    "supporters",
+    "penalty",
+    "striker",
+    "goalkeeper",
+    "fixtures",
+    "tournament",
+    "play football",
+    "five a side",
+    "team",
+    "champions"
+  ]
+}

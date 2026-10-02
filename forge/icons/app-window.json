@@ -1,0 +1,87 @@
+{
+  "name": "app-window",
+  "category": "layout",
+  "description": "An application window with a title bar and three dots, for apps, web pages and browser views.",
+  "aliases": [
+    "window",
+    "browser",
+    "webpage",
+    "application",
+    "browser-window",
+    "web-app",
+    "app",
+    "web-page",
+    "site",
+    "desktop-app",
+    "app-screen"
+  ],
+  "tags": [
+    "window",
+    "app",
+    "browser",
+    "web",
+    "interface",
+    "software"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 10 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 7 H6",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 7 H10",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 7 H14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V10 H2 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M5.5 6 H6 A1 1 0 0 1 6 8 H5.5 A1 1 0 0 1 5.5 6 Z",
+    "M9.5 6 H10 A1 1 0 0 1 10 8 H9.5 A1 1 0 0 1 9.5 6 Z",
+    "M13.5 6 H14 A1 1 0 0 1 14 8 H13.5 A1 1 0 0 1 13.5 6 Z"
+  ],
+  "synonyms": [
+    "apps",
+    "applications",
+    "software",
+    "program window",
+    "web browser",
+    "website",
+    "web site",
+    "internet",
+    "online",
+    "page",
+    "open in browser",
+    "open window",
+    "new window",
+    "desktop",
+    "mac window",
+    "traffic lights",
+    "title bar",
+    "titlebar",
+    "frame",
+    "screen",
+    "view",
+    "interface",
+    "ui",
+    "gui",
+    "saas",
+    "web application",
+    "aplication",
+    "browswer",
+    "windows"
+  ]
+}

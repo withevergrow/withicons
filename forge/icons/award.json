@@ -3,7 +3,6 @@
   "category": "objects",
   "description": "A ribboned medal for achievements, badges, and recognition.",
   "aliases": [
-    "medal",
     "achievement",
     "prize",
     "ribbon",
@@ -69,6 +68,7 @@
     "level up",
     "gamification",
     "meddle",
-    "aword"
+    "aword",
+    "medal"
   ]
 }

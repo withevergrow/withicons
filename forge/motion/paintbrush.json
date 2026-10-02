@@ -1,0 +1,43 @@
+{
+  "name": "paintbrush",
+  "intent": "sweeps gently like it's painting a stroke",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      17,
+      7
+    ],
+    "amount": 0.8,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      17,
+      7
+    ],
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        17,
+        7
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "palette",
+      "effect": "fade"
+    },
+    {
+      "to": "pencil",
+      "effect": "rotate"
+    }
+  ]
+}

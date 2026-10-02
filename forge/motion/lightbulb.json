@@ -1,0 +1,43 @@
+{
+  "name": "lightbulb",
+  "intent": "glows softly, like an idea switching on",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.8,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 1.4,
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "flicker",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        11
+      ]
+    },
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        3
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "lightbulb@solid",
+      "effect": "fade"
+    }
+  ]
+}

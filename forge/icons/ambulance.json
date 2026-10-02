@@ -1,0 +1,87 @@
+{
+  "name": "ambulance",
+  "category": "health",
+  "description": "An ambulance van with a medical cross for emergencies, paramedics, and urgent care.",
+  "aliases": [
+    "emergency-vehicle",
+    "paramedic",
+    "ems",
+    "rescue",
+    "urgent-care",
+    "emergency-services",
+    "first-responder",
+    "medevac"
+  ],
+  "tags": [
+    "health",
+    "emergency",
+    "vehicle",
+    "medical",
+    "rescue",
+    "transport"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 18 H3.5 A1.5 1.5 0 0 1 2 16.5 V6 A2 2 0 0 1 4 4 H14 L18.5 10 H20 A2 2 0 0 1 22 12 V16.5 A1.5 1.5 0 0 1 20.5 18 H20",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M14 4 V10 H18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 8 V13 M5 10.5 H10",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 18 A2 2 0 1 1 4.5 18 A2 2 0 1 1 8.5 18 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20 18 A2 2 0 1 1 16 18 A2 2 0 1 1 20 18 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 6 A2 2 0 0 1 4 4 H14 L18.5 10 H20 A2 2 0 0 1 22 12 V18 H21.5 A3.5 3.5 0 0 0 14.5 18 H10 A3.5 3.5 0 0 0 3 18 H2 Z",
+    "M8.5 18 A2 2 0 1 1 4.5 18 A2 2 0 1 1 8.5 18 Z",
+    "M20 18 A2 2 0 1 1 16 18 A2 2 0 1 1 20 18 Z"
+  ],
+  "cutouts": [
+    "M7.5 8 V13",
+    "M5 10.5 H10",
+    "M14.5 5.5 L17.5 10 H14.5 Z",
+    "M7.5 18 A1 1 0 1 1 5.5 18 A1 1 0 1 1 7.5 18 Z",
+    "M19 18 A1 1 0 1 1 17 18 A1 1 0 1 1 19 18 Z"
+  ],
+  "synonyms": [
+    "ambulances",
+    "paramedics",
+    "emergency",
+    "call an ambulance",
+    "911",
+    "999",
+    "112",
+    "emergency call",
+    "accident",
+    "urgent",
+    "sos",
+    "help",
+    "medical emergency",
+    "patient transport",
+    "hospital",
+    "siren",
+    "first aid",
+    "emt",
+    "emergency medical services",
+    "rescue vehicle",
+    "van",
+    "ambulence",
+    "ambulanse",
+    "amublance"
+  ]
+}

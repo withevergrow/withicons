@@ -1,0 +1,71 @@
+{
+  "name": "heart-crack",
+  "category": "status",
+  "description": "A heart split by a jagged crack for heartbreak, breakups, and removed favourites.",
+  "aliases": [
+    "broken-heart",
+    "heartbreak",
+    "heart-broken",
+    "sad-heart",
+    "breakup",
+    "unlike",
+    "heartache",
+    "cracked-heart",
+    "unfavorite",
+    "unfavourite"
+  ],
+  "tags": [
+    "heart",
+    "love",
+    "sad",
+    "breakup",
+    "emotion"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 L10 10.5 L13.5 13.5 L11 17 L12 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"
+  ],
+  "cutouts": [
+    "M12 6 L10 10.5 L13.5 13.5 L11 17 L12 21"
+  ],
+  "synonyms": [
+    "break up",
+    "broken",
+    "heartbroken",
+    "sadness",
+    "grief",
+    "loss",
+    "divorce",
+    "split",
+    "separation",
+    "lost love",
+    "unrequited love",
+    "rejected",
+    "rejection",
+    "remove from favorites",
+    "remove from favourites",
+    "remove from wishlist",
+    "unliked",
+    "dislike",
+    "sad",
+    "hurt",
+    "pain",
+    "emotional pain",
+    "relationship",
+    "dating",
+    "love lost",
+    "heart crack",
+    "brokenheart",
+    "hartbreak",
+    "broken heart emoji"
+  ]
+}

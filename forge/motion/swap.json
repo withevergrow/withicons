@@ -1,0 +1,32 @@
+{
+  "name": "swap",
+  "intent": "flips over to trade places, back and forth",
+  "loop": {
+    "preset": "flip",
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.6
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "repeat",
+      "effect": "rotate"
+    },
+    {
+      "to": "shuffle",
+      "effect": "fade"
+    }
+  ]
+}

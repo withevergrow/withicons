@@ -1,0 +1,12 @@
+{
+  "name": "pilcrow",
+  "intent": "fades softly in and out like hidden marks being shown",
+  "loop": { "preset": "breathe", "amount": 0.6, "duration": 3.2 },
+  "hover": { "preset": "pop" },
+  "alt": [ { "preset": "fill" }, { "preset": "draw" }, { "preset": "type" } ],
+  "swap": [
+    { "to": "pilcrow@solid", "effect": "fade" },
+    { "to": "type", "effect": "flip" },
+    { "to": "wrap-text", "effect": "slide-down" }
+  ]
+}

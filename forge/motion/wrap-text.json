@@ -1,0 +1,12 @@
+{
+  "name": "wrap-text",
+  "intent": "rolls the long line around and down onto the next row",
+  "loop": { "preset": "nudge", "dir": 135, "amount": 0.4, "duration": 2.8 },
+  "hover": { "preset": "draw" },
+  "alt": [ { "preset": "nudge", "dir": 180, "amount": 0.8 }, { "preset": "jelly" } ],
+  "swap": [
+    { "to": "align-left", "effect": "fade" },
+    { "to": "corner-down-left", "effect": "morph" },
+    { "to": "pilcrow", "effect": "slide-up" }
+  ]
+}

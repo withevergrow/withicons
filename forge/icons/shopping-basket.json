@@ -1,0 +1,83 @@
+{
+  "name": "shopping-basket",
+  "category": "commerce",
+  "description": "A handled basket for groceries, shopping, and add to basket.",
+  "aliases": [
+    "grocery-basket",
+    "market-basket",
+    "shop-basket",
+    "groceries",
+    "picnic-basket",
+    "hand-basket",
+    "supermarket-basket",
+    "wicker-basket",
+    "my-basket"
+  ],
+  "tags": [
+    "basket",
+    "groceries",
+    "shopping",
+    "ecommerce",
+    "retail",
+    "checkout"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 10 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 10 L5.5 19.32 A2 2 0 0 0 7.48 21 H16.52 A2 2 0 0 0 18.5 19.32 L20 10",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 10 A5.5 6.5 0 0 1 17.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M8 13.5 V17.5 M12 13.5 V17.5 M16 13.5 V17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 9 H21.5 V11 H19.84 L18.5 19.32 A2 2 0 0 1 16.52 21 H7.48 A2 2 0 0 1 5.5 19.32 L4.16 11 H2.5 Z"
+  ],
+  "cutouts": [
+    "M8 13.5 V17.5",
+    "M12 13.5 V17.5",
+    "M16 13.5 V17.5"
+  ],
+  "synonyms": [
+    "basket",
+    "baskets",
+    "add to basket",
+    "view basket",
+    "your basket",
+    "grocery",
+    "grocery shopping",
+    "supermarket",
+    "market",
+    "farmers market",
+    "produce",
+    "food shopping",
+    "shopping",
+    "online grocery",
+    "checkout",
+    "buy",
+    "purchase",
+    "order",
+    "picnic",
+    "hamper",
+    "wicker",
+    "harvest",
+    "carry",
+    "items",
+    "store",
+    "retail",
+    "e-commerce",
+    "ecommerce",
+    "shoping basket",
+    "baskit",
+    "shopping basket"
+  ]
+}

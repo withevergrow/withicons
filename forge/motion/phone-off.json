@@ -1,0 +1,32 @@
+{
+  "name": "phone-off",
+  "intent": "rests quietly hung up, shakes no when you hover",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "rock",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "phone",
+      "effect": "rotate"
+    },
+    {
+      "to": "phone-call",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "camera",
+  "intent": "snaps like a photo being taken",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      13.5
+    ],
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      13.5
+    ],
+    "amount": 1
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.8
+    },
+    {
+      "preset": "zoom",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "image",
+      "effect": "flip"
+    },
+    {
+      "to": "video-camera",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "camera@solid",
+      "effect": "scale"
+    }
+  ]
+}

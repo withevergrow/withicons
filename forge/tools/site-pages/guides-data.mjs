@@ -1,3 +1,5 @@
+import { hasStyle } from './lib.mjs'
+const also = (list, glue = ' or ') => list.filter(hasStyle).map(s => s[0].toUpperCase() + s.slice(1)).join(glue)
 // Guide content. Plain language first. UI labels in <b class="ui">, menu paths via P().
 export const P = (...xs) => `<span class="ui-path">${xs.map(x => `<b>${x}</b>`).join('<i aria-hidden="true">›</i><wbr>')}</span>`
 export const UI = x => `<b class="ui">${x}</b>`
@@ -85,23 +87,23 @@ export const GUIDES = [
   {
     slug: 'canva', app: 'Canva', group: 'design', color: 'gloss', icon: 'palette', time: 2,
     title: 'How to add icons to Canva',
-    desc: 'Upload free SVG icons to Canva, change their colour right in the editor and resize them without blur. Easy steps with pictures.',
-    short: `Download an <b>SVG</b>, then in Canva open ${P('Uploads', 'Upload files')}. Click the icon to add it and change its colour from the toolbar.`,
-    format: { best: 'SVG', size: 'any size', why: 'Canva accepts SVG uploads and lets you change their colour inside Canva. SVGs stay sharp on posters and print too.' },
+    desc: 'Upload free SVG icons to Canva, pick their colour and resize them without blur. Which styles recolour inside Canva, with easy steps and pictures.',
+    short: `Pick your colour on withicons.com, download the <b>SVG</b>, then in Canva open ${P('Uploads', 'Upload files')} and click the icon to add it.`,
+    format: { best: 'SVG', size: 'any size', why: 'SVGs stay sharp on posters and print. Canva can recolour filled shapes, so the Solid, Gloss, Retro and Pixel styles change colour inside Canva. Outline styles are drawn with strokes, which Canva may not let you recolour, so choose their colour here before you download.' },
     app_ui: 'design',
     steps: [
       pickStep('SVG', '', 'heart'),
       { t: 'Upload it to Canva', d: `In the Canva editor, click ${UI('Uploads')} in the left panel, then ${UI('Upload files')}, and choose the SVG.`, ui: { k: 'side', tab: 'Uploads', button: 'Upload files' } },
       { t: 'Add it to your design', d: 'Click the uploaded icon (or drag it onto the page). It appears in the middle of your design.', ui: { k: 'place', icon: 'heart' } },
-      { t: 'Change the colour', d: 'With the icon selected, click the coloured square in the toolbar at the top and pick any colour, including your Brand Kit colours.', ui: { k: 'recolor', icon: 'heart', label: 'Colour' } },
+      { t: 'Change the colour', d: 'With the icon selected, click the coloured square in the toolbar at the top and pick any colour, including your Brand Kit colours. This works best with filled styles (Solid, Gloss, Retro, Pixel). For outline styles, choose the colour on withicons.com before you download.', ui: { k: 'recolor', icon: 'heart', label: 'Colour' } },
       { t: 'Resize and place it', d: 'Drag a corner handle to resize. Canva shows pink guide lines to help you line it up.', ui: { k: 'resize', icon: 'heart' } },
     ],
-    recolor: 'Select the icon and click the colour square in the top toolbar. If there’s no colour square, you uploaded a PNG; upload the SVG instead.',
+    recolor: 'Select the icon and click the colour square in the top toolbar. Canva recolours filled shapes, so Solid, Gloss, Retro and Pixel icons change colour reliably. Outline styles (Line, Duo, Sketch and others drawn with strokes) may not show a colour square: pick the colour on withicons.com before downloading, and the file comes out in that colour.',
     resize: 'Drag a corner. Because it’s an SVG, it stays sharp at any size, even on a printed poster.',
     trouble: [
-      ['There’s no colour option.', 'That happens with PNG files. Upload the SVG version to recolour inside Canva.'],
+      ['There’s no colour option.', 'Canva only recolours filled shapes in an SVG, and never PNGs. Either use a filled style (Solid, Gloss, Retro or Pixel), or pick the colour on withicons.com and download the icon again in that colour.'],
       ['The upload failed.', 'Try again, or download a 1024 px PNG in the colour you want and upload that.'],
-      ['The icon looks too thin on a poster.', 'Switch to the Solid or Gloss style for bold, eye-catching shapes.'],
+      ['The icon looks too thin on a poster.', `Switch to a bold style like ${also(['solid', 'gloss', 'sticker', 'retro'], ', ').replace(/, ([^,]*)$/, ' or $1')} for eye-catching shapes.`],
     ],
     related: ['figma', 'google-slides', 'email-signatures'],
   },
@@ -170,7 +172,7 @@ export const GUIDES = [
     trouble: [
       ['My icon disappears in dark mode.', 'Black icons vanish on dark backgrounds. Re-download it in a mid-tone or light colour.'],
       ['It looks blurry as a page icon.', 'Upload a bigger PNG (256 or 512 px).'],
-      ['Can I use SVG?', 'Stick to PNG in Notion. It works everywhere in Notion, every time.'],
+      ['Can I use SVG?', 'For page and callout icons, use PNG: it works everywhere in Notion, every time. Inside a page, an image block also takes an SVG, which is how an <a href="animate-icons.html">animated icon</a> keeps moving in the browser and the desktop app. If a mobile app shows it standing still, upload the GIF instead.'],
     ],
     related: ['word-google-docs', 'email-signatures', 'canva'],
   },

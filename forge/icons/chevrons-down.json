@@ -1,0 +1,64 @@
+{
+  "name": "chevrons-down",
+  "category": "arrows",
+  "description": "A double chevron pointing down for expand-all, scrolling further, and lowered priority.",
+  "aliases": [
+    "double-chevron-down",
+    "angles-down",
+    "double-arrow-down",
+    "angle-double-down",
+    "expand-all",
+    "low-priority",
+    "double-caret-down",
+    "chevron-double-down",
+    "scroll-to-bottom",
+    "rank-down"
+  ],
+  "tags": [
+    "chevron",
+    "double",
+    "down",
+    "expand",
+    "priority",
+    "bottom"
+  ],
+  "paths": [
+    {
+      "d": "M6 6 L12 12 L18 6",
+      "plate": "K"
+    },
+    {
+      "d": "M6 12 L12 18 L18 12",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "scroll down",
+    "scroll for more",
+    "keep scrolling",
+    "see more below",
+    "read more",
+    "show more",
+    "expand everything",
+    "unfold all",
+    "open all",
+    "jump to bottom",
+    "go to bottom",
+    "end of page",
+    "priority low",
+    "not urgent",
+    "minor",
+    "level down",
+    "downgrade",
+    "demote",
+    "decrease",
+    "lower",
+    "drop",
+    "fall",
+    "sink",
+    "chevrons",
+    "angles down"
+  ]
+}

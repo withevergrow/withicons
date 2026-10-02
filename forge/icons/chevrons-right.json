@@ -1,0 +1,65 @@
+{
+  "name": "chevrons-right",
+  "category": "arrows",
+  "description": "A double chevron pointing right for jumping ahead, fast-forwarding, or expanding a panel.",
+  "aliases": [
+    "double-chevron-right",
+    "angles-right",
+    "double-arrow-right",
+    "angle-double-right",
+    "expand-all-right",
+    "skip-right",
+    "double-caret-right",
+    "guillemet-right",
+    "chevron-double-right"
+  ],
+  "tags": [
+    "chevron",
+    "double",
+    "right",
+    "next",
+    "expand",
+    "navigation"
+  ],
+  "paths": [
+    {
+      "d": "M12 6 L18 12 L12 18",
+      "plate": "K"
+    },
+    {
+      "d": "M6 6 L12 12 L6 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "jump ahead",
+    "go further",
+    "skip ahead",
+    "fast forward",
+    "next section",
+    "end",
+    "last",
+    "see all",
+    "view all",
+    "open panel",
+    "show sidebar",
+    "open drawer",
+    "fold right",
+    "scroll right",
+    "pagination",
+    "next page",
+    "forward two",
+    "double forward",
+    "right angle quote",
+    "guillemet",
+    "raquo",
+    "much greater than",
+    "faster",
+    "speed up",
+    "chevrons",
+    "angles right",
+    "expand-sidebar"
+  ]
+}

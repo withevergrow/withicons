@@ -1,0 +1,56 @@
+{
+  "name": "remove-formatting",
+  "category": "text",
+  "description": "Letter T with a small x for clearing formatting and returning to plain text.",
+  "aliases": [
+    "format-clear",
+    "plain-text",
+    "reset-style",
+    "no-format",
+    "unstyle",
+    "clear-style",
+    "remove-style",
+    "unformat"
+  ],
+  "synonyms": [
+    "clear formatting",
+    "remove formatting",
+    "reset formatting",
+    "remove style",
+    "clear styles",
+    "plain text",
+    "strip formatting",
+    "reset text",
+    "default text",
+    "undo formatting",
+    "tx",
+    "text formatting",
+    "word processor",
+    "editor toolbar",
+    "clear format",
+    "remove formating"
+  ],
+  "tags": [
+    "text",
+    "format",
+    "clear",
+    "editor",
+    "typography"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 6.5 V4 H16.5 V6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M15 15 L20.5 20.5 M20.5 15 L15 20.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

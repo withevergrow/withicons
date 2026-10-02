@@ -1,0 +1,85 @@
+{
+  "name": "utensils",
+  "category": "food",
+  "description": "A fork and a knife side by side for restaurants, meals, and dining.",
+  "aliases": [
+    "fork-knife",
+    "knife-fork",
+    "restaurant",
+    "dining",
+    "cutlery",
+    "meal",
+    "eat",
+    "food-menu",
+    "silverware",
+    "flatware",
+    "dine",
+    "eating"
+  ],
+  "tags": [
+    "food",
+    "restaurant",
+    "dining",
+    "kitchen",
+    "meal",
+    "cutlery"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 2.5 V8 A4 4 0 0 0 11.5 8 V2.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 2.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M20.5 15 V2.5 C17.5 3.5 15.5 6.5 15.5 10.5 V13 A2 2 0 0 0 17.5 15 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M18 15 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M20.5 15 V2.5 C17.5 3.5 15.5 6.5 15.5 10.5 V13 A2 2 0 0 0 17.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "fork and knife",
+    "knife and fork",
+    "restaurants",
+    "eat out",
+    "eating out",
+    "dinner",
+    "lunch",
+    "breakfast",
+    "brunch",
+    "food",
+    "meals",
+    "food and drink",
+    "dining room",
+    "cafe",
+    "canteen",
+    "cafeteria",
+    "bistro",
+    "diner",
+    "kitchen",
+    "table setting",
+    "tableware",
+    "menu",
+    "order food",
+    "food delivery",
+    "reservation",
+    "book a table",
+    "hungry",
+    "cuisine",
+    "catering",
+    "utensil",
+    "cuttlery",
+    "utinsils",
+    "resturant",
+    "restaraunt"
+  ]
+}

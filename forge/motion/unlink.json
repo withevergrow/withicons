@@ -1,0 +1,28 @@
+{
+  "name": "unlink",
+  "intent": "shudders as the two links come apart",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "link",
+      "effect": "morph"
+    }
+  ]
+}

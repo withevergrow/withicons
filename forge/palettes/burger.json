@@ -1,0 +1,450 @@
+{
+  "name": "burger",
+  "palettes": [
+    {
+      "id": "classic-cheeseburger",
+      "name": "Classic cheeseburger",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1406",
+        "c1": "#F2B544",
+        "c2": "#B8642B",
+        "c3": "#6B8E4E",
+        "c4": "#F7D046",
+        "tint": "#FCF0DA",
+        "accent": "#E2522F",
+        "shadow": "#7C541F",
+        "shine": "#FBE9C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sesame-bun",
+      "name": "Sesame bun",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2E1A08",
+        "c1": "#E9A54E",
+        "c2": "#F6D57A",
+        "c3": "#5E3519",
+        "c4": "#FFF3D6",
+        "tint": "#FBEDDC",
+        "accent": "#FFF3D6",
+        "shadow": "#795224",
+        "shine": "#F8E4CA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brioche",
+      "name": "Brioche",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1E05",
+        "c1": "#F0B25A",
+        "c2": "#C2702F",
+        "c3": "#F8E1B0",
+        "c4": "#6B8E4E",
+        "tint": "#FCF0DE",
+        "accent": "#F8E1B0",
+        "shadow": "#835927",
+        "shine": "#FBE8CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "smash-burger",
+      "name": "Smash burger",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0F05",
+        "c1": "#F4A33A",
+        "c2": "#7A3416",
+        "c3": "#F7D046",
+        "c4": "#4E9F3D",
+        "tint": "#FDEDD8",
+        "accent": "#F7D046",
+        "shadow": "#7B4A1A",
+        "shine": "#FCE3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "charcoal-bun",
+      "name": "Charcoal bun",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#4A4A50",
+        "c2": "#C98A3A",
+        "c3": "#F2C14E",
+        "c4": "#7FA650",
+        "tint": "#DBDBDC",
+        "accent": "#F2C14E",
+        "shadow": "#1E1E20",
+        "shine": "#C9C9CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "veggie-burger",
+      "name": "Veggie burger",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E2A10",
+        "c1": "#E8B66A",
+        "c2": "#6E9F3D",
+        "c3": "#C24B2E",
+        "c4": "#F4E3C1",
+        "tint": "#FAF0E1",
+        "accent": "#6E9F3D",
+        "shadow": "#6F6234",
+        "shine": "#F8E9D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beyond-beet",
+      "name": "Beet patty",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0614",
+        "c1": "#EDB25E",
+        "c2": "#A3214B",
+        "c3": "#9DBF6E",
+        "c4": "#F7E1B5",
+        "tint": "#FBF0DF",
+        "accent": "#A3214B",
+        "shadow": "#784B32",
+        "shine": "#FAE8CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fast-food-red",
+      "name": "Fast-food red",
+      "tags": [
+        "vivid",
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A0606",
+        "c1": "#FFC72C",
+        "c2": "#DA291C",
+        "c3": "#FFFFFF",
+        "c4": "#27251F",
+        "tint": "#FFF4D5",
+        "accent": "#DA291C",
+        "shadow": "#7F5315",
+        "shine": "#FFEEC0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "drive-in",
+      "name": "Drive-in diner",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#0D2B2B",
+        "c1": "#F2B544",
+        "c2": "#E85D4A",
+        "c3": "#2BA7A0",
+        "c4": "#F7F3E3",
+        "tint": "#FCF0DA",
+        "accent": "#2BA7A0",
+        "shadow": "#696235",
+        "shine": "#FBE9C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-grill",
+      "name": "70s grill",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E9A23B",
+        "c2": "#C2552D",
+        "c3": "#8E3B2E",
+        "c4": "#3D7068",
+        "tint": "#FBECD8",
+        "accent": "#C2552D",
+        "shadow": "#774D1C",
+        "shine": "#F8E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kawaii-bun",
+      "name": "Kawaii bun",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A2A20",
+        "c1": "#FFD6A5",
+        "c2": "#FFADAD",
+        "c3": "#CAFFBF",
+        "c4": "#FDFFB6",
+        "tint": "#FFF7ED",
+        "accent": "#FFADAD",
+        "shadow": "#926F55",
+        "shine": "#FFF3E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-slider",
+      "name": "Pastel slider",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3150",
+        "c1": "#FFE5B4",
+        "c2": "#F7B7D2",
+        "c3": "#B7E4C7",
+        "c4": "#CDB8F5",
+        "tint": "#FFFAF0",
+        "accent": "#F7B7D2",
+        "shadow": "#8C7978",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-stack",
+      "name": "Candy stack",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1028",
+        "c1": "#FF9EC4",
+        "c2": "#7FD8F0",
+        "c3": "#FFE066",
+        "c4": "#A8E66B",
+        "tint": "#FFECF3",
+        "accent": "#FFE066",
+        "shadow": "#894966",
+        "shine": "#FFE2ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-burger",
+      "name": "Y2K burger",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#FFC9F0",
+        "c2": "#B8A9FF",
+        "c3": "#C9FF6B",
+        "c4": "#8FF0FF",
+        "tint": "#FFF4FC",
+        "accent": "#C9FF6B",
+        "shadow": "#7F6590",
+        "shine": "#FFEFFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-grill",
+      "name": "Neon grill",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFB13D",
+        "c1": "#1A0E08",
+        "c2": "#FF3D6E",
+        "c3": "#3DFF9A",
+        "c4": "#FFE14D",
+        "tint": "#D1CFCE",
+        "accent": "#FF3D6E",
+        "shadow": "#0A0603",
+        "shine": "#BAB7B5",
+        "edge": "#040201"
+      }
+    },
+    {
+      "id": "bbq-smokehouse",
+      "name": "BBQ smokehouse",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#24120A",
+        "c1": "#C9853F",
+        "c2": "#5E2A14",
+        "c3": "#E8C068",
+        "c4": "#A33B20",
+        "tint": "#F4E7D9",
+        "accent": "#E8C068",
+        "shadow": "#66401F",
+        "shine": "#EFDAC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pretzel-bun",
+      "name": "Pretzel bun",
+      "tags": [
+        "earthy",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#24140A",
+        "c1": "#A8642E",
+        "c2": "#E8C8A0",
+        "c3": "#3A2A1E",
+        "c4": "#F4E3C1",
+        "tint": "#EEE0D5",
+        "accent": "#F4E3C1",
+        "shadow": "#593418",
+        "shine": "#E5D1C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pumpkin-patty",
+      "name": "Autumn stack",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2E1206",
+        "c1": "#E8994A",
+        "c2": "#8C3B1A",
+        "c3": "#6B8E4E",
+        "c4": "#F6D7B0",
+        "tint": "#FAEBDB",
+        "accent": "#6B8E4E",
+        "shadow": "#784821",
+        "shine": "#F8E0C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-burger",
+      "name": "Holiday burger",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#E8B66A",
+        "c2": "#B3202A",
+        "c3": "#1E6B45",
+        "c4": "#FFF3D6",
+        "tint": "#FAF0E1",
+        "accent": "#1E6B45",
+        "shadow": "#764F2E",
+        "shine": "#F8E9D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toast-ramp",
+      "name": "Toast ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2E1A08",
+        "c1": "#D99A4E",
+        "c2": "#F0CFA0",
+        "c3": "#8C5520",
+        "c4": "#FBEBD6",
+        "tint": "#F7EBDC",
+        "accent": "#F0CFA0",
+        "shadow": "#724D24",
+        "shine": "#F4E1CA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale-stack",
+      "name": "Greyscale stack",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#BDBDBD",
+        "c2": "#6E6E6E",
+        "c3": "#E6E6E6",
+        "c4": "#3A3A3A",
+        "tint": "#F2F2F2",
+        "accent": "#E6E6E6",
+        "shadow": "#585858",
+        "shine": "#EBEBEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#A33B00",
+        "c3": "#00A651",
+        "c4": "#FFFFFF",
+        "tint": "#FFF6CC",
+        "accent": "#00A651",
+        "shadow": "#665500",
+        "shine": "#FFF2B3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-burger",
+      "name": "Fish burger",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#0B2A33",
+        "c1": "#F2C46B",
+        "c2": "#6FB7D0",
+        "c3": "#F7F3E3",
+        "c4": "#1F6E8C",
+        "tint": "#FCF3E1",
+        "accent": "#6FB7D0",
+        "shadow": "#676849",
+        "shine": "#FBEDD3",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

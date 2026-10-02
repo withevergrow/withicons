@@ -1,0 +1,464 @@
+{
+  "name": "puzzle-piece",
+  "palettes": [
+    {
+      "id": "jigsaw-blue",
+      "name": "Jigsaw blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B1F4D",
+        "c1": "#3B82F6",
+        "c2": "#FACC15",
+        "c3": "#EF4444",
+        "c4": "#22C55E",
+        "tint": "#D8E6FD",
+        "accent": "#FACC15",
+        "shadow": "#193D80",
+        "shine": "#C4DAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jigsaw-red",
+      "name": "Jigsaw red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3F0A0A",
+        "c1": "#EF4444",
+        "c2": "#3B82F6",
+        "c3": "#FACC15",
+        "c4": "#22C55E",
+        "tint": "#FCDADA",
+        "accent": "#FACC15",
+        "shadow": "#741B1B",
+        "shine": "#FAC7C7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jigsaw-yellow",
+      "name": "Jigsaw yellow",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2600",
+        "c1": "#FACC15",
+        "c2": "#EF4444",
+        "c3": "#3B82F6",
+        "c4": "#22C55E",
+        "tint": "#FEF5D0",
+        "accent": "#EF4444",
+        "shadow": "#745806",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jigsaw-green",
+      "name": "Jigsaw green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#06290F",
+        "c1": "#22C55E",
+        "c2": "#FACC15",
+        "c3": "#3B82F6",
+        "c4": "#EF4444",
+        "tint": "#D3F3DF",
+        "accent": "#FACC15",
+        "shadow": "#0E5827",
+        "shine": "#BDEECF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cardboard",
+      "name": "Cardboard back",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1B0E",
+        "c1": "#C9A27A",
+        "c2": "#8C6A4A",
+        "c3": "#EBD8C3",
+        "c4": "#5E4632",
+        "tint": "#F4ECE4",
+        "accent": "#EBD8C3",
+        "shadow": "#5A442E",
+        "shine": "#EFE3D7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wooden-toy",
+      "name": "Wooden toy",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#2A1A0C",
+        "c1": "#D9A066",
+        "c2": "#E63946",
+        "c3": "#2A9D8F",
+        "c4": "#F4C430",
+        "tint": "#F7ECE0",
+        "accent": "#E63946",
+        "shadow": "#5F4227",
+        "shine": "#F4E3D1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "integration",
+      "name": "Integration",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0B1A3D",
+        "c1": "#6366F1",
+        "c2": "#22D3EE",
+        "c3": "#A5B4FC",
+        "c4": "#1E1B4B",
+        "tint": "#E0E0FC",
+        "accent": "#22D3EE",
+        "shadow": "#253173",
+        "shine": "#D0D1FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-piece",
+      "name": "Pastel piece",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3D3550",
+        "c1": "#C6EBD8",
+        "c2": "#F9C6D3",
+        "c3": "#FFE7A8",
+        "c4": "#D9C8F2",
+        "tint": "#F4FBF7",
+        "accent": "#F9C6D3",
+        "shadow": "#666C79",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-piece",
+      "name": "Candy piece",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#4A0D2E",
+        "c1": "#FF4FA3",
+        "c2": "#FFD23F",
+        "c3": "#3ED2C8",
+        "c4": "#9B6BFF",
+        "tint": "#FFDCED",
+        "accent": "#FFD23F",
+        "shadow": "#802151",
+        "shine": "#FFCAE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-piece",
+      "name": "Y2K piece",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#23224A",
+        "c1": "#C9FF6B",
+        "c2": "#FF9EE8",
+        "c3": "#A8C8FF",
+        "c4": "#F5FFE0",
+        "tint": "#F4FFE1",
+        "accent": "#FF9EE8",
+        "shadow": "#556454",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-piece",
+      "name": "Neon piece",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#7CFF4F",
+        "c1": "#0B1A06",
+        "c2": "#FF3DCB",
+        "c3": "#3DF2FF",
+        "c4": "#FFE14D",
+        "tint": "#387623",
+        "accent": "#FF3DCB",
+        "shadow": "#040A02",
+        "shine": "#C4FFB0",
+        "edge": "#101713"
+      }
+    },
+    {
+      "id": "clay-piece",
+      "name": "Clay piece",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#C8643B",
+        "c2": "#E9B872",
+        "c3": "#7A8B5C",
+        "c4": "#F3E3CC",
+        "tint": "#F4E0D8",
+        "accent": "#E9B872",
+        "shadow": "#5C2C19",
+        "shine": "#EFD1C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-piece",
+      "name": "70s puzzle",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2A140A",
+        "c1": "#E9A23B",
+        "c2": "#D9622B",
+        "c3": "#2F7F7A",
+        "c4": "#A6373F",
+        "tint": "#FBECD8",
+        "accent": "#D9622B",
+        "shadow": "#633F19",
+        "shine": "#F8E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "board-game",
+      "name": "Board game",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2A2420",
+        "c1": "#B5584A",
+        "c2": "#E3C99A",
+        "c3": "#4E8C8A",
+        "c4": "#3F5A57",
+        "tint": "#F0DEDB",
+        "accent": "#E3C99A",
+        "shadow": "#54342D",
+        "shine": "#E9CDC9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-ramp",
+      "name": "Green ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#052E16",
+        "c1": "#16A34A",
+        "c2": "#86EFAC",
+        "c3": "#166534",
+        "c4": "#DCFCE7",
+        "tint": "#D0EDDB",
+        "accent": "#86EFAC",
+        "shadow": "#0A5126",
+        "shine": "#B9E3C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grey piece",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#9E9E9E",
+        "c2": "#D9D9D9",
+        "c3": "#5C5C5C",
+        "c4": "#F2F2F2",
+        "tint": "#ECECEC",
+        "accent": "#D9D9D9",
+        "shadow": "#3B3B3B",
+        "shine": "#E2E2E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-piece",
+      "name": "Ocean piece",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#1597BB",
+        "c2": "#8FE3CF",
+        "c3": "#F4E1B5",
+        "c4": "#256D85",
+        "tint": "#D0EAF1",
+        "accent": "#F4E1B5",
+        "shadow": "#0B4963",
+        "shine": "#B9E0EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "jungle",
+      "name": "Jungle",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13240F",
+        "c1": "#4E9F3D",
+        "c2": "#F5C518",
+        "c3": "#D96C4A",
+        "c4": "#1E5128",
+        "tint": "#DCECD8",
+        "accent": "#F5C518",
+        "shadow": "#25491D",
+        "shine": "#CAE2C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grape-piece",
+      "name": "Grape piece",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24082E",
+        "c1": "#8E44AD",
+        "c2": "#F472B6",
+        "c3": "#FDE68A",
+        "c4": "#5B2172",
+        "tint": "#E8DAEF",
+        "accent": "#F472B6",
+        "shadow": "#441A54",
+        "shine": "#DDC7E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-piece",
+      "name": "Sunset piece",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A0618",
+        "c1": "#FB923C",
+        "c2": "#F43F5E",
+        "c3": "#A21CAF",
+        "c4": "#FDE68A",
+        "tint": "#FEE9D8",
+        "accent": "#FDE68A",
+        "shadow": "#743023",
+        "shine": "#FEDEC5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-piece",
+      "name": "Gold piece",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A1F05",
+        "c1": "#D4AF37",
+        "c2": "#1F1F22",
+        "c3": "#F5E7A1",
+        "c4": "#8C6D1F",
+        "tint": "#F6EFD7",
+        "accent": "#F5E7A1",
+        "shadow": "#5D4A14",
+        "shine": "#F2E7C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday",
+      "name": "Holiday puzzle",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0A06",
+        "c1": "#C62828",
+        "c2": "#1B6B3A",
+        "c3": "#FDD835",
+        "c4": "#F7EDE2",
+        "tint": "#F4D4D4",
+        "accent": "#FDD835",
+        "shadow": "#591310",
+        "shine": "#EEBFBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050EF",
+        "c2": "#FFD400",
+        "c3": "#D10000",
+        "c4": "#FFFFFF",
+        "tint": "#CCDCFC",
+        "accent": "#FFD400",
+        "shadow": "#001848",
+        "shine": "#B3CBFA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine piece",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0A3D",
+        "c1": "#FF5F1F",
+        "c2": "#00C2FF",
+        "c3": "#FFE600",
+        "c4": "#FF2E93",
+        "tint": "#FFDFD2",
+        "accent": "#00C2FF",
+        "shadow": "#6B2434",
+        "shine": "#FFCFBC",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

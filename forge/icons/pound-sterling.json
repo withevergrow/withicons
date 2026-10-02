@@ -1,0 +1,65 @@
+{
+  "name": "pound-sterling",
+  "category": "commerce",
+  "description": "The pound sterling sign for prices and money in GBP.",
+  "aliases": [
+    "gbp",
+    "sterling",
+    "pound-sign",
+    "currency-pound",
+    "british-pound",
+    "quid",
+    "pounds",
+    "pound-symbol",
+    "uk-pound"
+  ],
+  "tags": [
+    "currency",
+    "money",
+    "price",
+    "payment",
+    "uk",
+    "finance"
+  ],
+  "paths": [
+    {
+      "d": "M17 7 C16.3 5.4 14.9 4.5 13 4.5 C10.4 4.5 8.5 6.4 8.5 9 V15.5 C8.5 17.3 7.6 18.7 6 19.5 H18",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 12.5 H14",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "£",
+    "pound",
+    "money",
+    "price",
+    "pricing",
+    "cost",
+    "cash",
+    "currency",
+    "payment",
+    "pay",
+    "uk",
+    "united kingdom",
+    "britain",
+    "great britain",
+    "england",
+    "british",
+    "gb",
+    "pound sign",
+    "pence",
+    "finance",
+    "exchange rate",
+    "salary",
+    "invoice",
+    "bill",
+    "budget",
+    "stirling",
+    "pund"
+  ]
+}

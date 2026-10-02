@@ -1,0 +1,33 @@
+{
+  "name": "crop",
+  "intent": "the frame tightens in like you are cropping a photo",
+  "loop": {
+    "preset": "zoom",
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "maximize",
+      "effect": "morph"
+    },
+    {
+      "to": "image",
+      "effect": "fade"
+    }
+  ]
+}

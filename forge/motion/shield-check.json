@@ -1,0 +1,34 @@
+{
+  "name": "shield-check",
+  "intent": "glows softly and draws its tick to show you are protected",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-alert",
+      "effect": "flip"
+    },
+    {
+      "to": "shield",
+      "effect": "fade"
+    },
+    {
+      "to": "shield-check@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "salad",
+  "category": "food",
+  "description": "A bowl of leafy salad for healthy food, vegan, and diet plans.",
+  "aliases": [
+    "salad-bowl",
+    "healthy-food",
+    "vegan",
+    "vegetarian",
+    "greens",
+    "diet",
+    "fresh-food",
+    "healthy-eating",
+    "veggies",
+    "plant-based"
+  ],
+  "tags": [
+    "food",
+    "healthy",
+    "vegan",
+    "diet",
+    "bowl",
+    "greens"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 H21.5 A9.5 9 0 0 1 2.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 12 A6.75 6.75 0 0 1 5.5 4 A6.75 6.75 0 0 1 12.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 7.5 A2.5 2.5 0 1 1 14.5 7.5 A2.5 2.5 0 1 1 19.5 7.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 12 H21.5 A9.5 9 0 0 1 2.5 12 Z",
+    "M12.5 12 A6.75 6.75 0 0 1 5.5 4 A6.75 6.75 0 0 1 12.5 12 Z",
+    "M19.5 7.5 A2.5 2.5 0 1 1 14.5 7.5 A2.5 2.5 0 1 1 19.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M7 6 L10.5 10"
+  ],
+  "synonyms": [
+    "salad bowl",
+    "healthy",
+    "healthy eating",
+    "eat healthy",
+    "clean eating",
+    "nutrition",
+    "nutritionist",
+    "fitness food",
+    "weight loss",
+    "low calorie",
+    "keto",
+    "veggie",
+    "vegetables",
+    "vegetable",
+    "lettuce",
+    "leafy greens",
+    "tomato",
+    "lunch",
+    "light meal",
+    "organic",
+    "fresh",
+    "garden",
+    "plant based",
+    "meal plan",
+    "wellness",
+    "poke bowl",
+    "buddha bowl",
+    "salade",
+    "sallad",
+    "vegitarian"
+  ]
+}

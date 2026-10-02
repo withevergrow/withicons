@@ -1,0 +1,75 @@
+{
+  "name": "file-x",
+  "category": "files",
+  "description": "A page with a cross for an invalid, rejected or removed file.",
+  "aliases": [
+    "file-remove",
+    "file-error",
+    "file-delete",
+    "invalid-file",
+    "file-close",
+    "file-rejected",
+    "file-cross",
+    "document-x",
+    "delete-document",
+    "rejected-document",
+    "broken-file"
+  ],
+  "tags": [
+    "file",
+    "delete",
+    "error",
+    "reject",
+    "invalid",
+    "remove"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 12 L14.5 17",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12 L9.5 17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M9.5 12 L14.5 17",
+    "M14.5 12 L9.5 17"
+  ],
+  "synonyms": [
+    "remove file",
+    "delete file",
+    "close file",
+    "reject",
+    "rejected",
+    "declined",
+    "denied",
+    "invalid",
+    "error",
+    "failed upload",
+    "upload failed",
+    "corrupt file",
+    "corrupted",
+    "unsupported file",
+    "wrong file",
+    "missing file",
+    "not found",
+    "cancel",
+    "discard",
+    "x mark",
+    "cross"
+  ]
+}

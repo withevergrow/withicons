@@ -1,0 +1,41 @@
+{
+  "name": "book",
+  "intent": "leans gently like a book on a shelf",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "float",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "book-open",
+      "effect": "flip"
+    },
+    {
+      "to": "bookmark",
+      "effect": "slide-down"
+    }
+  ]
+}

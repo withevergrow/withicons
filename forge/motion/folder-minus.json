@@ -1,0 +1,8 @@
+{
+  "name": "folder-minus",
+  "intent": "squashes softly as a folder is removed or collapsed",
+  "loop": { "preset": "breathe", "amount": 0.4, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [12, 20], "amount": 0.6 },
+  "alt": [ { "preset": "shake", "amount": 0.5 }, { "preset": "pop" } ],
+  "swap": [ { "to": "folder-plus", "effect": "rotate" }, { "to": "folder", "effect": "fade" } ]
+}

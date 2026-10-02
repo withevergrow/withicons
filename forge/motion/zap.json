@@ -1,0 +1,36 @@
+{
+  "name": "zap",
+  "intent": "flickers with crackling electric energy",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.8,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "flicker",
+    "amount": 1.4,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "zap@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "battery-charging",
+      "effect": "fade"
+    }
+  ]
+}

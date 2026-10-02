@@ -1,0 +1,448 @@
+{
+  "name": "eye",
+  "palettes": [
+    {
+      "id": "blue-iris",
+      "name": "Blue iris",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2545",
+        "c1": "#4A90E2",
+        "c2": "#B9D8F7",
+        "c3": "#1F5FAD",
+        "c4": "#E8F2FD",
+        "tint": "#DBE9F9",
+        "accent": "#FF8FB1",
+        "shadow": "#1E3A5A",
+        "shine": "#E4EEFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brown-iris",
+      "name": "Brown iris",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A170C",
+        "c1": "#8A5A35",
+        "c2": "#D9B48F",
+        "c3": "#4E2F1A",
+        "c4": "#F3E5D6",
+        "tint": "#E8DED7",
+        "accent": "#E3B04B",
+        "shadow": "#372415",
+        "shine": "#EDE6E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-iris",
+      "name": "Green iris",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#13300F",
+        "c1": "#5A9E3E",
+        "c2": "#C5E3A5",
+        "c3": "#2F6B1C",
+        "c4": "#E5F2D9",
+        "tint": "#DEECD8",
+        "accent": "#C9A227",
+        "shadow": "#243F19",
+        "shine": "#E6F0E2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hazel-iris",
+      "name": "Hazel iris",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E2410",
+        "c1": "#9C8A3E",
+        "c2": "#6BA84F",
+        "c3": "#8A5A35",
+        "c4": "#EFE9D2",
+        "tint": "#EBE8D8",
+        "accent": "#6BA84F",
+        "shadow": "#3E3719",
+        "shine": "#F0EDE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grey-iris",
+      "name": "Grey iris",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1E252D",
+        "c1": "#8E9AA8",
+        "c2": "#C9D1DA",
+        "c3": "#4E5A66",
+        "c4": "#EEF1F4",
+        "tint": "#E8EBEE",
+        "accent": "#6EB5FF",
+        "shadow": "#393E43",
+        "shine": "#EEF0F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "amber-eye",
+      "name": "Amber eye",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2200",
+        "c1": "#E8A33A",
+        "c2": "#FFD88A",
+        "c3": "#8C5A12",
+        "c4": "#FFF0CC",
+        "tint": "#FAEDD8",
+        "accent": "#6BA84F",
+        "shadow": "#5D4117",
+        "shine": "#FCF1E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "violet-eye",
+      "name": "Violet eye",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#24104A",
+        "c1": "#8E6CF0",
+        "c2": "#D9CCFF",
+        "c3": "#5B3AB8",
+        "c4": "#F0EBFF",
+        "tint": "#E8E2FC",
+        "accent": "#FF8FB1",
+        "shadow": "#392B60",
+        "shine": "#EEE9FD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "on-air-red",
+      "name": "On air red",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0A0C",
+        "c1": "#E5484D",
+        "c2": "#FFB4B6",
+        "c3": "#8E1E22",
+        "c4": "#FDE2E3",
+        "tint": "#FADADB",
+        "accent": "#FFD166",
+        "shadow": "#5C1D1F",
+        "shine": "#FBE4E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-watch",
+      "name": "Night watch",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E8EEF8",
+        "c1": "#2A3B5C",
+        "c2": "#7DD3FC",
+        "c3": "#FFB74D",
+        "c4": "#141E30",
+        "tint": "#3D4F72",
+        "accent": "#7DD3FC",
+        "shadow": "#0A0F1A",
+        "shine": "#8FA7CF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-gaze",
+      "name": "Neon gaze",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FF2BD6",
+        "c1": "#00F0FF",
+        "c2": "#FFE600",
+        "c3": "#B6FF3D",
+        "c4": "#8B5CFF",
+        "tint": "#CCFCFF",
+        "accent": "#FFE600",
+        "shadow": "#003A40",
+        "shine": "#D9FDFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-peek",
+      "name": "Pastel peek",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3550",
+        "c1": "#BDE0FE",
+        "c2": "#FFC8DD",
+        "c3": "#CDB4FF",
+        "c4": "#FFF1B8",
+        "tint": "#F2F9FF",
+        "accent": "#FFC8DD",
+        "shadow": "#4C5A66",
+        "shine": "#F5FAFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-eye",
+      "name": "Candy eye",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3A1030",
+        "c1": "#FF8FC7",
+        "c2": "#7FDBFF",
+        "c3": "#FFE066",
+        "c4": "#C3F584",
+        "tint": "#FFE9F4",
+        "accent": "#7FDBFF",
+        "shadow": "#663950",
+        "shine": "#FFEEF7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-gaze",
+      "name": "Y2K gaze",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#221A4A",
+        "c1": "#A6B8FF",
+        "c2": "#FF8AE2",
+        "c3": "#7CF4E1",
+        "c4": "#F6EEFF",
+        "tint": "#EDF1FF",
+        "accent": "#FF8AE2",
+        "shadow": "#424A66",
+        "shine": "#F2F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-psychedelic",
+      "name": "70s psychedelic",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3A1A0E",
+        "c1": "#E9873A",
+        "c2": "#C8402B",
+        "c3": "#F2C14E",
+        "c4": "#3F8A8A",
+        "tint": "#FBE7D8",
+        "accent": "#F2C14E",
+        "shadow": "#5D3617",
+        "shine": "#FCEDE1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sepia-portrait",
+      "name": "Sepia portrait",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#3A2A1E",
+        "c1": "#A07C52",
+        "c2": "#D9C7A8",
+        "c3": "#6E5238",
+        "c4": "#F1E4D2",
+        "tint": "#ECE5DC",
+        "accent": "#A33B2B",
+        "shadow": "#403221",
+        "shine": "#F1EBE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-gaze",
+      "name": "Ocean gaze",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#052F3C",
+        "c1": "#1FA2B8",
+        "c2": "#6FD3D9",
+        "c3": "#0B5E78",
+        "c4": "#D4F2F6",
+        "tint": "#D2ECF1",
+        "accent": "#F2795B",
+        "shadow": "#0C414A",
+        "shine": "#DDF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cats-eye",
+      "name": "Cat's eye",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1C2410",
+        "c1": "#B5C93A",
+        "c2": "#E8B04B",
+        "c3": "#3A3A1A",
+        "c4": "#F3F6D2",
+        "tint": "#F0F4D8",
+        "accent": "#E8B04B",
+        "shadow": "#485017",
+        "shine": "#F4F7E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-gaze",
+      "name": "Sunset gaze",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A1528",
+        "c1": "#FF8C42",
+        "c2": "#FF3C78",
+        "c3": "#FFD166",
+        "c4": "#FFE1C2",
+        "tint": "#FFE8D9",
+        "accent": "#FF3C78",
+        "shadow": "#66381A",
+        "shine": "#FFEEE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-gaze",
+      "name": "Berry gaze",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0E25",
+        "c1": "#C2185B",
+        "c2": "#F48FB1",
+        "c3": "#7B1FA2",
+        "c4": "#FCE4EC",
+        "tint": "#F3D1DE",
+        "accent": "#FFC145",
+        "shadow": "#4E0A24",
+        "shine": "#F6DCE6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "emerald-and-gold",
+      "name": "Emerald & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0E2018",
+        "c1": "#138A5E",
+        "c2": "#D4AF37",
+        "c3": "#0A4D35",
+        "c4": "#D2F0E3",
+        "tint": "#D0E8DF",
+        "accent": "#D4AF37",
+        "shadow": "#083726",
+        "shine": "#DCEDE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "azure-ramp",
+      "name": "Azure ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#063A4F",
+        "c1": "#0EA5E9",
+        "c2": "#7DD3FC",
+        "c3": "#0369A1",
+        "c4": "#E0F2FE",
+        "tint": "#CFEDFB",
+        "accent": "#7DD3FC",
+        "shadow": "#06425D",
+        "shine": "#DBF2FC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast-eye",
+      "name": "High-contrast eye",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0057FF",
+        "c2": "#FFD400",
+        "c3": "#E00000",
+        "c4": "#FFFFFF",
+        "tint": "#CCDDFF",
+        "accent": "#FFD400",
+        "shadow": "#002366",
+        "shine": "#D9E6FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-gaze",
+      "name": "Dopamine gaze",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0B3F",
+        "c1": "#3EC1FF",
+        "c2": "#FF3EA5",
+        "c3": "#FFD23F",
+        "c4": "#7CFF6B",
+        "tint": "#D8F3FF",
+        "accent": "#FF3EA5",
+        "shadow": "#194D66",
+        "shine": "#E2F6FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "name": "car",
+  "palettes": [
+    {
+      "id": "cherry-red",
+      "name": "Cherry red",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0505",
+        "c1": "#D62828",
+        "c2": "#F2F2F2",
+        "c3": "#C9CED6",
+        "c4": "#9AD1F5",
+        "tint": "#F7D4D4",
+        "accent": "#FFC93C",
+        "shadow": "#6B1414",
+        "shine": "#F4C3C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "taxi-yellow",
+      "name": "Taxi yellow",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A2000",
+        "c1": "#FFC107",
+        "c2": "#2B2B2B",
+        "c3": "#FFFFFF",
+        "c4": "#E53935",
+        "tint": "#FFF3CD",
+        "accent": "#E53935",
+        "shadow": "#806104",
+        "shine": "#FFEEBA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "racing-green",
+      "name": "Racing green",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0A1F14",
+        "c1": "#1E5B3A",
+        "c2": "#E8E2C8",
+        "c3": "#C9A13B",
+        "c4": "#2B2D33",
+        "tint": "#D2DED8",
+        "accent": "#C9A13B",
+        "shadow": "#0F2E1D",
+        "shine": "#C0D1C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "police-blue",
+      "name": "Police blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A1530",
+        "c1": "#1E4FA8",
+        "c2": "#F2F4F8",
+        "c3": "#C9CED6",
+        "c4": "#E53935",
+        "tint": "#D2DCEE",
+        "accent": "#E53935",
+        "shadow": "#0F2854",
+        "shine": "#C0CEE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "silver-sedan",
+      "name": "Silver sedan",
+      "tags": [
+        "true-to-life",
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1F2329",
+        "c1": "#B8BEC6",
+        "c2": "#5B6573",
+        "c3": "#E9ECEF",
+        "c4": "#8FB8DE",
+        "tint": "#F1F2F4",
+        "accent": "#8FB8DE",
+        "shadow": "#5C5F63",
+        "shine": "#EBEDEF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "midnight-and-gold",
+      "name": "Midnight & gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#3A3D44",
+        "c2": "#D4AF37",
+        "c3": "#F3E5AB",
+        "c4": "#8A8F98",
+        "tint": "#D8D8DA",
+        "accent": "#D4AF37",
+        "shadow": "#1D1F22",
+        "shine": "#C8C9CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "electric-teal",
+      "name": "Electric teal",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#062E2A",
+        "c1": "#17B890",
+        "c2": "#E8FFF7",
+        "c3": "#FFE066",
+        "c4": "#9BF0D7",
+        "tint": "#D1F1E9",
+        "accent": "#FFE066",
+        "shadow": "#0C5C48",
+        "shine": "#BEEBE0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beach-buggy",
+      "name": "Beach buggy",
+      "tags": [
+        "vivid",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#3A1600",
+        "c1": "#FF7A1A",
+        "c2": "#4FC3F7",
+        "c3": "#FFE0B2",
+        "c4": "#2B2D33",
+        "tint": "#FFE4D1",
+        "accent": "#4FC3F7",
+        "shadow": "#803D0D",
+        "shine": "#FFDABF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-two-tone",
+      "name": "Vintage two-tone",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2216",
+        "c1": "#E9D8A6",
+        "c2": "#7FB7BE",
+        "c3": "#C0392B",
+        "c4": "#6B4E3D",
+        "tint": "#FBF7ED",
+        "accent": "#C0392B",
+        "shadow": "#756C53",
+        "shine": "#F9F4E6",
+        "edge": "#FBF6EA"
+      }
+    },
+    {
+      "id": "rust-bucket",
+      "name": "Rust bucket",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B140A",
+        "c1": "#A0522D",
+        "c2": "#6E7F5C",
+        "c3": "#D9A066",
+        "c4": "#3A3A3A",
+        "tint": "#ECDCD5",
+        "accent": "#D9A066",
+        "shadow": "#502917",
+        "shine": "#E4CFC4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-drive",
+      "name": "Night drive",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#EEF0F8",
+        "c1": "#3A3F66",
+        "c2": "#8A8FB8",
+        "c3": "#FFD166",
+        "c4": "#1E2140",
+        "tint": "#D8D9E0",
+        "accent": "#FFD166",
+        "shadow": "#161827",
+        "shine": "#C8C9D4",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "neon-racer",
+      "name": "Neon racer",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFFFFF",
+        "c1": "#FF2BD6",
+        "c2": "#00F0FF",
+        "c3": "#FFF200",
+        "c4": "#7A00FF",
+        "tint": "#FFD5F7",
+        "accent": "#00F0FF",
+        "shadow": "#611051",
+        "shine": "#FFC4F4",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-ride",
+      "name": "Pastel ride",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3F3A5A",
+        "c1": "#A0C4FF",
+        "c2": "#FFC6FF",
+        "c3": "#FDFFB6",
+        "c4": "#6B6880",
+        "tint": "#ECF3FF",
+        "accent": "#FFC6FF",
+        "shadow": "#506280",
+        "shine": "#E4EEFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toy-car",
+      "name": "Toy car",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3B0A2A",
+        "c1": "#FF5DA2",
+        "c2": "#7CE0F9",
+        "c3": "#FFE45E",
+        "c4": "#3D2B56",
+        "tint": "#FFDFEC",
+        "accent": "#7CE0F9",
+        "shadow": "#802F51",
+        "shine": "#FFD2E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "woodie-wagon",
+      "name": "Woodie wagon",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#3E1F0E",
+        "c1": "#E8663D",
+        "c2": "#8C3B1F",
+        "c3": "#F5B841",
+        "c4": "#3A2A1E",
+        "tint": "#FAE0D8",
+        "accent": "#F5B841",
+        "shadow": "#74331F",
+        "shine": "#F9D4C9",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "sunset-cruiser",
+      "name": "Sunset cruiser",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A1428",
+        "c1": "#F2545B",
+        "c2": "#FFD29D",
+        "c3": "#A23B72",
+        "c4": "#3A1F2B",
+        "tint": "#FCDDDE",
+        "accent": "#FFD29D",
+        "shadow": "#792A2E",
+        "shine": "#FBCFD1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-ramp",
+      "name": "Blue ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0A2540",
+        "c1": "#2F6FD8",
+        "c2": "#A8CBF5",
+        "c3": "#E7F1FC",
+        "c4": "#0E2F5A",
+        "tint": "#D5E2F7",
+        "accent": "#A8CBF5",
+        "shadow": "#18386C",
+        "shine": "#C5D7F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gunmetal",
+      "name": "Gunmetal",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#111111",
+        "c1": "#6E6E73",
+        "c2": "#C8C8CC",
+        "c3": "#F2F2F2",
+        "c4": "#2B2B2E",
+        "tint": "#E2E2E3",
+        "accent": "#C8C8CC",
+        "shadow": "#37373A",
+        "shine": "#D6D6D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FF1F1F",
+        "c2": "#FFE600",
+        "c3": "#0047FF",
+        "c4": "#FFFFFF",
+        "tint": "#FFD2D2",
+        "accent": "#FFE600",
+        "shadow": "#801010",
+        "shine": "#FFC0C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chrome-cruiser",
+      "name": "Chrome cruiser",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1B1F5E",
+        "c1": "#C0C7D6",
+        "c2": "#FF66CC",
+        "c3": "#8FB8FF",
+        "c4": "#E9FFB0",
+        "tint": "#F2F4F7",
+        "accent": "#FF66CC",
+        "shadow": "#60646B",
+        "shine": "#EDEFF4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "surf-wagon",
+      "name": "Surf wagon",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062F4A",
+        "c1": "#1BA7C4",
+        "c2": "#FFE8B0",
+        "c3": "#F2785C",
+        "c4": "#2B2D33",
+        "tint": "#D1EDF3",
+        "accent": "#F2785C",
+        "shadow": "#0E5462",
+        "shine": "#BFE6EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "off-roader",
+      "name": "Off-roader",
+      "tags": [
+        "nature",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1E2A14",
+        "c1": "#5A6B3A",
+        "c2": "#C9A66B",
+        "c3": "#E8E2C8",
+        "c4": "#2B2D33",
+        "tint": "#DEE1D8",
+        "accent": "#C9A66B",
+        "shadow": "#2D361D",
+        "shine": "#D1D6C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "snow-day",
+      "name": "Snow day",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#13293D",
+        "c1": "#DCE8F2",
+        "c2": "#D64550",
+        "c3": "#8FB8DE",
+        "c4": "#2B3A4A",
+        "tint": "#F8FAFC",
+        "accent": "#D64550",
+        "shadow": "#6E7479",
+        "shine": "#F5F9FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-pop",
+      "name": "Dopamine pop",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1A40",
+        "c1": "#FFD23F",
+        "c2": "#5B5BFF",
+        "c3": "#FF4D8D",
+        "c4": "#3DDC97",
+        "tint": "#FFF6D9",
+        "accent": "#FF4D8D",
+        "shadow": "#806920",
+        "shine": "#FFF2C9",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

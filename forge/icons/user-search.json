@@ -1,0 +1,68 @@
+{
+  "name": "user-search",
+  "category": "users",
+  "description": "A person with a magnifying glass for finding people and searching members.",
+  "aliases": [
+    "find-user",
+    "search-user",
+    "people-search",
+    "person-search",
+    "lookup-user",
+    "find-people",
+    "member-search",
+    "search-people",
+    "find-person",
+    "search-contacts"
+  ],
+  "tags": [
+    "person",
+    "search",
+    "find",
+    "directory",
+    "people"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M19.5 16 A3 3 0 1 1 13.5 16 A3 3 0 1 1 19.5 16 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M18.75 18.25 L21 20.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M19.5 16 A3 3 0 1 1 13.5 16 A3 3 0 1 1 19.5 16 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "find someone",
+    "look up a person",
+    "search members",
+    "find friends",
+    "find a contact",
+    "directory",
+    "staff directory",
+    "people finder",
+    "who is",
+    "recruiting",
+    "talent search",
+    "hiring",
+    "candidate search",
+    "headhunt",
+    "user lookup",
+    "search users",
+    "find colleagues",
+    "serch user"
+  ]
+}

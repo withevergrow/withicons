@@ -2,9 +2,9 @@
 
 [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com)
 
-Open-source icons: **300 icons x 7 styles = 2,100 icons**, MIT licensed.
-Every icon is one hand-drawn skeleton (24x24 grid, `forge/icons/<name>.json`); seven deterministic
-renderers turn it into seven styles, so all 2,100 stay one consistent family.
+Open-source icons: **500 icons x 12 styles = 6,000 icons**, MIT licensed, with optional animations.
+Every icon is one hand-drawn skeleton (24x24 grid, `forge/icons/<name>.json`); twelve deterministic
+renderers turn it into twelve styles, so all 6,000 stay one consistent family.
 
 ```bash
 npm i @withicons/react
@@ -19,7 +19,7 @@ import { Home as HomeSolid } from '@withicons/react/solid' // any style is a sub
 <HomeSolid size={32} color="#e11d48" title="Home" />
 ```
 
-## The 7 styles
+## The 12 styles
 
 | style | kind | subpath | look |
 |---|---|---|---|
@@ -30,9 +30,60 @@ import { Home as HomeSolid } from '@withicons/react/solid' // any style is a sub
 | `engrave` | creative | `/engrave` | Banknote intaglio: a swelling contour and burin hatching that models light and shade. |
 | `blueprint` | creative | `/blueprint` | A drafting-table drawing: hairline keylines, centre lines and open control nodes. |
 | `sketch` | creative | `/sketch` | Loose marker strokes drawn twice, with crossing corners and a light hachure. |
+| `glass` | palette | `/glass` | Layered frosted glass (glassmorphism): a vivid colour glowing through a translucent pane with a crisp rim. |
+| `kawaii` | palette | `/kawaii` | Chubby pastel shapes with a soft thick outline and a tiny blushing face. |
+| `sticker` | palette | `/sticker` | Y2K die-cut vinyl stickers: candy colours, a puffy white border, a glossy shine and sparkles. |
+| `pixel` | palette | `/pixel` | Hand-tuned 16-bit pixel art, sharp at 16, 32 and 48px. |
+| `retro` | palette | `/retro` | Warm 70s patches: chunky outlines, sunset-striped fills and a hard offset shadow. |
 
-Every style is single-colour `currentColor`: it follows your text color on light and dark backgrounds.
-The universal styles are for everyday UI; the creative styles are for illustration, marketing and empty states.
+The seven mono styles paint in `currentColor`, so they follow your text colour on light and dark backgrounds (duo's tone and
+blueprint's accent can take a second colour through `--with-duo` and `--with-accent`).
+The five palette styles ship a default palette that reads on white and on near-black; every colour is a CSS variable
+(`--with-<style>-<role>`) and the ink still follows `currentColor`, so one line of CSS re-themes them:
+
+```css
+.hero { --with-kawaii-fill-1: #c4b5fd; --with-retro-1: #fde047; }
+```
+
+The universal styles are for everyday UI; the creative and palette styles are for illustration, marketing, slides and empty states.
+
+## Colour palettes
+
+Every icon ships 20-30 colour palettes picked for that icon (pizza: Margherita, Pepperoni, Pesto verde…), 11,423 in all.
+A palette sets ten colour roles (`ink`, `c1`-`c4`, `tint`, `accent`, `shadow`, `shine`, `edge`) and every multi-colour
+style (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`) maps them onto its own variables, so one palette
+changes **every** colour of an icon in any of those styles:
+
+```js
+import pizza from '@withicons/core/palettes/pizza.json' with { type: 'json' }
+import { applyPalette, bakePalette } from '@withicons/core/palettes/palette-map.js'
+import retro from '@withicons/core/nodes/retro'
+import { toSvg } from '@withicons/core'
+
+const svg = toSvg(retro.pizza, 'retro')
+applyPalette(svg, pizza.palettes[1].colors)  // { vars: { '--with-retro-1': '#F7C64B', … }, color: '#3A1408' }: set as inline CSS
+bakePalette(svg, pizza.palettes[1].colors)   // the same SVG with the hex colours written in, for files and design tools
+```
+
+The MCP server (`list_palettes`, and `get_icon` with `palette` / `colors`) and the CLI (`npx withicons palettes pizza`,
+`npx withicons get pizza --style retro --palette pepperoni`) return the same palettes as ready code.
+
+## Animation
+
+Optional and separate: [`@withicons/motion`](packages/motion) animates the element that holds any icon, in any style
+or package, with pure CSS. Every icon has a tuned continuous loop and hover effect, plus icon-to-icon swaps.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+
+<span class="wm wm-loop" data-wm="bell">…bell icon…</span>                                     <!-- continuous -->
+<button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>   <!-- on hover -->
+<span class="wm-swap wm-fx-morph"><svg class="wm-a">…play…</svg><svg class="wm-b">…pause…</svg></span>
+```
+
+`prefers-reduced-motion` switches everything off. Agents get exact code from the MCP tool `animate_icon` or
+`npx withicons animate bell --trigger hover --format react`. Spec: [`forge/MOTION.md`](forge/MOTION.md).
 
 ## Packages
 
@@ -46,6 +97,10 @@ The universal styles are for everyday UI; the creative styles are for illustrati
 | [`@withicons/web`](packages/web) | `npm i @withicons/web` | `import '@withicons/web'` then `<with-icon name="home">` |
 | [`@withicons/static`](packages/static) | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
 | [`@withicons/core`](packages/core) | `npm i @withicons/core` | `import { resolve, search } from '@withicons/core'` |
+| [`@withicons/motion`](packages/motion) | `npm i @withicons/motion` | `import '@withicons/motion/motion.css'` (animations, optional) |
+| [`@withicons/search`](packages/search) | `npm i @withicons/search` | `import { create } from '@withicons/search'` |
+| [`@withicons/mcp`](packages/mcp) | `npx -y @withicons/mcp` | MCP server for AI assistants (search, code, animation) |
+| [`withicons`](packages/cli) | `npx withicons search "throw away"` | CLI: search, code, `init` for AI coding tools |
 
 No build step, straight from a CDN:
 
@@ -56,11 +111,13 @@ No build step, straight from a CDN:
 
 ## The same API everywhere
 
-- **Default path = `line`.** Other styles: `<pkg>/solid`, `<pkg>/duo`, `<pkg>/gloss`, `<pkg>/engrave`, `<pkg>/blueprint`, `<pkg>/sketch`.
+- **Default path = `line`.** Other styles: `<pkg>/solid`, `<pkg>/duo`, `<pkg>/gloss`, `<pkg>/engrave`, `<pkg>/blueprint`, `<pkg>/sketch`,
+  `<pkg>/glass`, `<pkg>/kawaii`, `<pkg>/sticker`, `<pkg>/pixel`, `<pkg>/retro`.
 - **Names:** PascalCase of the kebab-case icon name, exported twice: `ArrowRight` and `ArrowRightIcon`.
 - **Deep imports:** `<pkg>/icons/home` (line) and `<pkg>/solid/icons/home`.
 - **Props:** `size` (24), `color` (`currentColor`), `strokeWidth` (styles with live strokes), `absoluteStrokeWidth`,
-  `title` (sets `role="img"`, otherwise `aria-hidden`), `className` / `class`; everything else goes to the `<svg>`.
+  `title` or `aria-label` (sets `role="img"`, otherwise `aria-hidden`), `className` / `class`; everything else goes to the `<svg>`.
+  `<with-icon>` takes the same as attributes (`stroke-width`, `absolute-stroke-width`, `label`), plus `name` and `variant`.
 - **Dynamic names:** `<Icon name="home" variant="solid" />`. It pulls in every icon, so prefer named imports.
 - **Aliases:** names you might guess resolve to the real icon (`bin` -> `trash`, `house` -> `home`).
   `resolve()` in `@withicons/core` throws on ambiguous aliases (listing the candidates) and on unknown names (suggesting the 3 nearest).
@@ -68,13 +125,18 @@ No build step, straight from a CDN:
 ## Website
 
 The zero-build site in [`site/`](site) (open `site/index.html`) lets you browse and search all icons in every style,
-copy the SVG or its import line, and read [`site/llms.txt`](site/llms.txt), a guide for AI agents.
+copy the SVG or its import line, and read [`site/llms.txt`](site/llms.txt), a guide for AI agents. Every icon page has a
+**Customize** studio: pick a style, change every colour of a multi-colour icon (one picker per colour, or one of the
+icon's palettes), try its animations and swaps, and download it as PNG, SVG, PDF, GIF, video, Lottie, PowerPoint, Word,
+favicons or framework code.
 
 ## Repository
 
 ```
 forge/icons/<name>.json    one skeleton per icon (the only hand-drawn input)
-forge/styles/<style>.mjs   the seven style renderers
+forge/styles/<style>.mjs   the twelve style renderers
+forge/motion/<name>.json   one animation spec per icon (forge/MOTION.md)
+forge/palettes/<name>.json 20-30 colour palettes per icon (forge/PALETTES.md)
 forge/lib/emit-*.mjs       package emitters
 packages/*                 the npm packages (dist/ is generated)
 site/                      the website
@@ -84,6 +146,8 @@ site/                      the website
 node forge/build.mjs                  # render every icon x style, emit every package + site data
 node forge/build.mjs react vue        # only some emitters
 node forge/tools/check.mjs home lock  # lint skeletons and render them through every style
+node forge/tools/check-motion.mjs     # validate the animation specs
+node forge/tools/check-palettes.mjs   # validate the colour palettes
 ```
 
 Contributing an icon: read [`forge/CONTRACT.md`](forge/CONTRACT.md) and [`forge/PARTS.md`](forge/PARTS.md).

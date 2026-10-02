@@ -1,0 +1,76 @@
+{
+  "name": "file-lock",
+  "category": "files",
+  "description": "A page with a padlock for protected, private or encrypted files.",
+  "aliases": [
+    "locked-file",
+    "secure-file",
+    "file-secure",
+    "private-file",
+    "protected-document",
+    "encrypted-file",
+    "file-protected",
+    "document-lock",
+    "locked-document",
+    "confidential-file",
+    "file-password"
+  ],
+  "tags": [
+    "file",
+    "lock",
+    "secure",
+    "private",
+    "protected",
+    "encrypted"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M10 13.5 V12 A2 2 0 0 1 14 12 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 13.5 H14.5 A1 1 0 0 1 15.5 14.5 V17.5 A1 1 0 0 1 14.5 18.5 H9.5 A1 1 0 0 1 8.5 17.5 V14.5 A1 1 0 0 1 9.5 13.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M9.5 13.5 H14.5 A1 1 0 0 1 15.5 14.5 V17.5 A1 1 0 0 1 14.5 18.5 H9.5 A1 1 0 0 1 8.5 17.5 V14.5 A1 1 0 0 1 9.5 13.5 Z",
+    "M10 13.5 V12 A2 2 0 0 1 14 12 V13.5"
+  ],
+  "synonyms": [
+    "locked",
+    "private",
+    "secure",
+    "protected",
+    "encrypted",
+    "confidential",
+    "secret",
+    "classified",
+    "password protected",
+    "restricted",
+    "read only",
+    "read-only",
+    "no access",
+    "permissions",
+    "sensitive document",
+    "nda",
+    "privacy",
+    "safe document",
+    "padlock",
+    "locked pdf",
+    "secure attachment",
+    "gdpr"
+  ]
+}

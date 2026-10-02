@@ -1,0 +1,15 @@
+{
+  "name": "message-square-text",
+  "intent": "quivers like text being typed, pops from its tail on hover",
+  "loop": { "preset": "type", "amount": 0.5, "duration": 1.4 },
+  "hover": { "preset": "pop", "origin": [3, 21] },
+  "alt": [
+    { "preset": "breathe", "amount": 0.5 },
+    { "preset": "jelly", "origin": [3, 21] }
+  ],
+  "swap": [
+    { "to": "message-square", "effect": "fade" },
+    { "to": "message-square-text@solid", "effect": "fade" },
+    { "to": "check", "effect": "scale" }
+  ]
+}

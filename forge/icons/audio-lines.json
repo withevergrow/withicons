@@ -1,0 +1,78 @@
+{
+  "name": "audio-lines",
+  "category": "media",
+  "description": "Vertical bars of different heights for audio, voice input, and sound waves.",
+  "aliases": [
+    "sound-wave",
+    "audio-wave",
+    "voice-wave",
+    "audio-bars",
+    "soundbars",
+    "soundwave",
+    "sound-bars",
+    "audio-level",
+    "speaking"
+  ],
+  "tags": [
+    "audio",
+    "sound",
+    "voice",
+    "wave",
+    "levels",
+    "speech"
+  ],
+  "paths": [
+    {
+      "d": "M4 10 V14",
+      "plate": "A"
+    },
+    {
+      "d": "M8 6.5 V17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 3 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M16 7.5 V16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M20 10 V14",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "sound waves",
+    "audio waves",
+    "voice message",
+    "voice note",
+    "voice memo",
+    "voice chat",
+    "voice mode",
+    "talk",
+    "speak",
+    "speech",
+    "dictation",
+    "listening",
+    "transcribe",
+    "now playing",
+    "music playing",
+    "audio visualizer",
+    "audio visualiser",
+    "level meter",
+    "vu meter",
+    "spectrum",
+    "frequency",
+    "decibel",
+    "podcast",
+    "loudness",
+    "bars",
+    "sound bars",
+    "audiolines",
+    "voice input"
+  ]
+}

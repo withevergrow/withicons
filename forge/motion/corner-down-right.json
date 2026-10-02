@@ -1,0 +1,32 @@
+{
+  "name": "corner-down-right",
+  "intent": "steps right, like a reply tucking in under its thread",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 1.1,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "nudge",
+      "dir": 45
+    }
+  ],
+  "swap": [
+    {
+      "to": "reply",
+      "effect": "fade"
+    }
+  ]
+}

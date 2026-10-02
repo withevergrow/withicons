@@ -1,0 +1,447 @@
+{
+  "name": "wand",
+  "palettes": [
+    {
+      "id": "ebony-and-ivory",
+      "name": "Ebony & ivory",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#262628",
+        "c1": "#5B5B66",
+        "c2": "#F5F5F5",
+        "c3": "#FFD23F",
+        "c4": "#2A2A30",
+        "tint": "#DEDEE0",
+        "accent": "#FFD23F",
+        "shadow": "#242429",
+        "shine": "#E6E6E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fairy-godmother",
+      "name": "Fairy godmother",
+      "tags": [
+        "true-to-life",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#9D4D79",
+        "c1": "#FF8FC7",
+        "c2": "#FFD166",
+        "c3": "#B794F6",
+        "c4": "#FFE0EF",
+        "tint": "#FFE9F4",
+        "accent": "#FFD166",
+        "shadow": "#663950",
+        "shine": "#FFEEF7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wizard-violet",
+      "name": "Wizard violet",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3E2275",
+        "c1": "#7C4DDB",
+        "c2": "#FFD23F",
+        "c3": "#6EE7F9",
+        "c4": "#E8DEFB",
+        "tint": "#E5DBF8",
+        "accent": "#FFD23F",
+        "shadow": "#321F58",
+        "shine": "#EBE4FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "oak-wand",
+      "name": "Oak wand",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#593C22",
+        "c1": "#A0703F",
+        "c2": "#F2C94C",
+        "c3": "#6BA84F",
+        "c4": "#EEDCC5",
+        "tint": "#ECE2D9",
+        "accent": "#F2C94C",
+        "shadow": "#402D19",
+        "shine": "#F1EAE2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ai-magic",
+      "name": "AI magic",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#503995",
+        "c1": "#8E6CF0",
+        "c2": "#3EE6C1",
+        "c3": "#FF7AC6",
+        "c4": "#E5DEFF",
+        "tint": "#E8E2FC",
+        "accent": "#3EE6C1",
+        "shadow": "#392B60",
+        "shine": "#EEE9FD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "auto-fix-teal",
+      "name": "Auto-fix teal",
+      "tags": [
+        "vivid",
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0C746A",
+        "c1": "#14B8A6",
+        "c2": "#FBBF24",
+        "c3": "#F472B6",
+        "c4": "#CCFBF1",
+        "tint": "#D0F1ED",
+        "accent": "#FBBF24",
+        "shadow": "#084A42",
+        "shine": "#DCF4F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "midnight-spell",
+      "name": "Midnight spell",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFE38A",
+        "c1": "#3C2C78",
+        "c2": "#7FE7FF",
+        "c3": "#FF8AD8",
+        "c4": "#1B1438",
+        "tint": "#4E3D90",
+        "accent": "#7FE7FF",
+        "shadow": "#0E0A1E",
+        "shine": "#A897E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-spell",
+      "name": "Neon spell",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#00F0FF",
+        "c1": "#FF2BD6",
+        "c2": "#B6FF3D",
+        "c3": "#FFE600",
+        "c4": "#8B5CFF",
+        "tint": "#FFD5F7",
+        "accent": "#FFE600",
+        "shadow": "#4D0A40",
+        "shine": "#FFDFF9",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-charm",
+      "name": "Pastel charm",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#7C6E9F",
+        "c1": "#CDB4FF",
+        "c2": "#B9FBC0",
+        "c3": "#FFC8DD",
+        "c4": "#FFF1B8",
+        "tint": "#F5F0FF",
+        "accent": "#FFC8DD",
+        "shadow": "#524866",
+        "shine": "#F8F4FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-wand",
+      "name": "Y2K wand",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#915296",
+        "c1": "#FF8AE2",
+        "c2": "#7CF4E1",
+        "c3": "#B8A6FF",
+        "c4": "#F6EEFF",
+        "tint": "#FFE8F9",
+        "accent": "#7CF4E1",
+        "shadow": "#66375A",
+        "shine": "#FFEDFB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-magic-show",
+      "name": "70s magic show",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#652517",
+        "c1": "#C8402B",
+        "c2": "#F2B134",
+        "c3": "#2E7D7A",
+        "c4": "#F4DDB0",
+        "tint": "#F4D9D5",
+        "accent": "#F2B134",
+        "shadow": "#501A11",
+        "shine": "#F7E2DF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "stage-magician",
+      "name": "Stage magician",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1A1A1A",
+        "c1": "#7A1F2B",
+        "c2": "#E8D5A6",
+        "c3": "#C9A227",
+        "c4": "#3A3A3A",
+        "tint": "#E4D2D5",
+        "accent": "#C9A227",
+        "shadow": "#310C11",
+        "shine": "#EBDDDF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mermaid-wand",
+      "name": "Mermaid wand",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#116374",
+        "c1": "#1FA2B8",
+        "c2": "#FF8FAB",
+        "c3": "#FFD6A5",
+        "c4": "#D4F2F6",
+        "tint": "#D2ECF1",
+        "accent": "#FF8FAB",
+        "shadow": "#0C414A",
+        "shine": "#DDF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "willow-wand",
+      "name": "Willow wand",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#49642F",
+        "c1": "#7FA650",
+        "c2": "#F2C14E",
+        "c3": "#C77DCB",
+        "c4": "#EAF2DA",
+        "tint": "#E5EDDC",
+        "accent": "#C77DCB",
+        "shadow": "#334220",
+        "shine": "#ECF2E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-spell",
+      "name": "Sunset spell",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#9D4241",
+        "c1": "#FF6F59",
+        "c2": "#FFD166",
+        "c3": "#7A3EB1",
+        "c4": "#FFE1D9",
+        "tint": "#FFE2DE",
+        "accent": "#FFD166",
+        "shadow": "#662C24",
+        "shine": "#FFE9E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-hex",
+      "name": "Berry hex",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#59163A",
+        "c1": "#B5307A",
+        "c2": "#FFC145",
+        "c3": "#3EE6C1",
+        "c4": "#F9DDEB",
+        "tint": "#F0D6E4",
+        "accent": "#FFC145",
+        "shadow": "#481331",
+        "shine": "#F4E0EB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "citrus-charm",
+      "name": "Citrus charm",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#9D630E",
+        "c1": "#FF9F1C",
+        "c2": "#FFE14D",
+        "c3": "#2EC4B6",
+        "c4": "#FFEBCF",
+        "tint": "#FFECD2",
+        "accent": "#2EC4B6",
+        "shadow": "#66400B",
+        "shine": "#FFF1DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-sceptre",
+      "name": "Gold sceptre",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#79621F",
+        "c1": "#D4AF37",
+        "c2": "#5B2A86",
+        "c3": "#F5E6A8",
+        "c4": "#8A6D1C",
+        "tint": "#F6EFD7",
+        "accent": "#5B2A86",
+        "shadow": "#554616",
+        "shine": "#F9F3E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plum-ramp",
+      "name": "Plum ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#5B276B",
+        "c1": "#A24FBF",
+        "c2": "#D9A6E8",
+        "c3": "#6B2A80",
+        "c4": "#F2E2F7",
+        "tint": "#ECDCF2",
+        "accent": "#D9A6E8",
+        "shadow": "#41204C",
+        "shine": "#F1E5F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#8F8F8F",
+        "c2": "#E0E0E0",
+        "c3": "#4A4A4A",
+        "c4": "#F2F2F2",
+        "tint": "#E9E9E9",
+        "accent": "#E0E0E0",
+        "shadow": "#393939",
+        "shine": "#EEEEEE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "winter-enchantment",
+      "name": "Winter enchantment",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#507B9D",
+        "c1": "#8EC5F0",
+        "c2": "#FFFFFF",
+        "c3": "#C3B5FF",
+        "c4": "#E8F5FF",
+        "tint": "#E8F3FC",
+        "accent": "#C3B5FF",
+        "shadow": "#394F60",
+        "shine": "#EEF6FD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast-wand",
+      "name": "High-contrast wand",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#A100FF",
+        "c2": "#FFD400",
+        "c3": "#00C2FF",
+        "c4": "#FFFFFF",
+        "tint": "#ECCCFF",
+        "accent": "#FFD400",
+        "shadow": "#400066",
+        "shine": "#F1D9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-wand",
+      "name": "Dopamine wand",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#952572",
+        "c1": "#FF3EA5",
+        "c2": "#7CFF6B",
+        "c3": "#FFD23F",
+        "c4": "#3EC1FF",
+        "tint": "#FFD8ED",
+        "accent": "#7CFF6B",
+        "shadow": "#661942",
+        "shine": "#FFE2F2",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

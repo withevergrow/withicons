@@ -1,0 +1,79 @@
+{
+  "name": "sprout",
+  "category": "nature",
+  "description": "A seedling with two leaves rising from the soil for growth and new beginnings.",
+  "aliases": [
+    "seedling",
+    "sapling",
+    "seed",
+    "young-plant",
+    "new-growth",
+    "shoot",
+    "germinate",
+    "plant-growth"
+  ],
+  "synonyms": [
+    "growing",
+    "grow",
+    "growth",
+    "plant",
+    "planting",
+    "gardening",
+    "garden",
+    "soil",
+    "seeds",
+    "new beginning",
+    "fresh start",
+    "early stage",
+    "startup",
+    "beginner",
+    "nurture",
+    "develop",
+    "progress",
+    "sustainability",
+    "sustainable",
+    "eco",
+    "green",
+    "organic",
+    "vegan",
+    "agriculture",
+    "farming",
+    "spring",
+    "life",
+    "sprouting",
+    "sprouts"
+  ],
+  "tags": [
+    "nature",
+    "plant",
+    "growth",
+    "eco",
+    "garden"
+  ],
+  "paths": [
+    {
+      "d": "M12 13 C8 13.5 4 11 3.5 6 C8 5.5 11.5 8.5 12 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 10.5 C12.5 6 15.5 3 20.5 3 C20.5 7.5 16.5 10.5 12 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 21 V10.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7 21 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 13 C8 13.5 4 11 3.5 6 C8 5.5 11.5 8.5 12 13 Z",
+    "M12 10.5 C12.5 6 15.5 3 20.5 3 C20.5 7.5 16.5 10.5 12 10.5 Z"
+  ],
+  "cutouts": [
+    "M10 11 L6.5 8",
+    "M14 8.5 L17 6"
+  ]
+}

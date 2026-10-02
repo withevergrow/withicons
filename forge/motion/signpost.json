@@ -1,0 +1,8 @@
+{
+  "name": "signpost",
+  "intent": "sways on its post while pointing the way",
+  "loop": { "preset": "sway", "origin": [12, 21.5], "amount": 0.4, "duration": 3.6 },
+  "hover": { "preset": "rock", "origin": [12, 21.5], "amount": 0.8, "duration": 1 },
+  "alt": [ { "preset": "wiggle", "origin": [12, 21.5] }, { "preset": "nudge", "dir": 0, "amount": 0.6 } ],
+  "swap": [ { "to": "map", "effect": "fade" }, { "to": "route", "effect": "morph" } ]
+}

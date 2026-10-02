@@ -1,0 +1,63 @@
+{
+  "name": "picture-in-picture",
+  "category": "layout",
+  "description": "A screen with a small window inset in its corner, for picture-in-picture and floating video.",
+  "aliases": [
+    "pip",
+    "mini-player",
+    "floating-window",
+    "inset-video",
+    "overlay-window",
+    "pop-out-video",
+    "miniplayer",
+    "floating-video",
+    "pip-mode",
+    "pip-window"
+  ],
+  "tags": [
+    "video",
+    "window",
+    "media",
+    "overlay",
+    "player",
+    "screen"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 11 H17 A1 1 0 0 1 18 12 V15 A1 1 0 0 1 17 16 H12 A1 1 0 0 1 11 15 V12 A1 1 0 0 1 12 11 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M5 6 H19 A1 1 0 0 1 20 7 V17 A1 1 0 0 1 19 18 H5 A1 1 0 0 1 4 17 V7 A1 1 0 0 1 5 6 Z M11.5 10.5 H17.5 A1 1 0 0 1 18.5 11.5 V15.5 A1 1 0 0 1 17.5 16.5 H11.5 A1 1 0 0 1 10.5 15.5 V11.5 A1 1 0 0 1 11.5 10.5 Z"
+  ],
+  "synonyms": [
+    "picture in picture",
+    "pic in pic",
+    "floating player",
+    "pop out",
+    "popout player",
+    "small window",
+    "video overlay",
+    "inset",
+    "watch while browsing",
+    "keep watching",
+    "minimise video",
+    "minimize video",
+    "detach video",
+    "corner video",
+    "video call",
+    "tv",
+    "screen in screen",
+    "multitask",
+    "multitasking",
+    "overlay"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "name": "motorcycle",
+  "category": "travel",
+  "description": "A motorcycle from the side with two wheels, a seat and handlebars, for motorbikes, scooters and delivery riders.",
+  "aliases": [
+    "motorbike",
+    "scooter",
+    "moped",
+    "bike-motor",
+    "delivery-rider",
+    "two-wheeler",
+    "motor-bike",
+    "motorcycles",
+    "dirt-bike",
+    "vespa"
+  ],
+  "tags": [
+    "vehicle",
+    "bike",
+    "ride",
+    "transport",
+    "road",
+    "delivery"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 17 A3 3 0 1 1 2.5 17 A3 3 0 1 1 8.5 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M21.5 17 A3 3 0 1 1 15.5 17 A3 3 0 1 1 21.5 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H15.5 L12 14 H8.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 17 L8.5 14",
+      "plate": "K"
+    },
+    {
+      "d": "M18.5 17 L15.5 8.5 L13 7.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.5 17 A3 3 0 1 1 2.5 17 A3 3 0 1 1 8.5 17 Z",
+    "M21.5 17 A3 3 0 1 1 15.5 17 A3 3 0 1 1 21.5 17 Z",
+    "M3 10 H15.5 L12 14 H8.5 Z"
+  ],
+  "cutouts": [
+    "M6.5 17 A1 1 0 1 1 4.5 17 A1 1 0 1 1 6.5 17 Z",
+    "M19.5 17 A1 1 0 1 1 17.5 17 A1 1 0 1 1 19.5 17 Z"
+  ],
+  "synonyms": [
+    "motor cycle",
+    "motorbikes",
+    "bike",
+    "biker",
+    "rider",
+    "riding",
+    "ride",
+    "chopper",
+    "cruiser",
+    "superbike",
+    "sport bike",
+    "motocross",
+    "courier",
+    "food delivery",
+    "delivery",
+    "rider delivery",
+    "two wheeler",
+    "motorcycle parking",
+    "motorbike hire",
+    "transport",
+    "road",
+    "motercycle",
+    "motorcyle"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "pen-tool",
+  "intent": "the nib sways at its point, then draws a curve on hover",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      3.5,
+      20.5
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 1
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        3.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        3.5,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "pencil",
+      "effect": "fade"
+    }
+  ]
+}

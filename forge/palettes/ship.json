@@ -1,0 +1,431 @@
+{
+  "name": "ship",
+  "palettes": [
+    {
+      "id": "ocean-liner",
+      "name": "Ocean liner",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B1426",
+        "c1": "#2C4A7A",
+        "c2": "#F2F2EE",
+        "c3": "#C8302F",
+        "c4": "#F2B134",
+        "tint": "#D5DBE4",
+        "accent": "#C8302F",
+        "shadow": "#132036",
+        "shine": "#AFBACC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ferry-red",
+      "name": "Ferry red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#240A0A",
+        "c1": "#D12E2E",
+        "c2": "#F4F1EA",
+        "c3": "#2F4A6B",
+        "c4": "#F2C14E",
+        "tint": "#F6D5D5",
+        "accent": "#F2C14E",
+        "shadow": "#541313",
+        "shine": "#EEB0B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tugboat",
+      "name": "Tugboat",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1208",
+        "c1": "#E85A2B",
+        "c2": "#2B3A4A",
+        "c3": "#F5E9D0",
+        "c4": "#F2C230",
+        "tint": "#FADED5",
+        "accent": "#F2C230",
+        "shadow": "#592512",
+        "shine": "#F6C0AE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sailor-stripe",
+      "name": "Sailor stripe",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A1630",
+        "c1": "#2459A8",
+        "c2": "#F5F5F2",
+        "c3": "#D83A3A",
+        "c4": "#9CC3E8",
+        "tint": "#D3DEEE",
+        "accent": "#D83A3A",
+        "shadow": "#102649",
+        "shine": "#ACC0DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cargo-green",
+      "name": "Cargo green",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#0F1F14",
+        "c1": "#3E7A4F",
+        "c2": "#C9573A",
+        "c3": "#E8DCC0",
+        "c4": "#2F5470",
+        "tint": "#D8E4DC",
+        "accent": "#C9573A",
+        "shadow": "#1A3422",
+        "shine": "#B6CCBC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "icebreaker",
+      "name": "Icebreaker",
+      "tags": [
+        "true-to-life",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#13202E",
+        "c1": "#D63A2E",
+        "c2": "#F3F7FA",
+        "c3": "#3E6E9E",
+        "c4": "#9FC6E0",
+        "tint": "#F7D8D5",
+        "accent": "#3E6E9E",
+        "shadow": "#511E1E",
+        "shine": "#EFB4B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fishing-harbour",
+      "name": "Fishing harbour",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1A1F22",
+        "c1": "#3A8C8A",
+        "c2": "#C94A2E",
+        "c3": "#F2E2B5",
+        "c4": "#F2B634",
+        "tint": "#D8E8E8",
+        "accent": "#C94A2E",
+        "shadow": "#1C3A3B",
+        "shine": "#B4D3D3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pirate-galleon",
+      "name": "Pirate galleon",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1A120C",
+        "c1": "#6B4A32",
+        "c2": "#E8DCC0",
+        "c3": "#A3262A",
+        "c4": "#C9A04A",
+        "tint": "#E1DBD6",
+        "accent": "#C9A04A",
+        "shadow": "#2E1F15",
+        "shine": "#C7BAB1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "yacht-club",
+      "name": "Yacht club",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0A1324",
+        "c1": "#EDEAE0",
+        "c2": "#1F3A66",
+        "c3": "#C9A24A",
+        "c4": "#9C2B2B",
+        "tint": "#FBFBF9",
+        "accent": "#C9A24A",
+        "shadow": "#565859",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tropical-cruise",
+      "name": "Tropical cruise",
+      "tags": [
+        "ocean",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#072A33",
+        "c1": "#1FB3B8",
+        "c2": "#FFF6E0",
+        "c3": "#FF6F5E",
+        "c4": "#FFD166",
+        "tint": "#D2F0F1",
+        "accent": "#FF6F5E",
+        "shadow": "#0D4C50",
+        "shine": "#AAE2E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-sea",
+      "name": "Deep sea",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6F4FF",
+        "c1": "#12406A",
+        "c2": "#64D2E8",
+        "c3": "#F2C14E",
+        "c4": "#0A2238",
+        "tint": "#A0B3C3",
+        "accent": "#F2C14E",
+        "shadow": "#092035",
+        "shine": "#A5B6C6",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "pastel-harbour",
+      "name": "Pastel harbour",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#33405A",
+        "c1": "#A7CDF0",
+        "c2": "#FFD1DC",
+        "c3": "#FFF0B5",
+        "c4": "#BFEBD8",
+        "tint": "#EDF5FC",
+        "accent": "#FFD1DC",
+        "shadow": "#4A5B6F",
+        "shine": "#DEECF9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-boat",
+      "name": "Candy boat",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3E1838",
+        "c1": "#FF85BE",
+        "c2": "#7FE0F5",
+        "c3": "#FFE36A",
+        "c4": "#B7F08A",
+        "tint": "#FFE7F2",
+        "accent": "#7FE0F5",
+        "shadow": "#6C3653",
+        "shine": "#FFD1E6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-marina",
+      "name": "Neon marina",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F1FBFF",
+        "c1": "#0094FF",
+        "c2": "#FF3FC0",
+        "c3": "#FFF04A",
+        "c4": "#2CFFC2",
+        "tint": "#99D4FF",
+        "accent": "#FF3FC0",
+        "shadow": "#004A80",
+        "shine": "#9ED6FF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "sunset-sail",
+      "name": "Sunset sail",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2A0F22",
+        "c1": "#F2774B",
+        "c2": "#FFC85C",
+        "c3": "#9E3A6E",
+        "c4": "#3E2C6B",
+        "tint": "#FCE4DB",
+        "accent": "#FFC85C",
+        "shadow": "#612F25",
+        "shine": "#FACBBB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "70s-cruise",
+      "name": "70s cruise",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E180C",
+        "c1": "#E2732E",
+        "c2": "#F3C34A",
+        "c3": "#2F7F7A",
+        "c4": "#A43B2C",
+        "tint": "#F9E3D5",
+        "accent": "#F3C34A",
+        "shadow": "#5D3014",
+        "shine": "#F4CAB0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lagoon",
+      "name": "Lagoon",
+      "tags": [
+        "ocean",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#0E3438",
+        "c1": "#6FD3C9",
+        "c2": "#FFF1D0",
+        "c3": "#F5A37A",
+        "c4": "#2B8A9E",
+        "tint": "#E2F6F4",
+        "accent": "#F5A37A",
+        "shadow": "#2B5A58",
+        "shine": "#C8EEEA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "stormy-seas",
+      "name": "Stormy seas",
+      "tags": [
+        "ocean",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#0F161C",
+        "c1": "#4E6170",
+        "c2": "#E8EDF0",
+        "c3": "#F2A33A",
+        "c4": "#2B3A45",
+        "tint": "#DCDFE2",
+        "accent": "#F2A33A",
+        "shadow": "#202930",
+        "shine": "#BCC3C9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-navy",
+      "name": "Mono navy",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#071530",
+        "c1": "#2C4F8C",
+        "c2": "#8FA9D6",
+        "c3": "#142A57",
+        "c4": "#DCE4F2",
+        "tint": "#D5DCE8",
+        "accent": "#142A57",
+        "shadow": "#12223F",
+        "shine": "#AFBCD3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#6A6A6A",
+        "c2": "#DADADA",
+        "c3": "#A0A0A0",
+        "c4": "#3A3A3A",
+        "tint": "#E1E1E1",
+        "accent": "#A0A0A0",
+        "shadow": "#2B2B2B",
+        "shine": "#C6C6C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050B5",
+        "c2": "#FFD200",
+        "c3": "#FFFFFF",
+        "c4": "#E00000",
+        "tint": "#CCDCF0",
+        "accent": "#FFD200",
+        "shadow": "#001C40",
+        "shine": "#9EBDE3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine-dock",
+      "name": "Dopamine dock",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1C1236",
+        "c1": "#7B5CFF",
+        "c2": "#FF5C9A",
+        "c3": "#FFD23F",
+        "c4": "#32E0B0",
+        "tint": "#E5DEFF",
+        "accent": "#FF5C9A",
+        "shadow": "#34266A",
+        "shine": "#CDC1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

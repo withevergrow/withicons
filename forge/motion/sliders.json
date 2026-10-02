@@ -1,0 +1,38 @@
+{
+  "name": "sliders",
+  "intent": "knobs slide side to side like a setting being tuned",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "settings",
+      "effect": "rotate"
+    },
+    {
+      "to": "filter",
+      "effect": "fade"
+    },
+    {
+      "to": "toggle",
+      "effect": "morph"
+    }
+  ]
+}

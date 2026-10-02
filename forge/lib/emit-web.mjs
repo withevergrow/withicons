@@ -3,7 +3,8 @@
 //   dist/full.js          element + every style inline, single file, for a CDN <script type="module">
 //   dist/data/<style>.js  { name: '<inner svg markup>' }   (lazy chunk)
 //   dist/data/meta.js     { names, aliases }                (lazy chunk, only for alias/typo resolution)
-import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts } from './emit-core.mjs'
+import zlib from 'zlib'
+import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
 
 // ---- runtime (serialized with .toString(); free vars: STYLES, DEFAULT_STYLE, LOADERS, LOAD_META)
 function withWarnOnce(msg) {
@@ -57,11 +58,26 @@ function loadSvg(name, options) {
 }
 const WithBase = typeof HTMLElement === 'undefined' ? class {} : HTMLElement
 class WithIconElement extends WithBase {
-  static get observedAttributes() { return ['name', 'variant', 'size', 'color', 'stroke-width', 'absolute-stroke-width', 'label'] }
+  static get observedAttributes() { return ['name', 'variant', 'size', 'color', 'stroke-width', 'absolute-stroke-width', 'label', 'aria-label', 'aria-labelledby', 'mirror-rtl'] }
   connectedCallback() { this._withRender() }
   attributeChangedCallback() { if (this.isConnected) this._withRender() }
+  // aria-label / aria-labelledby on the host name the host itself: an autonomous custom element is role=generic,
+  // which may not carry a name, so it becomes role=img (ElementInternals; a role attribute in older browsers)
+  _withA11y() {
+    const named = !this.getAttribute('label') && (this.hasAttribute('aria-label') || this.hasAttribute('aria-labelledby'))
+    let i = this._withInternals
+    if (i === undefined) {
+      try { i = typeof this.attachInternals === 'function' ? this.attachInternals() : null } catch (e) { i = null }
+      this._withInternals = i
+    }
+    if (i && 'role' in i) i.role = named ? 'img' : null
+    else if (named && !this.hasAttribute('role')) { this.setAttribute('role', 'img'); this._withRole = 1 }
+    else if (!named && this._withRole) { this.removeAttribute('role'); this._withRole = 0 }
+    return named
+  }
   _withRender() {
-    const name = this.getAttribute('name') || ''
+    const named = this._withA11y()
+    const name = (this.getAttribute('name') || '').trim()
     let v = this.getAttribute('variant') || DEFAULT_STYLE
     if (!withHas(STYLES, v)) {
       withWarnOnce('with icons: unknown variant "' + v + '". Use one of: ' + Object.keys(STYLES).join(', ') + '. Falling back to "' + DEFAULT_STYLE + '".')
@@ -72,17 +88,25 @@ class WithIconElement extends WithBase {
     const o = {
       size, color: this.getAttribute('color'), strokeWidth: this.getAttribute('stroke-width'),
       absoluteStrokeWidth: this.hasAttribute('absolute-stroke-width') && this.getAttribute('absolute-stroke-width') !== 'false',
-      label: this.getAttribute('label'), part: 'svg',
+      label: named ? null : this.getAttribute('label'), part: 'svg',
+    }
+    // mirror-rtl: flip directional icons in right-to-left text. :dir() where supported (live), else the direction at render time
+    let rtl = ''
+    if (this.hasAttribute('mirror-rtl') && this.getAttribute('mirror-rtl') !== 'false') {
+      rtl = ':host(:dir(rtl)) svg{transform:scaleX(-1)}'
+      const dirOk = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('selector(:dir(rtl))')
+      if (!dirOk && typeof getComputedStyle === 'function' && getComputedStyle(this).direction === 'rtl') rtl = 'svg{transform:scaleX(-1)}'
     }
     const root = this.shadowRoot || this.attachShadow({ mode: 'open' })
     const token = this._withToken = (this._withToken || 0) + 1
     const paint = inner => {
       if (token !== this._withToken) return
-      root.innerHTML = '<style>:host{display:inline-block;width:' + css + ';height:' + css + ';line-height:0;vertical-align:middle;flex-shrink:0}svg{display:block;width:100%;height:100%}</style>' +
+      root.innerHTML = '<style>:host{display:inline-block;width:' + css + ';height:' + css + ';line-height:0;vertical-align:middle;flex-shrink:0}svg{display:block;width:100%;height:100%}' + rtl + '</style>' +
         (inner == null ? '' : withRenderSvg(inner, v, o))
     }
     const map = WITH_DATA[v]
     if (withHas(map, name)) return paint(map[name])
+    if (!name) return paint(null)   // no name yet (e.g. created, then configured): nothing to warn about
     if (!root.firstChild) paint(null)
     withResolveName(name, v).then(n => paint(WITH_DATA[v][n]), e => { withWarnOnce(e.message); paint(null) })
   }
@@ -93,7 +117,7 @@ function defineWithIcon(tagName) {
   customElements.define(tag, tag === 'with-icon' ? WithIconElement : class extends WithIconElement {})
 }
 function withProps() {
-  const map = { name: 'name', variant: 'variant', size: 'size', color: 'color', strokeWidth: 'stroke-width', label: 'label' }
+  const map = { name: 'name', variant: 'variant', size: 'size', color: 'color', strokeWidth: 'stroke-width', label: 'label', mirrorRtl: 'mirror-rtl' }
   for (const p in map) {
     Object.defineProperty(WithIconElement.prototype, p, {
       configurable: true,
@@ -129,8 +153,9 @@ export default async function emit(ctx) {
   out.add('data/meta.d.ts', `import type { IconName } from '../index.js'\ndeclare const meta: { names: IconName[]; aliases: Record<string, IconName[]> }\nexport default meta\n`)
 
   const exportsList = 'WithIconElement, defineWithIcon, loadVariant, registerVariant, loadSvg, styleNames'
-  out.add('index.js', `${header}${head}const LOADERS = { ${styleNames.map(s => `${J(s)}: () => import('./data/${s}.js')`).join(', ')} }\n` +
-    `const LOAD_META = () => import('./data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`)
+  const indexJs = `${header}${head}const LOADERS = { ${styleNames.map(s => `${J(s)}: () => import('./data/${s}.js')`).join(', ')} }\n` +
+    `const LOAD_META = () => import('./data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
+  out.add('index.js', indexJs)
   const fullData = styleNames.map(s => `registerVariant(${J(s)}, ${J(data[s])})`).join('\n')
   out.add('full.js', `${header}${head}const LOADERS = {}\nconst LOAD_META = () => Promise.resolve({ default: WITH_META_FULL })\nconst WITH_META_FULL = ${J(meta)}\n${RUNTIME}\n${fullData}\n` +
     `/** Synchronous SVG string (full bundle only). Throws on unknown or ambiguous names. */\n` +
@@ -152,14 +177,18 @@ export interface SvgOptions {
   label?: string
   class?: string
 }
-/** <with-icon name="home" variant="solid" size="24" color="" stroke-width="" absolute-stroke-width label=""> */
+/** <with-icon name="home" variant="solid" size="24" color="" stroke-width="" absolute-stroke-width label="" mirror-rtl> */
 export declare class WithIconElement extends HTMLElement {
-  name: string | null
+  /** Canonical name or unambiguous alias. */
+  name: IconName | IconAlias | (string & {}) | null
   variant: StyleName | null
   size: string | null
   color: string | null
   strokeWidth: string | null
+  /** Accessible name on the inner svg (role="img"). aria-label / aria-labelledby on the element work too. */
   label: string | null
+  /** Mirror the icon when it sits in right-to-left text (for directional icons). */
+  mirrorRtl: string | null
 }
 /** Registers the element (done automatically for 'with-icon'; safe to call again, no-op without a DOM). */
 export declare function defineWithIcon(tagName?: string): void
@@ -179,7 +208,8 @@ declare global {
   await out.flush()
 
   const pkg = {
-    ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn']),
+    ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn', 'css-icons', 'icon-classes', 'font-awesome-alternative',
+      ...styleNames, 'multicolor-icons', 'animated-icons']),
     type: 'module',
     sideEffects: ['./dist/index.js', './dist/full.js'],
     main: './dist/index.js', module: './dist/index.js', types: './dist/index.d.ts',
@@ -194,12 +224,25 @@ declare global {
     unpkg: './dist/full.js', jsdelivr: './dist/full.js',
   }
   const kb = f => Math.round(Buffer.byteLength(f) / 1024)
-  writePkg(ctx, 'web', pkg, readme(ctx, kb(J(data[ctx.defaultStyle])), kb(styleNames.map(s => J(data[s])).join(''))))
+  const gz = f => Math.round(zlib.gzipSync(f, { level: 9 }).length / 1024)
+  const chunks = styleNames.map(s => J(data[s]))
+  const sizes = {
+    entry: kb(indexJs), entryGz: Math.max(1, gz(indexJs)),
+    line: kb(J(data[ctx.defaultStyle])), lineGz: gz(J(data[ctx.defaultStyle])),
+    max: Math.max(...chunks.map(kb)), maxGz: Math.max(...chunks.map(gz)),
+    meta: kb(J(meta)), metaGz: gz(J(meta)),
+    full: kb(chunks.join('')), fullGz: gz(chunks.join('')),
+  }
+  writePkg(ctx, 'web', pkg, readme(ctx, sizes))
   return `index.js + full.js + ${styleNames.length} lazy chunks`
 }
 
-function readme(ctx, lineKb, fullKb) {
+function readme(ctx, z) {
   const v = ctx.version
+  const pal = paletteDoc(ctx)
+  // palette variables that default to currentColor (they follow `color`), unless paletteDoc already lists them
+  const followers = ctx.styles.filter(s => s.palette)
+    .flatMap(s => Object.entries(s.vars || {}).filter(([k, val]) => val === 'currentColor' && !pal.includes(k + '`')).map(([k]) => '`' + k + '`'))
   return `# @withicons/web
 
 \`<with-icon>\`: a dependency-free custom element for ${ctx.icons.length} icons x ${ctx.styles.length} styles. Works in any framework or none.
@@ -230,22 +273,51 @@ import '@withicons/web'   // registers <with-icon>; each style's data loads on f
 | \`color\` | \`currentColor\` | inherits the CSS text color by default |
 | \`stroke-width\` | style default | only styles with live strokes (${ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name).join(', ')}) |
 | \`absolute-stroke-width\` | off | keep the stroke constant in px at any size |
-| \`label\` | — | accessible name (\`role="img"\`); otherwise \`aria-hidden\` |
+| \`label\` | — | accessible name on the inner svg (\`role="img"\`); otherwise the svg is \`aria-hidden\` |
+| \`aria-label\` / \`aria-labelledby\` | — | also work: the element itself becomes \`role="img"\` with that name |
+| \`mirror-rtl\` | off | mirror the icon in right-to-left text (\`dir="rtl"\`), for directional icons such as \`arrow-right\` or \`undo\` |
 
-The same names work as JS properties (\`el.variant = 'solid'\`). Style the inner svg with \`with-icon::part(svg)\`.
+The same names work as JS properties (\`el.variant = 'solid'\`, \`el.strokeWidth = 1.5\`, \`el.mirrorRtl = true\`).
+Style the inner svg with \`with-icon::part(svg)\`:
+
+\`\`\`css
+with-icon::part(svg) { transition: transform .2s }
+button:hover with-icon::part(svg) { transform: scale(1.1) }
+\`\`\`
+
+Unknown names render nothing and log one console warning with the nearest matches.
 
 ## Entry points
 
 | import | what | size |
 |---|---|---|
-| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`) | tiny + ~${lineKb} KB per style used |
-| \`@withicons/web/full\` (\`dist/full.js\`) | one file, every style inline, adds sync \`svg(name, opts)\` | ~${fullKb} KB |
+| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`) | ${z.entry} KB (${z.entryGz} KB gzip) + one chunk per style used: \`${ctx.defaultStyle}\` ${z.line} KB (${z.lineGz} KB gzip), the largest ${z.max} KB (${z.maxGz} KB gzip) |
+| \`@withicons/web/full\` (\`dist/full.js\`) | one file, every style inline, adds sync \`svg(name, opts)\` | ~${z.full} KB (${z.fullGz} KB gzip) |
 
-SSR-safe: importing never touches the DOM; the element is only defined when \`customElements\` exists.
+A style's chunk loads once, the first time an icon of that style renders. Aliases and typos also load \`dist/data/meta.js\`
+(${z.meta} KB, ${z.metaGz} KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
+chunks automatically. Use \`full\` only where a single file matters more than size.
+
+SSR-safe: importing never touches the DOM; the element is only defined when \`customElements\` exists, so the same import
+works in Node, Deno and edge runtimes, where \`loadSvg\` returns plain markup:
 
 \`\`\`js
 import { loadSvg } from '@withicons/web'
 const markup = await loadSvg('home', { variant: 'solid', size: 20 })
+\`\`\`
+${pal}${followers.length ? `
+${followers.join(', ')} default to \`currentColor\`, so they follow \`color\` unless you set them.
+` : ''}${motionDoc(ctx)}
+With \`<with-icon>\`, add the element module once and use attributes (it needs \`motion.css\`, plus \`icons.css\` for the
+per-icon defaults):
+
+\`\`\`js
+import '@withicons/motion/element'
+\`\`\`
+\`\`\`html
+<with-icon name="bell" motion="loop"></with-icon>
+<with-icon name="bell" motion="hover" preset="shake"></with-icon>
+<with-icon name="play" swap-to="pause" swap-effect="flip" swap-trigger="click" aria-label="Play"></with-icon>
 \`\`\`
 
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

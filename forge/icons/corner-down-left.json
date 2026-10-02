@@ -1,0 +1,69 @@
+{
+  "name": "corner-down-left",
+  "category": "arrows",
+  "description": "An arrow that drops down then turns back to the left, the Enter or Return key and a line break.",
+  "aliases": [
+    "return-key",
+    "enter-key",
+    "keyboard-return",
+    "line-break",
+    "carriage-return",
+    "submit-key",
+    "keyboard-enter",
+    "new-line",
+    "newline",
+    "elbow-left"
+  ],
+  "tags": [
+    "enter",
+    "return",
+    "keyboard",
+    "line break",
+    "submit",
+    "arrow"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 4 V11 A4 4 0 0 1 15.5 15 H4.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 10 L4.5 15 L9.5 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "enter",
+    "return",
+    "press enter",
+    "hit return",
+    "submit",
+    "confirm",
+    "ok",
+    "go",
+    "run",
+    "execute",
+    "next line",
+    "line feed",
+    "break line",
+    "paragraph break",
+    "soft return",
+    "hard return",
+    "crlf",
+    "lf",
+    "cr",
+    "shift enter",
+    "keyboard key",
+    "keycap",
+    "enter button",
+    "return button",
+    "turn left",
+    "turn back",
+    "bent arrow",
+    "hooked arrow",
+    "retrun",
+    "entr"
+  ]
+}

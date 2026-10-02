@@ -1,0 +1,35 @@
+{
+  "name": "id-card",
+  "intent": "flips over like a card being shown at the door",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        20
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user-check",
+      "effect": "flip"
+    },
+    {
+      "to": "shield-check",
+      "effect": "scale"
+    }
+  ]
+}

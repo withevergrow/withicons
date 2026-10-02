@@ -1,0 +1,72 @@
+{
+  "name": "video-off",
+  "category": "media",
+  "description": "A video camera crossed out for camera off and video disabled in calls.",
+  "aliases": [
+    "camera-video-off",
+    "no-video",
+    "videocam-off",
+    "stop-video",
+    "video-disabled",
+    "turn-off-camera",
+    "webcam-off",
+    "video-slash",
+    "video-muted",
+    "cam-off"
+  ],
+  "tags": [
+    "media",
+    "video",
+    "camera",
+    "off",
+    "disabled",
+    "call"
+  ],
+  "paths": [
+    {
+      "d": "M2.47 6.71 A2 2 0 0 0 2 8 V16 A2 2 0 0 0 4 18 H13.75",
+      "plate": "K"
+    },
+    {
+      "d": "M10.25 6 H14 A2 2 0 0 1 16 8 V10.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16 10.5 L22 7 V17 L20.2 15.95",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M2.84 6.37 A2 2 0 0 0 2 8 V16 A2 2 0 0 0 4 18 H14.46 Z",
+    "M9.54 6 H14 A2 2 0 0 1 16 8 V12.46 Z",
+    "M16 10.5 L22 7 V17 L18.49 14.95 L16 12.46 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "camera off",
+    "video off",
+    "turn off video",
+    "stop camera",
+    "disable camera",
+    "no camera",
+    "hide video",
+    "hide me",
+    "mute video",
+    "video muted",
+    "video call",
+    "meeting",
+    "zoom",
+    "conference",
+    "privacy",
+    "off camera",
+    "audio only",
+    "no recording",
+    "disabled",
+    "unavailable",
+    "vidoe off"
+  ]
+}

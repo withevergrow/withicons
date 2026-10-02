@@ -1,0 +1,55 @@
+{
+  "name": "folder-minus",
+  "category": "files",
+  "description": "A folder with a minus for removing a folder or collapsing a directory.",
+  "aliases": [
+    "remove-folder",
+    "folder-remove",
+    "folder-dash",
+    "delete-folder",
+    "folder-subtract",
+    "collapse-folder",
+    "rmdir",
+    "remove-directory",
+    "delete-directory"
+  ],
+  "tags": [
+    "folder",
+    "remove",
+    "minus",
+    "delete",
+    "directory",
+    "collapse"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 13.5 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [
+    "M9 13.5 H15"
+  ],
+  "synonyms": [
+    "remove",
+    "delete",
+    "subtract",
+    "collapse",
+    "close folder",
+    "remove from folder",
+    "remove collection",
+    "remove project",
+    "remove album",
+    "remove category",
+    "fewer",
+    "minus",
+    "shrink folder"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "star-half",
+  "category": "status",
+  "description": "A star with its left half filled, for half points in ratings and review scores.",
+  "aliases": [
+    "half-star",
+    "rating-half",
+    "star-half-filled",
+    "partial-rating",
+    "review-score",
+    "half-rating",
+    "star-half-full",
+    "half-filled-star",
+    "star-partial"
+  ],
+  "tags": [
+    "rating",
+    "review",
+    "score",
+    "star",
+    "half"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.95 L14.79 9.11 L21.51 9.86 L16.52 14.42 L17.88 21.04 L12 17.7 L6.12 21.04 L7.48 14.42 L2.49 9.86 L9.21 9.11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.95 V17.7",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.95 L9.21 9.11 L2.49 9.86 L7.48 14.42 L6.12 21.04 L12 17.7 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "half a star",
+    "4.5 stars",
+    "3.5 stars",
+    "2.5 stars",
+    "half point",
+    "star rating",
+    "product rating",
+    "customer reviews",
+    "average rating",
+    "score",
+    "rated",
+    "feedback",
+    "reviews",
+    "stars",
+    "partly rated",
+    "in progress",
+    "half full",
+    "halfstar"
+  ]
+}

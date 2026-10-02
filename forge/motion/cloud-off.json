@@ -1,0 +1,8 @@
+{
+  "name": "cloud-off",
+  "intent": "drifts quietly, waiting for the connection to come back",
+  "loop": { "preset": "float", "amount": 0.5, "duration": 3.2 },
+  "hover": { "preset": "shake", "amount": 0.6, "duration": 0.5 },
+  "alt": [ { "preset": "breathe", "amount": 0.6 }, { "preset": "flicker", "amount": 0.5 } ],
+  "swap": [ { "to": "cloud", "effect": "fade" }, { "to": "wifi-off", "effect": "scale" }, { "to": "cloud-upload", "effect": "slide-up" } ]
+}

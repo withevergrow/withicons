@@ -1,0 +1,70 @@
+{
+  "name": "sun-moon",
+  "category": "weather",
+  "description": "A disc that is half rayed sun and half crescent moon for theme toggles and light or dark mode.",
+  "aliases": [
+    "theme-toggle",
+    "light-dark",
+    "day-night",
+    "auto-theme",
+    "color-scheme",
+    "colour-scheme",
+    "system-theme",
+    "theme-switch",
+    "light-dark-mode",
+    "auto-mode"
+  ],
+  "synonyms": [
+    "dark mode",
+    "light mode",
+    "dark theme",
+    "light theme",
+    "toggle theme",
+    "switch theme",
+    "change theme",
+    "automatic theme",
+    "system default",
+    "follow system",
+    "appearance",
+    "prefers color scheme",
+    "night mode",
+    "day mode",
+    "day and night",
+    "sun and moon",
+    "half sun",
+    "half moon",
+    "contrast",
+    "display",
+    "screen mode",
+    "twilight",
+    "24 hours",
+    "all day",
+    "darkmode",
+    "lightmode"
+  ],
+  "tags": [
+    "theme",
+    "toggle",
+    "sun",
+    "moon",
+    "settings"
+  ],
+  "paths": [
+    {
+      "d": "M13 6.5 A5.5 5.5 0 1 1 13 17.5 A5.5 5.5 0 1 1 13 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13 6.5 A10.83 10.83 0 0 1 13 17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.75 4.64 L7.75 2.91 M5.64 7.75 L3.91 6.75 M4.5 12 L2.5 12 M5.64 16.25 L3.91 17.25 M8.75 19.36 L7.75 21.09",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M13 6.5 A10.83 10.83 0 0 1 13 17.5 A5.5 5.5 0 0 1 13 6.5 Z"
+  ],
+  "cutouts": []
+}

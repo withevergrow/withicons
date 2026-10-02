@@ -1,0 +1,74 @@
+{
+  "name": "atom",
+  "category": "education",
+  "description": "Atom with orbiting electrons for physics, science, and nuclear energy.",
+  "aliases": [
+    "physics",
+    "nucleus",
+    "electron",
+    "nuclear",
+    "molecule",
+    "science-atom",
+    "quantum",
+    "atomic",
+    "orbit",
+    "atom-symbol"
+  ],
+  "tags": [
+    "science",
+    "physics",
+    "energy",
+    "nuclear",
+    "education",
+    "technology"
+  ],
+  "paths": [
+    {
+      "d": "M22 12 A10 4 0 1 1 2 12 A10 4 0 1 1 22 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17 20.66 A10 4 60 1 1 7 3.34 A10 4 60 1 1 17 20.66 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 20.66 A10 4 120 1 1 17 3.34 A10 4 120 1 1 7 20.66 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 12 A0.5 0.5 0 1 1 11.5 12 A0.5 0.5 0 1 1 12.5 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M13.5 12 A1.5 1.5 0 1 1 10.5 12 A1.5 1.5 0 1 1 13.5 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "atoms",
+    "science",
+    "atomic energy",
+    "nuclear power",
+    "energy",
+    "proton",
+    "neutron",
+    "electrons",
+    "particle",
+    "particles",
+    "chemistry",
+    "element",
+    "matter",
+    "orbits",
+    "orbital",
+    "research",
+    "stem",
+    "technology",
+    "innovation",
+    "quantum computing",
+    "quantum physics",
+    "science class",
+    "react",
+    "atome",
+    "atomm"
+  ]
+}

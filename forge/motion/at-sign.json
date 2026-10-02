@@ -1,0 +1,31 @@
+{
+  "name": "at-sign",
+  "intent": "breathes calmly, spins round when you mention someone",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "alt": [
+    {
+      "preset": "spin",
+      "duration": 6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "flip"
+    },
+    {
+      "to": "hash",
+      "effect": "rotate"
+    }
+  ]
+}
