@@ -106,7 +106,7 @@ describe('stdio server (SDK client)', () => {
     // every style the build rendered (the core package's style list), studio styles included
     const built = JSON.parse(fs.readFileSync(path.join(dist, '..', '..', 'core', 'dist', 'styles.json'), 'utf8')).map(s => s.name)
     assert.deepEqual(styles, built)
-    for (const s of ['luxe', 'bauhaus', 'skeuo']) assert.ok(styles.includes(s), s)
+    for (const s of ['luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']) assert.ok(styles.includes(s), s)
     for (const style of styles) for (const format of ['svg', 'react', 'vue', 'svelte', 'angular', 'solid', 'html-class', 'web-component', 'data-uri']) {
       const r = await client.callTool({ name: 'get_icon', arguments: { name: 'star', style, format } })
       assert.ok(!r.isError, `${style} ${format}`)

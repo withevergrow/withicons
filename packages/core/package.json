@@ -1,7 +1,7 @@
 {
   "name": "@withicons/core",
   "version": "0.2.0",
-  "description": "500 icons x 15 styles as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.",
+  "description": "500 icons x 20 styles as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -40,7 +40,12 @@
     "retro",
     "luxe",
     "bauhaus",
-    "skeuo"
+    "skeuo",
+    "anime",
+    "gothic",
+    "pastel",
+    "coquette",
+    "plush"
   ],
   "type": "module",
   "sideEffects": false,
@@ -208,6 +213,56 @@
         "default": "./dist/nodes/skeuo.cjs"
       }
     },
+    "./nodes/anime": {
+      "import": {
+        "types": "./dist/nodes/anime.d.ts",
+        "default": "./dist/nodes/anime.js"
+      },
+      "require": {
+        "types": "./dist/nodes/anime.d.cts",
+        "default": "./dist/nodes/anime.cjs"
+      }
+    },
+    "./nodes/gothic": {
+      "import": {
+        "types": "./dist/nodes/gothic.d.ts",
+        "default": "./dist/nodes/gothic.js"
+      },
+      "require": {
+        "types": "./dist/nodes/gothic.d.cts",
+        "default": "./dist/nodes/gothic.cjs"
+      }
+    },
+    "./nodes/pastel": {
+      "import": {
+        "types": "./dist/nodes/pastel.d.ts",
+        "default": "./dist/nodes/pastel.js"
+      },
+      "require": {
+        "types": "./dist/nodes/pastel.d.cts",
+        "default": "./dist/nodes/pastel.cjs"
+      }
+    },
+    "./nodes/coquette": {
+      "import": {
+        "types": "./dist/nodes/coquette.d.ts",
+        "default": "./dist/nodes/coquette.js"
+      },
+      "require": {
+        "types": "./dist/nodes/coquette.d.cts",
+        "default": "./dist/nodes/coquette.cjs"
+      }
+    },
+    "./nodes/plush": {
+      "import": {
+        "types": "./dist/nodes/plush.d.ts",
+        "default": "./dist/nodes/plush.js"
+      },
+      "require": {
+        "types": "./dist/nodes/plush.d.cts",
+        "default": "./dist/nodes/plush.cjs"
+      }
+    },
     "./svg/*": "./dist/svg/*",
     "./icons.json": "./dist/icons.json",
     "./aliases.json": "./dist/aliases.json",
@@ -272,6 +327,21 @@
       ],
       "nodes/skeuo": [
         "./dist/nodes/skeuo.d.ts"
+      ],
+      "nodes/anime": [
+        "./dist/nodes/anime.d.ts"
+      ],
+      "nodes/gothic": [
+        "./dist/nodes/gothic.d.ts"
+      ],
+      "nodes/pastel": [
+        "./dist/nodes/pastel.d.ts"
+      ],
+      "nodes/coquette": [
+        "./dist/nodes/coquette.d.ts"
+      ],
+      "nodes/plush": [
+        "./dist/nodes/plush.d.ts"
       ],
       "palettes/*": [
         "./dist/palettes/*"

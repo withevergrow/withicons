@@ -37,7 +37,7 @@ Options
   --color <css color>       get: replace currentColor, the ink (svg, data-uri)
   --flat                    get: bake palette / CSS-variable colours into the SVG (files, <img>, Figma, slides)
 
-Colours (multi-colour styles: duo, blueprint, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo)
+Colours (multi-colour styles: duo, blueprint, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush)
   --palette <id>            get: apply one of the icon's palettes (withicons palettes <name>)
   --ink, --c1 … --c4, --tint, --accent, --shadow, --shine, --edge <color>
                             get: set any colour role (on top of --palette, or alone)

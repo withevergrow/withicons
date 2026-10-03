@@ -112,8 +112,8 @@ few milliseconds, while the rich styles build whole-icon geometry (fields, bevel
 |---|---|
 | `line`, `duo`, `blueprint`, `sketch`, `pixel` | under 10 ms |
 | `engrave`, `kawaii`, `solid` | 15 to 30 ms |
-| `retro`, `sticker`, `skeuo`, `bauhaus` | 50 to 100 ms |
-| `gloss`, `luxe`, `glass` | 100 to 160 ms |
+| `anime`, `plush`, `retro`, `pastel`, `sticker`, `coquette`, `skeuo`, `bauhaus` | 45 to 100 ms |
+| `gloss`, `luxe`, `glass`, `gothic` | 100 to 160 ms |
 
 Medians over the 50 live icons on a laptop; the largest icons (alarm clock, gauges) take two to three times as long.
 

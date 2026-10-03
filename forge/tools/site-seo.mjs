@@ -94,17 +94,18 @@ async function main() {
 
   /* ───────────── styles ───────────── */
   // canonical order (forge/CONTRACT.md); styles found in forge/styles but not listed here go last
-  const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+  const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
   const GROUPS = [
     { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
     { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
     { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'] },
+    { id: 'storybook', title: 'Storybook', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'] },
   ]
-  const PALETTE = new Set(['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo'])
+  const PALETTE = new Set(['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush'])
   // signature colours come from the design tokens (site/css/tokens.css, light theme) so pages, OG cards and data agree
   const TOKENS = (() => { try { const t = fs.readFileSync(path.join(ROOT, 'site', 'css', 'tokens.css'), 'utf8'); const i = t.indexOf(':root[data-theme'); return i > 0 ? t.slice(0, i) : t } catch { return '' } })()
-  const HEX_FALLBACK = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
+  const HEX_FALLBACK = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
   const tokenHex = n => (TOKENS.match(new RegExp(`--c-${n}:\\s*(#[0-9A-Fa-f]{6})\\b`)) || [])[1]
   const HEX = new Proxy({}, { get: (_, n) => tokenHex(n) || HEX_FALLBACK[n] || '#111318' })
   const PLAIN = {
@@ -123,8 +124,13 @@ async function main() {
     luxe: { say: 'Layered 3D with gold trim, soft light and real depth. Rich and premium.', good: 'hero sections, app tiles, pricing tiers, luxury and fintech brands' },
     bauhaus: { say: 'Pure circles, squares and triangles in red, yellow and blue. Bold, modernist design.', good: 'posters, portfolios, galleries, design studios, editorial' },
     skeuo: { say: 'Real materials with bevels, gloss and shadows, like an object you could touch.', good: 'app icons, dashboards, music and photo apps, nostalgic product UIs' },
+    anime: { say: 'Anime cel shading: bold ink outlines, bright colour, hard shadows and sparkling highlights.', good: 'games, streaming, fan sites, creators, social posts, Gen Z apps' },
+    gothic: { say: 'Old-world Gothic detail, like a cathedral or a castle: pointed arches, carved stone and jewel-toned stained glass.', good: 'fantasy and RPG games, books, music, events, Halloween, dark-luxe brands' },
+    pastel: { say: 'Soft, airy pastel colours with gentle shading. Calm, light and dreamy.', good: 'wellness apps, journals, planners, baby and lifestyle brands' },
+    coquette: { say: 'Romantic and feminine: blush pink, satin bows, pearls and lace details.', good: 'beauty, fashion, weddings, boutiques, journals, social posts' },
+    plush: { say: 'Soft stuffed toys in felt, with stitched seams and plump shapes. Made for kids.', good: 'kids apps, learning games, toy shops, nurseries, family brands' },
   }
-  const NUMW = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen']
+  const NUMW = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five']
   const numw = k => NUMW[k] || String(k)
   // text colour that reads on a filled swatch (AA): ink or white, whichever contrasts more
   const lumOf = h => hexRgb(h).map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4 }).reduce((a, c, k) => a + c * [0.2126, 0.7152, 0.0722][k], 0)
@@ -644,7 +650,7 @@ ${crumbs(crumbItems)}
     ${aka.length ? `<p class="ip-aka-line"><b>Also known as</b> ${aka.slice(0, 8).map(a => esc(a)).join('&nbsp;· ')}</p>` : ''}
     <div class="ip-pickwrap">
       <p class="ip-pick-head" id="ip-pick-l"><span class="ip-pick-k">Style</span> <b data-pick-name>${esc(STYLE[first].title)}</b><span class="ip-pick-say" data-pick-say aria-live="polite">${esc(STYLE[first].say)}</span></p>
-      <div class="ip-pick" role="radiogroup" aria-labelledby="ip-pick-l">${groups.map(g => `<div class="ip-pick-g is-${g.id}"><span class="ip-pick-gl" aria-hidden="true">${esc(g.title)}${g.id === 'studio' ? ' <em>new</em>' : ''}</span><div class="ip-pick-row">${g.styles.map(pickBtn).join('')}</div></div>`).join('')}</div>
+      <div class="ip-pick" role="radiogroup" aria-labelledby="ip-pick-l">${groups.map(g => `<div class="ip-pick-g is-${g.id}"><span class="ip-pick-gl" aria-hidden="true">${esc(g.title)}${g.id === 'storybook' ? ' <em>new</em>' : ''}</span><div class="ip-pick-row">${g.styles.map(pickBtn).join('')}</div></div>`).join('')}</div>
     </div>
     <div class="ip-cta" data-actions>
       <div class="ip-split">
@@ -906,7 +912,7 @@ ${items.map(j => `  <tr><th scope="row"><a href="../icons/${j.name}.html">${svgE
 ${crumbs(crumbItems)}
 <div class="hub-hero-grid">
   <div>
-    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>${esc(S.group === 'studio' ? 'Studio' : cap(S.kind))} style · ${items.length} icons</p>
+    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>${esc(S.group === 'studio' ? 'Studio' : S.group === 'storybook' ? 'Storybook' : cap(S.kind))} style · ${items.length} icons</p>
     <h1 class="ip-h1">${esc(S.title)} <span class="ip-hand">icons</span></h1>
     <p class="ip-lede">${esc(S.say)} Great for ${esc(S.good)}.</p>
     <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html?style=${s}">Open in the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="#all">See all ${items.length}</a></p>
@@ -918,8 +924,8 @@ ${crumbs(crumbItems)}
   <div class="ip-head"><h2 class="ip-h2" id="when-h">When to use <span class="ip-hand">${esc(S.title)}</span></h2></div>
   <div class="hub-when">
     <article><h3>Good for</h3><p>${esc(cap(S.good))}.</p></article>
-    <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn on a 16×16 pixel grid, so it is sharpest at 16, 32 and 48px: tiny UI, games and big retro posters.' : S.group === 'studio' ? 'Built from layers of light, shade and material, so it is at its best from 48px up: app tiles, hero sections, pricing cards and posters.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
-    <article><h3>Colour</h3><p>${S.group === 'studio' ? (s === 'bauhaus' ? 'Arrives in the Bauhaus primaries: red, yellow and blue with black and paper. Pick a palette to swap them; developers can retint every part with role-named CSS variables.' : 'Arrives with its own rich default colours; pick a palette and the whole layered stack follows. Developers can retint every part with role-named CSS variables.') : S.palette ? 'Arrives with its own cheerful palette; the outline follows any colour you pick. Developers can retint every part with CSS variables.' : s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
+    <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn on a 16×16 pixel grid, so it is sharpest at 16, 32 and 48px: tiny UI, games and big retro posters.' : S.group === 'studio' ? 'Built from layers of light, shade and material, so it is at its best from 48px up: app tiles, hero sections, pricing cards and posters.' : S.group === 'storybook' ? 'Drawn like a small illustration, with layered colour, shading and fine detail, so it is at its best from 48px up: hero sections, app tiles, stickers, posters and social posts.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
+    <article><h3>Colour</h3><p>${S.group === 'storybook' ? 'Arrives in its own hand-picked colours; pick a palette and every layer follows. Developers can retint every part with role-named CSS variables (--with-' + s + '-c1 …).' : S.group === 'studio' ? (s === 'bauhaus' ? 'Arrives in the Bauhaus primaries: red, yellow and blue with black and paper. Pick a palette to swap them; developers can retint every part with role-named CSS variables.' : 'Arrives with its own rich default colours; pick a palette and the whole layered stack follows. Developers can retint every part with role-named CSS variables.') : S.palette ? 'Arrives with its own cheerful palette; the outline follows any colour you pick. Developers can retint every part with CSS variables.' : s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
     <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · launching soon</p></article>
   </div>
 </div></section>
@@ -1187,7 +1193,8 @@ ${CATS.map(c => `- [${catTitle(c)}](${catUrl(c)}) (${inCat(c).length}): ${catInt
 
 ${LIVE_SECTION}${ALT_SECTION}## Guides for non-developers
 
-- [How to use icons](${BASE}/guides/index.html): Google Slides, PowerPoint, Keynote, Canva, Figma, Word & Google Docs, Notion, WordPress, Webflow, Framer, Wix & Squarespace, email signatures, plain HTML.
+${exists('blog/index.html') ? `- [Journal](${BASE}/blog/index.html): plain-English articles on icons: comparisons, guides, design basics, AI tools (full text: ${BASE}/blog/llms-full.txt).
+` : ''}- [How to use icons](${BASE}/guides/index.html): Google Slides, PowerPoint, Keynote, Canva, Figma, Word & Google Docs, Notion, WordPress, Webflow, Framer, Wix & Squarespace, email signatures, plain HTML.
 
 ## License
 
@@ -1228,7 +1235,8 @@ Allow: /
 ${AI_BOTS.map(b => `User-agent: ${b}\nAllow: /`).join('\n\n')}
 
 Sitemap: ${BASE}/sitemap.xml
-`)
+${exists('blog/sitemap.xml') ? `Sitemap: ${BASE}/blog/sitemap.xml
+` : ''}`)
   const lastIcon = maxDate(ICONS.map(i => dateOf(i.mtime)))
   const buildDate = maxDate([lastIcon, fileDate(path.join(ROOT, 'forge', 'site.config.json'))])
   // top-level and guide pages are discovered from disk, so new pages land in the sitemap automatically

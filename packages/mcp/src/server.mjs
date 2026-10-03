@@ -10,7 +10,7 @@ const instructions = d => {
   const pal = d.meta.styles.filter(s => s.palette).map(s => s.name)
   return `with icons (withicons.com): ${d.meta.icons.length} open-source (MIT) icons, each drawn in ${d.styleNames.length} styles (${d.styleNames.join(', ')}).
 Workflow: search_icons with what the icon should show ("delete", "throw away", "user settings") -> pick a name -> get_icon(name, style, format) for paste-ready code.
-Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "frosted" -> glass, "vintage camera" -> retro).
+Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "frosted" -> glass, "vintage camera" -> retro, "3d" -> luxe, "manga" -> anime, "medieval" -> gothic, "soft" -> pastel, "girly" -> coquette, "toy" or "kids" -> plush).
 ${pal.length ? `Palette styles (${pal.join(', ')}) are multi-colour and duo + blueprint have an accent colour: every colour is a CSS variable with a default, the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
 Use line/solid/duo for UI controls, the creative styles at 32px+.
 Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format) returns code for the optional @withicons/motion package (continuous loops, hover effects, icon-to-icon swaps).
@@ -86,7 +86,7 @@ export function createServer() {
     title: 'List colour palettes',
     description: 'The 20-30 colour palettes picked for one icon (true-to-life first, then moods: pastel, neon, retro, earthy, luxe, ...), each with its ten role colours ' +
       '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, and the icon variables with their roles and defaults. ' +
-      'Multi-colour styles: glass, kawaii, sticker, pixel, retro, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").',
+      'Multi-colour styles: glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),
       style: z.enum(styleNames).optional().describe('Style to map the palettes onto (e.g. kawaii, sticker, retro)'),

@@ -11,7 +11,7 @@ only adds article components, using the site's tokens; each section gets one sty
 - `blog/posts/<slug>.mjs`: one post per file (the file name must equal the slug). See `with-icons-vs-font-awesome.mjs`, the reference post.
 - `blog/lib/blocks.mjs`: the building blocks you write a body with (`p`, `h2`, `h3`, `ul`, `ol`, `figure`, `iconGrid`,
   `styleRow`, `sizeRamp`, `table` + `yes/no/meh`, `verdict`, `callout`, `steps`, `stats`, `quote`, `doDont`, `code`, `cta`, links `L.*`).
-- `blog/images.json`: the photo registry (Unsplash, free licence; credit is added automatically). Images live only in `site/blog/assets/img/<key>-{800,1600}.webp` (+ `-og.jpg` 1200x630 for heroes); the build never deletes them.
+- `blog/images.json`: the photo registry (Unsplash, free licence; credit is added automatically). Images are source files in `blog/images/<key>-{800,1600}.webp` (+ `-og.jpg` 1200x630 for heroes); the build copies them into `site/blog/assets/img/` (generated, gitignored) and never deletes them.
 - Icon names: `forge/manifest.json` (300 icons). Styles: line, solid, duo, gloss, engrave, blueprint, sketch. An unknown name fails the build.
 
 ## Post fields

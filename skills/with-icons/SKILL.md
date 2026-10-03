@@ -1,11 +1,11 @@
 ---
 name: with-icons
-description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 15 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel, retro and the studio styles luxe (premium 3D), bauhaus and skeuo (skeuomorphic)) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps), and live icons whose content you set (@withicons/dynamic: a calendar showing a date, a clock showing a time, a notification count, a battery level, a short label). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism/3D/Bauhaus/skeuomorphic icon, a calendar/clock/badge/battery icon with its own date, time, number or text, or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
+description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 20 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel, retro, the studio styles luxe (premium 3D), bauhaus and skeuo (skeuomorphic), and the storybook styles anime, gothic, pastel, coquette and plush (stuffed toys for kids)) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps), and live icons whose content you set (@withicons/dynamic: a calendar showing a date, a clock showing a time, a notification count, a battery level, a short label). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism/3D/Bauhaus/skeuomorphic/anime/gothic/pastel/coquette/kids icon, a calendar/clock/badge/battery icon with its own date, time, number or text, or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
 ---
 
 # with icons
 
-500 icons, each drawn once and rendered in 15 styles. Every icon uses `currentColor` for its ink, sits on a 24x24 grid and
+500 icons, each drawn once and rendered in 20 styles. Every icon uses `currentColor` for its ink, sits on a 24x24 grid and
 has a default size of 24. Site: https://withicons.com · Repo: https://github.com/withevergrow/withicons · MIT.
 
 ## 1. Choose the package for the stack
@@ -44,17 +44,26 @@ Full snippets for each framework are in [reference/frameworks.md](reference/fram
   - **bauhaus**: pure circles, squares and bars in red, yellow and blue, overprinted; posters, portfolios, design, culture.
   - **skeuo**: skeuomorphic objects in real materials (paper, leather, metal, brass, glass) with bevels and soft shadows;
     app icons, music/photo/note apps, tactile dashboards.
+- **anime, gothic, pastel, coquette, plush** are *storybook* styles: small full-colour illustrations, at **48px or larger**.
+  - **anime**: cel shading, tapered ink line art, one hard shadow, specular shine and sparkles; games, streaming, fan sites.
+  - **gothic**: cathedral craft, carved limestone and stained glass (ruby, sapphire, gold, emerald) in dark lead, pointed
+    arches and tracery; fantasy and RPG games, books, music, Halloween, dark-luxe brands.
+  - **pastel**: soft colour fields in lavender, peach, mint, baby blue, butter and blush; wellness, planners, aesthetic UIs.
+  - **coquette**: ballet-pink satin tied with ribbon-red bows, pearls, lace and gold; beauty, fashion, weddings, feminine brands.
+  - **plush**: stuffed toys sewn from felt, piping, running stitches and buttons; kids' apps, learning, toys, nurseries.
   Their colours are CSS variables with defaults (`--with-<style>-<role>`, listed in [reference/styles.md](reference/styles.md));
   the ink stays `currentColor`. Re-theme with CSS on any parent: `.hero { --with-kawaii-fill-1: #c4b5fd }`.
-  Studio styles name every variable after its palette role (`--with-luxe-c1`, `--with-bauhaus-c3`, `--with-skeuo-shadow`;
-  roles: ink c1 c2 c3 c4 tint accent shadow shine edge), so one palette from `withicons palettes <icon>` fits all of them.
+  Studio and storybook styles name every variable after its palette role (`--with-luxe-c1`, `--with-bauhaus-c3`,
+  `--with-anime-shadow`, `--with-plush-accent`; roles: ink c1 c2 c3 c4 tint accent shadow shine edge), so one palette from
+  `withicons palettes <icon>` fits all of them.
 
 Rule: one style per UI region. The only routine mix is line plus solid for inactive and active states. Every style is a subpath:
 `@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`,
-`/luxe`, `/bauhaus`, `/skeuo`.
+`/luxe`, `/bauhaus`, `/skeuo`, `/anime`, `/gothic`, `/pastel`, `/coquette`, `/plush`.
 Style words in a search pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "frosted bell" -> glass, "y2k" -> sticker,
 "vintage camera" -> retro, "3d rocket" or "luxury gift" -> luxe, "bauhaus clock" or "geometric star" -> bauhaus,
-"skeuomorphic camera" or "realistic lock" -> skeuo). More in [reference/styles.md](reference/styles.md).
+"skeuomorphic camera" or "realistic lock" -> skeuo, "manga heart" -> anime, "medieval key" or "cathedral bell" -> gothic,
+"soft cloud" -> pastel, "girly star" or "bow heart" -> coquette, "toy rocket" or "kids home" -> plush). More in [reference/styles.md](reference/styles.md).
 
 ## 3. Names
 
@@ -137,7 +146,7 @@ import '@withicons/motion/icons.css'    // each icon's tuned motion (pivot, dire
 
 A separate set of up to 50 **live icons** draws content you choose inside the icon: a calendar with a date, a clock with a
 time, a bell with a count, a battery at a level, a weather icon with a temperature, a tag with a short label. Each is a
-generator that builds a normal skeleton, so it renders in **every style** (line through luxe, bauhaus and skeuo).
+generator that builds a normal skeleton, so it renders in **every style** (line through luxe, bauhaus, skeuo and the storybook styles).
 Text is limited to 4 characters so it stays legible at 24px; counts fall back to "99+".
 
 ```js
@@ -158,7 +167,7 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
 ## 8. Pitfalls
 
 - `import { Bin } from '@withicons/react'` fails because aliases are not exports. Resolve to `Trash` first.
-- The generic `<Icon name=... variant=...>` component bundles **all 7,500 icons**. Use it only for truly dynamic names
+- The generic `<Icon name=... variant=...>` component bundles **all 10,500 icons**. Use it only for truly dynamic names
   (CMS data). Otherwise use named imports, which tree-shake down to the icons you use.
 - `<img src=".../home.svg">` cannot inherit `currentColor` and renders black. Inline the SVG, use the component,
   the sprite or the classes when the colour must follow text.

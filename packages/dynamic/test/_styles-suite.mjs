@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { load, svgProblems } from './_setup.mjs'
 
-export const GROUPS = [['gloss', 'sticker'], ['glass', 'skeuo'], ['luxe'], ['retro', 'bauhaus']]
+export const GROUPS = [['gloss', 'sticker'], ['glass', 'skeuo'], ['luxe'], ['retro', 'bauhaus'], ['gothic'], ['coquette', 'anime'], ['pastel', 'plush']]
 export async function suite(pick) {
   const L = await load('index.js')
   const grouped = GROUPS.flat()

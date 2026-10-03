@@ -19,6 +19,11 @@
   --s-luxe: var(--c-luxe, #2B3FB8);
   --s-bauhaus: var(--c-bauhaus, #D62718);
   --s-skeuo: var(--c-skeuo, #5A6E86);
+  --s-anime: var(--c-anime, #2E9BF0);
+  --s-gothic: var(--c-gothic, #7A1F3D);
+  --s-pastel: var(--c-pastel, #3DBFA0);
+  --s-coquette: var(--c-coquette, #E2456F);
+  --s-plush: var(--c-plush, #F2AE24);
   --l-bg: var(--paper, #FBF8F3);
   --l-fg: var(--ink, #111318);
   --l-card: var(--card, #FFFFFF);
@@ -42,12 +47,14 @@
   --on-line: #fff; --on-duo: #fff; --on-solid: #111318; --on-gloss: #111318; --on-engrave: #111318; --on-blueprint: #111318; --on-sketch: #111318;
   --on-glass: #111318; --on-kawaii: #111318; --on-sticker: #111318; --on-pixel: #111318; --on-retro: #111318;
   --on-luxe: var(--c-luxe-on, #fff); --on-bauhaus: var(--c-bauhaus-on, #fff); --on-skeuo: var(--c-skeuo-on, #fff);
+  --on-anime: var(--c-anime-on, #111318); --on-gothic: var(--c-gothic-on, #fff); --on-pastel: var(--c-pastel-on, #111318); --on-coquette: var(--c-coquette-on, #111318); --on-plush: var(--c-plush-on, #111318);
   --on-acc: var(--on-line);
   /* AA text twins of the style colours (tokens.css: brighter in dark) */
   --t-line: var(--c-line-text, #2448D8); --t-solid: var(--c-solid-text, #C93512); --t-duo: var(--c-duo-text, #5B3CE0); --t-gloss: var(--c-gloss-text, #C4166C);
   --t-engrave: var(--c-engrave-text, #8A6414); --t-blueprint: var(--c-blueprint-text, #00728A); --t-sketch: var(--c-sketch-text, #157A43);
   --t-glass: var(--c-glass-text, #2F65C8); --t-kawaii: var(--c-kawaii-text, #C2335A); --t-sticker: var(--c-sticker-text, #7A3FD6); --t-pixel: var(--c-pixel-text, #3B7300); --t-retro: var(--c-retro-text, #AD4C00);
   --t-luxe: var(--c-luxe-text, #2B3FB8); --t-bauhaus: var(--c-bauhaus-text, #B81E12); --t-skeuo: var(--c-skeuo-text, #4A5C71);
+  --t-anime: var(--c-anime-text, #0B67B3); --t-gothic: var(--c-gothic-text, #7A1F3D); --t-pastel: var(--c-pastel-text, #127A62); --t-coquette: var(--c-coquette-text, #B81F4B); --t-plush: var(--c-plush-text, #8F5E00);
   --acc-text: var(--t-line);
 }
 :root[data-theme="dark"] :is(.lib, .lib-selbar, .lib-toast, .lib-peek) { --on-line: #111318; --on-duo: #111318; }
@@ -66,6 +73,11 @@
 .lib[data-style="luxe"] { --acc: var(--s-luxe); --on-acc: var(--on-luxe); --acc-text: var(--t-luxe) }
 .lib[data-style="bauhaus"] { --acc: var(--s-bauhaus); --on-acc: var(--on-bauhaus); --acc-text: var(--t-bauhaus) }
 .lib[data-style="skeuo"] { --acc: var(--s-skeuo); --on-acc: var(--on-skeuo); --acc-text: var(--t-skeuo) }
+.lib[data-style="anime"] { --acc: var(--s-anime); --on-acc: var(--on-anime); --acc-text: var(--t-anime) }
+.lib[data-style="gothic"] { --acc: var(--s-gothic); --on-acc: var(--on-gothic); --acc-text: var(--t-gothic) }
+.lib[data-style="pastel"] { --acc: var(--s-pastel); --on-acc: var(--on-pastel); --acc-text: var(--t-pastel) }
+.lib[data-style="coquette"] { --acc: var(--s-coquette); --on-acc: var(--on-coquette); --acc-text: var(--t-coquette) }
+.lib[data-style="plush"] { --acc: var(--s-plush); --on-acc: var(--on-plush); --acc-text: var(--t-plush) }
 .lib[data-style="all"] { --acc: var(--l-fg); --acc-text: var(--l-fg); --on-acc: var(--l-bg) }
 .lib { transition: --acc .7s var(--ease); }
 
@@ -102,6 +114,8 @@
 .lib-dots i:nth-child(8) { background: var(--s-glass) } .lib-dots i:nth-child(9) { background: var(--s-kawaii) } .lib-dots i:nth-child(10) { background: var(--s-sticker) }
 .lib-dots i:nth-child(11) { background: var(--s-pixel) } .lib-dots i:nth-child(12) { background: var(--s-retro) }
 .lib-dots i:nth-child(13) { background: var(--s-luxe) } .lib-dots i:nth-child(14) { background: var(--s-bauhaus) } .lib-dots i:nth-child(15) { background: var(--s-skeuo) }
+.lib-dots i:nth-child(16) { background: var(--s-anime) } .lib-dots i:nth-child(17) { background: var(--s-gothic) } .lib-dots i:nth-child(18) { background: var(--s-pastel) }
+.lib-dots i:nth-child(19) { background: var(--s-coquette) } .lib-dots i:nth-child(20) { background: var(--s-plush) }
 .lib-nw { white-space: nowrap }
 .lib-h1 { margin: 0 auto; max-width: 20ch; font: 800 clamp(38px, 5.4vw, 84px)/.95 var(--f-ui); letter-spacing: -.04em; text-wrap: balance; }
 .lib-hand {
@@ -171,8 +185,9 @@
 /* ─────────── style switcher: every style visible ───────────
    .lib-styles (container "sb") > .sb-toggle (phones only) + .sb-panel > .sb-list[role=radiogroup] (.sb-ink + .sb-g groups
    > .sb-gl label + .sb-opts > .sb-o radios: .sb-ic mini icon + .sb-t name) + .sb-cmp (compare toggle).
-   ≥ 940px of bar: one row · narrower: two balanced rows (Everyday + Crafted / Playful + Studio) · phones: a trigger
-   that opens the same list as a panel. */
+   20 styles in five groups (Everyday 3 · Crafted 4 · Playful 5 · Studio 3 · Storybook 5).
+   ≥ 1280px of bar: one row · narrower: two full-width rows (Everyday + Crafted + Playful / Studio + Storybook, the
+   second row's eight options a little wider) · phones: a trigger that opens the same list as a panel. */
 .lib-styles { container: sb / inline-size; min-width: 0; }
 .sb-toggle { display: none }
 .sb-panel {
@@ -180,7 +195,7 @@
   background: var(--l-card); border: 1px solid var(--l-rule);
   box-shadow: 0 1px 0 var(--l-rule), 0 20px 40px -36px rgba(17, 19, 24, .55);
 }
-.sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 3fr 4fr 5fr 3fr; column-gap: 0; row-gap: 4px; }
+.sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 3fr 4fr 5fr 3fr 5fr; column-gap: 0; row-gap: 4px; }
 .sb-g { display: flex; flex-direction: column; min-width: 0; padding: 0 3px; }
 .sb-g + .sb-g { border-left: 1px solid var(--l-rule); }
 .sb-gl {
@@ -235,25 +250,28 @@
 .lib-bar.is-stuck .sb-ic { width: 23px; height: 23px; }
 .lib-bar.is-stuck .sb-cmp-n { display: none; }
 
-/* one row, but tight (small laptops, tablets in landscape): smaller names so every one stays whole */
-@container sb (max-width: 1059px) {
+/* one row, but tight: smaller names so every one stays whole */
+@container sb (max-width: 1439px) {
   .sb-o { font-size: 10.5px; letter-spacing: -.01em; }
   .sb-g { padding: 0 2px; }
   .sb-cmp { flex-basis: 64px; }
 }
-/* two balanced rows: Everyday (3) + Crafted (4) over Playful (5) + Studio (3) */
-@container sb (max-width: 939px) {
-  .sb-list { grid-template-columns: repeat(56, minmax(0, 1fr)); row-gap: 6px; }
-  .sb-g[data-group="everyday"] { grid-column: span 24; }
-  .sb-g[data-group="crafted"] { grid-column: span 32; }
-  .sb-g[data-group="playful"] { grid-column: span 35; border-left: 0; }
-  .sb-g[data-group="studio"] { grid-column: span 21; }
-  .sb-g:only-of-type, .sb-g:nth-of-type(n+5) { grid-column: 1 / -1; border-left: 0; }
-  .sb-o { height: 54px; }
+/* two full-width rows: Everyday (3) + Crafted (4) + Playful (5) over Studio (3) + Storybook (5). 120 columns: every
+   option in a row is the same width (10 / 15 columns) */
+@container sb (max-width: 1279px) {
+  .sb-list { grid-template-columns: repeat(120, minmax(0, 1fr)); row-gap: 6px; }
+  .sb-g[data-group="everyday"] { grid-column: span 30; }
+  .sb-g[data-group="crafted"] { grid-column: span 40; }
+  .sb-g[data-group="playful"] { grid-column: span 50; }
+  .sb-g[data-group="studio"] { grid-column: span 45; border-left: 0; }
+  .sb-g[data-group="storybook"] { grid-column: span 75; }
+  .sb-g:only-of-type, .sb-g:nth-of-type(n+6) { grid-column: 1 / -1; border-left: 0; }
+  .sb-o { height: 54px; font-size: 11px; }
   .sb-cmp { flex-basis: 70px; }
 }
-@container sb (max-width: 699px) {
-  .sb-o { font-size: 11px; }
+@container sb (max-width: 759px) {
+  .sb-o { font-size: 10.5px; letter-spacing: -.015em; padding: 0 1px; }
+  .sb-g { padding: 0 1px; }
   .sb-gl { padding-left: 6px; }
   .sb-cmp { flex-basis: 62px; }
 }
@@ -273,7 +291,7 @@
   .sb-cur { display: grid; gap: 3px; min-width: 0; }
   .sb-cur small { font: 700 9px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--l-muted); }
   .sb-cur b { font: 750 15px/1 var(--f-ui); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sb-dots { margin-left: auto; flex: none; display: grid; grid-template-columns: repeat(8, 5px); gap: 3px; }
+  .sb-dots { margin-left: auto; flex: none; display: grid; grid-template-columns: repeat(10, 5px); gap: 3px; }
   .sb-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--sc); opacity: .55; transition: transform .3s var(--ease-spring), opacity .3s; }
   .sb-dots i.is-on { opacity: 1; transform: scale(1.5); box-shadow: 0 0 0 1px var(--l-card); }
   .sb-more { display: none; }
@@ -583,9 +601,9 @@
 .vw-art .wm-swap { display: grid }
 
 /* style switcher */
-/* 15 styles: five per row, so the three families of five (and the studio row) line up */
+/* 20 styles: five per row, four even rows (everyday + crafted · crafted + playful · studio + storybook · storybook) */
 .vw-styles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px }
-.vw-st[data-group="playful"], .vw-st[data-group="studio"] { background: linear-gradient(160deg, color-mix(in srgb, var(--sc) 8%, var(--l-card)), var(--l-card) 60%) }
+.vw-st[data-group="playful"], .vw-st[data-group="studio"], .vw-st[data-group="storybook"] { background: linear-gradient(160deg, color-mix(in srgb, var(--sc) 8%, var(--l-card)), var(--l-card) 60%) }
 .vw-st { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 0 8px; border-radius: 16px; border: 1px solid var(--l-rule); background: var(--l-card); color: var(--l-fg); cursor: pointer; min-width: 0; transition: transform .25s var(--ease-spring), border-color .2s, background .2s, color .2s }
 .vw-st-g { width: 28px; height: 28px; display: grid; place-items: center; color: var(--sc) }
 .vw-st-g svg { width: 28px; height: 28px }

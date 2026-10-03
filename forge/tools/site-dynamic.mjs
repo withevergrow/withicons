@@ -146,6 +146,7 @@ async function main() {
     line: 'clean outlines', solid: 'bold filled shapes', duo: 'outline with a colour tint', gloss: 'shiny candy highlights', engrave: 'engraved hatching',
     blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'frosted glass panes', kawaii: 'cute with a face', sticker: 'die-cut sticker',
     pixel: '8-bit pixels', retro: '70s stripes', luxe: 'layered 3D enamel and gold', bauhaus: 'bold geometric Bauhaus', skeuo: 'realistic materials',
+    anime: 'anime cel shading', gothic: 'Gothic stone and stained glass', pastel: 'soft pastels', coquette: 'bows and blush pink', plush: 'soft felt toys',
   }
 
   // standalone inline svg (decorative unless a title is given); inner markup may carry var(--with-*, #hex) and currentColor
@@ -324,13 +325,14 @@ ${scripts}<script src="${P}js/site.js" defer></script>
   const searchIco = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
   /* ───────────── style switcher (mirrors the icon library's) ─────────────
-     Every style always visible in four groups, each option a mini drawing of `sample` in that style + its name. Phones
+     Every style always visible in five groups, each option a mini drawing of `sample` in that style + its name. Phones
      get a trigger that opens the same list as a panel (js/live.js). Used by the library bar and by every icon page. */
   const SB_GROUPS = [
     { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
     { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'], isNew: true },
+    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'] },
+    { id: 'storybook', title: 'Storybook', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'], isNew: true },
   ].map(g => ({ ...g, styles: g.styles.filter(s => STYLE[s]) }))
   for (const s of SN) if (!SB_GROUPS.some(g => g.styles.includes(s))) SB_GROUPS[SB_GROUPS.length - 1].styles.push(s)
   const styleSwitcher = (sample, o = {}) => {
@@ -350,9 +352,9 @@ ${scripts}<script src="${P}js/site.js" defer></script>
     { n: 'calendar-date', s: 'luxe', p: { day: 17, month: 'MAR' }, say: ['day', 'month'] },
     { n: 'battery-percent', s: 'skeuo', p: { level: 0.8 }, say: ['level'] },
     { n: 'bell-count', s: 'bauhaus', p: { count: 12 }, say: ['count'] },
-    { n: 'weather', s: 'duo', p: { condition: 'partly', temperature: 23 }, say: ['condition', 'temperature'] },
+    { n: 'weather', s: 'pastel', p: { condition: 'partly', temperature: 23 }, say: ['condition', 'temperature'] },
     { n: 'clock-time', s: 'glass', p: { time: '10:10' }, say: ['time'] },
-    { n: 'progress-ring', s: 'sticker', p: { value: 68 }, say: ['value'] },
+    { n: 'progress-ring', s: 'plush', p: { value: 68 }, say: ['value'] },
   ].filter(h => BY[h.n] && STYLE[h.s])
   const heroInner = h => { if (RT) { try { return innerOf(RT.render(h.n, h.p, h.s)) } catch { } } return exInner(h.n, h.s, 0) }
   const sayKeys = (i, ps, keys) => keys.map(k => fmtVal(i.params[k], ps[k] ?? i.params[k].default)).join(' · ')

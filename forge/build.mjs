@@ -104,6 +104,9 @@ console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-
 await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-pages.mjs')).href)
 // alternatives + 'free icons for…' landers (SEO/GEO) — before site-seo, which sitemaps them and lists them in llms.txt
 await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-alternatives.mjs')).href)
+// the Journal (blog/, SEO/GEO articles) -> site/blog/; reads the same renderers and shared header/footer, so it always
+// matches the current site. It writes its own sitemap + llms.txt, which site-seo links from robots.txt and llms.txt.
+if (fs.existsSync(path.join(ROOT, 'blog', 'build.mjs'))) await import(pathToFileURL(path.join(ROOT, 'blog', 'build.mjs')).href)
 // live (editable) icons pages — before site-seo, which sitemaps them (forge/DYNAMIC.md)
 if (fs.existsSync(path.join(ROOT, 'forge', 'tools', 'site-dynamic.mjs'))) await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-dynamic.mjs')).href)
 // per-icon SEO/GEO pages, hubs, sitemap, robots, llms*.txt, icons.json, OG images (content-hash cached)

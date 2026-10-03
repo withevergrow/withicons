@@ -32,7 +32,7 @@ const DYN = path.join(ROOT, 'forge', 'dynamic')
 const STY = path.join(ROOT, 'forge', 'styles')
 const J = v => JSON.stringify(v)
 const posix = p => p.split(path.sep).join('/')
-const STYLE_ORDER_FALLBACK = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+const STYLE_ORDER_FALLBACK = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
 const BANNER = v => `/*! @withicons/dynamic ${v} — Live icons runtime. generated, do not edit. MIT. https://withicons.com */`
 
 // ------------------------------------------------------------------ discovery

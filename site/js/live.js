@@ -18,7 +18,8 @@
   var STYLE_SAY = {
     line: 'clean outlines', solid: 'bold filled shapes', duo: 'outline with a colour tint', gloss: 'shiny candy highlights', engrave: 'engraved hatching',
     blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'frosted glass panes', kawaii: 'cute with a face', sticker: 'die-cut sticker',
-    pixel: '8-bit pixels', retro: '70s stripes', luxe: 'layered 3D enamel and gold', bauhaus: 'bold geometric Bauhaus', skeuo: 'realistic materials'
+    pixel: '8-bit pixels', retro: '70s stripes', luxe: 'layered 3D enamel and gold', bauhaus: 'bold geometric Bauhaus', skeuo: 'realistic materials',
+    anime: 'anime cel shading', gothic: 'Gothic stone and stained glass', pastel: 'soft pastels', coquette: 'bows and blush pink', plush: 'soft felt toys'
   }
 
   /* ───────────── helpers ───────────── */
@@ -632,7 +633,7 @@
   function attrOf(k) { return RESERVED.indexOf(kebab(k)) >= 0 ? 'param-' + kebab(k) : kebab(k) }
   function jsVal(v) { return typeof v === 'string' ? "'" + v.replace(/'/g, "\\'") + "'" : String(v) }
   var VERSION = CAT.version || '0.2.0'
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
   // outline colours: '' = the style's own; 'style' = the style's signature colour
   var SWATCHES = [['', 'Style colours'], ['#111318', 'Black'], ['style', 'Style colour'], ['#2F5BFF', 'Cobalt'], ['#FF5A36', 'Tomato'], ['#22A861', 'Leaf'], ['#FF4FA3', 'Pink'], ['#FFB020', 'Amber'], ['#7252FF', 'Violet'], ['#FFFFFF', 'White']]
   var SPRING = 'cubic-bezier(.34,1.56,.64,1)', EASE = 'cubic-bezier(.23,1,.32,1)'

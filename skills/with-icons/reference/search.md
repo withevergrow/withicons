@@ -31,7 +31,7 @@ Tools (confirm with `tools/list`; arguments are documented in each tool's schema
 | `get_icon` | `name` (alias ok), `style`, `format` (`svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `web-component`, `html-class`, `data-uri`), optional `size`, `color`, `strokeWidth` |
 | `animate_icon` | `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
 | `resolve_icon` | alias, PascalCase or typo, which returns the canonical name, or candidates if ambiguous |
-| `list_styles` | the 15 styles with descriptions (palette styles list their colour variables) |
+| `list_styles` | the 20 styles with descriptions (palette styles list their colour variables) |
 | `list_categories` | categories, or the icons in one category |
 
 Typical agent loop: `search_icons("upload file")`, pick the top result that fits, then `get_icon(name, style, format: "react")`.

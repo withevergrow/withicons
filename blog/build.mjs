@@ -391,6 +391,12 @@ if (DRY) {
 for (const f of fs.existsSync(OUT) ? fs.readdirSync(OUT) : []) if (f !== 'assets') fs.rmSync(path.join(OUT, f), { recursive: true, force: true })
 for (const f of ['blog.css', 'blog.js', 'fonts', 'licenses']) fs.rmSync(path.join(OUT, 'assets', f), { recursive: true, force: true })
 fs.mkdirSync(IMG, { recursive: true })
+// photos are source files in blog/images/ (registry: blog/images.json); copy any new or changed ones into the output
+{ const SRC_IMG = path.join(HERE, 'images')
+  if (fs.existsSync(SRC_IMG)) for (const f of fs.readdirSync(SRC_IMG)) {
+    const a = path.join(SRC_IMG, f), b = path.join(IMG, f)
+    if (!fs.existsSync(b) || fs.statSync(b).size !== fs.statSync(a).size) fs.copyFileSync(a, b)
+  } }
 for (const p of posts) fs.writeFileSync(path.join(OUT, `${p.slug}.html`), article(p))
 fs.writeFileSync(path.join(OUT, 'index.html'), index())
 for (const k of Object.keys(HUBS)) if (posts.some(p => p.category === k)) fs.writeFileSync(path.join(OUT, HUBS[k].file), hubPage(k))

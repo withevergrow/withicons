@@ -3,8 +3,8 @@
 Live icons for **with icons**: icons whose content you set. A calendar shows the date you pass, a clock shows your
 time, a badge shows a count, a battery shows its charge, a weather icon shows the temperature, a tag shows a short label.
 
-Each live icon is a small generator. You give it params, it draws the icon, and any of the 15 styles renders it:
-`line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`. Text uses the with icons stroke font, so it takes on each style's look, needs no font files and stays
+Each live icon is a small generator. You give it params, it draws the icon, and any of the 20 styles renders it:
+`line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`. Text uses the with icons stroke font, so it takes on each style's look, needs no font files and stays
 readable down to 16px. When a value can't be drawn legibly, the icon switches to something that can: "99+" for big
 counts, or a level bar in place of a percentage that doesn't fit.
 
@@ -101,13 +101,13 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 
 | file | what | size | gzip |
 |---|---|---|---|
-| `index.js` | full runtime, all 15 styles, sync render() | 545 KB | 211 KB |
-| `lite.js` | core + line; other styles load on first use | 146 KB | 53.0 KB |
-| `element.js` | `<with-live-icon>` on lite | 150 KB | 54.9 KB |
-| `react.js` | `<LiveIcon>` on lite (react not included) | 147 KB | 53.6 KB |
-| `vue.js` | `<LiveIcon>` on lite (vue not included) | 147 KB | 53.4 KB |
-| `styles/<style>.js` | one style chunk: smallest `duo`, largest `bauhaus` (134 KB / 47.9 KB gzip) | 1.3 KB | 0.9 KB |
-| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line inline | 153 KB | 55.0 KB |
+| `index.js` | full runtime, all 20 styles, sync render() | 1414 KB | 486 KB |
+| `lite.js` | core + line; other styles load on first use | 147 KB | 53.4 KB |
+| `element.js` | `<with-live-icon>` on lite | 151 KB | 55.3 KB |
+| `react.js` | `<LiveIcon>` on lite (react not included) | 148 KB | 54.0 KB |
+| `vue.js` | `<LiveIcon>` on lite (vue not included) | 148 KB | 53.8 KB |
+| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (212 KB / 69.0 KB gzip) | 1.3 KB | 0.9 KB |
+| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line inline | 154 KB | 55.4 KB |
 
 ## Performance
 
@@ -118,8 +118,8 @@ few milliseconds, while the rich styles build whole-icon geometry (fields, bevel
 |---|---|
 | `line`, `duo`, `blueprint`, `sketch`, `pixel` | under 10 ms |
 | `engrave`, `kawaii`, `solid` | 15 to 30 ms |
-| `retro`, `sticker`, `skeuo`, `bauhaus` | 50 to 100 ms |
-| `gloss`, `luxe`, `glass` | 100 to 160 ms |
+| `anime`, `plush`, `retro`, `pastel`, `sticker`, `coquette`, `skeuo`, `bauhaus` | 45 to 100 ms |
+| `gloss`, `luxe`, `glass`, `gothic` | 100 to 160 ms |
 
 Medians over the 50 live icons on a laptop; the largest icons (alarm clock, gauges) take two to three times as long.
 

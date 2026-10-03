@@ -77,14 +77,15 @@
   function emit(ev, arg) { var l = (subs[ev] || []).slice(); for (var i = 0; i < l.length; i++) { try { l[i](arg) } catch (e) { if (W.console) console.error(e) } } }
 
   /* ───────────── data + styles ───────────── */
-  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful + 3 studio styles
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful + 3 studio + 5 storybook styles
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
   // how the home page and pickers group them (kind stays 'universal' | 'creative' for the data contract)
   var GROUPS = [
     { id: 'everyday', title: 'Everyday', blurb: 'Clean and quiet. For interfaces, docs and slides.', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', blurb: 'Illustrated looks with character.', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
     { id: 'playful', title: 'Playful', blurb: 'Colourful, cute and nostalgic.', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', blurb: 'Art-directed and premium: layered 3D, Bauhaus geometry, real materials. New!', styles: ['luxe', 'bauhaus', 'skeuo'] }
+    { id: 'studio', title: 'Studio', blurb: 'Art-directed and premium: layered 3D, Bauhaus geometry, real materials.', styles: ['luxe', 'bauhaus', 'skeuo'] },
+    { id: 'storybook', title: 'Storybook', blurb: 'Illustrated worlds: anime, gothic cathedrals, pastels, coquette bows and plush toys. New!', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'] }
   ]
   // plain-language copy for each style (shared by every page)
   var INFO = {
@@ -124,15 +125,30 @@
     retro: { title: 'Retro', kind: 'creative', color: '#F57C12', description: '70s sunset stripes.', group: 'playful',
       plain: 'Chunky 70s shapes with warm sunset stripes.', good: 'Posters, events, cafés, music, vintage brands',
       who: 'Events, hospitality, music and vintage-flavoured brands.', why: 'Warm stripes and a chunky outline: instant nostalgia.' },
-    luxe: { title: 'Luxe', kind: 'creative', color: '#2B3FB8', description: 'Premium layered 3D.', group: 'studio', isNew: true,
+    luxe: { title: 'Luxe', kind: 'creative', color: '#2B3FB8', description: 'Premium layered 3D.', group: 'studio',
       plain: 'Rich, layered 3D with gold trim and soft studio light. Premium.', good: 'Hero sections, app tiles, pricing, luxury brands',
       who: 'Premium products, fintech, pricing tiers and launch moments.', why: 'Stacked tonal layers give real depth, with no filters or gradients.' },
-    bauhaus: { title: 'Bauhaus', kind: 'creative', color: '#D62718', description: 'Primary colours, pure geometry.', group: 'studio', isNew: true,
+    bauhaus: { title: 'Bauhaus', kind: 'creative', color: '#D62718', description: 'Primary colours, pure geometry.', group: 'studio',
       plain: 'Circles, squares and triangles in red, yellow and blue. Bold modernist design.', good: 'Posters, portfolios, galleries, design studios',
       who: 'Design studios, editorial, art and culture, bold brands.', why: 'Every icon rebuilt from pure geometry, composed like a 1920s poster.' },
-    skeuo: { title: 'Skeuo', kind: 'creative', color: '#5A6E86', description: 'Real materials and depth.', group: 'studio', isNew: true,
+    skeuo: { title: 'Skeuo', kind: 'creative', color: '#5A6E86', description: 'Real materials and depth.', group: 'studio',
       plain: 'Real materials, bevels and shadows, like objects you could pick up.', good: 'App icons, dashboards, music and photo apps',
-      who: 'App icons, tools, dashboards and nostalgic product UIs.', why: 'Light, material and texture make each icon feel touchable.' }
+      who: 'App icons, tools, dashboards and nostalgic product UIs.', why: 'Light, material and texture make each icon feel touchable.' },
+    anime: { title: 'Anime', kind: 'creative', color: '#2E9BF0', description: 'Cel-shaded anime art.', group: 'storybook', isNew: true,
+      plain: 'Anime cel shading: bold ink, bright colour, hard shadows and starry highlights.', good: 'Games, streaming, fan sites, social posts',
+      who: 'Games, streaming, creators, fan communities and youthful brands.', why: 'Hard cel shadows and sparkling highlights, like a frame from a favourite show.' },
+    gothic: { title: 'Gothic', kind: 'creative', color: '#7A1F3D', description: 'Cathedral stone and stained glass.', group: 'storybook', isNew: true,
+      plain: 'Old-world Gothic detail: pointed arches, carved stone and jewel-toned stained glass.', good: 'Fantasy games, books, music, Halloween',
+      who: 'Fantasy and RPG games, publishers, bands, tattoo studios and dark-luxe brands.', why: 'Each icon carved like a cathedral window: arches, tracery and glowing glass.' },
+    pastel: { title: 'Pastel', kind: 'creative', color: '#3DBFA0', description: 'Soft candy pastels.', group: 'storybook', isNew: true,
+      plain: 'Soft, airy pastel colours with gentle shading. Calm and dreamy.', good: 'Wellness, journals, planners, lifestyle',
+      who: 'Wellness, journaling, planners, baby and lifestyle brands.', why: 'Low-contrast candy colours that stay calm, even in a dense grid.' },
+    coquette: { title: 'Coquette', kind: 'creative', color: '#E2456F', description: 'Bows, pearls and blush pink.', group: 'storybook', isNew: true,
+      plain: 'Romantic and feminine: blush pink, satin bows, pearls and lace.', good: 'Beauty, fashion, weddings, boutiques',
+      who: 'Beauty, fashion, weddings, boutiques and feminine brands.', why: 'Ribbons, pearls and lace turn everyday objects into keepsakes.' },
+    plush: { title: 'Plush', kind: 'creative', color: '#F2AE24', description: 'Soft stuffed-toy felt.', group: 'storybook', isNew: true,
+      plain: 'Soft stuffed toys in felt, with stitched seams. Made for kids.', good: 'Kids apps, learning, toys, nurseries',
+      who: 'Kids apps, learning games, toy shops, nurseries and family brands.', why: 'Plump felt shapes and stitched seams you almost want to squeeze.' }
   }
   ;['line', 'solid', 'duo'].forEach(function (n) { INFO[n].group = 'everyday' })
   ;['gloss', 'engrave', 'blueprint', 'sketch'].forEach(function (n) { INFO[n].group = 'crafted' })
@@ -146,7 +162,7 @@
     if (d && d.styles) d.styles.forEach(function (x) { if (x && ORDER.indexOf(x.name) < 0) st++ })
     return { icons: n, styles: st, svgs: n * st }
   }
-  var NUM_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen']
+  var NUM_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five']
   function numWord(n) { return NUM_WORDS[n] || String(n) }
   /* Live counts. Put data-count="icons|styles|svgs|styles-word|Styles-word" on any element holding a static number
      (keep the correct published number as its text: it is the no-JS fallback). Painted when data/meta.js is present. */
@@ -219,7 +235,8 @@
     // palette styles carry explicit fills/strokes per shape; data/meta.js supplies the real root when loaded
     glass: { fill: 'none' }, kawaii: { fill: 'currentColor' }, sticker: { fill: 'currentColor' },
     pixel: { fill: 'currentColor', 'shape-rendering': 'crispEdges' }, retro: { fill: 'currentColor' },
-    luxe: { fill: 'none' }, bauhaus: { fill: 'currentColor' }, skeuo: { fill: 'none' }
+    luxe: { fill: 'none' }, bauhaus: { fill: 'currentColor' }, skeuo: { fill: 'none' },
+    anime: { fill: 'none' }, gothic: { fill: 'none' }, pastel: { fill: 'none' }, coquette: { fill: 'none' }, plush: { fill: 'none' }
   }
   function rootAttrs(style) { var m = styleMeta(style); return (m && m.root) || ROOTS[style] || { fill: 'currentColor' } }
   function svgFrom(inner, style, size, opts) {
@@ -658,7 +675,8 @@
   /* ═════════════════════ LOGO MORPH ═════════════════════
      Cycles real icons through every style. line/duo/blueprint/sketch draw themselves on, solid/engrave
      fill up, gloss gets a highlight sweep; glass clears from frost, kawaii bounces in, a sticker is slapped on,
-     pixel resolves in steps and retro rises like a sunset; luxe lifts into the light, bauhaus snaps into place, skeuo is pressed in. Each frame tints the tile and the hand-written "with" in the style colour.
+     pixel resolves in steps and retro rises like a sunset; luxe lifts into the light, bauhaus snaps into place, skeuo is pressed in;
+     anime zooms in on an impact frame, gothic rises from the dark, pastel melts in, coquette swings on its ribbon, plush lands with a squish. Each frame tints the tile and the hand-written "with" in the style colour.
      Frames live in brand/logo-frames.js (≈27 KB, loaded when idle). Pauses off-screen, in hidden tabs, and for
      reduced motion (then it only changes on hover). */
   var FIRST_FRAME = ['heart', 'line', '<path pathLength="1" d="M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"/>']
@@ -676,7 +694,8 @@
   }
   var DRAW = { line: 1, duo: 1, blueprint: 1, sketch: 1 }
   var FILL = { solid: 1, engrave: 1 }
-  var ENTER = { glass: 'lm-frost', kawaii: 'lm-bounce', sticker: 'lm-slap', pixel: 'lm-pixel', retro: 'lm-rise', luxe: 'lm-lift', bauhaus: 'lm-snap', skeuo: 'lm-press' }
+  var ENTER = { glass: 'lm-frost', kawaii: 'lm-bounce', sticker: 'lm-slap', pixel: 'lm-pixel', retro: 'lm-rise', luxe: 'lm-lift', bauhaus: 'lm-snap', skeuo: 'lm-press',
+    anime: 'lm-impact', gothic: 'lm-vesper', pastel: 'lm-melt', coquette: 'lm-swing', plush: 'lm-squish' }
   var morphs = []
   function initLogoMorph() {
     $$('[data-logo-morph]').forEach(function (el, idx) {
@@ -768,7 +787,7 @@
     return hit
   }
   // nav links and the mobile menu cycle through the signature colours (old and new styles interleaved)
-  var NAV_STYLE = ['line', 'luxe', 'kawaii', 'solid', 'pixel', 'duo', 'retro', 'gloss', 'bauhaus', 'glass', 'sketch', 'sticker', 'skeuo', 'blueprint', 'engrave']
+  var NAV_STYLE = ['line', 'anime', 'luxe', 'kawaii', 'pastel', 'solid', 'pixel', 'gothic', 'duo', 'retro', 'coquette', 'gloss', 'bauhaus', 'glass', 'plush', 'sketch', 'sticker', 'skeuo', 'blueprint', 'engrave']
   function initHeader() {
     var header = $('[data-header]') || $('.site-header')
     if (!header) return
@@ -1403,7 +1422,7 @@
       add('Reply with:')
       add('1. Best fit: exact name + one line on why my users will read it right.')
       add('2. Up to 2 alternatives, one line each.')
-      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo — only at 32px+).')
+      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush — only at 32px+).')
       add('4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
       add('5. A link for each pick: ' + AI_SITE + '/icons/NAME.html')
     } else if (intent === 'code') {

@@ -30,7 +30,15 @@ One **skeleton** per icon. Seven **style renderers** turn every skeleton into a 
 | `bauhaus` | creative | `forge/styles/bauhaus.mjs` — Bauhaus: primary colours, pure geometry, bold composition |
 | `skeuo` | creative | `forge/styles/skeuo.mjs` — skeuomorphic: real materials, depth, light and texture |
 
-Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo`.
+| `anime` | creative | `forge/styles/anime.mjs` — anime/cel: crisp ink line, cel-shaded colour, sparkle highlights |
+| `gothic` | creative | `forge/styles/gothic.mjs` — gothic architecture: pointed arches, tracery, rose windows, stonework |
+| `pastel` | creative | `forge/styles/pastel.mjs` — soft pastel colour fields with gentle tonal depth |
+| `coquette` | creative | `forge/styles/coquette.mjs` — bows, pearls, lace, soft pinks (feminine, Gen Z) |
+| `plush` | creative | `forge/styles/plush.mjs` — stuffed-toy: felt, stitched seams, buttons, squishy forms (kids) |
+
+Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo anime gothic pastel coquette plush`.
+The run 11 styles (anime, gothic, pastel, coquette, plush) follow the "Run 7 styles" rules below (role-named variables, no defs,
+layered geometry, motion part classes wm-k/wm-a/wm-s/wm-deco/wm-shadow/wm-shine on every node per forge/MOTION.md).
 
 ### Run 7 styles (luxe, bauhaus, skeuo)
 Palette styles too, with **role-named variables**: `--with-<style>-<role>` where role is one of the palette roles

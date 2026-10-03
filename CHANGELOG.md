@@ -12,6 +12,19 @@ version from another commit).
 
 ### Added
 
+- **5 new storybook styles** (20 styles and 10,000 icons in all): `anime` (cel shading: tapered ink line art, flat cel
+  colour, one hard shadow, specular shine and sparkles), `gothic` (cathedral craft: carved limestone and stained glass in
+  dark lead, pointed arches and tracery), `pastel` (soft colour fields in lavender, peach, mint, baby blue, butter and
+  blush), `coquette` (ballet-pink satin, ribbon-red bows, pearls, lace and gold) and `plush` (stuffed toys sewn from
+  felt, for kids). Role-named colour variables (`--with-anime-c1`, `--with-gothic-tint`, `--with-plush-accent`), so
+  every per-icon palette and the editor's colour pickers work with them. Every package exposes them
+  (`@withicons/react/anime`, `<with-icon variant="gothic">`, `sprite-plush.svg`…), and so do live icons. Search
+  understands their words: "anime", "manga", "cel shaded" pick anime; "gothic", "medieval", "cathedral", "castle" pick
+  gothic; "pastel", "soft" pick pastel; "coquette", "bow", "girly", "feminine" pick coquette; "plush", "toy", "kids",
+  "stuffed", "felt" pick plush.
+- Website: a fifth style family, **Storybook**, in the library, the live icons page, icon pages, the editor and the home
+  page (the style switchers are laid out for 20 styles on desktops, tablets and phones), and "Free anime icons", "Free
+  gothic icons", "Free pastel icons", "Free coquette icons" and "Free plush icons for kids" pages.
 - **3 new studio styles** (15 styles and 7,500 icons in all): `luxe` (premium multi-layered 3D: sapphire enamel, polished
   gold, a jewel, lit chamfers, all stacked vector geometry), `bauhaus` (pure circles, squares and bars in red, yellow and
   blue, overprinted) and `skeuo` (skeuomorphic objects in real materials with bevels and soft shadows). Their colours are

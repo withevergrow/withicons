@@ -579,8 +579,11 @@
 .ip-pick-head b { font: 750 17px/1.2 var(--font-display); letter-spacing: -.01em; color: var(--style-text, var(--ink)) }
 .ip-pick-say { flex: 1 1 260px; min-width: 0 }
 .ip-pick { --t: min(52px, calc((100vw - 2 * var(--gutter, 16px) - 18px - 42px) / 8)); display: flex; flex-wrap: wrap; gap: 0 18px; margin: 0 }
-.ip-pick::after { content: ""; flex-basis: 100%; height: 14px; order: 1 }
-.ip-pick-g.is-playful, .ip-pick-g.is-studio, .ip-pick-g.is-more { order: 2 }
+/* three rows: Everyday + Crafted (7) · Playful + Studio (8) · Storybook (5); the two pseudo-elements are the line breaks */
+.ip-pick::after, .ip-pick::before { content: ""; flex-basis: 100%; height: 14px; order: 1 }
+.ip-pick::before { order: 3 }
+.ip-pick-g.is-playful, .ip-pick-g.is-studio { order: 2 }
+.ip-pick-g.is-storybook, .ip-pick-g.is-more { order: 4 }
 .ip-pick-g { display: grid; grid-template-columns: none; gap: 6px; align-content: start }
 .ip-pick-gl { display: flex; align-items: center; gap: 6px; font: 600 10.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
 .ip-pick-gl em { padding: 2px 6px; font-size: 9px }

@@ -1,7 +1,7 @@
 {
   "name": "@withicons/web",
   "version": "0.2.0",
-  "description": "<with-icon> custom element: 500 icons x 15 styles, zero dependencies, lazy per-style data.",
+  "description": "<with-icon> custom element: 500 icons x 20 styles, zero dependencies, lazy per-style data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -43,6 +43,11 @@
     "luxe",
     "bauhaus",
     "skeuo",
+    "anime",
+    "gothic",
+    "pastel",
+    "coquette",
+    "plush",
     "multicolor-icons",
     "animated-icons"
   ],

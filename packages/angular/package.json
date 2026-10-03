@@ -1,7 +1,7 @@
 {
   "name": "@withicons/angular",
   "version": "0.2.0",
-  "description": "500 icons x 15 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
+  "description": "500 icons x 20 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -42,7 +42,12 @@
     "retro-icons",
     "luxe-icons",
     "bauhaus-icons",
-    "skeuo-icons"
+    "skeuo-icons",
+    "anime-icons",
+    "gothic-icons",
+    "pastel-icons",
+    "coquette-icons",
+    "plush-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -113,6 +118,26 @@
       "types": "./dist/skeuo/index.d.ts",
       "default": "./dist/skeuo/index.mjs"
     },
+    "./anime": {
+      "types": "./dist/anime/index.d.ts",
+      "default": "./dist/anime/index.mjs"
+    },
+    "./gothic": {
+      "types": "./dist/gothic/index.d.ts",
+      "default": "./dist/gothic/index.mjs"
+    },
+    "./pastel": {
+      "types": "./dist/pastel/index.d.ts",
+      "default": "./dist/pastel/index.mjs"
+    },
+    "./coquette": {
+      "types": "./dist/coquette/index.d.ts",
+      "default": "./dist/coquette/index.mjs"
+    },
+    "./plush": {
+      "types": "./dist/plush/index.d.ts",
+      "default": "./dist/plush/index.mjs"
+    },
     "./icons/*": {
       "types": "./dist/line/icons/*.d.ts",
       "default": "./dist/line/icons/*.mjs"
@@ -176,6 +201,26 @@
     "./skeuo/icons/*": {
       "types": "./dist/skeuo/icons/*.d.ts",
       "default": "./dist/skeuo/icons/*.mjs"
+    },
+    "./anime/icons/*": {
+      "types": "./dist/anime/icons/*.d.ts",
+      "default": "./dist/anime/icons/*.mjs"
+    },
+    "./gothic/icons/*": {
+      "types": "./dist/gothic/icons/*.d.ts",
+      "default": "./dist/gothic/icons/*.mjs"
+    },
+    "./pastel/icons/*": {
+      "types": "./dist/pastel/icons/*.d.ts",
+      "default": "./dist/pastel/icons/*.mjs"
+    },
+    "./coquette/icons/*": {
+      "types": "./dist/coquette/icons/*.d.ts",
+      "default": "./dist/coquette/icons/*.mjs"
+    },
+    "./plush/icons/*": {
+      "types": "./dist/plush/icons/*.d.ts",
+      "default": "./dist/plush/icons/*.mjs"
     },
     "./package.json": "./package.json"
   },
@@ -273,6 +318,36 @@
       ],
       "skeuo/icons/*": [
         "./dist/skeuo/icons/*.d.ts"
+      ],
+      "anime": [
+        "./dist/anime/index.d.ts"
+      ],
+      "anime/icons/*": [
+        "./dist/anime/icons/*.d.ts"
+      ],
+      "gothic": [
+        "./dist/gothic/index.d.ts"
+      ],
+      "gothic/icons/*": [
+        "./dist/gothic/icons/*.d.ts"
+      ],
+      "pastel": [
+        "./dist/pastel/index.d.ts"
+      ],
+      "pastel/icons/*": [
+        "./dist/pastel/icons/*.d.ts"
+      ],
+      "coquette": [
+        "./dist/coquette/index.d.ts"
+      ],
+      "coquette/icons/*": [
+        "./dist/coquette/icons/*.d.ts"
+      ],
+      "plush": [
+        "./dist/plush/index.d.ts"
+      ],
+      "plush/icons/*": [
+        "./dist/plush/icons/*.d.ts"
       ]
     }
   },

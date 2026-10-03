@@ -5,7 +5,7 @@ This file is for coding agents (Claude Code, Cursor, Codex, Copilot) that change
 
 ## What this repo is
 
-500 icons x 15 styles = 7,500 icons, all generated from 500 hand-authored skeletons, plus one optional animation spec and 20-30 colour palettes per icon,
+500 icons x 20 styles = 10,000 icons, all generated from 500 hand-authored skeletons, plus one optional animation spec and 20-30 colour palettes per icon,
 and a separate set of up to 50 **live icons** (content you set: dates, times, counts, labels) whose generators every style renders.
 
 ```
@@ -14,9 +14,10 @@ forge/manifest.json         icon list + categories
 forge/motion/<name>.json     hand-authored animation spec per icon (loop, hover, alt presets, swaps); contract: forge/MOTION.md
 forge/palettes/<name>.json   20-30 colour palettes picked per icon (ten roles: ink c1-c4 tint accent shadow shine edge);
                              contract: forge/PALETTES.md; ships as @withicons/core/palettes/* (+ palette-map.js)
-forge/styles/<style>.mjs    15 deterministic renderers, in this order everywhere (STYLE_ORDER in forge/lib/emit-core.mjs):
+forge/styles/<style>.mjs    20 deterministic renderers, in this order everywhere (STYLE_ORDER in forge/lib/emit-core.mjs):
                             line solid duo gloss engrave blueprint sketch | palette styles: glass kawaii sticker pixel retro
                             | studio styles: luxe bauhaus skeuo (site group "Studio"; role-named vars --with-<style>-<role>)
+                            | storybook styles: anime gothic pastel coquette plush (site group "Storybook"; role-named vars)
                             (palette colours are var(--with-<style>-<role>, #hex), ink stays currentColor)
 forge/dynamic/<name>.mjs    live icon generators: params -> skeleton, rendered by every style (forge/DYNAMIC.md);
                             ships as @withicons/dynamic (emit-dynamic) and site/vendor/dynamic/dynamic.js (live.html)

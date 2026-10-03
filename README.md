@@ -2,9 +2,9 @@
 
 [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com)
 
-Open-source icons: **500 icons x 15 styles = 7,500 icons**, MIT licensed, with optional animations and a set of
+Open-source icons: **500 icons x 20 styles = 10,000 icons**, MIT licensed, with optional animations and a set of
 **live icons** whose dates, times, counts and labels you set. Every icon is one hand-drawn skeleton (24x24 grid,
-`forge/icons/<name>.json`); fifteen deterministic renderers turn it into fifteen styles, so all 7,500 stay one consistent family.
+`forge/icons/<name>.json`); twenty deterministic renderers turn it into twenty styles, so all 10,000 stay one consistent family.
 
 ```bash
 npm i @withicons/react
@@ -19,7 +19,7 @@ import { Home as HomeSolid } from '@withicons/react/solid' // any style is a sub
 <HomeSolid size={32} color="#e11d48" title="Home" />
 ```
 
-## The 15 styles
+## The 20 styles
 
 | style | kind | subpath | look |
 |---|---|---|---|
@@ -38,24 +38,31 @@ import { Home as HomeSolid } from '@withicons/react/solid' // any style is a sub
 | `luxe` | studio | `/luxe` | Premium multi-layered 3D: sapphire enamel slabs with an extruded wall, polished gold, a jewel, lit chamfers and a crisp highlight. |
 | `bauhaus` | studio | `/bauhaus` | Bauhaus posters in miniature: pure circles, squares and bars in red, yellow and blue, overprinted where they meet. |
 | `skeuo` | studio | `/skeuo` | Skeuomorphic: each icon a small object in a real material (paper, leather, metal, brass, glass), lit from above. |
+| `anime` | storybook | `/anime` | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow, a bright specular shine and the odd sparkle. |
+| `gothic` | storybook | `/gothic` | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches and tracery. |
+| `pastel` | storybook | `/pastel` | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
+| `coquette` | storybook | `/coquette` | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `plush` | storybook | `/plush` | Stuffed toys sewn from felt for kids: puffy panels, dark piping, running stitches, buttons and embroidery. |
 
 The seven mono styles paint in `currentColor`, so they follow your text colour on light and dark backgrounds (duo's tone and
 blueprint's accent can take a second colour through `--with-duo` and `--with-accent`).
-The five palette styles and the three studio styles ship a default palette that reads on white and on near-black; every colour
-is a CSS variable (`--with-<style>-<role>`; the studio styles use the palette role names: `--with-luxe-c1`, `--with-bauhaus-c3`)
+The five palette styles, the three studio styles and the five storybook styles ship a default palette that reads on white and on
+near-black; every colour is a CSS variable (`--with-<style>-<role>`; the studio and storybook styles use the palette role names:
+`--with-luxe-c1`, `--with-bauhaus-c3`, `--with-anime-shadow`)
 and the ink still follows `currentColor`, so one line of CSS re-themes them:
 
 ```css
-.hero { --with-kawaii-fill-1: #c4b5fd; --with-retro-1: #fde047; --with-luxe-c1: #0f766e; }
+.hero { --with-kawaii-fill-1: #c4b5fd; --with-retro-1: #fde047; --with-luxe-c1: #0f766e; --with-coquette-c3: #be123c; }
 ```
 
-The universal styles are for everyday UI; the creative, palette and studio styles are for illustration, marketing, slides and empty states.
+The universal styles are for everyday UI; the creative, palette, studio and storybook styles are for illustration, marketing, slides and empty states.
 
 ## Colour palettes
 
 Every icon ships 20-30 colour palettes picked for that icon (pizza: Margherita, Pepperoni, Pesto verde…), 11,423 in all.
 A palette sets ten colour roles (`ink`, `c1`-`c4`, `tint`, `accent`, `shadow`, `shine`, `edge`) and every multi-colour
-style (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`) maps them onto its own variables, so one palette
+style (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`,
+`coquette`, `plush`) maps them onto its own variables, so one palette
 changes **every** colour of an icon in any of those styles:
 
 ```js
@@ -133,7 +140,8 @@ No build step, straight from a CDN:
 ## The same API everywhere
 
 - **Default path = `line`.** Other styles: `<pkg>/solid`, `<pkg>/duo`, `<pkg>/gloss`, `<pkg>/engrave`, `<pkg>/blueprint`, `<pkg>/sketch`,
-  `<pkg>/glass`, `<pkg>/kawaii`, `<pkg>/sticker`, `<pkg>/pixel`, `<pkg>/retro`, `<pkg>/luxe`, `<pkg>/bauhaus`, `<pkg>/skeuo`.
+  `<pkg>/glass`, `<pkg>/kawaii`, `<pkg>/sticker`, `<pkg>/pixel`, `<pkg>/retro`, `<pkg>/luxe`, `<pkg>/bauhaus`, `<pkg>/skeuo`,
+  `<pkg>/anime`, `<pkg>/gothic`, `<pkg>/pastel`, `<pkg>/coquette`, `<pkg>/plush`.
 - **Names:** PascalCase of the kebab-case icon name, exported twice: `ArrowRight` and `ArrowRightIcon`.
 - **Deep imports:** `<pkg>/icons/home` (line) and `<pkg>/solid/icons/home`.
 - **Props:** `size` (24), `color` (`currentColor`), `strokeWidth` (styles with live strokes), `absoluteStrokeWidth`,
@@ -155,7 +163,7 @@ favicons or framework code.
 
 ```
 forge/icons/<name>.json    one skeleton per icon (the only hand-drawn input)
-forge/styles/<style>.mjs   the fifteen style renderers
+forge/styles/<style>.mjs   the twenty style renderers
 forge/dynamic/<name>.mjs   live icon generators (forge/DYNAMIC.md)
 forge/motion/<name>.json   one animation spec per icon (forge/MOTION.md)
 forge/palettes/<name>.json 20-30 colour palettes per icon (forge/PALETTES.md)

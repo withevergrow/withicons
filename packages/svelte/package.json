@@ -1,7 +1,7 @@
 {
   "name": "@withicons/svelte",
   "version": "0.2.0",
-  "description": "500 icons x 15 styles as tree-shakable Svelte components (Svelte 4 and 5).",
+  "description": "500 icons x 20 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -43,7 +43,12 @@
     "retro-icons",
     "luxe-icons",
     "bauhaus-icons",
-    "skeuo-icons"
+    "skeuo-icons",
+    "anime-icons",
+    "gothic-icons",
+    "pastel-icons",
+    "coquette-icons",
+    "plush-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -129,6 +134,31 @@
       "types": "./dist/skeuo/index.d.ts",
       "svelte": "./dist/skeuo/index.js",
       "default": "./dist/skeuo/index.js"
+    },
+    "./anime": {
+      "types": "./dist/anime/index.d.ts",
+      "svelte": "./dist/anime/index.js",
+      "default": "./dist/anime/index.js"
+    },
+    "./gothic": {
+      "types": "./dist/gothic/index.d.ts",
+      "svelte": "./dist/gothic/index.js",
+      "default": "./dist/gothic/index.js"
+    },
+    "./pastel": {
+      "types": "./dist/pastel/index.d.ts",
+      "svelte": "./dist/pastel/index.js",
+      "default": "./dist/pastel/index.js"
+    },
+    "./coquette": {
+      "types": "./dist/coquette/index.d.ts",
+      "svelte": "./dist/coquette/index.js",
+      "default": "./dist/coquette/index.js"
+    },
+    "./plush": {
+      "types": "./dist/plush/index.d.ts",
+      "svelte": "./dist/plush/index.js",
+      "default": "./dist/plush/index.js"
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
@@ -295,6 +325,56 @@
       "svelte": "./dist/skeuo/icons/*.svelte",
       "default": "./dist/skeuo/icons/*.svelte"
     },
+    "./anime/icons/*.svelte": {
+      "types": "./dist/anime/icons/*.svelte.d.ts",
+      "svelte": "./dist/anime/icons/*.svelte",
+      "default": "./dist/anime/icons/*.svelte"
+    },
+    "./anime/icons/*": {
+      "types": "./dist/anime/icons/*.svelte.d.ts",
+      "svelte": "./dist/anime/icons/*.svelte",
+      "default": "./dist/anime/icons/*.svelte"
+    },
+    "./gothic/icons/*.svelte": {
+      "types": "./dist/gothic/icons/*.svelte.d.ts",
+      "svelte": "./dist/gothic/icons/*.svelte",
+      "default": "./dist/gothic/icons/*.svelte"
+    },
+    "./gothic/icons/*": {
+      "types": "./dist/gothic/icons/*.svelte.d.ts",
+      "svelte": "./dist/gothic/icons/*.svelte",
+      "default": "./dist/gothic/icons/*.svelte"
+    },
+    "./pastel/icons/*.svelte": {
+      "types": "./dist/pastel/icons/*.svelte.d.ts",
+      "svelte": "./dist/pastel/icons/*.svelte",
+      "default": "./dist/pastel/icons/*.svelte"
+    },
+    "./pastel/icons/*": {
+      "types": "./dist/pastel/icons/*.svelte.d.ts",
+      "svelte": "./dist/pastel/icons/*.svelte",
+      "default": "./dist/pastel/icons/*.svelte"
+    },
+    "./coquette/icons/*.svelte": {
+      "types": "./dist/coquette/icons/*.svelte.d.ts",
+      "svelte": "./dist/coquette/icons/*.svelte",
+      "default": "./dist/coquette/icons/*.svelte"
+    },
+    "./coquette/icons/*": {
+      "types": "./dist/coquette/icons/*.svelte.d.ts",
+      "svelte": "./dist/coquette/icons/*.svelte",
+      "default": "./dist/coquette/icons/*.svelte"
+    },
+    "./plush/icons/*.svelte": {
+      "types": "./dist/plush/icons/*.svelte.d.ts",
+      "svelte": "./dist/plush/icons/*.svelte",
+      "default": "./dist/plush/icons/*.svelte"
+    },
+    "./plush/icons/*": {
+      "types": "./dist/plush/icons/*.svelte.d.ts",
+      "svelte": "./dist/plush/icons/*.svelte",
+      "default": "./dist/plush/icons/*.svelte"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -410,6 +490,41 @@
       "skeuo/icons/*": [
         "./dist/skeuo/icons/*.svelte.d.ts",
         "./dist/skeuo/icons/*.d.ts"
+      ],
+      "anime": [
+        "./dist/anime/index.d.ts"
+      ],
+      "anime/icons/*": [
+        "./dist/anime/icons/*.svelte.d.ts",
+        "./dist/anime/icons/*.d.ts"
+      ],
+      "gothic": [
+        "./dist/gothic/index.d.ts"
+      ],
+      "gothic/icons/*": [
+        "./dist/gothic/icons/*.svelte.d.ts",
+        "./dist/gothic/icons/*.d.ts"
+      ],
+      "pastel": [
+        "./dist/pastel/index.d.ts"
+      ],
+      "pastel/icons/*": [
+        "./dist/pastel/icons/*.svelte.d.ts",
+        "./dist/pastel/icons/*.d.ts"
+      ],
+      "coquette": [
+        "./dist/coquette/index.d.ts"
+      ],
+      "coquette/icons/*": [
+        "./dist/coquette/icons/*.svelte.d.ts",
+        "./dist/coquette/icons/*.d.ts"
+      ],
+      "plush": [
+        "./dist/plush/index.d.ts"
+      ],
+      "plush/icons/*": [
+        "./dist/plush/icons/*.svelte.d.ts",
+        "./dist/plush/icons/*.d.ts"
       ]
     }
   },

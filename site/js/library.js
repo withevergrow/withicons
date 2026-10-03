@@ -37,17 +37,18 @@
 
   /* ───────────────────────── data ───────────────────────── */
   // the contract order (forge/CONTRACT.md); styles the data adds later sort after these, missing ones are skipped
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
   var rankOf = function (n) { var i = ORDER.indexOf(n); return i < 0 ? 99 : i }
   var STYLES = META.styles.slice().sort(function (a, b) { return rankOf(a.name) - rankOf(b.name) })
   var STYLE = {}; STYLES.forEach(function (s) { STYLE[s.name] = s })
   var SNAMES = STYLES.map(function (s) { return s.name })
-  // how the switchers group them (same four families as the home page and icon pages)
+  // how the switchers group them (same five families as the home page and icon pages)
   var GROUPS = [
     { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
     { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
     { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'], isNew: true },
+    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'] },
+    { id: 'storybook', title: 'Storybook', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'], isNew: true },
   ].map(function (g) { return { id: g.id, title: g.title, isNew: g.isNew, styles: g.styles.filter(function (n) { return STYLE[n] }) } })
   SNAMES.forEach(function (n) { if (!GROUPS.some(function (g) { return g.styles.indexOf(n) >= 0 })) GROUPS[GROUPS.length - 1].styles.push(n) })
   GROUPS = GROUPS.filter(function (g) { return g.styles.length })
@@ -60,8 +61,8 @@
   CATS = CATS.filter(function (c) { return ICONS.some(function (ic) { return ic.category === c }) })
   var CAT_RANK = {}; CATS.forEach(function (c, i) { CAT_RANK[c] = i })
   var BROWSE = ICONS.slice().sort(function (a, b) { return (CAT_RANK[a.category] - CAT_RANK[b.category]) || (a.name < b.name ? -1 : 1) })
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
-  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes', luxe: 'Premium layered 3D with gold trim', bauhaus: 'Pure geometry in the Bauhaus primaries', skeuo: 'Real materials, bevels and depth' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
+  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes', luxe: 'Premium layered 3D with gold trim', bauhaus: 'Pure geometry in the Bauhaus primaries', skeuo: 'Real materials, bevels and depth', anime: 'Anime cel shading with sparkling highlights', gothic: 'Cathedral stone and stained glass', pastel: 'Soft, dreamy candy pastels', coquette: 'Blush pink, satin bows and pearls', plush: 'Soft felt toys with stitched seams' }
   var sayOf = function (st) { var wi = W.WI && W.WI.styleInfo && W.WI.styleInfo[st]; return SAY[st] || (wi && wi.description && wi.description.replace(/\.$/, '')) || (STYLE[st] && STYLE[st].description) || '' }
   var INK = '#111318', PAPER = '#FBF8F3'
   var styleHex = function (st) { return HEX[st] || INK }
@@ -537,7 +538,7 @@
       var narrow = w < 640
       L.gap = narrow ? 5 : 10; L.cols = SNAMES.length
       L.labelW = narrow ? 0 : Math.round(clamp(w * 0.17, 132, 210)); L.labelH = narrow ? 30 : 0
-      // every style of an icon sits on one line; when that would make tiles too small (15 styles on a phone or
+      // every style of an icon sits on one line; when that would make tiles too small (20 styles on a phone or
       // beside the open drawer) the line wraps into two rows of six
       var fit = function (per) { return Math.floor(Math.min(d.min, (w - L.labelW - L.gap * (per - 1)) / per)) }
       L.per = L.cols; L.tw = fit(L.cols)
@@ -831,8 +832,8 @@
   }
 
   /* ───────────────────────── style switcher ─────────────────────────
-     Every style is always visible: four groups (Everyday · Crafted · Playful · Studio), each option a live mini icon in
-     that style + its name. One row on wide bars, two balanced rows on tablets (CSS container query), and on phones a
+     Every style is always visible: five groups (Everyday · Crafted · Playful · Studio · Storybook), each option a live mini icon in
+     that style + its name. One row on wide bars, two full-width rows below that (CSS container query), and on phones a
      compact trigger that opens a panel listing all of them (no sideways scrolling anywhere). The selected option wears
      a sliding, colour-morphing indicator (.sb-ink). Mini icons come from an inline snapshot (#lib-style-samples) until
      each style's own file arrives, then switch to the live drawing. */

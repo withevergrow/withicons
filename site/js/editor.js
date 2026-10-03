@@ -29,8 +29,8 @@
 (function () {
   'use strict'
   var W = window, D = document
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86' }
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
   var INK = '#111318', INK_D = '#F4F0E8'
   var CDN = 'https://cdn.jsdelivr.net/npm/@withicons'
   var CLASH = ['Map', 'Image', 'History', 'File', 'Link', 'Navigation', 'Clipboard', 'Keyboard', 'Bluetooth', 'Screen', 'Option', 'Text', 'Location', 'Range', 'Selection', 'Notification', 'Set', 'Date', 'Error', 'Symbol', 'Proxy', 'Worker', 'Lock', 'Headers', 'Request', 'Response']
@@ -567,7 +567,13 @@
       // Bauhaus colours are named after what they are by default (Red, Yellow, Blue, Black, Paper), whichever role holds them
       // (the overlaps where two inks overprint are named after their colour too: "Orange overlap")
       bauhaus: { ink: 'Black', role: function (role, def) { var h = hueName(def); if (h && (role === 'c4' || role === 'accent')) return h + ' overlap'; return h || ({ c1: 'Main colour', c2: 'Second colour', c3: 'Third colour', c4: 'Overlap', accent: 'Overlap', tint: 'Paper', edge: 'Border', shadow: 'Shadow', shine: 'Shine' })[role] } },
-      skeuo: { ink: 'Outline', role: { c1: 'Main material', c2: 'Second material', c3: 'Third material', c4: 'Fourth material', tint: 'Glass', edge: 'Rim', accent: 'Stitching', shadow: 'Shadow', shine: 'Gloss' } }
+      skeuo: { ink: 'Outline', role: { c1: 'Main material', c2: 'Second material', c3: 'Third material', c4: 'Fourth material', tint: 'Glass', edge: 'Rim', accent: 'Stitching', shadow: 'Shadow', shine: 'Gloss' } },
+      // the storybook styles (role-named too), labelled after what each role paints in that style
+      anime: { ink: 'Line art', role: { c1: 'Main colour', c2: 'Second colour', c3: 'Gold', c4: 'Green', tint: 'Cream', accent: 'Coral', shadow: 'Cel shadow', shine: 'Shine', edge: 'Rim light' } },
+      gothic: { ink: 'Lead and iron', role: { c1: 'Ruby glass', c2: 'Sapphire glass', c3: 'Gold glass', c4: 'Emerald glass', tint: 'Stone', accent: 'Gilding', shadow: 'Shadow', shine: 'Candlelight', edge: 'Stone shade' } },
+      pastel: { ink: 'Outline', role: { c1: 'Main pastel', c2: 'Second pastel', c3: 'Third pastel', c4: 'Fourth pastel', accent: 'Fifth pastel', tint: 'Paper', shadow: 'Shadow', shine: 'Highlight', edge: 'Rim' } },
+      coquette: { ink: 'Outline', role: { c1: 'Blush', c2: 'Rose', c3: 'Ribbon', c4: 'Cream and pearls', tint: 'Satin light', accent: 'Gold', shadow: 'Shadow', shine: 'Sheen', edge: 'Lace' } },
+      plush: { ink: 'Piping', role: { c1: 'Main felt', c2: 'Second felt', c3: 'Third felt', c4: 'Fourth felt', accent: 'Patches', tint: 'Cream felt', shadow: 'Fabric shade', shine: 'Fleece highlight', edge: 'Stitching' } }
     }
     // plain colour name of a default (#hex) for the Bauhaus labels
     function hueName(hex) {

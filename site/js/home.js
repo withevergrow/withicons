@@ -1,6 +1,6 @@
 /* with icons — home page. Needs js/site.js (window.WI), js/home-icons.js (window.WITH_HOME) and, for the style
-   picker and "Icons that move", js/home-icons-more.js (window.WITH_HOME_MORE). Both packs are generated from the
-   skeletons (forge/tools/site-home.mjs) and load after the page is interactive. */
+   picker, "Icons that move" and the washing line's "dress them all as", js/home-icons-more.js (window.WITH_HOME_MORE).
+   Both packs are generated from the skeletons (forge/tools/site-data.mjs, homePacks) and load after the page is interactive. */
 (function () {
   'use strict'
   var W = window, doc = document
@@ -80,72 +80,133 @@
       }, 1500)
     }
 
-    /* ───────── stage: one icon, every style ───────── */
+    /* ───────── stage: every style, each with its own icon ─────────
+       Slide k is style AV[k] drawn with that style's representative icon (P.show[style] = [icon, ...alternates]; the
+       alternates take over on later rounds once the second pack is in). A searched icon "locks" the stage: then every
+       slide shows that icon. One rule keeps it honest: the chip, counter, caption, dots and the art change together, at
+       the moment the new art takes over (commit()), and the art layer carries data-icon/data-style for checking. */
     var stage = $('[data-stage]')
     var ST = null
-    if (stage) {
-      var art = $('[data-stage-art]', stage), scan = $('.stage-scan', stage), card = $('.stage-card', stage)
+    // its own scope: boot() declares paint/show/… again further down, and `var` would hoist them over these
+    if (stage) (function () {
+      var art = $('[data-stage-art]', stage), bloom = $('.stage-scan', stage), card = $('.stage-card', stage)
       var nameEl = $('[data-stage-name]', stage), nEl = $('[data-stage-n]', stage), styleEl = $('[data-stage-style]', stage), plainEl = $('[data-stage-plain]', stage)
-      var cap = $('.stage-cap', stage), dotsWrap = $('[data-stage-dots]', stage), totEl = $('[data-stage-total]', stage)
-      var HOLD = 2100
+      var cap = $('.stage-cap', stage), dotsWrap = $('[data-stage-dots]', stage), totEl = $('[data-stage-total]', stage), stTop = $('.stage-top', stage)
+      var HOLD = 2600, OUT = 150
+      var SHOW = P.show || {}
       if (totEl) totEl.textContent = String(AV.length)
-      ST = { icon: P.stage[0], si: 0, ii: 0, timer: 0, playing: false, visible: false, focus: false, pausedUntil: 0 }
+      ST = { si: 0, round: 0, timer: 0, swapT: 0, tok: 0, layer: null, playing: false, visible: false, focus: false, pausedUntil: 0, locked: false, lockIcon: null }
       dotsWrap.innerHTML = AV.map(function (s, i) {
-        return '<button type="button" class="stage-dot" style="--dot: var(--c-' + s + ')" data-i="' + i + '" aria-pressed="false" aria-label="' + INFO[s].title + '"></button>'
+        return '<button type="button" class="stage-dot" style="--dot: var(--c-' + s + ')" data-i="' + i + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false" aria-label="' + INFO[s].title + '"></button>'
       }).join('')
       dotsWrap.style.setProperty('--n', AV.length)
       var dots = $$('.stage-dot', dotsWrap)
-      stage.style.setProperty('--hold', HOLD + 'ms')
-      var paint = function (style, first) {
+      // the dot fills during the hold and is full just as the next swap starts
+      stage.style.setProperty('--hold', (HOLD - OUT) + 'ms')
+      // the icon slide k shows this round (null: not drawable yet)
+      var pick = function (k) {
+        var s = AV[k]
+        if (ST.locked) return hasIc(ST.lockIcon, s) ? ST.lockIcon : null
+        var list = SHOW[s] && SHOW[s].length ? SHOW[s] : P.stage
+        var n = list[ST.round % list.length]
+        if (hasIc(n, s)) return n
+        for (var j = 0; j < list.length; j++) if (hasIc(list[j], s)) return list[j]
+        return null
+      }
+      var paint = function (k, name, instant) {
+        var style = AV[k]
+        ST.icon = name // the washing line reads it (its gust never echoes the hero's icon)
         setStyleClass(stage, style)
-        nameEl.textContent = ST.icon
-        nEl.textContent = String(AV.indexOf(style) + 1)
+        stage.setAttribute('data-icon', name); stage.setAttribute('data-style', style)
+        nameEl.textContent = name
+        nEl.textContent = String(k + 1)
         styleEl.innerHTML = esc(INFO[style].title) + newTag(style)
         plainEl.textContent = INFO[style].plain
-        if (!first) { cap.classList.remove('is-swap'); void cap.offsetWidth; cap.classList.add('is-swap') }
-        var k = AV.indexOf(style)
+        if (!instant) {
+          cap.classList.remove('is-swap'); stTop.classList.remove('is-swap'); void cap.offsetWidth
+          cap.classList.add('is-swap'); stTop.classList.add('is-swap')
+        }
         dots.forEach(function (d, i) {
           d.setAttribute('aria-pressed', i === k ? 'true' : 'false')
+          d.tabIndex = i === k ? 0 : -1 // roving tabindex: one Tab stop for the whole row, arrows walk it
           d.classList.toggle('is-done', i < k)
           if (i === k) { d.style.animation = 'none'; void d.offsetWidth; d.style.animation = '' }
         })
       }
-      var show = function (style, mode) {
-        var svg = ic(ST.icon, style, 24)
+      var show = function (k, name, instant) {
+        var style = AV[k], svg = ic(name, style, 24)
         if (!svg) return false
+        // a swap still waiting to commit: don't blank the art for another OUT, hand over straight away
+        var pending = !!ST.swapT
+        clearTimeout(ST.swapT); ST.swapT = 0
         var layer = doc.createElement('div')
-        layer.className = 'stage-layer' + (reduced ? '' : mode === 'new' ? ' is-pop' : ' is-wipe')
+        // each layer carries its own style scope, so an outgoing icon keeps its palette while the stage changes style
+        layer.className = 'stage-layer'
+        setStyleClass(layer, style)
+        layer.setAttribute('data-icon', name); layer.setAttribute('data-style', style)
         layer.innerHTML = svg
-        var old = $$('.stage-layer', art)
-        art.appendChild(layer)
-        if (reduced || mode === 'new') old.forEach(function (o) { o.remove() })
-        else {
-          scan.style.setProperty('--scan-to', (card.offsetWidth * 0.86) + 'px')
-          scan.classList.remove('is-run'); void scan.offsetWidth; scan.classList.add('is-run')
-          setTimeout(function () { old.forEach(function (o) { o.remove() }) }, 820)
+        var cur = ST.layer
+        ST.si = k
+        var commit = function () {
+          ST.swapT = 0
+          ST.layer = layer
+          art.appendChild(layer)
+          if (!instant) {
+            layer.classList.add('is-in')
+            if (bloom) { bloom.classList.remove('is-run'); void bloom.offsetWidth; bloom.classList.add('is-run') }
+          }
+          paint(k, name, instant)
         }
-        paint(style, mode === 'first')
+        var clearOthers = function () { $$('.stage-layer', art).forEach(function (o) { if (o !== layer) o.remove() }) }
+        if (instant || reduced || !cur || !cur.parentNode) {
+          instant = true
+          commit(); clearOthers()
+          return true
+        }
+        if (pending) {
+          // cur is still on screen (fading or not): let it melt away under the new one
+          commit()
+          $$('.stage-layer', art).forEach(function (o) { if (o !== layer && o !== cur) o.remove() })
+          cur.classList.remove('is-in'); cur.classList.add('is-out')
+          setTimeout(function () { if (cur !== ST.layer) cur.remove() }, 300)
+          return true
+        }
+        // the old icon shrinks away; as it fades out the new one (with its caption) takes over
+        $$('.stage-layer.is-out', art).forEach(function (o) { o.remove() })
+        cur.classList.remove('is-in'); cur.classList.add('is-out')
+        ST.swapT = setTimeout(function () { commit(); setTimeout(function () { if (cur !== ST.layer) cur.remove() }, 200) }, OUT)
         return true
       }
-      var next = function () {
-        var k = ST.si, tries = 0
-        do {
-          k++
-          if (k >= AV.length) {
-            k = 0
-            if (!ST.locked) { ST.ii = (ST.ii + 1) % P.stage.length; ST.icon = P.stage[ST.ii] }
-          }
-          tries++
-        } while (!hasIc(ST.icon, AV[k]) && tries < 30)
-        ST.si = k
-        show(AV[k], k === 0 && !ST.locked ? 'new' : 'wipe')
-        if (ST.locked) prefetch(k)
-      }
       var prefetch = function (k) {
-        for (var j = 1; j <= AV.length; j++) {
-          var s = AV[(k + j) % AV.length]
-          if (!hasIc(ST.icon, s)) { WI.loadStyle(s); return }
+        var j = (k + 1) % AV.length
+        if (ST.locked && !hasIc(ST.lockIcon, AV[j])) WI.loadStyle(AV[j])
+      }
+      // go to slide k, or the first drawable one after it; a locked (searched) icon waits for its style file
+      var go = function (k) {
+        var tok = ++ST.tok
+        var tryFrom = function (k, left) {
+          for (; left > 0; left--, k = (k + 1) % AV.length) {
+            var n = pick(k)
+            if (n) { show(k, n); prefetch(k); return }
+            if (ST.locked) {
+              var j = k, rest = left - 1
+              WI.loadStyle(AV[j]).then(null, function () { return false }).then(function () {
+                if (tok !== ST.tok) return
+                var n2 = pick(j)
+                if (n2) { show(j, n2); prefetch(j) } else tryFrom((j + 1) % AV.length, rest)
+              })
+              return
+            }
+          }
         }
+        tryFrom(k, AV.length)
+      }
+      var next = function () {
+        var k = (ST.si + 1) % AV.length
+        if (k === 0 && !ST.locked) ST.round++
+        // the alternates ride in the second pack: someone still watching near the end of a round gets it fetched
+        if (!P2 && k === AV.length - 5 && typeof loadMore === 'function') loadMore()
+        go(k)
       }
       var schedule = function () {
         clearTimeout(ST.timer)
@@ -161,30 +222,46 @@
         if (ST.playing) schedule(); else clearTimeout(ST.timer)
       }
       ST.setIcon = function (name) {
-        if (!name || name === ST.icon) return
-        ST.want = name
-        WI.loadStyle('line').then(function () {
-          if (ST.want !== name) return
-          ST.icon = name; ST.locked = true; ST.si = 0
-          show('line', 'new')
-          // the searched icon morphs too: fetch each style file just ahead of its turn (never all of them at once)
-          prefetch(0)
-          schedule()
-        })
+        if (!name || (ST.locked && name === ST.lockIcon)) return
+        // first lock starts at slide 1; while typing (already locked) the stage stays on its slide and redraws it
+        var at = ST.locked ? ST.si : 0
+        ST.locked = true; ST.lockIcon = name
+        go(at)
+        schedule()
       }
-      ST.release = function () { ST.locked = false }
+      ST.release = function () { ST.locked = false; ST.lockIcon = null }
+      var jump = function (k) {
+        // the alternates ride in the second pack: a jump near the end of a round fetches it too
+        if (!P2 && k >= AV.length - 5 && typeof loadMore === 'function') loadMore()
+        if (k !== ST.si || ST.swapT) go(k)
+        ST.pausedUntil = Date.now() + 6000; schedule()
+      }
       dotsWrap.addEventListener('click', function (e) {
         var d = e.target.closest('.stage-dot'); if (!d) return
-        var k = +d.getAttribute('data-i')
-        if (!hasIc(ST.icon, AV[k])) { WI.loadStyle(AV[k]).then(function () { ST.si = k; show(AV[k], 'wipe') }); return }
-        ST.si = k; show(AV[k], 'wipe')
-        ST.pausedUntil = Date.now() + 6000; schedule()
+        jump(+d.getAttribute('data-i'))
+      })
+      // arrow keys walk the dots (Home / End jump to the ends)
+      dotsWrap.addEventListener('keydown', function (e) {
+        var d = e.target.closest('.stage-dot'); if (!d) return
+        var k = +d.getAttribute('data-i'), to = -1
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (k + 1) % AV.length
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (k - 1 + AV.length) % AV.length
+        else if (e.key === 'Home') to = 0
+        else if (e.key === 'End') to = AV.length - 1
+        if (to < 0) return
+        e.preventDefault()
+        dots[to].focus(); jump(to)
       })
       art.innerHTML = ''
-      show('line', 'first')
+      show(0, pick(0) || P.stage[0], true)
       WI.visibility(stage, play)
       motionFns.push(function () { play(ST.visible) })
-      stage.addEventListener('focusin', function () { ST.focus = true; play(ST.visible) })
+      // only keyboard focus pauses (a mouse click focuses the dot in Chrome/Firefox; jump() already pauses it for 6s)
+      stage.addEventListener('focusin', function (e) {
+        var kb = false
+        try { kb = e.target.matches(':focus-visible') } catch (err) { kb = true }
+        ST.focus = kb; play(ST.visible)
+      })
       stage.addEventListener('focusout', function (e) { if (!stage.contains(e.relatedTarget)) { ST.focus = false; play(ST.visible) } })
       // gentle 3D tilt that follows the pointer
       if (!reduced && W.matchMedia && W.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -197,26 +274,733 @@
         })
         stage.addEventListener('pointerleave', function () { card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg') })
       }
-    }
+    })()
 
-    /* ───────── lanes: one per style ───────── */
-    var lanes = $('[data-lanes]')
-    if (lanes) {
-      var tilt = $('.lanes-tilt', lanes)
-      var h = ''
-      AV.forEach(function (s, i) {
-        var names = (P.lanes[s] || []).filter(function (n) { return hasIc(n, s) })
-        if (!names.length) return
-        var tiles = names.map(function (n) {
-          return '<a class="lane-tile" tabindex="-1" href="' + esc(WI.iconUrl(n)) + '" title="' + esc(n) + ' · ' + INFO[s].title + '">' + ic(n, s, 30) + '</a>'
-        }).join('')
-        h += '<div class="lane s-' + s + (i % 2 ? ' rev' : '') + '" style="--dur:' + (46 + (i * 7) % 23) + 's">' +
-          '<a class="lane-label" href="' + esc(WI.url('styles/' + s + '.html')) + '">' + INFO[s].title + (INFO[s].isNew ? ' <span class="ll-new">new</span>' : '') + '</a>' +
-          '<div class="lane-track" aria-hidden="true">' + tiles + tiles + tiles + tiles + '</div></div>'
+    /* ═════════ THE WASHING LINE ═════════
+       One polaroid per style, pegged on a twine line in a soft sky, with a hanging sign per family and a kraft tag with
+       the sum (index.html [data-washline], home.css .wl). Data: P.washline = { cards: { style: icon }, sky: { sun|moon:
+       [style, icon] }, try: [icons], tryStyle }.
+       Motion is handed to the compositor: on a fine pointer the drift is ONE Web Animation per item (the curve is baked
+       into its keyframes; all share one clock, so the line moves as one), and each hanger has at most one plain swing
+       Web Animation. The speed (hover-stop, the gust, a scroll push) eases on a slow timer in a few coarse steps; a rAF
+       loop runs only while the line is dragged, flung or glides to a card, then sleeps. On touch (or a narrow screen) the line is parked: it only sways (CSS)
+       and moves when swiped. The story beat: when the line has pegged on, a gust blows through and every polaroid
+       develops into the same icon, holds, and develops back; then again every ~20 s with the next icon. */
+    var wlRoot = $('[data-washline]')
+    if (wlRoot && P.washline) washline(wlRoot, P.washline)
+    function washline(root, D) {
+      var list = $('.wl-list', root), signsBox = $('.wl-signs', root), pomsBox = $('.wl-poms', root)
+      var far = $('.wl-far', root), wind = $('.wl-wind', root), noteEl = $('.wl-note', root), windA = null, chipsBox = $('[data-wl-try]', root), holdBtn = $('[data-wl="hold"]', root)
+      var twine = $('.wl-twine', root), twineHi = $('.wl-twine-hi', root)
+      var isReduced = function () { return !!WI.reduced }
+      var fine = !!(W.matchMedia && W.matchMedia('(hover: hover) and (pointer: fine)').matches)
+      var canAnim = !!root.animate
+      // deterministic randomness: the same composition on every visit
+      var seed = 20261003
+      var rnd = function () { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296 }
+      var mod = function (a, n) { return ((a % n) + n) % n }
+      var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v }
+      var now = function () { return performance.now() }
+      var iconHref = function (n, s) { return WI.iconUrl(n) + '?style=' + encodeURIComponent(s) }
+      var cap = function (n) { n = String(n).replace(/-/g, ' '); return n.charAt(0).toUpperCase() + n.slice(1) }
+      var HEART = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.6c-.3 0-7.8-4.6-7.8-10.4 0-2.6 2-4.6 4.4-4.6 1.5 0 2.7.7 3.4 1.9.7-1.2 1.9-1.9 3.4-1.9 2.4 0 4.4 2 4.4 4.6 0 5.8-7.5 10.4-7.8 10.4z"/></svg>'
+      var SPARK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5c.7 6 3.6 9.2 10.5 10.5-6.9 1.3-9.8 4.5-10.5 10.5-.7-6-3.6-9.2-10.5-10.5C8.4 10.7 11.3 7.5 12 1.5z"/></svg>'
+      var CLOUD = '<svg viewBox="0 0 200 90"><path class="shade" d="M30 84c-16 0-26-8-26-19 0-12 11-19 24-18 3-15 16-24 31-21 7-13 22-21 39-17 15 3 25 14 27 27 4-2 9-3 14-2 14 2 22 12 21 24 11 1 18 8 18 16 0 6-6 10-15 10z"/><path class="puff" d="M30 78c-15 0-24-7-24-17 0-11 10-17 22-16 3-14 15-22 29-19 7-12 21-19 37-15 14 3 23 13 25 25 4-2 8-3 13-2 13 2 20 11 19 22 10 1 17 7 17 15 0 5-5 7-13 7z"/></svg>'
+      var ARROW = '<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16 L16 8 M9.5 8 H16 V14.5"/></svg>'
+
+      /* moments: each style's little trick (one card at a time, now and then) */
+      var MOMENT = { line: 'pop', solid: 'pop', duo: 'pop', gloss: 'shine', engrave: 'shine', blueprint: 'measure', sketch: 'wiggle',
+        glass: 'shine', kawaii: 'hearts', sticker: 'peel', pixel: 'steps', retro: 'sway', luxe: 'glint', bauhaus: 'spin', skeuo: 'press',
+        anime: 'sparkle', gothic: 'glow', pastel: 'bubbles', coquette: 'hearts', plush: 'squish' }
+      var fxi = function (cls, x, y, s, d, inner, r) { return '<i class="wl-fx-' + cls + '" style="--fx:' + x + '%;--fy:' + y + '%;--fs:' + s + '%' + (d ? ';--fd:' + d + 's' : '') + (r ? ';--fr:' + r + 'deg' : '') + '">' + (inner || '') + '</i>' }
+      var FX = {
+        pop: function () { return '<i class="wl-fx-ring"></i>' },
+        shine: function () { return '<i class="wl-fx-shine"></i>' },
+        glint: function () { return '<i class="wl-fx-shine"></i>' + fxi('star', 68, 10, 22, .25, SPARK) },
+        hearts: function () { return fxi('heart', 62, 16, 20, 0, HEART) + fxi('heart', 20, 26, 14, .22, HEART, -10) },
+        sparkle: function () { return fxi('star', 12, 14, 22, 0, SPARK) + fxi('star', 70, 8, 16, .18, SPARK) + fxi('star', 72, 66, 19, .34, SPARK) },
+        bubbles: function () { return fxi('bubble', 20, 62, 12) + fxi('bubble', 70, 58, 9, .2) + fxi('bubble', 56, 70, 14, .4) },
+        peel: function () { return '<i class="wl-fx-peel"></i>' },
+        steps: function () { return fxi('coin', 68, 24, 9) },
+        glow: function () { return '<i class="wl-fx-glow"></i>' },
+        measure: function () { return '<i class="wl-fx-measure"></i>' }
+      }
+      var MOMENT_MS = { pop: 900, shine: 1150, glint: 1300, hearts: 1800, sparkle: 1600, bubbles: 2000, peel: 1450, steps: 950, glow: 2450,
+        measure: 1650, squish: 1200, sway: 1350, wiggle: 950, spin: 1250, press: 750 }
+
+      /* ───── build: a sign, then that family's cards, for each family; the kraft tag with the sum closes the line ───── */
+      var seq = []
+      WI.GROUPS.forEach(function (g) {
+        var st = g.styles.filter(function (s) { return AV.indexOf(s) >= 0 && INFO[s] && D.cards[s] && hasIc(D.cards[s], s) })
+        if (!st.length) return
+        seq.push({ kind: 'sign', group: g })
+        st.forEach(function (s) { seq.push({ kind: 'card', style: s, group: g }) })
       })
-      tilt.innerHTML = h
-      tilt.style.setProperty('--lanes', String(AV.length))
-      WI.visibility(lanes, function (v) { lanes.classList.toggle('is-paused', !v) })
+      if (!seq.length) return
+      seq.push({ kind: 'tag', group: seq[seq.length - 1].group })
+      var items = [], cards = [], signs = [], poms = [], tagIt = null
+      var CN = WI.counts ? WI.counts() : { icons: 500, styles: AV.length, svgs: 500 * AV.length }
+      var fmt = WI.fmt || String
+      list.innerHTML = ''
+      seq.forEach(function (it, i) {
+        var g = it.group
+        if (it.kind === 'sign' || it.kind === 'tag') {
+          var el = doc.createElement('div')
+          if (it.kind === 'sign') {
+            el.className = 'wl-sign f-' + g.id
+            var isNew = g.styles.some(function (s) { return INFO[s] && INFO[s].isNew })
+            el.innerHTML = '<div class="wl-swing"><span class="wl-sign-thread"></span><span class="wl-sign-tag">' + esc(g.title.toLowerCase()) + (isNew ? '<span class="wl-sign-new">new</span>' : '') + '</span></div>'
+            signs.push(it)
+          } else {
+            // the sum, as a kraft luggage tag on the line (aria-hidden: the same words are in the list's description)
+            el.className = 'wl-sign wl-tag'
+            el.innerHTML = '<div class="wl-swing"><span class="wl-sign-thread"></span><span class="wl-tag-card"><b data-count="icons">' + fmt(CN.icons) + '</b> × <b data-count="styles">' + CN.styles +
+              '</b> = <b class="wl-tag-sum"><span data-count="svgs">' + fmt(CN.svgs) + '</span> ways</b></span></div>'
+            tagIt = it
+          }
+          signsBox.appendChild(el)
+          it.el = el
+          it.swingEl = el.firstChild
+        } else {
+          var s = it.style, info = INFO[s], name = D.cards[s]
+          var li = doc.createElement('li')
+          li.className = 'wl-card s-' + s + ' wl-st-' + s + ' f-' + g.id
+          li.style.setProperty('--in', (rnd() * 18 - 9).toFixed(1) + 'deg')
+          li.style.setProperty('--rest', (rnd() * 5 - 2.5).toFixed(2) + 'deg')
+          // the idle sway: every card its own period (4.6–6.2 s) and phase, so the line breathes without marching
+          var per = 4.6 + rnd() * 1.6
+          li.style.setProperty('--sdur', (per / 2).toFixed(2) + 's')
+          li.style.setProperty('--sd', (-rnd() * per).toFixed(2) + 's')
+          var label = info.title + ' style, ' + g.title + ' family' + (info.isNew ? ', new' : '') + '. ' + (info.description || '')
+          li.innerHTML = '<div class="wl-swing"><div class="wl-sway"><div class="wl-body"><span class="wl-peg" aria-hidden="true"></span>' +
+            '<a class="wl-paper" href="' + esc(WI.url('styles/' + s + '.html')) + '" draggable="false" tabindex="-1" aria-label="' + esc(label) + '">' +
+            '<span class="wl-photo" aria-hidden="true"><span class="wl-ic">' + ic(name, s, 64) + '</span><span class="wl-film"></span><span class="wl-fx"></span></span>' +
+            '<span class="wl-cap" aria-hidden="true">' + esc(info.title.toLowerCase()) + '</span></a>' +
+            // a mouse can also open the icon itself: a small chip in the photo's corner, shown on hover (never on touch)
+            (fine ? '<a class="wl-ic-a" href="' + esc(iconHref(name, s)) + '" draggable="false" tabindex="-1" aria-hidden="true"><span class="wl-ic-n">' + esc(name) + '</span>' + ARROW + '</a>' : '') +
+            '<span class="wl-burst" aria-hidden="true"></span></div></div></div>'
+          list.appendChild(li)
+          it.el = li; it.name = name; it.shown = name; it.want = name
+          it.swingEl = $('.wl-swing', li)
+          it.paper = $('.wl-paper', li); it.photo = $('.wl-photo', li); it.icEl = $('.wl-ic', li); it.film = $('.wl-film', li); it.fx = $('.wl-fx', li)
+          it.icA = $('.wl-ic-a', li); it.icN = $('.wl-ic-n', li); it.burst = $('.wl-burst', li)
+          it.ci = cards.length
+          cards.push(it)
+        }
+        it.rand = rnd(); it.swings = []
+        items.push(it)
+        // a pom-pom (a fairy light at night) in the gap after every item, in that family's colour
+        var p = doc.createElement('i')
+        p.className = 'wl-pom f-' + g.id + (i % 2 ? ' alt' : '')
+        p.style.setProperty('--d', (-rnd() * 3.8).toFixed(2) + 's')
+        pomsBox.appendChild(p)
+        poms.push({ el: p, after: it })
+      })
+      var N = cards.length
+      var movers = items.concat(poms)
+
+      // the sky: the sun and the moon are our own kawaii icons; two clouds that keep to the top corners
+      var sun = $('[data-sky="sun"]', root), moon = $('[data-sky="moon"]', root)
+      if (sun && D.sky && D.sky.sun) sun.innerHTML = ic(D.sky.sun[1], D.sky.sun[0], 88)
+      if (moon && D.sky && D.sky.moon) moon.innerHTML = ic(D.sky.moon[1], D.sky.moon[0], 80)
+      far.innerHTML = '<span class="wl-cloud wl-cloud-a">' + CLOUD + '</span><span class="wl-cloud wl-cloud-b">' + CLOUD + '</span>'
+
+      /* ───── metrics + the curve ───── */
+      var M = {}, L = 0, pad = 0, Wd = 0, Hd = 0, cardH = 170, Dms = 1, parked = false
+      var num = function (name, dflt) { var v = parseFloat(getComputedStyle(root).getPropertyValue(name)); return isFinite(v) ? v : dflt }
+      function curveY(x) { var u = clamp((x + 40) / (Wd + 80), -0.2, 1.2); return M.y0 + M.sag * 4 * u * (1 - u) }
+      function layout() {
+        Wd = root.clientWidth; Hd = root.clientHeight
+        M.cw = num('--cw', 136); M.slot = num('--slot', 178); M.tslot = num('--tslot', 124); M.gslot = num('--gslot', 230); M.y0 = num('--y0', 112); M.sag = num('--sag', 46)
+        M.speed = Wd < 1100 ? 20 : 23
+        // touch screens and phones: the line is parked (it sways, and moves when swiped); a mouse gets the slow drift
+        parked = !fine || Wd < 640
+        var c = 0
+        items.forEach(function (it) { var w = it.kind === 'sign' ? M.tslot : it.kind === 'tag' ? M.gslot : M.slot; it.bx = c + w / 2; it.w = w; c += w })
+        L = c
+        // a very wide screen must never see the loop's seam: stretch the spacing until the line is longer than the view
+        var k = (Wd + 2 * M.slot + 40) / L
+        if (k > 1) { items.forEach(function (it) { it.bx *= k; it.w *= k }); L *= k }
+        pad = M.slot
+        poms.forEach(function (p, i) { var a = p.after, b = items[(i + 1) % items.length]; p.bx = a.bx + a.w / 2 + (b.kind !== 'card' ? -6 : 0) })
+        var d = 'M -40 ' + M.y0 + ' Q ' + (Wd / 2) + ' ' + (M.y0 + 2 * M.sag) + ' ' + (Wd + 40) + ' ' + M.y0
+        twine.setAttribute('d', d); twineHi.setAttribute('d', d)
+        cardH = cards[0] ? cards[0].el.offsetHeight : 170
+        Dms = L / M.speed * 1000
+      }
+
+      /* ───── the drift: one Web Animation per item, all on one clock ─────
+         Keyframes run x from L - pad down to -pad with y on the curve; an item's place in the loop is its (negative)
+         delay. Offset (px) and the shared clock ct (ms) map one-to-one: offset = -ct / Dms * L. */
+      var anims = [], playing = false, rate = 0, applied = -1, manual = false, offset = 0
+      // guard: a zero width/duration mid-resize (or a hidden tab) must never produce NaN times
+      var ctOf = function (off) { var c = mod(-off / L * Dms, Dms); return isFinite(c) ? c : 0 }
+      var offOf = function (ct) { return -ct / Dms * L }
+      function curOffset() { return (manual || !anims.length) ? offset : offOf(anims[0].currentTime || 0) }
+      var xOf = function (it, off) { return mod(it.bx + off, L) - pad }
+      function buildAnims() {
+        anims.forEach(function (a) { a.cancel() }); anims = []; playing = false; applied = -1
+        var STOPS = 64, kf = []
+        for (var i = 0; i <= STOPS; i++) {
+          var u = i / STOPS, x = L - pad - u * L
+          kf.push({ transform: 'translate3d(' + x.toFixed(1) + 'px,' + curveY(x).toFixed(1) + 'px,0)', offset: u })
+        }
+        if (!canAnim) return
+        movers.forEach(function (m) {
+          var u0 = (L - mod(m.bx, L)) / L
+          var a = m.el.animate(kf, { duration: Dms, delay: -u0 * Dms, iterations: Infinity, easing: 'linear', fill: 'both' })
+          a.pause()
+          anims.push(a)
+        })
+        setCt(ctOf(offset))
+      }
+      function setCt(ct) {
+        if (!canAnim) { movers.forEach(function (m) { var x = xOf(m, offOf(ct)); m.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + curveY(x).toFixed(1) + 'px,0)' }); return }
+        if (!isFinite(ct)) ct = 0
+        for (var i = 0; i < anims.length; i++) anims[i].currentTime = ct
+      }
+      // free mode: play at `rate` (pause outright at rest, so nothing ticks)
+      function applyRate(r) {
+        if (!anims.length) return
+        // quantised coarsely, and through updatePlaybackRate: every new rate re-syncs all the drift animations, so the
+        // speed only changes in a few steps while it eases (a new rate every frame would keep them pending and busy)
+        r = Math.round(r * 4) / 4
+        var run = visible && !manual && r > 0
+        if (run) {
+          if (r !== applied) { for (var i = 0; i < anims.length; i++) { if (anims[i].updatePlaybackRate) anims[i].updatePlaybackRate(r); else anims[i].playbackRate = r } applied = r }
+          if (!playing) { for (var j = 0; j < anims.length; j++) anims[j].play(); playing = true }
+        } else if (playing) { for (var q = 0; q < anims.length; q++) anims[q].pause(); playing = false }
+      }
+      function enterManual() {
+        if (manual) return
+        offset = curOffset(); manual = true
+        applyRate(0); rate = 0
+      }
+      function exitManual() {
+        if (!manual) return
+        setCt(ctOf(offset)); manual = false; rate = 0
+        kick()
+      }
+
+      /* ───── swings: a damped pendulum, ONE plain (replace) Web Animation per hanger, so it stays on the compositor ─────
+         (additive animations cannot be composited). A new kick starts from wherever the hanger is now: the old swing's
+         angle is read back, the old animation is cancelled, and the new one rings down from that angle plus the kick.
+         The rest tilt lives on the separate `rotate` property, so it never fights the transform. */
+      function swing(it, amp, delay) {
+        if (calm() || !canAnim || !it.swingEl || Math.abs(amp) < .3) return
+        if (delay > 16) { clearTimeout(it.swT); it.swT = setTimeout(function () { it.swT = 0; swing(it, amp, 0) }, delay); return }
+        amp = clamp(amp, -16, 16)
+        var n = 26, dur = 2600, w = 2 * Math.PI / (it.kind === 'card' ? .98 : 1.15), tau = it.kind === 'card' ? .62 : .5
+        var ang = function (S, t) { return Math.exp(-t / tau) * (S.a0 * Math.cos(w * t) + S.amp * Math.sin(w * t)) }
+        // where the hanger is now, from the running swing's own formula (no style read-back, so no forced recalc)
+        var a0 = 0, S = it.sw
+        if (S && it.swings.length) { var ts = (now() - S.t0) / 1000; if (ts < dur / 1000) a0 = ang(S, ts) }
+        it.swings.forEach(function (x) { x.cancel() })
+        S = it.sw = { a0: a0, amp: amp, t0: now() }
+        // the ring-down takes 2.6 s, then a long, still tail: a composited animation that ends every few seconds keeps
+        // Chrome's main thread ticking frames (measured), one that simply rests at 0 for a while does not
+        var kf = [], TAIL = 30000
+        for (var i = 0; i <= n; i++) kf.push({ transform: 'rotate(' + clamp(ang(S, i / n * dur / 1000), -18, 18).toFixed(2) + 'deg)', offset: i / n * dur / TAIL })
+        kf.push({ transform: 'rotate(0deg)', offset: 1 })
+        var a = it.swingEl.animate(kf, { duration: TAIL, easing: 'linear' })
+        it.swings = [a]
+        a.onfinish = function () { if (it.swings[0] === a) it.swings = [] }
+      }
+      function stopSwings(it) { clearTimeout(it.swT); it.swT = 0; it.swings.forEach(function (x) { x.cancel() }); it.swings = [] }
+
+      /* ───── state ───── */
+      var visible = false, held = false, hover = false, focusIn = false, started = false
+      var drag = null, glide = null, glideCard = null, glideSay = false, fling = false, v = 0, vPeak = 0
+      var raf = 0, last = 0, restUntil = 0, pushS = 0, gust = null
+      var still = function () { return isReduced() || held }
+      function calm() { return isReduced() || held }
+      function target() {
+        if (parked || still() || hover || focusIn || !started || now() < restUntil) return 0
+        var gb = 0
+        if (gust) { var f = gust.front(now()); gb = Math.max(0, Math.sin(Math.PI * clamp((f + 300) / (Wd + 600), 0, 1))) * .8 }
+        return 1 + gb + pushS / M.speed
+      }
+      function nearestCard() {
+        var best = 0, bd = 1e9, off = curOffset()
+        cards.forEach(function (c, i) { var d = Math.abs(xOf(c, off) - Wd / 2); if (d < bd) { bd = d; best = i } })
+        return best
+      }
+      function offsetFor(c, at) { var t = (at == null ? Wd / 2 : at) + pad - c.bx, o = curOffset(); return t + Math.round((o - t) / L) * L }
+
+      /* ───── the loop: only while the line is dragged, flung, or glides to a card ───── */
+      function frame(t) {
+        raf = 0
+        var rdt = last ? clamp((t - last) / 1000, .0005, .1) : 1 / 60; last = t
+        var busy = false
+        if (manual) {
+          if (drag) { /* the move handler sets the clock */ }
+          else if (glide != null) {
+            if (isReduced()) { offset = glide; v = 0 }
+            else {
+              var sub = Math.ceil(rdt / (1 / 120)), h = rdt / sub
+              for (var g = 0; g < sub; g++) { var ga = 42 * (glide - offset) - 13 * v; v += ga * h; offset += v * h }
+              if (Math.abs(v) > Math.abs(vPeak)) vPeak = v
+            }
+            if (Math.abs(glide - offset) < .35 && Math.abs(v) < 3) { offset = glide; v = 0; glide = null; setCt(ctOf(offset)); landed(); exitManual() }
+            else { setCt(ctOf(offset)); busy = true }
+          } else if (fling) {
+            v *= Math.exp(-rdt * 3.4); offset += v * rdt; setCt(ctOf(offset))
+            if (Math.abs(v) < 40) {
+              fling = false; settle(vPeak)
+              // parked: come to rest with a card in the middle (a gentle snap, like a carousel)
+              if (parked) glideTo(nearestCard()); else exitManual()
+            }
+            busy = true
+          }
+        }
+        if (visible && busy && manual) raf = requestAnimationFrame(frame)
+        else { last = 0; if (!manual) kick() }
+      }
+      /* the speed governor: in free mode the speed (hover-stop, the gust, a scroll push) eases on a slow timer, never
+         on a per-frame loop, so the compositor keeps the line moving without the main thread drawing every frame */
+      var govT = 0, govLast = 0
+      function govern() {
+        govT = 0
+        if (manual) return
+        var t = now(), rdt = govLast ? clamp((t - govLast) / 1000, .01, .5) : .16; govLast = t
+        var tg = target()
+        rate += (tg - rate) * (1 - Math.exp(-rdt * (tg > rate ? 1.5 : 3.4)))
+        if (Math.abs(tg - rate) < .02 || isReduced()) rate = tg
+        applyRate(rate)
+        pushS *= Math.exp(-rdt * 2.6); if (pushS < .05) pushS = 0
+        if (gust && gust.front(now()) > Wd + 300) gust = null
+        if (visible && (rate !== tg || gust || pushS > 0)) govT = setTimeout(govern, 160)
+        else govLast = 0
+      }
+      function kick() {
+        if (!visible) return
+        if (manual) { if (!raf) raf = requestAnimationFrame(frame) }
+        else if (!govT) govT = setTimeout(govern, 0)
+      }
+      // the line stops: the cards carry on a little and swing back (inertia)
+      function settle(vel) {
+        var off = curOffset()
+        items.forEach(function (it) { var x = xOf(it, off); if (x > -M.cw && x < Wd + M.cw) swing(it, clamp(-vel * .008, -6, 6) * (.8 + .4 * it.rand), it.rand * 60) })
+        vPeak = 0
+      }
+
+      /* ───── landing: a squash from the peg and three four-point sparkles ───── */
+      function land(c, sparkle) {
+        if (isReduced() || !c || !canAnim) return
+        c.paper.animate([{ transform: 'none' }, { transform: 'scale(1.04, .955)', offset: .28 }, { transform: 'scale(.985, 1.02)', offset: .58 }, { transform: 'none' }],
+          { duration: 700, easing: 'cubic-bezier(.23, 1, .32, 1)' })
+        if (sparkle) {
+          c.burst.innerHTML = [[-9, 12, 17, 0], [88, 4, 13, .07], [94, 58, 19, .14]].map(function (b) {
+            return '<i style="--bx:' + b[0] + '%;--by:' + b[1] + '%;--bs:' + b[2] + 'px;--bd:' + b[3] + 's">' + SPARK + '</i>'
+          }).join('')
+          clearTimeout(c.burstT); c.burstT = setTimeout(function () { c.burst.innerHTML = '' }, 1200)
+        }
+      }
+      function landed() {
+        var c = glideCard; glideCard = null
+        settle(vPeak)
+        if (!c) return
+        land(c, true)
+        if (glideSay) { glideSay = false; WI.announce(INFO[c.style].title + ', ' + (c.ci + 1) + ' of ' + N + ', ' + c.group.title) }
+      }
+      function glideTo(ci, say) {
+        var c = cards[ci]; if (!c) return
+        enterManual()
+        glide = offsetFor(c); glideCard = c; glideSay = !!say; fling = false; vPeak = 0
+        kick()
+      }
+
+      /* ───── moments: one card in the middle of the view does its style's trick ───── */
+      var momentOn = null
+      function playMoment(it, type) {
+        if (it.busy || isReduced() || it.dev) return
+        type = type || MOMENT[it.style] || 'pop'
+        it.busy = true; momentOn = it
+        it.fx.innerHTML = FX[type] ? FX[type]() : ''
+        it.el.classList.add('wl-m-' + type)
+        setTimeout(function () { it.el.classList.remove('wl-m-' + type); it.fx.innerHTML = ''; it.busy = false; if (momentOn === it) momentOn = null }, MOMENT_MS[type] || 1200)
+      }
+      function moment() {
+        if (momentOn || costumeOn || gust) return
+        var off = curOffset()
+        var pool = cards.filter(function (c) { var x = xOf(c, off); return !c.busy && x > Wd * .25 && x < Wd * .75 })
+        if (pool.length) playMoment(pool[Math.floor(rnd() * pool.length)])
+      }
+
+      /* ───── the costume change: a gust blows through and every polaroid develops into the same icon ───── */
+      var dressed = null, dressBy = null, autoK = 0, costumeOn = false, costumeT = []
+      var iconFor = function (c) { return dressed && hasIc(dressed, c.style) ? dressed : c.name }
+      function swapNow(c, name) {
+        c.shown = name
+        c.icEl.innerHTML = ic(name, c.style, 64)
+        if (c.icA) { c.icA.setAttribute('href', iconHref(name, c.style)); c.icN.textContent = name }
+      }
+      // a Polaroid develops: the old picture fades back, a cream film washes over, the new one comes up through it
+      function develop(c) {
+        if (c.dev || c.want === c.shown) return
+        if (calm() || !visible || !canAnim) { swapNow(c, c.want); return }
+        c.dev = true
+        var name = c.want, old = c.icEl
+        var nu = doc.createElement('span'); nu.className = 'wl-ic'; nu.innerHTML = ic(name, c.style, 64)
+        old.parentNode.insertBefore(nu, old.nextSibling)
+        c.icEl = nu; c.shown = name
+        if (c.icA) { c.icA.setAttribute('href', iconHref(name, c.style)); c.icN.textContent = name }
+        // the old picture simply goes under the film (it is at .85 by 190 ms) and is removed there: one animation fewer
+        clearTimeout(c.oldT); c.oldT = setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old) }, 190)
+        c.film.animate([{ opacity: 0 }, { opacity: .85, offset: .3 }, { opacity: 0 }], { duration: 640, easing: 'ease-in-out' })
+        var a = nu.animate([{ opacity: .15, transform: 'scale(1.06)' }, { opacity: 1, transform: 'none' }], { duration: 600, delay: 90, easing: 'cubic-bezier(.2, .7, .3, 1)', fill: 'backwards' })
+        a.onfinish = a.oncancel = function () {
+          if (old.parentNode) old.parentNode.removeChild(old)
+          c.dev = false
+          if (c.want !== c.shown) develop(c)
+        }
+      }
+      /* the gust travels left to right; each card swings (and develops, if asked) as the wind front reaches it */
+      function blow(opts) {
+        var t0 = now(), sp = Wd < 640 ? 640 : 860, power = opts.power
+        var g = { front: function (t) { return -260 + sp * (t - t0) / 1000 } }
+        if (!parked && opts.curl) gust = g
+        var rel = sp + (parked ? 0 : M.speed * Math.max(rate, 0)), off = curOffset()
+        items.forEach(function (it) {
+          var x = xOf(it, off), on = x > -M.cw && x < Wd + M.cw && visible
+          var delay = Math.max(0, (x + 260) / rel * 1000)
+          if (it.kind === 'card' && opts.dress) {
+            it.want = iconFor(it)
+            if (!on || calm()) { clearTimeout(it.devT); if (!it.dev) swapNow(it, it.want); return }
+            clearTimeout(it.devT); it.devT = setTimeout(function () { develop(it) }, delay)
+          }
+          if (on) swing(it, -power * (.7 + .6 * it.rand) * (it.kind === 'card' ? 1 : .6), delay)
+        })
+        if (opts.curl && wind && canAnim && !calm() && visible) {
+          // the curls ride low, between the note and the twine, and stay faint until they are past the note's words
+          var span = Wd + 520, uOf = function (x) { return clamp((x + 380) / span, 0, 1) }
+          var nr = noteEl ? noteEl.getBoundingClientRect() : null, rr = root.getBoundingClientRect()
+          var past = nr ? uOf(nr.right - rr.left + 8) : .1
+          var kf = [{ transform: 'translate3d(-380px,0,0)', opacity: 0, offset: 0 }, { opacity: .22, offset: Math.min(.08, past / 2) }]
+          if (past > .1) kf.push({ opacity: .22, offset: past })
+          kf.push({ opacity: .85, offset: Math.min(.9, Math.max(past, .1) + .08) }, { opacity: .7, offset: .93 }, { transform: 'translate3d(' + (Wd + 140) + 'px,0,0)', opacity: 0, offset: 1 })
+          try { windA && windA.cancel(); windA = wind.animate(kf, { duration: span / sp * 1000, easing: 'linear' }) } catch (e) { /* odd offsets: skip the curls */ }
+        }
+        kick()
+      }
+      function dress(name, by, quiet) {
+        dressed = name; dressBy = name ? by : null
+        paintChips()
+        // dressing: a proper gust with the wind curl; undressing: a softer breeze
+        blow({ dress: true, curl: !!name && !quiet, power: name ? 6.5 : 3.5 })
+      }
+      function clearCostume() { costumeT.forEach(clearTimeout); costumeT = []; costumeOn = false }
+      // a costume is only offered once every polaroid can wear it (so "all 20 now show…" is always true)
+      var ready = function (n) { return cards.every(function (c) { return hasIc(n, c.style) }) }
+      function costume() {
+        if (!D.try || !D.try.length || dressBy) return
+        // never the icon the hero is showing right now: the gust should be a surprise, not an echo
+        var name = null
+        for (var k = 0; k < D.try.length && !name; k++) {
+          var n = D.try[autoK++ % D.try.length]
+          if (ready(n) && !(ST && ST.icon === n)) name = n
+        }
+        if (!name || !cards.some(function (c) { return name !== c.name })) return
+        costumeOn = true
+        dress(name, 'auto')
+        // hold once the gust has crossed the screen, then develop back
+        var cross = (Wd + 520) / (Wd < 640 ? 640 : 860) * 1000
+        costumeT.push(setTimeout(function () {
+          if (dressBy === 'auto') dress(null, null)
+          costumeT.push(setTimeout(function () { costumeOn = false }, cross))
+        }, cross + 3500))
+      }
+      // a user costume presses its chip; an automatic one only lights it (a soft ring, aria-pressed stays false), so people
+      // learn the chips do the same thing
+      function paintChips() {
+        if (!chipsBox) return
+        $$('.wl-chip', chipsBox).forEach(function (b) {
+          var n = b.getAttribute('data-n')
+          b.setAttribute('aria-pressed', dressBy === 'user' && n === dressed ? 'true' : 'false')
+          b.classList.toggle('is-auto', dressBy === 'auto' && n === dressed)
+          if (ready(n)) b.removeAttribute('aria-disabled'); else b.setAttribute('aria-disabled', 'true')
+        })
+      }
+      if (chipsBox && D.try && D.try.length) {
+        chipsBox.innerHTML = D.try.map(function (n) {
+          return '<button type="button" class="wl-chip" data-n="' + esc(n) + '" aria-pressed="false" aria-label="' + esc(cap(n)) + '" title="' + esc(cap(n)) + '">' + ic(n, D.tryStyle || 'line', 22) + '</button>'
+        }).join('')
+        chipsBox.addEventListener('click', function (e) {
+          var b = e.target.closest('.wl-chip'); if (!b) return
+          var n = b.getAttribute('data-n')
+          if (!ready(n)) return
+          clearCostume(); if (costumeAt) costumeAt = TT + 20
+          if (dressBy === 'user' && dressed === n) { dress(null, null); WI.announce('Each style shows its own icon again') }
+          else { dress(n, 'user'); WI.announce('All ' + N + ' styles now show the ' + n.replace(/-/g, ' ')) }
+        })
+        // the rest of the costumes ride in the second pack: whatever was waiting for it changes as soon as it lands
+        more.push(function () { paintChips(); if (dressed) dress(dressed, dressBy, true) })
+        paintChips()
+      } else if (chipsBox) chipsBox.parentNode.hidden = true
+
+      /* ───── the family spotlight: hover a sign and its family lifts while the others step back a little ───── */
+      var spot = null
+      function setSpot(id) {
+        if (spot === id) return
+        spot = id
+        cards.forEach(function (c) { c.el.classList.toggle('is-dim', !!id && c.group.id !== id); c.el.classList.toggle('is-lit', !!id && c.group.id === id) })
+        signs.forEach(function (s) { s.el.classList.toggle('is-dim', !!id && s.group.id !== id) })
+      }
+      signs.forEach(function (s) {
+        s.el.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') setSpot(s.group.id) })
+        s.el.addEventListener('pointerleave', function () { setSpot(null) })
+        s.el.addEventListener('click', function () {
+          if (suppress) return
+          var first = cards.filter(function (c) { return c.group === s.group })[0]
+          if (first) { setTab(first.ci); glideTo(first.ci); rest(4000) }
+        })
+      })
+      function rest(ms) { restUntil = now() + ms; setTimeout(kick, ms + 30) }
+
+      /* ───── pointer: brush past, hover to stop, drag and fling (swipe on touch) ───── */
+      var rect = null, suppress = false, lastPx = null, lastSy = W.scrollY || 0, lastSt = 0
+      var rel = function (e) { if (!rect) rect = root.getBoundingClientRect(); return { x: e.clientX - rect.left, y: e.clientY - rect.top } }
+      W.addEventListener('scroll', function () {
+        rect = null
+        if (!visible || parked || still()) return
+        // scrolling the page gives the line a little push along (never backwards)
+        var sy = W.scrollY || W.pageYOffset || 0, t = now(), dt = Math.max(16, t - lastSt)
+        var sv = Math.abs(sy - lastSy) / dt * 1000; lastSy = sy; lastSt = t
+        if (dt < 200) { pushS = Math.max(pushS, Math.min(46, sv * .06)); kick() }
+      }, { passive: true })
+      root.addEventListener('pointermove', function (e) {
+        var p = rel(e)
+        if (drag && e.pointerId === drag.id) {
+          var dx = p.x - drag.x0, dy = p.y - drag.y0
+          // mostly vertical before it moved: that is a page scroll or a cancelled click, never a drag
+          if (!drag.moved && Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { drag = null; kick(); return }
+          if (!drag.moved && Math.abs(dx) > 6) {
+            drag.moved = true; root.classList.add('is-grabbing')
+            enterManual(); drag.o0 = offset - dx; glide = null; glideCard = null; fling = false
+            try { root.setPointerCapture(e.pointerId) } catch (err) { /* noop */ }
+          }
+          if (drag.moved) {
+            var nt = now(), no = drag.o0 + dx
+            var dtt = Math.max(1, nt - drag.t) / 1000
+            drag.v = drag.v * .6 + ((no - offset) / dtt) * .4
+            offset = no; drag.t = nt
+            setCt(ctOf(offset))
+          }
+          return
+        }
+        if (e.pointerType === 'mouse' || e.pointerType === 'pen') {
+          var wasHover = hover
+          hover = p.y > M.y0 - 30 && p.y < M.y0 + M.sag + cardH + 26
+          // brushing past a card sets it swinging
+          if (lastPx != null && !still()) {
+            var mdx = p.x - lastPx, t = now(), off = curOffset()
+            if (Math.abs(mdx) > 1.5) {
+              for (var i = 0; i < items.length; i++) {
+                var it = items[i], x = xOf(it, off), y = curveY(x)
+                if (Math.abs(x - p.x) < M.cw * .55 && p.y > y + 4 && p.y < y + cardH && t - (it.brushAt || 0) > 260) { it.brushAt = t; swing(it, -clamp(mdx * .45, -9, 9), 0) }
+              }
+            }
+          }
+          lastPx = p.x
+          if (hover !== wasHover) kick()
+        }
+      }, { passive: true })
+      root.addEventListener('pointerleave', function () {
+        hover = false; lastPx = null; setSpot(null)
+        if (drag && !drag.moved) drag = null
+        kick()
+      })
+      root.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0 || e.target.closest('.wl-foot')) return
+        var p = rel(e)
+        drag = { id: e.pointerId, x0: p.x, y0: p.y, o0: 0, t: now(), v: 0, moved: false }
+      })
+      function endDrag(e) {
+        if (!drag || (e && e.pointerId != null && e.pointerId !== drag.id)) return
+        var d = drag; drag = null
+        root.classList.remove('is-grabbing')
+        if (d.moved) {
+          suppress = true; setTimeout(function () { suppress = false }, 0)
+          v = clamp(d.v, -1800, 1800); vPeak = v
+          if (isReduced() || Math.abs(v) < 40) { settle(v); if (parked) glideTo(nearestCard()); else exitManual() }
+          else fling = true
+        }
+        kick()
+      }
+      // the release can happen anywhere (outside the band too): always end the drag at window level
+      W.addEventListener('pointerup', endDrag)
+      W.addEventListener('pointercancel', endDrag)
+      // (only our own capture: touch starts with an implicit capture on the link, which is lost when the band takes it)
+      root.addEventListener('lostpointercapture', function (e) { if (e.target === root) endDrag(e) })
+      // a drag never opens a link
+      root.addEventListener('click', function (e) { if (suppress) { e.preventDefault(); e.stopPropagation(); suppress = false } }, true)
+      // hovering a card plays its trick straight away
+      cards.forEach(function (c) {
+        $('.wl-body', c.el).addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' && !still() && !drag && !momentOn) playMoment(c) })
+      })
+
+      /* ───── keyboard: one tab stop; the arrows walk the line ───── */
+      var tabI = -1
+      // the one tab stop also carries the "use the arrow keys" description, so it is read out when focus lands on it
+      function setTab(i) {
+        if (i === tabI || !cards[i]) return
+        if (tabI >= 0) { cards[tabI].paper.setAttribute('tabindex', '-1'); cards[tabI].paper.removeAttribute('aria-describedby') }
+        tabI = i; cards[i].paper.setAttribute('tabindex', '0'); cards[i].paper.setAttribute('aria-describedby', 'wl-keys')
+      }
+      list.addEventListener('keydown', function (e) {
+        var k = e.key, i = tabI
+        if (k === 'ArrowRight' || k === 'ArrowDown') i = (tabI + 1) % N
+        else if (k === 'ArrowLeft' || k === 'ArrowUp') i = (tabI - 1 + N) % N
+        else if (k === 'Home') i = 0
+        else if (k === 'End') i = N - 1
+        else return
+        e.preventDefault()
+        setTab(i); cards[i].paper.focus({ preventScroll: true })
+      })
+      list.addEventListener('focusin', function (e) {
+        var li = e.target.closest('.wl-card'); if (!li) return
+        var c = cards.filter(function (x) { return x.el === li })[0]; if (!c) return
+        setTab(c.ci)
+        // keyboard focus only: a press that starts a drag (or a tap) also focuses the link, and must not steer the line
+        var kb = true; try { kb = e.target.matches(':focus-visible') } catch (err) { /* old engines: treat as keyboard */ }
+        if (!kb) return
+        focusIn = true; glideTo(c.ci)
+      })
+      list.addEventListener('focusout', function (e) { if (!list.contains(e.relatedTarget)) { focusIn = false; kick() } })
+      // overflow: clip fallback: focus must never scroll the band sideways
+      root.addEventListener('scroll', function () { root.scrollLeft = 0; root.scrollTop = 0 })
+
+      /* ───── controls ───── */
+      $('.wl-ctrl', root).addEventListener('click', function (e) {
+        var b = e.target.closest('[data-wl]'); if (!b) return
+        var act = b.getAttribute('data-wl')
+        if (act === 'hold') {
+          held = !held
+          b.setAttribute('aria-pressed', held ? 'true' : 'false')
+          b.setAttribute('aria-label', held ? 'Play the line' : 'Pause the line')
+          root.classList.toggle('is-held', held)
+          if (held) {
+            // everything stops where it is: the swings, any wind, and costumes waiting for the gust (they change in place)
+            items.forEach(function (it) {
+              stopSwings(it)
+              if (it.devT) { clearTimeout(it.devT); it.devT = 0; if (!it.dev && it.want !== it.shown) swapNow(it, it.want) }
+            })
+            if (windA) windA.cancel()
+          }
+          kick(); return
+        }
+        var base = glideCard ? glideCard.ci : nearestCard()
+        var n = (base + (act === 'next' ? 1 : -1) + N) % N
+        setTab(n); glideTo(n, true); rest(4000)
+      })
+      function paintHold() { if (holdBtn) holdBtn.hidden = isReduced() && !held }
+
+      /* ───── the director: tricks and the costume change, on a clock that only runs while the line is seen ───── */
+      var TT = 0, dLast = 0, nextMoment = 9, costumeAt = 0, tabAt = 0
+      setInterval(function () {
+        var t = now(), dt = dLast ? Math.min(.5, (t - dLast) / 1000) : 0; dLast = t
+        if (!visible || !started) return
+        if (!focusIn && TT >= tabAt) { tabAt = TT + 1.2; setTab(nearestCard()) }
+        // cards well off screen stop their idle sway (fewer running animations for every frame the page draws)
+        var off = curOffset(), mg = M.cw * 1.5
+        for (var i = 0; i < N; i++) { var c = cards[i], x = xOf(c, off), far = x < -mg || x > Wd + mg; if (far !== !!c.far) { c.far = far; c.el.classList.toggle('is-far', far) } }
+        if (still() || drag) return
+        TT += dt
+        if (costumeAt && TT >= costumeAt && !costumeOn && !dressBy) { costumeAt = TT + 20; costume() }
+        if (TT >= nextMoment) { nextMoment = TT + 8 + rnd() * 4; if (!hover) moment() }
+      }, 250)
+
+      /* ───── lifecycle ───── */
+      function enter() {
+        if (started) return
+        started = true
+        if (isReduced()) { root.classList.add('is-in'); return }
+        // the twine draws on, then the cards are pegged on one by one, left to right, each landing with a swing
+        var off = curOffset()
+        var vis = items.filter(function (it) { var x = xOf(it, off); it.x0 = x; return x > -M.cw && x < Wd + M.cw }).sort(function (a, b) { return a.x0 - b.x0 })
+        // only what is on screen animates in (the rest is simply there when it drifts into view)
+        vis.forEach(function (it, k) {
+          it.el.style.setProperty('--k', k); it.el.classList.add('is-drop')
+          swing(it, (it.rand > .5 ? 1 : -1) * (5 + it.rand * 4), 250 + k * 75 + 560)
+        })
+        root.classList.add('is-drawing', 'is-intro', 'is-in')
+        var mid = cards[nearestCard()]
+        setTimeout(function () { land(mid, true) }, 250 + Math.max(0, vis.indexOf(mid)) * 75 + 640)
+        var endMs = 250 + vis.length * 75 + 640
+        setTimeout(function () { root.classList.remove('is-intro', 'is-drawing'); vis.forEach(function (it) { it.el.classList.remove('is-drop') }) }, endMs + 900)
+        // the story beat ends the entrance: 2.5 s after the last card lands, the first gust dresses everyone alike
+        costumeAt = TT + endMs / 1000 + 2.5
+        kick()
+      }
+      function onVisible(vv) {
+        visible = vv
+        root.classList.toggle('is-paused', !vv)
+        if (vv) { last = 0; kick() } else applyRate(0)
+      }
+      root.classList.add('is-ready')   // before measuring: the no-JS layout of the list must not apply
+      layout()
+      // open on the newest, cutest end of the set: with a mouse the storybook family (its sign, its five cards and the
+      // kraft tag with the sum) sits in the middle, and the drift then brings the everyday family round; on a parked
+      // (touch) line the plush bunny is in the middle, with the tag peeking in to invite a swipe
+      var story = items.filter(function (it) { return it.group && it.group.id === 'storybook' && it.kind !== 'tag' })
+      var plush = cards.filter(function (c) { return c.style === 'plush' })[0]
+      function home() {
+        if (parked && plush) return Wd / 2 + pad - plush.bx
+        if (story.length) { var a = story[0], b = tagIt && tagIt.group.id === 'storybook' ? tagIt : story[story.length - 1]; return Wd / 2 + pad - (a.bx - a.w / 2 + b.bx + b.w / 2) / 2 }
+        return Wd / 2 + pad - cards[Math.floor(N / 2)].bx
+      }
+      offset = home()
+      buildAnims()
+      if (isReduced()) { started = true; root.classList.add('is-in') }
+      setTab(nearestCard())
+      paintHold()
+      // the peg-on plays once, when most of the line is in view (not while it peeks under the hero)
+      if ('IntersectionObserver' in W) {
+        var io = new IntersectionObserver(function (es) {
+          if (es[es.length - 1].intersectionRatio >= .45) { io.disconnect(); enter() }
+        }, { threshold: [0, .45, .7] })
+        io.observe(root)
+      } else enter()
+      var rz = 0, lastW = Wd
+      W.addEventListener('resize', function () {
+        cancelAnimationFrame(rz)
+        rz = requestAnimationFrame(function () {
+          rect = null
+          // only the height changed (a phone's address bar): the line carries on undisturbed
+          if (root.clientWidth === lastW) return
+          // the card nearest the middle keeps its place, as a share of the new width
+          var keep = cards[nearestCard()], share = xOf(keep, curOffset()) / Wd
+                    enterManual(); glide = null; fling = false
+          layout(); lastW = Wd
+          offset = share * Wd + pad - keep.bx
+          if (!isFinite(offset)) offset = 0
+          buildAnims()
+          if (!drag) exitManual()
+        })
+      }, { passive: true })
+      WI.visibility(root, onVisible)
+      // the hero's "New: Anime, gothic & plush" link: bring the band into view and glide to the storybook sign
+      var kickNew = $('.kick-new'), firstStory = cards.filter(function (c) { return c.group.id === 'storybook' })[0]
+      if (kickNew && firstStory) kickNew.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
+        e.preventDefault()
+        var y = root.getBoundingClientRect().top + (W.scrollY || W.pageYOffset || 0) - Math.max(0, (W.innerHeight - root.offsetHeight) / 2)
+        W.scrollTo({ top: Math.max(0, y), behavior: isReduced() ? 'auto' : 'smooth' })
+        setTab(firstStory.ci)
+        if (!started) { offset = offsetFor(firstStory); setCt(ctOf(offset)) }
+        else { glideTo(firstStory.ci, true); rest(5000) }
+      })
+      motionFns.push(function (r) {
+        paintHold()
+        if (r) {
+          started = true; root.classList.add('is-in'); root.classList.remove('is-intro', 'is-drawing')
+          clearCostume(); if (dressBy === 'auto') dress(null, null)
+          items.forEach(stopSwings)
+          if (windA) windA.cancel()
+          if (glide != null) { offset = glide; glide = null; setCt(ctOf(offset)); exitManual() }
+        }
+        kick()
+      })
     }
 
     /* ───────── hero search: live results ───────── */
@@ -323,7 +1107,7 @@
       try { var q0 = new URLSearchParams(location.search).get('q'); if (q0) { input.value = q0; run() } } catch (err) { /* noop */ }
     }
 
-    /* ───────── pick a style: grouped tabs (Everyday · Crafted · Playful · Studio) ───────── */
+    /* ───────── pick a style: grouped tabs (Everyday · Crafted · Playful · Studio · Storybook) ───────── */
     var picker = $('[data-picker]')
     if (picker) {
       var tabs = $('[data-picker-tabs]', picker), pgrid = $('[data-picker-grid]', picker)
@@ -525,8 +1309,8 @@
     var orbit = $('[data-orbit]')
     if (orbit) {
       var ORB = [['heart', 'gloss'], ['star', 'solid'], ['rocket', 'retro'], ['gift', 'duo'], ['coffee', 'sketch'], ['cloud', 'glass'], ['camera', 'blueprint'], ['smile', 'kawaii'],
-        ['trophy', 'engrave'], ['zap', 'sticker'], ['star', 'pixel'], ['crown', 'luxe'], ['music-note', 'bauhaus'], ['calendar', 'line'], ['mail', 'retro'], ['camera', 'skeuo'],
-        ['settings', 'blueprint'], ['home', 'sticker'], ['user', 'engrave'], ['rocket', 'line']].filter(function (o) { return hasIc(o[0], o[1]) })
+        ['trophy', 'engrave'], ['zap', 'sticker'], ['star', 'pixel'], ['crown', 'luxe'], ['music-note', 'bauhaus'], ['calendar', 'line'], ['rocket', 'anime'], ['camera', 'skeuo'],
+        ['key', 'gothic'], ['cloud', 'pastel'], ['gift', 'coquette'], ['star', 'plush']].filter(function (o) { return hasIc(o[0], o[1]) })
       var orbs = ORB.map(function (o, i) {
         var el = doc.createElement('span'); el.className = 'orb' + (i % 3 === 1 ? ' ghost' : '')
         el.style.setProperty('--orb', 'var(--c-' + o[1] + ')')
@@ -563,7 +1347,7 @@
         bell: { name: 'bell-count', re: /bell|notif|badge|count/, fb: 'bell' }, battery: { name: 'battery-level', re: /^battery/, fb: 'battery', level: 0.72 },
         weather: { name: 'weather', re: /weather|temp|forecast/, fb: 'cloud-sun' }, label: { name: 'tag-label', re: /label|tag|text|sticker/, fb: 'tag' }
       }
-      var LV_STYLES = ['luxe', 'bauhaus', 'skeuo', 'line', 'kawaii', 'glass', 'retro', 'duo'].filter(function (s) { return INFO[s] })
+      var LV_STYLES = ['luxe', 'anime', 'bauhaus', 'plush', 'skeuo', 'line', 'coquette', 'kawaii', 'gothic', 'glass', 'pastel', 'retro', 'duo'].filter(function (s) { return INFO[s] })
       var lvTiles = $$('[data-lv]', lvSec), lvStyleEl = $('[data-lv-style]', lvSec), lvBoard = $('.live-board', lvSec)
       var MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
       var DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
@@ -649,12 +1433,21 @@
       more.forEach(function (fn) { try { fn() } catch (e) { if (W.console) console.error(e) } })
       initMotion()
     }
-    if (W.WITH_HOME_MORE) gotMore()
-    else {
+    // it is only needed from the style picker down, so it loads when that part of the page comes near (never at boot)
+    var askedMore = false
+    var loadMore = function () {
+      if (askedMore) return
+      askedMore = true
       var s2 = doc.createElement('script')
       s2.src = (WI.base || '') + 'js/home-icons-more.js'
       s2.onload = gotMore
       doc.head.appendChild(s2)
+    }
+    if (W.WITH_HOME_MORE) gotMore()
+    else {
+      var needMore = [$('[data-picker]'), $('[data-motion]')].filter(Boolean)
+      if (!needMore.length) loadMore()
+      needMore.forEach(function (el) { WI.whenVisible(el, loadMore, '250px') })
     }
 
     /* ═════════ ICONS THAT MOVE ═════════
@@ -824,7 +1617,7 @@
       WI.visibility(sec, function (v) { sec.classList.toggle('is-off', !v) }, '120px')
     }
   }
-  // the icon pack (≈75 KB gzipped) loads after the page is interactive, so it never delays the header or first paint
+  // the icon pack (≈160 KB gzipped) loads after the page is interactive, so it never delays the header or first paint
   function start() {
     if (W.WITH_HOME) { boot(); return }
     var s = doc.createElement('script')

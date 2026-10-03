@@ -1,7 +1,7 @@
 {
   "name": "@withicons/static",
   "version": "0.2.0",
-  "description": "500 icons x 15 styles as SVG sprites and standalone SVG files. No JavaScript.",
+  "description": "500 icons x 20 styles as SVG sprites and standalone SVG files. No JavaScript.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -41,7 +41,12 @@
     "retro",
     "luxe",
     "bauhaus",
-    "skeuo"
+    "skeuo",
+    "anime",
+    "gothic",
+    "pastel",
+    "coquette",
+    "plush"
   ],
   "sideEffects": false,
   "files": [

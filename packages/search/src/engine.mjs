@@ -206,9 +206,17 @@ const STYLE_WORDS = {
   '3d': 'luxe', luxury: 'luxe', luxurious: 'luxe', premium: 'luxe', gold: 'luxe', golden: 'luxe', deluxe: 'luxe', opulent: 'luxe', lux: 'luxe',
   geometric: 'bauhaus', modernist: 'bauhaus', modernism: 'bauhaus', constructivist: 'bauhaus', midcentury: 'bauhaus',
   skeuomorphic: 'skeuo', skeuomorphism: 'skeuo', skeuomorph: 'skeuo', skeuomorphous: 'skeuo', realistic: 'skeuo', tactile: 'skeuo', photorealistic: 'skeuo', lifelike: 'skeuo',
+  manga: 'anime', cel: 'anime', celshaded: 'anime', celshading: 'anime', shoujo: 'anime', shojo: 'anime', shonen: 'anime', ghibli: 'anime', otaku: 'anime',
+  goth: 'gothic', medieval: 'gothic', cathedral: 'gothic', castle: 'gothic', victorian: 'gothic', stainedglass: 'gothic', gargoyle: 'gothic', darkacademia: 'gothic',
+  pastels: 'pastel', soft: 'pastel', softcolor: 'pastel', softcolour: 'pastel', dreamy: 'pastel', babycolors: 'pastel',
+  bow: 'coquette', bows: 'coquette', girly: 'coquette', feminine: 'coquette', ribbons: 'coquette', dainty: 'coquette', balletcore: 'coquette', girlish: 'coquette',
+  plushie: 'plush', plushy: 'plush', plushies: 'plush', toy: 'plush', toys: 'plush', kids: 'plush', kid: 'plush', children: 'plush', childrens: 'plush',
+  stuffed: 'plush', felt: 'plush', squishy: 'plush', cuddly: 'plush', stuffedtoy: 'plush',
 }
 // two-word style phrases are joined before parsing: "8 bit" (from "8-bit") -> "8bit"
-const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart', '3 d': '3d', 'mid century': 'midcentury' }
+const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart', '3 d': '3d', 'mid century': 'midcentury',
+  'cel shaded': 'celshaded', 'cel shading': 'celshading', 'stained glass': 'stainedglass', 'dark academia': 'darkacademia', 'soft color': 'softcolor', 'soft colour': 'softcolour',
+  'baby colors': 'babycolors', 'stuffed toy': 'stuffedtoy' }
 // words after a style word that mark it as a style request ("glass style home", "pixel look")
 const STYLE_MARK = new Set(['style', 'styled', 'look', 'effect', 'version', 'variant', 'theme', 'aesthetic'])
 // the original seven styles and their words keep their exact 1.1 parsing

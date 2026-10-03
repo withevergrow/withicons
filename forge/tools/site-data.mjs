@@ -67,17 +67,47 @@ export function build(ctx) {
 }
 
 // Home page packs (site/js/home-icons.js = window.WITH_HOME, site/js/home-icons-more.js = window.WITH_HOME_MORE) carry
-// only what the home page animates, per style. Styles already in a pack are left byte-identical (their entries were
-// hand-tuned, e.g. pathLength for draw-on); a style the packs do not have yet is ADDED from this build's renders:
-// its showcase lane (LANES, falling back to the hero/stage icons), the stage, the hero icons it is listed under, and in
-// the second pack every other icon the picker grid and "Icons that move" use.
-const LANES = {
-  luxe: ['crown', 'gem', 'trophy', 'gift', 'key', 'wallet', 'credit-card', 'rocket', 'heart', 'star', 'bell', 'shield-check'],
-  bauhaus: ['home', 'clock', 'music-note', 'camera', 'sun', 'compass', 'palette', 'globe', 'book-open', 'lightbulb', 'chart-pie', 'star'],
-  skeuo: ['camera', 'calendar', 'clock', 'mail', 'phone', 'settings', 'folder', 'music-note', 'lock', 'headphones', 'notebook', 'microphone'],
-}
+// only what the home page draws, per style. The first pack is everything above the fold and the sections that paint
+// straight away (hero icons, stage, the washing line, the final orbit, the use-case cards); the second loads right
+// after it with every other icon the picker grid, "Icons that move" and the washing line's "dress them all as" use.
+// Entries of the original twelve styles were hand-tuned (e.g. pathLength for draw-on) and stay byte-identical; the
+// FOLLOW styles, and any style the packs do not have yet, are rebuilt from this build's renders on every run.
+const FOLLOW = ['luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
 // the hero headline icons a new style joins (index.html data-ht-styles must list it too)
-const HERO = { luxe: 'globe', bauhaus: 'chart-bar', skeuo: 'smartphone' }
+const HERO = { luxe: 'globe', bauhaus: 'chart-bar', skeuo: 'smartphone', anime: 'smartphone', gothic: 'globe', pastel: 'chart-bar', coquette: 'smartphone', plush: 'globe' }
+// other first-paint sections that only show what the first pack has: the final orbit (home.js ORB) and the use-case
+// cards (index.html data-use-ic + data-use-style). Keep in step with them.
+const PAGE = {
+  line: ['calendar', 'rocket'], solid: ['star'], duo: ['gift', 'calendar-check'], gloss: ['heart'], engrave: ['trophy', 'landmark'],
+  blueprint: ['camera', 'cpu'], sketch: ['coffee', 'graduation-cap'], glass: ['cloud'], kawaii: ['smile', 'book-open'],
+  sticker: ['zap', 'camera'], pixel: ['star', 'gamepad'], retro: ['rocket', 'music-note'], luxe: ['crown'], bauhaus: ['music-note'],
+  skeuo: ['camera'], anime: ['rocket'], gothic: ['key'], pastel: ['cloud'], coquette: ['gift'], plush: ['star'],
+}
+// The washing line under the hero (index.html [data-washline], home.js): one polaroid per style. `cards` is the subject
+// each style's polaroid shows (chosen to tell that style's story, in the first pack), `sky` the kawaii sun and moon,
+// `try` the shared objects every polaroid can change into ("dress them all as"): only icons the first pack already carries
+// in every style (the hero stage's), so the costumes cost nothing and never wait for the second pack. The first one
+// is the first gust's surprise; heart (which the hero opens on) comes last, and home.js skips whatever the hero shows.
+const WASHLINE = {
+  cards: { line: 'home', solid: 'star', duo: 'package', gloss: 'heart', engrave: 'anchor', blueprint: 'ruler', sketch: 'lightbulb',
+    glass: 'cloud', kawaii: 'coffee', sticker: 'smile', pixel: 'gamepad', retro: 'tv', luxe: 'gem', bauhaus: 'palette', skeuo: 'mail',
+    anime: 'cat', gothic: 'heart', pastel: 'ice-cream', coquette: 'butterfly', plush: 'rabbit' },
+  sky: { sun: ['kawaii', 'sun'], moon: ['kawaii', 'moon'] },
+  try: ['gift', 'coffee', 'rocket', 'camera', 'heart'],
+  tryStyle: 'line',
+}
+// The hero stage (index.html [data-stage], home.js): slide k is style k drawn with its own representative icon, so the
+// card walks through twenty different objects instead of one icon twenty times. The first icon of each list is in the
+// first pack (it paints with the hero); the alternates, which take over on later rounds, ride in the second pack.
+const SHOWCASE = {
+  line: ['bike', 'telescope', 'send'], solid: ['apple', 'umbrella', 'paw-print'], duo: ['piggy-bank', 'palette', 'gift'],
+  gloss: ['balloon', 'ice-cream', 'gamepad'], engrave: ['landmark', 'compass', 'hourglass'], blueprint: ['rocket', 'plane', 'car'],
+  sketch: ['bird', 'cat', 'notebook'], glass: ['droplet', 'gem', 'snowflake'], kawaii: ['cloud', 'star', 'cat'],
+  sticker: ['butterfly', 'pizza', 'cloud-lightning'], pixel: ['trophy', 'heart', 'star'], retro: ['disc', 'camera', 'bus'],
+  luxe: ['crown', 'watch', 'key'], bauhaus: ['fish', 'tent', 'flower'], skeuo: ['alarm-clock', 'book-open', 'backpack'],
+  anime: ['wand', 'flower', 'mountain'], gothic: ['bell', 'door-open', 'shield'], pastel: ['donut', 'rainbow', 'cake'],
+  coquette: ['shopping-bag', 'mail', 'lock'], plush: ['cake', 'gift', 'heart'],
+}
 function homePacks(ctx) {
   const files = [['home-icons.js', 'WITH_HOME'], ['home-icons-more.js', 'WITH_HOME_MORE']].map(([f, g]) => {
     const file = path.join(ROOT, 'site', 'js', f)
@@ -91,36 +121,81 @@ function homePacks(ctx) {
   if (!A) return 'home packs: none found'
   const byName = new Map(ctx.icons.map(i => [i.name, i]))
   const innerOf = (n, s) => { const i = byName.get(n); return i && i.render[s] ? i.render[s].inner : null }
-  const added = []
+  const mv = (B && B.data.moves) || {}
+  const later = B ? [...(B.data.grid || []), ...Object.keys(B.data.motion || {}), ...(mv.loops || []), ...(mv.hover || []),
+    ...(mv.swaps || []).flat().map(n => String(n).split('@')[0])] : []
+  const W = WASHLINE
+  // `stage` is now the small shared set every style carries in the first pack (the washing line's costumes, the picker's
+  // fallback grid); the stage itself draws `show`. Whatever the old shared set had beyond it is dropped below.
+  const oldShared = A.data.stage || []
+  const SHARED = W.try
+  A.data.stage = SHARED
+  const showOf = s => (SHOWCASE[s] || []).filter(n => innerOf(n, s) != null)
+  const cardOf = s => W.cards[s] || SHARED[0] // a style added later shows a shared icon until it gets its own
+  const sky = s => Object.values(W.sky).filter(([st]) => st === s).map(([, n]) => n)
+  const first = s => [...new Set([...SHARED, ...Object.keys(A.data.hero).filter(h => A.data.hero[h].includes(s)), ...(PAGE[s] || []),
+    cardOf(s), ...sky(s), ...showOf(s).slice(0, 1)])]
+  const alts = s => showOf(s).slice(1)
+  const added = [], trimmed = []
   for (const st of ctx.styles) {
     const s = st.name
-    if (A.data.svg[s] && !LANES[s]) continue // the original twelve stay as they are; LANES styles follow their renderer
     const ok = n => innerOf(n, s) != null
-    const lane = (LANES[s] || A.data.stage.concat(A.data.grid)).filter(ok).filter((n, i, a) => a.indexOf(n) === i).slice(0, 12)
-    if (lane.length < 6) continue // a renderer still being built: leave it out until it draws enough
-    const hero = HERO[s] && A.data.hero[HERO[s]] ? [HERO[s]] : []
-    const main = [...new Set([...lane, ...A.data.stage, ...hero])].filter(ok).sort()
-    A.data.svg[s] = Object.fromEntries(main.map(n => [n, innerOf(n, s)]))
-    A.data.roots[s] = st.root || { fill: 'currentColor' }
-    A.data.lanes[s] = lane
-    if (hero.length && !A.data.hero[hero[0]].includes(s)) A.data.hero[hero[0]].push(s)
-    if (!A.data.styles.includes(s)) A.data.styles.push(s)
-    if (B) {
-      const mv = B.data.moves || {}
-      const want = [...(B.data.grid || []), ...Object.keys(B.data.motion || {}), ...(mv.loops || []), ...(mv.hover || []),
-        ...(mv.swaps || []).flat().map(n => String(n).split('@')[0])]
-      const rest = [...new Set(want)].filter(n => ok(n) && !main.includes(n)).sort()
-      B.data.svg[s] = Object.fromEntries(rest.map(n => [n, innerOf(n, s)]))
+    if (!A.data.svg[s] || FOLLOW.includes(s)) {
+      if (SHARED.filter(ok).length < 4) continue // a renderer still being built: leave it out until it draws enough
+      const hero = HERO[s] && A.data.hero[HERO[s]] ? [HERO[s]] : []
+      if (hero.length && !A.data.hero[hero[0]].includes(s)) A.data.hero[hero[0]].push(s)
+      const main = first(s).filter(ok).sort()
+      A.data.svg[s] = Object.fromEntries(main.map(n => [n, innerOf(n, s)]))
+      A.data.roots[s] = st.root || { fill: 'currentColor' }
+      if (!A.data.styles.includes(s)) A.data.styles.push(s)
+      if (B) {
+        const rest = [...new Set([...later, ...alts(s)])].filter(n => ok(n) && !main.includes(n)).sort()
+        B.data.svg[s] = Object.fromEntries(rest.map(n => [n, innerOf(n, s)]))
+      }
+      added.push(`${s} (${main.length}+${B ? Object.keys(B.data.svg[s]).length : 0})`)
+      continue
     }
-    added.push(`${s} (${main.length}+${B ? Object.keys(B.data.svg[s]).length : 0} icons)`)
+    // hand-tuned styles: drop what only the old style lanes drew, keeping whatever pack 2 relies on pack 1 for
+    const a = A.data.svg[s], b = (B && B.data.svg[s]) || {}
+    const keep = new Set([...first(s), ...later.filter(n => !(n in b))])
+    const before = Object.keys(a).length
+    for (const n of [...((A.data.lanes && A.data.lanes[s]) || []), ...oldShared]) if (!keep.has(n)) delete a[n]
+    for (const n of first(s)) if (!(n in a) && ok(n)) a[n] = innerOf(n, s)
+    if (B) { B.data.svg[s] = B.data.svg[s] || {}; for (const n of alts(s)) if (!(n in a) && !(n in B.data.svg[s])) B.data.svg[s][n] = innerOf(n, s) }
+    // pack 2: drop what nothing reads any more (the old costumes); keep everything the picker and "Icons that move" use
+    if (B && B.data.svg[s]) { const need = new Set([...later, ...alts(s)]); for (const n of Object.keys(B.data.svg[s])) if (!need.has(n)) { delete B.data.svg[s][n]; trimmed.push(`${s} -${n} (pack 2)`) } }
+    if (Object.keys(a).length !== before) trimmed.push(`${s} ${before}→${Object.keys(a).length}`)
+  }
+  delete A.data.lanes
+  A.data.show = Object.fromEntries(A.data.styles.filter(s => A.data.svg[s]).map(s => [s, showOf(s)]).filter(([, l]) => l.length))
+  A.data.washline = {
+    cards: Object.fromEntries(A.data.styles.map(s => [s, cardOf(s)]).filter(([s, n]) => A.data.svg[s] && A.data.svg[s][n] != null)),
+    sky: Object.fromEntries(Object.entries(W.sky).filter(([, [s, n]]) => A.data.svg[s] && A.data.svg[s][n] != null)),
+    try: W.try.filter(n => A.data.styles.every(s => A.data.svg[s] && A.data.svg[s][n] != null)),
+    tryStyle: W.tryStyle,
   }
   for (const p of files) if (p) {
-    const js = `${p.head}window.${p.g}=${JSON.stringify(p.data)};\n`
+    const head = p.head.replace('forge/tools/site-home.mjs', 'forge/tools/site-data.mjs').replace('style picker + "Icons that move"', 'style picker, "Icons that move", washing-line costumes')
+    const js = `${head}window.${p.g}=${JSON.stringify(p.data)};\n`
     if (fs.readFileSync(p.file, 'utf8') !== js) fs.writeFileSync(p.file, js)
   }
-  return `home packs: ${added.length ? 'added ' + added.join(', ') : 'up to date'}`
+  const kb = p => p ? `${p.file.split(/[\\/]/).pop()} ${(fs.statSync(p.file).size / 1024).toFixed(0)} KB` : ''
+  return `home packs: ${[added.length ? 'rebuilt ' + added.join(', ') : '', trimmed.length ? 'trimmed ' + trimmed.join(', ') : '', kb(A), kb(B)].filter(Boolean).join('; ')}`
+}
+
+// `node forge/tools/site-data.mjs --packs` rebuilds only the home packs, from the style files the last build wrote to
+// site/data (no rendering, site/data untouched): for when a home section changes what it carries.
+function builtCtx() {
+  const json = (file, marker) => { const t = fs.readFileSync(path.join(outDir, file), 'utf8'); return JSON.parse(t.slice(t.indexOf(marker) + marker.length).trim().replace(/;$/, '')) }
+  const meta = json('meta.js', 'window.WITH=')
+  const svg = Object.fromEntries(meta.styles.filter(s => fs.existsSync(path.join(outDir, `style-${s.name}.js`))).map(s => [s.name, json(`style-${s.name}.js`, ']=')]))
+  return {
+    styles: meta.styles.filter(s => svg[s.name]),
+    icons: meta.icons.map(({ name }) => ({ name, render: Object.fromEntries(Object.keys(svg).filter(s => svg[s][name] != null).map(s => [s, { inner: svg[s][name] }])) })),
+  }
 }
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
-  console.log(build(await renderAll()))
+  if (process.argv.includes('--packs')) console.log(homePacks(builtCtx()))
+  else console.log(build(await renderAll()))
 }

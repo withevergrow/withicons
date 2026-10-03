@@ -367,13 +367,13 @@ function lander(L, all, libs) {
 function hub(all, libs) {
   const path = 'free/index.html', p = '../'
   const title = 'Free icons for slides, docs, design tools and code · with icons'
-  const desc = `Free icon pages by task and style: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, icon classes, hand-drawn, cute, sticker, pixel, glass, retro, 3D, Bauhaus, skeuomorphic and animated icons. ${N} icons × ${NS} styles, MIT.`
+  const desc = `Free icon pages by task and style: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, icon classes, hand-drawn, cute, sticker, pixel, glass, retro, 3D, Bauhaus, skeuomorphic, anime, gothic, pastel, coquette, plush (for kids) and animated icons. ${N} icons × ${NS} styles, MIT.`
   const qs = [
     ['Are all of these icons free?', `Yes. Every one of the ${N} icons in all ${NS} styles is free under the MIT licence, for personal and commercial use, with no credit required.`],
     ['Do I need an account?', 'No. Click an icon to copy or download it. That’s it.'],
     ['Which file format should I use?', 'SVG when your app accepts it (PowerPoint, Word, Canva, Figma, websites). PNG for Google Slides, Google Docs, Notion and email.'],
   ]
-  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'svg-icons']], ['By style & motion', ['animated-icons', 'hand-drawn-icons', 'cute-icons', 'sticker-icons', 'pixel-icons', 'glassmorphism-icons', 'retro-icons', '3d-icons', 'bauhaus-icons', 'skeuomorphic-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
+  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'svg-icons']], ['By style & motion', ['animated-icons', 'hand-drawn-icons', 'cute-icons', 'sticker-icons', 'pixel-icons', 'glassmorphism-icons', 'retro-icons', '3d-icons', 'bauhaus-icons', 'skeuomorphic-icons', 'anime-icons', 'gothic-icons', 'pastel-icons', 'coquette-icons', 'plush-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
     .map(([g, slugs]) => [g, slugs.filter(s => all.some(l => l.slug === s))]).filter(([, s]) => s.length)
   const by = Object.fromEntries(all.map(l => [l.slug, l]))
   const body = `

@@ -19,9 +19,9 @@ export const SVG_NS = 'http://www.w3.org/2000/svg'
 
 // ---------------------------------------------------------------- styles: order, palettes, counts
 // The ONE style order used everywhere (build, packages, search index, site data). Unknown styles sort last, by name.
-export const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+export const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
 // Styles that paint a default multi-colour palette: every colour is var(--with-<style>-<role>, #hex), the ink stays currentColor.
-export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo']
+export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
 export const styleRank = name => { const i = STYLE_ORDER.indexOf(name); return i < 0 ? STYLE_ORDER.length : i }
 export const sortStyles = (list, key = s => s.name) =>
   list.slice().sort((a, b) => styleRank(key(a)) - styleRank(key(b)) || (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0))
@@ -583,7 +583,7 @@ function palettesDoc(ctx) {
     '| role | paints |',
     '|---|---|',
     `| ${t}ink${t} | outlines and faces (${t}color${t} / ${t}currentColor${t}) |`,
-    `| ${t}c1${t} | the main body colour (duo tint, glass back, kawaii body, sticker 1st colour, pixel fill, retro 1st stripe, luxe / bauhaus / skeuo main surface) |`,
+    `| ${t}c1${t} | the main body colour (duo tint, glass back, kawaii body, sticker 1st colour, pixel fill, retro 1st stripe, luxe / bauhaus / skeuo / anime / gothic / pastel / coquette / plush main surface) |`,
     `| ${t}c2${t} ${t}c3${t} ${t}c4${t} | 2nd-4th colours in order of appearance (sticker, kawaii, retro stripes) or by name (${t}--with-luxe-c2${t}, ${t}--with-bauhaus-c3${t}) |`,
     `| ${t}tint${t} · ${t}accent${t} · ${t}shadow${t} · ${t}shine${t} · ${t}edge${t} | glass pane · blush, sparkles, gold trim · drop shadows and depth · highlights · borders and bevels |`,
     '',

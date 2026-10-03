@@ -136,6 +136,18 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 @keyframes lm-snap { from { opacity: 0; transform: rotate(-90deg) scale(.7); } }
 .logo-morph .lm-press { animation: lm-press .75s var(--e-out) both; }
 @keyframes lm-press { 0% { opacity: 0; transform: scale(1.18); } 45% { opacity: 1; transform: scale(.9); } 100% { transform: none; } }
+/* the storybook styles: anime zooms in on an impact frame, gothic rises out of the dark like a lit window, pastel melts in,
+   coquette swings on its ribbon, plush lands with a squish */
+.logo-morph .lm-impact { animation: lm-impact .7s var(--e-out) both; }
+@keyframes lm-impact { 0% { opacity: 0; transform: scale(1.45) rotate(6deg); } 40% { opacity: 1; transform: scale(.94) rotate(-2deg); } 100% { transform: none; } }
+.logo-morph .lm-vesper { animation: lm-vesper 1.1s var(--e-out) both; }
+@keyframes lm-vesper { from { opacity: 0; clip-path: inset(100% 0 0 0 round 50% 50% 0 0); filter: brightness(.3); } to { clip-path: inset(0 0 0 0 round 0); filter: none; } }
+.logo-morph .lm-melt { animation: lm-melt 1s var(--e-out) both; }
+@keyframes lm-melt { from { opacity: 0; filter: saturate(0) blur(2px); transform: scale(.96); } }
+.logo-morph .lm-swing { transform-origin: 50% 0; animation: lm-swing .9s var(--e-out) both; }
+@keyframes lm-swing { 0% { opacity: 0; transform: rotate(14deg); } 35% { opacity: 1; transform: rotate(-8deg); } 65% { transform: rotate(3deg); } 100% { transform: none; } }
+.logo-morph .lm-squish { transform-origin: 50% 100%; animation: lm-squish .8s var(--e-spring) both; }
+@keyframes lm-squish { 0% { opacity: 0; transform: translateY(-6px) scale(.8); } 45% { opacity: 1; transform: translateY(0) scale(1.14, .82); } 70% { transform: scale(.95, 1.06); } 100% { transform: none; } }
 .logo-morph .lm-shine { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
 .logo-morph .lm-shine::after { content: ''; position: absolute; top: -20%; bottom: -20%; width: 40%; left: -60%; transform: skewX(-20deg);
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent); }
@@ -657,4 +669,5 @@ html.search-open { overflow: hidden; }
 .site-footer .logo { --c-line-text: #8EA6FF; --c-solid-text: #FF9479; --c-duo-text: #B3A1FF; --c-gloss-text: #FF8DC4;
   --c-engrave-text: #E7C17A; --c-blueprint-text: #63D3EA; --c-sketch-text: #6FD99C;
   --c-glass-text: #A9CBFF; --c-kawaii-text: #FFB3C4; --c-sticker-text: #D4B3FF; --c-pixel-text: #A8EE6E; --c-retro-text: #FFB878;
-  --c-luxe-text: #C3CCFF; --c-bauhaus-text: #FF8A7A; --c-skeuo-text: #C3D2E4; }
+  --c-luxe-text: #C3CCFF; --c-bauhaus-text: #FF8A7A; --c-skeuo-text: #C3D2E4;
+  --c-anime-text: #9BD2FF; --c-gothic-text: #F09AB5; --c-pastel-text: #94E8D3; --c-coquette-text: #FFA3BA; --c-plush-text: #FFD789; }

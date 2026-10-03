@@ -1,6 +1,6 @@
 # @withicons/web
 
-`<with-icon>`: a dependency-free custom element for 500 icons x 15 styles. Works in any framework or none.
+`<with-icon>`: a dependency-free custom element for 500 icons x 20 styles. Works in any framework or none.
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/index.js"></script>
@@ -23,7 +23,7 @@ import '@withicons/web'   // registers <with-icon>; each style's data loads on f
 | attribute | default | notes |
 |---|---|---|
 | `name` | — | canonical name or unambiguous alias (`bin` -> `trash`) |
-| `variant` | `line` | `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo` (`style` is reserved in HTML) |
+| `variant` | `line` | `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush` (`style` is reserved in HTML) |
 | `size` | `24` | px number or any CSS length |
 | `color` | `currentColor` | inherits the CSS text color by default |
 | `stroke-width` | style default | only styles with live strokes (line, duo, blueprint, sketch, kawaii) |
@@ -46,10 +46,10 @@ Unknown names render nothing and log one console warning with the nearest matche
 
 | import | what | size |
 |---|---|---|
-| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`) | 25 KB (5 KB gzip) + one chunk per style used: `line` 116 KB (23 KB gzip), the largest 344 KB (32 KB gzip); a heavy style loads one small shard per icon used (~39 KB, at most 76 KB / 23 KB gzip) |
+| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`) | 36 KB (6 KB gzip) + one chunk per style used: `line` 116 KB (23 KB gzip), the largest 344 KB (32 KB gzip); a heavy style loads one small shard per icon used (~39 KB, at most 87 KB / 27 KB gzip) |
 | `@withicons/web/full` (`dist/full.js`) | one file, every style inline, adds sync `svg(name, opts)` | ~690 KB (84 KB gzip) |
 
-A style's chunk loads once, the first time an icon of that style renders. The heavy styles (`solid`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `retro`, `luxe`, `bauhaus`, `skeuo`)
+A style's chunk loads once, the first time an icon of that style renders. The heavy styles (`solid`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`)
 are split into shards of a few icons each (`dist/data/<style>/<n>.js`): an icon loads only its own shard, so one `luxe`
 icon costs a few KB instead of the whole style. `loadVariant()` and `@withicons/web/data/<style>` still return the whole style. Aliases and typos also load `dist/data/meta.js`
 (113 KB, 28 KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
@@ -65,8 +65,8 @@ const markup = await loadSvg('home', { variant: 'solid', size: 20 })
 
 ## Palette styles
 
-`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo` paint a default multi-colour palette. The main ink stays `currentColor`
-(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead, `luxe` draws its bold outline with `--with-luxe-ink` instead, `skeuo` draws its bold outline with `--with-skeuo-ink` instead) and every other colour is a CSS custom property with a built-in default,
+`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush` paint a default multi-colour palette. The main ink stays `currentColor`
+(so `color` still recolours the outline; `sticker` draws its bold outline with `--with-sticker-ink` instead, `luxe` draws its bold outline with `--with-luxe-ink` instead, `skeuo` draws its bold outline with `--with-skeuo-ink` instead, `anime` draws its bold outline with `--with-anime-ink` instead, `gothic` draws its bold outline with `--with-gothic-ink` instead, `pastel` draws its bold outline with `--with-pastel-ink` instead, `coquette` draws its bold outline with `--with-coquette-ink` instead, `plush` draws its bold outline with `--with-plush-ink` instead) and every other colour is a CSS custom property with a built-in default,
 so you can re-theme a page, a section or one icon without touching the SVG:
 
 ```css
@@ -83,6 +83,11 @@ so you can re-theme a page, a section or one icon without touching the SVG:
 | `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
 | `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #E9772E, `--with-bauhaus-ink` currentColor, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
 | `skeuo` | `--with-skeuo-accent` #F1CF98, `--with-skeuo-c1` #2F72E4, `--with-skeuo-c2` #BFC7D0, `--with-skeuo-c3` #E0483A, `--with-skeuo-c4` #1E2B3B, `--with-skeuo-edge` currentColor, `--with-skeuo-ink` #4F4638, `--with-skeuo-shadow` #15110D, `--with-skeuo-shine` #FFFFFF, `--with-skeuo-tint` #FFFFFF |
+| `anime` | `--with-anime-accent` #FF5D78, `--with-anime-c1` #4BA8F5, `--with-anime-c2` #FF8DB6, `--with-anime-c3` #FFC740, `--with-anime-c4` #5FCF8C, `--with-anime-edge` #BFE6FF, `--with-anime-ink` #2B2148, `--with-anime-shadow` #4B2C8F, `--with-anime-shine` #FFFFFF, `--with-anime-tint` #FFF5EC |
+| `gothic` | `--with-gothic-accent` #C79A38, `--with-gothic-c1` #B3163B, `--with-gothic-c2` #2552B4, `--with-gothic-c3` #E6A421, `--with-gothic-c4` #1C8A5F, `--with-gothic-edge` #837A6F, `--with-gothic-ink` #221A26, `--with-gothic-shadow` #140F18, `--with-gothic-shine` #FFF6DE, `--with-gothic-tint` #D3CDC0 |
+| `pastel` | `--with-pastel-c1` #CDBBF7, `--with-pastel-c2` #CDBBF7, `--with-pastel-c3` #FFE29C, `--with-pastel-c4` #B7D6FA, `--with-pastel-edge` #B6A1EF, `--with-pastel-ink` #6A55B8, `--with-pastel-shadow` #9E87E6, `--with-pastel-shine` #FFFFFF, `--with-pastel-tint` #ECE5FC |
+| `coquette` | `--with-coquette-accent` #D9A45B, `--with-coquette-c1` #F8BCCB, `--with-coquette-c2` #EC8DA6, `--with-coquette-c3` #D7385F, `--with-coquette-c4` #FCEADD, `--with-coquette-edge` #FFFBF6, `--with-coquette-ink` #7E2443, `--with-coquette-shadow` #A8345C, `--with-coquette-shine` #FFFFFF, `--with-coquette-tint` #FFE4EB |
+| `plush` | `--with-plush-accent` #FF8DB4, `--with-plush-c1` #F4695E, `--with-plush-c2` #FFC53D, `--with-plush-c3` #4C9FE6, `--with-plush-c4` #4FBF8A, `--with-plush-edge` #FFF9F0, `--with-plush-ink` #4A2C3D, `--with-plush-shadow` #3A1E46, `--with-plush-shine` #FFFFFF, `--with-plush-tint` #FFF0D9 |
 
 Inline SVG (components, `<with-icon>`, sprites, IconNode data) keeps the variables. Standalone `.svg` files have them
 flattened to the defaults, because `<img>`, design tools and rasterizers cannot see CSS.
@@ -129,7 +134,7 @@ Plain `<i>`/`<span>` elements with classes, no build step. Two interchangeable w
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`) or every style at once:
+One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`) or every style at once:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">
@@ -143,7 +148,7 @@ bare `with with-<name>` uses that style). Each icon is an SVG data-URI used as a
 element's `::after`), so it takes the text colour and font size (`1em` square, `vertical-align: -.125em`). In mono styles the duo tint
 and blueprint construction lines render as translucent `currentColor`.
 
-**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`) keep their colours in CSS-only mode too: the palette is the element's
+**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`) keep their colours in CSS-only mode too: the palette is the element's
 `background-image` (default colours baked in) and the ink is the `currentColor` mask on top, with the original stacking order
 preserved, so `color` still recolours the outline. The `--with-<style>-<role>` variables cannot reach into a data URI, so to
 re-theme a palette use the JS runtime below (or a component), where every variable works.
@@ -167,7 +172,12 @@ Use the JS runtime for live CSS variables and stroke width.
 | `with-luxe.css` | 2907 KB | 828 KB |
 | `with-bauhaus.css` | 632 KB | 112 KB |
 | `with-skeuo.css` | 4544 KB | 581 KB |
-| `with-all.css` | 19779 KB | 3487 KB |
+| `with-anime.css` | 1547 KB | 356 KB |
+| `with-gothic.css` | 3652 KB | 982 KB |
+| `with-pastel.css` | 1615 KB | 329 KB |
+| `with-coquette.css` | 2681 KB | 682 KB |
+| `with-plush.css` | 2455 KB | 571 KB |
+| `with-all.css` | 31662 KB | 6388 KB |
 | `with-icons.js` | 14 KB | 5 KB |
 
 ### 2. JS runtime (inline SVG)

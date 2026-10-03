@@ -9,6 +9,8 @@
   background: var(--card); border: 1px solid var(--rule); font: 600 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); box-shadow: var(--shadow-s); }
 .lv-dots { display: inline-flex; gap: 3px; }
 .lv-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+/* phones: twenty dots fold into two rows of ten, so the pill's text stays on one line */
+@media (max-width: 520px) { .lv-dots { display: inline-grid; grid-template-columns: repeat(10, 5px); gap: 3px 2px; } .lv-dots i { width: 5px; height: 5px; } .lv-pill { gap: 10px; } }
 .lv-accent { color: var(--style-text); font-size: 1.12em; line-height: .8; }
 .lv-soon { display: inline-block; font: 500 var(--step--1)/1.4 var(--font-sans); color: var(--muted); }
 .slab-dark .lv-soon { color: var(--on-dark-2); }
@@ -85,7 +87,7 @@
 .lv-sb-toggle { display: none; }
 .lv-sb-panel { display: flex; align-items: stretch; padding: 6px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule);
   box-shadow: 0 1px 0 var(--rule), 0 20px 40px -36px rgba(17, 19, 24, .55); }
-.lv-sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 3fr 4fr 5fr 3fr; row-gap: 4px; }
+.lv-sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 3fr 4fr 5fr 3fr 5fr; row-gap: 4px; }
 .lv-sb-g { display: flex; flex-direction: column; min-width: 0; padding: 0 3px; }
 .lv-sb-g + .lv-sb-g { border-left: 1px solid var(--rule); }
 .lv-sb-gl { display: flex; align-items: center; gap: 6px; height: 20px; margin: 0; padding: 2px 8px 0; overflow: hidden; white-space: nowrap;
@@ -122,23 +124,27 @@ html:not(.js) .lv-sb-o[aria-checked="true"] { background: color-mix(in srgb, var
 .lv-bar.is-stuck .lv-sb-o { height: 50px; gap: 5px; }
 .lv-bar.is-stuck .lv-sb-ic { width: 23px; height: 23px; }
 
-/* one row, but tight: smaller names so every one stays whole */
-@container lvsb (max-width: 1059px) {
+/* 20 styles in five groups (Everyday 3 · Crafted 4 · Playful 5 · Studio 3 · Storybook 5), the same layout as the library:
+   one row when wide, smaller names when tight */
+@container lvsb (max-width: 1439px) {
   .lv-sb-o { font-size: 10.5px; letter-spacing: -.01em; }
   .lv-sb-g { padding: 0 2px; }
 }
-/* two balanced rows: Everyday (3) + Crafted (4) over Playful (5) + Studio (3) */
-@container lvsb (max-width: 939px) {
-  .lv-sb-list { grid-template-columns: repeat(56, minmax(0, 1fr)); row-gap: 6px; }
-  .lv-sb-g[data-group="everyday"] { grid-column: span 24; }
-  .lv-sb-g[data-group="crafted"] { grid-column: span 32; }
-  .lv-sb-g[data-group="playful"] { grid-column: span 35; border-left: 0; }
-  .lv-sb-g[data-group="studio"] { grid-column: span 21; }
-  .lv-sb-g:nth-of-type(n+5) { grid-column: 1 / -1; border-left: 0; }
-  .lv-sb-o { height: 54px; }
+/* two full-width rows: Everyday + Crafted + Playful (12) over Studio + Storybook (8); 120 columns, so every option in a
+   row is the same width */
+@container lvsb (max-width: 1279px) {
+  .lv-sb-list { grid-template-columns: repeat(120, minmax(0, 1fr)); row-gap: 6px; }
+  .lv-sb-g[data-group="everyday"] { grid-column: span 30; }
+  .lv-sb-g[data-group="crafted"] { grid-column: span 40; }
+  .lv-sb-g[data-group="playful"] { grid-column: span 50; }
+  .lv-sb-g[data-group="studio"] { grid-column: span 45; border-left: 0; }
+  .lv-sb-g[data-group="storybook"] { grid-column: span 75; }
+  .lv-sb-g:nth-of-type(n+6) { grid-column: 1 / -1; border-left: 0; }
+  .lv-sb-o { height: 54px; font-size: 11px; }
 }
-@container lvsb (max-width: 699px) {
-  .lv-sb-o { font-size: 11px; }
+@container lvsb (max-width: 759px) {
+  .lv-sb-o { font-size: 10.5px; letter-spacing: -.015em; padding-left: 1px; padding-right: 1px; }
+  .lv-sb-g { padding: 0 1px; }
   .lv-sb-gl { padding-left: 6px; }
 }
 
@@ -895,7 +901,7 @@ html.lv-sheet-open { overflow: hidden; }
   .lv-sb-cur { display: grid; gap: 4px; min-width: 0; }
   .lv-sb-cur small { font: 700 9px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   .lv-sb-cur b { font: 750 15px/1 var(--font-sans); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .lv-sb-dots { margin-left: auto; flex: none; display: grid; grid-template-columns: repeat(8, 5px); gap: 3px; }
+  .lv-sb-dots { margin-left: auto; flex: none; display: grid; grid-template-columns: repeat(10, 5px); gap: 3px; }
   .lv-sb-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--sc); opacity: .55; transition: transform .3s var(--e-spring), opacity .3s; }
   .lv-sb-dots i.is-on { opacity: 1; transform: scale(1.5); box-shadow: 0 0 0 1px var(--card); }
   .lv-sb-chev { flex: none; width: 16px; height: 16px; color: var(--muted); transition: transform .3s var(--e-out); }

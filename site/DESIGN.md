@@ -216,7 +216,7 @@ guides/ → How to use; license/faq → About), sliding nav indicator, condense 
           <li><a href="ai.html">For AI agents</a></li><li><a href="ai.html#mcp">MCP server</a></li>
           <li><a href="ai.html#skill">Agent skill</a></li><li><a href="llms.txt">llms.txt</a></li></ul></div>
         <div class="foot-col s-sketch"><h2>About</h2><ul>
-          <li><a href="about.html">About</a></li><li><a href="license.html">License</a></li>
+          <li><a href="about.html">About</a></li><li><a href="blog/index.html">Journal</a></li><li><a href="license.html">License</a></li>
           <li><a href="faq.html">FAQ</a></li><li><a href="https://withevergrow.com">Evergrow</a></li></ul></div>
       </nav>
     </div>

@@ -23,11 +23,16 @@ const STYLE_PLAIN = {
   luxe: ['Luxe', 'Layered 3D with gold trim and soft light. Rich and premium.'],
   bauhaus: ['Bauhaus', 'Circles, squares and triangles in red, yellow and blue. Bold design.'],
   skeuo: ['Skeuo', 'Real materials, bevels and shadows, like an object you could touch.'],
+  anime: ['Anime', 'Anime cel shading: bold ink, bright colour and starry highlights.'],
+  gothic: ['Gothic', 'Cathedral stone, pointed arches and glowing stained glass.'],
+  pastel: ['Pastel', 'Soft candy pastels with gentle shading. Calm and dreamy.'],
+  coquette: ['Coquette', 'Blush pink, satin bows, pearls and lace. Romantic.'],
+  plush: ['Plush', 'Soft felt toys with stitched seams. Made for kids.'],
 }
 const plain = s => STYLE_PLAIN[s] || [styleTitle(s), (STYLE_INFO[s] && STYLE_INFO[s].description) || '']
-const GROUP_LABEL = { universal: 'Universal', creative: 'Creative', playful: 'Playful', studio: 'Studio' }
+const GROUP_LABEL = { universal: 'Universal', creative: 'Creative', playful: 'Playful', studio: 'Studio', storybook: 'Storybook' }
 const groupOf = s => (STYLE_INFO[s] && STYLE_INFO[s].group) || 'creative'
-const UNI = stylesIn('universal'), CRE = stylesIn('creative'), PLAY = stylesIn('playful'), STU = stylesIn('studio')
+const UNI = stylesIn('universal'), CRE = stylesIn('creative'), PLAY = stylesIn('playful'), STU = stylesIn('studio'), STORY = stylesIn('storybook')
 const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
   <div class="pg-tablist" role="tablist" aria-label="${esc(label)}">${items.map(([k, l], i) => `<button type="button" role="tab" id="${id}-t-${k}" aria-controls="${id}-p-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join('')}</div>
   ${items.map(([k, , html], i) => `<div class="pg-tabpanel" role="tabpanel" id="${id}-p-${k}" aria-labelledby="${id}-t-${k}" tabindex="0"${i === 0 ? '' : ' hidden'}>${html}</div>`).join('\n  ')}
@@ -190,8 +195,8 @@ export function Toolbar() {
 
     <section id="styles" class="dv-sec">
       <h2>Styles</h2>
-      <p>${Word(N_STYLES)} styles. <b>Universal</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>Creative</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}${STU.length ? ` <b>Studio</b> styles (${listTitles(STU)}) are art-directed, premium looks for heroes, app tiles and brand moments; their colours are role-named variables (<code>--with-luxe-c1</code>, <code>--with-bauhaus-accent</code>…), so one palette recolours every one of them.` : ''}</p>
-      ${[['universal', UNI], ['creative', CRE], ['playful', PLAY], ['studio', STU]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${g}</span></div>`).join('')}</div>`).join('\n      ')}
+      <p>${Word(N_STYLES)} styles. <b>Universal</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>Creative</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}${STU.length ? ` <b>Studio</b> styles (${listTitles(STU)}) are art-directed, premium looks for heroes, app tiles and brand moments; their colours are role-named variables (<code>--with-luxe-c1</code>, <code>--with-bauhaus-accent</code>…), so one palette recolours every one of them.` : ''}${STORY.length ? ` <b>Storybook</b> styles (${listTitles(STORY)}) are small illustrations: anime cel shading, Gothic cathedral detail, soft pastels, coquette bows and plush felt toys, with role-named colour variables too (<code>--with-anime-c1</code>, <code>--with-plush-accent</code>…).` : ''}</p>
+      ${[['universal', UNI], ['creative', CRE], ['playful', PLAY], ['studio', STU], ['storybook', STORY]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${g}</span></div>`).join('')}</div>`).join('\n      ')}
     </section>
 
     ${motionSection()}
@@ -744,7 +749,7 @@ function license() {
     ['yes', 'Can I put them in something I sell?', 'Yes: templates, themes, apps, slide decks and print designs are fine.'],
     ['careful', 'Can I resell the icons themselves?', 'The licence allows it, as long as the licence text goes with the files. But anyone can get them free here, so it’s rarely worth it.'],
     ['yes', 'Can I use them in apps built with AI?', 'Yes. The same rules apply however the work gets made.'],
-    ['yes', 'Are the animations and playful styles free too?', `Yes. All ${word(N_STYLES)} styles${PLAY.length || STU.length ? `, including ${listTitles([...PLAY, ...STU])},` : ''} and every animation (animated SVGs, GIFs and the motion package) come under the same MIT licence.`],
+    ['yes', 'Are the animations and playful styles free too?', `Yes. All ${word(N_STYLES)} styles${PLAY.length || STU.length || STORY.length ? `, including ${listTitles([...PLAY, ...STU, ...STORY])},` : ''} and every animation (animated SVGs, GIFs and the motion package) come under the same MIT licence.`],
   ]
   const badge = { yes: ['Yes', 'check-circle'], no: ['No', 'x-circle'], careful: ['Yes, but…', 'alert-circle'] }
   const body = `
@@ -811,9 +816,9 @@ export const FAQ = [
     ['Can I make a favicon or an app icon?', 'Yes. Download the favicon pack (every size a website needs, plus the lines to paste), an ICO file, an iOS imageset for Xcode or an Android VectorDrawable.'],
   ]]] : []),
   ['Styles', [
-    ['What’s the difference between universal, creative, playful and studio styles?', `Universal styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. Creative styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}${STU.length ? ` Studio styles (${listTitles(STU)}) are art-directed and premium: layered 3D, Bauhaus geometry and real materials, for hero sections, app tiles and brand moments at 48 px and up.` : ''}`],
-    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the creative${PLAY.length ? ', playful' : ''}${STU.length ? ' and studio' : ''} styles for big, eye-catching moments.`],
-    ...(PLAY.length ? [['Can I change the colours of the playful and studio styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost, gold trim, Bauhaus primaries and so on) have their own defaults, and on a website each one is a CSS variable you can change. Pick a palette in the icon editor to recolour them all at once.']] : []),
+    ['What’s the difference between universal, creative, playful, studio and storybook styles?', `Universal styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. Creative styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}${STU.length ? ` Studio styles (${listTitles(STU)}) are art-directed and premium: layered 3D, Bauhaus geometry and real materials, for hero sections, app tiles and brand moments at 48 px and up.` : ''}${STORY.length ? ` Storybook styles (${listTitles(STORY)}) are tiny illustrations: anime, Gothic, pastel, coquette and plush looks for games, kids’ apps, beauty and lifestyle brands, at 48 px and up.` : ''}`],
+    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the creative${PLAY.length ? ', playful' : ''}${STU.length ? ', studio' : ''}${STORY.length ? ' and storybook' : ''} styles for big, eye-catching moments.`],
+    ...(PLAY.length ? [['Can I change the colours of the playful, studio and storybook styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost, gold trim, Bauhaus primaries, satin bows, stained glass and so on) have their own defaults, and on a website each one is a CSS variable you can change. Pick a palette in the icon editor to recolour them all at once.']] : []),
     ['Can I mix styles?', 'Yes, they share one grid, so they line up perfectly. A common pattern is Line for normal buttons and Solid for the selected one. Avoid mixing many styles in the same row.'],
   ]],
   ['Animations', [

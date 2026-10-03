@@ -20,8 +20,13 @@ import s11 from '../dist/data/svg-retro.json?text'
 import s12 from '../dist/data/svg-luxe.json?text'
 import s13 from '../dist/data/svg-bauhaus.json?text'
 import s14 from '../dist/data/svg-skeuo.json?text'
+import s15 from '../dist/data/svg-anime.json?text'
+import s16 from '../dist/data/svg-gothic.json?text'
+import s17 from '../dist/data/svg-pastel.json?text'
+import s18 from '../dist/data/svg-coquette.json?text'
+import s19 from '../dist/data/svg-plush.json?text'
 
-const raw = { "line": s0, "solid": s1, "duo": s2, "gloss": s3, "engrave": s4, "blueprint": s5, "sketch": s6, "glass": s7, "kawaii": s8, "sticker": s9, "pixel": s10, "retro": s11, "luxe": s12, "bauhaus": s13, "skeuo": s14 }
+const raw = { "line": s0, "solid": s1, "duo": s2, "gloss": s3, "engrave": s4, "blueprint": s5, "sketch": s6, "glass": s7, "kawaii": s8, "sticker": s9, "pixel": s10, "retro": s11, "luxe": s12, "bauhaus": s13, "skeuo": s14, "anime": s15, "gothic": s16, "pastel": s17, "coquette": s18, "plush": s19 }
 const svgs = {}
 let palettes = null
 export function loadData() {

@@ -25,7 +25,7 @@ Self-contained: the search engine, the MCP SDK and every icon are bundled — no
 
 ## Colours and palettes
 
-`glass`, `kawaii`, `sticker`, `pixel` and `retro` paint several colours, and `duo` and `blueprint` have an accent colour. Every
+`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette` and `plush` paint several colours, and `duo` and `blueprint` have an accent colour. Every
 colour is a CSS variable with a default (`var(--with-retro-1, #F4B53F)`); the outline follows `currentColor`. A palette gives a
 colour to each of ten roles, and the server maps the roles onto the variables that icon actually uses in that style:
 

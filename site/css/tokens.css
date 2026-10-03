@@ -75,11 +75,18 @@
   --c-luxe: #2B3FB8;      --c-luxe-text: #2B3FB8;      --c-luxe-soft: #F5EBD3;    /* sapphire enamel on champagne */
   --c-bauhaus: #D62718;   --c-bauhaus-text: #B81E12;   --c-bauhaus-soft: #FCE3DF; /* Bauhaus red */
   --c-skeuo: #5A6E86;     --c-skeuo-text: #4A5C71;     --c-skeuo-soft: #E5EAF0;   /* brushed steel */
+  /* run 8: the five storybook styles (role-named palettes, --with-<style>-<role>) */
+  --c-anime: #2E9BF0;     --c-anime-text: #0B67B3;     --c-anime-soft: #DCEFFD;   /* cel sky blue */
+  --c-gothic: #7A1F3D;    --c-gothic-text: #7A1F3D;    --c-gothic-soft: #F3E1E6;  /* cathedral wine */
+  --c-pastel: #3DBFA0;    --c-pastel-text: #127A62;    --c-pastel-soft: #DDF5EE;  /* mint macaron */
+  --c-coquette: #E2456F;  --c-coquette-text: #B81F4B;  --c-coquette-soft: #FDE4EA; /* ribbon rose */
+  --c-plush: #F2AE24;     --c-plush-text: #8F5E00;     --c-plush-soft: #FDF0D5;   /* honey teddy */
   /* text/icon colour ON a filled style colour (AA): white on the deep ones, ink on the bright ones */
   --c-line-on: #FFFFFF; --c-solid-on: #111318; --c-duo-on: #FFFFFF; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-luxe-on: #FFFFFF; --c-bauhaus-on: #FFFFFF; --c-skeuo-on: #FFFFFF;
+  --c-anime-on: #111318; --c-gothic-on: #FFFFFF; --c-pastel-on: #111318; --c-coquette-on: #111318; --c-plush-on: #111318;
   --c-duo-fill: var(--c-duo); /* kept for compatibility: violet is now deep enough (4.8:1 with white) */
   --style-on: var(--c-line-on);
   /* short aliases (library.css relies on these names) */
@@ -87,12 +94,13 @@
   --on-engrave: var(--c-engrave-on); --on-blueprint: var(--c-blueprint-on); --on-sketch: var(--c-sketch-on);
   --on-glass: var(--c-glass-on); --on-kawaii: var(--c-kawaii-on); --on-sticker: var(--c-sticker-on); --on-pixel: var(--c-pixel-on); --on-retro: var(--c-retro-on);
   --on-luxe: var(--c-luxe-on); --on-bauhaus: var(--c-bauhaus-on); --on-skeuo: var(--c-skeuo-on);
+  --on-anime: var(--c-anime-on); --on-gothic: var(--c-gothic-on); --on-pastel: var(--c-pastel-on); --on-coquette: var(--c-coquette-on); --on-plush: var(--c-plush-on);
   /* every signature colour as one hue sweep (rings, dials, the CTA hover) */
-  --spectrum: var(--c-line), var(--c-glass), var(--c-blueprint), var(--c-sketch), var(--c-pixel), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-bauhaus), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-luxe), var(--c-skeuo), var(--c-line);
+  --spectrum: var(--c-line), var(--c-glass), var(--c-anime), var(--c-blueprint), var(--c-pastel), var(--c-sketch), var(--c-pixel), var(--c-plush), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-bauhaus), var(--c-gothic), var(--c-coquette), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-luxe), var(--c-skeuo), var(--c-line);
   /* focus: ink ring (17:1 on paper) inside a sun halo; dark theme flips the ring to sun */
   --focus-ring: #111318; --focus-halo: var(--sun);
   /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
-     or use the helper classes .s-line … .s-skeuo (they also set --style-text and --style-soft) */
+     or use the helper classes .s-line … .s-plush (they also set --style-text and --style-soft) */
   --style: var(--c-line); --style-text: var(--c-line-text); --style-soft: var(--c-line-soft);
 
   /* legacy semantic names (kept so older CSS keeps working) */
@@ -178,10 +186,16 @@
   --c-luxe: #9AA8FF;      --c-luxe-text: #C3CCFF;      --c-luxe-soft: #2A2312;
   --c-bauhaus: #FF5A47;   --c-bauhaus-text: #FF8A7A;   --c-bauhaus-soft: #3A1310;
   --c-skeuo: #9FB2C9;     --c-skeuo-text: #C3D2E4;     --c-skeuo-soft: #1C232D;
+  --c-anime: #5DB4FF;     --c-anime-text: #9BD2FF;     --c-anime-soft: #0E2638;
+  --c-gothic: #E0668C;    --c-gothic-text: #F09AB5;    --c-gothic-soft: #341020;
+  --c-pastel: #5FD6B9;    --c-pastel-text: #94E8D3;    --c-pastel-soft: #0E2E27;
+  --c-coquette: #FF6E93;  --c-coquette-text: #FFA3BA;  --c-coquette-soft: #3D1220;
+  --c-plush: #FFC24D;     --c-plush-text: #FFD789;     --c-plush-soft: #33260B;
   --c-line-on: #111318; --c-solid-on: #111318; --c-duo-on: #111318; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-luxe-on: #111318; --c-bauhaus-on: #111318; --c-skeuo-on: #111318;
+  --c-anime-on: #111318; --c-gothic-on: #111318; --c-pastel-on: #111318; --c-coquette-on: #111318; --c-plush-on: #111318;
   --c-duo-fill: var(--c-duo);
   --focus-ring: var(--sun); --focus-halo: rgba(255, 210, 63, .28);
   /* duo previews on dark grounds: a light-ink tint at 20% reads as muddy grey, so tint with the duo violet */
@@ -218,6 +232,11 @@
 .s-luxe { --style: var(--c-luxe); --style-text: var(--c-luxe-text); --style-soft: var(--c-luxe-soft); --style-on: var(--c-luxe-on); --style-fill: initial; }
 .s-bauhaus { --style: var(--c-bauhaus); --style-text: var(--c-bauhaus-text); --style-soft: var(--c-bauhaus-soft); --style-on: var(--c-bauhaus-on); --style-fill: initial; }
 .s-skeuo { --style: var(--c-skeuo); --style-text: var(--c-skeuo-text); --style-soft: var(--c-skeuo-soft); --style-on: var(--c-skeuo-on); --style-fill: initial; }
+.s-anime { --style: var(--c-anime); --style-text: var(--c-anime-text); --style-soft: var(--c-anime-soft); --style-on: var(--c-anime-on); --style-fill: initial; }
+.s-gothic { --style: var(--c-gothic); --style-text: var(--c-gothic-text); --style-soft: var(--c-gothic-soft); --style-on: var(--c-gothic-on); --style-fill: initial; }
+.s-pastel { --style: var(--c-pastel); --style-text: var(--c-pastel-text); --style-soft: var(--c-pastel-soft); --style-on: var(--c-pastel-on); --style-fill: initial; }
+.s-coquette { --style: var(--c-coquette); --style-text: var(--c-coquette-text); --style-soft: var(--c-coquette-soft); --style-on: var(--c-coquette-on); --style-fill: initial; }
+.s-plush { --style: var(--c-plush); --style-text: var(--c-plush-text); --style-soft: var(--c-plush-soft); --style-on: var(--c-plush-on); --style-fill: initial; }
 
 /* ───────── base ───────── */
 *, *::before, *::after { box-sizing: border-box; }

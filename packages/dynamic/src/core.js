@@ -237,7 +237,7 @@ function inner(g, p, style) {
 // What one uncached render costs (ms, median over the 50 live icons on a laptop). Rich styles run whole-icon geometry
 // (fields, booleans, bevels), so 50-150 ms per draw is normal for them. Seeds only: the runtime keeps a moving average.
 // Scheduling never changes output: a render is byte-identical on the main thread and in a worker.
-const COST = { line: 4, duo: 3, blueprint: 9, sketch: 9, pixel: 9, engrave: 18, kawaii: 21, solid: 27, retro: 57, sticker: 65, skeuo: 85, bauhaus: 95, gloss: 100, luxe: 140, glass: 160 }
+const COST = { line: 4, duo: 3, blueprint: 9, sketch: 9, pixel: 9, engrave: 18, kawaii: 21, solid: 27, anime: 45, plush: 50, retro: 57, pastel: 60, sticker: 65, coquette: 80, skeuo: 85, bauhaus: 95, gloss: 100, luxe: 140, glass: 160, gothic: 160 }
 const FRAME_MS = 16
 const SEED = { ...COST }
 // a moving average, kept within half to twice the seed so one cold (JIT) or lucky draw cannot reclassify a style

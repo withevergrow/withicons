@@ -1,8 +1,8 @@
-# with icons: the 15 styles
+# with icons: the 20 styles
 
 All styles render the same 500 skeletons, so `home` looks like the same house in every style. The seven mono styles
-are single-colour `currentColor` unless you opt into their CSS variables; the five palette styles and the three studio
-styles ship a default palette whose colours are CSS variables, while their ink still follows `currentColor`.
+are single-colour `currentColor` unless you opt into their CSS variables; the five palette styles, the three studio
+styles and the five storybook styles ship a default palette whose colours are CSS variables, while their ink still follows `currentColor`.
 
 | style | kind | look | use it for | min size | `strokeWidth` |
 |---|---|---|---|---|---|
@@ -21,6 +21,11 @@ styles ship a default palette whose colours are CSS variables, while their ink s
 | `luxe` | studio | premium multi-layered 3D: sapphire enamel slab, extruded wall, polished gold, jewel, lit chamfers | heroes, pricing tiers, fintech, luxury brands, launch moments | 48px | no |
 | `bauhaus` | studio | pure geometry (circles, squares, bars) in red, yellow and blue, overprinted where inks meet | posters, portfolios, galleries, design studios, editorial | 32px | no |
 | `skeuo` | studio | skeuomorphic objects in real materials (paper, leather, metal, brass, glass), bevels, soft shadows | app icons, music/photo/note apps, tactile dashboards, nostalgic UIs | 48px | no |
+| `anime` | storybook | anime cel shading: tapered plum ink lines, flat cel colour (sky blue, sakura pink, warm gold), one hard shadow, specular shine, sparkles | games, streaming, fan sites, creators, Gen Z apps | 32px | no |
+| `gothic` | storybook | cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery | fantasy and RPG games, books, music, Halloween, dark-luxe brands | 48px | no |
+| `pastel` | storybook | soft pastel colour fields (lavender, peach, mint, baby blue, butter, blush) with gentle tonal depth | wellness, planners and journals, baby and lifestyle brands, aesthetic home screens | 32px | no |
+| `coquette` | storybook | ballet-pink satin objects tied with ribbon-red bows, pearls, lace and delicate gold | beauty, fashion, weddings, boutiques, feminine brands, social posts | 32px | no |
+| `plush` | storybook | stuffed toys sewn from felt: puffy panels, dark piping, running stitches, buttons, embroidery | kids' apps, learning, toy shops, nurseries, family brands | 48px | no |
 
 ## Choosing
 
@@ -28,7 +33,8 @@ styles ship a default palette whose colours are CSS variables, while their ink s
 2. Want warmth without leaving the UI family? Use **duo**, and tint it to the brand: `style="--with-duo: #fde68a"`.
 3. Making marketing pages, illustrations, slides or empty states? Pick **one** creative or palette style for the whole page,
    matched to the brand's tone: playful: gloss or sticker; premium: luxe, engrave or glass; technical: blueprint or pixel;
-   human: sketch; cute and cozy: kawaii; nostalgic: retro, pixel or skeuo; bold and designed: bauhaus.
+   human: sketch; cute and cozy: kawaii or pastel; nostalgic: retro, pixel or skeuo; bold and designed: bauhaus;
+   games and fandom: anime; fantasy and dark: gothic; feminine and romantic: coquette; for children: plush.
 4. Never put creative or palette styles inside dense controls or below their minimum size, because their detail turns to noise.
 5. Palette styles are designed to read on white and on near-black (`#0B0B12`). On a strong brand colour, re-theme their variables.
 
@@ -40,9 +46,9 @@ styles ship a default palette whose colours are CSS variables, while their ink s
 - `--with-accent`: a second colour for blueprint construction lines.
 - Palette styles: `--with-<style>-<role>` per colour (table below). Set them on any parent, a theme class or one icon:
   `.cozy { --with-kawaii-fill-1: #fbcfe8; --with-kawaii-blush: #f472b6 }`.
-- Studio styles (luxe, bauhaus, skeuo) name each variable after its palette role: `--with-<style>-<role>` with role one of
+- Studio and storybook styles (luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush) name each variable after its palette role: `--with-<style>-<role>` with role one of
   `ink c1 c2 c3 c4 tint accent shadow shine edge` (`.vip { --with-luxe-c1: #0f766e; --with-luxe-accent: #e3ae47 }`), so a
-  per-icon palette (`withicons palettes <icon>`, the editor on withicons.com) recolours all three the same way.
+  per-icon palette (`withicons palettes <icon>`, the editor on withicons.com) recolours all of them the same way.
 - Icon classes (CSS masks) show palette styles in their default colours; the variables need components, the web
   component, sprites or `with-icons.js`. Standalone `.svg` files have the defaults baked in (for `<img>`, Figma, slides).
 
@@ -59,6 +65,11 @@ styles ship a default palette whose colours are CSS variables, while their ink s
 | `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
 | `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #E9772E, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
 | `skeuo` | `--with-skeuo-accent` #F1CF98, `--with-skeuo-c1` #2F72E4, `--with-skeuo-c2` #BFC7D0, `--with-skeuo-c3` #E0483A, `--with-skeuo-c4` #1E2B3B, `--with-skeuo-ink` #4F4638, `--with-skeuo-shadow` #15110D, `--with-skeuo-shine` #FFFFFF, `--with-skeuo-tint` #FFFFFF |
+| `anime` | `--with-anime-accent` #FF5D78, `--with-anime-c1` #4BA8F5, `--with-anime-c2` #FF8DB6, `--with-anime-c3` #FFC740, `--with-anime-c4` #5FCF8C, `--with-anime-edge` #BFE6FF, `--with-anime-ink` #2B2148, `--with-anime-shadow` #4B2C8F, `--with-anime-shine` #FFFFFF, `--with-anime-tint` #FFF5EC |
+| `gothic` | `--with-gothic-accent` #C79A38, `--with-gothic-c1` #B3163B, `--with-gothic-c2` #2552B4, `--with-gothic-c3` #E6A421, `--with-gothic-c4` #1C8A5F, `--with-gothic-edge` #837A6F, `--with-gothic-ink` #221A26, `--with-gothic-shadow` #140F18, `--with-gothic-shine` #FFF6DE, `--with-gothic-tint` #D3CDC0 |
+| `pastel` | `--with-pastel-c1` #CDBBF7, `--with-pastel-c2` #CDBBF7, `--with-pastel-c3` #FFE29C, `--with-pastel-c4` #B7D6FA, `--with-pastel-edge` #B6A1EF, `--with-pastel-ink` #6A55B8, `--with-pastel-shadow` #9E87E6, `--with-pastel-shine` #FFFFFF, `--with-pastel-tint` #ECE5FC |
+| `coquette` | `--with-coquette-accent` #D9A45B, `--with-coquette-c1` #F8BCCB, `--with-coquette-c2` #EC8DA6, `--with-coquette-c3` #D7385F, `--with-coquette-c4` #FCEADD, `--with-coquette-edge` #FFFBF6, `--with-coquette-ink` #7E2443, `--with-coquette-shadow` #A8345C, `--with-coquette-shine` #FFFFFF, `--with-coquette-tint` #FFE4EB |
+| `plush` | `--with-plush-accent` #FF8DB4, `--with-plush-c1` #F4695E, `--with-plush-c2` #FFC53D, `--with-plush-c3` #4C9FE6, `--with-plush-c4` #4FBF8A, `--with-plush-edge` #FFF9F0, `--with-plush-ink` #4A2C3D, `--with-plush-shadow` #3A1E46, `--with-plush-shine` #FFFFFF, `--with-plush-tint` #FFF0D9 |
 <!-- palettes:end -->
 
 ## Sizing

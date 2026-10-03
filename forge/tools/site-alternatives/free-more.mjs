@@ -1,5 +1,5 @@
 // "Free … icons" landers for the playful styles (glass, kawaii, sticker, pixel, retro), the studio styles (luxe as
-// "3D icons", bauhaus, skeuo) and for animated icons.
+// "3D icons", bauhaus, skeuo), the storybook styles (anime, gothic, pastel, coquette, plush "for kids") and for animated icons.
 // A style lander only exists once its renderer does (hasStyle); curated icon lists keep only icons that exist,
 // so names from the 200-icon expansion appear automatically as they land.
 import { I, esc, cvar, code, STYLES } from './render.mjs'
@@ -242,6 +242,114 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
       ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
     ],
     related: ['3d-icons', 'bauhaus-icons', 'icons-for-figma'],
+  })
+  /* ───── the storybook styles: anime, gothic, pastel, coquette, plush ───── */
+  const STORY = stylesIn('storybook')
+  const sibB = s => `${styleTitle(s)} is one of ${word(STORY.length)} storybook styles (${STORY.filter(x => x !== s).map(x => `<a href="../styles/${x}.html">${styleTitle(x)}</a>`).join(', ')}): small illustrations whose colours are role-named CSS variables, so one palette recolours them all. <a href="../styles/${s}.html">See every ${styleTitle(s)} icon</a>.`
+  S('anime', {
+    slug: 'anime-icons', short: 'Free anime icons', icon: 'sparkles',
+    title: 'Free anime icons: cel-shaded SVG & PNG icons · with icons',
+    desc: `Free anime icons: ${N} cel-shaded icons with tapered ink lines, bright flat colour, one hard shadow and sparkling highlights, as SVG or transparent PNG. MIT licensed.`,
+    h1: ['Free anime icons,', 'cel-shaded'], q: 'free anime icons',
+    answer: () => `The <b>Anime</b> style draws all ${N} icons like props from an anime frame: crisp tapered ink lines, flat cel colour in sky blue, sakura pink and warm gold, one hard shadow tone and a bright specular shine. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'svg', 'dl'], style: 'anime', groups: [['Anime favourites', pick(['rocket', 'zap', 'star', 'heart', 'sparkles', 'gamepad', 'music-note', 'headphones', 'camera', 'cat', 'moon', 'sun', 'flame', 'trophy', 'crown', 'gift', 'cake', 'cherry', 'flower', 'umbrella', 'bike', 'train', 'smartphone', 'mail'], 24)], ['Games', pick(SETS.game, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="an-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="an-where">Games, streams and fan pages</h2>
+  <p>Game menus and HUDs, streaming overlays and panels, fan sites, creator pages, Discord servers, social posts and Gen Z apps. The cel shading reads best from 32 px up; at 16 to 24 px use Line or Solid for the same icon.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibB('anime')], ['The look', 'Ink line art in deep plum (never flat black), flat cel colour, one hard shadow, a rim light and the odd sparkle']])}</div>
+  ${demo(['rocket', 'star', 'heart', 'gamepad', 'cat', 'music-note', 'zap', 'moon'], 'anime')}
+</section>`,
+    faq: p => [
+      ['Are these traced from an anime or a studio?', 'No. Every icon is drawn from scratch for with icons in a cel-shaded look inspired by animation in general. Nothing is copied from any show, studio or other icon set.'],
+      ['Can I change the colours?', `Yes. Pick a palette in the icon editor and every layer follows; on a website each colour is a CSS variable like <code>--with-anime-c1</code> (the main colour) or <code>--with-anime-shadow</code> (the cel shadow). <a href="${p}developers.html">Developer docs</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['sticker-icons', 'cute-icons', 'pixel-icons'],
+  })
+  S('gothic', {
+    slug: 'gothic-icons', short: 'Free gothic icons', icon: 'key',
+    title: 'Free gothic icons: medieval cathedral SVG & PNG icons · with icons',
+    desc: `Free gothic icons: ${N} medieval, cathedral-style icons in carved limestone with stained glass in ruby, sapphire, gold and emerald, pointed arches and tracery, as SVG or PNG. MIT licensed.`,
+    h1: ['Free gothic icons,', 'carved and stained'], q: 'free gothic icons',
+    answer: () => `The <b>Gothic</b> style carves all ${N} icons like pieces of an old cathedral or castle: limestone with bevelled edges, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and gilded metal. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'svg', 'dl'], style: 'gothic', groups: [['Gothic favourites', pick(['key', 'lock', 'book-open', 'book', 'bell', 'crown', 'shield', 'hourglass', 'moon', 'star', 'compass', 'scroll-text', 'library', 'landmark', 'flame', 'heart', 'gem', 'map', 'feather', 'wine', 'clock', 'eye', 'door-open', 'music-note'], 24)], ['Games', pick(SETS.game, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="go-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="go-where">Fantasy games, books and dark-luxe brands</h2>
+  <p>Fantasy and RPG games, tabletop campaigns, book covers and publishers, bands and music, Halloween events, tattoo studios, museums and churches. Rich in detail, so give them room: 48 px and up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibB('gothic')], ['Materials', 'Carved limestone, stained glass in dark lead, wrought iron and gilding, lit like candlelight']])}</div>
+  ${demo(['key', 'book-open', 'bell', 'crown', 'shield', 'hourglass', 'lock', 'moon'], 'gothic')}
+</section>`,
+    faq: p => [
+      ['Is this a gothic font or blackletter?', 'No. Gothic here means the architecture: each icon is built like a cathedral piece, with pointed arches, stone tracery and stained-glass panes. The icons contain no lettering.'],
+      ['Can I change the glass colours?', `Yes. Pick a palette in the icon editor, or on a website set <code>--with-gothic-c1</code> to <code>c4</code> (the four glass colours), <code>--with-gothic-tint</code> (the stone) and <code>--with-gothic-accent</code> (the gilding). <a href="${p}developers.html">Developer docs</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['3d-icons', 'skeuomorphic-icons', 'retro-icons'],
+  })
+  S('pastel', {
+    slug: 'pastel-icons', short: 'Free pastel icons', icon: 'cloud',
+    title: 'Free pastel icons: soft aesthetic SVG & PNG icons · with icons',
+    desc: `Free pastel icons: ${N} soft, aesthetic icons in lavender, peach, mint, baby blue, butter and blush with gentle depth, as SVG or transparent PNG for apps, planners and posts. MIT.`,
+    h1: ['Free pastel icons,', 'soft and dreamy'], q: 'free pastel icons',
+    answer: () => `The <b>Pastel</b> style paints all ${N} icons in soft colour fields (lavender, peach, mint, baby blue, butter and blush) with a gentle tonal depth and no harsh outlines. Calm enough for a whole grid of them. Click an icon below to copy it as a transparent PNG, download it or copy the SVG. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'dl', 'svg'], style: 'pastel', groups: [['Soft favourites', pick(['cloud', 'heart', 'moon', 'star', 'flower', 'coffee', 'gift', 'balloon', 'cake', 'rainbow', 'ice-cream', 'leaf', 'sun', 'butterfly', 'sprout', 'music-note', 'camera', 'book-open', 'calendar', 'bell', 'home', 'mail', 'sparkles', 'smile'], 24)], ['Planner', pick(SETS.planner, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="pa-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="pa-where">Aesthetic apps, planners and wellness</h2>
+  <p>Phone home screens and widgets, digital planners and journals, wellness, meditation and baby apps, lifestyle brands, Notion pages and soft social posts. Best from 32 px up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibB('pastel')], ['Colours', 'Lavender, peach, mint, baby blue, butter and blush, picked per object']])}</div>
+  ${demo(['cloud', 'heart', 'moon', 'flower', 'coffee', 'rainbow', 'gift', 'star'], 'pastel')}
+</section>`,
+    faq: p => [
+      ['Can I use them for an aesthetic home screen?', 'Yes. Download PNGs at any size (they have transparent backgrounds) and set them as app icons with Shortcuts on iPhone or a launcher on Android.'],
+      ['Can I change the colours?', `Yes. Pick a palette in the icon editor, or on a website set <code>--with-pastel-c1</code> to <code>c4</code>. <a href="${p}guides/index.html">How-to guides</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['cute-icons', 'coquette-icons', 'icons-for-notion'],
+  })
+  S('coquette', {
+    slug: 'coquette-icons', short: 'Free coquette icons', icon: 'heart',
+    title: 'Free coquette icons: pink bow aesthetic SVG & PNG icons · with icons',
+    desc: `Free coquette icons: ${N} ballet-pink icons tied with ribbon bows, with pearls, lace and delicate gold, as SVG or transparent PNG for beauty, fashion and feminine brands. MIT licensed.`,
+    h1: ['Free coquette icons,', 'bows and pearls'], q: 'free coquette icons',
+    answer: () => `The <b>Coquette</b> style dresses all ${N} icons in ballet-pink satin, ties them with ribbon-red bows and adds pearls, lace and a touch of gold. Click an icon below to copy it as a transparent PNG, download it or copy the SVG. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'dl', 'svg'], style: 'coquette', groups: [['Coquette favourites', pick(['heart', 'gift', 'crown', 'gem', 'flower', 'mail', 'camera', 'cake', 'coffee', 'star', 'butterfly', 'sparkles', 'shopping-bag', 'scissors', 'music-note', 'book-open', 'calendar', 'bell', 'wine', 'cherry', 'moon', 'cat', 'key', 'lock'], 24)], ['Social', pick(SETS.social, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="cq-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="cq-where">Beauty, fashion and feminine brands</h2>
+  <p>Beauty and nail salons, boutiques and fashion shops, wedding invitations, Pinterest and Instagram posts, link-in-bio pages, journals and girly phone themes. Best from 32 px up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibB('coquette')], ['The details', 'Blush satin, ribbon-red bows, pearls, white lace and delicate gold clasps']])}</div>
+  ${demo(['heart', 'gift', 'crown', 'flower', 'camera', 'cake', 'mail', 'gem'], 'coquette')}
+</section>`,
+    faq: p => [
+      ['What is the coquette aesthetic?', 'A romantic, girly look built on soft pinks, satin bows, pearls and lace, popular across Pinterest, TikTok and fashion. These icons bring it to everyday objects.'],
+      ['Can I change the pink?', `Yes. Pick a palette in the icon editor, or on a website set <code>--with-coquette-c1</code> (the blush), <code>--with-coquette-c3</code> (the ribbon) and <code>--with-coquette-accent</code> (the gold). <a href="${p}developers.html">Developer docs</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['pastel-icons', 'cute-icons', 'sticker-icons'],
+  })
+  S('plush', {
+    slug: 'plush-icons', short: 'Free plush icons for kids', icon: 'rabbit',
+    title: 'Free plush icons for kids: soft toy SVG & PNG icons · with icons',
+    desc: `Free plush icons for kids: ${N} stuffed-toy icons sewn from felt, with puffy panels, piping, running stitches and buttons, as SVG or transparent PNG for kids' apps, learning and nurseries. MIT.`,
+    h1: ['Free plush icons', 'for kids'], q: 'free icons for kids',
+    answer: () => `The <b>Plush</b> style sews all ${N} icons from felt like little stuffed toys: puffy panels in tomato, sunflower, sky and mint, dark piping, running stitches, buttons and embroidered details. Friendly and easy to read for children. Click an icon below to copy it as a transparent PNG, download it or copy the SVG. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'dl', 'svg'], style: 'plush', groups: [['Toy box favourites', pick(['star', 'moon', 'cloud', 'heart', 'home', 'rocket', 'balloon', 'cat', 'dog', 'rabbit', 'turtle', 'fish', 'bird', 'sun', 'rainbow', 'apple', 'cake', 'gift', 'music-note', 'puzzle-piece', 'book-open', 'bus', 'train', 'school'], 24)], ['Cute things', pick(SETS.cute, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="pl-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="pl-where">Kids’ apps, learning and nurseries</h2>
+  <p>Children’s apps and games, learning and phonics tools, classroom slides and worksheets, nurseries, toy shops, birthday invitations and family brands. Big, soft shapes that young children recognise: 48 px and up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibB('plush')], ['Made of', 'Felt panels, piping, running stitches, buttons and embroidery, all as flat vector layers']])}</div>
+  ${demo(['rabbit', 'star', 'rocket', 'cat', 'balloon', 'moon', 'home', 'turtle'], 'plush')}
+</section>`,
+    faq: p => [
+      ['Are these good for young children?', 'Yes. Every icon is a simple, chunky object with bright, friendly colours and no small text, so pre-readers can recognise them. Pair each icon with a spoken or written label in your app.'],
+      ['Can I print them for a classroom?', `Yes. Download a PNG at up to 1024 px or the SVG for sharp prints at any size, and use them on worksheets, labels and posters. <a href="${p}guides/index.html">How-to guides</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required, including in paid apps and products. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['cute-icons', 'pastel-icons', 'animated-icons'],
   })
   return out
 }
