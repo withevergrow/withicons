@@ -1,0 +1,415 @@
+{
+ "fetched": "2026-10-02",
+ "libraries": {
+  "lucide": {
+   "version": "1.49.0",
+   "variants": {
+    "line": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  },
+  "heroicons": {
+   "version": "2.2.0",
+   "variants": {
+    "outline": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "solid": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "mini": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "micro": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  },
+  "phosphor": {
+   "version": "2.1.1",
+   "variants": {
+    "thin": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "light": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "regular": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "bold": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "fill": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "duotone": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  },
+  "tabler": {
+   "version": "3.48.0",
+   "variants": {
+    "outline": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "filled": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  },
+  "font-awesome": {
+   "version": "7.3.1",
+   "variants": {
+    "solid": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "regular": [
+     "bell",
+     "calendar",
+     "heart",
+     "home",
+     "mail",
+     "star",
+     "user"
+    ]
+   }
+  },
+  "material-symbols": {
+   "version": "master",
+   "variants": {
+    "outlined": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "rounded": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "sharp": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ],
+    "filled": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  },
+  "hugeicons": {
+   "version": "4.3.5",
+   "variants": {
+    "stroke-rounded": [
+     "bell",
+     "calendar",
+     "download",
+     "heart",
+     "home",
+     "mail",
+     "search",
+     "settings",
+     "shopping-cart",
+     "star",
+     "trash",
+     "user"
+    ]
+   }
+  }
+ },
+ "names": {
+  "lucide": {
+   "home": "house",
+   "search": "search",
+   "settings": "settings",
+   "user": "user",
+   "bell": "bell",
+   "mail": "mail",
+   "heart": "heart",
+   "trash": "trash-2",
+   "calendar": "calendar",
+   "shopping-cart": "shopping-cart",
+   "star": "star",
+   "download": "download"
+  },
+  "heroicons": {
+   "home": "home",
+   "search": "magnifying-glass",
+   "settings": "cog-6-tooth",
+   "user": "user",
+   "bell": "bell",
+   "mail": "envelope",
+   "heart": "heart",
+   "trash": "trash",
+   "calendar": "calendar",
+   "shopping-cart": "shopping-cart",
+   "star": "star",
+   "download": "arrow-down-tray"
+  },
+  "phosphor": {
+   "home": "house",
+   "search": "magnifying-glass",
+   "settings": "gear",
+   "user": "user",
+   "bell": "bell",
+   "mail": "envelope",
+   "heart": "heart",
+   "trash": "trash",
+   "calendar": "calendar",
+   "shopping-cart": "shopping-cart",
+   "star": "star",
+   "download": "download-simple"
+  },
+  "tabler": {
+   "home": "home",
+   "search": "search",
+   "settings": "settings",
+   "user": "user",
+   "bell": "bell",
+   "mail": "mail",
+   "heart": "heart",
+   "trash": "trash",
+   "calendar": "calendar",
+   "shopping-cart": "shopping-cart",
+   "star": "star",
+   "download": "download"
+  },
+  "font-awesome": {
+   "home": "house",
+   "search": "magnifying-glass",
+   "settings": "gear",
+   "user": "user",
+   "bell": "bell",
+   "mail": "envelope",
+   "heart": "heart",
+   "trash": "trash",
+   "calendar": "calendar",
+   "shopping-cart": "cart-shopping",
+   "star": "star",
+   "download": "download"
+  },
+  "material-symbols": {
+   "home": "home",
+   "search": "search",
+   "settings": "settings",
+   "user": "person",
+   "bell": "notifications",
+   "mail": "mail",
+   "heart": "favorite",
+   "trash": "delete",
+   "calendar": "calendar_today",
+   "shopping-cart": "shopping_cart",
+   "star": "star",
+   "download": "download"
+  },
+  "hugeicons": {
+   "home": "Home01Icon",
+   "search": "Search01Icon",
+   "settings": "Settings01Icon",
+   "user": "UserIcon",
+   "bell": "Notification01Icon",
+   "mail": "Mail01Icon",
+   "heart": "FavouriteIcon",
+   "trash": "Delete02Icon",
+   "calendar": "Calendar03Icon",
+   "shopping-cart": "ShoppingCart01Icon",
+   "star": "StarIcon",
+   "download": "Download01Icon"
+  }
+ }
+}
