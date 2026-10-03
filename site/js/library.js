@@ -1386,6 +1386,39 @@
       '</div>'
     if (store.get('devopen', false)) $('[data-vw-dev]', vwBody).open = true
     viewer._built = true
+    kitUp(vwBody)
+  }
+
+  /* ── our own pickers (css/ui-kit.css + js/ui-kit.js, window.WIKit) instead of the browser's: the toolbar's and the
+     drawer's "any colour" and sliders. The natives stay the value holders, so the listeners here keep working; the
+     studio (js/editor.js) enhances its own fields. Colour suggestions: this icon's palettes, then every style colour. ── */
+  function kitPalette(t) {
+    var out = [], seen = {}, inViewer = viewer.contains(t), st = inViewer ? V.st : S.style, name = inViewer ? V.name : ''
+    function add(c, n) { c = String(c || '').toUpperCase(); if (!/^#[0-9A-F]{6}$/.test(c) || seen[c] || out.length >= 16) return; seen[c] = 1; out.push({ name: n, color: c }) }
+    if (st && STYLE[st]) add(styleHex(st), STYLE[st].title + ' colour')
+    var pals = name && W.WITH_PALETTES && W.WITH_PALETTES[name]
+    if (Array.isArray(pals)) pals.forEach(function (p) { if (p && p.colors) add(p.colors.c1, p.name) })
+    SNAMES.forEach(function (s) { add(styleHex(s), STYLE[s].title) })
+    return { palette: out, paletteLabel: name && BY[name] ? 'Picked for ' + BY[name].title : 'Style colours' }
+  }
+  function kitColor(K, t) {
+    // the suggestions follow the open icon and style: the kit reads them each time the picker opens. On phones the
+    // drawer's icon is scrolled into view above the picker's sheet.
+    var lab = ''
+    K.colorPicker(t, {
+      palette: function () { var o = kitPalette(t); lab = o.paletteLabel; return o.palette },
+      paletteLabel: function () { return lab },
+      preview: function () { return viewer.contains(t) ? $('[data-vw-art]', vwBody) : null }
+    })
+  }
+  function kitUp(scope) {
+    var K = W.WIKit
+    if (!K) { if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', function () { kitUp(scope) }, { once: true }); return }
+    $$('input[type=color]', scope).forEach(function (t) { if (!K.get(t) && !t.closest('.wied, .wied-cpanel, .wdl')) kitColor(K, t) })
+    $$('input[type=range]', scope).forEach(function (r) {
+      if (K.get(r) || r.closest('.wied, .wied-cpanel, .wdl')) return
+      K.slider(r, r.hasAttribute('data-vw-size') ? {} : { format: function (v) { return (+v).toFixed(2).replace(/0$/, '') + ' px' } })
+    })
   }
 
   // the drawer's strip shows this icon in every style. Desktop: fetch them now. Phones and tablets: once the drawer
@@ -1534,7 +1567,7 @@
     $$('[data-vw-color]', b).forEach(function (x) { var on = x.getAttribute('data-vw-color') === S.color; x.setAttribute('aria-checked', on ? 'true' : 'false'); x.tabIndex = on || (!isPreset(S.color) && x.getAttribute('data-vw-color') === 'ink') ? 0 : -1 })
     var hx = $('[data-vw-hex]', b); if (hx && D.activeElement !== hx) { hx.value = shownHex(st); hx.removeAttribute('aria-invalid') }
     var cust = $('[data-vw-custom]', b), isC = !isPreset(S.color)
-    cust.closest('.vw-sw').classList.toggle('is-on', isC); if (isC) { cust.value = S.color; cust.closest('.vw-sw').style.setProperty('--c', S.color) }
+    cust.closest('.vw-sw').classList.toggle('is-on', isC); if (isC) { if (cust.value !== S.color.toLowerCase()) cust.value = S.color; cust.closest('.vw-sw').style.setProperty('--c', S.color) }
     var si = sizeIndex(S.px), sr = $('[data-vw-size]', b)
     sr.value = si; sr.setAttribute('aria-valuetext', S.px + ' pixels'); sr.style.setProperty('--fill', (si / (SIZES.length - 1) * 100) + '%')
     $('[data-vw-sizeout]', b).textContent = S.px + ' px'
@@ -2035,7 +2068,7 @@
     $$('[data-density]', tools).forEach(function (b) { b.setAttribute('aria-pressed', S.density === b.getAttribute('data-density') ? 'true' : 'false') })
     $$('[data-color]', tools).forEach(function (b) { b.setAttribute('aria-pressed', S.color === b.getAttribute('data-color') ? 'true' : 'false') })
     var custom = $('[data-color-custom]', tools)
-    if (custom) { var isC = !isPreset(S.color); custom.closest('.sw').classList.toggle('is-on', isC); if (isC) { custom.value = S.color; custom.closest('.sw').style.setProperty('--c', S.color) } }
+    if (custom) { var isC = !isPreset(S.color); custom.closest('.sw').classList.toggle('is-on', isC); if (isC) { if (custom.value !== S.color.toLowerCase()) custom.value = S.color; custom.closest('.sw').style.setProperty('--c', S.color) } }
     var sw = $('[data-stroke]', tools), swWrap = $('[data-sw-wrap]', tools), ok = S.view === 'compare' || numericSW(S.style)
     if (sw) { var def = numericSW(S.style) ? STYLE[S.style].strokeWidth : 1.75; sw.value = S.sw == null ? def : S.sw; sw.disabled = !ok; $('[data-sw-out]', tools).textContent = (+sw.value).toFixed(2).replace(/0$/, ''); sw.style.setProperty('--fill', ((sw.value - 0.75) / 2.25 * 100) + '%') }
     if (swWrap) swWrap.classList.toggle('is-off', !ok)
@@ -2068,7 +2101,10 @@
     p.classList.toggle('is-open', open); $('[data-pop-toggle]', p).setAttribute('aria-expanded', open ? 'true' : 'false')
     if (open) { var f = $('button[aria-pressed="true"], button', $('.pop-panel', p)); if (f) setTimeout(function () { f.focus() }, 30) }
   }
-  D.addEventListener('pointerdown', function (e) { $$('[data-pop].is-open', tools).forEach(function (p) { if (!p.contains(e.target)) togglePop(p, false) }) })
+  D.addEventListener('pointerdown', function (e) {
+    if (e.target.closest && e.target.closest('.wk-layer')) return   // a picker opened from inside the pop (ui-kit.js) is part of it
+    $$('[data-pop].is-open', tools).forEach(function (p) { if (!p.contains(e.target)) togglePop(p, false) })
+  })
   // selection bar
   selbar.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return
@@ -2084,6 +2120,7 @@
 
   // global keys
   W.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('.wk-layer')) return   // an open kit picker owns its keys (Escape closes just it)
     var tag = (e.target.tagName || '').toLowerCase(), typing = tag === 'input' && !/^(range|checkbox|radio|color|button)$/.test(e.target.type) || tag === 'textarea' || tag === 'select' || e.target.isContentEditable
     if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K'))) {
       e.preventDefault(); e.stopImmediatePropagation()
@@ -2171,6 +2208,7 @@
 
   buildChrome()
   paintTools()
+  kitUp(tools)
   root.setAttribute('data-style', S.view === 'compare' ? 'all' : S.style)
   updateBodyCols()
   var firstLoad = S.view === 'compare' ? loadAll() : loadStyle(S.style)

@@ -1,4 +1,4 @@
-import { p, h2, h3, ul, figure, iconGrid, styleRow, table, yes, no, meh, callout, steps, stats, doDont, code, cta, L, N_ICONS, N_STYLES } from '../lib/blocks.mjs'
+import { p, h2, h3, ul, figure, iconGrid, motionGrid, swapGrid, styleRow, table, yes, no, meh, callout, steps, stats, doDont, code, cta, L, N_ICONS, N_STYLES } from '../lib/blocks.mjs'
 
 export default {
   slug: 'animated-icons',
@@ -47,8 +47,8 @@ export default {
   body: () => `
 ${p(`<span class="lede">Animated icons help when the motion tells people something: that a tap worked, that something changed, that the app is busy loading, or that one new thing deserves a look. They hurt when they loop forever, move just to look busy, or ignore people who have asked their device for less motion. Used once, briefly and with meaning, a moving icon makes an interface clearer.</span>`)}
 ${p('Below: the kinds of animated icons, good and bad uses, the accessibility rules (checked with the W3C in October 2026), speed, and slides and email.')}
-${iconGrid(['loader', 'bell-ring', 'heart', 'check-circle', 'refresh', 'download'], 'duo', 'Six icons that move with a purpose: the loader steps round, the bell swings, the heart beats, the tick draws itself, refresh turns once, the arrow drops into its tray.')}
-${callout('note', `This article is a still page on purpose, so it is calm to read. To see these icons actually move, open one, like the ${L.icon('bell')} or ${L.icon('heart')} icon, and choose the Motion tab.`)}
+${motionGrid(['loader', 'bell-ring', 'heart', 'check-circle', 'refresh', 'download'], 'duo', 'Six icons, each with its own motion: the loader steps round, the bell swings, the heart beats, the tick pulses softly, refresh turns once and rests, the arrow nudges down into its tray.', { trigger: 'loop' })}
+${callout('note', `The demos on this page really move, with the same motion you get from the icon pages. The set above loops (it breaks our own “one or two loops” rule on purpose, so you can compare, which is why it has a Pause button), and the rest play when you hover, focus or tap them. If your device asks for less motion, they stay still. To change the speed or download a GIF, open an icon like ${L.icon('bell')} or ${L.icon('heart')} and choose the Motion tab.`)}
 
 ${h2('What is an animated icon?')}
 ${p('An animated icon is a small picture that moves: it spins, bounces, beats, draws itself or turns into another icon. The drawing is the same as a normal icon. What changes is the file format that carries the motion. There are four you will meet:')}
@@ -74,7 +74,7 @@ ${ul([
   '<strong>Loading and progress.</strong> A spinner or a filling battery tells people the app has not frozen. This is the one place where a loop makes sense, and only while something is really happening.',
   '<strong>Pointing at one thing, once.</strong> The bell rings when a new message arrives, then rests. One short ring is a polite tap on the shoulder.',
 ])}
-${iconGrid(['play', 'pause', 'menu', 'close', 'eye', 'eye-off', 'heart', 'sun', 'moon'], 'line', 'Natural “turn into” pairs: play and pause, menu and close, eye and eye-off, sun and moon. The heart can fill up when liked.')}
+${swapGrid([['play', 'pause'], ['menu', 'close'], ['eye', 'eye-off'], ['sun', 'moon'], ['heart', 'heart@solid']], 'line', 'Natural “turn into” pairs: play and pause, menu and close, eye and eye-off, sun and moon, and a heart that fills up when liked. Tap one to switch it, tap again to switch back.')}
 ${p('Timing matters as much as the motion. Nielsen Norman Group suggests most interface animations should last roughly <strong>100 to 500 milliseconds</strong>, around 100 ms for simple feedback like a toggle, and warns that at 500 ms animations start to feel like a drag. Feedback should also start straight away, within about a tenth of a second of the tap.')}
 
 ${h2('When do animated icons hurt?')}
@@ -120,7 +120,7 @@ ${ul([
   `<strong>Keynote:</strong> an MP4 video is the safest choice, and you can pick your slide’s colour as its background. See the ${L.guide('keynote', 'Keynote guide')}.`,
   `<strong>Email:</strong> GIFs play in most email apps. Litmus notes that desktop Outlook 2007 to 2019 only shows the first frame, so make that frame complete on its own. Skip SVG in email: Can I email (tested September 2026) shows Gmail on the web turns SVGs into still PNGs and desktop Outlook does not show them. Our ${L.guide('email-signatures', 'email signature guide')} has the details.`,
 ])}
-${iconGrid(['trophy', 'rocket', 'sparkles', 'star'], 'gloss', 'Creative styles like Gloss make great slide moments at 48 px and up. In a GIF, the trophy does a little celebration and the sparkles twinkle.', { size: 48 })}
+${motionGrid(['trophy', 'rocket', 'sparkles', 'star'], 'gloss', 'Creative styles like Gloss make great slide moments at 48 px and up. Hover or tap: the trophy does a little celebration, the rocket takes off and the sparkles twinkle, just as they do in the GIF you download.', { size: 48, trigger: 'hover' })}
 ${callout('tip', `GIFs cannot have soft see-through edges, so they get blended with a background colour. Pick your slide’s background colour before you download, and the white rim disappears. More slide tips in ${L.post('icons-in-presentations', 'how to use icons in presentations')}.`)}
 
 ${h2('How does motion work in with icons?')}
@@ -133,7 +133,7 @@ ${ul([
   '<strong>Download it moving:</strong> animated SVG for websites and Notion, GIF for slides and email, MP4 or WebM for video, Lottie for apps, plus animated PNG, animated WebP and PNG frames.',
   '<strong>It respects reduce motion:</strong> on websites, when someone has turned on reduce motion, the icons politely stay still.',
 ])}
-${styleRow('bell', `The ${L.icon('bell')} icon in the styles this page can show. It swings from its hook the same way in each one, because motion moves the whole drawing, not one style.`)}
+${styleRow('bell', `The ${L.icon('bell')} icon in the styles this page can show. Hover one: it swings from its hook the same way in each style, because motion moves the drawing, not one style.`, { motion: 'hover' })}
 ${p(`For developers, motion ships as a separate, optional package, <code>@withicons/motion</code>: pure CSS classes for loop, hover and once, plus a small script for scroll-into-view and “turn into” switches. Like our other npm packages it is <strong>launching soon</strong>. Today you can copy the code or download files from any icon page, and the ${L.page('developers.html#motion-presets', 'developer page')} shows every preset.`)}
 
 ${h2('What are Live icons?')}

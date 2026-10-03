@@ -290,6 +290,7 @@ ${keywords ? `<meta name="keywords" content="${esc(keywords)}">\n` : ''}<link re
 <link rel="preload" href="${P}fonts/caveat-logo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${P}css/tokens.css">
 <link rel="stylesheet" href="${P}css/chrome.css">
+<link rel="stylesheet" href="${P}css/ui-kit.css">
 <link rel="stylesheet" href="${P}css/live.css">
 <link rel="icon" href="${P}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${P}brand/apple-touch-icon.png">
@@ -306,6 +307,7 @@ ${prefixed(FOOTER, P)}
 <script src="${P}data/live.js" defer></script>
 <script src="${P}vendor/dynamic/dynamic.js" defer></script>
 ${scripts}<script src="${P}js/site.js" defer></script>
+<script src="${P}js/ui-kit.js" defer></script>
 <script src="${P}js/live.js" defer></script>
 </body>
 </html>
@@ -656,7 +658,7 @@ ${sections}
           <div class="lv-dl-groups">${DL_GROUPS.map(gr => `<div class="lv-dl-g"><p class="lv-dl-gl">${gr.icon}${esc(gr.title)}</p><div class="lv-dl-list">${gr.items.map(it => `<button type="button" class="lv-fmt${it.main ? ' is-main' : ''}" ${it.attr}><span class="lv-fmt-x">${esc(it.x)}</span><span class="lv-fmt-t"><b>${esc(it.t)}</b><small>${esc(it.say)}</small></span>${it.copy ? IC.copy : IC.down}</button>`).join('')}</div></div>`).join('')}</div>
         </section>
         <section class="lv-sh-sec lv-sh-row"><h3 class="lv-sh-h" id="lv-px-h">Picture size <small>PNG, WebP, PowerPoint, Word</small></h3><div class="lv-seg lv-px" role="radiogroup" aria-labelledby="lv-px-h">${[256, 512, 1024, 2048].map(px => `<button type="button" role="radio" aria-checked="${px === 512}" tabindex="${px === 512 ? 0 : -1}" data-px="${px}">${px} px</button>`).join('')}</div></section>
-        <section class="lv-sh-sec lv-sh-row"><h3 class="lv-sh-h" id="lv-bgx-h">Background</h3><div class="lv-seg lv-bgx" role="radiogroup" aria-labelledby="lv-bgx-h"><button type="button" role="radio" aria-checked="true" tabindex="0" data-bgx="none"><i class="lv-bgx-sw is-none" aria-hidden="true"></i>See-through</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-bgx="#FFFFFF"><i class="lv-bgx-sw" style="--sw:#FFFFFF" aria-hidden="true"></i>White</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-bgx="custom"><i class="lv-bgx-sw" data-lv-bgx-sw style="--sw:#FFD23F" aria-hidden="true"></i>Colour</button></div><input class="lv-bgx-in" type="color" value="#FFD23F" data-lv-bgx-in aria-label="Background colour" hidden></section>
+        <section class="lv-sh-sec lv-sh-row"><h3 class="lv-sh-h" id="lv-bgx-h">Background</h3><div class="lv-seg lv-bgx" role="radiogroup" aria-labelledby="lv-bgx-h"><button type="button" role="radio" aria-checked="true" tabindex="0" data-bgx="none"><i class="lv-bgx-sw is-none" aria-hidden="true"></i>See-through</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-bgx="#FFFFFF"><i class="lv-bgx-sw" style="--sw:#FFFFFF" aria-hidden="true"></i>White</button><button type="button" role="radio" aria-checked="false" tabindex="-1" data-bgx="custom"><i class="lv-bgx-sw" data-lv-bgx-sw style="--sw:#FFD23F" aria-hidden="true"></i>Colour</button></div><input class="lv-bgx-in" type="color" value="#FFD23F" data-lv-bgx-in aria-label="Background colour" tabindex="-1" aria-hidden="true"></section>
       </div>
     </div>
     <footer class="lv-sheet-foot"><p class="lv-sheet-sum" data-lv-sheet-sum aria-live="polite"></p><div class="lv-sheet-acts"><button type="button" class="lv-btn2" data-lv-sheet-next></button><button type="button" class="lv-btn2 is-ink" data-lv-close>Done</button></div></footer>

@@ -11,6 +11,15 @@ only adds article components, using the site's tokens; each section gets one sty
 - `blog/posts/<slug>.mjs`: one post per file (the file name must equal the slug). See `with-icons-vs-font-awesome.mjs`, the reference post.
 - `blog/lib/blocks.mjs`: the building blocks you write a body with (`p`, `h2`, `h3`, `ul`, `ol`, `figure`, `iconGrid`,
   `styleRow`, `sizeRamp`, `table` + `yes/no/meh`, `verdict`, `callout`, `steps`, `stats`, `quote`, `doDont`, `code`, `cta`, links `L.*`).
+- Layout: running text keeps a reading measure (about 72 characters a line) centred in the column; tables, icon grids,
+  face-offs, style rows, verdicts, pros and cons, photos, stats, do/don't, code and the CTA break out to the full column
+  width automatically (the list is in `blog.css`, `.prose > :is(...)`). Tables get real column widths and turn into labelled
+  cards when their box is too narrow (phones; 5+ column tables on tablets), so never squeeze a table into prose.
+- Moving icons: `motionGrid(names, style, caption, { trigger: 'loop' | 'hover' })`, `swapGrid([['play', 'pause'], ['heart', 'heart@solid']], style, caption)`
+  and `styleRow(name, caption, { motion: 'hover' })` use each icon's own motion (`forge/motion/<name>.json`). A post that uses
+  them automatically loads the site's own runtime (`../vendor/motion/motion.css` + `motion.js`, never a CDN); other posts load
+  nothing extra. Loops get a Pause button, and everything stays still under reduced motion or the site's Pause animations.
+  Keep it to one looping demo per post; prefer hover and swap demos. CDN URLs in `code()` samples are text only.
 - `blog/images.json`: the photo registry (Unsplash, free licence; credit is added automatically). Images are source files in `blog/images/<key>-{800,1600}.webp` (+ `-og.jpg` 1200x630 for heroes); the build copies them into `site/blog/assets/img/` (generated, gitignored) and never deletes them.
 - Icon names: `forge/manifest.json` (300 icons). Styles: line, solid, duo, gloss, engrave, blueprint, sketch. An unknown name fails the build.
 

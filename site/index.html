@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/chrome.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/ui-kit.css">
   <link rel="stylesheet" href="vendor/motion/motion.css">
   <script>document.documentElement.className='js';try{var t=localStorage.getItem('with-theme-v2');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}</script>
 
@@ -398,7 +399,8 @@
             <div class="try-art" data-try-art role="img" aria-label="Icon preview"></div>
             <div class="try-controls">
               <div class="try-row" role="group" aria-label="Style" data-try-styles></div>
-              <div class="try-row" role="group" aria-label="Colour" data-try-colors></div>
+              <div class="try-row try-colors" role="group" aria-label="Colour" data-try-colors></div>
+              <p class="try-hint" data-try-hint></p>
             </div>
           </div>
           <div class="try-cards">
@@ -598,6 +600,8 @@
 
   <script src="data/integrations.js" defer></script>
   <script src="js/site.js" defer></script>
+  <script src="js/palette-map.js" defer></script>
+  <script src="js/ui-kit.js" defer></script>
   <script src="js/home.js" defer></script>
 </body>
 </html>

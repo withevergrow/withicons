@@ -183,7 +183,7 @@ export function Toolbar() {
       </tbody></table></div>
       <div class="dv-play" data-reveal data-stroke-play>
         <div class="dv-play-icons">${['settings', 'bell', 'camera', 'heart'].map(n => I(n, 'line', 48)).join('')}</div>
-        <label>strokeWidth <input type="range" min="0.75" max="3" step="0.25" value="1.75" data-stroke-range> <output data-stroke-out>1.75</output></label>
+        <label>strokeWidth <input type="range" min="0.75" max="3" step="0.25" value="1.75" data-stroke-range data-wikit> <output data-stroke-out>1.75</output></label>
         ${code('<Settings strokeWidth={1.75} />', 'jsx').replace('<div class="code pg-code"', '<div class="code pg-code" data-stroke-code')}
       </div>
       <h3>Generic icon (dynamic names)</h3>
@@ -229,9 +229,9 @@ export function Toolbar() {
           ${['ruler', 'compass'].map(n => I(n, 'blueprint', 64)).join('')}
         </div>
         <div class="dv-theme-ctl">
-          <label><span>color</span><input type="color" value="#111318" data-var="color"></label>
-          <label><span>--with-duo</span><input type="color" value="#7B5CFF" data-var="--with-duo"></label>
-          <label><span>--with-accent</span><input type="color" value="#00A3C4" data-var="--with-accent"></label>
+          <label><span>color</span><input type="color" value="#111318" data-var="color" data-wikit></label>
+          <label><span>--with-duo</span><input type="color" value="#7B5CFF" data-var="--with-duo" data-wikit></label>
+          <label><span>--with-accent</span><input type="color" value="#00A3C4" data-var="--with-accent" data-wikit></label>
         </div>
         ${code(`.toolbar { color: #111318; --with-duo: #7B5CFF; --with-accent: #00A3C4; }`, 'css').replace('<div class="code pg-code"', '<div class="code pg-code" data-theme-code')}
       </div>

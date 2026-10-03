@@ -1173,43 +1173,207 @@
       if (!reduced) loop(mock, function () { mk++; paintMock('is-new') }, 2600)
     }
 
-    /* ───────── try: copy, download, drag ───────── */
+    /* ───────── try: copy, download, drag ─────────
+       Colour is meaningful in every style. Single-colour styles (line, solid, duo, gloss…) draw in currentColor, so a
+       swatch recolours the whole icon. Multi-colour styles (kawaii, retro, luxe, plush…) recolour their colour roles
+       (c1..c4; js/palette-map.js) and keep their outline. One role: it takes the chosen colour. Several (retro stripes,
+       sticker candies, kawaii fills, bauhaus primaries…): a ramp is derived in OKLCH from the chosen colour, keeping the
+       icon's own light/dark rhythm between its parts (scaled down a little) and turning their hue differences into
+       small analogous steps, so the whole icon takes on the colour and every part stays distinct. The chosen colour
+       itself lands exactly on the part whose original lightness is closest to it. When the chosen colour would swallow
+       the outline, the outline flips to a legible light/dark shade of it. The preview, Copy SVG, SVG/PNG downloads,
+       the drag payload and the drop slide all use the same plan. */
     var tryEl = $('[data-try]')
     if (tryEl) {
       var tArt = $('[data-try-art]', tryEl), tStyles = $('[data-try-styles]', tryEl), tColors = $('[data-try-colors]', tryEl), drop = $('[data-try-drop]', tryEl)
+      var tHint = $('[data-try-hint]', tryEl)
       var prev = $('.try-preview', tryEl)
-      var T = { icon: 'rocket', style: 'line', color: null }
-      var COLORS = [['auto', null, 'Style colour'], ['ink', '#111318', 'Ink'], ['white', '#FFFFFF', 'White'], ['cobalt', '#2F5BFF', 'Cobalt'], ['tomato', '#FF5A36', 'Tomato'], ['violet', '#7B5CFF', 'Violet'], ['pink', '#FF4FA3', 'Pink'], ['gold', '#C9962B', 'Gold'], ['leaf', '#22A861', 'Leaf'], ['sunset', '#F57C12', 'Sunset orange']]
+      var T = { icon: 'rocket', style: 'line', color: null, custom: null }
+      var COLORS = [['Ink', '#111318'], ['Cobalt', '#2F5BFF'], ['Tomato', '#FF5A36'], ['Violet', '#7B5CFF'], ['Pink', '#FF4FA3'], ['Leaf', '#22A861'], ['Gold', '#C9962B']]
+      var MAIN = ['c1', 'c2', 'c3', 'c4']
+      var hexOk = function (h) { return /^#[0-9a-f]{6}$/i.test(h || '') }
+      var normHex = function (h) { h = String(h || '').trim(); if (/^#[0-9a-f]{3}$/i.test(h)) h = '#' + h.slice(1).replace(/./g, '$&$&'); return hexOk(h) ? h.toUpperCase() : null }
+      var rgbOf = function (h) { var n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255] }
+      var lumOf = function (h) { return rgbOf(h).map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4) }).reduce(function (a, v, i) { return a + v * [0.2126, 0.7152, 0.0722][i] }, 0) }
+      var contrast = function (a, b) { var x = lumOf(a), y = lumOf(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05) }
+      var mixHex = function (a, b, t) { var p = rgbOf(a), q = rgbOf(b); return '#' + p.map(function (v, i) { return ('0' + Math.round(v + (q[i] - v) * t).toString(16)).slice(-2) }).join('').toUpperCase() }
+      var fallbackOf = function (markup, v) { var m = new RegExp('var\\(\\s*' + v + '\\s*,\\s*(#[0-9a-fA-F]{3,6})\\b').exec(markup); return m ? normHex(m[1]) : null }
+      var rolesOf = function (markup) { return W.WithPalette && W.WithPalette.rolesFor ? W.WithPalette.rolesFor(markup) : {} }
+      // colour roles that really are the icon's own colours (duo / blueprint accents fall back to currentColor)
+      var colourVars = function (markup) {
+        var r = rolesOf(markup), out = []
+        for (var v in r) if (MAIN.indexOf(r[v]) > -1 && v !== '--with-duo' && v !== '--with-accent') out.push([v, r[v]])
+        return out
+      }
+      // OKLab / OKLCH (Björn Ottosson), for perceptual ramps
+      var lin = function (v) { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4) }
+      var gam = function (v) { return v <= 0.0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1 / 2.4) - 0.055 }
+      var toLch = function (h) {
+        var c = rgbOf(h).map(lin)
+        var l = Math.cbrt(0.4122214708 * c[0] + 0.5363325363 * c[1] + 0.0514459929 * c[2])
+        var m = Math.cbrt(0.2119034982 * c[0] + 0.6806995451 * c[1] + 0.1073969566 * c[2])
+        var q = Math.cbrt(0.0883024619 * c[0] + 0.2817188376 * c[1] + 0.6299787005 * c[2])
+        var L = 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * q
+        var a = 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * q
+        var b = 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * q
+        return { L: L, C: Math.sqrt(a * a + b * b), H: (Math.atan2(b, a) * 180 / Math.PI + 360) % 360 }
+      }
+      var lchRgb = function (L, C, H) {
+        var a = C * Math.cos(H * Math.PI / 180), b = C * Math.sin(H * Math.PI / 180)
+        var l = Math.pow(L + 0.3963377774 * a + 0.2158037573 * b, 3), m = Math.pow(L - 0.1055613458 * a - 0.0638541728 * b, 3), q = Math.pow(L - 0.0894841775 * a - 1.2914855480 * b, 3)
+        return [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * q, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * q, -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * q]
+      }
+      var fromLch = function (L, C, H) {
+        // into sRGB by easing chroma down (hue and lightness are what carry the ramp)
+        var inG = function (c) { return lchRgb(L, c, H).every(function (v) { return v >= -0.0005 && v <= 1.0005 }) }
+        if (!inG(C)) { var lo = 0, hi = C; for (var k = 0; k < 18; k++) { var mid = (lo + hi) / 2; if (inG(mid)) lo = mid; else hi = mid } C = lo }
+        return '#' + lchRgb(L, C, H).map(function (v) { return ('0' + Math.round(Math.max(0, Math.min(1, gam(Math.max(0, v)))) * 255).toString(16)).slice(-2) }).join('').toUpperCase()
+      }
+      // { role: hex } for the c-roles an icon uses, derived from one chosen colour (see the note above)
+      var rampFor = function (roles, orig, hex) {
+        var out = {}
+        if (roles.length < 2 || roles.some(function (r) { return !orig[r] })) { roles.forEach(function (r) { out[r] = hex }); return out }
+        var P = toLch(hex), O = roles.map(function (r) { return toLch(orig[r]) })
+        // the chosen colour lands on a part of the icon's main hue family (never on a contrast accent such as retro's
+        // teal), the one whose lightness is closest to it
+        var x = 0, y = 0
+        O.forEach(function (o) { x += o.C * Math.cos(o.H * Math.PI / 180); y += o.C * Math.sin(o.H * Math.PI / 180) })
+        var mH = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360, gap = function (h) { return Math.abs(((h - mH + 540) % 360) - 180) }
+        var fam = O.map(function (o, i) { return i }).filter(function (i) { return O[i].C < 0.03 || gap(O[i].H) <= 60 })
+        if (!fam.length) fam = O.map(function (o, i) { return i })
+        var a = fam[0]
+        fam.forEach(function (i) { if (Math.abs(O[i].L - P.L) < Math.abs(O[a].L - P.L)) a = i })
+        var neutral = P.C < 0.035
+        roles.forEach(function (r, i) {
+          if (i === a) { out[r] = hex; return }
+          var dL = (O[i].L - O[a].L) * 0.85
+          var L = Math.max(0.22, Math.min(0.97, P.L + dL))
+          if (Math.abs(L - P.L) < 0.045) L = Math.max(0.22, Math.min(0.97, P.L + (dL >= 0 && P.L < 0.9 || P.L < 0.3 ? 0.07 : -0.07)))
+          var dh = O[i].C < 0.03 || O[a].C < 0.03 ? 0 : ((O[i].H - O[a].H + 540) % 360) - 180
+          var off = Math.max(-32, Math.min(32, dh * 0.35)); if (Math.abs(dh) > 8 && Math.abs(off) < 12) off = dh > 0 ? 12 : -12
+          var C = neutral ? P.C : P.C * Math.max(0.65, Math.min(1.25, O[i].C / Math.max(O[a].C, 0.02)))
+          out[r] = fromLch(L, C, (P.H + (neutral ? 0 : off) + 360) % 360)
+        })
+        return out
+      }
+      var inner0 = function (style) { return inner(T.icon, style) || '' }
+      var isMulti = function (style) { return colourVars(inner0(style)).length > 0 }
+      // { vars: {'--with-x': hex}, color: hex|null } — one plan shared by preview and every output
+      var planFor = function (style, hex) {
+        var out = { vars: {}, color: null }
+        if (!hex) return out
+        var markup = inner0(style), cv = colourVars(markup)
+        if (!cv.length) { out.color = hex; return out }
+        var roles = MAIN.filter(function (r) { return cv.some(function (x) { return x[1] === r }) }), orig = {}
+        cv.forEach(function (x) { if (!orig[x[1]]) orig[x[1]] = fallbackOf(markup, x[0]) })
+        var ramp = rampFor(roles, orig, hex)
+        cv.forEach(function (x) { if (ramp[x[1]]) out.vars[x[0]] = ramp[x[1]] })
+        // keep the outline legible against the new main colour
+        var r = rolesOf(markup), inkVars = [], outline = null
+        for (var v in r) if (r[v] === 'ink') { inkVars.push(v); outline = outline || fallbackOf(markup, v) }
+        outline = outline || normHex(INFO[style].color) || '#111318'
+        if (contrast(hex, outline) < 1.8) {
+          var dk = mixHex(hex, '#000000', 0.74), lt = mixHex(hex, '#FFFFFF', 0.82), ink = contrast(hex, dk) >= contrast(hex, lt) ? dk : lt
+          inkVars.forEach(function (v) { out.vars[v] = ink })
+          out.color = ink
+        }
+        return out
+      }
+      var plan = function () { return planFor(T.style, T.color) }
+      var varCss = function (pl) { var s = ''; for (var v in pl.vars) s += v + ':' + pl.vars[v] + ';'; return s }
+      var artFor = function (size, opts, pl) {
+        var s = ic(T.icon, T.style, size, opts)
+        var css = varCss(pl)
+        return css ? s.replace('<svg ', '<svg style="' + css + '" ') : s
+      }
+      var outFor = function (pl) {
+        var s = ic(T.icon, T.style, 24, {})
+        if (!s) return ''
+        s = s.replace(' aria-hidden="true" focusable="false"', '')
+        s = s.replace(/var\(\s*(--with-[\w-]+)\s*,\s*([^()]*?)\s*\)/g, function (all, v) { return pl.vars[v] || all })
+        var c = pl.color || INFO[T.style].color
+        return s.replace(/var\(--(?:eg|with)-(?:duo|accent),\s*currentColor\)/g, c).replace(/currentColor/g, c)
+      }
+      // the icon's own colours, for the "Style colours" swatch
+      var autoFill = function (style) {
+        var markup = inner0(style), cs = []
+        colourVars(markup).forEach(function (x) { var h = fallbackOf(markup, x[0]); if (h && cs.indexOf(h) < 0) cs.push(h) })
+        if (!cs.length) return 'var(--style)'
+        cs = cs.slice(0, 3)
+        if (cs.length === 1) return cs[0]
+        var step = 100 / cs.length
+        return 'conic-gradient(' + cs.map(function (c, i) { return c + ' ' + (i * step) + '% ' + ((i + 1) * step) + '%' }).join(',') + ')'
+      }
+      var PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>'
       tStyles.innerHTML = AV.map(function (s) { return '<button type="button" class="chip s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === T.style) + '">' + INFO[s].title + '</button>' }).join('')
-      tColors.innerHTML = COLORS.map(function (c, i) { return '<button type="button" class="sw' + (i === 0 ? ' auto' : '') + '" style="--sw:' + (c[1] || 'transparent') + '" data-c="' + i + '" aria-pressed="' + (i === 0) + '" aria-label="' + c[2] + '" title="' + c[2] + '"></button>' }).join('')
+      tColors.innerHTML = '<button type="button" class="try-sw is-auto" data-tc="auto" aria-pressed="true" aria-label="Style colours" title="Style colours"></button>' +
+        COLORS.map(function (c) { return '<button type="button" class="try-sw" style="--sw:' + c[1] + '" data-tc="' + c[1] + '" aria-pressed="false" aria-label="' + c[0] + '" title="' + c[0] + '"></button>' }).join('') +
+        '<span class="try-sw-sep" aria-hidden="true"></span>' +
+        '<button type="button" class="try-sw try-sw-custom" data-tc-custom aria-pressed="false" aria-label="Any colour" title="Any colour">' + PLUS + '</button>'
+      var customBtn = $('[data-tc-custom]', tColors)
       tArt.setAttribute('draggable', 'true')
       tArt.setAttribute('role', 'img'); tArt.setAttribute('aria-label', 'Icon preview — drag me')
-      var paintTry = function () {
+      var paintTry = function (live) {
+        var pl = plan()
         setStyleClass(prev, T.style)
         prev.style.setProperty('--style', 'var(--c-' + T.style + ')'); prev.style.setProperty('--style-soft', 'var(--c-' + T.style + '-soft)')
-        if (T.color) tArt.style.setProperty('--try-color', T.color); else tArt.style.removeProperty('--try-color')
-        tArt.innerHTML = '<span class="try-grab" aria-hidden="true">drag me ↘</span>' + ic(T.icon, T.style, 200, { 'class': reduced ? '' : 'is-new' })
+        if (pl.color) tArt.style.setProperty('--try-color', pl.color); else tArt.style.removeProperty('--try-color')
+        tArt.innerHTML = '<span class="try-grab" aria-hidden="true">drag me ↘</span>' + artFor(200, { 'class': reduced || live ? '' : 'is-new' }, pl)
       }
-      paintTry()
-      var curColor = function () { return T.color || getComputedStyle(prev).getPropertyValue('--c-' + T.style).trim() || '#111318' }
-      var curColorHex = function () { return T.color || INFO[T.style].color }
+      var paintRow = function () {
+        var cv = colourVars(inner0(T.style)), multi = cv.length > 0
+        var many = MAIN.filter(function (r) { return cv.some(function (x) { return x[1] === r }) }).length > 1
+        var auto = $('.is-auto', tColors); if (auto) auto.style.setProperty('--sw', autoFill(T.style))
+        if (tHint) tHint.textContent = many ? 'Turns every colour into shades of yours; the outline stays crisp.' : multi ? 'Recolours the main colour; the outline stays crisp.' : 'Recolours the whole icon.'
+        tColors.setAttribute('aria-label', multi ? 'Main colour' : 'Colour')
+      }
+      var pressColour = function (btn) {
+        $$('[data-tc],[data-tc-custom]', tColors).forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false') })
+      }
+      paintTry(); paintRow()
+      var curColor = function () { var pl = plan(); return pl.color || getComputedStyle(prev).getPropertyValue('--c-' + T.style).trim() || '#111318' }
+      // "Any colour": the in-house picker (js/ui-kit.js), with this icon's palette suggestions when they load
+      var cpOpts = null
+      if (customBtn && W.WIKit && W.WIKit.colorPicker) {
+        var setCustom = function (hx, live) {
+          hx = normHex(hx); if (!hx) return
+          T.custom = T.color = hx
+          customBtn.style.setProperty('--sw', hx); customBtn.classList.add('is-set')
+          pressColour(customBtn); paintTry(live)
+        }
+        cpOpts = { value: '#7B5CFF', label: 'Any colour', paletteLabel: 'Rocket palettes', preview: function () { return tArt }, onInput: function (hx) { setCustom(hx, true) }, onChange: function (hx) { setCustom(hx, false) } }
+        var cpKit = W.WIKit.colorPicker(customBtn, cpOpts)
+        try {
+          var ps = doc.createElement('script'); ps.async = true
+          ps.src = (WI.base || '') + 'data/palettes/' + T.icon + '.js'
+          ps.onload = function () {
+            var list = (W.WITH_PALETTES && W.WITH_PALETTES[T.icon]) || [], seen = {}
+            var pal = list.map(function (p) { return { name: p.name, color: p.colors && p.colors.c1 } })
+              .filter(function (p) { var h = normHex(p.color); if (!h || seen[h]) return false; seen[h] = 1; return true }).slice(0, 18)
+            if (cpKit && cpKit.setPalette) cpKit.setPalette(pal); else cpOpts.palette = pal
+          }
+          ps.onerror = function () { ps.remove() }
+          doc.head.appendChild(ps)
+        } catch (err) { /* palettes are a bonus */ }
+      } else if (customBtn) customBtn.hidden = true
       tryEl.addEventListener('click', function (e) {
         var s = e.target.closest('[data-s]')
         if (s && tStyles.contains(s)) {
           T.style = s.getAttribute('data-s')
           $$('[data-s]', tStyles).forEach(function (b) { b.setAttribute('aria-pressed', b === s ? 'true' : 'false') })
+          paintTry(); paintRow(); return
+        }
+        var c = e.target.closest('[data-tc]')
+        if (c && tColors.contains(c)) {
+          var v = c.getAttribute('data-tc')
+          T.color = v === 'auto' ? null : v
+          pressColour(c)
           paintTry(); return
         }
-        var c = e.target.closest('[data-c]')
-        if (c) {
-          T.color = COLORS[+c.getAttribute('data-c')][1]
-          $$('[data-c]', tColors).forEach(function (b) { b.setAttribute('aria-pressed', b === c ? 'true' : 'false') })
-          paintTry(); return
-        }
-        if (e.target.closest('[data-try-copy]')) { WI.copyWithToast(fileFor(T.icon, T.style, curColorHex()), 'SVG copied — paste it into Figma, Canva or your code'); return }
-        if (e.target.closest('[data-try-svg]')) { WI.download(T.icon + '-' + T.style + '.svg', fileFor(T.icon, T.style, curColorHex())); WI.toast('Downloading ' + T.icon + '-' + T.style + '.svg'); return }
+        if (e.target.closest('[data-try-copy]')) { WI.copyWithToast(outFor(plan()), 'SVG copied — paste it into Figma, Canva or your code'); return }
+        if (e.target.closest('[data-try-svg]')) { WI.download(T.icon + '-' + T.style + '.svg', outFor(plan())); WI.toast('Downloading ' + T.icon + '-' + T.style + '.svg'); return }
         if (e.target.closest('[data-try-png]')) {
-          WI.svgToPng(fileFor(T.icon, T.style, curColorHex()), 512).then(function (blob) {
+          WI.svgToPng(outFor(plan()), 512).then(function (blob) {
             var a = doc.createElement('a'); a.href = URL.createObjectURL(blob); a.download = T.icon + '-' + T.style + '-512.png'
             doc.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove() }, 800)
             WI.toast('Downloading a 512px PNG')
@@ -1222,13 +1386,13 @@
         var label = $('.try-drop-label', drop); if (label) label.remove()
         var d = doc.createElement('span'); d.className = 'dropped'
         d.style.color = curColor()
-        d.innerHTML = ic(T.icon, T.style, 44)
+        d.innerHTML = artFor(44, {}, plan())
         drop.appendChild(d)
         var kids = $$('.dropped', drop); if (kids.length > 5) kids[0].remove()
         WI.announce('Placed ' + T.icon + ' on the slide')
       }
       tArt.addEventListener('dragstart', function (e) {
-        var svgText = fileFor(T.icon, T.style, curColorHex())
+        var svgText = outFor(plan())
         try {
           e.dataTransfer.effectAllowed = 'copy'
           e.dataTransfer.setData('text/plain', svgText)
@@ -1241,6 +1405,8 @@
       drop.addEventListener('drop', function (e) { e.preventDefault(); drop.classList.remove('is-over'); place() })
       drop.setAttribute('role', 'button'); drop.setAttribute('tabindex', '0'); drop.setAttribute('aria-label', 'Place the icon on the slide')
       drop.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); place() } })
+      // test hook (also handy for the verification script): the exact SVG that Copy / Download / Drag produce
+      tryEl._tryOut = function () { return outFor(plan()) }
     }
 
     /* ───────── developers: code tabs ───────── */

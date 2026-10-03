@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI kit · with icons</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Internal test page for the with icons UI kit: colour picker, dropdown, slider, stepper and time picker.">
+<link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/ui-kit.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>document.documentElement.className='js';try{var t=localStorage.getItem('with-theme-v2');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light')}catch(e){}</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--step-0)/1.55 var(--font-sans); }
+  .kt-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+  .kt-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .kt-top h1 { margin: 0; font: 700 var(--step-3)/1 var(--font-display); letter-spacing: -.02em; }
+  .kt-top h1 em { font-family: var(--font-hand); font-style: normal; font-weight: 600; color: var(--c-duo-text); }
+  .kt-lede { margin: 0 0 28px; color: var(--muted); max-width: 62ch; }
+  .kt-tools { display: flex; gap: 8px; }
+  .kt-btn { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 600 14px var(--font-sans); cursor: pointer; }
+  .kt-btn:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo); }
+  .kt-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+  .kt-card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+  .kt-card h2 { margin: 0 0 4px; font: 650 var(--step-1)/1.2 var(--font-display); }
+  .kt-card > p { margin: 0 0 16px; color: var(--muted); font-size: var(--step--1); }
+  .kt-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 14px; }
+  .kt-f { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .kt-f > label, .kt-f > span.kt-l { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+  .kt-inline { display: flex; align-items: center; gap: 12px; }
+  .kt-inline output { font: 600 13px var(--font-mono); min-width: 5ch; }
+  .kt-sw-custom { position: relative; display: block; width: 40px; height: 40px; border-radius: 50%; background: conic-gradient(#FF5A36, #FFD23F, #22A861, #00A3C4, #2F5BFF, #7B5CFF, #FF4FA3, #FF5A36); cursor: pointer; }
+  .kt-sw-custom input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+  .kt-sw-custom:focus-within { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; }
+  .kt-scroll { height: 180px; overflow: auto; border: 1px dashed var(--rule-strong); border-radius: 12px; padding: 16px; }
+  .kt-scroll .kt-pad { height: 240px; }
+  .kt-modal-bg { position: fixed; inset: 0; background: rgba(13,15,20,.5); display: grid; place-items: center; z-index: 50; padding: 16px; }
+  .kt-modal-bg[hidden] { display: none; }
+  .kt-modal { width: min(440px, 100%); background: var(--card); color: var(--ink); border-radius: var(--radius-l); padding: 24px; transform: translateZ(0) scale(1); box-shadow: var(--shadow-l); }
+  .kt-modal h3 { margin: 0 0 12px; }
+  .kt-log { position: sticky; top: 16px; background: var(--dark); color: var(--on-dark); border-radius: var(--radius); padding: 14px; font: 12px/1.5 var(--font-mono); max-height: calc(100vh - 32px); overflow: auto; }
+  .kt-log h2 { margin: 0 0 8px; font: 600 13px var(--font-sans); color: var(--on-dark-2); }
+  .kt-log ol { margin: 0; padding: 0; list-style: none; }
+  .kt-log li { padding: 2px 0; border-bottom: 1px solid var(--on-dark-rule); word-break: break-all; }
+  .kt-log b { color: var(--sun); font-weight: 600; }
+  pre.kt-code { margin: 0; padding: 14px; overflow: auto; border-radius: 12px; background: var(--paper-2); font: 12.5px/1.55 var(--font-mono); }
+  .kt-prev { display: block; width: 44px; height: 44px; border-radius: 12px; background: var(--kt-prev, #7252FF); -webkit-mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 60%); mask: radial-gradient(circle at 50% 50%, #000 58%, transparent 60%); }
+  .kt-chip { display: inline-block; padding: 2px 8px; border-radius: 999px; background: var(--paper-2); font: 600 12px var(--font-mono); }
+  @media (max-width: 900px) { .kt-grid { grid-template-columns: minmax(0, 1fr); } .kt-log { position: static; max-height: 220px; } }
+</style>
+</head>
+<body>
+<main class="kt-wrap" id="main">
+  <div class="kt-top">
+    <h1>UI kit <em>with</em> no native pickers</h1>
+    <div class="kt-tools">
+      <button class="kt-btn" type="button" id="kt-theme">Toggle dark</button>
+      <button class="kt-btn" type="button" id="kt-dir">Toggle RTL</button>
+    </div>
+  </div>
+  <p class="kt-lede">Internal test page for <code>js/ui-kit.js</code> + <code>css/ui-kit.css</code> (<code>window.WIKit</code>). Every control below is a real native element enhanced in place, or built with the API. The log on the right shows the native <code>input</code> / <code>change</code> events existing page code listens to.</p>
+
+  <div class="kt-grid">
+    <div>
+      <section class="kt-card" aria-labelledby="h-color">
+        <h2 id="h-color">Colour picker</h2>
+        <p>Visible native input, a label-wrapped transparent input (the editor pattern), a hidden input opened by <code>.click()</code> (the Live pattern; focus comes back to its button), and an API trigger whose palette arrives late and whose preview stays in view above the phone sheet. Swatches try a colour live and keep the picker open: double-click or Enter commits.</p>
+        <div class="kt-row">
+          <div class="kt-f"><label for="c1">Icon colour</label><input type="color" id="c1" value="#2f5bff" data-wikit></div>
+          <div class="kt-f"><span class="kt-l">Any colour</span><label class="kt-sw-custom" title="Any colour"><input type="color" id="c2" value="#ff5a36" aria-label="Pick any colour" data-wikit></label></div>
+          <div class="kt-f"><span class="kt-l">Background</span><button type="button" class="kt-btn" id="c3-open">Colour…</button><input type="color" id="c3" value="#ffd23f" aria-label="Background colour" hidden data-wikit></div>
+          <div class="kt-f"><span class="kt-l" id="c4-l">Duo tone (API)</span><button type="button" id="c4" aria-labelledby="c4-l"></button></div>
+          <div class="kt-f"><span class="kt-l">Preview</span><span class="kt-prev" id="c4-prev" aria-hidden="true"></span></div>
+        </div>
+        <p><button type="button" class="kt-btn" id="c4-late">Load a palette late (setPalette)</button> <span class="kt-chip" id="c4-closed">not closed yet</span></p>
+        <p>Native value now: <span class="kt-chip" id="c1-val"></span> <button type="button" class="kt-btn" id="c1-set">Set c1 = #22A861 in code</button></p>
+      </section>
+
+      <section class="kt-card" aria-labelledby="h-select">
+        <h2 id="h-select">Dropdown</h2>
+        <p>A native <code>&lt;select&gt;</code> with groups and swatches, a long one (search appears above 8 options), and one built from data.</p>
+        <div class="kt-row">
+          <div class="kt-f"><label for="s1">Style</label>
+            <select id="s1" data-wikit>
+              <optgroup label="Outline">
+                <option value="line" data-swatch="#2F5BFF">Line</option>
+                <option value="blueprint" data-swatch="#00A3C4">Blueprint</option>
+                <option value="sketch" data-swatch="#22A861" data-hint="Hand-drawn">Sketch</option>
+              </optgroup>
+              <optgroup label="Filled">
+                <option value="solid" data-swatch="#FF5A36" selected>Solid</option>
+                <option value="duo" data-swatch="#7252FF">Duo</option>
+                <option value="gloss" data-swatch="#FF4FA3" disabled>Gloss (soon)</option>
+              </optgroup>
+            </select></div>
+          <div class="kt-f"><label for="s2">Export format</label>
+            <select id="s2" data-wikit>
+              <option>SVG</option><option>PNG</option><option>WebP</option><option>JPEG</option><option>PDF</option><option>ICO</option><option>ICNS</option>
+              <option>React (JSX)</option><option>Vue SFC</option><option>Svelte</option><option>Angular</option><option>Solid</option><option>Web component</option>
+              <option>Figma SVG</option><option>Sketch</option><option>Lottie JSON</option><option>CSS mask</option><option>Data URI</option><option>Base64</option><option>XAML</option>
+              <option>Android vector</option><option>SwiftUI</option><option>Flutter</option>
+            </select></div>
+          <div class="kt-f"><span class="kt-l" id="s3-l">Size (API)</span><div id="s3"></div></div>
+        </div>
+      </section>
+
+      <section class="kt-card" aria-labelledby="h-slider">
+        <h2 id="h-slider">Slider</h2>
+        <p>The native range stays on top (transparent) and keeps pointer, touch, keyboard and screen-reader behaviour.</p>
+        <div class="kt-row">
+          <div class="kt-f" style="flex:1 1 260px"><label for="r1">Stroke width</label><div class="kt-inline"><input type="range" id="r1" min="0.75" max="3" step="0.25" value="1.75" data-wikit><output id="r1-out">1.75</output></div></div>
+          <div class="kt-f" style="flex:1 1 260px"><label for="r2">Size</label><div class="kt-inline"><input type="range" id="r2" min="16" max="256" step="4" value="48" data-unit=" px" data-wikit></div></div>
+        </div>
+        <p>Inline in text: <label>strokeWidth <input type="range" id="r3" min="0" max="10" value="4" data-wikit> <output id="r3-out">4</output></label></p>
+      </section>
+
+      <section class="kt-card" aria-labelledby="h-step">
+        <h2 id="h-step">Stepper and time</h2>
+        <div class="kt-row">
+          <div class="kt-f"><label for="n1">Custom size <small>px</small></label><input type="number" id="n1" min="8" max="512" step="1" value="64" inputmode="numeric" data-wikit></div>
+          <div class="kt-f"><label for="n2">Width (in)</label><input type="number" id="n2" min="0.25" max="8" step="0.25" value="1" inputmode="decimal" data-wikit></div>
+          <div class="kt-f"><label for="t1">Alarm time</label><input type="time" id="t1" step="60" value="07:30" data-wikit></div>
+          <div class="kt-f"><label for="t2">Reminder (24h, 5 min)</label><input type="time" id="t2" step="300" data-wikit></div>
+        </div>
+      </section>
+
+      <section class="kt-card" aria-labelledby="h-ctx">
+        <h2 id="h-ctx">Hard places</h2>
+        <p>Inside a scrolling box, inside a transformed modal, and a region with <code>data-wikit-all</code> (every native inside is upgraded).</p>
+        <div class="kt-row">
+          <div class="kt-scroll" style="flex:1 1 240px"><div class="kt-f"><label for="sc1">In a scroller</label><select id="sc1" data-wikit><option>Top</option><option>Middle</option><option>Bottom</option></select></div><div class="kt-pad"></div></div>
+          <button type="button" class="kt-btn" id="kt-modal-open">Open modal</button>
+        </div>
+        <div data-wikit-all id="kt-all" class="kt-row">
+          <div class="kt-f"><label for="a1">Plain select</label><select id="a1"><option value="a">Alpha</option><option value="b" selected>Bravo</option><option value="c">Charlie</option></select></div>
+          <div class="kt-f"><label for="a2">Plain colour</label><input type="color" id="a2" value="#7252ff"></div>
+          <div class="kt-f" style="flex:1 1 200px"><label for="a3">Plain range</label><input type="range" id="a3" value="30"></div>
+          <div class="kt-f"><label for="a4">Opt out</label><input type="number" id="a4" value="3" data-wikit="off"></div>
+        </div>
+      </section>
+
+      <section class="kt-card" aria-labelledby="h-api">
+        <h2 id="h-api">API</h2>
+<pre class="kt-code" tabindex="0">&lt;link rel="stylesheet" href="css/ui-kit.css"&gt;  &lt;script src="js/ui-kit.js" defer&gt;&lt;/script&gt;
+
+&lt;input type="color" data-wikit&gt;            auto-enhanced on load (also select, range, number, time)
+&lt;section data-wikit-all&gt;…&lt;/section&gt;        WIKit.enhance(section) upgrades every native inside
+
+WIKit.enhance(root?, {all?, color:{…}, select:{…}})  → instances
+WIKit.observe(root?, opts?)                  → stop()   (enhances nodes added later)
+WIKit.colorPicker(el, {value, label, palette (list | fn), paletteLabel (string | fn), swatches, recent, eyedropper,
+                   closeOnSwatch, returnTo, preview, compact, onInput, onChange, onClose})
+  colour instance: .setPalette(list, label?) · .isOpen()      events: input · change · wikit:close {value, changed}
+WIKit.select(el, {options, value, label, placeholder, name, search, onChange, onClose})
+WIKit.slider(input, {format, bubble})   WIKit.stepper(input)   WIKit.timePicker(input, {hour12, minuteStep})
+WIKit.get(el) · WIKit.destroy(el) · WIKit.close() · WIKit.parseColor('rgb(255 90 54)') → '#ff5a36'
+instance: .value (get/set) · .open() · .close() · .refresh() · .destroy()</pre>
+      </section>
+    </div>
+
+    <aside class="kt-log" aria-label="Event log" tabindex="0"><h2>Events (newest first)</h2><ol id="kt-log"></ol></aside>
+  </div>
+</main>
+
+<div class="kt-modal-bg" id="kt-modal" hidden>
+  <div class="kt-modal" role="dialog" aria-modal="true" aria-labelledby="m-h">
+    <h3 id="m-h">Modal with a transform</h3>
+    <div class="kt-row">
+      <div class="kt-f"><label for="m1">Colour in a modal</label><input type="color" id="m1" value="#00a3c4" data-wikit></div>
+      <div class="kt-f"><label for="m2">Pick one</label><select id="m2" data-wikit><option>One</option><option>Two</option><option>Three</option></select></div>
+    </div>
+    <button type="button" class="kt-btn" id="kt-modal-close">Close</button>
+  </div>
+</div>
+
+<script src="js/ui-kit.js"></script>
+<script>
+(function () {
+  var D = document, $ = function (s) { return D.querySelector(s) }, log = $('#kt-log'), n = 0
+  function add(e) {
+    var t = e.target; if (!t || !t.id || t.closest('.wk-layer')) return
+    var v = e.detail && e.detail.value !== undefined ? e.detail.value : t.value
+    var li = D.createElement('li'); li.innerHTML = '<b>' + e.type + '</b> #' + t.id + ' = ' + String(v).replace(/</g, '&lt;')
+    log.insertBefore(li, log.firstChild); if (log.children.length > 60) log.lastChild.remove()
+    window.__events = window.__events || []; window.__events.push({ type: e.type, id: t.id, value: v })
+  }
+  D.addEventListener('input', add, true); D.addEventListener('change', add, true); D.addEventListener('wikit:close', add, true)
+  // existing-page-style listeners on the natives
+  var c1 = $('#c1'), r1 = $('#r1'), r3 = $('#r3')
+  function showC1() { $('#c1-val').textContent = c1.value }
+  c1.addEventListener('input', showC1); showC1()
+  $('#c1-set').addEventListener('click', function () { c1.value = '#22a861'; showC1() })
+  r1.addEventListener('input', function () { $('#r1-out').textContent = r1.value })
+  r3.addEventListener('input', function () { $('#r3-out').textContent = r3.value })
+  $('#c3-open').addEventListener('click', function () { $('#c3').click() })
+  // API-built controls
+  var duo = [{ name: 'Primary', color: '#111318' }, { name: 'Duo', color: '#7252FF' }, { name: 'Accent', color: '#00A3C4' }]
+  var c4 = WIKit.colorPicker($('#c4'), { value: '#7252FF', label: 'Duo tone', paletteLabel: function () { return 'This icon' }, palette: function () { return duo },
+    preview: function () { return $('#c4-prev') },
+    onInput: function (hx) { $('#c4-prev').style.setProperty('--kt-prev', hx) },
+    onClose: function (d) { $('#c4-closed').textContent = 'closed: ' + d.value + (d.changed ? ' (changed)' : ' (same)') } })
+  $('#c4-late').addEventListener('click', function () { c4.setPalette([{ name: 'Sunset', color: '#FF5A36' }, { name: 'Sea', color: '#00A3C4' }, { name: 'Moss', color: '#22A861' }], 'Late palette') })
+  WIKit.select($('#s3'), { label: 'Size', name: 'size', value: '24', options: [
+    { value: '16', label: '16 px', hint: 'Dense UI' }, { value: '24', label: '24 px', hint: 'Default' }, { value: '32', label: '32 px' }, { value: '48', label: '48 px', hint: 'Slides' }] })
+  // theme / dir / modal
+  $('#kt-theme').addEventListener('click', function () { var r = D.documentElement, d = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; r.setAttribute('data-theme', d) })
+  $('#kt-dir').addEventListener('click', function () { var r = D.documentElement; r.dir = r.dir === 'rtl' ? 'ltr' : 'rtl'; D.querySelectorAll('input[type=range]').forEach(function (i) { var x = WIKit.get(i); if (x) x.refresh() }) })
+  var modal = $('#kt-modal')
+  $('#kt-modal-open').addEventListener('click', function () { modal.hidden = false; $('#kt-modal-close').focus() })
+  $('#kt-modal-close').addEventListener('click', function () { modal.hidden = true; $('#kt-modal-open').focus() })
+  D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) { modal.hidden = true; $('#kt-modal-open').focus() } })
+})()
+</script>
+</body>
+</html>

@@ -202,6 +202,8 @@ export function page({ path, title, desc, current, body, ld = [], crumbsLd, scri
   const p = '../'.repeat(depth)
   const graph = { '@context': 'https://schema.org', '@graph': [...ld, crumbsLd ? breadcrumbLd(crumbsLd) : null].filter(Boolean) }
   const url = ORIGIN + '/' + path
+  // pages whose pickers are marked data-wikit get the in-house UI kit (css/ui-kit.css + js/ui-kit.js) instead of native pickers
+  if (/\sdata-wikit[\s>=]/.test(body)) { styles = [...styles, 'css/ui-kit.css']; scripts = ['js/ui-kit.js', ...scripts] }
   return `<!doctype html>
 <html lang="en" class="no-js">
 <head>

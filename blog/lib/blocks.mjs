@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { listIcons, loadIcon, renderIcon, toSvg, readManifest } from '../../forge/lib/load.mjs'
+import { specVars } from '../../packages/motion/src/meta.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 export const IMAGES = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'images.json'), 'utf8'))
@@ -51,17 +52,68 @@ export function iconGrid(names, style = 'line', caption = '', { size = 36, links
 }
 
 /** One icon across styles, with labels. Default: every style this checkout can render; pass { styles } for a curated few. */
-export function styleRow(name, caption = '', { size = 44, styles = STYLES } = {}) {
+export function styleRow(name, caption = '', { size = 44, styles = STYLES, motion } = {}) {
   styles = styles.filter(s => STYLES.includes(s))
-  const cells = styles.map(s => `<div class="b-style" data-style="${s}">${icon(name, s, size)}<span>${STYLE_LABEL[s]}</span></div>`).join('')
+  // motion: 'hover' makes each style tile play the icon's own hover move (on hover, focus or tap)
+  const cells = styles.map(s => motion ? `<div class="b-style wm-trigger" data-style="${s}">${moving(name, s, size, motion)}<span>${STYLE_LABEL[s]}</span></div>` : `<div class="b-style" data-style="${s}">${icon(name, s, size)}<span>${STYLE_LABEL[s]}</span></div>`).join('')
   const all = styles.length >= N_STYLES
-  return `<figure class="b-styles${styles.length > 7 ? ' is-many' : ''}"><div class="b-styles__row">${cells}</div><figcaption>${caption || `The <a href="${iconHref(name)}">${esc(name)}</a> icon, drawn once and rendered ${all ? `in all ${N_STYLES} styles` : `in ${styles.length} of its ${N_STYLES} styles`}.`}</figcaption></figure>`
+  return `<figure class="b-styles${styles.length > 7 ? ' is-many' : ''}${motion ? ' b-motion" data-motion="' + motion : ''}"><div class="b-styles__row">${cells}</div><figcaption>${caption || `The <a href="${iconHref(name)}">${esc(name)}</a> icon, drawn once and rendered ${all ? `in all ${N_STYLES} styles` : `in ${styles.length} of its ${N_STYLES} styles`}.`}</figcaption></figure>`
 }
 
 /** Same icons at several sizes, for sizing posts. */
 export function sizeRamp(names, sizes = [16, 20, 24, 32, 48], style = 'line', caption = '') {
   const cols = sizes.map(sz => `<div class="b-ramp__col"><div class="b-ramp__icons">${names.map(n => icon(n, style, sz)).join('')}</div><span>${sz}px</span></div>`).join('')
   return `<figure class="b-ramp"><div class="b-ramp__row">${cols}</div>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`
+}
+
+// ---------------------------------------------------------------- motion (the site's own runtime, never a CDN)
+// Posts that use these blocks get the site's local copy of @withicons/motion (../vendor/motion/motion.css + motion.js);
+// build.mjs adds it only to pages whose body contains a `wm` element. Each icon's own motion comes from its spec in
+// forge/motion/<name>.json (the same source as the site's icons.css), written inline as CSS variables, so loops and
+// hovers already play with the stylesheet alone; blog.js then hands each one to the runtime (hover that finishes,
+// `draw` strokes, pausing off-screen) and wires the pause / play controls. Everything stays still under reduced motion.
+const MOTION_DIR = path.join(HERE, '..', '..', 'forge', 'motion')
+const SPECS = new Map()
+export function motionSpec(name) {
+  if (!SPECS.has(name)) {
+    const f = path.join(MOTION_DIR, `${name}.json`)
+    SPECS.set(name, fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null)
+  }
+  return SPECS.get(name)
+}
+const slotOnly = (vars, slot) => Object.entries(vars).filter(([k]) => k === `--wm${slot}` || k.startsWith(`--wm${slot}-`)).map(([k, v]) => `${k}:${v}`).join(';')
+/** An icon wrapped so it moves with its own motion: trigger 'loop' (always) or 'hover' (hover, focus or tap). */
+export function moving(name, style = 'line', size = 24, trigger = 'loop', { label } = {}) {
+  const spec = motionSpec(name)
+  if (!spec) throw new Error(`blog: icon "${name}" has no motion spec in forge/motion/`)
+  const slot = trigger === 'loop' ? 'L' : 'H'
+  const runtime = { loop: spec.loop, hover: spec.hover, ...(spec.parts ? { parts: spec.parts } : {}), ...(spec.deco ? { deco: spec.deco } : {}) }
+  return `<span class="wm wm-${trigger}" data-wm-trigger="${trigger}" data-wm-spec="${esc(JSON.stringify(runtime))}" style="${slotOnly(specVars(spec), slot)}">${icon(name, style, size, { label })}</span>`
+}
+/**
+ * Tiles whose icons really move, with their own motion. trigger 'loop' plays continuously (with a pause button, as
+ * WCAG 2.2.2 asks); 'hover' plays once on hover, keyboard focus or tap.
+ *   motionGrid(['loader', 'bell-ring', 'heart'], 'duo', 'Caption', { trigger: 'loop' })
+ */
+export function motionGrid(names, style = 'line', caption = '', { size = 40, trigger = 'loop', links = true } = {}) {
+  const tiles = names.map(n => {
+    const inner = `${moving(n, style, size, trigger)}<span>${esc(n)}</span>`
+    return links ? `<a class="b-tile wm-trigger" href="${iconHref(n)}">${inner}</a>` : `<span class="b-tile wm-trigger">${inner}</span>`
+  }).join('')
+  return `<figure class="b-icons b-icons--${style} b-motion" data-motion="${trigger}"><div class="b-icons__grid">${tiles}</div>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`
+}
+/**
+ * "Turn into" pairs: tap (or click) a tile to switch, using the effect from the first icon's spec.
+ *   swapGrid([['play', 'pause'], ['heart', 'heart@solid']], 'line', 'Caption')
+ */
+export function swapGrid(pairs, style = 'line', caption = '', { size = 40 } = {}) {
+  const tiles = pairs.map(([a, b, fx]) => {
+    const [bn, bs] = b.split('@')
+    const effect = fx || motionSpec(a)?.swap?.find(s => s.to === b)?.effect || 'fade'
+    const name = bs ? `${bn} (${bs})` : bn
+    return `<button type="button" class="b-tile b-swap wm-trigger" data-swap aria-label="Switch ${esc(a)} to ${esc(name)}"><span class="wm-swap wm-fx-${effect}" data-fx="${effect}"><span class="wm-a">${icon(a, style, size)}</span><span class="wm-b">${icon(bn, bs || style, size)}</span></span><span>${esc(a)} <i aria-hidden="true">→</i> ${esc(name)}</span></button>`
+  }).join('')
+  return `<figure class="b-icons b-icons--${style} b-motion b-motion--swap" data-motion="swap"><div class="b-icons__grid">${tiles}</div>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`
 }
 
 // ---------------------------------------------------------------- media
@@ -100,7 +152,12 @@ export function steps(items) {
 
 /** Comparison table. cols: header labels; rows: arrays of cells (HTML). Use yes()/no()/meh() in cells. */
 export function table(cols, rows, caption = '') {
-  return `<figure class="b-table"><div class="b-table__scroll" tabindex="0" role="region" aria-label="${esc(caption || 'Comparison table')}"><table>${caption ? `<caption>${caption}</caption>` : ''}<thead><tr>${cols.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => i === 0 ? `<th scope="row">${c}</th>` : `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div></figure>`
+  // data-label: the column name a cell shows when a phone stacks each row into a card; --cols sets the table's minimum width
+  const label = c => esc(String(c).replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim())
+  const head = `<thead><tr>${cols.map(c => `<th scope="col">${c}</th>`).join('')}</tr></thead>`
+  const body = `<tbody>${rows.map(r => `<tr>${r.map((c, i) => i === 0 ? `<th scope="row">${c}</th>` : `<td data-label="${label(cols[i] ?? '')}"><span>${c}</span></td>`).join('')}</tr>`).join('')}</tbody>`
+  const hint = `<p class="b-table__hint" aria-hidden="true">${icon('arrow-right', 'line', 14)}</p>`
+  return `<figure class="b-table${cols.length >= 5 ? ' b-table--many' : ''}">${hint}<div class="b-table__box"><div class="b-table__scroll" tabindex="0" role="region" aria-label="${esc(caption.replace(/<[^>]+>/g, '') || 'Comparison table')}"><table style="--cols:${cols.length}">${caption ? `<caption>${caption}</caption>` : ''}${head}${body}</table></div><span class="b-table__fade" aria-hidden="true"></span></div></figure>`
 }
 export const yes = (t = '') => `<span class="b-mark b-mark--yes">${icon('check-circle', 'solid', 18, { label: 'Yes' })}${t ? ` ${t}` : ''}</span>`
 export const no = (t = '') => `<span class="b-mark b-mark--no">${icon('x-circle', 'line', 18, { label: 'No' })}${t ? ` ${t}` : ''}</span>`

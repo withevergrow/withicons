@@ -365,13 +365,19 @@
 .vw-sw.is-custom svg { width: 15px; height: 15px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .4)) }
 
 /* range inputs (shared by the toolbar and the viewer) */
-.vw-range { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: none; cursor: pointer; --fill: 50%; }
-.vw-range::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sc, var(--acc)) var(--fill), var(--l-card-3) var(--fill)); }
-.vw-range::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sc, var(--acc)) var(--fill), var(--l-card-3) var(--fill)); }
-.vw-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: #fff; border: 2px solid var(--sc, var(--acc)); box-shadow: 0 2px 8px rgba(0, 0, 0, .25); transition: transform .15s }
-.vw-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid var(--sc, var(--acc)); box-shadow: 0 2px 8px rgba(0, 0, 0, .25) }
-.vw-range:active::-webkit-slider-thumb { transform: scale(1.15) }
-.vw-range:disabled { opacity: .4; cursor: not-allowed }
+.vw-range:not(.wk-sld-in) { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: none; cursor: pointer; --fill: 50%; }
+.vw-range:not(.wk-sld-in)::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sc, var(--acc)) var(--fill), var(--l-card-3) var(--fill)); }
+.vw-range:not(.wk-sld-in)::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sc, var(--acc)) var(--fill), var(--l-card-3) var(--fill)); }
+.vw-range:not(.wk-sld-in)::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: #fff; border: 2px solid var(--sc, var(--acc)); box-shadow: 0 2px 8px rgba(0, 0, 0, .25); transition: transform .15s }
+.vw-range:not(.wk-sld-in)::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid var(--sc, var(--acc)); box-shadow: 0 2px 8px rgba(0, 0, 0, .25) }
+.vw-range:not(.wk-sld-in):active::-webkit-slider-thumb { transform: scale(1.15) }
+.vw-range:not(.wk-sld-in):disabled { opacity: .4; cursor: not-allowed }
+/* ...drawn by our own slider (css/ui-kit.css, window.WIKit) once it loads: same accent, track and size */
+.wk-slider:has(> .vw-range) { --wk-accent: var(--sc, var(--acc)); block-size: 32px; min-inline-size: 0 }
+.wk-slider:has(> .vw-range) .wk-sld-track { background: var(--l-card-3) }
+.wk-slider:has(> .vw-range).is-disabled { opacity: .4 }
+.swatches .sw.is-custom:has(input:focus-visible), .vw-sw.is-custom:has(input:focus-visible) { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px }
+@media (pointer: coarse) { .wk-slider:has(> .vw-range) { block-size: 44px } }
 
 /* ─────────── body layout ─────────── */
 .lib-body {
@@ -1018,9 +1024,9 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
   .tools-dot { forced-color-adjust: none; border: 1px solid CanvasText }
   .vw-check-ui { border: 1px solid CanvasText; background: Canvas }
   .vw-check input:checked + .vw-check-ui { background: Highlight }
-  .vw-range { appearance: auto; -webkit-appearance: auto }
-  .vw-range::-webkit-slider-runnable-track { background: ButtonText }
-  .vw-range::-moz-range-track { background: ButtonText }
+  .vw-range:not(.wk-sld-in) { appearance: auto; -webkit-appearance: auto }
+  .vw-range:not(.wk-sld-in)::-webkit-slider-runnable-track { background: ButtonText }
+  .vw-range:not(.wk-sld-in)::-moz-range-track { background: ButtonText }
   .lib :focus-visible, .lib-selbar :focus-visible, .tile:focus-visible { outline: 3px solid CanvasText; outline-offset: 3px }
 }
 /* iOS Safari zooms the page into any focused field under 16px */

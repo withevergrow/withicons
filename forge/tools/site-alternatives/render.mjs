@@ -78,7 +78,7 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
       </div>
       <div class="ax-pick-row">
         <div class="ax-seg ax-acts" role="group" aria-label="When I click an icon">${actions.map((a, i) => `<button type="button" class="ax-act" data-pick-act="${a}" aria-pressed="${i === 0}">${I(ACT[a][1], 'line', 16)}${esc(ACT[a][0])}</button>`).join('')}</div>
-        ${colors ? `<div class="ax-colors" role="group" aria-label="Colour">${COLORS.map(([n, c], i) => `<button type="button" class="ax-sw" data-pick-color="${c}" style="--sw:${c}" aria-pressed="${i === 0}" title="${n}"><span class="pg-sr">${n}</span></button>`).join('')}<label class="ax-sw ax-sw-custom" title="Any colour"><span class="pg-sr">Any colour</span><input type="color" value="#111318" data-pick-custom></label></div>` : ''}
+        ${colors ? `<div class="ax-colors" role="group" aria-label="Colour">${COLORS.map(([n, c], i) => `<button type="button" class="ax-sw" data-pick-color="${c}" style="--sw:${c}" aria-pressed="${i === 0}" title="${n}"><span class="pg-sr">${n}</span></button>`).join('')}<label class="ax-sw ax-sw-custom" title="Any colour"><span class="pg-sr">Any colour</span><input type="color" value="#111318" data-pick-custom data-wikit></label></div>` : ''}
         ${pxs.length ? `<div class="ax-seg ax-px" role="group" aria-label="PNG size">${pxs.map(x => `<button type="button" class="ax-act" data-pick-px="${x}" aria-pressed="${x === px}">${x} px</button>`).join('')}</div>` : ''}
       </div>
     </div>

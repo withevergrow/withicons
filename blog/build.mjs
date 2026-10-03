@@ -110,7 +110,7 @@ const ORG = { '@type': 'Organization', name: 'with icons', url: `${SITE}/`, logo
 // The Journal wears the main site's chrome: same head assets (tokens, chrome, pages CSS + site.js), the real
 // header and the footer from site/DESIGN.md (forge/tools/site-pages/lib.mjs), so it always matches the site.
 const AUTHOR = { name: 'The Evergrow team', url: 'https://withevergrow.com' }
-function head({ title, description, canonical, image, imageAlt, type = 'article', ld, extra = '' }) {
+function head({ title, description, canonical, image, imageAlt, type = 'article', ld, extra = '', styles = [] }) {
   return `<!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -146,7 +146,8 @@ ${extra}  <meta name="theme-color" content="#FBF8F3" media="(prefers-color-schem
   <link rel="stylesheet" href="../css/chrome.css">
   <link rel="stylesheet" href="../css/pages.css">
   <link rel="stylesheet" href="assets/blog.css">
-  <link rel="alternate" type="application/rss+xml" title="with icons Journal" href="feed.xml">
+${styles.map(h => `  <link rel="stylesheet" href="${h}">
+`).join('')}  <link rel="alternate" type="application/rss+xml" title="with icons Journal" href="feed.xml">
   <link rel="alternate" type="text/plain" title="llms.txt" href="llms.txt">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../brand/apple-touch-icon.png">
@@ -156,9 +157,15 @@ ${ld.map(o => `  <script type="application/ld+json">${json(o)}</script>`).join('
 }
 const header = () => siteHeader('../', '')
 const footer = () => siteFooter('../')
-const scripts = () => `<script src="../js/site.js" defer></script>
+const scripts = (extra = []) => `<script src="../js/site.js" defer></script>
 <script src="../js/pages.js" defer></script>
-<script src="assets/blog.js" defer></script>`
+${extra.map(src => `<script src="${src}" defer></script>
+`).join('')}<script src="assets/blog.js" defer></script>`
+// Posts with moving icons (blocks.mjs moving / motionGrid / swapGrid) load the site's own copy of the motion runtime,
+// never a CDN: the stylesheet with every preset and the small script (hover that finishes, draw strokes, off-screen pause).
+// Each icon's own motion is written inline by the blocks, so the 500-icon spec table (data/motion.js) is not needed.
+const MOTION_CSS = '../vendor/motion/motion.css', MOTION_JS = '../vendor/motion/motion.js'
+const needsMotion = html => /class="(?:wm |wm-swap )/.test(html)
 // one style accent per section, like the guides: --g colour, --gt AA text, --gs soft tint, --go ink on the colour
 const CAT_STYLE = { comparisons: 'line', guides: 'solid', basics: 'duo', ai: 'gloss' }
 const accent = cat => `--g:${cvar(CAT_STYLE[cat] || 'line')}`
@@ -260,7 +267,9 @@ function article(p) {
   ]
   const stickers = stickerFor(p).map(([n, s]) => `<span class="sticker" data-style="${s}">${icon(n, s, 40)}</span>`).join('')
   const share = `<div class="share"><button type="button" data-copy-link>${icon('link', 'line', 16)}<span>Copy link</span></button><a href="https://x.com/intent/post?url=${encodeURIComponent(url)}&amp;text=${encodeURIComponent(p.title)}" rel="noopener">${icon('share', 'line', 16)}Share</a></div>`
-  return `${head({ title: p.seoTitle || brandTitle(p.title), description: p.description, canonical: url, image: ogImage(p.hero), imageAlt: IMAGES[p.hero].alt, ld,
+  const motion = needsMotion(p.html)
+  const tocItems = `${p.toc.map(t => `<li><a class="toc-l" href="#${t.id}">${t.text}</a></li>`).join('')}<li><a class="toc-l" href="#faq">FAQ</a></li>`
+  return `${head({ title: p.seoTitle || brandTitle(p.title), description: p.description, canonical: url, image: ogImage(p.hero), imageAlt: IMAGES[p.hero].alt, ld, styles: motion ? [MOTION_CSS] : [],
     extra: `<meta property="article:published_time" content="${p.date}T09:00:00+00:00">\n<meta property="article:modified_time" content="${checked}T09:00:00+00:00">\n<meta property="article:section" content="${CATS[p.category]}">\n${(p.keywords || []).slice(0, 6).map(k => `<meta property="article:tag" content="${esc(k)}">\n`).join('')}` })}
 <body class="pg j-blog">
 ${header()}
@@ -285,8 +294,9 @@ ${header()}
       </figure>
     </div>
     <div class="j-wrap a-layout">
-      <nav class="toc" aria-label="On this page"><h2>On this page</h2><ol>${p.toc.map(t => `<li><a class="toc-l" href="#${t.id}">${t.text}</a></li>`).join('')}<li><a class="toc-l" href="#faq">FAQ</a></li></ol>${share}</nav>
+      <nav class="toc" aria-label="On this page"><h2>On this page</h2><ol>${tocItems}</ol>${share}</nav>
       <div class="prose">
+        <details class="toc-m"><summary>On this page <span>${p.toc.length + 1} sections</span></summary><nav aria-label="On this page (folded)"><ol>${tocItems}</ol></nav></details>
         ${p.html}
         <section class="j-faq" aria-labelledby="faq"><h2 id="faq">Frequently asked questions</h2>
           ${p.faq.map(({ q, a }) => `<details class="pg-qa"><summary>${esc(q)}</summary><div>${a.startsWith('<') ? a : `<p>${a}</p>`}</div></details>`).join('\n          ')}
@@ -302,7 +312,7 @@ ${header()}
   </div>
 </main>
 ${footer()}
-${scripts()}
+${scripts(motion ? [MOTION_JS] : [])}
 </body>
 </html>
 `
@@ -398,6 +408,7 @@ fs.mkdirSync(IMG, { recursive: true })
     if (!fs.existsSync(b) || fs.statSync(b).size !== fs.statSync(a).size) fs.copyFileSync(a, b)
   } }
 for (const p of posts) fs.writeFileSync(path.join(OUT, `${p.slug}.html`), article(p))
+if (posts.some(p => needsMotion(p.html))) for (const f of [MOTION_CSS, MOTION_JS]) if (!fs.existsSync(path.join(OUT, f))) warnings.push(`missing motion runtime site/blog/${f} (run node forge/build.mjs)`)
 fs.writeFileSync(path.join(OUT, 'index.html'), index())
 for (const k of Object.keys(HUBS)) if (posts.some(p => p.category === k)) fs.writeFileSync(path.join(OUT, HUBS[k].file), hubPage(k))
 copyLicenses(path.join(OUT, 'assets', 'licenses'))

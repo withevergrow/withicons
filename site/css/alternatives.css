@@ -72,6 +72,12 @@
 .ax-sw[aria-pressed="true"] { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent), 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
 .ax-sw-custom { background: conic-gradient(var(--c-solid), var(--sun), var(--c-sketch), var(--c-blueprint), var(--c-line), var(--c-duo), var(--c-gloss), var(--c-solid)); overflow: hidden; }
 .ax-sw-custom input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+/* "Any colour" opens the in-house picker (js/ui-kit.js); once used, the dot shows the chosen colour inside the rainbow ring */
+.ax-sw-custom::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--sw, transparent); opacity: 0; transform: scale(.4); transition: opacity .15s, transform .3s var(--e-spring); pointer-events: none; }
+.ax-sw-custom.is-set::before { opacity: 1; transform: none; }
+.ax-sw-custom.is-set { overflow: visible; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent), 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
+.ax-sw-custom:focus-within { outline: 2.5px solid var(--focus-ring); outline-offset: 5px; }
+.ax-sw-custom:has(input:not(:focus-visible)):focus-within { outline: none; }
 .ax-pick-status { margin: 14px 2px 10px; font-size: var(--step--1); color: var(--muted); min-height: 1.5em; }
 .ax-pick-status b { color: var(--ink); }
 .ax-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }

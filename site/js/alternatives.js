@@ -118,7 +118,14 @@
       b.addEventListener('click', function () { st.color = b.getAttribute('data-pick-color'); st.colorSet = true; press('[data-pick-color]', b); paint() })
     })
     var custom = $('[data-pick-custom]', box)
-    if (custom) custom.addEventListener('input', function () { st.color = custom.value; st.colorSet = true; press('[data-pick-color]', null); paint() })
+    var customSw = custom && custom.closest('.ax-sw-custom')
+    if (custom) custom.addEventListener('input', function () {
+      st.color = custom.value; st.colorSet = true; press('[data-pick-color]', null)
+      // the "Any colour" dot shows the chosen colour (the picker itself is the in-house one, js/ui-kit.js)
+      if (customSw) { customSw.style.setProperty('--sw', custom.value); customSw.classList.add('is-set') }
+      paint()
+    })
+    $$('[data-pick-color]', box).forEach(function (b) { b.addEventListener('click', function () { if (customSw) customSw.classList.remove('is-set') }) })
     $$('[data-pick-px]', box).forEach(function (b) {
       b.addEventListener('click', function () { st.px = +b.getAttribute('data-pick-px'); press('[data-pick-px]', b) })
     })

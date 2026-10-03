@@ -687,10 +687,25 @@
 .try-controls { display: grid; gap: 10px; }
 .try-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .try-row .chip { min-height: 30px; padding: 0 11px; font-size: 12.5px; }
-.sw { width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 2px solid var(--card); background: var(--sw); cursor: pointer; box-shadow: 0 0 0 1px var(--rule-strong); transition: transform .25s var(--e-spring); }
-.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
-.sw:hover { transform: scale(1.12); }
-.sw.auto { background: conic-gradient(var(--spectrum)); }
+.try-colors { align-items: center; gap: 7px; }
+.try-sw { position: relative; flex: none; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: var(--sw); cursor: pointer;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 18%, transparent); transition: transform .25s var(--e-spring), box-shadow .15s;
+  -webkit-tap-highlight-color: transparent; }
+.try-sw::after { content: ''; position: absolute; inset: -6px -4px; } /* a bigger touch target without bigger dots */
+.try-sw:hover { transform: scale(1.1); }
+.try-sw:active { transform: scale(.94); }
+.try-sw[aria-pressed="true"] { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 18%, transparent), 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
+.try-sw:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 5px; }
+.try-sw.is-auto { box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px color-mix(in srgb, var(--ink) 18%, transparent); }
+.try-sw.is-auto[aria-pressed="true"] { box-shadow: inset 0 0 0 3px var(--card), 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
+.try-sw-sep { flex: none; width: 1px; height: 22px; margin: 0 2px; background: var(--rule-strong); }
+.try-sw-custom { display: grid; place-items: center; color: var(--ink); background: conic-gradient(var(--spectrum)); }
+.try-sw-custom::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--card); transition: background-color .2s, inset .25s var(--e-spring); }
+.try-sw-custom.is-set::before { background: var(--sw); inset: 3px; }
+.try-sw-custom svg { position: relative; width: 14px; height: 14px; }
+.try-sw-custom.is-set svg { display: none; }
+.try-sw-custom[aria-expanded="true"] { transform: scale(1.1); }
+.try-hint { margin: -2px 0 0; font-size: 12.5px; line-height: 1.35; color: var(--muted); min-height: 1.35em; }
 .try-cards { display: grid; gap: 14px; }
 .try-card { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; column-gap: 18px; padding: 22px 24px; border-radius: var(--radius-l);
   background: var(--style-soft); }
@@ -1220,3 +1235,10 @@ body[data-page="home"] .site-footer { margin-top: 0; z-index: 3; }
 @media (max-width: 520px) { .lv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .lv-tile.is-live .lv-ic svg { animation: none; } .lv-tile { transition: none; } }
 html.reduced .lv-tile.is-live .lv-ic svg { animation: none; }
+@media (max-width: 420px) {
+  .try-colors { gap: 6px; }
+  .try-sw { width: 28px; height: 28px; }
+  .try-sw::after { inset: -8px -3px; }
+  .try-sw-sep { display: none; }
+}
+@media (max-width: 359px) { .try-sw[data-tc="#C9962B"] { display: none; } }

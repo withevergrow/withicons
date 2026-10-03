@@ -107,17 +107,17 @@
 .wied-range .wied-l { justify-content: space-between; margin: 0 }
 .wied-range output { font: 650 12.5px/1 var(--font-mono); letter-spacing: 0; text-transform: none; color: var(--ink) }
 .wied-range.is-off { opacity: .55 }
-.wied-range input { --p: 50%; -webkit-appearance: none; appearance: none; width: 100%; height: 32px; margin: 0; background: none; cursor: pointer }
-.wied-range input:disabled { cursor: not-allowed }
-.wied-range input::-webkit-slider-runnable-track { height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--sc) var(--p), var(--paper-3) var(--p)) }
-.wied-range input::-moz-range-track { height: 6px; border-radius: 6px; background: var(--paper-3) }
-.wied-range input::-moz-range-progress { height: 6px; border-radius: 6px; background: var(--sc) }
-.wied-range input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: var(--card); border: 2px solid var(--sc); box-shadow: 0 2px 8px -2px rgba(17, 19, 24, .35); transition: transform .2s var(--wd-spring) }
-.wied-range input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--sc) }
-.wied-range input:active::-webkit-slider-thumb { transform: scale(1.15) }
-.wied-range input:focus-visible { outline: 2px solid transparent; outline-offset: 4px; box-shadow: none }  /* transparent: invisible here, drawn in forced colours */
-.wied-range input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--focus-halo, #FFD23F); outline: 2px solid var(--focus-ring, #111318) }
-.wied-range input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--focus-halo, #FFD23F); outline: 2px solid var(--focus-ring, #111318) }
+.wied-range input:not(.wk-sld-in) { --p: 50%; -webkit-appearance: none; appearance: none; width: 100%; height: 32px; margin: 0; background: none; cursor: pointer }
+.wied-range input:not(.wk-sld-in):disabled { cursor: not-allowed }
+.wied-range input:not(.wk-sld-in)::-webkit-slider-runnable-track { height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--sc) var(--p), var(--paper-3) var(--p)) }
+.wied-range input:not(.wk-sld-in)::-moz-range-track { height: 6px; border-radius: 6px; background: var(--paper-3) }
+.wied-range input:not(.wk-sld-in)::-moz-range-progress { height: 6px; border-radius: 6px; background: var(--sc) }
+.wied-range input:not(.wk-sld-in)::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: var(--card); border: 2px solid var(--sc); box-shadow: 0 2px 8px -2px rgba(17, 19, 24, .35); transition: transform .2s var(--wd-spring) }
+.wied-range input:not(.wk-sld-in)::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--sc) }
+.wied-range input:not(.wk-sld-in):active::-webkit-slider-thumb { transform: scale(1.15) }
+.wied-range input:not(.wk-sld-in):focus-visible { outline: 2px solid transparent; outline-offset: 4px; box-shadow: none }  /* transparent: invisible here, drawn in forced colours */
+.wied-range input:not(.wk-sld-in):focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--focus-halo, #FFD23F); outline: 2px solid var(--focus-ring, #111318) }
+.wied-range input:not(.wk-sld-in):focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--focus-halo, #FFD23F); outline: 2px solid var(--focus-ring, #111318) }
 
 .wied-intent { margin: 0 0 20px; padding: 12px 14px; border-radius: 16px; background: color-mix(in srgb, var(--sc) 10%, var(--card)); border: 1px dashed color-mix(in srgb, var(--sc) 45%, var(--rule)); font: 500 15px/1.45 var(--font-sans); color: var(--ink-2, var(--ink)) }
 .wied-intent b { color: var(--ink) }
@@ -799,12 +799,12 @@
   .wied-tab-ink { display: none }
   .wied-tabs button[aria-selected="true"]::after { forced-color-adjust: none; background: Highlight }
   .wied-sizes .is-cur figcaption { forced-color-adjust: none; background: Highlight; color: HighlightText }
-  .wied-range input { appearance: auto; -webkit-appearance: auto }
-  .wied-range input::-webkit-slider-runnable-track { background: ButtonText }
+  .wied-range input:not(.wk-sld-in) { appearance: auto; -webkit-appearance: auto }
+  .wied-range input:not(.wk-sld-in)::-webkit-slider-runnable-track { background: ButtonText }
   .wied-flat-ui { border: 1px solid CanvasText }
   .wied-flat input:checked + .wied-flat-ui { forced-color-adjust: none; background: Highlight }
   .wied-flat input:checked + .wied-flat-ui::after { background: HighlightText }
-  .wied :focus-visible, .wied-cpanel :focus-visible, .wcp-sw:focus-within, .wied-range input:focus-visible { outline: 3px solid CanvasText; outline-offset: 3px }
+  .wied :focus-visible, .wied-cpanel :focus-visible, .wcp-sw:focus-within, .wied-range input:not(.wk-sld-in):focus-visible { outline: 3px solid CanvasText; outline-offset: 3px }
 }
 /* iOS Safari zooms the page into any focused field under 16px: keep typed fields at 16px on touch screens */
 @media (pointer: coarse) { .wied-hex, .wcp-hex, .wied-q input { font-size: 16px } }
@@ -913,3 +913,20 @@
 [data-theme="dark"] .wied[data-bg="light"] .wied-sizes { background: #F3EEE5; border-color: #2A2F3A; color: #111318 }
 [data-theme="dark"] .wied[data-bg="light"] .wied-sizes figcaption { color: #5F6573 }
 [data-theme="dark"] .wied[data-bg="light"] .wied-sizes .is-cur figcaption { color: var(--sc-on) }
+
+/* our own pickers (css/ui-kit.css + js/ui-kit.js, window.WIKit, loaded with the studio): sized and tinted like the studio.
+   Colour fields keep their swatch (the transparent native inside .wcp-sw / .wied-sw-custom / .wdl-pick anchors the popover). */
+.wied-range .wk-slider { --wk-accent: var(--sc); block-size: 36px; min-inline-size: 0 }
+.wied-range .wk-sld-track { background: var(--paper-3) }
+.wied-range.is-off .wk-slider { --wk-accent: var(--muted) }
+.wdl-num .wk-stepper { block-size: 38px; border-radius: 11px; border-color: var(--rule-strong); background: var(--paper-2); color: var(--ink) }
+.wdl-num .wk-stepper:focus-within { border-color: var(--dl-sc, var(--ink)); background: var(--card) }
+.wdl-num .wk-step { inline-size: 34px; color: var(--ink) }
+.wdl-num .wk-step-in { width: 7ch; height: 100%; font-size: 13.5px; color: var(--ink) }
+.wcp-sw:has(input:focus-visible), .wied-sw-custom:has(input:focus-visible), .wdl-pick:has(input:focus-visible) { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo, #FFD23F) }
+@media (pointer: coarse) {
+  .wied-range .wk-slider { block-size: 44px }
+  .wdl-num .wk-stepper { block-size: 44px }
+  .wdl-num .wk-step { inline-size: 44px }
+  .wdl-num .wk-step-in { font-size: 16px }
+}

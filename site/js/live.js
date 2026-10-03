@@ -78,6 +78,9 @@
   function remember(style) { try { localStorage.setItem(LS_STYLE, style) } catch (e) { } }
   function remembered() { try { return localStorage.getItem(LS_STYLE) } catch (e) { return null } }
   function qs(k) { try { return new URLSearchParams(location.search).get(k) } catch (e) { return null } }
+  // the in-house pickers (js/ui-kit.js, window.WIKit) instead of the browser's own: colour, time, dropdown, slider, stepper.
+  // The native control stays the value holder, so the listeners below keep working; without the kit nothing changes.
+  function kit(kind, el, o) { var K = W.WIKit; if (!K || !el || !K[kind]) return null; try { return K[kind](el, o || {}) } catch (e) { return null } }
   // roving tabindex + arrow keys for a radiogroup of buttons
   function radios(group, sel, onPick) {
     var items = $$(sel, group)
@@ -697,6 +700,15 @@
       var grid = $('[data-grid]', wrap), say = $('[data-say]', wrap), mon = $('[data-mon]', wrap), tip = $('[data-tip]', wrap)
       var picking = 'from', year = (L.now ? L.now().year : new Date().getFullYear())
       var MO = hasMonth ? P.month.options : null
+      // the month name opens a dropdown of all twelve (the kit's select); the arrows still step one month
+      var monSel = mon && kit('select', mon.parentNode, { label: 'Month', search: false, value: S.params.month,
+        options: MO.map(function (m) { return { value: m, label: MONTHS[m] || m } }), onChange: function (v) { goMonth(MO.indexOf(v)) } })
+      if (monSel) { mon.parentNode.insertBefore(monSel.combobox, mon); mon.remove(); mon = null }
+      function goMonth(i) {
+        S.params.month = MO[i]
+        var n = new Date(year, i + 1, 0).getDate(); if (S.params.day > n) S.params.day = n
+        changed(); paint()
+      }
       function mIndex() { return hasMonth ? Math.max(0, MO.indexOf(S.params.month)) : 0 }
       function daysIn() { return hasMonth ? new Date(year, mIndex() + 1, 0).getDate() : 31 }
       function build() {
@@ -721,7 +733,8 @@
           if (!days.some(function (el) { return el.tabIndex === 0 }) && days[0]) days[0].tabIndex = 0
           say.textContent = hasMonth ? v + ' ' + MONTHS[S.params.month] : String(v)
         }
-        if (mon) mon.textContent = MONTHS[S.params.month] || S.params.month
+        if (monSel) monSel.value = S.params.month
+        else if (mon) mon.textContent = MONTHS[S.params.month] || S.params.month
       }
       grid.addEventListener('click', function (e) {
         var b = e.target.closest('.lv-cal-d'); if (!b) return
@@ -743,12 +756,7 @@
         var t = $('.lv-cal-d[data-d="' + nd + '"]', grid); if (t) t.focus()
       })
       $$('[data-m]', wrap).forEach(function (b) {
-        b.addEventListener('click', function () {
-          var i = (mIndex() + +b.getAttribute('data-m') + 12) % 12
-          S.params.month = MO[i]
-          var n = new Date(year, i + 1, 0).getDate(); if (S.params.day > n) S.params.day = n
-          changed(); paint()
-        })
+        b.addEventListener('click', function () { goMonth((mIndex() + +b.getAttribute('data-m') + 12) % 12) })
       })
       return { el: wrap, keys: keys, sync: paint }
     }
@@ -783,6 +791,7 @@
       }
       ti.addEventListener('input', function () { if (/^\d{2}:\d{2}/.test(ti.value)) { set(k, ti.value.slice(0, 5)); paint() } })
       ti.addEventListener('blur', paint)
+      kit('timePicker', ti)
       $('[data-now]', wrap).addEventListener('click', function () { var t = L.now ? L.now().time : null; if (t) { set(k, t); paint() } })
       dial.addEventListener('keydown', function (e) {
         var d = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1, PageUp: 60, PageDown: -60 }[e.key]
@@ -821,7 +830,7 @@
       var step = p.steps ? 100 / p.steps : 1
       wrap.className = 'lv-field lv-lf'
       wrap.innerHTML = headHtml(id, p, '<output class="lv-out" for="' + id + '" data-out></output>', true) +
-        '<div class="lv-meter"><span class="lv-meter-fill" aria-hidden="true"></span><span class="lv-meter-ticks" aria-hidden="true"></span><input class="lv-meter-in" type="range" id="' + id + '" min="0" max="100" step="' + step + '"></div>'
+        '<div class="lv-meter"><span class="lv-meter-fill" aria-hidden="true"></span><span class="lv-meter-ticks" aria-hidden="true"></span><input class="lv-meter-in" type="range" id="' + id + '" min="0" max="100" step="' + step + '" data-wikit="off"></div>'
       var rg = $('input', wrap), out = $('[data-out]', wrap), meter = $('.lv-meter', wrap)
       // a level that only counts in manual mode (thermometer: the reading sets it unless Scale is Manual)
       var gate = P.scale && P.scale.options && P.scale.options.indexOf('manual') >= 0 ? $('.lv-meter', wrap) : null
@@ -843,7 +852,7 @@
       wrap.innerHTML = '<div class="lv-field-head"><span class="lv-field-label" id="' + id + '-l">Bar heights</span><span class="lv-field-hint">drag each bar</span></div>' +
         '<div class="lv-eq" role="group" aria-labelledby="' + id + '-l">' + keys.map(function (k, x) {
           var p = P[k], step = p.steps ? 100 / p.steps : 5
-          return '<label class="lv-eq-b" data-k="' + k + '"><span class="lv-eq-track"><span class="lv-eq-fill" aria-hidden="true"></span><input type="range" min="0" max="100" step="' + step + '" aria-label="Bar ' + (x + 1) + '"></span><b aria-hidden="true">' + (x + 1) + '</b></label>'
+          return '<label class="lv-eq-b" data-k="' + k + '"><span class="lv-eq-track"><span class="lv-eq-fill" aria-hidden="true"></span><input type="range" min="0" max="100" step="' + step + '" aria-label="Bar ' + (x + 1) + '" data-wikit="off"></span><b aria-hidden="true">' + (x + 1) + '</b></label>'
         }).join('') + '</div>'
       var bars = $$('.lv-eq-b', wrap)
       function paint() {
@@ -882,22 +891,29 @@
     function numField(k) {
       var p = P[k], id = 'lv-f' + (++uid), wrap = D.createElement('div'), min = p.min, mx = p.max, step = p.step || 1
       var slider = (mx - min) <= 120, picks = slider ? [] : exampleValues(k).filter(function (v) { return typeof v === 'number' }).sort(function (a, b) { return a - b })
+      // with the kit: its stepper (hold to repeat) and slider; without it: our own −/+ around the field
+      var hasKit = !!W.WIKit, numIn = '<input type="number" inputmode="' + (step % 1 ? 'decimal' : 'numeric') + '" id="' + id + '" min="' + min + '" max="' + mx + '" step="' + step + '">'
       wrap.className = 'lv-field lv-nf'
       wrap.innerHTML = headHtml(id, p, '<span class="lv-field-hint">' + esc(sayRange(p)) + '</span>', true) +
-        '<div class="lv-nf-row"><span class="lv-step"><button type="button" data-d="-1" aria-label="Less" tabindex="-1">' + minus + '</button><input type="number" inputmode="' + (step % 1 ? 'decimal' : 'numeric') + '" id="' + id + '" min="' + min + '" max="' + mx + '" step="' + step + '"><button type="button" data-d="1" aria-label="More" tabindex="-1">' + plus + '</button></span>' +
+        '<div class="lv-nf-row">' + (hasKit ? numIn : '<span class="lv-step"><button type="button" data-d="-1" aria-label="Less" tabindex="-1">' + minus + '</button>' + numIn + '<button type="button" data-d="1" aria-label="More" tabindex="-1">' + plus + '</button></span>') +
         (slider ? '<input class="lv-range" type="range" min="' + min + '" max="' + mx + '" step="' + step + '" aria-hidden="true" tabindex="-1">' : '') + '</div>' +
         (picks.length > 2 ? '<div class="lv-chips" role="group" aria-label="Quick picks for ' + esc(short(p.label).toLowerCase()) + '">' + picks.map(function (v) { return '<button type="button" class="lv-chip" data-v="' + v + '">' + v + '</button>' }).join('') + '</div>' : '')
       var rg = $('.lv-range', wrap), nb = $('input[type="number"]', wrap)
       function clamp(v) { v = Math.min(mx, Math.max(min, v)); return Math.round(v / step) * step }
+      function chips(v) { $$('.lv-chip', wrap).forEach(function (c) { c.setAttribute('aria-pressed', +c.getAttribute('data-v') === v ? 'true' : 'false') }) }
       function paint() {
         var v = S.params[k]
         if (rg) { rg.value = v; rg.style.setProperty('--p', ((v - min) / (mx - min || 1) * 100) + '%') }
         if (D.activeElement !== nb) nb.value = v
-        $$('.lv-chip', wrap).forEach(function (c) { c.setAttribute('aria-pressed', +c.getAttribute('data-v') === v ? 'true' : 'false') })
+        chips(v)
       }
       function put(v) { v = clamp(v); set(k, v); paint() }
       if (rg) rg.addEventListener('input', function () { put(parseFloat(rg.value)) })
-      nb.addEventListener('input', function () { var v = parseFloat(nb.value); if (!isNaN(v) && v >= min && v <= mx) { set(k, clamp(v)); if (rg) { rg.value = v; rg.style.setProperty('--p', ((v - min) / (mx - min || 1) * 100) + '%') } } })
+      nb.addEventListener('input', function () { var v = parseFloat(nb.value); if (!isNaN(v) && v >= min && v <= mx) { v = clamp(v); set(k, v); chips(v); if (rg) { rg.value = v; rg.style.setProperty('--p', ((v - min) / (mx - min || 1) * 100) + '%') } } })
+      if (hasKit) {
+        kit('stepper', nb)
+        if (rg && kit('slider', rg, { bubble: false })) rg.classList.remove('lv-range')
+      }
       nb.addEventListener('blur', paint)
       nb.addEventListener('keydown', function (e) { if (e.key === 'Enter') { put(parseFloat(nb.value) || 0); nb.select() } })
       $$('[data-d]', wrap).forEach(function (b) {
@@ -1303,16 +1319,27 @@
           return '<button type="button" class="lv-pal" role="radio" aria-checked="false" tabindex="-1" data-pal="' + esc(p.id) + '"><span class="lv-pal-art" style="' + esc(st) + '">' + svgOf(inner, S.style) + '</span><span class="lv-pal-t"><b>' + esc(p.name) + '</b><span class="lv-pal-dots" aria-hidden="true">' + ['c1', 'c2', 'c3', 'ink'].filter(function (r) { return p.colors[r] }).map(function (r) { return '<i style="background:' + p.colors[r] + '"></i>' }).join('') + '</span></span></button>'
         }).join('')
         $('[data-lv-sw-h]', sheet).textContent = isMulti ? 'Outline colour' : 'Colour'
-        swBox.innerHTML = swatchList().map(function (c) { return swBtn(c, 'lv-swb') }).join('') + '<label class="lv-swb is-custom" title="Pick any colour"><input type="color" data-lv-ink-custom value="' + hex6(inkHex() || '#111318') + '" aria-label="Any colour"><span></span></label>'
+        // the colour inputs are rebuilt only when the set of swatches / roles changes, else updated in place, so a picker
+        // that is open (the kit's popover hangs off its input) keeps working while the palette previews refresh
+        var swHtml = swatchList().map(function (c) { return swBtn(c, 'lv-swb') }).join('') + '<label class="lv-swb is-custom" title="Pick any colour"><input type="color" data-lv-ink-custom value="#111318" aria-label="Any colour"><span></span></label>'
+        if (swBox._html !== swHtml) { swBox._html = swHtml; swBox.innerHTML = swHtml; kit('colorPicker', $('[data-lv-ink-custom]', swBox), { label: 'Any colour' }) }
+        var custom = $('[data-lv-ink-custom]', swBox), cHex = hex6(inkHex() || '#111318')
+        if (custom.value.toUpperCase() !== cHex) custom.value = cHex
         roleSec.hidden = !isMulti
         if (isMulti) {
           var roles = ['ink'].concat(((W.WithPalette && W.WithPalette.ROLES) || []).filter(function (r) { return r !== 'ink' && roleVars[r] }))
           var labels = (W.WithPalette && W.WithPalette.ROLE_LABELS) || {}, ord = ['Main colour', 'Second colour', 'Third colour', 'Fourth colour'], n = 0
-          roleBox.innerHTML = roles.map(function (r) {
+          var cur = function (r) { return r === 'ink' ? (inkHex() || roleDefault.ink || inkDefault()) : (S.colors[r] || roleDefault[r] || '#888888') }
+          var roleHtml = roles.map(function (r) {
             var lab = /^c\d$/.test(r) ? ord[n++] : (labels[r] || r)
-            var cur = r === 'ink' ? (inkHex() || roleDefault.ink || inkDefault()) : (S.colors[r] || roleDefault[r] || '#888888')
-            return '<label class="lv-color"><input type="color" data-role="' + r + '" value="' + hex6(cur) + '" aria-label="' + esc(lab) + '"><i style="--sw:' + esc(cur) + '"></i><span>' + esc(lab) + '</span></label>'
+            return '<label class="lv-color"><input type="color" data-role="' + r + '" value="#888888" aria-label="' + esc(lab) + '"><i></i><span>' + esc(lab) + '</span></label>'
           }).join('')
+          if (roleBox._html !== roleHtml) { roleBox._html = roleHtml; roleBox.innerHTML = roleHtml; $$('input', roleBox).forEach(function (t) { kit('colorPicker', t) }) }
+          $$('input', roleBox).forEach(function (t) {
+            var c = cur(t.getAttribute('data-role')), h = hex6(c)
+            if (t.value.toUpperCase() !== h) t.value = h
+            t.nextElementSibling.style.setProperty('--sw', c)
+          })
         }
         if (colorsReset) colorsReset.hidden = !(S.ink || Object.keys(S.colors).length)
       }
@@ -1414,7 +1441,7 @@
     }
     var size = $('[data-lv-size]'), sizeOut = $('[data-lv-size-out]')
     function paintSize() { size.value = S.size; size.style.setProperty('--p', ((S.size - 16) / 240 * 100) + '%'); sizeOut.textContent = S.size + ' px' }
-    if (size) { paintSize(); size.addEventListener('input', function () { S.size = +size.value; paintSize(); codes(); writeUrl() }) }
+    if (size) { if (kit('slider', size, { bubble: false })) size.classList.remove('lv-range'); paintSize(); size.addEventListener('input', function () { S.size = +size.value; paintSize(); codes(); writeUrl() }) }
     var dev = $('[data-lv-dev]')
     function openDev() { if (dev && !dev.open) dev.open = true }
     $$('[data-lv-dev-jump]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); openDev(); var t = $('#developers'); if (t) t.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' }); if (history.replaceState) history.replaceState(null, '', '#developers') }) })
@@ -1632,7 +1659,12 @@
         else S.bg = v === 'none' ? null : v
         sheetText()
       })
-      if (bgIn) bgIn.addEventListener('input', function () { S.bg = bgIn.value.toUpperCase(); bgSw.style.setProperty('--sw', S.bg); sheetText() })
+      if (bgIn) {
+        bgIn.addEventListener('input', function () { S.bg = bgIn.value.toUpperCase(); bgSw.style.setProperty('--sw', S.bg); sheetText() })
+        // the kit's colour popover hangs off the "Colour" choice; when it closes, focus goes back there
+        kit('colorPicker', bgIn, { label: 'Background colour' })
+        bgIn.addEventListener('focus', function () { var c = $('[data-bgx="custom"]', bgSeg); if (c) c.focus() })
+      }
       // phones: drag the header down to close
       var dragH = $('[data-lv-sheet-drag]', sheet), y0 = null, dy = 0, t0 = 0
       dragH.addEventListener('pointerdown', function (e) {

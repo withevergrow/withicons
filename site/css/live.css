@@ -1007,3 +1007,23 @@ html.lv-sheet-open { overflow: hidden; }
   .lv-sb-ic { forced-color-adjust: none; }
 }
 @media print { .lv-peek { display: none; } }
+
+/* ───────── the in-house pickers (css/ui-kit.css, js/ui-kit.js) dressed for the studio ─────────
+   The time field, number stepper, sliders, month dropdown and colour popovers come from the kit; these rules only
+   size and tint them so they match the studio. The meter and the equaliser keep their own drawings. */
+.lv-tf-side .wk-time { inline-size: 100%; max-inline-size: 210px; min-block-size: 52px; border-width: 1.5px; border-radius: 14px;
+  font: 650 22px/1 var(--font-mono); letter-spacing: 0; }
+.lv-tf-side .wk-time-ic svg { inline-size: 20px; block-size: 20px; }
+.lv-nf .wk-stepper { flex: none; block-size: 52px; border-width: 1.5px; border-radius: 16px; }
+.lv-nf .wk-step { inline-size: 46px; }
+.lv-nf .wk-step svg { inline-size: 18px; block-size: 18px; }
+.lv-nf .wk-step-in { inline-size: 78px; font: 750 22px/1 var(--font-mono); }
+.lv-nf-row .wk-slider { flex: 1; min-inline-size: 80px; --wk-accent: var(--style); }
+.lv-dev-size .wk-slider { flex: 1; min-inline-size: 120px; --wk-accent: var(--sun); }
+.lv-dev-size .wk-sld-track { background: rgba(255, 255, 255, .16); box-shadow: none; }
+.lv-dev-size .wk-sld-thumb { background: #111318; border-color: var(--sun); }
+.lv-cal-mon .wk-select { flex: 1; justify-content: center; gap: 6px; min-inline-size: 0; min-block-size: 38px; padding: 0 10px; border: 0; border-radius: 12px;
+  background: transparent; font: 750 17px/1 var(--font-display); letter-spacing: -.01em; }
+.lv-cal-mon .wk-select .wk-select-v { flex: 0 1 auto; }
+.lv-cal-mon .wk-select:hover, .lv-cal-mon .wk-select[aria-expanded="true"] { background: var(--card); box-shadow: var(--shadow-s); }
+.lv-bgx-in { pointer-events: none; }

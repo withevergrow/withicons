@@ -241,6 +241,19 @@
     if (loading[src]) return loading[src]
     return (loading[src] = new Promise(function (ok) { var s = D.createElement('script'); s.src = src; s.async = true; s.onload = function () { ok(true) }; s.onerror = function () { ok(false) }; D.head.appendChild(s) }))
   }
+  /* our own pickers (css/ui-kit.css + js/ui-kit.js, window.WIKit) replace the browser's colour dialog, sliders and number
+     spinners. They load with the studio (never before it), from wherever this script was loaded; a page that already
+     carries the kit (the library) just reuses it. */
+  var kitP = null
+  function loadKit() {
+    if (W.WIKit) return Promise.resolve(W.WIKit)
+    if (kitP) return kitP
+    var css = new Promise(function (ok) {
+      if (D.querySelector('link[href$="ui-kit.css"]')) { ok(); return }
+      var l = D.createElement('link'); l.rel = 'stylesheet'; l.href = siteUrl('css/ui-kit.css'); l.onload = l.onerror = function () { ok() }; D.head.appendChild(l)
+    })
+    return (kitP = Promise.all([css, loadScript(siteUrl('js/ui-kit.js'))]).then(function () { return W.WIKit || null }))
+  }
   function svgStore(style) { var s = W.WITH_SVG || W.EGI_SVG; return s && s[style] }
   function loadStyleData(style) {
     if (svgStore(style)) return Promise.resolve(true)
@@ -712,6 +725,7 @@
     function colorPanel(el, k) {
       var P = { el: el, k: k === 'b' ? 'b' : 'a', key: '', gkey: '', filter: '', more: false, id: uid + '-cp' + panels.length }
       el.classList.add('wied-cpanel')
+      kitWatch(el)
       function sb() { return subj(P.k) }
       function shell(rows) {
         return '<div class="wcp-head"><p class="wied-l" id="' + P.id + '-l">Colours <small>every part, in every download</small></p>' +
@@ -756,7 +770,7 @@
           var v = rowValue(r, cz, s), pick = $('[data-cp-pick]', row), hx = $('[data-cp-hex]', row)
           row.style.setProperty('--c', v)
           row.classList.toggle('is-set', r.key in tw)
-          if (D.activeElement !== pick) pick.value = v.toLowerCase()
+          if (D.activeElement !== pick && pick.value !== v.toLowerCase()) pick.value = v.toLowerCase()
           if (D.activeElement !== hx) { hx.value = v; hx.removeAttribute('aria-invalid') }
           $('[data-cp-reset]', row).disabled = !(r.key in tw)
         })
@@ -825,7 +839,7 @@
       }
       function onOut(e) { var t = e.target; if (t.hasAttribute && t.hasAttribute('data-cp-hex')) setTimeout(update, 0) }
       el.addEventListener('click', onClick); el.addEventListener('input', onInput); el.addEventListener('change', onChange); el.addEventListener('keydown', onKey); el.addEventListener('focusout', onOut)
-      var api2 = { el: el, k: P.k, update: update, destroy: function () { el.removeEventListener('click', onClick); el.removeEventListener('input', onInput); el.removeEventListener('change', onChange); el.removeEventListener('keydown', onKey); el.removeEventListener('focusout', onOut); panels = panels.filter(function (x) { return x !== api2 }); el.innerHTML = ''; el.classList.remove('wied-cpanel') } }
+      var api2 = { el: el, k: P.k, update: update, destroy: function () { el.removeEventListener('click', onClick); el.removeEventListener('input', onInput); el.removeEventListener('change', onChange); el.removeEventListener('keydown', onKey); el.removeEventListener('focusout', onOut); panels = panels.filter(function (x) { return x !== api2 }); kitUnwatch(el); el.innerHTML = ''; el.classList.remove('wied-cpanel') } }
       panels.push(api2)
       update()
       return api2
@@ -852,7 +866,7 @@
         $$('[data-mono-c]', g).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-mono-c') === v) })
         var sty = $('.is-style', g); if (sty && st) sty.style.setProperty('--sc', info(st).hex)
         var custom = $('.wied-sw-custom', g), isC = isHex(v) && !SWATCHES.some(function (c) { return c[0] === v })
-        custom.classList.toggle('is-on', isC); if (isC) $('[data-mono-pick]', g).value = v.toLowerCase()
+        custom.classList.toggle('is-on', isC); var mp = $('[data-mono-pick]', g); if (isC && mp.value !== v.toLowerCase()) mp.value = v.toLowerCase()
         var hx = $('[data-mono-hex]', g); if (D.activeElement !== hx) { hx.value = colorHex(st, v); hx.removeAttribute('aria-invalid') }
       })
     }
@@ -1168,6 +1182,72 @@
     host.innerHTML = ''
     host.appendChild(root)
     var built = false, ownPanel = null, offIO = null
+
+    /* ───────── our pickers (window.WIKit) ─────────
+       Every colour, range and number field the studio draws (here, in Colours panels and Download panels mounted
+       anywhere) becomes the kit's control as soon as it appears. The natives stay the value holders, so every input /
+       change listener below keeps working. Colour pickers suggest this icon's own colours and its palettes; the list is
+       refreshed each time a picker is about to open. */
+    var kitWatched = [], dead = false
+    function kitAdd(out, seen, c, n) {
+      c = String(c || '').toUpperCase(); if (/^#[0-9A-F]{3}$/.test(c)) c = '#' + c.slice(1).replace(/./g, '$&$&')
+      if (!isHex(c) || seen[c] || out.length >= 16) return
+      seen[c] = 1; out.push({ name: n, color: c })
+    }
+    function kitOpts(t) {
+      var out = [], seen = {}, add = function (c, n) { kitAdd(out, seen, c, n) }, k, s, label = 'Picked for ' + I.title
+      if ((k = t.getAttribute('data-cp-pick'))) {
+        // one part of a multi-colour icon: every colour it wears now, then this part's colour in each of its palettes
+        var pn = null; panels.forEach(function (p) { if (p.el.contains(t)) pn = p })
+        s = subj(pn ? pn.k : 'a'); if (!s) return {}
+        var cz = colorsFor(s.style, s.name, s.st)
+        rowsFor(s.style, s.name).forEach(function (r) { add(rowValue(r, cz, s), r.label) })
+        ;(palettesOf(s.name) || []).forEach(function (p) { var z = colorsOfPalette(p, s.style, s.name); if (z) add(k === 'ink' ? z.ink : z.vars[k], p.name) })
+        label = 'Picked for ' + s.title
+      } else if (t.hasAttribute('data-mono-pick')) {
+        var g = t.closest('[data-mono]'); s = subj(g ? g.getAttribute('data-mono') : 'a'); if (!s) return {}
+        add(info(s.style).hex, info(s.style).title + ' colour'); add(INK, 'Ink')
+        ;(palettesOf(s.name) || []).forEach(function (p) { if (p.colors) add(p.colors.c1, p.name) })
+        styleList().forEach(function (st) { add(info(st).hex, info(st).title) })
+        label = 'Picked for ' + s.title
+      } else if (t.hasAttribute('data-dl-pick')) {
+        // a background / edge colour for a download: this icon's colours first, then the preview's backgrounds
+        var cz2 = isMulti() ? colorsFor() : null
+        if (cz2) rowsFor(S.style).forEach(function (r) { add(rowValue(r, cz2), r.label) })
+        else add(colorHex(S.style), 'Icon colour')
+        add(info(S.style).hex, info(S.style).title + ' colour'); add(pageHex(), 'Preview background')
+        add('#FBF8F3', 'Paper'); add('#0D0F14', 'Night'); add(mixHex(info(S.style).hex, '#FBF8F3', 0.22), 'Tint')
+        label = 'From this icon'
+      } else return {}
+      return { palette: out, paletteLabel: label }
+    }
+    function kitColor(K, t) {
+      // the suggestions follow the icon: the kit reads them each time the picker opens. On phones the live preview is
+      // scrolled into view above the picker's sheet.
+      var lab = ''
+      K.colorPicker(t, {
+        palette: function () { var o = kitOpts(t); lab = o.paletteLabel || ''; return o.palette },
+        paletteLabel: function () { return lab },
+        preview: function () { return root.contains(t) && !t.hasAttribute('data-dl-pick') ? $('[data-art]', root) : null }
+      })
+    }
+    function kitScan(scope) {
+      var K = W.WIKit; if (!K || !scope || dead) return
+      $$('input[type=color]', scope).forEach(function (t) { if (!K.get(t)) kitColor(K, t) })
+      $$('input[type=range]', scope).forEach(function (r) { if (!K.get(r)) K.slider(r) })
+      $$('input[type=number]', scope).forEach(function (n) { if (!K.get(n)) K.stepper(n) })
+    }
+    function kitWatch(el) {
+      if (!el || kitWatched.some(function (w) { return w.el === el })) return
+      var w = { el: el, mo: null }; kitWatched.push(w)
+      loadKit().then(function (K) {
+        if (!K || dead || kitWatched.indexOf(w) < 0) return
+        kitScan(el)
+        if (W.MutationObserver) { w.mo = new MutationObserver(function () { kitScan(el) }); w.mo.observe(el, { childList: true, subtree: true }) }
+      })
+    }
+    function kitUnwatch(el) { kitWatched = kitWatched.filter(function (w) { if (w.el !== el && el) return true; if (w.mo) w.mo.disconnect(); return false }) }
+    kitWatch(host)
     function build() {
       var list = styleList()
       root.innerHTML =
@@ -2336,6 +2416,7 @@
         '</section>'
       }
       el.innerHTML = shell()
+      kitWatch(el)
       var sec = $('.wdl', el)
       function fmtBtn(f) {
         var d = DL_FMT[f] || [f, '', f.toUpperCase()], ok = avail(f)
@@ -2378,7 +2459,7 @@
           h += '<div class="wdl-o is-wide"><p class="wdl-l" id="' + id + '-o-size">' + (z.label || 'Size') + ' <small>' + esc(z.unit === 'in' ? 'inches' : z.unit === 'dp' ? 'dp (Android units)' : z.unit === 'pt' ? 'points' : 'pixels') + '</small></p>' +
             '<div class="wdl-seg is-sizes" data-n="' + (z.list.length + 1) + '" role="radiogroup" aria-labelledby="' + id + '-o-size">' + z.list.map(function (n) { var on = !custom && n === v; return '<button type="button" role="radio" data-dl-o="size" data-v="' + n + '" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '">' + fmtv(n) + '</button>' }).join('') +
               '<button type="button" role="radio" data-dl-o="size" data-v="custom" aria-checked="' + custom + '" tabindex="' + (custom ? 0 : -1) + '">Custom</button></div>' +
-            (custom ? '<label class="wdl-num"><span>Custom ' + esc((z.label || 'size').toLowerCase()) + '</span><input type="number" data-dl-num="' + k + '" min="' + z.min + '" max="' + z.max + '" step="' + (z.unit === 'in' ? 0.25 : 1) + '" value="' + v + '" inputmode="decimal"><span>' + z.unit + '</span></label>' : '') +
+            (custom ? '<label class="wdl-num"><span>Custom ' + esc((z.label || 'size').toLowerCase()) + '</span><input type="number" data-dl-num="' + k + '" min="' + z.min + '" max="' + z.max + '" step="' + (z.unit === 'in' ? 0.25 : 1) + '" value="' + v + '" inputmode="decimal" aria-label="Custom ' + esc((z.label || 'size').toLowerCase()) + ' in ' + z.unit + '"><span aria-hidden="true">' + z.unit + '</span></label>' : '') +
             (z.x2 ? '<button type="button" role="switch" class="wdl-switch" data-dl-x2 aria-checked="' + P.x2 + '"><span class="wdl-switch-ui" aria-hidden="true"></span><span><b>@2x for sharp screens</b><small>twice the pixels, same look on retina displays</small></span></button>' : '') +
             (z.hint ? '<p class="wdl-why">' + esc(z.hint) + '</p>' : '') + '</div>'
         }
@@ -2727,7 +2808,7 @@
           if (io) io.disconnect(); clearInterval(P.tick)
           sec.removeEventListener('click', onClick); sec.removeEventListener('keydown', onKey); sec.removeEventListener('keydown', onKeyField); sec.removeEventListener('input', onInput); sec.removeEventListener('change', onChange)
           sec.removeEventListener('pointerenter', onPointer); sec.removeEventListener('focusin', onPointer); sec.removeEventListener('focusout', onFocusOut)
-          dlPanels = dlPanels.filter(function (x) { return x !== api3 }); el.innerHTML = ''
+          dlPanels = dlPanels.filter(function (x) { return x !== api3 }); kitUnwatch(el); el.innerHTML = ''
         }
       }
       dlPanels.push(api3)
@@ -2762,6 +2843,7 @@
       on: function (ev, fn) { if (ev === 'change') subs.push(fn); return function () { subs = subs.filter(function (x) { return x !== fn }) } },
       placements: function (el) { place = placements(el, api); place.render(); return place },
       destroy: function () {
+        dead = true; kitUnwatch(null); if (W.WIKit) W.WIKit.close()
         stopAuto(); clearTimeout(demoT); panels.slice().forEach(function (p) { p.destroy() }); dlPanels.slice().forEach(function (p) { p.destroy() }); if (offIO) offIO.disconnect()
         root.removeEventListener('click', onClick); root.removeEventListener('keydown', onKey); root.removeEventListener('keydown', onKeyMono); root.removeEventListener('input', onInput); root.removeEventListener('change', onChange)
         unHost(); W.removeEventListener('resize', onResize); D.removeEventListener('visibilitychange', onVis); if (reducedMq.removeEventListener) reducedMq.removeEventListener('change', onMq)
@@ -2864,7 +2946,7 @@
     return { el: el, render: render, destroy: function () { el.removeEventListener('click', onClick); unHost(); if (keyRO) keyRO.disconnect(); if (el._wiKey) { el._wiKey = 0; el.removeAttribute('tabindex'); el.removeAttribute('role'); el.removeAttribute('aria-label') } if (offIO) offIO.disconnect(); el.classList.remove('wied-off'); el.innerHTML = '' } }
   }
 
-  var Editor = { version: '1.1.0', mount: mount, motionAttrs: motionAttrs, prepareDraw: prepareDraw, ensureMotionCss: ensureMotionCss, PRESETS: PRESETS, EFFECTS: EFFECTS.map(function (e) { return e[0] }), ORDER: ORDER, HEX: HEX, titleOf: titleOf, comp: comp }
+  var Editor = { version: '1.1.0', mount: mount, loadKit: loadKit, motionAttrs: motionAttrs, prepareDraw: prepareDraw, ensureMotionCss: ensureMotionCss, PRESETS: PRESETS, EFFECTS: EFFECTS.map(function (e) { return e[0] }), ORDER: ORDER, HEX: HEX, titleOf: titleOf, comp: comp }
   W.WithEditor = Editor
   /* hex code fields hold a full "#RRGGBB" at their 7-character limit: a click or tap that only placed the caret left no
      room to type, so the code is selected on focus and a new one simply replaces it (the click's mouseup would collapse
