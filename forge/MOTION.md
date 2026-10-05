@@ -91,9 +91,9 @@ Pure CSS, no JS required:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css"> <!-- per-icon defaults -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons/bell.css"> <!-- this icon's defaults; one file per animated icon (bundlers: @withicons/motion/icons.css has all) -->
 
-<!-- continuous: the icon's own loop (from icons.css) -->
+<!-- continuous: the icon's own loop (from icons/bell.css) -->
 <span class="wm wm-loop" data-wm="bell"> <svg …bell…/> </span>
 <!-- one-shot on hover/focus of the icon, or of any ancestor with .wm-trigger (e.g. a button) -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell"><svg…/></span> Notifications</button>

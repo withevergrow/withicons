@@ -18,7 +18,7 @@ import { parsePath, simplify, area, pointInRing, distToPolyline, arclen, bbox, r
 import * as F from './_sticker-field.mjs'
 import { subpaths, emit, raw, tp, splineD, sparkleD, heartD, starD } from './_sticker-path.mjs'
 import { colours, signalColour, VAR, EDGE, INK, SHINE, SHADOW } from './_sticker-tune.mjs'
-import { textInfo } from './_live-text.mjs'
+import { textInfo, glyphWeight } from './_live-text.mjs'
 
 export const K = {
   SCALE: 0.84,            // art scale about the centre
@@ -27,7 +27,7 @@ export const K = {
   TUBE: 2.0,              // candy tube core
   TUBE_O: 0.55,           // tube ink outline (each side)
   BORDER: 1.4,            // die-cut paper beyond the art
-  CLOSE: 1.4,             // closing radius: the die-cut ignores notches narrower than this
+  CLOSE: 1.4, CLOSE_LIVE: 2.2,             // closing radius: the die-cut ignores notches narrower than this
   SHADOW: [0.55, 0.8],    // drop-shadow offset
   SHADOW_OP: 0.22,
   HAIR: 0.32, HAIR_OP: 0.3,
@@ -36,6 +36,12 @@ export const K = {
   DOT: 2.7,               // closed shapes this small (art units) become candy dots
   DOT_O: 0.5,             // ...with this much ink ring               // a line point this far outside every fill is "outside the mass"
   BOX: [0.35, 23.65],     // everything (die-cut, shadow, sparkles) stays inside
+  // Live icons only (the skeleton carries params):
+  TUBE_GAP: 0.55,         // paper kept between a tube and every line it does not touch
+  TEXT_PAPER: 0,          // extra die-cut paper around text (each side)
+  TEXT_GIVE: 0.5,         // small text thins by this x (1 - scale) x cap (see inkW)
+  MERGE: 0.6,             // die-cut islands closer than this merge into one
+  TUBE_MIN: 1.45,         // a tube with less room than this is printed as an ink line
 }
 const LIGHT = (() => { const x = -0.55, y = -0.835, l = Math.hypot(x, y); return [x / l, y / l] })()
 
@@ -73,7 +79,8 @@ function read(icon) {
       const m = sp.cmds[0]
       if (!pts.length || (pts.length === 1)) pts = [[m[1], m[2]]]
       const closed = sp.closed && pts.length > 2
-      items.push({ sp, pts, closed, plate, pi, len: arclen(pts, closed), text: !!textInfo(p) })
+      const ti = textInfo(p)
+      items.push({ sp, pts, closed, plate, pi, len: arclen(pts, closed), text: !!ti, ch: ti?.ch, cap: ti?.cap })
     }
   }
   const fills = (icon.fills || []).map((f, fi) => {
@@ -178,11 +185,66 @@ export function build(icon) {
   const X = pts => pts.map(p => tp(T, p))
   const xl = l => ({ pts: X(l.pts), closed: l.closed })
 
+  // --- Live icons: a candy tube is only as fat as the room around it. A drawing made for a 1.75 line (wind gusts
+  // 2.5u apart, sun rays 1.3u off the disc) would fuse into one blob at full tube weight: each tube is slimmed to
+  // keep >= K.TUBE_GAP of paper to every line it does not touch, and one with too little room is printed as ink.
+  const FULL = K.TUBE + 2 * K.TUBE_O
+  for (const l of tubes) l.w = FULL
+  if (icon.params && tubes.length) {
+    const others = [...inks, ...tubes, ...dots]
+    for (const l of tubes) {
+      const P = densify(l.pts, 0.2, l.closed)
+      let w = FULL
+      for (const o of others) {
+        if (o === l) continue
+        let d = Infinity
+        for (const p of P) { const q = distToPolyline(p, o.pts, o.closed); if (q < d) d = q }
+        if (d < 0.15) continue // joined: one drawing
+        const ds = d * s
+        w = Math.min(w, tubes.includes(o) ? ds - K.TUBE_GAP : 2 * (ds - K.INK / 2 - K.TUBE_GAP))
+      }
+      // a short tube is a pill, not a tube (a 1u sun ray, the arms of a twinkle "+"): it gets at most 0.6x its length
+      l.w = Math.max(0, Math.min(w, 0.6 * l.len * s))
+    }
+    // tubes are one family (two rain streaks, three wind gusts): they share the slimmest width
+    const wMin = Math.min(...tubes.map(l => l.w))
+    for (const l of tubes) l.w = wMin
+    for (const l of tubes.filter(t => t.w < K.TUBE_MIN)) { tubes.splice(tubes.indexOf(l), 1); inks.push(l) }
+  }
+  const tubeOut = w => Math.max(0.35, Math.min(K.TUBE_O, w * 0.18))
+
   // --- the art silhouette as a distance field (final units)
-  const RE = K.BORDER + K.CLOSE + 0.3
+  // Live: a wider closing, so the die-cut never keeps a deep slot between parts (a two-row star rating, a sun's rays)
+  const CLOSE = icon.params ? K.CLOSE_LIVE : K.CLOSE
+  const RE = K.BORDER + CLOSE + 0.3
   const art = F.field(RE)
-  if (inks.length) F.strokes(inks.map(xl), K.INK, RE, art)
-  if (tubes.length) F.strokes(tubes.map(xl), K.TUBE + 2 * K.TUBE_O, RE, art)
+  // Live text: Line's weight at this scale (counters stay as open as in Line), and a little more paper around it so
+  // the die-cut edge never runs along a glyph
+  const glyphBox = new Map()
+  for (const l of inks) if (l.text) {
+    const b = glyphBox.get(l.pi) || { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity }
+    for (const [x, y] of l.pts) { b.x0 = Math.min(b.x0, x); b.y0 = Math.min(b.y0, y); b.x1 = Math.max(b.x1, x); b.y1 = Math.max(b.y1, y) }
+    glyphBox.set(l.pi, b)
+  }
+  // (the art is scaled by s < 1, which shrinks counters: small text gives back what the scale took from them)
+  // The art is scaled by s < 1, which shrinks small counters (a "9" at cap 4) below legibility: small text gives
+  // back K.TEXT_GIVE x (1 - s) x cap of weight. Not 4, 5 and S: their small drawings are near-closed hooks that Line's
+  // weight closes; thinned they would read differently from every other style.
+  // Live: a small filled shape outlined in ink (an earned star) keeps its colour: its ink goes UNDER the fill, so it
+  // only rims the shape instead of eating it
+  const under = new Set(icon.params ? inks.filter(l => {
+    if (l.text || !l.closed || !fillRings.length) return false
+    const b = bbox(l.pts)
+    if (Math.min(b.w, b.h) * s >= 4.5) return false
+    // its own fill (the outline traces it) that stands alone on the paper (not a wedge or a pip inside a face)
+    const own = fillRings.filter(r => r.every(p => distToPolyline(p, l.pts, true) < 0.2))
+    return own.length > 0 && own.every(r => !fillRings.some(o => o !== r && polyArea(o) > polyArea(r) && pointInRing(r[0], o)))
+  }) : [])
+  const inkW = l => !l.text || !icon.params ? K.INK
+    : +Math.max(1, Math.min(K.INK, s * glyphWeight({ ch: l.ch, cap: l.cap, box: glyphBox.get(l.pi) }, { base: K.INK / s })
+      - (l.cap < 6 && !'45S'.includes(l.ch) ? K.TEXT_GIVE * (1 - s) * l.cap : 0))).toFixed(2)
+  for (const l of inks) F.strokes([xl(l)], l.text && icon.params ? inkW(l) + 2 * K.TEXT_PAPER : K.INK, RE, art)
+  for (const l of tubes) F.strokes([xl(l)], l.w, RE, art)
   for (const f of baseFills) F.region(f.rings.map(X), RE, art)
   if (dots.length) { F.strokes(dots.map(xl), K.INK, RE, art); for (const l of dots) F.region([X(l.pts)], RE, art) }
   for (const b of badges) { F.region([X(b.pts)], RE, art); F.strokes([xl(b)], K.INK + 2 * K.HALO, RE, art) }
@@ -191,36 +253,51 @@ export function build(icon) {
 
   // --- die-cut = closing of the dilated silhouette, outer rings only
   const g = Float32Array.from(art)
-  F.offset(g, -(K.BORDER + K.CLOSE))
+  F.offset(g, -(K.BORDER + CLOSE))
   const l1 = F.contour(g).map(l => simplify(l, 0.004, true)).filter(l => l.length > 2)
   if (!l1.length) return null
-  const g2 = F.redistance(g, l1, K.CLOSE + 0.4)
-  F.offset(g2, K.CLOSE)
+  const g2 = F.redistance(g, l1, CLOSE + 0.4)
+  F.offset(g2, CLOSE)
   let rings = F.trace(g2, 0.004, 0.5)
+  if (icon.params && rings.length > 1) {
+    // Live: two die-cut islands that nearly touch (a row of stars) are one sticker: smoothing would overlap them
+    const near = rings.some((r, i) => rings.some((o, j) => j > i && r.some(p => distToPolyline(p, o, true) < K.MERGE)))
+    if (near) { F.offset(g2, -K.MERGE / 2); rings = F.trace(g2, 0.004, 0.5) }
+  }
   rings = rings.filter((r, i) => !rings.some((o, j) => j !== i && polyArea(o) > polyArea(r) && pointInRing(r[0], o)))
   const cut = rings.map(r => simplify(r, 0.08, true)).filter(r => r.length > 2)
   if (!cut.length) return null
 
   // --- decorations need the occupied area before we emit anything
   const shadowRings = cut.map(r => r.map(p => [p[0] + K.SHADOW[0], p[1] + K.SHADOW[1]]))
-  const decos = sparkles(cut, shadowRings, R, col)
+  const decos = sparkles(cut, shadowRings, R, col, !!icon.params)
 
   const nodes = []
   const cutD = cut.map(r => splineD(r)).join('')
   const shD = cut.map(r => splineD(r.map(p => [p[0] + K.SHADOW[0], p[1] + K.SHADOW[1]]))).join('')
   nodes.push(['path', { d: shD, fill: SHADOW, 'fill-opacity': K.SHADOW_OP, class: 'wm-shadow' }])
-  nodes.push(['path', { d: cutD, fill: EDGE, stroke: 'currentColor', 'stroke-opacity': K.HAIR_OP, 'stroke-width': K.HAIR }])
+  if (icon.params) {
+    // Live: the hairline sits on paper, never over the shadow (where the two stack, the die-cut edge reads as a dark
+    // seam that flickers along a reading whose length changes)
+    nodes.push(['path', { d: cutD, fill: EDGE, stroke: EDGE, 'stroke-width': fmt(2 * K.HAIR) }])
+    nodes.push(['path', { d: cutD, stroke: 'currentColor', 'stroke-opacity': K.HAIR_OP, 'stroke-width': K.HAIR }])
+  } else nodes.push(['path', { d: cutD, fill: EDGE, stroke: 'currentColor', 'stroke-opacity': K.HAIR_OP, 'stroke-width': K.HAIR }])
 
   // --- tubes that tuck behind the mass
   const C = n => VAR(n)
   const tubeCol = col.tune.tube || (baseFills.length ? col.accent : col.primary)
   const tubeNodes = list => {
     if (!list.length) return
-    const d = emit(list.map(l => l.sp), T)
-    nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O) }])
-    nodes.push(['path', { d, stroke: C(tubeCol), 'stroke-width': K.TUBE }])
+    const byW = new Map()
+    for (const l of list) { const k = fmt(l.w); if (!byW.has(k)) byW.set(k, []); byW.get(k).push(l) }
+    for (const [, ls] of [...byW].sort((a, b) => b[1][0].w - a[1][0].w)) {
+      const w = ls[0].w, d = emit(ls.map(l => l.sp), T)
+      nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(w) }])
+      nodes.push(['path', { d, stroke: C(tubeCol), 'stroke-width': fmt(w - 2 * tubeOut(w)) }])
+    }
   }
   tubeNodes(tubes.filter(l => !l.over && baseFills.length))
+  if (under.size) nodes.push(['path', { d: emit([...under].map(l => l.sp), T), stroke: INK, 'stroke-width': K.INK }])
   // --- fills
   const fc = col.tune.fillColours || {}
   const fcOf = f => fc[f.fi] === 'ink' ? INK : fc[f.fi] ? C(fc[f.fi]) : C(f.plate === 'A' && !col.tune.mono ? col.accent : col.primary)
@@ -261,7 +338,24 @@ export function build(icon) {
     nodes.push(['path', { d, fill: c, stroke: c, 'stroke-width': fmt(K.INK - 2 * K.DOT_O) }])
   }
   // --- ink
-  if (inks.length) nodes.push(['path', { d: emit(inks.map(l => l.sp), T), stroke: INK, 'stroke-width': K.INK }])
+  if (inks.length) {
+    const byW = new Map()
+    for (const l of inks) { if (under.has(l)) continue; const w = inkW(l); if (!byW.has(w)) byW.set(w, []); byW.get(w).push(l) }
+    for (const [w, ls] of byW) nodes.push(['path', { d: emit(ls.map(l => l.sp), T), stroke: INK, 'stroke-width': w }])
+  }
+  // --- Live: a battery's charge (one meandering A line that fills a rectangle) is printed as a candy cell inside
+  // its ink rim, so the level's moving edge is candy against ink: a 5% step shows at 24px
+  if (icon.params) {
+    const slabs = inks.filter(l => l.plate === 'A' && !l.closed && !l.text && l.pts.length >= 5 && l.pts.every((q, k) => !k || Math.abs(q[0] - l.pts[k - 1][0]) < 1e-6 || Math.abs(q[1] - l.pts[k - 1][1]) < 1e-6))
+    const cells = []
+    for (const l of slabs) {
+      const b = bbox(l.pts)
+      if (b.w < 0.5 || b.h < 0.5) continue
+      const r = K.INK / 2 / s - 0.42 / s, c = X([[b.x0 - r, b.y0 - r], [b.x1 + r, b.y0 - r], [b.x1 + r, b.y1 + r], [b.x0 - r, b.y1 + r]])
+      cells.push('M' + c.map(p => p.map(v => fmt(v)).join(' ')).join('L') + 'Z')
+    }
+    if (cells.length) nodes.push(['path', { d: cells.join(''), fill: C('lemon'), class: 'wm-a' }])
+  }
 
   // --- shine
   if (!col.tune.noShine) {
@@ -305,12 +399,13 @@ function shine(baseFills, tubes, inks, cutouts, sig, X, xl) {
     const primary = baseFills.filter(f => f.plate === 'K')
     for (const f of (primary.length ? primary : baseFills)) F.region(f.rings.map(X), M, Cf)
   } else {
-    Cf = F.strokes(tubes.map(xl), K.TUBE, M)
+    Cf = F.field(M)
+    for (const l of tubes) F.strokes([xl(l)], l.w - 2 * Math.max(0.35, Math.min(K.TUBE_O, l.w * 0.18)), M, Cf)
   }
   // keep clear of ink, tubes, panels and overlays
   const block = F.field(M)
   if (inks.length) F.strokes(inks.map(xl), K.INK + 0.5, M, block)
-  if (!onTube && tubes.length) F.strokes(tubes.map(xl), K.TUBE + 2 * K.TUBE_O + 0.5, M, block)
+  if (!onTube) for (const l of tubes) F.strokes([xl(l)], l.w + 0.5, M, block)
   if (!onTube && cutouts.length) { const c = F.region(cutouts.map(X), M); F.offset(c, -0.25); F.union(block, c) }
   if (sig.length) F.strokes(sig.map(xl), K.TUBE + 2 * K.TUBE_O + 2 * K.HALO + 0.4, M, block)
   const Fo = Float32Array.from(Cf)  // the colour area itself: its outer edge is what catches the light
@@ -377,7 +472,9 @@ function shine(baseFills, tubes, inks, cutouts, sig, X, xl) {
 
 // ---------------------------------------------------------------------------
 // SPARKLES: up to two in the free corners, never touching the sticker or its shadow
-function sparkles(cut, shadowRings, R, col) {
+// Live icons: one sparkle, in a top corner whenever one has room. The reading (usually low or right) changes size with
+// the value; a sparkle that hopped into the room a short reading leaves would flicker as the value changes.
+function sparkles(cut, shadowRings, R, col, live = false) {
   const [lo, hi] = K.BOX
   const GAP = 0.55, STEP = 0.32, REACH = 2.6
   // distance to the sticker and its shadow (union of two region fields)
@@ -395,7 +492,7 @@ function sparkles(cut, shadowRings, R, col) {
   }
   if (!cands.length) return []
   const quad = p => (p[0] > 12 ? 1 : 0) + (p[1] > 12 ? 2 : 0) // 0 TL, 1 TR, 2 BL, 3 BR
-  const pref = [0.25, 0.6, 0.35, 0]
+  const pref = live ? [1.25, 1.6, 0.35, 0] : [0.25, 0.6, 0.35, 0]
   const RMAX = 1.85
   let first = null
   for (const c of cands) {
@@ -408,7 +505,7 @@ function sparkles(cut, shadowRings, R, col) {
   const roll = R()
   const kind = t.deco || (roll < 0.14 ? 'heart' : roll < 0.26 ? 'star' : 'sparkle')
   const decoD = (k, p, r) => k === 'heart' ? heartD(p[0], p[1] + 0.05 * r, r * 0.92) : k === 'star' ? starD(p[0], p[1] + 0.08 * r, r * 1.02) : sparkleD(p[0], p[1], r, 0.2)
-  const nMax = t.sparkles ?? 2
+  const nMax = Math.min(t.sparkles ?? 2, live ? 1 : 2)
   if (nMax < 1) return out
   out.push({ d: decoD(kind, first.p, first.r), c: kind === 'heart' ? 'bubblegum' : kind === 'star' ? 'lemon' : col.spark })
   if (nMax < 2) return out

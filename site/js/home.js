@@ -1413,9 +1413,9 @@
     var devTabs = $('[data-dev-tabs]'), devCode = $('[data-dev-code]')
     if (devTabs && devCode) {
       var CODE = {
-        html: ['html', '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">\n\n<i class="with with-heart"></i>\n<i class="with with-heart with-solid"></i>'],
+        html: ['html', '<!-- loads only the icons on the page, in any style -->\n<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>\n\n<i class="with with-heart"></i>\n<i class="with with-heart with-solid"></i>'],
         react: ['jsx', "import { Heart } from '@withicons/react'\nimport { Heart as HeartGloss } from '@withicons/react/gloss'\n\n<Heart size={24} />\n<HeartGloss size={48} color=\"hotpink\" />"],
-        wc: ['html', '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web"></script>\n\n<with-icon name="heart" variant="duo"></with-icon>']
+        wc: ['html', '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>\n\n<with-icon name="heart" variant="duo"></with-icon>']
       }
       var setDev = function (k) {
         $$('[data-dev]', devTabs).forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-dev') === k ? 'true' : 'false') })

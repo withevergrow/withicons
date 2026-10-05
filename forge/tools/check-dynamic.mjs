@@ -5,6 +5,8 @@
 //   node forge/tools/check-dynamic.mjs calendar-date clock   # just these (underscore test generators allowed by name)
 //   node forge/tools/check-dynamic.mjs --all                 # public + _example-* test generators
 //   options: --styles a,b (default: every style in forge/styles)   --deep (render the stress params through every style too)
+//   RASTER GATE: --gate [--style a,b] [--gen a,b] [--json file] [--sheets [dir]] [--fails] [--code c] [--calibrate]
+//                (forge/tools/livegate.mjs, documented in forge/DYNAMIC.md "Quality gate")
 //
 // Checks: exports + metadata, params schema, examples (3-6, strictly valid), build() pure (frozen params, same
 // output twice), deterministic, fast (< 5 ms), never throws on edge params, skeleton shape (plates, closed fills),
@@ -22,6 +24,23 @@ import { listGenerators, loadGenerator, schemaErrors, paramErrors, resolveParams
 const argv = process.argv.slice(2)
 const opt = k => { const i = argv.indexOf('--' + k); if (i < 0) return undefined; const v = argv[i + 1]; argv.splice(i, v && !v.startsWith('--') ? 2 : 1); return v && !v.startsWith('--') ? v : true }
 const onlyStyles = opt('styles'), all = opt('all'), deep = opt('deep')
+// ── raster quality gate (forge/tools/livegate.mjs): --gate, or any of its flags
+{
+  const g = { gate: opt('gate'), style: opt('style'), gen: opt('gen'), json: opt('json'), sheets: opt('sheets'), calibrate: opt('calibrate'), workers: opt('workers'), warn: opt('warn'), max: opt('max'), quiet: opt('quiet'), fails: opt('fails'), code: opt('code') }
+  if (Object.values(g).some(v => v !== undefined)) {
+    const { runGate } = await import('./livegate.mjs')
+    const list = v => typeof v === 'string' ? v.split(',').filter(Boolean) : undefined
+    const st = list(g.style) || list(onlyStyles)
+    const gens = list(g.gen) || (argv.length ? argv : undefined)
+    const code = await runGate({
+      styles: st, gens, json: typeof g.json === 'string' ? g.json : g.json ? '.tmp/livegate/report.json' : undefined,
+      sheets: typeof g.sheets === 'string' ? g.sheets : g.sheets ? '.preview' : undefined,
+      calibrate: !!g.calibrate, thenGate: !!g.gate, workers: g.workers ? +g.workers : undefined, warn: !!g.warn, max: g.max ? +g.max : undefined,
+      list: !g.quiet, progress: true, onlyFails: !!g.fails || !!g.code, code: typeof g.code === 'string' ? g.code : undefined,
+    })
+    process.exit(code)
+  }
+}
 const names = argv.length ? argv : listGenerators({ private: !!all })
 const styles = await loadStyles(onlyStyles ? String(onlyStyles).split(',') : undefined)
 const manifest = readManifest()

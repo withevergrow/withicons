@@ -18,6 +18,37 @@ const ALIASES = Object.create(null)
 for (const g of GENERATORS) GENS[g.name] = g
 for (const g of GENERATORS) for (const a of g.aliases || []) if (!GENS[a]) (ALIASES[a] ||= []).push(g.name)
 
+// A build may ship generators as metadata only (no build()): the CDN lite script, where each live icon's drawing code
+// is its own small file. list(), get(), catalog(), resolve() and validate() work at once; drawing waits for loadIcon()
+// (renderAsync(), warm() and the element do that themselves). Every other build bundles build() and loads nothing.
+let ICON_LOADER = null
+const ICON_PENDING = Object.create(null)
+/** Tell the runtime how to fetch a live icon's drawing code: (name) => Promise (the file calls registerIcon). */
+export function setIconLoader(fn) { ICON_LOADER = typeof fn === 'function' ? fn : null }
+/** Register a live icon's generator ({ name, build, ... }); replaces the metadata-only entry of the same name. */
+export function registerIcon(g) {
+  const d = g && g.default && !g.build ? g.default : g
+  if (!d || typeof d.build !== 'function' || !d.name) throw fail('WITH_BAD_ICON', 'registerIcon() needs a generator with name and build()')
+  if (!GENS[d.name]) for (const a of d.aliases || []) if (!GENS[a]) (ALIASES[a] ||= []).push(d.name)
+  GENS[d.name] = d
+  return d
+}
+/** true when the live icon can draw synchronously right now (always, except in the CDN lite script before loadIcon) */
+export function iconLoaded(name) { const n = resolveName(name); return !!(n && typeof GENS[n].build === 'function') }
+/** Load a live icon's drawing code (no-op when bundled). Resolves to its canonical name. */
+export function loadIcon(name) {
+  let g
+  try { g = gen(name) } catch (e) { return Promise.reject(e) }
+  if (typeof g.build === 'function') return Promise.resolve(g.name)
+  if (!ICON_LOADER) return Promise.reject(fail('WITH_ICON_NOT_LOADED', `live icon "${g.name}" has no drawing code in this build and no loader`))
+  const n = g.name
+  return ICON_PENDING[n] || (ICON_PENDING[n] = Promise.resolve().then(() => ICON_LOADER(n)).then(m => {
+    if (m && typeof (m.default || m).build === 'function') registerIcon(m)
+    if (typeof GENS[n].build !== 'function') throw fail('WITH_ICON_LOAD', `live icon "${n}" loaded but did not register`)
+    return n
+  }).catch(e => { delete ICON_PENDING[n]; throw e }))
+}
+
 const STYLE_NAMES = STYLE_META.map(s => s.name)
 /** every style this runtime knows, in display order: [{ name, title, kind, description, strokeWidth, root }] */
 export const styles = STYLE_META.map(s => Object.freeze({ ...s }))
@@ -186,6 +217,7 @@ export const resolve = (name, params) => resolveParams(gen(name), params)
 /** The raw skeleton (forge/CONTRACT.md format) a generator builds for params. */
 export function skeleton(name, params) {
   const g = gen(name)
+  if (typeof g.build !== 'function') throw fail('WITH_ICON_NOT_LOADED', `live icon "${g.name}" is not loaded yet: await loadIcon("${g.name}") first, or use renderAsync().`, { icon: g.name })
   const p = Object.freeze(resolveParams(g, params))
   const sk = g.build(p) || {}
   return {
@@ -310,11 +342,15 @@ function finish(job, err) {
 }
 // the next job: the oldest icon+style group first (page order), but within a group the newest params (a dragged slider
 // shows where the thumb is now, not where it was)
-function take() {
-  if (!QUEUE.length) return null
-  const g = QUEUE[0].group
-  let i = 0
-  for (let j = QUEUE.length - 1; j >= 0; j--) if (QUEUE[j].group === g) { i = j; break }
+// ok(job): only jobs that may start now (workers wait until the page has the style, so the worker's copy of the style
+// file comes from the HTTP cache instead of a second download)
+function take(ok) {
+  const f = ok || (() => true)
+  const first = QUEUE.findIndex(f)
+  if (first < 0) return null
+  const g = QUEUE[first].group
+  let i = first
+  for (let j = QUEUE.length - 1; j >= 0; j--) if (QUEUE[j].group === g && f(QUEUE[j])) { i = j; break }
   return QUEUE.splice(i, 1)[0]
 }
 let pumping = false, mainTimer = 0
@@ -328,7 +364,7 @@ function pump() {
     if (p) {
       for (const slot of p) {
         if (slot.job) continue
-        const job = take(); if (!job) break
+        const job = take(j => !!RENDERERS[j.style]); if (!job) break
         slot.job = job; job.sent = true
         // a worker that never answers (blocked script, hung) is treated as dead after 20 s
         slot.timer = setTimeout(() => { if (slot.job === job) killPool() }, 20000)
@@ -341,7 +377,7 @@ function pump() {
       mainTimer = 0
       const job = take()
       if (!job) return
-      load(job.style).then(() => { inner(GENS[job.name], job.params, job.style); finish(job) }).catch(e => finish(job, e)).then(pump)
+      Promise.all([load(job.style), loadIcon(job.name)]).then(() => { inner(GENS[job.name], job.params, job.style); finish(job) }).catch(e => finish(job, e)).then(pump)
     }, 0)
   })
 }
@@ -357,6 +393,7 @@ export function warm(name, params, style, options) {
   if (!STYLE_NAMES.includes(v) && !LOADERS[v] && !RENDERERS[v]) return Promise.reject(unknownStyle(v))
   const p = resolveParams(g, params), key = keyOf3(g, p, v)
   // the page needs the style too (root attributes, and render() reads it); it loads while the worker draws
+  // (the icon's drawing code loads where it draws: in the worker, or on the main thread when the job runs there)
   const ready = load(v)
   if (CACHE.has(key)) return ready.then(() => true)
   const owner = options && options.owner
@@ -379,6 +416,11 @@ export function warm(name, params, style, options) {
     JOBS.set(key, job); QUEUE.push(job)
     pump()
   })
+  // a worker starts the job once the page has the style (see take); a style that fails to load fails its jobs
+  ready.then(pump, e => {
+    const job = JOBS.get(key)
+    if (job && !job.sent) { const i = QUEUE.indexOf(job); if (i >= 0) QUEUE.splice(i, 1); finish(job, e) }
+  })
   return Promise.all([ready, pending]).then(r => r[1])
 }
 /** Worker side: answer { id, name, params, style } with the rendered nodes. Builds call this inside their worker. */
@@ -386,7 +428,7 @@ export function serveWorker(scope) {
   scope.onmessage = e => {
     const m = e.data || {}
     if (m.id == null) return
-    load(m.style).then(() => {
+    Promise.all([load(m.style), loadIcon(m.name)]).then(() => {
       const g = gen(m.name), t = clock()
       const r = inner(g, resolveParams(g, m.params), m.style)
       scope.postMessage({ id: m.id, nodes: r.nodes, markup: r.markup, ms: clock() - t })
@@ -465,7 +507,8 @@ export function renderAsync(name, params, style, options) {
   // params are read now: the caller may change its object while the style loads or the worker draws
   try { g = gen(name); p = resolveParams(g, params) } catch (e) { return Promise.reject(e) }
   return load(v).then(() => {
-    if (cost(v) <= FRAME_MS || cached(g.name, p, v)) return render(g.name, p, v, o)
+    if (cached(g.name, p, v)) return render(g.name, p, v, o)
+    if (cost(v) <= FRAME_MS) return loadIcon(g.name).then(() => render(g.name, p, v, o))
     return warm(g.name, p, v, o.latest ? { owner: '\u0001latest\u0001' + g.name + '\u0001' + v } : null).then(ok => {
       if (!ok) throw fail('WITH_SUPERSEDED', `a newer renderAsync("${g.name}", ..., "${v}", { latest: true }) replaced this call`)
       return render(g.name, p, v, o)

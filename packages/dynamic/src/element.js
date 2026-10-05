@@ -100,9 +100,11 @@ export class WithLiveIconElement extends Base {
       if (typeof this.dispatchEvent === 'function' && typeof CustomEvent === 'function') this.dispatchEvent(new CustomEvent('with-live-render', { detail: { name, variant: v, params: L.resolve(name, params) } }))
     }
     // cheap or already drawn: now. Otherwise keep what is shown and draw in the background (newest request wins).
-    if (L.loaded(v) && (L.cost(v) <= 16 || L.cached(name, params, v))) return draw()
+    if (L.loaded(v) && (L.cached(name, params, v) || (L.iconLoaded(name) && L.cost(v) <= 16))) return draw()
     if (!this._html) paint(L.placeholder(o))
-    L.warm(name, params, v, { owner: this }).then(ok => { if (ok) draw() }, e => { if (token === this._token) { warnOnce(e.message); paint('') } })
+    // cheap styles draw here once the style (and, in the CDN lite script, the icon's code) is loaded; rich ones in the background
+    const job = L.cost(v) <= 16 ? Promise.all([L.load(v), L.loadIcon(name)]).then(() => true) : L.warm(name, params, v, { owner: this })
+    job.then(ok => { if (ok) draw() }, e => { if (token === this._token) { warnOnce(e.message); paint('') } })
   }
 }
 // JS properties mirror the attributes: el.variant = 'glass', el.size = 48

@@ -1,0 +1,813 @@
+{
+ "global": {
+  "minInk": 2,
+  "textC24": 0.3,
+  "textEmin": 0.3,
+  "textEmax": 4,
+  "countersLost": 1,
+  "valueE": 0.25,
+  "valueC24": 0.22,
+  "dynCov": 0.3,
+  "kbFail": 32,
+  "kbWarn": 14,
+  "msWarn": 250,
+  "gapText": 0.5,
+  "dynCovWarn": 0.5,
+  "textCov": 0.5
+ },
+ "styles": {
+  "anime": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "bauhaus": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "blueprint": {
+   "clip": 0.5,
+   "specks": 6,
+   "stray": 3,
+   "splits": 0,
+   "missing": 0
+  },
+  "coquette": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "duo": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "engrave": {
+   "clip": 0.5,
+   "specks": 7,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "glass": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "gloss": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "gothic": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "kawaii": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "line": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "luxe": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "pastel": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "pixel": {
+   "clip": 10.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "plush": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "retro": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "sketch": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "skeuo": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "solid": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "sticker": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "_default": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  }
+ },
+ "measured": {
+  "icons": 500,
+  "note": "per-style allowances = p95 of the static icons in that style (node forge/tools/check-dynamic.mjs --gate --calibrate)",
+  "stats": {
+   "anime": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 5
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 2,
+     "max": 2
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    }
+   },
+   "bauhaus": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 1,
+     "max": 2
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 2
+    }
+   },
+   "blueprint": {
+    "clip": {
+     "p90": 0.5,
+     "p95": 0.5,
+     "p99": 0.75,
+     "max": 0.75
+    },
+    "specks": {
+     "p90": 4,
+     "p95": 6,
+     "p99": 8,
+     "max": 9
+    },
+    "stray": {
+     "p90": 2,
+     "p95": 3,
+     "p99": 4,
+     "max": 7
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "coquette": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1.75
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 2
+    }
+   },
+   "duo": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "engrave": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 6,
+     "p95": 7,
+     "p99": 10,
+     "max": 13
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 6
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "glass": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 2
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "gloss": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 1,
+     "p99": 1,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "gothic": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0.5,
+     "max": 5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 2
+    }
+   },
+   "kawaii": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "line": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "luxe": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "pastel": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 3,
+     "max": 5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 1,
+     "p99": 2,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 2
+    }
+   },
+   "pixel": {
+    "clip": {
+     "p90": 4.5,
+     "p95": 10.5,
+     "p99": 13.5,
+     "max": 16.5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 3
+    }
+   },
+   "plush": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 3,
+     "max": 4.5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 2
+    }
+   },
+   "retro": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 2.5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "sketch": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0.25
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "skeuo": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "solid": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 1,
+     "max": 2
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "sticker": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   }
+  }
+ }
+}

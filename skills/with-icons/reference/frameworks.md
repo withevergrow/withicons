@@ -130,11 +130,15 @@ export const Toolbar = () => (
 ## Web component (any HTML, Astro, Lit, Rails, Django, WordPress, no build)
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.1/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="bin" variant="solid" size="32" color="#e11d48" label="Delete"></with-icon>
 ```
+
+The page downloads only what it shows: `cdn.js` is 7 KB gzipped, then each icon is its own small file
+(`dist/icons/<style>/<name>.js`, a `line` icon about 150 bytes gzipped). Never load `@withicons/web/full` on a page
+(every icon of every style, ~6 MB gzipped); it is for scripts and tools.
 
 With a bundler: `npm i @withicons/web`, then `import '@withicons/web'`. Each style's data loads on first use.
 Attributes: `name` (canonical or alias), `variant`, `size`, `color`, `stroke-width`, `absolute-stroke-width`, `label`.
@@ -143,19 +147,23 @@ then `await loadSvg('home', { variant: 'solid', size: 20 })`.
 
 ## Icon classes (Font Awesome style)
 
-CSS only, zero JS (each icon is a `currentColor` mask, 1em square):
+Each icon is a `currentColor` mask, 1em square. Recommended: the loader, which links just the CSS of the icons on the
+page, in any mix of styles (6 KB gzipped, then ~270 bytes per `line` icon):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.1/dist/classes/with-line.css">
+<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-loader.js" defer></script>
 <i class="with with-home" aria-hidden="true"></i>
+<i class="with with-heart with-solid" aria-hidden="true"></i>
 <i class="with with-search with-2x with-spin" aria-hidden="true"></i>
 ```
 
-All styles in one file: `.../classes/with-all.css`, then `<i class="with with-heart with-solid"></i>`.
+Zero JS: link `.../classes/with-base.css` plus `.../classes/<style>/<name>.css` per icon, or one whole style per file
+(`.../classes/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
+`with-all.css` imports every style (~6.3 MB gzipped): prototypes only, never a production page.
 Size utilities: `with-xs`, `with-sm`, `with-lg`, `with-2x`, and so on, plus `with-fw`. Animations: `with-spin`, `with-pulse`, both reduced-motion safe.
 For true multi-colour, stroke width and alias names, use the JS runtime instead:
-`<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.1/dist/classes/with-icons.js" defer></script>`.
-It turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).
+`<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-icons.js" defer></script>`.
+It fetches only the icons shown and turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).
 
 ## Static SVG and sprites (email, CMS, docs, no JS)
 
@@ -171,7 +179,7 @@ npm i @withicons/static
 Single files on the CDN (`<img>` renders black because it cannot use currentColor):
 
 ```
-https://cdn.jsdelivr.net/npm/@withicons/static@0.1/dist/svg/<style>/<name>.svg
+https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/<style>/<name>.svg
 ```
 
 `dist/icons.json` lists every icon (name, category, description, aliases, tags, styles).

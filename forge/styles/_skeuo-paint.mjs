@@ -147,7 +147,7 @@ export function piece(out, P, role, mat, opt = {}) {
     const { inset, top, op } = fin.spec
     const G = erode(P, thin ? Math.min(inset, 0.5) : inset)
     F.halfPlane(G, 0.18, 1, b.y0 + top * h + 0.18 * (b.x0 + w / 2))
-    out.fill(G, shine, op, { shine: true })
+    out.fill(G, shine, +(op * (opt.specK ?? 1)).toFixed(3), { shine: true })
   }
   // glint: a crisp curved reflection just inside the lit edge (glossy finishes)
   if (fin.hot && !thin && sz >= 4.5 && !opt.noHot) {

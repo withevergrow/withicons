@@ -17,8 +17,8 @@ has a default size of 24. Site: https://withicons.com · Repo: https://github.co
 | Svelte 4/5 / SvelteKit | `npm i @withicons/svelte` | `import { Home } from '@withicons/svelte'` then `<Home />` |
 | Angular 17+ | `npm i @withicons/angular` | `imports: [WithIconComponent]` then `<with-icon [icon]="Home" />` |
 | SolidJS | `npm i @withicons/solid` | `import { Home } from '@withicons/solid'` then `<Home />` |
-| any HTML, Astro, Lit, no build | CDN script | `<with-icon name="home"></with-icon>` |
-| Font Awesome-style classes | CDN stylesheet | `<i class="with with-home"></i>` |
+| any HTML, Astro, Lit, no build | CDN script `@withicons/web/dist/cdn.js` (loads only the icons shown) | `<with-icon name="home"></with-icon>` |
+| Font Awesome-style classes | CDN loader `@withicons/web/dist/classes/with-loader.js` (loads only the icons shown) | `<i class="with with-home"></i>` |
 | static SVG / sprite / email / CMS | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
 | Node, build scripts, name lookup | `npm i @withicons/core` | `resolve('bin').name` returns `'trash'` |
 | animation (any of the above) | `npm i @withicons/motion` | `<span class="wm wm-loop" data-wm="bell">…icon…</span>` (section 7) |
@@ -126,7 +126,7 @@ an editor with live previews.
 
 ```jsx
 import '@withicons/motion/motion.css'   // presets
-import '@withicons/motion/icons.css'    // each icon's tuned motion (pivot, direction, timing)
+import '@withicons/motion/icons.css'    // each icon's tuned motion, all 500 (~18 KB gzipped; from a CDN link dist/icons/<name>.css per icon instead)
 
 <span className="wm wm-loop" data-wm="loader"><Loader /></span>                                   {/* continuous */}
 <button className="wm-trigger" aria-label="Alerts"><span className="wm wm-hover" data-wm="bell"><Bell /></span></button>  {/* on hover/focus */}
@@ -156,6 +156,8 @@ paramsOf('calendar-date')                // { day: { type: 'int', min: 1, max: 3
 render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // -> SVG string
 ```
 ```html
+<!-- no build: ~35 KB gzipped, each live icon and style loads on first use -->
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>
 <with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii"></with-live-icon>
 ```
 
@@ -178,7 +180,11 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
   Figma, PowerPoint, Keynote and image converters need. Inline code keeps the variables.
 - Don't put palette styles, loops or creative styles in dense 16-20px controls: they turn to noise.
 - `strokeWidth` only affects styles with live strokes (line, duo, blueprint, sketch, kawaii); it does nothing on the filled styles.
-- Pin CDN versions in production: `https://cdn.jsdelivr.net/npm/@withicons/web@0.1/dist/index.js`.
+- From a CDN, load only what the page shows: `<with-icon>` via `https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js`
+  (7 KB gzipped + one small file per icon), `<i>` classes via `.../web@0.2.0/dist/classes/with-loader.js` (6 KB gzipped +
+  ~270 bytes per line icon), live icons via `.../dynamic@0.2.0/dist/cdn/lite.js`. Pin the version in production.
+  Never `with-all.css` (every style, ~6.3 MB gzipped) or `@withicons/web/full` on a real page; `with-<style>.css`
+  (one whole style, `with-line.css` 26 KB gzipped) is the zero-JS option.
 - Svelte 4: `on:click` is not forwarded to the icon. Wrap it in a `<button>`.
 - Angular `name=` usage needs `provideWithIcons(...)` registration. Passing `[icon]` needs none.
 - Packages are `0.x`: check `npm view @withicons/react version` if an install fails. The site offers direct SVG

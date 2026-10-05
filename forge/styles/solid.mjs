@@ -14,6 +14,7 @@
 // on a signed-distance field (see _solid-field.mjs) and traced to ONE even-odd path.
 import { polyD, pointInRing, distToPolyline, arclen, simplify, bbox, parsePath, V } from '../kernel/geom.mjs'
 import * as F from './_solid-field.mjs'
+import { hasText, splitText, openText, glyphLines, glyphWeight, TEXT_REF } from './_live-text.mjs'
 
 export const K = {
   W: 2.0,          // stroke weight of every centreline
@@ -28,6 +29,12 @@ export const K = {
   PARTS: true,     // emit free-standing A / S pieces as their own wm-a / wm-s nodes (motion parts).
                    // Geometry is loop-for-loop identical; only anti-aliasing where two pieces share a
                    // pixel can differ (<= 12/255 alpha on a few pixels at 16px, none from 32px up)
+  // Live icons only (the skeleton carries `params`; static icons never take these paths):
+  TEXT_CUT: TEXT_REF, // knocked-out glyphs: Line's text weight, so counters and letter gaps read exactly as in Line
+  INLAY: 0.75,     // gap around a moving part inlaid in the mass (see autoCut)
+  TEXT_GAP: 0.4,   // free text (no fill behind it) is set apart from the mass by this clear gap
+  OUTLINE: 0.25,   // a fill whose outline is partly drawn (>= this share runs along K centrelines) is outlined
+                   // all round, so open arcs along a badge edge never leave lips where they end
 }
 
 const LO = 0.5   // field reach where only the edge matters
@@ -56,6 +63,17 @@ const maxRun = (G, pts) => {
     else cur = 0
   }
   return best
+}
+
+// a ring that never crosses itself (a command symbol's loops do: knocking it out as an area would blot it)
+function simpleRing(r) {
+  const n = r.length, cross = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+  for (let i = 0; i < n; i++) for (let j = i + 2; j < n; j++) {
+    if (i === 0 && j === n - 1) continue
+    const a = r[i], b = r[(i + 1) % n], c = r[j], d = r[(j + 1) % n]
+    if (cross(a, b, c) * cross(a, b, d) < 0 && cross(c, d, a) * cross(c, d, b) < 0) return false
+  }
+  return true
 }
 
 // An open 2-arm polyline with equal arms and a 45-115 degree apex: a chevron.
@@ -118,6 +136,9 @@ function dots(icon) {
 
 function build(icon) {
   let cut = false // did anything subtract? (only then can slivers exist)
+  const live = !!icon.params
+  const glyphIds = live ? new Set(glyphLines(icon).map(l => l.pathId)) : null
+  const isGlyph = l => !!glyphIds && glyphIds.has(l.pathId)
   const lines = [...(icon.lines || []).filter(l => l.pts && l.pts.length), ...dots(icon)]
   const base = lines.filter(l => l.plate !== 'S')
   const sig = lines.filter(l => l.plate === 'S')
@@ -169,6 +190,16 @@ function build(icon) {
   const outerA = hasFill ? base.filter(l => l.plate === 'A' && !innerA(l)) : []
   const kMass = F.field(LO)
   for (const f of kFills) F.region(f.set, LO, kMass)
+  if (live && K.OUTLINE) {
+    // Live: a fill whose outline is drawn only in part (a ribbon's top and bottom arcs) is outlined all round
+    const kl = base.filter(l => l.plate === 'K' && !isGlyph(l))
+    const kNear2 = kl.length ? F.strokes(kl, 0, 0.5) : null
+    if (kNear2) for (const f of kFills) {
+      const pts = f.set.flatMap(r => densify(r, 0.25, true))
+      const share = pts.filter(p => at(kNear2, p) < 0.35).length / Math.max(1, pts.length)
+      if (share >= K.OUTLINE && share < 0.97) F.strokes(f.set.map(r => ({ pts: r, closed: true })), K.W, LO, kMass)
+    }
+  }
   for (const l of kLines) partField(l, K.W, LO, kMass)
   // distance to the object, exact out to the gap — only computed around the A parts
   let kDist = null
@@ -233,10 +264,33 @@ function build(icon) {
   const addS = G => { if (!sInk) sInk = F.field(1); F.union(sInk, G) }
 
   // --- knockouts
-  const cutArea = [], cutLine = []
+  const cutArea = [], cutLine = [], cutText = [], inlay = []
+  // Live: a cutout LINE knocks a drawn line out of the mass; one that traces no drawn line is an orphan (the half of a
+  // glyph whose text is not drawn) and is dropped
+  const traces = s => (icon.lines || []).some(l => s.pts.every(p => distToPolyline(p, l.pts, l.closed) < 0.15))
   for (const c of icon.cutouts || []) for (const s of c.subs) {
     if (s.closed && s.pts.length > 2) cutArea.push(s.pts)
+    else if (live && !s.glyph && !traces(s)) continue
+    else if (live && s.glyph) cutText.push(s)
     else cutLine.push(s)
+  }
+  if (live && cutLine.length) {
+    // Live: a closed part outline (a key's backspace or shift symbol) traced by open cutout lines is knocked out as an
+    // AREA, a crisp white symbol, not as a groove around a leftover island of ink
+    const covered = l => {
+      const d = densify(l.pts, 0.25, true)
+      return d.every(p => cutLine.some(c => distToPolyline(p, c.pts, c.closed) < 0.1))
+    }
+    for (const l of base) {
+      if (l.plate !== 'A' || !l.closed || l.pts.length < 3 || isGlyph(l) || !simpleRing(l.pts) || !covered(l)) continue
+      const d = densify(l.pts, 0.25, true)
+      if (d.filter(p => at(allFill, p) < 0).length / d.length < 0.9) continue
+      // an authored shape (closed with Z, one ring) that stands alone: no other part line within 1u of it
+      const src = (icon.paths || []).find(p => p.id === l.pathId)
+      if (!src || !/z\s*$/i.test(String(src.d).trim()) || (src.subs || []).length !== 1) continue
+      if (base.some(o => o !== l && o.plate !== 'K' && o.pts.some(p => distToPolyline(p, l.pts, true) < 1))) continue
+      cutArea.push(l.pts)
+    }
   }
   if (autoCut) {
     // never lose a line: when the author gave no cutouts, an interior centreline
@@ -244,13 +298,21 @@ function build(icon) {
     const inner = F.offset(Float32Array.from(allFill), 1.75) // room for the cut + ink both sides
     for (const l of base) {
       const d = densify(l.pts, 0.25, l.closed)
-      if (d.filter(p => at(inner, p) < 0).length / d.length > 0.6) cutLine.push(l)
+      if (d.filter(p => at(inner, p) < 0).length / d.length > 0.6) {
+        // Live: a moving part inside the mass (a thermometer's column at full) is INLAID (ink, ringed by a clear
+        // gap), never knocked out: a knocked-out column reads inverted (a full tube drawn as an empty channel)
+        if (live && l.plate === 'A' && !isGlyph(l)) inlay.push(l)
+        else (isGlyph(l) ? cutText : cutLine).push(l)
+      }
     }
   }
   const cuts = F.region(cutArea)
   if (cutLine.length) F.union(cuts, F.strokes(cutLine, K.CUT))
+  if (cutText.length) F.union(cuts, F.strokes(cutText, K.TEXT_CUT))
   for (const b of cutArea.flatMap(r => wallBreaches(r, mass))) F.union(cuts, F.region([b]))
-  if (cutArea.length || cutLine.length) { F.subtract(mass, cuts); cut = true }
+  if (inlay.length) F.union(cuts, F.strokes(inlay, K.W + 2 * K.INLAY))
+  if (cutArea.length || cutLine.length || cutText.length || inlay.length) { F.subtract(mass, cuts); cut = true }
+  if (inlay.length) { const G = F.strokes(inlay, K.W); F.union(mass, G); if (aInk) F.union(aInk, G) }
 
   // --- badges: clear a zone, add back a solid disc with the glyph knocked out
   for (const b of badges) {
@@ -260,7 +322,9 @@ function build(icon) {
     const gl = glyphs.filter(g => badgeOf(g) === b)
     const knock = F.region(gl.filter(g => g.closed && g.pts.length > 2).map(g => g.pts))
     const gLines = gl.filter(g => !(g.closed && g.pts.length > 2))
-    if (gLines.length) F.union(knock, F.strokes(gLines, K.CUT))
+    const gText = gLines.filter(isGlyph), gOther = gLines.filter(g => !isGlyph(g))
+    if (gOther.length) F.union(knock, F.strokes(gOther, K.CUT))
+    if (gText.length) F.union(knock, F.strokes(gText, K.TEXT_CUT))
     F.subtract(disc, knock)
     F.subtract(disc, cuts)
     F.union(mass, disc)
@@ -296,7 +360,42 @@ export function solidLoops(icon) {
 // a part runs into the object) stays K. Pieces never touch, so tracing each plate's
 // pieces on its own yields exactly the loops of the whole mass.
 export function solidPlates(icon) {
+  // Live icons: glyphs are always lines (a "D" or "0" whose ends meet is not a filled ring), and FREE text (no fill
+  // behind it: "37°" beside a thermometer, "12" under the wind) is set at a weight that keeps its counters open,
+  // clear of the mass, instead of being inflated with it
+  let free = []
+  if (icon.params && hasText(icon)) {
+    const gl = glyphLines(icon)
+    const sp = splitText(openText(icon))
+    const ids = new Set(sp.free.map(g => g.id))
+    free = gl.filter(l => ids.has(l.pathId))
+    icon = sp.icon
+  }
   let { mass, cut, aInk, sInk } = build(icon)
+  if (free.length) {
+    const clear = F.field(1), byPlate = { A: null, S: null, K: null }
+    // a glyph's weight comes from all of its strokes (the degree ring is two arcs)
+    const boxOf = new Map()
+    for (const l of free) for (const [x, y] of l.pts) {
+      const b = boxOf.get(l.pathId) || { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity }
+      b.x0 = Math.min(b.x0, x); b.y0 = Math.min(b.y0, y); b.x1 = Math.max(b.x1, x); b.y1 = Math.max(b.y1, y)
+      boxOf.set(l.pathId, b)
+    }
+    for (const l of free) {
+      const w = glyphWeight({ ch: l.ch, cap: l.cap, box: boxOf.get(l.pathId) }, { base: K.W })
+      F.strokes([l], w + 2 * K.TEXT_GAP, 1, clear)
+      const pl = l.plate === 'S' ? 'S' : l.plate === 'K' ? 'K' : 'A'
+      byPlate[pl] = F.strokes([l], w, 1, byPlate[pl])
+    }
+    F.subtract(mass, clear)
+    for (const [pl, G] of Object.entries(byPlate)) {
+      if (!G) continue
+      F.union(mass, G)
+      if (pl === 'A') { if (!aInk) aInk = F.field(1); F.union(aInk, G) }
+      if (pl === 'S') { if (!sInk) sInk = F.field(1); F.union(sInk, G) }
+    }
+    cut = true
+  }
   if (cut && K.SLIVER > 0) mass = F.open(mass, K.SLIVER)
   if (!K.PARTS || (!aInk && !sInk)) return [{ plate: 'K', loops: F.trace(mass, K.TOL) }]
   const N = F.N, NN = N * N

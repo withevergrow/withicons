@@ -32,8 +32,10 @@ function sunBehind(c, cx, cy, r, rIn, rOut, gap, angles) {
   if (run && (!best || run.a1 - run.a0 > best.a1 - best.a0)) best = run
   const paths = []
   if (best && best.a1 - best.a0 >= 30) {
-    const [x0, y0] = polar(cx, cy, r, best.a0), [x1, y1] = polar(cx, cy, r, best.a1)
-    paths.push(`M${x0} ${y0} A${snap(r)} ${snap(r)} 0 ${best.a1 - best.a0 > 180 ? 1 : 0} 1 ${x1} ${y1}`)
+    // drawn as two half-span arcs: with endpoints snapped to the grid, one arc near 180deg would flip or swell
+    const am = (best.a0 + best.a1) / 2
+    const [x0, y0] = polar(cx, cy, r, best.a0), [xm, ym] = polar(cx, cy, r, am), [x1, y1] = polar(cx, cy, r, best.a1)
+    paths.push(`M${x0} ${y0} A${snap(r)} ${snap(r)} 0 0 1 ${xm} ${ym} A${snap(r)} ${snap(r)} 0 0 1 ${x1} ${y1}`)
   }
   const rays = []
   for (const a of angles) {
@@ -54,7 +56,9 @@ const COMPACT = {
   },
   partly() {
     const c = cloud({ cx: 14.5, yb: 12.25, h: 6.75 })
-    const s = sunBehind(c, 8.25, 7.5, 2.5, 4.25, 5.25, 2, [180, 225, 270, 315, 0, 45])
+    // rays start 2.75u out from the arc (centrelines; 1u of white at line) so no stroke weight joins them to the sun,
+    // and the arc keeps 2.5u from the cloud; no ray straight down (clock 180): it would reach the temperature band
+    const s = sunBehind(c, 8.25, 8.25, 2.5, 5.25, 6.25, 2.5, [225, 270, 315, 0, 45])
     return { k: [c.d], a: [...s.arc, ...s.rays], fills: [c.fill], cuts: [] }
   },
   cloudy() {
@@ -93,7 +97,8 @@ const FULL = {
   },
   partly() {
     const c = cloud({ cx: 13.5, yb: 20.5, h: 10.5 })
-    const s = sunBehind(c, 9, 9, 3.75, 6, 7.25, 2, [270, 315, 0, 45, 90, 225, 180])
+    // the static cloud-sun's sun (centre 9.5 9.5, r 3.25, rays 6.5..7.5): 3.25u between arc and rays, 2.75u to the cloud
+    const s = sunBehind(c, 9.5, 9.5, 3.25, 6.5, 7.5, 2.75, [270, 315, 0, 45, 90, 225, 180])
     return { k: [c.d], a: [...s.arc, ...s.rays], fills: [c.fill], cuts: [] }
   },
   cloudy() {

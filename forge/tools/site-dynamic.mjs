@@ -208,7 +208,7 @@ async function main() {
       const v = ps[k] ?? p.default
       return p.type === 'bool' ? (v ? ` ${attrOf(k)}` : ` ${attrOf(k)}="false"`) : ` ${attrOf(k)}="${esc(v)}"`
     }).join('')
-    return `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/dynamic.js"></script>\n\n<with-live-icon name="${i.name}"${a}${style !== 'line' ? ` variant="${style}"` : ''} size="${size}"></with-live-icon>`
+    return `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/lite.js"></script>\n\n<with-live-icon name="${i.name}"${a}${style !== 'line' ? ` variant="${style}"` : ''} size="${size}"></with-live-icon>`
   }
   const jsVal = v => typeof v === 'string' ? `'${v.replace(/'/g, "\\'")}'` : String(v)
   const reactSnippet = (i, ps, style = 'line', size = 48) => {
@@ -433,7 +433,7 @@ ${sections}
       <p class="lede">The <code>${SCOPE}/dynamic</code> package draws every live icon in every style, in the browser or in Node. Change an attribute and the icon redraws. <code>today</code> keeps a calendar or clock on the visitor’s current date and time.</p>
       <p class="lv-soon">Launching soon on npm. Until then, use the copy in this site’s <code>vendor/dynamic/</code> folder.</p>
     </div>
-    ${code('lib-html', 'html', 'HTML', `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/dynamic.js"></script>\n\n<with-live-icon name="calendar-date" today variant="glass" size="48"></with-live-icon>\n<with-live-icon name="bell-count" count="12" variant="bauhaus"></with-live-icon>\n<with-live-icon name="battery-level" level="0.42" variant="skeuo"></with-live-icon>`)}
+    ${code('lib-html', 'html', 'HTML', `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/lite.js"></script>\n\n<with-live-icon name="calendar-date" today variant="glass" size="48"></with-live-icon>\n<with-live-icon name="bell-count" count="12" variant="bauhaus"></with-live-icon>\n<with-live-icon name="battery-level" level="0.42" variant="skeuo"></with-live-icon>`)}
   </div>
 </section>
 <section class="section lv-faq-sec">

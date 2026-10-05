@@ -21,9 +21,10 @@ export const K = {
   GAP_S: 1.2,      // moat around badges and modifiers
   DEEP: 1.35,      // a centreline this deep inside the fill is interior detail
   INK_HOLE: 7,     // closed cutouts smaller than this (u^2) are printed in ink
-  WT: 1.5,         // live-icon text set into a frame
-  WT_S: 1.3,       // the same at the font's small size
-  WT_LINE: 2.1,    // live icons without a frame: text and bars
+  WT: 1.75,        // live-icon text set into a frame: the font's own weight (it is spaced for it), so the
+  WT_S: 1.75,      //   counters of 0 4 6 8 9 % stay open at 24px; the same at the font's small size
+  WT_LINE: 2.1,    // live icons without a frame: bars
+  WT_FREE: 1.75,   // live icons without a frame: text (2.1 closes the counters of a small "8")
   LO: 0.6,
   TOL: 0.03,
 }
@@ -171,6 +172,9 @@ export function build(icon) {
   const mass = F.field(K.LO)
   for (const rings of kFills) F.region(rings, K.LO, mass)
   if (massLines.length) F.strokes(massLines, W, K.LO, mass)
+  // Live icons part their outline where the value needs room (a price tag, a file page): the field keeps its
+  // full silhouette there (the fill grown to just inside the bar edge), never a notch in its side
+  if (live && kFills.length) { const g = F.field(2); for (const rings of kFills) F.region(rings, 2, g); F.offset(g, -(W / 2 - 0.5)); F.union(mass, g) }
   let part = null
   if (aFills.length || partLines.length) {
     part = F.field(K.LO)
@@ -233,7 +237,7 @@ export function build(icon) {
   if (aInk.length) F.strokes(aInk, WI, K.LO, inkA)
   const tall = l => { let a = Infinity, b = -Infinity; for (const p of l.pts) { a = Math.min(a, p[1]); b = Math.max(b, p[1]) } return b - a }
   const capH = textLines.length ? Math.max(...textLines.map(tall)) : 0
-  const text = textLines.length ? F.strokes(textLines, !hasFill ? K.WT_LINE : capH < 5.25 ? K.WT_S : K.WT, K.LO) : null
+  const text = textLines.length ? F.strokes(textLines, !hasFill ? K.WT_FREE : capH < 5.25 ? K.WT_S : K.WT, K.LO) : null
   if (holes.length) { const h = F.region(holes, K.LO); F.intersect(h, massPre); F.union(inkK, h) }
 
   // --- S overlays: clear a moat, lay discs and modifiers on top
@@ -258,7 +262,10 @@ export function build(icon) {
   // BAND: a frame holding text in rows (calendars, clocks) prints its top row on
   // a band of the part hue, split off along the gap between the rows
   let band = null
-  if (T.band && textLines.length) {
+  if (T.band && T.bandY != null && hasFill) {
+    band = F.clipBand(F.copy(mass), -1, T.bandY)
+    if (F.extent(band, 0.05).area < 4) band = null
+  } else if (T.band && textLines.length) {
     const rows = []
     for (const l of textLines) {
       let a = Infinity, b = -Infinity
@@ -330,17 +337,18 @@ export function autoEntries(icon) {
     if (F.any(touch)) { F.union(B.mass, B.part); B.part = null }
   }
   const E = []
-  const add = (G, hue, mode, part) => { const D = deep(G); if (D) E.push({ hue, mode, part, F: D, reach: REACH_AUTO }) }
-  add(B.mass, S.main, 'lit', 'K')
+  const add = (G, hue, mode, part, x) => { const D = deep(G); if (D) E.push({ hue, mode, part, F: D, reach: REACH_AUTO, ...x }) }
+  const T = autoTune(icon.name), deepOf = pl => icon.params && T.deep && T.deep.includes(pl) ? { deep: true } : undefined
+  add(B.mass, S.main, 'lit', 'K', deepOf('K'))
   add(B.band, S.band || S.part, 'lit', 'K')
   add(B.face, 'paper', 'lit', 'K')
-  add(B.part, S.part, 'lit', 'A')
+  add(B.part, S.part, 'lit', 'A', deepOf('A'))
   add(B.inlay, S.inlay, 'well', 'K')
   add(B.inkK, S.main, 'ink', 'K')
   add(B.inkA, S.main, 'ink', 'A')
-  add(B.text, S.main, 'ink', 'A')
-  add(B.badge, S.badge, 'lit', 'S')
-  add(B.paper, S.badge, 'ink', 'S')
+  add(B.text, S.main, 'ink', 'A', { text: true })
+  add(B.badge, S.badge, 'lit', 'S', deepOf('S'))
+  add(B.paper, S.badge, 'ink', 'S', icon.params ? { text: true } : undefined)
   add(B.sBar, S.badge, 'lit', 'S')
   return E
 }

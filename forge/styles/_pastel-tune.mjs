@@ -50,13 +50,27 @@ const NAMES = {
 //   hollow  true: the inside of a round outline is an opening (lenses)
 //   face    true: a dial gets a paper face inset in its rim
 //   band    true: a frame with rows of text prints its top row on a band of the part hue
+//   deep    ['K' | 'A' | 'S']: Live icons paint these plates in the hue's deep tone (a meter's reading)
+//   bandY   the band's lower edge (skeleton y) when it is fixed by the layout, not read from the text
 //   w / wi  bar weights          drop  path indexes to leave out
 const DIAL = { face: true }
-const CAL = { band: true, rings: [1.75, 4.75], hues: { band: 'blush', part: 'butter' } }
+// Live calendars: the header band is set by the generator's layout (bandY, skeleton y), never by the text
+// it happens to carry, so the page never changes colour with its value. A label row (MAR, TUE) sits on
+// the band; a calendar whose number fills the page (event, range, tear) keeps one lavender page.
+const CAL = { band: true, bandY: 11.4, rings: [1.75, 4.75], hues: { band: 'blush', part: 'butter' } }
+const CAL_PAGE = { rings: [1.75, 4.75], hues: { part: 'butter' } }
 const T = {
+  // the stopwatch: its seconds sector in the deep tone on the paper face
+  stopwatch: { face: true, deep: ['A'] },
   search: { hollow: true }, 'zoom-in': { hollow: true }, 'zoom-out': { hollow: true },
-  'calendar-date': CAL, 'calendar-event': CAL, 'calendar-month': CAL, 'calendar-range': CAL, 'calendar-tear': CAL, 'calendar-weekday': CAL,
-  'digital-clock': { band: true }, 'clock-time': DIAL, 'watch-time': DIAL, stopwatch: DIAL,
+  'calendar-date': CAL, 'calendar-event': CAL_PAGE, 'calendar-month': CAL, 'calendar-range': CAL_PAGE, 'calendar-tear': CAL_PAGE, 'calendar-weekday': CAL,
+  // Live meters: the reading in the deep tone (flat, inked rim), the scale it moves on in the light field
+  'bar-values': { deep: ['K'] }, 'signal-bars': { deep: ['K'] }, 'progress-ring': { deep: ['K'] }, 'wifi-strength': { deep: ['K'] },
+  'volume-level': { deep: ['A'] },
+  // count badges: the count sits on a deep blush disc (it is the reading)
+  'bell-count': { deep: ['S'] }, 'cart-count': { deep: ['S'] }, 'mail-count': { deep: ['S'] }, 'inbox-count': { deep: ['S'] },
+  'chat-count': { deep: ['S'] }, 'app-badge': { deep: ['S'] },
+  'digital-clock': { band: true, bandY: 12 }, 'clock-time': DIAL, 'watch-time': DIAL,
   // the static battery: a lavender shell around a paper well
   'battery-percent': { hues: { main: 'lavender', part: 'lavender', inlay: 'paper' } },
   // the static alarm clock: a blush body under butter bells

@@ -1865,12 +1865,14 @@
     function styleAttr(parts) { parts = parts.filter(Boolean); return parts.length ? ' style="' + parts.join('; ') + '"' : '' }
     function varsList(mi) { return mi ? Object.keys(mi.vars).map(function (k) { return k + ': ' + mi.vars[k] }) : [] }
     function setupLines() {
-      var lines = ['<link rel="stylesheet" href="' + CDN + '/web/dist/classes/with-' + S.style + '.css">']
+      // with-loader.js (~6 KB gzipped) links just the CSS of the <i> tags on the page, any mix of styles
+      var lines = ['<script src="' + CDN + '/web/dist/classes/with-loader.js" defer></script>']
       // CSS-only icons paint palettes from a data URI that CSS variables cannot reach: custom colours need the tiny runtime
       var tb = swapReady() ? swapTarget() : null, bcz = tb ? bColors(tb).cz : null
       if (S.code === 'tag' && ((isMulti() && colorsFor()) || bcz)) lines.push('<script src="' + CDN + '/web/dist/classes/with-icons.js" defer></script>')
       if (S.anim !== 'none' || swapTarget()) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/motion.css">')
-      if (S.code !== 'tag' && !swapReady() && ownCode(motionInfo())) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/icons.css">')
+      // the icon's own moves, one small file per animated icon (icons.css bundles all of them)
+      if (S.code !== 'tag' && !swapReady() && ownCode(motionInfo())) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/icons/' + I.name + '.css">')
       return lines
     }
     function codeFor(kind) {
@@ -1924,7 +1926,7 @@
           return head + trigNote + open('') + i2 + '<span' + wrapAttrs() + '>\n' + i2 + '  ' + svgA.replace('<svg ', '<svg class="wm-a" ') + '\n' + i2 + '  ' + svgB.replace('<svg ', '<svg class="wm-b" ') + '\n' + i2 + '</span>' + close('')
         }
         if (!mi) return svgA
-        if (ownCode(mi)) return '<!-- motion: ' + CDN + '/motion/dist/motion.css + icons.css (data-wm plays ' + esc(I.title) + '’s own moves, part by part) -->\n' + wrapOpen(mi) + styleAttr(ownList(mi)) + '>\n  ' + svgA + '\n</span>'
+        if (ownCode(mi)) return '<!-- motion: ' + CDN + '/motion/dist/motion.css + icons/' + I.name + '.css (data-wm plays ' + esc(I.title) + '’s own moves, part by part) -->\n' + wrapOpen(mi) + styleAttr(ownList(mi)) + '>\n  ' + svgA + '\n</span>'
         return head + '<span class="' + mi.cls + '"' + styleAttr(varsList(mi)) + '>\n  ' + svgA + '\n</span>'
       }
       var imports = function (fw) {
@@ -1988,7 +1990,7 @@
           if (extra.length) at += '\n  ' + extra.join(' ')
         }
         var ws = styleAttr([col ? 'color: ' + col : ''].concat(cvars, mi ? (ownCode(mi) && !t ? ownList(mi) : varsList(mi).filter(function (v) { return !/--wm-(ox|oy|dx|dy|steps)/.test(v) })) : []))
-        return '<script type="module" src="' + CDN + '/web/dist/index.js"></script>\n' + (mi || t ? '<script type="module" src="' + CDN + '/motion/dist/element.js"></script>\n' : '') + '\n<with-icon' + at + (t ? '\n ' : '') + ' label="' + I.title + '"' + ws + '></with-icon>'
+        return '<script type="module" src="' + CDN + '/web/dist/cdn.js"></script>\n' + (mi || t ? '<script type="module" src="' + CDN + '/motion/dist/element.js"></script>\n' : '') + '\n<with-icon' + at + (t ? '\n ' : '') + ' label="' + I.title + '"' + ws + '></with-icon>'
       }
       return ''
     }

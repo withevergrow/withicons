@@ -65,3 +65,41 @@ Every param has a plain-language `label`. Defaults must make a great-looking ico
 node forge/tools/check-dynamic.mjs [names]        # validate generators: params, examples, every style renders, timing
 node forge/tools/preview-dynamic.mjs calendar-date --styles line,solid,kawaii --size 64 [--small] [--dark] [--params '{"day":9}']
 ```
+
+## Quality gate (raster)
+`check-dynamic --gate` renders every generator x its STRESS SET (default, examples, every param's boundaries: min/max,
+0/1/9/10/99/100/999/9999, empty / 1-char / max-length text incl. W M 8 0, every enum option, levels 0/.05/.5/.95/1,
+times 00:00/03:15/09:41/12:00/23:59, both bools, and every enum option with all values at their widest) x every
+style, rasterises with resvg at 96px (geometry) and 24px light + dark (legibility), and compares each render with the
+LINE render of the same skeleton. Code: `forge/tools/livegate.mjs` (runner, judging, sheets), `lib-livegate.mjs`
+(metrics), `livegate-worker.mjs`; thresholds in `forge/tools/livegate-thresholds.json` (per-style allowances = p95 of
+that style on the static icons, `--calibrate` re-measures).
+
+```bash
+node forge/tools/check-dynamic.mjs --gate                                   # all generators x all styles (~5-8 min)
+node forge/tools/check-dynamic.mjs --gate --style pixel,retro               # just these styles (line runs as the reference)
+node forge/tools/check-dynamic.mjs --gate --gen weather,clock-time          # just these generators
+node forge/tools/check-dynamic.mjs --gate --style pixel --sheets            # + .preview/livegate-pixel-{light,dark}.png
+node forge/tools/check-dynamic.mjs --gate --style pixel --sheets --fails    # sheets with failing cells only (+ default)
+node forge/tools/check-dynamic.mjs --gate --style pixel --code split        # sheets with one failure code only
+node forge/tools/check-dynamic.mjs --gate --json .tmp/livegate/report.json  # every metric of every render
+#   --workers n   --warn (list warnings)   --max n (failures listed per style)   --quiet (summary only)   --calibrate
+```
+
+| code | fails when (style render vs line render of the same params) |
+|---|---|
+| `throw` / `empty` | the style throws, or draws < 2u² of ink |
+| `clip` | ink on the canvas edge beyond what the style does on its static icons |
+| `stray` | specks (< 0.5u²) more than 1.5u away from the drawing |
+| `split` | a continuous part (one connected piece in line) drawn as >= 2 pieces: broken strokes, detached parts |
+| `missing` | a part of the drawing with no ink within 1u |
+| `text-missing` | < 50% of the line glyphs have a text change within 1u: the value is not shown |
+| `text-contrast` | text vs its background at 24px (p90 of the text change, light AND dark) < 0.3 |
+| `text-faint` | text strokes cover < 0.3x the area they do in line |
+| `text-broken` | a glyph breaks apart or partly vanishes into its background (pieces that belong to one glyph) |
+| `text-blob` | letter counters (>= 0.6u²) closed: 0 8 A B D O P Q R 4 6 9 % read as blobs at 24px |
+| `value-hidden` / `value-contrast` | changing the value moves < 0.25x the ink it moves in line / the change is faint at 24px |
+| `dyn-misplaced` / `dyn-count` | the moving part (hand, fill, pips, stars, bars) is < 30% where line draws it / pips, stars, bars merge (not applied when the moving part is a single filled body, e.g. a starburst re-cut by `points`) |
+| `nondeterministic`, `size` | two renders differ / > 32 KB |
+| generator: `text-crowded` | (line) text ink < 0.5u from the rest of the drawing |
+| generator: `level-mono` / `level-prop` | (line) a level's part does not grow monotonically / level .5 draws < 25% or > 80% of full |

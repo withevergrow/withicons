@@ -17,14 +17,20 @@ npm i @withicons/dynamic
 ## Plain HTML (no build step)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/dynamic.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>
 
 <with-live-icon name="calendar-date" day="17" month="MAR"></with-live-icon>
 <with-live-icon name="calendar-date" today variant="glass" size="48" label="Today"></with-live-icon>
 ```
 
-The script defines `<with-live-icon>` and `window.WithLive`. The line style is built in. The first time you use another
-style, its file (`styles/<style>.js` next to `dynamic.js`) loads.
+The script defines `<with-live-icon>` and `window.WithLive`, and downloads only what the page draws: the line style is
+built in, each live icon's drawing code is its own small file (`gens/<name>.js` next to `lite.js`), and the first time
+you use another style, its file (`styles/<style>.js`) loads. Every name, param and example is known at once
+(`WithLive.list()`, `get()`, `validate()`); `WithLive.render()` is sync once the icon and style are loaded
+(`await WithLive.loadIcon(name)` and `await WithLive.load(style)`), and `renderAsync()` loads both by itself.
+
+`cdn/dynamic.js` is the same script with all {{count}} live icons inline, for pages that call `WithLive.render()` on any
+icon synchronously. See [Bundle size](#bundle-size).
 
 ## The element
 
@@ -101,13 +107,15 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 
 | file | what | size | gzip |
 |---|---|---|---|
-| `index.js` | full runtime, all 20 styles, sync render() | 1414 KB | 486 KB |
-| `lite.js` | core + line; other styles load on first use | 147 KB | 53.4 KB |
-| `element.js` | `<with-live-icon>` on lite | 151 KB | 55.3 KB |
-| `react.js` | `<LiveIcon>` on lite (react not included) | 148 KB | 54.0 KB |
-| `vue.js` | `<LiveIcon>` on lite (vue not included) | 148 KB | 53.8 KB |
-| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (212 KB / 69.0 KB gzip) | 1.3 KB | 0.9 KB |
-| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line inline | 154 KB | 55.4 KB |
+| `index.js` | full runtime, all 20 styles, sync render() | 1490 KB | 514 KB |
+| `lite.js` | core + line; other styles load on first use | 150 KB | 54.7 KB |
+| `element.js` | `<with-live-icon>` on lite | 155 KB | 56.6 KB |
+| `react.js` | `<LiveIcon>` on lite (react not included) | 151 KB | 55.2 KB |
+| `vue.js` | `<LiveIcon>` on lite (vue not included) | 151 KB | 55.0 KB |
+| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (216 KB / 70.4 KB gzip) | 1.3 KB | 0.9 KB |
+| `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 102 KB | 35.3 KB |
+| `cdn/gens/<name>.js` | one live icon's drawing code (typical `price-tag`; largest `cart-count` 9.9 KB / 4.5 KB gzip) | 3.9 KB | 2.0 KB |
+| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 157 KB | 56.7 KB |
 
 ## Performance
 

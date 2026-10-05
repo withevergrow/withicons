@@ -10,6 +10,7 @@ import { build } from './_plush-auto.mjs'
 import { schemeOf } from './_plush-tune.mjs'
 import { EXEMPLAR } from './_plush-exemplars.mjs'
 import { liveOf } from './_plush-live.mjs'
+import { labelText } from './_plush-text.mjs'
 
 export { EXEMPLAR }
 const BASE = Object.freeze({ ...Prim, ...Kit })
@@ -74,10 +75,10 @@ export default function render(icon) {
     const g = liveOf(icon)
     if (g) {
       try {
-        const nodes = compose(g(icon), icon)
+        const nodes = compose(labelText(g(icon), icon.name, icon.params), icon)
         if (nodes.length) return nodes
       } catch (e) { if (globalThis.process?.env?.PLUSH_DEBUG) throw e }
     }
   }
-  return compose(build(icon), icon)
+  return compose(icon && icon.params ? labelText(build(icon), icon.name, icon.params) : build(icon), icon)
 }

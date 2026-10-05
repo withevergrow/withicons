@@ -15,8 +15,9 @@
 import { parsePath, distToPolyline, pointInRing, area, arclen, resample } from '../kernel/geom.mjs'
 import { setOf } from '../kernel/bool.mjs'
 import * as F from './_gothic-field.mjs'
-import { K as PK, minus, grow, erode, empty, exact, at, unionAll, inscribed } from './_gothic-paint.mjs'
-import { tuneFor } from './_gothic-tune.mjs'
+import { K as PK, minus, grow, erode, empty, exact, at, unionAll, inscribed, circlePts, mv } from './_gothic-paint.mjs'
+import { tuneFor, LIVE_TEXTLESS, LETTERED_DEEP } from './_gothic-tune.mjs'
+import { markIds, markGeo, isWellOf } from './_gothic-marks.mjs'
 
 export const A = {
   SCALE: 0.92, TX: -0.2, TY: -0.32,
@@ -96,10 +97,19 @@ export const COMPANION = { c1: ['c2', 'c3', 'c4'], c2: ['c1', 'c3', 'c4'], c3: [
 export const MEDAL = { c1: 'c3', c2: 'c3', c3: 'c2', c4: 'c1' }
 export const mainRole = icon => (tuneFor(icon.name).glass) || CAT[icon.category] || 'c2'
 
-export function auto(icon) {
-  const T = tuneFor(icon.name, icon.params)
+export function auto(icon0) {
+  const T = tuneFor(icon0.name, icon0.params)
   const tf = tfOf(T)
-  const live = !!icon.params
+  const live = !!icon0.params
+  // Live marks (a die's pips, a month's marked day: small A loops in a well) are gilt bosses set with a jewel
+  // of gold glass, so the value reads by light on the deep lettered glass; their loops and wells leave the scene
+  const mIds = live ? markIds(icon0) : new Set(), marks = markGeo(icon0, mIds)
+  const icon = marks.length ? {
+    ...icon0,
+    paths: icon0.paths.filter(p => !mIds.has(p.id)),
+    lines: (icon0.lines || []).filter(l => !mIds.has(l.pathId)),
+    cutouts: (icon0.cutouts || []).map(c => ({ ...c, subs: (c.subs || []).filter(q => !isWellOf(marks, q)) })).filter(c => c.subs.length),
+  } : icon0
   const all = [...(icon.lines || []), ...dots(icon)].filter(l => l.pts && l.pts.length)
     .map(l => ({ ...l, pts: l.pts.map(tf) }))
   const plateOf = l => (T.plate && T.plate[l.pathId]) || l.plate || 'K'
@@ -115,7 +125,8 @@ export function auto(icon) {
     const votes = { K: 0, A: 0, S: 0 }
     for (const r of rings) for (let i = 0; i < r.length; i += 3) {
       let best = Infinity, pl = 'K'
-      for (const l of all) { const d = distToPolyline(r[i], l.pts, l.closed); if (d < best) { best = d; pl = plateOf(l) } }
+      // (a Live icon's letters never vote: its face must not turn to gold when the text grows wide)
+      for (const l of all) { if (String(l.pathId || '').startsWith('text:')) continue; const d = distToPolyline(r[i], l.pts, l.closed); if (d < best) { best = d; pl = plateOf(l) } }
       votes[pl]++
     }
     const pl = T.fillPlate || (votes.S > votes.K + votes.A ? 'S' : votes.A > votes.K ? 'A' : 'K')
@@ -183,7 +194,9 @@ export function auto(icon) {
 
   // glass panes: the mass minus the mullions (and their leads), split by big cutouts
   // Live lettering is gilt: it needs a deep glass under it, and no tracery competing with it
-  const lettered = live && text.length > 0
+  // (a Live icon that writes a value is lettered whatever its current text, even none: its glass must not
+  // change with the value)
+  const lettered = live && (text.length > 0 || !LIVE_TEXTLESS.has(icon.name))
   let role = T.glass || mainRole(icon)
   if (lettered && role === 'c3') role = 'c2'
   const comp = COMPANION[role]
@@ -210,7 +223,8 @@ export function auto(icon) {
       const inCut = cutF && at(cutF, [cx, cy]) < 0 && c.area < 0.9 * comps[0].area
       let r = k === 0 ? role : inCut ? comp[0] : comp[(ci++) % comp.length]
       if (lettered && r === 'c3') r = role === 'c1' ? 'c2' : 'c1'
-      panes.push({ m: 'glass', F: P, role: r, plate: 'K', batch: 'panes', deep: inCut ? 0.22 : 0, tracery: lettered ? 'none' : k === 0 ? (T.tracery || 'auto') : 'none', medal: MEDAL[r] })
+      // lettered glass is smoked deep, so the gilt lettering reads by light on it at 24px, in light and dark pages
+      panes.push({ m: 'glass', F: P, role: r, plate: 'K', batch: 'panes', deep: inCut ? 0.22 : lettered ? LETTERED_DEEP : 0, glow: lettered ? 0.08 : undefined, glint: lettered ? false : undefined, tracery: lettered ? 'none' : k === 0 ? (T.tracery || (live ? 'none' : 'auto')) : 'none', medal: MEDAL[r] })
     })
     // the biggest pane's tracery: rose spokes in a round pane, quarry and medallion otherwise
     if (panes.length) {
@@ -221,7 +235,7 @@ export function auto(icon) {
       if (mull.length || T.medallion === false) p0.medallion = false
       for (const p of panes.slice(1)) {
         const ip = inscribed(p.F)
-        if (!lettered && !mull.length && ip && ip.r > 2.6) p.tracery = 'medallion'
+        if (!lettered && !live && !mull.length && ip && ip.r > 2.6) p.tracery = 'medallion'
       }
     }
     if (smallCut.length) panes.push({ m: 'recess', F: F.region(smallCut, A.M), plate: 'K', glow: 'c3', glowOp: 0.6 })
@@ -233,7 +247,14 @@ export function auto(icon) {
   if (F.any(fFrame)) parts.push({ m: 'stone', F: fFrame, plate: 'K', ticks: T.noTicks ? null : ticks(frame, wk) })
   if (F.any(fMull)) parts.push({ m: 'stone', F: minus(fMull, erode(fFrame, 0.2)), plate: innerA.length && !innerK.length ? 'A' : 'K', thin: true })
   if (slots.length) parts.push({ m: 'recess', F: F.strokes(slots, A.SLOT, A.M), plate: 'A', outline: 0.3 })
-  if (text.length) parts.push({ m: 'gilt', F: F.strokes(text, T.wt || A.WT, A.M), plate: 'A', outline: 0.3, thin: true, glint: false })
+  if (text.length) {
+    // lettering; a Live dot that is not a letter (a month's day) is a full gilt stud, so it reads as a mark
+    const isDot = l => !String(l.pathId || '').startsWith('text:') && arclen(l.pts, l.closed) < 0.6
+    const fT = F.strokes(text.filter(l => !isDot(l)), T.wt || A.WT, A.M)
+    const dts = text.filter(isDot)
+    if (dts.length) F.strokes(dts, 1.7, A.M, fT)
+    parts.push({ m: 'gilt', F: fT, plate: 'A', outline: 0.3, thin: true, glint: false, text: true, letter: true })
+  }
 
   if (badges.length || bars.length || fills.S.length) {
     const fS = F.field(A.M)
@@ -246,8 +267,17 @@ export function auto(icon) {
     if (F.any(fS)) {
       parts.push({ m: 'gilt', F: fS, plate: 'S', glint: false })
       const J = erode(exact(fS), 0.55)
-      if (!empty(J)) parts.push({ m: 'glass', F: J, role: T.badge || (role === 'c1' ? 'c2' : 'c1'), plate: 'S', outline: 0.25, tracery: 'none' })
-      if (inBadge.length) parts.push({ m: 'stone', F: F.strokes(inBadge, 1.3, A.M), plate: 'S', thin: true, outline: 0.3 })
+      // (a Live badge carries a value: smoked, no glint, so its numerals read edge to edge)
+      if (!empty(J)) parts.push({ m: 'glass', F: J, role: T.badge || (role === 'c1' ? 'c2' : 'c1'), plate: 'S', outline: 0.25, tracery: 'none', ...(live ? { glint: false, glow: 0.1, deep: 0.3 } : {}) })
+      if (inBadge.length) parts.push({ m: 'stone', F: F.strokes(inBadge, 1.3, A.M), plate: 'S', thin: true, outline: 0.3, text: live })
+    }
+  }
+  if (marks.length) {
+    const sc = Math.hypot(...[0, 1].map(k => tf([1, 0])[k] - tf([0, 0])[k]))
+    for (const m of marks) {
+      const [x, y] = tf([m.cx, m.cy]), R = (m.r + 0.85) * sc
+      parts.push({ m: 'gilt', F: F.region([circlePts(x, y, R).slice(0, -1)], A.M), plate: 'A', glint: false, thin: true })
+      parts.push({ m: 'glass', F: F.region([circlePts(x, y, R * 0.55).slice(0, -1)], A.M), role: 'c3', plate: 'A', outline: 0.2, tracery: 'none', glow: 0.35, glint: false })
     }
   }
   if (free.length) parts.push(...tablet(free, T.tablet || (role === 'c3' ? 'c2' : role === 'c2' ? 'c4' : role)))
@@ -288,10 +318,19 @@ export function tablet(lines, role = 'c4', o = {}) {
   const slab = F.region([pts], A.M)
   const fw = o.frame ?? 1.05
   const cap = Math.max(...ls.map(l => +String(l.pathId).split(':')[2] || 5))
-  const w = Math.max(1.05, Math.min(1.45, cap * k * 0.19))
-  return [
+  const w = Math.max(1.1, Math.min(1.4, cap * k * 0.2))
+  if (o.glass) return [
     { m: 'stone', F: minus(slab, erode(exact(slab), fw)), plate: 'K' },
-    { m: 'glass', F: erode(exact(slab), fw), role, plate: 'K', tracery: 'none', dark: 0.38, glow: 0.12 },
-    { m: 'gilt', F: F.strokes(ls, w, A.M), plate: 'A', outline: 0.3, thin: true, glint: false },
+    { m: 'glass', F: erode(exact(slab), fw), role, plate: 'K', tracery: 'none', dark: 0.38, glow: 0.08, deep: LETTERED_DEEP, glint: false },
+    { m: 'gilt', F: F.strokes(ls, w, A.M), plate: 'A', outline: 0.3, thin: true, glint: false, text: true, letter: true },
+  ]
+  // an inscription: a limestone tablet with the reading cut into it, each letter a dark incised groove whose
+  // lower lip catches the gilt light. (The tablet exists only for its text, so it is as pale as the page:
+  // the reading, not the stone, carries the contrast.)
+  const L = F.strokes(ls, w, A.M)
+  return [
+    { m: 'stone', F: slab, plate: 'K', ashlar: null },
+    { m: 'paint', F: minus(mv(L, 0.12, 0.2), L), role: 'accent', op: 0.9, plate: 'A', text: true },
+    { m: 'recess', F: L, plate: 'A', outline: 0, text: true },
   ]
 }

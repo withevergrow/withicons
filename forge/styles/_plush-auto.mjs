@@ -135,7 +135,12 @@ export function build(icon) {
     if (drop.has(pi) || freeIds.has(p.id)) return
     const text = typeof p.id === 'string' && p.id.startsWith('text:')
     if (text) return // text set into a frame is knocked out by the cutouts: embroidered from there
-    for (const s of subsOf(p.d)) if (s.pts.length) lines.push({ pts: s.pts.map(T), closed: !!s.closed && s.pts.length > 2, plate: p.plate || 'K', ink: inkIdx.has(pi) })
+    for (const s of subsOf(p.d)) {
+      if (!s.pts.length) continue
+      // Live icons: a stroke shorter than 0.6u is a ghost dot (an empty tick, an empty step): a dot, not a tube
+      if (live) { let L = 0; for (let i = 1; i < s.pts.length; i++) L += Math.hypot(s.pts[i][0] - s.pts[i - 1][0], s.pts[i][1] - s.pts[i - 1][1]); if (L < 0.6) { const a = s.pts[0], b = s.pts.at(-1); dots.push({ p: T([(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]), plate: p.plate || 'K' }); continue } }
+      lines.push({ pts: s.pts.map(T), closed: !!s.closed && s.pts.length > 2, plate: p.plate || 'K', ink: inkIdx.has(pi) })
+    }
     for (const q of dotsOf(p)) dots.push({ p: T(q), plate: p.plate || 'K' })
   })
   const fills = (icon.fills || []).map(f => subsOf(f.d).filter(s => s.pts.length > 2).map(s => s.pts.map(T))).filter(r => r.length)
@@ -152,6 +157,10 @@ export function build(icon) {
       const z = c.d.split(/(?=[Mm])/).filter(ch => /[LlHhVvCcSsQqTtAa]/.test(ch)).map(ch => /[Zz]/.test(ch))
       if (z.length === subs.length) subs = subs.map((s, i) => s.closed && !z[i] ? { ...s, closed: false, pts: [...s.pts, s.pts[0]] } : s)
     }
+    // a label face's lettering rows hold lettering only: an open knock-out there that is no glyph of the word is a
+    // stray piece of one (never embroidered on its own)
+    const band = live && LABEL_BAND[icon.name]
+    if (band) subs = subs.filter(s => s.closed || !s.pts.every(q => q[1] > band[0] && q[1] < band[1]))
     return subs.map(s => ({ pts: s.pts.map(T), closed: !!s.closed && s.pts.length > 2 })).filter(s => !isText(s))
   })
   const hasFill = fills.length > 0
@@ -269,7 +278,8 @@ export function build(icon) {
   const drawn = []
   for (const l of base) {
     if (!l.inner || l.absorbed) continue
-    pieces.push(Kit.thread(l.closed ? [...l.pts, l.pts[0]] : l.pts, { w: A.TI, part: l.plate, role: threadOn(pieces, l.pts) }))
+    // (a Live icon's moving detail, a clock hand, is sewn in a heavier thread so its reading carries at 24px)
+    pieces.push(Kit.thread(l.closed ? [...l.pts, l.pts[0]] : l.pts, { w: live && l.plate === 'A' ? 1.4 : A.TI, part: l.plate, role: threadOn(pieces, l.pts) }))
     drawn.push(l)
   }
   const near = (q, ls, d) => ls.some(l => distToPolyline(q, l.pts, l.closed) < d)
@@ -290,7 +300,12 @@ export function build(icon) {
     if (d.plate === 'S') continue
     const onFelt = hasFill && F.sampleAt(fillF, d.p[0], d.p[1]) < -0.2
     if (onFelt) pieces.push(Kit.knot(d.p[0], d.p[1], 0.95, 'ink', { part: d.plate }))
-    else pieces.push(Kit.felt(sc.main, P.circle(d.p[0], d.p[1], tw / 2 + 0.25), { part: d.plate, stitch: false }))
+    else {
+      // Live icons: a row of balls (a timer's ticks) keeps a gap between neighbours, so they stay countable
+      let r = tw / 2 + 0.25
+      if (live) for (const o of dots) if (o !== d && o.plate !== 'S') r = Math.min(r, Math.max(0.6, Math.hypot(o.p[0] - d.p[0], o.p[1] - d.p[1]) / 2 - 1.05))
+      pieces.push(Kit.felt(sc.main, P.circle(d.p[0], d.p[1], r), { part: d.plate, stitch: false }))
+    }
   }
   // ---- BADGE (S)
   if (sLines.length || fillPlate.includes('S')) {
@@ -325,6 +340,7 @@ export function build(icon) {
   pieces.push(...freeText(free))
   return pieces
 }
+const LABEL_BAND = { 'file-type': [9, 18], 'folder-label': [9, 18] }   // live label faces: their lettering rows (y, u)
 const textW = cap => { try { return textStroke(cap, 1.6) * A.S } catch { return 1.4 } }
 export function freeText(free, o = {}) {
   const gl = free.map(g => {
@@ -356,4 +372,4 @@ export function freeText(free, o = {}) {
   }
   return out
 }
-export { T, subsOf }
+export { T, subsOf, textW }

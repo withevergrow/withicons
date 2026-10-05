@@ -89,6 +89,12 @@ export const TUNE = {
     : 'M16.75 12 A4.75 4.75 0 1 1 7.25 12 A4.75 4.75 0 1 1 16.75 12 Z'] }),
   // live: earned stars are polished gold (navy enamel stars sink into a dark page)
   'rating-stars': { remap: { K: 'A' } },
+  // live rings: the face is enamel at every value (a short gold progress arc must not win the face's plate vote)
+  'progress-ring': { fillPlate: 'K' },
+  'timer-ring': { fillPlate: 'K' },
+  // live bars: satin enamel (no specular sickle) with a polished gold cap on each bar's top, the end that moves,
+  // so a bar's height reads on light and dark pages alike
+  'bar-values': { matte: true, caps: true },
 }
 // an entry may be a function of a Live icon's params
 export const tuneFor = (name, params) => { const t = TUNE[name]; return typeof t === 'function' ? t(params || {}) || {} : t || {} }

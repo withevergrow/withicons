@@ -100,14 +100,15 @@ export function Toolbar() {
     </nav>
   )
 }`, 'tsx', 'Toolbar.tsx')],
-    ['web', 'Web component', code(`<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>
+    ['web', 'Web component', code(`<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
-<with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Works in any framework, or none. Each style’s data loads the first time you use it. Style the inner svg with <code>with-icon::part(svg)</code>.</p>`],
-    ['classes', 'Icon classes', code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css">
+<with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Works in any framework, or none. The page downloads only the icons it shows: about 7 KB gzipped for the element, then one small file per icon (a line icon is about 150 bytes gzipped). Style the inner svg with <code>with-icon::part(svg)</code>.</p>`],
+    ['classes', 'Icon classes', code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
-<i class="with with-search with-2x"></i>`, 'html', 'index.html') + `<p class="pg-note">Zero JavaScript. Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>. Need every style? Use <code>with-all.css</code> and add <code>with-solid</code>, <code>with-duo</code>…</p>`],
+<i class="with with-search with-2x"></i>
+<i class="with with-heart with-solid"></i>`, 'html', 'index.html') + `<p class="pg-note">The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles. Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>. Zero JavaScript instead? Link one stylesheet per style, <code>with-line.css</code> (all ${N_ICONS} line icons, about 26 KB gzipped).</p>`],
     ['svg', 'SVG & sprite', code(`<!-- one sprite per style, served from your own site -->
 <svg width="24" height="24"><use href="sprite-line.svg#with-home"/></svg>
 
@@ -203,12 +204,15 @@ export function Toolbar() {
 
     <section id="classes" class="dv-sec">
       <h2>Icon classes</h2>
-      <p>The Font Awesome way: one stylesheet, then plain tags. No build step, no JavaScript.</p>
-      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css">
+      <p>The Font Awesome way: plain tags, no build step. The loader fetches only the icons on the page, in any style:</p>
+      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
-<i class="with with-home with-solid"></i>      <!-- needs with-all.css or with-solid.css -->
+<i class="with with-home with-solid"></i>
 <i class="with with-trash" role="img" aria-label="Delete"></i>`, 'html')}
+      <p>No JavaScript at all? Link one stylesheet per style you use instead. Each holds every icon of that style: <code>with-line.css</code> is about 26 KB gzipped, the richest styles several hundred KB, and <code>with-all.css</code> (every style, about 6 MB gzipped) is for prototypes only.</p>
+      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-solid.css">   <!-- for with-solid -->`, 'html')}
       <h3>Modifiers</h3>
       <ul class="dv-mods">${mods.map(([c, d, k]) => `<li data-reveal><span class="dv-mod-demo dm-${k}" aria-hidden="true">${I(modIcon[k], 'line', 24)}</span><code>${c}</code><span>${d}</span></li>`).join('')}</ul>
       <p class="pg-note">Also <code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-3x</code> to <code>with-5x</code>, <code>with-rotate-180</code>, <code>with-rotate-270</code> and <code>with-flip-both</code>. Spin and pulse switch off for people who prefer reduced motion. For richer motion (a bell that rings, a play button that turns into pause) use <a href="#motion">@withicons/motion</a>.</p>
@@ -217,7 +221,7 @@ export function Toolbar() {
 
 <i class="with with-home with-duo" style="--with-duo:#f59e0b"></i>
 <i class="with with-settings" data-with-stroke-width="1.5"></i>`, 'html')}
-      <p class="pg-note">The runtime swaps each tag for an inline SVG, downloads only the styles you use and understands aliases (<code>with-bin</code> → trash). Masks are single-colour; the runtime gives you the real duo tint and blueprint accent.</p>
+      <p class="pg-note">The runtime swaps each tag for an inline SVG, downloads only the icons you show and understands aliases (<code>with-bin</code> → trash). Masks are single-colour; the runtime gives you the real duo tint and blueprint accent.</p>
     </section>
 
     <section id="theming" class="dv-sec">
@@ -285,17 +289,18 @@ find('hoem')          // null`, 'js')}
 
     <section id="cdn" class="dv-sec">
       <h2>CDN &amp; downloads</h2>
-      <p>Not using npm? Everything works from a CDN or as files you copy into your project. ${soon}</p>
+      <p>Not using npm? Everything works from a CDN or as files you copy into your project, and a page downloads only the icons it uses. ${soon}</p>
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>What</th><th>URL / file</th></tr></thead><tbody>
         <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
-        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css</code> (or <code>with-all.css</code>)</td></tr>
-        <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js</code></td></tr>
+        <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js</code> · about 7 KB gzipped, then each icon from its own small file</td></tr>
+        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js</code> (only the icons on the page) · zero JS: <code>with-&lt;style&gt;.css</code>, one style per file</td></tr>
+        <tr><td>Live icons</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/dynamic/dist/cdn/lite.js</code> · each live icon and style loads on first use</td></tr>
         <tr><td>Sprites (download now)</td><td>${STYLES.filter(s => siteExists(`sprites/${s}.svg`)).map(s => `<a href="sprites/${s}.svg" download>${s}.svg</a>`).join(' · ')}</td></tr>
         <tr><td>Class CSS (download now)</td><td>${STYLES.filter(s => siteExists(`vendor/with/with-${s}.css`)).map(s => `<a href="vendor/with/with-${s}.css" download>with-${s}.css</a>`).join(' · ')}</td></tr>
-        <tr><td>Animations</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css</code> (+ <code>icons.css</code> for each icon’s own motion)${siteExists('vendor/motion/motion.css') ? ` · download <a href="vendor/motion/motion.css" download>motion.css</a>${siteExists('vendor/motion/motion.js') ? ` · <a href="vendor/motion/motion.js" download>motion.js</a>` : ''}` : ''}</td></tr>
+        <tr><td>Animations</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css</code> + each icon’s own motion, <code>dist/icons/&lt;name&gt;.css</code> (the element links these for you; <code>icons.css</code> has all of them)${siteExists('vendor/motion/motion.css') ? ` · download <a href="vendor/motion/motion.css" download>motion.css</a>${siteExists('vendor/motion/motion.js') ? ` · <a href="vendor/motion/motion.js" download>motion.js</a>` : ''}` : ''}</td></tr>
         <tr><td>Metadata</td><td><a href="icons.json">icons.json</a> · names, categories, aliases, tags</td></tr>
       </tbody></table></div>
-      <p class="pg-note">Pin a version in production (<code>@withicons/web@0.1.0</code>). Any single icon can also be copied or downloaded as SVG or PNG from <a href="icons.html">the library</a>.</p>
+      <p class="pg-note">Pin a version in production (<code>@withicons/web@0.2.0</code>): versioned files are cached for good, by the CDN and the browser. Any single icon can also be copied or downloaded as SVG or PNG from <a href="icons.html">the library</a>.</p>
     </section>
 
 ${FORMATS.length ? `    <section id="export" class="dv-sec">

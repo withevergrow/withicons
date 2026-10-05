@@ -65,7 +65,7 @@ const BASE_LANDERS = [
   ${steps([
     ['Paste it inline', 'Copy the SVG and paste it into your HTML. It inherits the text colour, so <code>color: tomato</code> on the parent recolours it.'],
     ['Use it as an image', 'Download the .svg file and use it like any picture: <code>&lt;img src="home.svg" alt="Home"&gt;</code>, or drop it into PowerPoint, Word, Canva or Figma.'],
-    ['Use a class instead', `One stylesheet, then <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>. See <a href="${p}free/font-awesome-style-icon-classes.html">icon classes</a>.`],
+    ['Use a class instead', `One setup line, then <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>. See <a href="${p}free/font-awesome-style-icon-classes.html">icon classes</a>.`],
   ])}
 </section>`,
     faq: p => [
@@ -283,14 +283,14 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
     title: 'Font Awesome-style icon classes: <i class="with with-home"> · with icons',
     desc: `Use free icons the Font Awesome way: one stylesheet, then <i class="with with-home"></i>. ${N} icons in ${NS} styles as CSS classes, no JavaScript, plus size, spin and flip modifiers.`,
     h1: ['Icon classes,', 'the Font Awesome way'], q: 'icon classes like Font Awesome',
-    answer: () => `Add one stylesheet, then write <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code> anywhere in your HTML: that’s the same pattern Font Awesome made popular, with no JavaScript. Add a style class such as <code>with-solid</code> or <code>with-sketch</code> for the other ${NS - 1} styles, and modifiers like <code>with-2x</code>, <code>with-spin</code> or <code>with-flip-h</code>. Click an icon below to copy its tag.`,
+    answer: () => `Add one small loader script, then write <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code> anywhere in your HTML: that’s the same pattern Font Awesome made popular, and the page downloads only the icons it shows. Prefer no JavaScript? Link one stylesheet per style instead. Add a style class such as <code>with-solid</code> or <code>with-sketch</code> for the other ${NS - 1} styles, and modifiers like <code>with-2x</code>, <code>with-spin</code> or <code>with-flip-h</code>. Click an icon below to copy its tag.`,
     picker: { actions: ['class'], colors: false, groups: [['Interface', SETS.ui], ['Arrows', SETS.arrows], ['Commerce', SETS.commerce]] },
     body: p => `
 <section class="ax-split" aria-labelledby="ic-setup">
-  <div><p class="ax-kicker">Set up</p><h2 id="ic-setup">One stylesheet, then plain tags</h2>
-  <p>Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>, so it scales with font size and takes the text colour. The CDN link is <span class="pg-soon">${I('sparkles', 'solid', 14)} launching soon</span>; today, download <a href="${p}vendor/with/with-line.css">with-line.css</a> or <a href="${p}vendor/with/with-all.css">with-all.css</a> and host it yourself.</p>
-  ${facts([['Base class', '<code>with</code> plus <code>with-&lt;name&gt;</code>'], ['Styles', '<code>with-solid</code>, <code>with-duo</code>, <code>with-gloss</code>, <code>with-engrave</code>, <code>with-blueprint</code>, <code>with-sketch</code> (needs <code>with-all.css</code> or that style’s CSS)'], ['Sizes', '<code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-2x</code> … <code>with-5x</code>, <code>with-fw</code>'], ['Motion & flips', '<code>with-spin</code>, <code>with-pulse</code>, <code>with-rotate-90</code>, <code>with-flip-h</code>, <code>with-flip-v</code>'], ['Aliases', `With the optional runtime, alias names work too: <code>with-bin</code> → trash`]])}</div>
-  <div>${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">
+  <div><p class="ax-kicker">Set up</p><h2 id="ic-setup">One setup line, then plain tags</h2>
+  <p>Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>, so it scales with font size and takes the text colour. The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles: a line icon is about 270 bytes gzipped. No JavaScript? Link one stylesheet per style; <code>with-line.css</code> holds all ${N} line icons in about 26 KB gzipped. The CDN link is <span class="pg-soon">${I('sparkles', 'solid', 14)} launching soon</span>; today, download <a href="${p}vendor/with/with-line.css">with-line.css</a> and host it yourself.</p>
+  ${facts([['Base class', '<code>with</code> plus <code>with-&lt;name&gt;</code>'], ['Styles', '<code>with-solid</code>, <code>with-duo</code>, <code>with-gloss</code>, <code>with-engrave</code>, <code>with-blueprint</code>, <code>with-sketch</code> and more (the loader fetches each one; without it, link that style’s CSS)'], ['Sizes', '<code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-2x</code> … <code>with-5x</code>, <code>with-fw</code>'], ['Motion & flips', '<code>with-spin</code>, <code>with-pulse</code>, <code>with-rotate-90</code>, <code>with-flip-h</code>, <code>with-flip-v</code>'], ['Aliases', `With the optional runtime, alias names work too: <code>with-bin</code> → trash`]])}</div>
+  <div>${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-home with-solid"></i>
@@ -299,7 +299,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   <p class="pg-note">Coming from Font Awesome? <a href="${p}alternatives/font-awesome.html">See the class-name map and converter</a>.</p></div>
 </section>`,
     faq: p => [
-      ['Do I need JavaScript for the icon classes?', 'No. The stylesheet alone renders every icon. An optional runtime script adds real multi-colour Duo and Blueprint and alias names.'],
+      ['Do I need JavaScript for the icon classes?', 'No. The small loader script is the lightest setup (it fetches only the icons on the page), but a stylesheet per style renders every icon of that style with no JavaScript at all. An optional runtime script adds live CSS colour variables and alias names.'],
       ['How do I make an icon bigger?', 'Icons are 1em, so they follow font-size. Use with-lg or with-2x to with-5x, or set font-size yourself.'],
       ['Is this compatible with Font Awesome class names?', `The pattern is the same but the names differ (fa-house → with-home). The <a href="${p}alternatives/font-awesome.html">Font Awesome page</a> has a name map and a converter.`],
       ['How do I make an icon accessible?', 'Decorative icons next to text: add aria-hidden="true". Icon-only buttons: put aria-label on the button.'],

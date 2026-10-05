@@ -12,17 +12,26 @@ npm i @withicons/motion
 
 ```js
 import '@withicons/motion/motion.css'   // the presets
-import '@withicons/motion/icons.css'    // each icon's tuned motion: pivot, direction, timing (keyed by data-wm)
+import '@withicons/motion/icons.css'    // each icon's tuned motion, all 500 (~18 KB gzipped; keyed by data-wm)
 ```
 
-CDN: `https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css` and `.../dist/icons.css`.
+From a CDN, load the presets and only the icons you animate (each icon's file is ~0.3 KB gzipped):
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+```
+
+With `<with-icon motion="loop">` (`<script type="module" src=".../motion@0.2.0/dist/element.js">` after `@withicons/web`'s
+`dist/cdn.js`) the element links each animated icon's file by itself. In an unbundled `<script type="module">`, import
+`@withicons/motion/runtime` (`dist/runtime.js`) for `motion()` / `swap()`, not `dist/index.js` (it pulls the full spec table).
 
 ## Classes
 
 | class / attribute | effect |
 |---|---|
 | `wm` | base class on the wrapper |
-| `data-wm="<icon>"` | use that icon's tuned motion (from `icons.css`) |
+| `data-wm="<icon>"` | use that icon's tuned motion (from `icons/<icon>.css` or `icons.css`) |
 | `wm-loop` | continuous animation, calm enough to run forever |
 | `wm-hover` | one-shot on hover / focus of the wrapper or of any `.wm-trigger` ancestor (e.g. the button) |
 | `wm-once` | plays once on load |

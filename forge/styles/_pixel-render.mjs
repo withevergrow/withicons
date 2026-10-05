@@ -2,7 +2,9 @@
 import { parsePath } from '../kernel/geom.mjs'
 import * as G from './_pixel-core.mjs'
 import { TUNE } from './_pixel-tune.mjs'
-import { pixelText, stampText, clearShine } from './_pixel-text.mjs'
+import { textInfo } from './_live-text.mjs'
+import { liveSprite, liveCompose, liveHands, drawHands, liveSlabs, drawSlabs, drawSweep, liveTimerHand, drawPointer, liveNeedle, drawNeedle, stopwatchDial } from './_pixel-live.mjs'
+import { pixelText, stampText, clearShine, LABEL_FACE } from './_pixel-text.mjs'
 import { pixelStars, stampStars } from './_pixel-star.mjs'
 
 const { N } = G
@@ -220,16 +222,87 @@ export function fromMap(rows) {
 
 const cellsOf = str => String(str || '').trim().split(/[\s;]+/).filter(Boolean).map(t => t.split(',').map(Number)).filter(([i, j]) => G.inb(i, j))
 
+// A live icon's drawing (forge/DYNAMIC.md) is placed on the grid by its frame alone (never by its text, so it
+// never jumps when the value changes): per axis, the default half-cell offset, or none when that keeps the frame
+// off the outermost row / column (a 2..22 frame then lands on cells 1..14 instead of touching the canvas edge)
+function liveShift(icon) {
+  const textIds = new Set((icon.paths || []).filter(p => textInfo(p)).map(p => p.id))
+  let lo = [Infinity, Infinity], hi = [-Infinity, -Infinity]
+  const see = ([x, y]) => { lo = [Math.min(lo[0], x), Math.min(lo[1], y)]; hi = [Math.max(hi[0], x), Math.max(hi[1], y)] }
+  for (const l of icon.lines || []) if (!textIds.has(l.pathId)) for (const p of l.pts || []) see(p)
+  for (const r of icon.fillSet || []) for (const p of r) see(p)
+  if (!Number.isFinite(lo[0])) return [0, 0]
+  const span = (a, b, sh) => [Math.floor((a - G.SHIFT + sh) / G.P), Math.floor((b - G.SHIFT + sh) / G.P)]
+  // offsets of a third of a cell keep 0.5u-snapped coordinates off the cell edges (no rounding ties)
+  return [0, 1].map(k => [0, 0.5, 1, -0.5].find(sh => { const [a, b] = span(lo[k], hi[k], sh); return a >= 1 && b <= G.N - 2 }) ?? 0)
+}
+
+// a sprite's layers before lighting (so text can be stamped on it)
+function spriteLayers(rows) {
+  const ink = G.grid(), tone = G.grid(), glint = G.grid()
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+    const c = (rows[j] || '')[i] || '.', k = G.ix(i, j)
+    if (c === '#') ink[k] = 1
+    else if (c === '+') tone[k] = 1
+    else if (c === 'o') { tone[k] = 1; glint[k] = 1 }
+  }
+  return { ink, tone, glint }
+}
+// light the drawing first, then set the text into the lit sprite: a value never moves the shading or highlight
+// of the cells around its glyphs (only the cells the text itself takes change)
+function litText(L, stamp) {
+  const pre = finish(G.copy(L.ink), G.copy(L.tone), L.glint)
+  stamp()
+  const S = { ink: L.ink, tone: G.grid(), shade: G.grid(), shine: G.grid() }
+  for (let k = 0; k < N * N; k++) {
+    if (L.ink[k] || !L.tone[k]) continue
+    if (pre.shade[k]) S.shade[k] = 1
+    else if (pre.shine[k]) S.shine[k] = 1
+    else S.tone[k] = 1
+  }
+  return clearShine(S, L.text)
+}
+const matteFace = (icon, Sp) => { if (icon.params && LABEL_FACE.has(icon.name)) { Sp.tone = G.or(Sp.tone, Sp.shine); Sp.shine = G.grid() } return Sp }
+
 export function build(icon, tune = TUNE[icon.name] || {}) {
   if (tune.map) return fromMap(tune.map)
+  // a live icon whose picture is drawn from a sprite (_pixel-live.mjs); its text is set on top in canvas cells
+  const LC = icon.params ? liveCompose(icon) : null
+  if (LC) {
+    const S = matteFace(icon, LC.T ? litText(LC, () => stampText(LC, LC.T.lines, LC.T.icon, [G.SHIFT, G.SHIFT])) : clearShine(finish(LC.ink, LC.tone, LC.glint), LC.text))
+    // cells the composer sets in the shade tone (a thermometer's mercury, a bar's half-cell top)
+    if (LC.shade) for (let k = 0; k < N * N; k++) if (LC.shade[k] && !S.ink[k]) { S.shade[k] = 1; S.tone[k] = 0; S.shine[k] = 0 }
+    return S
+  }
+  const SP = icon.params ? liveSprite(icon) : null
+  if (SP) {
+    const T0 = pixelText(icon), L0 = spriteLayers(SP)
+    if (!T0) return matteFace(icon, finish(L0.ink, L0.tone, L0.glint))
+    return matteFace(icon, litText(L0, () => stampText(L0, T0.lines, T0.icon, [G.SHIFT, G.SHIFT])))
+  }
+  if (icon.params && !tune.shift) { const sh = liveShift(icon); if (sh[0] || sh[1]) tune = { ...tune, shift: sh } }
   // Live-icon text is re-set in a bitmap font after the drawing is rasterised (_pixel-text.mjs)
   const T = pixelText(icon)
   if (T) icon = T.icon
   // so are five-point stars: drawn from sprites (_pixel-star.mjs)
   const S = pixelStars(icon)
   if (S) icon = S.icon
+  // a live clock's hands are drawn from its centre cell after the face (_pixel-live.mjs)
+  const HD = liveHands(icon)
+  if (HD) icon = HD.icon
+  const TP = liveTimerHand(icon)
+  if (TP) icon = TP.icon
+  const ND = liveNeedle(icon)
+  if (ND) icon = ND.icon
+  // and a battery's charge is a filled slab (_pixel-live.mjs)
+  const SL = liveSlabs(icon)
+  if (SL) icon = SL.icon
+  // a kitchen timer's ring is open (the time left is an arc, the spent part dots): its face disc has no rim to
+  // hold a body tone, so the timer is ink on paper
+  if (icon.params && icon.name === 'timer-ring') tune = { ...tune, notone: true }
   const L = tune.mode === 'sil' ? silhouette(icon, tune) : raster(icon, tune)
   if (tune.notone) { L.tone = G.grid(); L.glint = G.grid() }
+  if (icon.params) solidBadges(L, icon, tune.shift || [0, 0])
   if (tune.ink || tune.del || tune.tone || tune.clear) {
     for (const [i, j] of cellsOf(tune.del)) L.ink[G.ix(i, j)] = 0
     for (const [i, j] of cellsOf(tune.clear)) L.tone[G.ix(i, j)] = 0
@@ -237,9 +310,36 @@ export function build(icon, tune = TUNE[icon.name] || {}) {
     for (const [i, j] of cellsOf(tune.tone)) { L.tone[G.ix(i, j)] = 1; L.ink[G.ix(i, j)] = 0 }
   }
   if (S) stampStars(L, S.stars, tune.shift || [0, 0])
+  if (HD) drawHands(L, HD, tune.shift || [0, 0], icon.params)
+  if (TP) drawPointer(L, TP, tune.shift || [0, 0])
+  if (icon.params && icon.name === 'stopwatch') stopwatchDial(L, icon, tune.shift || [0, 0])
+  const SW = icon.params && icon.name === 'stopwatch' ? drawSweep(L, icon, tune.shift || [0, 0]) : false
+  let half = SL ? drawSlabs(L, SL, tune.shift || [0, 0], icon.params && icon.params.level) : null
+  // a gauge's dial is flat paper like a clock face (a toned dome with a highlight reads as a helmet): ink arc,
+  // ink hub and needle on an empty field
+  if (ND) { L.tone = G.grid(); L.glint = G.grid(); drawNeedle(L, ND, tune.shift || [0, 0]) }
   const plates = tune.noPlates ? null : L.plates
-  if (T) { stampText(L, T.lines, icon, tune.shift || [0, 0]); return withPlates(clearShine(finish(L.ink, L.tone, L.glint), L.text), plates) }
-  return withPlates(finish(L.ink, L.tone, L.glint), plates)
+  const matte = Sp => {
+    Sp = matteFace(icon, Sp)
+    // a clock face is matte: a highlight pixel beside the hands reads as part of them
+    if (HD || SW) { Sp.tone = G.or(Sp.tone, Sp.shine); Sp.shine = G.grid() }
+    if (half) for (let k = 0; k < N * N; k++) if (half[k] && !Sp.ink[k]) { Sp.shade[k] = 1; Sp.tone[k] = 0; Sp.shine[k] = 0 }
+    return Sp
+  }
+  if (T) return withPlates(matte(litText(L, () => stampText(L, T.lines, icon, tune.shift || [0, 0]))), plates)
+  return withPlates(matte(finish(L.ink, L.tone, L.glint)), plates)
+}
+// a live icon's count badge (a closed S-plate ring: forge/DYNAMIC.md) is a solid ink chip at every value, so its
+// digits are always knocked out of the same chip (and an empty badge is a plain notification dot)
+function solidBadges(L, icon, sh) {
+  for (const l of icon.lines || []) {
+    if (l.plate !== 'S' || !l.closed || !l.pts || l.pts.length < 3) continue
+    const cov = G.coverage([l.pts], sh)
+    for (let k = 0; k < cov.length; k++) if (cov[k] >= 6 || (L.plates?.s?.[k] && L.ink[k])) {
+      L.ink[k] = 1; L.tone[k] = 0; if (L.glint) L.glint[k] = 0
+      if (L.plates?.s) L.plates.s[k] = 1
+    }
+  }
 }
 const withPlates = (out, plates) => { if (plates) Object.defineProperty(out, 'plates', { value: plates, enumerable: false }); return out }
 

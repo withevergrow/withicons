@@ -158,7 +158,8 @@
   function tagText(st) { var c = colorCss(st); return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
   function cssText(st) {
     var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/'
-    return '<link rel="stylesheet" href="' + base + 'with-' + st + '.css">' + (colorCss(st) ? '\n<script src="' + base + 'with-icons.js" defer></script>' : '')
+    // with-loader.js links only the CSS of the icons on the page (any style mix); custom colours need the inline-SVG runtime
+    return '<script src="' + base + (colorCss(st) ? 'with-icons.js' : 'with-loader.js') + '" defer></script>'
   }
   function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
   function busy(b, on) { if (!b) return; b.classList.toggle('is-busy', !!on); if (on) b.setAttribute('aria-busy', 'true'); else b.removeAttribute('aria-busy') }
@@ -173,7 +174,7 @@
         if (ok && tb) { tb.classList.add('is-done'); if (gl) gl.textContent = 'Copied'; clearTimeout(tb._t); tb._t = setTimeout(function () { tb.classList.remove('is-done'); if (gl) gl.textContent = 'Copy' }, 1600) }
       })
     }
-    if (kind === 'copy-css') return copyText(cssText(st)).then(function (ok) { toast(ok ? 'Copied the stylesheet line. Add it once inside <head>.' : 'Couldn’t reach the clipboard.') })
+    if (kind === 'copy-css') return copyText(cssText(st)).then(function (ok) { toast(ok ? 'Copied the setup line. Add it once inside <head>.' : 'Couldn’t reach the clipboard.') })
     if (ed) return run(kind, st)
     // the studio is still on its way. An image copy must start inside the click (the clipboard wants the gesture), so it
     // hands the clipboard a promise of the PNG; everything else waits for the studio, with the plain SVG as the fallback

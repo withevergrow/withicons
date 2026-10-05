@@ -24,12 +24,20 @@ export const DEFAULTS = {
   S_GAP: 0.05,        // attached to the swell: reads as one engraved shadow
   S_PITCH: 0.85,
   S_W: 0.3,
+  S_MIN: 0.3,         // shortest cast-shade cut (live icons: P.LIVE_S_MIN, a lone short cut reads as a crumb)
+  LIVE_S_MIN: 0.9,
+  LIVE_S_GAP: -0.1,   // live icons: the cast shade runs into the stroke (a hairline gap breaks it off as loose crumbs)
+  LIVE_SPECK_L: 1.6,  // live icons: shortest body cut (rim tone breaks into crumbs otherwise)
   SPECK_L: 0.8,       // a cut must be longer than SPECK_L + SPECK_K * its peak width,
   SPECK_K: 2.5,        //   else it reads as a blot (tight bands, grids, rings)
   MIN_RUN: 1.0,       // shortest clear interval that may carry a body cut
   CROSS_RUN: 3.2,     // shortest clear interval that may carry a cross cut
   MIN_THICK: 1.1,
   CROSS_MIN: 2.4,     // shortest cross cut: shorter ones cross a main cut as a stray "x"
+  TEXT_SW: 1.75,      // live text stroke
+  TEXT_GAP: 0.55,     // live text: paper kept around every glyph (hatch and cast shade stop short of it)
+  LIVE_R: 2.3,        // live icons: hatch only within this reach of a shade-side edge (the centre stays paper)
+  LIVE_GAIN: 1.6,
   DOT_SHADE: 2.2,     // marks no larger than this cast no hatched shade     // across the hatch, the clear band must be at least this wide
 }
 const LIGHT = [H, H]  // tone grows toward lower-right
@@ -128,6 +136,7 @@ function clipBody(R, P, O, D) {
   capsulesT(O, D, R.cutOpenSegs, 0.75 + P.GAP, X)
   for (const c of R.crescents) ringsT(O, D, [c], X)
   capsulesT(O, D, R.crescentSegs, P.GAP, X)
+  if (R.textSegs) capsulesT(O, D, R.textSegs, P.TEXT_SW / 2 + P.TEXT_GAP, X)
   return subtract(merge(I), merge(X))
 }
 
@@ -156,7 +165,12 @@ const pointInSetFast = (p, set) => set.reduce((acc, r) => pointInRing(p, r) ? !a
 
 function bodyHatch(R, P) {
   if (!R.comps.length) return []
-  if (P.FORM > 0) R.formEdges = formEdges(R)
+  if (P.FORM > 0 || P.LIVE) R.formEdges = formEdges(R)
+  if (P.LIVE) {   // live: only an edge the contour draws carries rim tone (a bare fill edge is a clearance, not a form)
+    const segs = segsOf(R.lines.filter(l => !l.text))
+    const near = (x, y) => segs.some(g => { const ex = g[2] - g[0], ey = g[3] - g[1], L2 = ex * ex + ey * ey, px = x - g[0], py = y - g[1]; const t = L2 > 1e-12 ? Math.max(0, Math.min(1, (px * ex + py * ey) / L2)) : 0; return Math.hypot(px - ex * t, py - ey * t) < 0.4 })
+    R.formEdges = R.formEdges.filter(e => near((e[0] + e[2]) / 2, (e[1] + e[3]) / 2))
+  }
   const polys = []
   const allPts = R.fillRings.flat()
   const widthAt = u => { const v = Math.max(0, Math.min(1, (u - P.U0) / (1 - P.U0))); return P.W_MAX * Math.pow(v, P.GAMMA) }
@@ -176,7 +190,22 @@ function bodyHatch(R, P) {
     const f = 1 - Math.sqrt(best) / P.FORM_R
     return sh * f * f
   }
-  const tone = P.FORM > 0
+  const rim = p => {   // live: tone from the nearest shade-facing edge only, fading to 0 at LIVE_R
+    let best = Infinity, sh = 0
+    const E = R.formEdges, r2 = P.LIVE_R * P.LIVE_R
+    for (let i = 0; i < E.length; i++) {
+      const g = E[i], ex = g[2] - g[0], ey = g[3] - g[1], px = p[0] - g[0], py = p[1] - g[1]
+      const L2 = ex * ex + ey * ey
+      let t = L2 > 1e-12 ? (px * ex + py * ey) / L2 : 0; t = t < 0 ? 0 : t > 1 ? 1 : t
+      const dx = px - ex * t, dy = py - ey * t, d2 = dx * dx + dy * dy
+      if (d2 < best) { best = d2; sh = g[4] }
+    }
+    if (best >= r2 || sh <= 0) return 0
+    const f = 1 - Math.sqrt(best) / P.LIVE_R
+    return Math.min(1, P.LIVE_GAIN * sh * f)
+  }
+  const tone = P.LIVE ? (c, p) => rim(p)
+    : P.FORM > 0
     ? (c, p) => Math.max(0, Math.min(1, (1 - P.FORM) * ramp(c, p) + P.FORM * (0.5 + form(p))))
     : ramp
   const D = dirOf(P.BODY_ANGLE)
@@ -227,7 +256,7 @@ function shadowHatch(R, P) {
   if (!pts.length) return polys
   // dots and specks cast no shade: their hatched tails read as comets / pins
   const srcRings = R.fillRings.filter(r => bboxMax(r) > P.DOT_SHADE)
-  const srcSegs = segsOf(R.lines.filter(l => bboxMax(l.pts) > P.DOT_SHADE))
+  const srcSegs = segsOf(R.lines.filter(l => !l.text && bboxMax(l.pts) > P.DOT_SHADE))
   const D = dirOf(P.SHADOW_ANGLE)
   for (const O of lattice(D, P.S_PITCH, pts, 0.17)) {
     const Os = [O[0] - OFF[0], O[1] - OFF[1]]
@@ -241,10 +270,21 @@ function shadowHatch(R, P) {
     capsulesT(O, D, R.lineSegs, HW + P.S_GAP, X)
     for (const c of R.crescents) ringsT(O, D, [c], X)
     capsulesT(O, D, R.crescentSegs, P.S_GAP, X)
+    // live icons: a shade cut must hang off the mark that casts it; a cut floating on its own reads as a crumb
+    let ends = null
+    if (P.S_ATTACHED) {   // only inked marks hold a cut: strokes and swells (a bare fill edge is paper)
+      const A = []
+      capsulesT(O, D, R.lineSegs, HW + P.S_GAP, A)
+      for (const c of R.crescents) ringsT(O, D, [c], A)
+      capsulesT(O, D, R.crescentSegs, P.S_GAP, A)
+      ends = merge(A).map(x => x[1])
+    }
+    if (R.textSegs) capsulesT(O, D, R.textSegs, P.TEXT_SW / 2 + P.TEXT_GAP, X)
     const [b0, b1] = boxT(O, D, 0.35, 23.65)
     for (let [t0, t1] of subtract(merge(I), merge(X))) {
       t0 = Math.max(t0, b0); t1 = Math.min(t1, b1)
-      if (t1 - t0 < 0.3) continue
+      if (t1 - t0 < P.S_MIN) continue
+      if (ends && !ends.some(e => Math.abs(e - t0) < 0.05)) continue
       if (alongRod(R.lineSegs, O[0] + D[0] * (t0 + t1) / 2, O[1] + D[1] * (t0 + t1) / 2, D, HW + 0.3, HW + P.OFF * 1.6)) continue
       polys.push([[O[0] + D[0] * t0, O[1] + D[1] * t0], [O[0] + D[0] * t1, O[1] + D[1] * t1]])
     }
@@ -297,6 +337,15 @@ function platesOverlap(lines) {
 }
 const ringArea = r => { let a = 0; for (let k = 0; k < r.length; k++) { const p = r[k], q = r[(k + 1) % r.length]; a += p[0] * q[1] - q[0] * p[1] } return Math.abs(a / 2) }
 
+// Live text: glyph lines (ids "text:<ch>:<cap>:<n>") -> l.text = true
+const TEXT_ID = /^text:/
+function markText(R, icon) {
+  const ids = new Set(icon.paths.filter(p => TEXT_ID.test(p.id)).map(p => p.id))
+  for (const l of R.lines) if (ids.has(l.pathId)) l.text = true
+  if (ids.size) R.textSegs = segsOf(R.lines.filter(l => l.text))
+  return ids.size > 0
+}
+
 export function makeEngrave(over = {}) {
   const P = { ...DEFAULTS, ...over }
   return {
@@ -313,13 +362,20 @@ export function makeEngrave(over = {}) {
       // plates whose lines run along each other (a lid on a rim) would double-paint the shared edge: kept fused
       const plated = new Set(icon.paths.map(p => p.plate || 'K')).size > 1 && !platesOverlap(R.lines)
       if (plated) R.fillPlates = fillPlatesOf(R)
-      R.crescents = shadeCrescents(R, P.SW / 2, P.SWELL, LIGHT)
+      // Live text (forge/DYNAMIC.md): banknote lettering is cut clean. Glyphs get no swell and cast no shade, and
+      // the hatch and the cast shade keep out of a clear cartouche around each run of text, so every counter
+      // (0 8 9 A %) stays open at 16px. Static icons carry no glyph paths: unchanged.
+      const hasText = markText(R, icon)
+      R.crescents = shadeCrescents(hasText ? { ...R, lines: R.lines.filter(l => !l.text) } : R, P.SW / 2, P.SWELL, LIGHT, { bareEdges: !icon.params })
       R.crescentSegs = segsOf(R.crescents.map(r => ({ pts: r, closed: true })))
       const out = []
       // tiny closed contours (dots) would show a pinhole inside the stroke: fill them
       const dotLines = R.lines.filter(l => l.closed && bboxMax(l.pts) < P.SW + 1.2)
       const dots = dotLines.map(l => simplify(l.pts, 0.03, true))
-      const hatch = bodyHatch(R, P)
+      // Live icons (a skeleton built from params): the value sits in the middle of the frame, so the burin models
+      // only the shade-side rim of each mass and leaves the centre as clean paper. The hatch never depends on the
+      // value, so a digit changes only its own strokes.
+      const hatch = bodyHatch(R, icon.params ? { ...P, LIVE: true, SPECK_L: P.LIVE_SPECK_L } : P)
       const polys = [...dots, ...R.crescents, ...hatch]
       const tag = pl => plated ? { class: 'wm-' + (pl === 'A' || pl === 'S' ? pl : 'K').toLowerCase() } : {}
       if (!plated) {
@@ -336,9 +392,11 @@ export function makeEngrave(over = {}) {
         }
       }
       // cast shade: short constant-width cuts, cheapest as one stroked path
-      const sd = shadowHatch(R, P).map(s => ringD(s, false)).join('')
+      const sd = shadowHatch(R, icon.params ? { ...P, S_MIN: P.LIVE_S_MIN, S_ATTACHED: true, S_GAP: P.LIVE_S_GAP } : P).map(s => ringD(s, false)).join('')
       if (sd) out.push(['path', { d: sd, 'stroke-width': P.S_W, class: 'wm-shadow' }])
-      for (const p of icon.paths) out.push(['path', { d: p.d, ...tag(p.plate) }])
+      // live text: the swell-free glyphs are cut at the weight the stroke font is spaced for (the contour reads at
+      // SW + swell), so letters match the frame and keep the font's counters
+      for (const p of icon.paths) out.push(['path', { d: p.d, ...(TEXT_ID.test(p.id) ? { 'stroke-width': P.TEXT_SW } : {}), ...tag(p.plate) }])
       return out
     },
   }

@@ -129,19 +129,22 @@ by hand (section 1.5). `scripts/publish.mjs` refuses to publish a version whose 
 - [ ] Each package README shows the right install line, import path and props, and links to withicons.com.
 - [ ] `node scripts/publish.mjs --dry-run`: tarball contents are sane and sizes match the README tables.
 - [ ] Smoke test in fresh apps: Vite React, Vite Vue, SvelteKit, Angular CLI, SolidStart, and plain HTML with the web
-      component from jsDelivr plus the icon classes CSS. Check TypeScript types, tree-shaking (one icon gives a tiny bundle), and SSR.
+      component from jsDelivr (`dist/cdn.js`: the network panel shows only one `icons/<style>/<name>.js` per icon shown)
+      plus the icon classes loader (`dist/classes/with-loader.js`: only `classes/<style>/<name>.css` per icon), and
+      live icons from `@withicons/dynamic/dist/cdn/lite.js` (one `cdn/gens/<name>.js` per live icon). Check TypeScript types, tree-shaking (one icon gives a tiny bundle), and SSR.
 - [ ] `npx -y @withicons/mcp` starts and lists tools in an MCP client (seven, including `animate_icon` and `list_palettes`). `npx withicons search trash`
       and `npx withicons animate bell --trigger hover` work.
-- [ ] `@withicons/motion`: `motion.css` + `icons.css` from jsDelivr animate a React icon, a `<with-icon>` and an `<i class="with">`;
+- [ ] `@withicons/motion`: `motion.css` + `icons/<name>.css` from jsDelivr (and `icons.css` in a bundled app) animate a React icon, a `<with-icon>` and an `<i class="with">`;
       `prefers-reduced-motion` turns them off; a swap toggles with `.is-on`.
-- [ ] Palette styles: an `<img>` of `core/dist/svg/kawaii/heart.svg` shows its colours; `with-all.css` shows them CSS-only;
+- [ ] Palette styles: an `<img>` of `core/dist/svg/kawaii/heart.svg` shows its colours; `with-loader.js` (and `with-kawaii.css`) show them CSS-only;
       `--with-kawaii-*` variables re-theme a React icon.
 - [ ] Per-icon palettes: `import { applyPalette } from '@withicons/core/palettes/palette-map.js'` works on Node 18 and 20
       (palette-map ships as `.mjs` + `.cjs`, so the `package` icon's `dist/palettes/package.json` data file can't change its module type),
       and `npx withicons get pizza --style retro --palette pepperoni` recolours every part.
 - [ ] Package READMEs: drop the "Not published to npm yet / launching soon" notes (`packages/cli`, `mcp`, `motion`; they ship to npm).
-- [ ] After publishing: jsDelivr URLs resolve (`https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js`).
-      Purge if needed: `https://purge.jsdelivr.net/npm/@withicons/web/dist/index.js`.
+- [ ] After publishing: jsDelivr URLs resolve (`https://cdn.jsdelivr.net/npm/@withicons/web` serves `dist/cdn.js`;
+      also `.../web/dist/classes/with-loader.js`, `.../motion/dist/icons/bell.css`, `.../dynamic/dist/cdn/lite.js`).
+      Purge if needed: `https://purge.jsdelivr.net/npm/@withicons/web/dist/cdn.js`.
 - [ ] Site: "launching soon" labels next to install commands are removed (site owners), GitHub links go live.
 - [ ] Trusted Publishing configured for every package (section 1.6), tokens revoked.
 - [ ] Tag `v0.2.0` on the published commit (`git tag v0.2.0 <sha> && git push origin v0.2.0`). The workflow skips

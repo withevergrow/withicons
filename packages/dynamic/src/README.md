@@ -17,14 +17,20 @@ npm i @withicons/dynamic
 ## Plain HTML (no build step)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@{{version}}/dist/cdn/dynamic.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@{{version}}/dist/cdn/lite.js"></script>
 
 <with-live-icon name="calendar-date" day="17" month="MAR"></with-live-icon>
 <with-live-icon name="calendar-date" today variant="glass" size="48" label="Today"></with-live-icon>
 ```
 
-The script defines `<with-live-icon>` and `window.WithLive`. The line style is built in. The first time you use another
-style, its file (`styles/<style>.js` next to `dynamic.js`) loads.
+The script defines `<with-live-icon>` and `window.WithLive`, and downloads only what the page draws: the line style is
+built in, each live icon's drawing code is its own small file (`gens/<name>.js` next to `lite.js`), and the first time
+you use another style, its file (`styles/<style>.js`) loads. Every name, param and example is known at once
+(`WithLive.list()`, `get()`, `validate()`); `WithLive.render()` is sync once the icon and style are loaded
+(`await WithLive.loadIcon(name)` and `await WithLive.load(style)`), and `renderAsync()` loads both by itself.
+
+`cdn/dynamic.js` is the same script with all {{count}} live icons inline, for pages that call `WithLive.render()` on any
+icon synchronously. See [Bundle size](#bundle-size).
 
 ## The element
 

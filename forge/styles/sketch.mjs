@@ -15,6 +15,7 @@
 // Strokes are quadratic B-splines written as compact relative path data on a
 // 0.1u grid. All randomness is rng(icon.name + ...): same input, same bytes.
 import { V, rng, pointInRing, area } from '../kernel/geom.mjs'
+import { textInfo } from './_live-text.mjs'
 
 const SW = 1.3
 const D2R = Math.PI / 180
@@ -42,6 +43,9 @@ const K = {
   w2: 0.5, op2: 0.5,         // width, opacity
   ext2: [1.1, 1.8],          // run past a corner (x0.7 past a free end)
   min2: 3.2,
+  // live icons (forge/DYNAMIC.md): text is lettered with a broader marker in one clean pass (no overshoot, no pencil
+  // line through the letters), and the drawing stays inside the canvas whatever the value
+  textW: 1.75, textJit: 0.5, live: [0.95, 23.05],
   hatch: { cover: 0.58, ang: -38 * D2R, pitch: 2.2, w: 0.8, op: 0.5, clear: 1.45, edge: 1.1, min: 1.4 },
 }
 
@@ -273,6 +277,11 @@ const reindex = (oldPts, corners, newPts) => {
 
 // ---------------------------------------------------------------------------
 // Draw one stroke for one pass; returns the displaced samples (for hachure).
+let LIVE = false
+const LABEL_FACE = new Set(['avatar-initials', 'badge-text', 'battery-percent', 'calendar-date', 'calendar-event', 'calendar-month',
+  'calendar-range', 'calendar-tear', 'calendar-weekday', 'cellular-tech', 'digital-clock', 'file-type', 'folder-label',
+  'humidity', 'keycap', 'map-pin-number', 'percent-badge', 'price-tag', 'progress-ring', 'ribbon-label', 'sale-sticker',
+  'speech-bubble-text', 'step-number', 'tag-label', 'ticket-number', 'timer-ring', 'uv-index'])
 function drawStroke(pen, st, W, J, r, pass, touches) {
   let pts = st.pts.slice(), corners = st.corners.slice()
   const L0 = st.len
@@ -324,6 +333,7 @@ function drawStroke(pen, st, W, J, r, pass, touches) {
       const w = W(p), j = J(p)
       return [p[0] + w[0] + j[0] - t[1] * off, p[1] + w[1] + j[1] + t[0] * off]
     })
+    if (LIVE) q.splice(0, q.length, ...clampLive(q))
     if (first) { pen.move(q[0]); first = false }
     pen.spline(q)
     out.push(...q)
@@ -331,6 +341,53 @@ function drawStroke(pen, st, W, J, r, pass, touches) {
   }
   return out
 }
+
+// live-icon lettering: the centreline, warped by the shared field (so it stays registered with the drawing) and a
+// light tremor, split at sharp vertices so letters keep their corners; no overshoot, lead-in or closing tail
+function drawText(pen, l, W, J) {
+  let pts = clean(l.pts, l.closed)
+  if (l.closed && pts.length > 2) pts = [...pts, pts[0]]
+  if (pts.length < 2) return []
+  const n = pts.length, cuts = [0]
+  for (let i = 1; i < n - 1; i++) if (turn(pts[i - 1], pts[i], pts[i + 1]) > K.sharp) cuts.push(i)
+  cuts.push(n - 1)
+  const out = []
+  let first = true
+  for (let k = 0; k < cuts.length - 1; k++) {
+    const smp = samplePiece(pts.slice(cuts[k], cuts[k + 1] + 1))
+    if (!smp.length) continue
+    const q = smp.map(({ p }) => { const w = W(p), j = J(p); return [p[0] + w[0] + j[0] * K.textJit, p[1] + w[1] + j[1] * K.textJit] })
+    if (first) { pen.move(q[0]); first = false }
+    pen.spline(q)
+    out.push(...q)
+  }
+  return out
+}
+// a glyph's own path data, moved rigidly by (dx, dy): exact letter shapes (open counters), registered with the
+// warped drawing. Absolute commands only (the stroke font writes M L H V C Q A); anything else -> null
+function shiftD(d, dx, dy) {
+  const toks = String(d).match(/[A-Za-z]|-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/g) || []
+  if (toks.some(t => /^[a-z]$/.test(t))) return null
+  const R = v => String(Math.round(v * 100) / 100)
+  let out = '', cmd = '', k = 0
+  for (const t of toks) {
+    if (/^[A-Z]$/.test(t)) { cmd = t; k = 0; out += t; continue }
+    const v = parseFloat(t)
+    let w = v
+    if (cmd === 'H') w = v + dx
+    else if (cmd === 'V') w = v + dy
+    else if (cmd === 'A') { const i = k % 7; w = i === 5 ? v + dx : i === 6 ? v + dy : v }
+    else if ('MLCQST'.includes(cmd)) w = v + (k % 2 ? dy : dx)
+    else return null
+    out += (out && !/[A-Z]$/.test(out) ? ' ' : '') + R(w); k++
+  }
+  return out
+}
+const segDist = (p, a, b) => {
+  const d = V.sub(b, a), L2 = V.dot(d, d), t = L2 ? Math.max(0, Math.min(1, V.dot(V.sub(p, a), d) / L2)) : 0
+  return V.dist(p, V.add(a, V.mul(d, t)))
+}
+const clampLive = q => q.map(p => [Math.max(K.live[0], Math.min(K.live[1], p[0])), Math.max(K.live[0], Math.min(K.live[1], p[1]))])
 
 // a dot (degenerate subpath or tiny loop) becomes a small solid scribble:
 // an outward spiral, solid from the middle, ending on the dot's rim
@@ -349,7 +406,16 @@ function drawDot(pen, c, R, r) {
 // the displaced ink and of the fill's own edge. Exact scanline clipping.
 function hatch(icon, inkPts, r) {
   const H = K.hatch
-  const rings = (icon.fillSet || []).filter(g => g.length > 2)
+  let rings = (icon.fillSet || []).filter(g => g.length > 2)
+  // a live icon's badge (a ring traced by a closed S-plate line) holds its count: no shading behind the digits
+  // a live icon that letters a value on its face keeps that face clean paper at every value (hatching behind digits
+  // greys them out at 24px)
+  if (LIVE && LABEL_FACE.has(icon.name)) return ''
+  if (LIVE) {
+    const sRings = (icon.lines || []).filter(l => l.plate === 'S' && l.closed && l.pts.length > 2)
+    const near = (p, L) => L.pts.some((q, i) => { const b = L.pts[(i + 1) % L.pts.length]; return segDist(p, q, b) < 0.6 })
+    rings = rings.filter(g => !sRings.some(L => g.filter(p => near(p, L)).length > 0.6 * g.length))
+  }
   if (!rings.length) return ''
   const D = [Math.cos(H.ang), Math.sin(H.ang)], N = [-D[1], D[0]]
   const cutRings = [], cutLines = []
@@ -449,6 +515,9 @@ function hatch(icon, inkPts, r) {
 
 // ---------------------------------------------------------------------------
 function renderSketch(icon) {
+  LIVE = !!icon.params
+  const textIds = new Set(LIVE ? (icon.paths || []).filter(p => textInfo(p)).map(p => p.id) : [])
+  const isText = l => textIds.has(l.pathId)
   const lines = (icon.lines || []).filter(l => l && l.pts && l.pts.length)
   for (const p of icon.paths || []) for (const q of zeroDots(p.d)) lines.push({ pts: [q], closed: false, plate: p.plate, pathId: p.id })
   const W = field(icon.name + '|warp', K.warp)
@@ -460,9 +529,21 @@ function renderSketch(icon) {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
     for (const [x, y] of l.pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
     const R = Math.max(x1 - x0, y1 - y0) / 2
-    return (plen(l.pts) < 0.5 || (l.closed && R < 1.3)) ? { c: [(x0 + x1) / 2, (y0 + y1) / 2], R: Math.max(R, 0.7) } : null
+    if (isText(l)) return plen(l.pts) < 0.5 ? { c: [(x0 + x1) / 2, (y0 + y1) / 2], R: 0.7 } : null
+    // (a live icon's small ring is a big dot: a calendar's marked day must stay bigger than the plain ones)
+    return (plen(l.pts) < 0.5 || (l.closed && R < 1.3)) ? { c: [(x0 + x1) / 2, (y0 + y1) / 2], R: Math.max(R + (LIVE && l.closed ? 0.5 : 0), 0.7) } : null
   })
-  const plans = lines.map((l, i) => dots[i] ? null : planStrokes(l))
+  const plans = lines.map((l, i) => dots[i] || isText(l) ? null : planStrokes(l))
+  // a live icon seeds each stroke by its own path and subpath (not its place in the list), so a value that adds or
+  // removes text never reshuffles the hand of the rest of the drawing
+  const sub = new Map(), seedOf = lines.map(l => { const k = l.pathId || 'p'; const n = sub.get(k) || 0; sub.set(k, n + 1); return k + '|' + n })
+  const tpen = {}, tglyph = {}
+  const glyphOf = new Map()
+  for (const p of icon.paths || []) if (textIds.has(p.id)) {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+    for (const sb of p.subs || []) for (const [x, y] of sb.pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
+    if (Number.isFinite(x0)) glyphOf.set(p.id, { d: p.d, c: [(x0 + x1) / 2, (y0 + y1) / 2] })
+  }
   // one pen per pass and skeleton plate, so motion can move a part (MOTION.md "Parts choreography")
   const PLATES = ['K', 'A', 'S']
   const plateOf = l => PLATES.includes(l.plate) ? l.plate : 'K'
@@ -471,7 +552,19 @@ function renderSketch(icon) {
   for (let pass = 1; pass <= 2; pass++) {
     lines.forEach((line, li) => {
       const pen = pens[pass][plateOf(line)]
-      const r = rng(`${icon.name}|${line.pathId || 'p'}|${li}|${pass}`)
+      const r = rng(LIVE ? `${icon.name}|${seedOf[li]}|${pass}` : `${icon.name}|${line.pathId || 'p'}|${li}|${pass}`)
+      if (!plans[li] && !dots[li]) {
+        if (pass !== 1) return
+        const P = plateOf(line), g = glyphOf.get(line.pathId)
+        if (g && !g.done) {
+          g.done = true
+          const w = W(g.c), d = shiftD(g.d, w[0], w[1])
+          if (d) { (tglyph[P] ||= []).push(d); for (const l2 of lines) if (l2.pathId === line.pathId) ink.push(l2.pts.map(p => [p[0] + w[0], p[1] + w[1]])); return }
+        }
+        if (g && g.d && shiftD(g.d, 0, 0)) return
+        const q = drawText(tpen[P] ||= new Pen(), line, W, J[1]); if (q.length) ink.push(q)
+        return
+      }
       if (!plans[li]) {
         if (pass === 1) ink.push(drawDot(pen, dots[li].c, dots[li].R, r))
         return
@@ -491,6 +584,10 @@ function renderSketch(icon) {
   const tag = P => used.length > 1 ? { class: 'wm-' + P.toLowerCase() } : {}
   for (const P of used) if (pens[2][P].d) nodes.push(['path', { d: pens[2][P].d, 'stroke-width': K.w2, 'stroke-opacity': K.op2, ...tag(P) }])
   for (const P of used) if (pens[1][P].d) nodes.push(['path', { d: pens[1][P].d, ...tag(P) }])
+  for (const P of PLATES) {
+    const d = (tglyph[P] || []).join('') + (tpen[P]?.d || '')
+    if (d) nodes.push(['path', { d, 'stroke-width': K.textW, ...(used.length > 1 || !used.includes(P) ? { class: 'wm-' + P.toLowerCase() } : {}) }])
+  }
   return nodes
 }
 

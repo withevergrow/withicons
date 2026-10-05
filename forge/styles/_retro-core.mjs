@@ -16,9 +16,13 @@
 import { parsePath, simplify, area, pointInRing, distToPolyline } from '../kernel/geom.mjs'
 import * as F from './_retro-field.mjs'
 import { tune } from './_retro-tune.mjs'
+import { textInfo, textStroke } from './_live-text.mjs'
 
 export const K = {
   W: 2.35,          // ink weight
+  TEXT_W: 1.75,     // live-icon text weight, large caps (the line weight: counters stay open at 24px)
+  TEXT_W_S: 1.75,   // ...small caps (a touch heavier: they are thinner on screen)
+  TEXT_HALO: 0.5,   // clean paper kept around free text (no shadow / echo against the glyphs)
   SHIFT: -0.45,     // the drawing moves up-left so drawing + shadow sit centred
   OFF: 12,          // shadow offset in field samples (12 x 0.08 = 0.96u down-right)
   ECHO: 12,         // line-only echo offset (samples)
@@ -87,14 +91,30 @@ export function build(icon) {
   const lines = [...(icon.lines || []), ...dots(icon)]
     .filter(l => l.pts && l.pts.length)
     .map(l => ({ ...l, pts: mv(l.pts) }))
-  const base = lines.filter(l => l.plate !== 'S')
-  const sig = lines.filter(l => l.plate === 'S')
+  // Live-icon text (forge/DYNAMIC.md) is lettered, not inflated: glyphs keep the stroke font's own weight (their
+  // counters stay open at 24px), take no print shadow or echo, and on a badge they are cream on the teal disc
+  const caps = new Map()
+  for (const p of icon.paths || []) { const t = textInfo(p); if (t) caps.set(p.id, t.cap) }
+  const isTxt = l => caps.has(l.pathId)
+  const tlines = lines.filter(isTxt)
+  const base = lines.filter(l => l.plate !== 'S' && !isTxt(l))
+  const sig = lines.filter(l => l.plate === 'S' && !isTxt(l))
+  const textW = l => caps.get(l.pathId) >= 6 ? K.TEXT_W : K.TEXT_W_S
+  const strokeText = (ls, Fd, grow = 0) => {
+    const by = new Map()
+    for (const l of ls) { const w = textW(l) + grow; by.set(w, [...(by.get(w) || []), l]) }
+    for (const [w, g] of by) F.strokes(g, w, 1.2, Fd)
+    return Fd
+  }
 
   // --- S plate: outermost closed rings are badges; everything else is a glyph
   const closedS = sig.filter(l => l.closed && l.pts.length > 2)
   const badges = closedS.filter(l => !closedS.some(o => o !== l && polyArea(o.pts) > polyArea(l.pts) && fracInside(l.pts, o.pts) > 0.9))
   const inBadge = g => badges.some(b => b !== g && fracInside(g.pts, b.pts) > 0.5)
   const freeS = sig.filter(l => !badges.includes(l) && !inBadge(l))
+  const tBadge = badges.length ? tlines.filter(l => inBadge(l)) : []
+  const tFree = tlines.filter(l => !tBadge.includes(l))
+  const tFreeS = tFree.filter(l => l.plate === 'S')
 
   // --- fills: those that trace a badge belong to it
   const fills = (icon.fills || []).filter(f => f.set && f.set.length).map(f => f.set.map(mv))
@@ -104,8 +124,17 @@ export function build(icon) {
   }
   const baseFills = fills.filter(r => !onBadge(r))
 
-  // --- INK (base plates)
-  const ink = F.strokes(base, W, 1.2)
+  // --- INK (base plates). On a live label face the details drawn on it (a calendar's day marks, a key's symbol)
+  // are lettered like its text, in the fixed dark brown: currentColor turns light in dark themes and would vanish
+  // into the mustard
+  let letterBase = []
+  if (icon.params && T.label && baseFills.length) {
+    const pre = F.field(1.2)
+    for (const rings of baseFills) F.region(rings, 1.2, pre)
+    const at = p => { const i = Math.round(p[0] / F.H), j = Math.round(p[1] / F.H); return i < 0 || j < 0 || i >= F.N || j >= F.N ? 1 : pre[j * F.N + i] }
+    letterBase = base.filter(l => l.pts.filter(p => at(p) < -0.6).length > 0.8 * l.pts.length)
+  }
+  const ink = F.strokes(letterBase.length ? base.filter(l => !letterBase.includes(l)) : base, W, 1.2)
   // --- FILL
   const fill = F.field(1.2)
   for (const rings of baseFills) F.region(rings, 1.2, fill)
@@ -117,7 +146,7 @@ export function build(icon) {
     if (s.closed && pts.length > 2 && badges.some(b => fracInside(pts, b.pts) > 0.9)) { cutBadge.push(pts); continue }
     // Solid carves its detail out of the mass; in an outline style the ink already
     // draws that detail, so only cutouts that stand clear of the ink stay holes
-    const nearInk = pts.filter(p => base.some(l => distToPolyline(p, l.pts, l.closed) < K.CUT_NEAR)).length / pts.length
+    const nearInk = pts.filter(p => base.some(l => distToPolyline(p, l.pts, l.closed) < K.CUT_NEAR) || tlines.some(l => distToPolyline(p, l.pts, l.closed) < K.CUT_NEAR)).length / pts.length
     if (nearInk > (s.closed ? 0.8 : 0.5)) continue
     if (s.closed && s.pts.length > 2) cutArea.push(pts); else cutLine.push({ pts, closed: false })
   }
@@ -126,10 +155,11 @@ export function build(icon) {
 
   // --- S overlays: clear a moat through everything below, then lay them on top
   let badgeFill = null, lens = null, sMoat = null
-  if (badges.length || freeS.length) {
+  if (badges.length || freeS.length || tFreeS.length) {
     const moat = F.field(1.2)
     for (const b of badges) { F.region([b.pts], 1.2, moat); F.strokes([b], W + 2 * K.GAP_S, 1.2, moat) }
     if (freeS.length) F.strokes(freeS, W + 2 * K.GAP_S, 1.2, moat)
+    if (tFreeS.length) strokeText(tFreeS, moat, 2 * K.GAP_S)
     F.subtract(ink, moat)
     F.subtract(fill, moat)
     sMoat = moat
@@ -140,7 +170,8 @@ export function build(icon) {
       for (const b of badges) { F.region([b.pts], 2, disc); F.strokes([b], solidity(b.pts) < 0.93 ? W * K.BADGE_TOOTH : W, 2, disc) }
       if (cutBadge.length) F.subtract(disc, F.region(cutBadge, 1.2))
       // an empty round badge (a magnifier's lens) is a teal ring around a sunlit centre
-      const empty = badges.filter(b => solidity(b.pts) >= 0.93 && !sig.some(g => g !== b && fracInside(g.pts, b.pts) > 0.5))
+      // (a live icon's badge holds a value, even when it is empty for a moment: it stays a teal disc)
+      const empty = icon.params ? [] : badges.filter(b => solidity(b.pts) >= 0.93 && ![...sig, ...tlines].some(g => g !== b && fracInside(g.pts, b.pts) > 0.5))
       if (empty.length) lens = F.offset(F.region(empty.map(b => b.pts), 2), K.LENS_RING)
       const rim = F.intersect(F.copy(disc), F.offset(F.copy(disc), K.BADGE_RIM).map(v => -v))
       if (K.BADGE_RIM > 0) F.union(ink, rim)
@@ -160,18 +191,23 @@ export function build(icon) {
   const lineOnly = T.echo === true || (T.echo !== false && !badgeFill && ext.area < K.MIN_FILL)
 
   // moat: the S overlays' cleared region (negative inside); retro.mjs uses it to tag S ink as its own node
-  const out = { ink, stripes: [], badge: null, lens: null, shadow: null, echo: null, moat: sMoat }
+  const out = { ink, stripes: [], badge: null, lens: null, shadow: null, echo: null, moat: sMoat, btext: null, ftext: null }
+  // free text that sits on the face (most of each glyph inside the fill)
+  const atF = p => { const i = Math.round(p[0] / F.H), j = Math.round(p[1] / F.H); return i < 0 || j < 0 || i >= F.N || j >= F.N ? 1 : fill[j * F.N + i] }
+  const tFill = tFree.filter(l => l.pts.filter(p => atF(p) < 0).length > 0.6 * l.pts.length)
 
   if (!lineOnly) {
     const col = F.subtract(F.copy(fill), under)
     // inner details: the strokes that sit inside the mass (a mouth, text lines, a dash)
     const at = (Fd, p) => Fd[Math.round(p[1] / F.H) * F.N + Math.round(p[0] / F.H)]
-    const inner = [...base, ...glyphs].filter(l => {
+    const inner = [...base, ...glyphs, ...tFree].filter(l => {
       const pts = l.pts.filter(p => p[0] > 0 && p[1] > 0 && p[0] < 24 && p[1] < 24)
       return pts.length && pts.filter(p => at(fill, p) < -0.4).length / l.pts.length > 0.6
     })
     const detail = inner.length ? F.strokes(inner, inner === glyphs ? W * K.BADGE_GLYPH : W, 1.2) : null
-    out.stripes = bands(col, ext, T, F.components(vis).filter(c => c.area > 0.8), detail && inkRuns(detail))
+    // a face that carries text is a plain mustard label (stripes behind letters grey them out at 24px, and their gaps
+    // would shift with every value; a live icon that letters its face keeps it plain at every value, T.label): the letters go on it in a fixed dark brown that reads in light and dark themes
+    out.stripes = (tFill.length || (icon.params && T.label)) ? [{ c: 1, f: col }] : bands(col, ext, T, F.components(vis).filter(c => c.area > 0.8), detail && inkRuns(detail))
   }
   if (badgeFill) out.badge = F.subtract(badgeFill, under)
   if (lens) out.lens = lens
@@ -187,6 +223,18 @@ export function build(icon) {
     const s = F.shift(solidSil, K.OFF, K.OFF, 1.2)
     out.shadow = F.subtract(s, F.offset(solidSil, 0.25))
   }
+  // text goes on last, with a clean halo through the shadow / echo around it
+  const tOut = tFree.filter(l => !tFill.includes(l))
+  if (tFill.length) out.ftext = strokeText(tFill, F.field(1.2))
+  if (letterBase.length) out.ftext = F.strokes(letterBase, W, 1.2, out.ftext || F.field(1.2))
+  if (tOut.length) {
+    const tink = strokeText(tOut, F.field(1.2))
+    const halo = F.offset(F.copy(tink), -K.TEXT_HALO)
+    if (out.shadow) F.subtract(out.shadow, halo)
+    if (out.echo) F.subtract(out.echo, halo)
+    F.union(out.ink, tink)
+  }
+  if (tBadge.length) out.btext = strokeText(tBadge, F.field(1.2))
   return out
 }
 

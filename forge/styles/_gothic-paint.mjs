@@ -151,7 +151,9 @@ function lancetBars(c, s = 2.6) {
 
 // ---------------------------------------------------------------------------
 // output
-let OUT, USED, CLS, TIER = 0, RANK = 0, RANKS, KINDS, KIND = 0, KB = 0
+let OUT, USED, CLS, TIER = 0, RANK = 0, RANKS, KINDS, KIND = 0, KB = 0, TXT = false
+// Live lettering never counts toward the size budget: what texture a Live icon keeps must not change with its value
+const TXTN = new WeakSet()
 const Q = [[0.04, 0.05, 2], [0.06, 0.08, 1], [0.09, 0.14, 1]]
 function smooth(r) {
   const n = r.length
@@ -168,6 +170,7 @@ function add(Fd, role, op = 1, q = 0, cls = CLS) {
   if (op < 1) a['fill-opacity'] = opv(op)
   if (cls) a.class = cls
   OUT.push(['path', a]); RANKS.push(RANK); KINDS.push(KB + KIND++); USED += d.length + 70
+  if (TXT) TXTN.add(a)
 }
 const f2 = v => String(Math.round(v * 100) / 100).replace(/^(-?)0\./, '$1.')
 function lines(polys, role, w, op = 1, cls = CLS) {
@@ -178,6 +181,7 @@ function lines(polys, role, w, op = 1, cls = CLS) {
   if (op < 1) a['stroke-opacity'] = opv(op)
   if (cls) a.class = cls
   OUT.push(['path', a]); RANKS.push(RANK); KINDS.push(KB + KIND++); USED += d.length + 150
+  if (TXT) TXTN.add(a)
 }
 
 // a signed field negative in the upper-left part (fraction k) of each piece of Fd
@@ -267,7 +271,9 @@ function gilt(p) {
   add(Fd, p.role || 'accent')
   // burnished: the far side of the metal turns dark
   if (!p.thin && inkArea(Fd) > 5) { RANK = 1; add(shade(Fd, band(Fd, 0.7, 1.2)), 'shadow', 0.16, 2); RANK = 0 }
-  bevel(Fd, 'shadow', 0.45, 'shine', 0.9, p.thin ? 0.35 : 0.52, p.thin ? 0.2 : 0.28)
+  // lettering (p.letter) is set on deep glass: a light shade only, so every stroke stays bright edge to edge
+  if (p.letter) { add(Fd, 'shine', 0.3); bevel(Fd, 'shadow', 0.22, 'shine', 0.9, 0.18, 0.2) }
+  else bevel(Fd, 'shadow', 0.45, 'shine', 0.9, p.thin ? 0.35 : 0.52, p.thin ? 0.2 : 0.28)
   if (p.glint !== false) glint(Fd, p.thin ? 0.25 : 0.4, 0.5, 0.9)
 }
 function iron(p) {
@@ -371,7 +377,7 @@ export function paint(parts0, o = {}) {
   paintAll(live, o)
   // over budget: drop texture, finest first (glow and quarry shading, then joints and tracery)
   let res = OUT.map((n, i) => [n, RANKS[i]])
-  const size = ns => ns.reduce((a, n) => a + n[0][1].d.length + 70, 0)
+  const size = ns => ns.reduce((a, n) => a + (TXTN.has(n[0][1]) ? 0 : n[0][1].d.length + 70), 0)
   for (const r of [1, 2, 3]) {
     if (size(res) <= BUDGET) break
     res = res.filter(n => n[1] !== r)
@@ -409,6 +415,7 @@ function paintAll(parts, o) {
     if (!p.batch || p.batch !== key) { flush(); key = p.batch || null; if (key) run = OUT.length }
     KIND = 0; KB = 0
     CLS = PLATE[p.plate || 'K']
+    TXT = !!p.text
     if (p.m === 'lead') { lines(p.lines, p.role || 'ink', p.w || K.LW, p.op ?? 1); continue }
     if (p.m === 'shine') { add(p.F, 'shine', p.op ?? 0.7, 1, p.plate === 'deco' || p.plate === 'ground' ? PLATE[p.plate] : 'wm-shine'); continue }
     if (p.m === 'paint') { add(p.F, p.role || 'ink', p.op ?? 1, 1); continue }
@@ -418,6 +425,7 @@ function paintAll(parts, o) {
     f(p)
   }
   flush()
+  TXT = false
 }
 function sameAttrs(a, b) {
   const ka = Object.keys(a), kb = Object.keys(b)

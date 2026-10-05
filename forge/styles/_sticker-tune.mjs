@@ -86,9 +86,24 @@ export const TUNE = {
 
 const hash = s => { const r = rng('sticker:' + s); r(); return r() }
 
+// Live icons (forge/DYNAMIC.md): colours that follow what the icon shows (a sunny sky is lemon, a night is grape)
+export const LIVE_TUNE = {
+  'weather': p => p.condition === 'sunny' ? { primary: 'lemon', accent: 'lemon', tube: 'lemon' }
+    : p.condition === 'night' ? { primary: 'lemon', accent: 'grape' }
+    : p.condition === 'partly' ? { primary: 'sky', accent: 'lemon', tube: 'lemon' }
+    : p.condition === 'storm' ? { primary: 'grape', accent: 'lemon', tube: 'lemon' }
+    : { primary: 'sky', accent: 'grape' },
+  'uv-index': () => ({ primary: 'lemon', accent: 'peach', tube: 'peach' }),
+  'rating-stars': () => ({ primary: 'lemon', accent: 'lemon' }),
+  'wind-speed': () => ({ primary: 'sky', tube: 'sky' }),
+  // the empty tube above the column is clear glass (paper), never a second colour that reads as more mercury
+  'thermometer-level': () => ({ primary: 'sky', accent: 'bubblegum', panel: 'paper' }),
+}
+
 export function colours(icon) {
   const name = String(icon.name || '')
-  const t = TUNE[name] || {}
+  const lt = icon.params && LIVE_TUNE[name] ? LIVE_TUNE[name](icon.params) : null
+  const t = lt ? { ...(TUNE[name] || {}), ...lt } : TUNE[name] || {}
   let primary = t.primary
   if (!primary) for (const [re, c] of SEMANTIC) if (re.test(name)) { primary = c; break }
   if (!primary) primary = NAMES[Math.floor(hash(name) * NAMES.length) % NAMES.length]

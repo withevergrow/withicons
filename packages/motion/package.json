@@ -52,6 +52,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "default": "./dist/runtime.js"
+    },
     "./element": {
       "types": "./dist/element.d.ts",
       "default": "./dist/element.js"
@@ -66,10 +70,14 @@
     },
     "./motion.css": "./dist/motion.css",
     "./icons.css": "./dist/icons.css",
+    "./icons/*": "./dist/icons/*",
     "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
+      "runtime": [
+        "./dist/runtime.d.ts"
+      ],
       "element": [
         "./dist/element.d.ts"
       ],

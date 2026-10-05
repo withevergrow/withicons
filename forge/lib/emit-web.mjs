@@ -1,9 +1,13 @@
 // emit-web — @withicons/web: a dependency-free <with-icon> custom element.
-//   dist/index.js         element + lazy per-style data chunks (auto-defines <with-icon>; SSR-safe)
-//   dist/full.js          element + every style inline, single file, for a CDN <script type="module">
+//   dist/index.js         element + lazy per-style data chunks (auto-defines <with-icon>; SSR-safe); per-icon files
+//                         instead when it is served unbundled from a CDN / package path
+//   dist/cdn.js           element only (a few KB): every icon is fetched from its own file, for a CDN <script type="module">
+//   dist/full.js          element + every style registered up front (static imports of data/<style>.js), sync svg()
+//   dist/icons/<style>/<name>.js  export default '<inner svg markup>'  (one icon: what a CDN page downloads)
 //   dist/data/<style>.js  { name: '<inner svg markup>' }   (lazy chunk; a sharded style's file re-exports its shards)
 //   dist/data/<style>/<i>.js  shard i of a heavy style: the icons whose withShard(name, count) === i
-//   dist/data/meta.js     { names, aliases }                (lazy chunk, only for alias/typo resolution)
+//   dist/data/alias/<i>.js    { alias: [names] } for the aliases whose withShard(alias, ALIAS_SHARDS) === i
+//   dist/data/meta.js     { names, aliases }                (lazy chunk, only for typo suggestions)
 import zlib from 'zlib'
 import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
 
@@ -11,6 +15,7 @@ import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, name
 // so one luxe icon costs one shard instead of the whole 3 MB style.
 const SHARD_OVER = 400 * 1024
 const SHARD_TARGET = 40 * 1024
+const ALIAS_SHARDS = 16
 
 // ---- runtime (serialized with .toString(); free vars: STYLES, DEFAULT_STYLE, LOADERS, LOAD_META)
 function withWarnOnce(msg) {
@@ -62,13 +67,39 @@ function loadVariant(variant) {
   return (Array.isArray(L) ? Promise.all(L.map((f, i) => withOnce(v + '/' + i, f, v))) : withOnce(v, L, v))
     .then(() => { WITH_LOADED[v] = 1; return WITH_DATA[v] })
 }
-// the data that holds `name` (if that icon exists): its shard for a sharded style, else the whole style
+// Per-icon files (dist/icons/<style>/<name>.js, a few hundred bytes each): used when the module is served from a CDN
+// or a copy of the package (WITH_BASE.url, see withAutoBase / setIconBase), so a page downloads only the icons it shows.
+// Bundled apps keep the chunks above (a bundler cannot see these computed URLs).
+function withIcon(v, n) {
+  const key = 'i:' + v + '/' + n
+  return WITH_PENDING[key] || (WITH_PENDING[key] = import(/* webpackIgnore: true */ /* @vite-ignore */ WITH_BASE.url + 'icons/' + v + '/' + n + '.js')
+    .then(m => withMerge(v, { [n]: m.default }), e => { delete WITH_PENDING[key]; throw e }))
+}
+// the data that holds `name` (if that icon exists): its own file on a CDN, else its shard for a sharded style, else
+// the whole style
 function withLoadFor(v, name) {
+  if (withHas(WITH_DATA[v], name)) return Promise.resolve(WITH_DATA[v])
+  if (WITH_BASE.url && withHas(STYLES, v) && WITH_NAMES.has(name) && !WITH_LOADED[v]) return withIcon(v, name).catch(() => withChunkFor(v, name))
+  return withChunkFor(v, name)
+}
+function withChunkFor(v, name) {
   const L = withHas(LOADERS, v) ? LOADERS[v] : null
   if (withHas(WITH_DATA[v], name)) return Promise.resolve(WITH_DATA[v])
   if (!Array.isArray(L) || WITH_LOADED[v]) return loadVariant(v)
   const i = withShard(name, L.length)
   return withOnce(v + '/' + i, L[i], v)
+}
+/** Where per-icon files are fetched from: the URL of a `dist/` folder (CDN or self-hosted copy), or null for chunks. */
+function setIconBase(url) {
+  WITH_BASE.url = url ? String(url).replace(/\/?$/, '/') : null
+}
+// aliases: a small shard (dist/data/alias/<i>.js) per lookup key; the full meta only for typos (suggestions)
+function withAliases(name) {
+  if (!ALIAS_LOADERS.length) return Promise.resolve({})
+  const want = {}
+  for (const k of withKeys(name)) want[withShard(k, ALIAS_LOADERS.length)] = 1
+  return Promise.all(Object.keys(want).map(i => WITH_ALIAS[i] || (WITH_ALIAS[i] = ALIAS_LOADERS[i]().then(m => m.default, e => { delete WITH_ALIAS[i]; throw e }))))
+    .then(list => Object.assign({}, ...list))
 }
 function registerVariant(variant, map) {
   WITH_USER[variant] = Object.assign(WITH_USER[variant] || {}, map)
@@ -80,14 +111,19 @@ function withLoadMeta() {
 }
 function withResolveName(name, variant) {
   const v = variant || DEFAULT_STYLE
-  return withLoadFor(v, name).then(map => withHas(map, name) ? name
-    : withLoadMeta().then(meta => {
-      // a sharded style has not loaded every icon: canonical names come from meta
-      const sharded = Array.isArray(withHas(LOADERS, v) ? LOADERS[v] : null) && !WITH_LOADED[v]
-      const known = sharded ? (WITH_META.set || (WITH_META.set = new Set(meta.names))) : null
-      const n = withLookup(name, k => withHas(WITH_DATA[v], k) || (!!known && known.has(k)), meta.names, meta.aliases)
-      return withLoadFor(v, n).then(() => n)
-    }))
+  // canonical names (WITH_NAMES ships in the entry) and icons you registered: no lookup data at all
+  const has = k => withHas(WITH_DATA[v], k) || WITH_NAMES.has(k)
+  const direct = withHas(WITH_DATA[v], name) || WITH_NAMES.has(name) ? name : null
+  const found = direct != null ? Promise.resolve(direct)
+    : withAliases(name).then(al => {
+      try { return withLookup(name, has, [], al) } catch (e) { if (e.code !== 'WITH_UNKNOWN_ICON') throw e }
+      // unknown: the full meta, for the nearest-name suggestions in the error
+      return withLoadMeta().then(meta => withLookup(name, has, meta.names, meta.aliases))
+    })
+  return found.then(n => withLoadFor(v, n).then(map => {
+    if (!withHas(map, n) && !withHas(WITH_DATA[v], n)) throw Object.assign(new Error('with icons: unknown icon "' + name + '".'), { code: 'WITH_UNKNOWN_ICON', suggestions: [] })
+    return n
+  }))
 }
 function loadSvg(name, options) {
   const o = options || {}
@@ -165,10 +201,21 @@ function withProps() {
   }
 }
 
+// index.js: per-icon files only when this very module is served from a CDN or an unbundled copy of the package
+// (https://cdn.jsdelivr.net/npm/@withicons/web@x/dist/index.js, unpkg, /node_modules/@withicons/web/dist/index.js).
+// A bundler renames or inlines the module, so bundled apps never match and keep their split chunks.
+function withAutoBase() {
+  try {
+    const u = String(import.meta.url)
+    return /^https?:/.test(u) && /\/@withicons\/web(@[^/]*)?\/dist\/index\.js([?#].*)?$/.test(u) ? u.replace(/index\.js([?#].*)?$/, '') : null
+  } catch (e) { return null }
+}
+
 const RUNTIME = [LOOKUP_SRC, withWarnOnce, 'withWarnOnce.seen = {}', withHas, withRenderSvg,
-  'const WITH_DATA = {}', 'const WITH_USER = {}', 'const WITH_LOADED = {}', 'const WITH_PENDING = {}',
+  'const WITH_DATA = {}', 'const WITH_USER = {}', 'const WITH_LOADED = {}', 'const WITH_PENDING = {}', 'const WITH_ALIAS = {}',
   'const WITH_META = { value: null, pending: null, set: null }',
-  withShard, withMerge, withOnce, loadVariant, withLoadFor, registerVariant, withLoadMeta, withResolveName, loadSvg,
+  'const WITH_NAMES = new Set(NAME_LIST.split(" "))',
+  withShard, withMerge, withOnce, loadVariant, withIcon, withLoadFor, withChunkFor, setIconBase, withAliases, registerVariant, withLoadMeta, withResolveName, loadSvg,
   "const WithBase = typeof HTMLElement === 'undefined' ? class {} : HTMLElement", WithIconElement, defineWithIcon, withProps, 'withProps()',
 ].map(String).join('\n')
 
@@ -205,20 +252,40 @@ export default async function emit(ctx) {
   }
   out.add('data/meta.js', `${header}export default ${J(meta)}\n`)
   out.add('data/meta.d.ts', `import type { IconName } from '../index.js'\ndeclare const meta: { names: IconName[]; aliases: Record<string, IconName[]> }\nexport default meta\n`)
+  // alias shards: an alias lives in shard withShard(alias, ALIAS_SHARDS); resolving one alias costs one ~3 KB file
+  const aliasParts = Array.from({ length: ALIAS_SHARDS }, () => ({}))
+  for (const k of Object.keys(aliases)) aliasParts[withShard(k, ALIAS_SHARDS)][k] = aliases[k]
+  aliasParts.forEach((p, k) => out.add(`data/alias/${k}.js`, `export default ${J(p)}\n`))
+  // one file per icon and style: what a CDN page downloads (no header: most icons are a few hundred bytes)
+  for (const s of styleNames) for (const i of ctx.icons) out.add(`icons/${s}/${i.name}.js`, `export default ${J(data[s][i.name])}\n`)
 
-  const exportsList = 'WithIconElement, defineWithIcon, loadVariant, registerVariant, loadSvg, styleNames'
+  const exportsList = 'WithIconElement, defineWithIcon, loadVariant, registerVariant, loadSvg, setIconBase, styleNames'
+  const names = `const NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}\n`
   // literal import() paths so every bundler (Vite, webpack, Rollup, esbuild) sees and splits each chunk
   const loader = s => shards[s]
     ? `  ${J(s)}: [${Array.from({ length: shards[s] }, (_, k) => `() => import('./data/${s}/${k}.js')`).join(', ')}],`
     : `  ${J(s)}: () => import('./data/${s}.js'),`
-  const indexJs = `${header}${head}const LOADERS = {\n${styleNames.map(loader).join('\n')}\n}\n` +
-    `const LOAD_META = () => import('./data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
+  const aliasLoaders = `const ALIAS_LOADERS = [${aliasParts.map((_, k) => `() => import('./data/alias/${k}.js')`).join(', ')}]\n`
+  const indexJs = `${header}${head}${names}const LOADERS = {\n${styleNames.map(loader).join('\n')}\n}\n${aliasLoaders}` +
+    `const LOAD_META = () => import('./data/meta.js')\n${withAutoBase}\nconst WITH_BASE = { url: withAutoBase() }\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
   out.add('index.js', indexJs)
-  const fullData = styleNames.map(s => `registerVariant(${J(s)}, ${J(data[s])})`).join('\n')
-  out.add('full.js', `${header}${head}const LOADERS = {}\nconst LOAD_META = () => Promise.resolve({ default: WITH_META_FULL })\nconst WITH_META_FULL = ${J(meta)}\n${RUNTIME}\n${fullData}\n` +
+  // cdn.js: the smallest entry, for <script type="module"> from a CDN or a self-hosted copy of dist/. Every icon is its
+  // own file next to it (icons/<style>/<name>.js); no chunk table, so it stays a few KB whatever the style count.
+  const ign = '/* webpackIgnore: true */ /* @vite-ignore */ '
+  const cdnJs = `${header}${head}${names}const WITH_BASE = { url: new URL('./', import.meta.url).href }\n` +
+    `const LOADERS = {}\nfor (const s of styleNames) LOADERS[s] = () => import(${ign}WITH_BASE.url + 'data/' + s + '.js')\n` +
+    `const ALIAS_LOADERS = Array.from({ length: ${ALIAS_SHARDS} }, (_, i) => () => import(${ign}WITH_BASE.url + 'data/alias/' + i + '.js'))\n` +
+    `const LOAD_META = () => import(${ign}WITH_BASE.url + 'data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
+  out.add('cdn.js', cdnJs)
+  // full.js: every style registered before the module finishes evaluating (static imports of the same data chunks, so
+  // no 27 MB single file: CDNs refuse files over 20 MB, and bundlers produce the same output as before)
+  const fullJs = `${header}${head}${names}${styleNames.map((s, k) => `import WITH_D${k} from './data/${s}.js'\n`).join('')}import WITH_META_FULL from './data/meta.js'\n` +
+    `const LOADERS = {}\nconst ALIAS_LOADERS = []\nconst LOAD_META = () => Promise.resolve({ default: WITH_META_FULL })\nconst WITH_BASE = { url: null }\n${RUNTIME}\n` +
+    styleNames.map((s, k) => `registerVariant(${J(s)}, WITH_D${k})\n`).join('') +
     `/** Synchronous SVG string (full bundle only). Throws on unknown or ambiguous names. */\n` +
     `function svg(name, options) {\n  const o = options || {}\n  const v = withHas(STYLES, o.variant) ? o.variant : DEFAULT_STYLE\n  const map = WITH_DATA[v]\n  const n = withHas(map, name) ? name : withLookup(name, k => withHas(map, k), WITH_META_FULL.names, WITH_META_FULL.aliases)\n  return withRenderSvg(map[n], v, o)\n}\n` +
-    `defineWithIcon()\nexport { ${exportsList}, svg }\n`)
+    `defineWithIcon()\nexport { ${exportsList}, svg }\n`
+  out.add('full.js', fullJs)
 
   const dts = `${namesAndAliasesDts(ctx)}
 export interface SvgOptions {
@@ -256,12 +323,20 @@ export declare function loadVariant(variant: StyleName): Promise<Record<IconName
 export declare function registerVariant(variant: StyleName, icons: Record<string, string>): void
 /** Resolve a name or alias and return a complete <svg> string. */
 export declare function loadSvg(name: IconName | IconAlias | (string & {}), options?: SvgOptions): Promise<string>
+/**
+ * Where per-icon files load from: the URL of a dist/ folder (a CDN or your own copy of it), e.g.
+ * setIconBase('/vendor/withicons/web/dist/'). Detected automatically when this module itself is served from a CDN or an
+ * unbundled node_modules copy; null switches back to the per-style chunks (what bundled apps use).
+ */
+export declare function setIconBase(url: string | null): void
 export declare const styleNames: StyleName[]
 declare global {
   interface HTMLElementTagNameMap { 'with-icon': WithIconElement }
 }
 `
   out.add('index.d.ts', dts)
+  out.add('cdn.d.ts', `export * from './index.js'
+`)
   out.add('full.d.ts', `export * from './index.js'\nimport type { IconName, IconAlias, SvgOptions } from './index.js'\n/** Synchronous SVG string. Throws on unknown or ambiguous names. */\nexport declare function svg(name: IconName | IconAlias | (string & {}), options?: SvgOptions): string\n`)
   await out.flush()
 
@@ -269,17 +344,21 @@ declare global {
     ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn', 'css-icons', 'icon-classes', 'font-awesome-alternative',
       ...styleNames, 'multicolor-icons', 'animated-icons']),
     type: 'module',
-    sideEffects: ['./dist/index.js', './dist/full.js'],
+    sideEffects: ['./dist/index.js', './dist/cdn.js', './dist/full.js'],
     main: './dist/index.js', module: './dist/index.js', types: './dist/index.d.ts',
     exports: {
       '.': { types: './dist/index.d.ts', default: './dist/index.js' },
+      './cdn': { types: './dist/cdn.d.ts', default: './dist/cdn.js' },
       './full': { types: './dist/full.d.ts', default: './dist/full.js' },
       './data/*': { types: './dist/data/*.d.ts', default: './dist/data/*.js' },
+      './icons/*': './dist/icons/*',
       './package.json': './package.json',
     },
-    typesVersions: { '*': { full: ['./dist/full.d.ts'], 'data/*': ['./dist/data/*.d.ts'] } },
+    typesVersions: { '*': { cdn: ['./dist/cdn.d.ts'], full: ['./dist/full.d.ts'], 'data/*': ['./dist/data/*.d.ts'] } },
     files: ['dist', 'README.md', 'LICENSE'],
-    unpkg: './dist/full.js', jsdelivr: './dist/full.js',
+    // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/web) serves the few-KB per-icon entry, never every style
+    unpkg: './dist/cdn.js', jsdelivr: './dist/cdn.js',
+    scripts: { test: 'node --test test/*.test.mjs' },
   }
   const kb = f => Math.round(Buffer.byteLength(f) / 1024)
   const gz = f => Math.round(zlib.gzipSync(f, { level: 9 }).length / 1024)
@@ -292,10 +371,21 @@ declare global {
     sharded, shardMax: kb(shardJson.reduce((a, b) => b.length > a.length ? b : a, '')), shardMaxGz: Math.max(0, ...shardJson.map(gz)),
     shardAvg: Math.round(shardJson.reduce((a, b) => a + Buffer.byteLength(b), 0) / Math.max(1, shardJson.length) / 1024),
     meta: kb(J(meta)), metaGz: gz(J(meta)),
-    full: kb(chunks.join('')), fullGz: gz(chunks.join('')),
+    full: kb(styleNames.map(s => J(data[s])).join('')), fullGz: gz(styleNames.map(s => J(data[s])).join('')),
+    cdn: kb(cdnJs), cdnGz: Math.max(1, gz(cdnJs)),
+    alias: Math.max(...aliasParts.map(p => kb(J(p)))),
+  }
+  // per-icon files: typical (median) size in the default style and in the heaviest style, in bytes
+  const bytes = t => Buffer.byteLength(t), gzb = t => zlib.gzipSync(t, { level: 9 }).length
+  const med = a => a.sort((x, y) => x - y)[a.length >> 1]
+  const iconFile = (st, n) => `export default ${J(data[st][n])}\n`
+  const heavy = styleNames.reduce((a, b) => bytes(J(data[b])) > bytes(J(data[a])) ? b : a)
+  sizes.icon = {
+    line: med(ctx.icons.map(i => bytes(iconFile(ctx.defaultStyle, i.name)))), lineGz: med(ctx.icons.map(i => gzb(iconFile(ctx.defaultStyle, i.name)))),
+    heavy, heavyRaw: med(ctx.icons.map(i => bytes(iconFile(heavy, i.name)))), heavyGz: med(ctx.icons.map(i => gzb(iconFile(heavy, i.name)))),
   }
   writePkg(ctx, 'web', pkg, readme(ctx, sizes))
-  return `index.js + full.js + ${styleNames.length} lazy chunks`
+  return `index.js + cdn.js + full.js + ${styleNames.length} lazy chunks + ${styleNames.length * ctx.icons.length} per-icon files`
 }
 
 function readme(ctx, z) {
@@ -309,11 +399,18 @@ function readme(ctx, z) {
 \`<with-icon>\`: a dependency-free custom element for ${ctx.icons.length} icons x ${ctx.styles.length} styles. Works in any framework or none.
 
 \`\`\`html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@${v}/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@${v}/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>
 \`\`\`
+
+From a CDN the page downloads only what it shows: \`cdn.js\` (${z.cdn} KB, ${z.cdnGz} KB gzip) plus one small file per icon
+and style it renders (\`dist/icons/<style>/<name>.js\`). A \`${ctx.defaultStyle}\` icon is typically ${z.icon.line} bytes (${z.icon.lineGz} gzip);
+a \`${z.icon.heavy}\` icon, the richest style, about ${(z.icon.heavyRaw / 1024).toFixed(1)} KB (${(z.icon.heavyGz / 1024).toFixed(1)} KB gzip). Five \`${ctx.defaultStyle}\` icons cost about
+${Math.round(z.cdnGz + 5 * z.icon.lineGz / 1024)} KB gzipped in all. The URLs are versioned, so the CDN and the browser cache them for good.
+\`dist/index.js\` works from a CDN too (it switches to the same per-icon files when it is served from one) but also carries
+the bundler chunk table (${z.entry} KB, ${z.entryGz} KB gzip).
 
 Or with a bundler:
 
@@ -352,14 +449,21 @@ Unknown names render nothing and log one console warning with the nearest matche
 
 | import | what | size |
 |---|---|---|
-| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`) | ${z.entry} KB (${z.entryGz} KB gzip) + one chunk per style used: \`${ctx.defaultStyle}\` ${z.line} KB (${z.lineGz} KB gzip), the largest ${z.max} KB (${z.maxGz} KB gzip)${z.sharded.length ? `; a heavy style loads one small shard per icon used (~${z.shardAvg} KB, at most ${z.shardMax} KB / ${z.shardMaxGz} KB gzip)` : ''} |
-| \`@withicons/web/full\` (\`dist/full.js\`) | one file, every style inline, adds sync \`svg(name, opts)\` | ~${z.full} KB (${z.fullGz} KB gzip) |
+| \`@withicons/web/cdn\` (\`dist/cdn.js\`) | element; every icon loads its own file (\`dist/icons/<style>/<name>.js\`). For \`<script type="module">\` from a CDN or a self-hosted copy of \`dist/\` | ${z.cdn} KB (${z.cdnGz} KB gzip) + ~${z.icon.lineGz} bytes gzip per \`${ctx.defaultStyle}\` icon shown |
+| \`@withicons/web\` (\`dist/index.js\`) | element + lazy per-style chunks (\`dist/data/<style>.js\`); per-icon files when served unbundled from a CDN | ${z.entry} KB (${z.entryGz} KB gzip) + one chunk per style used: \`${ctx.defaultStyle}\` ${z.line} KB (${z.lineGz} KB gzip), the largest ${z.max} KB (${z.maxGz} KB gzip)${z.sharded.length ? `; a heavy style loads one small shard per icon used (~${z.shardAvg} KB, at most ${z.shardMax} KB / ${z.shardMaxGz} KB gzip)` : ''} |
+| \`@withicons/web/full\` (\`dist/full.js\`) | every style registered up front (static imports of the chunks), adds sync \`svg(name, opts)\` | every icon of every style: ~${Math.round(z.full / 1024)} MB (${Math.round(z.fullGz / 1024)} MB gzip). For scripts and tools, never for a web page |
 
 A style's chunk loads once, the first time an icon of that style renders.${z.sharded.length ? ` The heavy styles (${z.sharded.map(s => '`' + s + '`').join(', ')})
 are split into shards of a few icons each (\`dist/data/<style>/<n>.js\`): an icon loads only its own shard, so one \`luxe\`
-icon costs a few KB instead of the whole style. \`loadVariant()\` and \`@withicons/web/data/<style>\` still return the whole style.` : ''} Aliases and typos also load \`dist/data/meta.js\`
-(${z.meta} KB, ${z.metaGz} KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
-chunks automatically. Use \`full\` only where a single file matters more than size.
+icon costs a few KB instead of the whole style. \`loadVariant()\` and \`@withicons/web/data/<style>\` still return the whole style.` : ''} Canonical names resolve with no
+extra download (the entry knows every name); an alias loads one small shard (\`dist/data/alias/<n>.js\`, at most ${z.alias} KB), and
+only a typo loads \`dist/data/meta.js\` (${z.meta} KB, ${z.metaGz} KB gzip) for the "did you mean" warning. Bundlers (Vite, webpack,
+Rollup, esbuild) split the chunks automatically. Use \`full\` only for scripts and tools that need the sync \`svg()\`.
+
+**Per-icon files.** \`cdn.js\` always loads icons from \`icons/<style>/<name>.js\` next to itself. \`index.js\` does the same when
+it is served unbundled from a package path (jsDelivr, unpkg, \`/node_modules/@withicons/web/dist/index.js\`); in a bundled app
+it uses the chunks. Self-hosting \`dist/\` under another path? Use \`cdn.js\`, or call \`setIconBase('/vendor/withicons/dist/')\`.
+Loads are de-duplicated and kept in memory, so ten \`home\` icons cost one request.
 
 SSR-safe: importing never touches the DOM; the element is only defined when \`customElements\` exists, so the same import
 works in Node, Deno and edge runtimes, where \`loadSvg\` returns plain markup:
@@ -371,8 +475,8 @@ const markup = await loadSvg('home', { variant: 'solid', size: 20 })
 ${pal}${followers.length ? `
 ${followers.join(', ')} default to \`currentColor\`, so they follow \`color\` unless you set them.
 ` : ''}${motionDoc(ctx)}
-With \`<with-icon>\`, add the element module once and use attributes (it needs \`motion.css\`, plus \`icons.css\` for the
-per-icon defaults):
+With \`<with-icon>\`, add the element module once and use attributes (it needs \`motion.css\`; each icon's own defaults come
+from \`icons.css\`, or, from a CDN, the element links just \`icons/<name>.css\` for each animated icon):
 
 \`\`\`js
 import '@withicons/motion/element'

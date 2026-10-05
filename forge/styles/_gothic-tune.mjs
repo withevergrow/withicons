@@ -16,13 +16,26 @@ for (const [r, names] of Object.entries(GLASS)) for (const n of names) BY[n] = {
 // Live icons (forge/dynamic): the family glass of their tablets, ruby and emerald by family
 // (the automatic composer's default is sapphire)
 const LIVE = {
-  c1: ['badge-text', 'sale-sticker', 'percent-badge', 'ribbon-label', 'price-tag', 'step-number'],
+  c1: ['badge-text', 'sale-sticker', 'percent-badge', 'ribbon-label', 'price-tag', 'step-number', 'dice'],
   c4: ['ticket-number', 'tag-label', 'keycap', 'cellular-tech', 'speech-bubble-text', 'avatar-initials', 'folder-label', 'map-pin-number'],
 }
 for (const [r, names] of Object.entries(LIVE)) for (const n of names) BY[n] = { glass: r }
 
+// Live generators that never write a value (the rest are lettered: deep glass, no tracery, at every value)
+export const LIVE_TEXTLESS = new Set(['alarm-clock-time', 'bar-values', 'battery-charging-level', 'battery-level', 'battery-vertical',
+  'clock-time', 'dice', 'signal-bars', 'stopwatch', 'volume-level', 'watch-time', 'wifi-strength'])
+// how deep (smoked) lettered glass is: gilt lettering needs a dark ground
+export const LETTERED_DEEP = 0.62
+
 const TUNE = {
   ...BY,
+  // live rings: the face is glass at every value (a short gilt progress arc must not win the face's plate vote)
+  'timer-ring': { fillPlate: 'K' },
+  'progress-ring': { fillPlate: 'K' },
+  // the elapsed sweep cuts the face: its tracery must not come and go with the seconds
+  stopwatch: { tracery: 'none', fillPlate: 'K', glass: 'c3' },
+  // (a Live icon's glass is plain unless its tracery cannot move with the value: a die's pips sit on it)
+  dice: { glass: 'c1', tracery: 'quarry' },
 }
 
 export function tuneFor(name, params) {

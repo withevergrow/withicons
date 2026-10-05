@@ -17,6 +17,7 @@
 //   print / printSkip   open cutouts + interior lines printed in a colour (a file's type glyph); printSkip
 //                       lists cutouts that stay debossed (default [0], a document's fold)
 //   grooveAs            'emboss' (raised white enamel glyph), 'shine' (a glint), default debossed ink
+import { pointInRing, distToPolyline } from '../kernel/geom.mjs'
 const CAL = { zones: [{ y1: 9.9, mat: 'red', role: 'c3' }] }
 const FACE = (ring = 'gold', face = 'ceramic', inset = 1.25) => ({ body: ring, inlay: { mat: face, inset } })
 const LENS = { body: 'steel', part: 'steel', inlay: { mat: 'water', inset: 1.2 } }
@@ -79,16 +80,28 @@ const battery = icon => {
   const p = icon.params || {}, lvl = p.level > 1 ? p.level / 100 : (p.level ?? 1)
   const bar = (icon.paths || []).find(x => x.plate === 'A' && isBar(x.d))
   const t = { part: 'steel', screen: true, ...EM }
-  if (bar) Object.assign(t, { lift: [bar.id], liftMat: lvl < 0.25 ? 'orange' : 'green', wLift: 2 })
+  // (the charge's end is lit, not shaded: it is the edge that moves with the level)
+  if (bar) Object.assign(t, { lift: [bar.id], liftMat: lvl < 0.25 ? 'orange' : 'green', wLift: 2, liftOpt: { shade: [[0.3, 0.05]] } })
   return t
+}
+// the hands of a Live dial: A strokes lying on the face, knocked out by their own cutout (hub ring too, for a gauge)
+const HANDS = (icon, hub = false) => {
+  const fill = (icon.fills || [])[0], cuts = (icon.cutouts || []).flatMap(c => c.subs || [])
+  if (!fill) return {}
+  const inFace = p => (fill.subs || []).some(q => q.pts.length > 2 && pointInRing(p, q.pts))
+  const along = q => cuts.some(c => q.pts.every(p => distToPolyline(p, c.pts, c.closed) < 0.3) || c.pts.every(p => distToPolyline(p, q.pts, q.closed) < 0.3))
+  const ids = (icon.paths || []).filter(p => p.plate === 'A' && !String(p.id || '').startsWith('text:') && (p.subs || []).length &&
+    p.subs.every(q => q.pts.every(inFace) && (along(q) || (hub && q.closed)))).map(p => p.id)
+  return ids.length ? { lift: ids, liftMat: hub ? 'white' : 'charcoal', wLift: 1.35 } : {}
 }
 const HEAD = { zones: [{ y1: 11.25, mat: 'red', role: 'c3', text: 'white' }] }
 const STRIP = { zones: [{ y1: 5.1, mat: 'red', role: 'c3' }] }
 const FILETYPE = { PDF: 'red', DOC: 'blue', DOCX: 'blue', TXT: 'navy', CSV: 'green', XLS: 'green', XLSX: 'green', ZIP: 'orange', RAR: 'orange',
   JS: 'orange', TS: 'blue', PPT: 'coral', PPTX: 'coral', PNG: 'violet', JPG: 'violet', SVG: 'violet', GIF: 'violet', MP3: 'pink', MP4: 'coral', MOV: 'coral' }
 Object.assign(T, {
-  'alarm-clock-time': { ...FACE('red'), part: 'gold' }, 'clock-time': FACE(), stopwatch: FACE('steel'),
-  'watch-time': { ...FACE('graphite', 'ceramic', 1.15), screen: false },
+  // clock hands and a gauge's needle are raised black-lacquer hands that cast a shadow on the dial
+  'alarm-clock-time': icon => ({ ...FACE('red'), part: 'gold', ...HANDS(icon) }), 'clock-time': icon => ({ ...FACE(), ...HANDS(icon) }), stopwatch: FACE('steel'),
+  'watch-time': icon => ({ ...FACE('graphite', 'ceramic', 1.15), screen: false, ...HANDS(icon) }),
   'battery-level': battery, 'battery-vertical': battery, 'battery-charging-level': battery, 'battery-percent': battery,
   'calendar-date': HEAD, 'calendar-month': HEAD, 'calendar-weekday': HEAD,
   'calendar-event': STRIP, 'calendar-range': STRIP, 'calendar-tear': { zones: [{ y1: 7, mat: 'red', role: 'c3' }] },
@@ -99,10 +112,10 @@ Object.assign(T, {
   'map-pin-number': { body: 'red', ...EM }, 'sale-sticker': { body: 'red', ...EM }, 'ribbon-label': { body: 'red', ...EM },
   'tag-label': { body: 'kraft' },
   'avatar-initials': EM, 'badge-text': EM, 'percent-badge': EM, 'price-tag': EM, 'speech-bubble-text': EM, 'step-number': EM,
-  'signal-bars': { body: 'green' }, 'wifi-strength': { body: 'blue' }, 'rating-stars': { body: 'yellow', part: 'yellow' },
+  'signal-bars': { body: 'green' }, 'bar-values': { bodyOpt: { specK: 0.25, noHot: true } }, 'wifi-strength': { body: 'blue' }, 'rating-stars': { body: 'yellow', part: 'yellow' },
   'uv-index': { body: 'yellow', part: 'orange' },
   // free-standing numerals: rods at line weight so digits never fuse
-  weather: { wA: 1.85 }, 'wind-speed': { w: 2 }, 'gauge-value': { wA: 1.85 },
+  weather: { wA: 1.85 }, 'wind-speed': { w: 2 }, 'gauge-value': icon => ({ wA: 1.85, ...HANDS(icon, true) }),
   'thermometer-level': { wA: 1.85, print: 'red', printSkip: [] },
 })
 

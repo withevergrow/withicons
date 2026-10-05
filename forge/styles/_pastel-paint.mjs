@@ -265,7 +265,10 @@ export function paintEntries(entries, o = {}) {
       const d = e.d || traceD(e.F, 0.03, 0.05)
       if (!d) return
       // ink on a field: mid-tone of that hue; ink on the page: the deep tone of the main hue
-      const fill = host ? v('ink', HUES[HUES[host.hue] ? host.hue : 'lavender'].ink) : v('edge', HUES[mainHue].deep)
+      // (Live-icon TEXT on the page takes the main hue's ink lifted a quarter toward its deep tone: a mid-luminance
+      // tone that reads on white AND on dark)
+      // and TEXT on a field prints a deeper ink of that hue, so a lone "I" or "1" holds its contrast at 24px)
+      const fill = host ? v('ink', e.text ? mix(HUES[HUES[host.hue] ? host.hue : 'lavender'].ink, '#000000', host.deep ? 0.55 : 0.28) : HUES[HUES[host.hue] ? host.hue : 'lavender'].ink) : e.text ? v('ink', mix(HUES[mainHue].ink, HUES[mainHue].deep, 0.25)) : v('edge', HUES[mainHue].deep)
       nodes.push(['path', tag({ d, fill }, part)])
       return
     }
@@ -281,6 +284,12 @@ export function paintEntries(entries, o = {}) {
     }
     const d = e.d || traceD(e.F, 0.035, 0.1)
     if (!d) return
+    // DEEP: a Live icon's reading (a meter's bars, a progress arc) is set in the hue's deep tone with an inked
+    // rim, flat, so the value reads at 24px on white as well as on dark
+    if (e.deep) {
+      nodes.push(['path', tag({ d, fill: v('edge', H.deep), stroke: v('ink', mix(H.deep, H.ink, 0.55)), 'stroke-width': e.rim ?? L.RIM, 'stroke-linejoin': 'round' }, part)])
+      return
+    }
     nodes.push(['path', tag({ d, fill: v(roleOf(hue), H.base), stroke: v('edge', H.rim), 'stroke-width': e.rim ?? L.RIM, 'stroke-linejoin': 'round' }, part)])
     const thick = thicknessOf(e)
     if (mode === 'flat' || thick < 1.2) return

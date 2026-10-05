@@ -9,6 +9,10 @@
 // composition: _skeuo-render.mjs; per-icon tuning and redraws: _skeuo-tune.mjs.
 // Every colour is a role variable --with-skeuo-<role> with a literal fallback.
 import { draw } from './_skeuo-render.mjs'
+import { splitText } from './_live-text.mjs'
+import { stripText, letter, LIVE_TEXTLESS, dropOrphanCuts } from './_skeuo-live.mjs'
+import { tune } from './_skeuo-tune.mjs'
+import { materials } from './_skeuo-mat.mjs'
 
 export default {
   name: 'skeuo',
@@ -19,7 +23,15 @@ export default {
   root: { fill: 'none' },
   render(icon) {
     try {
-      const nodes = draw(icon)
+      // Live icons: the object is built without its text, then the value is lettered on it (_skeuo-live.mjs)
+      const { icon: rest, free, inside } = splitText(dropOrphanCuts(icon))
+      const lettered = !!icon.params && !LIVE_TEXTLESS.has(icon.name)
+      if (free.length || inside.length) {
+        const nodes = draw(stripText(rest, inside), { lettered })
+        const T = tune(icon)
+        if (nodes && nodes.length) return [...nodes, ...letter(icon, T, materials(icon, T), inside, free)]
+      }
+      const nodes = draw(rest, { lettered })
       if (nodes && nodes.length) return nodes
     } catch { /* degrade below */ }
     // never empty: the plain line drawing

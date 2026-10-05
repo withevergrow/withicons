@@ -13,6 +13,10 @@
 // Signals (S plate) clear a one-pixel moat. The hardest icons get hand-drawn
 // pixel maps (_pixel-maps.mjs) or pixel fixes (_pixel-tune.mjs). Output: one merged h/v path per
 // tone, root shape-rendering="crispEdges".
+// Live icons (forge/DYNAMIC.md): text is re-set in a bitmap font (_pixel-text.mjs); calendars, dice, a thermometer,
+// bars, the UV sun, tags and the weather glyphs are composed as pixel sprites, clock hands and battery charge are
+// drawn from their geometry (_pixel-live.mjs); a count badge is a solid chip, and the drawing is placed by its frame
+// so it keeps off the canvas edge at every value.
 // crispEdges snaps every cell to whole device pixels, so cells are even only when
 // the rendered size is a multiple of 16 device px (16/32/48 px at 1x, 2x, 3x; 24 px
 // at 2x). At 24 px on a 1x screen, or 16 px at 1.25x/1.5x, cells alternate 1 and 2 px.

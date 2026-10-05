@@ -16,6 +16,8 @@ export const PALETTE = {
   3: '#DE4B3A',      // coral red
   4: '#178A86',      // teal: the horizon / sea, and every badge
   shadow: '#6B3323', // deep warm brown: the hard print shadow
+  cream: '#FFF3D9',  // live-icon text on a teal badge
+  letter: '#2A160E', // live-icon text on a mustard face
 }
 const paint = k => `var(--with-retro-${k}, ${PALETTE[k]})`
 
@@ -43,12 +45,14 @@ function draw(icon) {
   for (const s of B.stripes) add(s.f, paint(s.c), K.TOL_C, 0.35, 1)
   add(B.badge, paint(4), K.TOL_C, 0.3, 1, 'wm-s')
   add(B.lens, paint(1), K.TOL_C, 0.3, 1, 'wm-s')
+  add(B.btext, paint('cream'), K.TOL, 0.1, 2, 'wm-s')
   const loops = trace(B.ink, K.TOL, 0.15)
   const sLoops = B.moat ? loops.filter(r => inMoat(B.moat, r)) : []
   const ink = loopsD(sLoops.length ? loops.filter(r => !sLoops.includes(r)) : loops, 2)
   if (ink) nodes.push(['path', { d: ink, 'fill-rule': 'evenodd' }])
   const sInk = sLoops.length ? loopsD(sLoops, 2) : ''
   if (sInk) nodes.push(['path', { d: sInk, 'fill-rule': 'evenodd', class: 'wm-s' }])
+  add(B.ftext, paint('letter'), K.TOL, 0.1, 2)
   return nodes
 }
 

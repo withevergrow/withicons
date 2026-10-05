@@ -54,6 +54,7 @@
   "type": "module",
   "sideEffects": [
     "./dist/index.js",
+    "./dist/cdn.js",
     "./dist/full.js",
     "./dist/classes/*"
   ],
@@ -65,6 +66,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./cdn": {
+      "types": "./dist/cdn.d.ts",
+      "default": "./dist/cdn.js"
+    },
     "./full": {
       "types": "./dist/full.d.ts",
       "default": "./dist/full.js"
@@ -73,11 +78,15 @@
       "types": "./dist/data/*.d.ts",
       "default": "./dist/data/*.js"
     },
+    "./icons/*": "./dist/icons/*",
     "./classes/*": "./dist/classes/*",
     "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
+      "cdn": [
+        "./dist/cdn.d.ts"
+      ],
       "full": [
         "./dist/full.d.ts"
       ],
@@ -91,6 +100,9 @@
     "README.md",
     "LICENSE"
   ],
-  "unpkg": "./dist/full.js",
-  "jsdelivr": "./dist/full.js"
+  "unpkg": "./dist/cdn.js",
+  "jsdelivr": "./dist/cdn.js",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
 }

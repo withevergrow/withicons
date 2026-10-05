@@ -3,11 +3,18 @@
 `<with-icon>`: a dependency-free custom element for 500 icons x 20 styles. Works in any framework or none.
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>
 ```
+
+From a CDN the page downloads only what it shows: `cdn.js` (19 KB, 7 KB gzip) plus one small file per icon
+and style it renders (`dist/icons/<style>/<name>.js`). A `line` icon is typically 229 bytes (148 gzip);
+a `gothic` icon, the richest style, about 7.7 KB (2.6 KB gzip). Five `line` icons cost about
+8 KB gzipped in all. The URLs are versioned, so the CDN and the browser cache them for good.
+`dist/index.js` works from a CDN too (it switches to the same per-icon files when it is served from one) but also carries
+the bundler chunk table (43 KB, 9 KB gzip).
 
 Or with a bundler:
 
@@ -46,14 +53,21 @@ Unknown names render nothing and log one console warning with the nearest matche
 
 | import | what | size |
 |---|---|---|
-| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`) | 36 KB (6 KB gzip) + one chunk per style used: `line` 116 KB (23 KB gzip), the largest 344 KB (32 KB gzip); a heavy style loads one small shard per icon used (~39 KB, at most 87 KB / 27 KB gzip) |
-| `@withicons/web/full` (`dist/full.js`) | one file, every style inline, adds sync `svg(name, opts)` | ~690 KB (84 KB gzip) |
+| `@withicons/web/cdn` (`dist/cdn.js`) | element; every icon loads its own file (`dist/icons/<style>/<name>.js`). For `<script type="module">` from a CDN or a self-hosted copy of `dist/` | 19 KB (7 KB gzip) + ~148 bytes gzip per `line` icon shown |
+| `@withicons/web` (`dist/index.js`) | element + lazy per-style chunks (`dist/data/<style>.js`); per-icon files when served unbundled from a CDN | 43 KB (9 KB gzip) + one chunk per style used: `line` 116 KB (23 KB gzip), the largest 344 KB (32 KB gzip); a heavy style loads one small shard per icon used (~39 KB, at most 87 KB / 27 KB gzip) |
+| `@withicons/web/full` (`dist/full.js`) | every style registered up front (static imports of the chunks), adds sync `svg(name, opts)` | every icon of every style: ~26 MB (6 MB gzip). For scripts and tools, never for a web page |
 
 A style's chunk loads once, the first time an icon of that style renders. The heavy styles (`solid`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`)
 are split into shards of a few icons each (`dist/data/<style>/<n>.js`): an icon loads only its own shard, so one `luxe`
-icon costs a few KB instead of the whole style. `loadVariant()` and `@withicons/web/data/<style>` still return the whole style. Aliases and typos also load `dist/data/meta.js`
-(113 KB, 28 KB gzip), so canonical names are the fastest. Bundlers (Vite, webpack, Rollup, esbuild) split the
-chunks automatically. Use `full` only where a single file matters more than size.
+icon costs a few KB instead of the whole style. `loadVariant()` and `@withicons/web/data/<style>` still return the whole style. Canonical names resolve with no
+extra download (the entry knows every name); an alias loads one small shard (`dist/data/alias/<n>.js`, at most 8 KB), and
+only a typo loads `dist/data/meta.js` (113 KB, 28 KB gzip) for the "did you mean" warning. Bundlers (Vite, webpack,
+Rollup, esbuild) split the chunks automatically. Use `full` only for scripts and tools that need the sync `svg()`.
+
+**Per-icon files.** `cdn.js` always loads icons from `icons/<style>/<name>.js` next to itself. `index.js` does the same when
+it is served unbundled from a package path (jsDelivr, unpkg, `/node_modules/@withicons/web/dist/index.js`); in a bundled app
+it uses the chunks. Self-hosting `dist/` under another path? Use `cdn.js`, or call `setIconBase('/vendor/withicons/dist/')`.
+Loads are de-duplicated and kept in memory, so ten `home` icons cost one request.
 
 SSR-safe: importing never touches the DOM; the element is only defined when `customElements` exists, so the same import
 works in Node, Deno and edge runtimes, where `loadSvg` returns plain markup:
@@ -98,8 +112,9 @@ Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/packag
 They work with every style and every package because they animate the element that holds the icon:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<!-- each animated icon's own motion: one small file per icon (icons.css has all of them) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
 
 <span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->
@@ -108,8 +123,8 @@ They work with every style and every package because they animate the element th
 
 `prefers-reduced-motion` turns every animation off. JS API: `import { motion, swap, motionFor } from '@withicons/motion'`.
 
-With `<with-icon>`, add the element module once and use attributes (it needs `motion.css`, plus `icons.css` for the
-per-icon defaults):
+With `<with-icon>`, add the element module once and use attributes (it needs `motion.css`; each icon's own defaults come
+from `icons.css`, or, from a CDN, the element links just `icons/<name>.css` for each animated icon):
 
 ```js
 import '@withicons/motion/element'
@@ -123,21 +138,46 @@ import '@withicons/motion/element'
 <!-- with-classes:start -->
 ## Icon classes (Font Awesome style)
 
-Plain `<i>`/`<span>` elements with classes, no build step. Two interchangeable ways to render them:
+Plain `<i>`/`<span>` elements with classes, no build step. Three interchangeable ways to render them, lightest first:
 
-### 1. CSS only (zero JS)
+### 1. CSS on demand (recommended from a CDN)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css">
+<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-loader.js" defer></script>
 
 <i class="with with-home"></i>                      <!-- line (default) -->
+<i class="with with-heart with-solid"></i>
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`) or every style at once:
+`with-loader.js` (15 KB, 6 KB gzip) adds the base rules, finds every `with with-<name>` on the
+page and links just that icon's rule: `dist/classes/<style>/<name>.css` (a `line` icon is typically 414 bytes,
+270 gzip; a `skeuo` icon about 8.5 KB, 1.7 KB gzip). Any style mix costs only the icons shown, and icons
+added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
+canonical class added with a console hint. Without JavaScript, link the same files yourself:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-all.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/line/home.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/solid/heart.css">
+```
+
+### 2. One stylesheet per style (zero JS)
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-line.css">
+
+<i class="with with-home"></i>
+<i class="with with-search with-2x with-spin"></i>
+```
+
+One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`), each holding all 500 icons
+(see the sizes below: the default `with-line.css` is 26 KB gzipped, the richest styles several hundred KB).
+`with-all.css` imports every style file: 31.2 MB (6.3 MB gzipped) in 20 requests,
+so keep it for prototypes and offline tools, never for a production page:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-all.css">   <!-- heavy: every icon in every style -->
 
 <i class="with with-home with-solid"></i>
 <span class="with with-heart with-gloss"></span>
@@ -157,33 +197,36 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
+| `<style>/<name>.css` (one icon, typical) | 414 B (`line`) to 8.5 KB (`skeuo`) | 270 B to 1.7 KB |
 | `with-line.css` | 209 KB | 26 KB |
 | `with-solid.css` | 655 KB | 186 KB |
 | `with-duo.css` | 320 KB | 33 KB |
 | `with-gloss.css` | 767 KB | 180 KB |
-| `with-engrave.css` | 1178 KB | 294 KB |
+| `with-engrave.css` | 1.2 MB | 294 KB |
 | `with-blueprint.css` | 646 KB | 97 KB |
 | `with-sketch.css` | 649 KB | 144 KB |
-| `with-glass.css` | 2740 KB | 404 KB |
+| `with-glass.css` | 2.7 MB | 404 KB |
 | `with-kawaii.css` | 891 KB | 128 KB |
-| `with-sticker.css` | 2161 KB | 228 KB |
+| `with-sticker.css` | 2.1 MB | 228 KB |
 | `with-pixel.css` | 555 KB | 40 KB |
-| `with-retro.css` | 1113 KB | 256 KB |
-| `with-luxe.css` | 2907 KB | 828 KB |
+| `with-retro.css` | 1.1 MB | 256 KB |
+| `with-luxe.css` | 2.8 MB | 828 KB |
 | `with-bauhaus.css` | 632 KB | 112 KB |
-| `with-skeuo.css` | 4544 KB | 581 KB |
-| `with-anime.css` | 1547 KB | 356 KB |
-| `with-gothic.css` | 3652 KB | 982 KB |
-| `with-pastel.css` | 1615 KB | 329 KB |
-| `with-coquette.css` | 2681 KB | 682 KB |
-| `with-plush.css` | 2455 KB | 571 KB |
-| `with-all.css` | 31662 KB | 6388 KB |
-| `with-icons.js` | 14 KB | 5 KB |
+| `with-skeuo.css` | 4.4 MB | 581 KB |
+| `with-anime.css` | 1.5 MB | 356 KB |
+| `with-gothic.css` | 3.6 MB | 982 KB |
+| `with-pastel.css` | 1.6 MB | 329 KB |
+| `with-coquette.css` | 2.6 MB | 682 KB |
+| `with-plush.css` | 2.4 MB | 571 KB |
+| `with-all.css` (imports every style file) | 31.2 MB | 6.3 MB |
+| `with-base.css` | 2 KB | 1 KB |
+| `with-icons.js` | 21 KB | 8 KB |
+| `with-loader.js` | 15 KB | 6 KB |
 
-### 2. JS runtime (inline SVG)
+### 3. JS runtime (inline SVG)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-icons.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-icons.js" defer></script>
 
 <i class="with with-home with-duo" style="--with-duo:#f59e0b"></i>
 <i class="with with-ruler with-blueprint" style="--with-accent:#38bdf8"></i>
@@ -192,8 +235,9 @@ Use the JS runtime for live CSS variables and stroke width.
 
 A classic (non-module), dependency-free script. It injects an inline `<svg class="with-svg">` into every element with class
 `with` and an `with-<name>` class, and keeps doing so for elements added or changed later (MutationObserver on added nodes and
-`class` / `aria-label` / `data-with-stroke-width` changes). Only the styles actually used are downloaded
-(`dist/data/<style>.js`, resolved relative to the script's URL; override with `data-with-base="…/"` on the script tag).
+`class` / `aria-label` / `data-with-stroke-width` changes). Only the icons actually shown are downloaded, one small
+module each (`dist/icons/<style>/<name>.js`, resolved relative to the script's URL; override with `data-with-icons="…/icons/"`
+and `data-with-base="…/data/"` on the script tag). `WithIcons.load(style)` still fetches a whole style.
 It can be combined with the CSS files: the mask shows until the SVG arrives, then it is switched off.
 
 - `data-with-stroke-width="1.5"` on the element: stroke width for `line`, `duo`, `blueprint`, `sketch`, `kawaii`.
@@ -225,8 +269,9 @@ and they print even with the browser's "Background graphics" option off.
 
 ### CSS or JS?
 
-- **CSS**: zero JS, works in emails-to-web, static sites, CMS content; one HTTP request; palette styles in their default colours.
-- **JS**: live CSS variables (`--with-duo`, `--with-accent`, `--with-<style>-<role>`), `data-with-stroke-width`, aliases and typo hints, only the styles you use are fetched.
+- **CSS on demand** (`with-loader.js`): the CSS rendering, downloading only the icons on the page.
+- **CSS stylesheet**: zero JS, works in emails-to-web, static sites, CMS content; one request per style; palette styles in their default colours.
+- **JS runtime**: live CSS variables (`--with-duo`, `--with-accent`, `--with-<style>-<role>`), `data-with-stroke-width`, aliases and typo hints, only the icons you show are fetched.
 - Using a framework? Prefer the component packages (`@withicons/react`, `vue`, `svelte`…) or `<with-icon>`.
 <!-- with-classes:end -->
 

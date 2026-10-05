@@ -125,7 +125,15 @@ export const boxDist = ([x, y], b) => Math.hypot(Math.max(b.x0 - x, 0, x - b.x1)
 export function cutPolygon(pts, b, clear) {
   const n = pts.length
   const ok = p => boxDist(p, b) >= clear - 1e-6
-  if (pts.every(ok)) return null
+  // the point of segment a->c nearest the box (distance to a box is convex along a line: ternary search)
+  const nearest = (a, c) => {
+    let lo = 0, hi = 1
+    const at = t => [a[0] + (c[0] - a[0]) * t, a[1] + (c[1] - a[1]) * t]
+    for (let i = 0; i < 40; i++) { const m1 = lo + (hi - lo) / 3, m2 = hi - (hi - lo) / 3; if (boxDist(at(m1), b) <= boxDist(at(m2), b)) hi = m2; else lo = m1 }
+    return at((lo + hi) / 2)
+  }
+  // a frame whose corners all clear can still pass too close along a side (a long word beside a straight wall)
+  if (pts.every((p, i) => ok(p) && ok(nearest(p, pts[(i + 1) % n])))) return null
   // start from an ok vertex so runs do not wrap
   const s = pts.findIndex(ok)
   if (s < 0) return []
@@ -143,7 +151,7 @@ export function cutPolygon(pts, b, clear) {
     const ao = ok(a), co = ok(c)
     if (ao && co) {
       // whole segment must clear too (its middle can dip into the zone)
-      const mid = [(a[0] + c[0]) / 2, (a[1] + c[1]) / 2]
+      const mid = nearest(a, c)
       if (ok(mid)) cur.push(c)
       else { cur.push(edge(a, mid)); if (cur.length >= 2) runs.push(cur); cur = [edge(c, mid), c] }
     } else if (ao && !co) { cur.push(edge(a, c)); if (cur.length >= 2) runs.push(cur); cur = [] }

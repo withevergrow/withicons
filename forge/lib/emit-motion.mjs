@@ -4,6 +4,8 @@
 //   packages/motion/dist/motion.css   every preset (@keyframes wm-<preset>[-loop]), triggers, explicit presets, swaps,
 //                                     reduced motion. Driven by CSS variables, so one keyframe serves every icon.
 //   packages/motion/dist/icons.css    per-icon defaults: [data-wm="<name>"], with-icon[name="<name>"] { --wmL…; --wmH… }
+//   packages/motion/dist/icons/<name>.css  one icon's defaults alone (the element links it on a CDN page without icons.css)
+//   packages/motion/dist/runtime.js   the runtime without the spec table (what element.js imports)
 //   packages/motion/dist/icons.js     { <name>: spec }   (forge/motion/<name>.json, or a derived spec with auto: true)
 //   packages/motion/dist/index.js     motionFor, motion, swap, pauseWhenOffscreen, PRESETS, EFFECTS (+ meta.js, keyframes.js)
 //   packages/motion/dist/element.js   <with-icon motion=… preset=… swap-to=… swap-effect=…>
@@ -390,13 +392,19 @@ function buildShadowCss(K, M) {
   return [sw, kf, draw, rm].join('\n')
 }
 
-function buildIconsCss(M, specs, version) {
-  const lines = [`/* @withicons/motion ${version} — icons.css: each icon's own loop (--wmL…) and hover (--wmH…) defaults. MIT. */`]
+// icons.css (every icon) and, per icon, the same rule alone: dist/icons/<name>.css
+function iconRules(M, specs) {
+  const out = {}
   for (const name of Object.keys(specs)) {
     const v = M.specVars(specs[name])
     const body = Object.keys(v).map(k => `${k}:${v[k]}`).join(';')
-    if (body) lines.push(`[data-wm="${name}"],with-icon[name="${name}"]{${body}}`)
+    if (body) out[name] = `[data-wm="${name}"],with-icon[name="${name}"]{${body}}`
   }
+  return out
+}
+function buildIconsCss(rules, version) {
+  const lines = [`/* @withicons/motion ${version} — icons.css: each icon's own loop (--wmL…) and hover (--wmH…) defaults. MIT. */`]
+  for (const name of Object.keys(rules)) lines.push(rules[name])
   return lines.join('\n') + '\n'
 }
 
@@ -404,15 +412,16 @@ function buildIconsCss(M, specs, version) {
 const src = f => fs.readFileSync(path.join(SRC, f), 'utf8')
 // strip ESM syntax so several source files can share one classic-script scope
 function classic(code) {
-  return code.replace(/^import [^\n]*\n/gm, '').replace(/^export \{[^}]*\}\n/gm, '').replace(/^export (function|const|async function|let|class) /gm, '$1 ')
+  return code.replace(/\r\n/g, '\n').replace(/^import [^\n]*\n/gm, '').replace(/^export \{[^}]*\}( from [^\n]*)?\n/gm, '').replace(/^export (function|const|async function|let|class) /gm, '$1 ')
 }
 function mustReplace(s, a, b) { if (!s.includes(a)) throw new Error(`emit-motion: marker not found: ${a}`); return s.replace(a, b) }
 
 function buildSiteJs(version, shadowCss) {
+  const runtime = classic(src('runtime.js'))
   let index = classic(src('index.js'))
   index = mustReplace(index, 'const specTable = () => SPECS', "const specTable = () => (typeof window !== 'undefined' && window.WITH_MOTION) || {}")
-  const parts = [classic(src('meta.js')), classic(src('keyframes.js')), classic(src('parts.js')), classic(src('parts-css.js')), index, `const SHADOW_CSS = ${J(shadowCss)}`,
-    classic(src('element.js')), classic(src('export.js'))]
+  const parts = [classic(src('meta.js')), classic(src('keyframes.js')), classic(src('parts.js')), classic(src('parts-css.js')), runtime, index, `const SHADOW_CSS = ${J(shadowCss)}`,
+    mustReplace(classic(src('element.js')), 'String(import.meta.url)', "''"), classic(src('export.js'))]
   const api = ['motionFor', 'motion', 'motionAttrs', 'swap', 'prepareDraw', 'unprepareDraw', 'upgradeMotion', 'PRESETS', 'EFFECTS', 'PRESET_DEFAULTS', 'EFFECT_DEFAULTS',
     'specVars', 'slotVars', 'keyframeName', 'presetStops', 'keyframesCss', 'swapLoopStops', 'parseSvg', 'resolveMotion', 'animatedSvg', 'animatedSwapSvg',
     'exportDuration', 'frameSvg', 'renderFrames', 'encodeGif', 'gif', 'video', 'webm', 'pauseWhenOffscreen',
@@ -446,7 +455,8 @@ export default async function emit(ctx) {
 
   const PC = await imp('parts-css.js')
   const motionCss = buildMotionCss(K, M, version, PC)
-  const iconsCss = buildIconsCss(M, specs, version)
+  const rules = iconRules(M, specs)
+  const iconsCss = buildIconsCss(rules, version)
   const shadowCss = buildShadowCss(K, M)
   const header = `// @withicons/motion ${version} — generated from packages/motion/src, do not edit. MIT.\n`
 
@@ -458,10 +468,14 @@ export default async function emit(ctx) {
     'icons.d.ts': dtsIcons(Object.keys(specs)),
     'shadow-css.js': `${header}export const SHADOW_CSS = ${J(shadowCss)}\n`,
   }
-  for (const f of ['meta.js', 'keyframes.js', 'parts.js', 'parts-css.js', 'index.js', 'element.js', 'export.js']) files[f] = header + src(f)
+  for (const f of ['meta.js', 'keyframes.js', 'parts.js', 'parts-css.js', 'runtime.js', 'index.js', 'element.js', 'export.js']) files[f] = header + src(f)
   for (const f of fs.readdirSync(SRC).filter(f => f.endsWith('.d.ts'))) files[f] = src(f)
+  // one icon's defaults alone: what a CDN page without icons.css loads (the element links them by itself)
+  for (const name of Object.keys(rules)) files[`icons/${name}.css`] = rules[name] + '\n'
   const distDir = path.join(ROOT, D)
-  if (fs.existsSync(distDir)) for (const f of fs.readdirSync(distDir)) if (!files[f]) fs.rmSync(path.join(distDir, f), { recursive: true, force: true })
+  if (fs.existsSync(distDir)) for (const f of fs.readdirSync(distDir)) if (!files[f] && f !== 'icons') fs.rmSync(path.join(distDir, f), { recursive: true, force: true })
+  const iconDir = path.join(distDir, 'icons')
+  if (fs.existsSync(iconDir)) for (const f of fs.readdirSync(iconDir)) if (!files['icons/' + f]) fs.rmSync(path.join(iconDir, f), { recursive: true, force: true })
   for (const [f, text] of Object.entries(files)) writeIfChanged(D + f, text)
 
   // package.json + LICENSE (README.md is hand-written)
@@ -477,14 +491,16 @@ export default async function emit(ctx) {
     main: './dist/index.js', module: './dist/index.js', types: './dist/index.d.ts',
     exports: {
       '.': { types: './dist/index.d.ts', default: './dist/index.js' },
+      './runtime': { types: './dist/runtime.d.ts', default: './dist/runtime.js' },
       './element': { types: './dist/element.d.ts', default: './dist/element.js' },
       './export': { types: './dist/export.d.ts', default: './dist/export.js' },
       './icons': { types: './dist/icons.d.ts', default: './dist/icons.js' },
       './motion.css': './dist/motion.css',
       './icons.css': './dist/icons.css',
+      './icons/*': './dist/icons/*',
       './package.json': './package.json',
     },
-    typesVersions: { '*': { element: ['./dist/element.d.ts'], export: ['./dist/export.d.ts'], icons: ['./dist/icons.d.ts'] } },
+    typesVersions: { '*': { runtime: ['./dist/runtime.d.ts'], element: ['./dist/element.d.ts'], export: ['./dist/export.d.ts'], icons: ['./dist/icons.d.ts'] } },
     style: './dist/motion.css',
     unpkg: './dist/motion.css', jsdelivr: './dist/motion.css',
     files: ['dist', 'README.md', 'LICENSE'],

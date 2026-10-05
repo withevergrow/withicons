@@ -115,6 +115,44 @@ function tangentAngle(px, py, cx, cy, r, side) {
 }
 const dot = (x, y) => pen().M(x, y - 0.25).V(y) // a dot: a 0.25u stub that every stroke rounds into a disc
 const rot180 = (ps, w, h) => ps.map(p => p.map(([x, y]) => [w - x, h - y]))
+// ── open terminals ─────────────────────────────────────────────────────────────────────────────────────
+// A terminal that curls back toward its own glyph (the tail of 5 S 3 2, the mouth of G, the hook of ?) closes a FALSE
+// counter as soon as the stroke is wider than the gap: a 5 reads as a 6, an S as an 8, a G as an O. open() walks a
+// terminal back (in `step` increments of the builder's parameter, from `from` to `to`) until its round end stays CLEAR
+// of every other part of the glyph by a heavy stroke (2.5u + antialiasing), measured on the SNAPPED path data. Parts of
+// the terminal's own stroke within 1.25 x clear of it along the path are its neighbours, not a closure, and are skipped.
+// `clear` defaults to CLEAR; a terminal facing a long straight stroke (2, ?) asks for more, since antialiasing joins
+// two parallel-ish edges sooner than a point and a curve.
+// Pure geometry: deterministic, and a no-op wherever the drawing is already open (most large glyphs).
+const CLEAR = 2.6, CLEAR_FLAT = 3.1
+function terminalClear(pens, idx, atStart, clear = CLEAR) {
+  // straight segments come back as their two end points only: resample every run to <= 0.1u so the middle of a
+  // straight stroke (the diagonal of a 2, the stem of a ?) counts as much as its ends
+  const dense = pts => pts.flatMap((q, i) => {
+    if (!i) return [q]
+    const a = pts[i - 1], n = Math.max(1, Math.ceil(Math.hypot(q[0] - a[0], q[1] - a[1]) / 0.1))
+    return Array.from({ length: n }, (_, k) => [a[0] + (q[0] - a[0]) * (k + 1) / n, a[1] + (q[1] - a[1]) * (k + 1) / n])
+  })
+  const subsOf = p => { const d = p.d(); return d ? parsePath(d, 0.1).map(s => ({ ...s, pts: dense(s.pts) })) : [] }
+  const own = subsOf(pens[idx]).flatMap(s => s.pts)
+  if (own.length < 2) return true
+  const seq = atStart ? own : [...own].reverse(), T = seq[0]
+  const far = [] // own points beyond 1.25 x clear (by arc length from the terminal)
+  for (let i = 1, acc = 0; i < seq.length; i++) {
+    acc += Math.hypot(seq[i][0] - seq[i - 1][0], seq[i][1] - seq[i - 1][1])
+    if (acc > clear * 1.25) far.push(seq[i])
+  }
+  const others = pens.flatMap((p, i) => i === idx ? [] : subsOf(p).flatMap(s => s.pts))
+  return [...far, ...others].every(q => Math.hypot(q[0] - T[0], q[1] - T[1]) >= clear)
+}
+function open(make, from, to, step, idx = -1, atStart = false, clear = CLEAR) {
+  const dir = Math.sign(to - from) || 1
+  for (let v = from; dir * (to - v) >= -1e-9; v += dir * step) {
+    const pens = make(v)
+    if (terminalClear(pens, idx < 0 ? pens.length + idx : idx, atStart, clear)) return pens
+  }
+  return make(to)
+}
 
 // ── glyph drawings ────────────────────────────────────────────────────────────────────────────────────
 // Each builder gets (h = cap height, w = design width, s = small drawing?) and returns an array of pens,
@@ -133,23 +171,27 @@ const G = {
   1: (h, w, s) => [pen().M(0, s ? h * 0.27 : h * 0.25).L(w, 0).V(h)],
   2: (h, w) => {
     const r = w / 2, t = tangentAngle(0, h, r, r, r, -1) + 360
-    return [pen().E(r, r, r, r, 172, t).L(0, h).H(w)]
+    // the top terminal curls toward the diagonal: walk it back until a heavy stroke cannot close the counter
+    return open(a0 => [pen().E(r, r, r, r, a0, t).L(0, h).H(w)], 172, 222, 2.5, 0, true, CLEAR_FLAT)
   },
   3: (h, w, s) => {
     const m = h * 0.45, c1 = w / 2 - 0.125, arm = w * (s ? 0.42 : 0.38)
-    return [
-      pen().E(c1, m / 2, c1, m / 2, 205, 450).H(arm),
-      pen().M(arm, m).H(w / 2).E(w / 2, (m + h) / 2, w / 2, (h - m) / 2, 270, 515),
-    ]
+    if (s) { // flat-top 3: a top bar and a diagonal into the bowl; no small upper bowl to blob, no crowded junction
+      const mm = h * 0.42, cx = w / 2, ry = (h - mm) / 2
+      return open(e => [pen().M(0, 0).H(w).L(cx - 0.25, mm).H(cx).E(cx, (mm + h) / 2, w / 2, ry, 270, e)], 515, 470, 2.5)
+    }
+    const top = a0 => pen().E(c1, m / 2, c1, m / 2, a0, 450).H(arm)
+    const t0 = open(a0 => [top(a0), pen().M(arm, m)], 205, 235, 2.5, 0, true)[0]
+    return open(e => [t0, pen().M(arm, m).H(w / 2).E(w / 2, (m + h) / 2, w / 2, (h - m) / 2, 270, e)], 515, 480, 2.5)
   },
   4: (h, w, s) => {
     const stem = w - (s ? 1 : 1.25), bar = h * (s ? 0.66 : 0.68)
     return [pen().M(s ? 0.75 : 1, 0).L(0, bar).H(w), pen().M(stem, s ? h * 0.3 : 0).V(h)]
   },
-  5: (h, w) => {
+  5: (h, w, s) => {
     const rx = w / 2, ry = h * 0.31, cy = h - ry
     const a = 215, sx = rx + rx * Math.cos(rad(a)), sy = cy + ry * Math.sin(rad(a))
-    return [pen().M(w, 0).H(sx + 0.15).L(sx, sy).E(rx, cy, rx, ry, a, 505)]
+    return open(e => [pen().M(w, 0).H(sx + 0.15).L(sx, sy).E(rx, cy, rx, ry, a, e)], 505, 460, 2.5)
   },
   6: (h, w) => {
     const r = w / 2, cy = h - r, px = w * 0.78
@@ -179,7 +221,13 @@ const G = {
   },
   E: (h, w, s) => [pen().M(w, 0).H(0).V(h).H(w), pen().M(0, h / 2).H(w * (s ? 0.75 : 0.85))],
   F: (h, w, s) => [pen().M(w, 0).H(0).V(h), pen().M(0, h * 0.5).H(w * (s ? 0.8 : 0.85))],
-  G: (h, w, s) => [pen().E(w / 2, h / 2, w / 2, h / 2, -40, -335).V(h * 0.54).H(w * (s ? 0.55 : 0.5))], // spur: never a 6
+  G: (h, w, s) => { // spur: never a 6. The bar shortens until it cannot touch the bowl, then the mouth (top terminal vs
+    // spur) opens until a heavy stroke cannot close it: a G must never close into an O
+    const g = (a0, bx) => [pen().E(w / 2, h / 2, w / 2, h / 2, a0, -335).V(h * 0.54).H(w * bx)]
+    let bx = s ? 0.55 : 0.5
+    while (bx < 0.75 && !terminalClear(g(-40, bx), 0, false)) bx += 0.05
+    return open(a0 => g(a0, bx), -40, -75, 2.5, 0, true)
+  },
   H: (h, w) => [pen().M(0, 0).V(h), pen().M(w, 0).V(h), pen().M(0, h / 2).H(w)],
   I: h => [pen().M(0, 0).V(h)],
   J: (h, w) => { const r = w / 2; return [pen().M(w, 0).V(h - r).E(r, h - r, r, r, 0, 170)] },
@@ -200,9 +248,12 @@ const G = {
     const r = h * (s ? 0.29 : 0.285), bx = w - 0.25
     return [pen().M(0, h).V(0).H(bx - r).E(bx - r, r, r, r, -90, 90).H(0), pen().M(bx - r, 2 * r).L(w, h)]
   },
-  S: (h, w) => {
+  S: (h, w, s) => {
     const m = h * 0.48, c1 = w / 2 - 0.125
-    return [pen().E(c1, m / 2, c1, m / 2, -25, -270).H(w / 2).E(w / 2, (m + h) / 2, w / 2, (h - m) / 2, -90, 155)]
+    const S = (a0, e) => [pen().E(c1, m / 2, c1, m / 2, a0, -270).H(w / 2).E(w / 2, (m + h) / 2, w / 2, (h - m) / 2, -90, e)]
+    let end = 155 // the lower tail first, then the upper terminal
+    while (end > 110 && !terminalClear(S(-25, end), 0, false)) end -= 2.5
+    return open(a0 => S(a0, end), -25, -55, 2.5, 0, true)
   },
   T: (h, w) => [pen().M(0, 0).H(w), pen().M(w / 2, 0).V(h)],
   U: (h, w) => { const r = w / 2; return [pen().M(0, 0).V(h - r).E(r, h - r, r, r, 180, 0).V(0)] },
@@ -226,11 +277,12 @@ const G = {
   '!': (h, w, s) => [pen().M(0, 0).V(h - (s ? 2.75 : 3.25)), dot(0, h)],
   '?': (h, w, s) => {
     const r = w / 2, low = h - (s ? 2.75 : 3.25)
-    return [pen().E(r, r, r, r, 180, 395).C(r + r * 0.55, r * 1.6, r, r * 1.7, r, low), dot(r, h)]
+    // the hook's left terminal curls toward the stem: walk it back until the hook stays open
+    return open(a0 => [pen().E(r, r, r, r, a0, 395).C(r + r * 0.55, r * 1.6, r, r * 1.7, r, low), dot(r, h)], 180, 260, 2.5, 0, true, CLEAR_FLAT)
   },
   $: (h, w, s) => {
     const pk = s ? 0.75 : 1
-    return [...G.S(h, w), pen().M(w / 2, -pk).V(0.25), pen().M(w / 2, h - 0.25).V(h + pk)]
+    return [...G.S(h, w, s), pen().M(w / 2, -pk).V(0.25), pen().M(w / 2, h - 0.25).V(h + pk)]
   },
   '€': (h, w, s) => {
     const ox = 0.75

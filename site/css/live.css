@@ -61,9 +61,9 @@
 .lv-flip > .lv-svg.is-out { position: absolute; inset: 0; margin: auto; opacity: 0; transform: translateY(-14%) scale(.9); }
 .lv-flip > .lv-svg.is-in { opacity: 0; transform: translateY(14%) scale(.94); }
 
-/* sticky toolbar */
-.lv-bar { position: sticky; top: var(--header-h); z-index: 20; padding: 12px 0 10px; background: color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; scroll-margin-top: var(--header-h); }
+/* toolbar */
+/* the filter bar scrolls with the page (a sticky bar with 20 styles + groups was too tall and covered the grid) */
+.lv-bar { position: relative; z-index: 2; padding: 12px 0 10px; scroll-margin-top: var(--header-h); }
 .lv-bar.is-stuck { border-bottom-color: var(--rule); }
 .lv-bar-in { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .lv-search { position: relative; display: flex; align-items: center; min-height: 52px; padding: 0 12px 0 46px; border-radius: var(--pill);

@@ -12,7 +12,7 @@
 // button around, the icon itself becomes a focusable toggle button (Enter / Space). Hover previews need a real
 // hover; on touch a tap toggles instead.
 // Import once, anywhere: import '@withicons/motion/element'
-import { prepareDraw, pauseWhenOffscreen, partsSvg, EFFECTS, EFFECT_DEFAULTS, SWAP_HOLD, swapEase } from './index.js'
+import { prepareDraw, pauseWhenOffscreen, partsSvg, EFFECTS, EFFECT_DEFAULTS, SWAP_HOLD, swapEase } from './runtime.js'
 import { cssSlot } from './meta.js'
 import { SHADOW_CSS } from './shadow-css.js'
 import { shadowPartsCss } from './parts-css.js'
@@ -24,6 +24,34 @@ const STATE = typeof WeakMap !== 'undefined' ? new WeakMap() : null
 const STATEFUL = '[aria-pressed],[aria-expanded],[aria-checked]'
 const STATE_ATTRS = ['aria-pressed', 'aria-expanded', 'aria-checked']
 const OWNED = typeof WeakSet !== 'undefined' ? new WeakSet() : null   // buttons whose aria-pressed this module manages
+
+// Each icon's own loop / hover defaults. With icons.css on the page (every icon, ~18 KB gzipped) nothing more loads.
+// Without it, an animated <with-icon name="bell"> links just icons/bell.css (a few hundred bytes) next to this module,
+// when this module is served unbundled from a package path (a CDN such as jsDelivr or unpkg, /node_modules/...).
+// Bundled apps import icons.css themselves; setMotionIconBase() points elsewhere (a self-hosted copy) or turns it off.
+let ICON_BASE = (() => {
+  try {
+    const u = String(import.meta.url)
+    return /^(https?|file):/.test(u) && /\/@withicons\/motion(@[^/]*)?\/dist\/element\.js([?#].*)?$/.test(u) ? u.replace(/element\.js([?#].*)?$/, 'icons/') : null
+  } catch { return null }
+})()
+const ICON_CSS = new Set()
+/** Where per-icon defaults (<name>.css) load from when icons.css is not on the page; null turns it off. */
+export function setMotionIconBase(url) { ICON_BASE = url ? String(url).replace(/\/?$/, '/') : null }
+function iconDefaults(host) {
+  const name = host.getAttribute('name')
+  if (!ICON_BASE || !name || ICON_CSS.has(name) || !/^[a-z0-9-]+$/.test(name) || typeof document === 'undefined') return
+  ICON_CSS.add(name)
+  // already styled (icons.css, or the file linked by hand): nothing to fetch
+  if (cssSlot(host, true) || cssSlot(host, false)) return
+  const l = document.createElement('link')
+  l.rel = 'stylesheet'
+  l.href = ICON_BASE + name + '.css'
+  l.setAttribute('data-wm-icon', name)
+  // the defaults decide draw strokes and the parts plan: decorate again once they apply
+  l.onload = () => document.querySelectorAll('with-icon[motion]').forEach(h => { if (h.getAttribute('name') === name) decorate(h) })
+  ;(document.head || document.documentElement).appendChild(l)
+}
 
 function stateOf(host) {
   let s = STATE.get(host)
@@ -141,6 +169,7 @@ function upgrade(host) {
   teardown(host, s)
   const motion = host.getAttribute('motion')
   const to = host.getAttribute('swap-to')
+  if (motion) iconDefaults(host)
   const play = () => {
     if (host.classList.contains('wm-run')) return
     void host.offsetWidth

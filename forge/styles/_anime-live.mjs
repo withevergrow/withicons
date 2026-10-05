@@ -22,14 +22,30 @@ const bboxArea = r => { const b = bbox(r); return b.w * b.h }
 // shrink a shape by d (> 1.5 in steps: the field reach is limited)
 const shrink = (sh, d) => { let out = sh; let left = d; while (left > 1e-6) { const step = Math.min(1.35, left); out = P.grow(out, -step); left -= step } return out }
 
-// text ops: ink lettering printed on a field (role picks ink or cream)
-const textInk = (L, role = 'ink', w = 0.9) => L.length ? [K.ink(L, { part: 'a', role, w, taper: false, shift: 0 })] : []
-// free text: cream lettering with an ink outline (or ink on a cream plate)
+// Live text (forge/DYNAMIC.md). The stroke font is spaced for a 1.75u stroke at full size; the anime fit draws the
+// icon at ~0.9, so lettering is cut at TEXT_W (= 1.75 x 0.9, minus a hair): heavy enough to read at 16px, light
+// enough that every counter of 0 4 6 8 9 A % stays open. An outlined (manga) letter is core + 2 x outline wide,
+// which closes those counters at 24px, so live lettering is solid: ink on light fields, cream on coloured plates.
+export const TEXT_W = 1.5
+export const FREE_TEXT = 'accent'   // free lettering (no field behind it): coral reads on light and dark pages
+// a small cap (fitted cap < 4.6u: a calendar's day, a timer's count) of a digit with a counter (0 4 6 8 9 %) is
+// cut lighter, down to 1.25u, so the counter keeps >= 0.6u² open at 24px
+const COUNTER = new Set([...'04689%'])
+// a bare stem (I 1 ! |) has no counter to keep open and at 24px a 1.5u stem lands on a pixel and a half of grey:
+// a lettering of stems only is cut a quarter heavier, so a lone "I" on a key holds its contrast
+const STEM = new Set([...'I1!|'])
+export const textW = (l, lone = false) => !l ? TEXT_W : STEM.has(l.ch) ? (lone ? 1.85 : TEXT_W) : !COUNTER.has(l.ch) || !(l.capS < 4.6) ? TEXT_W : Math.max(1.25, TEXT_W - (4.6 - l.capS) * 0.45)
+// ink ops for lettering: one per stroke weight
+export function inkText(L, o) {
+  const by = new Map(), lone = L.every(l => STEM.has(l.ch))
+  for (const l of L) { const w = o.role === 'ink' || lone ? +textW(l, lone).toFixed(3) : TEXT_W; (by.get(w) || by.set(w, []).get(w)).push(l) }
+  return [...by.entries()].map(([w, ls]) => K.ink(ls, { taper: false, shift: 0, text: true, ...o, w }))
+}
+const textInk = (L, role = 'ink') => L.length ? inkText(L, { part: 'a', role }) : []
 function freeText(L, role = 'tint') {
   if (!L.length) return []
-  const cap = Math.max(...L.map(l => l.cap || 5))
-  if (role === 'ink') return [K.ink(L, { part: 'a', w: cap >= 6 ? 1.25 : 1.05, taper: false, shift: 0 })]
-  return [K.tube(L, role, { part: 'a', w: cap >= 6 ? 1.35 : 1.1, ol: 0.42, shade: 0 })]
+  if (role === 'ink') return textInk(L, FREE_TEXT)
+  return [K.tube(L, role, { part: 'a', w: TEXT_W, ol: 0, shade: 0, casts: false })]
 }
 // a plate behind free text: a rounded slab padded around the lettering, kept on the canvas
 function plate(L, role, pad = 1.5, r = null) {
@@ -48,7 +64,11 @@ function clockFace(ctx, o) {
   const inner = shrink(face, o.rimW ?? 2.1)
   const ops = [K.surf(face, o.rim, { shineSize: o.shineSize ?? 0.95 })]
   ops.push(K.surf(inner, 'tint', { inset: true, ol: 0.4, shine: o.glass ? 'glass' : 'none', shade: 0.7 }))
-  if (sweeps.length) ops.push(K.paint(P.clip(P.join(...sweeps.map(l => [l.pts])), shrink(inner, 0.3)), 'c2', { op: 0.8, part: 'a' }))
+  // an elapsed sweep (stopwatch, timer): a solid coral sector edged in ink, so the reading is as strong as a hand
+  if (sweeps.length) {
+    ops.push(K.paint(P.clip(P.join(...sweeps.map(l => [l.pts])), shrink(inner, 0.3)), o.sweep || 'accent', { part: 'a' }))
+    ops.push(K.ink(sweeps, { w: 0.85, part: 'a', taper: false, shift: 0 }))
+  }
   // hour ticks where no hand points
   if (o.ticks) {
     const ib = boxOf(inner), R = Math.min(ib.w, ib.h) / 2 - 1.05
@@ -86,11 +106,14 @@ function calendar(ctx, mode) {
   if (divider) yh = bbox(divider.pts).y0
   else if (mode !== 'strip' && rows.length >= 2 && (rows[0].y1 - rows[0].y0) < (rows[1].y1 - rows[1].y0) * 0.9) yh = (rows[0].y1 + rows[1].y0) / 2
   else if (mode !== 'strip' && rows.length === 1 && rows[0].y1 < 12.5) yh = rows[0].y1 + 1.4
+  // a strip calendar (no header word) keeps one thin sakura band whatever its text: a band that followed the
+  // day's height would move, and its edge would run through the top of a 9 or a 0
+  else if (mode === 'strip') yh = Math.min(sb.y0 + 1.3, (rows[0] ? rows[0].y0 : 99) - 1.3)
   else yh = Math.min(sb.y0 + 2.6, (rows[0] ? rows[0].y0 : 99) - 1.3)
   const head = P.clip(sheet, P.rect(0, 0, 24, yh))
   // binder rings: the short stubs above the sheet
   const rings = ctx.lines.filter(l => l.plate !== 'S' && !l.closed && bbox(l.pts).y1 < sb.y0 + 1.8 && bbox(l.pts).h < 3.2 && bbox(l.pts).w < 0.6)
-  const ringOps = rings.map(l => { const b = bbox(l.pts), x = (b.x0 + b.x1) / 2; return K.surf(P.pill(x - 1, sb.y0 - 1.5, x + 1, Math.min(sb.y0 + 2.4, (rows[0] ? rows[0].y0 : 99) - 0.9)), 'c1', { part: 'a', shine: 'none', ol: 0.4 }) })
+  const ringOps = rings.map(l => { const b = bbox(l.pts), x = (b.x0 + b.x1) / 2; return K.surf(P.pill(x - 1, sb.y0 - 1.5, x + 1, Math.max(sb.y0 + 0.9, Math.min(sb.y0 + 2.4, (rows[0] ? rows[0].y0 : 99) - 1.6))), 'c1', { part: 'a', shine: 'none', ol: 0.4 }) })
   // anything else drawn inside the sheet: small closed loops are picked days, the rest ink
   const rest = ctx.lines.filter(l => l !== divider && !rings.includes(l) && l.plate !== 'S')
   const picked = rest.filter(l => l.closed && Math.max(bbox(l.pts).w, bbox(l.pts).h) < 3.4)
@@ -101,8 +124,13 @@ function calendar(ctx, mode) {
   ]
   if (divider) ops.push(K.ink([divider], { w: 0.7 }))
   for (const l of picked) { const b = bbox(l.pts); ops.push(K.surf(P.circle((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, Math.max(b.w, b.h) / 2 + 0.5), 'c1', { shine: 'dot', shineSize: 0.6, ol: 0.35, part: 'a' })) }
-  if (other.length) ops.push(K.ink(other, { w: 0.9, part: 'a', taper: false, shift: 0 }))
-  ops.push(...textInk(T, 'ink', 0.95), ...ringOps)
+  // day pips (the skeleton's zero-length dots) print as round ink dots at the reference dot size, not as a
+  // hairline speck; everything else drawn on the sheet is fine ink line art
+  const pip = l => { const b = bbox(l.pts); return Math.max(b.w, b.h) < 0.6 }
+  const pips = other.filter(pip), art = other.filter(l => !pip(l))
+  if (pips.length) ops.push(K.paint(P.join(...pips.map(l => { const b = bbox(l.pts); return P.circle((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, 0.8 * ctx.s / 0.9) })), 'ink', { part: 'a' }))
+  if (art.length) ops.push(K.ink(art, { w: 0.9, part: 'a', taper: false, shift: 0 }))
+  ops.push(...textInk(T, 'ink'), ...ringOps)
   return ops
 }
 
@@ -114,7 +142,8 @@ function battery(ctx, o = {}) {
   const body = ctx.fills[0]
   const cut = ctx.cuts[0] || []
   const win = cut.length ? largest(cut) : null
-  const window = win ? shrink([win], 0.55) : shrink(body, 1.6)
+  // the window never pokes out of the case (a case left open for a charge bolt): kept 0.8u inside the body
+  const window = win ? P.clip(shrink([win], 0.55), shrink(body, 0.8)) : shrink(body, 1.6)
   const holes = cut.filter(r => r !== win)
   const ops = []
   // terminal: the short open A line beside the case
@@ -123,17 +152,29 @@ function battery(ctx, o = {}) {
   ops.push(K.surf(body, 'c1', { shineSize: 0.85 }))
   const bolt = ctx.lines.filter(l => l.plate === 'S' && fracIn(l.pts, largest(body)) < 0.5)
   const bang = ctx.lines.filter(l => l.plate === 'S' && !bolt.includes(l))
-  if (ctx.texts.length) {
-    // battery-percent: the window itself is the charge, the number printed on it
-    ops.push(K.surf(window, low ? 'accent' : 'c4', { inset: true, ol: 0.38, shine: 'glass', shade: 0.6 }))
-    ops.push(...textInk(ctx.texts, 'ink', 0.95))
+  if (o.printed || ctx.texts.length) {
+    // battery-percent (with or without its figures, so the window never changes colour with them): the window itself is the charge, the number printed on it
+    // no glass bars: a shine streak across the figures reads as a stroke of them
+    ops.push(K.surf(window, low ? 'accent' : 'c4', { inset: true, ol: 0.38, shine: 'none', shade: 0.6 }))
+    ops.push(...textInk(ctx.texts, low ? 'shine' : 'ink'))   // white on the coral low window, navy on green
   } else {
     ops.push(K.surf(window, 'ink', { inset: true, ol: 0, shine: 'none', shade: 0, tone: ['ink', 0.3] }))
     if (holes.length && !bang.length) {
-      const lv = P.clip(P.join(...holes.map(r => [r])), shrink(window, 0.6))
+      // the charge is the skeleton's level bar (its knock-out is the bar + 1u clearance, the slot runs 2u inside
+      // the window), mapped as a fraction onto this window (which may be narrower: a case left open for a bolt)
+      const sw = boxOf([win]), hb = boxOf(holes), vert = o.vertical
+      const inner = shrink(window, 0.6), ib = boxOf(inner)
+      let lv
+      if (vert) {
+        const frac = Math.max(0, Math.min(1, (hb.h - 2) / Math.max(0.1, sw.h - 6)))
+        lv = P.clip(inner, P.rect(0, ib.y1 - Math.max(ib.h * frac, 1.6), 24, 24))   // a low charge still reads as a cell
+      } else {
+        const frac = Math.max(0, Math.min(1, (hb.w - 2) / Math.max(0.1, sw.w - 6)))
+        lv = P.clip(inner, P.rect(0, 0, ib.x0 + Math.max(ib.w * frac, 1.6), 24))
+      }
       ops.push(K.surf(lv, low ? 'accent' : 'c4', { ol: 0, shine: 'streak', shineSize: 0.6, cast: false, casts: false, shade: 0.6 }))
       // cell dividers at thirds of the full window
-      const wb = boxOf(window), vert = o.vertical
+      const wb = boxOf(window)
       const divs = [1, 2].map(i => vert
         ? [[wb.x0, wb.y0 + wb.h * i / 3], [wb.x1, wb.y0 + wb.h * i / 3]]
         : [[wb.x0 + wb.w * i / 3, wb.y0], [wb.x0 + wb.w * i / 3, wb.y1]])
@@ -158,10 +199,13 @@ export const LIVE = Object.assign(Object.create(null), {
       const bells = ctx.fills.slice(1)
       const legs = outside(ctx, face).filter(l => !l.closed && !bells.some(b => inAny(l.pts, b) > 0.3))
       const c = clockFace(ctx, { rim: 'accent', ticks: false, pin: 'accent', pinR: 0.85, rimW: 2.2, handW: 1.1 })
+      // ringing: the skeleton's S arcs either side, as gold tubes (they read on light and dark)
+      const ring = ctx.lines.filter(l => l.plate === 'S' && !l.closed)
       return [
         ...(legs.length ? [K.surf(P.stroke(legs, 1.9), 'c3', { shine: 'none', shade: 0, ol: 0.35 })] : []),
         ...bells.map(b => K.surf(b, 'c3', { part: 'a', shine: 'none' })),
         ...c.ops,
+        ...(ring.length ? [K.tube(ring, 'c3', { part: 's', w: 1.3, ol: 0.38 })] : []),
       ]
     },
   }),
@@ -191,7 +235,7 @@ export const LIVE = Object.assign(Object.create(null), {
   'calendar-tear': () => ({ draw: ctx => calendar(ctx, 'strip') }),
 
   'battery-level': () => ({ draw: ctx => battery(ctx) }),
-  'battery-percent': () => ({ draw: ctx => battery(ctx) }),
+  'battery-percent': () => ({ draw: ctx => battery(ctx, { printed: true }) }),
   'battery-charging-level': () => ({ draw: ctx => battery(ctx) }),
   'battery-vertical': () => ({ draw: ctx => battery(ctx, { vertical: true }) }),
 
@@ -206,10 +250,27 @@ export const LIVE = Object.assign(Object.create(null), {
       const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2
       const r = T.length ? Math.min(pb.w / 2 - 1.6, Math.max(b.x1 - b.x0, b.y1 - b.y0) / 2 + 1.3) : 2.6
       ops.push(K.surf(P.circle(cx, cy, r), 'tint', { part: 'a', inset: true, ol: 0.4, shine: 'none', shade: 0.6 }))
-      return [...ops, ...textInk(T, 'ink', 0.95)]
+      return [...ops, ...textInk(T, 'ink')]
     },
   }),
   'volume-level': () => ({ col: { main: 'c1', second: 'c2', tube: 'c2' } }),
+  // gold bars: the one tube colour whose height reads on a dark page as well as a light one
+  // gold bars (the one colour whose height reads on a dark page as well as a light one), each the skeleton's bar
+  // at the reference weight, on a sky baseline
+  'bar-values': () => ({
+    draw: ctx => {
+      const h = 0.875 * ctx.s
+      const bars = ctx.fills.map(f => boxOf(f)).sort((a, b) => a.x0 - b.x0)
+      const base = ctx.lines.filter(l => l.plate === 'A' && !l.closed)
+      const ops = []
+      if (base.length) ops.push(K.tube(base, 'c1', { part: 'a', w: 1.5 * ctx.s }))
+      for (const b of bars) {
+        const x0 = b.x0 - h, x1 = b.x1 + h, y0 = b.y0 - h, y1 = b.y1 + h
+        ops.push(K.surf(P.rr(x0, y0, x1, y1, Math.min((x1 - x0) / 2, (y1 - y0) / 2, 1.2)), 'c3', { part: 'k', shine: 'dot', shineSize: 0.5 }))
+      }
+      return ops
+    },
+  }),
   'cart-count': () => ({ col: { main: 'c1', second: 'c3', tube: 'c1' } }),
 
   // free lettering always sits on a plate
@@ -246,7 +307,10 @@ export const LIVE = Object.assign(Object.create(null), {
   }),
   'price-tag': () => ({
     draw: ctx => {
-      const tag = ctx.fills[0], T = ctx.texts
+      // the tag is the skeleton's: its fill plus its outline (the generator grows the outline with the price)
+      const T = ctx.texts
+      const edge = ctx.lines.filter(l => l.plate === 'K' && !ctx.texts.includes(l))
+      const tag = edge.length ? P.unite(ctx.fills[0], P.stroke(edge, 1.6 * ctx.s)) : ctx.fills[0]
       const ops = [K.surf(tag, 'c2', { shineSize: 0.85 })]
       // the string hole: only where it clears the lettering by a margin
       const holes = ctx.lines.filter(l => l.closed && !ctx.texts.includes(l) && Math.max(bbox(l.pts).w, bbox(l.pts).h) < 3)
@@ -256,7 +320,7 @@ export const LIVE = Object.assign(Object.create(null), {
         if (tb && cx + r + 1.1 > tb.x0 && cy + r > tb.y0 - 0.5 && cy - r < tb.y1 + 0.5) continue
         ops.push(K.surf(P.circle(cx, cy, r), 'tint', { inset: true, ol: 0.35, shine: 'none', shade: 0.6 }))
       }
-      return [...ops, ...textInk(T, 'ink', 0.95)]
+      return [...ops, ...textInk(T, 'ink')]
     },
   }),
 })

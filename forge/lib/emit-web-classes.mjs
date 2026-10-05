@@ -1,9 +1,11 @@
 // emit-classes — Font-Awesome-style class API inside @withicons/web (packages/web/dist/classes/).
 //
 //   dist/classes/with-<style>.css   CSS-only icons: <i class="with with-home with-solid"></i>  (SVG data-URI masks, zero JS)
-//   dist/classes/with-all.css       every style in one file (line is the default)
+//   dist/classes/with-all.css       @import of every style file (line is the default); heavy, for prototypes
+//   dist/classes/<style>/<name>.css one icon's rule; dist/classes/with-base.css the shared base rules
+//   dist/classes/with-loader.js     classic script: links only the <style>/<name>.css files of the icons on the page
 //   dist/classes/with-icons.js      classic script: decorates .with elements with inline <svg> (true multi-colour,
-//                                 stroke width); lazily imports ../data/<style>.js (the <with-icon> chunks) per used style
+//                                 stroke width); imports ../icons/<style>/<name>.js per icon shown (../data as fallback)
 //   dist/classes/with-icons.d.ts    window.WithIcons typings
 //   dist/classes/demo.html        demo page;  dist/classes/README.md  docs
 //
@@ -137,29 +139,59 @@ function withRuntime() {
   STYLE_NAMES.forEach(function (s) { STYLE_SET[s] = 1 })
   RESERVED.forEach(function (s) { RES[s] = 1 })
 
-  // data chunks live next to the <with-icon> runtime: <script>/../data/<style>.js (override: data-with-base)
+  // data lives next to the <with-icon> runtime: <script>/../data/<style>.js and, per icon, <script>/../icons/<style>/<name>.js
+  // (override: data-with-base="…/data/" and data-with-icons="…/icons/" on the script tag)
   var me = document.currentScript || document.querySelector('script[src*="with-icons"]')
-  var base = (me && me.getAttribute('data-with-base')) || DATA_BASE
-  try { base = new URL(base, (me && me.src) || document.baseURI).href } catch (e) { /* keep relative */ }
-  var DATA = {}, PENDING = {}, META = null
+  var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
+  var base = abs((me && me.getAttribute('data-with-base')) || DATA_BASE)
+  var iconBase = (me && me.getAttribute('data-with-icons')) || ICON_BASE
+  iconBase = iconBase ? abs(iconBase) : null
+  var DATA = {}, PENDING = {}, META = null, ONE = {}, ALIAS = {}
+  var NAMES = {}
+  NAME_LIST.split(' ').forEach(function (n) { NAMES[n] = 1 })
 
   function load(style) {
     var s = style || DEFAULT_STYLE
     if (!has(STYLES, s)) return Promise.reject(new Error('with icons: unknown style "' + s + '". Use one of: ' + STYLE_NAMES.join(', ') + '.'))
     if (DATA[s]) return Promise.resolve(DATA[s])
-    return PENDING[s] || (PENDING[s] = import(base + s + '.js').then(function (m) { return (DATA[s] = m.default) }))
+    return PENDING[s] || (PENDING[s] = import(base + s + '.js').then(function (m) { return (DATA[s] = m.default) }, function (e) { delete PENDING[s]; throw e }))
   }
-  function meta() { return META || (META = import(base + 'meta.js').then(function (m) { return m.default })) }
+  // one icon's inner markup: its own small file when the package has them, else the style's data
+  function icon(style, name) {
+    if (DATA[style] && has(DATA[style], name)) return Promise.resolve(DATA[style][name])
+    var key = style + '/' + name
+    if (has(ONE, key)) return Promise.resolve(ONE[key])
+    if (!iconBase || !has(STYLES, style)) return load(style).then(function (map) { return map[name] })
+    return PENDING[key] || (PENDING[key] = import(iconBase + key + '.js').then(function (m) { return (ONE[key] = m.default) },
+      function () { delete PENDING[key]; return load(style).then(function (map) { return map[name] }) }))
+  }
+  function meta() { return META || (META = import(base + 'meta.js').then(function (m) { return m.default }, function (e) { META = null; throw e })) }
+  // the alias shards (data/alias/<i>.js) that can hold these lookup keys
+  function aliases(cands) {
+    var want = {}
+    cands.forEach(function (c) { withKeys(c).forEach(function (k) { want[withShard(k, ALIAS_SHARDS)] = 1 }) })
+    return Promise.all(Object.keys(want).map(function (i) {
+      return ALIAS[i] || (ALIAS[i] = import(base + 'alias/' + i + '.js').then(function (m) { return m.default }, function () { delete ALIAS[i]; return {} }))
+    })).then(function (list) { var o = {}; list.forEach(function (x) { for (var k in x) o[k] = x[k] }); return o })
+  }
 
   // name (canonical or alias) -> canonical, warning once about aliases / typos; resolves null when unknown
   function resolve(cands, map, strict) {
-    for (var i = 0; i < cands.length; i++) if (has(map, cands[i])) return Promise.resolve(cands[i])
+    var known = function (k) { return has(NAMES, k) || has(map, k) }
+    for (var i = 0; i < cands.length; i++) if (known(cands[i])) return Promise.resolve(cands[i])
     if (!cands.length) return Promise.resolve(null)
-    return meta().then(function (md) {
-      var errs = []
+    return aliases(cands).then(function (al) {
       for (var i = 0; i < cands.length; i++) {
+        try { var n = withLookup(cands[i], known, [], al); warn('with icons: "with-' + cands[i] + '" is an alias; use the canonical class "with-' + n + '".'); return { md: null, n: n } } catch (e) { if (e.code === 'WITH_AMBIGUOUS_ICON') return { md: null, e: e } }
+      }
+      return meta().then(function (md) { return { md: md } })
+    }).then(function (r) {
+      if (r.n) return r.n
+      var md = r.md || { names: [], aliases: {} }
+      var errs = r.e ? [r.e] : []
+      for (var i = 0; !r.e && i < cands.length; i++) {
         try {
-          var n = withLookup(cands[i], function (k) { return has(map, k) }, md.names, md.aliases)
+          var n = withLookup(cands[i], known, md.names, md.aliases)
           if (n !== cands[i]) warn('with icons: "with-' + cands[i] + '" is an alias; use the canonical class "with-' + n + '".')
           return n
         } catch (e) { errs.push(e) }
@@ -214,23 +246,25 @@ function withRuntime() {
     var p = parse(el)
     if (!p.cands.length) { clear(el); return Promise.resolve() }
     var token = el._withToken = (el._withToken || 0) + 1
-    return load(p.style).then(function (map) {
-      return resolve(p.cands, map).then(function (name) {
+    if (!has(STYLES, p.style)) return Promise.resolve()
+    return resolve(p.cands, DATA[p.style] || {}).then(function (name) {
+      return name ? icon(p.style, name).then(function (inner) { return [name, inner] }) : [null]
+    }).then(function (r) {
+        var name = r[0], inner = r[1]
         if (token !== el._withToken) return
-        if (!name) { clear(el); return }
+        if (!name || inner == null) { clear(el); return }
         var label = el.getAttribute('aria-label') || ''
         var sw = el.getAttribute('data-with-stroke-width') || ''
         var key = name + '|' + p.style + '|' + sw + '|' + label
         if (key === el._withKey && el._withSvg && el._withSvg.parentNode === el) return
         var t = document.createElement('div')
-        t.innerHTML = markup(map[name], p.style, { strokeWidth: sw, label: label, 'class': 'with-svg' })
+        t.innerHTML = markup(inner, p.style, { strokeWidth: sw, label: label, 'class': 'with-svg' })
         var svg = t.firstChild
         if (el._withSvg && el._withSvg.parentNode === el) el.replaceChild(svg, el._withSvg)
         else el.appendChild(svg)
         el._withSvg = svg
         el._withKey = key
         if (el.getAttribute('data-with-svg') !== name) el.setAttribute('data-with-svg', name)
-      })
     }, function (e) { warn(e.message) })
   }
   function render(root) {
@@ -242,8 +276,9 @@ function withRuntime() {
   }
   function svg(name, style, opts) {
     var s = style || DEFAULT_STYLE, o = opts || {}
-    return load(s).then(function (map) {
-      return resolve([String(name).replace(/^with-/, '')], map, true).then(function (n) { return markup(map[n], s, o) })
+    if (!has(STYLES, s)) return load(s)
+    return resolve([String(name).replace(/^with-/, '')], DATA[s] || {}, true).then(function (n) {
+      return icon(s, n).then(function (inner) { return markup(inner, s, o) })
     })
   }
 
@@ -281,11 +316,139 @@ function withRuntime() {
   else start()
 }
 
-function runtimeJs(ctx, dataBase, css) {
+// ---------------------------------------------------------------- CSS-on-demand loader (serialized; classic script)
+// with-loader.js: the CSS-only icons without downloading a whole style. It injects the base rules, scans the page for
+// `with with-<name> [with-<style>]`, and adds one <link> per icon and style it finds (<style>/<name>.css next to the
+// script: a few hundred bytes to a few KB each). Elements added or re-classed later load theirs too (MutationObserver).
+// Aliases get the canonical class added (with a console hint); unknown names warn with suggestions.
+// free vars: VERSION, DEFAULT_STYLE, STYLE_NAMES, RESERVED, BASE_CSS, NAME_LIST, ALIAS_SHARDS + LOOKUP_SRC, withShard
+function withLoader() {
+  var G = typeof window !== 'undefined' ? window : null
+  if (!G || typeof document === 'undefined' || G.WithIconsLoader) return
+  var has = function (o, k) { return !!o && Object.prototype.hasOwnProperty.call(o, k) }
+  var seen = {}
+  var warn = function (m) { if (!seen[m] && typeof console !== 'undefined') { seen[m] = 1; console.warn(m) } }
+  var me = document.currentScript || document.querySelector('script[src*="with-loader"]')
+  var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
+  var cssBase = abs((me && me.getAttribute('data-with-css')) || './')
+  var dataBase = abs((me && me.getAttribute('data-with-base')) || '../data/')
+  var STYLE_SET = {}, RES = {}, NAMES = {}, DONE = {}, ALIAS = {}, META = null
+  STYLE_NAMES.forEach(function (s) { STYLE_SET[s] = 1 })
+  RESERVED.forEach(function (s) { RES[s] = 1 })
+  NAME_LIST.split(' ').forEach(function (n) { NAMES[n] = 1 })
+
+  function css(style, name) {
+    var key = style + '/' + name
+    if (DONE[key]) return DONE[key]
+    return (DONE[key] = new Promise(function (ok) {
+      var l = document.createElement('link')
+      l.rel = 'stylesheet'
+      l.href = cssBase + key + '.css'
+      l.setAttribute('data-with', key)
+      l.onload = function () { ok(true) }
+      l.onerror = function () { warn('with icons: could not load ' + l.href); ok(false) }
+      ;(document.head || document.documentElement).appendChild(l)
+    }))
+  }
+  function aliasShard(k) {
+    var i = withShard(k, ALIAS_SHARDS)
+    return ALIAS[i] || (ALIAS[i] = import(dataBase + 'alias/' + i + '.js').then(function (m) { return m.default }, function () { delete ALIAS[i]; return {} }))
+  }
+  function meta() { return META || (META = import(dataBase + 'meta.js').then(function (m) { return m.default }, function () { META = null; return { names: [], aliases: {} } })) }
+  // a class that is not a canonical name: alias -> add the canonical class; otherwise warn once
+  function alias(el, c) {
+    var known = function (k) { return has(NAMES, k) }
+    return Promise.all(withKeys(c).map(aliasShard)).then(function (list) {
+      var al = {}
+      list.forEach(function (x) { for (var k in x) al[k] = x[k] })
+      try { return withLookup(c, known, [], al) } catch (e) { if (e.code === 'WITH_AMBIGUOUS_ICON') throw e }
+      return meta().then(function (md) { return withLookup(c, known, md.names, md.aliases) })
+    }).then(function (n) {
+      warn('with icons: "with-' + c + '" is an alias; use the canonical class "with-' + n + '".')
+      if (!el.classList.contains('with-' + n)) el.classList.add('with-' + n)
+    }, function (e) {
+      warn(e.code === 'WITH_AMBIGUOUS_ICON'
+        ? 'with icons: "with-' + c + '" is ambiguous; use one of: ' + e.candidates.map(function (x) { return 'with-' + x }).join(', ') + '.'
+        : 'with icons: unknown icon "with-' + c + '". Did you mean: ' + (e.suggestions || []).map(function (x) { return 'with-' + x }).join(', ') + '?')
+    })
+  }
+  function one(el) {
+    if (!el.classList || !el.classList.contains('with') || (el.closest && el.closest('[data-with-skip]'))) return null
+    var style = null, cands = [], cl = el.classList
+    for (var i = 0; i < cl.length; i++) {
+      var c = cl[i]
+      if (c.slice(0, 5) !== 'with-') continue
+      var k = c.slice(5)
+      if (STYLE_SET[k]) { if (!style) style = k; continue }
+      if (!RES[k] && k) cands.push(k)
+    }
+    style = style || DEFAULT_STYLE
+    var jobs = []
+    for (var j = 0; j < cands.length; j++) jobs.push(has(NAMES, cands[j]) ? css(style, cands[j]) : alias(el, cands[j]))
+    return Promise.all(jobs)
+  }
+  function scan(root) {
+    var r = root || document, list = []
+    if (r.nodeType === 1 && r.classList && r.classList.contains('with')) list.push(r)
+    if (r.querySelectorAll) list.push.apply(list, r.querySelectorAll('.with'))
+    return Promise.all(list.map(one)).then(function () {})
+  }
+  function start() {
+    if (!document.getElementById('with-icons-css')) {
+      var st = document.createElement('style')
+      st.id = 'with-icons-css'
+      st.textContent = BASE_CSS
+      var h = document.head || document.documentElement
+      h.insertBefore(st, h.firstChild)
+    }
+    scan(document)
+    if (typeof MutationObserver === 'undefined') return
+    new MutationObserver(function (ms) {
+      for (var i = 0; i < ms.length; i++) {
+        var m = ms[i]
+        if (m.type === 'attributes') one(m.target)
+        else for (var j = 0; j < m.addedNodes.length; j++) if (m.addedNodes[j].nodeType === 1) scan(m.addedNodes[j])
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] })
+  }
+  G.WithIconsLoader = { scan: scan, load: css, version: VERSION }
+  // the head may still be parsing: scan what is there now, the rest arrives through the observer / DOMContentLoaded
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start)
+  else start()
+}
+function loaderJs(ctx, css) {
+  return `/*! @withicons/web ${ctx.version} — with-loader.js: CSS icon classes on demand (classic script, no dependencies). MIT. Generated, do not edit.
+ * <script src=".../dist/classes/with-loader.js" defer></script>  then  <i class="with with-home with-duo"></i>
+ * Loads only the rules of the icons on the page: <style>/<name>.css next to this script. */
+;(function () {
+'use strict'
+var VERSION = ${J(ctx.version)}
+var DEFAULT_STYLE = ${J(ctx.defaultStyle)}
+var STYLE_NAMES = ${J(ctx.styles.map(s => s.name))}
+var RESERVED = ${J(RESERVED)}
+var ALIAS_SHARDS = ${ALIAS_SHARDS}
+var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
+var BASE_CSS = ${J(css)}
+${LOOKUP_SRC}
+${withShard}
+;(${withLoader.toString()})()
+})()
+`
+}
+
+// same hash as emit-web (alias shards, data/alias/<i>.js)
+function withShard(name, n) {
+  let h = 2166136261
+  for (let i = 0; i < name.length; i++) { h ^= name.charCodeAt(i); h = Math.imul(h, 16777619) }
+  return (h >>> 0) % n
+}
+const ALIAS_SHARDS = 16
+
+function runtimeJs(ctx, dataBase, iconBase, css) {
   const table = styleTable(ctx)
   return `/*! @withicons/web ${ctx.version} — with-icons.js (classic script, no dependencies). MIT. Generated, do not edit.
  * <script src=".../dist/classes/with-icons.js" defer></script>  then  <i class="with with-home with-duo"></i>
- * Loads ${ctx.defaultStyle} (default) and other style data lazily from ${dataBase}<style>.js. */
+ * Loads each icon it shows from ${iconBase ? iconBase + '<style>/<name>.js' : dataBase + '<style>.js'}, nothing else up front. */
 ;(function () {
 'use strict'
 var VERSION = ${J(ctx.version)}
@@ -294,8 +457,12 @@ var STYLES = ${J(table)}
 var STYLE_NAMES = ${J(ctx.styles.map(s => s.name))}
 var RESERVED = ${J(RESERVED)}
 var DATA_BASE = ${J(dataBase)}
+var ICON_BASE = ${J(iconBase)}
+var ALIAS_SHARDS = ${ALIAS_SHARDS}
+var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
 ${LOOKUP_SRC}
+${withShard}
 ;(${withRuntime.toString()})()
 })()
 `
@@ -334,30 +501,55 @@ declare global {
 `
 }
 
-function classesDoc(ctx, sizes) {
+function classesDoc(ctx, sizes, per) {
   const v = ctx.version
-  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes`
+  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/web@${v}/dist/classes`
   const styles = ctx.styles.map(s => s.name)
   const sw = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => '`' + s.name + '`').join(', ')
-  const kb = n => (n / 1024).toFixed(0) + ' KB'
+  const kb = n => n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + ' MB' : (n / 1024).toFixed(0) + ' KB'
   const pal = ctx.styles.filter(s => s.palette)
   return `## Icon classes (Font Awesome style)
 
-Plain \`<i>\`/\`<span>\` elements with classes, no build step. Two interchangeable ways to render them:
+Plain \`<i>\`/\`<span>\` elements with classes, no build step. Three interchangeable ways to render them, lightest first:
 
-### 1. CSS only (zero JS)
+### 1. CSS on demand (recommended from a CDN)
+
+\`\`\`html
+<script src="${cdn}/with-loader.js" defer></script>
+
+<i class="with with-home"></i>                      <!-- line (default) -->
+<i class="with with-heart with-solid"></i>
+<i class="with with-search with-2x with-spin"></i>
+\`\`\`
+
+\`with-loader.js\` (${kb(sizes['with-loader.js'].raw)}, ${kb(sizes['with-loader.js'].gz)} gzip) adds the base rules, finds every \`with with-<name>\` on the
+page and links just that icon's rule: \`dist/classes/<style>/<name>.css\` (a \`${ctx.defaultStyle}\` icon is typically ${per.line} bytes,
+${per.lineGz} gzip; a \`${per.heavy}\` icon about ${(per.heavyRaw / 1024).toFixed(1)} KB, ${(per.heavyGz / 1024).toFixed(1)} KB gzip). Any style mix costs only the icons shown, and icons
+added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
+canonical class added with a console hint. Without JavaScript, link the same files yourself:
+
+\`\`\`html
+<link rel="stylesheet" href="${cdn}/with-base.css">
+<link rel="stylesheet" href="${cdn}/line/home.css">
+<link rel="stylesheet" href="${cdn}/solid/heart.css">
+\`\`\`
+
+### 2. One stylesheet per style (zero JS)
 
 \`\`\`html
 <link rel="stylesheet" href="${cdn}/with-line.css">
 
-<i class="with with-home"></i>                      <!-- line (default) -->
+<i class="with with-home"></i>
 <i class="with with-search with-2x with-spin"></i>
 \`\`\`
 
-One file per style (\`${styles.map(s => 'with-' + s + '.css').join('`, `')}\`) or every style at once:
+One file per style (\`${styles.map(s => 'with-' + s + '.css').join('`, `')}\`), each holding all ${ctx.icons.length} icons
+(see the sizes below: the default \`with-${ctx.defaultStyle}.css\` is ${kb(sizes[`with-${ctx.defaultStyle}.css`].gz)} gzipped, the richest styles several hundred KB).
+\`with-all.css\` imports every style file: ${kb(sizes['with-all.css'].raw)} (${kb(sizes['with-all.css'].gz)} gzipped) in ${styles.length} requests,
+so keep it for prototypes and offline tools, never for a production page:
 
 \`\`\`html
-<link rel="stylesheet" href="${cdn}/with-all.css">
+<link rel="stylesheet" href="${cdn}/with-all.css">   <!-- heavy: every icon in every style -->
 
 <i class="with with-home with-solid"></i>
 <span class="with with-heart with-gloss"></span>
@@ -377,9 +569,10 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
-${Object.entries(sizes).map(([f, s]) => `| \`${f}\` | ${kb(s.raw)} | ${kb(s.gz)} |`).join('\n')}
+| \`<style>/<name>.css\` (one icon, typical) | ${per.line} B (\`${ctx.defaultStyle}\`) to ${(per.heavyRaw / 1024).toFixed(1)} KB (\`${per.heavy}\`) | ${per.lineGz} B to ${(per.heavyGz / 1024).toFixed(1)} KB |
+${Object.entries(sizes).map(([f, s]) => `| \`${f}\`${f === 'with-all.css' ? ' (imports every style file)' : ''} | ${kb(s.raw)} | ${kb(s.gz)} |`).join('\n')}
 
-### 2. JS runtime (inline SVG)
+### 3. JS runtime (inline SVG)
 
 \`\`\`html
 <script src="${cdn}/with-icons.js" defer></script>
@@ -391,8 +584,9 @@ ${Object.entries(sizes).map(([f, s]) => `| \`${f}\` | ${kb(s.raw)} | ${kb(s.gz)}
 
 A classic (non-module), dependency-free script. It injects an inline \`<svg class="with-svg">\` into every element with class
 \`with\` and an \`with-<name>\` class, and keeps doing so for elements added or changed later (MutationObserver on added nodes and
-\`class\` / \`aria-label\` / \`data-with-stroke-width\` changes). Only the styles actually used are downloaded
-(\`dist/data/<style>.js\`, resolved relative to the script's URL; override with \`data-with-base="…/"\` on the script tag).
+\`class\` / \`aria-label\` / \`data-with-stroke-width\` changes). Only the icons actually shown are downloaded, one small
+module each (\`dist/icons/<style>/<name>.js\`, resolved relative to the script's URL; override with \`data-with-icons="…/icons/"\`
+and \`data-with-base="…/data/"\` on the script tag). \`WithIcons.load(style)\` still fetches a whole style.
 It can be combined with the CSS files: the mask shows until the SVG arrives, then it is switched off.
 
 - \`data-with-stroke-width="1.5"\` on the element: stroke width for ${sw}.
@@ -424,8 +618,9 @@ and they print even with the browser's "Background graphics" option off.
 
 ### CSS or JS?
 
-- **CSS**: zero JS, works in emails-to-web, static sites, CMS content; one HTTP request; palette styles in their default colours.
-- **JS**: live CSS variables (\`--with-duo\`, \`--with-accent\`${pal.length ? ', \`--with-<style>-<role>\`' : ''}), \`data-with-stroke-width\`, aliases and typo hints, only the styles you use are fetched.
+- **CSS on demand** (\`with-loader.js\`): the CSS rendering, downloading only the icons on the page.
+- **CSS stylesheet**: zero JS, works in emails-to-web, static sites, CMS content; one request per style; palette styles in their default colours.
+- **JS runtime**: live CSS variables (\`--with-duo\`, \`--with-accent\`${pal.length ? ', \`--with-<style>-<role>\`' : ''}), \`data-with-stroke-width\`, aliases and typo hints, only the icons you show are fetched.
 - Using a framework? Prefer the component packages (\`@withicons/react\`, \`vue\`, \`svelte\`…) or \`<with-icon>\`.
 `
 }
@@ -584,22 +779,51 @@ export default async function emit(ctx) {
     const body = rules[s.name].map(([n, d]) => (isDef ? `.with-${n}` : `:where(.with-${n}),.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')
     files.set(`with-${s.name}.css`, `${header}${css}\n${body}\n`)
   }
-  const all = ctx.styles.map(s => rules[s.name].map(([n, d]) => (s.name === ctx.defaultStyle ? `.with-${n}` : `.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')).join('\n')
-  files.set('with-all.css', `${header}${css}\n${all}\n`)
+  // with-all.css: every style file through @import (bare classes stay line: `.with-home` outranks the other files'
+  // zero-specificity `:where(.with-home)`). One 30 MB file would be over the 20 MB a CDN such as jsDelivr serves.
+  files.set('with-all.css', `${header}${ctx.styles.map(s => `@import url("with-${s.name}.css");`).join('\n')}\n`)
+  // the base rules alone, for pages that link per-icon files by hand
+  files.set('with-base.css', `${header}${css}\n`)
+  // one file per icon and style (the loader's unit): the same rule as in with-<style>.css, nothing else
+  const perIcon = new Map()
+  for (const s of ctx.styles) {
+    const isDef = s.name === ctx.defaultStyle
+    for (const [n, d] of rules[s.name]) perIcon.set(`${s.name}/${n}.css`, (isDef ? `.with-${n}` : `:where(.with-${n}),.with-${s.name}.with-${n}`) + `{${d}}\n`)
+  }
 
+  const gzn = t => zlib.gzipSync(t, { level: 9 }).length
   const sizes = {}
-  for (const [f, t] of files) sizes[f] = { raw: Buffer.byteLength(t), gz: zlib.gzipSync(t, { level: 9 }).length }
-  const pkgJs = runtimeJs(ctx, '../data/', css)
-  sizes['with-icons.js'] = { raw: Buffer.byteLength(pkgJs), gz: zlib.gzipSync(pkgJs, { level: 9 }).length }
-  const doc = classesDoc(ctx, sizes)
+  for (const [f, t] of files) sizes[f] = { raw: Buffer.byteLength(t), gz: gzn(t) }
+  // what with-all.css really downloads: every style file
+  sizes['with-all.css'] = ctx.styles.reduce((a, s) => ({ raw: a.raw + sizes[`with-${s.name}.css`].raw, gz: a.gz + sizes[`with-${s.name}.css`].gz }), { raw: 0, gz: 0 })
+  const pkgJs = runtimeJs(ctx, '../data/', '../icons/', css)
+  sizes['with-icons.js'] = { raw: Buffer.byteLength(pkgJs), gz: gzn(pkgJs) }
+  const ldr = loaderJs(ctx, css)
+  sizes['with-loader.js'] = { raw: Buffer.byteLength(ldr), gz: gzn(ldr) }
+  const med = a => a.sort((x, y) => x - y)[a.length >> 1]
+  const iconCss = st => ctx.icons.map(i => perIcon.get(`${st}/${i.name}.css`))
+  const heavy = styleNames.reduce((a, b) => sizes[`with-${b}.css`].raw > sizes[`with-${a}.css`].raw ? b : a)
+  const perIconSizes = {
+    line: med(iconCss(ctx.defaultStyle).map(t => Buffer.byteLength(t))), lineGz: med(iconCss(ctx.defaultStyle).map(gzn)),
+    heavy, heavyRaw: med(iconCss(heavy).map(t => Buffer.byteLength(t))), heavyGz: med(iconCss(heavy).map(gzn)),
+  }
+  const doc = classesDoc(ctx, sizes, perIconSizes)
   files.set('with-icons.js', pkgJs)
+  files.set('with-loader.js', ldr)
   files.set('with-icons.d.ts', dts(ctx))
   files.set('demo.html', demoHtml(ctx))
   files.set('README.md', `# @withicons/web — icon classes\n\n${doc}\nMIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).\n`)
 
   // site mirror: self-contained, data chunks next to the script
+  // (no per-icon files or loader there: the site serves the style files and the data chunks)
   const site = new Map(files)
-  site.set('with-icons.js', runtimeJs(ctx, './data/', css))
+  site.delete('with-loader.js')
+  // the site offers with-all.css as a single download: keep it one self-contained file there
+  site.set('with-all.css', `${header}${css}\n${ctx.styles.map(s => rules[s.name].map(([n, d]) => (s.name === ctx.defaultStyle ? `.with-${n}` : `.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')).join('\n')}\n`)
+  site.set('with-icons.js', runtimeJs(ctx, './data/', null, css))
+  const aliasParts = Array.from({ length: ALIAS_SHARDS }, () => ({}))
+  for (const k of Object.keys(ctx.aliasIndex).sort()) aliasParts[withShard(k, ALIAS_SHARDS)][k] = ctx.aliasIndex[k]
+  aliasParts.forEach((p, k) => site.set(`data/alias/${k}.js`, `export default ${J(p)}\n`))
   const aliases = {}
   for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
   const dh = `// @withicons/web ${ctx.version} — generated, do not edit. MIT.\n`
@@ -618,7 +842,7 @@ export default async function emit(ctx) {
     for (const [k, buf] of saved) { const p = path.join(dir, k); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, buf) }
     for (const [f, t] of map) { const p = path.join(dir, f); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, t) }
   }
-  const writeAll = () => writeDir('packages/web/dist/classes', files)
+  const writeAll = () => writeDir('packages/web/dist/classes', new Map([...files, ...perIcon]))
   writeAll()
   writeDir('site/vendor/with', site, ['search.js'])
 
@@ -627,5 +851,5 @@ export default async function emit(ctx) {
   if (fs.existsSync(P('package.json'))) fs.writeFileSync(P('package.json'), patchPkg(fs.readFileSync(P('package.json'), 'utf8')))
   if (fs.existsSync(P('README.md'))) fs.writeFileSync(P('README.md'), patchReadme(fs.readFileSync(P('README.md'), 'utf8'), doc))
   const k = n => (n / 1024).toFixed(0) + 'K'
-  return `${files.size} files; line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}; ${layered} palette icons as 2 layers; site/vendor/with mirrored`
+  return `${files.size + perIcon.size} files (${perIcon.size} per-icon); line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css via @import ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}, with-loader.js ${k(sizes['with-loader.js'].raw)}; ${layered} palette icons as 2 layers; site/vendor/with mirrored`
 }

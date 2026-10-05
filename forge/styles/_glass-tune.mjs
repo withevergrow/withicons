@@ -17,6 +17,8 @@ export const TUNE = {
   'battery-charging-level': { through: true },
   'battery-vertical': { through: true },
   'humidity': { through: true },
+  // five bars stay five countable rods
+  'bar-values': { r: 1.1 },
   // fills and cutouts engineered for Solid's knockouts: as glass, the plain rods read cleaner
   signal: { noFills: true, noCutouts: true },
   wifi: { noFills: true, noCutouts: true },

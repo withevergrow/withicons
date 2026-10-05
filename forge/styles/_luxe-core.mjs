@@ -28,6 +28,7 @@ import * as F from './_luxe-field.mjs'
 import { tuneFor } from './_luxe-tune.mjs'
 import { setOf } from '../kernel/bool.mjs'
 import { ringsD } from './_luxe-path.mjs'
+import { markIds as liveMarks } from './_luxe-live.mjs'
 
 export const K = {
   SCALE: 0.9,            // drawing scale about the centre (room for depth and shadow)
@@ -59,6 +60,8 @@ export const col = r => `var(--with-luxe-${r}, ${P[r]})`
 const MAT = {
   enamel: { base: 'c1', dark: 'shadow', darkOp: 0.34, light: 'shine', lightOp: 0.075, steps: [[0.42, 0.24]], discs: [0.4, 0.24], wall: 'c3', rim: 'edge', rimOp: 0.75, chamfer: 'shine', chamferOp: 0.42, spec: 'shine', glaze: 0.16 },
   gold:   { base: 'accent', dark: 'c4', darkOp: 0.62, light: 'tint', lightOp: 0.24, steps: [[0.3, 0.16], [0.62, 0.36]], discs: [], wall: 'c4', rim: 'tint', rimOp: 0, chamfer: 'tint', chamferOp: 0.85, spec: 'shine', glaze: 0.22 },
+  champagne: { base: 'tint', dark: 'accent', darkOp: 0.55, light: 'shine', lightOp: 0.3, steps: [[0.3, 0.16]], discs: [], wall: 'c4', rim: 'tint', rimOp: 0, chamfer: 'shine', chamferOp: 0.85, spec: 'shine', glaze: 0 },
+  pearl:  { base: 'tint', dark: 'c4', darkOp: 0.28, light: 'shine', lightOp: 0.5, steps: [[0.25, 0.14]], discs: [0.3], wall: 'c4', rim: 'edge', rimOp: 0, chamfer: 'shine', chamferOp: 0.6, spec: 'shine', glaze: 0 },
   jewel:  { base: 'c2', dark: 'shadow', darkOp: 0.36, light: 'shine', lightOp: 0.1, steps: [[0.25, 0.14]], discs: [0.3], wall: 'c4', rim: 'edge', rimOp: 0.0, chamfer: 'shine', chamferOp: 0.3, spec: 'shine', glaze: 0.18 },
 }
 
@@ -120,7 +123,16 @@ export function model(icon0) {
   const icon = prep(icon0, T)
   const all = [...(icon.lines || []), ...dots(icon)].filter(l => l.pts && l.pts.length)
     .map(l => ({ ...l, pts: l.pts.map(p => tf(p, T)) }))
-  const plateOf = l => (T.plate && T.plate[l.pathId]) || (T.remap && T.remap[l.plate]) || l.plate
+  let markIds = new Set()
+  let plateOf = l => (T.plate && T.plate[l.pathId]) || (T.remap && T.remap[l.plate]) || l.plate
+  // Live marks (a die's pips, the marked day of a month: small closed gold loops on the face) are set as
+  // pearls in gold bezels: a jewel that reads by light on the deep enamel at 24px (ruby and sapphire are
+  // the same luminance, so a ruby mark would only show by hue)
+  if (icon0.params) {
+    const marks = liveMarks(icon)
+    markIds = marks
+    if (marks.size) { const base = plateOf; plateOf = l => marks.has(l.pathId) && !(T.plate && T.plate[l.pathId]) ? 'S' : base(l) }
+  }
   const Kl = all.filter(l => plateOf(l) === 'K')
   let Al = all.filter(l => plateOf(l) === 'A')
   const Sl = all.filter(l => plateOf(l) === 'S')
@@ -133,7 +145,8 @@ export function model(icon0) {
     const votes = { K: 0, A: 0, S: 0 }
     for (const r of rings) for (let i = 0; i < r.length; i += 3) {
       let best = Infinity, pl = 'K'
-      for (const l of all) { const d = distToPolyline(r[i], l.pts, l.closed); if (d < best) { best = d; pl = plateOf(l) } }
+      // (a Live icon's letters never vote: its face must not turn to gold when the text grows wide)
+      for (const l of all) { if (String(l.pathId || '').startsWith('text:')) continue; const d = distToPolyline(r[i], l.pts, l.closed); if (d < best) { best = d; pl = plateOf(l) } }
       votes[pl]++
     }
     const pl = T.fillPlate || (votes.S > votes.K + votes.A ? 'S' : votes.A > votes.K ? 'A' : 'K')
@@ -187,6 +200,14 @@ export function model(icon0) {
   // A parts inside the mass are gold inlays (front); the rest sit behind the object
   const front = [], back = []
   for (const l of Al) (T.aFront === true || (T.aFront !== false && (inMass(l) > 0.5 || depthIn(l) > 0.5)) ? front : back).push(l)
+  // T.caps: every enamel bar wears a polished gold cap on its top end (the end that moves with a Live value)
+  if (T.caps) fills.K.forEach((rings, i) => {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity
+    for (const r of rings) for (const [x, y] of r) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y) }
+    if (y1 - y0 < 0.6) return
+    const cx = (x0 + x1) / 2
+    front.push({ pts: [[cx, y0 + 0.3], [cx, Math.min(y1, y0 + 0.7)]], closed: false, plate: 'A', pathId: 'cap' + i })
+  })
 
   // S: outermost closed rings are badges (filled discs); the rest are glyphs
   const closedS = Sl.filter(l => l.closed && l.pts.length > 2)
@@ -195,10 +216,26 @@ export function model(icon0) {
   // live icons drawn without a frame (weather readings, a bare clock face, network
   // labels): their free lines are lettering, so they take the finer lettering weights
   const freeK = live && !fills.K.length && !T.wk
-  const fK = freeK ? textField(KlBody, K.M, 1.12) || F.field(K.M) : F.strokes(KlBody, T.wk || K.WK, K.M)
+  // free Live text (no face under it: "21°" under a cloud, a gauge's reading): fine gold lettering outlined in
+  // ink, seated shallow, so it reads on light and dark pages and its counters stay open at 24px
+  const isTxt = l => String(l.pathId || '').startsWith('text:')
+  const freeTxt = live ? [...(freeK ? KlBody : []), ...back].filter(isTxt) : []
+  const KlB = freeTxt.length ? KlBody.filter(l => !freeTxt.includes(l)) : KlBody
+  const backB = freeTxt.length ? back.filter(l => !freeTxt.includes(l)) : back
+  const fTf = freeTxt.length ? freeTextField(freeTxt, K.M) : null
+  const fK = freeK ? textField(KlB, K.M, 1.12) || F.field(K.M) : F.strokes(KlB, T.wk || K.WK, K.M)
   F.union(fK, mass)
   const fAf = F.strokes(front, T.wa || K.WA, K.M)
-  const fAb = live && !T.wa ? textField(back, K.M, 1.1) || F.field(K.M) : F.strokes(back, T.wa || K.WA, K.M)
+  // Live: a closed gold part on the face knocked out by its own cutout (a stopwatch's elapsed sweep) is solid
+  // polished gold, not a gold outline round a dark well, so the value reads as a mass at 24px
+  if (live) for (const l of front) {
+    if (!l.closed || l.pts.length < 3 || polyArea(l.pts) < 5) continue // (a small ring is an eyelet: a hole)
+    const k = cutArea.findIndex(r => r.length > 2 && r.every(p => distToPolyline(p, l.pts, true) < 0.35))
+    if (k < 0) continue
+    F.region([cutArea[k]], K.M, fAf)
+    cutArea.splice(k, 1)
+  }
+  const fAb = live && !T.wa ? textField(backB, K.M, 1.1) || F.field(K.M) : F.strokes(backB, T.wa || K.WA, K.M)
   for (const r of fills.A) {
     // an A fill joins whichever A group it touches most
     const pts = r.flat()
@@ -211,7 +248,10 @@ export function model(icon0) {
   const inBadge = Sl.filter(l => !badges.includes(l) && badges.some(b => fracInside(dense(l), b.pts) > 0.8))
   const MS = K.MOAT + 0.5
   const fS = F.strokes(Sl.filter(l => !badges.includes(l) && !inBadge.includes(l)), T.ws || K.WS, MS)
-  for (const b of badges) { F.region([b.pts], MS, fS); F.strokes([b], T.ws || K.WS, MS, fS) }
+  const fP = F.field(MS)
+  for (const b of badges) { const t = markIds.has(b.pathId) ? fP : fS; F.region([b.pts], MS, t); F.strokes([b], T.ws || K.WS, MS, t) }
+  const hasP = F.any(fP)
+  if (hasP) F.union(fS, fP)
   for (const r of fills.S) F.region(r, MS, fS)
 
   // engraving
@@ -240,11 +280,15 @@ export function model(icon0) {
     return a > 0.3 && a < 0.6 * F.extent(P, 0).area ? exact(r) : null
   }
   // fine gold lettering: live text and hands on the face, glyphs inside a jewel
-  const fT = textField(textA, K.M), fSg = textField(inBadge, K.M, 0.82)
+  // (a Live dot that is not a letter, a month's day, is a full gold stud: it must read as a mark at 24px)
+  const isDot = l => !String(l.pathId || '').startsWith('text:') && arclen(l.pts, l.closed) < 0.6
+  let fT = textField(textA.filter(l => !isDot(l)), K.M)
+  const fSg = textField(inBadge, K.M, 0.82), dotsA = textA.filter(isDot)
+  if (dotsA.length) { fT = fT || F.field(K.M); F.strokes(dotsA, 1.75, K.M, fT) }
   return {
-    T, K0: exact(K0), Ab: exact(Ab), Af: exact(Af), S: exact(fS), rec: exact(recIn), recAf: recOf(Af), recAb: recOf(Ab), hasS, hasAf,
-    Tx: fT && exact(moatS ? minus(fT, moatS) : fT), Sg: fSg && exact(fSg),
-    sil: unionAll([fK, fAf, fAb, fS]),
+    live, T, K0: exact(K0), Ab: exact(Ab), Af: exact(Af), S: exact(hasP ? minus(fS, fP) : fS), P: hasP ? exact(fP) : null, rec: exact(recIn), recAf: recOf(Af), recAb: recOf(Ab), hasS, hasAf,
+    Tx: fT && exact(moatS ? minus(fT, moatS) : fT), Sg: fSg && exact(fSg), Tf: fTf && exact(fTf),
+    sil: unionAll([fK, fAf, fAb, fS, ...(fTf ? [fTf] : [])]),
   }
 }
 // lettering is stroked by text row: a row with the font's large caps gets a fuller line,
@@ -266,6 +310,12 @@ function textField(lines, margin, k = 1) {
     const h = (rows[row[i]][1] - rows[row[i]][0]) / K.SCALE
     F.strokes([l], (h > 5.9 ? WT_L : WT_S) * k, margin, F0)
   })
+  return F0
+}
+// free lettering: a finer gold line (the ink outline around it carries the contrast)
+function freeTextField(lines, margin) {
+  const F0 = F.field(margin)
+  for (const l of lines) F.strokes([l], (+String(l.pathId).split(':')[2] || 5) >= 6 ? 1.3 : 1.0, margin, F0)
   return F0
 }
 function unionAll(fs) { const u = F.copy(fs[0]); for (let i = 1; i < fs.length; i++) F.union(u, fs[i]); return u }
@@ -298,10 +348,23 @@ const setQuality = tier => {
 // size budget (CONTRACT: target < 6 KB): a dense icon is rebuilt in a lighter tier. The full
 // paint's size predicts the first tier worth trying (tiers save roughly 10, 28 and 36 %), so
 // a dense icon costs two paints rather than one per tier
-const BUDGET = 5700, SAVE = [1, 0.9, 0.7, 0]
-const bytes = nodes => nodes.reduce((a, n) => a + n[1].d.length + 60, 0)
+const BUDGET = 5700, SAVE = [1, 0.9, 0.7, 0], LIVE_CAP = 15000
+// Only a Live icon's body (its enamel and the gold behind it) counts toward the budget: the quality tier must
+// not change with the value (a longer number, a moved mark or hand would otherwise repaint the whole object in
+// another tier, and every edge would shift)
+const TEXTN = new WeakSet()
+const bytes = nodes => nodes.reduce((a, n) => a + (TEXTN.has(n) ? 0 : n[1].d.length + 60), 0)
 export function build(icon) {
   const M = model(icon)
+  // a Live icon paints in one fixed tier (dense: every light but the second ramp step and sheen disc), so its
+  // look never jumps between tiers as the value changes; only a pathological drawing drops to lite
+  if (M.live) {
+    setQuality(1)
+    const out = paint(M, Infinity)
+    if (bytes(out) <= LIVE_CAP) return out
+    setQuality(2)
+    return paint(M, Infinity)
+  }
   setQuality(0)
   const full = paint(M, Infinity), s0 = bytes(full)
   if (s0 <= BUDGET) return full
@@ -324,10 +387,12 @@ const OVER = new Error('over budget')
 // sickle and glaze of the K enamel are wm-shine. Classes never count toward the size budget,
 // so the paint (and its quality tier) is exactly what it was without them.
 const PLATE = { K: 'wm-k', A: 'wm-a', S: 'wm-s' }
+let LIVE = false
 function paint(M, budget) {
+  LIVE = !!M.live
   let used = 0
   const out = []
-  let cls = null, shineCls = null
+  let cls = null, shineCls = null, isText = false
   const add = (Fd, role, op = 1, q = BODY, shine = false) => {
     if (!Fd) return
     const d = ringsD(F.contour(Fd).filter(l => l.length > 2 && Math.abs(area(l)) >= q[1]).map(smooth), q[0], q[2])
@@ -338,7 +403,9 @@ function paint(M, budget) {
     if (op < 1) a['fill-opacity'] = String(Math.round(op * 1000) / 1000).replace(/^0./, '.')
     const c = shine && shineCls ? shineCls : cls
     if (c) a.class = c
-    out.push(['path', a])
+    const node = ['path', a]
+    out.push(node)
+    if (isText) { TEXTN.add(node); return }
     used += d.length + 60
     if (used > budget) throw OVER
   }
@@ -347,29 +414,34 @@ function paint(M, budget) {
   if (!M.T.noShadow) {
     const [dx, dy] = K.DIR
     cls = 'wm-shadow'
+    isText = !!M.live
     add(F.offset(mv(M.sil, dx * (K.DEPTH + 0.6), dy * (K.DEPTH + 0.6)), -0.1), 'shadow', 0.2, SOFT)
   }
 
   const parts = []
-  if (!empty(M.Ab)) parts.push([M.Ab, MAT.gold, M.recAb, false, { plate: 'A' }])
-  if (!empty(M.K0)) parts.push([M.K0, MAT.enamel, M.rec, false, { floor: M.T.recFloor, plate: 'K' }])
+  if (!empty(M.Ab)) parts.push([M.Ab, MAT.gold, M.recAb, false, { plate: 'A', body: true }])
+  if (!empty(M.K0)) parts.push([M.K0, MAT.enamel, M.rec, false, { floor: M.T.recFloor, plate: 'K', matte: M.T.matte }])
   if (!empty(M.Af)) parts.push([M.Af, MAT.gold, M.recAf, false, { plate: 'A' }])
   // lettering: a shallow gold inlay seated in a dark groove (live text and hands: A lines)
-  if (M.Tx && !empty(M.Tx)) parts.push([M.Tx, MAT.gold, null, false, { depth: 0.42, groove: 0.24, plate: 'A' }])
+  if (M.Tx && !empty(M.Tx)) parts.push([M.Tx, MAT.gold, null, false, { depth: 0.42, groove: 0.24, plate: 'A', text: true }])
+  if (M.Tf && !empty(M.Tf)) parts.push([M.Tf, MAT.gold, null, false, { depth: 0.3, groove: 0.28, grooveOp: 1, small: true, plate: 'A', text: true }])
   if (M.hasS && !empty(M.S)) parts.push([M.S, MAT.gold, null, true, { plate: 'S' }])
-  if (M.Sg && !empty(M.Sg)) parts.push([M.Sg, MAT.gold, null, false, { depth: 0.3, groove: 0.2, small: true, plate: 'S' }])
+  if (M.P) parts.push([M.P, MAT.gold, null, 'pearl', { plate: 'S' }])
+  // (a Live count on a ruby jewel is champagne gold: the ruby is dark, the numerals must read by light at 24px)
+  if (M.Sg && !empty(M.Sg)) parts.push([M.Sg, M.live ? MAT.champagne : MAT.gold, null, false, { depth: 0.3, groove: 0.2, small: true, plate: 'S', text: M.live }])
   const multi = parts.some(p => p[4].plate !== 'K')
   for (const [Fd, mat, rec, jewel, o = {}] of parts) {
     cls = multi ? PLATE[o.plate] : null
+    isText = !!o.text || (M.live && o.plate !== 'K' && !o.body)
     shineCls = o.plate === 'K' ? 'wm-shine' : null
-    if (o.groove) add(F.offset(F.copy(Fd), -o.groove), 'ink', 0.72, FINE)
+    if (o.groove) add(F.offset(F.copy(Fd), -o.groove), 'ink', o.grooveOp ?? 0.72, FINE)
     wall(Fd, mat, add, o.depth)
     if (jewel) {
       // a gold bezel with a ruby cabochon set into it
       face(Fd, mat, add, { bezel: true })
       const J = erode(Fd, K.BEZEL)
-      if (!empty(J)) face(exact(J), MAT.jewel, add, { small: true })
-    } else face(Fd, mat, add, { small: o.small })
+      if (!empty(J)) face(exact(J), jewel === 'pearl' ? MAT.pearl : MAT.jewel, add, { small: true })
+    } else face(Fd, mat, add, { small: o.small, matte: o.matte, lite: M.live && o.text })
     if (rec && !empty(rec)) recess(rec, mat, add, o.floor)
   }
   return out
@@ -395,8 +467,9 @@ function face(Fd, mat, add, o = {}) {
   add(minus(Fd, mv(Fd, -0.62 * D, -0.62 * D)), mat.dark, mat.darkOp, SOFT)
   if (!o.bezel) {
     // a broad fall-off away from each piece's hot spot: the body turns from the light
+    // (not on lettering, o.lite: a stroke a pixel wide stays bright end to end, so it reads on the enamel)
     const hs = hotspot(Fd)
-    if (TIER < 3) add(F.intersect(hs.r(0.6), F.copy(Fd)), mat.dark, mat.darkOp * 0.5, SOFT)
+    if (TIER < 3 && !o.lite) add(F.intersect(hs.r(0.6), F.copy(Fd)), mat.dark, mat.darkOp * 0.5, SOFT)
     // tonal ramp: inset contours nudged toward the light...
     const inner = erode(Fd, 0.18)
     // (dense tier: the sheen alone carries an enamel piece's light, one step a gold one's)
@@ -415,9 +488,11 @@ function face(Fd, mat, add, o = {}) {
   }
   // lit chamfer on edges facing the light; cool rim light on the far edges
   add(minus(Fd, mv(Fd, 0.28 * D, 0.28 * D)), mat.chamfer, mat.chamferOp, FINE)
-  if (mat.rimOp > 0 && TIER < 2) add(minus(erode(Fd, 0.06), mv(Fd, -0.24 * D, -0.24 * D)), mat.rim, mat.rimOp, FINE)
+  // (a Live icon's rim light is a touch broader and full strength: its silhouette moves with the value and must
+  // read on a dark page too)
+  if (mat.rimOp > 0 && TIER < 2) add(minus(erode(Fd, 0.06), mv(Fd, -(LIVE ? 0.34 : 0.24) * D, -(LIVE ? 0.34 : 0.24) * D)), mat.rim, LIVE ? 1 : mat.rimOp, FINE)
   // specular: a crisp sickle just inside the lit edge, upper-left part of each piece
-  if (!o.bezel) {
+  if (!o.bezel && !o.matte) {
     // a broad glaze: the soft window reflection across the top of each piece
     if (mat.glaze && TIER < 2) {
       const G = erode(Fd, 0.32)

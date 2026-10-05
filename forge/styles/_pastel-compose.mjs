@@ -6,6 +6,8 @@
 //           'hue.flat'       base + rim only (thin bars, small parts)
 //           'hue.well'       a recessed inlay (screens, windows, doorways)
 //           'ink'            mid-tone detail ink (takes the hue of the field under it)
+//           'hue.deep'       Live readings: the hue's deep tone, flat, with an inked rim
+//           'text' / 'text.hue'   Live-icon text: a deeper ink of the field under it (the hue's ink on the page)
 //           'shine'          an explicit glint (the automatic one is then skipped)
 //           'shade' / 'shade.hue'   a soft shadow tone over what is below (folds, gaps)
 //           'cut'            knocks these shapes out of every layer painted before it (moats, gaps)
@@ -55,9 +57,11 @@ export function parseKey(key) {
   const [a, b] = head.split('.')
   if (a === 'cut') return { kind: 'cut' }
   if (a === 'ink') return { kind: 'ink', mode: 'ink', hue: 'lavender', part }
+  if (a === 'text') return { kind: 'ink', mode: 'ink', hue: HUES[b] ? b : 'lavender', part, text: true }
   if (a === 'shine') return { kind: 'shine', mode: 'shine', hue: 'paper', part }
   if (a === 'shade') return { kind: 'shade', mode: 'shade', hue: HUES[b] ? b : null, part }
   if (!HUES[a]) return null
+  if (b === 'deep') return { kind: 'field', hue: a, mode: 'flat', part, deep: true }
   return { kind: 'field', hue: a, mode: b === 'flat' || b === 'well' ? b : 'lit', part }
 }
 
@@ -117,7 +121,7 @@ export function entriesOf(layers, icon) {
   const entries = []
   let prev = null
   for (const it of items) {
-    const key = `${it.spec.kind}|${it.spec.hue}|${it.spec.mode}|${it.part}`
+    const key = `${it.spec.kind}|${it.spec.hue}|${it.spec.mode}|${it.part}|${!!it.spec.deep}|${!!it.spec.text}`
     if (prev && prev.key === key) { prev.shapes.push(it.shape); continue }
     prev = { key, spec: it.spec, part: it.part, shapes: [it.shape] }
     entries.push(prev)
@@ -129,6 +133,8 @@ export function entriesOf(layers, icon) {
     if (!rings.length) continue
     const Fd = fieldOfRings(rings)
     const e = { hue: g.spec.hue, mode: g.spec.mode, part: g.part, F: Fd }
+    if (g.spec.deep) e.deep = true
+    if (g.spec.text) e.text = true
     if (g.spec.kind === 'shade' && !e.hue) e.hue = null
     const d = exactD(sh)
     if (d) e.d = d

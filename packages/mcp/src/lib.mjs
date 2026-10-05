@@ -90,9 +90,9 @@ export function snippet(name, style = 'line', format = 'svg', opts = {}) {
       return (style === 'line' ? `import { WithIconComponent, ${P} } from '@withicons/angular'` : `import { WithIconComponent } from '@withicons/angular'\nimport { ${P} as ${local} } from '@withicons/angular${sub}'`) +
         `\n\n// @Component({ imports: [WithIconComponent], ... })  then in the class: ${local} = ${local}\n<with-icon [icon]="${local}"${sizeAttr ? ` [size]="${size}"` : ''} />`
     case 'html-class':
-      return `<link rel="stylesheet" href="${CDN}/web/dist/classes/with-${style}.css">\n\n<i class="with with-${name}${style === 'line' ? '' : ' with-' + style}"${sizeAttr ? ` style="font-size:${size}px"` : ''}></i>`
+      return `<script src="${CDN}/web/dist/classes/with-loader.js" defer></script>\n\n<i class="with with-${name}${style === 'line' ? '' : ' with-' + style}"${sizeAttr ? ` style="font-size:${size}px"` : ''}></i>`
     case 'web-component':
-      return `<script type="module" src="${CDN}/web/dist/index.js"></script>\n\n<with-icon name="${name}"${style === 'line' ? '' : ` variant="${style}"`}${sizeAttr ? ` size="${size}"` : ''}></with-icon>`
+      return `<script type="module" src="${CDN}/web/dist/cdn.js"></script>\n\n<with-icon name="${name}"${style === 'line' ? '' : ` variant="${style}"`}${sizeAttr ? ` size="${size}"` : ''}></with-icon>`
   }
 }
 
@@ -105,8 +105,8 @@ export function importLine(names, framework = 'react', style = 'line') {
   switch (f) {
     case 'react': case 'vue': case 'svelte': case 'solid': return `import { ${spec} } from '@withicons/${f}${sub}'`
     case 'angular': return `import { WithIconComponent } from '@withicons/angular'\nimport { ${spec} } from '@withicons/angular${sub}'`
-    case 'web-component': return `<script type="module" src="${CDN}/web/dist/index.js"></script>`
-    case 'html-class': return `<link rel="stylesheet" href="${CDN}/web/dist/classes/with-${style}.css">`
+    case 'web-component': return `<script type="module" src="${CDN}/web/dist/cdn.js"></script>`
+    case 'html-class': return `<script src="${CDN}/web/dist/classes/with-loader.js" defer></script>`
     default: return null
   }
 }
@@ -359,7 +359,9 @@ export function motionData() {
     presets: raw.presets && raw.presets.length ? raw.presets : FALLBACK_PRESETS,
     effects: raw.effects && raw.effects.length ? raw.effects : FALLBACK_EFFECTS,
     css: raw.css || ['@withicons/motion/motion.css', '@withicons/motion/icons.css'],
-    cdn: raw.cdn || [`${CDN}/motion/dist/motion.css`, `${CDN}/motion/dist/icons.css`],
+    // from a CDN: the presets plus each animated icon's own defaults (icons/<name>.css), never the all-icons icons.css
+    cdn: (raw.cdn || [`${CDN}/motion/dist/motion.css`]).filter(u => !/\/icons\.css$/.test(u)),
+    cdnIcon: raw.cdnIcon || `${CDN}/motion/dist/icons/<name>.css`,
     source: raw.source || 'none',
   }
   return motionState
@@ -399,7 +401,8 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
     return Object.entries(by).map(([st, set]) => `import { ${[...set].join(', ')} } from '@withicons/${fw}${st === 'line' ? '' : '/' + st}'`).join('\n')
   }
   const cssImports = m.css.map(c => `import '${c}'`).join('\n')
-  const links = m.cdn.map(c => `<link rel="stylesheet" href="${c}">`).join('\n')
+  // CDN links: motion.css + icons/<name>.css for the icon whose tuned defaults (data-wm) the code uses
+  const links = [...m.cdn, ...(spec && trigger !== 'swap' ? [m.cdnIcon.replace('<name>', canonical)] : [])].map(c => `<link rel="stylesheet" href="${c}">`).join('\n')
   const attrCls = format === 'react' ? 'className' : 'class'
 
   // ---- swap: icon A turns into icon B
@@ -417,7 +420,7 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
         ? `import { swap } from '@withicons/motion'\n${cssImports}\n\n// returns { toggle(on?), destroy() }\nconst s = swap(document.querySelector('#my-icon'), { from: ${JSON.stringify(svgOf(canonical, style))}, to: ${JSON.stringify(svgOf(B.name, B.style))}, effect: '${fx}', trigger: 'click' })`
         : `${links}\n\n<!-- shows ${B.name} on hover/focus of the button; add class "is-on" to the .wm-swap span (a toggle) to keep it -->\n<button type="button" class="wm-trigger" aria-label="${titleOf(canonical)}">\n  <span class="${wrap}">${a}${b}</span>\n</button>`
     } else if (format === 'web-component') {
-      code = `<script type="module" src="${CDN}/web/dist/index.js"></script>\n${links}\n\n<button type="button" class="wm-trigger" aria-label="${titleOf(canonical)}">\n  <span class="${wrap}">\n    <with-icon class="wm-a" name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>\n    <with-icon class="wm-b" name="${B.name}"${B.style === 'line' ? '' : ` variant="${B.style}"`}></with-icon>\n  </span>\n</button>`
+      code = `<script type="module" src="${CDN}/web/dist/cdn.js"></script>\n${links}\n\n<button type="button" class="wm-trigger" aria-label="${titleOf(canonical)}">\n  <span class="${wrap}">\n    <with-icon class="wm-a" name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>\n    <with-icon class="wm-b" name="${B.name}"${B.style === 'line' ? '' : ` variant="${B.style}"`}></with-icon>\n  </span>\n</button>`
     } else if (format === 'angular') {
       code = `${imp('angular', [[canonical, style], [B.name, B.style]])}\n// angular.json "styles": [${m.css.map(c => `"${c}"`).join(', ')}]\n\n<button type="button" class="wm-trigger" [class.is-on]="on" (click)="on = !on" aria-label="${titleOf(canonical)}">\n  <span class="${wrap}" [class.is-on]="on">\n    <with-icon class="wm-a" [icon]="${comp(canonical, style)}" />\n    <with-icon class="wm-b" [icon]="${comp(B.name, B.style)}" />\n  </span>\n</button>`
     } else {
@@ -456,9 +459,9 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
     const run = el => `const m = motion(${el}, ${mArgs})`
     const motionImport = "import { motion } from '@withicons/motion'"
     switch (format) {
-      case 'html': code = `${links}\n\n${button(span(svgOf(canonical, style), 'class', ` id="${id}"`))}\n\n<script type="module">\n  import { motion } from '${CDN}/motion/dist/index.js'\n  motion(document.getElementById('${id}'), ${mArgs})\n</script>`; break
+      case 'html': code = `${links}\n\n${button(span(svgOf(canonical, style), 'class', ` id="${id}"`))}\n\n<script type="module">\n  import { motion } from '${CDN}/motion/dist/runtime.js'\n  motion(document.getElementById('${id}'), ${mArgs})\n</script>`; break
       // on the element itself, so the runtime reaches the SVG inside its shadow root
-      case 'web-component': code = `<script type="module" src="${CDN}/web/dist/index.js"></script>\n${links}\n\n${button(`<with-icon id="${id}" name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>`)}\n\n<script type="module">\n  import { motion } from '${CDN}/motion/dist/index.js'\n  await customElements.whenDefined('with-icon')\n  motion(document.getElementById('${id}'), ${mArgs})\n</script>`; break
+      case 'web-component': code = `<script type="module" src="${CDN}/web/dist/cdn.js"></script>\n${links}\n\n${button(`<with-icon id="${id}" name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>`)}\n\n<script type="module">\n  import { motion } from '${CDN}/motion/dist/runtime.js'\n  await customElements.whenDefined('with-icon')\n  motion(document.getElementById('${id}'), ${mArgs})\n</script>`; break
       case 'react': code = `${imp('react', [[canonical, style]])}\n${motionImport}\n${cssImports}\nimport { useEffect, useRef } from 'react'\n\nconst ref = useRef(null)\nuseEffect(() => { ${run('ref.current')}; return () => m.destroy() }, [])\n\n${button(span(`<${comp(canonical, style)} />`, 'className', ' ref={ref}'), 'className')}`; break
       case 'solid': code = `${imp('solid', [[canonical, style]])}\n${motionImport}\n${cssImports}\nimport { onMount, onCleanup } from 'solid-js'\n\nlet el\nonMount(() => { ${run('el')}; onCleanup(() => m.destroy()) })\n\n${button(span(`<${comp(canonical, style)} />`, 'class', ' ref={el}'))}`; break
       case 'vue': code = `<script setup>\n${imp('vue', [[canonical, style]])}\n${motionImport}\n${cssImports}\nimport { ref, onMounted, onBeforeUnmount } from 'vue'\nconst el = ref(null)\nlet m\nonMounted(() => { m = motion(el.value, ${mArgs}) })\nonBeforeUnmount(() => m && m.destroy())\n</script>\n\n<template>\n  ${button(span(`<${comp(canonical, style)} />`, 'class', ' ref="el"'))}\n</template>`; break
@@ -467,7 +470,7 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
     }
   } else switch (format) {
     case 'html': code = `${links}\n\n${button(span(svgOf(canonical, style)))}`; break
-    case 'web-component': code = `<script type="module" src="${CDN}/web/dist/index.js"></script>\n${links}\n\n${button(span(`<with-icon name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>`))}`; break
+    case 'web-component': code = `<script type="module" src="${CDN}/web/dist/cdn.js"></script>\n${links}\n\n${button(span(`<with-icon name="${canonical}"${style === 'line' ? '' : ` variant="${style}"`}></with-icon>`))}`; break
     case 'react': case 'solid': code = `${imp(format, [[canonical, style]])}\n${cssImports}\n\n${button(span(`<${comp(canonical, style)} />`, format === 'react' ? 'className' : 'class'), format === 'react' ? 'className' : 'class')}`; break
     case 'vue': code = `<script setup>\n${imp('vue', [[canonical, style]])}\n${cssImports}\n</script>\n\n<template>\n  ${button(span(`<${comp(canonical, style)} />`))}\n</template>`; break
     case 'svelte': code = `<script>\n  ${imp('svelte', [[canonical, style]])}\n  ${cssImports.replace(/\n/g, '\n  ')}\n</script>\n\n${button(span(`<${comp(canonical, style)} />`))}`; break
@@ -476,7 +479,7 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
   }
   return { name: canonical, style, trigger, format, preset: chosen, intent: spec ? spec.intent : null, code, motion: spec, presets: m.presets, notes, install: installOf(m) }
 }
-const installOf = m => ({ npm: 'npm i @withicons/motion', css: m.css, cdn: m.cdn })
+const installOf = m => ({ npm: 'npm i @withicons/motion', css: m.css, cdn: [...m.cdn, m.cdnIcon] })
 
 export function listMotion() {
   const m = motionData()

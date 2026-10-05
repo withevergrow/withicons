@@ -1,7 +1,8 @@
 // Live icon: a five-star rating. A single row of five stars cannot stay legible in 24u, so the default layout packs
 // them 3-over-2 like a honeycomb (read top row, then bottom). Earned stars are solid little stars, a half star is the
-// left half, stars still to earn are dots (or tiny stars). The "score" layout shows one big star over the number.
-import { fitText, asCutouts, live } from './_font.mjs'
+// left half, stars still to earn are dots (or tiny stars). The "score" layout shows one whole big star over the number
+// (filled for any score above 0, an empty outline at 0).
+import { fitText, live } from './_font.mjs'
 import { star, halfStar, dot } from './_parts-progress.mjs'
 
 const R = 2.6, RATIO = 0.42
@@ -29,9 +30,10 @@ export default live({
   build({ rating, layout, empty }) {
     const r = Math.round(Math.max(0, Math.min(5, Number(rating) || 0)) * 2) / 2
     if (layout === 'score') {
-      // one star (half star when the score is under 1) over the score: "4.5", "5", "0"
+      // one whole star over the score: "4.5", "5", "0". The star is a symbol, not a gauge: always drawn complete
+      // (a half star at this size reads as a broken fragment), filled for any score, an empty outline at 0
       const s = Number.isInteger(r) ? String(r) : r.toFixed(1)
-      const big = r > 0 && r < 1 ? halfStar(12, 7.75, 5.5, 0.45) : star(12, 7.75, 5.5, 0.45)
+      const big = star(12, 7.75, 5.5, 0.45)
       const t = fitText(s, { x0: 5, y0: 16.5, x1: 19, y1: 21.5 }, { prefer: 'small', maxCap: 5, minCap: 4 })
       const txt = t ? t.paths : []
       return {

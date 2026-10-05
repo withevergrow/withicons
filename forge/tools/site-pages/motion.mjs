@@ -241,13 +241,14 @@ import { WithIconComponent, Bell, Play, Pause } from '@withicons/angular'
   \`,
 })
 export class ToolbarComponent { Bell = Bell; Play = Play; Pause = Pause; playing = signal(false) }`, 'ts', 'toolbar.component.ts')],
-    ['element', '&lt;with-icon&gt;', code(`<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>
+    ['element', '&lt;with-icon&gt;', code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/element.js"></script>
 
 <with-icon name="bell" motion="loop"></with-icon>                <!-- its own animation, forever -->
 <with-icon name="heart" variant="solid" motion="hover"></with-icon> <!-- plays on hover / focus -->
 <with-icon name="star" motion="once" preset="tada"></with-icon>  <!-- once, when it appears -->
-<with-icon name="play" swap-to="pause" swap-effect="flip" swap-trigger="click"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Importing <code>@withicons/motion/element</code> upgrades every <code>&lt;with-icon&gt;</code> on the page, now and later: <code>motion</code> (<code>loop</code>, <code>hover</code>, <code>once</code>, <code>inview</code>), <code>preset</code>, <code>swap-to</code>, <code>swap-effect</code> and <code>swap-trigger</code> (<code>hover</code>, <code>click</code> or <code>loop</code>).</p>`],
+<with-icon name="play" swap-to="pause" swap-effect="flip" swap-trigger="click"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Importing <code>@withicons/motion/element</code> upgrades every <code>&lt;with-icon&gt;</code> on the page, now and later: <code>motion</code> (<code>loop</code>, <code>hover</code>, <code>once</code>, <code>inview</code>), <code>preset</code>, <code>swap-to</code>, <code>swap-effect</code> and <code>swap-trigger</code> (<code>hover</code>, <code>click</code> or <code>loop</code>). From a CDN it fetches only what the page animates: each icon’s own motion (<code>icons/&lt;name&gt;.css</code>, a few hundred bytes) and its drawing, about 42 KB gzipped in all for one animated icon.</p>`],
     ['js', 'Plain JS', code(`import { motion, swap, motionFor, PRESETS, EFFECTS } from '@withicons/motion'
 
 motionFor('bell')   // → { intent: 'rings like a notification just arrived', loop: {…}, hover: {…}, … }
@@ -288,7 +289,7 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
       <div class="mo-two">
         <div>${code('npm i @withicons/motion', 'sh', 'Terminal')}<p class="pg-note">${sizeNote()}</p></div>
         <div>${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">`, 'html', 'CDN')}<p class="pg-note"><code>motion.css</code> has the presets. <code>icons.css</code> adds each icon’s own motion (<code>data-wm="bell"</code>). Pin a version in production.</p></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons/bell.css">`, 'html', 'CDN')}<p class="pg-note"><code>motion.css</code> has the presets (about 10 KB gzipped). <code>icons/&lt;name&gt;.css</code> adds one icon’s own motion (<code>data-wm="bell"</code>), a few hundred bytes each; <code>icons.css</code> has all ${ICON_NAMES.length} at once (about 18 KB gzipped). Pin a version in production.</p></div>
       </div>
 
       <h3 id="motion-css">CSS only: add two classes</h3>

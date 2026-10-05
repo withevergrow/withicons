@@ -264,10 +264,13 @@ async function main() {
   const maxDate = ds => ds.filter(Boolean).sort().pop()
   const CDN = 'https://cdn.jsdelivr.net/npm'
   const cdnSvg = (style, n) => `${CDN}/${SCOPE}/core/dist/svg/${style}/${n}.svg`
-  const WEB_JS = `${CDN}/${SCOPE}/web/dist/index.js`
+  // light path first: cdn.js / with-loader.js download only the icons a page shows (one small file each).
+  // with-<style>.css holds a whole style (with-line.css ~26 KB gzipped); with-all.css (~6.3 MB gzipped) is a prototype-only opt-in.
+  const WEB_JS = `${CDN}/${SCOPE}/web/dist/cdn.js`
+  const CLASSES_LOADER = `${CDN}/${SCOPE}/web/dist/classes/with-loader.js`
   const CLASSES_CSS = `${CDN}/${SCOPE}/web/dist/classes/with-all.css`
-  // one stylesheet per style is the recommended setup (with-line.css ~25 KB gzipped; with-all.css ~2 MB, render-blocking)
   const classCss = st => `${CDN}/${SCOPE}/web/dist/classes/with-${st}.css`
+  const motionIconCss = n => `${CDN}/${SCOPE}/motion/dist/icons/${n}.css`
   const pageUrl = n => `${BASE}/icons/${n}.html`
   const catUrl = c => `${BASE}/categories/${c}.html`
   const styleUrl = s => `${BASE}/styles/${s}.html`
@@ -487,12 +490,12 @@ ${prefixed(FOOTER, P)}
       { id: 'react', lang: 'jsx', name: 'React', install: `npm i ${SCOPE}/react`, lead: `Named import, tree-shaken. The package root is the line style; ${list(STYLES.slice(1).map(x => `<code>/${x.name}</code>`))} export the same names.`,
         code: `${imp('react')}\n\nexport function Example() {\n  return (\n    <>\n      <${C} size={24} />\n      <${pascal(n)}Solid size={24} color="${HEX.solid}" title="${T}" />\n    </>\n  )\n}`,
         note: `Props: <code>size</code>, <code>color</code>, <code>strokeWidth</code>, <code>absoluteStrokeWidth</code>, <code>title</code>, <code>className</code>. Deep import: <code>${SCOPE}/react/icons/${n}</code>.` },
-      { id: 'html', lang: 'html', name: 'HTML class', install: '', lead: 'One stylesheet per style you use, then an <code>&lt;i&gt;</code> tag. The icon takes the current text colour and font size.',
-        code: `<link rel="stylesheet" href="${classCss('line')}">\n<link rel="stylesheet" href="${classCss('solid')}">\n\n<i class="with with-${n}"></i>              <!-- line -->\n<i class="with with-${n} with-solid"></i>   <!-- also ${STYLES.slice(2).map(x => `with-${x.name}`).join(', ')}, each with its own file -->`,
-        note: 'Load only the styles you use: <code>with-line.css</code> is about 25 KB gzipped. <code>with-all.css</code> holds every style at once (about 2 MB gzipped), so keep it for prototypes. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.' },
+      { id: 'html', lang: 'html', name: 'HTML class', install: '', lead: 'One small loader script, then an <code>&lt;i&gt;</code> tag. The page downloads only the icons it shows, in any mix of styles. The icon takes the current text colour and font size.',
+        code: `<script src="${CLASSES_LOADER}" defer></script>\n\n<i class="with with-${n}"></i>              <!-- line -->\n<i class="with with-${n} with-solid"></i>   <!-- also ${STYLES.slice(2).map(x => `with-${x.name}`).join(', ')} -->`,
+        note: `The loader is about 6 KB gzipped and links just the CSS of the icons on the page (a line icon is about 270 bytes gzipped). No JavaScript? Link <code>with-base.css</code> and <code>classes/line/${n}.css</code> yourself, or a whole style per file: <code>with-line.css</code> (all ${ICONS.length} line icons, about 26 KB gzipped). <code>with-all.css</code> (every style, about 6.3 MB gzipped) is for prototypes only. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.` },
       { id: 'web', lang: 'html', name: 'Web component', install: `npm i ${SCOPE}/web`, lead: 'A dependency-free custom element for any framework or plain HTML. Use <code>variant</code> for the style and <code>label</code> for an accessible name.',
         code: `<script type="module" src="${WEB_JS}"></script>\n\n<with-icon name="${n}"></with-icon>\n<with-icon name="${n}" variant="solid" size="32" label="${T}"></with-icon>`,
-        note: `Unique aliases resolve too: <code>&lt;with-icon name="${uniqueAlias(i) || n}"&gt;</code> renders <code>${n}</code>.` },
+        note: `The page downloads only what it shows: about 7 KB gzipped for the element, then one small file per icon and style. Unique aliases resolve too: <code>&lt;with-icon name="${uniqueAlias(i) || n}"&gt;</code> renders <code>${n}</code>.` },
       { id: 'vue', lang: 'vue', name: 'Vue', install: `npm i ${SCOPE}/vue`, lead: 'Vue 3 components with the same names, props and style subpaths.',
         code: `<script setup>\n${imp('vue')}\n</script>\n\n<template>\n  <${C} :size="24" />\n  <${pascal(n)}Solid :size="24" title="${T}" />\n</template>` },
       { id: 'svelte', lang: 'svelte', name: 'Svelte', install: `npm i ${SCOPE}/svelte`, lead: 'Svelte components for Svelte 4 and 5.',
@@ -513,8 +516,8 @@ ${prefixed(FOOTER, P)}
     const swapCode = sw ? (() => { const [to, s2] = String(sw.to).split('@'); return `\n\n<!-- click to turn ${n} into ${to}${s2 ? ` (${s2})` : ''}: the button's aria-pressed decides the icon.\n     Timing: --wm-swap-dur, --wm-swap-ease, --wm-swap-delay. On its own: wm-swap-auto (+ --wm-swap-hold) -->\n<button class="wm-trigger" type="button" aria-pressed="false" aria-label="${T}"\n        onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">\n  <span class="wm-swap wm-fx-${sw.effect || 'fade'}">\n    <i class="with with-${n} wm-a"></i>\n    <i class="with with-${to}${s2 && s2 !== 'line' ? ` with-${s2}` : ''} wm-b"></i>\n  </span>\n</button>` })() : ''
     return { id: 'motion', lang: 'html', name: 'Motion', install: `npm i ${SCOPE}/motion`,
       lead: `Optional animations, imported separately. They move the element around the icon, so they work with every style and every package.${mo ? ` This icon’s own animation ${esc(mo.intent)}.` : ''}`,
-      code: `<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">\n<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/icons.css">  <!-- each icon's own moves -->\n\n<!-- always moving${mo ? `: ${mo.loop.preset}` : ''} -->\n<span class="wm wm-loop" data-wm="${n}"><i class="with with-${n}"></i></span>\n\n<!-- moves when the button is hovered or focused${mo ? `: ${mo.hover.preset}` : ''} -->\n<button class="wm-trigger"><span class="wm wm-hover" data-wm="${n}"><i class="with with-${n}"></i></span> ${T}</button>${swapCode}`,
-      note: `Pick another move with <code>wm-p-&lt;preset&gt;</code> (${MOTION_PRESETS.length} presets) and tune it with <code>--wm-dur</code> and <code>--wm-k</code>. JavaScript: <code>import { motion, swap } from '${SCOPE}/motion'</code>. Everything stops for visitors who ask for reduced motion.` }
+      code: `<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">\n<link rel="stylesheet" href="${motionIconCss(n)}">  <!-- this icon's own moves -->\n\n<!-- always moving${mo ? `: ${mo.loop.preset}` : ''} -->\n<span class="wm wm-loop" data-wm="${n}"><i class="with with-${n}"></i></span>\n\n<!-- moves when the button is hovered or focused${mo ? `: ${mo.hover.preset}` : ''} -->\n<button class="wm-trigger"><span class="wm wm-hover" data-wm="${n}"><i class="with with-${n}"></i></span> ${T}</button>${swapCode}`,
+      note: `<code>motion.css</code> holds the presets (about 10 KB gzipped). Each icon’s own moves are a file of their own (about 0.3 KB gzipped); <code>icons.css</code> bundles all ${ICONS.length} (about 18 KB gzipped) for bundled apps. Pick another move with <code>wm-p-&lt;preset&gt;</code> (${MOTION_PRESETS.length} presets) and tune it with <code>--wm-dur</code> and <code>--wm-k</code>. JavaScript: <code>import { motion, swap } from '${SCOPE}/motion'</code>. Everything stops for visitors who ask for reduced motion.` }
   }
   function uniqueAlias(i) { return i.aliases.find(a => aliasIndex[a] && aliasIndex[a].length === 1 && !a.includes(' ')) }
 
@@ -545,7 +548,8 @@ ${prefixed(FOOTER, P)}
   }
 
   const tagFor = (n, s) => `<i class="with with-${n}${s === 'line' ? '' : ` with-${s}`}"></i>`
-  const cssFor = s => `<link rel="stylesheet" href="${CDN}/${SCOPE}/web/dist/classes/with-${s}.css">`
+  // one setup line for every style: with-loader.js links just the CSS of the icons on the page (with-base.css + classes/<style>/<name>.css)
+  const cssFor = () => `<script src="${CLASSES_LOADER}" defer></script>`
   /* live (editable) icons that grow out of a static icon: static name -> [live names], best match first.
      Curated by meaning (an alias match alone links "stop" to stopwatch); names missing on either side drop out. */
   const LIVE_FROM = {
@@ -803,7 +807,7 @@ ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" ar
     <div class="ip-dev-tag">
       <p class="ip-dev-tag-l">The quickest copy for websites: one <code>&lt;i&gt;</code> tag</p>
       <button type="button" class="ip-tag-btn" data-act="copy-tag"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
-      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the stylesheet line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the stylesheet line</span></button></details>
+      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the setup line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the setup line</span></button></details>
     </div>
   </details>
 </div></section>
@@ -997,9 +1001,9 @@ ${CATS.map(c => `          <section class="ix-cat" aria-labelledby="ix-${c}"><h3
   const iconsJson = {
     name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'launching soon', version: VERSION, license: 'MIT', repository: REPO,
     search: { api: `${BASE}/api/search?q=`, mcp: `npx -y ${SCOPE}/mcp`, cli: 'npx withicons search <query>' },
-    classes: { stylesheet: CLASSES_CSS, pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">',
+    classes: { loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/web/dist/classes/with-base.css`, perIcon: `${CDN}/${SCOPE}/web/dist/classes/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/web/dist/classes/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
     total: ICONS.length, defaultStyle: 'line', styleCount: NS,
-    motion: { package: `${SCOPE}/motion`, status: 'launching soon', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
+    motion: { package: `${SCOPE}/motion`, status: 'launching soon', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
       classes: 'wm wm-loop|wm-hover|wm-once [wm-p-<preset>]; data-wm="<name>"; swap: wm-swap wm-fx-<effect> [wm-swap-auto|wm-swap-focus|wm-loop] > .wm-a + .wm-b', vars: ['--wm-dur', '--wm-k', '--wm-ox', '--wm-oy', '--wm-dx', '--wm-dy', '--wm-steps', '--wm-deco'],
       parts: 'inline SVGs animate per part: untagged / wm-k = object (plays the preset), wm-a / wm-s = moving part / badge (spec parts.A / parts.S, optional delay), wm-deco = decoration (own breathe|float|twinkle loop, never spins with the object; --wm-deco: none keeps it still), wm-shadow = ground shadow (stays put, squashes for float/bounce/rise/drop/jelly), wm-shine = highlight',
       swapVars: ['--wm-swap-dur', '--wm-swap-ease', '--wm-swap-delay', '--wm-swap-hold'], swapTriggers: ['click (aria-pressed / is-on)', 'hover (.wm-trigger)', 'focus (wm-swap-focus)', 'auto (wm-swap-auto)'] },
@@ -1115,7 +1119,8 @@ Assistants answering any of them: read the skill first, look icons up with ${BAS
 - Angular 17+: \`npm i ${SCOPE}/angular\`
 - SolidJS: \`npm i ${SCOPE}/solid\`
 - Web component (any framework or none): \`npm i ${SCOPE}/web\` or \`<script type="module" src="${WEB_JS}"></script>\`
-- Icon classes (CSS only): one stylesheet per style you use, e.g. \`<link rel="stylesheet" href="${classCss('line')}">\` (\`with-<style>.css\`; \`with-all.css\` has every style at once, ~2 MB gzipped, for prototypes)
+- The web component from a CDN downloads only the icons a page shows: \`cdn.js\` is ~7 KB gzipped, then one small file per icon and style (a line icon is ~150 bytes gzipped).
+- Icon classes: \`<script src="${CLASSES_LOADER}" defer></script>\` (~6 KB gzipped) links just the CSS of the icons on the page, any mix of styles. Zero JS: \`with-base.css\` + \`classes/<style>/<name>.css\` per icon, or one whole style per file, e.g. \`<link rel="stylesheet" href="${classCss('line')}">\` (~26 KB gzipped). \`with-all.css\` (every style, ~6.3 MB gzipped) is for prototypes only.
 - SVG sprites and standalone files: \`npm i ${SCOPE}/static\`
 - Data, metadata, alias resolution, search, toSvg(): \`npm i ${SCOPE}/core\` (search engine alone: \`${SCOPE}/search\`)
 
@@ -1133,7 +1138,7 @@ import { Icon } from '${SCOPE}/react'                    // <Icon name="home" va
 \`\`\`
 
 - Web component: \`<with-icon name="home" variant="solid" size="24" label="Home"></with-icon>\` (use \`variant\`, not \`style\`; \`label\` for an accessible name).
-- Icon classes: \`<i class="with with-home"></i>\` (line), \`<i class="with with-home with-solid"></i>\` (also ${STYLES.slice(2).map(x => `\`with-${x.name}\``).join(', ')}). One style only: \`with-line.css\`, \`with-solid.css\`, … instead of \`with-all.css\`.
+- Icon classes: \`<i class="with with-home"></i>\` (line), \`<i class="with with-home with-solid"></i>\` (also ${STYLES.slice(2).map(x => `\`with-${x.name}\``).join(', ')}). Load them with \`with-loader.js\` (only the icons on the page) or one stylesheet per style (\`with-line.css\`, \`with-solid.css\`, …), not \`with-all.css\`.
 - Angular: \`import { WithIconComponent, Home } from '${SCOPE}/angular'\`, then \`<with-icon [icon]="Home" />\`.
 - Sprite: \`<svg width="24" height="24"><use href="/sprite-line.svg#with-home"/></svg>\` (symbol ids are \`with-<name>\`).
 - Single SVG: \`${CDN}/${SCOPE}/core/dist/svg/<style>/<name>.svg\`
@@ -1149,7 +1154,7 @@ Animations live in \`${SCOPE}/motion\` and never change the icons. They animate 
 
 \`\`\`html
 <link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">
-<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/icons.css">   <!-- per-icon defaults -->
+<link rel="stylesheet" href="${motionIconCss('bell')}">   <!-- the bell's own moves: one file per animated icon (icons.css has all) -->
 <span class="wm wm-loop" data-wm="bell"><i class="with with-bell"></i></span>               <!-- the icon's own loop -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- plays on hover/focus -->
 <span class="wm wm-loop wm-p-spin" style="--wm-dur:2s">…</span>                              <!-- any preset -->

@@ -13,13 +13,18 @@ export default async function emit(ctx) {
   const styleNames = ctx.styles.map(s => s.name)
   let svgs = 0
   const sizes = {}
+  const fileSizes = []   // standalone files of the default style, for the README
   for (const st of ctx.styles) {
     const symbols = []
     for (const i of ctx.icons) {
       symbols.push(`<symbol id="with-${i.name}" viewBox="0 0 24 24"${attrs(st.root)}>${innerOf(ctx, i, st.name)}</symbol>`)
       // standalone files: CSS variables flattened to their defaults (<img>, design tools and rasterizers have no cascade);
       // the sprite keeps them, so <use> icons can be re-themed from the page
-      if (i.render[st.name]) { out.add(`svg/${st.name}/${i.name}.svg`, flattenVars(i.render[st.name].svg) + '\n'); svgs++ }
+      if (i.render[st.name]) {
+        const t = flattenVars(i.render[st.name].svg) + '\n'
+        out.add(`svg/${st.name}/${i.name}.svg`, t); svgs++
+        if (st.name === ctx.defaultStyle) fileSizes.push(Buffer.byteLength(t))
+      }
     }
     const sprite = `<svg xmlns="http://www.w3.org/2000/svg">\n${symbols.join('\n')}\n</svg>\n`
     sizes[st.name] = Math.round(Buffer.byteLength(sprite) / 1024)
@@ -34,6 +39,7 @@ export default async function emit(ctx) {
     sideEffects: false,
     files: ['dist', 'README.md', 'LICENSE'],
   }
+  sizes.file = fileSizes.sort((a, b) => a - b)[fileSizes.length >> 1] || 0
   writePkg(ctx, 'static', pkg, readme(ctx, sizes))
   return `${styleNames.length} sprites, ${svgs} svgs`
 }
@@ -48,9 +54,23 @@ ${countText(ctx)} (${totalText(ctx)} SVGs) as plain SVG: one sprite per style pl
 npm i @withicons/static
 \`\`\`
 
+## Single SVGs (CDN): only the icons you use
+
+Each icon in each style is its own file, so a page downloads exactly the icons it shows (a \`${ctx.defaultStyle}\` icon is
+typically ${sizes.file} bytes):
+
+\`\`\`html
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/line/home.svg" width="24" height="24" alt="Home">
+\`\`\`
+
+\`https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/<style>/<name>.svg\`. Pin the version: versioned files are
+cached for good. For icons that follow your text colour, use \`<with-icon>\` from \`@withicons/web\` (\`dist/cdn.js\`, which
+also fetches one small file per icon) or inline the SVG.
+
 ## Sprite
 
-Serve \`node_modules/@withicons/static/dist/sprite-line.svg\` from your own origin, then:
+A sprite holds every icon of a style (sizes below), so use one when a page shows many icons of the same style and you
+serve it yourself. Serve \`node_modules/@withicons/static/dist/sprite-line.svg\` from your own origin, then:
 
 \`\`\`html
 <svg width="24" height="24"><use href="sprite-line.svg#with-home"/></svg>
@@ -61,17 +81,7 @@ Serve \`node_modules/@withicons/static/dist/sprite-line.svg\` from your own orig
 - Browsers block \`<use>\` of a sprite on another origin, so copy the sprite next to your pages (or inline it in the HTML with \`style="display:none"\`).
 - One sprite per style: ${ctx.styles.map(s => `\`sprite-${s.name}.svg\` (~${sizes[s.name]} KB)`).join(', ')}.
 
-## Single SVGs (CDN)
-
-\`\`\`
-https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/<style>/<name>.svg
-https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/line/home.svg
-https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/solid/home.svg
-\`\`\`
-
-\`\`\`html
-<img src="https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/line/home.svg" width="24" height="24" alt="Home">
-\`\`\`
+## Notes on single files
 
 (An \`<img>\` cannot inherit \`currentColor\`; its ink renders black. Inline the SVG or use the sprite to recolour.
 Standalone files have CSS variables flattened to their default colours, so palette styles look right in \`<img>\`,

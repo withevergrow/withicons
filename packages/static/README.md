@@ -6,9 +6,23 @@
 npm i @withicons/static
 ```
 
+## Single SVGs (CDN): only the icons you use
+
+Each icon in each style is its own file, so a page downloads exactly the icons it shows (a `line` icon is
+typically 393 bytes):
+
+```html
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/line/home.svg" width="24" height="24" alt="Home">
+```
+
+`https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/<style>/<name>.svg`. Pin the version: versioned files are
+cached for good. For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
+also fetches one small file per icon) or inline the SVG.
+
 ## Sprite
 
-Serve `node_modules/@withicons/static/dist/sprite-line.svg` from your own origin, then:
+A sprite holds every icon of a style (sizes below), so use one when a page shows many icons of the same style and you
+serve it yourself. Serve `node_modules/@withicons/static/dist/sprite-line.svg` from your own origin, then:
 
 ```html
 <svg width="24" height="24"><use href="sprite-line.svg#with-home"/></svg>
@@ -19,17 +33,7 @@ Serve `node_modules/@withicons/static/dist/sprite-line.svg` from your own origin
 - Browsers block `<use>` of a sprite on another origin, so copy the sprite next to your pages (or inline it in the HTML with `style="display:none"`).
 - One sprite per style: `sprite-line.svg` (~181 KB), `sprite-solid.svg` (~610 KB), `sprite-duo.svg` (~290 KB), `sprite-gloss.svg` (~722 KB), `sprite-engrave.svg` (~1138 KB), `sprite-blueprint.svg` (~666 KB), `sprite-sketch.svg` (~603 KB), `sprite-glass.svg` (~1481 KB), `sprite-kawaii.svg` (~661 KB), `sprite-sticker.svg` (~1221 KB), `sprite-pixel.svg` (~379 KB), `sprite-retro.svg` (~1021 KB), `sprite-luxe.svg` (~2905 KB), `sprite-bauhaus.svg` (~467 KB), `sprite-skeuo.svg` (~2394 KB), `sprite-anime.svg` (~1527 KB), `sprite-gothic.svg` (~3721 KB), `sprite-pastel.svg` (~1646 KB), `sprite-coquette.svg` (~2717 KB), `sprite-plush.svg` (~2480 KB).
 
-## Single SVGs (CDN)
-
-```
-https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/<style>/<name>.svg
-https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/line/home.svg
-https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/solid/home.svg
-```
-
-```html
-<img src="https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/line/home.svg" width="24" height="24" alt="Home">
-```
+## Notes on single files
 
 (An `<img>` cannot inherit `currentColor`; its ink renders black. Inline the SVG or use the sprite to recolour.
 Standalone files have CSS variables flattened to their default colours, so palette styles look right in `<img>`,
@@ -107,8 +111,9 @@ Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/packag
 They work with every style and every package because they animate the element that holds the icon:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<!-- each animated icon's own motion: one small file per icon (icons.css has all of them) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
 
 <span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->

@@ -10,6 +10,9 @@ import { splitText, textNodes } from './_live-text.mjs'
 const R = 1.35            // tube radius  (stroke 2.7u)
 const RC = 0.55           // closing radius: inner corners rounded
 const CW = 1.6            // open-cutout groove width
+const TW = 1.75           // live text groove width (the stroke font's weight)
+const BORE_ICONS = new Set(['thermometer-level'])
+const LABEL_BAND = { 'file-type': [9, 18], 'folder-label': [9, 18] }   // live label faces: their lettering rows (y range, u)   // live icons whose A column sits in a filled bore (see boreGrooves)
 const MOAT = 0.75         // clearance carved around S-plate overlays (badges, slashes)
 const LIGHT = (() => { const x = -0.55, y = -0.835, l = Math.hypot(x, y); return [x / l, y / l] })()
 const BAND = 4.1          // distance fields are exact up to this far from an edge
@@ -41,9 +44,10 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor' },
   render(full) {
-    // Live icons: free text (no frame behind it) would inflate into blobs; it is drawn as a crisp round stroke
+    // Live icons: free text (no frame behind it) would inflate into blobs; it is drawn as a crisp round stroke at
+    // the weight the stroke font is spaced for (heavier closes the counters of 0 4 6 8 9 % at 24px)
     const { icon, free } = splitText(full)
-    const text = textNodes(free, { 'stroke-width': 2.25 })
+    const text = textNodes(free, { 'stroke-width': 1.75 })
     let B = null
     try { B = body(icon) } catch { return text }
     if (!B) return text
@@ -51,7 +55,11 @@ export default {
     try {
       const hl = highlights(B)
       S = new Float32Array(NN)
-      for (let k = 0; k < NN; k++) S[k] = Math.min(B.depth[k], hl[k])
+      // a specular streak never runs through lettering: it would read as a stroke of the letter
+      // (nor puts a glint in a counter): no highlight within 0.9u of a glyph stroke or inside a glyph's box
+      const T = B.textD, clear = TW / 2 + 0.9, TB = B.textBoxes || []
+      const inBox = k => { const x = gx(k % N), y = gx((k - k % N) / N); return TB.some(b => x > b[0] && x < b[2] && y > b[1] && y < b[3]) }
+      for (let k = 0; k < NN; k++) S[k] = T && (T[k] < clear || (T[k] < 2.2 && inBox(k))) ? B.depth[k] : Math.min(B.depth[k], hl[k])
     } catch { /* never throw: fall back to the unlit body */ }
     const rings = contours(S, 0)
     let parts = null
@@ -119,7 +127,12 @@ function plateParts(icon, B, S, rings) {
 // BODY: union of round strokes and fills, closed (dilate→erode) so inner
 // corners are generously rounded, then S-plate moats and cutouts.
 function body(icon) {
-  const lines = (icon.lines || []).filter(l => l.pts && l.pts.length)
+  // lettering knocked out of a mass (the free text was split off before) is carved as a groove below, never
+  // added as mass: its strokes would bridge the field's closing into stray bars between letters
+  const cSegs = segsOf((icon.cutouts || []).flatMap(c => (c.subs || []).filter(s => s.pts && s.pts.length).map(s => ({ pts: s.pts, closed: !!s.closed }))))
+  const onCut = q => cSegs.some(([ax, ay, bx, by]) => { const ex = bx - ax, ey = by - ay, L2 = ex * ex + ey * ey, px = q[0] - ax, py = q[1] - ay; const t = L2 > 1e-12 ? Math.max(0, Math.min(1, (px * ex + py * ey) / L2)) : 0; return Math.hypot(px - ex * t, py - ey * t) < 0.06 })
+  const isGlyph = l => typeof l.pathId === 'string' && l.pathId.startsWith('text:') && cSegs.length > 0 && l.pts.every(onCut)
+  const lines = (icon.lines || []).filter(l => l.pts && l.pts.length && !isGlyph(l))
   const baseLines = lines.filter(l => l.plate !== 'S')
   const sLines = lines.filter(l => l.plate === 'S')
 
@@ -144,10 +157,30 @@ function body(icon) {
   }
   const shape = Float32Array.from(depth)     // before cutouts: beans follow the silhouette
 
-  const cutClosed = [], cutOpen = []
+  // Live text knocked out of a mass is a groove at the font's weight, never a region: a closed glyph (D O 0)
+  // cut as a region would take its counter with it (a solid hole where the letter should be)
+  // (a cutout sub is lettering when every point lies on a glyph centreline: generators may split a glyph's knock-out
+  // at other points than the glyph path itself)
+  const gSegs = segsOf((icon.paths || []).filter(p => typeof p.id === 'string' && p.id.startsWith('text:')).flatMap(p => (p.subs || []).filter(s => s.pts && s.pts.length).map(s => ({ pts: s.pts, closed: !!s.closed }))))
+  const onGlyph = q => gSegs.some(([ax, ay, bx, by]) => { const ex = bx - ax, ey = by - ay, L2 = ex * ex + ey * ey, px = q[0] - ax, py = q[1] - ay; const t = L2 > 1e-12 ? Math.max(0, Math.min(1, (px * ex + py * ey) / L2)) : 0; return Math.hypot(px - ex * t, py - ey * t) < 0.06 })
+  const glyph = { has: pts => gSegs.length > 0 && pts.every(onGlyph) }
+  const cutClosed = [], cutOpen = [], cutText = []
   for (const c of icon.cutouts || []) for (const s of c.subs || []) {
     if (!s.pts || !s.pts.length) continue
-    if (s.closed && s.pts.length > 2) cutClosed.push(s.pts); else cutOpen.push({ pts: s.pts, closed: false })
+    if (glyph.has(s.pts)) cutText.push({ pts: s.pts, closed: !!s.closed })
+    // a label face's lettering band holds lettering only: a knock-out there that is not a glyph of this word is a
+    // stray piece of one (never carve it as a groove of its own)
+    else if (icon.params && LABEL_BAND[icon.name] && s.pts.every(q => q[1] > LABEL_BAND[icon.name][0] && q[1] < LABEL_BAND[icon.name][1])) continue
+    else if (s.closed && s.pts.length > 2) cutClosed.push(s.pts); else cutOpen.push({ pts: s.pts, closed: false })
+  }
+  // Live level columns (a thermometer's mercury): an A line inside a filled stem would vanish into the mass. The
+  // empty part of the bore beyond its end is carved as a groove, so the column reads as the black left standing.
+  if (icon.params && BORE_ICONS.has(icon.name)) for (const g of boreGrooves(baseLines, fillsBase)) cutOpen.push(g)
+  let textD = null
+  if (cutText.length) {
+    const dt = exactDist(segsOf(cutText), 2.2)
+    textD = dt
+    for (let k = 0; k < NN; k++) { if (dt[k] >= 2.2) continue; const v = dt[k] - TW / 2; if (v < depth[k]) depth[k] = v }
   }
   if (cutClosed.length) {
     const m = evenOddMask(cutClosed)
@@ -158,7 +191,88 @@ function body(icon) {
     const dc = distField(segsOf(cutOpen), CUT_BAND)
     for (let k = 0; k < NN; k++) { if (dc[k] >= CUT_BAND) continue; const v = dc[k] - CW / 2; if (v < depth[k]) depth[k] = v }
   }
-  return { depth, shape, lines }
+  // the column itself runs in a channel: the stem is carved around it and the mercury left standing as a rod, so a
+  // column that fills the whole bore still reads as a moving part (not as the solid stem)
+  if (icon.params && BORE_ICONS.has(icon.name)) {
+    const rods = boreRods(baseLines, fillsBase)
+    if (rods.length) {
+      const dc = exactDist(segsOf(rods), 2.2)
+      for (let k = 0; k < NN; k++) { if (dc[k] >= 2.2) continue; const v = dc[k] - 1.15; if (v < depth[k]) depth[k] = v }
+      for (let k = 0; k < NN; k++) { if (dc[k] >= 2.2) continue; const v = 0.5 - dc[k]; if (v > depth[k]) depth[k] = v }
+    }
+  }
+  const textBoxes = cutText.length ? (icon.paths || []).filter(p => typeof p.id === 'string' && p.id.startsWith('text:')).map(p => {
+    const P = (p.subs || []).flatMap(s => s.pts || [])
+    return P.length ? [Math.min(...P.map(q => q[0])) - 0.3, Math.min(...P.map(q => q[1])) - 0.3, Math.max(...P.map(q => q[0])) + 0.3, Math.max(...P.map(q => q[1])) + 0.3] : null
+  }).filter(Boolean) : null
+  return { depth, shape, lines, textD, textBoxes }
+}
+
+// exact unsigned distance to segments within band (glyph grooves: the propagated distField can leak a sliver into
+// a small counter, which reads as a broken letter)
+function exactDist(segs, band) {
+  const f = new Float32Array(NN).fill(band)
+  for (const [ax, ay, bx, by] of segs) {
+    const i0 = ci(Math.min(ax, bx) - band), i1 = ci(Math.max(ax, bx) + band), j0 = ci(Math.min(ay, by) - band), j1 = ci(Math.max(ay, by) + band)
+    const ex = bx - ax, ey = by - ay, L2 = ex * ex + ey * ey
+    for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+      const px = gx(i) - ax, py = gx(j) - ay
+      let t = L2 > 1e-12 ? (px * ex + py * ey) / L2 : 0; t = t < 0 ? 0 : t > 1 ? 1 : t
+      const d = Math.hypot(px - ex * t, py - ey * t), k = j * N + i
+      if (d < f[k]) f[k] = d
+    }
+  }
+  return f
+}
+
+// straight open A lines inside a fill: the stretch of fill beyond the line's far end (>= 1.1u from the fill's
+// edge), less a 1u gap, as an open groove polyline
+export function boreGrooves(lines, fills) {
+  const out = []
+  const rings = fills.flat()
+  if (!rings.length) return out
+  const inside = p => rings.reduce((a, r) => pointInRing(p, r) ? !a : a, false)
+  const edge = segsOf(rings.map(pts => ({ pts, closed: true })))
+  const dEdge = edge.length ? distField(edge, 3) : null
+  for (const l of lines) {
+    if (l.plate !== 'A' || l.closed || l.pts.length < 2) continue
+    const a = l.pts[0], b = l.pts[l.pts.length - 1], L = Math.hypot(b[0] - a[0], b[1] - a[1])
+    if (L < 2 || !l.pts.every(p => inside(p))) continue
+    const u = [(b[0] - a[0]) / L, (b[1] - a[1]) / L]
+    if (l.pts.some(p => Math.abs((p[0] - a[0]) * u[1] - (p[1] - a[1]) * u[0]) > 0.05)) continue // straight only
+    let t = 1.0, last = null
+    for (; t < 24; t += 0.1) {
+      const q = [b[0] + u[0] * t, b[1] + u[1] * t]
+      if (!inside(q) || (dEdge && sample(dEdge, q[0], q[1]) < 1.1)) break
+      last = q
+    }
+    const s0 = [b[0] + u[0] * 1.0, b[1] + u[1] * 1.0]
+    if (last && Math.hypot(last[0] - s0[0], last[1] - s0[1]) >= 0.4) out.push({ pts: [s0, last], closed: false })
+  }
+  return out
+}
+
+// the part of a live level column (a straight A line inside a fill) that runs in the narrow stem (not the bulb)
+function boreRods(lines, fills) {
+  const out = []
+  const rings = fills.flat()
+  if (!rings.length) return out
+  const inside = p => rings.reduce((a, r) => pointInRing(p, r) ? !a : a, false)
+  const edge = segsOf(rings.map(pts => ({ pts, closed: true })))
+  const dEdge = edge.length ? distField(edge, 4) : null
+  if (!dEdge) return out
+  for (const l of lines) {
+    if (l.plate !== 'A' || l.closed || l.pts.length !== 2) continue
+    const [a, b] = l.pts, L = Math.hypot(b[0] - a[0], b[1] - a[1])
+    if (L < 2 || !inside(a) || !inside(b)) continue
+    let s0 = null, s1 = null
+    for (let t = 0; t <= L; t += 0.1) {
+      const q = [a[0] + (b[0] - a[0]) * t / L, a[1] + (b[1] - a[1]) * t / L]
+      if (sample(dEdge, q[0], q[1]) < 2.6) { if (!s0) s0 = q; s1 = q }
+    }
+    if (s0 && s1 && Math.hypot(s1[0] - s0[0], s1[1] - s0[1]) >= 0.5) out.push({ pts: [s0, s1], closed: false })
+  }
+  return out
 }
 
 // approximate SDF (inside positive) of round strokes ∪ fills, exact outside

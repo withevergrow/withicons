@@ -87,7 +87,10 @@ export function auto(icon, opts = {}) {
   const Sl = lines.filter(l => plateOf(l) === 'S')
   // the text's knock-out cutouts are redrawn as the text itself
   const nearText = c => textL.length && c.pts.every(p => textL.some(l => distToPolyline(p, l.pts, l.closed) < 0.45))
-  const cutouts = sk.cutouts.filter(c => !nearText(c))
+  // Live icons: an open cutout that runs along no drawn line is a text knock-out (the font's own groove): it is
+  // never drawn as detail, with or without its text
+  const alongLine = c => all.some(l => c.pts.every(p => distToPolyline(p, l.pts, l.closed) < 0.3))
+  const cutouts = sk.cutouts.filter(c => !nearText(c) && (!live || c.closed || alongLine(c)))
 
   // fills belong to the plate whose lines run closest to their edge
   const fillsBy = { K: [], A: [], S: [] }
@@ -116,7 +119,16 @@ export function auto(icon, opts = {}) {
   let bodyF
   const glyph = !hasMass
   if (glyph) bodyF = F.strokes(bodyK, T.wl || A.WL, 2.4)
-  else { bodyF = F.strokes(bodyK, T.wk || A.WK, 2.4); F.union(bodyF, mass) }
+  else {
+    bodyF = F.strokes(bodyK, T.wk || A.WK, 2.4); F.union(bodyF, mass)
+    // Live icons part their outline to make room for a value (a file page, a sale burst): the satin body keeps
+    // its full silhouette there instead of stepping in by half a stroke (no notches in the side)
+    // (only along the run of the outline: where the generator draws no outline, the body has no edge to keep)
+    if (live && bodyK.length) {
+      const b = bbox(bodyK.flatMap(l => l.pts)), h = (T.wk || A.WK) / 2
+      F.union(bodyF, K.inter(F.offset(F.copy(mass), -h), K.rr(b.x0 - h, b.y0 - h, b.x1 + h, b.y1 + h, h)))
+    }
+  }
 
   // ---- S: badges and modifiers
   const closedS = Sl.filter(l => l.closed && l.pts.length > 2)
@@ -139,18 +151,38 @@ export function auto(icon, opts = {}) {
     else tFree.push(...ls)
   }
   const tw = ls => clampN(0.18 * Math.min(...ls.map(capOf)) * sk.s + 0.35, 1.0, 1.3)
+  // text written on the object keeps clear of its outline: a value that would touch the edge (a "45" in a
+  // timer's face) is set a little smaller about its centre, so no glyph ever runs into the wine outline
+  let tInQ = 1   // the fit's scale: the line is set finer with the letters, so their counters stay open
+  if (tIn.length && hasMass && T.fitText !== false) {
+    const pts = tIn.flatMap(l => resample(l.pts, 0.2, l.closed).map(o => o.p).concat([l.pts[0], l.pts[l.pts.length - 1]]))
+    const b = bbox(tIn.flatMap(l => l.pts)), c = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]
+    // the line is set finer with the letters (tInQ), so the clearance shrinks with them
+    const ok = (q, dx = 0) => pts.every(p => sample(bodyF, [c[0] + dx + (p[0] - c[0]) * q, c[1] + (p[1] - c[1]) * q]) <= -(Math.max(0.9, tw(tIn) * q) / 2 + 1.05))
+    // (a value wider than its object, as on a sale sticker whose outline parts for the text, is left as drawn)
+    // the largest size >= 0.78 that fits, centred or slid up to 1.5u sideways (a price beside a tag's eyelet)
+    let best = null
+    if (!ok(1)) for (let q = 1; q >= 0.779 && !best; q -= 0.02) for (const dx of [0, -0.25, 0.25, -0.5, 0.5, -0.75, 0.75, -1, 1, -1.25, 1.25, -1.5, 1.5]) if (ok(q, dx)) { best = [q, dx]; break }
+    if (best) {
+      const [q, dx] = best
+      tInQ = q
+      for (let i = 0; i < tIn.length; i++) tIn[i] = { ...tIn[i], pts: tIn[i].pts.map(([x, y]) => [c[0] + dx + (x - c[0]) * q, c[1] + (y - c[1]) * q]) }
+    }
+  }
   // free text rows merge into label plates (a two-row clock face is one plate)
   let plateF = null
   const plates = []
   if (tFree.length) {
     const w = tw(tFree), pad = w / 2 + 1.3, padX = pad + 0.2
+    // the plate (outline + its cast shadow) keeps EDGE clear of the canvas border
+    const EDGE = 1.25, X0 = EDGE, X1 = 24 - EDGE, Y0 = EDGE, Y1 = 24 - EDGE
     // fit: text too wide for a plate on the canvas shrinks a little (never below 0.75) and
     // slides inside, so the plate keeps an even margin round it
     {
-      const B = bbox(tFree.flatMap(l => l.pts)), maxW = 22.6 - 2 * padX
+      const B = bbox(tFree.flatMap(l => l.pts)), maxW = (X1 - X0) - 2 * padX
       const q = B.w > maxW ? Math.max(0.75, maxW / B.w) : 1, cx = (B.x0 + B.x1) / 2, cy = (B.y0 + B.y1) / 2
       const hw = B.w * q / 2
-      const dx = Math.max(0, 0.7 + padX - (cx - hw)) - Math.max(0, cx + hw + padX - 23.3)
+      const dx = Math.max(0, X0 + padX - (cx - hw)) - Math.max(0, cx + hw + padX - X1)
       if (q < 1 || Math.abs(dx) > 1e-6) for (let i = 0; i < tFree.length; i++) tFree[i] = { ...tFree[i], pts: tFree[i].pts.map(([x, y]) => [cx + (x - cx) * q + dx, cy + (y - cy) * q]) }
     }
     const boxes = [...new Set(tFree.map(l => l.pathId))].map(id => bbox(tFree.filter(l => l.pathId === id).flatMap(l => l.pts))).map(b => [b.x0, b.y0, b.x1, b.y1])
@@ -165,9 +197,50 @@ export function auto(icon, opts = {}) {
         }
       }
     }
-    for (const b of boxes) {
-      const x0 = Math.max(0.7, b[0] - padX), x1 = Math.min(23.3, b[2] + padX)
-      const y0 = Math.max(0.7, b[1] - pad), y1 = Math.min(23.3, b[3] + pad)
+    // what the plate must not cover: the drawing (body, gold parts, badges, pearls) at its painted width
+    const draw = F.copy(bodyF)
+    if (badgeF) F.union(draw, badgeF)
+    if (bandF) F.union(draw, bandF)
+    if (Al.length) F.strokes(Al, A.WA, 2.4, draw)
+    if (dotL.length) F.strokes(dotL, 2.7, 2.4, draw)
+    const GAP = 0.8, minPad = w / 2 + 0.55
+    const padsFor = b => {
+      // each side's margin shrinks (down to minPad) until the plate stands clear of the drawing: a label
+      // beside a thermometer never sits on its tube
+      const pads = [padX, pad, padX, pad] // l t r b
+      for (let it = 0; it < 80; it++) {
+        const x0 = b[0] - pads[0], y0 = b[1] - pads[1], x1 = b[2] + pads[2], y1 = b[3] + pads[3]
+        const hit = [0, 0, 0, 0]
+        for (let y = y0 - GAP; y <= y1 + GAP; y += 0.2) for (let x = x0 - GAP; x <= x1 + GAP; x += 0.2) {
+          if (sample(draw, [x, y]) > 0) continue
+          const dl = b[0] - x, dt = b[1] - y, dr = x - b[2], db = y - b[3]
+          const m = Math.max(dl, dt, dr, db)
+          if (m <= 0) continue
+          hit[[dl, dt, dr, db].indexOf(m)]++
+        }
+        let moved = false
+        for (let k = 0; k < 4; k++) if (hit[k] && pads[k] > minPad) { pads[k] = Math.max(minPad, pads[k] - 0.1); moved = true }
+        if (!moved) break
+      }
+      return pads
+    }
+    for (const b0 of boxes) {
+      let b = b0, pads = padsFor(b)
+      // a squeezed side slides the label (text and plate) away from the drawing, up to 0.9u, where the canvas allows
+      const lim = 0.9
+      let dx = 0, dy = 0
+      if (pads[0] < padX) dx = Math.max(0, Math.min(lim, padX - pads[0], X1 - (b[2] + padX)))
+      else if (pads[2] < padX) dx = -Math.max(0, Math.min(lim, padX - pads[2], (b[0] - padX) - X0))
+      if (pads[1] < pad) dy = Math.max(0, Math.min(lim, pad - pads[1], Y1 - (b[3] + pad)))
+      else if (pads[3] < pad) dy = -Math.max(0, Math.min(lim, pad - pads[3], (b[1] - pad) - Y0))
+      if (dx || dy) {
+        const inB = l => l.pts.every(([x, y]) => x >= b[0] - 1e-6 && x <= b[2] + 1e-6 && y >= b[1] - 1e-6 && y <= b[3] + 1e-6)
+        for (let i = 0; i < tFree.length; i++) if (inB(tFree[i])) tFree[i] = { ...tFree[i], pts: tFree[i].pts.map(([x, y]) => [x + dx, y + dy]) }
+        b = [b[0] + dx, b[1] + dy, b[2] + dx, b[3] + dy]
+        pads = padsFor(b)
+      }
+      const x0 = Math.max(X0, b[0] - pads[0]), x1 = Math.min(X1, b[2] + pads[2])
+      const y0 = Math.max(Y0, b[1] - pads[1]), y1 = Math.min(Y1, b[3] + pads[3])
       plates.push({ box: [x0, y0, x1, y1], f: K.rr(x0, y0, x1, y1, Math.min(2.2, (y1 - y0) / 2, (x1 - x0) / 2)) })
     }
     plateF = K.union(plates.map(p => p.f))
@@ -218,7 +291,11 @@ export function auto(icon, opts = {}) {
     parts.push(K.rose(moat(f), { plate: 'A', ow: 0.8 }))
   }
   if (innerA.length) parts.push(K.ink(moat(F.strokes(innerA, A.WD + 0.1, 2.4)), 0, { plate: 'A' }))
-  if (tIn.length) parts.push(K.ink(F.strokes(tIn, tw(tIn), 2.4), 0, { plate: 'A' }))
+  if (live && T.ribbon) {
+    const [a, b] = [sk.tf([0.75, T.ribbon[0]]), sk.tf([23.25, T.ribbon[1]])]
+    parts.push(K.cream(K.rr(a[0], a[1], b[0], b[1], 1.1), { plate: 'K', ow: 0.55 }))
+  }
+  if (tIn.length) parts.push(K.ink(F.strokes(tIn, Math.max(0.9, tw(tIn) * tInQ), 2.4), 0, { plate: 'A' }))
   // S on top
   if (badgeF) {
     parts.push(K.satin(unplate(badgeF), { plate: 'S' }))
@@ -229,7 +306,15 @@ export function auto(icon, opts = {}) {
   // pearls for dots (Live icons: a little bigger, so a row of them never reads as specks)
   if (dotL.length) {
     const byPlate = {}
+    // Live icons: a ring among plain dots is the MARKED one (a calendar's day): it is tied in ribbon-red satin,
+    // a little bigger, so the value reads at a glance and never as one more pearl
+    const marked = live && dotL.some(l => l.dot) ? dotL.filter(l => !l.dot) : []
+    for (const l of marked) {
+      const b = bbox(l.pts), c = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]
+      parts.push(K.satin(moat(K.disc(c[0], c[1], Math.max(1.45, Math.max(b.w, b.h) / 2 + 0.75))), { plate: plateOf(l), ow: 0.5 }))
+    }
     for (const l of dotL) {
+      if (marked.includes(l)) continue
       const b = bbox(l.pts), c = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]
       const r = l.dot ? (live ? 1.35 : 1.2) : Math.max(1.1, Math.max(b.w, b.h) / 2 + 0.6)
       const pl = plateOf(l)
@@ -256,7 +341,7 @@ export function auto(icon, opts = {}) {
     if (orn === 'heart' && b && !b.heart) parts.push(K.heart(b.x - Math.sign(b.rot) * 0.3, b.y + 0.5, 5.2, b.rot * 0.6, { plate: 'K' }))
     else if (orn === 'plate' || (b && b.heart && plates.length)) {
       const p = plates.slice().sort((u, v) => (u.box[1] - v.box[1]) || (u.box[0] - v.box[0]))[0]
-      if (p) parts.push(...K.bow(Math.max(2.1, p.box[0] + 0.25), Math.max(1.9, p.box[1] + 0.15), 0.38, -20))
+      if (p) parts.push(...K.bow(Math.max(2.9, p.box[0] + 0.25), Math.max(2.5, p.box[1] + 0.15), 0.38, -20))
     } else if (b && !b.heart) parts.push(...K.bow(b.x, b.y, T.bow && T.bow.s ? b.s : s0 || b.s, b.rot))
   }
   if (T.extra) parts.push(...[].concat(T.extra(K, { icon, sk, params: icon.params || null }) || []))

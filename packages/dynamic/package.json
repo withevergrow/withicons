@@ -47,13 +47,14 @@
     "./dist/styles/*.js",
     "./dist/chunks/*.js",
     "./dist/cdn/*.js",
-    "./dist/cdn/styles/*.js"
+    "./dist/cdn/styles/*.js",
+    "./dist/cdn/gens/*.js"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "unpkg": "./dist/cdn/dynamic.js",
-  "jsdelivr": "./dist/cdn/dynamic.js",
+  "unpkg": "./dist/cdn/lite.js",
+  "jsdelivr": "./dist/cdn/lite.js",
   "exports": {
     ".": {
       "import": {
@@ -86,6 +87,7 @@
       "default": "./dist/styles/*.js"
     },
     "./cdn": "./dist/cdn/dynamic.js",
+    "./cdn/lite": "./dist/cdn/lite.js",
     "./package.json": "./package.json"
   },
   "typesVersions": {

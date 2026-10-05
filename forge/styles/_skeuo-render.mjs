@@ -10,8 +10,12 @@ const SHADOW = '#15110D', SHINE = '#FFFFFF'
 // enamel status buttons: their glyph is a raised white inlay, not a debossed groove
 const EMBOSS = /^(alert-circle|check-circle|check-square|x-circle|help-circle|info-circle|plus-circle|minus-circle|square-(plus|minus|x)|circle-(arrow|chevron|play|pause|stop)(-.*)?|badge-check|badge-percent|shield-check|ban|accessibility|user-circle)$/
 
-export function draw(icon) {
+// Live icons that letter a value (opt.lettered): their surfaces keep a softer gloss and no glint, so the
+// lettering set on them later reads edge to edge at 24px (the same at every value: the text is never consulted)
+const SOFT = { specK: 0.35, noHot: true }
+export function draw(icon, opt = {}) {
   let T = tune(icon)
+  if (opt.lettered) T = { ...T, bodyOpt: { ...SOFT, ...(T.bodyOpt || {}) }, badgeOpt: { ...SOFT, ...(T.badgeOpt || {}) }, zones: (T.zones || []).map(z => ({ ...z, opt: { ...SOFT, ...(z.opt || {}) } })), inlayOpt: SOFT }
   if (EMBOSS.test(icon.name) && !T.grooveAs) T = { grooveAs: 'emboss', groove: 1.5, ...T }
   const custom = redraw(icon, T)
   if (custom) return custom
@@ -103,7 +107,7 @@ export function paint(B, M, T = {}) {
   if (T.inlay && B.body) {
     const G = F.offset(F.copy(B.body), T.inlay.inset ?? 1.15)
     if (F.any(G)) {
-      piece(out, G, 'c4', MAT[T.inlay.mat] || M.screen, { ...(T.inlay.opt || {}) })
+      piece(out, G, 'c4', MAT[T.inlay.mat] || M.screen, { ...(T.inlayOpt || {}), ...(T.inlay.opt || {}) })
       out.fill(litBand(G, 0.5), shadow, 0.3)
     }
   }

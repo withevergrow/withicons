@@ -23,12 +23,12 @@ const { N } = G
 // ── bitmap fonts (original drawings; '#' = pixel) ───────────────────────────────────────────────────────
 const F5 = {
   0: ['###', '#.#', '#.#', '#.#', '###'], 1: ['.#', '##', '.#', '.#', '.#'], 2: ['###', '..#', '###', '#..', '###'],
-  3: ['###', '..#', '.##', '..#', '###'], 4: ['#.#', '#.#', '###', '..#', '..#'], 5: ['###', '#..', '###', '..#', '###'],
-  6: ['###', '#..', '###', '#.#', '###'], 7: ['###', '..#', '..#', '.#.', '.#.'], 8: ['###', '#.#', '###', '#.#', '###'],
-  9: ['###', '#.#', '###', '..#', '###'],
+  3: ['###', '..#', '.##', '..#', '###'], 4: ['#.#', '#.#', '###', '..#', '..#'], 5: ['###', '#..', '##.', '..#', '##.'],
+  6: ['.##', '#..', '###', '#.#', '###'], 7: ['###', '..#', '..#', '.#.', '.#.'], 8: ['###', '#.#', '###', '#.#', '###'],
+  9: ['###', '#.#', '###', '..#', '##.'],
   A: ['.#.', '#.#', '###', '#.#', '#.#'], B: ['##.', '#.#', '##.', '#.#', '##.'], C: ['.##', '#..', '#..', '#..', '.##'],
   D: ['##.', '#.#', '#.#', '#.#', '##.'], E: ['###', '#..', '##.', '#..', '###'], F: ['###', '#..', '##.', '#..', '#..'],
-  G: ['.##', '#..', '#.#', '#.#', '.##'], H: ['#.#', '#.#', '###', '#.#', '#.#'], I: ['###', '.#.', '.#.', '.#.', '###'],
+  G: ['.##', '#..', '#.#', '#.#', '.##'], H: ['#.#', '#.#', '###', '#.#', '#.#'], I: ['#', '#', '#', '#', '#'],
   J: ['..#', '..#', '..#', '#.#', '.#.'], K: ['#.#', '#.#', '##.', '#.#', '#.#'], L: ['#..', '#..', '#..', '#..', '###'],
   M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'], N: ['#..#', '##.#', '#.##', '#..#', '#..#'],
   O: ['.#.', '#.#', '#.#', '#.#', '.#.'], P: ['##.', '#.#', '##.', '#..', '#..'], Q: ['.#.', '#.#', '#.#', '##.', '.##'],
@@ -36,7 +36,7 @@ const F5 = {
   U: ['#.#', '#.#', '#.#', '#.#', '###'], V: ['#.#', '#.#', '#.#', '#.#', '.#.'],
   W: ['#...#', '#...#', '#.#.#', '##.##', '#...#'], X: ['#.#', '#.#', '.#.', '#.#', '#.#'], Y: ['#.#', '#.#', '.#.', '.#.', '.#.'],
   Z: ['###', '..#', '.#.', '#..', '###'],
-  '%': ['#.#', '..#', '.#.', '#..', '#.#'], '°': ['##', '##', '..', '..', '..'], ':': ['.', '#', '.', '#', '.'],
+  '%': ['..#', '#.#', '.#.', '#.#', '#..'], '°': ['###', '#.#', '###', '...', '...'], ':': ['.', '#', '.', '#', '.'],
   '-': ['..', '..', '##', '..', '..'], '+': ['...', '.#.', '###', '.#.', '...'], '/': ['..#', '..#', '.#.', '#..', '#..'],
   '.': ['.', '.', '.', '.', '#'], ',': ['.', '.', '.', '#', '#'], '!': ['#', '#', '#', '.', '#'], '?': ['##.', '..#', '.#.', '...', '.#.'],
   $: ['.##', '##.', '.#.', '.##', '##.'], '€': ['.##', '#..', '###', '#..', '.##'], '£': ['.##', '.#.', '###', '.#.', '###'],
@@ -47,12 +47,12 @@ const F4 = {
   0: ['###', '#.#', '#.#', '###'], 1: ['.#', '##', '.#', '.#'], 2: ['##.', '..#', '.#.', '###'], 3: ['###', '.##', '..#', '###'],
   4: ['#.#', '###', '..#', '..#'], 5: ['###', '##.', '..#', '##.'], 6: ['#..', '###', '#.#', '###'], 7: ['###', '..#', '.#.', '.#.'],
   8: ['###', '###', '#.#', '###'], 9: ['###', '#.#', '###', '..#'],
-  '+': ['...', '.#.', '###', '.#.'], '-': ['..', '..', '##', '..'], '%': ['#.#', '..#', '#..', '#.#'], '°': ['##', '##', '..', '..'],
+  '+': ['...', '.#.', '###', '.#.'], '-': ['..', '..', '##', '..'], '%': ['#.#', '.#.', '.#.', '#.#'], '°': ['###', '#.#', '###', '...'],
   ':': ['.', '#', '.', '#'], '.': ['.', '.', '.', '#'], '!': ['#', '#', '.', '#'], '/': ['..#', '.#.', '.#.', '#..'],
   // 4-row capitals: a calendar header or a label that has no room for five rows
   A: ['.#.', '#.#', '###', '#.#'], B: ['##.', '##.', '#.#', '###'], C: ['.##', '#..', '#..', '.##'], D: ['##.', '#.#', '#.#', '##.'],
   E: ['###', '##.', '#..', '###'], F: ['###', '#..', '##.', '#..'], G: ['.##', '#..', '#.#', '.##'], H: ['#.#', '###', '#.#', '#.#'],
-  I: ['###', '.#.', '.#.', '###'], J: ['..#', '..#', '#.#', '.#.'], K: ['#.#', '##.', '#.#', '#.#'], L: ['#..', '#..', '#..', '###'],
+  I: ['#', '#', '#', '#'], J: ['..#', '..#', '#.#', '.#.'], K: ['#.#', '##.', '#.#', '#.#'], L: ['#..', '#..', '#..', '###'],
   M: ['#...#', '##.##', '#.#.#', '#...#'], N: ['#..#', '##.#', '#.##', '#..#'], O: ['.#.', '#.#', '#.#', '.#.'],
   P: ['##.', '#.#', '##.', '#..'], Q: ['.#.', '#.#', '#.#', '.##'], R: ['##.', '#.#', '##.', '#.#'], S: ['.##', '##.', '..#', '##.'],
   T: ['###', '.#.', '.#.', '.#.'], U: ['#.#', '#.#', '#.#', '###'], V: ['#.#', '#.#', '#.#', '.#.'],
@@ -62,20 +62,24 @@ const F4 = {
 const F5N = { ...F5, M: ['#.#', '###', '###', '#.#', '#.#'], W: ['#.#', '#.#', '###', '###', '#.#'], N: ['##.', '#.#', '#.#', '#.#', '#.#'] }
 const F4N = { ...F4, M: ['#.#', '###', '###', '#.#'], W: ['#.#', '###', '###', '#.#'], N: ['##.', '#.#', '#.#', '#.#'] }
 // condensed: the letters that stay legible two pixels wide (and a one-pixel I), for a word one pixel too long
-const F5C = { ...F5N, '#': ['#.#', '###', '#.#', '###', '#.#'], C: ['##', '#.', '#.', '#.', '##'], E: ['##', '#.', '##', '#.', '##'], F: ['##', '#.', '##', '#.', '#.'], I: ['#', '#', '#', '#', '#'], L: ['#.', '#.', '#.', '#.', '##'] }
-const F4C = { ...F4N, C: ['##', '#.', '#.', '##'], E: ['##', '##', '#.', '##'], F: ['##', '#.', '##', '#.'], I: ['#', '#', '#', '#'], L: ['#.', '#.', '#.', '##'] }
+const F5C = { ...F5N, '°': ['##', '##', '..', '..', '..'], '/': ['.#', '.#', '.#', '#.', '#.'], '#': ['#.#', '###', '#.#', '###', '#.#'], C: ['##', '#.', '#.', '#.', '##'], E: ['##', '#.', '##', '#.', '##'], F: ['##', '#.', '##', '#.', '#.'], I: ['#', '#', '#', '#', '#'], L: ['#.', '#.', '#.', '#.', '##'] }
+const F4C = { ...F4N, '/': ['.#', '.#', '#.', '#.'], C: ['##', '#.', '#.', '##'], E: ['##', '##', '#.', '##'], F: ['##', '#.', '##', '#.'], I: ['#', '#', '#', '#'], L: ['#.', '#.', '#.', '##'] }
 for (const [f, h] of [[F5, 5], [F5N, 5], [F5C, 5], [F4, 4], [F4N, 4], [F4C, 4]]) Object.defineProperty(f, 'h', { value: h })
 const FONTS = [F5, F5N, F5C, F4, F4N, F4C]
 
-// a string of characters in a font -> { w, h, cells: [[i, j]] } or null when a character is missing
-function setLine(chars, font) {
+// a string of characters in a font -> { w, h, cells: [[i, j]] } or null when a character is missing. With xs (a
+// cell offset per glyph, from where the stroke font puts it), each glyph starts no earlier than its offset: the
+// pixel word keeps the drawing's own letter spacing (one clear column at least)
+function setLine(chars, font, xs = null) {
   const cells = []
-  let x = 0
+  let x = 0, n = 0
   for (const ch of chars) {
     if (ch === ' ') { x += 2; continue }
     const g = font[ch]
     if (!g) return null
     if (x) x += 1
+    if (xs) x = Math.max(x, xs[n] ?? 0)
+    n++
     g.forEach((row, j) => [...row].forEach((c, i) => { if (c === '#') cells.push([x + i, j]) }))
     x += g[0].length
   }
@@ -92,6 +96,17 @@ const nearLines = (p, lines, tol) => lines.some(l => {
   for (let k = 0; k + 1 < l.pts.length; k++) if (dist2(p, l.pts[k], l.pts[k + 1]) <= tol * tol) return true
   return false
 })
+
+// the first (most legible; or with narrowest, the narrowest) setting of a string in rows-tall pixel letters that is
+// at most maxW cells wide, or null
+export function fitPixelText(chars, maxW, rows = 5, narrowest = false) {
+  for (const f of narrowest ? FONTS.slice().reverse() : FONTS) {
+    if (f.h !== rows) continue
+    const t = setLine(chars, f)
+    if (t && t.w <= maxW) return t
+  }
+  return null
+}
 
 export function pixelText(icon) {
   const glyphs = []
@@ -122,6 +137,8 @@ export function pixelText(icon) {
     let s = ''
     l.glyphs.forEach((g, k) => { if (k && g.x0 - l.glyphs[k - 1].x1 > l.cap * 0.9) s += ' '; s += g.ch })
     l.chars = s
+    // (two-letter words only: there a narrow I or 1 packed tight pulls its letter away from where it is drawn)
+    l.xs = l.glyphs.length === 2 ? l.glyphs.map(g => Math.round((g.x0 - l.x0) / G.P)) : null
   }
   const ids = new Set(glyphs.map(g => g.id))
   const textLines = (icon.lines || []).filter(l => ids.has(l.pathId))
@@ -139,6 +156,13 @@ export function pixelText(icon) {
     lines: lines.sort((a, b) => b.cap - a.cap || a.cy - b.cy),
   }
 }
+
+// live icons that letter a value on their face: the face is matte (no highlight pixel), so nothing on it moves
+// or vanishes when the value changes (a highlight beside a glyph reads as an apostrophe; on a die, as a pip)
+export const LABEL_FACE = new Set(['avatar-initials', 'badge-text', 'battery-percent', 'calendar-date', 'calendar-event', 'calendar-month',
+  'calendar-range', 'calendar-tear', 'calendar-weekday', 'cellular-tech', 'digital-clock', 'file-type', 'folder-label',
+  'humidity', 'keycap', 'map-pin-number', 'percent-badge', 'price-tag', 'progress-ring', 'ribbon-label', 'sale-sticker',
+  'speech-bubble-text', 'step-number', 'tag-label', 'ticket-number', 'timer-ring', 'uv-index', 'dice'])
 
 const N4 = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 const FONT_COST = new Map([[F5, 0], [F5N, 6], [F5C, 9], [F4, 12], [F4N, 16], [F4C, 19]])
@@ -187,20 +211,26 @@ function candidates(L, ln, icon, sh) {
   const detail = (i, j) => G.get(L.ink, i, j) && R && G.get(R, i, j) && [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].every(([a, b]) => G.get(R, i + a, j + b))
   const badge = ln.plate === 'S' && R
   const out = []
-  for (const font of FONTS) {
-    const s = setLine(ln.chars, font)
-    if (!s) continue
-    const fc = FONT_COST.get(font)
+  for (const font of FONTS) for (const spread of [false, true]) {
+    const packed = setLine(ln.chars, font)
+    const s = spread ? (ln.xs ? setLine(ln.chars, font, ln.xs) : null) : packed
+    if (!s || (spread && packed && s.w === packed.w)) continue
+    // cut out of solid ink (band / fill / pill), an 8 is drawn round: its two counters then touch the solid at their
+    // corners instead of floating as single-pixel islands inside a knockout that runs into the frame's outline
+    const ko = font.h === 5 && ln.chars.includes('8') ? (() => { const f = { ...font, 8: ['.#.', '#.#', '.#.', '#.#', '.#.'] }; return spread ? (ln.xs ? setLine(ln.chars, f, ln.xs) : s) : setLine(ln.chars, f) })() : s
+    // the drawing's spacing scores a little better than the tight pack (letters sit where line puts them)
+    const fc = FONT_COST.get(font) - (spread ? 3 : 0)
     const i0 = Math.round(centre[0] - s.w / 2), j0 = Math.round(centre[1] - s.h / 2)
     for (let dy = -3; dy <= 3; dy++) for (let dx = -2; dx <= 2; dx++) {
       const glyph = s.cells.map(([i, j]) => [i0 + dx + i, j0 + dy + j])
       if (!glyph.every(([i, j]) => G.inb(i, j))) continue
-      const off = 5 * Math.abs(dx) + 4 * Math.abs(dy)
+      // glyphs on the canvas edge read as cut off (and a live icon may not lean on the edge): a narrower font wins
+      const off = 5 * Math.abs(dx) + 4 * Math.abs(dy) + (glyph.some(([i, j]) => i === 0 || j === 0 || i === N - 1 || j === N - 1) ? 30 : 0)
       if (badge) {
         if (glyph.every(([i, j]) => inner(i, j))) {
           const solid = []
           for (let k = 0; k < N * N; k++) if (R[k]) solid.push([k % N, (k - k % N) / N])
-          out.push({ score: 100 - fc - off, mode: 'fill', glyph, solid, clear: [] })
+          out.push({ score: 100 - fc - off, mode: 'fill', glyph: ko.cells.map(([i, j]) => [i0 + dx + i, j0 + dy + j]), solid, clear: [] })
         }
         continue
       }
@@ -209,31 +239,48 @@ function candidates(L, ln, icon, sh) {
       // last resort inside a frame: glyphs may touch its outline (never a detail inside it)
       else if (R && glyph.every(([i, j]) => G.get(R, i, j) && !G.get(L.ink, i, j) && !N4.some(([a, b]) => detail(i + a, j + b))))
         out.push({ score: 35 - fc - off, mode: 'on', glyph, solid: [], clear: [] })
+      // a word wider than its frame: the live skeleton opens the frame's sides for it (forge/DYNAMIC.md), so the
+      // glyphs may run out through the opening, as long as they keep a clear pixel from every line
+      else if (R && glyph.every(([i, j]) => !G.get(L.ink, i, j) && !N4.some(([a, b]) => G.get(L.ink, i + a, j + b))))
+        out.push({ score: 58 - fc - off, mode: 'on', glyph, solid: [], clear: [] })
       if (R && glyph.every(([i, j]) => inner(i, j))) {
         const t = j0 + dy - 1, b = j0 + dy + s.h, solid = []
         for (let j = t; j <= b; j++) for (let i = 0; i < N; i++) if (G.get(R, i, j)) solid.push([i, j])
         const halo = dilate(solid)
         let ok = true
         for (let k = 0; k < N * N && ok; k++) if (halo[k] && detail(k % N, (k - k % N) / N)) ok = false
-        if (ok) out.push({ score: 72 - fc - off, mode: 'band', glyph, solid, clear: [] })
+        if (ok) out.push({ score: 72 - fc - off, mode: 'band', glyph: ko.cells.map(([i, j]) => [i0 + dx + i, j0 + dy + j]), solid, clear: [] })
       }
     }
-    // a pill sized to the glyphs, centred on the badge and kept on the grid
+    // a pill sized to the glyphs, centred on the badge and kept on the grid; a pill wider than its badge may slide a
+    // cell along the row, toward where it cuts less of the drawing around it (its moat clears that ink)
     if (badge) {
       const w = s.w + 2, h = s.h + 2
       if (w > N || h > N) continue
-      const pi = Math.max(0, Math.min(N - w, Math.round(centre[0] - w / 2))), pj = Math.max(0, Math.min(N - h, Math.round(centre[1] - h / 2)))
-      const solid = []
-      for (let j = pj; j < pj + h; j++) for (let i = pi; i < pi + w; i++) {
-        if ((i === pi || i === pi + w - 1) && (j === pj || j === pj + h - 1)) continue
-        solid.push([i, j])
+      const pc = Math.max(0, Math.min(N - w, Math.round(centre[0] - w / 2))), pj = Math.max(0, Math.min(N - h, Math.round(centre[1] - h / 2)))
+      for (const pi of [pc, pc + 1, pc - 1]) {
+        if (pi < 0 || pi > N - w) continue
+        const solid = []
+        for (let j = pj; j < pj + h; j++) for (let i = pi; i < pi + w; i++) {
+          if ((i === pi || i === pi + w - 1) && (j === pj || j === pj + h - 1)) continue
+          solid.push([i, j])
+        }
+        const glyph = ko.cells.map(([i, j]) => [pi + 1 + i, pj + 1 + j])
+        const pill = G.grid(); for (const [i, j] of solid) pill[G.ix(i, j)] = 1
+        const moat = dilate(solid), clear = []
+        let cut = 0
+        for (let k = 0; k < N * N; k++) if ((moat[k] || R[k]) && !pill[k]) { clear.push([k % N, (k - k % N) / N]); if (L.ink[k] && !R[k]) cut++ }
+        for (let k = 0; k < N * N; k++) if (pill[k] && L.ink[k] && !R[k]) cut++
+        // a slid pill may not lean on the canvas edge more than the drawing already does (a corner cell or two)
+        if (pi !== pc) {
+          let edge = 0
+          const cl = G.grid(); for (const [i, j] of clear) cl[G.ix(i, j)] = 1
+          for (let k = 0; k < N * N; k++) { const i = k % N, j = (k - i) / N; if ((i === 0 || j === 0 || i === N - 1 || j === N - 1) && (pill[k] || (L.ink[k] && !cl[k]))) edge++ }
+          if (edge > 6) continue
+        }
+        const off = Math.abs(pi + w / 2 - centre[0]) + Math.abs(pj + h / 2 - centre[1])
+        out.push({ score: 60 - solid.length / 2 - 2 * off - (pi === pc ? 0 : 1) - (w > 10 ? 1.5 * cut : 0), mode: 'pill', glyph, solid, clear })
       }
-      const glyph = s.cells.map(([i, j]) => [pi + 1 + i, pj + 1 + j])
-      const pill = G.grid(); for (const [i, j] of solid) pill[G.ix(i, j)] = 1
-      const moat = dilate(solid), clear = []
-      for (let k = 0; k < N * N; k++) if ((moat[k] || R[k]) && !pill[k]) clear.push([k % N, (k - k % N) / N])
-      const off = Math.abs(pi + w / 2 - centre[0]) + Math.abs(pj + h / 2 - centre[1])
-      out.push({ score: 60 - solid.length / 2 - 2 * off, mode: 'pill', glyph, solid, clear })
     }
   }
   // the same cells from two fonts (no M, W or N in the line): keep the better one

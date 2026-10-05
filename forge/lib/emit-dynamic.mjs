@@ -82,8 +82,30 @@ function livePlugin({ gens, styles, version, mode }) {
   const styleFile = n => posix(path.join(STY, styles.find(s => s.name === n).file + '.mjs'))
   const KERNEL = { geom: posix(path.join(ROOT, 'forge', 'kernel', 'geom.mjs')), bool: posix(path.join(ROOT, 'forge', 'kernel', 'bool.mjs')) }
   const others = styles.filter(s => s.name !== 'line').map(s => s.name)
+  const FONT = posix(path.join(DYN, '_font.mjs'))
+  // the CDN lite script: each generator as metadata only (what list / get / catalog / validate read); its build() is
+  // a separate file, cdn/gens/<name>.js, fetched the first time that live icon draws
+  const STUB_KEYS = ['name', 'title', 'category', 'description', 'aliases', 'tags', 'synonyms', 'params', 'examples']
+  const stub = g => Object.fromEntries(STUB_KEYS.filter(k => g[k] !== undefined).map(k => [k, g[k]]))
+  // the classic CDN entry; lazy: generators load on demand (cdn/lite.js), else all inline (cdn/dynamic.js)
+  const cdnEntry = lazy => `import * as core from ${J(CORE)}\nimport * as el from ${J(ELEMENT)}\nimport line from ${J(styleFile('line'))}\n` +
+      `import * as geom from ${J(KERNEL.geom)}\nimport * as bool from ${J(KERNEL.bool)}\n${lazy ? `import * as font from ${J(FONT)}\n` : ''}` +
+      `const inWorker = typeof document === 'undefined' && typeof importScripts === 'function' && typeof self !== 'undefined'\n` +
+      `const cs = typeof document !== 'undefined' && (document.currentScript || [].slice.call(document.querySelectorAll ? document.querySelectorAll('script[src*="dynamic"]') : []).pop())\n` +
+      `const src = inWorker ? (self.WITH_LIVE_SRC || '') : cs && cs.src ? cs.src : ''\n` +
+      `const base = src ? src.replace(/[^/]*([?#].*)?$/, '') : ''\n` +
+      `const file = (dir, n) => new Promise((ok, bad) => { const u = base + dir + '/' + n + '.js'; if (inWorker) { try { importScripts(u); return ok() } catch (e) { return bad(new Error('with icons live: could not load ' + u)) } } if (typeof document === 'undefined') return bad(new Error('with icons live: ' + dir + '/' + n + '.js needs a document to load; include it with a script tag')); const s = document.createElement('script'); s.src = u; s.async = true; s.onload = () => ok(); s.onerror = () => bad(new Error('with icons live: could not load ' + u)); document.head.appendChild(s) })\n` +
+      `const script = n => file('styles', n)\n` +
+      `core.register(line)\ncore.setLoaders({ ${others.map(n => `${J(n)}: () => script(${J(n)})`).join(', ')} })\n` +
+      (lazy ? `core.setIconLoader(n => file('gens', n))\n` : '') +
+      `const api = Object.assign({}, core, { WithLiveIconElement: el.WithLiveIconElement, defineLiveIcon: el.defineLiveIcon, __kernel: { geom, bool }${lazy ? ', __font: font' : ''} })\n` +
+      `globalThis.WithLive = api\n` +
+      `if (inWorker) core.serveWorker(self)\n` +
+      `else {\n  el.defineLiveIcon()\n` +
+      `  if (src && typeof Worker === 'function' && typeof Blob === 'function' && typeof URL !== 'undefined' && URL.createObjectURL) core.setWorker(() => new Worker(URL.createObjectURL(new Blob(['self.WITH_LIVE_SRC=' + JSON.stringify(src) + ';importScripts(self.WITH_LIVE_SRC)'], { type: 'text/javascript' }))))\n}`
   const mods = {
-    generators: () => gens.map((g, i) => `import g${i} from ${J(posix(path.join(DYN, g.file + '.mjs')))}`).join('\n') +
+    generators: () => mode === 'cdn-lite' ? `export default ${J(gens.map(g => stub(g.gen)))}`
+      : gens.map((g, i) => `import g${i} from ${J(posix(path.join(DYN, g.file + '.mjs')))}`).join('\n') +
       `\nexport default [${gens.map((_, i) => 'g' + i).join(', ')}]`,
     meta: () => `export const VERSION = ${J(version)}\nexport const DEFAULT_STYLE = 'line'\n` +
       `export const STYLE_META = ${J(styles.map(({ name, title, kind, description, strokeWidth, root }) => ({ name, title, kind, description, strokeWidth, root })))}`,
@@ -103,25 +125,16 @@ function livePlugin({ gens, styles, version, mode }) {
     // classic script for the site / CDN: window.WithLive, element defined, styles fetched as sibling scripts
     // The same file is also the render worker: in a page it starts workers from a tiny blob that importScripts() it
     // (works cross-origin from a CDN); inside the worker it loads styles with importScripts and answers render jobs.
-    'entry/cdn': () => `import * as core from ${J(CORE)}\nimport * as el from ${J(ELEMENT)}\nimport line from ${J(styleFile('line'))}\n` +
-      `import * as geom from ${J(KERNEL.geom)}\nimport * as bool from ${J(KERNEL.bool)}\n` +
-      `const inWorker = typeof document === 'undefined' && typeof importScripts === 'function' && typeof self !== 'undefined'\n` +
-      `const cs = typeof document !== 'undefined' && (document.currentScript || [].slice.call(document.querySelectorAll ? document.querySelectorAll('script[src*="dynamic"]') : []).pop())\n` +
-      `const src = inWorker ? (self.WITH_LIVE_SRC || '') : cs && cs.src ? cs.src : ''\n` +
-      `const base = src ? src.replace(/[^/]*([?#].*)?$/, '') : ''\n` +
-      `const script = n => new Promise((ok, bad) => { if (inWorker) { try { importScripts(base + 'styles/' + n + '.js'); return ok() } catch (e) { return bad(new Error('with icons live: could not load ' + base + 'styles/' + n + '.js')) } } if (typeof document === 'undefined') return bad(new Error('with icons live: style "' + n + '" needs a document to load; include styles/' + n + '.js')); const s = document.createElement('script'); s.src = base + 'styles/' + n + '.js'; s.async = true; s.onload = () => ok(); s.onerror = () => bad(new Error('with icons live: could not load ' + s.src)); document.head.appendChild(s) })\n` +
-      `core.register(line)\ncore.setLoaders({ ${others.map(n => `${J(n)}: () => script(${J(n)})`).join(', ')} })\n` +
-      `const api = Object.assign({}, core, { WithLiveIconElement: el.WithLiveIconElement, defineLiveIcon: el.defineLiveIcon, __kernel: { geom, bool } })\n` +
-      `globalThis.WithLive = api\n` +
-      `if (inWorker) core.serveWorker(self)\n` +
-      `else {\n  el.defineLiveIcon()\n` +
-      `  if (src && typeof Worker === 'function' && typeof Blob === 'function' && typeof URL !== 'undefined' && URL.createObjectURL) core.setWorker(() => new Worker(URL.createObjectURL(new Blob(['self.WITH_LIVE_SRC=' + JSON.stringify(src) + ';importScripts(self.WITH_LIVE_SRC)'], { type: 'text/javascript' }))))\n}`,
+    'entry/cdn': () => cdnEntry(false),
+    'entry/cdn-lite': () => cdnEntry(true),
   }
   for (const s of styles) {
     mods['style/' + s.name] = () => mode === 'cdn-style'
       ? `import s from ${J(styleFile(s.name))}\nglobalThis.WithLive.register(s)`
       : `import s from ${J(styleFile(s.name))}\nimport { register } from ${J(CORE)}\nregister(s)\nexport default s`
   }
+  // cdn/gens/<name>.js: one live icon's drawing code for the lite script (registers itself on load)
+  for (const g of gens) mods['gen/' + g.gen.name] = () => `import g from ${J(posix(path.join(DYN, g.file + '.mjs')))}\nglobalThis.WithLive.registerIcon(g)`
   return {
     name: 'with-live',
     setup(b) {
@@ -132,12 +145,14 @@ function livePlugin({ gens, styles, version, mode }) {
         return { contents: m(), loader: 'js', resolveDir: ROOT }
       })
       // cdn style chunks share the core's kernel instead of carrying their own copy
-      if (mode === 'cdn-style') {
+      // (and cdn/gens chunks share its kernel and stroke font too)
+      if (mode === 'cdn-style' || mode === 'cdn-gen') {
         b.onResolve({ filter: /kernel[\\/](geom|bool)\.mjs$/ }, a => {
           const which = /geom/.test(a.path) ? 'geom' : 'bool'
           return { path: which, namespace: 'with-live-kernel' }
         })
-        b.onLoad({ filter: /.*/, namespace: 'with-live-kernel' }, a => ({ contents: `module.exports = globalThis.WithLive.__kernel.${a.path}`, loader: 'js' }))
+        b.onLoad({ filter: /.*/, namespace: 'with-live-kernel' }, a => ({ contents: a.path === 'font' ? 'module.exports = globalThis.WithLive.__font' : `module.exports = globalThis.WithLive.__kernel.${a.path}`, loader: 'js' }))
+        if (mode === 'cdn-gen') b.onResolve({ filter: /_font\.mjs$/ }, () => ({ path: 'font', namespace: 'with-live-kernel' }))
       }
     },
   }
@@ -239,6 +254,14 @@ export declare function resolveName(name: string): LiveIconName | null
 export declare function suggest(name: string, count?: number): LiveIconName[]
 export declare function load(style: LiveStyleName | (string & {})): Promise<unknown>
 export declare function loaded(style: string): boolean
+/** Load a live icon's drawing code. A no-op in every npm build; in the CDN lite script (cdn/lite.js) it fetches cdn/gens/<name>.js once. */
+export declare function loadIcon(name: LiveIconName | (string & {})): Promise<LiveIconName>
+/** true when the live icon can render synchronously right now (false only in the CDN lite script before loadIcon). */
+export declare function iconLoaded(name: string): boolean
+/** Register a live icon generator ({ name, build, params, ... }); the CDN lite script's gens/<name>.js files call this. */
+export declare function registerIcon(generator: { name: string; build: (params: Record<string, unknown>) => unknown }): unknown
+/** How to fetch a live icon's drawing code that is not bundled: (name) => Promise. */
+export declare function setIconLoader(fn: ((name: string) => Promise<unknown>) | null): void
 export declare function register(style: { name: string; render: (icon: unknown) => IconNode[] }): unknown
 export declare function setLoaders(map: Record<string, () => Promise<unknown>>): void
 /** local date/time as params: { day, month, weekday, year, time } */
@@ -356,6 +379,13 @@ export default async function emit(ctx) {
     ...common, format: 'iife', platform: 'browser', outdir: path.join(DIST, 'cdn'),
     entryPoints: styles.filter(s => s.name !== 'line').map(s => ({ in: 'with-live:style/' + s.name, out: 'styles/' + s.name })), plugins: plug('cdn-style'),
   })
+  // the light classic script: same API and element, but each live icon's drawing code is its own file (cdn/gens/<name>.js,
+  // fetched on first draw) next to the shared style files, so one live icon costs the core plus that icon
+  await esbuild.build({ ...common, format: 'iife', platform: 'browser', outfile: path.join(DIST, 'cdn', 'lite.js'), entryPoints: ['with-live:entry/cdn-lite'], plugins: plug('cdn-lite') })
+  if (gens.length) await esbuild.build({
+    ...common, format: 'iife', platform: 'browser', outdir: path.join(DIST, 'cdn'),
+    entryPoints: gens.map(g => ({ in: 'with-live:gen/' + g.gen.name, out: 'gens/' + g.gen.name })), plugins: plug('cdn-gen'),
+  })
   // declarations
   const types = dts(gens, styles)
   const wr = (rel, text) => { const f = path.join(DIST, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) }
@@ -388,7 +418,13 @@ export default async function emit(ctx) {
     { file: 'react.js', what: '`<LiveIcon>` on lite (react not included)', ...closure('react.js') },
     { file: 'vue.js', what: '`<LiveIcon>` on lite (vue not included)', ...closure('vue.js') },
     { file: 'styles/<style>.js', what: `one style chunk: smallest \`${big.at(-1)?.n}\`, largest \`${big[0]?.n}\` (${fmtKB(big[0]?.raw || 0)} / ${fmtKB(big[0]?.gz || 0)} gzip)`, raw: big.at(-1)?.raw || 0, gz: big.at(-1)?.gz || 0 },
-    { file: 'cdn/dynamic.js', what: 'classic script: `window.WithLive` + element, line inline', ...fileSize('cdn/dynamic.js') },
+    { file: 'cdn/lite.js', what: 'classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw', ...fileSize('cdn/lite.js') },
+    ...(gens.length ? [(() => {
+      const g = gens.map(x => ({ n: x.gen.name, ...fileSize(`cdn/gens/${x.gen.name}.js`) })).sort((a, b) => a.raw - b.raw)
+      const m = g[g.length >> 1]
+      return { file: 'cdn/gens/<name>.js', what: `one live icon's drawing code (typical \`${m.n}\`; largest \`${g.at(-1).n}\` ${fmtKB(g.at(-1).raw)} / ${fmtKB(g.at(-1).gz)} gzip)`, raw: m.raw, gz: m.gz }
+    })()] : []),
+    { file: 'cdn/dynamic.js', what: 'classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon)', ...fileSize('cdn/dynamic.js') },
   ]
 
   // package files
@@ -404,6 +440,7 @@ export default async function emit(ctx) {
     './vue': { types: './dist/vue.d.ts', default: './dist/vue.js' },
     './styles/*': { types: './dist/styles/*.d.ts', default: './dist/styles/*.js' },
     './cdn': './dist/cdn/dynamic.js',
+    './cdn/lite': './dist/cdn/lite.js',
     './package.json': './package.json',
   }
   const pkg = {
@@ -415,8 +452,8 @@ export default async function emit(ctx) {
     keywords: ['icons', 'svg', 'icon-library', 'withicons', 'with-icons', 'dynamic-icons', 'live-icons', 'calendar-icon', 'clock-icon',
       'battery-icon', 'notification-badge', 'weather-icons', 'svg-generator', 'web-components', 'custom-element', 'react', 'vue', 'ssr'],
     type: 'module', // every entry registers styles or defines the element when evaluated, so none may be skipped
-    sideEffects: ['./dist/index.js', './dist/index.cjs', './dist/lite.js', './dist/element.js', './dist/react.js', './dist/vue.js', './dist/styles/*.js', './dist/chunks/*.js', './dist/cdn/*.js', './dist/cdn/styles/*.js'],
-    main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts', unpkg: './dist/cdn/dynamic.js', jsdelivr: './dist/cdn/dynamic.js',
+    sideEffects: ['./dist/index.js', './dist/index.cjs', './dist/lite.js', './dist/element.js', './dist/react.js', './dist/vue.js', './dist/styles/*.js', './dist/chunks/*.js', './dist/cdn/*.js', './dist/cdn/styles/*.js', './dist/cdn/gens/*.js'],
+    main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts', unpkg: './dist/cdn/lite.js', jsdelivr: './dist/cdn/lite.js',
     exports: exp,
     typesVersions: { '*': { lite: ['./dist/lite.d.ts'], element: ['./dist/element.d.ts'], react: ['./dist/react.d.ts'], vue: ['./dist/vue.d.ts'], 'styles/*': ['./dist/styles/*.d.ts'] } },
     peerDependencies: { react: '>=17', vue: '>=3.2' },

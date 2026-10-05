@@ -29,6 +29,8 @@ import { textInfo } from './_live-text.mjs'
 const D2R = Math.PI / 180
 const K = {
   obj: 1.25,
+  text: 1.75,              // live-icon lettering (round pen)
+  textClr: 1.4,            // construction stays this far outside a line of lettering's box
   con: { w: 0.45, op: 0.5, key: 0.34 },
   dim: { room: 1.3, w: 0.5, op: 0.75, tick: 0.65 },
   node: { r: 0.8, w: 0.5, gap: 0.95, max: 5, spacing: 4, clear: 2.4, keep: 1.45, minLine: 6.5, maxCorners: 10, minPart: 7.5, tooth: 3.6 },
@@ -38,6 +40,7 @@ const K = {
   axis: 2.2,               // symmetry axes overhang the object by this much
   fillet: { max: 4, spacing: 5, over: 2.1 }, // virtual sharp corners of r<=3 fillets
   chain: '2.4 .7 .4 .7',   // long dash - dot
+  chainLive: '2.4 .7 .7 .7', minDashLive: 0.6, // live icons: dots and cut ends never become specks
   canvas: [0.7, 23.3],
   minRun: 0.55,
 }
@@ -141,11 +144,15 @@ const lineD = ([a, b]) => {
 // as SVG restarts a dash array per subpath, and the dashes inherit the root's
 // square caps, so browsers paint the same pixels as the old dasharray did.
 const DASH = K.chain.trim().split(/\s+/).map(Number)
+// a live icon's chain lines keep every piece a visible dash (its dots a touch longer, no crumbs where a run is cut):
+// a value change moves the clipping, and crumbs would flicker around the drawing
+const DASH_LIVE = K.chainLive.trim().split(/\s+/).map(Number)
+let LIVE = false
 function dashRuns(L) {
-  const runs = []
+  const runs = [], P = LIVE ? DASH_LIVE : DASH, min = LIVE ? K.minDashLive : 0.005
   for (let s = 0, i = 0; s < L - 1e-6; i++) {
-    const len = DASH[i % DASH.length]
-    if (i % 2 === 0) { const e = Math.min(L, s + len); if (e - s > 0.005) runs.push([s, e]) }
+    const len = P[i % P.length]
+    if (i % 2 === 0) { const e = Math.min(L, s + len); if (e - s > min) runs.push([s, e]) }
     s += len
   }
   return runs
@@ -279,7 +286,9 @@ function crowded(c, lines, dots) {
 }
 
 function pickNodes(cands, lines, dots, axes, interior) {
-  const ok = cands.filter(c => !crowded(c, lines, dots) && !interior(c.p))
+  // (a live icon's node never reaches the canvas edge: its geometry moves with the value)
+  const inCanvas = p => !LIVE || Math.min(p[0], p[1], 24 - p[0], 24 - p[1]) >= K.node.r + K.node.w / 2 + 0.6
+  const ok = cands.filter(c => !crowded(c, lines, dots) && !interior(c.p) && inCanvas(c.p))
   const score = c => (c.kind === 'corner' ? 2 + c.turn : 1.6) + d2(c.p, [12, 12]) / 12
   // mirror images travel together, so a symmetric icon gets symmetric nodes
   const mirror = (p, a) => a.axis === 'x' ? [2 * a.c - p[0], p[1]] : [p[0], 2 * a.c - p[1]]
@@ -377,6 +386,7 @@ function symmetric(pts, near, axis, c) {
 
 // ---------------------------------------------------------------------------
 function render(icon) {
+  LIVE = !!icon.params
   const { lines, dots } = analyse(icon)
   const out = []
   if (!lines.length && !dots.length) return out
@@ -412,8 +422,15 @@ function render(icon) {
   // ---- construction
   const [lo, hi] = K.canvas
   const nodeKeep = K.node.keep + K.node.r
+  // a live icon (forge/DYNAMIC.md) shows a value: its face stays clear of construction at every value (no centre
+  // lines across a day number or a count), and no construction runs through its lettering
+  const live = !!icon.params
+  const inFill = p => { let k = false; for (const r of fillRings) if (pointInRing(p, r)) k = !k; return k }
+  const tBoxes = lines.filter(s => s.text).map(s => bbox(s.flat.pts)).map(b => [b.x0 - K.textClr, b.y0 - K.textClr, b.x1 + K.textClr, b.y1 + K.textClr])
+  const inText = p => tBoxes.some(b => p[0] >= b[0] && p[0] <= b[2] && p[1] >= b[1] && p[1] <= b[3])
   const keep = p => p[0] >= lo && p[0] <= hi && p[1] >= lo && p[1] <= hi &&
-    near(p, K.clr) >= K.clr && nodes.every(n => d2(n.p, p) >= nodeKeep)
+    near(p, K.clr) >= K.clr && nodes.every(n => d2(n.p, p) >= nodeKeep) &&
+    !(live && (inText(p) || (fillRings.length && inFill(p))))
   let key = '', thin = '', chain = '', ticks = ''
 
   // keyline circle, for objects with mass that are not boxes (boxes show
@@ -478,7 +495,8 @@ function render(icon) {
   // a flat object (minus, strikethrough bar) would read the dimension line as a
   // second stroke ('=' sign), so it needs some depth too
   if (room && (room[0] === 'b' || room[0] === 't' ? B.w : B.h) >= 6 && Math.min(B.w, B.h) >= 3) {
-    const side = room[0], off = Math.min(2.4, room[1])
+    // (a live icon's ticks stay inside the canvas whatever the value makes of its extent)
+    const side = room[0], off = Math.min(2.4, room[1] - (LIVE ? 0.45 : 0))
     const horiz = side === 'b' || side === 't', sg = side === 'b' || side === 'r' ? 1 : -1
     const at = horiz ? (side === 'b' ? B.y1 : B.y0) + sg * off : (side === 'r' ? B.x1 : B.x0) + sg * off
     const [u0, u1] = horiz ? [B.x0, B.x1] : [B.y0, B.y1]
@@ -511,8 +529,13 @@ function render(icon) {
   for (const pl of groups) {
     const mine = s => pl === null || s.plate === pl
     // objectD indexes nodes by line, so it is given the full line list with other plates' lines blanked
-    const obj = objectD(lines.map(s => mine(s) ? s : { ...s, segs: [], skip: true }), nodes)
-    if (obj) objParts.push(['path', { d: obj, ...tag(pl) }])
+    const obj = objectD(lines.map(s => mine(s) && !s.text ? s : { ...s, segs: [], skip: true }), nodes)
+    // (a live icon's sharp vertices may sit anywhere its value puts them: a short mitre keeps the spike in the canvas)
+    if (obj) objParts.push(['path', LIVE ? { d: obj, 'stroke-miterlimit': 2, ...tag(pl) } : { d: obj, ...tag(pl) }])
+    // live-icon text is drafting lettering: a round lettering pen (round caps and joins) a touch heavier than the
+    // object line, so it reads at 24px and its counters stay open
+    const txt = objectD(lines.map(s => mine(s) && s.text ? s : { ...s, segs: [], skip: true }), nodes)
+    if (txt) objParts.push(['path', { d: txt, 'stroke-width': K.text, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', ...tag(pl) }])
     // dots: a tiny ring under the inherited stroke reads as a solid disc that follows strokeWidth
     const dd = dots.filter(mine).map(p => ringD(p, 0.3)).join('')
     if (dd) dotParts.push(['path', { d: dd, ...tag(pl) }])

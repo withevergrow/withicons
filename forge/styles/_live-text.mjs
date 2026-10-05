@@ -16,7 +16,26 @@
 //   splitText(icon)         -> { icon, free: [{ d, ch, cap, plate, box }], inside: [...] }
 //                              icon = the same prepared icon without the FREE glyph paths/lines (inside text kept)
 //   textStroke(cap, base)   -> a stroke width for free text that keeps counters open at that cap height
-import { pointInRing } from '../kernel/geom.mjs'
+//
+// Added for the quality gate (all opt-in; nothing above changed behaviour):
+//   TEXT_REF                -> 1.75, the stroke Line draws text with (the gate's reference weight)
+//   textWeight(cap, opts)   -> a weight for free OR knocked-out text that never closes more counters than Line:
+//                              opts { base = 2, ref = TEXT_REF, small = 6 } -> base at cap >= small, else min(base, ref).
+//                              (textStroke(cap, base) is unchanged; textWeight caps small text at Line's weight
+//                              instead of base - 0.25, which still closes 8 B 9 counters at cap 4-5.)
+//   glyphWeight(g, opts)    -> textWeight for one glyph { ch, cap, box? | pts? }, except a degree sign "°": its ring
+//                              is small (r = cap/4), so it is thinned to keep a visible hole (>= opts.hole = 0.35u
+//                              radius, min 1u) instead of printing as a bullet "37•".
+//   glyphLines(icon)        -> [{ pts, closed: false, ch, cap, plate, pathId }] every glyph centreline, OPEN
+//                              (dots of . : ! ? included as one-point lines: stroke them as round dots).
+//                              The kernel parser closes a subpath whose last point equals its first, so a "D" or
+//                              "0" drawn as one stroke arrives as a closed RING: a fill-building style then fills it
+//                              (a solid blob). These lines are always open (first point repeated at the end).
+//   openText(icon)          -> the prepared icon with every glyph line AND every cutout subpath that traces a glyph
+//                              re-opened (closed: false), so a mass style knocks glyphs out as lines, never as areas.
+//                              Cutout subs that trace a glyph get `glyph: { ch, cap }`. No-op without text.
+//   isGlyphSub(sub, lines)  -> true when every point of `sub` lies on one of glyphLines() (within 0.05u)
+import { pointInRing, distToPolyline, parsePath } from '../kernel/geom.mjs'
 
 const ID = /^text:(.):(\d+(?:\.\d+)?):\d+$/su
 
@@ -100,4 +119,62 @@ export function shiftD(d, dx, dy, s = 1) {
     out.push(f(v)); k++
   }
   return out.join(' ').replace(/ ?([A-Za-z]) ?/g, '$1')
+}
+
+// ── quality-gate helpers (opt-in) ────────────────────────────────────────────────────────────────────────
+export const TEXT_REF = 1.75
+export const textWeight = (cap, { base = 2, ref = TEXT_REF, small = 6 } = {}) => +(cap >= small ? base : Math.min(base, ref)).toFixed(2)
+
+const reopen = s => s.closed && s.pts.length > 2 ? { ...s, pts: [...s.pts, s.pts[0]], closed: false } : s
+export function glyphLines(icon) {
+  const out = []
+  for (const p of icon?.paths || []) {
+    const t = textInfo(p)
+    if (!t) continue
+    // per M-chunk, so a zero-length subpath (the dot of "." ":" "!" "?", which the parser drops) is kept as a point
+    for (const chunk of String(p.d || '').split(/(?=[Mm])/)) {
+      let subs = []
+      try { subs = parsePath(chunk) } catch { subs = [] }
+      if (!subs.length) {
+        const m = chunk.match(/^M\s*(-?[\d.]+(?:e[-+]?\d+)?)[\s,]*(-?[\d.]+(?:e[-+]?\d+)?)/)
+        if (m) out.push({ pts: [[+m[1], +m[2]]], closed: false, ch: t.ch, cap: t.cap, plate: p.plate || 'A', pathId: p.id })
+        continue
+      }
+      for (const s of subs) out.push({ ...reopen(s), ch: t.ch, cap: t.cap, plate: p.plate || 'A', pathId: p.id })
+    }
+  }
+  return out
+}
+export function isGlyphSub(sub, lines, tol = 0.05) {
+  if (!sub?.pts?.length || !lines?.length) return null
+  for (const l of lines) {
+    if (sub.pts.every(q => distToPolyline(q, l.pts, false) <= tol)) return l
+  }
+  return null
+}
+export function openText(icon) {
+  if (!icon || !hasText(icon)) return icon
+  const gl = glyphLines(icon)
+  const ids = new Set(gl.map(l => l.pathId))
+  const lines = (icon.lines || []).map(l => ids.has(l.pathId) ? reopen(l) : l)
+  const cutouts = (icon.cutouts || []).map(c => {
+    let hit = false
+    const subs = (c.subs || []).map(s => {
+      const g = isGlyphSub(s, gl)
+      if (!g) return s
+      hit = true
+      return { ...reopen(s), glyph: { ch: g.ch, cap: g.cap } }
+    })
+    return hit ? { ...c, subs } : c
+  })
+  return { ...icon, lines, cutouts }
+}
+
+export function glyphWeight(g, opts = {}) {
+  const w = textWeight(g.cap, opts)
+  if (g.ch !== '°') return w
+  let r = g.cap / 4
+  const b = g.box || (g.pts ? g.pts.reduce((o, [x, y]) => ({ x0: Math.min(o.x0, x), x1: Math.max(o.x1, x), y0: Math.min(o.y0, y), y1: Math.max(o.y1, y) }), { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity }) : null)
+  if (b && Number.isFinite(b.x0)) r = Math.max(b.x1 - b.x0, b.y1 - b.y0) / 2
+  return +Math.min(w, Math.max(1, 2 * (r - (opts.hole ?? 0.35)))).toFixed(2)
 }

@@ -10,7 +10,7 @@ import { textInfo } from './_live-text.mjs'
 export const INK = 2.2          // outline weight
 const R_INK = 1.75              // fillet radius of sharp corners (centreline)
 const HALF = INK / 2
-const TEXT_INK = 1.9            // Live-icon text (forge/styles/_live-text.mjs)
+const textW = () => 1.75   // Live-icon text: the line weight of the font (it is spaced for it) (forge/styles/_live-text.mjs)
 const BAND = 3.6           // fields only need to see this far (largest probe ~2.1u)
 
 const v = ([role, hex], fb) => `var(--with-kawaii-${role}, ${fb || hex})`
@@ -48,6 +48,7 @@ export function ringsD(rings, tol = 0.03, minArea = 0.04) {
 
 // what the last render decided (for QA scripts; never read by the renderer)
 export let lastDebug = null
+const LIVE_FACE = new Set(['app-badge', 'bell-count', 'chat-count', 'battery-vertical', 'clock-time', 'stopwatch'])
 export function render(icon) {
   const name = String(icon.name || '')
   const tune = TUNE[name] || {}
@@ -61,8 +62,8 @@ export function render(icon) {
     if (hide.has(pi)) continue
     let subs = []
     try { subs = parseSegs(p.d) } catch { subs = [] }
-    const text = !!textInfo(p)
-    for (const s of subs) { s.plate = p.plate || 'K'; s.text = text; inkSubs.push(s) }
+    const ti = textInfo(p)
+    for (const s of subs) { s.plate = p.plate || 'K'; s.text = !!ti; s.cap = ti ? ti.cap : 0; inkSubs.push(s) }
   }
   // Live-icon text keeps the font's crisp corners and a lighter pen: filleted at 2.2 it fills in
   const textSubs = inkSubs.filter(s => s.text), drawSubs = inkSubs.filter(s => !s.text)
@@ -71,6 +72,7 @@ export function render(icon) {
   const inkD = writeSubs(drawSubs)
   const textD = textSubs.length ? writeSubs(textSubs) : ''
   const inkLines = parsePath(inkD + textD).map(s => ({ pts: simplify(s.pts, 0.02, s.closed), closed: s.closed }))
+  const textLines = textD ? parsePath(textD).map(s => ({ pts: simplify(s.pts, 0.02, s.closed), closed: s.closed })) : []
   for (const s of inkSubs) if (s.dot) inkLines.push({ pts: [s.dot], closed: false })
   const sLines = []
   for (const s of inkSubs) if (s.plate === 'S' && !s.dot) for (const q of parsePath(writeSubs([s]))) sLines.push({ pts: q.pts, closed: q.closed })
@@ -131,9 +133,12 @@ export function render(icon) {
   const ci = colorFor(name, h)
   const di = (ci + 3) % PALETTE.length
   const si = ci === 0 ? 5 : 0
+  // a Live icon writes its value on the body: the sunniest hues sit a touch lighter there, so the value
+  // keeps its contrast on dark too (light text on a deep jewel tone)
+  const opOf = (i, cls) => icon.params && cls !== 'wm-s' ? Math.min(PALETTE[i][2], 0.6) : PALETTE[i][2]
   const paint = (set, i, cls) => {
     const d = ringsD(set)
-    if (d) out.push(['path', { d, fill: fillVar(i), 'fill-opacity': PALETTE[i][2], stroke: 'none', 'fill-rule': 'evenodd', ...(cls ? { class: cls } : {}) }])
+    if (d) out.push(['path', { d, fill: fillVar(i), 'fill-opacity': opOf(i, cls), stroke: 'none', 'fill-rule': 'evenodd', ...(cls ? { class: cls } : {}) }])
   }
   paint(main, ci)
   paint(detail, di)
@@ -141,7 +146,8 @@ export function render(icon) {
 
   // ---- clearance field inside the main body ---------------------------------
   const mainRings = [...main, ...detail].filter(r => r.length > 2)
-  let C = null, faceInfo = null, bodyArea = 0
+  let C = null, faceInfo = null, bodyArea = 0, shineC = null, avoidText = null
+  const shineField = c => shineC || c
   const contentPts = []
   if (mainRings.length) {
     const mask = maskOf(mainRings)
@@ -156,11 +162,25 @@ export function render(icon) {
       }
     }
     bodyArea = Math.abs(mainRings.reduce((a, r) => a + area(r), 0))
+    // Live-icon text: the shine follows the body, not the value written on it (it never hugs or crosses a
+    // glyph, and it stays put as the value changes)
+    if (textLines.length) {
+      const plain = inkLines.filter(l => !textLines.some(t => t.pts.length === l.pts.length && t.pts[0][0] === l.pts[0][0] && t.pts[0][1] === l.pts[0][1]))
+      const dPlain = plain.length ? distField(segsOf(plain), BAND) : null
+      const dText = distField(segsOf(textLines), BAND)
+      const Cs = new Float32Array(NN)
+      for (let k = 0; k < NN; k++) Cs[k] = mask[k] ? Math.min((dPlain ? dPlain[k] : 9) - HALF, dEdge[k]) : -Math.min(dEdge[k], 1)
+      shineC = Cs
+      avoidText = (x, y) => sample(dText, x, y) < 1.35
+    }
   }
 
   // ---- face ---------------------------------------------------------------
   // a face beside text (a date, a count, a label) reads as clutter: those get the heart / sparkle accent
-  const wantFace = C && tune.face !== false && (tune.face || (!NO_FACE.test(name) && !textSubs.some(s => s.plate !== 'S')))
+  // Live icons: the face belongs to the generator, never to its value (a calendar with no date written must
+  // not grow a face where the date was): only the families that wear one at every value get it
+  const liveNoFace = !!icon.params && !LIVE_FACE.has(name)
+  const wantFace = C && !liveNoFace && tune.face !== false && (tune.face || (!NO_FACE.test(name) && !textSubs.some(s => s.plate !== 'S')))
   if (wantFace) {
     try {
       if (tune.face && tune.face.x !== undefined && tune.face.y !== undefined) faceInfo = { x: tune.face.x, y: tune.face.y, s: tune.face.s || 0.8, blush: tune.face.blush !== false && tune.blush !== false }
@@ -189,7 +209,7 @@ export function render(icon) {
 
   // shine: a short white arc on the lit (upper-left) inside of the body
   if (C) {
-    try { const d = shine(C, faceInfo); if (d) out.push(['path', { d, stroke: v(SHINE), 'stroke-width': 0.85, 'stroke-opacity': 0.9, class: 'wm-shine' }]) } catch { /* optional */ }
+    try { const d = shine(shineField(C), faceInfo, avoidText); if (d) out.push(['path', { d, stroke: v(SHINE), 'stroke-width': 0.85, 'stroke-opacity': 0.9, class: 'wm-shine' }]) } catch { /* optional */ }
   }
 
   if (inkD && split) {
@@ -198,7 +218,13 @@ export function render(icon) {
       if (d) out.push(['path', { d, class: 'wm-' + P.toLowerCase() }])
     }
   } else if (inkD) out.push(['path', { d: inkD }])
-  if (textD) out.push(['path', { d: textD, 'stroke-width': TEXT_INK }])
+  // Live-icon text: the line weight of the font (1.75 at the large cap, finer at the small cap), so
+  // the counters of 0 6 8 9 % stay open at 24px; one path per weight
+  if (textD) {
+    const byW = new Map()
+    for (const s of textSubs) { const w = textW(s.cap); if (!byW.has(w)) byW.set(w, []); byW.get(w).push(s) }
+    for (const [w, ss] of [...byW].sort((a, b) => b[0] - a[0])) { const d = writeSubs(ss); if (d) out.push(['path', { d, 'stroke-width': w }]) }
+  }
 
   if (faceInfo) {
     const f = drawFace(faceInfo, expr)
@@ -217,7 +243,7 @@ export function render(icon) {
 
 // ---- shine ------------------------------------------------------------------
 const LIGHT = [-0.6, -0.8]   // unit vector toward the light (upper-left)
-function shine(C, face) {
+function shine(C, face, avoid) {
   const LV = 0.62
   const rings = contours(C, LV)
   if (!rings.length) return ''
@@ -251,7 +277,7 @@ function shine(C, face) {
       let nx = -ty, ny = tx
       if (sample(C, p[0] + nx * 0.3, p[1] + ny * 0.3) > sample(C, p[0] - nx * 0.3, p[1] - ny * 0.3)) { nx = -nx; ny = -ny }
       const f = nx * LIGHT[0] + ny * LIGHT[1]
-      return inFace(p[0], p[1]) ? -9 : f
+      return inFace(p[0], p[1]) || (avoid && avoid(p[0], p[1])) ? -9 : f
     })
     // a hole ring (inside of a ring-shaped body) lights its lower-right instead: skip holes
     for (let i = 0; i < n; i++) {
@@ -278,7 +304,7 @@ function shine(C, face) {
   const [e, nb] = lowA ? [e0, sm[Math.min(4, sm.length - 1)]] : [e1, sm[Math.max(0, sm.length - 5)]]
   let tx = e[0] - nb[0], ty = e[1] - nb[1]; const tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl
   const g = [e[0] + tx * 1.05, e[1] + ty * 1.05]
-  if (sample(C, g[0], g[1]) > 0.5 && !inFace(g[0], g[1])) d += 'M' + nums(g) + 'h0'
+  if (sample(C, g[0], g[1]) > 0.5 && !inFace(g[0], g[1]) && !(avoid && avoid(g[0], g[1]))) d += 'M' + nums(g) + 'h0'
   return d
 }
 

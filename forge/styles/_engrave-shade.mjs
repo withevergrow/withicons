@@ -51,7 +51,9 @@ function clearOf(q, segs, r) {
 
 // returns rings (crescent polygons)
 // Every crescent carries .plate: the skeleton plate of the line it swells (fill rings: fillPlates[i], else 'K').
-export function shadeCrescents({ lines, lineSegs, fillRings, fillPlates }, HW, delta, light) {
+// opts.bareEdges = false: fill edges that no stroke traces get no swell (live icons: there the mass is paper, not
+// tone, and a swell on a bare edge floats as a loose sliver)
+export function shadeCrescents({ lines, lineSegs, fillRings, fillPlates }, HW, delta, light, opts = {}) {
   if (!(delta > 0)) return []
   const loops = []
   const tagged = (loop, plate) => { loop.plate = plate || 'K'; return loop }
@@ -61,7 +63,7 @@ export function shadeCrescents({ lines, lineSegs, fillRings, fillPlates }, HW, d
     if (ln.closed) { loops.push(tagged(offsetLoop(P, HW), ln.plate)); loops.push(tagged(offsetLoop([...P].reverse(), HW), ln.plate)) }
     else loops.push(tagged(offsetLoop([...P, ...P.slice(1, -1).reverse()], HW), ln.plate))
   }
-  for (const [ri, r] of fillRings.entries()) {
+  for (const [ri, r] of (opts.bareEdges === false ? [] : fillRings).entries()) {
     const loop = tagged(offsetLoop(simplify(r, 0.01, true), 0), fillPlates && fillPlates[ri])
     if (!loop.length) continue
     // orient once per ring: normals must point away from the filled side

@@ -123,8 +123,17 @@ function toD(subs) {
       const q = at(s, 1)
       if (s.t === 'L') d += ` L${f(q[0])} ${f(q[1])}`
       else {
-        const span = s.a1 - s.a0
-        d += ` A${f(Math.max(0.25, s.r))} ${f(Math.max(0.25, s.r))} 0 ${Math.abs(span) > Math.PI ? 1 : 0} ${span > 0 ? 1 : 0} ${f(q[0])} ${f(q[1])}`
+        const span = s.a1 - s.a0, large = Math.abs(span) > Math.PI ? 1 : 0, sweep = span > 0 ? 1 : 0
+        // snapping the end points moves the circle an arc implies (badly so for a near-half arc): pick the grid
+        // radius whose implied centre stays closest to the true one, so a trimmed bubble never bulges out of 2..22
+        const p0 = at(s, 0), a = [snap(p0[0]), snap(p0[1])], b = [snap(q[0]), snap(q[1])]
+        let best = Math.max(0.25, snap(s.r)), err = Infinity
+        for (let k = -3; k <= 3; k++) {
+          const r = Math.max(0.25, snap(s.r) + k * 0.25), c = arcCenter(a, b, r, large, sweep).c
+          const e = Math.hypot(c[0] - s.c[0], c[1] - s.c[1]) + 0.05 * Math.abs(k)
+          if (e < err) { err = e; best = r }
+        }
+        d += ` A${f(best)} ${f(best)} 0 ${large} ${sweep} ${f(q[0])} ${f(q[1])}`
       }
     })
     if (sb.closed) d += ' Z'
@@ -162,7 +171,7 @@ const PAD = 2.25   // badge centreline -> text centreline: 0.875u ring ink + 0.5
 // badge sizes, overridable per icon through countIcon's `badge` option
 export const BADGE = {
   dotR: 2,            // dot ring centreline radius: ink 6u across, a ring in line, a disc in filled styles
-  r1: 4.5, cap1: 4.5, // one digit: a circle (centreline 9u)
+  r1: 4.75, cap1: 4.25, // one digit: a circle (centreline 9.5u); cap 4.25 keeps >= 0.5u white to the ring at the glyph corners
   h: 9, cap2: 4,      // two or more characters: a rounded rectangle 9u tall
   rc: 3.5,            // its corner radius
   plusCap: 2.75,      // the "+" of "99+" / "9+"
@@ -190,11 +199,21 @@ function layoutBadge(label, dot, corner, o) {
     const r = o.r1, cx = EDGE - r, cy = top ? TOP + r : EDGE - r
     return { kind: 'circle', cx, cy, r, cap: o.cap1 }
   }
-  // the rectangle grows just enough for the actual glyph ink
+  // the rectangle grows just enough for the actual glyph ink: PAD to the straight sides first, then wider (0.5u
+  // steps) until no glyph point sits closer than PAD to the outline, the rounded corners included (the square
+  // foot of a "2" or "4" otherwise runs into the corner arc)
   const probe = labelText(label, o.cap2, o.plusCap, 0, 0)
-  const w = Math.max(o.h, Math.ceil((probe.box.x1 - probe.box.x0 + 2 * PAD) * 2) / 2)
-  const y0 = top ? TOP : EDGE - o.h
-  return { kind: 'rect', x0: EDGE - w, y0, x1: EDGE, y1: y0 + o.h, rc: Math.min(o.rc, o.h / 2), cap: o.cap2, plusCap: o.plusCap }
+  const y0 = top ? TOP : EDGE - o.h, rc = Math.min(o.rc, o.h / 2)
+  const rect = w => ({ kind: 'rect', x0: EDGE - w, y0, x1: EDGE, y1: y0 + o.h, rc, cap: o.cap2, plusCap: o.plusCap })
+  let w = Math.max(o.h, Math.ceil((probe.box.x1 - probe.box.x0 + 2 * PAD) * 2) / 2)
+  for (let k = 0; k < 8; k++) {
+    const B = rect(w)
+    const t = labelText(label, B.cap, B.plusCap, snap((B.x0 + B.x1) / 2), snap((B.y0 + B.y1) / 2))
+    const pts = t.paths.flatMap(d => parsePath(d, 0.05).flatMap(sb => sb.pts))
+    if (pts.every(q => -badgeDist(q, B) >= PAD - 1e-6)) break
+    w += 0.5
+  }
+  return rect(w)
 }
 // signed distance from a point to the badge centreline shape (> 0 outside)
 function badgeDist([x, y], B) {

@@ -191,6 +191,7 @@ export function compose(input, opts = {}) {
   const ops = flat(input)
   const layers = []
   const push = (f, role, cls, extra) => { if (f && nonEmpty(f)) layers.push({ f, role, cls, ...extra }) }
+  const textF = []   // live lettering (ink ops with text: true)
 
   // pre-compute surface fields (for cast shadows)
   for (const o of ops) {
@@ -248,7 +249,7 @@ export function compose(input, opts = {}) {
             Sh = Sh ? uni(Sh, sh) : sh
           }
         }
-        if (Sh) { const [tr, top] = o.tone || SHADE_TONE[o.role] || ['shadow', M.SHADE_OP]; push(Sh, tr, cls, { op: o.shadeOp ?? top }) }
+        if (Sh) { const [tr, top] = o.tone || SHADE_TONE[o.role] || ['shadow', M.SHADE_OP]; push(Sh, tr, cls, { op: o.shadeOp ?? top, tone: true }) }
         // an ink disc (a tyre, a lens barrel) gets a thin sky rim inside its edge, so it still reads on a
         // dark page where ink sinks into the background
         if (o.role === 'ink' && !o.inset && o.inkRim !== false && o.box.w >= 2.8 && Math.abs(o.box.w - o.box.h) < 0.25 * o.box.w) {
@@ -258,7 +259,7 @@ export function compose(input, opts = {}) {
           if (A > Math.PI * r * r * 0.82) {
             const R = dilate(G, -0.3)
             F.subtract(R, dilate(G, -0.85))
-            push(R, 'c1', cls, { op: 0.85 })
+            push(R, 'c1', cls, { op: 0.85, tone: true })
           }
         }
         // rim light along the shadow edge of big surfaces
@@ -266,7 +267,7 @@ export function compose(input, opts = {}) {
           const R = F.copy(G)
           F.subtract(R, F.nudge(G, LN[0] * 0.45, LN[1] * 0.45))
           F.subtract(R, F.nudge(G, SD[0] * 1.1, SD[1] * 1.1))
-          push(R, 'edge', cls, { op: 0.9 })
+          push(R, 'edge', cls, { op: 0.9, tone: true })
         }
         // shine
         const kind = o.shine === undefined ? 'streak' : o.shine
@@ -278,7 +279,7 @@ export function compose(input, opts = {}) {
             Sf = glint(o.box.x0 + o.box.w * 0.3, o.box.y0 + o.box.h * 0.3, Math.max(0.9, Math.min(2.2, m * 0.2)) * (o.shineSize ?? 1))
           } else Sf = streak(G, kind, o.shineSize ?? 1, o.box, Gs)
           if (Sf && kind !== 'glint' && Sh) F.subtract(Sf, Sh)
-          push(Sf, 'shine', 'wm-shine', o.shineOp ? { op: o.shineOp } : undefined)
+          push(Sf, 'shine', 'wm-shine', { ...(o.shineOp ? { op: o.shineOp } : {}), tone: true })
         }
         return
       }
@@ -289,6 +290,7 @@ export function compose(input, opts = {}) {
         const G = F.strokesW(inkPolys(L, w, o.taper ?? true), MG)
         if (o.shift !== 0) uni(G, F.nudge(G, M.INK_SHIFT[0] * (o.shift ?? 1), M.INK_SHIFT[1] * (o.shift ?? 1)))
         push(G, o.role || 'ink', cls, o.op ? { op: o.op } : undefined)
+        if (o.text) textF.push(G)
         return
       }
       case 'tube': {
@@ -304,7 +306,7 @@ export function compose(input, opts = {}) {
           const u = Math.max(0.35, w * 0.42)
           const Sh = F.copy(o.core)
           F.subtract(Sh, F.nudge(o.core, LN[0] * u, LN[1] * u))
-          const [tr, top] = SHADE_TONE[o.role || 'c1'] || ['shadow', M.SHADE_OP]; push(Sh, tr, cls, { op: top })
+          const [tr, top] = SHADE_TONE[o.role || 'c1'] || ['shadow', M.SHADE_OP]; push(Sh, tr, cls, { op: top, tone: true })
         }
         return
       }
@@ -325,6 +327,15 @@ export function compose(input, opts = {}) {
       }
     }
   })
+
+  // Live lettering sits on flat colour: the cel shadow, rim light and shine (tone layers painted before it) clear a
+  // 0.55u margin around every letter, so a figure never straddles two tones (half its strokes would lose contrast)
+  if (textF.length) {
+    const T = F.field(MG); for (const G of textF) uni(T, G)
+    F.fillHoles(T, 12)   // and inside the counters
+    const Td = dilate(T, 0.55)
+    for (const l of layers) if (l.f && l.tone) F.subtract(l.f, Td)
+  }
 
   // place automatic sparkles in the freest corner
   if (sparkles.length) {

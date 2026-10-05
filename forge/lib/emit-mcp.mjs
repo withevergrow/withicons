@@ -135,8 +135,9 @@ export async function motionData(root, iconNames) {
     const ex = JSON.parse(fs.readFileSync(path.join(mdir, 'package.json'), 'utf8')).exports || {}
     if (ex['./motion.css'] && ex['./icons.css']) css = ['@withicons/motion/motion.css', '@withicons/motion/icons.css']
   } catch { /* package not generated yet */ }
-  const cdn = ['https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css', 'https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css']
-  return { source, presets, effects, css, cdn, icons: out }
+  // CDN: the presets + one small file per animated icon (dist/icons/<name>.css), not the all-icons icons.css
+  const cdn = ['https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css'], cdnIcon = 'https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons/<name>.css'
+  return { source, presets, effects, css, cdn, cdnIcon, icons: out }
 }
 
 // Per-icon colour palettes for the MCP server, HTTP API and CLI. Source: @withicons/core's generated dist/palettes/**

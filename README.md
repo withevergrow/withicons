@@ -85,15 +85,17 @@ Optional and separate: [`@withicons/motion`](packages/motion) animates the eleme
 or package, with pure CSS. Every icon has a tuned continuous loop and hover effect, plus icon-to-icon swaps.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">  <!-- one file per animated icon -->
 
 <span class="wm wm-loop" data-wm="bell">…bell icon…</span>                                     <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>   <!-- on hover -->
 <span class="wm-swap wm-fx-morph"><svg class="wm-a">…play…</svg><svg class="wm-b">…pause…</svg></span>
 ```
 
-`prefers-reduced-motion` switches everything off. Agents get exact code from the MCP tool `animate_icon` or
+`motion.css` (the presets) is about 10 KB gzipped and each icon's own moves are a 0.3 KB file; in a bundled app,
+`import '@withicons/motion/icons.css'` has all 500 (about 18 KB gzipped). With `<with-icon motion="loop">` the element
+links each icon's file for you. `prefers-reduced-motion` switches everything off. Agents get exact code from the MCP tool `animate_icon` or
 `npx withicons animate bell --trigger hover --format react`. Spec: [`forge/MOTION.md`](forge/MOTION.md).
 
 ## Live icons
@@ -107,6 +109,7 @@ import { render } from '@withicons/dynamic'
 render('calendar-date', { day: 17, month: 'MAR' }, 'luxe', { size: 48 })   // -> SVG string
 ```
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>  <!-- ~35 KB gzipped; each icon and style loads on first use -->
 <with-live-icon name="calendar-date" day="17" month="MAR" variant="bauhaus"></with-live-icon>
 ```
 
@@ -130,12 +133,23 @@ Try them at [withicons.com/live.html](https://withicons.com/live.html). Spec: [`
 | [`@withicons/mcp`](packages/mcp) | `npx -y @withicons/mcp` | MCP server for AI assistants (search, code, animation) |
 | [`withicons`](packages/cli) | `npx withicons search "throw away"` | CLI: search, code, `init` for AI coding tools |
 
-No build step, straight from a CDN:
+No build step, straight from a CDN. The page downloads only the icons it shows:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
 <with-icon name="home" variant="solid"></with-icon>
 ```
+
+`cdn.js` is 7 KB gzipped, then each icon is its own small file (a `line` icon about 150 bytes gzipped). Prefer
+Font Awesome-style `<i>` tags? `with-loader.js` (6 KB gzipped) links just the CSS of the icons on the page, in any style:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-loader.js" defer></script>
+<i class="with with-home"></i> <i class="with with-heart with-solid"></i>
+```
+
+Zero JavaScript: link one stylesheet per style (`with-line.css`, 26 KB gzipped). `with-all.css` imports every style
+(about 6.3 MB gzipped) and is for prototypes only. Details: [`packages/web`](packages/web#icon-classes-font-awesome-style).
 
 ## The same API everywhere
 

@@ -1285,16 +1285,16 @@
       { id: 'svelte', label: 'Svelte', file: 'Example.svelte', code: "<script>\n  " + imp('@withicons/svelte') + "\n</script>\n\n<" + alias + " size={24}" + sa + " />" },
       { id: 'angular', label: 'Angular', file: 'example.component.ts', code: "import { Component } from '@angular/core'\nimport { WithIconComponent } from '@withicons/angular'\n" + imp('@withicons/angular') + "\n\n@Component({\n  selector: 'app-example',\n  imports: [WithIconComponent],\n  template: `<with-icon [icon]=\"icon\" [size]=\"24\" />`,\n})\nexport class ExampleComponent { icon = " + alias + " }" },
       { id: 'solid', label: 'Solid', file: 'Example.tsx', code: imp('@withicons/solid') + "\n\nexport const Example = () => <" + alias + " size={24}" + (css ? ' style={{ ' + (cz.ink ? "color: '" + cz.ink + "', " : '') + Object.keys(cz.vars).map(function (k) { return "'" + k + "': '" + cz.vars[k] + "'" }).join(', ') + ' }}' : '') + " />" },
-      { id: 'wc', label: 'Web component', file: 'index.html', code: '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/index.js"></script>\n\n<with-icon name="' + name + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + ' label="' + T + '"' + sa + '></with-icon>' },
-      { id: 'classes', label: 'Icon classes', file: 'index.html', code: cssLink(st) + '\n' + (css ? '<!-- custom colours need the runtime: CSS-only icons can’t see CSS variables -->\n' + RUNTIME + '\n' : '') + '\n' + iTag(name, st) },
+      { id: 'wc', label: 'Web component', file: 'index.html', code: '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>\n\n<with-icon name="' + name + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + ' label="' + T + '"' + sa + '></with-icon>' },
+      { id: 'classes', label: 'Icon classes', file: 'index.html', code: (css ? '<!-- custom colours need the runtime (inline SVG): CSS-only icons can’t see CSS variables -->\n' + RUNTIME : LOADER) + '\n\n' + iTag(name, st) },
       { id: 'svg', label: 'SVG', file: fname(st, name, 'svg'), code: css ? svgText(st, name, { mode: 'file', color: exportColor(st), pretty: true }) : codeSvg(st, name) },
     ]
   }
-  // one stylesheet per style: with-line.css is ~26 KB gzipped, with-all.css ~2 MB and render-blocking. A single style file
-  // also draws that style's bare tags, and several style files can share a page.
-  function cssLink(st) { return '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-' + (STYLE[st] ? st : 'line') + '.css">' }
-  function cssLinks(styles) { return styles.filter(function (x, i, a) { return a.indexOf(x) === i }).map(cssLink).join(String.fromCharCode(10)) }
-  function headLines(st, name) { return cssLink(st) + (edCss(st, name) ? String.fromCharCode(10) + RUNTIME : '') }
+  // setup line for <i> tags: with-loader.js (~6 KB gzipped) links just the CSS of the icons on the page, in any mix of
+  // styles (a line icon ~270 bytes gzipped). Custom colours need with-icons.js (inline SVG, also only the icons shown).
+  // Whole-style stylesheets (with-line.css ~26 KB gzipped) and with-all.css (~6.3 MB gzipped) are opt-ins on the developers page.
+  var LOADER = '<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>'
+  function headLines(st, name) { return edCss(st, name) ? RUNTIME : LOADER }
   function iTag(name, st, plain) { var c = plain ? '' : edCss(st, name); return '<i class="with with-' + name + (st && st !== 'line' ? ' with-' + st : '') + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
   // the open icon's own colours (Colours panel in the Look tab, owned by the studio in js/editor.js) for exports and code
   function edColors(st, name) { if (!ED || !V.open || name !== V.name) return null; var e = ED.get(); return e.name === name ? ED.colorsFor(st, name) : null }
@@ -1786,8 +1786,8 @@
     else if (act === 'png') downloadPng(st, name)
     else if (act === 'svg') downloadSvg(st, name)
     else if (act === 'copy-svg') copySvgCode(st, name)
-    else if (act === 'copy-tag') { copyText(iTag(name, st)).then(function () { flash(t); bump(name); toast('Copied <code>' + esc(iTag(name, st)) + '</code>. First time on a page? Also add the stylesheet line once.', { icon: name, st: st, action: { label: 'Copy stylesheet', run: function () { copyText(headLines(st, name)).then(function () { toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once.') }, clipFail) } } }) }, clipFail) }
-    else if (act === 'copy-css') { copyText(headLines(st, name)).then(function () { flash(t); toast('Copied the stylesheet line. Put it in your page’s &lt;head&gt; once, then every &lt;i&gt; tag works.') }, clipFail) }
+    else if (act === 'copy-tag') { copyText(iTag(name, st)).then(function () { flash(t); bump(name); toast('Copied <code>' + esc(iTag(name, st)) + '</code>. First time on a page? Also add the setup line once.', { icon: name, st: st, action: { label: 'Copy setup line', run: function () { copyText(headLines(st, name)).then(function () { toast('Copied the setup line. Put it in your page’s &lt;head&gt; once.') }, clipFail) } } }) }, clipFail) }
+    else if (act === 'copy-css') { copyText(headLines(st, name)).then(function () { flash(t); toast('Copied the setup line. Put it in your page’s &lt;head&gt; once, then every &lt;i&gt; tag works, in any style.') }, clipFail) }
     else if (act === 'close') closeViewer()
     else if (act === 'prev') stepViewer(-1)
     else if (act === 'next') stepViewer(1)
@@ -2111,8 +2111,7 @@
     if (b.hasAttribute('data-zip')) zipSelected(b.getAttribute('data-zip'))
     else if (b.hasAttribute('data-sel-tags')) {
       var tags = Array.from(S.sel).map(function (k) { var p = k.split('|'); return iTag(p[0], p[1], true) }).join('\n')
-      var links = cssLinks(Array.from(S.sel).map(function (k) { return k.split('|')[1] })), nl = links.split(String.fromCharCode(10)).length
-      copyText(tags).then(function () { toast('Copied ' + S.sel.size + ' &lt;i&gt; tag' + (S.sel.size > 1 ? 's' : '') + '. First time on a page? Add the stylesheet line' + (nl > 1 ? 's' : '') + ' once.', { action: { label: 'Copy stylesheet' + (nl > 1 ? 's' : ''), run: function () { copyText(links).then(function () { toast('Copied ' + (nl > 1 ? nl + ' stylesheet lines, one per style' : 'the stylesheet line') + '.') }, clipFail) } } }) }, clipFail)
+      copyText(tags).then(function () { toast('Copied ' + S.sel.size + ' &lt;i&gt; tag' + (S.sel.size > 1 ? 's' : '') + '. First time on a page? Add the setup line once.', { action: { label: 'Copy setup line', run: function () { copyText(LOADER).then(function () { toast('Copied the setup line. It loads only the icons on the page, in any style.') }, clipFail) } } }) }, clipFail)
     }
     else if (b.hasAttribute('data-sel-clear')) clearSel()
     else if (b.hasAttribute('data-sel-all')) selectRange(0, ITEMS.length - 1)

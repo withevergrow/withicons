@@ -20,16 +20,22 @@ npm i @withicons/motion
 ```
 
 ```js
-import '@withicons/motion/motion.css'   // the presets (about 7 KB gzipped)
-import '@withicons/motion/icons.css'    // each icon's own loop and hover (about 9 KB gzipped)
+import '@withicons/motion/motion.css'   // the presets (about 10 KB gzipped)
+import '@withicons/motion/icons.css'    // each icon's own loop and hover, all 500 (about 18 KB gzipped)
 ```
 
-From a CDN, with no build step:
+From a CDN, with no build step, load the presets and only the icons you animate. Each icon's defaults are also a file of
+their own, `dist/icons/<name>.css` (about 0.5 KB, 0.3 KB gzipped):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/heart.css">
 ```
+
+With `<with-icon>` you do not even list them: the element module, served from a CDN, links `icons/<name>.css` for each
+animated icon when `icons.css` is not on the page (see [Web component](#web-component)). `icons.css` (every icon) is the
+simple choice for bundled apps, where it is one cached file.
 
 ## Use it with CSS only
 
@@ -214,9 +220,12 @@ motionAttrs('bell', { trigger: 'hover' })  // { class: 'wm wm-hover', 'data-wm':
 ```
 
 Size: `motion()` and `swap()` are about 4 KB gzipped, the `<with-icon>` upgrade about 5 KB. They read each icon's own
-defaults from `icons.css` on the element, so load `icons.css` before calling them. `motionFor()`, `motionAttrs()` and the
-export helpers need the full spec table of all 500 icons (`@withicons/motion/icons`, about 29 KB gzipped); bundlers only
-include it when you import one of those.
+defaults from `icons.css` (or the icon's own `icons/<name>.css`) on the element, so load it before calling them.
+`motionFor()`, `motionAttrs()` and the export helpers need the full spec table of all 500 icons (`@withicons/motion/icons`,
+about 29 KB gzipped); bundlers only include it when you import one of those. Without a bundler (a CDN
+`<script type="module">`), import `@withicons/motion/runtime` (`dist/runtime.js`: `motion()`, `swap()` and the rest without
+the table) or the element, never `dist/index.js` unless you need `motionFor()`, since an unbundled import downloads every
+module it names.
 
 Options for `motion()`: `trigger` (`loop`, `hover`, `once`, `inview`), `preset`, `duration`, `amount`, `origin` ([x, y] on the
 24 × 24 grid), `dir` (degrees: 0 right, 90 down, 180 left, 270 up), `steps`, `delay`, `force`, `offscreen`.
@@ -314,6 +323,20 @@ With `@withicons/web`, import the element upgrade once and use attributes:
 ```js
 import '@withicons/motion/element'
 ```
+
+From a CDN (one animated bell: about 42 KB gzipped in all, `motion.css`, the element and `cdn.js` included):
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/element.js"></script>
+
+<with-icon name="bell" motion="loop"></with-icon>   <!-- links dist/icons/bell.css by itself -->
+```
+
+Served from a package path (jsDelivr, unpkg, `/node_modules/…`), the element links `icons/<name>.css` next to itself for
+each animated icon, unless `icons.css` already styles it. Self-hosting a copy elsewhere? Call
+`setMotionIconBase('/vendor/motion/icons/')` from `@withicons/motion/element` (or `null` to turn it off).
 
 ```html
 <with-icon name="bell" motion="loop"></with-icon>

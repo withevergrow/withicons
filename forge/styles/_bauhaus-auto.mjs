@@ -9,7 +9,7 @@
 //   BADGE   S-plate badges: a disc in the contrasting primary with a cream glyph
 // Colours come from a small fixed triad per icon (main / part / inlay), chosen
 // deterministically, so a page of icons reads as one series of posters.
-import { parsePath, area, pointInRing, distToPolyline, rng, V } from '../kernel/geom.mjs'
+import { parsePath, area, pointInRing, distToPolyline, rng, V, bbox } from '../kernel/geom.mjs'
 import * as F from './_bauhaus-field.mjs'
 import { paint, compose } from './_bauhaus-compose.mjs'
 import { autoTune, LIVE, LIVE_ONE, liveCtx } from './_bauhaus-tune.mjs'
@@ -26,9 +26,10 @@ export const K = {
   GAP_S: 1.2,      // moat around badges and modifiers
   DEEP: 1.35,      // a K centreline this deep inside the fill is interior detail
   INK_HOLE: 7,     // closed cutouts smaller than this (u^2) are printed in ink
-  WT: 1.6,         // live-icon text set into a frame
-  WT_S: 1.4,       // the same at the font's small size
-  WT_LINE: 2.05,   // live icons without a frame: text and bars
+  WT: 1.75,        // live-icon text set into a frame: the stroke font's own weight (its counters and bowls)
+  WT_S: 1.75,      // the same at the font's small size
+  WT_LINE: 2.05,   // live icons without a frame: bars
+  WT_FREE: 1.75,   // live icons without a frame: text (the stroke font's own weight, counters stay open)
   LO: 0.6,
   TOL: 0.03,
 }
@@ -113,7 +114,11 @@ export function build(icon) {
   const T = autoTune(icon.name)
   const live = !!icon.params
   const { lines, fills, cutouts } = read(icon, T)
-  const base = lines.filter(l => l.plate !== 'S')
+  // T.mark: a small closed A ring (a calendar's highlighted day) prints as a solid disc in that colour,
+  // not as a black ring that disappears into black dots
+  const isMark = l => T.mark && live && l.plate === 'A' && l.closed && l.pts.length > 2 && (b => Math.max(b.w, b.h) < 2.2)(bbox(l.pts))
+  const marks = lines.filter(isMark)
+  const base = lines.filter(l => l.plate !== 'S' && !isMark(l))
   const sig = lines.filter(l => l.plate === 'S')
   const tri = triadOf(icon.name, T)
 
@@ -229,7 +234,7 @@ export function build(icon) {
   if (plainInk.length) F.strokes(plainInk, WI, K.LO, ink)
   const tall = l => { let a = Infinity, b = -Infinity; for (const p of l.pts) { a = Math.min(a, p[1]); b = Math.max(b, p[1]) } return b - a }
   const capH = textLines.length ? Math.max(...textLines.map(tall)) : 0
-  const text = textLines.length ? F.strokes(textLines, !hasFill ? K.WT_LINE : capH < 5.25 ? K.WT_S : K.WT, K.LO) : null
+  const text = textLines.length ? F.strokes(textLines, !hasFill ? K.WT_FREE : capH < 5.25 ? K.WT_S : K.WT, K.LO) : null
   if (text) F.union(ink, text)
   if (holes.length) { const h = F.region(holes, K.LO); F.intersect(h, massPre); F.union(ink, h) }
 
@@ -305,7 +310,7 @@ export function build(icon) {
     if (F.extent(inkOn, 0.05).area > 0.05) F.subtract(ink, inkOn)
     else inkOn = null
   }
-  return { mass, part, inlay, ink, inkOn, band, face, badge, paper, textPaper, sInk, roles, tri, hasFill }
+  return { mass, part, inlay, ink, inkOn, band, face, badge, paper, textPaper, sInk, roles, tri, hasFill, marks }
 }
 
 // enclosed openings of the mass (not touching the border, 3-40 u^2) that lie
@@ -401,6 +406,10 @@ export function auto(icon) {
   add(B.sInk, B.roles.s, 0.1, 'wm-s')
   add(B.paper, 'tint', 0.1, 'wm-s')
   add(B.textPaper, 'tint', 0.1)
+  for (const m of B.marks || []) {
+    const b = bbox(m.pts), r = 1.75, cx = +b.cx.toFixed(2), cy = +b.cy.toFixed(2)
+    nodes.push(['path', { d: `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0z`, fill: paint(autoTune(icon.name).mark) }])
+  }
   return nodes
 }
 
