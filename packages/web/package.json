@@ -25,9 +25,7 @@
     "web-components",
     "custom-elements",
     "cdn",
-    "css-icons",
-    "icon-classes",
-    "font-awesome-alternative",
+    "no-build",
     "line",
     "solid",
     "duo",
@@ -55,8 +53,7 @@
   "sideEffects": [
     "./dist/index.js",
     "./dist/cdn.js",
-    "./dist/full.js",
-    "./dist/classes/*"
+    "./dist/full.js"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -79,7 +76,6 @@
       "default": "./dist/data/*.js"
     },
     "./icons/*": "./dist/icons/*",
-    "./classes/*": "./dist/classes/*",
     "./package.json": "./package.json"
   },
   "typesVersions": {

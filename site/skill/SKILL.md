@@ -1,6 +1,6 @@
 ---
 name: with-icons
-description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 20 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel, retro, the studio styles luxe (premium 3D), bauhaus and skeuo (skeuomorphic), and the storybook styles anime, gothic, pastel, coquette and plush (stuffed toys for kids)) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps), and live icons whose content you set (@withicons/dynamic: a calendar showing a date, a clock showing a time, a notification count, a battery level, a short label). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism/3D/Bauhaus/skeuomorphic/anime/gothic/pastel/coquette/kids icon, a calendar/clock/badge/battery icon with its own date, time, number or text, or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
+description: Add icons to any web, app or UI project with the "with icons" library (withicons.com, npm @withicons/*). It has 500 MIT-licensed icons in 20 styles (line, solid, duo, gloss, engrave, blueprint, sketch, plus the multi-colour glass, kawaii, sticker, pixel, retro, the studio styles luxe (premium 3D), bauhaus and skeuo (skeuomorphic), and the storybook styles anime, gothic, pastel, coquette and plush (stuffed toys for kids)) for React, Vue, Svelte, Angular, SolidJS, plain HTML (web component, CSS icon classes, SVG sprites) and CDN use, optional animations (@withicons/motion: continuous loops, hover effects, icon-to-icon swaps; also exported as animated GIF / APNG / SVG / PowerPoint / Lottie files for slides and docs), and live icons whose content you set (@withicons/dynamic: a calendar showing a date, a clock showing a time, a notification count, a battery level, a short label). Use this skill whenever a task needs an icon or icon button, icons for a nav bar, sidebar, toolbar, menu, tabs, form, table, dashboard, landing page, empty state or feature list, an animated or cute/retro/pixel/glassmorphism/3D/Bauhaus/skeuomorphic/anime/gothic/pastel/coquette/kids icon, a calendar/clock/badge/battery icon with its own date, time, number or text, an icon file (SVG, PNG, PDF, PowerPoint) or an animated icon for slides, a deck, a document, email or social (GIF, animated PowerPoint, Lottie), or the right icon name for a concept. Also use it when replacing emoji, hand-written inline SVG or another icon set (Lucide, Heroicons, Font Awesome, Material, Feather) with a consistent one.
 ---
 
 # with icons
@@ -18,7 +18,7 @@ has a default size of 24. Site: https://withicons.com · Repo: https://github.co
 | Angular 17+ | `npm i @withicons/angular` | `imports: [WithIconComponent]` then `<with-icon [icon]="Home" />` |
 | SolidJS | `npm i @withicons/solid` | `import { Home } from '@withicons/solid'` then `<Home />` |
 | any HTML, Astro, Lit, no build | CDN script `@withicons/web/dist/cdn.js` (loads only the icons shown) | `<with-icon name="home"></with-icon>` |
-| Font Awesome-style classes | CDN loader `@withicons/web/dist/classes/with-loader.js` (loads only the icons shown) | `<i class="with with-home"></i>` |
+| Font Awesome-style classes | CDN loader `@withicons/classes/dist/with-loader.js` (loads only the icons shown), or `npm i @withicons/classes` | `<i class="with with-home"></i>` |
 | static SVG / sprite / email / CMS | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
 | Node, build scripts, name lookup | `npm i @withicons/core` | `resolve('bin').name` returns `'trash'` |
 | animation (any of the above) | `npm i @withicons/motion` | `<span class="wm wm-loop" data-wm="bell">…icon…</span>` (section 7) |
@@ -106,7 +106,9 @@ Use the first one available, in this order:
 - **MCP** (best for agents). Remote: `https://withicons.com/mcp` (Streamable HTTP). Local: `npx -y @withicons/mcp`.
   Tools: `search_icons` (query, then ranked names plus ready-to-paste import/usage), `get_icon` (name + style + format,
   which returns SVG or a framework snippet), `animate_icon` (name + trigger loop/hover/once/inview/swap + format, which returns
-  animation code), `resolve_icon` (alias or typo to canonical name), `list_styles`, `list_categories`.
+  animation code), `export_icon` (name + style + format, which makes FILES: svg, png, pdf, pptx, docx, favicons, app assets,
+  lottie and animated gif / apng / animated-svg / pptx-animated; section 7a), `resolve_icon` (alias or typo to canonical
+  name), `list_palettes`, `list_styles`, `list_categories`.
   Call `tools/list` to confirm names and arguments.
   Not connected yet? `npx withicons init` adds this skill and the server to the AI tools it finds in the project
   (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf); name one (`npx withicons init cursor`) or add `--global`.
@@ -141,6 +143,38 @@ import '@withicons/motion/icons.css'    // each icon's tuned motion, all 500 (~1
   one or two icons per screen. `prefers-reduced-motion` turns everything off automatically.
 - An animated icon is still decorative: keep the accessible name on the button, never in the animation.
   Full list of tuned icons: [reference/motion.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/motion.md).
+
+## 7a. Animated icon files for slides, docs and social
+
+When the person wants a moving icon in PowerPoint, Keynote, Google Slides, a document, an email, Slack/Notion or a social
+post, give them a FILE, not code. One command, no browser (Node 18+):
+
+```bash
+npx withicons export bell --format gif --background "#ffffff" --out slides   # bell-line-ring.gif, loops forever
+npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"   # a ready 16:9 slide, icon moving
+npx withicons export play --format gif --motion swap --to pause --effect morph            # play turns into pause and back
+```
+
+MCP: `export_icon({ name: 'bell', style: 'luxe', format: 'gif', background: '#ffffff', out_dir: 'slides' })` writes the
+file (without `out_dir` a small GIF comes back as image content). The remote server (`https://withicons.com/mcp`) cannot
+render frames: it answers GIF / APNG / PowerPoint requests with the exact `npx withicons export ...` command to run.
+
+- **Which format.** `gif`: plays in PowerPoint (slide show and editor), Keynote, Google Slides, Word, Gmail, Apple Mail, Outlook 365,
+  Slack, Teams, Notion. `pptx-animated`: a slide with that GIF on it (opens in PowerPoint, Keynote, Google Slides).
+  `apng` (`.apng.png`): smooth see-through edges on web pages; Office and Google Slides show only its first frame.
+  `animated-svg`: tiny, browsers only. `lottie` / `dotlottie`: vector, for apps, After Effects, Canva, LottieFiles.
+  Video (MP4, WebM) and animated WebP come from the icon page on withicons.com (browser encoders).
+- **Background.** GIF transparency is on or off per pixel, so soft edges are blended with a colour. Pass the slide's
+  colour as `--background` (solid tile, cleanest) or `--matte` (transparent, edges blended for that colour). A GIF made
+  for white shows a light fringe on a dark slide: export again for the real slide colour.
+- **Colours are baked in.** A GIF cannot be recoloured in PowerPoint or Keynote. Pick `--style`, `--palette`, `--color`
+  / `--c1` … before exporting (`withicons palettes <name>` lists palettes).
+- **Size.** Default 256 px (pptx-animated 480): sharp up to ~1.75 in / 4.5 cm wide on a 1080p slide; `--size 512`
+  for full-screen or 4K. Bigger and longer means heavier: a typical 256 px GIF is 20-300 KB.
+- **Motion.** The icon's tuned loop by default (same keyframes as the website). `--motion hover` / `once` play the
+  one-shot then rest, `--motion <preset>` (spin, ring, beat, bounce, float, pop, tada, draw …), `--motion swap`
+  (+ `--to`, `--effect`), `--fps`, `--seconds`, `--loop 1` to play once. Every style animates, palettes included.
+- In the deck: Insert > Pictures (or drag the file in); GIFs play in the slide show. Keep one moving icon per slide.
 
 ## 7b. Live icons (content you set, separate package)
 
@@ -181,7 +215,7 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
 - Don't put palette styles, loops or creative styles in dense 16-20px controls: they turn to noise.
 - `strokeWidth` only affects styles with live strokes (line, duo, blueprint, sketch, kawaii); it does nothing on the filled styles.
 - From a CDN, load only what the page shows: `<with-icon>` via `https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js`
-  (7 KB gzipped + one small file per icon), `<i>` classes via `.../web@0.2.0/dist/classes/with-loader.js` (6 KB gzipped +
+  (7 KB gzipped + one small file per icon), `<i>` classes via `.../classes@0.2.0/dist/with-loader.js` (6 KB gzipped +
   ~270 bytes per line icon), live icons via `.../dynamic@0.2.0/dist/cdn/lite.js`. Pin the version in production.
   Never `with-all.css` (every style, ~6.3 MB gzipped) or `@withicons/web/full` on a real page; `with-<style>.css`
   (one whole style, `with-line.css` 26 KB gzipped) is the zero-JS option.
@@ -207,8 +241,8 @@ first line sends you here. Each brief has a `MY TASK:` line. Do that task:
 - **fit**: an honest verdict on whether that icon says what they mean: how people will read it, ambiguity or cultural
   issues, whether it needs a text label, and up to 3 better options from the library.
 - **slides** (icon page or an app guide): which file to grab from the icon page (Copy image; SVG to recolour in
-  PowerPoint, Keynote, Figma, Canva; PNG at 256 px for slides, 1024 px for print), how to insert, recolour and resize it
-  in their app, layout tips, and the guide `https://withicons.com/guides/<app>.html` (powerpoint, google-slides, keynote,
+  PowerPoint, Keynote, Figma, Canva; PNG at 256 px for slides, 1024 px for print; an animated GIF on the slide's colour
+  for a moving icon, section 7a), how to insert, recolour and resize it in their app, layout tips, and the guide `https://withicons.com/guides/<app>.html` (powerpoint, google-slides, keynote,
   canva, figma, notion, word-google-docs, wordpress, webflow, framer, wix-squarespace, email-signatures, html).
 
 Always: search before naming anything (section 6), link `https://withicons.com/icons/<name>.html` for every pick, and

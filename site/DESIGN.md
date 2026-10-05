@@ -97,11 +97,11 @@ Data globals are renamed: `window.WITH` (meta) and `window.WITH_SVG[style][icon]
 update forge/tools/site-data.mjs; site code must use the new globals.
 
 ## Developer-facing names (after the rename)
-npm `@withicons/core|react|vue|svelte|angular|solid|web|static|search|mcp`. Web component `<with-icon name="home"
+npm `@withicons/core|react|vue|svelte|angular|solid|web|classes|static|search|mcp|motion|dynamic`. Web component `<with-icon name="home"
 variant="solid">`. Classes: `<i class="with with-home"></i>`, `<i class="with with-home with-solid"></i>`, CDN setup
-`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer>` (links only the icons on the
-page; zero JS: `with-base.css` + `classes/<style>/<name>.css`; one style: `with-line.css`; `with-all.css` is heavy, prototypes
-only), runtime `…/classes/with-icons.js`. Element from a CDN: `…/web/dist/cdn.js`. MCP: `npx -y @withicons/mcp`. Local site copies live in `site/vendor/with/`.
+`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer>` (links only the icons on the
+page; zero JS: `with-base.css` + `<style>/<name>.css`; one style: `with-line.css`; `with-all.css` is heavy, prototypes
+only), runtime `…/classes/dist/with-icons.js`. Element from a CDN: `…/web/dist/cdn.js`. MCP: `npx -y @withicons/mcp`. Local site copies live in `site/vendor/with/`.
 Not yet published — developer pages say "launching soon" next to install commands and offer direct downloads.
 
 ## Page map and owners

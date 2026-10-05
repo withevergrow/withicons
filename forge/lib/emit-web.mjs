@@ -221,7 +221,7 @@ const RUNTIME = [LOOKUP_SRC, withWarnOnce, 'withWarnOnce.seen = {}', withHas, wi
 
 export default async function emit(ctx) {
   const P = 'packages/web'
-  const out = distWriter(ctx, P + '/dist', { keep: ['classes'] })   // dist/classes belongs to emit-web-classes
+  const out = distWriter(ctx, P + '/dist')   // the icon classes are their own package: @withicons/classes (emit-classes)
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/web ${ctx.version} — generated, do not edit. MIT.\n`
   const head = `const DEFAULT_STYLE = ${J(ctx.defaultStyle)}\nconst STYLES = ${J(styleTable(ctx))}\nconst styleNames = ${J(styleNames)}\n`
@@ -341,7 +341,7 @@ declare global {
   await out.flush()
 
   const pkg = {
-    ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn', 'css-icons', 'icon-classes', 'font-awesome-alternative',
+    ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn', 'no-build',
       ...styleNames, 'multicolor-icons', 'animated-icons']),
     type: 'module',
     sideEffects: ['./dist/index.js', './dist/cdn.js', './dist/full.js'],
@@ -485,6 +485,14 @@ import '@withicons/motion/element'
 <with-icon name="bell" motion="loop"></with-icon>
 <with-icon name="bell" motion="hover" preset="shake"></with-icon>
 <with-icon name="play" swap-to="pause" swap-effect="flip" swap-trigger="click" aria-label="Play"></with-icon>
+\`\`\`
+
+## Icon classes (Font Awesome style)
+
+\`<i class="with with-home"></i>\` tags are their own package, [\`@withicons/classes\`](https://www.npmjs.com/package/@withicons/classes):
+
+\`\`\`html
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${v}/dist/with-loader.js" defer></script>
 \`\`\`
 
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

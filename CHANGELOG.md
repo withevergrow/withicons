@@ -12,6 +12,29 @@ version from another commit).
 
 ### Added
 
+- **Animated icon files from the terminal and from AI agents** (no browser): `withicons export <name> --format gif`,
+  `apng`, `animated-svg` and **`pptx-animated`** (a ready 16:9 PowerPoint slide whose picture is the animated GIF; plays in
+  PowerPoint, Keynote and Google Slides). Frames come from `@withicons/motion`'s own keyframes (the same as the website),
+  frozen per frame and drawn by `@resvg/resvg-js`, then encoded by the site's GIF / APNG encoders, so a file from the CLI
+  moves like the icon page. Options: `--motion loop|hover|once|swap|<preset>`, `--to` / `--effect` / `--hold` (icon turns
+  into another), `--fps`, `--seconds`, `--loop`, `--size` (default 256), `--background` (solid, best for slides) and
+  `--matte` (transparent GIF, soft edges blended with the colour it will sit on). Icons without tuned motion pulse; long
+  or huge animations are refused with a hint (600 frames, 1024 px). `pptx-sheet --motion <m>` animates every style.
+  WebP, JPG, AVIF, animated WebP and video stay in the browser (the error now names the terminal alternatives).
+- **MCP `export_icon`** (`@withicons/mcp`): files instead of code (every `withicons export` format, animated ones
+  included). The local server saves them to `out_dir` and returns small ones inline (GIF / PNG as MCP image content,
+  text as text, the rest as base64 resources); the remote server makes the vector, code and Lottie formats and answers
+  PNG-based / animated ones with the exact `npx withicons export …` command and the icon page. `animate_icon` results
+  point at it. `@resvg/resvg-js` is now an optional dependency of `@withicons/mcp` too.
+- Skill: a "7a. Animated icon files for slides, docs and social" recipe (which command, slide-colour background, sizes,
+  which apps play GIF / APNG / Lottie, the MCP path).
+- **`@withicons/classes`**, a new package for the Font Awesome-style icon classes (`<i class="with with-home">`), split
+  out of `@withicons/web` so each package stays far below jsDelivr's 150 MB limit. Short paths:
+  `@withicons/classes/dist/with-loader.js` (the bare `cdn.jsdelivr.net/npm/@withicons/classes` URL serves it),
+  `dist/with-<style>.css`, `dist/<style>/<name>.css`, `dist/with-base.css`, `dist/with-all.css`, `dist/with-icons.js`;
+  with a bundler `import '@withicons/classes/with-line.css'`. **Moved:** `@withicons/web/dist/classes/*` no longer
+  exists; `@withicons/web` is now only the `<with-icon>` element. `with-icons.js` still draws its inline SVG from
+  `@withicons/web` (same version, fetched on demand).
 - **5 new storybook styles** (20 styles and 10,000 icons in all): `anime` (cel shading: tapered ink line art, flat cel
   colour, one hard shadow, specular shine and sparkles), `gothic` (cathedral craft: carved limestone and stained glass in
   dark lead, pointed arches and tracery), `pastel` (soft colour fields in lavender, peach, mint, baby blue, butter and

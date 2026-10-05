@@ -91,16 +91,16 @@
   /* ───────────── Download: every export format, grouped by what people need it for ─────────────
      Format ids are js/export/*.js descriptors (WithExport.get(id)). A format may sit in more than one group. */
   var DL_GROUPS = [
-    { id: 'slides', title: 'Slides & documents', say: 'PowerPoint, Word, Keynote, Google Slides, email', use: 'For PowerPoint, Word, Keynote, Google Slides and email.', ids: ['png', 'pptx', 'docx', 'pdf', 'gif', 'pptx-sheet', 'jpg'] },
+    { id: 'slides', title: 'Slides & documents', say: 'PowerPoint, Word, Keynote, Google Slides, email', use: 'For PowerPoint, Word, Keynote, Google Slides and email.', ids: ['png', 'pptx', 'docx', 'pdf', 'gif', 'pptx-animated', 'pptx-sheet', 'jpg'] },
     { id: 'design', title: 'Design tools', say: 'Figma, Illustrator, Canva, Sketch, After Effects', use: 'For Figma, Illustrator, Canva, Sketch and After Effects.', ids: ['svg-flat', 'svg', 'pdf', 'eps', 'png-set', 'lottie'] },
     { id: 'web', title: 'Websites & apps', say: 'Websites, iPhone and Android apps, code', use: 'For websites, iPhone and Android apps, and code.', ids: ['svg-flat', 'svg', 'webp', 'avif', 'favicon-pack', 'ico', 'android', 'ios'], code: ['jsx', 'tsx', 'vue', 'svelte', 'angular', 'react-native', 'html', 'css', 'data-uri', 'base64'] },
-    { id: 'animated', title: 'Animated', say: 'GIF, video, animated PNG and SVG, Lottie', use: 'Moving files: GIF, video, animated PNG and SVG, Lottie.', ids: ['gif', 'apng', 'webp-animated', 'webm', 'mp4', 'animated-svg', 'png-sequence', 'lottie', 'dotlottie'] }
+    { id: 'animated', title: 'Animated', say: 'GIF, video, animated PNG and SVG, Lottie', use: 'Moving files: GIF, video, animated PNG and SVG, Lottie.', ids: ['gif', 'apng', 'pptx-animated', 'webp-animated', 'webm', 'mp4', 'animated-svg', 'png-sequence', 'lottie', 'dotlottie'] }
   ]
   // the three files most people want for each goal; the rest of a group (and its code files) wait behind "More formats"
   var DL_TOP = { slides: ['png', 'pptx', 'docx'], design: ['svg-flat', 'pdf', 'svg'], web: ['svg-flat', 'webp', 'favicon-pack'], animated: ['gif', 'mp4', 'animated-svg'] }
   // [short name, what it is for, the badge on its card]
   var DL_FMT = {
-    png: ['PNG', 'Slides, docs, chat, Canva', 'PNG'], pptx: ['PowerPoint', 'A ready slide, icon centred', 'PPTX'], 'pptx-sheet': ['PowerPoint, every style', 'Pick a look with your team', 'PPTX'],
+    png: ['PNG', 'Slides, docs, chat, Canva', 'PNG'], pptx: ['PowerPoint', 'A ready slide, icon centred', 'PPTX'], 'pptx-sheet': ['PowerPoint, every style', 'Pick a look with your team', 'PPTX'], 'pptx-animated': ['PowerPoint, animated', 'A ready slide, icon moving', 'PPTX'],
     docx: ['Word', 'Reports, briefs, handouts', 'DOCX'], pdf: ['PDF', 'Prints razor sharp', 'PDF'], gif: ['GIF', 'Moves in slides, chat, email', 'GIF'], jpg: ['JPG', 'Where PNG isn’t accepted', 'JPG'],
     'svg-flat': ['SVG', 'Sharp at any size, colours locked in', 'SVG'], svg: ['SVG, themable', 'Recolour it with CSS', 'SVG'], eps: ['EPS', 'Older print and design tools', 'EPS'],
     'png-set': ['PNG set', '@1x to @4x in one ZIP', 'ZIP'], lottie: ['Lottie', 'Vector animation, any size', 'JSON'], dotlottie: ['dotLottie', 'Compact Lottie package', 'LOTTIE'],
@@ -130,9 +130,9 @@
     code: { key: 'size', unit: 'px', list: [16, 20, 24, 32, 48], def: 24, min: 8, max: 512 }
   }
   var DL_KIND = { png: 'raster', webp: 'raster', jpg: 'raster', avif: 'raster', 'png-set': 'set', 'svg-flat': 'vector', svg: 'vector', pdf: 'print', eps: 'print', gif: 'anim', apng: 'anim',
-    'webp-animated': 'anim', webm: 'anim', mp4: 'anim', 'png-sequence': 'anim', 'animated-svg': 'svganim', lottie: 'lottie', dotlottie: 'lottie', android: 'dp', ios: 'pt', docx: 'doc' }
-  var DL_FRAMES = ['gif', 'apng', 'webp-animated', 'webm', 'mp4', 'png-sequence']
-  var DL_SLOW = { gif: 1, apng: 1, 'webp-animated': 1, webm: 1, mp4: 1, 'png-sequence': 1, pptx: 1, 'pptx-sheet': 1, docx: 1, 'png-set': 1, 'favicon-pack': 1, ico: 1 }
+    'webp-animated': 'anim', webm: 'anim', mp4: 'anim', 'png-sequence': 'anim', 'pptx-animated': 'anim', 'animated-svg': 'svganim', lottie: 'lottie', dotlottie: 'lottie', android: 'dp', ios: 'pt', docx: 'doc' }
+  var DL_FRAMES = ['gif', 'apng', 'webp-animated', 'webm', 'mp4', 'png-sequence', 'pptx-animated']
+  var DL_SLOW = { gif: 1, apng: 1, 'webp-animated': 1, webm: 1, mp4: 1, 'png-sequence': 1, pptx: 1, 'pptx-sheet': 1, 'pptx-animated': 1, docx: 1, 'png-set': 1, 'favicon-pack': 1, ico: 1 }
   var DL_PADS = [['0', 'None'], ['0.08', 'Small'], ['0.16', 'Medium'], ['0.25', 'Large']]
   var DLKEY = 'with-download-v1'
   // when "on": where A goes, and where B starts from
@@ -1866,10 +1866,10 @@
     function varsList(mi) { return mi ? Object.keys(mi.vars).map(function (k) { return k + ': ' + mi.vars[k] }) : [] }
     function setupLines() {
       // with-loader.js (~6 KB gzipped) links just the CSS of the <i> tags on the page, any mix of styles
-      var lines = ['<script src="' + CDN + '/web/dist/classes/with-loader.js" defer></script>']
+      var lines = ['<script src="' + CDN + '/classes/dist/with-loader.js" defer></script>']
       // CSS-only icons paint palettes from a data URI that CSS variables cannot reach: custom colours need the tiny runtime
       var tb = swapReady() ? swapTarget() : null, bcz = tb ? bColors(tb).cz : null
-      if (S.code === 'tag' && ((isMulti() && colorsFor()) || bcz)) lines.push('<script src="' + CDN + '/web/dist/classes/with-icons.js" defer></script>')
+      if (S.code === 'tag' && ((isMulti() && colorsFor()) || bcz)) lines.push('<script src="' + CDN + '/classes/dist/with-icons.js" defer></script>')
       if (S.anim !== 'none' || swapTarget()) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/motion.css">')
       // the icon's own moves, one small file per animated icon (icons.css bundles all of them)
       if (S.code !== 'tag' && !swapReady() && ownCode(motionInfo())) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/icons/' + I.name + '.css">')
@@ -2382,7 +2382,7 @@
         web: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 8.5h18M9.5 12.5l-2 2 2 2M14.5 12.5l2 2-2 2"/></svg>',
         animated: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.8v6.4l5.2-3.2z"/></svg>'
       }
-      var FAM = { png: 'img', webp: 'img', jpg: 'img', avif: 'img', 'png-set': 'img', pptx: 'doc', 'pptx-sheet': 'doc', docx: 'doc', pdf: 'doc', eps: 'doc', 'svg-flat': 'vec', svg: 'vec',
+      var FAM = { png: 'img', webp: 'img', jpg: 'img', avif: 'img', 'png-set': 'img', pptx: 'doc', 'pptx-sheet': 'doc', 'pptx-animated': 'doc', docx: 'doc', pdf: 'doc', eps: 'doc', 'svg-flat': 'vec', svg: 'vec',
         ico: 'app', 'favicon-pack': 'app', android: 'app', ios: 'app', lottie: 'mo', dotlottie: 'mo', gif: 'mo', apng: 'mo', 'webp-animated': 'mo', webm: 'mo', mp4: 'mo', 'animated-svg': 'mo', 'png-sequence': 'mo' }
       function shell() {
         var q = po.quick === false ? '' :
@@ -2479,7 +2479,7 @@
       }
       function sizeTxt(f) {
         var k = kind(f), z = k && DL_SIZE[k]
-        if (f === 'pptx' || f === 'pptx-sheet') return '16:9 slide' + (f === 'pptx-sheet' ? 's' : '')
+        if (f === 'pptx' || f === 'pptx-sheet' || f === 'pptx-animated') return '16:9 slide' + (f === 'pptx-sheet' ? 's' : '')
         if (f === 'ico') return '16 to 256 px inside'
         if (f === 'favicon-pack') return '16 to 512 px'
         if (!z) return ''
@@ -2623,7 +2623,7 @@
       }
       function kb(n) { return n < 1024 ? n + ' bytes' : n < 1048576 ? Math.round(n / 1024) + ' KB' : (Math.round(n / 104857.6) / 10) + ' MB' }
       function sizeOf(data) { return data == null ? 0 : typeof data === 'string' ? new Blob([data]).size : data.size != null ? data.size : data.byteLength || data.length || 0 }
-      var TIP = { pptx: 'Open it in PowerPoint, Keynote or Google Slides.', 'pptx-sheet': 'An overview slide, then one slide per style.', docx: 'Open it in Word or Google Docs, then copy the icon where you need it.',
+      var TIP = { pptx: 'Open it in PowerPoint, Keynote or Google Slides.', 'pptx-animated': 'Open it in PowerPoint, Keynote or Google Slides; the icon plays as a GIF.', 'pptx-sheet': 'An overview slide, then one slide per style.', docx: 'Open it in Word or Google Docs, then copy the icon where you need it.',
         gif: 'Drop it on a slide: it plays in slideshow mode.', 'png-set': 'Unzip it: the README says which file goes where.', 'favicon-pack': 'Unzip it at your site’s root: the README has the tags to paste.',
         ios: 'Unzip it, then drag the .imageset folder into Assets.xcassets.', android: 'Put it in res/drawable in Android Studio.', 'png-sequence': 'Import the first frame as an image sequence.',
         lottie: 'Preview it on lottiefiles.com, or play it with lottie-web.', dotlottie: 'Drop it into LottieFiles, Webflow or Framer.', 'svg-flat': 'Drag it into Figma, Canva, Illustrator, Keynote or Slides.',

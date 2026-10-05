@@ -78,6 +78,12 @@ export function distWriter(ctx, distRel, { keep = [] } = {}) {
       let i = 0
       const worker = async () => { while (i < jobs.length) await jobs[i++]() }
       await Promise.all(Array.from({ length: 48 }, worker))
+      // folders the prune emptied (a removed style, a layout change) go too
+      const prune = d => {
+        for (const e of fs.readdirSync(d, { withFileTypes: true })) if (e.isDirectory()) prune(path.join(d, e.name))
+        if (d !== root && !kept.some(k => (d + path.sep).startsWith(k)) && !fs.readdirSync(d).length) fs.rmdirSync(d)
+      }
+      if (stale.length) prune(root)
       return files.size
     },
   }

@@ -9,6 +9,11 @@
  * PNG fallback needs a rasterizer: WithExport.rasterize in browsers. In Node, set WithExport.pngFromSvg =
  * async (svg, w, h) => Uint8Array to enable these formats (available() is false otherwise).
  *
+ * pptx-animated (and pptx-sheet with opts.animated) embeds an animated GIF instead (the 'gif' format of animated.js, which
+ * must be registered): PowerPoint, Keynote and Google Slides play GIFs in the slide show (PowerPoint also in the editor).
+ * No SVG extension there: PowerPoint 365 would show the still SVG instead of the GIF. The slide takes opts.background
+ * (its fill) and the GIF's transparent edges are blended with that colour (opts.matte overrides), so it sits cleanly on it.
+ *
  * pptx-sheet needs the icon in every style. It uses ctx.variants / opts.variants when given
  * ([{ style, title?, inner, root }]); otherwise, in browsers, it reads window.WITH.styles + window.WITH_SVG and loads
  * missing data/style-<name>.js files on demand.
@@ -64,12 +69,13 @@
       list.map(function (r) { return '<Relationship Id="' + r[0] + '" Type="' + (r[1].indexOf('http') === 0 ? r[1] : REL + r[1]) + '" Target="' + x(r[2]) + '"/>' }).join('') +
       '</Relationships>'
   }
-  function contentTypes(overrides) {
+  function contentTypes(overrides, gif) {
     return XMLDECL + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
       '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
       '<Default Extension="xml" ContentType="application/xml"/>' +
       '<Default Extension="png" ContentType="image/png"/>' +
       '<Default Extension="svg" ContentType="image/svg+xml"/>' +
+      (gif ? '<Default Extension="gif" ContentType="image/gif"/>' : '') +
       overrides.map(function (o) { return '<Override PartName="' + o[0] + '" ContentType="' + o[1] + '"/>' }).join('') +
       '</Types>'
   }
@@ -120,7 +126,18 @@
     var svgRaster = unstrokeBg(X.svgString(base, Object.assign({}, o, { size: px })), o.background)
     return pngFromSvg(svgRaster, px).then(function (png) { return { svg: svgEmbed, png: png } })
   }
+  // An animated picture = { gif: Uint8Array } (the 'gif' export of animated.js, in this variant's style and colours).
+  function gifPicture(v, ctx, opts, px) {
+    var f = X.get('gif')
+    if (!f) return Promise.reject(new Error('animated GIF export is not loaded (js/export/animated.js)'))
+    var c = {}
+    for (var k in ctx) c[k] = ctx[k]
+    c.style = v.style; c.inner = v.inner; c.root = v.root
+    var o = { size: px, matte: opts.matte || opts.background || '#ffffff', padding: opts.padding, fps: opts.fps, seconds: opts.seconds, loop: opts.loop }
+    return f.run(c, o).then(function (r) { return toBytes(r.data) }).then(function (gif) { return { gif: gif } })
+  }
   function blip(pngRid, svgRid) {
+    if (!svgRid) return '<a:blip r:embed="' + pngRid + '"/>'
     return '<a:blip r:embed="' + pngRid + '"><a:extLst><a:ext uri="' + SVG_EXT + '"><asvg:svgBlip xmlns:asvg="' + NS_SVG + '" r:embed="' + svgRid + '"/></a:ext></a:extLst></a:blip>'
   }
 
@@ -154,13 +171,22 @@
   var SP_ID = 1
   function xfrm(xx, y, w, h) { return '<a:xfrm><a:off x="' + round(xx) + '" y="' + round(y) + '"/><a:ext cx="' + round(w) + '" cy="' + round(h) + '"/></a:xfrm>' }
   function grpRoot() { return '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>' }
+  // a slide / text colour that reads on a background: '#rrggbb' -> 'RRGGBB'; dark backgrounds get light text
+  function hex6(c) {
+    var m = /^#?([0-9a-f]{3,8})$/i.exec(String(c || '').trim())
+    if (!m) return null
+    var h = m[1]
+    if (h.length === 3 || h.length === 4) h = h.slice(0, 3).replace(/./g, function (q) { return q + q })
+    return h.slice(0, 6).toUpperCase()
+  }
+  function isDark(h) { if (!h) return false; var n = parseInt(h, 16); return (0.2126 * (n >> 16 & 255) + 0.7152 * (n >> 8 & 255) + 0.0722 * (n & 255)) < 140 }
   function run(text, sz, color, bold) {
     return '<a:r><a:rPr lang="en-US" sz="' + sz + '"' + (bold ? ' b="1"' : '') + ' dirty="0">' + (color ? '<a:solidFill><a:srgbClr val="' + color + '"/></a:solidFill>' : '') + '</a:rPr><a:t>' + x(text) + '</a:t></a:r>'
   }
-  function titleSp(id, text, y, h) {
+  function titleSp(id, text, y, h, color) {
     return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="Title ' + id + '"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr>' +
       '<p:spPr>' + xfrm(609600, y, SW - 1219200, h) + '</p:spPr>' +
-      '<p:txBody><a:bodyPr anchor="ctr"><a:normAutofit/></a:bodyPr><a:lstStyle/><a:p><a:pPr algn="ctr"/>' + run(text, 3600, null, false) + '</a:p></p:txBody></p:sp>'
+      '<p:txBody><a:bodyPr anchor="ctr"><a:normAutofit/></a:bodyPr><a:lstStyle/><a:p><a:pPr algn="ctr"/>' + run(text, 3600, color || null, false) + '</a:p></p:txBody></p:sp>'
   }
   function textSp(id, name, text, xx, y, w, h, sz, color, bold) {
     return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="' + x(name) + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>' +
@@ -172,8 +198,9 @@
       '<p:blipFill>' + blip(pngRid, svgRid) + '<a:stretch><a:fillRect/></a:stretch></p:blipFill>' +
       '<p:spPr>' + xfrm(xx, y, w, h) + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>'
   }
-  function slideXml(shapes) {
-    return XMLDECL + '<p:sld xmlns:a="' + NS_A + '" xmlns:r="' + NS_R + '" xmlns:p="' + NS_P + '"><p:cSld><p:spTree>' + grpRoot() + shapes +
+  function slideXml(shapes, bg) {
+    var fill = bg ? '<p:bg><p:bgPr><a:solidFill><a:srgbClr val="' + bg + '"/></a:solidFill><a:effectLst/></p:bgPr></p:bg>' : ''
+    return XMLDECL + '<p:sld xmlns:a="' + NS_A + '" xmlns:r="' + NS_R + '" xmlns:p="' + NS_P + '"><p:cSld>' + fill + '<p:spTree>' + grpRoot() + shapes +
       '</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>'
   }
   var THEME = XMLDECL + '<a:theme xmlns:a="' + NS_A + '" name="with icons"><a:themeElements>' +
@@ -201,15 +228,15 @@
     '<p:sp><p:nvSpPr><p:cNvPr id="2" name="Title 1"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang="en-US"/><a:t>Title</a:t></a:r></a:p></p:txBody></p:sp>' +
     '</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sldLayout>'
 
-  // slides: [{ xml, media: [mediaIndex...] }], media: [{ svg, png }] -> pptx bytes
+  // slides: [{ xml, media: [mediaIndex...] }], media: [{ svg, png } | { gif }] -> pptx bytes
   function pptxPackage(title, subject, slides, media) {
-    var files = [], n = slides.length
+    var files = [], n = slides.length, anyGif = media.some(function (m) { return !!m.gif })
     var ov = [['/ppt/presentation.xml', CT + 'presentationml.presentation.main+xml'], ['/ppt/slideMasters/slideMaster1.xml', CT + 'presentationml.slideMaster+xml'],
       ['/ppt/slideLayouts/slideLayout1.xml', CT + 'presentationml.slideLayout+xml'], ['/ppt/theme/theme1.xml', CT + 'theme+xml'],
       ['/ppt/presProps.xml', CT + 'presentationml.presProps+xml'], ['/ppt/viewProps.xml', CT + 'presentationml.viewProps+xml'], ['/ppt/tableStyles.xml', CT + 'presentationml.tableStyles+xml'],
       ['/docProps/core.xml', 'application/vnd.openxmlformats-package.core-properties+xml'], ['/docProps/app.xml', CT + 'extended-properties+xml']]
     slides.forEach(function (s, i) { ov.push(['/ppt/slides/slide' + (i + 1) + '.xml', CT + 'presentationml.slide+xml']) })
-    files.push({ name: '[Content_Types].xml', data: contentTypes(ov) })
+    files.push({ name: '[Content_Types].xml', data: contentTypes(ov, anyGif) })
     files.push({ name: '_rels/.rels', data: rels([['rId1', 'officeDocument', 'ppt/presentation.xml'], ['rId2', 'http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties', 'docProps/core.xml'], ['rId3', 'extended-properties', 'docProps/app.xml']]) })
     files.push({ name: 'docProps/core.xml', data: coreXml(title, subject, 'icon, ' + subject) })
     files.push({ name: 'docProps/app.xml', data: appXml('<PresentationFormat>Widescreen</PresentationFormat><Slides>' + n + '</Slides>') })
@@ -233,24 +260,27 @@
       files.push({ name: 'ppt/slides/slide' + (i + 1) + '.xml', data: s.xml })
       var r = [['rId1', 'slideLayout', '../slideLayouts/slideLayout1.xml']]
       s.media.forEach(function (m, k) {
+        if (media[m].gif) { r.push(['rId' + (2 + 2 * k), 'image', '../media/image' + (m + 1) + '.gif']); return }
         r.push(['rId' + (2 + 2 * k), 'image', '../media/image' + (m + 1) + '.png'])
         r.push(['rId' + (3 + 2 * k), 'image', '../media/image' + (m + 1) + '.svg'])
       })
       files.push({ name: 'ppt/slides/_rels/slide' + (i + 1) + '.xml.rels', data: rels(r) })
     })
     media.forEach(function (m, i) {
+      if (m.gif) { files.push({ name: 'ppt/media/image' + (i + 1) + '.gif', data: m.gif }); return }
       files.push({ name: 'ppt/media/image' + (i + 1) + '.png', data: m.png })
       files.push({ name: 'ppt/media/image' + (i + 1) + '.svg', data: m.svg })
     })
     return X.zip(files)
   }
   // Layout of a single-icon slide: title on top, icon centred, style caption below.
-  function iconSlide(title, styleLabel, descr) {
-    var pic = 3657600, top = 1554480
+  // look: { bg: 'RRGGBB' | null, gif: true (one picture, no SVG twin) }
+  function iconSlide(title, styleLabel, descr, look) {
+    var pic = 3657600, top = 1554480, bg = look && look.bg, dark = isDark(bg)
     return slideXml(
-      titleSp(2, title, 365760, 1005840) +
-      picSp(3, 'Icon', descr, 'rId2', 'rId3', (SW - pic) / 2, top, pic, pic) +
-      textSp(4, 'Style', styleLabel + ' style', 609600, top + pic + 228600, SW - 1219200, 457200, 1600, '6B7280', false))
+      titleSp(2, title, 365760, 1005840, dark ? 'F9FAFB' : null) +
+      picSp(3, look && look.gif ? 'Animated icon' : 'Icon', descr, 'rId2', look && look.gif ? null : 'rId3', (SW - pic) / 2, top, pic, pic) +
+      textSp(4, 'Style', styleLabel + ' style' + (look && look.gif ? ', animated' : ''), 609600, top + pic + 228600, SW - 1219200, 457200, 1600, dark ? 'D1D5DB' : '6B7280', false), bg)
   }
   function pptxOut(ctx, bytes, suffix) {
     return { data: bytes, filename: X.filename(ctx, suffix, 'pptx'), mime: CT + 'presentationml.presentation' }
@@ -313,31 +343,51 @@
     run: function (ctx, opts) {
       opts = opts || {}
       var title = titleOf(ctx), px = pngPx(opts, 768)
+      // opts.animated: every style as an animated GIF (one at a time: frames are memory-hungry)
+      var anim = !!opts.animated, bgHex = anim ? hex6(opts.background) : null, dark = isDark(bgHex)
       return variants(ctx, opts).then(function (vs) {
         if (!vs.length) throw new Error('no styles available for ' + ctx.name)
-        return Promise.all(vs.map(function (v) { return picture(v, ctx, opts, px, 192) })).then(function (pics) {
+        var all = anim
+          ? vs.reduce(function (p, v) { return p.then(function (acc) { return gifPicture(v, ctx, opts, clampPx(opts.size, 64, 1024, 320)).then(function (g) { acc.push(g); return acc }) }) }, Promise.resolve([]))
+          : Promise.all(vs.map(function (v) { return picture(v, ctx, opts, px, 192) }))
+        return all.then(function (pics) {
           // overview grid
           var n = vs.length, cols = n <= 6 ? n : Math.min(6, Math.ceil(n / 2)), rows = Math.ceil(n / cols)
           var top = 1463040, bottom = SH - 365760, margin = 609600
           var cellW = (SW - 2 * margin) / cols, cellH = (bottom - top) / rows
           var labelH = 320040, pic = Math.min(cellW * 0.7, (cellH - labelH) * 0.82, 1645920)
-          var shapes = titleSp(2, title + ' in ' + n + ' style' + (n === 1 ? '' : 's'), 365760, 1005840), id = 3
+          var shapes = titleSp(2, title + ' in ' + n + ' style' + (n === 1 ? '' : 's'), 365760, 1005840, dark ? 'F9FAFB' : null), id = 3
           var media = []
           vs.forEach(function (v, i) {
             var c = i % cols, r = Math.floor(i / cols)
             var cx = margin + cellW * c + cellW / 2, y0 = top + cellH * r + (cellH - pic - labelH) / 2
             var label = styleTitle(v.style, v.title), current = v.style === ctx.style
-            shapes += picSp(id++, label, title + ' icon, ' + label + ' style', 'rId' + (2 + 2 * i), 'rId' + (3 + 2 * i), cx - pic / 2, y0, pic, pic)
-            shapes += textSp(id++, label + ' label', label, cx - cellW / 2, y0 + pic + 91440, cellW, labelH, 1400, current ? '111827' : '4B5563', current)
+            shapes += picSp(id++, label, title + ' icon, ' + label + ' style', 'rId' + (2 + 2 * i), anim ? null : 'rId' + (3 + 2 * i), cx - pic / 2, y0, pic, pic)
+            shapes += textSp(id++, label + ' label', label, cx - cellW / 2, y0 + pic + 91440, cellW, labelH, 1400, dark ? (current ? 'F9FAFB' : 'D1D5DB') : current ? '111827' : '4B5563', current)
             media.push(i)
           })
-          var slides = [{ xml: slideXml(shapes), media: media }]
+          var slides = [{ xml: slideXml(shapes, bgHex), media: media }]
           vs.forEach(function (v, i) {
             var label = styleTitle(v.style, v.title)
-            slides.push({ xml: iconSlide(title, label, title + ' icon, ' + label + ' style'), media: [i] })
+            slides.push({ xml: iconSlide(title, label, title + ' icon, ' + label + ' style', anim ? { bg: bgHex, gif: true } : null), media: [i] })
           })
-          return pptxOut(ctx, pptxPackage(title, 'all styles', slides, pics), 'styles')
+          return pptxOut(ctx, pptxPackage(title, 'all styles', slides, pics), anim ? 'styles-animated' : 'styles')
         })
+      })
+    }
+  }))
+
+  X.register(Object.assign({}, common, {
+    id: 'pptx-animated', label: 'PowerPoint slide (animated)', ext: 'pptx', mime: CT + 'presentationml.presentation',
+    audience: ['presentations'], animated: true, transparent: '1-bit',
+    note: 'A ready 16:9 slide with the icon moving: an animated GIF that plays in PowerPoint, Keynote and Google Slides. Pick your slide colour as the background so the edges blend in.',
+    available: function () { var g = X.get('gif'); return !!(g && g.available()) },
+    run: function (ctx, opts) {
+      opts = opts || {}
+      var title = titleOf(ctx), st = styleTitle(ctx.style), bg = hex6(opts.background)
+      return gifPicture({ style: ctx.style, inner: ctx.inner, root: ctx.root }, ctx, opts, clampPx(opts.size, 64, 1024, 480)).then(function (pic) {
+        var bytes = pptxPackage(title, st + ' style, animated', [{ xml: iconSlide(title, st, title + ' icon, ' + st + ' style, animated', { bg: bg, gif: true }), media: [0] }], [pic])
+        return pptxOut(ctx, bytes, 'animated')
       })
     }
   }))

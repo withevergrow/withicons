@@ -7,7 +7,7 @@
 //   node scripts/publish.mjs --expect 0.2.0         fail unless every package is at 0.2.0 (CI passes the tag)
 //   node scripts/publish.mjs --only @withicons/core,withicons
 //
-// Packages (lockstep, one version): core react vue svelte angular solid web static search mcp motion dynamic + the `withicons` CLI.
+// Packages (lockstep, one version): core react vue svelte angular solid web classes static search mcp motion dynamic + the `withicons` CLI.
 // The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
 // git tag v<version> already exists on a different commit: that version was released with other content, so bump first.
 //
@@ -45,7 +45,7 @@ const only = opt('only')?.split(',')
 const names = new Set(pkgs.map(p => p.json.name))
 // every package of the lockstep release; a missing one means its emitter did not run (node forge/build.mjs)
 const EXPECTED = ['@withicons/core', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
-  '@withicons/web', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
+  '@withicons/web', '@withicons/classes', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
 const missing = EXPECTED.filter(n => !names.has(n))
 
 // --- checks: same version everywhere, built output present, repository url (provenance needs it)
@@ -56,7 +56,7 @@ const versions = new Set(pkgs.map(p => p.json.version))
 if (versions.size > 1) problems.push(`versions are not in lockstep: ${pkgs.map(p => `${p.json.name}@${p.json.version}`).join(', ')}`)
 for (const { dir, json } of pkgs) {
   if (expect && json.version !== expect) problems.push(`${json.name} is ${json.version}, tag says ${expect}`)
-  for (const f of json.files || []) if (!f.includes('*') && !fs.existsSync(path.join(dir, f))) problems.push(`${json.name}: "${f}" listed in files but missing (run node forge/build.mjs)`)
+  for (const f of json.files || []) if (!f.includes('*') && !f.startsWith('!') && !fs.existsSync(path.join(dir, f))) problems.push(`${json.name}: "${f}" listed in files but missing (run node forge/build.mjs)`)
   const repo = typeof json.repository === 'string' ? json.repository : json.repository?.url
   if (!repo || !repo.includes(REPO)) problems.push(`${json.name}: package.json "repository.url" must point to https://${REPO} (npm provenance verifies it)`)
   if (json.name.startsWith('@') && json.publishConfig?.access !== 'public') console.warn(`  note: ${json.name} has no publishConfig.access=public; passing --access public`)

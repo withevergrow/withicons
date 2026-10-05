@@ -28,7 +28,7 @@ forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generate
 forge/tools/site-data.mjs   site data (site/data/meta.js, style-<name>.js); build.mjs calls its build(ctx)
 forge/tools/site-seo.mjs    generated pages: site/icons/*.html, categories/, styles/, sitemap, robots, llms*.txt, icons.json, og/
 forge/build.mjs             renders everything once, runs every emitter, then site-data + site-seo
-packages/*                  npm packages @withicons/{core,react,vue,svelte,angular,solid,web,static,search,mcp,motion,dynamic} + CLI `withicons`
+packages/*                  npm packages @withicons/{core,react,vue,svelte,angular,solid,web,classes,static,search,mcp,motion,dynamic} + CLI `withicons`
 site/                       zero-build static website (vanilla HTML/CSS/JS), deployed to withicons.com
 skills/with-icons/          the agent skill for USERS of the library (reference/icons.md is generated)
 infra/                      AWS CloudFormation (S3 + CloudFront + Lambda API + OIDC role + budget)

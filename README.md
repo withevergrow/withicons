@@ -125,6 +125,7 @@ Try them at [withicons.com/live.html](https://withicons.com/live.html). Spec: [`
 | [`@withicons/angular`](packages/angular) | `npm i @withicons/angular` | `import { WithIconComponent, Home } from '@withicons/angular'` |
 | [`@withicons/solid`](packages/solid) | `npm i @withicons/solid` | `import { Home } from '@withicons/solid'` |
 | [`@withicons/web`](packages/web) | `npm i @withicons/web` | `import '@withicons/web'` then `<with-icon name="home">` |
+| [`@withicons/classes`](packages/classes) | `npm i @withicons/classes` | `import '@withicons/classes/with-line.css'` then `<i class="with with-home">` |
 | [`@withicons/static`](packages/static) | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
 | [`@withicons/core`](packages/core) | `npm i @withicons/core` | `import { resolve, search } from '@withicons/core'` |
 | [`@withicons/motion`](packages/motion) | `npm i @withicons/motion` | `import '@withicons/motion/motion.css'` (animations, optional) |
@@ -144,12 +145,12 @@ No build step, straight from a CDN. The page downloads only the icons it shows:
 Font Awesome-style `<i>` tags? `with-loader.js` (6 KB gzipped) links just the CSS of the icons on the page, in any style:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
 <i class="with with-home"></i> <i class="with with-heart with-solid"></i>
 ```
 
 Zero JavaScript: link one stylesheet per style (`with-line.css`, 26 KB gzipped). `with-all.css` imports every style
-(about 6.3 MB gzipped) and is for prototypes only. Details: [`packages/web`](packages/web#icon-classes-font-awesome-style).
+(about 6.3 MB gzipped) and is for prototypes only. Details: [`@withicons/classes`](packages/classes).
 
 ## The same API everywhere
 

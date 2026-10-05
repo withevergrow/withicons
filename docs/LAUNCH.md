@@ -9,7 +9,7 @@ Fixed names:
 |---|---|
 | website | https://withicons.com (www redirects to the apex) |
 | GitHub | https://github.com/withevergrow/withicons (existing org `withevergrow`) |
-| npm packages | `@withicons/core react vue svelte angular solid web static search mcp motion`, plus the unscoped CLI `withicons` (one lockstep version; `scripts/publish.mjs` refuses to run if one is missing) |
+| npm packages | `@withicons/core react vue svelte angular solid web classes static search mcp motion dynamic`, plus the unscoped CLI `withicons` (one lockstep version; `scripts/publish.mjs` refuses to run if one is missing) |
 | npm publisher | personal npm **user** account `withicons`, which owns the `@withicons` user scope |
 | npm org | `with-icons` (scope `@with-icons`): **reserved, unused** for now |
 | AWS stacks | `withicons-dns`, `withicons-site` (both us-east-1) |
@@ -55,13 +55,13 @@ hand and everything after that is published by GitHub Actions without tokens.
    - Organization or user: **`withevergrow`** · Repository: **`withicons`**
    - Workflow filename: **`release.yml`** · Environment: **`npm`**
    - Then, in the same settings page under **Publishing access**, choose *"Require two-factor authentication and disallow tokens"*.
-   Repeat for each package (`@withicons/core`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `static`, `search`,
-   `mcp`, `motion`, and `withicons`).
+   Repeat for each package (`@withicons/core`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `classes`, `static`, `search`,
+   `mcp`, `motion`, `dynamic`, and `withicons`).
 7. **[you] Remove tokens.** If you created an `NPM_TOKEN` (granular, publish-only, 7-day expiry) as a stop-gap,
    delete the GitHub secret and revoke the token at npmjs.com, then Access Tokens. `release.yml` works without it.
 8. **Co-maintainers** (later): they create their own npm accounts with 2FA, then
    ```bash
-   for p in core react vue svelte angular solid web static search mcp motion; do npm owner add <user> @withicons/$p; done
+   for p in core react vue svelte angular solid web classes static search mcp motion dynamic; do npm owner add <user> @withicons/$p; done
    npm owner add <user> withicons
    ```
 9. **Verify** after the first CI release: `npm audit signatures` in a project that installs a package, and the
@@ -130,7 +130,7 @@ by hand (section 1.5). `scripts/publish.mjs` refuses to publish a version whose 
 - [ ] `node scripts/publish.mjs --dry-run`: tarball contents are sane and sizes match the README tables.
 - [ ] Smoke test in fresh apps: Vite React, Vite Vue, SvelteKit, Angular CLI, SolidStart, and plain HTML with the web
       component from jsDelivr (`dist/cdn.js`: the network panel shows only one `icons/<style>/<name>.js` per icon shown)
-      plus the icon classes loader (`dist/classes/with-loader.js`: only `classes/<style>/<name>.css` per icon), and
+      plus the icon classes loader (`@withicons/classes/dist/with-loader.js`: only `dist/<style>/<name>.css` per icon), and
       live icons from `@withicons/dynamic/dist/cdn/lite.js` (one `cdn/gens/<name>.js` per live icon). Check TypeScript types, tree-shaking (one icon gives a tiny bundle), and SSR.
 - [ ] `npx -y @withicons/mcp` starts and lists tools in an MCP client (seven, including `animate_icon` and `list_palettes`). `npx withicons search trash`
       and `npx withicons animate bell --trigger hover` work.
@@ -143,7 +143,8 @@ by hand (section 1.5). `scripts/publish.mjs` refuses to publish a version whose 
       and `npx withicons get pizza --style retro --palette pepperoni` recolours every part.
 - [ ] Package READMEs: drop the "Not published to npm yet / launching soon" notes (`packages/cli`, `mcp`, `motion`; they ship to npm).
 - [ ] After publishing: jsDelivr URLs resolve (`https://cdn.jsdelivr.net/npm/@withicons/web` serves `dist/cdn.js`;
-      also `.../web/dist/classes/with-loader.js`, `.../motion/dist/icons/bell.css`, `.../dynamic/dist/cdn/lite.js`).
+      `https://cdn.jsdelivr.net/npm/@withicons/classes` serves `dist/with-loader.js`;
+      also `.../classes/dist/with-line.css`, `.../motion/dist/icons/bell.css`, `.../dynamic/dist/cdn/lite.js`).
       Purge if needed: `https://purge.jsdelivr.net/npm/@withicons/web/dist/cdn.js`.
 - [ ] Site: "launching soon" labels next to install commands are removed (site owners), GitHub links go live.
 - [ ] Trusted Publishing configured for every package (section 1.6), tokens revoked.

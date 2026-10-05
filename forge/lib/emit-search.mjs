@@ -12,8 +12,8 @@ import zlib from 'zlib'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { basePkg, writePkg, dual, sortStyles } from './emit-core.mjs'
 
-// site/vendor/with/ is wiped and rewritten by emit-web-classes — write after it
-export const after = ['web-classes']
+// site/vendor/with/ is wiped and rewritten by emit-classes — write after it
+export const after = ['classes']
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const DESC_STOP = new Set('a an the of for to in on at by with and or as is are its it that this from into onto over under used use showing shows one two any each per'.split(' '))

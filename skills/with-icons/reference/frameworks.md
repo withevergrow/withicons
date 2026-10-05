@@ -151,19 +151,20 @@ Each icon is a `currentColor` mask, 1em square. Recommended: the loader, which l
 page, in any mix of styles (6 KB gzipped, then ~270 bytes per `line` icon):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
 <i class="with with-home" aria-hidden="true"></i>
 <i class="with with-heart with-solid" aria-hidden="true"></i>
 <i class="with with-search with-2x with-spin" aria-hidden="true"></i>
 ```
 
-Zero JS: link `.../classes/with-base.css` plus `.../classes/<style>/<name>.css` per icon, or one whole style per file
-(`.../classes/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
+Zero JS: link `.../classes@0.2.0/dist/with-base.css` plus `.../classes@0.2.0/dist/<style>/<name>.css` per icon, or one whole style per file
+(`.../classes@0.2.0/dist/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
 `with-all.css` imports every style (~6.3 MB gzipped): prototypes only, never a production page.
+With a bundler: `npm i @withicons/classes`, then `import '@withicons/classes/with-line.css'` (or `with-base.css` + `line/home.css` per icon).
 Size utilities: `with-xs`, `with-sm`, `with-lg`, `with-2x`, and so on, plus `with-fw`. Animations: `with-spin`, `with-pulse`, both reduced-motion safe.
 For true multi-colour, stroke width and alias names, use the JS runtime instead:
-`<script src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/classes/with-icons.js" defer></script>`.
-It fetches only the icons shown and turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).
+`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-icons.js" defer></script>`.
+It fetches only the icons shown (from `@withicons/web`, same version) and turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).
 
 ## Static SVG and sprites (email, CMS, docs, no JS)
 

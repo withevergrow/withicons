@@ -90,7 +90,7 @@ export function snippet(name, style = 'line', format = 'svg', opts = {}) {
       return (style === 'line' ? `import { WithIconComponent, ${P} } from '@withicons/angular'` : `import { WithIconComponent } from '@withicons/angular'\nimport { ${P} as ${local} } from '@withicons/angular${sub}'`) +
         `\n\n// @Component({ imports: [WithIconComponent], ... })  then in the class: ${local} = ${local}\n<with-icon [icon]="${local}"${sizeAttr ? ` [size]="${size}"` : ''} />`
     case 'html-class':
-      return `<script src="${CDN}/web/dist/classes/with-loader.js" defer></script>\n\n<i class="with with-${name}${style === 'line' ? '' : ' with-' + style}"${sizeAttr ? ` style="font-size:${size}px"` : ''}></i>`
+      return `<script src="${CDN}/classes/dist/with-loader.js" defer></script>\n\n<i class="with with-${name}${style === 'line' ? '' : ' with-' + style}"${sizeAttr ? ` style="font-size:${size}px"` : ''}></i>`
     case 'web-component':
       return `<script type="module" src="${CDN}/web/dist/cdn.js"></script>\n\n<with-icon name="${name}"${style === 'line' ? '' : ` variant="${style}"`}${sizeAttr ? ` size="${size}"` : ''}></with-icon>`
   }
@@ -106,7 +106,7 @@ export function importLine(names, framework = 'react', style = 'line') {
     case 'react': case 'vue': case 'svelte': case 'solid': return `import { ${spec} } from '@withicons/${f}${sub}'`
     case 'angular': return `import { WithIconComponent } from '@withicons/angular'\nimport { ${spec} } from '@withicons/angular${sub}'`
     case 'web-component': return `<script type="module" src="${CDN}/web/dist/cdn.js"></script>`
-    case 'html-class': return `<script src="${CDN}/web/dist/classes/with-loader.js" defer></script>`
+    case 'html-class': return `<script src="${CDN}/classes/dist/with-loader.js" defer></script>`
     default: return null
   }
 }

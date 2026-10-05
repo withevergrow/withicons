@@ -104,7 +104,7 @@ export function Toolbar() {
 
 <with-icon name="home"></with-icon>
 <with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Works in any framework, or none. The page downloads only the icons it shows: about 7 KB gzipped for the element, then one small file per icon (a line icon is about 150 bytes gzipped). Style the inner svg with <code>with-icon::part(svg)</code>.</p>`],
-    ['classes', 'Icon classes', code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>
+    ['classes', 'Icon classes', code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-search with-2x"></i>
@@ -117,7 +117,8 @@ export function Toolbar() {
   ]
   const pkgs = [
     ['@withicons/react', 'React 18+', 'code', 'line'], ['@withicons/vue', 'Vue 3', 'code', 'sketch'], ['@withicons/svelte', 'Svelte 4 & 5', 'code', 'solid'],
-    ['@withicons/angular', 'Angular 17+, standalone', 'code', 'gloss'], ['@withicons/solid', 'SolidJS', 'code', 'duo'], ['@withicons/web', '<with-icon> + icon classes', 'globe', 'blueprint'],
+    ['@withicons/angular', 'Angular 17+, standalone', 'code', 'gloss'], ['@withicons/solid', 'SolidJS', 'code', 'duo'], ['@withicons/web', '<with-icon> custom element', 'globe', 'blueprint'],
+    ['@withicons/classes', 'Icon classes: <i class="with with-home">', 'hash', 'sketch'],
     ['@withicons/static', 'SVG files & sprites, no JS', 'file-image', 'engrave'], ['@withicons/core', 'Data, aliases, toSvg()', 'database', 'line'], ['@withicons/search', 'The search engine behind this site', 'search', 'solid'],
     ['@withicons/mcp', 'MCP server for AI agents', 'bot', 'duo'], ['withicons', 'CLI: npx withicons', 'terminal', 'sketch'],
   ]
@@ -205,19 +206,25 @@ export function Toolbar() {
     <section id="classes" class="dv-sec">
       <h2>Icon classes</h2>
       <p>The Font Awesome way: plain tags, no build step. The loader fetches only the icons on the page, in any style:</p>
-      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>
+      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-home with-solid"></i>
 <i class="with with-trash" role="img" aria-label="Delete"></i>`, 'html')}
       <p>No JavaScript at all? Link one stylesheet per style you use instead. Each holds every icon of that style: <code>with-line.css</code> is about 26 KB gzipped, the richest styles several hundred KB, and <code>with-all.css</code> (every style, about 6 MB gzipped) is for prototypes only.</p>
-      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-line.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-solid.css">   <!-- for with-solid -->`, 'html')}
+      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-line.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-solid.css">   <!-- for with-solid -->`, 'html')}
+      <p>With a bundler, install <code>@withicons/classes</code> and import the same files:</p>
+      ${code(`npm i @withicons/classes`, 'bash')}
+      ${code(`import '@withicons/classes/with-line.css'   // every line icon
+// or only what you use: the base rules, then one file per icon
+import '@withicons/classes/with-base.css'
+import '@withicons/classes/line/home.css'`, 'js')}
       <h3>Modifiers</h3>
       <ul class="dv-mods">${mods.map(([c, d, k]) => `<li data-reveal><span class="dv-mod-demo dm-${k}" aria-hidden="true">${I(modIcon[k], 'line', 24)}</span><code>${c}</code><span>${d}</span></li>`).join('')}</ul>
       <p class="pg-note">Also <code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-3x</code> to <code>with-5x</code>, <code>with-rotate-180</code>, <code>with-rotate-270</code> and <code>with-flip-both</code>. Spin and pulse switch off for people who prefer reduced motion. For richer motion (a bell that rings, a play button that turns into pause) use <a href="#motion">@withicons/motion</a>.</p>
       <h3>Want real multi-colour? Add the runtime</h3>
-      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-icons.js" defer></script>
+      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-icons.js" defer></script>
 
 <i class="with with-home with-duo" style="--with-duo:#f59e0b"></i>
 <i class="with with-settings" data-with-stroke-width="1.5"></i>`, 'html')}
@@ -293,7 +300,7 @@ find('hoem')          // null`, 'js')}
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>What</th><th>URL / file</th></tr></thead><tbody>
         <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
         <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js</code> · about 7 KB gzipped, then each icon from its own small file</td></tr>
-        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js</code> (only the icons on the page) · zero JS: <code>with-&lt;style&gt;.css</code>, one style per file</td></tr>
+        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js</code> (only the icons on the page) · zero JS: <code>with-&lt;style&gt;.css</code>, one style per file</td></tr>
         <tr><td>Live icons</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/dynamic/dist/cdn/lite.js</code> · each live icon and style loads on first use</td></tr>
         <tr><td>Sprites (download now)</td><td>${STYLES.filter(s => siteExists(`sprites/${s}.svg`)).map(s => `<a href="sprites/${s}.svg" download>${s}.svg</a>`).join(' · ')}</td></tr>
         <tr><td>Class CSS (download now)</td><td>${STYLES.filter(s => siteExists(`vendor/with/with-${s}.css`)).map(s => `<a href="vendor/with/with-${s}.css" download>with-${s}.css</a>`).join(' · ')}</td></tr>
@@ -309,13 +316,15 @@ ${FORMATS.length ? `    <section id="export" class="dv-sec">
       ${CLI_FORMATS.length ? code(`npx withicons export home settings --format svg,pdf,png --out icons
 npx withicons export star --style sticker --format favicon-pack --background "#ffffff" --out public
 npx withicons export bell --format lottie --motion hover
+npx withicons export bell --format gif --background "#ffffff" --out slides
+npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"
 npx withicons export heart --style retro --palette classic-red --format android,ios --out app/icons
 npx withicons export heart --all-styles --format png --size 256 --out hearts
 npx withicons export trash --format jsx --out - > src/icons/Trash.jsx`, 'sh', 'Terminal') : ''}
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>Format</th><th>File</th><th>Transparent</th>${CLI_FORMATS.length ? '<th>CLI</th>' : ''}<th>What it is</th></tr></thead><tbody>
         ${FMT_GROUPS.flatMap(([g]) => FORMATS.filter(f => f.group === g)).map(f => `<tr><td><code>${esc(f.id)}</code></td><td><code>.${esc(f.ext)}</code></td><td>${f.group === 'code' ? '—' : esc(seeThrough(f)[1].replace('See-through', 'Yes').replace('Solid background', 'No'))}</td>${CLI_FORMATS.length ? `<td>${CLI_FORMATS.includes(f.id) ? 'Yes' : 'Browser only'}</td>` : ''}<td>${esc(f.note)}</td></tr>`).join('\n        ')}
       </tbody></table></div>
-      ${CLI_FORMATS.length ? `<p class="pg-note">CLI options: <code>--format</code> (comma separated, or <code>all</code>), <code>--style</code> or <code>--all-styles</code>, <code>--size</code>, <code>--background transparent|#hex</code>, <code>--padding 0–0.4</code>, colours as for <code>get</code> (<code>--palette</code>, <code>--color</code>, <code>--c1</code> … <code>--edge</code>), <code>--motion loop|hover|once|none|&lt;preset&gt;</code> for Lottie and the code formats, <code>--out &lt;folder&gt;</code> (<code>-</code> prints one file) and <code>--json</code>. PNG-based formats use <code>@resvg/resvg-js</code>, an optional dependency; GIF, WebP, JPG, AVIF and video are made in the browser only.</p>` : ''}
+      ${CLI_FORMATS.length ? `<p class="pg-note">CLI options: <code>--format</code> (comma separated, or <code>all</code>), <code>--style</code> or <code>--all-styles</code>, <code>--size</code>, <code>--background transparent|#hex</code>, <code>--padding 0–0.4</code>, colours as for <code>get</code> (<code>--palette</code>, <code>--color</code>, <code>--c1</code> … <code>--edge</code>), <code>--motion loop|hover|once|swap|none|&lt;preset&gt;</code> for the animated and code formats (with <code>--to</code>, <code>--effect</code>, <code>--fps</code>, <code>--seconds</code>, <code>--loop</code>, <code>--matte</code>), <code>--out &lt;folder&gt;</code> (<code>-</code> prints one file) and <code>--json</code>. Animated GIF, APNG and the animated PowerPoint slide are rendered frame by frame from the same keyframes as this site, no browser needed: give a GIF the colour of the slide it sits on (<code>--background</code>, or <code>--matte</code> to keep it transparent). PNG-based and animated formats use <code>@resvg/resvg-js</code>, an optional dependency; WebP, JPG, AVIF, animated WebP and video are made in the browser only.</p>` : ''}
     </section>
 
 ` : ''}    <section id="cli" class="dv-sec">
@@ -454,6 +463,8 @@ async function ai() {
   const tools = [
     ['search_icons', '{ query, limit?, style?, category?, format? }', 'Find icons by meaning: “throw away” finds trash. Ranked and typo-tolerant. Each result comes with why it matched, a ready-to-paste snippet (React unless you pass <code>format</code>) and a link. Default limit: 10.'],
     ['get_icon', `{ name, style?, format?, size?, color? }`, `One icon as paste-ready code. <code>name</code> can be an alias (“delete” → trash). <code>format</code>: ${fmts} (default svg). <code>color</code> replaces currentColor in svg and data-uri.`],
+    ['animate_icon', '{ name, trigger?, preset?, to?, effect?, style?, format? }', 'Paste-ready animation code for the optional <code>@withicons/motion</code> package: <code>loop</code>, <code>hover</code>, <code>once</code>, <code>inview</code> or <code>swap</code> (play turns into pause), in HTML, React, Vue, Svelte, Solid, Angular or a web component.'],
+    ['export_icon', '{ name, style?, format?, size?, background?, palette?, motion?, out_dir? }', 'Files, not code: SVG, PNG, PDF, PowerPoint, Word, favicons, app assets, Lottie, and animated GIF, APNG, SVG or a PowerPoint slide with the moving icon, for slides and docs. The local server (<code>npx -y @withicons/mcp</code>) saves them to <code>out_dir</code> or returns them inline; the remote one makes the vector files and answers the rest with the exact <code>npx withicons export</code> command.'],
     ['resolve_icon', '{ name }', 'Check a guess: <code>resolved</code> (with the alias it came through), <code>ambiguous</code> (with candidates) or <code>unknown</code> (with the nearest names).'],
     ['list_styles', '{}', `The ${N_STYLES} styles, which are universal, creative or playful, and what each looks like.`],
     ['list_categories', '{ category? }', 'Every category with icon counts, or, with <code>category</code>, every icon in that category.'],

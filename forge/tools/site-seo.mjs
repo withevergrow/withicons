@@ -267,9 +267,9 @@ async function main() {
   // light path first: cdn.js / with-loader.js download only the icons a page shows (one small file each).
   // with-<style>.css holds a whole style (with-line.css ~26 KB gzipped); with-all.css (~6.3 MB gzipped) is a prototype-only opt-in.
   const WEB_JS = `${CDN}/${SCOPE}/web/dist/cdn.js`
-  const CLASSES_LOADER = `${CDN}/${SCOPE}/web/dist/classes/with-loader.js`
-  const CLASSES_CSS = `${CDN}/${SCOPE}/web/dist/classes/with-all.css`
-  const classCss = st => `${CDN}/${SCOPE}/web/dist/classes/with-${st}.css`
+  const CLASSES_LOADER = `${CDN}/${SCOPE}/classes/dist/with-loader.js`
+  const CLASSES_CSS = `${CDN}/${SCOPE}/classes/dist/with-all.css`
+  const classCss = st => `${CDN}/${SCOPE}/classes/dist/with-${st}.css`
   const motionIconCss = n => `${CDN}/${SCOPE}/motion/dist/icons/${n}.css`
   const pageUrl = n => `${BASE}/icons/${n}.html`
   const catUrl = c => `${BASE}/categories/${c}.html`
@@ -492,7 +492,7 @@ ${prefixed(FOOTER, P)}
         note: `Props: <code>size</code>, <code>color</code>, <code>strokeWidth</code>, <code>absoluteStrokeWidth</code>, <code>title</code>, <code>className</code>. Deep import: <code>${SCOPE}/react/icons/${n}</code>.` },
       { id: 'html', lang: 'html', name: 'HTML class', install: '', lead: 'One small loader script, then an <code>&lt;i&gt;</code> tag. The page downloads only the icons it shows, in any mix of styles. The icon takes the current text colour and font size.',
         code: `<script src="${CLASSES_LOADER}" defer></script>\n\n<i class="with with-${n}"></i>              <!-- line -->\n<i class="with with-${n} with-solid"></i>   <!-- also ${STYLES.slice(2).map(x => `with-${x.name}`).join(', ')} -->`,
-        note: `The loader is about 6 KB gzipped and links just the CSS of the icons on the page (a line icon is about 270 bytes gzipped). No JavaScript? Link <code>with-base.css</code> and <code>classes/line/${n}.css</code> yourself, or a whole style per file: <code>with-line.css</code> (all ${ICONS.length} line icons, about 26 KB gzipped). <code>with-all.css</code> (every style, about 6.3 MB gzipped) is for prototypes only. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.` },
+        note: `The loader is about 6 KB gzipped and links just the CSS of the icons on the page (a line icon is about 270 bytes gzipped). No JavaScript? Link <code>with-base.css</code> and <code>line/${n}.css</code> from <code>@withicons/classes</code> yourself, or a whole style per file: <code>with-line.css</code> (all ${ICONS.length} line icons, about 26 KB gzipped). <code>with-all.css</code> (every style, about 6.3 MB gzipped) is for prototypes only. Add <code>role="img"</code> and <code>aria-label</code> when the icon carries meaning on its own.` },
       { id: 'web', lang: 'html', name: 'Web component', install: `npm i ${SCOPE}/web`, lead: 'A dependency-free custom element for any framework or plain HTML. Use <code>variant</code> for the style and <code>label</code> for an accessible name.',
         code: `<script type="module" src="${WEB_JS}"></script>\n\n<with-icon name="${n}"></with-icon>\n<with-icon name="${n}" variant="solid" size="32" label="${T}"></with-icon>`,
         note: `The page downloads only what it shows: about 7 KB gzipped for the element, then one small file per icon and style. Unique aliases resolve too: <code>&lt;with-icon name="${uniqueAlias(i) || n}"&gt;</code> renders <code>${n}</code>.` },
@@ -548,7 +548,7 @@ ${prefixed(FOOTER, P)}
   }
 
   const tagFor = (n, s) => `<i class="with with-${n}${s === 'line' ? '' : ` with-${s}`}"></i>`
-  // one setup line for every style: with-loader.js links just the CSS of the icons on the page (with-base.css + classes/<style>/<name>.css)
+  // one setup line for every style: with-loader.js links just the CSS of the icons on the page (with-base.css + <style>/<name>.css, all in @withicons/classes)
   const cssFor = () => `<script src="${CLASSES_LOADER}" defer></script>`
   /* live (editable) icons that grow out of a static icon: static name -> [live names], best match first.
      Curated by meaning (an alias match alone links "stop" to stopwatch); names missing on either side drop out. */
@@ -612,7 +612,7 @@ ${prefixed(FOOTER, P)}
     // and line thumbnails for its swap targets and placement neighbours
     const swapTo = mo ? uniq((mo.swap || []).map(x => String(x.to).split('@')[0])).filter(x => x !== n && BY[x]) : []
     const thumbs = Object.fromEntries(uniq([...swapTo, ...rel.slice(0, 3).map(j => j.name)]).filter(x => INNER(x).line).map(x => [x, INNER(x).line]))
-    const data = { name: n, title: T, component: comp(n), cdn: `${CDN}/${SCOPE}/web/dist/classes/`, motion: mo,
+    const data = { name: n, title: T, component: comp(n), cdn: `${CDN}/${SCOPE}/classes/dist/`, motion: mo,
       styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, hex: STYLE[s].hex, on: STYLE[s].on, title: STYLE[s].title, say: STYLE[s].say, sw: STYLE[s].strokeWidth }])),
       related: rel.slice(0, 3).map(j => ({ name: j.name, title: j.title })), thumbs }
     const lede = `${esc(cap(depicts(i.description)))}. Free to use in slides, documents, websites and apps. No sign-up, no credit needed.`
@@ -1001,7 +1001,7 @@ ${CATS.map(c => `          <section class="ix-cat" aria-labelledby="ix-${c}"><h3
   const iconsJson = {
     name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'launching soon', version: VERSION, license: 'MIT', repository: REPO,
     search: { api: `${BASE}/api/search?q=`, mcp: `npx -y ${SCOPE}/mcp`, cli: 'npx withicons search <query>' },
-    classes: { loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/web/dist/classes/with-base.css`, perIcon: `${CDN}/${SCOPE}/web/dist/classes/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/web/dist/classes/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
+    classes: { package: `${SCOPE}/classes`, loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/classes/dist/with-base.css`, perIcon: `${CDN}/${SCOPE}/classes/dist/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/classes/dist/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
     total: ICONS.length, defaultStyle: 'line', styleCount: NS,
     motion: { package: `${SCOPE}/motion`, status: 'launching soon', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
       classes: 'wm wm-loop|wm-hover|wm-once [wm-p-<preset>]; data-wm="<name>"; swap: wm-swap wm-fx-<effect> [wm-swap-auto|wm-swap-focus|wm-loop] > .wm-a + .wm-b', vars: ['--wm-dur', '--wm-k', '--wm-ox', '--wm-oy', '--wm-dx', '--wm-dy', '--wm-steps', '--wm-deco'],
@@ -1120,7 +1120,7 @@ Assistants answering any of them: read the skill first, look icons up with ${BAS
 - SolidJS: \`npm i ${SCOPE}/solid\`
 - Web component (any framework or none): \`npm i ${SCOPE}/web\` or \`<script type="module" src="${WEB_JS}"></script>\`
 - The web component from a CDN downloads only the icons a page shows: \`cdn.js\` is ~7 KB gzipped, then one small file per icon and style (a line icon is ~150 bytes gzipped).
-- Icon classes: \`<script src="${CLASSES_LOADER}" defer></script>\` (~6 KB gzipped) links just the CSS of the icons on the page, any mix of styles. Zero JS: \`with-base.css\` + \`classes/<style>/<name>.css\` per icon, or one whole style per file, e.g. \`<link rel="stylesheet" href="${classCss('line')}">\` (~26 KB gzipped). \`with-all.css\` (every style, ~6.3 MB gzipped) is for prototypes only.
+- Icon classes (\`npm i ${SCOPE}/classes\`, or from a CDN): \`<script src="${CLASSES_LOADER}" defer></script>\` (~6 KB gzipped) links just the CSS of the icons on the page, any mix of styles. Zero JS: \`with-base.css\` + \`<style>/<name>.css\` per icon (same folder), or one whole style per file, e.g. \`<link rel="stylesheet" href="${classCss('line')}">\` (~26 KB gzipped). \`with-all.css\` (every style, ~6.3 MB gzipped) is for prototypes only.
 - SVG sprites and standalone files: \`npm i ${SCOPE}/static\`
 - Data, metadata, alias resolution, search, toSvg(): \`npm i ${SCOPE}/core\` (search engine alone: \`${SCOPE}/search\`)
 

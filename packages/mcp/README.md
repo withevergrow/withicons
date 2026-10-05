@@ -4,12 +4,14 @@ An [MCP](https://modelcontextprotocol.io) server for **with icons** — 500 MIT 
 (line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush). Your AI assistant can search icons in plain English
 ("throw away", "settigns", "money", "cute heart", "8-bit star") and get paste-ready SVG, React, Vue, Svelte, Angular,
 Solid, web-component, CSS-class or data-URI code, plus animation code for the optional `@withicons/motion` package
-(500 icons have a tuned animation; every icon can use any preset) and every icon's 20-30 hand-picked colour
-palettes for the multi-colour styles.
+(500 icons have a tuned animation; every icon can use any preset), every icon's 20-30 hand-picked colour
+palettes for the multi-colour styles, and **files**: SVG, PNG, PDF, PowerPoint, Word, Lottie, app assets and animated
+GIF / APNG / SVG / PowerPoint for slides and docs (`export_icon`).
 
 > Not published to npm yet — launching soon. The commands below are what you will use.
 
-Self-contained: the search engine, the MCP SDK and every icon are bundled — no runtime dependencies, no network.
+Self-contained: the search engine, the MCP SDK, the export formats and every icon are bundled — no network. PNG-based and
+animated files use `@resvg/resvg-js`, an optional dependency installed with the server where your platform has a prebuilt binary.
 
 ## Tools
 
@@ -19,6 +21,7 @@ Self-contained: the search engine, the MCP SDK and every icon are bundled — no
 | `get_icon` | `name` (name **or alias**), `style?` (line), `format?` (svg), `size?` (24), `color?`, `flat?`, `palette?`, `colors?` | the code: `svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`; for multi-colour styles the icon's colour variables (role + default) and its palette ids; with `palette` / `colors`, the code recoloured (every colour, not just one) plus the CSS; a `motion` summary when the icon has a tuned animation |
 | `list_palettes` | `name`, `style?`, `tag?`, `limit?` | the icon's 20-30 palettes (id, name, tags, ten role colours); with `style`, the exact `--with-*` variables and a CSS rule per palette |
 | `animate_icon` | `name`, `trigger?` (`loop` · `hover` · `once` · `inview` · `swap`), `preset?`, `to?`, `effect?`, `style?`, `format?` (html), `duration?` | paste-ready animation code (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), the icon's motion spec and install lines. `inview` and the `draw` preset come wired to the JS runtime (`motion(el, name, options)` in a mount hook / module script) |
+| `export_icon` | `name`, `style?`, `format?` (svg; one or a comma list), `size?`, `background?`, `matte?`, `palette?`, `colors?`, `color?`, `motion?` (loop · hover · once · swap · none · a preset), `to?`, `effect?`, `fps?`, `seconds?`, `loop?`, `all_styles?`, `out_dir?`, `inline?` | files: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, the code formats, and animated `gif`, `apng`, `animated-svg`, `pptx-animated`. Saved to `out_dir` when given; small files also come back inline (PNG / GIF as image content, text as text, the rest as base64 resources). The remote server makes the vector, code and Lottie formats and answers PNG-based / animated ones with the exact `npx withicons export …` command |
 | `list_styles` | — | the 20 styles, what they look like, and the colour variables of palette styles |
 | `list_categories` | `category?` | categories with counts, or every icon in one category |
 | `resolve_icon` | `name` | `resolved` (+ via alias), `ambiguous` (+ candidates) or `unknown` (+ nearest) |
@@ -41,6 +44,16 @@ colour to each of ten roles, and the server maps the roles onto the variables th
 - `svg` keeps the variables and sets them on the root `<svg style="…">` (add `flat: true` to bake them in, for `<img>` and design tools);
   `data-uri` is always baked; `web-component` gets an inline `style`; React, Vue, Svelte, Solid and Angular get a class plus the CSS rule
   (`.icon-heart-neon-love { color: …; --with-sticker-bubblegum: …; }`). CSS-class icons bake their palette into a data URI, so only the ink applies.
+
+## Animated icons for slides and docs
+
+`export_icon({ name: 'bell', style: 'luxe', format: 'gif', background: '#ffffff', out_dir: 'slides/icons' })` writes
+`bell-luxe-ring.gif`: the icon's own animation (the same keyframes as the website), looping forever. GIF plays in PowerPoint,
+Keynote, Google Slides, Slack, email and Notion. GIF transparency is 1-bit, so pass the slide colour as `background` (or
+keep it transparent with `matte: '<slide colour>'`); colours are baked in, so choose `palette` / `colors` before exporting.
+`format: 'pptx-animated'` gives a ready 16:9 slide with the moving icon; `apng` has smooth see-through edges for web pages;
+`lottie` / `dotlottie` stay vector for apps, After Effects and Canva. `motion: 'swap', to: 'pause'` records an icon turning
+into another one.
 
 Resources: `icon://<style>/<name>.svg` (e.g. `icon://solid/home.svg`) and `icon://about`.
 

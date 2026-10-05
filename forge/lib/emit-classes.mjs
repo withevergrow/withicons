@@ -1,22 +1,21 @@
-// emit-classes — Font-Awesome-style class API inside @withicons/web (packages/web/dist/classes/).
+// emit-classes — @withicons/classes (packages/classes): the Font-Awesome-style class API, its own package so that
+// neither it nor @withicons/web (the <with-icon> element) gets near jsDelivr's 150 MB package limit.
 //
-//   dist/classes/with-<style>.css   CSS-only icons: <i class="with with-home with-solid"></i>  (SVG data-URI masks, zero JS)
-//   dist/classes/with-all.css       @import of every style file (line is the default); heavy, for prototypes
-//   dist/classes/<style>/<name>.css one icon's rule; dist/classes/with-base.css the shared base rules
-//   dist/classes/with-loader.js     classic script: links only the <style>/<name>.css files of the icons on the page
-//   dist/classes/with-icons.js      classic script: decorates .with elements with inline <svg> (true multi-colour,
-//                                 stroke width); imports ../icons/<style>/<name>.js per icon shown (../data as fallback)
-//   dist/classes/with-icons.d.ts    window.WithIcons typings
-//   dist/classes/demo.html        demo page;  dist/classes/README.md  docs
+//   dist/with-<style>.css     CSS-only icons: <i class="with with-home with-solid"></i>  (SVG data-URI masks, zero JS)
+//   dist/with-all.css         @import of every style file (line is the default); heavy, for prototypes
+//   dist/<style>/<name>.css   one icon's rule;  dist/with-base.css  the shared base rules
+//   dist/with-loader.js       classic script: links only the <style>/<name>.css files of the icons on the page
+//   dist/with-icons.js        classic script: decorates .with elements with inline <svg> (true multi-colour, stroke width);
+//                             imports each icon shown from @withicons/web (dist/icons/<style>/<name>.js, same version)
+//   dist/with-icons.d.ts      window.WithIcons typings
+//   dist/data/alias/<i>.js, dist/data/meta.js   alias shards + names, for the loader's / runtime's alias and typo hints
+//   dist/demo.html            demo page
 //
 // Also mirrors everything into site/vendor/with/ (self-contained: data chunks copied to site/vendor/with/data/).
-//
-// Declares `after = ['web']` so it runs AFTER emit-web:  emit-web's distWriter
-// prunes files it did not write and rewrites package.json/README, so this emitter must come last.
 import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc } from './emit-core.mjs'
+import { J, LOOKUP_SRC, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc, distWriter, basePkg, writePkg } from './emit-core.mjs'
 
 const MODIFIERS = ['xs', 'sm', 'lg', '2x', '3x', '4x', '5x', 'fw', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270',
   'flip-h', 'flip-v', 'flip-both', 'rtl']
@@ -127,7 +126,7 @@ export function layerUris(style, nodes) {
 }
 
 // ---------------------------------------------------------------- JS runtime (serialized; free vars:
-// VERSION, STYLES, DEFAULT_STYLE, STYLE_NAMES, RESERVED, BASE_CSS, DATA_BASE + LOOKUP_SRC helpers)
+// VERSION, STYLES, DEFAULT_STYLE, STYLE_NAMES, RESERVED, BASE_CSS, DATA_BASE, WEB + LOOKUP_SRC helpers)
 function withRuntime() {
   var G = typeof window !== 'undefined' ? window : null
   if (!G || typeof document === 'undefined' || G.WithIcons) return
@@ -139,13 +138,22 @@ function withRuntime() {
   STYLE_NAMES.forEach(function (s) { STYLE_SET[s] = 1 })
   RESERVED.forEach(function (s) { RES[s] = 1 })
 
-  // data lives next to the <with-icon> runtime: <script>/../data/<style>.js and, per icon, <script>/../icons/<style>/<name>.js
-  // (override: data-with-base="…/data/" and data-with-icons="…/icons/" on the script tag)
+  // alias shards + names live next to this script (./data/); the icons themselves come from @withicons/web:
+  // per icon <web>/dist/icons/<style>/<name>.js, whole styles <web>/dist/data/<style>.js. <web> is the sibling package
+  // on the same CDN or node_modules path (…/@withicons/classes@1.2.3/dist/ -> …/@withicons/web@1.2.3/dist/), else
+  // jsDelivr at this version. Overrides on the script tag: data-with-web="…/web/dist/", data-with-base="…/data/"
+  // (alias + meta + style chunks, e.g. @withicons/web's dist/data/) and data-with-icons="…/icons/".
   var me = document.currentScript || document.querySelector('script[src*="with-icons"]')
+  var attr = function (k) { return (me && me.getAttribute(k)) || '' }
   var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
-  var base = abs((me && me.getAttribute('data-with-base')) || DATA_BASE)
-  var iconBase = (me && me.getAttribute('data-with-icons')) || ICON_BASE
-  iconBase = iconBase ? abs(iconBase) : null
+  var web = null
+  if (WEB) {
+    var src = (me && me.src) || '', wm = /^(.*\/)(@withicons\/|packages\/)classes(@[^/]*)?\/dist\//.exec(src)
+    web = attr('data-with-web') ? abs(attr('data-with-web')) : wm ? wm[1] + wm[2] + 'web' + (wm[3] || '') + '/dist/' : 'https://cdn.jsdelivr.net/npm/@withicons/web@' + VERSION + '/dist/'
+  }
+  var base = abs(attr('data-with-base') || DATA_BASE)
+  var styleBase = attr('data-with-base') || !web ? base : web + 'data/'
+  var iconBase = attr('data-with-icons') ? abs(attr('data-with-icons')) : web ? web + 'icons/' : null
   var DATA = {}, PENDING = {}, META = null, ONE = {}, ALIAS = {}
   var NAMES = {}
   NAME_LIST.split(' ').forEach(function (n) { NAMES[n] = 1 })
@@ -154,7 +162,7 @@ function withRuntime() {
     var s = style || DEFAULT_STYLE
     if (!has(STYLES, s)) return Promise.reject(new Error('with icons: unknown style "' + s + '". Use one of: ' + STYLE_NAMES.join(', ') + '.'))
     if (DATA[s]) return Promise.resolve(DATA[s])
-    return PENDING[s] || (PENDING[s] = import(base + s + '.js').then(function (m) { return (DATA[s] = m.default) }, function (e) { delete PENDING[s]; throw e }))
+    return PENDING[s] || (PENDING[s] = import(styleBase + s + '.js').then(function (m) { return (DATA[s] = m.default) }, function (e) { delete PENDING[s]; throw e }))
   }
   // one icon's inner markup: its own small file when the package has them, else the style's data
   function icon(style, name) {
@@ -331,7 +339,7 @@ function withLoader() {
   var me = document.currentScript || document.querySelector('script[src*="with-loader"]')
   var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
   var cssBase = abs((me && me.getAttribute('data-with-css')) || './')
-  var dataBase = abs((me && me.getAttribute('data-with-base')) || '../data/')
+  var dataBase = abs((me && me.getAttribute('data-with-base')) || './data/')
   var STYLE_SET = {}, RES = {}, NAMES = {}, DONE = {}, ALIAS = {}, META = null
   STYLE_NAMES.forEach(function (s) { STYLE_SET[s] = 1 })
   RESERVED.forEach(function (s) { RES[s] = 1 })
@@ -417,8 +425,8 @@ function withLoader() {
   else start()
 }
 function loaderJs(ctx, css) {
-  return `/*! @withicons/web ${ctx.version} — with-loader.js: CSS icon classes on demand (classic script, no dependencies). MIT. Generated, do not edit.
- * <script src=".../dist/classes/with-loader.js" defer></script>  then  <i class="with with-home with-duo"></i>
+  return `/*! @withicons/classes ${ctx.version} — with-loader.js: CSS icon classes on demand (classic script, no dependencies). MIT. Generated, do not edit.
+ * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${ctx.version}/dist/with-loader.js" defer></script>  then  <i class="with with-home with-duo"></i>
  * Loads only the rules of the icons on the page: <style>/<name>.css next to this script. */
 ;(function () {
 'use strict'
@@ -444,11 +452,12 @@ function withShard(name, n) {
 }
 const ALIAS_SHARDS = 16
 
-function runtimeJs(ctx, dataBase, iconBase, css) {
+// web: icons come from @withicons/web (the package build); false: style chunks in dataBase (the site mirror)
+function runtimeJs(ctx, dataBase, web, css) {
   const table = styleTable(ctx)
-  return `/*! @withicons/web ${ctx.version} — with-icons.js (classic script, no dependencies). MIT. Generated, do not edit.
- * <script src=".../dist/classes/with-icons.js" defer></script>  then  <i class="with with-home with-duo"></i>
- * Loads each icon it shows from ${iconBase ? iconBase + '<style>/<name>.js' : dataBase + '<style>.js'}, nothing else up front. */
+  return `/*! @withicons/classes ${ctx.version} — with-icons.js (classic script, no dependencies). MIT. Generated, do not edit.
+ * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${ctx.version}/dist/with-icons.js" defer></script>  then  <i class="with with-home with-duo"></i>
+ * Loads each icon it shows from ${web ? '@withicons/web@' + ctx.version + ' (dist/icons/<style>/<name>.js)' : dataBase + '<style>.js'}, nothing else up front. */
 ;(function () {
 'use strict'
 var VERSION = ${J(ctx.version)}
@@ -457,7 +466,7 @@ var STYLES = ${J(table)}
 var STYLE_NAMES = ${J(ctx.styles.map(s => s.name))}
 var RESERVED = ${J(RESERVED)}
 var DATA_BASE = ${J(dataBase)}
-var ICON_BASE = ${J(iconBase)}
+var WEB = ${J(!!web)}
 var ALIAS_SHARDS = ${ALIAS_SHARDS}
 var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
@@ -470,7 +479,7 @@ ${withShard}
 
 // ---------------------------------------------------------------- d.ts / docs / demo
 function dts(ctx) {
-  return `// @withicons/web ${ctx.version} — types for dist/classes/with-icons.js (window.WithIcons). Generated.
+  return `// @withicons/classes ${ctx.version} — types for dist/with-icons.js (window.WithIcons). Generated.
 ${namesAndAliasesDts(ctx)}
 export interface WithSvgOptions {
   /** width/height attribute. Default '1em'. */
@@ -501,16 +510,41 @@ declare global {
 `
 }
 
-function classesDoc(ctx, sizes, per) {
+function readme(ctx, sizes, per) {
   const v = ctx.version
-  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/web@${v}/dist/classes`
+  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/classes@${v}/dist`
   const styles = ctx.styles.map(s => s.name)
   const sw = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => '`' + s.name + '`').join(', ')
   const kb = n => n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + ' MB' : (n / 1024).toFixed(0) + ' KB'
   const pal = ctx.styles.filter(s => s.palette)
-  return `## Icon classes (Font Awesome style)
+  return `# @withicons/classes
 
-Plain \`<i>\`/\`<span>\` elements with classes, no build step. Three interchangeable ways to render them, lightest first:
+Font Awesome-style icon classes for ${ctx.icons.length} icons x ${styles.length} styles: plain \`<i>\`/\`<span>\` tags, no build step,
+no framework, zero dependencies. One line in your page:
+
+\`\`\`html
+<script src="${cdn}/with-loader.js" defer></script>
+
+<i class="with with-home"></i>
+<i class="with with-heart with-solid"></i>
+\`\`\`
+
+Every file sits at the top of \`dist/\`, so the URLs are short: \`dist/with-loader.js\`, \`dist/with-line.css\` (one style),
+\`dist/line/home.css\` (one icon). Prefer a custom element or components? \`<with-icon>\` is
+[\`@withicons/web\`](https://www.npmjs.com/package/@withicons/web); React, Vue, Svelte, Angular and Solid have their own packages.
+
+With a bundler or a self-hosted copy:
+
+\`\`\`bash
+npm i @withicons/classes
+\`\`\`
+\`\`\`js
+import '@withicons/classes/with-line.css'    // every line icon (or with-solid.css, with-duo.css, ...)
+import '@withicons/classes/with-base.css'    // or: the base rules, then only the icons you use
+import '@withicons/classes/line/home.css'
+\`\`\`
+
+Plain \`<i>\`/\`<span>\` elements with classes. Three interchangeable ways to render them, lightest first:
 
 ### 1. CSS on demand (recommended from a CDN)
 
@@ -523,7 +557,7 @@ Plain \`<i>\`/\`<span>\` elements with classes, no build step. Three interchange
 \`\`\`
 
 \`with-loader.js\` (${kb(sizes['with-loader.js'].raw)}, ${kb(sizes['with-loader.js'].gz)} gzip) adds the base rules, finds every \`with with-<name>\` on the
-page and links just that icon's rule: \`dist/classes/<style>/<name>.css\` (a \`${ctx.defaultStyle}\` icon is typically ${per.line} bytes,
+page and links just that icon's rule: \`dist/<style>/<name>.css\` (a \`${ctx.defaultStyle}\` icon is typically ${per.line} bytes,
 ${per.lineGz} gzip; a \`${per.heavy}\` icon about ${(per.heavyRaw / 1024).toFixed(1)} KB, ${(per.heavyGz / 1024).toFixed(1)} KB gzip). Any style mix costs only the icons shown, and icons
 added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
 canonical class added with a console hint. Without JavaScript, link the same files yourself:
@@ -582,18 +616,19 @@ ${Object.entries(sizes).map(([f, s]) => `| \`${f}\`${f === 'with-all.css' ? ' (i
 <i class="with with-settings" data-with-stroke-width="1.5"></i>
 \`\`\`
 
-A classic (non-module), dependency-free script. It injects an inline \`<svg class="with-svg">\` into every element with class
+A classic (non-module), dependency-free script that draws the icons from
+[\`@withicons/web\`](https://www.npmjs.com/package/@withicons/web) at the same version. It injects an inline \`<svg class="with-svg">\` into every element with class
 \`with\` and an \`with-<name>\` class, and keeps doing so for elements added or changed later (MutationObserver on added nodes and
 \`class\` / \`aria-label\` / \`data-with-stroke-width\` changes). Only the icons actually shown are downloaded, one small
-module each (\`dist/icons/<style>/<name>.js\`, resolved relative to the script's URL; override with \`data-with-icons="…/icons/"\`
-and \`data-with-base="…/data/"\` on the script tag). \`WithIcons.load(style)\` still fetches a whole style.
+module each (\`@withicons/web/dist/icons/<style>/<name>.js\`, fetched from the sibling \`@withicons/web\` path on the
+same CDN or \`node_modules\`, else jsDelivr; point it elsewhere with \`data-with-web="/vendor/withicons-web/dist/"\` on the script tag). \`WithIcons.load(style)\` still fetches a whole style.
 It can be combined with the CSS files: the mask shows until the SVG arrives, then it is switched off.
 
 - \`data-with-stroke-width="1.5"\` on the element: stroke width for ${sw}.
 - Aliases work (\`with-bin\` -> \`trash\`, with a one-time console hint); unknown names warn with the nearest suggestions.
 - Opt a subtree out with \`data-with-skip\`.
 - \`window.WithIcons\`: \`render(root?)\`, \`svg(name, style?, opts?)\` (Promise of an svg string), \`load(style)\`, \`styles\`, \`version\`.
-  Types: \`dist/classes/with-icons.d.ts\`.
+  Types: \`dist/with-icons.d.ts\`.
 
 ### Modifiers
 
@@ -621,7 +656,22 @@ and they print even with the browser's "Background graphics" option off.
 - **CSS on demand** (\`with-loader.js\`): the CSS rendering, downloading only the icons on the page.
 - **CSS stylesheet**: zero JS, works in emails-to-web, static sites, CMS content; one request per style; palette styles in their default colours.
 - **JS runtime**: live CSS variables (\`--with-duo\`, \`--with-accent\`${pal.length ? ', \`--with-<style>-<role>\`' : ''}), \`data-with-stroke-width\`, aliases and typo hints, only the icons you show are fetched.
-- Using a framework? Prefer the component packages (\`@withicons/react\`, \`vue\`, \`svelte\`…) or \`<with-icon>\`.
+- Using a framework? Prefer the component packages (\`@withicons/react\`, \`vue\`, \`svelte\`…) or \`<with-icon>\` (\`@withicons/web\`).
+
+## Files
+
+| path | what |
+|---|---|
+| \`dist/with-loader.js\` | CSS on demand: links \`dist/<style>/<name>.css\` for each icon on the page |
+| \`dist/with-<style>.css\` | one style, every icon (${styles.map(s => '\`' + s + '\`').join(', ')}) |
+| \`dist/<style>/<name>.css\` | one icon in one style (needs \`with-base.css\` or the loader) |
+| \`dist/with-base.css\` | the shared base rules and modifiers |
+| \`dist/with-all.css\` | \`@import\` of every style file (prototypes only) |
+| \`dist/with-icons.js\` (+ \`.d.ts\`) | JS runtime: inline SVG from \`@withicons/web\` |
+| \`dist/data/alias/<n>.js\`, \`dist/data/meta.js\` | alias and typo lookups, loaded only for a non-canonical class |
+| \`dist/demo.html\` | every style, modifier and runtime feature on one page |
+
+MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
 `
 }
 
@@ -660,7 +710,7 @@ function demoHtml(ctx) {
 </head>
 <body>
 <main>
-<h1>Icon classes <small style="color:var(--muted);font-size:13px">@withicons/web ${ctx.version}</small></h1>
+<h1>Icon classes <small style="color:var(--muted);font-size:13px">@withicons/classes ${ctx.version}</small></h1>
 <p><code>&lt;i class="with with-home with-solid"&gt;&lt;/i&gt;</code> — ${ctx.icons.length} icons x ${styles.length} styles. CSS-only sections use <code>data-with-skip</code> so the JS runtime leaves them alone.</p>
 
 <div data-with-skip>
@@ -726,39 +776,36 @@ ${styles.map(s => `<div class="row"><b>${s}</b>${row(s)}</div>`).join('\n')}
 `
 }
 
-// ---------------------------------------------------------------- package.json / README patches
-const START = '<!-- with-classes:start -->', END = '<!-- with-classes:end -->'
-function patchPkg(text) {
-  const p = JSON.parse(text)
-  const ex = {}
-  for (const [k, v] of Object.entries(p.exports || {})) {
-    if (k === './package.json') ex['./classes/*'] = './dist/classes/*'
-    if (k !== './classes/*') ex[k] = v
+// ---------------------------------------------------------------- package.json
+function pkgJson(ctx, styleNames) {
+  return {
+    ...basePkg(ctx, '@withicons/classes', `Font Awesome-style CSS icon classes: <i class="with with-home">. ${ctx.icons.length} icons x ${styleNames.length} styles, CSS-only or loaded on demand, zero dependencies.`,
+      ['css', 'css-icons', 'icon-classes', 'icon-font', 'font-awesome-alternative', 'cdn', 'no-build', 'html', ...styleNames, 'multicolor-icons']),
+    type: 'module',
+    // every file is a stylesheet or a script that runs for its effect
+    sideEffects: ['*.css', './dist/with-loader.js', './dist/with-icons.js'],
+    style: './dist/with-line.css',
+    exports: {
+      '.': { style: './dist/with-line.css', default: './dist/with-line.css' },
+      './with-icons.js': { types: './dist/with-icons.d.ts', default: './dist/with-icons.js' },
+      './package.json': './package.json',
+      // @withicons/classes/with-line.css, @withicons/classes/line/home.css, @withicons/classes/with-loader.js …
+      './*': './dist/*',
+    },
+    files: ['dist', 'README.md', 'LICENSE'],
+    // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/classes) serves the few-KB loader, never a whole style
+    unpkg: './dist/with-loader.js', jsdelivr: './dist/with-loader.js',
+    scripts: { test: 'node --test test/*.test.mjs' },
   }
-  if (!ex['./classes/*']) ex['./classes/*'] = './dist/classes/*'
-  p.exports = ex
-  const se = new Set(Array.isArray(p.sideEffects) ? p.sideEffects : [])
-  se.add('./dist/classes/*')
-  p.sideEffects = [...se]
-  return JSON.stringify(p, null, 2) + '\n'
-}
-function patchReadme(text, doc) {
-  const block = `${START}\n${doc}${END}\n`
-  const i = text.indexOf(START), j = text.indexOf(END)
-  if (i >= 0 && j > i) return text.slice(0, i) + block + text.slice(j + END.length).replace(/^\n/, '')
-  const k = text.lastIndexOf('\nMIT licensed.')
-  return k >= 0 ? text.slice(0, k + 1) + block + '\n' + text.slice(k + 1) : text.replace(/\n*$/, '\n\n') + block
 }
 
 // ---------------------------------------------------------------- emit
-export const after = ['web']
-
 export default async function emit(ctx) {
   const styleNames = ctx.styles.map(s => s.name)
   const bad = ctx.icons.map(i => i.name).filter(n => RESERVED.includes(n) || styleNames.includes(n))
   if (bad.length) throw new Error('icon names collide with reserved class words: ' + bad.join(', '))
 
-  const header = `/*! @withicons/web ${ctx.version} — icon classes. MIT. Generated, do not edit. */\n`
+  const header = `/*! @withicons/classes ${ctx.version} — icon classes. MIT. Generated, do not edit. */\n`
   const css = baseCss()
   const rules = {}   // style -> [[name, declarations]]
   let layered = 0
@@ -796,7 +843,7 @@ export default async function emit(ctx) {
   for (const [f, t] of files) sizes[f] = { raw: Buffer.byteLength(t), gz: gzn(t) }
   // what with-all.css really downloads: every style file
   sizes['with-all.css'] = ctx.styles.reduce((a, s) => ({ raw: a.raw + sizes[`with-${s.name}.css`].raw, gz: a.gz + sizes[`with-${s.name}.css`].gz }), { raw: 0, gz: 0 })
-  const pkgJs = runtimeJs(ctx, '../data/', '../icons/', css)
+  const pkgJs = runtimeJs(ctx, './data/', true, css)
   sizes['with-icons.js'] = { raw: Buffer.byteLength(pkgJs), gz: gzn(pkgJs) }
   const ldr = loaderJs(ctx, css)
   sizes['with-loader.js'] = { raw: Buffer.byteLength(ldr), gz: gzn(ldr) }
@@ -807,32 +854,40 @@ export default async function emit(ctx) {
     line: med(iconCss(ctx.defaultStyle).map(t => Buffer.byteLength(t))), lineGz: med(iconCss(ctx.defaultStyle).map(gzn)),
     heavy, heavyRaw: med(iconCss(heavy).map(t => Buffer.byteLength(t))), heavyGz: med(iconCss(heavy).map(gzn)),
   }
-  const doc = classesDoc(ctx, sizes, perIconSizes)
   files.set('with-icons.js', pkgJs)
   files.set('with-loader.js', ldr)
   files.set('with-icons.d.ts', dts(ctx))
   files.set('demo.html', demoHtml(ctx))
-  files.set('README.md', `# @withicons/web — icon classes\n\n${doc}\nMIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).\n`)
+
+  // alias shards + names (same split as @withicons/web's dist/data/): the loader and the runtime resolve aliases and
+  // suggest names for typos without touching @withicons/web
+  const dh = `// @withicons/classes ${ctx.version} — generated, do not edit. MIT.\n`
+  const aliases = {}
+  for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
+  const aliasParts = Array.from({ length: ALIAS_SHARDS }, () => ({}))
+  for (const k of Object.keys(aliases)) aliasParts[withShard(k, ALIAS_SHARDS)][k] = aliases[k]
+  const lookup = new Map()
+  aliasParts.forEach((p, k) => lookup.set(`data/alias/${k}.js`, `export default ${J(p)}\n`))
+  lookup.set('data/meta.js', `${dh}export default ${J({ names: ctx.icons.map(i => i.name), aliases })}\n`)
 
   // site mirror: self-contained, data chunks next to the script
   // (no per-icon files or loader there: the site serves the style files and the data chunks)
-  const site = new Map(files)
+  const site = new Map([...files, ...lookup])
   site.delete('with-loader.js')
   // the site offers with-all.css as a single download: keep it one self-contained file there
   site.set('with-all.css', `${header}${css}\n${ctx.styles.map(s => rules[s.name].map(([n, d]) => (s.name === ctx.defaultStyle ? `.with-${n}` : `.with-${s.name}.with-${n}`) + `{${d}}`).join('\n')).join('\n')}\n`)
-  site.set('with-icons.js', runtimeJs(ctx, './data/', null, css))
-  const aliasParts = Array.from({ length: ALIAS_SHARDS }, () => ({}))
-  for (const k of Object.keys(ctx.aliasIndex).sort()) aliasParts[withShard(k, ALIAS_SHARDS)][k] = ctx.aliasIndex[k]
-  aliasParts.forEach((p, k) => site.set(`data/alias/${k}.js`, `export default ${J(p)}\n`))
-  const aliases = {}
-  for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
-  const dh = `// @withicons/web ${ctx.version} — generated, do not edit. MIT.\n`
+  site.set('with-icons.js', runtimeJs(ctx, './data/', false, css))
   for (const s of styleNames) {
     const d = {}
     for (const i of ctx.icons) d[i.name] = innerOf(ctx, i, s)
     site.set(`data/${s}.js`, `${dh}export default ${J(d)}\n`)
   }
-  site.set('data/meta.js', `${dh}export default ${J({ names: ctx.icons.map(i => i.name), aliases })}\n`)
+
+  // the package: unchanged files are left alone, stale ones (renamed icons) pruned
+  const out = distWriter(ctx, 'packages/classes/dist')
+  for (const [f, t] of [...files, ...perIcon, ...lookup]) out.add(f, t)
+  await out.flush()
+  writePkg(ctx, 'classes', pkgJson(ctx, styleNames), readme(ctx, sizes, perIconSizes))
 
   // keep: files other emitters put in the same folder (emit-search writes site/vendor/with/search.js)
   const writeDir = (rel, map, keep = []) => {
@@ -842,14 +897,8 @@ export default async function emit(ctx) {
     for (const [k, buf] of saved) { const p = path.join(dir, k); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, buf) }
     for (const [f, t] of map) { const p = path.join(dir, f); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, t) }
   }
-  const writeAll = () => writeDir('packages/web/dist/classes', new Map([...files, ...perIcon]))
-  writeAll()
   writeDir('site/vendor/with', site, ['search.js'])
 
-  // package.json / README were just (re)written by emit-web; patch in the classes exports + docs
-  const P = f => path.join(ctx.root, 'packages/web', f)
-  if (fs.existsSync(P('package.json'))) fs.writeFileSync(P('package.json'), patchPkg(fs.readFileSync(P('package.json'), 'utf8')))
-  if (fs.existsSync(P('README.md'))) fs.writeFileSync(P('README.md'), patchReadme(fs.readFileSync(P('README.md'), 'utf8'), doc))
   const k = n => (n / 1024).toFixed(0) + 'K'
-  return `${files.size + perIcon.size} files (${perIcon.size} per-icon); line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css via @import ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}, with-loader.js ${k(sizes['with-loader.js'].raw)}; ${layered} palette icons as 2 layers; site/vendor/with mirrored`
+  return `${files.size + perIcon.size + lookup.size} files (${perIcon.size} per-icon); line.css ${k(sizes['with-line.css'].raw)} (${k(sizes['with-line.css'].gz)} gz), all.css via @import ${k(sizes['with-all.css'].raw)} (${k(sizes['with-all.css'].gz)} gz), with-icons.js ${k(sizes['with-icons.js'].raw)}, with-loader.js ${k(sizes['with-loader.js'].raw)}; ${layered} palette icons as 2 layers; site/vendor/with mirrored`
 }

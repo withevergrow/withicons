@@ -1,0 +1,84 @@
+{
+  "name": "@withicons/classes",
+  "version": "0.2.0",
+  "description": "Font Awesome-style CSS icon classes: <i class=\"with with-home\">. 500 icons x 20 styles, CSS-only or loaded on demand, zero dependencies.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/classes"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "css",
+    "css-icons",
+    "icon-classes",
+    "icon-font",
+    "font-awesome-alternative",
+    "cdn",
+    "no-build",
+    "html",
+    "line",
+    "solid",
+    "duo",
+    "gloss",
+    "engrave",
+    "blueprint",
+    "sketch",
+    "glass",
+    "kawaii",
+    "sticker",
+    "pixel",
+    "retro",
+    "luxe",
+    "bauhaus",
+    "skeuo",
+    "anime",
+    "gothic",
+    "pastel",
+    "coquette",
+    "plush",
+    "multicolor-icons"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "./dist/with-loader.js",
+    "./dist/with-icons.js"
+  ],
+  "style": "./dist/with-line.css",
+  "exports": {
+    ".": {
+      "style": "./dist/with-line.css",
+      "default": "./dist/with-line.css"
+    },
+    "./with-icons.js": {
+      "types": "./dist/with-icons.d.ts",
+      "default": "./dist/with-icons.js"
+    },
+    "./package.json": "./package.json",
+    "./*": "./dist/*"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "unpkg": "./dist/with-loader.js",
+  "jsdelivr": "./dist/with-loader.js",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

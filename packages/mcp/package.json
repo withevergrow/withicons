@@ -1,7 +1,7 @@
 {
   "name": "@withicons/mcp",
   "version": "0.2.0",
-  "description": "MCP server for with icons: search 500 icons x 20 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, and animation code (@withicons/motion). stdio (npx) and AWS Lambda.",
+  "description": "MCP server for with icons: search 500 icons x 20 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx) and AWS Lambda.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -34,6 +34,8 @@
     "icon-animation",
     "multicolor-icons",
     "color-palettes",
+    "animated-gif",
+    "powerpoint",
     "line-icons",
     "solid-icons",
     "duo-icons",
@@ -71,24 +73,26 @@
       "default": "./dist/lib.mjs"
     },
     "./stdio": "./dist/stdio.mjs",
-    "./lambda": "./dist/lambda.mjs",
     "./data/*": "./dist/data/*",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "!dist/lambda.mjs",
     "README.md",
     "LICENSE"
   ],
   "sideEffects": [
-    "./dist/stdio.mjs",
-    "./dist/lambda.mjs"
+    "./dist/stdio.mjs"
   ],
   "publishConfig": {
     "access": "public"
   },
   "engines": {
     "node": ">=18"
+  },
+  "optionalDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   },
   "scripts": {
     "build": "node ../../forge/lib/emit-mcp.mjs",

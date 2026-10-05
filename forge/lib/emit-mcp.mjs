@@ -4,7 +4,9 @@
 //   packages/mcp/dist/lib.mjs       library used by the CLI (search, get, snippets)
 //   packages/mcp/dist/lambda.mjs    `handler` for a Lambda Function URL — ONE self-contained file, data inlined
 //   packages/cli/dist/cli.mjs       bin `withicons` (bundles site/js/export/*.js for `withicons export`; @resvg/resvg-js stays
-//                                   an external, optional dependency loaded only for PNG-based formats)
+//                                   an external, optional dependency loaded only for PNG-based and animated formats)
+//   The export engine (packages/cli/src/export.mjs + @withicons/motion's frame code) is in stdio.mjs and lambda.mjs too, for
+//   the export_icon tool; the Lambda never loads resvg (remote export_icon makes vector / code / Lottie files only).
 // Bundling needs esbuild from packages/mcp/node_modules (cd packages/mcp && npm install). Without it the data
 // and package files are still written and the previous bundles are kept.
 import fs from 'fs'
@@ -62,6 +64,14 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
       b.onLoad({ filter: /.*/, namespace: 'json-text' }, a => ({ contents: `export default ${JSON.stringify(fs.readFileSync(a.path, 'utf8'))}`, loader: 'js' }))
     },
   })
+  // @withicons/motion's export.js reaches its 500-icon spec table (icons.js) only through motionFor(name); the exporters
+  // always pass the spec, so the bundles get an empty table instead of ~220 KB of duplicate data
+  const noSpecTable = {
+    name: 'motion-no-spec-table', setup(b) {
+      b.onResolve({ filter: /^\.\/icons\.js$/ }, a => /[\\/]motion[\\/]dist$/.test(a.resolveDir) ? { path: 'motion-icons-stub', namespace: 'stub' } : undefined)
+      b.onLoad({ filter: /.*/, namespace: 'stub' }, () => ({ contents: 'export default {}', loader: 'js' }))
+    },
+  }
   const common = {
     bundle: true, platform: 'node', format: 'esm', target: 'node18', logLevel: 'silent', legalComments: 'none',
     define: { __VERSION__: JSON.stringify(version) },
@@ -69,7 +79,7 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
   }
   const out = []
   const run = async (entry, outfile, data, extra = {}) => {
-    const r = await esbuild.build({ ...common, ...extra, entryPoints: [path.join(mcpDir, 'src', entry)], outfile, plugins: [dataPlugin(data)], metafile: true })
+    const r = await esbuild.build({ ...common, external: ['@resvg/resvg-js'], ...extra, entryPoints: [path.join(mcpDir, 'src', entry)], outfile, plugins: [dataPlugin(data), noSpecTable], metafile: true })
     out.push(`${path.basename(outfile)} ${(fs.statSync(outfile).size / 1024).toFixed(0)} KB`)
     return r
   }
@@ -79,7 +89,7 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
   fs.copyFileSync(path.join(mcpDir, 'src', 'lib.d.ts'), path.join(mcpDir, 'dist', 'lib.d.ts'))
   const cliDir = path.join(root, 'packages', 'cli')
   if (fs.existsSync(path.join(cliDir, 'src', 'cli.mjs'))) {
-    await esbuild.build({ ...common, entryPoints: [path.join(cliDir, 'src', 'cli.mjs')], outfile: path.join(cliDir, 'dist', 'cli.mjs'), external: ['@withicons/mcp', '@withicons/mcp/*', '@resvg/resvg-js'], banner: { js: '#!/usr/bin/env node' } })
+    await esbuild.build({ ...common, entryPoints: [path.join(cliDir, 'src', 'cli.mjs')], outfile: path.join(cliDir, 'dist', 'cli.mjs'), external: ['@withicons/mcp', '@withicons/mcp/*', '@resvg/resvg-js'], plugins: [noSpecTable], banner: { js: '#!/usr/bin/env node' } })
     out.push(`cli.mjs ${(fs.statSync(path.join(cliDir, 'dist', 'cli.mjs')).size / 1024).toFixed(0)} KB`)
   }
   return out.join(', ')
@@ -198,9 +208,9 @@ export default async function emit(ctx) {
   const rv = { version, icons: ctx.icons.length, styles: ctx.styles.length, styleList: ctx.styles.map(s => s.name).join(', '), total: totalText(ctx), animated: Object.keys(motion.icons).length, paletteIcons: Object.keys(palettes.icons).length }
   // package.json files (bundled -> no runtime dependencies)
   const mcpPkg = {
-    ...basePkg(ctx, '@withicons/mcp', `MCP server for with icons: search ${countText(ctx)} in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, and animation code (@withicons/motion). stdio (npx) and AWS Lambda.`,
+    ...basePkg(ctx, '@withicons/mcp', `MCP server for with icons: search ${countText(ctx)} in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx) and AWS Lambda.`,
       ['mcp', 'model-context-protocol', 'mcp-server', 'ai', 'claude', 'cursor', 'icon-search', 'svg-icons', 'animated-icons', 'icon-animation',
-        'multicolor-icons', 'color-palettes', ...ctx.styles.map(s => `${s.name}-icons`)]),
+        'multicolor-icons', 'color-palettes', 'animated-gif', 'powerpoint', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module',
     bin: { 'withicons-mcp': 'dist/stdio.mjs' },
     main: './dist/lib.mjs',
@@ -209,15 +219,17 @@ export default async function emit(ctx) {
       '.': { types: './dist/lib.d.ts', default: './dist/lib.mjs' },
       './lib': { types: './dist/lib.d.ts', default: './dist/lib.mjs' },
       './stdio': './dist/stdio.mjs',
-      './lambda': './dist/lambda.mjs',
       './data/*': './dist/data/*',
       './package.json': './package.json',
     },
-    files: ['dist', 'README.md', 'LICENSE'],
-    // the bin and the Lambda entry run code on import; the library does not
-    sideEffects: ['./dist/stdio.mjs', './dist/lambda.mjs'],
+    // dist/lambda.mjs (the site's API, ~33 MB with data inlined) is deployed by scripts/deploy.mjs, not shipped on npm
+    files: ['dist', '!dist/lambda.mjs', 'README.md', 'LICENSE'],
+    // the bin runs code on import; the library does not
+    sideEffects: ['./dist/stdio.mjs'],
     publishConfig: { access: 'public' },
     engines: { node: '>=18' },
+    // PNG / animated files from export_icon (stdio); everything else works without it
+    optionalDependencies: { '@resvg/resvg-js': '^2.6.2' },
     scripts: { build: 'node ../../forge/lib/emit-mcp.mjs', test: 'node --test test/*.test.mjs' },
     devDependencies: { '@modelcontextprotocol/sdk': '^1.31.0', esbuild: '^0.28.2', zod: '^4.6.5' },
   }
@@ -229,14 +241,14 @@ export default async function emit(ctx) {
   writePkg(ctx, 'mcp', mcpPkg, readme(root, 'mcp', rv))
 
   const cliPkg = {
-    ...basePkg(ctx, 'withicons', `with icons from the terminal: search ${countText(ctx)} in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie) for apps and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.`,
-      ['cli', 'icon-search', 'mcp', 'icon-export', 'favicon', 'lottie', 'svg-to-png', 'vectordrawable']),
+    ...basePkg(ctx, 'withicons', `with icons from the terminal: search ${countText(ctx)} in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint) for apps, slides and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.`,
+      ['cli', 'icon-search', 'mcp', 'icon-export', 'favicon', 'lottie', 'svg-to-png', 'vectordrawable', 'animated-gif', 'apng', 'powerpoint']),
     type: 'module',
     bin: { withicons: 'dist/cli.mjs' },
     files: ['dist', 'README.md', 'LICENSE'],
     engines: { node: '>=18' },
     dependencies: { '@withicons/mcp': version },
-    // PNG rendering for `withicons export --format png|png-set|ico|favicon-pack|pptx|pptx-sheet|docx`; every other
+    // PNG rendering for `withicons export --format png|png-set|ico|favicon-pack|pptx|pptx-sheet|docx|gif|apng|pptx-animated`; every other
     // command and format works without it (prebuilt native binaries: skipped quietly where none exists)
     optionalDependencies: { '@resvg/resvg-js': '^2.6.2' },
     scripts: { test: 'node --test test/*.test.mjs' },

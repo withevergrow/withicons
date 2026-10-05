@@ -9,7 +9,8 @@ Usage
   withicons search <words...>        find icons by meaning ("throw away", "settigns", "money")
   withicons get <name...>            print icons (SVG by default) or framework code
   withicons add <name...>            print import lines + usage for a framework
-  withicons export <name...>         save files: svg, pdf, png, ico, favicons, android, ios, jsx, pptx, lottie, …
+  withicons export <name...>         save files: svg, pdf, png, ico, favicons, android, ios, jsx, pptx, lottie,
+                                     animated gif / apng / svg, animated PowerPoint, …
   withicons palettes <name>          the colour palettes picked for an icon${palettes ? ` (${palettes} in all)` : ''}
   withicons animate <name>           animation code (@withicons/motion): loop, hover, once, inview, swap
   withicons resolve <name>           check a name or alias
@@ -47,8 +48,8 @@ Colours (multi-colour styles: duo, blueprint, glass, kawaii, sticker, pixel, ret
 Motion
   --trigger, -t <t>         animate: loop (default), hover, once, inview, swap
   --preset, -p <preset>     animate: override the motion (spin, ring, beat, float, pop, …; animate --list)
-  --to <name[@style]>       animate --trigger swap: the icon to turn into (default: the icon's suggestion)
-  --effect <effect>         animate --trigger swap: fade, flip, scale, rotate, slide-up, morph, …
+  --to <name[@style]>       animate --trigger swap, export --motion swap: the icon to turn into (default: its suggestion)
+  --effect <effect>         swaps: fade, flip, scale, rotate, slide-up, morph, …
   --duration <s>            animate: seconds per cycle
 
 Export (files for designers, apps and CI)
@@ -58,16 +59,26 @@ Export (files for designers, apps and CI)
                               apps    android (VectorDrawable xml), ios (Xcode imageset zip)
                               code    jsx, tsx, vue, svelte, react-native, angular, html, css, data-uri, base64
                               office  pptx, pptx-sheet (every style), docx
-                              motion  lottie, dotlottie
+                              motion  gif, apng, animated-svg, pptx-animated (a slide with the animated GIF),
+                                      lottie, dotlottie
   --out, -o <dir>           export: folder to write to (default: here); "-" prints one file to stdout
-  --size <n>                export: pixels (png 512, png-set base 24, svg 24, pdf/eps 512, lottie 512)
+  --size <n>                export: pixels (png 512, png-set base 24, svg 24, pdf/eps 512, lottie 512,
+                              gif/apng/animated-svg 256, pptx-animated 480)
   --background <color>      export: transparent (default) or a hex colour, e.g. "#ffffff"
   --palette, --color, --c1 … export: colours, as for get (--color is the ink)
-  --motion <m>              export: loop, hover, once, none, or a preset (ring, spin, …; hover:ring)
-                              for lottie, dotlottie and the code formats
+  --motion <m>              export: loop (default), hover, once, none, swap, or a preset (ring, spin, …; hover:ring)
+                              for the motion formats and code; with pptx-sheet: every style animated
+  --fps <n>                 gif/apng/pptx-animated: frames per second (gif 25, apng 30; gif at most 50)
+  --seconds <s>             gif/apng/pptx-animated: length of one loop (default: the motion's own cycle)
+  --loop <n>                gif/apng: 0 = repeat forever (default), n = play n times
+  --matte <color>           gif: transparent GIF, soft edges blended with this colour (your slide's)
+  --hold <s>                --motion swap: rest on each icon between turns
   --all-styles              export: every style, one file each
   --padding <0-0.4>         export: empty space around the icon, as a share of its size
-  PNG-based formats (png, png-set, ico, favicon-pack, pptx, pptx-sheet, docx) use @resvg/resvg-js:
+  Animated files for slides: GIF plays in PowerPoint, Keynote, Google Slides, Slack, email; APNG has smooth
+  see-through edges for web pages; pass your slide colour as --background (GIF transparency is 1-bit).
+  PNG-based and animated formats (png, png-set, ico, favicon-pack, pptx, pptx-sheet, docx, gif, apng, pptx-animated)
+  use @resvg/resvg-js:
   installed with withicons when your platform supports it, else: npm install -D @resvg/resvg-js
 
 Output
@@ -91,6 +102,9 @@ Examples
   npx withicons export home settings --format svg,pdf,png --out icons
   npx withicons export star --style sticker --format favicon-pack --background "#ffffff"
   npx withicons export bell --format lottie --motion hover
+  npx withicons export bell --format gif --background "#ffffff" --size 256
+  npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"
+  npx withicons export play --format gif,apng --motion swap --to pause --effect morph
   npx withicons export heart --all-styles --format png --palette classic-red --out hearts
   npx withicons init cursor
   npx withicons init claude-code codex --global --mcp local`
@@ -100,7 +114,7 @@ const FLAGS = { s: 'style', f: 'format', n: 'limit', c: 'category', fw: 'framewo
   o: 'out', formats: 'format', bg: 'background', 'all-style': 'all-styles', 'every-style': 'all-styles' }
 const BOOL = new Set(['json', 'version', 'help', 'raw', 'no-color', 'global', 'dry-run', 'force', 'no-mcp', 'no-skill', 'print', 'path', 'zip', 'list', 'flat', 'all-styles'])
 const VALUE = new Set(['style', 'format', 'framework', 'size', 'stroke-width', 'color', 'trigger', 'preset', 'to', 'effect', 'duration', 'limit',
-  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', ...ROLES])
+  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', 'fps', 'seconds', 'loop', 'matte', 'hold', ...ROLES])
 class UsageError extends Error {}
 const near = (k, list) => list.find(x => x.startsWith(k.slice(0, 3)) || k.startsWith(x.slice(0, 3)))
 function parseArgs(argv) {
@@ -363,6 +377,7 @@ async function exportCmd(lib, args, o, usage) {
     r = await X.exportIcons(lib, {
       names: args, format: o.format, style: o.style, allStyles: !!o['all-styles'], size: num(o, 'size', { int: true }), padding,
       background: o.background, palette: o.palette, colors, motion: o.motion, duration: num(o, 'duration'), out: o.out,
+      fps: o.fps, seconds: o.seconds, loop: o.loop, matte: o.matte, to: o.to, effect: o.effect, hold: o.hold === undefined ? undefined : num(o, 'hold', { min: -1 }),
     })
   } catch (e) {
     if (e instanceof X.ExportError) {

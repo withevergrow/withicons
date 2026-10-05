@@ -63,6 +63,10 @@ swap(el, { from: playSvg, to: pauseSvg, effect: 'morph', trigger: 'click' })   /
 Agents: `animate_icon({ name, trigger, preset?, to?, effect?, style?, format })` (MCP), `npx withicons animate <name>`,
 or `GET https://withicons.com/api/motion/<name>?trigger=hover&format=react`.
 
+As files (slides, documents, email, social): `npx withicons export <name> --format gif|apng|animated-svg|pptx-animated|lottie`
+with `--motion loop|hover|once|swap|<preset>` (MCP: `export_icon`). Frames come from these same keyframes, so a GIF moves
+exactly like the icon on the page. GIF: pass the slide colour as `--background`. See SKILL.md section 7a.
+
 ## Guidelines
 
 - Motion should explain state or invite action: loading (spin/tick), new notification (ring), like (beat/pop),

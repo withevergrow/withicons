@@ -1293,13 +1293,13 @@
   // setup line for <i> tags: with-loader.js (~6 KB gzipped) links just the CSS of the icons on the page, in any mix of
   // styles (a line icon ~270 bytes gzipped). Custom colours need with-icons.js (inline SVG, also only the icons shown).
   // Whole-style stylesheets (with-line.css ~26 KB gzipped) and with-all.css (~6.3 MB gzipped) are opt-ins on the developers page.
-  var LOADER = '<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-loader.js" defer></script>'
+  var LOADER = '<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>'
   function headLines(st, name) { return edCss(st, name) ? RUNTIME : LOADER }
   function iTag(name, st, plain) { var c = plain ? '' : edCss(st, name); return '<i class="with with-' + name + (st && st !== 'line' ? ' with-' + st : '') + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
   // the open icon's own colours (Colours panel in the Look tab, owned by the studio in js/editor.js) for exports and code
   function edColors(st, name) { if (!ED || !V.open || name !== V.name) return null; var e = ED.get(); return e.name === name ? ED.colorsFor(st, name) : null }
   function edCss(st, name) { var cz = edColors(st, name); if (!cz) return ''; var p = cz.ink ? ['color: ' + cz.ink] : []; Object.keys(cz.vars).forEach(function (k) { p.push(k + ': ' + cz.vars[k]) }); return p.join('; ') }
-  var RUNTIME = '<script src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/with-icons.js" defer></script>'
+  var RUNTIME = '<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-icons.js" defer></script>'
   function flash(btn, label) { var p = btn.querySelector('[data-vw-tagdone]') || btn; var old = p.textContent; btn.classList.add('is-done'); p.textContent = label || 'Copied'; clearTimeout(btn._ft); btn._ft = setTimeout(function () { btn.classList.remove('is-done'); p.textContent = old === (label || 'Copied') ? 'Copy' : old }, 1500) }
   function hl(code) { var w = WI(); return w && w.highlight ? w.highlight(code) : esc(code) }
 

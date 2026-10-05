@@ -30,6 +30,7 @@ Tools (confirm with `tools/list`; arguments are documented in each tool's schema
 | `search_icons` | `query`, optional `limit`, `style`, `category`, `format`. Returns ranked icons with why they matched and a ready-to-paste import/usage line |
 | `get_icon` | `name` (alias ok), `style`, `format` (`svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `web-component`, `html-class`, `data-uri`), optional `size`, `color`, `strokeWidth` |
 | `animate_icon` | `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
+| `export_icon` | `name`, `style`, `format` (one or a comma list: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, `gif`, `apng`, `animated-svg`, `pptx-animated`, code formats), optional `size`, `background`, `matte`, `palette`, `colors`, `color`, `motion` (`loop`, `hover`, `once`, `swap`, `none` or a preset), `to`, `effect`, `fps`, `seconds`, `loop`, `all_styles`, `out_dir` (local server). Makes files: saved to `out_dir`, small ones also inline (GIF / PNG as image content). The remote server makes vector / code / Lottie files and answers PNG-based and animated formats with the `npx withicons export …` command |
 | `resolve_icon` | alias, PascalCase or typo, which returns the canonical name, or candidates if ambiguous |
 | `list_styles` | the 20 styles with descriptions (palette styles list their colour variables) |
 | `list_categories` | categories, or the icons in one category |
@@ -44,6 +45,8 @@ npx withicons search "throw away"        # ranked names + aliases
 npx withicons search cart --limit 5
 npx withicons search "cute heart"        # style words pick the style: kawaii
 npx withicons animate bell --trigger hover --format react
+npx withicons export bell --format gif --background "#ffffff"   # an animated GIF for slides
+npx withicons export home --format svg,png,pdf --out icons      # files
 ```
 
 ## HTTP API (cached at the edge, CORS enabled)

@@ -6,8 +6,13 @@
  * from next to this script. Frames are the exact CSS animation: WithMotion.frameSvg() freezes the icon's own keyframes
  * (same data as motion.css) at time t with a negative, paused animation-delay, and the browser rasterizes that SVG.
  *
- * Node: require('./animated.js') -> { register(WithExport), encodeGif, encodeApng, muxWebp, fixWebmDuration, ... }
+ * Node: require('./animated.js') -> { register(WithExport, env?), encodeGif, encodeApng, muxWebp, fixWebmDuration, ... }
  * The encoders are pure functions over RGBA frames, so they can be tested (and reused) without a browser.
+ * register(WithExport, env) with env = { motion: WithMotion-like { frameSvg, exportDuration, resolveMotion, animatedSvg },
+ * raster: (svg, px, background) -> RGBA Uint8Array (or a Promise of one; straight alpha, px x px) } makes gif and apng
+ * run without a DOM: the same frame sampling, padding measurement and encoders, with frames drawn by the injected
+ * rasteriser (the withicons CLI: resvg, after freezing the paused CSS keyframes into attributes). In a browser no env is
+ * given and nothing changes: the motion runtime is loaded on demand and frames are drawn by <img> + canvas.
  *
  * Frame list format used by the encoders: [{ data: Uint8ClampedArray RGBA, width, height, t0, t1 }] (t in seconds;
  * a frame is shown from t0 to t1). Identical consecutive frames are merged (longer delay) before encoding.
@@ -487,7 +492,8 @@
   }
 
   /* ───────────────────────── browser: motion + frames ───────────────────────── */
-  var W_ = function () { return typeof window !== 'undefined' ? window : root }
+  var W_ = function () { return typeof window !== 'undefined' ? window : root || {} }
+  var env = null // Node: { motion, raster } from register(WE, env); null in browsers
   var hasDom = function () { return typeof document !== 'undefined' && typeof Image !== 'undefined' && !!document.createElement }
   var loading = {}
   function loadScript(rel) {
@@ -502,6 +508,7 @@
     }))
   }
   function ensureMotion() {
+    if (env && env.motion) return Promise.resolve(env.motion)
     var w = W_()
     if (w.WithMotion && w.WithMotion.frameSvg) return Promise.resolve(w.WithMotion)
     return loadScript('../../vendor/motion/motion.js').then(function () {
@@ -564,14 +571,18 @@
   function padding(opts, WM, a, mo, seconds) {
     if (opts && opts.padding != null && opts.padding !== '') return Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
     var S = 120, M = 0.5, unit = S / (24 * (1 + 2 * M)), N = 40, ext = 0, i = 0
-    var c = document.createElement('canvas'); c.width = c.height = S
-    var g = c.getContext('2d', { willReadFrequently: true })
+    var c = env ? null : document.createElement('canvas'), g = null
+    if (c) { c.width = c.height = S; g = c.getContext('2d', { willReadFrequently: true }) }
+    // the frame's RGBA at S x S: injected rasteriser (Node) or <img> + canvas (browser)
+    var pixels = function (svg) {
+      if (env) return Promise.resolve(env.raster(svg, S, null))
+      return loadImg(svg).then(function (img) { g.clearRect(0, 0, S, S); g.drawImage(img, 0, 0, S, S); return g.getImageData(0, 0, S, S).data })
+    }
     var step = function () {
       if (i >= N) return Promise.resolve()
       var t = i * seconds / N; i++
-      return loadImg(wrap(WM.frameSvg(a, Object.assign({}, mo, { size: 24 }), t), S, M, null)).then(function (img) {
-        g.clearRect(0, 0, S, S); g.drawImage(img, 0, 0, S, S)
-        var d = g.getImageData(0, 0, S, S).data, x0 = S, y0 = S, x1 = -1, y1 = -1
+      return pixels(wrap(WM.frameSvg(a, Object.assign({}, mo, { size: 24 }), t), S, M, null)).then(function (d) {
+        var x0 = S, y0 = S, x1 = -1, y1 = -1
         for (var y = 0; y < S; y++) for (var x = 0; x < S; x++) if (d[(y * S + x) * 4 + 3] > 24) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; y1 = y }
         if (x1 >= 0) {
           var off = 24 * M
@@ -624,6 +635,12 @@
           if (i >= n) return Promise.resolve()
           var t0 = i * seconds / n, t1 = (i + 1) * seconds / n
           var frozen = WM.frameSvg(a, Object.assign({}, mo, { size: 24 }), t0)
+          if (env && fo.keep !== 'canvas') {
+            return Promise.resolve(env.raster(wrap(frozen, px, pad, null), px, fo.background || null)).then(function (data) {
+              frames.push({ data: data, width: px, height: px, t0: t0, t1: t1 })
+              return step(i + 1)
+            })
+          }
           return loadImg(wrap(frozen, px, pad, null)).then(function (img) {
             var c = document.createElement('canvas'); c.width = c.height = px
             var g = c.getContext('2d', { willReadFrequently: fo.keep !== 'canvas' })
@@ -779,7 +796,10 @@
   return {
     encodeGif: encodeGif, encodeApng: encodeApng, muxWebp: muxWebp, riffChunks: riffChunks, fixWebmDuration: fixWebmDuration, muxMp4: muxMp4, webmBlockTimes: webmBlockTimes,
     quantize: quantize, dedupe: dedupe, zlibStored: stored, adler32: adler32,
-    register: function (WE) {
+    register: function (WE, nodeEnv) {
+      if (nodeEnv) env = nodeEnv
+      // browsers hand back a Blob (for the download button); Node callers get the bytes
+      var out = function (bytes, mime) { return env ? bytes : new Blob([bytes], { type: mime }) }
       var frameSet = function (ctx, opts, def, extra) {
         return renderFrames(WE, ctx, opts, Object.assign({ size: sizeOf(opts, 256), fps: fpsOf(opts, def.fps, def.maxFps) }, extra))
       }
@@ -789,12 +809,12 @@
         id: 'gif', label: 'GIF (animated)', ext: 'gif', mime: 'image/gif', group: 'animated',
         audience: ['presentations', 'designers', 'web'], transparent: '1-bit', animated: true,
         note: 'Plays everywhere: Slack, email, Notion, Google Slides, PowerPoint. Edges are blended with a matte colour (white, or your background), so pick the colour it will sit on.',
-        available: function () { return hasDom() },
+        available: function () { return hasDom() || !!env },
         run: function (ctx, opts) {
           opts = opts || {}
           return frameSet(ctx, opts, { fps: 25, maxFps: 50 }, { background: opts.background || null }).then(function (r) {
             var bytes = encodeGif(r.frames, { matte: opts.background || opts.matte || '#ffffff', loop: opts.loop })
-            return { data: new Blob([bytes], { type: 'image/gif' }), filename: name(ctx, r, 'gif'), mime: 'image/gif' }
+            return { data: out(bytes, 'image/gif'), filename: name(ctx, r, 'gif'), mime: 'image/gif' }
           })
         },
       })
@@ -802,12 +822,12 @@
         id: 'apng', label: 'APNG (animated PNG)', ext: 'png', mime: 'image/png', group: 'animated',
         audience: ['web', 'designers', 'developers'], transparent: true, animated: true,
         note: 'An animated PNG with smooth, truly see-through edges on any background. Plays in every modern browser; elsewhere it shows the still icon.',
-        available: function () { return hasDom() },
+        available: function () { return hasDom() || !!env },
         run: function (ctx, opts) {
           opts = opts || {}
           return frameSet(ctx, opts, { fps: 30 }, { background: opts.background || null }).then(function (r) {
             return encodeApng(r.frames, { loop: opts.loop }).then(function (bytes) {
-              return { data: new Blob([bytes], { type: 'image/png' }), filename: name(ctx, r, 'png').replace(/\.png$/, '.apng.png'), mime: 'image/png' }
+              return { data: out(bytes, 'image/png'), filename: name(ctx, r, 'png').replace(/\.png$/, '.apng.png'), mime: 'image/png' }
             })
           })
         },
@@ -914,7 +934,7 @@
         id: 'animated-svg', label: 'Animated SVG', ext: 'svg', mime: 'image/svg+xml', group: 'animated',
         audience: ['web', 'developers', 'designers'], transparent: true, animated: true,
         note: 'One small, sharp-at-any-size file that animates by itself: in an <img>, opened in a browser, or pasted into a page. Uses the same motion as the site (CSS keyframes inside).',
-        available: function () { return hasDom() || !!(W_().WithMotion && W_().WithMotion.animatedSvg) },
+        available: function () { return hasDom() || !!env || !!(W_().WithMotion && W_().WithMotion.animatedSvg) },
         run: function (ctx, opts) {
           opts = opts || {}
           return ensureMotion().then(function (WM) {
@@ -925,7 +945,7 @@
               var px = Math.max(1, Math.round(Number(opts.size) || 256))
               // measure the travel of the played motion (a hover export measures its one-shot)
               var still = Object.assign({}, mo, { trigger: mo.trigger === 'hover' ? 'once' : mo.trigger })
-              var measure = hasDom() ? padding(opts, WM, a, still, WM.exportDuration(still, a)) : Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
+              var measure = hasDom() || env ? padding(opts, WM, a, still, WM.exportDuration(still, a)) : Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
               return measure.then(function (pad) {
                 var anim = WM.animatedSvg(a, Object.assign({}, mo, { size: 24 }))
                 var out = pad || opts.background ? wrap(anim, px, pad, opts.background) : WM.animatedSvg(a, Object.assign({}, mo, { size: px }))

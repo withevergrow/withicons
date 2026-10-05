@@ -157,7 +157,7 @@
   function colorCss(st) { return ed && st === S.style && S.colors && S.colors.custom ? S.colors.css : '' }
   function tagText(st) { var c = colorCss(st); return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
   function cssText(st) {
-    var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/web/dist/classes/'
+    var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/classes/dist/'
     // with-loader.js links only the CSS of the icons on the page (any style mix); custom colours need the inline-SVG runtime
     return '<script src="' + base + (colorCss(st) ? 'with-icons.js' : 'with-loader.js') + '" defer></script>'
   }

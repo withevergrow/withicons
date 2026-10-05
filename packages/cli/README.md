@@ -27,7 +27,7 @@ npx withicons export home settings --format svg,pdf,png --out icons   # files, f
 | `add <name...>` | import line + usage for `--framework` react (default), vue, svelte, angular, solid, web-component, html-class, svg |
 | `palettes <name>` | the colour palettes picked for that icon (swatches in the terminal); `--style` shows the CSS variables each one sets, `--tag pastel` filters |
 | `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate --list` shows presets and effects |
-| `export <name...>` | save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React/Vue/Svelte/Angular components, PowerPoint, Word, Lottie ([below](#export-files)) |
+| `export <name...>` | save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React/Vue/Svelte/Angular components, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint ([below](#export-files)) |
 | `resolve <name>` | does a name/alias map to one icon? |
 | `styles` · `categories [category]` | the catalogue; `styles` also lists every colour variable of the multi-colour styles |
 | `mcp` | run the MCP server over stdio (same as `npx -y @withicons/mcp`) |
@@ -64,6 +64,8 @@ can make them without a browser:
 npx withicons export home settings --format svg,pdf,png --out icons
 npx withicons export star --style sticker --format favicon-pack --background "#ffffff" --out public
 npx withicons export bell --format lottie --motion hover          # bell-line-ring-hover.json
+npx withicons export bell --format gif --background "#ffffff"      # bell-line-ring.gif, for slides
+npx withicons export rocket --style luxe --format pptx-animated    # a slide with the moving icon
 npx withicons export heart --style retro --palette classic-red --format android,ios --out app/icons
 npx withicons export heart --all-styles --format png --size 256 --out hearts
 npx withicons export trash --format jsx --out - > src/icons/Trash.jsx
@@ -85,18 +87,40 @@ npx withicons export home --format all --out everything            # every forma
 | `html` · `css` · `data-uri` · `base64` | an inline SVG snippet, a CSS class (+ a `-mask` class that takes the text colour), or one line of text |
 | `pptx` · `pptx-sheet` · `docx` | a PowerPoint slide, a deck with the icon in every style, a Word document (vector in Office 365, PNG elsewhere) |
 | `lottie` · `dotlottie` | the icon's animation as Lottie JSON or a `.lottie` package |
+| `gif` | the animation as a looping GIF (256 px): plays in PowerPoint, Keynote, Google Slides, Slack, email, Notion |
+| `apng` | an animated PNG with smooth see-through edges, for web pages (`.apng.png`) |
+| `animated-svg` | one small SVG that animates by itself (CSS keyframes inside), for browsers and `<img>` |
+| `pptx-animated` | a ready 16:9 PowerPoint slide with the animated GIF (also opens in Keynote and Google Slides) |
 
 Options: `--style`, `--all-styles` (one file per style), `--size <px>`, `--background transparent|#hex`,
 `--padding <0-0.4>` (space around the icon), colours exactly as for `get` (`--palette <id>`, `--color` = the ink,
-`--c1` … `--edge`, `--colors`), `--motion loop|hover|once|none|<preset>` (e.g. `ring`, `hover:ring`; for `lottie`,
-`dotlottie` and the code formats; `--duration <s>`), `--out <folder>` (default: here; `-` prints one file to stdout),
+`--c1` … `--edge`, `--colors`), `--motion loop|hover|once|none|swap|<preset>` (e.g. `ring`, `hover:ring`; for the
+animated formats and the code formats; `--duration <s>`), `--out <folder>` (default: here; `-` prints one file to stdout),
 and `--json` (the list of files written, for scripts). Several formats at once: `--format svg,png,android`, or `all`.
 
-PNG-based formats (`png`, `png-set`, `ico`, `favicon-pack`, `pptx`, `pptx-sheet`, `docx`) are drawn by
-[`@resvg/resvg-js`](https://www.npmjs.com/package/@resvg/resvg-js), an optional dependency that npm installs with withicons
-wherever it has a prebuilt binary. If it is missing, those formats say so and tell you to run
-`npm install --save-dev @resvg/resvg-js`; everything else works without it. GIF, WebP, JPG, AVIF and video need a
-browser: download them from the icon's page on withicons.com.
+### Animated icons for slides
+
+```sh
+npx withicons export bell --format gif --background "#ffffff"                  # match your slide colour
+npx withicons export bell --format gif --matte "#0f172a"                       # transparent, edges blended for a dark slide
+npx withicons export play --format gif --motion swap --to pause --effect morph # play turns into pause and back
+npx withicons export heart --style kawaii --format gif --motion beat --size 512 --fps 30
+npx withicons export heart --format pptx-sheet --motion loop                   # every style, all moving
+```
+
+Frames come from the same keyframes as the website (`@withicons/motion`), so the file moves exactly like the icon page.
+Icons with a tuned motion use it; `--motion hover` / `once` play the one-shot and rest; `--motion swap` turns the icon into its
+suggested partner (or `--to <name[@style]>`, `--effect fade|flip|scale|morph|…`, `--hold <s>`). `--fps`, `--seconds`
+(length of one loop) and `--loop` (0 = forever) tune the file; long or large animations are refused with a hint
+(600 frames, 1024 px). GIF transparency is on or off per pixel, so give it the colour it will sit on: `--background`
+(solid) or `--matte` (transparent, soft edges blended with that colour). Colours are baked in: choose `--palette` /
+`--c1` … before exporting. Apps that cannot play GIF but take Lottie (After Effects, Canva, apps): `--format lottie`.
+
+PNG-based and animated formats (`png`, `png-set`, `ico`, `favicon-pack`, `pptx`, `pptx-sheet`, `docx`, `gif`, `apng`,
+`pptx-animated`) are drawn by [`@resvg/resvg-js`](https://www.npmjs.com/package/@resvg/resvg-js), an optional dependency
+that npm installs with withicons wherever it has a prebuilt binary. If it is missing, those formats say so and tell you to
+run `npm install --save-dev @resvg/resvg-js`; everything else works without it. WebP, JPG, AVIF, animated WebP and video
+(WebM, MP4) use your browser's encoders: download them from the icon's page on withicons.com.
 
 ## Add with icons to your AI coding tool
 

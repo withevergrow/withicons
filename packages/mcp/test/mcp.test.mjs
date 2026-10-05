@@ -4,11 +4,19 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import os from 'node:os'
+import { createRequire } from 'node:module'
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
 const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist')
 const parse = r => JSON.parse(r.content[0].text)
+// PNG / animated exports need @resvg/resvg-js (optional dependency)
+let hasRenderer = true
+try { createRequire(path.join(dist, 'stdio.mjs')).resolve('@resvg/resvg-js') } catch {
+  try { createRequire(path.join(dist, '..', '..', '..', 'package.json')).resolve('@resvg/resvg-js') } catch { hasRenderer = false }
+}
+const R = { skip: !hasRenderer && 'no @resvg/resvg-js' }
 
 describe('stdio server (SDK client)', () => {
   let client
@@ -18,9 +26,13 @@ describe('stdio server (SDK client)', () => {
   })
   after(async () => { await client.close() })
 
-  test('lists the seven tools', async () => {
+  test('lists the eight tools', async () => {
     const { tools } = await client.listTools()
-    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'resolve_icon', 'search_icons'])
+    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'resolve_icon', 'search_icons'])
+    const x = tools.find(t => t.name === 'export_icon')
+    for (const k of ['name', 'format', 'motion', 'background', 'out_dir', 'to', 'fps']) assert.ok(x.inputSchema.properties[k], k)
+    assert.match(x.description, /gif/)
+    assert.match(x.description, /pptx-animated/)
     const g = tools.find(t => t.name === 'get_icon')
     assert.ok(g.inputSchema.properties.palette && g.inputSchema.properties.colors)
     const s = tools.find(t => t.name === 'search_icons')
@@ -164,6 +176,60 @@ describe('stdio server (SDK client)', () => {
     const r = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'bell' } }))
     assert.ok(r.motion && r.motion.loop && r.motion.hover)
   })
+  test('export_icon: vector and code come back inline as text', async () => {
+    const r = await client.callTool({ name: 'export_icon', arguments: { name: 'delete', style: 'solid', format: 'svg-flat,lottie' } })
+    assert.ok(!r.isError, r.content[0].text)
+    const s = parse(r)
+    assert.equal(s.name, 'trash')
+    assert.equal(s.count, 2)
+    assert.match(s.command, /^npx withicons export trash --style solid --format svg-flat,lottie/)
+    assert.equal(s.page, 'https://withicons.com/icons/trash.html')
+    assert.ok(r.content.some(c => c.type === 'text' && /^--- trash-solid\.svg ---\n<svg /.test(c.text)))
+    assert.ok(r.content.some(c => c.type === 'text' && /"layers"/.test(c.text)))
+  })
+  test('export_icon: animated GIF as MCP image content', R, async () => {
+    const r = await client.callTool({ name: 'export_icon', arguments: { name: 'bell', format: 'gif', size: 64, background: '#ffffff' } })
+    assert.ok(!r.isError, r.content[0].text)
+    const s = parse(r)
+    assert.equal(s.files[0].filename, 'bell-line-ring.gif')
+    assert.equal(s.files[0].inline, 'image')
+    const img = r.content.find(c => c.type === 'image')
+    assert.equal(img.mimeType, 'image/gif')
+    const gif = Buffer.from(img.data, 'base64')
+    assert.equal(gif.toString('latin1', 0, 6), 'GIF89a')
+    assert.ok(gif.includes(Buffer.from('NETSCAPE2.0')), 'loops')
+    assert.equal(gif.length, s.files[0].bytes)
+  })
+  test('export_icon: out_dir writes the files (animated PowerPoint, APNG, swap)', R, async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'withicons-mcp-'))
+    try {
+      const r = await client.callTool({ name: 'export_icon', arguments: { name: 'play', format: 'pptx-animated,apng', motion: 'swap', to: 'pause', effect: 'morph', size: 96, out_dir: dir } })
+      assert.ok(!r.isError, r.content[0].text)
+      const s = parse(r)
+      assert.equal(s.outDir, dir)
+      assert.deepEqual(s.files.map(f => f.filename).sort(), ['play-line-animated.pptx', 'play-line-to-pause.apng.png'])
+      for (const f of s.files) { assert.ok(fs.existsSync(f.path), f.path); assert.equal(fs.statSync(f.path).size, f.bytes) }
+      assert.equal(r.content.length, 1, 'no inline copies when saved to disk')
+      const pptx = fs.readFileSync(s.files.find(f => f.format === 'pptx-animated').path)
+      assert.ok(pptx.includes(Buffer.from('ppt/media/image1.gif')))
+      assert.ok(pptx.includes(Buffer.from('GIF89a')))
+    } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+  })
+  test('export_icon: errors are tool errors with a code', async () => {
+    const r = await client.callTool({ name: 'export_icon', arguments: { name: 'bell', format: 'webm' } })
+    assert.ok(r.isError)
+    const e = JSON.parse(r.content[0].text)
+    assert.equal(e.code, 'browser_only')
+    assert.match(e.error, /gif, apng or pptx-animated/)
+    const u = await client.callTool({ name: 'export_icon', arguments: { name: 'nope-nope', format: 'gif' } })
+    assert.ok(u.isError)
+    assert.equal(JSON.parse(u.content[0].text).code, 'unknown_icon')
+  })
+  test('animate_icon points at export_icon for files', async () => {
+    const r = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'bell', trigger: 'hover' } }))
+    assert.equal(r.files.tool, 'export_icon')
+    assert.deepEqual(r.files.example, { name: 'bell', style: 'line', format: 'gif', motion: 'hover', background: '#ffffff' })
+  })
   test('resource icon://solid/home.svg', async () => {
     const r = await client.readResource({ uri: 'icon://solid/home.svg' })
     assert.match(r.contents[0].text, /^<svg/)
@@ -188,10 +254,24 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(init.statusCode, 200)
     assert.equal(JSON.parse(init.body).result.serverInfo.name, 'withicons')
     const list = await handler(rpc(2, 'tools/list', {}))
-    assert.equal(JSON.parse(list.body).result.tools.length, 7)
+    const tools = JSON.parse(list.body).result.tools
+    assert.equal(tools.length, 8)
+    // remote: no out_dir (nothing to write to), raster / animated formats answer with the command
+    assert.ok(!tools.find(t => t.name === 'export_icon').inputSchema.properties.out_dir)
     const call = await handler(rpc(3, 'tools/call', { name: 'search_icons', arguments: { query: 'throw away' } }))
     const res = JSON.parse(JSON.parse(call.body).result.content[0].text)
     assert.equal(res.results[0].name, 'trash')
+  })
+  test('remote export_icon: vector inline, GIF / PowerPoint as the npx command', async () => {
+    const call = async (id, args) => JSON.parse((await handler(rpc(id, 'tools/call', { name: 'export_icon', arguments: args }))).body).result
+    const gif = await call(10, { name: 'bell', style: 'luxe', format: 'gif,pptx-animated', background: '#0f172a' })
+    assert.ok(!gif.isError)
+    const g = JSON.parse(gif.content[0].text)
+    assert.equal(g.made, false)
+    assert.equal(g.command, 'npx withicons export bell --style luxe --format gif,pptx-animated --background #0f172a --out .')
+    assert.equal(g.page, 'https://withicons.com/icons/bell.html')
+    const svg = await call(11, { name: 'bell', format: 'svg-flat' })
+    assert.ok(svg.content.some(c => c.type === 'text' && /^--- bell-line\.svg ---/.test(c.text)))
   })
   test('MCP works without an Accept header; GET /mcp is 405', async () => {
     const r = await handler(ev('POST', '/mcp', '', { jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }, { 'content-type': 'application/json' }))

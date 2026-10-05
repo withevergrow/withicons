@@ -1,12 +1,13 @@
 // MCP server definition (transport-agnostic). Used by the stdio bin and the Lambda handler.
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
+import { exportIcon, EXPORT_FORMATS } from './export-tool.mjs'
 import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES } from './lib.mjs'
 
 export const SERVER_NAME = 'withicons'
 export const VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0-dev'
 
-const instructions = d => {
+const instructions = (d, remote) => {
   const pal = d.meta.styles.filter(s => s.palette).map(s => s.name)
   return `with icons (withicons.com): ${d.meta.icons.length} open-source (MIT) icons, each drawn in ${d.styleNames.length} styles (${d.styleNames.join(', ')}).
 Workflow: search_icons with what the icon should show ("delete", "throw away", "user settings") -> pick a name -> get_icon(name, style, format) for paste-ready code.
@@ -14,7 +15,8 @@ Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> p
 ${pal.length ? `Palette styles (${pal.join(', ')}) are multi-colour and duo + blueprint have an accent colour: every colour is a CSS variable with a default, the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
 Use line/solid/duo for UI controls, the creative styles at 32px+.
 Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format) returns code for the optional @withicons/motion package (continuous loops, hover effects, icon-to-icon swaps).
-Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|core|static|motion. Names and common aliases both work (e.g. "delete" -> trash).`
+Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'On this remote server PNG-based and animated formats come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
+Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|classes|core|static|motion (web = <with-icon> element, classes = <i class="with with-home"> CSS icons). Names and common aliases both work (e.g. "delete" -> trash).`
 }
 
 const json = v => ({ content: [{ type: 'text', text: JSON.stringify(v, null, 2) }], structuredContent: v })
@@ -22,13 +24,15 @@ const fail = e => {
   if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }, null, 2) }] } }
   return { isError: true, content: [{ type: 'text', text: `Error: ${e && e.message ? e.message : String(e)}` }] }
 }
-const safe = fn => async args => { try { return fn(args || {}) } catch (e) { return fail(e) } }
+const safe = fn => async args => { try { return await fn(args || {}) } catch (e) { return fail(e) } }
 
-export function createServer() {
+// opts.remote: the HTTP / Lambda server (no PNG renderer: export_icon answers raster and animated formats with a command)
+export function createServer(opts = {}) {
+  const remote = !!opts.remote
   const d = data()
   const styleNames = d.styleNames
   const categoryNames = d.meta.categories.map(c => c.name)
-  const server = new McpServer({ name: SERVER_NAME, version: VERSION, title: 'with icons', websiteUrl: 'https://withicons.com' }, { instructions: instructions(d), capabilities: { tools: {}, resources: {} } })
+  const server = new McpServer({ name: SERVER_NAME, version: VERSION, title: 'with icons', websiteUrl: 'https://withicons.com' }, { instructions: instructions(d, remote), capabilities: { tools: {}, resources: {} } })
   const ro = { readOnlyHint: true, openWorldHint: false }
 
   server.registerTool('search_icons', {
@@ -102,7 +106,8 @@ export function createServer() {
     description: 'Paste-ready animation code for an icon, using the optional @withicons/motion package (CSS, works with every style and package). ' +
       'trigger: loop = continuous (spinner, ringing bell), hover = one-shot on hover/focus (or of a .wm-trigger button), once = plays on load, inview = plays when scrolled into view, ' +
       'swap = the icon turns into another one (play -> pause, menu -> close, heart -> heart@solid). Icons with a tuned motion use it by default; preset overrides it. ' +
-      `${Object.keys(mo.icons).length} icons have tuned motion.`,
+      `${Object.keys(mo.icons).length} icons have tuned motion. ` +
+      'For a moving icon as a FILE (slides, docs, email, social) use export_icon with format gif, apng, animated-svg, pptx-animated or lottie and the same motion (motion: "loop", "hover", "swap" or a preset).',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),
       trigger: z.enum(TRIGGERS).optional().describe('loop (default), hover, once, inview or swap'),
@@ -114,7 +119,50 @@ export function createServer() {
       duration: z.number().min(0.2).max(10).optional().describe('Seconds per cycle'),
     },
     annotations: { title: 'Animate icon', ...ro },
-  }, safe(a => json(animateIcon(a))))
+  }, safe(a => {
+    const r = animateIcon(a)
+    r.files = { tool: 'export_icon', formats: ['gif', 'apng', 'animated-svg', 'pptx-animated', 'lottie', 'dotlottie'],
+      example: { name: r.name, style: r.style, format: 'gif', motion: a.trigger === 'swap' ? 'swap' : (a.preset || (a.trigger && a.trigger !== 'inview' ? a.trigger : 'loop')), ...(a.trigger === 'swap' && r.to ? { to: r.to } : {}), background: '#ffffff' } }
+    return json(r)
+  }))
+
+  const colorShape = z.object(Object.fromEntries(PALETTE_ROLES.map(r => [r, z.string().max(40).optional()]))).catchall(z.string().max(40))
+  server.registerTool('export_icon', {
+    title: 'Export icon files',
+    description: 'Make icon FILES (not code): for slides, documents, design tools, apps and social posts. ' +
+      'Animated (for PowerPoint, Keynote, Google Slides, email, chat): gif (plays everywhere; set background to the slide colour), apng (smooth see-through edges, web), ' +
+      'animated-svg (one small file, browsers), pptx-animated (a ready 16:9 slide with the moving GIF), lottie / dotlottie (apps, After Effects, Canva). ' +
+      'Still: svg, svg-flat (colours baked in), pdf, eps, png, png-set, ico, favicon-pack, android, ios, pptx, pptx-sheet (every style), docx, and code (jsx, tsx, vue, svelte, react-native, angular, html, css, data-uri, base64). ' +
+      (remote
+        ? 'This remote server makes the vector, code and Lottie formats inline; for png-based and animated formats it returns the exact `npx withicons export …` command to run in a terminal, plus the icon page. '
+        : 'Files are saved to out_dir when given (absolute or relative to the working directory) and returned inline when small (images as image content, text as text). ') +
+      'Colours are baked into raster and animated files: choose palette / colors / color here, they cannot be changed afterwards.',
+    inputSchema: {
+      name: z.string().min(1).describe('Icon name or alias'),
+      style: z.enum(styleNames).optional().describe('Style (default line)'),
+      format: z.string().max(200).optional().describe(`One format or a comma list (default svg): ${EXPORT_FORMATS.join(', ')}`),
+      all_styles: z.boolean().optional().describe('One file per style (every style)'),
+      size: z.number().int().min(8).max(2048).optional().describe('Pixels (png 512, gif / apng / animated-svg 256, pptx-animated 480, svg 24); animated formats max 1024'),
+      background: z.string().max(40).optional().describe('Solid background (hex), e.g. the slide colour "#ffffff"; default transparent'),
+      matte: z.string().max(40).optional().describe('gif only: keep it transparent but blend the soft edges with this colour (the colour it will sit on)'),
+      palette: z.string().max(60).optional().describe('Colour palette id (list_palettes)'),
+      colors: colorShape.optional().describe('Colour roles -> "#hex" (ink, c1-c4, tint, accent, shadow, shine, edge)'),
+      color: z.string().max(40).optional().describe('The ink colour (currentColor)'),
+      motion: z.string().max(40).optional().describe('Animated formats: loop (default: the icon\'s tuned motion), hover / once (plays once, then rests), swap (turns into another icon), none, or a preset (spin, ring, beat, bounce, float, pop, ...)'),
+      to: z.string().max(60).optional().describe('motion swap: the icon to turn into, "name" or "name@style" (default: the icon\'s suggestion)'),
+      effect: z.enum(mo.effects).optional().describe('motion swap: transition (fade, flip, scale, morph, ...)'),
+      duration: z.number().min(0.2).max(10).optional().describe('Seconds per motion cycle'),
+      fps: z.number().int().min(1).max(60).optional().describe('gif / apng frames per second (gif 25, apng 30)'),
+      seconds: z.number().min(0.1).max(30).optional().describe('gif / apng length of one loop (default: the motion cycle)'),
+      loop: z.number().int().min(0).max(100).optional().describe('gif / apng: 0 = forever (default), n = play n times'),
+      padding: z.number().min(0).max(0.4).optional().describe('Empty space around the icon, as a share of its size'),
+      ...(remote ? {} : {
+        out_dir: z.string().max(500).optional().describe('Folder to save the files in (created if needed). Without it, files come back inline only.'),
+        inline: z.boolean().optional().describe('Also return the files inline (default: only when out_dir is not given)'),
+      }),
+    },
+    annotations: { title: 'Export icon files', readOnlyHint: remote, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+  }, safe(a => exportIcon(a, { remote })))
 
   // icon://<style>/<name>.svg
   server.registerResource('icon', new ResourceTemplate('icon://{style}/{name}.svg', {

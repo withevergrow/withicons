@@ -39,7 +39,7 @@ async function mcp(event, method, url) {
   if (method === 'POST' && !headers.get('content-type')) headers.set('content-type', 'application/json')
   const body = event.body == null ? undefined : event.isBase64Encoded ? Buffer.from(event.body, 'base64').toString('utf8') : event.body
   const request = new Request(url, { method, headers, body: method === 'POST' ? body : undefined })
-  const server = createServer()
+  const server = createServer({ remote: true })
   const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true })
   try {
     await server.connect(transport)

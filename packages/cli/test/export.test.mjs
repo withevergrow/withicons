@@ -10,6 +10,7 @@ import zlib from 'node:zlib'
 import { createRequire } from 'node:module'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { decodeGif, decodeApng } from './anim-decode.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const cli = path.join(here, '..', 'dist', 'cli.mjs')
@@ -254,7 +255,7 @@ test('several icons, aliases, --all-styles, palettes, --format all', () => {
   assert.match(red, /#123456/)
   const pal = read(one(exp('heart', '--style', 'retro', '--format', 'svg', '--palette', 'classic-red'), 'svg')).toString()
   assert.notEqual(pal, read(one(exp('heart', '--style', 'retro', '--format', 'svg'), 'svg')).toString())
-  if (hasRenderer) assert.equal(exp('home', '--format', 'all').count, 25)
+  if (hasRenderer) assert.equal(exp('home', '--format', 'all').count, 29)
 })
 test('--out - prints one file to stdout', () => {
   const r = text(run(['export', 'home', '--format', 'svg', '--out', '-']))
@@ -263,9 +264,11 @@ test('--out - prints one file to stdout', () => {
   assert.equal(run(['export', 'home', '--format', 'svg,pdf', '--out', '-']).status, 2)
 })
 test('usage errors exit 2, unknown icons exit 1', () => {
-  const r = text(run(['export', 'home', '--format', 'gif']))
+  const r = text(run(['export', 'home', '--format', 'webm']))
   assert.equal(r.status, 2)
   assert.match(r.stderr, /browser/)
+  assert.match(r.stderr, /gif, apng or pptx-animated/)
+  assert.equal(run(['export', 'home', '--format', 'webp-animated']).status, 2)
   assert.equal(run(['export', 'home', '--format', 'nope']).status, 2)
   assert.equal(run(['export', 'home', '--background', 'tomato-ish']).status, 2)
   assert.equal(run(['export', 'home', '--motion', 'wobble']).status, 2)
@@ -282,6 +285,10 @@ test('without @resvg/resvg-js: PNG formats explain how to install it, the rest s
   assert.match(r.stderr, /npm install --save-dev @resvg\/resvg-js/)
   const j = JSON.parse(text(run(['export', 'home', '--format', 'ico', '--json'], env)).stdout)
   assert.equal(j.code, 'missing_renderer')
+  assert.equal(JSON.parse(text(run(['export', 'bell', '--format', 'gif', '--json'], env)).stdout).code, 'missing_renderer')
+  // animated SVG needs no renderer (a fixed headroom instead of a measured one)
+  const as = exp('bell', '--format', 'animated-svg')
+  assert.match(read(one(as, 'animated-svg')).toString(), /@keyframes/)
   const ok = text(run(['export', 'home', '--format', 'svg,pdf,android,lottie', '--out', path.join(tmp, 'nr')], env))
   assert.equal(ok.status, 0, ok.stderr)
   assert.equal(fs.readdirSync(path.join(tmp, 'nr')).length, 4)
@@ -291,4 +298,108 @@ test('--help documents export', () => {
   assert.match(h, /withicons export <name\.\.\.>/)
   assert.match(h, /favicon-pack/)
   assert.match(h, /@resvg\/resvg-js/)
+})
+
+// ---------------------------------------------------------------- animated files (frames rendered in Node)
+const R = { skip: !hasRenderer && 'no @resvg/resvg-js' }
+test('gif: a valid looping GIF89a, every frame decodes, same motion as the site', R, () => {
+  const j = exp('bell', '--format', 'gif', '--size', '96')
+  const f = one(j, 'gif')
+  assert.equal(f.filename, 'bell-line-ring.gif')
+  assert.equal(f.mime, 'image/gif')
+  const buf = read(f)
+  assert.equal(buf.toString('latin1', 0, 6), 'GIF89a')
+  const g = decodeGif(buf)
+  assert.equal(g.width, 96); assert.equal(g.height, 96)
+  assert.equal(g.loop, 0, 'NETSCAPE2.0 loops forever')
+  assert.ok(g.frames.length >= 10, 'frames: ' + g.frames.length)
+  // the delays add up to the bell's motion cycle (ring: 2.4 s at the default 25 fps)
+  const total = g.frames.reduce((n, x) => n + x.delay, 0)
+  assert.ok(Math.abs(total - 240) <= g.frames.length, 'loop length ' + total + ' cs')
+  // it moves: not every frame is the same picture, and the first frame has the icon in it
+  const key = x => Buffer.from(x.rgba.buffer).toString('base64')
+  assert.ok(new Set(g.frames.map(key)).size > 5)
+  assert.ok(g.frames[0].rgba.some((v, i) => i % 4 === 3 && v === 255))
+})
+test('gif options: --background is opaque, --fps / --seconds / --loop, --matte keeps it transparent', R, () => {
+  const bg = decodeGif(read(one(exp('star', '--format', 'gif', '--size', '64', '--background', '#102030', '--fps', '10', '--seconds', '1.5', '--loop', '3', '--motion', 'spin'), 'gif')))
+  assert.equal(bg.loop, 2, 'NETSCAPE repeat count = plays - 1')
+  assert.ok(bg.frames.length <= 15)
+  assert.equal(bg.frames.reduce((n, x) => n + x.delay, 0), 150)
+  const p = bg.frames[0].rgba
+  assert.deepEqual([p[0], p[1], p[2], p[3]], [0x10, 0x20, 0x30, 255], 'corner = background')
+  const t = decodeGif(read(one(exp('star', '--format', 'gif', '--size', '64', '--matte', '#000000'), 'gif')))
+  assert.equal(t.frames[0].rgba[3], 0, 'transparent corner')
+  assert.equal(run(['export', 'star', '--format', 'gif', '--fps', '0']).status, 2)
+  assert.equal(run(['export', 'star', '--format', 'gif', '--seconds', '99']).status, 2)
+  assert.equal(run(['export', 'star', '--format', 'gif', '--matte', 'nope']).status, 2)
+  // limits: too many frames is a usage error with a hint, not a crash
+  const big = text(run(['export', 'star', '--format', 'gif', '--size', '1024', '--fps', '50', '--seconds', '30', '--json']))
+  assert.equal(big.status, 2)
+  assert.match(JSON.parse(big.stdout).error, /frames|pixels/)
+})
+test('apng: valid APNG (acTL / fcTL / fdAT), true alpha, loops', R, () => {
+  const f = one(exp('heart', '--style', 'kawaii', '--format', 'apng', '--size', '80'), 'apng')
+  assert.match(f.filename, /^heart-kawaii-.+\.apng\.png$/)
+  const buf = read(f)
+  checkPng(buf, 80)
+  const a = decodeApng(buf)
+  assert.equal(a.plays, 0)
+  assert.equal(a.declared, a.frames.length)
+  assert.ok(a.frames.length > 5)
+  // soft (partly transparent) edge pixels survive, unlike GIF
+  assert.ok(a.frames[0].rgba.some((v, i) => i % 4 === 3 && v > 0 && v < 255))
+})
+test('--motion swap records the icon turning into another one', R, () => {
+  const j = exp('play', '--format', 'gif', '--motion', 'swap', '--to', 'pause', '--effect', 'morph', '--size', '64')
+  assert.equal(one(j, 'gif').filename, 'play-line-to-pause.gif')
+  const g = decodeGif(read(one(j, 'gif')))
+  assert.ok(g.frames.length > 5)
+  // default target: the icon's own suggestion
+  assert.match(one(exp('play', '--format', 'gif', '--motion', 'swap', '--size', '48'), 'gif').filename, /^play-line-to-/)
+  assert.equal(run(['export', 'play', '--format', 'gif', '--motion', 'swap', '--effect', 'wobble']).status, 2)
+})
+test('pptx-animated: a valid slide whose picture is the animated GIF (no SVG twin)', R, () => {
+  const f = one(exp('rocket', '--style', 'luxe', '--format', 'pptx-animated', '--background', '#0f172a', '--size', '160'), 'pptx-animated')
+  assert.equal(f.filename, 'rocket-luxe-animated.pptx')
+  const p = unzip(read(f))
+  for (const k of ['[Content_Types].xml', '_rels/.rels', 'ppt/presentation.xml', 'ppt/_rels/presentation.xml.rels', 'ppt/slides/slide1.xml',
+    'ppt/slides/_rels/slide1.xml.rels', 'ppt/slideMasters/slideMaster1.xml', 'ppt/slideLayouts/slideLayout1.xml', 'ppt/theme/theme1.xml', 'ppt/media/image1.gif']) assert.ok(p[k], k)
+  for (const [k, v] of Object.entries(p)) if (/\.(xml|rels)$/.test(k)) checkXml(v.toString())
+  assert.ok(!Object.keys(p).some(k => /\.(png|svg)$/.test(k)), 'only the GIF')
+  assert.match(p['[Content_Types].xml'].toString(), /<Default Extension="gif" ContentType="image\/gif"\/>/)
+  // every relationship target exists, and the slide's picture points at the GIF
+  for (const [k, v] of Object.entries(p)) {
+    if (!/\.rels$/.test(k)) continue
+    const base = k.replace(/_rels\/[^/]*\.rels$/, '')
+    for (const m of v.toString().matchAll(/Target="([^"]+)"/g)) {
+      const t = path.posix.normalize(path.posix.join(base, m[1]))
+      assert.ok(p[t], `${k} -> ${t}`)
+    }
+  }
+  const slide = p['ppt/slides/slide1.xml'].toString(), rels = p['ppt/slides/_rels/slide1.xml.rels'].toString()
+  const rid = /<a:blip r:embed="(rId\d+)"\/>/.exec(slide)[1]
+  assert.match(rels, new RegExp(`Id="${rid}" Type="[^"]+/image" Target="../media/image1.gif"`))
+  assert.doesNotMatch(slide, /svgBlip/)
+  assert.match(slide, /<p:bg><p:bgPr><a:solidFill><a:srgbClr val="0F172A"\/>/)
+  const g = decodeGif(p['ppt/media/image1.gif'])
+  assert.equal(g.width, 160)
+  assert.ok(g.frames.length > 5)
+  assert.equal(g.loop, 0)
+})
+test('pptx-sheet --motion: every style as an animated GIF', R, () => {
+  const f = one(exp('heart', '--format', 'pptx-sheet', '--motion', 'beat', '--size', '64'), 'pptx-sheet')
+  assert.equal(f.filename, 'heart-line-styles-animated.pptx')
+  const p = unzip(read(f))
+  const styles = JSON.parse(text(run(['styles', '--json'])).stdout).styles.length
+  const gifs = Object.keys(p).filter(k => /^ppt\/media\/image\d+\.gif$/.test(k))
+  assert.equal(gifs.length, styles)
+  gifs.forEach(k => assert.ok(decodeGif(p[k]).frames.length > 3, k))
+  assert.equal(Object.keys(p).filter(k => /^ppt\/slides\/slide\d+\.xml$/.test(k)).length, styles + 1)
+})
+test('animated-svg: keyframes inside, padding measured', R, () => {
+  const s = read(one(exp('basketball', '--format', 'animated-svg', '--motion', 'bounce'), 'animated-svg')).toString()
+  checkXml(s.replace(/<style>[\s\S]*?<\/style>/, ''))
+  assert.match(s, /@keyframes/)
+  assert.match(s, /viewBox="-/, 'headroom around the 24 grid')
 })

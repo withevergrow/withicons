@@ -1,7 +1,7 @@
 {
   "name": "withicons",
   "version": "0.2.0",
-  "description": "with icons from the terminal: search 500 icons x 20 styles in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie) for apps and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.",
+  "description": "with icons from the terminal: search 500 icons x 20 styles in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint) for apps, slides and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -29,7 +29,10 @@
     "favicon",
     "lottie",
     "svg-to-png",
-    "vectordrawable"
+    "vectordrawable",
+    "animated-gif",
+    "apng",
+    "powerpoint"
   ],
   "type": "module",
   "bin": {
