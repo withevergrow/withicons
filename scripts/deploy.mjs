@@ -192,7 +192,8 @@ if (!flag('skip-lambda')) {
   else {
     const entries = [['index.mjs', fs.readFileSync(path.join(ROOT, 'infra', 'lambda', 'index.mjs'))], ['mcp/package.json', Buffer.from('{"type":"module"}\n')]]
     for (const k of walk(MCP_DIST).sort()) {
-      if (k.endsWith('.map') || k.endsWith('.d.ts') || k === 'stdio.mjs') continue
+      // lambda.mjs is self-contained (data inlined): the npm-only files (stdio bin, library, its data/ JSON) stay out of the zip
+      if (k.endsWith('.map') || k.endsWith('.d.ts') || k === 'stdio.mjs' || k === 'lib.mjs' || k.startsWith('data/')) continue
       entries.push([`mcp/${k}`, fs.readFileSync(path.join(MCP_DIST, k))])
     }
     smokeTestLambda(entries)

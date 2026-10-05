@@ -117,7 +117,7 @@ Parameters:
 Conditions:
   HasZone: !Not [!Equals [!Ref HostedZoneId, '']]
   CreateOidcProvider: !Equals [!Ref GitHubOidcProviderArn, '']
-  HasReservedConcurrency: !Not [!Equals [!Ref LambdaReservedConcurrency, 0]]
+  HasReservedConcurrency: !Not [!Equals [!Ref LambdaReservedConcurrency, '0']]   # Ref of a Number parameter is a string
   AccessLogs: !Equals [!Ref EnableAccessLogs, 'true']
   Waf: !Equals [!Ref EnableWaf, 'true']
   Preload: !Equals [!Ref HstsPreload, 'true']
@@ -333,7 +333,7 @@ Resources:
           HeadersConfig: { HeaderBehavior: none }
           QueryStringsConfig:
             QueryStringBehavior: whitelist
-            QueryStrings: [q, limit, style, category]
+            QueryStrings: [q, query, limit, style, category, format]   # every parameter the search endpoint reads
 
   ApiIconCachePolicy:
     Type: AWS::CloudFront::CachePolicy
@@ -820,14 +820,15 @@ Resources:
         BudgetType: COST
         TimeUnit: MONTHLY
         BudgetLimit: { Amount: !Ref MonthlyBudgetUsd, Unit: USD }
+      # 40% / 80% / 100% of MonthlyBudgetUsd spent, and a forecast above it ($20 / $40 / $50 at the default $50)
       NotificationsWithSubscribers:
-        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 20, ThresholdType: ABSOLUTE_VALUE }
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 40, ThresholdType: PERCENTAGE }
           Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
-        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 40, ThresholdType: ABSOLUTE_VALUE }
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 80, ThresholdType: PERCENTAGE }
           Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
-        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: ABSOLUTE_VALUE }
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 100, ThresholdType: PERCENTAGE }
           Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
-        - Notification: { NotificationType: FORECASTED, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: ABSOLUTE_VALUE }
+        - Notification: { NotificationType: FORECASTED, ComparisonOperator: GREATER_THAN, Threshold: 100, ThresholdType: PERCENTAGE }
           Subscribers: [{ SubscriptionType: EMAIL, Address: !Ref AlertEmail }]
 
   # ---------------------------------------------------------------- GitHub Actions OIDC deploy role
