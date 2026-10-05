@@ -10,9 +10,6 @@ an arrow that nudges the way it points, a play button that flips into pause.
 - **Every icon already knows how to move.** Each of the 500 has its own continuous loop and hover animation, tuned by hand.
 - **Respects people.** When someone asks their system for reduced motion, everything stops (unless you opt in with `wm-force`).
 
-> Not published to npm yet; launching soon. Until then, use the copies on withicons.com:
-> `/vendor/motion/motion.css` (styles and every icon's defaults) and `/vendor/motion/motion.js` (`window.WithMotion`).
-
 ## Install
 
 ```bash

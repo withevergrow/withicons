@@ -3,8 +3,6 @@
 **with icons** from the terminal — search 500 icons x 20 styles in plain English, print SVG, framework or animation code,
 and get import lines. Works offline; everything ships in the package.
 
-> Not published to npm yet — launching soon.
-
 ```sh
 npx withicons search "throw away"
 #   trash         actions       matched related word "throw away"

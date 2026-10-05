@@ -8,8 +8,6 @@ Solid, web-component, CSS-class or data-URI code, plus animation code for the op
 palettes for the multi-colour styles, and **files**: SVG, PNG, PDF, PowerPoint, Word, Lottie, app assets and animated
 GIF / APNG / SVG / PowerPoint for slides and docs (`export_icon`).
 
-> Not published to npm yet — launching soon. The commands below are what you will use.
-
 Self-contained: the search engine, the MCP SDK, the export formats and every icon are bundled — no network. PNG-based and
 animated files use `@resvg/resvg-js`, an optional dependency installed with the server where your platform has a prebuilt binary.
 

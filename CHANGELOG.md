@@ -6,9 +6,7 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
-To be released as **0.2.0**: `v0.1.0` (300 icons x 7 styles) is already tagged and on GitHub, so bump `withiconsVersion`
-in the root `package.json` and rebuild before publishing (`scripts/publish.mjs` refuses to publish an already-tagged
-version from another commit).
+## 0.2.0 - 2026-10-05
 
 ### Added
 
