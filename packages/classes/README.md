@@ -4,7 +4,7 @@ Font Awesome-style icon classes for 500 icons x 20 styles: plain `<i>`/`<span>` 
 no framework, zero dependencies. One line in your page:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-heart with-solid"></i>
@@ -30,7 +30,7 @@ Plain `<i>`/`<span>` elements with classes. Three interchangeable ways to render
 ### 1. CSS on demand (recommended from a CDN)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>                      <!-- line (default) -->
 <i class="with with-heart with-solid"></i>
@@ -44,15 +44,15 @@ added later (or re-classed) load theirs. The rendering is the CSS-only one below
 canonical class added with a console hint. Without JavaScript, link the same files yourself:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/line/home.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/solid/heart.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/line/home.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/solid/heart.css">
 ```
 
 ### 2. One stylesheet per style (zero JS)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-line.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-line.css">
 
 <i class="with with-home"></i>
 <i class="with with-search with-2x with-spin"></i>
@@ -64,7 +64,7 @@ One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-glo
 so keep it for prototypes and offline tools, never for a production page:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-all.css">   <!-- heavy: every icon in every style -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-all.css">   <!-- heavy: every icon in every style -->
 
 <i class="with with-home with-solid"></i>
 <span class="with with-heart with-gloss"></span>
@@ -113,7 +113,7 @@ Use the JS runtime for live CSS variables and stroke width.
 ### 3. JS runtime (inline SVG)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-icons.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-icons.js" defer></script>
 
 <i class="with with-home with-duo" style="--with-duo:#f59e0b"></i>
 <i class="with with-ruler with-blueprint" style="--with-accent:#38bdf8"></i>

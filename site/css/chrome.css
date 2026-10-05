@@ -569,7 +569,6 @@ html.search-open { overflow: hidden; }
 .foot-col a:hover { color: #fff; }
 .foot-col a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; border-radius: 2px; background: var(--style); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--e-out); }
 .foot-col a:hover::after { transform: scaleX(1); }
-.foot-col .soon { margin-left: 6px; font: 600 10px/1 var(--font-sans); letter-spacing: .04em; text-transform: uppercase; padding: 3px 6px; border-radius: 6px; background: rgba(255,255,255,.1); color: var(--on-dark-2); }
 .foot-word { display: flex; align-items: baseline; justify-content: center; gap: .04em; margin: clamp(48px, 7vw, 88px) 0 0; line-height: .8; user-select: none; white-space: nowrap; }
 .foot-word .fw-with { font: 700 clamp(64px, 15vw, 230px)/.8 var(--font-hand); color: var(--sun); transform: rotate(-5deg) translateY(.04em); display: inline-block; }
 .foot-word .fw-icons { font: 800 clamp(72px, 18vw, 270px)/.8 var(--font-display); letter-spacing: -.06em; color: var(--on-dark); font-variation-settings: 'opsz' 96; }

@@ -12,11 +12,11 @@ Each icon in each style is its own file, so a page downloads exactly the icons i
 typically 393 bytes):
 
 ```html
-<img src="https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/line/home.svg" width="24" height="24" alt="Home">
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/line/home.svg" width="24" height="24" alt="Home">
 ```
 
-`https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/<style>/<name>.svg`. Pin the version: versioned files are
-cached for good. For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
+`https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg`. `@latest` always serves the newest release; for a
+fixed look, put a version number in its place (e.g. `@0.2.1`). For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
 also fetches one small file per icon) or inline the SVG.
 
 ## Sprite
@@ -111,9 +111,9 @@ Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/packag
 They work with every style and every package because they animate the element that holds the icon:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 <!-- each animated icon's own motion: one small file per icon (icons.css has all of them) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 
 <span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->

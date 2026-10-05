@@ -8,7 +8,7 @@ Each live icon is a small generator. You give it params, it draws the icon, and 
 readable down to 16px. When a value can't be drawn legibly, the icon switches to something that can: "99+" for big
 counts, or a level bar in place of a percentage that doesn't fit.
 
-50 live icons, version 0.2.0. Browse and edit them at https://withicons.com.
+50 live icons, version 0.2.1. Browse and edit them at https://withicons.com.
 
 ```bash
 npm i @withicons/dynamic
@@ -17,7 +17,7 @@ npm i @withicons/dynamic
 ## Plain HTML (no build step)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>
 
 <with-live-icon name="calendar-date" day="17" month="MAR"></with-live-icon>
 <with-live-icon name="calendar-date" today variant="glass" size="48" label="Today"></with-live-icon>

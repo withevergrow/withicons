@@ -85,8 +85,8 @@ Optional and separate: [`@withicons/motion`](packages/motion) animates the eleme
 or package, with pure CSS. Every icon has a tuned continuous loop and hover effect, plus icon-to-icon swaps.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">  <!-- one file per animated icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">  <!-- one file per animated icon -->
 
 <span class="wm wm-loop" data-wm="bell">…bell icon…</span>                                     <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>   <!-- on hover -->
@@ -109,7 +109,7 @@ import { render } from '@withicons/dynamic'
 render('calendar-date', { day: 17, month: 'MAR' }, 'luxe', { size: 48 })   // -> SVG string
 ```
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>  <!-- ~35 KB gzipped; each icon and style loads on first use -->
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>  <!-- ~35 KB gzipped; each icon and style loads on first use -->
 <with-live-icon name="calendar-date" day="17" month="MAR" variant="bauhaus"></with-live-icon>
 ```
 
@@ -137,7 +137,7 @@ Try them at [withicons.com/live.html](https://withicons.com/live.html). Spec: [`
 No build step, straight from a CDN. The page downloads only the icons it shows:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
 <with-icon name="home" variant="solid"></with-icon>
 ```
 
@@ -145,7 +145,7 @@ No build step, straight from a CDN. The page downloads only the icons it shows:
 Font Awesome-style `<i>` tags? `with-loader.js` (6 KB gzipped) links just the CSS of the icons on the page, in any style:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 <i class="with with-home"></i> <i class="with with-heart with-solid"></i>
 ```
 

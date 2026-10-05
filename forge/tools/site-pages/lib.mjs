@@ -170,7 +170,7 @@ function fallbackFooter(p) {
         <div class="foot-col s-duo"><h2>Developers</h2><ul>
           <li><a href="${p}developers.html">Overview</a></li><li><a href="${p}developers.html#frameworks">React, Vue, Svelte</a></li>
           <li><a href="${p}developers.html#cdn">CDN &amp; icon classes</a></li>
-          <li><a href="https://github.com/withevergrow/withicons">GitHub</a><span class="soon">soon</span></li></ul></div>
+          <li><a href="https://github.com/withevergrow/withicons">GitHub</a></li></ul></div>
         <div class="foot-col s-gloss"><h2>AI</h2><ul>
           <li><a href="${p}ai.html">For AI agents</a></li><li><a href="${p}ai.html#mcp">MCP server</a></li>
           <li><a href="${p}ai.html#skill">Agent skill</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>

@@ -1459,7 +1459,7 @@
     }
     function codes() {
       var Pm = S.params, va = varsAttr(), sz = S.size, style = S.style, ink = inkHex()
-      var html = '<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@' + VERSION + '/dist/cdn/lite.js"></script>\n\n' + elementHtml()
+      var html = '<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>\n\n' + elementHtml()
       var props = [], nested = [], vprops = [], vnested = []
       KEYS.forEach(function (k) {
         var v = Pm[k]
@@ -1550,7 +1550,7 @@
       if (t.hasAttribute('data-lv-go')) return run(t, 'png')
       if (t.hasAttribute('data-fmt') && sheet && sheet.contains(t)) return run(t, t.getAttribute('data-fmt'))
       if (t.hasAttribute('data-lv-copy-svg')) return copy(flatSvg(S.size), 'SVG code copied')
-      if (t.hasAttribute('data-lv-copy-el')) return copy('<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@' + VERSION + '/dist/cdn/lite.js"></script>\n' + elementHtml(), 'HTML copied')
+      if (t.hasAttribute('data-lv-copy-el')) return copy('<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>\n' + elementHtml(), 'HTML copied')
       if (t.hasAttribute('data-lv-share')) return copy(linkFor(), 'Link copied. It opens this exact design.')
       if (t.hasAttribute('data-lv-copy-png')) return copyPng(t)
       if (t.hasAttribute('data-lv-open')) { e.preventDefault(); openSheet(t.getAttribute('data-lv-open'), t) }

@@ -130,7 +130,7 @@ export const Toolbar = () => (
 ## Web component (any HTML, Astro, Lit, Rails, Django, WordPress, no build)
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="bin" variant="solid" size="32" color="#e11d48" label="Delete"></with-icon>
@@ -151,7 +151,7 @@ Each icon is a `currentColor` mask, 1em square. Recommended: the loader, which l
 page, in any mix of styles (6 KB gzipped, then ~270 bytes per `line` icon):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 <i class="with with-home" aria-hidden="true"></i>
 <i class="with with-heart with-solid" aria-hidden="true"></i>
 <i class="with with-search with-2x with-spin" aria-hidden="true"></i>
@@ -163,7 +163,7 @@ Zero JS: link `.../classes@0.2.0/dist/with-base.css` plus `.../classes@0.2.0/dis
 With a bundler: `npm i @withicons/classes`, then `import '@withicons/classes/with-line.css'` (or `with-base.css` + `line/home.css` per icon).
 Size utilities: `with-xs`, `with-sm`, `with-lg`, `with-2x`, and so on, plus `with-fw`. Animations: `with-spin`, `with-pulse`, both reduced-motion safe.
 For true multi-colour, stroke width and alias names, use the JS runtime instead:
-`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-icons.js" defer></script>`.
+`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-icons.js" defer></script>`.
 It fetches only the icons shown (from `@withicons/web`, same version) and turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).
 
 ## Static SVG and sprites (email, CMS, docs, no JS)
@@ -180,7 +180,7 @@ npm i @withicons/static
 Single files on the CDN (`<img>` renders black because it cannot use currentColor):
 
 ```
-https://cdn.jsdelivr.net/npm/@withicons/static@0.2.0/dist/svg/<style>/<name>.svg
+https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg
 ```
 
 `dist/icons.json` lists every icon (name, category, description, aliases, tags, styles).

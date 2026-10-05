@@ -18,8 +18,8 @@ import '@withicons/motion/icons.css'    // each icon's tuned motion, all 500 (~1
 From a CDN, load the presets and only the icons you animate (each icon's file is ~0.3 KB gzipped):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 ```
 
 With `<with-icon motion="loop">` (`<script type="module" src=".../motion@0.2.0/dist/element.js">` after `@withicons/web`'s

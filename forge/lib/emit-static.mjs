@@ -60,11 +60,11 @@ Each icon in each style is its own file, so a page downloads exactly the icons i
 typically ${sizes.file} bytes):
 
 \`\`\`html
-<img src="https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/line/home.svg" width="24" height="24" alt="Home">
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/line/home.svg" width="24" height="24" alt="Home">
 \`\`\`
 
-\`https://cdn.jsdelivr.net/npm/@withicons/static@${v}/dist/svg/<style>/<name>.svg\`. Pin the version: versioned files are
-cached for good. For icons that follow your text colour, use \`<with-icon>\` from \`@withicons/web\` (\`dist/cdn.js\`, which
+\`https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg\`. \`@latest\` always serves the newest release; for a
+fixed look, put a version number in its place (e.g. \`@${v}\`). For icons that follow your text colour, use \`<with-icon>\` from \`@withicons/web\` (\`dist/cdn.js\`, which
 also fetches one small file per icon) or inline the SVG.
 
 ## Sprite

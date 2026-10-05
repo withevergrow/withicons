@@ -6,6 +6,12 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.2.1 - 2026-10-06
+
+### Changed
+- The bundled with icons skill (CLI `withicons init`, `withicons skill`, MCP) now says the packages are on npm and the CDN, with real install lines, instead of "launching soon".
+- The website no longer labels npm packages, the CDN, motion or live icons as "launching soon".
+
 ## 0.2.0 - 2026-10-05
 
 ### Added

@@ -25,9 +25,9 @@ From a CDN, with no build step, load the presets and only the icons you animate.
 their own, `dist/icons/<name>.css` (about 0.5 KB, 0.3 KB gzipped):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/heart.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/heart.css">
 ```
 
 With `<with-icon>` you do not even list them: the element module, served from a CDN, links `icons/<name>.css` for each
@@ -324,9 +324,9 @@ import '@withicons/motion/element'
 From a CDN (one animated bell: about 42 KB gzipped in all, `motion.css`, the element and `cdn.js` included):
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/element.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/element.js"></script>
 
 <with-icon name="bell" motion="loop"></with-icon>   <!-- links dist/icons/bell.css by itself -->
 ```

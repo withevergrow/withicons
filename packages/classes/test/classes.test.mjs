@@ -58,7 +58,7 @@ test('package.json: short subpaths, CSS side effects, the bare CDN URL is the lo
   assert.equal(pkg.exports['./*'], './dist/*')
   assert.ok(pkg.sideEffects.includes('*.css'))
   assert.equal(pkg.jsdelivr, './dist/with-loader.js')
-  assert.ok(fs.readFileSync(path.join(root, 'README.md'), 'utf8').includes('@withicons/classes@' + pkg.version + '/dist/with-loader.js'))
+  assert.ok(fs.readFileSync(path.join(root, 'README.md'), 'utf8').includes('@withicons/classes@latest/dist/with-loader.js'))
 })
 
 // the loader in a minimal fake DOM: it must link the base rules once and exactly one file per icon and style shown

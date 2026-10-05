@@ -131,9 +131,9 @@ Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/packag
 They work with every style and every package because they animate the element that holds the icon:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 <!-- each animated icon's own motion: one small file per icon (icons.css has all of them) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 
 <span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->

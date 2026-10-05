@@ -33,9 +33,9 @@ CommonJS: `const { create } = require('@withicons/search'); const index = requir
 Browser, no build step:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/search@0.2.0/dist/with-search.js"></script>  <!-- window.WithSearch -->
+<script src="https://cdn.jsdelivr.net/npm/@withicons/search@latest/dist/with-search.js"></script>  <!-- window.WithSearch -->
 <script>
-  fetch('https://cdn.jsdelivr.net/npm/@withicons/search@0.2.0/dist/index.json').then(r => r.json()).then(index => {
+  fetch('https://cdn.jsdelivr.net/npm/@withicons/search@latest/dist/index.json').then(r => r.json()).then(index => {
     const engine = WithSearch.create(index)
     console.log(engine.search('magnifying glass'))
   })

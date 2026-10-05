@@ -17,7 +17,7 @@ npm i @withicons/dynamic
 ## Plain HTML (no build step)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@{{version}}/dist/cdn/lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>
 
 <with-live-icon name="calendar-date" day="17" month="MAR"></with-live-icon>
 <with-live-icon name="calendar-date" today variant="glass" size="48" label="Today"></with-live-icon>

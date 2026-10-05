@@ -399,7 +399,7 @@ function readme(ctx, z) {
 \`<with-icon>\`: a dependency-free custom element for ${ctx.icons.length} icons x ${ctx.styles.length} styles. Works in any framework or none.
 
 \`\`\`html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@${v}/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>
@@ -492,7 +492,7 @@ import '@withicons/motion/element'
 \`<i class="with with-home"></i>\` tags are their own package, [\`@withicons/classes\`](https://www.npmjs.com/package/@withicons/classes):
 
 \`\`\`html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${v}/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 \`\`\`
 
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).

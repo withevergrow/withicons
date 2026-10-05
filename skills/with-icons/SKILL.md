@@ -191,7 +191,7 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
 ```
 ```html
 <!-- no build: ~35 KB gzipped, each live icon and style loads on first use -->
-<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@0.2.0/dist/cdn/lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>
 <with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii"></with-live-icon>
 ```
 
@@ -214,7 +214,7 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
   Figma, PowerPoint, Keynote and image converters need. Inline code keeps the variables.
 - Don't put palette styles, loops or creative styles in dense 16-20px controls: they turn to noise.
 - `strokeWidth` only affects styles with live strokes (line, duo, blueprint, sketch, kawaii); it does nothing on the filled styles.
-- From a CDN, load only what the page shows: `<with-icon>` via `https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js`
+- From a CDN, load only what the page shows: `<with-icon>` via `https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js`
   (7 KB gzipped + one small file per icon), `<i>` classes via `.../classes@0.2.0/dist/with-loader.js` (6 KB gzipped +
   ~270 bytes per line icon), live icons via `.../dynamic@0.2.0/dist/cdn/lite.js`. Pin the version in production.
   Never `with-all.css` (every style, ~6.3 MB gzipped) or `@withicons/web/full` on a real page; `with-<style>.css`

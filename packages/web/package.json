@@ -1,6 +1,6 @@
 {
   "name": "@withicons/web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "<with-icon> custom element: 500 icons x 20 styles, zero dependencies, lazy per-style data.",
   "license": "MIT",
   "author": {

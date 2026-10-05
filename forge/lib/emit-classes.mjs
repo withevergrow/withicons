@@ -426,7 +426,7 @@ function withLoader() {
 }
 function loaderJs(ctx, css) {
   return `/*! @withicons/classes ${ctx.version} — with-loader.js: CSS icon classes on demand (classic script, no dependencies). MIT. Generated, do not edit.
- * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${ctx.version}/dist/with-loader.js" defer></script>  then  <i class="with with-home with-duo"></i>
+ * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>  then  <i class="with with-home with-duo"></i>
  * Loads only the rules of the icons on the page: <style>/<name>.css next to this script. */
 ;(function () {
 'use strict'
@@ -456,7 +456,7 @@ const ALIAS_SHARDS = 16
 function runtimeJs(ctx, dataBase, web, css) {
   const table = styleTable(ctx)
   return `/*! @withicons/classes ${ctx.version} — with-icons.js (classic script, no dependencies). MIT. Generated, do not edit.
- * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@${ctx.version}/dist/with-icons.js" defer></script>  then  <i class="with with-home with-duo"></i>
+ * <script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-icons.js" defer></script>  then  <i class="with with-home with-duo"></i>
  * Loads each icon it shows from ${web ? '@withicons/web@' + ctx.version + ' (dist/icons/<style>/<name>.js)' : dataBase + '<style>.js'}, nothing else up front. */
 ;(function () {
 'use strict'
@@ -512,7 +512,7 @@ declare global {
 
 function readme(ctx, sizes, per) {
   const v = ctx.version
-  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/classes@${v}/dist`
+  const cdn = `https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist`
   const styles = ctx.styles.map(s => s.name)
   const sw = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => '`' + s.name + '`').join(', ')
   const kb = n => n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + ' MB' : (n / 1024).toFixed(0) + ' KB'

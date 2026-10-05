@@ -3,7 +3,7 @@
 `<with-icon>`: a dependency-free custom element for 500 icons x 20 styles. Works in any framework or none.
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@0.2.0/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
 <with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>
@@ -112,9 +112,9 @@ Animations ship separately in [`@withicons/motion`](https://www.npmjs.com/packag
 They work with every style and every package because they animate the element that holds the icon:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 <!-- each animated icon's own motion: one small file per icon (icons.css has all of them) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@0.2.0/dist/icons/bell.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 
 <span class="wm wm-loop" data-wm="bell"><!-- any bell icon --></span>          <!-- continuous -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- on hover/focus -->
@@ -140,7 +140,7 @@ import '@withicons/motion/element'
 `<i class="with with-home"></i>` tags are their own package, [`@withicons/classes`](https://www.npmjs.com/package/@withicons/classes):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@0.2.0/dist/with-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 ```
 
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
