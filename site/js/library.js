@@ -1339,7 +1339,7 @@
             '<button type="button" class="vw-btn is-primary" data-vw="copy-img">' + ICO.copy + '<span><b>Copy image</b><small>Paste into Slides, Docs, Notion, Canva</small></span><kbd class="vw-kbd">Enter</kbd></button>' +
             '<div class="vw-itag">' +
               '<button type="button" class="vw-btn is-tag" data-vw="copy-tag">' + ICO.code + '<span><b>Copy &lt;i&gt; tag</b><code data-vw-tag></code></span><span class="vw-pill" data-vw-tagdone>Copy</span></button>' +
-              '<details class="vw-once" data-vw-once><summary>First time? Show setup</summary><p><span>Add this line once inside your page’s <code>&lt;head&gt;</code> <small class="vw-soon-tag">launching soon</small></span><code data-vw-css></code><button type="button" class="vw-mini" data-vw="copy-css">Copy</button></p></details>' +
+              '<details class="vw-once" data-vw-once><summary>First time? Show setup</summary><p><span>Add this line once inside your page’s <code>&lt;head&gt;</code></span><code data-vw-css></code><button type="button" class="vw-mini" data-vw="copy-css">Copy</button></p></details>' +
             '</div>' +
             '<div class="vw-png">' +
               '<button type="button" class="vw-btn" data-vw="png">' + ICO.down + '<span><b>Download PNG</b><small data-vw-pngsize></small></span></button>' +
@@ -1380,7 +1380,7 @@
           '<details class="vw-dev" data-vw-dev><summary><span><b>For developers</b><small>React, Vue, Svelte, Angular, Solid, web component, classes, SVG</small></span></summary>' +
             '<div class="vw-tabs" role="tablist" aria-label="Code format" data-vw-tabs></div>' +
             '<div class="vw-code" role="tabpanel" id="vw-codepanel" data-vw-codepanel><div class="vw-code-bar"><span data-vw-file></span><button type="button" class="vw-copy" data-vw="copy-code">' + ICO.copy + '<span>Copy</span></button></div><pre><code data-vw-code></code></pre></div>' +
-            '<p class="vw-soon">npm packages are <b>launching soon</b>. SVG, PNG and copy work today. <a href="developers.html">Developer docs</a></p>' +
+            '<p class="vw-npm">On npm: <code>npm i @withicons/react</code>, or vue, svelte, angular, solid, web and classes. <a href="developers.html">Developer docs</a></p>' +
           '</details>' +
         '</div>' +
       '</div>'

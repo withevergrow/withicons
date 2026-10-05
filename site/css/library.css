@@ -797,9 +797,9 @@
 .vw-copy { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 11px; border-radius: 9px; border: 0; background: rgba(255, 255, 255, .12); color: #fff; font: 600 12px/1 var(--f-ui); cursor: pointer }
 .vw-copy svg { width: 14px; height: 14px }
 .vw-copy.is-done { background: var(--s-sketch) }
-.vw-soon { margin: 10px 16px 0; padding-bottom: 14px; font-size: 12.5px; color: var(--l-muted); line-height: 1.45 }
-.vw-soon b { color: var(--l-fg) }
-.vw-soon a { color: var(--l-fg) }
+.vw-npm { margin: 10px 16px 0; padding-bottom: 14px; font-size: 12.5px; color: var(--l-muted); line-height: 1.45 }
+.vw-npm code { font: 500 11.5px/1 var(--f-mono); color: var(--l-fg) }
+.vw-npm a { color: var(--l-fg) }
 .vw-code .t-k { color: #FF8DC4 } .vw-code .t-s { color: #9BE3B5 } .vw-code .t-t { color: #8EA6FF } .vw-code .t-a { color: #E7C17A } .vw-code .t-c { color: #7C8190 } .vw-code .t-p { color: #9AA0AC } .vw-code .t-n { color: #FFB49E }
 
 /* wide panel (resized or full screen): preview left, controls right */
@@ -977,7 +977,6 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 .vw-once > p { margin: 4px 0 2px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 8px }
 .vw-once > p > span { grid-column: 1 / -1; line-height: 1.4 }
 .vw-once > p > span code { font: 500 11px/1 var(--f-mono); color: var(--l-fg) }
-.vw-soon-tag { padding: 2px 6px; border-radius: 999px; background: var(--l-sun); color: #111318; font: 700 9.5px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap }
 .vw-once > p > code { font: 500 11px/1.35 var(--f-mono); color: var(--l-fg); padding: 6px 8px; border-radius: 8px; background: var(--l-card-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
 .vw-mini { height: 28px; padding: 0 11px; border-radius: 9px; border: 1px solid var(--l-rule-2); background: var(--l-card); color: var(--l-fg); font: 600 12px/1 var(--f-ui); cursor: pointer }
 .vw-mini.is-done { background: var(--s-sketch); border-color: var(--s-sketch); color: #fff }

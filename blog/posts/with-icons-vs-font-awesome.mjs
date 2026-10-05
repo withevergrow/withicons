@@ -105,7 +105,7 @@ ${table(['Icon', 'with icons name', 'Font Awesome name'], [
   nameRow('Mail', 'mail', 'fa-envelope', 'mail'),
   nameRow('Cart', 'shopping-cart', 'fa-cart-shopping', 'shopping-cart'),
 ], 'Class names and the real icons they show, both in Solid (Font Awesome Free icons: CC BY 4.0, Fonticons, Inc.)')}
-${p('Developers also get ready-made with icons components for React, Vue, Svelte, Angular and Solid, plus a web component. (The npm packages are launching soon. Until then, every icon page lets you copy the SVG code directly.)')}
+${p('Developers also get ready-made with icons components for React, Vue, Svelte, Angular and Solid, plus a web component. (They install from npm, for example <code>npm i @withicons/react</code>, and every icon page also lets you copy the SVG code directly.)')}
 ${h3('In PowerPoint, Google Slides, Canva and Word')}
 ${p(`This is where with icons tries hardest. Every icon page has <strong>Copy image</strong>, <strong>PNG download</strong> (pick a size and colour) and <strong>SVG download</strong> buttons, so you can paste an icon into a slide in seconds. We also have guides for ${L.guide('powerpoint', 'PowerPoint')}, ${L.guide('google-slides', 'Google Slides')}, ${L.guide('canva', 'Canva')} and more. Font Awesome lets you download free icons as SVG files too; to recolour them or turn them into PNGs for slides, you may need another tool.`)}
 ${steps([
@@ -140,7 +140,6 @@ ${prosCons('with icons', { pros: [
 ], cons: [
   ['A smaller catalogue', `There are ${N_ICONS} icons. They cover everyday interface and business ideas well, but if you need something niche, it may not be there yet.`],
   ['No brand logos', 'You will not find GitHub, Slack or Visa logos here. For those, you need a brand icon set alongside.'],
-  ['Developer packages are not live yet', 'The npm packages and CDN are launching soon. Today you copy or download icons from each icon page, which is quick for slides and small sites but slower for big apps.'],
   ['Newer, with a smaller community', 'There are fewer tutorials and themes built around it so far. And the creative styles are made for 32px and up, not for tiny buttons.'],
 ] })}
 ${p('In short: Font Awesome suits people who need breadth, brand logos and a tool everyone already knows, and who might pay for Pro later. with icons suits people who mostly need everyday icons and want several matching looks, a no-strings license and quick copies for slides, without ever paying.')}

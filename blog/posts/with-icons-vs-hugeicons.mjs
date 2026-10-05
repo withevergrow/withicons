@@ -50,7 +50,7 @@ ${table(['', 'with icons', 'Hugeicons'], [
   ['Free styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus 17 creative styles such as glass, pixel, retro, kawaii and luxe`), meh('1: Stroke Rounded')],
   ['Paid catalogue', 'None, there is nothing to upgrade to', '60,000+ icons in 10 styles'],
   ['Licence of the free icons', yes('MIT, no visible credit'), yes('MIT, no visible credit')],
-  ['Developer packages', meh('React, Vue, Svelte, Angular, Solid, web component (launching soon)'), yes('React, Vue, Svelte, Angular, React Native, Flutter and more')],
+  ['Developer packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, Svelte, Angular, React Native, Flutter and more')],
   ['Copy or download for slides', yes('Copy image, PNG and SVG in any colour'), yes('Copy and download SVG, pick colour and size')],
   ['Help for AI assistants', yes('MCP server, llms.txt, agent skill'), yes('MCP server and an agent skill')],
 ], 'with icons and Hugeicons, side by side (checked October 2026)')}
@@ -109,8 +109,8 @@ ${p(`Both do, which is nice to see. AI tools like Claude, ChatGPT and Cursor oft
 ${p(`Hugeicons publishes an official MCP server on npm and an agent skill that teaches coding assistants how to use its packages. with icons has an ${L.page('ai.html', 'MCP server')}, a public llms.txt file and an agent skill too. If you build with AI help, either set will work far better than a set the assistant has to guess.`)}
 
 ${h2('Which one is ready for developers today?')}
-${p('Hugeicons is ready right now. Its free package installs from npm and works with official React, Vue, Svelte, Angular and React Native packages, and the project lists SolidJS and Flutter libraries as well.')}
-${p(`with icons will offer React, Vue, Svelte, Angular and Solid components, a web component and simple CSS classes like <code>&lt;i class="with with-home"&gt;</code>. The npm packages and CDN are launching soon. Until then, every icon page lets you copy the SVG code directly, and our ${L.page('developers.html', 'developer page')} shows what is coming.`)}
+${p('Both are. Hugeicons’ free package installs from npm and works with official React, Vue, Svelte, Angular and React Native packages, and the project lists SolidJS and Flutter libraries as well.')}
+${p(`with icons has React, Vue, Svelte, Angular and Solid components, a web component and simple CSS classes like <code>&lt;i class="with with-home"&gt;</code>, all on npm and the jsDelivr CDN. It has no React Native or Flutter package, so Hugeicons reaches more platforms. Every icon page also lets you copy the SVG code directly, and our ${L.page('developers.html', 'developer page')} has the install lines.`)}
 
 ${h2('What are the pros and cons of Hugeicons and with icons?')}
 ${p('The table gives you the facts. Here is what they mean in practice: what each set does well, and what to keep in mind, in plain words.')}
@@ -135,10 +135,10 @@ ${prosCons('with icons', { pros: [
 ], cons: [
   ['A much smaller catalogue', `There are ${N_ICONS} icons against Hugeicons’ 6,000+ free ones, about a twelfth as many. Everyday ideas are covered, but niche icons may be missing.`],
   ['No brand logos', 'You will not find company or social media logos here, so you may need a brand icon set alongside.'],
-  ['Developer packages are not live yet', 'The npm packages and CDN are launching soon. Today you copy or download icons from each icon page.'],
+  ['Web only', 'There are no React Native or Flutter packages, so for mobile apps you use the SVG files yourself.'],
   ['Newer, with a smaller community', 'There are fewer tutorials built around it so far. And the 17 creative styles are made for 32px and up, not for tiny buttons.'],
 ] })}
-${p('In short: Hugeicons suits people who need thousands of icons in one tidy outline style, want npm packages today, and might pay for Pro later. with icons suits people who mostly need everyday icons and want filled, tinted and illustrated looks for free, for apps, slides and docs alike.')}
+${p('In short: Hugeicons suits people who need thousands of icons in one tidy outline style, want React Native or Flutter packages, and might pay for Pro later. with icons suits people who mostly need everyday icons and want filled, tinted and illustrated looks for free, for apps, slides and docs alike.')}
 
 ${h2('So, Hugeicons or with icons?')}
 ${p(`Hugeicons Free is one of the largest free outline icon sets around, and it is properly MIT licensed. with icons is the opposite bet: a small set where every style is free and matches perfectly. If one style is enough, Hugeicons gives you more. If you want your icons to change mood without changing family, start with with icons. Still deciding? Compare a few more sets in ${L.post('best-free-icon-libraries', 'our guide to the best free icon libraries')}, or see how we stack up against ${L.post('with-icons-vs-lucide', 'Lucide')}.`)}

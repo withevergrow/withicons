@@ -37,7 +37,6 @@ const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
   <div class="pg-tablist" role="tablist" aria-label="${esc(label)}">${items.map(([k, l], i) => `<button type="button" role="tab" id="${id}-t-${k}" aria-controls="${id}-p-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join('')}</div>
   ${items.map(([k, , html], i) => `<div class="pg-tabpanel" role="tabpanel" id="${id}-p-${k}" aria-labelledby="${id}-t-${k}" tabindex="0"${i === 0 ? '' : ' hidden'}>${html}</div>`).join('\n  ')}
 </div>`
-const soon = '<span class="pg-soon">' + I('sparkles', 'solid', 14) + ' launching on npm soon</span>'
 
 /* ───────────────────────── developers ───────────────────────── */
 function developers() {
@@ -143,8 +142,8 @@ export function Toolbar() {
     <h1 class="pg-title">One icon set.<br><span class="pg-hl" style="--g:${cvar('line')}">Every framework.</span></h1>
     <p class="pg-lede">${N_ICONS} icons × ${N_STYLES} styles with the same names, grid and props everywhere: React, Vue, Svelte, Angular, Solid, a web component, CSS classes and plain SVG. Tree-shakable, typed, <code>currentColor</code> by default, zero runtime dependencies. Want them to move? Add the optional <a href="#motion">animations package</a>.</p>
     <div class="dv-launch" data-reveal>
-      <span class="dv-badge">${I('package', 'solid', 18)} Launching on npm soon</span>
-      <span>Download the files today:</span>
+      <a class="dv-badge" href="https://www.npmjs.com/org/withicons">${I('package', 'solid', 18)} Live on npm</a>
+      <span>Or download the files:</span>
       <a class="btn btn-ink" href="sprites/line.svg" download>${I('download', 'line', 18)} Line sprite</a>
       <a class="btn btn-ghost" href="vendor/with/with-line.css" download>${I('file-code', 'line', 18)} with-line.css</a>
       <a class="btn btn-ghost" href="icons.json">${I('braces', 'line', 18)} icons.json</a>
@@ -166,7 +165,7 @@ export function Toolbar() {
     <div class="dv-main">
 
     <section id="frameworks" class="dv-sec">
-      <h2>Quick start ${soon}</h2>
+      <h2>Quick start</h2>
       <p>Pick your tool. The default import is the <b>Line</b> style; every other style is a subpath with the same export names.</p>
       ${tabs('qs', qs, 'Framework')}
     </section>
@@ -296,7 +295,7 @@ find('hoem')          // null`, 'js')}
 
     <section id="cdn" class="dv-sec">
       <h2>CDN &amp; downloads</h2>
-      <p>Not using npm? Everything works from a CDN or as files you copy into your project, and a page downloads only the icons it uses. ${soon}</p>
+      <p>Not using npm? Everything works from a CDN or as files you copy into your project, and a page downloads only the icons it uses.</p>
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>What</th><th>URL / file</th></tr></thead><tbody>
         <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
         <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js</code> · about 7 KB gzipped, then each icon from its own small file</td></tr>
@@ -328,7 +327,7 @@ npx withicons export trash --format jsx --out - > src/icons/Trash.jsx`, 'sh', 'T
     </section>
 
 ` : ''}    <section id="cli" class="dv-sec">
-      <h2>CLI ${soon}</h2>
+      <h2>CLI</h2>
       <p>Search the set, print code and get import lines without leaving your terminal. It works offline: everything ships in the package (<code>withicons</code>, unscoped).</p>
       ${code(`npx withicons search "throw away"
 npx withicons get home --style solid --format react
@@ -551,7 +550,7 @@ async function ai() {
 
   <section id="mcp" class="ai-sec" aria-labelledby="mcp-h">
     <h2 id="mcp-h">The MCP server</h2>
-    <p>The <a href="https://modelcontextprotocol.io">Model Context Protocol</a> lets AI apps use tools. Add with icons once and your assistant can search, resolve and fetch icons on its own. ${soon}</p>
+    <p>The <a href="https://modelcontextprotocol.io">Model Context Protocol</a> lets AI apps use tools. Add with icons once and your assistant can search, resolve and fetch icons on its own.</p>
     <div class="ai-mcp-run">
       <div>${code('https://withicons.com/mcp', 'text', 'Remote · Streamable HTTP')}</div>
       <div>${code('npx -y @withicons/mcp', 'sh', 'Local · stdio')}</div>
@@ -603,7 +602,7 @@ async function ai() {
 
   <section id="cli" class="ai-sec" aria-labelledby="cli-h">
     <h2 id="cli-h">From the terminal</h2>
-    <p>Agents that run shell commands can use the CLI. Add <code>--json</code> for stable, machine-readable output (exit code 0 = found, 1 = not found or ambiguous, 2 = usage error). ${soon}</p>
+    <p>Agents that run shell commands can use the CLI. Add <code>--json</code> for stable, machine-readable output (exit code 0 = found, 1 = not found or ambiguous, 2 = usage error).</p>
     ${code(`npx withicons search "throw away" --json
 npx withicons get trash --style solid --format react
 npx withicons resolve bin --json`, 'sh', 'Terminal')}
@@ -850,7 +849,7 @@ export const FAQ = [
     ['Can I edit the icons?', 'Yes. Change colours, thickness, shapes, anything.'],
   ]],
   ['For developers', [
-    ['Is there a React, Vue or Svelte package?', 'Yes: @withicons/react, vue, svelte, angular and solid, plus a web component and CSS icon classes. They’re launching on npm soon; until then you can download sprites and CSS from the <a href="developers.html">developer page</a>.'],
+    ['Is there a React, Vue or Svelte package?', 'Yes: @withicons/react, vue, svelte, angular and solid, plus a web component (@withicons/web) and CSS icon classes (@withicons/classes), all on npm. For example, <code>npm i @withicons/react</code>. Setup for each one is on the <a href="developers.html">developer page</a>.'],
     ['How do I add icons to a website without any build tools?', 'Add one stylesheet and write <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>. No JavaScript needed. <a href="guides/html.html">See the HTML guide</a>.'],
     ['Do the icons work in dark mode?', 'Yes. Icons use currentColor, so they take the colour of the text around them and switch with your theme automatically.'],
     ['Are the icons accessible?', 'Icons are hidden from screen readers by default (they’re usually next to text). Give one a title or label when it carries meaning on its own, and put aria-label on icon-only buttons.'],

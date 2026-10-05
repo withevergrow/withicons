@@ -26,8 +26,6 @@
 @keyframes pg-swipe { from { transform: scaleX(0); } }
 .pg-lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); max-width: 58ch; margin: clamp(18px, 2vw, 28px) 0 0; }
 .pg-note { font-size: var(--step--1); color: var(--muted); margin: 14px 0 0; }
-.pg-soon { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; height: 26px; padding: 0 10px; border-radius: var(--pill); background: var(--sun-soft); color: var(--ink); font: 650 12px/1 var(--font-sans); letter-spacing: 0; white-space: nowrap; }
-.pg-soon svg { width: 14px; height: 14px; color: var(--c-solid); }
 .ui { font-weight: 650; color: var(--ink); background: var(--paper-2); border: 1px solid var(--rule); border-radius: 7px; padding: .05em .4em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .ui-path { display: inline; }
 .ui-path i { margin: 0 .2em; }
@@ -423,7 +421,8 @@
 .dv-term-icons svg { width: 61%; height: auto; }
 .dv-launch { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 28px; }
 .dv-launch > span:not(.dv-badge) { color: var(--muted); font-size: 14.5px; }
-.dv-badge { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: var(--pill); background: var(--sun); color: #111318; font: 700 14px/1 var(--font-sans); }
+.dv-badge { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: var(--pill); background: var(--sun); color: #111318; font: 700 14px/1 var(--font-sans); text-decoration: none; }
+a.dv-badge:hover { background: color-mix(in srgb, var(--sun) 85%, #fff); }
 .dv-badge svg { width: 18px; height: 18px; }
 .dv-launch .btn { min-height: 40px; padding: 0 16px; font-size: 14px; }
 .dv-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); width: 100%; max-width: var(--maxw); margin: clamp(56px, 8vw, 104px) auto 0; padding-inline: var(--gutter); }

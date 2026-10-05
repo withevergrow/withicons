@@ -27,7 +27,7 @@ export default {
     { q: 'Can ChatGPT or Claude make icons for me?', a: 'They can draw simple SVG icons, but the results are often uneven: different line weights, odd proportions, nothing that matches your other icons. For a professional result, ask the assistant to choose from a consistent, licensed icon set and to give you exact names and links.' },
     { q: 'Do I need to know how to code to use AI for icons?', a: 'No. On withicons.com you can describe what the icon is for, click an assistant, and paste the brief. The assistant replies with the best icon, alternatives and step-by-step instructions for your app, such as PowerPoint or Canva.' },
     { q: 'What is llms.txt?', a: 'llms.txt is a simple text file a website publishes to give AI models a short, clean summary of its content. It was proposed by Jeremy Howard in September 2024. with icons publishes one at withicons.com/llms.txt.' },
-    { q: 'Is the with icons MCP server free?', a: 'Yes. with icons is free and MIT licensed, and the MCP server needs no account or API key. The remote server is at https://withicons.com/mcp. The local version and the command-line tool are launching on npm soon.' },
+    { q: 'Is the with icons MCP server free?', a: 'Yes. with icons is free and MIT licensed, and the MCP server needs no account or API key. The remote server is at https://withicons.com/mcp. You can also run it locally with <code>npx -y @withicons/mcp</code>, or let <code>npx withicons init</code> set it up for you.' },
   ],
   sources: [
     { title: 'Model Context Protocol: What is MCP?', url: 'https://modelcontextprotocol.io/docs/getting-started/intro' },
@@ -108,13 +108,13 @@ ${code(`{
     "withicons": { "type": "http", "url": "https://withicons.com/mcp" }
   }
 }`, 'json')}
-${p(`The exact steps for each tool, checked against each tool’s own docs, are on the ${L.page('ai.html', 'with icons for AI page')}. Two more options are launching on npm soon: a local server you run with <code>npx -y @withicons/mcp</code>, and <code>npx withicons init</code>, which adds the server and the agent skill (a short instruction file the assistant reads first) to the AI tools it finds in your project.`)}
+${p(`The exact steps for each tool, checked against each tool’s own docs, are on the ${L.page('ai.html', 'with icons for AI page')}. Two more options come from npm: a local server you run with <code>npx -y @withicons/mcp</code>, and <code>npx withicons init</code>, which adds the server and the agent skill (a short instruction file the assistant reads first) to the AI tools it finds in your project.`)}
 ${p('Once connected, just ask in plain words:')}
 ${code(`Use the withicons MCP server. Replace every icon in the sidebar with
 with icons in the line style, and use the solid style for the active item.
 Look up each name with search_icons before importing it.
 Icon-only buttons need an aria-label.`, 'prompt')}
-${callout('note', `The with icons npm packages (React, Vue, Svelte, Angular, Solid and more) are launching soon. Until then, every icon page has Copy SVG code and SVG and PNG downloads, and ${L.post('how-to-add-icons-to-a-website', 'how to add icons to a website')} shows how to paste them in.`)}
+${callout('note', `Once the assistant has the right name, it can use the with icons npm packages (React, Vue, Svelte, Angular, Solid and more), for example <code>npm i @withicons/react</code>. No code? Every icon page has Copy SVG code and SVG and PNG downloads, and ${L.post('how-to-add-icons-to-a-website', 'how to add icons to a website')} shows how to paste them in.`)}
 ${figure('dark1', 'Coding assistants work best with the real thing: connect once, and they stop guessing names.')}
 
 ${h2('Which method should you use?')}

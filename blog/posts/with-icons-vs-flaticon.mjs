@@ -141,7 +141,6 @@ ${prosCons('with icons', {
   ],
   cons: [
     ['A much smaller catalogue', `With ${N_ICONS} everyday icons, rare objects and one-off illustrations are not there, and there are no brand logos.`],
-    ['Developer packages are not live yet', 'The npm packages and CDN are launching soon. Today you copy or download each icon from its page.'],
     ['Newer, with a smaller community', 'Flaticon is a long-running, widely used site. with icons is young, so there is less written about it so far.'],
     ['Creative styles need room', 'The 17 creative styles, such as gloss, glass, pixel and luxe, look best at 32px or larger. For tiny icons in an app, use line, solid or duo.'],
   ],

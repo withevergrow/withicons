@@ -12,8 +12,8 @@
 /* phones: twenty dots fold into two rows of ten, so the pill's text stays on one line */
 @media (max-width: 520px) { .lv-dots { display: inline-grid; grid-template-columns: repeat(10, 5px); gap: 3px 2px; } .lv-dots i { width: 5px; height: 5px; } .lv-pill { gap: 10px; } }
 .lv-accent { color: var(--style-text); font-size: 1.12em; line-height: .8; }
-.lv-soon { display: inline-block; font: 500 var(--step--1)/1.4 var(--font-sans); color: var(--muted); }
-.slab-dark .lv-soon { color: var(--on-dark-2); }
+.lv-npm { display: inline-block; font: 500 var(--step--1)/1.4 var(--font-sans); color: var(--muted); }
+.slab-dark .lv-npm { color: var(--on-dark-2); }
 .lv-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--style-text); text-decoration: none; }
 .lv-link .arr { width: 16px; height: 16px; transition: transform .3s var(--e-out); }
 .lv-link:hover .arr { transform: translateX(3px); }
@@ -557,8 +557,8 @@ html:not(.js) .lv-as-use { display: none; }
 .lv-dev > summary:hover .lv-dev-plus { transform: scale(1.06); }
 .lv-dev[open] > summary:hover .lv-dev-plus { transform: rotate(135deg) scale(1.06); }
 .lv-dev-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 0 clamp(22px, 3vw, 32px) clamp(22px, 3vw, 32px); }
-.lv-dev .lv-soon { margin: 0; font: 500 15px/1.5 var(--font-sans); color: var(--on-dark-2, rgba(247, 243, 236, .75)); }
-.lv-dev .lv-soon b { color: var(--on-dark); }
+.lv-dev .lv-npm { margin: 0; font: 500 15px/1.5 var(--font-sans); color: var(--on-dark-2, rgba(247, 243, 236, .75)); }
+.lv-dev .lv-npm b { color: var(--on-dark); }
 .lv-dev-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
 .lv-dev .lv-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: rgba(255, 255, 255, .07); margin: 0; }
 .lv-dev .lv-tabs button { min-height: 38px; padding: 0 18px; border: 0; border-radius: 10px; background: none; font: 680 14.5px/1 var(--font-sans); color: rgba(247, 243, 236, .7); cursor: pointer; }

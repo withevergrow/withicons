@@ -431,7 +431,7 @@ ${sections}
       <p class="eyebrow">For developers</p>
       <h2 class="h2">One element. Any value.</h2>
       <p class="lede">The <code>${SCOPE}/dynamic</code> package draws every live icon in every style, in the browser or in Node. Change an attribute and the icon redraws. <code>today</code> keeps a calendar or clock on the visitor’s current date and time.</p>
-      <p class="lv-soon">Launching soon on npm. Until then, use the copy in this site’s <code>vendor/dynamic/</code> folder.</p>
+      <p class="lv-npm">Install it with <code>npm i ${SCOPE}/dynamic</code>, or add the one script tag shown here.</p>
     </div>
     ${code('lib-html', 'html', 'HTML', `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/lite.js"></script>\n\n<with-live-icon name="calendar-date" today variant="glass" size="48"></with-live-icon>\n<with-live-icon name="bell-count" count="12" variant="bauhaus"></with-live-icon>\n<with-live-icon name="battery-level" level="0.42" variant="skeuo"></with-live-icon>`)}
   </div>
@@ -606,7 +606,7 @@ ${sections}
   <details class="lv-dev" data-lv-dev>
     <summary><span class="lv-dev-t"><span class="lv-dev-h" id="h-dev">For developers</span><small>One element or component with your settings: HTML, React or Vue</small></span><span class="lv-dev-plus" aria-hidden="true"></span></summary>
     <div class="lv-dev-body">
-      <p class="lv-soon"><b>${SCOPE}/dynamic is launching soon on npm.</b> The code follows everything you set above: values, style, colours and size.</p>
+      <p class="lv-npm"><b>Install it with <code>npm i ${SCOPE}/dynamic</code></b>, or copy the HTML tab as is. The code follows everything you set above: values, style, colours and size.</p>
       <div class="lv-dev-bar">
         <div class="lv-tabs" role="tablist" aria-label="Code">${tabs.map((t, x) => `<button type="button" role="tab" id="tab-${t.toLowerCase()}" aria-controls="pane-${t.toLowerCase()}" aria-selected="${x === 0}" tabindex="${x === 0 ? 0 : -1}">${t}</button>`).join('')}</div>
         <div class="lv-dev-size lv-js-only"><label for="lv-size">Size</label><input class="lv-range" id="lv-size" type="range" min="16" max="256" step="4" value="48" data-lv-size><output class="lv-out" data-lv-size-out for="lv-size">48 px</output></div>

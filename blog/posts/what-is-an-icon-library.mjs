@@ -102,7 +102,7 @@ ${p(`Search for the icon on the library’s website, then copy it or download it
 ${h3('On websites')}
 ${p(`Website builders usually take an uploaded SVG or PNG: see our guides for ${L.guide('wordpress', 'WordPress')}, ${L.guide('webflow', 'Webflow')} and ${L.guide('wix-squarespace', 'Wix and Squarespace')}. On a hand-built site you can paste the SVG code straight into the page. Our ${L.post('how-to-add-icons-to-a-website', 'guide to adding icons to a website')} shows each route.`)}
 ${h3('In apps')}
-${p(`Developers usually install the library as a code package and write something like <code>&lt;Icon name="home" /&gt;</code>. with icons has components for React, Vue, Svelte, Angular and SolidJS plus a web component; the npm packages and CDN are launching soon, so for now copy the SVG from any icon page. See ${L.page('developers.html', 'the developer page')}.`)}
+${p(`Developers usually install the library as a code package and write something like <code>&lt;Icon name="home" /&gt;</code>. with icons has components for React, Vue, Svelte, Angular and SolidJS plus a web component, all on npm (for example <code>npm i @withicons/react</code>) and the jsDelivr CDN. Without code, copy the SVG from any icon page. See ${L.page('developers.html', 'the developer page')}.`)}
 ${sizeRamp(['presentation', 'file-text', 'monitor', 'smartphone'], [16, 24, 32, 48], 'duo', 'Slides, documents, websites, apps: one library, the same icons at every size.')}
 
 ${h2('What are some examples of icon libraries?')}

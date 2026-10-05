@@ -217,15 +217,15 @@ const BASE_LANDERS = [
   },
   {
     slug: 'icons-for-react', short: 'Icons for React', icon: 'code', color: 'duo', dev: true,
-    title: 'Free React icons: copy as JSX today, @withicons/react soon · with icons',
-    desc: `Free icons for React: copy any of ${N} icons in ${NS} styles as a ready JSX component now; the tree-shakable @withicons/react package is launching on npm soon. MIT licensed.`,
+    title: 'Free React icons: copy as JSX or npm i @withicons/react · with icons',
+    desc: `Free icons for React: copy any of ${N} icons in ${NS} styles as a ready JSX component, or install the typed, tree-shakable @withicons/react package from npm. MIT licensed.`,
     h1: ['Free icons for', 'React'], q: 'free React icons',
-    answer: () => `Click any icon below to copy it as a <b>ready React component</b> (JSX, <code>currentColor</code>, props spread onto the svg) and paste it into your project today. A typed, tree-shakable package, <code>@withicons/react</code>, with all ${N} icons in ${NS} styles is <b>launching on npm soon</b>. Everything is MIT licensed.`,
+    answer: () => `Click any icon below to copy it as a <b>ready React component</b> (JSX, <code>currentColor</code>, props spread onto the svg) and paste it into your project. Or install the typed, tree-shakable package: <code>npm i @withicons/react</code> brings all ${N} icons in ${NS} styles. Everything is MIT licensed.`,
     picker: { actions: ['jsx', 'svg'], groups: [['Interface', SETS.ui], ['Status', SETS.status], ['Developer', SETS.dev]] },
     body: p => `
 <section class="ax-split" aria-labelledby="re-pkg">
-  <div><p class="ax-kicker">The package <span class="pg-soon">${I('sparkles', 'solid', 14)} launching on npm soon</span></p><h2 id="re-pkg">One import per icon, any style</h2>
-  <p>The default import is the Line style; every other style is a subpath with the same names. Only the icons you import end up in your bundle. Until it’s published, copy JSX from the grid above or download the <a href="${p}developers.html#cdn">sprites and CSS</a>.</p>
+  <div><p class="ax-kicker">The package</p><h2 id="re-pkg">One import per icon, any style</h2>
+  <p>Install it with <code>npm i @withicons/react</code>. The default import is the Line style; every other style is a subpath with the same names. Only the icons you import end up in your bundle. No build step? Copy JSX from the grid above or use the <a href="${p}developers.html#cdn">CDN, sprites and CSS</a>.</p>
   ${facts([['Package', '<code>@withicons/react</code> (React 18+)'], ['Props', '<code>size</code>, <code>color</code>, <code>strokeWidth</code>, <code>absoluteStrokeWidth</code>, <code>title</code>, <code>className</code>'], ['Accessibility', 'aria-hidden by default; pass <code>title</code> for a labelled icon'], ['Licence', 'MIT']])}</div>
   <div>${code(`import { Home, Search } from '@withicons/react'          // line (default)
 import { Home as HomeSolid } from '@withicons/react/solid'
@@ -241,8 +241,8 @@ export function Toolbar() {
 }`, 'jsx', 'Toolbar.jsx')}<p class="pg-note">All props and frameworks: <a href="${p}developers.html">developer docs</a>.</p></div>
 </section>`,
     faq: p => [
-      ['Is @withicons/react available on npm?', `Not yet: it is launching soon under that name. Today you can copy any icon as JSX from this page, or download the SVG sprites and CSS from the <a href="${p}developers.html">developer page</a>.`],
-      ['Will the React icons be tree-shakable?', 'Yes. Each icon is its own ES module export, so bundlers keep only the icons you import.'],
+      ['Is @withicons/react available on npm?', `Yes: <code>npm i @withicons/react</code> (React 18+). You can also copy any icon as JSX from this page, or get the SVG sprites and CSS from the <a href="${p}developers.html">developer page</a>.`],
+      ['Are the React icons tree-shakable?', 'Yes. Each icon is its own ES module export, so bundlers keep only the icons you import.'],
       ['Can I use the icons with Next.js?', 'Yes. The copied JSX components are plain function components with no hooks, so they work in server and client components.'],
       ['Are there icons for Vue, Svelte and Angular too?', `Yes, the same icons and props: <a href="${p}free/icons-for-vue.html">Vue</a>, plus Svelte, Angular, Solid and a web component on the <a href="${p}developers.html">developer page</a>.`],
     ],
@@ -250,15 +250,15 @@ export function Toolbar() {
   },
   {
     slug: 'icons-for-vue', short: 'Icons for Vue', icon: 'code', color: 'sketch', dev: true,
-    title: 'Free Vue icons: paste SVG in templates, @withicons/vue soon · with icons',
-    desc: `Free icons for Vue 3: copy any of ${N} icons in ${NS} styles as inline SVG for your templates today; the @withicons/vue component package is launching on npm soon. MIT.`,
+    title: 'Free Vue icons: paste SVG or npm i @withicons/vue · with icons',
+    desc: `Free icons for Vue 3: copy any of ${N} icons in ${NS} styles as inline SVG for your templates, or install the @withicons/vue component package from npm. MIT.`,
     h1: ['Free icons for', 'Vue'], q: 'free Vue icons',
-    answer: () => `Click an icon below to copy its <b>SVG</b> and paste it straight into a Vue template: it uses <code>currentColor</code>, so it follows your text colour and dark mode. The component package <code>@withicons/vue</code> (Vue 3) with all ${N} icons in ${NS} styles is <b>launching on npm soon</b>. MIT licensed.`,
+    answer: () => `Click an icon below to copy its <b>SVG</b> and paste it straight into a Vue template: it uses <code>currentColor</code>, so it follows your text colour and dark mode. Prefer components? <code>npm i @withicons/vue</code> (Vue 3) brings all ${N} icons in ${NS} styles. MIT licensed.`,
     picker: { actions: ['vue', 'dlsvg'], groups: [['Interface', SETS.ui], ['Commerce', SETS.commerce], ['Developer', SETS.dev]] },
     body: p => `
 <section class="ax-split" aria-labelledby="vu-pkg">
-  <div><p class="ax-kicker">The package <span class="pg-soon">${I('sparkles', 'solid', 14)} launching on npm soon</span></p><h2 id="vu-pkg">Same names, same props as React</h2>
-  <p>Import icons as components; the default is Line and other styles are subpaths. Until it’s published, paste inline SVG from the grid or use the <a href="${p}free/font-awesome-style-icon-classes.html">icon classes</a>.</p>
+  <div><p class="ax-kicker">The package</p><h2 id="vu-pkg">Same names, same props as React</h2>
+  <p>Install it with <code>npm i @withicons/vue</code>, then import icons as components; the default is Line and other styles are subpaths. No build step? Paste inline SVG from the grid or use the <a href="${p}free/font-awesome-style-icon-classes.html">icon classes</a>.</p>
   ${facts([['Package', '<code>@withicons/vue</code> (Vue 3)'], ['Props', '<code>size</code>, <code>color</code>, <code>stroke-width</code>, <code>title</code>'], ['Licence', 'MIT']])}</div>
   <div>${code(`<script setup>
 import { Home, Search } from '@withicons/vue'
@@ -272,7 +272,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
 </template>`, 'vue', 'Toolbar.vue')}</div>
 </section>`,
     faq: p => [
-      ['Is @withicons/vue on npm yet?', `It’s launching soon. Today, paste inline SVG from this page, or download sprites and CSS from the <a href="${p}developers.html">developer page</a>.`],
+      ['Is @withicons/vue on npm?', `Yes: <code>npm i @withicons/vue</code> (Vue 3). You can also paste inline SVG from this page, or get sprites and CSS from the <a href="${p}developers.html">developer page</a>.`],
       ['Does it work with Nuxt?', 'Yes. Inline SVG works anywhere in Nuxt templates, and the component package targets Vue 3, which Nuxt 3 uses.'],
       ['How do I colour the icons in Vue?', 'They use currentColor: set the CSS color on the icon or its parent, e.g. with a Tailwind text class.'],
     ],
@@ -288,7 +288,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
     body: p => `
 <section class="ax-split" aria-labelledby="ic-setup">
   <div><p class="ax-kicker">Set up</p><h2 id="ic-setup">One setup line, then plain tags</h2>
-  <p>Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>, so it scales with font size and takes the text colour. The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles: a line icon is about 270 bytes gzipped. No JavaScript? Link one stylesheet per style; <code>with-line.css</code> holds all ${N} line icons in about 26 KB gzipped. The CDN link is <span class="pg-soon">${I('sparkles', 'solid', 14)} launching soon</span>; today, download <a href="${p}vendor/with/with-line.css">with-line.css</a> and host it yourself.</p>
+  <p>Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>, so it scales with font size and takes the text colour. The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles: a line icon is about 270 bytes gzipped. No JavaScript? Link one stylesheet per style; <code>with-line.css</code> holds all ${N} line icons in about 26 KB gzipped. The link below is served by jsDelivr; to host it yourself, <code>npm i @withicons/classes</code> or download <a href="${p}vendor/with/with-line.css">with-line.css</a>.</p>
   ${facts([['Base class', '<code>with</code> plus <code>with-&lt;name&gt;</code>'], ['Styles', '<code>with-solid</code>, <code>with-duo</code>, <code>with-gloss</code>, <code>with-engrave</code>, <code>with-blueprint</code>, <code>with-sketch</code> and more (the loader fetches each one; without it, link that style’s CSS)'], ['Sizes', '<code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-2x</code> … <code>with-5x</code>, <code>with-fw</code>'], ['Motion & flips', '<code>with-spin</code>, <code>with-pulse</code>, <code>with-rotate-90</code>, <code>with-flip-h</code>, <code>with-flip-v</code>'], ['Aliases', `With the optional runtime, alias names work too: <code>with-bin</code> → trash`]])}</div>
   <div>${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
 

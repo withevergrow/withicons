@@ -71,7 +71,7 @@ ${table(['Shown at', 'Line becomes', 'How it looks'], [
 ${p('At 16 px, the line is barely more than one real pixel, so line icons can look pale or fuzzy. At 48 px and beyond, the line gets chunky. You have three easy options:')}
 ${ul([
   '<strong>Switch to solid at small sizes.</strong> Filled shapes hold up much better at 16 px.',
-  '<strong>Adjust the line.</strong> In the SVG code you can change the <code>stroke-width</code> value. Our code components (launching soon on npm) will have a <code>strokeWidth</code> setting, plus an option that keeps the line the same thickness at any size.',
+  '<strong>Adjust the line.</strong> In the SVG code you can change the <code>stroke-width</code> value. Our code components (on npm) have a <code>strokeWidth</code> setting, plus <code>absoluteStrokeWidth</code>, which keeps the line the same thickness at any size.',
   '<strong>Use icons drawn for small sizes.</strong> Some sets do this: Heroicons, for example, ships separate solid sets drawn for 20 px and 16 px, and Google’s Material Symbols adjusts its line weight automatically between 20 and 48 dp.',
 ])}
 ${sizeRamp(['bell', 'calendar', 'user', 'mail'], [16, 20, 24], 'line', 'Line style at 16, 20 and 24 px. Fine at 20 and up, a touch light at 16.')}

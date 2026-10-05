@@ -19,7 +19,7 @@ export default {
     '<strong>Sharper option:</strong> use SVG where your platform accepts it. Wix, Webflow and Framer take SVG files; WordPress blocks SVG uploads by default.',
     '<strong>Squarespace and Shopify</strong> image uploads do not list SVG, so use a PNG, or paste the SVG code into a code block.',
     '<strong>Plain HTML:</strong> paste the SVG code straight into your page. It stays sharp and takes your text colour.',
-    'with icons has free PNG and SVG downloads on every icon page today. npm packages and a CDN are launching soon.',
+    'with icons has free PNG and SVG downloads on every icon page, and npm packages and a CDN for developers.',
   ],
   faq: [
     { q: 'Why does WordPress say “Sorry, you are not allowed to upload this file type” for my SVG?', a: 'WordPress does not include SVG in its default list of allowed upload types, because an SVG file can contain code. Upload a PNG instead, or paste the SVG code into a Custom HTML block. Plugins exist that allow SVG uploads safely, but they are optional.' },
@@ -96,7 +96,7 @@ ${p('Click Copy SVG on the icon page to get the full code (the “…” above i
 ${p('Prefer a normal image file? That works too:')}
 ${code(`<img src="images/mail.png" width="24" height="24" alt="Email">`)}
 ${p(`The <code>alt</code> text describes the icon for people using screen readers. If the icon sits next to words that already say the same thing, use <code>alt=""</code> so it is skipped. Our guide to ${L.post('accessible-icons', 'accessible icons')} explains why.`)}
-${callout('note', `For developers: with icons also has React, Vue, Svelte, Angular and Solid components, a <code>&lt;with-icon&gt;</code> web component and <code>&lt;i class="with with-home"&gt;</code> CSS classes. The <strong>npm packages and CDN are launching soon</strong>. Until then, copy the SVG from any icon page, or see our ${L.guide('html', 'HTML guide')}.`, 'Coming soon for developers')}
+${callout('note', `For developers: with icons also has React, Vue, Svelte, Angular and Solid components, a <code>&lt;with-icon&gt;</code> web component and <code>&lt;i class="with with-home"&gt;</code> CSS classes. Install one with <code>npm i @withicons/react</code> (or <code>vue</code>, <code>svelte</code>, <code>angular</code>, <code>solid</code>, <code>web</code>), or load the classes from the CDN: <code>https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-line.css</code>. No build step? Copy the SVG from any icon page, or see our ${L.guide('html', 'HTML guide')}.`, 'For developers')}
 ${figure('hero1', 'Pasting SVG code is the sharpest way to add icons to a hand-built site. The icon follows your text colour automatically.')}
 
 ${h2('What size and colour should website icons be?')}

@@ -104,7 +104,7 @@ ${p(`For a deeper look at sizes, including slides and print, see our ${L.post('i
 ${h2('What about icon fonts?')}
 ${p('An icon font is a font where each letter is secretly a picture. You load the font, type a special code, and a house or a heart appears. It was a clever trick in the early 2010s, and some big icon sets still offer one.')}
 ${p('Today most teams prefer SVG, for a few practical reasons. Icon fonts can only be one colour. They are drawn like text, so they can look slightly blurry. And if the font fails to load, or someone uses their own font for easier reading, the icons can turn into empty boxes. GitHub described exactly these problems in 2016 when it moved its own icons from a font to SVG.')}
-${p(`with icons does not ship an icon font. Developers can still use simple class names like <code>&lt;i class="with with-home"&gt;</code>, but under the hood they are drawn with SVG. (Our npm packages and CDN are launching soon; until then, copy the SVG code from any icon page. Our ${L.post('how-to-add-icons-to-a-website', 'guide to adding icons to a website')} walks through it.)`)}
+${p(`with icons does not ship an icon font. Developers can still use simple class names like <code>&lt;i class="with with-home"&gt;</code>, but under the hood they are drawn with SVG. (Load them from npm or the jsDelivr CDN, or copy the SVG code from any icon page. Our ${L.post('how-to-add-icons-to-a-website', 'guide to adding icons to a website')} walks through it.)`)}
 
 ${h2('When is PNG actually the better choice?')}
 ${p('SVG wins most of the time, but PNG is the right answer in a few real situations:')}

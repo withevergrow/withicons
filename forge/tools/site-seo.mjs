@@ -529,8 +529,8 @@ ${prefixed(FOOTER, P)}
       { q: `How do I put the ${T} icon in Google Slides or PowerPoint?`, a: `On this page press Copy image, then paste it onto your slide. For PowerPoint, Keynote and Canva, Download SVG gives you a file that stays sharp at any size and can be recoloured inside the app.` },
       { q: `Can I change the colour or size of the ${T} icon?`, a: `Yes. Pick a colour above before you download, choose a PNG size (64, 256 or 1024 pixels), or download the SVG, which scales to any size without getting blurry.` },
       { q: `What is the ${T} icon also called?`, a: aka.length ? `People also search for it as ${list(aka.slice(0, 10).map(a => `“${a}”`), 'or')}. Its name in code is \`${n}\`.` : `Its name in code is \`${n}\`.` },
-      { q: `Can I animate the ${T} icon?`, a: MOTION[n] ? `Yes. Its built-in animation ${MOTION[n].intent}. Open Customize on this page, choose Always, On hover or Once, try any of the ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package (launching soon) and switch off for people who ask for reduced motion.` : `Yes. Open Customize on this page, choose Always, On hover or Once and pick one of ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package (launching soon).` },
-      { q: `How do I use the ${T} icon in React?`, a: `Install \`${SCOPE}/react\` (launching soon), then \`import { ${C} } from '${SCOPE}/react'\` and render \`<${C} size={24} />\`. Import from \`${SCOPE}/react/solid\` (or ${list(STYLES.slice(2).map(x => `\`/${x.name}\``), 'or')}) for another style. Until the packages are published, copy the SVG code from this page.` },
+      { q: `Can I animate the ${T} icon?`, a: MOTION[n] ? `Yes. Its built-in animation ${MOTION[n].intent}. Open Customize on this page, choose Always, On hover or Once, try any of the ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package and switch off for people who ask for reduced motion.` : `Yes. Open Customize on this page, choose Always, On hover or Once and pick one of ${MOTION_PRESETS.length} moves, then download an animated SVG or copy the code. Animations come from the optional \`${SCOPE}/motion\` package.` },
+      { q: `How do I use the ${T} icon in React?`, a: `Run \`npm i ${SCOPE}/react\`, then \`import { ${C} } from '${SCOPE}/react'\` and render \`<${C} size={24} />\`. Import from \`${SCOPE}/react/solid\` (or ${list(STYLES.slice(2).map(x => `\`/${x.name}\``), 'or')}) for another style.` },
     ]
   }
 
@@ -633,7 +633,7 @@ ${prefixed(FOOTER, P)}
       ['developers', 'For developers', U.map(u => u.name).slice(0, 4).join(', ') + '…'],
       ['faq', 'Questions', 'Free? Colours? Animation?'],
     ]
-    const tagSetup = `<details class="ip-setup"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><p class="ip-setup-line"><code>${esc(cssFor(first))}</code></p></details>`
+    const tagSetup = `<details class="ip-setup"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p><p class="ip-setup-line"><code>${esc(cssFor(first))}</code></p></details>`
     // "what is it for": the four ways into the Download sheet (the same groups as js/editor.js DL_GROUPS)
     const GOALS = [
       ['slides', 'Slides & documents', 'PNG, PowerPoint, Word, PDF', I.slides],
@@ -796,18 +796,18 @@ ${crumbs(crumbItems)}
 <section class="ip-section ip-devsec" id="developers" aria-labelledby="dev-h"><div class="wrap">
   <details class="ip-dev">
     <summary><span class="ip-dev-t"><span class="ip-h2" id="dev-h">For developers</span><small>${U.map(u => u.name).join(', ')}</small></span><span class="ip-dev-plus" aria-hidden="true"></span></summary>
-    <p class="ip-soon"><b>npm packages are launching soon.</b> The SVG, PNG and copy buttons above work today. Name in code: <code>${n}</code> · component <code>${comp(n)}</code>.</p>
+    <p class="ip-devlead"><b>Install one package for your stack</b>, or use the SVG, PNG and copy buttons above. Name in code: <code>${n}</code> · component <code>${comp(n)}</code>.</p>
     <div class="ip-tabs" role="tablist" aria-label="Framework">${U.map((u, k) => `<button type="button" role="tab" id="tab-${u.id}" data-tab="${u.id}" aria-controls="use-${u.id}" aria-selected="${k === 0}"${k ? ' tabindex="-1"' : ''}>${esc(u.name)}</button>`).join('')}</div>
 ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" aria-labelledby="tab-${u.id}"${k ? ' hidden' : ''}>
       <p>${u.lead}</p>
-      ${u.install ? `<p class="ip-install"><code>${esc(u.install)}</code> <span class="ip-soon-tag">launching soon</span></p>` : ''}
+      ${u.install ? `<p class="ip-install"><code>${esc(u.install)}</code></p>` : ''}
       ${codeBlock(`code-${u.id}`, u.code, { lang: u.lang, highlight: u.highlight !== false })}
       ${u.note ? `<p class="ip-note">${u.note}</p>` : ''}
     </div>`).join('\n')}
     <div class="ip-dev-tag">
       <p class="ip-dev-tag-l">The quickest copy for websites: one <code>&lt;i&gt;</code> tag</p>
       <button type="button" class="ip-tag-btn" data-act="copy-tag"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
-      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="ip-soon-tag">launching soon</span></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the setup line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the setup line</span></button></details>
+      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the setup line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the setup line</span></button></details>
     </div>
   </details>
 </div></section>
@@ -930,7 +930,7 @@ ${crumbs(crumbItems)}
     <article><h3>Good for</h3><p>${esc(cap(S.good))}.</p></article>
     <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn on a 16×16 pixel grid, so it is sharpest at 16, 32 and 48px: tiny UI, games and big retro posters.' : S.group === 'studio' ? 'Built from layers of light, shade and material, so it is at its best from 48px up: app tiles, hero sections, pricing cards and posters.' : S.group === 'storybook' ? 'Drawn like a small illustration, with layered colour, shading and fine detail, so it is at its best from 48px up: hero sections, app tiles, stickers, posters and social posts.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
     <article><h3>Colour</h3><p>${S.group === 'storybook' ? 'Arrives in its own hand-picked colours; pick a palette and every layer follows. Developers can retint every part with role-named CSS variables (--with-' + s + '-c1 …).' : S.group === 'studio' ? (s === 'bauhaus' ? 'Arrives in the Bauhaus primaries: red, yellow and blue with black and paper. Pick a palette to swap them; developers can retint every part with role-named CSS variables.' : 'Arrives with its own rich default colours; pick a palette and the whole layered stack follows. Developers can retint every part with role-named CSS variables.') : S.palette ? 'Arrives with its own cheerful palette; the outline follows any colour you pick. Developers can retint every part with CSS variables.' : s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
-    <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · launching soon</p></article>
+    <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · on npm</p></article>
   </div>
 </div></section>
 <section class="ip-section" id="all" aria-labelledby="all-h"><div class="wrap">
@@ -999,11 +999,11 @@ ${CATS.map(c => `          <section class="ix-cat" aria-labelledby="ix-${c}"><h3
 
   /* ───────────── icons.json ───────────── */
   const iconsJson = {
-    name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'launching soon', version: VERSION, license: 'MIT', repository: REPO,
+    name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'available', version: VERSION, license: 'MIT', repository: REPO,
     search: { api: `${BASE}/api/search?q=`, mcp: `npx -y ${SCOPE}/mcp`, cli: 'npx withicons search <query>' },
     classes: { package: `${SCOPE}/classes`, loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/classes/dist/with-base.css`, perIcon: `${CDN}/${SCOPE}/classes/dist/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/classes/dist/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
     total: ICONS.length, defaultStyle: 'line', styleCount: NS,
-    motion: { package: `${SCOPE}/motion`, status: 'launching soon', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
+    motion: { package: `${SCOPE}/motion`, status: 'available', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
       classes: 'wm wm-loop|wm-hover|wm-once [wm-p-<preset>]; data-wm="<name>"; swap: wm-swap wm-fx-<effect> [wm-swap-auto|wm-swap-focus|wm-loop] > .wm-a + .wm-b', vars: ['--wm-dur', '--wm-k', '--wm-ox', '--wm-oy', '--wm-dx', '--wm-dy', '--wm-steps', '--wm-deco'],
       parts: 'inline SVGs animate per part: untagged / wm-k = object (plays the preset), wm-a / wm-s = moving part / badge (spec parts.A / parts.S, optional delay), wm-deco = decoration (own breathe|float|twinkle loop, never spins with the object; --wm-deco: none keeps it still), wm-shadow = ground shadow (stays put, squashes for float/bounce/rise/drop/jelly), wm-shine = highlight',
       swapVars: ['--wm-swap-dur', '--wm-swap-ease', '--wm-swap-delay', '--wm-swap-hold'], swapTriggers: ['click (aria-pressed / is-on)', 'hover (.wm-trigger)', 'focus (wm-swap-focus)', 'auto (wm-swap-auto)'] },
@@ -1072,7 +1072,7 @@ Reply with:
 4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.
 5. A link for each pick: ${BASE}/icons/NAME.html
 
-If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ${BASE}/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code today. Launching soon: <i class="with with-NAME with-STYLE"></i> with the CDN stylesheet (line needs no style class) and npm packages (@withicons/react, vue, svelte, angular, solid).
+If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ${BASE}/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).
 
 Keep it short and practical.`
   const llmsCore = `# ${BRAND}
@@ -1083,7 +1083,7 @@ Website: ${BASE}/ · Library: ${BASE}/icons.html · Source: ${REPO} · Publisher
 
 ## Status
 
-The npm packages under \`${SCOPE}/*\` are launching soon; install commands below are the final names. Until then use the website's Copy/Download buttons or the SVG files on each icon page.
+The npm packages under \`${SCOPE}/*\` are published (version ${VERSION}) and served by jsDelivr. People who don't write code can use the website's Copy/Download buttons or the SVG files on each icon page.
 
 ## Using ${BRAND} from a chat assistant
 
@@ -1111,7 +1111,7 @@ Assistants answering any of them: read the skill first, look icons up with ${BAS
 - MCP server for AI agents: \`npx -y ${SCOPE}/mcp\`
 - CLI: \`npx withicons search "<query>"\`
 
-## Install (launching soon)
+## Install
 
 - React: \`npm i ${SCOPE}/react\`
 - Vue 3: \`npm i ${SCOPE}/vue\`
@@ -1148,7 +1148,7 @@ import { Icon } from '${SCOPE}/react'                    // <Icon name="home" va
 
 ${STYLES.map(s => `- \`${s.name}\` (${s.kind}${s.name === 'line' ? ', default' : ''}, colour ${s.hex}): ${s.say} Good for ${s.good}. Page: ${styleUrl(s.name)}`).join('\n')}
 
-## Motion (optional, imported separately; launching soon)
+## Motion (optional, imported separately)
 
 Animations live in \`${SCOPE}/motion\` and never change the icons. They animate the element that holds the icon, so they work with every style and package. Each icon page has a live editor ("Customize") that previews them, exports an animated SVG and copies the code.
 

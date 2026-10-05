@@ -118,7 +118,7 @@ ${ul([
   `<strong>Search in your own words.</strong> Type “bin” and you get trash, and “gear” finds settings. Try it in ${L.icons('the icon library')}.`,
   '<strong>No code needed.</strong> Every icon page lets you copy the image, download an SVG or a PNG in your colour and size, or copy the SVG code.',
   `<strong>Works with your site builder.</strong> Step-by-step guides for ${L.guide('wordpress', 'WordPress')}, ${L.guide('webflow', 'Webflow')}, ${L.guide('framer', 'Framer')}, ${L.guide('wix-squarespace', 'Wix and Squarespace')} and ${L.guide('html', 'plain HTML')}.`,
-  '<strong>For developers:</strong> React, Vue, Svelte, Angular and SolidJS components, a web component and CSS classes. The npm packages and CDN are launching soon; until then, copy from the icon pages.',
+  '<strong>For developers:</strong> React, Vue, Svelte, Angular and SolidJS components, a web component and CSS classes, installed from npm (<code>@withicons/react</code> and friends) or loaded from the jsDelivr CDN.',
 ])}
 ${p(`If your app has hundreds of specialist features, a bigger catalogue such as ${L.alt('material-symbols', 'Material Symbols')} or ${L.alt('font-awesome', 'Font Awesome')} may cover more niche ideas, though usually in fewer matching styles. For most websites, ${N_ICONS} is plenty. See ${L.post('how-to-add-icons-to-a-website', 'how to add icons to a website')} for the next step.`)}
 ${cta('Find your 30 icons in one place', `${N_ICONS} free icons in ${N_STYLES} matching styles. Copy, download or drop them into your site. No sign-up, MIT licensed.`, ['menu', 'search', 'user', 'shopping-cart', 'mail', 'star'])}

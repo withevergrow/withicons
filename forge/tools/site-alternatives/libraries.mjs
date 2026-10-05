@@ -22,14 +22,14 @@ export const US = p => ({
   price: 'Free. No paid tier, no account',
   count: `${N} icons × ${NS} styles (${num(N_TOTAL)} SVGs)`,
   styles: `${NS} styles on one 24 × 24 grid: <a href="${p}styles/line.html">Line</a>, ${listTitles(STYLES.slice(1))}. Every icon can also move: ${PRESETS.length} CSS animations and ${EFFECTS.length} swap transitions (<a href="${p}developers.html#motion">@withicons/motion</a>)`,
-  frameworks: 'React, Vue, Svelte, Angular, Solid and a <code>&lt;with-icon&gt;</code> web component (on npm soon); SVG, PNG and sprites today',
+  frameworks: 'React, Vue, Svelte, Angular, Solid and a <code>&lt;with-icon&gt;</code> web component, all on npm; plus SVG, PNG and sprites',
   classes: 'Yes: <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>, add <code>with-solid</code> etc. for other styles',
   selfhost: `Yes: download SVGs, sprites and CSS (<a href="${p}developers.html#cdn">developers</a>)`,
   design: `Copy SVG and paste into Figma, Canva, PowerPoint (<a href="${p}guides/index.html">guides</a>)`,
-  ai: `<a href="${p}llms.txt">llms.txt</a> and an <a href="${p}ai.html#skill">agent skill</a> today; an MCP server (<code>@withicons/mcp</code>) arrives with the npm launch`,
+  ai: `<a href="${p}llms.txt">llms.txt</a> an <a href="${p}ai.html#skill">agent skill</a> and an <a href="${p}ai.html#mcp">MCP server</a> (<code>@withicons/mcp</code>)`,
   attribution: 'No',
 })
-export const US_HUB = { license: 'MIT', price: 'Free', count: `${N} × ${NS} styles`, styles: `${NS} (line to ${styleTitle(STYLES.at(-1)).toLowerCase()}) + animations`, classes: 'Yes (with-*)', ai: 'llms.txt, skill; MCP soon' }
+export const US_HUB = { license: 'MIT', price: 'Free', count: `${N} × ${NS} styles`, styles: `${NS} (line to ${styleTitle(STYLES.at(-1)).toLowerCase()}) + animations`, classes: 'Yes (with-*)', ai: 'llms.txt, skill, MCP' }
 
 import { OPEN_LIBS } from './libraries-open.mjs'
 
@@ -79,7 +79,7 @@ export const LIBS = [...OPEN_LIBS,
       styleNote: 'Ionicons <b>outline</b> → our <b>Line</b>; Ionicons <b>filled</b> → our <b>Solid</b>. Sharp has no direct twin; Line or Solid are closest.',
     },
     faq: [
-      ['Does with icons work like the ion-icon web component?', `Yes. <code>&lt;with-icon name="home"&gt;&lt;/with-icon&gt;</code> works in any framework, and <code>variant="solid"</code> (or any of the ${NS} styles) replaces the Ionicons name suffix. The package is launching on npm soon.`],
+      ['Does with icons work like the ion-icon web component?', `Yes. <code>&lt;with-icon name="home"&gt;&lt;/with-icon&gt;</code> works in any framework, and <code>variant="solid"</code> (or any of the ${NS} styles) replaces the Ionicons name suffix. Install it with <code>npm i @withicons/web</code>, or load it from jsDelivr.`],
     ],
   },
 

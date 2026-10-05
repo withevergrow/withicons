@@ -26,7 +26,7 @@ export default {
     { q: 'Do I need to credit Lucide?', a: 'Not on screen. The ISC and MIT licences only ask you to keep the copyright and licence notice with copies of the software or source files. Using the icons in an app or website does not require a visible credit.' },
     { q: 'What is the best alternative to Lucide?', a: `It depends on what you miss. If you want the same tidy outline look plus filled, tinted and illustrated versions of every icon, with icons gives you ${N_ICONS} icons in ${N_STYLES} matching styles under MIT. If you simply need more outline icons, Hugeicons Free is bigger (over 6,000 icons). Feather, where Lucide came from, is smaller (287 icons) and rarely changes.` },
     { q: 'Why does shadcn/ui use Lucide?', a: 'shadcn/ui sets “lucide” as the default icon library in its components.json file and installs lucide-react during setup. Lucide fits well because it is a clean, consistent outline set with a strong React package.' },
-    { q: 'Can I use with icons with shadcn/ui?', a: 'Yes. You can keep Lucide for the built-in components and use with icons elsewhere, or swap icons one by one. The with icons components use currentColor and accept className, size and strokeWidth, so Tailwind classes keep working. The npm packages are launching soon; today you can copy SVG code from any icon page.' },
+    { q: 'Can I use with icons with shadcn/ui?', a: 'Yes. You can keep Lucide for the built-in components and use with icons elsewhere, or swap icons one by one. The with icons components use currentColor and accept className, size and strokeWidth, so Tailwind classes keep working. Install them with <code>npm i @withicons/react</code>, or copy SVG code from any icon page.' },
     { q: 'Lucide vs Feather: what is the difference?', a: 'Lucide started as a community fork of Feather and kept its 24 × 24, 2px outline look. Feather lists 287 icons and rarely changes; Lucide has grown to over 1,600 icons and ships new releases often.' },
     { q: 'Lucide vs Hugeicons: which should I pick?', a: 'Both are free outline sets. Hugeicons Free is larger (over 6,000 Stroke Rounded icons, MIT) and sells more styles in Pro. Lucide (over 1,600 icons, ISC) is fully free and is the shadcn/ui default. Pick by which look you prefer and which icons you need.' },
   ],
@@ -54,7 +54,7 @@ ${table(['', 'with icons', 'Lucide'], [
   ['Number of icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, yes('Over 1,600 (the site listed 1,857)')],
   ['Styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus ${N_STYLES - 3} creative styles such as gloss, glass, pixel, retro and luxe`), meh('1 outline style (stroke width adjustable)')],
   ['Default stroke', '1.75px on a 24 × 24 grid', '2px on a 24 × 24 grid'],
-  ['Framework packages', meh('React, Vue, Svelte, Angular, Solid, web component (launching soon)'), yes('React, Vue, Svelte, Solid, Preact, Angular, Astro, React Native, plain JS')],
+  ['Framework packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, Svelte, Solid, Preact, Angular, Astro, React Native, plain JS')],
   ['Built into shadcn/ui', no('No, but works alongside it'), yes('Yes, the default')],
   ['Ready for slides and docs', yes('Copy image, PNG and SVG in any colour'), meh('Copy SVG code from the site')],
   ['Help for AI assistants', yes('MCP server, llms.txt, agent skill'), meh('llms.txt (no official MCP server found)')],
@@ -97,7 +97,7 @@ ${p('Your app is mostly forms, tables and settings screens, you like the look, a
 ${h3('Bring in with icons if…')}
 ${p('You want solid icons for active states, tinted icons for dashboards, or expressive icons for your landing page and pitch deck, and you want all of them to match. Both sets use one component per icon with similar settings (size, colour, stroke width), so swapping is mostly renaming. A few names differ: Lucide’s <code>House</code> is our <code>Home</code> and <code>Trash2</code> is our <code>Trash</code> (you can see both pairs in the side-by-side above), <code>X</code> is <code>Close</code>, and <code>Funnel</code> is <code>Filter</code>.')}
 ${iconGrid(['home', 'trash', 'close', 'filter', 'edit', 'share'], 'line', 'The with icons names for common Lucide icons: house becomes home, trash-2 becomes trash, x becomes close, funnel becomes filter.')}
-${p(`Our ${L.alt('lucide', 'Lucide alternative page')} has a full name map and a converter that rewrites your imports for you. (The with icons npm packages are launching soon; until then, every icon page lets you copy the SVG code.)`)}
+${p(`Our ${L.alt('lucide', 'Lucide alternative page')} has a full name map and a converter that rewrites your imports for you. (The with icons packages install from npm, for example <code>npm i @withicons/react</code>, and every icon page also lets you copy the SVG code.)`)}
 ${doDont('<p>Pick one icon set per screen. If you move to with icons, move a whole area (say, the sidebar) at once.</p>', '<p>Put a 2px Lucide icon next to a 1.75px with icons line icon in the same toolbar. The small difference in weight is surprisingly easy to spot.</p>')}
 
 ${h2('What about slides, docs and AI tools?')}
@@ -133,17 +133,17 @@ ${prosCons('with icons', {
   ],
   cons: [
     ['A smaller catalogue', `There are ${N_ICONS} icons, so rare or very specific symbols may be missing, and there are no brand logos at all.`],
-    ['Packages are not live yet', 'The npm packages and CDN are launching soon. Today you copy or download icons from each icon page.'],
+    ['Fewer framework packages', 'There are packages for React, Vue, Svelte, Angular, Solid and a web component, but none for Preact, Astro or React Native, which Lucide covers.'],
     ['Newer, with a smaller community', 'Fewer tutorials and examples exist so far, and it is not built into shadcn/ui, so you add it yourself.'],
     ['Creative styles need room', 'The creative styles, from gloss to pixel and luxe, are made for 32px or larger. For tiny interface icons, stick to line, solid or duo.'],
   ],
 })}
-${p('Who does each one suit? Lucide is a great fit for developers building a busy app, especially on shadcn/ui, who need lots of icons in one plain style and want to install a package today. with icons suits founders, marketers, teachers and small teams who want the same icons in their app, on their landing page and in their pitch deck, without mixing sets or touching code.')}
+${p('Who does each one suit? Lucide is a great fit for developers building a busy app, especially on shadcn/ui, who need lots of icons in one plain style and want a package for almost any framework. with icons suits founders, marketers, teachers and small teams who want the same icons in their app, on their landing page and in their pitch deck, without mixing sets or touching code.')}
 
 ${h2('So, should you use Lucide or with icons?')}
 ${verdict({
   a: ['with icons', ['You want filled, tinted and illustrated versions of the same icons.', 'You want a slightly lighter 1.75px line.', 'You make slides and docs, not just apps.', 'You want an MCP server so AI assistants find real icon names.']],
-  b: ['Lucide', ['You only need one clean outline style.', 'You need more than 1,600 icons to choose from.', 'You use shadcn/ui and want zero setup.', 'You need React Native or Astro packages today.']],
+  b: ['Lucide', ['You only need one clean outline style.', 'You need more than 1,600 icons to choose from.', 'You use shadcn/ui and want zero setup.', 'You need React Native or Astro packages.']],
 })}
 ${p(`Lucide is a brilliant default, and there is no shame in keeping it. with icons is for the moment you want more than outlines: a solid active state, a warm duo dashboard, a glossy hero, a pixel-art game screen, a sketchy slide, all from one family. Curious how other popular sets compare? Read ${L.post('with-icons-vs-heroicons', 'with icons vs Heroicons')} or our explainer on ${L.post('icon-styles-explained', 'icon styles')}.`)}
 ${cta('See the bell in every style', `Search ${N_ICONS} icons, flip between ${N_STYLES} styles, and copy SVG code or a PNG in one click. Free and MIT licensed.`, ['bell', 'home', 'search', 'settings', 'palette', 'sparkles'])}

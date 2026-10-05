@@ -1309,9 +1309,9 @@
             '<label class="wied-flat" data-flat-wrap hidden><input type="checkbox" data-flat><span class="wied-flat-ui" aria-hidden="true"></span><span>Flat colours <small>write the hex values into the SVG instead of CSS variables</small></span></label>' +
             '<div class="wied-codebox"><pre><code data-code-out></code></pre><button type="button" class="wied-copy" data-do="copy-code">' + G.copy + '<span>Copy</span></button></div>' +
             '<details class="wied-setup" data-setup><summary><span>First time? Show setup</span><small>one line for your page’s &lt;head&gt;</small></summary>' +
-              '<p class="wied-setup-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code> <span class="wied-soon">launching soon</span></p>' +
+              '<p class="wied-setup-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p>' +
               '<div data-setup-lines></div>' +
-              '<p class="wied-setup-more">Prefer not to add anything? <button type="button" class="wied-link" data-do="copy-svg">Copy the SVG code</button> instead: it works anywhere, today.</p>' +
+              '<p class="wied-setup-more">Prefer not to add anything? <button type="button" class="wied-link" data-do="copy-svg">Copy the SVG code</button> instead: it works anywhere, no setup.</p>' +
             '</details>' +
           '</div>' + (opts.codeFold ? '</details>' : '') +
         '</div>' +

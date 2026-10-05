@@ -96,7 +96,7 @@
         { "@type": "Question", "name": "Can the icons move?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you want them to. An optional motion add-on gives every icon a gentle loop, a hover reaction, and smooth swaps from one icon to another (play to pause, menu to close). It is imported separately, so icons stay tiny when you do not need animation, and it respects the reduce-motion setting." } },
         { "@type": "Question", "name": "Can I change the colour and size?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pick any colour before you download, or recolour an SVG later in your design tool. SVGs stay perfectly sharp at every size; PNGs come in sizes from 64 to 1024 pixels." } },
         { "@type": "Question", "name": "Do I need to credit with icons?", "acceptedAnswer": { "@type": "Answer", "text": "No credit is required. The MIT License only asks that the license text travels with the source code if you redistribute the icon files themselves as a library." } },
-        { "@type": "Question", "name": "I'm a developer. Is there an npm package?", "acceptedAnswer": { "@type": "Answer", "text": "Packages for React, Vue, Svelte, Angular, Solid, web components and CSS icon classes are launching soon under @withicons. Until then you can copy SVG code or download files directly." } },
+        { "@type": "Question", "name": "I'm a developer. Is there an npm package?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Packages for React, Vue, Svelte, Angular, Solid, web components and CSS icon classes are on npm under @withicons, for example npm i @withicons/react. Prefer no install? Copy SVG code or download files from any icon page." } },
         { "@type": "Question", "name": "Can AI assistants use these icons?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. with icons ships an MCP server and an agent skill so coding assistants like Claude can search the library and insert the right icon, plus llms.txt for any AI that reads the web." } }
       ]
     }
@@ -330,7 +330,7 @@
                 <li><b>Want them to move?</b> Add the motion stylesheet once, then a class on any icon.</li>
                 <li><b>Accessible by default.</b> If someone turns on &ldquo;reduce motion&rdquo;, everything stays still.</li>
               </ol>
-              <p class="mo-soon"><span class="tag creative">Launching soon</span> <code>@withicons/motion</code> on npm and the CDN.</p>
+              <p class="mo-npm"><span class="tag creative">On npm</span> <span><code>npm i @withicons/motion</code>, or link it from the CDN. <a href="developers.html#motion">Motion docs</a></span></p>
             </div>
             <div class="mo-code-box" data-mo-code></div>
           </article>
@@ -443,7 +443,7 @@
             <button role="tab" type="button" aria-selected="false" data-dev="wc">Web component</button>
           </div>
           <div class="dev-code" data-dev-code></div>
-          <p class="dev-soon"><span class="tag creative">Launching soon</span> npm packages are on their way. Copy SVGs or download files today.</p>
+          <p class="dev-npm"><span class="tag creative">On npm</span> <span><code>npm i @withicons/react</code>, vue, svelte, angular, solid, web or classes. <a href="https://www.npmjs.com/org/withicons">All packages</a></span></p>
           <a class="btn btn-sun" href="developers.html">Developer docs <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12 H19 M13 6 L19 12 L13 18"/></svg></a>
         </article>
         <article class="ai-card" id="ai" data-reveal style="--d:1">
@@ -539,7 +539,7 @@
           <details class="qa" data-reveal><summary>Can the icons move?</summary><p>Yes, if you want them to. The optional motion add-on gives every icon a gentle loop, a hover reaction, and smooth swaps from one icon to another (play to pause, menu to close). It is imported separately, so icons stay tiny when you don't need animation, and it respects your device's reduce-motion setting. <a href="#motion">Try it above.</a></p></details>
           <details class="qa" data-reveal><summary>Can I change the colour and size?</summary><p>Yes. Pick any colour before you download, or recolour an SVG later in your design tool. SVGs stay perfectly sharp at every size; PNGs come in sizes from 64 to 1024 pixels.</p></details>
           <details class="qa" data-reveal><summary>Do I need to credit with icons?</summary><p>No credit is required. The MIT License only asks that the license text travels with the source code if you redistribute the icon files themselves as a library. <a href="license.html">Read the license in plain English.</a></p></details>
-          <details class="qa" data-reveal><summary>I'm a developer. Is there an npm package?</summary><p>Packages for React, Vue, Svelte, Angular, Solid, web components and CSS icon classes are launching soon under <code>@withicons</code>. Until then you can copy SVG code or download files directly. See <a href="developers.html">Developers</a>.</p></details>
+          <details class="qa" data-reveal><summary>I'm a developer. Is there an npm package?</summary><p>Yes. Packages for React, Vue, Svelte, Angular, Solid, web components and CSS icon classes are on npm under <code>@withicons</code>, for example <code>npm i @withicons/react</code>. Prefer no install? Copy SVG code or download files from any icon page. See <a href="developers.html">Developers</a>.</p></details>
           <details class="qa" data-reveal><summary>Can AI assistants use these icons?</summary><p>Yes. with icons ships an MCP server and an agent skill so coding assistants like Claude can search the library and insert the right icon, plus <a href="llms.txt">llms.txt</a> for any AI that reads the web. See <a href="ai.html">For AI</a>.</p></details>
         </div>
       </div>

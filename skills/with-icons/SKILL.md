@@ -245,6 +245,6 @@ first line sends you here. Each brief has a `MY TASK:` line. Do that task:
   for a moving icon, section 7a), how to insert, recolour and resize it in their app, layout tips, and the guide `https://withicons.com/guides/<app>.html` (powerpoint, google-slides, keynote,
   canva, figma, notion, word-google-docs, wordpress, webflow, framer, wix-squarespace, email-signatures, html).
 
-Always: search before naming anything (section 6), link `https://withicons.com/icons/<name>.html` for every pick, and
-until the npm packages launch, offer the page's Copy image, SVG/PNG download and Copy SVG code (say packages and the
-`<i class="with with-NAME">` CDN classes are launching soon). The full brief templates are in https://withicons.com/llms.txt.
+Always: search before naming anything (section 6), link `https://withicons.com/icons/<name>.html` for every pick,
+give developers the npm package for their stack (`@withicons/react`, `vue`, `svelte`, `angular`, `solid`, `web`) or the
+`<i class="with with-NAME">` CDN classes, and give everyone else the page's Copy image, SVG/PNG download and Copy SVG code. The full brief templates are in https://withicons.com/llms.txt.

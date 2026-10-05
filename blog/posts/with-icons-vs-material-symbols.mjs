@@ -108,7 +108,7 @@ ${steps([
 
 ${h2('Which is easier on a website or in an app?')}
 ${p('With Material Symbols, the classic setup is to load the font from Google and write the icon’s name inside a tag, for example <code>&lt;span class="material-symbols-outlined"&gt;favorite&lt;/span&gt;</code> for the heart in the face-off above. It is quick, but most React and Vue packages for Material Symbols come from the community, since Google mainly ships the font and the files.')}
-${p('with icons offers plain SVG code on every icon page today, a simple class pattern (<code>&lt;i class="with with-heart"&gt;</code>), a <code>&lt;with-icon&gt;</code> web component and components for React, Vue, Svelte, Angular and Solid. To be upfront: the npm packages and CDN are launching soon. Until then, copy the SVG from any icon page and paste it into your code.')}
+${p('with icons offers plain SVG code on every icon page today, a simple class pattern (<code>&lt;i class="with with-heart"&gt;</code>), a <code>&lt;with-icon&gt;</code> web component and components for React, Vue, Svelte, Angular and Solid. The packages are on npm (for example <code>npm i @withicons/react</code>) and the jsDelivr CDN, or you can copy the SVG from any icon page and paste it into your code.')}
 
 ${h2('Which works better with AI assistants?')}
 ${p(`If you ask an AI assistant to build a page, it needs to know real icon names. Google offers a Design MCP server (a plug-in that gives AI tools access to Google’s design resources), and its icon support defaults to Material Symbols. with icons has its own ${L.page('ai.html', 'MCP server, llms.txt and agent skill')}, so assistants can search the actual ${N_ICONS} icons instead of guessing. Our post on ${L.post('ai-assistants-and-icons', 'AI assistants and icons')} goes deeper.`)}
@@ -141,7 +141,7 @@ ${prosCons('with icons', {
   ],
   cons: [
     ['A smaller catalogue', `With ${N_ICONS} icons, we cover everyday needs well, but rare or very technical ideas may be missing. We also have no brand logos.`],
-    ['Packages are not live yet', 'The npm packages and CDN for developers are launching soon. Today you copy SVG code or download files from each icon page.'],
+    ['Web only', 'There is no Android, iOS or Flutter package and no icon font, so native apps need the SVG files instead.'],
     ['Newer, with a smaller community', 'Material Symbols has years of tutorials and community add-ons. with icons is younger, so there are fewer answers online for now.'],
     ['Creative styles need room', `The ${N_CREATIVE} creative styles, like gloss, glass and pixel, are made for 32px and larger. For tiny interface icons, stick to line, solid or duo.`],
   ],

@@ -54,7 +54,7 @@ ${table(['', 'with icons', 'Phosphor'], [
   ['Number of icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, yes('About 1,500 icons × 6 weights, over 9,000 SVGs')],
   ['Variations', yes(`${N_STYLES} styles: line, solid and duo, plus ${N_CREATIVE} creative ones like glass, pixel, retro and luxe`), yes('6 weights: Thin, Light, Regular, Bold, Fill, Duotone')],
   ['Expressive, illustration-like looks', yes(`${N_CREATIVE} creative styles, from gloss and engrave to kawaii and plush`), no('No')],
-  ['Web packages', meh('React, Vue, Svelte, Angular, Solid, web component (launching soon)'), yes('React, Vue, web components, web font')],
+  ['Web packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, web components, web font')],
   ['Mobile and desktop', no('Not yet'), yes('Flutter and SwiftUI (official), React Native (community)')],
   ['Design tools', meh('SVG and PNG from every icon page'), yes('Figma, Sketch and Penpot plugins')],
   ['Help for AI assistants', yes('MCP server, llms.txt, agent skill'), no('None official found')],
@@ -115,7 +115,7 @@ ${doDont('<p>Use one style per slide, and keep a single style for the whole deck
 
 ${h2('Can I use Phosphor or with icons in mobile apps?')}
 ${p('This is a clear Phosphor win. It has official packages for Flutter and SwiftUI, and community ports for React Native and many more, so you can use the same icons in a web app, an iPhone app and a Flutter app.')}
-${p(`with icons focuses on the web for now: React, Vue, Svelte, Angular and Solid components, a web component and plain CSS classes, with the npm packages launching soon. You can still use our SVGs in any app, but you will not find a ready-made Flutter or Swift package today. See the ${L.page('developers.html', 'developer page')} for what is coming.`)}
+${p(`with icons focuses on the web: React, Vue, Svelte, Angular and Solid components, a web component and plain CSS classes, all on npm and the jsDelivr CDN. You can still use our SVGs in any app, but you will not find a ready-made Flutter or Swift package. See the ${L.page('developers.html', 'developer page')} for the install lines.`)}
 
 ${h2('What are the pros and cons of Phosphor and with icons?')}
 ${p('Both sets are good, honest projects, and neither is perfect. Here is what each does well and what to keep in mind, in plain words.')}
@@ -145,7 +145,7 @@ ${prosCons('with icons', {
   ],
   cons: [
     ['A smaller catalogue', `There are ${N_ICONS} icons and no brand logos. If you need rare or niche icons, Phosphor will have more of them.`],
-    ['Packages are on the way', 'The npm packages and CDN are launching soon, and there are no Flutter or SwiftUI packages. Today you copy or download from the icon pages.'],
+    ['Web only', 'The packages cover React, Vue, Svelte, Angular, Solid and a web component, but there are no Flutter or SwiftUI packages. For native apps you use the SVG files.'],
     ['Newer, with a smaller community', 'with icons is a young project, so you will find fewer tutorials, ports and forum answers than for Phosphor.'],
     ['Creative styles need room', 'Gloss, glass, engrave and the other creative styles are made for 32px and larger. For tiny interface icons, stick to line, solid or duo.'],
   ],

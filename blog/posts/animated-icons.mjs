@@ -134,7 +134,7 @@ ${ul([
   '<strong>It respects reduce motion:</strong> on websites, when someone has turned on reduce motion, the icons politely stay still.',
 ])}
 ${styleRow('bell', `The ${L.icon('bell')} icon in the styles this page can show. Hover one: it swings from its hook the same way in each style, because motion moves the drawing, not one style.`, { motion: 'hover' })}
-${p(`For developers, motion ships as a separate, optional package, <code>@withicons/motion</code>: pure CSS classes for loop, hover and once, plus a small script for scroll-into-view and “turn into” switches. Like our other npm packages it is <strong>launching soon</strong>. Today you can copy the code or download files from any icon page, and the ${L.page('developers.html#motion-presets', 'developer page')} shows every preset.`)}
+${p(`For developers, motion ships as a separate, optional package, <code>@withicons/motion</code>: pure CSS classes for loop, hover and once, plus a small script for scroll-into-view and “turn into” switches. Install it with <code>npm i @withicons/motion</code>, or copy the code and download files from any icon page. The ${L.page('developers.html#motion-presets', 'developer page')} shows every preset.`)}
 
 ${h2('What are Live icons?')}
 ${p(`Live icons are a different kind of “alive”: instead of moving, they show content you set. There are 50 of them: a calendar with your date, a clock with your time, a bell with your notification count, a battery at your level, a tag with your short text, the weather with your temperature. You type the value, pick one of the ${N_STYLES} styles and download it for slides, docs or your website.`)}

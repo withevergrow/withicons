@@ -549,7 +549,6 @@
 .wied-setup-hint { margin-top: 0; font-size: 14px; line-height: 1.5; color: rgba(247, 243, 236, .78) }
 .wied-setup-hint b { color: #fff }
 .wied-setup-hint code, .wied-setup-more code { font: 500 .9em var(--font-mono) }
-.wied-soon { padding: 3px 8px; border-radius: 999px; background: var(--sun, #FFD23F); color: #111318; font: 700 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .05em; vertical-align: 1px }
 .wied-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; margin: 0 0 8px; padding: 9px 12px; border-radius: 10px; border: 1px dashed rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .05); color: #F7F3EC; text-align: left; cursor: pointer }
 .wied-line code { min-width: 0; font: 500 12px/1.4 var(--font-mono); overflow-wrap: anywhere; font-variant-ligatures: none }
 .wied-line svg { flex: none; width: 15px; height: 15px; opacity: .7 }

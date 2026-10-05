@@ -87,7 +87,7 @@ ${table(['Example', 'Type', 'What to do'], [
   ['Feature icons above headings on a slide', 'Decorative', 'Mark as decorative (PowerPoint and Word have a checkbox for it).'],
   ['A row of stars showing a 4 out of 5 rating', 'Meaningful', 'Add text such as “Rated 4 out of 5”.'],
 ], 'Decorative or meaningful? Five everyday examples')}
-${p(`In PowerPoint, Word and Excel, open the Alt Text pane and tick <strong>Mark as decorative</strong> for icons that only decorate. The ${L.icons('with icons')} code components (launching soon on npm) hide icons from screen readers by default, and you add a title only when an icon stands alone and carries meaning.`)}
+${p(`In PowerPoint, Word and Excel, open the Alt Text pane and tick <strong>Mark as decorative</strong> for icons that only decorate. The ${L.icons('with icons')} code components (on npm as <code>@withicons/react</code>, <code>@withicons/vue</code> and more) hide icons from screen readers by default, and you add a title only when an icon stands alone and carries meaning.`)}
 
 ${h2('How much contrast do icons need?')}
 ${p('Contrast is how much an icon stands out from its background, written as a ratio. 1:1 means no difference at all (white on white). 21:1 is the maximum (black on white). The W3C success criterion <strong>1.4.11 Non-text Contrast</strong> (level AA) says that graphics people need to understand, including meaningful icons, should reach at least <strong>3:1</strong> against the colours next to them.')}

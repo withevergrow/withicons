@@ -1474,7 +1474,7 @@
       add('4. The matching guide: ' + AI_SITE + '/guides/' + (app || 'APP') + '.html' + (app ? '' : ' (powerpoint, google-slides, keynote, canva, figma, notion, word-google-docs)'))
     }
     add('', true)
-    add('If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ' + AI_SITE + '/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code today. Launching soon: <i class="with with-NAME with-STYLE"></i> with the CDN stylesheet (line needs no style class) and npm packages (@withicons/react, vue, svelte, angular, solid).', true)
+    add('If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ' + AI_SITE + '/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).', true)
     add('')
     add('Keep it short and practical.')
     return P

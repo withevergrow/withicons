@@ -21,7 +21,7 @@ export default {
     '<strong>Pick Heroicons</strong> if you build with Tailwind CSS and want icons hand-tuned for very small sizes: 316 icons in Outline, Solid, Mini (20px) and Micro (16px).',
     `<strong>Pick with icons</strong> if you want more icons and more looks from one family: ${N_ICONS} icons in ${N_STYLES} styles (line, solid, duo and ${N_CREATIVE} creative styles such as glass, pixel and retro), ${N_SVGS} SVGs in all.`,
     'Both are free and MIT licensed, with no visible credit needed. Both work with Tailwind classes, because both use the current text colour.',
-    'Heroicons has official React and Vue packages. with icons will add Svelte, Angular, Solid, a web component and CSS classes (packages launching soon).',
+    'Heroicons has official React and Vue packages. with icons has those plus Svelte, Angular, Solid, a web component and CSS classes, all on npm.',
     `with icons has more icons (${N_ICONS} vs 316), but the bigger difference is extra sizes (Heroicons: 4 versions of each icon) versus extra styles (with icons: ${N_STYLES}).`,
   ],
   faq: [
@@ -29,7 +29,7 @@ export default {
     { q: 'How many icons does Heroicons have?', a: 'The Heroicons website lists 316 icons. Each one comes in Outline and Solid at 24px, plus Mini (20px) and Micro (16px) versions designed for small spaces.' },
     { q: 'What is the best Heroicons alternative?', a: `It depends on what you miss. If you like Heroicons’ calm look but want more icons and more styles, with icons gives you ${N_ICONS} icons in ${N_STYLES} matching styles (line, solid, duo and ${N_CREATIVE} creative styles) under the same MIT licence. If you need many more icons in one outline style, Lucide is bigger, with over 1,600.` },
     { q: 'Who makes Heroicons?', a: 'Heroicons is made by the makers of Tailwind CSS (Tailwind Labs). The website credits Steve Schoger and the Tailwind team for the design.' },
-    { q: 'Does with icons work with Tailwind CSS?', a: 'Yes. with icons use currentColor and accept a className, so Tailwind classes such as size-6 and text-rose-500 work the same way they do with Heroicons. The npm packages are launching soon; you can copy SVG code from any icon page today.' },
+    { q: 'Does with icons work with Tailwind CSS?', a: 'Yes. with icons use currentColor and accept a className, so Tailwind classes such as size-6 and text-rose-500 work the same way they do with Heroicons. Install <code>@withicons/react</code> or <code>@withicons/vue</code> from npm, or copy SVG code from any icon page.' },
     { q: 'Heroicons vs Lucide: which is better?', a: 'Heroicons is smaller (316 icons) and offers solid versions plus hand-tuned 20px and 16px sizes. Lucide is larger (over 1,600 icons) with a single adjustable outline style and packages for many more frameworks. Heroicons suits Tailwind projects; Lucide suits projects that need range.' },
   ],
   sources: [
@@ -52,7 +52,7 @@ ${table(['', 'with icons', 'Heroicons'], [
   ['Number of icons', yes(`${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`), '316 icons in 4 versions'],
   ['Styles', yes(`${N_STYLES}: line, solid and duo, plus ${N_CREATIVE} creative styles such as glass, pixel and retro`), meh('2 looks: outline and solid')],
   ['Hand-tuned small sizes', meh('One 24px drawing; use solid when small'), yes('Mini (20px) and Micro (16px)')],
-  ['Framework packages', meh('React, Vue, Svelte, Angular, Solid, web component (launching soon)'), meh('React and Vue')],
+  ['Framework packages', yes('React, Vue, Svelte, Angular, Solid, web component'), meh('React and Vue')],
   ['Plain CSS classes', yes('<code>&lt;i class="with with-home"&gt;</code>'), no('No, SVG or components only')],
   ['Ready for slides and docs', yes('Copy image, PNG and SVG in any colour'), meh('Copy SVG or JSX from the site')],
   ['Help for AI assistants', yes('MCP server, llms.txt, agent skill'), no('None official found')],
@@ -99,7 +99,7 @@ ${p(`So on price and licence, this is a tie. Neither set has a paid tier, and ne
 ${h2('Do Heroicons and with icons work with Tailwind CSS?')}
 ${p('Yes, both do. Heroicons and Tailwind CSS are made by the same team, so they fit together naturally. You size an icon with a class like <code>size-6</code> and colour it with <code>text-sky-500</code>, because the icon simply uses the current text colour.')}
 ${p('with icons works the same way. Our icons use the current text colour too and accept a <code>className</code>, so your Tailwind classes keep working if you switch. Heroicons components end in <code>Icon</code> (like <code>HomeIcon</code>); with icons exports both <code>Home</code> and <code>HomeIcon</code>, which makes the swap gentle.')}
-${callout('note', `The with icons npm packages are launching soon. Today you can copy SVG code from any icon page. Our ${L.alt('heroicons', 'Heroicons alternative page')} has a full name map (you saw a few pairs above: <code>cog-6-tooth</code> becomes settings, <code>arrow-down-tray</code> becomes download, and <code>x-mark</code> becomes close) and a converter for your imports.`)}
+${callout('note', `The with icons npm packages are live (<code>npm i @withicons/react</code> or <code>@withicons/vue</code>), and you can also copy SVG code from any icon page. Our ${L.alt('heroicons', 'Heroicons alternative page')} has a full name map (you saw a few pairs above: <code>cog-6-tooth</code> becomes settings, <code>arrow-down-tray</code> becomes download, and <code>x-mark</code> becomes close) and a converter for your imports.`)}
 
 ${h2('Which is better for landing pages and slides?')}
 ${p('Heroicons is built for interfaces, and it stays there on purpose. Its outline and solid looks are perfect for a navigation bar, a little less exciting on a big hero section or a pitch deck.')}
@@ -134,13 +134,12 @@ ${prosCons('with icons', {
     [`${N_STYLES} styles of every icon`, `Line, solid and duo for interfaces, plus ${N_CREATIVE} creative styles such as gloss, glass, sketch, pixel and retro, all from one drawing, so your app, homepage and slides match.`],
     ['More icons to choose from', `${N_ICONS} icons, about ${N_ICONS - HERO_COUNT} more than Heroicons, each with 20 to 30 hand-picked colour palettes for the multi-colour styles.`],
     ['Easy for non-developers', `Every icon page has Copy image, a PNG download in any colour and size, and an SVG download, plus guides for ${L.guide('google-slides', 'Google Slides')}, ${L.guide('canva', 'Canva')} and more.`],
-    ['More ways to use it in code', 'Besides React and Vue, there are Svelte, Angular and Solid components, a web component and plain CSS classes (launching soon).'],
+    ['More ways to use it in code', 'Besides React and Vue, there are Svelte, Angular and Solid components, a web component and plain CSS classes.'],
     ['Built for AI helpers', 'An MCP server, an llms.txt file and an agent skill help AI assistants pick real icon names.'],
   ],
   cons: [
     ['No hand-tuned tiny sizes', 'Each icon is drawn once at 24px. At 16px the solid style holds up well, but it is not a custom redraw like Heroicons Micro.'],
     ['Still a focused catalogue, no logos', `${N_ICONS} icons cover everyday needs, but big sets like Lucide have far more, and like Heroicons there are no brand logos.`],
-    ['Packages are not live yet', 'The npm packages and CDN are launching soon. Today you copy or download icons from each icon page.'],
     ['Newer, with a smaller community', 'Fewer tutorials and examples exist so far. The creative styles are also meant for 32px or larger, not tiny interface icons.'],
   ],
 })}

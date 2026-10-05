@@ -111,7 +111,7 @@ ${iconGrid(['home', 'sun', 'music-note', 'compass', 'lightbulb', 'palette'], 'ba
 
 ${h2('Trend 10: Adjustable stroke weights')}
 ${p('Icons are starting to behave more like fonts. Google’s Material Symbols are variable fonts with adjustable fill, weight (from 100, thin, to 700, bold), grade and optical size. Apple’s SF Symbols come in nine weights and three scales, designed to sit next to Apple’s system fonts. The idea is simple: your icons should match the weight of your text.')}
-${p(`with icons line icons use a 1.75px stroke by default, a middle ground that sits well next to most body text. In the developer components (launching on npm soon) you can change the stroke width for the line, duo, blueprint and sketch styles, and there is a setting to keep the line thickness the same when icons are scaled up or down.`)}
+${p(`with icons line icons use a 1.75px stroke by default, a middle ground that sits well next to most body text. In the developer components (on npm, such as <code>@withicons/react</code>) you can change the stroke width for the line, duo, blueprint and sketch styles, and there is a setting to keep the line thickness the same when icons are scaled up or down.`)}
 ${sizeRamp(['home', 'search', 'bell', 'settings'], [16, 20, 24, 32, 48], 'line', 'Line icons from 16px to 48px. At small sizes simple shapes matter most; at large sizes weight and detail start to show.')}
 
 ${h2('Trend 11: One drawing, many styles')}

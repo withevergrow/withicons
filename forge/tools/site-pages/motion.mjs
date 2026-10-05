@@ -8,7 +8,6 @@ import { specVars, decoOf, GROUND_PRESETS } from '../../../packages/motion/src/m
 const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
 const HAS = new Set(ICON_NAMES)
 const has = n => HAS.has(n)
-const soon = '<span class="pg-soon">' + I('sparkles', 'solid', 14) + ' launching on npm soon</span>'
 
 const gz = rel => siteExists(rel) ? (zlib.gzipSync(fs.readFileSync(SITE + '/' + rel)).length / 1024).toFixed(1) + ' KB' : null
 function sizeNote() {
@@ -275,7 +274,7 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
   ]
   const vars = [['--wm-dur', 'seconds per cycle', '<code>--wm-dur: 2s</code>'], ['--wm-k', 'intensity, 0.25 to 2', '<code>--wm-k: 1.5</code>'], ['--wm-ox / --wm-oy', 'pivot point, in % of the icon', '<code>--wm-ox: 50%; --wm-oy: 15%</code>'], ['--wm-dx / --wm-dy', 'direction for nudge, pass, rise…', '<code>--wm-dx: 0.7; --wm-dy: -0.7</code>'], ['--wm-steps', 'stepped motion (clock hands)', '<code>--wm-steps: 12</code>'], ['--wm-deco', 'how decorations move (none keeps them still)', '<code>--wm-deco: none</code>']]
   return `<section id="motion" class="dv-sec dv-motion" aria-labelledby="motion-h">
-      <h2 id="motion-h">Animations <code class="dv-pkgname">@withicons/motion</code> ${soon}</h2>
+      <h2 id="motion-h">Animations <code class="dv-pkgname">@withicons/motion</code></h2>
       <div class="mo-intro">
         <div class="mo-intro-copy">
           <p class="mo-lede">Make any icon move: a bell that rings, a heart that beats, a play button that flips into pause.</p>

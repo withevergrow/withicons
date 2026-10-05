@@ -30,7 +30,7 @@
 .ip-section { padding: clamp(48px, 7vw, 96px) 0 0; }
 .ip-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 32px; margin-bottom: clamp(20px, 3vw, 32px); }
 .ip-head > p { margin: 0; max-width: 48ch; color: var(--muted); font-size: 16px; line-height: 1.5 }
-.ip-head a, .ip-apps a, .ip-note a, .ip-soon a, .hub-when a { color: var(--ink); font-weight: 650; text-decoration-color: var(--sc); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.ip-head a, .ip-apps a, .ip-note a, .ip-devlead a, .hub-when a { color: var(--ink); font-weight: 650; text-decoration-color: var(--sc); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .ip-head .arr, .ip-app .arr { width: 16px; height: 16px; vertical-align: -3px; transition: transform .3s var(--ip-spring) }
 .ip-head a:hover .arr, .ip-app a:hover .arr { transform: translateX(3px) }
 
@@ -119,9 +119,9 @@
 .ip-dev-plus::after { transform: rotate(90deg) }
 .ip-dev[open] .ip-dev-plus { transform: rotate(135deg) }
 .ip-dev > :not(summary) { margin-left: clamp(22px, 3vw, 32px); margin-right: clamp(22px, 3vw, 32px) }
-.ip-soon { margin-top: 0; font-size: 15px; line-height: 1.5; color: var(--on-dark-2, rgba(247, 243, 236, .75)) }
-.ip-soon b { color: var(--on-dark) }
-.ip-soon code, .ip-panel > p code, .ip-note code { font: 500 .88em var(--font-mono); background: rgba(255, 255, 255, .1); padding: .1em .4em; border-radius: 6px }
+.ip-devlead { margin-top: 0; font-size: 15px; line-height: 1.5; color: var(--on-dark-2, rgba(247, 243, 236, .75)) }
+.ip-devlead b { color: var(--on-dark) }
+.ip-devlead code, .ip-panel > p code, .ip-note code { font: 500 .88em var(--font-mono); background: rgba(255, 255, 255, .1); padding: .1em .4em; border-radius: 6px }
 .ip-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 4px; border-radius: 14px; background: rgba(255, 255, 255, .06) }
 .ip-tabs::-webkit-scrollbar { display: none }
 .ip-tabs button { flex: none; height: 38px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--on-dark-2, rgba(247, 243, 236, .7)); font: 600 14px/1 var(--font-sans); cursor: pointer }
@@ -132,7 +132,6 @@
 .ip-panel > p { max-width: 70ch; margin: 0 0 12px; font-size: 15px; line-height: 1.55; color: var(--on-dark-2, rgba(247, 243, 236, .8)) }
 .ip-install { display: flex; flex-wrap: wrap; align-items: center; gap: 10px }
 .ip-install code { font-size: 14px !important; padding: .35em .7em !important }
-.ip-soon-tag { padding: 4px 10px; border-radius: 999px; background: var(--sun); color: #111318; font: 700 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .05em }
 .ip-code { border-radius: 16px; background: #07080B; border: 1px solid rgba(255, 255, 255, .08); overflow: hidden }
 .ip-code-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 16px; border-bottom: 1px solid rgba(255, 255, 255, .08); font: 600 11.5px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: rgba(247, 243, 236, .55) }
 .ip-copy { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 9px; border: 0; background: rgba(255, 255, 255, .1); color: #fff; font: 600 13px/1 var(--font-sans); cursor: pointer; text-transform: none; letter-spacing: 0 }
@@ -345,7 +344,6 @@
 .ip-tag-css code { font: 500 11.5px/1.35 var(--font-mono); overflow-wrap: anywhere }
 .ip-tag-css svg { flex: none; width: 14px; height: 14px; color: var(--muted) }
 .ip-tag-css:hover { border-color: var(--sc) }
-.ip-tag-hint .ip-soon-tag { padding: 3px 7px; font-size: 10px; vertical-align: middle }
 @media (max-width: 640px) {
   .ip-tag-btn { grid-template-columns: minmax(0, 1fr); grid-template-areas: "k" "code" "go"; }
   .ip-tag-go { justify-content: center }
@@ -421,7 +419,7 @@
 }
 /* code is copied verbatim: never let the mono font turn -- or <!-- into ligatures */
 .ip-page code, .ip-page pre, .ip-page kbd { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0 }
-.ip-note code, .ip-soon code, .ip-panel > p code { white-space: nowrap }
+.ip-note code, .ip-devlead code, .ip-panel > p code { white-space: nowrap }
 .ip-q code { overflow-wrap: anywhere }
 /* dark theme: the developer slab must still read as a slab on a near-black page */
 [data-theme="dark"] .ip-dev { background: var(--dark-2); border: 1px solid var(--rule-strong) }

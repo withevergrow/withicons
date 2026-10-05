@@ -20,11 +20,11 @@ export default {
   about: ['Tabler Icons', 'with icons', 'Icon library', 'MIT License'],
   related: ['with-icons-vs-lucide', 'consistent-icons', 'best-free-icon-libraries'],
   tldr: [
-    '<strong>Pick Tabler Icons</strong> if you need breadth: over 6,200 free icons (outline plus filled versions), with ready packages for most frameworks today.',
+    '<strong>Pick Tabler Icons</strong> if you need breadth: over 6,200 free icons (outline plus filled versions), with ready packages for most frameworks.',
     `<strong>Pick with icons</strong> if you want a smaller set that is quick to search and comes in ${N_STYLES} matching styles, from simple line to frosted glass, pixel art and hand-drawn sketch.`,
     'Both are free and MIT licensed, so you can use them commercially without showing a credit.',
     `Tabler offers 2 looks (outline and filled) with a 2px line. with icons offers ${N_STYLES} styles from one drawing, with a slightly lighter 1.75px line.`,
-    'with icons adds one-click Copy image, PNG and SVG downloads for slides and docs. Its npm packages are launching soon; Tabler’s are available now.',
+    'with icons adds one-click Copy image, PNG and SVG downloads for slides and docs. Both have npm packages; Tabler covers a few more frameworks.',
   ],
   faq: [
     { q: 'Is Tabler Icons free for commercial use?', a: 'Yes. Tabler Icons is released under the MIT licence, so you can use the icons in commercial websites, apps and products without credit. Tabler also sells optional paid bundles, but the icons themselves are free.' },
@@ -43,7 +43,7 @@ export default {
     { title: 'with icons license (MIT)', url: 'https://withicons.com/license.html' },
   ],
   body: () => `
-${p(`<span class="lede">Tabler Icons or ${L.icons('with icons')}: which should you use? Choose Tabler Icons if you need breadth: over 6,200 free MIT icons, with packages for most frameworks that you can install today. Choose with icons if you want ${N_ICONS} everyday icons in ${N_STYLES} matching styles that work in your app, your website and your slides. Both are free and neither needs a credit.</span>`)}
+${p(`<span class="lede">Tabler Icons or ${L.icons('with icons')}: which should you use? Choose Tabler Icons if you need breadth: over 6,200 free MIT icons, with packages for most frameworks. Choose with icons if you want ${N_ICONS} everyday icons in ${N_STYLES} matching styles that work in your app, your website and your slides. Both are free and neither needs a credit.</span>`)}
 ${p(`Think of two hardware shops. One is a giant warehouse with every screw ever made. The other is a smaller shop where the owner has picked the ${N_ICONS} things people actually buy, and stocks each one in ${N_STYLES} finishes. Tabler is the warehouse, with icons is the smaller shop, and the right one depends on whether you need <em>more icons</em> or <em>more looks</em>.`)}
 
 ${h2('How do Tabler Icons and with icons compare?')}
@@ -53,7 +53,7 @@ ${table(['', 'with icons', 'Tabler Icons'], [
   ['Icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, 'Over 6,200 (5,166 outline, 1,054 filled twins)'],
   ['Styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus ${N_CREATIVE} creative styles like glass, pixel, retro and luxe`), meh('2: outline and filled (for some icons)')],
   ['Grid and line', '24 × 24 grid, 1.75px line', '24 × 24 grid, 2px line'],
-  ['Developer packages', meh('React, Vue, Svelte, Angular, Solid, web component: on npm soon'), yes('React, Vue, Svelte, Angular, Preact, Solid, Astro and more, today')],
+  ['Developer packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, Svelte, Angular, Preact, Solid, Astro and more')],
   ['Slides and docs', yes('Copy image, PNG and SVG in any colour'), yes('PNG and PDF packages, Figma plugin')],
   ['Help for AI assistants', yes('llms.txt, agent skill, MCP server'), yes('Docs llms.txt and an agent skill')],
 ], 'with icons and Tabler Icons, side by side (checked October 2026)')}
@@ -88,8 +88,8 @@ ${sizeRamp(['home', 'bell', 'settings', 'chart-line'], [16, 20, 24, 32, 48], 'li
 ${p('Neither is better. It is a matter of taste and of what sits next to the icons. If you plan to mix the two sets, the components let you set the with icons stroke to 2 so the lines match more closely.')}
 
 ${h2('Is Tabler Icons better for developers today?')}
-${p('Right now, honestly, yes. Tabler has mature packages for React, Vue, Svelte, Angular, Preact, Solid and Astro, plus a web font, an SVG sprite, and PNG and PDF versions. You can install it in a minute.')}
-${p(`with icons has the same idea: components for React, Vue, Svelte, Angular and Solid, a <code>&lt;with-icon&gt;</code> web component and simple classes like <code>&lt;i class="with with-home"&gt;</code>, which draws the same ${L.icon('home')} icon you saw in the face-off. But the npm packages and CDN are <strong>launching soon</strong>. Until then, every icon page lets you copy the SVG code or download the file, which works in any project.`)}
+${p('For framework coverage, yes. Tabler has mature packages for React, Vue, Svelte, Angular, Preact, Solid and Astro, plus a web font, an SVG sprite, and PNG and PDF versions. You can install it in a minute.')}
+${p(`with icons has the same idea: components for React, Vue, Svelte, Angular and Solid, a <code>&lt;with-icon&gt;</code> web component and simple classes like <code>&lt;i class="with with-home"&gt;</code>, which draws the same ${L.icon('home')} icon you saw in the face-off. They are on npm and the jsDelivr CDN too, just without Preact or Astro packages or a web font. And every icon page lets you copy the SVG code or download the file, which works in any project.`)}
 ${callout('note', `Developers switching later can use the name map on our ${L.alt('tabler', 'Tabler alternative page')}. Many names are the same (all twelve in the face-off above match); a few differ, like <code>x</code> to close and <code>photo</code> to image.`)}
 
 ${h2('Which is easier for slides and documents?')}
@@ -124,17 +124,17 @@ ${prosCons('with icons', {
   ],
   cons: [
     ['A much smaller catalogue', `There are ${N_ICONS} icons and no brand logos, and Tabler has more than ${word(TABLER_X)} times as many. For rare or very specific icons, Tabler is the better place to look.`],
-    ['Packages are on the way', 'The npm packages and CDN are launching soon. Today you copy or download each icon from its page.'],
+    ['Fewer framework packages', 'There are packages for React, Vue, Svelte, Angular, Solid and a web component, but none for Preact or Astro, and no web font.'],
     ['Newer, with a smaller community', 'with icons is a young project, so there are fewer tutorials and community answers than for Tabler.'],
     ['Creative styles need room', 'Gloss, glass, engrave and the other creative styles are made for 32px and larger. For tiny interface icons, stick to line, solid or duo.'],
   ],
 })}
-${p('Who suits which? Tabler Icons suits developers building big apps and admin dashboards who need rare icons and want to install a package today. with icons suits people who mostly need the everyday icons and want them to look good everywhere: in the app, on the website and in the slides.')}
+${p('Who suits which? Tabler Icons suits developers building big apps and admin dashboards who need rare icons and want a package for almost any framework. with icons suits people who mostly need the everyday icons and want them to look good everywhere: in the app, on the website and in the slides.')}
 ${doDont('<p>Pick the set that matches your main need: breadth (Tabler) or looks (with icons). Then use it everywhere.</p>', '<p>Grab one icon from each set because the names were handy. Different line weights side by side look slightly off.</p>')}
 
 ${verdict({
   a: ['with icons', ['You want a curated set that is quick to search.', `You want ${N_STYLES} matching styles for app, website and slides.`, 'You make slides and docs and want Copy image in any colour.', 'You want an MCP server so AI assistants pick real icon names.']],
-  b: ['Tabler Icons', ['You need over 6,000 icons, including rare ones.', 'You want ready-made npm packages today.', 'You prefer a sturdy 2px outline with filled variants.']],
+  b: ['Tabler Icons', ['You need over 6,000 icons, including rare ones.', 'You need Preact or Astro packages, or a web font.', 'You prefer a sturdy 2px outline with filled variants.']],
 })}
 
 ${h2('So, Tabler Icons or with icons?')}
