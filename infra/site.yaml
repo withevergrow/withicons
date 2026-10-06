@@ -16,7 +16,7 @@ Metadata:
       - Label: { default: CloudFront }
         Parameters: [PriceClass, ContentSecurityPolicy, HstsPreload, EnableAccessLogs, EnableWaf, WafRateLimitPer5Min]
       - Label: { default: GitHub Actions }
-        Parameters: [GitHubOrg, GitHubRepo, GitHubOidcProviderArn]
+        Parameters: [GitHubOrg, GitHubRepo, GitHubOwnerId, GitHubRepoId, GitHubOidcProviderArn]
 
 Parameters:
   DomainName:
@@ -110,6 +110,19 @@ Parameters:
   GitHubRepo:
     Type: String
     Default: withicons
+  GitHubOwnerId:
+    Type: String
+    Default: '274390516'
+    AllowedPattern: '^[0-9]+$'
+    Description: >-
+      Numeric id of the GitHub owner (https://api.github.com/repos/<org>/<repo> -> owner.id). GitHub's OIDC subject
+      can carry immutable ids (repo:org@ownerId/repo@repoId:...), which survive renames and stop a re-created
+      repository with the same name from assuming the deploy role.
+  GitHubRepoId:
+    Type: String
+    Default: '1400616361'
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric id of the GitHub repository (same API -> id).
   GitHubOidcProviderArn:
     Type: String
     Default: ''
@@ -889,6 +902,9 @@ Resources:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
               StringLike:
                 token.actions.githubusercontent.com:sub:
+                  # GitHub now sends the id form (repo:org@ownerId/repo@repoId:...); the name form is kept for older tokens
+                  - !Sub 'repo:${GitHubOrg}@${GitHubOwnerId}/${GitHubRepo}@${GitHubRepoId}:environment:production'
+                  - !Sub 'repo:${GitHubOrg}@${GitHubOwnerId}/${GitHubRepo}@${GitHubRepoId}:ref:refs/heads/main'
                   - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/main'
                   - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:environment:production'
       Policies:
