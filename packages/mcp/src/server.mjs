@@ -60,8 +60,9 @@ export function createServer(opts = {}) {
 
   server.registerTool('get_icon', {
     title: 'Get icon code',
-    description: `Get one icon as paste-ready code. Accepts a canonical name or an alias ("delete" -> trash). Formats: ${FORMATS.join(', ')}. The result also says whether the icon has a tuned animation (motion) for animate_icon. ` +
-      'warnings lists colours that change nothing in the chosen style (and the roles it does use). colors.mainRole is the role that paints the icon body (set it for a brand colour). Multi-colour styles report how many palettes the icon has; the palette ids are included for a palette style with no format, or with include_palettes: true (list_palettes shows their colours).',
+    description: `Get one icon as paste-ready code or SVG. name takes a canonical name or an alias ("delete" -> trash). format: ${FORMATS.join(', ')} (default svg). ` +
+      'Colours: palette (an id from list_palettes) and/or colors (roles ink, c1-c4, tint, accent, shadow, shine, edge -> hex; merged over the palette); color replaces currentColor in svg / data-uri; flat bakes the CSS variables into the svg (for <img>, Figma, slides). ' +
+      'The result has colors.mainRole (the role that paints the body: set it for a brand colour), warnings (colours that change nothing in this style), motion (whether animate_icon has a tuned animation) and, with include_palettes (default: a palette style with no format), the icon palette ids.',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias, e.g. "home", "arrow-right", "delete"'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
@@ -148,44 +149,45 @@ export function createServer(opts = {}) {
   const colorShape = z.object(Object.fromEntries(PALETTE_ROLES.map(r => [r, z.string().max(40).optional()]))).catchall(z.string().max(40))
   server.registerTool('export_icon', {
     title: 'Export icon files',
-    description: 'Make icon FILES (not code): for slides, documents, design tools, apps and social posts. ' +
-      'Animated (for PowerPoint, Keynote, Google Slides, email, chat): gif (plays everywhere; set background to the slide colour), apng (smooth see-through edges, web), ' +
-      'animated-svg (one small file, browsers), pptx-animated (a ready 16:9 slide with the moving GIF), lottie / dotlottie (apps, After Effects, Canva). ' +
-      'Still: svg, svg-flat (colours baked in), pdf, eps, png, png-set, ico, favicon-pack, android, ios, pptx, pptx-sheet (every style), docx, and code (jsx, tsx, vue, svelte, react-native, angular, html, css, data-uri, base64). ' +
+    description: 'Make icon FILES (not code) for slides, documents, design tools, apps and social posts. ' +
+      'Animated: gif (plays everywhere; set background to the slide colour), apng, animated-svg, pptx-animated (a ready 16:9 slide), lottie / dotlottie; motion picks the movement. ' +
+      'Still: svg, svg-flat (colours baked in), pdf, eps, png, png-set, ico, favicon-pack, android, ios, pptx, pptx-sheet (every style), docx, and code (jsx, tsx, vue, svelte, html, css, data-uri ...). ' +
       (remote
-        ? 'This remote server makes the vector, code and Lottie formats inline; for png-based and animated formats it returns the exact `npx withicons export …` command to run in a terminal, plus the icon page. '
-        : 'Files are saved to out_dir when given (absolute or relative to the working directory) and returned inline when small (images as image content, text as text). ') +
-      'Colours are baked into raster and animated files: choose palette / colors / color here, they cannot be changed afterwards. With several icons, notes say once per colour which icons use it ("colors.accent applies to: phone-call (14 others do not use it)"); warnings only when no icon does. ' +
-      'Several icons in one call: names: ["home", "settings"] (same options for all), or names: { "receipt": "orders", "heart": "favourites" } to name each file. A palette id is per icon: icons without it borrow the colours of the first icon that has it (see warnings), or strict_palette: true fails first. ' +
-      'File names default to <name>-<style>[-<variant>].<ext> (svg: home-line-themable.svg, svg-flat: home-line.svg, png: home-line-512.png, gif: bell-line-ring.gif); filename sets them: a template with {name} {style} {format} {variant} {default}, or an exact name for one file (the extension is added).',
+        ? 'This remote server makes the vector, code and Lottie formats; for png-based and animated formats it returns the exact `npx withicons export …` command to run. ' +
+          'Large exports come in pages: when the result has next ({ cursor, remaining }), call again with the same arguments plus cursor; plain svg-flat files then come back as urls[] to the prebuilt @withicons/static SVGs on jsDelivr. '
+        : 'Files are saved to out_dir when given and returned inline when small. ') +
+      'Colours are baked in: set palette / colors / color here. Several icons: names: ["home", "settings"], or a map { "receipt": "orders" } to name each file; icons without the palette borrow it from the first that has it (strict_palette: true fails instead). ' +
+      'File names default to <name>-<style>[-<variant>].<ext>; filename takes a template ({name} {style} {format} {variant} {default}) or an exact name.',
     inputSchema: {
-      name: z.string().min(1).optional().describe('Icon name or alias (or use names for several)'),
+      name: z.string().min(1).optional().describe('Icon name or alias'),
       names: z.union([z.array(z.string().min(1)).max(50), z.record(z.string().min(1), z.string().min(1).max(120))]).optional()
-        .describe('Several icons, same options: ["home", "settings"]; or a map icon -> file base name, { "receipt": "orders", "heart": "favourites" } -> orders.svg, favourites.svg (in a filename template {name} is the mapped name; clashes are refused)'),
+        .describe('List, or map icon -> file base name'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
-      format: z.string().max(200).optional().describe(`One format or a comma list (default svg): ${EXPORT_FORMATS.join(', ')}`),
-      filename: z.string().max(120).optional().describe('File name: a template ("{name}", "{name}-{style}", "{name}-{format}"; placeholders {name} {style} {format} {variant} {default}) or an exact name for a single file. The extension is added. Default <name>-<style>[-<variant>].<ext>'),
-      all_styles: z.boolean().optional().describe('One file per style (every style)'),
-      size: z.number().int().min(8).max(2048).optional().describe('Pixels (png 512, png-set base 24, svg 24, pdf / eps 512, lottie 512, gif / apng / animated-svg 256, pptx-animated 480); animated formats go up to 2048 (larger is an error, never a silent resize)'),
-      background: z.string().max(40).optional().describe('Solid background (hex), e.g. the slide colour "#ffffff"; default transparent'),
-      matte: z.string().max(40).optional().describe('gif only: keep it transparent but blend the soft edges with this colour (the colour it will sit on)'),
-      palette: z.string().max(60).optional().describe('Colour palette id (list_palettes)'),
-      strict_palette: z.boolean().optional().describe('With names: fail (nothing made) when an icon lacks the palette, instead of borrowing its colours from one that has it'),
-      colors: colorShape.optional().describe('Colour roles -> "#hex" (ink, c1-c4, tint, accent, shadow, shine, edge)'),
-      color: z.string().max(40).optional().describe('The ink colour (currentColor)'),
-      motion: z.string().max(40).optional().describe('Animated formats: loop (default: the icon\'s tuned motion), hover / once (plays once, then rests), swap (turns into another icon), none, or a preset (spin, ring, beat, bounce, float, pop, ...)'),
-      to: z.string().max(60).optional().describe('motion swap: the icon to turn into, "name" or "name@style" (default: the icon\'s suggestion)'),
-      effect: z.enum(mo.effects).optional().describe('motion swap: transition (fade, flip, scale, morph, ...)'),
-      hold: z.number().min(0).max(10).optional().describe('motion swap: seconds to rest on each icon between turns (same as the CLI --hold)'),
+      format: z.string().max(200).optional().describe('One format or a comma list (see the tool description)'),
+      filename: z.string().max(120).optional().describe('Template or exact name; extension added'),
+      all_styles: z.boolean().optional().describe('One file per style'),
+      size: z.number().int().min(8).max(2048).optional().describe('Pixels (animated formats up to 2048)'),
+      background: z.string().max(40).optional().describe('Background colour (default transparent)'),
+      matte: z.string().max(40).optional().describe('gif: edge colour to blend with, kept transparent'),
+      palette: z.string().max(60).optional().describe('Palette id (list_palettes)'),
+      strict_palette: z.boolean().optional().describe('Fail when an icon lacks the palette'),
+      colors: colorShape.optional().describe('Role -> colour (ink, c1-c4, tint, accent, shadow, shine, edge)'),
+      color: z.string().max(40).optional().describe('Ink colour (currentColor)'),
+      motion: z.string().max(40).optional().describe('loop (default), hover, once, swap, none or a preset'),
+      to: z.string().max(60).optional().describe('swap target, "name" or "name@style"'),
+      effect: z.enum(mo.effects).optional().describe('swap transition'),
+      hold: z.number().min(0).max(10).optional().describe('swap: seconds to rest on each icon'),
       duration: z.number().min(0.2).max(10).optional().describe('Seconds per motion cycle'),
-      fps: z.number().int().min(1).max(60).optional().describe('gif / apng frames per second (gif 25, apng 30)'),
-      seconds: z.number().min(0.1).max(30).optional().describe('gif / apng length of one loop (default: the motion cycle)'),
-      loop: z.number().int().min(0).max(100).optional().describe('gif / apng: 0 = forever (default), n = play n times'),
-      padding: z.number().min(0).max(0.6).optional().describe('Empty space around the icon, as a share of its size (a minimum: animated formats grow it to fit the motion)'),
-      stroke_width: z.number().min(0.25).max(4).optional().describe('Stroke width of outline styles (line default 1.75), e.g. thinner for print or large exports; other styles ignore it'),
-      ...(remote ? {} : {
-        out_dir: z.string().max(500).optional().describe('Folder to save the files in (created if needed). Without it, files come back inline only.'),
-        inline: z.boolean().optional().describe('Also return the files inline (default: only when out_dir is not given)'),
+      fps: z.number().int().min(1).max(60).optional().describe('gif / apng frames per second'),
+      seconds: z.number().min(0.1).max(30).optional().describe('gif / apng loop length in seconds'),
+      loop: z.number().int().min(0).max(100).optional().describe('gif / apng plays: 0 = forever'),
+      padding: z.number().min(0).max(0.6).optional().describe('Space around the icon, share of its size'),
+      stroke_width: z.number().min(0.25).max(4).optional().describe('Outline styles: stroke width (default 1.75)'),
+      ...(remote ? {
+        cursor: z.number().int().min(0).optional().describe('next.cursor of the previous page (same arguments)'),
+      } : {
+        out_dir: z.string().max(500).optional().describe('Folder to save the files in'),
+        inline: z.boolean().optional().describe('Also return files inline'),
       }),
     },
     annotations: { title: 'Export icon files', readOnlyHint: remote, destructiveHint: false, idempotentHint: true, openWorldHint: false },

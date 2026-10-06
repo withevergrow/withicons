@@ -19,9 +19,13 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
 </template>
 ```
 
-- Default import path = **line** style. Every other style is a subpath: `@withicons/vue/solid`, `@withicons/vue/duo`, ...
+- **One rule:** the root is the **line** style, every other style is a subpath (`@withicons/vue/solid`, `@withicons/vue/duo`, ...).
+  Import the icons you use by name from the style you want. That is all.
+- Fast everywhere: each style is a single module, so the root or a style subpath loads that one style (never all 20),
+  quickly in Node, SSR, Jest and Vitest, and bundlers keep only the icons you import. No bundler config needed
+  (no `optimizePackageImports`, no deep imports).
 - Every icon is exported twice: `Home` and `HomeIcon`. Names are the PascalCase of the kebab-case icon name (`arrow-right` -> `ArrowRight`).
-- Deep imports (one file per icon): `@withicons/vue/icons/home`, `@withicons/vue/solid/icons/home`.
+- Deep imports keep working: `@withicons/vue/icons/home`, `@withicons/vue/solid/icons/home`.
 
 ## Props
 
@@ -37,28 +41,28 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
-| `line` | `@withicons/vue` | universal | A precise 1.75px outline with round caps and joins. The default for any interface. |
-| `solid` | `@withicons/vue/solid` | universal | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
-| `duo` | `@withicons/vue/duo` | universal | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
-| `gloss` | `@withicons/vue/gloss` | creative | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
-| `engrave` | `@withicons/vue/engrave` | creative | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
-| `blueprint` | `@withicons/vue/blueprint` | creative | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
-| `sketch` | `@withicons/vue/sketch` | creative | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
-| `glass` | `@withicons/vue/glass` | creative | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
-| `kawaii` | `@withicons/vue/kawaii` | creative | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
-| `sticker` | `@withicons/vue/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
-| `pixel` | `@withicons/vue/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
-| `retro` | `@withicons/vue/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
-| `luxe` | `@withicons/vue/luxe` | creative | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
-| `bauhaus` | `@withicons/vue/bauhaus` | creative | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
-| `skeuo` | `@withicons/vue/skeuo` | creative | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
-| `anime` | `@withicons/vue/anime` | creative | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
-| `gothic` | `@withicons/vue/gothic` | creative | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
-| `pastel` | `@withicons/vue/pastel` | creative | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
-| `coquette` | `@withicons/vue/coquette` | creative | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
-| `plush` | `@withicons/vue/plush` | creative | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
+| `line` | `@withicons/vue` | Everyday | A precise 1.75px outline with round caps and joins. The default for any interface. |
+| `solid` | `@withicons/vue/solid` | Everyday | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
+| `duo` | `@withicons/vue/duo` | Everyday | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
+| `gloss` | `@withicons/vue/gloss` | Crafted | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
+| `engrave` | `@withicons/vue/engrave` | Crafted | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
+| `blueprint` | `@withicons/vue/blueprint` | Crafted | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
+| `sketch` | `@withicons/vue/sketch` | Crafted | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
+| `glass` | `@withicons/vue/glass` | Playful | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
+| `kawaii` | `@withicons/vue/kawaii` | Playful | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
+| `sticker` | `@withicons/vue/sticker` | Playful | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
+| `pixel` | `@withicons/vue/pixel` | Playful | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
+| `retro` | `@withicons/vue/retro` | Playful | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
+| `luxe` | `@withicons/vue/luxe` | Studio | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
+| `bauhaus` | `@withicons/vue/bauhaus` | Studio | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
+| `skeuo` | `@withicons/vue/skeuo` | Studio | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
+| `anime` | `@withicons/vue/anime` | Storybook | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
+| `gothic` | `@withicons/vue/gothic` | Storybook | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
+| `pastel` | `@withicons/vue/pastel` | Storybook | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
+| `coquette` | `@withicons/vue/coquette` | Storybook | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `plush` | `@withicons/vue/plush` | Storybook | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
 
 Duo's tint can be recoloured with the CSS variable `--with-duo`.
 
@@ -192,12 +196,23 @@ import { Icon } from '@withicons/vue'
 </script>
 
 <template>
-  <Icon name="home" variant="solid" :size="20" />
+  <Icon name="home" :size="20" />                     <!-- line: renders at once -->
+  <Icon name="home" variant="solid" :size="20" />     <!-- solid: loaded on first use -->
 </template>
 ```
 
 `name` accepts canonical names and unambiguous aliases (`bin` -> `trash`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** `Icon` references every icon in every style (500 x 20). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+
+**How `Icon` loads styles.** The root `Icon` renders the **line** style at once (a dynamic name needs every line icon,
+so using `Icon` brings that style). Any other `variant` is loaded the first time it renders: one dynamic import per
+style (one chunk in a bundle, one file in Node), shared by every `Icon` of that style.
+Until a style has loaded, its `Icon` is an async component (`defineAsyncComponent`) that renders nothing, then the
+icon; Vue's `renderToString` and Nuxt SSR wait for it, so server HTML is complete. With `require()` (CommonJS) styles
+load synchronously.
+
+To have other styles ready up front, `await preloadStyles('solid', 'duo')` (no argument = every style). Or import
+`Icon` from `@withicons/vue/icon`: it imports every icon of every style (500 x 20, heavy) and always renders synchronously.
+`Icon` is tree-shaken away when unused; prefer named imports wherever the name is static.
 
 ## Custom icons
 

@@ -3,7 +3,8 @@
 // Same API, exports map, generic <Icon>, alias resolution and style fallback as react/vue.
 //
 //   dist/IconBase.svelte                 the one shared renderer: icon node + props -> <svg>
-//   dist/Icon.svelte                     generic <Icon name="home" variant="solid" />
+//   dist/Icon.svelte                     generic <Icon name="home" variant="solid" /> (other styles load on first use)
+//   dist/IconAll.svelte                  the same with every style imported up front (subpath /icon)
 //   dist/<style>/icons/<name>.svelte     tiny per-icon wrapper (inline node data)
 //   dist/<style>/index.js                every icon of that style as Name + NameIcon
 //   dist/index.js                        default style + Icon + IconBase + iconNames/styleNames
@@ -138,49 +139,91 @@ export default async function emit(ctx) {
     W(`${s}/nodes.js`, `${header}export const nodes = ${J(nodes)}\nexport const fallback = ${J(fallback)}\n`)
   }
 
-  // generic <Icon>: canonical names, PascalCase and unambiguous aliases, like every other package
+  // generic <Icon>: canonical names, PascalCase and unambiguous aliases, like every other package.
+  // find.js holds the default style; any other style's nodes load on first use (one dynamic import per style).
   W('find.js', `${header}import { iconNames, styleNames, aliases } from './meta.js'
-${styleNames.map(s => `import { nodes as n_${s}, fallback as f_${s} } from './${s}/nodes.js'`).join('\n')}
+import { nodes as n_${D}, fallback as f_${D} } from './${D}/nodes.js'
 const DEFAULT_STYLE = ${J(D)}
-const SETS = { ${styleNames.map(s => `${J(s)}: [n_${s}, f_${s}]`).join(', ')} }
+const LOAD = { ${styleNames.map(s => s === D ? `${J(s)}: null` : `${J(s)}: () => import('./${s}/nodes.js')`).join(', ')} }
+const SETS = { ${J(D)}: [n_${D}, f_${D}] }
+const PENDING = {}
 const ICON_SET = new Set(iconNames)
 ${LOOKUP_SRC}
 const WITH_WARNED = {}
 function withWarn(msg) { if (!WITH_WARNED[msg] && typeof console !== 'undefined') { WITH_WARNED[msg] = 1; console.warn(msg) } }
-/** name/alias + variant -> { name, variant, iconNode } or null (warns once) */
-export function findIcon(name, variant) {
+/**
+ * name/alias + variant -> { name, variant, iconNode }, null (unknown name, warns once), or the style name (a string)
+ * when that style is not loaded yet: load it with loadStyle(). sets: an explicit { style: [nodes, fallback] } table.
+ */
+export function findIcon(name, variant, sets) {
   let v = variant || DEFAULT_STYLE
-  if (!Object.prototype.hasOwnProperty.call(SETS, v)) {
+  if (!Object.prototype.hasOwnProperty.call(LOAD, v)) {
     withWarn('with icons: unknown variant "' + v + '". Use one of: ' + styleNames.join(', ') + '. Falling back to "' + DEFAULT_STYLE + '".')
     v = DEFAULT_STYLE
   }
   let canonical
   try { canonical = withLookup(name, k => ICON_SET.has(k), iconNames, aliases) } catch (e) { withWarn(e.message); return null }
-  const set = SETS[v], iconNode = set[0][canonical]
+  const set = (sets || SETS)[v]
+  if (!set) return v
+  const iconNode = set[0][canonical]
   return iconNode ? { name: canonical, variant: set[1][canonical] || v, iconNode } : null
 }
+/** Load one style's icon data for <Icon>. */
+export function loadStyle(v) {
+  if (SETS[v]) return Promise.resolve()
+  if (!Object.prototype.hasOwnProperty.call(LOAD, v)) return Promise.reject(new Error('with icons: unknown style "' + v + '". Use one of: ' + styleNames.join(', ') + '.'))
+  return PENDING[v] || (PENDING[v] = LOAD[v]().then(m => { SETS[v] = [m.nodes, m.fallback] }, e => { delete PENDING[v]; throw e }))
+}
+/** Load styles for <Icon> ahead of time (no argument = every style), e.g. before a server render. */
+export function preloadStyles() {
+  const list = arguments.length ? [].concat.apply([], arguments) : styleNames
+  return Promise.all(list.map(loadStyle)).then(() => {})
+}
+`)
+  // every style up front, for the /icon entry (synchronous everywhere, weighs every icon)
+  W('find-all.js', `${header}${styleNames.map(s => `import { nodes as n_${s}, fallback as f_${s} } from './${s}/nodes.js'`).join('\n')}
+export const ALL = { ${styleNames.map(s => `${J(s)}: [n_${s}, f_${s}]`).join(', ')} }
 `)
   W('Icon.svelte', `<script>
-  // Generic icon: <Icon name="home" variant="solid" />. Imports every icon of every style —
-  // prefer named imports (Home, Lock, ...) wherever the name is static.
+  // Generic icon: <Icon name="home" variant="solid" />. The ${D} style renders at once; any other style
+  // loads on first use (or up front with preloadStyles()). Prefer named imports (Home, Lock, ...)
+  // wherever the name is static.
   import IconBase from './IconBase.svelte';
-  import { findIcon } from './find.js';
+  import { findIcon, loadStyle } from './find.js';
   export let name;
   export let variant = undefined;
-  $: found = findIcon(name, variant);
+  let loaded = 0;
+  $: found = findIcon(name, variant, null, loaded);
+  $: if (typeof found === 'string') loadStyle(found).then(() => { loaded += 1 }, e => console.warn(e && e.message));
+</script>
+
+{#if found && typeof found === 'object'}<IconBase {...$$restProps} name={found.name} variant={found.variant} iconNode={found.iconNode}><slot /></IconBase>{/if}
+`)
+  W('IconAll.svelte', `<script>
+  // Generic icon with every style imported up front (@withicons/svelte/icon): renders synchronously in
+  // every style, also on the server, and weighs every icon. The root Icon loads styles on demand instead.
+  import IconBase from './IconBase.svelte';
+  import { findIcon } from './find.js';
+  import { ALL } from './find-all.js';
+  export let name;
+  export let variant = undefined;
+  $: found = findIcon(name, variant, ALL);
 </script>
 
 {#if found}<IconBase {...$$restProps} name={found.name} variant={found.variant} iconNode={found.iconNode}><slot /></IconBase>{/if}
 `)
-  W('icon.d.ts', `import type { WithGenericIcon, WithIconComponent, IconProps } from './types.js'\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * Bundle cost: imports every icon in every style (${ctx.icons.length} x ${styleNames.length}); prefer named imports.\n */\ndeclare const Icon: WithIconComponent<IconProps, WithGenericIcon>\ntype Icon = WithGenericIcon\nexport default Icon\nexport { Icon }\n`)
+  const preloadDts = `/** Load styles for <Icon> ahead of time (no argument = every style). Await it before a server render so icons in\n * other styles than ${D} are in the HTML. */\nexport declare function preloadStyles(...styles: StyleName[]): Promise<void>\n`
+  W('icon.d.ts', `import type { WithGenericIcon, WithIconComponent, IconProps, StyleName } from './types.js'\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * This entry imports every icon of every style (${ctx.icons.length} x ${styleNames.length}) and renders synchronously; the root Icon loads\n * each style on first use instead. Prefer named imports.\n */\ndeclare const Icon: WithIconComponent<IconProps, WithGenericIcon>\ntype Icon = WithGenericIcon\nexport default Icon\nexport { Icon }\n`)
+  W('icon-lazy.d.ts', `import type { WithGenericIcon, WithIconComponent, IconProps, StyleName } from './types.js'\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * The ${D} style renders at once; any other style loads on first use (one chunk per style) or with preloadStyles().\n * Prefer named imports wherever the name is static.\n */\nexport declare const Icon: WithIconComponent<IconProps, WithGenericIcon>\nexport type Icon = WithGenericIcon\n${preloadDts}`)
 
   W('index.js', `${header}export * from './${D}/index.js'
 export { default as Icon } from './Icon.svelte'
+export { preloadStyles } from './find.js'
 export { default as IconBase } from './IconBase.svelte'
 export { iconNames, styleNames } from './meta.js'
 `)
   W('index.d.ts', `export * from './${D}/index.js'
-export { Icon } from './icon.js'
+export { Icon, preloadStyles } from './icon-lazy.js'
 import type { WithIconBase, WithIconComponent, IconBaseProps } from './types.js'
 /** Low-level renderer for your own IconNode data: <IconBase iconNode={...} name="my-icon" variant="line" />. */
 export declare const IconBase: WithIconComponent<IconBaseProps, WithIconBase>
@@ -194,7 +237,7 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconCompon
   const e = (types, file) => ({ types, svelte: file, default: file })
   const ex = { '.': e('./dist/index.d.ts', './dist/index.js') }
   for (const s of styleNames) ex['./' + s] = e(`./dist/${s}/index.d.ts`, `./dist/${s}/index.js`)
-  ex['./icon'] = e('./dist/icon.d.ts', './dist/Icon.svelte')
+  ex['./icon'] = e('./dist/icon.d.ts', './dist/IconAll.svelte')
   ex['./icons/*.svelte'] = e(`./dist/${D}/icons/*.svelte.d.ts`, `./dist/${D}/icons/*.svelte`)
   ex['./icons/*'] = e(`./dist/${D}/icons/*.svelte.d.ts`, `./dist/${D}/icons/*.svelte`)
   for (const s of styleNames) {
@@ -214,6 +257,7 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconCompon
     jsdelivr: './dist/index.js', unpkg: './dist/index.js',
     exports: ex, typesVersions: { '*': tv },
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
     peerDependencies: { svelte: '^4.0.0 || ^5.0.0' },
   }
   writePkg(ctx, 'svelte', pkg, svelteReadme(ctx))
@@ -235,10 +279,16 @@ function svelteReadme(ctx) {
   <HomeSolid size={32} color="#e11d48" title="Home" />
 </nav>`,
     generic: `<script>
-  import { Icon } from '@withicons/svelte';   // or: import Icon from '@withicons/svelte/icon'
+  import { Icon } from '@withicons/svelte';
 </script>
 
-<Icon name="home" variant="solid" size={20} />`,
+<Icon name="home" size={20} />                    <!-- line: renders at once -->
+<Icon name="home" variant="solid" size={20} />    <!-- solid: loaded on first use -->`,
+    speed: `- Each icon is a small \`.svelte\` file and the package has \`sideEffects: false\`: production builds keep only the icons you
+  import. For the fastest dev server, see the deep imports under "Svelte notes".`,
+    lazy: `Until a style has loaded, its \`Icon\` renders nothing, then the icon. On the server it renders only styles already
+loaded, so call \`await preloadStyles('solid')\` before rendering (e.g. in a SvelteKit \`load\` or \`hooks.server\`) when
+server HTML must contain them.`,
   })
   const custom = /## Custom icons[\s\S]*?(?=\n\nMIT licensed|\nMIT licensed|$)/
   const svelteCustom = `## Custom icons

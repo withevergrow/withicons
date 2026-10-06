@@ -1,7 +1,7 @@
 # with icons: live icons (`@withicons/dynamic`)
 
 Live icons draw a value you set inside the icon (a date, a time, a count, a level, a short label). Each one is a
-generator that builds a normal skeleton, so it renders in every style. Quick start is in SKILL.md section 7b; this file
+generator that builds a normal skeleton, so it renders in every style. Quick start is in SKILL.md section 8; this file
 has every live icon with its params, bundler setup, bundle sizes and recipes.
 
 ## Pick the right one
@@ -21,6 +21,35 @@ Text params are short on purpose (2 to 4 characters) so they stay legible at 24 
 | bundler, element | `import '@withicons/dynamic/element'` |
 | React / Vue | `import { LiveIcon } from '@withicons/dynamic/react'` (or `/vue`) |
 | pure function (Node, SSR, canvas) | `import { render, now } from '@withicons/dynamic'`; `render(name, params, style, { size, label })` returns an SVG string |
+
+```js
+import { render, list, paramsOf } from '@withicons/dynamic'
+list()                                   // the live icon names
+paramsOf('calendar-date')                // { day: { type: 'int', min: 1, max: 31, … }, month: { type: 'enum', … } }
+render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // -> SVG string
+```
+```html
+<with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii" label="17 March"></with-live-icon>
+<with-live-icon name="calendar-date" today label="Today"></with-live-icon>   <!-- the viewer's date, kept current -->
+```
+```jsx
+import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dynamic/vue' (same props; :day="17" in templates)
+<LiveIcon name="calendar-date" day={17} month="MAR" variant="glass" size={48} label="17 March" />
+<LiveIcon name="bell-count" count={unread} label={`${unread} unread`} />
+```
+
+- Params are attributes in kebab-case on the element and props on `LiveIcon`; the other props (`className`, `onClick`,
+  `aria-*`) go on the `<svg>`.
+- **label** is the accessible name (`label` attribute, `label` prop, or the `label` render option); it adds `role="img"`.
+  The element and `LiveIcon` name themselves from their values when no label is given ("Calendar date, March 17",
+  `describe(name, params)`); `label=""` makes one decorative. `render()` stays `aria-hidden` unless you pass a label.
+  A param that is itself called `label` (`keycap`, `map-pin-number`) is set with `param-label="A"` on the element or
+  `params={{ label: 'A' }}` on `LiveIcon`.
+- **today** (attribute or prop) fills the date and time params (day, month, weekday, time) from the viewer's clock.
+  `<with-live-icon today>` redraws at each minute boundary while it is on the page; `LiveIcon` reads the clock each
+  time it renders (no timer of its own). On `LiveIcon` an explicit param prop overrides `today`; on the element,
+  whichever was set last wins. `render()` never reads the clock: pass `now()` (`render('calendar-date', now())`) and
+  re-render when you want it to move.
 
 **Vite**: add `worker: { format: 'es' }` to `vite.config`. The runtime starts its render worker with
 `new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })`; Vite's default worker format (`iife`) cannot

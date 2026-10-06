@@ -1,42 +1,55 @@
 # with icons: the 20 styles
 
-All styles render the same 500 skeletons, so `home` looks like the same house in every style. The seven mono styles
-are single-colour `currentColor` unless you opt into their CSS variables; the five palette styles, the three studio
-styles and the five storybook styles ship a default palette whose colours are CSS variables, while their ink still follows `currentColor`.
+All styles render the same 500 skeletons, so `home` looks like the same house in every style. They come in five groups:
+Everyday (line, solid, duo), Crafted (gloss, engrave, blueprint, sketch), Playful (glass, kawaii, sticker, pixel, retro),
+Studio (luxe, bauhaus, skeuo) and Storybook (anime, gothic, pastel, coquette, plush). The seven Everyday and Crafted styles
+are single-colour `currentColor` unless you opt into their CSS variables; the five Playful styles, the three Studio
+styles and the five Storybook styles ship a default palette whose colours are CSS variables, while their ink still follows `currentColor`.
 
-| style | kind | look | use it for | min size | `strokeWidth` |
+| style | group | look | use it for | min size | `strokeWidth` |
 |---|---|---|---|---|---|
-| `line` | universal | precise 1.75px outline, round caps/joins | default UI: nav, buttons, inputs, tables, menus | 14px | yes |
-| `solid` | universal | filled mass with crisp knockouts | active/selected states, dense or tiny UI, mobile tab bars | 12px | no |
-| `duo` | universal | line over a soft tonal fill (`--with-duo`) | friendly dashboards, cards, onboarding, settings pages | 18px | yes |
-| `gloss` | creative | inflated, glossy, pillowy, carved highlights | hero art, app-store style feature grids, playful brands | 32px | no |
-| `engrave` | creative | banknote intaglio hatching | finance, legal, premium, editorial, certificates | 40px | no |
-| `blueprint` | creative | drafting lines, centre lines, nodes (`--with-accent`) | docs, developer tools, engineering, "how it works" | 32px | yes |
-| `sketch` | creative | loose double marker strokes, light hachure | whiteboards, education, empty states, informal products | 32px | yes |
-| `glass` | palette | layered frosted glass panes with a bright rim (glassmorphism) | modern SaaS heroes, fintech, OS-like UIs, dark gradient backgrounds | 32px | no |
-| `kawaii` | palette | chubby pastel shapes, soft thick outline, a tiny blushing face | cozy and wellness apps, journaling, kids, stickers, Gen Z audiences | 32px | yes |
-| `sticker` | palette | Y2K die-cut sticker: thick white border, candy colours, sparkles | social, creator tools, scrapbooks, fandom, playful marketing | 32px | no |
-| `pixel` | palette | hand-tuned 16-bit pixel art: one-pixel outline, shaded body, highlight pixel | games, retro tech, playful dev tools, achievements | 16px (sharpest at 16, 32, 48) | no |
-| `retro` | palette | 70s sunset stripes, chunky outline, hard offset shadow | vintage brands, music, food, posters, merch | 32px | no |
-| `luxe` | studio | premium multi-layered 3D: sapphire enamel slab, extruded wall, polished gold, jewel, lit chamfers | heroes, pricing tiers, fintech, luxury brands, launch moments | 48px | no |
-| `bauhaus` | studio | pure geometry (circles, squares, bars) in red, yellow and blue, overprinted where inks meet | posters, portfolios, galleries, design studios, editorial | 32px | no |
-| `skeuo` | studio | skeuomorphic objects in real materials (paper, leather, metal, brass, glass), bevels, soft shadows | app icons, music/photo/note apps, tactile dashboards, nostalgic UIs | 48px | no |
-| `anime` | storybook | anime cel shading: tapered plum ink lines, flat cel colour (sky blue, sakura pink, warm gold), one hard shadow, specular shine, sparkles | games, streaming, fan sites, creators, Gen Z apps | 32px | no |
-| `gothic` | storybook | cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery | fantasy and RPG games, books, music, Halloween, dark-luxe brands | 48px | no |
-| `pastel` | storybook | soft pastel colour fields (lavender, peach, mint, baby blue, butter, blush) with gentle tonal depth | wellness, planners and journals, baby and lifestyle brands, aesthetic home screens | 32px | no |
-| `coquette` | storybook | ballet-pink satin objects tied with ribbon-red bows, pearls, lace and delicate gold | beauty, fashion, weddings, boutiques, feminine brands, social posts | 32px | no |
-| `plush` | storybook | stuffed toys sewn from felt: puffy panels, dark piping, running stitches, buttons, embroidery | kids' apps, learning, toy shops, nurseries, family brands | 48px | no |
+| `line` | Everyday | precise 1.75px outline, round caps/joins | default UI: nav, buttons, inputs, tables, menus | 14px | yes |
+| `solid` | Everyday | filled mass with crisp knockouts | active/selected states, dense or tiny UI, mobile tab bars | 12px | no |
+| `duo` | Everyday | line over a soft tonal fill (`--with-duo`) | friendly dashboards, cards, onboarding, settings pages | 18px | yes |
+| `gloss` | Crafted | inflated, glossy, pillowy, carved highlights | hero art, app-store style feature grids, playful brands | 32px | no |
+| `engrave` | Crafted | banknote intaglio hatching | finance, legal, premium, editorial, certificates | 40px | no |
+| `blueprint` | Crafted | drafting lines, centre lines, nodes (`--with-accent`) | docs, developer tools, engineering, "how it works" | 32px | yes |
+| `sketch` | Crafted | loose double marker strokes, light hachure | whiteboards, education, empty states, informal products | 32px | yes |
+| `glass` | Playful | layered frosted glass panes with a bright rim (glassmorphism) | modern SaaS heroes, fintech, OS-like UIs, dark gradient backgrounds | 32px | no |
+| `kawaii` | Playful | chubby pastel shapes, soft thick outline, a tiny blushing face | cozy and wellness apps, journaling, kids, stickers, Gen Z audiences | 32px | yes |
+| `sticker` | Playful | Y2K die-cut sticker: thick white border, candy colours, sparkles | social, creator tools, scrapbooks, fandom, playful marketing | 32px | no |
+| `pixel` | Playful | hand-tuned 16-bit pixel art: one-pixel outline, shaded body, highlight pixel | games, retro tech, playful dev tools, achievements | 16px (sharpest at 16, 32, 48) | no |
+| `retro` | Playful | 70s sunset stripes, chunky outline, hard offset shadow | vintage brands, music, food, posters, merch | 32px | no |
+| `luxe` | Studio | premium multi-layered 3D: sapphire enamel slab, extruded wall, polished gold, jewel, lit chamfers | heroes, pricing tiers, fintech, luxury brands, launch moments | 48px | no |
+| `bauhaus` | Studio | pure geometry (circles, squares, bars) in red, yellow and blue, overprinted where inks meet | posters, portfolios, galleries, design studios, editorial | 32px | no |
+| `skeuo` | Studio | skeuomorphic objects in real materials (paper, leather, metal, brass, glass), bevels, soft shadows | app icons, music/photo/note apps, tactile dashboards, nostalgic UIs | 48px | no |
+| `anime` | Storybook | anime cel shading: tapered plum ink lines, flat cel colour (sky blue, sakura pink, warm gold), one hard shadow, specular shine, sparkles | games, streaming, fan sites, creators, Gen Z apps | 32px | no |
+| `gothic` | Storybook | cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery | fantasy and RPG games, books, music, Halloween, dark-luxe brands | 48px | no |
+| `pastel` | Storybook | soft pastel colour fields (lavender, peach, mint, baby blue, butter, blush) with gentle tonal depth | wellness, planners and journals, baby and lifestyle brands, aesthetic home screens | 32px | no |
+| `coquette` | Storybook | ballet-pink satin objects tied with ribbon-red bows, pearls, lace and delicate gold | beauty, fashion, weddings, boutiques, feminine brands, social posts | 32px | no |
+| `plush` | Storybook | stuffed toys sewn from felt: puffy panels, dark piping, running stitches, buttons, embroidery | kids' apps, learning, toy shops, nurseries, family brands | 48px | no |
 
 ## Choosing
 
 1. Building application UI? Use **line**. Need emphasis or an "on" state? Use **solid** for that one icon.
 2. Want warmth without leaving the UI family? Use **duo**, and tint it to the brand: `style="--with-duo: #fde68a"`.
-3. Making marketing pages, illustrations, slides or empty states? Pick **one** creative or palette style for the whole page,
+3. Making marketing pages, illustrations, slides or empty states? Pick **one** Crafted, Playful, Studio or Storybook style for the whole page,
    matched to the brand's tone: playful: gloss or sticker; premium: luxe, engrave or glass; technical: blueprint or pixel;
    human: sketch; cute and cozy: kawaii or pastel; nostalgic: retro, pixel or skeuo; bold and designed: bauhaus;
    games and fandom: anime; fantasy and dark: gothic; feminine and romantic: coquette; for children: plush.
-4. Never put creative or palette styles inside dense controls or below their minimum size, because their detail turns to noise.
+4. Never put Crafted, Playful, Studio or Storybook styles inside dense controls or below their minimum size, because their detail turns to noise.
 5. Palette styles are designed to read on white and on near-black (`#0B0B12`). On a strong brand colour, re-theme their variables.
+6. One style per UI region. The only routine mix is line plus solid for inactive and active states.
+
+Every style is a subpath with the same export names: `@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`,
+`/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`, `/luxe`, `/bauhaus`, `/skeuo`, `/anime`,
+`/gothic`, `/pastel`, `/coquette`, `/plush` (same for vue, svelte, solid, angular).
+
+Style words in a search pick the style: "cute heart" -> kawaii, "8-bit star" -> pixel, "frosted bell" -> glass,
+"y2k" -> sticker, "vintage camera" -> retro, "3d rocket" or "luxury gift" -> luxe, "bauhaus clock" or "geometric star"
+-> bauhaus, "skeuomorphic camera" or "realistic lock" -> skeuo, "manga heart" -> anime, "medieval key" or
+"cathedral bell" -> gothic, "soft cloud" -> pastel, "girly star" or "bow heart" -> coquette, "toy rocket" or
+"kids home" -> plush.
 
 ## Colour
 

@@ -3,6 +3,9 @@
 Search understands canonical names, aliases (`bin` finds `trash`), related words / synonyms (`throw away` finds `trash`),
 tags, categories and descriptions, and tolerates typos (`settigns` finds `settings`).
 
+Never guess an import name: look it up first. Common mappings: delete/bin -> `trash`, settings/gear -> `settings`,
+x/dismiss -> `close`, hamburger -> `menu`, house -> `home`, magnifier -> `search`, avatar -> `user-circle`.
+
 ## Search tips
 
 - **One concept per query.** Search `delivery` (truck, motorcycle, package) rather than a whole tagline: every extra
@@ -77,9 +80,9 @@ Tools (confirm with `tools/list`; arguments are documented in each tool's schema
 | `get_icon` | `colors.mainRole` names the role that paints the icon body (set it for a brand colour). Args: `name` (alias ok), `style`, `format` (`svg` default, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`), optional `size` (8-1024), `color` (replaces currentColor; svg / data-uri), `flat` (svg: bake the CSS-variable colours in, for `<img>`, Figma, slides), `palette` (a palette id from `list_palettes`), `colors` (roles `ink c1 c2 c3 c4 tint accent shadow shine edge` or `--with-*` names -> colour, merged over the palette), `include_palettes` (list the icon's palette ids). `warnings` lists colours that change nothing in that style and the roles it uses. No stroke-width argument: set `strokeWidth` / `stroke-width` on the pasted component or element (or use `export_icon`'s `stroke_width`) |
 | `list_palettes` | `name` (alias ok), optional `style` (also lists the exact `--with-*` variables each palette sets in that style), `tag` (pastel, neon, retro, true-to-life …), `limit`. The 20-30 palettes picked for that icon, each with its ten role colours; apply one with `get_icon(…, palette: "<id>")` |
 | `animate_icon` | returns the code plus `alternates` (the icon's other tuned presets) and `lively` (its most energetic presets, for title slides). Args: `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
-| `export_icon` | `name` or `names` (up to 50 icons, same options; or a map to file names, `{ receipt: "orders" }`), `style`, `format` (one or a comma list: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, `gif`, `apng`, `animated-svg`, `pptx-animated`, code formats), optional `size`, `background`, `matte`, `palette`, `colors`, `color`, `motion` (`loop`, `hover`, `once`, `swap`, `none` or a preset), `to`, `effect`, `hold` (swap: seconds to rest on each icon), `duration` (seconds per motion cycle), `fps`, `seconds`, `loop` (0 = forever), `padding` (empty space around the icon, 0-0.6 of its size; a minimum for animated formats), `stroke_width` (outline styles, at most 4), `filename` (template with `{name}` `{style}` `{format}` `{variant}` `{default}`, or an exact name for one file), `strict_palette` (fail when an icon lacks the palette instead of borrowing it), `all_styles`; local server only: `out_dir` (folder to save into) and `inline` (also return the files inline; default only when there is no `out_dir`). Makes files: saved to `out_dir`, small ones also inline (GIF / PNG as image content). The remote server makes vector / code / Lottie files and answers PNG-based and animated formats with the `npx withicons export …` command |
+| `export_icon` | `name` or `names` (up to 50 icons, same options; or a map to file names, `{ receipt: "orders" }`), `style`, `format` (one or a comma list: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, `gif`, `apng`, `animated-svg`, `pptx-animated`, code formats), optional `size`, `background`, `matte`, `palette`, `colors`, `color`, `motion` (`loop`, `hover`, `once`, `swap`, `none` or a preset), `to`, `effect`, `hold` (swap: seconds to rest on each icon), `duration` (seconds per motion cycle), `fps`, `seconds`, `loop` (0 = forever), `padding` (empty space around the icon, 0-0.6 of its size; a minimum for animated formats), `stroke_width` (outline styles, at most 4), `filename` (template with `{name}` `{style}` `{format}` `{variant}` `{default}`, or an exact name for one file), `strict_palette` (fail when an icon lacks the palette instead of borrowing it), `all_styles`; local server only: `out_dir` (folder to save into) and `inline` (also return the files inline; default only when there is no `out_dir`). Makes files: saved to `out_dir`, small ones also inline (GIF / PNG as image content). The remote server makes vector / code / Lottie files and answers PNG-based and animated formats with the `npx withicons export …` command; remote only: `cursor` (the `next.cursor` of the previous page). Large remote exports come in pages (`next: { cursor, remaining }`); plain `svg-flat` files then come back as `urls[]` (jsDelivr `@withicons/static`) |
 | `resolve_icon` | `status`: `resolved` (canonical name, `via` name or alias), `ambiguous` (`candidates`), `synonym` (a word that means an icon but is not its name or alias: `favourites` -> star / heart, `orders` -> receipt; `name`, `candidates`, `note`: use the canonical name), or `unknown` (`nearest`, `didYouMean`, `hint`) |
-| `list_styles` | the 20 styles with descriptions, `minSize` (smallest px it reads well at: 16 UI, 32 creative and palette, 48 studio and storybook), `onDark` (how to use it on dark backgrounds); palette styles list their colour variables |
+| `list_styles` | the 20 styles with descriptions, `minSize` (smallest px it reads well at: 16 UI, 32 Crafted and Playful, 48 Studio and Storybook), `onDark` (how to use it on dark backgrounds); palette styles list their colour variables |
 | `list_categories` | categories, or the icons in one category |
 
 Typical agent loop: `search_icons("upload file")`, pick the top result that fits, then `get_icon(name, style, format: "react")`.
@@ -89,6 +92,8 @@ Paste the import and keep the canonical name.
 `<name>-<style>-themable.svg` (svg), `<name>-<style>-<px>.png`, `<name>-<style>-<preset>.gif` (animated),
 `<name>-<style>-animated.pptx`; the full table is in [files.md](files.md#file-names). Exported SVGs contain a `<title>`:
 add `aria-hidden="true"` (or `alt=""` on an `<img>`) when the icon sits next to visible text.
+
+Large remote exports come in pages: a result with `next: { cursor, remaining }` has more to come, so call `export_icon` again with the same arguments plus `cursor`. Plain `svg-flat` files (no colour or size options) then come back as `urls[]` to the prebuilt `@withicons/static` SVGs on jsDelivr (colours baked in, ink follows `currentColor`, no `<title>`).
 
 ## CLI
 
@@ -132,7 +137,7 @@ Plain `?q=<words>` (no `limit`) is the form most likely to be cached already.
 | file | contents |
 |---|---|
 | https://withicons.com/icons.json | every icon: name, category, description, aliases, tags, styles |
-| https://withicons.com/llms.txt | short guide for LLMs; `llms-full.txt` adds the complete list |
+| https://withicons.com/llms.txt | short index for LLMs; `llms-full.txt` is the full reference (usage, styles, motion, Ask AI briefs, every icon) |
 | https://withicons.com/skill/SKILL.md | this skill |
 | [icons.md](icons.md) | all 500 canonical names with categories and aliases (offline) |
 

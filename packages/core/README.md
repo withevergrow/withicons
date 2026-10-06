@@ -51,26 +51,26 @@ CDN: `https://cdn.jsdelivr.net/npm/@withicons/core@latest/dist/svg/line/home.svg
 
 ## Styles
 
-- `line` (universal) — A precise 1.75px outline with round caps and joins. The default for any interface.
-- `solid` (universal) — The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap.
-- `duo` (universal) — The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo.
-- `gloss` (creative) — Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour.
-- `engrave` (creative) — Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow.
-- `blueprint` (creative) — A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint.
-- `sketch` (creative) — Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching.
-- `glass` (creative, palette) — Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen.
-- `kawaii` (creative, palette) — Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web.
-- `sticker` (creative, palette) — Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two.
-- `pixel` (creative, palette) — Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens.
-- `retro` (creative, palette) — Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch.
-- `luxe` (creative, palette) — Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights.
-- `bauhaus` (creative, palette) — Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black.
-- `skeuo` (creative, palette) — Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail.
-- `anime` (creative, palette) — Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold.
-- `gothic` (creative, palette) — Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows.
-- `pastel` (creative, palette) — Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth.
-- `coquette` (creative, palette) — Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold.
-- `plush` (creative, palette) — Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details.
+- `line` (Everyday): A precise 1.75px outline with round caps and joins. The default for any interface.
+- `solid` (Everyday): The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap.
+- `duo` (Everyday): The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo.
+- `gloss` (Crafted): Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour.
+- `engrave` (Crafted): Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow.
+- `blueprint` (Crafted): A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint.
+- `sketch` (Crafted): Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching.
+- `glass` (Playful, palette): Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen.
+- `kawaii` (Playful, palette): Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web.
+- `sticker` (Playful, palette): Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two.
+- `pixel` (Playful, palette): Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens.
+- `retro` (Playful, palette): Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch.
+- `luxe` (Studio, palette): Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights.
+- `bauhaus` (Studio, palette): Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black.
+- `skeuo` (Studio, palette): Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail.
+- `anime` (Storybook, palette): Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold.
+- `gothic` (Storybook, palette): Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows.
+- `pastel` (Storybook, palette): Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth.
+- `coquette` (Storybook, palette): Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold.
+- `plush` (Storybook, palette): Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details.
 
 ## Palette styles
 

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { TOOLS, init, env, findTool, installSkill, skillText, zipSkill } from './init.mjs'
 
-const HELP = ({ icons = 'all', styles = [], palettes } = {}) => `withicons — ${icons} icons x ${styles.length || 'every'} styles from the terminal (https://withicons.com)
+const HELP = ({ icons = 'all', styles = [], palettes } = {}) => `withicons: ${icons} icons x ${styles.length || 'every'} styles from the terminal (https://withicons.com)
 
 Usage
   withicons search <words...>        find icons by meaning ("throw away", "settigns", "money")
@@ -131,7 +131,7 @@ const COLOUR_OPTS = `  --palette <id>            one of the icon's palettes (wit
 const COMMAND_HELP = ({ styles = [] } = {}) => {
   const st = styles.length ? styles.join(', ') : 'line (default), solid, duo, …'
   return {
-    search: `withicons search <words...> — find icons by meaning ("throw away", "settigns", "money")
+    search: `withicons search <words...>: find icons by meaning ("throw away", "settigns", "money")
 
 Options
   --limit, -n <n>           max results (default 10)
@@ -144,7 +144,7 @@ Exit codes: 0 found, 1 nothing found, 2 usage error
 Examples
   withicons search "throw away"
   withicons search money -n 5 --json`,
-    get: `withicons get <name...> — print icons as SVG (default) or framework code
+    get: `withicons get <name...>: print icons as SVG (default) or framework code
 
 Options
   --style, -s <style>       ${st}
@@ -161,7 +161,7 @@ Examples
   withicons get home --style solid --format react
   withicons get heart --style sticker --palette classic-red --flat > heart.svg
   withicons get pizza --style retro --c1 "#f4b942" --shadow "#5a2a14" --format react`,
-    add: `withicons add <name...> — import lines + usage for a framework
+    add: `withicons add <name...>: import lines + usage for a framework
 
 Options
   --framework, --fw <name>  react (default), vue, svelte, angular, solid, web-component, html-class, svg
@@ -170,7 +170,7 @@ Options
 
 Example
   withicons add home settings --framework react`,
-    export: `withicons export <name...> — save files for designers, apps, slides and CI
+    export: `withicons export <name...>: save files for designers, apps, slides and CI
 
 Every file is made before any is written: an unknown icon, palette or option writes nothing.
 
@@ -225,7 +225,7 @@ Examples
   withicons export receipt heart --format svg-flat --name-map receipt=orders,heart=favourites
   withicons export coffee flame leaf --style retro --palette seventies-diner --format png
   withicons export bell --format gif --background "#ffffff" --size 256`,
-    palettes: `withicons palettes <name> — the colour palettes picked for an icon
+    palettes: `withicons palettes <name>: the colour palettes picked for an icon
 
 Options
   --style, -s <style>       show the CSS variables each palette sets in this style
@@ -235,7 +235,7 @@ Options
 
 Example
   withicons palettes heart --style retro --tag pastel`,
-    animate: `withicons animate <name> — animation code (@withicons/motion)
+    animate: `withicons animate <name>: animation code (@withicons/motion)
 
 Options
   --trigger, -t <t>         loop (default), hover, once, inview, swap
@@ -256,19 +256,19 @@ Examples
   withicons animate bell --preset shake                # an alternate
   withicons animate bell --format web-component        # <with-icon name="bell" motion="loop">
   withicons animate play --trigger swap --to pause --effect morph`,
-    resolve: `withicons resolve <name> — check a name or alias (exit 0 resolved, 1 unknown or ambiguous)
+    resolve: `withicons resolve <name>: check a name or alias (exit 0 resolved, 1 unknown or ambiguous)
 
 Options
   --json                    machine-readable output`,
-    styles: `withicons styles — list the styles and the colour variables of multi-colour ones
+    styles: `withicons styles: list the styles and the colour variables of multi-colour ones
 
 Options
   --json                    machine-readable output (with minSize and onDark hints)`,
-    categories: `withicons categories [category] — list categories, or the icons in one
+    categories: `withicons categories [category]: list categories, or the icons in one
 
 Options
   --json                    machine-readable output`,
-    init: `withicons init [tool...] — add the with-icons skill + MCP server to your AI coding tools
+    init: `withicons init [tool...]: add the with-icons skill + MCP server to your AI coding tools
 
 Tools
   claude-code, codex, cursor, opencode, vscode, windsurf, claude-desktop, lovable
@@ -286,13 +286,13 @@ Options
 Examples
   withicons init cursor
   withicons init claude-code codex --global --mcp local`,
-    skill: `withicons skill — print the agent skill (SKILL.md)
+    skill: `withicons skill: print the agent skill (SKILL.md)
 
 Options
   --zip [--out <file>]      write with-icons.zip (upload to claude.ai and other chat apps)
   --out <dir>               install the skill folder into <dir>/with-icons
   --path [tool...]          where each tool reads skills from (--global for your user)`,
-    mcp: `withicons mcp — run the with icons MCP server over stdio (same as npx -y @withicons/mcp)`,
+    mcp: `withicons mcp: run the with icons MCP server over stdio (same as npx -y @withicons/mcp)`,
   }
 }
 const COMMAND_ALIASES = { s: 'search', find: 'search', g: 'get', svg: 'get', import: 'add', palette: 'palettes', colors: 'palettes', colours: 'palettes',
@@ -569,7 +569,7 @@ ${dim(`${m.animated} icons have a tuned animation · ${m.install.npm}`)}`)
           if (r.note) console.error(dim(`note: ${r.note}`))
         } else if (r.status === 'ambiguous') console.log(`${yellow('ambiguous')}: ${r.candidates.join(', ')}`)
         else {
-          console.log(`${yellow('unknown')}${r.nearest.length ? ` — nearest: ${r.nearest.join(', ')}` : ''}`)
+          console.log(`${yellow('unknown')}${r.nearest.length ? `, nearest: ${r.nearest.join(', ')}` : ''}`)
           if (r.didYouMean) console.log(`did you mean: ${cyan(r.didYouMean)}`)
           if (r.hint) console.log(dim(r.hint))
         }

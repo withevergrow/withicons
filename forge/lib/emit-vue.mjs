@@ -40,9 +40,17 @@ function createWithIcon(name, style, displayName, iconNode) {
   return Component
 }`
 
-const iconSrc = `const Icon = (props, ctx) => {
+// A style that is not loaded yet renders through defineAsyncComponent (one per style, resolving to Icon itself):
+// SSR (renderToString) waits for it, and once loaded every Icon of that style renders synchronously.
+const iconSrc = `const WITH_LAZY = {}
+const Icon = (props, ctx) => {
   const C = withFindComponent(props.name, props.variant)
-  return C ? h(C, ctx.attrs, ctx.slots) : null
+  if (!C) return null
+  if (typeof C === 'string') {
+    const L = WITH_LAZY[C] || (WITH_LAZY[C] = defineAsyncComponent(() => withLoadStyle(C).then(() => Icon)))
+    return h(L, Object.assign({}, ctx.attrs, { name: props.name, variant: props.variant }), ctx.slots)
+  }
+  return h(C, ctx.attrs, ctx.slots)
 }
 Icon.props = { name: { type: String, required: true }, variant: { type: String, default: DEFAULT_STYLE } }
 Icon.inheritAttrs = false
@@ -77,8 +85,8 @@ export interface IconProps extends WithIconProps {
 export default async function emit(ctx) {
   const files = await emitComponentPackage(ctx, {
     dir: 'vue',
-    importEsm: `import { h } from 'vue'`,
-    importCjs: `const { h } = require('vue')`,
+    importEsm: `import { h, defineAsyncComponent } from 'vue'`,
+    importCjs: `const { h, defineAsyncComponent } = require('vue')`,
     mapAttrs: clean,
     baseSrc, iconSrc, typesDts,
     typeNames: ['WithIcon', 'WithIconProps', 'IconProps'],
@@ -92,6 +100,7 @@ export default async function emit(ctx) {
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports, typesVersions,
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
     peerDependencies: { vue: '>=3.2.0' },
   }
   writePkg(ctx, 'vue', pkg, vueSections(ctx, frameworkReadme(ctx, {
@@ -111,8 +120,12 @@ import { Icon } from '@withicons/vue'
 </script>
 
 <template>
-  <Icon name="home" variant="solid" :size="20" />
+  <Icon name="home" :size="20" />                     <!-- line: renders at once -->
+  <Icon name="home" variant="solid" :size="20" />     <!-- solid: loaded on first use -->
 </template>`,
+    lazy: `Until a style has loaded, its \`Icon\` is an async component (\`defineAsyncComponent\`) that renders nothing, then the
+icon; Vue's \`renderToString\` and Nuxt SSR wait for it, so server HTML is complete. With \`require()\` (CommonJS) styles
+load synchronously.`,
   })))
   const fb = fallbackCount(ctx)
   return `${files} icon files, ${ctx.styles.length} styles${fb ? `, ${fb} fell back to ${ctx.defaultStyle}` : ''}`

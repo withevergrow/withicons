@@ -11,6 +11,7 @@
 //   dist/<style>/icons/<name>.mjs           one file per icon per style: Home, HomeIcon, default
 //   dist/<style>/index.mjs                  every icon of that style
 //   dist/index.mjs                          component + default-style icons + iconNames/styleNames
+import { groupOfStyle } from '../tools/style-groups.mjs'
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
@@ -116,7 +117,7 @@ export { iconNames, styleNames } from './meta'
 
 function angularReadme(ctx, info) {
   const major = (info.partialMinVersion || '17.0.0').split('.')[0]
-  const styleRows = ctx.styles.map(s => `| \`${s.name}\` | \`@withicons/angular${s.name === ctx.defaultStyle ? '' : '/' + s.name}\` | ${s.kind} | ${s.description} |`).join('\n')
+  const styleRows = ctx.styles.map(s => `| \`${s.name}\` | \`@withicons/angular${s.name === ctx.defaultStyle ? '' : '/' + s.name}\` | ${groupOfStyle(s.name).title} | ${s.description} |`).join('\n')
   const live = ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name).join(', ')
   const variantList = ctx.styles.map(s => '`' + s.name + '`').join(', ')
   // the Angular palette example uses retro + pizza; only print it when both exist
@@ -200,7 +201,7 @@ any Angular component. The inner \`<svg>\` carries \`class="withi withi-<name>"\
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
 ${styleRows}
 

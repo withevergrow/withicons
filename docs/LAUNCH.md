@@ -253,6 +253,37 @@ icon names). The WAF counts those against the runner's IP (limit 200 per 5 minut
   which generic MCP clients never send.
 - The CSP allows `'unsafe-inline'` scripts because the pages contain inline bootstraps; `node scripts/deploy.mjs
   --print-csp` produces a hash-based policy to pass as `ContentSecurityPolicy` once the site stabilises.
+  The site loads nothing from jsDelivr at runtime (CDN URLs on the site are code snippets), so the default CSP no
+  longer allows `cdn.jsdelivr.net`. `aws cloudformation deploy` keeps the previous `ContentSecurityPolicy` value, so
+  pass the new one explicitly once (see 6.6).
+- The viewer-request function (www -> apex, directory index, trailing slash) always answers with an absolute
+  `Location: https://<domain>/...`, collapses repeated slashes (`//example.com/x` -> `https://withicons.com/example.com/x/`,
+  never a protocol-relative redirect) and answers 400 to backslashes. `packages/mcp/test/viewer-function.test.mjs`
+  evaluates the function straight from the template.
+- The WAF rate rule URL-decodes, normalises (`NORMALIZE_PATH_WIN`: backslash -> slash, `//`, `./`, `../`) and lowercases
+  the path before matching `/api/` and `/mcp`, so `//api/x` or `/%61pi/x` are counted too; the Lambda also answers 404
+  to such non-canonical paths.
+- The deploy role trusts exactly one OIDC subject: `repo:withevergrow@274390516/withicons@1400616361:environment:production`
+  (the id form GitHub sends for the `production` environment of `deploy-site.yml`; CloudTrail showed every deploy
+  using it). A workflow that deploys from elsewhere (another environment or no environment) must be added explicitly.
+
+### 6.6 Security hardening update (October 2026)
+
+Order matters: the new Lambda code first (it is backwards compatible), then the stack.
+
+```bash
+node scripts/deploy.mjs --dry-run               # smoke-tests the new API bundle
+git push                                        # deploy-site.yml uploads the site + the new Lambda code
+aws cloudformation deploy --region us-east-1 --profile withicons --stack-name withicons-site --template-file infra/site.yaml \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides "ContentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+curl -sI https://withicons.com//example.com/x | grep -i '^location'     # https://withicons.com/example.com/x/
+curl -s -o /dev/null -w "%{http_code}\n" https://withicons.com//api/styles  # 404 (API) or 301 to /api/styles, never 200
+```
+
+The stack update changes the viewer function, the WAF rule, the deploy role's trust policy, the CSP and the API Lambda
+Timeout (10 -> 15 s, for paged `export_icon`; docs/COSTS.md section 4); no resource
+is replaced. Then push any commit to `main` to confirm the deploy role still works.
 
 ## 7. Search engines
 

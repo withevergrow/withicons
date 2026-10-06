@@ -25,6 +25,18 @@ const reply = (statusCode, body, headers = {}) => ({
   isBase64Encoded: false,
 })
 const cached = (seconds) => ({ 'cache-control': `public, max-age=${seconds}, s-maxage=${seconds}` })
+// Raw SVG / code answers: opened directly in a browser tab an SVG is a document that could run script; this CSP keeps
+// it an inert picture (inline styles only, no script, no requests, sandboxed origin).
+const RAW_CSP = { 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; sandbox" }
+// Only canonical paths are served: no empty segments ('//'), backslashes or dot segments, and percent-encoding only in
+// the last segment (an icon name, or a word for /api/resolve), never an encoded slash, backslash or dot. Spellings such
+// as //api/styles or /%61pi/styles must not reach the API under another name (the WAF rate rule and the CloudFront
+// behaviours match the literal /api/ and /mcp prefixes).
+export function canonicalPath(raw) {
+  const s = String(raw)
+  if (!s.startsWith('/') || /\/\/|\\|\.\.|%(2f|5c|2e)/i.test(s)) return false
+  return !s.slice(0, s.lastIndexOf('/')).includes('%')
+}
 
 // the MCP transport uses the Web Crypto global, which Node 18 only exposes as require('node:crypto').webcrypto
 if (!globalThis.crypto) globalThis.crypto = webcrypto
@@ -57,7 +69,9 @@ async function mcp(event, method, url) {
 export async function handler(event = {}) {
   const http = (event.requestContext && event.requestContext.http) || {}
   const method = String(http.method || event.httpMethod || 'GET').toUpperCase()
-  let p = String(event.rawPath || http.path || event.path || '/').replace(/\/+$/, '') || '/'
+  const rawPath = String(event.rawPath || http.path || event.path || '/')
+  if (!canonicalPath(rawPath)) return reply(404, { error: 'Not found' })
+  let p = rawPath.replace(/\/+$/, '') || '/'
   const qs = new URLSearchParams(event.rawQueryString || '')
   if (!event.rawQueryString && event.queryStringParameters) for (const [k, v] of Object.entries(event.queryStringParameters)) qs.set(k, v)
   const host = (event.headers && (event.headers.host || event.headers.Host)) || (event.requestContext && event.requestContext.domainName) || 'localhost'
@@ -92,7 +106,7 @@ export async function handler(event = {}) {
       const r = getIcon({ name, style: qs.get('style') || 'line', format, size: qs.get('size') ? +qs.get('size') : undefined, color: qs.get('color') || undefined, flat, palette: qs.get('palette') || undefined, colors })
       if (raw) {
         const type = r.format === 'svg' ? 'image/svg+xml' : 'text/plain; charset=utf-8'
-        return { statusCode: 200, headers: { ...CORS, ...cached(86400), 'content-type': type }, body: r.code, isBase64Encoded: false }
+        return { statusCode: 200, headers: { ...CORS, ...cached(86400), ...RAW_CSP, 'content-type': type }, body: r.code, isBase64Encoded: false }
       }
       return reply(200, r, cached(86400))
     }
@@ -102,7 +116,7 @@ export async function handler(event = {}) {
         name: decodeURIComponent(m[1]), trigger: qs.get('trigger') || undefined, preset: qs.get('preset') || undefined, to: qs.get('to') || undefined,
         effect: qs.get('effect') || undefined, style: qs.get('style') || 'line', format: qs.get('format') || 'html', duration: qs.get('duration') ? +qs.get('duration') : undefined,
       })
-      if (qs.get('raw') === '1' || qs.get('raw') === 'true') return { statusCode: 200, headers: { ...CORS, ...cached(86400), 'content-type': 'text/plain; charset=utf-8' }, body: r.code, isBase64Encoded: false }
+      if (qs.get('raw') === '1' || qs.get('raw') === 'true') return { statusCode: 200, headers: { ...CORS, ...cached(86400), ...RAW_CSP, 'content-type': 'text/plain; charset=utf-8' }, body: r.code, isBase64Encoded: false }
       return reply(200, r, cached(86400))
     }
     if ((m = p.match(/^\/api\/palettes\/([^/]+)$/))) return reply(200, listPalettes({ name: decodeURIComponent(m[1]), style: qs.get('style') || undefined, tag: qs.get('tag') || undefined, limit: qs.get('limit') ? +qs.get('limit') : undefined }), cached(86400))

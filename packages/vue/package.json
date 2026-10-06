@@ -270,87 +270,87 @@
       "default": "./dist/icon.js"
     },
     "./icons/*": {
-      "types": "./dist/line/icons/*.d.ts",
+      "types": "./dist/line/deep.d.ts",
       "default": "./dist/line/icons/*.js"
     },
     "./line/icons/*": {
-      "types": "./dist/line/icons/*.d.ts",
+      "types": "./dist/line/deep.d.ts",
       "default": "./dist/line/icons/*.js"
     },
     "./solid/icons/*": {
-      "types": "./dist/solid/icons/*.d.ts",
+      "types": "./dist/solid/deep.d.ts",
       "default": "./dist/solid/icons/*.js"
     },
     "./duo/icons/*": {
-      "types": "./dist/duo/icons/*.d.ts",
+      "types": "./dist/duo/deep.d.ts",
       "default": "./dist/duo/icons/*.js"
     },
     "./gloss/icons/*": {
-      "types": "./dist/gloss/icons/*.d.ts",
+      "types": "./dist/gloss/deep.d.ts",
       "default": "./dist/gloss/icons/*.js"
     },
     "./engrave/icons/*": {
-      "types": "./dist/engrave/icons/*.d.ts",
+      "types": "./dist/engrave/deep.d.ts",
       "default": "./dist/engrave/icons/*.js"
     },
     "./blueprint/icons/*": {
-      "types": "./dist/blueprint/icons/*.d.ts",
+      "types": "./dist/blueprint/deep.d.ts",
       "default": "./dist/blueprint/icons/*.js"
     },
     "./sketch/icons/*": {
-      "types": "./dist/sketch/icons/*.d.ts",
+      "types": "./dist/sketch/deep.d.ts",
       "default": "./dist/sketch/icons/*.js"
     },
     "./glass/icons/*": {
-      "types": "./dist/glass/icons/*.d.ts",
+      "types": "./dist/glass/deep.d.ts",
       "default": "./dist/glass/icons/*.js"
     },
     "./kawaii/icons/*": {
-      "types": "./dist/kawaii/icons/*.d.ts",
+      "types": "./dist/kawaii/deep.d.ts",
       "default": "./dist/kawaii/icons/*.js"
     },
     "./sticker/icons/*": {
-      "types": "./dist/sticker/icons/*.d.ts",
+      "types": "./dist/sticker/deep.d.ts",
       "default": "./dist/sticker/icons/*.js"
     },
     "./pixel/icons/*": {
-      "types": "./dist/pixel/icons/*.d.ts",
+      "types": "./dist/pixel/deep.d.ts",
       "default": "./dist/pixel/icons/*.js"
     },
     "./retro/icons/*": {
-      "types": "./dist/retro/icons/*.d.ts",
+      "types": "./dist/retro/deep.d.ts",
       "default": "./dist/retro/icons/*.js"
     },
     "./luxe/icons/*": {
-      "types": "./dist/luxe/icons/*.d.ts",
+      "types": "./dist/luxe/deep.d.ts",
       "default": "./dist/luxe/icons/*.js"
     },
     "./bauhaus/icons/*": {
-      "types": "./dist/bauhaus/icons/*.d.ts",
+      "types": "./dist/bauhaus/deep.d.ts",
       "default": "./dist/bauhaus/icons/*.js"
     },
     "./skeuo/icons/*": {
-      "types": "./dist/skeuo/icons/*.d.ts",
+      "types": "./dist/skeuo/deep.d.ts",
       "default": "./dist/skeuo/icons/*.js"
     },
     "./anime/icons/*": {
-      "types": "./dist/anime/icons/*.d.ts",
+      "types": "./dist/anime/deep.d.ts",
       "default": "./dist/anime/icons/*.js"
     },
     "./gothic/icons/*": {
-      "types": "./dist/gothic/icons/*.d.ts",
+      "types": "./dist/gothic/deep.d.ts",
       "default": "./dist/gothic/icons/*.js"
     },
     "./pastel/icons/*": {
-      "types": "./dist/pastel/icons/*.d.ts",
+      "types": "./dist/pastel/deep.d.ts",
       "default": "./dist/pastel/icons/*.js"
     },
     "./coquette/icons/*": {
-      "types": "./dist/coquette/icons/*.d.ts",
+      "types": "./dist/coquette/deep.d.ts",
       "default": "./dist/coquette/icons/*.js"
     },
     "./plush/icons/*": {
-      "types": "./dist/plush/icons/*.d.ts",
+      "types": "./dist/plush/deep.d.ts",
       "default": "./dist/plush/icons/*.js"
     },
     "./package.json": "./package.json"
@@ -361,127 +361,127 @@
         "./dist/icon.d.ts"
       ],
       "icons/*": [
-        "./dist/line/icons/*.d.ts"
+        "./dist/line/deep.d.ts"
       ],
       "line": [
         "./dist/line/index.d.ts"
       ],
       "line/icons/*": [
-        "./dist/line/icons/*.d.ts"
+        "./dist/line/deep.d.ts"
       ],
       "solid": [
         "./dist/solid/index.d.ts"
       ],
       "solid/icons/*": [
-        "./dist/solid/icons/*.d.ts"
+        "./dist/solid/deep.d.ts"
       ],
       "duo": [
         "./dist/duo/index.d.ts"
       ],
       "duo/icons/*": [
-        "./dist/duo/icons/*.d.ts"
+        "./dist/duo/deep.d.ts"
       ],
       "gloss": [
         "./dist/gloss/index.d.ts"
       ],
       "gloss/icons/*": [
-        "./dist/gloss/icons/*.d.ts"
+        "./dist/gloss/deep.d.ts"
       ],
       "engrave": [
         "./dist/engrave/index.d.ts"
       ],
       "engrave/icons/*": [
-        "./dist/engrave/icons/*.d.ts"
+        "./dist/engrave/deep.d.ts"
       ],
       "blueprint": [
         "./dist/blueprint/index.d.ts"
       ],
       "blueprint/icons/*": [
-        "./dist/blueprint/icons/*.d.ts"
+        "./dist/blueprint/deep.d.ts"
       ],
       "sketch": [
         "./dist/sketch/index.d.ts"
       ],
       "sketch/icons/*": [
-        "./dist/sketch/icons/*.d.ts"
+        "./dist/sketch/deep.d.ts"
       ],
       "glass": [
         "./dist/glass/index.d.ts"
       ],
       "glass/icons/*": [
-        "./dist/glass/icons/*.d.ts"
+        "./dist/glass/deep.d.ts"
       ],
       "kawaii": [
         "./dist/kawaii/index.d.ts"
       ],
       "kawaii/icons/*": [
-        "./dist/kawaii/icons/*.d.ts"
+        "./dist/kawaii/deep.d.ts"
       ],
       "sticker": [
         "./dist/sticker/index.d.ts"
       ],
       "sticker/icons/*": [
-        "./dist/sticker/icons/*.d.ts"
+        "./dist/sticker/deep.d.ts"
       ],
       "pixel": [
         "./dist/pixel/index.d.ts"
       ],
       "pixel/icons/*": [
-        "./dist/pixel/icons/*.d.ts"
+        "./dist/pixel/deep.d.ts"
       ],
       "retro": [
         "./dist/retro/index.d.ts"
       ],
       "retro/icons/*": [
-        "./dist/retro/icons/*.d.ts"
+        "./dist/retro/deep.d.ts"
       ],
       "luxe": [
         "./dist/luxe/index.d.ts"
       ],
       "luxe/icons/*": [
-        "./dist/luxe/icons/*.d.ts"
+        "./dist/luxe/deep.d.ts"
       ],
       "bauhaus": [
         "./dist/bauhaus/index.d.ts"
       ],
       "bauhaus/icons/*": [
-        "./dist/bauhaus/icons/*.d.ts"
+        "./dist/bauhaus/deep.d.ts"
       ],
       "skeuo": [
         "./dist/skeuo/index.d.ts"
       ],
       "skeuo/icons/*": [
-        "./dist/skeuo/icons/*.d.ts"
+        "./dist/skeuo/deep.d.ts"
       ],
       "anime": [
         "./dist/anime/index.d.ts"
       ],
       "anime/icons/*": [
-        "./dist/anime/icons/*.d.ts"
+        "./dist/anime/deep.d.ts"
       ],
       "gothic": [
         "./dist/gothic/index.d.ts"
       ],
       "gothic/icons/*": [
-        "./dist/gothic/icons/*.d.ts"
+        "./dist/gothic/deep.d.ts"
       ],
       "pastel": [
         "./dist/pastel/index.d.ts"
       ],
       "pastel/icons/*": [
-        "./dist/pastel/icons/*.d.ts"
+        "./dist/pastel/deep.d.ts"
       ],
       "coquette": [
         "./dist/coquette/index.d.ts"
       ],
       "coquette/icons/*": [
-        "./dist/coquette/icons/*.d.ts"
+        "./dist/coquette/deep.d.ts"
       ],
       "plush": [
         "./dist/plush/index.d.ts"
       ],
       "plush/icons/*": [
-        "./dist/plush/icons/*.d.ts"
+        "./dist/plush/deep.d.ts"
       ]
     }
   },
@@ -490,6 +490,9 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
   "peerDependencies": {
     "vue": ">=3.2.0"
   }

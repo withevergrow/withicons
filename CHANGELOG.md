@@ -6,6 +6,21 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+### Changed
+- React, Vue, Solid and Svelte: the root import is fast. `import { Home } from '@withicons/react'` takes about 0.15 s in
+  Node (was about 10 s) because each style is one module and the root `Icon` loads styles on demand: line renders at
+  once, other styles load on first use (React/Solid: inside `<Suspense>`; before a synchronous `renderToString`, call
+  `await preloadStyles('solid')`; `@withicons/<pkg>/icon` keeps every style synchronous). Half the files on install.
+  **Behaviour change:** a non-line `Icon` now suspends on first render; see the README.
+- Hosted MCP `export_icon` serves any size: large exports come in pages (`next.cursor`) and plain SVGs as CDN links.
+- Agent docs: shorter skill (description under 1,024 characters), `llms.txt` is a short index, shorter MCP tool
+  descriptions; one set of style groups everywhere (Everyday, Crafted, Playful, Studio, Storybook).
+
+### Fixed
+- Security: no open redirect on `//` paths; the API rate limit counts every path form; non-canonical API paths 404.
+- Site: icon pages hide typo aliases, a page map that never covers text, a mobile action bar, a feedback link, one
+  title separator, a "no exact icon" banner on the icons page and a slimmer hero once you search.
+
 ## 0.2.2 - 2026-10-06
 
 ### Added

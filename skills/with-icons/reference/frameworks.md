@@ -7,6 +7,51 @@ Every framework package exposes the same thing: one component per icon, PascalCa
 `/coquette`, `/plush` (all 20 in React, Vue, Svelte, Solid and Angular).
 Animation is a separate, optional package for every framework: see [motion.md](motion.md). Deep imports: `<pkg>/icons/<name>` and `<pkg>/<style>/icons/<name>`.
 
+## Props (identical across React, Vue, Svelte, Solid and Angular)
+
+| prop | default | notes |
+|---|---|---|
+| `size` | `24` | number (px) or CSS length |
+| `color` | `currentColor` | omit it and set CSS `color` on a parent instead |
+| `strokeWidth` | style default (1.75) | only styles with live strokes: line, duo, blueprint, sketch, kawaii; nothing on the filled styles |
+| `absoluteStrokeWidth` | `false` | keeps stroke px constant when scaled |
+| `title` | none | adds `<title>` and `role="img"`; without it the svg is `aria-hidden="true"` |
+| `className` / `class` | none | appended to `withi withi-<name>` |
+
+Everything else (`onClick`, `style`, `data-*`, `aria-*`) is spread onto the `<svg>`. The web component uses attributes:
+`name variant size color stroke-width absolute-stroke-width label mirror-rtl` (it uses `variant`, not `style`).
+
+## Accessibility
+
+1. **Decorative icon next to visible text**: nothing to add. It is `aria-hidden` by default.
+2. **Icon-only button or link**: put the accessible name on the control, not on the icon:
+   `<button type="button" aria-label="Delete row"><Trash /></button>`.
+3. **Standalone meaningful icon** (status, rating): pass `title="Error"` (components) or `label="Error"` (web component).
+4. Icon classes (`<i class="with ...">`) have no semantics. Add `aria-hidden="true"` and visible or `.sr-only` text.
+5. Exported SVG files contain a `<title>`. Next to visible text add `aria-hidden="true"` (inline) or `alt=""` (`<img>`).
+6. Never rely on the icon alone for meaning in forms or errors. Keep 3:1 contrast for meaningful icons, and give
+   icon-only controls a target of at least 24x24 CSS px (44 recommended on touch) using padding, not a bigger icon.
+7. An animated icon is still decorative: the accessible name stays on the button, never in the animation. Live icons
+   name themselves from their value unless you pass `label` ([live.md](live.md)).
+
+## Pitfalls
+
+- `import { Bin } from '@withicons/react'` fails because aliases are not exports. Resolve to `Trash` first.
+- The generic `<Icon name=... variant=...>` component bundles **all 500 icons in every style**. Use it only for truly
+  dynamic names (CMS data); named imports tree-shake down to the icons you use.
+- `<img src=".../home.svg">` cannot inherit `currentColor` and renders black. Inline the SVG, use the component, the
+  sprite or the classes when the colour must follow text. Standalone `.svg` files (CDN, `@withicons/static`, `get_icon`
+  with `flat: true`) have the palette baked in, which is what Figma, PowerPoint, Keynote and image converters need;
+  inline code keeps the variables.
+- SVG sprites must be served from **your own origin**. Browsers block cross-origin `<use href>`.
+- Don't put multi-colour styles, loops or Crafted styles in dense 16-20px controls: they turn to noise.
+- Svelte 4: `on:click` is not forwarded to the icon. Wrap it in a `<button>`. Angular `name=` usage needs
+  `provideWithIcons(...)` registration; passing `[icon]` needs none.
+- Packages are `0.x`: check `npm view @withicons/react version` if an install fails. The site offers direct SVG
+  downloads as a fallback.
+- Don't mix with icons and another icon set in the same UI region. Replace the old set's icons one-for-one using search.
+- Icon classes, CDN sizes, pinning and right-to-left: the sections below.
+
 ## React (also Next.js, Remix, Vite, React Native Web)
 
 ```bash
@@ -32,7 +77,7 @@ TypeScript: every package ships its types (`.d.ts`). A CSS custom property in a 
 `style` needs a cast: `style={{ '--with-duo': '#fde68a' } as React.CSSProperties}`.
 
 Next.js App Router: the icons are plain function components with no hooks or state, so they work in Server Components.
-Dynamic names (CMS data only, because it bundles every icon): `import { Icon } from '@withicons/react'` then `<Icon name="bin" variant="solid" />`.
+Dynamic names (CMS data only): `import { Icon } from '@withicons/react'` then `<Icon name="bin" variant="solid" />` inside `<Suspense>` (line renders at once; other styles load on first use; `await preloadStyles('solid')` before `renderToString`; `@withicons/react/icon` bundles every style, synchronous). Root and style imports load one style, so no `optimizePackageImports` or deep imports are needed.
 
 ## Vue 3 / Nuxt
 

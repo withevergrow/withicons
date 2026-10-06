@@ -123,7 +123,7 @@ exactly like the icon on the page. GIF: pass the slide colour as `--background`.
 noticeable move than the calm tuned loop, run `npx withicons motions <icon>` (same as `animate <icon> --list`): the default
 loop and hover, the icon's alternates with commands, and the livelier picks (tada, jelly, bounce, beat, wiggle, pop);
 MCP `animate_icon` returns them as `alternates` and `lively`. `npx withicons animate --list` lists every preset.
-Exported files carry no motion part classes; code formats keep them. See SKILL.md section 7a and
+Exported files carry no motion part classes; code formats keep them. See SKILL.md section 7 and
 [files.md](files.md) (sizes, limits, padding, dark backgrounds, email).
 
 ## Guidelines

@@ -101,7 +101,7 @@ const skill = counts(read(path.join(SKILL, 'SKILL.md')))
 const siteCopy = skill.replace(/\]\((reference\/[^)]+)\)/g, (_, p) => `](${GH}${p})`)
 
 const outputs = [[path.join(SKILL, 'SKILL.md'), skill], [path.join(SKILL, 'reference', 'icons.md'), md], [path.join(ROOT, 'site', 'skill', 'SKILL.md'), siteCopy]]
-for (const f of ['search.md', 'frameworks.md', 'files.md']) { const p = path.join(SKILL, 'reference', f); if (read(p)) outputs.push([p, counts(read(p))]) }
+for (const f of ['search.md', 'frameworks.md', 'files.md', 'chat.md']) { const p = path.join(SKILL, 'reference', f); if (read(p)) outputs.push([p, counts(read(p))]) }
 if (read(stylesFile)) outputs.push([stylesFile, block(counts(read(stylesFile)), 'palettes', palBody)])
 if (read(motionFile)) outputs.push([motionFile, block(counts(read(motionFile)), 'motion', motionBody)])
 if (read(liveFile)) outputs.push([liveFile, block(counts(read(liveFile)), 'live', liveBody)])

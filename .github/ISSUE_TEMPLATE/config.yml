@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Search the library first
     url: https://withicons.com/icons.html
-    about: 500 icons x 12 styles, searchable by name, alias and meaning. Many "missing" icons exist under another name.
+    about: 500 icons x 20 styles, searchable by name, alias and meaning. Many "missing" icons exist under another name.
   - name: Questions and ideas (Discussions)
     url: https://github.com/withevergrow/withicons/discussions
     about: How-to questions, showcase, style ideas.

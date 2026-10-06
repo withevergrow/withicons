@@ -1,5 +1,5 @@
 name: Icon request
-description: Ask for a new icon (it will be drawn once and rendered in all 12 styles, and can get its own animation).
+description: Ask for a new icon (it will be drawn once and rendered in all 20 styles, and can get its own animation).
 title: "Icon: <name>"
 labels: ["icon request"]
 body:

@@ -2,6 +2,7 @@
 //   dist/sprite-<style>.svg        <symbol id="with-<name>">
 //   dist/svg/<style>/<name>.svg    standalone files (jsDelivr-friendly)
 //   dist/icons.json                metadata
+import { groupOfStyle } from '../tools/style-groups.mjs'
 import { distWriter, basePkg, writePkg, innerOf, flattenVars, countText, totalText, paletteDoc, rtlDoc, motionDoc } from './emit-core.mjs'
 
 const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
@@ -91,7 +92,7 @@ Figma, PowerPoint, Keynote and rasterizers such as sharp or resvg.)
 
 ## Styles
 
-${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}${s.palette ? ', palette' : ''}) — ${s.description}`).join('\n')}
+${ctx.styles.map(s => `- \`${s.name}\` (${groupOfStyle(s.name).title}${s.palette ? ', palette' : ''}): ${s.description}`).join('\n')}
 ${paletteDoc(ctx)}${rtlDoc('html', '<svg class="with-rtl" width="24" height="24"><use href="sprite-line.svg#with-arrow-right"/></svg>')}${motionDoc(ctx)}
 \`dist/icons.json\` lists every icon's name, category, description, aliases, tags and styles.
 

@@ -9,6 +9,7 @@
 //   packages/core/dist/index.{js,cjs,d.ts,d.cts}           icons, styles, resolve, search, toSvg
 
 // ---------------------------------------------------------------- shared helpers
+import { groupOfStyle } from '../tools/style-groups.mjs'
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path from 'path'
@@ -169,11 +170,12 @@ export function componentExports(ctx) {
   const ex = { '.': dual('dist/index') }
   for (const s of ctx.styles) ex['./' + s.name] = dual(`dist/${s.name}/index`)
   ex['./icon'] = esmOnly('dist/icon')
-  ex['./icons/*'] = esmOnly(`dist/${ctx.defaultStyle}/icons/*`)
-  for (const s of ctx.styles) ex[`./${s.name}/icons/*`] = esmOnly(`dist/${s.name}/icons/*`)
+  const deep = s => ({ types: `./dist/${s}/deep.d.ts`, default: `./dist/${s}/icons/*.js` })
+  ex['./icons/*'] = deep(ctx.defaultStyle)
+  for (const s of ctx.styles) ex[`./${s.name}/icons/*`] = deep(s.name)
   ex['./package.json'] = './package.json'
-  const tv = { icon: ['./dist/icon.d.ts'], 'icons/*': [`./dist/${ctx.defaultStyle}/icons/*.d.ts`] }
-  for (const s of ctx.styles) { tv[s.name] = [`./dist/${s.name}/index.d.ts`]; tv[`${s.name}/icons/*`] = [`./dist/${s.name}/icons/*.d.ts`] }
+  const tv = { icon: ['./dist/icon.d.ts'], 'icons/*': [`./dist/${ctx.defaultStyle}/deep.d.ts`] }
+  for (const s of ctx.styles) { tv[s.name] = [`./dist/${s.name}/index.d.ts`]; tv[`${s.name}/icons/*`] = [`./dist/${s.name}/deep.d.ts`] }
   return { exports: ex, typesVersions: { '*': tv } }
 }
 
@@ -578,7 +580,7 @@ CDN: \`https://cdn.jsdelivr.net/npm/@withicons/core@latest/dist/svg/line/home.sv
 
 ## Styles
 
-${ctx.styles.map(s => `- \`${s.name}\` (${s.kind}${s.palette ? ', palette' : ''}) — ${s.description}`).join('\n')}
+${ctx.styles.map(s => `- \`${s.name}\` (${groupOfStyle(s.name).title}${s.palette ? ', palette' : ''}): ${s.description}`).join('\n')}
 ${paletteDoc(ctx)}${palettesDoc(ctx)}${rtlDoc('js', "import { ArrowRight } from '@withicons/core/nodes/line'\ntoSvg(ArrowRight, 'line', { class: 'with-rtl' })")}${motionDoc(ctx)}
 MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
 `
@@ -701,29 +703,40 @@ They work with every style and every package because they animate the element th
 //   dist/types.d.ts|.d.cts        IconName, IconAlias, StyleName, IconNode + framework types
 //   dist/base.{js,cjs,d.ts}       createWithIcon(name, style, displayName, iconNode)
 //   dist/meta.{js,cjs}            iconNames, styleNames, aliases
-//   dist/<style>/icons/<name>.{js,d.ts}   one component per icon per style (ESM)
-//   dist/<style>/index.{js,cjs,d.ts,d.cts}
-//   dist/icon.{js,d.ts}           generic <Icon name variant> (loads every style)
-//   dist/index.{js,cjs,d.ts,d.cts} default style + Icon + createWithIcon + iconNames/styleNames
+//   dist/<style>/index.{js,cjs}   ONE module per style holding all its icons (/*#__PURE__*/ consts, so bundlers keep
+//                                 only what is imported; Node, Jest and Vitest parse one file instead of 500)
+//   dist/<style>/index.{d.ts,d.cts}
+//   dist/<style>/icons/<name>.js  deep import path: re-exports one icon of the style module (all typed by <style>/deep.d.ts)
+//   dist/icon-lazy.{js,d.ts}      the root's generic <Icon>: default style eager, any other style loaded on first use
+//   dist/icon.{js,d.ts}           generic <Icon> with every style imported up front (synchronous everywhere; heavy)
+//   dist/index.{js,cjs,d.ts,d.cts} default style + Icon + preloadStyles + createWithIcon + iconNames/styleNames
 //
 // spec: { dir, importEsm, importCjs, mapAttrs, baseSrc, iconSrc, typesDts, iconType }
 //   baseSrc defines function createWithIcon (free vars: STYLES, DEFAULT_STYLE)
-//   iconSrc defines const Icon (free vars: withFindComponent)
+//   iconSrc defines const Icon (free vars: withFindComponent -> component | null | name of a style still to load,
+//   withLoadStyle(style) -> Promise); for a pending style it renders the framework's lazy component, resolving to Icon
 function withPascal(n) { return n.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('') }
+// -> the component, null (unknown name: warned), or a style name (string) whose module is not loaded yet
 function withFindComponent(name, variant) {
   let v = variant || DEFAULT_STYLE
-  let set = getSet(v)
-  if (!set) {
+  if (!Object.prototype.hasOwnProperty.call(LOAD, v)) {
     withWarn('with icons: unknown variant "' + v + '". Use one of: ' + styleNames.join(', ') + '. Falling back to "' + DEFAULT_STYLE + '".')
-    set = getSet(DEFAULT_STYLE)
+    v = DEFAULT_STYLE
   }
   let canonical
   try { canonical = withLookup(name, k => ICON_SET.has(k), iconNames, aliases) } catch (e) { withWarn(e.message); return null }
-  return set[withPascal(canonical)] || null
+  const set = getSet(v)
+  return set ? set[withPascal(canonical)] || null : v
+}
+// loads styles for <Icon> (no argument = every style); resolves once they render synchronously
+function preloadStyles() {
+  const list = arguments.length ? [].concat.apply([], arguments) : styleNames
+  for (const v of list) if (!Object.prototype.hasOwnProperty.call(LOAD, v)) return Promise.reject(new Error('with icons: unknown style "' + v + '". Use one of: ' + styleNames.join(', ') + '.'))
+  return Promise.all(list.map(withLoadStyle)).then(() => {})
 }
 const WITH_WARNED = {}
 function withWarn(msg) { if (!WITH_WARNED[msg] && typeof console !== 'undefined') { WITH_WARNED[msg] = 1; console.warn(msg) } }
-const FIND_SRC = [LOOKUP_SRC, withPascal, withFindComponent, 'const WITH_WARNED = {}', withWarn].map(String).join('\n')
+const FIND_SRC = [LOOKUP_SRC, withPascal, withFindComponent, preloadStyles, 'const WITH_WARNED = {}', withWarn].map(String).join('\n')
 
 export async function emitComponentPackage(ctx, spec) {
   const P = `packages/${spec.dir}/dist`
@@ -753,42 +766,56 @@ export async function emitComponentPackage(ctx, spec) {
   W(`${P}/meta.d.cts`, metaDts('cjs'))
 
   let files = 0
+  const doc = i => i.description.replace(/\*\//g, '')
   for (const s of styleNames) {
-    const idx = [], idxDts = [], cjs = [], cjsExp = []
+    const consts = [], names = [], idxDts = []
     for (const i of ctx.icons) {
       const r = renderOf(ctx, i, s)
       const nodes = J(r.nodes.map(([t, a]) => [t, spec.mapAttrs(a)]))
-      const call = `createWithIcon(${J(i.name)}, ${J(r.style)}, ${J(i.pascal)}, ${nodes})`
-      W(`${P}/${s}/icons/${i.name}.js`, `import { createWithIcon } from '../../base.js'\nconst ${i.pascal} = /*#__PURE__*/ ${call}\nexport { ${i.pascal}, ${i.pascal} as ${i.pascal}Icon }\nexport default ${i.pascal}\n`)
-      W(`${P}/${s}/icons/${i.name}.d.ts`, `import type { WithIcon } from '../../types.js'\n/** ${i.name} (${s}) — ${i.description.replace(/\*\//g, '')} */\ndeclare const ${i.pascal}: WithIcon\nexport { ${i.pascal}, ${i.pascal} as ${i.pascal}Icon }\nexport default ${i.pascal}\n`)
-      files += 2
-      idx.push(`export { ${i.pascal}, ${i.pascal}Icon } from './icons/${i.name}.js'`)
-      idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: WithIcon\nexport declare const ${i.pascal}Icon: WithIcon`)
-      cjs.push(`const ${i.pascal} = ${call}`)
-      cjsExp.push(`exports.${i.pascal} = ${i.pascal}\nexports.${i.pascal}Icon = ${i.pascal}`)
+      consts.push(`const ${i.pascal} = /*#__PURE__*/ createWithIcon(${J(i.name)}, ${J(r.style)}, ${J(i.pascal)}, ${nodes})`)
+      names.push(i.pascal)
+      // deep path = a re-export: the drawing ships once per module format, and the style module tree-shakes
+      W(`${P}/${s}/icons/${i.name}.js`, `export { ${i.pascal}, ${i.pascal}Icon, ${i.pascal} as default } from '../index.js'\n`)
+      files++
+      idxDts.push(`/** ${i.name} — ${doc(i)} */\nexport declare const ${i.pascal}: WithIcon\nexport declare const ${i.pascal}Icon: WithIcon`)
     }
-    W(`${P}/${s}/index.js`, `${header}${idx.join('\n')}\n`)
+    W(`${P}/${s}/index.js`, `${header}import { createWithIcon } from '../base.js'\n${consts.join('\n')}\nexport {\n${names.map(n => `  ${n}, ${n} as ${n}Icon,`).join('\n')}\n}\n`)
     W(`${P}/${s}/index.d.ts`, `import type { WithIcon } from '../types.js'\n${idxDts.join('\n')}\n`)
-    W(`${P}/${s}/index.cjs`, `'use strict'\n${header}const { createWithIcon } = require('../base.cjs')\n${cjs.join('\n')}\n${cjsExp.join('\n')}\n`)
+    W(`${P}/${s}/index.cjs`, `'use strict'\n${header}const { createWithIcon } = require('../base.cjs')\n${consts.join('\n')}\n${names.map(n => `exports.${n} = exports.${n}Icon = ${n}`).join('\n')}\n`)
+    // one declaration file types every deep path of the style (exports './<style>/icons/*' -> deep.d.ts): no per-icon .d.ts
+    W(`${P}/${s}/deep.d.ts`, `import type { WithIcon } from '../types.js'\nexport * from './index.js'\n/** The icon named in the deep import path ('@withicons/${spec.dir}/${s === D ? '' : s + '/'}icons/home'). */\ndeclare const Icon: WithIcon\nexport default Icon\n`)
     W(`${P}/${s}/index.d.cts`, `import type { WithIcon } from '../types.cjs'\n${idxDts.join('\n')}\n`)
   }
 
-  const findHead = `const DEFAULT_STYLE = ${J(D)}\nconst ICON_SET = new Set(iconNames)\n${FIND_SRC}\n`
+  // Generic <Icon>: LOAD has a key per style, getSet(style) returns the loaded style module (sync), withLoadStyle loads one.
+  const iconRuntime = `const DEFAULT_STYLE = ${J(D)}\nconst ICON_SET = new Set(iconNames)\n${FIND_SRC}\n${spec.iconSrc}\n`
+  // icon.js (subpath /icon): every style imported up front, so it renders synchronously in every style (and weighs every icon)
   W(`${P}/icon.js`, `${header}${spec.importEsm}\n` +
-    styleNames.map(s => `import * as ${'with_' + s} from './${s}/index.js'`).join('\n') +
-    `\nimport { iconNames, styleNames, aliases } from './meta.js'\nconst SETS = { ${styleNames.map(s => `${J(s)}: with_${s}`).join(', ')} }\nconst getSet = v => Object.prototype.hasOwnProperty.call(SETS, v) ? SETS[v] : undefined\n${findHead}${spec.iconSrc}\nexport { Icon }\nexport default Icon\n`)
-  const iconDts = ext => `import type { IconProps } from './types.${ext}'\n${spec.iconTypeImport(ext)}\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n * Bundle cost: imports every icon in every style (${ctx.icons.length} x ${styleNames.length}); prefer named imports.\n */\nexport declare const Icon: ${spec.iconType}\n`
-  W(`${P}/icon.d.ts`, iconDts('js') + 'export default Icon\n')
+    styleNames.map(s => `import * as with_${s} from './${s}/index.js'`).join('\n') +
+    `\nimport { iconNames, styleNames, aliases } from './meta.js'\nconst LOAD = { ${styleNames.map(s => `${J(s)}: with_${s}`).join(', ')} }\n` +
+    `const getSet = v => LOAD[v]\nconst withLoadStyle = v => Promise.resolve(LOAD[v])\n${iconRuntime}export { Icon, preloadStyles }\nexport default Icon\n`)
+  // icon-lazy.js (the root's Icon): the default style is already loaded by the root; any other style is one dynamic
+  // import (one file in Node, one chunk in a bundle), fetched on first render or by preloadStyles()
+  W(`${P}/icon-lazy.js`, `${header}${spec.importEsm}\nimport * as with_${D} from './${D}/index.js'\nimport { iconNames, styleNames, aliases } from './meta.js'\n` +
+    `const LOAD = { ${styleNames.map(s => s === D ? `${J(s)}: () => Promise.resolve(with_${s})` : `${J(s)}: () => import('./${s}/index.js')`).join(', ')} }\n` +
+    `const SETS = { ${J(D)}: with_${D} }\nconst PENDING = {}\nconst getSet = v => SETS[v]\n` +
+    `const withLoadStyle = v => SETS[v] ? Promise.resolve(SETS[v]) : PENDING[v] || (PENDING[v] = LOAD[v]().then(m => (SETS[v] = m), e => { delete PENDING[v]; throw e }))\n` +
+    `${iconRuntime}export { Icon, preloadStyles }\n`)
+  const iconDts = (ext, how) => `import type { IconProps, StyleName } from './types.${ext}'\n${spec.iconTypeImport(ext)}\n/**\n * Generic icon: <Icon name="home" variant="solid" />. Accepts canonical names and unambiguous aliases.\n${how}\n * Prefer named imports (import { Home } ...) wherever the name is static.\n */\nexport declare const Icon: ${spec.iconType}\n` +
+    `/**\n * Loads styles for <Icon> ahead of time (no argument = every style). Await it before a synchronous server render\n * (e.g. renderToString) so icons in other styles than ${D} are in the HTML.\n */\nexport declare function preloadStyles(...styles: StyleName[]): Promise<void>\n`
+  W(`${P}/icon.d.ts`, iconDts('js', ` * This entry imports every icon of every style (${ctx.icons.length} x ${styleNames.length}) and always renders synchronously.\n * The root <Icon> loads each style on first use instead.`) + 'export default Icon\n')
+  W(`${P}/icon-lazy.d.ts`, iconDts('js', ` * The ${D} style renders at once; any other style is loaded on first use (one chunk per style), or up front\n * with preloadStyles(). For every style synchronously, import Icon from '@withicons/${spec.dir}/icon'.`))
 
-  const idxEsm = `${header}export * from './${D}/index.js'\nexport { Icon } from './icon.js'\nexport { createWithIcon } from './base.js'\nexport { iconNames, styleNames } from './meta.js'\n`
-  W(`${P}/index.js`, idxEsm)
+  W(`${P}/index.js`, `${header}export * from './${D}/index.js'\nexport { Icon, preloadStyles } from './icon-lazy.js'\nexport { createWithIcon } from './base.js'\nexport { iconNames, styleNames } from './meta.js'\n`)
   const idxDts = ext => `export * from './${D}/index.${ext}'\nexport { createWithIcon } from './base.${ext}'\nexport { iconNames, styleNames } from './meta.${ext}'\nexport type { IconName, IconAlias, StyleName, IconNode, ${spec.typeNames.join(', ')} } from './types.${ext}'\n`
-  W(`${P}/index.d.ts`, idxDts('js') + `export { Icon } from './icon.js'\n`)
-  W(`${P}/index.d.cts`, idxDts('cjs') + iconDts('cjs'))
+  W(`${P}/index.d.ts`, idxDts('js') + `export { Icon, preloadStyles } from './icon-lazy.js'\n`)
+  W(`${P}/index.d.cts`, idxDts('cjs') + iconDts('cjs', ` * With require() a style is loaded synchronously the first time it renders.`))
+  // CommonJS: require() is synchronous, so <Icon> loads a style when it first renders and never suspends
   W(`${P}/index.cjs`, `'use strict'\n${header}${spec.importCjs}\nconst { createWithIcon } = require('./base.cjs')\nconst { iconNames, styleNames, aliases } = require('./meta.cjs')\n` +
     `const LOAD = { ${styleNames.map(s => `${J(s)}: () => require('./${s}/index.cjs')`).join(', ')} }\nconst SETS = {}\n` +
-    `const getSet = v => SETS[v] || (Object.prototype.hasOwnProperty.call(LOAD, v) ? (SETS[v] = LOAD[v]()) : undefined)\n${findHead}${spec.iconSrc}\n` +
-    `const def = getSet(DEFAULT_STYLE)\nfor (const k in def) exports[k] = def[k]\nexports.Icon = Icon\nexports.createWithIcon = createWithIcon\nexports.iconNames = iconNames\nexports.styleNames = styleNames\n`)
+    `const getSet = v => SETS[v] || (Object.prototype.hasOwnProperty.call(LOAD, v) ? (SETS[v] = LOAD[v]()) : undefined)\n` +
+    `const withLoadStyle = v => new Promise(r => r(getSet(v)))\n${iconRuntime}` +
+    `const def = getSet(DEFAULT_STYLE)\nfor (const k in def) exports[k] = def[k]\nexports.Icon = Icon\nexports.preloadStyles = preloadStyles\nexports.createWithIcon = createWithIcon\nexports.iconNames = iconNames\nexports.styleNames = styleNames\n`)
   await out.flush()
   return files
 }

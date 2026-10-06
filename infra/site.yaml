@@ -92,13 +92,16 @@ Parameters:
   ContentSecurityPolicy:
     Type: String
     Default: >-
-      default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      default-src 'self'; script-src 'self' 'unsafe-inline';
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;
-      img-src 'self' data: blob: https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;
+      img-src 'self' data: blob:; connect-src 'self';
       worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
       frame-ancestors 'none'; upgrade-insecure-requests
     Description: >-
-      Sent on every response. 'unsafe-inline' in script-src is deliberate: the static pages carry a few
+      Sent on every response. The site loads nothing from jsDelivr at runtime (the CDN URLs on the site are code
+      snippets shown as text; the site's own copies live in site/vendor/), so no third-party script, image or
+      connect origin is allowed; add one here only together with a page that really loads it.
+      'unsafe-inline' in script-src is deliberate: the static pages carry a few
       inline scripts (theme bootstrap etc.) and are edited by many hands. For a strict policy run
       "node scripts/deploy.mjs --print-csp" (replaces 'unsafe-inline' with sha256 hashes of every
       inline script in site/) and pass its output here; re-run it whenever inline scripts change.
@@ -279,42 +282,64 @@ Resources:
         Comment: www->apex redirect and directory index rewrite
         Runtime: cloudfront-js-2.0
       FunctionCode: !Sub |
+        // Tested by packages/mcp/test/viewer-function.test.mjs (it evaluates this block). No template literals: !Sub.
+        // Every Location is absolute (https://${DomainName} + path), so a path like //example.com/x can never become a
+        // protocol-relative redirect to another site; repeated slashes are collapsed, backslashes refused.
+        var APEX = 'https://${DomainName}';
+        // percent-encode anything outside the URL-safe set (already-encoded %XX stays as it is): no spaces, quotes,
+        // angle brackets or control characters in a Location header
+        function enc(s) {
+          return String(s).replace(/[^A-Za-z0-9\-._~%!$&'()*+,;=:@\/]/g, function (c) { return encodeURIComponent(c); });
+        }
         function qs(q) {
           var parts = [];
           for (var k in q) {
             var v = q[k];
             if (v.multiValue) {
-              for (var i = 0; i < v.multiValue.length; i++) parts.push(v.multiValue[i].value === '' ? k : k + '=' + v.multiValue[i].value);
+              for (var i = 0; i < v.multiValue.length; i++) parts.push(v.multiValue[i].value === '' ? enc(k) : enc(k) + '=' + enc(v.multiValue[i].value));
             } else {
-              parts.push(v.value === '' ? k : k + '=' + v.value);
+              parts.push(v.value === '' ? enc(k) : enc(k) + '=' + enc(v.value));
             }
           }
           return parts.length ? '?' + parts.join('&') : '';
         }
-        function redirect(location) {
+        function redirect(path, q) {
           return {
             statusCode: 301,
             statusDescription: 'Moved Permanently',
             headers: {
-              location: { value: location },
+              location: { value: APEX + enc(path) + qs(q) },
               'cache-control': { value: 'public, max-age=86400' }
             }
           };
         }
+        // extensionless directory URLs get a trailing slash (/guides -> /guides/) so relative links keep working
+        function dirSlash(p) {
+          if (p.charAt(p.length - 1) === '/') return p;
+          return p.substring(p.lastIndexOf('/') + 1).indexOf('.') === -1 ? p + '/' : p;
+        }
         function handler(event) {
           var request = event.request;
           var host = request.headers.host ? request.headers.host.value.toLowerCase() : '';
-          if (host === 'www.${DomainName}') {
-            return redirect('https://${DomainName}' + request.uri + qs(request.querystring));
+          var uri = request.uri || '/';
+          if (uri.indexOf('\\') !== -1 || /%5c/i.test(uri)) {
+            return { statusCode: 400, statusDescription: 'Bad Request' };
           }
-          var uri = request.uri;
+          var clean = uri.replace(/\/{2,}/g, '/');
+          if (clean.charAt(0) !== '/') clean = '/' + clean;
+          if (host === 'www.${DomainName}') {
+            return redirect(clean, request.querystring);
+          }
+          if (clean !== uri) {
+            // //api/x or //mcp: send it to the real API path as is (no trailing slash), anything else as a page
+            return redirect(/^\/(api|mcp)(\/|$)/i.test(clean) ? clean : dirSlash(clean), request.querystring);
+          }
           if (uri.charAt(uri.length - 1) === '/') {
             request.uri = uri + 'index.html';
             return request;
           }
-          var last = uri.substring(uri.lastIndexOf('/') + 1);
-          if (last.indexOf('.') === -1) {
-            return redirect(uri + '/' + qs(request.querystring));
+          if (dirSlash(uri) !== uri) {
+            return redirect(uri + '/', request.querystring);
           }
           return request;
         }
@@ -517,7 +542,10 @@ Resources:
       Runtime: nodejs22.x
       Architectures: [arm64]
       MemorySize: !Ref LambdaMemoryMb
-      Timeout: 10
+      # 15 s: export_icon pages stop starting new files after 4 s and drop a running call after 7 s (PAGE in
+      # packages/mcp/src/export-tool.mjs); the margin covers 512 MB's ~0.3 vCPU being ~3x slower than the desktop
+      # where a worst page measured ~0.8-3.4 s. CloudFront waits up to OriginReadTimeout (30 s). Costs nothing unless used.
+      Timeout: 15
       Handler: index.handler
       Role: !GetAtt ApiFunctionRole.Arn
       ReservedConcurrentExecutions: !If [HasReservedConcurrency, !Ref LambdaReservedConcurrency, !Ref AWS::NoValue]
@@ -801,7 +829,9 @@ Resources:
             RateBasedStatement:
               Limit: !Ref WafRateLimitPer5Min
               AggregateKeyType: IP
-              # only the hosted API (Lambda) counts; website pages and assets never do
+              # only the hosted API (Lambda) counts; website pages and assets never do. The path is URL-decoded, then
+              # normalised (backslash -> slash, // and ./.. collapsed), then lowercased, so /%61pi/x, //api/x, /API/x and
+              # /x/../api/x are all counted (CloudFront routes them to the API behaviours after its own decoding).
               ScopeDownStatement:
                 OrStatement:
                   Statements:
@@ -809,12 +839,12 @@ Resources:
                         FieldToMatch: { UriPath: {} }
                         PositionalConstraint: STARTS_WITH
                         SearchString: /mcp
-                        TextTransformations: [{ Priority: 0, Type: LOWERCASE }]
+                        TextTransformations: [{ Priority: 0, Type: URL_DECODE }, { Priority: 1, Type: NORMALIZE_PATH_WIN }, { Priority: 2, Type: LOWERCASE }]
                     - ByteMatchStatement:
                         FieldToMatch: { UriPath: {} }
                         PositionalConstraint: STARTS_WITH
                         SearchString: /api/
-                        TextTransformations: [{ Priority: 0, Type: LOWERCASE }]
+                        TextTransformations: [{ Priority: 0, Type: URL_DECODE }, { Priority: 1, Type: NORMALIZE_PATH_WIN }, { Priority: 2, Type: LOWERCASE }]
           VisibilityConfig:
             SampledRequestsEnabled: true
             CloudWatchMetricsEnabled: true
@@ -959,13 +989,10 @@ Resources:
             Condition:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
-              StringLike:
-                token.actions.githubusercontent.com:sub:
-                  # GitHub now sends the id form (repo:org@ownerId/repo@repoId:...); the name form is kept for older tokens
-                  - !Sub 'repo:${GitHubOrg}@${GitHubOwnerId}/${GitHubRepo}@${GitHubRepoId}:environment:production'
-                  - !Sub 'repo:${GitHubOrg}@${GitHubOwnerId}/${GitHubRepo}@${GitHubRepoId}:ref:refs/heads/main'
-                  - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:ref:refs/heads/main'
-                  - !Sub 'repo:${GitHubOrg}/${GitHubRepo}:environment:production'
+                # Only the deploy job of deploy-site.yml (environment production), in GitHub's immutable id form
+                # (repo:org@ownerId/repo@repoId:...): a renamed or re-created repository, a job without the environment, or
+                # a name-form token cannot assume this role. CloudTrail showed every deploy using exactly this subject.
+                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubOrg}@${GitHubOwnerId}/${GitHubRepo}@${GitHubRepoId}:environment:production'
       Policies:
         - PolicyName: deploy
           PolicyDocument:

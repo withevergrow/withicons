@@ -193,6 +193,12 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 .theme-toggle svg, .nav-toggle svg { width: 19px; height: 19px; }
 .theme-toggle:hover { transform: rotate(-20deg); border-color: var(--ink); }
 .theme-toggle:active { transform: rotate(-20deg) scale(.9); }
+/* "Request an icon / feedback": a quiet round link to GitHub issues (the footer carries it as text too) */
+.feedback-link { width: 42px; height: 42px; flex: none; display: inline-grid; place-items: center; border-radius: 50%; border: 1px solid var(--rule-strong);
+  background: var(--card); color: var(--ink); text-decoration: none; transition: transform .4s var(--e-spring), border-color .2s; }
+.feedback-link svg { width: 19px; height: 19px; }
+.feedback-link:hover { transform: translateY(-2px); border-color: var(--ink); }
+.feedback-link:focus-visible { outline: 2.5px solid var(--focus-ring, var(--ink)); outline-offset: 2px; }
 .cta { --btn-bg: var(--ink); flex: none; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--pill);
   background: var(--ink); color: var(--paper); font: 650 14.5px/1 var(--font-sans); text-decoration: none; white-space: nowrap; position: relative; overflow: hidden;
   transition: transform .4s var(--e-out), box-shadow .3s; will-change: transform; }
@@ -237,8 +243,12 @@ html.menu-open .site-header::before { inset: 0; border-radius: 0; box-shadow: no
   .search-trigger kbd { display: none; }
   .search-trigger { width: 42px; padding: 0; justify-content: center; }
 }
+/* narrow desktops: the nav already has "Icons", so the CTA steps aside there; the feedback link waits until it fits */
+@media (max-width: 1160px) and (min-width: 1081px) { .feedback-link { display: none; } }
+@media (max-width: 1080px) and (min-width: 901px) { .cta { display: none; } }
 @media (max-width: 520px) {
   .cta { display: none; }
+  .feedback-link { display: none; }
   .site-actions { gap: 6px; }
   .logo-with { font-size: 25px; }
   .logo-icons { font-size: 20px; }
@@ -672,3 +682,54 @@ html.search-open { overflow: hidden; }
   --c-glass-text: #A9CBFF; --c-kawaii-text: #FFB3C4; --c-sticker-text: #D4B3FF; --c-pixel-text: #A8EE6E; --c-retro-text: #FFB878;
   --c-luxe-text: #C3CCFF; --c-bauhaus-text: #FF8A7A; --c-skeuo-text: #C3D2E4;
   --c-anime-text: #9BD2FF; --c-gothic-text: #F09AB5; --c-pastel-text: #94E8D3; --c-coquette-text: #FFA3BA; --c-plush-text: #FFD789; }
+
+/* ─────────── "On this page" map, tucked or out (site.js pageMap; the pill itself is styled by the page) ───────────
+   Out: a small round button left of the pill tucks it away. Tucked (by the visitor, remembered; or by itself while it
+   would cover text): only a tab on the right edge shows; click it or drag it left to bring the map back. */
+.pm-tab { position: fixed; z-index: 71; right: calc(max(20px, env(safe-area-inset-right)) + var(--pm-w, 210px) + 8px); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 10px);
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; border: 1px solid var(--rule-strong); background: var(--card); color: var(--ink);
+  box-shadow: 0 8px 20px -10px rgba(17, 19, 24, .45); cursor: pointer; touch-action: none;
+  opacity: 0; pointer-events: none; transform: scale(.6); transition: opacity .25s, transform .45s var(--e-spring), right .45s var(--e-out), width .3s var(--e-out), height .3s var(--e-out), border-radius .3s; }
+.pm-tab[hidden] { display: none; }
+.pm-tab.is-shown { opacity: 1; pointer-events: auto; transform: none; }
+.pm-tab:hover { border-color: var(--ink); }
+.pm-tab svg { width: 18px; height: 18px; transition: transform .35s var(--e-out); }
+.pm-tab.is-tucked { right: 0; bottom: max(18px, env(safe-area-inset-bottom)); width: calc(26px + env(safe-area-inset-right)); height: 56px; padding-right: env(safe-area-inset-right);
+  border-radius: 16px 0 0 16px; border: 0; background: #111318; color: #F7F3EC; box-shadow: -8px 10px 26px -14px rgba(17, 19, 24, .6), inset 1px 1px 0 rgba(255, 255, 255, .16), inset 0 -1px 0 rgba(255, 255, 255, .08); }
+.pm-tab.is-tucked svg { transform: rotate(180deg); }
+.pm-tab.is-tucked:hover { width: calc(32px + env(safe-area-inset-right)); }
+/* no free height on the edge: a slim sliver that widens under the pointer or keyboard focus */
+.pm-tab.is-tucked.is-slim { width: calc(8px + env(safe-area-inset-right)); border-radius: 8px 0 0 8px; }
+.pm-tab.is-tucked.is-slim svg { opacity: 0; }
+.pm-tab.is-tucked.is-slim:hover, .pm-tab.is-tucked.is-slim:focus-visible { width: calc(26px + env(safe-area-inset-right)); }
+.pm-tab.is-tucked.is-slim:hover svg, .pm-tab.is-tucked.is-slim:focus-visible svg { opacity: 1; }
+/* compact: when the full pill would cover text but the margin has room, only its round button shows; hide button above it */
+.pm-tab.is-compact { right: calc(max(20px, env(safe-area-inset-right)) + 10px); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 60px); }
+.pm-tab.is-compact svg { transform: rotate(0deg); }
+.js details.pm-compact > summary { width: 52px; padding: 0; gap: 0; justify-content: center; }
+.js details.pm-compact > summary > span:not([class$="-ic"]) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.pm-tab.is-drag { transition: none; cursor: grabbing; }
+[data-theme="dark"] .pm-tab.is-tucked { background: #F4F0E8; color: #111318; box-shadow: -8px 10px 26px -14px rgba(0, 0, 0, .8); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pm-tab.is-tucked { background: #F4F0E8; color: #111318; } }
+.pm-tab:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo); }
+/* the pill slides off to the right while tucked (site.js makes it inert, so it can't take focus) */
+.js details.pm-tucked.is-shown { transform: translateX(calc(100% + 60px)); opacity: 0; pointer-events: none; }
+@media (max-width: 600px) { .pm-tab.is-tucked { width: calc(22px + env(safe-area-inset-right)); height: 52px; } }
+
+/* the first-visit hint: one short line with a close button, attached to the pill or the tab */
+.pm-hint { position: fixed; z-index: 72; display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 6px 6px 6px 14px; border-radius: var(--pill);
+  background: var(--ink); color: var(--paper); font: 650 14px/1.2 var(--font-sans); white-space: nowrap; box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .45s var(--e-spring); }
+.pm-hint.is-tab { transform: translateX(6px); }
+.pm-hint.is-on { opacity: 1; transform: none; }
+.pm-hint::after { content: ''; position: absolute; right: 22px; bottom: -5px; width: 10px; height: 10px; background: inherit; transform: rotate(45deg); border-radius: 2px; }
+.pm-hint.is-tab::after { right: -4px; bottom: auto; top: calc(50% - 5px); }
+.pm-hint-x { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: color-mix(in srgb, var(--paper) 16%, transparent); color: inherit; cursor: pointer; }
+.pm-hint-x:hover { background: color-mix(in srgb, var(--paper) 28%, transparent); }
+.pm-hint-x:focus-visible { outline: 2px solid var(--sun); outline-offset: 1px; }
+@media (prefers-reduced-motion: reduce) { .pm-tab, .pm-tab svg, .pm-hint, .js details.pm-tucked { transition: none !important; } }
+html.reduced .pm-tab, html.reduced .pm-tab svg, html.reduced .pm-hint { transition: none !important; }
+@media print { .pm-tab, .pm-hint { display: none !important; } }
+/* plain text links in the footer base line (the 404 page carries "Request an icon" and "Send feedback" there) */
+.foot-base span a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.foot-base span a:hover { color: var(--on-dark, #fff); }

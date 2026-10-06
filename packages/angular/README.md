@@ -77,28 +77,28 @@ any Angular component. The inner `<svg>` carries `class="withi withi-<name>"`. `
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
-| `line` | `@withicons/angular` | universal | A precise 1.75px outline with round caps and joins. The default for any interface. |
-| `solid` | `@withicons/angular/solid` | universal | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
-| `duo` | `@withicons/angular/duo` | universal | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
-| `gloss` | `@withicons/angular/gloss` | creative | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
-| `engrave` | `@withicons/angular/engrave` | creative | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
-| `blueprint` | `@withicons/angular/blueprint` | creative | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
-| `sketch` | `@withicons/angular/sketch` | creative | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
-| `glass` | `@withicons/angular/glass` | creative | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
-| `kawaii` | `@withicons/angular/kawaii` | creative | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
-| `sticker` | `@withicons/angular/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
-| `pixel` | `@withicons/angular/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
-| `retro` | `@withicons/angular/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
-| `luxe` | `@withicons/angular/luxe` | creative | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
-| `bauhaus` | `@withicons/angular/bauhaus` | creative | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
-| `skeuo` | `@withicons/angular/skeuo` | creative | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
-| `anime` | `@withicons/angular/anime` | creative | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
-| `gothic` | `@withicons/angular/gothic` | creative | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
-| `pastel` | `@withicons/angular/pastel` | creative | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
-| `coquette` | `@withicons/angular/coquette` | creative | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
-| `plush` | `@withicons/angular/plush` | creative | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
+| `line` | `@withicons/angular` | Everyday | A precise 1.75px outline with round caps and joins. The default for any interface. |
+| `solid` | `@withicons/angular/solid` | Everyday | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
+| `duo` | `@withicons/angular/duo` | Everyday | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
+| `gloss` | `@withicons/angular/gloss` | Crafted | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
+| `engrave` | `@withicons/angular/engrave` | Crafted | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
+| `blueprint` | `@withicons/angular/blueprint` | Crafted | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
+| `sketch` | `@withicons/angular/sketch` | Crafted | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
+| `glass` | `@withicons/angular/glass` | Playful | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
+| `kawaii` | `@withicons/angular/kawaii` | Playful | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
+| `sticker` | `@withicons/angular/sticker` | Playful | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
+| `pixel` | `@withicons/angular/pixel` | Playful | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
+| `retro` | `@withicons/angular/retro` | Playful | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
+| `luxe` | `@withicons/angular/luxe` | Studio | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
+| `bauhaus` | `@withicons/angular/bauhaus` | Studio | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
+| `skeuo` | `@withicons/angular/skeuo` | Studio | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
+| `anime` | `@withicons/angular/anime` | Storybook | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
+| `gothic` | `@withicons/angular/gothic` | Storybook | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
+| `pastel` | `@withicons/angular/pastel` | Storybook | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
+| `coquette` | `@withicons/angular/coquette` | Storybook | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `plush` | `@withicons/angular/plush` | Storybook | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
 
 - Every icon is exported twice: `Home` and `HomeIcon`. Deep imports (one file per icon):
   `@withicons/angular/icons/home`, `@withicons/angular/solid/icons/home`.

@@ -4,6 +4,8 @@
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest } from '../../lib/load.mjs'
+import { STYLE_GROUPS, groupOfStyle, LEGACY_GROUP } from '../style-groups.mjs'
+export { STYLE_GROUPS }
 
 export const ROOT = fileURLToPath(new URL('../../../', import.meta.url)).split('\\').join('/').replace(/\/+$/, '')
 export const SITE = ROOT + '/site'
@@ -13,11 +15,11 @@ export const GITHUB = 'https://github.com/withevergrow/withicons'
 /** Display order of the styles everywhere on the site (unknown future styles sort after these). */
 export const ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
 /** The playful palette styles (CONTRACT.md "Palette styles"): their own default colours, the ink still currentColor. */
-export const PLAYFUL = ['glass', 'kawaii', 'sticker', 'pixel', 'retro']
+export const PLAYFUL = (STYLE_GROUPS.find(g => g.id === 'playful') || { styles: [] }).styles
 /** The studio styles (CONTRACT.md "Run 7"): art-directed premium looks with role-named colour variables. */
-export const STUDIO = ['luxe', 'bauhaus', 'skeuo']
+export const STUDIO = (STYLE_GROUPS.find(g => g.id === 'studio') || { styles: [] }).styles
 /** The storybook styles (run 8): illustrated worlds (anime, gothic, pastel, coquette, plush), role-named colour variables. */
-export const STORYBOOK = ['anime', 'gothic', 'pastel', 'coquette', 'plush']
+export const STORYBOOK = (STYLE_GROUPS.find(g => g.id === 'storybook') || { styles: [] }).styles
 // Literal fallbacks, used only while tokens.css doesn't define a style's --c-<style> yet (the brand layer owns the values).
 export const STYLE_COLOR = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#4C8DFF', kawaii: '#FF6FAE', sticker: '#A855F7', pixel: '#16A34A', retro: '#F97316', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
 const STYLE_TEXT = { glass: '#2563C9', kawaii: '#C2185B', sticker: '#7E2FC9', pixel: '#0F7A35', retro: '#B4480B', luxe: '#2B3FB8', bauhaus: '#B81E12', skeuo: '#4A5C71', anime: '#0B67B3', gothic: '#7A1F3D', pastel: '#127A62', coquette: '#B81F4B', plush: '#8F5E00' }
@@ -46,10 +48,13 @@ export const META = {
 }
 export const ICON_NAMES = META.icons.map(i => i.name)
 const styleMeta = Object.fromEntries(META.styles.map(s => [s.name, s]))
-/** { name: { title, kind, description, group: 'universal' | 'creative' | 'playful' | 'studio' | 'storybook' } } */
-export const STYLE_INFO = Object.fromEntries(META.styles.map(s => [s.name, { ...s, group: PLAYFUL.includes(s.name) ? 'playful' : STUDIO.includes(s.name) ? 'studio' : STORYBOOK.includes(s.name) ? 'storybook' : s.kind === 'universal' ? 'universal' : 'creative' }]))
+/** { name: { title, kind, description, group: 'everyday' | 'crafted' | 'playful' | 'studio' | 'storybook', groupTitle } }
+ *  (the five groups come from site/js/site.js GROUPS via ../style-groups.mjs, the one source of truth) */
+export const STYLE_INFO = Object.fromEntries(META.styles.map(s => { const g = groupOfStyle(s.name); return [s.name, { ...s, group: g.id, groupTitle: g.title }] }))
 export const styleTitle = s => (STYLE_INFO[s] && STYLE_INFO[s].title) || s[0].toUpperCase() + s.slice(1)
-export const stylesIn = g => STYLES.filter(s => STYLE_INFO[s].group === g)
+export const stylesIn = g => STYLES.filter(s => STYLE_INFO[s].group === (LEGACY_GROUP[g] || g))
+/** A group's display name ('Everyday', 'Crafted', ...); the old ids 'universal' / 'creative' map to their groups. */
+export const groupTitle = g => (STYLE_GROUPS.find(x => x.id === (LEGACY_GROUP[g] || g)) || { title: g ? g[0].toUpperCase() + g.slice(1) : '' }).title
 export const hasStyle = s => STYLES.includes(s)
 
 /** Counts for copy, always from the data. */
@@ -124,6 +129,7 @@ export function header(p, current) {
   </nav>
   <div class="site-actions">
     <button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button>
+    <a class="feedback-link" href="https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml" title="Request an icon or send feedback (GitHub)"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4.5h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-7.5L7 21v-3.5H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/><path d="M12 8v6M9 11h6"/></svg><span class="visually-hidden">Request an icon or send feedback (opens GitHub)</span></a>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"></button>
     <a class="cta" href="${p}icons.html">Browse icons</a>
   </div>
@@ -176,7 +182,7 @@ function fallbackFooter(p) {
           <li><a href="${p}ai.html#skill">Agent skill</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
         <div class="foot-col s-sketch"><h2>About</h2><ul>
           <li><a href="${p}about.html">About</a></li><li><a href="${p}blog/index.html">Journal</a></li><li><a href="${p}license.html">License</a></li>
-          <li><a href="${p}faq.html">FAQ</a></li><li><a href="https://withevergrow.com">Evergrow</a></li></ul></div>
+          <li><a href="${p}faq.html">FAQ</a></li><li><a href="https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml">Request an icon</a></li><li><a href="https://github.com/withevergrow/withicons/issues/new/choose">Send feedback</a></li><li><a href="https://withevergrow.com">Evergrow</a></li></ul></div>
       </nav>
     </div>
     <div class="foot-word" aria-hidden="true"><span class="fw-with">with</span><span class="fw-icons">icons</span></div>
@@ -198,6 +204,9 @@ export function crumbs(trail) {
 }
 
 export function page({ path, title, desc, current, body, ld = [], crumbsLd, scripts = [], styles = [], bodyClass = '', ogTitle }) {
+  // one title separator across the site, as on the home page: "<what it is> | with icons"; no em dashes in titles
+  const tidy = t => t && String(t).replace(/\s+—\s+/g, ': ').replace(/\s+[·|]\s+with icons$/, ' | with icons')
+  title = tidy(title); ogTitle = tidy(ogTitle)
   const depth = path.split('/').length - 1
   const p = '../'.repeat(depth)
   const graph = { '@context': 'https://schema.org', '@graph': [...ld, crumbsLd ? breadcrumbLd(crumbsLd) : null].filter(Boolean) }

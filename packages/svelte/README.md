@@ -19,9 +19,12 @@ npm i @withicons/svelte
 </nav>
 ```
 
-- Default import path = **line** style. Every other style is a subpath: `@withicons/svelte/solid`, `@withicons/svelte/duo`, ...
+- **One rule:** the root is the **line** style, every other style is a subpath (`@withicons/svelte/solid`, `@withicons/svelte/duo`, ...).
+  Import the icons you use by name from the style you want. That is all.
+- Each icon is a small `.svelte` file and the package has `sideEffects: false`: production builds keep only the icons you
+  import. For the fastest dev server, see the deep imports under "Svelte notes".
 - Every icon is exported twice: `Home` and `HomeIcon`. Names are the PascalCase of the kebab-case icon name (`arrow-right` -> `ArrowRight`).
-- Deep imports (one file per icon): `@withicons/svelte/icons/home`, `@withicons/svelte/solid/icons/home`.
+- Deep imports keep working: `@withicons/svelte/icons/home`, `@withicons/svelte/solid/icons/home`.
 
 ## Props
 
@@ -37,28 +40,28 @@ npm i @withicons/svelte
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
-| `line` | `@withicons/svelte` | universal | A precise 1.75px outline with round caps and joins. The default for any interface. |
-| `solid` | `@withicons/svelte/solid` | universal | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
-| `duo` | `@withicons/svelte/duo` | universal | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
-| `gloss` | `@withicons/svelte/gloss` | creative | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
-| `engrave` | `@withicons/svelte/engrave` | creative | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
-| `blueprint` | `@withicons/svelte/blueprint` | creative | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
-| `sketch` | `@withicons/svelte/sketch` | creative | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
-| `glass` | `@withicons/svelte/glass` | creative | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
-| `kawaii` | `@withicons/svelte/kawaii` | creative | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
-| `sticker` | `@withicons/svelte/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
-| `pixel` | `@withicons/svelte/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
-| `retro` | `@withicons/svelte/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
-| `luxe` | `@withicons/svelte/luxe` | creative | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
-| `bauhaus` | `@withicons/svelte/bauhaus` | creative | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
-| `skeuo` | `@withicons/svelte/skeuo` | creative | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
-| `anime` | `@withicons/svelte/anime` | creative | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
-| `gothic` | `@withicons/svelte/gothic` | creative | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
-| `pastel` | `@withicons/svelte/pastel` | creative | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
-| `coquette` | `@withicons/svelte/coquette` | creative | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
-| `plush` | `@withicons/svelte/plush` | creative | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
+| `line` | `@withicons/svelte` | Everyday | A precise 1.75px outline with round caps and joins. The default for any interface. |
+| `solid` | `@withicons/svelte/solid` | Everyday | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
+| `duo` | `@withicons/svelte/duo` | Everyday | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
+| `gloss` | `@withicons/svelte/gloss` | Crafted | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
+| `engrave` | `@withicons/svelte/engrave` | Crafted | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
+| `blueprint` | `@withicons/svelte/blueprint` | Crafted | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
+| `sketch` | `@withicons/svelte/sketch` | Crafted | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
+| `glass` | `@withicons/svelte/glass` | Playful | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
+| `kawaii` | `@withicons/svelte/kawaii` | Playful | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
+| `sticker` | `@withicons/svelte/sticker` | Playful | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
+| `pixel` | `@withicons/svelte/pixel` | Playful | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
+| `retro` | `@withicons/svelte/retro` | Playful | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
+| `luxe` | `@withicons/svelte/luxe` | Studio | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
+| `bauhaus` | `@withicons/svelte/bauhaus` | Studio | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
+| `skeuo` | `@withicons/svelte/skeuo` | Studio | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
+| `anime` | `@withicons/svelte/anime` | Storybook | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
+| `gothic` | `@withicons/svelte/gothic` | Storybook | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
+| `pastel` | `@withicons/svelte/pastel` | Storybook | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
+| `coquette` | `@withicons/svelte/coquette` | Storybook | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `plush` | `@withicons/svelte/plush` | Storybook | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
 
 Duo's tint can be recoloured with the CSS variable `--with-duo`.
 
@@ -112,14 +115,25 @@ They work with every style and every package because they animate the element th
 
 ```svelte
 <script>
-  import { Icon } from '@withicons/svelte';   // or: import Icon from '@withicons/svelte/icon'
+  import { Icon } from '@withicons/svelte';
 </script>
 
-<Icon name="home" variant="solid" size={20} />
+<Icon name="home" size={20} />                    <!-- line: renders at once -->
+<Icon name="home" variant="solid" size={20} />    <!-- solid: loaded on first use -->
 ```
 
 `name` accepts canonical names and unambiguous aliases (`bin` -> `trash`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** `Icon` references every icon in every style (500 x 20). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+
+**How `Icon` loads styles.** The root `Icon` renders the **line** style at once (a dynamic name needs every line icon,
+so using `Icon` brings that style). Any other `variant` is loaded the first time it renders: one dynamic import per
+style (one chunk in a bundle, one file in Node), shared by every `Icon` of that style.
+Until a style has loaded, its `Icon` renders nothing, then the icon. On the server it renders only styles already
+loaded, so call `await preloadStyles('solid')` before rendering (e.g. in a SvelteKit `load` or `hooks.server`) when
+server HTML must contain them.
+
+To have other styles ready up front, `await preloadStyles('solid', 'duo')` (no argument = every style). Or import
+`Icon` from `@withicons/svelte/icon`: it imports every icon of every style (500 x 20, heavy) and always renders synchronously.
+`Icon` is tree-shaken away when unused; prefer named imports wherever the name is static.
 
 ## Custom icons
 

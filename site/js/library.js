@@ -261,9 +261,28 @@
     }
   }
   function doSearch(q) {
-    var res
-    try { res = getEngine().search(q, { limit: ICONS.length }) || [] } catch (e) { res = [] }
-    return res.filter(function (r) { return r && BY[r.name] })
+    var res, e = getEngine(), o = null
+    // engine.query (the shared engine) also says how sure the whole answer is; search() alone on the fallback engine
+    try { if (e.query) { o = e.query(q, { limit: ICONS.length }); res = o && o.results || [] } else res = e.search(q, { limit: ICONS.length }) || [] } catch (err) { res = []; o = null }
+    res = res.filter(function (r) { return r && BY[r.name] })
+    // a one- or two-letter query ("ai", "tv", "x") also prefix-matches dozens of longer words (air, aim, airport):
+    // those expansions are only related, and go after the icons that really are called or mean that word
+    var nq = norm(q).replace(/[\s-]+/g, '')
+    if (nq && nq.length <= 2) {
+      var whole = [], pre = []
+      res.forEach(function (r) {
+        if (r.match && r.match.kind === 'prefix') { r.confidence = 'low'; r.weak = true; pre.push(r) } else whole.push(r)
+      })
+      res = whole.concat(pre)
+    }
+    res.answer = o ? o.confidence : (res[0] && res[0].confidence) || null
+    return res
+  }
+  // every top result is a guess ("yoga" -> dumbbell, fitness): say there is no exact icon before showing them
+  function weakAnswer(res) {
+    if (!res.length) return false
+    var top = res.slice(0, 3)
+    return top.every(function (r) { return r.confidence === 'low' || r.weak })
   }
   function suggestions(q, n) {
     var out = []
@@ -584,12 +603,13 @@
   var lastSearchMs = 0
   function runSearch() {
     var t0 = performance.now(), q = S.q.trim(), res
-    S.fix = null
+    S.fix = null; S.weak = false
     if (!q) res = BROWSE.map(function (ic) { return { name: ic.name, match: null } })
     else {
       res = doSearch(q)
       S.fix = correction(q, res)
       if (S.fix && !res.length) { res = doSearch(S.fix.to); if (!res.length) S.fix = null; else S.fix.used = true }
+      S.weak = weakAnswer(res)
     }
     var counts = {}; res.forEach(function (r) { var c = BY[r.name].category; counts[c] = (counts[c] || 0) + 1 })
     S.counts = counts; S.total = res.length
@@ -728,7 +748,9 @@
     n.innerHTML = '<span class="t-card"><span class="t-ic">' + glyph(it.st, it.name) + '</span><span class="t-name">' + label + '</span>' + (why ? '<span class="t-why">' + why + '</span>' : '') + '</span>' +
       '<span class="t-chk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 L10 17 L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'
     var whyTxt = why ? why.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&') : ''
-    n.setAttribute('aria-label', ic.title + ', ' + STYLE[it.st].title + ' style' + (whyTxt ? ', ' + whyTxt : ''))
+    var rel = !!(S.view === 'grid' && S.q.trim() && it.r && (it.r.confidence === 'low' || it.r.weak))
+    n.classList.toggle('is-rel', rel)
+    n.setAttribute('aria-label', ic.title + ', ' + STYLE[it.st].title + ' style' + (whyTxt ? ', ' + whyTxt : '') + (rel ? ', related' : ''))
     n._st = it.st
     paintTileState(n)
   }
@@ -846,7 +868,7 @@
     if (scrollQueued) return
     scrollQueued = true
     raf(function () {
-      scrollQueued = false; render({ scrolling: true }); railWatch()
+      scrollQueued = false; render({ scrolling: true }); railWatch(); fitViewer()
       var b = $('[data-bar]'); if (b) { var st = b.getBoundingClientRect().top <= (parseFloat(root.style.getPropertyValue('--lib-top')) || 0) + 1 && W.scrollY > 40; if (st !== b.classList.contains('is-stuck')) { b.classList.toggle('is-stuck', st); measureTop() } }
     })
   }
@@ -862,6 +884,7 @@
     if (o.newQuery) gen++
     render({ anim: o.anim !== false, prev: prev, refill: o.refill !== false })
     paintMeta(); paintCats(); paintSel(); syncUrl()
+    syncSlim(!!o.newQuery)
   }
   function relayout(anim) {
     var prev = snapshot()
@@ -891,7 +914,13 @@
       var sug = suggestions(S.fix ? S.fix.to : q, 8).filter(function (s) { return !have[s] }).slice(0, 5)
       if (sug.length) dym = '<p class="meta-dym"><span>Also try</span>' + sug.map(function (s) { return '<button type="button" class="dym" data-q="' + esc(BY[s].title.toLowerCase()) + '" style="--sc:var(--s-' + S.style + ')">' + glyph(S.style, s) + esc(BY[s].title) + '</button>' }).join('') + '</p>'
     }
-    meta.innerHTML = '<p class="meta-line">' + head + '<span class="meta-speed" title="search time">' + (q ? lastSearchMs.toFixed(1) + ' ms' : '') + '</span></p>' + fix + dym
+    var weak = ''
+    if (q && n && S.weak) {
+      weak = '<div class="meta-weak" data-weak role="note"><span class="mw-ic" aria-hidden="true">' + ICO.spark + '</span>' +
+        '<p><b>No exact icon for “' + esc(S.fix && S.fix.used ? S.fix.to : q) + '”.</b> Closest:<small>These are related, not the thing itself. Pick one and say what it stands for in a label.</small></p>' +
+        '<a href="https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml&title=' + encodeURIComponent('Icon request: ' + (S.fix && S.fix.used ? S.fix.to : q)) + '" target="_blank" rel="noopener">Request an icon</a></div>'
+    }
+    meta.innerHTML = '<p class="meta-line">' + head + '<span class="meta-speed" title="search time">' + (q ? lastSearchMs.toFixed(1) + ' ms' : '') + '</span></p>' + fix + weak + dym
     empty.hidden = n > 0
     grid.hidden = n === 0
     if (!n && lastEmptyQ !== q + '|' + S.cat) { lastEmptyQ = q + '|' + S.cat; paintEmpty(q) }
@@ -901,7 +930,7 @@
   var POP_CATS = ['actions', 'communication', 'commerce', 'files', 'users', 'food', 'travel', 'nature', 'weather', 'objects']
   function paintEmpty(q) {
     var sug = q ? suggestions(q, 8).slice(0, 6) : []
-    var reqUrl = 'https://github.com/withevergrow/withicons/issues/new?title=' + encodeURIComponent('Icon request: ' + (q || '')) + '&labels=icon-request'
+    var reqUrl = 'https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml&title=' + encodeURIComponent('Icon request: ' + (q || ''))
     empty.innerHTML =
       '<div class="em-card">' +
         '<div class="em-art" aria-hidden="true">' + ICO.searchFace + '</div>' +
@@ -1567,6 +1596,9 @@
     var d = $('[data-vw-dock]', viewer); if (!d) return
     // a phone sheet in peek ends below the screen, so a dock there would sit over visible content: only when full
     var on = !!(V.open && V.dockWant && !(isSheet() && V.snap !== 'full'))
+    // a panel cut to the screen (page near the top) shows Copy image, PNG and SVG itself: no dock just for the code bar
+    var miss0 = V.dockMiss || {}
+    if (on && viewer.classList.contains('vw-fit') && !miss0.a && !miss0.f) on = false
     d.classList.toggle('is-on', on); viewer.classList.toggle('has-dock', on); var m = V.dockMiss || {}; d.classList.toggle('no-copy', !m.a); d.classList.toggle('no-files', !m.f); d.classList.toggle('no-code', !m.q); d.classList.toggle('is-solo', (m.a ? 1 : 0) + (m.f ? 2 : 0) + (m.q ? 1 : 0) === 1)
     var sk = $('[data-vw-stack] option:checked', vwBody), cb = $('[data-vw-dkcode]', d)
     if (cb && sk) cb.title = 'Copy the ' + sk.textContent + ' code'
@@ -1727,6 +1759,7 @@
     if (!wasOpen) {
       viewer.hidden = false
       root.classList.add('has-vw'); body.classList.add('has-vw')
+      syncSlim(); fitFor(600)
       if (isSheet()) { setSnap('peek', true); lockScroll(true) }
       else { updateBodyCols(); relayout(true); keepActiveInView() }
       viewer.classList.remove('is-in', 'is-in-fade'); void viewer.offsetWidth; viewer.classList.add(flyFrom ? 'is-in-fade' : 'is-in')
@@ -1746,6 +1779,7 @@
     var finish = function () {
       viewer.hidden = true
       root.classList.remove('has-vw'); body.classList.remove('has-vw')
+      fitViewer()   // the hero stays slim until the visitor is back to plain browsing (update)
       if (!isSheet()) { updateBodyCols(); relayout(true) }
     }
     if (isSheet()) { setSnap('closed'); lockScroll(false); setTimeout(function () { if (!V.open) finish() }, reduced ? 0 : 320) }
@@ -2335,6 +2369,7 @@
     if (isSheet()) on = false
     V.full = on
     viewer.classList.toggle('is-full', on)
+    fitViewer()
     HTML.classList.toggle('vw-lock', on || (isSheet() && V.open))
     var b = $('[data-vw="full"]', vwBody)
     if (b) { b.innerHTML = on ? ICO.shrink : ICO.expand; b.setAttribute('aria-label', on ? 'Exit full screen' : 'Expand to full screen'); b.title = on ? 'Exit full screen (F)' : 'Full screen (F)' }
@@ -2370,15 +2405,31 @@
   function snapY(s) {
     var h = sheetH(), vh = W.innerHeight
     if (s === 'full') return 0
-    if (s === 'peek') return Math.max(0, h - Math.min(vh * 0.72, 660))
+    if (s === 'peek') return Math.max(0, h - Math.min(vh * 0.72, 660) - (V.peekExtra || 0))
     return h + 24
   }
   function setSnap(s, fromClosed) {
     V.snap = s
     viewer.setAttribute('data-snap', s)
+    fitSheet()
     if (fromClosed && !reduced) { vwPanel.style.transition = 'none'; vwPanel.style.transform = 'translate3d(0,' + snapY('closed') + 'px,0)'; void vwPanel.offsetWidth; vwPanel.style.transition = '' }
     vwPanel.style.transform = 'translate3d(0,' + snapY(s) + 'px,0)'
     paintScrim(); paintDock()
+  }
+  // the phone sheet's first stop (peek) shows the jobs whole: Copy image, PNG and SVG. The preview gives up height
+  // (down to 120 px) and, on very short screens, the sheet rises a little higher until they fit.
+  function fitSheet() {
+    if (!viewer._built) return
+    viewer.style.removeProperty('--vw-peek-stage'); V.peekExtra = 0
+    if (!isSheet() || V.snap !== 'peek') return
+    var stg = $('[data-vw-stage]', vwBody), acts = $('.vw-acts', vwBody)
+    if (!stg || !acts) return
+    var vh = W.innerHeight, rel = acts.getBoundingClientRect().bottom - vwPanel.getBoundingClientRect().top
+    var over = vh - Math.min(vh * 0.72, 660) + rel - (vh - 12)
+    if (over <= 0) return
+    var cur = stg.getBoundingClientRect().height, want = Math.max(120, Math.round(cur - over))
+    viewer.style.setProperty('--vw-peek-stage', want + 'px')
+    var left = over - (cur - want); if (left > 0) V.peekExtra = Math.ceil(left)
   }
   function lockScroll(on) { HTML.classList.toggle('vw-lock', on || V.full) }
   ;(function sheetGestures() {
@@ -2452,9 +2503,66 @@
   }
   // first keystroke from the hero: glide the bar up to its sticky spot so the results are in view
   function dockBar() {
-    var b = $('[data-bar]'); if (!b || b.classList.contains('is-stuck')) return
+    var b = $('[data-bar]'); if (!b || b.classList.contains('is-stuck') || performance.now() - slimAt < 600) return
     var target = W.scrollY + b.getBoundingClientRect().top - (parseFloat(root.style.getPropertyValue('--lib-top')) || 0)
     if (target - W.scrollY > 40) W.scrollTo({ top: target, behavior: reduced ? 'instant' : 'smooth' })
+  }
+  /* Slim hero: once the visitor searches, picks a category or opens an icon, the hero folds away so the results and
+     the docked viewer's Copy / PNG / SVG fit the first screen. While the hero is on screen it folds smoothly (CSS);
+     when it is scrolled away (or before the first paint) it switches at once and the page scrolls by the same amount,
+     so the grid under the cursor does not move. Back to browsing (no query, no category, viewer closed) unfolds it. */
+  var heroEl = $('.lib-hero'), slimReady = false, slimAt = 0
+  function syncSlim(canUnfold) {
+    if (!heroEl) return false
+    var on = !!(S.q.trim() || S.cat || V.open)
+    if (on === root.classList.contains('has-slim-hero') || (!on && !canUnfold)) return false
+    var top = parseFloat(root.style.getPropertyValue('--lib-top')) || 0
+    var offscreen = heroEl.getBoundingClientRect().bottom <= top + 1
+    if (!slimReady || offscreen || reduced) {
+      var anchor = $('[data-body]'), y0 = anchor ? anchor.getBoundingClientRect().top : 0
+      root.classList.add('lib-snap'); root.classList.toggle('has-slim-hero', on)
+      var y1 = anchor ? anchor.getBoundingClientRect().top : 0
+      if (offscreen && slimReady && y1 !== y0) W.scrollBy({ top: y1 - y0, behavior: 'instant' })
+      void root.offsetHeight; root.classList.remove('lib-snap')
+      fitViewer()
+    } else {
+      root.classList.toggle('has-slim-hero', on); slimAt = performance.now()
+      fitFor(520)
+    }
+    return true
+  }
+  // the docked viewer is as tall as the space under the sticky bar; until it sticks (page near the top) it would end
+  // below the screen with its actions, so it is cut to the visible height and the action dock shows at its foot
+  function fitViewer() {
+    if (!viewer) return
+    if (!V.open || viewer.hidden || isSheet() || V.full) {
+      if (viewer.style.height) viewer.style.height = ''
+      if (viewer.classList.contains('vw-fit')) viewer.classList.remove('vw-fit')
+      var st0 = vwBody && $('[data-vw-stage]', vwBody); if (st0 && st0.style.height) st0.style.height = ''
+      return
+    }
+    var cs = root.style, stick = (parseFloat(cs.getPropertyValue('--lib-top')) || 0) + (parseFloat(cs.getPropertyValue('--lib-bar-h')) || 76) + 12
+    var t = viewer.getBoundingClientRect().top
+    var h = t > stick + 1 ? Math.round(W.innerHeight - t - 12) + 'px' : ''
+    if (viewer.style.height !== h) viewer.style.height = h
+    var fit = !!h
+    if (fit !== viewer.classList.contains('vw-fit')) { viewer.classList.toggle('vw-fit', fit); paintDock() }
+    // single column (the usual dock): give up stage height, down to 120 px, until Copy image, PNG and SVG fit
+    var stg = vwBody && $('[data-vw-stage]', vwBody), acts = vwBody && $('.vw-acts', vwBody), colA = vwBody && $('.vw-col-a', vwBody)
+    if (!stg || !acts || !colA || vwBody.scrollTop > 4) return
+    if (getComputedStyle(colA).display !== 'contents') { if (stg.style.height) stg.style.height = ''; return }
+    var base = Math.round(Math.min(300, Math.max(168, W.innerHeight * 0.28)))
+    var cur = stg.getBoundingClientRect().height, over = acts.getBoundingClientRect().bottom - (vwBody.getBoundingClientRect().bottom - 10)
+    var want = Math.max(120, Math.min(base, Math.round(cur - over)))
+    var sh = want < base ? want + 'px' : ''
+    if (stg.style.height !== sh) stg.style.height = sh
+  }
+  var fitUntil = 0, fitting = false
+  function fitFor(ms) {
+    fitUntil = performance.now() + ms
+    if (fitting) return
+    fitting = true
+    raf(function loop() { fitViewer(); if (performance.now() < fitUntil) raf(loop); else fitting = false })
   }
   // after a new query, make sure the top of the results is visible under the sticky bar
   function revealResults() {
@@ -2463,6 +2571,7 @@
   }
   function paintClear() { var c = $('[data-clear]'); if (c) c.hidden = !input.value }
   input.value = S.q
+  paintClear()   // a page opened on ?q= shows its clear button too
   var qTimer = 0
   input.addEventListener('input', function () {
     var v = input.value
@@ -2751,6 +2860,7 @@
   var firstLoad = S.view === 'compare' ? loadAll() : loadStyle(S.style)
   // render immediately (skeletons if the style file is still downloading), then fill in
   runSearch(); buildItems(); layout(); render({ anim: !reduced, prev: new Map() }); paintMeta(); paintCats(); paintStylePills(); paintSel()
+  syncSlim(); raf(function () { raf(function () { slimReady = true }) })
   firstLoad.then(function () {
     loadStyle('line').then(function () { paintCatGlyphs(); paintStylePills() })
     mounted.forEach(function (n) { n.remove() }); mounted.clear(); gen++
@@ -2788,7 +2898,7 @@
   if (W.ResizeObserver) new ResizeObserver(function () { if (inkQ) return; inkQ = true; raf(function () { inkQ = false; moveInk() }) }).observe(stylesEl)
   var wasSheet = isSheet()
   W.addEventListener('resize', function () {
-    measureTop(true); moveInk(); updateBodyCols(); moveTInk(); centreOverlays(); paintDock(); railWatch()
+    measureTop(true); moveInk(); updateBodyCols(); moveTInk(); centreOverlays(); paintDock(); railWatch(); fitViewer()
     if (stylesWrap.classList.contains('is-open') && !sbSheet()) sbOpen(false)
     var nowSheet = isSheet()
     if (nowSheet !== wasSheet) {

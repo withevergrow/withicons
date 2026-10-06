@@ -94,7 +94,7 @@
       who: 'Product UI, navigation, toolbars and dense dashboards.', why: 'One even stroke that stays crisp from tiny to huge and takes any colour.' },
     solid: { title: 'Solid', kind: 'universal', color: '#FF5A36', description: 'Bold filled shapes.',
       plain: 'Bold, filled shapes that read from across the room.', good: 'Buttons, tab bars, tiny sizes, signs',
-      who: 'Selected and active states, tab bars, tiny sizes, high contrast.', why: 'The filled twin of Line — pair them for on/off states.' },
+      who: 'Selected and active states, tab bars, tiny sizes, high contrast.', why: 'The filled twin of Line. Pair them for on/off states.' },
     duo: { title: 'Duo', kind: 'universal', color: '#7B5CFF', description: 'An outline over a soft tint.',
       plain: 'An outline with a soft tint inside. Friendly and calm.', good: 'Feature lists, onboarding, landing pages',
       who: 'Feature lists, empty states, onboarding and marketing surfaces.', why: 'Adds depth without adding a second colour.' },
@@ -1152,7 +1152,7 @@
     px = px || 512
     var blobP = pngFile(name, style, px)
     var fileName = name + '-' + style + '-' + px + '.png'
-    var fallback = function () { return blobP.then(function (b) { downloadBlob(fileName, b); toast('PNG downloaded — ' + fileName) }, function () { toast('Could not make a PNG') }) }
+    var fallback = function () { return blobP.then(function (b) { downloadBlob(fileName, b); toast('PNG downloaded: ' + fileName) }, function () { toast('Could not make a PNG') }) }
     if (navigator.clipboard && navigator.clipboard.write && W.ClipboardItem && W.isSecureContext) {
       var item
       try { item = new W.ClipboardItem({ 'image/png': blobP }) } catch (e) { item = null }
@@ -1263,7 +1263,7 @@
       if (!hits.length && fixed) hits = search(fixed, { limit: 300 })
       so.prog.classList.remove('is-run'); void so.prog.offsetWidth; so.prog.classList.add('is-run')
       so.all.setAttribute('href', rel('icons.html') + '?q=' + encodeURIComponent(q))
-      setBanner(fixed && hits.length ? '<span class="sb-ic" aria-hidden="true">✦</span><span>Showing results for <b>' + esc(fixed) + '</b> <span class="sb-typed">— you typed “' + esc(q) + '”</span></span>' : '')
+      setBanner(fixed && hits.length ? '<span class="sb-ic" aria-hidden="true">✦</span><span>Showing results for <b>' + esc(fixed) + '</b> <span class="sb-typed">(you typed “' + esc(q) + '”)</span></span>' : '')
       if (hits.length) {
         so.empty.hidden = true
         so.label.innerHTML = '<b>' + fmt(hits.length) + '</b>' + (hits.length === 1 ? ' icon' : ' icons') + ' for “' + esc(fixed || q) + '”'
@@ -1275,7 +1275,7 @@
         sug = sug.map(function (s) { return typeof s === 'string' ? s : s.name })
         so.empty.hidden = false
         so.empty.innerHTML = '<span class="hand">hmm, nothing yet…</span><p>' + (sug.length ? 'Did you mean ' + sug.map(function (s) { return '<button type="button" data-so-suggest="' + esc(s) + '">' + esc(s) + '</button>' }).join('') + '?' : 'Try a simpler word, like “home” or “money”.') + '</p>' +
-          '<p class="so-empty-ai">Or describe what it’s for — an AI assistant will pick the right icon for you:</p><div class="so-empty-ask"></div>'
+          '<p class="so-empty-ai">Or describe what it’s for, and an AI assistant will pick the right icon for you:</p><div class="so-empty-ask"></div>'
         askRender($('.so-empty-ask', so.empty), { query: q, intent: 'find' })
       }
     })
@@ -1401,18 +1401,18 @@
     var app = opts.app && GUIDES[opts.app] ? opts.app : ''
     var P = []
     var add = function (t, drop) { P.push([t, !!drop]) }
-    add('First, open and follow ' + AI_SKILL + ' — the guide to "with icons" (' + AI_SITE + '): ' + fmt(counts().icons) + ' free, MIT-licensed icons, each drawn in ' + counts().styles + ' styles (' + ORDER.join(', ') + '). Look icons up with ' + AI_SITE + '/api/search?q=WORDS (it understands synonyms and typos; overview: ' + AI_SITE + '/llms.txt). Only use icon names that exist there — never invent one.')
+    add('First, open and follow ' + AI_SKILL + ', the guide to "with icons" (' + AI_SITE + '): ' + fmt(counts().icons) + ' free, MIT-licensed icons, each drawn in ' + counts().styles + ' styles (' + ORDER.join(', ') + '). Look icons up with ' + AI_SITE + '/api/search?q=WORDS (it understands synonyms and typos; overview: ' + AI_SITE + '/llms.txt). Only use icon names that exist there. Never invent one.')
     add('')
     var page = name ? AI_SITE + '/icons/' + name + '.html' : ''
     var iconLine = function () {
       var m = icon(name) || {}
       var aka = (m.aliases || []).slice(0, 4)
-      return 'Icon: "' + name + '", ' + ST + ' style — ' + page + (m.category ? ' (category: ' + m.category + (aka.length ? '; also called ' + aka.join(', ') : '') + ')' : '')
+      return 'Icon: "' + name + '", ' + ST + ' style: ' + page + (m.category ? ' (category: ' + m.category + (aka.length ? '; also called ' + aka.join(', ') : '') + ')' : '')
     }
-    var needLine = function (ask) { return q ? 'What I’m making: "' + q + '"' : 'What I’m making: not said yet — ' + ask }
+    var needLine = function (ask) { return q ? 'What I’m making: "' + q + '"' : 'What I’m making: not said yet. ' + ask }
     if (intent === 'find') {
       if (q) {
-        add('MY TASK: find the best icon for this — "' + q + '"')
+        add('MY TASK: find the best icon for this: "' + q + '"')
         var hints = []
         try { hints = search(q, { limit: 6 }).map(function (h) { return h.name }) } catch (e) { hints = [] }
         if (hints.length) add('The site’s own search suggests: ' + hints.join(', ') + '. Check them against my meaning; don’t just trust the ranking.', true)
@@ -1424,8 +1424,8 @@
       add('Reply with:')
       add('1. Best fit: exact name + one line on why my users will read it right.')
       add('2. Up to 2 alternatives, one line each.')
-      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles — gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush — only at 32px+).')
-      add('4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
+      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles (gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush) only at 32px+).')
+      add('4. Ready-to-paste code for my stack, or steps for my app. Ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
       add('5. A link for each pick: ' + AI_SITE + '/icons/NAME.html')
     } else if (intent === 'code') {
       add('MY TASK: code the "' + name + '" icon into my app.')
@@ -1445,7 +1445,7 @@
       add('')
       add('Reply with:')
       add('1. The 4–8 icons from the library that belong beside "' + name + '" here: exact names (search, don’t guess), what each stands for, and why it’s needed.')
-      add('2. One style for all of them (' + ST + ' unless my context calls for another — say why), one size and one stroke width.')
+      add('2. One style for all of them (' + ST + ' unless my context calls for another; say why), one size and one stroke width.')
       add('3. How to use them together: code for my stack, or which files to download for slides and design tools.')
       add('4. Any meaning the library doesn’t cover, with the closest substitute.')
       add('5. A link for each: ' + AI_SITE + '/icons/NAME.html')
@@ -1488,7 +1488,7 @@
     var full = P.map(function (p) { return p[0] }).join('\n')
     if (full.length <= PREFILL_MAX) return full
     var t = P.filter(function (p) { return !p[1] }).map(function (p) { return p[0] }).join('\n').replace(/\n{3,}/g, '\n\n')
-    t += '\n\n(Shortened for the link. The full brief is on your clipboard — paste it here instead for more detail.)'
+    t += '\n\n(Shortened for the link. The full brief is on your clipboard: paste it here instead for more detail.)'
     return t.length > PREFILL_MAX + 400 ? t.slice(0, PREFILL_MAX + 380) + '…' : t
   }
   // copy with a fallback that also works on file:// and http:// (execCommand inside the click gesture),
@@ -1518,7 +1518,7 @@
       manualEl = doc.createElement('div')
       manualEl.className = 'manual-copy'
       manualEl.setAttribute('role', 'dialog'); manualEl.setAttribute('aria-modal', 'true'); manualEl.setAttribute('aria-labelledby', 'mc-title')
-      manualEl.innerHTML = '<div class="mc-card"><p class="mc-title" id="mc-title"></p><p class="mc-hint">Your browser blocked automatic copying. The text is selected — press <kbd>' + (IS_MAC ? '⌘' : 'Ctrl') + '</kbd>+<kbd>C</kbd> to copy it.</p>' +
+      manualEl.innerHTML = '<div class="mc-card"><p class="mc-title" id="mc-title"></p><p class="mc-hint">Your browser blocked automatic copying. The text is selected. Press <kbd>' + (IS_MAC ? '⌘' : 'Ctrl') + '</kbd>+<kbd>C</kbd> to copy it.</p>' +
         '<textarea class="mc-text" readonly></textarea><div class="mc-row"><a class="btn btn-ghost btn-sm mc-go" target="_blank" rel="noopener noreferrer" hidden></a><button type="button" class="btn btn-ink btn-sm" data-mc-close>Done</button></div></div>'
       doc.body.appendChild(manualEl)
       manualEl.addEventListener('click', function (e) { if (e.target === manualEl || e.target.closest('[data-mc-close]') || e.target.closest('.mc-go')) manualEl.classList.remove('is-on') })
@@ -1553,8 +1553,8 @@
         if (e.target.closest('[data-gem-close]')) { gemEl.classList.remove('is-on'); return }
         if (e.target.closest('[data-gem-copy]')) {
           var t = gemEl.__text
-          if (copySync(t)) toast('Copied again — paste it into Gemini')
-          else copyRobust(t).then(function (ok) { if (ok) toast('Copied again — paste it into Gemini'); else manualCopy(t, 'Paste this into Gemini', { href: gemEl.__url, label: 'Open Gemini' }) })
+          if (copySync(t)) toast('Copied again. Paste it into Gemini')
+          else copyRobust(t).then(function (ok) { if (ok) toast('Copied again. Paste it into Gemini'); else manualCopy(t, 'Paste this into Gemini', { href: gemEl.__url, label: 'Open Gemini' }) })
         }
         if (e.target.closest('[data-gem-open]')) {
           copySync(gemEl.__text)
@@ -1581,7 +1581,7 @@
     var h = ''
     AI.forEach(function (a) {
       h += '<a class="ask-ai-btn" data-ai="' + a.id + '" href="' + esc(a.url('')) + '" target="_blank" rel="noopener noreferrer"' + (list ? ' role="menuitem"' : '') +
-        ' aria-label="Ask ' + a.name + (a.paste ? ' (prompt is copied: paste it with ' + PASTE_KEY + ')' : '') + ' — opens in a new tab" title="' + (a.paste ? 'Gemini: we copy the prompt, you paste it (' + PASTE_KEY + ')' : 'Ask ' + a.name) + '">' +
+        ' aria-label="Ask ' + a.name + (a.paste ? ' (prompt is copied: paste it with ' + PASTE_KEY + ')' : '') + ' (opens in a new tab)" title="' + (a.paste ? 'Gemini: we copy the prompt, you paste it (' + PASTE_KEY + ')' : 'Ask ' + a.name) + '">' +
         '<span class="ask-ai-logo">' + a.svg() + '</span>' + (compact ? '' : '<span class="ask-ai-name">' + a.name + '</span>') +
         (a.paste ? '<span class="ask-ai-paste" aria-hidden="true">' + PASTE_KEY + '</span>' : '') + '</a>'
     })
@@ -1608,7 +1608,7 @@
     var h = ''
     if (mode === 'button') {
       var id = 'ask-pop-' + (++askSeq)
-      h = '<button type="button" class="ask-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="' + id + '" title="Describe what it’s for — an AI assistant picks the icon">' +
+      h = '<button type="button" class="ask-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="' + id + '" title="Describe what it’s for and an AI assistant picks the icon">' +
         '<span class="ask-spark" aria-hidden="true">✦</span><span class="ask-trigger-l">' + esc(opts.label || 'Ask AI') + '</span></button>' +
         '<div class="ask-pop" id="' + id + '" role="menu" aria-label="Choose an assistant" hidden>' +
         '<p class="ask-pop-h"><span class="ask-spark" aria-hidden="true">✦</span>Ask AI to find it</p>' +
@@ -1726,7 +1726,7 @@
     var a = AI_BY[b.getAttribute('data-ai')]
     if (!a) { // copy prompt only
       e.preventDefault()
-      copyRobust(p).then(function (ok) { if (ok) toast('Prompt copied — paste it into any AI'); else manualCopy(p) })
+      copyRobust(p).then(function (ok) { if (ok) toast('Prompt copied. Paste it into any AI'); else manualCopy(p) })
       return
     }
     var url = a.url(pre)
@@ -1740,7 +1740,7 @@
         e.preventDefault()
         manualCopy(p, 'Copy this, then open Gemini and paste it', { href: url, label: 'Open Gemini' })
       } else geminiNotice(p, url)
-    } else toast('Opening ' + a.name + (trimmed ? ' — full brief copied too' : ' — prompt copied too'))
+    } else toast('Opening ' + a.name + (trimmed ? ': full brief copied too' : ': prompt copied too'))
     b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop')
     if (openPop) setTimeout(function () { popClose() }, 0)
   }
@@ -1822,6 +1822,183 @@
     })
   }
 
+  /* ───────────── "On this page": the floating section map (icon pages, live pages) ─────────────
+     The page script owns the map itself (a <details> pill that shows once the hero has scrolled away and opens a list
+     of sections). This layer makes it polite: a small round "hide" button tucks it into a tab on the right edge (click
+     or drag the tab left to bring it back; the choice is remembered), it tucks itself whenever it would sit on top of
+     text or controls, and its one-time hint only appears where it covers nothing.
+     <details data-pm-dock="(max-width: 760px)"> docks the pill elsewhere in that media query (the icon pages' mobile
+     action bar): no tab and no tucking there. */
+  var PM_KEY = 'with-pagemap-tucked', PM_HINT = 'with-pagemap-hint'
+  var pmGet = function (k) { try { return localStorage.getItem(k) } catch (e) { return null } }
+  var pmSet = function (k, v) { try { localStorage.setItem(k, v) } catch (e) { /* private mode */ } }
+  var PM_TEXT = /^(P|LI|H[1-6]|A|BUTTON|LABEL|INPUT|SELECT|TEXTAREA|CODE|PRE|TD|TH|CAPTION|FIGCAPTION|BLOCKQUOTE|DT|DD|SUMMARY|IMG|CANVAS|VIDEO|KBD|B|STRONG|EM|I|SMALL|SPAN|MARK|TIME|Q|CITE|SUP|SUB)$/
+  function pmIsContent(el) {
+    if (!el || el === html || el === doc.body) return false
+    if ((W.SVGElement && el instanceof W.SVGElement) || PM_TEXT.test(el.tagName)) return true
+    for (var n = el.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && /\S/.test(n.nodeValue)) return true
+    return false
+  }
+  // does anything readable or clickable sit under this viewport rectangle? (the map's own parts don't count)
+  function pmCovers(r, skip) {
+    if (!doc.elementsFromPoint || r.w <= 0 || r.h <= 0) return false
+    var cols = Math.max(3, Math.ceil(r.w / 40)), rows = Math.max(2, Math.ceil(r.h / 20))
+    for (var i = 0; i <= cols; i++) for (var j = 0; j <= rows; j++) {
+      var x = r.x + 2 + (r.w - 4) * i / cols, y = r.y + 2 + (r.h - 4) * j / rows
+      var els = doc.elementsFromPoint(x, y)
+      for (var k = 0; k < els.length; k++) {
+        var el = els[k], mine = false
+        for (var s = 0; s < skip.length; s++) if (skip[s] && skip[s].contains(el)) mine = true
+        if (mine || (el.closest && el.closest('[data-pm-ignore], .toast'))) continue
+        if (pmIsContent(el)) return true
+        break // the first thing under the map that isn't the map: a background or a card's padding is fine
+      }
+    }
+    return false
+  }
+  function pageMap(map) {
+    if (!map || map.__pm) return map && map.__pm
+    var sum = map.querySelector('summary'); if (!sum || !map.parentNode) return null
+    if (!sum.id) sum.id = 'pm-sum-' + (map.className.split(' ')[0] || 'map')
+    var dockMq = map.getAttribute('data-pm-dock') && W.matchMedia ? W.matchMedia(map.getAttribute('data-pm-dock')) : null
+    var tab = doc.createElement('button')
+    tab.type = 'button'; tab.className = 'pm-tab'; tab.setAttribute('aria-controls', sum.id)
+    tab.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 6l6 6-6 6"/></svg>'
+    map.parentNode.insertBefore(tab, map.nextSibling)
+    html.classList.add('pm-on')
+    // mode: 'full' (the pill with its label), 'compact' (just the round button, in the margin) or 'tab' (tucked to the edge)
+    var userTucked = pmGet(PM_KEY) === '1', mode = 'full', forced = false, shown = false, hint = null, hintTries = 0, hintY = 0, fullW = 0
+    var COMPACT = 52, HIDE = 32, GAP = 8
+    function docked() { return !!(dockMq && dockMq.matches) }
+    // where the map's parts sit in each mode, from the map's own CSS position (whatever transform it has right now)
+    function spots() {
+      var cs = W.getComputedStyle(map), h = map.offsetHeight || COMPACT
+      var right = parseFloat(cs.right) || 20, bottom = parseFloat(cs.bottom) || 20
+      var vw = html.clientWidth || W.innerWidth, vh = W.innerHeight, w = fullW || map.offsetWidth
+      return {
+        right: right, bottom: bottom,
+        full: { x: vw - right - w - HIDE - GAP, y: vh - bottom - h, w: w + HIDE + GAP, h: h },            // the pill + its hide button on the left
+        compact: { x: vw - right - COMPACT, y: vh - bottom - COMPACT - GAP - HIDE, w: COMPACT, h: COMPACT + GAP + HIDE } // the round button + hide button above
+      }
+    }
+    function covered(r) { return pmCovers(r, [map, tab, hint]) }
+    // the edge tab: the lowest of a few heights where it covers nothing; if none is free it slims down to a sliver
+    var TAB_SPOTS = [0, 76, 152, 228, 304, 380]
+    function placeTab(sp) {
+      var vw = html.clientWidth || W.innerWidth, vh = W.innerHeight, tw = vw <= 600 ? 22 : 26, th = vw <= 600 ? 52 : 56, base = Math.max(18, sp.bottom - 2)
+      for (var i = 0; i < TAB_SPOTS.length; i++) {
+        var b = base + TAB_SPOTS[i]; if (b + th > vh * 0.6) break
+        if (!covered({ x: vw - tw, y: vh - b - th, w: tw, h: th })) { tab.style.bottom = b + 'px'; tab.classList.remove('is-slim'); return }
+      }
+      tab.style.bottom = base + 'px'; tab.classList.add('is-slim')
+    }
+    function paint() {
+      var dock = docked(), tucked = !dock && !forced && mode === 'tab', compact = !dock && !forced && mode === 'compact'
+      map.classList.toggle('pm-tucked', tucked)
+      map.classList.toggle('pm-compact', compact)
+      tab.classList.toggle('is-tucked', tucked)
+      tab.classList.toggle('is-compact', compact)
+      tab.classList.toggle('is-shown', shown && !dock)
+      tab.hidden = dock
+      if (!tucked) { tab.style.bottom = ''; tab.classList.remove('is-slim') }
+      tab.setAttribute('aria-expanded', String(!tucked))
+      tab.setAttribute('aria-label', tucked ? 'Show the section map' : 'Hide the section map')
+      tab.title = tucked ? 'Show “On this page” (click, or drag me left)' : 'Tuck “On this page” to the edge'
+      if ('inert' in map) map.inert = tucked
+      else if (tucked) sum.setAttribute('tabindex', '-1'); else sum.removeAttribute('tabindex')
+      if (tucked && map.open) map.open = false
+      // keep the hide button just left of the full pill, whatever its width is right now
+      if (!tucked && !compact && map.offsetWidth > COMPACT + 4 && map.offsetWidth !== fullW) { fullW = map.offsetWidth; html.style.setProperty('--pm-w', fullW + 'px') }
+    }
+    // the least it takes to cover nothing: the full pill, else the round button, else the edge tab
+    function wanted(sp) { return userTucked ? 'tab' : !covered(sp.full) ? 'full' : !covered(sp.compact) ? 'compact' : 'tab' }
+    var RANK = { full: 0, compact: 1, tab: 2 }, settle = 0
+    function check() {
+      shown = map.classList.contains('is-shown')
+      if (docked() || !shown || map.open) { if (!shown && !userTucked) mode = 'full'; paint(); return }
+      var sp = spots(), want = wanted(sp)
+      if (RANK[want] > RANK[mode]) { clearTimeout(settle); settle = 0; mode = want; paint() }
+      else if (RANK[want] < RANK[mode]) {
+        // step back out only once the page has settled, so it doesn't flicker while text scrolls past
+        if (!settle) settle = setTimeout(function () { settle = 0; var s2 = spots(), w2 = wanted(s2); if (RANK[w2] < RANK[mode]) { mode = w2; paint(); if (mode === 'tab') placeTab(s2) } }, 300)
+      } else if (settle && RANK[want] === RANK[mode]) { clearTimeout(settle); settle = 0 }
+      paint()
+      if (mode === 'tab' && !forced) placeTab(sp)
+      hintSoon()
+    }
+    var raf = 0
+    function soon() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; check() }) }
+    W.addEventListener('scroll', soon, { passive: true })
+    W.addEventListener('resize', soon)
+    if (dockMq && dockMq.addEventListener) dockMq.addEventListener('change', soon)
+    if (W.MutationObserver) new MutationObserver(soon).observe(map, { attributes: true, attributeFilter: ['class'] })
+    // late layout (images, tabs, revealed sections) moves things under it without a scroll: look again now and then
+    setInterval(function () { if (shown && !map.open && !docked() && !doc.hidden) soon() }, 1200)
+    map.addEventListener('toggle', function () { dropHint(); if (!map.open && forced) { forced = false; soon() } })
+
+    function focusSum() { setTimeout(function () { try { sum.focus({ preventScroll: true }) } catch (e) { } }, 30) }
+    function untuck() {
+      if (userTucked) { userTucked = false; pmSet(PM_KEY, '0') }
+      mode = wanted(spots())
+      // still nowhere free to stand: open the list straight away (it closes back into the tab)
+      if (mode === 'tab') { forced = true; paint(); map.open = true } else paint()
+      focusSum()
+    }
+    function tuck() { userTucked = true; pmSet(PM_KEY, '1'); forced = false; mode = 'tab'; dropHint(); paint(); placeTab(spots()); try { tab.focus({ preventScroll: true }) } catch (e) { } }
+    var dragged = false
+    tab.addEventListener('click', function (e) {
+      if (dragged) { dragged = false; e.preventDefault(); return }
+      if (tab.classList.contains('is-tucked')) untuck(); else tuck()
+    })
+    // drag the edge tab to the left to pull the map back out
+    tab.addEventListener('pointerdown', function (e) {
+      if (!tab.classList.contains('is-tucked') || e.button > 0) return
+      var x0 = e.clientX, dx = 0
+      try { tab.setPointerCapture(e.pointerId) } catch (err) { }
+      function mv(ev) { dx = Math.min(0, ev.clientX - x0); if (dx < -4) { tab.classList.add('is-drag'); tab.style.transform = 'translateX(' + Math.max(-56, dx) + 'px)' } }
+      function up() {
+        tab.removeEventListener('pointermove', mv); tab.removeEventListener('pointerup', up); tab.removeEventListener('pointercancel', up)
+        tab.classList.remove('is-drag'); tab.style.transform = ''
+        if (dx < -24) { dragged = true; untuck(); setTimeout(function () { dragged = false }, 400) }
+      }
+      tab.addEventListener('pointermove', mv); tab.addEventListener('pointerup', up); tab.addEventListener('pointercancel', up)
+    })
+
+    /* the first-visit hint: short, attached to whichever control is out, dismissible, gone after 5 s or a scroll,
+       and only shown where it covers nothing (tried again as the page moves, a dozen times at most) */
+    var hintTimer = 0
+    function hintSoon() {
+      if (hint || hintTries > 12 || pmGet(PM_HINT) || !shown || docked() || map.open) return
+      clearTimeout(hintTimer); hintTimer = setTimeout(showHint, 700)
+    }
+    function showHint() {
+      if (hint || pmGet(PM_HINT) || !map.classList.contains('is-shown') || docked() || map.open) return
+      hintTries++
+      var tucked = tab.classList.contains('is-tucked'), side = tucked || map.classList.contains('pm-compact'), h = doc.createElement('div')
+      h.className = 'pm-hint' + (side ? ' is-tab' : ''); h.setAttribute('role', 'note')
+      h.innerHTML = '<span>' + (tucked ? 'Sections, tucked away' : 'Jump to any section') + '</span><button type="button" class="pm-hint-x" aria-label="Dismiss tip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17"/></svg></button>'
+      doc.body.appendChild(h)
+      var t = (tucked ? tab : sum).getBoundingClientRect(), vw = html.clientWidth || W.innerWidth, w = h.offsetWidth, hh = h.offsetHeight
+      // beside the edge tab or the round button (the hide button sits above that one), above the full pill
+      var x = side ? t.left - w - 10 : Math.min(vw - w - 12, t.right - w), y = side ? t.top + (t.height - hh) / 2 : t.top - hh - 10
+      x = Math.max(12, x); y = Math.max(12, y)
+      h.style.left = x + 'px'; h.style.top = y + 'px'
+      if (pmCovers({ x: x, y: y, w: w, h: hh }, [map, tab, h])) { h.remove(); return }
+      hint = h; hintY = W.scrollY; pmSet(PM_HINT, '1')
+      requestAnimationFrame(function () { h.classList.add('is-on') })
+      h.querySelector('button').addEventListener('click', dropHint)
+      setTimeout(dropHint, 5000)
+    }
+    function dropHint() { clearTimeout(hintTimer); if (!hint) return; var h = hint; hint = null; h.classList.remove('is-on'); setTimeout(function () { h.remove() }, reduced ? 0 : 300) }
+    W.addEventListener('scroll', function () { if (hint && Math.abs(W.scrollY - hintY) > 160) dropHint() }, { passive: true })
+
+    if (userTucked) mode = 'tab'
+    paint(); soon()
+    map.__pm = { tuck: tuck, untuck: untuck, check: soon, tab: tab, mode: function () { return mode } }
+    return map.__pm
+  }
+  function initPageMap() { $$('details[data-map], details[data-lv-map], details[data-page-map]').forEach(pageMap) }
+
   /* ───────────── public API ───────────── */
   var API = {
     version: function () { return DATA().version },
@@ -1836,7 +2013,7 @@
     whenVisible: whenVisible, visibility: visibility, idle: idle, pick: pick, fmt: fmt, $: $, $$: $$,
     base: scriptBase, url: rel, iconUrl: iconUrl, magnetic: magnetic, icon_svg: ICON,
     askAI: askAI, copyPng: copyPng, manualCopy: manualCopy,
-    GROUPS: GROUPS, counts: counts, numWord: numWord, paintCounts: paintCounts
+    GROUPS: GROUPS, pageMap: pageMap, counts: counts, numWord: numWord, paintCounts: paintCounts
   }
   // live: WI.reduced always reads the current state; WI.on('motion', fn(reduced)) hears changes
   Object.defineProperty(API, 'reduced', { enumerable: true, get: function () { return reduced } })
@@ -1856,6 +2033,7 @@
     initStillToggle()
     initEvergrow()
     initAskAI()
+    initPageMap()
     wireCopy()
     on('meta', function () { paintCounts() })
     paintCounts()

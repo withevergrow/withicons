@@ -6,7 +6,7 @@
 import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount, rtlDoc } from './emit-core.mjs'
 import { frameworkReadme } from './emit-react.mjs'
 
-const imports = ['createComponent', 'createMemo', 'mergeProps', 'splitProps']
+const imports = ['createComponent', 'createMemo', 'lazy', 'mergeProps', 'splitProps']
 const webImports = ['Dynamic', 'insert', 'isServer']
 // getNextElement and template are only used in the browser branch. solid-js < 1.9 does not export them
 // from its server build, so a named import would fail to link under SSR: read them off the namespace.
@@ -66,10 +66,22 @@ function createWithIcon(name, style, displayName, iconNode) {
   return Component
 }`
 
-// free vars: withFindComponent, DEFAULT_STYLE. Reactive in name and variant.
-const iconSrc = `const Icon = function (props) {
+// free vars: withFindComponent, withLoadStyle, DEFAULT_STYLE. Reactive in name and variant.
+// A style that is not loaded yet renders through solid's lazy() (one per style, resolving to Icon itself, which gets
+// name and variant); once loaded every Icon of that style renders synchronously.
+const iconSrc = `const WITH_LAZY = {}
+const Icon = function (props) {
   const [own, rest] = splitProps(props, ['name', 'variant'])
-  return createComponent(Dynamic, mergeProps(rest, { get component() { return withFindComponent(own.name, own.variant) } }))
+  const found = createMemo(() => withFindComponent(own.name, own.variant))
+  const pending = () => typeof found() === 'string'
+  return createComponent(Dynamic, mergeProps(rest, {
+    get component() {
+      const C = found()
+      return typeof C !== 'string' ? C : WITH_LAZY[C] || (WITH_LAZY[C] = lazy(() => withLoadStyle(C).then(() => ({ default: Icon }))))
+    },
+    get name() { return pending() ? own.name : undefined },
+    get variant() { return pending() ? own.variant : undefined },
+  }))
 }`
 
 const typesDts = `
@@ -133,6 +145,7 @@ export default async function emit(ctx) {
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports: withSolidCondition(exports), typesVersions,
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
     peerDependencies: { 'solid-js': '^1.6.0' },
   }
   writePkg(ctx, 'solid', pkg, solidSections(ctx, frameworkReadme(ctx, {
@@ -152,9 +165,14 @@ export function Toolbar() {
 
 // Plain ESM, no JSX inside the package: works in the browser, with hydration and with
 // renderToString / SolidStart. ref, onClick, style and aria-* spread onto the <svg>.`,
-    generic: `import { Icon } from '@withicons/solid'
+    generic: `import { Suspense } from 'solid-js'
+import { Icon } from '@withicons/solid'
 
-<Icon name="home" variant="solid" size={20} />   // name and variant are reactive`,
+<Icon name="home" size={20} />                  // line: renders at once; name and variant are reactive
+<Suspense><Icon name="home" variant="solid" size={20} /></Suspense>   // solid: loaded on first use`,
+    lazy: `Until a style has loaded, its \`Icon\` is a solid \`lazy()\` component: it suspends to the nearest \`<Suspense>\`, and
+\`renderToStringAsync\` / \`renderToStream\` / SolidStart wait for it. A synchronous \`renderToString\` needs
+\`await preloadStyles(...)\` first. With \`require()\` (CommonJS) styles load synchronously.`,
   })))
   const fb = fallbackCount(ctx)
   return `${files} icon files, ${ctx.styles.length} styles${fb ? `, ${fb} fell back to ${ctx.defaultStyle}` : ''}`
@@ -234,8 +252,8 @@ For the JS-only triggers (\`inview\`, a hover that always finishes) call \`motio
   share its \`solid-js\` instance.
 - The root and every style subpath ship ESM (\`import\`) and CommonJS (\`require\`) with matching types.
   The per-icon deep paths (\`icons/*\`, \`<style>/icons/*\`) and \`/icon\` are ESM only.
-- \`sideEffects: false\` and one module per icon: a bundler keeps only the icons you import (the shared runtime plus
-  about 0.1 kB gzipped per line icon).
+- Each style is one module of \`/*#__PURE__*/\` components with \`sideEffects: false\`: a bundler keeps only the icons you
+  import (the shared runtime plus about 0.1 kB gzipped per line icon), and Node or Vitest load one file per style.
 `
   const put = (text, marker, add) => text.includes(marker) ? text.replace(marker, add.replace(/^\n/, '') + '\n' + marker) : text + add
   return put(put(md, '## Animation (optional)', palette), '## Generic icon', motion + rtl + ssr)

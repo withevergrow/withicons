@@ -293,7 +293,7 @@
     if (kind === 'copy-tag') {
       var tb = $('.ip-tag-btn', root)
       return copyText(tagText(st)).then(function (ok) {
-        toast(ok ? 'Copied ' + tagText(st) + ' — paste it into your HTML.' : 'Couldn’t reach the clipboard.')
+        toast(ok ? 'Copied ' + tagText(st) + '. Paste it into your HTML.' : 'Couldn’t reach the clipboard.')
         var gl = tb && $('.ip-tag-go span', tb)
         if (ok && tb) { tb.classList.add('is-done'); if (gl) gl.textContent = 'Copied'; clearTimeout(tb._t); tb._t = setTimeout(function () { tb.classList.remove('is-done'); if (gl) gl.textContent = 'Copy' }, 1600) }
       })
@@ -678,32 +678,45 @@
   fromHash()
   W.addEventListener('hashchange', function () { fromHash(); openDev() })
 
+  /* ═════════ the mobile action bar: Download + Copy image within thumb reach ═════════
+     Phones only (CSS shows it at 760px and below). It slides up once the hero's own buttons have scrolled out of view
+     and goes away while they are back on screen. The section map docks into its right end there. */
+  var bar = $('[data-bar]'), actionsEl = $('[data-actions]', root), barOn = false
+  var phoneMq = W.matchMedia ? W.matchMedia('(max-width: 760px)') : { matches: false }
+  function setBar(v) {
+    if (!bar || v === barOn) return
+    barOn = v; bar.classList.toggle('is-on', v); D.documentElement.classList.toggle('ip-bar-on', v)
+    if ('inert' in bar) bar.inert = !v
+  }
+  if (bar) {
+    D.documentElement.classList.add('ip-has-bar')
+    if ('inert' in bar) bar.inert = true
+    if (actionsEl && W.IntersectionObserver) {
+      new IntersectionObserver(function (es) {
+        var e = es[0]
+        // only once the buttons are above the screen (scrolled past), not while the page is still loading below them
+        setBar(!e.isIntersecting && e.boundingClientRect.top < 0)
+        if (W.dispatchEvent) W.dispatchEvent(new Event('scroll'))
+      }, { threshold: 0 }).observe(actionsEl)
+    }
+  }
+
   /* ═════════ "On this page": a quiet floating pill that opens a section map ═════════
-     Shows once the hero has scrolled away; the first time it appears it says what it is, once. The open map marks the
-     section in view; the pill's ring fills as the page is read. Without JS it is a plain disclosure after the hero. */
+     Shows once the hero has scrolled away (on phones: together with the action bar, docked into it). The open map marks
+     the section in view; the pill's ring fills as the page is read. js/site.js (WI.pageMap) lets the visitor tuck it
+     into an edge tab, tucks it while it would cover text and shows the one-time hint. Without JS it is a plain disclosure
+     after the hero. */
   var map = $('[data-map]')
   if (map) {
     D.documentElement.classList.add('ip-has-map')
     var mapBtn = $('summary', map), links = $$('[data-map-link]', map), now = $('[data-map-now]', map), prog = $('[data-map-prog]', map)
     var secs = links.map(function (a) { return $(a.getAttribute('href')) }).filter(Boolean)
     var hero = $('.ip-hero')
-    var hintKey = 'with-ip-map-hint', hinted = !!store(hintKey), hint = null
-    function showHint() {
-      if (hinted || map.open) return
-      hinted = true; store(hintKey, 1)
-      hint = D.createElement('p'); hint.className = 'ip-map-hint'; hint.setAttribute('aria-hidden', 'true')
-      hint.innerHTML = '<span>Jump to any section</span><svg viewBox="0 0 40 24" width="40" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4 C14 4 26 8 34 18 M27 18 H34 V11"/></svg>'
-      mapBtn.appendChild(hint)
-      setTimeout(function () { if (hint) hint.classList.add('is-on') }, 60)
-      setTimeout(dropHint, 5200)
-    }
-    function dropHint() { if (!hint) return; var h = hint; hint = null; h.classList.remove('is-on'); setTimeout(function () { h.remove() }, 400) }
     var shown = false
     function setShown(v) {
       if (v === shown) return
       shown = v; map.classList.toggle('is-shown', v)
       if (!v && map.open) map.open = false
-      if (v) setTimeout(showHint, 700)
     }
     function current() {
       var y = (W.innerHeight || 800) * 0.35, cur = null
@@ -715,7 +728,7 @@
       if (raf) return
       raf = requestAnimationFrame(function () {
         raf = 0
-        setShown(!hero || hero.getBoundingClientRect().bottom < 40)
+        setShown(bar && phoneMq.matches ? barOn : (!hero || hero.getBoundingClientRect().bottom < 40))
         var c = current(), id = c ? c.id : ''
         links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current') })
         var on = id && $('[data-map-link][aria-current]', map)
@@ -727,7 +740,6 @@
     W.addEventListener('scroll', onScroll, { passive: true }); W.addEventListener('resize', onScroll)
     onScroll()
     map.addEventListener('toggle', function () {
-      dropHint()
       if (map.open) {
         var cur = $('[data-map-link][aria-current]', map) || links[0]
         var card = $('.ip-map-card', map)

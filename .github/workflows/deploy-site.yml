@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment:
-      name: production   # OIDC subject repo:withevergrow/withicons:environment:production
+      name: production   # OIDC subject repo:withevergrow@274390516/withicons@1400616361:environment:production
       url: https://withicons.com
     steps:
       - uses: actions/checkout@v5

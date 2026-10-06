@@ -1,7 +1,7 @@
 import vm from 'vm'
 import { pathToFileURL } from 'url'
 import fs from 'fs'
-import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI, STYLE_INFO, styleTitle, stylesIn, listTitles, N_ICONS, N_STYLES, N_TOTAL, num, word, Word, MOTION, PRESETS, siteExists, hasStyle } from './lib.mjs'
+import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI, STYLE_INFO, STYLE_GROUPS, styleTitle, stylesIn, groupTitle, listTitles, N_ICONS, N_STYLES, N_TOTAL, num, word, Word, MOTION, PRESETS, siteExists, hasStyle } from './lib.mjs'
 import { motionSection, MOTION_TOC, motionAssets } from './motion.mjs'
 import { motionVars } from './lib.mjs'
 import { FORMATS, CLI_FORMATS, GROUPS as FMT_GROUPS, seeThrough } from './formats.mjs'
@@ -30,8 +30,10 @@ const STYLE_PLAIN = {
   plush: ['Plush', 'Soft felt toys with stitched seams. Made for kids.'],
 }
 const plain = s => STYLE_PLAIN[s] || [styleTitle(s), (STYLE_INFO[s] && STYLE_INFO[s].description) || '']
-const GROUP_LABEL = { universal: 'Universal', creative: 'Creative', playful: 'Playful', studio: 'Studio', storybook: 'Storybook' }
-const groupOf = s => (STYLE_INFO[s] && STYLE_INFO[s].group) || 'creative'
+// the five style groups (Everyday, Crafted, Playful, Studio, Storybook) come from site/js/site.js GROUPS via lib.mjs;
+// the old ids 'universal' / 'creative' read as Everyday / Crafted
+const GROUP_LABEL = new Proxy({}, { get: (_, g) => groupTitle(String(g)) })
+const groupOf = s => (STYLE_INFO[s] && STYLE_INFO[s].group) || 'crafted'
 const UNI = stylesIn('universal'), CRE = stylesIn('creative'), PLAY = stylesIn('playful'), STU = stylesIn('studio'), STORY = stylesIn('storybook')
 const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
   <div class="pg-tablist" role="tablist" aria-label="${esc(label)}">${items.map(([k, l], i) => `<button type="button" role="tab" id="${id}-t-${k}" aria-controls="${id}-p-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join('')}</div>
@@ -196,16 +198,20 @@ export function Toolbar() {
         ${code('<Settings strokeWidth={1.75} />', 'jsx').replace('<div class="code pg-code"', '<div class="code pg-code" data-stroke-code')}
       </div>
       <h3>Generic icon (dynamic names)</h3>
-      ${code(`import { Icon } from '@withicons/react'
+      ${code(`import { Suspense } from 'react'
+import { Icon } from '@withicons/react'
 
-<Icon name="home" variant="solid" size={20} />   // aliases work: name="bin" → trash`, 'jsx')}
-      <p class="pg-note"><code>Icon</code> references every icon in every style. It’s dropped from your bundle when unused; when you do use it, prefer named imports wherever the name is static.</p>
+<Icon name="home" size={20} />   // line renders at once; aliases work: name="bin" → trash
+<Suspense fallback={null}>
+  <Icon name="home" variant="solid" size={20} />   // other styles load on first use
+</Suspense>`, 'jsx')}
+      <p class="pg-note"><code>Icon</code> renders line at once and loads any other style on first use (one small chunk per style). Before a synchronous <code>renderToString</code>, call <code>await preloadStyles('solid')</code>, or import <code>Icon</code> from <code>@withicons/react/icon</code> to bundle every style up front. Prefer named imports wherever the name is static: no <code>optimizePackageImports</code> or deep imports needed.</p>
     </section>
 
     <section id="styles" class="dv-sec">
       <h2>Styles</h2>
-      <p>${Word(N_STYLES)} styles. <b>Universal</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>Creative</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}${STU.length ? ` <b>Studio</b> styles (${listTitles(STU)}) are art-directed, premium looks for heroes, app tiles and brand moments; their colours are role-named variables (<code>--with-luxe-c1</code>, <code>--with-bauhaus-accent</code>…), so one palette recolours every one of them.` : ''}${STORY.length ? ` <b>Storybook</b> styles (${listTitles(STORY)}) are small illustrations: anime cel shading, Gothic cathedral detail, soft pastels, coquette bows and plush felt toys, with role-named colour variables too (<code>--with-anime-c1</code>, <code>--with-plush-accent</code>…).` : ''}</p>
-      ${[['universal', UNI], ['creative', CRE], ['playful', PLAY], ['studio', STU], ['storybook', STORY]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${g}</span></div>`).join('')}</div>`).join('\n      ')}
+      <p>${Word(N_STYLES)} styles in five groups. <b>${GROUP_LABEL.everyday}</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>${GROUP_LABEL.crafted}</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}${STU.length ? ` <b>Studio</b> styles (${listTitles(STU)}) are art-directed, premium looks for heroes, app tiles and brand moments; their colours are role-named variables (<code>--with-luxe-c1</code>, <code>--with-bauhaus-accent</code>…), so one palette recolours every one of them.` : ''}${STORY.length ? ` <b>Storybook</b> styles (${listTitles(STORY)}) are small illustrations: anime cel shading, Gothic cathedral detail, soft pastels, coquette bows and plush felt toys, with role-named colour variables too (<code>--with-anime-c1</code>, <code>--with-plush-accent</code>…).` : ''}</p>
+      ${[['everyday', UNI], ['crafted', CRE], ['playful', PLAY], ['studio', STU], ['storybook', STORY]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${GROUP_LABEL[g].toLowerCase()}</span></div>`).join('')}</div>`).join('\n      ')}
     </section>
 
     ${motionSection()}
@@ -478,7 +484,7 @@ async function ai() {
     ['animate_icon', '{ name, trigger?, preset?, to?, effect?, style?, format? }', 'Paste-ready animation code for the optional <code>@withicons/motion</code> package: <code>loop</code>, <code>hover</code>, <code>once</code>, <code>inview</code> or <code>swap</code> (play turns into pause), in HTML, React, Vue, Svelte, Solid, Angular or a web component.'],
     ['export_icon', '{ name, style?, format?, size?, background?, palette?, motion?, out_dir? }', 'Files, not code: SVG, PNG, PDF, PowerPoint, Word, favicons, app assets, Lottie, and animated GIF, APNG, SVG or a PowerPoint slide with the moving icon, for slides and docs. The local server (<code>npx -y @withicons/mcp</code>) saves them to <code>out_dir</code> or returns them inline; the remote one makes the vector files and answers the rest with the exact <code>npx withicons export</code> command.'],
     ['resolve_icon', '{ name }', 'Check a guess: <code>resolved</code> (with the alias it came through), <code>ambiguous</code> (with candidates) or <code>unknown</code> (with the nearest names).'],
-    ['list_styles', '{}', `The ${N_STYLES} styles, which are universal, creative or playful, and what each looks like.`],
+    ['list_styles', '{}', `The ${N_STYLES} styles in their five groups (${STYLE_GROUPS.map(g => g.title).join(', ')}) and what each looks like.`],
     ['list_categories', '{ category? }', 'Every category with icon counts, or, with <code>category</code>, every icon in that category.'],
   ]
   const L = await import(pathToFileURL(ROOT + '/packages/mcp/dist/lib.mjs').href)
@@ -513,7 +519,7 @@ async function ai() {
         <li><b>2</b><span>Pick your assistant</span></li>
         <li><b>3</b><span>We copy a brief and open it</span></li>
       </ol>
-      <label class="ai-need"><span class="ai-need-l">What’s the icon for? <small>optional — or tell the assistant later</small></span><input class="ai-need-in" id="ai-need" type="text" maxlength="300" autocomplete="off" placeholder="e.g. a button that clears the cart in my grocery app"></label>
+      <label class="ai-need"><span class="ai-need-l">What’s the icon for? <small>optional, or tell the assistant later</small></span><input class="ai-need-in" id="ai-need" type="text" maxlength="300" autocomplete="off" placeholder="e.g. a button that clears the cart in my grocery app"></label>
       <div class="ai-ask-widget" data-ask-ai data-intent="find" data-ask-bind="#ai-need"><noscript><p class="pg-note">Turn on JavaScript for one-click buttons, or paste <a href="llms.txt">withicons.com/llms.txt</a> into your assistant.</p></noscript></div>
       <p class="pg-note ai-ask-note">The assistant opens in a new tab, searches with icons and replies with the best fit and how to use it. Nothing is sent to us: the prompt only tells your assistant where to read about with icons (<a href="llms.txt">llms.txt</a> and the <a href="skill/SKILL.md">skill</a>). Gemini can’t pre-fill the message: paste it with Ctrl+V (⌘V on a Mac).</p>
     </div>
@@ -629,10 +635,12 @@ npx withicons resolve bin --json`, 'sh', 'Terminal')}
   </section>
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for AI agents: MCP server, skill, llms.txt', description: 'Connect AI assistants to with icons through the MCP server, an agent skill, llms.txt, icons.json and a search API.', url: ORIGIN + '/' + path }]
-  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'with icons — ask your AI', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: [] }))
+  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'Ask your AI for icons | with icons', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: [] }))
 }
 
 /* ───────────────────────── about ───────────────────────── */
+// About page (styles: site/css/about.css + the shared .ab-* rules in pages.css; behaviour: initAbout in js/pages.js).
+// Every number is read from the data: icons, styles, motion specs, live generators, palettes, packages, formats, search words.
 function about() {
   const path = 'about.html'
   const terms = (() => {
@@ -640,8 +648,13 @@ function about() {
     vm.runInContext(fs.readFileSync(ROOT + '/site/data/search-index.js', 'utf8'), c)
     return c.WITH_SEARCH_INDEX.icons.reduce((n, ic) => n + 1 + [2, 3, 4].reduce((m, k) => m + (ic[k] ? String(ic[k]).split('|').length : 0), 0), 0)
   })()
+  const nAnimated = Object.keys(MOTION).length
+  const nPalettes = (() => { let n = 0; try { for (const f of fs.readdirSync(ROOT + '/forge/palettes')) if (f.endsWith('.json')) n += (JSON.parse(fs.readFileSync(ROOT + '/forge/palettes/' + f, 'utf8')).palettes || []).length } catch { } return n })()
+  const nLive = (() => { try { return fs.readdirSync(ROOT + '/forge/dynamic').filter(f => f.endsWith('.mjs') && !f.startsWith('_')).length } catch { return 0 } })()
+  const nPkgs = (() => { try { return fs.readdirSync(ROOT + '/packages').filter(d => fs.existsSync(ROOT + '/packages/' + d + '/package.json')).length } catch { return 0 } })()
+  const everyAnimated = nAnimated >= N_ICONS
+  const ISSUES = GITHUB + '/issues', NEW_ISSUE = GITHUB + '/issues/new/choose', DISCUSS = GITHUB + '/discussions'
   const hero = 'heart'
-  const story = 'rocket'
   const people = [
     ['monitor', 'line', 'Making slides', 'A clean icon says more than a paragraph. Drop them into Slides, PowerPoint or Keynote.'],
     ['globe', 'solid', 'Building a website', 'WordPress, Webflow, Wix or plain HTML. Copy, paste, publish.'],
@@ -651,15 +664,64 @@ function about() {
     ['bot', 'sketch', 'An AI agent', 'Hello! Search by meaning and get the real SVG. No guessing.'],
   ]
   const matrixIcons = ['home', 'bell', 'camera', 'heart', 'star']
+  // "Drawn once": the drawing, then one step per style family (the stage shows the family side by side)
+  const fams = [['universal', UNI, 'For apps and websites. One colour that follows your text, sharp at 16 px.'], ['creative', CRE, 'Crafted single-colour looks for posters, slides and editorial work.'], ['playful', PLAY, 'Cheerful built-in colours you can swap with a palette.'], ['studio', STU, 'Rich, layered, premium. Gold, enamel, real materials and bold primaries.'], ['storybook', STORY, 'Illustrated worlds: anime ink, cathedral glass, pastels, bows and felt toys.']].filter(f => f[1].length)
+  const story = 'rocket'
+  // live icons: each cycles through its sample states with CSS alone (site/data/live-<style>.js, from emit-dynamic)
+  const live = (() => {
+    const want = [['calendar-date', 'luxe'], ['clock-time', 'kawaii'], ['bell-count', 'anime'], ['battery-level', 'sticker'], ['weather', 'pastel'], ['cart-count', 'bauhaus'], ['progress-ring', 'glass'], ['thermometer-level', 'retro']]
+    const box = { window: {} }
+    try { new Function('window', fs.readFileSync(ROOT + '/site/data/live.js', 'utf8'))(box.window) } catch { return [] }
+    const roots = Object.fromEntries(((box.window.WITH_LIVE || {}).styles || []).map(s => [s.name, s.root || { fill: 'currentColor' }]))
+    const out = []
+    for (const [n, s0] of want) {
+      const s = hasStyle(s0) && roots[s0] ? s0 : 'line'
+      try {
+        const b = { window: {} }; new Function('window', fs.readFileSync(ROOT + `/site/data/live-${s}.js`, 'utf8'))(b.window)
+        const states = ((b.window.WITH_LIVE_SVG || {})[s] || {})[n]
+        if (!Array.isArray(states) || !states.length) continue
+        const attrs = Object.entries({ viewBox: '0 0 24 24', ...roots[s] }).map(([k, v]) => ` ${k}="${esc(v)}"`).join('')
+        out.push({ n, s, svgs: states.slice(0, 5).map(inner => `<svg xmlns="http://www.w3.org/2000/svg"${attrs} aria-hidden="true" focusable="false">${inner}</svg>`) })
+      } catch { }
+    }
+    return out
+  })()
+  const principles = [
+    ['gift', 'solid', 'Free means free', 'No account, no paywall, no premium tier, no credit line. MIT, for anything.'],
+    ['pen-tool', 'duo', 'Drawn by hand', `Every one of the ${num(N_ICONS)} drawings is made by a person, on one grid, checked for balance against its neighbours.`],
+    ['layers', 'line', 'One family', `All ${word(N_STYLES)} styles come from the same drawing, so names, sizes and shapes never drift. Switch styles and nothing moves.`],
+    ['eye', 'blueprint', 'Accessible by default', 'Icons follow your text colour, take a title for screen readers and stay still for anyone who turned off motion.'],
+    ['zap', 'gloss', 'Small and fast', 'Import only what you use. A line icon is about 150 bytes gzipped; the web component fetches icons on demand.'],
+    ['git-branch', 'sketch', 'Built in the open', 'The drawings, the renderers and the site are all on GitHub. Same input, byte-identical output, every time.'],
+  ]
+  const stats = [
+    [N_ICONS, 'icons', 'each drawn by hand'],
+    [N_STYLES, 'styles', 'from one drawing'],
+    [N_TOTAL, 'icons in all', 'SVG, PNG and more'],
+    everyAnimated ? [nAnimated, 'animated', 'every single icon'] : [nAnimated, 'animated', 'with their own moves'],
+    nLive ? [nLive, 'live icons', 'dates, times, counts'] : null,
+    nPalettes ? [nPalettes, 'colour palettes', 'picked per icon'] : null,
+    [FORMATS.length, 'file formats', 'from GIF to PowerPoint'],
+    [terms, 'search words', 'so you find it by meaning'],
+  ].filter(Boolean)
   const body = `
-<div class="ab">
-  <section class="ab-hero">
+<div class="ab abx">
+  <section class="ab-hero abx-hero">
     ${crumbs([['Home', 'index.html'], ['About', null]])}
     <div class="ab-hero-grid">
       <div>
         <p class="pg-eyebrow"><span class="hand">our story</span></p>
         <h1 class="ab-title">Good icons should be <span class="ab-free">free<svg viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 30 C 50 12, 120 10, 194 22"/></svg></span>.</h1>
-        <p class="ab-lede"><span class="hand ab-so">so we drew ${N_ICONS} of them</span> and made each one in ${word(N_STYLES)} styles. Then we taught them to move. No account, no catch, no credit needed.</p>
+        <p class="ab-lede"><span class="hand ab-so">so we drew ${num(N_ICONS)} of them</span> Then we made each one in ${word(N_STYLES)} styles, ${everyAnimated ? 'taught every single one to move' : 'taught them to move'}, and gave them all away. No account, no catch, no credit needed.</p>
+        <ul class="abx-chips" aria-label="In short">
+          <li style="--g:${cvar('sketch')}">${I('check-circle', 'solid', 16)}Free under MIT</li>
+          <li style="--g:${cvar('gloss')}">${I('play', 'solid', 16)}${everyAnimated ? 'Every icon animated' : 'Animated icons'}</li>
+          <li style="--g:${cvar('line')}">${I('users', 'solid', 16)}For people and AI agents</li>
+        </ul>
+        <div class="abx-actions">
+          <a class="btn btn-ink" href="icons.html">${I('search', 'line', 18)} Browse icons</a>
+          <a class="btn btn-ghost" href="${GITHUB}">${I('git-branch', 'line', 18)} View on GitHub</a>
+        </div>
       </div>
       <div class="ab-morph" data-morph aria-hidden="true">
         <div class="ab-morph-ring"></div>
@@ -669,16 +731,23 @@ function about() {
     </div>
   </section>
 
-  <section class="ab-why" aria-labelledby="why-h">
-    <div class="ab-why-art" aria-hidden="true" data-reveal>
-      <span class="ab-tag">${I('tag', 'solid', 96)}<b>$0</b></span>
+  <section class="abx-stats" aria-labelledby="stats-h">
+    <h2 id="stats-h" class="pg-sr">with icons in numbers</h2>
+    <ul>${stats.map(([n, l, d], i) => `<li data-reveal style="--d:${i}"><b data-count="${n}">${num(n)}</b><span class="abx-stat-l">${l}</span><span class="abx-stat-d">${d}</span></li>`).join('')}<li data-reveal style="--d:${stats.length}" class="abx-stat-free"><b>$0</b><span class="abx-stat-l">to use</span><span class="abx-stat-d">today and forever</span></li></ul>
+  </section>
+
+  <section class="abx-story" aria-labelledby="story-h">
+    <div class="abx-story-head">
+      <p class="pg-eyebrow"><span class="hand">why it exists</span></p>
+      <h2 id="story-h" class="ab-h">Icons are tiny. They’re also everywhere.</h2>
+      <div class="abx-story-art" aria-hidden="true"><span class="ab-tag">${I('tag', 'solid', 96)}<b>$0</b></span></div>
     </div>
-    <div>
-      <h2 id="why-h" class="ab-h">Why free?</h2>
-      <p data-reveal>Icons are tiny, but they’re everywhere: on buttons, slides, menus, posters and signs. Good ones are often hidden behind paywalls and sign-ups, or come in just one look.</p>
-      <p data-reveal>We think the basics should be free for everyone. A teacher’s slides. A student’s project. A small shop’s first website. A startup’s app. So every icon here is free to use for anything, including work you get paid for, under the MIT licence.</p>
-      <p data-reveal><a href="license.html">What the licence means, in plain words →</a></p>
-    </div>
+    <ol class="abx-chapters">
+      <li data-reveal><span class="abx-ch-n">01</span><h3>Good ones were hard to get</h3><p>Buttons, slides, menus, posters, signs: icons are on all of them. Yet the good ones often hide behind paywalls and sign-ups, come in just one look, or don’t match the set you already use.</p></li>
+      <li data-reveal><span class="abx-ch-n">02</span><h3>So we started from the drawing</h3><p>Each icon begins as one careful drawing on a 24 × 24 grid. A program then renders that drawing into every style, so a line home and a gothic home are the same home, at the same size, with the same name.</p></li>
+      <li data-reveal><span class="abx-ch-n">03</span><h3>And gave it all away</h3><p>A teacher’s slides. A student’s project. A small shop’s first website. A startup’s app. An AI agent building one. Every icon is free for all of them, including work you get paid for.</p></li>
+    </ol>
+    <blockquote class="abx-quote" data-reveal><p>The basics should be free for everyone, and they should look good.</p><footer><span class="hand">the whole idea, really</span></footer></blockquote>
   </section>
 
   <section class="ab-who" aria-labelledby="who-h">
@@ -687,70 +756,151 @@ function about() {
     <ul class="ab-people">${people.map(([ic, s, t, d], i) => `<li data-reveal style="--g:${cvar(s)};--i:${i}"><span class="ab-person-ic">${I(ic, s, 40)}</span><h3>${t}</h3><p>${d}</p></li>`).join('')}</ul>
   </section>
 
-  <section class="ab-seven" aria-labelledby="seven-h" data-scrolly>
+  <section class="ab-seven abx-seven" aria-labelledby="seven-h" data-scrolly>
     <div class="ab-seven-head">
+      <p class="pg-eyebrow"><span class="hand">how it’s built</span></p>
       <h2 id="seven-h" class="ab-h">Drawn once.<br>Rendered ${word(N_STYLES)} ways.</h2>
-      <p class="ab-sub">Every icon starts as one careful drawing on a 24 × 24 grid. Then ${word(N_STYLES)} “renderers” turn that same drawing into ${word(N_STYLES)} styles: clean ones for apps, crafted ones for posters, and playful ones full of colour. Scroll to watch.</p>
+      <p class="ab-sub">${num(N_ICONS)} hand-drawn skeletons go in. ${Word(N_STYLES)} renderers, small programs that each know one style, turn every skeleton into every style. Same drawing in, the same file out, byte for byte, every build.</p>
     </div>
     <div class="ab-seven-grid">
       <div class="ab-seven-stage" aria-hidden="true">
         <div class="ab-seven-card">
           <div class="ab-grid24"></div>
           <span class="ab-sf ab-sf-skel is-on" data-sf="0">${icon(story, 'line', { size: 220, cls: 'ab-draw', sw: 0.8 }).replace(/<path /g, '<path pathLength="1" ')}</span>
-          ${STYLES.map((s, i) => `<span class="ab-sf" data-sf="${i + 1}" style="--g:${cvar(s)}">${I(story, s, 220)}</span>`).join('')}
-          <span class="ab-seven-label" data-sf-label>The drawing</span>
+          ${fams.map(([g, list], i) => `<span class="ab-sf abx-fam" data-sf="${i + 1}" data-n="${list.length}">${list.map(s => `<span class="abx-fam-ic" style="--g:${cvar(s)}">${I(story, s, 120)}<small>${plain(s)[0]}</small></span>`).join('')}</span>`).join('')}
+          <span class="ab-seven-label" data-sf-label>One skeleton</span>
         </div>
       </div>
       <ol class="ab-seven-steps">
-        <li data-sstep="0"><span class="ab-step-k">The drawing</span><h3>One skeleton</h3><p>Lines, curves and points on a 24 × 24 grid, drawn by hand and checked for balance: every icon looks the same size as its neighbours.</p></li>
-        ${STYLES.map((s, i) => `<li data-sstep="${i + 1}" style="--g:${cvar(s)}"><span class="ab-step-k">${GROUP_LABEL[groupOf(s)]} · ${i + 1} of ${N_STYLES}</span><h3>${plain(s)[0]}</h3><p>${plain(s)[1]}</p></li>`).join('\n        ')}
+        <li data-sstep="0"><span class="ab-step-k">Step 1 · the drawing</span><h3>One skeleton</h3><p>Lines, curves and points on a 24 × 24 grid, drawn by hand and checked for balance: every icon looks the same size as its neighbours. It is the only thing anyone draws.</p></li>
+        ${fams.map(([g, list, say], i) => `<li data-sstep="${i + 1}" style="--g:${cvar(list[0])}"><span class="ab-step-k">Step ${i + 2} · ${list.length} ${list.length === 1 ? 'style' : 'styles'}</span><h3>${GROUP_LABEL[g]}</h3><p>${say}</p><p class="abx-fam-list">${listTitles(list)}</p></li>`).join('\n        ')}
       </ol>
     </div>
+    <ol class="abx-flow" aria-label="The pipeline" data-reveal>
+      <li><b>${num(N_ICONS)}</b><span>hand-drawn skeletons</span></li>
+      <li><b>${N_STYLES}</b><span>style renderers</span></li>
+      <li><b>${num(N_TOTAL)}</b><span>icons, checked every build</span></li>
+      <li><b>${nPkgs || 'npm'}</b><span>${nPkgs ? 'npm packages, ' : 'packages, '}the site, an MCP server</span></li>
+    </ol>
   </section>
 
   <section class="ab-matrix" aria-labelledby="matrix-h">
     <h2 id="matrix-h" class="ab-h">Same name. Same grid. Same size.</h2>
     <p class="ab-sub">Because every style comes from the same drawing, you can switch styles any time and nothing moves.</p>
-    <div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in all ${word(N_STYLES)} styles" style="--cols:${N_STYLES}">
+    <div class="abx-matrix-scroll"><div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in all ${word(N_STYLES)} styles" style="--cols:${N_STYLES}">
       ${STYLES.map((s, c) => `<div class="ab-col" style="--g:${cvar(s)};--c:${c}"><span class="ab-col-h">${plain(s)[0]}</span>${matrixIcons.map(n => I(n, s, 40)).join('')}</div>`).join('')}
+    </div></div>
+  </section>
+
+${aboutMotion(everyAnimated)}
+${live.length ? `
+  <section class="abx-live" aria-labelledby="live-h">
+    <div class="abx-live-copy">
+      <p class="pg-eyebrow"><span class="hand">and some of them listen</span></p>
+      <h2 id="live-h" class="ab-h">Live icons</h2>
+      <p>${nLive ? `${Word(nLive)} icons` : 'A set of icons'} that show what you tell them: a calendar with your date, a clock with your time, a bell with your count, a battery at your level, the weather with your temperature. Each one is drawn the same careful way, so it renders in all ${word(N_STYLES)} styles.</p>
+      <a class="btn btn-ink" href="live.html">Try the live icons <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    <ul class="abx-live-grid" aria-label="Live icons changing their values">${live.map(({ n, s, svgs }) => `<li style="--g:${cvar(s)}" title="${esc(n.replace(/-/g, ' '))} in ${esc(plain(s)[0])}"><span class="abx-live-ic" data-n="${svgs.length}">${svgs.map((x, k) => `<span class="abx-st" style="--k:${k};--n:${svgs.length}">${x}</span>`).join('')}</span><span class="abx-live-l">${esc(n.replace(/-/g, ' '))}</span></li>`).join('')}</ul>
+  </section>` : ''}
+
+  <section class="abx-two" aria-labelledby="two-h">
+    <h2 id="two-h" class="ab-h">Built for people <span class="abx-amp">and</span> AI agents.</h2>
+    <div class="abx-two-grid">
+      <article class="abx-card" style="--g:${cvar('solid')}" data-reveal>
+        <span class="abx-card-ic">${I('users', 'duo', 36)}</span>
+        <h3>For people</h3>
+        <p>Find an icon by what it means, pick a style and colour, then copy it or download it in ${FORMATS.length} formats, from PNG and SVG to PowerPoint, GIF and Lottie. Step-by-step guides for every app you use.</p>
+        <ul class="abx-links"><li><a class="abx-a" href="icons.html">Browse the library</a></li><li><a class="abx-a" href="guides/index.html">Guides for Slides, Canva, Figma and more</a></li><li><a class="abx-a" href="developers.html">Packages for developers</a></li></ul>
+      </article>
+      <article class="abx-card" style="--g:${cvar('duo')};--d:1" data-reveal>
+        <span class="abx-card-ic">${I('bot', 'duo', 36)}</span>
+        <h3>For AI agents</h3>
+        <p>Agents search by meaning and get the real SVG, never a guess. Connect the MCP server, add the agent skill, or point any assistant at <code>llms.txt</code>. One command sets up your coding tools:</p>
+        ${code('npx withicons init', 'sh', 'Terminal')}
+        <ul class="abx-links"><li><a class="abx-a" href="ai.html#mcp">MCP server</a></li><li><a class="abx-a" href="ai.html#skill">Agent skill</a></li><li><a class="abx-a" href="llms.txt">llms.txt</a></li></ul>
+      </article>
     </div>
   </section>
 
-  <section class="ab-numbers" aria-label="with icons in numbers">
-    <ul>
-      <li data-reveal><b data-count="${N_ICONS}">${num(N_ICONS)}</b><span>icons</span></li>
-      <li data-reveal><b data-count="${N_STYLES}">${N_STYLES}</b><span>styles</span></li>
-      <li data-reveal><b data-count="${N_TOTAL}">${num(N_TOTAL)}</b><span>SVG files</span></li>
-      <li data-reveal><b data-count="${PRESETS.length}">${PRESETS.length}</b><span>ways to move</span></li>
-      <li data-reveal><b data-count="${terms}">${terms.toLocaleString('en')}</b><span>words to search by</span></li>
-      <li data-reveal><b>$0</b><span>forever</span></li>
-    </ul>
+  <section class="abx-principles" aria-labelledby="pr-h">
+    <h2 id="pr-h" class="ab-h">What we care about</h2>
+    <ol>${principles.map(([ic, s, t, d], i) => `<li data-reveal style="--g:${cvar(s)};--d:${i % 3}"><span class="abx-pr-ic">${I(ic, s, 28)}</span><span class="abx-pr-n">${String(i + 1).padStart(2, '0')}</span><h3>${t}</h3><p>${d}</p></li>`).join('')}</ol>
   </section>
 
-${aboutMotion()}
+  <section class="abx-oss" aria-labelledby="oss-h">
+    <div class="abx-oss-copy">
+      <p class="pg-eyebrow"><span class="hand">open source</span></p>
+      <h2 id="oss-h" class="ab-h">Make it better with us.</h2>
+      <p>Everything is on GitHub: the ${num(N_ICONS)} drawings, the ${word(N_STYLES)} renderers, the packages and this website. Ask for an icon you’re missing, report something that looks off, or send a drawing of your own.</p>
+      <div class="abx-oss-btns">
+        <a class="btn btn-sun" href="${NEW_ISSUE}">${I('plus-circle', 'line', 18)} Request an icon</a>
+        <a class="btn btn-ghost-dark" href="${GITHUB}">${I('star', 'line', 18)} Star on GitHub</a>
+      </div>
+      <ul class="abx-oss-links">
+        <li><a class="abx-a" href="${ISSUES}">${I('alert-circle', 'line', 18)}<span>Report a bug</span></a></li>
+        <li><a class="abx-a" href="${DISCUSS}">${I('message-circle', 'line', 18)}<span>Questions and ideas</span></a></li>
+        <li><a class="abx-a" href="${GITHUB}/blob/main/CONTRIBUTING.md">${I('git-branch', 'line', 18)}<span>Contributing guide</span></a></li>
+      </ul>
+    </div>
+    <div class="abx-oss-term">${code(`git clone ${GITHUB}.git
+cd withicons
+npm ci
+# render all ${num(N_TOTAL)} icons, then serve this site
+node forge/build.mjs
+node forge/tools/serve.mjs`, 'sh', 'Build it yourself')}</div>
+  </section>
 
-  <section class="ab-evergrow" aria-labelledby="eg-h">
-    <div class="ab-eg-mark" aria-hidden="true">${I('leaf', 'engrave', 120)}</div>
+  <section class="abx-lic" aria-labelledby="lic-h">
+    <div class="abx-lic-badge" aria-hidden="true"><b>MIT</b><span>licence</span></div>
     <div>
-      <p class="pg-eyebrow"><span class="hand">powered by</span></p>
-      <h2 id="eg-h">Evergrow</h2>
-      <p>with icons is made and looked after by Evergrow. We build it in the open and give it away, because good tools should be within everyone’s reach.</p>
-      <a class="btn btn-sun" href="https://withevergrow.com">Visit Evergrow →</a>
+      <h2 id="lic-h" class="ab-h">The licence, in one breath</h2>
+      <ul class="abx-ticks">
+        <li>${I('check', 'line', 20)}Use every icon for anything, including client work and products you sell.</li>
+        <li>${I('check', 'line', 20)}No credit needed. Change them as much as you like.</li>
+        <li>${I('check', 'line', 20)}Passing on the icon files or code themselves? Keep the licence text with them.</li>
+      </ul>
+      <p><a href="license.html">Read the licence in plain words →</a></p>
     </div>
+  </section>
+
+  <section class="ab-evergrow abx-eg" aria-labelledby="eg-h">
+    <div class="abx-eg-logo"><img src="brand/evergrow-white.webp" width="400" height="91" alt="Evergrow" loading="lazy" decoding="async"></div>
+    <div>
+      <p class="pg-eyebrow"><span class="hand">who makes it</span></p>
+      <h2 id="eg-h">Powered by Evergrow</h2>
+      <p>with icons is made and looked after by Evergrow. We build it in the open and give it away, because good tools should be within everyone’s reach, and because the small details are where care shows.</p>
+      <a class="btn btn-sun" href="https://withevergrow.com">Visit Evergrow <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="abx-contact" aria-labelledby="contact-h">
+    <h2 id="contact-h" class="ab-h">Say hello</h2>
+    <ul>
+      <li><a class="abx-ct" href="${DISCUSS}" style="--g:${cvar('line')}"><span class="abx-ct-ic">${I('message-circle', 'duo', 26)}</span><b>Questions and ideas</b><span>GitHub Discussions</span></a></li>
+      <li><a class="abx-ct" href="${NEW_ISSUE}" style="--g:${cvar('solid')}"><span class="abx-ct-ic">${I('plus-circle', 'duo', 26)}</span><b>Missing an icon?</b><span>Request it on GitHub</span></a></li>
+      <li><a class="abx-ct" href="${GITHUB}/security/advisories/new" style="--g:${cvar('sketch')}"><span class="abx-ct-ic">${I('shield', 'duo', 26)}</span><b>Security</b><span>Report privately</span></a></li>
+      <li><a class="abx-ct" href="https://withevergrow.com" style="--g:${cvar('engrave')}"><span class="abx-ct-ic">${I('leaf', 'duo', 26)}</span><b>Evergrow</b><span>withevergrow.com</span></a></li>
+    </ul>
   </section>
 
   <section class="pg-cta" data-reveal>
     <h2>Go make something.</h2>
     <p>Find an icon, copy it, done. <a href="guides/index.html">Need help? Start here.</a></p>
-    <a class="btn btn-ink" href="icons.html">${I('search', 'line', 18)} Browse icons</a>
+    <a class="btn btn-sun" href="icons.html">${I('search', 'line', 18)} Browse icons</a>
   </section>
 </div>`
-  const ld = [{ '@type': 'AboutPage', name: 'About with icons', url: ORIGIN + '/' + path, description: `Why with icons is free, who it is for, and how every icon is drawn once and rendered in ${word(N_STYLES)} styles.`, publisher: { '@type': 'Organization', name: 'Evergrow', url: 'https://withevergrow.com' } }]
-  write(path, page({ path, current: 'about', title: `About with icons: free icons, drawn once, rendered ${word(N_STYLES)} ways`, ogTitle: 'About with icons', desc: `The story of with icons: ${N_ICONS} free icons drawn once and rendered in ${word(N_STYLES)} styles, with optional animations, for slides, websites, apps and AI. Free under MIT. Powered by Evergrow.`, body, ld, crumbsLd: [['Home', ''], ['About', path]], bodyClass: 'pg-about', styles: motionAssets().css, scripts: motionAssets().js }))
+  const EG = { '@type': 'Organization', '@id': 'https://withevergrow.com/#organization', name: 'Evergrow', url: 'https://withevergrow.com/', logo: ORIGIN + '/brand/evergrow_black.png' }
+  const WI = { '@type': 'Organization', '@id': ORIGIN + '/#organization', name: 'with icons', url: ORIGIN + '/', logo: ORIGIN + '/brand/icon-512.png', sameAs: [GITHUB], parentOrganization: { '@id': EG['@id'] }, brand: { '@id': EG['@id'] } }
+  const ld = [
+    { '@type': 'AboutPage', '@id': ORIGIN + '/' + path + '#page', name: 'About with icons', url: ORIGIN + '/' + path, description: `Why with icons exists, who makes it, and how ${num(N_ICONS)} hand-drawn icons become ${num(N_TOTAL)} in ${word(N_STYLES)} styles. Free under MIT, powered by Evergrow.`, mainEntity: { '@id': WI['@id'] }, publisher: { '@id': EG['@id'] }, isPartOf: { '@id': ORIGIN + '/#website' }, inLanguage: 'en' },
+    WI, EG,
+  ]
+  write(path, page({ path, current: 'about', title: `About with icons: free icons, drawn once, rendered ${word(N_STYLES)} ways`, ogTitle: 'About with icons', desc: `The story of with icons: ${N_ICONS} free icons drawn once and rendered in ${word(N_STYLES)} styles, ${everyAnimated ? 'every one animated' : 'with animations'}, for slides, websites, apps and AI. Free under MIT. Powered by Evergrow.`, body, ld, crumbsLd: [['Home', ''], ['About', path]], bodyClass: 'pg-about', styles: [...motionAssets().css, 'css/about.css'], scripts: motionAssets().js }))
 }
 
 /** "And now they move": a short band of looping icons on the about page. */
-function aboutMotion() {
+function aboutMotion(every) {
   const picks = ['bell', 'heart', 'star', 'rocket', 'cloud', 'loader', 'sun', 'lightbulb'].filter(n => MOTION[n] && MOTION[n].loop)
   if (!picks.length) return ''
   const st = ['duo', 'kawaii', 'solid', 'sticker', 'line', 'glass', 'gloss', 'retro'].map(s => hasStyle(s) ? s : 'line')
@@ -758,8 +908,8 @@ function aboutMotion() {
     <div class="ab-move-art" aria-hidden="true">${picks.map((n, i) => { const s = st[i % st.length], m = MOTION[n].loop; return `<span class="ab-move-ic" style="--g:${cvar(s)};--i:${i}"><span class="wm wm-loop wm-p-${m.preset}" data-wm-preset="${m.preset}" style="${motionVars(m)}">${I(n, s, 48)}</span></span>` }).join('')}</div>
     <div>
       <p class="pg-eyebrow"><span class="hand">and now they move</span></p>
-      <h2 id="move-h" class="ab-h">Icons with a little life in them</h2>
-      <p>A bell that rings. A heart that beats. A play button that flips into pause. Every icon has its own gentle animation, plus ${PRESETS.length} more to choose from, in every style. Download them as animated SVGs or GIFs, or add them in code. They stay still for anyone who prefers less motion.</p>
+      <h2 id="move-h" class="ab-h">${every ? 'Every icon has a little life in it' : 'Icons with a little life in them'}</h2>
+      <p>A bell that rings. A heart that beats. A play button that flips into pause. ${every ? 'Every one of the ' + num(N_ICONS) + ' icons has its own' : 'Many icons have their own'} gentle animation, plus ${PRESETS.length} more to choose from, in every style. Download them as animated SVGs or GIFs, or add them in code. They stay still for anyone who prefers less motion.</p>
       <p><a href="guides/animate-icons.html">Animate an icon, no code needed →</a> · <a href="free/animated-icons.html">Free animated icons</a></p>
     </div>
   </section>`
@@ -844,8 +994,8 @@ export const FAQ = [
     ['Can I make a favicon or an app icon?', 'Yes. Download the favicon pack (every size a website needs, plus the lines to paste), an ICO file, an iOS imageset for Xcode or an Android VectorDrawable.'],
   ]]] : []),
   ['Styles', [
-    ['What’s the difference between universal, creative, playful, studio and storybook styles?', `Universal styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. Creative styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}${STU.length ? ` Studio styles (${listTitles(STU)}) are art-directed and premium: layered 3D, Bauhaus geometry and real materials, for hero sections, app tiles and brand moments at 48 px and up.` : ''}${STORY.length ? ` Storybook styles (${listTitles(STORY)}) are tiny illustrations: anime, Gothic, pastel, coquette and plush looks for games, kids’ apps, beauty and lifestyle brands, at 48 px and up.` : ''}`],
-    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the creative${PLAY.length ? ', playful' : ''}${STU.length ? ', studio' : ''}${STORY.length ? ' and storybook' : ''} styles for big, eye-catching moments.`],
+    [`What’s the difference between the ${['everyday', 'crafted', 'playful', 'studio'].map(g => GROUP_LABEL[g]).join(', ')} and ${GROUP_LABEL.storybook} styles?`, `${GROUP_LABEL.everyday} styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. ${GROUP_LABEL.crafted} styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}${STU.length ? ` Studio styles (${listTitles(STU)}) are art-directed and premium: layered 3D, Bauhaus geometry and real materials, for hero sections, app tiles and brand moments at 48 px and up.` : ''}${STORY.length ? ` Storybook styles (${listTitles(STORY)}) are tiny illustrations: anime, Gothic, pastel, coquette and plush looks for games, kids’ apps, beauty and lifestyle brands, at 48 px and up.` : ''}`],
+    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the ${GROUP_LABEL.crafted}${PLAY.length ? `, ${GROUP_LABEL.playful}` : ''}${STU.length ? `, ${GROUP_LABEL.studio}` : ''}${STORY.length ? ` and ${GROUP_LABEL.storybook}` : ''} styles for big, eye-catching moments.`],
     ...(PLAY.length ? [['Can I change the colours of the playful, studio and storybook styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost, gold trim, Bauhaus primaries, satin bows, stained glass and so on) have their own defaults, and on a website each one is a CSS variable you can change. Pick a palette in the icon editor to recolour them all at once.']] : []),
     ['Can I mix styles?', 'Yes, they share one grid, so they line up perfectly. A common pattern is Line for normal buttons and Solid for the selected one. Avoid mixing many styles in the same row.'],
   ]],

@@ -24,9 +24,13 @@ export function Toolbar() {
 // renderToString / SolidStart. ref, onClick, style and aria-* spread onto the <svg>.
 ```
 
-- Default import path = **line** style. Every other style is a subpath: `@withicons/solid/solid`, `@withicons/solid/duo`, ...
+- **One rule:** the root is the **line** style, every other style is a subpath (`@withicons/solid/solid`, `@withicons/solid/duo`, ...).
+  Import the icons you use by name from the style you want. That is all.
+- Fast everywhere: each style is a single module, so the root or a style subpath loads that one style (never all 20),
+  quickly in Node, SSR, Jest and Vitest, and bundlers keep only the icons you import. No bundler config needed
+  (no `optimizePackageImports`, no deep imports).
 - Every icon is exported twice: `Home` and `HomeIcon`. Names are the PascalCase of the kebab-case icon name (`arrow-right` -> `ArrowRight`).
-- Deep imports (one file per icon): `@withicons/solid/icons/home`, `@withicons/solid/solid/icons/home`.
+- Deep imports keep working: `@withicons/solid/icons/home`, `@withicons/solid/solid/icons/home`.
 
 ## Props
 
@@ -42,28 +46,28 @@ export function Toolbar() {
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
-| `line` | `@withicons/solid` | universal | A precise 1.75px outline with round caps and joins. The default for any interface. |
-| `solid` | `@withicons/solid/solid` | universal | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
-| `duo` | `@withicons/solid/duo` | universal | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
-| `gloss` | `@withicons/solid/gloss` | creative | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
-| `engrave` | `@withicons/solid/engrave` | creative | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
-| `blueprint` | `@withicons/solid/blueprint` | creative | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
-| `sketch` | `@withicons/solid/sketch` | creative | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
-| `glass` | `@withicons/solid/glass` | creative | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
-| `kawaii` | `@withicons/solid/kawaii` | creative | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
-| `sticker` | `@withicons/solid/sticker` | creative | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
-| `pixel` | `@withicons/solid/pixel` | creative | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
-| `retro` | `@withicons/solid/retro` | creative | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
-| `luxe` | `@withicons/solid/luxe` | creative | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
-| `bauhaus` | `@withicons/solid/bauhaus` | creative | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
-| `skeuo` | `@withicons/solid/skeuo` | creative | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
-| `anime` | `@withicons/solid/anime` | creative | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
-| `gothic` | `@withicons/solid/gothic` | creative | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
-| `pastel` | `@withicons/solid/pastel` | creative | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
-| `coquette` | `@withicons/solid/coquette` | creative | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
-| `plush` | `@withicons/solid/plush` | creative | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
+| `line` | `@withicons/solid` | Everyday | A precise 1.75px outline with round caps and joins. The default for any interface. |
+| `solid` | `@withicons/solid/solid` | Everyday | The filled companion to Line: bold mass, crisp knockouts, solid arrowheads, and parts, badges and slashes set apart by a precise gap. |
+| `duo` | `@withicons/solid/duo` | Everyday | The line drawing over a soft tonal fill of the object's mass. Recolour the tone with --with-duo. |
+| `gloss` | `@withicons/solid/gloss` | Crafted | Inflated, glossy and pillowy: soft-vinyl forms with carved specular highlights, in one flat colour. |
+| `engrave` | `@withicons/solid/engrave` | Crafted | Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow. |
+| `blueprint` | `@withicons/solid/blueprint` | Crafted | A drafting-table drawing that shows its work: chain-dash centre lines, fillet construction, a dimension line and open control nodes around a precise 1.25px line. Set --with-accent for a two-tone blueprint. |
+| `sketch` | `@withicons/solid/sketch` | Crafted | Marker ink over pencil: loose hand-drawn strokes that cross at corners and overshoot their loops, with light shadow-side hatching. |
+| `glass` | `@withicons/solid/glass` | Playful | Layered frosted glass: a vivid colour glows through a translucent pane with a crisp rim, a specular edge and a soft sheen. |
+| `kawaii` | `@withicons/solid/kawaii` | Playful | Chubby pastel shapes with a soft thick outline and a tiny blushing face: the cutest icons on the web. |
+| `sticker` | `@withicons/solid/sticker` | Playful | Die-cut vinyl stickers in candy colours: bold ink outlines, a puffy white border, a soft drop shadow, a glossy shine and a sparkle or two. |
+| `pixel` | `@withicons/solid/pixel` | Playful | Hand-tuned 16-bit pixel art: crisp one-pixel outlines, a shaded sprite body and a highlight pixel. Pixel-perfect at 16, 32 and 48 px on 1x, 2x and 3x screens. |
+| `retro` | `@withicons/solid/retro` | Playful | Warm 70s vibes: chunky outlines, sunset-striped fills and a hard offset shadow, like a vintage patch. |
+| `luxe` | `@withicons/solid/luxe` | Studio | Premium multi-layered 3D: jewel enamel, polished gold and ruby set in deep extruded slabs, with soft shadows, lit chamfers and crisp highlights. |
+| `bauhaus` | `@withicons/solid/bauhaus` | Studio | Bauhaus compositions in miniature: circles, arches, half and quarter discs and pills in red, yellow, blue and black. |
+| `skeuo` | `@withicons/solid/skeuo` | Studio | Skeuomorphic: every icon is a tactile object in a real material (paper, leather, metal, brass, wood, glass), lit from above with soft shadows, inner walls and debossed detail. |
+| `anime` | `@withicons/solid/anime` | Storybook | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow tone, bright specular shine and the odd sparkle, in sky blue, sakura pink and warm gold. |
+| `gothic` | `@withicons/solid/gothic` | Storybook | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches, tracery and rose windows. |
+| `pastel` | `@withicons/solid/pastel` | Storybook | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
+| `coquette` | `@withicons/solid/coquette` | Storybook | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `plush` | `@withicons/solid/plush` | Storybook | Stuffed-toy icons sewn from felt: puffy panels, dark piping, running stitches, buttons and embroidered details. |
 
 Duo's tint can be recoloured with the CSS variable `--with-duo`.
 
@@ -192,19 +196,31 @@ chevrons, undo/redo, reply, send, log-in/out) with a class; symmetric icons and 
   share its `solid-js` instance.
 - The root and every style subpath ship ESM (`import`) and CommonJS (`require`) with matching types.
   The per-icon deep paths (`icons/*`, `<style>/icons/*`) and `/icon` are ESM only.
-- `sideEffects: false` and one module per icon: a bundler keeps only the icons you import (the shared runtime plus
-  about 0.1 kB gzipped per line icon).
+- Each style is one module of `/*#__PURE__*/` components with `sideEffects: false`: a bundler keeps only the icons you
+  import (the shared runtime plus about 0.1 kB gzipped per line icon), and Node or Vitest load one file per style.
 
 ## Generic icon (dynamic names)
 
 ```tsx
+import { Suspense } from 'solid-js'
 import { Icon } from '@withicons/solid'
 
-<Icon name="home" variant="solid" size={20} />   // name and variant are reactive
+<Icon name="home" size={20} />                  // line: renders at once; name and variant are reactive
+<Suspense><Icon name="home" variant="solid" size={20} /></Suspense>   // solid: loaded on first use
 ```
 
 `name` accepts canonical names and unambiguous aliases (`bin` -> `trash`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** `Icon` references every icon in every style (500 x 20). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+
+**How `Icon` loads styles.** The root `Icon` renders the **line** style at once (a dynamic name needs every line icon,
+so using `Icon` brings that style). Any other `variant` is loaded the first time it renders: one dynamic import per
+style (one chunk in a bundle, one file in Node), shared by every `Icon` of that style.
+Until a style has loaded, its `Icon` is a solid `lazy()` component: it suspends to the nearest `<Suspense>`, and
+`renderToStringAsync` / `renderToStream` / SolidStart wait for it. A synchronous `renderToString` needs
+`await preloadStyles(...)` first. With `require()` (CommonJS) styles load synchronously.
+
+To have other styles ready up front, `await preloadStyles('solid', 'duo')` (no argument = every style). Or import
+`Icon` from `@withicons/solid/icon`: it imports every icon of every style (500 x 20, heavy) and always renders synchronously.
+`Icon` is tree-shaken away when unused; prefer named imports wherever the name is static.
 
 ## Custom icons
 

@@ -684,10 +684,6 @@ html:not(.js) .ip-map-card { margin-top: 10px }
 .ip-map-card a[aria-current]::before { content: ""; position: absolute; left: 2px; top: 12px; bottom: 12px; width: 3px; border-radius: 3px; background: var(--sc) }
 .ip-map-card a[aria-current] .ip-map-n { color: var(--style-text, var(--sc)); font-weight: 700 }
 .ip-map-card a:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: -2px }
-.ip-map-hint { position: absolute; right: 40px; bottom: calc(100% + 6px); display: flex; align-items: flex-end; gap: 2px; margin: 0; white-space: nowrap; font: 700 22px/1 var(--font-hand); color: var(--style-text, var(--sc)); transform: rotate(-4deg) translateY(8px); opacity: 0; pointer-events: none; transition: opacity .4s, transform .6s var(--ip-spring) }
-.ip-map-hint.is-on { opacity: 1; transform: rotate(-4deg) }
-.ip-map-hint svg { margin-bottom: -12px }
-.ip-map[open] .ip-map-hint { display: none }
 
 /* ─────────── "Make it yours": the studio and the downloads, one step away ─────────── */
 .ip-make-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; align-items: stretch }
@@ -816,13 +812,6 @@ html.ip-locked { overflow: hidden }
   .ip-sheet-acts [data-proxy] span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
   .ip-sheet-acts [data-proxy].is-near { display: none }
   .ip-sheet .toast, .ip-sheet .wied-toast, .ip-sheet .ip-toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)) }
-  .js .ip-map { right: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translate(50%, calc(100% + 32px)) }
-  .js .ip-map.is-shown { transform: translate(50%, 0) }
-  .js .ip-map-card { right: 50%; transform: translateX(50%); transform-origin: 50% 100% }
-  .ip-map-now { display: none }
-  .ip-map-hint { right: auto; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(8px); font-size: 19px }
-  .ip-map-hint.is-on { transform: translateX(-50%) }
-  .ip-map-hint svg { display: none }
 }
 @media (max-width: 640px) {
   .ip-pick { column-gap: 14px; --t: min(48px, calc((100vw - 2 * var(--gutter, 16px) - 14px - 42px) / 8)) }
@@ -840,7 +829,7 @@ html.ip-locked { overflow: hidden }
   .ip-pick-b[aria-checked="true"] { transform: translateY(-2px) }
 }
 @media (prefers-reduced-motion: reduce) {
-  .js .ip-map, .ip-map-hint, .ip-sheet-ink { transition: none }
+  .js .ip-map, .ip-bar, .ip-sheet-ink { transition: none }
   .ip-live-chip .ip-live-dot, .ip-sheet-spin { animation: none }
 }
 html:not(.js) .ip-intent, html:not(.js) .ip-use-sec, html:not(.js) .ip-map a[href="#in-use"], html:not(.js) .ip-map a[href="#download"] { display: none }
@@ -1020,3 +1009,34 @@ html:not(.js) .ip-tabs-row { display: none }
 @media (max-width: 720px) { .ip-sheet-modes button { min-width: 0 } }
 @media (prefers-reduced-motion: reduce) { .ip-sheet-ink { transition: none } }
 @media (forced-colors: active) { .ip-sheet-ink { outline: 2px solid Highlight } }
+
+/* ─────────── phones: a sticky Download / Copy bar, with the section map docked into its right end ───────────
+   js/icon-page.js shows it once the hero's own buttons have scrolled away (and hides it while they are on screen);
+   the page keeps room for it at the bottom, so it never sits on the footer. */
+.ip-bar { display: none }
+@media (max-width: 760px) {
+  .js .ip-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 69; display: flex; align-items: center; gap: 8px;
+    padding: 10px calc(max(12px, env(safe-area-inset-right)) + 58px) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    background: color-mix(in srgb, var(--paper) 90%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+    border-top: 1px solid var(--rule); box-shadow: 0 -12px 30px -22px rgba(17, 19, 24, .45);
+    transform: translateY(110%); visibility: hidden; transition: transform .45s var(--ip-spring), visibility 0s .45s }
+  .js .ip-bar.is-on { transform: none; visibility: visible; transition: transform .45s var(--ip-spring), visibility 0s }
+  .ip-bar button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 48px; padding: 0 12px; border-radius: 16px; font: 720 15px/1.1 var(--font-display); cursor: pointer; transition: transform .25s var(--ip-spring) }
+  .ip-bar button svg { width: 20px; height: 20px; flex: none }
+  .ip-bar button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+  .ip-bar-go { flex: 1 1 auto; border: 0; background: var(--sc-fill, var(--sc)); color: var(--sc-on, #fff); box-shadow: 0 12px 24px -16px var(--sc) }
+  .ip-bar-copy { flex: 0 1 auto; border: 1.5px solid var(--rule-strong); background: var(--card); color: var(--ink) }
+  .ip-bar button:active { transform: scale(.97) }
+  .ip-bar button:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+  html.ip-has-bar body { padding-bottom: calc(72px + env(safe-area-inset-bottom)) }
+  html.ip-bar-on .toast { bottom: calc(86px + env(safe-area-inset-bottom)) }
+  /* the map: a round button at the bar's right end; its list opens upward from there */
+  .js .ip-map { right: max(12px, env(safe-area-inset-right)); bottom: calc(10px + env(safe-area-inset-bottom)); transform: translateY(calc(100% + 40px)) }
+  .js .ip-map.is-shown { transform: none }
+  .js .ip-map-btn { width: 48px; height: 48px; padding: 0; gap: 0; justify-content: center }
+  .js .ip-map-btn:hover { transform: none }
+  .js .ip-map-l { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+  .ip-map-now { display: none }
+  .js .ip-map-card { right: 0; bottom: calc(100% + 12px); width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - var(--header-h, 64px) - 100px) }
+}
+@media (max-width: 380px) { .ip-bar button { padding: 0 10px; font-size: 14.5px; gap: 6px } .ip-bar-copy svg { display: none } }

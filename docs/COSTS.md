@@ -82,6 +82,21 @@ Any of those emails means something abnormal, most likely abuse of the API.
   Repeated queries never reach Lambda. Deploys invalidate `/api/*` whenever the Lambda code changes.
 - **Reserved concurrency 10** caps parallel executions. At ~100 ms per call that is at most ~100 invocations/second.
 - `ApiInvocationsAlarm` emails at more than 20,000 invocations in one hour.
+- **Hosted `export_icon` is paged**, so no single call can exceed the Lambda (6 MB response, 15 s timeout, 512 MB): each
+  response carries at most ~4.5 MB of files (as sent: JSON-escaped text, base64 binaries) and stops starting new
+  files after 4 s (a file in progress is abandoned at 7 s); the rest comes with `next.cursor` for the next call. When
+  an export needs more than one page, plain `svg-flat` files are returned as jsDelivr URLs of `@withicons/static`
+  (no rendering at all). Measured (desktop, 50 icons x all 20 styles, 2026-10-07):
+
+  | export (dist/lambda.mjs, unpacked alone like on Lambda) | pages | worst page | largest body | peak RSS (whole process; heap capped at 200 MB) |
+  |---|---:|---:|---:|---:|
+  | eps (the heaviest format: up to ~1 MB a file), 1,000 files | 10 | 1.1 s | 4.1 MB | 373 MB (328 MB) |
+  | all 18 remote formats: 17,000 files + 1,000 svg-flat URLs | 43 | 0.5 s | 4.1 MB | 384 MB (315 MB) |
+
+  The Lambda Timeout is 15 s (was 10) for the margin: 512 MB is ~0.3 vCPU, roughly 3x slower than the desktop.
+  Each page is one uncached invocation (estimated ~1-3 s at 512 MB, about $0.00001-0.00003 each).
+- The WAF rule normalises the path (URL decode, `NORMALIZE_PATH_WIN`, lowercase), so `//api/...` and `/%61pi/...`
+  count against the per-IP limit, and the Lambda answers 404 to non-canonical paths.
 - **Kill switch** (stops all API spend in seconds, the site keeps working):
   `aws lambda put-function-concurrency --function-name withicons-site-api --reserved-concurrent-executions 0`
 - A sustained flood at the concurrency cap for a whole month would be ~260M invocations, about $225 Lambda

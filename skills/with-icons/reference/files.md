@@ -96,7 +96,24 @@ A role the style does not paint changes nothing. The CLI prints one line per com
 ```bash
 npx withicons export bell --format gif --background "#ffffff" --out slides      # bell-line-ring.gif
 npx withicons export rocket --style luxe --format gif --size 512 --background "#0f172a" --color "#ffffff"
+npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"   # a ready 16:9 slide, icon moving
+npx withicons export play --format gif --motion swap --to pause --effect morph            # play turns into pause and back
 ```
+
+MCP: `export_icon({ name: 'bell', style: 'luxe', format: 'gif', background: '#ffffff', out_dir: 'slides' })` writes the
+file (without `out_dir` a small GIF comes back as image content). The remote server (`https://withicons.com/mcp`) cannot
+render frames: it answers GIF / APNG / PowerPoint requests with the exact `npx withicons export ...` command to run.
+Large remote exports come in pages: a result with `next: { cursor, remaining }` has more to come, so call `export_icon` again with the same arguments plus `cursor`. Plain `svg-flat` files (no colour or size options) then come back as `urls[]` to the prebuilt `@withicons/static` SVGs on jsDelivr (colours baked in, ink follows `currentColor`, no `<title>`).
+
+- **Which animated format.** `gif` plays in PowerPoint (slide show and editor), Keynote, Google Slides, Word, Gmail,
+  Apple Mail, Outlook on the web, Slack, Teams and Notion (classic Outlook for Windows shows the first frame).
+  `pptx-animated`: one slide with that GIF (opens in PowerPoint, Keynote, Google Slides). `apng` (`.apng.png`): smooth
+  see-through edges on web pages; Office and Google Slides show only its first frame. `animated-svg`: tiny, browsers
+  only. `lottie` / `dotlottie`: vector, for apps, After Effects, Canva, LottieFiles.
+- **Background.** GIF transparency is on or off per pixel, so soft edges are blended with a colour. Pass the slide's
+  colour as `--background` (solid tile, cleanest) or `--matte` (transparent, edges blended for that colour).
+- Pixel size: default 256 px (pptx-animated 480), sharp up to ~1.75 in / 4.5 cm wide on a 1080p slide; `--size 512`
+  for full-screen or 4K, `--size 1080` for Instagram and other social posts.
 
 - **`pptx-animated` is one sample slide** (a 16:9 slide with the GIF on it). For a real deck, export `gif` files and insert them
   into your own slides (Insert > Pictures, or drag in): GIFs play in PowerPoint, Keynote and Google Slides.

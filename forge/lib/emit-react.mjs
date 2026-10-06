@@ -1,4 +1,5 @@
 // emit-react — @withicons/react. One forwardRef component per icon per style; see emitComponentPackage.
+import { groupOfStyle } from '../tools/style-groups.mjs'
 import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount, paletteDoc, motionDoc, totalText } from './emit-core.mjs'
 
 // SVG attribute names -> React prop names ('stroke-width' -> strokeWidth, 'class' -> className, style string -> object)
@@ -48,10 +49,17 @@ const baseSrc = `function createWithIcon(name, style, displayName, iconNode) {
   return Component
 }`
 
-const iconSrc = `const Icon = forwardRef(function Icon(props, ref) {
+// A style that is not loaded yet renders through React.lazy (one per style, resolving to Icon itself): it suspends
+// like any lazy component, works in Server Components and streaming SSR, and renders synchronously once loaded.
+const iconSrc = `const WITH_LAZY = {}
+const Icon = forwardRef(function Icon(props, ref) {
   const { name, variant, ...rest } = props
   const C = withFindComponent(name, variant)
   if (!C) return null
+  if (typeof C === 'string') {
+    const L = WITH_LAZY[C] || (WITH_LAZY[C] = lazy(() => withLoadStyle(C).then(() => ({ default: Icon }))))
+    return createElement(L, Object.assign({}, props, { ref }))
+  }
   rest.ref = ref
   return createElement(C, rest)
 })
@@ -89,8 +97,8 @@ export type IconComponentProps = WithIconProps
 export default async function emit(ctx) {
   const files = await emitComponentPackage(ctx, {
     dir: 'react',
-    importEsm: `import { createElement, forwardRef } from 'react'`,
-    importCjs: `const { createElement, forwardRef } = require('react')`,
+    importEsm: `import { createElement, forwardRef, lazy } from 'react'`,
+    importCjs: `const { createElement, forwardRef, lazy } = require('react')`,
     mapAttrs: reactAttrs,
     baseSrc, iconSrc, typesDts,
     typeNames: ['WithIcon', 'WithIconProps', 'WithIconStyle', 'IconProps', 'IconComponentProps'],
@@ -105,6 +113,7 @@ export default async function emit(ctx) {
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports, typesVersions,
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
     peerDependencies: { react: '>=16.8.0' },
   }
   writePkg(ctx, 'react', pkg, readme(ctx))
@@ -120,7 +129,7 @@ function strokeDefaults(ctx) {
 }
 
 export function frameworkReadme(ctx, o) {
-  const styleRows = ctx.styles.map(s => `| \`${s.name}\` | \`${o.pkg}${s.name === ctx.defaultStyle ? '' : '/' + s.name}\` | ${s.kind} | ${s.description} |`).join('\n')
+  const styleRows = ctx.styles.map(s => `| \`${s.name}\` | \`${o.pkg}${s.name === ctx.defaultStyle ? '' : '/' + s.name}\` | ${groupOfStyle(s.name).title} | ${s.description} |`).join('\n')
   return `# ${o.pkg}
 
 ${ctx.icons.length} icons x ${ctx.styles.length} styles for ${o.framework}. Tree-shakable, typed, \`currentColor\` by default.
@@ -133,9 +142,13 @@ npm i ${o.pkg}
 ${o.example}
 \`\`\`
 
-- Default import path = **line** style. Every other style is a subpath: \`${o.pkg}/solid\`, \`${o.pkg}/duo\`, ...
+- **One rule:** the root is the **line** style, every other style is a subpath (\`${o.pkg}/solid\`, \`${o.pkg}/duo\`, ...).
+  Import the icons you use by name from the style you want. That is all.
+${o.speed || `- Fast everywhere: each style is a single module, so the root or a style subpath loads that one style (never all ${ctx.styles.length}),
+  quickly in Node, SSR, Jest and Vitest, and bundlers keep only the icons you import. No bundler config needed
+  (no \`optimizePackageImports\`, no deep imports).`}
 - Every icon is exported twice: \`Home\` and \`HomeIcon\`. Names are the PascalCase of the kebab-case icon name (\`arrow-right\` -> \`ArrowRight\`).
-- Deep imports (one file per icon): \`${o.pkg}/icons/home\`, \`${o.pkg}/solid/icons/home\`.
+- Deep imports keep working: \`${o.pkg}/icons/home\`, \`${o.pkg}/solid/icons/home\`.
 
 ## Props
 
@@ -151,7 +164,7 @@ ${o.example}
 
 ## Styles
 
-| style | import | kind | look |
+| style | import | group | look |
 |---|---|---|---|
 ${styleRows}
 
@@ -164,7 +177,15 @@ ${o.generic}
 \`\`\`
 
 \`name\` accepts canonical names and unambiguous aliases (\`bin\` -> \`trash\`); unknown names warn with the 3 nearest names and render nothing.
-**Bundle cost:** \`Icon\` references every icon in every style (${ctx.icons.length} x ${ctx.styles.length}). It is tree-shaken away when unused; when used, prefer named imports wherever the name is static.
+
+**How \`Icon\` loads styles.** The root \`Icon\` renders the **${ctx.defaultStyle}** style at once (a dynamic name needs every ${ctx.defaultStyle} icon,
+so using \`Icon\` brings that style). Any other \`variant\` is loaded the first time it renders: one dynamic import per
+style (one chunk in a bundle, one file in Node), shared by every \`Icon\` of that style.
+${o.lazy}
+
+To have other styles ready up front, \`await preloadStyles('solid', 'duo')\` (no argument = every style). Or import
+\`Icon\` from \`${o.pkg}/icon\`: it imports every icon of every style (${ctx.icons.length} x ${ctx.styles.length}, heavy) and always renders synchronously.
+\`Icon\` is tree-shaken away when unused; prefer named imports wherever the name is static.
 
 ## Custom icons
 
@@ -189,9 +210,17 @@ export function Toolbar() {
     </nav>
   )
 }`,
-    generic: `import { Icon } from '@withicons/react'
+    generic: `import { Suspense } from 'react'
+import { Icon } from '@withicons/react'
 
-<Icon name="home" variant="solid" size={20} />`,
+<Icon name="home" size={20} />                      // line: renders at once
+<Suspense fallback={null}>
+  <Icon name="home" variant="solid" size={20} />    // solid: loaded on first use
+</Suspense>`,
+    lazy: `Until a style has loaded, its \`Icon\` suspends like any \`React.lazy\` component, so wrap it in \`<Suspense>\`.
+Server Components and streaming SSR (Next.js App Router, \`renderToPipeableStream\`) wait for it and send the finished
+\`<svg>\`; a synchronous \`renderToString\` needs \`await preloadStyles(...)\` first. With \`require()\` (CommonJS, Jest)
+styles load synchronously and \`Icon\` never suspends.`,
   })
   const marker = '## Generic icon (dynamic names)'
   return md.includes(marker) ? md.replace(marker, reactSections(ctx) + marker) : md + reactSections(ctx)
@@ -272,7 +301,9 @@ composes with motion's transforms and a nudge follows the mirrored direction:
   Works with React 16.8 and later; SSR and hydration are tested on React 18 and 19.
 - The root and every style subpath ship ESM (\`import\`) and CommonJS (\`require\`) with matching types.
   The per-icon deep paths (\`icons/*\`, \`<style>/icons/*\`) and \`/icon\` are ESM only.
-- \`sideEffects: false\` and one module per icon: a bundler keeps only the icons you import.
+- Each style is one module of \`/*#__PURE__*/\` components with \`sideEffects: false\`: Vite, webpack (Next.js), Rollup and
+  esbuild keep only the icons you import, and Node, Jest and Vitest load one file per style. Next.js needs no
+  \`optimizePackageImports\` entry, and named imports from the root are as small as deep imports.
 
 `
 }

@@ -164,8 +164,8 @@
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
-      "svelte": "./dist/Icon.svelte",
-      "default": "./dist/Icon.svelte"
+      "svelte": "./dist/IconAll.svelte",
+      "default": "./dist/IconAll.svelte"
     },
     "./icons/*.svelte": {
       "types": "./dist/line/icons/*.svelte.d.ts",
@@ -535,6 +535,9 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
   "peerDependencies": {
     "svelte": "^4.0.0 || ^5.0.0"
   }
