@@ -75,7 +75,10 @@
 .wied-tabs button { position: relative; z-index: 1; flex: 1; height: 42px; padding: 0 10px; border: 0; border-radius: 12px; background: none; color: var(--muted); font: 680 15px/1 var(--font-display); cursor: pointer; transition: color .25s }
 .wied-tabs button:hover { color: var(--ink) }
 .wied-tabs button[aria-selected="true"] { color: var(--ink) }
-.wied-tab-ink { position: absolute; z-index: 0; left: 0; top: 4px; bottom: 4px; border-radius: 12px; background: var(--card); box-shadow: 0 1px 2px rgba(17, 19, 24, .08), 0 6px 16px -10px rgba(17, 19, 24, .35); transition: transform .45s var(--wd-spring), width .45s var(--wd-e) }
+/* the pill: CSS-placed from --i / --n (set by selectTab), so it always frames the active tab exactly */
+.wied-tab-ink { position: absolute; z-index: 0; left: 4px; top: 4px; bottom: 4px; width: calc((100% - 8px - (var(--n, 3) - 1) * 2px) / var(--n, 3)); transform: translateX(calc(var(--i, 0) * (100% + 2px))); border-radius: 12px; background: var(--card); box-shadow: 0 1px 2px rgba(17, 19, 24, .08), 0 0 0 1px var(--rule-strong, rgba(17, 19, 24, .1)), 0 6px 16px -10px rgba(17, 19, 24, .35); transition: transform .45s var(--wd-spring) }
+:root[data-theme="dark"] .wied-tab-ink { background: color-mix(in srgb, var(--card) 82%, #fff 12%) }
+.wied-tabs button { min-width: 0 }
 .wied-tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 50%; bottom: 6px; width: 16px; height: 3px; margin-left: -8px; border-radius: 3px; background: var(--sc) }
 .wied-pane { animation: wied-in .45s var(--wd-e) both }
 @keyframes wied-in { from { opacity: 0; transform: translateY(6px) } }
@@ -549,6 +552,11 @@
 .wied-setup-hint { margin-top: 0; font-size: 14px; line-height: 1.5; color: rgba(247, 243, 236, .78) }
 .wied-setup-hint b { color: #fff }
 .wied-setup-hint code, .wied-setup-more code { font: 500 .9em var(--font-mono) }
+.wied-setup[hidden], .wied-setup-more[hidden] { display: none }
+.wied-line + .wied-setup-hint { margin-top: 14px }
+.wied-size-k { margin: 12px 0 6px; font: 600 12.5px/1.35 var(--font-sans); color: rgba(247, 243, 236, .72) }
+.wied-sizehelp [data-size-lines] { padding-bottom: 6px }
+.wied-sizehelp [data-size-lines] > .wied-line:last-child { margin-bottom: 16px }
 .wied-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; margin: 0 0 8px; padding: 9px 12px; border-radius: 10px; border: 1px dashed rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .05); color: #F7F3EC; text-align: left; cursor: pointer }
 .wied-line code { min-width: 0; font: 500 12px/1.4 var(--font-mono); overflow-wrap: anywhere; font-variant-ligatures: none }
 .wied-line svg { flex: none; width: 15px; height: 15px; opacity: .7 }

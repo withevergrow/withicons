@@ -49,8 +49,23 @@ styles and the five storybook styles ship a default palette whose colours are CS
 - Studio and storybook styles (luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush) name each variable after its palette role: `--with-<style>-<role>` with role one of
   `ink c1 c2 c3 c4 tint accent shadow shine edge` (`.vip { --with-luxe-c1: #0f766e; --with-luxe-accent: #e3ae47 }`), so a
   per-icon palette (`withicons palettes <icon>`, the editor on withicons.com) recolours all of them the same way.
-- Icon classes (CSS masks) show palette styles in their default colours; the variables need components, the web
-  component, sprites or `with-icons.js`. Standalone `.svg` files have the defaults baked in (for `<img>`, Figma, slides).
+- The five palette styles (glass, kawaii, sticker, pixel, retro) keep their own variable names, but every one of them maps
+  to a palette role too, so the same per-icon palettes apply to them: fixed variables map to one role
+  (`--with-kawaii-face` -> ink, `--with-kawaii-blush` -> accent, `--with-glass-back` -> c1, `--with-glass-pane` -> tint,
+  `--with-sticker-edge` -> edge, `--with-pixel-fill` -> c1, `--with-retro-shadow` -> shadow …), and the colour families
+  (`--with-kawaii-fill-N`, the sticker candies `--with-sticker-bubblegum/grape/lemon/mint/peach/sky`, `--with-retro-N`)
+  map to c1, c2, c3, c4 in the order they first appear in that icon. `withicons palettes heart --style kawaii` prints the
+  exact mapping for one icon (`kawaii: --with-kawaii-fill-1 (c1), --with-kawaii-blush (accent), … --with-kawaii-face (ink)`);
+  MCP `list_palettes(name, style)` and `/api/palettes/<name>?style=` return it as JSON. `--with-duo` and `--with-accent` map to c1.
+- Some variables default to `currentColor` (the ink), so the table below leaves them out: `--with-kawaii-face` (eyes and
+  mouth), `--with-pixel-fill`, `--with-bauhaus-ink`, `--with-skeuo-edge`, plus `--with-duo` and `--with-accent`.
+- Apply a named palette without a build step: `withicons get heart --style kawaii --palette classic-red --format web-component`
+  (or MCP `get_icon` with `palette`) returns a `<with-icon>` with the palette's variables in its `style` attribute, ready for
+  the CDN script; there is no `palette` attribute on `<with-icon>` itself. For an image, use
+  `https://withicons.com/api/icon/heart.svg?style=kawaii&palette=classic-red` (colours baked in) or `--flat` on `get`.
+- Icon classes (CSS masks) show palette styles in their default colours (with a palette, only its ink applies); the
+  variables need components, the web component, sprites or `with-icons.js`. Standalone `.svg` files have the defaults
+  baked in (for `<img>`, Figma, slides).
 
 ### Palette variables
 

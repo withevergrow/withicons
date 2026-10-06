@@ -1,4 +1,4 @@
-/* with icons — home page. Needs js/site.js (window.WI), js/home-icons.js (window.WITH_HOME) and, for the style
+/* with icons, home page. Needs js/site.js (window.WI), js/home-icons.js (window.WITH_HOME) and, for the style
    picker, "Icons that move" and the washing line's "dress them all as", js/home-icons-more.js (window.WITH_HOME_MORE).
    Both packs are generated from the skeletons (forge/tools/site-data.mjs, homePacks) and load after the page is interactive. */
 (function () {
@@ -1016,7 +1016,7 @@
           var sug = (WI.suggest(q, 4) || []).map(function (x) { return typeof x === 'string' ? x : x.name })
           grid.innerHTML = '<li class="hs-empty" style="--i:0"><span class="hand">hmm, nothing for “' + esc(q) + '”</span>' +
             (sug.length ? 'Did you mean ' + sug.map(function (s) { return '<button type="button" data-q="' + esc(s) + '">' + esc(s) + '</button>' }).join('') + '?' : 'Try a simpler word, like “home” or “money”.') +
-            '<span class="hs-empty-ai"><b>Or let an AI pick it</b> — it reads our skill file and searches every icon for “' + esc(q) + '”:</span><div class="hs-empty-ask" data-ask-ai data-intent="find" data-query="' + esc(q) + '"></div></li>'
+            '<span class="hs-empty-ai"><b>Or let an AI pick it.</b> It reads our skill file and searches every icon for “' + esc(q) + '”:</span><div class="hs-empty-ask" data-ask-ai data-intent="find" data-query="' + esc(q) + '"></div></li>'
           count.innerHTML = 'No icons yet'
           return
         }
@@ -1080,7 +1080,7 @@
         if (cp) {
           e.preventDefault()
           var n = cp.getAttribute('data-copy-name')
-          WI.loadStyle(hsStyle).then(function () { WI.copyWithToast(WI.svgFile(n, hsStyle) || fileFor(n, hsStyle), 'Copied ' + n + ' — paste it anywhere') })
+          WI.loadStyle(hsStyle).then(function () { WI.copyWithToast(WI.svgFile(n, hsStyle) || fileFor(n, hsStyle), 'Copied ' + n + '. Paste it anywhere.') })
         }
       })
       doc.addEventListener('pointerdown', function (e) { if (!hs.contains(e.target)) panel.hidden = true })
@@ -1312,7 +1312,7 @@
         '<button type="button" class="try-sw try-sw-custom" data-tc-custom aria-pressed="false" aria-label="Any colour" title="Any colour">' + PLUS + '</button>'
       var customBtn = $('[data-tc-custom]', tColors)
       tArt.setAttribute('draggable', 'true')
-      tArt.setAttribute('role', 'img'); tArt.setAttribute('aria-label', 'Icon preview — drag me')
+      tArt.setAttribute('role', 'img'); tArt.setAttribute('aria-label', 'Icon preview, drag me')
       var paintTry = function (live) {
         var pl = plan()
         setStyleClass(prev, T.style)
@@ -1370,7 +1370,7 @@
           pressColour(c)
           paintTry(); return
         }
-        if (e.target.closest('[data-try-copy]')) { WI.copyWithToast(outFor(plan()), 'SVG copied — paste it into Figma, Canva or your code'); return }
+        if (e.target.closest('[data-try-copy]')) { WI.copyWithToast(outFor(plan()), 'SVG copied. Paste it into Figma, Canva or your code.'); return }
         if (e.target.closest('[data-try-svg]')) { WI.download(T.icon + '-' + T.style + '.svg', outFor(plan())); WI.toast('Downloading ' + T.icon + '-' + T.style + '.svg'); return }
         if (e.target.closest('[data-try-png]')) {
           WI.svgToPng(outFor(plan()), 512).then(function (blob) {
@@ -1413,9 +1413,9 @@
     var devTabs = $('[data-dev-tabs]'), devCode = $('[data-dev-code]')
     if (devTabs && devCode) {
       var CODE = {
-        html: ['html', '<!-- loads only the icons on the page, in any style -->\n<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>\n\n<i class="with with-heart"></i>\n<i class="with with-heart with-solid"></i>'],
+        html: ['html', '<!-- loads only the icons on the page, in any style -->\n<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>\n\n<i class="with with-heart"></i>\n<i class="with with-heart with-solid"></i>'],
         react: ['jsx', "import { Heart } from '@withicons/react'\nimport { Heart as HeartGloss } from '@withicons/react/gloss'\n\n<Heart size={24} />\n<HeartGloss size={48} color=\"hotpink\" />"],
-        wc: ['html', '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>\n\n<with-icon name="heart" variant="duo"></with-icon>']
+        wc: ['html', '<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>\n\n<with-icon name="heart" variant="duo"></with-icon>']
       }
       var setDev = function (k) {
         $$('[data-dev]', devTabs).forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-dev') === k ? 'true' : 'false') })
@@ -1445,7 +1445,7 @@
           var style = s[4]
           var draw = function () {
             var svg = ic(s[2], style, 22) || WI.svg(s[2], style, 22) || ic(s[2], 'line', 22) || WI.svg(s[2], 'line', 22)
-            msgs[2].querySelector('p').innerHTML = '<span class="chat-ic" style="color:var(--c-' + style + ')">' + svg + '</span><span>Using <b>' + esc(s[2]) + '</b> in ' + s[3] + ' — added with an accessible label.</span>'
+            msgs[2].querySelector('p').innerHTML = '<span class="chat-ic" style="color:var(--c-' + style + ')">' + svg + '</span><span>Added <b>' + esc(s[2]) + '</b> in ' + s[3] + ', with an accessible label.</span>'
           }
           if (hasIc(s[2], style)) draw(); else WI.loadStyle(style).then(draw)
           msgs[0].classList.add('is-in')
@@ -1649,28 +1649,100 @@
         m = m || { preset: 'pop' }
         return '<span class="wm wm-' + trig + ' wm-p-' + esc(m.preset) + (S.force ? ' wm-force' : '') + '" data-wm="' + esc(name) + '" style="' + esc(styleAttr(vars(m))) + '">' + svg + '</span>'
       }
+      /* the code card: the demo picked last (loop, hover or a swap), in the current style, for the visitor's stack.
+         Web component first (the simplest); the stack is shared with the library and the icon pages ('with-stack'). */
+      var CDN = 'https://cdn.jsdelivr.net/npm/'
+      var STACK = [['web', 'Web component'], ['html', 'HTML <i> tag'], ['react', 'React'], ['vue', 'Vue'], ['svelte', 'Svelte'], ['svg', 'SVG']]
+      var stack = 'web'
+      try { var sk = String(localStorage.getItem('with-stack') || '').replace(/"/g, ''); if (STACK.some(function (x) { return x[0] === sk })) stack = sk } catch (err) { /* noop */ }
+      var boxStack = $('[data-mo-stack]', sec)
+      var pascal = function (n) { return n.split('-').map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1) }).join('') }
+      var label = function (n) { return LABEL[n] || n.charAt(0).toUpperCase() + n.slice(1).replace(/-/g, ' ') }
       function codeFor(kind, name, m, extra) {
-        var v = vars(m), opts = []
-        if (m.duration != null) opts.push('--wm-dur:' + v['--wm-dur'])
-        if (m.dir != null) opts.push('--wm-dx:' + v['--wm-dx'], '--wm-dy:' + v['--wm-dy'])
-        if (m.amount != null && m.amount !== 1) opts.push('--wm-k:' + v['--wm-k'])
-        if (m.origin && (m.origin[0] !== 12 || m.origin[1] !== 12)) opts.push('--wm-ox:' + v['--wm-ox'], '--wm-oy:' + v['--wm-oy'])
-        if (m.steps) opts.push('--wm-ease:steps(' + m.steps + ')')
-        var st = opts.length ? ' style="' + opts.join('; ') + '"' : ''
-        var head = '<!-- once, in your page’s <head>: the optional motion add-on -->\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">\n\n'
-        if (kind === 'loop') return head + '<!-- a ' + name + ' that ' + (VERB[m.preset] || 'moves') + ' all the time -->\n<span class="wm wm-loop wm-p-' + m.preset + '"' + st + '>\n  <!-- paste the ' + name + ' SVG here -->\n</span>'
-        if (kind === 'hover') return head + '<!-- the icon plays once when the button is hovered or focused -->\n<button class="wm-trigger">\n  <span class="wm wm-hover wm-p-' + m.preset + '"' + st + '><!-- ' + name + ' SVG --></span>\n  ' + (LABEL[name] || name) + '\n</button>'
-        return head + '<!-- ' + name + ' turns into ' + extra.to + ' when the button is pressed -->\n<button aria-pressed="false" onclick="this.setAttribute(\'aria-pressed\', this.getAttribute(\'aria-pressed\') !== \'true\')">\n  <span class="wm-swap wm-fx-' + extra.fx + '">\n    <!-- ' + name + ' SVG with class="wm-a" -->\n    <!-- ' + extra.to + ' SVG with class="wm-b" -->\n  </span>\n</button>'
+        var st = S.style, to = extra && extra.to ? extra.to.split('@') : null, bn = to && to[0], bs = to && (to[1] || st), fx = extra && extra.fx
+        var toggle = 'aria-pressed="false" aria-label="' + label(name) + '"'
+        var motionCss = '<link rel="stylesheet" href="' + CDN + '@withicons/motion@latest/dist/motion.css">'
+        var iconCss = function (n) { return '<link rel="stylesheet" href="' + CDN + '@withicons/motion@latest/dist/icons/' + n + '.css">' }
+        var onclick = ' onclick="this.setAttribute(\'aria-pressed\', this.getAttribute(\'aria-pressed\') !== \'true\')"'
+        var head = '<!-- once, in your page’s <head> -->\n'
+        if (stack === 'web') {
+          var v = st === 'line' ? '' : ' variant="' + st + '"'
+          var headW = head + motionCss + '\n<script type="module" src="' + CDN + '@withicons/web@latest/dist/cdn.js"></script>\n<script type="module" src="' + CDN + '@withicons/motion@latest/dist/element.js"></script>\n\n'
+          if (kind === 'loop') return headW + '<with-icon name="' + name + '"' + v + ' motion="loop"></with-icon>'
+          if (kind === 'hover') return headW + '<button class="wm-trigger">\n  <with-icon name="' + name + '"' + v + ' motion="hover"></with-icon> ' + label(name) + '\n</button>'
+          return headW + '<!-- click it: ' + name + ' turns into ' + bn + ' -->\n<with-icon name="' + name + '"' + v + ' swap-to="' + (bs === 'line' && st === 'line' ? bn : bn + '@' + bs) + '" swap-effect="' + fx + '" swap-trigger="click"></with-icon>'
+        }
+        if (stack === 'html') {
+          var cls = function (n, s2) { return 'with with-' + n + (s2 === 'line' ? '' : ' with-' + s2) }
+          var headH = head + motionCss + (kind === 'swap' ? '' : '\n' + iconCss(name)) + '\n<script src="' + CDN + '@withicons/classes/dist/with-loader.js" defer></script>\n\n'
+          if (kind === 'loop') return headH + '<i class="' + cls(name, st) + ' wm wm-loop" data-wm="' + name + '"></i>'
+          if (kind === 'hover') return headH + '<button class="wm-trigger">\n  <i class="' + cls(name, st) + ' wm wm-hover" data-wm="' + name + '"></i> ' + label(name) + '\n</button>'
+          return headH + '<button ' + toggle + onclick + '>\n  <span class="wm-swap wm-fx-' + fx + '">\n    <i class="' + cls(name, st) + ' wm-a"></i>\n    <i class="' + cls(bn, bs) + ' wm-b"></i>\n  </span>\n</button>'
+        }
+        if (stack === 'svg') {
+          var svgOf = function (n, s2, c) { return ic(n, s2, 24, c ? { 'class': c } : null).replace(' focusable="false"', '') }
+          var headS = head + motionCss + (kind === 'swap' ? '' : '\n' + iconCss(name)) + '\n\n'
+          if (kind === 'loop') return headS + '<span class="wm wm-loop" data-wm="' + name + '">\n  ' + svgOf(name, st) + '\n</span>'
+          if (kind === 'hover') return headS + '<button class="wm-trigger">\n  <span class="wm wm-hover" data-wm="' + name + '">' + svgOf(name, st) + '</span> ' + label(name) + '\n</button>'
+          return headS + '<button ' + toggle + onclick + '>\n  <span class="wm-swap wm-fx-' + fx + '">\n    ' + svgOf(name, st, 'wm-a') + '\n    ' + svgOf(bn, bs, 'wm-b') + '\n  </span>\n</button>'
+        }
+        // React, Vue, Svelte: the motion CSS once, then the component inside a wrapper that carries the classes
+        var pkg = '@withicons/' + stack, A = pascal(name), B = pascal(bn || ''), Bs = B === A ? B + pascal(bs) : B
+        var imp = function (n, s2, alias) { return 'import { ' + n + (alias && alias !== n ? ' as ' + alias : '') + ' } from \'' + pkg + (s2 === 'line' ? '' : '/' + s2) + '\'' }
+        var imports = 'import \'@withicons/motion/motion.css\'\nimport \'@withicons/motion/icons.css\'\n' +
+          (kind === 'swap' && bs === st && Bs === B ? imp(A + ', ' + B, st) : imp(A, st) + (kind === 'swap' ? '\n' + imp(B, bs, Bs) : ''))
+        var C2 = stack === 'react' ? 'className' : 'class'
+        var use
+        if (kind === 'loop') use = '<span ' + C2 + '="wm wm-loop" data-wm="' + name + '"><' + A + ' /></span>'
+        else if (kind === 'hover') use = '<button ' + C2 + '="wm-trigger">\n  <span ' + C2 + '="wm wm-hover" data-wm="' + name + '"><' + A + ' /></span> ' + label(name) + '\n</button>'
+        else {
+          var press = stack === 'react' ? 'aria-pressed={on} onClick={() => setOn(!on)}' : stack === 'vue' ? ':aria-pressed="on" @click="on = !on"' : 'aria-pressed={on} on:click={() => (on = !on)}'
+          use = '<button ' + press + ' aria-label="' + label(name) + '">\n  <span ' + C2 + '="wm-swap wm-fx-' + fx + '">\n    <' + A + ' ' + C2 + '="wm-a" />\n    <' + Bs + ' ' + C2 + '="wm-b" />\n  </span>\n</button>'
+        }
+        if (stack === 'react') return (kind === 'swap' ? 'import { useState } from \'react\'\n' : '') + imports + '\n\n' + (kind === 'swap' ? 'const [on, setOn] = useState(false)\n\n' : '') + use
+        if (stack === 'vue') return '<script setup>\n' + (kind === 'swap' ? 'import { ref } from \'vue\'\n' : '') + imports + (kind === 'swap' ? '\nconst on = ref(false)' : '') + '\n</script>\n\n<template>\n  ' + use.replace(/\n/g, '\n  ') + '\n</template>'
+        return '<script>\n  ' + imports.replace(/\n/g, '\n  ') + (kind === 'swap' ? '\n  let on = false' : '') + '\n</script>\n\n' + use
       }
       function showCode(kind, name, m, extra) {
         S.code = [kind, name, m, extra]
-        boxCode.innerHTML = WI.codeBlock(codeFor(kind, name, m, extra), 'html')
+        boxCode.innerHTML = WI.codeBlock(codeFor(kind, name, m, extra), stack === 'react' ? 'jsx' : 'html')
+      }
+      if (boxStack) {
+        boxStack.innerHTML = STACK.map(function (x) {
+          return '<button role="tab" type="button" data-mo-stk="' + x[0] + '" aria-selected="' + (x[0] === stack) + '" tabindex="' + (x[0] === stack ? 0 : -1) + '">' + esc(x[1]) + '</button>'
+        }).join('')
+        var setStack = function (k, focus) {
+          stack = k
+          try { localStorage.setItem('with-stack', k) } catch (err) { /* noop */ }
+          $$('[data-mo-stk]', boxStack).forEach(function (b) {
+            var on = b.getAttribute('data-mo-stk') === k
+            b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1
+            if (on && focus) b.focus()
+          })
+          if (S.code) showCode.apply(null, S.code)
+        }
+        boxStack.addEventListener('click', function (e) { var b = e.target.closest('[data-mo-stk]'); if (b) setStack(b.getAttribute('data-mo-stk')) })
+        boxStack.addEventListener('keydown', function (e) {
+          var i = STACK.map(function (x) { return x[0] }).indexOf(stack), j = -1
+          if (e.key === 'ArrowRight') j = (i + 1) % STACK.length
+          else if (e.key === 'ArrowLeft') j = (i - 1 + STACK.length) % STACK.length
+          else if (e.key === 'Home') j = 0
+          else if (e.key === 'End') j = STACK.length - 1
+          if (j < 0) return
+          e.preventDefault(); setStack(STACK[j][0], true)
+        })
       }
 
-      // style switcher
-      boxStyles.innerHTML = '<span class="mo-k">Style</span>' + AV.map(function (s) {
-        return '<button type="button" class="mo-st s-' + s + '" data-mo-style="' + s + '" aria-pressed="' + (s === S.style) + '" title="' + INFO[s].title + '"><span class="mo-st-dot" aria-hidden="true"></span><span class="mo-st-t">' + INFO[s].title + '</span></button>'
+      // style carousel: the same icon (a heart, in the first pack for every style) drawn in each style, with its name
+      var STRIP = hasIc('heart', AV[0]) ? 'heart' : MV.loops[0]
+      var stripM = (M[STRIP] && M[STRIP].loop) || { preset: 'beat' }
+      boxStyles.innerHTML = AV.map(function (s) {
+        var on = s === S.style
+        return '<button type="button" class="mo-st s-' + s + '" data-mo-style="' + s + '" tabindex="' + (on ? '0' : '-1') + '"' + (on ? ' aria-current="true"' : '') + '>' +
+          '<span class="mo-st-ic" aria-hidden="true">' + wm(STRIP, on ? 'loop' : 'idle', stripM, ic(STRIP, s, 24)) + '</span>' +
+          '<span class="mo-st-t">' + esc(INFO[s].title) + '</span><span class="mo-st-bar" aria-hidden="true"><i></i></span></button>'
       }).join('')
+      var stItems = $$('[data-mo-style]', boxStyles)
       boxFx.innerHTML = '<span class="mo-k">Effect</span>' + EFFECTS.map(function (f) {
         return '<button type="button" class="mo-fxb" data-mo-fx="' + f + '" aria-pressed="' + (f === S.fx) + '">' + (f === 'auto' ? 'Best fit' : f.replace('-', ' ')) + '</button>'
       }).join('')
@@ -1703,6 +1775,7 @@
             '<span class="mo-swap-l">' + esc(label) + '</span></button>'
         }).join('')
         if (!S.code) showCode('loop', MV.loops[0], (M[MV.loops[0]] && M[MV.loops[0]].loop) || { preset: 'ring' })
+        else showCode.apply(null, S.code)
         wireHover()
       }
       // hover one-shots: the motion runtime (WithMotion) plays them on hover, focus and tap and lets them finish;
@@ -1721,16 +1794,103 @@
       if (!W.WithMotion) WI.loadScript((WI.base || '') + 'vendor/motion/motion.js').then(function (ok) { if (ok) wireHover() })
       renderAll()
 
+      /* The style strip is a carousel: every 5 s the next style restyles the demos, exactly like a click. The active
+         item's bar shows the time left; it is a Web Animation whose end moves the carousel on, so pausing the bar
+         pauses the carousel (CSS reduced-motion rules do not touch it). It holds while a mouse is over the strip or the
+         demos, while the keyboard is in the section, for a while after a touch, off screen, in a hidden tab and on
+         Pause. Reduced motion (or the site's own "Pause animations"): no auto-advance until "Play them anyway". */
+      var EVERY = 5000
+      var C = { anim: null, holds: {}, vis: false, rt: 0, tt: 0 }
+      function autoOn() { return !reduced || S.force }
+      function stIndex(s) { return AV.indexOf(s) }
+      function keepInView(b, smooth) {
+        var bx = boxStyles, max = bx.scrollWidth - bx.clientWidth
+        if (max <= 0) return
+        var left = Math.max(0, Math.min(max, b.offsetLeft - (bx.clientWidth - b.offsetWidth) / 2))
+        if (Math.abs(bx.scrollLeft - left) < 2) return
+        try { bx.scrollTo({ left: left, behavior: smooth && autoOn() ? 'smooth' : 'auto' }) } catch (err) { bx.scrollLeft = left }
+      }
+      function edges() {
+        var bx = boxStyles
+        bx.classList.toggle('can-l', bx.scrollLeft > 2)
+        bx.classList.toggle('can-r', bx.scrollLeft < bx.scrollWidth - bx.clientWidth - 2)
+      }
+      function stopAnim() { if (C.anim) { C.anim.onfinish = null; try { C.anim.cancel() } catch (err) { /* noop */ } C.anim = null } }
+      function shouldRun() {
+        if (!autoOn() || S.paused || !C.vis) return false
+        for (var k in C.holds) if (C.holds[k]) return false
+        return true
+      }
+      function sync() {
+        boxStyles.classList.toggle('is-auto', autoOn())
+        if (!autoOn()) { stopAnim(); return }
+        if (!C.anim) {
+          var bar = stItems[stIndex(S.style)] && $('.mo-st-bar i', stItems[stIndex(S.style)])
+          if (!bar || !bar.animate) return
+          C.anim = bar.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: EVERY, easing: 'linear', fill: 'forwards' })
+          C.anim.onfinish = function () { C.anim = null; select(AV[(stIndex(S.style) + 1) % AV.length], 'auto') }
+          if (!shouldRun()) C.anim.pause()
+          return
+        }
+        if (shouldRun()) { if (C.anim.playState !== 'running') C.anim.play() }
+        else if (C.anim.playState === 'running') C.anim.pause()
+      }
+      function hold(k, on) { C.holds[k] = !!on; sync() }
+      // how: 'user' (click), 'key' (arrow keys) or 'auto' (the carousel); the carousel always carries on from here
+      function select(s, how) {
+        if (!INFO[s] || stIndex(s) < 0) return
+        S.style = s
+        stItems.forEach(function (x) {
+          var on = x.getAttribute('data-mo-style') === s
+          if (on) x.setAttribute('aria-current', 'true'); else x.removeAttribute('aria-current')
+          x.tabIndex = on ? 0 : -1
+          var w = $('.wm', x); if (w) { w.classList.toggle('wm-loop', on); w.classList.toggle('wm-idle', !on) }
+        })
+        sec.classList.add('is-restyle'); clearTimeout(C.rt); C.rt = setTimeout(function () { sec.classList.remove('is-restyle') }, 800)
+        renderAll()
+        keepInView(stItems[stIndex(s)], true)
+        if (how !== 'auto') WI.announce(INFO[s].title + ' style')
+        stopAnim(); sync()
+      }
+      boxStyles.addEventListener('scroll', edges, { passive: true })
+      W.addEventListener('resize', edges, { passive: true })
+      edges()
+      boxStyles.addEventListener('keydown', function (e) {
+        var b = e.target.closest('[data-mo-style]'), i = stItems.indexOf(b), j = -1
+        if (i < 0) return
+        if (e.key === 'ArrowRight') j = (i + 1) % stItems.length
+        else if (e.key === 'ArrowLeft') j = (i - 1 + stItems.length) % stItems.length
+        else if (e.key === 'Home') j = 0
+        else if (e.key === 'End') j = stItems.length - 1
+        if (j < 0) return
+        e.preventDefault()
+        try { stItems[j].focus({ preventScroll: true }) } catch (err) { stItems[j].focus() }
+        select(stItems[j].getAttribute('data-mo-style'), 'key')
+      })
+      // holds: a mouse over the strip or the demos, the keyboard inside the section, a recent touch
+      ;[boxStyles, $('.mo-grid', sec)].forEach(function (el, n) {
+        if (!el) return
+        el.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') hold('hover' + n, true) })
+        el.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch') hold('hover' + n, false) })
+      })
+      sec.addEventListener('focusin', function (e) { var t = e.target, fv = false; try { fv = t.matches(':focus-visible') } catch (err) { fv = true } hold('focus', fv) })
+      sec.addEventListener('focusout', function (e) { if (!e.relatedTarget || !sec.contains(e.relatedTarget)) hold('focus', false) })
+      sec.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'touch') return
+        hold('touch', true); clearTimeout(C.tt); C.tt = setTimeout(function () { hold('touch', false) }, 6000)
+      }, { passive: true })
+      motionFns.push(function () { sync() })
+
       // reduced motion: say so, and offer to play anyway
       if (reduced) { note.hidden = false; pauseBtn.hidden = true }
       sec.addEventListener('click', function (e) {
         var b
-        if ((b = e.target.closest('[data-mo-force]'))) { S.force = true; note.hidden = true; pauseBtn.hidden = false; renderAll(); return }
-        if ((b = e.target.closest('[data-mo-style]'))) {
-          S.style = b.getAttribute('data-mo-style')
-          $$('[data-mo-style]', boxStyles).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
-          renderAll(); WI.announce(INFO[S.style].title + ' style'); return
+        if ((b = e.target.closest('[data-mo-force]'))) {
+          S.force = true; note.hidden = true; pauseBtn.hidden = false
+          $$('.wm', boxStyles).forEach(function (w) { w.classList.add('wm-force') })
+          renderAll(); sync(); return
         }
+        if ((b = e.target.closest('[data-mo-style]'))) { select(b.getAttribute('data-mo-style'), 'user'); return }
         if ((b = e.target.closest('[data-mo-fx]'))) {
           S.fx = b.getAttribute('data-mo-fx')
           $$('[data-mo-fx]', boxFx).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
@@ -1745,6 +1905,7 @@
           sec.classList.toggle('is-paused', S.paused)
           b.setAttribute('aria-pressed', S.paused ? 'true' : 'false')
           $('.mo-pause-t', b).textContent = S.paused ? 'Play' : 'Pause'
+          sync()
           return
         }
         if ((b = e.target.closest('[data-mo-loop]'))) {
@@ -1764,7 +1925,7 @@
           S.touched = Date.now()
           toggleSwap(b)
           var pair = MV.swaps[+b.getAttribute('data-mo-swap')]
-          showCode('swap', pair[0], { preset: 'pop' }, { to: pair[1].replace('@', ' in '), fx: swapFx(pair[0], pair[1]) })
+          showCode('swap', pair[0], { preset: 'pop' }, { to: pair[1], fx: swapFx(pair[0], pair[1]) })
         }
       })
       function toggleSwap(b, on) {
@@ -1780,18 +1941,28 @@
         toggleSwap(bs[k % bs.length]); k++
       }, 1100)
       // loops only run while the section is on screen
-      WI.visibility(sec, function (v) { sec.classList.toggle('is-off', !v) }, '120px')
+      WI.visibility(sec, function (v) { sec.classList.toggle('is-off', !v); C.vis = v; sync() }, '120px')
     }
   }
-  // the icon pack (≈160 KB gzipped) loads after the page is interactive, so it never delays the header or first paint
+  // the icon pack (≈140 KB brotli) is fetched once the page has loaded (fonts, CSS and the hero's static first slide
+  // come first), or 2.5 s after DOMContentLoaded if the load event is slow, or at once when someone touches the hero
+  var started = false
   function start() {
+    if (started) return; started = true
     if (W.WITH_HOME) { boot(); return }
     var s = doc.createElement('script')
     s.src = (W.WI && W.WI.base ? W.WI.base : '') + 'js/home-icons.js'
     s.onload = boot
     doc.head.appendChild(s)
   }
-  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', start); else start()
+  function later() {
+    if (W.WITH_HOME || doc.readyState === 'complete') { start(); return }
+    W.addEventListener('load', start, { once: true })
+    setTimeout(start, 2500)
+    var hero = doc.querySelector('[data-stage]') || doc.querySelector('.hero')
+    if (hero) ['pointerdown', 'focusin', 'pointerenter'].forEach(function (t) { hero.addEventListener(t, start, { once: true, passive: true }) })
+  }
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', later); else later()
 })()
 
 /* Ask-AI section: examples fill the box, and the prompt preview follows what the visitor types */

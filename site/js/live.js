@@ -122,7 +122,7 @@
       var b = e.target.closest && e.target.closest('[data-lv-copy]')
       if (!b) return
       var c = D.getElementById('lv-code-' + b.getAttribute('data-lv-copy'))
-      if (c) copy(c.textContent, 'Code copied').then(function (ok) { if (ok) { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy' }, 1600) } })
+      if (c) copy(c.getAttribute('data-text') || c.textContent, 'Code copied').then(function (ok) { if (ok) { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy' }, 1600) } })
     })
   }
 
@@ -135,6 +135,17 @@
     'weather': [{ condition: 'partly', temperature: 23 }, { condition: 'sunny', temperature: 28 }, { condition: 'cloudy', temperature: 18 }, { condition: 'rain', temperature: 14 }, { condition: 'storm', temperature: 11 }, { condition: 'snow', temperature: -3 }],
     'clock-time': [{ time: '10:10' }, { time: '10:25' }, { time: '10:40' }, { time: '10:55' }, { time: '11:10' }, { time: '11:25' }],
     'progress-ring': [{ value: 68 }, { value: 84 }, { value: 100 }, { value: 12 }, { value: 30 }, { value: 50 }]
+  }
+  // the examples worth playing on a card: the fed value is not empty (0 stars, an empty gauge, a 0 count read as broken)
+  var GOOD = {}
+  function goodFrames(name) {
+    if (GOOD[name]) return GOOD[name]
+    var i = BY[name], ks = W.WithLiveSnippets ? W.WithLiveSnippets.feedKeys(i) : Object.keys((i && i.params) || {}).slice(0, 1), out = []
+    ;((i && i.examples) || []).forEach(function (e, x) {
+      var empty = ks.some(function (k) { var p = i.params[k], v = e[k]; return v == null ? false : (p.type === 'text' ? !String(v).trim() : (p.type === 'int' || p.type === 'number' || p.type === 'level') && +v === 0) })
+      if (!empty) out.push(x)
+    })
+    return (GOOD[name] = out.length ? out : [0])
   }
   function sayKeys(i, ps, keys) { return keys.map(function (k) { var p = i.params[k]; return p ? fmtVal(p, ps[k] != null ? ps[k] : p.default) : '' }).filter(Boolean).join(' · ') }
   function initHero() {
@@ -153,12 +164,24 @@
         return (t.cache[k] = { html: svgOf(innerOf(svg), t.style), say: t.say.length ? sayKeys(BY[t.name], seq[k], t.say) : sayParams(BY[t.name], seq[k]) })
       }, function () { return null })
     }
+    var M = W.WithLiveMotion
     function step() {
       timer = null
       if (!on) return
       var vis = tiles.filter(function (t) { return t.el.offsetParent !== null })
       if (!vis.length) return
       var t = vis[turn++ % vis.length]
+      var seq = HERO_SEQ[t.name] || (BY[t.name] && BY[t.name].examples) || []
+      if (M && seq.length > 1) {
+        var a = seq[t.k % seq.length], b = seq[(t.k + 1) % seq.length], i = BY[t.name]
+        t.k++
+        t.el.classList.add('is-tick')
+        M.playInto({ name: t.name, from: a, to: b, style: t.style, ms: 950, box: t.art, owner: t,
+          paint: function (svg) { t.art.innerHTML = svgOf(innerOf(svg), t.style) },
+          done: function () { setTimeout(function () { t.el.classList.remove('is-tick') }, 500); if (on && !timer) timer = setTimeout(step, 1150) } })
+        if (t.val) M.roll(t.val, t.say.length ? sayKeys(i, b, t.say) : sayParams(i, b))
+        return
+      }
       frame(t, t.k + 1).then(function (f) {
         if (f && on) { t.k++; swap(t.art, f.html); if (t.val) t.val.textContent = f.say }
         // warm the next frame while idle so the next swap is instant
@@ -277,9 +300,9 @@
       clearTimeout(PK.play)
       if (!PK.on || reduced()) return
       PK.play = setTimeout(function () {
-        var c = PK.card, l = c && list(c), n = c ? Math.min((BY[c.name].examples || []).length, 4) : 0
-        if (!c || !l || n < 2) return
-        setFrame(c, (PK.k + 1) % n, true)
+        var c = PK.card, l = c && list(c), good = c ? goodFrames(c.name).filter(function (x) { return x < 4 }) : []
+        if (!c || !l || good.length < 2) return
+        setFrame(c, good[(good.indexOf(PK.k) + 1) % good.length], true)
         schedule()
       }, 1400)
     }
@@ -474,6 +497,7 @@
     var peek = initPeek(cards, S, bar)
 
     /* style */
+    var paintGen = 0
     function applyStyle(style, user) {
       S.style = style
       setBodyStyle(style)
@@ -487,18 +511,27 @@
       peek.hide(true)
       loadFrames(style).then(function () {
         if (S.style !== style) return
-        var f = frames(style)
-        cards.forEach(function (c) {
+        var f = frames(style), gen = ++paintGen
+        var order = cards.filter(function (c) { return c.visible }).concat(cards.filter(function (c) { return !c.visible }))
+        var paintOne = function (c) {
           c.li.classList.remove('is-loading')
           var list = f && f[c.name]
           if (!list || !list.length) return
           if (style === 'line' && c.k < 0) return // keep the default drawing until the card's first turn
-          c.k = Math.max(0, c.k) % list.length
+          var good = goodFrames(c.name)
+          if (c.k < 0 || good.indexOf(c.k) < 0) c.k = good[0]
           var html = svgOf(list[c.k], style)
-          if (c.visible) swap(c.art, html); else c.art.innerHTML = html
-        })
-        startCycle()
-        peek.refresh()
+          if (c.visible && !reduced()) swap(c.art, html); else c.art.innerHTML = html
+        }
+        // a few cards per frame while they are on screen, then the rest when the page is idle
+        var batch = function () {
+          if (gen !== paintGen || S.style !== style) return
+          var t0 = performance.now(), n = 0
+          while (order.length && (n < 2 || performance.now() - t0 < 8)) { var c = order.shift(); paintOne(c); n++; if (!c.visible && order.length) break }
+          if (order.length) { if (order[0].visible) requestAnimationFrame(batch); else idle(batch, 400) }
+          else { startCycle(); peek.refresh() }
+        }
+        batch()
       }, function () { cards.forEach(function (c) { c.li.classList.remove('is-loading') }); toast('Could not load that style. Check your connection.') })
       writeUrl()
     }
@@ -550,6 +583,12 @@
         e.preventDefault(); input.focus(); input.select()
       })
     }
+    if (empty) empty.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-lv-try], [data-lv-clear]'); if (!b || !input) return
+      input.value = b.getAttribute('data-lv-try') || ''; S.q = input.value
+      if (!S.q) { S.group = ''; groupBtns.forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-group') === '' ? 'true' : 'false') }) }
+      filter(); input.focus()
+    })
     if (S.group) groupBtns.forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-group') === S.group) })
 
     /* (the filter bar used to be sticky) */
@@ -571,12 +610,13 @@
       var f = frames(S.style)
       if (f) {
         tick++
+        var room = W.WithLive && W.WithLive.cost && W.WithLive.cost(S.style) > 16 ? 1 : 2
         cards.forEach(function (c) {
-          if (!c.visible || c.li.hidden || (tick + c.phase) % 5) return
-          var list = f[c.name]
-          if (!list || list.length < 2) return
-          c.k = (c.k + 1) % list.length
-          swap(c.art, svgOf(list[c.k], S.style))
+          if (!room || !c.visible || c.li.hidden || (tick + c.phase) % 5) return
+          var list = f[c.name], good = goodFrames(c.name)
+          if (!list || good.length < 2) return
+          c.k = good[(good.indexOf(c.k) + 1) % good.length]
+          swap(c.art, svgOf(list[c.k], S.style)); room--
         })
       }
       timer = setTimeout(cycle, 520)
@@ -992,11 +1032,25 @@
       todayBtn.hidden = false
       todayBtn.addEventListener('click', function () {
         var n = L.now ? L.now() : {}
-        KEYS.forEach(function (k) { if (n[k] != null && ['day', 'month', 'weekday', 'time'].indexOf(k) >= 0) S.params[k] = n[k] })
-        syncAll(); changed(); toast('Set to today')
+        var to = Object.assign({}, S.params)
+        S.todayVals = {}
+        KEYS.forEach(function (k) { if (n[k] != null && ['day', 'month', 'weekday', 'time'].indexOf(k) >= 0) { to[k] = n[k]; S.todayVals[k] = n[k] } })
+        glide(to); toast('Set to today. The code uses today too.')
       })
     }
-    if (resetBtn) resetBtn.addEventListener('click', function () { S.params = Object.assign({}, defaults); syncAll(); changed(); toast('Back to the original values') })
+    if (resetBtn) resetBtn.addEventListener('click', function () { glide(Object.assign({}, defaults)); toast('Back to the original values') })
+    // move the big drawing to new values the way they should move (js/live-motion.js), then settle on them
+    var gliding = null
+    function glide(to) {
+      var M = W.WithLiveMotion, from = Object.assign({}, S.params)
+      if (gliding) gliding.cancel()
+      S.params = to; syncAll()
+      if (!M || reduced()) return changed()
+      drawN++; art.classList.remove('is-busy')
+      gliding = M.playInto({ name: name, from: from, to: to, style: S.style, ms: 760, box: art, owner: 'studio',
+        paint: function (svg) { var sv = $('.lv-svg', art); if (sv) sv.innerHTML = innerOf(svg); else art.innerHTML = svgOf(innerOf(svg), S.style) },
+        done: function () { gliding = null; changed() } })
+    }
 
     /* ───────── the stage: drag it, turn it, tap it ─────────
        The main value answers the pointer right on the big drawing: levels fill where you point, small counts (bars, waves,
@@ -1023,6 +1077,7 @@
       if (!G) return ''
       var w = G.k ? short(P[G.k].label).replace(/,.*$/, '').replace(/\s+of\s.*$/i, '').toLowerCase() : ''
       if (G.range) return 'Drag sideways to move the dates'
+      if (W.matchMedia && W.matchMedia('(max-width: 520px)').matches) return { roll: tap() + ' to roll', bars: 'Drag the bars', clock: 'Drag the hands', 'scrub-time': 'Drag sideways', ring: 'Drag the ring', 'pos-x': 'Drag across', 'pos-y': 'Drag up or down', scrub: 'Drag sideways', cycle: tap() + ' to change', type: tap() + ' to type' }[G.mode] || ''
       return { roll: tap() + ' to roll the die', bars: 'Drag the bars up and down', clock: 'Drag around the clock to set the time', 'scrub-time': 'Drag sideways to change the time',
         ring: 'Drag around the ring', 'pos-x': 'Drag across to set the ' + w, 'pos-y': 'Drag up or down to set the ' + w, scrub: 'Drag sideways to change the ' + w,
         cycle: tap() + ' to change the ' + w, type: tap() + ' to type your own text' }[G.mode] || ''
@@ -1151,7 +1206,7 @@
     exBtns.forEach(function (b) {
       b.addEventListener('click', function () {
         var e = I.examples[+b.getAttribute('data-ex')] || {}
-        S.params = Object.assign({}, defaults, e); syncAll(); changed()
+        glide(Object.assign({}, defaults, e))
         var r = stage.getBoundingClientRect(); if (r.bottom < 60) stage.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' })
       })
     })
@@ -1188,6 +1243,7 @@
       if (allList) $$('.lv-as', allList).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-style') === S.style ? 'true' : 'false') })
       paintExamples()
       draw()
+      try { D.dispatchEvent(new CustomEvent('lv:style', { detail: { style: S.style } })) } catch (e) { }
     }
     // thumbnails follow the values: switcher, gallery and choice tiles redraw one at a time, when the page is idle
     var thumbT = null, thumbGen = 0, cache = {}
@@ -1424,19 +1480,30 @@
       if (sheetOpen && mode === 'colours' && palBox && !$('[data-lv-pals-sec]', sheet).hidden) { clearTimeout(after.pt); after.pt = setTimeout(paintColors, 200) }
     }
 
-    /* ───────── code (the folded developers section) ───────── */
-    var tabsEl = $('.lv-tabs')
-    if (tabsEl) {
-      var tbs = $$('[role="tab"]', tabsEl)
-      var showTab = function (t, focus) {
-        tbs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; var p = D.getElementById(x.getAttribute('aria-controls')); if (p) p.classList.toggle('lv-pane-off', !on) })
+    /* ───────── code: "Use it in code" (one framework choice for the section; js/live-snippets.js writes the code) ─────────
+       The element follows everything set above (values, style, colours, size) and says `today` while the values are
+       today's. js/live-motion.js listens (lv:state, lv:fw) so the "Change it live" code follows too. */
+    S.fw = 'html'
+    function todayOn() { var t = S.todayVals; return !!t && Object.keys(t).length > 0 && Object.keys(t).every(function (k) { return String(S.params[k]) === String(t[k]) }) }
+    function studioState() { return { params: Object.assign({}, S.params), style: S.style, size: S.size, color: inkHex() || '', vars: varsAttr() || {}, today: todayOn() } }
+    W.LiveStudio = { state: studioState, fw: 'html' }
+    var fwTabs = $('.lv-fw')
+    if (fwTabs) {
+      var fbs = $$('[role="tab"]', fwTabs), pane = D.getElementById('lv-el-pane')
+      var showFw = function (t, focus) {
+        fbs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1 })
+        if (pane) pane.setAttribute('aria-labelledby', t.id)
+        S.fw = W.LiveStudio.fw = t.getAttribute('data-fw')
+        var isay = $('[data-lv-inst-say]'); if (isay) isay.textContent = S.fw === 'html' ? 'or skip it: the script tag below loads it from a CDN' : 'once in your project: the ' + (S.fw === 'react' ? 'React' : 'Vue') + ' component below imports from it'
         if (focus) t.focus()
+        codes()
+        try { D.dispatchEvent(new CustomEvent('lv:fw', { detail: { fw: S.fw } })) } catch (e) { }
       }
-      tabsEl.addEventListener('click', function (e) { var t = e.target.closest('[role="tab"]'); if (t) showTab(t) })
-      tabsEl.addEventListener('keydown', function (e) {
-        var i = tbs.indexOf(D.activeElement); if (i < 0) return
-        var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tbs.length - 1 : null
-        if (n == null) return; e.preventDefault(); showTab(tbs[(n + tbs.length) % tbs.length], true)
+      fwTabs.addEventListener('click', function (e) { var t = e.target.closest('[role="tab"]'); if (t) showFw(t) })
+      fwTabs.addEventListener('keydown', function (e) {
+        var i = fbs.indexOf(D.activeElement); if (i < 0) return
+        var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? fbs.length - 1 : null
+        if (n == null) return; e.preventDefault(); showFw(fbs[(n + fbs.length) % fbs.length], true)
       })
     }
     var size = $('[data-lv-size]'), sizeOut = $('[data-lv-size-out]')
@@ -1451,33 +1518,15 @@
       Object.keys(v).forEach(function (k) { o[k.replace(/^--with-/, '')] = v[k]; any = true })
       return any ? o : null
     }
-    function elementHtml(withSize) {
-      var Pm = S.params, va = varsAttr()
-      return '<with-live-icon name="' + name + '"' +
-        KEYS.map(function (k) { var v = Pm[k], p = P[k]; return p.type === 'bool' ? (v ? ' ' + attrOf(k) : ' ' + attrOf(k) + '="false"') : ' ' + attrOf(k) + '="' + esc(v) + '"' }).join('') +
-        (S.style !== 'line' ? ' variant="' + S.style + '"' : '') + (withSize !== false ? ' size="' + S.size + '"' : '') + (inkHex() ? ' color="' + inkHex() + '"' : '') + (va ? " vars='" + JSON.stringify(va) + "'" : '') + '></with-live-icon>'
-    }
     function codes() {
-      var Pm = S.params, va = varsAttr(), sz = S.size, style = S.style, ink = inkHex()
-      var html = '<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>\n\n' + elementHtml()
-      var props = [], nested = [], vprops = [], vnested = []
-      KEYS.forEach(function (k) {
-        var v = Pm[k]
-        if (REACT_RESERVED.indexOf(k) >= 0) { nested.push(k + ': ' + jsVal(v)); vnested.push(k + ': ' + jsVal(v)); return }
-        props.push(typeof v === 'string' ? k + '="' + v.replace(/"/g, '&quot;') + '"' : v === true ? k : k + '={' + v + '}')
-        vprops.push(typeof v === 'string' ? kebab(k) + '="' + v + '"' : ':' + kebab(k) + '="' + v + '"')
-      })
-      if (nested.length) { props.push('params={{ ' + nested.join(', ') + ' }}'); vprops.push(':params="{ ' + vnested.join(', ') + ' }"') }
-      if (style !== 'line') { props.push('variant="' + style + '"'); vprops.push('variant="' + style + '"') }
-      props.push('size={' + sz + '}'); vprops.push(':size="' + sz + '"')
-      if (ink) { props.push('color="' + ink + '"'); vprops.push('color="' + ink + '"') }
-      if (va) { props.push('vars={' + JSON.stringify(va) + '}'); vprops.push(":vars='" + JSON.stringify(va) + "'") }
-      var react = "import { LiveIcon } from '@withicons/dynamic/react'\n\nexport function Example() {\n  return <LiveIcon name=\"" + name + '" ' + props.join(' ') + ' />\n}'
-      var vue = "<script setup>\nimport { LiveIcon } from '@withicons/dynamic/vue'\n</script>\n\n<template>\n  <LiveIcon name=\"" + name + '" ' + vprops.join(' ') + ' />\n</template>'
-      ;[['html', html], ['react', react], ['vue', vue]].forEach(function (c) {
-        var el = D.getElementById('lv-code-' + c[0]); if (!el) return
-        if (W.WI && W.WI.highlight) el.innerHTML = W.WI.highlight(c[1]); else el.textContent = c[1]
-      })
+      var SNP = W.WithLiveSnippets, el = D.getElementById('lv-code-el')
+      if (SNP && el) {
+        var txt = SNP.element(I, studioState(), S.fw)
+        if (W.WI && W.WI.highlight) el.innerHTML = W.WI.highlight(txt); else el.textContent = txt
+        var lang = el.closest('.code') && $('.lang', el.closest('.code')); if (lang) lang.textContent = S.fw === 'html' ? 'HTML' : S.fw === 'react' ? 'React' : 'Vue'
+      }
+      var note = $('[data-lv-today-note]'); if (note) note.classList.toggle('is-on', todayOn())
+      try { D.dispatchEvent(new CustomEvent('lv:state')) } catch (e) { }
     }
 
     /* ───────── the shareable link ───────── */
@@ -1550,7 +1599,7 @@
       if (t.hasAttribute('data-lv-go')) return run(t, 'png')
       if (t.hasAttribute('data-fmt') && sheet && sheet.contains(t)) return run(t, t.getAttribute('data-fmt'))
       if (t.hasAttribute('data-lv-copy-svg')) return copy(flatSvg(S.size), 'SVG code copied')
-      if (t.hasAttribute('data-lv-copy-el')) return copy('<script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>\n' + elementHtml(), 'HTML copied')
+      if (t.hasAttribute('data-lv-copy-el')) return copy(W.WithLiveSnippets ? W.WithLiveSnippets.element(I, studioState(), 'html') : '', 'HTML copied')
       if (t.hasAttribute('data-lv-share')) return copy(linkFor(), 'Link copied. It opens this exact design.')
       if (t.hasAttribute('data-lv-copy-png')) return copyPng(t)
       if (t.hasAttribute('data-lv-open')) { e.preventDefault(); openSheet(t.getAttribute('data-lv-open'), t) }
@@ -1712,6 +1761,7 @@
     D.documentElement.classList.add('lv-has-map')
     var mapBtn = $('summary', map), links = $$('[data-lv-map-link]', map), nowEl = $('[data-lv-map-now]', map), prog = $('[data-lv-map-prog]', map)
     var secs = links.map(function (a) { return D.getElementById(a.getAttribute('href').slice(1)) }).filter(Boolean)
+    var tucks = $$('[data-lv-dev2], [data-lv-sheet][open]')
     var shown = false
     function setShown(v) { if (v === shown) return; shown = v; map.classList.toggle('is-shown', v); if (!v && map.open) map.open = false }
     var raf = 0
@@ -1719,7 +1769,9 @@
       if (raf) return
       raf = requestAnimationFrame(function () {
         raf = 0
-        setShown(!hero || hero.getBoundingClientRect().bottom < 40)
+        var vh = W.innerHeight || 800, tuck = false
+        tucks.forEach(function (t) { var r = t.getBoundingClientRect(); if (r.top < vh - 24 && r.bottom > vh - 150) tuck = true })
+        setShown((!hero || hero.getBoundingClientRect().bottom < 40) && !tuck)
         var y = (W.innerHeight || 800) * 0.35, cur = null
         secs.forEach(function (s) { if (s.getBoundingClientRect().top <= y) cur = s })
         var id = cur ? cur.id : ''

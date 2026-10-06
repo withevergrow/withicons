@@ -210,6 +210,8 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconCompon
     ...basePkg(ctx, '@withicons/svelte', `${ctx.icons.length} icons x ${ctx.styles.length} styles as tree-shakable Svelte components (Svelte 4 and 5).`, ['svelte', 'svelte5', 'sveltekit', 'svelte-icons', 'svelte-components', 'svg-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     svelte: './dist/index.js', types: './dist/index.d.ts',
+    // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/svelte) shows the entry instead of a 404
+    jsdelivr: './dist/index.js', unpkg: './dist/index.js',
     exports: ex, typesVersions: { '*': tv },
     files: ['dist', 'README.md', 'LICENSE'],
     peerDependencies: { svelte: '^4.0.0 || ^5.0.0' },
@@ -315,7 +317,7 @@ const nav: { label: string; icon: WithIconComponent }[] = [{ label: 'Home', icon
   icon of that style (${ctx.icons.length} small \`.svelte\` files) on a cold start, which can take tens of seconds. Deep imports compile only
   what you use: \`import Home from '@withicons/svelte/icons/home'\`, \`import Home from '@withicons/svelte/solid/icons/home'\`.
   Production builds tree-shake both forms to the same output.
-- Tree-shaking is per icon: the first icon adds about 3 KB gzipped on Svelte 4 and about 9 KB on Svelte 5 (the shared
+- Tree-shaking is per icon: the first icon adds about 3 KB gzipped on Svelte 4 and about 10 KB on Svelte 5 (the shared
   renderer plus Svelte 5's legacy-mode runtime, paid once), and each further icon about 0.2 KB.
 `
   md = custom.test(md) ? md.replace(custom, svelteCustom.trimEnd()) : md + '\n' + svelteCustom

@@ -38,8 +38,8 @@ Plain `<i>`/`<span>` elements with classes. Three interchangeable ways to render
 ```
 
 `with-loader.js` (15 KB, 6 KB gzip) adds the base rules, finds every `with with-<name>` on the
-page and links just that icon's rule: `dist/<style>/<name>.css` (a `line` icon is typically 414 bytes,
-270 gzip; a `skeuo` icon about 8.5 KB, 1.7 KB gzip). Any style mix costs only the icons shown, and icons
+page and links just that icon's rule: `dist/<style>/<name>.css` (a `line` icon is typically 428 bytes,
+278 gzip; a `skeuo` icon about 8.5 KB, 1.7 KB gzip). Any style mix costs only the icons shown, and icons
 added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
 canonical class added with a console hint. Without JavaScript, link the same files yourself:
 
@@ -84,18 +84,18 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
-| `<style>/<name>.css` (one icon, typical) | 414 B (`line`) to 8.5 KB (`skeuo`) | 270 B to 1.7 KB |
-| `with-line.css` | 209 KB | 26 KB |
-| `with-solid.css` | 655 KB | 186 KB |
-| `with-duo.css` | 320 KB | 33 KB |
-| `with-gloss.css` | 767 KB | 180 KB |
+| `<style>/<name>.css` (one icon, typical) | 428 B (`line`) to 8.5 KB (`skeuo`) | 278 B to 1.7 KB |
+| `with-line.css` | 216 KB | 26 KB |
+| `with-solid.css` | 662 KB | 187 KB |
+| `with-duo.css` | 327 KB | 33 KB |
+| `with-gloss.css` | 774 KB | 180 KB |
 | `with-engrave.css` | 1.2 MB | 294 KB |
-| `with-blueprint.css` | 646 KB | 97 KB |
-| `with-sketch.css` | 649 KB | 144 KB |
+| `with-blueprint.css` | 653 KB | 97 KB |
+| `with-sketch.css` | 655 KB | 145 KB |
 | `with-glass.css` | 2.7 MB | 404 KB |
 | `with-kawaii.css` | 891 KB | 128 KB |
 | `with-sticker.css` | 2.1 MB | 228 KB |
-| `with-pixel.css` | 555 KB | 40 KB |
+| `with-pixel.css` | 557 KB | 40 KB |
 | `with-retro.css` | 1.1 MB | 256 KB |
 | `with-luxe.css` | 2.8 MB | 828 KB |
 | `with-bauhaus.css` | 632 KB | 112 KB |
@@ -107,7 +107,7 @@ Use the JS runtime for live CSS variables and stroke width.
 | `with-plush.css` | 2.4 MB | 571 KB |
 | `with-all.css` (imports every style file) | 31.2 MB | 6.3 MB |
 | `with-base.css` | 2 KB | 1 KB |
-| `with-icons.js` | 22 KB | 8 KB |
+| `with-icons.js` | 23 KB | 8 KB |
 | `with-loader.js` | 15 KB | 6 KB |
 
 ### 3. JS runtime (inline SVG)
@@ -133,6 +133,17 @@ It can be combined with the CSS files: the mask shows until the SVG arrives, the
 - Opt a subtree out with `data-with-skip`.
 - `window.WithIcons`: `render(root?)`, `svg(name, style?, opts?)` (Promise of an svg string), `load(style)`, `styles`, `version`.
   Types: `dist/with-icons.d.ts`.
+
+### Size
+
+An icon is `1em` square, so it follows the text size. Setting only `height` does not grow it (the width stays `1em`).
+Any of these works:
+
+```html
+<i class="with with-home" style="font-size: 48px"></i>      <!-- 1. font-size (also scales with the text around it) -->
+<i class="with with-home with-3x"></i>                       <!-- 2. a size class: 3 x the text size -->
+<i class="with with-home" style="--with-size: 48px"></i>    <!-- 3. an exact size, whatever the text size -->
+```
 
 ### Modifiers
 

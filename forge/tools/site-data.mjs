@@ -3,6 +3,9 @@
 // (not fetch) so the site also works when opened straight from disk.
 //   site/data/meta.js           window.WITH = { version, total, categories, styles, icons }
 //   site/data/style-<name>.js   window.WITH_SVG[<name>] = { <icon>: '<inner svg markup>' }
+//   site/data/by-icon/<icon>.js window.WITH_ICON[<icon>] = { <style>: '<inner svg markup>' }  (one icon, every style:
+//                               the library's viewer + hover card and the studio load this instead of 20 style files)
+//   site/icons.html             the #lib-style-samples block (the heart in every style, for the style pickers)
 //
 // forge/build.mjs calls build(ctx) with the renders it already has. Run directly
 // (`node forge/tools/site-data.mjs`) it renders everything itself.
@@ -62,8 +65,38 @@ export function build(ctx) {
     if (!fs.existsSync(f) || fs.readFileSync(f, 'utf8') !== js) fs.writeFileSync(f, js)
     report.push(`${s.name}: ${Object.keys(map).length} icons, ${(js.length / 1024).toFixed(0)} KB${fails ? `, ${fails} FAILED` : ''}`)
   }
+  report.push(byIcon(ctx), libSamples(ctx))
   report.push(homePacks(ctx))
   return `site data: ${icons.length} icons x ${ctx.styles.length} styles\n  ` + report.join('\n  ')
+}
+
+// One file per icon with its drawing in every style (~20-60 KB raw, a few KB gzipped). Stale files are removed.
+function byIcon(ctx) {
+  const dir = path.join(outDir, 'by-icon'), keep = new Set()
+  fs.mkdirSync(dir, { recursive: true })
+  let bytes = 0
+  for (const i of ctx.icons) {
+    const map = {}
+    for (const s of ctx.styles) { const r = i.render[s.name]; if (r) map[s.name] = r.inner }
+    const js = `(window.WITH_ICON=window.WITH_ICON||{})[${JSON.stringify(i.name)}]=${JSON.stringify(map)};
+`
+    const f = path.join(dir, `${i.name}.js`); keep.add(`${i.name}.js`); bytes += js.length
+    if (!fs.existsSync(f) || fs.readFileSync(f, 'utf8') !== js) fs.writeFileSync(f, js)
+  }
+  for (const f of fs.readdirSync(dir)) if (!keep.has(f)) fs.rmSync(path.join(dir, f))
+  return `by-icon: ${keep.size} files, avg ${(bytes / Math.max(1, keep.size) / 1024).toFixed(0)} KB`
+}
+// icons.html's style pickers draw one sample (the heart) per style before any style file arrives
+const SAMPLE = 'heart'
+function libSamples(ctx) {
+  const f = path.join(ROOT, 'site', 'icons.html')
+  if (!fs.existsSync(f)) return 'lib samples: no icons.html'
+  const ic = ctx.icons.find(i => i.name === SAMPLE); if (!ic) return 'lib samples: no ' + SAMPLE
+  const map = Object.fromEntries(ctx.styles.filter(s => ic.render[s.name]).map(s => [s.name, ic.render[s.name].inner]))
+  const block = '<!-- STYLE-SAMPLES:BEGIN -->\n<script type="application/json" id="lib-style-samples">' + JSON.stringify(map).replace(/</g, '\\u003c') + '</script>\n<!-- STYLE-SAMPLES:END -->'
+  const html = fs.readFileSync(f, 'utf8'), next = html.replace(/<!-- STYLE-SAMPLES:BEGIN -->[\s\S]*?<!-- STYLE-SAMPLES:END -->/, () => block)
+  if (next !== html) fs.writeFileSync(f, next)
+  return `lib samples: ${Object.keys(map).length} styles`
 }
 
 // Home page packs (site/js/home-icons.js = window.WITH_HOME, site/js/home-icons-more.js = window.WITH_HOME_MORE) carry
@@ -183,6 +216,7 @@ function homePacks(ctx) {
   return `home packs: ${[added.length ? 'rebuilt ' + added.join(', ') : '', trimmed.length ? 'trimmed ' + trimmed.join(', ') : '', kb(A), kb(B)].filter(Boolean).join('; ')}`
 }
 
+// `--lib` rebuilds only data/by-icon/* and icons.html's style samples from the style files in site/data.
 // `node forge/tools/site-data.mjs --packs` rebuilds only the home packs, from the style files the last build wrote to
 // site/data (no rendering, site/data untouched): for when a home section changes what it carries.
 function builtCtx() {
@@ -197,5 +231,6 @@ function builtCtx() {
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   if (process.argv.includes('--packs')) console.log(homePacks(builtCtx()))
+  else if (process.argv.includes('--lib')) { const c = builtCtx(); console.log(byIcon(c) + '\n' + libSamples(c)) }
   else console.log(build(await renderAll()))
 }

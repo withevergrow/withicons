@@ -299,7 +299,7 @@ export const GUIDES = [
     steps: [
       { t: 'Copy the SVG', d: `Open <a href="../icons.html">the library</a>, click an icon and press ${UI('Copy SVG')}.`, ui: { k: 'pick', fmt: 'Copy SVG', icon: 'home' } },
       { t: 'Paste it into your HTML', d: 'Paste the code where you want the icon. It’s plain HTML: no files to upload, nothing to install.', ui: { k: 'code', icon: 'home', lines: ['<a href="/">', '  <svg width="20" height="20" …>…</svg>', '  Home', '</a>'] } },
-      { t: 'Or use icon classes', d: 'Add the stylesheet once in your <code>&lt;head&gt;</code>, then write one tag per icon. No JavaScript needed.', ui: { k: 'code', icon: 'home', lines: ['<link rel="stylesheet" href="…/@withicons/classes/dist/with-line.css">', '', '<i class="with with-home"></i>', '<i class="with with-home with-solid"></i>'] } },
+      { t: 'Or use icon classes', d: 'Add the stylesheet once in your <code>&lt;head&gt;</code>, then write one tag per icon. No JavaScript needed.', ui: { k: 'code', icon: 'home', lines: ['<link rel="stylesheet" href="…/@withicons/classes@latest/dist/with-line.css">', '', '<i class="with with-home"></i>', '<i class="with with-home with-solid"></i>'] } },
       { t: 'Colour it with CSS', d: 'Icons use <code>currentColor</code>, so they take the text colour: <code>color: #FF5A36</code>. Hover colours work too.', ui: { k: 'recolor', icon: 'home', label: 'color:' } },
       { t: 'Size it with CSS', d: 'Icon classes are <code>1em</code> square, so <code>font-size: 32px</code> makes a 32 px icon. For inline SVG, change <code>width</code> and <code>height</code>.', ui: { k: 'resize', icon: 'home' } },
     ],

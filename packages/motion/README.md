@@ -5,7 +5,7 @@ an arrow that nudges the way it points, a play button that flips into pause.
 
 - **Optional and separate.** The icons never depend on it. Add it only where you want motion.
 - **Pure CSS at its core.** Add a class and the icon moves. The small JavaScript helper is optional.
-- **Works with all 500 icons, in all 15 styles, from every package.** It animates the element that holds the icon: an inline `<svg>`,
+- **Works with all 500 icons, in all 20 styles, from every package.** It animates the element that holds the icon: an inline `<svg>`,
   a `<with-icon>`, an `<i class="with ...">` or any wrapper.
 - **Every icon already knows how to move.** Each of the 500 has its own continuous loop and hover animation, tuned by hand.
 - **Respects people.** When someone asks their system for reduced motion, everything stops (unless you opt in with `wm-force`).
@@ -260,7 +260,7 @@ await webm(svgString, { name: 'bell' }, { size: 256 })                      // B
 
 Directional icons (arrows, chevrons, send, log out) are drawn pointing right. To mirror one in a right-to-left page,
 put the mirroring on the same element as `wm`, for example `<i class="with with-arrow-right with-rtl wm wm-loop" data-wm="arrow-right">`
-from `@withicons/web`, or `[dir=rtl] .my-icon { scale: -1 1 }` on the wrapper. The `nudge` and `pass` motion then follows
+from `@withicons/classes`, or `[dir=rtl] .my-icon { scale: -1 1 }` on the wrapper. The `nudge` and `pass` motion then follows
 the mirrored arrow. Mirroring only the inner `<svg>` would leave the motion pointing the original way.
 
 ## Frameworks

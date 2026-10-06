@@ -1,6 +1,6 @@
 {
   "name": "@withicons/svelte",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "500 icons x 20 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {
@@ -54,6 +54,8 @@
   "sideEffects": false,
   "svelte": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "jsdelivr": "./dist/index.js",
+  "unpkg": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

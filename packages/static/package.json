@@ -1,6 +1,6 @@
 {
   "name": "@withicons/static",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "500 icons x 20 styles as SVG sprites and standalone SVG files. No JavaScript.",
   "license": "MIT",
   "author": {
@@ -49,6 +49,8 @@
     "plush"
   ],
   "sideEffects": false,
+  "jsdelivr": "./dist/icons.json",
+  "unpkg": "./dist/icons.json",
   "files": [
     "dist",
     "README.md",

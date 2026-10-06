@@ -268,7 +268,7 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.ok(!gif.isError)
     const g = JSON.parse(gif.content[0].text)
     assert.equal(g.made, false)
-    assert.equal(g.command, 'npx withicons export bell --style luxe --format gif,pptx-animated --background #0f172a --out .')
+    assert.equal(g.command, 'npx withicons export bell --style luxe --format gif,pptx-animated --background "#0f172a" --out .')
     assert.equal(g.page, 'https://withicons.com/icons/bell.html')
     const svg = await call(11, { name: 'bell', format: 'svg-flat' })
     assert.ok(svg.content.some(c => c.type === 'text' && /^--- bell-line\.svg ---/.test(c.text)))

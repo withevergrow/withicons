@@ -55,7 +55,9 @@ Full snippets for each framework are in [reference/frameworks.md](https://github
   the ink stays `currentColor`. Re-theme with CSS on any parent: `.hero { --with-kawaii-fill-1: #c4b5fd }`.
   Studio and storybook styles name every variable after its palette role (`--with-luxe-c1`, `--with-bauhaus-c3`,
   `--with-anime-shadow`, `--with-plush-accent`; roles: ink c1 c2 c3 c4 tint accent shadow shine edge), so one palette from
-  `withicons palettes <icon>` fits all of them.
+  `withicons palettes <icon>` fits all of them. The palette styles' own variables (`--with-kawaii-fill-1`, `--with-kawaii-face`,
+  `--with-retro-2` …) map to the same roles, so that palette fits them too (`withicons palettes heart --style kawaii` shows
+  the mapping; `withicons get heart --style kawaii --palette <id> --format web-component` applies one with no build).
 
 Rule: one style per UI region. The only routine mix is line plus solid for inactive and active states. Every style is a subpath:
 `@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`,
@@ -111,7 +113,9 @@ Use the first one available, in this order:
   name), `list_palettes`, `list_styles`, `list_categories`.
   Call `tools/list` to confirm names and arguments.
   Not connected yet? `npx withicons init` adds this skill and the server to the AI tools it finds in the project
-  (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf); name one (`npx withicons init cursor`) or add `--global`.
+  (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf). Name tools to pick them (`npx withicons init cursor`; ids:
+  `claude-code codex cursor opencode vscode windsurf claude-desktop lovable`; Claude Desktop is user-wide, Lovable prints
+  the connector steps), add `--global` for your user, `--mcp local|remote|none`, and `--dry-run` to see the changes first.
 - **CLI**: `npx withicons search "throw away"`
 - **HTTP**: `curl "https://withicons.com/api/search?q=throw+away&limit=5"` returns JSON with name, score and match.
 - **Offline**: [reference/icons.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/icons.md), `https://withicons.com/icons.json`, `https://withicons.com/llms.txt`,
@@ -192,18 +196,39 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
 ```html
 <!-- no build: ~35 KB gzipped, each live icon and style loads on first use -->
 <script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>
-<with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii"></with-live-icon>
+<with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii" label="17 March"></with-live-icon>
+<with-live-icon name="calendar-date" today label="Today"></with-live-icon>   <!-- the viewer's date, kept current -->
+```
+```jsx
+import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dynamic/vue' (same props; :day="17" in templates)
+<LiveIcon name="calendar-date" day={17} month="MAR" variant="glass" size={48} label="17 March" />
+<LiveIcon name="calendar-date" today label="Today" />
+<LiveIcon name="bell-count" count={unread} label={`${unread} unread`} />
 ```
 
-- A "today" calendar or a ticking clock is the app's job: pass today's values (or re-render each minute). The
-  generators are pure and never read the clock.
-- Live icons need an accessible name that says the value ("17 March", "3 unread"), since the text is drawn, not typed.
+- **today**: the `today` attribute (element) or prop (`LiveIcon`) fills the date and time params (day, month, weekday,
+  time) from the viewer's clock. `<with-live-icon today>` redraws at each minute boundary while it is on the page; the
+  React / Vue `LiveIcon` reads the clock each time it renders (no timer of its own). On `LiveIcon` an explicit param
+  prop overrides `today`; on the element, whichever was set last wins.
+  `render()` itself stays pure and never reads the clock: pass `now()` (`import { render, now } from '@withicons/dynamic'`,
+  `render('calendar-date', now())`) and re-render when you want it to move.
+- **Values that change after load** (an API, a WebSocket, a timer, an input): set the attribute (`icon.setAttribute('count', 7)`)
+  or the `LiveIcon` prop. Add `animate` (element attribute, or `animate` / `animate={900}` on `LiveIcon`) and changes move
+  instead of jumping: numbers roll, levels ease, clock hands take the short way round, words cross-fade, instant with
+  reduced motion. One change: `el.animateTo({ count: 7 }, { ms: 900 })` (or `animateTo(el, …)` from
+  `@withicons/dynamic/element`). Several attributes set together make one transition; the last frame is exact.
+- **label**: the accessible name (`label` attribute, `label` prop, or the `label` render option); it adds `role="img"`.
+  The element and `LiveIcon` name themselves from their values when no label is given ("Calendar date, March 17",
+  `describe(name, params)`); `label=""` makes one decorative. `render()` stays `aria-hidden` unless you pass a label. A param that is itself called `label` (`keycap`, `map-pin-number`) is set with
+  `param-label="A"` on the element or `params={{ label: 'A' }}` on `LiveIcon`.
+- Params are attributes in kebab-case on the element and props on `LiveIcon`; the other props (`className`, `onClick`,
+  `aria-*`) go on the `<svg>`. Bundler setup for the element: `import '@withicons/dynamic/element'`.
 - Try them and copy code at https://withicons.com/live.html. Spec: `forge/DYNAMIC.md` in the repo.
 
 ## 8. Pitfalls
 
 - `import { Bin } from '@withicons/react'` fails because aliases are not exports. Resolve to `Trash` first.
-- The generic `<Icon name=... variant=...>` component bundles **all 10,500 icons**. Use it only for truly dynamic names
+- The generic `<Icon name=... variant=...>` component bundles **all 500 icons in every style**. Use it only for truly dynamic names
   (CMS data). Otherwise use named imports, which tree-shake down to the icons you use.
 - `<img src=".../home.svg">` cannot inherit `currentColor` and renders black. Inline the SVG, use the component,
   the sprite or the classes when the colour must follow text.
@@ -215,8 +240,9 @@ render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // ->
 - Don't put palette styles, loops or creative styles in dense 16-20px controls: they turn to noise.
 - `strokeWidth` only affects styles with live strokes (line, duo, blueprint, sketch, kawaii); it does nothing on the filled styles.
 - From a CDN, load only what the page shows: `<with-icon>` via `https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js`
-  (7 KB gzipped + one small file per icon), `<i>` classes via `.../classes@0.2.0/dist/with-loader.js` (6 KB gzipped +
-  ~270 bytes per line icon), live icons via `.../dynamic@0.2.0/dist/cdn/lite.js`. Pin the version in production.
+  (7 KB gzipped + one small file per icon), `<i>` classes via `.../classes@latest/dist/with-loader.js` (6 KB gzipped +
+  ~270 bytes per line icon), live icons via `.../dynamic@latest/dist/cdn/lite.js`. `@latest` follows new releases; for a
+  look that never changes, pin one version (`@withicons/web@<version>`, the same for every `@withicons/*` file on the page).
   Never `with-all.css` (every style, ~6.3 MB gzipped) or `@withicons/web/full` on a real page; `with-<style>.css`
   (one whole style, `with-line.css` 26 KB gzipped) is the zero-JS option.
 - Svelte 4: `on:click` is not forwarded to the icon. Wrap it in a `<button>`.

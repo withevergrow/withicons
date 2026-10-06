@@ -290,7 +290,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   <div><p class="ax-kicker">Set up</p><h2 id="ic-setup">One setup line, then plain tags</h2>
   <p>Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>, so it scales with font size and takes the text colour. The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles: a line icon is about 270 bytes gzipped. No JavaScript? Link one stylesheet per style; <code>with-line.css</code> holds all ${N} line icons in about 26 KB gzipped. The link below is served by jsDelivr; to host it yourself, <code>npm i @withicons/classes</code> or download <a href="${p}vendor/with/with-line.css">with-line.css</a>.</p>
   ${facts([['Base class', '<code>with</code> plus <code>with-&lt;name&gt;</code>'], ['Styles', '<code>with-solid</code>, <code>with-duo</code>, <code>with-gloss</code>, <code>with-engrave</code>, <code>with-blueprint</code>, <code>with-sketch</code> and more (the loader fetches each one; without it, link that style’s CSS)'], ['Sizes', '<code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-2x</code> … <code>with-5x</code>, <code>with-fw</code>'], ['Motion & flips', '<code>with-spin</code>, <code>with-pulse</code>, <code>with-rotate-90</code>, <code>with-flip-h</code>, <code>with-flip-v</code>'], ['Aliases', `With the optional runtime, alias names work too: <code>with-bin</code> → trash`]])}</div>
-  <div>${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
+  <div>${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-home with-solid"></i>

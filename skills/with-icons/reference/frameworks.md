@@ -2,7 +2,9 @@
 
 Every framework package exposes the same thing: one component per icon, PascalCase of the kebab-case name, exported as
 `Name` and `NameIcon`. The default path is the **line** style; each other style is a subpath
-(`/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`).
+(`/line` is also accepted): `/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, palette styles `/glass`, `/kawaii`,
+`/sticker`, `/pixel`, `/retro`, studio styles `/luxe`, `/bauhaus`, `/skeuo`, storybook styles `/anime`, `/gothic`, `/pastel`,
+`/coquette`, `/plush` (all 20 in React, Vue, Svelte, Solid and Angular).
 Animation is a separate, optional package for every framework: see [motion.md](motion.md). Deep imports: `<pkg>/icons/<name>` and `<pkg>/<style>/icons/<name>`.
 
 ## React (also Next.js, Remix, Vite, React Native Web)
@@ -136,6 +138,10 @@ export const Toolbar = () => (
 <with-icon name="bin" variant="solid" size="32" color="#e11d48" label="Delete"></with-icon>
 ```
 
+CDN links on this page use `@latest`. For a look that never changes under you, pin a version instead
+(`@withicons/web@<version>`, and the same version for every `@withicons/*` file on the page; `npm view @withicons/web version`
+prints the current one).
+
 The page downloads only what it shows: `cdn.js` is 7 KB gzipped, then each icon is its own small file
 (`dist/icons/<style>/<name>.js`, a `line` icon about 150 bytes gzipped). Never load `@withicons/web/full` on a page
 (every icon of every style, ~6 MB gzipped); it is for scripts and tools.
@@ -157,11 +163,21 @@ page, in any mix of styles (6 KB gzipped, then ~270 bytes per `line` icon):
 <i class="with with-search with-2x with-spin" aria-hidden="true"></i>
 ```
 
-Zero JS: link `.../classes@0.2.0/dist/with-base.css` plus `.../classes@0.2.0/dist/<style>/<name>.css` per icon, or one whole style per file
-(`.../classes@0.2.0/dist/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
+Zero JS: link `.../classes@latest/dist/with-base.css` plus `.../classes@latest/dist/<style>/<name>.css` per icon, or one whole style per file
+(`.../classes@latest/dist/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
 `with-all.css` imports every style (~6.3 MB gzipped): prototypes only, never a production page.
 With a bundler: `npm i @withicons/classes`, then `import '@withicons/classes/with-line.css'` (or `with-base.css` + `line/home.css` per icon).
-Size utilities: `with-xs`, `with-sm`, `with-lg`, `with-2x`, and so on, plus `with-fw`. Animations: `with-spin`, `with-pulse`, both reduced-motion safe.
+Size: the icon is 1em square, so it follows the text size. Setting only `height` does not grow it (the width stays 1em).
+Three ways, each giving a 48 px icon:
+
+```html
+<i class="with with-home" style="font-size: 48px"></i>      <!-- 1. font-size (also scales with the text around it) -->
+<i class="with with-home with-3x"></i>                       <!-- 2. a size class: 3 x the text size -->
+<i class="with with-home" style="--with-size: 48px"></i>    <!-- 3. an exact size, whatever the text size -->
+```
+
+Size classes: `with-xs`, `with-sm`, `with-lg`, `with-2x` to `with-5x` (multiples of the text size), plus `with-fw` (fixed width for lists).
+Animations: `with-spin`, `with-pulse`, both reduced-motion safe.
 For true multi-colour, stroke width and alias names, use the JS runtime instead:
 `<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-icons.js" defer></script>`.
 It fetches only the icons shown (from `@withicons/web`, same version) and turns `<i class="with with-home with-duo">` into inline SVG (`--with-duo`, `--with-accent`, `data-with-stroke-width`).

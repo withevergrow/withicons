@@ -1,6 +1,6 @@
 {
   "name": "@withicons/motion",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Optional animations for with icons: 32 CSS presets, per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.",
   "license": "MIT",
   "author": {

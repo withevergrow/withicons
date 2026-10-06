@@ -164,7 +164,7 @@ ${turn.length ? `  <section class="ga-turn" id="turn-into" aria-labelledby="ga-t
       <p>Add the optional <b>@withicons/motion</b> stylesheet and two classes. It works with every package and every style, and respects reduced motion.</p>
       <a class="btn btn-ink" href="../developers.html#motion">Animation docs</a>
     </div>
-    ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+    ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 
 <span class="wm wm-loop wm-p-ring"><svg …bell…></svg></span>`, 'html', 'index.html')}
   </section>

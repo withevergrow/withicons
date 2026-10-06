@@ -146,7 +146,7 @@ export async function motionData(root, iconNames) {
     if (ex['./motion.css'] && ex['./icons.css']) css = ['@withicons/motion/motion.css', '@withicons/motion/icons.css']
   } catch { /* package not generated yet */ }
   // CDN: the presets + one small file per animated icon (dist/icons/<name>.css), not the all-icons icons.css
-  const cdn = ['https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css'], cdnIcon = 'https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons/<name>.css'
+  const cdn = ['https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css'], cdnIcon = 'https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/<name>.css'
   return { source, presets, effects, css, cdn, cdnIcon, icons: out }
 }
 
@@ -208,7 +208,7 @@ export default async function emit(ctx) {
   const rv = { version, icons: ctx.icons.length, styles: ctx.styles.length, styleList: ctx.styles.map(s => s.name).join(', '), total: totalText(ctx), animated: Object.keys(motion.icons).length, paletteIcons: Object.keys(palettes.icons).length }
   // package.json files (bundled -> no runtime dependencies)
   const mcpPkg = {
-    ...basePkg(ctx, '@withicons/mcp', `MCP server for with icons: search ${countText(ctx)} in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx) and AWS Lambda.`,
+    ...basePkg(ctx, '@withicons/mcp', `MCP server for with icons: search ${countText(ctx)} in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx), plus a hosted server at https://withicons.com/mcp.`,
       ['mcp', 'model-context-protocol', 'mcp-server', 'ai', 'claude', 'cursor', 'icon-search', 'svg-icons', 'animated-icons', 'icon-animation',
         'multicolor-icons', 'color-palettes', 'animated-gif', 'powerpoint', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module',

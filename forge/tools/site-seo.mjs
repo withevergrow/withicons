@@ -263,14 +263,14 @@ async function main() {
   const fileDate = f => fs.existsSync(f) ? dateOf(fs.statSync(f).mtime) : null
   const maxDate = ds => ds.filter(Boolean).sort().pop()
   const CDN = 'https://cdn.jsdelivr.net/npm'
-  const cdnSvg = (style, n) => `${CDN}/${SCOPE}/core/dist/svg/${style}/${n}.svg`
+  const cdnSvg = (style, n) => `${CDN}/${SCOPE}/core@latest/dist/svg/${style}/${n}.svg`
   // light path first: cdn.js / with-loader.js download only the icons a page shows (one small file each).
   // with-<style>.css holds a whole style (with-line.css ~26 KB gzipped); with-all.css (~6.3 MB gzipped) is a prototype-only opt-in.
-  const WEB_JS = `${CDN}/${SCOPE}/web/dist/cdn.js`
-  const CLASSES_LOADER = `${CDN}/${SCOPE}/classes/dist/with-loader.js`
-  const CLASSES_CSS = `${CDN}/${SCOPE}/classes/dist/with-all.css`
-  const classCss = st => `${CDN}/${SCOPE}/classes/dist/with-${st}.css`
-  const motionIconCss = n => `${CDN}/${SCOPE}/motion/dist/icons/${n}.css`
+  const WEB_JS = `${CDN}/${SCOPE}/web@latest/dist/cdn.js`
+  const CLASSES_LOADER = `${CDN}/${SCOPE}/classes@latest/dist/with-loader.js`
+  const CLASSES_CSS = `${CDN}/${SCOPE}/classes@latest/dist/with-all.css`
+  const classCss = st => `${CDN}/${SCOPE}/classes@latest/dist/with-${st}.css`
+  const motionIconCss = n => `${CDN}/${SCOPE}/motion@latest/dist/icons/${n}.css`
   const pageUrl = n => `${BASE}/icons/${n}.html`
   const catUrl = c => `${BASE}/categories/${c}.html`
   const styleUrl = s => `${BASE}/styles/${s}.html`
@@ -340,7 +340,7 @@ async function main() {
   /* ───────────── chrome (exact markup from site/DESIGN.md) ───────────── */
   const HEADER = `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a class="logo" href="index.html" aria-label="with icons — home">
+  <a class="logo" href="index.html" aria-label="with icons, home">
     <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
     <span class="logo-type">
       <span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span>
@@ -516,10 +516,71 @@ ${prefixed(FOOTER, P)}
     const swapCode = sw ? (() => { const [to, s2] = String(sw.to).split('@'); return `\n\n<!-- click to turn ${n} into ${to}${s2 ? ` (${s2})` : ''}: the button's aria-pressed decides the icon.\n     Timing: --wm-swap-dur, --wm-swap-ease, --wm-swap-delay. On its own: wm-swap-auto (+ --wm-swap-hold) -->\n<button class="wm-trigger" type="button" aria-pressed="false" aria-label="${T}"\n        onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">\n  <span class="wm-swap wm-fx-${sw.effect || 'fade'}">\n    <i class="with with-${n} wm-a"></i>\n    <i class="with with-${to}${s2 && s2 !== 'line' ? ` with-${s2}` : ''} wm-b"></i>\n  </span>\n</button>` })() : ''
     return { id: 'motion', lang: 'html', name: 'Motion', install: `npm i ${SCOPE}/motion`,
       lead: `Optional animations, imported separately. They move the element around the icon, so they work with every style and every package.${mo ? ` This icon’s own animation ${esc(mo.intent)}.` : ''}`,
-      code: `<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">\n<link rel="stylesheet" href="${motionIconCss(n)}">  <!-- this icon's own moves -->\n\n<!-- always moving${mo ? `: ${mo.loop.preset}` : ''} -->\n<span class="wm wm-loop" data-wm="${n}"><i class="with with-${n}"></i></span>\n\n<!-- moves when the button is hovered or focused${mo ? `: ${mo.hover.preset}` : ''} -->\n<button class="wm-trigger"><span class="wm wm-hover" data-wm="${n}"><i class="with with-${n}"></i></span> ${T}</button>${swapCode}`,
+      code: `<link rel="stylesheet" href="${CDN}/${SCOPE}/motion@latest/dist/motion.css">\n<link rel="stylesheet" href="${motionIconCss(n)}">  <!-- this icon's own moves -->\n\n<!-- always moving${mo ? `: ${mo.loop.preset}` : ''} -->\n<span class="wm wm-loop" data-wm="${n}"><i class="with with-${n}"></i></span>\n\n<!-- moves when the button is hovered or focused${mo ? `: ${mo.hover.preset}` : ''} -->\n<button class="wm-trigger"><span class="wm wm-hover" data-wm="${n}"><i class="with with-${n}"></i></span> ${T}</button>${swapCode}`,
       note: `<code>motion.css</code> holds the presets (about 10 KB gzipped). Each icon’s own moves are a file of their own (about 0.3 KB gzipped); <code>icons.css</code> bundles all ${ICONS.length} (about 18 KB gzipped) for bundled apps. Pick another move with <code>wm-p-&lt;preset&gt;</code> (${MOTION_PRESETS.length} presets) and tune it with <code>--wm-dur</code> and <code>--wm-k</code>. JavaScript: <code>import { motion, swap } from '${SCOPE}/motion'</code>. Everything stops for visitors who ask for reduced motion.` }
   }
   function uniqueAlias(i) { return i.aliases.find(a => aliasIndex[a] && aliasIndex[a].length === 1 && !a.includes(' ')) }
+  /* the hero's "Use it in code" bar: one line per stack (ids = localStorage 'with-stack', shared with the library viewer).
+     Tokens follow the picked style: {sub} '' | '/solid', {cls} '' | ' with-solid', {var} '' | ' variant="solid"', {style}. */
+  const QU_ORDER = ['html', 'react', 'vue', 'svelte', 'angular', 'solid', 'web', 'svg']
+  function quickT(i) {
+    const n = i.name, C = comp(n), T = i.title, P = pkg => `${SCOPE}/${pkg}{sub}`
+    const fw = (id, name, tag) => ({ id, name, k: 'Install', setup: `npm i ${SCOPE}/${id}`, use: `import { ${C} } from '${P(id)}'\n${tag}` })
+    return [
+      { id: 'html', name: 'HTML', k: 'Once per page', setup: `<script src="${CLASSES_LOADER}" defer></script>`, use: `<i class="with with-${n}{cls}"></i>` },
+      fw('react', 'React', `<${C} size={24} />`),
+      fw('vue', 'Vue', `<${C} :size="24" />`),
+      fw('svelte', 'Svelte', `<${C} size={24} />`),
+      fw('angular', 'Angular', `<with-icon [icon]="${C}" [size]="24" />`),
+      fw('solid', 'Solid', `<${C} size={24} />`),
+      { id: 'web', name: 'Web component', k: 'Once per page', setup: `<script type="module" src="${WEB_JS}"></script>`, use: `<with-icon name="${n}"{var}></with-icon>` },
+      { id: 'svg', name: 'SVG file', k: 'No install', setup: '', use: `<img src="${CDN}/${SCOPE}/core@latest/dist/svg/{style}/${n}.svg" width="24" height="24" alt="${T}">` },
+    ]
+  }
+  /* "Make it bigger or smaller": copyable 48 px one-liners per stack. An <i> tag is 1em square (width and height read
+     --with-size, default 1em), so it follows font-size; setting only height leaves the width at 1em. */
+  function sizeT(id, n, C, cls = '{cls}') {
+    const tag = extra => `<i class="with with-${n}${cls}${extra}></i>`
+    if (id === 'html') return { sub: 'font size, a size class or an exact size', say: 'The icon is 1em square, so it follows the text size. Three ways to make it 48 px:',
+      rows: [['Font size', 'also grows with the text around it', tag('" style="font-size: 48px"')],
+        ['A size class', 'with-xs, with-sm, with-lg, with-2x to with-5x: times the text size', tag(' with-3x"')],
+        ['An exact size', 'whatever the text size', tag('" style="--with-size: 48px"')]],
+      note: 'Setting only <code>height</code> does not work: the width stays 1em.' }
+    if (id === 'web') return { sub: 'the size attribute', say: 'Use <code>size</code>: pixels, or any CSS length.', rows: [['', '', `<with-icon name="${n}"${cls === '{cls}' ? '{var}' : ''} size="48"></with-icon>`]] }
+    if (id === 'svg') return { sub: 'width and height', say: 'Change <code>width</code> and <code>height</code>. SVG stays sharp at any size.', rows: [['', '', `<img src="${CDN}/${SCOPE}/core@latest/dist/svg/${cls === '{cls}' ? '{style}' : 'line'}/${n}.svg" width="48" height="48" alt="">`]] }
+    if (id === 'vue') return { sub: 'the size prop', say: 'Use the <code>size</code> prop: a number in pixels, or any CSS length.', rows: [['', '', `<${C} :size="48" />`]] }
+    if (id === 'angular') return { sub: 'the size input', say: 'Use the <code>size</code> input: a number in pixels, or any CSS length.', rows: [['', '', `<with-icon [icon]="${C}" [size]="48" />`]] }
+    return { sub: 'the size prop', say: 'Use the <code>size</code> prop: a number in pixels, or any CSS length.', rows: [['', '', `<${C} size={48} />`]] }
+  }
+  // the collapsed disclosure; fill = the hero bar (codes follow the picked style), otherwise static line-style code
+  function sizeHelp(pre, id, n, C, s, { fill = false, dark = false } = {}) {
+    const z = sizeT(id, n, C, fill ? '{cls}' : '')
+    return `<details class="ip-size${dark ? ' is-dark' : ''}"><summary><span>Make it bigger or smaller</span><small>${esc(z.sub)}</small></summary><div class="ip-size-b">
+          <p class="ip-size-say">${z.say}</p>
+${z.rows.map(([t, sub, c], k) => `          ${t ? `<p class="ip-size-k"><b>${esc(t)}</b> <small>${esc(sub)}</small></p>` : ''}<div class="ip-size-row"><code id="${pre}-${id}-${k}"${fill ? ` data-fill="${esc(c)}"` : ''}>${esc(fill ? quickFill(c, s) : c)}</code><button type="button" class="ip-qu-mini" data-ip-copy="#${pre}-${id}-${k}" aria-label="Copy the 48 px version">${I.copy}</button></div>`).join('\n')}
+          ${z.note ? `<p class="ip-size-say ip-size-note">${z.note}</p>` : ''}
+        </div></details>`
+  }
+  const quickFill = (t, s) => t.replace(/\{sub\}/g, s === 'line' ? '' : `/${s}`).replace(/\{cls\}/g, s === 'line' ? '' : ` with-${s}`).replace(/\{var\}/g, s === 'line' ? '' : ` variant="${s}"`).replace(/\{style\}/g, s)
+  // short words never break at their hyphens (with-calendar), long ones (URLs) still wrap
+  const quNw = h => h.replace(/>([^<]+)</g, (m, t) => '>' + t.split(' ').map(w => w && w.length < 32 && !w.includes('\n') ? `<span class="nw">${w}</span>` : w).join(' ') + '<')
+  function quickBar(i, s) {
+    const Q = quickT(i)
+    return `
+    <div class="ip-qu" data-qu data-stack="html" role="group" aria-labelledby="qu-k">
+      <div class="ip-qu-head">
+        <p class="ip-qu-k" id="qu-k">${I.code}<span>Use it in code</span></p>
+        <label class="ip-qu-pick"><span class="visually-hidden">Your stack</span><select data-qu-pick>${Q.map(q => `<option value="${q.id}">${esc(q.name)}</option>`).join('')}</select>${I.chev}</label>
+      </div>
+${Q.map(q => `      <div class="ip-qu-line" data-qu-line="${q.id}">
+        <div class="ip-qu-use"><pre class="ip-qu-code"><code id="qu-${q.id}" data-qu-use>${quNw(hl(quickFill(q.use, s)))}</code></pre><button type="button" class="ip-qu-copy" data-ip-copy="#qu-${q.id}" aria-label="Copy the ${esc(q.name)} code">${I.copy}<span>Copy</span></button></div>
+        <p class="ip-qu-setup"><span class="ip-qu-sk">${esc(q.k)}</span>${q.setup ? `<code id="qus-${q.id}" data-qu-setup title="${esc(q.setup)}">${esc(q.setup)}</code><button type="button" class="ip-qu-mini" data-ip-copy="#qus-${q.id}" aria-label="Copy the ${esc(q.name)} setup line">${I.copy}</button>` : '<span class="ip-qu-none">paste it inline to recolour it</span>'}</p>
+        ${sizeHelp('qz', q.id, i.name, comp(i.name), s, { fill: true })}
+      </div>`).join('\n')}
+      <a class="ip-qu-all" href="#developers" data-qu-all><span>Every stack, props and setup</span>${I.arr}</a>
+    </div>
+    <script>try{var q=document.currentScript.previousElementSibling,v=String(localStorage.getItem('with-stack')||'').replace(/"/g,'');if(/^(html|react|vue|svelte|angular|solid|web|svg)$/.test(v)){q.setAttribute('data-stack',v);q.querySelector('select').value=v}}catch(e){}</script>`
+  }
 
   /* ───────────── FAQ ───────────── */
   function faq(i) {
@@ -599,6 +660,8 @@ ${prefixed(FOOTER, P)}
     const n = i.name, T = i.title, url = pageUrl(n), cat = i.category
     const st = i.styles, first = st[0]
     const rel = related(i), faqs = faq(i), U = usage(i), aka = akaOf(i)
+    // the developer tabs, most common first (their ids match the hero bar's 'with-stack' values)
+    const UT = [...QU_ORDER, 'motion', 'ai'].map(id => U.find(u => u.id === id)).filter(Boolean).concat(U.filter(u => ![...QU_ORDER, 'motion', 'ai'].includes(u.id)))
     const mo = MOTION[n] || null
     const live = liveFor(n)
     const prev = ICONS[(idx - 1 + ICONS.length) % ICONS.length], next = ICONS[(idx + 1) % ICONS.length]
@@ -612,9 +675,9 @@ ${prefixed(FOOTER, P)}
     // and line thumbnails for its swap targets and placement neighbours
     const swapTo = mo ? uniq((mo.swap || []).map(x => String(x.to).split('@')[0])).filter(x => x !== n && BY[x]) : []
     const thumbs = Object.fromEntries(uniq([...swapTo, ...rel.slice(0, 3).map(j => j.name)]).filter(x => INNER(x).line).map(x => [x, INNER(x).line]))
-    const data = { name: n, title: T, component: comp(n), cdn: `${CDN}/${SCOPE}/classes/dist/`, motion: mo,
+    const data = { name: n, title: T, component: comp(n), cdn: `${CDN}/${SCOPE}/classes@latest/dist/`, motion: mo,
       styles: Object.fromEntries(st.map(s => [s, { root: STYLE[s].root, hex: STYLE[s].hex, on: STYLE[s].on, title: STYLE[s].title, say: STYLE[s].say, sw: STYLE[s].strokeWidth }])),
-      related: rel.slice(0, 3).map(j => ({ name: j.name, title: j.title })), thumbs }
+      related: rel.slice(0, 3).map(j => ({ name: j.name, title: j.title })), thumbs, qu: Object.fromEntries(quickT(i).map(q => [q.id, q.use])) }
     const lede = `${esc(cap(depicts(i.description)))}. Free to use in slides, documents, websites and apps. No sign-up, no credit needed.`
     const groups = GROUPS.map(g => ({ ...g, styles: g.styles.filter(x => st.includes(x)) })).filter(g => g.styles.length)
     const extra = st.filter(x => !GROUPS.some(g => g.styles.includes(x)))
@@ -630,7 +693,7 @@ ${prefixed(FOOTER, P)}
       ['styles', `All ${st.length} styles`, 'Same icon, every look'],
       ['related', 'Goes well with', live.length ? 'Related and live icons' : 'Related icons'],
       ['names', 'Other names', 'What people call it'],
-      ['developers', 'For developers', U.map(u => u.name).slice(0, 4).join(', ') + '…'],
+      ['developers', 'For developers', UT.map(u => u.name).slice(0, 4).join(', ') + '…'],
       ['faq', 'Questions', 'Free? Colours? Animation?'],
     ]
     const tagSetup = `<details class="ip-setup"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p><p class="ip-setup-line"><code>${esc(cssFor(first))}</code></p></details>`
@@ -674,6 +737,7 @@ ${crumbs(crumbItems)}
       ${mo ? `<button type="button" class="ip-intent" data-intent aria-pressed="false"><span class="ip-intent-ic" aria-hidden="true"></span><span class="ip-intent-t"><b data-intent-b>Play animation</b><small>${esc(cap(mo.intent))}</small></span></button>` : ''}
       <div class="ip-sizes" aria-label="${esc(T)} icon at 16, 24, 32 and 48 pixels">${[16, 24, 32, 48].map(px => `<figure>${useEl(first, { size: px, dataRoot: true })}<figcaption>${px}</figcaption></figure>`).join('')}</div>
     </div>
+${quickBar(i, first)}
     ${live.length ? `<a class="ip-live-chip" href="../live/${live[0]}.html"><span class="ip-live-chip-art" aria-hidden="true">${liveArt(live[0], n)}</span><span class="ip-live-chip-t"><b><span class="ip-live-dot" aria-hidden="true"></span>Live version</b><small>${esc(liveTitle(live[0]))}: set what it shows</small></span>${I.arr}</a>` : ''}
   </div>
 </div>
@@ -795,19 +859,23 @@ ${crumbs(crumbItems)}
 
 <section class="ip-section ip-devsec" id="developers" aria-labelledby="dev-h"><div class="wrap">
   <details class="ip-dev">
-    <summary><span class="ip-dev-t"><span class="ip-h2" id="dev-h">For developers</span><small>${U.map(u => u.name).join(', ')}</small></span><span class="ip-dev-plus" aria-hidden="true"></span></summary>
-    <p class="ip-devlead"><b>Install one package for your stack</b>, or use the SVG, PNG and copy buttons above. Name in code: <code>${n}</code> · component <code>${comp(n)}</code>.</p>
-    <div class="ip-tabs" role="tablist" aria-label="Framework">${U.map((u, k) => `<button type="button" role="tab" id="tab-${u.id}" data-tab="${u.id}" aria-controls="use-${u.id}" aria-selected="${k === 0}"${k ? ' tabindex="-1"' : ''}>${esc(u.name)}</button>`).join('')}</div>
-${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" aria-labelledby="tab-${u.id}"${k ? ' hidden' : ''}>
-      <p>${u.lead}</p>
-      ${u.install ? `<p class="ip-install"><code>${esc(u.install)}</code></p>` : ''}
-      ${codeBlock(`code-${u.id}`, u.code, { lang: u.lang, highlight: u.highlight !== false })}
-      ${u.note ? `<p class="ip-note">${u.note}</p>` : ''}
+    <summary><span class="ip-dev-t"><span class="ip-h2" id="dev-h">For developers</span><small><span class="ip-dev-all">Copy-paste code for ${UT.map(u => u.name).join(', ')}</span><span class="ip-dev-few" aria-hidden="true">${UT.slice(0, 3).map(u => u.name).join(', ')} and ${UT.length - 3} more</span></small></span><span class="ip-dev-plus" aria-hidden="true"></span></summary>
+    <div class="ip-dev-body">
+    <p class="ip-devlead"><b>Pick your stack</b>, install one package, paste the code. Name in code <code>${n}</code> · component <code>${comp(n)}</code></p>
+    <div class="ip-tabs-row" data-tabs-row>
+      <div class="ip-tabs" role="tablist" aria-label="Your stack">${UT.map((u, k) => `<button type="button" role="tab" id="tab-${u.id}" data-tab="${u.id}" aria-controls="use-${u.id}" aria-selected="${k === 0}"${k ? ' tabindex="-1"' : ''}>${esc(u.name)}</button>`).join('')}</div>
+      <div class="ip-tabs-more" data-tabs-more hidden><button type="button" class="ip-more-b" aria-haspopup="menu" aria-expanded="false" aria-controls="ip-more-m"><span data-more-l>More</span>${I.chev}</button><div class="ip-more-m" id="ip-more-m" role="menu" aria-label="More stacks" hidden></div></div>
+    </div>
+${UT.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" aria-labelledby="tab-${u.id}"${k ? ' data-off' : ''}>
+      <h3 class="ip-panel-h">${esc(u.name)}</h3>
+      <p class="ip-panel-lead">${u.lead}</p>
+      <ol class="ip-steps${u.install ? '' : ' is-one'}">
+        ${u.install ? `<li class="ip-step"><p class="ip-step-k">Install</p><div class="ip-cmd"><span class="ip-cmd-p" aria-hidden="true">$</span><code id="inst-${u.id}">${esc(u.install)}</code><button class="ip-copy" type="button" data-ip-copy="#inst-${u.id}" aria-label="Copy the install command">${I.copy}<span>Copy</span></button></div></li>` : ''}
+        <li class="ip-step"><p class="ip-step-k">${u.id === 'ai' ? 'Run it' : u.install ? 'Use it' : 'Paste it'}</p>${codeBlock(`code-${u.id}`, u.code, { lang: u.lang, highlight: u.highlight !== false })}</li>
+      </ol>
+      ${/^(html|react|vue|svelte|angular|solid|web|svg)$/.test(u.id) ? sizeHelp('dz', u.id, n, comp(n), 'line', { dark: true }) : ''}
+      ${u.note ? `<div class="ip-panel-note"><p class="ip-panel-note-k">Good to know</p><p class="ip-note">${u.note}</p></div>` : ''}
     </div>`).join('\n')}
-    <div class="ip-dev-tag">
-      <p class="ip-dev-tag-l">The quickest copy for websites: one <code>&lt;i&gt;</code> tag</p>
-      <button type="button" class="ip-tag-btn" data-act="copy-tag"><span class="ip-tag-k">${I.code}Copy &lt;i&gt; tag</span><code data-tag-code>${tagFor(n, first).split(' ').map(w => `<span class="nw">${esc(w)}</span>`).join(' ')}</code><span class="ip-tag-go">${I.copy}<span>Copy</span></span></button>
-      <details class="ip-setup is-dark"><summary>First time? Show setup</summary><p class="ip-tag-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p><button type="button" class="ip-tag-css" data-act="copy-css" title="Copy the setup line"><code data-tag-css>${esc(cssFor(first))}</code>${I.copy}<span class="visually-hidden">Copy the setup line</span></button></details>
     </div>
   </details>
 </div></section>
@@ -856,7 +924,7 @@ ${U.map((u, k) => `    <div class="ip-panel" id="use-${u.id}" role="tabpanel" ar
   function categoryPage(c) {
     const items = inCat(c), url = catUrl(c), C = catTitle(c)
     const crumbItems = [{ name: 'Home', href: '../index.html', url: `${BASE}/` }, { name: 'Icons', href: '../icons.html', url: `${BASE}/icons.html` }, { name: C, url }]
-    const title = [`${C} icons — ${items.length} free SVG & PNG icons in ${NS} styles | ${BRAND}`, `${C} icons — ${items.length} free SVG & PNG icons | ${BRAND}`, `${C} icons | ${BRAND}`].find(t => t.length <= 70) || `${C} icons | ${BRAND}`
+    const title = [`${C} icons — ${items.length} free SVG & PNG icons in ${NS} styles | ${BRAND}`, `${C} icons — ${items.length} free SVG & PNG icons | ${BRAND}`, `${C} icons — ${items.length} free SVG & PNG | ${BRAND}`, `${C} icons | ${BRAND}`].find(t => t.length <= 65) || `${C} icons | ${BRAND}`
     const mk = k => `${items.length} free ${c} icons in ${NS} styles: ${items.slice(0, k).map(i => i.title.toLowerCase()).join(', ')} and more. Download SVG or PNG, or copy into your slides.`
     let k = 6; while (k > 1 && mk(k).length > 160) k--
     const desc = mk(k)
@@ -907,8 +975,9 @@ ${items.map(j => `  <tr><th scope="row"><a href="../icons/${j.name}.html">${svgE
     const S = STYLE[s], url = styleUrl(s)
     const items = ICONS.filter(i => i.styles.includes(s))
     const crumbItems = [{ name: 'Home', href: '../index.html', url: `${BASE}/` }, { name: 'Icons', href: '../icons.html', url: `${BASE}/icons.html` }, { name: `${S.title} style`, url }]
-    const title = [`${S.title} icons — ${items.length} free ${S.title.toLowerCase()} SVG & PNG icons | ${BRAND}`, `${S.title} icons — ${items.length} free SVG & PNG | ${BRAND}`].find(t => t.length <= 70) || `${S.title} icons | ${BRAND}`
-    const desc = `${items.length} free ${s} style icons. ${S.say} Download SVG or PNG in any colour, or copy into Slides, Docs and Figma.`.slice(0, 165)
+    const title = [`${S.title} icons — ${items.length} free ${S.title.toLowerCase()} SVG & PNG icons | ${BRAND}`, `${S.title} icons — ${items.length} free SVG & PNG | ${BRAND}`].find(t => t.length <= 65) || `${S.title} icons | ${BRAND}`
+    // search snippets cut near 160 characters: the longest wording that fits wins
+    const desc = [`${items.length} free ${s} style icons. ${S.say} Download SVG or PNG in any colour, or copy into Slides, Docs and Figma.`, `${items.length} free ${s} style icons. ${S.say} Download SVG or PNG in any colour.`, `${items.length} free ${s} style icons. ${S.say}`].find(t => t.length <= 160) || `${items.length} free ${s} style icons, as SVG or PNG in any colour.`
     const subpath = s === 'line' ? '' : `/${s}`
     const main = `
 <div class="hub hub-style${S.palette ? ' is-palette' : ''}" data-hub style="${scv(s)}">
@@ -953,6 +1022,99 @@ ${CATS.map(c => { const g = items.filter(i => i.category === c); return g.length
     return page({ title, description: desc, canonical: url, og: `${BASE}/og/style-${s}.png`, ogAlt: `${S.title} style icons from ${BRAND}`, jsonld, main, bodyClass: 'ip-page hub-page', styleCls: `s-${s}` })
   }
 
+  /* ───────────── folder index pages ─────────────
+     CloudFront rewrites /x/ to /x/index.html, so every generated folder gets one: categories/ and styles/ are real
+     (indexable) overview pages; icons/ is a clean noindex,follow redirect to the library (icons.html is that page). */
+  function categoriesIndexPage() {
+    const url = `${BASE}/categories/index.html`
+    const crumbItems = [{ name: 'Home', href: '../index.html', url: `${BASE}/` }, { name: 'Icons', href: '../icons.html', url: `${BASE}/icons.html` }, { name: 'Categories', url }]
+    const title = `Icon categories: ${CATS.length} groups of free icons | ${BRAND}`
+    const desc = `Browse ${ICONS.length} free icons by category: ${CATS.slice(0, 6).join(', ')} and more. Each comes in ${NS} styles as SVG or PNG.`
+    const main = `
+<div class="hub" data-hub>
+<section class="hub-hero"><div class="wrap">
+${crumbs(crumbItems)}
+<div class="hub-hero-grid">
+  <div>
+    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>${CATS.length} categories · ${ICONS.length} icons · ${NS} styles</p>
+    <h1 class="ip-h1">Icon <span class="ip-hand">categories</span></h1>
+    <p class="ip-lede">Every icon sorted by what it is for. Open a category to see its icons in all ${numw(NS)} styles, with plain descriptions and the other words people search for.</p>
+    <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html">Open the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="../styles/index.html">Browse by style</a></p>
+  </div>
+  <div class="hub-strip" aria-hidden="true">${CATS.slice(0, 9).map((c, k) => { const s = STYLES[k % NS]; return `<span class="s-${s.name}" style="${scv(s.name)};--i:${k}">${svgEl(inCat(c)[0].name, s.name)}</span>` }).join('')}</div>
+</div>
+</div></section>
+<section class="ip-section" id="all" aria-labelledby="all-h"><div class="wrap">
+  <div class="ip-head"><h2 class="ip-h2" id="all-h">All ${CATS.length} <span class="ip-hand">categories</span></h2></div>
+  ${catNav()}
+${CATS.map(c => `  <div class="hub-group"><h3 id="cat-${c}"><a href="${c}.html">${esc(catTitle(c))}</a> <small>${inCat(c).length}</small></h3>
+  <p>${esc(catIntro(c))}</p>
+  ${hubGrid(inCat(c).slice(0, 8), 'line', false)}
+  <p><a href="${c}.html">See all ${inCat(c).length} ${esc(c)} icons</a></p></div>`).join('\n')}
+</div></section>
+</div>`
+    const jsonld = { '@context': 'https://schema.org', '@graph': [...BASE_GRAPH,
+      { '@type': 'CollectionPage', '@id': url, url, name: title, description: desc, inLanguage: 'en', isPartOf: { '@id': SITE_NODE['@id'] }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#list` }, license: LICENSE_URL },
+      crumbLd(`${url}#breadcrumb`, crumbItems),
+      { '@type': 'ItemList', '@id': `${url}#list`, name: 'Icon categories', numberOfItems: CATS.length, itemListElement: CATS.map((c, k) => ({ '@type': 'ListItem', position: k + 1, url: catUrl(c), name: `${catTitle(c)} icons` })) },
+    ] }
+    return page({ title, description: desc, canonical: url, og: `${BASE}/og/library.png`, ogAlt: `Icon categories from ${BRAND}`, jsonld, main, bodyClass: 'ip-page hub-page', styleCls: 's-line' })
+  }
+  function stylesIndexPage() {
+    const url = `${BASE}/styles/index.html`
+    const crumbItems = [{ name: 'Home', href: '../index.html', url: `${BASE}/` }, { name: 'Icons', href: '../icons.html', url: `${BASE}/icons.html` }, { name: 'Styles', url }]
+    const title = `${numw(NS).replace(/^./, m => m.toUpperCase())} icon styles, one free icon set | ${BRAND}`
+    const desc = `Every icon in ${NS} styles: ${STYLES.slice(0, 5).map(s => s.title.toLowerCase()).join(', ')} and more. Compare them and pick one. Free SVG and PNG, MIT licensed.`
+    const main = `
+<div class="hub" data-hub>
+<section class="hub-hero"><div class="wrap">
+${crumbs(crumbItems)}
+<div class="hub-hero-grid">
+  <div>
+    <p class="ip-eyebrow"><span class="ip-dot" aria-hidden="true"></span>${NS} styles · ${ICONS.length} icons each</p>
+    <h1 class="ip-h1">Icon <span class="ip-hand">styles</span></h1>
+    <p class="ip-lede">The same ${ICONS.length} icons drawn ${numw(NS)} ways, from clean outlines to storybook illustrations. Pick the one that fits your slides, site or app.</p>
+    <p class="hub-cta"><a class="btn btn-ink btn-lg" href="../icons.html">Open the library ${I.arr}</a><a class="btn btn-ghost btn-lg" href="../categories/index.html">Browse by category</a></p>
+  </div>
+  <div class="hub-strip" aria-hidden="true">${STYLES.slice(0, 9).map((s, k) => `<span class="s-${s.name}" style="${scv(s.name)};--i:${k}">${svgEl('heart', s.name)}</span>`).join('')}</div>
+</div>
+</div></section>
+<section class="ip-section" id="all" aria-labelledby="all-h"><div class="wrap">
+  <div class="ip-head"><h2 class="ip-h2" id="all-h">All ${numw(NS)} <span class="ip-hand">styles</span></h2><p>Click one to see every icon in it.</p></div>
+  ${styleNav()}
+</div></section>
+<section class="ip-section" aria-labelledby="say-h"><div class="wrap">
+  <div class="ip-head"><h2 class="ip-h2" id="say-h">Which one <span class="ip-hand">when</span></h2></div>
+  <div class="hub-table-wrap"><table class="hub-table"><thead><tr><th scope="col">Style</th><th scope="col">Looks like</th><th scope="col">Good for</th></tr></thead><tbody>
+${STYLES.map(s => `  <tr><th scope="row"><a href="${s.name}.html">${svgEl('home', s.name, { size: 22 })}${esc(s.title)}</a></th><td>${esc(s.say)}</td><td>${esc(cap(s.good || ''))}</td></tr>`).join('\n')}
+  </tbody></table></div>
+</div></section>
+</div>`
+    const jsonld = { '@context': 'https://schema.org', '@graph': [...BASE_GRAPH,
+      { '@type': 'CollectionPage', '@id': url, url, name: title, description: desc, inLanguage: 'en', isPartOf: { '@id': SITE_NODE['@id'] }, breadcrumb: { '@id': `${url}#breadcrumb` }, mainEntity: { '@id': `${url}#list` }, license: LICENSE_URL },
+      crumbLd(`${url}#breadcrumb`, crumbItems),
+      { '@type': 'ItemList', '@id': `${url}#list`, name: 'Icon styles', numberOfItems: NS, itemListElement: STYLES.map((s, k) => ({ '@type': 'ListItem', position: k + 1, url: styleUrl(s.name), name: `${s.title} style icons` })) },
+    ] }
+    return page({ title, description: desc, canonical: url, og: `${BASE}/og/library.png`, ogAlt: `The ${NS} icon styles of ${BRAND}`, jsonld, main, bodyClass: 'ip-page hub-page', styleCls: 's-line' })
+  }
+  // a folder URL with no page of its own: send people (and crawlers, via follow) to the real page, keep it out of the index
+  const redirectPage = (to, label, canonical) => `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(label)} | ${esc(BRAND)}</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${canonical}">
+<meta http-equiv="refresh" content="0; url=${to}">
+<meta name="color-scheme" content="light dark">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FBF8F3;color:#111318;font:16px/1.5 system-ui,sans-serif}a{color:inherit}@media (prefers-color-scheme:dark){body{background:#0D0F14;color:#F3F1EC}}</style>
+<script>location.replace(${JSON.stringify(to)}+location.search+location.hash)</script>
+</head>
+<body><p><a href="${to}">${esc(label)}</a></p></body>
+</html>
+`
+
   /* ───────────── write pages ───────────── */
   const written = {}
   function write(rel, text) {
@@ -966,11 +1128,14 @@ ${CATS.map(c => { const g = items.filter(i => i.category === c); return g.length
     for (const f of fs.readdirSync(d)) if (!keep.has(f)) fs.rmSync(path.join(d, f))
   }
   ICONS.forEach((i, k) => write(`icons/${i.name}.html`, iconPage(i, k)))
-  prune('icons', new Set(ICONS.map(i => `${i.name}.html`)))
+  write('icons/index.html', redirectPage('../icons.html', 'Browse all icons', `${BASE}/icons.html`))
+  prune('icons', new Set([...ICONS.map(i => `${i.name}.html`), 'index.html']))
   CATS.forEach(c => write(`categories/${c}.html`, categoryPage(c)))
-  prune('categories', new Set(CATS.map(c => `${c}.html`)))
+  write('categories/index.html', categoriesIndexPage())
+  prune('categories', new Set([...CATS.map(c => `${c}.html`), 'index.html']))
   STYLES.forEach(s => write(`styles/${s.name}.html`, stylePage(s.name)))
-  prune('styles', new Set(STYLES.map(s => `${s.name}.html`)))
+  write('styles/index.html', stylesIndexPage())
+  prune('styles', new Set([...STYLES.map(s => `${s.name}.html`), 'index.html']))
   for (const s of STYLES) {
     write(`sprites/${s.name}.svg`, `<svg xmlns="http://www.w3.org/2000/svg">${ICONS.filter(i => INNER(i.name)[s.name]).map(i => `<symbol id="with-${i.name}" viewBox="0 0 24 24">${INNER(i.name)[s.name]}</symbol>`).join('')}</svg>\n`)
   }
@@ -1001,9 +1166,9 @@ ${CATS.map(c => `          <section class="ix-cat" aria-labelledby="ix-${c}"><h3
   const iconsJson = {
     name: BRAND, homepage: `${BASE}/`, publisher: PUB.name, publisherUrl: PUB.url, packageScope: SCOPE, packagesStatus: 'available', version: VERSION, license: 'MIT', repository: REPO,
     search: { api: `${BASE}/api/search?q=`, mcp: `npx -y ${SCOPE}/mcp`, cli: 'npx withicons search <query>' },
-    classes: { package: `${SCOPE}/classes`, loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/classes/dist/with-base.css`, perIcon: `${CDN}/${SCOPE}/classes/dist/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/classes/dist/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
+    classes: { package: `${SCOPE}/classes`, loader: CLASSES_LOADER, base: `${CDN}/${SCOPE}/classes@latest/dist/with-base.css`, perIcon: `${CDN}/${SCOPE}/classes@latest/dist/<style>/<name>.css`, perStyle: `${CDN}/${SCOPE}/classes@latest/dist/with-<style>.css`, stylesheet: CLASSES_CSS, stylesheetNote: 'with-all.css is every icon in every style (~6.3 MB gzipped): prototypes only', pattern: 'with with-<name> with-<style>' }, webComponent: '<with-icon name="<name>" variant="<style>">', webComponentScript: WEB_JS,
     total: ICONS.length, defaultStyle: 'line', styleCount: NS,
-    motion: { package: `${SCOPE}/motion`, status: 'available', css: `${CDN}/${SCOPE}/motion/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
+    motion: { package: `${SCOPE}/motion`, status: 'available', css: `${CDN}/${SCOPE}/motion@latest/dist/motion.css`, iconCss: motionIconCss('<name>'), iconsCss: `${CDN}/${SCOPE}/motion@latest/dist/icons.css`, presets: MOTION_PRESETS, effects: MOTION_EFFECTS,
       classes: 'wm wm-loop|wm-hover|wm-once [wm-p-<preset>]; data-wm="<name>"; swap: wm-swap wm-fx-<effect> [wm-swap-auto|wm-swap-focus|wm-loop] > .wm-a + .wm-b', vars: ['--wm-dur', '--wm-k', '--wm-ox', '--wm-oy', '--wm-dx', '--wm-dy', '--wm-steps', '--wm-deco'],
       parts: 'inline SVGs animate per part: untagged / wm-k = object (plays the preset), wm-a / wm-s = moving part / badge (spec parts.A / parts.S, optional delay), wm-deco = decoration (own breathe|float|twinkle loop, never spins with the object; --wm-deco: none keeps it still), wm-shadow = ground shadow (stays put, squashes for float/bounce/rise/drop/jelly), wm-shine = highlight',
       swapVars: ['--wm-swap-dur', '--wm-swap-ease', '--wm-swap-delay', '--wm-swap-hold'], swapTriggers: ['click (aria-pressed / is-on)', 'hover (.wm-trigger)', 'focus (wm-swap-focus)', 'auto (wm-swap-auto)'] },
@@ -1072,7 +1237,7 @@ Reply with:
 4. Ready-to-paste code for my stack, or steps for my app — ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.
 5. A link for each pick: ${BASE}/icons/NAME.html
 
-If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ${BASE}/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).
+If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ${BASE}/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).
 
 Keep it short and practical.`
   const llmsCore = `# ${BRAND}
@@ -1102,13 +1267,14 @@ On every icon page (and in the library's icon viewer) the visitor picks a task f
 - Is this the right icon?: a verdict, what people will read it as, ambiguity or cultural issues, whether it needs a text label, and up to 3 better options.
 - Use it in my slides/doc: which file to grab (Copy image, SVG, or PNG at 256 or 1024 px), how to insert, recolour and resize it in their app, layout tips, and the matching guide (${BASE}/guides/<app>.html). App guides send the same brief for their app.
 
-Assistants answering any of them: read the skill first, look icons up with ${BASE}/api/search?q=<words>, recommend real names only, link each icon's page (${BASE}/icons/<name>.html), and give code to developers or step-by-step instructions for slides, docs and design tools.
+Assistants answering any of them: read the skill first, look icons up with \`${BASE}/api/search?q=<words>\`, recommend real names only, link each icon's page (\`${BASE}/icons/<name>.html\`; the whole library is ${BASE}/icons.html), and give code to developers or step-by-step instructions for slides, docs and design tools.
 
 ## Find an icon (search)
 
-- Library search (understands meaning, aliases and synonyms: "throw away" finds trash): ${BASE}/icons.html?q=<query>
-- Remote API: ${BASE}/api/search?q=<query>
-- MCP server for AI agents: \`npx -y ${SCOPE}/mcp\`
+- Library search (understands meaning, aliases and synonyms: "throw away" finds trash): \`${BASE}/icons.html?q=<query>\`
+- Remote API: \`${BASE}/api/search?q=<query>\` (JSON; also \`/api/icon/<name>?style=&format=\`, \`/api/icon/<name>.svg\`, \`/api/palettes/<name>\`, \`/api/motion/<name>\`)
+- Remote MCP server for AI agents (Streamable HTTP, no install): \`${BASE}/mcp\`. Local: \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, animate_icon, export_icon, resolve_icon, list_palettes, list_styles, list_categories.
+- One command adds the skill and the MCP server to the AI tools in a project (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; or name \`claude-desktop\`, \`lovable\`): \`npx withicons init\` (\`--global\`, \`--mcp remote|local\`, \`--dry-run\`)
 - CLI: \`npx withicons search "<query>"\`
 
 ## Install
@@ -1141,19 +1307,21 @@ import { Icon } from '${SCOPE}/react'                    // <Icon name="home" va
 - Icon classes: \`<i class="with with-home"></i>\` (line), \`<i class="with with-home with-solid"></i>\` (also ${STYLES.slice(2).map(x => `\`with-${x.name}\``).join(', ')}). Load them with \`with-loader.js\` (only the icons on the page) or one stylesheet per style (\`with-line.css\`, \`with-solid.css\`, …), not \`with-all.css\`.
 - Angular: \`import { WithIconComponent, Home } from '${SCOPE}/angular'\`, then \`<with-icon [icon]="Home" />\`.
 - Sprite: \`<svg width="24" height="24"><use href="/sprite-line.svg#with-home"/></svg>\` (symbol ids are \`with-<name>\`).
-- Single SVG: \`${CDN}/${SCOPE}/core/dist/svg/<style>/<name>.svg\`
+- Single SVG (palette colours baked in; \`<img>\` cannot follow currentColor and renders the ink black): \`${CDN}/${SCOPE}/static@latest/dist/svg/<style>/<name>.svg\`, or \`${BASE}/api/icon/<name>.svg?style=<style>\`. CDN links here use \`@latest\`; pin one version (\`@<version>\`) for a look that never changes.
 - Framework SVGs carry \`class="withi withi-<name>"\`. CSS hooks: \`--with-duo\` recolours the duo tone, \`--with-accent\` the blueprint construction lines.
 
 ## Styles (subpath = style name)
 
-${STYLES.map(s => `- \`${s.name}\` (${s.kind}${s.name === 'line' ? ', default' : ''}, colour ${s.hex}): ${s.say} Good for ${s.good}. Page: ${styleUrl(s.name)}`).join('\n')}
+Kinds: universal (UI at any size), creative (illustration, 32px+), palette (full colour, 32px+), studio and storybook (art-directed full-colour illustrations, 48px+). Multi-colour styles paint \`var(--with-<style>-<role>, #hex)\` CSS variables; the ink stays \`currentColor\`.
+
+${STYLES.map(s => `- \`${s.name}\` (${s.group === 'studio' ? 'studio' : s.group === 'storybook' ? 'storybook' : s.palette ? 'palette' : s.kind}${s.name === 'line' ? ', default' : ''}, colour ${s.hex}): ${s.say} Good for ${s.good}. Page: ${styleUrl(s.name)}`).join('\n')}
 
 ## Motion (optional, imported separately)
 
 Animations live in \`${SCOPE}/motion\` and never change the icons. They animate the element that holds the icon, so they work with every style and package. Each icon page has a live editor ("Customize") that previews them, exports an animated SVG and copies the code.
 
 \`\`\`html
-<link rel="stylesheet" href="${CDN}/${SCOPE}/motion/dist/motion.css">
+<link rel="stylesheet" href="${CDN}/${SCOPE}/motion@latest/dist/motion.css">
 <link rel="stylesheet" href="${motionIconCss('bell')}">   <!-- the bell's own moves: one file per animated icon (icons.css has all) -->
 <span class="wm wm-loop" data-wm="bell"><i class="with with-bell"></i></span>               <!-- the icon's own loop -->
 <button class="wm-trigger"><span class="wm wm-hover" data-wm="bell">…</span> Alerts</button>  <!-- plays on hover/focus -->
@@ -1170,12 +1338,25 @@ Animations live in \`${SCOPE}/motion\` and never change the icons. They animate 
 - Parts: an inline SVG inside a \`wm\` wrapper (or \`<with-icon>\`) moves part by part. Styles tag nodes: untagged = the object (plays the move), \`wm-a\`/\`wm-s\` = moving part / badge (spec \`parts\`, e.g. a bell's clapper a beat behind), \`wm-deco\` = decoration (backdrop, sparkles: its own breathe/float/twinkle loop, never spins with the object), \`wm-shadow\` = shadow (stays on the ground). \`<img>\`, \`<i>\` tags, swaps and \`draw\` move as one piece. JS: \`motion(el, 'sun', { deco: 'still' })\`.
 - JS: \`import { motion, swap, motionFor } from '${SCOPE}/motion'\`; web component: \`<with-icon name="bell" motion="hover" swap-to="bell-off" swap-effect="flip">\` after importing \`${SCOPE}/motion/element\`.
 - Per-icon specs (intent, loop, hover, alternatives, swap targets) are in icons.json under \`icons[].motion\`.
+- Animated FILES for slides, docs, email and social (Node 18+, no browser): \`npx withicons export bell --format gif --background "<slide colour>"\` (plays in PowerPoint, Keynote, Google Slides, Gmail, Slack, Notion), \`npx withicons export rocket --style luxe --format pptx-animated --background "<slide colour>"\` (a ready 16:9 slide); also \`apng\`, \`animated-svg\`, \`lottie\`. Quote the colour (\`"#0f172a"\`): an unquoted \`#\` starts a shell comment. Colours are baked in. MCP: \`export_icon\` with the same options.
+
+## Live icons (content you set, \`${SCOPE}/dynamic\`)
+
+A separate set of live icons draws a value inside the icon (a calendar's date, a clock's time, a badge count, a battery level, a short label), in all ${NS} styles. \`today\` fills the date and time from the viewer's clock and keeps it current; \`label\` is the accessible name (say the value).
+
+\`\`\`html
+<script src="${CDN}/${SCOPE}/dynamic@latest/dist/cdn/lite.js"></script>
+<with-live-icon name="calendar-date" today label="Today"></with-live-icon>
+<with-live-icon name="bell-count" count="3" variant="kawaii" label="3 unread"></with-live-icon>
+\`\`\`
+
+React / Vue: \`import { LiveIcon } from '${SCOPE}/dynamic/react'\` (or \`/vue\`), then \`<LiveIcon name="calendar-date" today label="Today" />\`. Pure function: \`render(name, params, style)\` from \`${SCOPE}/dynamic\` never reads the clock (pass \`now()\`). Every live icon: ${BASE}/live.html
 
 ## Props (identical in React, Vue, Svelte, Angular, Solid)
 
 - \`size\` number | string, default 24
 - \`color\` string, default \`currentColor\`
-- \`strokeWidth\` number (line, duo, blueprint, sketch)
+- \`strokeWidth\` number (${STYLES.filter(s => s.strokeWidth).map(s => s.name).join(', ')}; no effect on the filled styles)
 - \`absoluteStrokeWidth\` boolean, default false
 - \`title\` string: adds \`<title>\` and \`role="img"\`; without it the svg is \`aria-hidden="true"\`.
 
@@ -1209,7 +1390,7 @@ MIT. Free for personal and commercial use; no attribution required. Credit line 
   const llmsFull = llmsCore.replace(/^# .*\n/, `# ${BRAND} — full reference\n`) + `
 ## Every icon
 
-Format: name | category | also known as | page URL. Component = PascalCase(name). SVG = ${CDN}/${SCOPE}/core/dist/svg/<style>/<name>.svg
+Format: name | category | also known as | page URL. Component = PascalCase(name). SVG = \`${CDN}/${SCOPE}/static@latest/dist/svg/<style>/<name>.svg\`
 
 ${ICONS.map(i => `${i.name} | ${i.category} | ${akaOf(i).join(', ')} | ${pageUrl(i.name)}`).join('\n')}
 
@@ -1245,16 +1426,20 @@ ${exists('blog/sitemap.xml') ? `Sitemap: ${BASE}/blog/sitemap.xml
   const lastIcon = maxDate(ICONS.map(i => dateOf(i.mtime)))
   const buildDate = maxDate([lastIcon, fileDate(path.join(ROOT, 'forge', 'site.config.json'))])
   // top-level and guide pages are discovered from disk, so new pages land in the sitemap automatically
-  const PRI = { 'index.html': '1.0', 'icons.html': '0.9', 'guides/index.html': '0.8', 'live.html': '0.8', 'developers.html': '0.7', 'ai.html': '0.7' }
+  const PRI = { 'index.html': '1.0', 'icons.html': '0.9', 'guides/index.html': '0.8', 'live.html': '0.8', 'developers.html': '0.7', 'ai.html': '0.7', 'categories/index.html': '0.8', 'styles/index.html': '0.8' }
   // live pages carry their own OG image (site-dynamic.mjs renders live/og/<name>.png, and live/og/index.png for the hub)
   const liveImg = f => {
     const m = f === 'live.html' ? 'index' : (f.match(/^live\/([a-z0-9-]+)\.html$/) || [])[1]
     return m && fs.existsSync(path.join(SITE, 'live', 'og', `${m}.png`)) ? `${BASE}/live/og/${m}.png` : undefined
   }
+  // pages that ask not to be indexed (<meta name="robots" content="noindex…">: ui-kit, redirects) stay out of the sitemap
+  const isNoindex = f => { try { return /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(fs.readFileSync(path.join(SITE, f), 'utf8').slice(0, 6000)) } catch { return false } }
   const discovered = [
     ...fs.readdirSync(SITE).filter(f => f.endsWith('.html') && !/^(404|demo)/.test(f)),
     ...['guides', ...EXTRA_DIRS].flatMap(d => fs.existsSync(path.join(SITE, d)) ? fs.readdirSync(path.join(SITE, d)).filter(f => f.endsWith('.html') && !/^(404|demo)/.test(f)).map(f => `${d}/${f}`) : []),
-  ].sort((a, b) => (PRI[b] || '0.6') - (PRI[a] || '0.6') || (a < b ? -1 : 1))
+    // generated folder overviews (/categories/, /styles/); icons/index.html is a noindex redirect
+    ...['categories', 'styles'].map(d => `${d}/index.html`).filter(f => exists(f)),
+  ].filter(f => !isNoindex(f)).sort((a, b) => (PRI[b] || '0.6') - (PRI[a] || '0.6') || (a < b ? -1 : 1))
   const urls = [
     ...discovered.map(f => ({ loc: f === 'index.html' ? `${BASE}/` : `${BASE}/${f}`, lastmod: fileDate(path.join(SITE, f)) || buildDate, pri: PRI[f] || (/^(guides|alternatives|compare|free|live)\//.test(f) ? '0.7' : '0.6'), freq: f === 'index.html' || f === 'icons.html' ? 'weekly' : 'monthly', img: liveImg(f) })),
     ...STYLES.map(s => ({ loc: styleUrl(s.name), lastmod: lastIcon, pri: '0.8', freq: 'weekly', img: `${BASE}/og/style-${s.name}.png` })),

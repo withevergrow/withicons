@@ -117,11 +117,13 @@ test('cdn script: window.WithLive in a classic-script sandbox, styles via inject
 const stubs = {
   react: `export const createElement = (type, props, ...children) => ({ type, props: props || {}, children })
 export const useState = v => [v, () => {}]
-export const useEffect = () => {}`,
+export const useEffect = () => {}
+export const useRef = v => ({ current: v })`,
   vue: `export const defineComponent = c => c
 export const h = (type, props) => ({ type, props })
 export const ref = v => ({ value: v })
-export const mergeProps = (...ps) => Object.assign({}, ...ps)`,
+export const mergeProps = (...ps) => Object.assign({}, ...ps)
+export const onBeforeUnmount = () => {}`,
 }
 register('data:text/javascript,' + encodeURIComponent(`
 const stubs = ${JSON.stringify(stubs)}

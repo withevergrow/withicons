@@ -456,8 +456,19 @@
   function init() {
     initSteps(); initTabs(); initGuideIndex(); initDevelopers(); initAI(); initAbout(); initFAQ(); initMotion(); initFormats(); openHash()
     var w = WI()
-    // the shared search engine may arrive after us (lazy) — re-run demos once it does
-    if (!getEngine() && w && w.ensureSearch) w.ensureSearch().then(function () { var q = $('[data-ai-q]'); if (q) q.dispatchEvent(new Event('input')); var r = $('[data-resolve-in]'); if (r) r.dispatchEvent(new Event('input')) }, function () { })
+    // the shared search engine (data/meta.js + search-index.js, ~120 KB) is only fetched for a page that has a search
+    // demo, once that demo comes near the screen or is focused; then the demos re-run. Other content pages never load it
+    // (the header search and command palette load it themselves when opened).
+    var demo = $('[data-ai-q]') || $('[data-resolve-in]')
+    if (!getEngine() && demo && w && w.ensureSearch) {
+      var started = false
+      var go = function () {
+        if (started) return; started = true
+        Promise.all([w.ensureSearch(), w.loadStyle ? w.loadStyle('line') : true]).then(function () { var q = $('[data-ai-q]'); if (q) q.dispatchEvent(new Event('input')); var r = $('[data-resolve-in]'); if (r) r.dispatchEvent(new Event('input')) }, function () { })
+      }
+      demo.addEventListener('focus', go, { once: true })
+      if ('IntersectionObserver' in W) { var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting })) { io.disconnect(); go() } }, { rootMargin: '600px 0px' }); io.observe(demo) } else go()
+    }
   }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init()
 })()

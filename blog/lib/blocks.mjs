@@ -117,11 +117,12 @@ export function swapGrid(pairs, style = 'line', caption = '', { size = 40 } = {}
 }
 
 // ---------------------------------------------------------------- media
-export function img(key, { sizes = '(min-width: 1100px) 760px, 100vw', eager = false, cls = '' } = {}) {
+// eager: load now (no lazy); priority: also fetchpriority=high, only for a photo that is the first thing on screen
+export function img(key, { sizes = '(min-width: 1100px) 760px, 100vw', eager = false, priority = eager, cls = '' } = {}) {
   const m = IMAGES[key]
   if (!m) throw new Error(`blog: unknown image "${key}". See blog/images.json`)
   used.images.add(key)
-  return `<img class="${cls}" src="assets/img/${key}-1600.webp" srcset="assets/img/${key}-800.webp 800w, assets/img/${key}-1600.webp 1600w" sizes="${sizes}" width="1600" height="1000" alt="${esc(m.alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
+  return `<img class="${cls}" src="assets/img/${key}-1600.webp" srcset="assets/img/${key}-800.webp 800w, assets/img/${key}-1600.webp 1600w" sizes="${sizes}" width="1600" height="1000" alt="${esc(m.alt)}" ${eager ? (priority ? 'fetchpriority="high"' : 'loading="eager"') : 'loading="lazy"'} decoding="async">`
 }
 export const credit = key => { const m = IMAGES[key]; return `Photo: <a href="${m.profile}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">${esc(m.by)}</a> on <a href="${m.source}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">Unsplash</a>` }
 

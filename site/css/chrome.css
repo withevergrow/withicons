@@ -184,7 +184,7 @@ kbd, .kbd { display: inline-grid; place-items: center; min-width: 1.6em; height:
 .site-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .search-trigger { display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 8px 0 14px; border-radius: var(--pill); cursor: pointer;
   border: 1px solid var(--rule-strong); background: var(--card); color: var(--muted); font: 500 14px/1 var(--font-sans); transition: border-color .2s, color .2s, transform .3s var(--e-out), box-shadow .3s; }
-.search-trigger svg { width: 18px; height: 18px; color: var(--ink); }
+.search-trigger svg { width: 18px; height: 18px; flex: none; color: var(--ink); }
 .search-trigger:hover { border-color: var(--ink); color: var(--ink); box-shadow: var(--shadow-s); }
 .search-trigger kbd { font-size: 12px; }
 .search-trigger .st-label { white-space: nowrap; }
@@ -226,6 +226,8 @@ html.menu-open .site-header::before { inset: 0; border-radius: 0; box-shadow: no
   .search-trigger .st-label { display: none; }
   .search-trigger { padding: 0 6px 0 12px; }
   .site-nav a { padding: 9px 11px; }
+  .search-trigger kbd { display: none; }
+  .search-trigger { width: 42px; padding: 0; justify-content: center; flex: none; }
 }
 @media (max-width: 900px) {
   :root { --header-h: 64px; }

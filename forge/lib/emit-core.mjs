@@ -266,6 +266,16 @@ function withLookup(input, has, names, aliases) {
 }
 export const LOOKUP_SRC = [withLevenshtein, withKeys, withNearest, withLookup].map(f => f.toString()).join('\n')
 
+// Runs in the browser (inlined by its source into cdn.js, with-loader.js, with-icons.js and the dynamic CDN scripts).
+// A bare package URL (https://cdn.jsdelivr.net/npm/@withicons/web, …/web@latest, …/web@0.2, unpkg.com/@withicons/web)
+// serves the package's "jsdelivr" / "unpkg" entry file, but relative URLs then resolve against …/npm/@withicons/.
+// Returns this exact version's folder `dir` (e.g. 'dist/') on the same host, or null when `src` is a real file path
+// (pinned or @latest …/dist/x.js, node_modules, a self-hosted copy), which then resolves next to itself as before.
+export function withBareBase(src, pkg, version, dir) {
+  var m = /^(https?:\/\/[^?#]*\/)@withicons\/([\w.-]+)(@[^/?#]*)?\/?([?#].*)?$/.exec(String(src || ''))
+  return m && m[2] === pkg ? m[1] + '@withicons/' + pkg + '@' + version + '/' + dir : null
+}
+
 function withScore(icon, q, tokens) {
   let total = 0
   if (icon.name === q) total += 100

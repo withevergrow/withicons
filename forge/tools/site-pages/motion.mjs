@@ -240,9 +240,9 @@ import { WithIconComponent, Bell, Play, Pause } from '@withicons/angular'
   \`,
 })
 export class ToolbarComponent { Bell = Bell; Play = Play; Pause = Pause; playing = signal(false) }`, 'ts', 'toolbar.component.ts')],
-    ['element', '&lt;with-icon&gt;', code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/element.js"></script>
+    ['element', '&lt;with-icon&gt;', code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/element.js"></script>
 
 <with-icon name="bell" motion="loop"></with-icon>                <!-- its own animation, forever -->
 <with-icon name="heart" variant="solid" motion="hover"></with-icon> <!-- plays on hover / focus -->
@@ -287,8 +287,8 @@ toggle.toggle(true)   // force "on"`, 'js', 'app.js')],
       <h3 id="motion-install">Install</h3>
       <div class="mo-two">
         <div>${code('npm i @withicons/motion', 'sh', 'Terminal')}<p class="pg-note">${sizeNote()}</p></div>
-        <div>${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/icons/bell.css">`, 'html', 'CDN')}<p class="pg-note"><code>motion.css</code> has the presets (about 10 KB gzipped). <code>icons/&lt;name&gt;.css</code> adds one icon’s own motion (<code>data-wm="bell"</code>), a few hundred bytes each; <code>icons.css</code> has all ${ICON_NAMES.length} at once (about 18 KB gzipped). Pin a version in production.</p></div>
+        <div>${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">`, 'html', 'CDN')}<p class="pg-note"><code>motion.css</code> has the presets (about 10 KB gzipped). <code>icons/&lt;name&gt;.css</code> adds one icon’s own motion (<code>data-wm="bell"</code>), a few hundred bytes each; <code>icons.css</code> has all ${ICON_NAMES.length} at once (about 18 KB gzipped). Pin a version in production.</p></div>
       </div>
 
       <h3 id="motion-css">CSS only: add two classes</h3>

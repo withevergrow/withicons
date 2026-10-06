@@ -38,29 +38,141 @@
     var el = $(b.getAttribute('data-ip-copy')); if (!el) return
     copyText(el.textContent).then(function (ok) {
       var l = $('span', b); b.classList.add('is-done'); if (l) l.textContent = ok ? 'Copied' : 'Press Ctrl+C'
-      setTimeout(function () { b.classList.remove('is-done'); if (l) l.textContent = 'Copy' }, 1500)
+      if (W.WI && W.WI.announce) W.WI.announce(ok ? 'Copied to clipboard' : 'Copy failed, press Ctrl+C')
+      clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('is-done'); if (l) l.textContent = 'Copy' }, 1500)
     })
   })
-  var tabs = $$('.ip-tabs [role="tab"]')
-  function selectTab(t, focus) {
+
+  /* the visitor's stack: one choice shared by the hero's "Use it in code" bar, the developer tabs and the library viewer */
+  var STACKS = /^(html|react|vue|svelte|angular|solid|web|svg)$/
+  function getStack() { try { var v = String(localStorage.getItem('with-stack') || '').replace(/"/g, ''); return STACKS.test(v) ? v : '' } catch (e) { return '' } }
+  function putStack(v) { if (STACKS.test(v)) try { localStorage.setItem('with-stack', v) } catch (e) { } }
+
+  var tabs = $$('.ip-tabs [role="tab"]'), row = $('[data-tabs-row]'), more = $('[data-tabs-more]')
+  var moreB = more && $('.ip-more-b', more), moreM = more && $('.ip-more-m', more), moreL = more && $('[data-more-l]', more)
+  var visTabs = function () { return tabs.filter(function (t) { return !t.classList.contains('is-over') }) }
+  function selectTab(t, focus, quiet) {
+    if (!t) return
     tabs.forEach(function (x) {
       var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1
-      var p = D.getElementById(x.getAttribute('aria-controls')); if (p) p.hidden = !on
+      var p = D.getElementById(x.getAttribute('aria-controls')); if (p) { p.hidden = !on; p.removeAttribute('data-off') }
     })
-    if (focus) t.focus()
-    try { localStorage.setItem('with-ip-tab', t.getAttribute('data-tab')) } catch (e) { }
+    if (focus) (t.classList.contains('is-over') ? moreB : t).focus()
+    var id = t.getAttribute('data-tab')
+    if (!quiet) { putStack(id); setQuick(id, true) }
+    syncMore()
   }
-  tabs.forEach(function (t, i) {
+  tabs.forEach(function (t) {
     t.addEventListener('click', function () { selectTab(t) })
     t.addEventListener('keydown', function (e) {
+      var vis = visTabs(), i = vis.indexOf(t)
       var k = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-      if (k) { e.preventDefault(); selectTab(tabs[(i + k + tabs.length) % tabs.length], true) }
-      else if (e.key === 'Home') { e.preventDefault(); selectTab(tabs[0], true) } else if (e.key === 'End') { e.preventDefault(); selectTab(tabs[tabs.length - 1], true) }
+      if (k && i === vis.length - 1 && k > 0 && more && !more.hidden) { e.preventDefault(); moreB.focus(); return }
+      if (k) { e.preventDefault(); selectTab(vis[(i + k + vis.length) % vis.length], true) }
+      else if (e.key === 'Home') { e.preventDefault(); selectTab(vis[0], true) } else if (e.key === 'End') { e.preventDefault(); selectTab(vis[vis.length - 1], true) }
     })
   })
-  try { var saved = localStorage.getItem('with-ip-tab'); var st0 = saved && $('.ip-tabs [data-tab="' + saved + '"]'); if (st0) selectTab(st0) } catch (e) { }
-  function openDev() { if (/^#(developers|use-)/.test(location.hash)) { var dv = $('.ip-dev'); if (dv) dv.open = true } }
+  // priority+: the tabs that don't fit on one row move into a "More" menu (the selected one always stays reachable)
+  function fit() {
+    if (!row || !more || !tabs.length) return
+    tabs.forEach(function (t) { t.classList.remove('is-over') }); more.hidden = true
+    var list = $('.ip-tabs', row)
+    if (!row.offsetWidth || list.scrollWidth <= list.clientWidth + 1) { syncMore(); return }
+    more.hidden = false
+    for (var k = tabs.length - 1; k > 0 && list.scrollWidth > list.clientWidth + 1; k--) tabs[k].classList.add('is-over')
+    syncMore()
+  }
+  function syncMore() {
+    if (!more) return
+    var over = tabs.filter(function (t) { return t.classList.contains('is-over') })
+    var cur = over.filter(function (t) { return t.getAttribute('aria-selected') === 'true' })[0]
+    moreM.innerHTML = over.map(function (t) { var on = t.getAttribute('aria-selected') === 'true'; return '<button type="button" role="menuitemradio" aria-checked="' + on + '" tabindex="-1" data-tab-go="' + t.getAttribute('data-tab') + '">' + esc(t.textContent) + '</button>' }).join('')
+    moreL.textContent = cur ? cur.textContent : 'More'
+    moreB.classList.toggle('is-on', !!cur)
+  }
+  function menu(open, focusFirst) {
+    if (!more) return
+    moreM.hidden = !open; moreB.setAttribute('aria-expanded', open ? 'true' : 'false')
+    if (open) { var items = $$('[role="menuitemradio"]', moreM), f = items.filter(function (x) { return x.getAttribute('aria-checked') === 'true' })[0] || items[0]; if (f && focusFirst !== false) f.focus() }
+  }
+  if (more) {
+    moreB.addEventListener('click', function () { menu(moreM.hidden) })
+    moreB.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); menu(true) }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); var vis = visTabs(); selectTab(vis[vis.length - 1], true) }
+    })
+    moreM.addEventListener('click', function (e) { var b = e.target.closest('[data-tab-go]'); if (!b) return; menu(false); selectTab($('.ip-tabs [data-tab="' + b.getAttribute('data-tab-go') + '"]'), false); moreB.focus() })
+    moreM.addEventListener('keydown', function (e) {
+      var items = $$('[role="menuitemradio"]', moreM), i = items.indexOf(D.activeElement)
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus() }
+      else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); items[e.key === 'Home' ? 0 : items.length - 1].focus() }
+      else if (e.key === 'Escape' || e.key === 'Tab') { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); moreB.focus() } menu(false, false) }
+    })
+    D.addEventListener('pointerdown', function (e) { if (!moreM.hidden && !more.contains(e.target)) menu(false, false) })
+    var fq = 0; W.addEventListener('resize', function () { if (!fq) fq = requestAnimationFrame(function () { fq = 0; fit() }) })
+    var dvx = $('.ip-dev'); if (dvx) dvx.addEventListener('toggle', fit)
+    if (D.fonts && D.fonts.ready) D.fonts.ready.then(fit)
+  }
+  // the panels are all readable without JS; with it, one shows at a time
+  var st0 = (location.hash.match(/^#use-([a-z]+)$/) || [])[1] || getStack()
+  selectTab((st0 && $('.ip-tabs [data-tab="' + st0 + '"]')) || tabs[0], false, true)
+  fit()
+  function openDev() {
+    var m = location.hash.match(/^#(developers|use-([a-z]+))$/); if (!m) return
+    var dv = $('.ip-dev'); if (dv) dv.open = true
+    if (m[2]) selectTab($('.ip-tabs [data-tab="' + m[2] + '"]'), false, true)
+  }
   openDev()
+
+  /* the hero's "Use it in code" bar */
+  var qu = $('[data-qu]'), quPick = qu && $('[data-qu-pick]', qu)
+  function setQuick(v, fromTabs) {
+    if (!qu || !STACKS.test(v)) return
+    qu.setAttribute('data-stack', v)
+    if (quPick && quPick.value !== v) quPick.value = v
+    if (!fromTabs) { putStack(v); selectTab($('.ip-tabs [data-tab="' + v + '"]'), false, true) }
+  }
+  if (qu) {
+    setQuick(getStack() || qu.getAttribute('data-stack'), true)
+    quPick.addEventListener('change', function () {
+      setQuick(quPick.value)
+      if (!reduced()) { var ln = $('[data-qu-line="' + quPick.value + '"] .ip-qu-code', qu); if (ln && ln.animate) ln.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.22,1,.36,1)' }) }
+    })
+    // the site's own dropdown (js/ui-kit.js, window.WIKit) replaces the browser's: the <select> stays the source of truth
+    // (and the no-JS fallback). The kit loads after the page (or the moment the visitor reaches for the picker).
+    var kitP = null
+    var kitUp = function () {
+      if (kitP) return kitP
+      var css = D.querySelector('link[href$="ui-kit.css"]') ? Promise.resolve() : new Promise(function (ok) { var l = D.createElement('link'); l.rel = 'stylesheet'; l.href = BASE + 'css/ui-kit.css'; l.onload = l.onerror = function () { ok() }; D.head.appendChild(l) })
+      var js = W.WIKit ? Promise.resolve() : new Promise(function (ok) { var s = D.createElement('script'); s.src = BASE + 'js/ui-kit.js'; s.async = true; s.onload = s.onerror = function () { ok() }; D.head.appendChild(s) })
+      return (kitP = Promise.all([css, js]).then(function () {
+        var K = W.WIKit; if (!K || !K.select || K.get && K.get(quPick)) return
+        var hadFocus = D.activeElement === quPick
+        try { K.select(quPick, { search: false, label: 'Your stack' }); quPick.parentNode.classList.add('is-kit') } catch (e) { return }
+        if (hadFocus) { var cb = $('.wk-select', quPick.parentNode); if (cb) cb.focus() }
+      }))
+    }
+    var pickWrap = quPick.parentNode
+    ;['pointerenter', 'focusin', 'touchstart'].forEach(function (ev) { pickWrap.addEventListener(ev, function () { kitUp() }, { once: true, passive: true }) })
+    if (D.readyState === 'complete') setTimeout(kitUp, 400); else W.addEventListener('load', function () { if (W.requestIdleCallback) W.requestIdleCallback(function () { kitUp() }, { timeout: 2000 }); else setTimeout(kitUp, 800) })
+    var all = $('[data-qu-all]', qu)
+    if (all) all.addEventListener('click', function (e) {
+      var sec = $('#developers'), dv = $('.ip-dev'); if (!sec || !dv) return
+      e.preventDefault(); dv.open = true; fit()
+      var t = $('.ip-tabs [data-tab="' + qu.getAttribute('data-stack') + '"]')
+      selectTab(t, false, true)
+      sec.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' })
+      if (history.replaceState) history.replaceState(null, '', '#developers')
+      setTimeout(function () { try { (t && !t.classList.contains('is-over') ? t : moreB || t).focus({ preventScroll: true }) } catch (err) { } }, reduced() ? 0 : 500)
+    })
+  }
+  // tiny colouring for the bar's code (the same rules as the page generator's)
+  function hl(code) {
+    var re = /(\/\/[^\n]*|<!--[\s\S]*?-->)|('(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*")|\b(import|from|export|const|function|return|class|default|as)\b|(<\/?[A-Za-z][\w.-]*)/g
+    var out = '', last = 0, m
+    while ((m = re.exec(code))) { out += esc(code.slice(last, m.index)) + '<span class="' + (m[1] ? 'tk-c' : m[2] ? 'tk-s' : m[3] ? 'tk-k' : 'tk-t') + '">' + esc(m[0]) + '</span>'; last = re.lastIndex }
+    return out + esc(code.slice(last))
+  }
 
   /* ───────── icon page ───────── */
   var dataEl = $('#ip-data'), root = $('[data-ip]')
@@ -157,11 +269,23 @@
   function colorCss(st) { return ed && st === S.style && S.colors && S.colors.custom ? S.colors.css : '' }
   function tagText(st) { var c = colorCss(st); return '<i class="with with-' + DATA.name + (st === 'line' ? '' : ' with-' + st) + '"' + (c ? ' style="' + c + '"' : '') + '></i>' }
   function cssText(st) {
-    var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/classes/dist/'
+    var base = DATA.cdn || 'https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/'
     // with-loader.js links only the CSS of the icons on the page (any style mix); custom colours need the inline-SVG runtime
     return '<script src="' + base + (colorCss(st) ? 'with-icons.js' : 'with-loader.js') + '" defer></script>'
   }
   function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
+  // the "Use it in code" bar follows the picked style (and, for the <i> tag, the studio's custom colours)
+  function quickFill(t, s) { return t.replace(/\{sub\}/g, s === 'line' ? '' : '/' + s).replace(/\{cls\}/g, s === 'line' ? '' : ' with-' + s).replace(/\{var\}/g, s === 'line' ? '' : ' variant="' + s + '"').replace(/\{style\}/g, s) }
+  function quickPaint() {
+    if (!qu || !DATA.qu) return
+    Object.keys(DATA.qu).forEach(function (id) {
+      var c = $('#qu-' + id), txt = id === 'html' ? tagText(S.style) : quickFill(DATA.qu[id], S.style)
+      if (c && c.textContent !== txt) c.innerHTML = hl(txt).replace(/>([^<]+)</g, function (m, t) { return '>' + t.split(' ').map(function (w) { return w && w.length < 32 && w.indexOf('\n') < 0 ? '<span class="nw">' + w + '</span>' : w }).join(' ') + '<' })
+    })
+    var su = $('#qus-html'); if (su) { var t = cssText(S.style); if (su.textContent !== t) { su.textContent = t; su.title = t } }
+    // "Make it bigger or smaller": the 48 px one-liners follow the picked style too
+    $$('[data-fill]', qu).forEach(function (c) { var t = quickFill(c.getAttribute('data-fill'), S.style); if (c.textContent !== t) c.textContent = t })
+  }
   function busy(b, on) { if (!b) return; b.classList.toggle('is-busy', !!on); if (on) b.setAttribute('aria-busy', 'true'); else b.removeAttribute('aria-busy') }
 
   function act(kind, st, btn) {
@@ -245,6 +369,7 @@
     var ps = $('[data-pick-say]', root); if (ps && s.say) ps.textContent = s.say
     var tc = $('[data-tag-code]', root); if (tc) tc.innerHTML = nowrapTokens(tagText(S.style))
     var cc = $('[data-tag-css]', root); if (cc) cc.textContent = cssText(S.style)
+    quickPaint()
     root.classList.toggle('is-white', S.color === '#FFFFFF')
     // "Make it yours": the current choices at a glance
     var dot = $('[data-now-dot]'); if (dot) dot.style.background = multi() ? (S.colors && S.colors.custom && S.colors.main ? S.colors.main : s.hex) : S.color === 'ink' ? INK : (S.hex || hexOf(S.style))
@@ -416,8 +541,10 @@
     }
   }
   function modeInk() {
-    var on = sheet && $('.ip-sheet-modes [aria-selected="true"]', sheet), ink = sheet && $('.ip-sheet-ink', sheet)
-    if (on && ink && on.offsetWidth) { ink.style.width = on.offsetWidth + 'px'; ink.style.transform = 'translateX(' + on.offsetLeft + 'px)' }
+    // no measuring: the modes are equal grid columns, so CSS places the pill from the active index alone
+    var box = sheet && $('.ip-sheet-modes', sheet); if (!box) return
+    var bs = $$('[data-mode]', box), k = bs.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true' })
+    box.style.setProperty('--n', bs.length); box.style.setProperty('--i', Math.max(0, k))
   }
   var goSeen = null, goIO = null, goNear = false
   function sheetFoot() {
@@ -522,7 +649,7 @@
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' && e.key !== 'Home' && e.key !== 'End') return
       e.preventDefault(); setMode(e.key === 'ArrowRight' || e.key === 'End' ? 'download' : 'customize', true)
     })
-    W.addEventListener('resize', function () { if (sheetOpen) { modeInk(); sheetFoot() } })
+    W.addEventListener('resize', function () { if (sheetOpen) sheetFoot() })
     // the footer's phone Download button follows the panel's own (its format, and 'Making your GIF…' while busy)
     if (W.MutationObserver) { var footQ = 0; new MutationObserver(function () { if (footQ || !sheetOpen || mode !== 'download' || !phone.matches) return; footQ = requestAnimationFrame(function () { footQ = 0; sheetFoot() }) }).observe(body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['aria-disabled', 'disabled'] }) }
     // phones: drag the header down to close

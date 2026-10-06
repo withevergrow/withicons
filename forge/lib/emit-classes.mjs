@@ -15,7 +15,7 @@
 import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc, distWriter, basePkg, writePkg } from './emit-core.mjs'
+import { J, LOOKUP_SRC, withBareBase, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc, distWriter, basePkg, writePkg } from './emit-core.mjs'
 
 const MODIFIERS = ['xs', 'sm', 'lg', '2x', '3x', '4x', '5x', 'fw', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270',
   'flip-h', 'flip-v', 'flip-both', 'rtl']
@@ -34,7 +34,7 @@ function baseCss() {
   const sizes = { xs: '.75em', sm: '.875em', '2x': '2em', '3x': '3em', '4x': '4em', '5x': '5em' }
   return [
     // .with keeps real (0,1,0) specificity; modifiers use .with.with-x (0,2,0) so they win regardless of file order
-    `.with{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex-shrink:0;font-style:normal;line-height:1;background:var(--with-p,none) center/contain no-repeat}`,
+    `.with{display:inline-block;width:var(--with-size,1em);height:var(--with-size,1em);vertical-align:-.125em;flex-shrink:0;font-style:normal;line-height:1;background:var(--with-p,none) center/contain no-repeat}`,
     `.with::after{content:"";display:block;width:100%;height:100%;background-color:currentColor;-webkit-mask:${MASK};mask:${MASK}}`,
     `.with[data-with-svg]{background:none}.with[data-with-svg]::after{content:none}`,
     `.with>.with-svg{display:block;width:100%;height:100%;overflow:visible}`,
@@ -145,10 +145,11 @@ function withRuntime() {
   // (alias + meta + style chunks, e.g. @withicons/web's dist/data/) and data-with-icons="…/icons/".
   var me = document.currentScript || document.querySelector('script[src*="with-icons"]')
   var attr = function (k) { return (me && me.getAttribute(k)) || '' }
-  var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
+  var here = (me && (withBareBase(me.src, 'classes', VERSION, 'dist/') || me.src)) || document.baseURI
+  var abs = function (u) { try { return new URL(u, here).href } catch (e) { return u } }
   var web = null
   if (WEB) {
-    var src = (me && me.src) || '', wm = /^(.*\/)(@withicons\/|packages\/)classes(@[^/]*)?\/dist\//.exec(src)
+    var src = me ? here : '', wm = /^(.*\/)(@withicons\/|packages\/)classes(@[^/]*)?\/dist\//.exec(src)
     web = attr('data-with-web') ? abs(attr('data-with-web')) : wm ? wm[1] + wm[2] + 'web' + (wm[3] || '') + '/dist/' : 'https://cdn.jsdelivr.net/npm/@withicons/web@' + VERSION + '/dist/'
   }
   var base = abs(attr('data-with-base') || DATA_BASE)
@@ -337,7 +338,9 @@ function withLoader() {
   var seen = {}
   var warn = function (m) { if (!seen[m] && typeof console !== 'undefined') { seen[m] = 1; console.warn(m) } }
   var me = document.currentScript || document.querySelector('script[src*="with-loader"]')
-  var abs = function (u) { try { return new URL(u, (me && me.src) || document.baseURI).href } catch (e) { return u } }
+  // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/classes) serves this script outside dist/: resolve from dist/
+  var here = (me && (withBareBase(me.src, 'classes', VERSION, 'dist/') || me.src)) || document.baseURI
+  var abs = function (u) { try { return new URL(u, here).href } catch (e) { return u } }
   var cssBase = abs((me && me.getAttribute('data-with-css')) || './')
   var dataBase = abs((me && me.getAttribute('data-with-base')) || './data/')
   var STYLE_SET = {}, RES = {}, NAMES = {}, DONE = {}, ALIAS = {}, META = null
@@ -439,6 +442,7 @@ var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
 ${LOOKUP_SRC}
 ${withShard}
+${withBareBase}
 ;(${withLoader.toString()})()
 })()
 `
@@ -472,6 +476,7 @@ var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
 ${LOOKUP_SRC}
 ${withShard}
+${withBareBase}
 ;(${withRuntime.toString()})()
 })()
 `
@@ -629,6 +634,17 @@ It can be combined with the CSS files: the mask shows until the SVG arrives, the
 - Opt a subtree out with \`data-with-skip\`.
 - \`window.WithIcons\`: \`render(root?)\`, \`svg(name, style?, opts?)\` (Promise of an svg string), \`load(style)\`, \`styles\`, \`version\`.
   Types: \`dist/with-icons.d.ts\`.
+
+### Size
+
+An icon is \`1em\` square, so it follows the text size. Setting only \`height\` does not grow it (the width stays \`1em\`).
+Any of these works:
+
+\`\`\`html
+<i class="with with-home" style="font-size: 48px"></i>      <!-- 1. font-size (also scales with the text around it) -->
+<i class="with with-home with-3x"></i>                       <!-- 2. a size class: 3 x the text size -->
+<i class="with with-home" style="--with-size: 48px"></i>    <!-- 3. an exact size, whatever the text size -->
+\`\`\`
 
 ### Modifiers
 
@@ -815,7 +831,9 @@ export default async function emit(ctx) {
       const st = ctx.styles.find(x => x.name === r.style) || s
       const L = layerUris(st, r.nodes)
       if (L) { layered++; return [i.name, `--with-i:${L.i};--with-p:${L.p}`] }
-      return [i.name, `--with-i:${maskUri(s, innerOf(ctx, i, s.name))}`]
+      // --with-p:none on every one-layer rule: with-all.css also holds the palette files' zero-specificity
+      // `:where(.with-home){--with-p:…}`, which would otherwise paint the last palette style behind a line icon
+      return [i.name, `--with-i:${maskUri(s, innerOf(ctx, i, s.name))};--with-p:none`]
     })
   }
 

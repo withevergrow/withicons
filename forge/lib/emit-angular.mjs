@@ -101,6 +101,8 @@ export { iconNames, styleNames } from './meta'
     ...basePkg(ctx, '@withicons/angular', `${ctx.icons.length} icons x ${ctx.styles.length} styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.`, ['angular', 'angular-icons', 'standalone', 'svg-icons', 'multicolor-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),
     type: 'module', sideEffects: false,
     module: './dist/index.mjs', typings: './dist/index.d.ts',
+    // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/angular) shows the entry instead of a 404
+    jsdelivr: './dist/index.mjs', unpkg: './dist/index.mjs',
     exports: ex, typesVersions: { '*': tv },
     files: ['dist', 'README.md', 'LICENSE'],
     scripts: { test: 'node --test test/*.test.mjs' },

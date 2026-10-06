@@ -23,6 +23,7 @@ import os from 'os'
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads'
 import { performance } from 'perf_hooks'
 import { fileURLToPath, pathToFileURL } from 'url'
+import { withBareBase } from './emit-core.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const PKG = path.join(ROOT, 'packages', 'dynamic')
@@ -93,12 +94,13 @@ function livePlugin({ gens, styles, version, mode }) {
       `const inWorker = typeof document === 'undefined' && typeof importScripts === 'function' && typeof self !== 'undefined'\n` +
       `const cs = typeof document !== 'undefined' && (document.currentScript || [].slice.call(document.querySelectorAll ? document.querySelectorAll('script[src*="dynamic"]') : []).pop())\n` +
       `const src = inWorker ? (self.WITH_LIVE_SRC || '') : cs && cs.src ? cs.src : ''\n` +
-      `const base = src ? src.replace(/[^/]*([?#].*)?$/, '') : ''\n` +
+      // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/dynamic) serves this script outside dist/cdn/: load from there
+      `${withBareBase}\nconst base = src ? withBareBase(src, 'dynamic', ${J(version)}, 'dist/cdn/') || src.replace(/[^/]*([?#].*)?$/, '') : ''\n` +
       `const file = (dir, n) => new Promise((ok, bad) => { const u = base + dir + '/' + n + '.js'; if (inWorker) { try { importScripts(u); return ok() } catch (e) { return bad(new Error('with icons live: could not load ' + u)) } } if (typeof document === 'undefined') return bad(new Error('with icons live: ' + dir + '/' + n + '.js needs a document to load; include it with a script tag')); const s = document.createElement('script'); s.src = u; s.async = true; s.onload = () => ok(); s.onerror = () => bad(new Error('with icons live: could not load ' + u)); document.head.appendChild(s) })\n` +
       `const script = n => file('styles', n)\n` +
       `core.register(line)\ncore.setLoaders({ ${others.map(n => `${J(n)}: () => script(${J(n)})`).join(', ')} })\n` +
       (lazy ? `core.setIconLoader(n => file('gens', n))\n` : '') +
-      `const api = Object.assign({}, core, { WithLiveIconElement: el.WithLiveIconElement, defineLiveIcon: el.defineLiveIcon, __kernel: { geom, bool }${lazy ? ', __font: font' : ''} })\n` +
+      `const api = Object.assign({}, core, { WithLiveIconElement: el.WithLiveIconElement, defineLiveIcon: el.defineLiveIcon, animateTo: el.animateTo, __kernel: { geom, bool }${lazy ? ', __font: font' : ''} })\n` +
       `globalThis.WithLive = api\n` +
       `if (inWorker) core.serveWorker(self)\n` +
       `else {\n  el.defineLiveIcon()\n` +
@@ -117,7 +119,7 @@ function livePlugin({ gens, styles, version, mode }) {
     'lite-base': () => `import { register, setLoaders } from ${J(CORE)}\nimport line from ${J(styleFile('line'))}\nregister(line)\n` +
       `setLoaders({ ${others.map(n => `${J(n)}: () => import(${J('with-live:style/' + n)})`).join(', ')} })`,
     'entry/lite': () => `import 'with-live:lite-base'\nexport * from ${J(CORE)}` + ESM_WORKER,
-    'entry/element': () => `import 'with-live:lite-base'\nimport { defineLiveIcon } from ${J(ELEMENT)}\nexport * from ${J(CORE)}\nexport { WithLiveIconElement, defineLiveIcon } from ${J(ELEMENT)}` + ESM_WORKER + `\ndefineLiveIcon()`,
+    'entry/element': () => `import 'with-live:lite-base'\nimport { defineLiveIcon } from ${J(ELEMENT)}\nexport * from ${J(CORE)}\nexport { WithLiveIconElement, defineLiveIcon, animateTo } from ${J(ELEMENT)}` + ESM_WORKER + `\ndefineLiveIcon()`,
     'entry/react': () => `import 'with-live:lite-base'\nexport * from ${J(posix(path.join(SRC, 'react.js')))}\nexport { default } from ${J(posix(path.join(SRC, 'react.js')))}` + ESM_WORKER,
     'entry/vue': () => `import 'with-live:lite-base'\nexport * from ${J(posix(path.join(SRC, 'vue.js')))}\nexport { default } from ${J(posix(path.join(SRC, 'vue.js')))}` + ESM_WORKER,
     // the render worker (module worker): lite + lazy styles, answers render jobs from the page
@@ -267,6 +269,36 @@ export declare function setLoaders(map: Record<string, () => Promise<unknown>>):
 /** local date/time as params: { day, month, weekday, year, time } */
 export declare function now(date?: Date): { day: number; month: string; weekday: string; year: number; time: string }
 export declare function clearCache(): void
+/** What the icon shows, in words: describe('calendar-date', { day: 17, month: 'MAR' }) -> 'Calendar date, March 17' */
+export declare function describe(name: string, params?: Record<string, unknown>): string
+export type Ease = 'linear' | 'out' | 'in-out' | 'roll' | 'spring' | ((t: number) => number)
+export interface TransitionPlan { name: string; style: string; ms: number; swap: boolean; from: Record<string, unknown>; to: Record<string, unknown>; frames: { t: number; params: Record<string, unknown> }[] }
+export interface TransitionOptions {
+  /** duration in ms (default 650) */
+  ms?: number
+  /** overrides the per-kind easing (numbers roll, levels spring, clock hands in-out) */
+  ease?: Ease
+  /** a new transition with the same owner cancels this one */
+  owner?: unknown
+  /** draw one frame: params render() draws at once (cached or cheap); swap: choices or text changed on this frame */
+  paint?: (params: Record<string, unknown>, info: { t: number; final: boolean; swap: boolean; plan: TransitionPlan }) => void
+  /** always called at the end (false: cancelled) */
+  done?: (completed: boolean) => void
+  /** force a frame count */
+  frames?: number
+}
+export interface Transition { done: Promise<boolean>; cancel(): void; readonly params: Record<string, unknown>; plan: TransitionPlan }
+/** The params at t (0..1) between two sets of params, eased per kind; t >= 1 is exactly the target. */
+export declare function interpolate(name: string, from: Record<string, unknown>, to: Record<string, unknown>, t: number, options?: { ease?: Ease }): Record<string, unknown>
+/** The frames a transition will paint in this style on this device. */
+export declare function plan(name: string, from: Record<string, unknown>, to: Record<string, unknown>, style?: string, options?: TransitionOptions): TransitionPlan
+/** Run a transition on the shared animation-frame loop (instant with reduced motion). */
+export declare function transition(name: string, from: Record<string, unknown>, to: Record<string, unknown>, style?: string, options?: TransitionOptions): Transition
+/** { reduced: true | false | null (follow prefers-reduced-motion), raf } */
+export declare function setMotion(options: { reduced?: boolean | null; raf?: ((cb: (t: number) => void) => unknown) | null }): void
+export declare function reducedMotion(): boolean
+export declare function animating(): boolean
+export declare const DEFAULT_MS: number
 export declare function paramAttr(param: string): string
 export declare function attrParam(attr: string): string
 export declare function paramAttributes(): string[]
@@ -282,7 +314,11 @@ export declare class WithLiveIconElement extends HTMLElement {
   label: string | null
   today: boolean
   params: Record<string, unknown>
+  /** Move to new param values with a transition; resolves when they are drawn. */
+  animateTo(values: Record<string, unknown>, options?: { ms?: number; ease?: import('./index.js').Ease }): Promise<void>
 }
+/** Animate a <with-live-icon> to new values (numbers roll, levels ease, clock hands the short way, words cross-fade). */
+export declare function animateTo(el: Element, values: Record<string, unknown>, options?: { ms?: number; ease?: import('./index.js').Ease }): Promise<void>
 export declare function defineLiveIcon(tagName?: string): void
 declare global { interface HTMLElementTagNameMap { 'with-live-icon': WithLiveIconElement } }
 `
@@ -300,18 +336,22 @@ export type LiveIconProps<N extends LiveIconName | (string & {}) = LiveIconName>
   params?: LiveParams<N>
   /** date-like icons: fill day/month/weekday/time from the viewer's clock */
   today?: boolean
+  /** move to new values instead of jumping (true, or a duration in ms) */
+  animate?: boolean | number
 } & LiveParams<N> & Omit<SVGProps<SVGSVGElement>, 'name' | 'color' | 'strokeWidth' | 'ref'>
 export declare function LiveIcon<N extends LiveIconName | (string & {})>(props: LiveIconProps<N>): ReactElement
 export default LiveIcon
-export { render, renderAsync, load, list, get, defaults, catalog, styles, resolve, validate } from './index.js'
+export { render, renderAsync, load, list, get, defaults, catalog, styles, resolve, validate, describe, transition, interpolate, setMotion } from './index.js'
 `
 const VUE_DTS = `import type { DefineComponent } from 'vue'
 export declare const LiveIcon: DefineComponent<{
   name: string; variant?: string; size?: number | string; color?: string; strokeWidth?: number | string
   absoluteStrokeWidth?: boolean; label?: string; vars?: Record<string, string>; params?: Record<string, unknown>; today?: boolean
+  /** move to new values instead of jumping (true, or a duration in ms) */
+  animate?: boolean | number
 }>
 export default LiveIcon
-export { render, renderAsync, load, list, get, defaults, catalog, styles, resolve, validate } from './index.js'
+export { render, renderAsync, load, list, get, defaults, catalog, styles, resolve, validate, describe, transition, interpolate, setMotion } from './index.js'
 `
 
 // ------------------------------------------------------------------ README
@@ -337,8 +377,12 @@ function readme(tpl, { gens, styles, sizes, version }) {
     return `| \`${gen.name}\`<br>${cell(gen.title || '')} | ${Object.entries(gen.params || {}).map(([k, s]) => cell(paramCell(k, s))).join('<br>')} | \`<with-live-icon name="${gen.name}"${cell(attrs)}>\` |`
   }).join('\n')).join('\n\n') : '_No live icons are bundled in this build._'
   const sizeRows = sizes.map(s => `| \`${s.file}\` | ${s.what} | ${fmtKB(s.raw)} | ${fmtKB(s.gz)} |`).join('\n')
-  return tpl.replace(/\{\{version\}\}/g, version).replace('{{count}}', String(gens.length)).replace('{{styleCount}}', String(styles.length))
-    .replace('{{styles}}', styles.map(s => '`' + s.name + '`').join(', ')).replace('{{table}}', table).replace('{{sizes}}', sizeRows)
+  // every occurrence of every placeholder (a function replacer, so a '$' in the table stays literal); an unknown one fails
+  const vars = { version, count: String(gens.length), styleCount: String(styles.length), styles: styles.map(s => '`' + s.name + '`').join(', '), table, sizes: sizeRows }
+  return tpl.replace(/\{\{(\w+)\}\}/g, (m, k) => {
+    if (!Object.hasOwn(vars, k)) throw new Error(`packages/dynamic/src/README.md: unknown placeholder ${m}`)
+    return vars[k]
+  })
 }
 
 // ------------------------------------------------------------------ emit
@@ -491,13 +535,17 @@ export default async function emit(ctx) {
   const api = await import(pathToFileURL(path.join(DIST, 'index.js')).href + `?t=${process.hrtime.bigint()}`)
   failures.slice(0, 10).forEach(f => warn('render failed: ' + f))
 
-  // site outputs
-  if (!noSite) {
+  // site/vendor/dynamic mirrors dist/cdn: refreshed on every build, --no-site too (it is the runtime the site runs, not a
+  // generated page; package-only rebuilds used to leave the site on an older runtime than the package)
+  {
     const VEND = path.join(ROOT, 'site', 'vendor', 'dynamic')
     fs.rmSync(VEND, { recursive: true, force: true })
     const copy = (from, to) => { fs.mkdirSync(path.dirname(to), { recursive: true }); fs.copyFileSync(from, to) }
     copy(path.join(DIST, 'cdn', 'dynamic.js'), path.join(VEND, 'dynamic.js'))
     for (const f of fs.readdirSync(path.join(DIST, 'cdn', 'styles'))) copy(path.join(DIST, 'cdn', 'styles', f), path.join(VEND, 'styles', f))
+  }
+  // site outputs
+  if (!noSite) {
     const index = {
       version, defaultStyle: 'line',
       styles: styles.map(({ name, title, kind, strokeWidth, root }) => ({ name, title, kind, strokeWidth, root })),

@@ -49,7 +49,7 @@ Fonts are downloaded once into `site/fonts/` (woff2 + OFL license text) and decl
 ```html
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a class="logo" href="/index.html" aria-label="with icons — home">
+  <a class="logo" href="/index.html" aria-label="with icons, home">
     <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
     <span class="logo-type">
       <span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span>
@@ -99,7 +99,7 @@ update forge/tools/site-data.mjs; site code must use the new globals.
 ## Developer-facing names (after the rename)
 npm `@withicons/core|react|vue|svelte|angular|solid|web|classes|static|search|mcp|motion|dynamic`. Web component `<with-icon name="home"
 variant="solid">`. Classes: `<i class="with with-home"></i>`, `<i class="with with-home with-solid"></i>`, CDN setup
-`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer>` (links only the icons on the
+`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer>` (links only the icons on the
 page; zero JS: `with-base.css` + `<style>/<name>.css`; one style: `with-line.css`; `with-all.css` is heavy, prototypes
 only), runtime `…/classes/dist/with-icons.js`. Element from a CDN: `…/web/dist/cdn.js`. MCP: `npx -y @withicons/mcp`. Local site copies live in `site/vendor/with/`.
 Published on npm (all `@withicons/*` packages and the `withicons` CLI) and served by jsDelivr. Developer pages show plain install commands, no "launching soon" pills, and still offer direct downloads.
@@ -165,7 +165,7 @@ auto-upgraded), `.visually-hidden`, `[data-reveal]` (fade-up on scroll; `style="
 ```html
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a class="logo" href="index.html" aria-label="with icons — home">
+  <a class="logo" href="index.html" aria-label="with icons, home">
     <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
     <span class="logo-type">
       <span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span>
@@ -194,7 +194,7 @@ guides/ → How to use; license/faq → About), sliding nav indicator, condense 
   <div class="foot-inner">
     <div class="foot-top">
       <div class="foot-brand">
-        <a class="logo" href="index.html" aria-label="with icons — home">
+        <a class="logo" href="index.html" aria-label="with icons, home">
           <span class="logo-morph" aria-hidden="true" data-logo-morph></span>
           <span class="logo-type"><span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span><span class="logo-by">powered by <b>evergrow</b></span></span>
         </a>
@@ -212,7 +212,7 @@ guides/ → How to use; license/faq → About), sliding nav indicator, condense 
         <div class="foot-col s-duo"><h2>Developers</h2><ul>
           <li><a href="developers.html">Overview</a></li><li><a href="developers.html#frameworks">React, Vue, Svelte</a></li>
           <li><a href="developers.html#cdn">CDN &amp; icon classes</a></li>
-          <li><a href="https://github.com/withevergrow/withicons">GitHub</a><span class="soon">soon</span></li></ul></div>
+          <li><a href="https://github.com/withevergrow/withicons">GitHub</a></li></ul></div>
         <div class="foot-col s-gloss"><h2>AI</h2><ul>
           <li><a href="ai.html">For AI agents</a></li><li><a href="ai.html#mcp">MCP server</a></li>
           <li><a href="ai.html#skill">Agent skill</a></li><li><a href="llms.txt">llms.txt</a></li></ul></div>

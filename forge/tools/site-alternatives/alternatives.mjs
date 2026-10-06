@@ -47,6 +47,9 @@ function sup(l, refs) {
   return (refs || []).map(n => { if (!l.sources[n - 1]) throw new Error(`${l.slug}: missing source ${n}`); return `<a class="ax-src" href="#src-${n}" aria-label="Source ${n}: ${esc(l.sources[n - 1][0])}">[${n}]</a>` }).join('')
 }
 
+// first candidate within max characters (titles <= 65, descriptions <= 160), else the last one
+const fit = (cands, max) => cands.find(c => c.length <= max) || cands[cands.length - 1]
+
 function libPage(l) {
   // a library added later carries its own check date
   CHECKED = l.checked || CHECKED_ALL; CHECKED_HUMAN = l.checked ? humanDate(l.checked) : CHECKED_HUMAN_ALL
@@ -54,9 +57,14 @@ function libPage(l) {
   const us = US(p)
   assertIcons(l.migrate.map.map(r => r[1]), l.slug)
   const name = l.name, sn = short(l)
-  const title = `${name} alternative: free MIT icons in ${NS} styles · with icons`
+  const title = fit([`${name} alternative: free MIT icons in ${NS} styles · with icons`, `${name} alternative: free icons, ${NS} styles · with icons`, `${name} alternative · with icons`], 65)
   const hasMap = !!l.migrate.concept || !!rivalSet(l.slug)
-  const desc = `Looking for a ${name} alternative? Compare ${name} and with icons side by side (licence, price, icon count, styles, frameworks, AI), with ${hasMap ? "a name map and " : ""}a converter to switch. Checked ${CHECKED_HUMAN}.`
+  // search snippets cut near 160 characters: the first candidate that fits wins
+  const desc = fit([
+    `Looking for a ${name} alternative? Compare ${name} and with icons side by side: licence, price, icon count, styles, frameworks${hasMap ? ', plus a name map to switch' : ''}.`,
+    `Looking for a ${name} alternative? Compare ${name} and with icons side by side: licence, price, icon count, styles and frameworks.`,
+    `${name} alternative: compare licence, price, icon count, styles and frameworks with with icons.`,
+  ], 160)
   const spec = convSpec(l)
   const isConcept = !!l.migrate.concept
   const others = OPEN.filter(x => x.slug !== l.slug).slice(0, 3)
@@ -183,8 +191,11 @@ function libPage(l) {
 function hub() {
   CHECKED = CHECKED_ALL; CHECKED_HUMAN = CHECKED_HUMAN_ALL
   const path = 'alternatives/index.html', p = '../'
-  const title = `Best free icon library alternatives (${CHECKED.slice(0, 4)}): ${LIBS.length} libraries compared · with icons`
-  const desc = `Compare ${LIBS.length} icon libraries side by side: Font Awesome, Material Symbols, Heroicons, Lucide, Phosphor, Tabler, Bootstrap Icons and more. Licence, price, icon count, styles, CSS classes and AI support, checked ${CHECKED_HUMAN}.`
+  const title = fit([`Best free icon library alternatives (${CHECKED.slice(0, 4)}): ${LIBS.length} libraries compared · with icons`, `Free icon library alternatives: ${LIBS.length} compared (${CHECKED.slice(0, 4)}) · with icons`, `Icon library alternatives compared · with icons`], 65)
+  const desc = fit([
+    `Compare ${LIBS.length} icon libraries side by side: Font Awesome, Material Symbols, Heroicons, Lucide, Phosphor and more. Licence, price, icon count, styles and AI support.`,
+    `Compare ${LIBS.length} icon libraries side by side: Font Awesome, Material Symbols, Heroicons, Lucide and more. Licence, price, icon count and styles.`,
+  ], 160)
   const cols = [['license', 'Licence'], ['price', 'Price'], ['count', 'Icons'], ['styles', 'Styles'], ['classes', 'CSS classes'], ['ai', 'AI / MCP']]
   const mit = LIBS.filter(l => /^MIT$/.test(l.hub.license)).map(l => l.name)
   const classLibs = LIBS.filter(l => /^Yes/.test(l.hub.classes)).map(l => l.name)

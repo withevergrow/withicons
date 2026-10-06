@@ -42,6 +42,14 @@ const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
 function developers() {
   const path = 'developers.html'
   const install = pkg => code(`npm i ${pkg}`, 'sh', 'Terminal')
+  const SIZE_WAYS = [
+    ['Font size', 'grows with the text', '<i class="with with-home" style="font-size: 48px"></i>'],
+    ['Size class', 'with-xs to with-5x, times the text size', '<i class="with with-home with-3x"></i>'],
+    ['Exact size', 'whatever the text size', '<i class="with with-home" style="--with-size: 48px"></i>'],
+  ]
+  // one light block: each way is a short comment line above its code line (reads well at phone width too)
+  const sizeFold = (sub, say, rows, note) => `<details class="dv-size"><summary>Make it bigger or smaller <small>${sub}</small></summary><p>${say}</p>${code(rows.map(([t, d, c]) => (t ? `<!-- ${t.toLowerCase()}: ${d} -->\n` : '') + c).join('\n\n'), 'html')}${note ? `<p class="pg-note">${note}</p>` : ''}</details>`
+  const SIZE_NOTE = 'Setting only <code>height</code> does not work: the width stays <code>1em</code>.'
   const qs = [
     ['react', 'React', install('@withicons/react') + code(`import { Home, Search } from '@withicons/react'          // line (default)
 import { Home as HomeSolid } from '@withicons/react/solid'
@@ -99,20 +107,20 @@ export function Toolbar() {
     </nav>
   )
 }`, 'tsx', 'Toolbar.tsx')],
-    ['web', 'Web component', code(`<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js"></script>
+    ['web', 'Web component', code(`<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
 
 <with-icon name="home"></with-icon>
-<with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Works in any framework, or none. The page downloads only the icons it shows: about 7 KB gzipped for the element, then one small file per icon (a line icon is about 150 bytes gzipped). Style the inner svg with <code>with-icon::part(svg)</code>.</p>`],
-    ['classes', 'Icon classes', code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
+<with-icon name="home" variant="solid" size="32" color="#e11d48" label="Home"></with-icon>`, 'html', 'index.html') + `<p class="pg-note">Works in any framework, or none. The page downloads only the icons it shows: about 7 KB gzipped for the element, then one small file per icon (a line icon is about 150 bytes gzipped). Style the inner svg with <code>with-icon::part(svg)</code>.</p>` + sizeFold('the size attribute', 'Use <code>size</code>: pixels, or any CSS length.', [['', '', '<with-icon name="home" size="48"></with-icon>']])],
+    ['classes', 'Icon classes', code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-search with-2x"></i>
-<i class="with with-heart with-solid"></i>`, 'html', 'index.html') + `<p class="pg-note">The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles. Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>. Zero JavaScript instead? Link one stylesheet per style, <code>with-line.css</code> (all ${N_ICONS} line icons, about 26 KB gzipped).</p>`],
+<i class="with with-heart with-solid"></i>`, 'html', 'index.html') + `<p class="pg-note">The loader (about 6 KB gzipped) links just the CSS of the icons on the page, in any mix of styles. Each icon is a CSS mask over <code>currentColor</code>, sized <code>1em</code>. Zero JavaScript instead? Link one stylesheet per style, <code>with-line.css</code> (all ${N_ICONS} line icons, about 26 KB gzipped).</p>` + sizeFold('font size, a size class or an exact size', 'The icon is <code>1em</code> square, so it follows the text size. Three ways to make it 48 px:', SIZE_WAYS, SIZE_NOTE)],
     ['svg', 'SVG & sprite', code(`<!-- one sprite per style, served from your own site -->
 <svg width="24" height="24"><use href="sprite-line.svg#with-home"/></svg>
 
 <!-- or a single file -->
-<img src="https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/line/home.svg" width="24" height="24" alt="Home">`, 'html', 'index.html') + `<p class="pg-note">An <code>&lt;img&gt;</code> can’t inherit <code>currentColor</code> and renders black. Use inline SVG or the sprite to recolour.</p>`],
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/line/home.svg" width="24" height="24" alt="Home">`, 'html', 'index.html') + `<p class="pg-note">An <code>&lt;img&gt;</code> can’t inherit <code>currentColor</code> and renders black. Use inline SVG or the sprite to recolour.</p>`],
   ]
   const pkgs = [
     ['@withicons/react', 'React 18+', 'code', 'line'], ['@withicons/vue', 'Vue 3', 'code', 'sketch'], ['@withicons/svelte', 'Svelte 4 & 5', 'code', 'solid'],
@@ -205,25 +213,30 @@ export function Toolbar() {
     <section id="classes" class="dv-sec">
       <h2>Icon classes</h2>
       <p>The Font Awesome way: plain tags, no build step. The loader fetches only the icons on the page, in any style:</p>
-      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js" defer></script>
+      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
 
 <i class="with with-home"></i>
 <i class="with with-home with-solid"></i>
 <i class="with with-trash" role="img" aria-label="Delete"></i>`, 'html')}
       <p>No JavaScript at all? Link one stylesheet per style you use instead. Each holds every icon of that style: <code>with-line.css</code> is about 26 KB gzipped, the richest styles several hundred KB, and <code>with-all.css</code> (every style, about 6 MB gzipped) is for prototypes only.</p>
-      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-line.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-solid.css">   <!-- for with-solid -->`, 'html')}
+      ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-line.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-solid.css">   <!-- for with-solid -->`, 'html')}
       <p>With a bundler, install <code>@withicons/classes</code> and import the same files:</p>
       ${code(`npm i @withicons/classes`, 'bash')}
       ${code(`import '@withicons/classes/with-line.css'   // every line icon
 // or only what you use: the base rules, then one file per icon
 import '@withicons/classes/with-base.css'
 import '@withicons/classes/line/home.css'`, 'js')}
+      <h3 id="classes-size">Size</h3>
+      <p>An icon is <code>1em</code> square, so it follows the text size. ${SIZE_NOTE} Use one of these instead:</p>
+      ${code(`<i class="with with-home" style="font-size: 48px"></i>     <!-- 1. font size: also grows with the text around it -->
+<i class="with with-home with-3x"></i>                      <!-- 2. a size class: 3 × the text size (with-xs, with-sm, with-lg, with-2x … with-5x) -->
+<i class="with with-home" style="--with-size: 48px"></i>   <!-- 3. an exact size, whatever the text size -->`, 'html')}
       <h3>Modifiers</h3>
       <ul class="dv-mods">${mods.map(([c, d, k]) => `<li data-reveal><span class="dv-mod-demo dm-${k}" aria-hidden="true">${I(modIcon[k], 'line', 24)}</span><code>${c}</code><span>${d}</span></li>`).join('')}</ul>
       <p class="pg-note">Also <code>with-xs</code>, <code>with-sm</code>, <code>with-lg</code>, <code>with-3x</code> to <code>with-5x</code>, <code>with-rotate-180</code>, <code>with-rotate-270</code> and <code>with-flip-both</code>. Spin and pulse switch off for people who prefer reduced motion. For richer motion (a bell that rings, a play button that turns into pause) use <a href="#motion">@withicons/motion</a>.</p>
       <h3>Want real multi-colour? Add the runtime</h3>
-      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-icons.js" defer></script>
+      ${code(`<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-icons.js" defer></script>
 
 <i class="with with-home with-duo" style="--with-duo:#f59e0b"></i>
 <i class="with with-settings" data-with-stroke-width="1.5"></i>`, 'html')}
@@ -297,13 +310,13 @@ find('hoem')          // null`, 'js')}
       <h2>CDN &amp; downloads</h2>
       <p>Not using npm? Everything works from a CDN or as files you copy into your project, and a page downloads only the icons it uses.</p>
       <div class="pg-table-wrap"><table class="pg-table"><thead><tr><th>What</th><th>URL / file</th></tr></thead><tbody>
-        <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
-        <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web/dist/cdn.js</code> · about 7 KB gzipped, then each icon from its own small file</td></tr>
-        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js</code> (only the icons on the page) · zero JS: <code>with-&lt;style&gt;.css</code>, one style per file</td></tr>
-        <tr><td>Live icons</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/dynamic/dist/cdn/lite.js</code> · each live icon and style loads on first use</td></tr>
+        <tr><td>One SVG</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/&lt;style&gt;/&lt;name&gt;.svg</code></td></tr>
+        <tr><td>Web component</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js</code> · about 7 KB gzipped, then each icon from its own small file</td></tr>
+        <tr><td>Icon classes</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js</code> (only the icons on the page) · zero JS: <code>with-&lt;style&gt;.css</code>, one style per file</td></tr>
+        <tr><td>Live icons</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js</code> · each live icon and style loads on first use</td></tr>
         <tr><td>Sprites (download now)</td><td>${STYLES.filter(s => siteExists(`sprites/${s}.svg`)).map(s => `<a href="sprites/${s}.svg" download>${s}.svg</a>`).join(' · ')}</td></tr>
         <tr><td>Class CSS (download now)</td><td>${STYLES.filter(s => siteExists(`vendor/with/with-${s}.css`)).map(s => `<a href="vendor/with/with-${s}.css" download>with-${s}.css</a>`).join(' · ')}</td></tr>
-        <tr><td>Animations</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css</code> + each icon’s own motion, <code>dist/icons/&lt;name&gt;.css</code> (the element links these for you; <code>icons.css</code> has all of them)${siteExists('vendor/motion/motion.css') ? ` · download <a href="vendor/motion/motion.css" download>motion.css</a>${siteExists('vendor/motion/motion.js') ? ` · <a href="vendor/motion/motion.js" download>motion.js</a>` : ''}` : ''}</td></tr>
+        <tr><td>Animations</td><td><code>https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css</code> + each icon’s own motion, <code>dist/icons/&lt;name&gt;.css</code> (the element links these for you; <code>icons.css</code> has all of them)${siteExists('vendor/motion/motion.css') ? ` · download <a href="vendor/motion/motion.css" download>motion.css</a>${siteExists('vendor/motion/motion.js') ? ` · <a href="vendor/motion/motion.js" download>motion.js</a>` : ''}` : ''}</td></tr>
         <tr><td>Metadata</td><td><a href="icons.json">icons.json</a> · names, categories, aliases, tags</td></tr>
       </tbody></table></div>
       <p class="pg-note">Pin a version in production (<code>@withicons/web@0.2.0</code>): versioned files are cached for good, by the CDN and the browser. Any single icon can also be copied or downloaded as SVG or PNG from <a href="icons.html">the library</a>.</p>
@@ -360,7 +373,7 @@ ${CLI_FORMATS.length ? `<tr><td><code>export &lt;name…&gt;</code></td><td>Save
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for developers', description: 'Install and use with icons in React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and plain SVG.', url: ORIGIN + '/' + path, proficiencyLevel: 'Beginner' },
     { '@type': 'SoftwareSourceCode', name: 'with icons', codeRepository: GITHUB, license: 'https://opensource.org/licenses/MIT', programmingLanguage: ['JavaScript', 'TypeScript'] }]
-  write(path, page({ path, current: 'developers', title: 'Developers: React, Vue, Svelte, Angular icons and more · with icons', ogTitle: 'with icons for developers', desc: `${N_ICONS} icons × ${N_STYLES} styles for React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and SVG sprites, plus optional animations. Tree-shakable, typed, currentColor, MIT.`, body, ld, crumbsLd: [['Home', ''], ['Developers', path]], bodyClass: 'pg-dev', styles: motionAssets().css, scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js', ...motionAssets().js] }))
+  write(path, page({ path, current: 'developers', title: 'Developers: React, Vue, Svelte, Angular icons and more · with icons', ogTitle: 'with icons for developers', desc: `${N_ICONS} icons × ${N_STYLES} styles for React, Vue, Svelte, Angular, Solid, web components, CSS icon classes and SVG sprites, plus optional animations. Tree-shakable, typed, currentColor, MIT.`, body, ld, crumbsLd: [['Home', ''], ['Developers', path]], bodyClass: 'pg-dev', styles: motionAssets().css, scripts: motionAssets().js }))
 }
 
 
@@ -616,7 +629,7 @@ npx withicons resolve bin --json`, 'sh', 'Terminal')}
   </section>
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for AI agents: MCP server, skill, llms.txt', description: 'Connect AI assistants to with icons through the MCP server, an agent skill, llms.txt, icons.json and a search API.', url: ORIGIN + '/' + path }]
-  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'with icons — ask your AI', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: ['data/meta.js', 'data/style-line.js', 'vendor/with/search.js', 'data/search-index.js'] }))
+  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'with icons — ask your AI', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: [] }))
 }
 
 /* ───────────────────────── about ───────────────────────── */

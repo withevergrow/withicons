@@ -37,6 +37,8 @@ export default async function emit(ctx) {
   const pkg = {
     ...basePkg(ctx, '@withicons/static', `${countText(ctx)} as SVG sprites and standalone SVG files. No JavaScript.`, ['svg-sprite', 'static', 'cdn', 'svg-icons', 'multicolor-icons', ...styleNames]),
     sideEffects: false,
+    // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/static) answers with the catalogue: every name, alias and style
+    jsdelivr: './dist/icons.json', unpkg: './dist/icons.json',
     files: ['dist', 'README.md', 'LICENSE'],
   }
   sizes.file = fileSizes.sort((a, b) => a - b)[fileSizes.length >> 1] || 0

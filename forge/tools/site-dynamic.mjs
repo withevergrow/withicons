@@ -134,6 +134,8 @@ async function main() {
   const kebab = s => String(s).replace(/[A-Z]/g, m => '-' + m.toLowerCase())
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1)
   const list = (a, conj = 'and') => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + (a.length > 2 ? ',' : '') + ` ${conj} ` + a[a.length - 1]
+  // first candidate within max characters (titles <= 65, descriptions <= 160), else the last one
+  const fit = (cands, max) => cands.find(c => c.length <= max) || cands[cands.length - 1]
   const short = l => String(l).replace(/\s*\(.*?\)\s*/g, ' ').replace(/\s+—.*$/, '').trim()
   const dateOf = d => new Date(d).toISOString().slice(0, 10)
   const fileDate = f => fs.existsSync(f) ? dateOf(fs.statSync(f).mtime) : null
@@ -195,6 +197,14 @@ async function main() {
     }
     return out.filter(Boolean).slice(0, 3).join(' · ')
   }
+  // a card's one plain line: the description up to its first pause, without "you choose" ("Battery filled to the charge level")
+  const oneLine = i => {
+    const d = String(i.description || '').replace(/\.$/, '')
+    let c = d.split(/[,;:(]|\s\u2014\s|\sfor\s/)[0].trim()
+    if (c.length < 18) c = d
+    c = c.replace(/\s+(?:that |which )?you (?:choose|set|pick|type)\b.*$/, '').replace(/^(?:A|An|The) /, '')
+    return c.charAt(0).toUpperCase() + c.slice(1)
+  }
   const paramList = i =>Object.values(i.params).map(p => short(p.label))
   const kindWord = { int: 'Number', number: 'Number', level: 'Level', time: 'Time', enum: 'Choice', text: 'Text', bool: 'On / off' }
   const rangeOf = p => p.type === 'int' || p.type === 'number' ? `${p.min} to ${p.max}${p.step ? `, steps of ${p.step}` : ''}`
@@ -202,46 +212,51 @@ async function main() {
       : p.type === 'enum' ? p.options.join(', ') : p.type === 'text' ? `Up to ${p.maxLength} characters: A-Z, 0-9 and % ° : - + / . , ! ? $ € £ ₹ # & * '` : 'on or off'
   const defOf = p => p.type === 'level' ? `${Math.round(p.default * 100)}%` : p.type === 'bool' ? (p.default ? 'on' : 'off') : String(p.default)
 
-  /* ───────────── code snippets ───────────── */
-  const htmlSnippet = (i, ps, style = 'line', size = 48) => {
-    const a = Object.entries(i.params).map(([k, p]) => {
-      const v = ps[k] ?? p.default
-      return p.type === 'bool' ? (v ? ` ${attrOf(k)}` : ` ${attrOf(k)}="false"`) : ` ${attrOf(k)}="${esc(v)}"`
-    }).join('')
-    return `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/lite.js"></script>\n\n<with-live-icon name="${i.name}"${a}${style !== 'line' ? ` variant="${style}"` : ''} size="${size}"></with-live-icon>`
+  /* ───────────── code snippets: site/js/live-snippets.js, the same generator the pages run ─────────────
+     The build writes the default code (readable without JS); js/live.js and js/live-motion.js redraw it from what the
+     visitor sets. Only real runtime APIs (packages/dynamic/src): setAttribute on <with-live-icon> (+ `animate`),
+     LiveIcon props in React and Vue. */
+  vm.runInContext(fs.readFileSync(path.join(SITE, 'js', 'live-snippets.js'), 'utf8'), sandbox)
+  const SNIP = sandbox.window.WithLiveSnippets
+  const LITE = `${CDN}/${SCOPE}/dynamic@latest/dist/cdn/lite.js`
+  const stOf = (i, o = {}) => ({ style: 'line', size: 48, cdn: LITE, scope: SCOPE, animate: true, params: { ...(i.defaults || {}) }, ...o })
+  const SRC = SNIP.SRC, FW = SNIP.FW
+  const sIc = d => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`
+  const PLAY = sIc('<path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/>')
+  // "Change it live" on an icon page: the demo (source picker, a live element, the wire) + the code for that source
+  const updDemo = i => {
+    const n = i.name, first = 'fetch'
+    return `<div class="lv-upd" data-lv-upd="${n}" data-src="${first}">
+  <div class="lv-upd-demo">
+    <div class="lv-upd-src" role="radiogroup" aria-label="Where the new values come from">${SRC.map(x => `<button type="button" role="radio" aria-checked="${x.id === first}" tabindex="${x.id === first ? 0 : -1}" data-src="${x.id}">${sIc(x.ic)}<span><b>${x.t}</b><small>${x.say}</small></span></button>`).join('')}</div>
+    <div class="lv-upd-stage">
+      <span class="lv-upd-chip" data-upd-chip aria-hidden="true"><i></i><span data-upd-chip-t>Live</span></span>
+      <span class="lv-upd-pulse" data-upd-pulse aria-hidden="true"></span>
+      <div class="lv-upd-art" data-upd-art>${svgOf(defaultInner(n, 'line'), 'line', { cls: 'lv-svg', title: `${i.title}: ${sayNice(i, i.defaults || {})}` })}</div>
+      <p class="lv-upd-val" data-upd-val>${esc(sayFed(i, i.defaults || {}))}</p>
+      <div class="lv-upd-input" data-upd-input></div>
+    </div>
+    <div class="lv-upd-wire" aria-hidden="true"><ol class="lv-upd-log" data-upd-log><li class="is-idle"><code>Press play to stream values</code></li></ol></div>
+    <div class="lv-upd-bar lv-js-only">
+      <button type="button" class="lv-upd-play" data-upd-play aria-pressed="false">${PLAY}<span>Play</span></button>
+      <label class="lv-switch lv-upd-anim"><input type="checkbox" role="switch" data-upd-anim checked><span class="lv-knob" aria-hidden="true"></span><span>Animate changes</span></label>
+    </div>
+  </div>
+  <div class="lv-upd-code">
+    <p class="lv-upd-src-say" data-upd-src-say>${esc(SRC[1].t)}: ${esc(SRC[1].say)}</p>
+    ${code('upd', 'html', 'HTML · API', SNIP.update(i, first, 'html', stOf(i)))}
+  </div>
+</div>`
   }
-  const jsVal = v => typeof v === 'string' ? `'${v.replace(/'/g, "\\'")}'` : String(v)
-  const reactSnippet = (i, ps, style = 'line', size = 48) => {
-    const props = [], nested = []
-    for (const [k, p] of Object.entries(i.params)) {
-      const v = ps[k] ?? p.default
-      if (REACT_RESERVED.includes(k)) { nested.push(`${k}: ${jsVal(v)}`); continue }
-      props.push(typeof v === 'string' ? `${k}="${v.replace(/"/g, '&quot;')}"` : v === true ? k : `${k}={${v}}`)
-    }
-    if (nested.length) props.push(`params={{ ${nested.join(', ')} }}`)
-    if (style !== 'line') props.push(`variant="${style}"`)
-    props.push(`size={${size}}`)
-    return `import { LiveIcon } from '${SCOPE}/dynamic/react'\n\nexport function Example() {\n  return <LiveIcon name="${i.name}" ${props.join(' ')} />\n}`
-  }
-  const vueSnippet = (i, ps, style = 'line', size = 48) => {
-    const props = [], nested = []
-    for (const [k, p] of Object.entries(i.params)) {
-      const v = ps[k] ?? p.default
-      if (REACT_RESERVED.includes(k)) { nested.push(`${k}: ${jsVal(v)}`); continue }
-      props.push(typeof v === 'string' ? `${kebab(k)}="${v}"` : `:${kebab(k)}="${v}"`)
-    }
-    if (nested.length) props.push(`:params="{ ${nested.join(', ')} }"`)
-    if (style !== 'line') props.push(`variant="${style}"`)
-    props.push(`:size="${size}"`)
-    return `<script setup>\nimport { LiveIcon } from '${SCOPE}/dynamic/vue'\n</script>\n\n<template>\n  <LiveIcon name="${i.name}" ${props.join(' ')} />\n</template>`
-  }
+  // the fed values with their labels ("Count 3", "Charge 70%"): what the demo readout shows
+  const sayFed = (i, ps) => SNIP.feedKeys(i).map(k => { const p = i.params[k], v = ps[k] ?? i.defaults?.[k] ?? p.default; return `${short(p.label).replace(/,.*$/, '')} ${p.type === 'level' ? Math.round(v * 100) + '%' : p.type === 'enum' ? prettyOpt(v) : v}` }).join(' · ')
 
   /* ───────────── chrome: header + footer taken from a hand-written page so every page matches ───────────── */
   const chromeSrc = ['about.html', 'faq.html', 'index.html'].map(f => path.join(SITE, f)).find(f => fs.existsSync(f))
   const srcHtml = chromeSrc ? fs.readFileSync(chromeSrc, 'utf8') : ''
   let HEADER = (srcHtml.match(/<a class="skip-link"[\s\S]*?<\/header>/) || [''])[0]
   let FOOTER = (srcHtml.match(/<footer class="site-footer">[\s\S]*?<\/footer>/) || [''])[0]
-  if (!HEADER) HEADER = `<a class="skip-link" href="#main">Skip to content</a>\n<header class="site-header" data-header><a class="logo" href="index.html" aria-label="with icons — home"><span class="logo-morph" aria-hidden="true" data-logo-morph></span><span class="logo-type"><span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span><span class="logo-by">powered by <b>evergrow</b></span></span></a><nav class="site-nav" aria-label="Primary"><a href="icons.html">Icons</a><a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a><a href="guides/index.html">How to use</a><a href="developers.html">Developers</a><a href="ai.html">For AI</a><a href="about.html">About</a></nav><div class="site-actions"><button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"></button><a class="cta" href="icons.html">Browse icons</a></div></header>`
+  if (!HEADER) HEADER = `<a class="skip-link" href="#main">Skip to content</a>\n<header class="site-header" data-header><a class="logo" href="index.html" aria-label="with icons, home"><span class="logo-morph" aria-hidden="true" data-logo-morph></span><span class="logo-type"><span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span><span class="logo-by">powered by <b>evergrow</b></span></span></a><nav class="site-nav" aria-label="Primary"><a href="icons.html">Icons</a><a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a><a href="guides/index.html">How to use</a><a href="developers.html">Developers</a><a href="ai.html">For AI</a><a href="about.html">About</a></nav><div class="site-actions"><button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"></button><a class="cta" href="icons.html">Browse icons</a></div></header>`
   if (!FOOTER) FOOTER = `<footer class="site-footer"><div class="foot-inner"><div class="foot-base"><span>© 2026 with icons · MIT License</span><a class="evergrow-link" href="https://withevergrow.com"><span data-evergrow-mark></span>Powered by Evergrow</a></div></div></footer>`
   HEADER = HEADER.replace(/ aria-current="[^"]*"/g, '')
   if (!/href="live\.html"/.test(HEADER)) HEADER = HEADER.replace(/(<a href="icons\.html">Icons<\/a>)/, '$1<a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a>')
@@ -308,6 +323,8 @@ ${prefixed(FOOTER, P)}
 <script src="${P}vendor/dynamic/dynamic.js" defer></script>
 ${scripts}<script src="${P}js/site.js" defer></script>
 <script src="${P}js/ui-kit.js" defer></script>
+<script src="${P}js/live-snippets.js" defer></script>
+<script src="${P}js/live-motion.js" defer></script>
 <script src="${P}js/live.js" defer></script>
 </body>
 </html>
@@ -367,6 +384,23 @@ ${scripts}<script src="${P}js/site.js" defer></script>
     { q: 'Will the text stay readable when the icon is small?', a: 'Yes. Text is drawn with a stroke font built for 16 to 24 pixels, and each icon falls back when a value would get too small to read: counts over 99 become “99+”, for example.' },
     { q: 'Can a calendar icon show today’s date on my website?', a: `Yes. Add the ${SCOPE}/dynamic script and write <code>&lt;with-live-icon name="calendar-date" today&gt;</code>. It reads the visitor’s clock and updates every minute.` },
   ]
+  // the "Update it live" board on live.html: four tiles, four sources (js/live-motion.js initDash)
+  const DASH = [
+    { n: 'bell-count', s: 'solid', src: 'socket', p: { count: 3 }, say: '3', idle: 'ws ← waiting' },
+    { n: 'battery-level', s: 'duo', src: 'fetch', p: { level: 0.64 }, say: '64%', idle: 'GET /api/battery' },
+    { n: 'clock-time', s: 'blueprint', src: 'timer', p: { time: '10:10' }, say: '10:10', idle: 'tick' },
+    { n: 'progress-ring', s: 'kawaii', src: 'input', p: { value: 68 }, say: '68', idle: '' },
+  ].filter(d => BY[d.n] && STYLE[d.s])
+  // the code under the board: what the source is (element / API / WebSocket / timer / input) x the framework; the page
+  // swaps between these (JSON, not script: CSP-safe), the build shows Element x HTML without JS
+  const BASIC = {
+    html: `<script src="${LITE}"></script>\n\n<with-live-icon name="calendar-date" today variant="glass" size="48"></with-live-icon>\n<with-live-icon name="bell-count" count="12" variant="bauhaus" animate></with-live-icon>\n<with-live-icon name="battery-level" level="0.42" variant="skeuo" animate></with-live-icon>`,
+    react: `// npm i ${SCOPE}/dynamic\nimport { LiveIcon } from '${SCOPE}/dynamic/react'\n\nexport function Status({ unread, charge }) {\n  return (\n    <>\n      <LiveIcon name="calendar-date" today variant="glass" size={48} />\n      <LiveIcon name="bell-count" count={unread} variant="bauhaus" animate />\n      <LiveIcon name="battery-level" level={charge} variant="skeuo" animate />\n    </>\n  )\n}`,
+    vue: `<!-- npm i ${SCOPE}/dynamic -->\n<script setup>\nimport { LiveIcon } from '${SCOPE}/dynamic/vue'\ndefineProps(['unread', 'charge'])\n</script>\n\n<template>\n  <LiveIcon name="calendar-date" today variant="glass" :size="48" />\n  <LiveIcon name="bell-count" :count="unread" variant="bauhaus" animate />\n  <LiveIcon name="battery-level" :level="charge" variant="skeuo" animate />\n</template>`,
+  }
+  const DASH_SRC = [{ id: 'element', t: 'Element', say: 'one tag, any value' }, ...DASH.map(d => ({ id: d.src, t: SRC.find(x => x.id === d.src).t, say: `${BY[d.n].title.toLowerCase()} · ${SRC.find(x => x.id === d.src).say}`, n: d.n, s: d.s }))]
+  const DASH_CODES = {}
+  for (const x of DASH_SRC) for (const fw of FW) DASH_CODES[x.id + '-' + fw.id] = x.id === 'element' ? BASIC[fw.id] : SNIP.update(BY[x.n], x.id, fw.id, stOf(BY[x.n], { style: x.s, size: 48 }))
   const lib = (() => {
     const canonical = `${BASE}/live.html`
     const heroTiles = HERO.map((h, k) => `<figure class="lv-tile s-${h.s}" data-hero="${h.n}" data-style="${h.s}" data-say="${h.say.join(',')}" style="--k:${k}">
@@ -374,14 +408,14 @@ ${scripts}<script src="${P}js/site.js" defer></script>
   <figcaption><span class="lv-tile-name">${esc(BY[h.n].title)}</span><span class="lv-tile-val" data-hero-val>${esc(sayKeys(BY[h.n], h.p, h.say))}</span><span class="lv-tile-style">${esc(STYLE[h.s].title)}</span></figcaption>
 </figure>`).join('\n')
     const SB_SAMPLE = BY['calendar-date'] ? 'calendar-date' : ICONS[0].name
-    const styleBar = styleSwitcher(SB_SAMPLE)
+    const styleBar = styleSwitcher(SB_SAMPLE, { cls: 'lv-sb-drop' })
     const groupChips = `<div class="lv-groups" role="group" aria-label="Show a group"><button type="button" class="lv-g" aria-pressed="true" data-group="">All <b>${N}</b></button>${GROUPS.map(g => `<button type="button" class="lv-g s-${g.style}" aria-pressed="false" data-group="${g.id}">${esc(g.title)} <b>${g.names.length}</b></button>`).join('')}</div>`
     const card = (n, k) => {
       const i = BY[n]
       return `<li class="lv-card" data-name="${n}" data-group-title="${esc(G[groupOf[n]].title)}" style="--k:${k % 12}"><a href="live/${n}.html" class="lv-card-link">
   <span class="lv-card-art">${svgOf(defaultInner(n, 'line'), 'line', { cls: 'lv-svg' })}</span>
   <span class="lv-card-title">${esc(i.title)}</span>
-  <span class="lv-card-params">${esc(paramList(i).slice(0, 3).join(' · '))}</span>
+  <span class="lv-card-params">${esc(oneLine(i))}</span>
 </a></li>`
     }
     const sections = GROUPS.map(g => `<section class="lv-group s-${g.style}" id="g-${g.id}" data-group-sec="${g.id}" aria-labelledby="h-${g.id}">
@@ -397,22 +431,33 @@ ${scripts}<script src="${P}js/site.js" defer></script>
       <p class="lede">A calendar with your date. A battery at your level. A bell with your count, a tag with your words. Type it in, pick one of ${NS} styles, download it for slides, docs or your website.</p>
       <div class="lv-hero-cta"><a class="btn btn-ink btn-lg" href="#library">Browse all ${N} ${arrow}</a><a class="btn btn-ghost btn-lg" href="live/${ex}.html">Make a calendar</a></div>
     </div>
-    <div class="lv-board" data-hero-board aria-label="Live icons changing their values" role="img">
+    <div class="lv-board-wrap">
+      <div class="lv-board" data-hero-board aria-label="Live icons changing their values" role="img">
 ${heroTiles}
+      </div>
+      <p class="lv-board-cap" aria-hidden="true"><span class="lv-live-dot"></span>Live: the values change in place, no reload</p>
     </div>
   </div>
 </section>
 <div class="lv-bar" data-lv-bar id="library">
-  <div class="wrap lv-bar-in">
-    <label class="lv-search">${searchIco}<span class="visually-hidden">Search live icons</span><input type="search" data-lv-q placeholder="Search ${N} live icons… try “date”, “battery”" autocomplete="off" spellcheck="false"><kbd>/</kbd></label>
-    ${styleBar}
+  <div class="wrap">
+    <div class="lv-bar-in">
+      <label class="lv-search">${searchIco}<span class="visually-hidden">Search live icons</span><input type="search" data-lv-q placeholder="Search ${N} live icons… try “date”, “battery”" autocomplete="off" spellcheck="false"><kbd>/</kbd></label>
+      ${styleBar}
+    </div>
+    ${groupChips}
   </div>
-  <div class="wrap">${groupChips}</div>
 </div>
 <div class="wrap lv-lib">
   <p class="lv-status" data-lv-status aria-live="polite"><b>${N}</b> live icons · <span data-lv-style-name>Line</span> style</p>
 ${sections}
-  <div class="lv-empty" data-lv-empty hidden><p class="h3">Nothing live matches “<span data-lv-empty-q></span>”.</p><p class="muted">Try “date”, “time”, “battery”, “count”, “sale”, “weather” or “progress”, or <a href="icons.html" data-lv-all>search all icons</a>.</p></div>
+  <div class="lv-empty" data-lv-empty hidden>
+    <div class="lv-empty-art" aria-hidden="true">${['calendar-date', 'battery-level', 'bell-count'].filter(n => BY[n]).map((n, k) => `<span style="--k:${k}">${svgOf(defaultInner(n, 'line'), 'line', { cls: 'lv-svg' })}</span>`).join('')}</div>
+    <p class="h3">Nothing live matches “<span data-lv-empty-q></span>”.</p>
+    <p class="muted">Live icons are calendars, clocks, batteries, counts, labels, weather and progress. Try one of these:</p>
+    <p class="lv-empty-try">${['date', 'time', 'battery', 'count', 'sale', 'weather', 'progress'].map(w => `<button type="button" class="lv-g" data-lv-try="${w}">${w}</button>`).join('')}</p>
+    <p class="muted"><button type="button" class="lv-linkbtn" data-lv-clear>Clear the search</button> or <a href="icons.html" data-lv-all>search the static icons</a>.</p>
+  </div>
 </div>
 <section class="section lv-how">
   <div class="wrap">
@@ -425,15 +470,36 @@ ${sections}
     </ol>
   </div>
 </section>
-<section class="section lv-dev slab-dark">
-  <div class="wrap lv-dev-in">
-    <div>
-      <p class="eyebrow">For developers</p>
-      <h2 class="h2">One element. Any value.</h2>
-      <p class="lede">The <code>${SCOPE}/dynamic</code> package draws every live icon in every style, in the browser or in Node. Change an attribute and the icon redraws. <code>today</code> keeps a calendar or clock on the visitor’s current date and time.</p>
-      <p class="lv-npm">Install it with <code>npm i ${SCOPE}/dynamic</code>, or add the one script tag shown here.</p>
+<section class="section lv-dev lv-live slab-dark" id="update-live" aria-labelledby="h-upd">
+  <div class="wrap">
+    <div class="lv-live-head">
+      <div><p class="eyebrow">For developers</p><h2 class="h2" id="h-upd">One element. Any value. <span class="hand lv-live-word">Live.</span></h2></div>
+      <div>
+        <p class="lede">The <code>${SCOPE}/dynamic</code> package draws every live icon in every style, in the browser or in Node. Change an attribute, from an API, a WebSocket, a timer or a click, and the icon redraws in place. <code>today</code> keeps a calendar or clock on the visitor’s current date and time.</p>
+        <p class="lv-npm">Install it with <code>npm i ${SCOPE}/dynamic</code>, or add the one script tag below.</p>
+      </div>
     </div>
-    ${code('lib-html', 'html', 'HTML', `<script src="${CDN}/${SCOPE}/dynamic@${VERSION}/dist/cdn/lite.js"></script>\n\n<with-live-icon name="calendar-date" today variant="glass" size="48"></with-live-icon>\n<with-live-icon name="bell-count" count="12" variant="bauhaus"></with-live-icon>\n<with-live-icon name="battery-level" level="0.42" variant="skeuo"></with-live-icon>`)}
+    <div class="lv-dash" data-lv-dash>
+      <div class="lv-dash-grid">${DASH.map(d => `<figure class="lv-dash-t s-${d.s}" data-dash-t data-name="${d.n}" data-style="${d.s}" data-src="${d.src}" data-ps='${JSON.stringify(d.p)}'>
+        <span class="lv-upd-chip is-on" data-dash-chip aria-hidden="true"><i></i><span data-dash-chip-t>${esc(SRC.find(x => x.id === d.src).t)}</span></span>
+        <div class="lv-dash-art" data-dash-art>${svgOf((() => { try { return RT ? innerOf(RT.render(d.n, d.p, d.s)) : exInner(d.n, d.s, 0) } catch { return exInner(d.n, d.s, 0) } })(), d.s, { cls: 'lv-svg', title: BY[d.n].title })}</div>
+        <figcaption><b>${esc(BY[d.n].title)}</b><span class="lv-dash-val" data-dash-val>${esc(d.say)}</span></figcaption>
+        ${d.src === 'input' ? `<label class="lv-dash-in"><span class="visually-hidden">${esc(BY[d.n].title)}: value</span><input class="lv-range" type="range" min="0" max="100" value="${d.p.value}"></label>` : `<ol class="lv-dash-log" data-dash-log aria-hidden="true"><li class="is-idle"><code>${esc(d.idle)}</code></li></ol>`}
+      </figure>`).join('')}</div>
+      <div class="lv-dash-bar lv-js-only">
+        <button type="button" class="lv-upd-play" data-dash-play aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg><span>Play</span></button>
+        <label class="lv-switch lv-upd-anim"><input type="checkbox" role="switch" data-dash-anim checked><span class="lv-knob" aria-hidden="true"></span><span>Animate changes</span></label>
+        <span class="lv-dash-say">Four sources, one element: <b>setAttribute</b> redraws it.</span>
+      </div>
+    </div>
+    <div class="lv-dash-code" data-dash-code>
+      <div class="lv-dash-code-bar">
+        <div class="lv-dash-src lv-js-only" role="radiogroup" aria-label="Code for">${DASH_SRC.map((x, k) => `<button type="button" role="radio" aria-checked="${!k}" tabindex="${k ? -1 : 0}" data-dsrc="${x.id}"><b>${esc(x.t)}</b><small>${esc(x.say)}</small></button>`).join('')}</div>
+        <div class="lv-tabs lv-dash-fw lv-js-only" role="tablist" aria-label="Framework">${FW.map((x, k) => `<button type="button" role="tab" aria-selected="${!k}" tabindex="${k ? -1 : 0}" aria-controls="dpane" data-fw="${x.id}">${x.t}</button>`).join('')}</div>
+      </div>
+      <div id="dpane" role="tabpanel" aria-label="Code">${code('lib', 'html', 'HTML · element', BASIC.html)}</div>
+      <script type="application/json" data-dash-codes>${JSON.stringify(DASH_CODES).replace(/</g, '\\u003c')}</script>
+    </div>
   </div>
 </section>
 <section class="section lv-faq-sec">
@@ -451,7 +517,7 @@ ${sections}
       faqLd(`${canonical}#faq`, libFaq)]
     return page({
       title: `Editable live icons: calendar, clock, battery | ${BRAND}`,
-      description: `Free icons you can edit: set the date on a calendar, the time on a clock, the count on a badge, the charge on a battery or the text on a tag. ${N} live icons in ${NS} styles. Download SVG, PNG, PDF or PowerPoint.`,
+      description: fit([`Free icons you can edit: set the date on a calendar, the time on a clock, the count on a badge or the charge on a battery. ${N} live icons, ${NS} styles.`, `Free icons you can edit: set the date, time, count or charge. ${N} live icons in ${NS} styles.`], 160),
       canonical, og: `${BASE}/live/og/index.png`, ogAlt: `Live icons from ${BRAND}: calendars, clocks, batteries and badges in many styles`,
       keywords: 'editable icons, dynamic icons, calendar icon with date, clock icon with time, notification badge icon, battery level icon, weather icon with temperature, label icon, free icons',
       jsonld, main, bodyClass: 'lv-page lv-lib-page s-line', bodyAttr: ' data-search="local"',
@@ -532,7 +598,15 @@ ${sections}
     const sibHtml = sib.map(x => `<li><a class="lv-rel lv-rel-static" href="../icons/${x}.html"><span class="lv-rel-art">${svgOf(staticInner(x), 'line', { cls: 'lv-svg' })}</span><span>${esc(staticTitle(x))}</span></a></li>`).join('')
     const relHtml = rel.map(x => `<li><a class="lv-rel" href="${x}.html"><span class="lv-rel-art">${svgOf(defaultInner(x, 'line'), 'line', { cls: 'lv-svg' })}</span><span>${esc(BY[x].title)}</span></a></li>`).join('')
     const aka = (i.aliases || []).slice(0, 8)
-    const desc = `${i.description.replace(/\.$/, '')}. Free and editable: set ${list(Object.values(i.params).slice(0, 3).map(p => short(p.label).toLowerCase()))}, pick one of ${NS} styles and your colours, then download SVG, PNG, PDF or PowerPoint.`
+    // search snippets cut near 160 characters: the longest wording that fits wins
+    const dsc = i.description.replace(/\.$/, ''), pl = k => list(Object.values(i.params).slice(0, k).map(p => short(p.label).toLowerCase()))
+    const desc = fit([
+      `${dsc}. Free and editable: set ${pl(3)}, pick one of ${NS} styles and your colours, then download SVG, PNG, PDF or PowerPoint.`,
+      `${dsc}. Free and editable: set ${pl(3)}, pick one of ${NS} styles, download SVG, PNG or PowerPoint.`,
+      `${dsc}. Free and editable: set ${pl(2)} in ${NS} styles, then download SVG or PNG.`,
+      `${dsc}. Free and editable, in ${NS} styles, as SVG or PNG.`,
+      `${dsc}.`,
+    ], 160)
     const sayDef = sayNice(i, def)
     // the palettes this live icon wears: its plain sibling's (site/data/palettes/<static>.js, forge/PALETTES.md)
     const pal = sib.find(x => fs.existsSync(path.join(SITE, 'data', 'palettes', `${x}.js`))) || ''
@@ -540,13 +614,12 @@ ${sections}
     const toc = [
       ['make', 'Make it yours', 'set it, style it, download it'],
       ['styles', `All ${NS} styles`, 'your icon in every style'],
-      ['developers', 'For developers', 'HTML, React and Vue'],
-      ['settings', 'What you can change', `${Object.keys(i.params).length} setting${Object.keys(i.params).length > 1 ? 's' : ''}, ranges and defaults`],
+      ['developers', 'Use it in code', 'install, your element, attributes'],
+      ['live', 'Change it live', 'API, WebSocket, timer, input'],
       ['faq', 'Questions', `${faqs.length} quick answers`],
       ['related', 'Related icons', 'the plain icon and more live ones'],
     ]
-    const tabs = ['HTML', 'React', 'Vue']
-    const main = `<div class="wrap lv-top">
+        const main = `<div class="wrap lv-top">
   ${crumbs(crumbItems)}
 </div>
 <section class="wrap lv-make" id="make" data-lv-studio="${n}" data-lv-pal="${pal}" aria-labelledby="lv-h1">
@@ -602,32 +675,32 @@ ${sections}
   <div class="lv-sec-h"><h2 class="h2" id="h-styles">${esc(i.title)} in <span class="hand lv-accent">all ${NS} styles</span></h2><p>Same values, ${NS} personalities. <span class="lv-js-inline">Pick one to use it above.</span></p></div>
   <ul class="lv-all" role="list" data-lv-all>${allStyles}</ul>
 </section>
-<section class="wrap lv-sec" id="developers" aria-labelledby="h-dev">
-  <details class="lv-dev" data-lv-dev>
-    <summary><span class="lv-dev-t"><span class="lv-dev-h" id="h-dev">For developers</span><small>One element or component with your settings: HTML, React or Vue</small></span><span class="lv-dev-plus" aria-hidden="true"></span></summary>
-    <div class="lv-dev-body">
-      <p class="lv-npm"><b>Install it with <code>npm i ${SCOPE}/dynamic</code></b>, or copy the HTML tab as is. The code follows everything you set above: values, style, colours and size.</p>
-      <div class="lv-dev-bar">
-        <div class="lv-tabs" role="tablist" aria-label="Code">${tabs.map((t, x) => `<button type="button" role="tab" id="tab-${t.toLowerCase()}" aria-controls="pane-${t.toLowerCase()}" aria-selected="${x === 0}" tabindex="${x === 0 ? 0 : -1}">${t}</button>`).join('')}</div>
-        <div class="lv-dev-size lv-js-only"><label for="lv-size">Size</label><input class="lv-range" id="lv-size" type="range" min="16" max="256" step="4" value="48" data-lv-size><output class="lv-out" data-lv-size-out for="lv-size">48 px</output></div>
-      </div>
-      <div role="tabpanel" id="pane-html" aria-labelledby="tab-html">${code('html', 'html', 'HTML: any website', htmlSnippet(i, def))}</div>
-      <div role="tabpanel" id="pane-react" aria-labelledby="tab-react" class="lv-pane-off">${code('react', 'jsx', 'React', reactSnippet(i, def))}</div>
-      <div role="tabpanel" id="pane-vue" aria-labelledby="tab-vue" class="lv-pane-off">${code('vue', 'vue', 'Vue', vueSnippet(i, def))}</div>
-      ${hasToday(i) ? `<p class="lv-dev-note">Add <code>today</code> and it shows the visitor’s own date and time, updated every minute: <code>&lt;with-live-icon name="${n}" today&gt;</code></p>` : ''}
-    </div>
-  </details>
-</section>
-<section class="wrap lv-sec lv-more" id="settings" aria-labelledby="h-settings">
-  <div class="lv-more-col">
-    <h2 class="h3" id="h-settings">What you can change</h2>
-    ${controlsNoJs(i)}
-    ${aka.length ? `<p class="lv-aka"><b>Also called</b> ${aka.map(a => `<span class="tag">${esc(a.replace(/-/g, ' '))}</span>`).join(' ')}</p>` : ''}
+<section class="wrap lv-sec lv-dev2" id="developers" aria-labelledby="h-dev" data-lv-dev2>
+  <div class="lv-sec-h"><div><p class="eyebrow">For developers</p><h2 class="h2" id="h-dev">Use it in <span class="hand lv-accent">code</span></h2></div><p>One element, or a React or Vue component, with everything you set above. Change a value after the page loads and it redraws, or moves there with <code>animate</code>.</p></div>
+  <div class="lv-dev2-bar lv-js-only">
+    <div class="lv-tabs lv-fw" role="tablist" aria-label="Framework">${FW.map((x, k) => `<button type="button" role="tab" id="fw-${x.id}" aria-selected="${!k}" tabindex="${k ? -1 : 0}" aria-controls="lv-el-pane" data-fw="${x.id}">${x.t}</button>`).join('')}</div>
+    <div class="lv-dev-size"><label for="lv-size">Size</label><input class="lv-range" id="lv-size" type="range" min="16" max="256" step="4" value="48" data-lv-size><output class="lv-out" data-lv-size-out for="lv-size">48 px</output></div>
   </div>
-  <div class="lv-more-col" id="faq">
-    <h2 class="h3">Questions</h2>
+  <ol class="lv-steps2" role="list">
+    <li class="lv-step2"><h3 class="lv-step2-h"><b aria-hidden="true">1</b>Install <small data-lv-inst-say>or skip it: the script tag below loads it from a CDN</small></h3>
+      <div class="code cmdline lv-code" data-lv-code="npm"><pre tabindex="0" aria-label="Install command"><code id="lv-code-npm">npm i ${SCOPE}/dynamic</code></pre><button class="copy-btn lv-copy" type="button" data-lv-copy="npm">Copy</button></div></li>
+    <li class="lv-step2"><h3 class="lv-step2-h"><b aria-hidden="true">2</b>Your element <small>follows the values, style, colours and size you set</small></h3>
+      <div id="lv-el-pane" role="tabpanel" aria-labelledby="fw-html">${code('el', 'html', 'HTML', SNIP.element(i, stOf(i), 'html'))}</div>
+      ${hasToday(i) ? `<p class="lv-dev-note" data-lv-today-note>Add <code>today</code> and it shows the visitor’s own date and time, updated every minute: <code>&lt;with-live-icon name="${n}" today&gt;</code>. “Use today” above adds it for you.</p>` : ''}</li>
+    <li class="lv-step2" id="live"><h3 class="lv-step2-h"><b aria-hidden="true">3</b>Change it live <small>from an API, a WebSocket, a timer or a click; with <code>animate</code> it moves to each new value</small></h3>
+      ${updDemo(i)}
+      <p class="lv-upd-note">Numbers roll, levels ease, clock hands take the short way round and words cross-fade. One change without the attribute: <code>icon.animateTo({ ${SNIP.feedKeys(i).map(k => `${/^[a-z]\w*$/i.test(k) ? k : `'${k}'`}: ${JSON.stringify(SNIP.feedKeys(i).length ? (i.examples?.[1]?.[k] ?? i.defaults?.[k]) : null)}`).join(', ')} })</code>. Each redraw fires a <code>with-live-render</code> event; with reduced motion, values change at once.</p></li>
+    <li class="lv-step2"><h3 class="lv-step2-h"><b aria-hidden="true">4</b>Attributes <small>${Object.keys(i.params).length} for this icon, plus the ones every live icon takes</small></h3>
+      ${controlsNoJs(i)}
+      <table class="lv-ptable lv-ptable-base"><tbody>${[['variant', `any of the ${NS} styles (default line)`], ['size', 'px or any CSS length (default 24)'], ['color', 'the outline colour (default: the text colour)'], ['vars', "style colours as JSON: vars='{\"glass-pane\":\"#cde\"}'"], ...(hasToday(i) ? [['today', 'the visitor’s date and time, redrawn every minute']] : []), ['animate', 'value changes move instead of jumping; animate="900" sets the ms'], ['label', 'the accessible name (default: what it shows); label="" for decoration']].map(([a, t]) => `<tr><th scope="row"><code>${a}</code></th><td>${esc(t)}</td></tr>`).join('')}</tbody></table></li>
+  </ol>
+</section>
+<section class="wrap lv-sec lv-more" id="faq" aria-labelledby="h-faq">
+  <div class="lv-more-col">
+    <h2 class="h3" id="h-faq">Questions</h2>
     ${faqHtml(faqs)}
   </div>
+  ${aka.length ? `<div class="lv-more-col"><h2 class="h3">Also called</h2><p class="lv-aka">${aka.map(a => `<span class="tag">${esc(a.replace(/-/g, ' '))}</span>`).join(' ')}</p><p class="muted">Search any of these words to find this icon.</p></div>` : ''}
 </section>
 <section class="wrap lv-related" id="related" aria-labelledby="h-rel">
   ${sib.length ? `<div class="lv-rel-head"><h2 class="h3" id="h-static">The plain ${esc(sib.length > 1 ? 'icons' : 'icon')}</h2><a class="lv-link" href="../icons.html">All static icons ${arrow}</a></div>
@@ -683,6 +756,23 @@ ${sections}
     }))
     pages.push({ url: `live/${n}.html`, title: `${i.title} live icon`, summary: i.description, lastmod: lastmod(n) })
   }
+  // /live/ (CloudFront serves live/index.html): a clean noindex,follow redirect to the hub, live.html
+  write('live/index.html', `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live icons | ${esc(BRAND)}</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${BASE}/live.html">
+<meta http-equiv="refresh" content="0; url=../live.html">
+<meta name="color-scheme" content="light dark">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FBF8F3;color:#111318;font:16px/1.5 system-ui,sans-serif}a{color:inherit}@media (prefers-color-scheme:dark){body{background:#0D0F14;color:#F3F1EC}}</style>
+<script>location.replace('../live.html'+location.search+location.hash)</script>
+</head>
+<body><p><a href="../live.html">Live icons</a></p></body>
+</html>
+`)
   // drop pages of live icons that no longer exist
   const liveDir = path.join(SITE, 'live')
   for (const f of fs.readdirSync(liveDir)) if (f.endsWith('.html') && !written[`live/${f}`]) fs.rmSync(path.join(liveDir, f))

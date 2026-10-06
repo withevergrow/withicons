@@ -33,6 +33,8 @@
   var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
   var INK = '#111318', INK_D = '#F4F0E8'
   var CDN = 'https://cdn.jsdelivr.net/npm/@withicons'
+  // a package's dist folder on jsDelivr, always the latest release
+  function cdnDist(pkg) { return CDN + '/' + pkg + '@latest/dist' }
   var CLASH = ['Map', 'Image', 'History', 'File', 'Link', 'Navigation', 'Clipboard', 'Keyboard', 'Bluetooth', 'Screen', 'Option', 'Text', 'Location', 'Range', 'Selection', 'Notification', 'Set', 'Date', 'Error', 'Symbol', 'Proxy', 'Worker', 'Lock', 'Headers', 'Request', 'Response']
   var reducedMq = W.matchMedia ? W.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false }
   // touch-first devices (phones, tablets): say "tap", not "hover"
@@ -263,9 +265,18 @@
   // <symbol>, while a style's data file holds all 500 icons (up to 1.5 MB). Used for "Turn into" targets. Needs http(s):
   // from file:// the fetch fails and callers fall back to the style data files.
   var XS = {}, xsLoading = {}
+  // first choice: data/by-icon/<name>.js (window.WITH_ICON, one icon in every style, works from file:// too)
   function fetchIconPage(name) {
     if (XS[name]) return Promise.resolve(true)
+    if (W.WITH_ICON && W.WITH_ICON[name]) { XS[name] = W.WITH_ICON[name]; return Promise.resolve(true) }
     if (xsLoading[name]) return xsLoading[name]
+    if (/^[a-z0-9-]+$/.test(name)) return (xsLoading[name] = loadScript(siteUrl('data/by-icon/' + name + '.js')).then(function () {
+      if (W.WITH_ICON && W.WITH_ICON[name]) { XS[name] = W.WITH_ICON[name]; return true }
+      xsLoading[name] = null; return fetchIconHtml(name)
+    }))
+    return fetchIconHtml(name)
+  }
+  function fetchIconHtml(name) {
     if (!W.fetch || !W.DOMParser || /^file:/.test(location.protocol) || !/^[a-z0-9-]+$/.test(name)) return Promise.resolve(false)
     return (xsLoading[name] = W.fetch(siteUrl('icons/' + name + '.html')).then(function (r) { return r.ok ? r.text() : '' }).then(function (html) {
       if (!html) return false
@@ -424,6 +435,10 @@
     if (['none', 'loop', 'hover', 'once'].indexOf(S.anim) < 0) S.anim = 'loop'
     if (S.deco !== 'still') S.deco = ''
     if (opts.anim) S.anim = opts.anim
+    // the visitor's code stack is shared with the library's code bar and the icon pages (localStorage 'with-stack')
+    var STACK2CODE = { html: 'tag', svg: 'html', react: 'react', vue: 'vue', web: 'web' }, CODE2STACK = { tag: 'html', html: 'svg', react: 'react', vue: 'vue', web: 'web' }
+    try { var sk0 = localStorage.getItem('with-stack'); if (STACK2CODE[sk0]) S.code = STACK2CODE[sk0] } catch (e) { }
+    function setCode(v) { set({ code: v }); try { if (CODE2STACK[v]) localStorage.setItem('with-stack', CODE2STACK[v]) } catch (e) { } }
 
     /* "Turn into": the one source of truth for the swap. Every live copy (preview, placements, the library stage, effect
        chips), the code and every download is drawn from SW; on/off is applied to the live copies as a class (syncSwaps), so
@@ -490,12 +505,13 @@
       if (name === I.name && I.data && I.data.styles && I.data.styles[style]) return I.data.styles[style].inner
       var m = svgStore(style); if (m && m[name] != null) return m[name]
       if (XS[name] && XS[name][style] != null) return XS[name][style]
+      var wi = W.WITH_ICON && W.WITH_ICON[name]; if (wi && wi[style] != null) return wi[style]
       if (style === 'line' && I.data && I.data.thumbs && I.data.thumbs[name] != null) return I.data.thumbs[name]
       return null
     }
     // tried[style]: 1 while its data file loads, 2 once it has (only then may a missing drawing fall back to line)
     var tried = {}
-    function ensureStyle(style) { return innerOf(I.name, style) != null ? Promise.resolve(true) : loadStyleData(style) }
+    function ensureStyle(style) { return innerOf(I.name, style) != null ? Promise.resolve(true) : fetchIconPage(I.name).then(function (ok) { return ok && innerOf(I.name, style) != null ? true : loadStyleData(style) }) }
     function thumbInner(name) {
       if (I.data && I.data.thumbs && I.data.thumbs[name]) return I.data.thumbs[name]
       return innerOf(name, 'line')
@@ -800,7 +816,7 @@
         chipsEl.forEach(function (b) { var on = b.getAttribute('data-cp-pal') === c.pal; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; any = any || on })
         if (!any && chipsEl[0]) chipsEl[0].tabIndex = 0
         var note = $('[data-cp-note]', el), edited = Object.keys(tw).length
-        note.textContent = c.pal ? (c.palName + (edited ? ', with your edits' : '') + '. Applies to every style.') : hasCustom(c) ? 'Your own colours.' : 'Pick a palette, or change any colour above.'
+        note.textContent = c.pal ? (c.palName + (edited ? ', with your edits' : '') + (opts.colorsPerStyle ? '. For ' + info(s.style).title + ' only: another style starts from its own colours.' : '. Applies to every style.')) : hasCustom(c) ? 'Your own colours.' : (opts.colorsPerStyle ? 'Pick a palette, or edit each colour.' : 'Pick a palette, or change any colour above.')
       }
       function pal(id) { var s = sb(), l = (s && palettesOf(s.name)) || []; for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return null }
       function onClick(e) {
@@ -1308,11 +1324,11 @@
             '</div></div>' +
             '<label class="wied-flat" data-flat-wrap hidden><input type="checkbox" data-flat><span class="wied-flat-ui" aria-hidden="true"></span><span>Flat colours <small>write the hex values into the SVG instead of CSS variables</small></span></label>' +
             '<div class="wied-codebox"><pre><code data-code-out></code></pre><button type="button" class="wied-copy" data-do="copy-code">' + G.copy + '<span>Copy</span></button></div>' +
-            '<details class="wied-setup" data-setup><summary><span>First time? Show setup</span><small>one line for your page’s &lt;head&gt;</small></summary>' +
-              '<p class="wied-setup-hint"><b>First time?</b> Add this line once inside your page’s <code>&lt;head&gt;</code></p>' +
+            '<details class="wied-setup" data-setup><summary><span data-setup-s>First time? Show setup</span><small data-setup-sub>one line for your page’s &lt;head&gt;</small></summary>' +
               '<div data-setup-lines></div>' +
-              '<p class="wied-setup-more">Prefer not to add anything? <button type="button" class="wied-link" data-do="copy-svg">Copy the SVG code</button> instead: it works anywhere, no setup.</p>' +
+              '<p class="wied-setup-more" data-setup-more>Prefer not to add anything? <button type="button" class="wied-link" data-do="copy-svg">Copy the SVG code</button> instead: it works anywhere, no setup.</p>' +
             '</details>' +
+            '<details class="wied-setup wied-sizehelp" data-sizehelp><summary><span>Make it bigger or smaller</span><small data-size-sub></small></summary><div data-size-lines></div></details>' +
           '</div>' + (opts.codeFold ? '</details>' : '') +
         '</div>' +
         '<p class="visually-hidden" aria-live="polite" data-live></p>'
@@ -1706,8 +1722,10 @@
       S.tab = t
       $$('[role=tab][data-tab]', root).forEach(function (b) { var on = b.getAttribute('data-tab') === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus() })
       $$('[data-pane]', root).forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== t })
-      var on = $('[role=tab][aria-selected="true"]', root), ink = $('.wied-tab-ink', root)
-      if (on && ink) { ink.style.width = on.offsetWidth + 'px'; ink.style.transform = 'translateX(' + on.offsetLeft + 'px)' }
+      // the pill is placed by CSS from the active index (--i of --n equal tabs): exact at any width, after fonts load,
+      // while the studio is hidden in a closed sheet, and in both themes (nothing is measured)
+      var tl = $('.wied-tabs', root)
+      if (tl) { var vis = $$('[role=tab][data-tab]', tl).filter(function (b) { return !b.hidden }), ix = 0; vis.forEach(function (b, k) { if (b.getAttribute('data-tab') === t) ix = k }); tl.style.setProperty('--i', ix); tl.style.setProperty('--n', vis.length || 1) }
       if (t === 'swap') { var b = $('[data-sugg]', root); if (b) paintThumbs(b); renderSwap(); if ($('[data-st-i][data-wait]', root)) paintStyleIcons() }
       if (t === 'look' && $('[data-st-i][data-wait]', root)) paintStyleIcons()
     }
@@ -1775,12 +1793,29 @@
       // code
       $$('[data-code]', root).forEach(function (b) { var on = b.getAttribute('data-code') === S.code; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1 })
       $('[data-code-out]', root).innerHTML = hl(codeFor(S.code))
-      $('[data-setup-lines]', root).innerHTML = setupLines().map(function (l, i) { return '<button type="button" class="wied-line" data-line="' + i + '"><code>' + esc(l) + '</code>' + G.copy + '<span class="visually-hidden">Copy this line</span></button>' }).join('')
+      paintSetup()
       buildPresets()
       dlPanels.forEach(function (p) { p.update() })
       if (place) place.render()
       if (remember) store(KEY, { style: S.style, color: S.color, size: S.size, px: S.px, bg: S.bg, anim: S.anim, speed: S.speed, amount: S.amount, deco: S.deco, code: S.code, flat: S.flat })
       if (!o.silent) emit()
+    }
+    // the setup and size disclosures under the code follow the selected tab
+    function paintSetup() {
+      var kind = S.code, groups = setupGroups(kind), idx = 0, fw = kind === 'react' || kind === 'vue'
+      var box = $('[data-setup]', root), lines = 0
+      groups.forEach(function (g) { lines += g.lines.length })
+      box.hidden = !groups.length
+      $('[data-setup-s]', root).textContent = fw ? 'Show install and import' : kind === 'html' ? 'Show setup for the motion' : 'First time? Show setup'
+      $('[data-setup-sub]', root).textContent = fw ? 'npm i @withicons/' + kind + ', then the import' : (lines > 1 ? lines + ' lines' : 'one line') + ' for your page’s <head>'
+      $('[data-setup-lines]', root).innerHTML = groups.map(function (g) {
+        var hint = g.k === 'install' ? '<b>Install once</b> in your project' : g.k === 'import' ? '<b>Import</b> at the top of your file (the code above already starts with ' + (g.lines.length > 1 ? 'these lines' : 'this line') + ')' : (kind === 'html' ? '<b>For the motion</b>, add ' : '<b>First time?</b> Add ') + (g.lines.length > 1 ? 'these lines' : 'this line') + ' once inside your page’s <code>&lt;head&gt;</code>'
+        return '<p class="wied-setup-hint" data-setup-k="' + g.k + '">' + hint + '</p>' + g.lines.map(function (l) { return '<button type="button" class="wied-line" data-line="' + (idx++) + '"><code>' + esc(l) + '</code>' + G.copy + '<span class="visually-hidden">Copy this line</span></button>' }).join('')
+      }).join('')
+      $('[data-setup-more]', root).hidden = !(kind === 'tag' || kind === 'web')
+      var sh = sizeHelp(kind)
+      $('[data-size-sub]', root).textContent = kind === 'tag' ? 'font size, a size class or an exact size' : kind === 'web' ? 'the size attribute' : kind === 'html' ? 'width and height' : 'the size prop'
+      $('[data-size-lines]', root).innerHTML = '<p class="wied-setup-hint">' + sh.say + '</p>' + sh.rows.map(function (r, i) { return (r[0] ? '<p class="wied-size-k">' + esc(r[0]) + '</p>' : '') + '<button type="button" class="wied-line" data-sline="' + i + '"><code>' + esc(r[1]) + '</code>' + G.copy + '<span class="visually-hidden">Copy this line</span></button>' }).join('') + (sh.note ? '<p class="wied-setup-more">' + sh.note + '</p>' : '')
     }
     function setRange(k, v, txt) {
       var r = $('[data-range="' + k + '"]', root), out = $('[data-out="' + k + '"]', root)
@@ -1864,16 +1899,50 @@
     }
     function styleAttr(parts) { parts = parts.filter(Boolean); return parts.length ? ' style="' + parts.join('; ') + '"' : '' }
     function varsList(mi) { return mi ? Object.keys(mi.vars).map(function (k) { return k + ': ' + mi.vars[k] }) : [] }
-    function setupLines() {
-      // with-loader.js (~6 KB gzipped) links just the CSS of the <i> tags on the page, any mix of styles
-      var lines = ['<script src="' + CDN + '/classes/dist/with-loader.js" defer></script>']
-      // CSS-only icons paint palettes from a data URI that CSS variables cannot reach: custom colours need the tiny runtime
-      var tb = swapReady() ? swapTarget() : null, bcz = tb ? bColors(tb).cz : null
-      if (S.code === 'tag' && ((isMulti() && colorsFor()) || bcz)) lines.push('<script src="' + CDN + '/classes/dist/with-icons.js" defer></script>')
-      if (S.anim !== 'none' || swapTarget()) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/motion.css">')
-      // the icon's own moves, one small file per animated icon (icons.css bundles all of them)
-      if (S.code !== 'tag' && !swapReady() && ownCode(motionInfo())) lines.push('<link rel="stylesheet" href="' + CDN + '/motion/dist/icons/' + I.name + '.css">')
-      return lines
+    // the one-time setup for the selected code tab, in groups: [{ k: 'head' | 'install' | 'import', lines: [...] }]
+    //   <i> tag: with-loader.js (~6 KB gzipped) links just the CSS of the <i> tags on the page, any mix of styles
+    //   HTML + SVG: nothing, unless it moves (motion.css + the icon's own moves)
+    //   React / Vue: npm i the package (+ @withicons/motion when it moves), then the import lines of the code above
+    //   web component: cdn.js (+ the motion element and motion.css when it moves)
+    function setupGroups(kind) {
+      kind = kind || S.code
+      var moving = S.anim !== 'none' || !!swapTarget()
+      var motionCss = '<link rel="stylesheet" href="' + cdnDist('motion') + '/motion.css">'
+      if (kind === 'react' || kind === 'vue') {
+        var imps = codeFor(kind).split('\n').filter(function (l) { return /^\s*import\b/.test(l) && l.indexOf('@withicons/') >= 0 }).map(function (l) { return l.trim() })
+        return [{ k: 'install', lines: ['npm i @withicons/' + kind + (moving ? ' @withicons/motion' : '')] }, { k: 'import', lines: imps }]
+      }
+      var head = []
+      if (kind === 'tag') {
+        head.push('<script src="' + cdnDist('classes') + '/with-loader.js" defer></script>')
+        // CSS-only icons paint palettes from a data URI that CSS variables cannot reach: custom colours need the tiny runtime
+        var tb = swapReady() ? swapTarget() : null, bcz = tb ? bColors(tb).cz : null
+        if ((isMulti() && colorsFor()) || bcz) head.push('<script src="' + cdnDist('classes') + '/with-icons.js" defer></script>')
+        if (moving) head.push(motionCss)
+      } else if (kind === 'web') {
+        if (moving) head.push(motionCss)
+        head.push('<script type="module" src="' + cdnDist('web') + '/cdn.js"></script>')
+        if (moving) head.push('<script type="module" src="' + cdnDist('motion') + '/element.js"></script>')
+      } else if (kind === 'html') {
+        if (moving) head.push(motionCss)
+        // the icon's own moves, one small file per animated icon (icons.css bundles all of them)
+        if (moving && !swapReady() && ownCode(motionInfo())) head.push('<link rel="stylesheet" href="' + cdnDist('motion') + '/icons/' + I.name + '.css">')
+      }
+      return head.length ? [{ k: 'head', lines: head }] : []
+    }
+    function setupLines(kind) { var out = []; setupGroups(kind).forEach(function (g) { out = out.concat(g.lines) }); return out }
+    // "Make it bigger or smaller": copyable one-liners for the selected tab, at 48 px
+    function sizeHelp(kind) {
+      kind = kind || S.code
+      var n = I.name, st = S.style, C = comp(n), cls = 'with with-' + n + (st === 'line' ? '' : ' with-' + st)
+      if (kind === 'tag') return { say: 'An &lt;i&gt; icon is 1em square, so it follows the text size. Three ways to make it 48 px:', note: 'Setting only <code>height</code> does not work: the width stays 1em. Use one of these instead.',
+        rows: [['Font size (also grows with the text around it)', '<i class="' + cls + '" style="font-size: 48px"></i>'],
+          ['A size class: with-xs, with-sm, with-lg, with-2x to with-5x (times the text size)', '<i class="' + cls + ' with-3x"></i>'],
+          ['An exact size, whatever the text size', '<i class="' + cls + '" style="--with-size: 48px"></i>']] }
+      if (kind === 'web') return { say: 'Use the <code>size</code> attribute: pixels or any CSS length.', rows: [['', '<with-icon name="' + n + '"' + (st === 'line' ? '' : ' variant="' + st + '"') + ' size="48"></with-icon>']] }
+      if (kind === 'react') return { say: 'Use the <code>size</code> prop: a number in pixels, or any CSS length as a string.', rows: [['', '<' + C + ' size={48} />']] }
+      if (kind === 'vue') return { say: 'Use the <code>size</code> prop: a number in pixels, or any CSS length as a string.', rows: [['', '<' + C + ' :size="48" />']] }
+      return { say: 'Change the <code>width</code> and <code>height</code> on the <code>&lt;svg&gt;</code> (or use the Size slider in Look). It stays sharp at any size.', rows: [['', '<svg width="48" height="48" viewBox="0 0 24 24" …>']] }
     }
     function codeFor(kind) {
       var n = I.name, st = S.style, mi = motionInfo(), t = swapReady() ? swapTarget() : null
@@ -1919,14 +1988,14 @@
       }
       if (kind === 'html') {
         var svgA = buildSvg(n, st, { size: S.size, mode: 'code', flat: S.flat })
-        var head = S.anim !== 'none' || t ? '<!-- motion: ' + CDN + '/motion/dist/motion.css -->\n' : ''
+        var head = S.anim !== 'none' || t ? '<!-- motion: ' + cdnDist('motion') + '/motion.css -->\n' : ''
         if (t) {
           var svgB = buildSvg(t.name, t.style, { size: S.size, mode: 'code', flat: S.flat, colors: bc.cz, mono: bc.mono })
           var i2 = trig === 'auto' ? '' : '  '
           return head + trigNote + open('') + i2 + '<span' + wrapAttrs() + '>\n' + i2 + '  ' + svgA.replace('<svg ', '<svg class="wm-a" ') + '\n' + i2 + '  ' + svgB.replace('<svg ', '<svg class="wm-b" ') + '\n' + i2 + '</span>' + close('')
         }
         if (!mi) return svgA
-        if (ownCode(mi)) return '<!-- motion: ' + CDN + '/motion/dist/motion.css + icons/' + I.name + '.css (data-wm plays ' + esc(I.title) + '’s own moves, part by part) -->\n' + wrapOpen(mi) + styleAttr(ownList(mi)) + '>\n  ' + svgA + '\n</span>'
+        if (ownCode(mi)) return '<!-- motion: ' + cdnDist('motion') + '/motion.css + icons/' + I.name + '.css (data-wm plays ' + esc(I.title) + '’s own moves, part by part) -->\n' + wrapOpen(mi) + styleAttr(ownList(mi)) + '>\n  ' + svgA + '\n</span>'
         return head + '<span class="' + mi.cls + '"' + styleAttr(varsList(mi)) + '>\n  ' + svgA + '\n</span>'
       }
       var imports = function (fw) {
@@ -1990,7 +2059,7 @@
           if (extra.length) at += '\n  ' + extra.join(' ')
         }
         var ws = styleAttr([col ? 'color: ' + col : ''].concat(cvars, mi ? (ownCode(mi) && !t ? ownList(mi) : varsList(mi).filter(function (v) { return !/--wm-(ox|oy|dx|dy|steps)/.test(v) })) : []))
-        return '<script type="module" src="' + CDN + '/web/dist/cdn.js"></script>\n' + (mi || t ? '<script type="module" src="' + CDN + '/motion/dist/element.js"></script>\n' : '') + '\n<with-icon' + at + (t ? '\n ' : '') + ' label="' + I.title + '"' + ws + '></with-icon>'
+        return '<script type="module" src="' + cdnDist('web') + '/cdn.js"></script>\n' + (mi || t ? '<script type="module" src="' + cdnDist('motion') + '/element.js"></script>\n' : '') + '\n<with-icon' + at + (t ? '\n ' : '') + ' label="' + I.title + '"' + ws + '></with-icon>'
       }
       return ''
     }
@@ -2107,7 +2176,7 @@
           if (ok && b) { b.classList.add('is-done'); $('span', b).textContent = 'Copied'; clearTimeout(b._t); b._t = setTimeout(function () { b.classList.remove('is-done'); $('span', b).textContent = 'Copy' }, 1500) }
         })
       },
-      code: codeFor, animatedSvg: animatedExport, png: function (st, px) { st = st || S.style; px = px || S.px; return toPng(buildSvg(I.name, st, { size: px, mode: 'file', hex: colorHex(st) }), px) }
+      code: codeFor, setup: function (kind) { return setupLines(kind || S.code) }, setupGroups: function (kind) { return setupGroups(kind || S.code) }, sizeHelp: function (kind) { return sizeHelp(kind || S.code) }, animatedSvg: animatedExport, png: function (st, px) { st = st || S.style; px = px || S.px; return toPng(buildSvg(I.name, st, { size: px, mode: 'file', hex: colorHex(st) }), px) }
     }
 
     /* ───────── events ───────── */
@@ -2154,15 +2223,16 @@
       else if (b.hasAttribute('data-replay')) replay()
       else if (b.hasAttribute('data-force')) { forced = true; root.classList.add('is-forced'); presetKey = ''; fxKey = ''; render() }
       else if ((v = b.getAttribute('data-tab'))) selectTab(v)
-      else if ((v = b.getAttribute('data-code'))) set({ code: v })
-      else if (b.hasAttribute('data-line')) { var l = setupLines()[+b.getAttribute('data-line')]; copyText(l).then(function (ok) { toast(ok ? 'Copied. Add it once inside <head>.' : 'Couldn’t reach the clipboard.') }) }
+      else if ((v = b.getAttribute('data-code'))) setCode(v)
+      else if (b.hasAttribute('data-line')) { var l = setupLines()[+b.getAttribute('data-line')]; copyText(l).then(function (ok) { toast(!ok ? 'Couldn’t reach the clipboard.' : /^npm /.test(l) ? 'Copied. Run it once in your project.' : /^import /.test(l) ? 'Copied the import line.' : 'Copied. Add it once inside <head>.') }) }
+      else if (b.hasAttribute('data-sline')) { var sr = sizeHelp().rows[+b.getAttribute('data-sline')]; copyText(sr[1]).then(function (ok) { toast(ok ? 'Copied the 48 px version.' : 'Couldn’t reach the clipboard.') }) }
       else if ((v = b.getAttribute('data-do'))) {
         if (v === 'copy-img') actions.copyImage(); else if (v === 'svg') actions.downloadSvg(); else if (v === 'png') actions.downloadPng()
         else if (v === 'anim') actions.downloadAnimated(); else if (v === 'gif') actions.downloadGif(); else if (v === 'copy-code') actions.copyCode(); else if (v === 'copy-svg') actions.copySvg()
       }
     }
     // single-choice groups: arrow keys move and choose within the group (radiogroup / tablist around the button)
-    var KEYGROUPS = [['data-tab', function (v) { selectTab(v, true) }], ['data-code', function (v) { set({ code: v }) }], ['data-st', function (v) { set({ style: v }) }],
+    var KEYGROUPS = [['data-tab', function (v) { selectTab(v, true) }], ['data-code', function (v) { setCode(v) }], ['data-st', function (v) { set({ style: v }) }],
       ['data-bst'], ['data-fx'], ['data-sw-trig'], ['data-sw-speed'], ['data-sw-ease'], ['data-sw-form']]
     function onKey(e) {
       var t = e.target
@@ -2828,6 +2898,7 @@
       svgText: function (mode, st, px) { return buildSvg(I.name, st || S.style, { size: px || S.size, mode: mode || 'file', hex: colorHex(st || S.style) }) },
       // colours of multi-colour styles (every part + palettes): a Colours panel anywhere, and the colours for hosts' own exports
       colorsPanel: function (el, k) { return colorPanel(el, k) },
+      resetColors: function () { resetColors(subj('a')) }, hasCustomColors: function () { return hasCustom(cstate()) },
       // the Download panel anywhere (the library drawer mounts one beside its own buttons): { quick: false } leaves out
       // the quick buttons. downloads() lists the mounted panels (each has .download(formatId, opts) and .make())
       downloadPanel: function (el, o) { return downloadPanel(el, o) }, downloads: function () { return dlPanels.slice() }, loadExports: loadExports,

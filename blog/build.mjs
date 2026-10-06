@@ -288,7 +288,7 @@ ${header()}
         <div><dt>${p.sources?.length ? 'Facts checked' : 'Updated'}</dt><dd><time datetime="${checked}">${fmtDate(checked)}</time></dd></div>
       </dl>
       <figure class="a-figure">
-        <div class="a-figure__img">${img(p.hero, { sizes: '(min-width: 1280px) 1240px, 100vw', eager: true })}</div>
+        <div class="a-figure__img">${img(p.hero, { sizes: '(min-width: 1280px) 1240px, 100vw', eager: true, priority: false })}</div>
         <div class="stickers" aria-hidden="true">${stickers}</div>
         <figcaption>${credit(p.hero)}</figcaption>
       </figure>
@@ -419,6 +419,8 @@ fs.writeFileSync(path.join(OUT, 'llms-full.txt'), llmsFull())
 for (const f of ['blog.css', 'blog.js']) fs.copyFileSync(path.join(HERE, 'assets', f), path.join(OUT, 'assets', f))
 for (const k of [...used.images].sort()) for (const v of ['1600.webp', '800.webp'])
   if (!fs.existsSync(path.join(IMG, `${k}-${v}`))) warnings.push(`missing image file site/blog/assets/img/${k}-${v}`)
+// photo weight: blog/tools/cap-images.py squeezes anything over these caps (a few very detailed photos stay above at q65)
+for (const f of fs.readdirSync(IMG)) { const cap = /-1600\.webp$/.test(f) ? 400e3 : /-800\.webp$/.test(f) ? 160e3 : 0; if (cap && fs.statSync(path.join(IMG, f)).size > cap) warnings.push(`heavy image site/blog/assets/img/${f} (${Math.round(fs.statSync(path.join(IMG, f)).size / 1000)} KB): run python blog/tools/cap-images.py`) }
 for (const f of fs.readdirSync(IMG)) if (!used.images.has(f.replace(/-(1600|800)\.webp$|-og\.jpg$/, ''))) warnings.push(`unused image site/blog/assets/img/${f}`)
 
 console.log(`blog: ${posts.length} posts, ${used.images.size} images, ${used.icons.size} distinct icons -> site/blog/`)

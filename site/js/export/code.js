@@ -17,7 +17,7 @@
     return WE.vector
   }
   var SITE = 'https://withicons.com'
-  var CDN = 'https://cdn.jsdelivr.net/npm/@withicons/motion/dist/'
+  var CDN = 'https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/'
 
   // ---------- names ----------
   function pascal(s) {
@@ -409,7 +409,7 @@
       L.push('<!-- Motion (@withicons/motion): add these two lines once, in <head> -->',
         '<link rel="stylesheet" href="' + CDN + 'motion.css">', '<link rel="stylesheet" href="' + CDN + 'icons.css">')
       if (p.runtime) L.push('<!-- ' + (p.preset === 'draw' ? '"draw"' : '"inview"') + ' also needs the runtime: -->',
-        '<script type="module">import { motion } from \'https://cdn.jsdelivr.net/npm/@withicons/motion/+esm\'; document.querySelectorAll(\'[data-wm-auto]\').forEach(el => motion(el, el.dataset.wm, ' + JSON.stringify(p.opts) + '))</script>')
+        '<script type="module">import { motion } from \'https://cdn.jsdelivr.net/npm/@withicons/motion@latest/+esm\'; document.querySelectorAll(\'[data-wm-auto]\').forEach(el => motion(el, el.dataset.wm, ' + JSON.stringify(p.opts) + '))</script>')
     }
     if (p && p.swap) {
       var sv = Object.keys(p.vars).length ? ' style="' + styleVars(p.vars) + '"' : ''

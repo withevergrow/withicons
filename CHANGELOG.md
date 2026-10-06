@@ -6,6 +6,57 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.2.2 - 2026-10-06
+
+### Added
+- `@withicons/dynamic`: live icons can **move to new values instead of jumping**. `<with-live-icon animate>` (or
+  `animate="900"` for a duration in ms) animates every change: numbers roll, levels ease, clock hands take the short way
+  round and words cross-fade. From script: `animateTo(el, values, { ms, ease })` and `el.animateTo(values)` (both resolve
+  when the last frame is drawn), plus `transition()`, `plan()`, `interpolate()`, `setMotion()` and `reducedMotion()` for
+  your own loops. With reduced motion the change is instant. React and Vue get an `animate` prop.
+- `@withicons/dynamic`: a **default accessible name**. Without a `label`, an icon is named by what it shows
+  (`describe('calendar-date', { day: 17, month: 'MAR' })` gives "Calendar date, March 17"); `label=""` makes it decorative.
+- `@withicons/classes`: `--with-size` sets an exact icon size whatever the text size
+  (`<i class="with with-home" style="--with-size: 48px">`). The READMEs and the site now explain the three ways to
+  resize a class icon (font size, a size class, `--with-size`).
+- Search: finance words (fintech, trading, stocks, investing and more) find the money, chart and trend icons.
+
+### Changed
+- `@withicons/dynamic`: `loaded(style)` says whether a style's renderer runs on this thread. In the lite and CDN builds a
+  rich style can be drawn only by the render workers, so `loaded(style)` can be `false` while `renderAsync()` and
+  `<with-live-icon>` draw it fine. Check `cached(...)` or await `renderAsync()` before a sync `render()`.
+- `@withicons/mcp`: the `npx withicons export …` command that `export_icon` returns now quotes values so it pastes the
+  same into bash, zsh, PowerShell and cmd (hex colours and leading `@` were split or eaten by some shells), and passes
+  `hold` (seconds on each icon in a swap animation) through, like the CLI `--hold`.
+- `package.json` `jsdelivr` / `unpkg` fields for `@withicons/angular`, `svelte` and `static`, so their bare CDN URLs show
+  the entry (static: the `icons.json` catalogue) instead of a 404.
+- Website and READMEs use `@latest` in every jsDelivr link.
+- Package READMEs: setup lines per stack, a "Make it bigger or smaller" section, corrected sizes (Svelte 5 about 10 KB
+  gzipped for the first icon).
+
+### Fixed
+- Bare jsDelivr URLs (`cdn.jsdelivr.net/npm/@withicons/web`, `…/classes`, `…/dynamic`, with or without `@latest` or a
+  version range) now work: the scripts they serve load their icons from that exact version's `dist/` instead of a
+  broken path one folder up.
+- `@withicons/classes`: `with-all.css` no longer paints the last palette style's colours behind a one-colour icon (a line
+  icon could show a kawaii fill when every style was loaded).
+- Releases: `scripts/publish.mjs` publishes every package after all of its internal dependencies and the `withicons` CLI
+  strictly last, and waits until each dependency is visible on the registry (0.2.1's CLI went out a few minutes before
+  `@withicons/mcp`, so `npx withicons@latest` failed until it did).
+
+### Website
+- Icons page and viewer redesign: one search bar with the style and view pickers, a docked details panel (resizable,
+  full screen with F, a bottom sheet on phones) with Copy image, PNG, SVG and a "Use it in code" bar for your stack, an
+  action dock that stands in for those buttons only once they are scrolled out of view, palettes with an Auto background
+  that suits them, a reset for colours, and every other format one tap away under "More formats".
+- Icon pages: a quick-use bar (Copy image, PNG, SVG, the code line for your stack) and a developer panel with setup per
+  stack and "Make it bigger or smaller".
+- Live icon pages redesigned: the icon and its settings side by side, every style in one grid, an "Update it live" demo
+  (timer, API polling, WebSocket, user input) that animates with `animate`, and attributes per icon.
+- Home: new copy, a style carousel and code tabs for motion.
+- Folder index pages (`categories/`, `styles/`, `guides/`, …) for every folder in the sitemap, lazy-loaded search, lighter
+  fonts and images, and smaller off-screen work on long pages.
+
 ## 0.2.1 - 2026-10-06
 
 ### Changed

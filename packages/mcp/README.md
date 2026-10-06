@@ -109,8 +109,8 @@ On Windows, if `npx` is not found, use `"command": "cmd", "args": ["/c", "npx", 
 
 ### Remote (HTTP) instead of npx
 
-The same server also runs as a stateless Streamable-HTTP endpoint (`POST <endpoint>/mcp`). Use the URL of the
-hosted endpoint once it is live (it will be listed on withicons.com/ai), or your own deployment:
+The same server runs as a stateless Streamable-HTTP endpoint, hosted at **https://withicons.com/mcp** (no key,
+nothing to install; see withicons.com/ai):
 
 ```sh
 claude mcp add --transport http withicons https://withicons.com/mcp
@@ -163,23 +163,11 @@ import { Heart as HeartKawaii } from '@withicons/vue/kawaii'
 </style>
 ```
 
-## AWS Lambda (Function URL)
+## HTTP API
 
-`dist/lambda.mjs` is **one self-contained ES module** (MCP SDK, search engine, all 10,000 SVGs and the palettes inlined as JSON strings that are parsed on first use). It exports `handler` (also the default export).
-
-| setting | value |
-|---|---|
-| runtime | Node.js 20.x or 22.x (x86_64 or arm64 — no native code) |
-| handler | `lambda.handler` (file `lambda.mjs` at the zip root) |
-| memory | 512 MB recommended (256 MB works; peak RSS ≈ 130 MB — more memory = faster CPU = faster cold start) |
-| timeout | 10 s (requests take 1–20 ms warm; cold start ≈ 300–600 ms) |
-| Function URL | auth `NONE`, invoke mode `BUFFERED` (responses are plain JSON — no streaming needed) |
-| CORS | the handler sends `Access-Control-Allow-Origin: *` and answers `OPTIONS` itself; leave the Function URL CORS config off (or mirror these headers) |
-| env | none required |
-
-**Event**: Lambda Function URL payload **version 2.0** (`rawPath`, `rawQueryString`, `headers` (lower-case),
-`requestContext.http.method`, `body`, `isBase64Encoded`). API Gateway HTTP API v2 events work too.
-**Response**: `{ statusCode, headers, body, isBase64Encoded: false }`.
+The hosted endpoint at https://withicons.com also answers plain GET requests (JSON, CORS open). The remote MCP server
+and this API make vector, code and Lottie files; for PNG and animated formats `export_icon` answers with the
+`npx withicons export …` command to run locally.
 
 Routes:
 
@@ -191,9 +179,11 @@ Routes:
 | `GET /api/palettes/<name>?style=&tag=&limit=` | same as `list_palettes` |
 | `GET /api/motion/<name>?trigger=&preset=&to=&effect=&style=&format=&duration=` | same as `animate_icon` (JSON; `&raw=1` for the bare code). `GET /api/motion` lists triggers, presets and effects |
 | `GET /api/resolve/<name>` · `GET /api/styles` · `GET /api/categories[/<category>]` | catalogue |
-| `GET /` (`/health`) | status + version + endpoints |
+| `GET /api` | status + version + endpoints |
 
-GET responses carry `Cache-Control: public, max-age=…` (1 h for search, 24 h for icons) so a CDN in front works well.
+GET responses carry `Cache-Control: public, max-age=…` (1 h for search, 24 h for icons). Example: `https://withicons.com/api/icon/home.svg?style=duo`.
+
+The Lambda bundle behind it is not part of this npm package; it is built from the repository (`node forge/build.mjs mcp`, `infra/`).
 
 ## Programmatic use
 

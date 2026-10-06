@@ -179,7 +179,7 @@
       if (v != null && el.textContent !== v) el.textContent = v
     })
     $$('[data-count-line]', root).forEach(function (el) { el.textContent = countLine() })
-    if (so && so.input) so.input.setAttribute('placeholder', 'Search ' + fmt(c.icons) + ' icons — try “bin”, “money” or “settigns”')
+    if (so && so.input) so.input.setAttribute('placeholder', 'Search ' + fmt(c.icons) + ' icons, try “bin”, “money” or “settings”')
   }
   function countLine() { var c = counts(); return fmt(c.icons) + ' icons, ' + c.styles + ' styles, all free.' }
   var scriptBase = (function () {
@@ -708,12 +708,14 @@
       logo.addEventListener('pointerleave', function () { st.hover = false })
       visibility(el, function (v) { st.visible = v; v ? start(st) : stop(st) })
     })
-    if (morphs.length) idle(function () {
+    // the frames wait until the page has loaded and settled (they are decoration, never on the critical path)
+    var afterLoad = function (fn) { if (doc.readyState === 'complete') setTimeout(fn, 1200); else W.addEventListener('load', function () { setTimeout(fn, 1200) }, { once: true }) }
+    if (morphs.length) afterLoad(function () { idle(function () {
       loadFrames().then(function (data) {
         if (!data) return
         morphs.forEach(function (st) { st.frames = data.frames; st.roots = data.roots; st.i = st.i % data.frames.length; if (st.visible) start(st) })
       })
-    }, 2500)
+    }, 4000) })
   }
   function hold(st) {
     if (st.hover) return 1100
@@ -1009,7 +1011,7 @@
     el.innerHTML = '<div class="so-backdrop" data-so-close></div>' +
       '<div class="so-panel">' +
       '<div class="so-bar">' + ICON.search +
-      '<input class="so-input" type="search" placeholder="Search ' + fmt(counts().icons) + ' icons — try “bin”, “money” or “settigns”" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="so-list" aria-autocomplete="list" aria-label="Search icons">' +
+      '<input class="so-input" type="search" placeholder="Search ' + fmt(counts().icons) + ' icons, try “bin”, “money” or “settings”" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="so-list" aria-autocomplete="list" aria-label="Search icons">' +
       '<div class="so-ask"></div><button class="so-close" type="button" data-so-close aria-label="Close search">Esc</button><span class="so-progress"></span></div>' +
       '<div class="so-tools"><div class="so-styles" role="group" aria-label="Show results in style">' + chips + '</div>' +
       '<div class="so-view" role="group" aria-label="Result layout">' +
@@ -1474,7 +1476,7 @@
       add('4. The matching guide: ' + AI_SITE + '/guides/' + (app || 'APP') + '.html' + (app ? '' : ' (powerpoint, google-slides, keynote, canva, figma, notion, word-google-docs)'))
     }
     add('', true)
-    add('If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ' + AI_SITE + '/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).', true)
+    add('If you can’t open links, say so instead of guessing. What I know: names are kebab-case (trash, arrow-right, check-circle); every icon page ' + AI_SITE + '/icons/NAME.html has Copy image, SVG/PNG download and Copy SVG code. In code: <i class="with with-NAME with-STYLE"></i> after the loader script https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js (line needs no style class), or the npm packages (@withicons/react, vue, svelte, angular, solid, web).', true)
     add('')
     add('Keep it short and practical.')
     return P
@@ -1627,7 +1629,7 @@
     } else {
       h = mode === 'compact' ? '<span class="ask-ai-label"><span class="ask-ai-spark" aria-hidden="true">✦</span>Ask AI</span>' : ''
       h += '<div class="ask-ai-row">' + aiButtons(mode === 'compact') + '</div>'
-      if (mode !== 'compact') h += '<p class="ask-ai-note">We copy a ready brief and open the assistant in a new tab — it reads our skill file, searches with icons and replies with the best fit and code or steps. Gemini can’t be pre-filled, so ' + PASTE_HOW + '.</p>'
+      if (mode !== 'compact') h += '<p class="ask-ai-note">We copy a ready brief and open the assistant in a new tab. It reads our skill file, searches with icons and replies with the best fit and code or steps. Gemini can’t be pre-filled, so ' + PASTE_HOW + '.</p>'
     }
     el.innerHTML = h
     askLinks(el)
@@ -1857,7 +1859,18 @@
     wireCopy()
     on('meta', function () { paintCounts() })
     paintCounts()
-    if ($('[data-count]')) idle(function () { loadMeta().then(function () { paintCounts() }) }, 1500)
+    // the published numbers are already in the HTML; data/meta.js (~40 KB) only refreshes them, so fetch it after the
+    // page has loaded and only once a count is near the screen (the footer one rarely is)
+    if ($('[data-count]')) {
+      var countsLater = function () {
+        var io = 'IntersectionObserver' in W && new IntersectionObserver(function (es) {
+          if (es.some(function (e) { return e.isIntersecting })) { io.disconnect(); idle(function () { loadMeta().then(function () { paintCounts() }) }, 3000) }
+        }, { rootMargin: '300px' })
+        if (io) $$('[data-count]').forEach(function (el) { io.observe(el) })
+        else idle(function () { loadMeta().then(function () { paintCounts() }) }, 3000)
+      }
+      if (doc.readyState === 'complete') countsLater(); else W.addEventListener('load', countsLater, { once: true })
+    }
     $$('pre[data-code]').forEach(function (p) { p.outerHTML = codeBlock(p.textContent.replace(/^\n/, ''), p.getAttribute('data-code')) })
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { emit('fonts') })
     emit('ready')

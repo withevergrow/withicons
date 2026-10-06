@@ -22,7 +22,7 @@ From a CDN, load the presets and only the icons you animate (each icon's file is
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 ```
 
-With `<with-icon motion="loop">` (`<script type="module" src=".../motion@0.2.0/dist/element.js">` after `@withicons/web`'s
+With `<with-icon motion="loop">` (`<script type="module" src=".../motion@latest/dist/element.js">` after `@withicons/web`'s
 `dist/cdn.js`) the element links each animated icon's file by itself. In an unbundled `<script type="module">`, import
 `@withicons/motion/runtime` (`dist/runtime.js`) for `motion()` / `swap()`, not `dist/index.js` (it pulls the full spec table).
 

@@ -57,7 +57,13 @@ Every param has a plain-language `label`. Defaults must make a great-looking ico
 - `@withicons/dynamic` (packages/dynamic, emitter `forge/lib/emit-dynamic.mjs`) bundles the generators + font + kernel +
   every style renderer: `render(name, params, style, { size, color, vars }) -> svg string`, `list()`, `paramsOf(name)`;
   a `<with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii">` element; React/Vue wrappers.
-- Website: `site/vendor/dynamic/dynamic.js` (classic script, `window.WithLive`) and the Live icons pages.
+- Animated changes: `<with-live-icon animate>` (or `animate="900"` ms), `el.animateTo(values, { ms, ease })`, `WithLive.animateTo`
+  and the `animate` prop on React/Vue `LiveIcon`. Numbers roll, levels ease on a light spring, analogue hands take the
+  12-hour short way (digital clocks 24-hour), text/choices/switches cross-fade; reduced motion applies values at once.
+  A frame planner measures each icon's render cost and pre-draws slow styles in the worker; the last frame is always the
+  exact target. Core helpers: `interpolate`, `plan`, `transition`, `describe` (tests: `packages/dynamic/test/motion.test.mjs`).
+  The element and wrappers name the icon from its values ("Calendar date, March 17") unless `label` is set.
+- Website: `site/vendor/dynamic/dynamic.js` (classic script, `window.WithLive`, refreshed by emit-dynamic on every build) and the Live icons pages.
 - Static fallbacks: every generator's `examples` are pre-rendered into all styles for SEO pages and previews.
 
 ## Tools

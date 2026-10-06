@@ -859,3 +859,164 @@ html:not(.js) .ip-cta, html:not(.js) .ip-minor > button { display: none }
 /* keyboard: the map sits right after the hero in tab order, and shows itself when it receives focus (a skip link to any section) */
 .js .ip-map:focus-within { transform: none; opacity: 1; pointer-events: auto }
 @media (max-width: 720px) { .js .ip-map:focus-within { transform: translate(50%, 0) } }
+
+/* ═══════════ v5: "Use it in code" up top + a calmer developer panel ═══════════
+   The hero carries one line of code for the visitor's stack (remembered in localStorage 'with-stack', shared with the
+   library viewer; an inline script sets it before the first paint, so nothing shifts). The developer panel below holds
+   every stack: most common first, overflow tabs in a "More" menu, Install then Use, the fine print in one note. */
+.ip-qu { max-width: 560px; margin-top: 22px; padding: 12px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule); box-shadow: 0 1px 0 rgba(17, 19, 24, .03), 0 18px 40px -34px color-mix(in srgb, var(--sc) 60%, transparent) }
+.ip-qu-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 10px; padding-left: 6px }
+.ip-qu-k { display: inline-flex; align-items: center; gap: 8px; margin: 0; font: 650 11.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.ip-qu-k svg { width: 17px; height: 17px; color: var(--style-text, var(--sc)); transition: color .5s var(--ip-e) }
+.ip-qu-pick { position: relative; display: inline-flex; align-items: center; flex: none }
+.ip-qu-pick select { -webkit-appearance: none; appearance: none; width: 168px; height: 36px; padding: 0 34px 0 14px; border-radius: 999px; border: 1px solid var(--rule-strong); background: var(--paper-2); color: var(--ink); font: 650 14px/1 var(--font-sans); cursor: pointer; transition: border-color .2s, background .2s }
+.ip-qu-pick select:hover { border-color: var(--sc); background: var(--card) }
+.ip-qu-pick select:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+.ip-qu-pick > svg { position: absolute; right: 12px; width: 16px; height: 16px; color: var(--muted); pointer-events: none }
+/* enhanced by the UI kit (js/ui-kit.js): its combobox takes the native's exact place and size, so nothing moves */
+.ip-qu-pick.is-kit > svg { display: none }
+.ip-qu-pick .wk-select { inline-size: 168px; min-block-size: 36px; block-size: 36px; min-inline-size: 0; gap: 8px; padding: 0 10px 0 14px; border-radius: 999px; border-color: var(--rule-strong); background: var(--paper-2); font: 650 14px/1 var(--font-sans) }
+.ip-qu-pick .wk-select:hover { border-color: var(--sc); background: var(--card) }
+.ip-qu-line { display: none }
+.ip-qu[data-stack="html"] [data-qu-line="html"], .ip-qu[data-stack="react"] [data-qu-line="react"], .ip-qu[data-stack="vue"] [data-qu-line="vue"],
+.ip-qu[data-stack="svelte"] [data-qu-line="svelte"], .ip-qu[data-stack="angular"] [data-qu-line="angular"], .ip-qu[data-stack="solid"] [data-qu-line="solid"],
+.ip-qu[data-stack="web"] [data-qu-line="web"], .ip-qu[data-stack="svg"] [data-qu-line="svg"] { display: block }
+.ip-qu-use { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 64px; padding: 6px 6px 6px 16px; border-radius: 15px; background: var(--paper-2); border: 1px solid var(--rule) }
+.ip-qu-code { min-width: 0; margin: 0; padding: 4px 0; font: 550 13.5px/1.6 var(--font-mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2 }
+.ip-qu-code .nw { white-space: nowrap }
+.ip-qu-code .tk-c { color: #6B7280 } .ip-qu-code .tk-s { color: #157A47 } .ip-qu-code .tk-k { color: #B4236C } .ip-qu-code .tk-t { color: #2E4FD6 }
+[data-theme="dark"] .ip-qu-code .tk-c { color: #8E96A6 } [data-theme="dark"] .ip-qu-code .tk-s { color: #9BE3B4 } [data-theme="dark"] .ip-qu-code .tk-k { color: #FF8FC4 } [data-theme="dark"] .ip-qu-code .tk-t { color: #9DB2FF }
+.ip-qu-copy { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px 0 14px; border: 0; border-radius: 12px; background: var(--ink); color: var(--paper); font: 720 15px/1 var(--font-display); cursor: pointer; transition: transform .25s var(--ip-spring), background .25s }
+.ip-qu-copy svg { width: 18px; height: 18px }
+.ip-qu-copy:hover { transform: translateY(-1px) }
+.ip-qu-copy:active { transform: scale(.96) }
+.ip-qu-copy.is-done { background: #157A47; color: #fff }
+.ip-qu-setup { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 34px; margin: 6px 0 0; padding: 0 2px 0 8px; font: 500 13px/1.3 var(--font-sans); color: var(--muted) }
+.ip-qu-sk { flex: none; font-weight: 650; color: var(--ink-2, var(--ink)) }
+.ip-qu-setup code { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12.5px/1.3 var(--font-mono); color: var(--muted) }
+.ip-qu-none { flex: 1 }
+.ip-qu-mini { display: grid; place-items: center; flex: none; width: 34px; height: 34px; padding: 0; border-radius: 10px; border: 1px solid var(--rule); background: none; color: var(--muted); cursor: pointer; transition: color .2s, border-color .2s, background .2s }
+.ip-qu-mini svg { width: 16px; height: 16px }
+.ip-qu-mini:hover { color: var(--ink); border-color: var(--sc) }
+.ip-qu-mini.is-done { background: #157A47; border-color: #157A47; color: #fff }
+.ip-qu-copy:focus-visible, .ip-qu-mini:focus-visible, .ip-qu-all:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+.ip-qu-all { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; margin: 4px 0 0 8px; font: 650 14px/1.2 var(--font-sans); color: var(--ink); text-decoration: underline; text-decoration-color: var(--sc); text-decoration-thickness: 2px; text-underline-offset: 4px; border-radius: 6px }
+.ip-qu-all .arr { width: 16px; height: 16px; transform: rotate(90deg); transition: transform .3s var(--ip-spring) }
+.ip-qu-all:hover .arr { transform: rotate(90deg) translateX(3px) }
+/* "Make it bigger or smaller": a quiet disclosure under the setup line (hero bar) and after the code (developer panel) */
+.ip-size { margin: 2px 0 0; padding: 0 2px 0 8px; font: 500 13px/1.4 var(--font-sans); color: var(--muted) }
+.ip-size > summary { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; min-height: 32px; padding: 6px 0; list-style: none; cursor: pointer; font-weight: 650; color: var(--ink-2, var(--ink)); border-radius: 6px }
+.ip-size > summary::-webkit-details-marker { display: none }
+.ip-size > summary > span::before { content: "+"; display: inline-grid; place-items: center; width: 17px; height: 17px; margin-right: 7px; border-radius: 50%; background: var(--paper-2); border: 1px solid var(--rule); font: 600 12px/1 var(--font-mono); vertical-align: -3px; transition: transform .3s var(--ip-spring) }
+.ip-size[open] > summary > span::before { transform: rotate(45deg) }
+.ip-size > summary small { font-weight: 500; color: var(--muted) }
+.ip-size > summary:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px }
+.ip-size-b { padding: 2px 0 8px }
+.ip-size-say { margin: 0 0 8px; line-height: 1.45 }
+.ip-size-say code { font: 500 .92em var(--font-mono); color: var(--ink) }
+.ip-size-note { margin: 8px 0 0 }
+.ip-size-k { margin: 10px 0 5px; line-height: 1.35 }
+.ip-size-k b { color: var(--ink) }
+.ip-size-row { display: flex; align-items: center; gap: 8px; min-width: 0 }
+.ip-size-row code { flex: 1 1 auto; min-width: 0; padding: 8px 10px; border-radius: 10px; background: var(--paper-2); border: 1px solid var(--rule); font: 500 12.5px/1.4 var(--font-mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere }
+.ip-size.is-dark { max-width: 78ch; margin-top: 18px; padding: 0; color: var(--on-dark-2, rgba(247, 243, 236, .72)) }
+.ip-size.is-dark > summary, .ip-size.is-dark .ip-size-k b, .ip-size.is-dark .ip-size-say code { color: var(--on-dark, #F7F3EC) }
+.ip-size.is-dark > summary small { color: var(--on-dark-2, rgba(247, 243, 236, .65)) }
+.ip-size.is-dark > summary > span::before { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .16) }
+.ip-size.is-dark .ip-size-row code { background: #07080B; border-color: rgba(255, 255, 255, .08); color: #E9E5DD }
+.ip-size.is-dark .ip-qu-mini { color: rgba(247, 243, 236, .7); border-color: rgba(255, 255, 255, .16) }
+.ip-size.is-dark .ip-qu-mini:hover { color: #fff }
+.ip-size.is-dark > summary:focus-visible { outline-color: var(--sun) }
+html:not(.js) .ip-qu-pick, html:not(.js) .ip-qu-copy, html:not(.js) .ip-qu-mini { display: none }
+html:not(.js) .ip-qu-use { grid-template-columns: minmax(0, 1fr) }
+[data-theme="dark"] .ip-qu { box-shadow: none }
+/* desktop: under the stage (the preview, then how to use it); tablets and phones: right after the buttons */
+.ip-side > .ip-qu { min-width: 0; max-width: none; margin-top: 0 }
+@media (min-width: 901px) { .ip-side { grid-template-columns: minmax(0, 1fr) } }
+@media (max-width: 900px) {
+  .ip-side { display: contents }
+  .ip-stage { order: -1 }
+  .ip-side > .ip-qu { order: 1 }
+  .ip-live-chip { order: 2 }
+}
+@media (min-width: 641px) and (max-width: 900px) { .ip-live-chip { margin-top: calc(-1 * clamp(32px, 5vw, 88px) + 12px) } }
+@media (max-width: 640px) {
+  .ip-qu { padding: 10px; border-radius: 20px }
+  .ip-qu-use { padding-left: 13px }
+  .ip-qu-code { font-size: 12.5px }
+  .ip-qu-copy { width: 46px; padding: 0; justify-content: center }
+  .ip-qu-copy span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+}
+@media (hover: none) { .ip-qu-copy:hover { transform: none } }
+
+/* the developer panel */
+.ip-dev-few { display: none }
+@media (min-width: 901px) { .ip-side > .ip-qu .ip-qu-code { font-size: 13px } }
+.ip-dev-body { padding-bottom: clamp(22px, 3vw, 32px) }
+.ip-dev-body .ip-devlead { margin: 0 0 16px }
+.ip-tabs-row { position: relative; display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 16px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .06) }
+.ip-tabs-row .ip-tabs { flex: 1 1 auto; min-width: 0; padding: 0; border-radius: 0; background: none; overflow: hidden }
+.ip-tabs button.is-over { display: none }
+.ip-tabs button { border-radius: 11px; transition: background .2s, color .2s }
+.ip-tabs button:not([aria-selected="true"]):hover { background: rgba(255, 255, 255, .07) }
+.ip-tabs-more { position: relative; flex: none }
+.ip-tabs-more[hidden] { display: none }
+.ip-more-b { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 10px 0 14px; border: 0; border-radius: 11px; background: none; color: var(--on-dark-2, rgba(247, 243, 236, .7)); font: 600 14px/1 var(--font-sans); cursor: pointer; white-space: nowrap; transition: background .2s, color .2s }
+.ip-more-b:hover { color: var(--on-dark); background: rgba(255, 255, 255, .07) }
+.ip-more-b.is-on { background: var(--on-dark); color: #111318 }
+.ip-more-b svg { width: 16px; height: 16px; transition: transform .3s var(--ip-spring) }
+.ip-more-b[aria-expanded="true"] svg { transform: rotate(180deg) }
+.ip-more-b:focus-visible, .ip-more-m button:focus-visible { outline: 3px solid var(--sun); outline-offset: 1px }
+.ip-more-m { position: absolute; right: 0; top: calc(100% + 10px); z-index: 6; display: grid; gap: 2px; min-width: 210px; padding: 6px; border-radius: 16px; background: #1B1E26; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 28px 56px -22px rgba(0, 0, 0, .7) }
+.ip-more-m[hidden] { display: none }
+.ip-more-m button { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 42px; padding: 0 12px; border: 0; border-radius: 10px; background: none; color: #F4F0E8; font: 600 14.5px/1 var(--font-sans); text-align: left; cursor: pointer }
+.ip-more-m button:hover { background: rgba(255, 255, 255, .08) }
+.ip-more-m button[aria-checked="true"]::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sun) }
+.js .ip-panel[data-off] { display: none }
+.js .ip-panel-h { display: none }
+html:not(.js) .ip-tabs-row { display: none }
+.ip-panel-h { margin: 28px 0 0; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font: 750 22px/1.1 var(--font-display); color: var(--on-dark) }
+.ip-panel { padding: 22px 0 0 }
+.ip-panel > .ip-panel-lead { max-width: 68ch; margin: 0; font-size: 15px; line-height: 1.55; color: var(--on-dark-2, rgba(247, 243, 236, .8)) }
+.ip-panel-lead code { font: 500 .88em var(--font-mono); background: rgba(255, 255, 255, .1); padding: .1em .4em; border-radius: 6px; white-space: nowrap }
+.ip-steps { display: grid; gap: 20px; margin: 20px 0 0; padding: 0; list-style: none; counter-reset: ip-st }
+.ip-step { position: relative; min-width: 0; padding-left: 42px; counter-increment: ip-st }
+.ip-step::before { content: counter(ip-st); position: absolute; left: 0; top: -3px; display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: var(--sun); color: #111318; font: 700 13px/1 var(--font-mono) }
+.ip-step:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 32px; bottom: -16px; width: 1px; background: rgba(255, 255, 255, .16) }
+.ip-steps.is-one .ip-step { padding-left: 0 }
+.ip-steps.is-one .ip-step::before, .ip-steps.is-one .ip-step-k { display: none }
+.ip-step-k { margin: 0 0 10px; font: 720 15.5px/1.3 var(--font-display); color: var(--on-dark) }
+.ip-cmd { display: flex; align-items: center; gap: 10px; max-width: 520px; padding: 6px 6px 6px 16px; border-radius: 14px; background: #07080B; border: 1px solid rgba(255, 255, 255, .08) }
+.ip-cmd-p { flex: none; font: 600 14px/1 var(--font-mono); color: var(--sun) }
+.ip-cmd code { flex: 1 1 auto; min-width: 0; overflow-x: auto; white-space: nowrap; font: 500 14px/1.5 var(--font-mono); color: #E9E5DD; scrollbar-width: none }
+.ip-cmd .ip-copy { flex: none }
+.ip-panel-note { max-width: 78ch; margin-top: 20px; padding: 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, .04); border: 1px dashed rgba(255, 255, 255, .16) }
+.ip-panel-note-k { margin: 0 0 6px; font: 650 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--sun) }
+.ip-panel-note .ip-note { margin: 0 }
+.ip-copy:focus-visible { outline: 3px solid var(--sun); outline-offset: 1px }
+@media (max-width: 640px) {
+  .ip-step { padding-left: 0 }
+  .ip-step::before { position: static; display: inline-grid; width: 22px; height: 22px; margin: 0 8px 0 0; font-size: 11.5px; float: left }
+  .ip-step::after { display: none }
+  .ip-step-k { line-height: 22px }
+  .ip-step > .ip-code, .ip-step > .ip-cmd { clear: both }
+  .ip-cmd { padding-left: 14px }
+  .ip-cmd code { font-size: 13px }
+  .ip-cmd .ip-copy { width: 38px; padding: 0; justify-content: center }
+  .ip-cmd .ip-copy span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+  /* the summary names three stacks on phones (the full list is still read by screen readers) */
+  .ip-dev-all { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+  .ip-dev-few { display: inline }
+  .ip-panel-note .ip-note code { white-space: normal; overflow-wrap: anywhere }
+}
+
+/* the studio's mode switch: equal columns, the pill placed from the active index (--i, set by icon-page.js) with no
+   measuring, so it stays exact through resizes, font loads and sheet size changes */
+.ip-sheet-modes { --n: 2; --i: 0; --gap: 2px; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--gap) }
+.ip-sheet-modes button { min-width: 150px }
+.ip-sheet-ink { left: 4px; width: calc((100% - 8px - (var(--n) - 1) * var(--gap)) / var(--n)); transform: translateX(calc(var(--i) * (100% + var(--gap)))); transition: transform .45s var(--ip-spring) }
+[data-theme="dark"] .ip-sheet-modes { background: rgba(255, 255, 255, .04) }
+[data-theme="dark"] .ip-sheet-ink { background: #343A48; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--sc) 55%, rgba(255, 255, 255, .22)), 0 8px 18px -10px rgba(0, 0, 0, .7) }
+@media (max-width: 720px) { .ip-sheet-modes button { min-width: 0 } }
+@media (prefers-reduced-motion: reduce) { .ip-sheet-ink { transition: none } }
+@media (forced-colors: active) { .ip-sheet-ink { outline: 2px solid Highlight } }

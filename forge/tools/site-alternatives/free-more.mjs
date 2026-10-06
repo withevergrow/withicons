@@ -52,7 +52,7 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
     ['A website: two CSS classes', 'Add <code>motion.css</code> once, then wrap an icon: <code>&lt;span class="wm wm-loop wm-p-ring"&gt;</code>. Use <code>wm-hover</code> to play on hover, inside any button with <code>wm-trigger</code>.'],
     ['An app: any framework', `The same classes work in React, Vue, Svelte and Angular, and a small JS API starts, stops and swaps icons from code. <a href="${p}developers.html#motion">Animation docs</a>.`],
   ])}
-  ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion/dist/motion.css">
+  ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 
 <button class="wm-trigger">
   <span class="wm wm-hover wm-p-ring"><svg …bell…></svg></span> Notifications

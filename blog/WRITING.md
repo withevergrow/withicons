@@ -63,7 +63,7 @@ Use the constants from blocks.mjs in copy (`${N_ICONS}`, `${N_STYLES}`, `${N_SVG
   Figma, Notion, Word/Google Docs, WordPress, Webflow, Framer, Wix/Squarespace, email signatures, HTML.
 - Developers: React, Vue, Svelte, Angular, SolidJS components, a `<with-icon>` web component, `<i class="with with-home">` CSS classes, SVG sprites.
   **The npm packages are live (0.2.0)**: `npm i @withicons/react` (also `vue`, `svelte`, `angular`, `solid`, `web`, `classes`, `static`, `motion`, `dynamic`),
-  CDN via jsDelivr (`https://cdn.jsdelivr.net/npm/@withicons/classes/dist/with-line.css`), local MCP server `npx -y @withicons/mcp`, and `npx withicons init`
+  CDN via jsDelivr (`https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-line.css`), local MCP server `npx -y @withicons/mcp`, and `npx withicons init`
   to add the skill + MCP server to AI tools. Never write "launching soon". For non-developers, still point to the icon pages for copy/download.
 - AI: an MCP server (lets AI assistants search the real icon list), `https://withicons.com/llms.txt`, an agent skill, and "Ask AI" buttons on the site.
 - Search understands everyday words and aliases ("bin" finds trash, "gear" finds settings).

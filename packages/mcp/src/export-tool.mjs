@@ -14,20 +14,8 @@ export const ANIMATED_FORMATS = ['gif', 'apng', 'animated-svg', 'pptx-animated',
 const TEXT_MIME = /^(image\/svg\+xml|application\/json|text\/|application\/(javascript|typescript|xml|postscript))/
 const INLINE_MAX = 1.5 * 1024 * 1024   // per file, before base64
 const INLINE_TOTAL = 4 * 1024 * 1024
-
-const q = v => /^[\w@#.,:/-]+$/.test(String(v)) ? String(v) : `"${String(v).replace(/(["\\$`])/g, '\\$1')}"`
-/** The `npx withicons export …` command that makes the same files on the user's machine. */
-export function exportCommand(a) {
-  const parts = ['npx', 'withicons', 'export', ...[].concat(a.name || []).map(q)]
-  const add = (flag, v) => { if (v !== undefined && v !== null && v !== '' && v !== false) parts.push(flag, ...(v === true ? [] : [q(v)])) }
-  add('--style', a.style); add('--format', a.format); add('--size', a.size); add('--background', a.background); add('--matte', a.matte)
-  add('--palette', a.palette); add('--color', a.color)
-  for (const [k, v] of Object.entries(a.colors || {})) add(k.startsWith('--') ? '--colors' : '--' + k, k.startsWith('--') ? `${k.slice(2)}=${v}` : v)
-  add('--motion', a.motion); add('--to', a.to); add('--effect', a.effect); add('--fps', a.fps); add('--seconds', a.seconds); add('--loop', a.loop)
-  add('--duration', a.duration); add('--padding', a.padding); if (a.all_styles) parts.push('--all-styles')
-  add('--out', a.out_dir || '.')
-  return parts.join(' ')
-}
+import { q, exportCommand } from './export-command.mjs'
+export { q, exportCommand }
 
 const iconPage = name => `${lib.SITE}/icons/${name}.html`
 

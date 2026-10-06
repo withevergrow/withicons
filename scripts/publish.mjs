@@ -6,6 +6,7 @@
 //   node scripts/publish.mjs                        publish (skips name@version already on npm)
 //   node scripts/publish.mjs --expect 0.2.0         fail unless every package is at 0.2.0 (CI passes the tag)
 //   node scripts/publish.mjs --only @withicons/core,withicons
+//   node scripts/publish.mjs --order                print the publish order and exit
 //
 // Packages (lockstep, one version): core react vue svelte angular solid web classes static search mcp motion dynamic + the `withicons` CLI.
 // The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
@@ -48,6 +49,39 @@ const EXPECTED = ['@withicons/core', '@withicons/react', '@withicons/vue', '@wit
   '@withicons/web', '@withicons/classes', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
 const missing = EXPECTED.filter(n => !names.has(n))
 
+// --- order: every internal dependency (dependencies, peer, optional, bundled) before its dependents, the `withicons`
+// CLI (it installs @withicons/mcp) strictly last. 0.2.1 published the CLI while @withicons/mcp@0.2.1 was not yet
+// installable, and `npx withicons@latest` failed for minutes; the guard below and the registry wait prevent that.
+const CLI = 'withicons'
+const deps = p => [...new Set([
+  ...Object.keys({ ...p.json.dependencies, ...p.json.peerDependencies, ...p.json.optionalDependencies }),
+  ...[].concat(p.json.bundleDependencies || p.json.bundledDependencies || []),
+])].filter(n => names.has(n))
+function publishOrder(list) {
+  const byName = new Map(list.map(p => [p.json.name, p]))
+  const order = [], seen = new Set()
+  const visit = (p, stack = []) => {
+    if (seen.has(p.json.name)) return
+    if (stack.includes(p.json.name)) die(`dependency cycle: ${[...stack, p.json.name].join(' -> ')}`)
+    for (const d of deps(p).sort()) visit(byName.get(d), [...stack, p.json.name])
+    seen.add(p.json.name); order.push(p)
+  }
+  const sorted = [...list].sort((a, b) => a.json.name.localeCompare(b.json.name))
+  sorted.filter(p => p.json.name !== CLI).forEach(p => visit(p))
+  sorted.filter(p => p.json.name === CLI).forEach(p => visit(p))
+  // guard: each package after all of its internal dependencies, nothing depending on the CLI, the CLI last
+  order.forEach((p, i) => {
+    for (const d of deps(p)) if (order.findIndex(x => x.json.name === d) >= i) die(`order bug: ${p.json.name} would publish before its dependency ${d}`)
+  })
+  const cliAt = order.findIndex(p => p.json.name === CLI)
+  if (cliAt >= 0 && cliAt !== order.length - 1) die(`order bug: ${CLI} must publish last, not before ${order.slice(cliAt + 1).map(p => p.json.name).join(', ')}`)
+  return order
+}
+const order = publishOrder(pkgs)
+console.log(`order: ${order.map(p => p.json.name).join(' -> ')}`)
+
+if (flag('order')) process.exit(0)   // print the order only (packages/cli/test/publish-order.test.mjs)
+
 // --- checks: same version everywhere, built output present, repository url (provenance needs it)
 const expect = opt('expect')?.replace(/^v/, '')
 const problems = []
@@ -74,24 +108,28 @@ if (tagSha && headSha && tagSha !== headSha) {
 if (problems.length && !(DRY && flag('lenient'))) die('\n  ' + problems.join('\n  '))
 else if (problems.length) console.warn('  (dry run, --lenient) ' + problems.join('\n  '))
 
-// --- topological order over internal dependencies
-const deps = p => Object.keys({ ...p.json.dependencies, ...p.json.peerDependencies, ...p.json.optionalDependencies }).filter(n => names.has(n))
-const order = [], seen = new Set()
-const visit = (p, stack = []) => {
-  if (seen.has(p.json.name)) return
-  if (stack.includes(p.json.name)) die(`dependency cycle: ${[...stack, p.json.name].join(' -> ')}`)
-  for (const d of deps(p)) visit(pkgs.find(x => x.json.name === d), [...stack, p.json.name])
-  seen.add(p.json.name); order.push(p)
+// a dependency must be installable (visible on the registry) before a dependent goes out
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+const onNpm = (id, version, dir) => { const r = npm(['view', id, 'version'], dir, true); return r.status === 0 && r.stdout.trim() === version }
+async function waitFor(id, version, dir, minutes = 10) {
+  const until = Date.now() + minutes * 60e3
+  for (let n = 0; ; n++) {
+    if (onNpm(id, version, dir)) return
+    if (Date.now() > until) die(`${id} is still not visible on the registry after ${minutes} min; not publishing its dependents (re-run later)`)
+    if (n === 0) console.log(`  waiting for ${id} to appear on the registry …`)
+    await sleep(10e3)
+  }
 }
-pkgs.sort((a, b) => a.json.name.localeCompare(b.json.name)).forEach(p => visit(p))
 
 const inCI = !!process.env.GITHUB_ACTIONS
 let published = 0, skipped = 0
-for (const { dir, json } of order) {
+for (const p of order) {
+  const { dir, json } = p
   if (only && !only.includes(json.name)) continue
   const id = `${json.name}@${json.version}`
-  const exists = npm(['view', id, 'version'], dir, true)
-  if (exists.status === 0 && exists.stdout.trim() === json.version) { console.log(`= ${id} already on npm`); skipped++; continue }
+  if (onNpm(id, json.version, dir)) { console.log(`= ${id} already on npm`); skipped++; continue }
+  // internal dependencies first, at the exact version this package pins
+  if (!DRY) for (const d of deps(p)) await waitFor(`${d}@${pkgs.find(x => x.json.name === d).json.version}`, pkgs.find(x => x.json.name === d).json.version, dir)
   const args = ['publish', '--access', 'public', '--tag', json.version.includes('-') ? 'next' : 'latest']
   if (inCI) args.push('--provenance')
   if (DRY) args.push('--dry-run')

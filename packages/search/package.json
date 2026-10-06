@@ -1,6 +1,6 @@
 {
   "name": "@withicons/search",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Fast, typo-tolerant, dependency-free search engine and prebuilt index for the with icons library (500 icons x 20 styles).",
   "license": "MIT",
   "author": {

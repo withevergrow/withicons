@@ -151,6 +151,7 @@ export function createServer(opts = {}) {
       motion: z.string().max(40).optional().describe('Animated formats: loop (default: the icon\'s tuned motion), hover / once (plays once, then rests), swap (turns into another icon), none, or a preset (spin, ring, beat, bounce, float, pop, ...)'),
       to: z.string().max(60).optional().describe('motion swap: the icon to turn into, "name" or "name@style" (default: the icon\'s suggestion)'),
       effect: z.enum(mo.effects).optional().describe('motion swap: transition (fade, flip, scale, morph, ...)'),
+      hold: z.number().min(0).max(10).optional().describe('motion swap: seconds to rest on each icon between turns (same as the CLI --hold)'),
       duration: z.number().min(0.2).max(10).optional().describe('Seconds per motion cycle'),
       fps: z.number().int().min(1).max(60).optional().describe('gif / apng frames per second (gif 25, apng 30)'),
       seconds: z.number().min(0.1).max(30).optional().describe('gif / apng length of one loop (default: the motion cycle)'),

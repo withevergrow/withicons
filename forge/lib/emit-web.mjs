@@ -9,7 +9,7 @@
 //   dist/data/alias/<i>.js    { alias: [names] } for the aliases whose withShard(alias, ALIAS_SHARDS) === i
 //   dist/data/meta.js     { names, aliases }                (lazy chunk, only for typo suggestions)
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
+import { J, LOOKUP_SRC, withBareBase, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
 
 // A style whose chunk is over SHARD_OVER bytes ships as shards of about SHARD_TARGET bytes (~10 KB gzip) each,
 // so one luxe icon costs one shard instead of the whole 3 MB style.
@@ -272,7 +272,10 @@ export default async function emit(ctx) {
   // cdn.js: the smallest entry, for <script type="module"> from a CDN or a self-hosted copy of dist/. Every icon is its
   // own file next to it (icons/<style>/<name>.js); no chunk table, so it stays a few KB whatever the style count.
   const ign = '/* webpackIgnore: true */ /* @vite-ignore */ '
-  const cdnJs = `${header}${head}${names}const WITH_BASE = { url: new URL('./', import.meta.url).href }\n` +
+  // The bare CDN URL (cdn.jsdelivr.net/npm/@withicons/web) serves this file outside dist/: icons then come from this
+  // version's dist/ on the same CDN (withBareBase); any other URL resolves next to the file.
+  const cdnJs = `${header}${head}${names}${withBareBase}\n` +
+    `const WITH_BASE = { url: withBareBase(import.meta.url, 'web', ${J(ctx.version)}, 'dist/') || new URL('./', import.meta.url).href }\n` +
     `const LOADERS = {}\nfor (const s of styleNames) LOADERS[s] = () => import(${ign}WITH_BASE.url + 'data/' + s + '.js')\n` +
     `const ALIAS_LOADERS = Array.from({ length: ${ALIAS_SHARDS} }, (_, i) => () => import(${ign}WITH_BASE.url + 'data/alias/' + i + '.js'))\n` +
     `const LOAD_META = () => import(${ign}WITH_BASE.url + 'data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`

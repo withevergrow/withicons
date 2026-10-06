@@ -51,7 +51,8 @@ icon synchronously. See [Bundle size](#bundle-size).
 | `color` | `currentColor` | follows the text colour unless you set it |
 | `vars` | none | style colours as JSON: `vars='{"glass-pane":"#cde"}'` |
 | `stroke-width`, `absolute-stroke-width` | style default | only for styles drawn with strokes |
-| `label` | none | accessible name on the svg (`role="img"`). Without it the svg is `aria-hidden`. |
+| `label` | what it shows | accessible name on the svg (`role="img"`). Without it the icon is named by its values (`describe()`: "Calendar date, March 17"); `label=""` or `aria-hidden="true"` makes it decorative. |
+| `animate` | off | value changes move instead of jumping (see [Change values live](#change-values-live)); `animate="900"` sets the duration in ms |
 
 Change any attribute or JS property (`el.variant = 'luxe'`, `el.params = { day: 3 }`) and the icon redraws. After each
 draw the element fires a `with-live-render` event.
@@ -63,6 +64,41 @@ wins. In markup that is the attribute written later; from script, `el.params = {
 Styles that take longer than a frame to draw (see [Performance](#performance)) never block the page: the element keeps
 its current drawing, renders the new one in the background, and shows only the newest params when several changes
 arrive at once.
+
+## Change values live
+
+The element redraws whenever an attribute changes, so values from an API, a WebSocket, a timer or a click are one
+`setAttribute` away. Add `animate` and every change moves to its new value instead of jumping:
+
+```html
+<with-live-icon id="unread" name="bell-count" count="3" animate></with-live-icon>
+<script>
+  const icon = document.getElementById('unread')
+  const socket = new WebSocket('wss://example.com/live/bell')
+  socket.onmessage = e => icon.setAttribute('count', JSON.parse(e.data).count)   // 3 rolls up to 7
+</script>
+```
+
+`el.animateTo({ count: 7 }, { ms: 900 })` (or `animateTo(el, values, options)` from `@withicons/dynamic/element`, and
+`WithLive.animateTo` in the CDN script) animates one change without the attribute and resolves once the new values are
+drawn. Several attributes set in the same task become one transition, and a new value mid-way retargets from what is on
+screen.
+
+| value | motion |
+|---|---|
+| numbers (counts, temperatures, prices) | roll through every value between, like an odometer |
+| levels (battery, progress, signal) | ease in on a light spring |
+| analogue clock hands | the short way round the 12-hour face: 10:10 to 03:00 goes forward 4 h 50 min |
+| digital clock times | the short way round 24 hours |
+| choices, text, switches | cross-fade once |
+
+The last frame is always exactly the new value. Cheap styles (line, duo, blueprint, sketch, pixel) move every frame;
+slower styles draw a few frames ahead in the render worker and play them from the cache, so a transition never blocks
+the page. With `prefers-reduced-motion: reduce` (or `setMotion({ reduced: true })`) values change at once.
+In React and Vue, pass `animate` (or a duration in ms) to `<LiveIcon>` and change the props.
+
+For your own painting, `transition(name, from, to, style, { ms, paint(params), done })` runs the same planner and
+`interpolate(name, from, to, t)` returns the params at any point.
 
 ## JavaScript
 
@@ -87,9 +123,14 @@ validate('calendar-date', { day: 40 })   // ['day=40: outside 1..31']
   replaced ones reject with code `WITH_SUPERSEDED`.
 - `warm(name, params, style)` draws in the background so a later `render()` is instant; `cached(...)` tells you if it
   already is.
+- `loaded(style)` says whether the style's renderer runs on this thread. In the lite and CDN builds a rich style can be
+  drawn only by the render workers, so `loaded(style)` can stay `false` while `renderAsync()` and `<with-live-icon>`
+  draw it fine; check `cached(...)` (or await `renderAsync()`) rather than `loaded()` before a sync `render()`.
 - Metadata: `list()`, `catalog()`, `get(name)`, `defaults(name)`, `paramsOf(name)`.
 - Params: `resolve(name, params)` fills in and corrects values; `validate(name, params)` checks them strictly.
 - `now()` returns today's params `{ day, month, weekday, year, time }`, for example `render('calendar-date', now())`.
+- `describe(name, params)` says what the icon shows: `'Calendar date, March 17'` (the default accessible name).
+- Motion: `transition()`, `plan()`, `interpolate()`, `setMotion()`, `reducedMotion()` (see [Change values live](#change-values-live)).
 - `skeleton(name, params)` returns the raw drawing, and `nodes(name, params, style)` returns the `[tag, attrs]` list.
 
 ### Bundle size
@@ -138,6 +179,7 @@ import { LiveIcon } from '@withicons/dynamic/react'
 <LiveIcon name="calendar-date" day={17} month="MAR" variant="glass" size={48} />
 <LiveIcon name="calendar-date" today label="Today" />
 <LiveIcon name="bell-count" count={unread} className="nav-icon" onClick={open} />
+<LiveIcon name="battery-level" level={charge} animate />          // moves to each new level
 ```
 
 The icon's params are props. A param with the same name as a wrapper prop (for example `label` on `keycap`) goes in `params={{ label: 'A' }}`. Other props (`className`, `style`, `onClick`, `aria-*`, `data-*`) go on the `<svg>`.
@@ -154,6 +196,7 @@ import { LiveIcon } from '@withicons/dynamic/vue'
 <template>
   <LiveIcon name="calendar-date" :day="17" month="MAR" variant="glass" :size="48" />
   <LiveIcon name="clock-time" time="10:10" variant="bauhaus" />
+  <LiveIcon name="bell-count" :count="unread" animate />
 </template>
 ```
 
