@@ -37,8 +37,8 @@ concurrency:
 
 jobs:
   deploy:
-    # skipped until AWS is set up: add the repository/environment variable AWS_DEPLOY_ROLE_ARN (docs/LAUNCH.md §6.5)
-    if: vars.AWS_DEPLOY_ROLE_ARN != ''
+    # AWS_DEPLOY_ROLE_ARN lives on the production environment; a job-level if: can't read environment variables
+    # (it is evaluated before the environment loads), so there is no guard here. See docs/LAUNCH.md §6.5.
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment:
