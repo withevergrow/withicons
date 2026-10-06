@@ -40,7 +40,7 @@ Icon pages link the per-style SVG downloads from jsDelivr (`cdn.jsdelivr.net/npm
 - CloudFront Function (www redirect + index rewrite) only runs on the HTML behaviour: **~150k invocations**.
 - API: **100k edge requests** to `/api/*` and `/mcp` (AI agents, CLI, site search fallback). `/api/search` is cached
   per query for a day behind Origin Shield, so ~60% of it is served from cache; MCP POSTs are never cached. That leaves
-  **~70k Lambda invocations**, ~100 ms each at 1024 MB arm64, so **~7,000 GB-s**, plus **8,640 keep-warm pings** (section 6).
+  **~70k Lambda invocations**, ~100 ms each at 512 MB arm64, so **~3,500 GB-s**, plus **8,640 keep-warm pings** (section 6).
 - ~30 deploys/month, each uploading ~50 changed files and invalidating ≤ 40 paths (wildcards collapse the rest).
 
 ## 3. Itemised monthly cost
@@ -55,7 +55,7 @@ Icon pages link the per-style SVG downloads from jsDelivr (`cdn.jsdelivr.net/npm
 | S3 requests (CloudFront cache misses + deploy PUTs/LIST) | ~60k GET, ~2k PUT | | $0.03 | $0.03 |
 | S3 to CloudFront transfer | | always free | $0.00 | $0.00 |
 | Lambda requests (incl. 8,640 keep-warm pings) | 79k | 1M/month | $0.00 | $0.02 |
-| Lambda compute (arm64, 1024 MB, incl. billed cold-start INIT) | ~7,100 GB-s | 400k GB-s/month | $0.00 | $0.10 |
+| Lambda compute (arm64, 512 MB default, incl. billed cold-start INIT) | ~3,600 GB-s | 400k GB-s/month | $0.00 | $0.05 |
 | EventBridge schedule (keep-warm, `KeepWarm=true`) | 8,640 events | scheduled rules are free | $0.00 | $0.00 |
 | CloudFront Origin Shield on the API (`ApiOriginShield=true`) | ≤ 100k req | none | $0.08 | $0.08 |
 | Lambda Function URL | | no charge | $0.00 | $0.00 |
@@ -130,7 +130,7 @@ ChatGPT browsing to time out on their first search. The fixes, in `infra/site.ya
 
 | lever | what it does | monthly cost (no free tier) |
 |---|---|---:|
-| `LambdaMemoryMb=1024` (allowed: 256-512, 1024, 1536, 1769) | CPU scales with memory: 512 MB is ~0.29 vCPU, 1024 MB ~0.58, 1769 MB one full vCPU. Init roughly halves at 1024 MB. | 7,000 GB-s x $0.0000133 = **$0.09** (was $0.05); free tier covers 400k GB-s |
+| `LambdaMemoryMb` (default 512; allowed: 256-512, 1024, 1536, 1769) | CPU scales with memory: 512 MB is ~0.29 vCPU, 1024 MB ~0.58, 1769 MB one full vCPU. Init roughly halves at 1024 MB. | 7,000 GB-s x $0.0000133 = **$0.09** (was $0.05); free tier covers 400k GB-s |
 | cold-start INIT is billed (since Aug 2025) | ~3 s x 1 GB per cold start; a few hundred a month | **< $0.02** |
 | `KeepWarm=true`: EventBridge `rate(5 minutes)` -> `{"source":"withicons.warm"}` | keeps **one** execution environment initialised; the handler returns at once (~1-5 ms). A burst that needs a 2nd concurrent instance still cold-starts that one | 8,640 invocations: **$0.002** requests + ~$0.001 compute; EventBridge schedules free |
 | `ApiOriginShield=true` (us-east-1) | every edge location shares one cache layer in front of the Lambda, so a query cached once is a hit worldwide | $0.0075 / 10k requests that reach the shield: **~$0.08** at 100k API requests |

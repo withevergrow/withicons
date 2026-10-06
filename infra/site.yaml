@@ -53,12 +53,12 @@ Parameters:
       Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   LambdaMemoryMb:
     Type: Number
-    Default: 1024
+    Default: 512
     AllowedValues: [256, 384, 512, 1024, 1536, 1769]
     Description: >-
       Lambda gets CPU in proportion to memory (1769 MB = one full vCPU), and a cold start is mostly CPU-bound
-      parsing of the bundled index, so 1024 MB starts roughly twice as fast as 512 MB. Billed per GB-s: at
-      ~100 ms per warm call this is still inside the free tier (docs/COSTS.md).
+      parsing, so 1024 MB starts roughly twice as fast as 512 MB. 512 MB is the default: the slim bundle and the
+      keep-warm ping keep cold starts rare and short. Raise it only if CloudWatch shows slow cold starts (docs/COSTS.md).
   LambdaReservedConcurrency:
     Type: Number
     Default: 10

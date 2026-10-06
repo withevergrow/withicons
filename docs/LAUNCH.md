@@ -229,14 +229,13 @@ After 2-4 weeks of clean HTTPS, redeploy with `HstsPreload=true` and submit at h
 `main`; S3 keeps 30 days of old versions if you need a single file back.
 
 **API cold starts** (agents time out on a slow first search; details and costs in `docs/COSTS.md` section 6): the
-template defaults to `LambdaMemoryMb=1024`, `KeepWarm=true` (EventBridge ping every 5 minutes) and `ApiOriginShield=true`,
-and caches `/api/search` for a day with one cache entry per query. A stack created earlier keeps its old memory value
-(`aws cloudformation deploy` reuses previous parameter values), so pass it once, after the Lambda code that answers the
-`{"source":"withicons.warm"}` ping is deployed:
+template defaults to `LambdaMemoryMb=512` (raise to 1024 only if CloudWatch shows cold starts over ~1 s), `KeepWarm=true` (EventBridge ping every 5 minutes) and `ApiOriginShield=true`,
+and caches `/api/search` for a day with one cache entry per query. Run the stack update once, after the Lambda code that answers the `{"source":"withicons.warm"}` ping is
+deployed (`aws cloudformation deploy` keeps every parameter you do not pass, including the memory size):
 
 ```bash
 aws cloudformation deploy --region us-east-1 --profile withicons --stack-name withicons-site --template-file infra/site.yaml \
-  --capabilities CAPABILITY_NAMED_IAM --parameter-overrides LambdaMemoryMb=1024
+  --capabilities CAPABILITY_NAMED_IAM
 node scripts/deploy.mjs --warm-only                     # fill the edge cache now (150 queries, under the WAF limit)
 curl -s -o /dev/null -w "%{time_total}\n" "https://withicons.com/api/search?q=dollar+sign"   # x-cache: Hit, well under 1 s
 ```
