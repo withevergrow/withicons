@@ -119,7 +119,8 @@ Everything else (`onClick`, `style`, `data-*`, `aria-*`) is spread onto the `<sv
 
 Use the first one available, in this order:
 
-- **MCP** (best for agents). Remote: `https://withicons.com/mcp` (Streamable HTTP). Local: `npx -y @withicons/mcp`.
+- **MCP** (best for agents). Remote: `https://withicons.com/mcp` (Streamable HTTP; about 200 requests per IP every
+  5 minutes, then HTTP 429). Local, unlimited and offline: `npx -y @withicons/mcp`; prefer it for heavy or batch work.
   Tools: `search_icons` (query, then ranked names plus ready-to-paste import/usage), `get_icon` (name + style + format,
   which returns SVG or a framework snippet), `animate_icon` (name + trigger loop/hover/once/inview/swap + format, which returns
   animation code), `export_icon` (name + style + format, which makes FILES: svg, png, pdf, pptx, docx, favicons, app assets,

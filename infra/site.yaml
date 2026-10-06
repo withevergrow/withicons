@@ -94,13 +94,16 @@ Parameters:
     Description: CloudFront standard logs to an S3 bucket (30-day expiry). Off by default (storage + request cost).
   EnableWaf:
     Type: String
-    Default: 'false'
+    Default: 'true'
     AllowedValues: ['true', 'false']
     Description: AWS WAF web ACL with a per-IP rate limit (~$6/month + $0.60 per million requests).
   WafRateLimitPer5Min:
     Type: Number
-    Default: 2000
+    Default: 200
     MinValue: 100
+    Description: >-
+      Requests per 5 minutes per IP to the hosted API (/mcp and /api/*) before WAF answers 429 with a message
+      pointing to the local MCP server and CLI. Website pages and assets are not counted.
   GitHubOrg:
     Type: String
     Default: withevergrow
@@ -706,14 +709,40 @@ Resources:
         SampledRequestsEnabled: true
         CloudWatchMetricsEnabled: true
         MetricName: !Sub '${AWS::StackName}-acl'
+      # 429 (not WAF's default 403, which CloudFront would turn into the 404 page) with a JSON-RPC error body, so MCP
+      # clients show the message and plain API callers get JSON with an "error" object.
+      CustomResponseBodies:
+        api-rate-limited:
+          ContentType: APPLICATION_JSON
+          Content: !Sub '{"jsonrpc":"2.0","id":null,"error":{"code":-32029,"message":"Rate limit reached: the hosted with icons API allows ${WafRateLimitPer5Min} requests per IP every 5 minutes. For unlimited use, run it locally (free, offline, same tools): MCP server npx -y @withicons/mcp (or set it up with npx withicons init --mcp local), the CLI npx withicons, or the npm packages @withicons/*. Try the hosted API again in a few minutes.","data":{"local":"npx -y @withicons/mcp","setup":"npx withicons init --mcp local","cli":"npx withicons","docs":"https://withicons.com/ai.html","retryAfterSeconds":300}}}'
       Rules:
         - Name: per-ip-rate-limit
           Priority: 0
-          Action: { Block: {} }
+          Action:
+            Block:
+              CustomResponse:
+                ResponseCode: 429
+                CustomResponseBodyKey: api-rate-limited
+                ResponseHeaders:
+                  - { Name: retry-after, Value: '300' }
           Statement:
             RateBasedStatement:
               Limit: !Ref WafRateLimitPer5Min
               AggregateKeyType: IP
+              # only the hosted API (Lambda) counts; website pages and assets never do
+              ScopeDownStatement:
+                OrStatement:
+                  Statements:
+                    - ByteMatchStatement:
+                        FieldToMatch: { UriPath: {} }
+                        PositionalConstraint: STARTS_WITH
+                        SearchString: /mcp
+                        TextTransformations: [{ Priority: 0, Type: LOWERCASE }]
+                    - ByteMatchStatement:
+                        FieldToMatch: { UriPath: {} }
+                        PositionalConstraint: STARTS_WITH
+                        SearchString: /api/
+                        TextTransformations: [{ Priority: 0, Type: LOWERCASE }]
           VisibilityConfig:
             SampledRequestsEnabled: true
             CloudWatchMetricsEnabled: true

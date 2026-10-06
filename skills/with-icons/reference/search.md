@@ -49,6 +49,11 @@ tags, categories and descriptions, and tolerates typos (`settigns` finds `settin
 Remote (no install, Streamable HTTP, stateless): **`https://withicons.com/mcp`**
 Local (stdio): **`npx -y @withicons/mcp`**
 
+The hosted server and `/api/*` share a per-IP limit (about 200 requests every 5 minutes). Over it, they answer
+HTTP 429 with `Retry-After: 300` and a JSON-RPC error (code -32029) whose message points to the local server. The local
+server, the CLI and the npm packages have no limit and work offline, so use them for batch work (many exports, whole
+icon sets) and switch to them when you see a 429.
+
 One command for the skill + server: `npx withicons init [claude-code|codex|cursor|opencode|vscode|windsurf|claude-desktop|lovable] [--global] [--mcp local|remote]`
 (no tool name = the ones found in the project; `--dry-run` shows the changes first).
 
