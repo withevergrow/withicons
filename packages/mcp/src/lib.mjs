@@ -301,6 +301,8 @@ export function colorVars(name, style) {
 }
 // styles in which this icon has more than one colour
 export function multiColourStyles(name) {
+  // the Lambda data layer precomputes this table (same test), so it never reads every style's SVG file for one answer
+  if (typeof data().multiColour === 'function') return data().multiColour(name)
   return data().styleNames.filter(st => { try { return /var\(\s*--with-/.test(svgOf(name, st)) } catch { return false } })
 }
 const HEX = /^#?(?:[0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i

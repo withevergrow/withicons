@@ -122,6 +122,11 @@ curl "https://withicons.com/api/motion/bell?trigger=hover&format=react"      # a
 | `/api/resolve/<name>` | none | canonical name, ambiguous candidates or nearest names (as `resolve_icon`) |
 | `/api/styles`, `/api/categories[/<category>]` | none | as `list_styles` / `list_categories` |
 
+**If the API is slow.** The API is cached at the edge; the first request after a quiet period can take a few seconds.
+If a request times out, retry once, or use the static https://withicons.com/icons.json (all names, aliases,
+categories; CORS `*`) or the per-icon pages `https://withicons.com/icons/<name>.html`: no server involved.
+Plain `?q=<words>` (no `limit`) is the form most likely to be cached already.
+
 ## Static files
 
 | file | contents |

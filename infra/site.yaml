@@ -12,9 +12,9 @@ Metadata:
       - Label: { default: Alerts and budget }
         Parameters: [AlertEmail, MonthlyBudgetUsd, ApiInvocationsAlarmPerHour]
       - Label: { default: API (Lambda) }
-        Parameters: [OriginVerifySecret, LambdaMemoryMb, LambdaReservedConcurrency]
+        Parameters: [OriginVerifySecret, LambdaMemoryMb, LambdaReservedConcurrency, KeepWarm]
       - Label: { default: CloudFront }
-        Parameters: [PriceClass, ContentSecurityPolicy, HstsPreload, EnableAccessLogs, EnableWaf, WafRateLimitPer5Min]
+        Parameters: [PriceClass, ApiOriginShield, ContentSecurityPolicy, HstsPreload, EnableAccessLogs, EnableWaf, WafRateLimitPer5Min]
       - Label: { default: GitHub Actions }
         Parameters: [GitHubOrg, GitHubRepo, GitHubOwnerId, GitHubRepoId, GitHubOidcProviderArn]
 
@@ -53,8 +53,12 @@ Parameters:
       Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   LambdaMemoryMb:
     Type: Number
-    Default: 512
-    AllowedValues: [256, 384, 512]
+    Default: 1024
+    AllowedValues: [256, 384, 512, 1024, 1536, 1769]
+    Description: >-
+      Lambda gets CPU in proportion to memory (1769 MB = one full vCPU), and a cold start is mostly CPU-bound
+      parsing of the bundled index, so 1024 MB starts roughly twice as fast as 512 MB. Billed per GB-s: at
+      ~100 ms per warm call this is still inside the free tier (docs/COSTS.md).
   LambdaReservedConcurrency:
     Type: Number
     Default: 10
@@ -62,6 +66,22 @@ Parameters:
     Description: >-
       Hard cap on concurrent API executions (bounds worst-case cost). 0 = no reservation
       (needed on new accounts whose total concurrency quota is 10; request a quota increase).
+  KeepWarm:
+    Type: String
+    Default: 'true'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      EventBridge pings the API Lambda every 5 minutes ({"source":"withicons.warm"}; the handler returns at once)
+      so one execution environment stays initialised and the first agent request after a quiet spell skips the
+      cold start. ~8,640 invocations/month, inside the Lambda free tier. Keeps ONE instance warm, not a pool.
+  ApiOriginShield:
+    Type: String
+    Default: 'true'
+    AllowedValues: ['true', 'false']
+    Description: >-
+      CloudFront Origin Shield (us-east-1) in front of the API Lambda: every edge location shares one extra cache
+      layer, so a query warmed once (scripts/deploy.mjs warms the common ones) is a cache hit worldwide and the
+      Lambda sees far fewer cold misses. $0.0075 per 10,000 requests that reach the shield (docs/COSTS.md).
   PriceClass:
     Type: String
     Default: PriceClass_All
@@ -137,6 +157,8 @@ Conditions:
   AccessLogs: !Equals [!Ref EnableAccessLogs, 'true']
   Waf: !Equals [!Ref EnableWaf, 'true']
   Preload: !Equals [!Ref HstsPreload, 'true']
+  Warm: !Equals [!Ref KeepWarm, 'true']
+  Shield: !Equals [!Ref ApiOriginShield, 'true']
 
 Rules:
   UsEast1Only:
@@ -338,13 +360,20 @@ Resources:
     Properties:
       CachePolicyConfig:
         Name: !Sub '${AWS::StackName}-api-search'
-        Comment: /api/search - cached per query string; MinTTL forces caching even if the origin says no-cache
-        MinTTL: 300
-        DefaultTTL: 3600
-        MaxTTL: 86400
+        # Results are deterministic per release and scripts/deploy.mjs invalidates /api/* whenever the Lambda code changes,
+        # so a day at the edge is safe. MinTTL (not DefaultTTL) does the work: the origin sends s-maxage=3600, which
+        # CloudFront clamps to [MinTTL, MaxTTL]. Browsers still get the origin's max-age=3600.
+        Comment: /api/search - cached per query string for a day (MinTTL overrides the origin s-maxage); invalidated on API deploys
+        MinTTL: 86400
+        DefaultTTL: 86400
+        MaxTTL: 604800
+        # No Accept-Encoding in the key: ONE cache entry per query serves every client (curl, Python, browsers,
+        # agents), so one warm request per query (scripts/deploy.mjs) covers everybody. With gzip+br in the key a
+        # query has three variants and each one cold-starts the Lambda separately. Cost: results (~8 KB) go
+        # uncompressed, which is why the behaviour below says Compress: false.
         ParametersInCacheKeyAndForwardedToOrigin:
-          EnableAcceptEncodingGzip: true
-          EnableAcceptEncodingBrotli: true
+          EnableAcceptEncodingGzip: false
+          EnableAcceptEncodingBrotli: false
           CookiesConfig: { CookieBehavior: none }
           HeadersConfig: { HeaderBehavior: none }
           QueryStringsConfig:
@@ -531,6 +560,31 @@ Resources:
       Principal: '*'
       InvokedViaFunctionUrl: true
 
+  # Keep-warm: one ping every 5 minutes keeps one execution environment initialised (Lambda recycles idle ones
+  # after roughly 5-15 minutes). infra/lambda/index.mjs answers {"source":"withicons.warm"} without loading the
+  # app when the event has no requestContext (a Function URL event always has one, so this cannot be triggered
+  # from the internet).
+  ApiKeepWarmRule:
+    Type: AWS::Events::Rule
+    Condition: Warm
+    Properties:
+      Description: Keep one API Lambda execution environment warm (no cold start for the first agent request)
+      ScheduleExpression: rate(5 minutes)
+      State: ENABLED
+      Targets:
+        - Id: api-keep-warm
+          Arn: !GetAtt ApiFunction.Arn
+          Input: '{"source":"withicons.warm"}'
+
+  ApiKeepWarmPermission:
+    Type: AWS::Lambda::Permission
+    Condition: Warm
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt ApiKeepWarmRule.Arn
+
   # ---------------------------------------------------------------- Distribution
   Distribution:
     Type: AWS::CloudFront::Distribution
@@ -568,6 +622,11 @@ Resources:
               HTTPSPort: 443
               OriginReadTimeout: 30
               OriginKeepaliveTimeout: 5
+            OriginShield: !If
+              - Shield
+              - Enabled: true
+                OriginShieldRegion: us-east-1   # same region as the Lambda
+              - !Ref AWS::NoValue
             OriginCustomHeaders:
               - HeaderName: x-origin-verify
                 HeaderValue: !Ref OriginVerifySecret
@@ -615,7 +674,7 @@ Resources:
             ViewerProtocolPolicy: https-only
             AllowedMethods: [GET, HEAD, OPTIONS]
             CachedMethods: [GET, HEAD]
-            Compress: true
+            Compress: false   # the search cache key has no Accept-Encoding (see ApiSearchCachePolicy)
             CachePolicyId: !Ref ApiSearchCachePolicy
             OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
             ResponseHeadersPolicyId: !Ref ApiHeadersPolicy
@@ -922,7 +981,7 @@ Resources:
                 Resource: !Sub '${SiteBucket.Arn}/*'
               - Sid: Invalidate
                 Effect: Allow
-                Action: [cloudfront:CreateInvalidation, cloudfront:GetInvalidation]
+                Action: [cloudfront:CreateInvalidation, cloudfront:GetInvalidation, cloudfront:ListInvalidations]
                 Resource: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${Distribution}'
               - Sid: UpdateApiCode
                 Effect: Allow

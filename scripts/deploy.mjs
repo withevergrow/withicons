@@ -10,6 +10,8 @@
 //        --full-invalidation (/*)  --stack <name> (default withicons-site)  --region <r> (default us-east-1)
 //        --bucket <b> --distribution <id> --function <name>   (override the stack outputs)
 // Env overrides: WITHICONS_BUCKET, WITHICONS_DISTRIBUTION_ID, WITHICONS_FUNCTION_NAME, WITHICONS_STACK.
+// Cache warm (after a real deploy): --skip-warm  --warm-only (just warm, no build/upload)  --warm-limit <n> (default 150,
+//        max 180: WAF allows 200 API requests per IP per 5 min)  --warm-base <url> (default https://withicons.com)
 //
 // Why not plain `aws s3 sync`: in CI every checked-out file has a fresh mtime, so sync re-uploads all
 // ~700 files and cannot tell us which paths really changed. We diff local MD5s against S3 ETags instead,
@@ -96,6 +98,9 @@ if (flag('print-csp')) {
   console.log(csp)
   process.exit(csp.length > 1783 ? 1 : 0)
 }
+
+// ------------------------------------------------------------------ --warm-only (no build, no upload)
+if (flag('warm-only')) { await warmApiCache(); await new Promise(r => setTimeout(r, 100)); process.exit(0) } // the pause lets fetch sockets close (Windows libuv asserts otherwise)
 
 // ------------------------------------------------------------------ 1. build
 if (!flag('skip-build')) {
@@ -192,13 +197,15 @@ if (!flag('skip-lambda')) {
   else {
     const entries = [['index.mjs', fs.readFileSync(path.join(ROOT, 'infra', 'lambda', 'index.mjs'))], ['mcp/package.json', Buffer.from('{"type":"module"}\n')]]
     for (const k of walk(MCP_DIST).sort()) {
-      // lambda.mjs is self-contained (data inlined): the npm-only files (stdio bin, library, its data/ JSON) stay out of the zip
-      if (k.endsWith('.map') || k.endsWith('.d.ts') || k === 'stdio.mjs' || k === 'lib.mjs' || k.startsWith('data/')) continue
+      // lambda.mjs inlines the small data (meta, search index, motion) and reads the big data from mcp/data/ on first use:
+      // ship data/svg-<style>.json + data/palettes.json; the npm-only files (stdio bin, library, the other data/ JSON) stay out
+      if (k.endsWith('.map') || k.endsWith('.d.ts') || k === 'stdio.mjs' || k === 'lib.mjs') continue
+      if (k.startsWith('data/') && !/^data\/(svg-[a-z0-9-]+|palettes)\.json$/.test(k)) continue
       entries.push([`mcp/${k}`, fs.readFileSync(path.join(MCP_DIST, k))])
     }
     smokeTestLambda(entries)
     lambdaZip = zip(entries)
-    // update-function-code --zip-file accepts at most 50 MB; every style's SVGs are inlined, so watch the growth
+    // update-function-code --zip-file accepts at most 50 MB; every style's SVGs are in the zip, so watch the growth
     if (lambdaZip.length > 45 * 1048576) die(`the API Lambda zip is ${(lambdaZip.length / 1048576).toFixed(1)} MB (limit 50 MB for a direct upload): upload via S3 or slim packages/mcp/dist/lambda.mjs`)
     const sha = crypto.createHash('sha256').update(lambdaZip).digest('base64')
     let current = null
@@ -251,29 +258,119 @@ try {
   }
 } finally { fs.rmSync(tmp, { recursive: true, force: true }) }
 log('deploy done')
+await postDeployCacheWarm()
+
+// ------------------------------------------------------------------ post-deploy API cache warm
+// The API Lambda cold-starts in seconds, and AI agents (ChatGPT browsing etc.) give up on a slow first search.
+// /api/search is cached at the edge for a day (infra/site.yaml ApiSearchCachePolicy) behind Origin Shield, so
+// requesting the common queries once after a deploy makes agents' first searches CDN hits.
+//  1. New API code -> invalidate /api/* (cached results came from the old code), unless the site step already did /*.
+//  2. Wait for in-flight invalidations, otherwise they would purge what we warm.
+//  3. GET the top queries through CloudFront. Never fails the deploy.
+async function postDeployCacheWarm() {
+  try {
+    const full = plan.invalidate.includes('/*')
+    let own = null
+    if (plan.lambda === 'update' && !full && T.dist) {
+      const r = awsJson(['cloudfront', 'create-invalidation', '--distribution-id', T.dist, '--paths', '/api/*'], { allowFail: true })
+      own = r?.Invalidation?.Id || null
+      log(own ? `> invalidation ${own} (/api/*: new API code)` : '! could not invalidate /api/* (search results stay cached up to a day)')
+    }
+    if (flag('skip-warm')) return log('> cache warm: skipped (--skip-warm)')
+    const ids = own ? [own] : []
+    if (full && T.dist) {
+      // the site step's /* id is not kept; ListInvalidations needs the deploy role from the current infra/site.yaml
+      const list = awsJson(['cloudfront', 'list-invalidations', '--distribution-id', T.dist, '--max-items', '20'], { allowFail: true })
+      if (list) ids.push(...(list.InvalidationList?.Items || []).filter(i => i.Status === 'InProgress').map(i => i.Id))
+      else log('! cannot list invalidations: warming now, some entries may be purged by the running /* invalidation')
+    }
+    for (const id of ids) {
+      log(`> waiting for invalidation ${id}`)
+      aws(['cloudfront', 'wait', 'invalidation-completed', '--distribution-id', T.dist, '--id', id], { allowFail: true })
+    }
+    await warmApiCache()
+  } catch (e) { log(`! cache warm failed (deploy itself is fine): ${e.message}`) }
+}
+
+// Queries: a curated list of what people and agents actually type, then icon names from site/icons.json, deduped.
+// Budget: the WAF rule (WafRateLimitPer5Min, default 200) counts EVERY /api/* request per IP over 5 minutes, cache
+// hits included, so one warm run stays at <= 180 and stops at the first 429. Two deploys within 5 minutes from the
+// same runner can still trip it for that runner only (the warm then stops; nothing else is affected).
+async function warmApiCache() {
+  const base = opt('warm-base', 'https://withicons.com').replace(/\/+$/, '')
+  const limit = Math.max(1, Math.min(180, Number(opt('warm-limit', 150)) || 150))
+  const CONCURRENCY = 6 // reserved concurrency is 10: leave room for real traffic while the cache is cold
+  const COMMON = [
+    'home', 'search', 'settings', 'user', 'menu', 'close', 'trash', 'delete', 'edit', 'add', 'plus', 'check',
+    'arrow', 'arrow right', 'arrow left', 'chevron', 'download', 'upload', 'share', 'heart', 'star', 'bell',
+    'notification', 'mail', 'email', 'calendar', 'clock', 'lock', 'eye', 'camera', 'image', 'video', 'play',
+    'music', 'phone', 'chat', 'message', 'file', 'folder', 'document', 'cart', 'shopping cart', 'dollar sign',
+    'money', 'credit card', 'payment', 'map', 'location', 'globe', 'link', 'copy', 'save', 'refresh', 'filter',
+    'info', 'warning', 'error', 'help', 'logout', 'login', 'profile', 'cloud', 'wifi', 'sun', 'moon', 'dark mode',
+    'chart', 'dashboard', 'gift', 'rocket', 'sparkle', 'ai', 'bookmark', 'tag', 'thumbs up', 'send', 'attachment',
+    'microphone', 'volume', 'throw away',
+  ]
+  let names = []
+  try { names = JSON.parse(fs.readFileSync(path.join(SITE, 'icons.json'), 'utf8')).icons.map(i => i.name) } catch { log('! site/icons.json not readable: warming the curated list only') }
+  const queries = [...new Set([...COMMON, ...names].map(q => q.trim().toLowerCase()).filter(Boolean))].slice(0, limit)
+  const urls = queries.map(q => `${base}/api/search?${new URLSearchParams({ q })}`) // ?q=a+b, the form the docs show
+  log(`> cache warm: ${urls.length} /api/search queries via ${base} (concurrency ${CONCURRENCY})`)
+  const t0 = Date.now(), tally = { hit: 0, miss: 0, fail: 0 }
+  let next = 0, stopped = false, slowest = 0
+  const worker = async () => {
+    while (!stopped && next < urls.length) {
+      const u = urls[next++], t = Date.now()
+      try {
+        const r = await fetch(u, { headers: { 'user-agent': 'withicons-deploy-warm/1', accept: 'application/json' }, signal: AbortSignal.timeout(15000) })
+        await r.arrayBuffer()
+        if (r.status === 429) { stopped = true; log(`! cache warm: WAF rate limit hit after ${next} requests, stopping`); break }
+        if (!r.ok) { tally.fail++; continue }
+        ;/hit/i.test(r.headers.get('x-cache') || '') ? tally.hit++ : tally.miss++
+        slowest = Math.max(slowest, Date.now() - t)
+      } catch { tally.fail++ }
+    }
+  }
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+  log(`> cache warm: ${tally.miss} filled, ${tally.hit} already cached, ${tally.fail} failed in ${((Date.now() - t0) / 1000).toFixed(1)} s (slowest ${slowest} ms)`)
+}
 
 // ------------------------------------------------------------------ Lambda smoke test
 // Unpack the bundle into an empty temp dir (no node_modules anywhere above it, like Lambda), load it and
-// call the handler with a Function URL v2 event. Catches non-bundled dependencies and startup crashes.
+// call the handler with Function URL v2 events. Catches non-bundled dependencies, missing data files and startup crashes;
+// also checks the origin secret, the keep-warm ping and reports the cold import (Lambda INIT) and first-request times.
 function smokeTestLambda(entries) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'withicons-lambda-'))
   try {
     for (const [name, data] of entries) { const f = path.join(dir, name); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, data) }
     const probe = `
+      const t0 = performance.now()
       const { handler } = await import(${JSON.stringify(pathToFileURL(path.join(dir, 'index.mjs')).href)})
-      const ev = (method, rawPath, rawQueryString = '', body) => ({ version: '2.0', rawPath, rawQueryString,
-        headers: { host: 'withicons.com', accept: 'application/json, text/event-stream', 'content-type': 'application/json' },
+      const init = performance.now() - t0
+      const ev = (method, rawPath, rawQueryString = '', body, secret = 'smoke') => ({ version: '2.0', rawPath, rawQueryString,
+        headers: { host: 'withicons.com', accept: 'application/json, text/event-stream', 'content-type': 'application/json', ...(secret ? { 'x-origin-verify': secret } : {}) },
         queryStringParameters: Object.fromEntries(new URLSearchParams(rawQueryString)),
         requestContext: { http: { method, path: rawPath, sourceIp: '127.0.0.1' } }, body, isBase64Encoded: false })
-      const out = []
-      for (const e of [ev('GET', '/api/search', 'q=home&limit=3'), ev('GET', '/api/icon/home'), ev('GET', '/api/motion/bell', 'trigger=hover'),
+      const out = [], bad = []
+      let first = null
+      for (const e of [ev('GET', '/api/search', 'q=home&limit=3'), ev('GET', '/api/icon/home'), ev('GET', '/api/icon/home', 'style=gothic&c1=e11d48'),
+        ev('GET', '/api/palettes/home', 'style=luxe'), ev('GET', '/api/motion/bell', 'trigger=hover'),
         ev('POST', '/mcp', '', JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} }))]) {
+        const t = performance.now()
         const r = await handler(e, {})
+        if (first == null) first = performance.now() - t
         out.push(e.requestContext.http.method + ' ' + e.rawPath + ' -> ' + (r && r.statusCode))
+        if (!r || r.statusCode !== 200) bad.push(out[out.length - 1])
       }
-      console.log(out.join('  |  '))`
-    const r = spawnSync(process.execPath, ['--input-type=module', '-e', probe], { cwd: dir, encoding: 'utf8', env: { ...process.env, ORIGIN_VERIFY_SECRET: '' } })
-    if (r.status !== 0) die(`the API bundle failed to load/run in isolation (is packages/mcp/dist/lambda.mjs self-contained?)\n${(r.stderr || '').split('\n').slice(0, 8).join('\n')}`)
+      const noSecret = await handler(ev('GET', '/api/search', 'q=home', undefined, 'wrong'), {})
+      if (!noSecret || noSecret.statusCode !== 401) bad.push('request without the origin secret was not rejected')
+      const warm = await handler({ source: 'withicons.warm' }, {})
+      if (!warm || warm.statusCode !== 200 || warm.body !== 'warm') bad.push('keep-warm ping not answered')
+      const spoof = await handler({ ...ev('GET', '/api/styles', '', undefined, 'wrong'), source: 'withicons.warm' }, {})
+      if (!spoof || spoof.statusCode !== 401) bad.push('an HTTP request passed itself off as the keep-warm ping')
+      if (bad.length) { console.error(bad.join(' | ')); process.exit(1) }
+      console.log(out.join('  |  ') + '  |  origin check + warm ping ok  |  cold import (INIT; first load of new files, so antivirus scans count) ' + init.toFixed(0) + ' ms, then first request ' + first.toFixed(0) + ' ms')`
+    const r = spawnSync(process.execPath, ['--input-type=module', '-e', probe], { cwd: dir, encoding: 'utf8', env: { ...process.env, ORIGIN_VERIFY_SECRET: 'smoke' } })
+    if (r.status !== 0) die(`the API bundle failed to load/run in isolation (is packages/mcp/dist/lambda.mjs self-contained, with its data/ files zipped?)\n${(r.stderr || '').split('\n').slice(0, 8).join('\n')}`)
     log(`> lambda smoke test: ${r.stdout.trim()}`)
   } finally { fs.rmSync(dir, { recursive: true, force: true }) }
 }

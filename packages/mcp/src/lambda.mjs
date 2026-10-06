@@ -29,7 +29,6 @@ const cached = (seconds) => ({ 'cache-control': `public, max-age=${seconds}, s-m
 // the MCP transport uses the Web Crypto global, which Node 18 only exposes as require('node:crypto').webcrypto
 if (!globalThis.crypto) globalThis.crypto = webcrypto
 
-data() // warm the data + search engine during cold start (init phase is not billed per request the same way)
 
 async function mcp(event, method, url) {
   const headers = new Headers()
@@ -119,5 +118,18 @@ export async function handler(event = {}) {
     return reply(500, { error: 'Internal error' })
   }
 }
+
+// Cold start: this runs while the module loads, i.e. in Lambda's INIT phase (infra/lambda/index.mjs imports this file at its
+// top level), which runs before the first request is accepted. Parse the inlined data, build the search engine's tables, run
+// a few queries, open the default style and the palettes (byte-range maps: cheap) and push one MCP request through the SDK
+// (undici's Request/Headers, zod -> JSON Schema) so the first real request, REST or MCP, finds all of it warm.
+export async function warmUp() {
+  const d = data()
+  d.engine.search('home', { limit: 3 }); d.engine.resolve('house'); d.engine.didYouMean('hous')
+  d.svg('line').home; d.palettes()
+  await handler({ rawPath: '/mcp', headers: { host: 'localhost', 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+    requestContext: { http: { method: 'POST', path: '/mcp' } }, body: JSON.stringify({ jsonrpc: '2.0', id: 0, method: 'tools/list', params: {} }) })
+}
+await warmUp().catch(e => console.error('withicons API warm-up failed:', e))
 
 export default handler

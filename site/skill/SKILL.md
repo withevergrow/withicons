@@ -133,6 +133,8 @@ Use the first one available, in this order:
   the connector steps), add `--global` for your user, `--mcp local|remote|none`, and `--dry-run` to see the changes first.
 - **CLI**: `npx withicons search "throw away"`
 - **HTTP**: `curl "https://withicons.com/api/search?q=throw+away&limit=5"` returns JSON with name, score and match.
+  Edge-cached; the first call after a quiet spell can take a few seconds: on a timeout retry once, or read
+  `https://withicons.com/icons.json` / `https://withicons.com/icons/<name>.html` (static, no server).
 - **Offline**: [reference/icons.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/icons.md), `https://withicons.com/icons.json`, `https://withicons.com/llms.txt`,
   or `import { search, resolve } from '@withicons/core'`.
 

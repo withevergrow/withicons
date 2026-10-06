@@ -39,8 +39,8 @@ Icon pages link the per-style SVG downloads from jsDelivr (`cdn.jsdelivr.net/npm
 - Requests: ~12 per cold view, giving **1.2M**, plus bots and API traffic of **0.3M**, so **1.5M requests**.
 - CloudFront Function (www redirect + index rewrite) only runs on the HTML behaviour: **~150k invocations**.
 - API: **100k edge requests** to `/api/*` and `/mcp` (AI agents, CLI, site search fallback). `/api/search` is cached
-  per query (≥5 min) so ~60% of it is served from cache; MCP POSTs are never cached. That leaves **~70k Lambda invocations**,
-  ~100 ms each at 512 MB arm64, so **~3,500 GB-s**.
+  per query for a day behind Origin Shield, so ~60% of it is served from cache; MCP POSTs are never cached. That leaves
+  **~70k Lambda invocations**, ~100 ms each at 1024 MB arm64, so **~7,000 GB-s**, plus **8,640 keep-warm pings** (section 6).
 - ~30 deploys/month, each uploading ~50 changed files and invalidating ≤ 40 paths (wildcards collapse the rest).
 
 ## 3. Itemised monthly cost
@@ -54,8 +54,10 @@ Icon pages link the per-style SVG downloads from jsDelivr (`cdn.jsdelivr.net/npm
 | S3 storage (50 MB + noncurrent versions, 30-day expiry) | ≤ 0.3 GB | (5 GB, first 12 months only) | $0.01 | $0.01 |
 | S3 requests (CloudFront cache misses + deploy PUTs/LIST) | ~60k GET, ~2k PUT | | $0.03 | $0.03 |
 | S3 to CloudFront transfer | | always free | $0.00 | $0.00 |
-| Lambda requests | 70k | 1M/month | $0.00 | $0.01 |
-| Lambda compute (arm64) | 3,500 GB-s | 400k GB-s/month | $0.00 | $0.05 |
+| Lambda requests (incl. 8,640 keep-warm pings) | 79k | 1M/month | $0.00 | $0.02 |
+| Lambda compute (arm64, 1024 MB, incl. billed cold-start INIT) | ~7,100 GB-s | 400k GB-s/month | $0.00 | $0.10 |
+| EventBridge schedule (keep-warm, `KeepWarm=true`) | 8,640 events | scheduled rules are free | $0.00 | $0.00 |
+| CloudFront Origin Shield on the API (`ApiOriginShield=true`) | ≤ 100k req | none | $0.08 | $0.08 |
 | Lambda Function URL | | no charge | $0.00 | $0.00 |
 | CloudWatch Logs (14-day retention) | ~30 MB | 5 GB | $0.00 | $0.02 |
 | CloudWatch alarms (2) | | 10 alarms | $0.00 | $0.20 |
@@ -64,7 +66,7 @@ Icon pages link the per-style SVG downloads from jsDelivr (`cdn.jsdelivr.net/npm
 | Route 53 hosted zone | 1 zone | none | **$0.50** | $0.50 |
 | Route 53 queries (alias to CloudFront is free) | | | $0.00 | $0.00 |
 | AWS Budgets (1 budget, 4 alerts) | | first 2 budgets free | $0.00 | $0.00 |
-| **Total** | | | **≈ $0.55** | **≈ $5.30** |
+| **Total** | | | **≈ $0.65** | **≈ $5.45** |
 | optional: WAF rate limit (`EnableWaf=true`) | 1.5M req | none | +$6.90 | +$6.90 |
 | optional: CloudFront access logs (`EnableAccessLogs=true`) | ~0.6 GB | | +$0.05 | +$0.05 |
 | outside AWS: domain renewal (.com) | | | ~$1.25/mo amortised | |
@@ -75,8 +77,9 @@ Any of those emails means something abnormal, most likely abuse of the API.
 
 ## 4. Worst case: what keeps the API bounded
 
-- `/api/search` and `/api/icon/*` are edge-cached (MinTTL 300 s overrides `no-cache`) and keyed only on
-  `q, limit, style, category`, so repeated queries never reach Lambda.
+- `/api/search` is edge-cached for a day (MinTTL 86400 s overrides the origin's `s-maxage=3600`) and keyed only on
+  `q, query, limit, style, category, format`; `/api/icon/*` for a day too (MinTTL 300 s, origin `s-maxage=86400`).
+  Repeated queries never reach Lambda. Deploys invalidate `/api/*` whenever the Lambda code changes.
 - **Reserved concurrency 10** caps parallel executions. At ~100 ms per call that is at most ~100 invocations/second.
 - `ApiInvocationsAlarm` emails at more than 20,000 invocations in one hour.
 - **Kill switch** (stops all API spend in seconds, the site keeps working):
@@ -111,7 +114,7 @@ Any of those emails means something abnormal, most likely abuse of the API.
    `cdn.jsdelivr.net/npm/@withicons/web@<ver>/...`, which costs $0. Keep the site copies as fallback.
 5. **Fonts**: ~180 KB of woff2 is the largest part of a first visit. Subsetting Caveat to the logo glyphs
    (`caveat-logo.woff2` is already 4 KB) and dropping unused weights cuts cold views by ~40%.
-6. **API**: raise `ApiSearchCachePolicy` MinTTL to 1 day (the index only changes on deploy), lower Lambda memory to 256 MB.
+6. **API**: `ApiSearchCachePolicy` already caches a day. Lowering `LambdaMemoryMb` saves cents but brings back multi-second cold starts (section 6).
 7. **Invalidations**: deploy collapses changes to directory wildcards; `--full-invalidation` is one path. Staying
    under 1,000 paths/month is automatic unless you deploy hundreds of times.
 
@@ -119,3 +122,27 @@ Any of those emails means something abnormal, most likely abuse of the API.
 
 ~3.5 TB and ~150M requests is ~$215 data + ~$140 requests + small Lambda, about $350/month pay-as-you-go. At that
 point the flat-rate Business plan (~$200) or levers 1 + 4 (which cut both lines by half or more) are the move.
+
+## 6. API cold starts (why the Lambda has 1 GB, a keep-warm ping and Origin Shield)
+
+A cold API Lambda took **~3.4 s** at 512 MB (loading the bundled index is CPU-bound), long enough for AI agents such as
+ChatGPT browsing to time out on their first search. The fixes, in `infra/site.yaml` and `scripts/deploy.mjs`:
+
+| lever | what it does | monthly cost (no free tier) |
+|---|---|---:|
+| `LambdaMemoryMb=1024` (allowed: 256-512, 1024, 1536, 1769) | CPU scales with memory: 512 MB is ~0.29 vCPU, 1024 MB ~0.58, 1769 MB one full vCPU. Init roughly halves at 1024 MB. | 7,000 GB-s x $0.0000133 = **$0.09** (was $0.05); free tier covers 400k GB-s |
+| cold-start INIT is billed (since Aug 2025) | ~3 s x 1 GB per cold start; a few hundred a month | **< $0.02** |
+| `KeepWarm=true`: EventBridge `rate(5 minutes)` -> `{"source":"withicons.warm"}` | keeps **one** execution environment initialised; the handler returns at once (~1-5 ms). A burst that needs a 2nd concurrent instance still cold-starts that one | 8,640 invocations: **$0.002** requests + ~$0.001 compute; EventBridge schedules free |
+| `ApiOriginShield=true` (us-east-1) | every edge location shares one cache layer in front of the Lambda, so a query cached once is a hit worldwide | $0.0075 / 10k requests that reach the shield: **~$0.08** at 100k API requests |
+| search cache key without Accept-Encoding | one cache entry per query instead of three (identity / gzip / br), so one warm request covers every client; results (~8 KB) go uncompressed | ~0.1 GB more transfer: **$0.01** |
+| post-deploy cache warm (`scripts/deploy.mjs`) | after each deploy: invalidates `/api/*` if the Lambda code changed, waits for the invalidation, then GETs the top 150 `/api/search?q=` queries through CloudFront | 150 requests per deploy: **$0** |
+| optional: provisioned concurrency (not in the template) | 1 always-initialised instance, no cold start ever for the first concurrent request | **~$9/month** for 1 x 1 GB arm64 (not free-tier); needs a published version + alias, the Function URL on the alias, and `deploy.mjs` publishing a version per deploy. Only worth it if keep-warm is not enough. |
+
+The warm step and the WAF: the per-IP rule (`WafRateLimitPer5Min`, default 200) counts every `/api/*` request,
+cache hits included. One warm run sends at most 180 (`--warm-limit`, default 150) at concurrency 6 (reserved
+concurrency is 10) and stops at the first 429. Two deploys inside 5 minutes from the same CI runner can rate-limit
+that runner's warm, nothing else. `--skip-warm` turns it off, `--warm-only` re-warms without deploying.
+
+Fallbacks agents are told about (llms.txt, the skill): retry once, or use the static `https://withicons.com/icons.json`
+(every name, alias and category, CORS `*`, ~1.9 MB raw / far less compressed) and the per-icon pages
+`https://withicons.com/icons/<name>.html`. Both come from S3, no Lambda involved.

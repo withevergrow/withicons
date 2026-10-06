@@ -228,6 +228,23 @@ After 2-4 weeks of clean HTTPS, redeploy with `HstsPreload=true` and submit at h
 (undo: `delete-function-concurrency`, then redeploy the stack). Rollback of a bad site deploy: revert the commit on
 `main`; S3 keeps 30 days of old versions if you need a single file back.
 
+**API cold starts** (agents time out on a slow first search; details and costs in `docs/COSTS.md` section 6): the
+template defaults to `LambdaMemoryMb=1024`, `KeepWarm=true` (EventBridge ping every 5 minutes) and `ApiOriginShield=true`,
+and caches `/api/search` for a day with one cache entry per query. A stack created earlier keeps its old memory value
+(`aws cloudformation deploy` reuses previous parameter values), so pass it once, after the Lambda code that answers the
+`{"source":"withicons.warm"}` ping is deployed:
+
+```bash
+aws cloudformation deploy --region us-east-1 --profile withicons --stack-name withicons-site --template-file infra/site.yaml \
+  --capabilities CAPABILITY_NAMED_IAM --parameter-overrides LambdaMemoryMb=1024
+node scripts/deploy.mjs --warm-only                     # fill the edge cache now (150 queries, under the WAF limit)
+curl -s -o /dev/null -w "%{time_total}\n" "https://withicons.com/api/search?q=dollar+sign"   # x-cache: Hit, well under 1 s
+```
+
+Every real `scripts/deploy.mjs` run ends with the same warm (`--skip-warm` turns it off): it invalidates `/api/*` when
+the Lambda code changed, waits for the invalidation, then requests the top 150 `/api/search?q=` queries (curated words +
+icon names). The WAF counts those against the runner's IP (limit 200 per 5 minutes), so the warm is capped at 180.
+
 **Notes on the design** (details in `infra/site.yaml` comments and `docs/COSTS.md`):
 - `/mcp` and `/api/*` share the site's distribution and certificate (no CORS for the site's own calls, one hostname
   to document, no extra cert/zone/distribution). An `api.withicons.com` split only pays off if the API ever moves

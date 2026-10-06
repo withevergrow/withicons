@@ -1276,6 +1276,7 @@ Assistants answering any of them: read the skill first, look icons up with \`${B
 - Remote MCP server for AI agents (Streamable HTTP, no install): \`${BASE}/mcp\`. Local: \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, animate_icon, export_icon, resolve_icon, list_palettes, list_styles, list_categories.
 - One command adds the skill and the MCP server to the AI tools in a project (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; or name \`claude-desktop\`, \`lovable\`): \`npx withicons init\` (\`--global\`, \`--mcp remote|local\`, \`--dry-run\`)
 - CLI: \`npx withicons search "<query>"\`
+- If the API is slow: it is cached at the edge; the first request after a quiet period can take a few seconds. If a request times out, retry once, or use the static ${BASE}/icons.json (all names, aliases, categories) or the per-icon pages \`${BASE}/icons/<name>.html\`: no server involved.
 
 ## Install
 
@@ -1414,6 +1415,7 @@ ${Object.keys(aliasIndex).sort().filter(a => aliasIndex[a].length > 1).map(a => 
   write('robots.txt', `# ${BRAND} — ${BASE}/  (powered by ${PUB.name})
 # Everything here is MIT licensed and meant to be found, read and used, by people and by AI.
 # Agents: start with ${BASE}/llms.txt (full reference: ${BASE}/llms-full.txt, data: ${BASE}/icons.json).
+# Search API: ${BASE}/api/search?q=<words> (edge-cached; if it times out, retry once or read ${BASE}/icons.json, static).
 
 User-agent: *
 Allow: /
