@@ -37,9 +37,9 @@ jobs:
     timeout-minutes: 30
     environment: npm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
@@ -88,5 +88,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           pre=""; case "$GITHUB_REF_NAME" in *-*) pre="--prerelease";; esac
-          gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes $pre \
-            --title "with icons $GITHUB_REF_NAME" release-assets/*.tgz
+          # GitHub's API sometimes answers 5xx: retry, and if a try created the release but the upload failed, upload again
+          for i in 1 2 3 4 5; do
+            if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+              gh release upload "$GITHUB_REF_NAME" release-assets/*.tgz --clobber && exit 0
+            else
+              gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes $pre \
+                --title "with icons $GITHUB_REF_NAME" release-assets/*.tgz && exit 0
+            fi
+            echo "GitHub Release attempt $i failed; retrying in $((i * 15)) s"; sleep $((i * 15))
+          done
+          exit 1
