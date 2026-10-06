@@ -61,6 +61,8 @@
     "none",
     "never",
     "forbiden",
-    "prohibitted"
+    "prohibitted",
+    "out of stock",
+    "sold out"
   ]
 }

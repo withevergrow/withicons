@@ -11,7 +11,8 @@
     "hand-basket",
     "supermarket-basket",
     "wicker-basket",
-    "my-basket"
+    "my-basket",
+    "basket"
   ],
   "tags": [
     "basket",
@@ -48,7 +49,6 @@
     "M16 13.5 V17.5"
   ],
   "synonyms": [
-    "basket",
     "baskets",
     "add to basket",
     "view basket",

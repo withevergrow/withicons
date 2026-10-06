@@ -1,5 +1,5 @@
 // Parts choreography (forge/MOTION.md): tagged nodes move on their own — decorations never play the main preset,
-// ground shadows stay on the ground, plates take their overrides.
+// cast shadows travel with the object (lagging / fading as it lifts), plates take their overrides.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { load, read } from './_setup.mjs'
@@ -24,7 +24,7 @@ test('partRole / hasParts read renderer tags', () => {
   assert.ok(!M.hasParts('<path class="wm-k" d="M0 0"/>'))
 })
 
-test('partsPlan: deco has its own counter-phased loop, ground shadow only for lifting presets', () => {
+test('partsPlan: deco has its own counter-phased loop, lifting presets give the shadow its own lag + fade keyframes', () => {
   const spin = P.resolveSpecMotion(null, { preset: 'spin', duration: 6 })
   const plan = P.partsPlan(spin, null)
   assert.equal(plan.deco.preset, 'breathe')
@@ -38,8 +38,16 @@ test('partsPlan: deco has its own counter-phased loop, ground shadow only for li
   const rise = P.partsPlan(P.resolveSpecMotion(null, { preset: 'rise' }), { deco: 'still' })
   assert.equal(rise.deco, null)
   assert.notEqual(rise.shadow, rise.obj)
-  // the ground shadow never travels: no translate in any stop
-  for (const [, p] of rise.shadow.stops({ k: 1 })) assert.ok(!/translate/.test(p.transform), p.transform)
+  // the cast shadow travels with the object (an offset print shadow left behind read as a hollow ghost of the icon),
+  // a little behind it on the way up: same stops, translate x SHADOW_LAG, same origin
+  const objStops = rise.obj.stops({ k: 1 }), shStops = rise.shadow.stops({ k: 1 })
+  assert.deepEqual(shStops.map(s => s[0]), objStops.map(s => s[0]))
+  assert.match(shStops[1][1].transform, /translateY\(-33\.44%\)/)
+  assert.deepEqual(rise.shadow.origin, rise.obj.origin)
+  for (const p of ['drop', 'jelly', 'tada', 'wiggle', 'spin', 'pop', 'nudge']) {
+    const pl = P.partsPlan(P.resolveSpecMotion(null, { preset: p }), null)
+    assert.equal(pl.shadow, pl.obj, p + ': the shadow plays the object keyframes')
+  }
   assert.equal(P.partsPlan(P.resolveSpecMotion(null, { preset: 'beat' }), null, { deco: false }).deco, null)
 })
 
@@ -81,9 +89,9 @@ test('partVars: icons.css carries deco, deco length, ground shadow and plate ove
 })
 
 test('motion.css: parts rules, deco and shadow keyframes, wrapper stands still in parts mode', () => {
-  for (const k of ['wm-deco-breathe', 'wm-deco-float', 'wm-deco-twinkle', 'wm-shadow-bounce', 'wm-shadow-bounce-loop', 'wm-shadow-rise', 'wm-shadow-jelly-loop']) assert.ok(css.includes(`@keyframes ${k}{`), k)
+  for (const k of ['wm-deco-breathe', 'wm-deco-float', 'wm-deco-twinkle', 'wm-shadow-bounce', 'wm-shadow-bounce-loop', 'wm-shadow-rise', 'wm-shadow-float']) assert.ok(css.includes(`@keyframes ${k}{`), k)
   assert.ok(css.includes(':where(.wm,.wm-loop,.wm-hover,.wm-once,.wm-run,with-icon){--_an:initial}'), 'idle wrappers hand no animation down')
-  assert.ok(css.includes('.wm-parts{animation-name:none}'))
+  assert.ok(css.includes('.wm-parts{animation-name:none!important}'), 'beats the more specific one-shot trigger list')
   assert.ok(css.includes(':has(>svg>:is(.wm-deco,.wm-shadow,.wm-a,.wm-s))'), 'CSS-only via :has()')
   assert.match(css, /\.wm-deco\{transform-box:fill-box;transform-origin:50% 50%;animation:var\(--_dk\)/)
   assert.ok(css.includes('.wm-shadow{animation-name:var(--_sh)}'))
@@ -100,9 +108,32 @@ test('animatedSvg with tagged parts: the group stands still, each role animates,
   assert.match(a, /-g>\.wm-deco\{transform-box:fill-box/)
   assert.match(a, /-g>\.wm-shadow\{transform-box:view-box/)
   assert.ok(!/-g\{animation:/.test(a), 'the wrapper group does not move')
-  assert.match(a, /transform-origin:50% 92%/, 'ground shadow keyframes')
+  assert.ok(!/transform-origin:50% 92%/.test(a), 'no ground pivot: the shadow pivots where the object does')
+  assert.match(a, /translateY\(-26\.4%\) scale\(0\.95, 1\.06\);opacity:0\.76/, 'shadow lifts with the object (lag 0.88) and fades')
   const f = X.frameSvg(TAGGED, { preset: 'spin', duration: 1.4 }, 0.5)
   assert.equal((f.match(/animation-play-state:paused/g) || []).length, 5)
   assert.equal(X.exportDuration({ preset: 'spin', duration: 1.4 }, TAGGED), 2.8, 'records until the decoration loop closes')
   assert.equal(X.exportDuration({ preset: 'spin', duration: 1.4 }, TAGGED.replace('class="wm-deco" ', '')), 1.4)
+})
+
+test('fades scale with amount: a 0.3 breathe dims to 92%, not 72%', async () => {
+  const K = await load('keyframes.js')
+  const mid = k => Number(K.presetStops('breathe', false, { k })[1][1].opacity)
+  assert.equal(mid(1), 0.72)
+  assert.ok(Math.abs(mid(0.3) - 0.916) < 1e-9)
+  assert.ok(Math.min(...K.presetStops('flicker', false, { k: 0.3 }).map(s => Number(s[1].opacity))) > 0.93)
+})
+
+test('exports of fading presets fade the icon as one picture: opacity on the group, parts keep transforms only', () => {
+  const a = X.animatedSvg(TAGGED, { spec: { name: 'x', intent: 'x', loop: { preset: 'rise' }, hover: { preset: 'pop' } }, time: 0.5 })
+  const id = /class="(wm\w+)"/.exec(a)[1]
+  assert.match(a, new RegExp(String.raw`\.${id}-g\{animation:${id}-op `), 'the group carries the opacity track')
+  const kf = name => (new RegExp(String.raw`@keyframes ${name}\{(.*?)\}\}`).exec(a) || [])[1] || ''
+  assert.match(kf(id + '-op'), /opacity:0/)
+  // object and shadow keyframes: transforms, no opacity (the shadow's fade equals the object's, so nothing is left)
+  const used = [...a.matchAll(new RegExp(String.raw`-g>(?::not\([^)]*\)|\.wm-shadow)\{animation:(${id}-\d+) `, 'g'))].map(m => m[1])
+  assert.equal(used.length, 2)
+  for (const n of used) { assert.ok(kf(n).includes('transform'), n); assert.ok(!/opacity/.test(kf(n)), n) }
+  // a non-fading preset leaves the group still
+  assert.ok(!/-g\{animation:/.test(X.animatedSvg(TAGGED, { preset: 'float' })))
 })

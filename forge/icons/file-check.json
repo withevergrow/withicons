@@ -58,6 +58,9 @@
     "checked",
     "file uploaded",
     "submitted",
-    "compliance"
+    "compliance",
+    "exam",
+    "exam results",
+    "test results"
   ]
 }

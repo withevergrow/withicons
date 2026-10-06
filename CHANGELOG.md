@@ -20,6 +20,20 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
   (`<i class="with with-home" style="--with-size: 48px">`). The READMEs and the site now explain the three ways to
   resize a class icon (font size, a size class, `--with-size`).
 - Search: finance words (fintech, trading, stocks, investing and more) find the money, chart and trend icons.
+- `@withicons/search` 1.5.0: much better ranking (multi-word queries weigh every word, generic words like "fast" or
+  "live" count less than the object, real English words are never "corrected" into other icons), a `confidence`
+  (high, medium, low) and `weak` flag on every result, empty results plus a hint for things with no honest icon, and
+  `query()` with filtered ranking, `outside` matches a filter hid, `didYouMean` and a browse list. 160+ new synonyms.
+  Measured on a new 1,125-query evaluation set (`packages/search/eval`): nDCG@5 0.88 to 0.93, top result right 89% to
+  94%, typo noise 3.9% to 0.1%, no-icon queries handled 46% to 97%.
+- CLI: `palettes <icon> --style <s>` marks the main colour role ("c2, main body, ~47%"); `--name <template>`,
+  `--name-map receipt=orders`, `--strict`, `--stroke-width` on `export`; `motions <icon>` (or `animate <icon> --list`)
+  with livelier picks for slides; per-command `--help`; one colour note per command instead of one per icon.
+- MCP: `export_icon` takes `names` (list or map), `filename`, `strict_palette`, `stroke_width`; `get_icon` returns
+  `mainRole` and `warnings` and lists palettes only on request; `list_styles` returns `minSize` and `onDark`;
+  `resolve_icon` resolves by meaning (`status: "synonym"`, e.g. favourites to star or heart); shorter search replies.
+- Animated exports up to 2048 px (1080 px Instagram GIFs at the default frame rate), with a clear error instead of a
+  silent resize; padding always covers the motion.
 
 ### Changed
 - `@withicons/dynamic`: `loaded(style)` says whether a style's renderer runs on this thread. In the lite and CDN builds a
@@ -35,6 +49,13 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
   gzipped for the first icon).
 
 ### Fixed
+- `@withicons/motion`: `<with-icon motion="hover|once">` animated the whole element as well as its parts; now only the
+  parts move, with each icon's tuned lags (the bell's clapper rings a beat behind). Shadows travel with the object
+  instead of staying behind as an outline, and fades in exported files fade the whole icon at once.
+- `@withicons/dynamic`: the render worker starts only for styles that are slow to draw, so pages with only simple styles
+  never download it; `animate` durations are honoured (a 900 ms change took about 500 ms).
+- Exported files (SVG, PDF, PNG, PowerPoint, Word…) no longer carry motion class names; an export with a palette some
+  icons lack writes nothing half-way (those icons borrow the first icon's colours, or `--strict` fails cleanly).
 - Bare jsDelivr URLs (`cdn.jsdelivr.net/npm/@withicons/web`, `…/classes`, `…/dynamic`, with or without `@latest` or a
   version range) now work: the scripts they serve load their icons from that exact version's `dist/` instead of a
   broken path one folder up.

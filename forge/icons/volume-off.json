@@ -9,7 +9,8 @@
     "no-sound",
     "volume-mute",
     "volume-x",
-    "silent"
+    "silent",
+    "muted"
   ],
   "tags": [
     "media",
@@ -37,7 +38,6 @@
   ],
   "cutouts": [],
   "synonyms": [
-    "muted",
     "silence",
     "quiet",
     "mute audio",

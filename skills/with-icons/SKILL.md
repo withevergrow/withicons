@@ -19,9 +19,10 @@ has a default size of 24. Site: https://withicons.com · Repo: https://github.co
 | SolidJS | `npm i @withicons/solid` | `import { Home } from '@withicons/solid'` then `<Home />` |
 | any HTML, Astro, Lit, no build | CDN script `@withicons/web/dist/cdn.js` (loads only the icons shown) | `<with-icon name="home"></with-icon>` |
 | Font Awesome-style classes | CDN loader `@withicons/classes/dist/with-loader.js` (loads only the icons shown), or `npm i @withicons/classes` | `<i class="with with-home"></i>` |
-| static SVG / sprite / email / CMS | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
+| static SVG / sprite / CMS | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
+| files: slides, print, email, social | `npx withicons export <name> --format …` (section 7a) | PNG for email, PDF/SVG for print, GIF for motion |
 | Node, build scripts, name lookup | `npm i @withicons/core` | `resolve('bin').name` returns `'trash'` |
-| animation (any of the above) | `npm i @withicons/motion` | `<span class="wm wm-loop" data-wm="bell">…icon…</span>` (section 7) |
+| animation (any of the above) | `npm i @withicons/motion` | `<span class="wm wm-loop" data-wm="bell">…icon…</span>`; `<with-icon motion="loop">` (section 7) |
 
 Full snippets for each framework are in [reference/frameworks.md](reference/frameworks.md).
 
@@ -58,6 +59,18 @@ Full snippets for each framework are in [reference/frameworks.md](reference/fram
   `withicons palettes <icon>` fits all of them. The palette styles' own variables (`--with-kawaii-fill-1`, `--with-kawaii-face`,
   `--with-retro-2` …) map to the same roles, so that palette fits them too (`withicons palettes heart --style kawaii` shows
   the mapping; `withicons get heart --style kawaii --palette <id> --format web-component` applies one with no build).
+  **Brand colours on a web page, no build**: `get` takes the same role flags as `export` (`--ink --c1 … --c4 --tint --accent
+  --shadow --shine --edge`, `--colors`): `npx withicons get rocket --style glass --c1 "#6d28d9" --tint "#c4b5fd" --format web-component`
+  prints `<with-icon style="--with-glass-back: #6d28d9; --with-glass-pane: #c4b5fd" name="rocket" variant="glass">`.
+  `--color` only applies to `svg` / `data-uri`; for a web component set CSS `color` on a parent for the ink.
+  **Brand colour = the main role, not always c1.** c1 is the first colour family drawn, not necessarily the biggest
+  area. `npx withicons palettes <icon> --style <style>` marks the role that paints the body and says how much
+  (`--with-glass-pane (tint, main body)`, then `main role: tint (main body, ~93% of the drawn area): set it for a brand
+  colour, e.g. --tint "#e11d48"`); MCP: `get_icon` `colors.mainRole`, `list_palettes` `mainRole` / `mainRoleShare` /
+  `mainRoleNote`. It differs per icon and style (glass `heart`: tint; kawaii `home`: c1, ~78%), and the palette styles'
+  variables map to different roles per icon (kawaii `heart` paints c1 with `--with-kawaii-fill-1`, `home` with
+  `--with-kawaii-fill-3`), so one CSS rule does not recolour a set evenly: set each icon's main role with role flags
+  (`get` / `export` do the variable mapping), or use solid / line (`color`). Then look at the result.
 
 Rule: one style per UI region. The only routine mix is line plus solid for inactive and active states. Every style is a subpath:
 `@withicons/react/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, `/glass`, `/kawaii`, `/sticker`, `/pixel`, `/retro`,
@@ -98,7 +111,8 @@ Everything else (`onClick`, `style`, `data-*`, `aria-*`) is spread onto the `<sv
    `<button type="button" aria-label="Delete row"><Trash /></button>`.
 3. **Standalone meaningful icon** (status, rating): pass `title="Error"` (components) or `label="Error"` (web component).
 4. Icon classes (`<i class="with ...">`) have no semantics. Add `aria-hidden="true"` and visible or `.sr-only` text.
-5. Never rely on the icon alone for meaning in forms or errors. Keep 3:1 contrast for meaningful icons, and give
+5. Exported SVG files contain a `<title>`. Next to visible text add `aria-hidden="true"` (inline) or `alt=""` (`<img>`).
+6. Never rely on the icon alone for meaning in forms or errors. Keep 3:1 contrast for meaningful icons, and give
    icon-only controls a target of at least 24x24 CSS px (44 recommended on touch) using padding, not a bigger icon.
 
 ## 6. Find the right icon
@@ -109,7 +123,7 @@ Use the first one available, in this order:
   Tools: `search_icons` (query, then ranked names plus ready-to-paste import/usage), `get_icon` (name + style + format,
   which returns SVG or a framework snippet), `animate_icon` (name + trigger loop/hover/once/inview/swap + format, which returns
   animation code), `export_icon` (name + style + format, which makes FILES: svg, png, pdf, pptx, docx, favicons, app assets,
-  lottie and animated gif / apng / animated-svg / pptx-animated; section 7a), `resolve_icon` (alias or typo to canonical
+  lottie and animated gif / apng / animated-svg / pptx-animated; section 7a), `resolve_icon` (alias, typo or a word by meaning, e.g. "orders" -> receipt, to the canonical
   name), `list_palettes`, `list_styles`, `list_categories`.
   Call `tools/list` to confirm names and arguments.
   Not connected yet? `npx withicons init` adds this skill and the server to the AI tools it finds in the project
@@ -121,7 +135,16 @@ Use the first one available, in this order:
 - **Offline**: [reference/icons.md](reference/icons.md), `https://withicons.com/icons.json`, `https://withicons.com/llms.txt`,
   or `import { search, resolve } from '@withicons/core'`.
 
-MCP client setup and response shapes are in [reference/search.md](reference/search.md).
+Search tips: one concept per query (`delivery`, `secure`, `payment` rather than a whole tagline); if nothing fits, try a synonym
+by meaning or the object you would draw, then browse the category (`list_categories`, `npx withicons categories <cat>`,
+[reference/icons.md](reference/icons.md)). Every result says why it matched (`reason`, and `match.kind`: exact, prefix,
+stem, typo, concept, similar, phonetic): and a `confidence` (high, medium, low): trust high and medium, treat low as
+"related" (the reason says "(related, low confidence)") and check `reason` / `match` before using one; prefer the object
+you would draw. Words with no honest icon return nothing (`grinder`, `mat`, `shirt`, `pram`) plus a browse hint or
+`didYouMean`; others only low matches (`yoga` -> dumbbell). Then pick the closest honest icon and say what it stands
+for in the text or label, never pass a loose match off as exact ([reference/search.md](reference/search.md) lists the gaps). There are **no brand or social logos** (Instagram, X, GitHub …): use a neutral
+stand-in (`camera`, `play`, `message-circle`, `code`, `share-2`) with the brand name as text or `aria-label`, or the brand's
+official asset. MCP client setup, more tips and response shapes are in [reference/search.md](reference/search.md).
 
 ## 7. Animate (optional, separate package)
 
@@ -140,20 +163,31 @@ import '@withicons/motion/icons.css'    // each icon's tuned motion, all 500 (~1
 <span className={'wm-swap wm-fx-morph' + (playing ? ' is-on' : '')}><Play className="wm-a" /><Pause className="wm-b" /></span>  {/* icon to icon */}
 ```
 
+- **TypeScript**: every package ships its types. A CSS custom property in a React `style` needs a cast:
+  `style={{ '--wm-dur': '3s' } as React.CSSProperties}`.
+- **`<with-icon>` (web component): use the `motion` attribute, not a `.wm` wrapper.** Its svg is in a shadow root, so a
+  wrapper only moves the outer box. Load `@withicons/motion/dist/element.js` after `@withicons/web`'s `dist/cdn.js`, then
+  `<with-icon name="bell" motion="loop|hover|once|inview">` (optional `preset="ring"`, swaps with `swap-to="bell-off"`).
+  Wrappers are for inline SVG, framework components, live icons and `<i>` classes (the svg must be the wrapper's direct child
+  for part motion; `<i>` moves as one piece).
+- Check it runs: `el.getAnimations({ subtree: true })` on a wrapper; for `<with-icon>` with `element.js` use
+  `el.shadowRoot.getAnimations()` (the parts move, each with its own lag, while the element itself stays still and reports none). Reduced motion (common in CI and screenshot tools) empties both.
+- Touch screens have no hover: on mobile prefer `wm-inview` / `motion="inview"`, `wm-once` or a calm loop.
 - Triggers: `wm-loop` (continuous), `wm-hover` (one-shot on hover/focus of the icon or of a `.wm-trigger` ancestor),
   `wm-once` (on load), `wm-inview` (JS). Presets: `wm-p-<preset>` (spin, pulse, beat, float, bounce, ring, wiggle, shake,
   nudge, pop, tada, flip, glow, draw…). Swap effects: `wm-fx-<effect>` (fade, scale, rotate, flip, slide-up, blur, morph…).
 - Use motion to explain state or invite action (loading, new notification, like, play/pause, menu/close); keep loops on
   one or two icons per screen. `prefers-reduced-motion` turns everything off automatically.
 - An animated icon is still decorative: keep the accessible name on the button, never in the animation.
-  Full list of tuned icons: [reference/motion.md](reference/motion.md).
+  Web component details, sizes and the full list of tuned icons: [reference/motion.md](reference/motion.md).
 
-## 7a. Animated icon files for slides, docs and social
+## 7a. Icon files for slides, print, email, docs and social (still or animated)
 
-When the person wants a moving icon in PowerPoint, Keynote, Google Slides, a document, an email, Slack/Notion or a social
-post, give them a FILE, not code. One command, no browser (Node 18+):
+When the result is a deck, a document, a print file, an email or a social post, give the person FILES, not code.
+One command, no browser (Node 18+); several icons and formats at once:
 
 ```bash
+npx withicons export truck package home --format svg-flat,png,pdf --out icons   # truck-line.svg, truck-line-512.png, truck-line.pdf …
 npx withicons export bell --format gif --background "#ffffff" --out slides   # bell-line-ring.gif, loops forever
 npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"   # a ready 16:9 slide, icon moving
 npx withicons export play --format gif --motion swap --to pause --effect morph            # play turns into pause and back
@@ -163,22 +197,62 @@ MCP: `export_icon({ name: 'bell', style: 'luxe', format: 'gif', background: '#ff
 file (without `out_dir` a small GIF comes back as image content). The remote server (`https://withicons.com/mcp`) cannot
 render frames: it answers GIF / APNG / PowerPoint requests with the exact `npx withicons export ...` command to run.
 
-- **Which format.** `gif`: plays in PowerPoint (slide show and editor), Keynote, Google Slides, Word, Gmail, Apple Mail, Outlook 365,
-  Slack, Teams, Notion. `pptx-animated`: a slide with that GIF on it (opens in PowerPoint, Keynote, Google Slides).
+- **Which format.** Still: `svg-flat` (slides, design tools, `<img>`), `png`, `pdf` / `eps` (print).
+  `gif`: plays in PowerPoint (slide show and editor), Keynote, Google Slides, Word, Gmail, Apple Mail, Outlook on the
+  web, Slack, Teams, Notion (classic Outlook for Windows shows the first frame). `pptx-animated`: one slide with that GIF
+  (opens in PowerPoint, Keynote, Google Slides).
   `apng` (`.apng.png`): smooth see-through edges on web pages; Office and Google Slides show only its first frame.
   `animated-svg`: tiny, browsers only. `lottie` / `dotlottie`: vector, for apps, After Effects, Canva, LottieFiles.
   Video (MP4, WebM) and animated WebP come from the icon page on withicons.com (browser encoders).
 - **Background.** GIF transparency is on or off per pixel, so soft edges are blended with a colour. Pass the slide's
   colour as `--background` (solid tile, cleanest) or `--matte` (transparent, edges blended for that colour). A GIF made
   for white shows a light fringe on a dark slide: export again for the real slide colour.
-- **Colours are baked in.** A GIF cannot be recoloured in PowerPoint or Keynote. Pick `--style`, `--palette`, `--color`
-  / `--c1` … before exporting (`withicons palettes <name>` lists palettes).
+- **Colours are baked in**, and the ink defaults to **black**. On a dark slide or page pass `--color "#ffffff"` (and
+  `--background` with the slide colour); for multi-colour styles pick an `on-dark` palette
+  (`npx withicons palettes <icon> --tag on-dark`, every icon has one) and still set `--color` for a light outline.
+- **One look for many icons**: palette ids are per icon, so set roles instead; they apply to every icon in the call:
+  `npx withicons export rocket shield chart-bar --style glass --format png --color "#ffffff" --c1 "#6d28d9" --tint "#c4b5fd"`.
+  `npx withicons palettes <icon> --style <style>` shows which roles a style reads and its **main role** (the body
+  colour, section 2): put the brand colour on that role. A role some icons do not use gets one note per command
+  (`note: --accent applies to: phone-call (2 others don't use it)`); `--color` / `--ink` alone prints nothing.
+  Export one icon and look before the whole set. With `--palette`, icons lacking it borrow the first icon's colours (`--strict` fails instead). Keep roles distinct (one hex for all
+  merges parts), and expect see-through styles (duo 20%, glass, kawaii, pixel) to show a brand hex lighter: for the
+  exact hex use solid/line `--color`, or bauhaus, retro or sticker ([reference/files.md](reference/files.md)).
 - **Size.** Default 256 px (pptx-animated 480): sharp up to ~1.75 in / 4.5 cm wide on a 1080p slide; `--size 512`
-  for full-screen or 4K. Bigger and longer means heavier: a typical 256 px GIF is 20-300 KB.
+  for full-screen or 4K, `--size 1080` for Instagram and other social posts. GIF size depends on the style and on how
+  much of the icon moves (measured at the default 25 fps on white; a small ring like `bell` at the low end, a long
+  steam loop like `coffee` at the high end):
+
+  | GIF | line, solid, duo | glass, luxe | sticker, gothic |
+  |---|---|---|---|
+  | 256 px | 45-185 KB | 180-560 KB | 330-630 KB |
+  | 512 px | 95-390 KB | 0.4-1.3 MB | 0.7-1.5 MB |
+  | 1080 px | 0.2-0.95 MB | 0.95-3.2 MB | 1.6-3.4 MB |
+
+  To shrink one, lower `--fps` (12 roughly halves it) or `--seconds`. Animated files go up to 2048 px; very large or
+  long ones may ask for a lower `--fps` or `--seconds` (the error says what fits).
+- **Padding.** Animated files leave room for the motion by themselves; static files sit edge to edge on the 24 grid,
+  so pass `--padding 0.15` (0 to 0.6; MCP `padding`) for app tiles, round frames or extra breathing room; for animated
+  files it is a minimum.
 - **Motion.** The icon's tuned loop by default (same keyframes as the website). `--motion hover` / `once` play the
   one-shot then rest, `--motion <preset>` (spin, ring, beat, bounce, float, pop, tada, draw …), `--motion swap`
   (+ `--to`, `--effect`), `--fps`, `--seconds`, `--loop 1` to play once. Every style animates, palettes included.
-- In the deck: Insert > Pictures (or drag the file in); GIFs play in the slide show. Keep one moving icon per slide.
+- **`pptx-animated` is one sample slide.** For a whole deck, export GIFs and insert them into your own slides:
+  Insert > Pictures (or drag the file in); GIFs play in the slide show. Keep one moving icon per slide. Building the
+  deck in code: python-pptx `slide.shapes.add_picture('bell-line-ring.gif', …)` keeps the GIF animation.
+  A title slide wants a more noticeable move than a calm tuned loop: `npx withicons motions <icon>` (same as
+  `animate <icon> --list`) shows its default loop and hover, its alternates with ready commands and the livelier picks
+  (tada, jelly, bounce, beat, wiggle, pop) with an `export --motion ...` line; `npx withicons animate --list` lists every preset.
+- **Print**: vector `pdf`, `eps` or `svg-flat`, never PNG; `--color` sets the line colour, `--stroke-width 1.25` a
+  lighter line on outline styles. **Names**: `--name "{name}"` gives `home.svg` (MCP `filename`); one name per icon:
+  `--name-map receipt=orders,heart=favourites` gives `orders.svg`, `favourites.svg` (MCP `names: { receipt: "orders" }`).
+  Files (svg, svg-flat, pdf, png, pptx ...) carry no motion classes; code formats (jsx, vue ...) keep them.
+  Nothing is written if any file fails; `npx withicons export --help` lists every option.
+  **Email**: PNG at 2x the display size, hosted on your https URLs (the CDN has SVGs only), with `width`, `height`, `alt`;
+  never SVG, `data:` URIs, sprites, web components or CSS classes. In email HTML put the `<img>` in a table cell with
+  inline styles (no stylesheet classes). Email signatures (Gmail, Outlook, Apple Mail):
+  https://withicons.com/guides/email-signatures.html. File names, formats per job, print stroke weight
+  and email details: [reference/files.md](reference/files.md).
 
 ## 7b. Live icons (content you set, separate package)
 
@@ -194,7 +268,7 @@ paramsOf('calendar-date')                // { day: { type: 'int', min: 1, max: 3
 render('calendar-date', { day: 17, month: 'MAR' }, 'line', { size: 24 })   // -> SVG string
 ```
 ```html
-<!-- no build: ~35 KB gzipped, each live icon and style loads on first use -->
+<!-- no build: ~40 KB gzipped, each live icon and style loads on first use -->
 <script src="https://cdn.jsdelivr.net/npm/@withicons/dynamic@latest/dist/cdn/lite.js"></script>
 <with-live-icon name="calendar-date" day="17" month="MAR" variant="kawaii" label="17 March"></with-live-icon>
 <with-live-icon name="calendar-date" today label="Today"></with-live-icon>   <!-- the viewer's date, kept current -->
@@ -215,7 +289,9 @@ import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dyn
 - **Values that change after load** (an API, a WebSocket, a timer, an input): set the attribute (`icon.setAttribute('count', 7)`)
   or the `LiveIcon` prop. Add `animate` (element attribute, or `animate` / `animate={900}` on `LiveIcon`) and changes move
   instead of jumping: numbers roll, levels ease, clock hands take the short way round, words cross-fade, instant with
-  reduced motion. One change: `el.animateTo({ count: 7 }, { ms: 900 })` (or `animateTo(el, …)` from
+  reduced motion. The whole change takes the `animate` time (default 650 ms) however far it goes: "roll" means the
+  digits step through the values in between (3 to 7 shows 4, 5, 6; a big jump skips some), so a change of 1 is a single
+  swap at the end. Rich styles draw only a few in-between frames (in a worker; without one, a cross-fade). One change: `el.animateTo({ count: 7 }, { ms: 900 })` (or `animateTo(el, …)` from
   `@withicons/dynamic/element`). Several attributes set together make one transition; the last frame is exact.
 - **label**: the accessible name (`label` attribute, `label` prop, or the `label` render option); it adds `role="img"`.
   The element and `LiveIcon` name themselves from their values when no label is given ("Calendar date, March 17",
@@ -223,7 +299,14 @@ import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dyn
   `param-label="A"` on the element or `params={{ label: 'A' }}` on `LiveIcon`.
 - Params are attributes in kebab-case on the element and props on `LiveIcon`; the other props (`className`, `onClick`,
   `aria-*`) go on the `<svg>`. Bundler setup for the element: `import '@withicons/dynamic/element'`.
-- Try them and copy code at https://withicons.com/live.html. Spec: `forge/DYNAMIC.md` in the repo.
+- **Vite**: set `worker: { format: 'es' }` in `vite.config` (the default `iife` inlines every style into a ~1.5 MB worker
+  and slows builds). The first `es` build can still take ~90 s while Vite bundles the worker; later builds take seconds.
+  Each style chunk then appears twice in `dist` (once for the page, once for the worker); a page downloads only the
+  styles it shows. **React**: never change a `LiveIcon`'s `key` (or its parent's) to replay an animation; it remounts
+  and the value jumps. Change the prop and toggle a class on a `.wm` wrapper (a `bell-count` in `data-wm="bell"` rings
+  part by part).
+- Every live icon with its params (name, type, range or options, default), bundle sizes and recipes:
+  [reference/live.md](reference/live.md). Try them at https://withicons.com/live.html.
 
 ## 8. Pitfalls
 
@@ -235,6 +318,11 @@ import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dyn
 - SVG sprites must be served from **your own origin**. Browsers block cross-origin `<use href>`.
 - Icon classes are CSS masks: duo tint and blueprint accents render as translucent `currentColor`. Palette styles keep
   their default colours in classes, but their `--with-<style>-*` variables only work in components, `<with-icon>`, sprites or `with-icons.js`.
+  Only their fills are fixed: the ink is still a `currentColor` mask, so `color` (and dark mode) still recolours it.
+- Icon classes: `with-loader.js` watches the page (MutationObserver), so `<i>` elements or classes added later load too.
+  `with-pulse` is a stepped spin (8 steps, like an old spinner), not an opacity pulse. `with-rtl` / `with-flip-*` use
+  the CSS `scale` property and `with-rotate-*` the `rotate` property, so they combine with `with-spin`; to check a flip,
+  read `getComputedStyle(el).scale` (`'-1 1'` when mirrored), not `transform`.
 - Standalone `.svg` files (CDN, `@withicons/static`, `get_icon` with `flat: true`) have the palette baked in, which is what
   Figma, PowerPoint, Keynote and image converters need. Inline code keeps the variables.
 - Don't put palette styles, loops or creative styles in dense 16-20px controls: they turn to noise.
@@ -245,6 +333,11 @@ import { LiveIcon } from '@withicons/dynamic/react'        // or '@withicons/dyn
   look that never changes, pin one version (`@withicons/web@<version>`, the same for every `@withicons/*` file on the page).
   Never `with-all.css` (every style, ~6.3 MB gzipped) or `@withicons/web/full` on a real page; `with-<style>.css`
   (one whole style, `with-line.css` 26 KB gzipped) is the zero-JS option.
+- `<i class="with …">` size: `font-size` on the `<i>` gives an exact pixel size; `with-2x` … `with-5x` multiply the text
+  size; `--with-size: 48px` needs `@withicons/classes` 0.2.2+. Measure with `offsetWidth` (a spinning icon's bounding box changes).
+- Right-to-left: `with-rtl` on `<i>` (also `with-flip-h`, `with-rotate-90` …), `mirror-rtl` on `<with-icon>`, and for
+  components a class plus `.rtl-flip:dir(rtl) { transform: scaleX(-1) }` (no prop). Only mirror directional icons
+  ([reference/frameworks.md](reference/frameworks.md)).
 - Svelte 4: `on:click` is not forwarded to the icon. Wrap it in a `<button>`.
 - Angular `name=` usage needs `provideWithIcons(...)` registration. Passing `[icon]` needs none.
 - Packages are `0.x`: check `npm view @withicons/react version` if an install fails. The site offers direct SVG
@@ -267,7 +360,7 @@ first line sends you here. Each brief has a `MY TASK:` line. Do that task:
 - **fit**: an honest verdict on whether that icon says what they mean: how people will read it, ambiguity or cultural
   issues, whether it needs a text label, and up to 3 better options from the library.
 - **slides** (icon page or an app guide): which file to grab from the icon page (Copy image; SVG to recolour in
-  PowerPoint, Keynote, Figma, Canva; PNG at 256 px for slides, 1024 px for print; an animated GIF on the slide's colour
+  PowerPoint, Keynote, Figma, Canva; PNG at 256 px for slides; SVG or PDF for print; an animated GIF on the slide's colour
   for a moving icon, section 7a), how to insert, recolour and resize it in their app, layout tips, and the guide `https://withicons.com/guides/<app>.html` (powerpoint, google-slides, keynote,
   canva, figma, notion, word-google-docs, wordpress, webflow, framer, wix-squarespace, email-signatures, html).
 

@@ -54,6 +54,8 @@
     "form",
     "option",
     "ballot",
-    "completed task"
+    "completed task",
+    "mark as done",
+    "mark complete"
   ]
 }

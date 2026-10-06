@@ -298,6 +298,9 @@ export function cached(name, params, style) {
 // workers (Node, file://, a CSP without worker-src) jobs run on the main thread one per task, so the page can paint
 // and take input between draws instead of freezing for the whole batch.
 let workerFactory = null, pool = null, poolDead = false, seq = 0
+// a job worth a worker: its style costs more than a frame (cheap styles draw on this thread, no worker download), or a
+// transition's frames that proved slower than planned on this device
+const rich = job => job.worker || cost(job.style) > FRAME_MS
 const QUEUE = [], JOBS = new Map()
 /** Give the runtime a way to start a render worker: setWorker(() => new Worker(url)). null turns workers off. */
 export function setWorker(factory, onlyIfUnset) {
@@ -370,7 +373,8 @@ function pump() {
   // a microtask: several attribute or param changes in one task become one job
   Promise.resolve().then(() => {
     pumping = false
-    const p = startPool()
+    // workers start only for styles slower than a frame: a page of cheap icons (line, duo...) never downloads the worker
+    const p = pool || (QUEUE.some(rich) ? startPool() : null)
     if (p) {
       for (const slot of p) {
         if (slot.job) continue
@@ -404,7 +408,7 @@ export function warm(name, params, style, options) {
   const p = resolveParams(g, params), key = keyOf3(g, p, v)
   // the page needs the style too (root attributes, and render() reads it); it loads while the worker draws
   // (the icon's drawing code loads where it draws: in the worker, or on the main thread when the job runs there)
-  const ready = RENDERERS[v] || startPool() ? Promise.resolve() : load(v)
+  const ready = RENDERERS[v] || (cost(v) > FRAME_MS && startPool()) ? Promise.resolve() : load(v)
   if (CACHE.has(key)) return ready.then(() => true)
   const owner = options && options.owner
   const pending = new Promise((ok, bad) => {
@@ -444,10 +448,10 @@ function warmInOrder(g, list, v, owner) {
     const waiter = { ok() { }, bad() { }, owner }
     const have = JOBS.get(key)
     if (have) { have.waiters.push(waiter); continue }
-    const job = { id: ++seq, key, name: g.name, params: p, style: v, group: g.name + '\u0001' + v, waiters: [waiter], sent: false, fifo: true }
+    const job = { id: ++seq, key, name: g.name, params: p, style: v, group: g.name + '\u0001' + v, waiters: [waiter], sent: false, fifo: true, worker: true }
     JOBS.set(key, job); QUEUE.push(job)
   }
-  ;(RENDERERS[v] || startPool() ? Promise.resolve() : load(v)).then(pump, () => { })
+  ;(RENDERERS[v] || (cost(v) > FRAME_MS && startPool()) ? Promise.resolve() : load(v)).then(pump, () => { })
 }
 /** Worker side: answer { id, name, params, style } with the rendered nodes. Builds call this inside their worker. */
 export function serveWorker(scope) {
@@ -701,6 +705,10 @@ export function plan(name, from, to, style, options) {
     if (key !== last) { frames.push({ t, params: p }); last = key }
   }
   if (!frames.length || !same(frames[frames.length - 1].params, b)) frames.push({ t: 1, params: b })
+  // easings that settle early (a level's spring, a number's roll) reach the target's exact values before t = 1, and the
+  // repeats are dropped above: spread the frames over the whole duration, so the transition takes the ms it was given
+  const tEnd = frames[frames.length - 1].t
+  if (tEnd > 0 && tEnd < 1) for (const f of frames) f.t = f.t / tEnd
   return { name: g.name, style: v, ms, swap, from: a, to: b, frames, sync: syncOK(g, v) }
 }
 // the running transitions, painted by one animation-frame loop

@@ -64,6 +64,11 @@ function teardown(host, s) {
   host.classList.remove('wm-js', 'wm-run', 'wm-drawing', 'wm-parts')
   host.removeAttribute('data-wm-on')
 }
+const isPlaying = a => a.playState === 'running'
+// true while the host or any node in its shadow root still plays a motion
+function hostBusy(host) {
+  try { return host.getAnimations().some(isPlaying) || (!!host.shadowRoot && !!host.shadowRoot.getAnimations && host.shadowRoot.getAnimations().some(isPlaying)) } catch { return false }
+}
 function listen(s, t, type, fn) { t.addEventListener(type, fn); s.offs.push(() => t.removeEventListener(type, fn)) }
 const setOn = (host, on) => { if (on) host.setAttribute('data-wm-on', ''); else host.removeAttribute('data-wm-on') }
 // the swap follows the state of the control around it (no :host-context(), which Firefox and Safari lack)
@@ -100,9 +105,11 @@ function decorate(host) {
   }
   if (motion && effectivePreset(host) === 'draw' && svg && prepareDraw(svg)) host.classList.add('wm-drawing')
   else host.classList.remove('wm-drawing')
-  // parts choreography: tagged nodes move on their own; the document's @keyframes are not visible in a shadow root,
-  // so it gets its own copy (one shared string, built on first use)
-  const parts = !!motion && !to && !host.classList.contains('wm-drawing') && !!partsSvg(host)
+  // parts choreography: tagged nodes move on their own (each with its spec lag); the document's @keyframes are not
+  // visible in a shadow root, so it gets its own copy (one shared string, built on first use). An icon without part
+  // tags plays the same way: all its nodes are the object, about the same origin, so the host box itself never
+  // moves (a moving host would add its own turn to the parts', and drag the hit area around under the pointer).
+  const parts = !!motion && !to && !host.classList.contains('wm-drawing') && !!(svg && (partsSvg(host) || svg.firstElementChild))
   host.classList.toggle('wm-parts', parts)
   if (parts && !root.querySelector('style[data-wm-parts]')) {
     const st = document.createElement('style')
@@ -176,7 +183,11 @@ function upgrade(host) {
     host.classList.add('wm-run')
   }
   if (motion === 'hover' || motion === 'inview') {
-    listen(s, host, 'animationend', e => { if (String(e.animationName).indexOf('wm-') === 0) host.classList.remove('wm-run') })
+    // the parts animate inside the shadow root, whose animation events stop at the root (not composed); the
+    // one-shot is over when the last part (a lagging plate, a decoration answering a beat later) has finished
+    const done = e => { if (String(e.animationName).indexOf('wm-') === 0 && !hostBusy(host)) host.classList.remove('wm-run') }
+    listen(s, host, 'animationend', done)
+    if (host.shadowRoot) listen(s, host.shadowRoot, 'animationend', done)
   }
   if (motion === 'hover') {
     host.classList.add('wm-js')

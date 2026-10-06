@@ -59,6 +59,8 @@
     "marked",
     "included",
     "available",
-    "in stock"
+    "in stock",
+    "mark as done",
+    "mark complete"
   ]
 }

@@ -63,6 +63,20 @@ styles and the five storybook styles ship a default palette whose colours are CS
   (or MCP `get_icon` with `palette`) returns a `<with-icon>` with the palette's variables in its `style` attribute, ready for
   the CDN script; there is no `palette` attribute on `<with-icon>` itself. For an image, use
   `https://withicons.com/api/icon/heart.svg?style=kawaii&palette=classic-red` (colours baked in) or `--flat` on `get`.
+- **Brand colours with no build**: `get` takes the same role flags as `export` (`--ink`, `--c1` to `--c4`, `--tint`,
+  `--accent`, `--shadow`, `--shine`, `--edge`, or `--colors "c1=#6d28d9,tint=#c4b5fd"`) and writes the variables that
+  icon uses: `withicons get rocket --style glass --c1 "#6d28d9" --tint "#c4b5fd" --format web-component` gives
+  `<with-icon style="--with-glass-back: #6d28d9; --with-glass-pane: #c4b5fd" name="rocket" variant="glass">`.
+  (`--color` only changes `svg` / `data-uri` output; for the element, set CSS `color` on a parent.)
+- **Put the brand colour on the main role.** c1 is the first colour family the drawing uses, not necessarily its
+  biggest part. `withicons palettes <icon> --style <style>` marks the body colour and its share:
+  `--with-glass-pane (tint, main body)` and `main role: tint (main body, ~93% of the drawn area): set it for a brand
+  colour, e.g. --tint "#e11d48"` (MCP `list_palettes`: `mainRole`, `mainRoleShare`, `mainRoleNote`; `get_icon`:
+  `colors.mainRole`). The main role changes per icon and style, and the palette styles' variables map to different
+  roles per icon (kawaii `heart`: `--with-kawaii-fill-1` is c1, `home`: `--with-kawaii-fill-3`; sticker `heart`:
+  bubblegum, `home`: sky), so one hand-written CSS rule does not recolour a set evenly. For one brand colour across a
+  set, set each icon's main role with role flags (`get` / `export` map them to variables), or use solid / line with
+  `color`. Look at the result.
 - Icon classes (CSS masks) show palette styles in their default colours (with a palette, only its ink applies); the
   variables need components, the web component, sprites or `with-icons.js`. Standalone `.svg` files have the defaults
   baked in (for `<img>`, Figma, slides).

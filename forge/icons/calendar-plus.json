@@ -66,6 +66,12 @@
     "add reminder",
     "new meeting",
     "book a call",
-    "schedule a call"
+    "schedule a call",
+    "leave request",
+    "time off",
+    "time off request",
+    "holiday request",
+    "vacation request",
+    "pto"
   ]
 }

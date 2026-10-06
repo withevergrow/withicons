@@ -69,9 +69,9 @@ export function partsPlan(m, spec, o) {
   const parts = spec && spec.parts
   const pa = partMotion(m, parts && parts.A), ps = partMotion(m, parts && parts.S)
   const out = { obj, a: pa ? role(pa) : obj, s: ps ? role(ps) : obj, shadow: obj, deco: null, cycle: m.duration }
-  // shadow: stays on the ground and squashes / fades for presets that lift the object; otherwise it is attached
+  // shadow: travels with the object; for presets that lift it, it lags a little and fades (keyframes.js SHADOW_STOPS)
   if (shadowStops(m.preset, m.loop, { k: 1 })) {
-    out.shadow = role(m, { stops: mode => shadowStops(m.preset, m.loop, mode), key: 'sh:' + obj.key, origin: null })
+    out.shadow = role(m, { stops: mode => shadowStops(m.preset, m.loop, mode), key: 'sh:' + obj.key })
   }
   const kind = decoOf(m.preset, spec && spec.deco)
   if (kind !== 'still' && DECO_STOPS[kind] && !(o && o.deco === false)) {

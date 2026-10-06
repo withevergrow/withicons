@@ -7,7 +7,8 @@
     "record-video",
     "movie-camera",
     "video-recorder",
-    "cam"
+    "cam",
+    "video"
   ],
   "tags": [
     "media",
@@ -35,7 +36,6 @@
     "recording",
     "record",
     "filming",
-    "video",
     "shoot video",
     "movie",
     "clip",
@@ -52,6 +52,8 @@
     "videography",
     "vid",
     "vidoe",
-    "webcam"
+    "webcam",
+    "go live",
+    "live stream"
   ]
 }

@@ -43,3 +43,13 @@ for (const [shell, args] of [
     assert.deepEqual(JSON.parse(r.stdout.trim().split('\n').pop()), want)
   })
 }
+
+test('exportCommand(): several names, --name template, --strict', () => {
+  const cmd = exportCommand({ name: ['coffee', 'flame'], format: 'png', palette: 'seventies-diner', strict_palette: true, filename: '{name}-{style}' })
+  assert.equal(cmd, 'npx withicons export coffee flame --format png --palette seventies-diner --strict --name "{name}-{style}" --out .')
+})
+
+test('exportCommand(): names as a map -> --name-map', () => {
+  const cmd = exportCommand({ name: ['receipt', 'heart'], format: 'svg-flat', name_map: { receipt: 'orders', heart: 'favourites' } })
+  assert.equal(cmd, 'npx withicons export receipt heart --format svg-flat --name-map "receipt=orders,heart=favourites" --out .')
+})

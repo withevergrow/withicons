@@ -120,7 +120,7 @@
   }
   // One picture = { svg: string, png: Uint8Array } for an icon variant.
   function picture(v, ctx, opts, px, displayPx) {
-    var base = { name: ctx.name, title: ctx.title, style: v.style, inner: v.inner, root: v.root, color: ctx.color, vars: ctx.vars }
+    var base = { name: ctx.name, title: ctx.title, style: v.style, inner: X.stripMotion ? X.stripMotion(v.inner) : v.inner, root: v.root, color: ctx.color, vars: ctx.vars }
     var o = { background: opts.background || null, padding: opts.padding || 0, flat: true }
     var svgEmbed = '<?xml version="1.0" encoding="UTF-8"?>\n' + unstrokeBg(X.svgString(base, Object.assign({}, o, { size: displayPx })), o.background)
     var svgRaster = unstrokeBg(X.svgString(base, Object.assign({}, o, { size: px })), o.background)
@@ -348,7 +348,7 @@
       return variants(ctx, opts).then(function (vs) {
         if (!vs.length) throw new Error('no styles available for ' + ctx.name)
         var all = anim
-          ? vs.reduce(function (p, v) { return p.then(function (acc) { return gifPicture(v, ctx, opts, clampPx(opts.size, 64, 1024, 320)).then(function (g) { acc.push(g); return acc }) }) }, Promise.resolve([]))
+          ? vs.reduce(function (p, v) { return p.then(function (acc) { return gifPicture(v, ctx, opts, clampPx(opts.size, 64, 2048, 320)).then(function (g) { acc.push(g); return acc }) }) }, Promise.resolve([]))
           : Promise.all(vs.map(function (v) { return picture(v, ctx, opts, px, 192) }))
         return all.then(function (pics) {
           // overview grid
@@ -385,7 +385,7 @@
     run: function (ctx, opts) {
       opts = opts || {}
       var title = titleOf(ctx), st = styleTitle(ctx.style), bg = hex6(opts.background)
-      return gifPicture({ style: ctx.style, inner: ctx.inner, root: ctx.root }, ctx, opts, clampPx(opts.size, 64, 1024, 480)).then(function (pic) {
+      return gifPicture({ style: ctx.style, inner: ctx.inner, root: ctx.root }, ctx, opts, clampPx(opts.size, 64, 2048, 480)).then(function (pic) {
         var bytes = pptxPackage(title, st + ' style, animated', [{ xml: iconSlide(title, st, title + ' icon, ' + st + ' style, animated', { bg: bg, gif: true }), media: [0] }], [pic])
         return pptxOut(ctx, bytes, 'animated')
       })

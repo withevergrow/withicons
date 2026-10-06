@@ -38,7 +38,7 @@ for (const [label, LIST] of [['real user queries', CASES], ['hard queries (unsee
 describe('API shape', () => {
   test('search returns the documented fields', () => {
     const [r] = engine.search('trash can', { limit: 1 })
-    assert.deepEqual(Object.keys(r).sort(), ['category', 'match', 'name', 'score', 'title'])
+    assert.deepEqual(Object.keys(r).sort(), ['category', 'confidence', 'match', 'name', 'score', 'title'])
     assert.equal(r.name, 'trash')
     assert.equal(r.title, 'Trash')
     assert.equal(typeof r.score, 'number')

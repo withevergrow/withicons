@@ -148,10 +148,10 @@ and search only, and are never exports. Every icon exists in all 20 styles (line
 | `skip-back` | `SkipBack` | previous, previous-track, prev, skip-previous, back-track, restart-track, step-back, go-to-start |
 | `skip-forward` | `SkipForward` | next, next-track, skip-next, forward-track, advance, next-song, go-to-end, skip |
 | `stop` | `Stop` | halt, stop-button, square-stop, end, terminate, abort, stop-playback, stop-recording |
-| `video-camera` | `VideoCamera` | camcorder, record-video, movie-camera, video-recorder, cam |
+| `video-camera` | `VideoCamera` | camcorder, record-video, movie-camera, video-recorder, cam, video |
 | `video-off` | `VideoOff` | camera-video-off, no-video, videocam-off, stop-video, video-disabled, turn-off-camera, webcam-off, video-slash |
 | `volume-1` | `Volume1` | volume-low, volume-down, low-sound, soft-volume, sound-low, volume-quiet, speaker-low, quiet-sound |
-| `volume-off` | `VolumeOff` | mute, sound-off, speaker-off, no-sound, volume-mute, volume-x, silent |
+| `volume-off` | `VolumeOff` | mute, sound-off, speaker-off, no-sound, volume-mute, volume-x, silent, muted |
 | `volume` | `Volume` | sound, volume-up, sound-on, volume-high, loud |
 
 ## files (36)
@@ -292,7 +292,7 @@ and search only, and are never exports. Every icon exists in all 20 styles (line
 | name | component | aliases |
 |---|---|---|
 | `alarm-clock` | `AlarmClock` | alarm, wake-up, snooze, wake, bedside-clock, morning-alarm, alarm-time, wakeup-call |
-| `calendar-check` | `CalendarCheck` | booked, scheduled, event-confirmed, booking-confirmed, date-confirmed, rsvp |
+| `calendar-check` | `CalendarCheck` | booked, scheduled, event-confirmed, booking-confirmed, date-confirmed, rsvp, reservation |
 | `calendar-days` | `CalendarDays` | month-view, dates, days, date-grid, calendar-grid, monthly |
 | `calendar-plus` | `CalendarPlus` | add-event, new-event, add-to-calendar, create-event, schedule-event, new-appointment, book-meeting |
 | `calendar` | `Calendar` | date, schedule, planner, agenda, date-picker, appointment, event, month |

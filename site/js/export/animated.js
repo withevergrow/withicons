@@ -170,6 +170,7 @@
     // 1. composite: -1 = transparent, else 0xRRGGBB (edge pixels blended over the matte)
     var keys = frames.map(function (f) {
       var p = f.data, k = new Int32Array(N)
+      if (o.release) f.data = null   // the caller hands the frames over: keep one copy of each in memory, not two
       for (var i = 0, j = 0; j < N; i += 4, j++) {
         var a = p[i + 3]
         if (a < 128) { k[j] = -1; transparent = true; continue }
@@ -567,10 +568,17 @@
     return o
   }
   // Headroom so motion that leaves the 24 grid (bounce, glow, zoom, spin corners...) is not cut off at the file's edge.
-  // opts.padding wins; otherwise a quick low-resolution pass over the animation measures how far it really travels.
+  // A quick low-resolution pass over the animation measures how far it really travels (every part: object, plates,
+  // shadow, decorations). opts.padding is the space wanted around the icon; it is a floor, never a crop: when the motion
+  // travels further (a bounce of 0.14 clipped the coffee's steam), the measured headroom wins.
+  // -> Promise<number> (share of the icon's size per side, 0-PAD_MAX)
+  var PAD_MAX = 0.6
   function padding(opts, WM, a, mo, seconds) {
-    if (opts && opts.padding != null && opts.padding !== '') return Promise.resolve(Math.max(0, Math.min(0.4, Number(opts.padding) || 0)))
-    var S = 120, M = 0.5, unit = S / (24 * (1 + 2 * M)), N = 40, ext = 0, i = 0
+    var asked = opts && opts.padding != null && opts.padding !== '' ? Math.max(0, Math.min(PAD_MAX, Number(opts.padding) || 0)) : null
+    return travel(WM, a, mo, seconds).then(function (need) { return asked == null ? need : Math.max(asked, need) })
+  }
+  function travel(WM, a, mo, seconds) {
+    var S = 120, M = 0.75, unit = S / (24 * (1 + 2 * M)), N = 48, ext = 0, i = 0
     var c = env ? null : document.createElement('canvas'), g = null
     if (c) { c.width = c.height = S; g = c.getContext('2d', { willReadFrequently: true }) }
     // the frame's RGBA at S x S: injected rasteriser (Node) or <img> + canvas (browser)
@@ -591,7 +599,7 @@
         return step()
       })
     }
-    return step().then(function () { return ext > 0.05 ? Math.min(0.4, Math.round((ext / 24 + 0.015) * 1000) / 1000) : 0 })
+    return step().then(function () { return ext > 0.05 ? Math.min(PAD_MAX, Math.round((ext / 24 + 0.015) * 1000) / 1000) : 0 })
   }
   // put a 24-grid animated/frozen SVG inside a px x px file with padding; the nested <svg> keeps transform-box:view-box
   // meaning the 24 grid, and overflow="visible" lets motion spill into the padding
@@ -610,8 +618,18 @@
       img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg)
     })
   }
-  var MAX_PX = 1024, MAX_FRAMES = 600, PIXEL_BUDGET = 64e6
-  function sizeOf(opts, def) { return Math.max(8, Math.min(MAX_PX, Math.round((Number(opts && opts.size) || def) * (Number(opts && opts.scale) || 1)))) }
+  // Limits. Frames are kept as RGBA until encoded (4 bytes a pixel; the GIF encoder frees each frame as it converts it),
+  // so the budget is memory: ~640 MB of frames in Node (the CLI), ~440 MB in a browser tab. 1080 px (Instagram) at the
+  // default frame rate fits for every icon's own loop; larger sizes or long loops ask for a lower --fps / --seconds.
+  // A size is never changed silently: out of range is an error that says what fits.
+  var MAX_PX = 2048, MIN_PX = 8, MAX_FRAMES = 600
+  var pixelBudget = function () { return env ? 160e6 : 110e6 }
+  function sizeOf(opts, def) {
+    var want = Math.round((Number(opts && opts.size) || def) * (Number(opts && opts.scale) || 1))
+    if (want > MAX_PX) throw new Error('A ' + want + ' px animation is too many pixels; animated files go up to ' + MAX_PX + ' px. Use a size of ' + MAX_PX + ' or less.')
+    if (want < MIN_PX) throw new Error('A ' + want + ' px animation is too small to draw; the smallest is ' + MIN_PX + ' px.')
+    return want
+  }
   /**
    * Render the animation as frames.
    * fo: { size, fps, background, keep: 'data' (ImageData RGBA, default) | 'canvas' }
@@ -629,7 +647,12 @@
         var seconds = Number(opts.seconds) > 0 ? Number(opts.seconds) : WM.exportDuration(mo, a)
         var n = Math.max(1, Math.round(seconds * fps))
         if (n > MAX_FRAMES) throw new Error('That is ' + n + ' frames; the limit is ' + MAX_FRAMES + '. Use a lower frame rate or a shorter duration.')
-        if (n * px * px > PIXEL_BUDGET) throw new Error('Too many pixels for one animation (' + n + ' frames at ' + px + ' px). Try ' + Math.floor(Math.sqrt(PIXEL_BUDGET / n)) + ' px or a lower frame rate.')
+        var budget = pixelBudget()
+        if (n * px * px > budget) {
+          var fitFps = Math.floor(budget / (px * px) / seconds), fitPx = Math.floor(Math.sqrt(budget / n))
+          throw new Error('Too many pixels for one animation (' + n + ' frames of ' + px + ' x ' + px + ' px, ' + (Math.round(seconds * 100) / 100) + ' s at ' + fps + ' fps). ' +
+            (fitFps >= 1 ? 'At ' + px + ' px use a frame rate of ' + Math.min(fitFps, fps - 1) + ' or less (fps), or a shorter loop (seconds); ' : '') + 'at ' + fps + ' fps the largest size is ' + fitPx + ' px.')
+        }
         var frames = [], pad = 0
         var step = function (i) {
           if (i >= n) return Promise.resolve()
@@ -813,7 +836,7 @@
         run: function (ctx, opts) {
           opts = opts || {}
           return frameSet(ctx, opts, { fps: 25, maxFps: 50 }, { background: opts.background || null }).then(function (r) {
-            var bytes = encodeGif(r.frames, { matte: opts.background || opts.matte || '#ffffff', loop: opts.loop })
+            var bytes = encodeGif(r.frames, { matte: opts.background || opts.matte || '#ffffff', loop: opts.loop, release: true })
             return { data: out(bytes, 'image/gif'), filename: name(ctx, r, 'gif'), mime: 'image/gif' }
           })
         },

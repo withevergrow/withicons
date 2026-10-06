@@ -111,7 +111,7 @@
   function flatSvg(ctx, o) {
     var c = {}
     for (var k in ctx) c[k] = ctx[k]
-    c.inner = flatInner(ctx)
+    c.inner = WE.stripMotion ? WE.stripMotion(flatInner(ctx)) : flatInner(ctx)   // a flat SVG is a file: no motion hooks
     return svgWithBg(c, Object.assign({}, o || {}, { flat: true }))
   }
 
@@ -628,7 +628,10 @@
       available: function () { return true },
       run: function (ctx, opts) {
         opts = opts || {}
-        var s = svgWithBg(ctx, { flat: false, size: sizeOf(opts), background: opts.background || null, padding: opts.padding })
+        var c = {}
+        for (var k in ctx) c[k] = ctx[k]
+        if (WE.stripMotion) c.inner = WE.stripMotion(ctx.inner)   // keeps the colour variables, not the motion hooks
+        var s = svgWithBg(c, { flat: false, size: sizeOf(opts), background: opts.background || null, padding: opts.padding })
         return Promise.resolve({ data: s + '\n', filename: WE.filename(ctx, 'themable', 'svg'), mime: 'image/svg+xml' })
       }
     })

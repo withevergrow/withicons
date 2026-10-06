@@ -68,6 +68,8 @@
     "missing",
     "flag issue",
     "eror",
-    "importent"
+    "importent",
+    "warning message",
+    "error message"
   ]
 }

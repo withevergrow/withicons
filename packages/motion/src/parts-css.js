@@ -12,7 +12,7 @@ const NOT_SHAPE = 'defs,title,desc,style,script,metadata'
  * The wrapper resolves every variable (--_an, --_dur, --_ox… for the object, --_an/--_ad… per plate, --_dk/--_dd for
  * decorations, --_sh for the shadow) and the nodes inherit them: object nodes play the preset about the icon's origin
  * (transform-box: view-box), plates their override, decorations their own loop about their own centre (fill-box),
- * shadows the ground keyframes (or the object's, when attached).
+ * shadows their lift keyframes (lag + fade; otherwise the object's own).
  */
 export function partNodeRules(kids) {
   const sel = child => kids.map(k => k + child).join(',')

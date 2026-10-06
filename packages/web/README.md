@@ -61,7 +61,7 @@ A style's chunk loads once, the first time an icon of that style renders. The he
 are split into shards of a few icons each (`dist/data/<style>/<n>.js`): an icon loads only its own shard, so one `luxe`
 icon costs a few KB instead of the whole style. `loadVariant()` and `@withicons/web/data/<style>` still return the whole style. Canonical names resolve with no
 extra download (the entry knows every name); an alias loads one small shard (`dist/data/alias/<n>.js`, at most 8 KB), and
-only a typo loads `dist/data/meta.js` (113 KB, 28 KB gzip) for the "did you mean" warning. Bundlers (Vite, webpack,
+only a typo loads `dist/data/meta.js` (114 KB, 28 KB gzip) for the "did you mean" warning. Bundlers (Vite, webpack,
 Rollup, esbuild) split the chunks automatically. Use `full` only for scripts and tools that need the sync `svg()`.
 
 **Per-icon files.** `cdn.js` always loads icons from `icons/<style>/<name>.js` next to itself. `index.js` does the same when

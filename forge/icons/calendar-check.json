@@ -8,7 +8,8 @@
     "event-confirmed",
     "booking-confirmed",
     "date-confirmed",
-    "rsvp"
+    "rsvp",
+    "reservation"
   ],
   "tags": [
     "calendar",
@@ -63,7 +64,6 @@
     "accepted invite",
     "yes going",
     "save the date",
-    "booking",
-    "reservation"
+    "booking"
   ]
 }

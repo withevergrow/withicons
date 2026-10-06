@@ -110,24 +110,51 @@ export function animatedSvg(svg, opts) {
 const ROLE_SEL = {
   obj: ':not(.wm-deco,.wm-shadow,.wm-a,.wm-s,defs,title,desc,style)', a: '.wm-a', s: '.wm-s', shadow: '.wm-shadow', deco: '.wm-deco',
 }
+// Fading presets (breathe, rise, drop, flicker, fill): opacity on each node separately lets overlapping parts show
+// through each other mid-fade (an outline over its fill, the body over its cast shadow), which reads as a glitch in a
+// GIF on a coloured background. So the object's opacity track plays on the <g> (the icon fades as one picture) and
+// the parts that share the object's preset keep only their transforms; a cast shadow keeps its extra fade relative
+// to the object's (its own opacity / the object's at the same stop).
+const opOf = st => (st[1].opacity == null ? 1 : Number(st[1].opacity))
 function partsCss(id, plan, on, time) {
   let css = ''
   const named = {}
+  const timing = r => {
+    const delay = time != null ? -time + r.delay : r.delay
+    return `${num(r.duration)}s ${r.ease} ${num(delay)}s ${r.iter} both${time != null ? ';animation-play-state:paused' : ''}`
+  }
+  const modeOf = r => { const [dx, dy] = dirVec(r.dir || 0); return { k: r.k == null ? 1 : r.k, dx, dy, em: 16 } }
+  const objStops = plan.obj.stops(modeOf(plan.obj))
+  const groupOp = objStops.some(st => opOf(st) !== 1)
+  if (groupOp) {
+    css += keyframesCss(`${id}-op`, objStops.map(([at, p, e]) => [at, { opacity: p.opacity == null ? 1 : p.opacity }, e]))
+    css += `${on}.${id}-g{animation:${id}-op ${timing(plan.obj)}}`
+  }
   for (const role of ['obj', 'shadow', 'a', 's', 'deco']) {
     const r = plan[role]
     if (!r) continue
-    const [dx, dy] = dirVec(r.dir || 0)
-    const key = r.key + '|' + r.k + '|' + r.dir
+    const shared = groupOp && role !== 'deco' && r.preset === plan.obj.preset && r.duration === plan.obj.duration && r.delay === plan.obj.delay
+    const key = r.key + '|' + r.k + '|' + r.dir + (shared ? '|g' : '')
     let name = named[key]
     if (!name) {
       name = named[key] = `${id}-${Object.keys(named).length}`
       // the glow / twinkle halo stays a drop-shadow here: per part, so only the parts that glow get one
-      css += keyframesCss(name, r.stops({ k: r.k == null ? 1 : r.k, dx, dy, em: 16 }))
+      let stops = r.stops(modeOf(r))
+      if (shared) {
+        const own = stops !== objStops && stops.length === objStops.length && stops.every((st, i) => st[0] === objStops[i][0])
+        stops = stops.map((st, i) => {
+          const q = Object.assign({}, st[1])
+          delete q.opacity
+          if (own && role === 'shadow') { const o = opOf(objStops[i]); const rel = o > 0.001 ? opOf(st) / o : 1; if (Math.abs(rel - 1) > 0.001) q.opacity = num(Math.min(1, rel)) }
+          return [st[0], q, st[2]]
+        })
+        if (!stops.some(st => Object.keys(st[1]).length)) stops = [[0, { transform: 'none' }], [100, { transform: 'none' }]]
+      }
+      css += keyframesCss(name, stops)
     }
-    const delay = time != null ? -time + r.delay : r.delay
     const origin = r.box === 'fill-box' || !r.origin ? '50% 50%' : `${pct(r.origin[0])} ${pct(r.origin[1])}`
     css += `.${id}-g>${ROLE_SEL[role]}{transform-box:${r.box};transform-origin:${origin}}`
-    css += `${on}.${id}-g>${ROLE_SEL[role]}{animation:${name} ${num(r.duration)}s ${r.ease} ${num(delay)}s ${r.iter} both${time != null ? ';animation-play-state:paused' : ''}}`
+    css += `${on}.${id}-g>${ROLE_SEL[role]}{animation:${name} ${timing(r)}}`
   }
   return css
 }

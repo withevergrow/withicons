@@ -10,7 +10,9 @@
     "sunny-intervals",
     "fair-weather",
     "sun-cloud",
-    "cloudy-sun"
+    "cloudy-sun",
+    "forecast",
+    "weather-forecast"
   ],
   "tags": [
     "weather",
@@ -56,7 +58,6 @@
   "cutouts": [],
   "synonyms": [
     "weather",
-    "forecast",
     "partly cloudy",
     "partly sunny",
     "mostly cloudy",

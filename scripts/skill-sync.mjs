@@ -4,12 +4,13 @@
 //   skills/with-icons/reference/styles.md   <- the block between <!-- palettes:start/end --> (palette variables, from
 //                                              packages/core/dist/styles.json written by the build)
 //   skills/with-icons/reference/motion.md   <- the block between <!-- motion:start/end --> (animated icons, from forge/motion/*.json)
+//   skills/with-icons/reference/live.md     <- the block between <!-- live:start/end --> (live icons + params, from forge/dynamic/*.mjs)
 //   site/skill/SKILL.md                     <- skills/with-icons/SKILL.md (relative links -> GitHub URLs)
 // Run after adding/renaming icons or editing aliases (scripts/deploy.mjs runs it after the build).
 //   node scripts/skill-sync.mjs [--check]   --check: exit 1 if any file is out of date (CI)
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { styleRank } from '../forge/lib/emit-core.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -62,6 +63,30 @@ const specs = fs.existsSync(motionDir) ? fs.readdirSync(motionDir).filter(f => f
 const motionBody = `${specs.length} icons have a tuned animation (any icon can use any preset).\n\n| icon | loop | hover | swaps to | what it says |\n|---|---|---|---|---|\n` +
   specs.map(s => `| \`${s.name}\` | ${s.loop.preset} | ${s.hover.preset} | ${(s.swap || []).map(x => `\`${x.to}\``).join(', ')} | ${String(s.intent || '').replace(/\|/g, '/')} |`).join('\n') + '\n'
 
+// live icons (@withicons/dynamic): name, what it shows, params (attribute, range or options, default)
+const liveDir = path.join(ROOT, 'forge', 'dynamic')
+const lives = []
+if (fs.existsSync(liveDir)) for (const f of fs.readdirSync(liveDir).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).sort()) {
+  try { const g = (await import(pathToFileURL(path.join(liveDir, f)).href)).default; if (g && g.name && g.params) lives.push(g) }
+  catch (e) { console.warn(`live icon ${f}: ${e.message}`) }
+}
+const cell = t => String(t == null ? '' : t).replace(/\s*—\s*/g, ': ').replace(/\|/g, '/').replace(/\s*\n\s*/g, ' ')
+const kebab = k => k.replace(/[A-Z]/g, c => '-' + c.toLowerCase())
+const paramText = (k, p) => {
+  const t = p.type
+  const range = t === 'int' || t === 'number' ? `${p.min} to ${p.max}${p.step ? `, step ${p.step}` : ''}`
+    : t === 'enum' ? (p.options || []).join(' / ')
+    : t === 'level' ? '0 to 1 (or "80%")'
+    : t === 'text' ? `text, up to ${p.maxLength}${p.case === 'upper' ? ', uppercased' : ''}`
+    : t === 'time' ? '"HH:MM"' : t === 'bool' ? 'true / false' : t
+  // a param called `label` clashes with the accessible-name attribute: param-label on the element, params={{ label }} on LiveIcon
+  const attr = k === 'label' ? 'param-label' : kebab(k)
+  return `\`${attr}\` ${range} (${JSON.stringify(p.default)})${p.label ? ': ' + cell(p.label) : ''}`
+}
+const liveBody = `${lives.length} live icons. Params are kebab-case attributes on \`<with-live-icon>\` (as listed) and camelCase props on ` +
+  `\`LiveIcon\` / keys for \`render()\`; the default is in brackets.\n\n| name | what it shows | params |\n|---|---|---|\n` +
+  lives.map(g => `| \`${g.name}\` | ${cell(g.description || g.title)} | ${Object.entries(g.params).map(([k, p]) => paramText(k, p)).join('<br>')} |`).join('\n') + '\n'
+
 // keep the counts in the hand-written skill text true: "500 icons", "12 styles", "6,000 icons"
 const total = (icons.length * styles.length).toLocaleString('en-US')
 const counts = text => text
@@ -71,13 +96,15 @@ const counts = text => text
   .replace(/(?<=in all )\d{1,2}(?= styles)/g, String(styles.length))
 
 const stylesFile = path.join(SKILL, 'reference', 'styles.md'), motionFile = path.join(SKILL, 'reference', 'motion.md')
+const liveFile = path.join(SKILL, 'reference', 'live.md')
 const skill = counts(read(path.join(SKILL, 'SKILL.md')))
 const siteCopy = skill.replace(/\]\((reference\/[^)]+)\)/g, (_, p) => `](${GH}${p})`)
 
 const outputs = [[path.join(SKILL, 'SKILL.md'), skill], [path.join(SKILL, 'reference', 'icons.md'), md], [path.join(ROOT, 'site', 'skill', 'SKILL.md'), siteCopy]]
-for (const f of ['search.md', 'frameworks.md']) { const p = path.join(SKILL, 'reference', f); if (read(p)) outputs.push([p, counts(read(p))]) }
+for (const f of ['search.md', 'frameworks.md', 'files.md']) { const p = path.join(SKILL, 'reference', f); if (read(p)) outputs.push([p, counts(read(p))]) }
 if (read(stylesFile)) outputs.push([stylesFile, block(counts(read(stylesFile)), 'palettes', palBody)])
 if (read(motionFile)) outputs.push([motionFile, block(counts(read(motionFile)), 'motion', motionBody)])
+if (read(liveFile)) outputs.push([liveFile, block(counts(read(liveFile)), 'live', liveBody)])
 let stale = 0
 for (const [file, text] of outputs) {
   const cur = read(file)

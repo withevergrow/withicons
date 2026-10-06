@@ -84,7 +84,9 @@ export const PRESET_STOPS = {
   'pulse': v => [[0, T('scale(1)'), E.sine], [50, T(`scale(${v.sc(0.1)})`), E.sine], [100, T('scale(1)')]],
   'beat': v => [[0, T('scale(1)'), E.out], [20, T(`scale(${v.sc(0.16)})`), E.inOut], [40, T(`scale(${v.sc(-0.02)})`), E.out],
     [58, T(`scale(${v.sc(0.1)})`), E.sine], [100, T('scale(1)')]],
-  'breathe': v => [[0, { transform: 'scale(1)', opacity: 1 }, E.sine], [50, { transform: `scale(${v.sc(0.07)})`, opacity: 0.72 }, E.sine], [100, { transform: 'scale(1)', opacity: 1 }]],
+  // the fade scales with amount like the swell does (a calm 0.3 breathe no longer dims to 72%: on a coloured GIF
+  // background that read as a glitchy flash)
+  'breathe': v => [[0, { transform: 'scale(1)', opacity: 1 }, E.sine], [50, { transform: `scale(${v.sc(0.07)})`, opacity: v.sc(-0.28) }, E.sine], [100, { transform: 'scale(1)', opacity: 1 }]],
   'float': v => [[0, T('translateY(0%)'), E.sineIn], [25, T(`translateY(${v.len(-5)})`), E.sineOut], [50, T(`translateY(${v.len(-10)})`), E.sineIn],
     [75, T(`translateY(${v.len(-5)})`), E.sineOut], [100, T('translateY(0%)')]],
   'bounce': v => {
@@ -118,7 +120,8 @@ export const PRESET_STOPS = {
     [44.01, { transform: `translateY(${v.len(-30)}) scaleY(1)`, opacity: 0 }, E.out], [86, { transform: 'translateY(0%) scaleY(1)', opacity: 1 }], [100, { transform: 'translateY(0%) scaleY(1)', opacity: 1 }]],
   'blink': v => [[0, T('scaleY(1)'), 'cubic-bezier(.5,0,.9,.4)'], [34, T(`scaleY(${v.scMin(-0.9, 0.06)})`), E.out], [74, T(`scaleY(${v.sc(0.04)})`), E.sine], [100, T('scaleY(1)')]],
   'flicker': v => {
-    const f = (sx, sy, rot, o) => ({ transform: `scale(${sx ? v.sc(sx) : 1}, ${sy ? v.sc(sy) : 1}) rotate(${rot ? v.deg(rot) : '0deg'})`, opacity: o })
+    // opacity dips scale with amount too (a 0.3 flicker is a faint shimmer, not a 22% blink)
+    const f = (sx, sy, rot, o) => ({ transform: `scale(${sx ? v.sc(sx) : 1}, ${sy ? v.sc(sy) : 1}) rotate(${rot ? v.deg(rot) : '0deg'})`, opacity: o === 1 ? 1 : v.sc(o - 1) })
     return [[0, f(0, 0, 0, 1), E.sine], [9, f(0.025, -0.05, -1.5, 0.84), E.sine], [17, f(-0.02, 0.045, 1, 1), E.sine], [30, f(0.01, -0.02, 0, 0.93), E.sine],
       [37, f(0, 0.035, -1, 1), E.sine], [53, f(0.03, -0.06, 1.5, 0.78), E.sine], [61, f(-0.01, 0.025, 0, 1), E.sine], [76, f(0.012, -0.02, -0.5, 0.9), E.sine],
       [85, f(0, 0.02, 0, 1), E.sine], [100, f(0, 0, 0, 1)]]
@@ -246,25 +249,26 @@ export const DECO_STOPS = {
 }
 export const DECOS = Object.keys(DECO_STOPS)
 
-// Ground shadows: for presets that lift the object off the ground the shadow stays on the ground (it never travels
-// with the object) and shrinks / fades as the object rises, widens as it squashes. Same stops as the object's preset,
-// so they stay in sync; scaled about a point on the ground (transform-origin in the keyframes, % of the 24 grid).
-const G = '50% 92%'
-const gs = (v, s, o, sy) => ({ 'transform-origin': G, transform: `scale(${s ? v.sc(s) : 1}, ${sy ? v.sc(sy) : (s ? v.sc(s) : 1)})`, opacity: o ? v.sc(o) : 1 })
+// Cast shadows while the object lifts. Renderers tag as wm-shadow both offset print shadows (a copy of the silhouette
+// nudged down-right: retro, sticker, luxe, skeuo, plush, gothic...) and flat contact shadows. A shadow left on the
+// ground while the object rose showed the offset silhouette as a hollow ghost of the icon, so the shadow now travels
+// WITH the object (same keyframes, same origin), lagging a little on the way up (SHADOW_LAG: the offset grows, as if
+// the object lifted off the page) and fading as it rises. Squash and stretch are the object's own.
+export const SHADOW_LAG = 0.88
+const lift = (v, y) => (y ? v.len(y * SHADOW_LAG) : '0%')
+const fade = (v, n) => (n ? v.sc(n) : 1)
 export const SHADOW_STOPS = {
   'bounce': v => {
-    const b = (y, sx) => gs(v, (sx - 1) + y * 0.011, y * 0.013, (sx - 1) * 0.4 + y * 0.011)
-    return [[0, b(0, 1), E.out], [9, b(0, 1.07), E.lift], [36, b(-30, 0.95), E.fall], [58, b(0, 1.1), E.out],
-      [70, b(-7, 0.98), E.fall], [81, b(0, 1.03), E.out], [100, b(0, 1)]]
+    const b = (y, sx, sy) => ({ transform: `translateY(${lift(v, y)}) scale(${sx === 1 ? 1 : v.sc(sx - 1)}, ${sy === 1 ? 1 : v.sc(sy - 1)})`, opacity: fade(v, y * 0.008) })
+    return [[0, b(0, 1, 1), E.out], [9, b(0, 1.07, 0.9), E.lift], [36, b(-30, 0.95, 1.06), E.fall], [58, b(0, 1.1, 0.88), E.out],
+      [70, b(-7, 0.98, 1.02), E.fall], [81, b(0, 1.03, 0.97), E.out], [100, b(0, 1, 1)]]
   },
-  'float': v => [[0, gs(v, 0, 0), E.sineIn], [25, gs(v, -0.06, -0.08), E.sineOut], [50, gs(v, -0.12, -0.16), E.sineIn],
-    [75, gs(v, -0.06, -0.08), E.sineOut], [100, gs(v, 0, 0)]],
-  'rise': v => [[0, gs(v, 0, 0), E.in], [44, gs(v, -0.5, -1), 'step-end'], [44.01, gs(v, -0.6, -1), E.back], [86, gs(v, 0, 0)], [100, gs(v, 0, 0)]],
-  'drop': v => [[0, gs(v, 0, 0), E.fall], [44, gs(v, 0.12, -1), 'step-end'], [44.01, gs(v, -0.35, -1), E.out], [86, gs(v, 0, 0)], [100, gs(v, 0, 0)]],
-  'jelly': v => {
-    const j = a => gs(v, a, 0, a ? -a * 0.2 : 0)
-    return [[0, j(0), E.out], [24, j(0.2), E.sine], [42, j(-0.15), E.sine], [58, j(0.08), E.sine], [72, j(-0.04), E.sine], [86, j(0.015), E.sine], [100, j(0)]]
+  'float': v => {
+    const f = y => ({ transform: `translateY(${lift(v, y)})`, opacity: fade(v, y * 0.01) })
+    return [[0, f(0), E.sineIn], [25, f(-5), E.sineOut], [50, f(-10), E.sineIn], [75, f(-5), E.sineOut], [100, f(0)]]
   },
+  'rise': v => [[0, { transform: 'translateY(0%) scale(1)', opacity: 1 }, E.in], [44, { transform: `translateY(${lift(v, -38)}) scale(.92)`, opacity: 0 }, 'step-end'],
+    [44.01, { transform: 'translateY(0%) scale(.4)', opacity: 0 }, E.back], [86, { transform: 'translateY(0%) scale(1)', opacity: 1 }], [100, { transform: 'translateY(0%) scale(1)', opacity: 1 }]],
 }
 export const GROUND = Object.keys(SHADOW_STOPS)
 export function shadowStops(preset, loop, mode) {

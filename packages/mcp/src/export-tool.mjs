@@ -20,8 +20,8 @@ export { q, exportCommand }
 const iconPage = name => `${lib.SITE}/icons/${name}.html`
 
 /**
- * args: { name, style?, format? (one or a comma list), all_styles?, size?, background?, matte?, palette?, colors?, color?,
- *   motion?, to?, effect?, hold?, duration?, fps?, seconds?, loop?, padding?, out_dir?, inline? } ; ctx: { remote }
+ * args: { name | names[] | names{icon: file base name}, style?, format? (one or a comma list), all_styles?, size?, background?, matte?, palette?, strict_palette?,
+ *   colors?, color?, motion?, to?, effect?, hold?, duration?, fps?, seconds?, loop?, padding?, filename?, out_dir?, inline? } ; ctx: { remote }
  * -> MCP tool result ({ content, structuredContent })
  */
 export async function exportIcon(a = {}, o = {}) {
@@ -31,21 +31,27 @@ export async function exportIcon(a = {}, o = {}) {
   }
 }
 async function run(a, { remote = false }) {
-  const name = lib.resolveName(a.name)
+  // one icon (name) or several (names), all with the same options
+  // names: ["home", "settings"], or a map icon -> file base name: { receipt: "orders", heart: "favourites" }
+  const mapForm = a.names && typeof a.names === 'object' && !Array.isArray(a.names)
+  const asked = [...(mapForm ? Object.keys(a.names) : [].concat(a.names || [])), ...(a.name ? [a.name] : [])].flatMap(n => String(n).split(',')).map(n => n.trim()).filter(Boolean)
+  if (!asked.length) throw new lib.IconError('Give name (one icon) or names (several), e.g. names: ["home", "settings"]', { code: 'missing_name' })
+  const names = [...new Set(asked.map(n => lib.resolveName(n)))]
+  const name = names[0]
   const formats = parseFormats(a.format || 'svg')
   const style = lib.checkStyle(a.style || 'line')
-  const cmd = exportCommand({ ...a, name, style: a.style ? style : undefined, format: formats.join(',') })
+  const cmd = exportCommand({ ...a, name: names, style: a.style ? style : undefined, format: formats.join(','), ...(mapForm ? { name_map: a.names } : {}) })
   const raster = formats.filter(f => NEEDS_PNG.has(f))
   if (remote && raster.length) {
     const summary = {
-      name, style, formats, made: false,
+      name, ...(names.length > 1 ? { names } : {}), style, formats, made: false,
       reason: `${raster.join(', ')} ${raster.length === 1 ? 'is' : 'are'} rendered frame by frame on your machine (PNG renderer), which this remote server does not run.`,
-      command: cmd, page: iconPage(name),
+      command: cmd, page: iconPage(name), ...(names.length > 1 ? { pages: names.map(iconPage) } : {}),
       howTo: 'Run the command in a terminal (Node 18+; it installs the withicons CLI on first use) and the files appear in --out. ' +
         'Or use the local MCP server (npx -y @withicons/mcp), whose export_icon writes these files directly. The icon page on withicons.com downloads every format too.',
       vectorHere: 'svg, svg-flat, pdf, eps, android, lottie, dotlottie and the code formats are made right here.',
     }
-    return { content: [{ type: 'text', text: JSON.stringify(summary, null, 2) }], structuredContent: summary }
+    return { content: [{ type: 'text', text: JSON.stringify(summary) }], structuredContent: summary }
   }
   if (raster.length && !(await loadRenderer())) throw new lib.IconError(RENDERER_HINT + `\nOr, in a terminal: ${cmd}`, { code: 'missing_renderer', command: cmd })
   const outDir = !remote && a.out_dir ? path.resolve(String(a.out_dir)) : null
@@ -53,19 +59,19 @@ async function run(a, { remote = false }) {
   let r
   try {
     r = await exportIcons(lib, {
-      names: [name], format: formats.join(','), style, allStyles: !!a.all_styles, size: a.size, padding: a.padding, background: a.background,
+      names, nameMap: mapForm ? a.names : undefined, colorLabel: k => (k.startsWith('--') ? k : 'colors.' + k), format: formats.join(','), style, allStyles: !!a.all_styles, filename: a.filename, strictPalette: !!a.strict_palette, size: a.size, padding: a.padding, strokeWidth: a.stroke_width, background: a.background,
       palette: a.palette, colors, color: a.color, motion: a.motion, duration: a.duration, fps: a.fps, seconds: a.seconds, loop: a.loop,
       matte: a.matte, to: a.to, effect: a.effect, hold: a.hold, out: outDir || '-', keepData: true,
     })
   } catch (e) {
-    if (e instanceof ExportError) throw new lib.IconError(e.message, { code: e.code, command: cmd })
+    if (e instanceof ExportError) { const { message, name: n, stack, usage, ...rest } = e; throw new lib.IconError(e.message, { ...rest, command: cmd }) }
     throw e
   }
   const inline = a.inline !== undefined ? !!a.inline : !outDir
   const content = []
   let total = 0
   const files = r.files.map(f => {
-    const item = { format: f.format, style: f.style, filename: f.filename, mime: f.mime, bytes: f.bytes, ...(f.file ? { path: f.file } : {}) }
+    const item = { ...(names.length > 1 ? { name: f.name } : {}), format: f.format, style: f.style, filename: f.filename, mime: f.mime, bytes: f.bytes, ...(f.file ? { path: f.file } : {}) }
     if (!inline) return item
     if (TEXT_MIME.test(f.mime) && f.bytes <= INLINE_MAX && total + f.bytes <= INLINE_TOTAL) {
       total += f.bytes
@@ -84,13 +90,14 @@ async function run(a, { remote = false }) {
   })
   const tooBig = files.filter(f => inline && f.inline === false)
   const summary = {
-    name, style: a.all_styles ? 'all' : style, formats, made: true, count: files.length, files,
+    name, ...(names.length > 1 ? { names } : {}), style: a.all_styles ? 'all' : style, formats, made: true, count: files.length, files,
     ...(outDir ? { outDir } : {}),
     notes: [...r.notes, ...(tooBig.length ? [`${tooBig.map(f => f.filename).join(', ')} ${tooBig.length === 1 ? 'is' : 'are'} too large to return inline: pass out_dir to save ${tooBig.length === 1 ? 'it' : 'them'} to disk.`] : [])],
-    command: cmd, page: iconPage(name),
+    ...(r.warnings && r.warnings.length ? { warnings: r.warnings } : {}),
+    command: cmd, page: iconPage(name), ...(names.length > 1 ? { pages: names.map(iconPage) } : {}),
     ...(formats.some(f => ['gif', 'pptx-animated'].includes(f)) ? { tip: 'GIF edges are blended with the background (or matte) colour: export again with background set to your slide colour. Colours cannot be changed after export.' } : {}),
   }
-  return { content: [{ type: 'text', text: JSON.stringify(summary, null, 2) }, ...content], structuredContent: summary }
+  return { content: [{ type: 'text', text: JSON.stringify(summary) }, ...content], structuredContent: summary }
 }
 
 /** The vector / code formats a remote server can make, and the ones that need the local renderer. */

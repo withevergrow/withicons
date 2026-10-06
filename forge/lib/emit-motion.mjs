@@ -18,6 +18,7 @@
 //   node forge/lib/emit-motion.mjs
 import fs from 'fs'
 import path from 'path'
+import vm from 'vm'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
@@ -276,8 +277,10 @@ function partsCss(PC) {
   const H = `:has(>svg>:is(${TAGS}))`, HS = `:has(>:is(${TAGS}))`
   const out = []
   // 1. a wrapper the runtime marked (.wm-parts); 2. the same through :has() for CSS-only use, in rules of their own
-  // (a browser without :has() drops only those and keeps animating the whole icon)
-  out.push(`${A}.wm-parts{animation-name:none}`, `${A}${H},svg${A}${HS}{animation-name:none}`)
+  // (a browser without :has() drops only those and keeps animating the whole icon). !important: the one-shot trigger
+  // list (.wm-trigger:hover with-icon[motion="hover"]:not(.wm-js), …) is more specific than these, and a wrapper that
+  // moved as well as its parts would turn twice (a <with-icon motion="hover"> host rang along with its bell)
+  out.push(`${A}.wm-parts{animation-name:none!important}`, `${A}${H},svg${A}${HS}{animation-name:none!important}`)
   out.push(partNodeRules([`${A}.wm-parts>svg>`, `svg${A}.wm-parts>`]))
   out.push(partNodeRules([`${A}${H}>svg>`, `svg${A}${HS}>`]))
   return out.join('\n')
@@ -330,7 +333,7 @@ function buildMotionCss(K, M, version, PC) {
   out.push(`:is(${SHOT}){${vars('H')};--_an:var(--wmP-s, var(--wmH, none));--_ai:1;animation:var(--_an) ${DUR} var(--_ae) var(--wm-delay, 0s) 1 both}`)
   // parts: inside an inline SVG whose renderer tagged its nodes, each part plays its own role (MOTION.md "Parts
   // choreography"): the wrapper stands still, object nodes play the preset, plates their override, decorations their
-  // own counter-phased loop, cast shadows stay on the ground. .wm-parts (set by motion() / the element) or :has().
+  // own counter-phased loop, cast shadows travel with the object (lagging / fading as it lifts). .wm-parts (set by motion() / the element) or :has().
   out.push(partsCss(PC))
   // draw: strokes draw on when the runtime prepared them (.wm-drawing); the element itself stays still
   out.push(`.wm-drawing{animation-name:none!important}`)
@@ -516,7 +519,10 @@ export default async function emit(ctx) {
   writeIfChanged('site/data/motion.js', siteSpecs)
   writeIfChanged('site/vendor/motion/motion.css', motionCss + '\n' + iconsCss)
   writeIfChanged('site/vendor/motion/icons.css', iconsCss)
-  writeIfChanged('site/vendor/motion/motion.js', buildSiteJs(version, shadowCss))
+  const siteJs = buildSiteJs(version, shadowCss)
+  // the classic bundle shares one scope: a duplicate top-level name across source files is a SyntaxError in the browser
+  try { new vm.Script(siteJs, { filename: 'site/vendor/motion/motion.js' }) } catch (e) { throw new Error(`emit-motion: site/vendor/motion/motion.js does not compile: ${e.message}`) }
+  writeIfChanged('site/vendor/motion/motion.js', siteJs)
 
   const kb = s => (Buffer.byteLength(s) / 1024).toFixed(1) + ' KB'
   const msg = `${iconList.length} icons (${hand} hand specs, ${auto} derived); motion.css ${kb(motionCss)}, icons.css ${kb(iconsCss)}` +

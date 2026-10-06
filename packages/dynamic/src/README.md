@@ -171,6 +171,19 @@ If a worker cannot start (a `file://` page, a CSP without `worker-src blob:`, or
 one per task, so the page still paints and takes input between icons. Synchronous `render()` always runs where you
 call it: for many rich icons, prefer the element, `renderAsync()` or `warm()`, or render on the server.
 
+The worker starts on the first render of a rich style, never at load: a page that only shows cheap styles (`line`,
+`duo`, `blueprint`...) never downloads it. Inside the worker each style is a separate chunk loaded on demand.
+
+**Vite**: bundle workers as ES modules, so those style chunks stay separate files (with Vite's default `iife` worker
+format every style is inlined into one large worker file, and the build is much slower):
+
+```js
+// vite.config.js
+export default { worker: { format: 'es' } }
+```
+
+webpack 5 keeps the worker's chunks split by default.
+
 ## React
 
 ```jsx

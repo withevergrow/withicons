@@ -201,8 +201,8 @@ function splitSvg(svg) {
   for (const a of m[1].matchAll(/([\w:-]+)="([^"]*)"/g)) if (!['xmlns', 'width', 'height', 'viewBox'].includes(a[1])) root[a[1]] = a[2]
   return { root, inner: m[2].replace(/^<title>[\s\S]*?<\/title>/, '') }
 }
-export function buildCtx(lib, { name, style, title, palette, colors, color, motion, duration }) {
-  const { root, inner } = splitSvg(lib.svgOf(name, style))
+export function buildCtx(lib, { name, style, title, palette, colors, color, motion, duration, strokeWidth }) {
+  const { root, inner } = splitSvg(lib.svgOf(name, style, strokeWidth ? { strokeWidth } : {}))
   let vars = {}, ink = color || null, applied = null
   if (palette || (colors && Object.keys(colors).length)) {
     applied = lib.applyColors(name, style, { palette, colors: color ? { ink: color, ...(colors || {}) } : colors })
@@ -250,11 +250,101 @@ function variants(lib, name, opts) {
   }).filter(Boolean)
 }
 
-// names x styles x formats -> files. Returns [{ name, style, format, file, bytes, data }] (data only when keepData)
+// ---- output file names: --name / filename templates ----
+// The default is <name>-<style>[-<variant>].<ext>: home-line.svg (svg-flat), home-line-themable.svg (svg), home-line-512.png,
+// bell-line-ring.gif, play-line-to-pause.apng.png. A template may use {name} {style} {format} {variant} {default}; the
+// extension is added when the template does not end with it.
+export const NAME_PLACEHOLDERS = ['name', 'style', 'format', 'variant', 'default']
+export function checkNameTemplate(t) {
+  const s = String(t).trim()
+  if (!s) throw new ExportError('--name: give a file name or a template such as "{name}" or "{name}-{style}"', 'invalid_option', true)
+  if (/[\\/]|\.\./.test(s) || /^[.-]/.test(s)) throw new ExportError(`--name "${t}": a file name only (no folders, no leading "." or "-"); use --out for the folder`, 'invalid_option', true)
+  if (/[<>:"|?*\x00-\x1f]/.test(s)) throw new ExportError(`--name "${t}": contains a character file systems reject`, 'invalid_option', true)
+  for (const m of s.matchAll(/\{([^}]*)\}/g)) if (!NAME_PLACEHOLDERS.includes(m[1])) throw new ExportError(`--name: unknown placeholder {${m[1]}}. Use ${NAME_PLACEHOLDERS.map(p => `{${p}}`).join(', ')}`, 'invalid_option', true)
+  return s
+}
+// default file name -> { stem, variant, ext }
+function splitDefault(filename, name, style) {
+  const pre = `${name}-${style}`
+  const m = filename.startsWith(pre) ? /^(?:-(.*?))?\.([a-z0-9]+(?:\.png)?)$/i.exec(filename.slice(pre.length)) : null
+  if (m) return { stem: filename.slice(0, filename.length - m[2].length - 1), variant: m[1] || '', ext: m[2] }
+  const i = filename.indexOf('.')
+  return { stem: i > 0 ? filename.slice(0, i) : filename, variant: '', ext: i > 0 ? filename.slice(i + 1) : '' }
+}
+export function applyNameTemplate(template, { name, style, format, filename, as }) {
+  const d = splitDefault(filename, name, style)
+  // as: the icon's own file base name (--name-map receipt=orders): {name} and {default} use it
+  const stem = as && d.stem.startsWith(name) ? as + d.stem.slice(name.length) : d.stem
+  const vals = { name: as || name, style, format, variant: d.variant, default: stem }
+  let s = template.replace(/\{(\w+)\}/g, (all, k) => vals[k])
+  // an empty {variant} leaves no stray dashes
+  s = s.replace(/-{2,}/g, '-').replace(/^-+|-+$/g, '').replace(/-+\./g, '.')
+  if (!s) s = stem
+  return d.ext && !s.toLowerCase().endsWith('.' + d.ext.toLowerCase()) ? `${s}.${d.ext}` : s
+}
+
+// --name-map receipt=orders,heart=favourites (MCP names: { receipt: "orders", heart: "favourites" }) -> Map(icon -> base)
+// Keys are icon names or aliases and must be among the exported icons; values are plain file names (no folders,
+// placeholders or extension: the extension is added). Clashes are refused like any other (two files, one name).
+export function parseNameMap(lib, value, names) {
+  if (value == null || value === '') return null
+  let pairs
+  if (typeof value === 'object') pairs = Object.entries(value)
+  else pairs = String(value).split(/[,;]/).map(p => p.trim()).filter(Boolean).map(p => {
+    const m = /^([^=:]+)[=:](.+)$/.exec(p)
+    if (!m) throw new ExportError(`--name-map: "${p}" is not icon=file-name (e.g. --name-map receipt=orders,heart=favourites)`, 'invalid_option', true)
+    return [m[1].trim(), m[2].trim()]
+  })
+  const map = new Map()
+  for (const [k, v] of pairs) {
+    const icon = lib.resolveName(k)
+    if (!names.includes(icon)) throw new ExportError(`--name-map: "${k}" is not one of the icons being exported (${names.join(', ')})`, 'invalid_option', true)
+    const base = String(v == null ? '' : v).trim().replace(/\.(svg|png|pdf|eps|gif|json|zip|ico|xml|txt)$/i, '')
+    if (!base || /[{}]/.test(base)) throw new ExportError(`--name-map: give "${k}" a plain file name, got "${v}"`, 'invalid_option', true)
+    checkNameTemplate(base)
+    if (map.has(icon) && map.get(icon) !== base) throw new ExportError(`--name-map: ${icon} is given two names ("${map.get(icon)}", "${base}")`, 'invalid_option', true)
+    map.set(icon, base)
+  }
+  return map.size ? map : null
+}
+
+// ---- palettes across several icons: palettes are picked per icon, so an id may exist on some icons only ----
+// Every icon is checked before anything is written. An icon without the palette borrows its colours (the role colours:
+// ink, c1-c4, tint, ...) from the first icon in this export that has it, so the set keeps one look; strict: fail instead.
+function planPalettes(lib, names, palette, colors, strict) {
+  const plan = new Map(names.map(n => [n, { palette, colors }]))
+  if (!palette) return { plan, notes: [] }
+  const have = [], missing = []
+  let firstError = null
+  for (const n of names) {
+    try { lib.applyColors(n, 'line', { palette }); have.push(n) } catch (e) {
+      if (!(e && e.code === 'unknown_palette')) throw e
+      missing.push(n); firstError = firstError || e
+    }
+  }
+  if (!missing.length) return { plan, notes: [] }
+  if (!have.length) {
+    if (names.length === 1) throw new ExportError(firstError.message, 'unknown_palette', false, { palettes: firstError.palettes })
+    throw new ExportError(`none of ${names.join(', ')} has a palette "${palette}"; nothing was written. See: withicons palettes ${names[0]}`, 'unknown_palette')
+  }
+  if (strict) throw new ExportError(`palette "${palette}" exists for ${have.join(', ')} but not for ${missing.join(', ')}; nothing was written. ` +
+    `Leave out --strict to give ${missing.length === 1 ? 'it' : 'them'} the same colours (borrowed from ${have[0]}), or pick a palette per icon (withicons palettes <name>).`, 'unknown_palette', false, { missing, have })
+  const donor = lib.applyColors(have[0], 'line', { palette })
+  // borrowed roles act like a palette's: no warning when this style leaves some of them out
+  const borrowed = Object.keys(donor.colors).filter(k => !(colors && k in colors))
+  for (const n of missing) plan.set(n, { palette: undefined, colors: { ...donor.colors, ...(colors || {}) }, borrowed })
+  return { plan, notes: [`${missing.join(', ')} ${missing.length === 1 ? 'has' : 'have'} no palette "${palette}": used ${have[0]}'s "${palette}" colours instead (--strict fails instead).`] }
+}
+
+// names x styles x formats -> files. Returns { files: [{ name, style, format, filename, file, bytes, data }], notes, warnings }
+// (data only when keepData or not writing). Everything is checked and rendered before the first file is written.
 export async function exportIcons(lib, o) {
   const formats = parseFormats(o.format)
   const styles = o.allStyles ? lib.data().meta.styles.map(s => s.name) : [lib.checkStyle(o.style || 'line')]
-  const names = [...new Set(o.names.flatMap(n => String(n).split(',')).filter(Boolean).map(n => lib.resolveName(n)))]
+  const names = [...new Set(o.names.flatMap(n => String(n).split(',')).map(n => n.trim()).filter(Boolean).map(n => lib.resolveName(n)))]
+  const nameMap = parseNameMap(lib, o.nameMap, names)
+  // with a name map and no --name: just the mapped name (orders.svg), plus the style when there are several
+  const template = o.filename != null && o.filename !== '' ? checkNameTemplate(o.filename) : nameMap ? (styles.length > 1 ? '{name}-{style}' : '{name}') : null
   if (formats.some(f => NEEDS_PNG.has(f)) && !(await loadRenderer())) throw new ExportError(RENDERER_HINT, 'missing_renderer')
   if (formats.includes('animated-svg')) await loadRenderer()
   const presets = (lib.motionData && lib.motionData().presets) || []
@@ -263,7 +353,18 @@ export async function exportIcons(lib, o) {
   const color = o.color !== undefined ? cleanColour(o.color, '--color') : undefined
   const colors = {}
   for (const [k, v] of Object.entries(o.colors || {})) colors[k] = cleanColour(v, `--${k}`)
-  const out = [], notes = new Set(), oneColour = {}
+  const out = [], notes = new Set(), warnings = new Set()
+  // colours per icon x style, summarised once for the whole command at the end (lib.colorSummary)
+  const colourEntries = new Map()
+  // --stroke-width: outline styles only (as for get); the others have no single stroke to change
+  const strokeWidth = o.strokeWidth !== undefined ? Number(o.strokeWidth) : undefined
+  if (strokeWidth !== undefined && !(strokeWidth > 0 && strokeWidth <= 4)) throw new ExportError(`--stroke-width must be a number above 0 and at most 4, got "${o.strokeWidth}"`, 'invalid_option', true)
+  // outline styles: a stroke-width on the root <svg> (what svgOf(..., { strokeWidth }) changes)
+  const probe = lib.data().meta.icons[0].name
+  const strokeStyles = new Set(lib.data().meta.styles.map(s => s.name).filter(st => { try { return /^<svg[^>]* stroke-width="/.test(lib.svgOf(probe, st)) } catch { return false } }))
+  if (strokeWidth !== undefined && !styles.some(s => strokeStyles.has(s))) notes.add(`--stroke-width applies to outline styles only (${[...strokeStyles].join(', ')}); ${styles.join(', ')} ignore${styles.length === 1 ? 's' : ''} it`)
+  const pal = planPalettes(lib, names, o.palette, colors, !!o.strictPalette)
+  for (const n of pal.notes) warnings.add(n)
   const wantsSwap = !!(o.to || (motion && motion.swap))
   const sheetAnimated = formats.includes('pptx-sheet') && ((motion && motion !== false) || wantsSwap || o.animated)
   if ((motion !== undefined || wantsSwap) && !formats.some(f => (WE.get(f) && WE.get(f).animated) || (f === 'pptx-sheet' && sheetAnimated)))
@@ -280,12 +381,14 @@ export async function exportIcons(lib, o) {
   const dir = o.out === '-' ? null : path.resolve(o.out || '.')
   for (const name of names) {
     const title = lib.getIcon({ name, style: 'line' }).title
+    const { palette, colors: cols, borrowed } = pal.plan.get(name)
     for (const format of formats) {
       const f = WE.get(format)
       for (const style of PER_ICON.has(format) ? [styles[0]] : styles) {
-        const { ctx, applied } = buildCtx(lib, { name, style, title, palette: o.palette, colors, color, motion, duration: o.duration })
-        if (applied && !Object.keys(applied.vars || {}).length && (o.palette || Object.keys(colors).length)) (oneColour[name] ||= new Set()).add(style)
-        if (wantsSwap && f.animated) ctx.swap = swapFor(lib, ctx, { to: o.to, effect: o.effect, hold: o.hold, duration: o.duration, palette: o.palette, colors, color })
+        const sw = strokeWidth && strokeStyles.has(style) ? strokeWidth : undefined
+        const { ctx, applied } = buildCtx(lib, { name, style, title, palette, colors: cols, color, motion, duration: o.duration, strokeWidth: sw })
+        if (applied && !PER_ICON.has(format) && !colourEntries.has(name + '|' + style)) colourEntries.set(name + '|' + style, { name, style, applied, borrowed })
+        if (wantsSwap && f.animated) ctx.swap = swapFor(lib, ctx, { to: o.to, effect: o.effect, hold: o.hold, duration: o.duration, palette, colors: cols, color })
         const opts = { background, padding: o.padding }
         if (o.size !== undefined) opts.size = o.size
         else if (format === 'svg' || format === 'svg-flat') opts.size = 24
@@ -305,8 +408,8 @@ export async function exportIcons(lib, o) {
           opts.variants = variants(lib, name, o)
           ctx.variants = opts.variants
           // the chosen colours, for every style (variable names are per style, so they never clash)
-          if (o.palette || Object.keys(colors).length || color) for (const v of opts.variants) {
-            try { Object.assign(ctx.vars, lib.applyColors(name, v.style, { palette: o.palette, colors: color ? { ink: color, ...colors } : colors }).vars) } catch { /* palette missing for this style */ }
+          if (palette || Object.keys(cols).length || color) for (const v of opts.variants) {
+            try { Object.assign(ctx.vars, lib.applyColors(name, v.style, { palette, colors: color ? { ink: color, ...cols } : cols }).vars) } catch { /* palette missing for this style */ }
           }
         }
         let r
@@ -316,18 +419,34 @@ export async function exportIcons(lib, o) {
           throw new ExportError(`${format}: ${e && e.message ? e.message : e}`, /frames|pixels/.test(String(e && e.message)) ? 'too_large' : 'export_failed', /frames|pixels/.test(String(e && e.message)))
         }
         const data = typeof r.data === 'string' ? Buffer.from(r.data, 'utf8') : Buffer.from(r.data.buffer ? new Uint8Array(r.data.buffer, r.data.byteOffset, r.data.byteLength) : r.data)
-        const item = { name, style: PER_ICON.has(format) ? 'all' : style, format, label: f.label, mime: r.mime, filename: r.filename, bytes: data.length }
-        if (dir) {
-          fs.mkdirSync(dir, { recursive: true })
-          item.file = path.join(dir, r.filename)
-          fs.writeFileSync(item.file, data)
-        }
-        if (o.keepData || !dir) item.data = data
-        out.push(item)
+        const st = PER_ICON.has(format) ? 'all' : style
+        const filename = template ? applyNameTemplate(template, { name, style: st, format, filename: r.filename, as: nameMap && nameMap.get(name) }) : r.filename
+        out.push({ name, style: st, format, label: f.label, mime: r.mime, filename, bytes: data.length, data })
       }
     }
   }
-  for (const [name, set] of Object.entries(oneColour))
-    notes.add(`${[...set].join(', ')} ${set.size === 1 ? 'draws' : 'draw'} ${name} in one colour, so only the ink applies there. Multi-colour styles: ${lib.multiColourStyles(name).join(', ')}`)
-  return { files: out, notes: [...notes] }
+  // two files with one name would overwrite each other: refuse before writing anything
+  const seen = new Map()
+  for (const it of out) {
+    const k = it.filename.toLowerCase()
+    const a = seen.get(k)
+    if (a) throw new ExportError(`two files would both be named "${it.filename}" (${a.name} ${a.style} ${a.format} and ${it.name} ${it.style} ${it.format}); nothing was written: ` +
+      (template ? `add {name}, {style} or {format} to --name "${template}"${nameMap ? ' (with --name-map, {name} is the mapped name)' : ''}` : 'export them separately'), 'name_clash', true)
+    seen.set(k, it)
+  }
+  if (dir) {
+    fs.mkdirSync(dir, { recursive: true })
+    for (const it of out) { it.file = path.join(dir, it.filename); fs.writeFileSync(it.file, it.data) }
+  }
+  if (dir && !o.keepData) for (const it of out) delete it.data
+  // colours: one line per colour for the whole command, never one per icon. Only the colours set by hand are checked
+  // (a palette's own roles, and roles borrowed from another icon's palette, may leave some out); the ink always applies.
+  if (colourEntries.size && typeof lib.colorSummary === 'function') {
+    const keys = Object.keys(colors).filter(k => k !== 'ink')
+    const label = o.colorLabel || (k => k.startsWith('--') ? k : '--' + k)
+    const sum = lib.colorSummary([...colourEntries.values()], { keys, palette: !!o.palette, label })
+    for (const n of sum.notes) notes.add(n)
+    for (const w of sum.warnings) warnings.add(w)
+  }
+  return { files: out, notes: [...notes], warnings: [...warnings] }
 }

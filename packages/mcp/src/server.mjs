@@ -19,10 +19,20 @@ Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, 
 Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|classes|core|static|motion (web = <with-icon> element, classes = <i class="with with-home"> CSS icons). Names and common aliases both work (e.g. "delete" -> trash).`
 }
 
-const json = v => ({ content: [{ type: 'text', text: JSON.stringify(v, null, 2) }], structuredContent: v })
+// structuredContent carries the result; the text block is the same JSON once, compact (the MCP spec's fallback for
+// clients that do not read structuredContent), or a short summary where the JSON would be long (search_icons)
+const json = (v, text) => ({ content: [{ type: 'text', text: text || JSON.stringify(v) }], structuredContent: v })
 const fail = e => {
-  if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }, null, 2) }] } }
+  if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }) }] } }
   return { isError: true, content: [{ type: 'text', text: `Error: ${e && e.message ? e.message : String(e)}` }] }
+}
+// search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent)
+export function searchSummary(r) {
+  if (!r.count) return `No icons for "${r.query}".${r.suggestions && r.suggestions.length ? ` Did you mean: ${r.suggestions.join(', ')}?` : ''}${r.hint ? ` ${r.hint}` : ''}`
+  const lines = [`${r.count} icon${r.count === 1 ? '' : 's'} for "${r.query}"${r.didYouMean ? ` (showing results for "${r.didYouMean}")` : ''}, style ${r.style}:`]
+  r.results.forEach((x, i) => lines.push(`${i + 1}. ${x.name} (${x.category}): ${x.reason}`))
+  lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
+  return lines.join("\n")
 }
 const safe = fn => async args => { try { return await fn(args || {}) } catch (e) { return fail(e) } }
 
@@ -37,7 +47,7 @@ export function createServer(opts = {}) {
 
   server.registerTool('search_icons', {
     title: 'Search icons',
-    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked icon names, why each matched, and a ready-to-paste snippet.',
+    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked icon names, why each matched, and a ready-to-paste snippet; didYouMean when the query was spell-corrected, and a hint (where to browse) when nothing matched.',
     inputSchema: {
       query: z.string().min(1).describe('What the icon should show, in plain words'),
       limit: z.number().int().min(1).max(100).optional().describe('Max results (default 10)'),
@@ -46,11 +56,12 @@ export function createServer(opts = {}) {
       format: z.enum(FORMATS).optional().describe('Snippet format (default react)'),
     },
     annotations: { title: 'Search icons', ...ro },
-  }, safe(a => json(searchIcons(a))))
+  }, safe(a => { const r = searchIcons(a); return json(r, searchSummary(r)) }))
 
   server.registerTool('get_icon', {
     title: 'Get icon code',
-    description: `Get one icon as paste-ready code. Accepts a canonical name or an alias ("delete" -> trash). Formats: ${FORMATS.join(', ')}. The result also says whether the icon has a tuned animation (motion) for animate_icon.`,
+    description: `Get one icon as paste-ready code. Accepts a canonical name or an alias ("delete" -> trash). Formats: ${FORMATS.join(', ')}. The result also says whether the icon has a tuned animation (motion) for animate_icon. ` +
+      'warnings lists colours that change nothing in the chosen style (and the roles it does use). colors.mainRole is the role that paints the icon body (set it for a brand colour). Multi-colour styles report how many palettes the icon has; the palette ids are included for a palette style with no format, or with include_palettes: true (list_palettes shows their colours).',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias, e.g. "home", "arrow-right", "delete"'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
@@ -61,13 +72,18 @@ export function createServer(opts = {}) {
       palette: z.string().max(60).optional().describe('Apply one of the icon colour palettes by id (see colors.suggestions in the result, or list_palettes), e.g. "classic-red"'),
       colors: z.object(Object.fromEntries(PALETTE_ROLES.map(r => [r, z.string().max(40).optional()]))).catchall(z.string().max(40)).optional()
         .describe('Change any colour: roles ink (outline), c1 (main), c2, c3, c4, tint, accent, shadow, shine, edge -> "#hex" or a CSS colour name; also accepts --with-* variable names. Merged over palette.'),
+      include_palettes: z.boolean().optional().describe("List the icon's palette ids (colors.suggestions). Default: only for a palette style when no format is given"),
     },
     annotations: { title: 'Get icon code', ...ro },
-  }, safe(a => json(getIcon(a))))
+  }, safe(a => {
+    const { include_palettes: inc, ...rest } = a
+    const pal = (d.meta.styles.find(s => s.name === (a.style || 'line')) || {}).palette
+    return json(getIcon({ ...rest, includePalettes: inc !== undefined ? !!inc : !!(pal && !a.format) }))
+  }))
 
   server.registerTool('list_styles', {
     title: 'List styles',
-    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with what each looks like; palette styles list their colour variables.`,
+    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with what each looks like, minSize (the smallest px it reads well at: 16 for UI styles, 32 creative and palette, 48 studio and storybook) and onDark (how to use it on dark backgrounds); palette styles list their colour variables.`,
     inputSchema: {},
     annotations: { title: 'List styles', ...ro },
   }, safe(() => json({ styles: listStyles() })))
@@ -81,7 +97,9 @@ export function createServer(opts = {}) {
 
   server.registerTool('resolve_icon', {
     title: 'Resolve icon name',
-    description: 'Check whether a name or alias maps to exactly one icon. Returns the canonical name, the ambiguous candidates, or the nearest names.',
+    description: 'Check whether a name or alias maps to exactly one icon. Returns the canonical name (status resolved), the ambiguous candidates, ' +
+      'a match by meaning (status synonym: a word that is not a name or alias but means an icon, e.g. "favourites" -> star / heart, "orders" -> receipt; ' +
+      'with candidates and a note; use the canonical name), or for unknown words the nearest names, didYouMean (a spelling correction) and a hint.',
     inputSchema: { name: z.string().min(1).describe('Name or alias to check') },
     annotations: { title: 'Resolve icon name', ...ro },
   }, safe(a => json(resolveIcon(a.name))))
@@ -89,7 +107,7 @@ export function createServer(opts = {}) {
   server.registerTool('list_palettes', {
     title: 'List colour palettes',
     description: 'The 20-30 colour palettes picked for one icon (true-to-life first, then moods: pastel, neon, retro, earthy, luxe, ...), each with its ten role colours ' +
-      '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, and the icon variables with their roles and defaults. ' +
+      '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, the icon variables with their roles and defaults, and mainRole: the role that covers most of the icon body (e.g. c2): set that one for a brand colour. ' +
       'Multi-colour styles: glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),
@@ -106,6 +124,7 @@ export function createServer(opts = {}) {
     description: 'Paste-ready animation code for an icon, using the optional @withicons/motion package (CSS, works with every style and package). ' +
       'trigger: loop = continuous (spinner, ringing bell), hover = one-shot on hover/focus (or of a .wm-trigger button), once = plays on load, inview = plays when scrolled into view, ' +
       'swap = the icon turns into another one (play -> pause, menu -> close, heart -> heart@solid). Icons with a tuned motion use it by default; preset overrides it. ' +
+      'The result has intent (what the motion shows), alternates (other tuned presets of this icon, e.g. a livelier one for a title slide) and lively (the most energetic presets); pass one as preset. ' +
       `${Object.keys(mo.icons).length} icons have tuned motion. ` +
       'For a moving icon as a FILE (slides, docs, email, social) use export_icon with format gif, apng, animated-svg, pptx-animated or lottie and the same motion (motion: "loop", "hover", "swap" or a preset).',
     inputSchema: {
@@ -136,16 +155,22 @@ export function createServer(opts = {}) {
       (remote
         ? 'This remote server makes the vector, code and Lottie formats inline; for png-based and animated formats it returns the exact `npx withicons export …` command to run in a terminal, plus the icon page. '
         : 'Files are saved to out_dir when given (absolute or relative to the working directory) and returned inline when small (images as image content, text as text). ') +
-      'Colours are baked into raster and animated files: choose palette / colors / color here, they cannot be changed afterwards.',
+      'Colours are baked into raster and animated files: choose palette / colors / color here, they cannot be changed afterwards. With several icons, notes say once per colour which icons use it ("colors.accent applies to: phone-call (14 others do not use it)"); warnings only when no icon does. ' +
+      'Several icons in one call: names: ["home", "settings"] (same options for all), or names: { "receipt": "orders", "heart": "favourites" } to name each file. A palette id is per icon: icons without it borrow the colours of the first icon that has it (see warnings), or strict_palette: true fails first. ' +
+      'File names default to <name>-<style>[-<variant>].<ext> (svg: home-line-themable.svg, svg-flat: home-line.svg, png: home-line-512.png, gif: bell-line-ring.gif); filename sets them: a template with {name} {style} {format} {variant} {default}, or an exact name for one file (the extension is added).',
     inputSchema: {
-      name: z.string().min(1).describe('Icon name or alias'),
+      name: z.string().min(1).optional().describe('Icon name or alias (or use names for several)'),
+      names: z.union([z.array(z.string().min(1)).max(50), z.record(z.string().min(1), z.string().min(1).max(120))]).optional()
+        .describe('Several icons, same options: ["home", "settings"]; or a map icon -> file base name, { "receipt": "orders", "heart": "favourites" } -> orders.svg, favourites.svg (in a filename template {name} is the mapped name; clashes are refused)'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
       format: z.string().max(200).optional().describe(`One format or a comma list (default svg): ${EXPORT_FORMATS.join(', ')}`),
+      filename: z.string().max(120).optional().describe('File name: a template ("{name}", "{name}-{style}", "{name}-{format}"; placeholders {name} {style} {format} {variant} {default}) or an exact name for a single file. The extension is added. Default <name>-<style>[-<variant>].<ext>'),
       all_styles: z.boolean().optional().describe('One file per style (every style)'),
-      size: z.number().int().min(8).max(2048).optional().describe('Pixels (png 512, gif / apng / animated-svg 256, pptx-animated 480, svg 24); animated formats max 1024'),
+      size: z.number().int().min(8).max(2048).optional().describe('Pixels (png 512, png-set base 24, svg 24, pdf / eps 512, lottie 512, gif / apng / animated-svg 256, pptx-animated 480); animated formats go up to 2048 (larger is an error, never a silent resize)'),
       background: z.string().max(40).optional().describe('Solid background (hex), e.g. the slide colour "#ffffff"; default transparent'),
       matte: z.string().max(40).optional().describe('gif only: keep it transparent but blend the soft edges with this colour (the colour it will sit on)'),
       palette: z.string().max(60).optional().describe('Colour palette id (list_palettes)'),
+      strict_palette: z.boolean().optional().describe('With names: fail (nothing made) when an icon lacks the palette, instead of borrowing its colours from one that has it'),
       colors: colorShape.optional().describe('Colour roles -> "#hex" (ink, c1-c4, tint, accent, shadow, shine, edge)'),
       color: z.string().max(40).optional().describe('The ink colour (currentColor)'),
       motion: z.string().max(40).optional().describe('Animated formats: loop (default: the icon\'s tuned motion), hover / once (plays once, then rests), swap (turns into another icon), none, or a preset (spin, ring, beat, bounce, float, pop, ...)'),
@@ -156,7 +181,8 @@ export function createServer(opts = {}) {
       fps: z.number().int().min(1).max(60).optional().describe('gif / apng frames per second (gif 25, apng 30)'),
       seconds: z.number().min(0.1).max(30).optional().describe('gif / apng length of one loop (default: the motion cycle)'),
       loop: z.number().int().min(0).max(100).optional().describe('gif / apng: 0 = forever (default), n = play n times'),
-      padding: z.number().min(0).max(0.4).optional().describe('Empty space around the icon, as a share of its size'),
+      padding: z.number().min(0).max(0.6).optional().describe('Empty space around the icon, as a share of its size (a minimum: animated formats grow it to fit the motion)'),
+      stroke_width: z.number().min(0.25).max(4).optional().describe('Stroke width of outline styles (line default 1.75), e.g. thinner for print or large exports; other styles ignore it'),
       ...(remote ? {} : {
         out_dir: z.string().max(500).optional().describe('Folder to save the files in (created if needed). Without it, files come back inline only.'),
         inline: z.boolean().optional().describe('Also return the files inline (default: only when out_dir is not given)'),

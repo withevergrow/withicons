@@ -57,6 +57,7 @@
     "performance",
     "system health",
     "server status",
-    "beat"
+    "beat",
+    "step counter"
   ]
 }

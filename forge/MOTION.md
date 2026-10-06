@@ -192,7 +192,7 @@ From run 9, **renderers tag what they draw** and **motion animates parts**:
 | `wm-k` / `wm-a` / `wm-s` | the object, by skeleton plate (K body, A moving/secondary part, S badge/modifier) — only where a style keeps plates as separate nodes | the main preset (K), optionally a part override (A/S) |
 | (no class) | object geometry a style fuses together | treated as `wm-k` |
 | `wm-deco` | decoration that is not the object: backdrop shapes, sparkles, hearts, stars, confetti, accent dots | its own gentle loop (`breathe` / `float` / `twinkle`, counter-phased), never the main preset |
-| `wm-shadow` | cast/drop shadow, ground, extrusion that sits under the object | stays put; squashes/fades in sync for `bounce`, `float`, `rise`, `drop`, `jelly` |
+| `wm-shadow` | cast/drop shadow, ground, extrusion that sits under the object | travels with the object; for `bounce`, `float`, `rise` it lags (about 88% of the lift) and fades as the object lifts; `drop` and `jelly` move it with the object. In exports, fading presets fade the whole icon at once |
 | `wm-shine` | specular highlight on the object | moves with the object; may glint once per loop |
 
 Classes are tiny (`class="wm-deco"`), harmless without motion CSS, and preserved by every package. Rotations use

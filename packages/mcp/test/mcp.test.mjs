@@ -10,7 +10,8 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
 const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist')
-const parse = r => JSON.parse(r.content[0].text)
+// tool results: structuredContent (the text block is a compact copy, or a summary for search_icons)
+const parse = r => r.structuredContent || JSON.parse(r.content[0].text)
 // PNG / animated exports need @resvg/resvg-js (optional dependency)
 let hasRenderer = true
 try { createRequire(path.join(dist, 'stdio.mjs')).resolve('@resvg/resvg-js') } catch {
@@ -40,7 +41,13 @@ describe('stdio server (SDK client)', () => {
     assert.ok(s.annotations.readOnlyHint)
   })
   test('search_icons "trash can" -> trash with reason and snippet', async () => {
-    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'trash can', limit: 5 } }))
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'trash can', limit: 5 } })
+    // the text block is a short summary, not a second copy of the JSON
+    assert.equal(raw.content.length, 1)
+    assert.match(raw.content[0].text, /^\d+ icons? for "trash can"/)
+    assert.match(raw.content[0].text, /\n1\. trash \(/)
+    assert.ok(raw.content[0].text.length < JSON.stringify(raw.structuredContent).length / 2, 'summary is short')
+    const r = parse(raw)
     assert.equal(r.results[0].name, 'trash')
     assert.match(r.results[0].reason, /trash/)
     assert.match(r.results[0].snippet, /import \{ Trash \} from '@withicons\/react'/)
@@ -95,10 +102,20 @@ describe('stdio server (SDK client)', () => {
     assert.match(pre.code, /wm-p-spin/)
     assert.match(pre.code, /--wm-dur:3s/)
     // inview and draw only run through the JS runtime, so every format wires up motion()
-    for (const format of ['html', 'web-component', 'react', 'vue', 'svelte', 'solid', 'angular', 'js']) {
+    for (const format of ['html', 'react', 'vue', 'svelte', 'solid', 'angular', 'js']) {
       const iv = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'rocket', trigger: 'inview', format } }))
       assert.match(iv.code, /motion\(.*'rocket', \{ trigger: 'inview' \}\)/, format)
     }
+    // web component: motion attributes on <with-icon> itself + the @withicons/motion element upgrade (no wrapper span)
+    const wc = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'rocket', trigger: 'inview', format: 'web-component' } }))
+    assert.match(wc.code, /<with-icon name="rocket" motion="inview"><\/with-icon>/)
+    assert.match(wc.code, /web@latest\/dist\/cdn\.js"><\/script>\n<script type="module" src="[^"]*motion@latest\/dist\/element\.js"/)
+    assert.doesNotMatch(wc.code, /class="wm /)
+    const wh = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'bell', trigger: 'hover', format: 'web-component', preset: 'shake', duration: 2 } }))
+    assert.match(wh.code, /<button type="button" class="wm-trigger" aria-label="[^"]+"><with-icon name="bell" motion="hover" preset="shake" style="--wm-dur:2s"><\/with-icon><\/button>/)
+    const ws = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'play', trigger: 'swap', to: 'pause', effect: 'morph', format: 'web-component' } }))
+    assert.match(ws.code, /<with-icon name="play" swap-to="pause" swap-effect="morph" swap-trigger="hover"><\/with-icon>/)
+    for (const r of [wc, wh, ws]) for (const u of r.code.match(/https:\/\/cdn\.jsdelivr\.net\/npm\/@withicons\/[^"']+/g)) assert.match(u, /@withicons\/[\w-]+@latest\//, u)
     const draw = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'check', trigger: 'hover', preset: 'draw', format: 'vue' } }))
     assert.match(draw.code, /onMounted\(\(\) => \{ m = motion\(el\.value, 'check', \{ trigger: 'hover', preset: 'draw' \}\) \}\)/)
     const bad = await client.callTool({ name: 'animate_icon', arguments: { name: 'home', trigger: 'swap' } })
@@ -172,6 +189,71 @@ describe('stdio server (SDK client)', () => {
     assert.equal((await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro', colors: { c1: 'url(x)' } } })).isError, true)
     assert.equal((await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro', colors: { body: '#fff' } } })).isError, true)
   })
+  test('get_icon: palette ids only when asked (or a palette style with no format); warnings for colours that do nothing', async () => {
+    const code = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro', format: 'react' } }))
+    assert.ok(code.colors.palettes > 0 && !code.colors.suggestions && /list_palettes/.test(code.colors.hint))
+    const asked = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro', format: 'react', include_palettes: true } }))
+    assert.equal(asked.colors.suggestions.length, asked.colors.palettes)
+    const svg = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro' } }))
+    assert.ok(svg.colors.suggestions.length > 0)
+    const ok = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'heart', style: 'retro', colors: { c1: '#e11d48' } } }))
+    assert.equal(ok.warnings, undefined)
+    const duo = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'flower', style: 'duo', colors: { shine: '#ff0000' } } }))
+    assert.ok(duo.warnings && /"shine" changes nothing on flower in the duo style: it is painted with ink/.test(duo.warnings[0]), JSON.stringify(duo.warnings))
+    const line = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'flower', style: 'line', colors: { c1: '#ff0000' } } }))
+    // a one-colour style says so once (a note), not a second time as a per-role warning
+    assert.equal(line.warnings, undefined)
+    assert.ok(line.notes.some(n => /draws "flower" in one colour/.test(n) && /Multi-colour styles for this icon: /.test(n)), JSON.stringify(line.notes))
+    // only the ink: nothing to say
+    const ink = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'flower', style: 'line', colors: { ink: '#ff0000' } } }))
+    assert.equal(ink.notes, undefined)
+    assert.equal(ink.warnings, undefined)
+    // the role list never repeats a role
+    const sticker = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'bell', style: 'sticker', colors: { accent: '#ff0000' } } }))
+    const roles = /painted with ([^.]*)\./.exec(sticker.warnings[0])[1].split(', ')
+    assert.deepEqual(roles, [...new Set(roles)], sticker.warnings[0])
+  })
+  test('get_icon / list_palettes: mainRole is the role that paints the icon body', async () => {
+    const g = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'bell', style: 'sticker' } }))
+    assert.equal(g.colors.mainRole, 'c2')   // bubblegum pink body (c1 is the lemon clapper and sparkle)
+    const p = parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'bell', style: 'sticker', limit: 1 } }))
+    assert.equal(p.mainRole, 'c2')
+    assert.ok(p.mainRoleShare > 0.3 && p.mainRoleShare <= 1)
+    assert.match(p.mainRoleNote, /c2 paints the main body of bell in sticker/)
+    assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'duo', limit: 1 } })).mainRole, 'c1')
+    assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'line', limit: 1 } })).mainRole, 'ink')
+    assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', limit: 1 } })).mainRole, undefined, 'needs a style')
+  })
+  test('animate_icon lists the alternates and lively presets', async () => {
+    const r = parse(await client.callTool({ name: 'animate_icon', arguments: { name: 'bell' } }))
+    assert.match(r.intent, /clapper/)
+    assert.deepEqual(r.alternates.map(a => a.preset), ['shake', 'pop'])
+    assert.ok(r.lively.includes('tada'))
+  })
+  test('list_styles: minSize and onDark hints', async () => {
+    const styles = parse(await client.callTool({ name: 'list_styles', arguments: {} })).styles
+    const by = Object.fromEntries(styles.map(s => [s.name, s]))
+    for (const n of ['line', 'solid', 'duo']) assert.equal(by[n].minSize, 16, n)
+    for (const n of ['gloss', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro']) assert.equal(by[n].minSize, 32, n)
+    for (const n of ['luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']) assert.equal(by[n].minSize, 48, n)
+    for (const s of styles) assert.ok(s.onDark && s.onDark.length > 20, s.name)
+    assert.match(by.retro.onDark, /on-dark/)
+  })
+  test('resolve_icon: synonyms resolve by meaning; unknown words carry didYouMean', async () => {
+    const fav = parse(await client.callTool({ name: 'resolve_icon', arguments: { name: 'favourites' } }))
+    assert.equal(fav.status, 'synonym')
+    assert.ok(fav.candidates.includes('star') && fav.candidates.includes('heart'))
+    assert.match(fav.note, /Use the canonical name/)
+    const ord = parse(await client.callTool({ name: 'resolve_icon', arguments: { name: 'orders' } }))
+    assert.equal(ord.status, 'synonym')
+    assert.equal(ord.name, 'receipt')
+    const typo = parse(await client.callTool({ name: 'resolve_icon', arguments: { name: 'setings' } }))
+    assert.equal(typo.status, 'unknown')
+    assert.equal(typo.didYouMean, 'settings')
+    const { tools } = await client.listTools()
+    assert.match(tools.find(t => t.name === 'resolve_icon').description, /synonym/)
+    assert.match(tools.find(t => t.name === 'search_icons').description, /didYouMean/)
+  })
   test('get_icon reports motion for animated icons', async () => {
     const r = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'bell' } }))
     assert.ok(r.motion && r.motion.loop && r.motion.hover)
@@ -214,6 +296,76 @@ describe('stdio server (SDK client)', () => {
       assert.ok(pptx.includes(Buffer.from('ppt/media/image1.gif')))
       assert.ok(pptx.includes(Buffer.from('GIF89a')))
     } finally { fs.rmSync(dir, { recursive: true, force: true }) }
+  })
+  test('export_icon: names (several icons), filename templates, palettes missing on some icons', async () => {
+    const r = await client.callTool({ name: 'export_icon', arguments: { names: ['home', 'settings'], format: 'svg,svg-flat', filename: '{name}-{format}' } })
+    assert.ok(!r.isError, r.content[0].text)
+    const s = parse(r)
+    assert.deepEqual(s.names, ['home', 'settings'])
+    assert.deepEqual(s.files.map(f => f.filename).sort(), ['home-svg-flat.svg', 'home-svg.svg', 'settings-svg-flat.svg', 'settings-svg.svg'])
+    assert.match(s.command, /^npx withicons export home settings --format svg,svg-flat --name "\{name\}-\{format\}" --out \.$/)
+    const one = parse(await client.callTool({ name: 'export_icon', arguments: { name: 'home', format: 'svg', filename: 'logo' } }))
+    assert.equal(one.files[0].filename, 'logo.svg')
+    const clash = await client.callTool({ name: 'export_icon', arguments: { names: ['home', 'settings'], format: 'svg', filename: 'logo' } })
+    assert.ok(clash.isError)
+    assert.equal(JSON.parse(clash.content[0].text).code, 'name_clash')
+    const bad = await client.callTool({ name: 'export_icon', arguments: { name: 'home', filename: '../x' } })
+    assert.ok(bad.isError)
+    // a palette id one icon has and the other does not: borrowed colours + a warning, or strict_palette fails
+    const h = parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'heart' } }))
+    const other = parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home' } }))
+    const id = h.palettes.map(p => p.id).find(x => !other.palettes.some(p => p.id === x))
+    if (id) {
+      const mixed = parse(await client.callTool({ name: 'export_icon', arguments: { names: ['heart', 'home'], style: 'retro', format: 'svg-flat', palette: id } }))
+      assert.equal(mixed.count, 2)
+      assert.ok(mixed.warnings.some(w => w.includes(`home has no palette "${id}"`)), JSON.stringify(mixed.warnings))
+      const strict = await client.callTool({ name: 'export_icon', arguments: { names: ['heart', 'home'], style: 'retro', format: 'svg-flat', palette: id, strict_palette: true } })
+      assert.ok(strict.isError)
+      assert.deepEqual(JSON.parse(strict.content[0].text).missing, ['home'])
+    }
+  })
+  test('export_icon: names as a map icon -> file name; clashes refused', async () => {
+    const r = await client.callTool({ name: 'export_icon', arguments: { names: { receipt: 'orders', heart: 'favourites' }, format: 'svg-flat' } })
+    assert.ok(!r.isError, r.content[0].text)
+    const s = parse(r)
+    assert.deepEqual(s.names, ['receipt', 'heart'])
+    assert.deepEqual(s.files.map(f => f.filename), ['orders.svg', 'favourites.svg'])
+    assert.match(s.command, / --name-map "receipt=orders,heart=favourites" /)
+    // {name} in a template is the mapped name; aliases work as keys
+    const t = parse(await client.callTool({ name: 'export_icon', arguments: { names: { receipt: 'orders', delete: 'bin' }, format: 'png,svg-flat', filename: 'icon-{name}', size: 64 } }))
+    assert.deepEqual(t.files.map(f => f.filename).sort(), ['icon-bin.png', 'icon-bin.svg', 'icon-orders.png', 'icon-orders.svg'])
+    const clash = await client.callTool({ name: 'export_icon', arguments: { names: { receipt: 'same', heart: 'same' }, format: 'svg' } })
+    assert.ok(clash.isError)
+    assert.equal(JSON.parse(clash.content[0].text).code, 'name_clash')
+    const bad = await client.callTool({ name: 'export_icon', arguments: { names: { receipt: '../x' }, format: 'svg' } })
+    assert.ok(bad.isError)
+    assert.equal(JSON.parse(bad.content[0].text).code, 'invalid_option')
+  })
+  test('export_icon: one colour note per command, never per icon', async () => {
+    const s = parse(await client.callTool({ name: 'export_icon', arguments: { names: ['bell', 'bell-ring', 'home', 'cloud-off'], style: 'glass', format: 'svg-flat', colors: { accent: '#ff0000' } } }))
+    assert.deepEqual(s.notes.filter(n => /accent/.test(n)), ['colors.accent applies to: bell-ring, cloud-off (2 others don\'t use it)'])
+    assert.equal(s.warnings, undefined)
+    const line = parse(await client.callTool({ name: 'export_icon', arguments: { names: ['bell', 'heart', 'home'], format: 'svg-flat', color: '#ff0000' } }))
+    assert.ok(!line.notes.some(n => /one colour/.test(n)), 'only the ink set: no one-colour note')
+    const c1 = parse(await client.callTool({ name: 'export_icon', arguments: { names: ['bell', 'heart', 'home'], format: 'svg-flat', colors: { c1: '#ff0000' } } }))
+    assert.equal(c1.notes.filter(n => /one colour/.test(n)).length, 1)
+    assert.match(c1.notes.find(n => /one colour/.test(n)), /^line draws bell, heart, home in one colour/)
+  })
+  test('export_icon: files carry no motion hooks; inline code keeps them', async () => {
+    const s = await client.callTool({ name: 'export_icon', arguments: { name: 'bell', style: 'sticker', format: 'svg,svg-flat,data-uri,html' } })
+    const text = f => s.content.find(c => c.type === 'text' && c.text.startsWith(`--- ${f} ---`)).text
+    for (const f of ['bell-sticker-themable.svg', 'bell-sticker.svg', 'bell-sticker-data-uri.txt']) assert.ok(!/wm-/.test(text(f)), f)
+    assert.match(text('bell-sticker.html'), /class="wm-shadow"/)
+  })
+  test('export_icon: stroke_width on outline styles, padding up to 0.6', async () => {
+    const thin = parse(await client.callTool({ name: 'export_icon', arguments: { name: 'home', format: 'svg-flat', stroke_width: 1.25, padding: 0.5 } }))
+    assert.equal(thin.made, true)
+    assert.match(thin.command, / --padding 0.5 --stroke-width 1.25 /)
+    const r = await client.callTool({ name: 'export_icon', arguments: { name: 'home', format: 'svg-flat', stroke_width: 1.25 } })
+    assert.ok(r.content.some(c => c.type === 'text' && /stroke-width="1.25"/.test(c.text)))
+    assert.ok((await client.callTool({ name: 'export_icon', arguments: { name: 'home', padding: 0.7 } })).isError)
+    const { tools } = await client.listTools()
+    assert.equal(tools.find(t => t.name === 'export_icon').inputSchema.properties.padding.maximum, 0.6)
   })
   test('export_icon: errors are tool errors with a code', async () => {
     const r = await client.callTool({ name: 'export_icon', arguments: { name: 'bell', format: 'webm' } })
@@ -259,8 +411,9 @@ describe('Lambda handler (Function URL payload v2)', () => {
     // remote: no out_dir (nothing to write to), raster / animated formats answer with the command
     assert.ok(!tools.find(t => t.name === 'export_icon').inputSchema.properties.out_dir)
     const call = await handler(rpc(3, 'tools/call', { name: 'search_icons', arguments: { query: 'throw away' } }))
-    const res = JSON.parse(JSON.parse(call.body).result.content[0].text)
+    const res = JSON.parse(call.body).result.structuredContent
     assert.equal(res.results[0].name, 'trash')
+    assert.match(JSON.parse(call.body).result.content[0].text, /^1\. trash /m)
   })
   test('remote export_icon: vector inline, GIF / PowerPoint as the npx command', async () => {
     const call = async (id, args) => JSON.parse((await handler(rpc(id, 'tools/call', { name: 'export_icon', arguments: args }))).body).result

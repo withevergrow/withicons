@@ -72,6 +72,10 @@
     "groups",
     "teams",
     "audiance",
-    "membership"
+    "membership",
+    "interview",
+    "conference",
+    "meeting",
+    "team meeting"
   ]
 }

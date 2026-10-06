@@ -3,6 +3,47 @@
 Search understands canonical names, aliases (`bin` finds `trash`), related words / synonyms (`throw away` finds `trash`),
 tags, categories and descriptions, and tolerates typos (`settigns` finds `settings`).
 
+## Search tips
+
+- **One concept per query.** Search `delivery` (truck, motorcycle, package) rather than a whole tagline: every extra
+  word is evidence too, and an adjective (`fast`, `easy`, `smart`) can pull in an icon that matches only it. Search each
+  idea of a feature list separately, and if a two-word query looks off, search the noun alone.
+- **Try words by meaning, then by object.** No hit for `revenue growth`? Try `revenue` (dollar-sign, trending-up,
+  hand-coins), then `growth`, then the object you would draw (`chart`, `coins`). `kpi` finds chart-bar, chart-line, gauge.
+- **Browse the category** when a domain word has no icon: `list_categories` (MCP), `npx withicons categories charts`,
+  or the headings in [icons.md](icons.md). The closest generic icon plus a text label beats a wrong specific one.
+- **Trust `confidence`.** Every result has `confidence` (`high`, `medium`, `low`; low ones also carry `weak: true` in
+  `@withicons/search`, and their `reason` ends "(related, low confidence)"). Use high and medium; treat low as
+  "related", not the thing itself, and say so. The response's top-level `confidence` is the best result's; when every
+  result is low, `hint` says so.
+- **Read `reason` / `match`.** `reason` ("matched alias \"fitness\"") and `match: { field, term, typo, kind }` (kind:
+  exact, prefix, stem, typo, concept, similar, phonetic) say why it matched. A loose related word is weaker than a
+  name or alias, and a match whose meaning is unrelated is noise even at high confidence: `bean` returns `paw-print`
+  ("toe beans"), not a coffee bean.
+- **Nothing honest, nothing returned.** Words with no fitting icon return no results (`grinder`, `mat`, `shirt`, `pram`;
+  CLI exit code 1) with a browse `hint` and often `didYouMean`. Do not force a pick from the suggestions.
+- **Query understanding.** Filler words such as "icon" or "logo" are dropped ("home icon" = `home`), "x or y" searches
+  both, and British and American spellings both work (`colour`, `favourites`).
+- **Category filter.** With `category` (MCP, HTTP, `--category`), strong matches in other categories come back as
+  `outside` (MCP and `--json`) instead of being hidden.
+- **Prefer the object you would draw.** People read the picture, not the tag: for a coffee bean, search `coffee`
+  (a cup reads as coffee) rather than taking whatever matched `bean`.
+- **Content gaps.** These subjects have no icon yet (stand-in in brackets; label it in visible text or `aria-label`,
+  never present it as the exact thing):
+  - health and family: yoga, yoga mat, meditation (`flower`), swimming (`droplet`), baby, pram / stroller, nappy, kids
+    (`school`, `backpack`), pregnancy (`heart-pulse`);
+  - food: tea (`coffee`), cocktail (`wine`), bread (`cake`), milk (`cup-soda`), meat (`utensils`), coffee bean or
+    grinder (`coffee`);
+  - fashion: shirt, dress (`shopping-bag`), shoe, glasses, lipstick;
+  - money: bitcoin / crypto (`coins`), ATM, cheque (`banknote`);
+  - places and nature: church / mosque / temple (`landmark`), elevator, stairs, traffic light (`traffic-cone`), van
+    (`truck`), waves / ocean, recycle (`refresh`), farm animals (`paw-print`);
+  - leisure and devices: wedding rings (`heart`, `gem`), halloween, guitar / piano (`music-note`), chess, CCTV
+    (`webcam`), copyright mark.
+  Dice exist only as a live icon (`dice` in `@withicons/dynamic`).
+- **Style words pick the style** (`cute heart` -> kawaii): leave them out when you only want the name.
+- There are no brand or company logos (Instagram, X, GitHub …); see [files.md](files.md#brand-and-social-logos).
+
 ## MCP server (`@withicons/mcp`)
 
 Remote (no install, Streamable HTTP, stateless): **`https://withicons.com/mcp`**
@@ -27,17 +68,22 @@ Tools (confirm with `tools/list`; arguments are documented in each tool's schema
 
 | tool | what it does |
 |---|---|
-| `search_icons` | `query`, optional `limit`, `style`, `category`, `format`. Returns ranked icons with why they matched and a ready-to-paste import/usage line |
-| `get_icon` | `name` (alias ok), `style`, `format` (`svg` default, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`), optional `size` (8-1024), `color` (replaces currentColor; svg / data-uri), `flat` (svg: bake the CSS-variable colours in, for `<img>`, Figma, slides), `palette` (a palette id from `list_palettes`), `colors` (roles `ink c1 c2 c3 c4 tint accent shadow shine edge` or `--with-*` names -> colour, merged over the palette). No stroke-width argument: set `strokeWidth` / `stroke-width` on the pasted component or element |
+| `search_icons` | `query`, optional `limit`, `style`, `category`, `format`. The text reply is a short summary (one line per icon, the top icon's snippet); `structuredContent` has every result with `confidence`, `reason`, `match`, `snippet` and `url` (low-confidence ones are noted as related), plus `outside` (strong matches outside a `category` filter), `didYouMean` (the query as corrected, when the top hit needed a spelling fix) and, with no results, `hint` (where to browse) |
+| `get_icon` | `colors.mainRole` names the role that paints the icon body (set it for a brand colour). Args: `name` (alias ok), `style`, `format` (`svg` default, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`), optional `size` (8-1024), `color` (replaces currentColor; svg / data-uri), `flat` (svg: bake the CSS-variable colours in, for `<img>`, Figma, slides), `palette` (a palette id from `list_palettes`), `colors` (roles `ink c1 c2 c3 c4 tint accent shadow shine edge` or `--with-*` names -> colour, merged over the palette), `include_palettes` (list the icon's palette ids). `warnings` lists colours that change nothing in that style and the roles it uses. No stroke-width argument: set `strokeWidth` / `stroke-width` on the pasted component or element (or use `export_icon`'s `stroke_width`) |
 | `list_palettes` | `name` (alias ok), optional `style` (also lists the exact `--with-*` variables each palette sets in that style), `tag` (pastel, neon, retro, true-to-life …), `limit`. The 20-30 palettes picked for that icon, each with its ten role colours; apply one with `get_icon(…, palette: "<id>")` |
-| `animate_icon` | `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
-| `export_icon` | `name`, `style`, `format` (one or a comma list: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, `gif`, `apng`, `animated-svg`, `pptx-animated`, code formats), optional `size`, `background`, `matte`, `palette`, `colors`, `color`, `motion` (`loop`, `hover`, `once`, `swap`, `none` or a preset), `to`, `effect`, `hold` (swap: seconds to rest on each icon), `duration` (seconds per motion cycle), `fps`, `seconds`, `loop` (0 = forever), `padding` (empty space around the icon, 0-0.4 of its size), `all_styles`; local server only: `out_dir` (folder to save into) and `inline` (also return the files inline; default only when there is no `out_dir`). Makes files: saved to `out_dir`, small ones also inline (GIF / PNG as image content). The remote server makes vector / code / Lottie files and answers PNG-based and animated formats with the `npx withicons export …` command |
-| `resolve_icon` | alias, PascalCase or typo, which returns the canonical name, or candidates if ambiguous |
-| `list_styles` | the 20 styles with descriptions (palette styles list their colour variables) |
+| `animate_icon` | returns the code plus `alternates` (the icon's other tuned presets) and `lively` (its most energetic presets, for title slides). Args: `name`, `trigger` (`loop`, `hover`, `once`, `inview`, `swap`), optional `preset`, `to` (swap target, `name` or `name@style`), `effect`, `style`, `format` (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), `duration`. Returns animation code for `@withicons/motion` |
+| `export_icon` | `name` or `names` (up to 50 icons, same options; or a map to file names, `{ receipt: "orders" }`), `style`, `format` (one or a comma list: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, `gif`, `apng`, `animated-svg`, `pptx-animated`, code formats), optional `size`, `background`, `matte`, `palette`, `colors`, `color`, `motion` (`loop`, `hover`, `once`, `swap`, `none` or a preset), `to`, `effect`, `hold` (swap: seconds to rest on each icon), `duration` (seconds per motion cycle), `fps`, `seconds`, `loop` (0 = forever), `padding` (empty space around the icon, 0-0.6 of its size; a minimum for animated formats), `stroke_width` (outline styles, at most 4), `filename` (template with `{name}` `{style}` `{format}` `{variant}` `{default}`, or an exact name for one file), `strict_palette` (fail when an icon lacks the palette instead of borrowing it), `all_styles`; local server only: `out_dir` (folder to save into) and `inline` (also return the files inline; default only when there is no `out_dir`). Makes files: saved to `out_dir`, small ones also inline (GIF / PNG as image content). The remote server makes vector / code / Lottie files and answers PNG-based and animated formats with the `npx withicons export …` command |
+| `resolve_icon` | `status`: `resolved` (canonical name, `via` name or alias), `ambiguous` (`candidates`), `synonym` (a word that means an icon but is not its name or alias: `favourites` -> star / heart, `orders` -> receipt; `name`, `candidates`, `note`: use the canonical name), or `unknown` (`nearest`, `didYouMean`, `hint`) |
+| `list_styles` | the 20 styles with descriptions, `minSize` (smallest px it reads well at: 16 UI, 32 creative and palette, 48 studio and storybook), `onDark` (how to use it on dark backgrounds); palette styles list their colour variables |
 | `list_categories` | categories, or the icons in one category |
 
 Typical agent loop: `search_icons("upload file")`, pick the top result that fits, then `get_icon(name, style, format: "react")`.
 Paste the import and keep the canonical name.
+
+`export_icon` with `out_dir` writes the same file names as the CLI: `<name>-<style>.svg` (svg-flat),
+`<name>-<style>-themable.svg` (svg), `<name>-<style>-<px>.png`, `<name>-<style>-<preset>.gif` (animated),
+`<name>-<style>-animated.pptx`; the full table is in [files.md](files.md#file-names). Exported SVGs contain a `<title>`:
+add `aria-hidden="true"` (or `alt=""` on an `<img>`) when the icon sits next to visible text.
 
 ## CLI
 

@@ -22,9 +22,63 @@ From a CDN, load the presets and only the icons you animate (each icon's file is
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">
 ```
 
-With `<with-icon motion="loop">` (`<script type="module" src=".../motion@latest/dist/element.js">` after `@withicons/web`'s
-`dist/cdn.js`) the element links each animated icon's file by itself. In an unbundled `<script type="module">`, import
-`@withicons/motion/runtime` (`dist/runtime.js`) for `motion()` / `swap()`, not `dist/index.js` (it pulls the full spec table).
+In an unbundled `<script type="module">`, import `@withicons/motion/runtime` (`dist/runtime.js`) for `motion()` /
+`swap()`, not `dist/index.js` (it pulls the full spec table).
+
+Sizes (gzipped): `motion.css` ~10 KB (120 KB raw), `icons.css` ~17 KB (148 KB raw), one `icons/<name>.css` ~0.2 KB,
+`element.js` ~6 KB, `runtime.js` ~6 KB.
+
+## Which way to animate
+
+| icon is | animate it with |
+|---|---|
+| inline `<svg>`, a framework component (React, Vue, Svelte, Solid, Angular), a live icon's svg | a `.wm` wrapper (classes below) whose **direct child** is the svg: the icon moves part by part (a bell's clapper swings a beat behind) |
+| `<i class="with …">` (CSS mask) | a `.wm` wrapper; it moves as one piece |
+| `<with-icon>` (web component) | the `motion` attribute + `dist/element.js`, **not** a `.wm` wrapper (below) |
+
+### `<with-icon>`: use the `motion` attribute
+
+The web component draws its svg inside a shadow root. A `.wm` wrapper around `<with-icon>` can only move the
+element's outer box: the parts never move and `draw` cannot reach the strokes. Load the motion element after the icons:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/web@latest/dist/cdn.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/element.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
+
+<with-icon name="loader" motion="loop"></with-icon>
+<button class="wm-trigger" aria-label="Notifications"><with-icon name="bell" motion="hover"></with-icon></button>
+<with-icon name="rocket" motion="inview" preset="rise"></with-icon>
+<with-icon name="play" swap-to="pause" swap-effect="morph" swap-trigger="click"></with-icon>
+```
+
+- `motion="loop|hover|once|inview"`, optional `preset="<preset>"`, `paused`, `offscreen="run"` (loops pause while
+  scrolled out of view by default). Served from a CDN, `element.js` links each animated icon's own
+  `icons/<name>.css` by itself; with a bundler, `import '@withicons/motion/element'` and `import '@withicons/motion/icons.css'`.
+- Swaps: `swap-to="pause"` (or `pause@solid`), `swap-effect`, `swap-trigger="hover|click|focus|auto|manual"`,
+  `swap-duration`, `swap-hold`, `swap-color`. Inside a button with `aria-pressed` / `aria-expanded` the icon follows that state.
+- `motion.css` alone already runs `motion="loop"` and `"once"` on the whole element; `element.js` adds part motion,
+  hover that finishes its one-shot, `inview`, `draw` and swaps.
+
+### Check that it moves
+
+Animations inside a shadow root are not listed on the element itself:
+
+```js
+document.querySelector('with-icon[motion]').shadowRoot.getAnimations().map(a => a.animationName)  // ['wm-ring-loop', …]
+document.querySelector('.wm').getAnimations({ subtree: true }).length                              // wrapper + inline svg
+```
+
+With `element.js` the parts move inside the shadow root, each with its tuned lag, and the element's own box stays
+still, so `el.getAnimations()` on a `<with-icon>` returns `[]` even while it moves (with `motion.css` alone, no
+`element.js`, the whole element moves instead and its own list is not empty). Under `prefers-reduced-motion: reduce`
+(often on in CI, remote desktops and screenshot tools) every list is empty by design.
+
+### Touch screens
+
+There is no hover on phones and tablets. The JS paths (`motion()` with `trigger: 'hover'`, `<with-icon motion="hover">`)
+play the one-shot on tap; the CSS-only `wm-hover` depends on the browser's emulated `:hover` and is unreliable. For
+mobile layouts prefer `wm-inview` / `motion="inview"` (plays as it scrolls into view), `wm-once`, or a calm `wm-loop`.
 
 ## Classes
 
@@ -38,7 +92,7 @@ With `<with-icon motion="loop">` (`<script type="module" src=".../motion@latest/
 | `wm-inview` | plays when scrolled into view (needs the JS runtime) |
 | `wm-paused` | pause |
 | `wm-p-<preset>` | choose the preset explicitly (overrides the icon default) |
-| `--wm-dur`, `--wm-k` | CSS variables: seconds per cycle, intensity (0.25-2) |
+| `--wm-dur`, `--wm-k` | CSS variables: seconds per cycle, intensity (0.25-2); in React with TypeScript, cast: `style={{ '--wm-dur': '3s' } as React.CSSProperties}` |
 | `wm-swap wm-fx-<effect>` + children `wm-a` / `wm-b` | icon A turns into icon B on `.wm-trigger:hover`, focus, `.is-on` or `aria-pressed="true"` |
 | `wm-force` | keep animating under `prefers-reduced-motion` (avoid) |
 
@@ -65,13 +119,21 @@ or `GET https://withicons.com/api/motion/<name>?trigger=hover&format=react`.
 
 As files (slides, documents, email, social): `npx withicons export <name> --format gif|apng|animated-svg|pptx-animated|lottie`
 with `--motion loop|hover|once|swap|<preset>` (MCP: `export_icon`). Frames come from these same keyframes, so a GIF moves
-exactly like the icon on the page. GIF: pass the slide colour as `--background`. See SKILL.md section 7a.
+exactly like the icon on the page. GIF: pass the slide colour as `--background`. For a title slide that needs a more
+noticeable move than the calm tuned loop, run `npx withicons motions <icon>` (same as `animate <icon> --list`): the default
+loop and hover, the icon's alternates with commands, and the livelier picks (tada, jelly, bounce, beat, wiggle, pop);
+MCP `animate_icon` returns them as `alternates` and `lively`. `npx withicons animate --list` lists every preset.
+Exported files carry no motion part classes; code formats keep them. See SKILL.md section 7a and
+[files.md](files.md) (sizes, limits, padding, dark backgrounds, email).
 
 ## Guidelines
 
 - Motion should explain state or invite action: loading (spin/tick), new notification (ring), like (beat/pop),
   play/pause or menu/close (swap). Keep continuous loops to one or two icons per screen.
 - Hover effects belong on interactive elements; put `.wm-trigger` on the button so the whole target plays the icon.
+  Touch screens have no hover: see "Touch screens" above.
+- To replay a one-shot (`wm-once`) from code: remove the class, read `el.offsetWidth`, add it again. In React, do this
+  on a ref; changing the `key` remounts the icon (and resets a live icon's value instead of animating it).
 - `prefers-reduced-motion: reduce` disables every animation unless `wm-force` is set. Don't set it.
 - The accessible name stays on the control; an animated icon is still decorative.
 
@@ -207,7 +269,7 @@ exactly like the icon on the page. GIF: pass the slide colour as `--background`.
 | `cloud-upload` | float | nudge | `check`, `loader`, `cloud-download` | the cloud drifts while the arrow keeps lifting data up |
 | `cloud` | float | jelly | `cloud-sun`, `cloud-rain`, `cloud@solid` | drifts calmly across the sky, squishes softly when touched |
 | `code` | type | jelly | `braces`, `terminal`, `file-code` | brackets tick like typing while the slash blinks like a cursor |
-| `coffee` | breathe | tilt |  | swells softly like a fresh hot cup, then tips up for a sip |
+| `coffee` | pulse | tilt |  | a warm cup swelling gently from its base as steam rises, then tips up for a sip |
 | `coins` | pulse | nod | `banknote`, `wallet`, `dollar-sign` | the top coin hops on the stack, like coins being counted |
 | `columns` | pulse | jelly | `sidebar`, `layout-grid`, `kanban` | the divider slides like a pane being resized |
 | `compass` | pulse | pop | `navigation`, `map` | the needle swings and settles on north inside a steady case |

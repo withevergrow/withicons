@@ -297,6 +297,8 @@
     q: params.get('q') || '',
     style: STYLE[params.get('style')] ? params.get('style') : (STYLE[store.get('style', 'line')] ? store.get('style', 'line') : 'line'),
     cat: CAT_RANK[params.get('cat')] != null ? params.get('cat') : '',
+    // search results: 'best' (relevance, the engine's order) or 'az'
+    sort: params.get('sort') === 'az' ? 'az' : 'best',
     view: params.get('view') === 'compare' || params.get('style') === 'all' ? 'compare' : 'grid',
     color: oldColor === 'white' ? '#FFFFFF' : (oldColor === 'ink' || oldColor === 'style' || /^#[0-9a-f]{6}$/i.test(oldColor) ? oldColor : 'ink'),
     px: [16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024].indexOf(store.get('px', 256)) >= 0 ? store.get('px', 256) : 256,
@@ -333,6 +335,7 @@
     if (S.q && !forShare) p.set('q', S.q)
     if (S.style !== 'line' && !forShare) p.set('style', S.style)
     if (S.cat && !forShare) p.set('cat', S.cat)
+    if (S.sort === 'az' && S.q && !forShare) p.set('sort', 'az')
     if (S.view === 'compare' && !forShare) p.set('view', 'compare')
     if (V.open && V.name) { p.set('icon', V.name); if (V.st !== (forShare ? 'line' : S.style)) p.set(forShare ? 'style' : 'vs', V.st) }
     var qs = p.toString()
@@ -590,7 +593,12 @@
     }
     var counts = {}; res.forEach(function (r) { var c = BY[r.name].category; counts[c] = (counts[c] || 0) + 1 })
     S.counts = counts; S.total = res.length
+    // the engine ranks every icon on its own evidence, so the category's slice of the global ranking is the
+    // ranking within the category (no empty page because the global top results sit elsewhere)
     S.results = S.cat ? res.filter(function (r) { return BY[r.name].category === S.cat }) : res
+    // low-confidence matches ("related") are counted apart from the best ones
+    S.related = 0; S.results.forEach(function (r) { if (r.confidence === 'low') S.related++ })
+    if (q && S.sort === 'az') S.results = S.results.slice().sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0 })
     lastSearchMs = performance.now() - t0
   }
   var ITEMS = [], KEYS = new Map()
@@ -866,6 +874,12 @@
     var head
     if (!q) head = '<b>' + fmt(n) + '</b> icon' + (n === 1 ? '' : 's') + catTxt + (S.view === 'compare' ? ' <span class="meta-sep">·</span> <b>' + fmt(n * SNAMES.length) + '</b> in all ' + SNAMES.length + ' styles' : ' <span class="meta-sep">·</span> <span class="meta-sc">' + esc(STYLE[S.style].title) + '</span> style' + (sayOf(S.style) ? '<span class="meta-say"> · ' + esc(sayOf(S.style)) + '</span>' : ''))
     else head = '<b>' + fmt(n) + '</b> icon' + (n === 1 ? '' : 's') + ' for <q>' + esc(S.fix && S.fix.used ? S.fix.to : q) + '</q>' + catTxt + (S.cat && S.total > n ? ' <button type="button" class="meta-link" data-clear-cat>+' + (S.total - n) + ' in other categories</button>' : '')
+    if (q && n > 1) {
+      var best = n - (S.related || 0)
+      if (S.related && best > 0) head += ' <span class="meta-sep">·</span> <span>' + fmt(best) + ' best, ' + fmt(S.related) + ' related</span>'
+      var opt = function (k, label) { return S.sort === k ? '<b aria-current="true">' + label + '</b>' : '<button type="button" class="meta-link" data-sort="' + k + '">' + label + '</button>' }
+      head += ' <span class="meta-sep">·</span> <span class="meta-sort" role="group" aria-label="Sort results">Sort: ' + opt('best', 'Best match') + ' / ' + opt('az', 'A–Z') + '</span>'
+    }
     var fix = ''
     if (q && S.fix && n) {
       var how = S.fix.how === 'sounds' ? 'sounds like' : S.fix.how === 'similar' ? 'is close to' : 'looks like'
@@ -2474,6 +2488,8 @@
     var pc = e.target.closest('[data-pick-cat]')
     if (pc) { setQuery('', { noAnim: true }); setCat(pc.getAttribute('data-pick-cat'), true); return }
     if (e.target.closest('[data-clear-cat]')) setCat('')
+    var so = e.target.closest('[data-sort]')
+    if (so && meta.contains(so)) { S.sort = so.getAttribute('data-sort') === 'az' ? 'az' : 'best'; S.fi = 0; update({ anim: true }) }
   })
   catNav.addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) setCat(b.getAttribute('data-cat')) })
   function setCat(c, force) {

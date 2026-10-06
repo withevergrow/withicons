@@ -52,6 +52,8 @@
     "trusted",
     "identity verified",
     "validated user",
-    "rsvp yes"
+    "rsvp yes",
+    "attendance",
+    "present"
   ]
 }

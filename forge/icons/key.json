@@ -65,6 +65,10 @@
     "keychain",
     "rental",
     "realtor",
-    "access"
+    "access",
+    "2fa",
+    "mfa",
+    "change password",
+    "reset password"
   ]
 }

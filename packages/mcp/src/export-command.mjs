@@ -14,10 +14,12 @@ export function exportCommand(a) {
   const parts = ['npx', 'withicons', 'export', ...[].concat(a.name || []).map(q)]
   const add = (flag, v) => { if (v !== undefined && v !== null && v !== '' && v !== false) parts.push(flag, ...(v === true ? [] : [q(v)])) }
   add('--style', a.style); add('--format', a.format); add('--size', a.size); add('--background', a.background); add('--matte', a.matte)
-  add('--palette', a.palette); add('--color', a.color)
+  add('--palette', a.palette); if (a.palette && a.strict_palette) parts.push('--strict'); add('--color', a.color)
   for (const [k, v] of Object.entries(a.colors || {})) add(k.startsWith('--') ? '--colors' : '--' + k, k.startsWith('--') ? `${k.slice(2)}=${v}` : v)
   add('--motion', a.motion); add('--to', a.to); add('--effect', a.effect); add('--hold', a.hold); add('--fps', a.fps); add('--seconds', a.seconds); add('--loop', a.loop)
-  add('--duration', a.duration); add('--padding', a.padding); if (a.all_styles) parts.push('--all-styles')
+  add('--duration', a.duration); add('--padding', a.padding); add('--stroke-width', a.stroke_width); if (a.all_styles) parts.push('--all-styles')
+  add('--name', a.filename)
+  if (a.name_map && typeof a.name_map === 'object') add('--name-map', Object.entries(a.name_map).map(([k, v]) => `${k}=${v}`).join(','))
   add('--out', a.out_dir || '.')
   return parts.join(' ')
 }

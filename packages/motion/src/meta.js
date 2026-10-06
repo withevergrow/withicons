@@ -162,8 +162,9 @@ export function decoOf(preset, deco) { return DECO_KINDS.includes(deco) ? deco :
 // A deco loop lasts a whole number of the object's cycles (~2.8 s), so exports of n cycles loop seamlessly.
 export const DECO_CYCLE = 2.8
 export function decoTimes(cycle) { return Math.max(1, Math.round(DECO_CYCLE / (Number(cycle) || DECO_CYCLE))) }
-// Ground-shadow presets (keyframes wm-shadow-<preset>[-loop] in motion.css); kept in step with keyframes.js SHADOW_STOPS.
-export const GROUND_PRESETS = ['bounce', 'float', 'rise', 'drop', 'jelly']
+// Lifting presets whose cast shadow has keyframes of its own (wm-shadow-<preset>[-loop] in motion.css: travels with the
+// object, lagging and fading as it rises); kept in step with keyframes.js SHADOW_STOPS. Other presets move the shadow as the object.
+export const GROUND_PRESETS = ['bounce', 'float', 'rise']
 const PART_KEYS = ['A', 'S']
 // The parts variables of one slot ('L' loop / 'H' one-shot) of a spec: decoration loop, ground shadow and plate overrides.
 //   --wm<S>-dc (deco keyframes, when not breathe) --wmL-dd (deco loop length) --wm<S>-sh (ground shadow keyframes)

@@ -1,14 +1,14 @@
 {
   "name": "coffee",
-  "intent": "swells softly like a fresh hot cup, then tips up for a sip",
+  "intent": "a warm cup swelling gently from its base as steam rises, then tips up for a sip",
   "loop": {
-    "preset": "breathe",
+    "preset": "pulse",
     "origin": [
       9.75,
       21
     ],
-    "amount": 0.3,
-    "duration": 3.4
+    "amount": 0.45,
+    "duration": 3.2
   },
   "hover": {
     "preset": "tilt",
@@ -23,6 +23,14 @@
   "alt": [
     {
       "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        9.75,
+        21
+      ],
       "amount": 0.4
     },
     {

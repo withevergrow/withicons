@@ -62,17 +62,42 @@ const DTS = `// readonly arrays, so the raw JSON index (import index from '@with
 export interface SearchIndex { format: string; version: string; styles: ReadonlyArray<ReadonlyArray<string>>; categories: ReadonlyArray<string>; icons: ReadonlyArray<unknown> }
 export type MatchField = 'name' | 'alias' | 'synonym' | 'tag' | 'category' | 'description'
 export type MatchKind = 'exact' | 'prefix' | 'stem' | 'typo' | 'similar' | 'phonetic' | 'concept'
-export interface SearchResult { name: string; title: string; category: string; score: number; match: { field: MatchField; term: string; typo: boolean; kind: MatchKind } }
-export interface SearchOptions { limit?: number; category?: string; style?: string }
+/** high: what the query names; medium: a sound but looser match (spelling fix, related concept, partial match missing a modifier);
+ *  low: a guess, show it as "related" (also flagged weak: true) */
+export type Confidence = 'high' | 'medium' | 'low'
+export interface SearchResult { name: string; title: string; category: string; score: number; match: { field: MatchField; term: string; typo: boolean; kind: MatchKind }
+  confidence?: Confidence; weak?: true }
+/** filters rank within the filtered set with the same model; tags: an icon must carry one of them */
+export interface SearchOptions { limit?: number; category?: string; style?: string; tags?: string | string[] }
+export interface QueryOptions extends SearchOptions { outside?: boolean; outsideLimit?: number }
+export interface QueryResponse {
+  query: string; results: SearchResult[]; total: number
+  /** results with high confidence */
+  best: number
+  /** confidence of the top result, null when there is none */
+  confidence: Confidence | null
+  parsed: { words: string[]; style: string | null; category: string | null; any: string[] | null }
+  /** the strongest matches the filters hid (only when the filtered set is weak) */
+  outside?: SearchResult[]
+  didYouMean?: string
+  /** nothing matched: browse instead */
+  browse?: { categories: string[]; category: string | null }
+}
 export type Resolution = { name: string; alias?: string } | { ambiguous: string[] } | { unknown: true; nearest: string[] }
 /** A query word and its position in ParsedQuery.all */
 export interface QueryToken { w: string; pos: number }
 /** all: every word after normalisation; words: the meaningful ones; required: must all match; soft: only add score;
  *  style: a style named in the query ('cute heart' -> 'kawaii'); split: a run-together word was split */
-export interface ParsedQuery { all: string[]; words: string[]; required: QueryToken[]; soft: QueryToken[]; style: string | null; split: boolean }
+export interface ParsedQuery { all: string[]; words: string[]; required: QueryToken[]; soft: QueryToken[]; style: string | null; split: boolean
+  /** a category the query names ('weather icons' -> 'weather') */
+  category?: string | null
+  /** 'cats and dogs' -> ['cats', 'dogs']: each side is also searched on its own */
+  segments?: string[] | null }
 export interface Engine {
   version: string; dataVersion: string; size: number
   search(query: string, options?: SearchOptions): SearchResult[]
+  /** the rich form: results with confidence, outside-the-filter suggestions, didYouMean, browse hint */
+  query(query: string, options?: QueryOptions): QueryResponse
   suggest(query: string, n?: number): string[]
   didYouMean(query: string): string | null
   warm(): boolean
@@ -91,6 +116,8 @@ export declare function fold(text: string): string
 export declare function distance(a: string, b: string, max?: number): number
 export declare function weightedDistance(a: string, b: string, max?: number): number
 export declare function phonetic(word: string): string
+/** other spellings of a word (British/American): 'colour' -> ['color'] */
+export declare function variants(word: string): string[]
 export declare function titleOf(name: string): string
 `
 

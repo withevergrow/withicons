@@ -11,7 +11,8 @@
     "quid",
     "pounds",
     "pound-symbol",
-    "uk-pound"
+    "uk-pound",
+    "pound"
   ],
   "tags": [
     "currency",
@@ -35,7 +36,6 @@
   "cutouts": [],
   "synonyms": [
     "£",
-    "pound",
     "money",
     "price",
     "pricing",

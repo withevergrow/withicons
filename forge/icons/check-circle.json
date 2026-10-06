@@ -59,6 +59,8 @@
     "green tick",
     "tick in circle",
     "active",
-    "online"
+    "online",
+    "mark as done",
+    "mark complete"
   ]
 }

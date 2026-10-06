@@ -23,8 +23,8 @@ npx withicons export home settings --format svg,pdf,png --out icons   # files, f
 | `search <words...>` | ranked icons, typo-tolerant (`settigns`), synonyms (`bin`), phrases (`recycle bin`), natural language (`money`) |
 | `get <name...>` | code for one or more icons; names or aliases (`delete` -> trash) |
 | `add <name...>` | import line + usage for `--framework` react (default), vue, svelte, angular, solid, web-component, html-class, svg |
-| `palettes <name>` | the colour palettes picked for that icon (swatches in the terminal); `--style` shows the CSS variables each one sets, `--tag pastel` filters |
-| `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate --list` shows presets and effects |
+| `palettes <name>` | the colour palettes picked for that icon (swatches in the terminal); `--style` shows the CSS variables each one sets and marks the main role (the colour of the icon's body: set it for a brand colour), `--tag pastel` filters |
+| `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate <name> --list` (or `motions <name>`) shows that icon's loop and hover motions, its alternates and swaps; `animate --list` shows every preset and effect |
 | `export <name...>` | save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React/Vue/Svelte/Angular components, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint ([below](#export-files)) |
 | `resolve <name>` | does a name/alias map to one icon? |
 | `styles` · `categories [category]` | the catalogue; `styles` also lists every colour variable of the multi-colour styles |

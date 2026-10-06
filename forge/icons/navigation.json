@@ -48,6 +48,9 @@
     "go",
     "wayfinding",
     "navigator",
-    "navagation"
+    "navagation",
+    "tracking",
+    "live tracking",
+    "gps tracking"
   ]
 }

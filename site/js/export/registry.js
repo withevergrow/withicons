@@ -149,10 +149,19 @@
     a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove()
     setTimeout(function () { URL.revokeObjectURL(url) }, 4000)
   }
+  // The icon data tags parts for @withicons/motion (class="wm-a", wm-k, wm-s, wm-deco, wm-shadow, wm-shine). They only
+  // mean something next to the page's motion CSS, so files (svg, svg-flat, the SVG inside PDF, PowerPoint, Word, data
+  // URIs) leave them out; inline code (components, HTML, animated SVG) keeps them.
+  function stripMotion(s) {
+    return String(s).replace(/\sclass="([^"]*)"/g, function (all, v) {
+      var keep = v.split(/\s+/).filter(function (t) { return t && !/^wm(?:-|$)/.test(t) })
+      return keep.length ? ' class="' + keep.join(' ') + '"' : ''
+    })
+  }
   function filename(ctx, suffix, ext) {
     return [ctx.name, ctx.style].concat(suffix ? [suffix] : []).join('-') + '.' + ext
   }
 
   return { register: register, list: list, get: get, formats: formats, bakeVars: bakeVars, defaultVars: defaultVars, mapVars: mapVars, svgString: svgString, rasterize: rasterize,
-    canvasBlob: canvasBlob, utf8: utf8, crc32: crc32, zip: zip, download: download, filename: filename }
+    canvasBlob: canvasBlob, utf8: utf8, crc32: crc32, zip: zip, download: download, filename: filename, stripMotion: stripMotion }
 })

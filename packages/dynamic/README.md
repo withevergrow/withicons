@@ -149,14 +149,14 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 | file | what | size | gzip |
 |---|---|---|---|
 | `index.js` | full runtime, all 20 styles, sync render() | 1497 KB | 517 KB |
-| `lite.js` | core + line; other styles load on first use | 157 KB | 57.6 KB |
+| `lite.js` | core + line; other styles load on first use | 157 KB | 57.7 KB |
 | `element.js` | `<with-live-icon>` on lite | 165 KB | 60.6 KB |
-| `react.js` | `<LiveIcon>` on lite (react not included) | 159 KB | 58.6 KB |
-| `vue.js` | `<LiveIcon>` on lite (vue not included) | 159 KB | 58.4 KB |
+| `react.js` | `<LiveIcon>` on lite (react not included) | 159 KB | 58.7 KB |
+| `vue.js` | `<LiveIcon>` on lite (vue not included) | 159 KB | 58.5 KB |
 | `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (216 KB / 70.4 KB gzip) | 1.3 KB | 0.9 KB |
-| `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 112 KB | 39.3 KB |
+| `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 113 KB | 39.3 KB |
 | `cdn/gens/<name>.js` | one live icon's drawing code (typical `price-tag`; largest `cart-count` 9.9 KB / 4.5 KB gzip) | 3.9 KB | 2.0 KB |
-| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 167 KB | 60.7 KB |
+| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 167 KB | 60.8 KB |
 
 ## Performance
 
@@ -178,6 +178,19 @@ ES module builds, the CDN script itself for the classic build). The result is by
 If a worker cannot start (a `file://` page, a CSP without `worker-src blob:`, or Node), renders run on the main thread
 one per task, so the page still paints and takes input between icons. Synchronous `render()` always runs where you
 call it: for many rich icons, prefer the element, `renderAsync()` or `warm()`, or render on the server.
+
+The worker starts on the first render of a rich style, never at load: a page that only shows cheap styles (`line`,
+`duo`, `blueprint`...) never downloads it. Inside the worker each style is a separate chunk loaded on demand.
+
+**Vite**: bundle workers as ES modules, so those style chunks stay separate files (with Vite's default `iife` worker
+format every style is inlined into one large worker file, and the build is much slower):
+
+```js
+// vite.config.js
+export default { worker: { format: 'es' } }
+```
+
+webpack 5 keeps the worker's chunks split by default.
 
 ## React
 

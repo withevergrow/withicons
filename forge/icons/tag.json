@@ -70,6 +70,8 @@
     "retail",
     "sku",
     "clearance",
-    "markdown"
+    "markdown",
+    "coupon code",
+    "promo code"
   ]
 }
