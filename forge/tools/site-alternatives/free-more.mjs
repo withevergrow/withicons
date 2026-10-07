@@ -2,7 +2,7 @@
 // "3D icons", bauhaus, skeuo), the storybook styles (anime, gothic, pastel, coquette, plush "for kids") and for animated icons.
 // A style lander only exists once its renderer does (hasStyle); curated icon lists keep only icons that exist,
 // so names from the 200-icon expansion appear automatically as they land.
-import { I, esc, cvar, code, STYLES } from './render.mjs'
+import { I, esc, cvar, code, STYLES, iconLink } from './render.mjs'
 import { hasStyle, MOTION, PRESETS, EFFECTS, ICON_NAMES, styleTitle, stylesIn, listTitles, N_STYLES, word } from '../site-pages/lib.mjs'
 import { wm, demoFor } from '../site-pages/motion.mjs'
 
@@ -26,7 +26,7 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
   const out = []
   const PLAY = stylesIn('playful')
   const sib = s => `${styleTitle(s)} is one of ${word(PLAY.length)} playful styles (${PLAY.filter(x => x !== s).map(x => `<a href="../styles/${x}.html">${styleTitle(x)}</a>`).join(', ')}): its own default colours, with the outline following whatever colour you choose. <a href="../styles/${s}.html">See every ${styleTitle(s)} icon</a>.`
-  const demo = (names, style, cls = 'ax-play-demo') => `<div class="${cls}" aria-hidden="true">${pick(names, 6).map((n, i) => `<span style="--i:${i}">${I(n, style, 56)}</span>`).join('')}</div>`
+  const demo = (names, style, cls = 'ax-play-demo') => `<div class="${cls}">${pick(names, 6).map((n, i) => iconLink('../', n, style, I(n, style, 56), ` style="--i:${i}"`)).join('')}</div>`
 
   /* ───── animated icons ───── */
   if (Object.keys(MOTION).length) {
@@ -44,7 +44,7 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
   <div><p class="ax-kicker">See them move</p><h2 id="an-show">Motion that says what the icon means</h2>
   <p>Animations here aren’t decoration: each icon moves the way the thing it shows would move. Bells ring from their hook, arrows nudge the way they point, hearts beat. They are plain CSS inside the SVG: no Lottie player, no JavaScript, tiny files. And they stop for anyone who has asked their device for less motion.</p>
   ${facts([...BASE_FACTS(p), ['Motions', `${PRESETS.length} presets (spin, ring, beat, float, twinkle…) plus ${EFFECTS.length} swap transitions that turn one icon into another, like play into pause`], ['Formats', 'GIF for slides and animated SVG (no code), CSS classes, React, Vue, Svelte, Angular and a <code>&lt;with-icon motion&gt;</code> element'], ['Accessibility', 'Respects <code>prefers-reduced-motion</code>, in downloads and in code']])}</div>
-  <div class="ax-motion-wall" aria-hidden="true" data-motion-area>${showcase.map((x, i) => `<span class="s-${tryStyles[i]}" style="--g:${cvar(tryStyles[i])};--i:${i}">${wm(x.name, tryStyles[i], 48, x.m)}<small>${x.k}</small></span>`).join('')}</div>
+  <div class="ax-motion-wall" data-motion-area>${showcase.map((x, i) => iconLink(p, x.name, tryStyles[i], `${wm(x.name, tryStyles[i], 48, x.m)}<small>${x.k}</small>`, ` class="s-${tryStyles[i]}" style="--g:${cvar(tryStyles[i])};--i:${i}"`)).join('')}</div>
 </section>
 <section aria-labelledby="an-use"><div class="ax-sec-head"><p class="ax-kicker">Use them</p><h2 id="an-use">Three ways to add an animated icon</h2></div>
   ${steps([
@@ -147,7 +147,7 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
   <div><p class="ax-kicker">Where they shine</p><h2 id="gl-where">Best on colour</h2>
   <p>Glass icons glow on gradients, photos and dark UIs: app landing pages, fintech and weather dashboards, iOS-style feature grids, pitch-deck hero slides. On a plain white page, try a soft tinted card behind them.</p>
   ${facts([...BASE_FACTS(p), ['How it’s made', 'Layered shapes with partial opacity. No filters, masks or gradients, so it renders the same in every browser, Figma and PowerPoint'], ['Style family', sib('glass')]])}</div>
-  <div class="ax-glass-demo" aria-hidden="true">${pick(SETS.dash, 6).map((n, i) => `<span style="--i:${i}">${I(n, 'glass', 56)}</span>`).join('')}</div>
+  <div class="ax-glass-demo">${pick(SETS.dash, 6).map((n, i) => iconLink(p, n, 'glass', I(n, 'glass', 56), ` style="--i:${i}"`)).join('')}</div>
 </section>`,
     faq: p => [
       ['Are these real glassmorphism icons or just transparent?', 'They are drawn as several stacked, partly see-through panes with highlights, the layered look glassmorphism is known for, built from plain vector shapes.'],

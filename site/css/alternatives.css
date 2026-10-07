@@ -81,27 +81,46 @@
 .ax-pick-status { margin: 14px 2px 10px; font-size: var(--step--1); color: var(--muted); min-height: 1.5em; }
 .ax-pick-status b { color: var(--ink); }
 .ax-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
-.ax-grid > li { position: relative; }
 .ax-grid-h { grid-column: 1 / -1; font: 700 12px/1 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 14px 2px 4px; }
 .ax-grid-h:first-child { padding-top: 2px; }
-.ax-tile { width: 100%; display: grid; justify-items: center; gap: 8px; padding: 18px 6px 12px; border-radius: 16px; border: 1px solid transparent; background: var(--paper); color: var(--ax-ink, var(--ink)); cursor: pointer; transition: background .2s, border-color .2s, transform .2s var(--e-out), opacity .35s var(--e-out); transition-delay: 0s, 0s, 0s, calc(var(--i, 0) * 18ms); }
-.ax-tile:hover { background: var(--card); border-color: color-mix(in srgb, var(--g) 50%, var(--rule)); transform: translateY(-2px); box-shadow: var(--shadow-s); }
-.ax-tile:focus-visible { outline: 2.5px solid var(--g); outline-offset: 2px; }
-.ax-tile.is-new { opacity: 0; transform: translateY(8px); }
+/* a cell is the card: the button (the click action) on top, the name (a link to the icon's page) under it, and the
+   corner chip (the icon's page with the studio open). The card lifts as one whatever part the pointer is on. */
+.ax-cell { position: relative; display: flex; flex-direction: column; border-radius: 16px; border: 1px solid transparent; background: var(--paper); color: var(--ax-ink, var(--ink)); transition: background .2s, border-color .2s, transform .2s var(--e-out), box-shadow .2s, opacity .35s var(--e-out); transition-delay: 0s, 0s, 0s, 0s, calc(var(--i, 0) * 18ms); }
+.ax-cell:hover { background: var(--card); border-color: color-mix(in srgb, var(--g) 50%, var(--rule)); transform: translateY(-2px); box-shadow: var(--shadow-s); }
+.ax-cell.is-new { opacity: 0; transform: translateY(8px); }
+.ax-tile { width: 100%; display: grid; justify-items: center; padding: 18px 6px 6px; border: 0; border-radius: 15px 15px 8px 8px; background: none; color: inherit; cursor: pointer; }
+.ax-tile:focus-visible { outline: 2.5px solid var(--g); outline-offset: -2px; }
 .ax-tile.is-hit .ax-tile-ic { animation: ax-hit .45s var(--e-spring); }
 @keyframes ax-hit { 40% { transform: scale(.82); } }
 .ax-tile-ic { display: grid; place-items: center; width: 40px; height: 40px; }
 .ax-tile-ic svg { width: 32px; height: 32px; }
-.ax-tile-n { font: 500 12px/1.25 var(--font-mono); color: var(--muted); max-width: 100%; text-align: center; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
-.ax-tile-go { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: var(--muted); opacity: 0; transition: opacity .2s, background .2s; }
-.ax-grid li:hover .ax-tile-go, .ax-tile-go:focus-visible { opacity: 1; }
-.ax-tile-go:hover { background: var(--paper-2); color: var(--ink); }
-@media (hover: none) { .ax-tile-go { opacity: .45; } }
-.ax-pick.is-white .ax-tile { background: #1A1D25; }
-.ax-pick.is-white .ax-tile:hover { background: #232733; }
-.ax-pick.is-white .ax-tile-n { color: #9BA1AE; }
-:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile { background: #ECE8E1; }
-:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-n { color: #5F6573; }
+.ax-tile-n { align-self: center; max-width: calc(100% - 8px); margin: 0 4px 10px; padding: 2px 4px; border-radius: 6px; font: 500 12px/1.25 var(--font-mono); color: var(--muted); text-align: center; text-decoration: none; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; transition: color .2s; }
+.ax-tile-n:hover { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--g) 70%, var(--ink)); }
+.ax-tile-n:focus-visible { outline: 2.5px solid var(--g); outline-offset: 0; color: var(--ink); }
+.ax-tile-cz { position: absolute; top: 5px; right: 5px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: var(--muted); opacity: 0; transition: opacity .2s, background .2s, color .2s, transform .25s var(--e-spring); }
+.ax-tile-cz svg { width: 15px; height: 15px; }
+.ax-cell:hover .ax-tile-cz, .ax-cell:focus-within .ax-tile-cz { opacity: 1; }
+.ax-tile-cz:hover { background: color-mix(in srgb, var(--g) 16%, var(--paper-2)); color: var(--ink); transform: rotate(-8deg) scale(1.08); }
+.ax-tile-cz:focus-visible { opacity: 1; outline: 2.5px solid var(--g); outline-offset: 0; }
+/* touch screens cannot hover: the chip is always there, quietly */
+@media (hover: none) { .ax-tile-cz { opacity: .6; } }
+.ax-cz-glyph { display: inline-grid; place-items: center; width: 22px; height: 22px; margin: 0 1px; border-radius: 50%; background: var(--paper-2); color: var(--ink-2); vertical-align: -6px; }
+.ax-cz-glyph svg { width: 13px; height: 13px; }
+.ax-pick.is-white .ax-cell { background: #1A1D25; }
+.ax-pick.is-white .ax-cell:hover { background: #232733; }
+.ax-pick.is-white .ax-tile-n, .ax-pick.is-white .ax-tile-cz { color: #9BA1AE; }
+.ax-pick.is-white .ax-tile-n:hover, .ax-pick.is-white .ax-tile-cz:hover { color: #FFFFFF; }
+.ax-pick.is-white .ax-tile-cz:hover { background: #2E3240; }
+:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-cell { background: #ECE8E1; }
+:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-n, :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz { color: #5F6573; }
+:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-n:hover, :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz:hover { color: #111318; }
+:root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz:hover { background: #DAD5CC; }
+/* under the grid: the whole library and the studio, for anyone who wants more than a quick copy */
+.ax-pick-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 18px; padding: 18px 20px; border-radius: var(--radius-l); background: var(--paper); border: 1px dashed var(--rule-strong); }
+.ax-pick-more p { flex: 1 1 320px; margin: 0; font-size: var(--step--1); color: var(--ink-2); max-width: 62ch; }
+.ax-pick-more p b { color: var(--ink); }
+.ax-pick-more-go { display: flex; flex-wrap: wrap; gap: 10px; }
+.ax-pick-more .btn { min-height: 44px; }
 /* light by default: dark applies only via [data-theme="dark"] (the toggle) */
 
 .ax-pick-empty { margin: 16px 2px 4px; color: var(--muted); }
@@ -126,9 +145,14 @@
 .ax-how-guide .btn { max-width: 100%; white-space: normal; text-align: left; height: auto; min-height: 40px; padding-block: 8px; line-height: 1.25; }
 .ax-png-demo, .ax-sketch-demo { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .ax-sketch-demo { grid-template-columns: repeat(3, 1fr); }
-.ax-png-demo span, .ax-sketch-demo span { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-l); border: 1px solid var(--rule); }
-.ax-png-demo span { background: var(--bg); background-image: repeating-conic-gradient(color-mix(in srgb, var(--bg) 88%, #888) 0 25%, var(--bg) 0 50%); background-size: 18px 18px; }
-.ax-sketch-demo span { background: var(--card); color: var(--c-sketch-text); transform: rotate(calc((var(--i) - 2.5) * 1.6deg)); }
+.ax-png-demo > a, .ax-sketch-demo > a { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-l); border: 1px solid var(--rule); }
+.ax-png-demo > a { background: var(--bg); background-image: repeating-conic-gradient(color-mix(in srgb, var(--bg) 88%, #888) 0 25%, var(--bg) 0 50%); background-size: 18px 18px; }
+.ax-sketch-demo > a { background: var(--card); color: var(--c-sketch-text); transform: rotate(calc((var(--i) - 2.5) * 1.6deg)); }
+/* showcase icons are links to their pages: a lift on hover, the focus ring on keyboard focus */
+:is(.ax-play-demo, .ax-glass-demo, .ax-png-demo, .ax-sketch-demo, .ax-motion-wall) > a { text-decoration: none; transition: translate .25s var(--e-out), box-shadow .25s var(--e-out), border-color .2s; }
+:is(.ax-play-demo, .ax-glass-demo, .ax-png-demo, .ax-sketch-demo) > a:hover { translate: 0 -3px; border-color: var(--rule-strong); box-shadow: var(--shadow-s); }
+.ax-motion-wall > a:hover { translate: 0 -2px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--g) 55%, transparent); }
+:is(.ax-play-demo, .ax-glass-demo, .ax-png-demo, .ax-sketch-demo, .ax-motion-wall) > a:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 3px; }
 .ax-png-demo p, .ax-sketch-demo p { grid-column: 1 / -1; text-align: center; margin: 4px 0 0; font-size: 26px; color: var(--muted); }
 
 /* ───────── comparison table ───────── */
@@ -277,11 +301,13 @@
   .ax-pick-search input { height: 48px; padding-left: 42px; font-size: 15px; }
   .ax-pick-search svg { left: 14px; }
   .ax-grid { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; }
-  .ax-tile { padding: 12px 3px 9px; gap: 6px; }
+  .ax-tile { padding: 12px 3px 4px; }
   .ax-tile-ic { width: 32px; height: 32px; }
   .ax-tile-ic svg { width: 28px; height: 28px; }
-  .ax-tile-n { font-size: 10.5px; }
-  .ax-tile-go { top: 2px; right: 2px; width: 22px; height: 22px; }
+  .ax-tile-n { font-size: 10.5px; margin-bottom: 7px; }
+  .ax-tile-cz { top: 1px; right: 1px; width: 26px; height: 26px; }
+  .ax-pick-more { padding: 16px; }
+  .ax-pick-more-go, .ax-pick-more .btn { width: 100%; }
   .ax-swap { gap: 8px; }
   .ax-swap-row { padding: 6px 6px 6px 12px; border-radius: 14px; }
   .ax-swap-ic { width: 40px; height: 40px; border-radius: 11px; }
@@ -311,22 +337,22 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ax-hero-badge, .ax-strip span, .ax-swap-row, .ax-apps span { animation: none; }
-  .ax-tile, .ax-card, .ax-links a { transition: none; }
+  .ax-cell, .ax-card, .ax-links a { transition: none; }
 }
 
 /* ───────── style & motion landers (cute, sticker, pixel, glass, retro, animated) ───────── */
 .ax-play-demo, .ax-glass-demo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.ax-play-demo span, .ax-glass-demo span { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-l); background: var(--card); border: 1px solid var(--rule); color: var(--gt); animation: ax-pop .6s var(--e-spring) calc(.15s + var(--i) * 70ms) both; }
+.ax-play-demo > a, .ax-glass-demo > a { display: grid; place-items: center; aspect-ratio: 1; border-radius: var(--radius-l); background: var(--card); border: 1px solid var(--rule); color: var(--gt); animation: ax-pop .6s var(--e-spring) calc(.15s + var(--i) * 70ms) both; }
 .ax-play-demo svg, .ax-glass-demo svg { width: 52%; height: auto; }
-.ax-play-demo.is-tilt span { transform: rotate(calc((var(--i) - 2.5) * 2.4deg)); background: var(--gs); border-color: transparent; }
+.ax-play-demo.is-tilt > a { transform: rotate(calc((var(--i) - 2.5) * 2.4deg)); background: var(--gs); border-color: transparent; }
 .ax-glass-demo { padding: 14px; border-radius: var(--radius-xl); background: linear-gradient(135deg, #6D7CFF 0%, #B66DFF 45%, #FF8BB0 100%); }
-.ax-glass-demo span { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .35); color: #FFFFFF; backdrop-filter: blur(6px); }
+.ax-glass-demo > a { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .35); color: #FFFFFF; backdrop-filter: blur(6px); }
 .ax-motion-wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 14px; border-radius: var(--radius-xl); background: var(--dark); }
-.ax-motion-wall > span { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 4px 10px; border-radius: var(--radius); background: color-mix(in srgb, var(--g) 16%, transparent); color: var(--g); --with-duo: var(--g); --with-accent: var(--sun); }
+.ax-motion-wall > a { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 4px 10px; border-radius: var(--radius); background: color-mix(in srgb, var(--g) 16%, transparent); color: var(--g); --with-duo: var(--g); --with-accent: var(--sun); }
 .ax-motion-wall .wm { display: inline-grid; place-items: center; }
 .ax-motion-wall small { font: 600 11px/1 var(--font-mono); color: var(--on-dark-2); }
-.ax-motion .ax-tile .wm { will-change: transform; }
-@media (max-width: 560px) { .ax-motion-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 10px; } .ax-motion-wall > span { padding: 12px 2px 8px; } .ax-motion-wall svg { width: 32px; height: 32px; } }
+.ax-motion .ax-cell .wm { will-change: transform; }
+@media (max-width: 560px) { .ax-motion-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 10px; } .ax-motion-wall > a { padding: 12px 2px 8px; } .ax-motion-wall svg { width: 32px; height: 32px; } }
 
 /* color-mix() needs Safari 16.2 / Chrome 111 / Firefox 113; with var() inside, older engines compute transparent */
 @supports not (color: color-mix(in srgb, red, blue)) {

@@ -55,6 +55,40 @@
   }
   function pascal(n) { return n.split('-').map(function (x) { return x.charAt(0).toUpperCase() + x.slice(1) }).join('') }
 
+  /* ───────── animated downloads: the shared export pipeline (js/export/registry.js + animated.js) ─────────
+     Loaded on first use from the site root (data-root), so it works at any page depth; animated.js finds the motion
+     runtime from its own URL. */
+  var exportP = null
+  function loadExport(root) {
+    var X = W.WithExport
+    if (X && X.get && X.get('gif') && X.get('animated-svg')) return Promise.resolve(X)
+    if (exportP) return exportP
+    exportP = new Promise(function (resolve, reject) {
+      var list = ['js/export/registry.js', 'js/export/animated.js'], left = list.length, failed = false
+      var one = function () {
+        if (--left) return
+        var R = W.WithExport
+        if (!failed && R && R.get && R.get('gif') && R.get('animated-svg')) resolve(R)
+        else { exportP = null; reject(new Error('export scripts did not load')) }
+      }
+      list.forEach(function (rel) {
+        var sc = doc.createElement('script'); sc.src = root + rel; sc.async = false
+        sc.onload = one; sc.onerror = function () { failed = true; one() }
+        doc.head.appendChild(sc)
+      })
+    })
+    return exportP
+  }
+  // the export context for one icon (registry.js ctx): the file's own root attributes and drawing (colours already
+  // baked by WI.svgFile), its motion spec, and the motion to record: the hover move the tile plays, looped
+  function exportCtx(n, style, svg, ink) {
+    var m = /^\s*<svg([^>]*)>([\s\S]*)<\/svg>\s*$/i.exec(svg) || ['', '', svg], rootAttrs = {}
+    m[1].replace(/([\w:-]+)\s*=\s*"([^"]*)"/g, function (all, k, v) { if (!/^(xmlns|width|height|viewBox|class|style)$/.test(k)) rootAttrs[k] = v; return '' })
+    var sp = (W.WITH_MOTION && W.WITH_MOTION[n]) || null, mv = sp && (sp.hover || sp.loop), motion = { trigger: 'loop' }
+    if (mv) ['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].forEach(function (k) { if (mv[k] != null) motion[k] = mv[k] })
+    return { name: n, title: n.replace(/-/g, ' '), style: style, inner: m[2], root: rootAttrs, color: ink, vars: {}, motion: motion, motionSpec: sp }
+  }
+
   /* ───────── icon picker ───────── */
   function initPicker(box) {
     var grid = $('[data-pick-grid]', box), input = $('[data-pick-q]', box), status = $('[data-pick-status]', box)
@@ -82,14 +116,28 @@
     }
     tint()
     var moving = box.hasAttribute('data-pick-motion')
+    // same markup as the generated tiles (forge/tools/site-alternatives/render.mjs picker): the button runs the action,
+    // the name links to the icon's page, the corner chip opens that page with the studio open in the style shown here
+    var czIcon = (function () { var c = $('.ax-tile-cz svg, .ax-cz-glyph svg', box); return c ? c.outerHTML : '' })()
+    var czHash = moving ? '#studio-motion' : '#studio'
+    function styleQs() { return st.style && st.style !== 'line' ? '?style=' + encodeURIComponent(st.style) : '' }
     function tile(n) {
-      return '<li><button class="ax-tile is-new' + (moving ? ' wm-trigger' : '') + '" type="button" data-name="' + esc(n) + '"><span class="ax-tile-ic' + (moving ? motionAttrs(n) : '') + '"></span><span class="ax-tile-n">' + esc(n) + '</span></button>' +
-        '<a class="ax-tile-go" href="' + root + 'icons/' + esc(n) + '.html" aria-label="' + esc(n) + ' icon page"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>'
+      var e = esc(n), href = root + 'icons/' + e + '.html'
+      return '<li class="ax-cell is-new' + (moving ? ' wm-trigger' : '') + '"><button class="ax-tile" type="button" data-name="' + e + '"><span class="ax-tile-ic' + (moving ? motionAttrs(n) : '') + '"></span><span class="pg-sr">' + e + '</span></button>' +
+        '<a class="ax-tile-n" href="' + href + '" data-icon-link>' + e + '<span class="pg-sr"> icon page</span></a>' +
+        '<a class="ax-tile-cz" href="' + href + styleQs() + czHash + '" data-studio-link title="Customize in the studio">' + czIcon + '<span class="pg-sr">Customize ' + e + ' in the studio</span></a></li>'
+    }
+    // the studio links (and "Browse all") open in the style picked here
+    function relink() {
+      $$('[data-studio-link], [data-browse-link]', box).forEach(function (a) {
+        var h = a.getAttribute('href') || '', m = /^([^?#]*)(?:\?[^#]*)?(#.*)?$/.exec(h)
+        if (m) a.setAttribute('href', m[1] + styleQs() + (m[2] || ''))
+      })
     }
     function search(q) {
       q = (q || '').trim()
       if (!q) {
-        if (mode !== 'curated') { grid.innerHTML = curated; mode = 'curated'; paint() }
+        if (mode !== 'curated') { grid.innerHTML = curated; mode = 'curated'; relink(); paint() }
         empty.hidden = true; setStatus(); return
       }
       var e = getEngine()
@@ -99,17 +147,18 @@
       grid.innerHTML = hits.map(function (h) { return tile(h.name) }).join('')
       empty.hidden = !!hits.length
       paint()
-      $$('.ax-tile.is-new', grid).forEach(function (b, i) { b.style.setProperty('--i', Math.min(i, 16)); requestAnimationFrame(function () { b.classList.remove('is-new') }) })
+      $$('.ax-cell.is-new', grid).forEach(function (b, i) { b.style.setProperty('--i', Math.min(i, 16)); requestAnimationFrame(function () { b.classList.remove('is-new') }) })
       var first = hits[0]
       var why = ''
       if (first && first.match && first.match.field && first.match.field !== 'name' && first.match.term) why = ' “' + esc(q) + '” matched <b>' + esc(first.name) + '</b> by ' + esc(first.match.field) + ' “' + esc(first.match.term) + '”.'
       status.innerHTML = hits.length ? hits.length + ' icon' + (hits.length === 1 ? '' : 's') + ' for “' + esc(q) + '”.' + why + ' Click one to ' + esc(HINT[st.act]) + '.' : 'Nothing for “' + esc(q) + '”.'
     }
-    function setStatus() { status.innerHTML = 'Click an icon to <b data-pick-hint>' + esc(HINT[st.act]) + '</b>. The arrow opens its page.' }
+    var tail = $('[data-pick-tail]', status), tailHtml = tail ? ' ' + tail.outerHTML : ''
+    function setStatus() { status.innerHTML = 'Click an icon to <b data-pick-hint>' + esc(HINT[st.act]) + '</b>.' + tailHtml }
     function press(group, btn) { $$(group, box).forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false') }) }
 
     $$('[data-pick-style]', box).forEach(function (b) {
-      b.addEventListener('click', function () { st.style = b.getAttribute('data-pick-style'); press('[data-pick-style]', b); box.setAttribute('data-style', st.style); paint() })
+      b.addEventListener('click', function () { st.style = b.getAttribute('data-pick-style'); press('[data-pick-style]', b); box.setAttribute('data-style', st.style); relink(); paint() })
     })
     $$('[data-pick-act]', box).forEach(function (b) {
       b.addEventListener('click', function () { st.act = b.getAttribute('data-pick-act'); press('[data-pick-act]', b); if (mode === 'curated' || !input.value.trim()) setStatus(); else search(input.value) })
@@ -144,18 +193,32 @@
         var color = st.colorSet ? st.color : null
         var label = n + ' · ' + title(st.style)
         if (st.act === 'anim' || st.act === 'gif') {
-          // animated exports come from the motion runtime (vendor/motion/motion.js + data/motion.js)
+          // Animated files come from the same export pipeline as the icon pages and the studio (js/export/animated.js):
+          // headroom for motion that leaves the 24 grid, merged still frames, a matte for the GIF's edges. They play the
+          // move the tile just showed on hover, on a loop (a file can't sense hover), like the studio's "On hover" export.
           var M = W.WithMotion
           if (!M || !M.animatedSvg) { location.href = root + 'icons/' + n + '.html'; return }
           var ink = color || '#111318', base = w.svgFile(n, st.style, { color: ink, size: 24 })
-          var mo = { name: n, trigger: 'loop', color: ink }
-          if (st.act === 'anim') {
-            var fn = n + (st.style === 'line' ? '' : '-' + st.style) + '-animated.svg'
-            w.download(fn, M.animatedSvg(base, Object.assign({ size: 96 }, mo)), 'image/svg+xml'); toast('Downloaded ' + fn + '. It plays on websites, in Notion and in browsers.'); return
-          }
-          var gpx = Math.min(st.px, 512), gfn = n + (st.style === 'line' ? '' : '-' + st.style) + '-' + gpx + '.gif'
-          toast('Making your GIF…')
-          return M.gif(base, mo, { size: gpx, fps: 25, background: lum(ink) > 0.85 ? '#111318' : '#FFFFFF' }).then(function (bl) { saveBlob(gfn, bl); toast('Downloaded ' + gfn + '. Insert it like a picture: it plays in PowerPoint, Google Slides and Keynote.') }, function () { toast('Couldn’t make the GIF in this browser. Try the animated SVG.') })
+          var bg = lum(ink) > 0.85 ? '#111318' : '#FFFFFF'
+          var ctx = exportCtx(n, st.style, base, ink)
+          if (st.act === 'gif') toast('Making your GIF…')
+          return loadExport(root).then(function (X) {
+            var gpx = Math.min(st.px, 512)
+            return X.get(st.act === 'gif' ? 'gif' : 'animated-svg').run(ctx, st.act === 'gif' ? { size: gpx, fps: 25, background: bg } : { size: 96 }).then(function (r) {
+              X.download(r.data, r.filename, r.mime)
+              return r.filename
+            })
+          }, function () {
+            // the export scripts didn't load (offline, blocked): the motion runtime alone still makes both files
+            var mo = { name: n, trigger: 'loop', color: ink }, mv = ctx.motion || {}
+            ;['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].forEach(function (k) { if (mv[k] != null) mo[k] = mv[k] })
+            var stem = n + (st.style === 'line' ? '' : '-' + st.style)
+            if (st.act === 'anim') { w.download(stem + '-animated.svg', M.animatedSvg(base, Object.assign({ size: 96 }, mo)), 'image/svg+xml'); return stem + '-animated.svg' }
+            var gpx = Math.min(st.px, 512)
+            return M.gif(base, mo, { size: gpx, fps: 25, background: bg }).then(function (bl) { saveBlob(stem + '-' + gpx + '.gif', bl); return stem + '-' + gpx + '.gif' })
+          }).then(function (fn) {
+            toast(st.act === 'gif' ? 'Downloaded ' + fn + '. Insert it like a picture: it plays in PowerPoint, Google Slides and Keynote.' : 'Downloaded ' + fn + '. It plays on websites, in Notion and in browsers.')
+          }, function () { toast(st.act === 'gif' ? 'Couldn’t make the GIF in this browser. Try the animated SVG.' : 'Couldn’t make the animated SVG here. Open the icon’s page instead.') })
         }
         if (st.act === 'svg' || st.act === 'vue') return copyText(w.svgFile(n, st.style, { color: color }), 'Copied ' + label + ' SVG')
         if (st.act === 'jsx') return copyText(toJsx(w.svgFile(n, st.style, { color: color }), pascal(n)), 'Copied ' + label + ' as JSX')

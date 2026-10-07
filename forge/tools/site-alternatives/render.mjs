@@ -59,14 +59,19 @@ export function answer(html, { tag = 'Short answer', checked = true, date = [CHE
  * motion: true wraps each tile's icon in its own hover animation (forge/motion specs; the tile is the wm-trigger).
  * groups: [[title|null, [names]]]; actions: subset of svg|png|dl|dlsvg|class|jsx|vue (first = default)
  */
-export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = `Search all ${N_ICONS}, e.g. “throw away”`, colors = true, q = '', heading, intro, size = 32, px = 512, motion = false }) {
+export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = `Search all ${N_ICONS}, e.g. “throw away”`, colors = true, q = '', heading, intro, size = 32, px = 512, motion = false, studio = '' }) {
   const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : actions.includes('gif') ? [128, 256, 512] : []
   for (const [, names] of groups) assertIcons(names, 'picker ' + id)
   const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'], anim: ['Animated SVG', 'sparkles'], gif: ['GIF for slides', 'film'] }
   const HINT = { anim: 'download it as an animated SVG', gif: 'download an animated GIF for your slides', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', class: 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
   const COLORS = [['Ink', '#111318'], ['White', '#FFFFFF'], ['Cobalt', '#2F5BFF'], ['Tomato', '#FF5A36'], ['Violet', '#7B5CFF'], ['Leaf', '#22A861'], ['Gold', '#C9962B']]
   const mo = n => { const m = motion && MOTION[n] && (MOTION[n].hover || MOTION[n].loop); if (!m) return ''; const v = motionVars(m); return ` wm wm-hover wm-p-${m.preset}"${v ? ` style="${v}"` : ''} data-wm-preset="${m.preset}` }
-  const tile = n => `<li><button class="ax-tile${motion ? ' wm-trigger' : ''}" type="button" data-name="${n}"><span class="ax-tile-ic${mo(n)}">${I(n, style, size)}</span><span class="ax-tile-n">${n}</span></button><a class="ax-tile-go" href="${p}icons/${n}.html" aria-label="${n} icon page">${I('arrow-up-right', 'line', 14)}</a></li>`
+  // a tile: the button runs the click action (copy / download); the name is a real link to the icon's page and the corner
+  // chip opens that page with the studio (Customize) already open, in the style shown here. Plain <a href>s: crawlable,
+  // and they work without JavaScript.
+  const qs = s => s && s !== 'line' ? `?style=${s}` : ''
+  const czHash = motion ? '#studio-motion' : '#studio'
+  const tile = n => `<li class="ax-cell${motion ? ' wm-trigger' : ''}"><button class="ax-tile" type="button" data-name="${n}"><span class="ax-tile-ic${mo(n)}">${I(n, style, size)}</span><span class="pg-sr">${n}</span></button><a class="ax-tile-n" href="${p}icons/${n}.html" data-icon-link>${n}<span class="pg-sr"> icon page</span></a><a class="ax-tile-cz" href="${p}icons/${n}.html${qs(style)}${czHash}" data-studio-link title="Customize in the studio">${I('sliders', 'line', 14)}<span class="pg-sr">Customize ${n} in the studio</span></a></li>`
   const grid = groups.map(([t, names]) => `${t ? `<li class="ax-grid-h" role="presentation">${t}</li>` : ''}${names.map(tile).join('')}`).join('')
   return `<section class="ax-pick" id="${id}" data-picker${motion ? ' data-pick-motion' : ''} data-style="${style}" data-act="${actions[0]}" data-px="${px}" data-root="${p}"${q ? ` data-q="${esc(q)}"` : ''} aria-labelledby="${id}-h">
   ${heading ? `<div class="ax-sec-head"><h2 id="${id}-h">${heading}</h2>${intro ? `<p>${intro}</p>` : ''}</div>` : `<h2 class="pg-sr" id="${id}-h">Icons</h2>`}
@@ -82,13 +87,25 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
         ${pxs.length ? `<div class="ax-seg ax-px" role="group" aria-label="PNG size">${pxs.map(x => `<button type="button" class="ax-act" data-pick-px="${x}" aria-pressed="${x === px}">${x} px</button>`).join('')}</div>` : ''}
       </div>
     </div>
-    <p class="ax-pick-status" data-pick-status aria-live="polite">Click an icon to <b data-pick-hint>${esc(HINT[actions[0]] || ACT[actions[0]][0].toLowerCase())}</b>. The arrow opens its page.</p>
+    <p class="ax-pick-status" data-pick-status aria-live="polite">Click an icon to <b data-pick-hint>${esc(HINT[actions[0]] || ACT[actions[0]][0].toLowerCase())}</b>. <span data-pick-tail>Its name opens its page; <span class="ax-cz-glyph">${I('sliders', 'line', 14)}</span> opens it in the studio.</span></p>
     <ul class="ax-grid" data-pick-grid>${grid}</ul>
     <p class="ax-pick-empty" data-pick-empty hidden>No icons match yet. Try a simpler word, or <a href="${p}icons.html">browse all ${N_ICONS}</a>.</p>
-    <noscript><p class="pg-note">Turn on JavaScript to search and copy here, or click an icon’s arrow to open its page with copy and download buttons.</p></noscript>
+    <noscript><p class="pg-note">Turn on JavaScript to search and copy here, or click an icon’s name to open its page with copy and download buttons.</p></noscript>
+    <div class="ax-pick-more">
+      <p><b>Want to change it first?</b> Every icon has its own page with all ${N_STYLES} styles and every format, and a studio for its colours, stroke${motion ? ', motion' : ''} and size.</p>
+      <div class="ax-pick-more-go">
+        <a class="btn btn-ink" href="${p}icons.html${qs(style)}" data-browse-link>Browse all ${N_ICONS} icons <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="${p}icons/${studio || groups[0][1][0]}.html${qs(style)}${czHash}" data-studio-link>${I('sliders', 'line', 18)}Open the icon studio</a>
+      </div>
+    </div>
   </div>
 </section>`
 }
+
+/** Link to an icon's page, in the style it is shown in (the page opens on that style; its canonical URL stays clean). */
+export const iconHref = (p, n, s) => `${p}icons/${n}.html${s && s !== 'line' ? `?style=${s}` : ''}`
+/** A showcase icon as a link to its page (demo rows, motion wall): the visible drawing plus a hidden, readable label. */
+export const iconLink = (p, n, s, inner, attrs = '') => `<a href="${iconHref(p, n, s)}"${attrs} title="${n} icon">${inner}<span class="pg-sr">${n} icon</span></a>`
 
 /** List of links to the other alternatives pages (footer-independent). */
 export function altLinks(p, libs, current, title = 'More icon library alternatives') {

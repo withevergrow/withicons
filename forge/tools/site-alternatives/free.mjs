@@ -1,7 +1,7 @@
 // "Free icons for …" landers: real icon grids generated from the icon data, each answering one real query.
 import { GUIDES } from '../site-pages/guides-data.mjs'
 import { crumbs } from '../site-pages/lib.mjs'
-import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, styleStrip, STYLES, STYLE_TITLE, ICON_NAMES, META, rawSvgSize, CHECKED } from './render.mjs'
+import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, styleStrip, STYLES, STYLE_TITLE, ICON_NAMES, META, rawSvgSize, CHECKED, iconLink } from './render.mjs'
 import { moreLanders } from './free-more.mjs'
 import { N_STYLES, word, stylesIn, listTitles, styleTitle, hasStyle } from '../site-pages/lib.mjs'
 import { motionAssets } from '../site-pages/motion.mjs'
@@ -88,7 +88,7 @@ const BASE_LANDERS = [
   <div><p class="ax-kicker">Which size?</p><h2 id="png-size">Pick a PNG twice the size you’ll show it</h2>
   <p>A PNG is made of pixels, so it gets blurry when stretched. Download one at least twice as big as it will appear and it stays sharp on high-resolution screens.</p>
   ${facts([['256 px', `Notion page icons, email signatures, small icons in documents. <a href="${p}guides/notion.html">Notion guide</a>`], ['512 px', `Slides and docs: sharp up to about half a slide wide. <a href="${p}guides/google-slides.html">Google Slides guide</a>`], ['1024 px', 'Full-screen slides, posters, anything big.'], ['Background', 'Always transparent, so icons sit on any colour.']])}</div>
-  <div class="ax-png-demo" aria-hidden="true">${['#111318', '#FFFFFF', '#FF5A36', '#2F5BFF'].map((c, i) => `<span style="--bg:${['#FFD23F', '#111318', '#FBF8F3', '#E8EEFF'][i]};color:${c}">${I(['rocket', 'lightbulb', 'heart', 'chart-pie'][i], ['solid', 'line', 'gloss', 'duo'][i], 64)}</span>`).join('')}<p class="hand">same PNG, any background</p></div>
+  <div class="ax-png-demo">${['#111318', '#FFFFFF', '#FF5A36', '#2F5BFF'].map((c, i) => iconLink(p, ['rocket', 'lightbulb', 'heart', 'chart-pie'][i], ['solid', 'line', 'gloss', 'duo'][i], I(['rocket', 'lightbulb', 'heart', 'chart-pie'][i], ['solid', 'line', 'gloss', 'duo'][i], 64), ` style="--bg:${['#FFD23F', '#111318', '#FBF8F3', '#E8EEFF'][i]};color:${c}"`)).join('')}<p class="hand">same PNG, any background</p></div>
 </section>`,
     faq: p => [
       ['Do the PNG icons have a transparent background?', 'Yes. Every PNG you download or copy here has a see-through background, so it works on any slide or page colour.'],
@@ -318,7 +318,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   <div><p class="ax-kicker">Where they shine</p><h2 id="hd-where">Made for big, friendly moments</h2>
   <p>Hand-drawn icons have fine detail, so they look best at 32 px and larger: slides, posters, social posts, onboarding screens, notes and empty states. For tiny interface buttons, use Line or Solid.</p>
   ${facts([...BASE_FACTS(p), ['Style family', `Sketch is one of ${word(stylesIn('creative').length)} creative styles (with ${stylesIn('creative').filter(s => s !== 'sketch').map(s => `<a href="${p}styles/${s}.html">${styleTitle(s)}</a>`).join(', ')}). <a href="${p}styles/sketch.html">See every Sketch icon</a>.`]])}</div>
-  <div class="ax-sketch-demo" aria-hidden="true">${['lightbulb', 'rocket', 'heart', 'coffee', 'star', 'smile'].map((n, i) => `<span style="--i:${i}">${I(n, 'sketch', 56)}</span>`).join('')}<p class="hand">drawn, not traced</p></div>
+  <div class="ax-sketch-demo">${['lightbulb', 'rocket', 'heart', 'coffee', 'star', 'smile'].map((n, i) => iconLink(p, n, 'sketch', I(n, 'sketch', 56), ` style="--i:${i}"`)).join('')}<p class="hand">drawn, not traced</p></div>
 </section>`,
     faq: p => [
       ['Are the hand-drawn icons vectors?', 'Yes. They are real SVG paths, so they stay sharp at any size and can be recoloured.'],
@@ -350,7 +350,7 @@ function lander(L, all, libs) {
       <div class="ax-hero-art" aria-hidden="true"><div class="ax-hero-badge s-${L.color}">${I(L.icon, style === 'line' ? 'duo' : style, 120)}</div>${styleStrip(L.icon, 30)}</div>
     </div>
   </section>
-  ${picker({ id: 'pick', p, style, px: L.px || L.picker.px || 512, motion: !!L.motion, ...L.picker, heading: L.dev ? 'Pick an icon, copy the code' : 'Pick an icon, click to get it', intro: `A starter set for ${esc(L.short.replace(/^Free /, '').replace(/^Icons for /, ''))}. Search to find any of all ${N}.` })}
+  ${picker({ id: 'pick', p, style, studio: L.icon, px: L.px || L.picker.px || 512, motion: !!L.motion, ...L.picker, heading: L.dev ? 'Pick an icon, copy the code' : 'Pick an icon, click to get it', intro: `A starter set for ${esc(L.short.replace(/^Free /, '').replace(/^Icons for /, ''))}. Search to find any of all ${N}.` })}
   ${L.body(p)}
   ${faqBlock('faq-h', qs)}
   <section class="ax-more" aria-label="Related pages">

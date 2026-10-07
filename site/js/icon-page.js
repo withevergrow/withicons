@@ -673,8 +673,17 @@
     var v = b.getAttribute('data-open')
     if (openSheet(v === 'download' ? 'download' : 'customize', { tab: v === 'download' ? '' : v, goal: b.getAttribute('data-goal') || '', from: b })) e.preventDefault()
   })
-  // deep links: #download opens the sheet on Download (old #customize links land on the "Make it yours" entry)
-  function fromHash() { if (location.hash === '#download' && !sheetOpen) openSheet('download', { from: $('#download'), hash: false }) }
+  // deep links: #download opens the sheet on Download (old #customize links land on the "Make it yours" entry);
+  // #studio (and #studio-look / -motion / -swap) opens it on Customize at that tab: the "Customize" links on other pages.
+  // The #studio hash is dropped once the sheet opens, so closing it and reloading shows the plain page.
+  function fromHash() {
+    if (sheetOpen) return
+    if (location.hash === '#download') { openSheet('download', { from: $('#download'), hash: false }); return }
+    var m = /^#studio(?:-(look|motion|swap))?$/.exec(location.hash)
+    if (!m) return
+    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search)
+    openSheet('customize', { tab: m[1] || 'look', from: $('[data-open="look"]'), hash: false })
+  }
   fromHash()
   W.addEventListener('hashchange', function () { fromHash(); openDev() })
 
