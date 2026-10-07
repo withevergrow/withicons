@@ -358,3 +358,74 @@
 @supports not (color: color-mix(in srgb, red, blue)) {
   .ax-table td.ax-us, .ax-matrix tr.ax-us-row > *, :root[data-theme="dark"] .ax-pickers li.is-us { background: var(--sun-soft); }
 }
+
+/* ───────── the GIF maker (js/alternatives.js openMaker): the studio in a dialog, opened on Animated → GIF ───────── */
+.ax-gm { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 24px; border: 0; background: transparent; color: var(--ink); overflow: hidden }
+.ax-gm[open] { display: grid; place-items: center }
+.ax-gm::backdrop { background: rgba(13, 15, 20, .46); -webkit-backdrop-filter: blur(8px) saturate(1.1); backdrop-filter: blur(8px) saturate(1.1); animation: ax-gm-fade .25s ease-out both }
+@keyframes ax-gm-fade { from { opacity: 0 } }
+html.ax-gm-open { overflow: hidden }
+.ax-gm-in {
+  position: relative; display: grid; grid-template-rows: auto minmax(0, 1fr); width: min(1240px, 100%); height: min(920px, 100%);
+  border-radius: 28px; background: var(--paper); box-shadow: 0 50px 120px -40px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .05); overflow: hidden;
+  animation: ax-gm-in .32s cubic-bezier(.23, 1, .32, 1) both;
+}
+@keyframes ax-gm-in { from { opacity: 0; transform: translateY(12px) scale(.985) } }
+.ax-gm-head { display: flex; align-items: center; gap: 12px; padding: 14px 14px 14px 18px; border-bottom: 1px solid var(--rule); background: var(--paper) }
+.ax-gm-grab { display: none }
+.ax-gm-ic { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--card); box-shadow: inset 0 0 0 1px var(--rule); color: var(--ink) }
+.ax-gm-ic svg { width: 26px; height: 26px; overflow: visible }
+.ax-gm-id { flex: 1; min-width: 0 }
+.ax-gm-id h2 { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 780 19px/1.15 var(--font-display); letter-spacing: -.015em }
+.ax-gm-k { font-family: var(--font-hand); font-weight: 700; font-size: 1.12em; letter-spacing: 0; color: var(--style-text, var(--ink)) }
+.ax-gm-id p { margin: 3px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 13.5px/1.3 var(--font-sans); color: var(--muted) }
+.ax-gm-page { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: var(--pill, 999px); background: var(--card); box-shadow: inset 0 0 0 1px var(--rule-strong); color: var(--ink); font: 650 14px/1 var(--font-sans); text-decoration: none; transition: transform .16s ease-out, box-shadow .2s }
+.ax-gm-page svg { transition: transform .25s cubic-bezier(.23, 1, .32, 1) }
+.ax-gm-page:active, .ax-gm-x:active { transform: scale(.96) }
+.ax-gm-x { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--paper-2); color: var(--ink); cursor: pointer; transition: background-color .2s, transform .16s ease-out }
+@media (hover: hover) and (pointer: fine) {
+  .ax-gm-page:hover { box-shadow: inset 0 0 0 1.5px var(--ink) }
+  .ax-gm-page:hover svg { transform: translateX(2px) }
+  .ax-gm-x:hover { background: var(--ink); color: var(--paper) }
+}
+.ax-gm-page:focus-visible, .ax-gm-x:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px }
+.ax-gm-body { position: relative; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 18px clamp(14px, 2vw, 22px) 28px; outline: none }
+.ax-gm-wait { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 260px; margin: 0; color: var(--muted); font: 550 15px/1.3 var(--font-sans) }
+.ax-gm-spin { width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid var(--rule-strong); border-top-color: var(--ink); animation: ax-gm-spin .8s linear infinite }
+@keyframes ax-gm-spin { to { transform: rotate(360deg) } }
+/* inside: the preview and its controls on the left, the file on the right; code lives on the icon page */
+.ax-gm .wied { --wied-sticky: 0px }
+.ax-gm .wied-codefold, .ax-gm .wied-code, .ax-gm .wied-places { display: none }
+/* the maker is about animated files: its format list stays, the goal tabs (slides, design, web) live on the icon page */
+.ax-gm .wdl-groups, .ax-gm .wdl-gsay { display: none }
+@media (min-width: 1000px) {
+  .ax-gm .wied { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: start }
+  .ax-gm .wied-main { grid-template-columns: minmax(0, 1fr) }
+  .ax-gm .wied-canvas { min-height: 300px }
+  .ax-gm .wied-out { position: sticky; top: 0 }
+}
+@media (max-width: 720px) {
+  .ax-gm { padding: 0; padding-top: max(12px, env(safe-area-inset-top)) }
+  .ax-gm[open] { place-items: end stretch }
+  .ax-gm-in { width: 100%; height: min(100%, 94dvh); border-radius: 26px 26px 0 0 }
+  .ax-gm-head { position: relative; flex-wrap: wrap; padding: 18px 12px 12px 14px }
+  .ax-gm-grab { display: block; position: absolute; left: 50%; top: 7px; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: var(--rule-strong) }
+  .ax-gm-id p { display: none }
+  .ax-gm-id h2 { white-space: normal; font-size: 17px }
+  .ax-gm-page { height: 36px; padding: 0 12px; font-size: 13px }
+  .ax-gm-ic { width: 38px; height: 38px }
+  .ax-gm-body { padding: 12px 10px calc(24px + env(safe-area-inset-bottom)) }
+}
+.ax-gm-foot { display: none }
+@media (max-width: 720px) {
+  .ax-gm-in { grid-template-rows: auto minmax(0, 1fr) auto }
+  .ax-gm .wied-canvas { min-height: 220px }
+  .ax-gm .wied-sizes { display: none }
+  .ax-gm-foot { display: block; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--rule); background: var(--paper) }
+  .ax-gm-go { display: grid; justify-items: center; gap: 2px; width: 100%; min-height: 52px; border: 0; border-radius: 16px; background: var(--ink); color: var(--paper); cursor: pointer; transition: transform .16s ease-out }
+  .ax-gm-go span { font: 720 16px/1.1 var(--font-sans) }
+  .ax-gm-go small { font: 500 12px/1.2 var(--font-sans); opacity: .75 }
+  .ax-gm-go:active { transform: scale(.98) }
+  .ax-gm-body { padding-bottom: 16px }
+}
+@media (prefers-reduced-motion: reduce) { .ax-gm-in, .ax-gm::backdrop { animation: none } .ax-gm-spin { animation-duration: 2s } }

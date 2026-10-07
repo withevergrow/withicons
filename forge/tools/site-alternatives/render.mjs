@@ -63,7 +63,7 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
   const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : actions.includes('gif') ? [128, 256, 512] : []
   for (const [, names] of groups) assertIcons(names, 'picker ' + id)
   const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'], anim: ['Animated SVG', 'sparkles'], gif: ['GIF for slides', 'film'] }
-  const HINT = { anim: 'download it as an animated SVG', gif: 'download an animated GIF for your slides', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', class: 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
+  const HINT = { anim: 'make an animated SVG', gif: 'make a GIF for your slides, in the quality you pick', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', class: 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
   const COLORS = [['Ink', '#111318'], ['White', '#FFFFFF'], ['Cobalt', '#2F5BFF'], ['Tomato', '#FF5A36'], ['Violet', '#7B5CFF'], ['Leaf', '#22A861'], ['Gold', '#C9962B']]
   const mo = n => { const m = motion && MOTION[n] && (MOTION[n].hover || MOTION[n].loop); if (!m) return ''; const v = motionVars(m); return ` wm wm-hover wm-p-${m.preset}"${v ? ` style="${v}"` : ''} data-wm-preset="${m.preset}` }
   // a tile: the button runs the click action (copy / download); the name is a real link to the icon's page and the corner

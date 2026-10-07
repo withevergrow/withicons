@@ -6,6 +6,11 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+### Changed
+- `withicons export --format gif`: smaller, cleaner GIFs. Pixels that did not change since the previous frame are sent as
+  transparent (so each frame carries only what moved), and frame delays follow a running clock, so the loop keeps its
+  exact length at any frame rate.
+
 ## 0.3.1 - 2026-10-07
 
 ### Fixed

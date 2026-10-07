@@ -160,12 +160,39 @@
     for (var j = 0; j < data.length; j += 255) { var n = Math.min(255, data.length - j); w.u8(n); w.bytes(data.subarray(j, j + n)) }
     w.u8(0)
   }
-  /** frames -> Uint8Array GIF. o: { matte: '#hex' (default white), loop: 0 = forever (default) | n plays } */
+  // nearest palette index for a 0xRRGGBB colour (exact hits are a map lookup; the rest are weighted by how the eye sees them)
+  function nearestOf(pal) {
+    var lut = new Map()
+    pal.forEach(function (c, i) { lut.set(c, i) })
+    return function (c) {
+      var v = lut.get(c)
+      if (v !== undefined) return v
+      var r = c >> 16 & 255, g = c >> 8 & 255, b = c & 255, best = 0, bd = Infinity
+      for (var i = 0; i < pal.length; i++) {
+        var q = pal[i], dr = (q >> 16 & 255) - r, dg = (q >> 8 & 255) - g, db = (q & 255) - b
+        var rm = ((q >> 16 & 255) + r) / 2, d = (2 + rm / 256) * dr * dr + 4 * dg * dg + (2 + (255 - rm) / 256) * db * db
+        if (d < bd) { bd = d; best = i }
+      }
+      lut.set(c, best)
+      return best
+    }
+  }
+  function tableBits(n) { var b = 1; while ((1 << b) < n) b++; return b }
+  function writeTable(w, pal, bits) { for (var i = 0; i < (1 << bits); i++) { var c = i < pal.length ? pal[i] : 0; w.u8(c >> 16 & 255).u8(c >> 8 & 255).u8(c & 255) } }
+  /**
+   * frames -> Uint8Array GIF.
+   * o: { matte: '#hex' (default white), loop: 0 = forever (default) | n plays,
+   *      colors: most colours per frame (2-256, default 256), local: true = a palette per frame when the animation has
+   *      more colours than one palette holds (gradients, glass, gloss), release: true = free each frame's RGBA as it goes }
+   * One palette index is always kept free as the transparent index: see-through pixels, and (for opaque files) pixels
+   * that did not change since the previous frame, so each frame only sends what moved and LZW packs the rest into runs.
+   */
   function encodeGif(frames, o) {
     o = o || {}
     frames = dedupe(frames)
     var W = frames[0].width, H = frames[0].height, N = W * H
     var matte = hexRgb(o.matte, [255, 255, 255])
+    var cap = Math.max(2, Math.min(256, Math.round(Number(o.colors) || 256)))
     var transparent = false
     // 1. composite: -1 = transparent, else 0xRRGGBB (edge pixels blended over the matte)
     var keys = frames.map(function (f) {
@@ -180,36 +207,20 @@
       }
       return k
     })
-    // 2. palette
+    // 2. the global palette (cap - 1 colours: one index stays free for transparency)
     var hist = new Map()
     keys.forEach(function (k) { for (var j = 0; j < N; j++) { var c = k[j]; if (c >= 0) hist.set(c, (hist.get(c) || 0) + 1) } })
-    var pal = quantize(hist, transparent ? 255 : 256)
-    if (!pal.length) pal.push(0)
-    var tIndex = transparent ? pal.length : 0
-    var used = pal.length + (transparent ? 1 : 0), bits = 1
-    while ((1 << bits) < used) bits++
-    var minSize = Math.max(2, bits)
-    var lut = new Map()
-    pal.forEach(function (c, i) { lut.set(c, i) })
-    var nearest = function (c) {
-      var v = lut.get(c)
-      if (v !== undefined) return v
-      var r = c >> 16 & 255, g = c >> 8 & 255, b = c & 255, best = 0, bd = Infinity
-      for (var i = 0; i < pal.length; i++) {
-        var q = pal[i], dr = (q >> 16 & 255) - r, dg = (q >> 8 & 255) - g, db = (q & 255) - b
-        var rm = ((q >> 16 & 255) + r) / 2, d = (2 + rm / 256) * dr * dr + 4 * dg * dg + (2 + (255 - rm) / 256) * db * db
-        if (d < bd) { bd = d; best = i }
-      }
-      lut.set(c, best)
-      return best
-    }
+    var gpal = quantize(hist, cap - 1)
+    if (!gpal.length) gpal.push(0)
+    var local = !!o.local && hist.size > cap - 1
+    var gbits = tableBits(gpal.length + 1), gT = gpal.length, gnear = nearestOf(gpal)
     // 3. stream
     var w = new Writer(N * frames.length / 3 + 2048)
-    w.str('GIF89a').u16(W).u16(H).u8(0x80 | 0x70 | (bits - 1)).u8(transparent ? tIndex : 0).u8(0)
-    for (var i = 0; i < (1 << bits); i++) { var c = i < pal.length ? pal[i] : 0; w.u8(c >> 16 & 255).u8(c >> 8 & 255).u8(c & 255) }
+    w.str('GIF89a').u16(W).u16(H).u8(0x80 | 0x70 | (gbits - 1)).u8(transparent ? gT : 0).u8(0)
+    writeTable(w, gpal, gbits)
     var loop = o.loop == null ? 0 : o.loop
     if (loop !== 1) w.u8(0x21).u8(0xff).u8(11).str('NETSCAPE2.0').u8(3).u8(1).u16(loop > 1 ? loop - 1 : 0).u8(0)
-    var prev = null
+    var prev = null, clock = 0
     frames.forEach(function (f, fi) {
       var k = keys[fi], box
       if (transparent) {
@@ -221,19 +232,44 @@
         // opaque: keep the previous frame (disposal 1) and only send the rectangle that changed
         box = prev ? diffBox(new Uint8Array(prev.buffer), new Uint8Array(k.buffer), W, H) || { x: 0, y: 0, w: 1, h: 1 } : { x: 0, y: 0, w: W, h: H }
       }
-      var delay = Math.max(2, Math.round(f.t1 * 100) - Math.round(f.t0 * 100))
-      w.u8(0x21).u8(0xf9).u8(4).u8(transparent ? (2 << 2) | 1 : (1 << 2)).u16(delay).u8(tIndex).u8(0)
-      w.u8(0x2c).u16(box.x).u16(box.y).u16(box.w).u16(box.h).u8(0)
-      var idx = new Uint8Array(box.w * box.h)
+      // what this frame sends: -1 = the transparent index (see-through, or the same as the frame already showing)
+      var px = new Int32Array(box.w * box.h), any = false
       for (var yy = 0, n = 0; yy < box.h; yy++) {
         var row = (box.y + yy) * W + box.x
-        for (var xx = 0; xx < box.w; xx++, n++) { var cc = k[row + xx]; idx[n] = cc < 0 ? tIndex : nearest(cc) }
+        for (var xx = 0; xx < box.w; xx++, n++) {
+          var cc = k[row + xx]
+          if (!transparent && prev && prev[row + xx] === cc) cc = -1
+          if (cc < 0) any = true
+          px[n] = cc
+        }
       }
-      lzw(idx, minSize, w)
+      var pal = gpal, near = gnear, bits = gbits, tI = gT
+      if (local) {
+        var fh = new Map()
+        for (var q = 0; q < px.length; q++) if (px[q] >= 0) fh.set(px[q], (fh.get(px[q]) || 0) + 1)
+        pal = quantize(fh, cap - 1); if (!pal.length) pal.push(0)
+        near = nearestOf(pal); bits = tableBits(pal.length + 1); tI = pal.length
+      }
+      // delays come from a running clock in hundredths, so rounding never drifts over the loop (2 is the shortest every
+      // viewer honours; browsers slow 0 and 1 down to a tenth of a second)
+      var end = Math.round(f.t1 * 100), delay = Math.max(2, end - clock); clock += delay
+      w.u8(0x21).u8(0xf9).u8(4).u8((transparent ? 2 : 1) << 2 | (transparent || any ? 1 : 0)).u16(delay).u8(tI).u8(0)
+      w.u8(0x2c).u16(box.x).u16(box.y).u16(box.w).u16(box.h).u8(local ? 0x80 | (bits - 1) : 0)
+      if (local) writeTable(w, pal, bits)
+      var idx = new Uint8Array(px.length)
+      for (var m = 0; m < px.length; m++) idx[m] = px[m] < 0 ? tI : near(px[m])
+      lzw(idx, Math.max(2, bits), w)
       prev = k
     })
     w.u8(0x3b)
     return w.out()
+  }
+  // GIF quality levels (the studio's Quality control, the free pages and the CLI): frames a second, colours, supersampling
+  var GIF_QUALITY = {
+    light: { fps: 15, colors: 128, label: 'Light' },
+    standard: { fps: 25, label: 'Standard' },
+    smooth: { fps: 50, label: 'Smooth' },
+    best: { fps: 50, ss: 2, local: true, label: 'Best' }
   }
 
   /* ───────────────────────── PNG / APNG ───────────────────────── */
@@ -653,7 +689,8 @@
           throw new Error('Too many pixels for one animation (' + n + ' frames of ' + px + ' x ' + px + ' px, ' + (Math.round(seconds * 100) / 100) + ' s at ' + fps + ' fps). ' +
             (fitFps >= 1 ? 'At ' + px + ' px use a frame rate of ' + Math.min(fitFps, fps - 1) + ' or less (fps), or a shorter loop (seconds); ' : '') + 'at ' + fps + ' fps the largest size is ' + fitPx + ' px.')
         }
-        var frames = [], pad = 0
+        var frames = [], pad = 0, ss = Math.max(1, Math.min(3, Math.round(Number(fo.ss) || 1)))
+        if (px * ss > MAX_PX * 2) ss = 1
         var step = function (i) {
           if (i >= n) return Promise.resolve()
           var t0 = i * seconds / n, t1 = (i + 1) * seconds / n
@@ -664,11 +701,17 @@
               return step(i + 1)
             })
           }
-          return loadImg(wrap(frozen, px, pad, null)).then(function (img) {
+          return loadImg(wrap(frozen, ss > 1 ? px * ss : px, pad, null)).then(function (img) {
             var c = document.createElement('canvas'); c.width = c.height = px
             var g = c.getContext('2d', { willReadFrequently: fo.keep !== 'canvas' })
             if (fo.background) { g.fillStyle = fo.background; g.fillRect(0, 0, px, px) }
-            g.drawImage(img, 0, 0, px, px)
+            if (ss > 1) {
+              // drawn at ss x the size, then scaled down: finer edges, and no hairline seams where two shapes meet
+              var big = document.createElement('canvas'); big.width = big.height = px * ss
+              big.getContext('2d').drawImage(img, 0, 0, px * ss, px * ss)
+              g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high'
+              g.drawImage(big, 0, 0, px, px)
+            } else g.drawImage(img, 0, 0, px, px)
             var f = { width: px, height: px, t0: t0, t1: t1 }
             if (fo.keep === 'canvas') f.canvas = c
             else f.data = g.getImageData(0, 0, px, px).data
@@ -817,7 +860,7 @@
   function fpsOf(opts, def, max) { return Math.max(1, Math.min(max || 60, Math.round(Number(opts && opts.fps) || def))) }
 
   return {
-    encodeGif: encodeGif, encodeApng: encodeApng, muxWebp: muxWebp, riffChunks: riffChunks, fixWebmDuration: fixWebmDuration, muxMp4: muxMp4, webmBlockTimes: webmBlockTimes,
+    encodeGif: encodeGif, GIF_QUALITY: GIF_QUALITY, encodeApng: encodeApng, muxWebp: muxWebp, riffChunks: riffChunks, fixWebmDuration: fixWebmDuration, muxMp4: muxMp4, webmBlockTimes: webmBlockTimes,
     quantize: quantize, dedupe: dedupe, zlibStored: stored, adler32: adler32,
     register: function (WE, nodeEnv) {
       if (nodeEnv) env = nodeEnv
@@ -833,10 +876,13 @@
         audience: ['presentations', 'designers', 'web'], transparent: '1-bit', animated: true,
         note: 'Plays everywhere: Slack, email, Notion, Google Slides, PowerPoint. Edges are blended with a matte colour (white, or your background), so pick the colour it will sit on.',
         available: function () { return hasDom() || !!env },
+        // opts.quality: 'light' | 'standard' (default) | 'smooth' | 'best' (GIF_QUALITY); an explicit fps wins over its rate
+        qualities: GIF_QUALITY,
         run: function (ctx, opts) {
           opts = opts || {}
-          return frameSet(ctx, opts, { fps: 25, maxFps: 50 }, { background: opts.background || null }).then(function (r) {
-            var bytes = encodeGif(r.frames, { matte: opts.background || opts.matte || '#ffffff', loop: opts.loop, release: true })
+          var q = GIF_QUALITY[opts.quality] || GIF_QUALITY.standard
+          return frameSet(ctx, opts, { fps: q.fps, maxFps: 50 }, { background: opts.background || null, ss: q.ss || 1 }).then(function (r) {
+            var bytes = encodeGif(r.frames, { matte: opts.background || opts.matte || '#ffffff', loop: opts.loop, release: true, colors: q.colors, local: q.local })
             return { data: out(bytes, 'image/gif'), filename: name(ctx, r, 'gif'), mime: 'image/gif' }
           })
         },

@@ -133,6 +133,14 @@
   }
   var DL_KIND = { png: 'raster', webp: 'raster', jpg: 'raster', avif: 'raster', 'png-set': 'set', 'svg-flat': 'vector', svg: 'vector', pdf: 'print', eps: 'print', gif: 'anim', apng: 'anim',
     'webp-animated': 'anim', webm: 'anim', mp4: 'anim', 'png-sequence': 'anim', 'pptx-animated': 'anim', 'animated-svg': 'svganim', lottie: 'lottie', dotlottie: 'lottie', android: 'dp', ios: 'pt', docx: 'doc' }
+  // GIF quality: what the Quality control offers (the encoder's own table is GIF_QUALITY in js/export/animated.js)
+  var GIF_Q = [
+    ['light', 'Light', 15, 'smallest file'],
+    ['standard', 'Standard', 25, 'the everyday pick'],
+    ['smooth', 'Smooth', 50, 'fluid motion'],
+    ['best', 'Best', 50, 'finest edges and colour']
+  ]
+  function gifQ(id) { for (var i = 0; i < GIF_Q.length; i++) if (GIF_Q[i][0] === id) return GIF_Q[i]; return GIF_Q[1] }
   var DL_FRAMES = ['gif', 'apng', 'webp-animated', 'webm', 'mp4', 'png-sequence', 'pptx-animated']
   var DL_SLOW = { gif: 1, apng: 1, 'webp-animated': 1, webm: 1, mp4: 1, 'png-sequence': 1, pptx: 1, 'pptx-sheet': 1, 'pptx-animated': 1, docx: 1, 'png-set': 1, 'favicon-pack': 1, ico: 1 }
   var DL_PADS = [['0', 'None'], ['0.08', 'Small'], ['0.16', 'Medium'], ['0.25', 'Large']]
@@ -1360,7 +1368,7 @@
       // the Download panel (hosts that place their own, like the library drawer, pass downloads: false and mount one)
       if (ownDl) ownDl.destroy()
       var dh = $('[data-dl-host]', root)
-      ownDl = dh ? downloadPanel(dh, { anchor: D.getElementById('download') ? '' : 'download', quick: opts.dlQuick === false ? false : undefined, title: opts.dlTitle }) : null
+      ownDl = dh ? downloadPanel(dh, { anchor: D.getElementById('download') ? '' : 'download', quick: opts.dlQuick === false ? false : undefined, title: opts.dlTitle, group: opts.dlGroup, pick: opts.dlPick, size: opts.dlSize }) : null
       selectTab(S.tab, false)
       paintStyleIcons()
       buildPresets()
@@ -2318,24 +2326,28 @@
        After's own colours), stroke, motion and "Turn into" come from exportCtx(); the panel adds the file's own options:
        background (see-through by default), GIF edge colour, size, padding, and for animations the motion, frame rate and
        loops. Per-viewer choices are remembered in localStorage. */
-    var dlPanels = []
+    var dlPanels = [], dlMem = null, dlPreset = false
     function pageHex() { return S.bg === 'dark' ? '#0D0F14' : S.bg === 'brand' ? mixHex(info(S.style).hex, '#FBF8F3', 0.22).toUpperCase() : '#FBF8F3' }
     function downloadPanel(el, po) {
       po = po || {}
       var id = uid + '-dl' + (dlPanels.length + 1)
-      var sv = (remember ? store(DLKEY) : null) || {}
+      var sv = (remember ? store(DLKEY) : dlMem) || {}
       var obj = function (v) { return v && typeof v === 'object' ? v : {} }
       var P = {
         group: DL_GROUPS.some(function (g) { return g.id === sv.group }) ? sv.group : 'slides', pick: obj(sv.pick),
         bg: /^(none|white|page|custom)$/.test(sv.bg) ? sv.bg : 'none', bgHex: isHex(sv.bgHex) ? sv.bgHex.toUpperCase() : '#2F5BFF',
         matte: /^(white|page|black|custom)$/.test(sv.matte) ? sv.matte : 'white', matteHex: isHex(sv.matteHex) ? sv.matteHex.toUpperCase() : '#FFFFFF',
         pad: obj(sv.pad), size: obj(sv.size), custom: {}, x2: !!sv.x2, motion: '', fps: obj(sv.fps), loop: [0, 1, 3].indexOf(sv.loop) >= 0 ? sv.loop : 0,
-        loops: [1, 2, 3, 5].indexOf(sv.loops) >= 0 ? sv.loops : 1, adv: !!sv.adv, more: false, which: 'a', busy: 0, bkey: '', okey: '', akey: '', na: {}, t0: 0, tick: 0
+        loops: [1, 2, 3, 5].indexOf(sv.loops) >= 0 ? sv.loops : 1, q: gifQ(sv.q)[0], adv: !!sv.adv, more: false, which: 'a', busy: 0, bkey: '', okey: '', akey: '', na: {}, t0: 0, tick: 0
       }
       function save() {
-        if (!remember) return
-        store(DLKEY, { adv: P.adv, group: P.group, pick: P.pick, bg: P.bg, bgHex: P.bgHex, matte: P.matte, matteHex: P.matteHex, pad: P.pad, size: P.size, x2: P.x2, fps: P.fps, loop: P.loop, loops: P.loops })
+        var o = { adv: P.adv, group: P.group, pick: P.pick, bg: P.bg, bgHex: P.bgHex, matte: P.matte, matteHex: P.matteHex, pad: P.pad, size: P.size, x2: P.x2, fps: P.fps, loop: P.loop, loops: P.loops, q: P.q }
+        if (remember) store(DLKEY, o); else dlMem = o   // not remembered: the choices still outlive a rebuild of the panel
       }
+      // a host can open the panel on a goal and a format (the free pages' GIF maker: Animated, GIF)
+      if (!dlPreset && po.group && DL_GROUPS.some(function (g) { return g.id === po.group })) { P.group = po.group; if (po.pick) P.pick[po.group] = po.pick }
+      if (!dlPreset && po.pick && po.size && kind(po.pick)) { P.size[kind(po.pick)] = po.size; P.custom[kind(po.pick)] = false }
+      if (po.group) dlPreset = true   // once per studio: a rebuilt panel keeps what the visitor picked since
       var X = function () { return W.WithExport || null }
       function desc(f) { var x = X(); return x && x.get ? x.get(f) : null }
       function groupOf(g) { for (var i = 0; i < DL_GROUPS.length; i++) if (DL_GROUPS[i].id === g) return DL_GROUPS[i]; return DL_GROUPS[0] }
@@ -2379,7 +2391,7 @@
       function padVal(f) { var v = P.pad[kind(f) === 'anim' || f === 'animated-svg' ? 'anim' : f === 'lottie' || f === 'dotlottie' ? 'lottie' : 'still']; return v != null && (v === 'auto' ? padDef(f) === 'auto' : /^0(\.\d+)?$/.test(v)) ? v : padDef(f) }
       function padKey(f) { return kind(f) === 'anim' || f === 'animated-svg' ? 'anim' : f === 'lottie' || f === 'dotlottie' ? 'lottie' : 'still' }
       function fpsList(f) { return f === 'gif' ? [10, 15, 25, 50] : [12, 24, 30, 60] }
-      function fpsVal(f) { var l = fpsList(f), k = f === 'gif' ? 'gif' : 'v', v = +P.fps[k]; return l.indexOf(v) >= 0 ? v : f === 'gif' ? 25 : 30 }
+      function fpsVal(f) { if (f === 'gif') return gifQ(P.q)[2]; var l = fpsList(f), v = +P.fps.v; return l.indexOf(v) >= 0 ? v : 30 }
       // the motions a file can carry: "Turn into" (when set), the icon's loop, its hover move (looped: files can't sense hover)
       function motions(f) {
         var t = swapReady() ? swapTarget() : null, out = [], o = { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco }
@@ -2451,6 +2463,7 @@
           var pd = padVal(f); if (pd !== 'auto') o.padding = +pd
         }
         if (DL_FRAMES.indexOf(f) >= 0) { o.fps = fpsVal(f); if (f === 'webm' || f === 'mp4') o.loops = P.loops; else if (f !== 'png-sequence') o.loop = P.loop }
+        if (f === 'gif') o.quality = P.q
         if (moving(f) && motionPick(f) === 'still') o.static = true
         if (f === 'pptx-sheet') o.variants = variants()
         return o
@@ -2460,7 +2473,7 @@
         svg: { f: 'svg-flat', o: function () { return { size: S.size } } },
         png: { f: 'png', o: function () { return { size: S.px } } },
         pptx: { f: 'pptx', o: function () { return {} } },
-        gif: { f: 'gif', o: function () { return { size: 256, fps: 25, matte: '#FFFFFF' } } }
+        gif: { f: 'gif', o: function () { return { size: 256, quality: P.q, matte: '#FFFFFF' } } }
       }
 
       /* ── markup ── */
@@ -2494,6 +2507,7 @@
                 '<div class="wdl-about"><p class="wdl-name"><span class="wdl-badge" data-dl-badge aria-hidden="true"></span><b data-dl-name></b></p><p class="wdl-note" data-dl-note></p><p class="wdl-aud" data-dl-aud></p></div></div>' +
               '<button type="button" class="wdl-adj" data-dl-adj aria-expanded="false" aria-controls="' + id + '-opts"><span class="wdl-adj-i" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="wdl-adj-t"><b>Options</b><small data-dl-adjsum></small></span><span class="wdl-adj-x" aria-hidden="true"></span></button>' +
               '<div class="wdl-opts" id="' + id + '-opts" data-dl-opts></div>' +
+              '<div class="wdl-qual" data-dl-qual hidden></div>' +
               '<div class="wdl-go">' +
                 '<button type="button" class="wdl-dl" data-dl-go><span class="wdl-dl-i">' + G.down + '<i class="wdl-spin" aria-hidden="true"></i></span><span class="wdl-dl-t"><b data-dl-gol>Download</b><small id="' + id + '-sum" data-dl-sum></small></span><span class="wdl-bar" aria-hidden="true"></span></button>' +
                 '<button type="button" class="wdl-copy" data-dl-copy hidden>' + G.copy + '<span>Copy</span></button>' +
@@ -2559,7 +2573,7 @@
           if (padVal(f) === 'auto') h += '<p class="wdl-why">Auto leaves just enough room for the motion, so nothing is cut off.</p>'
         }
         if (DL_FRAMES.indexOf(f) >= 0) {
-          h += seg('fps', 'Smoothness <small>frames a second</small>', fpsList(f).map(function (n) { return [n, String(n)] }), fpsVal(f))
+          if (f !== 'gif') h += seg('fps', 'Smoothness <small>frames a second</small>', fpsList(f).map(function (n) { return [n, String(n)] }), fpsVal(f))
           if (f === 'webm' || f === 'mp4') h += seg('loops', 'Length', [[1, 'One loop'], [2, '2 loops'], [3, '3 loops'], [5, '5 loops']], P.loops)
           else if (f !== 'png-sequence') h += seg('loop', 'Plays', [[0, 'Forever'], [1, 'Once'], [3, '3 times']], P.loop)
         }
@@ -2582,7 +2596,8 @@
         if (s) parts.push(s)
         if (bm) parts.push(bg ? (bgVal(f) === 'white' ? 'on white' : bgVal(f) === 'page' ? 'on the page colour' : 'on ' + bg) : bm === 'matte' ? 'see-through, edges on ' + (P.matte === 'custom' ? P.matteHex : P.matte === 'page' ? 'the page colour' : P.matte) : 'see-through')
         if (moving(f) && motionPick(f) !== 'still') { var sec2 = loopSecs(f); if (sec2) parts.push(sec2 + ' s loop') }
-        if (DL_FRAMES.indexOf(f) >= 0) parts.push(fpsVal(f) + ' fps')
+        if (f === 'gif') parts.push(gifQ(P.q)[1] + ' quality, ' + fpsVal(f) + ' fps')
+        else if (DL_FRAMES.indexOf(f) >= 0) parts.push(fpsVal(f) + ' fps')
         if (isCode(f)) parts.push(S.anim === 'none' && !swapOn() ? 'still' : 'with motion')
         return parts.join(' · ')
       }
@@ -2659,6 +2674,22 @@
           P.okey = ok2
           oe.innerHTML = ok ? optsHtml(f) : ''
           if (had) { var back = $('[data-dl-o="' + had + '"][aria-checked="true"]', oe) || $('[data-dl-o="' + had + '"][data-v="' + hadV + '"]', oe); if (back) back.focus() }
+        }
+        // GIF quality: four levels, each saying what it does to the file; the frame count follows the loop's length
+        var qe = $('[data-dl-qual]', sec), showQ = ok && f === 'gif' && motionPick(f) !== 'still'
+        qe.hidden = !showQ
+        if (showQ) {
+          var secs = loopSecs(f) || 0, qk = P.q + '|' + secs
+          if (qe._k !== qk) {
+            var had2 = qe.contains(D.activeElement)
+            qe._k = qk
+            qe.innerHTML = '<p class="wdl-l" id="' + id + '-o-q">Quality <small>' + (secs ? Math.round(secs * fpsVal(f)) + ' frames in a ' + secs + ' s loop' : 'frames and colour') + '</small></p>' +
+              '<div class="wdl-qs" role="radiogroup" aria-labelledby="' + id + '-o-q">' + GIF_Q.map(function (q) {
+                var on = q[0] === P.q
+                return '<button type="button" role="radio" class="wdl-q2" data-dl-o="q" data-v="' + q[0] + '" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '"><b>' + q[1] + '</b><small>' + q[2] + ' fps · ' + q[3] + '</small></button>'
+              }).join('') + '</div>'
+            if (had2) { var bq = $('[aria-checked="true"]', qe); if (bq) bq.focus() }
+          }
         }
         // options fold: "Options" names what can be changed for this format; open or closed is remembered
         var adj = $('[data-dl-adj]', sec), has = ok && !!oe.children.length
@@ -2822,7 +2853,8 @@
         else if (name === 'pad') P.pad[padKey(f)] = v
         else if (name === 'motion') P.motion = v
         else if (name === 'which') P.which = v
-        else if (name === 'fps') P.fps[f === 'gif' ? 'gif' : 'v'] = +v
+        else if (name === 'fps') P.fps.v = +v
+        else if (name === 'q') P.q = gifQ(v)[0]
         else if (name === 'loop') P.loop = +v
         else if (name === 'loops') P.loops = +v
         else if (name === 'size') { if (v === 'custom') P.custom[k] = true; else { P.custom[k] = false; P.size[k] = +v } }

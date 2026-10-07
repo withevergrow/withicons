@@ -417,6 +417,19 @@
 .wdl-switch[aria-checked="true"] .wdl-switch-ui::after { transform: translateX(16px) }
 
 /* the big button (+ Copy for text formats and PNG) */
+/* GIF quality: four levels in view next to the Download button, each saying what it does to the file */
+.wdl-qual { display: grid; gap: 0 }
+.wdl-qual[hidden] { display: none }
+.wdl-qs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; padding: 4px; border-radius: 14px; background: var(--paper-2) }
+.wdl-q2 { display: grid; gap: 3px; align-content: center; min-width: 0; min-height: 52px; padding: 7px 9px; border: 0; border-radius: 10px; background: none; color: var(--muted); text-align: left; cursor: pointer; transition: background-color .2s, color .2s, box-shadow .2s, transform .16s ease-out }
+.wdl-q2 b { font: 700 13.5px/1.1 var(--font-sans); color: inherit }
+.wdl-q2 small { font: 500 11.5px/1.25 var(--font-sans); opacity: .85 }
+.wdl-q2:active { transform: scale(.97) }
+.wdl-q2[aria-checked="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 4px rgba(17, 19, 24, .16), inset 0 -2px 0 var(--sc, var(--ink)) }
+[data-theme="dark"] .wdl-q2[aria-checked="true"] { background: #2B303C; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), inset 0 -2px 0 var(--sc, #fff) }
+.wdl-q2:focus-visible { outline: 2.5px solid var(--focus-ring, #2F5BFF); outline-offset: 1px }
+@media (hover: hover) and (pointer: fine) { .wdl-q2:hover { color: var(--ink) } }
+@media (max-width: 520px) { .wdl-qs { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 .wdl-go { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px }
 .wdl-dl {
   position: relative; display: grid; flex: 1 1 240px; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; min-width: 0; min-height: 72px; padding: 12px 22px 12px 13px;

@@ -22,7 +22,7 @@
     if (m.steps) v.push('--wm-steps:' + m.steps)
     return ' wm wm-hover wm-p-' + esc(m.preset) + '"' + (v.length ? ' style="' + v.join(';') + '"' : '') + ' data-wm-preset="' + esc(m.preset)
   }
-  var HINT = { anim: 'download it as an animated SVG', gif: 'download an animated GIF for your slides', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', 'class': 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
+  var HINT = { anim: 'make an animated SVG', gif: 'make a GIF for your slides, in the quality you pick', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', 'class': 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
 
   var engine = null
   function getEngine() {
@@ -55,38 +55,99 @@
   }
   function pascal(n) { return n.split('-').map(function (x) { return x.charAt(0).toUpperCase() + x.slice(1) }).join('') }
 
-  /* ───────── animated downloads: the shared export pipeline (js/export/registry.js + animated.js) ─────────
-     Loaded on first use from the site root (data-root), so it works at any page depth; animated.js finds the motion
-     runtime from its own URL. */
-  var exportP = null
-  function loadExport(root) {
-    var X = W.WithExport
-    if (X && X.get && X.get('gif') && X.get('animated-svg')) return Promise.resolve(X)
-    if (exportP) return exportP
-    exportP = new Promise(function (resolve, reject) {
-      var list = ['js/export/registry.js', 'js/export/animated.js'], left = list.length, failed = false
-      var one = function () {
-        if (--left) return
-        var R = W.WithExport
-        if (!failed && R && R.get && R.get('gif') && R.get('animated-svg')) resolve(R)
-        else { exportP = null; reject(new Error('export scripts did not load')) }
-      }
-      list.forEach(function (rel) {
-        var sc = doc.createElement('script'); sc.src = root + rel; sc.async = false
-        sc.onload = one; sc.onerror = function () { failed = true; one() }
-        doc.head.appendChild(sc)
-      })
+  /* ───────── the GIF maker: the studio itself (js/editor.js), opened in a dialog on Animated → GIF ─────────
+     Every animated file on these pages comes from the one GIF creator the icon pages and the library use: the same
+     motion (the icon's own loop), frames, headroom and encoder, with its options (move, quality, size, background,
+     edge colour, plays). The studio's scripts load on first use from the site root (data-root). */
+  var studioP = null, maker = null
+  function loadAsset(root, rel, css) {
+    return new Promise(function (resolve) {
+      var el = doc.createElement(css ? 'link' : 'script')
+      if (css) { el.rel = 'stylesheet'; el.href = root + rel } else { el.src = root + rel; el.async = false }
+      el.onload = function () { resolve(true) }; el.onerror = function () { resolve(false) }
+      doc.head.appendChild(el)
     })
-    return exportP
   }
-  // the export context for one icon (registry.js ctx): the file's own root attributes and drawing (colours already
-  // baked by WI.svgFile), its motion spec, and the motion to record: the hover move the tile plays, looped
-  function exportCtx(n, style, svg, ink) {
-    var m = /^\s*<svg([^>]*)>([\s\S]*)<\/svg>\s*$/i.exec(svg) || ['', '', svg], rootAttrs = {}
-    m[1].replace(/([\w:-]+)\s*=\s*"([^"]*)"/g, function (all, k, v) { if (!/^(xmlns|width|height|viewBox|class|style)$/.test(k)) rootAttrs[k] = v; return '' })
-    var sp = (W.WITH_MOTION && W.WITH_MOTION[n]) || null, mv = sp && (sp.hover || sp.loop), motion = { trigger: 'loop' }
-    if (mv) ['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].forEach(function (k) { if (mv[k] != null) motion[k] = mv[k] })
-    return { name: n, title: n.replace(/-/g, ' '), style: style, inner: m[2], root: rootAttrs, color: ink, vars: {}, motion: motion, motionSpec: sp }
+  function loadStudio(root) {
+    if (W.WithEditor && W.WithEditor.mount) return Promise.resolve(W.WithEditor)
+    if (studioP) return studioP
+    studioP = Promise.all([
+      loadAsset(root, 'vendor/motion/motion.css', true), loadAsset(root, 'css/editor.css', true),
+      W.WithMotion ? true : loadAsset(root, 'vendor/motion/motion.js'),
+      W.WITH_MOTION ? true : loadAsset(root, 'data/motion.js'),
+      loadAsset(root, 'js/palette-map.js'), loadAsset(root, 'js/editor.js')
+    ]).then(function () {
+      if (!W.WithEditor || !W.WithEditor.mount) { studioP = null; throw new Error('studio') }
+      return W.WithEditor
+    })
+    return studioP
+  }
+  var ICX = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+  var ICA = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12 H19 M13 6 L19 12 L13 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  function makerDialog() {
+    if (maker) return maker
+    var d = doc.createElement('dialog')
+    d.className = 'ax-gm'; d.setAttribute('aria-labelledby', 'ax-gm-h')
+    d.innerHTML =
+      '<div class="ax-gm-in">' +
+        '<header class="ax-gm-head">' +
+          '<span class="ax-gm-grab" aria-hidden="true"></span>' +
+          '<span class="ax-gm-ic" data-gm-ic aria-hidden="true"></span>' +
+          '<div class="ax-gm-id"><h2 id="ax-gm-h"><span data-gm-t></span> <span class="ax-gm-k" data-gm-k>GIF maker</span></h2><p data-gm-sub>Pick a move and a quality, then download.</p></div>' +
+          '<a class="ax-gm-page" data-gm-page href="#">Icon page' + ICA + '</a>' +
+          '<button type="button" class="ax-gm-x" data-gm-x>' + ICX + '<span class="pg-sr">Close</span></button>' +
+        '</header>' +
+        '<div class="ax-gm-body" data-gm-body tabindex="-1"></div>' +
+        // phones: the file's button stays in reach while the move and the quality are picked further down
+        '<div class="ax-gm-foot"><button type="button" class="ax-gm-go" data-gm-go><span data-gm-gol>Download</span><small>quality and options below</small></button></div>' +
+      '</div>'
+    doc.body.appendChild(d)
+    d.addEventListener('click', function (e) {
+      if (e.target === d || (e.target.closest && e.target.closest('[data-gm-x]'))) closeMaker()
+      else if (e.target.closest && e.target.closest('[data-gm-go]')) { var go = $('.ax-gm-body [data-dl-go]', d); if (go) go.click() }
+    })
+    d.addEventListener('close', function () { doc.documentElement.classList.remove('ax-gm-open'); if (maker.from && maker.from.focus) maker.from.focus({ preventScroll: true }) })
+    maker = { el: d, ed: null, from: null }
+    return maker
+  }
+  function closeMaker() { if (maker && maker.el.open) maker.el.close() }
+  function openMaker(o) {
+    var m = makerDialog(), d = m.el, body = $('[data-gm-body]', d), w = WI()
+    var gif = o.act !== 'anim'
+    m.from = o.from || null
+    $('[data-gm-t]', d).textContent = o.title
+    $('[data-gm-k]', d).textContent = gif ? 'GIF maker' : 'Animated SVG'
+    $('[data-gm-gol]', d).textContent = gif ? 'Download GIF' : 'Download animated SVG'
+    $('[data-gm-sub]', d).textContent = gif ? 'Pick a move and a quality, then download. Plays in PowerPoint, Google Slides, Keynote, email and chat.' : 'Pick a move, then download. Plays on websites, in Notion and in browsers.'
+    $('[data-gm-page]', d).href = o.root + 'icons/' + o.name + '.html' + (o.style !== 'line' ? '?style=' + o.style : '')
+    $('[data-gm-ic]', d).innerHTML = (w && w.svg && w.svg(o.name, o.style, 28)) || ''
+    if (m.ed) { try { m.ed.destroy() } catch (e) { } m.ed = null }
+    body.innerHTML = '<p class="ax-gm-wait"><span class="ax-gm-spin" aria-hidden="true"></span>Opening the GIF maker…</p>'
+    doc.documentElement.classList.add('ax-gm-open')
+    if (!d.open) { if (d.showModal) d.showModal(); else d.setAttribute('open', '') }
+    loadStudio(o.root).then(function (E) {
+      if (!d.open) return
+      body.innerHTML = ''
+      var host = doc.createElement('div'); host.className = 'ax-gm-studio'; body.appendChild(host)
+      m.ed = E.mount(host, {
+        name: o.name, title: o.title, style: o.style, remember: false, rememberColors: false, anim: 'loop',
+        codeFold: true, dlQuick: false, dlGroup: 'animated', dlPick: gif ? 'gif' : 'animated-svg', dlSize: gif ? o.px : null,
+        dlTitle: gif ? 'Your GIF' : 'Your animated file'
+      })
+      if (o.color && m.ed && m.ed.set) m.ed.set({ color: o.color })
+      if (m.ed && m.ed.tab) m.ed.tab('motion')   // the move is what changes a GIF most, so its controls come first
+      body.focus({ preventScroll: true })
+    }, function () {
+      // the studio didn't load (offline, blocked): the icon's own page has the same maker
+      location.href = $('[data-gm-page]', d).href + '#download'
+    })
+  }
+
+  // the tile's own label (its visible name), else the icon's name in words
+  function tileTitle(b, n) {
+    var t = b && b.querySelector('.ax-tile-n, .ax-tile-t, span:not(.ax-tile-ic)')
+    var s = (t && t.textContent.trim()) || n.replace(/-/g, ' ')
+    return s.charAt(0).toUpperCase() + s.slice(1)
   }
 
   /* ───────── icon picker ───────── */
@@ -192,34 +253,7 @@
       withStyle(st.style).then(function () {
         var color = st.colorSet ? st.color : null
         var label = n + ' · ' + title(st.style)
-        if (st.act === 'anim' || st.act === 'gif') {
-          // Animated files come from the same export pipeline as the icon pages and the studio (js/export/animated.js):
-          // headroom for motion that leaves the 24 grid, merged still frames, a matte for the GIF's edges. They play the
-          // move the tile just showed on hover, on a loop (a file can't sense hover), like the studio's "On hover" export.
-          var M = W.WithMotion
-          if (!M || !M.animatedSvg) { location.href = root + 'icons/' + n + '.html'; return }
-          var ink = color || '#111318', base = w.svgFile(n, st.style, { color: ink, size: 24 })
-          var bg = lum(ink) > 0.85 ? '#111318' : '#FFFFFF'
-          var ctx = exportCtx(n, st.style, base, ink)
-          if (st.act === 'gif') toast('Making your GIF…')
-          return loadExport(root).then(function (X) {
-            var gpx = Math.min(st.px, 512)
-            return X.get(st.act === 'gif' ? 'gif' : 'animated-svg').run(ctx, st.act === 'gif' ? { size: gpx, fps: 25, background: bg } : { size: 96 }).then(function (r) {
-              X.download(r.data, r.filename, r.mime)
-              return r.filename
-            })
-          }, function () {
-            // the export scripts didn't load (offline, blocked): the motion runtime alone still makes both files
-            var mo = { name: n, trigger: 'loop', color: ink }, mv = ctx.motion || {}
-            ;['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].forEach(function (k) { if (mv[k] != null) mo[k] = mv[k] })
-            var stem = n + (st.style === 'line' ? '' : '-' + st.style)
-            if (st.act === 'anim') { w.download(stem + '-animated.svg', M.animatedSvg(base, Object.assign({ size: 96 }, mo)), 'image/svg+xml'); return stem + '-animated.svg' }
-            var gpx = Math.min(st.px, 512)
-            return M.gif(base, mo, { size: gpx, fps: 25, background: bg }).then(function (bl) { saveBlob(stem + '-' + gpx + '.gif', bl); return stem + '-' + gpx + '.gif' })
-          }).then(function (fn) {
-            toast(st.act === 'gif' ? 'Downloaded ' + fn + '. Insert it like a picture: it plays in PowerPoint, Google Slides and Keynote.' : 'Downloaded ' + fn + '. It plays on websites, in Notion and in browsers.')
-          }, function () { toast(st.act === 'gif' ? 'Couldn’t make the GIF in this browser. Try the animated SVG.' : 'Couldn’t make the animated SVG here. Open the icon’s page instead.') })
-        }
+        if (st.act === 'anim' || st.act === 'gif') { openMaker({ name: n, title: tileTitle(b, n), style: st.style, color: color, px: Math.min(st.px, 512), act: st.act, root: root, from: b }); return }
         if (st.act === 'svg' || st.act === 'vue') return copyText(w.svgFile(n, st.style, { color: color }), 'Copied ' + label + ' SVG')
         if (st.act === 'jsx') return copyText(toJsx(w.svgFile(n, st.style, { color: color }), pascal(n)), 'Copied ' + label + ' as JSX')
         if (st.act === 'dlsvg') { w.download(n + '-' + st.style + '.svg', w.svgFile(n, st.style, { color: color })); toast('Downloaded ' + n + '-' + st.style + '.svg'); return }

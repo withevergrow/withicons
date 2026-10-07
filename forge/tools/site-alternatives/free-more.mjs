@@ -37,7 +37,7 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
       title: 'Free animated icons: animated SVG, CSS and React, MIT · with icons',
       desc: `Free animated icons: ${N} icons that ring, beat, spin and float, in ${N_STYLES} styles. Download animated SVGs with no code, or add two CSS classes. ${PRESETS.length} motions, reduced-motion safe, MIT.`,
       h1: ['Free', 'animated icons'], q: 'free animated icons, no code needed',
-      answer: () => `Every one of the ${N} icons comes with <b>its own animation</b> (a bell rings, a heart beats, a loader spins) and works with ${PRESETS.length} motion presets in all ${N_STYLES} styles. Hover an icon below to watch it move, then click it to download a <b>GIF for your slides</b> (PowerPoint, Google Slides, Keynote) or an <b>animated SVG</b> for websites and Notion. No code, no account. Developers add two CSS classes from <code>@withicons/motion</code>. Free and MIT licensed.`,
+      answer: () => `Every one of the ${N} icons comes with <b>its own animation</b> (a bell rings, a heart beats, a loader spins) and works with ${PRESETS.length} motion presets in all ${N_STYLES} styles. Hover an icon below to watch it move, then click it to make a <b>GIF for your slides</b> (PowerPoint, Google Slides, Keynote), from light and small to smooth and crisp, or an <b>animated SVG</b> for websites and Notion. No code, no account. Developers add two CSS classes from <code>@withicons/motion</code>. Free and MIT licensed.`,
       picker: { actions: ['gif', 'anim', 'svg'], px: 256, groups: [['They move on hover', pick(SETS.motion, 24)]] },
       body: p => `
 <section class="ax-split" aria-labelledby="an-show">
