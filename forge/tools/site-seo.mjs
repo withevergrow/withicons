@@ -749,7 +749,10 @@ ${crumbs(crumbItems)}
         <button type="button" class="ip-go-more" data-open="download" aria-haspopup="dialog" title="PNG, PowerPoint, GIF, video and more"><span class="visually-hidden">More formats: PNG, PowerPoint, GIF, video and more</span>${I.chev}</button>
       </div>
       <button type="button" class="ip-ghost" data-act="copy-img" title="Paste into Slides, Docs or Notion">${I.copy}<span>Copy image</span></button>
-      <button type="button" class="ip-ghost is-quiet" data-open="look" aria-haspopup="dialog">${I.spark}<span>Customize</span></button>
+      <div class="ip-sgo" role="group" aria-label="The studio">
+        <button type="button" class="ip-sgo-b" data-open="look" aria-haspopup="dialog"><span class="ip-sgo-i" aria-hidden="true">${I.spark}</span><span class="ip-sgo-t"><b>Open the studio</b><small>Colour, palettes, size, motion and turn into</small></span>${I.arr}</button>
+        <div class="ip-sgo-starts"><span class="ip-sgo-or" aria-hidden="true">or start with</span>${[['look', 'Colour', I.drop], ['motion', 'Motion', I.play], ['swap', 'Turn into', I.swap]].map(([v, l, ic]) => `<button type="button" data-open="${v}" aria-haspopup="dialog" aria-label="Open the studio on ${l}">${ic}<span>${l}</span></button>`).join('')}</div>
+      </div>
     </div>
     <p class="ip-minor"><button type="button" data-act="copy-svg">${I.code}Copy SVG code</button><a href="../icons.html?icon=${n}">${I.grid}Open in the library</a><a href="#ask-ai" data-ask-jump>${I.chat}Ask AI</a></p>
     <noscript><p class="ip-note">Downloads need JavaScript. You can still <a href="${cdnSvg('line', n)}">open the SVG file</a>.</p></noscript>

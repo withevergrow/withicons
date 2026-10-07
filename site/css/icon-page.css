@@ -616,12 +616,28 @@
 .ip-ghost svg { width: 22px; height: 22px; flex: none }
 .ip-ghost:hover { transform: translateY(-2px); border-color: var(--sc) }
 .ip-ghost:active { transform: scale(.97) }
-.ip-ghost.is-quiet { flex: 1 0 100%; min-height: 44px; padding: 0 2px; border: 0; background: none; font: 680 16px/1.2 var(--font-sans) }
-.ip-ghost.is-quiet span { text-decoration: underline; text-decoration-color: var(--sc); text-decoration-thickness: 2px; text-underline-offset: 5px; transition: text-underline-offset .25s }
-.ip-ghost.is-quiet svg { color: var(--style-text, var(--sc)) }
-.ip-ghost.is-quiet:hover { transform: none }
-.ip-ghost.is-quiet:hover span { text-underline-offset: 7px }
-.ip-ghost.is-quiet::after { content: "colour, palettes, size, motion"; font: 500 14px/1.2 var(--font-sans); color: var(--muted) }
+/* the studio, right under Download: open it, or start on one of its tabs */
+.ip-sgo { flex: 1 0 100%; display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 6px; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--rule-strong); transition: box-shadow .25s }
+.ip-sgo:has(.ip-sgo-b:hover) { box-shadow: inset 0 0 0 1.5px var(--sc) }
+.ip-sgo-b { min-width: 0; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 12px 6px 6px; border: 0; border-radius: 16px; background: none; color: var(--ink); text-align: left; cursor: pointer; transition: background-color .2s, transform .16s ease-out }
+.ip-sgo-b:active { transform: scale(.98) }
+.ip-sgo-i { flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; color: var(--sc-on, #fff); background: linear-gradient(135deg, color-mix(in srgb, var(--sc) 85%, #fff), var(--sc) 60%, color-mix(in srgb, var(--sc) 82%, #000)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 10px 20px -12px var(--sc); transition: background .5s var(--ip-e) }
+.ip-sgo-i svg { width: 22px; height: 22px; transition: transform .45s var(--ip-spring) }
+.ip-sgo-t { flex: 1; min-width: 0; display: grid; gap: 3px }
+.ip-sgo-t b { font: 760 17px/1.1 var(--font-display); letter-spacing: -.01em }
+.ip-sgo-t small { font: 500 13px/1.3 var(--font-sans); color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.ip-sgo-b > .arr { flex: none; width: 18px; height: 18px; color: var(--muted); transition: transform .25s var(--ip-e), color .2s }
+.ip-sgo-starts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 6px 6px 0; padding: 8px 0 4px; border-top: 1px solid var(--rule, rgba(127, 127, 127, .2)) }
+.ip-sgo-or { font: 600 11px/1 var(--font-mono, ui-monospace, monospace); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-right: 4px }
+.ip-sgo-starts button { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px 0 9px; border: 0; border-radius: 999px; background: var(--paper-2, rgba(127, 127, 127, .1)); color: var(--ink); font: 650 13.5px/1 var(--font-sans); cursor: pointer; transition: background-color .2s, transform .16s ease-out }
+.ip-sgo-starts button svg { width: 16px; height: 16px; color: var(--style-text, var(--sc)) }
+.ip-sgo-starts button:active { transform: scale(.96) }
+.ip-sgo-b:focus-visible, .ip-sgo-starts button:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+@media (hover: hover) and (pointer: fine) {
+  .ip-sgo-b:hover .ip-sgo-i svg { transform: rotate(18deg) scale(1.08) }
+  .ip-sgo-b:hover > .arr { transform: translateX(3px); color: var(--ink) }
+  .ip-sgo-starts button:hover { background: color-mix(in srgb, var(--sc) 16%, var(--card)) }
+}
 .is-busy { cursor: progress }
 .ip-ghost.is-busy svg, .ip-go.is-busy > svg { animation: ip-pulse 1s ease-in-out infinite }
 @keyframes ip-pulse { 50% { opacity: .35 } }
@@ -820,12 +836,14 @@ html.ip-locked { overflow: hidden }
   .ip-go { min-height: 62px; padding-left: 16px; gap: 12px }
   .ip-go b { font-size: 18px }
   .ip-split { flex-basis: 100% }
-  .ip-ghost:not(.is-quiet) { flex: 1 1 auto; justify-content: center; min-height: 54px }
-  .ip-ghost.is-quiet::after { display: none }
+  .ip-ghost { flex: 1 1 auto; justify-content: center; min-height: 54px }
+  .ip-sgo-or { display: none }
+  .ip-sgo-t small { white-space: normal }
+  .ip-sgo-starts button { flex: 1; justify-content: center; padding: 0 8px }
   .ip-goals button { min-height: 58px }
 }
 @media (hover: none) {
-  .ip-pick-b:hover, .ip-split:hover, .ip-ghost:hover, .ip-goals button:hover, .ip-make-starts button:hover, .ip-btn2:hover, .ip-live-chip:hover { transform: none }
+  .ip-pick-b:hover, .ip-split:hover, .ip-ghost:hover, .ip-sgo-b:hover, .ip-goals button:hover, .ip-make-starts button:hover, .ip-btn2:hover, .ip-live-chip:hover { transform: none }
   .ip-pick-b[aria-checked="true"] { transform: translateY(-2px) }
 }
 @media (prefers-reduced-motion: reduce) {

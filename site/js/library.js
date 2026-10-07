@@ -1402,6 +1402,7 @@
     ext: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4 H20 V10 M20 4 L11 13 M18 14 V18.5 A1.5 1.5 0 0 1 16.5 20 H5.5 A1.5 1.5 0 0 1 4 18.5 V7.5 A1.5 1.5 0 0 1 5.5 6 H10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     spark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L13.8 9.2 L20 11 L13.8 12.8 L12 19 L10.2 12.8 L4 11 L10.2 9.2 Z" fill="currentColor"/><path d="M19 3 L19.6 4.9 L21.5 5.5 L19.6 6.1 L19 8 L18.4 6.1 L16.5 5.5 L18.4 4.9 Z" fill="currentColor" opacity=".6"/></svg>',
     searchFace: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 15.5 L20.5 20.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8.5 9.5 h.01 M12.5 9.5 h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8.5 13 Q10.5 11.6 12.5 13" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+    page: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5 H13.5 L18.5 8.5 V19 A1.5 1.5 0 0 1 17 20.5 H6.5 A1.5 1.5 0 0 1 5 19 V5 A1.5 1.5 0 0 1 6.5 3.5 Z M13.5 3.5 V8.5 H18.5 M8.5 12.5 H15 M8.5 16 H13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     pick: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 L18.5 9.5 M4 20 L5 16 L15.5 5.5 A2.83 2.83 0 0 1 19.5 9.5 L9 20 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
   }
   var SIZES = [16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024]
@@ -1482,7 +1483,12 @@
       '</div>' +
       '<header class="vw-head">' +
         '<h2 class="vw-title" id="vw-title" tabindex="-1" data-vw-title></h2>' +
-        '<p class="vw-desc"><span data-vw-desc></span> <a class="vw-page" data-vw-page href="#"><span data-vw-pagetitle>Open the icon page</span>' + ICO.arrow + '</a></p>' +
+        '<p class="vw-desc"><span data-vw-desc></span></p>' +
+        // the two ways onward, always first: the full studio (this look and motion come along) and the icon's own page
+        '<div class="vw-launch">' +
+          '<a class="vw-go is-studio" data-vw-studio href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.spark + '</span><span class="vw-go-t"><b>Open studio</b><small>Colours, motion, turn into</small></span>' + ICO.arrow + '</a>' +
+          '<a class="vw-go is-page" data-vw-page href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.page + '</span><span class="vw-go-t"><b>Icon page</b><small>Guides, every format</small></span>' + ICO.arrow + '</a>' +
+        '</div>' +
       '</header>' +
       '<div class="vw-main">' +
         '<div class="vw-col-a">' +
@@ -1507,6 +1513,15 @@
               '<div class="vw-field"><label class="vw-label" for="vw-pad">Padding</label><input class="vw-range" id="vw-pad" type="range" min="0" max="0.3" step="0.02" data-vw-pad><output class="vw-out" data-vw-padout></output></div>' +
             '</div>' +
           '</div></div>' +
+          // animation, one tap away: when it moves, and the moves made for this icon (the full set lives in Make it yours)
+          '<div class="vw-mo" data-vw-mo role="group" aria-labelledby="vw-mo-l">' +
+            '<div class="vw-mo-top"><span class="vw-mo-l" id="vw-mo-l"><span class="vw-mo-dot" aria-hidden="true"></span>Animation</span><span class="vw-mo-now" data-vw-mo-now aria-live="polite"></span>' +
+              '<button type="button" class="vw-mo-more" data-vw="mo-more">More<span class="vh"> animation settings</span>' + ICO.arrow + '</button></div>' +
+            '<div class="vw-mo-seg" role="radiogroup" aria-label="When it moves" data-vw-mo-seg style="--n:4"><span class="vw-mo-ink" aria-hidden="true"></span>' +
+              [['none', 'Still'], ['loop', 'Always'], ['hover', mq('(hover: none)') ? 'On tap' : 'On hover'], ['once', 'Once']].map(function (a) { return '<button type="button" role="radio" data-vw-anim="' + a[0] + '" aria-checked="false" tabindex="-1">' + a[1] + '</button>' }).join('') +
+            '</div>' +
+            '<div class="vw-mo-chips" role="radiogroup" aria-label="Move" data-vw-mo-chips><span class="vw-mo-wait"><span class="t-skel" aria-hidden="true"></span>Getting the moves ready…</span></div>' +
+          '</div>' +
           '<div class="vw-stylebar">' +
             '<p class="vw-stl" aria-hidden="true"><b data-vw-stl-n></b><span data-vw-stl-s></span></p>' +
             '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { var g = GROUP_OF[s]; return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" data-group="' + (g ? g.id : '') + '" style="--sc:var(--s-' + s + ');--on-sc:var(--on-' + s + ')" aria-label="' + esc(STYLE[s].title) + '" title="' + esc(STYLE[s].title) + ' · ' + esc(sayOf(s)) + (i < 10 ? ' (' + ((i + 1) % 10) + ')' : '') + '"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
@@ -1896,8 +1911,8 @@
       $('[data-vw-title]', b).textContent = ic.title; $('[data-vw-mini-t]', b).textContent = ic.title
       $('[data-vw-desc]', b).textContent = ic.description || ''
       var cat = $('[data-vw-cat]', b); cat.textContent = cap(ic.category); cat.href = 'categories/' + ic.category + '.html'
-      var pg = $('[data-vw-page]', b); pg.href = 'icons/' + name + '.html'
-      $('[data-vw-pagetitle]', b).textContent = 'Open the ' + ic.title + ' icon page'
+      $('[data-vw-page]', b).setAttribute('aria-label', 'Open the ' + ic.title + ' icon page: guides and every format')
+      $('[data-vw-studio]', b).setAttribute('aria-label', 'Open the ' + ic.title + ' studio: colours, motion and turn into, with your choices so far')
       var aka = (ic.aliases || []).concat(ic.synonyms || []).filter(function (x, i, arr) { return arr.indexOf(x) === i && x !== ic.name }).slice(0, 16)
       $('[data-vw-akasec]', b).hidden = !aka.length
       $('[data-vw-aka]', b).innerHTML = aka.map(function (x) { return '<button type="button" class="vw-chip" data-vw-q="' + esc(x.replace(/-/g, ' ')) + '" title="Search “' + esc(x.replace(/-/g, ' ')) + '”">' + esc(x.replace(/-/g, ' ')) + '</button>' }).join('')
@@ -1921,6 +1936,7 @@
       renderAskAI(host, { icon: name, style: st, mode: 'tasks', compact: true })
     }
     if (part === 'all') { paintTTabs(); if (!reduced) V.pendingPlay = true }
+    paintLaunch(); paintMo()
     paintLook()
   }
   function paintLook() {
@@ -2098,7 +2114,7 @@
     try { if (ED.swapHost) ED.swapHost($('[data-vw-art]', vwBody)) } catch (err) { }
     ED.tab(V.ttab === 'swap' ? 'swap' : 'motion')
     syncEditor()
-    paintArt(); paintPlay()
+    paintArt(); paintPlay(); paintMo()
   }
   // the drawer owns the look (style, colour, stroke, background, PNG size); the studio owns motion and "turn into"
   function syncEditor() {
@@ -2133,7 +2149,7 @@
     var mono = $('[data-vw-monocol]', vwBody); if (mono && st.name === V.name) mono.hidden = ED.isMulti(V.st)
     paintResetChip()
     if (st.name === V.name && (st.anim !== V.qa || st.swapKey !== V.qw)) { V.qa = st.anim; V.qw = st.swapKey; paintQuick() }
-    paintArt(); paintPlay()
+    paintArt(); paintPlay(); paintMo()
     var note = $('[data-vw-mknote]', vwBody)
     if (note) note.textContent = st.swap && st.swap.ready ? (st.swap.trigger === 'click' ? 'Press the round button to switch' : st.swap.trigger === 'hover' ? (mq('(hover: none)') ? 'Tap a card’s button to switch' : 'Point at a button to switch') : st.swap.trigger === 'auto' ? 'Switching on its own' : 'Focus a button to switch') : st.anim === 'hover' ? 'Point at a card to see it move' : 'Ten everyday places'
     if (V.pendingPlay && st.name === V.name && st.style === V.st) { V.pendingPlay = false; clearTimeout(V.playT); V.playT = setTimeout(replayStage, 280) }
@@ -2167,6 +2183,50 @@
     paintArt(true, once ? 'once' : 'auto')
     clearTimeout(V.rt)
     if (once) { var mi = ED.motionInfo('hover'); V.rt = setTimeout(function () { paintArt(true) }, ((mi && mi.dur) || 1) * 1000 + 160) }
+  }
+  // "Open studio" and "Icon page": the icon page in this style; the studio opens on the tab in use here
+  function paintLaunch() {
+    if (!viewer._built || !V.name) return
+    var u = 'icons/' + V.name + '.html' + (V.st && V.st !== 'line' ? '?style=' + V.st : '')
+    $('[data-vw-page]', vwBody).href = u
+    var tab = V.ttab === 'look' && V.moUsed ? 'motion' : V.ttab   // after the animation bar, the studio opens on Motion
+    $('[data-vw-studio]', vwBody).href = u + '#studio' + (tab === 'motion' || tab === 'swap' ? '-' + tab : '')
+  }
+  // the animation bar under the stage: when it moves (Still · Always · On hover · Once) and the moves made for the icon
+  var MO_SAY = { loop: 'always', hover: 'on hover', once: 'once' }
+  function paintMo() {
+    var box = viewer._built && $('[data-vw-mo]', vwBody); if (!box || !V.name) return
+    var e = ED && ED.get(), ready = !!(e && e.name === V.name && e.style === V.st)
+    var anim = ready ? e.anim : (V.anim || 'loop'), seg = $('[data-vw-mo-seg]', box), k = 0
+    $$('[data-vw-anim]', seg).forEach(function (b, i) { var on = b.getAttribute('data-vw-anim') === anim; if (on) k = i; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+    seg.style.setProperty('--i', k)
+    box.classList.toggle('is-still', anim === 'none')
+    var chips = $('[data-vw-mo-chips]', box), now = $('[data-vw-mo-now]', box)
+    if (!ready) { if (chips._k) { chips._k = ''; chips.innerHTML = '<span class="vw-mo-wait"><span class="t-skel" aria-hidden="true"></span>Getting the moves ready…</span>' } now.textContent = ''; return }
+    var key = V.name + '|' + V.st + '|' + e.colorsKey + '|' + e.color + '|' + e.deco
+    if (chips._k !== key) {
+      chips._k = key
+      chips.innerHTML = ED.moves(22).map(function (m) { return '<button type="button" role="radio" class="vw-mo-chip wm-trigger" data-vw-move="' + m.id + '" aria-checked="false" tabindex="-1">' + m.icon + '<span>' + esc(m.label) + '</span></button>' }).join('')
+      if (W.WithEditor.prepareDraw) W.WithEditor.prepareDraw(chips)
+    }
+    chips.style.color = e.color === 'ink' ? '' : e.hex || ''   // the chips wear the icon's colour (ink follows the theme)
+    var cur = ED.preset(), any = false, P = W.WithEditor.PRESETS || {}
+    $$('[data-vw-move]', chips).forEach(function (b) { var on = b.getAttribute('data-vw-move') === cur; if (on) any = true; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+    if (!any) { var f = $('[data-vw-move]', chips); if (f) f.tabIndex = 0 }
+    var hov = mq('(hover: none)') ? 'on tap' : 'on hover'
+    now.textContent = anim === 'none' ? 'Still' : (P[cur] ? P[cur].label : 'Moving') + ' · ' + (anim === 'hover' ? hov : MO_SAY[anim])
+  }
+  function setMo(patch) {
+    if (!V.moUsed) { V.moUsed = true; paintLaunch() }
+    if (!ED || ED.get().name !== V.name) { if (patch.anim) { V.anim = patch.anim; store.set('anim', V.anim) } loadMotion().then(mountEditor); paintMo(); return }
+    if (patch.preset && ED.get().anim === 'none') patch.anim = 'loop'
+    ED.set(patch)
+    if (ED.get().anim !== 'none') { clearTimeout(V.moT); V.moT = setTimeout(replayStage, 20) }
+  }
+  function openMotionTab() {
+    var acc = $('[data-vw-acc="tune"]', vwBody); if (!acc) return
+    acc.open = true; setTTab('motion')
+    setTimeout(function () { acc.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' }) }, 30)
   }
   function paintPlay() {
     var b = viewer._built && $('[data-vw="play"]', vwBody); if (!b) return
@@ -2212,7 +2272,7 @@
   }
   function setTTab(t) {
     V.ttab = t; store.set('ttab', t)
-    paintTTabs()
+    paintTTabs(); paintLaunch()
     if (t !== 'look') { if (ED) ED.tab(t); else loadMotion().then(mountEditor) }
   }
   // grid: with "Animate" on, the tile under the pointer (or keyboard focus) plays its icon's own one-shot
@@ -2252,7 +2312,11 @@
     if (artEl && ED) { var es = ED.get(); if (!(es.swap && es.swap.ready && ED.swapPress(artEl))) replayStage(); return }
     var t = e.target.closest('button, a'); if (!t || !viewer.contains(t)) return
     if (t.closest('.wied, .wied-cpanel')) return   // the studio handles its own controls
+    if (t.hasAttribute('data-vw-studio')) { handoff(); return }   // the link itself goes there
+    if (t.hasAttribute('data-vw-anim')) { setMo({ anim: t.getAttribute('data-vw-anim') }); return }
+    if (t.hasAttribute('data-vw-move')) { setMo({ preset: t.getAttribute('data-vw-move') }); return }
     var act = t.getAttribute('data-vw'), name = V.name, st = V.st
+    if (act === 'mo-more') { openMotionTab(); return }
     if (act === 'copy-img') copyImage(st, name).then(function (ok) { if (ok) yay(t) })
     else if (act === 'png') downloadPng(st, name).then(function (ok) { if (ok) yay(t) })
     else if (act === 'svg') { downloadSvg(st, name); yay(t) }
@@ -2318,6 +2382,9 @@
       if (i >= 0) { e.preventDefault(); var dir = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1; var n = items[(i + dir + items.length) % items.length]; n.focus(); n.click(); return }
     }
   })
+  // a middle-click (new tab) on "Open studio" takes this look and motion along too
+  function handoff() { if (ED && ED.handoff && ED.get().name === V.name) try { ED.handoff() } catch (err) { } }
+  viewer.addEventListener('auxclick', function (e) { if (e.target.closest && e.target.closest('[data-vw-studio]')) handoff() })
   viewer.addEventListener('toggle', function (e) {
     var t = e.target; if (!t.hasAttribute) return
     if (t.hasAttribute('data-vw-dev')) store.set('devopen', t.open)

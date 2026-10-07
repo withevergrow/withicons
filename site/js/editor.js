@@ -476,6 +476,10 @@
       I.title = o.title || (I.data && I.data.title) || (W.WI && W.WI.icon && W.WI.icon(name) && W.WI.icon(name).title) || titleOf(name)
       I.motion = o.motion || (I.data && I.data.motion) || (W.WITH_MOTION && W.WITH_MOTION[name]) || null
       S.preset = ''; SW.to = ''; SW.toStyle = ''; SW.effect = ''; SW.link = true; SW.on = false; SW.paused = false; SW.go = false; SW.form = 'a'
+      // a move picked in the library drawer before "Open studio" (handoff below) arrives with the icon, once, within a minute
+      var ho = remember ? store(HOKEY) : null
+      if (ho && ho.name === name && Date.now() - ho.at < 60000 && ho.preset && PRESETS[ho.preset]) S.preset = ho.preset
+      if (ho && ho.name === name) store(HOKEY, null)
       stopAuto()
       var list = styleList()
       if (o.style && list.indexOf(o.style) >= 0) S.style = o.style
@@ -560,6 +564,20 @@
         return { k: 'b', name: t.name, style: t.style, title: t.title, st: bstate(t.name), mono: function () { return bstate(t.name).color } }
       }
       return { k: 'a', name: I.name, style: S.style, title: I.title, st: cstate(), mono: function () { return S.color } }
+    }
+    // "Open studio" from the library drawer: the drawer's studio is not remembered, so it hands its look, motion and this
+    // icon's colours to the full studio on the icon page (same localStorage keys, plus a one-shot note for the move)
+    var HOKEY = 'with-handoff-v1'
+    function handoff() {
+      var sv = store(KEY) || {}
+      ;['style', 'color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco'].forEach(function (k) { sv[k] = S[k] })
+      store(KEY, sv)
+      var cv = store(CKEY) || {}, c = cstate()
+      cv.icons = cv.icons || {}
+      if (hasCustom(c)) cv.icons[I.name] = { pal: c.pal, palName: c.palName, roles: c.roles, tw: c.tw, n: (cv.seq = (cv.seq || 0) + 1) }
+      else delete cv.icons[I.name]
+      store(CKEY, cv)
+      store(HOKEY, { name: I.name, preset: S.preset || '', at: Date.now() })
     }
     function hasCustom(c) { if (!c) return false; if (c.pal || Object.keys(c.roles).length) return true; for (var s in c.tw) if (Object.keys(c.tw[s]).length) return true; return false }
     function saveC() {
@@ -2897,7 +2915,15 @@
       svg: function (o) { o = o || {}; return buildSvg(o.name || I.name, o.style || S.style, { size: o.size || S.size, mode: o.mode || 'live', hex: o.hex }) },
       svgText: function (mode, st, px) { return buildSvg(I.name, st || S.style, { size: px || S.size, mode: mode || 'file', hex: colorHex(st || S.style) }) },
       // colours of multi-colour styles (every part + palettes): a Colours panel anywhere, and the colours for hosts' own exports
-      colorsPanel: function (el, k) { return colorPanel(el, k) },
+      colorsPanel: function (el, k) { return colorPanel(el, k) }, handoff: handoff,
+      // the moves made for this icon, each with a small live preview that plays on hover (the library's quick motion bar)
+      moves: function (px) {
+        return presetsOrdered().own.map(function (p) {
+          var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, deco: S.deco })
+          return { id: p, label: PRESETS[p].label, icon: '<span class="wied-pchip-i ' + (mi ? mi.cls : '') + '" style="' + (mi ? mi.style : '') + '">' + buildSvg(I.name, S.style, { size: px || 20, mode: 'live' }) + '</span>' }
+        })
+      },
+      preset: function () { return S.preset || ((motionInfo(S.anim === 'none' ? 'loop' : S.anim) || {}).preset) || '' },
       resetColors: function () { resetColors(subj('a')) }, hasCustomColors: function () { return hasCustom(cstate()) },
       // the Download panel anywhere (the library drawer mounts one beside its own buttons): { quick: false } leaves out
       // the quick buttons. downloads() lists the mounted panels (each has .download(formatId, opts) and .make())

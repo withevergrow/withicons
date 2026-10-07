@@ -568,10 +568,76 @@ html.lib-sheet-open, html.lib-sheet-open body { overflow: hidden }
 .vw-title { margin: 0; font: 800 clamp(28px, 7cqi, 42px)/1 var(--f-ui); letter-spacing: -.035em; outline: none; text-wrap: balance }
 .vw-title:focus, .vw-title:focus-visible { outline: none; box-shadow: none }
 .vw-desc { margin: 8px 0 0; font-size: 14.5px; line-height: 1.45; color: var(--l-muted); max-width: 60ch }
-.vw-page { display: inline-flex; align-items: center; gap: 4px; color: var(--sc-text, var(--l-fg)); font-weight: 650; text-decoration: none; white-space: nowrap; border-radius: 6px }
-.vw-page svg { width: 15px; height: 15px; transition: transform .3s var(--ease) }
-.vw-page:hover { text-decoration: underline; text-underline-offset: 3px }
-.vw-page:hover svg { transform: translateX(3px) }
+/* the two ways onward: the full studio (in the style's colour) and the icon page */
+.vw-launch { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 8px; margin-top: 14px }
+.vw-go {
+  position: relative; display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 12px 8px 8px; border-radius: 16px; overflow: hidden;
+  text-decoration: none; color: var(--l-fg); background: var(--l-card-2); box-shadow: inset 0 0 0 1px var(--l-rule);
+  transition: transform .16s ease-out, box-shadow .2s, background-color .4s;
+}
+.vw-go:active { transform: scale(.97) }
+.vw-go:focus-visible { outline: 3px solid var(--l-sun); outline-offset: 2px }
+.vw-go-i { flex: none; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--l-card); box-shadow: 0 1px 2px rgba(17, 19, 24, .08) }
+.vw-go-i svg { width: 19px; height: 19px }
+.vw-go-t { display: grid; gap: 3px; min-width: 0; flex: 1 }
+.vw-go-t b { font: 750 14.5px/1.1 var(--f-ui); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.vw-go-t small { font: 500 12px/1.2 var(--f-ui); opacity: .72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.vw-go > svg { flex: none; width: 16px; height: 16px; opacity: .55; transition: transform .25s var(--ease), opacity .2s }
+.vw-go.is-studio {
+  color: var(--on-sc, #fff); background: linear-gradient(135deg, color-mix(in srgb, var(--sc) 92%, #fff), var(--sc) 55%, color-mix(in srgb, var(--sc) 80%, #000));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 10px 24px -14px var(--sc);
+}
+.vw-go.is-studio::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%); transform: translateX(-100%) }
+.vw-go.is-studio .vw-go-i { background: rgba(255, 255, 255, .22); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); color: inherit }
+.vw-go.is-studio > svg { opacity: .85 }
+@media (hover: hover) and (pointer: fine) {
+  .vw-go:hover > svg { transform: translateX(3px); opacity: 1 }
+  .vw-go.is-page:hover { background: var(--l-card-3) }
+  .vw-go.is-studio:hover::after { transform: translateX(100%); transition: transform .7s var(--ease) }
+}
+@container (max-width: 400px) { .vw-launch { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) } .vw-go-t small, .vw-go > svg { display: none } .vw-go { min-height: 50px; gap: 8px; padding-right: 10px } .vw-go-i { width: 34px; height: 34px; border-radius: 11px } }
+
+/* animation bar (under the stage): when it moves + the moves made for this icon */
+.vw-mo { display: grid; gap: 10px; padding: 12px; border-radius: 18px; background: var(--l-card-2); box-shadow: inset 0 0 0 1px var(--l-rule) }
+.vw-mo-top { display: flex; align-items: center; gap: 10px; min-width: 0 }
+.vw-mo-l { display: inline-flex; align-items: center; gap: 7px; flex: none; font: 700 11px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--l-fg) }
+.vw-mo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sc); box-shadow: 0 0 0 0 color-mix(in srgb, var(--sc) 50%, transparent); animation: vw-mo-pulse 1.8s ease-out infinite }
+.vw-mo.is-still .vw-mo-dot { animation: none; background: var(--l-muted) }
+@keyframes vw-mo-pulse { 70%, 100% { box-shadow: 0 0 0 6px transparent } }
+.vw-mo-now { flex: 1; min-width: 0; font: 500 12.5px/1.2 var(--f-ui); color: var(--l-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.vw-mo-more { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 8px 0 10px; border: 0; border-radius: 999px; background: var(--l-card); color: var(--l-fg); font: 650 12.5px/1 var(--f-ui); cursor: pointer; box-shadow: inset 0 0 0 1px var(--l-rule); transition: transform .16s ease-out, background-color .2s }
+.vw-mo-more svg { width: 13px; height: 13px; transition: transform .25s var(--ease) }
+.vw-mo-more:active { transform: scale(.96) }
+@media (hover: hover) and (pointer: fine) { .vw-mo-more:hover svg { transform: translateX(2px) } }
+.vw-mo-seg { position: relative; display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 2px; padding: 3px; border-radius: 13px; background: var(--l-card-3, var(--l-card)); }
+.vw-mo-seg button { position: relative; z-index: 1; height: 36px; min-width: 0; padding: 0 4px; border: 0; border-radius: 10px; background: none; color: var(--l-muted); font: 680 13.5px/1 var(--f-ui); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .2s }
+.vw-mo-seg button[aria-checked="true"] { color: var(--l-fg) }
+.vw-mo-seg button:focus-visible { outline: 3px solid var(--l-sun); outline-offset: -2px }
+.vw-mo-ink {
+  position: absolute; z-index: 0; left: 3px; top: 3px; bottom: 3px;
+  width: calc((100% - 6px - (var(--n, 4) - 1) * 2px) / var(--n, 4)); transform: translateX(calc(var(--i, 0) * (100% + 2px)));
+  border-radius: 10px; background: var(--l-card); box-shadow: 0 1px 2px rgba(17, 19, 24, .1), 0 0 0 1px var(--l-rule-2), 0 6px 16px -10px rgba(17, 19, 24, .35);
+  transition: transform .3s var(--ease);
+}
+.vw-mo-ink::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 14px; height: 3px; margin-left: -7px; border-radius: 3px; background: var(--sc); transition: background .4s }
+:root[data-theme="dark"] .vw-mo-ink { background: color-mix(in srgb, var(--l-card) 80%, #fff 12%) }
+.vw-mo-chips { display: flex; flex-wrap: wrap; gap: 6px; transition: opacity .25s }
+.vw-mo-chips::-webkit-scrollbar { display: none }
+.vw-mo.is-still .vw-mo-chips { opacity: .62 }
+.vw-mo-chip {
+  flex: none; display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 13px 0 6px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--l-card); color: inherit; font: 650 13px/1 var(--f-ui); box-shadow: inset 0 0 0 1px var(--l-rule-2); transition: transform .16s ease-out, box-shadow .2s, background-color .2s
+}
+.vw-mo-chip:active { transform: scale(.96) }
+.vw-mo-chips { color: var(--l-fg) }
+.vw-mo-chip .wied-pchip-i { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--l-card-2); color: inherit }
+.vw-mo-chip > span:last-child { color: var(--l-fg) }
+.vw-mo-chip .wied-pchip-i svg { width: 20px; height: 20px; overflow: visible }
+.vw-mo-chip[aria-checked="true"] { background: var(--sc-soft); box-shadow: inset 0 0 0 2px var(--sc) }
+.vw-mo-chip:focus-visible { outline: 3px solid var(--l-sun); outline-offset: 2px }
+.vw-mo-wait { display: inline-flex; align-items: center; gap: 8px; height: 40px; font: 500 12.5px/1 var(--f-ui); color: var(--l-muted) }
+.vw-mo-wait .t-skel { width: 28px; height: 28px; border-radius: 50% }
+@media (prefers-reduced-motion: reduce) { .vw-mo-dot { animation: none } .vw-mo-ink { transition: none } }
 
 /* layout: one column; two once the panel is wide (full screen, or dragged wider) */
 .vw-main { display: flex; flex-direction: column; gap: 16px; margin-top: 18px }
@@ -1206,8 +1272,8 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 .vw-art.has-tile { width: min(var(--disp, 256px), 54cqw, 80cqh) }
 @container (max-width: 759px) {
   .vw-col-a, .vw-col-b { display: contents }
-  .vw-stage { order: 1; aspect-ratio: auto; height: clamp(168px, 28vh, 300px); max-height: none }
-  .vw-bgp { order: 2 }
+  .vw-stage { order: 1; aspect-ratio: auto; height: clamp(196px, 30vh, 300px); max-height: none }
+  .vw-bgp, .vw-mo { order: 2 }
   .vw-actions { order: 3 }
   .vw-quick { order: 4 }
   .vw-stylebar { order: 5 }
