@@ -1,6 +1,6 @@
 {
   "name": "@withicons/solid",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "500 icons x 20 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
   "license": "MIT",
   "author": {

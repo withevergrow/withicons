@@ -6,6 +6,8 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.3.0 - 2026-10-07
+
 ### Changed
 - React, Vue, Solid and Svelte: the root import is fast. `import { Home } from '@withicons/react'` takes about 0.15 s in
   Node (was about 10 s) because each style is one module and the root `Icon` loads styles on demand: line renders at

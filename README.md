@@ -27,6 +27,11 @@ For slides, Canva, Figma, websites, apps and AI agents.
 
 </div>
 
+> **New in v0.3.0:** imports are fast everywhere (`import { Home } from '@withicons/react'` loads in about 0.15 s in
+> Node, one icon is under 1 KB gzipped), the dynamic `<Icon>` loads styles on demand, smarter search with confidence and
+> "no exact icon" hints, paged exports on the hosted MCP server, and a slimmer agent skill.
+> [Full changelog](CHANGELOG.md)
+
 ## Why with icons
 
 - **One family, twenty looks.** Every icon is drawn once by hand on a 24x24 grid. Twenty deterministic renderers turn that

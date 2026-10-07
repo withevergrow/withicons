@@ -1,10 +1,10 @@
 {
   "name": "@withicons/search",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Fast, typo-tolerant, dependency-free search engine and prebuilt index for the with icons library (500 icons x 20 styles).",
   "license": "MIT",
   "author": {
-    "name": "with icons, powered by Evergrow",
+    "name": "with icons — powered by Evergrow",
     "url": "https://withevergrow.com"
   },
   "homepage": "https://withicons.com",
