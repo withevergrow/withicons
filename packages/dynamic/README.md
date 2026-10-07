@@ -8,7 +8,7 @@ Each live icon is a small generator. You give it params, it draws the icon, and 
 readable down to 16px. When a value can't be drawn legibly, the icon switches to something that can: "99+" for big
 counts, or a level bar in place of a percentage that doesn't fit.
 
-50 live icons, version 0.3.0. Browse and edit them at https://withicons.com.
+50 live icons, version 0.3.1. Browse and edit them at https://withicons.com.
 
 ```bash
 npm i @withicons/dynamic

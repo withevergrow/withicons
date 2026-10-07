@@ -1,6 +1,6 @@
 {
   "name": "@withicons/angular",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "500 icons x 20 styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.",
   "license": "MIT",
   "author": {

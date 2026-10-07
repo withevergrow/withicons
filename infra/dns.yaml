@@ -23,6 +23,8 @@ Resources:
 
   # Mail hardening for a domain that sends no mail: reject spoofed mail claiming to be from withicons.com.
   # Remove/replace these if you later add a mail provider.
+  # The apex TXT set also holds the Google Search Console verification (added by hand in Route 53 first; kept here so
+  # a stack deploy never removes it — Google re-checks it).
   NullSpf:
     Type: AWS::Route53::RecordSet
     Properties:
@@ -32,6 +34,7 @@ Resources:
       TTL: '3600'
       ResourceRecords:
         - '"v=spf1 -all"'
+        - '"google-site-verification=BtAja2MxkGV9YGn6F2DXodtjVriOHZsciJy-779H5L0"'
   NullDmarc:
     Type: AWS::Route53::RecordSet
     Properties:

@@ -1,6 +1,6 @@
 {
   "name": "@withicons/mcp",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MCP server for with icons: search 500 icons x 20 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx), plus a hosted server at https://withicons.com/mcp.",
   "license": "MIT",
   "author": {

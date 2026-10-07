@@ -1,6 +1,6 @@
 {
   "name": "@withicons/svelte",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "500 icons x 20 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {

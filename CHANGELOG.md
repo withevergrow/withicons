@@ -6,6 +6,13 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.3.1 - 2026-10-07
+
+### Fixed
+- `@withicons/motion`: the `loader` icon's loop is now a smooth spin. Its 8 identical spokes made the 8-step tick look
+  frozen (every step landed on the same picture), on the site, in GIF exports and in code. The stepped tick is still
+  available as an alternate motion, now in 12 steps.
+
 ## 0.3.0 - 2026-10-07
 
 ### Changed

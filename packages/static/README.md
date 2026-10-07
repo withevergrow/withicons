@@ -16,7 +16,7 @@ typically 393 bytes):
 ```
 
 `https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg`. `@latest` always serves the newest release; for a
-fixed look, put a version number in its place (e.g. `@0.3.0`). For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
+fixed look, put a version number in its place (e.g. `@0.3.1`). For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
 also fetches one small file per icon) or inline the SVG.
 
 ## Sprite

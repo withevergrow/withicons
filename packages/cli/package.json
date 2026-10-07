@@ -1,6 +1,6 @@
 {
   "name": "withicons",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "with icons from the terminal: search 500 icons x 20 styles in plain English, print SVG, framework or animation code, export files (SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React, Vue, Svelte, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint) for apps, slides and CI, and add the with icons skill + MCP server to Claude Code, Codex, Cursor, OpenCode or VS Code in one command: npx withicons init.",
   "license": "MIT",
   "author": {
@@ -47,7 +47,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@withicons/mcp": "0.3.0"
+    "@withicons/mcp": "0.3.1"
   },
   "optionalDependencies": {
     "@resvg/resvg-js": "^2.6.2"
