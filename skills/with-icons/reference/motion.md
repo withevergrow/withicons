@@ -405,7 +405,7 @@ Exported files carry no motion part classes; code formats keep them. See SKILL.m
 | `list-ordered` | pulse | nod | `list`, `list-checks` | its numbers tap out a count while the lines wait in order |
 | `list-plus` | pulse | pop | `list-checks`, `list` | the plus pops in, adding one more item to the list |
 | `list` | pulse | fill | `list-checks`, `list-ordered` | the lines hold still while their bullets light up like items loading |
-| `loader` | tick | spin-once | `check`, `check-circle`, `x-circle` | spokes step round like a spinner while something loads |
+| `loader` | spin | spin-once | `check`, `check-circle`, `x-circle` | spokes turn smoothly round like a spinner while something loads |
 | `lock` | nod | nod | `unlock`, `lock@solid` | shackle clicks down into the body; tugs shut on hover |
 | `log-in` | nudge | nudge | `log-out`, `user-check` | the arrow steps in through the door while the frame stays put |
 | `log-out` | nudge | nudge | `log-in`, `user-x` | the arrow steps out of the door while the frame stays put |
