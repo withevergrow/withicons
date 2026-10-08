@@ -626,6 +626,27 @@ html.search-open { overflow: hidden; }
 .still-toggle.on-light:hover, .still-toggle.on-light[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
 .still-toggle.on-light[aria-pressed="true"] { background: var(--paper-3); }
 
+/* cookie choice (site.js initConsent): a quiet card, bottom left, never blocking the page */
+.consent {
+  position: fixed; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 400;
+  display: grid; gap: 12px; width: min(400px, calc(100vw - 32px)); padding: 16px 16px 14px; border-radius: 20px;
+  background: var(--card); color: var(--ink); box-shadow: 0 24px 60px -24px rgba(13, 15, 20, .5), 0 0 0 1px var(--rule);
+  animation: consent-in .3s cubic-bezier(.23, 1, .32, 1) both;
+}
+@keyframes consent-in { from { opacity: 0; transform: translateY(10px) } }
+.consent-t { margin: 0; font: 500 14px/1.45 var(--font-sans); color: var(--ink-2, var(--ink)) }
+.consent-t b { display: block; margin-bottom: 2px; font-weight: 700; color: var(--ink) }
+.consent-t a { color: inherit; text-decoration: underline; text-underline-offset: 3px }
+.consent-now { color: var(--muted) }
+.consent-acts { display: flex; gap: 8px; justify-content: flex-end }
+.consent-b { min-height: 40px; padding: 0 16px; border-radius: var(--pill, 999px); border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); font: 650 14px/1 var(--font-sans); cursor: pointer; transition: transform .16s ease-out, background-color .2s, border-color .2s }
+.consent-b.is-yes { background: var(--ink); border-color: var(--ink); color: var(--paper) }
+.consent-b:active { transform: scale(.97) }
+.consent-b:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px }
+@media (hover: hover) and (pointer: fine) { .consent-b:not(.is-yes):hover { border-color: var(--ink) } }
+@media (max-width: 520px) { .consent { left: 12px; right: 12px; width: auto; bottom: max(12px, env(safe-area-inset-bottom)) } .consent-b { flex: 1 } }
+@media (prefers-reduced-motion: reduce) { .consent { animation: none } }
+
 /* print */
 @media print { .site-header, .site-footer, .search-overlay, .toast { display: none !important; } }
 

@@ -92,15 +92,17 @@ Parameters:
   ContentSecurityPolicy:
     Type: String
     Default: >-
-      default-src 'self'; script-src 'self' 'unsafe-inline';
+      default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;
-      img-src 'self' data: blob:; connect-src 'self';
+      img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com;
+      connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
       worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
       frame-ancestors 'none'; upgrade-insecure-requests
     Description: >-
       Sent on every response. The site loads nothing from jsDelivr at runtime (the CDN URLs on the site are code
-      snippets shown as text; the site's own copies live in site/vendor/), so no third-party script, image or
-      connect origin is allowed; add one here only together with a page that really loads it.
+      snippets shown as text; the site's own copies live in site/vendor/). The only third party is Google Analytics
+      (site.js initAnalytics, with Consent Mode): its tag from www.googletagmanager.com and its beacons to
+      *.google-analytics.com / *.analytics.google.com. Add another origin only together with a page that really loads it.
       'unsafe-inline' in script-src is deliberate: the static pages carry a few
       inline scripts (theme bootstrap etc.) and are edited by many hands. For a strict policy run
       "node scripts/deploy.mjs --print-csp" (replaces 'unsafe-inline' with sha256 hashes of every

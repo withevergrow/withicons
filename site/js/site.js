@@ -2022,6 +2022,72 @@
   W.WI = API
   W.EG = API
 
+  /* ───────── analytics: Google Analytics 4 with Consent Mode v2 ─────────
+     Only on withicons.com (never on localhost, previews or file://), and no advertising features. In the EEA, the UK and
+     Switzerland, analytics cookies stay off until the visitor allows them (Google then gets cookie-less pings only);
+     elsewhere they are on, unless the browser sends Global Privacy Control or the visitor said no. Visitors in European
+     time zones see a small choice once; everyone can change their mind from "Cookie settings" in the footer. The choice
+     is kept in localStorage ('with-consent'), never in a cookie. Policy: license.html#privacy. */
+  var GA_ID = 'G-KKDYS8VBZW', CONSENT_KEY = 'with-consent'
+  var CONSENT_REGIONS = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH']
+  var gaOn = false
+  function consentGet() { try { var v = W.localStorage.getItem(CONSENT_KEY); return v === 'granted' || v === 'denied' ? v : null } catch (e) { return null } }
+  function consentSet(v) { try { W.localStorage.setItem(CONSENT_KEY, v) } catch (e) { /* private mode: the choice lasts this page */ } }
+  function siteRoot() { var l = doc.querySelector('a.logo[href]'), h = l ? l.getAttribute('href') : ''; return /index\.html$/.test(h) ? h.replace(/index\.html$/, '') : '' }
+  // a European time zone is a good-enough hint for "ask first"; Google's own region check enforces the default anyway
+  function europeanZone() {
+    var z = ''
+    try { z = Intl.DateTimeFormat().resolvedOptions().timeZone || '' } catch (e) { return true }
+    return /^Europe\//.test(z) || /^(Atlantic\/(Reykjavik|Canary|Madeira|Azores|Faroe)|Africa\/Ceuta|Asia\/(Nicosia|Famagusta)|Arctic\/Longyearbyen)$/.test(z)
+  }
+  function initAnalytics() {
+    if (!/(^|\.)withicons\.com$/.test(location.hostname)) return
+    gaOn = true
+    W.dataLayer = W.dataLayer || []
+    W.gtag = W.gtag || function () { W.dataLayer.push(arguments) }
+    var noAds = { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }
+    W.gtag('consent', 'default', Object.assign({ analytics_storage: 'denied', region: CONSENT_REGIONS }, noAds))
+    W.gtag('consent', 'default', Object.assign({ analytics_storage: 'granted' }, noAds))
+    var c = consentGet() || (navigator.globalPrivacyControl ? 'denied' : null)
+    if (c) W.gtag('consent', 'update', { analytics_storage: c })
+    W.gtag('js', new Date())
+    W.gtag('config', GA_ID)
+    var s = doc.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID
+    doc.head.appendChild(s)
+  }
+  function consentChoose(v) {
+    consentSet(v)
+    if (W.gtag) W.gtag('consent', 'update', { analytics_storage: v })
+    var b = $('[data-consent]'); if (b) b.remove()
+    $$('[data-consent-open]').forEach(function (x) { x.setAttribute('aria-expanded', 'false') })
+  }
+  function consentBanner(focus) {
+    var old = $('[data-consent]'); if (old) { if (focus) $('button', old).focus(); return }
+    var cur = consentGet()
+    var b = doc.createElement('div')
+    b.className = 'consent'; b.setAttribute('data-consent', ''); b.setAttribute('role', 'region'); b.setAttribute('aria-label', 'Cookie choice')
+    b.innerHTML =
+      '<p class="consent-t"><b>Cookies for counting, nothing else.</b> May we use Google Analytics cookies to see which icons and pages help people? ' +
+        'No ads, nothing sold. <a href="' + siteRoot() + 'license.html#privacy">Privacy</a>' + (cur ? ' <span class="consent-now">Now: ' + (cur === 'granted' ? 'allowed' : 'not allowed') + '.</span>' : '') + '</p>' +
+      '<div class="consent-acts"><button type="button" class="consent-b" data-consent-v="denied">No thanks</button><button type="button" class="consent-b is-yes" data-consent-v="granted">Allow</button></div>'
+    doc.body.appendChild(b)
+    b.addEventListener('click', function (e) { var x = e.target.closest && e.target.closest('[data-consent-v]'); if (x) consentChoose(x.getAttribute('data-consent-v')) })
+    b.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cur) consentChoose(cur) })
+    $$('[data-consent-open]').forEach(function (x) { x.setAttribute('aria-expanded', 'true') })
+    if (focus) $('.consent-b.is-yes', b).focus()
+  }
+  function initConsent() {
+    if (!gaOn) return
+    $$('.foot-base').forEach(function (fb) {
+      if ($('[data-consent-open]', fb)) return
+      var x = doc.createElement('button'); x.type = 'button'; x.className = 'still-toggle consent-open'; x.setAttribute('data-consent-open', ''); x.setAttribute('aria-expanded', 'false')
+      x.textContent = 'Cookie settings'
+      fb.insertBefore(x, $('.evergrow-link', fb) || null)
+    })
+    doc.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('[data-consent-open]')) consentBanner(true) })
+    if (!consentGet() && !navigator.globalPrivacyControl && europeanZone()) consentBanner(false)
+  }
+
   function boot() {
     $$('[data-theme-toggle]').forEach(function (b) { b.addEventListener('click', toggleTheme) })
     paintToggles()
@@ -2031,6 +2097,7 @@
     initReveal()
     initFooter()
     initStillToggle()
+    initConsent()
     initEvergrow()
     initAskAI()
     initPageMap()
@@ -2053,5 +2120,6 @@
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { emit('fonts') })
     emit('ready')
   }
+  initAnalytics()   // first, so the page view is counted even if something later fails
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', boot); else boot()
 })()

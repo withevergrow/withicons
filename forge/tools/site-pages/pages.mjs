@@ -952,6 +952,16 @@ function license() {
     </div>
   </section>
 
+  <section class="lc-one" id="privacy" data-reveal aria-labelledby="privacy-h">
+    <div class="lc-one-ic" aria-hidden="true">${I('shield-check', 'duo', 56)}</div>
+    <div>
+      <h2 id="privacy-h">Privacy and cookies</h2>
+      <p>We use Google Analytics to count visits and see which icons, styles and pages help people, so we know what to make next. No ads, no advertising features, nothing sold or shared for marketing.</p>
+      <p>In the EU, the UK and Switzerland, analytics cookies stay off until you allow them. Elsewhere they are on, unless your browser sends Global Privacy Control or you turn them off. Change your choice any time with <button type="button" class="lc-link" data-consent-open>Cookie settings</button> (also in every page’s footer).</p>
+      <p>Everything else stays in your browser: your theme, styles and colours are kept in its local storage, and every file you make here (PNG, SVG, GIF, video) is made on your device and never uploaded.</p>
+    </div>
+  </section>
+
   <section class="lc-full" aria-labelledby="full-h">
     <div class="lc-full-head"><h2 id="full-h">The full licence</h2><button class="btn btn-ghost" type="button" data-copy-btn data-copy="${esc(text)}">${COPY_ICON}<span>Copy licence</span></button></div>
     <div class="lc-text" id="license-text">${text.split(/\n\s*\n/).map(p => `<p>${esc(p.replace(/\s*\n\s*/g, ' '))}</p>`).join('')}</div>

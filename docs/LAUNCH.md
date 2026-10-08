@@ -285,6 +285,23 @@ The stack update changes the viewer function, the WAF rule, the deploy role's tr
 Timeout (10 -> 15 s, for paged `export_icon`; docs/COSTS.md section 4); no resource
 is replaced. Then push any commit to `main` to confirm the deploy role still works.
 
+### 6.7 Google Analytics (October 2026)
+
+`site/js/site.js` (`initAnalytics`) loads GA4 (`G-KKDYS8VBZW`) on withicons.com only, with Consent Mode v2: analytics
+cookies are off in the EEA, UK and Switzerland until the visitor allows them (a small card for European time zones, and
+"Cookie settings" in every footer), on elsewhere unless the browser sends Global Privacy Control. No ad features. The
+policy is on license.html#privacy. The CSP must allow Google's tag and beacons, so update the stack once (PowerShell:
+put the command on one line):
+
+```bash
+aws cloudformation deploy --region us-east-1 --profile withicons --stack-name withicons-site --template-file infra/site.yaml \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides "ContentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+```
+
+Until the stack is updated the browser blocks the tag (the site works as before, just uncounted). Check it in GA
+Realtime, or in DevTools: a request to `www.google-analytics.com/g/collect` after a page view.
+
 ## 7. Search engines
 
 1. **Google Search Console** [you]: add a **Domain property** `withicons.com`, verify with the TXT record it shows

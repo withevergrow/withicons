@@ -1289,3 +1289,6 @@ html:not(.has-motion) .ga-pair[aria-pressed="true"] .wm-b { display: inline; }
 .dv-size > p.dv-size-k small { color: var(--muted); }
 .dv-size > .pg-code { margin-top: 8px; }
 .dv-size > .pg-code pre { white-space: pre-wrap; overflow-wrap: break-word; font-size: 12.5px; line-height: 1.55; }
+.lc-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 650; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: pointer }
+.lc-link:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px; border-radius: 4px }
+.lc-one + .lc-one { margin-top: 16px }
