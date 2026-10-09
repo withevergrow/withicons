@@ -1,6 +1,6 @@
 {
   "name": "@withicons/classes",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Font Awesome-style CSS icon classes: <i class=\"with with-home\">. 734 icons x 20 styles, CSS-only or loaded on demand, zero dependencies.",
   "license": "MIT",
   "author": {

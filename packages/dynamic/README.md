@@ -8,7 +8,7 @@ Each live icon is a small generator. You give it params, it draws the icon, and 
 readable down to 16px. When a value can't be drawn legibly, the icon switches to something that can: "99+" for big
 counts, or a level bar in place of a percentage that doesn't fit.
 
-50 live icons, version 0.3.1. Browse and edit them at https://withicons.com.
+50 live icons, version 0.4.0. Browse and edit them at https://withicons.com.
 
 ```bash
 npm i @withicons/dynamic
@@ -149,7 +149,7 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 | file | what | size | gzip |
 |---|---|---|---|
 | `index.js` | full runtime, all 34 styles, sync render() | 2052 KB | 743 KB |
-| `lite.js` | core + line; other styles load on first use | 172 KB | 62.9 KB |
+| `lite.js` | core + line; other styles load on first use | 172 KB | 62.8 KB |
 | `element.js` | `<with-live-icon>` on lite | 179 KB | 65.8 KB |
 | `react.js` | `<LiveIcon>` on lite (react not included) | 174 KB | 63.9 KB |
 | `vue.js` | `<LiveIcon>` on lite (vue not included) | 173 KB | 63.7 KB |

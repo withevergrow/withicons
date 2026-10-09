@@ -1,6 +1,6 @@
 {
   "name": "@withicons/core-plus",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "7 newer with icons styles (clay, bento, suite, dock, liquid, chrome, brutal) for 734 icons: standalone SVGs and IconNode data. Companion of @withicons/core.",
   "license": "MIT",
   "author": {
@@ -143,7 +143,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@withicons/core": "0.3.1"
+    "@withicons/core": "0.4.0"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"

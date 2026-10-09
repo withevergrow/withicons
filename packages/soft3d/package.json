@@ -1,6 +1,6 @@
 {
   "name": "@withicons/soft3d",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "The soft3d style of with icons (734 icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.",
   "license": "MIT",
   "author": {
@@ -76,7 +76,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@withicons/core": "0.3.1"
+    "@withicons/core": "0.4.0"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"

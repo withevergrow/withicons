@@ -1,6 +1,6 @@
 {
   "name": "@withicons/dynamic",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Live icons for with icons: 50 icons whose content you set (calendar date, clock time, badge count, battery level, weather, labels), drawn in all 34 styles at runtime. Custom element, React and Vue wrappers.",
   "license": "MIT",
   "author": {

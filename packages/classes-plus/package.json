@@ -1,6 +1,6 @@
 {
   "name": "@withicons/classes-plus",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "CSS icon classes for the 7 newer with icons styles (clay, bento, suite, dock, liquid, chrome, brutal). Companion of @withicons/classes, whose loader finds them by itself.",
   "license": "MIT",
   "author": {

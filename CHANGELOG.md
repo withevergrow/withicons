@@ -6,6 +6,8 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.4.0 - 2026-10-09
+
 ### Added
 - 14 new styles (34 in all): the rich styles `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d` and `brutal`,
   whose colours (gradient stops included) are role-named CSS variables, and six holiday styles: `utsav`, `rangoli`

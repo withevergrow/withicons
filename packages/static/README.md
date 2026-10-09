@@ -19,7 +19,7 @@ typically 425 bytes):
 ```
 
 `https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg`. `@latest` always serves the newest release; for a
-fixed look, put a version number in its place (e.g. `@0.3.1`). For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
+fixed look, put a version number in its place (e.g. `@0.4.0`). For icons that follow your text colour, use `<with-icon>` from `@withicons/web` (`dist/cdn.js`, which
 also fetches one small file per icon) or inline the SVG.
 
 ## Sprite
@@ -34,7 +34,7 @@ serve it yourself. Serve `node_modules/@withicons/static/dist/sprite-line.svg` f
 
 - Symbol ids are `with-<name>`. Icons use `currentColor`, so set `color` on the outer `<svg>` (or any parent).
 - Browsers block `<use>` of a sprite on another origin, so copy the sprite next to your pages (or inline it in the HTML with `style="display:none"`).
-- One sprite per style: `sprite-line.svg` (~309 KB), `sprite-solid.svg` (~1047 KB), `sprite-duo.svg` (~566 KB), `sprite-gloss.svg` (~1137 KB), `sprite-engrave.svg` (~1737 KB), `sprite-blueprint.svg` (~1039 KB), `sprite-sketch.svg` (~963 KB), `sprite-glass.svg` (~3799 KB), `sprite-kawaii.svg` (~1085 KB), `sprite-sticker.svg` (~1971 KB), `sprite-pixel.svg` (~603 KB), `sprite-retro.svg` (~1676 KB), `sprite-luxe.svg` (~4779 KB), `sprite-bauhaus.svg` (~906 KB), `sprite-skeuo.svg` (~3993 KB), `sprite-anime.svg` (~2431 KB), `sprite-gothic.svg` (~5781 KB), `sprite-pastel.svg` (~2851 KB), `sprite-coquette.svg` (~4730 KB), `sprite-plush.svg` (~3970 KB), `sprite-clay.svg` (~5843 KB), `sprite-bento.svg` (~3077 KB), `sprite-suite.svg` (~2151 KB), `sprite-dock.svg` (~4045 KB), `sprite-liquid.svg` (~5495 KB), `sprite-chrome.svg` (~5287 KB), `sprite-soft3d.svg` (~6883 KB), `sprite-brutal.svg` (~1766 KB), `sprite-utsav.svg` (~2615 KB), `sprite-rangoli.svg` (~1967 KB), `sprite-halloween.svg` (~3899 KB), `sprite-christmas.svg` (~3754 KB), `sprite-lunar.svg` (~1852 KB), `sprite-valentine.svg` (~3146 KB).
+- One sprite per style: `sprite-line.svg` (~309 KB), `sprite-solid.svg` (~1047 KB), `sprite-duo.svg` (~566 KB), `sprite-gloss.svg` (~1137 KB), `sprite-engrave.svg` (~1737 KB), `sprite-blueprint.svg` (~1039 KB), `sprite-sketch.svg` (~963 KB), `sprite-glass.svg` (~3799 KB), `sprite-kawaii.svg` (~1085 KB), `sprite-sticker.svg` (~1971 KB), `sprite-pixel.svg` (~603 KB), `sprite-retro.svg` (~1676 KB), `sprite-luxe.svg` (~4779 KB), `sprite-bauhaus.svg` (~906 KB), `sprite-skeuo.svg` (~3993 KB), `sprite-anime.svg` (~2431 KB), `sprite-gothic.svg` (~5781 KB), `sprite-pastel.svg` (~2851 KB), `sprite-coquette.svg` (~4730 KB), `sprite-plush.svg` (~3970 KB), `sprite-clay.svg` (~5843 KB), `sprite-bento.svg` (~3077 KB), `sprite-suite.svg` (~2151 KB), `sprite-dock.svg` (~4044 KB), `sprite-liquid.svg` (~5495 KB), `sprite-chrome.svg` (~5287 KB), `sprite-soft3d.svg` (~6883 KB), `sprite-brutal.svg` (~1766 KB), `sprite-utsav.svg` (~2615 KB), `sprite-rangoli.svg` (~1967 KB), `sprite-halloween.svg` (~3899 KB), `sprite-christmas.svg` (~3754 KB), `sprite-lunar.svg` (~1852 KB), `sprite-valentine.svg` (~3146 KB).
 
 ## Notes on single files
 

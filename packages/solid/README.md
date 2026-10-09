@@ -32,8 +32,8 @@ export function Toolbar() {
 - Every icon is exported twice: `Home` and `HomeIcon`. Names are the PascalCase of the kebab-case icon name (`arrow-right` -> `ArrowRight`).
 - Deep imports keep working: `@withicons/solid/icons/home`, `@withicons/solid/solid/icons/home`.
 - No bundler (an ESM CDN in a `<script type="module">`)? Ask for the icons you use, so the CDN tree-shakes the style
-  down to them: `https://esm.sh/@withicons/solid@0.3.1?exports=Home,Search` (line),
-  `https://esm.sh/@withicons/solid@0.3.1/solid?exports=Home`. A bare style URL is every icon of that style (megabytes).
+  down to them: `https://esm.sh/@withicons/solid@0.4.0?exports=Home,Search` (line),
+  `https://esm.sh/@withicons/solid@0.4.0/solid?exports=Home`. A bare style URL is every icon of that style (megabytes).
 
 ## Props
 
