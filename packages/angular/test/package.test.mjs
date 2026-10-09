@@ -47,8 +47,9 @@ test('every style exports every icon with matching data', async () => {
       const P = pascal(name)
       assert.ok(idx.includes(`export { ${P}, ${P}Icon } from './icons/${name}.mjs'`), `${s} index exports ${P}`)
       assert.ok(dts.includes(`export declare const ${P}: WithIconData`), `${s} index.d.ts declares ${P}`)
-      assert.ok(fs.existsSync(path.join(PKG, `dist/${s}/icons/${name}.mjs`)) && fs.existsSync(path.join(PKG, `dist/${s}/icons/${name}.d.ts`)), `${s}/${name} files`)
+      assert.ok(fs.existsSync(path.join(PKG, `dist/${s}/icons/${name}.mjs`)), `${s}/${name} files`)
     }
+    assert.ok(fs.existsSync(path.join(PKG, `dist/${s}/deep.d.ts`)), `${s}/deep.d.ts`)
     for (const name of sample) {
       const mod = await load(`dist/${s}/icons/${name}.mjs`), P = pascal(name), icon = mod[P]
       assert.equal(mod.default, icon)

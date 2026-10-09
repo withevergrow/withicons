@@ -37,7 +37,7 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
   JS: a value a style repeats (palette variables, class names) is declared once per module.
   - Solid: `<style>/index.cjs` reads the drawings from the ES module `<style>/nodes.js`, so `require()` of a style
     needs Node 20.19+ / 22.12+ (as React and Vue already did); `import` is unchanged.
-  - Svelte: each `icons/<name>.svelte` imports its drawing from `<style>/nodes/<name>.js`, which the generic `<Icon>`
+  - Svelte: each `icons/<name>.svelte` imports its drawing from a 32-icon chunk `<style>/nodes/<k>.js` (no per-icon `.d.ts`; one shared declaration), which the generic `<Icon>`
     shares, so a deep import still loads only that icon.
 - Every package has a size test (`test/size.test.mjs`, `scripts/package-budget.mjs`: under 120 MB unpacked, no file
   over 20 MB), and `scripts/publish.mjs` refuses a package over that budget.

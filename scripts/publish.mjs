@@ -22,7 +22,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { measure, overBudget } from './package-budget.mjs'
+import { measure, overBudget, MAX_FILES } from './package-budget.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const argv = process.argv.slice(2)
@@ -101,7 +101,12 @@ for (const { dir, json } of pkgs) {
   const repo = typeof json.repository === 'string' ? json.repository : json.repository?.url
   if (!repo || !repo.includes(REPO)) problems.push(`${json.name}: package.json "repository.url" must point to https://${REPO} (npm provenance verifies it)`)
   // jsDelivr serves at most 150 MB per package version (~20 MB per file): refuse a package over the budget
-  if (fs.existsSync(path.join(dir, 'dist'))) problems.push(...overBudget(measure(dir)))
+  // and at most MAX_FILES files: npm answers a bigger one with E415 "Too many files" (@withicons/svelte 0.4.0: 75,018 files; 50,022 passed)
+  if (fs.existsSync(path.join(dir, 'dist'))) {
+    const m = measure(dir)
+    console.log(`  ${json.name.padEnd(24)} ${String(m.files).padStart(6)} files (max ${MAX_FILES}), ${(m.total / 1048576).toFixed(1)} MB`)
+    problems.push(...overBudget(m))
+  }
   if (json.name.startsWith('@') && json.publishConfig?.access !== 'public') console.warn(`  note: ${json.name} has no publishConfig.access=public; passing --access public`)
 }
 // a version whose git tag already exists on another commit was released with other content (e.g. v0.1.0 = 300 icons x 7

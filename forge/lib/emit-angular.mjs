@@ -69,15 +69,16 @@ ${used.size ? `import { ${[...used].join(', ')} } from '../values.mjs'\n` : ''}$
 export { ${N}, ${N} as ${N}Icon }
 export default ${N}
 `)
-      W(`${s}/icons/${i.name}.d.ts`, `import type { WithIconData } from '../../types/withicons-angular'
-/** ${i.name} (${s}) — ${i.description.replace(/\*\//g, '')} */
-declare const ${N}: WithIconData
-export { ${N}, ${N} as ${N}Icon }
-export default ${N}
-`)
       idx.push(`export { ${N}, ${N}Icon } from './icons/${i.name}.mjs'`)
       idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${N}: WithIconData\nexport declare const ${N}Icon: WithIconData`)
     }
+    // ONE declaration for every deep import of the style (no per-icon .d.ts: npm refuses ~75,000 files, E415, and we stay far below):
+    // '<style>/icons/home' resolves here, where the named exports (Home, HomeIcon) come from the style's index.d.ts.
+    W(`${s}/deep.d.ts`, `import type { WithIconData } from '../types/withicons-angular'
+export * from './index'
+declare const icon: WithIconData
+export default icon
+`)
     W(`${s}/index.mjs`, header + idx.join('\n') + '\n')
     W(`${s}/index.d.ts`, `import type { WithIconData } from '../types/withicons-angular'\n${idxDts.join('\n')}\n`)
   }
@@ -95,14 +96,14 @@ export { iconNames, styleNames } from './meta'
 `)
   await out.flush()
 
-  const e = base => ({ types: `./dist/${base}.d.ts`, default: `./dist/${base}.mjs` })
+  const e = (base, types = base) => ({ types: `./dist/${types}.d.ts`, default: `./dist/${base}.mjs` })
   const ex = { '.': e('index') }
   for (const s of styleNames) ex['./' + s] = e(`${s}/index`)
-  ex['./icons/*'] = e(`${D}/icons/*`)
-  for (const s of styleNames) ex[`./${s}/icons/*`] = e(`${s}/icons/*`)
+  ex['./icons/*'] = e(`${D}/icons/*`, `${D}/deep`)
+  for (const s of styleNames) ex[`./${s}/icons/*`] = e(`${s}/icons/*`, `${s}/deep`)
   ex['./package.json'] = './package.json'
-  const tv = { 'icons/*': [`./dist/${D}/icons/*.d.ts`] }
-  for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = [`./dist/${s}/icons/*.d.ts`] }
+  const tv = { 'icons/*': [`./dist/${D}/deep.d.ts`] }
+  for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = [`./dist/${s}/deep.d.ts`] }
   const major = (info.partialMinVersion || '17.0.0').split('.')[0]
   const pkg = {
     ...basePkg(ctx, '@withicons/angular', `${ctx.icons.length} icons x ${ctx.styles.length} styles for Angular: a standalone <with-icon> component plus tree-shakable icon data.`, ['angular', 'angular-icons', 'standalone', 'svg-icons', 'multicolor-icons', 'animated-icons', ...ctx.styles.map(s => `${s.name}-icons`)]),

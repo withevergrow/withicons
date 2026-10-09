@@ -35,25 +35,29 @@ test('index exports the lazy Icon and preloadStyles; /icon is IconAll', { skip }
   for (const s of styles) assert.match(read('find-all.js'), new RegExp(`'\./${s}/nodes\.js'`))
 })
 
-// Each drawing ships once: the per-icon .svelte imports its own small data module (dist/<style>/nodes/<name>.js), and the
-// generic <Icon>'s nodes.js maps every name to those same modules. A deep import loads one icon, never its whole style.
-test('per-icon .svelte imports only its own drawing; nodes.js reuses the same modules', { skip }, async () => {
+// Each drawing ships once, in a chunk module (dist/<style>/nodes/<k>.js, 32 drawings, named exports): the per-icon .svelte
+// imports its drawing from its chunk and the generic <Icon>'s nodes.js maps every name to the same exports. No per-icon
+// data or .d.ts files (npm refuses ~75,000 files: E415).
+test('per-icon .svelte imports its drawing from a chunk; nodes.js reuses the same exports', { skip }, async () => {
   const url = f => 'file://' + path.join(dist, f).split(path.sep).join('/')
   for (const s of styles) {
     const svelte = read(`${s}/icons/home.svelte`)
-    assert.match(svelte, /import iconNode from '\.\.\/nodes\/home\.js'/, s)
+    const m = svelte.match(/import \{ Home as iconNode \} from '\.\.\/nodes\/(\d+)\.js'/)
+    assert.ok(m, s)
     assert.ok(!/\[\["/.test(svelte), `${s}: no inline drawing in the .svelte file`)
-    assert.match(read(`${s}/nodes.js`), /^import Home from '\.\/nodes\/home\.js'$/m, `${s}: nodes.js imports the per-icon module`)
-    // evaluating a whole style is 700+ modules: do it for the default style and one rich style only
+    assert.ok(!fs.existsSync(path.join(dist, s, 'icons', 'home.svelte.d.ts')), `${s}: no per-icon .d.ts`)
+    assert.match(read(`${s}/nodes.js`), new RegExp(String.raw`^import \{[^}]*\bHome\b[^}]*\} from '\./nodes/${m[1]}\.js'$`, 'm'), `${s}: nodes.js imports the chunk`)
     if (s === 'line' || s === styles.at(-1)) {
-      const own = await import(url(`${s}/nodes/home.js`))
+      const own = await import(url(`${s}/nodes/${m[1]}.js`))
       const all = await import(url(`${s}/nodes.js`))
-      assert.equal(all.nodes.home, own.default, `${s}: nodes.js shares the per-icon module`)
-      assert.ok(Array.isArray(own.default) && own.default.length, s)
+      assert.equal(all.nodes.home, own.Home, `${s}: nodes.js shares the chunk export`)
+      assert.ok(Array.isArray(own.Home) && own.Home.length, s)
     }
-    // the per-icon module's static graph is itself plus the style's small shared values module
-    const deps = [...read(`${s}/nodes/home.js`).matchAll(/from '(\.[^']+)'/g)].map(m => m[1])
+    const deps = [...read(`${s}/nodes/${m[1]}.js`).matchAll(/from '(\.[^']+)'/g)].map(x => x[1])
     assert.ok(deps.every(d => d === '../values.js'), `${s}: ${deps}`)
     assert.ok(fs.statSync(path.join(dist, s, 'values.js')).size < 16 * 1024, `${s}/values.js stays small`)
   }
+  const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
+  assert.equal(pkg.exports['./line/icons/*'].types, './dist/component.d.ts')
+  assert.ok(fs.existsSync(path.join(dist, 'component.d.ts')))
 })

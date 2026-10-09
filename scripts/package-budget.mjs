@@ -11,7 +11,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 export const MB = 1024 * 1024
-export const BUDGET = { total: 120 * MB, file: 20 * MB }
+// files: npm's registry refuses a publish with too many files (E415 "Unsupported Media Type ... Too many files"):
+// @withicons/svelte at 0.4.0 had 75,018 files and failed, angular with 50,022 was accepted. Stay at or under 50,000.
+export const MAX_FILES = 50000
+export const BUDGET = { total: 120 * MB, file: 20 * MB, files: MAX_FILES }
 
 /** { total, files, largest: [[bytes, relPath], ...top 5], name } for the package at `dir` */
 export function measure(dir) {
@@ -41,6 +44,7 @@ export function measure(dir) {
 export function overBudget(m, budget = BUDGET) {
   const out = []
   if (m.total > budget.total) out.push(`${m.name}: ${(m.total / MB).toFixed(1)} MB unpacked, over the ${budget.total / MB} MB budget (jsDelivr: 150 MB per package); split it or shrink it`)
+  if (m.files > budget.files) out.push(`${m.name}: ${m.files} files, over the ${budget.files} file budget (npm refuses a package with too many files: E415, @withicons/svelte 0.4.0 had 75,018); merge or drop per-icon files`)
   for (const [size, f] of m.largest) if (size > budget.file) out.push(`${m.name}: ${f} is ${(size / MB).toFixed(1)} MB, over the ${budget.file / MB} MB per-file budget`)
   return out
 }

@@ -5,8 +5,9 @@
 //   dist/IconBase.svelte                 the one shared renderer: icon node + props -> <svg>
 //   dist/Icon.svelte                     generic <Icon name="home" variant="solid" /> (other styles load on first use)
 //   dist/IconAll.svelte                  the same with every style imported up front (subpath /icon)
-//   dist/<style>/icons/<name>.svelte     tiny per-icon wrapper: imports its drawing from ../nodes/<name>.js
-//   dist/<style>/nodes/<name>.js         one drawing (IconNode data); repeated values come from ../values.js
+//   dist/<style>/icons/<name>.svelte     tiny per-icon wrapper: imports its drawing from ../nodes/<k>.js (a chunk of 32 drawings)
+//   dist/<style>/nodes/<k>.js            32 drawings (IconNode data, named exports); repeated values come from ../values.js
+//   dist/component.d.ts                  the ONE declaration every deep icon import resolves to (no per-icon .d.ts: file-count limit)
 //   dist/<style>/nodes.js                every drawing of the style (for the generic <Icon>)
 //   dist/<style>/index.js                every icon of that style as Name + NameIcon
 //   dist/index.js                        default style + Icon + IconBase + iconNames/styleNames
@@ -86,6 +87,9 @@ export interface WithIconComponent<Props extends Record<string, any> = WithIconP
 }
 `
 
+// icons per drawing chunk (dist/<style>/nodes/<k>.js)
+const CHUNK = 32
+
 export default async function emit(ctx) {
   const P = 'packages/svelte/dist'
   const out = distWriter(ctx, P)
@@ -95,6 +99,12 @@ export default async function emit(ctx) {
   const header = `// @withicons/svelte ${ctx.version} — generated, do not edit\n`
 
   W('types.d.ts', namesAndAliasesDts(ctx) + svelteTypes(ctx))
+  W('component.d.ts', `import type { WithIcon, WithIconComponent } from './types.js'
+/** An icon component (every icon takes the same props). */
+declare const Icon: WithIconComponent
+type Icon = WithIcon
+export default Icon
+`)
   W('attrs.js', `${header}export const DEFAULT_STYLE = ${J(D)}\nexport const STYLES = ${J(styleTable(ctx))}\n${attrsSrc}\n${uniqSrc}\n`)
   W('attrs.d.ts', `import type { StyleName, IconNode } from './types.js'\nexport declare const DEFAULT_STYLE: ${J(D)}\nexport declare const STYLES: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n` +
     `/** iconNode with its gradient ids made unique for one rendered copy (rich styles; others are returned as is). */\nexport declare function uniqueNode(iconNode: IconNode, uid: string): IconNode\n/** A new per-instance id. */\nexport declare function nextUid(): string\n`)
@@ -129,32 +139,42 @@ export default async function emit(ctx) {
   let files = 0
   for (const s of styleNames) {
     const idx = [], idxDts = [], fallback = {}
-    // Each drawing ships once, in its own small data module (dist/<style>/nodes/<name>.js), and the attribute values a
-    // style repeats (palette variables, classes) once in dist/<style>/values.js. The per-icon .svelte imports its one
-    // drawing and the generic <Icon>'s nodes.js all of them: nothing twice, and a deep import loads only its own icon.
+    // Each drawing ships once, in a chunk module of 32 drawings (dist/<style>/nodes/<k>.js), and the attribute values a
+    // style repeats (palette variables, classes) once in dist/<style>/values.js. The per-icon .svelte imports its
+    // drawing and the generic <Icon>'s nodes.js all of them: nothing twice, and a deep import loads only its own chunk, and bundlers keep just the exports used.
     const renders = ctx.icons.map(i => [i, renderOf(ctx, i, s)])
     const pool = nodePool(renders.map(([, r]) => r.nodes), { shared: true })
     W(`${s}/values.js`, `${header}${pool.decl(null, true)}\n`)
+    // drawings ship in chunks of CHUNK icons (dist/<style>/nodes/<k>.js, named exports), not one file per icon: npm refuses a
+    // package of ~75,000 files (E415 "Too many files", v0.4.0), so the per-icon files are the .svelte wrappers only.
+    const chunkOf = new Map(), chunks = []
+    renders.forEach(([i], n) => { const k = Math.floor(n / CHUNK); (chunks[k] ||= []).push(i.name); chunkOf.set(i.name, k) })
+    chunks.forEach((names, k) => {
+      const part = renders.filter(([i]) => chunkOf.get(i.name) === k)
+      const used = new Set(), own = nodePool(part.map(([, r]) => r.nodes), { prefix: '_', skip: pool.ids })
+      const body = part.map(([i, r]) => `export const ${i.pascal} = ${pool.lit(r.nodes, used, own.ids)}`).join('\n')
+      W(`${s}/nodes/${k}.js`, (used.size ? `import { ${[...used].join(', ')} } from '../values.js'\n` : '') + (own.decl() ? own.decl() + '\n' : '') + body + '\n')
+    })
     for (const [i, r] of renders) {
       if (r.style !== s) fallback[i.name] = r.style
-      const used = new Set(), own = pool.local(r.nodes, used)
-      W(`${s}/nodes/${i.name}.js`, (used.size ? `import { ${[...used].join(', ')} } from '../values.js'\n` : '') +
-        (own.decl ? own.decl + '\n' : '') + `export default ${own.lit}\n`)
       W(`${s}/icons/${i.name}.svelte`, `<script>
   import IconBase from '../../IconBase.svelte';
-  import iconNode from '../nodes/${i.name}.js';
+  import { ${i.pascal} as iconNode } from '../nodes/${chunkOf.get(i.name)}.js';
 </script>
 
 <IconBase {...$$props} name="${i.name}" variant="${r.style}" {iconNode}><slot /></IconBase>
 `)
-      W(`${s}/icons/${i.name}.svelte.d.ts`, `import type { WithIcon, WithIconComponent } from '../../types.js'\n/** ${i.name} (${s}) — ${i.description.replace(/\*\//g, '')} */\ndeclare const ${i.pascal}: WithIconComponent\ntype ${i.pascal} = WithIcon\nexport default ${i.pascal}\n`)
-      files += 2
+      files += 1
       idx.push(`export { default as ${i.pascal}, default as ${i.pascal}Icon } from './icons/${i.name}.svelte'`)
-      idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: C\nexport type ${i.pascal} = I\nexport declare const ${i.pascal}Icon: C\nexport type ${i.pascal}Icon = I`)
+      idxDts.push(`/** ${i.name} — ${i.description.replace(/\*\//g, '')} */
+export declare const ${i.pascal}: C
+export type ${i.pascal} = I
+export declare const ${i.pascal}Icon: C
+export type ${i.pascal}Icon = I`)
     }
     W(`${s}/index.js`, `${header}${idx.join('\n')}\n`)
     W(`${s}/index.d.ts`, `import type { WithIcon as I, WithIconComponent as C } from '../types.js'\n${idxDts.join('\n')}\n`)
-    W(`${s}/nodes.js`, `${header}${ctx.icons.map(i => `import ${i.pascal} from './nodes/${i.name}.js'`).join('\n')}\n` +
+    W(`${s}/nodes.js`, `${header}${chunks.map((names, k) => `import { ${names.map(n => ctx.icons.find(x => x.name === n).pascal).join(', ')} } from './nodes/${k}.js'`).join('\n')}\n` +
       `export const nodes = { ${ctx.icons.map(i => `${J(i.name)}: ${i.pascal}`).join(', ')} }\nexport const fallback = ${J(fallback)}\n`)
   }
 
@@ -257,15 +277,15 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconCompon
   const ex = { '.': e('./dist/index.d.ts', './dist/index.js') }
   for (const s of styleNames) ex['./' + s] = e(`./dist/${s}/index.d.ts`, `./dist/${s}/index.js`)
   ex['./icon'] = e('./dist/icon.d.ts', './dist/IconAll.svelte')
-  ex['./icons/*.svelte'] = e(`./dist/${D}/icons/*.svelte.d.ts`, `./dist/${D}/icons/*.svelte`)
-  ex['./icons/*'] = e(`./dist/${D}/icons/*.svelte.d.ts`, `./dist/${D}/icons/*.svelte`)
+  ex['./icons/*.svelte'] = e('./dist/component.d.ts', `./dist/${D}/icons/*.svelte`)
+  ex['./icons/*'] = e('./dist/component.d.ts', `./dist/${D}/icons/*.svelte`)
   for (const s of styleNames) {
-    ex[`./${s}/icons/*.svelte`] = e(`./dist/${s}/icons/*.svelte.d.ts`, `./dist/${s}/icons/*.svelte`)
-    ex[`./${s}/icons/*`] = e(`./dist/${s}/icons/*.svelte.d.ts`, `./dist/${s}/icons/*.svelte`)
+    ex[`./${s}/icons/*.svelte`] = e('./dist/component.d.ts', `./dist/${s}/icons/*.svelte`)
+    ex[`./${s}/icons/*`] = e('./dist/component.d.ts', `./dist/${s}/icons/*.svelte`)
   }
   ex['./package.json'] = './package.json'
   // legacy moduleResolution 'node': '<style>/icons/home' and '<style>/icons/home.svelte' both resolve (fallback list)
-  const deep = s => [`./dist/${s}/icons/*.svelte.d.ts`, `./dist/${s}/icons/*.d.ts`]
+  const deep = () => ['./dist/component.d.ts']
   const tv = { icon: ['./dist/icon.d.ts'], 'icons/*': deep(D) }
   for (const s of styleNames) { tv[s] = [`./dist/${s}/index.d.ts`]; tv[`${s}/icons/*`] = deep(s) }
   const pkg = {
