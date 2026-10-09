@@ -1,0 +1,58 @@
+{
+  "name": "ghost",
+  "intent": "floats and bobs gently, saying boo",
+  "loop": {
+    "preset": "float",
+    "amount": 1.2,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        10.5
+      ],
+      "amount": 0.8,
+      "delay": 0.2
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        4
+      ]
+    },
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "flicker"
+    }
+  ],
+  "swap": [
+    {
+      "to": "skull",
+      "effect": "blur"
+    },
+    {
+      "to": "ghost@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "eye-off",
+      "effect": "morph"
+    }
+  ]
+}

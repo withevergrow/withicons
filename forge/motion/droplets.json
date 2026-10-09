@@ -1,0 +1,38 @@
+{
+  "name": "droplets",
+  "intent": "two drops drip one after the other",
+  "loop": {
+    "preset": "drop",
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      9.25,
+      21.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.8,
+      "duration": 2.2,
+      "delay": 0.35
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "droplet",
+      "effect": "fade"
+    }
+  ]
+}

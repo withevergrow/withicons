@@ -1,0 +1,35 @@
+{
+  "name": "send-horizontal",
+  "intent": "the paper plane darts forward as the message goes out",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 0,
+    "amount": 1,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "float"
+    }
+  ],
+  "swap": [
+    {
+      "to": "send",
+      "effect": "rotate"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

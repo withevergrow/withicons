@@ -1,0 +1,55 @@
+{
+  "name": "gift-stack",
+  "intent": "the presents wiggle with anticipation; they jump on hover",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "amount": 0.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.7
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "gift",
+      "effect": "morph"
+    },
+    {
+      "to": "package-open",
+      "effect": "flip"
+    }
+  ]
+}

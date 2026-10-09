@@ -1,0 +1,9 @@
+{
+  "name": "avatar-penguin",
+  "intent": "waddles side to side like a happy penguin",
+  "loop": { "preset": "rock", "origin": [12,21], "amount": 0.7, "duration": 1.8 },
+  "hover": { "preset": "jelly", "origin": [12,21] },
+  "parts": { "A": { "preset": "blink", "origin": [12,13], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "bounce", "origin": [12,21], "amount": 0.5 },{ "preset": "nod", "origin": [12,21] }],
+  "swap": [{ "to": "avatar-owl", "effect": "morph" },{ "to": "avatar-penguin@solid", "effect": "scale" }]
+}

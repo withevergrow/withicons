@@ -1,0 +1,68 @@
+{
+  "name": "heart-handshake",
+  "category": "users",
+  "description": "A handshake inside a heart, for partnership, charity and care.",
+  "aliases": [
+    "heart-hands",
+    "goodwill",
+    "caring-partnership",
+    "charity-handshake",
+    "compassion",
+    "care-handshake"
+  ],
+  "synonyms": [
+    "nonprofit",
+    "non profit",
+    "giving",
+    "donation",
+    "fundraising",
+    "philanthropy",
+    "help",
+    "helping hand",
+    "community",
+    "trust",
+    "agreement",
+    "deal",
+    "empathy",
+    "friendship",
+    "alliance",
+    "cooperation",
+    "social good",
+    "caring",
+    "customer care",
+    "love and support"
+  ],
+  "tags": [
+    "charity",
+    "care",
+    "partnership",
+    "community",
+    "support"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 L9 9.5 A1.77 1.77 0 0 0 11.5 12 L13.25 10.25 A2 2 0 0 1 16 10.25 L20.25 13.25",
+      "plate": "A"
+    },
+    {
+      "d": "M16.75 15.25 L15 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 17.5 L12.25 15.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 L9 9.5 A1.77 1.77 0 0 0 11.5 12 L13.25 10.25 A2 2 0 0 1 16 10.25 L20.25 13.25",
+    "M16.75 15.25 L15 13.5",
+    "M14 17.5 L12.25 15.75"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "love-letter",
+  "intent": "the heart letter peeks up out of its envelope",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "rise",
+      "amount": 0.5,
+      "duration": 2.8
+    },
+    "S": {
+      "preset": "beat",
+      "origin": [
+        12,
+        8.75
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "flip"
+    },
+    {
+      "to": "mail-open",
+      "effect": "fade"
+    },
+    {
+      "to": "love-letter@solid",
+      "effect": "scale"
+    }
+  ]
+}

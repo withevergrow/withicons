@@ -1,0 +1,41 @@
+{
+  "name": "chart-scatter",
+  "intent": "data points twinkle into place on the axes",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      13,
+      11
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      13,
+      11
+    ]
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "draw",
+      "duration": 1.2
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-line",
+      "effect": "morph"
+    },
+    {
+      "to": "chart-bar",
+      "effect": "fade"
+    }
+  ]
+}

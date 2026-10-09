@@ -1,0 +1,48 @@
+{
+  "name": "fireplace",
+  "intent": "the fire flickers and the hearth glows warm",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "flicker",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.9,
+      "duration": 1.6
+    },
+    "S": {
+      "preset": "sway",
+      "origin": [
+        12,
+        7
+      ],
+      "amount": 0.5,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "flame",
+      "effect": "morph"
+    }
+  ]
+}

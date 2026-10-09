@@ -1,0 +1,52 @@
+{
+  "name": "diya",
+  "intent": "the lamp glows softly while its flame flickers",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.4,
+    "amount": 0.6
+  },
+  "hover": {
+    "preset": "flicker",
+    "origin": [
+      12,
+      11
+    ],
+    "amount": 1.4,
+    "duration": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        11
+      ],
+      "amount": 1.3,
+      "delay": 0.12
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        20.75
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "diya@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "flame",
+      "effect": "fade"
+    }
+  ]
+}

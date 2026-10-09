@@ -1,0 +1,41 @@
+{
+  "name": "red-envelope",
+  "intent": "a lucky red packet pops up, ready to give",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        12
+      ]
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "gold-ingot",
+      "effect": "scale"
+    },
+    {
+      "to": "gift",
+      "effect": "flip"
+    }
+  ]
+}

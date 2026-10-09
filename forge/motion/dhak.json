@@ -1,0 +1,49 @@
+{
+  "name": "dhak",
+  "intent": "the drum keeps the beat while its feather plume sways",
+  "loop": {
+    "preset": "beat",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        11
+      ],
+      "amount": 1.2,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "dholak",
+      "effect": "slide-left"
+    }
+  ]
+}

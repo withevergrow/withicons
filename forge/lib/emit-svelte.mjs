@@ -5,12 +5,19 @@
 //   dist/IconBase.svelte                 the one shared renderer: icon node + props -> <svg>
 //   dist/Icon.svelte                     generic <Icon name="home" variant="solid" /> (other styles load on first use)
 //   dist/IconAll.svelte                  the same with every style imported up front (subpath /icon)
-//   dist/<style>/icons/<name>.svelte     tiny per-icon wrapper (inline node data)
+//   dist/<style>/icons/<name>.svelte     tiny per-icon wrapper: imports its drawing from ../nodes/<name>.js
+//   dist/<style>/nodes/<name>.js         one drawing (IconNode data); repeated values come from ../values.js
+//   dist/<style>/nodes.js                every drawing of the style (for the generic <Icon>)
 //   dist/<style>/index.js                every icon of that style as Name + NameIcon
 //   dist/index.js                        default style + Icon + IconBase + iconNames/styleNames
-import { J, LOOKUP_SRC, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable, namesAndAliasesDts } from './emit-core.mjs'
+import { J, LOOKUP_SRC, UNIQ_SRC, nodePool, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable, namesAndAliasesDts } from './emit-core.mjs'
 import { frameworkReadme } from './emit-react.mjs'
 
+// Per-instance gradient ids (rich styles), shared with every other @withicons component package (withUniq in emit-core).
+const uniqSrc = `${UNIQ_SRC}
+let WITH_UID = 0
+export function nextUid() { return 'w' + (++WITH_UID) }
+export function uniqueNode(iconNode, uid) { return iconNode && iconNode.some(n => n[2]) ? withUniq(iconNode, uid) : iconNode || [] }`
 // Same attribute logic as every other @withicons component package.
 const attrsSrc = `export function svgAttrs(name, s, o, rest) {
   const size = o.size == null || o.size === '' ? 24 : o.size
@@ -88,12 +95,13 @@ export default async function emit(ctx) {
   const header = `// @withicons/svelte ${ctx.version} — generated, do not edit\n`
 
   W('types.d.ts', namesAndAliasesDts(ctx) + svelteTypes(ctx))
-  W('attrs.js', `${header}export const DEFAULT_STYLE = ${J(D)}\nexport const STYLES = ${J(styleTable(ctx))}\n${attrsSrc}\n`)
-  W('attrs.d.ts', `import type { StyleName } from './types.js'\nexport declare const DEFAULT_STYLE: ${J(D)}\nexport declare const STYLES: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n`)
+  W('attrs.js', `${header}export const DEFAULT_STYLE = ${J(D)}\nexport const STYLES = ${J(styleTable(ctx))}\n${attrsSrc}\n${uniqSrc}\n`)
+  W('attrs.d.ts', `import type { StyleName, IconNode } from './types.js'\nexport declare const DEFAULT_STYLE: ${J(D)}\nexport declare const STYLES: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n` +
+    `/** iconNode with its gradient ids made unique for one rendered copy (rich styles; others are returned as is). */\nexport declare function uniqueNode(iconNode: IconNode, uid: string): IconNode\n/** A new per-instance id. */\nexport declare function nextUid(): string\n`)
 
   W('IconBase.svelte', `<script>
   // @withicons/svelte — the shared renderer behind every icon (Svelte 4 + 5).
-  import { STYLES, DEFAULT_STYLE, svgAttrs } from './attrs.js';
+  import { STYLES, DEFAULT_STYLE, svgAttrs, uniqueNode, nextUid } from './attrs.js';
   export let iconNode = [];
   export let name = '';
   export let variant = DEFAULT_STYLE;
@@ -104,10 +112,13 @@ export default async function emit(ctx) {
   export let title = undefined;
   let className = '';
   export { className as class };
+  // rich styles (gradients): this copy's own gradient ids, so icons on one page never share a gradient
+  const uid = nextUid();
+  $: nodes = uniqueNode(iconNode, uid);
   $: attrs = svgAttrs(name, STYLES[variant] || STYLES[DEFAULT_STYLE], { size, color, strokeWidth, absoluteStrokeWidth, title, class: className }, $$restProps);
 </script>
 
-<svg {...attrs} {...$$restProps}>{#if title}<title>{title}</title>{/if}{#each iconNode as [tag, a]}<svelte:element this={tag} {...a} />{/each}<slot /></svg>
+<svg {...attrs} {...$$restProps}>{#if title}<title>{title}</title>{/if}{#each nodes as [tag, a, kids]}{#if kids}<svelte:element this={tag} {...a}>{#each kids as [t2, a2, k2]}{#if k2}<svelte:element this={t2} {...a2}>{#each k2 as [t3, a3]}<svelte:element this={t3} {...a3} />{/each}</svelte:element>{:else}<svelte:element this={t2} {...a2} />{/if}{/each}</svelte:element>{:else}<svelte:element this={tag} {...a} />{/if}{/each}<slot /></svg>
 `)
 
   const aliases = {}
@@ -117,14 +128,21 @@ export default async function emit(ctx) {
 
   let files = 0
   for (const s of styleNames) {
-    const idx = [], idxDts = [], nodes = {}, fallback = {}
-    for (const i of ctx.icons) {
-      const r = renderOf(ctx, i, s)
-      nodes[i.name] = r.nodes
+    const idx = [], idxDts = [], fallback = {}
+    // Each drawing ships once, in its own small data module (dist/<style>/nodes/<name>.js), and the attribute values a
+    // style repeats (palette variables, classes) once in dist/<style>/values.js. The per-icon .svelte imports its one
+    // drawing and the generic <Icon>'s nodes.js all of them: nothing twice, and a deep import loads only its own icon.
+    const renders = ctx.icons.map(i => [i, renderOf(ctx, i, s)])
+    const pool = nodePool(renders.map(([, r]) => r.nodes), { shared: true })
+    W(`${s}/values.js`, `${header}${pool.decl(null, true)}\n`)
+    for (const [i, r] of renders) {
       if (r.style !== s) fallback[i.name] = r.style
+      const used = new Set(), own = pool.local(r.nodes, used)
+      W(`${s}/nodes/${i.name}.js`, (used.size ? `import { ${[...used].join(', ')} } from '../values.js'\n` : '') +
+        (own.decl ? own.decl + '\n' : '') + `export default ${own.lit}\n`)
       W(`${s}/icons/${i.name}.svelte`, `<script>
   import IconBase from '../../IconBase.svelte';
-  const iconNode = ${J(r.nodes)};
+  import iconNode from '../nodes/${i.name}.js';
 </script>
 
 <IconBase {...$$props} name="${i.name}" variant="${r.style}" {iconNode}><slot /></IconBase>
@@ -136,7 +154,8 @@ export default async function emit(ctx) {
     }
     W(`${s}/index.js`, `${header}${idx.join('\n')}\n`)
     W(`${s}/index.d.ts`, `import type { WithIcon as I, WithIconComponent as C } from '../types.js'\n${idxDts.join('\n')}\n`)
-    W(`${s}/nodes.js`, `${header}export const nodes = ${J(nodes)}\nexport const fallback = ${J(fallback)}\n`)
+    W(`${s}/nodes.js`, `${header}${ctx.icons.map(i => `import ${i.pascal} from './nodes/${i.name}.js'`).join('\n')}\n` +
+      `export const nodes = { ${ctx.icons.map(i => `${J(i.name)}: ${i.pascal}`).join(', ')} }\nexport const fallback = ${J(fallback)}\n`)
   }
 
   // generic <Icon>: canonical names, PascalCase and unambiguous aliases, like every other package.
@@ -267,7 +286,7 @@ export type { IconName, IconAlias, StyleName, IconNode, WithIcon, WithIconCompon
 
 function svelteReadme(ctx) {
   let md = frameworkReadme(ctx, {
-    pkg: '@withicons/svelte', framework: 'Svelte 4 and Svelte 5', lang: 'svelte', classProp: 'class',
+    pkg: '@withicons/svelte', framework: 'Svelte 4 and Svelte 5', lang: 'svelte', classProp: 'class', noCdn: true,
     example: `<script>
   import { Home, Search } from '@withicons/svelte';       // line (default style)
   import { Home as HomeSolid } from '@withicons/svelte/solid';

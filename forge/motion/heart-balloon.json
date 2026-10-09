@@ -1,0 +1,50 @@
+{
+  "name": "heart-balloon",
+  "intent": "the heart balloon bobs in the air, then floats up",
+  "loop": {
+    "preset": "float",
+    "amount": 0.7,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "rise",
+    "amount": 0.8,
+    "duration": 1.2
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12.75,
+        22
+      ],
+      "amount": 0.7
+    },
+    {
+      "preset": "beat",
+      "origin": [
+        12,
+        9.25
+      ]
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12.75,
+        22
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "balloon",
+      "effect": "morph"
+    },
+    {
+      "to": "heart-balloon@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "screen-share",
+  "category": "devices",
+  "description": "A monitor with an outgoing arrow, for screen sharing and presenting.",
+  "aliases": [
+    "share-screen",
+    "screen-sharing",
+    "presenting",
+    "present-screen",
+    "broadcast-screen",
+    "share-desktop",
+    "screenshare"
+  ],
+  "tags": [
+    "screen",
+    "share",
+    "present",
+    "meeting",
+    "monitor",
+    "video-call"
+  ],
+  "paths": [
+    {
+      "d": "M4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13 V7",
+      "plate": "S"
+    },
+    {
+      "d": "M9 10 L12 7 L15 10",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z"
+  ],
+  "cutouts": [
+    "M12 13 V7",
+    "M9 10 L12 7 L15 10"
+  ],
+  "synonyms": [
+    "share",
+    "sharing",
+    "presentation",
+    "presenter mode",
+    "present now",
+    "video call",
+    "video conference",
+    "zoom",
+    "meet",
+    "teams",
+    "webinar",
+    "remote desktop",
+    "remote support",
+    "demo",
+    "show my screen",
+    "stream",
+    "go live",
+    "broadcast",
+    "mirror",
+    "projector",
+    "monitor",
+    "display",
+    "desktop",
+    "upload to screen",
+    "present",
+    "cast screen"
+  ]
+}

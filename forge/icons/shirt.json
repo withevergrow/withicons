@@ -1,0 +1,54 @@
+{
+  "name": "shirt",
+  "category": "commerce",
+  "description": "A T-shirt, for clothing, fashion and merchandise.",
+  "aliases": [
+    "t-shirt",
+    "tshirt",
+    "tee",
+    "clothing",
+    "clothes",
+    "apparel",
+    "top",
+    "merch"
+  ],
+  "synonyms": [
+    "fashion",
+    "outfit",
+    "wardrobe",
+    "garment",
+    "wear",
+    "dress code",
+    "merchandise",
+    "swag",
+    "uniform",
+    "jersey",
+    "laundry",
+    "size guide",
+    "boutique",
+    "shop",
+    "store",
+    "polo",
+    "tee shirt",
+    "casual",
+    "dress",
+    "textile"
+  ],
+  "tags": [
+    "clothing",
+    "fashion",
+    "shopping",
+    "apparel",
+    "merchandise"
+  ],
+  "paths": [
+    {
+      "d": "M9 3.5 L4.5 5.5 L2.5 10.5 L6 12 V20 A1.5 1.5 0 0 0 7.5 21.5 H16.5 A1.5 1.5 0 0 0 18 20 V12 L21.5 10.5 L19.5 5.5 L15 3.5 A3 3 0 0 1 9 3.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M9 3.5 L4.5 5.5 L2.5 10.5 L6 12 V20 A1.5 1.5 0 0 0 7.5 21.5 H16.5 A1.5 1.5 0 0 0 18 20 V12 L21.5 10.5 L19.5 5.5 L15 3.5 A3 3 0 0 1 9 3.5 Z"
+  ],
+  "cutouts": []
+}

@@ -1,0 +1,72 @@
+{
+  "name": "recycle",
+  "category": "nature",
+  "description": "Three chasing arrows in a loop, for recycling, reuse and sustainability.",
+  "aliases": [
+    "recycling",
+    "reuse",
+    "sustainable",
+    "chasing-arrows",
+    "circular"
+  ],
+  "synonyms": [
+    "eco",
+    "sustainability",
+    "green",
+    "recycle bin",
+    "environment",
+    "environmental",
+    "eco friendly",
+    "zero waste",
+    "renew",
+    "renewable",
+    "circular economy",
+    "reduce reuse recycle",
+    "waste",
+    "compost",
+    "planet",
+    "earth day",
+    "repurpose",
+    "loop",
+    "cycle",
+    "mobius",
+    "upcycle",
+    "green living",
+    "recyclable"
+  ],
+  "tags": [
+    "recycling",
+    "environment",
+    "eco",
+    "arrows",
+    "sustainability"
+  ],
+  "paths": [
+    {
+      "d": "M8.45 8.89 L9.62 6.88 A2.75 2.75 0 0 1 14.38 6.88 L15.55 8.89",
+      "plate": "K"
+    },
+    {
+      "d": "M12.41 8.05 L15.55 8.89 L16.39 5.75",
+      "plate": "A"
+    },
+    {
+      "d": "M17.55 12.36 L18.71 14.37 A2.75 2.75 0 0 1 16.33 18.5 L14 18.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.3 16.2 L14 18.5 L16.3 20.8",
+      "plate": "A"
+    },
+    {
+      "d": "M10 18.5 L7.67 18.5 A2.75 2.75 0 0 1 5.29 14.38 L6.45 12.36",
+      "plate": "K"
+    },
+    {
+      "d": "M7.29 15.5 L6.45 12.36 L3.31 13.2",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

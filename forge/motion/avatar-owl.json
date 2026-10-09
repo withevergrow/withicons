@@ -1,0 +1,8 @@
+{
+  "name": "avatar-owl",
+  "intent": "blinks its big round eyes and turns its head a little",
+  "loop": { "preset": "blink", "origin": [12,11.5], "amount": 0.8, "duration": 3.8 },
+  "hover": { "preset": "tilt", "origin": [12,21], "amount": 1 },
+  "alt": [{ "preset": "rock", "origin": [12,21], "amount": 0.6 },{ "preset": "nod", "origin": [12,21] }],
+  "swap": [{ "to": "avatar-owl@solid", "effect": "scale" },{ "to": "bird", "effect": "fade" }]
+}

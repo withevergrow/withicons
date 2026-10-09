@@ -1,0 +1,33 @@
+{
+  "name": "life-buoy",
+  "intent": "the life ring bobs on the water, ready to help",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock"
+    },
+    {
+      "preset": "spin",
+      "duration": 4
+    }
+  ],
+  "swap": [
+    {
+      "to": "help-circle",
+      "effect": "rotate"
+    },
+    {
+      "to": "life-buoy@solid",
+      "effect": "fade"
+    }
+  ]
+}

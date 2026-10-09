@@ -1,0 +1,84 @@
+{
+  "name": "chart-candlestick",
+  "category": "charts",
+  "description": "Candlestick bars with wicks, for stock prices, trading and market data.",
+  "aliases": [
+    "candlestick",
+    "candlestick-chart",
+    "candles",
+    "ohlc",
+    "ohlc-chart",
+    "stock-chart",
+    "trading-chart",
+    "price-chart",
+    "market-chart"
+  ],
+  "tags": [
+    "chart",
+    "stocks",
+    "trading",
+    "finance",
+    "market",
+    "price"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 9 H5.5 A1 1 0 0 1 6.5 10 V14 A1 1 0 0 1 5.5 15 H4.5 A1 1 0 0 1 3.5 14 V10 A1 1 0 0 1 4.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 6 V9 M5 15 V18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11.5 5.5 H12.5 A1 1 0 0 1 13.5 6.5 V11 A1 1 0 0 1 12.5 12 H11.5 A1 1 0 0 1 10.5 11 V6.5 A1 1 0 0 1 11.5 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 V5.5 M12 12 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18.5 11 H19.5 A1 1 0 0 1 20.5 12 V16.5 A1 1 0 0 1 19.5 17.5 H18.5 A1 1 0 0 1 17.5 16.5 V12 A1 1 0 0 1 18.5 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19 8 V11 M19 17.5 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 9 H5.5 A1 1 0 0 1 6.5 10 V14 A1 1 0 0 1 5.5 15 H4.5 A1 1 0 0 1 3.5 14 V10 A1 1 0 0 1 4.5 9 Z",
+    "M11.5 5.5 H12.5 A1 1 0 0 1 13.5 6.5 V11 A1 1 0 0 1 12.5 12 H11.5 A1 1 0 0 1 10.5 11 V6.5 A1 1 0 0 1 11.5 5.5 Z",
+    "M18.5 11 H19.5 A1 1 0 0 1 20.5 12 V16.5 A1 1 0 0 1 19.5 17.5 H18.5 A1 1 0 0 1 17.5 16.5 V12 A1 1 0 0 1 18.5 11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "stock",
+    "stocks",
+    "stock market",
+    "trading",
+    "trader",
+    "trade",
+    "crypto",
+    "cryptocurrency",
+    "bitcoin",
+    "forex",
+    "exchange",
+    "price action",
+    "open high low close",
+    "bullish",
+    "bearish",
+    "volatility",
+    "portfolio",
+    "investing",
+    "investment",
+    "fintech",
+    "brokerage",
+    "ticker",
+    "equity",
+    "market data",
+    "candle chart",
+    "japanese candlestick"
+  ]
+}

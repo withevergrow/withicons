@@ -1,0 +1,34 @@
+{
+  "name": "split",
+  "intent": "flows up and forks into two paths",
+  "loop": {
+    "preset": "pass",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-fork",
+      "effect": "morph"
+    },
+    {
+      "to": "git-merge",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -11,9 +11,11 @@ const baseSrc = `const WITH_PROPS = {
   absoluteStrokeWidth: { type: Boolean, default: false },
   title: { type: String, default: undefined },
 }
+let WITH_UID = 0
+const withEl = n => n[2] ? h(n[0], n[1], n[2].map(withEl)) : h(n[0], n[1])
 function createWithIcon(name, style, displayName, iconNode) {
   const s = STYLES[style] || STYLES[DEFAULT_STYLE]
-  const Component = (props, ctx) => {
+  const draw = (props, ctx, nodes) => {
     const attrs = ctx.attrs || {}
     const size = props.size == null || props.size === '' ? 24 : props.size
     const c = props.color || 'currentColor'
@@ -30,12 +32,26 @@ function createWithIcon(name, style, displayName, iconNode) {
     if (props.title || attrs['aria-label'] || attrs['aria-labelledby'] || attrs.ariaLabel) p.role = 'img'
     else p['aria-hidden'] = 'true'
     const kids = props.title ? [h('title', props.title)] : []
-    for (const n of iconNode) kids.push(h(n[0], n[1]))
+    for (const n of nodes) kids.push(withEl(n))
     if (ctx.slots && ctx.slots.default) kids.push(ctx.slots.default())
     return h('svg', p, kids)
   }
-  Component.props = WITH_PROPS
-  Component.displayName = displayName
+  let Component
+  if (iconNode.some(n => n[2])) {
+    // rich styles (gradients): a stateful component, so every copy keeps its own gradient ids (useId in Vue 3.5+,
+    // stable across SSR and hydration; a per-instance counter before that)
+    Component = {
+      name: displayName, props: WITH_PROPS,
+      setup(props, ctx) {
+        const nodes = withUniq(iconNode, WithVue.useId ? WithVue.useId() : 'w' + (++WITH_UID))
+        return () => draw(props, ctx, nodes)
+      },
+    }
+  } else {
+    Component = (props, ctx) => draw(props, ctx, iconNode)
+    Component.props = WITH_PROPS
+    Component.displayName = displayName
+  }
   Component.iconNode = iconNode
   return Component
 }`
@@ -85,8 +101,11 @@ export interface IconProps extends WithIconProps {
 export default async function emit(ctx) {
   const files = await emitComponentPackage(ctx, {
     dir: 'vue',
-    importEsm: `import { h, defineAsyncComponent } from 'vue'`,
-    importCjs: `const { h, defineAsyncComponent } = require('vue')`,
+    thinCjs: true,
+    importEsm: `import * as WithVue from 'vue'
+import { h, defineAsyncComponent } from 'vue'`,
+    importCjs: `const WithVue = require('vue')
+const { h, defineAsyncComponent } = WithVue`,
     mapAttrs: clean,
     baseSrc, iconSrc, typesDts,
     typeNames: ['WithIcon', 'WithIconProps', 'IconProps'],

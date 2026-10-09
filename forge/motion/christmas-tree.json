@@ -1,0 +1,67 @@
+{
+  "name": "christmas-tree",
+  "intent": "the tree sways softly while its star twinkles",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        4.6
+      ],
+      "amount": 0.6,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "tree-pine",
+      "effect": "fade"
+    },
+    {
+      "to": "gift-stack",
+      "effect": "morph"
+    },
+    {
+      "to": "christmas-tree@solid",
+      "effect": "scale"
+    }
+  ]
+}

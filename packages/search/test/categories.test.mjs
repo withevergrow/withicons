@@ -20,7 +20,7 @@ const CASES = [
   ['doctor', 'stethoscope', 1], ['first aid kit', 'briefcase-medical', 1], ['vaccine', 'syringe', 1], ['dentist', 'tooth', 1],
   ['band aid', 'bandage', 1], ['wheelchair', 'accessibility', 1], ['ambulence', 'ambulance', 1], ['stethoscpe', 'stethoscope', 1],
   // nature
-  ['kitten', 'cat', 1], ['puppy', 'dog', 1], ['paw', 'paw-print', 1], ['seedling', 'sprout', 1], ['christmas tree', 'tree-pine', 1],
+  ['kitten', 'cat', 1], ['puppy', 'dog', 1], ['paw', 'paw-print', 1], ['seedling', 'sprout', 1], ['christmas tree', ['christmas-tree', 'tree-pine'], 1],
   ['palm tree', 'palm-tree', 1], ['bunny', 'rabbit', 1], ['tortoise', 'turtle', 1], ['buterfly', 'butterfly', 1], ['turtel', 'turtle', 1],
   // travel
   ['gas station', 'fuel', 1], ['suitcase', 'luggage', 1], ['motorbike', 'motorcycle', 1], ['car park', 'parking', 1],
@@ -79,7 +79,8 @@ describe('style words', () => {
   }
   test('"glass of water" is about water, not the glass style', () => {
     assert.equal(engine.parse('glass of water').style, null)
-    assert.ok(engine.search('glass of water', { limit: 3 }).some(r => r.name === 'droplet'))
+    // many festival icons are glasses of something (thandai glass, wine glass): water still answers, never the style
+    assert.ok(engine.search('glass of water', { limit: 10 }).some(r => r.name === 'droplet' || r.name === 'droplets'))
   })
   test('a style word plus a UI word keeps the UI word as content ("glossy button")', () => {
     const p = engine.parse('glossy button')

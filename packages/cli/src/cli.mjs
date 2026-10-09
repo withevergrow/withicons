@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { TOOLS, init, env, findTool, installSkill, skillText, zipSkill } from './init.mjs'
 
-const HELP = ({ icons = 'all', styles = [], palettes } = {}) => `withicons: ${icons} icons x ${styles.length || 'every'} styles from the terminal (https://withicons.com)
+const HELP = ({ icons = 'all', styles = [], palettes, paletteStyles } = {}) => `withicons: ${icons} icons x ${styles.length || 'every'} styles from the terminal (https://withicons.com)
 
 Usage
   withicons search <words...>        find icons by meaning ("throw away", "settigns", "money")
@@ -13,9 +13,13 @@ Usage
                                      animated gif / apng / svg, animated PowerPoint, …
   withicons palettes <name>          the colour palettes picked for an icon${palettes ? ` (${palettes} in all)` : ''}
   withicons animate <name>           animation code (@withicons/motion): loop, hover, once, inview, swap
-                                     (--list: the icon's tuned motions and alternates)
+                                     (--list: the icon's tuned motions and alternates; with --style, the
+                                     moves it offers there: 3D styles move in 3D, soft3d has 3-5 moves per icon)
   withicons resolve <name>           check a name or alias
-  withicons styles                   list the styles (and the colour variables of multi-colour ones)
+  withicons styles                   the styles by group (Essentials, Product & brand, 3D & glass, Playful,
+                                     Artistic, Holidays) with their colour variables
+  withicons styles --for <words>     the best styles for a job: "diwali sale banner", "kids avatar picker",
+                                     "AI landing page" (packages, snippets, palettes, download zip)
   withicons categories [category]    list categories, or the icons in one
   withicons mcp                      run the MCP server over stdio (same as npx -y @withicons/mcp)
   withicons init [tool...]           add the with-icons skill + MCP server to your AI coding tools
@@ -39,12 +43,16 @@ Options
   --color <css color>       get: replace currentColor, the ink (svg, data-uri)
   --flat                    get: bake palette / CSS-variable colours into the SVG (files, <img>, Figma, slides)
 
-Colours (multi-colour styles: duo, blueprint, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush)
+Colours (multi-colour styles: duo, blueprint${paletteStyles && paletteStyles.length ? ', ' + paletteStyles.join(', ') : ', and every palette style'})
   --palette <id>            get: apply one of the icon's palettes (withicons palettes <name>)
   --ink, --c1 … --c4, --tint, --accent, --shadow, --shine, --edge <color>
                             get: set any colour role (on top of --palette, or alone)
   --colors <k=v,...>        get: several at once: "c1=#e11d48,ink=#111" or a variable "retro-2=#0ea5e9"
-  --tag <tag>               palettes: only palettes with this tag (pastel, neon, retro, …)
+  --tag <tag>               palettes: only palettes with this tag (pastel, neon, retro, true-to-life …;
+                              avatars: true-to-life = the skin-tone and hair palettes)
+  Duo: --with-duo (tint) and --with-duo-accent (one detail) are CSS variables; "Duo with an accent" =
+  --colors "duo=#6B70F7,duo-accent=#6B70F7" --stroke-width 1.5. Holiday styles (utsav, rangoli, halloween,
+  christmas, lunar, valentine) also have festival palettes: withicons styles --for christmas lists them.
 
 Motion
   --trigger, -t <t>         animate: loop (default), hover, once, inview, swap
@@ -108,6 +116,10 @@ Examples
   npx withicons get pizza --style retro --c1 "#f4b942" --shadow "#5a2a14" --format react
   npx withicons animate bell --trigger hover --format react
   npx withicons animate play --trigger swap --to pause --effect morph
+  npx withicons animate rocket --style clay --format react     # 3D style: plays in 3D (wm-3d)
+  npx withicons motions camera --style soft3d                       # the moves camera offers in soft3d
+  npx withicons styles --for "diwali sale banner"
+  npx withicons search diya --category indian-festivals
   npx withicons get trash --format svg --size 32 > trash.svg
   npx withicons export home settings --format svg,pdf,png --out icons
   npx withicons export star --style sticker --format favicon-pack --background "#ffffff"
@@ -116,6 +128,8 @@ Examples
   npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a"
   npx withicons export play --format gif,apng --motion swap --to pause --effect morph
   npx withicons export heart --all-styles --format png --palette classic-red --out hearts
+  npx withicons export christmas-tree gift-stack --style christmas --format png --out campaign
+  Every style as one zip (all SVGs + an offline viewer): https://withicons.com/downloads/with-icons-<style>.zip
   npx withicons init cursor
   npx withicons init claude-code codex --global --mcp local`
 
@@ -255,15 +269,27 @@ Examples
   withicons animate bell --list                        # its motions: loop ring, hover ring, alternates shake, pop
   withicons animate bell --preset shake                # an alternate
   withicons animate bell --format web-component        # <with-icon name="bell" motion="loop">
+  withicons animate rocket --style clay --format react # 3D style: the loop plays in 3D (class wm-3d)
+  withicons motions camera --style soft3d                 # the 3-5 moves camera offers in soft3d
   withicons animate play --trigger swap --to pause --effect morph`,
     resolve: `withicons resolve <name>: check a name or alias (exit 0 resolved, 1 unknown or ambiguous)
 
 Options
   --json                    machine-readable output`,
-    styles: `withicons styles: list the styles and the colour variables of multi-colour ones
+    styles: `withicons styles: the styles by group, with the colour variables of multi-colour ones
+withicons styles --for <words>: the best styles for what you are making (festivals, avatars, AI, SaaS, kids, print …)
 
 Options
-  --json                    machine-readable output (with minSize and onDark hints)`,
+  --for <words>             what you are making: "diwali sale banner", "avatar picker for a kids app", "AI landing page"
+  --use <id>                a job instead: app, slides, saas, ai, brand, kids, print, festive
+  --icon <name>             the icon the snippets show (default home)
+  --limit, -n <n>           max styles (default 6)
+  --json                    machine-readable output (with minSize, onDark, group and goodFor)
+
+Examples
+  withicons styles --for "christmas email"        # christmas first, with its festival palettes
+  withicons styles --for "diwali sale" --icon diya
+  withicons styles --use ai`,
     categories: `withicons categories [category]: list categories, or the icons in one
 
 Options
@@ -303,7 +329,7 @@ const FLAGS = { s: 'style', f: 'format', n: 'limit', c: 'category', fw: 'framewo
   o: 'out', formats: 'format', bg: 'background', 'all-style': 'all-styles', 'every-style': 'all-styles' }
 const BOOL = new Set(['json', 'version', 'help', 'raw', 'no-color', 'global', 'dry-run', 'force', 'no-mcp', 'no-skill', 'print', 'path', 'zip', 'list', 'flat', 'all-styles', 'strict'])
 const VALUE = new Set(['style', 'format', 'framework', 'size', 'stroke-width', 'color', 'trigger', 'preset', 'to', 'effect', 'duration', 'limit',
-  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', 'fps', 'seconds', 'loop', 'matte', 'hold', 'name', 'name-map', ...ROLES])
+  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', 'fps', 'seconds', 'loop', 'matte', 'hold', 'name', 'name-map', 'for', 'use', 'icon', ...ROLES])
 class UsageError extends Error {}
 const near = (k, list) => list.find(x => x.startsWith(k.slice(0, 3)) || k.startsWith(x.slice(0, 3)))
 function parseArgs(argv) {
@@ -515,7 +541,7 @@ async function run(argv) {
         if (args.length && (o.list || cmd === 'motions')) {
           if (typeof lib.iconMotions !== 'function') { console.error('withicons animate --list: needs a newer @withicons/mcp (npm i withicons@latest)'); return 1 }
           if (args.length > 1) console.error(dim(`animate --list takes one icon; showing ${args[0]}`))
-          const r = lib.iconMotions(args[0])
+          const r = lib.iconMotions(args[0], o.style)
           if (o.json) { out(r); return 0 }
           const n = r.name
           const desc = x => x ? `${bold(x.preset.padEnd(8))}${dim([x.duration != null ? x.duration + 's' : '', x.amount != null ? 'amount ' + x.amount : '', x.dir != null ? 'dir ' + x.dir : ''].filter(Boolean).join(', '))}` : '-'
@@ -529,6 +555,9 @@ async function run(argv) {
   ${bold('alternates')} ${dim("(the icon's other tuned motions; any trigger)")}`)
             for (const a of r.alternates) console.log(`  ${desc(a)}  ${cmdl(`withicons animate ${n} --preset ${a.preset}   ·   export --motion ${a.preset}`)}`)
           }
+          if (r.moves && r.moves.length) console.log(`
+  ${bold('moves in ' + r.style)} ${dim(r.motion3d ? '(plays in 3D)' : '')}
+` + r.moves.map(m => `  ${desc(m)}  ${cmdl(`withicons animate ${n} --style ${r.style} --preset ${m.preset}`)}`).join('\n'))
           if (r.swaps.length) console.log(`
   ${bold('swaps')}      ${r.swaps.map(x => `${x.to} (${x.effect})`).join(', ')}  ${cmdl(`withicons animate ${n} --trigger swap --to ${r.swaps[0].to}`)}`)
           console.log(dim(`
@@ -576,13 +605,39 @@ ${dim(`${m.animated} icons have a tuned animation · ${m.install.npm}`)}`)
         return found ? 0 : 1
       }
       case 'styles': {
+        // withicons styles --for "diwali sale banner": the best styles for a job (recommend_styles)
+        const job = o.for != null ? [o.for, ...args].join(' ') : null
+        if ((job != null || o.use) && typeof lib.recommendStyles === 'function') {
+          const r = lib.recommendStyles({ for: job || '', use: o.use, icon: o.icon, limit: num(o, 'limit', { int: true }) || 6 })
+          if (o.json) { out(r); return 0 }
+          if (!r.matched) console.log(dim(r.hint))
+          if (r.festivals) for (const f of r.festivals) console.log(`${bold(f.festival)}  ${dim('icons: withicons categories ' + f.category)}`)
+          for (const x of r.recommendations) {
+            console.log(`  ${bold(x.style.padEnd(10))} ${dim(x.group)}  ${x.goodFor || x.looks || ''}`)
+            console.log(`  ${''.padEnd(10)} ${cyan(x.webComponent)}  ${dim(x.react)}`)
+            if (x.stylePalettes) console.log(`  ${''.padEnd(10)} ${dim('palettes: ' + x.stylePalettes.map(q => q.id).join(', '))}
+  ${''.padEnd(10)} ${dim('e.g. --colors "' + Object.entries(x.stylePalettes[0].colors).map(([k, v]) => k + '=' + v).join(',') + '"  (every palette: --json)')}`)
+            if (x.presets) console.log(`  ${''.padEnd(10)} ${dim('presets: ' + x.presets.map(q => q.title + (q.css ? ' (' + q.css + ')' : ' (site / studio only)')).join('; '))}`)
+          }
+          for (const n of r.notes) console.log(dim(`\n  ${n}`))
+          console.log(dim(`\n  Whole style as files: ${r.downloads.style}`))
+          return r.matched ? 0 : 1
+        }
         const s = lib.listStyles()
         if (o.json) { out({ styles: s }); return 0 }
-        for (const x of s) {
-          console.log(`  ${bold(x.name.padEnd(10))} ${dim(x.description || '')}`)
-          const vars = Object.entries(x.vars || {})
-          if (vars.length) console.log(`  ${''.padEnd(10)} ${vars.map(([k, v]) => `${swatch(v)} ${cyan(k)}`).join('  ')}`)
+        const groups = typeof lib.styleGroups === 'function' ? lib.styleGroups() : []
+        const by = new Map(s.map(x => [x.name, x]))
+        const order = groups.length ? [...groups.map(g => [g.title, g.styles.filter(n => by.has(n))]), ['More', s.map(x => x.name).filter(n => !groups.some(g => g.styles.includes(n)))]] : [['', s.map(x => x.name)]]
+        for (const [title, names] of order) {
+          if (!names.length) continue
+          if (title) console.log(`\n${bold(title)}`)
+          for (const x of names.map(n => by.get(n))) {
+            console.log(`  ${bold(x.name.padEnd(10))} ${dim(x.goodFor || x.description || '')}`)
+            const vars = Object.entries(x.vars || {})
+            if (vars.length) console.log(`  ${''.padEnd(10)} ${vars.map(([k, v]) => `${swatch(v)} ${cyan(k)}`).join('  ')}`)
+          }
         }
+        console.log(dim(`\n  Which style for a job: withicons styles --for "what you are making"`))
         console.log(dim(`\n  Colour variables have defaults; override them in CSS, or: withicons get <name> --style retro --palette <id> | --c1 <color>`))
         return 0
       }

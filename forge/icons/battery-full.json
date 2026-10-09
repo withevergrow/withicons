@@ -1,0 +1,66 @@
+{
+  "name": "battery-full",
+  "category": "devices",
+  "description": "A full battery, for fully charged and full power.",
+  "aliases": [
+    "full-battery",
+    "charged",
+    "fully-charged",
+    "battery-100",
+    "battery-high",
+    "full-charge",
+    "power-full"
+  ],
+  "synonyms": [
+    "100 percent",
+    "full power",
+    "charged up",
+    "battery level",
+    "charge complete",
+    "max battery",
+    "energy",
+    "power level",
+    "device battery",
+    "phone battery",
+    "all charged",
+    "ready",
+    "energized",
+    "battery status",
+    "full energy"
+  ],
+  "tags": [
+    "battery",
+    "power",
+    "charge",
+    "full",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 10.5 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z"
+  ],
+  "cutouts": [
+    "M4 8 H17 A1 1 0 0 1 18 9 V15 A1 1 0 0 1 17 16 H4 A1 1 0 0 1 3 15 V9 A1 1 0 0 1 4 8 Z M5 9.5 H7 V14.5 H5 Z M9 9.5 H11 V14.5 H9 Z M13 9.5 H15 V14.5 H13 Z"
+  ]
+}

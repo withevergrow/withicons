@@ -1,0 +1,72 @@
+{
+  "name": "stocking",
+  "category": "christmas",
+  "description": "A Christmas stocking with a cuff and a patched heel and toe, for gifts and holidays.",
+  "aliases": [
+    "christmas-stocking",
+    "xmas-stocking",
+    "sock",
+    "holiday-stocking",
+    "stocking-stuffer",
+    "hanging-sock"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "stocking stuffers",
+    "stockings",
+    "gifts",
+    "presents",
+    "fireplace",
+    "mantel",
+    "santa",
+    "treats",
+    "small gifts",
+    "surprise",
+    "christmas morning",
+    "socks",
+    "stockin"
+  ],
+  "tags": [
+    "christmas",
+    "stocking",
+    "gift",
+    "holiday",
+    "decoration"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 8 V15 A6 6 0 0 0 13.5 21 H17.5 A3 3 0 0 0 17.5 15 H17 A1 1 0 0 1 16 14 V8",
+      "plate": "K"
+    },
+    {
+      "d": "M7 3.5 H16.5 A1.5 1.5 0 0 1 18 5 V6.5 A1.5 1.5 0 0 1 16.5 8 H7 A1.5 1.5 0 0 1 5.5 6.5 V5 A1.5 1.5 0 0 1 7 3.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M16.75 15.25 C17.75 16.75 17.75 19.25 16.75 20.85",
+      "plate": "A"
+    },
+    {
+      "d": "M7.65 17.25 C10 17.25 11.5 19 12 20.9",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 8 V15 A6 6 0 0 0 13.5 21 H17.5 A3 3 0 0 0 17.5 15 H17 A1 1 0 0 1 16 14 V8 Z",
+    "M7 3.5 H16.5 A1.5 1.5 0 0 1 18 5 V6.5 A1.5 1.5 0 0 1 16.5 8 H7 A1.5 1.5 0 0 1 5.5 6.5 V5 A1.5 1.5 0 0 1 7 3.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 8 H18",
+    "M16.75 15.25 C17.75 16.75 17.75 19.25 16.75 20.85",
+    "M7.65 17.25 C10 17.25 11.5 19 12 20.9"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "scan",
+  "intent": "the frame focuses in and out like a camera finding its target",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.8,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "scan-face",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    }
+  ]
+}

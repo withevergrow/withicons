@@ -1,0 +1,36 @@
+{
+  "name": "candy-cane",
+  "intent": "the candy cane rocks on its foot like a sweet pendulum",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      9.25,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 1
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "candy-cane@solid",
+      "effect": "scale"
+    }
+  ]
+}

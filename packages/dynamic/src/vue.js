@@ -4,9 +4,11 @@
 // the short way, words and choices cross-fade) instead of jumping; instant with prefers-reduced-motion.
 // Without a label the svg is named by what it shows ("Calendar date, March 17"); label="" makes it decorative.
 import { defineComponent, h, ref, mergeProps, onBeforeUnmount } from 'vue'
+import * as WithVue from 'vue'
 import * as L from './core.js'
 
 const camel = k => k.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())
+let UID = 0
 
 export const LiveIcon = defineComponent({
   name: 'LiveIcon',
@@ -29,6 +31,8 @@ export const LiveIcon = defineComponent({
     const frame = ref(null)
     const svg = ref(null)
     let shown = null, ctl = null, pending = null
+    // rich styles (gradients): this copy's own gradient ids (useId in Vue 3.5+, stable across SSR and hydration)
+    const uid = WithVue.useId ? WithVue.useId() : 'w' + (++UID)
     if (typeof onBeforeUnmount === 'function') onBeforeUnmount(() => { if (ctl) ctl.cancel() })
     // a new target with animate on: start a transition from what is on screen (after this render)
     const start = (name, v, target, key) => {
@@ -75,7 +79,7 @@ export const LiveIcon = defineComponent({
         shown = { key, name: props.name, variant: v, params: target }
         if (frame.value) frame.value = null
       }
-      const o = { size: props.size, color: props.color, strokeWidth: props.strokeWidth, absoluteStrokeWidth: props.absoluteStrokeWidth, label: props.label, vars: props.vars }
+      const o = { size: props.size, color: props.color, strokeWidth: props.strokeWidth, absoluteStrokeWidth: props.absoluteStrokeWidth, label: props.label, vars: props.vars, idSuffix: uid }
       if (props.label == null && rest['aria-hidden'] !== true && rest['aria-hidden'] !== 'true' && !rest['aria-label'] && !rest['aria-labelledby']) o.label = L.describe(props.name, draw)
       else if (props.label === '') o.label = null
       const { attrs: a, inner } = L.parts(props.name, draw, v, o)

@@ -1,0 +1,57 @@
+{
+  "name": "reindeer",
+  "intent": "the reindeer nods while its red nose glows",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        18
+      ],
+      "amount": 0.8,
+      "duration": 1.6
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "sleigh",
+      "effect": "slide-right"
+    }
+  ]
+}

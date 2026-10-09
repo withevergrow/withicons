@@ -114,6 +114,8 @@ export interface AnimationResponse {
   motion: unknown; presets?: string[]; effects?: string[]; notes: string[]
   /** the icon's other tuned motions (pass one as preset) and the most energetic presets */
   alternates?: MotionSlot[]; lively?: string[]
+  /** 3D styles (and soft3d): the motion plays in 3D (wm-3d), and the moves the icon offers in this style (soft3d: 3-5) */
+  motion3d?: boolean; moves?: MotionSlot[]
   install: { npm: string; css: string[]; cdn: string[] }
 }
 export declare function animateIcon(opts: {
@@ -123,10 +125,12 @@ export declare function listMotion(): { animated: number; triggers: Trigger[]; p
 export declare function motionFor(name: string): unknown | null
 export interface MotionSlot { preset: string; duration?: number; amount?: number; dir?: number; delay?: number }
 /** One icon's tuned motions: default loop / hover presets, intent, part lags, alternates and suggested swaps. */
-export declare function iconMotions(name: string): {
+export declare function iconMotions(name: string, style?: string): {
   name: string; tuned: boolean; intent: string | null; loop: MotionSlot | null; hover: MotionSlot | null
   parts?: Record<string, MotionSlot>; deco?: string; alternates: MotionSlot[]; swaps: { to: string; effect: string }[]
   lively: string[]; presets: string[]; howTo: string
+  /** with a style: whether it plays in 3D and the moves the icon offers in it */
+  style?: string; motion3d?: boolean; moves?: MotionSlot[]
 }
 
 export declare function resolveIcon(name: string):
@@ -137,6 +141,8 @@ export declare function resolveIcon(name: string):
   | { status: 'unknown'; nearest: string[]; didYouMean?: string; hint?: string }
 export declare function resolveName(name: string): string
 export declare function listStyles(): { name: string; title: string; kind: string; description: string; default: boolean
+  /** the style group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) and what it is good for */
+  group: string; goodFor?: string; motion3d?: true
   /** smallest size (px) the style reads well at */
   minSize: 16 | 32 | 48
   /** how to use it on a dark background */
@@ -144,7 +150,40 @@ export declare function listStyles(): { name: string; title: string; kind: strin
   palette?: boolean; vars?: Record<string, string> }[]
 export declare function listCategories(): { total: number; categories: { name: string; count: number; examples: string[] }[] }
 export declare function listCategories(category: string): { category: string; count: number; icons: { name: string; title: string; description: string }[] }
-export declare function info(): { version: string; icons: number; styles: string[]; formats: Format[]; site: string; animated: number; palettes: number }
+export declare function info(): { version: string; icons: number; styles: string[]; groups: { id: string; title: string; styles: string[] }[]; uses: StyleUse[]; paletteStyles: string[]; formats: Format[]; site: string; animated: number; palettes: number }
+
+// ---- choosing a style
+export interface StyleGroup { id: string; title: string; blurb: string; styles: string[] }
+/** a "What are you making?" job and its best styles, best first */
+export interface StyleUse { id: string; title: string; styles: string[] }
+export interface DuoPreset { id: string; title: string; description: string; vars: Record<string, string>; strokeWidth?: number; where: string; css?: string }
+export interface StyleInfo {
+  style: string; title?: string; group: string; looks?: string; goodFor?: string; minSize?: number
+  motion3d: boolean; moves?: string
+  react: string; webComponent: string; classes: string
+  /** npm packages holding the style's raw files (framework packages, <with-icon> and the class loader carry every style) */
+  files?: { svgAndNodes: string; prebuiltSvg: string; classes: string; nodes: string }
+  /** https://withicons.com/downloads/with-icons-<style>.zip */
+  zip: string
+  /** holiday styles: festival palettes (stylePalette(style, id) gives the CSS variables) */
+  stylePalettes?: { id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>> }[]; stylePalettesHow?: string
+  /** duo only */
+  presets?: DuoPreset[]
+  page?: string
+}
+export declare function styleGroups(): StyleGroup[]
+export declare function styleUses(): StyleUse[]
+export declare function styleInfo(style: string, icon?: string): StyleInfo
+export declare function duoPresets(): DuoPreset[]
+export declare function stylePalette(style: string, id?: string): { style: string; id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>>; vars: Record<string, string>; css: string; /** for the CLI: --colors "<flags>" */ flags: string }
+export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number }): {
+  query: string | null; matched: boolean; uses: StyleUse[]
+  festivals?: { festival: string; styles: string[]; category: string }[]
+  avatars?: { category: 'avatars'; paletteTag: 'true-to-life' }
+  recommendations: StyleInfo[]
+  hint?: string; allUses?: StyleUse[]; groups?: StyleGroup[]
+  notes: string[]; downloads: { style: string; all: string }
+}
 
 export declare function snippet(name: string, style?: string, format?: Format | string, opts?: { size?: number; color?: string; strokeWidth?: number; flat?: boolean }): string
 export declare function svgOf(name: string, style: string, opts?: { size?: number; color?: string; strokeWidth?: number; flat?: boolean }): string

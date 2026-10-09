@@ -22,6 +22,8 @@
  *   flip           rotateY has no 2D equivalent: baked to scaleX = cos(angle), two samples per frame
  *   orbit          the circular drift is baked to position, two samples per frame
  *   flicker        CSS scales after rotating, Lottie before; the rotation is <= 1.5deg so the gap is sub-pixel
+ * Gradients (rich styles: clay, glass, chrome, the holiday styles, ...): Lottie gradient fills are not drawn the same way by every
+ * player, so each gradient becomes one flat colour, its middle (the colour at offset 0.5, stop-opacity included).
  * Not representable: the pixel style's shape-rendering=crispEdges (Lottie players always anti-alias); motion that
  * overshoots the 24 box (twinkle, zoom, bounce...) is cut at the canvas edge, so use opts.padding for those.
  * Parts: when the drawing carries part tags (wm-deco, wm-shadow, wm-a, wm-s) and the motion runtime is on the page
@@ -190,12 +192,17 @@
     if (opts && opts.static) return null
     if (m === false || (m && (m.preset === 'none' || m.preset === 'static' || m.trigger === 'none'))) return null
     var spec = ctx.motionSpec || null
+    // 3D motion (forge/MOTION.md "3D motion"): a 3D style plays the spec's 3D counterpart, a backdrop style keeps its tile
+    // still. The mapping and the 3D preset table come from the motion runtime when it is on the page.
+    var WMr = motionRuntime()
+    if (spec && ctx.style && WMr && WMr.styleSpec) spec = WMr.styleSpec(spec, ctx.style)
+    var DEF = function (p) { return PRESET_DEFAULTS[p] || (WMr && WMr.PRESET_DEFAULTS && WMr.PRESET_DEFAULTS[p]) || null }
     m = m || {}
     var trigger = m.trigger === 'hover' || m.trigger === 'once' ? m.trigger : 'loop'
     var slot = spec ? (trigger === 'loop' ? spec.loop : spec.hover) || spec.loop : null
-    var preset = PRESET_DEFAULTS[m.preset] ? m.preset : slot && PRESET_DEFAULTS[slot.preset] ? slot.preset : (trigger === 'loop' ? 'float' : 'pop')
+    var preset = DEF(m.preset) ? m.preset : slot && DEF(slot.preset) ? slot.preset : (trigger === 'loop' ? 'float' : 'pop')
     var base = slot && slot.preset === preset ? slot : {}
-    var d = PRESET_DEFAULTS[preset], loop = trigger === 'loop'
+    var d = DEF(preset), loop = trigger === 'loop'
     var num = function (a) { return a != null && a !== '' && isFinite(Number(a)) ? Number(a) : null }
     var pick = function () { for (var i = 0; i < arguments.length; i++) { var v = num(arguments[i]); if (v != null) return v } return null }
     var dir = pick(m.dir, base.dir)
@@ -532,8 +539,34 @@
   // Walk the tree with inherited presentation attributes -> flat list of drawable elements (document order).
   var INHERIT = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-dasharray', 'stroke-dashoffset',
     'fill-opacity', 'stroke-opacity', 'fill-rule', 'color', 'visibility']
+  // gradient id -> its middle colour as rgba(): the colour at offset 0.5 (stop colours baked, stop-opacity kept)
+  function gradientMids(src, bake, ink) {
+    var out = {}, re = /<(linearGradient|radialGradient)\b([^>]*)>([\s\S]*?)<\/\1\s*>/g, m
+    while ((m = re.exec(src))) {
+      var ga = parseAttrs(m[2]), stops = [], sr = /<stop\b((?:[^>"']|"[^"]*"|'[^']*')*?)\/?>/g, s
+      if (!ga.id) continue
+      while ((s = sr.exec(m[3]))) {
+        var a = parseAttrs(s[1])
+        var col = String(bake(a['stop-color'] == null ? '#000000' : a['stop-color'])).trim()
+        var c = parseColor(/^currentcolor$/i.test(col) ? ink : col)
+        if (!c) continue
+        var off = parseFloat(a.offset)
+        off = !isFinite(off) ? 0 : /%\s*$/.test(a.offset) ? off / 100 : off
+        var so = num0(a['stop-opacity'] == null ? 1 : bake(a['stop-opacity']), 1)
+        stops.push([Math.max(0, Math.min(1, off)), c[0], c[1], c[2], c[3] * Math.max(0, Math.min(1, so))])
+      }
+      if (!stops.length) continue
+      var lo = stops[0], hi = stops[stops.length - 1]
+      for (var i = 0; i < stops.length; i++) { if (stops[i][0] <= 0.5) lo = stops[i]; if (stops[i][0] >= 0.5) { hi = stops[i]; break } }
+      var t = hi[0] > lo[0] ? (0.5 - lo[0]) / (hi[0] - lo[0]) : 0
+      var mix = function (k) { return lo[k] + (hi[k] - lo[k]) * Math.max(0, Math.min(1, t)) }
+      out[ga.id] = 'rgba(' + Math.round(mix(1) * 255) + ',' + Math.round(mix(2) * 255) + ',' + Math.round(mix(3) * 255) + ',' + r4(mix(4)) + ')'
+    }
+    return out
+  }
   function collect(ctx, bake) {
     var tree = parseMarkup(String(ctx.inner || ''))
+    var GRADS = gradientMids(String(ctx.inner || ''), bake, ctx.color || '#000000')
     var rootAttrs = {}, rootSrc = ctx.root || {}
     for (var k in rootSrc) rootAttrs[k] = bake(String(rootSrc[k]))
     var base = { fill: '#000000', stroke: 'none', 'stroke-width': '1', 'stroke-linecap': 'butt', 'stroke-linejoin': 'miter', 'stroke-miterlimit': '4',
@@ -542,8 +575,8 @@
     function resolveColor(v, st) {
       v = String(v).trim()
       if (v === 'currentColor' || v === 'currentcolor') return st.color
-      var u = /^url\([^)]*\)\s*(.*)$/.exec(v)
-      if (u) return u[1] ? resolveColor(u[1], st) : st.color
+      var u = /^url\(\s*['"]?#?([^'")\s]*)['"]?\s*\)\s*(.*)$/.exec(v)
+      if (u) return GRADS[u[1]] || (u[2] ? resolveColor(u[2], st) : st.color)
       return v
     }
     function walk(node, inh, mtx, op, role) {
@@ -555,7 +588,7 @@
       if (a.color != null) st.color = resolveColor(a.color, { color: inh.color })
       var m = a.transform ? mul(mtx, parseTransform(a.transform)) : mtx
       var o = op * (a.opacity != null ? Math.max(0, Math.min(1, num0(a.opacity, 1))) : 1)
-      if (a['class'] && partRole(a['class']) !== 'obj') role = partRole(a['class'])
+      if (a['class'] && partRole(a['class'], { shine: true }) !== 'obj') role = partRole(a['class'], { shine: true })
       if (node.tag === 'g' || node.tag === 'svg' || node.tag === 'root' || node.tag === 'a') {
         node.children.forEach(function (c) { walk(c, st, m, o, role) })
         return
@@ -777,9 +810,13 @@
   // each run of same-role elements becomes its own layer: the object plays the preset, plates their override,
   // decorations their own counter-phased loop, ground shadows stay put. Values are sampled twice per frame (linear),
   // so they match the CSS at every instant. Without the runtime (Node) the icon moves as one layer, as before.
-  function partRole(cls) {
+  // { shine: true }: the highlight (wm-shine) is its own layer, which 3D presets move against the turn
+  function partRole(cls, o) {
+    var WMr = motionRuntime()
+    if (WMr && WMr.partRole) return WMr.partRole(cls, o)
     var c = ' ' + String(cls || '').replace(/\s+/g, ' ') + ' '
-    return c.indexOf(' wm-deco ') >= 0 ? 'deco' : c.indexOf(' wm-shadow ') >= 0 ? 'shadow' : c.indexOf(' wm-a ') >= 0 ? 'a' : c.indexOf(' wm-s ') >= 0 ? 's' : 'obj'
+    return c.indexOf(' wm-deco ') >= 0 ? 'deco' : c.indexOf(' wm-shadow ') >= 0 ? 'shadow' : c.indexOf(' wm-a ') >= 0 ? 'a' : c.indexOf(' wm-s ') >= 0 ? 's' :
+      o && o.shine && c.indexOf(' wm-shine ') >= 0 ? 'shine' : 'obj'
   }
   function motionRuntime() {
     var g = typeof self !== 'undefined' ? self : typeof globalThis !== 'undefined' ? globalThis : {}
@@ -791,6 +828,7 @@
     var st = /^steps\((\d+)/.exec(mo.ease || '')
     var m = { preset: mo.preset, trigger: mo.trigger, loop: mo.loop, duration: mo.duration, k: mo.k, origin: mo.origin,
       dir: (Math.atan2(mo.dy, mo.dx) * 180 / Math.PI + 360) % 360, steps: st ? +st[1] : 0, ease: mo.ease, delay: 0 }
+    if (ctx.style) m.style = ctx.style   // partsPlan maps the spec for 3D / backdrop styles
     var plan = WM.partsPlan(m, ctx.motionSpec || null, { deco: els.some(function (e) { return e.role === 'deco' }) })
     var secs = mo.loop ? plan.cycle : mo.duration + (plan.deco ? Math.max(0, plan.deco.delay) : 0)
     var op = r4(secs * FPS)
@@ -835,14 +873,17 @@
           var pos = [M[0] * o[0] + M[2] * o[1] + M[4], M[1] * o[0] + M[3] * o[1] + M[5]]
           var sx = Math.sqrt(M[0] * M[0] + M[1] * M[1]), rot = Math.atan2(M[1], M[0]) * 180 / Math.PI
           var sy = sx ? (M[0] * M[3] - M[1] * M[2]) / sx : 1
+          // M = rotate . skewX . scale: the 3D presets' projected poses carry a shear (lottie-web: skew(-sk), axis 0)
+          var shear = sx && sy ? (M[0] * M[2] + M[1] * M[3]) / sx / sy : 0
           if (prevR != null) rot += Math.round((prevR - rot) / 360) * 360   // unwrap: no 179 -> -179 jumps
           prevR = rot
-          samples.push({ t: f / 2, ease: LIN, c: { p: pos, r: rot, sx: sx, sy: sy, o: sm.opacity, clip: sm.clip } })
+          samples.push({ t: f / 2, ease: LIN, c: { p: pos, r: rot, sx: sx, sy: sy, sk: -Math.atan(shear) * 180 / Math.PI, o: sm.opacity, clip: sm.clip } })
         }
         var A = P(o[0], o[1])
         var ch = function (fn, dims) { return prop(samples.map(function (x) { return { t: x.t, v: fn(x.c), ease: x.ease } }), dims, lerpN) }
         ks = { a: { a: 0, k: [A[0], A[1], 0] }, p: ch(function (c) { var q = P(c.p[0], c.p[1]); return [q[0], q[1], 0] }, 3),
           r: ch(function (c) { return r3(c.r) }, 1), s: ch(function (c) { return [r3(c.sx * 100), r3(c.sy * 100), 100] }, 3), o: ch(function (c) { return r3(c.o * 100) }, 1) }
+        if (samples.some(function (x) { return Math.abs(x.c.sk) > 1e-3 })) { ks.sk = ch(function (c) { return r3(c.sk) }, 1); ks.sa = { a: 0, k: 0 } }
         if (samples.some(function (x) { return x.c.clip })) {
           // CSS clip-path: inset(...) of `pass`, in the layer's own (untransformed) space
           mask = { inv: false, mode: 'a', nm: 'Clip', o: { a: 0, k: 100 }, x: { a: 0, k: 0 },
@@ -854,7 +895,7 @@
           if (mask.pt.a === 0) mask.pt.k = mask.pt.k[0]
         }
       }
-      var nm = { obj: 'Object', a: 'Part A', s: 'Part S', deco: 'Decoration', shadow: 'Shadow' }[run.role] + (runs.length > 1 ? ' ' + (ri + 1) : '')
+      var nm = { obj: 'Object', a: 'Part A', s: 'Part S', deco: 'Decoration', shadow: 'Shadow', shine: 'Shine' }[run.role] + (runs.length > 1 ? ' ' + (ri + 1) : '')
       var L = { ddd: 0, ind: 0, ty: 4, nm: nm, sr: 1, ks: ks, ao: 0, shapes: shapes, ip: 0, op: op, st: 0, bm: 0 }
       if (mask) { L.hasMask = true; L.masksProperties = [mask] }
       layers.unshift(L)   // Lottie: the first layer is on top
@@ -916,7 +957,8 @@
       }
     }
     var WM = mo && !isDraw ? motionRuntime() : null
-    if (WM && els.some(function (e) { return e.role !== 'obj' })) return buildParts(ctx, opts, mo, els, geo, size, WM)
+    // parts, or a 3D preset (only the runtime knows its poses): sampled layers
+    if (WM && (els.some(function (e) { return e.role !== 'obj' }) || !PRESET_DEFAULTS[mo.preset])) return buildParts(ctx, opts, mo, els, geo, size, WM)
     var shapes = []
     els.forEach(function (el, i) { var g = elementGroup(el, i, geo, draw); if (g) shapes.unshift(g) }) // Lottie: first item is on top
 
@@ -1069,14 +1111,14 @@
   var FORMATS = [
     { id: 'lottie', label: 'Lottie JSON', ext: 'json', mime: 'application/json', group: 'animated', audience: ['designers', 'developers', 'mobile', 'web'],
       transparent: true, animated: true,
-      note: 'Vector animation for apps and sites (lottie-web, iOS, Android, Flutter, React Native) and for motion designers in After Effects or LottieFiles. Stays sharp at any size.',
+      note: 'Vector animation for apps and sites (lottie-web, iOS, Android, Flutter, React Native) and for motion designers in After Effects or LottieFiles. Stays sharp at any size. Gradients become their middle colour.',
       available: function () { return true },
       run: function (ctx, opts) {
         return Promise.resolve({ data: JSON.stringify(build(ctx, opts)), filename: fname(ctx, suffix(ctx, opts), 'json'), mime: 'application/json' })
       } },
     { id: 'dotlottie', label: 'dotLottie', ext: 'lottie', mime: 'application/zip', group: 'animated', audience: ['designers', 'developers', 'mobile', 'web'],
       transparent: true, animated: true,
-      note: 'The compact Lottie package (.lottie) with playback settings built in. Drop it into LottieFiles, Webflow, Framer or the dotLottie players.',
+      note: 'The compact Lottie package (.lottie) with playback settings built in. Drop it into LottieFiles, Webflow, Framer or the dotLottie players. Gradients become their middle colour.',
       available: function () { return true },
       run: function (ctx, opts) {
         return Promise.resolve({ data: dotLottie(ctx, opts), filename: fname(ctx, suffix(ctx, opts), 'lottie'), mime: 'application/zip' })

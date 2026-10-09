@@ -5,7 +5,10 @@ import * as Kit from './_bauhaus-kit.mjs'
 const P = Object.freeze({ ...Prim, ...Kit })
 import { compose } from './_bauhaus-compose.mjs'
 import { REDRAW } from './_bauhaus-redraws.mjs'
-import { auto } from './_bauhaus-auto.mjs'
+import { auto, loopsD } from './_bauhaus-auto.mjs'
+import * as F from './_bauhaus-field.mjs'
+import { isPerson } from './_people.mjs'
+import { buildPerson, personPalette } from './_bauhaus-people.mjs'
 
 // The 20 exemplars of forge/styles/BAUHAUS-GUIDE.md, one per family. They are the
 // reference every redraw is measured against, owned by the art director: an entry here
@@ -105,7 +108,27 @@ export function redrawOf(icon) {
   return typeof f === 'function' ? f : null
 }
 
+// people avatars (forge/styles/_people.mjs): flat skin c1, hair c2, a primary for clothing c4, black features
+function person(icon) {
+  const B = buildPerson(icon), C = personPalette(icon)
+  const pp = role => `var(--with-bauhaus-${role}, ${C[role]})`
+  const nodes = []
+  const add = (Fd, fill, min) => {
+    if (!Fd) return
+    const d = loopsD(F.trace(Fd, 0.03, min), 2)
+    if (d) nodes.push(['path', { d, fill, 'fill-rule': 'evenodd' }])
+  }
+  for (const f of B.fields) add(f.f, pp(f.role), 0.2)
+  // features in the ink role with a fixed print-black default (stays black on skin in dark mode)
+  add(B.ink, 'var(--with-bauhaus-ink, #151515)', 0.1)
+  add(B.glint, pp('tint'), 0.05)
+  return nodes
+}
+
 export default function render(icon) {
+  if (!icon.params && isPerson(icon)) {
+    try { const nodes = person(icon); if (nodes.length) return nodes } catch { /* the composer below */ }
+  }
   const f = redrawOf(icon)
   if (f) {
     const nodes = compose(f(P), icon)

@@ -1,0 +1,85 @@
+{
+  "name": "chinese-knot",
+  "category": "lunar-new-year",
+  "description": "A decorative knot with a tassel, for luck and celebrations.",
+  "aliases": [
+    "lucky-knot",
+    "decorative-knot",
+    "good-luck-knot",
+    "zhongguo-jie",
+    "maedeup",
+    "knot-tassel",
+    "red-knot"
+  ],
+  "synonyms": [
+    "knot",
+    "tassel",
+    "ornament",
+    "hanging ornament",
+    "charm",
+    "decoration",
+    "macrame",
+    "cord",
+    "weave",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "luck",
+    "unity",
+    "blessing",
+    "celebration",
+    "wedding",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "decoration",
+    "luck",
+    "ornament"
+  ],
+  "paths": [
+    {
+      "d": "M12 4.5 L17.5 10 L12 15.5 L6.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.25 7.25 L14.75 12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.75 7.25 L9.25 12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 10 A1.75 1.75 0 1 1 3 10 A1.75 1.75 0 1 1 6.5 10 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21 10 A1.75 1.75 0 1 1 17.5 10 A1.75 1.75 0 1 1 21 10 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 4.5 V2",
+      "plate": "S"
+    },
+    {
+      "d": "M12 15.5 V18.75",
+      "plate": "S"
+    },
+    {
+      "d": "M10.5 18.75 H13.5 L14.25 21.5 H9.75 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 4.5 L17.5 10 L12 15.5 L6.5 10 Z",
+    "M6.5 10 A1.75 1.75 0 1 1 3 10 A1.75 1.75 0 1 1 6.5 10 Z",
+    "M21 10 A1.75 1.75 0 1 1 17.5 10 A1.75 1.75 0 1 1 21 10 Z",
+    "M10.5 18.75 H13.5 L14.25 21.5 H9.75 Z"
+  ],
+  "cutouts": [
+    "M9.25 7.25 L14.75 12.75",
+    "M14.75 7.25 L9.25 12.75"
+  ]
+}

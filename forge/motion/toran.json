@@ -1,0 +1,45 @@
+{
+  "name": "toran",
+  "intent": "the garland sways gently in the doorway breeze",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3.5
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      3.5
+    ],
+    "amount": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        3.5
+      ],
+      "amount": 0.9,
+      "delay": 0.15
+    }
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        3.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ]
+}

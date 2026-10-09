@@ -7,6 +7,7 @@
 //   node forge/tools/check-dynamic.mjs --gate --json .tmp/livegate/report.json # full report (every set's metrics)
 //   node forge/tools/check-dynamic.mjs --gate --sheets .preview/livegate       # contact sheets per style (light + dark)
 //   node forge/tools/check-dynamic.mjs --gate --calibrate                      # re-measure the static icons -> thresholds
+//   node forge/tools/check-dynamic.mjs --calibrate --style clay,soft3d            # re-measure just these styles (others kept)
 //   options: --workers <n>  --warn (list warnings too)  --max <n> (failures listed per style, default 25)
 //
 // Thresholds: forge/tools/livegate-thresholds.json (global numbers + per-style allowances measured on the 500 static
@@ -146,10 +147,12 @@ export async function runGate(o = {}) {
     const icons = listIcons(), chunks = []
     for (let i = 0; i < icons.length; i += 25) chunks.push(icons.slice(i, i + 25))
     const res = {}
-    await Promise.all(allStyles.flatMap(s => chunks.map(async ch => { const r = await P.run({ kind: 'static', icons: ch, style: s }); (res[s] ||= []).push(...r.recs) })))
+    // --style a,b re-measures just those styles; every other style keeps its allowance
+    const calStyles = o.styles ? styleNames : allStyles
+    await Promise.all(calStyles.flatMap(s => chunks.map(async ch => { const r = await P.run({ kind: 'static', icons: ch, style: s }); (res[s] ||= []).push(...r.recs) })))
     const T = loadThresholds() || { global: {}, styles: {} }
-    const stats = {}
-    for (const s of allStyles) {
+    const stats = { ...((T.measured && T.measured.stats) || {}) }
+    for (const s of calStyles) {
       const rs = res[s].filter(r => !r.error)
       const k = key => rs.map(r => r[key])
       stats[s] = Object.fromEntries(['clip', 'specks', 'stray', 'splits', 'missing'].map(key => [key, { p90: pct(k(key), 0.9), p95: pct(k(key), 0.95), p99: pct(k(key), 0.99), max: Math.max(...k(key)) }]))
@@ -160,8 +163,8 @@ export async function runGate(o = {}) {
     T.styles._default = { clip: 0.5, specks: 2, stray: 0, splits: 0, missing: 0 }
     T.measured = { icons: icons.length, note: 'per-style allowances = p95 of the static icons in that style (node forge/tools/check-dynamic.mjs --gate --calibrate)', stats }
     fs.writeFileSync(TFILE, JSON.stringify(T, null, 1) + '\n')
-    console.log(`calibrated on ${icons.length} static icons x ${allStyles.length} styles in ${((Date.now() - t0) / 1000).toFixed(0)}s -> ${path.relative(ROOT, TFILE)}`)
-    for (const s of allStyles) console.log(`  ${s.padEnd(10)} ${JSON.stringify(T.styles[s])}`)
+    console.log(`calibrated on ${icons.length} static icons x ${calStyles.length} styles in ${((Date.now() - t0) / 1000).toFixed(0)}s -> ${path.relative(ROOT, TFILE)}`)
+    for (const s of calStyles) console.log(`  ${s.padEnd(10)} ${JSON.stringify(T.styles[s])}`)
     if (!o.thenGate) { P.close(); return 0 }
   }
 

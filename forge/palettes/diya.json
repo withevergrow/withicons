@@ -1,0 +1,549 @@
+{
+  "name": "diya",
+  "palettes": [
+    {
+      "id": "terracotta-diya",
+      "name": "Terracotta diya",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A1A0C",
+        "c1": "#C8642E",
+        "c2": "#FFB300",
+        "c3": "#FF7043",
+        "c4": "#FFE082",
+        "tint": "#F5E3D9",
+        "accent": "#FFB300",
+        "shadow": "#643217",
+        "shine": "#E9C1AB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "painted-diya",
+      "name": "Painted red diya",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3B0A0A",
+        "c1": "#E53935",
+        "c2": "#FFC107",
+        "c3": "#1E88E5",
+        "c4": "#43A047",
+        "tint": "#FADBDB",
+        "accent": "#FFC107",
+        "shadow": "#731D1B",
+        "shine": "#F5B0AE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brass-diya",
+      "name": "Brass diya",
+      "tags": [
+        "true-to-life",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3A2A00",
+        "c1": "#D4A017",
+        "c2": "#FF8F00",
+        "c3": "#FFE57F",
+        "c4": "#8D6E00",
+        "tint": "#F7EED5",
+        "accent": "#FF8F00",
+        "shadow": "#6A500C",
+        "shine": "#EED9A2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "silver-diya",
+      "name": "Silver diya",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#263238",
+        "c1": "#B0BEC5",
+        "c2": "#FFB300",
+        "c3": "#FF7043",
+        "c4": "#ECEFF1",
+        "tint": "#F1F3F5",
+        "accent": "#FFB300",
+        "shadow": "#585F63",
+        "shine": "#DFE5E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gilded-clay",
+      "name": "Gilded clay",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2B1206",
+        "c1": "#8D4A24",
+        "c2": "#FFC93C",
+        "c3": "#E8A317",
+        "c4": "#F3D27A",
+        "tint": "#EADED8",
+        "accent": "#FFC93C",
+        "shadow": "#472512",
+        "shine": "#D1B7A7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-pottery",
+      "name": "Jaipur blue pottery",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0B1F3A",
+        "c1": "#1F5FA8",
+        "c2": "#FFB703",
+        "c3": "#FB8500",
+        "c4": "#A9D6F5",
+        "tint": "#D7E2EF",
+        "accent": "#FFB703",
+        "shadow": "#103054",
+        "shine": "#A5BFDC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "diwali-gold",
+      "name": "Diwali gold",
+      "tags": [
+        "seasonal",
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#3A1F00",
+        "c1": "#F2A900",
+        "c2": "#C2185B",
+        "c3": "#6A1B9A",
+        "c4": "#FF7043",
+        "tint": "#FDF0D1",
+        "accent": "#FFD54F",
+        "shadow": "#795500",
+        "shine": "#FADD99",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pujo-red-white",
+      "name": "Pujo red & white",
+      "tags": [
+        "seasonal",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3B0A0A",
+        "c1": "#C62828",
+        "c2": "#FFFDF5",
+        "c3": "#FFC107",
+        "c4": "#2E7D32",
+        "tint": "#F5D8D8",
+        "accent": "#FFC107",
+        "shadow": "#631414",
+        "shine": "#E8A9A9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holi-brights",
+      "name": "Holi brights",
+      "tags": [
+        "seasonal",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0A2E",
+        "c1": "#FF2E93",
+        "c2": "#FFD600",
+        "c3": "#00C853",
+        "c4": "#2979FF",
+        "tint": "#FFD9EC",
+        "accent": "#FF6D00",
+        "shadow": "#80174A",
+        "shine": "#FFABD4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holi-pastel",
+      "name": "Holi pastel",
+      "tags": [
+        "seasonal",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A3550",
+        "c1": "#F8A5C2",
+        "c2": "#FFE29A",
+        "c3": "#A8E6CF",
+        "c4": "#9AD0F5",
+        "tint": "#FEEFF4",
+        "accent": "#F8A5C2",
+        "shadow": "#7C5361",
+        "shine": "#FCDBE7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "marigold-mango-leaf",
+      "name": "Marigold & mango",
+      "tags": [
+        "seasonal",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#2E1A00",
+        "c1": "#FF9800",
+        "c2": "#2E7D32",
+        "c3": "#FFC107",
+        "c4": "#C62828",
+        "tint": "#FFECD1",
+        "accent": "#FFC107",
+        "shadow": "#804C00",
+        "shine": "#FFD699",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rajasthani-pink",
+      "name": "Rajasthani pink",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3A0A24",
+        "c1": "#E91E63",
+        "c2": "#00ACC1",
+        "c3": "#FFB300",
+        "c4": "#7B1FA2",
+        "tint": "#FBD7E3",
+        "accent": "#FFB300",
+        "shadow": "#750F32",
+        "shine": "#F6A5C1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kasavu-cream",
+      "name": "Kasavu cream & gold",
+      "tags": [
+        "luxe",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#3B2A12",
+        "c1": "#F6EBD3",
+        "c2": "#D4A017",
+        "c3": "#8D1B1B",
+        "c4": "#2E7D32",
+        "tint": "#FDFBF7",
+        "accent": "#D4A017",
+        "shadow": "#7B766A",
+        "shine": "#FBF7ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "peacock-blues",
+      "name": "Peacock blues",
+      "tags": [
+        "nature",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#052B2B",
+        "c1": "#00897B",
+        "c2": "#1E88E5",
+        "c3": "#C0CA33",
+        "c4": "#FFC107",
+        "tint": "#D1EAE7",
+        "accent": "#FFC107",
+        "shadow": "#00453E",
+        "shine": "#99D0CA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mehndi-henna",
+      "name": "Mehndi & henna",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B1A0E",
+        "c1": "#6B8E23",
+        "c2": "#A0522D",
+        "c3": "#E9C46A",
+        "c4": "#F4A261",
+        "tint": "#E4EBD7",
+        "accent": "#F4A261",
+        "shadow": "#364712",
+        "shine": "#C4D2A7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "saffron-sunrise",
+      "name": "Saffron sunrise",
+      "tags": [
+        "sunset",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#3B1B00",
+        "c1": "#FF9933",
+        "c2": "#FFD166",
+        "c3": "#EF476F",
+        "c4": "#06D6A0",
+        "tint": "#FFEDDA",
+        "accent": "#EF476F",
+        "shadow": "#804D1A",
+        "shine": "#FFD6AD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lotus-blush",
+      "name": "Lotus blush",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A0A1E",
+        "c1": "#F48FB1",
+        "c2": "#F8BBD0",
+        "c3": "#81C784",
+        "c4": "#FFE082",
+        "tint": "#FDEBF1",
+        "accent": "#F06292",
+        "shadow": "#7A4859",
+        "shine": "#FBD2E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "indigo-block",
+      "name": "Indigo block print",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#0B1440",
+        "c1": "#3F51B5",
+        "c2": "#E8EAF6",
+        "c3": "#D84315",
+        "c4": "#FFB300",
+        "tint": "#DCE0F2",
+        "accent": "#D84315",
+        "shadow": "#20295B",
+        "shine": "#B2B9E1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "temple-gold",
+      "name": "Temple gold",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1A1206",
+        "c1": "#C9A227",
+        "c2": "#7A1F1F",
+        "c3": "#F3E5AB",
+        "c4": "#2C2C2C",
+        "tint": "#F5EED8",
+        "accent": "#F3E5AB",
+        "shadow": "#655114",
+        "shine": "#E9DAA9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wedding-maroon",
+      "name": "Wedding maroon",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#2A0505",
+        "c1": "#9B1B30",
+        "c2": "#D4AF37",
+        "c3": "#F8E7C9",
+        "c4": "#1B5E20",
+        "tint": "#EDD6DA",
+        "accent": "#D4AF37",
+        "shadow": "#4E0E18",
+        "shine": "#D7A4AC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sankranti-sky",
+      "name": "Sankranti sky",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0A2540",
+        "c1": "#29B6F6",
+        "c2": "#FFCA28",
+        "c3": "#EF5350",
+        "c4": "#AB47BC",
+        "tint": "#D8F2FD",
+        "accent": "#EF5350",
+        "shadow": "#155B7B",
+        "shine": "#A9E2FB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "terracotta-earth",
+      "name": "Terracotta",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2B0F05",
+        "c1": "#C1440E",
+        "c2": "#E9A23B",
+        "c3": "#F5E6C8",
+        "c4": "#6B8E23",
+        "tint": "#F4DDD4",
+        "accent": "#E9A23B",
+        "shadow": "#612207",
+        "shine": "#E6B49F",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "soft-pastel",
+      "name": "Soft pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A4458",
+        "c1": "#CDB4DB",
+        "c2": "#FFC8DD",
+        "c3": "#BDE0FE",
+        "c4": "#CAFFBF",
+        "tint": "#F6F2F9",
+        "accent": "#FFAFCC",
+        "shadow": "#675A6E",
+        "shine": "#EBE1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mono-saffron",
+      "name": "Mono saffron",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#3B1B00",
+        "c1": "#FF9800",
+        "c2": "#FFB74D",
+        "c3": "#E65100",
+        "c4": "#FFE0B2",
+        "tint": "#FFECD1",
+        "accent": "#E65100",
+        "shadow": "#804C00",
+        "shine": "#FFD699",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#1A1A1A",
+        "c1": "#9E9E9E",
+        "c2": "#616161",
+        "c3": "#E0E0E0",
+        "c4": "#424242",
+        "tint": "#EEEEEE",
+        "accent": "#757575",
+        "shadow": "#4F4F4F",
+        "shine": "#D8D8D8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "diwali-night",
+      "name": "Diwali night",
+      "tags": [
+        "on-dark",
+        "neon"
+      ],
+      "colors": {
+        "ink": "#FFE8A3",
+        "c1": "#4527A0",
+        "c2": "#FFB300",
+        "c3": "#FF4081",
+        "c4": "#00E5FF",
+        "tint": "#DED8EE",
+        "accent": "#FFB300",
+        "shadow": "#231450",
+        "shine": "#B5A9D9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-mela",
+      "name": "Neon mela",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#F5F0FF",
+        "c1": "#FF00A8",
+        "c2": "#00F0FF",
+        "c3": "#FFE600",
+        "c4": "#7CFF00",
+        "tint": "#FFD1EF",
+        "accent": "#FFE600",
+        "shadow": "#800054",
+        "shine": "#FF99DC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFC300",
+        "c2": "#0047AB",
+        "c3": "#D00000",
+        "c4": "#FFFFFF",
+        "tint": "#FFF4D1",
+        "accent": "#D00000",
+        "shadow": "#806200",
+        "shine": "#FFE799",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

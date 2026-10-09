@@ -12,6 +12,7 @@
 // sit on a wall break through it, arrowheads close into solid triangles, and
 // anything thinner than 0.4u is removed. Everything is computed
 // on a signed-distance field (see _solid-field.mjs) and traced to ONE even-odd path.
+import { snowmanFor } from './_line-snowman.mjs'
 import { polyD, pointInRing, distToPolyline, arclen, simplify, bbox, parsePath, V } from '../kernel/geom.mjs'
 import * as F from './_solid-field.mjs'
 import { hasText, splitText, openText, glyphLines, glyphWeight, TEXT_REF } from './_live-text.mjs'
@@ -442,6 +443,7 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor' },
   render(icon) {
+    icon = snowmanFor('solid', icon)
     let plates = []
     try { plates = solidPlates(icon) } catch (e) { plates = [] }
     if (!plates.some(p => p.loops.length)) {

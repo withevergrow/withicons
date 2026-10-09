@@ -1,0 +1,39 @@
+{
+  "name": "chopsticks",
+  "intent": "chopsticks dip into the bowl to pick up food",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        21.5,
+        5
+      ],
+      "amount": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "soup",
+      "effect": "fade"
+    }
+  ]
+}

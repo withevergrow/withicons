@@ -1,0 +1,39 @@
+{
+  "name": "boxes",
+  "intent": "the top box hops on the stack like stock being added",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 1,
+      "delay": 0.05
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "package",
+      "effect": "morph"
+    },
+    {
+      "to": "boxes@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "shapes",
+  "intent": "the shapes bob gently like toys on a table",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "component",
+      "effect": "morph"
+    },
+    {
+      "to": "shapes@solid",
+      "effect": "scale"
+    }
+  ]
+}

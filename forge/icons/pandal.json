@@ -1,0 +1,86 @@
+{
+  "name": "pandal",
+  "category": "indian-festivals",
+  "description": "A festive pandal canopy, for Durga Puja and community celebrations.",
+  "aliases": [
+    "puja-pandal",
+    "durga-pandal",
+    "shamiana",
+    "mandap",
+    "mandapam",
+    "festival-canopy",
+    "marquee"
+  ],
+  "synonyms": [
+    "canopy",
+    "tent",
+    "decorated tent",
+    "durga puja",
+    "pujo",
+    "pandal hopping",
+    "ganesh chaturthi",
+    "navratri",
+    "garba",
+    "wedding",
+    "wedding mandap",
+    "community",
+    "celebration",
+    "venue",
+    "stage",
+    "archway",
+    "gate",
+    "kolkata",
+    "event",
+    "festival ground",
+    "indian festival",
+    "india",
+    "pandaal"
+  ],
+  "tags": [
+    "durga-puja",
+    "celebration",
+    "venue",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 9 L12 3 L21.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 11 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M19 11 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 9 A2.125 2.125 0 0 0 7.75 9 A2.125 2.125 0 0 0 12 9 A2.125 2.125 0 0 0 16.25 9 A2.125 2.125 0 0 0 20.5 9",
+      "plate": "A"
+    },
+    {
+      "d": "M5 11 H9 C8.75 13.5 7.25 15.25 5 15.75",
+      "plate": "A"
+    },
+    {
+      "d": "M19 11 L15 11 C15.25 13.5 16.75 15.25 19 15.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12 9 V13 M12 13 L13.5 15 L12 17 L10.5 15 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 9 L12 3 L21.5 9 Z",
+    "M3.5 9 A2.125 2.125 0 0 0 7.75 9 A2.125 2.125 0 0 0 12 9 A2.125 2.125 0 0 0 16.25 9 A2.125 2.125 0 0 0 20.5 9 Z",
+    "M4 11 H6 V21.5 H4 Z",
+    "M18 11 H20 V21.5 H18 Z",
+    "M12 13 L13.5 15 L12 17 L10.5 15 Z"
+  ],
+  "cutouts": [
+    "M12 5.75 V6.5"
+  ]
+}

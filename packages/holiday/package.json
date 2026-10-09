@@ -1,0 +1,141 @@
+{
+  "name": "@withicons/holiday",
+  "version": "0.3.1",
+  "description": "The holiday styles (utsav, rangoli, halloween, christmas, lunar, valentine) of with icons (734 icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/holiday"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "svg-icons",
+    "multicolor-icons",
+    "gradient-icons",
+    "utsav",
+    "rangoli",
+    "halloween",
+    "christmas",
+    "lunar",
+    "valentine",
+    "css-icons"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "jsdelivr": "./package.json",
+  "unpkg": "./package.json",
+  "exports": {
+    "./nodes/utsav": {
+      "import": {
+        "types": "./dist/nodes/utsav.d.ts",
+        "default": "./dist/nodes/utsav.js"
+      },
+      "require": {
+        "types": "./dist/nodes/utsav.d.cts",
+        "default": "./dist/nodes/utsav.cjs"
+      }
+    },
+    "./nodes/rangoli": {
+      "import": {
+        "types": "./dist/nodes/rangoli.d.ts",
+        "default": "./dist/nodes/rangoli.js"
+      },
+      "require": {
+        "types": "./dist/nodes/rangoli.d.cts",
+        "default": "./dist/nodes/rangoli.cjs"
+      }
+    },
+    "./nodes/halloween": {
+      "import": {
+        "types": "./dist/nodes/halloween.d.ts",
+        "default": "./dist/nodes/halloween.js"
+      },
+      "require": {
+        "types": "./dist/nodes/halloween.d.cts",
+        "default": "./dist/nodes/halloween.cjs"
+      }
+    },
+    "./nodes/christmas": {
+      "import": {
+        "types": "./dist/nodes/christmas.d.ts",
+        "default": "./dist/nodes/christmas.js"
+      },
+      "require": {
+        "types": "./dist/nodes/christmas.d.cts",
+        "default": "./dist/nodes/christmas.cjs"
+      }
+    },
+    "./nodes/lunar": {
+      "import": {
+        "types": "./dist/nodes/lunar.d.ts",
+        "default": "./dist/nodes/lunar.js"
+      },
+      "require": {
+        "types": "./dist/nodes/lunar.d.cts",
+        "default": "./dist/nodes/lunar.cjs"
+      }
+    },
+    "./nodes/valentine": {
+      "import": {
+        "types": "./dist/nodes/valentine.d.ts",
+        "default": "./dist/nodes/valentine.js"
+      },
+      "require": {
+        "types": "./dist/nodes/valentine.d.cts",
+        "default": "./dist/nodes/valentine.cjs"
+      }
+    },
+    "./svg/*": "./dist/svg/*",
+    "./classes/*": "./dist/classes/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "nodes/utsav": [
+        "./dist/nodes/utsav.d.ts"
+      ],
+      "nodes/rangoli": [
+        "./dist/nodes/rangoli.d.ts"
+      ],
+      "nodes/halloween": [
+        "./dist/nodes/halloween.d.ts"
+      ],
+      "nodes/christmas": [
+        "./dist/nodes/christmas.d.ts"
+      ],
+      "nodes/lunar": [
+        "./dist/nodes/lunar.d.ts"
+      ],
+      "nodes/valentine": [
+        "./dist/nodes/valentine.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@withicons/core": "0.3.1"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

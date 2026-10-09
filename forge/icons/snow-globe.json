@@ -1,0 +1,84 @@
+{
+  "name": "snow-globe",
+  "category": "christmas",
+  "description": "A snow globe on a base with a tiny tree and falling snow inside, for winter and gifts.",
+  "aliases": [
+    "snowglobe",
+    "snow-dome",
+    "water-globe",
+    "glass-globe",
+    "winter-globe",
+    "snow-ball-globe"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "snow",
+    "winter",
+    "souvenir",
+    "gift",
+    "keepsake",
+    "ornament",
+    "decor",
+    "glass",
+    "shake",
+    "winter wonderland",
+    "magic",
+    "snowfall",
+    "collectible",
+    "snow globle"
+  ],
+  "tags": [
+    "christmas",
+    "winter",
+    "snow",
+    "gift",
+    "decoration"
+  ],
+  "paths": [
+    {
+      "d": "M8.26 16.5 A7.5 7.5 0 1 1 15.74 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 16.5 H17.5 L18.75 20.5 A0.75 0.75 0 0 1 18 21.5 H6 A0.75 0.75 0 0 1 5.25 20.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 5.75 L15.75 12.5 H8.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 9.5 H7.5",
+      "plate": "S"
+    },
+    {
+      "d": "M16.5 9.5 H17",
+      "plate": "S"
+    },
+    {
+      "d": "M11.75 15 H12.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M19.5 10 A7.5 7.5 0 1 1 4.5 10 A7.5 7.5 0 1 1 19.5 10 Z",
+    "M6.5 16.5 H17.5 L18.75 20.5 A0.75 0.75 0 0 1 18 21.5 H6 A0.75 0.75 0 0 1 5.25 20.5 Z",
+    "M12 5.75 L15.75 12.5 H8.25 Z"
+  ],
+  "cutouts": [
+    "M12 4 L17 13.5 H7 Z M12 5.75 L15.75 12.5 H8.25 Z",
+    "M5.5 16.5 H18.5",
+    "M7.95 9.5 A0.7 0.7 0 1 1 6.55 9.5 A0.7 0.7 0 1 1 7.95 9.5 Z",
+    "M17.45 9.5 A0.7 0.7 0 1 1 16.05 9.5 A0.7 0.7 0 1 1 17.45 9.5 Z",
+    "M12.7 15.25 A0.7 0.7 0 1 1 11.3 15.25 A0.7 0.7 0 1 1 12.7 15.25 Z"
+  ]
+}

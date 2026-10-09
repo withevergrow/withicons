@@ -1,0 +1,65 @@
+{
+  "name": "ring-box",
+  "intent": "the ring sparkles in its open box",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      12,
+      9
+    ],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        6.5
+      ],
+      "amount": 1.3
+    },
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "bounce"
+    }
+  ],
+  "swap": [
+    {
+      "to": "gem",
+      "effect": "scale"
+    },
+    {
+      "to": "heart",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,5 +1,44 @@
 # with icons — authoring contract
 
+> ## Run 13 (2026-10-09): Holidays
+> - Holiday styles (rich styles, same rules as Run 12, all palette styles with role variables): `utsav` (Indian festive
+>   ornament, replaces `aura`), `rangoli` (brand-friendly Indian festival style for Diwali, Durga Puja and Holi),
+>   `halloween` (replaces `spectrum`), `christmas`, `lunar` (Lunar New Year), `valentine`. Site group "Holidays";
+>   npm package `@withicons/holiday`. `linear` and `spectrum` fold into `duo` (accent detail + gradient stroke options).
+>   `soft3d` ("Soft 3D", group "3D & glass", npm `@withicons/soft3d`) replaces `iso`: soft studio-lit 3D objects with real
+>   depth, tilted only when the object is a physical thing, people as Memoji-like busts.
+> - 95 festival icons in claims `forge/.claims/new-30..34.json` (categories `indian-festivals`, `christmas`,
+>   `lunar-new-year`, `valentines`, `halloween`; already in the manifest). Every style renders them like any icon.
+> - Holiday styles must work for every icon (a calendar in Christmas style still reads as a calendar), and look their
+>   best on their own festival's icons. Each should ship 6-10 festival palettes as data in `_<style>-palettes.mjs`.
+
+> ## Run 12 (2026-10-08): 100 new icons, 11 new rich styles, glass redesign, 3D motion
+> - New icons: claims `forge/.claims/new-26..29.json` (already in `forge/manifest.json`, new category `ai`). Each batch's
+>   author writes the skeletons **and** the icons' `forge/motion/<name>.json` and `forge/palettes/<name>.json`.
+> - New styles, in this order after `plush`: `clay bento suite dock liquid chrome soft3d brutal` (Run 13: `aura` was replaced
+>   by `utsav`; `linear` and `spectrum` were folded into `duo` and never shipped). `glass` is redrawn as a rich style too.
+>   All of them follow **Rich styles** below. Site groups (site/js/site.js GROUPS): Essentials, Product & brand, 3D & glass,
+>   Playful, Artistic, Holidays.
+>
+> ### Rich styles (gradients allowed)
+> Everything in "Run 7 styles" (role-named variables `--with-<style>-<role>`, motion part classes on every drawn node,
+> reads on white and on #0B0B12, deterministic, never throws) **plus** these extra elements:
+> - A renderer may return **one** `['defs', {}, [ ...gradients ]]` node first. Children are a node's optional third element:
+>   `['linearGradient', { id, x1, y1, x2, y2, gradientUnits: 'userSpaceOnUse' }, [['stop', { offset, 'stop-color', 'stop-opacity' }], ...]]`
+>   (or `radialGradient` with `cx cy r fx fy`). Only `defs`, `linearGradient`, `radialGradient`, `stop` may nest. Still banned:
+>   `filter`, `mask`, `clipPath`, `pattern`, `image`, `text`, `use`, `symbol`, CSS.
+> - **Ids**: `wg-<style>-<icon>-<n>` (n = 0, 1, 2…), unique within the icon, referenced only as `url(#…)` in `fill` / `stroke`
+>   of the same icon. Emitters make them unique per instance on a page; renderers never invent other ids.
+> - Stop colours are role variables with a hex fallback: `'stop-color': 'var(--with-clay-c1, #E8875F)'`. A gradient's
+>   lightest/darkest stops may mix a role with white/black only through `stop-opacity` over another shape, never a second
+>   variable name. Colour that `color` should control stays `currentColor`.
+> - Prefer `gradientUnits: 'userSpaceOnUse'` with coordinates on the 24 grid (predictable across shapes).
+> - Every drawn node still needs a solid sensible look if gradients are unsupported: put the role's base colour in the
+>   node's `fill` fallback chain only via the gradient's first stop (resvg, browsers, Figma and PowerPoint all render
+>   linear/radial gradients, so this is a safety note, not a second drawing).
+> - Size: target < 8 KB, ceiling 20 KB per icon (gradients are verbose: share one gradient across shapes where you can).
+> - Motion: the drawing keeps the part classes (`wm-k wm-a wm-s wm-deco wm-shadow wm-shine`); the `defs` node gets none.
+
 > ## Run 4 (2026-10-02): 200 new icons, 5 new styles, motion
 > - New icons are claimed in `forge/.claims/new-<NN>.json` (`batch`, `icons`). Only the named batch's author creates those skeletons;
 >   the author writes `forge/.claims/new-<NN>.done` when finished. Style polishers: never edit a skeleton.
@@ -7,7 +46,7 @@
 > - New style renderers: `glass`, `kawaii`, `sticker`, `pixel`, `retro` (see the table and **Palette styles** below).
 
 One **skeleton** per icon. Seven **style renderers** turn every skeleton into a finished icon.
-500 icons × 12 styles = 6,000 icons, all generated from 500 hand-authored JSON files.
+Every icon in every style, all generated from hand-authored JSON skeletons (counts are data: `countText(ctx)`; today 735 × 34).
 
 ## Styles
 
@@ -36,7 +75,23 @@ One **skeleton** per icon. Seven **style renderers** turn every skeleton into a 
 | `coquette` | creative | `forge/styles/coquette.mjs` — bows, pearls, lace, soft pinks (feminine, Gen Z) |
 | `plush` | creative | `forge/styles/plush.mjs` — stuffed-toy: felt, stitched seams, buttons, squishy forms (kids) |
 
-Style order everywhere: `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo anime gothic pastel coquette plush`.
+| `clay` | rich | `forge/styles/clay.mjs` — soft faux-3D matte clay |
+| `bento` | rich | `forge/styles/bento.mjs` — each icon in its own tinted tile |
+| `suite` | rich | `forge/styles/suite.mjs` — polished enterprise colour icons |
+| `dock` | rich | `forge/styles/dock.mjs` — glossy rounded app-icon tiles |
+| `liquid` | rich | `forge/styles/liquid.mjs` — clear refractive liquid glass |
+| `chrome` | rich | `forge/styles/chrome.mjs` — polished liquid metal |
+| `soft3d` | rich | `forge/styles/soft3d.mjs` — soft studio-lit 3D objects with real depth, Memoji-like people (npm `@withicons/soft3d`; replaces `iso`) |
+| `brutal` | rich | `forge/styles/brutal.mjs` — neo-brutalism: thick outline, flat colour, hard shadow |
+
+| `utsav` | holiday (rich) | `forge/styles/utsav.mjs` — Indian festive craft (npm `@withicons/holiday`, as are the five below) |
+| `rangoli` | holiday (rich) | `forge/styles/rangoli.mjs` — Diwali, Durga Puja and Holi: festive glow + one Indian motif |
+| `halloween` | holiday (rich) | `forge/styles/halloween.mjs` — spooky-cute Halloween |
+| `christmas` | holiday (rich) | `forge/styles/christmas.mjs` — cosy Christmas with a snow cap |
+| `lunar` | holiday (rich) | `forge/styles/lunar.mjs` — Lunar New Year red lacquer and gold |
+| `valentine` | holiday (rich) | `forge/styles/valentine.mjs` — cute Valentine's stickers |
+
+Style order everywhere (`STYLE_ORDER`, forge/lib/emit-core.mjs): `line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro luxe bauhaus skeuo anime gothic pastel coquette plush clay bento suite dock liquid chrome soft3d brutal utsav rangoli halloween christmas lunar valentine`.
 The run 11 styles (anime, gothic, pastel, coquette, plush) follow the "Run 7 styles" rules below (role-named variables, no defs,
 layered geometry, motion part classes wm-k/wm-a/wm-s/wm-deco/wm-shadow/wm-shine on every node per forge/MOTION.md).
 

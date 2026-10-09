@@ -1,0 +1,86 @@
+{
+  "name": "pichkari",
+  "category": "indian-festivals",
+  "description": "A pichkari water gun spraying colour, for Holi.",
+  "aliases": [
+    "pichkaari",
+    "water-gun",
+    "squirt-gun",
+    "water-pistol",
+    "holi-gun",
+    "colour-gun",
+    "color-gun",
+    "water-syringe"
+  ],
+  "synonyms": [
+    "holi",
+    "happy holi",
+    "festival of colours",
+    "festival of colors",
+    "colour",
+    "color",
+    "colours",
+    "rang",
+    "gulal",
+    "splash",
+    "spray",
+    "squirt",
+    "water",
+    "water fight",
+    "play",
+    "fun",
+    "toy",
+    "kids",
+    "summer",
+    "rangpanchami",
+    "indian festival",
+    "india",
+    "pichkaris",
+    "pickari"
+  ],
+  "tags": [
+    "holi",
+    "colour",
+    "play",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M6.43 12.53 L11.52 9.35 A1.5 1.5 -32 0 1 13.59 9.83 L14.65 11.52 A1.5 1.5 -32 0 1 14.17 13.59 L9.08 16.77 A1.5 1.5 -32 0 1 7.02 16.29 L5.96 14.6 A1.5 1.5 -32 0 1 6.43 12.53 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.46 9.62 L17.04 8.26 L17.57 9.11 L14.78 11.74",
+      "plate": "K"
+    },
+    {
+      "d": "M2.19 15.18 L4.84 19.42",
+      "plate": "A"
+    },
+    {
+      "d": "M3.52 17.3 L6.49 15.44",
+      "plate": "A"
+    },
+    {
+      "d": "M17.86 6.28 L18.89 4.16",
+      "plate": "S"
+    },
+    {
+      "d": "M19.21 7.5 L21.33 6.17",
+      "plate": "S"
+    },
+    {
+      "d": "M19.71 9.24 L22.07 9.24",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6.43 12.53 L11.52 9.35 A1.5 1.5 -32 0 1 13.59 9.83 L14.65 11.52 A1.5 1.5 -32 0 1 14.17 13.59 L9.08 16.77 A1.5 1.5 -32 0 1 7.02 16.29 L5.96 14.6 A1.5 1.5 -32 0 1 6.43 12.53 Z",
+    "M13.46 9.62 L17.04 8.26 L17.57 9.11 L14.78 11.74 Z"
+  ],
+  "cutouts": [
+    "M8.13 11.47 L10.78 15.71",
+    "M10.25 10.14 L12.9 14.39"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "sun-dim",
+  "category": "weather",
+  "description": "A small sun with short rays, for low brightness and dimmed light.",
+  "aliases": [
+    "brightness-low",
+    "low-brightness",
+    "brightness-down",
+    "dim",
+    "dimmer",
+    "sun-low",
+    "screen-dim",
+    "darken"
+  ],
+  "tags": [
+    "brightness",
+    "dim",
+    "display",
+    "light",
+    "weather"
+  ],
+  "paths": [
+    {
+      "d": "M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4.5 L12 3.5 M17.25 6.75 L18 6 M19.5 12 L20.5 12 M17.25 17.25 L18 18 M12 19.5 L12 20.5 M6.75 17.25 L6 18 M4.5 12 L3.5 12 M6.75 6.75 L6 6",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "dim light",
+    "dimmed",
+    "lower brightness",
+    "decrease brightness",
+    "less bright",
+    "night light",
+    "screen brightness",
+    "backlight",
+    "soft light",
+    "weak sun",
+    "low light",
+    "evening",
+    "dusk",
+    "faint",
+    "brightness slider"
+  ]
+}

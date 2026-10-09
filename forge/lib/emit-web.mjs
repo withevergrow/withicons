@@ -9,7 +9,8 @@
 //   dist/data/alias/<i>.js    { alias: [names] } for the aliases whose withShard(alias, ALIAS_SHARDS) === i
 //   dist/data/meta.js     { names, aliases }                (lazy chunk, only for typo suggestions)
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, withBareBase, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
+import { cdnPkg, isAwayStyle } from './emit-core.mjs'
+import { J, LOOKUP_SRC, withUniqMarkup, withBareBase, distWriter, basePkg, writePkg, styleTable, innerOf, namesAndAliasesDts, paletteDoc, motionDoc } from './emit-core.mjs'
 
 // A style whose chunk is over SHARD_OVER bytes ships as shards of about SHARD_TARGET bytes (~10 KB gzip) each,
 // so one luxe icon costs one shard instead of the whole 3 MB style.
@@ -45,7 +46,9 @@ function withRenderSvg(inner, variant, options) {
   if (o.label) { a.role = 'img'; a['aria-label'] = o.label } else a['aria-hidden'] = 'true'
   let s = '<svg'
   for (const k in a) s += ' ' + k + '="' + esc(a[k]) + '"'
-  return s + '>' + (inner || '') + '</svg>'
+  // rich styles: a copy placed inline in a page needs its own gradient ids (the element's shadow root needs none)
+  const body = o.idSuffix != null && o.idSuffix !== '' ? withUniqMarkup(inner, o.idSuffix) : (inner || '')
+  return s + '>' + body + '</svg>'
 }
 // Heavy styles are split into shards (LOADERS[style] is an array): an icon lives in shard withShard(name, count),
 // so one icon of a heavy style costs one small shard, not the whole style. Light styles are one chunk (a function).
@@ -70,9 +73,17 @@ function loadVariant(variant) {
 // Per-icon files (dist/icons/<style>/<name>.js, a few hundred bytes each): used when the module is served from a CDN
 // or a copy of the package (WITH_BASE.url, see withAutoBase / setIconBase), so a page downloads only the icons it shows.
 // Bundled apps keep the chunks above (a bundler cannot see these computed URLs).
+// The newest styles live in @withicons/web-plus (STYLE_HOME: style -> package): next to this package on the same CDN or
+// node_modules path (…/@withicons/web@1.2.3/dist/ -> …/@withicons/web-plus@1.2.3/dist/); a self-hosted copy: same folder.
+function withHomeBase(v) {
+  const base = WITH_BASE.url
+  if (!base || !withHas(STYLE_HOME, v)) return base
+  const m = /^(.*\/)(@withicons\/|packages\/)web(@[^/]*)?\/dist\/$/.exec(base)
+  return m ? m[1] + m[2] + STYLE_HOME[v] + (m[3] || '') + '/dist/' : base
+}
 function withIcon(v, n) {
   const key = 'i:' + v + '/' + n
-  return WITH_PENDING[key] || (WITH_PENDING[key] = import(/* webpackIgnore: true */ /* @vite-ignore */ WITH_BASE.url + 'icons/' + v + '/' + n + '.js')
+  return WITH_PENDING[key] || (WITH_PENDING[key] = import(/* webpackIgnore: true */ /* @vite-ignore */ withHomeBase(v) + 'icons/' + v + '/' + n + '.js')
     .then(m => withMerge(v, { [n]: m.default }), e => { delete WITH_PENDING[key]; throw e }))
 }
 // the data that holds `name` (if that icon exists): its own file on a CDN, else its shard for a sharded style, else
@@ -211,11 +222,11 @@ function withAutoBase() {
   } catch (e) { return null }
 }
 
-const RUNTIME = [LOOKUP_SRC, withWarnOnce, 'withWarnOnce.seen = {}', withHas, withRenderSvg,
+const RUNTIME = [LOOKUP_SRC, withWarnOnce, 'withWarnOnce.seen = {}', withHas, withUniqMarkup, withRenderSvg,
   'const WITH_DATA = {}', 'const WITH_USER = {}', 'const WITH_LOADED = {}', 'const WITH_PENDING = {}', 'const WITH_ALIAS = {}',
   'const WITH_META = { value: null, pending: null, set: null }',
   'const WITH_NAMES = new Set(NAME_LIST.split(" "))',
-  withShard, withMerge, withOnce, loadVariant, withIcon, withLoadFor, withChunkFor, setIconBase, withAliases, registerVariant, withLoadMeta, withResolveName, loadSvg,
+  withShard, withMerge, withOnce, loadVariant, withHomeBase, withIcon, withLoadFor, withChunkFor, setIconBase, withAliases, registerVariant, withLoadMeta, withResolveName, loadSvg,
   "const WithBase = typeof HTMLElement === 'undefined' ? class {} : HTMLElement", WithIconElement, defineWithIcon, withProps, 'withProps()',
 ].map(String).join('\n')
 
@@ -224,7 +235,14 @@ export default async function emit(ctx) {
   const out = distWriter(ctx, P + '/dist')   // the icon classes are their own package: @withicons/classes (emit-classes)
   const styleNames = ctx.styles.map(s => s.name)
   const header = `// @withicons/web ${ctx.version} — generated, do not edit. MIT.\n`
-  const head = `const DEFAULT_STYLE = ${J(ctx.defaultStyle)}\nconst STYLES = ${J(styleTable(ctx))}\nconst styleNames = ${J(styleNames)}\n`
+  // the newest styles' data and per-icon files go to @withicons/web-plus (jsDelivr serves at most 150 MB per package)
+  const away = styleNames.filter(isAwayStyle)
+  const HOME = Object.fromEntries(away.map(st => [st, cdnPkg(st, 'web')]))
+  const outPlus = distWriter(ctx, 'packages/web-plus/dist')
+  const O = st => HOME[st] ? outPlus : out
+  // package specifiers go through the exports pattern "./data/*" (which adds .js); relative ones name the file
+  const spec = (st, rest) => HOME[st] ? `@withicons/${HOME[st]}/data/${rest.replace(/\.js$/, '')}` : `./data/${rest}`
+  const head = `const DEFAULT_STYLE = ${J(ctx.defaultStyle)}\nconst STYLES = ${J(styleTable(ctx))}\nconst styleNames = ${J(styleNames)}\nconst STYLE_HOME = ${J(HOME)}\n`
   const aliases = {}
   for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
   const meta = { names: ctx.icons.map(i => i.name), aliases }
@@ -235,20 +253,20 @@ export default async function emit(ctx) {
     data[s] = {}
     for (const i of ctx.icons) data[s][i.name] = innerOf(ctx, i, s)
     const raw = Buffer.byteLength(J(data[s]))
-    if (raw <= SHARD_OVER) out.add(`data/${s}.js`, `${header}export default ${J(data[s])}\n`)
+    if (raw <= SHARD_OVER) O(s).add(`data/${s}.js`, `${header}export default ${J(data[s])}\n`)
     else {
       const n = shards[s] = Math.ceil(raw / SHARD_TARGET)
       const parts = Array.from({ length: n }, () => ({}))
       for (const i of ctx.icons) parts[withShard(i.name, n)][i.name] = data[s][i.name]
       parts.forEach(p => shardJson.push(J(p)))
-      parts.forEach((p, k) => out.add(`data/${s}/${k}.js`, `${header}export default ${J(p)}\n`))
+      parts.forEach((p, k) => O(s).add(`data/${s}/${k}.js`, `${header}export default ${J(p)}\n`))
       // the whole style still imports as one module (loadVariant, the class runtime, `@withicons/web/data/<style>`),
       // in canonical icon order
-      out.add(`data/${s}.js`, header + parts.map((_, k) => `import p${k} from './${s}/${k}.js'\n`).join('') +
+      O(s).add(`data/${s}.js`, header + parts.map((_, k) => `import p${k} from './${s}/${k}.js'\n`).join('') +
         `const all = Object.assign({}, ${parts.map((_, k) => 'p' + k).join(', ')})\n` +
         `export default Object.fromEntries(${J(ctx.icons.map(i => i.name))}.map(n => [n, all[n]]))\n`)
     }
-    out.add(`data/${s}.d.ts`, `import type { IconName } from '../index.js'\ndeclare const data: Record<IconName, string>\nexport default data\n`)
+    O(s).add(`data/${s}.d.ts`, HOME[s] ? `import type { IconName } from '@withicons/web'\ndeclare const data: Record<IconName, string>\nexport default data\n` : `import type { IconName } from '../index.js'\ndeclare const data: Record<IconName, string>\nexport default data\n`)
   }
   out.add('data/meta.js', `${header}export default ${J(meta)}\n`)
   out.add('data/meta.d.ts', `import type { IconName } from '../index.js'\ndeclare const meta: { names: IconName[]; aliases: Record<string, IconName[]> }\nexport default meta\n`)
@@ -257,14 +275,14 @@ export default async function emit(ctx) {
   for (const k of Object.keys(aliases)) aliasParts[withShard(k, ALIAS_SHARDS)][k] = aliases[k]
   aliasParts.forEach((p, k) => out.add(`data/alias/${k}.js`, `export default ${J(p)}\n`))
   // one file per icon and style: what a CDN page downloads (no header: most icons are a few hundred bytes)
-  for (const s of styleNames) for (const i of ctx.icons) out.add(`icons/${s}/${i.name}.js`, `export default ${J(data[s][i.name])}\n`)
+  for (const s of styleNames) for (const i of ctx.icons) O(s).add(`icons/${s}/${i.name}.js`, `export default ${J(data[s][i.name])}\n`)
 
   const exportsList = 'WithIconElement, defineWithIcon, loadVariant, registerVariant, loadSvg, setIconBase, styleNames'
   const names = `const NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}\n`
   // literal import() paths so every bundler (Vite, webpack, Rollup, esbuild) sees and splits each chunk
   const loader = s => shards[s]
-    ? `  ${J(s)}: [${Array.from({ length: shards[s] }, (_, k) => `() => import('./data/${s}/${k}.js')`).join(', ')}],`
-    : `  ${J(s)}: () => import('./data/${s}.js'),`
+    ? `  ${J(s)}: [${Array.from({ length: shards[s] }, (_, k) => `() => import('${spec(s, `${s}/${k}.js`)}')`).join(', ')}],`
+    : `  ${J(s)}: () => import('${spec(s, `${s}.js`)}'),`
   const aliasLoaders = `const ALIAS_LOADERS = [${aliasParts.map((_, k) => `() => import('./data/alias/${k}.js')`).join(', ')}]\n`
   const indexJs = `${header}${head}${names}const LOADERS = {\n${styleNames.map(loader).join('\n')}\n}\n${aliasLoaders}` +
     `const LOAD_META = () => import('./data/meta.js')\n${withAutoBase}\nconst WITH_BASE = { url: withAutoBase() }\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
@@ -276,13 +294,13 @@ export default async function emit(ctx) {
   // version's dist/ on the same CDN (withBareBase); any other URL resolves next to the file.
   const cdnJs = `${header}${head}${names}${withBareBase}\n` +
     `const WITH_BASE = { url: withBareBase(import.meta.url, 'web', ${J(ctx.version)}, 'dist/') || new URL('./', import.meta.url).href }\n` +
-    `const LOADERS = {}\nfor (const s of styleNames) LOADERS[s] = () => import(${ign}WITH_BASE.url + 'data/' + s + '.js')\n` +
+    `const LOADERS = {}\nfor (const s of styleNames) LOADERS[s] = () => import(${ign}withHomeBase(s) + 'data/' + s + '.js')\n` +
     `const ALIAS_LOADERS = Array.from({ length: ${ALIAS_SHARDS} }, (_, i) => () => import(${ign}WITH_BASE.url + 'data/alias/' + i + '.js'))\n` +
     `const LOAD_META = () => import(${ign}WITH_BASE.url + 'data/meta.js')\n${RUNTIME}\ndefineWithIcon()\nexport { ${exportsList} }\n`
   out.add('cdn.js', cdnJs)
   // full.js: every style registered before the module finishes evaluating (static imports of the same data chunks, so
   // no 27 MB single file: CDNs refuse files over 20 MB, and bundlers produce the same output as before)
-  const fullJs = `${header}${head}${names}${styleNames.map((s, k) => `import WITH_D${k} from './data/${s}.js'\n`).join('')}import WITH_META_FULL from './data/meta.js'\n` +
+  const fullJs = `${header}${head}${names}${styleNames.map((s, k) => `import WITH_D${k} from '${spec(s, `${s}.js`)}'\n`).join('')}import WITH_META_FULL from './data/meta.js'\n` +
     `const LOADERS = {}\nconst ALIAS_LOADERS = []\nconst LOAD_META = () => Promise.resolve({ default: WITH_META_FULL })\nconst WITH_BASE = { url: null }\n${RUNTIME}\n` +
     styleNames.map((s, k) => `registerVariant(${J(s)}, WITH_D${k})\n`).join('') +
     `/** Synchronous SVG string (full bundle only). Throws on unknown or ambiguous names. */\n` +
@@ -304,6 +322,11 @@ export interface SvgOptions {
   /** Accessible name (role="img" aria-label). Without it the svg is aria-hidden. */
   label?: string
   class?: string
+  /**
+   * Appended to the gradient ids of rich styles (and every url(#id) pointing at them). Give each copy you put inline in
+   * one page its own value (e.g. a counter); <with-icon> (shadow DOM), files and <img> need none.
+   */
+  idSuffix?: string | number
 }
 /** <with-icon name="home" variant="solid" size="24" color="" stroke-width="" absolute-stroke-width label="" mirror-rtl> */
 export declare class WithIconElement extends HTMLElement {
@@ -342,6 +365,25 @@ declare global {
 `)
   out.add('full.d.ts', `export * from './index.js'\nimport type { IconName, IconAlias, SvgOptions } from './index.js'\n/** Synchronous SVG string. Throws on unknown or ambiguous names. */\nexport declare function svg(name: IconName | IconAlias | (string & {}), options?: SvgOptions): string\n`)
   await out.flush()
+  await outPlus.flush()
+  if (away.length) {
+    writePkg(ctx, 'web-plus', {
+      ...basePkg(ctx, '@withicons/web-plus', `Icon data of the ${away.length} newest with icons styles (${away.join(', ')}) for @withicons/web: loaded by <with-icon> by itself.`, ['web-components', 'cdn', ...away]),
+      type: 'module', sideEffects: false,
+      exports: { './data/*': { types: './dist/data/*.d.ts', default: './dist/data/*.js' }, './icons/*': './dist/icons/*', './package.json': './package.json', './*': './dist/*' },
+      files: ['dist', 'README.md', 'LICENSE'],
+      unpkg: './package.json', jsdelivr: './package.json',
+    }, `# @withicons/web-plus
+
+The icon data of the newest with icons styles (${away.map(x => '\`' + x + '\`').join(', ')}) for
+[\`@withicons/web\`](https://www.npmjs.com/package/@withicons/web), which installs it and loads it by itself: from a CDN,
+\`<with-icon variant="${away[0]}">\` fetches \`@withicons/web-plus@<same version>/dist/icons/${away[0]}/<name>.js\`; in a bundled
+app the chunks come from this package. They live here because jsDelivr serves at most 150 MB per package. Nothing to
+import by hand. Self-hosting \`@withicons/web\`'s \`dist/\`? Copy this package's \`dist/\` into the same folder.
+
+MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+`)
+  }
 
   const pkg = {
     ...basePkg(ctx, '@withicons/web', `<with-icon> custom element: ${ctx.icons.length} icons x ${styleNames.length} styles, zero dependencies, lazy per-style data.`, ['web-components', 'custom-elements', 'cdn', 'no-build',
@@ -362,6 +404,8 @@ declare global {
     // the bare CDN URL (cdn.jsdelivr.net/npm/@withicons/web) serves the few-KB per-icon entry, never every style
     unpkg: './dist/cdn.js', jsdelivr: './dist/cdn.js',
     scripts: { test: 'node --test test/*.test.mjs' },
+    // the newest styles' data (bundled apps import it; CDN pages fetch it from the sibling package)
+    ...(away.length ? { dependencies: { '@withicons/web-plus': ctx.version } } : {}),
   }
   const kb = f => Math.round(Buffer.byteLength(f) / 1024)
   const gz = f => Math.round(zlib.gzipSync(f, { level: 9 }).length / 1024)

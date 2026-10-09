@@ -10,6 +10,9 @@ import { mainRole } from './_gothic-auto.mjs'
 import * as F from './_gothic-field.mjs'
 import { exact, erode, inscribed } from './_gothic-paint.mjs'
 import { LIVE, dress } from './_gothic-live.mjs'
+import { setDefaults } from './_gothic-paint.mjs'
+import { isPerson, tones } from './_people.mjs'
+import { glazePerson } from './_gothic-people.mjs'
 
 // ink area of a field (u^2)
 function inkArea(Fd) { let a = 0; for (let i = 0; i < Fd.length; i++) if (Fd[i] < 0) a++; return a * F.H * F.H }
@@ -71,6 +74,14 @@ export default function render(icon) {
       } catch (e) { if (globalThis.process?.env?.GOTHIC_DEBUG) throw e }
     }
     try { return paint(dress(icon, auto(icon), G)) } catch (e) { if (globalThis.process?.env?.GOTHIC_DEBUG) throw e }
+  }
+  // people avatars: the figure glazed in flesh, hair and robe glass (_gothic-people.mjs)
+  if (icon && isPerson(icon)) {
+    const t = tones(icon)
+    setDefaults({ c1: t.c1, c2: t.c2, c3: t.c3, c4: t.c4 })
+    try { const nodes = paint(glazePerson(auto(icon).flat(Infinity).filter(Boolean), icon)); if (nodes.length) return nodes }
+    catch (e) { if (globalThis.process?.env?.GOTHIC_DEBUG) throw e }
+    finally { setDefaults(null) }
   }
   return paint(auto(icon))
 }

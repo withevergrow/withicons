@@ -1,0 +1,67 @@
+{
+  "name": "chopsticks",
+  "category": "lunar-new-year",
+  "description": "A pair of chopsticks over a bowl, for meals and Asian food.",
+  "aliases": [
+    "chopstick",
+    "rice-bowl",
+    "bowl-chopsticks",
+    "kuaizi",
+    "hashi",
+    "asian-food",
+    "rice"
+  ],
+  "synonyms": [
+    "bowl",
+    "noodles",
+    "meal",
+    "eat",
+    "eating",
+    "dinner",
+    "lunch",
+    "food",
+    "chinese food",
+    "japanese food",
+    "korean food",
+    "restaurant",
+    "takeaway",
+    "ramen",
+    "fried rice",
+    "kuai zi",
+    "jeotgarak",
+    "dua",
+    "reunion dinner",
+    "lunar new year",
+    "cuisine"
+  ],
+  "tags": [
+    "food",
+    "meal",
+    "asian",
+    "lunar-new-year"
+  ],
+  "paths": [
+    {
+      "d": "M3 12.5 H21 C21 17 17 20.5 12 20.5 C7 20.5 3 17 3 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M21.5 3 L9 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 7.5 L11 11",
+      "plate": "A"
+    },
+    {
+      "d": "M5.25 16.25 C9.5 17.25 14.5 17.25 18.75 16.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3 12.5 H21 C21 17 17 20.5 12 20.5 C7 20.5 3 17 3 12.5 Z"
+  ],
+  "cutouts": [
+    "M5.25 16.25 C9.5 17.25 14.5 17.25 18.75 16.25"
+  ]
+}

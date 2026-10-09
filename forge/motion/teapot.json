@@ -1,0 +1,48 @@
+{
+  "name": "teapot",
+  "intent": "the teapot tips forward to pour",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      20.5
+    ],
+    "dir": 180
+  },
+  "parts": {
+    "S": {
+      "preset": "bounce",
+      "origin": [
+        12,
+        4.5
+      ],
+      "amount": 0.5
+    }
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "coffee",
+      "effect": "fade"
+    }
+  ]
+}

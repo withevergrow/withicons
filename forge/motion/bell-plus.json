@@ -1,0 +1,52 @@
+{
+  "name": "bell-plus",
+  "intent": "the bell rings as a new alert is added",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 1.2
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        19,
+        5
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell",
+      "effect": "fade"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "scale"
+    }
+  ]
+}

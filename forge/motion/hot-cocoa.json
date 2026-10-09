@@ -1,0 +1,59 @@
+{
+  "name": "hot-cocoa",
+  "intent": "warm steam curls up from the cocoa",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 2.2
+    },
+    "A": {
+      "preset": "float",
+      "amount": 0.5,
+      "delay": 0.2
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        10,
+        21
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        10,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "coffee",
+      "effect": "fade"
+    },
+    {
+      "to": "hot-cocoa@solid",
+      "effect": "scale"
+    }
+  ]
+}

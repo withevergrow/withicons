@@ -82,6 +82,26 @@ serves every icon: `--wm-ox --wm-oy` (origin, %), `--wm-dx --wm-dy` (unit direct
 | `type` | tiny stepped jitter like keystrokes | 0.9 s | keyboard, terminal, type, chat bubbles |
 | `fill` | opacity ramps 0.35 → 1 (charging) | 1.6 s | battery-charging, signal, wifi, volume, progress |
 
+3D presets (run 12; see **3D motion** below):
+
+| preset | motion | default dur (shot / loop) | moves |
+|---|---|---|---|
+| `turn` | full turn on a turntable, linear; edge-on at ¼, mirrored back at ½ | 2 / 2 s | object, shine, shadow |
+| `turn-once` | one turn with anticipation and a settling overshoot | 1.1 / 2.6 s | object, shine, shadow |
+| `wobble` | precession like a spinning top, swelling in and out of the cycle | 2.4 / 2.4 s | object, shine |
+| `chime` | decaying swing about the hook (origin) twisting toward you | 1.6 / 2.8 s, origin [12, 3] | object, shine |
+| `swivel` | head shake "no": turns away left / right, decaying | 0.9 / 2.2 s | object, shine |
+| `bow` | nod "yes": the top tips toward you and back | 0.9 / 2.2 s, origin [12, 18] | object, shine |
+| `lean` | turns and pushes along `dir`, springs back (directional) | 1 / 1.6 s | object, shine |
+| `lift` | rises toward you (bigger, top tipping back), hangs, lands with a squash | 1.2 / 2.4 s | object, shine, shadow |
+| `pump` | heartbeat toward you (two thumps closer) | 0.8 / 1.3 s | object, shine, shadow |
+| `squish` | hop: crouch, stretch in the air tipping back, squash landing, rebound | 0.9 / 1.5 s, origin [12, 21] | object, shine, shadow |
+| `drift` | slow bob with a lazy figure-eight turn in depth | 3.2 / 3.2 s | object, shine, shadow |
+| `gleam` | tips toward the light while the highlight sweeps across and flashes back | 1.4 / 2.8 s | object, shine |
+| `pop-up` | part move: the raised parts (plates `wm-a` / `wm-s`) pop up off the body and land back; the body gives under launch and landing | 1 / 2.2 s | plates, object, shadow (stays, softens) |
+| `press` | part move: the raised parts push down like a button, hold, spring back | 0.7 / 1.8 s | plates, object, shadow (spreads) |
+| `hop` | quick hop with a squash; the raised parts land a beat late | 0.8 / 1.6 s, origin [12, 21] | object, plates, shadow |
+
 **Swap effects** (icon A turns into icon B): `fade`, `scale`, `rotate`, `flip`, `slide-up`, `slide-down`,
 `slide-left`, `slide-right`, `blur`, `spin`, `morph` (scale + rotate + blur together), `draw` (stroked styles; falls back to `fade`).
 
@@ -208,3 +228,104 @@ Spec additions in `forge/motion/<name>.json` (all optional; validated by check-m
 - `parts.A` / `parts.S`: a motion object (+ `delay` seconds, 0–1) for that plate, applied when the style exposes plates;
   otherwise the whole object plays the main preset.
 - `deco`: `"breathe" | "float" | "twinkle" | "still"` (default: chosen by the engine per preset).
+
+## 3D motion (run 12)
+
+The 3D styles draw objects with volume, so they move like objects: they turn in depth, lift toward you and land, and
+their highlight and ground shadow answer. Flat styles keep their motion exactly (same CSS, byte-identical exports).
+
+### The style profile
+
+| style group | styles | what changes |
+|---|---|---|
+| 3D (`STYLES_3D`) | `clay dock liquid chrome soft3d luxe skeuo glass plush` | the icon's own motion (loop, hover, alt, parts) plays as its 3D counterpart (`PROFILE_3D`) |
+| backdrop (`BACKDROP_STYLES`) | `bento dock` | the tile behind the glyph (tagged `wm-deco`) stays still: the spec's `deco` becomes `still` |
+| everything else | | unchanged |
+
+`PROFILE_3D` (packages/motion/src/meta.js), flat → 3D (amount × / duration × applied to the spec's own values):
+
+| flat | 3D | | flat | 3D |
+|---|---|---|---|---|
+| `spin` | `turn` | | `beat` | `pump` |
+| `spin-once`, `flip`, `tada` | `turn-once` | | `pulse` | `lift` (amount × 0.7) |
+| `orbit`, `rock` | `wobble` | | `zoom`, `rise` | `lift` |
+| `sway` | `wobble` (amount × 0.7) | | `bounce`, `jelly` | `squish` |
+| `tilt`, `nudge` | `lean` (keeps `dir`) | | `pop` | `squish` (amount × 0.8, duration × 1.6) |
+| `ring` | `chime` | | `float` | `drift` |
+| `wiggle` | `swivel` (amount × 0.6) | | `breathe` | `drift` (amount × 0.6) |
+| `shake` | `swivel` (duration × 1.4) | | `glow`, `twinkle` | `gleam` |
+| `nod` | `bow` (duration × 1.1) | | | |
+
+Unlisted presets keep themselves (`tick pass drop blink flicker draw type fill` and the 3D presets). Stepped motion
+(`steps > 0`: loaders, clock hands) is mechanical and is never mapped. A `dir` survives only into a directional
+preset (`lean`). An explicit preset (`wm-p-<preset>`, `preset="…"`, `{ preset }`) is always taken literally.
+A spec author may also use the 3D presets directly in `forge/motion/<name>.json` (they are in the vocabulary).
+
+API (all optional, flat styles change nothing):
+- `styleSpec(spec, style)`, `styleMotion(m, style)`, `motion3d(m)`, `is3dStyle(style)`, `isBackdropStyle(style)`,
+  `STYLES_3D`, `BACKDROP_STYLES`, `PROFILE_3D`, `PRESETS_3D`; `motionFor(name, style)`.
+- `motion(el, name, { style })`, `motionAttrs(name, { style })`: a 3D style adds class `wm-3d`, a backdrop style
+  `wm-backdrop` (unless `deco` is given); an inline spec object is mapped with `styleSpec`.
+- Exports: `animatedSvg / frameSvg / exportDuration / resolveMotion(… { style })`; `resolveSpecMotion(spec, { style })`
+  and `partsPlan` follow (resolved motions carry `style`, only when it changes something).
+- CSS only: `icons.css` has, per icon, a second rule `.wm-3d[data-wm="<name>"],with-icon.wm-3d[name="<name>"]` with
+  the 3D slot variables (only what differs; flat-only variables reset to `initial`). `.wm-backdrop{--wm-deco:none}`.
+- `<with-icon variant="clay" motion="loop">`: the element adds `wm-3d` / `wm-backdrop` from `variant` by itself.
+
+### How the 3D is drawn (live = export)
+
+Each 3D preset is a list of **poses** (keyframes.js `D3`): turn about the vertical axis (`ry`), the horizontal axis
+(`rx`, top toward you > 0), in the picture plane (`rz`), move (`x y`, % of the box), come closer (`s`), squash (`qx qy`).
+A pose is projected through a camera a little above the object (`CAMERA` = sin 15°) to a **plain 2D affine
+transform**, always the same function list per track:
+
+    translate(x, y) rotate(rz) scale(sx, sy) skewY(ky) skewX(kx)      (functions a preset never uses are left out)
+
+e.g. a turntable is `scale(cos θ, 1) skewY(atan(−sin θ · sin φ))`: the face narrows to its edge, the near side dips.
+No CSS 3D (`perspective`, `rotateX/Y`) is used anywhere: browsers flatten 3D transforms on SVG child elements, and
+static renderers (resvg, PowerPoint, Figma) cannot do it, so one affine track serves the page, `<with-icon>`'s shadow
+root, animated SVG, GIF / video frames (`frameSvg`), the CLI's resvg freezer and Lottie (`sampleMatrix` reads skews),
+and what you see live is what you download. `--wm-k` (amount) scales every delta from rest linearly (in CSS:
+`calc(1 + n * var(--_k))`); `turn` / `turn-once` keep their literal foreshortening (amount scales the camera tilt).
+`lean` reads `--wm-dx / --wm-dy`: each parameter is measured for a lean right / left / down / up and recombined from its
+odd and even parts (`calc(… a * var(--_dx) + b * var(--_dx) * var(--_dx) …)`).
+
+Per part (inline SVGs with part tags, `<with-icon>`, exports):
+
+| part | 3D presets |
+|---|---|
+| object (untagged, `wm-k`), plates `wm-a` / `wm-s` | the pose track |
+| `wm-shine` | `wm-shine-<preset>[-loop]`: the pose plus a slide against the turn (16% of the box × the face normal) and an opacity that dims as the face turns from the light (light from the upper left); `gleam` sweeps it on purpose |
+| `wm-shadow` | `turn`, `turn-once`: turns along, dimmer edge-on; `lift`, `pump`, `squish`, `drift`: `wm-shadow-<preset>` stays lower (lag 0.25–0.5), shrinks and fades as the object rises; others: attached |
+| `wm-deco` | its own calm loop (`DECO_DEFAULT`: turns / gleam breathe, swings float, lifts twinkle); still in backdrop styles |
+
+CSS wiring: the wrapper hands nodes `--_sn` (`var(--wmP-sn{l,s}, var(--wm{L,H}-sn, var(--_an)))`), and
+`.wm-shine{animation-name:var(--_sn, var(--_an))}`; every explicit preset class sets `--wmP-snl/--wmP-sns` (flat presets:
+their own keyframes), so an explicit flat preset on a `wm-3d` element still moves the highlight with the object.
+Icons without part tags (`<img>`, `<i class="with">`, sprites) move as a whole with the same pose track.
+
+Reduced motion: exactly like every preset (`prefers-reduced-motion: reduce` stops all of it unless `wm-force`;
+exports carry the same media query).
+
+### Part moves and per-style move lists (soft3d)
+
+`pop-up`, `press` and `hop` (`PLATE_PRESETS`) give the plates (`wm-a` / `wm-s`: buttons, lenses, lids, badges sitting on the
+body `wm-k`) their own track `wm-plate-<preset>[-loop]` (keyframes.js `D3[p].plates`, same 2D-affine projection, export
+safe). A part move IS the plates' motion, so a spec's `parts.A / parts.S` override does not apply to it. CSS: the plate
+chain is `--_p{a,s}n: var(--wmP-p{l,s}, var(--wm{L,H}-{a,s}, var(--wm{L,H}-p, var(--_an))))`: an explicit preset class sets
+`--wmP-pl / --wmP-ps` (its plate track, or its own keyframes for other presets), icons.css `--wm{L,H}-p` for an icon whose own
+motion is a part move. Without plates the body still moves (pop-up / press: a small give; hop: the whole hop).
+
+`styleMoves(spec, style, { parts })` -> `[{ preset, …options }]`: the moves an icon offers in a style (the studio's
+"Made for <icon>" chips), own first, no preset twice. `MOVE_PROFILES` per style:
+
+| style | min-max | after the icon's own moves (loop, hover, alt as the style plays them) |
+|---|---|---|
+| `soft3d` | 3–5 | with plates (`parts: true`): `pop-up`, `press`; then `hop turn gleam lift wobble drift squish` until 3 |
+| other 3D styles | — | the icon's own moves, mapped (`styleSpec`) |
+| flat styles | — | exactly `[loop, hover, ...alt]` without repeats (unchanged) |
+
+`parts` should say whether the drawing has `wm-a` / `wm-s` nodes (the default guesses from the spec's `parts`).
+
+Check by eye: `node forge/tools/preview-motion.mjs bell,heart,settings --styles clay,luxe,skeuo` (3D styles play their
+3D counterpart; `--flat` shows the flat motion; `--spec '{"loop":{"preset":"squish"}}'` any preset).

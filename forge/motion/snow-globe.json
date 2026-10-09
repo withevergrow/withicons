@@ -1,0 +1,50 @@
+{
+  "name": "snow-globe",
+  "intent": "a little shake sets the snow swirling",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.6,
+      "duration": 2.4
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "twinkle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "snowflake",
+      "effect": "morph"
+    }
+  ]
+}

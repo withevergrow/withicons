@@ -1,9 +1,10 @@
 // @withicons/motion/runtime — the motion runtime without the 500-icon spec table (index.js adds motionFor / motionAttrs).
 // The animations themselves are pure CSS (motion.css + icons.css); this file only toggles classes and
 // CSS variables, prepares strokes for `draw`, and builds swaps. SSR-safe: nothing touches the DOM on import.
-import { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, DIRECTIONAL, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, dirVec, pct, keyframeName, cssSlot, DECO_KINDS } from './meta.js'
+import { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, DIRECTIONAL, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, dirVec, pct, keyframeName, cssSlot, DECO_KINDS, PRESETS_3D, STYLES_3D, PROFILE_3D, is3dStyle, motion3d, styleMotion, styleSpec, BACKDROP_STYLES, isBackdropStyle, styleMoves, MOVE_PROFILES, PLATE_PRESETS } from './meta.js'
 
-export { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, keyframeName }
+export { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, keyframeName,
+  PRESETS_3D, STYLES_3D, PROFILE_3D, is3dStyle, motion3d, styleMotion, styleSpec, BACKDROP_STYLES, isBackdropStyle, styleMoves, MOVE_PROFILES, PLATE_PRESETS }
 
 // No spec table here: motion(), swap() and the element read an icon's defaults from icons.css (or the icon's own
 // icons/<name>.css) on the live element (cssSlot). motionFor() and motionAttrs() live in index.js with the table, so an
@@ -51,15 +52,22 @@ export function unprepareDraw(root) {
 
 // Shared mapping of motion options -> { classes, vars, preset (effective), name }.
 // slotOf(name, loop) gives a named icon's own { preset, dir } for the slot (from the table or from icons.css).
+// o.style: the icon's style. A 3D style (STYLES_3D) adds wm-3d (icons.css then hands a named icon its 3D counterpart)
+// and maps an inline spec the same way (styleSpec); an explicit preset is always taken as it is.
 export function plan(nameOrSpec, o, fallbackName, slotOf) {
   const trigger = TRIGGERS.includes(o.trigger) ? o.trigger : 'loop'
-  const spec = nameOrSpec && typeof nameOrSpec === 'object' ? nameOrSpec : null
+  const d3 = is3dStyle(o.style)
+  const spec = nameOrSpec && typeof nameOrSpec === 'object' ? styleSpec(nameOrSpec, o.style) : null
   const name = typeof nameOrSpec === 'string' ? nameOrSpec : (spec ? null : fallbackName || null)
   const classes = ['wm', 'wm-' + trigger]
+  if (d3) classes.push('wm-3d')
+  // a style whose decoration is a backdrop tile (bento, dock): the tile stays still (motion.css .wm-backdrop)
+  if (isBackdropStyle(o.style) && !DECO_KINDS.includes(o.deco)) classes.push('wm-backdrop')
   const vars = {}
   // a spec object that is not in the table: its slot variables go inline (icons.css only knows the table)
   if (spec) Object.assign(vars, specVars(spec))
-  const slot = spec ? (trigger === 'loop' ? spec.loop : spec.hover) : (name ? slotOf(name, trigger === 'loop') : null)
+  let slot = spec ? (trigger === 'loop' ? spec.loop : spec.hover) : (name ? slotOf(name, trigger === 'loop') : null)
+  if (d3 && slot) slot = motion3d(slot)
   const preset = PRESET_DEFAULTS[o.preset] ? o.preset : null
   if (preset) classes.push('wm-p-' + preset)
   let dir = o.dir
@@ -109,6 +117,7 @@ export function pauseWhenOffscreen(el) {
  * motion(el, 'bell')                                  the icon's own loop
  * motion(el, 'bell', { trigger: 'hover' })            its one-shot on hover / focus / tap (finishes even if the pointer leaves)
  * motion(el, null, { preset: 'spin', duration: 2 })   any preset
+ * motion(el, 'bell', { style: 'clay' })               a 3D style plays the icon's 3D counterpart (bell: chime)
  * Loops pause while scrolled out of view (pass { offscreen: 'run' } to keep them running).
  * Calling motion() again on the same element replaces the previous motion.
  * Returns { el, play(), pause(), destroy() }.

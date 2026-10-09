@@ -148,13 +148,16 @@ export const R = {
       ['ink', R(p.seg2(12, 8, 12, 14.25, 1.2))],
     ]
   },
-  // blush pig with a peach snout, ink eye and slot, a butter coin dropping in (A)
+  // blush pig in 3/4 view (perky ear, curly tail, stubby legs), a peach oval snout, ink eye, nostrils and slot,
+  // a butter coin dropping in (S)
   'piggy-bank': (icon, p) => [
-    ['blush', p.unite(p.ellipse(10.75, 13.5, 8, 6.25), p.poly([[12.5, 8.4], [15.4, 4.1], [17.25, 9.4]], [1, 1, 1]),
-      p.rr(5.5, 16.5, 8.5, 21.75, 1.4), p.rr(12.75, 16.5, 15.75, 21.75, 1.4))],
-    ['peach.flat', p.rr(17.25, 10.75, 21.75, 16, 2)],
-    ['ink', p.circle(14.75, 11.5, 1.05), p.seg2(7.75, 9.9, 11.25, 9.9, 1.6), p.circle(19.6, 13.4, 0.75)],
-    ['butter@A', p.circle(9.5, 4.25, 2.6)],
+    ['peach', p.poly([[16.8, 10.6], [20.6, 5.9], [20, 11.6]], [0.4, 0.4, 0.4])],
+    ['blush', p.unite(p.ellipse(11.75, 14, 7.75, 5.75), p.poly([[13.4, 9.6], [16.4, 3.9], [17.6, 10.2]], [1, 1, 1]),
+      p.rr(5.5, 16.5, 8.5, 21.75, 1.4), p.rr(13.5, 16.5, 16.5, 21.75, 1.4),
+      p.stroke('M4.6 12.3 C2.9 12.4 2.2 11.2 2.8 10.2 C3.1 9.7 3.6 9.7 3.9 10', 1.6))],
+    ['peach.flat', p.ellipse(19.75, 13.5, 2.05, 2.7)],
+    ['ink', p.circle(15.75, 12, 1.05), p.seg2(8.25, 10.75, 11.75, 10.75, 1.6), p.circle(19.15, 13.1, 0.45), p.circle(20.35, 13.1, 0.45)],
+    ['butter@S', p.circle(10, 3.75, 2.1)],
   ],
   // butter cheese slice, peach crust (A), blush pepperoni
   pizza: (icon, p) => [

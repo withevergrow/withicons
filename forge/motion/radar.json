@@ -1,0 +1,57 @@
+{
+  "name": "radar",
+  "intent": "the sweep arm circles the scope and the blip pulses when found",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 1,
+      "duration": 2.4
+    },
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        16,
+        15.5
+      ],
+      "amount": 1.4,
+      "delay": 0.3
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin",
+      "duration": 3
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "target",
+      "effect": "scale"
+    },
+    {
+      "to": "crosshair",
+      "effect": "rotate"
+    },
+    {
+      "to": "compass",
+      "effect": "fade"
+    }
+  ]
+}

@@ -601,6 +601,8 @@
     var o = { trigger: trig, spec: ctx.motionSpec || (w.WITH_MOTION && w.WITH_MOTION[ctx.name]) || undefined }
     ;['preset', 'origin', 'dir', 'amount', 'duration', 'steps'].forEach(function (k) { if (m[k] != null && m[k] !== '') o[k] = m[k] })
     if (ctx.color) o.color = ctx.color
+    // 3D motion: a 3D style plays the spec's 3D counterpart, a backdrop style keeps its tile still (forge/MOTION.md)
+    if (ctx.style) o.style = ctx.style
     return o
   }
   // Headroom so motion that leaves the 24 grid (bounce, glow, zoom, spin corners...) is not cut off at the file's edge.

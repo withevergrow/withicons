@@ -134,20 +134,49 @@
     } else svg = v.svgWithBg(ctx, Object.assign({ flat: false }, o))
     var root = v.findTag(v.parseXml(svg), 'svg'), attrs = {}
     for (var a in root.attrs) if (a !== 'xmlns' && a !== 'width' && a !== 'height' && a !== 'color') attrs[a] = root.attrs[a]
-    return { attrs: attrs, children: root.children.filter(function (n) { return n.tag !== 'title' }) }
+    var children = root.children.filter(function (n) { return n.tag !== 'title' })
+    return { attrs: attrs, children: children, uid: markUid(children) }
   }
+  // Rich styles draw gradients with ids: a component used twice on one page needs its own ids per copy. Every id and
+  // url(#id) gets UID appended here; each framework writer turns UID into its per-instance value (useId, a counter...).
+  var UID = '__WITH_UID__'
+  function markUid(nodes) {
+    var ids = {}
+    ;(function find(ns) { ns.forEach(function (n) { if (n.attrs && n.attrs.id) ids[n.attrs.id] = 1; if (n.children) find(n.children) }) })(nodes)
+    if (!Object.keys(ids).length) return false
+    ;(function mark(ns) {
+      ns.forEach(function (n) {
+        if (!n.attrs) return
+        for (var k in n.attrs) {
+          if (k === 'id') n.attrs[k] = n.attrs[k] + '-' + UID
+          else n.attrs[k] = String(n.attrs[k]).replace(/url\(#([^)\s]+)\)/g, function (m, id) { return ids[id] ? 'url(#' + id + '-' + UID + ')' : m })
+        }
+        if (n.children) mark(n.children)
+      })
+    })(nodes)
+    return true
+  }
+  // value with UID -> a JS string expression: 'url(#wg-a-' + uid + ')'
+  function uidExpr(v) { return String(v).split(UID).map(q).join(' + uid + ').replace(/^'' \+ | \+ ''$/g, '') }
 
   // plain markup (HTML, Vue, Svelte, Angular templates)
-  function markup(nodes, indent) {
+  // bind(name, value) writes an attribute whose value holds UID (a framework binding); omitted: UID is dropped
+  function markup(nodes, indent, bind) {
     var v = V()
     return nodes.map(function (n) {
       if (n.text != null) return indent + v.escText(n.text)
       var s = indent + '<' + n.tag
-      for (var k in n.attrs) s += ' ' + k + '="' + v.escAttr(n.attrs[k]) + '"'
+      for (var k in n.attrs) {
+        var val = String(n.attrs[k])
+        s += val.indexOf(UID) < 0 ? ' ' + k + '="' + v.escAttr(val) + '"' : bind ? ' ' + bind(k, val) : ' ' + k + '="' + v.escAttr(val.split('-' + UID).join('')) + '"'
+      }
       var kids = (n.children || []).filter(function (c) { return c.text == null || /\S/.test(c.text) })
-      return kids.length ? s + '>\n' + markup(kids, indent + '  ') + '\n' + indent + '</' + n.tag + '>' : s + ' />'
+      return kids.length ? s + '>\n' + markup(kids, indent + '  ', bind) + '\n' + indent + '</' + n.tag + '>' : s + ' />'
     }).join('\n')
   }
+  var vueBind = function (k, val) { return ':' + k + '="' + uidExpr(val).replace(/"/g, '&quot;') + '"' }
+  var svelteBind = function (k, val) { return k + '="' + V().escAttr(val).split(UID).join('{uid}') + '"' }
+  var ngBind = function (k, val) { return '[attr.' + k + ']="' + uidExpr(val).replace(/"/g, '&quot;') + '"' }
   function attrList(attrs) { var v = V(), s = ''; for (var k in attrs) s += ' ' + k + '="' + v.escAttr(attrs[k]) + '"'; return s }
 
   // JSX
@@ -161,7 +190,10 @@
     var parts = String(s).split(';').map(function (d) { var i = d.indexOf(':'); return i > 0 ? [d.slice(0, i).trim(), d.slice(i + 1).trim()] : null }).filter(Boolean)
     return '{{ ' + parts.map(function (p) { return (p[0].indexOf('--') === 0 ? q(p[0]) : jsxName(p[0])) + ': ' + q(p[1]) }).join(', ') + ' }}'
   }
-  function jsxValue(v) { return /["\\{}<>]/.test(v) ? '{' + q(v) + '}' : '"' + v + '"' }
+  function jsxValue(v) {
+    if (String(v).indexOf(UID) >= 0) return '{' + uidExpr(v) + '}'
+    return /["\\{}<>]/.test(v) ? '{' + q(v) + '}' : '"' + v + '"'
+  }
   function jsxAttrList(attrs) {
     var out = []
     for (var k in attrs) out.push(k === 'style' ? 'style=' + jsxStyle(attrs[k]) : jsxName(k) + '=' + jsxValue(attrs[k]))
@@ -213,6 +245,8 @@
     }
     var sig = '{ size = 24, color = ' + q(color) + ', title, className, style' + (p && p.swap ? ', on = false' : '') + ', ...props }' + propsType
     L.push('export function ' + name + '(' + sig + ') {')
+    // gradients: this copy's own ids (React 18+), so two copies on one page never share a gradient
+    if (md.uid || (p && p.swap && model(p.swap.ctx, opts).uid)) L.push("  const uid = React.useId().replace(/[^\\w-]/g, '')")
     var cssVars = p ? p.vars : {}
     var styleExpr = function () {
       var keys = Object.keys(cssVars)
@@ -256,11 +290,13 @@
     if (p && p.swap) S.push('  on: { type: Boolean, default: false },')
     S.push('})')
     if (p && p.runtime) S.push('const el = ref(null)', 'let m = null', 'onMounted(() => { m = motion(el.value, ' + q(ctx.name) + ', ' + JSON.stringify(p.opts) + ') })', 'onBeforeUnmount(() => { if (m) m.destroy() })')
+    // gradients: this copy's own ids (Vue 3.5+)
+    if (md.uid || (p && p.swap && model(p.swap.ctx, opts).uid)) S.push("import { useId } from 'vue'", "const uid = useId().replace(/[^\\w-]/g, '')")
     S.push('</script>', '', '<template>')
     var svg = function (m, extra, indent, a11y) {
       return indent + '<svg xmlns="http://www.w3.org/2000/svg" :width="size" :height="size"' + attrList(m.attrs) + ' :color="color"' + (extra || '') +
         (a11y ? " :role=\"title ? 'img' : undefined\" :aria-hidden=\"title ? undefined : 'true'\"" : '') + '>\n' +
-        (a11y ? indent + '  <title v-if="title">{{ title }}</title>\n' : '') + markup(m.children, indent + '  ') + '\n' + indent + '</svg>'
+        (a11y ? indent + '  <title v-if="title">{{ title }}</title>\n' : '') + markup(m.children, indent + '  ', vueBind) + '\n' + indent + '</svg>'
     }
     if (p && p.swap) {
       S.push('  <span class="' + swapClasses(p).join(' ') + '" :class="{ \'is-on\': on }"' + (Object.keys(p.vars).length ? ' style="' + styleVars(p.vars) + '"' : '') +
@@ -279,7 +315,12 @@
   // ---------- Svelte (works in Svelte 4 and 5) ----------
   function svelte(ctx, opts) {
     var p = motionPlan(ctx), md = model(ctx, opts), color = ctx.color || 'currentColor'
-    var S = ['<!-- ' + (ctx.title || ctx.name) + ' (' + ctx.style + ' style) from with icons, ' + iconUrl(ctx) + ' -->', '<script>']
+    var S = ['<!-- ' + (ctx.title || ctx.name) + ' (' + ctx.style + ' style) from with icons, ' + iconUrl(ctx) + ' -->']
+    // gradients: every copy gets its own ids from a module counter
+    var sUid = md.uid || (p && p.swap && model(p.swap.ctx, opts).uid)
+    if (sUid) S.push('<script context="module">', '  let n = 0', '</script>', '')
+    S.push('<script>')
+    if (sUid) S.push("  const uid = 'w' + (++n)")
     if (p) S.push(motionComment(p, '  // ').replace(/\n$/, ''), "  import '@withicons/motion/motion.css'", "  import '@withicons/motion/icons.css'")
     if (p && p.runtime) S.push("  import { onMount } from 'svelte'", "  import { motion } from '@withicons/motion'")
     S.push('  export let size = 24', '  export let color = ' + q(color), '  export let title = undefined')
@@ -289,7 +330,7 @@
     var svg = function (m, extra, indent, a11y) {
       return indent + '<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}' + attrList(m.attrs) + ' {color}' + (extra || '') +
         (a11y ? " role={title ? 'img' : undefined} aria-hidden={title ? undefined : 'true'} {...$$restProps}" : '') + '>\n' +
-        (a11y ? indent + '  {#if title}<title>{title}</title>{/if}\n' : '') + markup(m.children, indent + '  ') + '\n' + indent + '</svg>'
+        (a11y ? indent + '  {#if title}<title>{title}</title>{/if}\n' : '') + markup(m.children, indent + '  ', svelteBind) + '\n' + indent + '</svg>'
     }
     if (p && p.swap) {
       S.push('<span class="' + swapClasses(p).join(' ') + '" class:is-on={on}' + (Object.keys(p.vars).length ? ' style="' + styleVars(p.vars) + '"' : '') +
@@ -311,7 +352,7 @@
     var tpl = function (m, extra, indent, a11y) {
       return indent + '<svg xmlns="http://www.w3.org/2000/svg" [attr.width]="size" [attr.height]="size"' + attrList(m.attrs) + ' [attr.color]="color"' + (extra || '') +
         (a11y ? " [attr.role]=\"title ? 'img' : null\" [attr.aria-hidden]=\"title ? null : 'true'\"" : '') + '>\n' +
-        (a11y ? indent + '  @if (title) { <title>{{ title }}</title> }\n' : '') + markup(m.children, indent + '  ') + '\n' + indent + '</svg>'
+        (a11y ? indent + '  @if (title) { <title>{{ title }}</title> }\n' : '') + markup(m.children, indent + '  ', ngBind) + '\n' + indent + '</svg>'
     }
     var t, cls = ''
     if (p && p.swap) {
@@ -329,10 +370,13 @@
     if (p) L.push(motionComment(p).replace(/\n$/, ''), ' * Add the motion styles once, in angular.json "styles":', ' *   "node_modules/@withicons/motion/dist/motion.css", "node_modules/@withicons/motion/dist/icons.css"')
     L.push(' */', 'import { ' + ng.join(', ') + " } from '@angular/core'")
     if (p && p.runtime) L.push("import { motion } from '@withicons/motion'")
+    var aUid = md.uid || (p && p.swap && model(p.swap.ctx, opts).uid)
+    if (aUid) L.push('', '// gradients: every copy gets its own ids', 'let withUid = 0')
     L.push('', '@Component({', "  selector: 'with-" + kebab(ctx) + "',", '  standalone: true,', '  changeDetection: ChangeDetectionStrategy.OnPush,',
       "  host: { style: 'display: inline-flex; line-height: 0' },", '  template: `', t.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${'), '`,', '})')
     L.push('export class ' + name + (p && p.runtime ? ' implements AfterViewInit, OnDestroy' : '') + ' {',
       '  @Input() size: number | string = 24', '  @Input() color = ' + q(color), '  @Input() title?: string')
+    if (aUid) L.push("  protected readonly uid = 'w' + (++withUid)")
     if (p && p.swap) L.push('  @Input() on = false')
     if (p && p.runtime) {
       L.push("  @ViewChild('svg', { static: true }) svg!: ElementRef<SVGSVGElement>", '  private m?: { destroy(): void }',
@@ -344,7 +388,12 @@
   }
 
   // ---------- React Native (react-native-svg) ----------
-  var RN_TAGS = { path: 'Path', g: 'G', circle: 'Circle', rect: 'Rect', ellipse: 'Ellipse', line: 'Line', polyline: 'Polyline', polygon: 'Polygon' }
+  var RN_TAGS = { path: 'Path', g: 'G', circle: 'Circle', rect: 'Rect', ellipse: 'Ellipse', line: 'Line', polyline: 'Polyline', polygon: 'Polygon',
+    defs: 'Defs', linearGradient: 'LinearGradient', radialGradient: 'RadialGradient', stop: 'Stop' }
+  // react-native-svg scopes ids to each <Svg>: no per-copy ids needed
+  function dropUid(nodes) {
+    nodes.forEach(function (n) { if (n.attrs) for (var k in n.attrs) n.attrs[k] = String(n.attrs[k]).split('-' + UID).join(''); if (n.children) dropUid(n.children) })
+  }
   // preset -> [transform, values over one cycle] (translate values are fractions of the icon size)
   var RN_KEYS = { spin: ['rotate', [0, 360]], 'spin-once': ['rotate', [0, 360]], tick: ['rotate', [0, 360]], pulse: ['scale', [1, 1.1, 1]], beat: ['scale', [1, 1.15, 1, 1.1, 1]],
     breathe: ['scale', [1, 1.06, 1]], float: ['translateY', [0, -0.06, 0]], bounce: ['translateY', [0, -0.15, 0, -0.04, 0]], sway: ['rotate', [0, 6, 0, -6, 0]],
@@ -356,6 +405,7 @@
     draw: ['opacity', [0, 1]], type: ['translateY', [0, -0.02, 0, -0.02, 0]], fill: ['opacity', [0.35, 1]] }
   function reactNative(ctx, opts) {
     var p = motionPlan(ctx), md = model(ctx, opts, true), name = compName(ctx), color = ctx.color || '#000000'
+    dropUid(md.children)
     var used = {}
     ;(function walk(ns) { ns.forEach(function (n) { if (RN_TAGS[n.tag]) used[RN_TAGS[n.tag]] = 1; if (n.children) walk(n.children) }) })(md.children)
     var L = ['/**', ' * ' + (ctx.title || ctx.name) + ' (' + ctx.style + ' style) from with icons, ' + iconUrl(ctx),

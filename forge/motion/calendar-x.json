@@ -1,0 +1,49 @@
+{
+  "name": "calendar-x",
+  "intent": "the cross stamps onto the page; shakes no on hover",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        15.5
+      ],
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw",
+      "duration": 0.9
+    }
+  ],
+  "swap": [
+    {
+      "to": "calendar-check",
+      "effect": "flip"
+    },
+    {
+      "to": "calendar",
+      "effect": "fade"
+    }
+  ]
+}

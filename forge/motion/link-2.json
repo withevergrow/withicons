@@ -1,0 +1,41 @@
+{
+  "name": "link-2",
+  "intent": "the links pull together and click shut",
+  "loop": {
+    "preset": "jelly",
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "link",
+      "effect": "rotate"
+    },
+    {
+      "to": "unlink",
+      "effect": "morph"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    }
+  ]
+}

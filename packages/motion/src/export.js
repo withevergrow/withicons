@@ -49,6 +49,7 @@ export function resolveMotion(o) {
  *   animatedSvg(svg, { preset: 'spin', duration: 2 })
  *   animatedSvg(svg, { name: 'bell', trigger: 'hover' })       plays when the SVG is hovered (inline SVG only)
  *   animatedSvg(svg, { swapTo: otherSvg, effect: 'flip' })     A <-> B forever (see animatedSwapSvg)
+ *   animatedSvg(svg, { name: 'bell', style: 'clay' })          a 3D style plays the icon's 3D counterpart (chime)
  *   time: seconds -> a frozen frame at that moment (used for frame export)
  */
 export function animatedSvg(svg, opts) {
@@ -109,6 +110,7 @@ export function animatedSvg(svg, opts) {
 // with literal keyframes. time != null freezes every part at that moment (frame export).
 const ROLE_SEL = {
   obj: ':not(.wm-deco,.wm-shadow,.wm-a,.wm-s,defs,title,desc,style)', a: '.wm-a', s: '.wm-s', shadow: '.wm-shadow', deco: '.wm-deco',
+  shine: '.wm-shine',
 }
 // Fading presets (breathe, rise, drop, flicker, fill): opacity on each node separately lets overlapping parts show
 // through each other mid-fade (an outline over its fill, the body over its cast shadow), which reads as a glitch in a
@@ -130,9 +132,10 @@ function partsCss(id, plan, on, time) {
     css += keyframesCss(`${id}-op`, objStops.map(([at, p, e]) => [at, { opacity: p.opacity == null ? 1 : p.opacity }, e]))
     css += `${on}.${id}-g{animation:${id}-op ${timing(plan.obj)}}`
   }
-  for (const role of ['obj', 'shadow', 'a', 's', 'deco']) {
+  for (const role of ['obj', 'shadow', 'a', 's', 'deco', 'shine']) {
     const r = plan[role]
-    if (!r) continue
+    // the highlight is part of the object unless a 3D preset moves it on its own (after the object's rule, so it wins)
+    if (!r || (role === 'shine' && r === plan.obj)) continue
     const shared = groupOp && role !== 'deco' && r.preset === plan.obj.preset && r.duration === plan.obj.duration && r.delay === plan.obj.delay
     const key = r.key + '|' + r.k + '|' + r.dir + (shared ? '|g' : '')
     let name = named[key]

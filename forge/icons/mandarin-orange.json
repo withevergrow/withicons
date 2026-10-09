@@ -1,0 +1,68 @@
+{
+  "name": "mandarin-orange",
+  "category": "lunar-new-year",
+  "description": "A mandarin orange with leaves, for luck and Lunar New Year.",
+  "aliases": [
+    "mandarin",
+    "tangerine",
+    "clementine",
+    "satsuma",
+    "lucky-orange",
+    "kumquat",
+    "mandarin-fruit"
+  ],
+  "synonyms": [
+    "orange",
+    "citrus",
+    "fruit",
+    "ju zi",
+    "kam",
+    "gam",
+    "quyt",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "gold",
+    "prosperity",
+    "luck",
+    "good fortune",
+    "gift",
+    "offering",
+    "healthy",
+    "vitamin c",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "fruit",
+    "food",
+    "luck"
+  ],
+  "paths": [
+    {
+      "d": "M19.75 13.75 A7.75 7.75 0 1 1 4.25 13.75 A7.75 7.75 0 1 1 19.75 13.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6 C13 3.75 15.75 2.5 19 3.25 C17.75 5.75 15 6.75 12 6 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6 C11.25 4.25 9.25 3 6.5 3.5 C7.5 5.5 9.5 6.5 12 6 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 12.5 A4.75 4.75 0 0 1 10 9.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.75 13.75 A7.75 7.75 0 1 1 4.25 13.75 A7.75 7.75 0 1 1 19.75 13.75 Z",
+    "M12 6 C13 3.75 15.75 2.5 19 3.25 C17.75 5.75 15 6.75 12 6 Z",
+    "M12 6 C11.25 4.25 9.25 3 6.5 3.5 C7.5 5.5 9.5 6.5 12 6 Z"
+  ],
+  "cutouts": [
+    "M7.5 12.5 A4.75 4.75 0 0 1 10 9.25"
+  ]
+}

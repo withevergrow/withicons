@@ -1,0 +1,51 @@
+{
+  "name": "spider-web",
+  "intent": "trembles softly in the corner breeze",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      3,
+      3
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      3,
+      3
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        3,
+        3
+      ]
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        3,
+        3
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "spider",
+      "effect": "slide-down"
+    },
+    {
+      "to": "spider-web@solid",
+      "effect": "fade"
+    }
+  ]
+}

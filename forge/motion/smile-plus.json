@@ -1,0 +1,47 @@
+{
+  "name": "smile-plus",
+  "intent": "the face blinks happily, a reaction ready to add",
+  "loop": {
+    "preset": "blink",
+    "origin": [
+      12,
+      9.5
+    ],
+    "duration": 3.5
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        19,
+        5
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "smile",
+      "effect": "scale"
+    },
+    {
+      "to": "heart",
+      "effect": "morph"
+    }
+  ]
+}

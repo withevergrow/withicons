@@ -1,0 +1,80 @@
+{
+  "name": "trash-2",
+  "category": "actions",
+  "description": "A lidded bin with lines, for delete, remove and trash.",
+  "aliases": [
+    "trash-alt",
+    "delete-alt",
+    "bin-alt",
+    "trash-can-lines",
+    "garbage-alt",
+    "remove-alt",
+    "rubbish-alt",
+    "waste-bin-alt"
+  ],
+  "tags": [
+    "delete",
+    "remove",
+    "bin",
+    "garbage",
+    "trash"
+  ],
+  "paths": [
+    {
+      "d": "M3 6.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 6.5 V18.5 A2.5 2.5 0 0 0 8 21 H16 A2.5 2.5 0 0 0 18.5 18.5 V6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9 6.5 A3 3 0 0 1 15 6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10 10.5 V17",
+      "plate": "A"
+    },
+    {
+      "d": "M14 10.5 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 6.5 V18.5 A2.5 2.5 0 0 0 8 21 H16 A2.5 2.5 0 0 0 18.5 18.5 V6.5 Z"
+  ],
+  "cutouts": [
+    "M10 10.5 V17",
+    "M14 10.5 V17"
+  ],
+  "synonyms": [
+    "delete",
+    "remove",
+    "bin",
+    "trash",
+    "trash can",
+    "trashcan",
+    "garbage",
+    "garbage can",
+    "rubbish",
+    "rubbish bin",
+    "waste",
+    "waste basket",
+    "dustbin",
+    "litter bin",
+    "discard",
+    "throw away",
+    "erase",
+    "destroy",
+    "dump",
+    "junk",
+    "clear",
+    "deleted items",
+    "empty trash",
+    "recycle bin",
+    "delete row",
+    "remove item",
+    "delet"
+  ]
+}

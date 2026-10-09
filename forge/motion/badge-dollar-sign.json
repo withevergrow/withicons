@@ -1,0 +1,44 @@
+{
+  "name": "badge-dollar-sign",
+  "intent": "the price badge rocks gently; spins like a coin on hover",
+  "loop": {
+    "preset": "rock",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.8
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "badge-percent",
+      "effect": "flip"
+    },
+    {
+      "to": "dollar-sign",
+      "effect": "fade"
+    }
+  ]
+}

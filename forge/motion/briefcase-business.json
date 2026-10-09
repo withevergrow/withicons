@@ -1,0 +1,44 @@
+{
+  "name": "briefcase-business",
+  "intent": "the work case swings gently from its handle",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      4
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.6
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        4
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "briefcase",
+      "effect": "fade"
+    },
+    {
+      "to": "briefcase-business@solid",
+      "effect": "scale"
+    }
+  ]
+}

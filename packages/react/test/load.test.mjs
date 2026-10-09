@@ -39,7 +39,9 @@ test('root import loads one style statically; the others are dynamic imports', {
 test('each style is one module; deep paths re-export it', { skip }, () => {
   for (const s of styles) {
     const { files } = graph(path.join(dist, s, 'index.js'))
-    assert.deepEqual(files, [`${s}/index.js`, 'base.js'].sort(), s)
+    // solid: the drawings sit in nodes.js, shared by index.js and index.cjs (react and vue: inline in index.js)
+    const data = fs.existsSync(path.join(dist, s, 'nodes.js')) ? [`${s}/nodes.js`] : []
+    assert.deepEqual(files, [`${s}/index.js`, 'base.js', ...data].sort(), s)
     const deep = fs.readFileSync(path.join(dist, s, 'icons', 'home.js'), 'utf8')
     assert.equal(deep, "export { Home, HomeIcon, Home as default } from '../index.js'\n")
     assert.ok(fs.existsSync(path.join(dist, s, 'deep.d.ts')) && fs.existsSync(path.join(dist, s, 'index.cjs')), s)
@@ -63,3 +65,17 @@ test('exports map: every entry points at an existing file; deep paths share one 
   assert.equal(pkg.sideEffects, false)
 })
 
+
+// What a bundler or an ESM CDN (esm.sh and jsDelivr's +esm build each entry with tree-shaking) ships for one deep
+// import: that icon and the shared runtime, never its whole style.
+test('one deep import bundles to one icon, not the whole style', { skip }, async () => {
+  let esbuild
+  try { esbuild = await import('esbuild') } catch { return }   // the repo root has it (dynamic's build)
+  for (const s of ['line', ...styles.filter(x => x !== 'line').sort((a, b) => fs.statSync(path.join(dist, b, 'index.js')).size - fs.statSync(path.join(dist, a, 'index.js')).size).slice(0, 1)]) {
+    const r = await esbuild.build({ entryPoints: [path.join(dist, s, 'icons', 'home.js')], bundle: true, write: false, format: 'esm', minify: true, packages: 'external', logLevel: 'silent' })
+    const out = r.outputFiles[0].text
+    const style = fs.statSync(path.join(dist, s, 'index.js')).size + (fs.existsSync(path.join(dist, s, 'nodes.js')) ? fs.statSync(path.join(dist, s, 'nodes.js')).size : 0)
+    assert.ok(out.length < 48 * 1024, `${s}/icons/home bundles to ${out.length} bytes (style module ${style} bytes)`)
+    assert.ok(!/AlarmClock|alarm-clock/.test(out), `${s}: other icons were bundled`)
+  }
+})

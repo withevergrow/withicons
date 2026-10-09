@@ -1,0 +1,74 @@
+{
+  "name": "lion-head",
+  "category": "lunar-new-year",
+  "description": "A lion dance head, for Lunar New Year celebrations.",
+  "aliases": [
+    "lion-dance",
+    "lion-mask",
+    "lion-dance-head",
+    "dance-lion",
+    "southern-lion",
+    "barongsai",
+    "wushi"
+  ],
+  "synonyms": [
+    "lion",
+    "mask",
+    "mua lan",
+    "mua lân",
+    "sai si",
+    "shishi",
+    "wu shi",
+    "lion dancer",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "festival",
+    "parade",
+    "performance",
+    "dance",
+    "good luck",
+    "blessing",
+    "celebration",
+    "grand opening",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "festival",
+    "mask",
+    "dance",
+    "animal"
+  ],
+  "paths": [
+    {
+      "d": "M3.25 13.5 A2.9 2.9 0 0 1 5 8.25 A2.9 2.9 0 0 1 9.25 5.25 L12 2.25 L14.75 5.25 A2.9 2.9 0 0 1 19 8.25 A2.9 2.9 0 0 1 20.75 13.5 C20.75 18.75 16.75 22 12 22 C7.25 22 3.25 18.75 3.25 13.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 11 A1.75 1.75 0 1 1 7 11 A1.75 1.75 0 1 1 10.5 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17 11 A1.75 1.75 0 1 1 13.5 11 A1.75 1.75 0 1 1 17 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7.25 15 H16.75 C16 17.75 14.25 19.25 12 19.25 C9.75 19.25 8 17.75 7.25 15 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 7.25 L12 5.5 L13.25 7.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.25 13.5 A2.9 2.9 0 0 1 5 8.25 A2.9 2.9 0 0 1 9.25 5.25 L12 2.25 L14.75 5.25 A2.9 2.9 0 0 1 19 8.25 A2.9 2.9 0 0 1 20.75 13.5 C20.75 18.75 16.75 22 12 22 C7.25 22 3.25 18.75 3.25 13.5 Z"
+  ],
+  "cutouts": [
+    "M10.5 11 A1.75 1.75 0 1 1 7 11 A1.75 1.75 0 1 1 10.5 11 Z",
+    "M17 11 A1.75 1.75 0 1 1 13.5 11 A1.75 1.75 0 1 1 17 11 Z",
+    "M7.25 15 H16.75 C16 17.75 14.25 19.25 12 19.25 C9.75 19.25 8 17.75 7.25 15 Z"
+  ]
+}

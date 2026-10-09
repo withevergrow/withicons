@@ -1,0 +1,34 @@
+{
+  "name": "rakhi",
+  "intent": "the rakhi sways on its thread, its jewel catching the light",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "beat"
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "spin-once"
+    }
+  ]
+}

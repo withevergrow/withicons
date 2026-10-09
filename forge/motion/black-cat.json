@@ -1,0 +1,65 @@
+{
+  "name": "black-cat",
+  "intent": "arches its back and puffs up with a spooky hiss",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        6,
+        13.5
+      ],
+      "amount": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "cat",
+      "effect": "morph"
+    },
+    {
+      "to": "black-cat@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "witch-hat",
+      "effect": "slide-up"
+    }
+  ]
+}

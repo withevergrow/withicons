@@ -1,0 +1,56 @@
+{
+  "name": "calendar-clock",
+  "intent": "the little clock ticks on the calendar page",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      17.5,
+      17.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "tick",
+      "origin": [
+        17.5,
+        17.5
+      ],
+      "steps": 12,
+      "duration": 6
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        3
+      ]
+    },
+    {
+      "preset": "draw",
+      "duration": 1.2
+    }
+  ],
+  "swap": [
+    {
+      "to": "calendar",
+      "effect": "fade"
+    },
+    {
+      "to": "clock",
+      "effect": "morph"
+    }
+  ]
+}

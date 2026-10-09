@@ -1,0 +1,43 @@
+{
+  "name": "bauble",
+  "intent": "the ornament swings gently from its hook",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      2.5
+    ],
+    "amount": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "christmas-tree",
+      "effect": "morph"
+    },
+    {
+      "to": "bauble@solid",
+      "effect": "scale"
+    }
+  ]
+}

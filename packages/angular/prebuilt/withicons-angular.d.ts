@@ -2,8 +2,11 @@ import * as i0 from "@angular/core";
 import { InjectionToken, OnChanges, OnInit, Provider } from "@angular/core";
 /** The 12 with icons styles. */
 type WithIconVariant = 'line' | 'solid' | 'duo' | 'gloss' | 'engrave' | 'blueprint' | 'sketch' | 'glass' | 'kawaii' | 'sticker' | 'pixel' | 'retro';
-/** Flat list of SVG child elements: [tag, attributes]. */
-type WithIconNode = ReadonlyArray<readonly [tag: string, attrs: Readonly<Record<string, string | number>>]>;
+/**
+ * List of SVG child elements: [tag, attributes]. Rich styles (gradients) start with one
+ * ['defs', {}, [[gradient tag, attributes, [['stop', attributes], ...]], ...]] element.
+ */
+type WithIconNode = ReadonlyArray<readonly [tag: string, attrs: Readonly<Record<string, string | number>>, children?: WithIconNode]>;
 /** How a style dresses the root <svg>. */
 interface WithIconStyle {
   readonly name: string;
@@ -20,6 +23,12 @@ interface WithIconData {
   readonly node: WithIconNode;
 }
 type Attrs = Record<string, string | number>;
+/** A gradient of a rich style: <linearGradient> or <radialGradient> with its <stop>s. */
+interface Grad {
+  readonly radial: boolean;
+  readonly attrs: Attrs;
+  readonly stops: ReadonlyArray<Attrs>;
+}
 /**
  * <with-icon> — renders any with icons icon as inline SVG.
  *
@@ -50,6 +59,9 @@ export declare class WithIconComponent implements OnChanges, OnInit {
   private readonly registry;
   protected rootAttrs: Attrs;
   protected paths: ReadonlyArray<Attrs>;
+  protected grads: ReadonlyArray<Grad>;
+  /** this copy's gradient-id suffix: two rich icons on one page never paint with each other's gradients */
+  private readonly uid;
   protected found: boolean;
   private ready;
   ngOnChanges(): void;

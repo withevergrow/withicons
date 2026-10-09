@@ -1,0 +1,41 @@
+{
+  "name": "hand",
+  "intent": "waves hello from the wrist",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      11,
+      21.5
+    ],
+    "amount": 1.4,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      11,
+      21.5
+    ],
+    "amount": 1.4,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "hand@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "handshake",
+      "effect": "morph"
+    }
+  ]
+}

@@ -1,11 +1,12 @@
 # @withicons/mcp
 
-An [MCP](https://modelcontextprotocol.io) server for **with icons** — 500 MIT icons, each drawn in 20 styles
-(line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush). Your AI assistant can search icons in plain English
+An [MCP](https://modelcontextprotocol.io) server for **with icons** — 734 MIT icons, each drawn in 34 styles
+(line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine). Your AI assistant can search icons in plain English
 ("throw away", "settigns", "money", "cute heart", "8-bit star") and get paste-ready SVG, React, Vue, Svelte, Angular,
 Solid, web-component, CSS-class or data-URI code, plus animation code for the optional `@withicons/motion` package
-(500 icons have a tuned animation; every icon can use any preset), every icon's 20-30 hand-picked colour
-palettes for the multi-colour styles, and **files**: SVG, PNG, PDF, PowerPoint, Word, Lottie, app assets and animated
+(734 icons have a tuned animation; every icon can use any preset), every icon's 20-30 hand-picked colour
+palettes for the multi-colour styles, a style recommender (`recommend_styles`: "Diwali sale banner", "avatar picker for
+a kids app", "AI landing page" -> the best styles with packages, snippets, presets and palettes), and **files**: SVG, PNG, PDF, PowerPoint, Word, Lottie, app assets and animated
 GIF / APNG / SVG / PowerPoint for slides and docs (`export_icon`).
 
 Self-contained: the search engine, the MCP SDK, the export formats and every icon are bundled — no network. PNG-based and
@@ -17,16 +18,17 @@ animated files use `@resvg/resvg-js`, an optional dependency installed with the 
 |---|---|---|
 | `search_icons` | `query`, `limit?` (10), `style?`, `category?`, `format?` (react) | ranked names, why each matched (`matched alias "bin"`, typo-tolerant), a ready snippet, a link |
 | `get_icon` | `name` (name **or alias**), `style?` (line), `format?` (svg), `size?` (24), `color?`, `flat?`, `palette?`, `colors?` | the code: `svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`; for multi-colour styles the icon's colour variables (role + default) and its palette ids; with `palette` / `colors`, the code recoloured (every colour, not just one) plus the CSS; a `motion` summary when the icon has a tuned animation |
+| `recommend_styles` | `for?` (what you are making, plain words), `use?` (app · slides · saas · ai · brand · kids · print · festive), `icon?`, `limit?` (6) | the best styles for the job, best first, each with its group, what it is good for, the React import, `<with-icon>` and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes (holiday styles) and the Duo presets (duo); festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. Nothing recognised: every use and group |
 | `list_palettes` | `name`, `style?`, `tag?`, `limit?` | the icon's 20-30 palettes (id, name, tags, ten role colours); with `style`, the exact `--with-*` variables and a CSS rule per palette |
-| `animate_icon` | `name`, `trigger?` (`loop` · `hover` · `once` · `inview` · `swap`), `preset?`, `to?`, `effect?`, `style?`, `format?` (html), `duration?` | paste-ready animation code (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), the icon's motion spec and install lines. `inview` and the `draw` preset come wired to the JS runtime (`motion(el, name, options)` in a mount hook / module script) |
+| `animate_icon` | `name`, `trigger?` (`loop` · `hover` · `once` · `inview` · `swap`), `preset?`, `to?`, `effect?`, `style?`, `format?` (html), `duration?` | paste-ready animation code (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), the icon's motion spec and install lines. `inview` and the `draw` preset come wired to the JS runtime (`motion(el, name, options)` in a mount hook / module script). In a 3D style (clay, glass, liquid, chrome, soft3d, luxe, skeuo, dock, plush) the motion plays in 3D: the code adds `wm-3d` (or `style` to `motion()`), and the result has `motion3d` and `moves` (the moves the icon offers in that style; soft3d 3-5: its own, then `pop-up` / `press`, then `hop`, `turn`, `gleam` …) |
 | `export_icon` | `name`, `style?`, `format?` (svg; one or a comma list), `size?`, `background?`, `matte?`, `palette?`, `colors?`, `color?`, `motion?` (loop · hover · once · swap · none · a preset), `to?`, `effect?`, `fps?`, `seconds?`, `loop?`, `all_styles?`, `out_dir?`, `inline?` (local), `cursor?` (remote) | files: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, the code formats, and animated `gif`, `apng`, `animated-svg`, `pptx-animated`. Saved to `out_dir` when given; small files also come back inline (PNG / GIF as image content, text as text, the rest as base64 resources). The remote server makes the vector, code and Lottie formats and answers PNG-based / animated ones with the exact `npx withicons export …` command; large remote exports come in pages (`next: { cursor, remaining }`: call again with `cursor`), and plain `svg-flat` files then come back as `urls[]` to jsDelivr `@withicons/static` |
-| `list_styles` | — | the 20 styles, what they look like, and the colour variables of palette styles |
-| `list_categories` | `category?` | categories with counts, or every icon in one category |
+| `list_styles` | — | the 34 styles with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) and what they are good for, what they look like, `minSize`, `onDark`, and the colour variables of palette styles; plus `groups` and `uses` (the "What are you making?" picks) |
+| `list_categories` | `category?` | categories with counts, or every icon in one category (festivals: `indian-festivals`, `christmas`, `lunar-new-year`, `valentines`, `halloween`; `avatars`; `ai` …) |
 | `resolve_icon` | `name` | `resolved` (+ via alias), `ambiguous` (+ candidates) or `unknown` (+ nearest) |
 
 ## Colours and palettes
 
-`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette` and `plush` paint several colours, and `duo` and `blueprint` have an accent colour. Every
+Every style except `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint` and `sketch` paints several colours (`list_styles` marks them `palette: true`), and `duo` (tint `--with-duo` + one accent detail `--with-duo-accent`) and `blueprint` have accent colours. Every
 colour is a CSS variable with a default (`var(--with-retro-1, #F4B53F)`); the outline follows `currentColor`. A palette gives a
 colour to each of ten roles, and the server maps the roles onto the variables that icon actually uses in that style:
 
@@ -42,6 +44,17 @@ colour to each of ten roles, and the server maps the roles onto the variables th
 - `svg` keeps the variables and sets them on the root `<svg style="…">` (add `flat: true` to bake them in, for `<img>` and design tools);
   `data-uri` is always baked; `web-component` gets an inline `style`; React, Vue, Svelte, Solid and Angular get a class plus the CSS rule
   (`.icon-heart-neon-love { color: …; --with-sticker-bubblegum: …; }`). CSS-class icons bake their palette into a data URI, so only the ink applies.
+
+## Choosing a style, festivals and avatars
+
+`recommend_styles({ for: 'Diwali sale banner', icon: 'diya' })` ranks `rangoli` and `utsav` first, with
+`<with-icon name="diya" variant="rangoli">`, `import { Diya as DiyaRangoli } from '@withicons/react/rangoli'`, the raw-file
+packages (`@withicons/holiday`, `@withicons/static-plus`), the style's festival palettes (`diwali`, `holi`, `navratri` …:
+CSS variable sets) and `list_categories({ category: 'indian-festivals' })` for the festival icons. Avatars (category
+`avatars`: people, animals, friendly monsters): people come with true-to-life palettes for many skin tones and hair colours
+(`list_palettes({ name: 'avatar-woman', tag: 'true-to-life' })`); offer several. Every style also ships as one zip:
+`https://withicons.com/downloads/with-icons-<style>.zip` (every SVG plus an offline searchable viewer) and
+`with-icons-all.zip`.
 
 ## Animated icons for slides and docs
 
@@ -178,6 +191,7 @@ Routes:
 | `GET /api/icon/<name>?style=&format=&size=&color=&palette=` | same as `get_icon` (JSON). Custom colours: one parameter per role (`&c1=22c55e&ink=111827`, `#` optional). `&raw=1` returns the bare code; `/api/icon/<name>.svg` returns `image/svg+xml` with the colours baked in (`&flat=0` keeps the CSS variables) |
 | `GET /api/palettes/<name>?style=&tag=&limit=` | same as `list_palettes` |
 | `GET /api/motion/<name>?trigger=&preset=&to=&effect=&style=&format=&duration=` | same as `animate_icon` (JSON; `&raw=1` for the bare code). `GET /api/motion` lists triggers, presets and effects |
+| `GET /api/recommend?for=&use=&icon=&limit=` | same as `recommend_styles` |
 | `GET /api/resolve/<name>` · `GET /api/styles` · `GET /api/categories[/<category>]` | catalogue |
 | `GET /api` | status + version + endpoints |
 
@@ -188,12 +202,14 @@ The Lambda bundle behind it is not part of this npm package; it is built from th
 ## Programmatic use
 
 ```js
-import { searchIcons, getIcon, resolveIcon, snippet, animateIcon, listPalettes } from '@withicons/mcp/lib'
+import { searchIcons, getIcon, resolveIcon, snippet, animateIcon, listPalettes, recommendStyles, stylePalette } from '@withicons/mcp/lib'
 searchIcons({ query: 'trash can', limit: 3 })
 getIcon({ name: 'home', style: 'solid', format: 'vue' })
 getIcon({ name: 'heart', style: 'sticker', format: 'svg', palette: 'neon-love', flat: true })
 listPalettes({ name: 'pizza', style: 'retro' })
 animateIcon({ name: 'bell', trigger: 'hover', format: 'react' })
+recommendStyles({ for: 'Christmas email' })        // -> christmas first, its palettes, notes
+stylePalette('christmas', 'nordic').css           // '--with-christmas-ink: #2E2620; --with-christmas-c1: #B5523B; …'
 ```
 
 TypeScript types ship in `dist/lib.d.ts`. Errors are `IconError`s with a `code` (`unknown_icon` + `nearest`, `unknown_palette` + `palettes`, …).

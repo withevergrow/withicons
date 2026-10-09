@@ -1,6 +1,6 @@
 # @withicons/classes
 
-Font Awesome-style icon classes for 500 icons x 20 styles: plain `<i>`/`<span>` tags, no build step,
+Font Awesome-style icon classes for 734 icons x 34 styles: plain `<i>`/`<span>` tags, no build step,
 no framework, zero dependencies. One line in your page:
 
 ```html
@@ -14,16 +14,26 @@ Every file sits at the top of `dist/`, so the URLs are short: `dist/with-loader.
 `dist/line/home.css` (one icon). Prefer a custom element or components? `<with-icon>` is
 [`@withicons/web`](https://www.npmjs.com/package/@withicons/web); React, Vue, Svelte, Angular and Solid have their own packages.
 
+The newest styles' CSS files live in companion packages (jsDelivr serves at most 150 MB per package): `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal` in [`@withicons/classes-plus`](https://www.npmjs.com/package/@withicons/classes-plus); `soft3d` in [`@withicons/soft3d`](https://www.npmjs.com/package/@withicons/soft3d) (`dist/classes/`); `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine` in [`@withicons/holiday`](https://www.npmjs.com/package/@withicons/holiday) (`dist/classes/`).
+`with-loader.js` and `with-icons.js` load them by themselves, from the same CDN or `node_modules` folder, so
+`<i class="with with-home with-clay">` just works. A self-hosted copy: put their files next to this package's, or
+point the loader at them with `data-with-css-<package>="…/"`. With a bundler, install the companion
+(`npm i @withicons/classes-plus`) and import its files, e.g. `@withicons/classes-plus/with-clay.css`.
+
 With a bundler or a self-hosted copy:
 
 ```bash
 npm i @withicons/classes
 ```
 ```js
-import '@withicons/classes/with-line.css'    // every line icon (or with-solid.css, with-duo.css, ...)
-import '@withicons/classes/with-base.css'    // or: the base rules, then only the icons you use
+import '@withicons/classes/with-base.css'    // the base rules, then only the icons you use
 import '@withicons/classes/line/home.css'
+import '@withicons/classes/solid/heart.css'
+// or a whole style: import '@withicons/classes/with-line.css' (every line icon; with-solid.css, with-duo.css, ...)
 ```
+
+A small subset as one stylesheet without a bundler: concatenate the base rules and the icons' files,
+`cd node_modules/@withicons/classes/dist && cat with-base.css line/home.css solid/heart.css > icons.css`.
 
 Plain `<i>`/`<span>` elements with classes. Three interchangeable ways to render them, lightest first:
 
@@ -37,9 +47,9 @@ Plain `<i>`/`<span>` elements with classes. Three interchangeable ways to render
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-`with-loader.js` (15 KB, 6 KB gzip) adds the base rules, finds every `with with-<name>` on the
-page and links just that icon's rule: `dist/<style>/<name>.css` (a `line` icon is typically 428 bytes,
-278 gzip; a `skeuo` icon about 8.5 KB, 1.7 KB gzip). Any style mix costs only the icons shown, and icons
+`with-loader.js` (19 KB, 8 KB gzip) adds the base rules, finds every `with with-<name>` on the
+page and links just that icon's rule: `dist/<style>/<name>.css` (a `line` icon is typically 461 bytes,
+289 gzip; a `liquid` icon about 15.6 KB, 3.1 KB gzip). Any style mix costs only the icons shown, and icons
 added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
 canonical class added with a console hint. Without JavaScript, link the same files yourself:
 
@@ -58,9 +68,9 @@ canonical class added with a console hint. Without JavaScript, link the same fil
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`), each holding all 500 icons
-(see the sizes below: the default `with-line.css` is 26 KB gzipped, the richest styles several hundred KB).
-`with-all.css` imports every style file: 31.2 MB (6.3 MB gzipped) in 20 requests,
+One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`, `with-clay.css`, `with-bento.css`, `with-suite.css`, `with-dock.css`, `with-liquid.css`, `with-chrome.css`, `with-soft3d.css`, `with-brutal.css`, `with-utsav.css`, `with-rangoli.css`, `with-halloween.css`, `with-christmas.css`, `with-lunar.css`, `with-valentine.css`), each holding all 734 icons
+(see the sizes below: the default `with-line.css` is 49 KB gzipped, the richest styles several hundred KB).
+`with-all.css` imports every style file: 107.9 MB (20.1 MB gzipped) in 34 requests,
 so keep it for prototypes and offline tools, never for a production page:
 
 ```html
@@ -75,7 +85,7 @@ bare `with with-<name>` uses that style). Each icon is an SVG data-URI used as a
 element's `::after`), so it takes the text colour and font size (`1em` square, `vertical-align: -.125em`). In mono styles the duo tint
 and blueprint construction lines render as translucent `currentColor`.
 
-**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`) keep their colours in CSS-only mode too: the palette is the element's
+**Palette styles** (`glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`, `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d`, `brutal`, `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`) keep their colours in CSS-only mode too: the palette is the element's
 `background-image` (default colours baked in) and the ink is the `currentColor` mask on top, with the original stacking order
 preserved, so `color` still recolours the outline. The `--with-<style>-<role>` variables cannot reach into a data URI, so to
 re-theme a palette use the JS runtime below (or a component), where every variable works.
@@ -84,31 +94,45 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
-| `<style>/<name>.css` (one icon, typical) | 428 B (`line`) to 8.5 KB (`skeuo`) | 278 B to 1.7 KB |
-| `with-line.css` | 216 KB | 26 KB |
-| `with-solid.css` | 662 KB | 187 KB |
-| `with-duo.css` | 327 KB | 33 KB |
-| `with-gloss.css` | 774 KB | 180 KB |
-| `with-engrave.css` | 1.2 MB | 294 KB |
-| `with-blueprint.css` | 653 KB | 97 KB |
-| `with-sketch.css` | 655 KB | 145 KB |
-| `with-glass.css` | 2.7 MB | 404 KB |
-| `with-kawaii.css` | 891 KB | 128 KB |
-| `with-sticker.css` | 2.1 MB | 228 KB |
-| `with-pixel.css` | 557 KB | 40 KB |
-| `with-retro.css` | 1.1 MB | 256 KB |
-| `with-luxe.css` | 2.8 MB | 828 KB |
-| `with-bauhaus.css` | 632 KB | 112 KB |
-| `with-skeuo.css` | 4.4 MB | 581 KB |
-| `with-anime.css` | 1.5 MB | 356 KB |
-| `with-gothic.css` | 3.6 MB | 982 KB |
-| `with-pastel.css` | 1.6 MB | 329 KB |
-| `with-coquette.css` | 2.6 MB | 682 KB |
-| `with-plush.css` | 2.4 MB | 571 KB |
-| `with-all.css` (imports every style file) | 31.2 MB | 6.3 MB |
+| `<style>/<name>.css` (one icon, typical) | 461 B (`line`) to 15.6 KB (`liquid`) | 289 B to 3.1 KB |
+| `with-line.css` | 360 KB | 49 KB |
+| `with-solid.css` | 1.1 MB | 320 KB |
+| `with-duo.css` | 587 KB | 61 KB |
+| `with-gloss.css` | 1.2 MB | 291 KB |
+| `with-engrave.css` | 1.8 MB | 456 KB |
+| `with-blueprint.css` | 1019 KB | 159 KB |
+| `with-sketch.css` | 1.0 MB | 234 KB |
+| `with-glass.css` | 5.4 MB | 802 KB |
+| `with-kawaii.css` | 1.4 MB | 222 KB |
+| `with-sticker.css` | 3.4 MB | 364 KB |
+| `with-pixel.css` | 874 KB | 63 KB |
+| `with-retro.css` | 1.8 MB | 431 KB |
+| `with-luxe.css` | 4.7 MB | 1.3 MB |
+| `with-bauhaus.css` | 1.2 MB | 232 KB |
+| `with-skeuo.css` | 8.0 MB | 998 KB |
+| `with-anime.css` | 2.4 MB | 579 KB |
+| `with-gothic.css` | 5.6 MB | 1.6 MB |
+| `with-pastel.css` | 2.7 MB | 603 KB |
+| `with-coquette.css` | 4.5 MB | 1.2 MB |
+| `with-plush.css` | 3.8 MB | 957 KB |
+| `with-clay.css` | 5.4 MB | 977 KB |
+| `with-bento.css` | 2.9 MB | 218 KB |
+| `with-suite.css` | 2.1 MB | 340 KB |
+| `with-dock.css` | 3.9 MB | 563 KB |
+| `with-liquid.css` | 10.8 MB | 1.5 MB |
+| `with-chrome.css` | 5.0 MB | 1.3 MB |
+| `with-soft3d.css` | 6.4 MB | 1.1 MB |
+| `with-brutal.css` | 2.4 MB | 409 KB |
+| `with-utsav.css` | 2.5 MB | 539 KB |
+| `with-rangoli.css` | 1.9 MB | 449 KB |
+| `with-halloween.css` | 3.7 MB | 523 KB |
+| `with-christmas.css` | 3.5 MB | 578 KB |
+| `with-lunar.css` | 1.7 MB | 377 KB |
+| `with-valentine.css` | 3.0 MB | 520 KB |
+| `with-all.css` (imports every style file) | 107.9 MB | 20.1 MB |
 | `with-base.css` | 2 KB | 1 KB |
-| `with-icons.js` | 23 KB | 8 KB |
-| `with-loader.js` | 15 KB | 6 KB |
+| `with-icons.js` | 28 KB | 10 KB |
+| `with-loader.js` | 19 KB | 8 KB |
 
 ### 3. JS runtime (inline SVG)
 
@@ -178,7 +202,7 @@ and they print even with the browser's "Background graphics" option off.
 | path | what |
 |---|---|
 | `dist/with-loader.js` | CSS on demand: links `dist/<style>/<name>.css` for each icon on the page |
-| `dist/with-<style>.css` | one style, every icon (`line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`) |
+| `dist/with-<style>.css` | one style, every icon (`line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`, `coquette`, `plush`, `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d`, `brutal`, `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`) |
 | `dist/<style>/<name>.css` | one icon in one style (needs `with-base.css` or the loader) |
 | `dist/with-base.css` | the shared base rules and modifiers |
 | `dist/with-all.css` | `@import` of every style file (prototypes only) |

@@ -1,0 +1,41 @@
+{
+  "name": "puja-thali",
+  "intent": "the plate circles slowly as in an aarti, its flame flickering",
+  "loop": {
+    "preset": "orbit",
+    "duration": 3.2,
+    "amount": 0.6
+  },
+  "hover": {
+    "preset": "glow"
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        11
+      ],
+      "amount": 1.2,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "diya",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "kite",
+  "category": "indian-festivals",
+  "description": "A diamond kite with a tail, for Makar Sankranti and kite festivals.",
+  "aliases": [
+    "patang",
+    "patangi",
+    "guddi",
+    "kite-festival",
+    "uttarayan",
+    "fighter-kite",
+    "paper-kite",
+    "tukkal",
+    "kanna",
+    "pipa"
+  ],
+  "synonyms": [
+    "makar sankranti",
+    "sankranti",
+    "uttarayan festival",
+    "lohri",
+    "pongal",
+    "basant panchami",
+    "independence day",
+    "kite flying",
+    "patangbazi",
+    "manja",
+    "string",
+    "sky",
+    "wind",
+    "breeze",
+    "fly",
+    "play",
+    "toy",
+    "summer",
+    "festival",
+    "gujarat",
+    "ahmedabad",
+    "jaipur",
+    "indian festival",
+    "india"
+  ],
+  "tags": [
+    "sankranti",
+    "kite",
+    "play",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L19.5 10 L12 17.5 L4.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 V17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 10 C8 6.75 16 6.75 19.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.5 L9.5 21.5 H14.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L19.5 10 L12 17.5 L4.5 10 Z",
+    "M12 17.5 L9.5 21.5 H14.5 Z"
+  ],
+  "cutouts": [
+    "M12 2.5 V17.5",
+    "M4.5 10 C8 6.75 16 6.75 19.5 10"
+  ]
+}

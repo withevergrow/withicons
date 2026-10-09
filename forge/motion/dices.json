@@ -1,0 +1,24 @@
+{
+  "name": "dices",
+  "intent": "tumble like a fresh roll of the dice",
+  "loop": {
+    "preset": "rock",
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "shake"
+    },
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "bounce"
+    }
+  ]
+}

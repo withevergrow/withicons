@@ -1,0 +1,67 @@
+{
+  "name": "variable",
+  "category": "development",
+  "description": "An x between parentheses, for variables, parameters and placeholders.",
+  "aliases": [
+    "var",
+    "parameter",
+    "placeholder",
+    "param",
+    "math-variable",
+    "x-variable",
+    "function-variable",
+    "token",
+    "template-variable",
+    "brackets-x"
+  ],
+  "tags": [
+    "variable",
+    "math",
+    "code",
+    "parameter",
+    "placeholder"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 3.5 C4.5 7 4.5 17 7.5 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 3.5 C19.5 7 19.5 17 16.5 20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9 L14.5 15",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 9 L9.5 15",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "variables",
+    "parameters",
+    "arguments",
+    "argument",
+    "input",
+    "dynamic value",
+    "merge tag",
+    "template",
+    "prompt variable",
+    "insert variable",
+    "formula",
+    "expression",
+    "function",
+    "f of x",
+    "unknown",
+    "algebra",
+    "x",
+    "parentheses",
+    "env var",
+    "environment variable",
+    "field"
+  ]
+}

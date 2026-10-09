@@ -1,0 +1,66 @@
+{
+  "name": "mic-vocal",
+  "category": "media",
+  "description": "A handheld singing microphone, for vocals, karaoke and podcasts.",
+  "aliases": [
+    "karaoke",
+    "singing",
+    "vocals",
+    "handheld-mic",
+    "sing",
+    "singer",
+    "stage-mic"
+  ],
+  "synonyms": [
+    "karaoke night",
+    "vocalist",
+    "voice",
+    "concert",
+    "live show",
+    "performance",
+    "stage",
+    "open mic",
+    "stand up",
+    "comedy",
+    "podcast",
+    "interview",
+    "announcer",
+    "host",
+    "mc",
+    "speech",
+    "talk",
+    "music",
+    "pop star",
+    "record vocals",
+    "wireless mic"
+  ],
+  "tags": [
+    "audio",
+    "music",
+    "singing",
+    "microphone",
+    "performance"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 8 A4.5 4.5 0 1 1 11.5 8 A4.5 4.5 0 1 1 20.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.82 4.82 L19.18 11.18",
+      "plate": "A"
+    },
+    {
+      "d": "M14.31 12.17 L6.63 19.14 A1.25 1.25 0 0 1 4.86 17.37 L11.83 9.69",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M20.5 8 A4.5 4.5 0 1 1 11.5 8 A4.5 4.5 0 1 1 20.5 8 Z",
+    "M14.31 12.17 L6.63 19.14 A1.25 1.25 0 0 1 4.86 17.37 L11.83 9.69 Z"
+  ],
+  "cutouts": [
+    "M12.82 4.82 L19.18 11.18",
+    "M10.81 8.95 L15.05 13.19"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "avatar-koala",
+  "intent": "sways sleepily like a koala hugging a tree",
+  "loop": { "preset": "sway", "origin": [12,20.75], "amount": 0.6, "duration": 3.6 },
+  "hover": { "preset": "wiggle", "origin": [12,20.75], "amount": 0.6 },
+  "parts": { "A": { "preset": "blink", "origin": [12,12.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "breathe", "origin": [12,20.75] },{ "preset": "nod", "origin": [12,20.75] }],
+  "swap": [{ "to": "avatar-bear", "effect": "morph" },{ "to": "avatar-panda", "effect": "fade" },{ "to": "avatar-koala@solid", "effect": "scale" }]
+}

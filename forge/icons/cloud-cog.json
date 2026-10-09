@@ -1,0 +1,64 @@
+{
+  "name": "cloud-cog",
+  "category": "development",
+  "description": "A cloud with a gear, for cloud settings, DevOps and hosted services.",
+  "aliases": [
+    "cloud-settings",
+    "cloud-config",
+    "cloud-gear",
+    "cloud-admin",
+    "cloud-ops",
+    "devops",
+    "cloud-configuration",
+    "managed-service"
+  ],
+  "tags": [
+    "cloud",
+    "settings",
+    "devops",
+    "infrastructure",
+    "hosting"
+  ],
+  "paths": [
+    {
+      "d": "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15",
+      "plate": "K"
+    },
+    {
+      "d": "M13.3 19.98 L12.9 21.51 L11.1 21.51 L10.7 19.98 A3.25 3.25 0 0 1 10.07 19.62 L8.54 20.03 L7.64 18.48 L8.77 17.36 A3.25 3.25 0 0 1 8.77 16.64 L7.64 15.52 L8.54 13.97 L10.07 14.38 A3.25 3.25 0 0 1 10.7 14.02 L11.1 12.49 L12.9 12.49 L13.3 14.02 A3.25 3.25 0 0 1 13.93 14.38 L15.46 13.97 L16.36 15.52 L15.23 16.64 A3.25 3.25 0 0 1 15.23 17.36 L16.36 18.48 L15.46 20.03 L13.93 19.62 A3.25 3.25 0 0 1 13.3 19.98 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M12 16.75 V17.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15 L17.76 15 A6.1 6.1 0 0 0 6.24 15 Z",
+    "M13.3 19.98 L12.9 21.51 L11.1 21.51 L10.7 19.98 A3.25 3.25 0 0 1 10.07 19.62 L8.54 20.03 L7.64 18.48 L8.77 17.36 A3.25 3.25 0 0 1 8.77 16.64 L7.64 15.52 L8.54 13.97 L10.07 14.38 A3.25 3.25 0 0 1 10.7 14.02 L11.1 12.49 L12.9 12.49 L13.3 14.02 A3.25 3.25 0 0 1 13.93 14.38 L15.46 13.97 L16.36 15.52 L15.23 16.64 A3.25 3.25 0 0 1 15.23 17.36 L16.36 18.48 L15.46 20.03 L13.93 19.62 A3.25 3.25 0 0 1 13.3 19.98 Z"
+  ],
+  "cutouts": [
+    "M13.75 17 A1.75 1.75 0 1 1 10.25 17 A1.75 1.75 0 1 1 13.75 17 Z"
+  ],
+  "synonyms": [
+    "cloud management",
+    "configure cloud",
+    "cloud computing",
+    "saas",
+    "paas",
+    "iaas",
+    "aws",
+    "azure",
+    "gcp",
+    "hosted service",
+    "cloud hosting",
+    "serverless",
+    "deployment",
+    "infrastructure",
+    "platform",
+    "ops",
+    "gear",
+    "cog",
+    "cloud service settings"
+  ]
+}

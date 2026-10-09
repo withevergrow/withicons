@@ -1,0 +1,39 @@
+{
+  "name": "kite",
+  "intent": "the kite rocks and climbs on the wind",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      10
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      17.5
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "sway",
+      "origin": [
+        12,
+        17.5
+      ],
+      "amount": 1.2,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "rise"
+    }
+  ]
+}

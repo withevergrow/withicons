@@ -1,0 +1,75 @@
+{
+  "name": "sleigh",
+  "category": "christmas",
+  "description": "A sleigh with a curled front and runners, for Santa and winter holidays.",
+  "aliases": [
+    "sled",
+    "santa-sleigh",
+    "sledge",
+    "toboggan",
+    "sleigh-ride",
+    "christmas-sleigh"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "santa",
+    "santa claus",
+    "winter",
+    "snow",
+    "delivery",
+    "gift delivery",
+    "runners",
+    "ride",
+    "reindeer",
+    "sledding",
+    "free shipping",
+    "christmas delivery",
+    "slay",
+    "sleight"
+  ],
+  "tags": [
+    "christmas",
+    "santa",
+    "winter",
+    "transport",
+    "delivery"
+  ],
+  "paths": [
+    {
+      "d": "M4 15 V7.5 A2 2 0 0 1 6 5.5 H6.5 A2 2 0 0 1 8.5 7.5 V10.5 H14 C16 10.5 17 8 19.5 8 A1.75 1.75 0 0 1 19.5 11.5 C17.5 11.5 18 16.5 14.5 16.5 H5.5 A1.5 1.5 0 0 1 4 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 20 H18 C20 20 21.5 19 21.5 17.25",
+      "plate": "A"
+    },
+    {
+      "d": "M7 16.5 V20",
+      "plate": "A"
+    },
+    {
+      "d": "M14 16.5 V20",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 13.5 H14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 15 V7.5 A2 2 0 0 1 6 5.5 H6.5 A2 2 0 0 1 8.5 7.5 V10.5 H14 C16 10.5 17 8 19.5 8 A1.75 1.75 0 0 1 19.5 11.5 C17.5 11.5 18 16.5 14.5 16.5 H5.5 A1.5 1.5 0 0 1 4 15 Z"
+  ],
+  "cutouts": [
+    "M8.5 13.5 H14.5",
+    "M6.25 8 V10"
+  ]
+}

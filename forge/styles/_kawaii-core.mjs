@@ -4,8 +4,9 @@ import { setOf, unionSets, differenceSets, intersectSets } from '../kernel/bool.
 import { parseSegs, fillet, snapEnds, writeSubs, nums } from './_kawaii-path.mjs'
 import { N, NN, H, gx, gi, segsOf, distField, maskOf, sample, contours } from './_kawaii-field.mjs'
 import { placeFace, drawFace, cheeksD, ellipseD, heartD, sparkleD, discD, faceMetrics } from './_kawaii-face.mjs'
-import { PALETTE, BLUSH, BLUSH_OPACITY, SHINE, ACCENT, SPARKLE, colorFor, NO_FACE, TUNE } from './_kawaii-tune.mjs'
+import { PALETTE, BLUSH, BLUSH_OPACITY, SHINE, ACCENT, SPARKLE, colorFor, NO_FACE, TUNE, avatarTune } from './_kawaii-tune.mjs'
 import { textInfo } from './_live-text.mjs'
+import { isPerson, tones, adapt, fillParts } from './_people.mjs'
 
 export const INK = 2.2          // outline weight
 const R_INK = 1.75              // fillet radius of sharp corners (centreline)
@@ -51,9 +52,13 @@ export let lastDebug = null
 const LIVE_FACE = new Set(['app-badge', 'bell-count', 'chat-count', 'battery-vertical', 'clock-time', 'stopwatch'])
 export function render(icon) {
   const name = String(icon.name || '')
-  const tune = TUNE[name] || {}
+  const tune = TUNE[name] || avatarTune(icon) || {}
   const h = hash(name)
   const out = []
+  // People avatars (forge/styles/_people.mjs): pastel skin in the c1 role, hair / headwear c2, clothing c4, headphone
+  // cups accent, each skeleton fill painted in its own part colour (role-named variables, so a per-icon palette or the
+  // skin-tone picker recolours the skin). Skin sits nearly opaque so it stays skin on dark; the face is a dark ink.
+  const who = isPerson(icon) ? adapt(tones(icon), 'pastel') : null
 
   // ---- ink: every centreline, chubby-filleted -------------------------------
   const inkSubs = []
@@ -81,7 +86,7 @@ export function render(icon) {
   const dInk = distField(segsOf(inkLines), BAND)
   const dS = sLines.length ? distField(segsOf(sLines), 2) : null
   const mainSets = [], sSets = [], dropped = []
-  for (const f of icon.fills || []) {
+  for (const [fi, f] of (icon.fills || []).entries()) {
     let subs = []
     try { subs = parseSegs(f.d || '') } catch { subs = [] }
     subs = subs.filter(s => s.closed || s.segs.length > 1)
@@ -96,6 +101,7 @@ export function render(icon) {
     if (tune.fills === false || (tune.fills !== true && all && near / all < 0.3)) { dropped.push(f.d); continue }
     const set = setOf(rings)
     if (!set.length) continue
+    set.fi = fi
     let onS = 0, tot = 0
     if (dS) for (const r of rings) for (const p of r) { tot++; if (sample(dS, p[0], p[1]) < 0.45) onS++ }
     ;(tot && onS / tot > 0.5 ? sSets : mainSets).push(set)
@@ -106,7 +112,7 @@ export function render(icon) {
 
   // cutouts with a visible area become a second candy colour
   let detail = []
-  if (main.length) {
+  if (main.length && !who) {
     const cuts = []
     const hideCuts = new Set(tune.hideCuts || [])
     for (const [ci0, c] of (icon.cutouts || []).entries()) {
@@ -140,8 +146,28 @@ export function render(icon) {
     const d = ringsD(set)
     if (d) out.push(['path', { d, fill: fillVar(i), 'fill-opacity': opOf(i, cls), stroke: 'none', 'fill-rule': 'evenodd', ...(cls ? { class: cls } : {}) }])
   }
-  paint(main, ci)
-  paint(detail, di)
+  if (who) {
+    const parts = fillParts(icon), body = mainSets.filter(x => x.fi !== undefined)
+    const PART = {
+      skin: [`var(--with-kawaii-c1, ${who.c1})`, 0.94], hair: [`var(--with-kawaii-c2, ${who.c2})`, 0.95],
+      wear: [`var(--with-kawaii-c2, ${who.c2})`, 0.85], cloth: [`var(--with-kawaii-c4, ${who.c4})`, 0.82],
+      gear: [v(ACCENT, '#8E7CF0'), 0.85],
+    }
+    // each fill less the fills painted after it (hair over the forehead, clothes over the neck): no double-tinted overlaps
+    body.forEach((set, k) => {
+      const later = body.slice(k + 1)
+      const vis = later.length ? differenceSets(set, unionSets(later)) : set
+      const d = ringsD(vis), [fill, op] = PART[parts[set.fi]] || PART.skin
+      if (d) out.push(['path', { d, fill, 'fill-opacity': op, stroke: 'none', 'fill-rule': 'evenodd' }])
+    })
+    if (tune.glass) {
+      const d = (tune.glass.idx || []).map(i => icon.paths[i]).filter(p => p && p.subs && p.subs[0] && p.subs[0].closed).map(p => p.d).join('')
+      if (d) out.push(['path', { d, fill: v(SHINE), 'fill-opacity': 0.62, stroke: 'none' }])
+    }
+  } else {
+    paint(main, ci)
+    paint(detail, di)
+  }
   paint(sBody, si, split && inkPlates.includes('S') ? 'wm-s' : null)
 
   // ---- clearance field inside the main body ---------------------------------
@@ -226,9 +252,21 @@ export function render(icon) {
     for (const [w, ss] of [...byW].sort((a, b) => b[0] - a[0])) { const d = writeSubs(ss); if (d) out.push(['path', { d, 'stroke-width': w }]) }
   }
 
+  const faceInk = who ? 'var(--with-kawaii-face, #34231E)' : 'var(--with-kawaii-face, currentColor)'
+  if (who && tune.glass) {
+    // glasses: fine frames round the glazed lenses, dot eyes behind them, a small smile and blush below
+    const g = tune.glass, fd = (g.idx || []).map(i => icon.paths[i] && icon.paths[i].d).filter(Boolean).join('')
+    if (fd) out.push(['path', { d: fd, 'stroke-width': 1.35 }])
+    const r = 0.62, mx = g.mouth[0], my = g.mouth[1]
+    out.push(['path', { d: g.eyes.map(([x, y]) => discD(x, y + 0.1, r)).join(''), fill: faceInk, stroke: 'none' }])
+    out.push(['path', { d: g.eyes.map(([x, y]) => discD(x - 0.2, y - 0.12, 0.22)).join(''), fill: v(SHINE), stroke: 'none', class: 'wm-shine' }])
+    out.push(['path', { d: `M${nums([mx - 0.75, my - 0.2])}Q${nums([mx, my + 0.7, mx + 0.75, my - 0.2])}`, stroke: faceInk, 'stroke-width': 0.6 }])
+    const cy = g.lensBottom + 1.05
+    out.push(['path', { d: g.eyes.map(([x]) => ellipseD(x + (x < 12 ? -0.9 : 0.9), cy, 0.95, 0.55)).join(''), fill: v(BLUSH), 'fill-opacity': BLUSH_OPACITY, stroke: 'none' }])
+  }
   if (faceInfo) {
     const f = drawFace(faceInfo, expr)
-    const ink = 'var(--with-kawaii-face, currentColor)'
+    const ink = faceInk
     if (f.fill) out.push(['path', { d: f.fill, fill: ink, stroke: 'none' }])
     if (f.stroke) out.push(['path', { d: f.stroke, stroke: ink, 'stroke-width': Math.round(f.lw * 100) / 100 }])
     if (f.shine) out.push(['path', { d: f.shine, fill: v(SHINE), stroke: 'none', class: 'wm-shine' }])

@@ -1,0 +1,67 @@
+{
+  "name": "square-terminal",
+  "category": "development",
+  "description": "A terminal window tile with a prompt caret, for console, CLI and prompt input.",
+  "aliases": [
+    "terminal-square",
+    "console-square",
+    "shell-square",
+    "cli-box",
+    "prompt-box",
+    "terminal-app",
+    "command-prompt-box",
+    "terminal-box",
+    "console-app"
+  ],
+  "tags": [
+    "terminal",
+    "console",
+    "shell",
+    "cli",
+    "developer",
+    "prompt"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 8.5 L11 12 L7.5 15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13 15.5 H16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M7.5 8.5 L11 12 L7.5 15.5",
+    "M13 15.5 H16.5"
+  ],
+  "synonyms": [
+    "terminal",
+    "console",
+    "shell",
+    "cli",
+    "command line",
+    "prompt",
+    "bash",
+    "zsh",
+    "powershell",
+    "run command",
+    "script",
+    "developer",
+    "dev tools",
+    "coding",
+    "agent terminal",
+    "code agent",
+    "ssh",
+    "linux",
+    "execute",
+    "app icon"
+  ]
+}

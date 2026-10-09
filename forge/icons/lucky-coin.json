@@ -1,0 +1,62 @@
+{
+  "name": "lucky-coin",
+  "category": "lunar-new-year",
+  "description": "A round coin with a square hole, for fortune and luck.",
+  "aliases": [
+    "chinese-coin",
+    "cash-coin",
+    "square-hole-coin",
+    "fortune-coin",
+    "feng-shui-coin",
+    "ancient-coin",
+    "copper-coin"
+  ],
+  "synonyms": [
+    "coin",
+    "money",
+    "cash",
+    "tong qian",
+    "mon",
+    "luck",
+    "lucky",
+    "fortune",
+    "wealth",
+    "prosperity",
+    "old coin",
+    "antique",
+    "charm",
+    "amulet",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "feng shui",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "money",
+    "luck",
+    "coin"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M18.25 12 A6.25 6.25 0 1 1 5.75 12 A6.25 6.25 0 1 1 18.25 12",
+      "plate": "A"
+    },
+    {
+      "d": "M10 10 H14 V14 H10 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 10 H14 V14 H10 Z",
+    "M18.25 12 A6.25 6.25 0 1 1 5.75 12 A6.25 6.25 0 1 1 18.25 12"
+  ]
+}

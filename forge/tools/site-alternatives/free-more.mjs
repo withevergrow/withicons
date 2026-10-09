@@ -1,9 +1,12 @@
 // "Free … icons" landers for the playful styles (glass, kawaii, sticker, pixel, retro), the studio styles (luxe as
-// "3D icons", bauhaus, skeuo), the storybook styles (anime, gothic, pastel, coquette, plush "for kids") and for animated icons.
+// "3D icons", bauhaus, skeuo), the storybook styles (anime, gothic, pastel, coquette, plush "for kids"), the rich AI styles
+// (clay, plus "AI icons" on clay), Product styles (duo + bento/soft3d/dock as "SaaS", bento, suite "enterprise", dock "app icons"),
+// Trend styles (liquid glass, chrome, soft3d "soft 3D", brutal "neo-brutalism"), the holiday styles (utsav "Diwali",
+// rangoli "Holi", halloween, christmas, lunar "Lunar New Year", valentine "Valentine's Day") and for animated icons.
 // A style lander only exists once its renderer does (hasStyle); curated icon lists keep only icons that exist,
 // so names from the 200-icon expansion appear automatically as they land.
 import { I, esc, cvar, code, STYLES, iconLink } from './render.mjs'
-import { hasStyle, MOTION, PRESETS, EFFECTS, ICON_NAMES, styleTitle, stylesIn, listTitles, N_STYLES, word } from '../site-pages/lib.mjs'
+import { hasStyle, MOTION, PRESETS, EFFECTS, ICON_NAMES, META, styleTitle, stylesIn, listTitles, N_STYLES, word } from '../site-pages/lib.mjs'
 import { wm, demoFor } from '../site-pages/motion.mjs'
 
 const HAS = new Set(ICON_NAMES)
@@ -137,21 +140,21 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
   })
   S('glass', {
     slug: 'glassmorphism-icons', short: 'Free glassmorphism icons', icon: 'layers',
-    title: 'Free glassmorphism icons: frosted glass SVG icons · with icons',
-    desc: `Free glassmorphism icons: ${N} multi-layered frosted glass icons as SVG or transparent PNG, for modern apps, dashboards and landing pages. Real vectors, no blur filters, MIT.`,
+    title: 'Free glassmorphism icons: soft frosted glass SVG icons · with icons',
+    desc: `Free glassmorphism icons: ${N} soft, luxurious frosted glass icons with a luminous tint, a bright rim and gentle highlights, as SVG or transparent PNG for modern apps, dashboards and landing pages. Real vectors, no blur filters, MIT.`,
     h1: ['Free glassmorphism', 'icons'], q: 'free glassmorphism icons',
-    answer: () => `The <b>Glass</b> style builds all ${N} icons from stacked panes of frosted glass, soft and see-through, in the glassmorphism look. Click an icon below to copy the SVG or a transparent PNG. The frost is made from layered shapes, not blur filters, so the files stay small and render the same everywhere. Free and MIT licensed.`,
+    answer: () => `The <b>Glass</b> style turns all ${N} icons into soft, luxurious frosted glass: a milky, softly tinted body, a bright rim of light and gentle highlights, in the glassmorphism look. Click an icon below to copy the SVG or a transparent PNG. The frost is made from plain vector shapes and gradients, not blur filters, so the files stay small and render the same everywhere. Free and MIT licensed.`,
     picker: { actions: ['svg', 'png', 'dl'], style: 'glass', groups: [['Dashboard', pick(SETS.dash, 24)], ['App', pick(SETS.ui, 12)]] },
     body: p => `
 <section class="ax-split" aria-labelledby="gl-where">
   <div><p class="ax-kicker">Where they shine</p><h2 id="gl-where">Best on colour</h2>
   <p>Glass icons glow on gradients, photos and dark UIs: app landing pages, fintech and weather dashboards, iOS-style feature grids, pitch-deck hero slides. On a plain white page, try a soft tinted card behind them.</p>
-  ${facts([...BASE_FACTS(p), ['How it’s made', 'Layered shapes with partial opacity. No filters, masks or gradients, so it renders the same in every browser, Figma and PowerPoint'], ['Style family', sib('glass')]])}</div>
+  ${facts([...BASE_FACTS(p), ['How it’s made', 'Frosted shapes with soft gradients, a lit rim and highlights. No blur filters or images, so it stays sharp and light in every browser and design app'], ['Colours', 'Every colour is a CSS variable, so a palette recolours the glass, gradients included'], ['Style family', sib('glass')]])}</div>
   <div class="ax-glass-demo">${pick(SETS.dash, 6).map((n, i) => iconLink(p, n, 'glass', I(n, 'glass', 56), ` style="--i:${i}"`)).join('')}</div>
 </section>`,
     faq: p => [
-      ['Are these real glassmorphism icons or just transparent?', 'They are drawn as several stacked, partly see-through panes with highlights, the layered look glassmorphism is known for, built from plain vector shapes.'],
-      ['Do they work in Figma?', `Yes. Copy the SVG and paste it onto the canvas: each pane arrives as an editable vector layer. <a href="${p}guides/figma.html">Figma guide</a>.`],
+      ['Are these real glassmorphism icons or just transparent?', 'They are drawn as soft frosted glass: a milky tinted body, a bright rim and gentle highlights, the look glassmorphism is known for, built from plain vector shapes and gradients.'],
+      ['Do they work in Figma?', `Yes. Copy the SVG and paste it onto the canvas: every layer and gradient arrives editable. <a href="${p}guides/figma.html">Figma guide</a>.`],
       ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
     ],
     related: ['animated-icons', 'icons-for-figma', 'svg-icons'],
@@ -350,6 +353,352 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
       ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required, including in paid apps and products. <a href="${p}license.html">Licence</a>.`],
     ],
     related: ['cute-icons', 'pastel-icons', 'animated-icons'],
+  })
+
+  /* ───── the rich styles (gradients): clay, bento, suite, dock, liquid, chrome, soft3d, brutal; plus the AI lander (on
+     clay) and the SaaS lander (duo with its accent, then bento, soft3d and dock) ───── */
+  const sibG = (id, label) => s => {
+    const others = stylesIn(id).filter(x => x !== s)
+    const fam = others.length ? `${styleTitle(s)} is one of ${word(others.length + 1)} ${label} styles (with ${others.map(x => `<a href="../styles/${x}.html">${styleTitle(x)}</a>`).join(', ')})` : `${styleTitle(s)} is one of the ${label} styles`
+    return `${fam}: rich looks whose colours, gradient stops included, are role-named CSS variables, so one palette recolours them all. <a href="../styles/${s}.html">See every ${styleTitle(s)} icon</a>.`
+  }
+  // the family line names the style's own picker group (site.js GROUPS)
+  const GL = { essentials: 'Essentials', product: 'Product & brand', depth: '3D & glass', playful: 'playful', artistic: 'artistic', holidays: 'holiday' }
+  const sibAny = s => { const id = Object.keys(GL).find(g => stylesIn(g).includes(s)) || 'depth'; return sibG(id, GL[id])(s) }
+  const sibAI = sibAny, sibP = sibAny, sibT = sibAny
+  const RICH_FAQ = (p, s) => [
+    ['Do the gradients survive copy and paste?', `Yes. Each gradient sits inside the SVG with its own id, and the site and the packages make those ids unique for every icon on a page, so two icons never borrow each other’s colours. A downloaded .svg file has its colours baked in, ready for Figma, Illustrator or Canva.`],
+    ['Can I change the colours?', `Yes. Pick a palette in the icon editor and every layer and gradient follows. On a website each colour is a CSS variable like <code>--with-${s}-c1</code> or <code>--with-${s}-accent</code>, and the gradient stops read the same variables. <a href="${p}developers.html">Developer docs</a>.`],
+    ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+  ]
+  const AI_SET = ['sparkles', 'wand-sparkles', 'bot', 'bot-message-square', 'brain', 'brain-circuit', 'message-circle', 'wand', 'cpu', 'circuit-board', 'workflow', 'scan-search', 'radar', 'lightbulb', 'zap', 'search', 'mic-vocal', 'audio-waveform', 'image', 'code-xml', 'database', 'globe', 'rocket', 'shield-check']
+  const AI_CAT = META.icons.filter(i => i.category === 'ai').map(i => i.name)
+  const SAAS = ['layout-dashboard', 'inbox', 'kanban', 'search', 'settings', 'users', 'bell', 'calendar', 'git-branch', 'terminal', 'command', 'component', 'blocks', 'database', 'server', 'cloud', 'chart-bar', 'chart-line', 'filter', 'sliders', 'link', 'lock', 'code-xml', 'webhook']
+  const OFFICE = ['mail', 'calendar', 'file-text', 'folder', 'users', 'chart-bar', 'chart-pie', 'clipboard', 'list-checks', 'briefcase', 'building-2', 'cloud', 'database', 'server', 'shield-check', 'lock', 'key', 'settings', 'receipt', 'credit-card', 'globe', 'headset', 'message-circle', 'video-camera']
+  const APPS = ['camera', 'music-note', 'mail', 'calendar', 'map', 'message-circle', 'settings', 'image', 'notebook', 'clock', 'calculator', 'wallet', 'headphones', 'video-camera', 'globe', 'shopping-bag', 'book-open', 'gamepad', 'phone', 'cloud', 'sun', 'heart', 'folder', 'terminal']
+  const BOLD = ['rocket', 'zap', 'star', 'heart', 'flame', 'megaphone', 'smile', 'thumbs-up', 'trophy', 'target', 'lightbulb', 'sparkles', 'music-note', 'camera', 'coffee', 'gift', 'mail', 'bell', 'shopping-bag', 'globe', 'code', 'pen-tool', 'palette', 'crown']
+  const TECH = ['server', 'database', 'cloud', 'cpu', 'cube', 'boxes', 'blocks', 'package', 'truck', 'building-2', 'store', 'home', 'shield-check', 'lock', 'globe', 'satellite', 'satellite-dish', 'router', 'monitor', 'smartphone', 'rocket', 'chart-bar', 'gamepad', 'map']
+
+  S('clay', {
+    slug: 'clay-icons', short: 'Free clay icons', icon: 'sparkles',
+    title: 'Free clay icons: soft 3D clay SVG & PNG icons · with icons',
+    desc: `Free clay icons: ${N} soft, rounded faux-3D icons that look sculpted from matte clay, as SVG or transparent PNG for AI products, onboarding, landing pages and empty states. MIT licensed.`,
+    h1: ['Free clay icons,', 'soft 3D'], q: 'free 3d clay icons',
+    answer: () => `The <b>Clay</b> style turns all ${N} icons into soft, rounded objects that look sculpted from matte clay: puffy forms, soft studio light and warm colour. It is all vector shapes and gradients, so it stays sharp at any size. Click an icon below to copy it as a transparent PNG, download it or copy the SVG. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'dl', 'svg'], style: 'clay', groups: [['Clay favourites', pick(['sparkles', 'rocket', 'heart', 'star', 'gift', 'lightbulb', 'bot', 'trophy', 'cloud', 'sun', 'moon', 'camera', 'music-note', 'coffee', 'home', 'mail', 'bell', 'shopping-bag', 'wallet', 'chart-pie', 'globe', 'smile', 'puzzle-piece', 'balloon'], 24)], ['Interface', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="cl-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="cl-where">AI products, onboarding and empty states</h2>
+  <p>AI assistants, consumer apps, onboarding flows, friendly SaaS landing pages, empty states and feature cards: the warm, tactile look of AI-era product art. The soft depth reads best from 32 px up; at 16 to 24 px use Line or Solid for the same icon.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibAI('clay')], ['Not a render', 'Real vectors with soft gradients: no images or blur filters, so it stays crisp and small']])}</div>
+  ${demo(['sparkles', 'rocket', 'heart', 'gift', 'lightbulb', 'bot', 'trophy', 'cloud'], 'clay')}
+</section>`,
+    faq: p => [
+      ['Are these 3D renders?', 'No. Each icon is flat vector layers and soft gradients drawn to read as matte clay, so it stays sharp, small and editable in Figma, Illustrator or Canva.'],
+      ...RICH_FAQ(p, 'clay'),
+    ],
+    related: ['ai-icons', '3d-icons', 'plush-icons'],
+  })
+  S('clay', {
+    slug: 'ai-icons', short: 'Free AI icons', icon: 'sparkles',
+    title: 'Free AI icons: sparkles, bots and brains in 3D, SVG & PNG · with icons',
+    desc: `Free AI icons: sparkles, bots, brains, wands and workflows in soft 3D clay, liquid glass, chrome and glass, plus all ${N} icons in ${N_STYLES} styles, as SVG or transparent PNG. MIT licensed.`,
+    h1: ['Free AI icons,', 'soft and shiny'], q: 'free AI icons',
+    answer: () => `Below are the AI icons first (sparkles, bots, brains, wands, workflows and more), drawn in the <b>Clay</b> style: soft, rounded 3D forms with warm studio light, the tactile look of AI-era product art. Switch to Liquid, Chrome or Glass for a cooler, glossier feel; every icon keeps the same name in all ${N_STYLES} styles. Click an icon to copy the SVG, copy a PNG or download one.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'clay', lead: ['liquid', 'chrome', 'glass'], groups: [['AI', pick([...AI_CAT, ...AI_SET], 24)], ['Interface', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="au-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="au-where">AI features, copilots and launches</h2>
+  <p>AI copilots and chat apps, “Ask AI” buttons, model launches, feature announcements and onboarding. Clay feels warm and friendly; Liquid, Chrome and Glass look sleek on dark backgrounds. In a dense toolbar use Line or Duo for the same icon and keep the 3D version for the moment that matters.</p>
+  ${facts([...BASE_FACTS(p), ['AI icons', `Sparkles, bots, brains, wands, workflows and more${AI_CAT.length ? `, with their own <a href="${p}categories/ai.html">AI category</a>` : ''}`], ['Style family', sibAI('clay')]])}</div>
+  ${demo([...AI_CAT, ...AI_SET], 'clay')}
+</section>`,
+    faq: p => [
+      ['Which icon should I use for an AI feature?', 'Sparkles is the most widely understood sign for “AI” today. A bot or a chat bubble suits assistants, a magic wand suits “generate” and “improve” actions, and a brain suits models and reasoning.'],
+      ['Do the AI icons come in other styles?', `Yes. Every icon has the same name in all ${N_STYLES} styles, so the sparkles in your toolbar can be Line while the hero uses Clay, Liquid or Chrome.`],
+      ...RICH_FAQ(p, 'clay'),
+    ],
+    related: ['clay-icons', 'liquid-glass-icons', 'animated-icons'],
+  })
+  S('duo', {
+    slug: 'saas-icons', short: 'Free SaaS icons', icon: 'layout-dashboard',
+    title: 'Free SaaS icons: product UI, bento and 3D SVG icons · with icons',
+    desc: `Free SaaS and product icons: ${N} icons in Duo (an outline, a soft tint and one accent detail) plus Bento tiles, soft 3D and app-icon tiles, as SVG or PNG for dashboards, docs and landing pages. MIT.`,
+    h1: ['Free SaaS icons,', 'UI to landing page'], q: 'free SaaS icons',
+    answer: () => `In the product itself, the <b>Duo</b> style draws all ${N} icons as calm outlines over a soft tint, with one small accent detail in your brand colour (and an opt-in gradient stroke for hero moments). On the landing page, the same icons come as <b>Bento</b> tiles for feature grids, <b>Soft 3D</b> for hero art and explainers and <b>Dock</b> app tiles for launches. Click an icon below to copy the SVG, copy a PNG or download one.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'duo', lead: ['bento', 'soft3d', 'dock'], groups: [['Product UI', pick(SAAS, 24)], ['Interface', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="ln-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="ln-where">Dashboards, dev tools and landing pages</h2>
+  <p>SaaS dashboards, settings screens, command menus and docs in Duo, which shares Line’s grid and names, so it sits next to Line in a sidebar without a pixel of drift. Then Bento for “why us” feature grids, Soft 3D for hero art and onboarding explainers, and Dock for app launches and download pages.</p>
+  ${facts([...BASE_FACTS(p), ['Accent colour', 'Set <code>--with-duo-accent</code> once in CSS and every icon’s accent detail follows your brand'], ['In code', '<code>npm i @withicons/react</code> and import from <code>@withicons/react/duo</code> (or <code>/bento</code>, <code>/soft3d</code>, <code>/dock</code>); the same subpaths work in Vue, Svelte, Angular and Solid']])}</div>
+  ${demo(SAAS, 'duo')}
+</section>`,
+    faq: p => [
+      ['Which style should I use inside the product?', 'Line or Duo: they read from 16px, take any colour and stay calm in dense UI. Duo adds a soft tint and one accent detail, so a feature list or an empty state gets a little colour without getting loud.'],
+      ['And on the landing page?', `Bento tiles for feature grids, Soft 3D for hero art and explainers, Dock for app launches. They share every icon name with Duo, so the same icon follows a visitor from the hero into the product. <a href="${p}styles/index.html">All ${N_STYLES} styles</a>.`],
+      ['Can I use them commercially?', `Yes, MIT licensed and free, with no credit required. <a href="${p}license.html">Licence</a>.`],
+    ],
+    related: ['icons-for-react', 'enterprise-icons', 'bento-icons'],
+  })
+  S('bento', {
+    slug: 'bento-icons', short: 'Free bento grid icons', icon: 'layout-grid',
+    title: 'Free bento grid icons: icons in tinted tiles, SVG & PNG · with icons',
+    desc: `Free bento grid icons: ${N} icons each sitting in its own soft tinted tile, as SVG or transparent PNG for feature grids, bento layouts, settings screens and landing pages. MIT licensed.`,
+    h1: ['Free bento grid', 'icons'], q: 'free bento grid icons',
+    answer: () => `The <b>Bento</b> style sets each of the ${N} icons in its own soft tinted tile, like a bento-grid feature card: a ready-made tile that turns every icon into a tidy, colour-coded feature. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'bento', groups: [['Feature grid', pick(['zap', 'shield-check', 'globe', 'chart-line', 'users', 'lock', 'cloud', 'sparkles', 'rocket', 'clock', 'credit-card', 'bell', 'search', 'layers', 'code-xml', 'database', 'smartphone', 'mail', 'calendar', 'heart', 'star', 'gift', 'settings', 'puzzle-piece'], 24)], ['Settings', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="bn-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="bn-where">Feature grids, settings and menus</h2>
+  <p>Bento-grid landing pages, “why us” feature rows, settings screens, app menus, pricing tables and marketing sites. The tile is part of the icon, so a grid of them lines up perfectly with no extra CSS.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibP('bento')], ['Colour coding', 'Pick a palette per icon to colour-code a grid, or set the tile colour once in CSS']])}</div>
+  ${demo(['zap', 'shield-check', 'globe', 'chart-line', 'users', 'lock', 'cloud', 'sparkles'], 'bento')}
+</section>`,
+    faq: p => [
+      ['What is a bento grid?', 'A layout of rounded cards in different sizes, like the compartments of a bento box. It became a favourite for landing pages and feature overviews, and each card usually leads with an icon.'],
+      ...RICH_FAQ(p, 'bento'),
+    ],
+    related: ['saas-icons', 'app-icons', 'svg-icons'],
+  })
+  S('suite', {
+    slug: 'enterprise-icons', short: 'Free enterprise icons', icon: 'briefcase',
+    title: 'Free enterprise icons: office and cloud suite style SVG icons · with icons',
+    desc: `Free enterprise and office icons: ${N} polished full-colour icons with calm gradients, like an office or cloud suite, as SVG or PNG for business apps, intranets, admin consoles and docs. MIT.`,
+    h1: ['Free enterprise icons,', 'suite colour'], q: 'free enterprise icons',
+    answer: () => `The <b>Suite</b> style draws all ${N} icons as polished full-colour icons with calm gradients, like the ones in an office or cloud suite: clear shapes and a consistent colour system teams trust. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'suite', groups: [['Office & cloud', pick(OFFICE, 24)], ['Business', pick(['chart-bar', 'chart-line', 'trending-up', 'target', 'trophy', 'award', 'megaphone', 'wallet', 'coins', 'percent', 'gauge', 'flag'], 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="su-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="su-where">Business apps, intranets and consoles</h2>
+  <p>Enterprise software, productivity suites, intranets, cloud and admin consoles, internal tools, help centres and documentation. Familiar and calm, so they work in dense screens as well as on slides.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibP('suite')], ['Brand colours', 'Set your brand colours once in CSS or pick a palette, and every icon and gradient follows']])}</div>
+  ${demo(OFFICE, 'suite')}
+</section>`,
+    faq: p => [
+      ['Is this affiliated with Microsoft, Google or another suite?', 'No. Suite names a look, and every icon is drawn from scratch for with icons. Nothing is copied from any product or other icon set.'],
+      ...RICH_FAQ(p, 'suite'),
+    ],
+    related: ['saas-icons', 'icons-for-powerpoint', 'png-icons'],
+  })
+  S('dock', {
+    slug: 'app-icons', short: 'Free app icons', icon: 'app-window',
+    title: 'Free app icons: glossy dock-style tiles, SVG & PNG · with icons',
+    desc: `Free app icons: ${N} glossy rounded app tiles with light and depth, like the icons in a desktop dock, as SVG or transparent PNG for launchers, product pages and portfolios. MIT licensed.`,
+    h1: ['Free app icons,', 'dock tiles'], q: 'free app icons',
+    answer: () => `The <b>Dock</b> style turns all ${N} icons into glossy rounded app tiles with light and depth, like the icons in a desktop dock. Click an icon below to download a transparent PNG, copy it or copy the SVG. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['dl', 'png', 'svg'], style: 'dock', px: 1024, groups: [['App favourites', pick(APPS, 24)], ['Tools', pick(SETS.dash, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="dk-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="dk-where">Launchers, showcases and download pages</h2>
+  <p>App launchers and home-screen themes, product showcases, download pages, portfolios, pitch decks and mock-ups. The tile, light and depth are built in, so a row of them looks like a real dock.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibP('dock')], ['Sizes', 'Download a PNG at up to 1024 px, or the SVG for any size']])}</div>
+  ${demo(APPS, 'dock')}
+</section>`,
+    faq: p => [
+      ['Can I use these as my app’s icon?', `Yes, they’re MIT licensed. Anyone can use the same icons, so customise yours (colours, palette) before you ship it as your app icon. <a href="${p}license.html">Licence</a>.`],
+      ['Can I make a custom home screen with them?', 'Yes. Download PNGs and set them as app icons with Shortcuts on iPhone or a launcher on Android.'],
+      ...RICH_FAQ(p, 'dock').slice(0, 2),
+    ],
+    related: ['skeuomorphic-icons', 'bento-icons', 'png-icons'],
+  })
+  S('liquid', {
+    slug: 'liquid-glass-icons', short: 'Free liquid glass icons', icon: 'droplet',
+    title: 'Free liquid glass icons: clear refractive SVG & PNG icons · with icons',
+    desc: `Free liquid glass icons: ${N} icons in clear liquid glass that bends the light, with bright rims and soft reflections, as SVG or transparent PNG for modern app UIs, dashboards and hero art. MIT.`,
+    h1: ['Free liquid glass', 'icons'], q: 'free liquid glass icons',
+    answer: () => `The <b>Liquid</b> style makes all ${N} icons from clear liquid glass that bends the light: rims of light, refracted colour and soft reflections, the newest look in interface design. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'liquid', groups: [['App', pick(SETS.ui, 24)], ['Dashboard', pick(SETS.dash, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="lq-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="lq-where">Modern app UIs and hero art</h2>
+  <p>Modern OS-style interfaces, product launches, premium apps, dashboards and hero art. Clear glass shows off what is behind it, so it looks best on colour, photos and dark mode.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibT('liquid')], hasStyle('glass') ? ['Liquid or Glass?', `Liquid is clear and refractive; <a href="${p}free/glassmorphism-icons.html">Glass</a> is soft and frosted`] : null].filter(Boolean))}</div>
+  ${demo(SETS.ui, 'liquid')}
+</section>`,
+    faq: p => [
+      ['Is this Apple’s Liquid Glass?', 'No. Liquid glass here names a look, and every icon is drawn from scratch for with icons from plain vector shapes and gradients. Nothing is copied from any operating system or other icon set.'],
+      ...RICH_FAQ(p, 'liquid'),
+    ],
+    related: ['glassmorphism-icons', 'chrome-icons', 'app-icons'],
+  })
+  S('chrome', {
+    slug: 'chrome-icons', short: 'Free chrome icons', icon: 'disc',
+    title: 'Free chrome icons: Y2K liquid metal SVG & PNG icons · with icons',
+    desc: `Free chrome icons: ${N} polished liquid-metal icons with mirror highlights, Y2K and futuristic, as SVG or transparent PNG for music, fashion, events, posters and streetwear. MIT licensed.`,
+    h1: ['Free chrome icons,', 'Y2K liquid metal'], q: 'free chrome Y2K icons',
+    answer: () => `The <b>Chrome</b> style polishes all ${N} icons into liquid chrome with mirror highlights: mirror-bright metal from banded gradients, Y2K and futuristic, sharp at any size. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['png', 'svg', 'dl'], style: 'chrome', groups: [['Chrome favourites', pick(['star', 'heart', 'music-note', 'headphones', 'disc', 'zap', 'flame', 'crown', 'gem', 'sparkles', 'rocket', 'globe', 'camera', 'smile', 'moon', 'sun', 'skull', 'eye', 'lock', 'key', 'mail', 'phone', 'gamepad', 'trophy'], 24)], ['Social', pick(SETS.social, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="ch-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="ch-where">Music, fashion and posters</h2>
+  <p>Music and fashion brands, album and playlist covers, event and club posters, streetwear drops and futuristic launches. Big and shiny: 48 px and up.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibT('chrome')], ['How it’s made', 'Banded gradients for the mirror, plain vector shapes for the rest: no images']])}</div>
+  ${demo(['star', 'heart', 'music-note', 'zap', 'crown', 'gem', 'disc', 'flame'], 'chrome')}
+</section>`,
+    faq: p => RICH_FAQ(p, 'chrome'),
+    related: ['liquid-glass-icons', 'retro-icons', 'sticker-icons'],
+  })
+  S('soft3d', {
+    slug: 'soft-3d-icons', short: 'Free soft 3D icons', icon: 'cube',
+    title: 'Free soft 3D icons: studio-lit 3D SVG & PNG icons · with icons',
+    desc: `Free soft 3D icons: ${N} studio-lit 3D objects with real depth, plus friendly 3D avatars, as SVG or transparent PNG for landing pages, onboarding, app stores and launches. MIT licensed.`,
+    h1: ['Free soft 3D', 'icons'], q: 'free 3d icons',
+    answer: () => `The <b>Soft 3D</b> style turns all ${N} icons into soft, studio-lit 3D objects with real volume. Physical things (a camera, a gift, a house) sit at a gentle angle; symbols such as arrows and checks stay front-facing so they read at a glance; people become friendly Memoji-like busts. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'soft3d', groups: [['Objects', pick(TECH, 24)], ['Everyday', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="is-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="is-where">Landing pages, onboarding and launches</h2>
+  <p>Hero sections, feature cards, onboarding steps, app-store art, avatar pickers and launch posts. Every icon shares one soft studio light, so a set looks like one photo shoot; at 16 to 24 px use Line or Solid for the same icon.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibT('soft3d')], ['Not a render', 'Real vectors with soft gradients: no images or blur filters, so it stays crisp, small and editable']])}</div>
+  ${demo(TECH, 'soft3d')}
+</section>`,
+    faq: p => RICH_FAQ(p, 'soft3d'),
+    related: ['3d-icons', 'clay-icons', 'svg-icons'],
+  })
+  S('brutal', {
+    slug: 'neo-brutalism-icons', short: 'Free neo-brutalism icons', icon: 'zap',
+    title: 'Free neo-brutalism icons: bold outlines and hard shadows · with icons',
+    desc: `Free neo-brutalism icons: ${N} icons with thick black outlines, loud flat colour and a hard offset shadow, as SVG or transparent PNG for startups, portfolios, newsletters and posters. MIT.`,
+    h1: ['Free neo-brutalism', 'icons'], q: 'free neo-brutalism icons',
+    answer: () => `The <b>Brutal</b> style draws all ${N} icons in neo-brutalism: thick black outlines, loud flat colour and a hard offset shadow, raw and confident shapes that pop off the page. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit needed.`,
+    picker: { actions: ['svg', 'png', 'dl'], style: 'brutal', groups: [['Bold favourites', pick(BOLD, 24)], ['Interface', pick(SETS.ui, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="br-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="br-where">Startups, portfolios and posters</h2>
+  <p>Indie startups, portfolios, newsletters, posters, Gen Z brands and playful product sites. The hard shadow wants a bold layout around it: chunky borders, flat colour and big type.</p>
+  ${facts([...BASE_FACTS(p), ['Style family', sibT('brutal')], ['Colour', 'Pick a palette and the fills and the shadow follow; on a website each one is a CSS variable']])}</div>
+  ${demo(BOLD, 'brutal')}
+</section>`,
+    faq: p => [
+      ['What is neo-brutalism?', 'A web design trend of thick black borders, loud flat colours, hard drop shadows and visible structure: deliberately raw, but tidy underneath.'],
+      ...RICH_FAQ(p, 'brutal'),
+    ],
+    related: ['sticker-icons', 'retro-icons'],
+  })
+
+  /* ───── the holiday styles (run 13, rich): utsav + rangoli (Diwali, Holi), halloween, christmas, lunar, valentine.
+     Each lander leads with its festival's own icons (the festival categories), then everyday icons in the same look,
+     and offers the sibling holiday styles first in its style row ───── */
+  const HOLI = stylesIn('holidays')
+  const sibH = s => sibAny(s)
+  const festFor = cat => META.icons.filter(i => i.category === cat).map(i => i.name)
+  const iconTitles = names => names.map(n => n.replace(/-/g, ' ')).join(', ')
+  const FEST_FAQ = (p, s, fest) => [
+    ['Are these festival icons free for commercial use?', `Yes. All ${N} icons in the ${styleTitle(s)} style are MIT licensed: use them in ${fest} campaigns, greetings, menus, apps and client work with no credit. <a href="${p}license.html">Licence</a>.`],
+    [`Is ${styleTitle(s)} only for ${fest} icons?`, `No. Every one of the ${N} icons comes in ${styleTitle(s)}, so a cart, a bell or a gift matches the festival icons in one seasonal set. Switch the same icons back to Line or Solid when the season is over: the names never change.`],
+    ...RICH_FAQ(p, s),
+  ]
+  const H = (style, o) => S(style, { ...o, picker: { actions: ['png', 'dl', 'svg'], style, lead: HOLI.filter(x => x !== style).slice(0, 3), ...o.picker } })
+  const INDIAN = festFor('indian-festivals')
+  const DIWALI = ['diya', 'rangoli-pattern', 'sky-lantern', 'sparkler', 'firecracker', 'kalash', 'toran', 'marigold', 'lotus', 'puja-thali', 'mithai-box', 'laddoo', 'jalebi', 'shankh', 'peacock-feather', 'paisley', 'dhak', 'pandal', 'alpana', 'rakhi', 'mehndi-hand', 'kite', 'gift', 'sparkles']
+  const HOLI_SET = ['pichkari', 'gulal', 'holi-splash', 'water-balloon', 'thandai', 'dholak', 'marigold', 'lotus', 'rangoli-pattern', 'diya', 'kite', 'peacock-feather', 'paisley', 'mehndi-hand', 'sky-lantern', 'sparkler', 'laddoo', 'jalebi', 'music-note', 'sun', 'flower', 'rainbow', 'palette', 'party-popper']
+  const SALE = ['gift', 'shopping-bag', 'shopping-cart', 'tag', 'ticket', 'percent', 'credit-card', 'store', 'truck', 'calendar', 'bell', 'mail', 'heart', 'star', 'sparkles', 'party-popper', 'cake', 'coffee', 'music-note', 'camera', 'home', 'user', 'map-pin', 'clock']
+  H('utsav', {
+    slug: 'diwali-icons', short: 'Free Diwali icons', icon: 'diya',
+    title: 'Free Diwali icons: diya, rangoli and festive SVG & PNG · with icons',
+    desc: `Free Diwali icons: diyas, rangoli, lanterns, sweets and ${INDIAN.length} Indian festival icons, plus all ${N} icons in the festive Utsav style, as SVG or transparent PNG. MIT, no credit.`,
+    h1: ['Free Diwali icons,', 'warm and festive'], q: 'free diwali icons',
+    answer: () => `The <b>Utsav</b> style draws Indian festive craft: warm marigold and saffron shapes with a plum outline, a fine gold inner line, rangoli dot-work and a tiny diya flame. It comes with ${INDIAN.length} festival icons (diya, rangoli, kalash, toran, sky lantern, mithai and more) and turns every one of the ${N} icons festive, so your sale banner, greeting card or app theme matches. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [['Diwali & Durga Puja', pick(DIWALI, 24)], ['Festive offers and greetings', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="dw-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="dw-where">Greetings, festive sales and menus</h2>
+  <p>Diwali and Durga Puja greetings, WhatsApp and Instagram posts, festive sale banners, sweet-shop menus, wedding cards and app themes for the season. For Holi and Navratri campaigns try <a href="holi-icons.html">Rangoli</a>, the sibling style with one festival motif per icon.</p>
+  ${facts([...BASE_FACTS(p), ['Festival icons', `${INDIAN.length} Indian festival icons: ${iconTitles(pick(DIWALI, 8))} and more`], ['Style family', sibH('utsav')]])}</div>
+  ${demo(['diya', 'rangoli-pattern', 'sky-lantern', 'kalash', 'marigold', 'mithai-box'], 'utsav')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'utsav', 'Diwali'),
+    related: ['holi-icons', 'christmas-icons', 'lunar-new-year-icons'],
+  })
+  H('rangoli', {
+    slug: 'holi-icons', short: 'Free Holi icons', icon: 'pichkari',
+    title: 'Free Holi icons: colourful festival SVG & PNG icons · with icons',
+    desc: `Free Holi icons: pichkari, gulal, colour splashes and ${INDIAN.length} Indian festival icons, plus all ${N} icons in the festive Rangoli style, as SVG or transparent PNG. MIT, no credit.`,
+    h1: ['Free Holi icons,', 'full of colour'], q: 'free holi icons',
+    answer: () => `The <b>Rangoli</b> style draws clean objects in a warm festive glow, each with one Indian festival motif: rangoli petals, a lotus, a toran, a marigold or a diya flame. Its festival icons include the pichkari, gulal, a colour splash, water balloons, thandai and the dholak, and every one of the ${N} icons comes in the same look. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [['Holi & Navratri', pick(HOLI_SET, 24)], ['Festive offers and greetings', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="ho-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="ho-where">Holi posts, invites and festive campaigns</h2>
+  <p>Holi party invites, Navratri and Durga Puja campaigns, festive sale banners, school and office celebration posters, and app themes. For Diwali greetings with diyas and gold line-work, try <a href="diwali-icons.html">Utsav</a>, the sibling style.</p>
+  ${facts([...BASE_FACTS(p), ['Festival icons', `${INDIAN.length} Indian festival icons: ${iconTitles(pick(['pichkari', 'gulal', 'holi-splash', 'water-balloon', 'thandai', 'dholak', 'marigold', 'lotus'], 8))} and more`], ['Style family', sibH('rangoli')]])}</div>
+  ${demo(['pichkari', 'gulal', 'holi-splash', 'water-balloon', 'dholak', 'marigold'], 'rangoli')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'rangoli', 'Holi'),
+    related: ['diwali-icons', 'valentines-day-icons', 'cute-icons'],
+  })
+  const HW = festFor('halloween')
+  H('halloween', {
+    slug: 'halloween-icons', short: 'Free Halloween icons', icon: 'jack-o-lantern',
+    title: 'Free Halloween icons: spooky-cute SVG & PNG icons · with icons',
+    desc: `Free Halloween icons: jack-o’-lanterns, ghosts, bats, witch hats and ${HW.length} Halloween icons, plus all ${N} icons in a spooky-cute style, as SVG or transparent PNG. MIT.`,
+    h1: ['Free Halloween icons,', 'spooky but cute'], q: 'free halloween icons',
+    answer: () => `The <b>Halloween</b> style is spooky-cute: pumpkin, witch-purple and midnight shapes with candle-lit carvings, slime drips and a tiny bat. It comes with ${HW.length} Halloween icons (a jack-o’-lantern, a ghost, a cauldron, a haunted house and more) and dresses up every one of the ${N} icons, so a cart or a bell joins the party. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [['Halloween', pick(['jack-o-lantern', 'ghost', 'bat', 'witch-hat', 'black-cat', 'cauldron', 'haunted-house', ...HW, 'moon', 'flame', 'candy', 'lollipop', 'key', 'lock', 'skull', 'ghost'], 24)], ['Party and promos', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="hw-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="hw-where">Party invites, promos and game events</h2>
+  <p>Halloween party invites, trick-or-treat flyers, October sale banners, in-game events, classroom worksheets and app themes. Spooky-cute rather than scary, so it suits kids’ brands as well as late-night campaigns.</p>
+  ${facts([...BASE_FACTS(p), ['Halloween icons', `${HW.length} of them: ${iconTitles(pick(HW, 8))} and more`], ['Style family', sibH('halloween')]])}</div>
+  ${demo(['jack-o-lantern', 'ghost', 'bat', 'witch-hat', 'cauldron', 'haunted-house'], 'halloween')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'halloween', 'Halloween'),
+    related: ['gothic-icons', 'christmas-icons', 'cute-icons'],
+  })
+  const XM = festFor('christmas')
+  H('christmas', {
+    slug: 'christmas-icons', short: 'Free Christmas icons', icon: 'christmas-tree',
+    title: 'Free Christmas icons: cosy holiday SVG & PNG icons · with icons',
+    desc: `Free Christmas icons: trees, Santa hats, snowmen, wreaths and ${XM.length} Christmas icons, plus all ${N} icons in a cosy snow-capped style, as SVG or transparent PNG. MIT.`,
+    h1: ['Free Christmas icons,', 'cosy and snowy'], q: 'free christmas icons',
+    answer: () => `The <b>Christmas</b> style is cosy: cranberry, pine and gold shapes with a snow cap on every top edge, candy-cane stripes and a sprig of holly. It comes with ${XM.length} Christmas icons (a tree, a Santa hat, a snowman, a wreath, a sleigh and more) and wraps every one of the ${N} icons for the season, so your gift guide and checkout match. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [['Christmas', pick(['christmas-tree', 'santa-hat', 'snowman', 'wreath', 'gingerbread-man', 'bauble', ...XM, 'gift', 'snowflake', 'star', 'bell'], 24)], ['Gift guides and offers', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="xm-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="xm-where">Holiday emails, gift guides and advent calendars</h2>
+  <p>Christmas campaigns and holiday emails, gift guides, advent calendars, festive menus, office party invites and seasonal app themes. Each icon wears its own snow cap, so a whole row reads as one winter set.</p>
+  ${facts([...BASE_FACTS(p), ['Christmas icons', `${XM.length} of them: ${iconTitles(pick(XM, 8))} and more`], ['Style family', sibH('christmas')]])}</div>
+  ${demo(['christmas-tree', 'santa-hat', 'snowman', 'wreath', 'gingerbread-man', 'bauble'], 'christmas')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'christmas', 'Christmas'),
+    related: ['halloween-icons', 'lunar-new-year-icons', 'valentines-day-icons'],
+  })
+  const LN = festFor('lunar-new-year')
+  H('lunar', {
+    slug: 'lunar-new-year-icons', short: 'Free Lunar New Year icons', icon: 'red-lantern',
+    title: 'Free Lunar New Year icons: lucky red and gold SVG & PNG · with icons',
+    desc: `Free Lunar New Year and Chinese New Year icons: lanterns, red envelopes, dragons and ${LN.length} festival icons, plus all ${N} icons in lucky red and gold, as SVG or PNG. MIT.`,
+    h1: ['Free Lunar New Year icons,', 'red and gold'], q: 'free lunar new year icons',
+    answer: () => `The <b>Lunar</b> style is lucky red lacquer with a gold-foil rim, jade details, paper-cut cloud scrolls, silk tassels and plum blossoms. It comes with ${LN.length} Lunar New Year icons (a red lantern, a red envelope, a dragon and a lion head, dumplings, lucky coins and more) and dresses every one of the ${N} icons in the same red and gold. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [['Lunar New Year', pick(['red-lantern', 'red-envelope', 'dragon-head', 'lion-head', 'mandarin-orange', 'plum-blossom', ...LN, 'gift', 'coins', 'sparkles', 'moon'], 24)], ['Red-envelope promos', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="ln-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="ln-where">Greetings, red-envelope promos and app themes</h2>
+  <p>Lunar New Year and Chinese New Year greetings, red-envelope promotions, restaurant menus, festive sale banners and seasonal app themes, from Seoul to Singapore to San Francisco.</p>
+  ${facts([...BASE_FACTS(p), ['Festival icons', `${LN.length} of them: ${iconTitles(pick(LN, 8))} and more`], ['Style family', sibH('lunar')]])}</div>
+  ${demo(['red-lantern', 'red-envelope', 'dragon-head', 'lion-head', 'mandarin-orange', 'plum-blossom'], 'lunar')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'lunar', 'Lunar New Year'),
+    related: ['christmas-icons', 'diwali-icons', 'valentines-day-icons'],
+  })
+  const VL = festFor('valentines')
+  H('valentine', {
+    slug: 'valentines-day-icons', short: 'Free Valentine’s Day icons', icon: 'heart-pair',
+    title: 'Free Valentine’s Day icons: cute heart SVG & PNG icons · with icons',
+    desc: `Free Valentine’s Day icons: love letters, roses, chocolates and ${VL.length} Valentine’s icons, plus all ${N} icons as cute pink-to-red stickers, as SVG or transparent PNG. MIT.`,
+    h1: ['Free Valentine’s Day icons,', 'cute and sweet'], q: 'free valentines day icons',
+    answer: () => `The <b>Valentine</b> style draws cute Valentine’s stickers: pink-to-red cartoon shapes with a berry outline, polka dots, tiny blushing faces and floating hearts. It comes with ${VL.length} Valentine’s icons (a love letter, a rose bouquet, a box of chocolates, a teddy bear and more) and sweetens every one of the ${N} icons, so a gift card or a checkout button fits the theme. Click an icon below to copy a transparent PNG, download it or copy the SVG. Free and MIT licensed.`,
+    picker: { groups: [["Valentine’s Day", pick(['heart-pair', 'love-letter', 'rose-bouquet', 'chocolate-box', 'teddy-bear', 'heart-balloon', ...VL, 'heart', 'gift', 'cake', 'sparkles', 'music-note'], 24)], ['Gifts and offers', pick(SALE, 12)]] },
+    body: p => `
+<section class="ax-split" aria-labelledby="vl-where">
+  <div><p class="ax-kicker">Where they shine</p><h2 id="vl-where">Cards, gift shops and social posts</h2>
+  <p>Valentine’s and Galentine’s campaigns, e-cards, gift-shop banners, dating apps, café and bakery menus and social posts. The blushing faces and floating hearts look best from 32 px up; for small buttons use Line or Duo with a pink accent.</p>
+  ${facts([...BASE_FACTS(p), ["Valentine’s icons", `${VL.length} of them: ${iconTitles(pick(VL, 8))} and more`], ['Style family', sibH('valentine')]])}</div>
+  ${demo(['heart-pair', 'love-letter', 'rose-bouquet', 'chocolate-box', 'teddy-bear', 'heart-balloon'], 'valentine')}
+</section>`,
+    faq: p => FEST_FAQ(p, 'valentine', 'Valentine’s'),
+    related: ['coquette-icons', 'cute-icons', 'christmas-icons'],
   })
   return out
 }

@@ -9,13 +9,14 @@
 //   dist/types/withicons-angular.d.ts
 //   dist/styles.mjs                         per-style root attributes + default stroke width
 //   dist/<style>/icons/<name>.mjs           one file per icon per style: Home, HomeIcon, default
+//   dist/<style>/values.mjs                 the attribute values that style repeats, imported by its icon files
 //   dist/<style>/index.mjs                  every icon of that style
 //   dist/index.mjs                          component + default-style icons + iconNames/styleNames
 import { groupOfStyle } from '../tools/style-groups.mjs'
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
-import { J, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable, paletteDoc, motionDoc, totalText, liveStrokeStyles } from './emit-core.mjs'
+import { J, nodePool, distWriter, basePkg, writePkg, renderOf, fallbackCount, styleTable, paletteDoc, motionDoc, totalText, liveStrokeStyles } from './emit-core.mjs'
 
 // The prebuilt component's d.ts names the styles it was compiled with; the style list is data, so the
 // union (and the live-stroke note) are rewritten here from ctx.styles instead of recompiling the component.
@@ -55,11 +56,16 @@ export default async function emit(ctx) {
 
   for (const s of styleNames) {
     const idx = [], idxDts = []
-    for (const i of ctx.icons) {
-      const r = renderOf(ctx, i, s) // a style that failed for this icon falls back to the default style
+    // a style that failed for an icon falls back to the default style
+    const renders = ctx.icons.map(i => [i, renderOf(ctx, i, s)])
+    // attribute values the style repeats (palette variables, classes) live once in <style>/values.mjs (package size)
+    const pool = nodePool(renders.map(([, r]) => r.nodes), { shared: true })
+    W(`${s}/values.mjs`, `${header}${pool.decl(null, true)}\n`)
+    for (const [i, r] of renders) {
       const N = i.pascal
+      const used = new Set(), own = pool.local(r.nodes, used)
       W(`${s}/icons/${i.name}.mjs`, `import { ${id(r.style)} as style } from '../../styles.mjs'
-const ${N} = { name: ${J(i.name)}, variant: ${J(s)}, style, node: ${J(r.nodes)} }
+${used.size ? `import { ${[...used].join(', ')} } from '../values.mjs'\n` : ''}${own.decl ? own.decl + '\n' : ''}const ${N} = { name: ${J(i.name)}, variant: ${J(s)}, style, node: ${own.lit} }
 export { ${N}, ${N} as ${N}Icon }
 export default ${N}
 `)

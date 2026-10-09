@@ -1,0 +1,69 @@
+{
+  "name": "bell-plus",
+  "category": "communication",
+  "description": "A bell with a plus, for adding a notification, alert or reminder.",
+  "aliases": [
+    "add-notification",
+    "add-alert",
+    "create-alert",
+    "add-reminder",
+    "new-reminder",
+    "subscribe-alerts",
+    "notify-me",
+    "set-alert",
+    "alert-plus"
+  ],
+  "tags": [
+    "notification",
+    "add",
+    "alert",
+    "reminder",
+    "subscribe",
+    "bell"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18.5 A2.5 2.5 0 0 0 13.5 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M19 2.5 V7.5",
+      "plate": "S"
+    },
+    {
+      "d": "M16.5 5 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "notifications",
+    "alerts",
+    "reminder",
+    "set reminder",
+    "create reminder",
+    "turn on notifications",
+    "get notified",
+    "notify me",
+    "subscribe",
+    "follow",
+    "watch",
+    "price alert",
+    "stock alert",
+    "job alert",
+    "alert rule",
+    "new alert",
+    "bell plus",
+    "add bell",
+    "remind me",
+    "notification settings",
+    "new notification"
+  ]
+}

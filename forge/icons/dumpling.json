@@ -1,0 +1,74 @@
+{
+  "name": "dumpling",
+  "category": "lunar-new-year",
+  "description": "A folded dumpling, for Lunar New Year food.",
+  "aliases": [
+    "jiaozi",
+    "gyoza",
+    "potsticker",
+    "mandu",
+    "dim-sum",
+    "wonton",
+    "momo",
+    "dumplings"
+  ],
+  "synonyms": [
+    "food",
+    "chinese food",
+    "asian food",
+    "pleated",
+    "steamed",
+    "boiled",
+    "fried",
+    "potstickers",
+    "shui jiao",
+    "jiao zi",
+    "pierogi",
+    "har gow",
+    "xiaolongbao",
+    "lunar new year",
+    "chinese new year",
+    "reunion dinner",
+    "new year eve",
+    "wealth",
+    "snack",
+    "restaurant",
+    "takeaway",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "food",
+    "asian",
+    "dinner"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 15.5 A4 4 0 0 1 5.5 11.25 A2.25 2.25 0 0 1 9.25 9.25 A2.25 2.25 0 0 1 12 8.75 A2.25 2.25 0 0 1 14.75 9.25 A2.25 2.25 0 0 1 18.5 11.25 A4 4 0 0 1 21.5 15.5 C19.5 18.25 16 19.75 12 19.75 C8 19.75 4.5 18.25 2.5 15.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.25 9.25 Q9.75 11.5 9.25 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.75 9.25 Q14.25 11.5 14.75 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 5.75 C8.75 4.75 10.25 3.75 9.5 2.5",
+      "plate": "S"
+    },
+    {
+      "d": "M14.5 5.75 C13.75 4.75 15.25 3.75 14.5 2.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M2.5 15.5 A4 4 0 0 1 5.5 11.25 A2.25 2.25 0 0 1 9.25 9.25 A2.25 2.25 0 0 1 12 8.75 A2.25 2.25 0 0 1 14.75 9.25 A2.25 2.25 0 0 1 18.5 11.25 A4 4 0 0 1 21.5 15.5 C19.5 18.25 16 19.75 12 19.75 C8 19.75 4.5 18.25 2.5 15.5 Z"
+  ],
+  "cutouts": [
+    "M9.25 9.25 Q9.75 11.5 9.25 13.5",
+    "M14.75 9.25 Q14.25 11.5 14.75 13.5"
+  ]
+}

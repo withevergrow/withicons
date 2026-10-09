@@ -1,0 +1,64 @@
+{
+  "name": "spider",
+  "intent": "drops down on its thread and bobs back up",
+  "loop": {
+    "preset": "float",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 1.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        2
+      ]
+    },
+    {
+      "preset": "drop"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        2
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "spider-web",
+      "effect": "slide-up"
+    },
+    {
+      "to": "bug",
+      "effect": "morph"
+    },
+    {
+      "to": "spider@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "name": "@withicons/core-plus",
+  "version": "0.3.1",
+  "description": "7 newer with icons styles (clay, bento, suite, dock, liquid, chrome, brutal) for 734 icons: standalone SVGs and IconNode data. Companion of @withicons/core.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/core-plus"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "svg-icons",
+    "multicolor-icons",
+    "gradient-icons",
+    "clay",
+    "bento",
+    "suite",
+    "dock",
+    "liquid",
+    "chrome",
+    "brutal"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "jsdelivr": "./package.json",
+  "unpkg": "./package.json",
+  "exports": {
+    "./nodes/clay": {
+      "import": {
+        "types": "./dist/nodes/clay.d.ts",
+        "default": "./dist/nodes/clay.js"
+      },
+      "require": {
+        "types": "./dist/nodes/clay.d.cts",
+        "default": "./dist/nodes/clay.cjs"
+      }
+    },
+    "./nodes/bento": {
+      "import": {
+        "types": "./dist/nodes/bento.d.ts",
+        "default": "./dist/nodes/bento.js"
+      },
+      "require": {
+        "types": "./dist/nodes/bento.d.cts",
+        "default": "./dist/nodes/bento.cjs"
+      }
+    },
+    "./nodes/suite": {
+      "import": {
+        "types": "./dist/nodes/suite.d.ts",
+        "default": "./dist/nodes/suite.js"
+      },
+      "require": {
+        "types": "./dist/nodes/suite.d.cts",
+        "default": "./dist/nodes/suite.cjs"
+      }
+    },
+    "./nodes/dock": {
+      "import": {
+        "types": "./dist/nodes/dock.d.ts",
+        "default": "./dist/nodes/dock.js"
+      },
+      "require": {
+        "types": "./dist/nodes/dock.d.cts",
+        "default": "./dist/nodes/dock.cjs"
+      }
+    },
+    "./nodes/liquid": {
+      "import": {
+        "types": "./dist/nodes/liquid.d.ts",
+        "default": "./dist/nodes/liquid.js"
+      },
+      "require": {
+        "types": "./dist/nodes/liquid.d.cts",
+        "default": "./dist/nodes/liquid.cjs"
+      }
+    },
+    "./nodes/chrome": {
+      "import": {
+        "types": "./dist/nodes/chrome.d.ts",
+        "default": "./dist/nodes/chrome.js"
+      },
+      "require": {
+        "types": "./dist/nodes/chrome.d.cts",
+        "default": "./dist/nodes/chrome.cjs"
+      }
+    },
+    "./nodes/brutal": {
+      "import": {
+        "types": "./dist/nodes/brutal.d.ts",
+        "default": "./dist/nodes/brutal.js"
+      },
+      "require": {
+        "types": "./dist/nodes/brutal.d.cts",
+        "default": "./dist/nodes/brutal.cjs"
+      }
+    },
+    "./svg/*": "./dist/svg/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "nodes/clay": [
+        "./dist/nodes/clay.d.ts"
+      ],
+      "nodes/bento": [
+        "./dist/nodes/bento.d.ts"
+      ],
+      "nodes/suite": [
+        "./dist/nodes/suite.d.ts"
+      ],
+      "nodes/dock": [
+        "./dist/nodes/dock.d.ts"
+      ],
+      "nodes/liquid": [
+        "./dist/nodes/liquid.d.ts"
+      ],
+      "nodes/chrome": [
+        "./dist/nodes/chrome.d.ts"
+      ],
+      "nodes/brutal": [
+        "./dist/nodes/brutal.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@withicons/core": "0.3.1"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

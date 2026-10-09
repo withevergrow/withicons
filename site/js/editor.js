@@ -29,8 +29,8 @@
 (function () {
   'use strict'
   var W = window, D = document
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#7484FF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24', clay: '#C8714E', bento: '#0E9F9A', suite: '#0B6CD4', dock: '#3A3F4B', liquid: '#38BDF8', chrome: '#8D99AE', soft3d: '#E0A800', brutal: '#FF4F79', utsav: '#EA7A0C', rangoli: '#E81F7A', halloween: '#F2690F', christmas: '#1F7A4D', lunar: '#E8282E', valentine: '#FF5C82' }
   var INK = '#111318', INK_D = '#F4F0E8'
   var CDN = 'https://cdn.jsdelivr.net/npm/@withicons'
   // a package's dist folder on jsDelivr, always the latest release
@@ -77,7 +77,20 @@
     ['glow', 'Glow', 1.8, 'ease-in-out', '0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 calc(5px * $k) currentColor)}'],
     ['draw', 'Draw on', 1.6, 'ease-in-out', '0%{stroke-dashoffset:1}60%,100%{stroke-dashoffset:0}'],
     ['type', 'Type', 0.9, 'steps(1,end)', '0%,100%{transform:translate(0,0)}25%{transform:translate(0,calc(-4% * $k))}50%{transform:translate(calc(3% * $k),0)}75%{transform:translate(0,calc(3% * $k))}'],
-    ['fill', 'Fill up', 1.6, 'ease-out', '0%{opacity:.35}70%,100%{opacity:1}']
+    ['fill', 'Fill up', 1.6, 'ease-out', '0%{opacity:.35}70%,100%{opacity:1}'],
+    // 3D (forge/MOTION.md "3D motion"): the 3D styles (WithMotion.STYLES_3D) turn in depth, lift toward you and land
+    ['turn', 'Turn', 2, 'linear', '0%,100%{transform:scaleX(1)}25%{transform:scaleX(.08)}50%{transform:scaleX(-1)}75%{transform:scaleX(-.08)}'],
+    ['turn-once', 'Turn once', 1.1, 'cubic-bezier(.65,0,.25,1)', '0%{transform:scaleX(1)}50%{transform:scaleX(-1)}100%{transform:scaleX(1)}'],
+    ['wobble', 'Wobble', 2.4, 'ease-in-out', '0%,100%{transform:rotate(0) skewX(0)}25%{transform:rotate(calc(5deg * $k)) skewX(calc(4deg * $k))}75%{transform:rotate(calc(-5deg * $k)) skewX(calc(-4deg * $k))}'],
+    ['chime', 'Chime', 1.6, 'ease-in-out', '0%,100%{transform:rotate(0)}15%{transform:rotate(calc(14deg * $k)) scaleX(.94)}35%{transform:rotate(calc(-10deg * $k)) scaleX(.96)}55%{transform:rotate(calc(5deg * $k))}75%{transform:rotate(calc(-2deg * $k))}'],
+    ['swivel', 'Swivel', 0.9, 'ease-in-out', '0%,100%{transform:scaleX(1)}25%{transform:scaleX(calc(1 - .3*$k)) skewY(calc(4deg * $k))}60%{transform:scaleX(calc(1 - .15*$k)) skewY(calc(-3deg * $k))}'],
+    ['bow', 'Bow', 0.9, 'ease-in-out', '0%,100%{transform:scaleY(1)}35%{transform:scaleY(calc(1 - .14*$k)) translateY(calc(4% * $k))}65%{transform:scaleY(calc(1 - .04*$k))}'],
+    ['lean', 'Lean', 1, 'ease-in-out', '0%,100%{transform:translate(0,0) skewX(0)}45%{transform:translate(calc($dx * 10% * $k),calc($dy * 10% * $k)) skewX(calc(-6deg * $k))}'],
+    ['lift', 'Lift', 1.2, 'ease-in-out', '0%,100%{transform:translateY(0) scale(1)}45%,60%{transform:translateY(calc(-12% * $k)) scale(calc(1 + .1*$k))}85%{transform:translateY(0) scale(1.04,.95)}'],
+    ['pump', 'Pump', 0.8, 'ease-in-out', '0%,60%,100%{transform:scale(1)}15%{transform:scale(calc(1 + .14*$k))}35%{transform:scale(calc(1 + .1*$k))}'],
+    ['squish', 'Squish', 0.9, 'ease-in-out', '0%,100%{transform:translateY(0) scale(1)}20%{transform:translateY(0) scale(1.1,.88)}50%{transform:translateY(calc(-18% * $k)) scale(.94,1.08)}80%{transform:translateY(0) scale(1.08,.92)}'],
+    ['drift', 'Drift', 3.2, 'ease-in-out', '0%,100%{transform:translateY(0) skewX(0)}25%{transform:translateY(calc(-6% * $k)) skewX(calc(3deg * $k))}50%{transform:translateY(0)}75%{transform:translateY(calc(-6% * $k)) skewX(calc(-3deg * $k))}'],
+    ['gleam', 'Gleam', 1.4, 'ease-in-out', '0%,100%{transform:scale(1);filter:brightness(1)}45%{transform:scale(calc(1 + .05*$k)) skewX(calc(-3deg * $k));filter:brightness(1.18)}']
   ]
   var PRESETS = {}; PRESET_LIST.forEach(function (p) { PRESETS[p[0]] = { name: p[0], label: p[1], dur: p[2], ease: p[3], kf: p[4] } })
   var EFFECTS = [['fade', 'Fade'], ['scale', 'Scale'], ['rotate', 'Rotate'], ['flip', 'Flip'], ['slide-up', 'Slide up'], ['slide-down', 'Slide down'], ['slide-left', 'Slide left'], ['slide-right', 'Slide right'], ['blur', 'Blur'], ['spin', 'Spin'], ['morph', 'Morph'], ['draw', 'Draw']]
@@ -264,9 +277,23 @@
     })
     return (kitP = Promise.all([css, loadScript(siteUrl('js/ui-kit.js'))]).then(function () { return W.WIKit || null }))
   }
+  /* the shared style picker (js/style-picker.js + css/style-picker.css, WI.stylePicker; site/STYLE-PICKER.md): a few
+     styles in a compact row, "All N styles" opens the full grouped picker. Pages that do not carry it get it here. */
+  var spP = null
+  function loadStylePicker() {
+    if (W.WI && W.WI.stylePicker) return Promise.resolve(W.WI.stylePicker)
+    if (spP) return spP
+    var css = new Promise(function (ok) {
+      if (D.querySelector('link[href$="style-picker.css"]')) { ok(); return }
+      var l = D.createElement('link'); l.rel = 'stylesheet'; l.href = siteUrl('css/style-picker.css'); l.onload = l.onerror = function () { ok() }; D.head.appendChild(l)
+    })
+    return (spP = Promise.all([css, loadScript(siteUrl('js/style-picker.js'))]).then(function () { return (W.WI && W.WI.stylePicker) || null }))
+  }
   function svgStore(style) { var s = W.WITH_SVG || W.EGI_SVG; return s && s[style] }
   function loadStyleData(style) {
     if (svgStore(style)) return Promise.resolve(true)
+    // site.js knows the chunked heavy styles (data/chunks/*) and puts them together
+    if (W.WI && W.WI.loadStyle) return W.WI.loadStyle(style).then(function () { return !!svgStore(style) })
     return loadScript(siteUrl('data/style-' + style + '.js')).then(function () { return !!svgStore(style) })
   }
   // One icon in every style, cheaply: its own page (site/icons/<name>.html, ~110 KB) carries every style as a
@@ -289,7 +316,12 @@
     return (xsLoading[name] = W.fetch(siteUrl('icons/' + name + '.html')).then(function (r) { return r.ok ? r.text() : '' }).then(function (html) {
       if (!html) return false
       var doc = new W.DOMParser().parseFromString(html, 'text/html'), got = {}, n = 0
-      $$('symbol[id^="s-"]', doc).forEach(function (sym) { got[sym.id.slice(2)] = sym.innerHTML; n++ })
+      // (heavy styles' symbols are empty placeholders, data-lazy; a rich style's gradient <defs> sit beside its symbol, data-for)
+      $$('symbol[id^="s-"]', doc).forEach(function (sym) {
+        if (sym.hasAttribute('data-lazy')) return
+        var df = doc.querySelector('defs[data-for="' + sym.id + '"]')
+        got[sym.id.slice(2)] = (df ? '<defs>' + df.innerHTML + '</defs>' : '') + sym.innerHTML; n++
+      })
       if (n) XS[name] = got
       return n > 0
     }, function () { return false }))
@@ -335,8 +367,13 @@
     if (d) return trigger === 'loop' ? (d.cycle || d.shot) : (d.shot || d.cycle)
     return PRESETS[preset].dur
   }
+  // o.style: the icon's style. A 3D style (WithMotion.is3dStyle) plays the entry's 3D counterpart (styleMotion) and wears
+  // class wm-3d; a backdrop style (bento, dock: the tile stays still) wears wm-backdrop. Flat styles change nothing.
   function motionAttrs(entry, o) {
     o = o || {}
+    var mm = WM(), st = o.style || ''
+    var d3 = !!(st && mm && mm.is3dStyle && mm.is3dStyle(st)), backdrop = !!(st && mm && mm.isBackdropStyle && mm.isBackdropStyle(st))
+    if (entry && entry.preset && d3 && mm.styleMotion) { try { var e3 = mm.styleMotion(entry, st); if (e3 && PRESETS[e3.preset]) entry = e3 } catch (err) { } }
     if (!entry || !entry.preset || !PRESETS[entry.preset]) return null
     var preset = entry.preset
     if (preset === 'draw' && o.stroked === false) preset = 'pop'
@@ -351,8 +388,10 @@
     var steps = entry.steps || 0
     if (steps) v['--wm-steps'] = steps
     var cls = 'wm wm-' + trig + ' wm-p-' + preset + (preset === 'draw' ? ' wm-drawing' : '')
+    var extra = (d3 ? ' wm-3d' : '') + (backdrop ? ' wm-backdrop' : '')
+    cls += extra
     // parts choreography (forge/MOTION.md): decorations kept still
-    if (o.deco === 'still' && preset !== 'draw') v['--wm-deco'] = 'none'
+    if ((o.deco === 'still' || backdrop) && preset !== 'draw') v['--wm-deco'] = 'none'
     var out = { preset: preset, trigger: trig, cls: cls, vars: v, dur: dur, k: k, steps: steps, origin: entry.origin || null, dir: entry.dir, deco: o.deco === 'still' ? 'still' : '' }
     // an icon whose drawing has tagged parts, playing its OWN motion: no preset class (it would make every plate play
     // the main preset), the spec's slot + parts variables instead, so a plate keeps its own move (a bell's clapper rings
@@ -360,17 +399,19 @@
     // o.spec: the icon's motion spec (o.parts: false when the drawing has no part tags, which keeps the classic form)
     var m = WM()
     if (o.spec && o.parts !== false && preset !== 'draw' && m && m.specVars) {
-      var slot = trig === 'loop' ? '--wmL' : '--wmH', own = trig === 'loop' ? o.spec.loop : o.spec.hover
+      var spec3 = o.spec
+      if (st && m.styleSpec) { try { spec3 = m.styleSpec(o.spec, st) || o.spec } catch (err) { spec3 = o.spec } }
+      var slot = trig === 'loop' ? '--wmL' : '--wmH', own = trig === 'loop' ? spec3.loop : spec3.hover
       if (own && own.preset === preset) {
         var sv = {}
-        try { var all = m.specVars(o.spec); for (var x in all) if (x.indexOf(slot) === 0) sv[x] = all[x] } catch (e) { sv = null }
+        try { var all = m.specVars(spec3); for (var x in all) if (x.indexOf(slot) === 0) sv[x] = all[x] } catch (e) { sv = null }
         if (sv) {
           var keep = {}
           if (v['--wm-dur'] && Math.abs(speed - 1) > 0.001) keep['--wm-dur'] = v['--wm-dur']
           if (Math.abs((o.amount || 1) - 1) > 0.001) keep['--wm-k'] = v['--wm-k'] || '1'
           if (v['--wm-deco']) keep['--wm-deco'] = v['--wm-deco']
           out.own = true; out.ownVars = keep
-          out.cls = 'wm wm-' + trig
+          out.cls = 'wm wm-' + trig + extra
           out.vars = Object.assign(sv, keep)
         }
       }
@@ -379,6 +420,8 @@
     return out
   }
   // the part tags a drawing carries (forge/MOTION.md "Parts choreography"): { a, s, deco, shadow, any }
+  // what a preset does, in words (the runtime's PRESET_DEFAULTS[p].intent)
+  function presetIntent(p) { var m = WM(), d = m && m.PRESET_DEFAULTS && m.PRESET_DEFAULTS[p]; return (d && d.intent) || '' }
   function partTags(inner) {
     var s = String(inner || ''), has = function (t) { return new RegExp('\\sclass="[^"]*\\bwm-' + t + '\\b').test(s) }
     var o = { a: has('a'), s: has('s'), deco: has('deco'), shadow: has('shadow') }
@@ -389,7 +432,8 @@
   var DECO_DEFAULT = { spin: 'breathe', 'spin-once': 'breathe', tick: 'breathe', orbit: 'breathe', flip: 'breathe', nudge: 'breathe', pass: 'breathe', draw: 'breathe', fill: 'breathe', blink: 'breathe', glow: 'breathe', flicker: 'breathe', twinkle: 'breathe', zoom: 'breathe',
     ring: 'float', wiggle: 'float', shake: 'float', nod: 'float', type: 'float', tilt: 'float', sway: 'float', rock: 'float', breathe: 'float',
     bounce: 'twinkle', float: 'twinkle', rise: 'twinkle', drop: 'twinkle', jelly: 'twinkle', beat: 'twinkle', pulse: 'twinkle', pop: 'twinkle', tada: 'twinkle' }
-  var GROUND = ['bounce', 'float', 'rise', 'drop', 'jelly']
+  var GROUND_FALLBACK = ['bounce', 'float', 'rise', 'drop', 'jelly', 'turn', 'turn-once', 'lift', 'pump', 'squish', 'drift']
+  function groundPresets() { var m = WM(); return (m && m.GROUND_PRESETS) || GROUND_FALLBACK }
   function decoKind(preset, specDeco) {
     var m = WM(), d = m && m.DECO_DEFAULT
     if (['breathe', 'float', 'twinkle', 'still'].indexOf(specDeco) >= 0) return specDeco
@@ -435,10 +479,12 @@
     var remember = opts.remember !== false
     var subs = []
     var I = { name: '', title: '', data: null, motion: null }   // the current icon
-    var S = { style: 'line', color: 'ink', size: 24, px: 256, stroke: null, bg: 'light', anim: 'loop', preset: '', speed: 1, amount: 1, deco: '', code: 'tag', tab: 'look', flat: false }
+    var S = { style: 'line', color: 'ink', size: 24, px: 256, stroke: null, bg: 'light', anim: 'loop', preset: '', speed: 1, amount: 1, deco: '', code: 'tag', tab: 'look', flat: false, duo: '', duoRender: '' }
     var saved = remember ? (store(KEY) || {}) : {}
     if (remember && !store(KEY)) { var old = store('with-ip'); if (old) saved = { px: old.px, color: old.color, style: old.style } }
-    ;['color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco', 'code', 'style', 'flat'].forEach(function (k) { if (saved[k] != null) S[k] = saved[k] })
+    ;['color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco', 'code', 'style', 'flat', 'duo', 'duoRender'].forEach(function (k) { if (saved[k] != null) S[k] = saved[k] })
+    if (typeof S.duo !== 'string' || !/^[a-z0-9-]*$/.test(S.duo)) S.duo = ''
+    if (S.duoRender !== 'gradient') S.duoRender = ''
     if (PX.indexOf(S.px) < 0) S.px = 256
     if (['none', 'loop', 'hover', 'once'].indexOf(S.anim) < 0) S.anim = 'loop'
     if (S.deco !== 'still') S.deco = ''
@@ -514,12 +560,66 @@
       return { name: s, title: (d && d.title) || (m && m.title) || (wi && wi.title) || cap(s), hex: (d && d.hex) || (wi && wi.color) || HEX[s] || '#2F5BFF', say: (d && d.say) || (wi && wi.plain) || (m && m.description) || '', root: root, sw: typeof sw === 'number' ? sw : false, stroked: !!root.stroke && root.stroke !== 'none' }
     }
     function innerOf(name, style) {
-      if (name === I.name && I.data && I.data.styles && I.data.styles[style]) return I.data.styles[style].inner
+      var raw = rawInnerOf(name, style)
+      return raw != null && style === 'duo' && S.duoRender === 'gradient' ? duoGradient(name, raw) : raw
+    }
+    function rawInnerOf(name, style) {
+      if (name === I.name && I.data && I.data.styles && I.data.styles[style] && I.data.styles[style].inner != null) return I.data.styles[style].inner
       var m = svgStore(style); if (m && m[name] != null) return m[name]
       if (XS[name] && XS[name][style] != null) return XS[name][style]
       var wi = W.WITH_ICON && W.WITH_ICON[name]; if (wi && wi[style] != null) return wi[style]
       if (style === 'line' && I.data && I.data.thumbs && I.data.thumbs[name] != null) return I.data.thumbs[name]
       return null
+    }
+    /* ───────── Duo looks (data/duo-presets.js, generated from forge/styles/_duo-presets.mjs) ─────────
+       S.duo        '' or a preset id: its --with-duo-* colours (your own colour edits still win) and its suggested line width
+       S.duoRender  '' (the default Duo drawing) or 'gradient': the lines swept with one diagonal gradient
+                    var(--with-duo-from) -> var(--with-duo-to), the same drawing as duo.variants.gradient (_duo-core.mjs),
+                    made here from the default one: ink paths (no stroke or fill of their own) take url(#wg-duo-<icon>-0),
+                    and the gradient axis runs along (1,1) across the sampled line work.
+       The packages ship the default Duo render this release, so the gradient is a studio look: downloads and the
+       HTML + SVG code carry it, the <i> tag and components draw classic Duo (the Duo look field says so). */
+    var SVGNS = 'http://www.w3.org/2000/svg'
+    function duoPresets() { var p = W.WITH_DUO_PRESETS; return p && typeof p === 'object' ? p : null }
+    function duoPreset() { var p = S.duo && duoPresets(); return (p && p[S.duo]) || null }
+    var duoP = null
+    function ensureDuo() { return duoPresets() ? Promise.resolve(true) : (duoP || (duoP = loadScript(siteUrl('data/duo-presets.js')).then(function () { return !!duoPresets() }))) }
+    var duoG = {}, duoBox = null
+    function duoGradient(name, inner) {
+      var k = name + '|' + inner.length + '|' + inner.slice(0, 60)
+      if (duoG[k] != null) return duoG[k]
+      var id = 'wg-duo-' + (String(name).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '') || 'icon') + '-0', n = 0
+      // (the page's own data writes <path …></path>, the style files <path …/>)
+      var body = String(inner).replace(/<path\b([^>]*?)\s*(\/>|><\/path>)/g, function (all, at, end) {
+        if (/\s(?:stroke|fill)=/.test(at)) return all
+        n++; return '<path' + at + ' stroke="url(#' + id + ')"' + end
+      })
+      if (!n) return (duoG[k] = inner)
+      var ax = duoAxis(inner)
+      return (duoG[k] = '<defs><linearGradient id="' + id + '" x1="' + ax[0] + '" y1="' + ax[1] + '" x2="' + ax[2] + '" y2="' + ax[3] + '" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--with-duo-from, currentColor)"/><stop offset="1" stop-color="var(--with-duo-to, currentColor)"/></linearGradient></defs>' + body)
+    }
+    // the axis of _duo-core.mjs axis(): along (1,1), spanning the line work (+1.4 for the stroke), at least 16 units long
+    function duoAxis(inner) {
+      var lo = Infinity, hi = -Infinity, x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity
+      try {
+        if (!duoBox) { duoBox = D.createElementNS(SVGNS, 'svg'); duoBox.setAttribute('aria-hidden', 'true'); duoBox.style.cssText = 'position:absolute;left:-9999px;top:0;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none'; D.body.appendChild(duoBox) }
+        String(inner).replace(/<path\b([^>]*?)\/?>/g, function (all, at) {
+          var m = /\sd="([^"]*)"/.exec(at); if (!m || /\sfill=/.test(at)) return all
+          var p = D.createElementNS(SVGNS, 'path'); p.setAttribute('d', m[1]); duoBox.appendChild(p)
+          var L = p.getTotalLength(), steps = Math.min(400, Math.max(4, Math.ceil(L / 0.4)))
+          for (var i = 0; i <= steps; i++) {
+            var q = p.getPointAtLength(L * i / steps), sm = q.x + q.y
+            if (sm < lo) lo = sm; if (sm > hi) hi = sm
+            if (q.x < x0) x0 = q.x; if (q.x > x1) x1 = q.x; if (q.y < y0) y0 = q.y; if (q.y > y1) y1 = q.y
+          }
+          duoBox.removeChild(p); return all
+        })
+      } catch (e) { }
+      if (!isFinite(lo)) return [2, 2, 22, 22]
+      lo -= 1.4; hi += 1.4
+      if (hi - lo < 16) { var mid = (lo + hi) / 2; lo = mid - 8; hi = mid + 8 }
+      var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, sc = cx + cy, r2 = function (v) { var r = Math.round(v * 100) / 100; return r === 0 ? 0 : r }
+      return [cx + (lo - sc) / 2, cy + (lo - sc) / 2, cx + (hi - sc) / 2, cy + (hi - sc) / 2].map(r2)
     }
     // tried[style]: 1 while its data file loads, 2 once it has (only then may a missing drawing fall back to line)
     var tried = {}
@@ -578,7 +678,7 @@
     var HOKEY = 'with-handoff-v1'
     function handoff() {
       var sv = store(KEY) || {}
-      ;['style', 'color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco'].forEach(function (k) { sv[k] = S[k] })
+      ;['style', 'color', 'size', 'px', 'bg', 'anim', 'speed', 'amount', 'deco', 'duo', 'duoRender'].forEach(function (k) { sv[k] = S[k] })
       store(KEY, sv)
       var cv = store(CKEY) || {}, c = cstate()
       cv.icons = cv.icons || {}
@@ -605,13 +705,15 @@
       if (rmCache[k]) return rmCache[k]
       var roles = PL().rolesFor(inner), defs = {}
       String(inner).replace(/var\(\s*(--with-[\w-]+)\s*,\s*([^()]*?)\s*\)/g, function (a, v, d) { if (!(v in defs)) defs[v] = d; return a })
+      // the Duo gradient's stops (studio look): the palette's main colour to its accent
+      if (style === 'duo') { if ('--with-duo-from' in defs) roles['--with-duo-from'] = 'c1'; if ('--with-duo-to' in defs) roles['--with-duo-to'] = 'accent' }
       return (rmCache[k] = { roles: roles, order: Object.keys(roles), defs: defs })
     }
     function isMulti(style, name) { var inner = innerOf(name || I.name, style || S.style); return inner != null && /var\(\s*--with-/.test(inner) }
     var CLABEL = {
-      duo: { ink: 'Lines', '--with-duo': 'Tint' },
+      duo: { ink: 'Lines', '--with-duo': 'Tint', '--with-duo-accent': 'Accent detail', '--with-duo-from': 'Gradient start', '--with-duo-to': 'Gradient end' },
       blueprint: { ink: 'Lines', '--with-accent': 'Accent lines' },
-      glass: { ink: 'Rim', '--with-glass-back': 'Back glass', '--with-glass-pane': 'Front pane', '--with-glass-etch': 'Etching', '--with-glass-frost': 'Frost', '--with-glass-shine': 'Shine', '--with-glass-accent': 'Accent' },
+      glass: { ink: 'Rim', role: { c1: 'Glass tint', c2: 'Second tint', c3: 'Third tint', c4: 'Fourth tint', tint: 'Frost', accent: 'Accent', shadow: 'Shadow', shine: 'Shine', edge: 'Rim light' }, '--with-glass-back': 'Back glass', '--with-glass-pane': 'Front pane', '--with-glass-etch': 'Etching', '--with-glass-frost': 'Frost', '--with-glass-shine': 'Shine', '--with-glass-accent': 'Accent' },
       kawaii: { ink: 'Outline', slot: ['Body', 'Second colour', 'Third colour', 'Fourth colour', 'Fifth colour', 'Sixth colour'], '--with-kawaii-face': 'Face', '--with-kawaii-blush': 'Blush', '--with-kawaii-sparkle': 'Sparkle', '--with-kawaii-accent': 'Accent', '--with-kawaii-shine': 'Shine' },
       sticker: { ink: 'Outline', merge: ['--with-sticker-ink'], slot: ['Main colour', 'Second colour', 'Third colour', 'Fourth colour', 'Fifth colour', 'Sixth colour'], '--with-sticker-edge': 'Border', '--with-sticker-shadow': 'Shadow', '--with-sticker-shine': 'Shine' },
       pixel: { ink: 'Outline', '--with-pixel-fill': 'Fill', '--with-pixel-shine': 'Highlight' },
@@ -628,7 +730,23 @@
       gothic: { ink: 'Lead and iron', role: { c1: 'Ruby glass', c2: 'Sapphire glass', c3: 'Gold glass', c4: 'Emerald glass', tint: 'Stone', accent: 'Gilding', shadow: 'Shadow', shine: 'Candlelight', edge: 'Stone shade' } },
       pastel: { ink: 'Outline', role: { c1: 'Main pastel', c2: 'Second pastel', c3: 'Third pastel', c4: 'Fourth pastel', accent: 'Fifth pastel', tint: 'Paper', shadow: 'Shadow', shine: 'Highlight', edge: 'Rim' } },
       coquette: { ink: 'Outline', role: { c1: 'Blush', c2: 'Rose', c3: 'Ribbon', c4: 'Cream and pearls', tint: 'Satin light', accent: 'Gold', shadow: 'Shadow', shine: 'Sheen', edge: 'Lace' } },
-      plush: { ink: 'Piping', role: { c1: 'Main felt', c2: 'Second felt', c3: 'Third felt', c4: 'Fourth felt', accent: 'Patches', tint: 'Cream felt', shadow: 'Fabric shade', shine: 'Fleece highlight', edge: 'Stitching' } }
+      plush: { ink: 'Piping', role: { c1: 'Main felt', c2: 'Second felt', c3: 'Third felt', c4: 'Fourth felt', accent: 'Patches', tint: 'Cream felt', shadow: 'Fabric shade', shine: 'Fleece highlight', edge: 'Stitching' } },
+      // the rich styles (run 12): gradients whose stops are role variables, so a palette or a picked colour repaints the gradient itself
+      clay: { ink: 'Outline', role: { c1: 'Main clay', c2: 'Second clay', c3: 'Third clay', c4: 'Fourth clay', tint: 'Light clay', accent: 'Accent', shadow: 'Shadow', shine: 'Highlight', edge: 'Rim' } },
+      bento: { ink: 'Glyph', role: { c1: 'Tile', c2: 'Tile shade', c3: 'Third colour', c4: 'Fourth colour', tint: 'Tile light', accent: 'Accent', shadow: 'Shadow', shine: 'Shine', edge: 'Tile edge' } },
+      suite: { ink: 'Outline', role: { c1: 'Main colour', c2: 'Second colour', c3: 'Third colour', c4: 'Fourth colour', tint: 'Light fill', accent: 'Accent', shadow: 'Shade', shine: 'Highlight', edge: 'Edge' } },
+      dock: { ink: 'Glyph', role: { c1: 'Tile', c2: 'Tile depth', c3: 'Third colour', c4: 'Fourth colour', tint: 'Glyph light', accent: 'Accent', shadow: 'Shadow', shine: 'Gloss', edge: 'Rim' } },
+      liquid: { ink: 'Outline', role: { c1: 'Liquid tint', c2: 'Second tint', c3: 'Third tint', c4: 'Fourth tint', tint: 'Clear glass', accent: 'Refraction', shadow: 'Shadow', shine: 'Glint', edge: 'Light rim' } },
+      chrome: { ink: 'Outline', role: { c1: 'Metal', c2: 'Dark metal', c3: 'Reflection', c4: 'Horizon', tint: 'Light metal', accent: 'Accent', shadow: 'Shadow', shine: 'Mirror shine', edge: 'Edge' } },
+      soft3d: { ink: 'Outline', role: { c1: 'Main colour', c2: 'Shade side', c3: 'Third colour', c4: 'Fourth colour', tint: 'Light', accent: 'Accent', shadow: 'Shadow', shine: 'Highlight', edge: 'Edge' } },
+      brutal: { ink: 'Outline', role: { c1: 'Main colour', c2: 'Second colour', c3: 'Third colour', c4: 'Fourth colour', tint: 'Paper', accent: 'Accent', shadow: 'Hard shadow', shine: 'Shine', edge: 'Edge' } },
+      // the holiday styles (run 13), labelled after what each role paints by default (see each _<style>-palettes.mjs / core header)
+      utsav: { ink: 'Plum outline', role: { c1: 'Marigold body', c2: 'Saffron', c3: 'Rani pink parts', c4: 'Peacock teal', tint: 'Light', accent: 'Gold rosettes', shadow: 'Shadow', shine: 'Cream dot-work', edge: 'Gold inner line' } },
+      rangoli: { ink: 'Pane detail', role: { c1: 'Glow light', c2: 'Glow deep', c3: 'Parts light', c4: 'Parts deep', tint: 'Panes', accent: 'Motif pop', shadow: 'Depth lip', shine: 'Highlight', edge: 'Inlay motifs' } },
+      halloween: { ink: 'Midnight outline', role: { c1: 'Pumpkin glow', c2: 'Pumpkin edge', c3: 'Witch purple', c4: 'Slime green', tint: 'Candle light', accent: 'Candle glow and moon', shadow: 'Drop shadow', shine: 'Highlight', edge: 'Bats and spiders' } },
+      christmas: { ink: 'Outline', role: { c1: 'Cranberry', c2: 'Pine', c3: 'Gold', c4: 'Candy cream', tint: 'Snow shade', accent: 'Sparkle', shadow: 'Deep shade', shine: 'Snow white', edge: 'Warm glow' } },
+      lunar: { ink: 'Lacquer lines', role: { c1: 'Lucky red', c2: 'Deep red', c3: 'Jade', c4: 'Blossom', tint: 'Paper', accent: 'Gold', shadow: 'Deep shade', shine: 'Foil highlight', edge: 'Deep gold' } },
+      valentine: { ink: 'Berry outline', role: { c1: 'Pink', c2: 'Red', c3: 'Chocolate', c4: 'Cream', tint: 'Gold sprinkles', accent: 'Leaves', shadow: 'Shade', shine: 'White highlights', edge: 'Blush' } }
     }
     // plain colour name of a default (#hex) for the Bauhaus labels
     function hueName(hex) {
@@ -669,12 +787,14 @@
     // c = a colour state (default: the icon's); its tweaks apply only to its own icon
     function colorsFor(style, name, c) {
       name = name || I.name; style = style || S.style; c = c || cstate()
-      if (!hasCustom(c) || !PL()) return null
+      var pv = style === 'duo' && duoPreset() ? duoPreset().vars || {} : null
+      if ((!hasCustom(c) && !pv) || !PL()) return null
       var m = rmap(name, style); if (!m || !m.order.length) return null
       var tw = (c.name || I.name) === name ? (c.tw[style] || {}) : {}
       var base = PL().applyPalette(innerOf(name, style), c.roles).vars, merge = mergeOf(style, m)
       var vars = {}, ink = tw.ink || c.roles.ink || null, n = 0
-      m.order.forEach(function (v) { var x = tw[v] || (merge.indexOf(v) >= 0 && tw.ink) || base[v]; if (x) { vars[v] = x; n++ } })
+      // your edits, then the Duo look's colours, then the palette (the gradient stops follow its roles too)
+      m.order.forEach(function (v) { var x = tw[v] || (merge.indexOf(v) >= 0 && tw.ink) || (pv && pv[v]) || base[v] || (style === 'duo' && c.roles[m.roles[v]]); if (x) { vars[v] = x; n++ } })
       return n || ink ? { vars: vars, ink: ink } : null
     }
     // palette -> colours for a mini render (no tweaks)
@@ -695,7 +815,7 @@
       if (cz) Object.keys(cz.vars).forEach(function (v) { parts.push(v + sep + cz.vars[v]) })
       return parts.join(pretty ? '; ' : ';')
     }
-    function colorKey() { var c = CS[I.name]; return hasCustom(c) ? JSON.stringify([c.pal, c.roles, c.tw[S.style] || 0]) : '' }
+    function colorKey() { var c = CS[I.name]; return (hasCustom(c) ? JSON.stringify([c.pal, c.roles, c.tw[S.style] || 0]) : '') + (S.duo || S.duoRender ? '|duo:' + S.duo + ':' + S.duoRender + ':' + !!duoPresets() : '') }
     function inkAuto(row, sb) {
       sb = sb || subj('a')
       var m = rmap(sb.name, sb.style), d = row && row.merge && row.merge.length && m && m.defs[row.merge[0]]
@@ -741,13 +861,14 @@
       var c = sb.st, roles = {}
       for (var r in p.colors) if (isHex(p.colors[r])) roles[r] = p.colors[r].toUpperCase()
       c.pal = p.id; c.palName = p.name; c.roles = roles; c.tw = {}
+      if (sb.k === 'a' && sb.style === 'duo') S.duo = ''   // a palette is your own colours: the Duo look keeps only its drawing
       colorsChanged(false, sb)
       say('Palette ' + p.name + ' applied to every colour' + (sb.k === 'b' ? ' of ' + sb.title : '') + '.')
     }
     function resetColors(sb) {
       sb = sb && sb.k ? sb : subj('a')
       if (sb.k === 'b') { var keep = sb.st.color; BCS[sb.name] = { name: sb.name, color: keep, pal: '', palName: '', roles: {}, tw: {} } }
-      else CS[I.name] = { name: I.name, pal: '', palName: '', roles: {}, tw: {} }
+      else { CS[I.name] = { name: I.name, pal: '', palName: '', roles: {}, tw: {} }; if (sb.style === 'duo') S.duo = '' }
       colorsChanged(false, sb)
       say('Colours reset to the defaults.')
     }
@@ -763,6 +884,24 @@
     var panels = []
     var RESET_I = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 12 A7.5 7.5 0 1 0 7 6.4"/><path d="M4 3.5 V7.5 H8"/></svg>'
     var DICE_I = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke-width="3"/></svg>'
+    /* the skin-tone picker (people avatars): one standard row, light to deep, like emoji skin tones. A tone sets the skin
+       roles (c1 = skin, tint = its light, shadow = its shade; the table in skills/with-icons/reference/styles.md#avatar-skin-tones),
+       keeps the hair and clothes, and repaints every style. Shown for icons whose palettes are named <skin>-and-<hair>. */
+    var SKIN = [['fair', 'Light', '#F6D2B6', '#FDEEE3', '#B08061'], ['beige', 'Medium-light', '#E2B184', '#F6E2CF', '#966243'], ['tan', 'Medium', '#C88B5C', '#EED6C4', '#7B4E30'],
+      ['caramel', 'Medium-dark', '#9C6038', '#E2C7B4', '#5C341A'], ['chestnut', 'Dark', '#6B4127', '#CFB4A2', '#3C2010'], ['umber', 'Deep', '#583420', '#C7AA98', '#2F190C']]
+    var SKIN_RE = /^(fair|umber|peach|caramel|porcelain|bronze|olive|chestnut|beige|honey|tan)-and-/
+    function isPerson(list) { for (var i = 0; list && i < list.length; i++) if (SKIN_RE.test(list[i].id) && (list[i].tags || []).indexOf('true-to-life') >= 0) return true; return false }
+    function chooseSkin(t, sb) {
+      // only the skin roles change: the hair, clothes and the rest keep the palette in use (or the style's own colours)
+      var c = sb.st, roles = {}
+      for (var k in c.roles) roles[k] = c.roles[k]
+      roles.c1 = t[2]; roles.tint = t[3]; roles.shadow = t[4]
+      c.roles = roles
+      // a tweak of the skin itself would hide the new tone
+      for (var st in c.tw) { var m = rmap(sb.name, st); if (!m) continue; for (var v in c.tw[st]) if (/^(c1|tint|shadow)$/.test(m.roles[v])) delete c.tw[st][v]; if (!Object.keys(c.tw[st]).length) delete c.tw[st] }
+      colorsChanged(false, sb)
+      say('Skin tone ' + t[1].toLowerCase() + ' applied to every style.')
+    }
     var TAG_LABEL = { 'true-to-life': 'True to life', 'on-dark': 'For dark pages', y2k: 'Y2K' }
     function colorPanel(el, k) {
       var P = { el: el, k: k === 'b' ? 'b' : 'a', key: '', gkey: '', filter: '', more: false, id: uid + '-cp' + panels.length }
@@ -780,6 +919,8 @@
               '<input class="wcp-hex" id="' + id + '" data-cp-hex="' + esc(r.key) + '" type="text" inputmode="text" maxlength="7" spellcheck="false" autocomplete="off" aria-label="' + esc(r.label) + ' hex code">' +
               '<button type="button" class="wcp-reset" data-cp-reset="' + esc(r.key) + '" aria-label="Reset ' + esc(r.label) + '" title="Reset ' + esc(r.label) + '">' + RESET_I + '</button></div>'
           }).join('') + '</div>' +
+          '<div class="wcp-skin" data-cp-skin hidden><p class="wied-l" id="' + P.id + '-sk">Skin tone</p><div class="wcp-skins" role="radiogroup" aria-labelledby="' + P.id + '-sk">' +
+            SKIN.map(function (t) { return '<button type="button" role="radio" class="wcp-skin-b" data-cp-tone="' + t[0] + '" aria-checked="false" aria-label="' + t[1] + '" title="' + t[1] + '" style="--sk:' + t[2] + ';--sk-s:' + t[4] + '"><span aria-hidden="true"></span></button>' }).join('') + '</div></div>' +
           '<div class="wcp-pal"><div class="wcp-pal-head"><p class="wied-l" id="' + P.id + '-pl">Palettes <small data-cp-count></small></p>' +
             '<button type="button" class="wcp-dice" data-cp-surprise>' + DICE_I + '<span>Surprise me</span></button></div>' +
             '<div class="wcp-tags" role="group" aria-label="Filter palettes" data-cp-tags></div>' +
@@ -823,6 +964,9 @@
           loadPalettes(s.name).then(function (l) { if (l) update(); else grid.innerHTML = '<p class="wcp-empty">No palettes for this icon yet.</p>' })
           return
         }
+        var skin = $('[data-cp-skin]', el), person = isPerson(list)
+        skin.hidden = !person
+        if (person) { var cur = (c.roles.c1 || '').toUpperCase(); $$('[data-cp-tone]', skin).forEach(function (b, i) { b.setAttribute('aria-checked', SKIN[i][2] === cur ? 'true' : 'false') }) }
         var vis = visible(list)
         if (!P.more && c.pal && !P.filter) { for (var j = 12; j < vis.length; j++) if (vis[j].id === c.pal) P.more = true }
         var shown = P.filter || P.more || vis.length <= 15 ? vis : vis.slice(0, 12)
@@ -849,6 +993,7 @@
         var b = e.target.closest('button'); if (!b || !el.contains(b)) return
         var v, s = sb(); if (!s) return
         if ((v = b.getAttribute('data-cp-pal'))) { var p = pal(v); if (p) choosePalette(p, s) }
+        else if ((v = b.getAttribute('data-cp-tone'))) { var t = SKIN.filter(function (x) { return x[0] === v })[0]; if (t) chooseSkin(t, s) }
         else if (b.hasAttribute('data-cp-tag')) { P.filter = b.getAttribute('data-cp-tag'); update() }
         else if (b.hasAttribute('data-cp-more')) { P.more = true; var k0 = $('[data-cp-pal]', el).length; update(); var nx = $('[data-cp-pal]', el)[k0]; if (nx) nx.focus() }
         else if ((v = b.getAttribute('data-cp-reset'))) clearTweak(v, s)
@@ -938,6 +1083,7 @@
     function rootFor(style, stroke) {
       var r = {}, src = info(style).root
       for (var k in src) r[k] = src[k]
+      if (stroke == null && style === 'duo') stroke = duoStroke()
       if (stroke != null && r['stroke-width'] != null) r['stroke-width'] = stroke
       return r
     }
@@ -994,7 +1140,7 @@
     function motionInfo(trigger) {
       trigger = trigger || S.anim
       if (trigger === 'none') return null
-      var o = { trigger: trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco, spec: S.preset ? null : I.motion, parts: parts().any }
+      var o = { trigger: trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, style: S.style, deco: S.deco, spec: S.preset ? null : I.motion, parts: parts().any }
       return motionAttrs(currentEntry(trigger), o) || motionAttrs({ preset: trigger === 'loop' ? 'float' : 'pop' }, o)
     }
     // the part tags of the current drawing (style), cached per drawing
@@ -1007,7 +1153,9 @@
     function presetsOrdered() {
       var sp = spec(), own = []
       ;[sp.loop, sp.hover].concat(sp.alt || []).forEach(function (e) { if (e && e.preset && PRESETS[e.preset] && own.indexOf(e.preset) < 0) own.push(e.preset) })
-      return { own: own, rest: PRESET_LIST.map(function (p) { return p[0] }).filter(function (p) { return own.indexOf(p) < 0 }) }
+      var m = WM(), rest = PRESET_LIST.map(function (p) { return p[0] }).filter(function (p) { return own.indexOf(p) < 0 })
+      if (m && m.is3dStyle && m.is3dStyle(S.style) && m.PRESETS_3D) rest.sort(function (a, b) { return (m.PRESETS_3D.indexOf(a) < 0 ? 1 : 0) - (m.PRESETS_3D.indexOf(b) < 0 ? 1 : 0) })
+      return { own: own, rest: rest }
     }
     /* ───────── "Turn into": target, After's colours, timing ───────── */
     function iconTitle(n) { if (n === I.name) return I.title; var w = W.WI && W.WI.icon && W.WI.icon(n); return (w && w.title) || titleOf(n) }
@@ -1311,9 +1459,14 @@
               '<span class="wied-tab-ink" aria-hidden="true"></span>' +
             '</div>' +
             '<div class="wied-pane" role="tabpanel" id="' + uid + '-p-look" aria-labelledby="' + uid + '-t-look" data-pane="look">' +
-              '<div class="wied-f"><p class="wied-l" id="' + uid + '-sl">Style <small data-style-say></small></p><div class="wied-styles" role="radiogroup" aria-labelledby="' + uid + '-sl" data-styles>' +
-                list.map(function (s) { var f = info(s); return '<button type="button" role="radio" class="wied-st" data-st="' + s + '" aria-checked="false" style="--sc:var(--c-' + s + ', ' + f.hex + ')" title="' + esc(f.title) + '"><span class="wied-st-i" data-st-i="' + s + '"></span><span class="wied-st-n">' + esc(f.title) + '</span></button>' }).join('') +
-              '</div></div>' +
+              '<div class="wied-f"><p class="wied-l" id="' + uid + '-sl">Style <small data-style-say></small></p><div class="wied-srow" data-styles></div></div>' +
+              '<div class="wied-f wied-duo" data-duof hidden><p class="wied-l" id="' + uid + '-dul">Duo look <small>an accent detail, or lines in a gradient</small></p>' +
+                '<div class="wied-seg is-3" role="group" aria-labelledby="' + uid + '-dul">' +
+                  [['classic', 'Classic'], ['accent', 'With an accent'], ['gradient', 'Gradient']].map(function (b) { return '<button type="button" data-duo-look="' + b[0] + '" aria-pressed="false">' + b[1] + '</button>' }).join('') +
+                '</div>' +
+                '<div class="wied-duo-sw" role="group" aria-label="Duo presets" data-duo-sw></div>' +
+                '<p class="wied-duo-note" data-duo-note hidden><b>Gradient is a studio look for now.</b> Your downloads and the HTML + SVG code carry it; the npm packages, the &lt;i&gt; tag and the components draw classic Duo this release.</p>' +
+              '</div>' +
               '<div class="wied-f" data-cpanel hidden></div>' +
               '<div class="wied-f" data-monof><p class="wied-l" id="' + uid + '-cl">Colour <small>in every download</small></p>' + monoHtml('a', uid + '-cl') + '</div>' +
               layer('fine', 'Size, line and background',
@@ -1359,6 +1512,7 @@
         '</div>' +
         '<p class="visually-hidden" aria-live="polite" data-live></p>'
       built = true
+      mountStyleRows()
       // the Colours panel in the Look pane (hosts with their own Look tab, like the library drawer, mount one there instead)
       if (ownPanel) ownPanel.destroy()
       ownPanel = opts.colorsPanel === false ? null : colorPanel($('[data-cpanel]', root))
@@ -1435,14 +1589,12 @@
             '<span class="wsw-arrow" aria-hidden="true"><span class="wsw-arrow-i">' + G.arrow + '</span><small data-sw-fxl></small></span>' + formTab('b') + '</div>' +
           '<div class="wsw-fpane" role="tabpanel" id="' + L('sfp') + '" data-sw-fp>' +
             '<div data-sw-fa>' +
-              '<div class="wied-f"><p class="wied-l" id="' + L('sal') + '">Style <small>the same as in Look</small></p><div class="wied-styles" role="radiogroup" aria-labelledby="' + L('sal') + '">' +
-                list.map(function (s) { var f = info(s); return '<button type="button" role="radio" class="wied-st" data-st="' + s + '" aria-checked="false" style="--sc:var(--c-' + s + ', ' + f.hex + ')" title="' + esc(f.title) + '"><span class="wied-st-i" data-st-i="' + s + '"></span><span class="wied-st-n">' + esc(f.title) + '</span></button>' }).join('') +
-              '</div></div>' +
+              '<div class="wied-f"><p class="wied-l" id="' + L('sal') + '">Style <small>the same as in Look</small></p><div class="wied-srow" data-sw-astyles></div></div>' +
               '<div class="wied-f" data-sw-acp hidden></div>' +
               '<div class="wied-f" data-sw-amono><p class="wied-l" id="' + L('acl') + '">Colour <small>the same as in Look</small></p>' + monoHtml('a', L('acl')) + '</div>' +
             '</div>' +
             '<div data-sw-fb hidden>' +
-              '<div class="wied-f"><p class="wied-l" id="' + L('bsl') + '">Style <small data-sw-bsay></small></p><div class="wied-styles wsw-bst" role="radiogroup" aria-labelledby="' + L('bsl') + '" data-sw-bst></div></div>' +
+              '<div class="wied-f"><div class="wied-lrow"><p class="wied-l" id="' + L('bsl') + '">Style <small data-sw-bsay></small></p><button type="button" class="wsw-same" data-bst="" aria-pressed="true">Same as before</button></div><div class="wied-srow" data-sw-bst></div></div>' +
               '<div class="wied-f"><button type="button" role="switch" class="wsw-link" data-sw-link aria-checked="true"><span class="wsw-link-ui" aria-hidden="true"></span><span class="wsw-link-t"><b>Same colours as before</b><small data-sw-linksay></small></span></button></div>' +
               '<div data-sw-bown hidden>' +
                 '<div class="wied-f" data-sw-bcp hidden></div>' +
@@ -1525,7 +1677,7 @@
       if (pt.a) rows.push(plate('A', 'Moving part'))
       if (pt.s) rows.push(plate('S', 'Badge'))
       if (pt.deco) rows.push(['deco', 'Decorations', DECO_SAY[S.deco === 'still' ? 'still' : decoKind(mi.preset, mi.own ? sp.deco : null)]])
-      if (pt.shadow) rows.push(['shadow', 'Shadow', GROUND.indexOf(mi.preset) >= 0 ? 'stays on the ground and shrinks as it lifts' : 'moves with it'])
+      if (pt.shadow) rows.push(['shadow', 'Shadow', groundPresets().indexOf(mi.preset) >= 0 ? 'stays on the ground and shrinks as it lifts' : 'moves with it'])
       $('[data-parts-say]', root).textContent = 'in ' + info(S.style).title
       $('[data-parts]', root).innerHTML = rows.map(function (r) { return '<li class="is-' + r[0] + '"><i aria-hidden="true"></i><b>' + esc(r[1]) + '</b><span>' + esc(r[2]) + '</span></li>' }).join('')
     }
@@ -1536,8 +1688,8 @@
       presetKey = key
       var o = presetsOrdered()
       var chip = function (p, own) {
-        var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, deco: S.deco })
-        return '<button type="button" class="wied-pchip wm-trigger' + (own ? ' is-own' : '') + '" data-preset="' + p + '" aria-pressed="false"><span class="wied-pchip-i ' + (mi ? mi.cls : '') + '" style="' + (mi ? mi.style : '') + '">' + buildSvg(I.name, S.style, { size: 20, mode: 'live' }) + '</span><span>' + esc(PRESETS[p].label) + '</span></button>'
+        var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, style: S.style, deco: S.deco })
+        return '<button type="button" class="wied-pchip wm-trigger' + (own ? ' is-own' : '') + '" data-preset="' + p + '" aria-pressed="false"' + (presetIntent(p) ? ' title="' + esc(cap(presetIntent(p))) + '"' : '') + '><span class="wied-pchip-i ' + (mi ? mi.cls : '') + '" style="' + (mi ? mi.style : '') + '">' + buildSvg(I.name, S.style, { size: 20, mode: 'live' }) + '</span><span>' + esc(PRESETS[p].label) + '</span></button>'
       }
       box.innerHTML = '<div class="wied-pgroup"><p class="wied-sub">Made for ' + esc(I.title) + '</p><div class="wied-pchips">' + o.own.map(function (p) { return chip(p, true) }).join('') + '</div></div>' +
         '<details class="wied-more"><summary>All ' + PRESET_LIST.length + ' moves</summary><div class="wied-pchips">' + o.rest.map(function (p) { return chip(p, false) }).join('') + '</div></details>'
@@ -1648,25 +1800,37 @@
       }
       paintRadios('data-fx', swEffect(), box)
     }
+    // the style controls: compact rows from the shared picker (Look, Turn into Before / After); "All N styles" opens the rest
+    var rows = {}
+    function mountStyleRows() {
+      Object.keys(rows).forEach(function (k) { if (rows[k] && rows[k].destroy) rows[k].destroy() })
+      rows = {}
+      var gen = (mountStyleRows.gen = (mountStyleRows.gen || 0) + 1)
+      loadStylePicker().then(function (SP) {
+        if (!SP || !built || gen !== mountStyleRows.gen) return
+        var mk = function (el, o) { return el ? SP.row(el, o) : null }
+        var pickA = function (v) { set({ style: v }) }
+        rows.a = mk($('[data-styles]', root), { current: S.style, icon: I.name, size: 26, max: 6, label: 'Style', title: 'Choose a style', onPick: pickA })
+        rows.a2 = mk($('[data-sw-astyles]', root), { current: S.style, icon: I.name, size: 26, max: 6, label: 'Style before', title: 'Choose a style', onPick: pickA })
+        var t = swapTarget()
+        rows.b = mk($('[data-sw-bst]', root), { current: SW.toStyle || S.style, icon: t ? t.name : I.name, size: 26, max: 6, label: 'Style after', title: 'Choose the style after',
+          onPick: function (v) { SW.toStyle = v; swChanged(); var tt = swapTarget(); if (tt) say(tt.title + ' in ' + info(tt.want).title + '.') } })
+        rows.icon = I.name; rows.bIcon = t ? t.name : I.name
+        syncStyleRows()
+      })
+    }
+    function syncStyleRows() {
+      if (rows.a) { if (rows.icon !== I.name) { rows.a.setIcon(I.name); if (rows.a2) rows.a2.setIcon(I.name) } rows.a.set(S.style) }
+      if (rows.a2) rows.a2.set(S.style)
+      rows.icon = I.name
+    }
+
     // After's style chips: "Same as before" + every style, each drawn with After in that style when its drawing is here
-    var bstKey = ''
     function paintBStyles(t) {
       var box = $('[data-sw-bst]', root); if (!box) return
-      var list = styleList(), key = t.name + '|' + S.style + '|' + list.join(',') + '|' + list.map(function (s) { return innerOf(t.name, s) != null ? 1 : 0 }).join('') + '|' + JSON.stringify(bColors(t))
-      if (key !== bstKey) {
-        bstKey = key
-        var bc = bColors(t)
-        var one = function (s, same) {
-          var f = info(s), inner = innerOf(t.name, s)
-          var ic = inner != null ? buildSvg(t.name, s, { size: 22, mode: 'live', full: true, colors: isMulti(s, t.name) ? (SW.link ? colorsFor(s, t.name) : colorsFor(s, t.name, bstate(t.name))) : null }) : ''
-          return '<button type="button" role="radio" class="wied-st' + (same ? ' is-same' : '') + '" data-bst="' + (same ? '' : s) + '" aria-checked="false" tabindex="-1" style="--sc:var(--c-' + s + ', ' + f.hex + ')" title="' + esc(same ? 'Same style as before (' + f.title + ')' : f.title) + '">' +
-            '<span class="wied-st-i"' + (inner == null ? ' data-wait' : '') + '>' + ic + '</span><span class="wied-st-n">' + esc(same ? 'Same as before · ' + f.title : f.title) + '</span></button>'
-        }
-        box.innerHTML = one(S.style, true) + list.map(function (s) { return one(s, false) }).join('')
-        if (bc && list.some(function (s) { return innerOf(t.name, s) == null })) fetchIconPage(t.name).then(function (ok) { if (ok && built) { bstKey = ''; paintBStyles(swapTarget() || t) } })
-      }
-      paintRadios('data-bst', SW.toStyle, box)
-      $('[data-sw-bsay]', root).textContent = SW.toStyle ? info(SW.toStyle).title : 'same as before'
+      if (rows.b) { if (rows.bIcon !== t.name) { rows.b.setIcon(t.name); rows.bIcon = t.name } rows.b.set(SW.toStyle || S.style) }
+      var same = $('.wsw-same', root); if (same) same.setAttribute('aria-pressed', SW.toStyle ? 'false' : 'true')
+      $('[data-sw-bsay]', root).textContent = SW.toStyle ? info(SW.toStyle).title : 'same as before (' + info(S.style).title + ')'
     }
     function renderSwap() {
       var pane = $('[data-pane="swap"]', root); if (!pane) return
@@ -1768,9 +1932,10 @@
       root.className = root.className.replace(/s-[a-z]+/g, '').trim() + ' s-' + S.style
       root.style.setProperty('--ic', previewColor())
       // style + colour controls
-      $$('[data-st]', root).forEach(function (b) { var on = b.getAttribute('data-st') === S.style; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1 })
+      syncStyleRows()
       var sayEl = $('[data-style-say]', root); if (sayEl) sayEl.textContent = f.title + (f.say ? ' · ' + f.say : '')
       paintMono()
+      paintDuo()
       // multi-colour styles: every colour + palettes replace the single colour row
       var multi = isMulti()
       $('[data-monof]', root).hidden = multi
@@ -1781,7 +1946,7 @@
       var fw = $('[data-flat-wrap]', root); fw.hidden = !(cz && S.code === 'html'); $('[data-flat]', root).checked = !!S.flat
       $$('[data-bg]', root).forEach(function (b) { if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', b.getAttribute('data-bg') === S.bg) })
       setRange('size', S.size, S.size + ' px')
-      var sw = f.sw, sr = $('[data-range-wrap="stroke"]', root)
+      var sw = f.sw && S.style === 'duo' ? (duoStroke() || f.sw) : f.sw, sr = $('[data-range-wrap="stroke"]', root)
       sr.classList.toggle('is-off', !sw)
       $('[data-range="stroke"]', root).disabled = !sw
       setRange('stroke', S.stroke != null ? S.stroke : (sw || 1.75), sw ? (S.stroke != null ? S.stroke : sw) + ' px' : 'fixed')
@@ -1823,7 +1988,7 @@
       buildPresets()
       dlPanels.forEach(function (p) { p.update() })
       if (place) place.render()
-      if (remember) store(KEY, { style: S.style, color: S.color, size: S.size, px: S.px, bg: S.bg, anim: S.anim, speed: S.speed, amount: S.amount, deco: S.deco, code: S.code, flat: S.flat })
+      if (remember) store(KEY, { style: S.style, color: S.color, size: S.size, px: S.px, bg: S.bg, anim: S.anim, speed: S.speed, amount: S.amount, deco: S.deco, code: S.code, flat: S.flat, duo: S.duo, duoRender: S.duoRender })
       if (!o.silent) emit()
     }
     // the setup and size disclosures under the code follow the selected tab
@@ -1973,7 +2138,7 @@
     function codeFor(kind) {
       var n = I.name, st = S.style, mi = motionInfo(), t = swapReady() ? swapTarget() : null
       // a swap pair is never animated part by part: the whole-icon form of the motion
-      if (t && ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked })
+      if (t && ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, style: S.style })
       var cz = isMulti(st) ? colorsFor(st) : null
       var col = cz && cz.ink ? cz.ink : S.color === 'ink' ? null : colorHex()
       var cvars = cz ? Object.keys(cz.vars).map(function (k) { return k + ': ' + cz.vars[k] }) : []
@@ -2008,7 +2173,7 @@
             ind + '  <i class="' + cls(n, st) + ' wm-a"' + styleAttr([col ? 'color: ' + col : ''].concat(cvars)) + '></i>\n' +
             ind + '  <i class="' + cls(t.name, t.style) + ' wm-b"' + styleAttr([colB ? 'color: ' + colB : ''].concat(bvars)) + '></i>\n' + ind + '</span>' + close('') + palNote
         }
-        if (ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked })
+        if (ownCode(mi)) mi = motionAttrs(currentEntry(mi.trigger), { trigger: mi.trigger, speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, style: S.style })
         var sty = styleAttr([col ? 'color: ' + col : '', fs].concat(cvars, varsList(mi)))
         return '<i class="' + cls(n, st) + motionTagCls(mi) + '"' + sty + '></i>' + (mi && mi.trigger === 'hover' ? '\n<!-- plays on hover. To play when a parent is hovered or focused, give that button or link class="wm-trigger".\n     Touch screens: tapping a button or link with class="wm-trigger" plays it (a bare <i> never gets :hover on iOS), or use the JS runtime: motion() from @withicons/motion -->' : '') + palNote
       }
@@ -2102,7 +2267,7 @@
     // hovered, so "On hover" exports its hover move on a loop; a GIF cannot play "once" either, so it loops too.
     function exportMotion(gif) {
       var trig = S.anim === 'none' ? 'loop' : S.anim
-      if (trig === 'hover' || (gif && trig === 'once')) return motionAttrs(currentEntry('hover'), { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco }) || motionInfo('loop')
+      if (trig === 'hover' || (gif && trig === 'once')) return motionAttrs(currentEntry('hover'), { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, style: S.style, deco: S.deco }) || motionInfo('loop')
       return motionInfo(trig)
     }
     function exportLabel() {
@@ -2135,7 +2300,7 @@
     }
 
     function exportOpts(mi) {
-      var o = { trigger: mi.trigger, preset: mi.preset, duration: mi.dur, amount: mi.k }
+      var o = { trigger: mi.trigger, preset: mi.preset, duration: mi.dur, amount: mi.k, style: S.style }
       if (mi.origin) o.origin = mi.origin
       if (mi.dir != null) o.dir = mi.dir
       if (mi.steps) o.steps = mi.steps
@@ -2205,12 +2370,55 @@
       code: codeFor, setup: function (kind) { return setupLines(kind || S.code) }, setupGroups: function (kind) { return setupGroups(kind || S.code) }, sizeHelp: function (kind) { return sizeHelp(kind || S.code) }, animatedSvg: animatedExport, png: function (st, px) { st = st || S.style; px = px || S.px; return toPng(buildSvg(I.name, st, { size: px, mode: 'file', hex: colorHex(st) }), px) }
     }
 
+    /* ───────── the Duo look field (Look pane, Duo only) ───────── */
+    function duoStroke() { var p = duoPreset(); return p && p.strokeWidth != null ? p.strokeWidth : null }
+    function duoLookNow() { return S.duoRender === 'gradient' ? 'gradient' : S.duo ? 'accent' : 'classic' }
+    function firstPreset(gradient) {
+      var all = duoPresets() || {}
+      for (var id in all) if ((all[id].render === 'gradient') === gradient) return id
+      return ''
+    }
+    function setDuoLook(v) {
+      if (!duoPresets() && v !== 'classic') { ensureDuo().then(function (ok) { if (ok) setDuoLook(v) }); return }
+      if (v === 'gradient') { S.duo = firstPreset(true); S.duoRender = 'gradient' }
+      else if (v === 'accent') { S.duo = firstPreset(false); S.duoRender = '' }
+      else { S.duo = ''; S.duoRender = '' }
+      S.stroke = null; presetKey = ''
+      render()
+      say(v === 'gradient' ? 'Duo gradient: the lines sweep from one colour to another.' : v === 'accent' ? 'Duo with an accent: one detail in the accent colour.' : 'Classic Duo: lines and tint in one colour.')
+    }
+    function setDuoPreset(id) {
+      var p = duoPresets() && duoPresets()[id]; if (!p) return
+      S.duo = id; S.duoRender = p.render === 'gradient' ? 'gradient' : ''; S.stroke = null; presetKey = ''
+      render()
+      say(p.title + ' applied.')
+    }
+    function paintDuo() {
+      var f = $('[data-duof]', root); if (!f) return
+      var on = S.style === 'duo'
+      f.hidden = !on
+      if (!on) return
+      if (!duoPresets()) { ensureDuo().then(function (ok) { if (ok && built) { presetKey = ''; render() } else if (!ok) f.hidden = true }); return }
+      var look = duoLookNow()
+      $$('[data-duo-look]', f).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-duo-look') === look ? 'true' : 'false') })
+      var sw = $('[data-duo-sw]', f), all = duoPresets()
+      if (!sw.firstChild) sw.innerHTML = Object.keys(all).map(function (id) {
+        var p = all[id], v = p.vars || {}
+        var bg = p.render === 'gradient' ? 'linear-gradient(135deg,' + (v['--with-duo-from'] || v['--with-duo']) + ',' + (v['--with-duo-to'] || v['--with-duo-accent']) + ')' : 'linear-gradient(135deg,' + (v['--with-duo'] || '#6B70F7') + ' 0 50%,' + (v['--with-duo-accent'] || v['--with-duo']) + ' 50% 100%)'
+        return '<button type="button" class="wied-duo-chip" data-duo-pre="' + esc(id) + '" aria-pressed="false" title="' + esc(p.description || p.title) + '"><span class="wied-duo-dot" style="background:' + esc(bg) + '" aria-hidden="true"></span><span>' + esc(p.title) + '</span></button>'
+      }).join('')
+      $$('[data-duo-pre]', sw).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-duo-pre') === S.duo ? 'true' : 'false') })
+      $('[data-duo-note]', f).hidden = S.duoRender !== 'gradient'
+    }
+
     /* ───────── events ───────── */
     function onClick(e) {
       var b = e.target.closest('button, [data-art]'); if (!b || !root.contains(b)) return
       if (b.closest('.wied-cpanel, .wdl')) return   // the Colours and Download panels handle their own buttons
       var v
       if ((v = b.getAttribute('data-st'))) set({ style: v })
+      else if ((v = b.getAttribute('data-duo-look'))) setDuoLook(v)
+      else if ((v = b.getAttribute('data-duo-pre'))) setDuoPreset(v)
       else if (b.hasAttribute('data-mono-c')) setMono(b.closest('[data-mono]').getAttribute('data-mono'), b.getAttribute('data-mono-c'))
       else if ((v = b.getAttribute('data-anim'))) { set({ anim: v }); if (v !== 'none') setTimeout(replay, 20) }
       else if (b.hasAttribute('data-deco')) { set({ deco: b.getAttribute('data-deco') === 'still' ? 'still' : '' }); say(S.deco === 'still' ? 'Decorations keep still.' : 'Decorations move on their own.') }
@@ -2394,7 +2602,7 @@
       function fpsVal(f) { if (f === 'gif') return gifQ(P.q)[2]; var l = fpsList(f), v = +P.fps.v; return l.indexOf(v) >= 0 ? v : 30 }
       // the motions a file can carry: "Turn into" (when set), the icon's loop, its hover move (looped: files can't sense hover)
       function motions(f) {
-        var t = swapReady() ? swapTarget() : null, out = [], o = { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, deco: S.deco }
+        var t = swapReady() ? swapTarget() : null, out = [], o = { trigger: 'loop', speed: S.speed, amount: S.amount, stroked: info(S.style).stroked, style: S.style, deco: S.deco }
         var lo = motionAttrs(currentEntry('loop'), Object.assign({ spec: S.preset ? null : I.motion, parts: parts().any }, o)), hv = motionAttrs(currentEntry('hover'), o)
         if (t) out.push(['swap', 'Turns into ' + t.title])
         if (lo) out.push(['loop', PRESETS[lo.preset].label])
@@ -2951,7 +3159,7 @@
       // the moves made for this icon, each with a small live preview that plays on hover (the library's quick motion bar)
       moves: function (px) {
         return presetsOrdered().own.map(function (p) {
-          var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, deco: S.deco })
+          var mi = motionAttrs(entryFor(p), { trigger: 'hover', stroked: info(S.style).stroked, style: S.style, deco: S.deco })
           return { id: p, label: PRESETS[p].label, icon: '<span class="wied-pchip-i ' + (mi ? mi.cls : '') + '" style="' + (mi ? mi.style : '') + '">' + buildSvg(I.name, S.style, { size: px || 20, mode: 'live' }) + '</span>' }
         })
       },
@@ -2960,6 +3168,7 @@
       // the Download panel anywhere (the library drawer mounts one beside its own buttons): { quick: false } leaves out
       // the quick buttons. downloads() lists the mounted panels (each has .download(formatId, opts) and .make())
       downloadPanel: function (el, o) { return downloadPanel(el, o) }, downloads: function () { return dlPanels.slice() }, loadExports: loadExports,
+      inner: function (st, name) { return innerOf(name || I.name, st || S.style) },
       colorsFor: function (st, name) { return isMulti(st || S.style, name) ? colorsFor(st || S.style, name || I.name) : null },
       bakeColors: bakeColors, colorCss: function (st, pretty) { var cz = isMulti(st || S.style) ? colorsFor(st || S.style) : null; return cz ? cssOf(cz, null, pretty) : '' },
       isMulti: function (st) { return isMulti(st || S.style) }, palettes: function () { return palettesOf(I.name) }, loadPalettes: function () { return loadPalettes(I.name) },

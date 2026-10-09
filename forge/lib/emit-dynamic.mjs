@@ -33,7 +33,8 @@ const DYN = path.join(ROOT, 'forge', 'dynamic')
 const STY = path.join(ROOT, 'forge', 'styles')
 const J = v => JSON.stringify(v)
 const posix = p => p.split(path.sep).join('/')
-const STYLE_ORDER_FALLBACK = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
+const STYLE_ORDER_FALLBACK = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush',
+  'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
 const BANNER = v => `/*! @withicons/dynamic ${v} — Live icons runtime. generated, do not edit. MIT. https://withicons.com */`
 
 // ------------------------------------------------------------------ discovery
@@ -210,10 +211,16 @@ export interface RenderOptions {
   /** resolve var() paints to plain colours (for <img>, canvas, data URIs) */
   flat?: boolean
   part?: string
+  /**
+   * Rich styles (gradients): appended to the gradient ids and every url(#…) that points at them. Give every copy you put
+   * inline in one page its own value; <with-live-icon> (shadow DOM), files, data URIs and <img> need none.
+   */
+  idSuffix?: string | number
   /** renderAsync only: keep just the newest pending call per icon and style (older ones reject with WITH_SUPERSEDED) */
   latest?: boolean
 }
-export type IconNode = [string, Record<string, string | number>]
+/** [tag, attributes], or [tag, attributes, children] for the gradient definitions of rich styles */
+export type IconNode = [string, Record<string, string | number>, IconNode[]?]
 
 export declare const version: string
 export declare const defaultStyle: 'line'
@@ -240,6 +247,8 @@ export declare function parts(name: string, params?: Record<string, unknown>, st
 export declare function nodes(name: string, params?: Record<string, unknown>, style?: string): { root: Record<string, string | number>; nodes: IconNode[] }
 export declare function placeholder(options?: RenderOptions): string
 export declare function flatten(svg: string, vars?: Record<string, string>): string
+/** Gives the gradient ids in inner markup (rich styles) a suffix, and every url(#…) pointing at them. */
+export declare function uniqueIds(markup: string, suffix: string | number): string
 /** names of every live icon */
 export declare function list(): LiveIconName[]
 export declare function catalog(): LiveIconMeta<LiveIconName>[]

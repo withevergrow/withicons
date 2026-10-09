@@ -1,0 +1,45 @@
+{
+  "name": "avatar-woman-braids",
+  "intent": "breathes calmly; a playful tilt on hover",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.7
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "avatar-woman",
+      "effect": "fade"
+    },
+    {
+      "to": "avatar-woman-braids@solid",
+      "effect": "fade"
+    }
+  ]
+}

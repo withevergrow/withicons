@@ -1,0 +1,51 @@
+{
+  "name": "coffin",
+  "intent": "rattles as if something inside wants out",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "tombstone",
+      "effect": "slide-down"
+    },
+    {
+      "to": "skull",
+      "effect": "morph"
+    },
+    {
+      "to": "coffin@solid",
+      "effect": "fade"
+    }
+  ]
+}

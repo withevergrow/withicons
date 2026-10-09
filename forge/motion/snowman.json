@@ -1,0 +1,51 @@
+{
+  "name": "snowman",
+  "intent": "the snowman wobbles happily on the snow",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "snowflake",
+      "effect": "fade"
+    }
+  ]
+}

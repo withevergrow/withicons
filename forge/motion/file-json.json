@@ -1,0 +1,56 @@
+{
+  "name": "file-json",
+  "intent": "the page rests while its braces wiggle like data being written",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      14.5
+    ],
+    "amount": 0.4,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        14.5
+      ],
+      "amount": 0.4
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "braces",
+      "effect": "flip"
+    },
+    {
+      "to": "file-code",
+      "effect": "fade"
+    },
+    {
+      "to": "file",
+      "effect": "fade"
+    }
+  ]
+}

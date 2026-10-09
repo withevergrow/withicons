@@ -734,19 +734,20 @@ export const R = {
   ],
 
   // ===== animals and money
-  // a piggy bank of ruby glass in a fine stone frame: a gilt-lipped coin slot with a gold coin
-  // dropping in, a carved ear, gilt snout and legs, a gilt curl of a tail
+  // a piggy bank of ruby glass in a fine stone frame, 3/4 view: a gilt-lipped coin slot with a gold coin
+  // dropping in, a carved perky ear, a gilt oval snout and stubby legs, a gilt curl of a tail
   'piggy-bank': (icon, g) => [
-    g.gilt(g.union(g.rr(6.8, 16.4, 9.2, 21.2, 0.9), g.rr(13.6, 16.4, 16, 21.2, 0.9)), { plate: 'A' }),
-    g.gilt(g.stroke('M4.2 13.4 C2.6 13.6 2.2 11.4 3.6 11', 1.1), { thin: true, outline: 0.3, glint: false }),
-    ...g.pane(g.union(g.ellipse(11, 13.6, 7.2, 5.4), g.circle(15.4, 12.6, 4.4)), 'c1', { frame: 1.1, tracery: [[[7.4, 9], [7.4, 19]]], glass: { glow: 0.24 } }),
-    g.stone(g.poly([[13.4, 9.4], [14.6, 5.8], [17.2, 8.8]]), { thin: true }),
-    g.gilt(g.rr(18.6, 10.8, 21.4, 15, 1.2)),
-    g.recess(g.union(g.circle(19.6, 12.9, 0.45), g.circle(20.6, 12.9, 0.45))),
-    g.recess(g.circle(16.2, 11.3, 0.75)),
-    g.gilt(g.rr(7.8, 8.6, 12.8, 10.4, 0.9), { thin: true }),
-    g.recess(g.rr(8.5, 9.2, 12.1, 9.8, 0.3), { outline: 0.15 }),
-    g.deco(g.gilt(g.circle(10.3, 4.6, 2.2), { glint: false }), g.glass(g.circle(10.3, 4.6, 1.4), 'c3', { outline: 0.25, glint: false })),
+    g.gilt(g.union(g.rr(5.9, 16.4, 8.1, 21.3, 1), g.rr(13.9, 16.4, 16.1, 21.3, 1)), { plate: 'K' }),
+    g.gilt(g.stroke('M4.6 12.3 C2.9 12.4 2.2 11.2 2.8 10.2 C3.1 9.7 3.6 9.7 3.9 10', 1.1), { thin: true, outline: 0.3, glint: false }),
+    g.gilt(g.path('M17.1 8 C17.8 7 18.6 6.3 19.6 5.9 C19.9 7.5 19.5 9 18.6 10.4 Z')),
+    g.gilt(g.path('M13.3 10 C13.1 7.3 14.4 5 16.5 4.1 C17.5 6.2 17.9 8.4 17.5 10.4 Z')),
+    ...g.pane(g.ellipse(11.75, 14, 7.4, 5.5), 'c1', { frame: 1.1, tracery: [[[6.6, 10.2], [6.6, 17.8]]], glass: { glow: 0.24 } }),
+    g.gilt(g.ellipse(19.75, 13.5, 1.85, 2.5)),
+    g.recess(g.union(g.circle(19.1, 13.2, 0.36), g.circle(20.4, 13.2, 0.36))),
+    g.recess(g.circle(15.75, 12, 0.62)),
+    g.gilt(g.rr(8.5, 10.6, 12.5, 12.2, 0.8)),
+    g.recess(g.rr(9.2, 11.1, 11.8, 11.7, 0.3)),
+    g.deco(g.gilt(g.circle(10.5, 4.2, 2.1), { glint: false }), g.glass(g.circle(10.5, 4.2, 1.3), 'c3', { outline: 0.25, glint: false })),
   ],
 
 }

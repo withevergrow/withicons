@@ -7,7 +7,7 @@
 // Shape: { slug, name, kind, color, mark, url, known, hub: {...short matrix values}, facts: { key: [html, [src]] },
 //          sources: [[label, url]], them: [...], us: [...], migrate: {...}, faq: [[q, a]] }
 
-import { N_ICONS as N, N_STYLES as NS, N_TOTAL, num, listTitles, STYLES, PRESETS, EFFECTS, styleTitle } from '../site-pages/lib.mjs'
+import { N_ICONS as N, N_STYLES as NS, OVER_TEXT, num, listTitles, STYLES, PRESETS, EFFECTS, styleTitle } from '../site-pages/lib.mjs'
 /** "about three times our 500" — a hedged ratio for the "choose them if" lists. */
 export const timesOurs = n => { const r = n / N; return r >= 1.75 ? `about ${['', '', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'][Math.round(r)] || Math.round(r)} times our ${N}` : `more than our ${N}` }
 
@@ -20,7 +20,7 @@ export const FACT_ROWS = [
 export const US = p => ({
   license: 'MIT, for the icons and the code',
   price: 'Free. No paid tier, no account',
-  count: `${N} icons × ${NS} styles (${num(N_TOTAL)} SVGs)`,
+  count: `${N} icons × ${NS} styles, plus live icons (${OVER_TEXT} SVGs in all)`,
   styles: `${NS} styles on one 24 × 24 grid: <a href="${p}styles/line.html">Line</a>, ${listTitles(STYLES.slice(1))}. Every icon can also move: ${PRESETS.length} CSS animations and ${EFFECTS.length} swap transitions (<a href="${p}developers.html#motion">@withicons/motion</a>)`,
   frameworks: 'React, Vue, Svelte, Angular, Solid and a <code>&lt;with-icon&gt;</code> web component, all on npm; plus SVG, PNG and sprites',
   classes: 'Yes: <code>&lt;i class="with with-home"&gt;&lt;/i&gt;</code>, add <code>with-solid</code> etc. for other styles',

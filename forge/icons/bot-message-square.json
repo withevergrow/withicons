@@ -1,0 +1,71 @@
+{
+  "name": "bot-message-square",
+  "category": "ai",
+  "description": "A chat bubble holding a small robot face, for chatbots, AI chat and assistant replies.",
+  "aliases": [
+    "ai-chat",
+    "bot-chat",
+    "assistant-chat",
+    "ai-message",
+    "bot-reply",
+    "ai-reply",
+    "chat-ai",
+    "robot-chat",
+    "ask-ai",
+    "bot-message"
+  ],
+  "tags": [
+    "ai",
+    "chat",
+    "bot",
+    "message",
+    "assistant",
+    "support"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 9 V11.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 9 A1 1 0 0 1 10.5 9 V11.5 A1 1 0 0 1 8.5 11.5 Z",
+    "M13.5 9 A1 1 0 0 1 15.5 9 V11.5 A1 1 0 0 1 13.5 11.5 Z"
+  ],
+  "synonyms": [
+    "chatbot",
+    "chat bot",
+    "ai assistant",
+    "virtual assistant",
+    "customer support bot",
+    "support chat",
+    "live chat bot",
+    "conversation",
+    "conversational ai",
+    "gpt",
+    "llm",
+    "copilot",
+    "helper",
+    "auto reply",
+    "automated reply",
+    "faq bot",
+    "chat with ai",
+    "talk to ai",
+    "help desk",
+    "agent",
+    "answer",
+    "robot face",
+    "speech bubble"
+  ]
+}

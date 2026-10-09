@@ -1,0 +1,9 @@
+{
+  "name": "avatar-bear",
+  "intent": "breathes like a cuddly bear and gives a friendly nod",
+  "loop": { "preset": "breathe", "origin": [12,20.5], "amount": 0.7, "duration": 3.4 },
+  "hover": { "preset": "nod", "origin": [12,20.5], "amount": 0.8 },
+  "parts": { "A": { "preset": "blink", "origin": [12,12.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "jelly", "origin": [12,20.5] },{ "preset": "sway", "origin": [12,20.5], "amount": 0.6 }],
+  "swap": [{ "to": "avatar-panda", "effect": "morph" },{ "to": "avatar-koala", "effect": "fade" },{ "to": "avatar-bear@solid", "effect": "scale" }]
+}

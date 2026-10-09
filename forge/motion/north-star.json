@@ -1,0 +1,57 @@
+{
+  "name": "north-star",
+  "intent": "the star twinkles bright in the night sky",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      12,
+      11
+    ],
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      11
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        11
+      ],
+      "amount": 0.8,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        11
+      ]
+    },
+    {
+      "preset": "float"
+    }
+  ],
+  "swap": [
+    {
+      "to": "star",
+      "effect": "morph"
+    },
+    {
+      "to": "north-star@solid",
+      "effect": "scale"
+    }
+  ]
+}

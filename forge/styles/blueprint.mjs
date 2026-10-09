@@ -22,6 +22,7 @@
 // color="var(--with-accent, currentColor)" + stroke="currentColor": one colour by
 // default, a two-tone blueprint when --with-accent is set, and renderers without
 // CSS variables fall back to currentColor.
+import { snowmanFor } from './_line-snowman.mjs'
 import { bbox, pointInRing, distToPolyline } from '../kernel/geom.mjs'
 import { parseSegs, segPt, segTan, segFlat, segLen, trimStart, trimEnd, chainLen, chainD, nums } from './_blueprint-path.mjs'
 import { textInfo } from './_live-text.mjs'
@@ -554,6 +555,7 @@ export default {
   strokeWidth: 1.25,
   root: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.25, 'stroke-linecap': 'square', 'stroke-linejoin': 'miter' },
   render(icon) {
+    icon = snowmanFor('blueprint', icon)
     try { return render(icon) }
     catch (e) {
       if (globalThis.process?.env?.BP_DEBUG) throw e

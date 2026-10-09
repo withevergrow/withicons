@@ -1,0 +1,70 @@
+{
+  "name": "stamp",
+  "category": "objects",
+  "description": "A rubber stamp, for approvals, sign-off and official marks.",
+  "aliases": [
+    "rubber-stamp",
+    "approval-stamp",
+    "notarize",
+    "notarise",
+    "certify"
+  ],
+  "tags": [
+    "stamp",
+    "approval",
+    "official",
+    "document",
+    "seal",
+    "office"
+  ],
+  "paths": [
+    {
+      "d": "M10.5 12.5 V9 A3 3 0 1 1 13.5 9 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 12.5 H19.5 A1.5 1.5 0 0 1 21 14 V17 H3 V14 A1.5 1.5 0 0 1 4.5 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 20.5 H19",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 12.5 H19.5 A1.5 1.5 0 0 1 21 14 V17 H3 V14 A1.5 1.5 0 0 1 4.5 12.5 Z",
+    "M10.5 12.5 V9 A3 3 0 1 1 13.5 9 V12.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "approval",
+    "approve document",
+    "sign off",
+    "signoff",
+    "stamped",
+    "endorse",
+    "authorize",
+    "authorise",
+    "validate",
+    "verified",
+    "certified",
+    "official mark",
+    "postmark",
+    "passport stamp",
+    "visa",
+    "notary",
+    "notarized",
+    "paperwork",
+    "bureaucracy",
+    "office",
+    "ink stamp",
+    "press",
+    "imprint",
+    "mark",
+    "accepted",
+    "seal",
+    "approve",
+    "approved",
+    "official"
+  ]
+}

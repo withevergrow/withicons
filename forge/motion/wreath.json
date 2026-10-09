@@ -1,0 +1,47 @@
+{
+  "name": "wreath",
+  "intent": "the wreath breathes on the door, its bow bouncing",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        18.5
+      ],
+      "amount": 0.7,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        2.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "wreath@solid",
+      "effect": "scale"
+    }
+  ]
+}

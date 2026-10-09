@@ -1,0 +1,63 @@
+{
+  "name": "coffin",
+  "category": "halloween",
+  "description": "A coffin, for Halloween and spooky themes.",
+  "aliases": [
+    "casket",
+    "vampire-coffin",
+    "burial-box",
+    "sarcophagus",
+    "halloween-coffin",
+    "funeral"
+  ],
+  "tags": [
+    "halloween",
+    "death",
+    "vampire",
+    "spooky",
+    "funeral"
+  ],
+  "paths": [
+    {
+      "d": "M9 2.5 H15 L18.5 7.5 L14 21.5 H10 L5.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V15.5 M9.5 9.5 H14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 2.5 H15 L18.5 7.5 L14 21.5 H10 L5.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M12 7 V15.5",
+    "M9.5 9.5 H14.5"
+  ],
+  "synonyms": [
+    "coffins",
+    "caskets",
+    "vampire",
+    "dracula",
+    "undead",
+    "burial",
+    "bury",
+    "funeral home",
+    "mortuary",
+    "death",
+    "dead",
+    "rest in peace",
+    "rip",
+    "grave",
+    "crypt",
+    "tomb",
+    "goth",
+    "gothic",
+    "spooky",
+    "creepy",
+    "halloween",
+    "game over",
+    "deprecated",
+    "coffen"
+  ]
+}

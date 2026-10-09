@@ -1,0 +1,58 @@
+{
+  "name": "split",
+  "category": "arrows",
+  "description": "One path splitting into two, for branching, split view and A/B tests.",
+  "aliases": [
+    "diverge",
+    "split-arrow",
+    "branch-out",
+    "fork-path",
+    "bifurcate",
+    "ab-test",
+    "a-b-test",
+    "divide-path",
+    "split-path"
+  ],
+  "tags": [
+    "arrows",
+    "branch",
+    "split",
+    "flow",
+    "direction"
+  ],
+  "paths": [
+    {
+      "d": "M12 21 V13",
+      "plate": "K"
+    },
+    {
+      "d": "M12 13 L4 5 M12 13 L20 5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 10 V5 H9 M20 10 V5 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "branching",
+    "a/b test",
+    "ab testing",
+    "split test",
+    "experiment",
+    "two ways",
+    "fork in the road",
+    "crossroads",
+    "divide",
+    "separate",
+    "routing",
+    "workflow branch",
+    "decision",
+    "y split",
+    "split view",
+    "either or",
+    "options"
+  ]
+}

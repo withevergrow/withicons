@@ -1,0 +1,87 @@
+{
+  "name": "calendar-span",
+  "category": "time",
+  "description": "A calendar with a highlighted span of days, for date ranges and periods.",
+  "aliases": [
+    "date-range",
+    "date-span",
+    "period",
+    "date-period",
+    "range-picker",
+    "date-range-picker",
+    "time-range",
+    "from-to",
+    "stay-dates"
+  ],
+  "tags": [
+    "calendar",
+    "range",
+    "period",
+    "dates",
+    "picker",
+    "booking"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M7 14 H7.01 M11 14 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.5 H13 M17 17.5 H17.01",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H19",
+    "M8 14 A1 1 0 1 1 6 14 A1 1 0 1 1 8 14 Z",
+    "M11 14 H17",
+    "M7 17.5 H13",
+    "M18 17.5 A1 1 0 1 1 16 17.5 A1 1 0 1 1 18 17.5 Z"
+  ],
+  "synonyms": [
+    "range",
+    "span",
+    "interval",
+    "from to",
+    "start and end",
+    "start date",
+    "end date",
+    "multi day",
+    "trip dates",
+    "stay",
+    "check in check out",
+    "vacation",
+    "holiday",
+    "leave",
+    "pto",
+    "sprint",
+    "billing period",
+    "reporting period",
+    "date filter",
+    "this week",
+    "last 30 days",
+    "custom range",
+    "timeframe",
+    "calender",
+    "duration"
+  ]
+}

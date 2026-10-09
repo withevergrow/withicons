@@ -1,0 +1,50 @@
+{
+  "name": "skull",
+  "intent": "chatters its jaw with a spooky little nod",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "origin": [
+        12,
+        18
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "ghost",
+      "effect": "blur"
+    },
+    {
+      "to": "skull@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "tombstone",
+      "effect": "slide-down"
+    }
+  ]
+}

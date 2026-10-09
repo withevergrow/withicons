@@ -1,0 +1,82 @@
+{
+  "name": "candy-cane",
+  "category": "christmas",
+  "description": "A striped candy cane, for Christmas treats and decor.",
+  "aliases": [
+    "candycane",
+    "peppermint",
+    "peppermint-stick",
+    "christmas-candy",
+    "xmas-candy",
+    "holiday-candy",
+    "sweet-cane"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "candy",
+    "sweets",
+    "treat",
+    "mint",
+    "striped",
+    "stripes",
+    "red and white",
+    "lollipop",
+    "confectionery",
+    "stocking stuffer",
+    "dessert",
+    "sugar",
+    "candy cain"
+  ],
+  "tags": [
+    "christmas",
+    "candy",
+    "sweets",
+    "holiday",
+    "decoration"
+  ],
+  "paths": [
+    {
+      "d": "M7 19.5 V8.5 A6.5 6.5 0 0 1 20 8.5 V11.5 A2.25 2.25 0 0 1 15.5 11.5 V8.5 A2 2 0 0 0 11.5 8.5 V19.5 A2.25 2.25 0 0 1 7 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 18.75 L11.5 15.75",
+      "plate": "A"
+    },
+    {
+      "d": "M7 13.5 L11.5 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11.8 7.44 L7.99 5.06",
+      "plate": "A"
+    },
+    {
+      "d": "M13.43 6.5 L13.27 2",
+      "plate": "A"
+    },
+    {
+      "d": "M15.12 7.32 L18.76 4.68",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 19.5 V8.5 A6.5 6.5 0 0 1 20 8.5 V11.5 A2.25 2.25 0 0 1 15.5 11.5 V8.5 A2 2 0 0 0 11.5 8.5 V19.5 A2.25 2.25 0 0 1 7 19.5 Z"
+  ],
+  "cutouts": [
+    "M7 18.75 L11.5 15.75",
+    "M7 13.5 L11.5 10.5",
+    "M11.8 7.44 L7.99 5.06",
+    "M13.43 6.5 L13.27 2",
+    "M15.12 7.32 L18.76 4.68"
+  ]
+}

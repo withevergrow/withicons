@@ -1,0 +1,35 @@
+{
+  "name": "marigold",
+  "intent": "the bloom breathes and turns like a garland flower",
+  "loop": {
+    "preset": "breathe",
+    "duration": 3
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "duration": 6
+    }
+  },
+  "alt": [
+    {
+      "preset": "spin",
+      "duration": 6
+    },
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "lotus",
+      "effect": "morph"
+    }
+  ]
+}

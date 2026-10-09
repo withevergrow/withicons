@@ -22,6 +22,8 @@
 // at 2x). At 24 px on a 1x screen, or 16 px at 1.25x/1.5x, cells alternate 1 and 2 px.
 // Keep crispEdges anyway: anti-aliased cells look worse than uneven ones.
 import { build, nodes } from './_pixel-render.mjs'
+import { pixelSnowman } from './_pixel-snowman.mjs'
+import { pixelDragon } from './_pixel-dragon.mjs'
 
 export default {
   name: 'pixel',
@@ -31,6 +33,9 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor', 'shape-rendering': 'crispEdges' },
   render(icon) {
+    // hand-drawn per-icon sprites in full colour (the skeleton stays the base for every other style)
+    if (icon.name === 'snowman' && !icon.params) { try { return pixelSnowman() } catch { /* the generic build below */ } }
+    if (icon.name === 'dragon-head' && !icon.params) { try { return pixelDragon() } catch { /* the generic build below */ } }
     try { return nodes(build(icon)) } catch { return [] }
   },
 }

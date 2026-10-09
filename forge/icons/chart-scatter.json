@@ -1,0 +1,84 @@
+{
+  "name": "chart-scatter",
+  "category": "charts",
+  "description": "Dots scattered over axes, for scatter plots, correlation and data points.",
+  "aliases": [
+    "scatter-plot",
+    "scatter-chart",
+    "scatter-graph",
+    "dot-plot",
+    "dot-chart",
+    "xy-plot",
+    "correlation",
+    "point-cloud",
+    "bubble-chart"
+  ],
+  "tags": [
+    "chart",
+    "data",
+    "analytics",
+    "correlation",
+    "points",
+    "statistics"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 V18.5 A2 2 0 0 0 5.5 20.5 H20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.75 15.5 A0.75 0.75 0 1 1 7.25 15.5 A0.75 0.75 0 1 1 8.75 15.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.75 10.5 A0.75 0.75 0 1 1 10.25 10.5 A0.75 0.75 0 1 1 11.75 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.25 14 A0.75 0.75 0 1 1 13.75 14 A0.75 0.75 0 1 1 15.25 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.75 7 A0.75 0.75 0 1 1 15.25 7 A0.75 0.75 0 1 1 16.75 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.75 11 A0.75 0.75 0 1 1 18.25 11 A0.75 0.75 0 1 1 19.75 11 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M9.5 15.5 A1.5 1.5 0 1 1 6.5 15.5 A1.5 1.5 0 1 1 9.5 15.5 Z",
+    "M12.5 10.5 A1.5 1.5 0 1 1 9.5 10.5 A1.5 1.5 0 1 1 12.5 10.5 Z",
+    "M16 14 A1.5 1.5 0 1 1 13 14 A1.5 1.5 0 1 1 16 14 Z",
+    "M17.5 7 A1.5 1.5 0 1 1 14.5 7 A1.5 1.5 0 1 1 17.5 7 Z",
+    "M20.5 11 A1.5 1.5 0 1 1 17.5 11 A1.5 1.5 0 1 1 20.5 11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "scatter",
+    "scatterplot",
+    "data points",
+    "dots",
+    "plot",
+    "regression",
+    "distribution",
+    "cluster",
+    "clusters",
+    "outliers",
+    "correlation chart",
+    "statistics",
+    "analytics",
+    "data science",
+    "machine learning",
+    "dataset",
+    "x y",
+    "variables",
+    "research",
+    "analysis",
+    "analyze",
+    "analyse",
+    "visualization",
+    "visualisation"
+  ]
+}

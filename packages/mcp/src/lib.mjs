@@ -3,6 +3,8 @@
 import { create, titleOf } from '../../search/src/engine.mjs'
 import { loadData } from '#data'
 import { rolesFor, ROLES, ROLE_LABELS } from '../../../forge/lib/palette-map.mjs'
+import GUIDE from './style-guide.mjs'
+import { is3dStyle, isBackdropStyle, styleMoves, motion3d, hasParts, MOVE_PROFILES } from '../../motion/src/meta.js'
 
 export const FORMATS = ['svg', 'react', 'vue', 'svelte', 'angular', 'solid', 'html-class', 'web-component', 'data-uri']
 export const FRAMEWORKS = ['react', 'vue', 'svelte', 'angular', 'solid', 'web-component', 'html-class', 'svg']
@@ -238,8 +240,11 @@ const browseHint = (cat) => `No icon for this.${cat ? ` The query names the "${c
 
 // Smallest size a style reads well at (the skill's "Choose the style" rules): interface styles 16 px, creative and
 // palette styles 32 px, the role-named studio / storybook styles (--with-<style>-c1 ...) 48 px.
+const SLOT_STYLES = new Set(['glass', 'kawaii', 'sticker', 'pixel', 'retro'])
 function minSizeOf(s) {
   if (s.kind === 'universal') return 16
+  // the slot-coloured palette styles stay 32 px even where a hand-drawn icon (people, snowman, piggy bank) adds role variables
+  if (SLOT_STYLES.has(s.name)) return 32
   if (s.palette && Object.keys(s.vars || {}).some(v => /-c1$/.test(v))) return 48
   return 32
 }
@@ -248,7 +253,9 @@ const ON_DARK_PALETTE = 'The fills keep their own colours; the outline ink follo
 export function listStyles() {
   return data().meta.styles.map(s => ({
     name: s.name, title: s.title, kind: s.kind, description: s.description, default: s.name === 'line',
+    group: groupOf(s.name).title, ...(((GUIDE.styles || {})[s.name] || {}).good ? { goodFor: GUIDE.styles[s.name].good } : {}),
     minSize: minSizeOf(s), onDark: s.palette ? ON_DARK_PALETTE : ON_DARK_INK,
+    ...(is3dStyle(s.name) ? { motion3d: true } : {}),
     ...(s.palette ? { palette: true, vars: s.vars || {} } : {}),
   }))
 }
@@ -267,7 +274,7 @@ export function info() {
   const d = data()
   const m = motionData()
   const pal = Object.values(paletteStore().icons)
-  return { version: d.meta.version, icons: d.meta.icons.length, styles: d.styleNames, formats: FORMATS, site: SITE, animated: Object.keys(m.icons).length, palettes: pal.reduce((n, x) => n + x.p.length, 0) }
+  return { version: d.meta.version, icons: d.meta.icons.length, styles: d.styleNames, groups: styleGroups().map(g => ({ id: g.id, title: g.title, styles: g.styles })), uses: styleUses().map(u => ({ id: u.id, title: u.title, styles: u.styles })), paletteStyles: d.meta.styles.filter(s => s.palette).map(s => s.name), formats: FORMATS, site: SITE, animated: Object.keys(m.icons).length, palettes: pal.reduce((n, x) => n + x.p.length, 0) }
 }
 
 // ---------------------------------------------------------------- colour palettes (@withicons/core/palettes)
@@ -682,9 +689,16 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
   }
 
   // ---- loop / hover / once / inview on one icon
-  const chosen = preset || (spec && spec[trigger === 'loop' ? 'loop' : 'hover'] && spec[trigger === 'loop' ? 'loop' : 'hover'].preset) || (trigger === 'loop' ? 'pulse' : 'pop')
+  // 3D styles (forge/MOTION.md "3D motion"): the icon's own motion plays as its 3D counterpart (class wm-3d; icons.css
+  // has the 3D variables per icon), a backdrop style keeps its tile still (wm-backdrop); an explicit preset is literal
+  const d3 = is3dStyle(style), backdrop = isBackdropStyle(style)
+  const generic = trigger === 'loop' ? 'pulse' : 'pop'
+  const chosen = preset || (spec && spec[trigger === 'loop' ? 'loop' : 'hover'] && (d3 ? motion3d(spec[trigger === 'loop' ? 'loop' : 'hover']) : spec[trigger === 'loop' ? 'loop' : 'hover']).preset) || (d3 ? motion3d({ preset: generic }).preset : generic)
   if (!spec) notes.push(`"${canonical}" has no tuned motion yet; using the generic "${chosen}" preset.`)
   const classes = ['wm', `wm-${trigger}`]
+  if (d3) classes.push('wm-3d')
+  if (backdrop) classes.push('wm-backdrop')
+  if (d3) notes.push(`${style} is a 3D style: the icon's motion plays in 3D (class wm-3d${format === 'web-component' ? ', added by <with-icon> from variant' : ''}); its highlight and ground shadow move with it.`)
   if (preset || !spec) classes.push(`wm-p-${chosen}`)
   const dataWm = spec ? ` data-wm="${canonical}"` : ''
   const styleVar = dur ? `--wm-dur:${dur}s` : ''
@@ -696,7 +710,7 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
   if (chosen === 'draw') notes.push('"draw" animates strokes and runs through the JS runtime (motion()): use a stroked style (line, duo, blueprint, sketch, kawaii); other styles fall back to "pop".')
   const span = (inner, c = 'class', extra = '') => `<span${extra} ${c}="${classes.join(' ')}"${dataWm}${styleVar ? (c === 'className' ? ` style={{ '--wm-dur': '${dur}s' }}` : ` style="${styleVar}"`) : ''}>${inner}</span>`
   const button = (inner, c = 'class') => trigger === 'hover' ? `<button type="button" ${c}="wm-trigger" aria-label="${titleOf(canonical)}">${inner}</button>` : inner
-  const mArgs = `${spec ? `'${canonical}'` : 'null'}, { trigger: '${trigger}'${preset || !spec ? `, preset: '${chosen}'` : ''}${dur ? `, duration: ${dur}` : ''} }`
+  const mArgs = `${spec ? `'${canonical}'` : 'null'}, { trigger: '${trigger}'${preset || !spec ? `, preset: '${chosen}'` : ''}${dur ? `, duration: ${dur}` : ''}${d3 || backdrop ? `, style: '${style}'` : ''} }`
   let code
   if (format === 'web-component') {
     // attributes on <with-icon> itself: the element upgrade animates the SVG inside its shadow root (a wrapper span
@@ -726,16 +740,24 @@ export function animateIcon({ name, style = 'line', trigger = 'loop', preset, to
   return { name: canonical, style, trigger, format, preset: chosen, intent: spec ? spec.intent : null,
     // the icon's other tuned motions (preset: "<one>"), and the most energetic presets for a title slide
     alternates: spec ? (spec.alt || []).map(slotOf) : [], lively: LIVELY_PRESETS.filter(p => m.presets.includes(p)),
+    ...(d3 || MOVE_PROFILES[style] ? { motion3d: d3, moves: movesOf(canonical, style, spec) } : {}),
     code, motion: spec, presets: m.presets, notes, install: installOf(m) }
 }
 const installOf = m => ({ npm: 'npm i @withicons/motion', css: m.css, cdn: [...m.cdn, m.cdnIcon] })
+// the moves an icon offers in a style (the studio's "Made for <icon>" chips): soft3d 3-5, other 3D styles their 3D own moves
+function movesOf(name, style, spec) {
+  let parts
+  try { parts = hasParts(svgOf(name, style)) } catch { parts = undefined }
+  return styleMoves(spec, style, { parts }).map(slotOf)
+}
 
 // presets with the most energy, for a title slide or a celebration (any preset works on any icon)
 export const LIVELY_PRESETS = ['tada', 'jelly', 'bounce', 'beat', 'wiggle', 'pop']
 const slotOf = s => s ? { preset: s.preset, ...(s.duration != null ? { duration: s.duration } : {}), ...(s.amount != null ? { amount: s.amount } : {}), ...(s.dir != null ? { dir: s.dir } : {}) } : null
 /** One icon's tuned motions: the default loop and hover presets, the intent, the alternates and the suggested swaps. */
-export function iconMotions(name) {
+export function iconMotions(name, style) {
   const canonical = resolveName(name)
+  const st = style ? checkStyle(style) : null
   const m = motionData(), spec = motionFor(canonical)
   const alternates = spec ? (spec.alt || []).map(slotOf) : []
   const parts = spec && spec.parts ? Object.fromEntries(Object.entries(spec.parts).map(([k, p]) => [k, { ...slotOf(p), ...(p.delay ? { delay: p.delay } : {}) }])) : null
@@ -745,6 +767,7 @@ export function iconMotions(name) {
     ...(parts ? { parts } : {}), ...(spec && spec.deco ? { deco: spec.deco } : {}),
     alternates, swaps: spec ? (spec.swap || []).map(s => ({ to: s.to, effect: s.effect || 'fade' })) : [],
     lively: LIVELY_PRESETS.filter(p => m.presets.includes(p)), presets: m.presets,
+    ...(st ? { style: st, motion3d: is3dStyle(st), moves: movesOf(canonical, st, spec) } : {}),
     howTo: `animate_icon(name: "${canonical}", preset: "<alternate>") or export_icon(..., motion: "<preset>") plays another motion; trigger hover / once plays the one-shot.`,
   }
 }
@@ -752,4 +775,153 @@ export function iconMotions(name) {
 export function listMotion() {
   const m = motionData()
   return { animated: Object.keys(m.icons).length, triggers: TRIGGERS, presets: m.presets, effects: m.effects, formats: MOTION_FORMATS, install: installOf(m) }
+}
+
+// ---------------------------------------------------------------- choosing a style (recommend_styles)
+// The style guide is data generated by scripts/skill-sync.mjs from site/js/site.js (GROUPS, USES, INFO: the site's
+// "What are you making?" picker), forge/lib/emit-core.mjs (which package holds each style), the Duo presets and the
+// holiday styles' palettes. Styles the build does not carry are filtered out here, so a stale guide never names one.
+const live = list => { const have = new Set(data().styleNames); return (list || []).filter(s => have.has(s)) }
+export function styleGroups() {
+  return (GUIDE.groups || []).map(g => ({ ...g, styles: live(g.styles) })).filter(g => g.styles.length)
+}
+export function styleUses() {
+  return (GUIDE.uses || []).map(u => ({ ...u, styles: live(u.styles) })).filter(u => u.styles.length)
+}
+export const groupOf = style => (styleGroups().find(g => g.styles.includes(style)) || { id: 'more', title: 'More' })
+export function duoPresets() {
+  return Object.entries(GUIDE.duoPresets || {}).map(([id, p]) => ({
+    id, title: p.title, description: p.description, vars: p.vars, ...(p.strokeWidth ? { strokeWidth: p.strokeWidth } : {}),
+    where: p.render ? 'site and studio only (its downloads and exports bake it into the file); no package API yet' : 'every package: set the variables on the icon or a parent',
+    ...(p.render ? {} : { css: Object.entries(p.vars).map(([k, v]) => `${k}: ${v}`).join('; ') }),
+  }))
+}
+/** One style's guide entry: title, plain words, what it is good for, min size, group, packages, zip, 3D motion. */
+export function styleInfo(style, icon = 'home') {
+  const s = checkStyle(style)
+  const g = (GUIDE.styles || {})[s] || {}
+  const P = pascal(icon), local = P + (s === 'line' ? '' : cap(s))
+  return {
+    style: s, ...(g.title ? { title: g.title } : {}), group: groupOf(s).title,
+    ...(g.plain ? { looks: g.plain } : {}), ...(g.good ? { goodFor: g.good } : {}),
+    ...(g.minSize ? { minSize: g.minSize } : {}),
+    motion3d: is3dStyle(s), ...(MOVE_PROFILES[s] ? { moves: `${MOVE_PROFILES[s].min}-${MOVE_PROFILES[s].max} moves per icon (animate_icon returns them)` } : {}),
+    react: `import { ${P}${s === 'line' ? '' : ' as ' + local} } from '@withicons/react${s === 'line' ? '' : '/' + s}'`,
+    webComponent: `<with-icon name="${icon}"${s === 'line' ? '' : ` variant="${s}"`}></with-icon>`,
+    classes: `<i class="with with-${icon}${s === 'line' ? '' : ' with-' + s}"></i>`,
+    ...(g.packages ? { files: { svgAndNodes: g.packages.core, prebuiltSvg: g.packages.static, classes: g.packages.classes, nodes: g.nodes } } : {}),
+    zip: g.zip || `${SITE}/downloads/with-icons-${s}.zip`,
+    ...((GUIDE.stylePalettes || {})[s] ? { stylePalettes: GUIDE.stylePalettes[s].map(p => ({ id: p.id, name: p.name, tags: p.tags, colors: p.colors })), stylePalettesHow: `role colours: pass colors to get_icon / export_icon (CLI: --colors "c1=#…,c2=#…"), or set --with-${s}-<role> on a parent` } : {}),
+    ...(s === 'duo' && GUIDE.duoPresets ? { presets: duoPresets() } : {}),
+  }
+}
+/** The CSS variables of one style palette (holiday styles), e.g. stylePalette('christmas', 'nordic') -> { vars: { '--with-christmas-c1': … }, css } */
+export function stylePalette(style, id) {
+  const s = checkStyle(style)
+  const list = (GUIDE.stylePalettes || {})[s] || []
+  const p = id ? list.find(x => x.id === id) : list[0]
+  if (!p) throw new IconError(`No style palette "${id}" for ${s}. ${list.length ? 'Palettes: ' + list.map(x => x.id).join(', ') : 'This style has no style palettes.'}`, { code: 'unknown_palette', palettes: list.map(x => x.id) })
+  const vars = Object.fromEntries(Object.entries(p.colors).map(([r, v]) => [`--with-${s}-${r}`, v]))
+  return { style: s, id: p.id, name: p.name, tags: p.tags, colors: p.colors, vars,
+    css: Object.entries(vars).map(([k, v]) => `${k}: ${v}`).join('; '),
+    // CLI: withicons get|export … --colors "<flags>"
+    flags: Object.entries(p.colors).map(([r, v]) => `${r}=${v}`).join(',') }
+}
+
+// words -> a festival (holiday styles + icon category) or a use (USES id); every hit counts
+const FESTIVALS = [
+  { re: /\b(diwali|deepavali|dussehra|dasara|navratri|durga|puja|pujo|holi|rakhi|raksha|onam|pongal|lohri|ganesh|ganpati|karva|bhai dooj|chhath|indian (?:festival|festive|wedding)|mehndi|sangeet)\b/i, festival: 'Indian festivals', styles: ['rangoli', 'utsav'], category: 'indian-festivals' },
+  { re: /\b(halloween|spooky|trick or treat|haunted)\b/i, festival: 'Halloween', styles: ['halloween'], category: 'halloween' },
+  { re: /\b(christmas|xmas|x-mas|santa|noel|yuletide|advent|holiday season|winter holidays?)\b/i, festival: 'Christmas and winter', styles: ['christmas'], category: 'christmas' },
+  { re: /\b(lunar new year|chinese new year|spring festival|tet|seollal|year of the|red envelope|hongbao)\b/i, festival: 'Lunar New Year', styles: ['lunar'], category: 'lunar-new-year' },
+  { re: /\b(valentine'?s?|romance|romantic|love|anniversary|wedding|dating|galentine'?s?)\b/i, festival: "Valentine's and love", styles: ['valentine', 'coquette'], category: 'valentines' },
+]
+const USE_WORDS = [
+  ['festive', /\b(festival|festive|seasonal|holiday|celebration|greeting card)\b/i],
+  ['ai', /\b(ai|llm|gpt|copilot|assistant|chatbot|agents?|machine learning|genai|generative)\b/i],
+  ['saas', /\b(saas|landing|startup|b2b|marketing site|homepage|feature grid|pricing|launch)\b/i],
+  ['brand', /\b(premium|luxury|luxe|fintech|bank|banking|jewel(?:le)?ry|high[- ]end|elegant|vip)\b/i],
+  ['kids', /\b(kids?|child|children|toddler|baby|school|playful|games?|gaming|cute|fun|toys?|family)\b/i],
+  ['slides', /\b(slides?|deck|presentation|powerpoint|keynote|documents?|reports?|docs|pdf)\b/i],
+  ['print', /\b(print|editorial|magazine|book|poster|invitation|menu|certificate|newspaper)\b/i],
+  ['app', /\b(app|website|web ?site|dashboard|ui|admin|navigation|nav|toolbar|sidebar|settings|forms?|buttons?|tab bar)\b/i],
+]
+// look words -> a style (the search engine's style words, for recommend_styles)
+const LOOK_WORDS = [
+  [/\b(soft ?3d|isometric|iso ?3d|3d render|blender|memoji)\b/i, 'soft3d'], [/\b(clay(?:morphism|morphic)?|plasticine)\b/i, 'clay'], [/\b(glassmorphism|glassmorphic|frosted)\b/i, 'glass'],
+  [/\bliquid ?glass|refractive\b/i, 'liquid'], [/\b(chrome|metallic|liquid metal)\b/i, 'chrome'], [/\b(neo[- ]?brutal(?:ism|ist)?|brutalis[mt])\b/i, 'brutal'],
+  [/\bbento\b/i, 'bento'], [/\b(app icons?|macos|squircle|app tiles?|launcher)\b/i, 'dock'], [/\b(skeuomorphi(?:c|sm)|realistic|tactile)\b/i, 'skeuo'],
+  [/\b(cute|kawaii|chibi|adorable)\b/i, 'kawaii'], [/\b(8[- ]?bit|16[- ]?bit|pixel(?: art)?|retro games?)\b/i, 'pixel'], [/\b(hand[- ]?drawn|doodles?|whiteboard)\b/i, 'sketch'],
+  [/\b(gradients?|ombre)\b/i, 'duo'], [/\b(3d|three[- ]d)\b/i, 'clay'], [/\b(plush(?:ie)?|stuffed|felt)\b/i, 'plush'], [/\b(sticker|y2k|die[- ]cut)\b/i, 'sticker'],
+  [/\b(vintage|70s|80s|retro)\b/i, 'retro'], [/\b(manga|anime|cel[- ]shadw*)\b/i, 'anime'], [/\b(goth(?:ic)?|medieval|fantasy|rpg)\b/i, 'gothic'],
+  [/\b(pastels?|dreamy)\b/i, 'pastel'], [/\b(coquette|girly|bows?|ballet)\b/i, 'coquette'], [/\b(bauhaus|geometric|modernist)\b/i, 'bauhaus'],
+  [/\b(engravw*|etchw*|banknote)\b/i, 'engrave'], [/\b(blueprint|schematic|technical drawing)\b/i, 'blueprint'], [/\b(enterprise|corporate|office|intranet)\b/i, 'suite'],
+  [/\b(outline|line icons?|minimal)\b/i, 'line'], [/\b(filled|solid)\b/i, 'solid'], [/\b(duotone|two[- ]tone)\b/i, 'duo'], [/\b(luxury|luxe|gold)\b/i, 'luxe'],
+]
+const AVATAR_RE = /\b(avatars?|profile (?:pic(?:ture)?|photo|image)s?|people|persons?|team members?|user picker|characters?)\b/i
+/**
+ * Best styles for a job. opts: { for: free text ("Diwali sale banner", "avatar picker for a kids app"), use: a USES id,
+ * icon: the icon the snippets show (default home), limit }. Returns the matched uses and festivals, ranked styles with
+ * how to get each, festival categories, avatar advice, Duo presets and holiday palettes where they apply.
+ */
+export function recommendStyles({ for: text = '', use, icon, limit = 6 } = {}) {
+  const uses = styleUses()
+  const q = String(text || '')
+  const hits = [], festivals = [], scores = new Map()
+  const add = (s, w) => { if (data().styleNames.includes(s)) scores.set(s, (scores.get(s) || 0) + w) }
+  if (use) {
+    const u = uses.find(x => x.id === String(use).toLowerCase())
+    if (!u) throw new IconError(`Unknown use "${use}". Uses: ${uses.map(x => x.id).join(', ')}`, { code: 'unknown_use', uses: uses.map(x => x.id) })
+    hits.push(u)
+  }
+  for (const f of FESTIVALS) if (f.re.test(q)) { festivals.push(f); f.styles.forEach((s, i) => add(s, 12 - i * 2)) }
+  // a use named by more words weighs more ("premium fintech pricing page": premium + fintech beat pricing); an explicit use leads
+  const found = []
+  for (const [id, re] of USE_WORDS) {
+    if (id === 'festive' && festivals.length) continue
+    const n = (q.match(new RegExp(re.source, 'gi')) || []).length, u = uses.find(x => x.id === id)
+    if (n && u && !hits.includes(u)) found.push([u, n])
+  }
+  found.sort((a, b) => b[1] - a[1]).forEach(([u]) => hits.push(u))
+  hits.forEach((u, k) => { const n = (found.find(f => f[0] === u) || [u, 1])[1]; u.styles.forEach((s, i) => add(s, (k === 0 ? 6 : 4) + Math.min(2, n - 1) - i * 0.5)) })
+  const name = icon ? resolveName(icon) : null
+  const avatars = AVATAR_RE.test(q) || /^avatar-/.test(name || '')
+  if (avatars) ['plush', 'kawaii', 'clay', 'pastel', 'duo'].forEach((s, i) => add(s, 5 - i * 0.5))
+  // style names and their "good for" words in the text ("isometric", "neo-brutalism", "clay")
+  const lower = q.toLowerCase()
+  for (const s of data().styleNames) {
+    const g = (GUIDE.styles || {})[s] || {}
+    if (new RegExp(`\\b${s}\\b`).test(lower)) add(s, 9)
+    const words = [...new Set(`${g.good || ''} ${g.who || ''}`.toLowerCase().split(/[^a-z]+/).filter(w => w.length > 3))]
+    const n = words.filter(w => new RegExp(`\\b${w}s?\\b`).test(lower)).length
+    if (n) add(s, Math.min(2, n * 0.5))
+  }
+  for (const [re, st] of LOOK_WORDS) if (re.test(q)) add(st, 7)
+  const matched = scores.size > 0
+  // drop stray weak matches (a single "good for" word) when the text clearly named a job
+  const top = Math.max(0, ...scores.values())
+  const ranked = [...scores.entries()].filter(([, v]) => top < 5 || v >= 1.5).sort((a, b) => b[1] - a[1]).map(([s]) => s)
+  const recommendations = ranked.slice(0, Math.max(1, Math.min(12, +limit || 6))).map(s => ({ ...styleInfo(s, name || 'home'), ...(name ? { page: `${SITE}/icons/${name}.html` } : {}) }))
+  const notes = []
+  if (festivals.length) notes.push(`Festival icons: list_categories(category: "${festivals[0].category}"), or search_icons for the object; everyday icons (shopping-bag, gift, tag, calendar) render in the holiday styles too. Holiday styles carry festival palettes (stylePalettes on each style): set their CSS variables on a parent, e.g. ${stylePaletteHint(recommendations)}.`)
+  if (avatars) notes.push('Avatars: list_categories(category: "avatars") (people, animals, friendly monsters, all avatar-*). People avatars have true-to-life palettes for many skin tones and hair colours: list_palettes(name: "avatar-woman", tag: "true-to-life") and let users choose; never one default skin tone.')
+  if (recommendations.some(r => r.style === 'duo')) notes.push('Duo presets (on the duo entry): "Duo with an accent" works in every package via CSS variables; "Duo gradient" is site and studio only.')
+  if (recommendations.some(r => r.motion3d)) notes.push('3D styles animate in 3D: animate_icon(name, style: "<3D style>") adds wm-3d (and soft3d returns 3-5 moves); <with-icon variant="…" motion="loop"> does it by itself.')
+  notes.push('One style per page or UI region; only line, solid and duo belong in 16-24px controls. A whole style as files: each style\'s zip.')
+  return {
+    query: q || null, matched,
+    uses: hits.map(u => ({ id: u.id, title: u.title, styles: u.styles })),
+    // a festival named in the text: that one; "festive" in general (use festive, or festival / seasonal words): every festival's style
+    ...((festivals.length || hits.some(u => u.id === 'festive')) ? { festivals: (festivals.length ? festivals : FESTIVALS).map(f => ({ festival: f.festival, styles: live(f.styles), category: f.category })) } : {}),
+    ...(avatars ? { avatars: { category: 'avatars', paletteTag: 'true-to-life' } } : {}),
+    recommendations,
+    ...(matched ? {} : { hint: 'Nothing in the text named a job, so here is every use: pass use (one of the ids) or describe what you are making.', allUses: uses, groups: styleGroups() }),
+    notes,
+    downloads: GUIDE.downloads || { style: `${SITE}/downloads/with-icons-<style>.zip`, all: `${SITE}/downloads/with-icons-all.zip` },
+  }
+}
+function stylePaletteHint(recs) {
+  const r = recs.find(x => x.stylePalettes && x.stylePalettes.length > 1)
+  if (!r) return 'see stylePalettes'
+  try { return `.campaign { ${stylePalette(r.style, r.stylePalettes[1].id).css} }` } catch { return 'see stylePalettes' }
 }

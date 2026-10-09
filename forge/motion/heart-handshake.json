@@ -1,0 +1,30 @@
+{
+  "name": "heart-handshake",
+  "intent": "beats warmly around a handshake",
+  "loop": {
+    "preset": "beat",
+    "amount": 0.7,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "fade"
+    },
+    {
+      "to": "handshake",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "candy-bucket",
+  "category": "halloween",
+  "description": "A pumpkin candy bucket, for trick-or-treating.",
+  "aliases": [
+    "trick-or-treat",
+    "treat-bucket",
+    "pumpkin-pail",
+    "candy-pail",
+    "pumpkin-bucket",
+    "treat-bag",
+    "candy-basket",
+    "trick-or-treat-bag"
+  ],
+  "tags": [
+    "halloween",
+    "candy",
+    "pumpkin",
+    "bucket",
+    "treat"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 11 H19.5 L18.25 19.5 A2 2 0 0 1 16.25 21.5 H7.75 A2 2 0 0 1 5.75 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 11 C4.5 0 19.5 0 19.5 11",
+      "plate": "A"
+    },
+    {
+      "d": "M7.75 15.25 L9.25 13.25 L10.75 15.25 Z M13.25 15.25 L14.75 13.25 L16.25 15.25 Z M8.5 17.5 C10.5 18.75 13.5 18.75 15.5 17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 7.5 A1.5 1.5 0 1 1 10.5 7.5 A1.5 1.5 0 1 1 13.5 7.5 Z M10.5 7.5 L8.5 6.25 V8.75 Z M13.5 7.5 L15.5 6.25 V8.75 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 11 H19.5 L18.25 19.5 A2 2 0 0 1 16.25 21.5 H7.75 A2 2 0 0 1 5.75 19.5 Z",
+    "M13.5 7.5 A1.5 1.5 0 1 1 10.5 7.5 A1.5 1.5 0 1 1 13.5 7.5 Z",
+    "M10.75 7.5 L8.5 6.25 V8.75 Z",
+    "M13.25 7.5 L15.5 6.25 V8.75 Z"
+  ],
+  "cutouts": [
+    "M7.75 15.25 L9.25 13.25 L10.75 15.25 Z",
+    "M13.25 15.25 L14.75 13.25 L16.25 15.25 Z",
+    "M8.5 17.5 C10.5 18.75 13.5 18.75 15.5 17.5"
+  ],
+  "synonyms": [
+    "trick or treat",
+    "trick or treating",
+    "trick-or-treating",
+    "candy",
+    "candies",
+    "sweets",
+    "treats",
+    "loot",
+    "haul",
+    "stash",
+    "goodies",
+    "pail",
+    "bucket",
+    "basket",
+    "jack o lantern bucket",
+    "halloween candy",
+    "kids",
+    "costume",
+    "door to door",
+    "collect",
+    "pumpkin",
+    "halloween",
+    "candy buket"
+  ]
+}

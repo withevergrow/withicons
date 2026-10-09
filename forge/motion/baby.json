@@ -1,0 +1,37 @@
+{
+  "name": "baby",
+  "intent": "rocks gently like a cradle",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "blink"
+    },
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "smile",
+      "effect": "fade"
+    }
+  ]
+}

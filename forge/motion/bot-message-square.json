@@ -1,0 +1,54 @@
+{
+  "name": "bot-message-square",
+  "intent": "the chat bubble floats while the bot inside blinks, ready to reply",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        10.25
+      ],
+      "amount": 1,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "blink",
+      "origin": [
+        12,
+        10.25
+      ]
+    },
+    {
+      "preset": "type",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-square",
+      "effect": "fade"
+    },
+    {
+      "to": "bot",
+      "effect": "morph"
+    },
+    {
+      "to": "message-square-text",
+      "effect": "slide-up"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "gavel",
+  "category": "objects",
+  "description": "A judge's gavel, for legal, terms, auctions and decisions.",
+  "aliases": [
+    "judge",
+    "hammer-of-justice",
+    "auction",
+    "bid",
+    "verdict",
+    "ruling"
+  ],
+  "tags": [
+    "legal",
+    "law",
+    "court",
+    "auction",
+    "judge",
+    "decision"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 10.5 L10.5 3.5 L13.5 6.5 L6.5 13.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 10 L19.5 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3 21 H11",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.5 10.5 L10.5 3.5 L13.5 6.5 L6.5 13.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "justice",
+    "lawyer",
+    "attorney",
+    "courtroom",
+    "trial",
+    "lawsuit",
+    "legal terms",
+    "terms of service",
+    "terms and conditions",
+    "policy",
+    "compliance",
+    "regulation",
+    "rules",
+    "moderation",
+    "ban hammer",
+    "decision",
+    "judgement",
+    "judgment",
+    "sentence",
+    "arbitration",
+    "auction house",
+    "bidding",
+    "sold",
+    "going once",
+    "legislation",
+    "law",
+    "legal",
+    "court",
+    "mallet"
+  ]
+}

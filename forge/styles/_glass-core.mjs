@@ -1,19 +1,17 @@
-// GLASS core — builds the layered glass icon on signed distance fields.
+// GLASS core — the geometry of the glass icon, on signed distance fields (paint: _glass-soft.mjs).
 //
-// Every icon becomes two stacked panes plus light:
-//   BACK   the object's mass, shifted down-right, in a vivid colour (signals in an accent)
-//   FRONT  the same mass in place as a frosted, tinted pane with a crisp currentColor rim;
-//          closed cutouts and part joins are cut into it; open cutouts and interior lines are
-//          etched on it (a deep line with a light lip)
-//   FROST  where the front pane covers the back, the colour is seen through frosted glass
-//   SHINE  a soft diagonal sheen across big panes, and a bright specular edge on the lit rim
+// build(icon, opt) returns, as fields on the shared grid:
+//   back    the object's mass, slimmer and shifted down-right: the colour body behind the glass (backS: signals)
+//   front   the same mass in place, 0.5u up-left: the frosted pane; closed cutouts and part joins are cut into it
+//   aPane   the attached parts (plate A) inside the pane;  sPane  the signals' own pane (plate S)
+//   etch    open cutouts and interior lines, etched on the pane (front frame)
 // Glass rods are fatter than Line's 2u strokes, so Line's narrow counters and gaps are kept open
 // (openLimit), small parts and short signals use slimmer rods, small closed cutouts are windows
 // in the front pane (the vivid back glows through) while hollows (a battery's inside, a ring's gap)
 // and ring-fill holes go through both panes.
 // Fields are inside-positive (approximate SDF), sampled on the shared 0.1u grid.
-import { N, NN, H, X0, gx, segsOf, distField, evenOddMask, maxFilter, sample, contours, ringsToD } from './_glass-field.mjs'
-import { parsePath, resample, simplify, fmt } from '../kernel/geom.mjs'
+import { N, NN, H, segsOf, distField, evenOddMask, maxFilter, sample, contours } from './_glass-field.mjs'
+import { parsePath, resample, simplify } from '../kernel/geom.mjs'
 import { tuneFor } from './_glass-tune.mjs'
 
 export const G = {
@@ -24,12 +22,8 @@ export const G = {
   SHIFT_MASS: 1.35, // ... big masses by 1.35u (the front moves the other way)
   ERODE_MIN: 0.45,  // the back layer is slimmer than the pane: rods by this much ...
   ERODE_MAX: 0.8,   // ... big masses by up to this much, so the pane's top-left reads clear
-  RIM: 0.62,        // rim stroke width (currentColor)
-  ETCH_HI: 0.32,    // offset of the light lip beside every etched line
   PART: 0.3,        // parting cut between an attached A part and the object
   MOAT: 0.85,       // clearance around signals (badges, slashes, modifiers)
-  HL_IN: 0.4,       // specular edge starts this far inside the pane edge
-  HL_W: 0.46,       // specular edge thickness at full light
   CLOSE: 0.2,       // closing radius of the mass
   R_SMALL: 1.12,    // rod radius of small parts and short signals (rays, numerals, flames, small loops)
   LINE_HALF: 1,     // Line's half stroke: the drawing whose counters and gaps glass keeps open
@@ -39,8 +33,7 @@ export const G = {
   THROUGH: 0.22,    // a cutout component bigger than this share of the mass goes through both panes
   BAND: 3.4,
 }
-const LIGHT = (() => { const x = -0.55, y = -0.835, l = Math.hypot(x, y); return [x / l, y / l] })()
-const sstep = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
+export const LIGHT = (() => { const x = -0.55, y = -0.835, l = Math.hypot(x, y); return [x / l, y / l] })()
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v))
 
 // ---------------------------------------------------------------------------
@@ -104,7 +97,7 @@ function regions(ringLists, band = G.BAND) {
   return f
 }
 const maxInto = (a, b) => { for (let k = 0; k < NN; k++) if (b[k] > a[k]) a[k] = b[k]; return a }
-const shifted = (f, s, fillV) => {
+export const shifted = (f, s, fillV) => {
   const o = new Float32Array(NN).fill(fillV)
   for (let j = 0; j < N; j++) {
     const sj = j - s
@@ -127,7 +120,7 @@ function warp(f, m, s0, s1) {
   return o
 }
 // separable box blur (two passes ~ a tent), radius r cells
-function blur(f, r) {
+export function blur(f, r) {
   let a = f
   for (let pass = 0; pass < 2; pass++) {
     const t = new Float32Array(NN), o = new Float32Array(NN), w = 2 * r + 1
@@ -163,7 +156,7 @@ function closeInPlace(f, rc) {
   return f
 }
 // exact signed distance to the zero level of f (inside positive), plus its rings
-function exact(f, band) {
+export function exact(f, band) {
   const rings = contours(f, 0)
   if (!rings.length) return { rings, D: null }
   const d = distField(segsOf(rings.map(pts => ({ pts, closed: true }))), band)
@@ -172,7 +165,7 @@ function exact(f, band) {
   return { rings, D }
 }
 // connected components of {f > 0}; returns label array and per-component cell lists
-function components(pred) {
+export function components(pred) {
   const lab = new Int32Array(NN).fill(-1), comps = [], stack = []
   for (let k = 0; k < NN; k++) {
     if (lab[k] >= 0 || !pred(k)) continue
@@ -293,8 +286,8 @@ function dotBlobs(etch, nearCut) {
 }
 
 // ---------------------------------------------------------------------------
-export function build(icon) {
-  const T = tuneFor(icon.name)
+export function build(icon, opt = {}) {
+  const T = { ...opt, ...tuneFor(icon.name) }
   const S = T.scale ?? G.SCALE
   const R = T.r ?? G.R
   const P0 = prep(icon, S, T.skipCut)
@@ -466,103 +459,24 @@ export function build(icon) {
   const backS = SM ? backOf(SM.map((v, k) => Math.min(v, -through[k]))) : null
   const front = shifted(pane, -sf, -G.BAND)
   const o = -sf * H
-  return { back, backS, front, etch: etch.map(l => ({ pts: l.pts.map(p => [p[0] + o, p[1] + o]), closed: l.closed })) }
+  // extras for the soft (rich) glass paint: the attached parts (plate A) and the signals' own pane, both in the front frame
+  let aPane = null
+  if (aLines.length || AF) {
+    const af = aLines.length ? tubesBy(aLines, rOf) : new Float32Array(NN).fill(-G.BAND)
+    if (AF) maxInto(af, AF)
+    for (let k = 0; k < NN; k++) af[k] = Math.min(af[k], pane[k])
+    aPane = shifted(af, -sf, -G.BAND)
+  }
+  let sPane = null
+  if (SM) {
+    const sp = new Float32Array(NN)
+    for (let k = 0; k < NN; k++) sp[k] = Math.min(SM[k], -holes[k])
+    sPane = shifted(sp, -sf, -G.BAND)
+  }
+  return { back, backS, front, aPane, sPane, etch: etch.map(l => ({ pts: l.pts.map(p => [p[0] + o, p[1] + o]), closed: l.closed })) }
 }
 
-// ---------------------------------------------------------------------------
-export function glassLayers(icon) {
-  const { back, backS, front, etch } = build(icon)
-  const { rings: frontRings, D } = exact(front, G.BAND)
-  if (!D) return null
-  const out = {}
-  out.back = ringsToD(contours(back, 0), 0.05)
-  out.backS = backS ? ringsToD(contours(backS, 0), 0.05) : ''
-  out.front = ringsToD(frontRings, 0.035)
-
-  out.etch = etchD(etch, 0)
-  out.etchHi = etchD(etch, G.ETCH_HI)
-  // frost: the colour seen through the pane (inset so the rim stays crisp)
-  const inset = G.RIM / 2
-  const fr = new Float32Array(NN)
-  for (let k = 0; k < NN; k++) {
-    const b = backS ? Math.max(back[k], backS[k]) : back[k]
-    fr[k] = Math.min(D[k] - inset, b)
-  }
-  out.frost = ringsToD(contours(fr, 0), 0.05, 0.05)
-
-  // local thickness of the pane
-  const TH = maxFilter(D, 16)
-
-  // specular edge: a tapered sliver just inside the rim wherever the edge faces the light
-  const hl = new Float32Array(NN).fill(-1)
-  for (let j = 1; j < N - 1; j++) for (let i = 1; i < N - 1; i++) {
-    const k = j * N + i, v = D[k]
-    if (v < G.HL_IN - 0.05 || v > G.HL_IN + G.HL_W + 0.1) continue
-    const gxv = D[k + 1] - D[k - 1], gyv = D[k + N] - D[k - N], gl = Math.hypot(gxv, gyv)
-    if (gl < 1e-6) continue
-    // outward normal = -grad
-    const f = -(gxv * LIGHT[0] + gyv * LIGHT[1]) / gl
-    const g = sstep(0.2, 0.85, f)
-    if (g <= 0) continue
-    const w = Math.min(G.HL_W, 0.34 * TH[k]) * g
-    if (w < 0.07) continue
-    hl[k] = Math.min(v - G.HL_IN, G.HL_IN + w - v)
-  }
-  prune(hl, 0.3)
-  out.hl = ringsToD(contours(hl, 0), 0.05, 0.03)
-
-  // sheen: two diagonal bands across the big panes (rods stay clear)
-  const sheen = sheenField(D, TH)
-  out.sheen = sheen ? ringsToD(contours(sheen, 0), 0.05, 0.08) : ''
-  return out
-}
-
-// open polylines as compact stroke data, optionally nudged down-right (the etch's lit lip)
-function etchD(lines, off) {
-  let d = ''
-  for (const l of lines) {
-    const pts = l.pts.length > 2 ? simplify(l.pts, 0.03, l.closed) : l.pts
-    if (!pts.length) continue
-    const q = p => fmt(p[0] + off) + ' ' + fmt(p[1] + off)
-    d += 'M' + q(pts[0]) + (pts.length === 1 ? 'h0' : 'L' + pts.slice(1).map(q).join('L')) + (l.closed ? 'Z' : '')
-  }
-  return d
-}
-
-function prune(f, minArea) {
+export function prune(f, minArea) {
   const { comps } = components(k => f[k] > 0)
   for (const cells of comps) if (cells.length * H * H < minArea) for (const c of cells) f[c] = -1
-}
-
-function sheenField(D, TH) {
-  // extent of the pane along the diagonal u = (x + y)/sqrt2
-  let u0 = Infinity, u1 = -Infinity
-  for (let k = 0; k < NN; k++) {
-    if (D[k] <= 0) continue
-    const i = k % N, j = (k - i) / N, u = (gx(i) + gx(j)) * Math.SQRT1_2
-    if (u < u0) u0 = u; if (u > u1) u1 = u
-  }
-  if (!(u1 > u0)) return null
-  const span = u1 - u0
-  const w1 = clamp(0.17 * span, 1.3, 2.7), c1 = u0 + 0.3 * span
-  const w2 = clamp(0.045 * span, 0.4, 0.65), c2 = c1 + w1 / 2 + 0.75 + w2 / 2
-  const f = new Float32Array(NN).fill(-1)
-  const IN = 0.62
-  for (let k = 0; k < NN; k++) {
-    const v = D[k]
-    if (v <= IN) continue
-    const i = k % N, j = (k - i) / N, u = (gx(i) + gx(j)) * Math.SQRT1_2
-    const b = Math.max(w1 / 2 - Math.abs(u - c1), w2 / 2 - Math.abs(u - c2))
-    if (b <= 0) continue
-    f[k] = Math.min(b, v - IN)
-  }
-  // keep only pieces on real masses (a rod crossing the band would get a noisy chip)
-  const { comps } = components(k => f[k] > 0)
-  let kept = 0
-  for (const cells of comps) {
-    let mx = 0
-    for (const c of cells) if (TH[c] > mx) mx = TH[c]
-    if (mx < 2.3 || cells.length * H * H < 0.5) { for (const c of cells) f[c] = -1 } else kept++
-  }
-  return kept ? f : null
 }

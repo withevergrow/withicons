@@ -1,0 +1,44 @@
+{
+  "name": "screen-share",
+  "intent": "the arrow lifts off the screen, sharing it out",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      10
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "nudge",
+      "dir": 270
+    }
+  ],
+  "swap": [
+    {
+      "to": "monitor",
+      "effect": "fade"
+    },
+    {
+      "to": "cast",
+      "effect": "morph"
+    }
+  ]
+}

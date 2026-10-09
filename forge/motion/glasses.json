@@ -1,0 +1,28 @@
+{
+  "name": "glasses",
+  "intent": "adjusted on the nose for a closer look",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      14
+    ]
+  },
+  "alt": [
+    {
+      "preset": "zoom"
+    },
+    {
+      "preset": "glow"
+    }
+  ]
+}

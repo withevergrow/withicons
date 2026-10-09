@@ -1,0 +1,76 @@
+{
+  "name": "chart-column-stacked",
+  "category": "charts",
+  "description": "Columns split into stacked segments, for stacked bar charts and breakdowns.",
+  "aliases": [
+    "stacked-bar-chart",
+    "stacked-column-chart",
+    "stacked-bars",
+    "stacked-columns",
+    "stacked-chart",
+    "segmented-bars",
+    "stacked-histogram",
+    "column-breakdown"
+  ],
+  "tags": [
+    "chart",
+    "bars",
+    "stacked",
+    "analytics",
+    "breakdown",
+    "comparison"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 20.5 V12.5 A1.5 1.5 0 0 1 6 11 H9.5 V5 A1.5 1.5 0 0 1 11 3.5 H13 A1.5 1.5 0 0 1 14.5 5 V8 H18 A1.5 1.5 0 0 1 19.5 9.5 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 11 V20.5 M14.5 8 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 16 H9.5 M9.5 13.5 H14.5 M14.5 16.5 H19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 20.5 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 20.5 V12.5 A1.5 1.5 0 0 1 6 11 H9.5 V5 A1.5 1.5 0 0 1 11 3.5 H13 A1.5 1.5 0 0 1 14.5 5 V8 H18 A1.5 1.5 0 0 1 19.5 9.5 V20.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 11 V20.5",
+    "M14.5 8 V20.5",
+    "M4.5 16 H9.5",
+    "M9.5 13.5 H14.5",
+    "M14.5 16.5 H19.5"
+  ],
+  "synonyms": [
+    "stacked",
+    "stacked bar",
+    "stacked column",
+    "bar chart",
+    "column chart",
+    "breakdown",
+    "composition",
+    "segments",
+    "categories",
+    "share",
+    "comparison",
+    "compare",
+    "revenue by product",
+    "usage by plan",
+    "analytics",
+    "report",
+    "dashboard",
+    "metrics",
+    "statistics",
+    "data",
+    "kpi",
+    "visualization",
+    "visualisation"
+  ]
+}

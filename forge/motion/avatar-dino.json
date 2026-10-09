@@ -1,0 +1,9 @@
+{
+  "name": "avatar-dino",
+  "intent": "bobs its long neck with a happy little rawr",
+  "loop": { "preset": "sway", "origin": [9,21], "amount": 0.7, "duration": 2.6 },
+  "hover": { "preset": "nod", "origin": [9,21], "amount": 1.2 },
+  "parts": { "A": { "preset": "blink", "origin": [12.5,9], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "bounce", "origin": [9,21], "amount": 0.6 },{ "preset": "tada", "origin": [9,21] }],
+  "swap": [{ "to": "avatar-frog", "effect": "morph" },{ "to": "avatar-dino@solid", "effect": "scale" }]
+}

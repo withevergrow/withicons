@@ -1,0 +1,63 @@
+{
+  "name": "bat",
+  "category": "halloween",
+  "description": "A flying bat, for Halloween and the night.",
+  "aliases": [
+    "flying-bat",
+    "vampire-bat",
+    "halloween-bat",
+    "night-bat",
+    "fruit-bat",
+    "bats"
+  ],
+  "tags": [
+    "halloween",
+    "animal",
+    "night",
+    "spooky",
+    "wings"
+  ],
+  "paths": [
+    {
+      "d": "M14 10 C16 9.5 18.5 8.25 21.5 6.5 C21.75 9.5 21.5 11.5 20.5 13 C19.5 12.25 18 12.25 17 13.5 C16 12.75 14.75 13.25 14 15",
+      "plate": "K"
+    },
+    {
+      "d": "M10 10 C8 9.5 5.5 8.25 2.5 6.5 C2.25 9.5 2.5 11.5 3.5 13 C4.5 12.25 6 12.25 7 13.5 C8 12.75 9.25 13.25 10 15",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7 L11.25 8.75 H12.75 L14 7 V14.5 C14 16.25 13 17.5 12 17.5 C11 17.5 10 16.25 10 14.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 10 C16 9.5 18.5 8.25 21.5 6.5 C21.75 9.5 21.5 11.5 20.5 13 C19.5 12.25 18 12.25 17 13.5 C16 12.75 14.75 13.25 14 15 Z",
+    "M10 10 C8 9.5 5.5 8.25 2.5 6.5 C2.25 9.5 2.5 11.5 3.5 13 C4.5 12.25 6 12.25 7 13.5 C8 12.75 9.25 13.25 10 15 Z",
+    "M10 7 L11.25 8.75 H12.75 L14 7 V14.5 C14 16.25 13 17.5 12 17.5 C11 17.5 10 16.25 10 14.5 Z"
+  ],
+  "cutouts": [
+    "M11.75 11 A0.75 0.75 0 1 1 10.25 11 A0.75 0.75 0 1 1 11.75 11 Z",
+    "M13.75 11 A0.75 0.75 0 1 1 12.25 11 A0.75 0.75 0 1 1 13.75 11 Z"
+  ],
+  "synonyms": [
+    "vampire",
+    "dracula",
+    "nocturnal",
+    "night creature",
+    "cave",
+    "belfry",
+    "flying",
+    "wings",
+    "echolocation",
+    "mammal",
+    "spooky",
+    "creepy",
+    "halloween",
+    "night",
+    "dark",
+    "gotham",
+    "flittermouse",
+    "batty"
+  ]
+}

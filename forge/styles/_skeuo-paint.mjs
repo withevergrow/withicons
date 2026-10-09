@@ -112,7 +112,8 @@ const rimAttrs = (mat, thin) => {
 export function piece(out, P, role, mat, opt = {}) {
   if (!has(P)) return
   const fin = FINISH[mat.f] || FINISH.satin
-  const shadow = v('shadow', SHADOW), shine = v('shine', SHINE)
+  // (opt.shadePaint: the paint the piece's own shading rolls in; a person's skin shades in its own skin shade)
+  const shadow = opt.shadePaint || v('shadow', SHADOW), shine = v('shine', SHINE)
   const b = F.box(P)
   const w = b.x1 - b.x0, h = b.y1 - b.y0, sz = Math.min(w, h)
   const thin = opt.thin != null ? opt.thin : sz < 3.2

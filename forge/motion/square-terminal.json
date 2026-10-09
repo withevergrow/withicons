@@ -1,0 +1,44 @@
+{
+  "name": "square-terminal",
+  "intent": "the tile rests while the prompt ticks like someone typing",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.6,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 1,
+      "duration": 1.4,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "terminal",
+      "effect": "fade"
+    },
+    {
+      "to": "square-code",
+      "effect": "flip"
+    }
+  ]
+}

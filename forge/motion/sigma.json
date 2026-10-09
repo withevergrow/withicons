@@ -1,0 +1,32 @@
+{
+  "name": "sigma",
+  "intent": "the sum sign pops like a total being calculated",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "calculator",
+      "effect": "flip"
+    },
+    {
+      "to": "percent",
+      "effect": "fade"
+    }
+  ]
+}

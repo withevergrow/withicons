@@ -1,0 +1,76 @@
+{
+  "name": "satellite",
+  "category": "travel",
+  "description": "A satellite with solar panels, for space, GPS and global coverage.",
+  "aliases": [
+    "orbiter",
+    "sat",
+    "space-station",
+    "satcom",
+    "broadcast-satellite"
+  ],
+  "synonyms": [
+    "spacecraft",
+    "gps",
+    "space",
+    "orbit",
+    "satellite dish",
+    "communication",
+    "telecom",
+    "broadcast",
+    "transmission",
+    "signal",
+    "global coverage",
+    "navigation",
+    "remote sensing",
+    "earth observation",
+    "starlink",
+    "internet",
+    "uplink",
+    "downlink",
+    "solar panel",
+    "aerospace",
+    "nasa",
+    "cosmos"
+  ],
+  "tags": [
+    "space",
+    "gps",
+    "communication",
+    "orbit",
+    "signal"
+  ],
+  "paths": [
+    {
+      "d": "M10.42 10.75 L13.25 13.58 L16.08 10.75 L13.25 7.92 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.95 9.69 L4.06 5.8 L8.3 1.56 L12.19 5.45 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.31 16.05 L18.2 19.94 L22.44 15.7 L18.55 11.81 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.66 12.16 L16.43 13.93 M11.84 9.34 L10.07 7.57",
+      "plate": "A"
+    },
+    {
+      "d": "M6.71 13.4 A3.25 3.25 0 0 0 10.6 17.29 M11.84 12.16 L9.89 14.11",
+      "plate": "A"
+    },
+    {
+      "d": "M3.7 13.93 A6 6 0 0 0 10.07 20.3",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M10.42 10.75 L13.25 13.58 L16.08 10.75 L13.25 7.92 Z",
+    "M7.95 9.69 L4.06 5.8 L8.3 1.56 L12.19 5.45 Z",
+    "M14.31 16.05 L18.2 19.94 L22.44 15.7 L18.55 11.81 Z",
+    "M6.71 13.4 A3.25 3.25 0 0 0 10.6 17.29 Z"
+  ],
+  "cutouts": []
+}

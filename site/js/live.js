@@ -17,9 +17,10 @@
   function reduced() { return (W.WI && 'reduced' in W.WI) ? !!W.WI.reduced || !!(W.WI.isStill && W.WI.isStill()) : mqReduce.matches }
   var STYLE_SAY = {
     line: 'clean outlines', solid: 'bold filled shapes', duo: 'outline with a colour tint', gloss: 'shiny candy highlights', engrave: 'engraved hatching',
-    blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'frosted glass panes', kawaii: 'cute with a face', sticker: 'die-cut sticker',
+    blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'soft frosted glass', kawaii: 'cute with a face', sticker: 'die-cut sticker',
     pixel: '8-bit pixels', retro: '70s stripes', luxe: 'layered 3D enamel and gold', bauhaus: 'bold geometric Bauhaus', skeuo: 'realistic materials',
-    anime: 'anime cel shading', gothic: 'Gothic stone and stained glass', pastel: 'soft pastels', coquette: 'bows and blush pink', plush: 'soft felt toys'
+    anime: 'anime cel shading', gothic: 'Gothic stone and stained glass', pastel: 'soft pastels', coquette: 'bows and blush pink', plush: 'soft felt toys',
+    clay: 'soft matte clay', bento: 'tinted bento tiles', suite: 'suite-style colour', dock: 'glossy app tiles', liquid: 'clear liquid glass', chrome: 'liquid chrome', soft3d: 'soft studio-lit 3D', brutal: 'bold neo-brutalism', utsav: 'Indian festive craft', rangoli: 'Diwali glow and rangoli motifs', halloween: 'spooky-cute Halloween', christmas: 'cosy Christmas with snow', lunar: 'Lunar New Year red and gold', valentine: 'cute Valentine\'s stickers'
   }
 
   /* ───────────── helpers ───────────── */
@@ -422,54 +423,23 @@
     }
   }
 
-  /* the grouped style switcher (library bar + icon pages): every style visible (mini drawing + name each), a sliding
-     colour-morphing selection (.lv-sb-ink); phones get a trigger that opens the same list as a panel */
+  /* the style switcher (library bar + icon pages): the shared compact row (js/style-picker.js, site/STYLE-PICKER.md):
+     the current style, recent and Popular ones, then "All N styles" for the full picker, grouped by what people make */
   function switcher(sbWrap, onPick) {
-    var styles = $('.lv-sb-list', sbWrap), cur = 'line'
-    var sbToggle = $('[data-lv-sb-toggle]', sbWrap)
-    function moveInk() {
-      var ink = $('.lv-sb-ink', styles), on = $('.lv-sb-o[aria-checked="true"]', styles)
-      if (!ink) return
-      if (!on || !on.offsetWidth) { ink.style.opacity = 0; return }
-      var jump = !ink._placed || (ink._y != null && ink._y !== on.offsetTop) || reduced()
-      if (jump) ink.classList.add('is-jump')
-      ink.style.opacity = 1; ink.style.transform = 'translate(' + on.offsetLeft + 'px,' + on.offsetTop + 'px)'
-      ink.style.width = on.offsetWidth + 'px'; ink.style.height = on.offsetHeight + 'px'
-      ink._y = on.offsetTop
-      if (jump) { void ink.offsetWidth; ink.classList.remove('is-jump') }
-      ink._placed = true
+    var cur = 'line', row = null
+    var SP = W.WI && W.WI.stylePicker
+    if (SP && SP.row) {
+      sbWrap.innerHTML = ''
+      var el = D.createElement('div')
+      sbWrap.appendChild(el)
+      row = SP.row(el, { current: cur, icon: sbWrap.getAttribute('data-icon') || 'calendar', max: 6, size: 28, label: sbWrap.getAttribute('data-label') || 'Style',
+        title: 'Choose a style', onPick: function (s) { cur = s; onPick(s) } })
     }
-    function paintSwitcher() {
-      var b = $('.lv-sb-o[data-style="' + cur + '"]', styles)
-      if (sbToggle && b) {
-        $('[data-lv-sb-cur]', sbToggle).textContent = STY[cur] ? STY[cur].title : cur
-        $('[data-lv-sb-cur-g]', sbToggle).textContent = (b.getAttribute('data-group-title') || 'Style') + ' style'
-        var ic = $('.lv-sb-ic', b), curIc = $('[data-lv-sb-cur-ic]', sbToggle)
-        if (ic && curIc) curIc.innerHTML = ic.innerHTML
-        $$('.lv-sb-dots i', sbToggle).forEach(function (d) { d.classList.toggle('is-on', d.getAttribute('data-st') === cur) })
-        sbToggle.setAttribute('aria-label', 'Style: ' + (STY[cur] ? STY[cur].title : cur) + '. Show all ' + SN.length + ' styles')
-      }
-      moveInk()
+    return {
+      paint: function (s) { cur = s },
+      set: function (s) { cur = s; if (row && STY[s]) row.set(s) },
+      open: function () { if (row && row.open) row.open() }
     }
-    function sbIsSheet() { return !!(sbToggle && sbToggle.offsetWidth) }
-    function sbOpen(open, focus) {
-      if (!sbToggle) return
-      if (open && !sbIsSheet()) open = false
-      sbWrap.classList.toggle('is-open', open); sbToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
-      if (open) { requestAnimationFrame(moveInk); if (focus) { var on = $('.lv-sb-o[aria-checked="true"]', styles); setTimeout(function () { if (on) on.focus({ preventScroll: true }) }, 40) } }
-      else if (focus) sbToggle.focus({ preventScroll: true })
-    }
-    if (sbToggle) sbToggle.addEventListener('click', function () { sbOpen(!sbWrap.classList.contains('is-open'), true) })
-    // a pick closes the phone panel (a click, not an arrow key moving through the list)
-    styles.addEventListener('click', function (e) { if (e.target.closest('.lv-sb-o') && e.detail && sbWrap.classList.contains('is-open')) setTimeout(function () { sbOpen(false) }, reduced() ? 0 : 220) })
-    sbWrap.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sbWrap.classList.contains('is-open')) { e.preventDefault(); e.stopPropagation(); sbOpen(false, true) } })
-    D.addEventListener('pointerdown', function (e) { if (sbWrap.classList.contains('is-open') && !sbWrap.contains(e.target)) sbOpen(false) })
-    sbWrap.addEventListener('focusout', function (e) { if (sbWrap.classList.contains('is-open') && e.relatedTarget && !sbWrap.contains(e.relatedTarget)) sbOpen(false) })
-    var rzT = null
-    W.addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(function () { if (!sbIsSheet()) sbOpen(false); moveInk() }, 80) })
-    if (W.ResizeObserver) new ResizeObserver(function () { moveInk() }).observe(styles)
-    var setRadio = radios(styles, '.lv-sty', function (b) { onPick(b.getAttribute('data-style')) })
-    return { paint: function (s) { cur = s; paintSwitcher() }, set: function (s) { cur = s; setRadio(s); paintSwitcher() }, open: sbOpen }
   }
 
   function initLibrary() {
@@ -676,7 +646,7 @@
   function attrOf(k) { return RESERVED.indexOf(kebab(k)) >= 0 ? 'param-' + kebab(k) : kebab(k) }
   function jsVal(v) { return typeof v === 'string' ? "'" + v.replace(/'/g, "\\'") + "'" : String(v) }
   var VERSION = CAT.version || '0.2.0'
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#7484FF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24', clay: '#C8714E', bento: '#0E9F9A', suite: '#0B6CD4', dock: '#3A3F4B', liquid: '#38BDF8', chrome: '#8D99AE', soft3d: '#E0A800', brutal: '#FF4F79', utsav: '#EA7A0C', rangoli: '#E81F7A', halloween: '#F2690F', christmas: '#1F7A4D', lunar: '#E8282E', valentine: '#FF5C82' }
   // outline colours: '' = the style's own; 'style' = the style's signature colour
   var SWATCHES = [['', 'Style colours'], ['#111318', 'Black'], ['style', 'Style colour'], ['#2F5BFF', 'Cobalt'], ['#FF5A36', 'Tomato'], ['#22A861', 'Leaf'], ['#FF4FA3', 'Pink'], ['#FFB020', 'Amber'], ['#7252FF', 'Violet'], ['#FFFFFF', 'White']]
   var SPRING = 'cubic-bezier(.34,1.56,.64,1)', EASE = 'cubic-bezier(.23,1,.32,1)'
@@ -1747,8 +1717,8 @@
     W.addEventListener('scroll', pinSoon, { passive: true }); W.addEventListener('resize', pinSoon)
     pinEnd()
 
-    /* ───────── "On this page": a quiet floating pill that opens a section map ───────── */
-    initMap($('[data-lv-map]'), root)
+    /* ───────── "On this page": js/site.js (WI.pageMap) runs it; here only what a jump needs ───────── */
+    initMap($('[data-lv-map]'))
 
     // palettes are small: fetch them when the page is idle so the quick colour row can offer them
     idle(function () { loadPalettes().then(function () { if (PALS) paintColors() }) }, 1500)
@@ -1756,57 +1726,10 @@
     styleChanged()
   }
 
-  function initMap(map, hero) {
+  function initMap(map) {
     if (!map) return
     D.documentElement.classList.add('lv-has-map')
-    var mapBtn = $('summary', map), links = $$('[data-lv-map-link]', map), nowEl = $('[data-lv-map-now]', map), prog = $('[data-lv-map-prog]', map)
-    var secs = links.map(function (a) { return D.getElementById(a.getAttribute('href').slice(1)) }).filter(Boolean)
-    var tucks = $$('[data-lv-dev2], [data-lv-sheet][open]')
-    var shown = false
-    function setShown(v) { if (v === shown) return; shown = v; map.classList.toggle('is-shown', v); if (!v && map.open) map.open = false }
-    var raf = 0
-    function onScroll() {
-      if (raf) return
-      raf = requestAnimationFrame(function () {
-        raf = 0
-        var vh = W.innerHeight || 800, tuck = false
-        tucks.forEach(function (t) { var r = t.getBoundingClientRect(); if (r.top < vh - 24 && r.bottom > vh - 150) tuck = true })
-        setShown((!hero || hero.getBoundingClientRect().bottom < 40) && !tuck)
-        var y = (W.innerHeight || 800) * 0.35, cur = null
-        secs.forEach(function (s) { if (s.getBoundingClientRect().top <= y) cur = s })
-        var id = cur ? cur.id : ''
-        links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current') })
-        var on = id && $('[data-lv-map-link][aria-current]', map)
-        if (nowEl) nowEl.textContent = on ? $('b', on).textContent : ''
-        var max = D.documentElement.scrollHeight - (W.innerHeight || 800)
-        if (prog) prog.style.strokeDashoffset = String(100 - Math.round(Math.min(1, Math.max(0, W.scrollY / Math.max(1, max))) * 100))
-      })
-    }
-    W.addEventListener('scroll', onScroll, { passive: true }); W.addEventListener('resize', onScroll)
-    onScroll()
-    map.addEventListener('toggle', function () {
-      if (!map.open) return
-      var cur = $('[data-lv-map-link][aria-current]', map) || links[0], card = $('.lv-map-card', map)
-      if (card && card.animate && !reduced()) {
-        card.animate([{ opacity: 0, transform: 'translateY(12px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 360, easing: 'cubic-bezier(.34,1.56,.64,1)' })
-        links.forEach(function (a, i) { a.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 340, delay: 40 + i * 24, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'backwards' }) })
-      }
-      if (cur && map.contains(D.activeElement)) setTimeout(function () { cur.focus({ preventScroll: true }) }, 30)
-    })
-    links.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var t = D.getElementById(a.getAttribute('href').slice(1)); if (!t) return
-        e.preventDefault(); map.open = false
-        if (t.id === 'developers') { var dv = $('[data-lv-dev]'); if (dv) dv.open = true }
-        t.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' })
-        if (history.replaceState) history.replaceState(null, '', location.search + a.getAttribute('href'))
-        if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1')
-        setTimeout(function () { try { t.focus({ preventScroll: true }) } catch (err) { } }, reduced() ? 0 : 500)
-      })
-    })
-    D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && map.open) { map.open = false; mapBtn.focus() } })
-    D.addEventListener('pointerdown', function (e) { if (map.open && !map.contains(e.target)) map.open = false })
-    map.addEventListener('focusout', function (e) { if (map.open && e.relatedTarget && !map.contains(e.relatedTarget)) map.open = false })
+    map.addEventListener('pagemap:jump', function (e) { if (e.detail && e.detail.id === 'developers') { var dv = $('[data-lv-dev]'); if (dv) dv.open = true } })
   }
   var chevL = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6 8.5 12l6 6"/></svg>'
   var chevR = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg>'

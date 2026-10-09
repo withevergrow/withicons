@@ -1,0 +1,31 @@
+{
+  "name": "door-closed",
+  "intent": "a polite knock on a shut door",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5
+  },
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        5,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "door-open",
+      "effect": "flip"
+    }
+  ]
+}

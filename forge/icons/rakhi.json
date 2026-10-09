@@ -1,0 +1,89 @@
+{
+  "name": "rakhi",
+  "category": "indian-festivals",
+  "description": "A rakhi thread with a decorated centre, for Raksha Bandhan.",
+  "aliases": [
+    "rakhee",
+    "rakri",
+    "raksha-bandhan",
+    "rakshabandhan",
+    "rakhi-thread",
+    "raksha-sutra",
+    "sacred-thread",
+    "rakhi-band"
+  ],
+  "synonyms": [
+    "raksha bandhan",
+    "rakhi festival",
+    "rakhi purnima",
+    "shravan",
+    "brother",
+    "sister",
+    "siblings",
+    "sibling bond",
+    "love",
+    "protection",
+    "promise",
+    "thread",
+    "bracelet",
+    "wristband",
+    "gift",
+    "rakhi gift",
+    "family",
+    "celebration",
+    "indian festival",
+    "india",
+    "raki",
+    "rakhri",
+    "rakhy"
+  ],
+  "tags": [
+    "raksha-bandhan",
+    "siblings",
+    "thread",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 H6.25",
+      "plate": "A"
+    },
+    {
+      "d": "M17.75 12 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13.44 8.54 A1.6 1.6 0 1 1 15.46 10.56 A1.6 1.6 0 1 1 15.46 13.44 A1.6 1.6 0 1 1 13.44 15.46 A1.6 1.6 0 1 1 10.56 15.46 A1.6 1.6 0 1 1 8.54 13.44 A1.6 1.6 0 1 1 8.54 10.56 A1.6 1.6 0 1 1 10.56 8.54 A1.6 1.6 0 1 1 13.44 8.54 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 12 A1.5 1.5 0 1 1 10.5 12 A1.5 1.5 0 1 1 13.5 12 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M3.5 12 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 12 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.75 16 A1.25 1.25 0 1 1 2.25 16 A1.25 1.25 0 1 1 4.75 16 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M21.75 16 A1.25 1.25 0 1 1 19.25 16 A1.25 1.25 0 1 1 21.75 16 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M13.44 8.54 A1.6 1.6 0 1 1 15.46 10.56 A1.6 1.6 0 1 1 15.46 13.44 A1.6 1.6 0 1 1 13.44 15.46 A1.6 1.6 0 1 1 10.56 15.46 A1.6 1.6 0 1 1 8.54 13.44 A1.6 1.6 0 1 1 8.54 10.56 A1.6 1.6 0 1 1 10.56 8.54 A1.6 1.6 0 1 1 13.44 8.54 Z",
+    "M4.75 16 A1.25 1.25 0 1 1 2.25 16 A1.25 1.25 0 1 1 4.75 16 Z",
+    "M21.75 16 A1.25 1.25 0 1 1 19.25 16 A1.25 1.25 0 1 1 21.75 16 Z"
+  ],
+  "cutouts": [
+    "M13.5 12 A1.5 1.5 0 1 1 10.5 12 A1.5 1.5 0 1 1 13.5 12 Z"
+  ]
+}

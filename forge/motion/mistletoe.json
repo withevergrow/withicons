@@ -1,0 +1,51 @@
+{
+  "name": "mistletoe",
+  "intent": "the sprig dangles from its ribbon; a kiss on hover",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "beat",
+    "origin": [
+      12,
+      12
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        11.5
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        3
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "float"
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "morph"
+    }
+  ]
+}

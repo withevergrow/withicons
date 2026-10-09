@@ -1,0 +1,51 @@
+{
+  "name": "user-lock",
+  "intent": "the person rests while the padlock clicks shut",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "bounce",
+      "origin": [
+        17.5,
+        21
+      ],
+      "amount": 0.5,
+      "duration": 3.4,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.4,
+      "duration": 3.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "user-x",
+      "effect": "flip"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "alpana",
+  "intent": "the curling pattern turns slowly as it is painted",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "amount": 0.6,
+      "delay": 0.25
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "rangoli-pattern",
+      "effect": "spin"
+    }
+  ]
+}

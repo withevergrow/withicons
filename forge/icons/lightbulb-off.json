@@ -1,0 +1,64 @@
+{
+  "name": "lightbulb-off",
+  "category": "objects",
+  "description": "A light bulb struck through, for lights off, no ideas yet and power saving.",
+  "aliases": [
+    "light-off",
+    "bulb-off",
+    "lights-out",
+    "no-idea",
+    "lamp-off",
+    "idea-off",
+    "dark"
+  ],
+  "synonyms": [
+    "turn off light",
+    "lights off",
+    "switch off",
+    "power saving",
+    "energy saving",
+    "save energy",
+    "dark mode",
+    "no ideas",
+    "out of ideas",
+    "blank",
+    "disabled",
+    "unlit",
+    "night",
+    "sleep",
+    "hints off",
+    "tips off",
+    "blackout",
+    "burnt out",
+    "off"
+  ],
+  "tags": [
+    "light",
+    "off",
+    "idea",
+    "power",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M10.9 15.5 L9 15.5 C9 13.87 5.54 12.46 5.05 9.65 M7.91 3.32 A7 7 0 0 1 19 9 C19 10.51 18.13 11.65 17.2 12.61",
+      "plate": "K"
+    },
+    {
+      "d": "M9 15.5 L9 19 A2 2 0 0 0 11 21 L13 21 A2 2 0 0 0 14.93 19.53",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.14 3.96 A7 7 0 0 1 19 9 C19 10.9 17.63 12.21 16.49 13.31 L7.14 3.96 Z",
+    "M12.32 15.5 L9 15.5 C9 13.75 5 12.25 5 9 A7 7 0 0 1 5.04 8.23 L12.32 15.5 Z",
+    "M15 18.18 L15 19 A2 2 0 0 1 13 21 L11 21 A2 2 0 0 1 9 19 L9 15.5 L12.32 15.5 L15 18.18 Z"
+  ],
+  "cutouts": [
+    "M8 16 H13.25"
+  ]
+}

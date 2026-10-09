@@ -23,12 +23,23 @@ export function reactAttrs(attrs) {
   return out
 }
 
-const baseSrc = `function createWithIcon(name, style, displayName, iconNode) {
+// Rich styles (gradients): every rendered copy gets its own gradient ids from useId (React 18+; a per-instance counter
+// before that), so two copies on one page never share a gradient (or its palette colours).
+const baseSrc = `let WITH_UID = 0
+const withNextUid = () => 'w' + (++WITH_UID)
+const withEl = n => n[2] ? createElement(n[0], n[1], ...n[2].map(withEl)) : createElement(n[0], n[1])
+function createWithIcon(name, style, displayName, iconNode) {
   const s = STYLES[style] || STYLES[DEFAULT_STYLE]
+  const uniq = iconNode.some(n => n[2])
   let kids = null
   const Component = forwardRef(function WithIcon(props, ref) {
     const { size = 24, color = 'currentColor', strokeWidth, absoluteStrokeWidth = false, title, className, children, ...rest } = props
-    if (!kids) kids = iconNode.map(n => createElement(n[0], n[1]))
+    let body
+    if (uniq) {
+      // a constant per component, so the hook order never changes
+      const id = WithReact.useId ? WithReact.useId() : WithReact.useState(withNextUid)[0]
+      body = WithReact.useMemo(() => withUniq(iconNode, id).map(withEl), [id])
+    } else body = kids || (kids = iconNode.map(withEl))
     const c = color || 'currentColor'
     const p = { xmlns: 'http://www.w3.org/2000/svg', width: size, height: size, viewBox: '0 0 24 24' }
     for (const k in s.root) p[k] = s.root[k] === 'currentColor' ? c : s.root[k]
@@ -43,7 +54,7 @@ const baseSrc = `function createWithIcon(name, style, displayName, iconNode) {
     else p['aria-hidden'] = 'true'
     for (const k in rest) p[k] = rest[k]
     p.ref = ref
-    return createElement('svg', p, title ? createElement('title', null, title) : null, ...kids, children)
+    return createElement('svg', p, title ? createElement('title', null, title) : null, ...body, children)
   })
   Component.displayName = displayName
   return Component
@@ -97,8 +108,11 @@ export type IconComponentProps = WithIconProps
 export default async function emit(ctx) {
   const files = await emitComponentPackage(ctx, {
     dir: 'react',
-    importEsm: `import { createElement, forwardRef, lazy } from 'react'`,
-    importCjs: `const { createElement, forwardRef, lazy } = require('react')`,
+    thinCjs: true,
+    importEsm: `import * as WithReact from 'react'
+import { createElement, forwardRef, lazy } from 'react'`,
+    importCjs: `const WithReact = require('react')
+const { createElement, forwardRef, lazy } = WithReact`,
     mapAttrs: reactAttrs,
     baseSrc, iconSrc, typesDts,
     typeNames: ['WithIcon', 'WithIconProps', 'WithIconStyle', 'IconProps', 'IconComponentProps'],
@@ -149,7 +163,10 @@ ${o.speed || `- Fast everywhere: each style is a single module, so the root or a
   (no \`optimizePackageImports\`, no deep imports).`}
 - Every icon is exported twice: \`Home\` and \`HomeIcon\`. Names are the PascalCase of the kebab-case icon name (\`arrow-right\` -> \`ArrowRight\`).
 - Deep imports keep working: \`${o.pkg}/icons/home\`, \`${o.pkg}/solid/icons/home\`.
-
+${o.noCdn ? '' : `- No bundler (an ESM CDN in a \`<script type="module">\`)? Ask for the icons you use, so the CDN tree-shakes the style
+  down to them: \`https://esm.sh/${o.pkg}@${ctx.version}?exports=Home,Search\` (line),
+  \`https://esm.sh/${o.pkg}@${ctx.version}/solid?exports=Home\`. A bare style URL is every icon of that style (megabytes).
+`}
 ## Props
 
 | prop | type | default | notes |

@@ -1,0 +1,55 @@
+{
+  "name": "link-2",
+  "category": "actions",
+  "description": "Two rounded chain links side by side, for links and connected items.",
+  "aliases": [
+    "link-horizontal",
+    "chain-horizontal",
+    "link-alt",
+    "chain-2",
+    "linked",
+    "connect-link",
+    "attach-link"
+  ],
+  "tags": [
+    "link",
+    "url",
+    "chain",
+    "connect",
+    "web"
+  ],
+  "paths": [
+    {
+      "d": "M10 6.5 H7.5 A5.5 5.5 0 0 0 7.5 17.5 H10",
+      "plate": "K"
+    },
+    {
+      "d": "M14 6.5 H16.5 A5.5 5.5 0 0 1 16.5 17.5 H14",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 12 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "hyperlink",
+    "url",
+    "chain",
+    "chain link",
+    "insert link",
+    "web address",
+    "connected",
+    "connection",
+    "join",
+    "attach",
+    "linked items",
+    "reference",
+    "share link",
+    "related",
+    "bind",
+    "couple"
+  ]
+}

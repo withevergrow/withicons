@@ -1,0 +1,32 @@
+{
+  "name": "minimize-2",
+  "intent": "arrows pull in toward the centre like leaving full screen",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "maximize-2",
+      "effect": "morph"
+    },
+    {
+      "to": "minimize",
+      "effect": "rotate"
+    }
+  ]
+}

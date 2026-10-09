@@ -1,0 +1,90 @@
+{
+  "name": "avatar-alien",
+  "category": "avatars",
+  "description": "A friendly alien avatar with antennae, for playful profiles and guests.",
+  "aliases": [
+    "alien-avatar",
+    "alien",
+    "alien-face",
+    "extraterrestrial",
+    "martian",
+    "et",
+    "space-alien",
+    "little-green-man",
+    "ufo-avatar"
+  ],
+  "tags": [
+    "avatar",
+    "alien",
+    "space",
+    "character",
+    "sci-fi"
+  ],
+  "paths": [
+    {
+      "d": "M12 6 C16.5 6 19.5 8.75 19.5 12.25 C19.5 16.25 15.5 20.5 12 20.5 C8.5 20.5 4.5 16.25 4.5 12.25 C4.5 8.75 7.5 6 12 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.25 11.25 C9 11 10.5 12 10.75 13.5 C9 13.75 7.5 12.75 7.25 11.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M16.75 11.25 C15 11 13.5 12 13.25 13.5 C15 13.75 16.5 12.75 16.75 11.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 17 A1.5 1.5 0 0 0 13.25 17",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 6.5 L8 3.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 6.5 L16 3.75",
+      "plate": "A"
+    },
+    {
+      "d": "M7.25 3 H7.75",
+      "plate": "S"
+    },
+    {
+      "d": "M16.25 3 H16.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 6 C16.5 6 19.5 8.75 19.5 12.25 C19.5 16.25 15.5 20.5 12 20.5 C8.5 20.5 4.5 16.25 4.5 12.25 C4.5 8.75 7.5 6 12 6 Z",
+    "M7.25 11.25 C9 11 10.5 12 10.75 13.5 C9 13.75 7.5 12.75 7.25 11.25 Z",
+    "M16.75 11.25 C15 11 13.5 12 13.25 13.5 C15 13.75 16.5 12.75 16.75 11.25 Z"
+  ],
+  "cutouts": [
+    "M6.75 10.75 C9 10.5 11 12 11.25 14 C9 14.25 7 13 6.75 10.75 Z",
+    "M17.25 10.75 C15 10.5 13 12 12.75 14 C15 14.25 17 13 17.25 10.75 Z",
+    "M10.75 17 A1.5 1.5 0 0 0 13.25 17"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "face",
+    "space",
+    "outer space",
+    "antenna",
+    "antennae",
+    "visitor",
+    "sci-fi",
+    "guest",
+    "anonymous",
+    "green",
+    "ufo"
+  ]
+}

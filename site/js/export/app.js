@@ -59,18 +59,39 @@
 
   // ---------- Android VectorDrawable ----------
   function argb(c) { var h = V().hex2; return '#' + (c.a < 0.9995 ? h(c.a) : '') + h(c.r) + h(c.g) + h(c.b) }
+  // a gradient paint (rich styles) as an inline <aapt:attr> <gradient> (Android 7.0+, API 24). VectorDrawable gradients
+  // have no transform: the end points (linear) or the centre and radius (radial) are mapped through it, exact for the
+  // translate + uniform scale the icons use.
+  function gradientXml(gr, m, attr) {
+    var v = V(), f = function (n) { return v.fmt(n, 3) }
+    var t = v.mul(m, gr.m), sc = Math.sqrt(Math.abs(t[0] * t[3] - t[1] * t[2])) || 1
+    var P = function (x, y) { return v.apply(t, x, y) }
+    var g = '        <gradient'
+    if (gr.radial) {
+      var c = P(gr.coords[3], gr.coords[4])
+      g += ' android:type="radial" android:centerX="' + f(c[0]) + '" android:centerY="' + f(c[1]) + '" android:gradientRadius="' + f(Math.max(0.001, gr.coords[5] * sc)) + '"'
+    } else {
+      var a = P(gr.coords[0], gr.coords[1]), b = P(gr.coords[2], gr.coords[3])
+      g += ' android:type="linear" android:startX="' + f(a[0]) + '" android:startY="' + f(a[1]) + '" android:endX="' + f(b[0]) + '" android:endY="' + f(b[1]) + '"'
+    }
+    g += ' android:tileMode="clamp">\n'
+    gr.stops.forEach(function (s) { g += '          <item android:offset="' + f(s.o) + '" android:color="' + argb({ r: s.r, g: s.g, b: s.b, a: s.a * gr.k }) + '" />\n' })
+    return '      <aapt:attr name="android:' + attr + '">\n' + g + '        </gradient>\n      </aapt:attr>\n'
+  }
   function vectorDrawable(ctx, opts) {
     var v = V(), f = function (n) { return v.fmt(n, 3) }
     var d = v.drawing(v.flatSvg(ctx, { size: 24, background: opts.background || null, padding: opts.padding }))
     var vb = d.vb, shift = [1, 0, 0, 1, -vb[0], -vb[1]]
     var dp = Math.max(1, Math.round(opts.dp || 24))
-    var paths = []
+    var paths = [], aapt = false
     d.items.forEach(function (it) {
       var m = v.mul(shift, it.ctm), scale = Math.sqrt(Math.abs(m[0] * m[3] - m[1] * m[2])) || 1
       var segs = v.transformSegs(it.segs, m)
       var attrs = []
       if (it.fill) {
-        attrs.push(['pathData', v.segsToD(segs, f)], ['fillColor', argb(it.fill)])
+        attrs.push(['pathData', v.segsToD(segs, f)])
+        if (it.fill.grad) { attrs.kids = (attrs.kids || '') + gradientXml(it.fill.grad, m, 'fillColor'); aapt = true }
+        else attrs.push(['fillColor', argb(it.fill)])
         if (it.rule === 'evenodd') attrs.push(['fillType', 'evenOdd'])
         paths.push(attrs)
       }
@@ -78,22 +99,23 @@
         var sd = it.dash.length ? v.flattenDash(segs, it.dash.map(function (x) { return x * scale }), it.dashOffset * scale) : segs
         if (!sd.length) return
         var sa = [['pathData', v.segsToD(sd, f)], ['strokeColor', argb(it.stroke)], ['strokeWidth', f(it.sw * scale)]]
+        if (it.stroke.grad) { sa.splice(1, 1); sa.kids = gradientXml(it.stroke.grad, m, 'strokeColor'); aapt = true }
         if (it.cap !== 'butt') sa.push(['strokeLineCap', it.cap === 'square' ? 'square' : 'round'])
         if (it.join !== 'miter' && it.join !== 'miter-clip' && it.join !== 'arcs') sa.push(['strokeLineJoin', it.join === 'bevel' ? 'bevel' : 'round'])
         else if (it.miter !== 4) sa.push(['strokeMiterLimit', f(it.miter)])
         // Fill and stroke in one <path> when they share geometry (VectorDrawable paints fill, then stroke: like SVG).
-        if (it.fill && sd === segs) { var last = paths[paths.length - 1]; sa.slice(1).forEach(function (a) { last.push(a) }) }
+        if (it.fill && sd === segs) { var last = paths[paths.length - 1]; sa.slice(1).forEach(function (a) { last.push(a) }); if (sa.kids) last.kids = (last.kids || '') + sa.kids }
         else paths.push(sa)
       }
     })
     var esc = v.escAttr
     var x = '<?xml version="1.0" encoding="utf-8"?>\n' +
       '<!-- ' + String(ctx.title || ctx.name).replace(/--/g, '-') + ' (' + ctx.style + ') from with icons, withicons.com -->\n' +
-      '<vector xmlns:android="http://schemas.android.com/apk/res/android"\n' +
+      '<vector xmlns:android="http://schemas.android.com/apk/res/android"\n' + (aapt ? '    xmlns:aapt="http://schemas.android.com/aapt"\n' : '') +
       '    android:width="' + dp + 'dp"\n    android:height="' + dp + 'dp"\n' +
       '    android:viewportWidth="' + f(vb[2]) + '"\n    android:viewportHeight="' + f(vb[3]) + '">\n'
     paths.forEach(function (p) {
-      x += '  <path\n' + p.map(function (a) { return '      android:' + a[0] + '="' + esc(a[1]) + '"' }).join('\n') + ' />\n'
+      x += '  <path\n' + p.map(function (a) { return '      android:' + a[0] + '="' + esc(a[1]) + '"' }).join('\n') + (p.kids ? '>\n' + p.kids + '  </path>\n' : ' />\n')
     })
     return x + '</vector>\n'
   }

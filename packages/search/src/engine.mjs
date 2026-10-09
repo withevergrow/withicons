@@ -212,11 +212,32 @@ const STYLE_WORDS = {
   bow: 'coquette', bows: 'coquette', girly: 'coquette', feminine: 'coquette', ribbons: 'coquette', dainty: 'coquette', balletcore: 'coquette', girlish: 'coquette',
   plushie: 'plush', plushy: 'plush', plushies: 'plush', toy: 'plush', toys: 'plush', kids: 'plush', kid: 'plush', children: 'plush', childrens: 'plush',
   stuffed: 'plush', felt: 'plush', squishy: 'plush', cuddly: 'plush', stuffedtoy: 'plush',
+  // run 12: the rich styles (gradients). Words that also name things (glass, metal, office, tile) are left out on purpose.
+  claymorphism: 'clay', claymorphic: 'clay', plasticine: 'clay', clay3d: 'clay',
+  saas: 'duo', productui: 'duo',
+  bentogrid: 'bento', bentobox: 'bento',
+  enterprise: 'suite', corporate: 'suite',
+  macos: 'dock', appicon: 'dock', squircle: 'dock',
+  liquidglass: 'liquid', refractive: 'liquid', refraction: 'liquid',
+  metallic: 'chrome', chromed: 'chrome', liquidmetal: 'chrome',
+  isometric: 'soft3d', isometry: 'soft3d', iso3d: 'soft3d', iso: 'soft3d', soft3d: 'soft3d', render: 'soft3d', renders: 'soft3d', blender: 'soft3d', memoji: 'soft3d', '3drender': 'soft3d',
+  brutalism: 'brutal', brutalist: 'brutal', neobrutalism: 'brutal', neobrutalist: 'brutal', neubrutalism: 'brutal',
+  // run 13: the holiday styles (the style names christmas, halloween, lunar, valentine work as words already)
+  festive: 'utsav', ethnic: 'utsav', desi: 'utsav', indianfestive: 'utsav',
+  diwali: 'rangoli', deepavali: 'rangoli', holi: 'rangoli', durgapuja: 'rangoli', navratri: 'rangoli', pongal: 'rangoli', onam: 'rangoli',
+  xmas: 'christmas', noel: 'christmas', yuletide: 'christmas',
+  spooky: 'halloween', spookycute: 'halloween', trickor: 'halloween', trickortreat: 'halloween', samhain: 'halloween',
+  lunarnew: 'lunar', lunarnewyear: 'lunar', chinesenew: 'lunar', chinesenewyear: 'lunar', cny: 'lunar', tet: 'lunar', seollal: 'lunar', springfestival: 'lunar',
+  valentines: 'valentine', valentinesday: 'valentine', galentine: 'valentine', galentines: 'valentine', cutelove: 'valentine', romantic: 'valentine',
 }
 // two-word style phrases are joined before parsing: "8 bit" (from "8-bit") -> "8bit"
 const STYLE_PHRASES = { '8 bit': '8bit', '16 bit': '16bit', 'pixel art': 'pixelart', 'frosted glass': 'frostedglass', 'die cut': 'diecut', 'hand drawn': 'handdrawn', 'two tone': 'twotone', 'line art': 'lineart', '3 d': '3d', 'mid century': 'midcentury',
   'cel shaded': 'celshaded', 'cel shading': 'celshading', 'stained glass': 'stainedglass', 'dark academia': 'darkacademia', 'soft color': 'softcolor', 'soft colour': 'softcolour',
-  'baby colors': 'babycolors', 'stuffed toy': 'stuffedtoy' }
+  'baby colors': 'babycolors', 'stuffed toy': 'stuffedtoy',
+  'liquid glass': 'liquidglass', 'liquid metal': 'liquidmetal', 'neo brutalism': 'neobrutalism', 'neo brutalist': 'neobrutalist', 'bento grid': 'bentogrid', 'bento box': 'bentobox',
+  'product ui': 'productui',
+  'durga puja': 'durgapuja', 'lunar new': 'lunarnew', 'lunarnew year': 'lunarnewyear', 'chinese new': 'chinesenew', 'chinesenew year': 'chinesenewyear',
+  'spring festival': 'springfestival', 'soft 3d': 'soft3d', 'soft 3 d': 'soft3d', '3d render': '3drender', 'trick or': 'trickor', 'trickor treat': 'trickortreat', 'cute love': 'cutelove', 'valentines day': 'valentinesday', 'spooky cute': 'spookycute' }
 // words after a style word that mark it as a style request ("glass style home", "pixel look")
 const STYLE_MARK = new Set(['style', 'styled', 'look', 'effect', 'version', 'variant', 'theme', 'aesthetic'])
 // the original seven styles and their words keep their exact 1.1 parsing
@@ -632,7 +653,9 @@ export function create(index) {
     // different words ("mat" is not "matter", "bear" is not "bearing")
     const dict = exact === undefined && isCommon(w)
     for (const id of stems.get(s) || []) {
-      if (dict && !plural(w, tokens[id])) continue
+      // a common English word keeps only its plural among stem-mates whether or not the vocabulary has it ("bear" -> bears,
+      // never bearing / navigation; "mat" -> mats, never matter)
+      if ((dict || (exact !== undefined && isCommon(w))) && !plural(w, tokens[id])) continue
       put(id, exact !== undefined && fields()[exact] < 9 && !knownFix(w) ? Q_STEM_KNOWN : Q_STEM, 2)
     }
     // British / American spellings are the same word, not a typo ("colour" -> color, "centre" -> center)
@@ -643,19 +666,22 @@ export function create(index) {
     // a word typed in full that names something ("book", "fast"): longer words that start with it are related,
     // not what it names ("bookmark", "fastfood")
     const whole = exact !== undefined && w.length >= 3 && fields()[exact] < 9 && !knownFix(w)
+    // a common English word the vocabulary knows ("bear", an icon now) does not start other words either ("bearing")
+    const commonKnown = exact !== undefined && isCommon(w) && !knownFix(w)
     if (allowPrefix && w.length >= 1) {
       let lo = 0, hi = T
       while (lo < hi) { const m = (lo + hi) >> 1; if (tokens[sorted[m]] < w) lo = m + 1; else hi = m }
-      for (let k = lo, n = 0; k < T && n < 80; k++) {
+      // the cap is on completions, alphabetical: 600 icons have ~200 "tr" words, and a cap of 80 stopped before "tru" (truck)
+      for (let k = lo, n = 0; k < T && n < 320; k++) {
         const t = tokens[sorted[k]]
         if (!t.startsWith(w)) break
         // a whole word does not complete into a misspelling the data carries ("temple" is not "templete")
         if (t.length > w.length && !(whole && knownFix(t))) {
           // an inflection of the word ("bean" -> beans) is the word itself, not an unfinished one
-          const infl = w.length >= 3 && stem(t) === s && (dict ? plural(w, t) : /^(s|es|d|ed|ing|[b-df-hj-np-tv-z](ed|ing))$/.test(t.slice(w.length)))
-          put(sorted[k], qPrefix(w.length, t.length) * (dict && !infl ? 0.6 : whole && !infl ? 0.72 : 1), infl ? 2 : 1); n++
+          const infl = w.length >= 3 && stem(t) === s && (dict || commonKnown ? plural(w, t) : /^(s|es|d|ed|ing|[b-df-hj-np-tv-z](ed|ing))$/.test(t.slice(w.length)))
+          put(sorted[k], qPrefix(w.length, t.length) * ((dict || commonKnown) && !infl ? 0.6 : whole && !infl ? 0.72 : 1), infl ? 2 : 1); n++
           const o = out.get(sorted[k])
-          if (o.kind === 1 && !infl) { if (dict) o.dp = true; else if (whole) o.pk = true }
+          if (o.kind === 1 && !infl) { if (dict || commonKnown) o.dp = true; else if (whole) o.pk = true }
         }
       }
     }

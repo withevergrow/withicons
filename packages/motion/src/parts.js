@@ -1,12 +1,17 @@
 // @withicons/motion — parts choreography (forge/MOTION.md "Parts choreography"): which motion each tagged part of an
 // icon plays. Shared by exports (export.js), the website (Lottie, frames) and the node frame-strip previewer
 // (forge/tools/preview-motion.mjs), so all of them move exactly like motion.css does inline.
-import { PRESET_DEFAULTS, DIRECTIONAL, decoOf, decoTimes } from './meta.js'
-import { presetStops, shadowStops, DECO_STOPS } from './keyframes.js'
+import { PRESET_DEFAULTS, DIRECTIONAL, decoOf, decoTimes, styleSpec, is3dStyle, isBackdropStyle } from './meta.js'
+import { presetStops, shadowStops, shineStops, plateStops, DECO_STOPS } from './keyframes.js'
 
-/** Resolves preset, timing and geometry for one trigger of a spec (or explicit options): the motion `m` of partsPlan. */
+/**
+ * Resolves preset, timing and geometry for one trigger of a spec (or explicit options): the motion `m` of partsPlan.
+ * o.style: the icon's style; a 3D style (STYLES_3D) plays the spec's 3D counterpart (meta.js styleSpec). An explicit
+ * o.preset is always taken as it is.
+ */
 export function resolveSpecMotion(spec, o) {
   o = o || {}
+  if (o.style) spec = styleSpec(spec, o.style)
   const trigger = ['loop', 'hover', 'once'].includes(o.trigger) ? o.trigger : 'loop'
   const slot = spec ? (trigger === 'loop' ? spec.loop : spec.hover) : null
   const preset = PRESET_DEFAULTS[o.preset] ? o.preset : (slot && PRESET_DEFAULTS[slot.preset] ? slot.preset : 'pop')
@@ -27,6 +32,9 @@ export function resolveSpecMotion(spec, o) {
     dir, steps,
     ease: steps > 0 ? `steps(${Math.round(steps)})` : (d.ease || 'linear'),
     delay: pick(o.delay, null, 0),
+    // partsPlan maps the spec's plate overrides the same way
+    // (only a style that changes anything: flat exports stay byte-identical)
+    style: o.style && (is3dStyle(o.style) || isBackdropStyle(o.style)) ? o.style : undefined,
   }
 }
 
@@ -54,11 +62,13 @@ function partMotion(m, p) {
  * dir, steps, ease, delay }) and the icon's spec (for `parts` / `deco`). Each role is
  *   { preset, loop, duration, delay, iter: 'infinite' | 1, ease, origin: [x, y] | null, box: 'view-box' | 'fill-box',
  *     stops(mode) -> keyframe stops, key: string (same key = same keyframes) }
- * Roles: obj (untagged, wm-k, wm-shine), a, s (plates), deco, shadow. deco is null for "still".
+ * Roles: obj (untagged, wm-k), shine (wm-shine: the object's own for flat presets), a, s (plates), deco, shadow.
+ * deco is null for "still".
  * `cycle` is the length after which every role is back where it started (loops: duration x deco multiple).
  * o.deco === false: the icon has no decoration nodes (no deco role, cycle = one object cycle).
  */
 export function partsPlan(m, spec, o) {
+  if (m.style) spec = styleSpec(spec, m.style)
   const iter = m.loop ? 'infinite' : 1
   const role = (mm, extra) => Object.assign({
     preset: mm.preset, loop: mm.loop, duration: mm.duration, delay: mm.delay, iter, ease: mm.ease, origin: mm.origin, box: 'view-box',
@@ -67,11 +77,20 @@ export function partsPlan(m, spec, o) {
   }, extra)
   const obj = role(m)
   const parts = spec && spec.parts
-  const pa = partMotion(m, parts && parts.A), ps = partMotion(m, parts && parts.S)
-  const out = { obj, a: pa ? role(pa) : obj, s: ps ? role(ps) : obj, shadow: obj, deco: null, cycle: m.duration }
+  // a part move (pop-up, press, hop) IS the plates' motion: the spec's plate overrides do not apply to it
+  const own = !plateStops(m.preset, m.loop, { k: 1 })
+  const pa = own ? partMotion(m, parts && parts.A) : null, ps = own ? partMotion(m, parts && parts.S) : null
+  // part moves (pop-up, press, hop): plates play their own track unless the spec gives them another preset
+  const plate = mm => plateStops(mm.preset, mm.loop, { k: 1 }) ? role(mm, { stops: mode => plateStops(mm.preset, mm.loop, mode), key: 'pl:' + [mm.preset, mm.loop ? 'l' : 's', mm.k, mm.dir].join(':') }) : null
+  const pm = plate(m)
+  const out = { obj, a: pa ? (plate(pa) || role(pa)) : (pm || obj), s: ps ? (plate(ps) || role(ps)) : (pm || obj), shadow: obj, shine: obj, deco: null, cycle: m.duration }
   // shadow: travels with the object; for presets that lift it, it lags a little and fades (keyframes.js SHADOW_STOPS)
   if (shadowStops(m.preset, m.loop, { k: 1 })) {
     out.shadow = role(m, { stops: mode => shadowStops(m.preset, m.loop, mode), key: 'sh:' + obj.key })
+  }
+  // highlight: 3D presets slide it against the turn and dim it as the face turns from the light (keyframes.js D3)
+  if (shineStops(m.preset, m.loop, { k: 1 })) {
+    out.shine = role(m, { stops: mode => shineStops(m.preset, m.loop, mode), key: 'sn:' + obj.key })
   }
   const kind = decoOf(m.preset, spec && spec.deco)
   if (kind !== 'still' && DECO_STOPS[kind] && !(o && o.deco === false)) {
@@ -195,6 +214,9 @@ export function sampleMatrix(s, origin, box) {
     else if (fn === 'scaleY') n = [1, 0, 0, v[0], 0, 0]
     else if (fn === 'rotate') { const a = v[0] * Math.PI / 180; n = [Math.cos(a), Math.sin(a), -Math.sin(a), Math.cos(a), 0, 0] }
     else if (fn === 'rotateY') n = [Math.cos(v[0] * Math.PI / 180), 0, 0, 1, 0, 0]
+    else if (fn === 'skewX') n = [1, 0, Math.tan(v[0] * Math.PI / 180), 1, 0, 0]
+    else if (fn === 'skewY') n = [1, Math.tan(v[0] * Math.PI / 180), 0, 1, 0, 0]
+    else if (fn === 'matrix' && v.length === 6) n = v.slice()
     if (n) M = mul(M, n)
   }
   return mul(M, [1, 0, 0, 1, -o[0], -o[1]])

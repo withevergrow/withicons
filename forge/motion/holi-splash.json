@@ -1,0 +1,40 @@
+{
+  "name": "holi-splash",
+  "intent": "the burst of colour throbs and splashes outward",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.8,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "duration": 5
+    },
+    "S": {
+      "preset": "twinkle",
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "water-balloon",
+      "effect": "scale"
+    }
+  ]
+}

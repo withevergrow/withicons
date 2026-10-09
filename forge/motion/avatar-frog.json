@@ -1,0 +1,8 @@
+{
+  "name": "avatar-frog",
+  "intent": "squashes and hops like a frog on a lily pad",
+  "loop": { "preset": "bounce", "origin": [12,20.5], "amount": 0.6, "duration": 1.5 },
+  "hover": { "preset": "jelly", "origin": [12,20.5], "amount": 1.2 },
+  "alt": [{ "preset": "breathe", "origin": [12,20.5] },{ "preset": "pop" }],
+  "swap": [{ "to": "avatar-frog@solid", "effect": "scale" },{ "to": "avatar-dino", "effect": "morph" }]
+}

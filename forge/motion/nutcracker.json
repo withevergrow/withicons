@@ -1,0 +1,40 @@
+{
+  "name": "nutcracker",
+  "intent": "the toy soldier marches in place and snaps its jaw",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "nutcracker@solid",
+      "effect": "scale"
+    }
+  ]
+}

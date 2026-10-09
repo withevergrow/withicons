@@ -1,0 +1,82 @@
+{
+  "name": "calendar-x",
+  "category": "time",
+  "description": "A calendar with a cross, for cancelled events and unavailable dates.",
+  "aliases": [
+    "cancel-event",
+    "event-cancelled",
+    "event-canceled",
+    "cancelled",
+    "canceled",
+    "remove-event",
+    "delete-event",
+    "unavailable",
+    "no-date",
+    "date-blocked"
+  ],
+  "tags": [
+    "calendar",
+    "cancel",
+    "event",
+    "remove",
+    "unavailable",
+    "date"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 13 L14.5 18",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 13 L9.5 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H19",
+    "M9.5 13 L14.5 18",
+    "M14.5 13 L9.5 18"
+  ],
+  "synonyms": [
+    "cancel",
+    "cancel appointment",
+    "cancel booking",
+    "cancel meeting",
+    "declined",
+    "decline invite",
+    "not going",
+    "busy",
+    "blocked date",
+    "out of office",
+    "day off",
+    "closed",
+    "holiday",
+    "no availability",
+    "missed",
+    "postponed",
+    "remove from calendar",
+    "clear date",
+    "delete",
+    "error",
+    "calender"
+  ]
+}

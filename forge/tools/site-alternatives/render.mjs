@@ -2,6 +2,7 @@
 // Reuses the content-page shell from ../site-pages/lib.mjs (header, footer, head, JSON-LD) without editing it.
 import { icon, esc, page, write, cvar, code, ORIGIN, STYLES, ICON_NAMES, META, N_ICONS, N_STYLES, styleTitle, MOTION, motionVars } from '../site-pages/lib.mjs'
 import { motionAssets } from '../site-pages/motion.mjs'
+import { STYLE_GROUPS, FEATURED } from '../style-groups.mjs'
 
 export { icon, esc, write, cvar, code, ORIGIN, STYLES, ICON_NAMES, META }
 export const CHECKED = '2026-10-01'
@@ -13,14 +14,14 @@ export const has = n => HAS.has(n)
 export const assertIcons = (names, where) => { for (const n of names) if (!HAS.has(n)) throw new Error(`${where}: unknown icon "${n}"`) }
 export const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim()
 
-const SEARCH_SCRIPTS = ['vendor/with/search.js', 'data/search-index.js', 'js/alternatives.js']
+const SEARCH_SCRIPTS = ['vendor/with/search.js', 'data/search-index.js', 'js/style-picker.js', 'js/alternatives.js']
 const MOTION_SCRIPTS = () => motionAssets().js
 
 /** Page shell: the shared content-page layout + css/alternatives.css (+ search engine scripts when asked). */
 export function shell(o) {
   const depth = o.path.split('/').length - 1
   const p = '../'.repeat(depth)
-  let html = page({ ...o, styles: o.motion ? motionAssets().css : [], scripts: [...(o.motion ? MOTION_SCRIPTS() : []), ...(o.search === false ? ['js/alternatives.js'] : SEARCH_SCRIPTS)], bodyClass: 'ax ' + (o.bodyClass || '') })
+  let html = page({ ...o, styles: [...(o.motion ? motionAssets().css : []), 'css/style-picker.css'], scripts: [...(o.motion ? MOTION_SCRIPTS() : []), ...(o.search === false ? ['js/style-picker.js', 'js/alternatives.js'] : SEARCH_SCRIPTS)], bodyClass: 'ax ' + (o.bodyClass || '') })
   html = html.replace(`<link rel="stylesheet" href="${p}css/pages.css">`, `<link rel="stylesheet" href="${p}css/pages.css">\n  <link rel="stylesheet" href="${p}css/alternatives.css">\n  <link rel="alternate" type="text/plain" title="llms.txt" href="${p}llms.txt">`)
   if (o.modified) html = html.replace('<meta name="robots"', `<meta property="article:modified_time" content="${o.modified}">\n  <meta name="robots"`)
   write(o.path, html)
@@ -59,7 +60,7 @@ export function answer(html, { tag = 'Short answer', checked = true, date = [CHE
  * motion: true wraps each tile's icon in its own hover animation (forge/motion specs; the tile is the wm-trigger).
  * groups: [[title|null, [names]]]; actions: subset of svg|png|dl|dlsvg|class|jsx|vue (first = default)
  */
-export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = `Search all ${N_ICONS}, e.g. “throw away”`, colors = true, q = '', heading, intro, size = 32, px = 512, motion = false, studio = '' }) {
+export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles = STYLES, style = 'line', placeholder = `Search all ${N_ICONS}, e.g. “throw away”`, colors = true, q = '', heading, intro, size = 32, px = 512, motion = false, studio = '', lead = [] }) {
   const pxs = actions.some(a => a === 'png' || a === 'dl') ? [256, 512, 1024] : actions.includes('gif') ? [128, 256, 512] : []
   for (const [, names] of groups) assertIcons(names, 'picker ' + id)
   const ACT = { svg: ['Copy SVG', 'copy'], png: ['Copy PNG', 'image'], dl: ['Download PNG', 'download'], dlsvg: ['Download SVG', 'download'], class: ['Copy <i> tag', 'code'], jsx: ['Copy JSX', 'braces'], vue: ['Copy for Vue', 'code'], anim: ['Animated SVG', 'sparkles'], gif: ['GIF for slides', 'film'] }
@@ -79,7 +80,7 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
     <div class="ax-pick-bar">
       <label class="ax-pick-search"><span class="pg-sr">Search icons</span>${I('search', 'line', 20)}<input type="search" data-pick-q placeholder="${esc(placeholder)}" autocomplete="off" spellcheck="false"${q ? ` value="${esc(q)}"` : ''}></label>
       <div class="ax-pick-row">
-        <div class="ax-seg" role="group" aria-label="Icon style">${styles.map(s => `<button type="button" class="chip s-${s}" data-pick-style="${s}" aria-pressed="${s === style}">${STYLE_TITLE[s] || styleTitle(s)}</button>`).join('')}</div>
+        <div class="ax-seg ax-styles" role="group" aria-label="Icon style" data-pick-styles="${landerStyles(style, styles, lead).slice(0, 8).join(',')}" data-icon="${groups[0][1][0]}">${landerStyles(style, styles, lead).slice(0, 6).map(s => `<button type="button" class="chip s-${s}" data-pick-style="${s}" aria-pressed="${s === style}">${STYLE_TITLE[s] || styleTitle(s)}</button>`).join('')}</div>
       </div>
       <div class="ax-pick-row">
         <div class="ax-seg ax-acts" role="group" aria-label="When I click an icon">${actions.map((a, i) => `<button type="button" class="ax-act" data-pick-act="${a}" aria-pressed="${i === 0}">${I(ACT[a][1], 'line', 16)}${esc(ACT[a][0])}</button>`).join('')}</div>
@@ -100,6 +101,12 @@ export function picker({ id, p, groups, actions = ['svg', 'png', 'dl'], styles =
     </div>
   </div>
 </section>`
+}
+
+/** The styles a lander offers first: its own style, that style's group, then the Popular ones (FEATURED). */
+export function landerStyles(style = 'line', styles = STYLES, lead = []) {
+  const g = STYLE_GROUPS.find(x => x.styles.includes(style))
+  return [...new Set([style, ...lead, ...(g ? g.styles : []), ...FEATURED, ...styles])].filter(s => styles.includes(s))
 }
 
 /** Link to an icon's page, in the style it is shown in (the page opens on that style; its canonical URL stays clean). */

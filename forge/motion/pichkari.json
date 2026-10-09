@@ -1,0 +1,40 @@
+{
+  "name": "pichkari",
+  "intent": "the water gun pumps and sprays colour",
+  "loop": {
+    "preset": "nudge",
+    "dir": 328,
+    "amount": 0.6,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 328,
+    "amount": 1.3,
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "origin": [
+        19.5,
+        7.5
+      ],
+      "amount": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "holi-splash",
+      "effect": "morph"
+    }
+  ]
+}

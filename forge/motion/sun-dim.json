@@ -1,0 +1,33 @@
+{
+  "name": "sun-dim",
+  "intent": "glows softly like a dimmed light",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "glow",
+      "amount": 0.6
+    },
+    {
+      "preset": "spin",
+      "duration": 6
+    }
+  ],
+  "swap": [
+    {
+      "to": "sun",
+      "effect": "scale"
+    },
+    {
+      "to": "moon",
+      "effect": "rotate"
+    }
+  ]
+}

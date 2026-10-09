@@ -12,9 +12,12 @@ const size = f => fs.statSync(path.join(dist, f)).size
 const skip = !has('cdn.js') && 'dist/ not built (node forge/build.mjs web --no-site)'
 const meta = skip ? null : (await import(pathToFileURL(path.join(dist, 'data/meta.js')).href)).default
 const styles = skip ? [] : (await import(pathToFileURL(path.join(dist, 'cdn.js')).href)).styleNames
+// the newest styles' files are in @withicons/web-plus (STYLE_HOME in the entry)
+const HOME = skip ? {} : JSON.parse(/const STYLE_HOME = (\{[^\n]*\})/.exec(fs.readFileSync(path.join(dist, 'cdn.js'), 'utf8'))[1])
+const hasFor = (s, f) => fs.existsSync(path.join(dist, '..', '..', HOME[s] || 'web', 'dist', f))
 
 test('one file per icon and style, small entry, no file a CDN would refuse', { skip }, () => {
-  for (const s of styles) for (const n of meta.names) assert.ok(has(`icons/${s}/${n}.js`), `icons/${s}/${n}.js`)
+  for (const s of styles) for (const n of meta.names) assert.ok(hasFor(s, `icons/${s}/${n}.js`), `icons/${s}/${n}.js`)
   assert.ok(size('cdn.js') < 32 * 1024, 'cdn.js stays a few KB: ' + size('cdn.js'))
   assert.ok(size('full.js') < 64 * 1024, 'full.js imports the chunks instead of inlining 27 MB')
   // jsDelivr serves files up to 20 MB

@@ -6,7 +6,7 @@
 import { emitComponentPackage, componentExports, basePkg, writePkg, fallbackCount, rtlDoc } from './emit-core.mjs'
 import { frameworkReadme } from './emit-react.mjs'
 
-const imports = ['createComponent', 'createMemo', 'lazy', 'mergeProps', 'splitProps']
+const imports = ['createComponent', 'createMemo', 'createUniqueId', 'lazy', 'mergeProps', 'splitProps']
 const webImports = ['Dynamic', 'insert', 'isServer']
 // getNextElement and template are only used in the browser branch. solid-js < 1.9 does not export them
 // from its server build, so a named import would fail to link under SSR: read them off the namespace.
@@ -46,16 +46,28 @@ function withSvgAttrs(name, s, o, rest) {
   p['aria-hidden'] = named ? undefined : 'true'
   return p
 }
+let WITH_UID = 0
+// createUniqueId throws on the server inside <NoHydration>: a plain counter is fine there (nothing hydrates)
+function withUid() { try { return createUniqueId() } catch (e) { return 'w' + (++WITH_UID) } }
+// one drawn element; nested children (the gradient definitions of rich styles) recurse
+function withEl(n) {
+  const p = Object.assign({ component: n[0] }, n[1])
+  if (n[2]) p.children = n[2].map(withEl)
+  return createComponent(Dynamic, p)
+}
 function createWithIcon(name, style, displayName, iconNode) {
   const s = STYLES[style] || STYLES[DEFAULT_STYLE]
+  const uniq = iconNode.some(n => n[2])
   const Component = function (props) {
+    // rich styles: every copy gets its own gradient ids (createUniqueId: stable across SSR and hydration)
+    const nodes = uniq ? withUniq(iconNode, withUid()) : iconNode
     const [own, rest] = splitProps(props, WITH_OWN)
     const attrs = createMemo(() => withSvgAttrs(name, s, own, rest))
     return createComponent(Dynamic, mergeProps({ component: 'svg' }, attrs, rest, {
       get children() {
         const kids = []
         if (own.title) kids.push(createComponent(WithTitle, { get children() { return own.title } }))
-        for (let i = 0; i < iconNode.length; i++) kids.push(createComponent(Dynamic, Object.assign({ component: iconNode[i][0] }, iconNode[i][1])))
+        for (let i = 0; i < nodes.length; i++) kids.push(withEl(nodes[i]))
         if (own.children !== undefined) kids.push(own.children)
         return kids
       },
@@ -250,8 +262,9 @@ For the JS-only triggers (\`inview\`, a hover that always finishes) call \`motio
   SVG namespace on both sides). Works with \`solid-js\` 1.6 and later; SSR and hydration are tested on 1.6 and 1.9.
 - Every entry has a \`solid\` export condition, so \`vite-plugin-solid\` bundles the icons with your app and they always
   share its \`solid-js\` instance.
-- The root and every style subpath ship ESM (\`import\`) and CommonJS (\`require\`) with matching types.
-  The per-icon deep paths (\`icons/*\`, \`<style>/icons/*\`) and \`/icon\` are ESM only.
+- The root and every style subpath ship ESM (\`import\`) and CommonJS (\`require\`) with matching types. Both builds
+  read a style's drawings from one ES module (\`<style>/nodes.js\`, so the package carries them once), so \`require()\`
+  needs Node 20.19+ or 22.12+ (or any bundler). The per-icon deep paths (\`icons/*\`, \`<style>/icons/*\`) and \`/icon\` are ESM only.
 - Each style is one module of \`/*#__PURE__*/\` components with \`sideEffects: false\`: a bundler keeps only the icons you
   import (the shared runtime plus about 0.1 kB gzipped per line icon), and Node or Vitest load one file per style.
 `

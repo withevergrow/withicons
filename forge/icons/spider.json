@@ -1,0 +1,76 @@
+{
+  "name": "spider",
+  "category": "halloween",
+  "description": "A dangling spider, for Halloween.",
+  "aliases": [
+    "arachnid",
+    "tarantula",
+    "black-widow",
+    "hanging-spider",
+    "dangling-spider",
+    "creepy-crawly",
+    "spiders"
+  ],
+  "tags": [
+    "halloween",
+    "animal",
+    "insect",
+    "spooky",
+    "creepy"
+  ],
+  "paths": [
+    {
+      "d": "M15.25 15 A3.25 3.75 0 1 1 8.75 15 A3.25 3.75 0 1 1 15.25 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 9.5 A2 2 0 1 1 10 9.5 A2 2 0 1 1 14 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.25 10.5 L7 7.25 L4.5 8.5 M9 13 L5 11.5 L3 13.5 M9 16 L5 16.5 L3.5 19 M10 18.25 L7.5 20 L7 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M13.75 10.5 L17 7.25 L19.5 8.5 M15 13 L19 11.5 L21 13.5 M15 16 L19 16.5 L20.5 19 M14 18.25 L16.5 20 L17 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2 V7.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M15.25 15 A3.25 3.75 0 1 1 8.75 15 A3.25 3.75 0 1 1 15.25 15 Z",
+    "M14 9.5 A2 2 0 1 1 10 9.5 A2 2 0 1 1 14 9.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 11.75 C11 12.5 13 12.5 14.5 11.75",
+    "M11.75 9.25 A0.6 0.6 0 1 1 10.55 9.25 A0.6 0.6 0 1 1 11.75 9.25 Z",
+    "M13.45 9.25 A0.6 0.6 0 1 1 12.25 9.25 A0.6 0.6 0 1 1 13.45 9.25 Z"
+  ],
+  "synonyms": [
+    "spidey",
+    "eight legs",
+    "crawler",
+    "crawly",
+    "bug",
+    "insect",
+    "creepy",
+    "creepy crawly",
+    "arachnophobia",
+    "fear",
+    "scary",
+    "spooky",
+    "halloween",
+    "thread",
+    "silk",
+    "dangle",
+    "hanging",
+    "drop",
+    "nature",
+    "wildlife",
+    "pest",
+    "spidr"
+  ]
+}

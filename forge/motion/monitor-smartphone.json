@@ -1,0 +1,38 @@
+{
+  "name": "monitor-smartphone",
+  "intent": "the phone pops forward from the desktop screen",
+  "loop": {
+    "preset": "float",
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "bounce",
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "monitor",
+      "effect": "fade"
+    },
+    {
+      "to": "smartphone",
+      "effect": "morph"
+    }
+  ]
+}

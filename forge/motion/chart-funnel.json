@@ -1,0 +1,37 @@
+{
+  "name": "chart-funnel",
+  "intent": "leads drop through the funnel, stage by stage",
+  "loop": {
+    "preset": "drop",
+    "amount": 0.3,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.7
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "filter",
+      "effect": "morph"
+    },
+    {
+      "to": "chart-bar",
+      "effect": "fade"
+    }
+  ]
+}

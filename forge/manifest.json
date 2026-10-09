@@ -1,6 +1,7 @@
 {
- "count": 500,
+ "count": 734,
  "categories": [
+  "ai",
   "navigation",
   "arrows",
   "actions",
@@ -26,7 +27,13 @@
   "nature",
   "home",
   "travel",
-  "sports"
+  "sports",
+  "indian-festivals",
+  "christmas",
+  "lunar-new-year",
+  "valentines",
+  "halloween",
+  "avatars"
  ],
  "icons": [
   {
@@ -6722,6 +6729,1644 @@
     "cyclist"
    ],
    "batch": "n25"
+  },
+  {
+   "name": "bot-off",
+   "category": "ai",
+   "description": "A robot head struck through by a slash, for a paused, disabled or offline assistant.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "wand-sparkles",
+   "category": "ai",
+   "description": "A magic wand with sparkles, for AI generate, auto-fix and one-click magic actions.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "brain-circuit",
+   "category": "ai",
+   "description": "A brain drawn with circuit traces, for machine learning, AI models and reasoning.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "bot-message-square",
+   "category": "ai",
+   "description": "A chat bubble holding a small robot face, for chatbots, AI chat and assistant replies.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "message-square-plus",
+   "category": "communication",
+   "description": "A square chat bubble with a plus, for starting a new chat or conversation.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "square-terminal",
+   "category": "development",
+   "description": "A terminal window tile with a prompt caret, for console, CLI and prompt input.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "command",
+   "category": "development",
+   "description": "The looped command key symbol, for keyboard shortcuts and command palettes.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "workflow",
+   "category": "ai",
+   "description": "Linked boxes on a path, for automations, agent workflows and pipelines.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "api",
+   "category": "development",
+   "description": "An API connector block with ports, for integrations, endpoints and developer APIs.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "plug-zap",
+   "category": "devices",
+   "description": "An electric plug with a lightning bolt, for connected integrations and power on.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "circuit-board",
+   "category": "devices",
+   "description": "A chip board with traces and pads, for hardware, GPUs, compute and AI chips.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "audio-waveform",
+   "category": "media",
+   "description": "A spiky audio waveform, for voice input, speech AI and audio recording.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "scan-search",
+   "category": "ai",
+   "description": "A magnifier inside scan corners, for visual search, image analysis and AI lookup.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "send-horizontal",
+   "category": "communication",
+   "description": "A paper plane pointing right, for send buttons in chat and message inputs.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "copy-check",
+   "category": "actions",
+   "description": "Two stacked sheets with a check, for copied to clipboard confirmation.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "code-xml",
+   "category": "development",
+   "description": "Angle brackets around a slash, for code, HTML, XML and markup.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "square-code",
+   "category": "development",
+   "description": "A rounded tile with angle brackets, for code blocks, snippets and embeds.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "file-json",
+   "category": "files",
+   "description": "A document with curly braces, for JSON files, configs and structured data.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "infinity",
+   "category": "objects",
+   "description": "The infinity loop, for unlimited plans, forever and continuous loops.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "sigma",
+   "category": "text",
+   "description": "The Greek sigma, for sums, totals, formulas and maths.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "variable",
+   "category": "development",
+   "description": "An x between parentheses, for variables, parameters and placeholders.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "list-todo",
+   "category": "text",
+   "description": "A checklist with ticked and empty boxes, for to-dos, tasks and agent plans.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "chart-gantt",
+   "category": "charts",
+   "description": "Staggered horizontal bars on a timeline, for project plans, roadmaps and schedules.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "radar",
+   "category": "ai",
+   "description": "A radar sweep with a blip, for monitoring, discovery and scanning.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "satellite-dish",
+   "category": "devices",
+   "description": "A satellite dish on a stand, for broadcast, signals and remote connections.",
+   "aliases": [],
+   "batch": "new-26"
+  },
+  {
+   "name": "building-2",
+   "category": "maps",
+   "description": "A tall office tower with windows, for companies, offices and organisations.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "briefcase-business",
+   "category": "objects",
+   "description": "A briefcase with a middle band, for business, work and company accounts.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "receipt-text",
+   "category": "commerce",
+   "description": "A receipt with text lines, for invoices, bills and order details.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "chart-scatter",
+   "category": "charts",
+   "description": "Dots scattered over axes, for scatter plots, correlation and data points.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "chart-candlestick",
+   "category": "charts",
+   "description": "Candlestick bars with wicks, for stock prices, trading and market data.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "chart-funnel",
+   "category": "charts",
+   "description": "A stacked funnel narrowing down, for conversion funnels and sales pipelines.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "chart-column-stacked",
+   "category": "charts",
+   "description": "Columns split into stacked segments, for stacked bar charts and breakdowns.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "badge-dollar-sign",
+   "category": "commerce",
+   "description": "A scalloped badge with a dollar sign, for pricing, deals and paid plans.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "calendar-clock",
+   "category": "time",
+   "description": "A calendar with a small clock, for scheduled events, bookings and reminders.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "calendar-x",
+   "category": "time",
+   "description": "A calendar with a cross, for cancelled events and unavailable dates.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "calendar-span",
+   "category": "time",
+   "description": "A calendar with a highlighted span of days, for date ranges and periods.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "stamp",
+   "category": "objects",
+   "description": "A rubber stamp, for approvals, sign-off and official marks.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "gavel",
+   "category": "objects",
+   "description": "A judge's gavel, for legal, terms, auctions and decisions.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "life-buoy",
+   "category": "objects",
+   "description": "A ring life buoy, for help, support and rescue.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "voicemail",
+   "category": "communication",
+   "description": "Two reels joined by a line, for voicemail and recorded messages.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "screen-share",
+   "category": "devices",
+   "description": "A monitor with an outgoing arrow, for screen sharing and presenting.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "mail-plus",
+   "category": "communication",
+   "description": "An envelope with a plus, for new email, compose and invite by email.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "bell-plus",
+   "category": "communication",
+   "description": "A bell with a plus, for adding a notification, alert or reminder.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "smile-plus",
+   "category": "users",
+   "description": "A smiling face with a plus, for adding a reaction or emoji.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "user-round",
+   "category": "users",
+   "description": "A round-headed person bust, for profiles, avatars and accounts.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "users-round",
+   "category": "users",
+   "description": "Two round-headed people, for teams, members and groups.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "user-lock",
+   "category": "users",
+   "description": "A person with a padlock, for private accounts, permissions and locked users.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "shield-x",
+   "category": "security",
+   "description": "A shield with a cross, for blocked, unprotected or failed security.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "key-round",
+   "category": "security",
+   "description": "A round-bowed key, for passwords, passkeys and access.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "lock-keyhole",
+   "category": "security",
+   "description": "A padlock with a keyhole, for secure, encrypted and private content.",
+   "aliases": [],
+   "batch": "new-27"
+  },
+  {
+   "name": "pipette",
+   "category": "layout",
+   "description": "An eyedropper, for picking colours and sampling.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "shapes",
+   "category": "objects",
+   "description": "A circle, square and triangle together, for shapes, design and components.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "component",
+   "category": "layout",
+   "description": "Four diamonds in a cross, for design-system components and reusable parts.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "scan",
+   "category": "layout",
+   "description": "Four scan corners framing a space, for scanning, capture frames and focus.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "lasso",
+   "category": "layout",
+   "description": "A looping lasso line, for free-form selection.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "cube",
+   "category": "objects",
+   "description": "A 3D cube, for 3D, products, models and blocks.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "boxes",
+   "category": "objects",
+   "description": "Stacked boxes, for inventory, packages and modules.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "blocks",
+   "category": "layout",
+   "description": "Three squares and one lifted square, for integrations, add-ons and building blocks.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "mouse-pointer-click",
+   "category": "navigation",
+   "description": "A pointer with click rays, for clicks, interactions and call to action.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "hand",
+   "category": "navigation",
+   "description": "An open hand, for grab, pan, stop and raise hand.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "maximize-2",
+   "category": "layout",
+   "description": "Two diagonal arrows pointing out, for expand and full screen.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "minimize-2",
+   "category": "layout",
+   "description": "Two diagonal arrows pointing in, for collapse and exit full screen.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "split",
+   "category": "arrows",
+   "description": "One path splitting into two, for branching, split view and A/B tests.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "ungroup",
+   "category": "layout",
+   "description": "Two separated dashed boxes, for ungrouping and splitting selections.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "monitor-smartphone",
+   "category": "devices",
+   "description": "A monitor with a phone in front, for responsive design and devices.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "contrast",
+   "category": "layout",
+   "description": "A half-filled circle, for contrast, dark mode and themes.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "sun-dim",
+   "category": "weather",
+   "description": "A small sun with short rays, for low brightness and dimmed light.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "image-off",
+   "category": "media",
+   "description": "A picture crossed out, for missing images and hidden media.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "link-2",
+   "category": "actions",
+   "description": "Two rounded chain links side by side, for links and connected items.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "trash-2",
+   "category": "actions",
+   "description": "A lidded bin with lines, for delete, remove and trash.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "settings-2",
+   "category": "actions",
+   "description": "Two slider bars with knobs, for settings, preferences and options.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "git-fork",
+   "category": "development",
+   "description": "A fork of branches meeting at one root, for forks and branching code.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "git-compare",
+   "category": "development",
+   "description": "Two branches with arrows across, for diffs and comparing changes.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "server-cog",
+   "category": "development",
+   "description": "A server stack with a gear, for server settings and infrastructure.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "cloud-cog",
+   "category": "development",
+   "description": "A cloud with a gear, for cloud settings, DevOps and hosted services.",
+   "aliases": [],
+   "batch": "new-28"
+  },
+  {
+   "name": "notebook-pen",
+   "category": "files",
+   "description": "A notebook with a pen, for notes, journals and writing.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "shovel",
+   "category": "objects",
+   "description": "A spade shovel, for digging in, building and groundwork.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "hard-hat",
+   "category": "objects",
+   "description": "A safety helmet, for construction, work in progress and maintenance.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "recycle",
+   "category": "nature",
+   "description": "Three chasing arrows in a loop, for recycling, reuse and sustainability.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "dices",
+   "category": "objects",
+   "description": "Two dice showing dots, for games, random and chance.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "satellite",
+   "category": "travel",
+   "description": "A satellite with solar panels, for space, GPS and global coverage.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "map-pin-check",
+   "category": "maps",
+   "description": "A map pin with a check, for confirmed locations and check-ins.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "globe-lock",
+   "category": "security",
+   "description": "A globe with a padlock, for secure web, VPN and privacy.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "house-plus",
+   "category": "home",
+   "description": "A house with a plus, for adding a home, address or property.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "door-closed",
+   "category": "home",
+   "description": "A closed door with a handle, for exits, rooms and private spaces.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "zap-off",
+   "category": "devices",
+   "description": "A lightning bolt crossed out, for power off and no charge.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "battery-full",
+   "category": "devices",
+   "description": "A full battery, for fully charged and full power.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "cloud-fog",
+   "category": "weather",
+   "description": "A cloud over fog lines, for fog, mist and haze.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "cloud-drizzle",
+   "category": "weather",
+   "description": "A cloud with light rain dashes, for drizzle and showers.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "droplets",
+   "category": "weather",
+   "description": "Two water drops, for humidity, water and liquids.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "test-tube",
+   "category": "education",
+   "description": "A test tube with liquid, for experiments, testing and labs.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "car-front",
+   "category": "travel",
+   "description": "A car seen from the front, for cars, rides and parking.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "baby",
+   "category": "users",
+   "description": "A baby face, for babies, kids and family.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "shirt",
+   "category": "commerce",
+   "description": "A T-shirt, for clothing, fashion and merchandise.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "glasses",
+   "category": "objects",
+   "description": "A pair of glasses, for reading, vision and accessibility.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "mic-vocal",
+   "category": "media",
+   "description": "A handheld singing microphone, for vocals, karaoke and podcasts.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "popcorn",
+   "category": "food",
+   "description": "A striped popcorn bucket, for movies, entertainment and snacks.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "heart-handshake",
+   "category": "users",
+   "description": "A handshake inside a heart, for partnership, charity and care.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "database-zap",
+   "category": "development",
+   "description": "A database with a lightning bolt, for fast queries, caching and real-time data.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "lightbulb-off",
+   "category": "objects",
+   "description": "A light bulb struck through, for lights off, no ideas yet and power saving.",
+   "aliases": [],
+   "batch": "new-29"
+  },
+  {
+   "name": "diya",
+   "category": "indian-festivals",
+   "description": "A clay diya oil lamp with a flame, for Diwali, festivals and light.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "rangoli-pattern",
+   "category": "indian-festivals",
+   "description": "A round rangoli pattern of petals and dots, for Diwali and festive welcomes.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "kalash",
+   "category": "indian-festivals",
+   "description": "A kalash pot with mango leaves and a coconut, for puja, blessings and new beginnings.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "toran",
+   "category": "indian-festivals",
+   "description": "A marigold and leaf garland hung over a doorway, for festive decor and welcome.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "marigold",
+   "category": "indian-festivals",
+   "description": "A marigold flower, for garlands, puja and Indian festivals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "lotus",
+   "category": "indian-festivals",
+   "description": "A lotus flower in bloom, for purity, calm and festivals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "sparkler",
+   "category": "indian-festivals",
+   "description": "A sparkler throwing sparks, for Diwali and celebrations.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "firecracker",
+   "category": "indian-festivals",
+   "description": "A cone firecracker with sparks, for Diwali and fireworks.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "sky-lantern",
+   "category": "indian-festivals",
+   "description": "A hanging sky lantern (akash kandil), for Diwali decor.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "mithai-box",
+   "category": "indian-festivals",
+   "description": "An open box of Indian sweets, for festive gifting and Diwali.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "laddoo",
+   "category": "indian-festivals",
+   "description": "A stack of round laddoo sweets, for festivals and celebrations.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "jalebi",
+   "category": "indian-festivals",
+   "description": "A coiled jalebi sweet, for Indian festivals and food.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "shankh",
+   "category": "indian-festivals",
+   "description": "A conch shell (shankh), for puja, Durga Puja and auspicious starts.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "dhak",
+   "category": "indian-festivals",
+   "description": "A dhak drum with feathers, for Durga Puja and festive music.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "puja-thali",
+   "category": "indian-festivals",
+   "description": "A puja plate with a diya, flowers and kumkum, for worship and rituals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "pandal",
+   "category": "indian-festivals",
+   "description": "A festive pandal canopy, for Durga Puja and community celebrations.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "alpana",
+   "category": "indian-festivals",
+   "description": "An alpana floor motif of flowing lines and dots, for Durga Puja and Bengal festivals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "pichkari",
+   "category": "indian-festivals",
+   "description": "A pichkari water gun spraying colour, for Holi.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "gulal",
+   "category": "indian-festivals",
+   "description": "Bowls of gulal colour powder, for Holi and colour.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "holi-splash",
+   "category": "indian-festivals",
+   "description": "A burst of colour splashes, for Holi and celebrations.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "water-balloon",
+   "category": "indian-festivals",
+   "description": "A tied water balloon, for Holi and summer fun.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "thandai",
+   "category": "indian-festivals",
+   "description": "A glass of thandai with garnish, for Holi and festive drinks.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "dholak",
+   "category": "indian-festivals",
+   "description": "A dholak barrel drum, for festive music, weddings and Holi.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "rakhi",
+   "category": "indian-festivals",
+   "description": "A rakhi thread with a decorated centre, for Raksha Bandhan.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "mehndi-hand",
+   "category": "indian-festivals",
+   "description": "A hand with a mehndi pattern, for weddings and festivals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "paisley",
+   "category": "indian-festivals",
+   "description": "A paisley (kalka) motif, for Indian textiles and ornament.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "peacock-feather",
+   "category": "indian-festivals",
+   "description": "A peacock feather, for Indian art, Krishna and decor.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "kite",
+   "category": "indian-festivals",
+   "description": "A diamond kite with a tail, for Makar Sankranti and kite festivals.",
+   "aliases": [],
+   "batch": "new-30"
+  },
+  {
+   "name": "christmas-tree",
+   "category": "christmas",
+   "description": "A decorated Christmas tree with a star, for Christmas and holidays.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "santa-hat",
+   "category": "christmas",
+   "description": "A Santa hat with a fluffy trim and pompom, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "gingerbread-man",
+   "category": "christmas",
+   "description": "A gingerbread man cookie with icing, for Christmas baking.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "candy-cane",
+   "category": "christmas",
+   "description": "A striped candy cane, for Christmas treats and decor.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "snowman",
+   "category": "christmas",
+   "description": "A snowman with a scarf and hat, for winter and Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "sleigh",
+   "category": "christmas",
+   "description": "A sleigh with runners, for Santa and winter holidays.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "reindeer",
+   "category": "christmas",
+   "description": "A reindeer head with antlers, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "bauble",
+   "category": "christmas",
+   "description": "A round Christmas ornament with a cap, for tree decorations.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "wreath",
+   "category": "christmas",
+   "description": "A holiday wreath with a bow, for doors and Christmas decor.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "stocking",
+   "category": "christmas",
+   "description": "A Christmas stocking with a cuff, for gifts and holidays.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "mistletoe",
+   "category": "christmas",
+   "description": "A sprig of mistletoe with berries, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "north-star",
+   "category": "christmas",
+   "description": "A bright four-point Christmas star, for the season and tree toppers.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "gift-stack",
+   "category": "christmas",
+   "description": "A stack of wrapped presents, for Christmas gifts.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "jingle-bells",
+   "category": "christmas",
+   "description": "Two jingle bells with a bow, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "fireplace",
+   "category": "christmas",
+   "description": "A fireplace with a mantel and a crackling fire, for cosy holidays and winter.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "snow-globe",
+   "category": "christmas",
+   "description": "A snow globe with a tiny tree inside, for winter and gifts.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "poinsettia",
+   "category": "christmas",
+   "description": "A poinsettia flower, for Christmas decor.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "nutcracker",
+   "category": "christmas",
+   "description": "A toy nutcracker soldier, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "christmas-candle",
+   "category": "christmas",
+   "description": "A candle with holly at its base, for Christmas evenings.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "holly",
+   "category": "christmas",
+   "description": "Holly leaves with red berries, for Christmas.",
+   "aliases": [],
+   "batch": "new-31"
+  },
+  {
+   "name": "red-lantern",
+   "category": "lunar-new-year",
+   "description": "A round red lantern with a tassel, for Lunar New Year.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "red-envelope",
+   "category": "lunar-new-year",
+   "description": "A red envelope (hongbao) with a gold seal, for gifts of luck.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "firecracker-string",
+   "category": "lunar-new-year",
+   "description": "A string of red firecrackers, for Lunar New Year.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "lion-head",
+   "category": "lunar-new-year",
+   "description": "A lion dance head, for Lunar New Year celebrations.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "dragon-head",
+   "category": "lunar-new-year",
+   "description": "A festive dragon head, for Lunar New Year and dragon dances.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "mandarin-orange",
+   "category": "lunar-new-year",
+   "description": "A mandarin orange with leaves, for luck and Lunar New Year.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "dumpling",
+   "category": "lunar-new-year",
+   "description": "A folded dumpling, for Lunar New Year food.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "gold-ingot",
+   "category": "lunar-new-year",
+   "description": "A gold ingot (yuanbao), for wealth and prosperity.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "lucky-coin",
+   "category": "lunar-new-year",
+   "description": "A round coin with a square hole, for fortune and luck.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "paper-fan",
+   "category": "lunar-new-year",
+   "description": "An open folding paper fan, for festivals and East Asian decor.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "plum-blossom",
+   "category": "lunar-new-year",
+   "description": "A plum blossom branch, for spring and Lunar New Year.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "chinese-knot",
+   "category": "lunar-new-year",
+   "description": "A decorative knot with a tassel, for luck and celebrations.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "lunar-drum",
+   "category": "lunar-new-year",
+   "description": "A festival drum with studs, for Lunar New Year parades.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "teapot",
+   "category": "lunar-new-year",
+   "description": "A round teapot, for tea, gatherings and hospitality.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "chopsticks",
+   "category": "lunar-new-year",
+   "description": "A pair of chopsticks over a bowl, for meals and Asian food.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "bamboo",
+   "category": "lunar-new-year",
+   "description": "Bamboo stalks with leaves, for nature, luck and growth.",
+   "aliases": [],
+   "batch": "new-32"
+  },
+  {
+   "name": "love-letter",
+   "category": "valentines",
+   "description": "An open envelope with a heart letter, for love notes and Valentine's Day.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "heart-pair",
+   "category": "valentines",
+   "description": "Two hearts together, for love, couples and Valentine's Day.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "rose-bouquet",
+   "category": "valentines",
+   "description": "A wrapped bouquet of roses with a bow, for Valentine's Day.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "choco-strawberry",
+   "category": "valentines",
+   "description": "A chocolate-dipped strawberry, for treats and Valentine's Day.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "teddy-bear",
+   "category": "valentines",
+   "description": "A teddy bear holding a heart, for gifts and love.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "heart-gift",
+   "category": "valentines",
+   "description": "A gift box with heart wrapping, for Valentine's presents.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "champagne-toast",
+   "category": "valentines",
+   "description": "Two champagne glasses clinking, for celebrations and toasts.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "cupid-bow",
+   "category": "valentines",
+   "description": "A bow with a heart-tipped arrow, for Cupid and love.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "chocolate-box",
+   "category": "valentines",
+   "description": "A heart-shaped box of chocolates, for Valentine's Day.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "love-scroll",
+   "category": "valentines",
+   "description": "A scroll with a love message and a quill, for love letters and vows.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "hot-cocoa",
+   "category": "valentines",
+   "description": "A mug of hot cocoa with marshmallows, for cosy treats.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "heart-balloon",
+   "category": "valentines",
+   "description": "A heart-shaped balloon on a string, for love and celebration.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "ring-box",
+   "category": "valentines",
+   "description": "An open ring box with a ring, for proposals and engagements.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "rose",
+   "category": "valentines",
+   "description": "A single rose with leaves, for love and romance.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "love-lock",
+   "category": "valentines",
+   "description": "A padlock with a heart, for lasting love.",
+   "aliases": [],
+   "batch": "new-33"
+  },
+  {
+   "name": "jack-o-lantern",
+   "category": "halloween",
+   "description": "A carved pumpkin with a glowing face, for Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "ghost",
+   "category": "halloween",
+   "description": "A friendly floating ghost, for Halloween and spooky fun.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "bat",
+   "category": "halloween",
+   "description": "A flying bat, for Halloween and the night.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "witch-hat",
+   "category": "halloween",
+   "description": "A pointed witch hat with a buckle band, for Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "skull",
+   "category": "halloween",
+   "description": "A cartoon skull, for Halloween and spooky themes.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "cauldron",
+   "category": "halloween",
+   "description": "A bubbling cauldron, for potions and Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "candy-corn",
+   "category": "halloween",
+   "description": "A piece of candy corn, for Halloween treats.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "spider",
+   "category": "halloween",
+   "description": "A dangling spider, for Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "spider-web",
+   "category": "halloween",
+   "description": "A corner spider web, for Halloween and spooky decor.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "haunted-house",
+   "category": "halloween",
+   "description": "A crooked haunted house, for Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "broom",
+   "category": "halloween",
+   "description": "A witch's broom, for Halloween and cleaning.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "coffin",
+   "category": "halloween",
+   "description": "A coffin, for Halloween and spooky themes.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "tombstone",
+   "category": "halloween",
+   "description": "A rounded tombstone in the grass, for Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "black-cat",
+   "category": "halloween",
+   "description": "An arched black cat, for Halloween and superstition.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "candy-bucket",
+   "category": "halloween",
+   "description": "A pumpkin candy bucket, for trick-or-treating.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "crystal-ball",
+   "category": "halloween",
+   "description": "A crystal ball on a stand, for fortune telling and Halloween.",
+   "aliases": [],
+   "batch": "new-34"
+  },
+  {
+   "name": "avatar-man",
+   "category": "avatars",
+   "description": "A standard avatar of a man with short hair, for profiles, user lists and default users.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-woman",
+   "category": "avatars",
+   "description": "A standard avatar of a woman with shoulder-length hair, for profiles, user lists and default users.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-person",
+   "category": "avatars",
+   "description": "A friendly gender-neutral avatar, for profiles, guests and default users.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-boy",
+   "category": "avatars",
+   "description": "A friendly avatar of a boy, for kids' profiles and family apps.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-girl",
+   "category": "avatars",
+   "description": "A friendly avatar of a girl with pigtails, for kids' profiles and family apps.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-baby",
+   "category": "avatars",
+   "description": "A friendly avatar of a baby, for family, parenting and baby apps.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-teen",
+   "category": "avatars",
+   "description": "A friendly avatar of a teenager with a hoodie, for young users and students.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-older-man",
+   "category": "avatars",
+   "description": "A friendly avatar of an older man with grey hair, for profiles and family apps.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-older-woman",
+   "category": "avatars",
+   "description": "A friendly avatar of an older woman with a bun and glasses, for profiles and family apps.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-man-beard",
+   "category": "avatars",
+   "description": "A friendly avatar of a man with a beard, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-man-afro",
+   "category": "avatars",
+   "description": "A friendly avatar of a man with an afro, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-man-bald",
+   "category": "avatars",
+   "description": "A friendly avatar of a bald man, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-man-turban",
+   "category": "avatars",
+   "description": "A friendly avatar of a man wearing a turban, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-man-cap",
+   "category": "avatars",
+   "description": "A friendly avatar of a man in a cap, for profiles and casual users.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-woman-curly",
+   "category": "avatars",
+   "description": "A friendly avatar of a woman with curly hair, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-woman-braids",
+   "category": "avatars",
+   "description": "A friendly avatar of a woman with braids, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-woman-bun",
+   "category": "avatars",
+   "description": "A friendly avatar of a woman with her hair in a bun, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-woman-bob",
+   "category": "avatars",
+   "description": "A friendly avatar of a woman with a bob haircut, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-person-glasses",
+   "category": "avatars",
+   "description": "A friendly avatar of a person wearing glasses, for profiles.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-person-headphones",
+   "category": "avatars",
+   "description": "A friendly avatar of a person wearing headphones, for support agents, gamers and podcasts.",
+   "aliases": [],
+   "batch": "new-35"
+  },
+  {
+   "name": "avatar-cat",
+   "category": "avatars",
+   "description": "A cute cat face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-dog",
+   "category": "avatars",
+   "description": "A cute dog face avatar with floppy ears, for profiles and pet apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-fox",
+   "category": "avatars",
+   "description": "A cute fox face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-panda",
+   "category": "avatars",
+   "description": "A cute panda face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-bear",
+   "category": "avatars",
+   "description": "A cute bear face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-bunny",
+   "category": "avatars",
+   "description": "A cute bunny face avatar with long ears, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-owl",
+   "category": "avatars",
+   "description": "A cute owl face avatar, for profiles, learning and night owls.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-penguin",
+   "category": "avatars",
+   "description": "A cute penguin face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-frog",
+   "category": "avatars",
+   "description": "A cute frog face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-koala",
+   "category": "avatars",
+   "description": "A cute koala face avatar, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-tiger",
+   "category": "avatars",
+   "description": "A cute tiger face avatar with stripes, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-unicorn",
+   "category": "avatars",
+   "description": "A cute unicorn face avatar with a horn, for profiles and playful apps.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-monster",
+   "category": "avatars",
+   "description": "A friendly one-eyed monster avatar, for playful profiles and guests.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-monster-horns",
+   "category": "avatars",
+   "description": "A friendly horned monster avatar with a big grin, for playful profiles.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-monster-fluffy",
+   "category": "avatars",
+   "description": "A friendly fluffy monster avatar, for playful profiles.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-alien",
+   "category": "avatars",
+   "description": "A friendly alien avatar with antennae, for playful profiles and guests.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-robot",
+   "category": "avatars",
+   "description": "A friendly robot avatar, for bots, assistants and playful profiles.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-ghost",
+   "category": "avatars",
+   "description": "A friendly ghost avatar, for anonymous and playful profiles.",
+   "aliases": [],
+   "batch": "new-36"
+  },
+  {
+   "name": "avatar-dino",
+   "category": "avatars",
+   "description": "A friendly dinosaur avatar, for playful profiles and kids.",
+   "aliases": [],
+   "batch": "new-36"
   }
  ]
 }

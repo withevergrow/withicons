@@ -162,10 +162,108 @@
    "stray": 0,
    "splits": 0,
    "missing": 0
+  },
+  "clay": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "bento": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "suite": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "dock": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "liquid": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "chrome": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "soft3d": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "brutal": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
+  },
+  "utsav": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "rangoli": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "halloween": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "christmas": {
+   "clip": 3.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "lunar": {
+   "clip": 0.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 1,
+   "missing": 0
+  },
+  "valentine": {
+   "clip": 9.5,
+   "specks": 2,
+   "stray": 0,
+   "splits": 0,
+   "missing": 0
   }
  },
  "measured": {
-  "icons": 500,
+  "icons": 735,
   "note": "per-style allowances = p95 of the static icons in that style (node forge/tools/check-dynamic.mjs --gate --calibrate)",
   "stats": {
    "anime": {
@@ -800,6 +898,454 @@
      "p95": 0,
      "p99": 0,
      "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "clay": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "bento": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "suite": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1.75
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 4
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 1,
+     "p99": 1,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "dock": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "liquid": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 2,
+     "max": 5
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 1,
+     "p99": 1,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "chrome": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 5
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 1,
+     "max": 2
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    }
+   },
+   "soft3d": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 2
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1,
+     "max": 3
+    }
+   },
+   "brutal": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 5,
+     "max": 25.25
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "utsav": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 2.75
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 2,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    }
+   },
+   "rangoli": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 2,
+     "max": 5
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 2,
+     "max": 2
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 2,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "halloween": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 1.75,
+     "max": 1.75
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 1,
+     "max": 2
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    }
+   },
+   "christmas": {
+    "clip": {
+     "p90": 1.5,
+     "p95": 3.5,
+     "p99": 4,
+     "max": 5
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 2,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    }
+   },
+   "lunar": {
+    "clip": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 1,
+     "p95": 1,
+     "p99": 2,
+     "max": 3
+    },
+    "missing": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
+    }
+   },
+   "valentine": {
+    "clip": {
+     "p90": 2.75,
+     "p95": 9.5,
+     "p99": 26.5,
+     "max": 26.75
+    },
+    "specks": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "stray": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 0
+    },
+    "splits": {
+     "p90": 0,
+     "p95": 0,
+     "p99": 0,
+     "max": 1
     },
     "missing": {
      "p90": 0,

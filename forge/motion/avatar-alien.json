@@ -1,0 +1,9 @@
+{
+  "name": "avatar-alien",
+  "intent": "hovers like it just beamed down, antennae twitching",
+  "loop": { "preset": "float", "amount": 0.8, "duration": 2.8 },
+  "hover": { "preset": "wiggle", "origin": [12,20.5], "amount": 0.7 },
+  "parts": { "A": { "preset": "blink", "origin": [12,12.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "orbit" },{ "preset": "glow" }],
+  "swap": [{ "to": "avatar-robot", "effect": "morph" },{ "to": "avatar-alien@solid", "effect": "scale" }]
+}

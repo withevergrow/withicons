@@ -1,0 +1,77 @@
+{
+  "name": "list-todo",
+  "category": "text",
+  "description": "A checklist with ticked and empty boxes, for to-dos, tasks and agent plans.",
+  "aliases": [
+    "todo",
+    "todo-list",
+    "to-do-list",
+    "checklist-todo",
+    "agent-plan",
+    "plan",
+    "checkbox-list",
+    "action-items"
+  ],
+  "tags": [
+    "list",
+    "tasks",
+    "todo",
+    "checklist",
+    "plan"
+  ],
+  "paths": [
+    {
+      "d": "M13 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 18 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 6.5 L5 8.5 L9 4",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 15 H7.5 A1.5 1.5 0 0 1 9 16.5 V19.5 A1.5 1.5 0 0 1 7.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V16.5 A1.5 1.5 0 0 1 4.5 15 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 15 H7.5 A1.5 1.5 0 0 1 9 16.5 V19.5 A1.5 1.5 0 0 1 7.5 21 H4.5 A1.5 1.5 0 0 1 3 19.5 V16.5 A1.5 1.5 0 0 1 4.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "todo list",
+    "task list",
+    "to do",
+    "to dos",
+    "things to do",
+    "task",
+    "checkbox",
+    "checkboxes",
+    "unchecked",
+    "pending",
+    "open tasks",
+    "in progress",
+    "remaining",
+    "plan steps",
+    "agent plan",
+    "ai plan",
+    "step list",
+    "backlog",
+    "chores",
+    "reminders",
+    "project tasks",
+    "tickets",
+    "progress",
+    "tracker",
+    "planner",
+    "agenda",
+    "todos"
+  ]
+}

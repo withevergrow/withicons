@@ -1,0 +1,75 @@
+{
+  "name": "hand",
+  "category": "navigation",
+  "description": "An open hand, for grab, pan, stop and raise hand.",
+  "aliases": [
+    "palm-hand",
+    "grab",
+    "pan-hand",
+    "stop-hand",
+    "raise-hand",
+    "hand-raised",
+    "open-hand",
+    "high-five",
+    "hand-tool",
+    "hello-hand"
+  ],
+  "tags": [
+    "gesture",
+    "hand",
+    "pan",
+    "stop",
+    "grab"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 12.5 V11 A2 2 0 0 0 2.5 11 V16 A5.5 5.5 0 0 0 8 21.5 H13.75 A5 5 0 0 0 17.29 20.04 L20.91 16.41 A2 2 0 0 0 18.5 13.27 V6.5 A2 2 0 0 0 14.5 6.5 V11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 12.5 V7 A2 2 0 0 1 10.5 7 V11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 11.5 V5 A2 2 0 0 1 14.5 5 V11.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M2.5 11 A2 2 0 0 1 6.5 11 V7 A2 2 0 0 1 10.5 7 V5 A2 2 0 0 1 14.5 5 V6.5 A2 2 0 0 1 18.5 6.5 V13.27 A2 2 0 0 1 20.91 16.41 L17.29 20.04 A5 5 0 0 1 13.75 21.5 H8 A5.5 5.5 0 0 1 2.5 16 Z"
+  ],
+  "cutouts": [
+    "M6.5 11 V13.5",
+    "M10.5 7 V12",
+    "M14.5 6.5 V12"
+  ],
+  "synonyms": [
+    "halt",
+    "stop",
+    "hello",
+    "hi",
+    "wave",
+    "waving",
+    "five",
+    "gesture",
+    "move canvas",
+    "drag",
+    "pan tool",
+    "question",
+    "volunteer",
+    "bye",
+    "goodbye",
+    "raise your hand",
+    "palm up",
+    "hand up",
+    "grab tool",
+    "touch",
+    "fingers",
+    "manual",
+    "human",
+    "hold on",
+    "wait",
+    "palm",
+    "pan"
+  ]
+}

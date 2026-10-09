@@ -1,0 +1,47 @@
+{
+  "name": "water-balloon",
+  "intent": "the full balloon wobbles, ready to be thrown",
+  "loop": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "duration": 1.8,
+    "amount": 0.7
+  },
+  "hover": {
+    "preset": "bounce"
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        17
+      ],
+      "amount": 0.8
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        3.25
+      ]
+    },
+    {
+      "preset": "drop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "holi-splash",
+      "effect": "scale"
+    }
+  ]
+}

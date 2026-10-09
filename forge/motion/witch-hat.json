@@ -1,0 +1,50 @@
+{
+  "name": "witch-hat",
+  "intent": "the bent tip sways like the hat is about to cast a spell",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.8,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20.75
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        20
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "broom",
+      "effect": "morph"
+    },
+    {
+      "to": "cauldron",
+      "effect": "slide-down"
+    },
+    {
+      "to": "witch-hat@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 // ONE flat colour. The icon is modelled on a signed distance field: strokes and
 // fills are fused into one rounded mass, and specular highlights are carved out
 // of it as real holes, all lit by one light from the upper-left.
+import { snowmanFor } from './_line-snowman.mjs'
 import { N, NN, H, X0, gx, segsOf, distField, evenOddMask, maxFilter, sample, contours, ringsToD } from './_gloss-field.mjs'
 import { resample, pointInRing } from '../kernel/geom.mjs'
 import { splitText, textNodes } from './_live-text.mjs'
@@ -44,6 +45,7 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor' },
   render(full) {
+    full = snowmanFor('gloss', full)
     // Live icons: free text (no frame behind it) would inflate into blobs; it is drawn as a crisp round stroke at
     // the weight the stroke font is spaced for (heavier closes the counters of 0 4 6 8 9 % at 24px)
     const { icon, free } = splitText(full)

@@ -6,6 +6,9 @@
  *   parseXml(str) / serialize(node)          tiny XML tree for icon markup
  *   flatSvg(ctx, o)                          like svgString({flat:true}) but resolves per-element `color` (blueprint accents)
  *   drawing(svgString)                       -> { vb, width, height, items:[{ segs, ctm, fill, stroke, ... }] }
+ *                                               a gradient paint (rich styles) is its middle colour plus .grad:
+ *                                               { radial, coords, m (gradient -> item space), stops: [{ o, r, g, b, a }], k }
+ *   gradientShading(grad, gray?)             -> PDF / PostScript shading dictionary (linear: type 2, radial: type 3)
  *   pdf(drawing, { width, height, title })   -> Uint8Array (PDF 1.4)
  *   eps(drawing, { width, height, title, background }) -> string (EPSF-3.0)
  *   flattenDash(segs, dash, offset)          -> segs (open dashes as polylines), for targets without dashes
@@ -365,6 +368,90 @@
   }
   function num(v, d) { var n = parseFloat(v); return isFinite(n) ? n : d }
 
+  // ---------- gradients (rich styles) ----------
+  // <linearGradient> / <radialGradient> element -> { radial, coords, m, stops } in the painted item's own space
+  // (objectBoundingBox units are mapped onto the item's bounding box), or null when it has no usable stop.
+  function gradientOf(g, color, segs, vb) {
+    if (!g || (g.tag !== 'linearGradient' && g.tag !== 'radialGradient')) return null
+    var stops = []
+    ;(g.children || []).forEach(function (c) {
+      if (c.tag !== 'stop') return
+      var ss = styleOf(c), raw = String(ss['stop-color'] == null ? '#000' : ss['stop-color']).trim()
+      var col = parseColor(/^currentcolor$/i.test(raw) ? color : raw)
+      if (!col) return
+      var off = String(ss.offset == null ? '0' : ss.offset).trim(), t = parseFloat(off)
+      t = clamp01(!isFinite(t) ? 0 : /%$/.test(off) ? t / 100 : t)
+      if (stops.length && t < stops[stops.length - 1].o) t = stops[stops.length - 1].o   // offsets never go back
+      col.a *= clamp01(num(ss['stop-opacity'], 1))
+      col.o = t
+      stops.push(col)
+    })
+    if (!stops.length) return null
+    var a = g.attrs, user = a.gradientUnits === 'userSpaceOnUse', radial = g.tag === 'radialGradient'
+    var len = function (k, d, axis) {
+      var v = a[k]
+      if (v == null || v === '') return d
+      v = String(v).trim()
+      var n = parseFloat(v)
+      if (!isFinite(n)) return d
+      if (!/%$/.test(v)) return n
+      n /= 100
+      return user ? n * (axis === 'x' ? vb[2] : axis === 'y' ? vb[3] : Math.hypot(vb[2], vb[3]) / Math.SQRT2) + (axis === 'x' ? vb[0] : axis === 'y' ? vb[1] : 0) : n
+    }
+    var coords
+    if (radial) {
+      var cx = len('cx', user ? vb[0] + vb[2] / 2 : 0.5, 'x'), cy = len('cy', user ? vb[1] + vb[3] / 2 : 0.5, 'y'), r = len('r', user ? vb[2] / 2 : 0.5, 'r')
+      coords = [len('fx', cx, 'x'), len('fy', cy, 'y'), 0, cx, cy, Math.max(0, r)]
+    } else coords = [len('x1', user ? vb[0] : 0, 'x'), len('y1', user ? vb[1] : 0, 'y'), len('x2', user ? vb[0] + vb[2] : 1, 'x'), len('y2', user ? vb[1] : 0, 'y')]
+    var m = a.gradientTransform ? parseTransform(a.gradientTransform) : I.slice()
+    if (!user) {
+      var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+      ;(segs || []).forEach(function (sg) { for (var i = 1; i < sg.length; i += 2) { x0 = Math.min(x0, sg[i]); x1 = Math.max(x1, sg[i]); y0 = Math.min(y0, sg[i + 1]); y1 = Math.max(y1, sg[i + 1]) } })
+      if (!(x1 > x0) || !(y1 > y0)) return null   // SVG: a zero-size box does not paint a bounding-box gradient
+      m = mul([x1 - x0, 0, 0, y1 - y0, x0, y0], m)
+    }
+    return { radial: radial, coords: coords, m: m, stops: stops, k: 1 }
+  }
+  // colour of a stop list at offset t (pad spread)
+  function colorAt(stops, t) {
+    var lo = stops[0], hi = stops[stops.length - 1]
+    for (var i = 0; i < stops.length; i++) { if (stops[i].o <= t) lo = stops[i]; if (stops[i].o >= t) { hi = stops[i]; break } }
+    var u = hi.o > lo.o ? clamp01((t - lo.o) / (hi.o - lo.o)) : 0
+    var mix = function (k) { return lo[k] + (hi[k] - lo[k]) * u }
+    return { r: mix('r'), g: mix('g'), b: mix('b'), a: mix('a') }
+  }
+  function gradMaxA(gr) { return gr.stops.reduce(function (m, s) { return Math.max(m, s.a * gr.k) }, 0) }
+  // true when every stop has the same alpha (a constant opacity is enough; no soft mask)
+  function gradFlatAlpha(gr) { return gr.stops.every(function (s) { return Math.abs(s.a - gr.stops[0].a) < 0.002 }) }
+  // PDF / PostScript function dictionary for the stops: one type 2 (two colours) or a type 3 stitching of them.
+  // pick(stop) -> 'r g b' (or a gray level). Pads to [0, 1] and drops zero-width pieces (Bounds must increase).
+  function gradFunction(stops, pick) {
+    var s = stops.slice()
+    if (s[0].o > 0) s.unshift(Object.assign({}, s[0], { o: 0 }))
+    if (s[s.length - 1].o < 1) s.push(Object.assign({}, s[s.length - 1], { o: 1 }))
+    var fns = [], bounds = []
+    for (var i = 0; i + 1 < s.length; i++) {
+      if (!(s[i + 1].o > s[i].o)) continue
+      if (fns.length) bounds.push(fmt(s[i].o, 5))
+      fns.push('<< /FunctionType 2 /Domain [0 1] /C0 [' + pick(s[i]) + '] /C1 [' + pick(s[i + 1]) + '] /N 1 >>')
+    }
+    if (!fns.length) return '<< /FunctionType 2 /Domain [0 1] /C0 [' + pick(s[0]) + '] /C1 [' + pick(s[0]) + '] /N 1 >>'
+    if (fns.length === 1) return fns[0]
+    return '<< /FunctionType 3 /Domain [0 1] /Functions [' + fns.join(' ') + '] /Bounds [' + bounds.join(' ') + '] /Encode [' +
+      fns.map(function () { return '0 1' }).join(' ') + '] >>'
+  }
+  // shading dictionary; gray: the alpha ramp (for a PDF soft mask) instead of the colours; under: blend every stop over
+  // this colour first (EPS has no transparency)
+  function gradientShading(gr, gray, under) {
+    var pick = gray
+      ? function (s) { return fmt(clamp01(s.a * gr.k), 4) }
+      : under
+        ? function (s) { var a = clamp01(s.a * gr.k); return [s.r * a + under.r * (1 - a), s.g * a + under.g * (1 - a), s.b * a + under.b * (1 - a)].map(function (v) { return fmt(v, 4) }).join(' ') }
+        : function (s) { return fmt(s.r, 4) + ' ' + fmt(s.g, 4) + ' ' + fmt(s.b, 4) }
+    return '<< /ShadingType ' + (gr.radial ? 3 : 2) + ' /ColorSpace /' + (gray ? 'DeviceGray' : 'DeviceRGB') +
+      ' /Coords [' + gr.coords.map(function (v) { return fmt(v, 5) }).join(' ') + '] /Function ' + gradFunction(gr.stops, pick) + ' /Extend [true true] >>'
+  }
+
   function drawing(svg) {
     var tree = typeof svg === 'string' ? parseXml(svg) : svg
     var rootSvg = findTag(tree, 'svg') || tree
@@ -374,18 +461,17 @@
     var width = num(rootSvg.attrs.width, vb.length === 4 ? vb[2] : 24), height = num(rootSvg.attrs.height, vb.length === 4 ? vb[3] : 24)
     if (vb.length !== 4 || !(vb[2] > 0) || !(vb[3] > 0)) vb = [0, 0, width, height]
     var items = []
-    var paintOf = function (v, color) {
+    // url(#gradient) -> its middle colour (for targets without gradients) carrying .grad (for those with them);
+    // a missing or unusable gradient falls back to the paint after url(...), like browsers
+    var paintOf = function (v, color, segs) {
       v = String(v == null ? '' : v).trim()
       if (!v || v === 'none') return null
       if (/^currentcolor$/i.test(v)) return parseColor(color)
       var u = /^url\(\s*['"]?#([^'")]+)['"]?\s*\)\s*(.*)$/.exec(v)
       if (u) {
-        if (u[2] && u[2] !== 'none') return paintOf(u[2], color)
-        var g = ids[u[1]], stop = g && (g.children || []).filter(function (c) { return c.tag === 'stop' })[0]
-        if (!stop) return null
-        var ss = styleOf(stop), c = parseColor(ss['stop-color'] || '#000')
-        if (c) c.a *= num(ss['stop-opacity'], 1)
-        return c
+        var gr = gradientOf(ids[u[1]], color, segs, vb)
+        if (gr) { var mid = colorAt(gr.stops, 0.5); mid.grad = gr; return mid }
+        return u[2] && u[2] !== 'none' ? paintOf(u[2], color) : null
       }
       return parseColor(v)
     }
@@ -416,14 +502,16 @@
           default: return
         }
         if (!segs.length || s.visibility === 'hidden' || s.visibility === 'collapse') return
-        var fill = paintOf(s.fill == null ? '#000' : s.fill, s.color)
-        if (fill) fill.a *= clamp01(num(s['fill-opacity'], 1)) * o
-        var stroke = paintOf(s.stroke, s.color), sw = num(s['stroke-width'], 1)
-        if (stroke) stroke.a *= clamp01(num(s['stroke-opacity'], 1)) * o
+        var fill = paintOf(s.fill == null ? '#000' : s.fill, s.color, segs)
+        var fk = clamp01(num(s['fill-opacity'], 1)) * o
+        if (fill) { fill.a *= fk; if (fill.grad) fill.grad.k = fk }
+        var stroke = paintOf(s.stroke, s.color, segs), sw = num(s['stroke-width'], 1)
+        var sk = clamp01(num(s['stroke-opacity'], 1)) * o
+        if (stroke) { stroke.a *= sk; if (stroke.grad) stroke.grad.k = sk }
         if (!(sw > 0)) stroke = null
         if (n.tag === 'line') fill = null // a line has no area
-        if (fill && fill.a <= 0) fill = null
-        if (stroke && stroke.a <= 0) stroke = null
+        if (fill && fill.a <= 0 && !(fill.grad && gradMaxA(fill.grad) > 0)) fill = null
+        if (stroke && stroke.a <= 0 && !(stroke.grad && gradMaxA(stroke.grad) > 0)) stroke = null
         if (!fill && !stroke) return
         var dash = []
         if (s['stroke-dasharray'] && s['stroke-dasharray'] !== 'none') {
@@ -474,20 +562,61 @@
       if (!gs[key]) { gs[key] = '/G' + gsList.length; gsList.push([fmt(ca, 3), fmt(CA, 3)]) }
       return gs[key]
     }
+    // gradients: a shading pattern per painted gradient (/P<n>), and a soft mask (/M<n>, a luminosity group drawing the
+    // alpha ramp) when the stops' opacity varies
+    var pats = [], masks = []
+    var page = [sx, 0, 0, -sy, -vb[0] * sx, H + vb[1] * sy]
+    var mtx = function (m) { return '[' + m.map(function (v) { return fmt(v, 6) }).join(' ') + ']' }
+    var gradPaint = function (gr, ctm, stroke) {
+      var out = []
+      if (gradFlatAlpha(gr)) {
+        var al = clamp01(gr.stops[0].a * gr.k)
+        if (al < 0.9995) out.push(stroke ? gsName(1, al) + ' gs' : gsName(al, 1) + ' gs')
+      } else {
+        masks.push('q ' + gr.m.map(function (v) { return fmt(v, 6) }).join(' ') + ' cm /S0 sh Q\n' + '\u0000' + gradientShading(gr, true))
+        out.push('/M' + (masks.length - 1) + ' gs')
+      }
+      pats.push('<< /PatternType 2 /Matrix ' + mtx(mul(mul(page, ctm), gr.m)) + ' /Shading ' + gradientShading(gr) + ' >>')
+      out.push('/Pattern ' + (stroke ? 'CS' : 'cs') + ' /P' + (pats.length - 1) + ' ' + (stroke ? 'SCN' : 'scn'))
+      return out
+    }
     body.push('q', [fmt(sx, 6), '0 0', fmt(-sy, 6), fmt(-vb[0] * sx, 6), fmt(H + vb[1] * sy, 6), 'cm'].join(' '))
     d.items.forEach(function (it) {
       body.push('q')
       if (!isIdentity(it.ctm)) body.push(it.ctm.map(function (v) { return fmt(v, 6) }).join(' ') + ' cm')
+      var ops = pathOps(it.segs, { m: 'm', l: 'l', c: 'c', h: 'h' })
+      var lineOps = function () {
+        var l = [fmt(it.sw, 4) + ' w', (CAP[it.cap] || 0) + ' J', (JOIN[it.join] || 0) + ' j', fmt(it.miter, 3) + ' M']
+        if (it.dash.length) l.push('[' + it.dash.map(function (v) { return fmt(v, 4) }).join(' ') + '] ' + fmt(it.dashOffset, 4) + ' d')
+        return l
+      }
+      if ((it.fill && it.fill.grad) || (it.stroke && it.stroke.grad)) {
+        // fill and stroke each in their own q/Q: a gradient brings its own opacity state (or soft mask)
+        if (it.fill) {
+          body.push('q')
+          if (it.fill.grad) body.push.apply(body, gradPaint(it.fill.grad, it.ctm, false))
+          else { if (it.fill.a < 0.9995) body.push(gsName(it.fill.a, 1) + ' gs'); body.push(rgb(it.fill) + ' rg') }
+          body.push(ops, it.rule === 'evenodd' ? 'f*' : 'f', 'Q')
+        }
+        if (it.stroke) {
+          body.push('q')
+          if (it.stroke.grad) body.push.apply(body, gradPaint(it.stroke.grad, it.ctm, true))
+          else { if (it.stroke.a < 0.9995) body.push(gsName(1, it.stroke.a) + ' gs'); body.push(rgb(it.stroke) + ' RG') }
+          body.push.apply(body, lineOps())
+          body.push(ops, 'S', 'Q')
+        }
+        body.push('Q')
+        return
+      }
       var ca = it.fill ? it.fill.a : 1, CA = it.stroke ? it.stroke.a : 1
       if (ca < 0.9995 || CA < 0.9995) body.push(gsName(ca, CA) + ' gs')
       if (it.fill) body.push(rgb(it.fill) + ' rg')
       if (it.stroke) {
-        body.push(rgb(it.stroke) + ' RG', fmt(it.sw, 4) + ' w', (CAP[it.cap] || 0) + ' J', (JOIN[it.join] || 0) + ' j', fmt(it.miter, 3) + ' M')
-        if (it.dash.length) body.push('[' + it.dash.map(function (v) { return fmt(v, 4) }).join(' ') + '] ' + fmt(it.dashOffset, 4) + ' d')
+        body.push(rgb(it.stroke) + ' RG')
+        body.push.apply(body, lineOps())
       }
       // Fill, then stroke as a separate path. (B/B* would treat fill + stroke as a knockout group when alpha < 1,
       // which differs from SVG, where a translucent stroke shows the fill beneath it.)
-      var ops = pathOps(it.segs, { m: 'm', l: 'l', c: 'c', h: 'h' })
       if (it.fill) body.push(ops, it.rule === 'evenodd' ? 'f*' : 'f')
       if (it.stroke) body.push(ops, 'S')
       body.push('Q')
@@ -497,12 +626,23 @@
     var objs = []
     objs[1] = '<< /Type /Catalog /Pages 2 0 R >>'
     objs[2] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>'
-    var gsRefs = gsList.map(function (g, i) { return '/G' + i + ' ' + (6 + i) + ' 0 R' }).join(' ')
+    // objects: 6.. opacity states, then soft masks (an ExtGState + its form each), then patterns
+    var gsRefs = gsList.map(function (g, i) { return '/G' + i + ' ' + (6 + i) + ' 0 R' })
+    var mBase = 6 + gsList.length, pBase = mBase + 2 * masks.length
+    masks.forEach(function (mk, i) { gsRefs.push('/M' + i + ' ' + (mBase + 2 * i) + ' 0 R') })
+    var patRefs = pats.map(function (p, i) { return '/P' + i + ' ' + (pBase + i) + ' 0 R' }).join(' ')
     objs[3] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + fmt(W, 4) + ' ' + fmt(H, 4) + '] /Resources << /ProcSet [/PDF]' +
-      (gsList.length ? ' /ExtGState << ' + gsRefs + ' >>' : '') + ' >> /Contents 4 0 R >>'
+      (gsRefs.length ? ' /ExtGState << ' + gsRefs.join(' ') + ' >>' : '') + (pats.length ? ' /Pattern << ' + patRefs + ' >>' : '') + ' >> /Contents 4 0 R >>'
     objs[4] = '<< /Length ' + content.length + ' >>\nstream\n' + content + 'endstream'
     objs[5] = '<< /Title ' + pdfText(o.title || '') + ' /Producer (with icons - withicons.com) /Creator (with icons - withicons.com) >>'
     gsList.forEach(function (g, i) { objs[6 + i] = '<< /Type /ExtGState /ca ' + g[0] + ' /CA ' + g[1] + ' >>' })
+    masks.forEach(function (mk, i) {
+      var cut = mk.indexOf('\u0000'), stream = mk.slice(0, cut), shading = mk.slice(cut + 1)
+      objs[mBase + 2 * i] = '<< /Type /ExtGState /SMask << /Type /Mask /S /Luminosity /G ' + (mBase + 2 * i + 1) + ' 0 R >> >>'
+      objs[mBase + 2 * i + 1] = '<< /Type /XObject /Subtype /Form /BBox [-10000 -10000 10000 10000] /Group << /S /Transparency /CS /DeviceGray >>' +
+        ' /Resources << /Shading << /S0 ' + shading + ' >> >> /Length ' + stream.length + ' >>\nstream\n' + stream + 'endstream'
+    })
+    pats.forEach(function (p, i) { objs[pBase + i] = p })
     var out = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n', offs = []
     for (var n = 1; n < objs.length; n++) { offs[n] = out.length; out += n + ' 0 obj\n' + objs[n] + '\nendobj\n' }
     var xref = out.length
@@ -555,12 +695,33 @@
       var it = d.items[r.i]
       return 'p' + r.i + ' ' + rgb(c) + ' setrgbcolor ' + (r.kind === 's' ? 's' + r.i + ' stroke' : it.rule === 'evenodd' ? 'eofill' : 'fill')
     }
+    // a gradient (LanguageLevel 3 shfill) clipped to the fill or the stroke outline; see-through stops are blended over
+    // `under` (the background, or the colour already painted there)
+    var level3 = false
+    var gradOps = function (r, gr, under) {
+      level3 = true
+      return 'gsave ' + clipOps(r) + ' newpath ' + mtxPs(gr.m) + ' concat ' + gradientShading(gr, false, under) + ' shfill grestore'
+    }
+    var mtxPs = function (m) { return '[' + m.map(function (v) { return fmt(v, 6) }).join(' ') + ']' }
     var pieces = [], MAXP = 600
     d.items.forEach(function (it, i) {
       ;[['f', it.fill], ['s', it.stroke]].forEach(function (pp) {
         var kind = pp[0], c = pp[1]
         if (!c) return
         var r = { i: i, kind: kind }, box = itemBox(it, kind, sx, sy)
+        if (c.grad) {
+          var gr = c.grad, opaque = gr.stops.every(function (st) { return st.a * gr.k >= 0.999 })
+          body.push(gradOps(r, gr, opaque ? null : matte))
+          var gfresh = [{ clips: [r], color: opaque ? c : over(c, matte), box: box }]
+          if (!opaque) pieces.forEach(function (p) {
+            var b = boxAnd(box, p.box)
+            if (!b) return
+            body.push('gsave ' + p.clips.map(clipOps).join(' ') + ' newpath ' + gradOps(r, gr, p.color) + ' grestore')
+            if (p.clips.length < 5) gfresh.push({ clips: p.clips.concat([r]), color: over(c, p.color), box: b })
+          })
+          gfresh.forEach(function (p) { if (pieces.length < MAXP) pieces.push(p) })
+          return
+        }
         if (c.a >= 0.999) {
           body.push(paintOps(r, c))
           pieces.push({ clips: [r], color: c, box: box })
@@ -583,7 +744,7 @@
       '%%HiResBoundingBox: 0 0 ' + fmt(W, 4) + ' ' + fmt(H, 4),
       '%%Title: ' + title,
       '%%Creator: with icons - withicons.com',
-      '%%LanguageLevel: 2',
+      '%%LanguageLevel: ' + (level3 ? 3 : 2),
       '%%Pages: 1',
       '%%DocumentData: Clean7Bit',
       '%%EndComments',
@@ -663,7 +824,7 @@
     })
   }
 
-  WE.vector = { __registered: true, parseXml: parseXml, serialize: serialize, findTag: findTag, flatInner: flatInner, flatSvg: flatSvg, svgWithBg: svgWithBg,
+  WE.vector = { __registered: true, gradientShading: gradientShading, colorAt: colorAt, parseXml: parseXml, serialize: serialize, findTag: findTag, flatInner: flatInner, flatSvg: flatSvg, svgWithBg: svgWithBg,
     drawing: drawing, pdf: pdf, eps: eps, parsePath: parsePath, arcToCubics: arcToCubics, flattenDash: flattenDash,
     transformSegs: transformSegs, segsToD: segsToD, parseTransform: parseTransform, mul: mul, apply: apply, fmt: fmt,
     parseColor: parseColor, hex2: hex2, escAttr: escAttr, escText: escText, latin1: latin1 }

@@ -1,0 +1,71 @@
+{
+  "name": "mail-plus",
+  "category": "communication",
+  "description": "An envelope with a plus, for new email, compose and invite by email.",
+  "aliases": [
+    "new-email",
+    "compose-email",
+    "add-email",
+    "new-message",
+    "write-email",
+    "invite-by-email",
+    "email-invite",
+    "add-mail",
+    "create-email"
+  ],
+  "tags": [
+    "email",
+    "add",
+    "compose",
+    "message",
+    "invite",
+    "envelope"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 11.5 V6.5 A2 2 0 0 0 19.5 4.5 H4.5 A2 2 0 0 0 2.5 6.5 V17.5 A2 2 0 0 0 4.5 19.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    },
+    {
+      "d": "M18 15 V21",
+      "plate": "S"
+    },
+    {
+      "d": "M15 18 H21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V12.5 A7 7 0 0 0 12 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "compose mail",
+    "new mail",
+    "write",
+    "draft",
+    "send email",
+    "add email address",
+    "add contact email",
+    "invite",
+    "invite by email",
+    "email invitation",
+    "subscribe",
+    "newsletter signup",
+    "add mailbox",
+    "new inbox",
+    "add account",
+    "envelope plus",
+    "email plus",
+    "mail add",
+    "create message",
+    "gmail compose",
+    "compose"
+  ]
+}

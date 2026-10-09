@@ -479,6 +479,30 @@ function raster(icon, tune) {
     if (!peel.length) break
     for (const k of peel) tone[k] = 0
   }
+  // a mass that stands on the bottom of the canvas with no ink along its base (a bust's
+  // shoulders: an arc on top, the fill closed by a straight edge at y 21.5) was peeled away
+  // above as body spilling onto paper, leaving a hairline arc. It is a cut-off solid: keep its
+  // body and close its base with an ink row, so the shoulders read as a filled shape
+  for (const f of icon.fills || []) for (const s of f.subs || []) {
+    if (!s.closed || s.pts.length < 3) continue
+    let yMax = -Infinity, bottomRun = 0
+    for (const [, y] of s.pts) yMax = Math.max(yMax, y)
+    for (let q = 0; q < s.pts.length; q++) {
+      const a = s.pts[q], b = s.pts[(q + 1) % s.pts.length]
+      if (a[1] >= 20.5 && b[1] >= 20.5 && Math.abs(a[1] - b[1]) < 0.01) bottomRun += Math.abs(a[0] - b[0])
+    }
+    if (yMax < 20.5 || bottomRun < 6) continue
+    const cc = G.coverage([s.pts], sh), R = G.grid()
+    for (let k = 0; k < cc.length; k++) if (cc[k] >= 6 && !cutKeep[k]) R[k] = 1
+    let body = 0, kept = 0
+    for (let k = 0; k < N * N; k++) if (R[k] && !ink[k]) { body++; if (tone[k]) kept++ }
+    if (body < 6 || kept > 0.3 * body) continue
+    // the base: every cell of the mass with nothing of it below
+    for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+      const k = G.ix(i, j); if (!R[k]) continue
+      if (!G.get(R, i, j + 1)) { ink[k] = 1; tone[k] = 0 } else if (!ink[k]) tone[k] = 1
+    }
+  }
   // an open knockout that runs beside the ink (a smile, a crease) is part of that
   // line; only a knockout out on the body is a glint
   const gl = G.and(glint, tone)

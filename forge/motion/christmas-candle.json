@@ -1,0 +1,48 @@
+{
+  "name": "christmas-candle",
+  "intent": "the flame flickers over the holly",
+  "loop": {
+    "preset": "flicker",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.5,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        7
+      ],
+      "amount": 0.9,
+      "duration": 1.6
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        18
+      ],
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "flame",
+      "effect": "fade"
+    }
+  ]
+}

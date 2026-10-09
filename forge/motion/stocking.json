@@ -1,0 +1,41 @@
+{
+  "name": "stocking",
+  "intent": "the stocking sways on its hook, heavy with treats",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      11.75,
+      3.5
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      11.75,
+      3.5
+    ],
+    "amount": 1
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "gift",
+      "effect": "morph"
+    },
+    {
+      "to": "stocking@solid",
+      "effect": "scale"
+    }
+  ]
+}

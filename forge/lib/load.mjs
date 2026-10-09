@@ -58,7 +58,9 @@ export async function loadStyles(only) {
 const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 export const attrs = o => Object.entries(o).filter(([, v]) => v !== undefined && v !== null && v !== false)
   .map(([k, v]) => ` ${k}="${esc(v)}"`).join('')
-export const nodesToMarkup = nodes => nodes.map(([tag, a]) => `<${tag}${attrs(a)}/>`).join('')
+// A node may carry children as a third element (rich styles only: ['defs', {}, [['linearGradient', {id}, [['stop', {}]]]]],
+// see forge/CONTRACT.md "Rich styles"); flat [tag, attrs] nodes are unchanged.
+export const nodesToMarkup = nodes => nodes.map(([tag, a, kids]) => Array.isArray(kids) && kids.length ? `<${tag}${attrs(a)}>${nodesToMarkup(kids)}</${tag}>` : `<${tag}${attrs(a)}/>`).join('')
 export function toSvg(style, nodes, extra = {}) {
   const root = { xmlns: 'http://www.w3.org/2000/svg', width: 24, height: 24, viewBox: '0 0 24 24', ...style.root, ...extra }
   return `<svg${attrs(root)}>${nodesToMarkup(nodes)}</svg>`

@@ -40,6 +40,10 @@ hand and everything after that is published by GitHub Actions without tokens.
    node scripts/publish.mjs --dry-run        # npm publish --dry-run per package, in dependency order
    ```
    Read the file lists printed by the dry run: only `dist/`, `README.md`, `LICENSE`, `package.json` should ship.
+   Size budget: jsDelivr serves at most 150 MB per package version (about 20 MB per file), so `publish.mjs` refuses any
+   package over 120 MB unpacked or with a file over 20 MB (`node scripts/package-budget.mjs` prints every package; each
+   package's `test/size.test.mjs` checks the same). When one grows past it, shrink its data first, then move styles to a
+   companion (`STYLE_PACKAGE` / `SPLIT_BASES` in `forge/lib/emit-core.mjs`) and add that package to the lists below.
 5. **[you] First publish, by hand, as user `withicons`**
    ```bash
    npm login                                  # as withicons, 2FA prompt
@@ -55,13 +59,33 @@ hand and everything after that is published by GitHub Actions without tokens.
    - Organization or user: **`withevergrow`** · Repository: **`withicons`**
    - Workflow filename: **`release.yml`** · Environment: **`npm`**
    - Then, in the same settings page under **Publishing access**, choose *"Require two-factor authentication and disallow tokens"*.
-   Repeat for each package (`@withicons/core`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `classes`, `static`, `search`,
-   `mcp`, `motion`, `dynamic`, and `withicons`).
+   Repeat for each package (`@withicons/core`, `core-plus`, `soft3d`, `holiday`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `web-plus`, `classes`,
+   `classes-plus`, `static`, `static-plus`, `search`, `mcp`, `motion`, `dynamic`, and `withicons`).
+
+   **New companion packages (0.4): `@withicons/core-plus`, `@withicons/classes-plus`, `@withicons/web-plus`, `@withicons/static-plus`, `@withicons/soft3d`, `@withicons/holiday`.** They hold the newest
+   styles' files because jsDelivr serves at most 150 MB per package. Trusted Publishing can only be added to a package that
+   exists, so before the first CI release that contains them:
+   1. Build and check: `node forge/build.mjs && node scripts/publish.mjs --dry-run` (the order puts `core` before `core-plus`,
+      `soft3d` and `holiday`, `web-plus` before `web`, `static-plus` before `static`, and `classes-plus`, `soft3d`, `holiday` and `web-plus` before `classes`).
+   2. Publish the six by hand once, as `withicons` with 2FA, in this order:
+      ```bash
+      npm login && npm whoami                                   # -> withicons
+      node scripts/publish.mjs --only @withicons/core,@withicons/core-plus,@withicons/soft3d,@withicons/holiday,@withicons/classes-plus,@withicons/web-plus,@withicons/web,@withicons/static-plus,@withicons/static,@withicons/classes
+      ```
+      (`core`, `web`, `static` and `classes` are included so the companions never point at a version that is not on npm; versions already
+      published are skipped.)
+   3. For each of `@withicons/core-plus`, `@withicons/classes-plus`, `@withicons/web-plus`, `@withicons/static-plus`, `@withicons/soft3d`
+      and `@withicons/holiday`: npmjs.com, the package, Settings,
+      **Trusted Publisher**: GitHub Actions, user **`withevergrow`**, repository **`withicons`**, workflow **`release.yml`**,
+      environment **`npm`**; then **Publishing access**: *"Require two-factor authentication and disallow tokens"*.
+   4. Check: `npm view @withicons/core-plus version`, `npm view @withicons/soft3d version`, `npm view @withicons/holiday version`, `npm view @withicons/web-plus version`, `npm view @withicons/static-plus version`
+      and `npm view @withicons/classes-plus version`
+      show the release; the next tag publishes all of them from CI (`scripts/publish.mjs` fails if one is missing).
 7. **[you] Remove tokens.** If you created an `NPM_TOKEN` (granular, publish-only, 7-day expiry) as a stop-gap,
    delete the GitHub secret and revoke the token at npmjs.com, then Access Tokens. `release.yml` works without it.
 8. **Co-maintainers** (later): they create their own npm accounts with 2FA, then
    ```bash
-   for p in core react vue svelte angular solid web classes static search mcp motion dynamic; do npm owner add <user> @withicons/$p; done
+   for p in core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static static-plus search mcp motion dynamic; do npm owner add <user> @withicons/$p; done
    npm owner add <user> withicons
    ```
 9. **Verify** after the first CI release: `npm audit signatures` in a project that installs a package, and the

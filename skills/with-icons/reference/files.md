@@ -18,6 +18,8 @@ written: an unknown icon, palette or option writes nothing. `npx withicons expor
 | design tools (Figma, Canva, Illustrator) | `svg-flat` (`eps` for old print pipelines) | editable vectors |
 | apps | `android` (VectorDrawable), `ios` (imageset zip), `png-set` (@1x to @4x), `favicon-pack`, `ico` | |
 | motion for apps / After Effects | `lottie`, `dotlottie` | vector animation |
+| a whole style (designers, no-code, offline) | `https://withicons.com/downloads/with-icons-<style>.zip` | every icon as SVG (colours baked in) + an offline searchable viewer; `with-icons-all.zip` = every style |
+| a festive campaign (banner, email, post) | `png` / `gif` in the holiday style: `--style rangoli`, `christmas`, `halloween`, `lunar`, `valentine`, `utsav` | one style for the whole campaign; festival icons in [icons.md](icons.md); switch festivals with a palette ([styles.md](styles.md#holiday-palettes)) |
 
 ## File names
 

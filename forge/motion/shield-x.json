@@ -1,0 +1,41 @@
+{
+  "name": "shield-x",
+  "intent": "the shield stands guard; shakes no when a threat is blocked",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw",
+      "duration": 0.9
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    },
+    {
+      "to": "shield",
+      "effect": "fade"
+    }
+  ]
+}

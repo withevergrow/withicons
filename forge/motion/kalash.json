@@ -1,0 +1,38 @@
+{
+  "name": "kalash",
+  "intent": "sits calm and full while its mango leaves sway",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        10.5
+      ],
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ]
+}

@@ -51,6 +51,91 @@ export function colorFor(name, hash) {
 // glyphs that should never wear a face: directional, typographic, punctuation
 export const NO_FACE = /(-off$)|^((alert|check|plus|minus|x|help|info|play|pause|stop|arrow|chevron)-(circle|square|triangle)|(circle|square)-|arrow|chevron|corner|move|hash|at-sign|percent|bold|italic|underline|strikethrough|heading|type|text|align|list|quote|code|braces|pilcrow|minus|plus|check$|close|x$|menu|more-|drag-|maximize|minimize|sort|swap|shuffle|repeat|redo|undo|reply|rotate|refresh|trending|activity|chart-line|signal|loader|equal|divide|asterisk|slash|terminal|sliders|columns|sidebar|layout|table$|kanban|barcode|qr-code|link|unlink|external-link|log-in|log-out|share|git-|route|webhook|wifi|rss|fingerprint|scissors|crop|crosshair|filter|percent)/
 
+// Avatars (avatar-*) draw their own face: never stamp a second one. People and creatures alike
+// get kawaii's blush under their own eyes (a symmetric pair of small closed cutouts), placed just
+// below and outside each eye; creatures keep the heart accent, people stay quiet (no accent).
+const PEOPLE = /^avatar-(baby|boy|girl|teen|man|woman|older|person)/
+const NO_CHEEKS = new Set(['avatar-robot', 'avatar-alien', 'avatar-ghost', 'avatar-monster', 'avatar-owl', 'avatar-dino', 'avatar-frog'])
+export function avatarTune(icon) {
+  const name = String(icon && icon.name || '')
+  if (!name.startsWith('avatar-')) return null
+  const t = { face: false }
+  if (PEOPLE.test(name)) {
+    t.accent = false
+    // People: the skeleton's eye dots and smile, filleted at kawaii's chubby weight, melt into the chin
+    // (a beard-like blob). Hide them (paths + their cutouts) and stamp kawaii's own tiny face on the eye line.
+    // With glasses the lenses are the eyes: only the smile goes, and the blush sits under the lenses.
+    const bb = pts => { let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity; for (const [x, y] of pts) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y } return { x0, x1, y0, y1, w: x1 - x0, h: y1 - y0, cx: (x0 + x1) / 2, cy: (y0 + y1) / 2 } }
+    const feat = (p) => {
+      if (p.plate !== 'K' || !p.subs || p.subs.length !== 1 || p.subs[0].closed) return null
+      const b = bb(p.subs[0].pts)
+      if (b.w > 4.6 || b.h > 1.6 || b.cx < 8 || b.cx > 16 || b.cy < 9.5 || b.cy > 16) return null
+      return b.w < 0.6 ? 'eye' : 'mouth'
+    }
+    const glasses = (icon.paths || []).some(p => p.plate === 'A' && p.subs && p.subs.length === 1 && p.subs[0].closed && (b => b.w > 3 && b.w < 5 && b.cy > 9 && b.cy < 13.5 && b.cx > 6.5 && b.cx < 17.5)(bb(p.subs[0].pts)))
+    const hide = [], ds = new Set(), eyeAt = []
+    ;(icon.paths || []).forEach((p, i) => {
+      const k = feat(p)
+      if (!k || (glasses && k === 'eye')) return
+      hide.push(i); ds.add(p.d)
+      if (k === 'eye') eyeAt.push(bb(p.subs[0].pts))
+    })
+    const hideCuts = []
+    ;(icon.cutouts || []).forEach((c, i) => {
+      if (ds.has(c.d)) { hideCuts.push(i); return }
+      const s = c.subs && c.subs[0]
+      if (!s || !s.closed || c.subs.length !== 1) return
+      const b = bb(s.pts)
+      if (b.w < 2.2 && b.h < 2.2 && eyeAt.some(e => Math.abs(e.cx - b.cx) < 0.3 && Math.abs(e.cy - b.cy) < 0.6)) hideCuts.push(i)
+    })
+    // a short highlight stroke on a bald scalp: at 2.2 it is an ink blob; kawaii's own shine arc does its job
+    ;(icon.paths || []).forEach((p, i) => {
+      if (p.plate !== 'A' || !p.subs || p.subs.length !== 1 || p.subs[0].closed) return
+      const b = bb(p.subs[0].pts)
+      if (Math.max(b.w, b.h) < 2.6 && b.cy > 5 && b.cy < 9 && b.cx > 7 && b.cx < 17 && b.w > 0.5) hide.push(i)
+    })
+    if (hide.length) { t.hide = hide; t.hideCuts = hideCuts }
+    if (glasses) {
+      // Glasses: at kawaii's chubby 2.2 the lens rings swallow the lenses (they read as sunglasses). The frames are
+      // drawn by the core at a finer weight round clear, glazed lenses, with dot eyes behind them and a small smile.
+      const idx = [], lens = []
+      ;(icon.paths || []).forEach((p, i) => {
+        if (p.plate !== 'A' || !p.subs || p.subs.length !== 1) return
+        const q = p.subs[0], b = bb(q.pts)
+        if (q.closed && b.w > 3 && b.w < 5 && b.cy > 9 && b.cy < 13.5 && b.cx > 6.5 && b.cx < 17.5) { idx.push(i); lens.push(b) }
+        else if (!q.closed && b.w < 2 && b.h < 0.3 && Math.abs(b.cx - 12) < 0.5 && b.cy > 9 && b.cy < 13.5) idx.push(i) // the bridge
+      })
+      const mouth = (icon.paths || []).map((p, i) => hide.includes(i) && feat(p) === 'mouth' ? bb(p.subs[0].pts) : null).find(Boolean)
+      t.hide = [...(t.hide || []), ...idx]
+      t.glass = { idx, eyes: lens.map(b => [b.cx, b.cy]), lensBottom: Math.max(...lens.map(b => b.y1)), mouth: mouth ? [mouth.cx, mouth.cy] : [12, 14.75] }
+    }
+    if (eyeAt.length === 2 && !glasses) {
+      const y = (eyeAt[0].cy + eyeAt[1].cy) / 2, gap = Math.abs(eyeAt[0].cx - eyeAt[1].cx)
+      t.face = { x: 12, y: Math.round((y + 0.25) * 100) / 100, s: Math.round(Math.min(1.05, gap / 4.7) * 100) / 100 }
+      return t
+    }
+  }
+  if (NO_CHEEKS.has(name)) return t
+  const eyes = []
+  for (const c of icon.cutouts || []) for (const s of c.subs || []) {
+    if (!s.closed || !s.pts.length) continue
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity
+    for (const [x, y] of s.pts) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y }
+    if (x1 - x0 < 2.2 && y1 - y0 < 2.2) eyes.push([(x0 + x1) / 2, (y0 + y1) / 2])
+  }
+  // the topmost symmetric pair about x = 12
+  eyes.sort((a, b) => a[1] - b[1] || a[0] - b[0])
+  for (const L of eyes) {
+    if (L[0] >= 12) continue
+    const R = eyes.find(e => Math.abs(e[0] - (24 - L[0])) < 0.3 && Math.abs(e[1] - L[1]) < 0.3)
+    if (!R) continue
+    const dx = 0.95, dy = 2.05
+    t.cheeks = [[Math.round((L[0] - dx) * 100) / 100, Math.round((L[1] + dy) * 100) / 100], [Math.round((R[0] + dx) * 100) / 100, Math.round((R[1] + dy) * 100) / 100]]
+    break
+  }
+  return t
+}
+
 export const TUNE = {
   star: { expr: 'wink' },
   sparkles: { face: false, accent: false },
@@ -58,6 +143,8 @@ export const TUNE = {
   sun: { expr: 'joy' },
   heart: { expr: 'joy' },
   'heart-pulse': { face: false },
+  // the dragon trades its angry brows and eyes for kawaii's own face; antlers and whiskers stay
+  'dragon-head': { hide: [3, 4, 5, 6, 7], hideCuts: [0, 1, 2, 3, 4, 5], face: { x: 12, y: 15.25, s: 1 }, expr: 'smile', color: 1, accent: false },
   smile: { face: false, accent: false, cheeks: [[6.6, 12.9], [17.4, 12.9]] },
   bot: { face: false, accent: false, cheeks: [[7.5, 16.7], [16.5, 16.7]] },
   signal: { fills: false },
@@ -144,7 +231,7 @@ export const TUNE = {
   'cloud-upload': { face: false },
   'cloud-download': { face: false },
   // placed by hand
-  'piggy-bank': { hide: [3], hideCuts: [1], face: { x: 13.9, y: 12.4, s: 0.84 } },
+  'piggy-bank': { hide: [5, 7], hideCuts: [1], fills: true, color: 1, face: { x: 14.25, y: 13.75, s: 0.8 } },
   hotel: { face: { x: 13.5, y: 10.4, s: 0.74 } },
   bus: { face: { x: 12, y: 9.25, s: 0.8 } },
   'user-cog': { face: { x: 8.5, y: 7.8, s: 0.6, blush: false } },

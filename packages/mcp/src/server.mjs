@@ -2,21 +2,25 @@
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { exportIcon, EXPORT_FORMATS } from './export-tool.mjs'
-import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES } from './lib.mjs'
+import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES, recommendStyles, styleGroups, styleUses, iconMotions } from './lib.mjs'
 
 export const SERVER_NAME = 'withicons'
 export const VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0-dev'
 
 const instructions = (d, remote) => {
   const pal = d.meta.styles.filter(s => s.palette).map(s => s.name)
-  return `with icons (withicons.com): ${d.meta.icons.length} open-source (MIT) icons, each drawn in ${d.styleNames.length} styles (${d.styleNames.join(', ')}).
+  const groups = styleGroups(), uses = styleUses()
+  const cats = new Set(d.meta.categories.map(c => c.name))
+  const fest = ['indian-festivals', 'christmas', 'lunar-new-year', 'valentines', 'halloween'].filter(c => cats.has(c))
+  return `with icons (withicons.com): ${d.meta.icons.length} open-source (MIT) icons, each drawn in ${d.styleNames.length} styles${groups.length ? `, in ${groups.length} groups: ${groups.map(g => `${g.title} (${g.styles.join(', ')})`).join('; ')}` : ` (${d.styleNames.join(', ')})`}.
 Workflow: search_icons with what the icon should show ("delete", "throw away", "user settings") -> pick a name -> get_icon(name, style, format) for paste-ready code.
-Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "frosted" -> glass, "vintage camera" -> retro, "3d" -> luxe, "manga" -> anime, "medieval" -> gothic, "soft" -> pastel, "girly" -> coquette, "toy" or "kids" -> plush).
-${pal.length ? `Palette styles (${pal.join(', ')}) are multi-colour and duo + blueprint have an accent colour: every colour is a CSS variable with a default, the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
-Use line/solid/duo for UI controls, the creative styles at 32px+.
-Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format) returns code for the optional @withicons/motion package (continuous loops, hover effects, icon-to-icon swaps).
+Choosing a style: recommend_styles(for: "what you are making", e.g. "Diwali sale banner", "avatar picker for a kids app", "AI landing page") returns the best styles with packages, snippets, presets and palettes.${uses.length ? ` Best per job: ${uses.map(u => `${u.title.toLowerCase()}: ${u.styles.join(', ')}`).join('; ')}.` : ''} One style per page or UI region; only line, solid and duo go in 16-24px controls, the others at 32px+.
+${fest.length ? `Festivals: icon categories ${fest.join(', ')} plus holiday styles with festival palettes. ` : ''}${cats.has('avatars') ? 'Avatars: category avatars (people with true-to-life skin-tone and hair palettes: offer several; animals; friendly monsters). ' : ''}Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "isometric server" -> soft3d, "claymorphism" -> clay, "manga" -> anime, "toy" or "kids" -> plush).
+${pal.length ? `Multi-colour styles (${pal.join(', ')}) and duo's tint + accent are CSS variables with defaults; the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
+Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format, style) returns code for the optional @withicons/motion package (loops, hover effects, icon-to-icon swaps); 3D styles (clay, glass, liquid, chrome, soft3d, luxe, skeuo ...) play it in 3D and soft3d returns 3-5 moves per icon.
+Whole styles as files: https://withicons.com/downloads/with-icons-<style>.zip (every SVG + an offline viewer) and with-icons-all.zip.
 Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'On this remote server PNG-based and animated formats come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
-Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|classes|core|static|motion (web = <with-icon> element, classes = <i class="with with-home"> CSS icons). Names and common aliases both work (e.g. "delete" -> trash).`
+Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|classes|core|static|motion|dynamic (web = <with-icon> element, classes = <i class="with with-home"> CSS icons); every framework package, <with-icon> and the class loader carry every style. Raw files of the newest styles live in companions: @withicons/core-plus, soft3d, holiday (SVG + node data), static-plus (prebuilt SVG, sprites), classes-plus; recommend_styles names the package per style. Names and common aliases both work (e.g. "delete" -> trash).`
 }
 
 // structuredContent carries the result; the text block is the same JSON once, compact (the MCP spec's fallback for
@@ -84,14 +88,29 @@ export function createServer(opts = {}) {
 
   server.registerTool('list_styles', {
     title: 'List styles',
-    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with what each looks like, minSize (the smallest px it reads well at: 16 for UI styles, 32 creative and palette, 48 studio and storybook) and onDark (how to use it on dark backgrounds); palette styles list their colour variables.`,
+    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays), goodFor, what each looks like, minSize (the smallest px it reads well at: 16 for UI styles, 32 creative and palette, 48 studio and storybook) and onDark (how to use it on dark backgrounds); palette styles list their colour variables.`,
     inputSchema: {},
     annotations: { title: 'List styles', ...ro },
-  }, safe(() => json({ styles: listStyles() })))
+  }, safe(() => json({ styles: listStyles(), groups: styleGroups().map(g => ({ id: g.id, title: g.title, blurb: g.blurb, styles: g.styles })), uses: styleUses(), next: 'recommend_styles(for: "what you are making") picks the best styles for a job, with packages and presets.' })))
+
+  server.registerTool('recommend_styles', {
+    title: 'Recommend styles',
+    description: 'Which style(s) to use for a job. for: plain words about what you are making ("Diwali sale banner", "avatar picker for a kids app", "animated 3D icons for an AI landing page", "admin dashboard", "Christmas email"); or use: one of the "What are you making?" ids from withicons.com. ' +
+      'Ranks by your own words: a festival named in for wins ("Halloween party app" -> halloween, "Christmas email" -> christmas, "Diwali sale" -> rangoli, utsav), then the job (AI, SaaS, kids, print ...) and look words (isometric, claymorphism, neo-brutalism); use: "festive" lists every festival with its style. ' +
+      'Returns ranked styles, each with its group, what it is good for, the React import, <with-icon> and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes and Duo presets; plus festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. ' +
+      'Then search_icons / get_icon(name, style) for the icons themselves.',
+    inputSchema: {
+      for: z.string().max(300).optional().describe('What you are making, in plain words'),
+      use: z.enum(styleUses().map(u => u.id).length ? styleUses().map(u => u.id) : ['app']).optional().describe('A job id: ' + styleUses().map(u => `${u.id} (${u.title})`).join(', ')),
+      icon: z.string().max(60).optional().describe('Icon the snippets show (default home), e.g. "diya" or "avatar-woman"'),
+      limit: z.number().int().min(1).max(12).optional().describe('Max styles (default 6)'),
+    },
+    annotations: { title: 'Recommend styles', ...ro },
+  }, safe(a => json(recommendStyles(a))))
 
   server.registerTool('list_categories', {
     title: 'List categories',
-    description: 'All icon categories with counts, or (with category) every icon in that category.',
+    description: 'All icon categories with counts, or (with category) every icon in that category. Festival icons: indian-festivals (Diwali, Holi, Durga Puja), christmas, lunar-new-year, valentines, halloween; avatars: people (true-to-life skin-tone and hair palettes via list_palettes), animals and friendly monsters; ai: AI and assistant icons.',
     inputSchema: { category: z.enum(categoryNames).optional().describe('List the icons in this category') },
     annotations: { title: 'List categories', ...ro },
   }, safe(a => json(listCategories(a.category))))
@@ -109,7 +128,7 @@ export function createServer(opts = {}) {
     title: 'List colour palettes',
     description: 'The 20-30 colour palettes picked for one icon (true-to-life first, then moods: pastel, neon, retro, earthy, luxe, ...), each with its ten role colours ' +
       '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, the icon variables with their roles and defaults, and mainRole: the role that covers most of the icon body (e.g. c2): set that one for a brand colour. ' +
-      'Multi-colour styles: glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").',
+      `Multi-colour styles: ${d.meta.styles.filter(x => x.palette).map(x => x.name).join(', ')}, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").`,
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),
       style: z.enum(styleNames).optional().describe('Style to map the palettes onto (e.g. kawaii, sticker, retro)'),
@@ -127,6 +146,7 @@ export function createServer(opts = {}) {
       'swap = the icon turns into another one (play -> pause, menu -> close, heart -> heart@solid). Icons with a tuned motion use it by default; preset overrides it. ' +
       'The result has intent (what the motion shows), alternates (other tuned presets of this icon, e.g. a livelier one for a title slide) and lively (the most energetic presets); pass one as preset. ' +
       `${Object.keys(mo.icons).length} icons have tuned motion. ` +
+      'Pass the style the page uses: 3D styles (clay, glass, liquid, chrome, soft3d, luxe, skeuo, dock, plush) play the motion in 3D (the code adds wm-3d, motion3d: true) and the result lists moves: the moves the icon offers in that style (soft3d: 3-5, e.g. pop-up, press, hop, turn, gleam); pass one as preset. ' +
       'For a moving icon as a FILE (slides, docs, email, social) use export_icon with format gif, apng, animated-svg, pptx-animated or lottie and the same motion (motion: "loop", "hover", "swap" or a preset).',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),

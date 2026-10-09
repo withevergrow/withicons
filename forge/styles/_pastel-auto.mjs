@@ -10,7 +10,8 @@
 // Hues come from _pastel-tune.mjs (meaning first, a stable hash otherwise).
 import { parsePath, area, pointInRing, distToPolyline, V, simplify } from '../kernel/geom.mjs'
 import * as F from './_pastel-field.mjs'
-import { paintEntries, L } from './_pastel-paint.mjs'
+import { paintEntries, L, swatch } from './_pastel-paint.mjs'
+import { isPerson, tones, adapt, fillParts, mix, shade } from './_people.mjs'
 import { autoTune, setOf } from './_pastel-tune.mjs'
 
 export const K = {
@@ -354,7 +355,66 @@ export function autoEntries(icon) {
 }
 
 export function auto(icon) {
+  if (isPerson(icon) && !icon.params) {
+    try { const n = personNodes(icon); if (n.length) return n } catch { /* the house composition below */ }
+  }
   return paintEntries(autoEntries(icon))
+}
+
+// PEOPLE avatars: the house composition, re-coloured part by part (forge/styles/_people.mjs): chalky pastel skin
+// (c1, its light tone the tint, its shade the shadow) across the light -> deep spread, soft pastel hair (c2, c3 its
+// shade), clothing (c4). The figure (fills + outline bars) is split by the skeleton's fills, painted in their order.
+const PERSON_ROLES = { skin: 'c1', hair: 'c2', wear: 'c2', cloth: 'c4', gear: 'accent', hair2: 'c3' }
+export function personSwatches(icon) {
+  const t0 = tones(icon), t = adapt(t0, 'pastel')
+  // pastel black hair is a soft charcoal plum, lifted off the page on dark
+  const lum = h => [1, 3, 5].reduce((a, i, k) => a + parseInt(h.slice(i, i + 2), 16) * [0.3, 0.59, 0.11][k], 0)
+  const hairOf = h => lum(h) < 60 ? mix(h, '#8A7BA0', 0.5) : mix(h, '#FFFFFF', 0.18)
+  const c2 = t0.wear ? t.c2 : hairOf(t0.c2), c3 = t0.wear ? t.c3 : mix(shade(c2, 0.72), '#3A2E48', 0.2)
+  const sk = swatch(t.c1, t.shadow, mix(t0.shadow, '#22141C', 0.62), t.tint)
+  return {
+    t, hex: { c1: t.c1, tint: t.tint, shadow: t.shadow, c2, c3, c4: t.c4 },
+    hues: {
+      skin: sk,
+      // hair and headwear: their bottom plane in the hair shade (c3), their top plane a white sheen (shine): the
+      // tint and shadow roles belong to the skin
+      hair: { ...swatch(c2, c3, mix(c3, '#1E1622', 0.5)), bot: 'c3', top: 'shine' },
+      wear: { ...swatch(c2, c3, mix(c3, '#1E1622', 0.5)), bot: 'c3', top: 'shine' },
+      // with headwear, the hair (a beard, a fringe) takes the hair shade role
+      hair2: { ...swatch(hairOf(t0.hair), mix(shade(hairOf(t0.hair), 0.72), '#3A2E48', 0.2), mix(shade(hairOf(t0.hair), 0.5), '#1E1622', 0.5)), top: 'shine' },
+      cloth: { ...swatch(t.c4, mix(t.c4, t0.c4, 0.6), shade(t0.c4, 0.55)), top: 'shine' },
+      gear: { ...swatch('#FFC3D7', '#F08FB3', '#B54A76'), top: 'shine' },
+    },
+  }
+}
+function personNodes(icon) {
+  const B = build(icon)
+  const sw = personSwatches(icon), wear = !!tones(icon).wear
+  const parts = fillParts(icon)
+  const body = F.copy(B.mass); if (B.part) F.union(body, B.part)
+  if (B.inlay) F.union(body, B.inlay)
+  const E = []
+  const add = (G, hue, mode, part, x) => { const D = deep(G); if (D) E.push({ hue, mode, part, F: D, reach: REACH_AUTO, ...x }) }
+  const regions = (icon.fills || []).map((f, i) => {
+    const rings = subsOf(f.d, f.subs).map(s => s.pts).filter(r => r.length > 2)
+    const G = F.region(rings, K.LO + 1.6)
+    F.offset(G, -(K.W / 2 + 0.05))  // grown over its outline bar
+    return { G, part: parts[i], i }
+  })
+  // ears first (under the face), then the face, then the rest in skeleton order (hair over the forehead, clothes)
+  const ord = [...regions.filter(r => r.part === 'skin' && r.i > 0), ...regions.filter(r => r.i === 0), ...regions.filter(r => r.part !== 'skin')]
+  // anything of the figure outside every fill (a loose lock, a strap) paints in the hair hue, under all
+  const cover = F.field(K.LO); for (const r of regions) F.union(cover, r.G)
+  const rest = F.subtract(F.copy(body), cover)
+  if (F.any(rest)) add(rest, wear ? 'hair2' : 'hair', 'flat', 'K')
+  for (const r of ord) {
+    const G = F.intersect(F.copy(r.G), body)
+    const hue = r.part === 'hair' && wear ? 'hair2' : r.part || 'skin'
+    add(G, hue, r.part === 'gear' ? 'flat' : 'lit', r.part === 'skin' || r.i === 0 ? 'K' : 'A')
+  }
+  add(B.inkK, 'skin', 'ink', 'K')
+  add(B.inkA, 'skin', 'ink', 'A')
+  return paintEntries(E, { hues: sw.hues, roles: PERSON_ROLES })
 }
 
 // prime the field engine once at load, so the first real render is not paying

@@ -1,0 +1,42 @@
+{
+  "name": "pipette",
+  "intent": "dips and tilts like it is picking up a colour",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      4,
+      20
+    ],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 135,
+    "amount": 0.6,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        4,
+        20
+      ]
+    },
+    {
+      "preset": "drop",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "palette",
+      "effect": "morph"
+    },
+    {
+      "to": "pipette@solid",
+      "effect": "scale"
+    }
+  ]
+}

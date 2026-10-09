@@ -1,0 +1,95 @@
+{
+  "name": "mistletoe",
+  "category": "christmas",
+  "description": "A hanging sprig of mistletoe with leaves, berries and a bow, for Christmas.",
+  "aliases": [
+    "mistle-toe",
+    "kiss",
+    "kissing-ball",
+    "christmas-plant",
+    "sprig",
+    "berry-sprig"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "romance",
+    "love",
+    "couple",
+    "kissing",
+    "under the mistletoe",
+    "berries",
+    "leaves",
+    "plant",
+    "decoration",
+    "hanging",
+    "ribbon",
+    "winter",
+    "missletoe",
+    "mistletow"
+  ],
+  "tags": [
+    "christmas",
+    "plant",
+    "love",
+    "holiday",
+    "decoration"
+  ],
+  "paths": [
+    {
+      "d": "M11 14 C6.57 13.56 3.97 16.46 4.5 21.25 C9.32 21.25 11.92 18.35 11 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13 14 C12.08 18.35 14.68 21.25 19.5 21.25 C20.03 16.46 17.43 13.56 13 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4.25 V6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 4.25 C10.5 2 8 1.75 8 3.25 C8 4.75 10.5 5 12 4.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 4.25 C13.5 2 16 1.75 16 3.25 C16 4.75 13.5 5 12 4.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13.45 8.4 A1.45 1.45 0 1 1 10.55 8.4 A1.45 1.45 0 1 1 13.45 8.4 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M11.95 11 A1.45 1.45 0 1 1 9.05 11 A1.45 1.45 0 1 1 11.95 11 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M14.95 11 A1.45 1.45 0 1 1 12.05 11 A1.45 1.45 0 1 1 14.95 11 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M11 14 C6.57 13.56 3.97 16.46 4.5 21.25 C9.32 21.25 11.92 18.35 11 14 Z",
+    "M13 14 C12.08 18.35 14.68 21.25 19.5 21.25 C20.03 16.46 17.43 13.56 13 14 Z",
+    "M12 4.25 C10.5 2 8 1.75 8 3.25 C8 4.75 10.5 5 12 4.25 Z",
+    "M12 4.25 C13.5 2 16 1.75 16 3.25 C16 4.75 13.5 5 12 4.25 Z",
+    "M11.5 4.25 H12.5 V7.5 H11.5 Z",
+    "M13.45 8.4 A1.45 1.45 0 1 1 10.55 8.4 A1.45 1.45 0 1 1 13.45 8.4 Z",
+    "M11.95 11 A1.45 1.45 0 1 1 9.05 11 A1.45 1.45 0 1 1 11.95 11 Z",
+    "M14.95 11 A1.45 1.45 0 1 1 12.05 11 A1.45 1.45 0 1 1 14.95 11 Z"
+  ],
+  "cutouts": [
+    "M8.4 16.9 L5.93 19.66",
+    "M15.6 16.9 L18.07 19.66",
+    "M8.5 13.4 Q12 14.6 15.5 13.4"
+  ]
+}

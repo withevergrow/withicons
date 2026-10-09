@@ -18,12 +18,20 @@
 //                       lists cutouts that stay debossed (default [0], a document's fold)
 //   grooveAs            'emboss' (raised white enamel glyph), 'shine' (a glint), default debossed ink
 import { pointInRing, distToPolyline } from '../kernel/geom.mjs'
+import { SNOWMAN, SNOWMAN_TUNE } from './_skeuo-snowman.mjs'
+import { DRAGON, DRAGON_TUNE } from './_skeuo-dragon.mjs'
 const CAL = { zones: [{ y1: 9.9, mat: 'red', role: 'c3' }] }
 const FACE = (ring = 'gold', face = 'ceramic', inset = 1.25) => ({ body: ring, inlay: { mat: face, inset } })
 const LENS = { body: 'steel', part: 'steel', inlay: { mat: 'water', inset: 1.2 } }
 const P = c => ({ print: c })
 const PHOTO = { inlay: { mat: 'sky', inset: 1.3 }, decal: { 0: 'yellow', 1: 'leaf' }, noInner: true }
 const T = {
+  // a glazed pink ceramic piggy bank, a gold coin dropping in
+  'piggy-bank': { body: 'pink', part: 'pink', sig: 'gold' },
+  // a hand-built glazed ceramic snowman: its own skeleton and glaze zones (_skeuo-snowman.mjs)
+  snowman: { ...SNOWMAN_TUNE, skeleton: SNOWMAN },
+  // a hand-built red lacquered dragon head: its own skeleton and glaze zones (_skeuo-dragon.mjs)
+  'dragon-head': { ...DRAGON_TUNE, skeleton: DRAGON },
   'file-pdf': P('red'), 'file-code': P('violet'), 'file-image': P('blue'), 'file-video': P('coral'), 'file-audio': P('violet'),
   'file-spreadsheet': { print: 'green', wPrint: 1.0 }, 'file-archive': P('orange'), 'file-check': P('green'), 'file-x': P('red'), 'file-plus': P('green'),
   'file-minus': P('red'), 'file-lock': P('orange'), 'file-search': P('blue'), 'file-up': P('blue'), 'file-down': P('blue'),

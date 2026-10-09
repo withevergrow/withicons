@@ -1,0 +1,55 @@
+{
+  "name": "@withicons/static-plus",
+  "version": "0.3.1",
+  "description": "The 14 newest with icons styles (clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine) as SVG sprites and standalone SVG files. Companion of @withicons/static.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/static-plus"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "svg-sprite",
+    "static",
+    "cdn",
+    "svg-icons",
+    "clay",
+    "bento",
+    "suite",
+    "dock",
+    "liquid",
+    "chrome",
+    "soft3d",
+    "brutal",
+    "utsav",
+    "rangoli",
+    "halloween",
+    "christmas",
+    "lunar",
+    "valentine"
+  ],
+  "sideEffects": false,
+  "jsdelivr": "./package.json",
+  "unpkg": "./package.json",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

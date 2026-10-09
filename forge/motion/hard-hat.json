@@ -1,0 +1,35 @@
+{
+  "name": "hard-hat",
+  "intent": "gets a reassuring knock on the crown",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      19.5
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      19.5
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        19.5
+      ]
+    },
+    {
+      "preset": "bounce"
+    }
+  ]
+}

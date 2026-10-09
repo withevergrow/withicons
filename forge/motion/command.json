@@ -1,0 +1,35 @@
+{
+  "name": "command",
+  "intent": "the command key squishes like a shortcut being pressed",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "keyboard",
+      "effect": "fade"
+    },
+    {
+      "to": "search",
+      "effect": "scale"
+    }
+  ]
+}

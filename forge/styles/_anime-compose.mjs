@@ -420,7 +420,7 @@ function emit(layers, opts) {
     if (!d) continue
     const key = l.role + '|' + l.cls + '|' + (l.op || '')
     if (last && last.key === key) { last.node[1].d += d; continue }
-    const a = { d, fill: paint(l.role) }
+    const a = { d, fill: paint(l.role, opts.hex) }
     if (l.op) a['fill-opacity'] = String(l.op).replace(/^0\./, '.')
     if (l.cls) a.class = l.cls
     const node = ['path', a]

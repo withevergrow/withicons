@@ -1,0 +1,68 @@
+{
+  "name": "database-zap",
+  "category": "development",
+  "description": "A database with a lightning bolt, for fast queries, caching and real-time data.",
+  "aliases": [
+    "fast-database",
+    "cache",
+    "database-fast",
+    "realtime-db",
+    "database-power",
+    "db-zap",
+    "quick-query"
+  ],
+  "synonyms": [
+    "caching",
+    "redis",
+    "in memory",
+    "real time",
+    "realtime",
+    "fast query",
+    "performance",
+    "speed",
+    "optimize",
+    "optimise",
+    "instant data",
+    "high performance",
+    "turbo",
+    "data power",
+    "serverless database",
+    "edge database",
+    "index",
+    "quick",
+    "storage",
+    "sql"
+  ],
+  "tags": [
+    "database",
+    "performance",
+    "cache",
+    "speed",
+    "data"
+  ],
+  "paths": [
+    {
+      "d": "M20 5.5 A8 3 0 1 1 4 5.5 A8 3 0 1 1 20 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 5.5 L4 18.5 A8 3 0 0 0 13.54 21.44 M20 8.62 L20 5.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 12 A8 3 0 0 0 11.81 15",
+      "plate": "A"
+    },
+    {
+      "d": "M18.5 11.5 L14 17.5 H17.25 L16.75 22 L21.5 15.75 H18.25 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M13.62 21.44 A8 3 0 0 1 4 18.5 L4 5.5 A8 3 0 0 1 20 5.5 L20 10.92 A6.25 6.25 0 0 0 13.62 21.44 Z",
+    "M18.5 11.5 L14 17.5 H17.25 L16.75 22 L21.5 15.75 H18.25 Z"
+  ],
+  "cutouts": [
+    "M2.5 5.5 H4 A8 3 0 0 0 20 5.5 H21.5"
+  ]
+}

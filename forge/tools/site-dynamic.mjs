@@ -17,6 +17,7 @@ import vm from 'vm'
 import crypto from 'crypto'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads'
+import { STYLE_GROUPS } from './style-groups.mjs'
 
 const SELF = fileURLToPath(import.meta.url)
 const ROOT = path.resolve(path.dirname(SELF), '..', '..')
@@ -146,9 +147,10 @@ async function main() {
   const REACT_RESERVED = ['name', 'variant', 'size', 'color', 'vars', 'label', 'params', 'today', 'className', 'style', 'strokeWidth', 'absoluteStrokeWidth', 'key', 'ref', 'children']
   const STYLE_SAY = {
     line: 'clean outlines', solid: 'bold filled shapes', duo: 'outline with a colour tint', gloss: 'shiny candy highlights', engrave: 'engraved hatching',
-    blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'frosted glass panes', kawaii: 'cute with a face', sticker: 'die-cut sticker',
+    blueprint: 'technical drawing', sketch: 'hand-drawn pencil', glass: 'soft frosted glass', kawaii: 'cute with a face', sticker: 'die-cut sticker',
     pixel: '8-bit pixels', retro: '70s stripes', luxe: 'layered 3D enamel and gold', bauhaus: 'bold geometric Bauhaus', skeuo: 'realistic materials',
     anime: 'anime cel shading', gothic: 'Gothic stone and stained glass', pastel: 'soft pastels', coquette: 'bows and blush pink', plush: 'soft felt toys',
+    clay: 'soft matte clay', bento: 'tinted bento tiles', suite: 'suite-style colour', dock: 'glossy app tiles', liquid: 'clear liquid glass', chrome: 'liquid chrome', soft3d: 'soft studio-lit 3D', brutal: 'bold neo-brutalism', utsav: 'Indian festive craft', rangoli: 'Diwali glow and rangoli motifs', halloween: 'spooky-cute Halloween', christmas: 'cosy Christmas with snow', lunar: 'Lunar New Year red and gold', valentine: 'cute Valentine\'s stickers',
   }
 
   // standalone inline svg (decorative unless a title is given); inner markup may carry var(--with-*, #hex) and currentColor
@@ -306,6 +308,7 @@ ${keywords ? `<meta name="keywords" content="${esc(keywords)}">\n` : ''}<link re
 <link rel="stylesheet" href="${P}css/tokens.css">
 <link rel="stylesheet" href="${P}css/chrome.css">
 <link rel="stylesheet" href="${P}css/ui-kit.css">
+<link rel="stylesheet" href="${P}css/style-picker.css">
 <link rel="stylesheet" href="${P}css/live.css">
 <link rel="icon" href="${P}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${P}brand/apple-touch-icon.png">
@@ -322,6 +325,7 @@ ${prefixed(FOOTER, P)}
 <script src="${P}data/live.js" defer></script>
 <script src="${P}vendor/dynamic/dynamic.js" defer></script>
 ${scripts}<script src="${P}js/site.js" defer></script>
+<script src="${P}js/style-picker.js" defer></script>
 <script src="${P}js/ui-kit.js" defer></script>
 <script src="${P}js/live-snippets.js" defer></script>
 <script src="${P}js/live-motion.js" defer></script>
@@ -343,28 +347,12 @@ ${scripts}<script src="${P}js/site.js" defer></script>
   const arrow = '<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   const searchIco = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 
-  /* ───────────── style switcher (mirrors the icon library's) ─────────────
-     Every style always visible in five groups, each option a mini drawing of `sample` in that style + its name. Phones
-     get a trigger that opens the same list as a panel (js/live.js). Used by the library bar and by every icon page. */
-  const SB_GROUPS = [
-    { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
-    { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
-    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'] },
-    { id: 'storybook', title: 'Storybook', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'], isNew: true },
-  ].map(g => ({ ...g, styles: g.styles.filter(s => STYLE[s]) }))
-  for (const s of SN) if (!SB_GROUPS.some(g => g.styles.includes(s))) SB_GROUPS[SB_GROUPS.length - 1].styles.push(s)
-  const styleSwitcher = (sample, o = {}) => {
-    const sbIc = s => svgOf(defaultInner(sample, s), s)
-    const chev = '<svg class="lv-sb-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    const g0 = SB_GROUPS.find(g => g.styles.includes(SN[0])) || SB_GROUPS[0]
-    return `<div class="lv-sb${o.cls ? ' ' + o.cls : ''}" data-lv-styles>
-      <button type="button" class="lv-sb-toggle" data-lv-sb-toggle aria-expanded="false" aria-controls="lv-style-panel" aria-label="Style: ${esc(STYLE[SN[0]].title)}. Show all ${NS} styles"><span class="lv-sb-cur-ic" data-lv-sb-cur-ic aria-hidden="true">${sbIc(SN[0])}</span><span class="lv-sb-cur"><small data-lv-sb-cur-g>${esc(g0.title)} style</small><b data-lv-sb-cur>${esc(STYLE[SN[0]].title)}</b></span><span class="lv-sb-dots" aria-hidden="true">${SN.map((s, k) => `<i data-st="${s}" style="--sc:var(--c-${s})"${k === 0 ? ' class="is-on"' : ''}></i>`).join('')}</span>${chev}</button>
-      <div class="lv-sb-panel" id="lv-style-panel">
-        <div class="lv-sb-list" role="radiogroup" aria-label="${esc(o.label || 'Style')}"><span class="lv-sb-ink" aria-hidden="true"></span>${SB_GROUPS.map(g => `<div class="lv-sb-g" data-group="${g.id}"><p class="lv-sb-gl" aria-hidden="true"><span>${esc(g.title)}</span>${g.isNew ? '<b class="lv-sb-new">New</b>' : ''}</p><div class="lv-sb-opts">${g.styles.map(s => `<button type="button" class="lv-sb-o lv-sty" role="radio" aria-checked="${s === SN[0]}" tabindex="${s === SN[0] ? 0 : -1}" data-style="${s}" data-group-title="${esc(g.title)}" style="--sc:var(--c-${s});--sc-text:var(--c-${s}-text)" aria-label="${esc(STYLE[s].title)}, ${g.title.toLowerCase()} style${g.isNew ? ', new' : ''}" title="${esc(STYLE[s].title)}: ${esc(STYLE_SAY[s] || '')}"><span class="lv-sb-ic" aria-hidden="true">${sbIc(s)}</span><span class="lv-sb-t">${esc(STYLE[s].title)}</span></button>`).join('')}</div></div>`).join('')}</div>
-      </div>
-    </div>`
-  }
+  /* ───────────── style switcher: the shared compact row (site/STYLE-PICKER.md) ─────────────
+     The current style, then recent and Popular ones, each tile the plain icon `sample` drawn in that style, and "All N styles"
+     for the full picker (js/style-picker.js; js/live.js builds it into [data-lv-styles]). Without JS the hint links to the
+     page's all-styles gallery. The five groups (site.js GROUPS, via style-groups.mjs) order that gallery. */
+  const SB_GROUPS = STYLE_GROUPS.map(g => ({ ...g, styles: g.styles.filter(s => STYLE[s]) })).filter(g => g.styles.length)
+  const styleSwitcher = (sample, o = {}) => `<div class="lv-sb${o.cls ? ' ' + o.cls : ''}" data-lv-styles data-icon="${esc(sample)}" data-label="${esc(o.label || 'Style')}">${o.gallery ? `<a class="lv-sb-nojs" href="#styles">See all ${NS} styles</a>` : ''}</div>`
 
   /* ───────────── the library: site/live.html ───────────── */
   const HERO = [
@@ -407,8 +395,7 @@ ${scripts}<script src="${P}js/site.js" defer></script>
   <div class="lv-tile-art">${svgOf(heroInner(h), h.s, { cls: 'lv-svg' })}</div>
   <figcaption><span class="lv-tile-name">${esc(BY[h.n].title)}</span><span class="lv-tile-val" data-hero-val>${esc(sayKeys(BY[h.n], h.p, h.say))}</span><span class="lv-tile-style">${esc(STYLE[h.s].title)}</span></figcaption>
 </figure>`).join('\n')
-    const SB_SAMPLE = BY['calendar-date'] ? 'calendar-date' : ICONS[0].name
-    const styleBar = styleSwitcher(SB_SAMPLE, { cls: 'lv-sb-drop' })
+    const styleBar = styleSwitcher('calendar', { cls: 'lv-sb-drop', label: 'Style of every live icon' })
     const groupChips = `<div class="lv-groups" role="group" aria-label="Show a group"><button type="button" class="lv-g" aria-pressed="true" data-group="">All <b>${N}</b></button>${GROUPS.map(g => `<button type="button" class="lv-g s-${g.style}" aria-pressed="false" data-group="${g.id}">${esc(g.title)} <b>${g.names.length}</b></button>`).join('')}</div>`
     const card = (n, k) => {
       const i = BY[n]
@@ -610,7 +597,8 @@ ${sections}
     const sayDef = sayNice(i, def)
     // the palettes this live icon wears: its plain sibling's (site/data/palettes/<static>.js, forge/PALETTES.md)
     const pal = sib.find(x => fs.existsSync(path.join(SITE, 'data', 'palettes', `${x}.js`))) || ''
-    const allStyles = SN.map(s => `<li><button type="button" class="lv-as" data-style="${s}" aria-pressed="${s === SN[0]}" style="--sc:var(--c-${s});--sc-text:var(--c-${s}-text)"><span class="lv-as-art">${svgOf(defaultInner(n, s), s, { cls: 'lv-svg', title: `${i.title} icon, ${STYLE[s].title.toLowerCase()} style` })}</span><span class="lv-as-t"><b>${esc(STYLE[s].title)}</b><small>${esc(STYLE_SAY[s] || '')}</small></span><span class="lv-as-use" aria-hidden="true">Use</span></button></li>`).join('')
+    const asItem = s => `<li><button type="button" class="lv-as" data-style="${s}" aria-pressed="${s === SN[0]}" style="--sc:var(--c-${s});--sc-text:var(--c-${s}-text)"><span class="lv-as-art">${svgOf(defaultInner(n, s), s, { cls: 'lv-svg', title: `${i.title} icon, ${STYLE[s].title.toLowerCase()} style` })}</span><span class="lv-as-t"><b>${esc(STYLE[s].title)}</b><small>${esc(STYLE_SAY[s] || '')}</small></span><span class="lv-as-use" aria-hidden="true">Use</span></button></li>`
+    const allStyles = SB_GROUPS.map(g => `<li class="lv-all-g"><h3 class="lv-all-gh">${esc(g.title)} <small>${esc(g.blurb || '')}</small></h3><ul class="lv-all" role="list">${g.styles.map(asItem).join('')}</ul></li>`).join('')
     const toc = [
       ['make', 'Make it yours', 'set it, style it, download it'],
       ['styles', `All ${NS} styles`, 'your icon in every style'],
@@ -658,7 +646,7 @@ ${sections}
       </div>
       <div class="lv-pickwrap">
         <p class="lv-pick-head"><span class="lv-label">Style</span> <b data-lv-style-name>${esc(STYLE[SN[0]].title)}</b> <span class="lv-pick-say" data-lv-style-say aria-live="polite">${esc(STYLE_SAY[SN[0]] || '')}</span></p>
-        ${styleSwitcher(n, { cls: 'lv-sb-page', label: `Style for the ${i.title.toLowerCase()} icon` })}
+        ${styleSwitcher(sib[0] || 'calendar', { cls: 'lv-sb-page', label: `Style for the ${i.title.toLowerCase()} icon`, gallery: true })}
       </div>
       <div class="lv-qcwrap lv-js-only">
         <p class="lv-pick-head"><span class="lv-label">Colour</span> <b data-lv-color-name>Style colours</b></p>
@@ -673,7 +661,7 @@ ${sections}
 </details>
 <section class="wrap lv-sec" id="styles" aria-labelledby="h-styles">
   <div class="lv-sec-h"><h2 class="h2" id="h-styles">${esc(i.title)} in <span class="hand lv-accent">all ${NS} styles</span></h2><p>Same values, ${NS} personalities. <span class="lv-js-inline">Pick one to use it above.</span></p></div>
-  <ul class="lv-all" role="list" data-lv-all>${allStyles}</ul>
+  <ul class="lv-all-groups" role="list" data-lv-all>${allStyles}</ul>
 </section>
 <section class="wrap lv-sec lv-dev2" id="developers" aria-labelledby="h-dev" data-lv-dev2>
   <div class="lv-sec-h"><div><p class="eyebrow">For developers</p><h2 class="h2" id="h-dev">Use it in <span class="hand lv-accent">code</span></h2></div><p>One element, or a React or Vue component, with everything you set above. Change a value after the page loads and it redraws, or moves there with <code>animate</code>.</p></div>

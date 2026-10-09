@@ -1,0 +1,53 @@
+{
+  "name": "satellite-dish",
+  "intent": "the dish rocks gently while its signal waves pulse outward",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      7.5,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      7.5,
+      21.5
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "radio",
+      "effect": "fade"
+    },
+    {
+      "to": "wifi",
+      "effect": "morph"
+    },
+    {
+      "to": "signal",
+      "effect": "fade"
+    }
+  ]
+}

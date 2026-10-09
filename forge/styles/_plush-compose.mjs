@@ -2,6 +2,8 @@
 //
 // A piece is one of
 //   { kind: 'felt',   role, F, part?, stitch?, seam?, shade?, hi?, line? }  a stuffed felt panel
+//     (optional: shadeRole / hiRole recolour the shade + pinch / highlight, pinchOp; groundRole on any piece
+//      recolours the ground shadow: people avatars shade skin in its own shadow role, the rest in ink)
 //   { kind: 'flat',   role, F, part?, op? }                                 flat colour (a French knot, a button hole)
 //   { kind: 'thread', role, lines: [[x, y], ...][], w, part?, op? }         embroidery (round-capped thread)
 //   { kind: 'cut',    F }                                                   knocks F out of every piece painted before it
@@ -195,7 +197,7 @@ export function compose(pieces, icon = null) {
     const S = F.move(G, K.GROUND[0], K.GROUND[1], 3)
     F.subtract(S, G) // only the visible part: keeps the path small and the ground off the felt
     const d = traceD(S, K.TOL2, 0.15, 10)
-    if (d) out.push(['path', { d, fill: paint('shadow'), 'fill-opacity': K.GROUND_OP, class: 'wm-shadow' }])
+    if (d) out.push(['path', { d, fill: paint(list.find(p => p.groundRole)?.groundRole || 'shadow'), 'fill-opacity': K.GROUND_OP, class: 'wm-shadow' }])
   }
   // 4. every piece
   for (const p of list) {
@@ -233,7 +235,7 @@ export function compose(pieces, icon = null) {
       const S = F.copy(E)
       F.subtract(S, F.offset(F.copy(E), K.PINCH))
       const d = traceD(S, K.TOL2, 0.12, 10)
-      if (d) out.push(['path', attrs({ d, fill: paint('shadow'), 'fill-opacity': K.PINCH_OP }, c)])
+      if (d) out.push(['path', attrs({ d, fill: paint(p.shadeRole || 'shadow'), 'fill-opacity': p.pinchOp ?? K.PINCH_OP }, c)])
     }
     // shade: the panel minus itself shifted toward the light (lower-right crescent)
     if (p.shade !== false && deep > 0.55) {
@@ -242,7 +244,7 @@ export function compose(pieces, icon = null) {
       const S = F.copy(E)
       F.subtract(S, F.move(E, -sh[0], -sh[1], 3))
       const d = traceD(S, K.TOL2, 0.12, 10)
-      if (d) out.push(['path', attrs({ d, fill: paint('shadow'), 'fill-opacity': p.shadeOp ?? K.SHADE_OP }, c)])
+      if (d) out.push(['path', attrs({ d, fill: paint(p.shadeRole || 'shadow'), 'fill-opacity': p.shadeOp ?? K.SHADE_OP }, c)])
     }
     // highlight: the puffed-up top-left of the stuffing, inset from the seam
     if (p.hi !== false && deep > 1.05) {
@@ -252,7 +254,7 @@ export function compose(pieces, icon = null) {
       const hi = p.hiOff || [K.HI[0] * k, K.HI[1] * k]
       F.subtract(I, F.move(E, hi[0], hi[1], 3))
       const d = traceD(I, K.TOL2, 0.15, 10)
-      if (d) out.push(['path', attrs({ d, fill: paint('shine'), 'fill-opacity': p.hiOp ?? K.HI_OP }, p.part === 'K' || !multi ? (c && c !== 'wm-k' ? c : 'wm-shine') : c)])
+      if (d) out.push(['path', attrs({ d, fill: paint(p.hiRole || 'shine'), 'fill-opacity': p.hiOp ?? K.HI_OP }, p.part === 'K' || !multi ? (c && c !== 'wm-k' ? c : 'wm-shine') : c)])
     }
     // stitches
     const st = p.stitch === undefined ? 'auto' : p.stitch

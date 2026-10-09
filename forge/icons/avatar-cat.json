@@ -1,0 +1,92 @@
+{
+  "name": "avatar-cat",
+  "category": "avatars",
+  "description": "A cute cat face avatar, for profiles and playful apps.",
+  "aliases": [
+    "cat-avatar",
+    "kitty-avatar",
+    "kitten-avatar",
+    "cat-profile",
+    "cat-pfp",
+    "kitty-face",
+    "cat-portrait",
+    "neko-avatar"
+  ],
+  "tags": [
+    "avatar",
+    "animal",
+    "cat",
+    "cute",
+    "profile"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C8 20.5 5 18.25 5 14.5 C5 12.75 5.5 11.25 6 10.25 V5.5 C6 4.5 6.75 4.25 7.5 4.75 L10.25 7 C10.75 6.75 11.25 6.75 12 6.75 C12.75 6.75 13.25 6.75 13.75 7 L16.5 4.75 C17.25 4.25 18 4.5 18 5.5 V10.25 C18.5 11.25 19 12.75 19 14.5 C19 18.25 16 20.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M11.25 15.5 H12.75 L12 16.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 14.5 L6.5 15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 18 L6.5 16.75",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 14.5 L17.5 15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 18 L17.5 16.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C8 20.5 5 18.25 5 14.5 C5 12.75 5.5 11.25 6 10.25 V5.5 C6 4.5 6.75 4.25 7.5 4.75 L10.25 7 C10.75 6.75 11.25 6.75 12 6.75 C12.75 6.75 13.25 6.75 13.75 7 L16.5 4.75 C17.25 4.25 18 4.5 18 5.5 V10.25 C18.5 11.25 19 12.75 19 14.5 C19 18.25 16 20.5 12 20.5 Z",
+    "M7.5 6.5 V9 L9.25 7.75 Z",
+    "M16.5 6.5 V9 L14.75 7.75 Z",
+    "M15 17.5 A3 2 0 1 1 9 17.5 A3 2 0 1 1 15 17.5 Z"
+  ],
+  "cutouts": [
+    "M10.25 12.5 A0.75 1 0 1 1 8.75 12.5 A0.75 1 0 1 1 10.25 12.5 Z",
+    "M15.25 12.5 A0.75 1 0 1 1 13.75 12.5 A0.75 1 0 1 1 15.25 12.5 Z",
+    "M10.75 15.25 H13.25 L12 16.5 Z"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "animal avatar",
+    "pet avatar",
+    "face",
+    "kitten",
+    "kitty",
+    "feline",
+    "whiskers",
+    "meow",
+    "cat lover",
+    "neko",
+    "pet",
+    "cat face"
+  ]
+}

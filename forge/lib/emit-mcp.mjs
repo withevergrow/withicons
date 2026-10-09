@@ -14,7 +14,7 @@ import fs from 'fs'
 import path from 'path'
 import { createRequire } from 'module'
 import { fileURLToPath, pathToFileURL } from 'url'
-import { basePkg, writePkg, countText, totalText } from './emit-core.mjs'
+import { basePkg, writePkg, countText, totalText, cdnPkg } from './emit-core.mjs'
 import { fill } from './emit-search.mjs'
 
 // search writes the index we ship; motion (when present) writes the animation specs we expose;
@@ -265,7 +265,8 @@ export default async function emit(ctx) {
   for (const ic of ctx.icons) cats.set(ic.category, (cats.get(ic.category) || 0) + 1)
   const meta = {
     version,
-    styles: ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, ...(s.palette ? { palette: true, vars: s.vars || {} } : {}) })),
+    // static: the package with the style's standalone files when it is not @withicons/static (static-plus)
+    styles: ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, ...(s.palette ? { palette: true, vars: s.vars || {} } : {}), ...(cdnPkg(s.name, 'static') !== 'static' ? { static: cdnPkg(s.name, 'static') } : {}) })),
     categories: [...cats].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([name, count]) => ({ name, count })),
     icons: ctx.icons.map(ic => ({ name: ic.name, category: ic.category, description: ic.description, aliases: ic.aliases, tags: ic.tags })),
   }

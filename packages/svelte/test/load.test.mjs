@@ -34,3 +34,26 @@ test('index exports the lazy Icon and preloadStyles; /icon is IconAll', { skip }
   assert.equal(pkg.exports['./icon'].default, './dist/IconAll.svelte')
   for (const s of styles) assert.match(read('find-all.js'), new RegExp(`'\./${s}/nodes\.js'`))
 })
+
+// Each drawing ships once: the per-icon .svelte imports its own small data module (dist/<style>/nodes/<name>.js), and the
+// generic <Icon>'s nodes.js maps every name to those same modules. A deep import loads one icon, never its whole style.
+test('per-icon .svelte imports only its own drawing; nodes.js reuses the same modules', { skip }, async () => {
+  const url = f => 'file://' + path.join(dist, f).split(path.sep).join('/')
+  for (const s of styles) {
+    const svelte = read(`${s}/icons/home.svelte`)
+    assert.match(svelte, /import iconNode from '\.\.\/nodes\/home\.js'/, s)
+    assert.ok(!/\[\["/.test(svelte), `${s}: no inline drawing in the .svelte file`)
+    assert.match(read(`${s}/nodes.js`), /^import Home from '\.\/nodes\/home\.js'$/m, `${s}: nodes.js imports the per-icon module`)
+    // evaluating a whole style is 700+ modules: do it for the default style and one rich style only
+    if (s === 'line' || s === styles.at(-1)) {
+      const own = await import(url(`${s}/nodes/home.js`))
+      const all = await import(url(`${s}/nodes.js`))
+      assert.equal(all.nodes.home, own.default, `${s}: nodes.js shares the per-icon module`)
+      assert.ok(Array.isArray(own.default) && own.default.length, s)
+    }
+    // the per-icon module's static graph is itself plus the style's small shared values module
+    const deps = [...read(`${s}/nodes/home.js`).matchAll(/from '(\.[^']+)'/g)].map(m => m[1])
+    assert.ok(deps.every(d => d === '../values.js'), `${s}: ${deps}`)
+    assert.ok(fs.statSync(path.join(dist, s, 'values.js')).size < 16 * 1024, `${s}/values.js stays small`)
+  }
+})

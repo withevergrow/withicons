@@ -1,0 +1,39 @@
+{
+  "name": "peacock-feather",
+  "intent": "the feather sways from its quill and shimmers",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      6,
+      20
+    ],
+    "amount": 0.7,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      6,
+      20
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        16.5,
+        7.5
+      ],
+      "amount": 0.6,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "glow"
+    }
+  ]
+}

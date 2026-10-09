@@ -5,6 +5,8 @@ export interface ExportOptions {
   name?: string
   spec?: MotionSpec
   preset?: Preset
+  /** The icon's style: a 3D style plays the spec's 3D counterpart, a backdrop style keeps its tile still. */
+  style?: string
   /** 'loop' (default) | 'hover' (inline SVG only) | 'once' */
   trigger?: 'loop' | 'hover' | 'once'
   duration?: number
@@ -52,6 +54,8 @@ export interface VideoResult {
 export interface ResolvedMotion {
   preset: Preset; trigger: 'loop' | 'hover' | 'once'; loop: boolean; duration: number; k: number
   origin: [number, number]; dir: number; steps: number; ease: string; delay: number
+  /** Set only for a style that changes the motion (3D / backdrop). */
+  style?: string
 }
 export function parseSvg(svg: string): { attrs: Record<string, string>; inner: string }
 export function resolveMotion(options?: ExportOptions): ResolvedMotion

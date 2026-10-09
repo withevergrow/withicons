@@ -1,0 +1,71 @@
+{
+  "name": "broom",
+  "category": "halloween",
+  "description": "A witch's broom, for Halloween and cleaning.",
+  "aliases": [
+    "broomstick",
+    "witch-broom",
+    "besom",
+    "sweeping-brush",
+    "sweeper",
+    "flying-broom",
+    "clean-up"
+  ],
+  "tags": [
+    "halloween",
+    "witch",
+    "cleaning",
+    "tool",
+    "magic"
+  ],
+  "paths": [
+    {
+      "d": "M11 10 C8.75 11.75 4 13.25 2 15.5 L4.5 16.25 L5.25 18.75 L7.75 19.5 L8.5 22 C10.75 20 12.25 15.25 14 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M20.75 3.25 L14.25 9.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12.75 8.25 L11 10 L14 13 L15.75 11.25 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M10.75 13.25 L7.25 16.75",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M11 10 C8.75 11.75 4 13.25 2 15.5 L4.5 16.25 L5.25 18.75 L7.75 19.5 L8.5 22 C10.75 20 12.25 15.25 14 13 Z",
+    "M12.75 8.25 L11 10 L14 13 L15.75 11.25 Z"
+  ],
+  "cutouts": [
+    "M10.5 9.25 L14.75 13.5",
+    "M10.75 13.25 L7.25 16.75"
+  ],
+  "synonyms": [
+    "sweep",
+    "sweeping",
+    "clean",
+    "cleaning",
+    "cleanup",
+    "tidy",
+    "housework",
+    "chores",
+    "janitor",
+    "housekeeping",
+    "dust",
+    "clear",
+    "clear all",
+    "clean up",
+    "witch",
+    "flying",
+    "quidditch",
+    "magic",
+    "halloween",
+    "brush",
+    "broom stick",
+    "brom"
+  ]
+}

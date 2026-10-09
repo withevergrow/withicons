@@ -1,0 +1,9 @@
+{
+  "name": "avatar-dog",
+  "intent": "bobs happily and wags its floppy ears on hover",
+  "loop": { "preset": "bounce", "origin": [12,20.5], "amount": 0.4, "duration": 1.6 },
+  "hover": { "preset": "wiggle", "origin": [12,6], "amount": 0.8 },
+  "parts": { "A": { "preset": "blink", "origin": [12,12.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "nod", "origin": [12,20.5] },{ "preset": "jelly", "origin": [12,20.5] }],
+  "swap": [{ "to": "avatar-cat", "effect": "morph" },{ "to": "dog", "effect": "fade" },{ "to": "avatar-dog@solid", "effect": "scale" }]
+}

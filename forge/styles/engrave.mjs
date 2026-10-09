@@ -1,4 +1,5 @@
 // ENGRAVE — creative. Intaglio: crisp contour + shade-side swell + swelling burin hatch.
+import { snowmanFor } from './_line-snowman.mjs'
 import { pointInRing, simplify, resample } from '../kernel/geom.mjs'
 import { merge, subtract, ringsT, capsulesT, segsOf, ringD } from './_engrave-core.mjs'
 import { shadeCrescents } from './_engrave-shade.mjs'
@@ -356,6 +357,7 @@ export function makeEngrave(over = {}) {
     strokeWidth: false,
     root: { fill: 'none', stroke: 'currentColor', 'stroke-width': P.SW, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
     render(icon) {
+      icon = snowmanFor('engrave', icon)
       const R = prepareRegions(icon)
       // Motion parts (forge/MOTION.md "Parts choreography"): with more than one skeleton plate, the ink of each
       // plate (contour, dots, swell, body hatch) is its own node tagged wm-k / wm-a / wm-s; the cast shade is wm-shadow.

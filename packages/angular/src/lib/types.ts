@@ -1,8 +1,11 @@
 /** The 12 with icons styles. */
 export type WithIconVariant = 'line' | 'solid' | 'duo' | 'gloss' | 'engrave' | 'blueprint' | 'sketch' | 'glass' | 'kawaii' | 'sticker' | 'pixel' | 'retro';
 
-/** Flat list of SVG child elements: [tag, attributes]. */
-export type WithIconNode = ReadonlyArray<readonly [tag: string, attrs: Readonly<Record<string, string | number>>]>;
+/**
+ * List of SVG child elements: [tag, attributes]. Rich styles (gradients) start with one
+ * ['defs', {}, [[gradient tag, attributes, [['stop', attributes], ...]], ...]] element.
+ */
+export type WithIconNode = ReadonlyArray<readonly [tag: string, attrs: Readonly<Record<string, string | number>>, children?: WithIconNode]>;
 
 /** How a style dresses the root <svg>. */
 export interface WithIconStyle {

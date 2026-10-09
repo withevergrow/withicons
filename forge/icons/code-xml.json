@@ -1,0 +1,61 @@
+{
+  "name": "code-xml",
+  "category": "development",
+  "description": "Angle brackets around a slash, for code, HTML, XML and markup.",
+  "aliases": [
+    "xml-code",
+    "html-tag",
+    "markup-code",
+    "angle-brackets-slash",
+    "closing-tag",
+    "tag-code",
+    "xml-tag",
+    "jsx",
+    "embed-tag"
+  ],
+  "tags": [
+    "code",
+    "html",
+    "xml",
+    "markup",
+    "developer",
+    "tag"
+  ],
+  "paths": [
+    {
+      "d": "M7 7.5 L2.5 12 L7 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 4.5 L11.5 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 7.5 L22 12 L17.5 16.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "html",
+    "xml",
+    "markup",
+    "svg",
+    "tsx",
+    "web code",
+    "source code",
+    "tags",
+    "element",
+    "less than slash greater than",
+    "embed",
+    "snippet",
+    "frontend",
+    "web development",
+    "programming",
+    "coding",
+    "developer",
+    "view source",
+    "code view"
+  ]
+}

@@ -266,16 +266,20 @@ export const R = {
     k.surf(k.rr(4.4, 6, 19.6, 18, 1.2), 'edge', { inset: true, ol: 0.35, shine: 'none', shade: 0.6 }),
     k.surf(k.rr(11, 10.8, 18, 16.2, 1.1), 'c2', { part: 'a', shine: 'dot', shineSize: 0.6, ol: 0.4 }),
   ],
-  // a sakura piggy bank with a snout, an eye with a catch-light and a gold coin dropping in
+  // a sakura piggy bank in 3/4 view: round body, perky ear, an oval snout with two nostrils, a curly tail,
+  // stubby legs, an eye with a catch-light, the coin slot, and a gold coin dropping in
   'piggy-bank': (icon, k) => [
-    k.surf(k.join(k.rr(6, 16.4, 8.4, 21.4, 1), k.rr(13.8, 16.4, 16.2, 21.4, 1)), 'c2', { shine: 'none', ol: 0.4 }),
-    k.surf(k.path('M18.54 11 A8 6 0 0 0 16.6 8.7 L15.5 4.6 L13.5 7.3 A8 6 0 1 0 18.54 15 Z'), 'c2', { shineSize: 0.9 }),
-    k.surf(k.rr(18.2, 10.9, 21.4, 15.1, 1.2), 'c2', { shine: 'none', ol: 0.4 }),
-    k.paint(k.join(k.circle(19.4, 12.3, 0.4), k.circle(19.4, 13.7, 0.4)), 'ink'),
-    k.paint(k.ellipse(14.7, 11, 0.55, 0.75), 'ink', { part: 'a' }),
-    k.shine(k.circle(14.55, 10.7, 0.22)),
-    k.ink([[8.4, 10], [11.6, 10]], { w: 0.9, taper: false, part: 'a' }),
-    k.surf(k.circle(10, 4.6, 2), 'c3', { part: 'a', shine: 'dot', shineSize: 0.6, ol: 0.38 }),
+    k.surf(k.join(k.rr(5.6, 16.6, 8.4, 21.5, 1.3), k.rr(13.6, 16.6, 16.4, 21.5, 1.3)), 'c2', { shine: 'none', ol: 0.4 }),
+    k.tube(['M4.6 12.3 C2.9 12.4 2.2 11.2 2.8 10.2 C3.1 9.7 3.6 9.7 3.9 10'], 'c2', { w: 1.1, ol: 0.4 }),
+    k.surf(k.path('M17.1 8 C17.8 7 18.6 6.3 19.6 5.9 C19.9 7.5 19.5 9 18.6 10.4 Z'), 'c2', { shine: 'none', ol: 0.4 }),
+    k.surf(k.path('M13.6 9 C13.3 6.6 14.4 4.7 16.5 3.9 C17.4 5.8 17.7 8 16.9 10.1 Z'), 'c2', { shine: 'none', ol: 0.4 }),
+    k.surf(k.ellipse(11.75, 14, 7.75, 5.75), 'c2', { shineSize: 0.9 }),
+    k.surf(k.ellipse(19.75, 13.5, 1.9, 2.6), 'c2', { shine: 'none', ol: 0.4 }),
+    k.paint(k.join(k.ellipse(19.2, 13.1, 0.38, 0.55), k.ellipse(20.4, 13.1, 0.38, 0.55)), 'ink'),
+    k.paint(k.ellipse(15.6, 12.1, 0.75, 1), 'ink', { part: 'a' }),
+    k.shine(k.circle(15.35, 11.7, 0.26)),
+    k.ink([[8.5, 10.75], [11.5, 10.75]], { w: 0.95, taper: false, part: 'a' }),
+    k.surf(k.circle(10, 3.9, 1.95), 'c3', { part: 's', shine: 'dot', shineSize: 0.6, ol: 0.38 }),
   ],
   // a glossy sky pilcrow
   pilcrow: (icon, k) => [

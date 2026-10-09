@@ -1,0 +1,45 @@
+{
+  "name": "avatar-person-glasses",
+  "intent": "breathes calmly; a thoughtful tilt on hover",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "avatar-person",
+      "effect": "fade"
+    },
+    {
+      "to": "avatar-person-glasses@solid",
+      "effect": "fade"
+    }
+  ]
+}

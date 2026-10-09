@@ -1,0 +1,87 @@
+{
+  "name": "kalash",
+  "category": "indian-festivals",
+  "description": "A kalash pot with mango leaves and a coconut, for puja, blessings and new beginnings.",
+  "aliases": [
+    "kalasha",
+    "kalasam",
+    "purna-kumbha",
+    "poorna-kalash",
+    "mangal-kalash",
+    "kumbh",
+    "puja-pot",
+    "sacred-pot",
+    "kalash-pot"
+  ],
+  "synonyms": [
+    "puja",
+    "pooja",
+    "coconut",
+    "mango leaves",
+    "pot",
+    "brass pot",
+    "copper pot",
+    "blessing",
+    "auspicious",
+    "shubh",
+    "prosperity",
+    "new beginnings",
+    "griha pravesh",
+    "housewarming",
+    "wedding",
+    "navratri",
+    "ghatasthapana",
+    "durga puja",
+    "diwali",
+    "worship",
+    "hindu ritual",
+    "indian festival",
+    "india",
+    "kalas",
+    "kalsh"
+  ],
+  "tags": [
+    "puja",
+    "blessing",
+    "pot",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M9.25 12.5 C6 13.5 4.5 15.25 4.5 17.25 C4.5 19.75 7.5 21.5 12 21.5 C16.5 21.5 19.5 19.75 19.5 17.25 C19.5 15.25 18 13.5 14.75 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 10.5 H16 A1 1 0 0 1 16 12.5 H8 A1 1 0 0 1 8 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.75 17.25 C9.5 18.25 14.5 18.25 18.25 17.25",
+      "plate": "K"
+    },
+    {
+      "d": "M9.75 10.5 C9.25 9.25 9.25 7.75 9.75 6.5 C10.25 5 11 3.75 12 2.75 C13 3.75 13.75 5 14.25 6.5 C14.75 7.75 14.75 9.25 14.25 10.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8.25 10.5 C7.25 8.5 5.25 7 2.5 7 C3.25 9.25 5.25 10.5 8.25 10.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.75 10.5 C16.75 8.5 18.75 7 21.5 7 C20.75 9.25 18.75 10.5 15.75 10.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.25 12.5 C6 13.5 4.5 15.25 4.5 17.25 C4.5 19.75 7.5 21.5 12 21.5 C16.5 21.5 19.5 19.75 19.5 17.25 C19.5 15.25 18 13.5 14.75 12.5 Z",
+    "M8 10.5 H16 A1 1 0 0 1 16 12.5 H8 A1 1 0 0 1 8 10.5 Z",
+    "M9.75 10.5 C9.25 9.25 9.25 7.75 9.75 6.5 C10.25 5 11 3.75 12 2.75 C13 3.75 13.75 5 14.25 6.5 C14.75 7.75 14.75 9.25 14.25 10.5 Z",
+    "M8.25 10.5 C7.25 8.5 5.25 7 2.5 7 C3.25 9.25 5.25 10.5 8.25 10.5 Z",
+    "M15.75 10.5 C16.75 8.5 18.75 7 21.5 7 C20.75 9.25 18.75 10.5 15.75 10.5 Z"
+  ],
+  "cutouts": [
+    "M5.75 17.25 C9.5 18.25 14.5 18.25 18.25 17.25",
+    "M12 4.75 V7.5"
+  ]
+}

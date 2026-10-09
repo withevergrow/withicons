@@ -1,0 +1,51 @@
+{
+  "name": "calendar-span",
+  "intent": "the highlighted span of days sweeps across the page",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      13
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      15.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.4,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw",
+      "duration": 1.2
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "calendar-days",
+      "effect": "fade"
+    },
+    {
+      "to": "calendar",
+      "effect": "scale"
+    }
+  ]
+}

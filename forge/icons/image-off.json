@@ -1,0 +1,70 @@
+{
+  "name": "image-off",
+  "category": "media",
+  "description": "A picture crossed out, for missing images and hidden media.",
+  "aliases": [
+    "no-image",
+    "image-missing",
+    "broken-image",
+    "picture-off",
+    "hide-image",
+    "no-photo",
+    "image-disabled",
+    "image-hidden"
+  ],
+  "tags": [
+    "image",
+    "photo",
+    "missing",
+    "disabled",
+    "hidden"
+  ],
+  "paths": [
+    {
+      "d": "M9 4 H20 A2 2 0 0 1 22 6 V17",
+      "plate": "K"
+    },
+    {
+      "d": "M15 20 H4 A2 2 0 0 1 2 18 V7",
+      "plate": "K"
+    },
+    {
+      "d": "M2 17 L6 13 A1.41 1.41 0 0 1 8 13 L15 20",
+      "plate": "A"
+    },
+    {
+      "d": "M18.75 9.25 A1.75 1.75 0 1 1 15.25 9.25 A1.75 1.75 0 1 1 18.75 9.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9 4 H20 A2 2 0 0 1 22 6 V17 Z",
+    "M15 20 H4 A2 2 0 0 1 2 18 V7 Z"
+  ],
+  "cutouts": [
+    "M19 9.25 A2 2 0 1 1 15 9.25 A2 2 0 1 1 19 9.25 Z",
+    "M3.25 15.75 L6 13 A1.41 1.41 0 0 1 8 13 L13.75 18.75 H3.25 Z"
+  ],
+  "synonyms": [
+    "missing image",
+    "image not found",
+    "no picture",
+    "photo unavailable",
+    "failed to load",
+    "placeholder",
+    "hide photo",
+    "images off",
+    "media off",
+    "no media",
+    "blocked image",
+    "remove image",
+    "no thumbnail",
+    "image error",
+    "crossed out picture",
+    "photo-off"
+  ]
+}

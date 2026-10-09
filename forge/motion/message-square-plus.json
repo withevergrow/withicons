@@ -1,0 +1,56 @@
+{
+  "name": "message-square-plus",
+  "intent": "the plus pops inside the bubble, inviting a new conversation",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        10.5
+      ],
+      "amount": 1,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "spin-once",
+      "origin": [
+        12,
+        10.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-square",
+      "effect": "scale"
+    },
+    {
+      "to": "message-square-text",
+      "effect": "fade"
+    },
+    {
+      "to": "bot-message-square",
+      "effect": "flip"
+    }
+  ]
+}

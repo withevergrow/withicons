@@ -1,0 +1,39 @@
+{
+  "name": "chinese-knot",
+  "intent": "the lucky knot swings from its cord",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      2
+    ],
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        18.75
+      ],
+      "amount": 1.5,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "twinkle"
+    }
+  ]
+}

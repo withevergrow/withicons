@@ -1,0 +1,56 @@
+{
+  "name": "maximize-2",
+  "category": "layout",
+  "description": "Two diagonal arrows pointing out, for expand and full screen.",
+  "aliases": [
+    "expand-diagonal",
+    "fullscreen-alt",
+    "maximize-alt",
+    "arrows-out-diagonal",
+    "enlarge-alt",
+    "expand-alt",
+    "full-screen-alt"
+  ],
+  "tags": [
+    "expand",
+    "fullscreen",
+    "arrows",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 L10 10",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 3.5 H3.5 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 20.5 L14 14",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 20.5 H20.5 V14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "full screen",
+    "fullscreen",
+    "expand",
+    "enlarge",
+    "grow",
+    "zoom out view",
+    "bigger",
+    "open wide",
+    "resize",
+    "scale up",
+    "maximise",
+    "diagonal arrows",
+    "pop out",
+    "stretch"
+  ]
+}

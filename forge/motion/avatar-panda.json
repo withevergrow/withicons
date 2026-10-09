@@ -1,0 +1,8 @@
+{
+  "name": "avatar-panda",
+  "intent": "sways gently like a sleepy panda munching bamboo",
+  "loop": { "preset": "sway", "origin": [12,20.5], "amount": 0.7, "duration": 3.2 },
+  "hover": { "preset": "jelly", "origin": [12,20.5] },
+  "alt": [{ "preset": "breathe", "origin": [12,20.5] },{ "preset": "bounce", "origin": [12,20.5], "amount": 0.6 }],
+  "swap": [{ "to": "avatar-bear", "effect": "morph" },{ "to": "avatar-koala", "effect": "fade" },{ "to": "avatar-panda@solid", "effect": "scale" }]
+}

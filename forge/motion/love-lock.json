@@ -1,0 +1,60 @@
+{
+  "name": "love-lock",
+  "intent": "the heart lock clicks shut for good",
+  "loop": {
+    "preset": "beat",
+    "origin": [
+      12,
+      14.75
+    ],
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "shake"
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        8.5
+      ],
+      "amount": 0.8
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        4
+      ]
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "lock",
+      "effect": "morph"
+    },
+    {
+      "to": "unlock",
+      "effect": "flip"
+    },
+    {
+      "to": "love-lock@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "red-envelope",
+  "category": "lunar-new-year",
+  "description": "A red envelope (hongbao) with a gold seal, for gifts of luck.",
+  "aliases": [
+    "hongbao",
+    "hong-bao",
+    "ang-pao",
+    "angpao",
+    "red-packet",
+    "lai-see",
+    "li-xi",
+    "lucky-money",
+    "money-envelope",
+    "lucky-envelope"
+  ],
+  "synonyms": [
+    "envelope",
+    "red pocket",
+    "ang pow",
+    "angpow",
+    "lì xì",
+    "sebaetdon",
+    "otoshidama",
+    "lunar new year",
+    "chinese new year",
+    "gift money",
+    "cash gift",
+    "money gift",
+    "pocket money",
+    "bonus",
+    "blessing",
+    "luck",
+    "wedding gift",
+    "gift",
+    "reward",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "gift",
+    "money",
+    "luck",
+    "envelope"
+  ],
+  "paths": [
+    {
+      "d": "M7 2.5 H17 A2 2 0 0 1 19 4.5 V19.5 A2 2 0 0 1 17 21.5 H7 A2 2 0 0 1 5 19.5 V4.5 A2 2 0 0 1 7 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 7 L9.25 9.75",
+      "plate": "A"
+    },
+    {
+      "d": "M19 7 L14.75 9.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12 A2.5 2.5 0 1 1 9.5 12 A2.5 2.5 0 1 1 14.5 12 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7 2.5 H17 A2 2 0 0 1 19 4.5 V19.5 A2 2 0 0 1 17 21.5 H7 A2 2 0 0 1 5 19.5 V4.5 A2 2 0 0 1 7 2.5 Z"
+  ],
+  "cutouts": [
+    "M5 7 L9.25 9.75",
+    "M19 7 L14.75 9.75",
+    "M15.75 12 A3.75 3.75 0 1 1 8.25 12 A3.75 3.75 0 1 1 15.75 12 Z M14.25 12 A2.25 2.25 0 1 1 9.75 12 A2.25 2.25 0 1 1 14.25 12 Z"
+  ]
+}

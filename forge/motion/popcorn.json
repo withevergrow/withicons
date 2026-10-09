@@ -1,0 +1,35 @@
+{
+  "name": "popcorn",
+  "intent": "kernels pop up out of the bucket",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "origin": [
+        12,
+        10
+      ],
+      "amount": 0.6,
+      "duration": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ]
+}

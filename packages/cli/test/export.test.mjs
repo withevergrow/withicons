@@ -271,7 +271,7 @@ test('usage errors exit 2, unknown icons exit 1', () => {
   assert.equal(run(['export', 'home', '--format', 'webp-animated']).status, 2)
   assert.equal(run(['export', 'home', '--format', 'nope']).status, 2)
   assert.equal(run(['export', 'home', '--background', 'tomato-ish']).status, 2)
-  assert.equal(run(['export', 'home', '--motion', 'wobble']).status, 2)
+  assert.equal(run(['export', 'home', '--motion', 'wobbly']).status, 2)
   assert.equal(run(['export', 'home', '--padding', '2']).status, 2)
   assert.equal(run(['export']).status, 2)
   assert.equal(run(['export', 'setings']).status, 1)

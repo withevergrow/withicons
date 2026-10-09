@@ -1,0 +1,76 @@
+{
+  "name": "globe-lock",
+  "category": "security",
+  "description": "A globe with a padlock, for secure web, VPN and privacy.",
+  "aliases": [
+    "secure-web",
+    "vpn",
+    "secure-internet",
+    "web-security",
+    "private-network",
+    "secure-browsing",
+    "internet-lock",
+    "world-lock"
+  ],
+  "synonyms": [
+    "secure connection",
+    "https",
+    "ssl",
+    "tls",
+    "encrypted",
+    "encryption",
+    "privacy",
+    "private",
+    "protected",
+    "online security",
+    "cyber security",
+    "cybersecurity",
+    "firewall",
+    "geo block",
+    "region locked",
+    "global security",
+    "safe browsing",
+    "proxy",
+    "internet privacy",
+    "locked globe",
+    "world wide web"
+  ],
+  "tags": [
+    "security",
+    "web",
+    "privacy",
+    "vpn",
+    "internet"
+  ],
+  "paths": [
+    {
+      "d": "M11.5 20 A9 9 0 1 1 20 11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.75 11.5 C14.75 7.75 13.5 4.5 11 2 C8.5 4.5 7.25 7.75 7.25 11 C7.25 14.25 8.5 17.5 11 20",
+      "plate": "A"
+    },
+    {
+      "d": "M2 11 H20",
+      "plate": "A"
+    },
+    {
+      "d": "M15.25 16.5 H19.75 A1.25 1.25 0 0 1 21 17.75 V20.25 A1.25 1.25 0 0 1 19.75 21.5 H15.25 A1.25 1.25 0 0 1 14 20.25 V17.75 A1.25 1.25 0 0 1 15.25 16.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M15.75 16.5 V15 A1.75 1.75 0 0 1 19.25 15 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M11.5 20 A9 9 0 1 1 20 11.5 A6.5 6.5 0 0 0 11.5 20 Z",
+    "M15.25 16.5 H19.75 A1.25 1.25 0 0 1 21 17.75 V20.25 A1.25 1.25 0 0 1 19.75 21.5 H15.25 A1.25 1.25 0 0 1 14 20.25 V17.75 A1.25 1.25 0 0 1 15.25 16.5 Z"
+  ],
+  "cutouts": [
+    "M11 1 C8.5 4.5 7.25 7.75 7.25 11 C7.25 14.25 8.5 17.5 11 21",
+    "M14.75 11.5 C14.75 7.75 13.5 4.5 11 1",
+    "M1 11 H20.5"
+  ]
+}

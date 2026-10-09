@@ -1,0 +1,34 @@
+{
+  "name": "contrast",
+  "intent": "turns half a circle like switching light to dark",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sun-moon",
+      "effect": "rotate"
+    },
+    {
+      "to": "moon",
+      "effect": "spin"
+    },
+    {
+      "to": "sun",
+      "effect": "spin"
+    }
+  ]
+}

@@ -7,6 +7,10 @@ type Attrs = Record<string, string | number>;
 const warned = new Set<string>();
 const GEOMETRY = ['cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'width', 'height', 'x1', 'y1', 'x2', 'y2', 'points'];
 const pathCache = new WeakMap<WithIconNode, ReadonlyArray<Attrs>>();
+const gradCache = new WeakMap<WithIconNode, ReadonlyArray<Grad>>();
+/** A gradient of a rich style: <linearGradient> or <radialGradient> with its <stop>s. */
+interface Grad { readonly radial: boolean; readonly attrs: Attrs; readonly stops: ReadonlyArray<Attrs> }
+let uidCounter = 0;
 
 /** Geometry-equivalent path data for the basic SVG shapes (null for anything else). */
 function shapeToD(tag: string, a: Readonly<Record<string, string | number>>): string | null {
@@ -38,12 +42,40 @@ function shapeToD(tag: string, a: Readonly<Record<string, string | number>>): st
   return null;
 }
 
+/** The gradient definitions of a rich style's icon (its ['defs', {}, [...]] element), cached per node array. */
+function gradsOf(node: WithIconNode): ReadonlyArray<Grad> {
+  let out = gradCache.get(node);
+  if (!out) {
+    const list: Grad[] = [];
+    for (const [tag, , kids] of node) {
+      if (tag !== 'defs' || !kids) continue;
+      for (const [t, a, stops] of kids) {
+        if (t !== 'linearGradient' && t !== 'radialGradient') continue;
+        list.push({ radial: t === 'radialGradient', attrs: a as Attrs, stops: (stops || []).filter(x => x[0] === 'stop').map(x => x[1] as Attrs) });
+      }
+    }
+    gradCache.set(node, (out = list));
+  }
+  return out;
+}
+/** Gradient ids get this copy's suffix, and so does every url(#id) that points at them. */
+function withSuffix(a: Attrs, sfx: string): Attrs {
+  let b: Attrs | null = null;
+  for (const k of Object.keys(a)) {
+    const v = a[k];
+    const w = k === 'id' ? v + sfx : typeof v === 'string' && v.indexOf('url(#') >= 0 ? v.replace(/url\(#([^)\s]+)\)/g, 'url(#$1' + sfx + ')') : v;
+    if (w !== v) { if (!b) b = { ...a }; b[k] = w; }
+  }
+  return b || a;
+}
+
 /** IconNode -> attribute maps for <path> elements (cached per node array). */
 function pathsOf(node: WithIconNode): ReadonlyArray<Attrs> {
   let out = pathCache.get(node);
   if (!out) {
     const list: Attrs[] = [];
     for (const [tag, attrs] of node) {
+      if (tag === 'defs') continue;
       if (tag === 'path') { list.push(attrs as Attrs); continue; }
       const d = shapeToD(tag, attrs);
       if (d === null) continue;
@@ -80,6 +112,11 @@ function pathsOf(node: WithIconNode): ReadonlyArray<Attrs> {
   template:
     '@if (found) {<svg [withAttrs]="rootAttrs">' +
     '@if (title) {<svg:title>{{ title }}</svg:title>}' +
+    // rich styles: gradient definitions (ids unique per <with-icon>, see update())
+    '@if (grads.length) {<svg:defs>@for (g of grads; track $index) {' +
+    '@if (g.radial) {<svg:radialGradient [withAttrs]="g.attrs">@for (s of g.stops; track $index) {<svg:stop [withAttrs]="s" />}</svg:radialGradient>}' +
+    '@else {<svg:linearGradient [withAttrs]="g.attrs">@for (s of g.stops; track $index) {<svg:stop [withAttrs]="s" />}</svg:linearGradient>}' +
+    '}</svg:defs>}' +
     '@for (p of paths; track $index) {<svg:path [withAttrs]="p" />}' +
     '<ng-content /></svg>}',
 })
@@ -108,6 +145,9 @@ export class WithIconComponent implements OnChanges, OnInit {
   private readonly registry = inject(WITH_ICONS, { optional: true });
   protected rootAttrs: Attrs = {};
   protected paths: ReadonlyArray<Attrs> = [];
+  protected grads: ReadonlyArray<Grad> = [];
+  /** this copy's gradient-id suffix: two rich icons on one page never paint with each other's gradients */
+  private readonly uid = '-w' + (++uidCounter);
   protected found = false;
   private ready = false;
 
@@ -147,7 +187,10 @@ export class WithIconComponent implements OnChanges, OnInit {
     if (this.title || this.ariaLabel || this.ariaLabelledby) a['role'] = 'img';
     else a['aria-hidden'] = 'true';
     this.rootAttrs = a;
-    this.paths = data ? pathsOf(data.node) : [];
+    const grads = data ? gradsOf(data.node) : [];
+    const sfx = this.uid;
+    this.grads = grads.length ? grads.map(g => ({ radial: g.radial, attrs: withSuffix(g.attrs, sfx), stops: g.stops })) : grads;
+    this.paths = data ? (grads.length ? pathsOf(data.node).map(p => withSuffix(p, sfx)) : pathsOf(data.node)) : [];
     this.found = !!data;
   }
 }

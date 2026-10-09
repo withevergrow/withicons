@@ -1,39 +1,39 @@
 {
   "name": "piggy-bank",
-  "intent": "swells with savings and blinks now and then; pops as a coin goes in",
+  "intent": "swells with savings as the gold coin drops in; pops as a coin goes in",
   "loop": {
     "preset": "pulse",
-    "origin": [14.75, 11],
+    "origin": [11.75, 21],
     "amount": 0.35,
-    "duration": 3.6
+    "duration": 3.2
   },
   "hover": {
     "preset": "pop",
-    "origin": [14.75, 11],
+    "origin": [11.75, 21],
     "amount": 0.8
   },
   "parts": {
-    "A": {
-      "preset": "blink",
-      "origin": [14.75, 11],
-      "duration": 3.6,
-      "delay": 0.4
+    "S": {
+      "preset": "drop",
+      "origin": [9.5, 4],
+      "amount": 0.6,
+      "duration": 1.6
     }
   },
   "deco": "twinkle",
   "alt": [
     {
       "preset": "rock",
-      "origin": [11, 21.5],
+      "origin": [11.75, 21.5],
       "amount": 0.5
     },
     {
       "preset": "wiggle",
-      "origin": [11, 21.5]
+      "origin": [11.75, 21.5]
     },
     {
       "preset": "jelly",
-      "origin": [11, 21.5]
+      "origin": [11.75, 21.5]
     }
   ],
   "swap": [

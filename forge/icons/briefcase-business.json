@@ -1,0 +1,79 @@
+{
+  "name": "briefcase-business",
+  "category": "objects",
+  "description": "A briefcase with a middle band, for business, work and company accounts.",
+  "aliases": [
+    "business-bag",
+    "business-case",
+    "work-case",
+    "attache",
+    "attache-case",
+    "business-account",
+    "company-account",
+    "portfolio-case",
+    "executive-case"
+  ],
+  "tags": [
+    "business",
+    "work",
+    "job",
+    "company",
+    "office",
+    "career"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7.5 V5.5 A2 2 0 0 1 10.5 3.5 H13.5 A2 2 0 0 1 15.5 5.5 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 13 H9.5 M14.5 13 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 11 H13.5 A1 1 0 0 1 14.5 12 V14.5 A1 1 0 0 1 13.5 15.5 H10.5 A1 1 0 0 1 9.5 14.5 V12 A1 1 0 0 1 10.5 11 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 7.5 H19.5 A2 2 0 0 1 21.5 9.5 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V9.5 A2 2 0 0 1 4.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M2.5 13 H8.25",
+    "M15.75 13 H21.5",
+    "M9.75 9.25 H14.25 A2.5 2.5 0 0 1 16.75 11.75 V14.75 A2.5 2.5 0 0 1 14.25 17.25 H9.75 A2.5 2.5 0 0 1 7.25 14.75 V11.75 A2.5 2.5 0 0 1 9.75 9.25 Z M10.5 10 H13.5 A2 2 0 0 1 15.5 12 V14.5 A2 2 0 0 1 13.5 16.5 H10.5 A2 2 0 0 1 8.5 14.5 V12 A2 2 0 0 1 10.5 10 Z"
+  ],
+  "synonyms": [
+    "work",
+    "job",
+    "jobs",
+    "career",
+    "careers",
+    "employment",
+    "occupation",
+    "office",
+    "corporate",
+    "company",
+    "enterprise",
+    "b2b",
+    "business plan",
+    "business profile",
+    "business tools",
+    "workspace",
+    "professional",
+    "hiring",
+    "experience",
+    "work history",
+    "business trip",
+    "commute",
+    "luggage",
+    "brief case",
+    "suitcase",
+    "work mode",
+    "business"
+  ]
+}

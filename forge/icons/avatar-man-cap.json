@@ -1,0 +1,93 @@
+{
+  "name": "avatar-man-cap",
+  "category": "avatars",
+  "description": "A friendly avatar of a man in a cap, for profiles and casual users.",
+  "aliases": [
+    "man-cap",
+    "cap-avatar",
+    "baseball-cap",
+    "man-in-cap",
+    "cap-man",
+    "casual-man",
+    "ball-cap",
+    "snapback"
+  ],
+  "tags": [
+    "person",
+    "man",
+    "cap",
+    "avatar",
+    "casual"
+  ],
+  "paths": [
+    {
+      "d": "M6.75 9 A5.5 6 0 1 0 17.25 9",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M10 13.5 C11 14.5 13 14.5 14 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 9 C6.5 5.5 8.75 2.75 12 2.75 C15.25 2.75 17.5 5.5 17.25 9 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17.25 9 H20.5 C21.25 9 21.25 10 20.5 10.25 C19.25 10.75 18 10.75 17.25 10.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2.75 V3.75",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 21.5 C4.5 19.25 6.25 18 8.5 18 C9.75 18 10.75 18.75 12 18.75 C13.25 18.75 14.25 18 15.5 18 C17.75 18 19.5 19.25 19.5 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A5.5 6 0 1 1 6.5 10.5 A5.5 6 0 1 1 17.5 10.5 Z",
+    "M6.75 9 C6.5 5.5 8.75 2.75 12 2.75 C15.25 2.75 17.5 5.5 17.25 9 Z",
+    "M17.25 9 H20.5 C21.25 9 21.25 10 20.5 10.25 C19.25 10.75 18 10.75 17.25 10.25 Z",
+    "M4.5 21.5 C4.5 19.25 6.25 18 8.5 18 C9.75 18 10.75 18.75 12 18.75 C13.25 18.75 14.25 18 15.5 18 C17.75 18 19.5 19.25 19.5 21.5 Z"
+  ],
+  "cutouts": [
+    "M10.25 10.75 A0.75 1 0 1 1 8.75 10.75 A0.75 1 0 1 1 10.25 10.75 Z",
+    "M15.25 10.75 A0.75 1 0 1 1 13.75 10.75 A0.75 1 0 1 1 15.25 10.75 Z",
+    "M10 13.5 C11 14.5 13 14.5 14 13.5",
+    "M6.75 9 H17.25",
+    "M17.25 9 V10.25"
+  ],
+  "synonyms": [
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "account",
+    "profile",
+    "member",
+    "contact",
+    "people",
+    "man",
+    "male",
+    "cap",
+    "hat",
+    "baseball",
+    "sport",
+    "casual",
+    "delivery driver",
+    "courier",
+    "coach",
+    "trucker hat",
+    "streetwear",
+    "guy",
+    "gamer"
+  ]
+}

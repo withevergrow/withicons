@@ -3,6 +3,7 @@
 //   dist/svg/<style>/<name>.svg    standalone files (jsDelivr-friendly)
 //   dist/icons.json                metadata
 import { groupOfStyle } from '../tools/style-groups.mjs'
+import { cdnPkg, isAwayStyle } from './emit-core.mjs'
 import { distWriter, basePkg, writePkg, innerOf, flattenVars, countText, totalText, paletteDoc, rtlDoc, motionDoc } from './emit-core.mjs'
 
 const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
@@ -12,10 +13,14 @@ export default async function emit(ctx) {
   const P = 'packages/static'
   const out = distWriter(ctx, P + '/dist')
   const styleNames = ctx.styles.map(s => s.name)
+  // the newest styles' files go to @withicons/static-plus, same paths (jsDelivr serves at most 150 MB per package)
+  const away = styleNames.filter(isAwayStyle)
+  const outPlus = distWriter(ctx, 'packages/static-plus/dist')
   let svgs = 0
   const sizes = {}
   const fileSizes = []   // standalone files of the default style, for the README
   for (const st of ctx.styles) {
+    const W = isAwayStyle(st.name) ? outPlus : out
     const symbols = []
     for (const i of ctx.icons) {
       symbols.push(`<symbol id="with-${i.name}" viewBox="0 0 24 24"${attrs(st.root)}>${innerOf(ctx, i, st.name)}</symbol>`)
@@ -23,17 +28,36 @@ export default async function emit(ctx) {
       // the sprite keeps them, so <use> icons can be re-themed from the page
       if (i.render[st.name]) {
         const t = flattenVars(i.render[st.name].svg) + '\n'
-        out.add(`svg/${st.name}/${i.name}.svg`, t); svgs++
+        W.add(`svg/${st.name}/${i.name}.svg`, t); svgs++
         if (st.name === ctx.defaultStyle) fileSizes.push(Buffer.byteLength(t))
       }
     }
     const sprite = `<svg xmlns="http://www.w3.org/2000/svg">\n${symbols.join('\n')}\n</svg>\n`
     sizes[st.name] = Math.round(Buffer.byteLength(sprite) / 1024)
-    out.add(`sprite-${st.name}.svg`, sprite)
+    W.add(`sprite-${st.name}.svg`, sprite)
   }
   const meta = ctx.icons.map(i => ({ name: i.name, category: i.category, description: i.description, aliases: i.aliases, tags: i.tags, styles: styleNames.filter(s => i.render[s]) }))
   out.add('icons.json', JSON.stringify(meta, null, 1) + '\n')
   await out.flush()
+  await outPlus.flush()
+  if (away.length) writePkg(ctx, 'static-plus', {
+    ...basePkg(ctx, '@withicons/static-plus', `The ${away.length} newest with icons styles (${away.join(', ')}) as SVG sprites and standalone SVG files. Companion of @withicons/static.`, ['svg-sprite', 'static', 'cdn', 'svg-icons', ...away]),
+    sideEffects: false,
+    jsdelivr: './package.json', unpkg: './package.json',
+    files: ['dist', 'README.md', 'LICENSE'],
+  }, `# @withicons/static-plus
+
+The newest with icons styles (${away.map(x => '\`' + x + '\`').join(', ')}) as plain SVG, laid out exactly like
+[\`@withicons/static\`](https://www.npmjs.com/package/@withicons/static) (which holds the other styles and \`icons.json\`).
+They live here because jsDelivr serves at most 150 MB per package.
+
+\`\`\`html
+<img src="https://cdn.jsdelivr.net/npm/@withicons/static-plus@latest/dist/svg/${away[0]}/home.svg" width="24" height="24" alt="Home">
+<svg width="24" height="24"><use href="sprite-${away[0]}.svg#with-home"/></svg>   <!-- dist/sprite-${away[0]}.svg, self-hosted -->
+\`\`\`
+
+MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+`)
 
   const pkg = {
     ...basePkg(ctx, '@withicons/static', `${countText(ctx)} as SVG sprites and standalone SVG files. No JavaScript.`, ['svg-sprite', 'static', 'cdn', 'svg-icons', 'multicolor-icons', ...styleNames]),
@@ -57,7 +81,10 @@ ${countText(ctx)} (${totalText(ctx)} SVGs) as plain SVG: one sprite per style pl
 npm i @withicons/static
 \`\`\`
 
-## Single SVGs (CDN): only the icons you use
+${(() => { const aw = ctx.styles.map(x => x.name).filter(isAwayStyle), t = '`'; return aw.length ? `The newest styles (${aw.map(x => t + x + t).join(', ')}) live in [${t}@withicons/static-plus${t}](https://www.npmjs.com/package/@withicons/static-plus)
+with the same paths (jsDelivr serves at most 150 MB per package): ${t}https://cdn.jsdelivr.net/npm/@withicons/static-plus@latest/dist/svg/${aw[0]}/home.svg${t}.
+
+` : '' })()}## Single SVGs (CDN): only the icons you use
 
 Each icon in each style is its own file, so a page downloads exactly the icons it shows (a \`${ctx.defaultStyle}\` icon is
 typically ${sizes.file} bytes):

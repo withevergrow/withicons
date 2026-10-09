@@ -1,0 +1,27 @@
+{
+  "name": "car-front",
+  "intent": "idles and rolls toward you, lights on",
+  "loop": {
+    "preset": "bounce",
+    "amount": 0.3,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "car",
+      "effect": "flip"
+    }
+  ]
+}

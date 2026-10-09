@@ -1,0 +1,76 @@
+{
+  "name": "spider-web",
+  "category": "halloween",
+  "description": "A corner spider web, for Halloween and spooky decor.",
+  "aliases": [
+    "cobweb",
+    "spiderweb",
+    "web-corner",
+    "corner-web",
+    "cobwebs",
+    "spider-net",
+    "halloween-web"
+  ],
+  "tags": [
+    "halloween",
+    "spooky",
+    "decoration",
+    "corner",
+    "web"
+  ],
+  "paths": [
+    {
+      "d": "M3 3 L21.5 3 M3 3 L3 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L19 12.25 M3 3 L12.25 19",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 3 Q8.25 4.5 8.75 6.25 Q6.75 6.75 6.25 8.75 Q4.5 8.25 3 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 3 Q12.75 5.5 13.5 9 Q10.25 10.25 9 13.5 Q5.5 12.75 3 15",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 3 Q17.25 6.75 18.25 11.75 Q13.5 13.5 11.75 18.25 Q6.75 17.25 3 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 3 L20.5 3 Q17.25 6.75 18.25 11.75 Q13.5 13.5 11.75 18.25 Q6.75 17.25 3 20.5 Z"
+  ],
+  "cutouts": [
+    "M3 3 L19 12.25",
+    "M3 3 L12.25 19",
+    "M9.5 3 Q8.25 4.5 8.75 6.25 Q6.75 6.75 6.25 8.75 Q4.5 8.25 3 9.5",
+    "M15 3 Q12.75 5.5 13.5 9 Q10.25 10.25 9 13.5 Q5.5 12.75 3 15"
+  ],
+  "synonyms": [
+    "web",
+    "webs",
+    "spider",
+    "silk",
+    "trap",
+    "tangle",
+    "tangled",
+    "net",
+    "mesh",
+    "dusty",
+    "abandoned",
+    "old",
+    "neglected",
+    "cobwebby",
+    "creepy",
+    "spooky",
+    "haunted",
+    "halloween decor",
+    "decoration",
+    "corner decoration",
+    "cob web",
+    "spidder web"
+  ]
+}

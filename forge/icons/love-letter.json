@@ -1,0 +1,75 @@
+{
+  "name": "love-letter",
+  "category": "valentines",
+  "description": "An open envelope with a heart letter, for love notes and Valentine's Day.",
+  "aliases": [
+    "love-note",
+    "valentine-card",
+    "heart-envelope",
+    "envelope-heart",
+    "mail-heart",
+    "love-mail",
+    "valentine-letter",
+    "love-message"
+  ],
+  "synonyms": [
+    "love letter",
+    "love note",
+    "valentine",
+    "valentines day",
+    "valentine card",
+    "card",
+    "greeting card",
+    "letter",
+    "envelope",
+    "open envelope",
+    "romantic message",
+    "secret admirer",
+    "sweetheart",
+    "love",
+    "romance",
+    "invitation",
+    "wedding invitation",
+    "save the date",
+    "thank you note",
+    "fan mail",
+    "heart mail",
+    "pen pal",
+    "dating app message",
+    "anniversary card"
+  ],
+  "tags": [
+    "valentine",
+    "love",
+    "letter",
+    "envelope",
+    "romance"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 10 H4.5 A2 2 0 0 0 2.5 12 V19 A2 2 0 0 0 4.5 21 H19.5 A2 2 0 0 0 21.5 19 V12 A2 2 0 0 0 19.5 10 H18.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 10.5 L12 17 L21.5 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 12.75 L5.5 5 C5.5 4.25 6.25 3.5 7 3.5 L17 3.5 C17.75 3.5 18.5 4.25 18.5 5 L18.5 12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12 11.5 C12 11.5 9 9.75 9 7.5 C9 6.75 9.75 6 10.5 6 C11.25 6 11.75 6.25 12 6.75 C12.25 6.25 12.75 6 13.5 6 C14.25 6 15 6.75 15 7.5 C15 9.75 12 11.5 12 11.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 10 H5.5 V5 A1.5 1.5 0 0 1 7 3.5 H17 A1.5 1.5 0 0 1 18.5 5 V10 H19.5 A2 2 0 0 1 21.5 12 V19 A2 2 0 0 1 19.5 21 H4.5 A2 2 0 0 1 2.5 19 V12 A2 2 0 0 1 4.5 10 Z"
+  ],
+  "cutouts": [
+    "M2.5 10.5 L12 17 L21.5 10.5",
+    "M3 10 H5.5",
+    "M18.5 10 H21",
+    "M12 11.5 C12 11.5 9 9.75 9 7.5 C9 6.75 9.75 6 10.5 6 C11.25 6 11.75 6.25 12 6.75 C12.25 6.25 12.75 6 13.5 6 C14.25 6 15 6.75 15 7.5 C15 9.75 12 11.5 12 11.5 Z"
+  ]
+}

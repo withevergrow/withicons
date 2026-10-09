@@ -1,0 +1,76 @@
+{
+  "name": "receipt-text",
+  "category": "commerce",
+  "description": "A receipt with text lines, for invoices, bills and order details.",
+  "aliases": [
+    "invoice-text",
+    "itemized-receipt",
+    "itemised-receipt",
+    "bill-details",
+    "invoice-details",
+    "order-details",
+    "line-items",
+    "receipt-lines",
+    "sales-receipt",
+    "billing-statement"
+  ],
+  "tags": [
+    "invoice",
+    "billing",
+    "order",
+    "payment",
+    "paper",
+    "itemized"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V21.5 L17 19.5 L14.5 21.5 L12 19.5 L9.5 21.5 L7 19.5 L4.5 21.5 V4.5 A2 2 0 0 1 6.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 7 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 11 H11 M14 11 H15.5 M8.5 15 H11 M14 15 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 2.5 H17.5 A2 2 0 0 1 19.5 4.5 V21.5 L17 19.5 L14.5 21.5 L12 19.5 L9.5 21.5 L7 19.5 L4.5 21.5 V4.5 A2 2 0 0 1 6.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 7 H15.5",
+    "M8.5 11 H11",
+    "M14 11 H15.5",
+    "M8.5 15 H11",
+    "M14 15 H15.5"
+  ],
+  "synonyms": [
+    "invoice",
+    "bill",
+    "billing",
+    "statement",
+    "order summary",
+    "purchase",
+    "payment",
+    "paid",
+    "expense",
+    "expenses",
+    "checkout",
+    "total",
+    "subtotal",
+    "tax",
+    "vat",
+    "price list",
+    "line item",
+    "items",
+    "accounting",
+    "bookkeeping",
+    "proof of purchase",
+    "refund",
+    "transaction details",
+    "reciept",
+    "recipt"
+  ]
+}

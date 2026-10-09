@@ -1,0 +1,34 @@
+{
+  "name": "infinity",
+  "intent": "the endless loop breathes on and on, never stopping",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 1.2
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "repeat",
+      "effect": "morph"
+    },
+    {
+      "to": "refresh",
+      "effect": "rotate"
+    }
+  ]
+}

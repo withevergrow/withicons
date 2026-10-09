@@ -1,0 +1,87 @@
+{
+  "name": "avatar-baby",
+  "category": "avatars",
+  "description": "A friendly avatar of a baby, for family, parenting and baby apps.",
+  "aliases": [
+    "baby-avatar",
+    "baby-face",
+    "babe",
+    "little-one",
+    "bub",
+    "baby-profile",
+    "infant-avatar",
+    "newborn-avatar"
+  ],
+  "tags": [
+    "person",
+    "baby",
+    "child",
+    "avatar",
+    "family"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 10.5 A5.5 6 0 1 1 6.5 10.5 A5.5 6 0 1 1 17.5 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M10 13.5 C11 14.5 13 14.5 14 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4.75 C11 4 11.25 2.5 12.5 2.5 C13.5 2.5 13.75 3.5 13 4",
+      "plate": "A"
+    },
+    {
+      "d": "M6 21.5 C6 19.5 7.5 18.25 9.5 18.25 C10.5 18.25 11 18.75 12 18.75 C13 18.75 13.5 18.25 14.5 18.25 C16.5 18.25 18 19.5 18 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 18.5 C9.5 20.25 10.5 21 12 21 C13.5 21 14.5 20.25 14.5 18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A5.5 6 0 1 1 6.5 10.5 A5.5 6 0 1 1 17.5 10.5 Z",
+    "M6 21.5 C6 19.5 7.5 18.25 9.5 18.25 C10.5 18.25 11 18.75 12 18.75 C13 18.75 13.5 18.25 14.5 18.25 C16.5 18.25 18 19.5 18 21.5 Z",
+    "M9.5 18.5 C9.5 20.25 10.5 21 12 21 C13.5 21 14.5 20.25 14.5 18.5 Z"
+  ],
+  "cutouts": [
+    "M10.25 10.75 A0.75 1 0 1 1 8.75 10.75 A0.75 1 0 1 1 10.25 10.75 Z",
+    "M15.25 10.75 A0.75 1 0 1 1 13.75 10.75 A0.75 1 0 1 1 15.25 10.75 Z",
+    "M10 13.5 C11 14.5 13 14.5 14 13.5",
+    "M9.5 18.5 C9.5 20.25 10.5 21 12 21 C13.5 21 14.5 20.25 14.5 18.5"
+  ],
+  "synonyms": [
+    "baby",
+    "infant",
+    "newborn",
+    "toddler",
+    "kid",
+    "child",
+    "family",
+    "parenting",
+    "nursery",
+    "daycare",
+    "childcare",
+    "bib",
+    "curl",
+    "new parent",
+    "maternity",
+    "paternity",
+    "birth",
+    "son",
+    "daughter",
+    "cute",
+    "pfp",
+    "member"
+  ]
+}

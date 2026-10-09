@@ -6,7 +6,42 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+### Added
+- 14 new styles (34 in all): the rich styles `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d` and `brutal`,
+  whose colours (gradient stops included) are role-named CSS variables, and six holiday styles: `utsav`, `rangoli`
+  (Diwali, Durga Puja, Holi), `halloween`, `christmas`, `lunar` (Lunar New Year) and `valentine`, each with festival
+  palettes. `glass` is redrawn with soft gradients.
+- `@withicons/holiday`: the six holiday styles' SVGs and node data (core layout in `dist/`, icon classes in
+  `dist/classes/`). `@withicons/soft3d` holds `soft3d` the same way.
+- Companion packages that keep every package under the CDN size limit, with the same paths as their base package:
+  `@withicons/core-plus` and `@withicons/classes-plus` (clay, bento, suite, dock, liquid, chrome, brutal),
+  `@withicons/web-plus` and `@withicons/static-plus` (every newer style). Framework packages hold every style.
+- Duo has an accent detail (`--with-duo-accent`), an opt-in gradient render and colour presets.
+- 234 new icons (734 in all), among them 39 avatars (`avatar-man` and `avatar-woman` first, as the standard defaults), 95 festival icons (Indian festivals, Christmas, Lunar New Year,
+  Valentine's, Halloween) and a new AI category; each with its own animation and palettes.
+- `@withicons/motion`: in the 3D styles (clay, dock, liquid, chrome, soft3d, luxe, skeuo, glass, plush) an icon's own
+  motion plays as its 3D counterpart (`STYLES_3D`, `styleSpec`).
+- Site: a skin-tone picker in the studio's Colours panel for people avatars (six tones, light to deep; it changes only
+  the skin and keeps the hair and clothes).
+- Site: "Download all" zips per style (SVGs plus an offline viewer) and one with every style, offered on every style hub, the library's style picker and each icon page.
+- Site: an "Every style" bento on the home page (one card per style), Duo looks in the studio (classic, with an accent,
+  gradient), and free holiday pages (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's Day).
+
 ### Changed
+- Smaller framework packages, every one well under jsDelivr's 150 MB per-package limit, with no import path changed:
+  `@withicons/solid` 207 MB -> ~92 MB and `@withicons/svelte` 208 MB -> ~102 MB (each drawing now ships once instead
+  of twice), `@withicons/react` and `@withicons/vue` 109 MB -> ~88 MB, `@withicons/angular` 112 MB -> ~98 MB,
+  `@withicons/core` 97 MB -> ~89 MB (`core-plus`, `soft3d` and `holiday` shrink too). Icon data is written as compact
+  JS: a value a style repeats (palette variables, class names) is declared once per module.
+  - Solid: `<style>/index.cjs` reads the drawings from the ES module `<style>/nodes.js`, so `require()` of a style
+    needs Node 20.19+ / 22.12+ (as React and Vue already did); `import` is unchanged.
+  - Svelte: each `icons/<name>.svelte` imports its drawing from `<style>/nodes/<name>.js`, which the generic `<Icon>`
+    shares, so a deep import still loads only that icon.
+- Every package has a size test (`test/size.test.mjs`, `scripts/package-budget.mjs`: under 120 MB unpacked, no file
+  over 20 MB), and `scripts/publish.mjs` refuses a package over that budget.
+- Docs lead with the load-what-you-use paths: React, Vue and Solid READMEs show the ESM CDN form that ships only the
+  icons named (`https://esm.sh/@withicons/react?exports=Home,Search`), and the classes README starts with
+  `with-base.css` plus one file per icon, and shows how to make one small stylesheet from a few icons.
 - `withicons export --format gif`: smaller, cleaner GIFs. Pixels that did not change since the previous frame are sent as
   transparent (so each frame carries only what moved), and frame delays follow a running clock, so the loop keeps its
   exact length at any frame rate.

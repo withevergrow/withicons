@@ -9,6 +9,10 @@
 // the ink is currentColor.
 import { build, loopsD, trace, K } from './_retro-core.mjs'
 import { H, N } from './_retro-field.mjs'
+import { isPerson } from './_people.mjs'
+import { buildPerson, personPalette } from './_retro-people.mjs'
+import { retroSnowman } from './_retro-snowman.mjs'
+import { retroDragon } from './_retro-dragon.mjs'
 
 export const PALETTE = {
   1: '#F4B53F',      // mustard: the top of the sun
@@ -32,7 +36,30 @@ const inMoat = (moat, ring) => {
   }
   return n > ring.length / 2
 }
+// people avatars (forge/styles/_people.mjs): warm flat skin in retro-1 (first slot = c1), hair retro-2 with a
+// retro-3 sheen stripe, clothing retro-4 (_retro-people.mjs)
+function drawPerson(icon) {
+  const B = buildPerson(icon), P = personPalette(icon)
+  const pp = k => `var(--with-retro-${k}, ${k === 'shadow' ? PALETTE.shadow : P[k]})`
+  const nodes = []
+  const add = (Fd, fill, tol, minArea, dp, cls) => {
+    if (!Fd) return
+    const d = loopsD(trace(Fd, tol, minArea), dp)
+    if (d) nodes.push(['path', cls ? { d, fill, 'fill-rule': 'evenodd', class: cls } : { d, fill, 'fill-rule': 'evenodd' }])
+  }
+  add(B.shadow, pp('shadow'), K.TOL_C, 0.25, 1, 'wm-shadow')
+  for (const f of B.fields) add(f.f, pp(f.c), K.TOL_C, 0.3, 1)
+  const ink = loopsD(trace(B.ink, K.TOL, 0.1), 2)
+  if (ink) nodes.push(['path', { d: ink, 'fill-rule': 'evenodd' }])
+  // features (eyes, mouth, glasses) in the fixed dark letter brown: they stay dark on skin in dark mode
+  add(B.feat, paint('letter'), K.TOL, 0.1, 2)
+  // the catch-light: the cream of live-icon letters (the slot family has no tint role), tiny and always light
+  add(B.glint, paint('cream'), K.TOL, 0.05, 2)
+  return nodes
+}
+
 function draw(icon) {
+  if (isPerson(icon)) return drawPerson(icon)
   const B = build(icon)
   const nodes = []
   const add = (Fd, fill, tol, minArea, dp, cls) => {
@@ -64,6 +91,9 @@ export default {
   strokeWidth: false,
   root: { fill: 'currentColor' },
   render(icon) {
+    // hand-drawn per-icon drawings (the skeleton stays the base for every other style)
+    if (icon.name === 'snowman' && !icon.params) { try { return retroSnowman() } catch { /* the generic build below */ } }
+    if (icon.name === 'dragon-head' && !icon.params) { try { return retroDragon() } catch { /* the generic build below */ } }
     try {
       const nodes = draw(icon)
       if (nodes.length) return nodes

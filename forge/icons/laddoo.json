@@ -1,0 +1,83 @@
+{
+  "name": "laddoo",
+  "category": "indian-festivals",
+  "description": "A stack of round laddoo sweets, for festivals and celebrations.",
+  "aliases": [
+    "laddu",
+    "ladoo",
+    "ladu",
+    "motichoor",
+    "besan-laddoo",
+    "boondi-laddoo",
+    "laddoo-plate"
+  ],
+  "synonyms": [
+    "sweet",
+    "sweets",
+    "mithai",
+    "indian sweet",
+    "dessert",
+    "prasad",
+    "ganesh chaturthi",
+    "diwali",
+    "festival food",
+    "celebration",
+    "good news",
+    "wedding",
+    "treat",
+    "motichoor laddoo",
+    "besan ladoo",
+    "boondi",
+    "round sweet",
+    "indian food",
+    "indian festival",
+    "india",
+    "ladoos",
+    "laddus",
+    "laddoos"
+  ],
+  "tags": [
+    "sweets",
+    "food",
+    "dessert",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M15.75 8.25 A3.75 3.75 0 1 1 8.25 8.25 A3.75 3.75 0 1 1 15.75 8.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 14.75 A3.75 3.75 0 1 1 4.5 14.75 A3.75 3.75 0 1 1 12 14.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.5 14.75 A3.75 3.75 0 1 1 12 14.75 A3.75 3.75 0 1 1 19.5 14.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 18.5 H21.5 C20.75 20.25 19 21.5 17 21.5 H7 C5 21.5 3.25 20.25 2.5 18.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 8 C11.25 7.25 12.75 7.25 13.5 8 C12.75 8.75 11.25 8.75 10.5 8 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M15.75 8.25 A3.75 3.75 0 1 1 8.25 8.25 A3.75 3.75 0 1 1 15.75 8.25 Z",
+    "M12 14.75 A3.75 3.75 0 1 1 4.5 14.75 A3.75 3.75 0 1 1 12 14.75 Z",
+    "M19.5 14.75 A3.75 3.75 0 1 1 12 14.75 A3.75 3.75 0 1 1 19.5 14.75 Z",
+    "M2.5 18.5 H21.5 C20.75 20.25 19 21.5 17 21.5 H7 C5 21.5 3.25 20.25 2.5 18.5 Z"
+  ],
+  "cutouts": [
+    "M10.5 8 C11.25 7.25 12.75 7.25 13.5 8 C12.75 8.75 11.25 8.75 10.5 8 Z",
+    "M7.5 14 A0.5 0.5 0 1 1 6.5 14 A0.5 0.5 0 1 1 7.5 14 Z",
+    "M10 15.75 A0.5 0.5 0 1 1 9 15.75 A0.5 0.5 0 1 1 10 15.75 Z",
+    "M15 14 A0.5 0.5 0 1 1 14 14 A0.5 0.5 0 1 1 15 14 Z",
+    "M17.5 15.75 A0.5 0.5 0 1 1 16.5 15.75 A0.5 0.5 0 1 1 17.5 15.75 Z",
+    "M11.5 10.25 A0.5 0.5 0 1 1 10.5 10.25 A0.5 0.5 0 1 1 11.5 10.25 Z",
+    "M13.75 10.25 A0.5 0.5 0 1 1 12.75 10.25 A0.5 0.5 0 1 1 13.75 10.25 Z"
+  ]
+}

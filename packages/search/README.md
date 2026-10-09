@@ -1,7 +1,7 @@
 # @withicons/search
 
 The search engine behind [withicons.com](https://withicons.com), the `withicons` CLI and the `@withicons/mcp` server:
-a fast, typo-tolerant, dependency-free search over all 500 icons of **with icons** (20 styles: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush), with a prebuilt index.
+a fast, typo-tolerant, dependency-free search over all 734 icons of **with icons** (34 styles: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine), with a prebuilt index.
 Style words in a query pick a style: `cute heart` -> kawaii, `8-bit star` -> pixel, `frosted bell` -> glass, `y2k star` -> sticker,
 `vintage camera` -> retro, `3d rocket` -> luxe, `bauhaus clock` -> bauhaus, `skeuomorphic camera` -> skeuo,
 `manga heart` -> anime, `medieval key` -> gothic, `soft cloud` -> pastel, `girly star` -> coquette, `toy rocket` -> plush, `two tone heart` -> duo, `etched coin` -> engrave, `doodle cat` -> sketch, `blueprint home` -> blueprint,
@@ -13,7 +13,7 @@ npm i @withicons/search
 
 ```js
 import { create } from '@withicons/search'
-import index from '@withicons/search/data'      // prebuilt index (~189 KB raw, ~71 KB gzip)
+import index from '@withicons/search/data'      // prebuilt index (~269 KB raw, ~99 KB gzip)
 
 const engine = create(index)
 engine.search('throw away', { limit: 5 })

@@ -1,0 +1,91 @@
+{
+  "name": "building-2",
+  "category": "maps",
+  "description": "A tall office tower with windows, for companies, offices and organisations.",
+  "aliases": [
+    "office-tower",
+    "office-block",
+    "offices",
+    "company-building",
+    "corporate-building",
+    "headquarters",
+    "hq",
+    "business-park",
+    "workspace-building",
+    "organization-building"
+  ],
+  "tags": [
+    "office",
+    "company",
+    "corporate",
+    "organization",
+    "workplace",
+    "architecture"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 21.5 V4.5 A2 2 0 0 1 5.5 2.5 H10.5 A2 2 0 0 1 12.5 4.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 9.5 H18.5 A2 2 0 0 1 20.5 11.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21.5 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 6.5 H8.5 M7.5 10.5 H8.5 M7.5 14.5 H8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 13.5 H17 M16 17.5 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M7 21.5 V19 A1 1 0 0 1 8 18 A1 1 0 0 1 9 19 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 21.5 V4.5 A2 2 0 0 1 5.5 2.5 H10.5 A2 2 0 0 1 12.5 4.5 V9.5 H18.5 A2 2 0 0 1 20.5 11.5 V21.5 Z"
+  ],
+  "cutouts": [
+    "M7 5.75 H9 V7.25 H7 Z",
+    "M7 9.75 H9 V11.25 H7 Z",
+    "M7 13.75 H9 V15.25 H7 Z",
+    "M15.5 12.75 H17.5 V14.25 H15.5 Z",
+    "M15.5 16.75 H17.5 V18.25 H15.5 Z",
+    "M12.5 9.5 V21.5",
+    "M7 21.5 V19 A1 1 0 0 1 9 19 V21.5 Z"
+  ],
+  "synonyms": [
+    "office",
+    "company",
+    "business",
+    "enterprise",
+    "corporate",
+    "organisation",
+    "organization",
+    "workplace",
+    "employer",
+    "tenant",
+    "campus",
+    "city",
+    "downtown",
+    "commercial property",
+    "real estate",
+    "high rise",
+    "tower block",
+    "departments",
+    "workspace",
+    "company profile",
+    "company account",
+    "billing entity",
+    "team workspace",
+    "branch office",
+    "location",
+    "address"
+  ]
+}

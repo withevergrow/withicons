@@ -13,7 +13,7 @@
 // hover; on touch a tap toggles instead.
 // Import once, anywhere: import '@withicons/motion/element'
 import { prepareDraw, pauseWhenOffscreen, partsSvg, EFFECTS, EFFECT_DEFAULTS, SWAP_HOLD, swapEase } from './runtime.js'
-import { cssSlot } from './meta.js'
+import { cssSlot, is3dStyle, isBackdropStyle } from './meta.js'
 import { SHADOW_CSS } from './shadow-css.js'
 import { shadowPartsCss } from './parts-css.js'
 
@@ -91,7 +91,21 @@ function effectivePreset(host) {
 }
 
 // Re-applied after every paint of the host's shadow root (the icon element rewrites it on attribute changes).
+// Style-aware motion (forge/MOTION.md "3D motion"): a 3D variant (clay, dock, luxe…) plays the icon's 3D counterpart
+// (wm-3d: icons.css), a backdrop variant (bento, dock) keeps its tile still (wm-backdrop). Only classes this module
+// added are ever removed again.
+const STYLED = typeof WeakMap !== 'undefined' ? new WeakMap() : null
+function styleClasses(host) {
+  const v = host.getAttribute('variant'), mine = (STYLED && STYLED.get(host)) || {}
+  for (const [c, on] of [['wm-3d', is3dStyle(v)], ['wm-backdrop', isBackdropStyle(v)]]) {
+    if (on && !host.classList.contains(c)) { host.classList.add(c); mine[c] = true }
+    else if (!on && mine[c]) { host.classList.remove(c); delete mine[c] }
+  }
+  if (STYLED) STYLED.set(host, mine)
+}
+
 function decorate(host) {
+  styleClasses(host)
   const root = host.shadowRoot
   if (!root) return
   const svg = Array.from(root.children).find(n => n.localName === 'svg')
@@ -174,6 +188,7 @@ function upgrade(host) {
   if (key === s.key) { observe(host, s); decorate(host); return }
   s.key = key
   teardown(host, s)
+  styleClasses(host)
   const motion = host.getAttribute('motion')
   const to = host.getAttribute('swap-to')
   if (motion) iconDefaults(host)

@@ -1,0 +1,41 @@
+{
+  "name": "key-round",
+  "intent": "the key turns as if in a lock",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      15,
+      9
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      15,
+      9
+    ],
+    "amount": 1
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "nudge",
+      "dir": 135
+    }
+  ],
+  "swap": [
+    {
+      "to": "lock-keyhole",
+      "effect": "morph"
+    },
+    {
+      "to": "key",
+      "effect": "fade"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import { cast } from './_anime-tune.mjs'
 import * as FF from './_anime-field.mjs'
 import { splitText, textInfo } from './_live-text.mjs'
 import { LIVE, TEXT_W, FREE_TEXT, inkText } from './_anime-live.mjs'
+import { isPerson, fillParts, ROLE_OF } from './_people.mjs'
 
 const polyArea = r => { let a = 0; for (let i = 0; i < r.length; i++) { const p = r[i], q = r[(i + 1) % r.length]; a += p[0] * q[1] - q[0] * p[1] } return Math.abs(a / 2) }
 const inSet = (p, rings) => rings.reduce((a, r) => pointInRing(p, r) ? !a : a, false)
@@ -46,7 +47,9 @@ export function auto(icon, opt = {}) {
     const closed = !!s.closed && s.pts.length > 2
     items.push({ pts: s.pts, closed, plate: p.plate || 'K', text: !!textInfo(p), ch: textInfo(p)?.ch, cap: textInfo(p)?.cap, len: arclen(s.pts, closed) })
   }
-  const fills = (ic.fills || []).map(f => ({ rings: (f.set && f.set.length ? f.set : (f.subs || []).map(s => s.pts)).filter(r => r && r.length > 2) })).filter(f => f.rings.length)
+  const person = isPerson(icon) && !icon.params
+  const parts = person ? fillParts(icon) : []
+  const fills = (ic.fills || []).map((f, i) => ({ part: parts[i], idx: i, rings: (f.set && f.set.length ? f.set : (f.subs || []).map(s => s.pts)).filter(r => r && r.length > 2) })).filter(f => f.rings.length)
   const cuts = []
   // a closed glyph (D O 0) is also knocked out of its field; that is lettering, never an inset panel
   const keyOf = pts => pts.length + ':' + pts[0].map(v => v.toFixed(2)).join(',')
@@ -119,7 +122,10 @@ export function auto(icon, opt = {}) {
     surfs.push(f)
   }
   // K first (largest first), then A; keeps the author's order within a plate
-  const order = [...surfs.filter(f => f.plate === 'K'), ...surfs.filter(f => f.plate === 'A')]
+  // people keep the skeleton's paint order (face, hair over the forehead, clothing over the neck); ears go under the face
+  const order = person
+    ? [...surfs.filter(f => f.part === 'skin' && f.idx > 0), ...surfs.filter(f => f.idx === 0), ...surfs.filter(f => f.part !== 'skin')]
+    : [...surfs.filter(f => f.plate === 'K'), ...surfs.filter(f => f.plate === 'A')]
   const mass = order.flatMap(f => f.rings)
   const massF = mass.length ? sampler(FF.region(mass, 1.6)) : () => 1.6
   const mIn = p => massF(p) < 0, mDist = p => Math.abs(massF(p))
@@ -135,7 +141,10 @@ export function auto(icon, opt = {}) {
     return bb.w > 1.6 && bb.h > 1.6 && (!mass.length || rings.flat().filter(p => mIn(p) || mDist(p) < 0.6).length > rings.flat().length * 0.92)
   })
   // cutouts that run out of the mass are knockouts that shape it (gaps between wifi arcs, slots): cut them
-  const knock = cuts.filter(rs => !panels.includes(rs) && mass.length && rs.flat().some(p => mIn(p)))
+  // people: small closed cutouts on the face are the eyes; they are painted as ink eyes with a catch-light (a hole
+  // would show the page, and dark eyes sink into deep skin without the light dot)
+  const eyes = person ? cuts.filter(rs => { const bb = bbox(rs.flat()); return !panels.includes(rs) && rs.length === 1 && Math.max(bb.w, bb.h) <= 2.4 }) : []
+  const knock = cuts.filter(rs => !panels.includes(rs) && !eyes.includes(rs) && mass.length && rs.flat().some(p => mIn(p)))
   if (knock.length) for (const f of order) f.rings = P.cut(f.rings, knock.flat())
   const inks = [], tubesBack = [], tubesFront = []
   for (const l of lines) {
@@ -162,6 +171,22 @@ export function auto(icon, opt = {}) {
   // (white on white: a counter opens into it), so its face takes the small dot of shine instead
   const liveFace = !!icon.params && LIVE_FACE.has(icon.name)
   order.forEach((f, i) => {
+    if (person && f.part) {
+      // skin: matte cel (one hard shade in the skin's own shadow tone, no specular); hair: shaded in its own dark
+      // tone with the anime hair shine; headwear like hair; clothing: the usual cel; gear (ear cups): glossy accent
+      const role = ROLE_OF[f.part] || 'c1'
+      const o = f.part === 'skin' ? { tone: ['shadow', 0.5], shine: 'none' }
+        : f.part === 'hair' || f.part === 'wear' ? { tone: ['c3', 0.8], shine: f.area > 5 ? 'streak' : 'dot', rim: f.area > 12 }
+        : f.part === 'cloth' ? { shine: 'none' } : { shine: 'dot' }
+      if (f.rings.length) ops.push(K.surf(f.rings, role, { part: f.plate === 'A' ? 'a' : 'k', rim: false, ...o }))
+      // the eyes go on the face (under the hair, which may fall over them)
+      if (f.idx === 0) for (const rs of eyes) {
+        const c = centroid(rs[0])
+        ops.push(K.surf(rs, 'ink', { part: 'k', ol: 0, shade: 0, cast: false, casts: false, shine: 'none', inkRim: false }))
+        ops.push(K.paint(P.circle(c[0] - 0.2 * s, c[1] - 0.3 * s, 0.36 * s), 'shine', { part: 'k' }))
+      }
+      return
+    }
     const role = roleOf(f.plate)
     // second and later K masses that sit on the first take the second colour when they are small
     const r2 = f.plate === 'K' && i > 0 && f.area < big * 0.35 ? col.second : role

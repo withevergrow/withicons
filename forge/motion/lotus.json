@@ -1,0 +1,39 @@
+{
+  "name": "lotus",
+  "intent": "opens and settles like a calm breath",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      18
+    ],
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        18
+      ],
+      "amount": 0.5
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "lotus@solid",
+      "effect": "scale"
+    }
+  ]
+}

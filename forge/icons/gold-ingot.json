@@ -1,0 +1,62 @@
+{
+  "name": "gold-ingot",
+  "category": "lunar-new-year",
+  "description": "A gold ingot (yuanbao), for wealth and prosperity.",
+  "aliases": [
+    "yuanbao",
+    "yuan-bao",
+    "sycee",
+    "ingot",
+    "gold-boat",
+    "chinese-ingot",
+    "lucky-ingot"
+  ],
+  "synonyms": [
+    "gold",
+    "gold bar",
+    "bullion",
+    "treasure",
+    "wealth",
+    "prosperity",
+    "money",
+    "riches",
+    "fortune",
+    "savings",
+    "rich",
+    "golden",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "luck",
+    "feng shui",
+    "investment",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "wealth",
+    "gold",
+    "money"
+  ],
+  "paths": [
+    {
+      "d": "M3 11 C5.5 12.5 8 13 12 13 C16 13 18.5 12.5 21 11 C20.5 16.5 17 19.5 12 19.5 C7 19.5 3.5 16.5 3 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 12.75 C7.5 9 9.5 6.5 12 6.5 C14.5 6.5 16.5 9 16.5 12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M19 2.5 V6.5 M17 4.5 H21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3 11 C5.5 12.5 8 13 12 13 C16 13 18.5 12.5 21 11 C20.5 16.5 17 19.5 12 19.5 C7 19.5 3.5 16.5 3 11 Z",
+    "M7.5 12.75 C7.5 9 9.5 6.5 12 6.5 C14.5 6.5 16.5 9 16.5 12.75 Z"
+  ],
+  "cutouts": [
+    "M3 11 C5.5 12.5 8 13 12 13 C16 13 18.5 12.5 21 11"
+  ]
+}

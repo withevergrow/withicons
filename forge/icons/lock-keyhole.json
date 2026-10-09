@@ -1,0 +1,77 @@
+{
+  "name": "lock-keyhole",
+  "category": "security",
+  "description": "A padlock with a keyhole, for secure, encrypted and private content.",
+  "aliases": [
+    "padlock-keyhole",
+    "keyhole-lock",
+    "locked-keyhole",
+    "secure-lock",
+    "keyhole",
+    "lock-closed-keyhole",
+    "padlock-closed",
+    "encrypted-lock"
+  ],
+  "tags": [
+    "padlock",
+    "secure",
+    "private",
+    "locked",
+    "keyhole",
+    "security"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 11 V7.5 A4.5 4.5 0 0 1 16.5 7.5 V11",
+      "plate": "A"
+    },
+    {
+      "d": "M6 11 H18 A2 2 0 0 1 20 13 V19 A2 2 0 0 1 18 21 H6 A2 2 0 0 1 4 19 V13 A2 2 0 0 1 6 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13 15 A1 1 0 1 1 11 15 A1 1 0 1 1 13 15 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16 V18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 11 H18 A2 2 0 0 1 20 13 V19 A2 2 0 0 1 18 21 H6 A2 2 0 0 1 4 19 V13 A2 2 0 0 1 6 11 Z"
+  ],
+  "cutouts": [
+    "M13.75 15 A1.75 1.75 0 1 1 10.25 15 A1.75 1.75 0 1 1 13.75 15 Z",
+    "M12 16 V18"
+  ],
+  "synonyms": [
+    "lock",
+    "locked",
+    "padlock",
+    "secure",
+    "security",
+    "private",
+    "privacy",
+    "encrypted",
+    "encryption",
+    "protected",
+    "password",
+    "password protected",
+    "confidential",
+    "restricted",
+    "members only",
+    "vault",
+    "safe",
+    "ssl",
+    "https",
+    "secure checkout",
+    "secure payment",
+    "end to end encrypted",
+    "e2ee",
+    "lock screen",
+    "locker",
+    "unlock with key",
+    "secured"
+  ]
+}

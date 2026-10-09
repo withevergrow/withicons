@@ -1,0 +1,40 @@
+{
+  "name": "mehndi-hand",
+  "intent": "the hand waves to show off its fresh mehndi",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "hand",
+      "effect": "fade"
+    }
+  ]
+}

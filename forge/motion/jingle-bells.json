@@ -1,0 +1,63 @@
+{
+  "name": "jingle-bells",
+  "intent": "the bells jingle from their bow",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      7.5
+    ],
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      7.5
+    ],
+    "amount": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "ring",
+      "origin": [
+        12,
+        7.5
+      ],
+      "amount": 1.1,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        7.5
+      ]
+    },
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        7.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell-ring",
+      "effect": "fade"
+    },
+    {
+      "to": "bell",
+      "effect": "morph"
+    }
+  ]
+}

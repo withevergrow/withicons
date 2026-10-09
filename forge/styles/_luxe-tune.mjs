@@ -17,7 +17,10 @@
 //   extra       [{ d, plate }] parts added for Luxe only (default plate S: a ruby in a gold bezel)
 //   redraw      { paths, fills, cutouts } replaces the skeleton geometry for Luxe (same grid and
 //               keylines, coordinates taken from the skeleton so the icon still matches its family)
+import { DRAGON } from './_luxe-dragon.mjs'
 export const TUNE = {
+  // a hand-made dragon head (_luxe-dragon.mjs)
+  'dragon-head': DRAGON,
   // concentric arcs: as a filled wedge they read as a fan; as tubes they read as signal
   wifi: { noFills: true, noCutouts: true },
   'wifi-off': { noFills: true, noCutouts: true },
@@ -28,6 +31,30 @@ export const TUNE = {
   truck: { aFront: true },
   // a film strip is one enamel frame with its sprocket holes and window engraved
   film: { plate: { p1: 'K', p2: 'K', p3: 'K', p4: 'K' } },
+  // the coin dropping into the piggy bank is gold (A), not a ruby badge
+  'piggy-bank': { plate: { p7: 'A' } },
+  // a hand-made snowman: snow-white enamel balls (tone: the enamel's own fallbacks, still c1 / c3 vars)
+  // with engraved coal eyes and buttons, a ruby top hat and a ruby scarf with its hanging end, gold twig
+  // arms and a gold carrot
+  snowman: { tone: { c1: '#EEF2FA', c3: '#8391B8', edge: '#FFFFFF' }, wa: 1.4, ws: 1.8, aFront: true, redraw: {
+    paths: [
+      { d: 'M10.4 5.6 A3.4 3.4 0 0 0 9.9 12.3 A5 5 0 1 0 14.1 12.3 A3.4 3.4 0 0 0 13.6 5.6 Z', plate: 'K' },
+      { d: 'M10.4 4.5 V2.5 A0.7 0.7 0 0 1 11.1 1.8 H12.9 A0.7 0.7 0 0 1 13.6 2.5 V4.5 H16.2 A0.6 0.6 0 0 1 16.2 5.7 H7.8 A0.6 0.6 0 0 1 7.8 4.5 Z', plate: 'S' },
+      { d: 'M9 12.4 C10.9 13.3 13.1 13.3 15 12.4 M14 13.2 L14.6 16.2', plate: 'S' },
+      { d: 'M12.3 9.7 L14.8 10.3', plate: 'A' },
+      { d: 'M7.6 15 L4.2 12.6 M5 13.2 L4.8 11.1 M4.6 12.9 L2.8 13', plate: 'A' },
+      { d: 'M16.4 15 L19.8 12.6 M19 13.2 L19.2 11.1 M19.4 12.9 L21.2 13', plate: 'A' },
+    ],
+    fills: [
+      'M10.4 5.6 A3.4 3.4 0 0 0 9.9 12.3 A5 5 0 1 0 14.1 12.3 A3.4 3.4 0 0 0 13.6 5.6 Z',
+      'M10.4 4.5 V2.5 A0.7 0.7 0 0 1 11.1 1.8 H12.9 A0.7 0.7 0 0 1 13.6 2.5 V4.5 H16.2 A0.6 0.6 0 0 1 16.2 5.7 H7.8 A0.6 0.6 0 0 1 7.8 4.5 Z',
+    ],
+    cutouts: [
+      'M11.5 8.6 A0.8 0.8 0 1 1 9.9 8.6 A0.8 0.8 0 1 1 11.5 8.6 Z',
+      'M14.1 8.6 A0.8 0.8 0 1 1 12.5 8.6 A0.8 0.8 0 1 1 14.1 8.6 Z',
+      'M12.75 15.6 A0.75 0.75 0 1 1 11.25 15.6 A0.75 0.75 0 1 1 12.75 15.6 Z',
+      'M12.75 18.6 A0.75 0.75 0 1 1 11.25 18.6 A0.75 0.75 0 1 1 12.75 18.6 Z',
+    ] } },
   ban: { noFills: true, noCutouts: true },
   // crown jewels: three rubies set into the band
   crown: { extra: [{ d: 'M7.5 13.25 L7.5 13.25' }, { d: 'M12 12.5 L12 12.5' }, { d: 'M16.5 13.25 L16.5 13.25' }], ws: 3.1 },

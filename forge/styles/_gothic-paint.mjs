@@ -38,7 +38,10 @@ export const PALETTE = {
   edge: '#837A6F',   // stone shade bevel, mortar joints, iron chamfer
 }
 export const ROLES = Object.keys(PALETTE)
-export const col = r => `var(--with-gothic-${r}, ${PALETTE[r] || PALETTE.ink})`
+// a person avatar's own natural defaults (skin c1, hair c2, clothing c4: forge/styles/_people.mjs), set while it renders
+let OV = null
+export const setDefaults = o => { OV = o || null }
+export const col = r => `var(--with-gothic-${r}, ${(OV && OV[r]) || PALETTE[r] || PALETTE.ink})`
 
 export const K = {
   OL: 0.42,      // outline (lead) width around every part

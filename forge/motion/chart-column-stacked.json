@@ -1,0 +1,44 @@
+{
+  "name": "chart-column-stacked",
+  "intent": "the stacked columns grow up from the baseline",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-bar",
+      "effect": "fade"
+    },
+    {
+      "to": "chart-pie",
+      "effect": "morph"
+    }
+  ]
+}

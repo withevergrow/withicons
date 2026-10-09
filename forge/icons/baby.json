@@ -1,0 +1,85 @@
+{
+  "name": "baby",
+  "category": "users",
+  "description": "A baby face, for babies, kids and family.",
+  "aliases": [
+    "infant",
+    "newborn",
+    "toddler",
+    "child",
+    "kid",
+    "babies",
+    "nursery"
+  ],
+  "synonyms": [
+    "children",
+    "kids",
+    "family",
+    "parenting",
+    "parent",
+    "mom",
+    "dad",
+    "mother",
+    "father",
+    "maternity",
+    "pregnancy",
+    "birth",
+    "baby shower",
+    "childcare",
+    "daycare",
+    "cute",
+    "bub",
+    "little one",
+    "kid friendly",
+    "babysitter",
+    "pediatric",
+    "paediatric"
+  ],
+  "tags": [
+    "baby",
+    "child",
+    "family",
+    "kids",
+    "parenting"
+  ],
+  "paths": [
+    {
+      "d": "M20 13 A8 8 0 1 1 4 13 A8 8 0 1 1 20 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.25 11.25 A1.9 1.9 0 0 0 4.25 14.75",
+      "plate": "K"
+    },
+    {
+      "d": "M19.75 11.25 A1.9 1.9 0 0 1 19.75 14.75",
+      "plate": "K"
+    },
+    {
+      "d": "M12 5 C11.25 3.5 12.25 2.25 13.5 2.5 C14.5 2.75 14.5 4 13.75 4.25",
+      "plate": "A"
+    },
+    {
+      "d": "M9 12 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M15 12 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M10 16.5 A2.5 2.5 0 0 0 14 16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M20 13 A8 8 0 1 1 4 13 A8 8 0 1 1 20 13 Z",
+    "M4.25 11.25 A1.9 1.9 0 0 0 4.25 14.75 Z",
+    "M19.75 11.25 A1.9 1.9 0 0 1 19.75 14.75 Z"
+  ],
+  "cutouts": [
+    "M10.1 12.5 A1.1 1.1 0 1 1 7.9 12.5 A1.1 1.1 0 1 1 10.1 12.5 Z",
+    "M16.1 12.5 A1.1 1.1 0 1 1 13.9 12.5 A1.1 1.1 0 1 1 16.1 12.5 Z",
+    "M10 16.5 A2.5 2.5 0 0 0 14 16.5"
+  ]
+}

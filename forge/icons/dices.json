@@ -1,0 +1,74 @@
+{
+  "name": "dices",
+  "category": "objects",
+  "description": "A die showing dots, for games, random and chance.",
+  "aliases": [
+    "die",
+    "two-dice",
+    "pair-of-dice",
+    "roll",
+    "chance",
+    "gamble",
+    "luck",
+    "dice-roll"
+  ],
+  "synonyms": [
+    "dice",
+    "roll the dice",
+    "randomize",
+    "randomise",
+    "board game",
+    "tabletop",
+    "casino",
+    "gambling",
+    "probability",
+    "odds",
+    "lucky",
+    "play",
+    "games night",
+    "craps",
+    "cube",
+    "five",
+    "surprise me",
+    "pick random",
+    "dnd"
+  ],
+  "tags": [
+    "game",
+    "random",
+    "chance",
+    "luck",
+    "board-game"
+  ],
+  "paths": [
+    {
+      "d": "M5 10 H12 A2 2 0 0 1 14 12 V19 A2 2 0 0 1 12 21 H5 A2 2 0 0 1 3 19 V12 A2 2 0 0 1 5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 6.75 L10 5 A2 2 0 0 1 12 3 L19 3 A2 2 0 0 1 21 5 L21 12 A2 2 0 0 1 19 14 L17.25 14",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 13.25 V13.75",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 17.25 V17.75",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 6.25 V6.75",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5 10 H12 A2 2 0 0 1 14 12 V19 A2 2 0 0 1 12 21 H5 A2 2 0 0 1 3 19 V12 A2 2 0 0 1 5 10 Z",
+    "M12 3 H19 A2 2 0 0 1 21 5 V12 A2 2 0 0 1 19 14 H16.25 V7.75 H10 V5 A2 2 0 0 1 12 3 Z"
+  ],
+  "cutouts": [
+    "M7.9 13.5 A1.4 1.4 0 1 1 5.1 13.5 A1.4 1.4 0 1 1 7.9 13.5 Z",
+    "M11.9 17.5 A1.4 1.4 0 1 1 9.1 17.5 A1.4 1.4 0 1 1 11.9 17.5 Z",
+    "M18.9 6.5 A1.4 1.4 0 1 1 16.1 6.5 A1.4 1.4 0 1 1 18.9 6.5 Z"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "mandarin-orange",
+  "intent": "a ripe mandarin bobs with its leaves fluttering",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6
+  },
+  "hover": {
+    "preset": "bounce"
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        6
+      ],
+      "amount": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ]
+}

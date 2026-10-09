@@ -1,0 +1,42 @@
+{
+  "name": "gavel",
+  "intent": "the gavel swings down and strikes the block",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      19.5,
+      19.5
+    ],
+    "amount": 0.8,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      19.5,
+      19.5
+    ],
+    "amount": 1.2
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.8
+    },
+    {
+      "preset": "tada",
+      "amount": 0.7
+    }
+  ],
+  "swap": [
+    {
+      "to": "scale",
+      "effect": "morph"
+    },
+    {
+      "to": "gavel@solid",
+      "effect": "fade"
+    }
+  ]
+}

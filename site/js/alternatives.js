@@ -12,15 +12,20 @@
   var TITLE = { line: 'Line', solid: 'Solid', duo: 'Duo', gloss: 'Gloss', engrave: 'Engrave', blueprint: 'Blueprint', sketch: 'Sketch', glass: 'Glass', kawaii: 'Kawaii', sticker: 'Sticker', pixel: 'Pixel', retro: 'Retro', luxe: 'Luxe', bauhaus: 'Bauhaus', skeuo: 'Skeuo' }
   function title(s) { var w = WI(), i = w && w.styleInfo && w.styleInfo[s]; return (i && i.title) || TITLE[s] || (s.charAt(0).toUpperCase() + s.slice(1)) }
   /* motion landers: the icon's own hover motion as wm classes + CSS variables (forge/MOTION.md) */
-  function motionAttrs(n) {
+  // style: the tile's style; a 3D style (WithMotion.is3dStyle) plays the move's 3D counterpart and wears wm-3d,
+  // a backdrop style (bento, dock) keeps its tile still (wm-backdrop)
+  function motionAttrs(n, style) {
     var sp = W.WITH_MOTION && W.WITH_MOTION[n], m = sp && (sp.hover || sp.loop); if (!m) return ''
+    var WMo = W.WithMotion, d3 = !!(style && WMo && WMo.is3dStyle && WMo.is3dStyle(style)), bd = !!(style && WMo && WMo.isBackdropStyle && WMo.isBackdropStyle(style))
+    if (d3 && WMo.styleMotion) { try { m = WMo.styleMotion(m, style) || m } catch (e) { } }
     var v = [], o = m.origin || [12, 12]
     if (o[0] !== 12 || o[1] !== 12) v.push('--wm-ox:' + (o[0] / 24 * 100).toFixed(2) + '%', '--wm-oy:' + (o[1] / 24 * 100).toFixed(2) + '%')
     if (m.dir != null) { var r = m.dir * Math.PI / 180; v.push('--wm-dx:' + Math.cos(r).toFixed(3), '--wm-dy:' + Math.sin(r).toFixed(3)) }
     if (m.amount != null && m.amount !== 1) v.push('--wm-k:' + m.amount)
     if (m.duration != null) v.push('--wm-dur:' + m.duration + 's')
     if (m.steps) v.push('--wm-steps:' + m.steps)
-    return ' wm wm-hover wm-p-' + esc(m.preset) + '"' + (v.length ? ' style="' + v.join(';') + '"' : '') + ' data-wm-preset="' + esc(m.preset)
+    if (bd) v.push('--wm-deco:none')
+    return ' wm wm-hover wm-p-' + esc(m.preset) + (d3 ? ' wm-3d' : '') + (bd ? ' wm-backdrop' : '') + '"' + (v.length ? ' style="' + v.join(';') + '"' : '') + ' data-wm-preset="' + esc(m.preset)
   }
   var HINT = { anim: 'make an animated SVG', gif: 'make a GIF for your slides, in the quality you pick', svg: 'copy it as SVG', png: 'copy it as a PNG image', dl: 'download a PNG', dlsvg: 'download the SVG file', 'class': 'copy its <i> tag', jsx: 'copy it as JSX for React', vue: 'copy it for a Vue template' }
 
@@ -30,8 +35,12 @@
     if (W.WithSearch && W.WITH_SEARCH_INDEX) { try { engine = W.WithSearch.create(W.WITH_SEARCH_INDEX) } catch (e) { engine = null } }
     return engine
   }
+  // deferred scripts run before site.js: the shared style row waits until WI is there (DOMContentLoaded at the latest)
+  function afterWI(fn) { if (WI()) fn(); else doc.addEventListener('DOMContentLoaded', fn) }
+  function stylePicker() { var w = WI(); return (w && w.stylePicker) || W.WIStylePicker || null }
   function ready() { var w = WI(); return w && w.loadMeta ? w.loadMeta() : Promise.resolve(false) }
-  function withStyle(style) { var w = WI(); return ready().then(function () { return w && w.loadStyle ? w.loadStyle(style) : false }) }
+  // only what is on show: a heavy style comes in chunks (site.js loadStyleFor), so a dozen tiles never pull a 7 MB style
+  function withStyle(style, names) { var w = WI(); return ready().then(function () { return w && w.loadStyleFor && names ? w.loadStyleFor(style, names) : w && w.loadStyle ? w.loadStyle(style) : false }) }
   function toast(msg) { var w = WI(); if (w && w.toast) w.toast(msg) }
   function copyText(text, label) {
     var w = WI()
@@ -161,7 +170,7 @@
     function names() { return $$('.ax-tile', grid).map(function (b) { return b.getAttribute('data-name') }) }
     function paint() {
       var w = WI(); if (!w || !w.svg) return
-      withStyle(st.style).then(function () {
+      withStyle(st.style, names()).then(function () {
         $$('.ax-tile', grid).forEach(function (b) {
           var s = w.svg(b.getAttribute('data-name'), st.style, 32)
           if (s) $('.ax-tile-ic', b).innerHTML = s
@@ -184,7 +193,7 @@
     function styleQs() { return st.style && st.style !== 'line' ? '?style=' + encodeURIComponent(st.style) : '' }
     function tile(n) {
       var e = esc(n), href = root + 'icons/' + e + '.html'
-      return '<li class="ax-cell is-new' + (moving ? ' wm-trigger' : '') + '"><button class="ax-tile" type="button" data-name="' + e + '"><span class="ax-tile-ic' + (moving ? motionAttrs(n) : '') + '"></span><span class="pg-sr">' + e + '</span></button>' +
+      return '<li class="ax-cell is-new' + (moving ? ' wm-trigger' : '') + '"><button class="ax-tile" type="button" data-name="' + e + '"><span class="ax-tile-ic' + (moving ? motionAttrs(n, st.style) : '') + '"></span><span class="pg-sr">' + e + '</span></button>' +
         '<a class="ax-tile-n" href="' + href + '" data-icon-link>' + e + '<span class="pg-sr"> icon page</span></a>' +
         '<a class="ax-tile-cz" href="' + href + styleQs() + czHash + '" data-studio-link title="Customize in the studio">' + czIcon + '<span class="pg-sr">Customize ' + e + ' in the studio</span></a></li>'
     }
@@ -221,6 +230,16 @@
     $$('[data-pick-style]', box).forEach(function (b) {
       b.addEventListener('click', function () { st.style = b.getAttribute('data-pick-style'); press('[data-pick-style]', b); box.setAttribute('data-style', st.style); relink(); paint() })
     })
+    // the style: the shared compact row (js/style-picker.js, site/STYLE-PICKER.md), this lander's own styles first,
+    // then "All N styles"; without it the server-rendered chips above keep working
+    var segEl = $('.ax-styles', box)
+    if (segEl) afterWI(function () {
+      var SP = stylePicker(); if (!SP || !SP.row) return
+      var prefer = (segEl.getAttribute('data-pick-styles') || '').split(',').filter(Boolean)
+      segEl.innerHTML = ''
+      SP.row(segEl, { current: st.style, icon: segEl.getAttribute('data-icon') || null, styles: prefer, max: 6, size: 26, label: 'Icon style', title: 'Show these icons in',
+        onPick: function (s) { st.style = s; box.setAttribute('data-style', s); relink(); paint() } })
+    })
     $$('[data-pick-act]', box).forEach(function (b) {
       b.addEventListener('click', function () { st.act = b.getAttribute('data-pick-act'); press('[data-pick-act]', b); if (mode === 'curated' || !input.value.trim()) setStatus(); else search(input.value) })
     })
@@ -250,7 +269,7 @@
       b.classList.remove('is-hit'); void b.offsetWidth; b.classList.add('is-hit')
       if (st.act === 'class') { copyText('<i class="with with-' + n + (st.style === 'line' ? '' : ' with-' + st.style) + '"></i>', 'Copied <i> tag for ' + n); return }
       if (!w || !w.svgFile) { location.href = root + 'icons/' + n + '.html'; return }
-      withStyle(st.style).then(function () {
+      withStyle(st.style, [n]).then(function () {
         var color = st.colorSet ? st.color : null
         var label = n + ' · ' + title(st.style)
         if (st.act === 'anim' || st.act === 'gif') { openMaker({ name: n, title: tileTitle(b, n), style: st.style, color: color, px: Math.min(st.px, 512), act: st.act, root: root, from: b }); return }
@@ -269,7 +288,7 @@
     })
 
     // warm up: preload style data on first interaction, run a pre-filled query
-    box.addEventListener('pointerenter', function () { withStyle(st.style) }, { once: true })
+    box.addEventListener('pointerenter', function () { withStyle(st.style, names()) }, { once: true })
     var q0 = box.getAttribute('data-q')
     if (q0) { var tries = 0; (function go() { if (getEngine()) search(q0); else if (tries++ < 40) setTimeout(go, 100) })() }
   }
@@ -407,14 +426,12 @@
   function initNameMap(tools) {
     var wrap = tools.nextElementSibling, table = wrap && $('.ax-map', wrap)
     if (!table) return
-    var btns = $$('[data-map-style]', tools), seq = 0
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var s = b.getAttribute('data-map-style'), mine = ++seq
-        btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)) })
+    var btns = $('[data-map-style]', tools), seq = 0
+    function apply(s) {
+        var mine = ++seq
         $$('[data-map-code]', table).forEach(function (c) { c.textContent = mapCode(c.getAttribute('data-map-code'), c.getAttribute('data-name'), s) })
         table.setAttribute('data-busy', '')
-        withStyle(s).then(function () {
+        withStyle(s, $$('[data-map-ic]', table).map(function (el) { return el.getAttribute('data-map-ic') })).then(function () {
           var w = WI()
           if (mine !== seq || !w || !w.svg) return
           $$('[data-map-ic]', table).forEach(function (el) {
@@ -422,6 +439,19 @@
             if (svg) el.innerHTML = svg
           })
         }).then(function () { if (mine === seq) table.removeAttribute('data-busy') })
+    }
+    // the shared compact row when it is here (Essentials and Popular first, then "All N styles"); else the chips
+    var seg = $('.ax-map-styles', tools), SP = W.WIStylePicker
+    if (seg && SP && SP.row) afterWI(function () {
+      var prefer = (seg.getAttribute('data-pick-styles') || '').split(',').filter(Boolean)
+      seg.innerHTML = ''
+      SP.row(seg, { current: 'line', icon: seg.getAttribute('data-icon') || null, styles: prefer, max: 6, size: 24, label: 'with icons style in the name map', title: 'Show with icons in', onPick: apply })
+    })
+    if (seg && SP && SP.row) return
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)) })
+        apply(b.getAttribute('data-map-style'))
       })
     })
   }

@@ -115,6 +115,15 @@
 :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-n, :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz { color: #5F6573; }
 :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-n:hover, :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz:hover { color: #111318; }
 :root[data-theme="dark"] .ax-pick.is-dark-ink .ax-tile-cz:hover { background: #DAD5CC; }
+/* the style row above the grid (js/style-picker.js row): each tile previews a style, so in dark mode it sits on the same light
+   plate as the grid's tiles. On the dark plate the outlines drawn in the ink colour went light and the palette fills muddy,
+   and the styles with their own dark outline (Halloween's midnight, Gothic's lead, Lunar's lacquer) vanished. White ink keeps dark plates. */
+:root[data-theme="dark"] .ax-pick:not(.is-white) .ax-styles .sp-t:not(.sp-all) .sp-plate { background: #ECE8E1; box-shadow: inset 0 0 0 1px rgba(17, 19, 24, .1); }
+:root[data-theme="dark"] .ax-pick:not(.is-white) .ax-styles .sp-t:not(.sp-all) .sp-ic { color: #111318; }
+:root[data-theme="dark"] .ax-pick:not(.is-white) .ax-styles .sp-t:not(.sp-all):hover .sp-plate { background: #F7F3EC; }
+:root[data-theme="dark"] .ax-pick:not(.is-white) .ax-styles .sp-t.is-on .sp-plate { background: #FBF8F3; box-shadow: 0 0 0 2px var(--ink), inset 0 0 0 1px rgba(17, 19, 24, .1); }
+.ax-pick.is-white .ax-styles .sp-t:not(.sp-all) .sp-plate { background: #1A1D25; }
+.ax-pick.is-white .ax-styles .sp-t:not(.sp-all) .sp-ic { color: #FFFFFF; }
 /* under the grid: the whole library and the studio, for anyone who wants more than a quick copy */
 .ax-pick-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 18px; padding: 18px 20px; border-radius: var(--radius-l); background: var(--paper); border: 1px dashed var(--rule-strong); }
 .ax-pick-more p { flex: 1 1 320px; margin: 0; font-size: var(--step--1); color: var(--ink-2); max-width: 62ch; }

@@ -1,0 +1,76 @@
+{
+  "name": "boxes",
+  "category": "objects",
+  "description": "Stacked boxes, for inventory, packages and modules.",
+  "aliases": [
+    "stacked-boxes",
+    "crates",
+    "cubes",
+    "stock",
+    "stacked-cubes",
+    "pile-of-boxes",
+    "box-stack"
+  ],
+  "tags": [
+    "inventory",
+    "storage",
+    "stack",
+    "packages",
+    "3d"
+  ],
+  "paths": [
+    {
+      "d": "M7.67 10.75 L12 13.25 V18.25 L7.67 20.75 L3.34 18.25 V13.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.33 10.75 L20.66 13.25 V18.25 L16.33 20.75 L12 18.25 V13.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 3.25 L16.33 5.75 V10.75 L12 13.25 L7.67 10.75 V5.75 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M3.34 13.25 L7.67 15.75 L12 13.25 M7.67 15.75 V20.75 M12 13.25 L16.33 15.75 L20.66 13.25 M16.33 15.75 V20.75",
+      "plate": "K"
+    },
+    {
+      "d": "M7.67 5.75 L12 8.25 L16.33 5.75 M12 8.25 V13.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.67 10.75 L12 13.25 V18.25 L7.67 20.75 L3.34 18.25 V13.25 Z",
+    "M16.33 10.75 L20.66 13.25 V18.25 L16.33 20.75 L12 18.25 V13.25 Z",
+    "M12 3.25 L16.33 5.75 V10.75 L12 13.25 L7.67 10.75 V5.75 Z"
+  ],
+  "cutouts": [
+    "M3.34 13.25 L7.67 15.75 L12 13.25 M7.67 15.75 V20.75",
+    "M12 13.25 L16.33 15.75 L20.66 13.25 M16.33 15.75 V20.75",
+    "M7.67 5.75 L12 8.25 L16.33 5.75 M12 8.25 V13.25"
+  ],
+  "synonyms": [
+    "inventory",
+    "storage",
+    "stack",
+    "stacked",
+    "packages",
+    "parcels",
+    "shipping",
+    "logistics",
+    "warehouse stock",
+    "goods",
+    "products",
+    "dependencies",
+    "components",
+    "microservices",
+    "containers",
+    "blocks",
+    "pyramid",
+    "isometric",
+    "moving boxes",
+    "supplies",
+    "modules"
+  ]
+}

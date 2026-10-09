@@ -1,0 +1,52 @@
+{
+  "name": "sigma",
+  "category": "text",
+  "description": "The Greek sigma, for sums, totals, formulas and maths.",
+  "aliases": [
+    "sum",
+    "summation",
+    "total",
+    "sigma-sign",
+    "greek-sigma",
+    "autosum",
+    "formula",
+    "math-sum",
+    "add-all"
+  ],
+  "tags": [
+    "math",
+    "sum",
+    "formula",
+    "greek",
+    "total"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 6.5 V4 H6 L12.5 12 L6 20 H17.5 V17.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "sum total",
+    "summation symbol",
+    "add up",
+    "aggregate",
+    "aggregation",
+    "grand total",
+    "spreadsheet sum",
+    "excel sum",
+    "calculate",
+    "calculation",
+    "maths",
+    "mathematics",
+    "statistics",
+    "standard deviation",
+    "greek letter",
+    "six sigma",
+    "functions",
+    "equation",
+    "reduce"
+  ]
+}

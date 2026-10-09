@@ -1,0 +1,60 @@
+{
+  "name": "door-closed",
+  "category": "home",
+  "description": "A closed door with a handle, for exits, rooms and private spaces.",
+  "aliases": [
+    "closed-door",
+    "shut-door",
+    "door-shut",
+    "private-room",
+    "room-closed",
+    "door-close",
+    "closed"
+  ],
+  "synonyms": [
+    "shut",
+    "close door",
+    "privacy",
+    "private",
+    "do not disturb",
+    "entry",
+    "exit",
+    "room",
+    "office door",
+    "front door",
+    "bedroom",
+    "meeting room",
+    "busy",
+    "locked out",
+    "enter",
+    "doorway",
+    "gate"
+  ],
+  "tags": [
+    "door",
+    "room",
+    "closed",
+    "privacy",
+    "home"
+  ],
+  "paths": [
+    {
+      "d": "M5 21 V5 A2 2 0 0 1 7 3 H17 A2 2 0 0 1 19 5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 11.5 V13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 21 V5 A2 2 0 0 1 7 3 H17 A2 2 0 0 1 19 5 V21 Z"
+  ],
+  "cutouts": [
+    "M15 11.5 V13"
+  ]
+}

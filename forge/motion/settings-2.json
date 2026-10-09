@@ -1,0 +1,42 @@
+{
+  "name": "settings-2",
+  "intent": "the knobs slide along their tracks like tuning a setting",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.7
+    }
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "settings",
+      "effect": "spin"
+    },
+    {
+      "to": "sliders",
+      "effect": "morph"
+    },
+    {
+      "to": "settings-2@solid",
+      "effect": "scale"
+    }
+  ]
+}

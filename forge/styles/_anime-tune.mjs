@@ -24,7 +24,8 @@ export const SHADE_TONE = {
   tint: ['shadow', 0.17], accent: ['shadow', 0.3], ink: ['c1', 0.3], edge: ['shadow', 0.3], shine: ['shadow', 0.17],
 }
 export const ROLES = Object.keys(PALETTE)
-export const paint = role => `var(--with-anime-${role}, ${PALETTE[role] || PALETTE.ink})`
+// hex: optional per-icon fallbacks (people avatars carry their own skin / hair / clothing defaults)
+export const paint = (role, hex) => `var(--with-anime-${role}, ${(hex && hex[role]) || PALETTE[role] || PALETTE.ink})`
 
 // measures (24-grid units)
 export const M = {

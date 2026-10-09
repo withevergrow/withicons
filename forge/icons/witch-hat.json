@@ -1,0 +1,73 @@
+{
+  "name": "witch-hat",
+  "category": "halloween",
+  "description": "A pointed witch hat with a buckle band, for Halloween.",
+  "aliases": [
+    "witch",
+    "witches-hat",
+    "wizard-hat",
+    "pointed-hat",
+    "sorcerer-hat",
+    "halloween-hat",
+    "magic-hat"
+  ],
+  "tags": [
+    "halloween",
+    "witch",
+    "magic",
+    "hat",
+    "costume"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 18.25 C2.5 16.75 6.75 15.75 12 15.75 C17.25 15.75 21.5 16.75 21.5 18.25 C21.5 19.75 17.25 20.75 12 20.75 C6.75 20.75 2.5 19.75 2.5 18.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 16 L10.25 7.5 C11.25 4.75 14.75 3.25 18.5 5.25 C16 5.5 14.25 6.75 14.25 9 L17.25 16",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 12 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 13.25 H13.25 V15 H10.75 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6.75 16 L10.25 7.5 C11.25 4.75 14.75 3.25 18.5 5.25 C16 5.5 14.25 6.75 14.25 9 L17.25 16 Z",
+    "M2.5 18.25 C2.5 16.75 6.75 15.75 12 15.75 C17.25 15.75 21.5 16.75 21.5 18.25 C21.5 19.75 17.25 20.75 12 20.75 C6.75 20.75 2.5 19.75 2.5 18.25 Z"
+  ],
+  "cutouts": [
+    "M6 12 H18",
+    "M5.5 16.5 C8.5 15.5 15.5 15.5 18.5 16.5",
+    "M10.75 13.25 H13.25 V15 H10.75 Z"
+  ],
+  "synonyms": [
+    "witchcraft",
+    "witchy",
+    "witches",
+    "sorceress",
+    "spell",
+    "spells",
+    "magic",
+    "wizard",
+    "sorcerer",
+    "mage",
+    "enchantress",
+    "coven",
+    "costume",
+    "dress up",
+    "fancy dress",
+    "hat",
+    "buckle hat",
+    "halloween costume",
+    "occult",
+    "mystic",
+    "fantasy",
+    "cone hat",
+    "which hat"
+  ]
+}

@@ -16,26 +16,32 @@ const skip = !has('with-loader.js') && 'dist/ not built (node forge/build.mjs cl
 const meta = skip ? null : (await import(pathToFileURL(path.join(dist, 'data/meta.js')).href)).default
 const styles = skip ? [] : JSON.parse(/var STYLE_NAMES = (\[[^\]]*\])/.exec(read('with-loader.js'))[1])
 
+// the newest styles' files live in companion packages (STYLE_HOME / HOME_DIR in the loader): packages/<pkg>/<dir>/
+const homeOf = () => { const js = fs.readFileSync(path.join(dist, 'with-loader.js'), 'utf8'); return [JSON.parse(/var STYLE_HOME = (\{[^\n]*\})/.exec(js)[1]), JSON.parse(/var HOME_DIR = (\{[^\n]*\})/.exec(js)[1])] }
+const styleDir = s => { const [H, D] = homeOf(); return H[s] ? path.join(root, '..', H[s], D[H[s]]) : dist }
+const readStyle = (s, f) => fs.readFileSync(path.join(styleDir(s), f), 'utf8')
+
 test('every style file, every per-icon file, base, all, loader, runtime', { skip }, () => {
   assert.ok(styles.length >= 20 && styles[0] === 'line')
   for (const f of ['with-base.css', 'with-all.css', 'with-loader.js', 'with-icons.js', 'with-icons.d.ts', 'demo.html']) assert.ok(has(f), f)
   for (const s of styles) {
-    assert.ok(has(`with-${s}.css`), `with-${s}.css`)
-    for (const n of meta.names) assert.ok(has(`${s}/${n}.css`), `${s}/${n}.css`)
+    const d = styleDir(s)
+    assert.ok(fs.existsSync(path.join(d, `with-${s}.css`)), `with-${s}.css`)
+    for (const n of meta.names) assert.ok(fs.existsSync(path.join(d, `${s}/${n}.css`)), `${s}/${n}.css`)
   }
   for (let i = 0; i < 16; i++) assert.ok(has(`data/alias/${i}.js`), `data/alias/${i}.js`)
   // with-all.css only @imports the style files (one 30 MB file would exceed what a CDN serves)
   const all = read('with-all.css')
-  for (const s of styles) assert.ok(all.includes(`@import url("with-${s}.css")`))
+  for (const s of styles) assert.equal(all.includes(`@import url("with-${s}.css")`), styleDir(s) === dist, s)
   assert.ok(size('with-all.css') < 4096)
   assert.ok(size('with-loader.js') < 24 * 1024, 'with-loader.js stays a few KB: ' + size('with-loader.js'))
 })
 
 test('a per-icon file holds exactly the rule of its style file', { skip }, () => {
   for (const s of ['line', 'solid', 'kawaii', 'gothic'].filter(x => styles.includes(x))) {
-    const sheet = read(`with-${s}.css`)
+    const sheet = readStyle(s, `with-${s}.css`)
     for (const n of ['home', 'heart', 'bell']) {
-      const rule = read(`${s}/${n}.css`).trim()
+      const rule = readStyle(s, `${s}/${n}.css`).trim()
       assert.ok(rule.length > 40 && sheet.includes(rule), `${s}/${n}.css is the rule in with-${s}.css`)
     }
   }
@@ -46,10 +52,15 @@ test('a per-icon file holds exactly the rule of its style file', { skip }, () =>
 
 test('no file a CDN would refuse (jsDelivr: 20 MB per file, 150 MB per package)', { skip }, () => {
   const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])
-  const files = walk(dist)
-  assert.deepEqual(files.filter(f => fs.statSync(f).size > 20 * 1024 * 1024), [])
-  const total = files.reduce((a, f) => a + fs.statSync(f).size, 0)
-  assert.ok(total < 120 * 1024 * 1024, `dist is ${(total / 1048576).toFixed(1)} MB`)
+  // this package and every companion (classes-plus, an own-style package): each one stays well under jsDelivr's limit
+  const [H] = homeOf()
+  const pkgs = [...new Set([root, ...Object.values(H).map(p => path.join(root, '..', p))])]
+  for (const p of pkgs) {
+    const files = walk(path.join(p, 'dist'))
+    assert.deepEqual(files.filter(f => fs.statSync(f).size > 20 * 1024 * 1024), [])
+    const total = files.reduce((a, f) => a + fs.statSync(f).size, 0)
+    assert.ok(total < 120 * 1024 * 1024, `${path.basename(p)}/dist is ${(total / 1048576).toFixed(1)} MB`)
+  }
 })
 
 test('package.json: short subpaths, CSS side effects, the bare CDN URL is the loader', { skip }, () => {

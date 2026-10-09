@@ -100,6 +100,8 @@ const GEOMETRY = [
 	"points"
 ];
 const pathCache = /* @__PURE__ */ new WeakMap();
+const gradCache = /* @__PURE__ */ new WeakMap();
+let uidCounter = 0;
 function shapeToD(tag, a) {
 	const n = (k) => Number(a[k] ?? 0) || 0;
 	switch (tag) {
@@ -127,11 +129,43 @@ function shapeToD(tag, a) {
 	}
 	return null;
 }
+function gradsOf(node) {
+	let out = gradCache.get(node);
+	if (!out) {
+		const list = [];
+		for (const [tag, , kids] of node) {
+			if (tag !== "defs" || !kids) continue;
+			for (const [t, a, stops] of kids) {
+				if (t !== "linearGradient" && t !== "radialGradient") continue;
+				list.push({
+					radial: t === "radialGradient",
+					attrs: a,
+					stops: (stops || []).filter((x) => x[0] === "stop").map((x) => x[1])
+				});
+			}
+		}
+		gradCache.set(node, out = list);
+	}
+	return out;
+}
+function withSuffix(a, sfx) {
+	let b = null;
+	for (const k of Object.keys(a)) {
+		const v = a[k];
+		const w = k === "id" ? v + sfx : typeof v === "string" && v.indexOf("url(#") >= 0 ? v.replace(/url\(#([^)\s]+)\)/g, "url(#$1" + sfx + ")") : v;
+		if (w !== v) {
+			if (!b) b = { ...a };
+			b[k] = w;
+		}
+	}
+	return b || a;
+}
 function pathsOf(node) {
 	let out = pathCache.get(node);
 	if (!out) {
 		const list = [];
 		for (const [tag, attrs] of node) {
+			if (tag === "defs") continue;
 			if (tag === "path") {
 				list.push(attrs);
 				continue;
@@ -161,6 +195,8 @@ var WithIconComponent = class WithIconComponent {
 	registry = inject(WITH_ICONS, { optional: true });
 	rootAttrs = {};
 	paths = [];
+	grads = [];
+	uid = "-w" + ++uidCounter;
 	found = false;
 	ready = false;
 	ngOnChanges() {
@@ -205,7 +241,14 @@ var WithIconComponent = class WithIconComponent {
 		if (this.title || this.ariaLabel || this.ariaLabelledby) a["role"] = "img";
 		else a["aria-hidden"] = "true";
 		this.rootAttrs = a;
-		this.paths = data ? pathsOf(data.node) : [];
+		const grads = data ? gradsOf(data.node) : [];
+		const sfx = this.uid;
+		this.grads = grads.length ? grads.map((g) => ({
+			radial: g.radial,
+			attrs: withSuffix(g.attrs, sfx),
+			stops: g.stops
+		})) : grads;
+		this.paths = data ? grads.length ? pathsOf(data.node).map((p) => withSuffix(p, sfx)) : pathsOf(data.node) : [];
 		this.found = !!data;
 	}
 	static ɵfac = i0.ɵɵngDeclareFactory({
@@ -248,7 +291,7 @@ var WithIconComponent = class WithIconComponent {
 		},
 		usesOnChanges: true,
 		ngImport: i0,
-		template: "@if (found) {<svg [withAttrs]=\"rootAttrs\">@if (title) {<svg:title>{{ title }}</svg:title>}@for (p of paths; track $index) {<svg:path [withAttrs]=\"p\" />}<ng-content /></svg>}",
+		template: "@if (found) {<svg [withAttrs]=\"rootAttrs\">@if (title) {<svg:title>{{ title }}</svg:title>}@if (grads.length) {<svg:defs>@for (g of grads; track $index) {@if (g.radial) {<svg:radialGradient [withAttrs]=\"g.attrs\">@for (s of g.stops; track $index) {<svg:stop [withAttrs]=\"s\" />}</svg:radialGradient>}@else {<svg:linearGradient [withAttrs]=\"g.attrs\">@for (s of g.stops; track $index) {<svg:stop [withAttrs]=\"s\" />}</svg:linearGradient>}}</svg:defs>}@for (p of paths; track $index) {<svg:path [withAttrs]=\"p\" />}<ng-content /></svg>}",
 		isInline: true,
 		styles: ["with-icon{display:inline-flex}\n"],
 		dependencies: [{
@@ -280,7 +323,7 @@ i0.ɵɵngDeclareClassMetadata({
 				"[attr.aria-labelledby]": "null"
 			},
 			encapsulation: ViewEncapsulation.None,
-			template: "@if (found) {<svg [withAttrs]=\"rootAttrs\">@if (title) {<svg:title>{{ title }}</svg:title>}@for (p of paths; track $index) {<svg:path [withAttrs]=\"p\" />}<ng-content /></svg>}",
+			template: "@if (found) {<svg [withAttrs]=\"rootAttrs\">@if (title) {<svg:title>{{ title }}</svg:title>}@if (grads.length) {<svg:defs>@for (g of grads; track $index) {@if (g.radial) {<svg:radialGradient [withAttrs]=\"g.attrs\">@for (s of g.stops; track $index) {<svg:stop [withAttrs]=\"s\" />}</svg:radialGradient>}@else {<svg:linearGradient [withAttrs]=\"g.attrs\">@for (s of g.stops; track $index) {<svg:stop [withAttrs]=\"s\" />}</svg:linearGradient>}}</svg:defs>}@for (p of paths; track $index) {<svg:path [withAttrs]=\"p\" />}<ng-content /></svg>}",
 			styles: ["with-icon{display:inline-flex}\n"]
 		}]
 	}],

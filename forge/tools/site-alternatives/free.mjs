@@ -1,14 +1,14 @@
 // "Free icons for …" landers: real icon grids generated from the icon data, each answering one real query.
 import { GUIDES } from '../site-pages/guides-data.mjs'
 import { crumbs } from '../site-pages/lib.mjs'
-import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, styleStrip, STYLES, STYLE_TITLE, ICON_NAMES, META, rawSvgSize, CHECKED, iconLink } from './render.mjs'
+import { I, esc, cvar, code, write, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, styleStrip, STYLES, STYLE_TITLE, ICON_NAMES, META, rawSvgSize, CHECKED, iconLink } from './render.mjs'
 import { moreLanders } from './free-more.mjs'
-import { N_STYLES, word, stylesIn, listTitles, styleTitle, hasStyle } from '../site-pages/lib.mjs'
+import { N_STYLES, OVER_TEXT, word, stylesIn, listTitles, styleTitle, hasStyle } from '../site-pages/lib.mjs'
 import { motionAssets } from '../site-pages/motion.mjs'
 
 const G = Object.fromEntries(GUIDES.map(g => [g.slug, g]))
-const N = ICON_NAMES.length, T = N * STYLES.length
-const TOTAL = `${N} icons × ${STYLES.length} styles (${T.toLocaleString('en-US')} in all)`
+const N = ICON_NAMES.length
+const TOTAL = `${N} icons × ${STYLES.length} styles, plus live icons (${OVER_TEXT} in all)`
 const NS = N_STYLES
 
 /* curated sets (validated against the icon data at build time) */
@@ -52,7 +52,7 @@ const BASE_LANDERS = [
     title: `Free SVG icons: ${N} icons in ${NS} styles, MIT licensed · with icons`,
     desc: `Free SVG icons you can copy or download in one click: ${N} icons in ${NS} styles on a 24 × 24 grid, currentColor, MIT licensed, no account or attribution needed.`,
     h1: ['Free SVG icons,', 'copy in one click'], q: 'free SVG icons',
-    answer: () => `with icons gives you <b>${N} free SVG icons in ${NS} styles</b> (${T.toLocaleString('en-US')} files in all), MIT licensed, with no sign-up and no credit required. Every icon is a clean <code>viewBox="0 0 24 24"</code> SVG that uses <code>currentColor</code>, so it takes the colour of the text around it. Click any icon below to copy its SVG code, or download the file.`,
+    answer: () => `with icons gives you <b>${N} free SVG icons in ${NS} styles</b> (${OVER_TEXT} files in all, with the live icons), MIT licensed, with no sign-up and no credit required. Every icon is a clean <code>viewBox="0 0 24 24"</code> SVG that uses <code>currentColor</code>, so it takes the colour of the text around it. Click any icon below to copy its SVG code, or download the file.`,
     picker: { actions: ['svg', 'dlsvg', 'png'], groups: [['Interface', SETS.ui], ['Arrows', SETS.arrows], ['Files', SETS.files], ['Status', SETS.status]] },
     body: p => `
 <section class="ax-split" aria-labelledby="svg-why">
@@ -329,7 +329,7 @@ import { Home as HomeSolid } from '@withicons/vue/solid'
   },
 ]
 
-export const LANDERS = [...BASE_LANDERS, ...moreLanders({ steps, facts, BASE_FACTS, N, T })]
+export const LANDERS = [...BASE_LANDERS, ...moreLanders({ steps, facts, BASE_FACTS, N, T: N * STYLES.length })]
 
 function rawSvgCode(n) { return rawSvgSize.raw(n) }
 
@@ -367,13 +367,18 @@ function lander(L, all, libs) {
 function hub(all, libs) {
   const path = 'free/index.html', p = '../'
   const title = 'Free icons for slides, docs, design tools and code · with icons'
-  const desc = `Free icon pages by task and style: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, icon classes, hand-drawn, cute, sticker, pixel, glass, retro, 3D, Bauhaus, skeuomorphic, anime, gothic, pastel, coquette, plush (for kids) and animated icons. ${N} icons × ${NS} styles, MIT.`
+  // the rich-style landers join the description only once they exist (each needs its renderer)
+  const RICH_WORDS = [['ai-icons', 'AI'], ['clay-icons', 'clay'], ['saas-icons', 'SaaS'], ['bento-icons', 'bento'], ['enterprise-icons', 'enterprise'], ['app-icons', 'app'], ['liquid-glass-icons', 'liquid glass'], ['chrome-icons', 'chrome'], ['soft-3d-icons', 'soft 3D'], ['neo-brutalism-icons', 'neo-brutalism']]
+    .filter(([s]) => all.some(l => l.slug === s)).map(([, w]) => w)
+  const FEST_WORDS = [['diwali-icons', 'Diwali'], ['holi-icons', 'Holi'], ['halloween-icons', 'Halloween'], ['christmas-icons', 'Christmas'], ['lunar-new-year-icons', 'Lunar New Year'], ['valentines-day-icons', 'Valentine’s']]
+    .filter(([s]) => all.some(l => l.slug === s)).map(([, w]) => w)
+  const desc = `Free icon pages by task and style: SVG, transparent PNG, PowerPoint, Google Slides, Canva, Figma, Notion, React, Vue, icon classes, hand-drawn, cute, sticker, pixel, glass, retro, 3D, Bauhaus, skeuomorphic, anime, gothic, pastel, coquette, plush (for kids), ${RICH_WORDS.map(w => w + ', ').join('')}${FEST_WORDS.length ? FEST_WORDS.join(', ') + ' and other festival icons, ' : ''}and animated icons. ${N} icons × ${NS} styles, MIT.`
   const qs = [
     ['Are all of these icons free?', `Yes. Every one of the ${N} icons in all ${NS} styles is free under the MIT licence, for personal and commercial use, with no credit required.`],
     ['Do I need an account?', 'No. Click an icon to copy or download it. That’s it.'],
     ['Which file format should I use?', 'SVG when your app accepts it (PowerPoint, Word, Canva, Figma, websites). PNG for Google Slides, Google Docs, Notion and email.'],
   ]
-  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'svg-icons']], ['By style & motion', ['animated-icons', 'hand-drawn-icons', 'cute-icons', 'sticker-icons', 'pixel-icons', 'glassmorphism-icons', 'retro-icons', '3d-icons', 'bauhaus-icons', 'skeuomorphic-icons', 'anime-icons', 'gothic-icons', 'pastel-icons', 'coquette-icons', 'plush-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
+  const groups = [['For slides & docs', ['icons-for-powerpoint', 'icons-for-google-slides', 'icons-for-notion', 'png-icons']], ['For design', ['icons-for-figma', 'icons-for-canva', 'svg-icons']], ['By style & motion', ['animated-icons', 'hand-drawn-icons', 'cute-icons', 'sticker-icons', 'pixel-icons', 'glassmorphism-icons', 'retro-icons', '3d-icons', 'bauhaus-icons', 'skeuomorphic-icons', 'anime-icons', 'gothic-icons', 'pastel-icons', 'coquette-icons', 'plush-icons', 'ai-icons', 'clay-icons', 'saas-icons', 'bento-icons', 'enterprise-icons', 'app-icons', 'liquid-glass-icons', 'chrome-icons', 'soft-3d-icons', 'neo-brutalism-icons']], ['For holidays & festivals', ['diwali-icons', 'holi-icons', 'halloween-icons', 'christmas-icons', 'lunar-new-year-icons', 'valentines-day-icons']], ['For code', ['icons-for-react', 'icons-for-vue', 'font-awesome-style-icon-classes']]]
     .map(([g, slugs]) => [g, slugs.filter(s => all.some(l => l.slug === s))]).filter(([, s]) => s.length)
   const by = Object.fromEntries(all.map(l => [l.slug, l]))
   const body = `
@@ -405,5 +410,30 @@ function hub(all, libs) {
 export function buildFree(libs) {
   const out = [hub(LANDERS, libs)]
   for (const L of LANDERS) out.push(lander(L, LANDERS, libs))
+  // retired lander URLs that were live: a small noindex page sends old links on (kept out of the sitemap and llms.txt,
+  // which skip noindex pages and only list `out`)
+  for (const [from, to] of Object.entries(MOVED)) if (LANDERS.some(l => l.slug === to)) write(`free/${from}.html`, movedPage(to, LANDERS.find(l => l.slug === to).short))
   return out
+}
+
+// old slug -> current slug
+const MOVED = { 'isometric-icons': 'soft-3d-icons' }
+function movedPage(to, label) {
+  const href = `${to}.html`, canonical = `https://withicons.com/free/${href}`
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(label)} | with icons</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${canonical}">
+<meta http-equiv="refresh" content="0; url=${href}">
+<meta name="color-scheme" content="light dark">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FBF8F3;color:#111318;font:16px/1.5 system-ui,sans-serif}a{color:inherit}@media (prefers-color-scheme:dark){body{background:#0D0F14;color:#F3F1EC}}</style>
+<script>location.replace(${JSON.stringify(href)}+location.search+location.hash)</script>
+</head>
+<body><p>This page moved: <a href="${href}">${esc(label)}</a></p></body>
+</html>
+`
 }

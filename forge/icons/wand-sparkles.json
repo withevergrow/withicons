@@ -1,0 +1,84 @@
+{
+  "name": "wand-sparkles",
+  "category": "ai",
+  "description": "A magic wand with sparkles, for AI generate, auto-fix and one-click magic actions.",
+  "aliases": [
+    "magic-wand-sparkles",
+    "ai-magic",
+    "magic-sparkles",
+    "auto-magic",
+    "spellcast",
+    "enchant",
+    "magic-fix",
+    "ai-wand",
+    "wand-magic"
+  ],
+  "tags": [
+    "ai",
+    "magic",
+    "wand",
+    "sparkles",
+    "generate",
+    "enhance"
+  ],
+  "paths": [
+    {
+      "d": "M3.25 17.25 L10.75 9.75 A0.71 0.71 0 0 1 11.75 9.75 L14.25 12.25 A0.71 0.71 0 0 1 14.25 13.25 L6.75 20.75 A0.71 0.71 0 0 1 5.75 20.75 L3.25 18.25 A0.71 0.71 0 0 1 3.25 17.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.25 12.25 L11.75 15.75",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 2.5 C16.5 5.09 17.41 6 20 6 C17.41 6 16.5 6.91 16.5 9.5 C16.5 6.91 15.59 6 13 6 C15.59 6 16.5 5.09 16.5 2.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8 2.5 C8 3.9 8.6 4.5 10 4.5 C8.6 4.5 8 5.1 8 6.5 C8 5.1 7.4 4.5 6 4.5 C7.4 4.5 8 3.9 8 2.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M19 12.5 C19 14.15 19.6 14.75 21.25 14.75 C19.6 14.75 19 15.35 19 17 C19 15.35 18.4 14.75 16.75 14.75 C18.4 14.75 19 14.15 19 12.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.25 17.25 L10.75 9.75 A0.71 0.71 0 0 1 11.75 9.75 L14.25 12.25 A0.71 0.71 0 0 1 14.25 13.25 L6.75 20.75 A0.71 0.71 0 0 1 5.75 20.75 L3.25 18.25 A0.71 0.71 0 0 1 3.25 17.25 Z",
+    "M16.5 2.5 C16.5 5.09 17.41 6 20 6 C17.41 6 16.5 6.91 16.5 9.5 C16.5 6.91 15.59 6 13 6 C15.59 6 16.5 5.09 16.5 2.5 Z",
+    "M8 2.5 C8 3.9 8.6 4.5 10 4.5 C8.6 4.5 8 5.1 8 6.5 C8 5.1 7.4 4.5 6 4.5 C7.4 4.5 8 3.9 8 2.5 Z",
+    "M19 12.5 C19 14.15 19.6 14.75 21.25 14.75 C19.6 14.75 19 15.35 19 17 C19 15.35 18.4 14.75 16.75 14.75 C18.4 14.75 19 14.15 19 12.5 Z"
+  ],
+  "cutouts": [
+    "M8.25 12.25 L11.75 15.75"
+  ],
+  "synonyms": [
+    "magic",
+    "magic wand",
+    "ai generate",
+    "generate with ai",
+    "auto enhance",
+    "enhance",
+    "improve",
+    "auto fix",
+    "fix with ai",
+    "beautify",
+    "polish",
+    "rewrite",
+    "smart compose",
+    "one click",
+    "transform",
+    "wizard",
+    "abracadabra",
+    "fairy",
+    "spell",
+    "sparkle",
+    "genai",
+    "generative ai",
+    "copilot",
+    "ai assist",
+    "make it better",
+    "retouch",
+    "magic eraser"
+  ]
+}

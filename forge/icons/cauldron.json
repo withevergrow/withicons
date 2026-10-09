@@ -1,0 +1,74 @@
+{
+  "name": "cauldron",
+  "category": "halloween",
+  "description": "A bubbling cauldron, for potions and Halloween.",
+  "aliases": [
+    "witch-cauldron",
+    "witches-cauldron",
+    "potion-pot",
+    "brew",
+    "witch-pot",
+    "kettle-pot",
+    "bubbling-pot"
+  ],
+  "tags": [
+    "halloween",
+    "witch",
+    "potion",
+    "magic",
+    "pot"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 9 H19.5 A1.5 1.5 0 0 1 19.5 12 H4.5 A1.5 1.5 0 0 1 4.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 12 C3.75 14.5 4.5 17.25 6.75 18.75 C8.25 19.75 10 20.25 12 20.25 C14 20.25 15.75 19.75 17.25 18.75 C19.5 17.25 20.25 14.5 19 12",
+      "plate": "K"
+    },
+    {
+      "d": "M8 19.75 L7.25 21.5 M16 19.75 L16.75 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11 4.5 A1.5 1.5 0 1 1 8 4.5 A1.5 1.5 0 1 1 11 4.5 Z M15.75 3.5 A1 1 0 1 1 13.75 3.5 A1 1 0 1 1 15.75 3.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 9 H19.5 A1.5 1.5 0 0 1 19.5 12 H4.5 A1.5 1.5 0 0 1 4.5 9 Z",
+    "M5 12 C3.75 14.5 4.5 17.25 6.75 18.75 C8.25 19.75 10 20.25 12 20.25 C14 20.25 15.75 19.75 17.25 18.75 C19.5 17.25 20.25 14.5 19 12 Z",
+    "M11 4.5 A1.5 1.5 0 1 1 8 4.5 A1.5 1.5 0 1 1 11 4.5 Z",
+    "M15.75 3.5 A1 1 0 1 1 13.75 3.5 A1 1 0 1 1 15.75 3.5 Z"
+  ],
+  "cutouts": [
+    "M3 12 H21"
+  ],
+  "synonyms": [
+    "potion",
+    "potions",
+    "brewing",
+    "witch brew",
+    "witches brew",
+    "spell",
+    "magic",
+    "alchemy",
+    "elixir",
+    "concoction",
+    "bubbling",
+    "bubbles",
+    "stew",
+    "pot",
+    "kettle",
+    "hocus pocus",
+    "toil and trouble",
+    "witchcraft",
+    "mix",
+    "recipe",
+    "experiment",
+    "halloween",
+    "caldron",
+    "cauldren"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "name": "@withicons/soft3d",
+  "version": "0.3.1",
+  "description": "The soft3d style of with icons (734 icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/soft3d"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "svg-icons",
+    "multicolor-icons",
+    "gradient-icons",
+    "soft3d",
+    "css-icons"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/nodes/soft3d.cjs",
+  "module": "./dist/nodes/soft3d.js",
+  "types": "./dist/nodes/soft3d.d.ts",
+  "jsdelivr": "./package.json",
+  "unpkg": "./package.json",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/nodes/soft3d.d.ts",
+        "default": "./dist/nodes/soft3d.js"
+      },
+      "require": {
+        "types": "./dist/nodes/soft3d.d.cts",
+        "default": "./dist/nodes/soft3d.cjs"
+      }
+    },
+    "./nodes/soft3d": {
+      "import": {
+        "types": "./dist/nodes/soft3d.d.ts",
+        "default": "./dist/nodes/soft3d.js"
+      },
+      "require": {
+        "types": "./dist/nodes/soft3d.d.cts",
+        "default": "./dist/nodes/soft3d.cjs"
+      }
+    },
+    "./svg/*": "./dist/svg/*",
+    "./classes/*": "./dist/classes/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "nodes/soft3d": [
+        "./dist/nodes/soft3d.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@withicons/core": "0.3.1"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

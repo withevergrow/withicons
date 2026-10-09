@@ -1,0 +1,76 @@
+{
+  "name": "satellite-dish",
+  "category": "devices",
+  "description": "A satellite dish on a stand, for broadcast, signals and remote connections.",
+  "aliases": [
+    "dish",
+    "antenna-dish",
+    "parabolic-antenna",
+    "satellite-antenna",
+    "receiver",
+    "dish-antenna",
+    "uplink",
+    "downlink"
+  ],
+  "tags": [
+    "satellite",
+    "antenna",
+    "broadcast",
+    "signal",
+    "communication"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 7.5 A7.5 7.5 0 0 0 13.5 17.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 12.5 L11.5 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 18 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 21.5 H10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11.5 5.5 A4 4 0 0 1 15.5 9.5",
+      "plate": "S"
+    },
+    {
+      "d": "M11.5 2 A7.5 7.5 0 0 1 19 9.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.5 7.5 A7.5 7.5 0 0 0 13.5 17.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "broadcast",
+    "satellite tv",
+    "tv dish",
+    "signal",
+    "reception",
+    "transmit",
+    "transmission",
+    "broadcasting",
+    "communication",
+    "telecom",
+    "remote connection",
+    "space communication",
+    "ground station",
+    "radio telescope",
+    "wireless",
+    "network",
+    "internet",
+    "starlink",
+    "beam",
+    "stream",
+    "wifi",
+    "feed"
+  ]
+}

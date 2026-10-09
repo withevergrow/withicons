@@ -1,0 +1,75 @@
+{
+  "name": "user-lock",
+  "category": "users",
+  "description": "A person with a padlock, for private accounts, permissions and locked users.",
+  "aliases": [
+    "private-user",
+    "locked-user",
+    "locked-account",
+    "private-account",
+    "account-locked",
+    "user-security",
+    "secure-user",
+    "restricted-user",
+    "user-permissions"
+  ],
+  "tags": [
+    "user",
+    "lock",
+    "private",
+    "security",
+    "account",
+    "permission"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 15 H20 A1.5 1.5 0 0 1 21.5 16.5 V19.5 A1.5 1.5 0 0 1 20 21 H15 A1.5 1.5 0 0 1 13.5 19.5 V16.5 A1.5 1.5 0 0 1 15 15 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M15 15 V12.5 A2.5 2.5 0 0 1 20 12.5 V15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M15 15 H20 A1.5 1.5 0 0 1 21.5 16.5 V19.5 A1.5 1.5 0 0 1 20 21 H15 A1.5 1.5 0 0 1 13.5 19.5 V16.5 A1.5 1.5 0 0 1 15 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "private profile",
+    "private account",
+    "account locked",
+    "locked out",
+    "suspended",
+    "restricted",
+    "permissions",
+    "access control",
+    "role",
+    "roles",
+    "admin only",
+    "privacy",
+    "privacy settings",
+    "secure account",
+    "password",
+    "2fa",
+    "two factor",
+    "mfa",
+    "sso",
+    "authentication",
+    "identity",
+    "iam",
+    "blocked user",
+    "protected profile",
+    "account security"
+  ]
+}

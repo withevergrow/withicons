@@ -1,0 +1,47 @@
+{
+  "name": "lion-head",
+  "intent": "the dance lion bobs its head to the drum",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.8,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 1.3
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        11
+      ]
+    }
+  },
+  "alt": [
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        22
+      ]
+    },
+    {
+      "preset": "bounce"
+    }
+  ],
+  "swap": [
+    {
+      "to": "dragon-head",
+      "effect": "flip"
+    }
+  ]
+}

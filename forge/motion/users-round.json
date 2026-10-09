@@ -1,0 +1,41 @@
+{
+  "name": "users-round",
+  "intent": "the team bobs together; pops on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.5,
+      "duration": 3.4,
+      "delay": 0.3
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    },
+    {
+      "preset": "nod",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "user-round",
+      "effect": "fade"
+    },
+    {
+      "to": "users",
+      "effect": "scale"
+    }
+  ]
+}

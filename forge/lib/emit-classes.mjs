@@ -15,7 +15,8 @@
 import fs from 'fs'
 import path from 'path'
 import zlib from 'zlib'
-import { J, LOOKUP_SRC, withBareBase, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc, distWriter, basePkg, writePkg } from './emit-core.mjs'
+import { cdnPkg, cdnDir, splitPackages, isOwnPackage } from './emit-core.mjs'
+import { J, LOOKUP_SRC, withUniqMarkup, withBareBase, styleTable, innerOf, renderOf, namesAndAliasesDts, flattenVars, liveStrokeStyles, paletteDoc, distWriter, basePkg, writePkg } from './emit-core.mjs'
 
 const MODIFIERS = ['xs', 'sm', 'lg', '2x', '3x', '4x', '5x', 'fw', 'spin', 'pulse', 'rotate-90', 'rotate-180', 'rotate-270',
   'flip-h', 'flip-v', 'flip-both', 'rtl']
@@ -81,13 +82,23 @@ function paintKind(v) {
   return r === 'none' || r === 'transparent' ? 'none' : /^currentcolor$/i.test(r) ? 'ink' : 'pal'
 }
 const q = v => String(v).replace(/'/g, '&#39;').replace(/"/g, "'").replace(/</g, '&lt;')
-const nodeMarkup = (tag, a) => `<${tag}${Object.entries(a).filter(([, v]) => v != null && v !== false).map(([k, v]) => ` ${k}='${q(v)}'`).join('')}/>`
+const nodeAttrs = a => Object.entries(a).filter(([, v]) => v != null && v !== false).map(([k, v]) => ` ${k}='${q(v)}'`).join('')
+const nodeMarkup = (tag, a) => `<${tag}${nodeAttrs(a)}/>`
+// nested nodes (the gradient definitions of rich styles), CSS variables flattened: a data URI has no cascade
+const treeMarkup = list => list.map(([tag, a, kids]) => {
+  const fa = {}
+  for (const [k, v] of Object.entries(a)) fa[k] = typeof v === 'string' ? flattenVars(v) : v
+  return kids && kids.length ? `<${tag}${nodeAttrs(fa)}>${treeMarkup(kids)}</${tag}>` : `<${tag}${nodeAttrs(fa)}/>`
+}).join('')
 const encodeSvg = s => `url("data:image/svg+xml,${s.replace(/[%#"\\\r\n\t]|[^\x20-\x7e]/g, c => encodeURIComponent(c))}")`
 export function layerUris(style, nodes) {
   const root = style.root || {}
   const rootFill = root.fill == null ? 'black' : root.fill, rootStroke = root.stroke == null ? 'none' : root.stroke
   const parts = []
-  for (const [tag, a] of nodes) {
+  // gradients (rich styles) go into the palette picture: its shapes are the ones that paint with url(#…)
+  const defs = treeMarkup(nodes.filter(n => Array.isArray(n[2]) && n[2].length))
+  for (const [tag, a, kids] of nodes) {
+    if (Array.isArray(kids) && kids.length) continue
     const fill = a.fill == null ? rootFill : a.fill, stroke = a.stroke == null ? rootStroke : a.stroke
     const fk = paintKind(fill), sk = paintKind(stroke)
     const base = {}
@@ -120,7 +131,7 @@ export function layerUris(style, nodes) {
   parts.forEach((p, i) => { if (p.ink) run.push(p); else flush(i) })
   flush(parts.length)
   return {
-    p: encodeSvg(`${open}${pal}</svg>`),
+    p: encodeSvg(`${open}${defs}${pal}</svg>`),
     i: ink ? encodeSvg(`${open}${masks}${ink}</svg>`) : EMPTY,
   }
 }
@@ -155,7 +166,14 @@ function withRuntime() {
   var base = abs(attr('data-with-base') || DATA_BASE)
   var styleBase = attr('data-with-base') || !web ? base : web + 'data/'
   var iconBase = attr('data-with-icons') ? abs(attr('data-with-icons')) : web ? web + 'icons/' : null
-  var DATA = {}, PENDING = {}, META = null, ONE = {}, ALIAS = {}
+  // the newest styles' data lives in @withicons/web-plus (WEB_HOME: style -> package), next to @withicons/web on the same
+  // CDN or node_modules path; a self-hosted web dist/ (data-with-web, data-with-base, data-with-icons): the same folders
+  var webHome = function (style, url, sub) {
+    if (!url || !has(WEB_HOME, style) || attr('data-with-base') || attr('data-with-icons')) return url
+    var m = /^(.*\/)(@withicons\/|packages\/)web(@[^/]*)?\/dist\/$/.exec(web || '')
+    return m ? m[1] + m[2] + WEB_HOME[style] + (m[3] || '') + '/dist/' + sub : url
+  }
+  var DATA = {}, PENDING = {}, META = null, ONE = {}, ALIAS = {}, UID = 0
   var NAMES = {}
   NAME_LIST.split(' ').forEach(function (n) { NAMES[n] = 1 })
 
@@ -163,7 +181,7 @@ function withRuntime() {
     var s = style || DEFAULT_STYLE
     if (!has(STYLES, s)) return Promise.reject(new Error('with icons: unknown style "' + s + '". Use one of: ' + STYLE_NAMES.join(', ') + '.'))
     if (DATA[s]) return Promise.resolve(DATA[s])
-    return PENDING[s] || (PENDING[s] = import(styleBase + s + '.js').then(function (m) { return (DATA[s] = m.default) }, function (e) { delete PENDING[s]; throw e }))
+    return PENDING[s] || (PENDING[s] = import(webHome(s, styleBase, 'data/') + s + '.js').then(function (m) { return (DATA[s] = m.default) }, function (e) { delete PENDING[s]; throw e }))
   }
   // one icon's inner markup: its own small file when the package has them, else the style's data
   function icon(style, name) {
@@ -171,7 +189,7 @@ function withRuntime() {
     var key = style + '/' + name
     if (has(ONE, key)) return Promise.resolve(ONE[key])
     if (!iconBase || !has(STYLES, style)) return load(style).then(function (map) { return map[name] })
-    return PENDING[key] || (PENDING[key] = import(iconBase + key + '.js').then(function (m) { return (ONE[key] = m.default) },
+    return PENDING[key] || (PENDING[key] = import(webHome(style, iconBase, 'icons/') + key + '.js').then(function (m) { return (ONE[key] = m.default) },
       function () { delete PENDING[key]; return load(style).then(function (map) { return map[name] }) }))
   }
   function meta() { return META || (META = import(base + 'meta.js').then(function (m) { return m.default }, function (e) { META = null; throw e })) }
@@ -229,7 +247,8 @@ function withRuntime() {
     else { a['aria-hidden'] = 'true'; a.focusable = 'false' }
     var s = '<svg'
     for (var q in a) s += ' ' + q + '="' + esc(a[q]) + '"'
-    return s + '>' + (o.label ? '<title>' + esc(o.label) + '</title>' : '') + inner + '</svg>'
+    // rich styles (gradients): every inline copy gets its own gradient ids
+    return s + '>' + (o.label ? '<title>' + esc(o.label) + '</title>' : '') + withUniqMarkup(inner, 'wi' + (++UID)) + '</svg>'
   }
 
   // parse an element's classes: { style, cands }
@@ -342,6 +361,18 @@ function withLoader() {
   var here = (me && (withBareBase(me.src, 'classes', VERSION, 'dist/') || me.src)) || document.baseURI
   var abs = function (u) { try { return new URL(u, here).href } catch (e) { return u } }
   var cssBase = abs((me && me.getAttribute('data-with-css')) || './')
+  // the newest styles' CSS lives in companion packages (STYLE_HOME: style -> package, HOME_DIR: its folder): next to
+  // this package on the same CDN or node_modules path (…/@withicons/classes@1.2.3/dist/ -> …/@withicons/classes-plus@1.2.3/dist/),
+  // or, for a self-hosted copy of dist/, the same folder. Override per package: data-with-css-<package>="…/".
+  var homes = {}
+  function baseFor(style) {
+    var p = has(STYLE_HOME, style) ? STYLE_HOME[style] : null
+    if (!p) return cssBase
+    if (homes[p]) return homes[p]
+    var own = me && me.getAttribute('data-with-css-' + p)
+    var m = /^(.*\/)(@withicons\/|packages\/)classes(@[^/]*)?\/dist\/$/.exec(cssBase)
+    return (homes[p] = own ? abs(own) : m ? m[1] + m[2] + p + (m[3] || '') + '/' + HOME_DIR[p] : cssBase)
+  }
   var dataBase = abs((me && me.getAttribute('data-with-base')) || './data/')
   var STYLE_SET = {}, RES = {}, NAMES = {}, DONE = {}, ALIAS = {}, META = null
   STYLE_NAMES.forEach(function (s) { STYLE_SET[s] = 1 })
@@ -354,7 +385,7 @@ function withLoader() {
     return (DONE[key] = new Promise(function (ok) {
       var l = document.createElement('link')
       l.rel = 'stylesheet'
-      l.href = cssBase + key + '.css'
+      l.href = baseFor(style) + key + '.css'
       l.setAttribute('data-with', key)
       l.onload = function () { ok(true) }
       l.onerror = function () { warn('with icons: could not load ' + l.href); ok(false) }
@@ -440,6 +471,8 @@ var RESERVED = ${J(RESERVED)}
 var ALIAS_SHARDS = ${ALIAS_SHARDS}
 var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
+var STYLE_HOME = ${J(Object.fromEntries(ctx.styles.map(s => [s.name, cdnPkg(s.name, 'classes')]).filter(([, p]) => p !== 'classes')))}
+var HOME_DIR = ${J(Object.fromEntries(ctx.styles.filter(s => cdnPkg(s.name, 'classes') !== 'classes').map(s => [cdnPkg(s.name, 'classes'), cdnDir(s.name, 'classes') + '/'])))}
 ${LOOKUP_SRC}
 ${withShard}
 ${withBareBase}
@@ -471,12 +504,14 @@ var STYLE_NAMES = ${J(ctx.styles.map(s => s.name))}
 var RESERVED = ${J(RESERVED)}
 var DATA_BASE = ${J(dataBase)}
 var WEB = ${J(!!web)}
+var WEB_HOME = ${J(web ? Object.fromEntries(ctx.styles.filter(s => cdnPkg(s.name, 'web') !== 'web').map(s => [s.name, cdnPkg(s.name, 'web')])) : {})}
 var ALIAS_SHARDS = ${ALIAS_SHARDS}
 var NAME_LIST = ${J(ctx.icons.map(i => i.name).join(' '))}
 var BASE_CSS = ${J(css)}
 ${LOOKUP_SRC}
 ${withShard}
 ${withBareBase}
+${withUniqMarkup}
 ;(${withRuntime.toString()})()
 })()
 `
@@ -537,17 +572,32 @@ no framework, zero dependencies. One line in your page:
 Every file sits at the top of \`dist/\`, so the URLs are short: \`dist/with-loader.js\`, \`dist/with-line.css\` (one style),
 \`dist/line/home.css\` (one icon). Prefer a custom element or components? \`<with-icon>\` is
 [\`@withicons/web\`](https://www.npmjs.com/package/@withicons/web); React, Vue, Svelte, Angular and Solid have their own packages.
-
+${(() => {
+  const h = splitPackages(styles, 'classes'), parts = Object.entries(h).filter(([p]) => p !== 'classes')
+  if (!parts.length) return ''
+  return `
+The newest styles' CSS files live in companion packages (jsDelivr serves at most 150 MB per package): ${parts.map(([p, l]) =>
+    `${l.map(x => '`' + x + '`').join(', ')} in [\`@withicons/${p}\`](https://www.npmjs.com/package/@withicons/${p})${isOwnPackage(p) ? ' (`dist/classes/`)' : ''}`).join('; ')}.
+\`with-loader.js\` and \`with-icons.js\` load them by themselves, from the same CDN or \`node_modules\` folder, so
+\`<i class="with with-home with-${parts[0][1][0]}">\` just works. A self-hosted copy: put their files next to this package's, or
+point the loader at them with \`data-with-css-<package>="…/"\`. With a bundler, install the companion
+(\`npm i @withicons/${parts[0][0]}\`) and import its files, e.g. \`@withicons/${parts[0][0]}/${isOwnPackage(parts[0][0]) ? 'classes/' : ''}with-${parts[0][1][0]}.css\`.
+`
+})()}
 With a bundler or a self-hosted copy:
 
 \`\`\`bash
 npm i @withicons/classes
 \`\`\`
 \`\`\`js
-import '@withicons/classes/with-line.css'    // every line icon (or with-solid.css, with-duo.css, ...)
-import '@withicons/classes/with-base.css'    // or: the base rules, then only the icons you use
+import '@withicons/classes/with-base.css'    // the base rules, then only the icons you use
 import '@withicons/classes/line/home.css'
+import '@withicons/classes/solid/heart.css'
+// or a whole style: import '@withicons/classes/with-line.css' (every line icon; with-solid.css, with-duo.css, ...)
 \`\`\`
+
+A small subset as one stylesheet without a bundler: concatenate the base rules and the icons' files,
+\`cd node_modules/@withicons/classes/dist && cat with-base.css line/home.css solid/heart.css > icons.css\`.
 
 Plain \`<i>\`/\`<span>\` elements with classes. Three interchangeable ways to render them, lightest first:
 
@@ -815,6 +865,50 @@ function pkgJson(ctx, styleNames) {
   }
 }
 
+// @withicons/classes-plus: the newest styles' class files, same layout as @withicons/classes (no scripts of its own)
+function plusPkgJson(ctx, name, list) {
+  return {
+    ...basePkg(ctx, '@withicons/' + name, `CSS icon classes for the ${list.length} newer with icons styles (${list.join(', ')}). Companion of @withicons/classes, whose loader finds them by itself.`,
+      ['css', 'css-icons', 'icon-classes', 'cdn', ...list, 'multicolor-icons']),
+    type: 'module',
+    sideEffects: ['*.css'],
+    exports: { './package.json': './package.json', './*': './dist/*' },
+    files: ['dist', 'README.md', 'LICENSE'],
+    unpkg: './dist/with-base.css', jsdelivr: './dist/with-base.css',
+  }
+}
+function plusReadme(ctx, name, list) {
+  const ex = list[0], t = '`', fence = '```'
+  return `# @withicons/${name}
+
+CSS icon classes for the ${list.length} newer with icons styles (${list.map(x => t + x + t).join(', ')}), for all ${ctx.icons.length} icons.
+A companion of [${t}@withicons/classes${t}](https://www.npmjs.com/package/@withicons/classes): its loader (${t}with-loader.js${t}) and
+runtime (${t}with-icons.js${t}) find these styles by themselves, so a page needs nothing extra:
+
+${fence}html
+<script src="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-loader.js" defer></script>
+<i class="with with-home with-${ex}"></i>
+${fence}
+
+They live in their own package because jsDelivr serves at most 150 MB per package. Without the loader:
+
+${fence}html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/${name}@latest/dist/with-base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/${name}@latest/dist/${ex}/home.css">
+${fence}
+
+With a bundler: ${t}npm i @withicons/${name}${t}, then ${t}import '@withicons/${name}/with-${ex}.css'${t} (or ${t}with-base.css${t} + ${t}${ex}/home.css${t} per icon).
+
+| file | contents |
+|---|---|
+| ${t}dist/with-<style>.css${t} | every icon of one style (base rules included) |
+| ${t}dist/<style>/<name>.css${t} | one icon's rule (what the loader links) |
+| ${t}dist/with-base.css${t}, ${t}dist/with-all.css${t} | the base rules; an @import of every style here |
+
+MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+`
+}
+
 // ---------------------------------------------------------------- emit
 export default async function emit(ctx) {
   const styleNames = ctx.styles.map(s => s.name)
@@ -901,11 +995,27 @@ export default async function emit(ctx) {
     site.set(`data/${s}.js`, `${dh}export default ${J(d)}\n`)
   }
 
-  // the package: unchanged files are left alone, stale ones (renamed icons) pruned
+  // the packages: unchanged files are left alone, stale ones (renamed icons) pruned. The newest styles' files go to
+  // companions (jsDelivr serves at most 150 MB per package): @withicons/classes-plus, and dist/classes/ of an own-style
+  // package (@withicons/soft3d); the loader finds them by itself (STYLE_HOME).
+  const homes = splitPackages(styleNames, 'classes')
+  const homeOf = f => { const m = /^(?:with-)?([a-z0-9]+)(?:\.css|\/)/.exec(f); return m && styleNames.includes(m[1]) ? cdnPkg(m[1], 'classes') : 'classes' }
+  const baseOnly = homes.classes || []
+  files.set('with-all.css', `${header}${baseOnly.map(s => `@import url("with-${s}.css");`).join('\n')}\n`)
   const out = distWriter(ctx, 'packages/classes/dist')
-  for (const [f, t] of [...files, ...perIcon, ...lookup]) out.add(f, t)
+  const companions = {}
+  for (const p of Object.keys(homes)) if (p !== 'classes') companions[p] = distWriter(ctx, `packages/${p}/${isOwnPackage(p) ? 'dist/classes' : 'dist'}`)
+  for (const [f, t] of [...files, ...perIcon, ...lookup]) { const h = homeOf(f); (h === 'classes' ? out : companions[h]).add(f, t) }
+  for (const [p, list] of Object.entries(homes)) {
+    if (p === 'classes') continue
+    // a companion is usable on its own too: the base rules and (several styles) an @import of all of them
+    companions[p].add('with-base.css', `${header}${css}\n`)
+    if (!isOwnPackage(p)) companions[p].add('with-all.css', `${header}${list.map(st => `@import url("with-${st}.css");`).join('\n')}\n`)
+  }
   await out.flush()
-  writePkg(ctx, 'classes', pkgJson(ctx, styleNames), readme(ctx, sizes, perIconSizes))
+  for (const w of Object.values(companions)) await w.flush()
+  writePkg(ctx, 'classes', pkgJson(ctx, baseOnly), readme(ctx, sizes, perIconSizes))
+  for (const [p, list] of Object.entries(homes)) if (p !== 'classes' && !isOwnPackage(p)) writePkg(ctx, p, plusPkgJson(ctx, p, list), plusReadme(ctx, p, list))
 
   // keep: files other emitters put in the same folder (emit-search writes site/vendor/with/search.js)
   const writeDir = (rel, map, keep = []) => {

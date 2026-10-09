@@ -1,0 +1,65 @@
+{
+  "name": "pipette",
+  "category": "layout",
+  "description": "An eyedropper, for picking colours and sampling.",
+  "aliases": [
+    "eyedropper",
+    "eye-dropper",
+    "color-dropper",
+    "colour-picker",
+    "dropper",
+    "color-sampler",
+    "pick-color",
+    "sample-color"
+  ],
+  "tags": [
+    "color",
+    "picker",
+    "design",
+    "sample",
+    "tool"
+  ],
+  "paths": [
+    {
+      "d": "M15 12 L7.5 19.5 L3.5 20.5 L4.5 16.5 L12 9",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 7.5 L16.5 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 12.5 L19.5 8.5 A2.83 2.83 0 0 0 15.5 4.5 L11.5 8.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M15 12 L7.5 19.5 L3.5 20.5 L4.5 16.5 L12 9 Z",
+    "M15.5 12.5 L19.5 8.5 A2.83 2.83 0 0 0 15.5 4.5 L11.5 8.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "eyedropper tool",
+    "colour",
+    "color",
+    "pick colour",
+    "sample colour",
+    "sampler",
+    "picker",
+    "hex",
+    "swatch",
+    "color picker tool",
+    "match color",
+    "get color",
+    "design tool",
+    "pipet",
+    "lab pipette",
+    "liquid",
+    "drop",
+    "chemistry",
+    "dropper tool",
+    "select color",
+    "eye droper",
+    "color-picker"
+  ]
+}

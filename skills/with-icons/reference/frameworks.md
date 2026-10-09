@@ -2,9 +2,14 @@
 
 Every framework package exposes the same thing: one component per icon, PascalCase of the kebab-case name, exported as
 `Name` and `NameIcon`. The default path is the **line** style; each other style is a subpath
-(`/line` is also accepted): `/solid`, `/duo`, `/gloss`, `/engrave`, `/blueprint`, `/sketch`, palette styles `/glass`, `/kawaii`,
-`/sticker`, `/pixel`, `/retro`, studio styles `/luxe`, `/bauhaus`, `/skeuo`, storybook styles `/anime`, `/gothic`, `/pastel`,
-`/coquette`, `/plush` (all 20 in React, Vue, Svelte, Solid and Angular).
+(`/line` is also accepted), by group: Essentials `/solid`, `/duo`, `/suite`; Product & brand `/bento`, `/dock`,
+`/brutal`, `/bauhaus`; 3D & glass `/clay`, `/glass`, `/liquid`, `/chrome`, `/soft3d`, `/luxe`, `/skeuo`; Playful `/kawaii`, `/plush`,
+`/sticker`, `/gloss`, `/pastel`, `/pixel`, `/retro`; Artistic `/sketch`, `/engrave`, `/blueprint`, `/anime`, `/gothic`,
+`/coquette`; Holidays `/utsav`, `/rangoli`, `/halloween`, `/christmas`, `/lunar`, `/valentine` (all 34 in React, Vue, Svelte,
+Solid and Angular; nothing else to install, whichever npm package holds the raw files). Which style for which job:
+[styles.md](styles.md#what-are-you-making). Rich styles
+put gradients in one `<defs>` with ids `wg-<style>-<icon>-<n>`; every package suffixes those ids per rendered instance,
+so many copies of one icon on a page never clash (details: [styles.md](styles.md#colour)).
 Animation is a separate, optional package for every framework: see [motion.md](motion.md). Deep imports: `<pkg>/icons/<name>` and `<pkg>/<style>/icons/<name>`.
 
 ## Props (identical across React, Vue, Svelte, Solid and Angular)
@@ -16,7 +21,7 @@ Animation is a separate, optional package for every framework: see [motion.md](m
 | `strokeWidth` | style default (1.75) | only styles with live strokes: line, duo, blueprint, sketch, kawaii; nothing on the filled styles |
 | `absoluteStrokeWidth` | `false` | keeps stroke px constant when scaled |
 | `title` | none | adds `<title>` and `role="img"`; without it the svg is `aria-hidden="true"` |
-| `className` / `class` | none | appended to `withi withi-<name>` |
+| `className` / `class` | none | appended to `withi withi-<name>` (component classes; the CSS icon classes are `with with-<name>`, a different package) |
 
 Everything else (`onClick`, `style`, `data-*`, `aria-*`) is spread onto the `<svg>`. The web component uses attributes:
 `name variant size color stroke-width absolute-stroke-width label mirror-rtl` (it uses `variant`, not `style`).
@@ -37,14 +42,18 @@ Everything else (`onClick`, `style`, `data-*`, `aria-*`) is spread onto the `<sv
 ## Pitfalls
 
 - `import { Bin } from '@withicons/react'` fails because aliases are not exports. Resolve to `Trash` first.
-- The generic `<Icon name=... variant=...>` component bundles **all 500 icons in every style**. Use it only for truly
-  dynamic names (CMS data); named imports tree-shake down to the icons you use.
+- The generic `<Icon name=... variant=...>` component renders line at once and loads each other style's data on first
+  use (React / Solid: inside `<Suspense>`). Use it only for truly dynamic names (CMS data); named imports tree-shake down
+  to the icons you use.
 - `<img src=".../home.svg">` cannot inherit `currentColor` and renders black. Inline the SVG, use the component, the
   sprite or the classes when the colour must follow text. Standalone `.svg` files (CDN, `@withicons/static`, `get_icon`
   with `flat: true`) have the palette baked in, which is what Figma, PowerPoint, Keynote and image converters need;
   inline code keeps the variables.
 - SVG sprites must be served from **your own origin**. Browsers block cross-origin `<use href>`.
-- Don't put multi-colour styles, loops or Crafted styles in dense 16-20px controls: they turn to noise.
+- No bundler (React, Vue, Solid from an ESM CDN): ask for the icons you use and the CDN tree-shakes the style to them,
+  `https://esm.sh/@withicons/react?exports=Home,Search` (line) or `https://esm.sh/@withicons/react/solid?exports=Home`.
+  A bare package or style URL is every icon of that style (megabytes). In a page without a framework use `<with-icon>`.
+- Don't put anything but line, solid or duo, or any loop, in dense 16-20px controls: they turn to noise.
 - Svelte 4: `on:click` is not forwarded to the icon. Wrap it in a `<button>`. Angular `name=` usage needs
   `provideWithIcons(...)` registration; passing `[icon]` needs none.
 - Packages are `0.x`: check `npm view @withicons/react version` if an install fails. The site offers direct SVG
@@ -214,9 +223,11 @@ page, in any mix of styles (6 KB gzipped, then ~270 bytes per `line` icon):
 ```
 
 Zero JS: link `.../classes@latest/dist/with-base.css` plus `.../classes@latest/dist/<style>/<name>.css` per icon, or one whole style per file
-(`.../classes@latest/dist/with-line.css`, all 500 line icons, 26 KB gzipped; the richest styles are several hundred KB).
-`with-all.css` imports every style (~6.3 MB gzipped): prototypes only, never a production page.
-With a bundler: `npm i @withicons/classes`, then `import '@withicons/classes/with-line.css'` (or `with-base.css` + `line/home.css` per icon).
+(`.../classes@latest/dist/with-line.css`, every line icon, a few dozen KB gzipped; the richest styles are several hundred KB).
+`with-all.css` imports every style of the package (tens of MB): prototypes only, never a production page.
+With a bundler: `npm i @withicons/classes`, then `import '@withicons/classes/with-base.css'` plus one file per icon
+(`import '@withicons/classes/line/home.css'`), or a whole style (`with-line.css`). A small subset as one file:
+`cat with-base.css line/home.css solid/heart.css > icons.css` (from `node_modules/@withicons/classes/dist/`).
 Size: the icon is 1em square, so it follows the text size. Setting only `height` does not grow it (the width stays 1em).
 Three ways, each giving a 48 px icon:
 
@@ -270,8 +281,12 @@ npm i @withicons/static
 Single files on the CDN (`<img>` renders black because it cannot use currentColor):
 
 ```
-https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg
+https://cdn.jsdelivr.net/npm/@withicons/static@latest/dist/svg/<style>/<name>.svg        older styles (line … coquette)
+https://cdn.jsdelivr.net/npm/@withicons/static-plus@latest/dist/svg/<style>/<name>.svg   newer styles (table below)
 ```
+
+The newer styles' sprites (`sprite-clay.svg`, `sprite-christmas.svg` …) are in `@withicons/static-plus` (`npm i @withicons/static-plus`).
+Every style as one zip of SVGs with an offline viewer: `https://withicons.com/downloads/with-icons-<style>.zip`.
 
 `dist/icons.json` lists every icon (name, category, description, aliases, tags, styles).
 
@@ -304,6 +319,47 @@ find('nope')              // null
 search('delete')          // ranked IconMeta[]
 toSvg(solid.home, 'solid', { size: 32, title: 'Home' })  // '<svg ...>'
 ```
+
+### Where the newest styles live (core files and icon classes)
+
+<!-- packages:start -->
+The newest styles' files live in companion packages (jsDelivr serves at most 150 MB per package). The framework packages
+(react, vue, svelte, angular, solid) hold every style. `@withicons/web` installs `@withicons/web-plus` and loads it by itself (CDN or bundler), and the classes loader and runtime find the class companions by themselves,
+so pages never name a companion. Name one only for direct file URLs, `@withicons/core` node imports or self-hosting.
+The two SVG columns hold the same standalone files (colours baked in): take files and sprites from the static package,
+node data for `toSvg` from the core companion.
+
+| style | SVG files + IconNode data | prebuilt SVG + sprites | CSS class files |
+|---|---|---|---|
+| `clay` | `@withicons/core-plus` (`dist/svg/clay/<name>.svg`, import `@withicons/core-plus/nodes/clay`) | `@withicons/static-plus` (`dist/svg/clay/<name>.svg`, `dist/sprite-clay.svg`) | `@withicons/classes-plus` (`dist/clay/<name>.css`) |
+| `bento` | `@withicons/core-plus` (`dist/svg/bento/<name>.svg`, import `@withicons/core-plus/nodes/bento`) | `@withicons/static-plus` (`dist/svg/bento/<name>.svg`, `dist/sprite-bento.svg`) | `@withicons/classes-plus` (`dist/bento/<name>.css`) |
+| `suite` | `@withicons/core-plus` (`dist/svg/suite/<name>.svg`, import `@withicons/core-plus/nodes/suite`) | `@withicons/static-plus` (`dist/svg/suite/<name>.svg`, `dist/sprite-suite.svg`) | `@withicons/classes-plus` (`dist/suite/<name>.css`) |
+| `dock` | `@withicons/core-plus` (`dist/svg/dock/<name>.svg`, import `@withicons/core-plus/nodes/dock`) | `@withicons/static-plus` (`dist/svg/dock/<name>.svg`, `dist/sprite-dock.svg`) | `@withicons/classes-plus` (`dist/dock/<name>.css`) |
+| `liquid` | `@withicons/core-plus` (`dist/svg/liquid/<name>.svg`, import `@withicons/core-plus/nodes/liquid`) | `@withicons/static-plus` (`dist/svg/liquid/<name>.svg`, `dist/sprite-liquid.svg`) | `@withicons/classes-plus` (`dist/liquid/<name>.css`) |
+| `chrome` | `@withicons/core-plus` (`dist/svg/chrome/<name>.svg`, import `@withicons/core-plus/nodes/chrome`) | `@withicons/static-plus` (`dist/svg/chrome/<name>.svg`, `dist/sprite-chrome.svg`) | `@withicons/classes-plus` (`dist/chrome/<name>.css`) |
+| `soft3d` | `@withicons/soft3d` (`dist/svg/soft3d/<name>.svg`, import `@withicons/soft3d`) | `@withicons/static-plus` (`dist/svg/soft3d/<name>.svg`, `dist/sprite-soft3d.svg`) | `@withicons/soft3d` (`dist/classes/soft3d/<name>.css`) |
+| `brutal` | `@withicons/core-plus` (`dist/svg/brutal/<name>.svg`, import `@withicons/core-plus/nodes/brutal`) | `@withicons/static-plus` (`dist/svg/brutal/<name>.svg`, `dist/sprite-brutal.svg`) | `@withicons/classes-plus` (`dist/brutal/<name>.css`) |
+| `utsav` | `@withicons/holiday` (`dist/svg/utsav/<name>.svg`, import `@withicons/holiday/nodes/utsav`) | `@withicons/static-plus` (`dist/svg/utsav/<name>.svg`, `dist/sprite-utsav.svg`) | `@withicons/holiday` (`dist/classes/utsav/<name>.css`) |
+| `rangoli` | `@withicons/holiday` (`dist/svg/rangoli/<name>.svg`, import `@withicons/holiday/nodes/rangoli`) | `@withicons/static-plus` (`dist/svg/rangoli/<name>.svg`, `dist/sprite-rangoli.svg`) | `@withicons/holiday` (`dist/classes/rangoli/<name>.css`) |
+| `halloween` | `@withicons/holiday` (`dist/svg/halloween/<name>.svg`, import `@withicons/holiday/nodes/halloween`) | `@withicons/static-plus` (`dist/svg/halloween/<name>.svg`, `dist/sprite-halloween.svg`) | `@withicons/holiday` (`dist/classes/halloween/<name>.css`) |
+| `christmas` | `@withicons/holiday` (`dist/svg/christmas/<name>.svg`, import `@withicons/holiday/nodes/christmas`) | `@withicons/static-plus` (`dist/svg/christmas/<name>.svg`, `dist/sprite-christmas.svg`) | `@withicons/holiday` (`dist/classes/christmas/<name>.css`) |
+| `lunar` | `@withicons/holiday` (`dist/svg/lunar/<name>.svg`, import `@withicons/holiday/nodes/lunar`) | `@withicons/static-plus` (`dist/svg/lunar/<name>.svg`, `dist/sprite-lunar.svg`) | `@withicons/holiday` (`dist/classes/lunar/<name>.css`) |
+| `valentine` | `@withicons/holiday` (`dist/svg/valentine/<name>.svg`, import `@withicons/holiday/nodes/valentine`) | `@withicons/static-plus` (`dist/svg/valentine/<name>.svg`, `dist/sprite-valentine.svg`) | `@withicons/holiday` (`dist/classes/valentine/<name>.css`) |
+
+CDN file URL of any style: `https://cdn.jsdelivr.net/npm/@withicons/<package>@latest/dist/svg/<style>/<name>.svg` with the package from this table (`static` / `core` for the styles not listed).
+
+In short, by package (every other style is in `@withicons/core`, `@withicons/static` and `@withicons/classes`):
+
+- `@withicons/core-plus`: SVG files and node data of `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`
+- `@withicons/soft3d`: SVG files and node data of `soft3d`
+- `@withicons/holiday`: SVG files and node data of `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`
+- `@withicons/static-plus`: prebuilt SVGs and sprites (`dist/sprite-<style>.svg`) of `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d`, `brutal`, `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`
+- `@withicons/classes-plus`: CSS class files of `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`
+- `@withicons/soft3d` also: CSS class files of `soft3d` (`dist/classes/`)
+- `@withicons/holiday` also: CSS class files of `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine` (`dist/classes/`)
+
+Sprite URL: `https://cdn.jsdelivr.net/npm/@withicons/<static or static-plus>@latest/dist/sprite-<style>.svg` (e.g. `…/@withicons/static-plus@latest/dist/sprite-soft3d.svg`). Download it and serve it from your own origin: browsers block a cross-origin `<use href>`.
+<!-- packages:end -->
 
 `resolve` throws `WITH_AMBIGUOUS_ICON` (see `err.candidates`) or `WITH_UNKNOWN_ICON` (see `err.suggestions`).
 

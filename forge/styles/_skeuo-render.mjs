@@ -5,6 +5,8 @@ import { build } from './_skeuo-core.mjs'
 import { materials, MAT } from './_skeuo-mat.mjs'
 import { Out, piece, castShadow, contact, farBand, litBand, v, L } from './_skeuo-paint.mjs'
 import { tune, redraw } from './_skeuo-tune.mjs'
+import { isPerson } from './_people.mjs'
+import { paintPerson } from './_skeuo-people.mjs'
 
 const SHADOW = '#15110D', SHINE = '#FFFFFF'
 // enamel status buttons: their glyph is a raised white inlay, not a debossed groove
@@ -15,6 +17,8 @@ const EMBOSS = /^(alert-circle|check-circle|check-square|x-circle|help-circle|in
 const SOFT = { specK: 0.35, noHot: true }
 export function draw(icon, opt = {}) {
   let T = tune(icon)
+  // a hand-built skeleton for Skeuo only (_skeuo-snowman.mjs)
+  if (!icon.params && T.skeleton) icon = { ...icon, ...T.skeleton() }
   if (opt.lettered) T = { ...T, bodyOpt: { ...SOFT, ...(T.bodyOpt || {}) }, badgeOpt: { ...SOFT, ...(T.badgeOpt || {}) }, zones: (T.zones || []).map(z => ({ ...z, opt: { ...SOFT, ...(z.opt || {}) } })), inlayOpt: SOFT }
   if (EMBOSS.test(icon.name) && !T.grooveAs) T = { grooveAs: 'emboss', groove: 1.5, ...T }
   const custom = redraw(icon, T)
@@ -22,6 +26,8 @@ export function draw(icon, opt = {}) {
   const M = materials(icon, T)
   if (M.names.body === 'graphite' && T.screen !== false) T = { screen: true, ...T }
   const B = build(icon, T)
+  // people avatars: a portrait bust in skin, hair and cloth (_skeuo-people.mjs)
+  if (!icon.params && isPerson(icon)) { const out = paintPerson(B, icon, T); if (out.length) return out }
   return paint(B, M, T)
 }
 

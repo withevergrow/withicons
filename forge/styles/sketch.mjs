@@ -14,6 +14,7 @@
 //    side away from a top-left light, tapering at the terminator.
 // Strokes are quadratic B-splines written as compact relative path data on a
 // 0.1u grid. All randomness is rng(icon.name + ...): same input, same bytes.
+import { snowmanFor } from './_line-snowman.mjs'
 import { V, rng, pointInRing, area } from '../kernel/geom.mjs'
 import { textInfo } from './_live-text.mjs'
 
@@ -599,6 +600,7 @@ export default {
   strokeWidth: SW,
   root: { fill: 'none', stroke: 'currentColor', 'stroke-width': SW, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
   render(icon) {
+    icon = snowmanFor('sketch', icon)
     try { return renderSketch(icon) }
     catch (e) {
       if (globalThis.process?.env?.SKETCH_DEBUG) throw e

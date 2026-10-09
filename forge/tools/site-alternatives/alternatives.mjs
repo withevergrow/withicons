@@ -1,9 +1,9 @@
 // site/alternatives/index.html + site/alternatives/<library>.html — honest, sourced comparisons and migration guides.
 import { crumbs } from '../site-pages/lib.mjs'
-import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, assertIcons, strip, STYLES, STYLE_TITLE, ICON_NAMES, CHECKED as CHECKED_ALL, CHECKED_HUMAN as CHECKED_HUMAN_ALL, ORIGIN, humanDate } from './render.mjs'
+import { I, esc, cvar, code, shell, picker, answer, faqBlock, faqLd, webPageLd, altLinks, freeLinks, cta, assertIcons, strip, landerStyles, STYLES, STYLE_TITLE, ICON_NAMES, CHECKED as CHECKED_ALL, CHECKED_HUMAN as CHECKED_HUMAN_ALL, ORIGIN, humanDate } from './render.mjs'
 let CHECKED = CHECKED_ALL, CHECKED_HUMAN = CHECKED_HUMAN_ALL
 import { LIBS, FACT_ROWS, US, US_HUB } from './libraries.mjs'
-import { N_STYLES as NS, N_TOTAL, num, PRESETS } from '../site-pages/lib.mjs'
+import { N_STYLES as NS, OVER_TEXT, num, PRESETS } from '../site-pages/lib.mjs'
 import { LANDERS } from './free.mjs'
 import { rivalSet, writeRivalLicenses } from './rivals.mjs'
 import { SITE } from '../site-pages/lib.mjs'
@@ -72,7 +72,7 @@ function libPage(l) {
   const qs = [
     [`What is the best free alternative to ${name}?`, `It depends on what you need. with icons is a free, MIT-licensed set of ${N} icons in ${NS} styles that works in code, slides, docs and design tools, with no credit required. Other popular free options include ${others.map(o => `<a href="${o.slug}.html">${esc(o.name)}</a>`).join(', ')}; <a href="index.html">compare them all</a>.`],
     [`Is ${name} free?`, `${strip(l.facts.price[0])}. Licence: ${strip(l.facts.license[0])}. (Checked ${CHECKED_HUMAN}; see the sources below.)`],
-    [`How many icons does with icons have compared with ${name}?`, `with icons has ${N} icons, each drawn in ${NS} styles (${num(N_TOTAL)} SVGs). ${name}: ${strip(l.facts.count[0]).replace(/^./, c => c.toLowerCase())}. ${name} is the bigger library; with icons focuses on a curated set with more styles.`],
+    [`How many icons does with icons have compared with ${name}?`, `with icons has ${N} icons, each drawn in ${NS} styles, plus live icons (${OVER_TEXT} SVGs in all). ${name}: ${strip(l.facts.count[0]).replace(/^./, c => c.toLowerCase())}. ${name} is the bigger library; with icons focuses on a curated set with more styles.`],
     ['Do I need to credit with icons?', `No. with icons is MIT licensed: free for personal and commercial use with no attribution. If you redistribute the icon files themselves, include the licence text. <a href="${p}license.html">Licence in plain words</a>.`],
     ...l.faq,
   ]
@@ -98,14 +98,15 @@ function libPage(l) {
     return `<td><span class="ax-map-cell">${mark}${label}</span></td>`
   }
   const usCell = o => `<td><a class="ax-map-cell" href="${p}icons/${o}.html"><span class="ax-map-ic is-us" data-map-ic="${o}">${I(o, 'line', 24)}</span><span class="ax-map-names"><b>${o}</b>${isConcept ? '' : useCode(l, o)}</span></a></td>`
-  const mapStyles = ['line', 'solid', 'duo', ...STYLES.filter(s => !['line', 'solid', 'duo'].includes(s))]
+  // the name map's style: the Essentials and Popular styles first (js/alternatives.js turns them into the shared compact row)
+  const mapStyles = landerStyles('line')
   const missing = R && l.migrate.map.some(([t]) => !R.icons[t])
   const mapNote = isConcept ? `${esc(name)} sells icons by many different artists, so there is no single ${esc(sn)} icon to show: the left column is what you would search for there.`
     : R ? `${esc(name)} icons © ${esc(R.credit)}, <a href="licenses/${l.slug}.txt">${esc(R.license)}</a> (v${esc(R.version)}), from the official package and shown only for comparison.${missing ? ' A dash means that name is not in this version of the package.' : ''}`
     : ''
   // no real icons we're allowed to show (Flaticon UIcons' licence forbids redistribution): no name map at all
   const showMap = isConcept || !!R
-  const mapTable = !showMap ? '' : `<div class="ax-map-tools"><span class="ax-map-tools-label">Show with icons in</span><div class="ax-seg ax-map-styles" role="group" aria-label="with icons style in the name map">${mapStyles.map(s => `<button type="button" class="chip s-${s}" data-map-style="${s}" aria-pressed="${s === 'line'}">${STYLE_TITLE[s]}</button>`).join('')}</div></div>
+  const mapTable = !showMap ? '' : `<div class="ax-map-tools"><span class="ax-map-tools-label">Show with icons in</span><div class="ax-seg ax-map-styles" role="group" aria-label="with icons style in the name map" data-pick-styles="${mapStyles.slice(0, 8).join(',')}" data-icon="${l.migrate.map.find(([, o]) => o)?.[1] || 'home'}">${mapStyles.slice(0, 6).map(s => `<button type="button" class="chip s-${s}" data-map-style="${s}" aria-pressed="${s === 'line'}">${STYLE_TITLE[s]}</button>`).join('')}</div></div>
   <div class="pg-table-wrap ax-map-wrap" data-map><table class="pg-table ax-map">
     <caption class="pg-sr">${isConcept ? 'Common searches and the matching with icons' : `${esc(name)} icons and their with icons equivalents`}</caption>
     <thead><tr><th scope="col">${isConcept ? 'You’d search for' : esc(name)}</th><th scope="col" class="ax-map-us">with icons</th></tr></thead>

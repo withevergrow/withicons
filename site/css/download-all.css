@@ -1,0 +1,20 @@
+/* with icons — "Download all" button (js/download-all.js). Builds on .btn / .btn-ghost / .btn-lg from chrome.css.
+   A quiet secondary action: the glyph in a style-tinted disc, "Download all" over a muted "734 SVGs · ZIP · 1.43 MB".
+   It keeps the height of the buttons beside it (the disc sits concentric in the pill). */
+.dl-all { --dl-c: var(--sc, var(--style, var(--sun))); gap: 12px; padding: 0 22px 0 7px; text-align: left; }
+.btn-lg.dl-all { padding-left: 9px; }
+.dl-all-ic { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  background: color-mix(in srgb, var(--dl-c) 16%, transparent); color: var(--style-text, var(--ink));
+  transition: background-color .25s var(--e-out, ease), color .25s var(--e-out, ease); }
+.btn-lg .dl-all-ic { width: 40px; height: 40px; }
+.dl-all .dl-all-ic svg { width: 20px; height: 20px; transition: transform .35s var(--e-out, ease); }
+.dl-all-t { display: flex; flex-direction: column; gap: 4px; min-width: 0; line-height: 1.05; }
+.dl-all-main { font-size: 16px; font-weight: 650; overflow: hidden; text-overflow: ellipsis; }
+.dl-all-note { font: 550 12.5px/1 var(--font-sans); letter-spacing: 0; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dl-all:hover .dl-all-ic { background: var(--dl-c); color: var(--style-on, var(--sc-on, #fff)); }
+.dl-all:hover .dl-all-ic svg { transform: translateY(2px); }
+.dl-all:focus-visible .dl-all-ic { background: var(--dl-c); color: var(--style-on, var(--sc-on, #fff)); }
+/* one-line form (opts.compact) */
+.dl-all-compact .dl-all-t { flex-direction: row; align-items: baseline; gap: 8px; }
+.dl-all[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .dl-all .dl-all-ic svg { transition: none; } }

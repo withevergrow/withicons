@@ -215,16 +215,19 @@ export const R = {
     k.rose(k.rr(11, 11, 18.6, 16.4, 1.2), { plate: 'A' }),
     k.bow(20.6, 4.6, 0.55, 18),
   ],
-  // a blush piggy bank with a bow on its ear and a gold coin dropping in
+  // a blush piggy bank in 3/4 view: a perky ear wearing a bow, a curly rose tail, a rose oval snout,
+  // stubby legs and a gold coin dropping in
   'piggy-bank': (icon, k) => [
-    k.body(k.union(k.pill(6, 15, 8.6, 21.4), k.pill(13.6, 15, 16.2, 21.4))),
-    k.rose(k.tube('M3.6 12.4 C2 12 2 10.2 3.4 10.4', 1.1), { plate: 'A' }),
-    k.body(k.union(k.ellipse(10.8, 13.4, 7.9, 6), k.poly([[12.6, 8.6], [15.4, 4.2], [17.2, 9.4]], 0.9))),
-    k.rose(k.rr(17.4, 11, 21.6, 15.6, 1.4), { plate: 'K' }),
-    k.ink('M8.2 9.2 H11.6', 1.1),
-    k.fill(k.disc(15, 11.2, 0.75), 'ink'),
-    k.gold(k.disc(9.9, 4.4, 2.1), { plate: 'A' }),
-    k.bow(15.8, 5.2, 0.48, 22),
+    k.body(k.union(k.pill(5.75, 15, 8.25, 21.4), k.pill(13.75, 15, 16.25, 21.4))),
+    k.rose(k.tube('M4.6 12.3 C2.9 12.4 2.2 11.2 2.8 10.2 C3.1 9.7 3.6 9.7 3.9 10', 1.1), { plate: 'K' }),
+    k.rose(k.poly([[17.6, 9.8], [20.7, 6.1], [20.1, 11]], 0.8), { plate: 'K' }),
+    k.body(k.union(k.ellipse(11.75, 14, 7.75, 5.75), k.poly([[13.4, 9.6], [16.4, 3.9], [17.6, 10.2]], 0.9))),
+    k.rose(k.ellipse(19.75, 13.5, 2.05, 2.7), { plate: 'K' }),
+    k.fill(k.union(k.disc(19.15, 13.1, 0.42), k.disc(20.35, 13.1, 0.42)), 'ink'),
+    k.ink('M8.5 10.75 H11.5', 1.1),
+    k.fill(k.disc(15.75, 12, 0.78), 'ink'),
+    k.gold(k.disc(10, 3.75, 2), { plate: 'S' }),
+    k.bow(3.4, 9.4, 0.42, -18),
   ],
   // a satin pilcrow with a little heart
   pilcrow: (icon, k) => [

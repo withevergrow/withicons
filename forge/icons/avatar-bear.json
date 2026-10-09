@@ -1,0 +1,87 @@
+{
+  "name": "avatar-bear",
+  "category": "avatars",
+  "description": "A cute bear face avatar, for profiles and playful apps.",
+  "aliases": [
+    "bear-avatar",
+    "bear",
+    "bear-face",
+    "brown-bear",
+    "bear-profile",
+    "bear-pfp",
+    "bear-head",
+    "grizzly"
+  ],
+  "tags": [
+    "avatar",
+    "animal",
+    "bear",
+    "cute",
+    "profile"
+  ],
+  "paths": [
+    {
+      "d": "M19 13.75 A7 7 0 1 1 5 13.75 A7 7 0 1 1 19 13.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 10.25 A2.75 2.75 0 1 1 9 7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 7.5 A2.75 2.75 0 1 1 18 10.25",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 15.5 H13.25 C13.25 16.25 12.75 16.75 12 16.75 C11.25 16.75 10.75 16.25 10.75 15.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 18.25 C11.25 18.75 12 18.5 12 17.5 C12 18.5 12.75 18.75 13.5 18.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 13.75 A7 7 0 1 1 5 13.75 A7 7 0 1 1 19 13.75 Z",
+    "M9 7.5 A2.75 2.75 0 1 1 3.5 7.5 A2.75 2.75 0 1 1 9 7.5 Z",
+    "M20.5 7.5 A2.75 2.75 0 1 1 15 7.5 A2.75 2.75 0 1 1 20.5 7.5 Z",
+    "M15.25 17 A3.25 2.5 0 1 1 8.75 17 A3.25 2.5 0 1 1 15.25 17 Z"
+  ],
+  "cutouts": [
+    "M10.25 12.5 A0.75 1 0 1 1 8.75 12.5 A0.75 1 0 1 1 10.25 12.5 Z",
+    "M15.25 12.5 A0.75 1 0 1 1 13.75 12.5 A0.75 1 0 1 1 15.25 12.5 Z",
+    "M10.25 15.25 H13.75 C13.75 16.5 13 17.25 12 17.25 C11 17.25 10.25 16.5 10.25 15.25 Z"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "animal avatar",
+    "pet avatar",
+    "face",
+    "teddy",
+    "cub",
+    "bear cub",
+    "honey",
+    "woodland",
+    "forest animal",
+    "wildlife",
+    "cuddly"
+  ]
+}

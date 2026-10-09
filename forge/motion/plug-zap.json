@@ -1,0 +1,53 @@
+{
+  "name": "plug-zap",
+  "intent": "the plug hangs steady while its bolt flickers with live power",
+  "loop": {
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "origin": [
+        17.75,
+        17
+      ],
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "plug",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "morph"
+    },
+    {
+      "to": "power",
+      "effect": "scale"
+    }
+  ]
+}

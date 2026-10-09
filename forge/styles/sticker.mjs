@@ -16,6 +16,8 @@
 // `--with-sticker-ink: currentColor` to drive it from `color`. The paper hairline follows `color`.
 // No ids, defs, gradients, filters or masks: depth is layered geometry and opacity.
 import { build } from './_sticker-core.mjs'
+import { stickerSnowman } from './_sticker-snowman.mjs'
+import { stickerDragon } from './_sticker-dragon.mjs'
 
 export default {
   name: 'sticker',
@@ -25,6 +27,9 @@ export default {
   strokeWidth: false,
   root: { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
   render(icon) {
+    // hand-drawn per-icon drawings (the skeleton stays the base for every other style)
+    if (icon.name === 'snowman' && !icon.params) { try { return stickerSnowman() } catch { /* the generic build below */ } }
+    if (icon.name === 'dragon-head' && !icon.params) { try { return stickerDragon() } catch { /* the generic build below */ } }
     try {
       const nodes = build(icon)
       if (nodes && nodes.length) return nodes

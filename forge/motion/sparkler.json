@@ -1,0 +1,56 @@
+{
+  "name": "sparkler",
+  "intent": "the sparks twinkle and crackle at the tip",
+  "loop": {
+    "preset": "twinkle",
+    "origin": [
+      15,
+      9
+    ],
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "glow"
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        15,
+        9
+      ],
+      "amount": 1.4
+    },
+    "S": {
+      "preset": "twinkle",
+      "delay": 0.3
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "flicker",
+      "origin": [
+        15,
+        9
+      ]
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        3.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "firecracker",
+      "effect": "fade"
+    }
+  ]
+}

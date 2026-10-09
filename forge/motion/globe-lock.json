@@ -1,0 +1,45 @@
+{
+  "name": "globe-lock",
+  "intent": "the world turns gently while the lock stays shut",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      11,
+      11
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "S": {
+      "preset": "nod",
+      "origin": [
+        17.75,
+        21.5
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "shake"
+    }
+  ],
+  "swap": [
+    {
+      "to": "globe",
+      "effect": "fade"
+    },
+    {
+      "to": "lock",
+      "effect": "scale"
+    }
+  ]
+}

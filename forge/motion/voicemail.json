@@ -1,0 +1,32 @@
+{
+  "name": "voicemail",
+  "intent": "the tape reels pulse as a message plays back",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.4,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.7
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "phone",
+      "effect": "flip"
+    },
+    {
+      "to": "voicemail@solid",
+      "effect": "fade"
+    }
+  ]
+}

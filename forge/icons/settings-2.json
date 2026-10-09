@@ -1,0 +1,68 @@
+{
+  "name": "settings-2",
+  "category": "actions",
+  "description": "Two slider bars with knobs, for settings, preferences and options.",
+  "aliases": [
+    "settings-alt",
+    "settings-sliders",
+    "toggles",
+    "knobs",
+    "preferences-alt",
+    "filter-settings",
+    "slider-settings",
+    "customize"
+  ],
+  "tags": [
+    "settings",
+    "preferences",
+    "options",
+    "sliders",
+    "controls"
+  ],
+  "paths": [
+    {
+      "d": "M10 7 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 17 H14",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7 A3.5 3.5 0 1 1 3 7 A3.5 3.5 0 1 1 10 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21 17 A3.5 3.5 0 1 1 14 17 A3.5 3.5 0 1 1 21 17 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 7 A3.5 3.5 0 1 1 3 7 A3.5 3.5 0 1 1 10 7 Z",
+    "M21 17 A3.5 3.5 0 1 1 14 17 A3.5 3.5 0 1 1 21 17 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "settings",
+    "preferences",
+    "configuration",
+    "config",
+    "options",
+    "sliders",
+    "slider",
+    "controls",
+    "adjust",
+    "adjustments",
+    "customise",
+    "personalize",
+    "filters",
+    "toggle",
+    "switches",
+    "setup",
+    "tweak",
+    "parameters",
+    "fine tune",
+    "control panel",
+    "tune"
+  ]
+}

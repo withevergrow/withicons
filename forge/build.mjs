@@ -11,14 +11,16 @@
 //                          in STYLE_ORDER (forge/lib/emit-core.mjs): line solid duo gloss engrave blueprint sketch glass kawaii sticker pixel retro
 //   ctx.icons[]            { name, category, description, aliases, tags,
 //                            pascal ('ArrowRight'), camel ('arrowRight'),
-//                            render: { [style]: { nodes: [[tag, attrs]], svg: '<svg ...>...</svg>', inner: '<path/>...' } } }
+//                            render: { [style]: { nodes: [[tag, attrs, children?]], svg: '<svg ...>...</svg>', inner: '<path/>...' } } }
+//                          (children: the ['defs', {}, [gradients]] node of rich styles; see forge/CONTRACT.md "Rich styles")
 //   ctx.aliasIndex         { alias -> [canonical names] }  (ambiguous aliases map to >1 name)
 //   ctx.write(rel, text)   write a file relative to repo root (mkdir -p)
 import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { spawnSync } from 'child_process'
-import { ROOT, listIcons, loadIcon, loadStyles, renderIcon, toSvg, nodesToMarkup } from './lib/load.mjs'
+import { ROOT, listIcons, loadIcon, loadStyles, toSvg, nodesToMarkup } from './lib/load.mjs'
+import { renderAll } from './lib/render-pool.mjs'
 import { STYLE_ORDER, sortStyles, styleVars, isPalette } from './lib/emit-core.mjs'
 
 const t0 = Date.now()
@@ -30,15 +32,16 @@ const unknownStyles = styles.map(s => s.name).filter(n => !STYLE_ORDER.includes(
 if (unknownStyles.length) console.log(`  note: styles missing from STYLE_ORDER (forge/lib/emit-core.mjs), sorted last: ${unknownStyles.join(', ')}`)
 const pascal = n => n.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('')
 
-const failures = []
-const icons = listIcons().map(name => {
+// every icon x every style: worker threads + a content-hash cache (forge/lib/render-pool.mjs); --no-cache redraws all
+const names = listIcons()
+const pool = await renderAll(names, styles, { cache: !process.argv.includes('--no-cache') })
+const failures = pool.failures
+const icons = names.map(name => {
   const icon = loadIcon(name)
   const render = {}
-  for (const s of styles) {
-    try {
-      const nodes = renderIcon(s, icon)
-      render[s.name] = { nodes, inner: nodesToMarkup(nodes), svg: toSvg(s, nodes) }
-    } catch (e) { failures.push(`${s.name}/${name}: ${e.message.split('\n')[0]}`) }
+  for (const s of styles) {   // style order: renderOf()'s fallback takes the first render
+    const nodes = pool.renders[name][s.name]
+    if (nodes) render[s.name] = { nodes, inner: nodesToMarkup(nodes), svg: toSvg(s, nodes) }
   }
   const p = pascal(name)
   return { name, category: icon.category, description: icon.description || '', aliases: icon.aliases || [], tags: icon.tags || [],
@@ -58,7 +61,7 @@ const ctx = {
   icons, aliasIndex,
   write(rel, text) { const f = path.join(ROOT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) },
 }
-console.log(`rendered ${icons.length} icons x ${styles.length} styles in ${Date.now() - t0} ms${failures.length ? ` — ${failures.length} FAILURES` : ''}`)
+console.log(`rendered ${icons.length} icons x ${styles.length} styles in ${Date.now() - t0} ms (${pool.rendered} drawn, ${pool.cached} from cache)${failures.length ? ` — ${failures.length} FAILURES` : ''}`)
 failures.slice(0, 20).forEach(f => console.log('  FAIL ' + f))
 
 // `--no-site` skips the website generators (site data, pages, SEO) — for package-only rebuilds
@@ -91,12 +94,14 @@ for (const { name, mod } of ordered) {
   console.log(`  skill-sync: ${out.replace(/\r?\n/g, '; ') || (r.stderr || '').split('\n')[0]}`)
   if (/wrote skills/.test(out) && (!only.length || only.includes('mcp'))) {
     const { bundle } = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'emit-mcp.mjs')).href)
-    console.log(`  emit-mcp (skill changed, re-bundled): ${await bundle({ root: ROOT, version })}`)
+    console.log(`  emit-mcp (skill changed, re-bundled): ${await bundle({ root: ROOT, version, styles: ctx.styles.map(s => s.name) })}`)
   }
 }
 if (NO_SITE) { console.log(`build done (packages only) in ${Date.now() - t0} ms`); process.exit(process.exitCode || 0) }
 // site data is always regenerated last (reuses this build's renders instead of rendering everything again)
 console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-data.mjs')).href)).build(ctx))
+// "Download all" zips (site/downloads/*.zip + site/data/downloads.json/js), from this build's renders
+console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-downloads.mjs')).href)).build(ctx))
 // AI coding-tool integrations data (site/data/integrations.js) — read by the home page and ai.html
 // (that script only self-runs when launched directly, so call its exported build() here)
 console.log((await import(pathToFileURL(path.join(ROOT, 'forge', 'tools', 'site-integrations.mjs')).href)).build())

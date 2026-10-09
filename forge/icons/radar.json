@@ -1,0 +1,72 @@
+{
+  "name": "radar",
+  "category": "ai",
+  "description": "A radar sweep with a blip, for monitoring, discovery and scanning.",
+  "aliases": [
+    "radar-scan",
+    "sonar",
+    "scanner",
+    "sweep",
+    "detect",
+    "radar-screen",
+    "tracking",
+    "scan-area"
+  ],
+  "tags": [
+    "radar",
+    "scan",
+    "monitor",
+    "detect",
+    "discovery"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 17 A5 5 0 0 1 12 7",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 L18.5 5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16.5 15.5 A0.5 0.5 0 1 1 15.5 15.5 A0.5 0.5 0 1 1 16.5 15.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 17 A5 5 0 0 1 12 7",
+    "M12 12 L18.5 5.5",
+    "M17.25 15.5 A1.25 1.25 0 1 1 14.75 15.5 A1.25 1.25 0 1 1 17.25 15.5 Z"
+  ],
+  "synonyms": [
+    "discover",
+    "scanning",
+    "detection",
+    "monitor",
+    "watch",
+    "surveillance",
+    "nearby",
+    "find nearby",
+    "proximity",
+    "discovery",
+    "explore",
+    "on the radar",
+    "blip",
+    "air traffic",
+    "military",
+    "submarine",
+    "signal",
+    "search area",
+    "locate",
+    "trend watch",
+    "observability",
+    "alerts"
+  ]
+}

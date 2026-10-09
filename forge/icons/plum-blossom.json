@@ -1,0 +1,72 @@
+{
+  "name": "plum-blossom",
+  "category": "lunar-new-year",
+  "description": "A plum blossom branch, for spring and Lunar New Year.",
+  "aliases": [
+    "plum-flower",
+    "meihua",
+    "mei-hua",
+    "ume",
+    "winter-plum",
+    "plum-branch",
+    "blossom-branch",
+    "maehwa"
+  ],
+  "synonyms": [
+    "blossom",
+    "flower",
+    "plum",
+    "branch",
+    "spring",
+    "late winter",
+    "hoa mai",
+    "apricot blossom",
+    "ume blossom",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "resilience",
+    "hope",
+    "renewal",
+    "nature",
+    "floral",
+    "bloom",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "flower",
+    "spring",
+    "nature"
+  ],
+  "paths": [
+    {
+      "d": "M12 5.75 A2.55 2.55 0 1 1 17 5.75 A2.55 2.55 0 1 1 18.5 10.5 A2.55 2.55 0 1 1 14.5 13.5 A2.55 2.55 0 1 1 10.5 10.5 A2.55 2.55 0 1 1 12 5.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.75 9.25 A1.25 1.25 0 1 1 13.25 9.25 A1.25 1.25 0 1 1 15.75 9.25 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M2.5 21.5 C5 19 7.5 16.5 10.25 13.75",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 17.5 C6 15.5 5.5 14.25 4.5 13",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10.75 A1.75 1.75 0 1 1 2.5 10.75 A1.75 1.75 0 1 1 6 10.75 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 5.75 A2.55 2.55 0 1 1 17 5.75 A2.55 2.55 0 1 1 18.5 10.5 A2.55 2.55 0 1 1 14.5 13.5 A2.55 2.55 0 1 1 10.5 10.5 A2.55 2.55 0 1 1 12 5.75 Z",
+    "M6 10.75 A1.75 1.75 0 1 1 2.5 10.75 A1.75 1.75 0 1 1 6 10.75 Z"
+  ],
+  "cutouts": [
+    "M15.75 9.25 A1.25 1.25 0 1 1 13.25 9.25 A1.25 1.25 0 1 1 15.75 9.25 Z"
+  ]
+}

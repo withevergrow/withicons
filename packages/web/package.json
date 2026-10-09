@@ -1,7 +1,7 @@
 {
   "name": "@withicons/web",
   "version": "0.3.1",
-  "description": "<with-icon> custom element: 500 icons x 20 styles, zero dependencies, lazy per-style data.",
+  "description": "<with-icon> custom element: 734 icons x 34 styles, zero dependencies, lazy per-style data.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -46,6 +46,20 @@
     "pastel",
     "coquette",
     "plush",
+    "clay",
+    "bento",
+    "suite",
+    "dock",
+    "liquid",
+    "chrome",
+    "soft3d",
+    "brutal",
+    "utsav",
+    "rangoli",
+    "halloween",
+    "christmas",
+    "lunar",
+    "valentine",
     "multicolor-icons",
     "animated-icons"
   ],
@@ -100,5 +114,8 @@
   "jsdelivr": "./dist/cdn.js",
   "scripts": {
     "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@withicons/web-plus": "0.3.1"
   }
 }

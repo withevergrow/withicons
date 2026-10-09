@@ -39,7 +39,10 @@ const sentBytes = (bytes, binary) => binary ? Math.ceil(bytes / 3) * 4 : Math.ce
 const remoteCommandOnly = f => NEEDS_PNG.has(f) || f === 'animated-svg'
 const PKG_VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : 'latest'
 // the prebuilt standalone SVG of @withicons/static (colours baked in, ink currentColor), same release as this server
-export const staticSvgUrl = (style, name) => `https://cdn.jsdelivr.net/npm/@withicons/static@${PKG_VERSION}/dist/svg/${style}/${name}.svg`
+// the newest styles' files live in @withicons/static-plus (meta.styles[].static: the package holding the style; jsDelivr
+// serves at most 150 MB per package)
+const staticPkg = style => { try { const st = lib.data().meta.styles.find(x => x.name === style); return (st && st.static) || 'static' } catch { return 'static' } }
+export const staticSvgUrl = (style, name) => `https://cdn.jsdelivr.net/npm/@withicons/${staticPkg(style)}@${PKG_VERSION}/dist/svg/${style}/${name}.svg`
 class PageTimeout extends Error {}
 
 /**

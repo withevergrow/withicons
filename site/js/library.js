@@ -17,7 +17,7 @@
   var $ = function (s, r) { return (r || D).querySelector(s) }
   var $$ = function (s, r) { return Array.prototype.slice.call((r || D).querySelectorAll(s)) }
   var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
-  var cap = function (s) { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1) }
+  var cap = function (s) { s = String(s || ''); if (s === 'ai') return 'AI'; return s.charAt(0).toUpperCase() + s.slice(1) }
   var pascal = function (n) { return n.split(/[-_\s]+/).filter(Boolean).map(cap).join('') }
   var TITLE_WORDS = { qr: 'QR', id: 'ID', cpu: 'CPU', pdf: 'PDF', rss: 'RSS', tv: 'TV', ccw: 'CCW', cw: 'CW', wifi: 'Wi-Fi', x: 'X' }
   var titleOf = function (n) { return n.split('-').map(function (w) { return TITLE_WORDS[w] || cap(w) }).join(' ') }
@@ -38,19 +38,14 @@
 
   /* ───────────────────────── data ───────────────────────── */
   // the contract order (forge/CONTRACT.md); styles the data adds later sort after these, missing ones are skipped
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
   var rankOf = function (n) { var i = ORDER.indexOf(n); return i < 0 ? 99 : i }
   var STYLES = META.styles.slice().sort(function (a, b) { return rankOf(a.name) - rankOf(b.name) })
   var STYLE = {}; STYLES.forEach(function (s) { STYLE[s.name] = s })
   var SNAMES = STYLES.map(function (s) { return s.name })
-  // how the switchers group them (same five families as the home page and icon pages)
-  var GROUPS = [
-    { id: 'everyday', title: 'Everyday', styles: ['line', 'solid', 'duo'] },
-    { id: 'crafted', title: 'Crafted', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
-    { id: 'playful', title: 'Playful', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', styles: ['luxe', 'bauhaus', 'skeuo'] },
-    { id: 'storybook', title: 'Storybook', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'], isNew: true },
-  ].map(function (g) { return { id: g.id, title: g.title, isNew: g.isNew, styles: g.styles.filter(function (n) { return STYLE[n] }) } })
+  // how the pickers group them: the five groups of site.js (WI.GROUPS, the one source of truth; site/STYLE-PICKER.md)
+  var GROUPS = ((W.WI && W.WI.GROUPS) || [{ id: 'all', title: 'Styles', styles: SNAMES.slice() }])
+    .map(function (g) { return { id: g.id, title: g.title, blurb: g.blurb || '', styles: g.styles.filter(function (n) { return STYLE[n] }) } })
   SNAMES.forEach(function (n) { if (!GROUPS.some(function (g) { return g.styles.indexOf(n) >= 0 })) GROUPS[GROUPS.length - 1].styles.push(n) })
   GROUPS = GROUPS.filter(function (g) { return g.styles.length })
   var GROUP_OF = {}; GROUPS.forEach(function (g) { g.styles.forEach(function (n) { GROUP_OF[n] = g }) })
@@ -62,21 +57,27 @@
   CATS = CATS.filter(function (c) { return ICONS.some(function (ic) { return ic.category === c }) })
   var CAT_RANK = {}; CATS.forEach(function (c, i) { CAT_RANK[c] = i })
   var BROWSE = ICONS.slice().sort(function (a, b) { return (CAT_RANK[a.category] - CAT_RANK[b.category]) || (a.name < b.name ? -1 : 1) })
-  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#5B9DFF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24' }
-  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Layers of frosted glass', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes', luxe: 'Premium layered 3D with gold trim', bauhaus: 'Pure geometry in the Bauhaus primaries', skeuo: 'Real materials, bevels and depth', anime: 'Anime cel shading with sparkling highlights', gothic: 'Cathedral stone and stained glass', pastel: 'Soft, dreamy candy pastels', coquette: 'Blush pink, satin bows and pearls', plush: 'Soft felt toys with stitched seams' }
+  var HEX = { line: '#2F5BFF', solid: '#FF5A36', duo: '#7252FF', gloss: '#FF4FA3', engrave: '#C9962B', blueprint: '#00A3C4', sketch: '#22A861', glass: '#7484FF', kawaii: '#FF7A9A', sticker: '#B57CFF', pixel: '#4FAE0C', retro: '#F57C12', luxe: '#2B3FB8', bauhaus: '#D62718', skeuo: '#5A6E86', anime: '#2E9BF0', gothic: '#7A1F3D', pastel: '#3DBFA0', coquette: '#E2456F', plush: '#F2AE24', clay: '#C8714E', bento: '#0E9F9A', suite: '#0B6CD4', dock: '#3A3F4B', liquid: '#38BDF8', chrome: '#8D99AE', soft3d: '#E0A800', brutal: '#FF4F79', utsav: '#EA7A0C', rangoli: '#E81F7A', halloween: '#F2690F', christmas: '#1F7A4D', lunar: '#E8282E', valentine: '#FF5C82' }
+  var SAY = { line: 'Clean outlines for apps, sites and slides', solid: 'Bold filled shapes that read from afar', duo: 'An outline over a soft tint', gloss: 'Puffy, shiny and toy-like', engrave: 'Fine banknote-style engraving', blueprint: 'A technical drawing with guides', sketch: 'Hand-drawn marker lines', glass: 'Soft frosted glass with a calm glow', kawaii: 'Chubby and cute, with a tiny face', sticker: 'A shiny die-cut sticker', pixel: 'Crisp pixel art', retro: 'Chunky 70s sunset stripes', luxe: 'Premium layered 3D with gold trim', bauhaus: 'Pure geometry in the Bauhaus primaries', skeuo: 'Real materials, bevels and depth', anime: 'Anime cel shading with sparkling highlights', gothic: 'Cathedral stone and stained glass', pastel: 'Soft, dreamy candy pastels', coquette: 'Blush pink, satin bows and pearls', plush: 'Soft felt toys with stitched seams', clay: 'Soft faux-3D clay', bento: 'Icons in tinted tiles', suite: 'Enterprise colour icons', dock: 'App-icon tiles', liquid: 'Clear refractive glass', chrome: 'Liquid metal', soft3d: 'Soft studio-lit 3D with real depth', brutal: 'Bold neo-brutalism', utsav: 'Indian festive craft in marigold and gold', rangoli: 'Diwali, Durga Puja and Holi in a festive glow', halloween: 'Spooky-cute pumpkins, purple and slime', christmas: 'Cosy cranberry and pine with a snow cap', lunar: 'Lucky red lacquer and gold foil', valentine: 'Cute pink stickers with tiny hearts' }
   var sayOf = function (st) { var wi = W.WI && W.WI.styleInfo && W.WI.styleInfo[st]; return SAY[st] || (wi && wi.description && wi.description.replace(/\.$/, '')) || (STYLE[st] && STYLE[st].description) || '' }
   var INK = '#111318', PAPER = '#FBF8F3'
   var styleHex = function (st) { return HEX[st] || INK }
   var CLASH = { Map: 1, Image: 1, History: 1, File: 1, Link: 1, Navigation: 1, Clipboard: 1, Keyboard: 1, Bluetooth: 1, Screen: 1, Option: 1, Text: 1, Location: 1, Range: 1, Selection: 1, Notification: 1, Set: 1, Date: 1, Error: 1, Symbol: 1, Proxy: 1, Worker: 1, Lock: 1, Headers: 1, Request: 1, Response: 1 }
   var comp = function (n) { var p = pascal(n); return CLASH[p] ? p + 'Icon' : p }
-  var CAT_ICON = { navigation: 'home', arrows: 'arrow-up-right', actions: 'pencil', status: 'check-circle', media: 'play', files: 'file', communication: 'mail', users: 'user', commerce: 'shopping-cart', time: 'clock', devices: 'smartphone', layout: 'layout-grid', text: 'type', maps: 'map-pin', development: 'code', security: 'lock', charts: 'chart-bar', weather: 'sun', objects: 'gift', food: 'pizza', health: 'stethoscope', education: 'graduation-cap', nature: 'leaf', home: 'sofa', travel: 'luggage', sports: 'trophy' }
+  var CAT_ICON = { ai: 'brain-circuit', navigation: 'home', arrows: 'arrow-up-right', actions: 'pencil', status: 'check-circle', media: 'play', files: 'file', communication: 'mail', users: 'user', commerce: 'shopping-cart', time: 'clock', devices: 'smartphone', layout: 'layout-grid', text: 'type', maps: 'map-pin', development: 'code', security: 'lock', charts: 'chart-bar', weather: 'sun', objects: 'gift', food: 'pizza', health: 'stethoscope', education: 'graduation-cap', nature: 'leaf', home: 'sofa', travel: 'luggage', sports: 'trophy', 'indian-festivals': 'diya', christmas: 'christmas-tree', 'lunar-new-year': 'red-lantern', valentines: 'heart-pair', halloween: 'jack-o-lantern', avatars: 'avatar-person' }
   function catIcon(c) { var n = CAT_ICON[c]; if (n && BY[n]) return n; for (var i = 0; i < BROWSE.length; i++) if (BROWSE[i].category === c) return BROWSE[i].name; return ICONS[0].name }
   var numericSW = function (st) { return !!(STYLE[st] && typeof STYLE[st].strokeWidth === 'number') }
 
   function svgMap(st) { var a = W.WITH_SVG; return (a && a[st]) || null }
   // one icon in every style (data/by-icon/<name>.js, window.WITH_ICON): the viewer, hover card, copies and downloads use it,
   // so opening an icon costs one small file instead of 20 style files (those stay for switching the grid's style)
-  function innerOf(st, name) { var m = svgMap(st); if (m && m[name] != null) return m[name]; var p = W.WITH_ICON && W.WITH_ICON[name]; return p && p[st] != null ? p[st] : null }
+  function innerOf(st, name) {
+    var m = svgMap(st); if (m && m[name] != null) return m[name]
+    var wi = WI(), c = wi && wi.inner && W.WITH_SVG_PART ? wi.inner(name, st) : null; if (c != null) return c
+    var p = W.WITH_ICON && W.WITH_ICON[name]; return p && p[st] != null ? p[st] : null
+  }
+  // a heavy style comes in chunks of 48 icons (site.js WI.loadStyleFor; forge/tools/site-data.mjs styleChunks)
+  function chunked(st) { var wi = WI(); return !!(wi && wi.chunkCount && wi.chunkCount(st)) }
   function has(st, name) { return innerOf(st, name) != null }
   var iconLoading = {}
   function loadIcon(name) {
@@ -97,6 +98,7 @@
     if (!STYLE[st]) return Promise.resolve(false)
     if (svgMap(st)) return Promise.resolve(true)
     if (loading[st]) return loading[st]
+    if (chunked(st)) return (loading[st] = WI().loadStyle(st).then(function (ok) { if (ok) onStyleLoaded(st); else delete loading[st]; return ok }))
     loading[st] = new Promise(function (res) {
       var el = D.querySelector('script[data-with-style="' + st + '"]')
       if (el && el.hasAttribute('data-done')) { res(); return }
@@ -105,7 +107,51 @@
     }).then(function () { var ok = !!svgMap(st); if (ok) onStyleLoaded(st); return ok })
     return loading[st]
   }
-  function loadAll() { return Promise.all(SNAMES.map(loadStyle)) }
+  // A chunked style shows as soon as the chunks of the icons on screen (and the next row) are in, ~50 KB instead of
+  // the whole 1-7 MB style; the rest of its chunks follow at once in the background and fill tiles as they land.
+  function firstNames(all) {
+    var res = S.results || [], start = 0, n = 48
+    if (!all && S.view !== 'compare' && L.cols > 0 && L.rowH > 0) {
+      var r = visibleRange(); start = Math.max(0, r.vis0 * L.cols); n = Math.max(L.cols * 2, (r.vis1 - r.vis0 + 2) * L.cols)
+    }
+    var out = res.slice(start, start + n).map(function (x) { return x.name })
+    return out.length ? out : BROWSE.slice(0, 48).map(function (ic) { return ic.name })
+  }
+  function loadFirst(st, names) {
+    if (!STYLE[st] || svgMap(st) || !chunked(st)) return loadStyle(st)
+    return WI().loadStyleFor(st, names || firstNames()).then(function (ok) { restSoon(st); return ok })
+  }
+  // the rest of a chunked style: once the page is idle (a tile scrolled into view asks for its own chunk sooner, see
+  // glyph); on Save-Data or 2G only what is scrolled to
+  function restSoon(st) {
+    if (lowData() || svgMap(st)) return
+    var go = function () { if (S.style === st || S.view === 'compare') loadStyle(st) }
+    if (W.requestIdleCallback) W.requestIdleCallback(go, { timeout: 3000 }); else setTimeout(go, 1500)
+  }
+  // tiles drawn before their chunk is here ask for it (batched per frame): scrolling never waits for the whole style
+  var askQ = {}, askT = 0
+  function askChunk(st, name) {
+    if (!chunked(st)) return
+    ;(askQ[st] = askQ[st] || []).push(name)
+    if (askT) return
+    askT = raf(function () {
+      askT = 0; var q = askQ; askQ = {}
+      Object.keys(q).forEach(function (k) { if (!svgMap(k)) WI().loadStyleFor(k, q[k]) })
+    })
+  }
+  // compare view: the light styles first (the grid waits for them), then the rich ones one by one; their tiles show a
+  // skeleton until their file lands (styleHooks fill them)
+  function loadAll() {
+    var names = firstNames(true).slice(0, 12)
+    SNAMES.forEach(function (n) { if (chunked(n) && !svgMap(n)) WI().loadStyleFor(n, names) })
+    return Promise.all(SNAMES.filter(function (n) { return !isRich(n) && !chunked(n) }).map(loadStyle)).then(function (r) {
+      var rich = SNAMES.filter(function (n) { return (isRich(n) || chunked(n)) && !svgMap(n) })
+      ;(function next() { var n = rich.shift(); if (n) loadStyle(n).then(next) })()
+      return r
+    })
+  }
+  // a rich style (forge/CONTRACT.md "Rich styles": gradients), as data/meta.js marks it
+  function isRich(st) { return !!(STYLE[st] && STYLE[st].rich) }
   var styleHooks = []
   function onStyleLoaded(st) { styleHooks.forEach(function (f) { try { f(st) } catch (e) { if (W.console) console.error(e) } }) }
   // Every style file is 0.1-1.5 MB of JS (8 MB together). Only desktop-class devices on a normal connection fetch them
@@ -116,7 +162,8 @@
   function idleLoadRest(force) {
     if ((!force && !richDevice()) || idleLoadRest.on) return
     idleLoadRest.on = true
-    var rest = SNAMES.filter(function (n) { return !svgMap(n) })
+    // (rich styles, with gradients, run to several MB a file: they load only when picked or reached for)
+    var rest = SNAMES.filter(function (n) { return !svgMap(n) && !isRich(n) && !chunked(n) })
     rest.sort(function (a, b) { return (snapOf(a) ? 1 : 0) - (snapOf(b) ? 1 : 0) })
     var idle = W.requestIdleCallback ? function (f) { W.requestIdleCallback(f, { timeout: 2500 }) } : function (f) { setTimeout(f, 300) }
     ;(function next() { var n = rest.shift(); if (n) idle(function () { loadStyle(n).then(next) }) })()
@@ -135,7 +182,7 @@
     var key = st + '|' + name
     if (gCache[key]) return gCache[key]
     var inner = innerOf(st, name)
-    if (inner == null) return svgMap(st) ? '<span class="t-skel is-missing" aria-hidden="true"></span>' : '<span class="t-skel" aria-hidden="true"></span>'
+    if (inner == null) { if (svgMap(st)) return '<span class="t-skel is-missing" aria-hidden="true"></span>'; askChunk(st, name); return '<span class="t-skel" aria-hidden="true"></span>' }
     if (DRAWABLE[st] && inner.indexOf('dasharray') < 0) inner = inner.replace(/<(path|circle|line|rect|ellipse|polyline|polygon)\b(?![^>]*\bfill="(?!none))/g, '<$1 pathLength="1"')
     return (gCache[key] = '<svg viewBox="0 0 24 24"' + ROOT_ATTR[st] + (numericSW(st) ? ' class="sw"' : '') + ' aria-hidden="true" focusable="false">' + inner + '</svg>')
   }
@@ -365,7 +412,7 @@
   var root = $('[data-lib]')
   if (!root) return
   var input = $('#lib-q'), grid = $('[data-grid]'), meta = $('[data-meta]'), empty = $('[data-empty]'), body = $('[data-body]')
-  var catNav = $('[data-cats]'), stylesEl = $('[data-styles]'), stylesWrap = $('[data-styles-wrap]'), viewer = $('[data-viewer]'), vwBody = $('[data-vw-body]'), vwPanel = $('[data-vw-panel]')
+  var catNav = $('[data-cats]'), stylesWrap = $('[data-styles-wrap]'), viewer = $('[data-viewer]'), vwBody = $('[data-vw-body]'), vwPanel = $('[data-vw-panel]')
   var selbar = $('[data-selbar]'), toastEl = $('[data-toast]'), scrim = $('[data-vw-scrim]'), tools = $('[data-tools]'), rail = $('[data-rail]')
 
   /* ───────────────────────── toast ───────────────────────── */
@@ -859,7 +906,7 @@
     if (!rail) return
     var bar = $('[data-bar]'), bb = bar.getBoundingClientRect().bottom, r = rail.getBoundingClientRect()
     var on = r.bottom > bb + 12 && r.top < W.innerHeight
-    if (on !== bar.classList.contains('rail-on')) { bar.classList.toggle('rail-on', on); if (on && stylesWrap.classList.contains('is-open')) sbOpen(false) }
+    if (on !== bar.classList.contains('rail-on')) { bar.classList.toggle('rail-on', on); if (on && picker) sbOpen(false) }
     var fade = clamp((r.top - bb + 20) / 60, 0, 1)
     if (fade !== rail._f) { rail._f = fade; rail.style.opacity = fade < 1 ? (0.15 + 0.85 * fade).toFixed(3) : '' }
   }
@@ -972,11 +1019,11 @@
   }
 
   /* ───────────────────────── style switcher ─────────────────────────
-     Two homes for the same options, five groups (Everyday · Crafted · Playful · Studio · Storybook), each a live mini icon +
-     its name: the RAIL in the page flow under the bar (one row on wide screens, two even rows below ~1040px, a sideways
-     strip on phones; a rich hover card per style) and the bar's compact PICKER (popover on desktop, bottom sheet on
-     phones) so every style stays one click away while the bar is stuck. Selection is drawn by CSS (aria-checked). Mini
-     icons come from the inline snapshot (#lib-style-samples), a localStorage copy for styles added later, then the live drawing. */
+     Few choices first, everything one step away (site/STYLE-PICKER.md): the compact row under the bar (the current style,
+     recent ones, then the popular picks, and "All N styles") and the bar's Style button once the row has scrolled away;
+     both open the shared full picker (js/style-picker.js: groups, "What are you making?", search, Compare all styles).
+     The bar button's mini icon comes from the inline snapshot (#lib-style-samples), a localStorage copy for styles
+     added later, then the live drawing. */
   var SAMPLE = BY.heart ? 'heart' : ['star', 'home', 'bell'].filter(function (n) { return BY[n] })[0] || ICONS[0].name
   var SNAP = (function () { try { var el = D.getElementById('lib-style-samples'); return el ? JSON.parse(el.textContent) : {} } catch (e) { return {} } })()
   // a style the inline snapshot doesn't know yet (added after the page was generated) still gets its preview: the
@@ -995,32 +1042,26 @@
     g.innerHTML = h; g._live = live; g._st = st
   }
   var CMP_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="4" height="16" rx="1.5" fill="currentColor" opacity=".35"/><rect x="10" y="4" width="4" height="16" rx="1.5" fill="currentColor" opacity=".65"/><rect x="17" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>'
+  var styleRow = null, picker = null
+  function moveInk() { }
+  var SP = function () { return W.WI && W.WI.stylePicker }
   function paintStylePills() {
-    $$('[data-style-pill]', root).forEach(function (b) {
-      var st = b.getAttribute('data-style-pill')
-      var on = S.view === 'grid' && st === S.style
-      b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on || (S.view === 'compare' && st === S.style) ? 0 : -1
-      paintSample($('.sb-ic', b), st)
-    })
-    $$('[data-compare]', root).forEach(function (cmp) { cmp.setAttribute('aria-pressed', S.view === 'compare' ? 'true' : 'false') })
-    if (rail) $$('[data-style-pill]', rail).forEach(function (b) { b.tabIndex = b.getAttribute('aria-checked') === 'true' || (S.view === 'compare' && b.getAttribute('data-style-pill') === S.style) ? 0 : -1 })
-    sbSay()
-    // phone trigger: the current style (or "All styles" in compare)
+    var all = S.view === 'compare'
+    if (styleRow) styleRow.set(S.style)
+    if (rail) rail.classList.toggle('is-compare', all)
+    $$('[data-compare]', root).forEach(function (cmp) { cmp.setAttribute('aria-pressed', all ? 'true' : 'false') })
+    // the bar's Style button: the current style (or "All styles" in compare)
     var cur = $('[data-sb-cur]', stylesWrap), curG = $('[data-sb-cur-g]', stylesWrap), curIc = $('[data-sb-cur-ic]', stylesWrap)
     if (cur) {
-      var all = S.view === 'compare'
       cur.textContent = all ? 'All ' + SNAMES.length + ' styles' : STYLE[S.style].title
-      curG.textContent = all ? 'Compare' : (GROUP_OF[S.style] ? GROUP_OF[S.style].title : 'Style') + ' style'
+      curG.textContent = all ? 'Compare' : 'Style'
       if (all) { if (curIc._st !== 'all') { curIc.innerHTML = CMP_SVG; curIc._st = 'all'; curIc._live = null } } else paintSample(curIc, S.style)
-      $('[data-sb-toggle]', stylesWrap).setAttribute('aria-label', 'Icon style: ' + (all ? 'comparing all ' + SNAMES.length + ' styles' : STYLE[S.style].title) + '. Show all ' + SNAMES.length + ' styles')
+      $('[data-sb-toggle]', stylesWrap).setAttribute('aria-label', 'Icon style: ' + (all ? 'comparing all ' + SNAMES.length + ' styles' : STYLE[S.style].title) + '. Choose from all ' + SNAMES.length + ' styles')
     }
-    moveInk()
-    root.setAttribute('data-style', S.view === 'compare' ? 'all' : S.style)
+    root.setAttribute('data-style', all ? 'all' : S.style)
     paintTools()
+    paintDl()
   }
-  // the selected option is drawn by CSS (aria-checked); nothing to measure
-  function moveInk() { }
-  // the picker's footer line: the style under the pointer / focus, else the current one
   // a popover opens where it is: it never scrolls the page, it scrolls inside itself when the screen is short
   function fitPanel(el) {
     if (!el) return
@@ -1028,22 +1069,57 @@
     var t = el.parentNode.getBoundingClientRect().bottom + 10
     el.style.maxHeight = Math.max(220, W.innerHeight - t - 16) + 'px'
   }
-  function sbSay(st) {
-    var el = $('[data-sb-say]', stylesWrap); if (!el) return
-    var all = !st && S.view === 'compare'; st = st || S.style
-    el.innerHTML = all ? '<b>Comparing all ' + SNAMES.length + ' styles</b> side by side' : '<b style="color:var(--t-' + st + ')">' + esc(STYLE[st].title) + '</b> ' + esc(sayOf(st))
+  // the full picker's footer actions: compare mode (every icon in every style) stays one click away, and the current
+  // style's whole set as one zip (site/downloads/with-icons-<style>.zip, sizes from data/downloads.js)
+  function compareActions() {
+    var a = [{ id: 'compare', label: S.view === 'compare' ? 'Back to one style' : 'Compare all ' + SNAMES.length + ' styles', hint: 'See every icon in every style side by side', pressed: S.view === 'compare' }]
+    var d = S.view === 'compare' ? null : dlInfo(S.style)
+    if (d) a.push({ id: 'download', label: 'Download all in this style', hint: dlText(S.style, d) })
+    return a
   }
-  // phones: the panel opens from the trigger and closes on pick / Escape / outside tap
-  function sbSheet() { var t = $('[data-sb-toggle]', stylesWrap); return !!(t && t.offsetWidth) }
-  function sbOpen(open, focus) {
-    var t = $('[data-sb-toggle]', stylesWrap); if (!t) return
-    if (open && !sbSheet()) open = false
-    if (open) { var vp = $('[data-pop].is-open', tools); if (vp) togglePop(vp, false) }
-    if (open) { hideToast(); fitPanel($('[data-sb-panel]', stylesWrap)) }
-    stylesWrap.classList.toggle('is-open', open); t.setAttribute('aria-expanded', open ? 'true' : 'false')
-    HTML.classList.toggle('lib-sheet-open', open && isPhone())
-    if (open) { sbSay(); if (focus) { var on = $('[aria-checked="true"]', stylesEl) || $('[data-compare]', stylesWrap); setTimeout(function () { on.focus({ preventScroll: true }) }, 40) } }
-    else if (focus) t.focus({ preventScroll: true })
+  function onPickerAction(id) {
+    if (id === 'compare') setView(S.view === 'compare' ? 'grid' : 'compare')
+    else if (id === 'download') dlStyle(S.style)
+  }
+  /* "Download all in this style": data/downloads.js (window.WITH_DOWNLOADS, forge/tools/site-downloads.mjs) arrives once
+     the page is idle; the View panel gets a link (a plain <a download>) that follows the style, and the picker a footer action */
+  function dlInfo(st) { var d = W.WITH_DOWNLOADS; return d && d.styles && d.styles[st] || null }
+  function dlText(st, d) { return fmt(d.icons) + ' ' + (d.title || STYLE[st].title) + ' SVGs, .zip, ' + d.size }
+  function dlStyle(st) {
+    var d = dlInfo(st); if (!d) return
+    var a = D.createElement('a'); a.href = d.file; a.setAttribute('download', d.file.split('/').pop()); a.hidden = true
+    D.body.appendChild(a); a.click(); a.remove()
+    try { if (typeof W.gtag === 'function') W.gtag('event', 'download_all', { style: st }) } catch (e) { }
+  }
+  function paintDl() {
+    var box = $('.pop-togs', tools); if (!box) return
+    var a = $('[data-lib-dl]', box), d = S.view === 'compare' ? null : dlInfo(S.style)
+    if (!d) { if (a) a.hidden = true; return }
+    if (!a) {
+      a = D.createElement('a'); a.className = 'pop-tog pop-dl'; a.setAttribute('data-lib-dl', '')
+      a.innerHTML = '<span class="pop-tog-t"><b>Download all in this style</b><small data-lib-dl-t></small></span><svg class="pop-dl-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M7.5 10.5 12 15l4.5-4.5M4 15.5v2.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      a.addEventListener('click', function () { try { if (typeof W.gtag === 'function') W.gtag('event', 'download_all', { style: S.style }) } catch (e) { } })
+      box.appendChild(a)
+    }
+    a.hidden = false
+    a.href = d.file; a.setAttribute('download', d.file.split('/').pop())
+    $('[data-lib-dl-t]', a).textContent = dlText(S.style, d)
+  }
+  function loadDl() {
+    if (W.WITH_DOWNLOADS) { paintDl(); return }
+    var e = D.createElement('script'); e.src = 'data/downloads.js'; e.async = true; e.onload = paintDl; D.head.appendChild(e)
+  }
+  // the bar's Style button opens the full picker (a popover on desktop, a bottom sheet on phones)
+  function sbOpen(open) {
+    if (!open) { if (picker) picker.close(); return }
+    if (picker || !SP()) return
+    var vp = $('[data-pop].is-open', tools); if (vp) togglePop(vp, false)
+    hideToast(); peekHide(true)
+    var p = SP().open({ current: S.view === 'compare' ? null : S.style, icon: null, anchor: $('[data-sb-toggle]', stylesWrap), title: 'Choose a style',
+      actions: compareActions(), onAction: onPickerAction, onPick: function (st) { setStyle(st, null) } })
+    picker = p
+    $('[data-sb-toggle]', stylesWrap).setAttribute('aria-expanded', 'true')
+    p.then(function () { if (picker === p) picker = null; $('[data-sb-toggle]', stylesWrap).setAttribute('aria-expanded', 'false') })
   }
   function setStyle(st, fromEl) {
     if (!STYLE[st]) return
@@ -1051,10 +1127,11 @@
     if (st === S.style && !wasCompare) return
     peekHide(true)
     S.style = st; S.view = 'grid'; store.set('style', st)
+    if (SP()) SP().remember(st)
     if (V.open && !wasCompare) setViewerStyle(st, true)
     root.classList.add('is-loading')
     paintStylePills()
-    loadStyle(st).then(function () {
+    loadFirst(st, wasCompare ? firstNames(true) : null).then(function () {
       root.classList.remove('is-loading')
       if (wasCompare) { mounted.forEach(function (n) { n.remove() }); mounted.clear(); clearLabels() }
       runSearch(); buildItems(); layout()
@@ -1086,7 +1163,7 @@
     peekHide(true)
     root.classList.add('is-loading')
     paintStylePills()
-    ;(v === 'compare' ? loadAll() : loadStyle(S.style)).then(function () {
+    ;(v === 'compare' ? loadAll() : loadFirst(S.style, firstNames(true))).then(function () {
       root.classList.remove('is-loading')
       mounted.forEach(function (n) { n.remove() }); mounted.clear(); clearLabels()
       gen++; S.fi = 0
@@ -1327,7 +1404,7 @@
     var entry = spec && (spec.loop || spec.hover), P = W.WithEditor && W.WithEditor.PRESETS
     moBox.classList.toggle('is-wait', !spec)
     if (spec && entry) {
-      var mi = W.WithEditor && W.WithEditor.motionAttrs(entry, { trigger: 'loop', stroked: !!DRAWABLE[st] })
+      var mi = W.WithEditor && W.WithEditor.motionAttrs(entry, { trigger: 'loop', stroked: !!DRAWABLE[st], style: st })
       mo.innerHTML = mi && has(st, name) ? '<span class="pk-mo-in ' + mi.cls + '" style="' + esc(mi.style) + '">' + svgInline(st, name) + '</span>' : (has(st, name) ? svgInline(st, name) : '')
       if (mi && mi.preset === 'draw' && W.WithEditor.prepareDraw) W.WithEditor.prepareDraw(mo)
       $('[data-pk-mo-l]', el).textContent = (mi && P && P[mi.preset] ? P[mi.preset].label : 'Animated')
@@ -1463,7 +1540,7 @@
   // ones (PNG + size, SVG, SVG code) and the "use it in code" bar are always shown; everything else lives in labelled
   // accordions (Make it yours · More formats · See it in use · Related · Ask AI · For developers) that remember their state.
   var STACKS = [['html', 'HTML <i> tag'], ['react', 'React'], ['vue', 'Vue'], ['svelte', 'Svelte'], ['angular', 'Angular'], ['solid', 'Solid'], ['web', 'Web component'], ['svg', 'SVG']]
-  var ACC_DEF = { tune: false, dl: false, use: false, rel: false, ai: false }
+  var ACC_DEF = { tune: true, dl: false, use: false, rel: false, ai: false }
   function acc(id, title, sub, inner, extra) {
     var open = accOpen(id)
     return '<details class="vw-acc" data-vw-acc="' + id + '"' + (extra || '') + (open ? ' open' : '') + '><summary class="vw-acc-s"><span class="vw-acc-t"><b>' + title + '</b><small>' + sub + '</small></span><span class="vw-acc-x" aria-hidden="true"></span></summary><div class="vw-acc-b">' + inner + '</div></details>'
@@ -1472,7 +1549,8 @@
   function buildViewer() {
     vwBody.innerHTML =
       '<div class="vw-topline" data-vw-drag>' +
-          '<b class="vw-mini-t" data-vw-mini-t aria-hidden="true"></b><p class="vw-crumbs"><a data-vw-cat href="#"></a><span class="vw-dot" aria-hidden="true"></span><span class="vw-stname" data-vw-stname></span></p>' +
+          // the crumbs and the compact title share one cell: they cross-fade, the bar never changes height
+          '<div class="vw-tl-l"><p class="vw-crumbs"><a data-vw-cat href="#"></a><span class="vw-dot" aria-hidden="true"></span><span class="vw-stname" data-vw-stname></span></p><b class="vw-mini-t" data-vw-mini-t aria-hidden="true"></b></div>' +
           '<div class="vw-hbtns">' +
             '<button type="button" class="vw-ib" data-vw="prev" aria-label="Previous icon" title="Previous icon (←)">' + ICO.prev + '</button>' +
             '<button type="button" class="vw-ib" data-vw="next" aria-label="Next icon" title="Next icon (→)">' + ICO.next + '</button>' +
@@ -1484,11 +1562,6 @@
       '<header class="vw-head">' +
         '<h2 class="vw-title" id="vw-title" tabindex="-1" data-vw-title></h2>' +
         '<p class="vw-desc"><span data-vw-desc></span></p>' +
-        // the two ways onward, always first: the full studio (this look and motion come along) and the icon's own page
-        '<div class="vw-launch">' +
-          '<a class="vw-go is-studio" data-vw-studio href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.spark + '</span><span class="vw-go-t"><b>Open studio</b><small>Colours, motion, turn into</small></span>' + ICO.arrow + '</a>' +
-          '<a class="vw-go is-page" data-vw-page href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.page + '</span><span class="vw-go-t"><b>Icon page</b><small>Guides, every format</small></span>' + ICO.arrow + '</a>' +
-        '</div>' +
       '</header>' +
       '<div class="vw-main">' +
         '<div class="vw-col-a">' +
@@ -1513,6 +1586,11 @@
               '<div class="vw-field"><label class="vw-label" for="vw-pad">Padding</label><input class="vw-range" id="vw-pad" type="range" min="0" max="0.3" step="0.02" data-vw-pad><output class="vw-out" data-vw-padout></output></div>' +
             '</div>' +
           '</div></div>' +
+          // the two ways onward, right under the preview: the full studio (this look and motion come along) and the icon's own page
+          '<nav class="vw-launch" aria-label="Open this icon">' +
+            '<a class="vw-go is-studio" data-vw-studio href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.spark + '</span><span class="vw-go-t"><b>Open studio</b><small>Colours, motion, turn into</small></span>' + ICO.arrow + '</a>' +
+            '<a class="vw-go is-page" data-vw-page href="#"><span class="vw-go-i" aria-hidden="true">' + ICO.page + '</span><span class="vw-go-t"><b>Icon page</b><small>Guides, every format</small></span>' + ICO.arrow + '</a>' +
+          '</nav>' +
           // animation, one tap away: when it moves, and the moves made for this icon (the full set lives in Make it yours)
           '<div class="vw-mo" data-vw-mo role="group" aria-labelledby="vw-mo-l">' +
             '<div class="vw-mo-top"><span class="vw-mo-l" id="vw-mo-l"><span class="vw-mo-dot" aria-hidden="true"></span>Animation</span><span class="vw-mo-now" data-vw-mo-now aria-live="polite"></span>' +
@@ -1524,21 +1602,10 @@
           '</div>' +
           '<div class="vw-stylebar">' +
             '<p class="vw-stl" aria-hidden="true"><b data-vw-stl-n></b><span data-vw-stl-s></span></p>' +
-            '<div class="vw-styles" role="radiogroup" aria-label="Style" data-vw-styles>' + SNAMES.map(function (s, i) { var g = GROUP_OF[s]; return '<button type="button" role="radio" class="vw-st" data-vw-st="' + s + '" data-group="' + (g ? g.id : '') + '" style="--sc:var(--s-' + s + ');--on-sc:var(--on-' + s + ')" aria-label="' + esc(STYLE[s].title) + '" title="' + esc(STYLE[s].title) + ' · ' + esc(sayOf(s)) + (i < 10 ? ' (' + ((i + 1) % 10) + ')' : '') + '"><span class="vw-st-g"></span><span class="vw-st-t">' + esc(STYLE[s].title) + '</span></button>' }).join('') + '</div>' +
+            '<div class="vw-srow" data-vw-styles></div>' +
           '</div>' +
         '</div>' +
         '<div class="vw-col-b">' +
-          '<div class="vw-actions">' +
-            '<button type="button" class="vw-btn is-primary" data-vw="copy-img">' + ICO.copy + '<span><b>Copy image</b><small>Paste into Slides, Docs, Notion, Canva</small></span><kbd class="vw-kbd">Enter</kbd></button>' +
-            '<div class="vw-acts">' +
-              '<div class="vw-pngw">' +
-                '<button type="button" class="vw-act" data-vw="png" title="Download a PNG">' + ICO.down + '<span><b>PNG</b><small data-vw-pngsize></small></span></button>' +
-                '<label class="vw-pxsel"><span class="vh">PNG size</span><select data-vw-pxsel>' + SIZES.filter(function (p) { return p >= 32 }).map(function (p) { return '<option value="' + p + '">' + p + ' px</option>' }).join('') + '</select></label>' +
-              '</div>' +
-              '<button type="button" class="vw-act" data-vw="svg" title="Download an SVG: sharp at any size">' + ICO.down + '<span><b>SVG</b><small>any size</small></span></button>' +
-              '<button type="button" class="vw-act" data-vw="copy-svg" title="Copy SVG code for Figma, Canva or HTML">' + ICO.code + '<span><b>SVG code</b><small>Figma, HTML</small></span></button>' +
-            '</div>' +
-          '</div>' +
           '<div class="vw-quick" data-vw-quick>' +
             '<div class="vw-q-top"><span class="vw-q-l" id="vw-q-l">Use it in code</span>' +
               '<label class="vw-stack"><span class="vh">Code for</span><select data-vw-stack aria-describedby="vw-q-l">' + STACKS.map(function (s) { return '<option value="' + s[0] + '">' + esc(s[1]) + '</option>' }).join('') + '</select></label>' +
@@ -1584,41 +1651,28 @@
         '</div>' +
       '</div>'
     if (store.get('devopen', false)) $('[data-vw-dev]', vwBody).open = true
-    // the action dock: Copy image · PNG · SVG · code, pinned to the bottom of the panel / sheet whenever the in-panel
-    // actions are scrolled (or cropped) out of view, so the main jobs are always one tap away
+    // the action bar: Copy image · PNG (+ size) · SVG · SVG code, the panel's own footer (outside the scrolling body).
+    // Always there, always the same size: nothing appears, hides or resizes while you scroll, so nothing under it jumps.
     var live = D.createElement('p'); live.className = 'vh'; live.setAttribute('aria-live', 'polite'); live.setAttribute('data-vw-live', ''); viewer.appendChild(live)
-    var dock = D.createElement('div'); dock.className = 'vw-dock'; dock.setAttribute('data-vw-dock', '')
-    dock.innerHTML = '<button type="button" class="vw-dk is-primary" data-vw="copy-img">' + ICO.copy + '<span>Copy image</span></button>' +
-      '<button type="button" class="vw-dk" data-vw="png" title="Download PNG">' + ICO.down + '<span>PNG</span></button>' +
-      '<button type="button" class="vw-dk" data-vw="svg" title="Download SVG">' + ICO.down + '<span>SVG</span></button>' +
-      '<button type="button" class="vw-dk" data-vw="copy-quick" data-vw-dkcode title="Copy the code">' + ICO.code + '<span data-vw-tagdone>Code</span></button>'
-    viewer.appendChild(dock)
-    if (W.IntersectionObserver) {
-      // shown while Copy image or the code bar is out of view (scrolled away, or below the fold of a short panel)
-      var seen = {}
-      // each dock button stands in for its in-panel twin only while ALL of that twin is out of view (no duplicates on screen),
-      // and while the dock shows, the body gives up the strip under it (.has-dock), so the dock never covers visible content
-      var dockIO = new IntersectionObserver(function (en) { en.forEach(function (e) { seen[e.target.getAttribute('data-dock-k')] = e.isIntersecting && e.intersectionRatio > 0 }); V.dockWant = !(seen.a && seen.f && seen.q); V.dockMiss = { a: !seen.a, f: !seen.f, q: !seen.q }; paintDock() }, { threshold: [0, 0.01, 1] })
-      ;[['.vw-btn.is-primary', 'a'], ['.vw-acts', 'f'], ['[data-vw-quick]', 'q']].forEach(function (x) { var el = $(x[0], vwBody); el.setAttribute('data-dock-k', x[1]); dockIO.observe(el) })
-    }
-    vwBody.addEventListener('scroll', function () { var sc = vwBody.scrollTop > 110; if (sc !== viewer.classList.contains('is-scrolled')) viewer.classList.toggle('is-scrolled', sc) }, { passive: true })
+    var foot = D.createElement('div'); foot.className = 'vw-foot'; foot.setAttribute('data-vw-foot', ''); foot.setAttribute('role', 'group'); foot.setAttribute('aria-label', 'Copy and download')
+    foot.innerHTML = '<div class="vw-foot-in"><button type="button" class="vw-fb is-primary" data-vw="copy-img" title="Copy image: paste into Slides, Docs, Notion, Canva (Enter)">' + ICO.copy + '<span>Copy image</span><kbd class="vw-kbd" aria-hidden="true">Enter</kbd></button>' +
+      '<div class="vw-pngw"><button type="button" class="vw-fb" data-vw="png" title="Download a PNG">' + ICO.down + '<span>PNG<small class="vh" data-vw-pngsize></small></span></button>' +
+        '<label class="vw-pxsel" title="PNG size"><span class="vh">PNG size</span><select data-vw-pxsel>' + SIZES.filter(function (p) { return p >= 32 }).map(function (p) { return '<option value="' + p + '">' + p + '</option>' }).join('') + '</select></label></div>' +
+      '<button type="button" class="vw-fb" data-vw="svg" title="Download an SVG: sharp at any size">' + ICO.down + '<span>SVG</span></button>' +
+      '<button type="button" class="vw-fb is-icon" data-vw="copy-svg" title="Copy SVG code for Figma, Canva or HTML">' + ICO.code + '<span class="vh">Copy SVG code</span></button></div>'
+    vwPanel.appendChild(foot)
+    // the compact title in the sticky top line: on once the big title has scrolled under it, off only well above that
+    // (hysteresis), and a cross-fade in one fixed cell, so the toggle never moves the content or the scroll position
+    var tlQ = false
+    vwBody.addEventListener('scroll', function () {
+      if (tlQ) return; tlQ = true
+      raf(function () { tlQ = false; var y = vwBody.scrollTop, on = viewer.classList.contains('is-scrolled'); if (on ? y < 56 : y > 96) viewer.classList.toggle('is-scrolled', !on) })
+    }, { passive: true })
     var sk = stackGet(); $('[data-vw-stack]', vwBody).value = sk; V.tab = STACK2DEV[sk] || sk
     viewer._built = true
     kitUp(vwBody)
   }
   // the code bar's stack: shared with the icon pages (localStorage 'with-stack', plain string)
-  function paintDock() {
-    var d = $('[data-vw-dock]', viewer); if (!d) return
-    // a phone sheet in peek ends below the screen, so a dock there would sit over visible content: only when full
-    var on = !!(V.open && V.dockWant && !(isSheet() && V.snap !== 'full'))
-    // a panel cut to the screen (page near the top) shows Copy image, PNG and SVG itself: no dock just for the code bar
-    var miss0 = V.dockMiss || {}
-    if (on && viewer.classList.contains('vw-fit') && !miss0.a && !miss0.f) on = false
-    d.classList.toggle('is-on', on); viewer.classList.toggle('has-dock', on); var m = V.dockMiss || {}; d.classList.toggle('no-copy', !m.a); d.classList.toggle('no-files', !m.f); d.classList.toggle('no-code', !m.q); d.classList.toggle('is-solo', (m.a ? 1 : 0) + (m.f ? 2 : 0) + (m.q ? 1 : 0) === 1)
-    var sk = $('[data-vw-stack] option:checked', vwBody), cb = $('[data-vw-dkcode]', d)
-    if (cb && sk) cb.title = 'Copy the ' + sk.textContent + ' code'
-    var cl = cb && $('span', cb); if (cl && !cb.classList.contains('is-done')) cl.textContent = d.classList.contains('is-solo') && sk ? 'Copy ' + sk.textContent.replace(/^HTML /, '') : 'Code'
-  }
   function stackGet() { var v = null; try { v = localStorage.getItem('with-stack') } catch (e) { } if (v && v.charAt(0) === '"') { try { v = JSON.parse(v) } catch (e) { } } return STACKS.some(function (s) { return s[0] === v }) ? v : 'html' }
   function stackSet(v) { try { localStorage.setItem('with-stack', v) } catch (e) { } }
   // one-line usage per stack (shown), what Copy puts on the clipboard, and the one-time setup steps:
@@ -1921,11 +1975,11 @@
     if (part === 'all' || part === 'style') {
       $('[data-vw-stname]', b).textContent = STYLE[st].title
       paintStl(); setTimeout(paintStripColours, 0)
-      $$('[data-vw-st]', b).forEach(function (btn) {
-        var s = btn.getAttribute('data-vw-st'), on = s === st
-        btn.setAttribute('aria-checked', on ? 'true' : 'false'); btn.tabIndex = on ? 0 : -1
-        $('.vw-st-g', btn).innerHTML = has(s, name) ? glyph(s, name) : stripLazy ? '<span class="vw-st-dot" aria-hidden="true"></span>' : '<span class="t-skel" aria-hidden="true"></span>'
-      })
+      // the style row (site/STYLE-PICKER.md): this icon in a few styles, "All N styles" opens the full picker
+      var srow = $('[data-vw-styles]', b)
+      if (!viewer._srow && srow && SP()) viewer._srow = SP().row(srow, { current: st, icon: name, size: 26, max: 6, label: 'Style of this icon', title: 'Choose a style for ' + ic.title, onPick: function (s2) { setViewerStyle(s2) } })
+      else if (viewer._srow) { if (viewer._srowIcon !== name) viewer._srow.setIcon(name); viewer._srow.set(st) }
+      viewer._srowIcon = name
       $('[data-vw-rel]', b).innerHTML = (viewer._rel || []).map(function (n) { return '<button type="button" class="vw-relb" data-vw-open="' + n + '" title="' + esc(BY[n].title) + '" aria-label="' + esc(BY[n].title) + '">' + (has(st, n) ? glyph(st, n) : has('line', n) ? glyph('line', n) : '') + '<span>' + esc(BY[n].title) + '</span></button>' }).join('')
       paintQuick()
       paintDev()
@@ -1965,9 +2019,9 @@
     var si = sizeIndex(S.px), sr = $('[data-vw-size]', b)
     sr.value = si; sr.setAttribute('aria-valuetext', S.px + ' pixels'); sr.style.setProperty('--fill', (si / (SIZES.length - 1) * 100) + '%')
     $('[data-vw-sizeout]', b).textContent = S.px + ' px'
-    $('[data-vw-pngsize]', b).textContent = V.bgInc ? 'with background' : 'transparent'
-    var pxs = $('[data-vw-pxsel]', b)
-    if (pxs) { if (!$('option[value="' + S.px + '"]', pxs)) { var o = D.createElement('option'); o.value = S.px; o.textContent = S.px + ' px'; pxs.insertBefore(o, pxs.firstChild) } pxs.value = String(S.px) }
+    $('[data-vw-pngsize]', viewer).textContent = V.bgInc ? 'with background' : 'transparent'
+    var pxs = $('[data-vw-pxsel]', viewer)
+    if (pxs) { if (!$('option[value="' + S.px + '"]', pxs)) { var o = D.createElement('option'); o.value = S.px; o.textContent = S.px; pxs.insertBefore(o, pxs.firstChild) } pxs.value = String(S.px) }
     var swRow = $('[data-vw-swrow]', b), swOk = numericSW(st)
     swRow.hidden = !swOk
     if (swOk) {
@@ -2067,9 +2121,9 @@
   // the strip wears the icon's custom colours (each style maps the palette onto its own parts)
   function paintStripColours() {
     if (!viewer._built || !V.name) return
-    $$('[data-vw-st]', vwBody).forEach(function (btn) {
-      var sv = $('.vw-st-g svg', btn); if (!sv) return
-      var sst = btn.getAttribute('data-vw-st'), css = sst === V.st ? edCss(sst, V.name) : ''
+    $$('[data-vw-styles] [data-sp-pick]', vwBody).forEach(function (btn) {
+      var sv = $('.sp-ic svg', btn); if (!sv) return
+      var sst = btn.getAttribute('data-sp-pick'), css = sst === V.st ? edCss(sst, V.name) : ''
       if (css || sv._cz) { sv.style.cssText = css.replace(/: /g, ':'); sv._cz = !!css }
     })
     var sp = $('[data-vw="surprise"]', vwBody); if (sp) sp.hidden = !(ED && ED.get().name === V.name && ED.isMulti(V.st))
@@ -2286,7 +2340,7 @@
       setTimeout(function () { n.classList.remove('is-draw'); n._playing = false }, 760); return
     }
     if (entry.preset === 'draw') entry = { preset: 'pop' }
-    var mi = W.WithEditor.motionAttrs(entry, { trigger: 'hover' }); if (!mi) { n._playing = false; return }
+    var mi = W.WithEditor.motionAttrs(entry, { trigger: 'hover', style: n._st }); if (!mi) { n._playing = false; return }
     var cls = ['wm', 'wm-p-' + mi.preset, 'wm-run'], keys = Object.keys(mi.vars)
     cls.forEach(function (c) { svg.classList.add(c) }); keys.forEach(function (k) { svg.style.setProperty(k, mi.vars[k]) })
     setTimeout(function () { cls.forEach(function (c) { svg.classList.remove(c) }); keys.forEach(function (k) { svg.style.removeProperty(k) }); n._playing = false }, mi.dur * 1000 + 80)
@@ -2347,7 +2401,7 @@
     else if (t.hasAttribute('data-vw-shape')) { V.shape = t.getAttribute('data-vw-shape'); store.set('vshape', V.shape); afterLook() }
     else if (t.hasAttribute('data-vw-color')) { vwColor(t.getAttribute('data-vw-color')); afterLook() }
     else if (t.hasAttribute('data-vw-px')) { setPx(+t.getAttribute('data-vw-px')) }
-    else if (t.hasAttribute('data-vw-tab')) { V.tab = t.getAttribute('data-vw-tab'); store.set('devtab', V.tab); paintDev(); var nt = $('[data-vw-tab="' + V.tab + '"]', vwBody); if (nt) nt.focus(); var ts = DEV2STACK[V.tab] || V.tab, qs = $('[data-vw-stack]', vwBody); if (qs && qs.value !== ts && STACKS.some(function (x) { return x[0] === ts })) { qs.value = ts; stackSet(ts); paintQuick(); paintDock(); var c3 = { html: 'tag', svg: 'html', react: 'react', vue: 'vue', web: 'web' }[ts]; if (ED && c3 && ED.get().code !== c3) ED.set({ code: c3 }) } }
+    else if (t.hasAttribute('data-vw-tab')) { V.tab = t.getAttribute('data-vw-tab'); store.set('devtab', V.tab); paintDev(); var nt = $('[data-vw-tab="' + V.tab + '"]', vwBody); if (nt) nt.focus(); var ts = DEV2STACK[V.tab] || V.tab, qs = $('[data-vw-stack]', vwBody); if (qs && qs.value !== ts && STACKS.some(function (x) { return x[0] === ts })) { qs.value = ts; stackSet(ts); paintQuick(); var c3 = { html: 'tag', svg: 'html', react: 'react', vue: 'vue', web: 'web' }[ts]; if (ED && c3 && ED.get().code !== c3) ED.set({ code: c3 }) } }
     else if (t.hasAttribute('data-vw-q')) { var q = t.getAttribute('data-vw-q'); if (isSheet() || V.full) closeViewer(); setQuery(q); if (!isSheet()) input.focus({ preventScroll: true }); W.scrollTo({ top: Math.max(0, W.scrollY + grid.getBoundingClientRect().top - barBottom() - 90), behavior: reduced ? 'auto' : 'smooth' }) }
     else if (t.hasAttribute('data-vw-open')) { setViewerIcon(t.getAttribute('data-vw-open'), V.st); vwBody.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); keepActiveInView() }
     else if (t.hasAttribute('data-vw-cat')) { e.preventDefault(); if (isSheet() || V.full) closeViewer(); setCat(BY[name].category, true) }
@@ -2366,7 +2420,7 @@
     var t = e.target
     if (t.closest('.wied, .wied-cpanel')) return
     if (t.hasAttribute('data-vw-bginc')) { V.bgInc = t.checked; store.set('bginc', V.bgInc); afterLook() }
-    else if (t.hasAttribute('data-vw-stack')) { stackSet(t.value); paintQuick(); paintDock(); V.tab = STACK2DEV[t.value] || t.value; store.set('devtab', V.tab); paintDev(); var c2 = { html: 'tag', svg: 'html', react: 'react', vue: 'vue', web: 'web' }[t.value]; if (ED && c2 && ED.get().code !== c2) ED.set({ code: c2 }); if (!reduced) { var qc = $('[data-vw-q-code]', vwBody); qc.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' }) } }
+    else if (t.hasAttribute('data-vw-stack')) { stackSet(t.value); paintQuick(); V.tab = STACK2DEV[t.value] || t.value; store.set('devtab', V.tab); paintDev(); var c2 = { html: 'tag', svg: 'html', react: 'react', vue: 'vue', web: 'web' }[t.value]; if (ED && c2 && ED.get().code !== c2) ED.set({ code: c2 }); if (!reduced) { var qc = $('[data-vw-q-code]', vwBody); qc.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.2,.8,.2,1)' }) } }
     else if (t.hasAttribute('data-vw-pxsel')) setPx(+t.value)
     else if (t.hasAttribute('data-vw-hex')) hexField(t, true)
     else if (t.hasAttribute('data-vw-size') || t.hasAttribute('data-vw-sw')) paintTools()
@@ -2394,10 +2448,10 @@
     var s = e.target.closest && e.target.closest('[data-vw-stage]'); if (!s || !V.name) return
     dragData(e, V.st, V.name, $('[data-vw-art] svg', s))
   })
-  viewer.addEventListener('pointerover', function (e) { var sb = e.target.closest && e.target.closest('[data-vw-st]'); if (sb) paintStl(sb.getAttribute('data-vw-st')) })
-  viewer.addEventListener('pointerout', function (e) { if (e.target.closest && e.target.closest('[data-vw-styles]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-vw-st]'))) paintStl() })
-  viewer.addEventListener('focusin', function (e) { var sb = e.target.closest && e.target.closest('[data-vw-st]'); if (sb && sb.matches(':focus-visible')) paintStl(sb.getAttribute('data-vw-st')) })
-  viewer.addEventListener('focusout', function (e) { if (e.target.closest && e.target.closest('[data-vw-st]')) paintStl() })
+  viewer.addEventListener('pointerover', function (e) { var sb = e.target.closest && e.target.closest('[data-vw-styles] [data-sp-pick]'); if (sb) paintStl(sb.getAttribute('data-sp-pick')) })
+  viewer.addEventListener('pointerout', function (e) { if (e.target.closest && e.target.closest('[data-vw-styles]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sp-pick]'))) paintStl() })
+  viewer.addEventListener('focusin', function (e) { var sb = e.target.closest && e.target.closest('[data-vw-styles] [data-sp-pick]'); if (sb && sb.matches(':focus-visible')) paintStl(sb.getAttribute('data-sp-pick')) })
+  viewer.addEventListener('focusout', function (e) { if (e.target.closest && e.target.closest('[data-vw-styles] [data-sp-pick]')) paintStl() })
   viewer.addEventListener('pointerover', function (e) { if (V.name && e.pointerType === 'mouse' && e.target.closest && e.target.closest('[data-vw-stage]')) renderPng(V.st, V.name, S.px).catch(function () { }) })
   function afterLook(live) { paintLook(); paintResetChip(); if (!live) paintTools(); else paintGridColour() }
   function setPx(px, live) { S.px = px; store.set('px', px); paintLook(); paintSel(); if (!live) paintTools() }
@@ -2478,32 +2532,25 @@
   function setSnap(s, fromClosed) {
     V.snap = s
     viewer.setAttribute('data-snap', s)
-    fitSheet()
-    if (fromClosed && !reduced) { vwPanel.style.transition = 'none'; vwPanel.style.transform = 'translate3d(0,' + snapY('closed') + 'px,0)'; void vwPanel.offsetWidth; vwPanel.style.transition = '' }
-    vwPanel.style.transform = 'translate3d(0,' + snapY(s) + 'px,0)'
-    paintScrim(); paintDock()
+    V.peekExtra = 0
+    if (fromClosed && !reduced) { vwPanel.style.transition = 'none'; sheetAt(snapY('closed')); void vwPanel.offsetWidth; vwPanel.style.transition = '' }
+    sheetAt(snapY(s))
+    paintScrim()
   }
-  // the phone sheet's first stop (peek) shows the jobs whole: Copy image, PNG and SVG. The preview gives up height
-  // (down to 120 px) and, on very short screens, the sheet rises a little higher until they fit.
-  function fitSheet() {
-    if (!viewer._built) return
-    viewer.style.removeProperty('--vw-peek-stage'); V.peekExtra = 0
-    if (!isSheet() || V.snap !== 'peek') return
-    var stg = $('[data-vw-stage]', vwBody), acts = $('.vw-acts', vwBody)
-    if (!stg || !acts) return
-    var vh = W.innerHeight, rel = acts.getBoundingClientRect().bottom - vwPanel.getBoundingClientRect().top
-    var over = vh - Math.min(vh * 0.72, 660) + rel - (vh - 12)
-    if (over <= 0) return
-    var cur = stg.getBoundingClientRect().height, want = Math.max(120, Math.round(cur - over))
-    viewer.style.setProperty('--vw-peek-stage', want + 'px')
-    var left = over - (cur - want); if (left > 0) V.peekExtra = Math.ceil(left)
+  // moves the sheet to y and keeps its action bar on the screen's bottom edge while the sheet rests anywhere between
+  // full and peek (the bar is the panel's footer, so at peek it is lifted by the part of the sheet below the screen).
+  // The panel and the bar share one transition, so the bar holds still while the sheet slides; below peek it leaves with it.
+  function sheetAt(y) {
+    vwPanel.style.transform = 'translate3d(0,' + y + 'px,0)'
+    var lift = Math.max(0, Math.min(y, snapY('peek')))
+    vwPanel.style.setProperty('--vw-foot-y', (lift ? -lift : 0) + 'px')
   }
   function lockScroll(on) { HTML.classList.toggle('vw-lock', on || V.full) }
   ;(function sheetGestures() {
     var drag = null
     vwPanel.addEventListener('pointerdown', function (e) {
       if (!isSheet() || !V.open || e.button !== 0) return
-      var inBody = vwBody.contains(e.target), onControl = e.target.closest('input, select, textarea, summary, .vw-styles, .vw-acts, .vw-quick, .vw-tabs, .vw-ttabs, .vw-rel, .vw-places, .wied-pchips, .wied-ctabs, .wied-chips, pre')
+      var inBody = vwBody.contains(e.target), onControl = e.target.closest('input, select, textarea, summary, .vw-styles, .vw-foot, .vw-quick, .vw-tabs, .vw-ttabs, .vw-rel, .vw-places, .wied-pchips, .wied-ctabs, .wied-chips, pre')
       if (onControl) return
       // at "full", the content scrolls: only the grip/header drag the sheet (or a pull-down from the very top)
       var head = e.target.closest('[data-vw-grip], .vw-head, .vw-topline')
@@ -2523,7 +2570,7 @@
       drag.v = (e.clientY - drag.last) / dt; drag.last = e.clientY; drag.t = now
       var y = drag.base + dy
       if (y < 0) y = y * 0.25   // rubber band past full
-      vwPanel.style.transform = 'translate3d(0,' + y + 'px,0)'
+      sheetAt(y)
       e.preventDefault()
     })
     var end = function (e) {
@@ -2579,6 +2626,9 @@
      when it is scrolled away (or before the first paint) it switches at once and the page scrolls by the same amount,
      so the grid under the cursor does not move. Back to browsing (no query, no category, viewer closed) unfolds it. */
   var heroEl = $('.lib-hero'), slimReady = false, slimAt = 0
+  // the docked viewer's height follows the hero as it folds, frame by frame, however long the fold takes (a busy main
+  // thread can outlast fitFor's window and leave the panel cut short, its action bar mid-screen)
+  if (heroEl && W.ResizeObserver) new ResizeObserver(function () { fitViewer() }).observe(heroEl)
   function syncSlim(canUnfold) {
     if (!heroEl) return false
     var on = !!(S.q.trim() || S.cat || V.open)
@@ -2599,13 +2649,13 @@
     return true
   }
   // the docked viewer is as tall as the space under the sticky bar; until it sticks (page near the top) it would end
-  // below the screen with its actions, so it is cut to the visible height and the action dock shows at its foot
+  // below the screen with its action bar, so it is cut to the visible height. Only the panel's outer height follows
+  // the page: the stage and everything inside keep their size (the action bar is the panel's footer), so nothing jumps.
   function fitViewer() {
     if (!viewer) return
     if (!V.open || viewer.hidden || isSheet() || V.full) {
       if (viewer.style.height) viewer.style.height = ''
       if (viewer.classList.contains('vw-fit')) viewer.classList.remove('vw-fit')
-      var st0 = vwBody && $('[data-vw-stage]', vwBody); if (st0 && st0.style.height) st0.style.height = ''
       return
     }
     var cs = root.style, stick = (parseFloat(cs.getPropertyValue('--lib-top')) || 0) + (parseFloat(cs.getPropertyValue('--lib-bar-h')) || 76) + 12
@@ -2613,16 +2663,7 @@
     var h = t > stick + 1 ? Math.round(W.innerHeight - t - 12) + 'px' : ''
     if (viewer.style.height !== h) viewer.style.height = h
     var fit = !!h
-    if (fit !== viewer.classList.contains('vw-fit')) { viewer.classList.toggle('vw-fit', fit); paintDock() }
-    // single column (the usual dock): give up stage height, down to 120 px, until Copy image, PNG and SVG fit
-    var stg = vwBody && $('[data-vw-stage]', vwBody), acts = vwBody && $('.vw-acts', vwBody), colA = vwBody && $('.vw-col-a', vwBody)
-    if (!stg || !acts || !colA || vwBody.scrollTop > 4) return
-    if (getComputedStyle(colA).display !== 'contents') { if (stg.style.height) stg.style.height = ''; return }
-    var base = Math.round(Math.min(300, Math.max(168, W.innerHeight * 0.28)))
-    var cur = stg.getBoundingClientRect().height, over = acts.getBoundingClientRect().bottom - (vwBody.getBoundingClientRect().bottom - 10)
-    var want = Math.max(120, Math.min(base, Math.round(cur - over)))
-    var sh = want < base ? want + 'px' : ''
-    if (stg.style.height !== sh) stg.style.height = sh
+    if (fit !== viewer.classList.contains('vw-fit')) viewer.classList.toggle('vw-fit', fit)
   }
   var fitUntil = 0, fitting = false
   function fitFor(ms) {
@@ -2675,83 +2716,20 @@
     var gtop = grid.getBoundingClientRect().top
     if (gtop < barBottom()) W.scrollTo({ top: W.scrollY + gtop - barBottom() - 80, behavior: reduced ? 'auto' : 'smooth' })
   }
-  stylesWrap.addEventListener('click', function (e) {
-    if (e.target.closest('[data-sb-toggle]')) { sbOpen(!stylesWrap.classList.contains('is-open'), true); return }
-    if (e.target.closest('[data-sb-close]')) { sbOpen(false, true); return }
-    var b = e.target.closest('[data-style-pill]')
-    if (b) { setStyle(b.getAttribute('data-style-pill'), b); if (e.detail && stylesWrap.classList.contains('is-open')) setTimeout(function () { sbOpen(false) }, reduced ? 0 : 220); return }
-    if (e.target.closest('[data-compare]')) { setView(S.view === 'compare' ? 'grid' : 'compare'); if (stylesWrap.classList.contains('is-open')) setTimeout(function () { sbOpen(false) }, reduced ? 0 : 220) }
-  })
-  D.addEventListener('pointerdown', function (e) { if (stylesWrap.classList.contains('is-open') && !stylesWrap.contains(e.target)) sbOpen(false) })
-  stylesWrap.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && stylesWrap.classList.contains('is-open')) { e.preventDefault(); e.stopPropagation(); sbOpen(false, true) }
-  })
+  stylesWrap.addEventListener('click', function (e) { if (e.target.closest('[data-sb-toggle]')) sbOpen(!picker) })
   // reaching for a style (pointer over it, or keyboard focus) starts its download before the click
-  function prefetchStyle(e) { var b = e.target.closest && e.target.closest('[data-style-pill], [data-vw-st]'); if (b) loadStyle(b.getAttribute('data-style-pill') || b.getAttribute('data-vw-st')) }
-  stylesEl.addEventListener('pointerover', prefetchStyle, { passive: true }); stylesEl.addEventListener('focusin', prefetchStyle)
-  // the picker's footer previews the style under the pointer / keyboard
-  stylesEl.addEventListener('pointerover', function (e) { var b = e.target.closest && e.target.closest('[data-style-pill]'); if (b) sbSay(b.getAttribute('data-style-pill')) })
-  stylesEl.addEventListener('pointerleave', function () { sbSay() })
-  stylesEl.addEventListener('focusin', function (e) { var b = e.target.closest && e.target.closest('[data-style-pill]'); if (b) sbSay(b.getAttribute('data-style-pill')) })
-  /* the style rail (in the page flow, under the bar): same options, a live mini icon + name each, and a rich hover card */
-  if (rail) {
-    rail.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-style-pill]')
-      if (b) { setStyle(b.getAttribute('data-style-pill'), b); return }
-      if (e.target.closest('[data-compare]')) setView(S.view === 'compare' ? 'grid' : 'compare')
-    })
-    rail.addEventListener('pointerover', prefetchStyle, { passive: true }); rail.addEventListener('focusin', prefetchStyle)
-    rail.addEventListener('keydown', function (e) {
-      if (!e.target.hasAttribute('data-style-pill')) return
-      var pills = $$('[data-style-pill]', rail), i = pills.indexOf(e.target), n = null
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = pills[(i + 1) % pills.length]
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = pills[(i - 1 + pills.length) % pills.length]
-      else if (e.key === 'Home') n = pills[0]
-      else if (e.key === 'End') n = pills[pills.length - 1]
-      else if (e.key === 'Escape') { railTip(null); return }
-      if (!n) return
-      e.preventDefault(); n.focus(); n.click(); railTip(n)
-    })
-    var RT = { el: null, t: 0, on: null }
-    var railTip = function (b) {
-      clearTimeout(RT.t)
-      if (!b) { if (RT.el) RT.el.classList.remove('is-on'); RT.on = null; return }
-      if (!RT.el) { RT.el = D.createElement('div'); RT.el.className = 'rail-tip'; RT.el.setAttribute('aria-hidden', 'true'); rail.parentNode.appendChild(RT.el) }
-      var st = b.getAttribute('data-style-pill'), g = GROUP_OF[st], el = RT.el, warm = !!RT.on
-      RT.on = b
-      el.style.setProperty('--sc', 'var(--s-' + st + ')'); el.style.setProperty('--sc-text', 'var(--t-' + st + ')')
-      el.innerHTML = '<span class="rt-art">' + (sampleSvg(st) || '') + '</span><span class="rt-t"><small>' + esc(g ? g.title : 'Style') + (g && g.isNew ? ' · new' : '') + '</small><b>' + esc(STYLE[st].title) + '</b><span>' + esc(sayOf(st)) + '</span></span>'
-      var host = rail.parentNode.getBoundingClientRect(), r = b.getBoundingClientRect(), w = 280
-      var x = clamp(r.left + r.width / 2 - host.left - w / 2, 0, Math.max(0, host.width - w))
-      el.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(r.bottom - host.top + 8) + 'px)'
-      el.style.setProperty('--rt-ax', Math.round(r.left + r.width / 2 - host.left - x) + 'px')
-      el.classList.toggle('is-warm', warm)
-      el.classList.add('is-on')
-    }
-    rail.addEventListener('pointerover', function (e) {
-      if (e.pointerType !== 'mouse') return
-      var b = e.target.closest('[data-style-pill]'); if (!b) return
-      clearTimeout(RT.t)
-      if (RT.on) railTip(b); else RT.t = setTimeout(function () { if (b.matches(':hover')) railTip(b) }, 260)
-    })
-    rail.addEventListener('pointerleave', function () { clearTimeout(RT.t); RT.t = setTimeout(function () { railTip(null) }, 80) })
-    rail.addEventListener('focusin', function (e) { var b = e.target.closest('[data-style-pill]'); if (b && b.matches(':focus-visible')) railTip(b) })
-    rail.addEventListener('focusout', function () { railTip(null) })
-    rail.addEventListener('scroll', function () { railTip(null) }, { passive: true })
-    W.addEventListener('scroll', function () { if (RT.on) railTip(null) }, { passive: true })
+  // (only the first screen of a chunked style, ~50 KB; nothing on Save-Data or 2G; light styles are small)
+  function prefetchStyle(e) {
+    var b = e.target.closest && e.target.closest('[data-sp-pick]'); if (!b || lowData()) return
+    var st = b.getAttribute('data-sp-pick'); if (!STYLE[st] || svgMap(st)) return
+    clearTimeout(prefetchStyle.t)
+    prefetchStyle.t = setTimeout(function () { if (chunked(st)) WI().loadStyleFor(st, firstNames()); else loadStyle(st) }, 120)
   }
-  viewer.addEventListener('pointerover', prefetchStyle, { passive: true }); viewer.addEventListener('focusin', prefetchStyle)
-  // radiogroup keys: arrows move and pick (wrapping), Home / End jump to the ends
-  stylesEl.addEventListener('keydown', function (e) {
-    if (!e.target.hasAttribute('data-style-pill')) return
-    var pills = $$('[data-style-pill]', stylesEl), i = pills.indexOf(e.target), n = null
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = pills[(i + 1) % pills.length]
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = pills[(i - 1 + pills.length) % pills.length]
-    else if (e.key === 'Home') n = pills[0]
-    else if (e.key === 'End') n = pills[pills.length - 1]
-    if (!n) return
-    e.preventDefault(); n.focus(); n.click()
-  })
+  if (rail) {
+    rail.addEventListener('click', function (e) { if (e.target.closest('[data-compare]')) setView(S.view === 'compare' ? 'grid' : 'compare') })
+    rail.addEventListener('pointerover', function (e) { if (e.pointerType === 'mouse') prefetchStyle(e) }, { passive: true }); rail.addEventListener('focusin', prefetchStyle)
+  }
+  viewer.addEventListener('pointerover', function (e) { if (e.pointerType === 'mouse') prefetchStyle(e) }, { passive: true }); viewer.addEventListener('focusin', prefetchStyle)
 
   // toolbar: tile size, colour popover (+ stroke), select mode
   function paintGridColour() {
@@ -2800,7 +2778,7 @@
     if (!p) return
     var open = force != null ? force : !p.classList.contains('is-open')
     $$('[data-pop].is-open', tools).forEach(function (o) { if (o !== p) { o.classList.remove('is-open'); $('[data-pop-toggle]', o).setAttribute('aria-expanded', 'false') } })
-    if (open && stylesWrap.classList.contains('is-open')) sbOpen(false)
+    if (open && picker) sbOpen(false)
     if (open) { hideToast(); fitPanel($('.pop-panel', p)) }
     p.classList.toggle('is-open', open); $('[data-pop-toggle]', p).setAttribute('aria-expanded', open ? 'true' : 'false')
     HTML.classList.toggle('lib-sheet-open', open && isPhone())
@@ -2824,7 +2802,7 @@
 
   // global keys
   W.addEventListener('keydown', function (e) {
-    if (e.target.closest && e.target.closest('.wk-layer')) return   // an open kit picker owns its keys (Escape closes just it)
+    if (e.target.closest && e.target.closest('.wk-layer, .sp-layer')) return   // an open kit picker / style picker owns its keys (Escape closes just it)
     var tag = (e.target.tagName || '').toLowerCase(), typing = tag === 'input' && !/^(range|checkbox|radio|color|button)$/.test(e.target.type) || tag === 'textarea' || tag === 'select' || e.target.isContentEditable
     if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K'))) {
       e.preventDefault(); e.stopImmediatePropagation()
@@ -2834,7 +2812,6 @@
       return
     }
     if (e.key === 'Escape') {
-      if (stylesWrap.classList.contains('is-open')) { e.preventDefault(); sbOpen(false, true); return }
       if (peekHide(true)) { if (PK.kb) PK.kb = false; e.preventDefault(); return }
       var pop = $('[data-pop].is-open', tools)
       if (pop) { togglePop(pop, false); $('[data-pop-toggle]', pop).focus(); return }
@@ -2879,18 +2856,14 @@
 
   /* ───────────────────────── boot ───────────────────────── */
   function buildChrome() {
-    // the grouped switcher: every style visible, a live mini icon + name each (see "style switcher")
-    var opts = function (g, tip) {
-      return g.styles.map(function (n) {
-        var s = STYLE[n]
-        return '<button type="button" class="sb-o" role="radio" data-style-pill="' + n + '" data-group="' + g.id + '" style="--sc:var(--s-' + n + ');--sc-text:var(--t-' + n + ');--on-sc:var(--on-' + n + ')" aria-checked="false" aria-label="' + esc(s.title) + ', ' + esc(g.title.toLowerCase()) + ' style' + (g.isNew ? ', new' : '') + '"' + (tip ? '' : ' title="' + esc(s.title) + ': ' + esc(sayOf(n)) + '"') + '><span class="sb-ic" aria-hidden="true"></span><span class="sb-t">' + esc(s.title) + '</span></button>'
-      }).join('')
-    }
-    var groupHtml = function (g, tip) { return '<div class="sb-g" data-group="' + g.id + '" style="--n:' + g.styles.length + '"><p class="sb-gl" aria-hidden="true"><span>' + esc(g.title) + '</span>' + (g.isNew ? '<b class="sb-new">New</b>' : '') + '</p><div class="sb-opts">' + opts(g, tip) + '</div></div>' }
-    stylesEl.innerHTML = GROUPS.map(function (g) { return groupHtml(g) }).join('')
-    if (rail) rail.innerHTML = GROUPS.map(function (g) { return groupHtml(g, true) }).join('') + '<button type="button" class="sb-o rail-cmp" data-compare aria-pressed="false" title="See every icon in all ' + SNAMES.length + ' styles side by side"><span class="sb-ic" aria-hidden="true">' + CMP_SVG + '</span><span class="sb-t">Compare</span></button>'
-    $$('[data-style-pill]', root).forEach(function (b) { paintSample($('.sb-ic', b), b.getAttribute('data-style-pill')) })
-    var cmpT = $('[data-compare]', stylesWrap); if (cmpT) cmpT.title = 'See every icon in all ' + SNAMES.length + ' styles side by side'
+    // the compact style row (site/STYLE-PICKER.md): a few styles first, "All N styles" opens the full picker
+    var rowEl = $('[data-style-row]')
+    if (rowEl && SP()) styleRow = SP().row(rowEl, {
+      current: S.style, icon: null, size: 28, max: 8, label: 'Icon style', title: 'Choose a style',
+      actions: compareActions, onAction: onPickerAction,
+      onPick: function (st) { setStyle(st, $('[data-sp-pick="' + st + '"]', rowEl)) }
+    })
+    var cmpT = $('[data-compare]', rail || root); if (cmpT) cmpT.title = 'See every icon in all ' + SNAMES.length + ' styles side by side'
     catNav.innerHTML = '<button type="button" class="cat" data-cat="" aria-pressed="true"><span class="cat-g" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg></span><span class="cat-t">All icons</span><small>' + ICONS.length + '</small></button>' +
       CATS.map(function (c) { return '<button type="button" class="cat" data-cat="' + c + '" aria-pressed="false"><span class="cat-g" aria-hidden="true" data-cat-g="' + catIcon(c) + '"></span><span class="cat-t">' + esc(cap(c)) + '</span><small></small></button>' }).join('')
     $$('[data-icon-total]').forEach(function (el) { el.textContent = fmt(ICONS.length) })
@@ -2911,6 +2884,11 @@
     if (V.open && viewer._built && name === V.name) { paintViewer('style'); if (ED) { syncEditor(); paintArt(true) } }
     if (PK.on && PK.tile && PK.tile._name === name) { peekFill(itemOf(PK.tile), true) }
   })
+  // a chunk of the shown style landed: its waiting tiles draw (the viewer and peek use data/by-icon)
+  if (WI() && WI().on) WI().on('chunk', function (c) {
+    if (!c || !(S.view === 'compare' || c.style === S.style)) return
+    mounted.forEach(function (n) { if (n._st === c.style && n.querySelector('.t-skel:not(.is-missing)')) { var it = itemOf(n); if (it && innerOf(it.st, it.name) != null) fillTile(n, it) } })
+  })
   styleHooks.push(function (st) {
     if (st === 'line') paintCatGlyphs()
     paintStylePills()
@@ -2920,13 +2898,14 @@
   })
 
   buildChrome()
+  if (W.requestIdleCallback) W.requestIdleCallback(loadDl, { timeout: 4000 }); else setTimeout(loadDl, 1200)
   paintTools()
   kitUp(tools)
   root.setAttribute('data-style', S.view === 'compare' ? 'all' : S.style)
   updateBodyCols()
-  var firstLoad = S.view === 'compare' ? loadAll() : loadStyle(S.style)
   // render immediately (skeletons if the style file is still downloading), then fill in
   runSearch(); buildItems(); layout(); render({ anim: !reduced, prev: new Map() }); paintMeta(); paintCats(); paintStylePills(); paintSel()
+  var firstLoad = S.view === 'compare' ? loadAll() : loadFirst(S.style)
   syncSlim(); raf(function () { raf(function () { slimReady = true }) })
   firstLoad.then(function () {
     loadStyle('line').then(function () { paintCatGlyphs(); paintStylePills() })
@@ -2941,7 +2920,7 @@
     if (S.animate) setAnimate(true, true)
     var idleRun = W.requestIdleCallback ? function (f) { W.requestIdleCallback(f, { timeout: 1500 }) } : function (f) { setTimeout(f, 200) }
     // the search engine (~1 s of CPU on a slow phone) is built when the visitor reaches for the field, not at load
-    var warmEngine = function () { input.removeEventListener('focus', warmEngine); input.removeEventListener('pointerenter', warmEngine); idleRun(function () { try { var en = getEngine(); if (typeof en.warm === 'function') en.warm() } catch (e) { } }) }
+    var warmEngine = function () { input.removeEventListener('focus', warmEngine); input.removeEventListener('pointerenter', warmEngine); needSearch().then(function () { idleRun(function () { try { var en = getEngine(); if (typeof en.warm === 'function') en.warm() } catch (e) { } }) }) }
     input.addEventListener('focus', warmEngine); input.addEventListener('pointerenter', warmEngine)
     // the other eleven style files (~1.9 MB compressed) and the studio + motion runtime (~0.6 MB) wait for the visitor's
     // first click, key, wheel or touch: a page that is only looked at (or measured) stays at the line style it shows,
@@ -2962,17 +2941,15 @@
   }).observe(grid)
   // the switcher reflows (stuck / unstuck, one or two rows, fonts): the selection indicator follows
   var inkQ = false
-  if (W.ResizeObserver) new ResizeObserver(function () { if (inkQ) return; inkQ = true; raf(function () { inkQ = false; moveInk() }) }).observe(stylesEl)
   var wasSheet = isSheet()
   W.addEventListener('resize', function () {
-    measureTop(true); moveInk(); updateBodyCols(); moveTInk(); centreOverlays(); paintDock(); railWatch(); fitViewer()
-    if (stylesWrap.classList.contains('is-open') && !sbSheet()) sbOpen(false)
+    measureTop(true); moveInk(); updateBodyCols(); moveTInk(); centreOverlays(); railWatch(); fitViewer()
     var nowSheet = isSheet()
     if (nowSheet !== wasSheet) {
       wasSheet = nowSheet
       if (V.open) {
         if (nowSheet) { if (V.full) setFull(false); setSnap('peek'); lockScroll(true) }
-        else { vwPanel.style.transform = ''; lockScroll(false); paintScrim() }
+        else { vwPanel.style.transform = ''; vwPanel.style.removeProperty('--vw-foot-y'); lockScroll(false); paintScrim() }
       }
     } else if (nowSheet && V.open) setSnap(V.snap)
     render()
@@ -2981,8 +2958,24 @@
   if (W.WI && W.WI.on) W.WI.on('fonts', function () { measureTop(); moveInk() })
   if (W.WI && W.WI.on) W.WI.on('theme', function () { if (V.open && viewer._built) { afterLook(); paintPalChips() } })
   placeholderLoop()
-  // engine may arrive after us (deferred script order): swap it in and re-run the query
-  if (!(W.WithSearch && W.WITH_SEARCH_INDEX)) W.addEventListener('load', function () { if (W.WithSearch && W.WITH_SEARCH_INDEX && !(engine && engine.isShared)) { engine = null; if (S.q) update({ anim: false }) } })
+  // The shared engine (vendor/with/search.js + data/search-index.js, ~130 KB compressed) is not on the page's critical
+  // path: it loads at once when the page opens on a query, when the visitor reaches for the field, or once the page is
+  // idle after load. Until then the built-in fallback answers, and the query re-runs when the real engine lands.
+  function needSearch() {
+    if (W.WithSearch && W.WITH_SEARCH_INDEX) return Promise.resolve(true)
+    var wi = WI(); if (!wi || !wi.ensureSearch) return Promise.resolve(false)
+    return wi.ensureSearch().then(function () {
+      if (W.WithSearch && W.WITH_SEARCH_INDEX && !(engine && engine.isShared)) { engine = null; if (S.q.trim()) update({ anim: false }) }
+      return true
+    })
+  }
+  if (S.q.trim()) needSearch()
+  else {
+    var searchSoon = function () { input.removeEventListener('focus', searchSoon); input.removeEventListener('pointerenter', searchSoon); needSearch() }
+    input.addEventListener('focus', searchSoon); input.addEventListener('pointerenter', searchSoon)
+    var afterLoad = function () { if (W.requestIdleCallback) W.requestIdleCallback(function () { needSearch() }, { timeout: 4000 }); else setTimeout(needSearch, 1200) }
+    if (D.readyState === 'complete') afterLoad(); else W.addEventListener('load', afterLoad, { once: true })
+  }
   // public hook for debugging / other scripts
   W.WITH_LIBRARY = { _m: function () { return mounted }, state: S, viewer: V, studio: function () { return ED }, animate: setAnimate, open: openViewer, close: closeViewer, search: function (q) { setQuery(q) }, zip: zip, png: renderPng, svg: fileSvg, engine: getEngine }
 })()

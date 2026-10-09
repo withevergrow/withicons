@@ -1,0 +1,39 @@
+{
+  "name": "ungroup",
+  "intent": "the two boxes drift apart as the group breaks up",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.8,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 45,
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "layers",
+      "effect": "morph"
+    },
+    {
+      "to": "ungroup@solid",
+      "effect": "fade"
+    }
+  ]
+}

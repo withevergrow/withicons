@@ -8,7 +8,11 @@ import { ROOT, listIcons } from '../lib/load.mjs'
 
 export const PRESETS = ['spin', 'spin-once', 'tick', 'pulse', 'beat', 'breathe', 'float', 'bounce', 'sway', 'ring', 'wiggle', 'shake',
   'nod', 'nudge', 'pass', 'rise', 'drop', 'blink', 'flicker', 'twinkle', 'pop', 'tada', 'jelly', 'flip', 'rock', 'tilt', 'zoom',
-  'orbit', 'glow', 'draw', 'type', 'fill']
+  'orbit', 'glow', 'draw', 'type', 'fill',
+  // 3D presets (run 12, MOTION.md "3D motion")
+  'turn', 'turn-once', 'wobble', 'chime', 'swivel', 'bow', 'lean', 'lift', 'pump', 'squish', 'drift', 'gleam',
+  // part moves (soft3d: raised plates wm-a / wm-s)
+  'pop-up', 'press', 'hop']
 export const EFFECTS = ['fade', 'scale', 'rotate', 'flip', 'slide-up', 'slide-down', 'slide-left', 'slide-right', 'blur', 'spin', 'morph', 'draw']
 const DIR = path.join(ROOT, 'forge', 'motion')
 const STYLE_DIR = path.join(ROOT, 'forge', 'styles')

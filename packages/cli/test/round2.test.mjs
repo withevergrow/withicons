@@ -28,9 +28,9 @@ test('export: --color alone on a one-colour style says nothing; other colours sa
 })
 
 test('export: a role used by some icons gets one "applies to" line; a warning only when none use it', () => {
-  const some = run('export', 'bell', 'bell-ring', 'home', 'cloud-off', '--style', 'glass', '--format', 'svg-flat', '--accent', '#ff0000', '--out', out())
+  const some = run('export', 'bell', 'bell-ring', 'home', 'cloud-off', '--style', 'coquette', '--format', 'svg-flat', '--accent', '#ff0000', '--out', out())
   assert.equal(some.status, 0, some.stderr)
-  assert.deepEqual(lines(some.stderr), ["note: --accent applies to: bell-ring, cloud-off (2 others don't use it)"])
+  assert.deepEqual(lines(some.stderr), ["note: --accent applies to: bell, bell-ring (2 others don't use it)"])
   const none = run('export', 'bell', 'home', '--style', 'sticker', '--format', 'svg-flat', '--accent', '#ff0000', '--out', out(), '--json')
   const j = JSON.parse(none.stdout)
   assert.equal(j.warnings.length, 1)
@@ -38,8 +38,8 @@ test('export: a role used by some icons gets one "applies to" line; a warning on
   const roles = /painted with ([^.]*)\./.exec(j.warnings[0])[1].split(', ')
   assert.deepEqual(roles, [...new Set(roles)], 'no role listed twice')
   // get with several icons: the same summary, once
-  const g = run('get', 'bell', 'bell-ring', '--style', 'glass', '--accent', '#ff0000')
-  assert.deepEqual(lines(g.stderr), ["note: --accent applies to: bell-ring (1 other doesn't use it)"])
+  const g = run('get', 'bell', 'home', '--style', 'coquette', '--accent', '#ff0000')
+  assert.deepEqual(lines(g.stderr), ["note: --accent applies to: bell (1 other doesn't use it)"])
 })
 
 test('export --name-map: one file name per icon, aliases as keys, clashes and bad names refused', () => {
@@ -91,8 +91,8 @@ test('animate <name> --list (and motions <name>): defaults, intent, alternates, 
 test('palettes --style marks the main role', () => {
   const r = run('palettes', 'bell', '--style', 'sticker', '-n', '1')
   assert.equal(r.status, 0, r.stderr)
-  assert.match(r.stdout, /--with-sticker-bubblegum \(c2, main body\)/)
-  assert.match(r.stdout, /main role: c2 \(main body/)
+  assert.match(r.stdout, /--with-sticker-bubblegum \(c1, main body\)/)
+  assert.match(r.stdout, /main role: c1 \(main body/)
   const j = JSON.parse(run('palettes', 'bell', '--style', 'sticker', '-n', '1', '--json').stdout)
-  assert.equal(j.mainRole, 'c2')
+  assert.equal(j.mainRole, 'c1')
 })

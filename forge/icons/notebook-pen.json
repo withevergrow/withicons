@@ -1,0 +1,74 @@
+{
+  "name": "notebook-pen",
+  "category": "files",
+  "description": "A notebook with a pen, for notes, journals and writing.",
+  "aliases": [
+    "notebook-pencil",
+    "journal-pen",
+    "write-notes",
+    "note-taking",
+    "diary",
+    "notepad-pen"
+  ],
+  "synonyms": [
+    "journal",
+    "writing",
+    "take notes",
+    "jot down",
+    "notes",
+    "memo",
+    "write",
+    "journaling",
+    "logbook",
+    "sketchbook",
+    "planner",
+    "compose",
+    "draft",
+    "edit notes",
+    "homework",
+    "study notes",
+    "meeting notes",
+    "notebook and pen",
+    "note book",
+    "scribble",
+    "log entry"
+  ],
+  "tags": [
+    "notes",
+    "writing",
+    "journal",
+    "notebook",
+    "pen"
+  ],
+  "paths": [
+    {
+      "d": "M16 2.5 H8 A2 2 0 0 0 6 4.5 V19.5 A2 2 0 0 0 8 21.5 H18 A2 2 0 0 0 20 19.5 V13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 7 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 12 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 17 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M11 15 L11.71 11.46 L17.58 5.6 A2 2 0 0 1 20.4 8.42 L14.54 14.29 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M16 2.5 H8 A2 2 0 0 0 6 4.5 V19.5 A2 2 0 0 0 8 21.5 H18 A2 2 0 0 0 20 19.5 V13.5 L16.5 17 L11 17.25 L8.75 15 V11.25 L16 4 Z",
+    "M11 15 L11.71 11.46 L17.58 5.6 A2 2 0 0 1 20.4 8.42 L14.54 14.29 Z"
+  ],
+  "cutouts": [
+    "M6 7 H8",
+    "M6 12 H8",
+    "M6 17 H8"
+  ]
+}

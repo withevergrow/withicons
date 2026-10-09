@@ -1,0 +1,51 @@
+{
+  "name": "mouse-pointer-click",
+  "intent": "presses down like a click while the rays flash",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      9,
+      9
+    ],
+    "amount": 0.8,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      9,
+      9
+    ],
+    "duration": 0.45
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        6,
+        6
+      ],
+      "amount": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 225,
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cursor",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    }
+  ]
+}

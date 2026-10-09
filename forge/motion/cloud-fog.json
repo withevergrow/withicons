@@ -1,0 +1,38 @@
+{
+  "name": "cloud-fog",
+  "intent": "the cloud hangs low as fog drifts past",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "float",
+    "amount": 1.1,
+    "duration": 1.4
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.7,
+      "duration": 3,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pass",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "love-scroll",
+  "intent": "the quill writes a love note on the scroll",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "draw"
+  },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        13,
+        19
+      ],
+      "amount": 1.4
+    },
+    "A": {
+      "preset": "beat",
+      "origin": [
+        10.25,
+        11
+      ],
+      "amount": 0.8
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "type"
+    }
+  ],
+  "swap": [
+    {
+      "to": "scroll-text",
+      "effect": "fade"
+    },
+    {
+      "to": "love-letter",
+      "effect": "flip"
+    }
+  ]
+}

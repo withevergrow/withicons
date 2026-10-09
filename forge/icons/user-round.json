@@ -1,0 +1,66 @@
+{
+  "name": "user-round",
+  "category": "users",
+  "description": "A round-headed person bust, for profiles, avatars and accounts.",
+  "aliases": [
+    "person-round",
+    "profile-round",
+    "account-round",
+    "member-round",
+    "user-avatar",
+    "bust",
+    "round-user",
+    "user-bust"
+  ],
+  "tags": [
+    "person",
+    "profile",
+    "account",
+    "avatar",
+    "member"
+  ],
+  "paths": [
+    {
+      "d": "M16 7 A4 4 0 1 1 8 7 A4 4 0 1 1 16 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 21 A8 6 0 0 1 20 21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M16 7 A4 4 0 1 1 8 7 A4 4 0 1 1 16 7 Z",
+    "M4 21 A8 6 0 0 1 20 21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "user",
+    "person",
+    "profile",
+    "account",
+    "my account",
+    "member",
+    "customer",
+    "client",
+    "contact",
+    "author",
+    "owner",
+    "guest",
+    "sign in",
+    "login",
+    "username",
+    "identity",
+    "people",
+    "human",
+    "individual",
+    "employee",
+    "staff",
+    "persona",
+    "profile picture",
+    "pfp",
+    "me",
+    "self",
+    "avatar"
+  ]
+}

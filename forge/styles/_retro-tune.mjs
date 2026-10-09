@@ -7,6 +7,7 @@
 const T = {
   'qr-code': { w: 2.0 },   // modules stay separate
   coffee: { w: 2.15 },     // the steam curls stay open
+  'piggy-bank': { w: 1.75 },   // the coin, tail and snout keep their counters
   tennis: { w: 2.0 },      // the string grid stays open
   hotel: { w: 2.1, bands: 3 },      // the sign and bed keep their counters
   'bar-values': { w: 2.0 }, // live: five bars + their echoes stay five separate bars

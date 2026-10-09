@@ -1,0 +1,66 @@
+{
+  "name": "cauldron",
+  "intent": "bubbles rise from a brewing potion",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "origin": [
+        12,
+        5
+      ],
+      "amount": 0.8,
+      "duration": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "flask-conical",
+      "effect": "morph"
+    },
+    {
+      "to": "witch-hat",
+      "effect": "slide-up"
+    },
+    {
+      "to": "cauldron@solid",
+      "effect": "fade"
+    }
+  ]
+}

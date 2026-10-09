@@ -1,0 +1,36 @@
+{
+  "name": "battery-full",
+  "intent": "charge bars glow full and steady",
+  "loop": {
+    "preset": "fill",
+    "duration": 2
+  },
+  "hover": {
+    "preset": "pulse"
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 1.2,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "battery-low",
+      "effect": "fade"
+    },
+    {
+      "to": "battery-charging",
+      "effect": "fade"
+    }
+  ]
+}

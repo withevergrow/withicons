@@ -1,0 +1,59 @@
+{
+  "name": "rose-bouquet",
+  "intent": "the roses sway gently in their wrap",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      18
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.8,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        18
+      ]
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "rose",
+      "effect": "fade"
+    },
+    {
+      "to": "flower",
+      "effect": "morph"
+    }
+  ]
+}

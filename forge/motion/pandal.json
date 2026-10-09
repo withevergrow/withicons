@@ -1,0 +1,34 @@
+{
+  "name": "pandal",
+  "intent": "the canopy stands festive while its drapes and lamp sway",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        9
+      ],
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "tada"
+    }
+  ]
+}

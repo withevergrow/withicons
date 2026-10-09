@@ -1,0 +1,33 @@
+{
+  "name": "lunar-drum",
+  "intent": "drumsticks beat the festival drum",
+  "loop": {
+    "preset": "beat",
+    "duration": 1
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "nod",
+      "origin": [
+        12,
+        4.5
+      ],
+      "amount": 1.3
+    }
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "bounce"
+    }
+  ]
+}

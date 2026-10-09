@@ -1,0 +1,29 @@
+{
+  "name": "lucky-coin",
+  "intent": "a lucky coin flips and catches the light",
+  "loop": {
+    "preset": "flip",
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "bounce"
+    }
+  ],
+  "swap": [
+    {
+      "to": "coins",
+      "effect": "scale"
+    },
+    {
+      "to": "gold-ingot",
+      "effect": "flip"
+    }
+  ]
+}

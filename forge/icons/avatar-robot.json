@@ -1,0 +1,95 @@
+{
+  "name": "avatar-robot",
+  "category": "avatars",
+  "description": "A friendly robot avatar, for bots, assistants and playful profiles.",
+  "aliases": [
+    "robot-avatar",
+    "robot-face",
+    "droid",
+    "android-avatar",
+    "bot-avatar",
+    "mech",
+    "automaton"
+  ],
+  "tags": [
+    "avatar",
+    "robot",
+    "bot",
+    "ai",
+    "character"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 7.5 H15.5 A3.5 3.5 0 0 1 19 11 V17 A3.5 3.5 0 0 1 15.5 20.5 H8.5 A3.5 3.5 0 0 1 5 17 V11 A3.5 3.5 0 0 1 8.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 10 H14.5 A2.5 2.5 0 0 1 17 12.5 V13 A2.5 2.5 0 0 1 14.5 15.5 H9.5 A2.5 2.5 0 0 1 7 13 V12.5 A2.5 2.5 0 0 1 9.5 10 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M9.75 12.75 H10.25",
+      "plate": "A"
+    },
+    {
+      "d": "M13.75 12.75 H14.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7.5 V5.25",
+      "plate": "A"
+    },
+    {
+      "d": "M13.25 4 A1.25 1.25 0 1 1 10.75 4 A1.25 1.25 0 1 1 13.25 4 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 18 H13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5 11.5 H3.5 V16 H5",
+      "plate": "A"
+    },
+    {
+      "d": "M19 11.5 H20.5 V16 H19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.5 7.5 H15.5 A3.5 3.5 0 0 1 19 11 V17 A3.5 3.5 0 0 1 15.5 20.5 H8.5 A3.5 3.5 0 0 1 5 17 V11 A3.5 3.5 0 0 1 8.5 7.5 Z",
+    "M9.5 10 H14.5 A2.5 2.5 0 0 1 17 12.5 V13 A2.5 2.5 0 0 1 14.5 15.5 H9.5 A2.5 2.5 0 0 1 7 13 V12.5 A2.5 2.5 0 0 1 9.5 10 Z",
+    "M5 11.5 H3.5 V16 H5 Z",
+    "M19 11.5 H20.5 V16 H19 Z",
+    "M13.25 4 A1.25 1.25 0 1 1 10.75 4 A1.25 1.25 0 1 1 13.25 4 Z"
+  ],
+  "cutouts": [
+    "M9.5 10.5 H14.5 A2 2 0 0 1 16.5 12.5 V13 A2 2 0 0 1 14.5 15 H9.5 A2 2 0 0 1 7.5 13 V12.5 A2 2 0 0 1 9.5 10.5 Z M11 12.75 A1 1 0 1 1 9 12.75 A1 1 0 1 1 11 12.75 Z M15 12.75 A1 1 0 1 1 13 12.75 A1 1 0 1 1 15 12.75 Z",
+    "M10.5 18 H13.5"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "face",
+    "bot",
+    "chatbot",
+    "assistant",
+    "ai assistant",
+    "ai",
+    "machine",
+    "automation",
+    "antenna",
+    "visor",
+    "android",
+    "cyborg",
+    "tech"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "santa-hat",
+  "intent": "the floppy tip and pompom bob as if worn",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      18.5
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      18.5
+    ],
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        18.5
+      ],
+      "amount": 0.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "santa-hat@solid",
+      "effect": "scale"
+    }
+  ]
+}

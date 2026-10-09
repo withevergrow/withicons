@@ -1,0 +1,62 @@
+{
+  "name": "cloud-fog",
+  "category": "weather",
+  "description": "A cloud over fog lines, for fog, mist and haze.",
+  "aliases": [
+    "fog",
+    "foggy",
+    "mist",
+    "misty",
+    "haze",
+    "hazy",
+    "smog"
+  ],
+  "synonyms": [
+    "low visibility",
+    "overcast",
+    "cloudy",
+    "murky",
+    "gloomy",
+    "weather forecast",
+    "morning fog",
+    "pea soup",
+    "dew",
+    "damp",
+    "cloud cover",
+    "brume",
+    "smoke",
+    "air quality",
+    "visibility",
+    "vapour",
+    "vapor"
+  ],
+  "tags": [
+    "weather",
+    "fog",
+    "mist",
+    "cloud",
+    "forecast"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 17.5 H14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18 17.5 H19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 21.5 H19.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z"
+  ],
+  "cutouts": []
+}

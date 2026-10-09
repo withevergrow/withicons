@@ -1,0 +1,45 @@
+{
+  "name": "brain-circuit",
+  "intent": "the brain thinks while signals pulse out along its circuit traces",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "brain",
+      "effect": "morph"
+    },
+    {
+      "to": "cpu",
+      "effect": "fade"
+    },
+    {
+      "to": "bot",
+      "effect": "flip"
+    }
+  ]
+}

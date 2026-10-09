@@ -1,0 +1,61 @@
+{
+  "name": "send-horizontal",
+  "category": "communication",
+  "description": "A paper plane pointing right, for send buttons in chat and message inputs.",
+  "aliases": [
+    "send-right",
+    "paper-plane-right",
+    "send-button",
+    "submit-message",
+    "send-chat",
+    "send-prompt",
+    "send-arrow",
+    "message-send-right",
+    "paperplane-horizontal"
+  ],
+  "tags": [
+    "send",
+    "message",
+    "chat",
+    "submit",
+    "paper plane"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 L21.5 12 L3.5 20.5 L6.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 12 H13",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 3.5 L21.5 12 L3.5 20.5 L6.5 12 Z"
+  ],
+  "cutouts": [
+    "M6.5 12 H12.5"
+  ],
+  "synonyms": [
+    "send message",
+    "submit",
+    "post",
+    "enter",
+    "go",
+    "run prompt",
+    "ask",
+    "reply",
+    "deliver",
+    "dispatch",
+    "transmit",
+    "outgoing",
+    "paper airplane",
+    "paper aeroplane",
+    "chat input",
+    "composer",
+    "sent",
+    "forward",
+    "fly",
+    "snd"
+  ]
+}

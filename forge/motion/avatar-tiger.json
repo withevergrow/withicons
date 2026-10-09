@@ -1,0 +1,9 @@
+{
+  "name": "avatar-tiger",
+  "intent": "shows off its stripes with a proud little roar-nod",
+  "loop": { "preset": "breathe", "origin": [12,20.5], "amount": 0.7, "duration": 3 },
+  "hover": { "preset": "tada", "origin": [12,20.5], "amount": 0.7 },
+  "parts": { "A": { "preset": "blink", "origin": [12,12.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "nod", "origin": [12,20.5] },{ "preset": "wiggle", "origin": [12,20.5], "amount": 0.6 }],
+  "swap": [{ "to": "avatar-cat", "effect": "morph" },{ "to": "avatar-tiger@solid", "effect": "scale" }]
+}

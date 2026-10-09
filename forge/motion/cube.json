@@ -1,0 +1,32 @@
+{
+  "name": "cube",
+  "intent": "turns like a 3D model on a turntable",
+  "loop": {
+    "preset": "flip",
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "boxes",
+      "effect": "morph"
+    },
+    {
+      "to": "cube@solid",
+      "effect": "flip"
+    }
+  ]
+}

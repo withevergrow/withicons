@@ -1,0 +1,87 @@
+{
+  "name": "bamboo",
+  "category": "lunar-new-year",
+  "description": "Bamboo stalks with leaves, for nature, luck and growth.",
+  "aliases": [
+    "bamboo-stalk",
+    "bamboo-stalks",
+    "lucky-bamboo",
+    "bamboo-stick",
+    "bamboo-grove",
+    "zhu"
+  ],
+  "synonyms": [
+    "plant",
+    "stalk",
+    "cane",
+    "grass",
+    "forest",
+    "grove",
+    "garden",
+    "zen",
+    "growth",
+    "nature",
+    "green",
+    "eco",
+    "sustainable",
+    "panda",
+    "take",
+    "dae",
+    "spring",
+    "lunar new year",
+    "resilience",
+    "feng shui"
+  ],
+  "tags": [
+    "nature",
+    "plant",
+    "lunar-new-year",
+    "growth"
+  ],
+  "paths": [
+    {
+      "d": "M8 2.5 H9.5 A1.25 1.25 0 0 1 10.75 3.75 V21.5 H6.75 V3.75 A1.25 1.25 0 0 1 8 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 7 H16.5 A1.25 1.25 0 0 1 17.75 8.25 V21.5 H13.75 V8.25 A1.25 1.25 0 0 1 15 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 9 H10.75",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 15.25 H10.75",
+      "plate": "K"
+    },
+    {
+      "d": "M13.75 12.75 H17.75",
+      "plate": "K"
+    },
+    {
+      "d": "M13.75 17.5 H17.75",
+      "plate": "K"
+    },
+    {
+      "d": "M17.75 11.75 C18.5 9 20 7.25 22 6.5 C21.75 9 20.25 11 17.75 11.75 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6.75 12.5 C5.5 10.5 4 9.75 2 9.75 C2.75 11.75 4.5 12.75 6.75 12.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 2.5 H9.5 A1.25 1.25 0 0 1 10.75 3.75 V21.5 H6.75 V3.75 A1.25 1.25 0 0 1 8 2.5 Z",
+    "M15 7 H16.5 A1.25 1.25 0 0 1 17.75 8.25 V21.5 H13.75 V8.25 A1.25 1.25 0 0 1 15 7 Z",
+    "M17.75 11.75 C18.5 9 20 7.25 22 6.5 C21.75 9 20.25 11 17.75 11.75 Z",
+    "M6.75 12.5 C5.5 10.5 4 9.75 2 9.75 C2.75 11.75 4.5 12.75 6.75 12.5 Z"
+  ],
+  "cutouts": [
+    "M6.75 9 H10.75",
+    "M6.75 15.25 H10.75",
+    "M13.75 12.75 H17.75",
+    "M13.75 17.5 H17.75"
+  ]
+}

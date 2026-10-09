@@ -700,57 +700,101 @@ html.search-open { overflow: hidden; }
 /* footer sits on --dark in both themes: the logo's morphing "with" must use the bright (dark-theme) text twins */
 .site-footer .logo { --c-line-text: #8EA6FF; --c-solid-text: #FF9479; --c-duo-text: #B3A1FF; --c-gloss-text: #FF8DC4;
   --c-engrave-text: #E7C17A; --c-blueprint-text: #63D3EA; --c-sketch-text: #6FD99C;
-  --c-glass-text: #A9CBFF; --c-kawaii-text: #FFB3C4; --c-sticker-text: #D4B3FF; --c-pixel-text: #A8EE6E; --c-retro-text: #FFB878;
+  --c-glass-text: #C3C9FF; --c-kawaii-text: #FFB3C4; --c-sticker-text: #D4B3FF; --c-pixel-text: #A8EE6E; --c-retro-text: #FFB878;
   --c-luxe-text: #C3CCFF; --c-bauhaus-text: #FF8A7A; --c-skeuo-text: #C3D2E4;
-  --c-anime-text: #9BD2FF; --c-gothic-text: #F09AB5; --c-pastel-text: #94E8D3; --c-coquette-text: #FFA3BA; --c-plush-text: #FFD789; }
+  --c-anime-text: #9BD2FF; --c-gothic-text: #F09AB5; --c-pastel-text: #94E8D3; --c-coquette-text: #FFA3BA; --c-plush-text: #FFD789;
+  --c-clay-text: #DEAA94; --c-bento-text: #6DC5C2; --c-suite-text: #8DBBEB; --c-dock-text: #B6B9BC; --c-liquid-text: #4CC4F9; --c-chrome-text: #ABB4C4; --c-soft3d-text: #E3B11A; --c-brutal-text: #FF98B0;
+  --c-utsav-text: #F8B46A; --c-rangoli-text: #F48DBB; --c-halloween-text: #FFAF73; --c-christmas-text: #7ED0A6; --c-lunar-text: #F48D90; --c-valentine-text: #FFA6BA; }
 
-/* ─────────── "On this page" map, tucked or out (site.js pageMap; the pill itself is styled by the page) ───────────
-   Out: a small round button left of the pill tucks it away. Tucked (by the visitor, remembered; or by itself while it
-   would cover text): only a tab on the right edge shows; click it or drag it left to bring the map back. */
-.pm-tab { position: fixed; z-index: 71; right: calc(max(20px, env(safe-area-inset-right)) + var(--pm-w, 210px) + 8px); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 10px);
-  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; border: 1px solid var(--rule-strong); background: var(--card); color: var(--ink);
-  box-shadow: 0 8px 20px -10px rgba(17, 19, 24, .45); cursor: pointer; touch-action: none;
-  opacity: 0; pointer-events: none; transform: scale(.6); transition: opacity .25s, transform .45s var(--e-spring), right .45s var(--e-out), width .3s var(--e-out), height .3s var(--e-out), border-radius .3s; }
-.pm-tab[hidden] { display: none; }
-.pm-tab.is-shown { opacity: 1; pointer-events: auto; transform: none; }
-.pm-tab:hover { border-color: var(--ink); }
-.pm-tab svg { width: 18px; height: 18px; transition: transform .35s var(--e-out); }
-.pm-tab.is-tucked { right: 0; bottom: max(18px, env(safe-area-inset-bottom)); width: calc(26px + env(safe-area-inset-right)); height: 56px; padding-right: env(safe-area-inset-right);
-  border-radius: 16px 0 0 16px; border: 0; background: #111318; color: #F7F3EC; box-shadow: -8px 10px 26px -14px rgba(17, 19, 24, .6), inset 1px 1px 0 rgba(255, 255, 255, .16), inset 0 -1px 0 rgba(255, 255, 255, .08); }
-.pm-tab.is-tucked svg { transform: rotate(180deg); }
-.pm-tab.is-tucked:hover { width: calc(32px + env(safe-area-inset-right)); }
-/* no free height on the edge: a slim sliver that widens under the pointer or keyboard focus */
-.pm-tab.is-tucked.is-slim { width: calc(8px + env(safe-area-inset-right)); border-radius: 8px 0 0 8px; }
-.pm-tab.is-tucked.is-slim svg { opacity: 0; }
-.pm-tab.is-tucked.is-slim:hover, .pm-tab.is-tucked.is-slim:focus-visible { width: calc(26px + env(safe-area-inset-right)); }
-.pm-tab.is-tucked.is-slim:hover svg, .pm-tab.is-tucked.is-slim:focus-visible svg { opacity: 1; }
-/* compact: when the full pill would cover text but the margin has room, only its round button shows; hide button above it */
-.pm-tab.is-compact { right: calc(max(20px, env(safe-area-inset-right)) + 10px); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 60px); }
-.pm-tab.is-compact svg { transform: rotate(0deg); }
-.js details.pm-compact > summary { width: 52px; padding: 0; gap: 0; justify-content: center; }
-.js details.pm-compact > summary > span:not([class$="-ic"]) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.pm-tab.is-drag { transition: none; cursor: grabbing; }
-[data-theme="dark"] .pm-tab.is-tucked { background: #F4F0E8; color: #111318; box-shadow: -8px 10px 26px -14px rgba(0, 0, 0, .8); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pm-tab.is-tucked { background: #F4F0E8; color: #111318; } }
-.pm-tab:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo); }
-/* the pill slides off to the right while tucked (site.js makes it inert, so it can't take focus) */
-.js details.pm-tucked.is-shown { transform: translateX(calc(100% + 60px)); opacity: 0; pointer-events: none; }
-@media (max-width: 600px) { .pm-tab.is-tucked { width: calc(22px + env(safe-area-inset-right)); height: 52px; } }
+/* ─────────── "On this page": the floating section map (icon pages .ip-map, live pages .lv-map; site.js pageMap) ───────────
+   Without JS: a plain disclosure after the hero. With JS: a slim pill at the bottom right (reading-progress ring, the
+   current section) that opens a compact card of sections; at 760px and below the card is a bottom sheet (icon pages: the
+   pill is a round button at the end of the phone action bar). Only transform and opacity animate; the pill has a fixed
+   size, so a new section name never moves anything. It stays focusable while hidden and shows itself on focus. */
+:is(.ip-map, .lv-map) { --pm-ac: var(--sc, var(--ink)); --pm-e: cubic-bezier(.2, .9, .3, 1.1); position: relative; z-index: 70 }
+.lv-map { --pm-ac: var(--style, var(--ink)) }
+:is(.ip-map-btn, .lv-map-btn) { position: relative; list-style: none; cursor: pointer }
+:is(.ip-map-btn, .lv-map-btn)::-webkit-details-marker { display: none }
+html:not(.js) :is(.ip-map, .lv-map) { box-sizing: border-box; max-width: var(--maxw, 1200px); margin: clamp(48px, 6vw, 72px) auto 0; padding-inline: var(--gutter, 16px) }
+html:not(.js) :is(.ip-map-btn, .lv-map-btn) { display: inline-flex; align-items: center; gap: 10px; font: 700 16px/1.2 var(--font-display); color: var(--ink) }
+html:not(.js) :is(.ip-map-l, .lv-map-l)::after { content: " +"; color: var(--muted) }
+html:not(.js) :is(.ip-map-ic, .lv-map-ic, .ip-map-now, .lv-map-now) { display: none }
+html:not(.js) :is(.ip-map-card, .lv-map-card) { margin-top: 10px }
 
-/* the first-visit hint: one short line with a close button, attached to the pill or the tab */
-.pm-hint { position: fixed; z-index: 72; display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 6px 6px 6px 14px; border-radius: var(--pill);
-  background: var(--ink); color: var(--paper); font: 650 14px/1.2 var(--font-sans); white-space: nowrap; box-shadow: var(--shadow);
-  opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .45s var(--e-spring); }
-.pm-hint.is-tab { transform: translateX(6px); }
-.pm-hint.is-on { opacity: 1; transform: none; }
-.pm-hint::after { content: ''; position: absolute; right: 22px; bottom: -5px; width: 10px; height: 10px; background: inherit; transform: rotate(45deg); border-radius: 2px; }
-.pm-hint.is-tab::after { right: -4px; bottom: auto; top: calc(50% - 5px); }
-.pm-hint-x { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: color-mix(in srgb, var(--paper) 16%, transparent); color: inherit; cursor: pointer; }
-.pm-hint-x:hover { background: color-mix(in srgb, var(--paper) 28%, transparent); }
-.pm-hint-x:focus-visible { outline: 2px solid var(--sun); outline-offset: 1px; }
-@media (prefers-reduced-motion: reduce) { .pm-tab, .pm-tab svg, .pm-hint, .js details.pm-tucked { transition: none !important; } }
-html.reduced .pm-tab, html.reduced .pm-tab svg, html.reduced .pm-hint { transition: none !important; }
-@media print { .pm-tab, .pm-hint { display: none !important; } }
+/* the pill: hidden = 16px lower and transparent (site.js adds .is-shown once the hero has gone, not near the footer) */
+.js :is(.ip-map, .lv-map) { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); width: auto; margin: 0;
+  opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .18s ease, transform .24s var(--pm-e) }
+.js :is(.ip-map, .lv-map):is(.is-shown, :focus-within) { opacity: 1; transform: none; pointer-events: auto }
+.js :is(.ip-map-btn, .lv-map-btn) { display: grid; grid-template: "ic l" auto "ic now" auto / 36px minmax(0, 1fr); align-content: center; column-gap: 10px; row-gap: 3px;
+  box-sizing: border-box; width: 228px; height: 52px; padding: 0 18px 0 7px; border-radius: 999px; border: 1px solid var(--rule-strong); color: var(--ink);
+  background: color-mix(in srgb, var(--card) 84%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 14px 32px -16px rgba(17, 19, 24, .4), 0 2px 6px -2px rgba(17, 19, 24, .08); user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: transform .2s var(--pm-e), border-color .2s }
+@media (hover: hover) { .js :is(.ip-map-btn, .lv-map-btn):hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--ink) 40%, var(--rule-strong)) } }
+.js :is(.ip-map-btn, .lv-map-btn):active { transform: scale(.97) }
+.js :is(.ip-map-btn, .lv-map-btn):focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 3px; box-shadow: 0 0 0 7px var(--focus-halo) }
+.js :is(.ip-map-l, .lv-map-l) { grid-area: l; overflow: hidden; white-space: nowrap; font: 650 10.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.js :is(.ip-map-now, .lv-map-now) { grid-area: now; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 14.5px/1.15 var(--font-display); letter-spacing: -.005em }
+/* the ring: reading progress around a small list glyph that turns into a close mark while open */
+:is(.ip-map-ic, .lv-map-ic) { grid-area: ic; position: relative; display: grid; place-items: center; width: 36px; height: 36px }
+:is(.ip-map-ic, .lv-map-ic) svg { position: absolute; inset: 0; transform: rotate(-90deg) }
+:is(.ip-map-track, .lv-map-track) { fill: none; stroke: currentColor; stroke-width: 2.5; opacity: .14 }
+:is(.ip-map-prog, .lv-map-prog) { fill: none; stroke: var(--pm-ac); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .12s linear }
+:is(.ip-map-ic, .lv-map-ic) i { position: absolute; left: 11px; width: 14px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s var(--pm-e), opacity .15s }
+:is(.ip-map-ic, .lv-map-ic) i:nth-of-type(1) { top: 12px }
+:is(.ip-map-ic, .lv-map-ic) i:nth-of-type(2) { top: 17px; width: 10px }
+:is(.ip-map-ic, .lv-map-ic) i:nth-of-type(3) { top: 22px; width: 12px }
+.pm-open :is(.ip-map-ic, .lv-map-ic) i:nth-of-type(1) { transform: translateY(5px) rotate(45deg) }
+.pm-open :is(.ip-map-ic, .lv-map-ic) i:nth-of-type(2) { opacity: 0 }
+.pm-open :is(.ip-map-ic, .lv-map-ic) i:nth-of-type(3) { transform: translateY(-5px) rotate(-45deg) scaleX(1.17) }
+
+/* the card: grows from the pill's corner (opacity + transform only; site.js closes the <details> after it has faded) */
+.js :is(.ip-map-card, .lv-map-card) { position: absolute; right: 0; bottom: calc(100% + 10px); box-sizing: border-box; width: min(340px, calc(100vw - 32px));
+  max-height: min(540px, calc(100dvh - var(--header-h, 72px) - 100px)); overflow: auto; overscroll-behavior: contain; padding: 8px; border-radius: 22px;
+  background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow-l);
+  opacity: 0; transform: translateY(8px) scale(.96); transform-origin: 100% 100%; transition: opacity .15s ease, transform .2s var(--pm-e) }
+.js .pm-open :is(.ip-map-card, .lv-map-card) { opacity: 1; transform: none }
+:is(.ip-map-k, .lv-map-k) { margin: 6px 10px 6px; font: 650 10.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+:is(.ip-map-card, .lv-map-card) ol { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none }
+:is(.ip-map-card, .lv-map-card) a { position: relative; display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 44px;
+  box-sizing: border-box; padding: 6px 10px 6px 8px; border-radius: 14px; color: var(--ink); text-decoration: none; transition: background-color .15s }
+:is(.ip-map-n, .lv-map-n) { font: 600 11px/1 var(--font-mono); color: var(--muted); text-align: center }
+:is(.ip-map-t, .lv-map-t) { min-width: 0 }
+:is(.ip-map-t, .lv-map-t) b { display: block; font: 650 14.5px/1.2 var(--font-display) }
+:is(.ip-map-t, .lv-map-t) small { display: block; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12px/1.3 var(--font-sans); color: var(--muted) }
+:is(.ip-map-card, .lv-map-card) a:hover { background: var(--paper-2) }
+:is(.ip-map-card, .lv-map-card) a[aria-current] { background: color-mix(in srgb, var(--pm-ac) 12%, var(--card)) }
+:is(.ip-map-card, .lv-map-card) a[aria-current]::before { content: ""; position: absolute; left: 2px; top: 12px; bottom: 12px; width: 3px; border-radius: 3px; background: var(--pm-ac) }
+:is(.ip-map-card, .lv-map-card) a[aria-current] :is(.ip-map-n, .lv-map-n) { color: var(--style-text, var(--pm-ac)); font-weight: 700 }
+:is(.ip-map-card, .lv-map-card) a:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: -2px }
+
+/* tablets and phones: the card is a bottom sheet over a light scrim (a tap on it closes) */
+@media (max-width: 760px) {
+  .js :is(.ip-map, .lv-map)::before { content: ""; position: fixed; inset: 0; background: rgba(13, 15, 20, .34); opacity: 0; pointer-events: none; transition: opacity .2s ease }
+  .js :is(.ip-map, .lv-map).pm-open::before { opacity: 1; pointer-events: auto }
+  .js :is(.ip-map-card, .lv-map-card) { position: fixed; left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); bottom: max(8px, env(safe-area-inset-bottom));
+    width: auto; max-height: min(74dvh, 600px); padding: 18px 8px 8px; border-radius: 26px; transform: translateY(32px); transform-origin: 50% 100% }
+  .js :is(.ip-map-card, .lv-map-card)::before { content: ""; position: absolute; left: 50%; top: 7px; width: 36px; height: 4px; margin-left: -18px; border-radius: 2px; background: var(--rule-strong) }
+  :is(.ip-map-card, .lv-map-card) a { min-height: 50px }
+  /* live pages: a slimmer pill */
+  .js .lv-map { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)) }
+  .js .lv-map-btn { width: 200px; height: 48px }
+  /* icon pages: a round button at the right end of the action bar, sliding with it */
+  .js .ip-map { right: max(12px, env(safe-area-inset-right)); bottom: calc(10px + env(safe-area-inset-bottom)); transform: translateY(72px) }
+  .js .ip-map-btn { grid-template: "ic" 36px / 36px; place-content: center; width: 48px; height: 48px; padding: 0 }
+  .js .ip-map-l { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
+  .js .ip-map-now { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js :is(.ip-map, .lv-map), .js :is(.ip-map, .lv-map)::before, :is(.ip-map-btn, .lv-map-btn), :is(.ip-map-card, .lv-map-card), :is(.ip-map-ic, .lv-map-ic) i, :is(.ip-map-prog, .lv-map-prog) { transition: none !important }
+}
+html.reduced :is(.ip-map, .lv-map), html.reduced :is(.ip-map, .lv-map)::before, html.reduced :is(.ip-map-btn, .lv-map-btn), html.reduced :is(.ip-map-card, .lv-map-card) { transition: none !important }
+@media (forced-colors: active) { .js :is(.ip-map-btn, .lv-map-btn), .js :is(.ip-map-card, .lv-map-card) { border: 1px solid CanvasText } }
+@media print { :is(.ip-map, .lv-map) { display: none !important } }
 /* plain text links in the footer base line (the 404 page carries "Request an icon" and "Send feedback" there) */
 .foot-base span a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .foot-base span a:hover { color: var(--on-dark, #fff); }
+
+/* speed: the footer lays out only when it comes near (content-visibility; it already clips its own overflow) */
+.site-footer { content-visibility: auto; contain-intrinsic-size: auto 760px }
+html:has(:target) .site-footer { content-visibility: visible }

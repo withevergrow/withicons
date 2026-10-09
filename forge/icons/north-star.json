@@ -1,0 +1,76 @@
+{
+  "name": "north-star",
+  "category": "christmas",
+  "description": "A bright four-point Christmas star with a long lower ray, for the season and tree toppers.",
+  "aliases": [
+    "christmas-star",
+    "star-of-bethlehem",
+    "bethlehem-star",
+    "polaris",
+    "guiding-star",
+    "tree-topper",
+    "pole-star",
+    "xmas-star"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "star",
+    "nativity",
+    "epiphany",
+    "three kings",
+    "wise men",
+    "guide",
+    "navigation",
+    "night sky",
+    "shine",
+    "bright",
+    "twinkle",
+    "topper",
+    "hope",
+    "northstar"
+  ],
+  "tags": [
+    "christmas",
+    "star",
+    "holiday",
+    "night",
+    "faith"
+  ],
+  "paths": [
+    {
+      "d": "M12 2 Q13 10 19.5 11 Q13 12 12 22 Q11 12 4.5 11 Q11 10 12 2 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 6.5 L17 5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 6.5 L7 5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 15.5 L17 17",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 15.5 L7 17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2 Q13 10 19.5 11 Q13 12 12 22 Q11 12 4.5 11 Q11 10 12 2 Z"
+  ],
+  "cutouts": [
+    "M12 8.75 L13.25 11 L12 13.25 L10.75 11 Z"
+  ]
+}

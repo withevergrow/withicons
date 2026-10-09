@@ -25,6 +25,10 @@ export const FINISH = {
   glass:   { shade: [[0.5, 0.16], [1.5, 0.1]], hi: [0.4, 0.8], spec: { inset: 0.6, top: 0.5, op: 0.36 }, hot: 0.95, sheer: true },
   cloud:   { shade: [[0.6, 0.1], [1.8, 0.07], [3.2, 0.05]], hi: [0.45, 0.9], spec: { inset: 0.8, top: 0.4, op: 0.5 } },
   enamel:  { shade: [[0.5, 0.18], [1.3, 0.1]], hi: [0.4, 0.6], spec: { inset: 0.65, top: 0.5, op: 0.32 }, hot: 0.9 },
+  // people (_skeuo-people.mjs): satin skin shaded in its own shade, hair with a sheen band, a matte knit
+  skin:    { shade: [[0.55, 0.34], [1.5, 0.2], [2.8, 0.12]], hi: [0.4, 0.38], spec: { inset: 1.0, top: 0.36, op: 0.16 } },
+  hair:    { shade: [[0.5, 0.24], [1.4, 0.13]], hi: [0.36, 0.26], bands: [[0.1, 0.3, 'shine', 0.34]] },
+  fabric:  { shade: [[0.5, 0.2], [1.4, 0.11], [2.8, 0.06]], hi: [0.38, 0.32] },
 }
 
 // materials: colour (c), groove/print ink (ink), stitch/detail accent (acc), finish (f)

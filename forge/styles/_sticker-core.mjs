@@ -17,7 +17,9 @@
 import { parsePath, simplify, area, pointInRing, distToPolyline, arclen, bbox, rng, fmt, resample, V } from '../kernel/geom.mjs'
 import * as F from './_sticker-field.mjs'
 import { subpaths, emit, raw, tp, splineD, sparkleD, heartD, starD } from './_sticker-path.mjs'
-import { colours, signalColour, VAR, EDGE, INK, SHINE, SHADOW } from './_sticker-tune.mjs'
+import { colours, signalColour, VAR, EDGE, INK, SHINE, SHADOW, PALETTE } from './_sticker-tune.mjs'
+import { isPerson, tones, adapt, fillParts } from './_people.mjs'
+import { setOf, unionSets, differenceSets, translateSet } from '../kernel/bool.mjs'
 import { textInfo, glyphWeight } from './_live-text.mjs'
 
 export const K = {
@@ -110,6 +112,13 @@ export function build(icon) {
   const col = colours(icon)
   const name = String(icon.name || '')
   const R = rng('sticker:' + name)
+  // People avatars (forge/styles/_people.mjs): glossy candy-bright skin in the c1 role (its shade in shadow), hair or
+  // headwear c2, clothing c4, headphone cups, clips and sparkles accent. Role-named variables, so a per-icon palette
+  // or the skin-tone picker recolours the skin whatever the markup order.
+  const who = isPerson(icon) ? adapt(tones(icon), 'vivid') : null
+  const parts = who ? fillParts(icon) : null
+  const PV = (role, hex) => `var(--with-sticker-${role}, ${hex})`
+  const GEAR = PV('accent', '#FF6FB5')
 
   // --- signals (S plate): badges, slashes, glyphs
   const sig = items.filter(l => l.plate === 'S')
@@ -293,16 +302,18 @@ export function build(icon) {
     for (const [, ls] of [...byW].sort((a, b) => b[1][0].w - a[1][0].w)) {
       const w = ls[0].w, d = emit(ls.map(l => l.sp), T)
       nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(w) }])
-      nodes.push(['path', { d, stroke: C(tubeCol), 'stroke-width': fmt(w - 2 * tubeOut(w)) }])
+      nodes.push(['path', { d, stroke: who ? GEAR : C(tubeCol), 'stroke-width': fmt(w - 2 * tubeOut(w)) }])
     }
   }
   tubeNodes(tubes.filter(l => !l.over && baseFills.length))
   if (under.size) nodes.push(['path', { d: emit([...under].map(l => l.sp), T), stroke: INK, 'stroke-width': K.INK }])
   // --- fills
   const fc = col.tune.fillColours || {}
-  const fcOf = f => fc[f.fi] === 'ink' ? INK : fc[f.fi] ? C(fc[f.fi]) : C(f.plate === 'A' && !col.tune.mono ? col.accent : col.primary)
+  const partFill = p => p === 'skin' ? PV('c1', who.c1) : p === 'hair' || p === 'wear' ? PV('c2', who.c2) : p === 'cloth' ? PV('c4', who.c4) : GEAR
+  const fcOf = f => who ? partFill(parts[f.fi]) : fc[f.fi] === 'ink' ? INK : fc[f.fi] ? C(fc[f.fi]) : C(f.plate === 'A' && !col.tune.mono ? col.accent : col.primary)
   const tyres = baseFills.filter(f => fc[f.fi] !== undefined)
   for (const f of baseFills) nodes.push(['path', { d: emit(f.subs, T), fill: fcOf(f), 'fill-rule': 'evenodd' }])
+  if (who) { try { nodes.push(...skinGloss(icon, parts, who, PV, X)) } catch { /* the flat skin is fine */ } }
   // a recoloured fill (a wheel) prints its closed cutouts as hubs
   const hubSets = tyres.length && col.tune.hub ? cutSets.filter(set => set.every(x => tyres.some(f => fracInside(x.pts, f.rings[0]) > 0.9))) : []
   if (hubSets.length) nodes.push(['path', { d: emit(hubSets.flat().map(x => x.sp), T), fill: col.tune.hub === 'ink' ? INK : C(col.tune.hub), 'fill-rule': 'evenodd' }])
@@ -325,7 +336,7 @@ export function build(icon) {
       if (col.tune.panel === 'none') continue
       ;(-mn >= 0.62 && col.tune.panel !== 'paper' ? panels : gaps).push(...set.map(x => x.sp))
     }
-    if (panels.length) nodes.push(['path', { d: emit(panels, T), fill: C(col.accent), 'fill-rule': 'evenodd' }])
+    if (panels.length) nodes.push(['path', { d: emit(panels, T), fill: who ? INK : C(col.accent), 'fill-rule': 'evenodd' }])
     if (gaps.length) nodes.push(['path', { d: emit(gaps, T), fill: EDGE, 'fill-rule': 'evenodd' }])
     for (const [c, sps] of Object.entries(tinted)) nodes.push(['path', { d: emit(sps, T), fill: c === 'paper' ? EDGE : C(c), 'fill-rule': 'evenodd' }])
   }
@@ -333,7 +344,7 @@ export function build(icon) {
   tubeNodes(tubes.filter(l => l.over || !baseFills.length))
   // --- dots: ink disc, then a candy disc inside it
   if (dots.length) {
-    const d = emit(dots.map(l => l.sp), T), c = C(baseFills.length || tubes.length ? (baseFills.length ? col.accent : tubeCol) : col.primary)
+    const d = emit(dots.map(l => l.sp), T), c = who ? GEAR : C(baseFills.length || tubes.length ? (baseFills.length ? col.accent : tubeCol) : col.primary)
     nodes.push(['path', { d, fill: INK, stroke: INK, 'stroke-width': K.INK }])
     nodes.push(['path', { d, fill: c, stroke: c, 'stroke-width': fmt(K.INK - 2 * K.DOT_O) }])
   }
@@ -343,6 +354,7 @@ export function build(icon) {
     for (const l of inks) { if (under.has(l)) continue; const w = inkW(l); if (!byW.has(w)) byW.set(w, []); byW.get(w).push(l) }
     for (const [w, ls] of byW) nodes.push(['path', { d: emit(ls.map(l => l.sp), T), stroke: INK, 'stroke-width': w }])
   }
+  if (who) { const d = eyeLights(icon, X, s); if (d) nodes.push(['path', { d, stroke: SHINE, 'stroke-width': 0.55, 'stroke-opacity': 0.95, class: 'wm-shine' }]) }
   // --- Live: a battery's charge (one meandering A line that fills a rectangle) is printed as a candy cell inside
   // its ink rim, so the level's moving edge is candy against ink: a 5% step shows at 24px
   if (icon.params) {
@@ -368,10 +380,11 @@ export function build(icon) {
   // --- signals: mini stickers on top
   let sc = signalColour(name, col.accent)
   if (sc === col.primary) sc = col.accent
+  const SC = who ? GEAR : C(sc)
   for (const b of badges) {
     const d = emit([b.sp], T)
     nodes.push(['path', { d, fill: EDGE, stroke: EDGE, 'stroke-width': fmt(K.INK + 2 * K.HALO), class: 'wm-s' }])
-    nodes.push(['path', { d, fill: C(sc), stroke: INK, 'stroke-width': K.INK, class: 'wm-s' }])
+    nodes.push(['path', { d, fill: SC, stroke: INK, 'stroke-width': K.INK, class: 'wm-s' }])
     const gl = glyphs.filter(gg => badgeOf(gg) === b)
     if (gl.length) nodes.push(['path', { d: emit(gl.map(x => x.sp), T), stroke: INK, 'stroke-width': fmt(K.INK * 0.9), class: 'wm-s' }])
   }
@@ -379,12 +392,61 @@ export function build(icon) {
     const d = emit(sOpen.map(l => l.sp), T)
     nodes.push(['path', { d, stroke: EDGE, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O + 2 * K.HALO), class: 'wm-s' }])
     nodes.push(['path', { d, stroke: INK, 'stroke-width': fmt(K.TUBE + 2 * K.TUBE_O), class: 'wm-s' }])
-    nodes.push(['path', { d, stroke: C(sc), 'stroke-width': K.TUBE, class: 'wm-s' }])
+    nodes.push(['path', { d, stroke: SC, 'stroke-width': K.TUBE, class: 'wm-s' }])
   }
 
   // --- sparkles
-  for (const dc of decos) nodes.push(['path', { d: dc.d, fill: C(dc.c), class: 'wm-deco' }])
-  return nodes
+  for (const dc of decos) nodes.push(['path', { d: dc.d, fill: who ? PV('accent', PALETTE[dc.c][0]) : C(dc.c), class: 'wm-deco' }])
+  return primaryFirst(nodes, C(col.primary))
+}
+
+// People: the skin's gloss. A shade crescent on the lower right of the face (the face less a copy nudged up-left, less
+// everything painted over it) in the shadow role, and a catch-light in each eye so dark eyes read on deep skin.
+function skinGloss(icon, parts, who, PV, X) {
+  const out = []
+  const ringsOf = f => (f.set && f.set.length ? f.set : (f.subs || []).map(s => s.pts)).filter(r => r && r.length > 2)
+  const fills = icon.fills || []
+  const face = setOf(ringsOf(fills[0]))
+  const over = unionSets(fills.slice(1).filter((f, i) => parts[i + 1] !== 'skin').map(f => setOf(ringsOf(f))))
+  let shade = differenceSets(face, translateSet(face, -0.85, -1.0))
+  if (over.length) shade = differenceSets(shade, over)
+  const ringD = rs => rs.filter(r => r.length > 2 && polyArea(r) > 0.05).map(r => 'M' + X(simplify(r, 0.03, true)).map(p => fmt(p[0]) + ' ' + fmt(p[1])).join('L') + 'Z').join('')
+  const sd = ringD(shade)
+  if (sd) out.push(['path', { d: sd.replace(/ -/g, '-'), fill: PV('shadow', who.shadow), 'fill-opacity': +(0.42 - 0.025 * who.skin).toFixed(2) }])
+  // glasses: clear lenses (a light glaze inside each closed lens ring on the face), never dark shades
+  const lens = (icon.paths || []).flatMap(p => p.plate === 'A' ? p.subs || [] : []).filter(q => {
+    if (!q.closed || q.pts.length < 3) return false
+    const b = bbox(q.pts)
+    return b.w > 2.8 && b.w < 5.2 && b.h > 2.8 && b.h < 4.6 && b.y0 > 8.5 && b.y1 < 14.5
+  })
+  const ld = ringD(lens.map(q => q.pts))
+  if (ld) out.push(['path', { d: ld.replace(/ -/g, '-'), fill: PV('shine', '#FFFFFF'), 'fill-opacity': 0.5 }])
+  return out
+}
+function eyeLights(icon, X, s) {
+  let d = ''
+  for (const c of icon.cutouts || []) for (const q of c.subs || []) {
+    if (!q.closed || q.pts.length < 3) continue
+    const b = bbox(q.pts)
+    if (b.w > 2.2 || b.h > 2.2 || b.y0 < 8 || b.y1 > 14) continue
+    const [x, y] = X([[b.x0 + b.w * 0.36, b.y0 + b.h * 0.3]])[0]
+    d += 'M' + fmt(x) + ' ' + fmt(y) + 'h.01'
+  }
+  return d
+}
+
+// Palettes (forge/PALETTES.md) match the candy variables to c1..c4 in the order they first appear in the markup, and
+// c1 must be the main body. Parts painted before the body (a stem, a shackle or rays tucked behind the mass) would
+// claim c1: lay a copy of the body fill down first. The real body is painted over it at the same place, so the
+// picture is unchanged (it keeps the body's motion class, so it moves with it).
+const CANDY = /var\(--with-sticker-(bubblegum|grape|lemon|mint|peach|sky),/
+function primaryFirst(nodes, prim) {
+  const candyOf = a => { for (const k of ['fill', 'stroke']) { const m = CANDY.exec(String(a[k] || '')); if (m) return a[k] } return null }
+  const first = nodes.findIndex(n => n && n[1] && candyOf(n[1]))
+  if (first < 0 || candyOf(nodes[first][1]) === prim) return nodes
+  const body = nodes.findIndex(n => n && n[1] && n[1].fill === prim && !n[1].stroke)
+  if (body < 0) return nodes
+  return [...nodes.slice(0, first), ['path', { ...nodes[body][1] }], ...nodes.slice(first)]
 }
 
 // ---------------------------------------------------------------------------

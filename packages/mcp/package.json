@@ -1,7 +1,7 @@
 {
   "name": "@withicons/mcp",
   "version": "0.3.1",
-  "description": "MCP server for with icons: search 500 icons x 20 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx), plus a hosted server at https://withicons.com/mcp.",
+  "description": "MCP server for with icons: search 734 icons x 34 styles in plain English and get paste-ready SVG, React, Vue, Svelte, Angular, Solid, web-component or class code, every icon's colour palettes for the multi-colour styles, animation code (@withicons/motion), and files (SVG, PNG, PDF, PowerPoint, Lottie, animated GIF / APNG / PowerPoint for slides). stdio (npx), plus a hosted server at https://withicons.com/mcp.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -55,7 +55,21 @@
     "gothic-icons",
     "pastel-icons",
     "coquette-icons",
-    "plush-icons"
+    "plush-icons",
+    "clay-icons",
+    "bento-icons",
+    "suite-icons",
+    "dock-icons",
+    "liquid-icons",
+    "chrome-icons",
+    "soft3d-icons",
+    "brutal-icons",
+    "utsav-icons",
+    "rangoli-icons",
+    "halloween-icons",
+    "christmas-icons",
+    "lunar-icons",
+    "valentine-icons"
   ],
   "type": "module",
   "bin": {

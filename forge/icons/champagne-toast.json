@@ -1,0 +1,104 @@
+{
+  "name": "champagne-toast",
+  "category": "valentines",
+  "description": "Two champagne glasses clinking, for celebrations and toasts.",
+  "aliases": [
+    "champagne",
+    "champagne-glasses",
+    "clinking-glasses",
+    "cheers-glasses",
+    "bubbly",
+    "prosecco",
+    "sparkling-wine",
+    "flutes",
+    "raise-a-glass"
+  ],
+  "synonyms": [
+    "cheers",
+    "toast",
+    "make a toast",
+    "celebration",
+    "celebrate",
+    "party",
+    "new year",
+    "new years eve",
+    "nye",
+    "wedding",
+    "anniversary",
+    "engagement party",
+    "congratulations",
+    "success",
+    "milestone",
+    "drinks",
+    "cava",
+    "sparkling",
+    "bubbles",
+    "champagne flutes",
+    "date night",
+    "valentine",
+    "valentines day",
+    "romantic dinner",
+    "bar",
+    "fizz",
+    "champaign",
+    "champange"
+  ],
+  "tags": [
+    "valentine",
+    "celebration",
+    "drink",
+    "party",
+    "toast"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 5 L13.5 6.25 C12.5 10 11.25 12.5 9 12.75 C7.25 11.5 7.5 8.75 8.5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 12.75 L7 21",
+      "plate": "K"
+    },
+    {
+      "d": "M4 20.75 L9.5 22.25",
+      "plate": "K"
+    },
+    {
+      "d": "M15.75 6.25 C16.5 9.25 16.5 11.75 15 12.75 C14.5 12.75 14 12.5 13.5 12.25",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12.75 L17 21",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 22.25 L20 20.75",
+      "plate": "K"
+    },
+    {
+      "d": "M8 8 L12.5 9",
+      "plate": "A"
+    },
+    {
+      "d": "M15.25 8.25 L16 8",
+      "plate": "A"
+    },
+    {
+      "d": "M4 3 V6 M2.5 4.5 H5.5",
+      "plate": "S"
+    },
+    {
+      "d": "M20 3 V6 M18.5 4.5 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8.5 5 L13.5 6.25 C12.5 10 11.25 12.5 9 12.75 C7.25 11.5 7.5 8.75 8.5 5 Z",
+    "M10.5 6.25 L15.5 5 C16.5 8.75 16.75 11.5 15 12.75 C12.75 12.5 11.5 10 10.5 6.25 Z"
+  ],
+  "cutouts": [
+    "M8 8 L12.5 9",
+    "M11.5 9 L16 8",
+    "M10 5.5 L13.5 6.25 C13 8.5 12.25 10.25 11.5 11.25"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "image-off",
+  "intent": "flickers like a picture that failed to load",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.6,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "image",
+      "effect": "fade"
+    },
+    {
+      "to": "eye-off",
+      "effect": "morph"
+    }
+  ]
+}

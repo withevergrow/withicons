@@ -1,0 +1,41 @@
+{
+  "name": "square-code",
+  "intent": "the tile rests while the brackets tick like code being typed",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.8,
+      "duration": 1.4,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "code",
+      "effect": "fade"
+    },
+    {
+      "to": "square-terminal",
+      "effect": "flip"
+    }
+  ]
+}

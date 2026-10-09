@@ -1,0 +1,62 @@
+{
+  "name": "shapes",
+  "category": "objects",
+  "description": "A circle, square and triangle together, for shapes, design and components.",
+  "aliases": [
+    "geometry",
+    "basic-shapes",
+    "shape-tool",
+    "primitives",
+    "figures",
+    "geometric-shapes",
+    "insert-shape"
+  ],
+  "tags": [
+    "circle",
+    "square",
+    "triangle",
+    "design",
+    "geometry"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V8.5 A1.5 1.5 0 0 1 8.5 10 H4.5 A1.5 1.5 0 0 1 3 8.5 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M20.5 6.5 A3.5 3.5 0 1 1 13.5 6.5 A3.5 3.5 0 1 1 20.5 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.8 14.07 L16.8 19.4 A1 1 0 0 1 16 21 L8 21 A1 1 0 0 1 7.2 19.4 L11.2 14.07 A1 1 0 0 1 12.8 14.07 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V8.5 A1.5 1.5 0 0 1 8.5 10 H4.5 A1.5 1.5 0 0 1 3 8.5 V4.5 A1.5 1.5 0 0 1 4.5 3 Z",
+    "M20.5 6.5 A3.5 3.5 0 1 1 13.5 6.5 A3.5 3.5 0 1 1 20.5 6.5 Z",
+    "M12.8 14.07 L16.8 19.4 A1 1 0 0 1 16 21 L8 21 A1 1 0 0 1 7.2 19.4 L11.2 14.07 A1 1 0 0 1 12.8 14.07 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "circle square triangle",
+    "forms",
+    "design",
+    "drawing",
+    "vector",
+    "graphics",
+    "polygon",
+    "elements",
+    "objects",
+    "geometric",
+    "art",
+    "kids",
+    "education",
+    "toys",
+    "shape library",
+    "add shape",
+    "illustration",
+    "canvas",
+    "shape"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "dholak",
+  "intent": "the drum thumps in time for a wedding song",
+  "loop": {
+    "preset": "beat",
+    "amount": 0.6,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "wiggle"
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.5
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "bounce"
+    }
+  ],
+  "swap": [
+    {
+      "to": "dhak",
+      "effect": "slide-right"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "name": "firecracker",
+  "category": "indian-festivals",
+  "description": "A cone firecracker with sparks, for Diwali and fireworks.",
+  "aliases": [
+    "anar",
+    "anaar",
+    "flowerpot-cracker",
+    "fountain-cracker",
+    "cracker",
+    "patakha",
+    "pataka",
+    "phatakha",
+    "cone-firecracker"
+  ],
+  "synonyms": [
+    "diwali",
+    "happy diwali",
+    "fireworks",
+    "firework",
+    "crackers",
+    "patakhe",
+    "fountain",
+    "flowerpot",
+    "sparks",
+    "burst",
+    "explosion",
+    "pyrotechnics",
+    "cone",
+    "celebration",
+    "new year",
+    "festival",
+    "green crackers",
+    "eco friendly crackers",
+    "indian festival",
+    "india",
+    "fire cracker",
+    "fire-cracker",
+    "firecraker"
+  ],
+  "tags": [
+    "diwali",
+    "fireworks",
+    "celebration",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M8.25 21.5 H15.75 A1.5 1.5 0 0 0 17.15 19.45 L13.5 11.5 H10.5 L6.85 19.45 A1.5 1.5 0 0 0 8.25 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.2 16.5 H15.8",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8.25 L12 2.25",
+      "plate": "A"
+    },
+    {
+      "d": "M10.06 9.06 L6.87 5.87",
+      "plate": "A"
+    },
+    {
+      "d": "M13.94 9.06 L17.13 5.87",
+      "plate": "A"
+    },
+    {
+      "d": "M9.98 4.3 A0.75 0.75 0 1 1 8.48 4.3 A0.75 0.75 0 1 1 9.98 4.3 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.52 4.3 A0.75 0.75 0 1 1 14.02 4.3 A0.75 0.75 0 1 1 15.52 4.3 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6.71 9.38 A0.75 0.75 0 1 1 5.21 9.38 A0.75 0.75 0 1 1 6.71 9.38 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M18.79 9.38 A0.75 0.75 0 1 1 17.29 9.38 A0.75 0.75 0 1 1 18.79 9.38 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8.25 21.5 H15.75 A1.5 1.5 0 0 0 17.15 19.45 L13.5 11.5 H10.5 L6.85 19.45 A1.5 1.5 0 0 0 8.25 21.5 Z",
+    "M9.98 4.3 A0.75 0.75 0 1 1 8.48 4.3 A0.75 0.75 0 1 1 9.98 4.3 Z",
+    "M15.52 4.3 A0.75 0.75 0 1 1 14.02 4.3 A0.75 0.75 0 1 1 15.52 4.3 Z",
+    "M6.71 9.38 A0.75 0.75 0 1 1 5.21 9.38 A0.75 0.75 0 1 1 6.71 9.38 Z",
+    "M18.79 9.38 A0.75 0.75 0 1 1 17.29 9.38 A0.75 0.75 0 1 1 18.79 9.38 Z"
+  ],
+  "cutouts": [
+    "M8.2 16.5 H15.8"
+  ]
+}

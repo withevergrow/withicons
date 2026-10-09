@@ -4,6 +4,7 @@
 // the short way, words and choices cross-fade) instead of jumping; instant with prefers-reduced-motion.
 // Without a label the svg is named by what it shows ("Calendar date, March 17"); label="" makes it decorative.
 import { createElement, useEffect, useRef, useState } from 'react'
+import * as WithReact from 'react'
 import * as L from './core.js'
 
 const OWN = new Set(['name', 'variant', 'size', 'color', 'strokeWidth', 'absoluteStrokeWidth', 'label', 'vars', 'className', 'style', 'params', 'today', 'children', 'animate'])
@@ -14,6 +15,7 @@ const cssObj = s => {
   return o
 }
 const msOf = a => typeof a === 'number' && a >= 0 ? a : undefined
+let UID = 0
 
 /** A Live icon as an inline <svg>. Styles other than the bundled ones load on first use (an empty svg holds the space). */
 export function LiveIcon(props) {
@@ -22,6 +24,9 @@ export function LiveIcon(props) {
   const [, bump] = useState(0)
   const [frame, setFrame] = useState(null)
   const shown = useRef(null), ctl = useRef(null), svg = useRef(null)
+  // rich styles (gradients): this copy's own gradient ids (useId in React 18+, stable across SSR and hydration)
+  const uidRef = useRef(null)
+  const uid = WithReact.useId ? WithReact.useId() : uidRef.current || (uidRef.current = 'w' + (++UID))
   const ready = L.loaded(v)
   useEffect(() => {
     if (ready) return
@@ -63,7 +68,7 @@ export function LiveIcon(props) {
     })
   }, [key, on])
   useEffect(() => () => { if (ctl.current) ctl.current.cancel() }, [])
-  const o = { size, color, strokeWidth, absoluteStrokeWidth, vars, label }
+  const o = { size, color, strokeWidth, absoluteStrokeWidth, vars, label, idSuffix: uid }
   if (!meta || !ready) {
     if (name && !meta) console.warn(`with icons live: unknown live icon "${name}". Did you mean: ${L.suggest(name).join(', ')}?`)
     return createElement('svg', { xmlns: 'http://www.w3.org/2000/svg', width: size || 24, height: size || 24, viewBox: '0 0 24 24', 'aria-hidden': true, className, style, ...rest })

@@ -1,0 +1,9 @@
+{
+  "name": "avatar-monster",
+  "intent": "wobbles like jelly and blinks its one big eye",
+  "loop": { "preset": "jelly", "origin": [12,20.5], "amount": 0.6, "duration": 2.2 },
+  "hover": { "preset": "jelly", "origin": [12,20.5], "amount": 1.2 },
+  "parts": { "A": { "preset": "blink", "origin": [12,10.25], "amount": 0.8, "delay": 0.1 } },
+  "alt": [{ "preset": "bounce", "origin": [12,20.5] },{ "preset": "wiggle", "origin": [12,20.5] }],
+  "swap": [{ "to": "avatar-monster-horns", "effect": "morph" },{ "to": "avatar-monster-fluffy", "effect": "fade" },{ "to": "avatar-monster@solid", "effect": "scale" }]
+}

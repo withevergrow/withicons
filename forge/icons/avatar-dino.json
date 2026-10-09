@@ -1,0 +1,87 @@
+{
+  "name": "avatar-dino",
+  "category": "avatars",
+  "description": "A friendly dinosaur avatar, for playful profiles and kids.",
+  "aliases": [
+    "dino-avatar",
+    "dino",
+    "dinosaur",
+    "dinosaur-avatar",
+    "dino-face",
+    "trex",
+    "t-rex",
+    "rawr",
+    "dino-pfp"
+  ],
+  "tags": [
+    "avatar",
+    "dinosaur",
+    "character",
+    "cute",
+    "kids"
+  ],
+  "paths": [
+    {
+      "d": "M6 21 V12.5 C6 7.75 8.75 4.5 13 4.5 H16 C18.75 4.5 20.5 6.5 20.5 9 V10.5 C20.5 12.75 19 14 17 14 H12.5 C11.75 14 11.5 14.5 11.5 15.25 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M6 13 L3.25 14.25 L6 15.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 17.5 L3.25 18.75 L6 20.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 8.75 L4 8.25 L7.75 6.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 8.75 V9.25",
+      "plate": "A"
+    },
+    {
+      "d": "M18 7.5 H18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 11.25 Q16.5 12 18.5 11",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 21 V12.5 C6 7.75 8.75 4.5 13 4.5 H16 C18.75 4.5 20.5 6.5 20.5 9 V10.5 C20.5 12.75 19 14 17 14 H12.5 C11.75 14 11.5 14.5 11.5 15.25 V21 Z",
+    "M6 13 L3.25 14.25 L6 15.75 Z",
+    "M6 17.5 L3.25 18.75 L6 20.25 Z",
+    "M6.75 8.75 L4 8.25 L7.75 6.75 Z"
+  ],
+  "cutouts": [
+    "M13.25 9 A0.75 1 0 1 1 11.75 9 A0.75 1 0 1 1 13.25 9 Z",
+    "M19 7.5 A0.75 0.5 0 1 1 17.5 7.5 A0.75 0.5 0 1 1 19 7.5 Z",
+    "M14.5 11.25 Q16.5 12 18.5 11"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "face",
+    "reptile",
+    "jurassic",
+    "prehistoric",
+    "lizard",
+    "dragon",
+    "spikes",
+    "roar",
+    "kids",
+    "tyrannosaurus",
+    "stegosaurus"
+  ]
+}

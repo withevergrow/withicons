@@ -1,0 +1,64 @@
+{
+  "name": "cube",
+  "category": "objects",
+  "description": "A 3D cube, for 3D, products, models and blocks.",
+  "aliases": [
+    "box-3d",
+    "3d",
+    "three-d",
+    "3d-box",
+    "cuboid",
+    "3d-model",
+    "isometric-cube",
+    "block-3d",
+    "hexahedron"
+  ],
+  "tags": [
+    "3d",
+    "model",
+    "geometry",
+    "object",
+    "isometric"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L20.25 7.25 V16.75 L12 21.5 L3.75 16.75 V7.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3.75 7.25 L12 12 L20.25 7.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L20.25 7.25 V16.75 L12 21.5 L3.75 16.75 V7.25 Z"
+  ],
+  "cutouts": [
+    "M3.75 7.25 L12 12 L20.25 7.25",
+    "M12 12 V21.5"
+  ],
+  "synonyms": [
+    "3d model",
+    "isometric",
+    "solid",
+    "volume",
+    "geometry",
+    "ar",
+    "augmented reality",
+    "render",
+    "mesh",
+    "object",
+    "dice",
+    "sugar cube",
+    "product",
+    "dimension",
+    "three dimensional",
+    "blender",
+    "shape",
+    "voxel"
+  ]
+}

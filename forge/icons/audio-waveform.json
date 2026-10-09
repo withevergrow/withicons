@@ -1,0 +1,60 @@
+{
+  "name": "audio-waveform",
+  "category": "media",
+  "description": "A spiky audio waveform, for voice input, speech AI and audio recording.",
+  "aliases": [
+    "speech-wave",
+    "wave-form",
+    "voice-waveform",
+    "audio-signal",
+    "voice-mode",
+    "sound-graph",
+    "speech-signal"
+  ],
+  "tags": [
+    "audio",
+    "voice",
+    "sound",
+    "wave",
+    "speech",
+    "recording"
+  ],
+  "paths": [
+    {
+      "d": "M2 12 H4 L6.5 7.5 L9 17 L12 4 L15 20 L17.5 8.5 L19.5 13.5 L20.5 12 H22",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "waveform",
+    "sound wave",
+    "voice wave",
+    "voice input",
+    "voice mode",
+    "voice chat",
+    "speech to text",
+    "text to speech",
+    "tts",
+    "stt",
+    "transcribe",
+    "dictation",
+    "voice assistant",
+    "talk",
+    "listening",
+    "recording",
+    "record audio",
+    "sound",
+    "audio",
+    "frequency",
+    "oscilloscope",
+    "signal",
+    "pulse",
+    "spectrum",
+    "equalizer",
+    "podcast",
+    "voice memo",
+    "voice note"
+  ]
+}

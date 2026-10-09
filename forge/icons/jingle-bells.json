@@ -1,0 +1,89 @@
+{
+  "name": "jingle-bells",
+  "category": "christmas",
+  "description": "Two round jingle bells hanging from a bow, for Christmas.",
+  "aliases": [
+    "sleigh-bells",
+    "christmas-bells",
+    "xmas-bells",
+    "holiday-bells",
+    "jingle-bell",
+    "bells-with-bow"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "bells",
+    "jingle",
+    "jingle all the way",
+    "sleigh",
+    "chime",
+    "ring",
+    "carol",
+    "christmas carol",
+    "music",
+    "sound",
+    "ribbon",
+    "bow",
+    "celebration",
+    "jingel bells"
+  ],
+  "tags": [
+    "christmas",
+    "bells",
+    "music",
+    "holiday",
+    "sound"
+  ],
+  "paths": [
+    {
+      "d": "M2.89 15.64 L3.8 12.47 A3.6 3.6 0 0 1 10.72 14.45 L9.81 17.63 L10.34 19.03 L1.69 16.55 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.19 17.63 L13.28 14.45 A3.6 3.6 0 0 1 20.2 12.47 L21.11 15.64 L22.31 16.55 L13.66 19.03 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.58 17.37 A1.5 1.5 0 0 0 7.46 18.2",
+      "plate": "A"
+    },
+    {
+      "d": "M16.54 18.2 A1.5 1.5 0 0 0 19.42 17.37",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7.5 C10.5 5 7.75 4.5 7.75 6.25 C7.75 7.75 10.5 8 12 7.5 C13.5 8 16.25 7.75 16.25 6.25 C16.25 4.5 13.5 5 12 7.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M11.25 8.25 L9.75 9.25",
+      "plate": "S"
+    },
+    {
+      "d": "M12.75 8.25 L14.25 9.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M2.89 15.64 L3.8 12.47 A3.6 3.6 0 0 1 10.72 14.45 L9.81 17.63 L10.34 19.03 L1.69 16.55 Z",
+    "M14.19 17.63 L13.28 14.45 A3.6 3.6 0 0 1 20.2 12.47 L21.11 15.64 L22.31 16.55 L13.66 19.03 Z",
+    "M4.58 17.37 A1.5 1.5 0 0 0 7.46 18.2 Z",
+    "M16.54 18.2 A1.5 1.5 0 0 0 19.42 17.37 Z",
+    "M12 7.5 C10.5 5 7.75 4.5 7.75 6.25 C7.75 7.75 10.5 8 12 7.5 C13.5 8 16.25 7.75 16.25 6.25 C16.25 4.5 13.5 5 12 7.5 Z"
+  ],
+  "cutouts": [
+    "M1.69 16.55 L10.34 19.03",
+    "M13.66 19.03 L22.31 16.55",
+    "M5.16 13.17 A2.1 2.1 0 0 1 6.85 11.63",
+    "M14.81 14.33 A2.1 2.1 0 0 1 15.42 12.12"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "name": "avatar-man-bald",
+  "category": "avatars",
+  "description": "A friendly avatar of a bald man, for profiles.",
+  "aliases": [
+    "bald",
+    "bald-man",
+    "man-bald",
+    "bald-avatar",
+    "shaved-head",
+    "no-hair",
+    "baldie",
+    "hairless"
+  ],
+  "tags": [
+    "person",
+    "man",
+    "bald",
+    "avatar",
+    "face"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 10.5 A5.5 6 0 1 1 6.5 10.5 A5.5 6 0 1 1 17.5 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 10.5 V11",
+      "plate": "K"
+    },
+    {
+      "d": "M10 13.5 C11 14.5 13 14.5 14 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9 7.5 C9.5 6.75 10.25 6.25 11 6",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 21.5 C4.5 19.25 6.25 18 8.5 18 C9.75 18 10.75 18.75 12 18.75 C13.25 18.75 14.25 18 15.5 18 C17.75 18 19.5 19.25 19.5 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.75 9 C4.75 8.75 4.5 12.75 7 12.75",
+      "plate": "K"
+    },
+    {
+      "d": "M17.25 9 C19.25 8.75 19.5 12.75 17 12.75",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A5.5 6 0 1 1 6.5 10.5 A5.5 6 0 1 1 17.5 10.5 Z",
+    "M4.5 21.5 C4.5 19.25 6.25 18 8.5 18 C9.75 18 10.75 18.75 12 18.75 C13.25 18.75 14.25 18 15.5 18 C17.75 18 19.5 19.25 19.5 21.5 Z",
+    "M6.75 9 C4.75 8.75 4.5 12.75 7 12.75 Z",
+    "M17.25 9 C19.25 8.75 19.5 12.75 17 12.75 Z"
+  ],
+  "cutouts": [
+    "M10.25 10.75 A0.75 1 0 1 1 8.75 10.75 A0.75 1 0 1 1 10.25 10.75 Z",
+    "M15.25 10.75 A0.75 1 0 1 1 13.75 10.75 A0.75 1 0 1 1 15.25 10.75 Z",
+    "M10 13.5 C11 14.5 13 14.5 14 13.5"
+  ],
+  "synonyms": [
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "account",
+    "profile",
+    "member",
+    "contact",
+    "people",
+    "man",
+    "male",
+    "shaved",
+    "skinhead",
+    "buzz cut",
+    "alopecia",
+    "chemo",
+    "ears",
+    "shiny head",
+    "guy",
+    "dad",
+    "headshot",
+    "clean shaven"
+  ]
+}

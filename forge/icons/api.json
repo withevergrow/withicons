@@ -1,0 +1,84 @@
+{
+  "name": "api",
+  "category": "development",
+  "description": "An API connector block with ports, for integrations, endpoints and developer APIs.",
+  "aliases": [
+    "endpoint",
+    "interface",
+    "rest-api",
+    "api-connector",
+    "integration-api",
+    "developer-api",
+    "sdk",
+    "web-api",
+    "api-endpoint"
+  ],
+  "tags": [
+    "api",
+    "developer",
+    "integration",
+    "endpoint",
+    "connector"
+  ],
+  "paths": [
+    {
+      "d": "M10 6.5 H14 A2 2 0 0 1 16 8.5 V15.5 A2 2 0 0 1 14 17.5 H10 A2 2 0 0 1 8 15.5 V8.5 A2 2 0 0 1 10 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 12 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M16 9 H18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M16 15 H18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 12 A1.5 1.5 0 1 1 2.5 12 A1.5 1.5 0 1 1 5.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 9 A1.5 1.5 0 1 1 18.5 9 A1.5 1.5 0 1 1 21.5 9 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 15 A1.5 1.5 0 1 1 18.5 15 A1.5 1.5 0 1 1 21.5 15 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 6.5 H14 A2 2 0 0 1 16 8.5 V15.5 A2 2 0 0 1 14 17.5 H10 A2 2 0 0 1 8 15.5 V8.5 A2 2 0 0 1 10 6.5 Z",
+    "M5.5 12 A1.5 1.5 0 1 1 2.5 12 A1.5 1.5 0 1 1 5.5 12 Z",
+    "M21.5 9 A1.5 1.5 0 1 1 18.5 9 A1.5 1.5 0 1 1 21.5 9 Z",
+    "M21.5 15 A1.5 1.5 0 1 1 18.5 15 A1.5 1.5 0 1 1 21.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "application programming interface",
+    "rest",
+    "graphql",
+    "grpc",
+    "http api",
+    "json api",
+    "api key",
+    "api access",
+    "integrations",
+    "connect app",
+    "service",
+    "microservice",
+    "backend",
+    "request",
+    "response",
+    "ports",
+    "connector",
+    "mcp server",
+    "tool call",
+    "function calling",
+    "openapi",
+    "swagger"
+  ]
+}

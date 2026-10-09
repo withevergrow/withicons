@@ -10,7 +10,7 @@ import indexRaw from '../dist/data/search-index.json?text'
 import motionRaw from '../dist/data/motion.json?text'
 import { multiRaw, rangesRaw } from '#lambda-index'
 
-const STYLES = new Set(["line","solid","duo","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","pixel","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush"])
+const STYLES = new Set(["line","solid","duo","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","pixel","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush","clay","bento","suite","dock","liquid","chrome","soft3d","brutal","utsav","rangoli","halloween","christmas","lunar","valentine"])
 const url = f => new URL('./data/' + f, import.meta.url)
 const read = f => JSON.parse(fs.readFileSync(url(f), 'utf8'))
 const svgs = {}

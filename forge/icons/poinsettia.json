@@ -1,0 +1,87 @@
+{
+  "name": "poinsettia",
+  "category": "christmas",
+  "description": "A poinsettia flower with pointed veined bracts, for Christmas decor.",
+  "aliases": [
+    "christmas-flower",
+    "christmas-star-flower",
+    "xmas-flower",
+    "holiday-flower",
+    "euphorbia",
+    "flor-de-nochebuena"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "flower",
+    "plant",
+    "bloom",
+    "red flower",
+    "houseplant",
+    "floral",
+    "botanical",
+    "decor",
+    "decoration",
+    "nochebuena",
+    "mexico",
+    "winter flower",
+    "pointsettia",
+    "poinsetta"
+  ],
+  "tags": [
+    "christmas",
+    "flower",
+    "plant",
+    "holiday",
+    "nature"
+  ],
+  "paths": [
+    {
+      "d": "M9.88 9.09 Q9.13 4.53 12 2.5 Q14.87 4.53 14.12 9.09 Q18.22 6.97 21.04 9.06 Q19.99 12.42 15.42 13.11 Q18.71 16.36 17.58 19.69 Q14.07 19.73 12 15.6 Q9.93 19.73 6.42 19.69 Q5.29 16.36 8.58 13.11 Q4.01 12.42 2.96 9.06 Q5.78 6.97 9.88 9.09 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8.4 L12 5.4",
+      "plate": "A"
+    },
+    {
+      "d": "M15.42 10.89 L18.28 9.96",
+      "plate": "A"
+    },
+    {
+      "d": "M14.12 14.91 L15.88 17.34",
+      "plate": "A"
+    },
+    {
+      "d": "M9.88 14.91 L8.12 17.34",
+      "plate": "A"
+    },
+    {
+      "d": "M8.58 10.89 L5.72 9.96",
+      "plate": "A"
+    },
+    {
+      "d": "M13.25 12 A1.25 1.25 0 1 1 10.75 12 A1.25 1.25 0 1 1 13.25 12 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.88 9.09 Q9.13 4.53 12 2.5 Q14.87 4.53 14.12 9.09 Q18.22 6.97 21.04 9.06 Q19.99 12.42 15.42 13.11 Q18.71 16.36 17.58 19.69 Q14.07 19.73 12 15.6 Q9.93 19.73 6.42 19.69 Q5.29 16.36 8.58 13.11 Q4.01 12.42 2.96 9.06 Q5.78 6.97 9.88 9.09 Z"
+  ],
+  "cutouts": [
+    "M12 8.4 L12 5.4",
+    "M15.42 10.89 L18.28 9.96",
+    "M14.12 14.91 L15.88 17.34",
+    "M9.88 14.91 L8.12 17.34",
+    "M8.58 10.89 L5.72 9.96",
+    "M14.1 12 A2.1 2.1 0 1 1 9.9 12 A2.1 2.1 0 1 1 14.1 12 Z M13.25 12 A1.25 1.25 0 1 1 10.75 12 A1.25 1.25 0 1 1 13.25 12 Z"
+  ]
+}

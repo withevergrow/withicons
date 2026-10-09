@@ -1,0 +1,37 @@
+{
+  "name": "user-round",
+  "intent": "the person breathes calmly; nods hello on hover",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.6
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "user-circle",
+      "effect": "scale"
+    }
+  ]
+}

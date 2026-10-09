@@ -1,0 +1,22 @@
+{
+  "name": "jalebi",
+  "intent": "the syrupy coil spins round and round",
+  "loop": {
+    "preset": "spin",
+    "duration": 4
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "draw"
+    }
+  ]
+}

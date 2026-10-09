@@ -1,0 +1,10 @@
+{
+  "name": "avatar-unicorn",
+  "intent": "floats on a cloud and its horn twinkles with magic",
+  "loop": { "preset": "float", "amount": 0.7, "duration": 3 },
+  "hover": { "preset": "twinkle", "origin": [12,12] },
+  "parts": { "A": { "preset": "twinkle", "origin": [12,5], "amount": 0.8, "delay": 0.15 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "glow" },{ "preset": "tada", "origin": [12,21] }],
+  "swap": [{ "to": "avatar-unicorn@solid", "effect": "scale" },{ "to": "sparkles", "effect": "morph" }]
+}

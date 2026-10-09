@@ -1,0 +1,45 @@
+{
+  "name": "variable",
+  "intent": "the x spins in its brackets like a value being filled in",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.7,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "spin-once",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 1,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "braces",
+      "effect": "morph"
+    },
+    {
+      "to": "sigma",
+      "effect": "fade"
+    }
+  ]
+}

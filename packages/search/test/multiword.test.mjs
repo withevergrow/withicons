@@ -28,7 +28,7 @@ describe('several words combine their evidence', () => {
   })
   test('"choose food" -> food icons with a real score', () => {
     const r = engine.search('choose food', { limit: 5 })
-    assert.ok(r.every(x => ['utensils', 'salad', 'burger', 'pizza', 'soup', 'apple', 'chef-hat', 'cooking-pot'].includes(x.name)), r.map(x => x.name).join(', '))
+    assert.ok(r.every(x => ['utensils', 'salad', 'burger', 'pizza', 'soup', 'apple', 'chef-hat', 'cooking-pot', 'chopsticks'].includes(x.name)), r.map(x => x.name).join(', '))
     assert.ok(r[0].score > 30)
   })
   test('"yoga mat" -> fitness, not calculator / football (math, match)', () => {

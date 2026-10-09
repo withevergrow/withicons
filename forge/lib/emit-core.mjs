@@ -20,9 +20,59 @@ export const SVG_NS = 'http://www.w3.org/2000/svg'
 
 // ---------------------------------------------------------------- styles: order, palettes, counts
 // The ONE style order used everywhere (build, packages, search index, site data). Unknown styles sort last, by name.
-export const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
+export const STYLE_ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush',
+  'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
 // Styles that paint a default multi-colour palette: every colour is var(--with-<style>-<role>, #hex), the ink stays currentColor.
-export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
+export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal',
+  'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
+// Rich styles (forge/CONTRACT.md "Rich styles") may draw gradients: one ['defs', {}, [gradients]] node whose ids
+// (wg-<style>-<icon>-<n>) are referenced as url(#id). Every inline output makes those ids unique per rendered instance
+// (withUniq below); standalone files keep the deterministic ids. Detection is by data (hasDefs); this list is for docs.
+export const RICH_STYLES = ['glass', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
+// Split packages (jsDelivr serves at most 150 MB per package). @withicons/core and @withicons/classes keep the 20
+// older styles (glass included), so no import path or CDN URL of an older style changes. The run 12 styles live in
+// companions with the SAME layout (dist/svg/<style>/<name>.svg, dist/nodes/<style>.js, dist/<style>/<name>.css):
+//   STYLE_PACKAGE  the ONE style -> package map for styles with a package of their own (one or several styles each):
+//                  core files in dist/, class files in dist/classes/
+//   PLUS_STYLES    every other style after 'plush' in STYLE_ORDER: @withicons/core-plus and @withicons/classes-plus
+// Every other package (react, vue, svelte, angular, solid, web, static, dynamic, mcp) holds every style.
+export const STYLE_PACKAGE = {
+  soft3d: 'soft3d',
+  utsav: 'holiday', rangoli: 'holiday', halloween: 'holiday', christmas: 'holiday', lunar: 'holiday', valentine: 'holiday',
+}
+export const OWN_STYLES = Object.keys(STYLE_PACKAGE)
+// the run 12 styles: everything after 'plush' in STYLE_ORDER (so the list follows STYLE_ORDER), own-package styles excepted
+export const PLUS_STYLES = STYLE_ORDER.slice(STYLE_ORDER.indexOf('plush') + 1).filter(s => !OWN_STYLES.includes(s))
+export const isPlusStyle = style => PLUS_STYLES.includes(style)
+export const isOwnStyle = style => Object.prototype.hasOwnProperty.call(STYLE_PACKAGE, style)
+/** true for a package name from STYLE_PACKAGE ('soft3d', 'holiday'): core files in dist/, class files in dist/classes/ */
+export const isOwnPackage = pkg => Object.values(STYLE_PACKAGE).includes(pkg)
+/** The npm package (without scope) that holds a style's files of a split package ('core' or 'classes'):
+ *  cdnPkg('clay') -> 'core-plus', cdnPkg('soft3d', 'classes') -> 'soft3d', cdnPkg('line', 'classes') -> 'classes'. */
+export const cdnPkg = (style, base = 'core') => !SPLIT_BASES.includes(base) ? base
+  : (base === 'core' || base === 'classes') && isOwnStyle(style) ? STYLE_PACKAGE[style]
+  : isPlusStyle(style) || isOwnStyle(style) ? base + '-plus' : base
+// the packages that are split: core and classes (companions: -plus and the STYLE_PACKAGE packages), web and static
+// (every newer style, own-package ones included, in web-plus / static-plus: one package each keeps them under the limit)
+export const SPLIT_BASES = ['core', 'classes', 'web', 'static']
+/** true when a style's files of a split package live outside it */
+export const isAwayStyle = style => isPlusStyle(style) || isOwnStyle(style)
+/** That package's folder for those files, relative to the package root: 'dist' or (own packages' classes) 'dist/classes'. */
+export const cdnDir = (style, base = 'core') => base === 'classes' && isOwnStyle(style) ? 'dist/classes' : 'dist'
+/** CDN base URL (no trailing slash) of a style's files: cdnBase('clay', 'classes') -> https://…/@withicons/classes-plus@latest/dist */
+export const cdnBase = (style, base = 'core', version = 'latest') => `https://cdn.jsdelivr.net/npm/@withicons/${cdnPkg(style, base)}@${version}/${cdnDir(style, base)}`
+/** CDN URL of a standalone SVG in the package that holds the style. */
+export const cdnSvgUrl = (style, name, version = 'latest') => `${cdnBase(style, 'core', version)}/svg/${style}/${name}.svg`
+/** The packages a split base package's styles go to: { 'core': [...], 'core-plus': [...], soft3d: ['soft3d'] } */
+export const splitPackages = (styleNames, base = 'core') => {
+  const out = {}
+  for (const s of styleNames) (out[cdnPkg(s, base)] ||= []).push(s)
+  return out
+}
+// true when an IconNode list carries nested children (a defs node with gradients)
+export const hasDefs = nodes => Array.isArray(nodes) && nodes.some(n => Array.isArray(n[2]) && n[2].length)
+// Deep-map the attributes of an IconNode list (children included): component packages rename attributes per framework.
+export const mapNodes = (nodes, fn) => nodes.map(n => Array.isArray(n[2]) && n[2].length ? [n[0], fn(n[1]), mapNodes(n[2], fn)] : [n[0], fn(n[1])])
 export const styleRank = name => { const i = STYLE_ORDER.indexOf(name); return i < 0 ? STYLE_ORDER.length : i }
 export const sortStyles = (list, key = s => s.name) =>
   list.slice().sort((a, b) => styleRank(key(a)) - styleRank(key(b)) || (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0))
@@ -52,6 +102,56 @@ export const countText = ctx => `${ctx.icons.length} icons x ${ctx.styles.length
 export const totalText = ctx => (ctx.icons.length * ctx.styles.length).toLocaleString('en-US')
 export const liveStrokeStyles = ctx => ctx.styles.filter(s => typeof s.strokeWidth === 'number').map(s => s.name)
 export const paletteStyles = ctx => ctx.styles.filter(s => s.palette)
+
+// ---------------------------------------------------------------- compact icon data (package size)
+// IconNode lists written as JS source instead of JSON, for the packages that ship every style as code (react, vue,
+// solid, svelte, angular): identifier keys unquoted, numbers without a leading zero, and every attribute value that
+// repeats across one style (palette variables, class names, stroke attributes, paths drawn twice) declared ONCE as a
+// const ($0, $1, ...). Same data at runtime, about a fifth smaller, and bundlers still keep only the icons imported
+// (a const is side-effect free). nodePool(lists) -> { lit(nodes, used?), decl(only?, exported?), ids }
+//   lit(nodes, used)   the literal; adds every pooled const it references to the Set `used` (per-icon files import them)
+//   decl(only, exp)    'const $0 = "…"\n…' for all pooled values (or only the names in `only`); exp: 'export const'
+const POOL_MIN = 4
+// shared pools: values of at most SHARED_MAX chars that at least SHARED_USERS (or 1 in 50) icons use: colours, classes,
+// stroke attributes, never one icon's path, so a style's values module stays a few KB
+const SHARED_MAX = 80, SHARED_USERS = 3
+const keyLit = k => /^[A-Za-z_$][\w$]*$/.test(k) && k !== '__proto__' ? k : J(k)
+const numLit = v => { const s = J(v); return s.replace(/^(-?)0\./, '$1.') }
+//   shared             per-icon files import the pool from one small values module: pool only short values that
+//                      many lists use (SHARED_MAX, SHARED_USERS)
+//   local(nodes, used) for a per-icon file: { decl, lit } with the values this one icon repeats (a path drawn twice) as
+//                      file-local consts (_0, _1, ...) and the pool's values as imports (their names added to `used`)
+export function nodePool(lists, { prefix = '$', shared = false, skip = null } = {}) {
+  const count = new Map(), users = new Map(), last = new Map()   // users: how many lists use a value
+  const visit = (nodes, li) => { for (const n of nodes) {
+    for (const v of Object.values(n[1] || {})) if (typeof v === 'string' && v.length >= POOL_MIN) {
+      count.set(v, (count.get(v) || 0) + 1)
+      if (last.get(v) !== li) { last.set(v, li); users.set(v, (users.get(v) || 0) + 1) }
+    }
+    if (Array.isArray(n[2])) visit(n[2], li)
+  } }
+  lists.forEach((l, li) => visit(l, li))
+  // biggest saving first (ties: by value), so the shortest names go to the values that repeat most: deterministic
+  const cand = [...count].filter(([v, c]) => c > 1 && !(skip && skip.has(v)) && (!shared || (v.length <= SHARED_MAX && users.get(v) >= Math.max(SHARED_USERS, lists.length / 50)))).map(([v, c]) => [v, c, c * (J(v).length - 3) - J(v).length - 8])
+    .filter(x => x[2] > 0).sort((a, b) => b[2] - a[2] || (a[0] < b[0] ? -1 : 1))
+  const ids = new Map(cand.map(([v], i) => [v, prefix + i.toString(36)]))
+  const val = (v, used, more) => {
+    if (typeof v === 'string') {
+      const id = ids.get(v)
+      if (id) { if (used) used.add(id); return id }
+      return (more && more.get(v)) || J(v)
+    }
+    return typeof v === 'number' ? numLit(v) : J(v)
+  }
+  const obj = (o, used, more) => '{' + Object.entries(o || {}).filter(([, v]) => v !== undefined).map(([k, v]) => keyLit(k) + ':' + val(v, used, more)).join(',') + '}'
+  const lit = (nodes, used, more) => '[' + nodes.map(n => '[' + J(n[0]) + ',' + obj(n[1], used, more) + (Array.isArray(n[2]) ? ',' + lit(n[2], used, more) : '') + ']').join(',') + ']'
+  const decl = (only, exp) => [...ids].filter(([, id]) => !only || only.has(id)).map(([v, id]) => `${exp ? 'export ' : ''}const ${id} = ${J(v)}`).join('\n')
+  const local = (nodes, used) => {
+    const own = nodePool([nodes], { prefix: '_', skip: ids })
+    return { decl: own.decl(), lit: lit(nodes, used, own.ids) }
+  }
+  return { lit, decl, ids, local }
+}
 
 // Collects files for one dist directory, then writes them in parallel and deletes stale files
 // (icons that were renamed or removed) so deep imports never serve outdated output.
@@ -153,6 +253,8 @@ export function basePkg(ctx, name, description, keywords) {
   }
 }
 export function writePkg(ctx, dir, pkg, readme) {
+  // every package runs its tests, at least test/size.test.mjs (the jsDelivr size budget, scripts/package-budget.mjs)
+  if (!pkg.scripts?.test) pkg = { ...pkg, scripts: { ...pkg.scripts, test: 'node --test test/*.test.mjs' } }
   ctx.write(`packages/${dir}/package.json`, JSON.stringify(pkg, null, 2) + '\n')
   ctx.write(`packages/${dir}/README.md`, readme)
   ctx.write(`packages/${dir}/LICENSE`, LICENSE(FIRST_YEAR))   // fixed year: output must not depend on the clock
@@ -189,8 +291,10 @@ export type IconName = ${unionOf(ctx.icons.map(i => i.name))}
 export type IconAlias = ${unionOf(unamb)}
 /** The ${ctx.styles.length} styles. 'line' is the default. */
 export type StyleName = ${unionOf(ctx.styles.map(s => s.name))}
-/** Icon data: a list of [tag, attributes] pairs rendered inside a 24x24 <svg>. */
-export type IconNode = [tag: string, attrs: Record<string, string | number>][]
+/** One element: [tag, attributes], or [tag, attributes, children] for the gradient definitions of rich styles. */
+export type IconNodeElement = [tag: string, attrs: Record<string, string | number>, children?: IconNodeElement[]]
+/** Icon data: a list of [tag, attributes] pairs rendered inside a 24x24 <svg> (rich styles start with ['defs', {}, [...]]). */
+export type IconNode = IconNodeElement[]
 `
 }
 
@@ -268,6 +372,32 @@ function withLookup(input, has, names, aliases) {
 }
 export const LOOKUP_SRC = [withLevenshtein, withKeys, withNearest, withLookup].map(f => f.toString()).join('\n')
 
+// Gives the gradient ids of one rendered icon a per-instance suffix, and every url(#id) that points at them, so two
+// copies of a rich icon on one page never paint with each other's gradients (or palettes). Flat nodes come back as is.
+// Serialized into every component runtime (UNIQ_SRC); keep it self-contained.
+function withUniq(iconNode, suffix) {
+  const sfx = '-' + String(suffix).replace(/[^\w-]/g, '')
+  const fix = v => typeof v === 'string' && v.indexOf('url(#') >= 0 ? v.replace(/url\(#([^)\s]+)\)/g, 'url(#$1' + sfx + ')') : v
+  const walk = list => list.map(n => {
+    const a = n[1]
+    let b = null
+    for (const k in a) {
+      const v = k === 'id' ? a[k] + sfx : fix(a[k])
+      if (v !== a[k]) { if (!b) b = Object.assign({}, a); b[k] = v }
+    }
+    return n[2] ? [n[0], b || a, walk(n[2])] : b ? [n[0], b] : n
+  })
+  return walk(iconNode)
+}
+export const UNIQ_SRC = String(withUniq)
+// The same for inner SVG markup (strings): id="x" and url(#x) get the suffix. ES5 (classic scripts serialize it too).
+export function withUniqMarkup(markup, suffix) {
+  var s = String(markup == null ? '' : markup)
+  if (s.indexOf('url(#') < 0 && s.indexOf(' id="') < 0) return s
+  var sfx = '-' + String(suffix).replace(/[^\w-]/g, '')
+  return s.replace(/(\sid="|url\(#)([^")\s]+)/g, '$1$2' + sfx)
+}
+
 // Runs in the browser (inlined by its source into cdn.js, with-loader.js, with-icons.js and the dynamic CDN scripts).
 // A bare package URL (https://cdn.jsdelivr.net/npm/@withicons/web, …/web@latest, …/web@0.2, unpkg.com/@withicons/web)
 // serves the package's "jsdelivr" / "unpkg" entry file, but relative URLs then resolve against …/npm/@withicons/.
@@ -335,8 +465,9 @@ function withToSvg(iconNode, style, options) {
   if (o.title) a.role = 'img'
   else a['aria-hidden'] = 'true'
   const attrs = obj => Object.keys(obj).filter(k => obj[k] != null && obj[k] !== false).map(k => ' ' + k + '="' + esc(obj[k]) + '"').join('')
-  let out = '<svg' + attrs(a) + '>' + (o.title ? '<title>' + esc(o.title) + '</title>' : '') +
-    iconNode.map(n => '<' + n[0] + attrs(n[1]) + '/>').join('') + '</svg>'
+  const el = n => '<' + n[0] + attrs(n[1]) + (n[2] && n[2].length ? '>' + n[2].map(el).join('') + '</' + n[0] + '>' : '/>')
+  const nodes = o.idSuffix != null && o.idSuffix !== '' ? withUniq(iconNode, o.idSuffix) : iconNode
+  let out = '<svg' + attrs(a) + '>' + (o.title ? '<title>' + esc(o.title) + '</title>' : '') + nodes.map(el).join('') + '</svg>'
   // flat: CSS variables -> their default colours (for files, <img>, design tools and rasterizers)
   if (o.flat) { let p; do { p = out; out = out.replace(/var\(\s*--[\w-]+\s*,\s*([^()]*?)\s*\)/g, '$1').replace(/var\(\s*--[\w-]+\s*\)/g, 'currentColor') } while (out !== p) }
   return out
@@ -347,7 +478,8 @@ function withToSvg(iconNode, style, options) {
 export default async function emit(ctx) {
   const P = 'packages/core'
   const out = distWriter(ctx, P + '/dist', { keep: ['palettes'] })   // dist/palettes/** belongs to emit-palettes
-  const W = (rel, text) => out.add(rel.slice(P.length + 6), text)
+  const W0 = (rel, text) => out.add(rel.slice(P.length + 6), text)
+  const W = W0
   const styleNames = ctx.styles.map(s => s.name)
   const meta = ctx.icons.map(i => ({
     name: i.name, category: i.category, description: i.description, aliases: i.aliases, tags: i.tags,
@@ -355,11 +487,22 @@ export default async function emit(ctx) {
   }))
   const aliases = {}
   for (const k of Object.keys(ctx.aliasIndex).sort()) aliases[k] = ctx.aliasIndex[k]
-  const stylesMeta = ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: !!s.palette, vars: s.vars || {} }))
+  const stylesMeta = ctx.styles.map(s => ({ name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: !!s.palette, vars: s.vars || {}, package: '@withicons/' + cdnPkg(s.name) }))
+  // the run 12 styles' files go to the companion packages (core-plus, and a package per OWN_STYLES style)
+  const homes = splitPackages(styleNames, 'core')
+  const writers = { core: out }
+  // an own-style package also holds the class icons (emit-classes writes its dist/classes/)
+  for (const p of Object.keys(homes)) if (p !== 'core') writers[p] = distWriter(ctx, `packages/${p}/dist`, { keep: isOwnPackage(p) ? ['classes'] : [] })
+  const plusNames = homes['core-plus'] || [], baseNames = homes.core || []
   const categories = [...new Set(meta.map(m => m.category))]
 
   let svgCount = 0
   for (const s of styleNames) {
+    const home = cdnPkg(s)
+    const W = home === 'core' ? W0 : (rel, text) => writers[home].add(rel.slice(P.length + 6), text)
+    const NAME = '@withicons/' + home
+    // companions have no index of their own: their type files take the shared types from @withicons/core
+    const TYPES = ext => home === 'core' ? `../index.${ext}` : '@withicons/core'
     const nodes = {}
     for (const i of ctx.icons) {
       const r = renderOf(ctx, i, s)
@@ -370,23 +513,29 @@ export default async function emit(ctx) {
     // ESM: one named export per icon (PascalCase, like the component packages) so a bundler keeps only the icons you
     // import: `import { Home } from '@withicons/core/nodes/line'` is ~1 KB. `nodes` / default (keyed by canonical name)
     // reference the same constants, so they cost nothing when unused.
+    // compact JS (nodePool): the values the style repeats (palette variables, classes) are declared once
     const list = ctx.icons.filter(i => nodes[i.name])
-    const consts = list.map(i => `const ${i.pascal} = ${J(nodes[i.name])}`).join('\n')
+    const pool = nodePool(list.map(i => nodes[i.name]))
+    const consts = (pool.ids.size ? pool.decl() + '\n' : '') + list.map(i => `const ${i.pascal} = ${pool.lit(nodes[i.name])}`).join('\n')
     const map = `{ ${list.map(i => `${J(i.name)}: ${i.pascal}`).join(', ')} }`
     const styleJson = J(stylesMeta.find(x => x.name === s))
-    W(`${P}/dist/nodes/${s}.js`, `// @withicons/core ${ctx.version} — ${s} IconNode data\nconst style = ${styleJson}\n${consts}\n` +
+    W(`${P}/dist/nodes/${s}.js`, `// ${NAME} ${ctx.version} — ${s} IconNode data\nconst style = ${styleJson}\n${consts}\n` +
       `/** every ${s} icon, keyed by canonical name */\nconst nodes = ${map}\n` +
       `export { style, nodes, ${list.map(i => i.pascal).join(', ')} }\nexport default nodes\n`)
     // CJS: the canonical-name map is module.exports; style, nodes, default and the PascalCase names are non-enumerable,
     // so Object.keys(require('@withicons/core/nodes/line')) is exactly the icon names.
-    const pascalMap = J(Object.fromEntries(list.map(i => [i.name, i.pascal])))
-    W(`${P}/dist/nodes/${s}.cjs`, `'use strict'\n// @withicons/core ${ctx.version} — ${s} IconNode data\nconst style = ${styleJson}\nconst nodes = ${J(nodes)}\n` +
-      `const PASCAL = ${pascalMap}\nconst hide = (k, v) => Object.defineProperty(nodes, k, { value: v, enumerable: false })\n` +
-      `for (const k of Object.keys(nodes)) hide(PASCAL[k], nodes[k])\nhide('style', style)\nhide('nodes', nodes)\nhide('default', nodes)\nhide('__esModule', true)\nmodule.exports = nodes\n`)
+    // the data lives once, in the ES module next to it: require() loads it (Node 20.19+ / 22.12+, every bundler). A second
+    // copy here would push the CDN packages over jsDelivr's 150 MB limit. Same API as before: the canonical-name map, with
+    // style, nodes, default and the PascalCase names non-enumerable.
+    W(`${P}/dist/nodes/${s}.cjs`, `'use strict'\n// ${NAME} ${ctx.version} — ${s} IconNode data for require(): loads ./${s}.js (ES module)\n` +
+      `let m\ntry { m = require('./${s}.js') } catch (e) {\n` +
+      `  if (e && (e.code === 'ERR_REQUIRE_ESM' || e.code === 'ERR_REQUIRE_ASYNC_MODULE')) throw new Error(${J(`${NAME}/nodes/${s}: require() needs Node 20.19+ or 22.12+ (it loads the ES module next to it). Use import, or a newer Node.`)})\n` +
+      `  throw e\n}\nconst nodes = Object.assign({}, m.nodes)\nconst hide = (k, v) => Object.defineProperty(nodes, k, { value: v, enumerable: false })\n` +
+      `for (const k of Object.keys(m)) if (k !== 'nodes' && k !== 'style' && k !== 'default') hide(k, m[k])\nhide('style', m.style)\nhide('nodes', nodes)\nhide('default', nodes)\nhide('__esModule', true)\nmodule.exports = nodes\n`)
     const named = list.map(i => `/** ${i.name} — ${i.description.replace(/\*\//g, '')} */\nexport declare const ${i.pascal}: IconNode`).join('\n')
-    const dts = ext => `import type { IconName, IconNode, StyleMeta } from '../index.${ext}'\n/** ${s} style metadata */\nexport declare const style: StyleMeta\n/** IconNode data for every icon in the ${s} style, keyed by canonical name. Prefer the named exports to keep bundles small. */\nexport declare const nodes: Record<IconName, IconNode>\n${named}\n`
+    const dts = ext => `import type { IconName, IconNode, StyleMeta } from '${TYPES(ext)}'\n/** ${s} style metadata */\nexport declare const style: StyleMeta\n/** IconNode data for every icon in the ${s} style, keyed by canonical name. Prefer the named exports to keep bundles small. */\nexport declare const nodes: Record<IconName, IconNode>\n${named}\n`
     W(`${P}/dist/nodes/${s}.d.ts`, dts('js') + 'export default nodes\n')
-    W(`${P}/dist/nodes/${s}.d.cts`, `import type { IconName, IconNode, StyleMeta } from '../index.cjs'\ntype Nodes = Record<IconName, IconNode>\n` +
+    W(`${P}/dist/nodes/${s}.d.cts`, `import type { IconName, IconNode, StyleMeta } from '${TYPES('cjs')}'\ntype Nodes = Record<IconName, IconNode>\n` +
       `type Named = { ${list.map(i => `${i.pascal}: IconNode`).join('; ')} }\n` +
       `/** IconNode data for every icon in the ${s} style, keyed by canonical name (and by PascalCase name). */\ndeclare const nodes: Nodes & Named & { nodes: Nodes; style: StyleMeta; default: Nodes }\nexport = nodes\n`)
   }
@@ -412,6 +561,7 @@ function byName() {
 ${LOOKUP_SRC}
 ${withScore}
 ${withSearch}
+${UNIQ_SRC}
 ${withToSvg}
 /** Resolve a name or alias to its icon. Throws on ambiguous aliases and unknown names. */
 function resolve(name) { const m = byName(); return m[withLookup(name, k => k in m, iconNames, aliases)] }
@@ -443,6 +593,8 @@ export interface StyleMeta {
   palette: boolean
   /** CSS custom properties this style reads, with their defaults, e.g. { '--with-duo': 'currentColor' }. */
   vars: Record<string, string>
+  /** The package with this style's SVG files and IconNode data: '@withicons/core' or '@withicons/core-plus'. */
+  package: string
 }
 export interface IconMeta {
   name: IconName
@@ -468,6 +620,11 @@ export interface ToSvgOptions {
   class?: string
   /** Replace CSS variables (palette colours, --with-duo, --with-accent) with their default values. For files, <img> and rasterizers. */
   flat?: boolean
+  /**
+   * Appended to the gradient ids of rich styles (and to every url(#id) that points at them). Give each copy you put
+   * inline in one page its own value (e.g. a counter); files and <img> need none.
+   */
+  idSuffix?: string | number
 }
 /** Error thrown by resolve(): code 'WITH_AMBIGUOUS_ICON' (see candidates) or 'WITH_UNKNOWN_ICON' (see suggestions). */
 export interface IconResolveError extends Error {
@@ -502,7 +659,7 @@ export declare function toSvg(iconNode: IconNode, style?: StyleName, options?: T
   W(`${P}/dist/index.d.cts`, dts)
 
   const ex = { '.': dual('dist/index') }
-  for (const s of styleNames) ex[`./nodes/${s}`] = dual(`dist/nodes/${s}`)
+  for (const s of baseNames) ex[`./nodes/${s}`] = dual(`dist/nodes/${s}`)
   ex['./svg/*'] = './dist/svg/*'
   ex['./icons.json'] = './dist/icons.json'
   ex['./aliases.json'] = './dist/aliases.json'
@@ -513,21 +670,94 @@ export declare function toSvg(iconNode: IconNode, style?: StyleName, options?: T
   ex['./dist/*'] = './dist/*'
   ex['./package.json'] = './package.json'
   const tv = {}
-  for (const s of styleNames) tv[`nodes/${s}`] = [`./dist/nodes/${s}.d.ts`]
+  for (const s of baseNames) tv[`nodes/${s}`] = [`./dist/nodes/${s}.d.ts`]
   tv['palettes/*'] = ['./dist/palettes/*']   // TypeScript without "exports" support (moduleResolution node10)
   const pkg = {
-    ...basePkg(ctx, '@withicons/core', `${countText(ctx)} as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.`, ['svg-icons', 'icon-search', 'multicolor-icons', 'color-palettes', ...styleNames]),
+    ...basePkg(ctx, '@withicons/core', `${countText(ctx)} as standalone SVGs, IconNode data, metadata, colour palettes, alias resolution and search.`, ['svg-icons', 'icon-search', 'multicolor-icons', 'color-palettes', ...baseNames]),
     type: 'module', sideEffects: false,
     main: './dist/index.cjs', module: './dist/index.js', types: './dist/index.d.ts',
     exports: ex, typesVersions: { '*': tv },
     files: ['dist', 'README.md', 'LICENSE'],
+    scripts: { test: 'node --test test/*.test.mjs' },
   }
   await out.flush()
   writePkg(ctx, 'core', pkg, coreReadme(ctx))
-  return `${svgCount} svgs, ${meta.length} icons, ${Object.keys(aliases).length} aliases, nodes for ${styleNames.length} styles`
+  // companions: the run 12 styles' SVG files and IconNode data (same paths as in core)
+  for (const [p, list] of Object.entries(homes)) {
+    if (p === 'core') continue
+    const own = isOwnPackage(p)
+    const pex = {}
+    // an own-style package: the bare import is its IconNode data, './classes/*' its CSS class icons (emit-classes)
+    if (own && list.length === 1) pex['.'] = dual(`dist/nodes/${list[0]}`)
+    for (const st of list) pex[`./nodes/${st}`] = dual(`dist/nodes/${st}`)
+    pex['./svg/*'] = './dist/svg/*'
+    if (own) pex['./classes/*'] = './dist/classes/*'
+    pex['./dist/*'] = './dist/*'
+    pex['./package.json'] = './package.json'
+    const ptv = {}
+    for (const st of list) ptv[`nodes/${st}`] = [`./dist/nodes/${st}.d.ts`]
+    const desc = own
+      ? `${list.length === 1 ? `The ${list[0]} style` : `The ${p} styles (${list.join(', ')})`} of with icons (${ctx.icons.length} icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.`
+      : `${list.length} newer with icons styles (${list.join(', ')}) for ${ctx.icons.length} icons: standalone SVGs and IconNode data. Companion of @withicons/core.`
+    const ppkg = {
+      ...basePkg(ctx, '@withicons/' + p, desc, ['svg-icons', 'multicolor-icons', 'gradient-icons', ...list, ...(own ? ['css-icons'] : [])]),
+      type: 'module', sideEffects: own ? ['*.css'] : false,
+      ...(own && list.length === 1 ? { main: `./dist/nodes/${list[0]}.cjs`, module: `./dist/nodes/${list[0]}.js`, types: `./dist/nodes/${list[0]}.d.ts` } : {}),
+      // the bare CDN URL shows the package manifest instead of a 404
+      jsdelivr: './package.json', unpkg: './package.json',
+      exports: pex, typesVersions: { '*': ptv },
+      files: ['dist', 'README.md', 'LICENSE'],
+      dependencies: { '@withicons/core': ctx.version },
+    }
+    await writers[p].flush()
+    writePkg(ctx, p, ppkg, companionReadme(ctx, p, list))
+  }
+  return `${svgCount} svgs (${Object.entries(homes).filter(([p]) => p !== 'core').map(([p, l]) => `${l.length} in ${p}`).join(', ')}), ${meta.length} icons, ${Object.keys(aliases).length} aliases, nodes for ${styleNames.length} styles`
 }
 
+function companionReadme(ctx, pkg, list) {
+  const ex = list[0], own = isOwnPackage(pkg), N = '@withicons/' + pkg, t = '`', fence = '```'
+  const one = own && list.length === 1, nodesPath = one ? N : `${N}/nodes/${ex}`
+  return `# ${N}
+
+${one ? `The ${t}${ex}${t} style` : `${list.length} ${own ? '' : 'newer '}styles (${list.map(x => t + x + t).join(', ')})`} of with icons for all ${ctx.icons.length} icons:
+standalone SVG files and IconNode data${own ? ', plus their CSS class icons' : ''}, laid out like [${t}@withicons/core${t}](https://www.npmjs.com/package/@withicons/core),
+which holds the older styles and the shared API (${t}toSvg${t}, ${t}resolve${t}, ${t}search${t}, metadata, palettes; its ${t}styles.json${t}
+says which package holds each style). The newest styles have packages of their own because jsDelivr serves at most 150 MB per package.
+
+${fence}bash
+npm i @withicons/core ${N}
+${fence}
+
+${fence}js
+import { toSvg } from '@withicons/core'
+import { Home } from '${nodesPath}'
+toSvg(Home, '${ex}', { size: 32, idSuffix: 'a' })   // gradients: give each inline copy its own idSuffix
+import url from '${N}/svg/${ex}/home.svg'
+${fence}
+
+CDN: ${t}https://cdn.jsdelivr.net/npm/${N}@latest/dist/svg/${ex}/home.svg${t}
+
+| path | contents |
+|---|---|
+| ${t}dist/svg/<style>/<name>.svg${t} | standalone SVG (CSS variables flattened to their defaults) |
+| ${t}dist/nodes/<style>.js${t} (${t}.cjs${t}) | IconNode data: one tree-shakable named export per icon plus ${t}nodes${t} / default |
+${own ? `| ${t}dist/classes/with-<style>.css${t}, ${t}dist/classes/<style>/<name>.css${t} | CSS class icons (${t}<i class="with with-home with-${ex}">${t}); the @withicons/classes loader finds them by itself |
+` : ''}
+Every framework package (${t}@withicons/react${t}, ${t}vue${t}, ${t}svelte${t}, ${t}angular${t}, ${t}solid${t}) and ${t}@withicons/web${t}, ${t}@withicons/static${t}
+hold every style, these included.
+${gradientDoc(ctx)}
+MIT licensed. [withicons.com](https://withicons.com) · [GitHub](https://github.com/withevergrow/withicons) · Powered by [Evergrow](https://withevergrow.com).
+`
+}
+
+
 function coreReadme(ctx) {
+  const plus = ctx.styles.map(s => s.name).filter(n => cdnPkg(n) !== 'core')
+  const plusOnly = plus.filter(isPlusStyle)
+  // own packages: [package, [styles]] ('soft3d' -> ['soft3d'], 'holiday' -> ['utsav', ...])
+  const own = Object.entries(splitPackages(plus.filter(isOwnStyle), 'core'))
+  const camel = x => x[0].toUpperCase() + x.slice(1)
   const styles = ctx.styles.map(s => '`' + s.name + '`').join(', ')
   return `# @withicons/core
 
@@ -559,13 +789,32 @@ ${ctx.styles.some(s => s.name === 'kawaii') ? "toSvg(kawaii[resolve('bin').name]
 | \`dist/icons.json\` | \`[{ name, category, description, aliases, tags, styles }]\` |
 | \`dist/aliases.json\` | \`{ alias: [canonical names] }\` (more than one name = ambiguous) |
 | \`dist/styles.json\` | \`[{ name, title, kind, description, strokeWidth, root, palette, vars }]\` |
-| \`dist/nodes/<style>.js\` | IconNode data (\`[tag, attrs][]\`, keeps the CSS variables): one tree-shakable named export per icon (\`Home\`, \`ArrowRight\`) plus \`nodes\` / default \`{ [name]: IconNode }\` |
+| \`dist/nodes/<style>.js\` | IconNode data (\`[tag, attrs][]\`; gradient styles add one \`['defs', {}, [...]]\` node with children; keeps the CSS variables): one tree-shakable named export per icon (\`Home\`, \`ArrowRight\`) plus \`nodes\` / default \`{ [name]: IconNode }\` |
 | \`dist/palettes/<name>.json\` | \`{ name, auto, palettes: [{ id, name, tags, colors }] }\`: colour palettes picked for that icon (see below) |
 | \`dist/palettes/index.json\` | \`{ roles, roleLabels, tags, icons: { [name]: { count, auto, tags } } }\` |
 | \`dist/palettes/palette-map.mjs\` (import it as \`@withicons/core/palettes/palette-map.js\`) | \`rolesFor\`, \`applyPalette\`, \`bakePalette\` (also \`palette-map.cjs\` and \`palette-map.d.ts\`) |
 
 Import a file: \`import url from '@withicons/core/svg/solid/home.svg'\`.
 CDN: \`https://cdn.jsdelivr.net/npm/@withicons/core@latest/dist/svg/line/home.svg\`
+${plus.length ? `
+### Where the newest styles live
+
+jsDelivr serves at most 150 MB per package, so the SVG files and IconNode data of the newest styles live in companion
+packages with the same paths: ${plusOnly.length ? `${plusOnly.map(s => '\`' + s + '\`').join(', ')} in
+[\`@withicons/core-plus\`](https://www.npmjs.com/package/@withicons/core-plus)` : ''}${plusOnly.length && own.length ? ', and ' : ''}${own.map(([p, l]) => `${l.map(x => '\`' + x + '\`').join(', ')} in [\`@withicons/${p}\`](https://www.npmjs.com/package/@withicons/${p})`).join(', ')}.
+This package keeps their metadata (\`styles\`; \`styles.json\` names each style's \`package\`) and \`toSvg\` draws them:
+
+\`\`\`bash
+${plusOnly.length ? 'npm i @withicons/core-plus\n' : ''}${own.map(([p]) => `npm i @withicons/${p}\n`).join('')}\`\`\`
+
+\`\`\`js
+${plusOnly.length ? `import { Home } from '@withicons/core-plus/nodes/${plusOnly[0]}'
+toSvg(Home, '${plusOnly[0]}')
+// CDN: https://cdn.jsdelivr.net/npm/@withicons/core-plus@latest/dist/svg/${plusOnly[0]}/home.svg
+` : ''}${own.map(([p, l]) => `import { Home as ${camel(l[0])}Home } from '@withicons/${l.length === 1 ? p : p + '/nodes/' + l[0]}'
+// CDN: https://cdn.jsdelivr.net/npm/@withicons/${p}@latest/dist/svg/${l[0]}/home.svg
+`).join('')}\`\`\`
+` : ''}
 
 ## API
 
@@ -652,6 +901,20 @@ ${rows}
 
 Inline SVG (components, \`<with-icon>\`, sprites, IconNode data) keeps the variables. Standalone \`.svg\` files have them
 flattened to the defaults, because \`<img>\`, design tools and rasterizers cannot see CSS.
+${gradientDoc(ctx)}`
+}
+
+// The styles of this build that draw SVG gradients (rich styles), found in the renders
+export const gradientStyles = ctx => ctx.styles.filter(s => ctx.icons.some(i => i.render[s.name] && hasDefs(i.render[s.name].nodes))).map(s => s.name)
+function gradientDoc(ctx) {
+  const g = gradientStyles(ctx)
+  if (!g.length) return ''
+  return `
+${g.map(s => '`' + s + '`').join(', ')} draw real SVG gradients: a \`<defs>\` of \`linearGradient\` / \`radialGradient\` whose stop
+colours are the same CSS variables, so palettes and \`--with-*\` overrides recolour them too. Every inline copy gets its own
+gradient ids (components, \`<with-icon>\`, \`with-icons.js\`), so one page can show the same icon many times in different
+colours. When you inline SVG strings yourself, pass \`idSuffix\` (\`toSvg\` in \`@withicons/core\`, \`svg\` / \`loadSvg\` in
+\`@withicons/web\`, \`render\` in \`@withicons/dynamic\`) with a different value per copy. Files and \`<img>\` need nothing.
 `
 }
 
@@ -704,7 +967,9 @@ They work with every style and every package because they animate the element th
 //   dist/base.{js,cjs,d.ts}       createWithIcon(name, style, displayName, iconNode)
 //   dist/meta.{js,cjs}            iconNames, styleNames, aliases
 //   dist/<style>/index.{js,cjs}   ONE module per style holding all its icons (/*#__PURE__*/ consts, so bundlers keep
-//                                 only what is imported; Node, Jest and Vitest parse one file instead of 500)
+//                                 only what is imported; Node, Jest and Vitest parse one file instead of 500); the
+//                                 drawings are compact JS (nodePool: repeated values once), the .cjs a thin require()
+//                                 of the .js (thinCjs) or, for solid, both formats read them from <style>/nodes.js
 //   dist/<style>/index.{d.ts,d.cts}
 //   dist/<style>/icons/<name>.js  deep import path: re-exports one icon of the style module (all typed by <style>/deep.d.ts)
 //   dist/icon-lazy.{js,d.ts}      the root's generic <Icon>: default style eager, any other style loaded on first use
@@ -749,7 +1014,7 @@ export async function emitComponentPackage(ctx, spec) {
   W(`${P}/types.d.ts`, types)
   W(`${P}/types.d.cts`, types)
 
-  const baseBody = `const DEFAULT_STYLE = ${J(D)}\nconst STYLES = ${J(styleTable(ctx, spec.mapAttrs))}\n${spec.baseSrc}\n`
+  const baseBody = `const DEFAULT_STYLE = ${J(D)}\nconst STYLES = ${J(styleTable(ctx, spec.mapAttrs))}\n${UNIQ_SRC}\n${spec.baseSrc}\n`
   W(`${P}/base.js`, `${header}${spec.importEsm}\n${baseBody}export { createWithIcon, STYLES as styles }\n`)
   W(`${P}/base.cjs`, `'use strict'\n${header}${spec.importCjs}\n${baseBody}exports.createWithIcon = createWithIcon\nexports.styles = STYLES\n`)
   const baseDts = ext => `import type { WithIcon, IconNode, StyleName } from './types.${ext}'\n/** Build a component from IconNode data (use it for your own icons). */\nexport declare function createWithIcon(name: string, style: StyleName, displayName: string, iconNode: IconNode): WithIcon\nexport declare const styles: Record<StyleName, { root: Record<string, string | number>; strokeWidth: number | false }>\n`
@@ -768,10 +1033,14 @@ export async function emitComponentPackage(ctx, spec) {
   let files = 0
   const doc = i => i.description.replace(/\*\//g, '')
   for (const s of styleNames) {
-    const consts = [], names = [], idxDts = []
-    for (const i of ctx.icons) {
-      const r = renderOf(ctx, i, s)
-      const nodes = J(r.nodes.map(([t, a]) => [t, spec.mapAttrs(a)]))
+    const consts = [], names = [], idxDts = [], data = []
+    const renders = ctx.icons.map(i => [i, renderOf(ctx, i, s)]).map(([i, r]) => [i, r, mapNodes(r.nodes, spec.mapAttrs)])
+    const pool = nodePool(renders.map(x => x[2]))
+    for (const [i, r, mapped] of renders) {
+      // thinCjs: the drawings live in index.js (its require() twin loads that file). Otherwise (solid: two module
+      // formats with their own framework instance) they live once in nodes.js, plain data both formats load.
+      const nodes = spec.thinCjs ? pool.lit(mapped) : `N.${i.pascal}`
+      if (!spec.thinCjs) data.push(`export const ${i.pascal} = ${pool.lit(mapped)}`)
       consts.push(`const ${i.pascal} = /*#__PURE__*/ createWithIcon(${J(i.name)}, ${J(r.style)}, ${J(i.pascal)}, ${nodes})`)
       names.push(i.pascal)
       // deep path = a re-export: the drawing ships once per module format, and the style module tree-shakes
@@ -779,9 +1048,22 @@ export async function emitComponentPackage(ctx, spec) {
       files++
       idxDts.push(`/** ${i.name} — ${doc(i)} */\nexport declare const ${i.pascal}: WithIcon\nexport declare const ${i.pascal}Icon: WithIcon`)
     }
-    W(`${P}/${s}/index.js`, `${header}import { createWithIcon } from '../base.js'\n${consts.join('\n')}\nexport {\n${names.map(n => `  ${n}, ${n} as ${n}Icon,`).join('\n')}\n}\n`)
+    const prelude = spec.thinCjs ? pool.decl() + '\n' : ''
+    W(`${P}/${s}/index.js`, `${header}import { createWithIcon } from '../base.js'\n${spec.thinCjs ? '' : `import * as N from './nodes.js'\n`}${prelude}${consts.join('\n')}\nexport {\n${names.map(n => `  ${n}, ${n} as ${n}Icon,`).join('\n')}\n}\n`)
     W(`${P}/${s}/index.d.ts`, `import type { WithIcon } from '../types.js'\n${idxDts.join('\n')}\n`)
-    W(`${P}/${s}/index.cjs`, `'use strict'\n${header}const { createWithIcon } = require('../base.cjs')\n${consts.join('\n')}\n${names.map(n => `exports.${n} = exports.${n}Icon = ${n}`).join('\n')}\n`)
+    const needEsm = (what, file) => `  if (e && (e.code === 'ERR_REQUIRE_ESM' || e.code === 'ERR_REQUIRE_ASYNC_MODULE')) throw new Error(${J(`@withicons/${spec.dir}: require() of the ${s} icons needs Node 20.19+ or 22.12+ (${what} load from the ES module ${file}). Use import, or a newer Node.`)})\n`
+    // require(): the icons live once, in an ES module (Node 20.19+ / 22.12+ and every bundler load it with require()).
+    // A second copy of every drawing would push the package over jsDelivr's 150 MB limit.
+    // Solid ships two builds with their own solid-js instance, so its CommonJS components stay CommonJS and only the
+    // drawings (plain data, no framework import) come from nodes.js; react and vue share one instance (thinCjs).
+    if (!spec.thinCjs) {
+      W(`${P}/${s}/nodes.js`, `${header}// the ${s} drawings (IconNode data), shared by index.js and index.cjs\n${pool.decl()}\n${data.join('\n')}\n`)
+      W(`${P}/${s}/index.cjs`, `'use strict'\n${header}const { createWithIcon } = require('../base.cjs')\nlet N\ntry { N = require('./nodes.js') } catch (e) {\n${needEsm('the drawings', 'nodes.js')}  throw e\n}\n${consts.join('\n')}\n${names.map(n => `exports.${n} = exports.${n}Icon = ${n}`).join('\n')}\n`)
+    }
+    else W(`${P}/${s}/index.cjs`, `'use strict'\n${header}// require() of this file loads ./index.js (ES module): the ${s} icons live there once\n` +
+      `try { module.exports = require('./index.js') } catch (e) {\n` +
+      `  if (e && (e.code === 'ERR_REQUIRE_ESM' || e.code === 'ERR_REQUIRE_ASYNC_MODULE')) throw new Error(${J(`@withicons/${spec.dir}: require() of the ${s} icons needs Node 20.19+ or 22.12+ (they load from the ES module). Use import, or a newer Node.`)})\n` +
+      `  throw e\n}\n`)
     // one declaration file types every deep path of the style (exports './<style>/icons/*' -> deep.d.ts): no per-icon .d.ts
     W(`${P}/${s}/deep.d.ts`, `import type { WithIcon } from '../types.js'\nexport * from './index.js'\n/** The icon named in the deep import path ('@withicons/${spec.dir}/${s === D ? '' : s + '/'}icons/home'). */\ndeclare const Icon: WithIcon\nexport default Icon\n`)
     W(`${P}/${s}/index.d.cts`, `import type { WithIcon } from '../types.cjs'\n${idxDts.join('\n')}\n`)

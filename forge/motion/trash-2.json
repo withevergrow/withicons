@@ -1,0 +1,51 @@
+{
+  "name": "trash-2",
+  "intent": "rocks on its base, then the lid lifts as it is filled",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21
+    ],
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.7
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "check",
+      "effect": "morph"
+    },
+    {
+      "to": "trash-2@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "trash",
+      "effect": "fade"
+    }
+  ]
+}

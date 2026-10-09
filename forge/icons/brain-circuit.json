@@ -1,0 +1,95 @@
+{
+  "name": "brain-circuit",
+  "category": "ai",
+  "description": "A brain drawn with circuit traces, for machine learning, AI models and reasoning.",
+  "aliases": [
+    "ai-brain",
+    "neural-network",
+    "machine-learning-model",
+    "ml-model",
+    "ai-model",
+    "deep-learning",
+    "neural-net",
+    "smart-brain",
+    "cyber-brain",
+    "circuit-brain"
+  ],
+  "tags": [
+    "ai",
+    "brain",
+    "circuit",
+    "neural",
+    "model",
+    "machine learning"
+  ],
+  "paths": [
+    {
+      "d": "M12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 12 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 6 C7.5 6.75 8 7.75 8 9 M3.5 12 C5.5 12 7 12.75 7.5 14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7.5 H14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 12 H17.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16.5 H14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 7.5 A1.5 1.5 0 1 1 14.5 7.5 A1.5 1.5 0 1 1 17.5 7.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 12 A1.5 1.5 0 1 1 17.5 12 A1.5 1.5 0 1 1 20.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 16.5 A1.5 1.5 0 1 1 14.5 16.5 A1.5 1.5 0 1 1 17.5 16.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 12 19 Z",
+    "M17.5 7.5 A1.5 1.5 0 1 1 14.5 7.5 A1.5 1.5 0 1 1 17.5 7.5 Z",
+    "M20.5 12 A1.5 1.5 0 1 1 17.5 12 A1.5 1.5 0 1 1 20.5 12 Z",
+    "M17.5 16.5 A1.5 1.5 0 1 1 14.5 16.5 A1.5 1.5 0 1 1 17.5 16.5 Z"
+  ],
+  "cutouts": [
+    "M6.5 6 C7.5 6.75 8 7.75 8 9",
+    "M3.5 12 C5.5 12 7 12.75 7.5 14.5"
+  ],
+  "synonyms": [
+    "artificial intelligence",
+    "machine learning",
+    "ml",
+    "llm",
+    "large language model",
+    "model",
+    "reasoning",
+    "thinking",
+    "inference",
+    "training",
+    "neural",
+    "neurons",
+    "cognitive computing",
+    "agi",
+    "ai engine",
+    "ai chip",
+    "compute",
+    "intelligence",
+    "smart",
+    "think mode",
+    "deep think",
+    "knowledge",
+    "tech brain",
+    "cyborg"
+  ]
+}

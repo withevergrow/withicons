@@ -24,10 +24,11 @@ npx withicons export home settings --format svg,pdf,png --out icons   # files, f
 | `get <name...>` | code for one or more icons; names or aliases (`delete` -> trash) |
 | `add <name...>` | import line + usage for `--framework` react (default), vue, svelte, angular, solid, web-component, html-class, svg |
 | `palettes <name>` | the colour palettes picked for that icon (swatches in the terminal); `--style` shows the CSS variables each one sets and marks the main role (the colour of the icon's body: set it for a brand colour), `--tag pastel` filters |
-| `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate <name> --list` (or `motions <name>`) shows that icon's loop and hover motions, its alternates and swaps; `animate --list` shows every preset and effect |
+| `animate <name>` | animation code (`@withicons/motion`): `--trigger` loop (default), hover, once, inview, swap; `--preset`, `--to <name[@style]>`, `--effect`, `--duration`; `--format` html (default), react, vue, svelte, solid, angular, web-component, js. `animate <name> --list` (or `motions <name>`) shows that icon's loop and hover motions, its alternates and swaps; `animate --list` shows every preset and effect. With `--style` a 3D style (clay, glass, liquid, chrome, soft3d, luxe, skeuo, dock, plush) plays the motion in 3D (`wm-3d`), and `motions <name> --style soft3d` lists the 3-5 moves the icon offers in soft3d |
 | `export <name...>` | save files: SVG, PDF, EPS, PNG, ICO, favicon pack, Android, iOS, React/Vue/Svelte/Angular components, PowerPoint, Word, Lottie, animated GIF / APNG / SVG / PowerPoint ([below](#export-files)) |
 | `resolve <name>` | does a name/alias map to one icon? |
-| `styles` · `categories [category]` | the catalogue; `styles` also lists every colour variable of the multi-colour styles |
+| `styles` · `categories [category]` | the catalogue; `styles` groups the styles (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) with their colour variables; `categories` includes the festival categories (`indian-festivals`, `christmas`, `lunar-new-year`, `valentines`, `halloween`) and `avatars` |
+| `styles --for <words>` | the best styles for a job (`--for "diwali sale banner"`, `"kids avatar picker"`, `"AI landing page"`, or `--use app|slides|saas|ai|brand|kids|print|festive`): each with its React import, `<with-icon>` snippet, raw-file packages, download zip, holiday palettes and Duo presets |
 | `mcp` | run the MCP server over stdio (same as `npx -y @withicons/mcp`) |
 | `init [tool...]` | add the agent skill + MCP server to your AI coding tools (below) |
 | `skill` | print the agent skill; `--zip` (upload to Claude / Lovable), `--out <dir>`, `--path` |
@@ -39,8 +40,8 @@ Options: `--style/-s`, `--format/-f` (svg, react, vue, svelte, angular, solid, h
 
 ## Colours
 
-Fifteen styles paint with more than one colour (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`,
-`anime`, `gothic`, `pastel`, `coquette`, `plush`). Every colour
+Every style except line, solid, gloss, engrave and sketch paints with more than one colour (`duo` and `blueprint` add an
+accent; `withicons styles` lists every variable). Every colour
 is a CSS variable with a default, and `get` can set **all of them**, not just one:
 
 - `--palette <id>`: one of the palettes picked for that icon (`withicons palettes <name>` lists them).
@@ -52,6 +53,14 @@ What you get depends on `--format`: `svg` keeps the variables and sets them on t
 plain hex colours in, for files, `<img>`, Figma and slides); `data-uri` is always baked; `web-component` sets them on
 `<with-icon style>`; react, vue, svelte, solid and angular add a class and print its CSS rule. One-colour styles (line, solid,
 gloss, engrave, sketch) and `html-class` take only the ink.
+
+- Duo: `--with-duo` (tint) and `--with-duo-accent` (one accent detail). "Duo with an accent":
+  `withicons get bell --style duo --colors "duo=#6B70F7,duo-accent=#6B70F7" --stroke-width 1.5`. "Duo gradient" is made on
+  withicons.com (studio) only.
+- Holiday styles (`utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`) also have festival palettes (CSS variable
+  sets: `withicons styles --for christmas` lists them); people avatars (`avatar-*`) have true-to-life skin-tone and hair
+  palettes: `withicons palettes avatar-woman --tag true-to-life`.
+- Every style as one zip of SVGs plus an offline viewer: `https://withicons.com/downloads/with-icons-<style>.zip`.
 
 ## Export files
 

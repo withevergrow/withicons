@@ -67,7 +67,7 @@
   --c-sketch: #22A861;    --c-sketch-text: #157A43;    --c-sketch-soft: #DDF3E6;
   /* run 4 (2026-10-02): the five palette styles. Their icons carry their own default palette
      (--with-<style>-<role>); these tokens are the site's signature colour for each style. */
-  --c-glass: #5B9DFF;     --c-glass-text: #2F65C8;     --c-glass-soft: #E3EEFF;   /* icy sky */
+  --c-glass: #7484FF;     --c-glass-text: #6A45D6;     --c-glass-soft: #ECEDFF;   /* periwinkle frost (accent rose #F2679E) */
   --c-kawaii: #FF7A9A;    --c-kawaii-text: #C2335A;    --c-kawaii-soft: #FFE6EC;  /* strawberry milk */
   --c-sticker: #B57CFF;   --c-sticker-text: #7A3FD6;   --c-sticker-soft: #F2E8FF; /* candy lilac */
   --c-pixel: #4FAE0C;     --c-pixel-text: #3B7300;     --c-pixel-soft: #E6F5D6;   /* arcade green */
@@ -82,12 +82,30 @@
   --c-pastel: #3DBFA0;    --c-pastel-text: #127A62;    --c-pastel-soft: #DDF5EE;  /* mint macaron */
   --c-coquette: #E2456F;  --c-coquette-text: #B81F4B;  --c-coquette-soft: #FDE4EA; /* ribbon rose */
   --c-plush: #F2AE24;     --c-plush-text: #8F5E00;     --c-plush-soft: #FDF0D5;   /* honey teddy */
+  /* run 12/13: the rich styles (gradients allowed): clay bento suite dock liquid chrome soft3d brutal, and the holiday
+     styles utsav rangoli halloween christmas lunar valentine */
+  --c-clay: #C8714E;      --c-clay-text: #9C583D;      --c-clay-soft: #F7EBE6;    /* terracotta clay */
+  --c-bento: #0E9F9A;     --c-bento-text: #097571;     --c-bento-soft: #DDF2F1;   /* bento teal */
+  --c-suite: #0B6CD4;     --c-suite-text: #0B6CD4;     --c-suite-soft: #DDEAF9;   /* suite blue */
+  --c-dock: #3A3F4B;      --c-dock-text: #3A3F4B;      --c-dock-soft: #E3E4E6;    /* dock graphite */
+  --c-liquid: #38BDF8;    --c-liquid-text: #237497;    --c-liquid-soft: #E3F6FE;  /* liquid glass aqua */
+  --c-chrome: #8D99AE;    --c-chrome-text: #626978;    --c-chrome-soft: #EFF1F4;  /* liquid silver */
+  --c-soft3d: #E0A800;       --c-soft3d-text: #896700;       --c-soft3d-soft: #FBF3DB;     /* soft 3D amber */
+  --c-brutal: #FF4F79;    --c-brutal-text: #BB3A59;    --c-brutal-soft: #FFE6EC;  /* neo-brutal pink */
+  --c-utsav: #EA7A0C;     --c-utsav-text: #A85406;     --c-utsav-soft: #FDEBD6;   /* marigold saffron */
+  --c-rangoli: #E81F7A;   --c-rangoli-text: #B5175F;   --c-rangoli-soft: #FCE3EF; /* rani pink */
+  --c-halloween: #F2690F; --c-halloween-text: #AD4A08; --c-halloween-soft: #FEE9D9; /* pumpkin */
+  --c-christmas: #1F7A4D; --c-christmas-text: #1A6B43; --c-christmas-soft: #DFF1E7; /* pine */
+  --c-lunar: #E8282E;     --c-lunar-text: #B81F24;     --c-lunar-soft: #FCE2E2;   /* lucky red */
+  --c-valentine: #FF5C82; --c-valentine-text: #C2304F; --c-valentine-soft: #FFE4EA; /* valentine pink */
   /* text/icon colour ON a filled style colour (AA): white on the deep ones, ink on the bright ones */
   --c-line-on: #FFFFFF; --c-solid-on: #111318; --c-duo-on: #FFFFFF; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-luxe-on: #FFFFFF; --c-bauhaus-on: #FFFFFF; --c-skeuo-on: #FFFFFF;
   --c-anime-on: #111318; --c-gothic-on: #FFFFFF; --c-pastel-on: #111318; --c-coquette-on: #111318; --c-plush-on: #111318;
+  --c-clay-on: #111318; --c-bento-on: #111318; --c-suite-on: #FFFFFF; --c-dock-on: #FFFFFF; --c-liquid-on: #111318; --c-chrome-on: #111318; --c-soft3d-on: #111318; --c-brutal-on: #111318;
+  --c-utsav-on: #111318; --c-rangoli-on: #FFFFFF; --c-halloween-on: #111318; --c-christmas-on: #FFFFFF; --c-lunar-on: #FFFFFF; --c-valentine-on: #111318;
   --c-duo-fill: var(--c-duo); /* kept for compatibility: violet is now deep enough (4.8:1 with white) */
   --style-on: var(--c-line-on);
   /* short aliases (library.css relies on these names) */
@@ -96,8 +114,10 @@
   --on-glass: var(--c-glass-on); --on-kawaii: var(--c-kawaii-on); --on-sticker: var(--c-sticker-on); --on-pixel: var(--c-pixel-on); --on-retro: var(--c-retro-on);
   --on-luxe: var(--c-luxe-on); --on-bauhaus: var(--c-bauhaus-on); --on-skeuo: var(--c-skeuo-on);
   --on-anime: var(--c-anime-on); --on-gothic: var(--c-gothic-on); --on-pastel: var(--c-pastel-on); --on-coquette: var(--c-coquette-on); --on-plush: var(--c-plush-on);
+  --on-clay: var(--c-clay-on); --on-bento: var(--c-bento-on); --on-suite: var(--c-suite-on); --on-dock: var(--c-dock-on); --on-liquid: var(--c-liquid-on); --on-chrome: var(--c-chrome-on); --on-soft3d: var(--c-soft3d-on); --on-brutal: var(--c-brutal-on);
+  --on-utsav: var(--c-utsav-on); --on-rangoli: var(--c-rangoli-on); --on-halloween: var(--c-halloween-on); --on-christmas: var(--c-christmas-on); --on-lunar: var(--c-lunar-on); --on-valentine: var(--c-valentine-on);
   /* every signature colour as one hue sweep (rings, dials, the CTA hover) */
-  --spectrum: var(--c-line), var(--c-glass), var(--c-anime), var(--c-blueprint), var(--c-pastel), var(--c-sketch), var(--c-pixel), var(--c-plush), var(--c-engrave), var(--c-retro), var(--c-solid), var(--c-bauhaus), var(--c-gothic), var(--c-coquette), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-luxe), var(--c-skeuo), var(--c-line);
+  --spectrum: var(--c-line), var(--c-suite), var(--c-glass), var(--c-liquid), var(--c-anime), var(--c-blueprint), var(--c-bento), var(--c-pastel), var(--c-sketch), var(--c-pixel), var(--c-soft3d), var(--c-plush), var(--c-engrave), var(--c-clay), var(--c-retro), var(--c-solid), var(--c-bauhaus), var(--c-brutal), var(--c-gothic), var(--c-coquette), var(--c-kawaii), var(--c-gloss), var(--c-sticker), var(--c-duo), var(--c-luxe), var(--c-dock), var(--c-chrome), var(--c-skeuo), var(--c-utsav), var(--c-halloween), var(--c-lunar), var(--c-valentine), var(--c-rangoli), var(--c-christmas), var(--c-line);
   /* focus: ink ring (17:1 on paper) inside a sun halo; dark theme flips the ring to sun */
   --focus-ring: #111318; --focus-halo: var(--sun);
   /* the current style on a page/element: set --style on any element, e.g. style="--style: var(--c-duo)"
@@ -179,7 +199,7 @@
   --c-engrave: #D9A94A;   --c-engrave-text: #E7C17A;   --c-engrave-soft: #33280F;
   --c-blueprint: #19B8D8; --c-blueprint-text: #63D3EA; --c-blueprint-soft: #0B2B33;
   --c-sketch: #34BF73;    --c-sketch-text: #6FD99C;    --c-sketch-soft: #10301E;
-  --c-glass: #7DB2FF;     --c-glass-text: #A9CBFF;     --c-glass-soft: #13243F;
+  --c-glass: #9AA5FF;     --c-glass-text: #C3C9FF;     --c-glass-soft: #1B1E3D;
   --c-kawaii: #FF8FAA;    --c-kawaii-text: #FFB3C4;    --c-kawaii-soft: #3D1622;
   --c-sticker: #C292FF;   --c-sticker-text: #D4B3FF;   --c-sticker-soft: #2A1A45;
   --c-pixel: #7FDB2E;     --c-pixel-text: #A8EE6E;     --c-pixel-soft: #172E0A;
@@ -192,11 +212,27 @@
   --c-pastel: #5FD6B9;    --c-pastel-text: #94E8D3;    --c-pastel-soft: #0E2E27;
   --c-coquette: #FF6E93;  --c-coquette-text: #FFA3BA;  --c-coquette-soft: #3D1220;
   --c-plush: #FFC24D;     --c-plush-text: #FFD789;     --c-plush-soft: #33260B;
+  --c-clay: #CC7C5C;      --c-clay-text: #DEAA94;      --c-clay-soft: #362521;
+  --c-bento: #21A7A2;     --c-bento-text: #6DC5C2;     --c-bento-soft: #0D2F31;
+  --c-suite: #5096E0;     --c-suite-text: #8DBBEB;     --c-suite-soft: #0D233E;
+  --c-dock: #90939A;      --c-dock-text: #B6B9BC;      --c-dock-soft: #171A20;
+  --c-liquid: #38BDF8;    --c-liquid-text: #4CC4F9;    --c-liquid-soft: #163546;
+  --c-chrome: #8D99AE;    --c-chrome-text: #ABB4C4;    --c-chrome-soft: #292D36;
+  --c-soft3d: #E0A800;       --c-soft3d-text: #E3B11A;       --c-soft3d-soft: #3B3110;
+  --c-brutal: #FF4F79;    --c-brutal-text: #FF98B0;    --c-brutal-soft: #421D2A;
+  --c-utsav: #F59A3A;     --c-utsav-text: #F8B46A;     --c-utsav-soft: #3D2410;
+  --c-rangoli: #F0559A;   --c-rangoli-text: #F48DBB;   --c-rangoli-soft: #401A2C;
+  --c-halloween: #FF8A33; --c-halloween-text: #FFAF73; --c-halloween-soft: #40230F;
+  --c-christmas: #3FB27A; --c-christmas-text: #7ED0A6; --c-christmas-soft: #13301F;
+  --c-lunar: #F0555A;     --c-lunar-text: #F48D90;     --c-lunar-soft: #401A1B;
+  --c-valentine: #FF7A98; --c-valentine-text: #FFA6BA; --c-valentine-soft: #42192A;
   --c-line-on: #111318; --c-solid-on: #111318; --c-duo-on: #111318; --c-gloss-on: #111318;
   --c-engrave-on: #111318; --c-blueprint-on: #111318; --c-sketch-on: #111318;
   --c-glass-on: #111318; --c-kawaii-on: #111318; --c-sticker-on: #111318; --c-pixel-on: #111318; --c-retro-on: #111318;
   --c-luxe-on: #111318; --c-bauhaus-on: #111318; --c-skeuo-on: #111318;
   --c-anime-on: #111318; --c-gothic-on: #111318; --c-pastel-on: #111318; --c-coquette-on: #111318; --c-plush-on: #111318;
+  --c-clay-on: #111318; --c-bento-on: #111318; --c-suite-on: #111318; --c-dock-on: #111318; --c-liquid-on: #111318; --c-chrome-on: #111318; --c-soft3d-on: #111318; --c-brutal-on: #111318;
+  --c-utsav-on: #111318; --c-rangoli-on: #111318; --c-halloween-on: #111318; --c-christmas-on: #111318; --c-lunar-on: #111318; --c-valentine-on: #111318;
   --c-duo-fill: var(--c-duo);
   --focus-ring: var(--sun); --focus-halo: rgba(255, 210, 63, .28);
   /* duo previews on dark grounds: a light-ink tint at 20% reads as muddy grey, so tint with the duo violet */
@@ -238,6 +274,20 @@
 .s-pastel { --style: var(--c-pastel); --style-text: var(--c-pastel-text); --style-soft: var(--c-pastel-soft); --style-on: var(--c-pastel-on); --style-fill: initial; }
 .s-coquette { --style: var(--c-coquette); --style-text: var(--c-coquette-text); --style-soft: var(--c-coquette-soft); --style-on: var(--c-coquette-on); --style-fill: initial; }
 .s-plush { --style: var(--c-plush); --style-text: var(--c-plush-text); --style-soft: var(--c-plush-soft); --style-on: var(--c-plush-on); --style-fill: initial; }
+.s-clay { --style: var(--c-clay); --style-text: var(--c-clay-text); --style-soft: var(--c-clay-soft); --style-on: var(--c-clay-on); --style-fill: initial; }
+.s-bento { --style: var(--c-bento); --style-text: var(--c-bento-text); --style-soft: var(--c-bento-soft); --style-on: var(--c-bento-on); --style-fill: initial; }
+.s-suite { --style: var(--c-suite); --style-text: var(--c-suite-text); --style-soft: var(--c-suite-soft); --style-on: var(--c-suite-on); --style-fill: initial; }
+.s-dock { --style: var(--c-dock); --style-text: var(--c-dock-text); --style-soft: var(--c-dock-soft); --style-on: var(--c-dock-on); --style-fill: initial; }
+.s-liquid { --style: var(--c-liquid); --style-text: var(--c-liquid-text); --style-soft: var(--c-liquid-soft); --style-on: var(--c-liquid-on); --style-fill: initial; }
+.s-chrome { --style: var(--c-chrome); --style-text: var(--c-chrome-text); --style-soft: var(--c-chrome-soft); --style-on: var(--c-chrome-on); --style-fill: initial; }
+.s-soft3d { --style: var(--c-soft3d); --style-text: var(--c-soft3d-text); --style-soft: var(--c-soft3d-soft); --style-on: var(--c-soft3d-on); --style-fill: initial; }
+.s-brutal { --style: var(--c-brutal); --style-text: var(--c-brutal-text); --style-soft: var(--c-brutal-soft); --style-on: var(--c-brutal-on); --style-fill: initial; }
+.s-utsav { --style: var(--c-utsav); --style-text: var(--c-utsav-text); --style-soft: var(--c-utsav-soft); --style-on: var(--c-utsav-on); --style-fill: initial; }
+.s-rangoli { --style: var(--c-rangoli); --style-text: var(--c-rangoli-text); --style-soft: var(--c-rangoli-soft); --style-on: var(--c-rangoli-on); --style-fill: initial; }
+.s-halloween { --style: var(--c-halloween); --style-text: var(--c-halloween-text); --style-soft: var(--c-halloween-soft); --style-on: var(--c-halloween-on); --style-fill: initial; }
+.s-christmas { --style: var(--c-christmas); --style-text: var(--c-christmas-text); --style-soft: var(--c-christmas-soft); --style-on: var(--c-christmas-on); --style-fill: initial; }
+.s-lunar { --style: var(--c-lunar); --style-text: var(--c-lunar-text); --style-soft: var(--c-lunar-soft); --style-on: var(--c-lunar-on); --style-fill: initial; }
+.s-valentine { --style: var(--c-valentine); --style-text: var(--c-valentine-text); --style-soft: var(--c-valentine-soft); --style-on: var(--c-valentine-on); --style-fill: initial; }
 
 /* ───────── base ───────── */
 *, *::before, *::after { box-sizing: border-box; }

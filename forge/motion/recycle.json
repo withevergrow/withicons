@@ -1,0 +1,28 @@
+{
+  "name": "recycle",
+  "intent": "the arrows keep chasing each other round the loop",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      13.25
+    ],
+    "duration": 5
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      13.25
+    ],
+    "duration": 0.9
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pop"
+    }
+  ]
+}

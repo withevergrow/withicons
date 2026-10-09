@@ -1,0 +1,9 @@
+{
+  "name": "avatar-monster-horns",
+  "intent": "grins and rocks with cheeky mischief",
+  "loop": { "preset": "rock", "origin": [12,21], "amount": 0.6, "duration": 2.4 },
+  "hover": { "preset": "tada", "origin": [12,21] },
+  "parts": { "A": { "preset": "blink", "origin": [12,12], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "wiggle", "origin": [12,21] },{ "preset": "bounce", "origin": [12,21], "amount": 0.6 }],
+  "swap": [{ "to": "avatar-monster", "effect": "morph" },{ "to": "avatar-monster-fluffy", "effect": "fade" },{ "to": "avatar-monster-horns@solid", "effect": "scale" }]
+}

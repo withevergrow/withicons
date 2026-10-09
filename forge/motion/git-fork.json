@@ -1,0 +1,35 @@
+{
+  "name": "git-fork",
+  "intent": "sways gently like a branch splitting from its root",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-merge",
+      "effect": "morph"
+    },
+    {
+      "to": "git-branch",
+      "effect": "rotate"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "name": "shield-x",
+  "category": "security",
+  "description": "A shield with a cross, for blocked, unprotected or failed security.",
+  "aliases": [
+    "shield-cross",
+    "not-secure",
+    "security-failed",
+    "threat-blocked",
+    "security-error"
+  ],
+  "tags": [
+    "security",
+    "shield",
+    "blocked",
+    "error",
+    "danger",
+    "protection"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9.5 L14.5 14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 9.5 L9.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 9.5 L14.5 14.5",
+    "M14.5 9.5 L9.5 14.5"
+  ],
+  "synonyms": [
+    "not protected",
+    "no protection",
+    "insecure connection",
+    "unsafe site",
+    "dangerous",
+    "threat",
+    "malware",
+    "virus",
+    "blocked threat",
+    "firewall block",
+    "access denied",
+    "denied",
+    "rejected",
+    "failed check",
+    "verification failed",
+    "vulnerable",
+    "vulnerability",
+    "breach",
+    "security alert",
+    "no ssl",
+    "untrusted",
+    "revoked",
+    "invalid certificate",
+    "shield with x",
+    "unprotected",
+    "insecure",
+    "blocked",
+    "protection off",
+    "unsafe"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "life-buoy",
+  "category": "objects",
+  "description": "A ring life buoy, for help, support and rescue.",
+  "aliases": [
+    "lifebuoy",
+    "life-ring",
+    "lifesaver",
+    "life-preserver",
+    "help-center",
+    "help-centre"
+  ],
+  "tags": [
+    "help",
+    "support",
+    "rescue",
+    "safety",
+    "service",
+    "sea"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 12 A4.5 4.5 0 1 1 7.5 12 A4.5 4.5 0 1 1 16.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.25 8.75 L18.75 5.25 M15.25 15.25 L18.75 18.75 M8.75 15.25 L5.25 18.75 M8.75 8.75 L5.25 5.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z M16.5 12 A4.5 4.5 0 1 1 7.5 12 A4.5 4.5 0 1 1 16.5 12 Z"
+  ],
+  "cutouts": [
+    "M15.25 8.75 L18.75 5.25",
+    "M15.25 15.25 L18.75 18.75",
+    "M8.75 15.25 L5.25 18.75",
+    "M8.75 8.75 L5.25 5.25"
+  ],
+  "synonyms": [
+    "help desk",
+    "helpdesk",
+    "support center",
+    "support centre",
+    "customer service",
+    "assistance",
+    "get help",
+    "need help",
+    "contact support",
+    "faq",
+    "troubleshooting",
+    "documentation",
+    "save",
+    "emergency",
+    "lifeguard",
+    "swimming",
+    "pool",
+    "ocean",
+    "boat",
+    "ship",
+    "float ring",
+    "life buoy",
+    "lifebelt",
+    "sos",
+    "help",
+    "support",
+    "rescue",
+    "customer support"
+  ]
+}

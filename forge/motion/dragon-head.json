@@ -1,0 +1,52 @@
+{
+  "name": "dragon-head",
+  "intent": "the festival dragon weaves and rears its head",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.25
+    ],
+    "amount": 1.2,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      21.25
+    ],
+    "amount": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        9.5
+      ],
+      "amount": 0.5
+    }
+  },
+  "alt": [
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.25
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "lion-head",
+      "effect": "flip"
+    }
+  ]
+}

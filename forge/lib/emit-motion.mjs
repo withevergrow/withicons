@@ -251,12 +251,14 @@ function partWrapVars(s) {
   const v = [
     '--_dur:max(var(--_ad), var(--_am))', '--_dl:var(--wm-delay, 0s)',
     `--_sh:var(--wmP-sh${L ? 'l' : 's'}, var(--wm${s}-sh, var(--_an)))`,
+    `--_sn:var(--wmP-sn${L ? 'l' : 's'}, var(--wm${s}-sn, var(--_an)))`,
     `--_dk:var(--wm-deco, var(--wmP-dc, var(--wm${s}-dc, wm-deco-breathe)))`,
     L ? '--_dd:var(--wmP-dd, var(--wmL-dd, 2.8s));--_ddl:calc(var(--_dl) - var(--_dd) / 2)' : '--_dd:var(--_dur);--_ddl:calc(var(--_dl) + .08s)',
   ]
   for (const x of ['a', 's']) {
     const q = `--wm${s}-${x}`
-    v.push(`--_p${x}n:var(--wmP-${L ? 'l' : 's'}, var(${q}, var(--_an)))`,
+    // plates: explicit preset (its plate track for part moves) > the icon's plate override > the part move's plate track > the object
+    v.push(`--_p${x}n:var(--wmP-p${L ? 'l' : 's'}, var(${q}, var(--wm${s}-p, var(--_an))))`,
       `--_p${x}d:${L ? `var(--wm-dur, var(--wmP-dl, var(${q}-d, var(--_dur))))` : 'var(--_dur)'}`,
       `--_p${x}k:${chain('--wm-k', '--wmP-k', q + '-k', 'var(--_k)')}`,
       `--_p${x}x:${chain('--wm-dx', '--wmP-dx', q + '-dx', 'var(--_dx)')}`,
@@ -352,8 +354,13 @@ function buildMotionCss(K, M, version, PC) {
     return `.wm-p-${p},with-icon[preset="${p}"]{--wmP-l:${keyframeName(p, true)};--wmP-s:${keyframeName(p, false)};--wmP-dl:${fmt(d.cycle)}s;--wmP-ds:${fmt(d.shot)}s;` +
       `--wmP-e:${d.ease || 'linear'};--wmP-ox:${pct(o[0])};--wmP-oy:${pct(o[1])};--wmP-k:1;--wmP-dx:${fmt(dx)};--wmP-dy:${fmt(dy)};--wmP-m:${fmt(d.min || 0)}s;` +
       `--wmP-shl:${M.GROUND_PRESETS.includes(p) ? 'wm-shadow-' + p + (hasLoopVariant(p) ? '-loop' : '') : keyframeName(p, true)};--wmP-shs:${M.GROUND_PRESETS.includes(p) ? 'wm-shadow-' + p : keyframeName(p, false)};` +
+      `--wmP-pl:${M.PLATE_PRESETS.includes(p) ? M.plateName(p, true) : keyframeName(p, true)};--wmP-ps:${M.PLATE_PRESETS.includes(p) ? M.plateName(p, false) : keyframeName(p, false)};` +
+      `--wmP-snl:${M.SHINE_PRESETS.includes(p) ? 'wm-shine-' + p + (hasLoopVariant(p) ? '-loop' : '') : keyframeName(p, true)};--wmP-sns:${M.SHINE_PRESETS.includes(p) ? 'wm-shine-' + p : keyframeName(p, false)};` +
       `--wmP-dc:wm-deco-${M.decoOf(p)};--wmP-dd:${fmt(d.cycle * M.decoTimes(d.cycle))}s;--wmP-z:0s}`
   }).join('\n'))
+  // backdrop styles (bento, dock: the tile is wm-deco): the tile stays still (MOTION.md "3D motion"); set by the runtime
+  // (motion(el, …, { style })) and the element (variant). A --wm-deco of your own (inline) still wins.
+  out.push(`.wm-backdrop{--wm-deco:none}`)
   // glow / twinkle halo without color-mix() (Safari < 16.2, Chromium < 111): a later @keyframes of the same name wins
   out.push(`@supports not (color:color-mix(in srgb,red,red)){` + ['glow', 'twinkle'].flatMap(p => {
     const kfs = [K.keyframesCss('wm-' + p, K.presetStops(p, false, { css: true, legacyGlow: true }))]
@@ -396,12 +403,19 @@ function buildShadowCss(K, M) {
 }
 
 // icons.css (every icon) and, per icon, the same rule alone: dist/icons/<name>.css
+// A second rule holds the icon's 3D counterpart (MOTION.md "3D motion", PROFILE_3D) for .wm-3d wrappers (3D styles),
+// only what differs; a variable the flat motion sets and the 3D one does not is reset to `initial` (its fallback applies).
 function iconRules(M, specs) {
   const out = {}
   for (const name of Object.keys(specs)) {
     const v = M.specVars(specs[name])
     const body = Object.keys(v).map(k => `${k}:${v[k]}`).join(';')
-    if (body) out[name] = `[data-wm="${name}"],with-icon[name="${name}"]{${body}}`
+    const w = M.specVars(M.styleSpec(specs[name], M.STYLES_3D[0]))
+    const diff = Object.keys(w).filter(k => w[k] !== v[k]).map(k => `${k}:${w[k]}`).concat(Object.keys(v).filter(k => !(k in w)).map(k => `${k}:initial`))
+    const rules = []
+    if (body) rules.push(`[data-wm="${name}"],with-icon[name="${name}"]{${body}}`)
+    if (diff.length) rules.push(`.wm-3d[data-wm="${name}"],with-icon.wm-3d[name="${name}"]{${diff.join(';')}}`)
+    if (rules.length) out[name] = rules.join('\n')
   }
   return out
 }
@@ -429,7 +443,8 @@ function buildSiteJs(version, shadowCss) {
     'specVars', 'slotVars', 'keyframeName', 'presetStops', 'keyframesCss', 'swapLoopStops', 'parseSvg', 'resolveMotion', 'animatedSvg', 'animatedSwapSvg',
     'exportDuration', 'frameSvg', 'renderFrames', 'encodeGif', 'gif', 'video', 'webm', 'pauseWhenOffscreen',
     'SWAP_HOLD', 'SWAP_EASES', 'swapEase', 'swapCycle', 'EFFECT_STATES', 'SWAP_EASE',
-    'partsPlan', 'resolveSpecMotion', 'sampleRole', 'sampleMatrix', 'easeFn', 'partRole', 'hasParts', 'partsSvg', 'partVars', 'decoOf', 'DECO_KINDS', 'shadowPartsCss']
+    'partsPlan', 'resolveSpecMotion', 'sampleRole', 'sampleMatrix', 'easeFn', 'partRole', 'hasParts', 'partsSvg', 'partVars', 'decoOf', 'DECO_KINDS', 'shadowPartsCss',
+    'PRESETS_3D', 'STYLES_3D', 'PROFILE_3D', 'BACKDROP_STYLES', 'is3dStyle', 'isBackdropStyle', 'motion3d', 'styleMotion', 'styleSpec', 'shineStops', 'DECO_DEFAULT', 'GROUND_PRESETS', 'SHINE_PRESETS', 'PLATE_PRESETS', 'plateStops', 'styleMoves', 'MOVE_PROFILES']
   return `/* @withicons/motion ${version} — website build: window.WithMotion (same API as the npm package + export helpers). MIT. Generated, do not edit. */\n` +
     `;(function () {\n'use strict'\n${parts.join('\n')}\n` +
     `const api = { version: ${J(version)}, ${api.join(', ')} }\nif (typeof window !== 'undefined') window.WithMotion = api\n})();\n`
@@ -484,7 +499,7 @@ export default async function emit(ctx) {
   // package.json + LICENSE (README.md is hand-written)
   const pkg = {
     name: '@withicons/motion', version,
-    description: 'Optional animations for with icons: 32 CSS presets, per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.',
+    description: 'Optional animations for with icons: 47 CSS presets (15 in 3D, style-aware), per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.',
     license: 'MIT', author: { name: 'with icons — powered by Evergrow', url: 'https://withevergrow.com' }, homepage: 'https://withicons.com',
     repository: { type: 'git', url: 'git+https://github.com/withevergrow/withicons.git', directory: 'packages/motion' },
     bugs: { url: 'https://github.com/withevergrow/withicons/issues' },

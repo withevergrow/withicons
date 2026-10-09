@@ -1,0 +1,85 @@
+{
+  "name": "avatar-fox",
+  "category": "avatars",
+  "description": "A cute fox face avatar, for profiles and playful apps.",
+  "aliases": [
+    "fox-avatar",
+    "fox",
+    "fox-face",
+    "fox-profile",
+    "fox-pfp",
+    "foxy",
+    "kitsune",
+    "fox-head"
+  ],
+  "tags": [
+    "avatar",
+    "animal",
+    "fox",
+    "cute",
+    "profile"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C11 19.5 9.5 18.5 8 17.75 L3.5 15.25 C4.5 13.75 5 12.25 5 10.75 V4.75 C5 3.75 5.75 3.5 6.5 4 L10 7 H14 L17.5 4 C18.25 3.5 19 3.75 19 4.75 V10.75 C19 12.25 19.5 13.75 20.5 15.25 L16 17.75 C14.5 18.5 13 19.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12.25 V12.75",
+      "plate": "A"
+    },
+    {
+      "d": "M11.25 17.75 H12.75 L12 18.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 7 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 7 V9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C11 19.5 9.5 18.5 8 17.75 L3.5 15.25 C4.5 13.75 5 12.25 5 10.75 V4.75 C5 3.75 5.75 3.5 6.5 4 L10 7 H14 L17.5 4 C18.25 3.5 19 3.75 19 4.75 V10.75 C19 12.25 19.5 13.75 20.5 15.25 L16 17.75 C14.5 18.5 13 19.5 12 20.5 Z",
+    "M3.5 15.25 C6 14.25 9 14.75 12 17 C15 14.75 18 14.25 20.5 15.25 L16 17.75 C14.5 18.5 13 19.5 12 20.5 C11 19.5 9.5 18.5 8 17.75 Z",
+    "M6.5 5.5 V10 L9 7.75 Z",
+    "M17.5 5.5 V10 L15 7.75 Z"
+  ],
+  "cutouts": [
+    "M10.25 12.5 A0.75 1 0 1 1 8.75 12.5 A0.75 1 0 1 1 10.25 12.5 Z",
+    "M15.25 12.5 A0.75 1 0 1 1 13.75 12.5 A0.75 1 0 1 1 15.25 12.5 Z",
+    "M10.75 17.5 H13.25 L12 18.75 Z",
+    "M6.5 6.75 V9.75",
+    "M17.5 6.75 V9.75"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "animal avatar",
+    "pet avatar",
+    "face",
+    "vixen",
+    "red fox",
+    "clever",
+    "sly",
+    "woodland",
+    "forest animal",
+    "wildlife",
+    "firefox"
+  ]
+}

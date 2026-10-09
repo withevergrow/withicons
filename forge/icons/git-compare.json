@@ -1,0 +1,68 @@
+{
+  "name": "git-compare",
+  "category": "development",
+  "description": "Two branches with arrows across, for diffs and comparing changes.",
+  "aliases": [
+    "diff",
+    "git-diff",
+    "compare",
+    "compare-branches",
+    "code-compare",
+    "code-diff",
+    "changes-compare"
+  ],
+  "tags": [
+    "git",
+    "diff",
+    "compare",
+    "version-control",
+    "code"
+  ],
+  "paths": [
+    {
+      "d": "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19 15 V8 A2 2 0 0 0 17 6 H12",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 3.5 L12 6 L14.5 8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5 9 V16 A2 2 0 0 0 7 18 H12",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 15.5 L12 18 L9.5 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+    "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "git",
+    "difference",
+    "comparison",
+    "compare changes",
+    "file diff",
+    "branch diff",
+    "review changes",
+    "version control",
+    "vcs",
+    "pull request",
+    "merge",
+    "side by side",
+    "changes",
+    "delta"
+  ]
+}

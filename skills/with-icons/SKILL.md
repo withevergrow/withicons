@@ -1,11 +1,11 @@
 ---
 name: with-icons
-description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 500 MIT-licensed icons (SVG) in 20 styles (line, solid, duo, sketch, blueprint, glassmorphism, kawaii, sticker, pixel, retro, 3D luxe, bauhaus, skeuomorphic, anime, gothic, pastel, coquette, plush ...) for React, Vue, Svelte, Angular, SolidJS, a web component, CSS icon classes, SVG sprites and CDN. Also animated icons (@withicons/motion: loops, hover, icon swaps), live icons showing your own date, time, count or label (@withicons/dynamic), and icon files for slides, docs, print, email and social (SVG, PNG, PDF, PowerPoint, animated GIF, Lottie). Use it whenever a task needs an icon, an icon button or a set of icons (nav, sidebar, toolbar, tabs, forms, dashboards, landing pages, empty states, feature lists), the right icon name for a concept, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome, Material, Feather).
+description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 734 MIT-licensed icons in 34 styles: line, solid, duo, office suite, 3D (clay, glass, liquid glass, chrome, soft 3D, luxe, skeuomorphic), brand (bento, app-dock tiles, neo-brutalism, bauhaus), playful (kawaii, plush, sticker, pastel, pixel, retro), artistic (sketch, engrave, blueprint, anime, gothic, coquette) and holiday styles (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's). React, Vue, Svelte, Angular, SolidJS, web component, CSS classes, sprites, CDN, download-all zips. Festival icons, inclusive avatars, animated and 3D icons (@withicons/motion), live date or count icons (@withicons/dynamic), files for slides, print, email and social (SVG, PNG, PDF, PowerPoint, GIF, Lottie). Use it whenever a task needs an icon, icon set or avatar, the right icon name or style for a job, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome).
 ---
 
 # with icons
 
-500 icons, each drawn once and rendered in 20 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
+734 icons, each drawn once and rendered in 34 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
 Site https://withicons.com · repo https://github.com/withevergrow/withicons · MIT. Detail lives in `reference/`; read
 the file a rule links to before going beyond the rule.
 
@@ -20,11 +20,18 @@ the file a rule links to before going beyond the rule.
 | SolidJS | `npm i @withicons/solid` | same named imports |
 | any HTML, no build | CDN `@withicons/web/dist/cdn.js` | `<with-icon name="home"></with-icon>` |
 | Font Awesome-style classes | CDN `@withicons/classes/dist/with-loader.js` | `<i class="with with-home"></i>` |
-| static SVG, sprite, CMS | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
+| static SVG, sprite, CMS | `npm i @withicons/static` (newer styles: `static-plus`) | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
+| a whole style as files | `https://withicons.com/downloads/with-icons-<style>.zip` | every SVG + an offline searchable viewer |
 | files (slides, print, email, social) | `npx withicons export <name> --format …` | section 7 |
 | Node, name lookup | `npm i @withicons/core` | `resolve('bin').name` is `'trash'` |
-| animation | `npm i @withicons/motion` | section 6 |
+| animation (also 3D) | `npm i @withicons/motion` | section 6 |
 | live icons (date, count …) | `npm i @withicons/dynamic` | section 8 |
+
+Every framework package, `<with-icon>` and the class loader carry all 34 styles (they fetch companions themselves).
+Only raw files are split: the newest styles' SVGs and node data are in `@withicons/core-plus`, `soft3d` and `holiday`,
+prebuilt SVGs and sprites in `static-plus`, classes in `classes-plus` / `soft3d` / `holiday` (so soft3d's SVGs and nodes are in
+`@withicons/soft3d`, its sprite `sprite-soft3d.svg` in `@withicons/static-plus`): see
+[frameworks.md](reference/frameworks.md#where-the-newest-styles-live-core-files-and-icon-classes) for any file's URL.
 
 Every framework has the same props: `size` (24), `color` (`currentColor`; prefer CSS `color` on a parent), `strokeWidth`
 (line, duo, blueprint, sketch, kawaii only), `absoluteStrokeWidth`, `title`, `className`/`class`; the rest is spread onto
@@ -33,29 +40,54 @@ the props table, CDN sizes and version pinning: [reference/frameworks.md](refere
 
 ## 2. Pick the style
 
-- **line** (the default import path): all interface chrome. **solid**: the active/selected state and dense or tiny UI.
-  **duo**: line over a soft tint (`--with-duo`) for friendlier dashboards and cards.
-- Everything else is illustration, never for 16-20px controls: Crafted (gloss, engrave, blueprint, sketch) and Playful
-  styles (glass, kawaii, sticker, pixel, retro) at **32px+**; Studio (luxe, bauhaus, skeuo) and Storybook styles (anime,
-  gothic, pastel, coquette, plush) at **32-48px+** (each style's minimum is in styles.md).
-- One style per UI region; the only routine mix is line (inactive) plus solid (active). Each style is a subpath:
-  `@withicons/react/solid`, `/duo`, `/glass`, `/luxe`, `/plush` … Style words in a search pick the style
-  ("cute heart" -> kawaii, "8-bit star" -> pixel).
-- Multi-colour styles paint CSS variables `--with-<style>-<role>` with defaults; the ink stays `currentColor`. For a
-  brand colour set the icon's **main role** (not always `c1`): `npx withicons palettes <icon> --style <style>` names it,
-  and `get` / `export` take role flags (`--c1`, `--tint` …) that map to the right variables per icon.
-  For one exact hex across a set, use solid or line with `color`.
+Six groups, named for what people make. Use ONE style per page or UI region (the only routine mix: line for inactive,
+solid for active). Each style is a subpath with the same export names: `@withicons/react/solid`, `/clay`, `/christmas` …
 
-Looks, minimum sizes, the choosing guide, every variable and the role mapping: [reference/styles.md](reference/styles.md).
+| group | styles | for |
+|---|---|---|
+| Essentials | line, solid, duo, suite | app and web UI, docs, dashboards, slides; only line, solid and duo go in 16-24px controls |
+| Product & brand | bento, dock, brutal, bauhaus | SaaS landing pages, feature grids, app tiles, bold startup and poster looks |
+| 3D & glass | clay, glass, liquid, chrome, soft3d, luxe, skeuo | AI products, heroes, launches, premium brands, soft 3D hero art and avatars |
+| Playful | kawaii, plush, sticker, gloss, pastel, pixel, retro | kids, games, social posts, cosy and wellness apps |
+| Artistic | sketch, engrave, blueprint, anime, gothic, coquette | print, editorial, education, fandom, themed designs |
+| Holidays | utsav, rangoli, halloween, christmas, lunar, valentine | festive campaigns, seasonal themes, greetings, sale banners |
+
+**What are you making?** (best first; full list in [styles.md](reference/styles.md#what-are-you-making), MCP
+`recommend_styles`): app or website: line, duo, solid · slides: solid, duo, suite · SaaS landing page: bento, soft3d, duo ·
+AI product: clay, liquid, chrome · premium: glass, luxe · playful: kawaii, plush, sticker · print: engrave, sketch,
+blueprint · a festival: its holiday style.
+
+- **Festivals**: Diwali, Durga Puja, Holi -> `rangoli` (clean, brand-friendly) or `utsav` (ornate); Halloween ->
+  `halloween`; Christmas -> `christmas`; Lunar New Year -> `lunar`; Valentine's, weddings -> `valentine`. Pair them with
+  the 95 festival icons (categories `indian-festivals`, `christmas`, `lunar-new-year`, `valentines`, `halloween`: `diya`,
+  `red-lantern`, `jack-o-lantern` …) and everyday ones (`shopping-bag`, `tag`). Switch festivals by palette (`holi`,
+  `diwali`, `nordic` …: every colour in [styles.md](reference/styles.md#holiday-palettes); CLI `--colors "…"`, since
+  `--palette` takes per-icon ids only).
+- **Avatars** (category `avatars`, 40 `avatar-*`): people, animals, friendly monsters. In every person c1 is the skin and
+  c2 the hair (or turban, cap), so one tone picker fits all ([skin tones](reference/styles.md#avatar-skin-tones));
+  offer several, never one default skin tone. Role-named styles keep the roles stable: plush, clay, pastel; duo or line
+  for small UI.
+- **Duo** has an accent colour (`--with-duo-accent`: the icon's badge, plus or slash, else an inner part like a bell's clapper) and two presets: "Duo with an accent"
+  (`--with-duo: #6B70F7; --with-duo-accent: #6B70F7`, strokeWidth 1.5) works in every package; "Duo gradient" (lines
+  swept indigo to pink) is made only in the studio (`withicons.com/icons/<name>.html?style=duo#studio`), whose downloads bake it into the file (no package or
+  CLI API yet: use the downloaded file as an image). [styles.md](reference/styles.md#duo-presets).
+- Sizes: line and solid from 12px, duo 18px; everything else is illustration at **32px+** (luxe, skeuo, gothic, plush 48px).
+- Colour: multi-colour styles paint CSS variables `--with-<style>-<role>` with defaults (role-named styles also give the
+  outline its own `--with-<style>-ink`; elsewhere the ink is `currentColor`).
+  For a brand colour set the icon's **main role**: `npx withicons palettes <icon> --style <style>` names it, and
+  `get` / `export` take role flags (`--c1`, `--tint` …). For one exact hex across a set, use solid or line with `color`.
+- Rich styles draw gradients in one `<defs>` (ids `wg-<style>-<icon>-<n>`, made unique per instance by every package).
+
+Looks, minimum sizes, every variable, holiday palettes and Duo presets: [reference/styles.md](reference/styles.md).
 
 ## 3. Names (never guess one)
 
 - Canonical names are kebab-case (`arrow-right`); components are PascalCase, exported as `ArrowRight` and `ArrowRightIcon`.
 - **Aliases** (`bin`, `house`, `gear`) resolve in name-based APIs (`<with-icon name>`, `<Icon name>`, `resolve()`,
   search, MCP) but **are not exports**: `import { Bin }` fails, use `Trash`.
-- Look every name up before writing it (section 5) or read [reference/icons.md](reference/icons.md) (all 500 names,
+- Look every name up before writing it (section 5) or read [reference/icons.md](reference/icons.md) (all 734 names,
   categories, aliases). Common: delete/bin -> `trash`, gear -> `settings`, x/dismiss -> `close`, hamburger -> `menu`,
-  house -> `home`, magnifier -> `search`, avatar -> `user-circle`.
+  house -> `home`, magnifier -> `search`, profile picture -> `user-circle` or an `avatar-*` icon.
 
 ## 4. Accessibility (every time)
 
@@ -72,7 +104,8 @@ More in [reference/frameworks.md](reference/frameworks.md#accessibility).
 
 - **MCP** (best for agents): remote `https://withicons.com/mcp` (about 200 requests per IP per 5 minutes, then HTTP 429),
   local and unlimited `npx -y @withicons/mcp` (prefer it for batch work). Tools: `search_icons`, `get_icon`,
-  `resolve_icon`, `animate_icon`, `export_icon`, `list_palettes`, `list_styles`, `list_categories`; confirm with
+  `resolve_icon`, `recommend_styles` (best styles for a job, a festival or an audience, with packages, presets and
+  palettes), `animate_icon`, `export_icon`, `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with
   `tools/list`. Not connected? `npx withicons init` adds the skill and the server to the project's AI tools (`--dry-run` first).
 - **CLI** `npx withicons search "throw away"` · **HTTP** `https://withicons.com/api/search?q=throw+away&limit=5` (on a
   timeout retry once, or read `https://withicons.com/icons.json`) · **offline** [reference/icons.md](reference/icons.md)
@@ -103,6 +136,11 @@ import '@withicons/motion/icons.css'    // every icon's tuned motion (or one CDN
   is in a shadow root). Wrappers are for inline SVG, components, live icons and `<i>` classes.
 - Motion explains state or invites action; one or two loops per screen; no hover on touch (prefer `wm-inview` /
   `wm-once`). Reduced motion turns everything off. The accessible name stays on the button.
+- **3D**: in clay, glass, liquid, chrome, soft3d, luxe, skeuo, dock and plush the icon's motion plays in 3D (turns, lifts,
+  lands). `<with-icon variant="clay" motion="loop">` does it itself; wrappers add `wm-3d`. soft3d has 3-5 moves per icon
+  (`npx withicons motions <icon> --style soft3d`, MCP `animate_icon` `moves`). Exports of a 3D style move in 3D too.
+- Scroll-triggered in React and other frameworks: `motion(el, name, { trigger: 'inview', style })` from
+  `@withicons/motion` in an effect, `m.destroy()` on unmount (`.wm-inview` in markup alone does nothing; motion.md).
 
 Triggers, presets, swaps, TypeScript casts, checking that it runs: [reference/motion.md](reference/motion.md).
 
@@ -121,10 +159,12 @@ PNG-based and animated formats with the `npx withicons export …` command to ru
 
 - Slides and design tools: `svg-flat` or `png`; print: `pdf`, `eps` or `svg-flat` (never PNG); email: PNG at 2x,
   hosted on your https URLs (never SVG); a moving icon: `gif` (plays in PowerPoint, Keynote, Google Slides, Gmail, Slack).
-- Colours are baked in and the ink defaults to black: on dark backgrounds pass `--color "#ffffff"` and the slide colour
+- Colours are baked in; a `currentColor` ink becomes black (role-named styles keep their own ink colour): on dark backgrounds pass `--color "#ffffff"` and the slide colour
   as `--background` (GIF), and pick an `on-dark` palette for multi-colour styles. Quote colours (`#` starts a comment).
 - One look for many icons: role flags on one call (`--c1`, `--tint` …), since palette ids are per icon. Export one and
   look before the whole set.
+- A whole style for designers or no-code: `https://withicons.com/downloads/with-icons-<style>.zip` (every SVG + an offline
+  searchable viewer), `with-icons-all.zip` for every style. A festive campaign: export in its holiday style (`--style rangoli`).
 - `pptx-animated` is one sample slide: for a deck insert GIFs. `--padding`, `--size`, `--fps`, `--name` and the rest:
   `npx withicons export --help`.
 
@@ -153,7 +193,8 @@ Every live icon with its params, sizes and recipes: [reference/live.md](referenc
 - Sprites must be served from your own origin (cross-origin `<use href>` is blocked).
 - Icon classes are CSS masks: multi-colour variables only work in components, `<with-icon>`, sprites or `with-icons.js`.
 - From a CDN load only what the page shows (`cdn.js`, `with-loader.js`, `lite.js`); never `with-all.css` or
-  `@withicons/web/full` on a real page. `@latest` follows releases; pin one version for a fixed look.
+  `@withicons/web/full` on a real page. `@latest` follows releases; pin one version for a fixed look. React, Vue or
+  Solid from an ESM CDN: name the icons (`https://esm.sh/@withicons/react?exports=Home,Search`), never a bare style URL.
 - Svelte 4 does not forward `on:click` to the icon (wrap it in a button); Angular `name=` needs `provideWithIcons(...)`.
 - Right-to-left: mirror only directional icons (`with-rtl`, `mirror-rtl`, or a `:dir(rtl)` CSS rule on components).
 - Don't mix with icons and another set in one UI region; replace the old icons one-for-one using search.

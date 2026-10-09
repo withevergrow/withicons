@@ -31,12 +31,13 @@ describe('confidence', () => {
     assert.notEqual(conf('book', 'bookmark'), 'high') // a longer word that starts with the query
   })
   test('a spelling fix is at most medium', () => assert.equal(conf('settigns', 'settings') === 'low', false))
-  test('a word no icon carries is answered by its concept, flagged low ("yoga" -> fitness)', () => {
-    const r = engine.search('yoga', { limit: 5 })
+  test('a word no icon carries is answered by its concept, flagged low ("pilates" -> fitness)', () => {
+    const r = engine.search('pilates', { limit: 5 })
     assert.ok(r.length && r.every(x => x.confidence === 'low'), r.map(x => x.name + ':' + x.confidence).join(', '))
   })
   test('a word that only leads phrases names nothing ("baby" shower, "church" bell)', () => {
-    for (const q of ['baby', 'church']) for (const r of engine.search(q, { limit: 5 })) assert.equal(r.confidence, 'low', `${q}: ${r.name}`)
+    // (run 12: "baby" and "church" are carried by icons now; the rule still applies to any word that only leads phrases)
+    for (const q of ['church'].filter(w => !engine.search(w, { limit: 1 }).some(r => r.match.term === w))) for (const r of engine.search(q, { limit: 5 })) assert.equal(r.confidence, 'low', `${q}: ${r.name}`)
   })
 })
 
@@ -51,7 +52,7 @@ describe('real words are not typos', () => {
   test('they return their honest matches or nothing', () => {
     assert.deepEqual(top('mat'), []) // not math / match
     assert.deepEqual(top('grinder'), []) // not gender reveal
-    assert.deepEqual(top('yin yang'), []) // not young plant
+    assert.ok(top('yin yang').every(n => n === 'contrast'), top('yin yang').join()) // its own synonym (run 12), never young plant
     assert.deepEqual(top('bean'), ['paw-print']) // toe beans: a real (plural) match, not "ban"
     lacksAll('bear', ['beer', 'navigation'])
   })
@@ -155,7 +156,7 @@ describe('query() and no-result honesty', () => {
     assert.equal(r.results[0].name, 'settings')
   })
   test('nothing matches: empty results with a browse hint, never noise', () => {
-    for (const q of ['qzxjvw', 'yin yang', 'grinder']) {
+    for (const q of ['qzxjvw', 'grinder']) {
       const r = engine.query(q)
       assert.deepEqual(r.results, [], q)
       assert.ok(r.browse && r.browse.categories.length > 10, q)

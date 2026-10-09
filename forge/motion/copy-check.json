@@ -1,0 +1,44 @@
+{
+  "name": "copy-check",
+  "intent": "the check draws on inside the sheet to confirm the copy",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "draw",
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "nod"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "copy",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    },
+    {
+      "to": "clipboard-check",
+      "effect": "flip"
+    }
+  ]
+}

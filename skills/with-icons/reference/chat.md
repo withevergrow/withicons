@@ -22,5 +22,8 @@ first line sends you to the skill. Each brief has a `MY TASK:` line. Do that tas
 Always: search before naming anything (`https://withicons.com/api/search?q=<words>`, see [search.md](search.md)), link
 `https://withicons.com/icons/<name>.html` for every pick, give developers the npm package for their stack
 (`@withicons/react`, `vue`, `svelte`, `angular`, `solid`, `web`) or the `<i class="with with-NAME">` CDN classes, and give
-everyone else the page's Copy image, SVG/PNG download and Copy SVG code. If you cannot open links, say so instead of
+everyone else the page's Copy image, SVG/PNG download and Copy SVG code (a whole style as files:
+`https://withicons.com/downloads/with-icons-<style>.zip`). Pick the style by the job, not by taste: the six groups and
+"What are you making?" in [styles.md](styles.md#what-are-you-making) (festivals: the holiday styles; avatars: offer
+several skin-tone palettes). If you cannot open links, say so instead of
 guessing a name. The full brief templates are in https://withicons.com/llms-full.txt.

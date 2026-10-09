@@ -87,7 +87,17 @@
 .lv-sb-toggle { display: none; }
 .lv-sb-panel { display: flex; align-items: stretch; padding: 6px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule);
   box-shadow: 0 1px 0 var(--rule), 0 20px 40px -36px rgba(17, 19, 24, .55); }
-.lv-sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: 3fr 4fr 5fr 3fr 5fr; row-gap: 4px; }
+.lv-sb-list { position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: repeat(120, minmax(0, 1fr)); row-gap: 6px; }
+/* 31 styles in eight families, two even rows: Everyday + Crafted + Playful + Studio (15) over Storybook + AI + Product + Trend (16) */
+.lv-sb-g { grid-row: 2; }
+.lv-sb-g[data-group="everyday"] { grid-row: 1; grid-column: span 24; }
+.lv-sb-g[data-group="crafted"] { grid-row: 1; grid-column: span 32; }
+.lv-sb-g[data-group="playful"] { grid-row: 1; grid-column: span 40; }
+.lv-sb-g[data-group="studio"] { grid-row: 1; grid-column: span 24; }
+.lv-sb-g[data-group="storybook"] { grid-column: span 37; border-left: 0 !important; }
+.lv-sb-g[data-group="ai"] { grid-column: span 15; }
+.lv-sb-g[data-group="product"] { grid-column: span 37; }
+.lv-sb-g[data-group="trend"] { grid-column: span 31; }
 .lv-sb-g { display: flex; flex-direction: column; min-width: 0; padding: 0 3px; }
 .lv-sb-g + .lv-sb-g { border-left: 1px solid var(--rule); }
 .lv-sb-gl { display: flex; align-items: center; gap: 6px; height: 20px; margin: 0; padding: 2px 8px 0; overflow: hidden; white-space: nowrap;
@@ -124,22 +134,12 @@ html:not(.js) .lv-sb-o[aria-checked="true"] { background: color-mix(in srgb, var
 .lv-bar.is-stuck .lv-sb-o { height: 50px; gap: 5px; }
 .lv-bar.is-stuck .lv-sb-ic { width: 23px; height: 23px; }
 
-/* 20 styles in five groups (Everyday 3 · Crafted 4 · Playful 5 · Studio 3 · Storybook 5), the same layout as the library:
-   one row when wide, smaller names when tight */
+/* smaller names when tight (the two-row layout is above) */
 @container lvsb (max-width: 1439px) {
   .lv-sb-o { font-size: 10.5px; letter-spacing: -.01em; }
   .lv-sb-g { padding: 0 2px; }
 }
-/* two full-width rows: Everyday + Crafted + Playful (12) over Studio + Storybook (8); 120 columns, so every option in a
-   row is the same width */
 @container lvsb (max-width: 1279px) {
-  .lv-sb-list { grid-template-columns: repeat(120, minmax(0, 1fr)); row-gap: 6px; }
-  .lv-sb-g[data-group="everyday"] { grid-column: span 30; }
-  .lv-sb-g[data-group="crafted"] { grid-column: span 40; }
-  .lv-sb-g[data-group="playful"] { grid-column: span 50; }
-  .lv-sb-g[data-group="studio"] { grid-column: span 45; border-left: 0; }
-  .lv-sb-g[data-group="storybook"] { grid-column: span 75; }
-  .lv-sb-g:nth-of-type(n+6) { grid-column: 1 / -1; border-left: 0; }
   .lv-sb-o { height: 54px; font-size: 11px; }
 }
 @container lvsb (max-width: 759px) {
@@ -610,48 +610,7 @@ html:not(.js) [role="tabpanel"] + [role="tabpanel"] { margin-top: 12px; }
 .lv-pn span { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .lv-pn b { font: 700 16px/1.2 var(--font-sans); }
 
-/* ── "On this page": a floating pill + its section map (a plain disclosure without JS) ── */
-.lv-map { position: relative; z-index: 60; }
-html:not(.js) .lv-map { box-sizing: border-box; max-width: var(--maxw); margin: clamp(48px, 6vw, 72px) auto 0; padding-inline: var(--gutter); }
-html:not(.js) .lv-map-l::after { content: ' +'; color: var(--muted); }
-html:not(.js) .lv-map-btn { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font: 700 16px/1.2 var(--font-display); color: var(--ink); }
-html:not(.js) .lv-map-ic, html:not(.js) .lv-map-now { display: none; }
-html:not(.js) .lv-map-card { margin-top: 10px; }
-.lv-map-btn { position: relative; list-style: none; }
-.lv-map-btn::-webkit-details-marker { display: none; }
-.js .lv-map { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); margin: 0; transform: translateY(calc(100% + 32px)); opacity: 0; pointer-events: none; transition: transform .55s var(--e-spring), opacity .3s; }
-.js .lv-map.is-shown { transform: none; opacity: 1; pointer-events: auto; }
-.js .lv-map-btn { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px 0 8px; border-radius: 999px; background: #111318; color: #F7F3EC; box-shadow: 0 18px 40px -16px rgba(17, 19, 24, .55), inset 0 1px 0 rgba(255, 255, 255, .08); cursor: pointer; user-select: none; transition: transform .3s var(--e-spring), box-shadow .3s; }
-.js[data-theme="dark"] .lv-map-btn { background: #F4F0E8; color: #111318; box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .8); }
-.js .lv-map-btn:hover { transform: translateY(-2px); }
-.js .lv-map-btn:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 3px; box-shadow: 0 0 0 7px var(--focus-halo); }
-.lv-map-ic { position: relative; display: grid; place-items: center; flex: none; width: 36px; height: 36px; }
-.lv-map-ic svg { position: absolute; inset: 0; transform: rotate(-90deg); }
-.lv-map-track { fill: none; stroke: currentColor; stroke-width: 2.5; opacity: .18; }
-.lv-map-prog { fill: none; stroke: var(--style); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .3s linear, stroke .4s; }
-.lv-map-ic i { position: absolute; left: 11px; width: 14px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .35s var(--e-spring), opacity .2s; }
-.lv-map-ic i:nth-of-type(1) { top: 12px; }
-.lv-map-ic i:nth-of-type(2) { top: 17px; width: 10px; }
-.lv-map-ic i:nth-of-type(3) { top: 22px; width: 12px; }
-.lv-map[open] .lv-map-ic i:nth-of-type(1) { transform: translateY(5px) rotate(45deg); width: 14px; }
-.lv-map[open] .lv-map-ic i:nth-of-type(2) { opacity: 0; }
-.lv-map[open] .lv-map-ic i:nth-of-type(3) { transform: translateY(-5px) rotate(-45deg); width: 14px; }
-.lv-map-l { font: 700 15px/1 var(--font-display); white-space: nowrap; }
-.lv-map-now { max-width: 0; overflow: hidden; white-space: nowrap; font: 500 13.5px/1 var(--font-sans); opacity: .72; transition: max-width .45s var(--e-out), opacity .3s; }
-.lv-map-now:not(:empty) { max-width: 180px; padding-left: 12px; border-left: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
-.js .lv-map-card { position: absolute; right: 0; bottom: calc(100% + 12px); width: min(360px, calc(100vw - 32px)); max-height: min(560px, calc(100dvh - var(--header-h, 72px) - 110px)); overflow: auto; overscroll-behavior: contain; padding: 10px; border-radius: 26px; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow-l); transform-origin: 100% 100%; }
-.lv-map-k { margin: 6px 10px 8px; font: 650 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.lv-map-card ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
-.lv-map-card a { position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 10px; border-radius: 16px; color: var(--ink); text-decoration: none; transition: background .2s; }
-.lv-map-n { font: 600 11.5px/1 var(--font-mono); color: var(--muted); text-align: center; }
-.lv-map-t { min-width: 0; }
-.lv-map-t b { display: block; font: 680 15px/1.2 var(--font-display); }
-.lv-map-t small { display: block; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12.5px/1.3 var(--font-sans); color: var(--muted); }
-.lv-map-card a:hover { background: var(--paper-2); }
-.lv-map-card a[aria-current] { background: color-mix(in srgb, var(--style) 12%, var(--card)); }
-.lv-map-card a[aria-current]::before { content: ''; position: absolute; left: 2px; top: 12px; bottom: 12px; width: 3px; border-radius: 3px; background: var(--style); }
-.lv-map-card a[aria-current] .lv-map-n { color: var(--style-text); font-weight: 700; }
-.lv-map-card a:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: -2px; }
+/* "On this page" (.lv-map): styled with the icon pages' map in chrome.css, run by js/site.js pageMap */
 
 /* ── the studio sheet (Colours · Download) ── */
 .lv-sheet { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 24px; border: 0; background: transparent; color: var(--ink); overflow: hidden; }
@@ -816,9 +775,6 @@ html.lv-sheet-open { overflow: hidden; }
   .lv-rel-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lv-ptable .lv-attr { display: none; }
   .lv-dev-plus { width: 44px; height: 44px; }
-  .js .lv-map { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
-  .js .lv-map-btn { height: 48px; padding-right: 16px; }
-  .lv-map-now:not(:empty) { max-width: 110px; }
   /* the sheet becomes a bottom sheet you can drag down */
   .lv-sheet { padding: 0; }
   .lv-sheet[open] { place-items: end stretch; }
@@ -915,6 +871,7 @@ html.lv-sheet-open { overflow: hidden; }
   html:not(.js) .lv-sb-toggle { display: none; }
   html:not(.js) .lv-sb-panel { position: static; opacity: 1; visibility: visible; transform: none; }
   .lv-sb-list { grid-template-columns: 1fr; row-gap: 6px; }
+  .lv-sb-g, .lv-sb-g[data-group] { grid-row: auto; grid-column: 1 / -1; }
   .lv-sb-g, .lv-sb-g[data-group] { grid-column: auto; border-left: 0; padding: 0; }
   .lv-sb-g + .lv-sb-g { border-left: 0; border-top: 1px solid var(--rule); padding-top: 4px; }
   .lv-sb-gl, .lv-bar.is-stuck .lv-sb-gl { padding: 4px 6px 2px; height: 20px; opacity: 1; }
@@ -1402,3 +1359,11 @@ html:not(.js) .lv-dash-code [role="tabpanel"][hidden] { display: block; margin-t
 /* cards: one plain line under the name (two at most) */
 .lv-card-params { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .lv-tile::after { inset: 0; }
+
+/* ───── styles: the shared compact row (css/style-picker.css) and the all-styles gallery in the five groups ───── */
+.lv-sb-nojs { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; color: var(--ink); }
+.lv-all-groups { display: grid; gap: clamp(24px, 3vw, 36px); margin: 0; padding: 0; list-style: none; }
+.lv-all-g { display: grid; gap: 12px; }
+.lv-all-gh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; font: 750 20px/1.2 var(--font-display); letter-spacing: -.02em; }
+.lv-all-gh small { font: 500 14px/1.4 var(--font-sans); letter-spacing: 0; color: var(--muted); }
+@media (min-width: 1100px) { .lv-all-g .lv-all { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; } }

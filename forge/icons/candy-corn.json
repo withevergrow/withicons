@@ -1,0 +1,62 @@
+{
+  "name": "candy-corn",
+  "category": "halloween",
+  "description": "A piece of candy corn, for Halloween treats.",
+  "aliases": [
+    "candycorn",
+    "halloween-candy",
+    "corn-candy",
+    "tricolor-candy",
+    "chicken-feed"
+  ],
+  "tags": [
+    "halloween",
+    "candy",
+    "sweet",
+    "treat",
+    "food"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 C13.5 2.5 14.5 3.75 15.25 5.5 L19.5 16.5 C20.5 19.5 17 21.5 12 21.5 C7 21.5 3.5 19.5 4.5 16.5 L8.75 5.5 C9.5 3.75 10.5 2.5 12 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 9 C10 10 14 10 16.5 9",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 14 C9.5 15.25 14.5 15.25 18.5 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 14 C9.5 15.25 14.5 15.25 18.5 14 L19.5 16.5 C20.5 19.5 17 21.5 12 21.5 C7 21.5 3.5 19.5 4.5 16.5 Z",
+    "M7.5 9 C10 10 14 10 16.5 9 L18.5 14 C14.5 15.25 9.5 15.25 5.5 14 Z",
+    "M12 2.5 C13.5 2.5 14.5 3.75 15.25 5.5 L16.5 9 C14 10 10 10 7.5 9 L8.75 5.5 C9.5 3.75 10.5 2.5 12 2.5 Z"
+  ],
+  "cutouts": [
+    "M6.5 9 C10 10.25 14 10.25 17.5 9",
+    "M4.5 14 C9.5 15.5 14.5 15.5 19.5 14"
+  ],
+  "synonyms": [
+    "candy",
+    "candies",
+    "sweets",
+    "treats",
+    "halloween treat",
+    "trick or treat",
+    "confectionery",
+    "sugar",
+    "sweet tooth",
+    "dessert",
+    "snack",
+    "autumn",
+    "fall",
+    "october",
+    "thanksgiving",
+    "kernel",
+    "striped candy",
+    "candy korn"
+  ]
+}

@@ -233,14 +233,17 @@ export const R = {
     P.felt('tint', P.rr(2, 4, 22, 20, 2.75), { part: 'K', inset: 0.85 }),
     P.felt('c3', P.rr(10.75, 10.75, 19, 17, 1.6), { part: 'A', stitchMin: 1.2, inset: 0.75 }),
   ],
-  // a bubblegum piggy bank: button snout, knot eye, a sunflower coin dropping in
+  // a bubblegum piggy bank in 3/4 view: stubby legs, a perky ear, a curly yarn tail, button snout, knot eye,
+  // a stitched coin slot and a sunflower coin dropping in
   'piggy-bank': (icon, P) => [
     P.felt('accent', P.unite(P.pill(5.75, 15, 8.25, 21.5), P.pill(13.75, 15, 16.25, 21.5)), { part: 'K', stitch: false }),
-    P.felt('accent', P.fillet(P.unite(P.ellipse(10.75, 13, 8, 6.25), P.poly([[13.25, 8], [15.5, 4.25], [17, 9.25]], 0.8)), 0.8), { part: 'K' }),
-    ...P.button(19.4, 13, 2.25, 'accent', { part: 'K', n: 2 }),
-    P.knot(14.6, 11, 0.75, 'ink', { part: 'A' }),
-    P.thread([[8.25, 9.75], [11.75, 9.75]], { w: 1.15, part: 'A' }),
-    P.felt('c2', P.pill(8.4, 1.5, 11.6, 6), { part: 'deco', ...SOFT }),
+    P.tube('accent', [[4.6, 12.3], [3.2, 12.1], [2.6, 11.1], [2.9, 10.2], [3.6, 9.9]], 1.25, { part: 'K' }),
+    P.felt('c1', P.poly([[17.6, 9.8], [20.7, 6.1], [20.1, 11]], 0.9), { part: 'K', stitch: false }),
+    P.felt('accent', P.fillet(P.unite(P.ellipse(11.75, 14, 7.75, 5.75), P.poly([[13.4, 9.6], [16.4, 3.9], [17.6, 10.2]], 0.9)), 0.8), { part: 'K' }),
+    ...P.button(19.6, 13.5, 2.3, 'accent', { part: 'K', n: 2 }),
+    P.knot(15.75, 12, 0.78, 'ink', { part: 'A' }),
+    P.thread([[8.5, 10.75], [11.5, 10.75]], { w: 1.15, part: 'A' }),
+    P.felt('c2', P.ellipse(10, 3.75, 1.95, 1.95), { part: 'S', ...SOFT }),
   ],
   // a sky pilcrow, the bowl stuffed
   pilcrow: (icon, P) => [

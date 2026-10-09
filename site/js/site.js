@@ -77,16 +77,34 @@
   function emit(ev, arg) { var l = (subs[ev] || []).slice(); for (var i = 0; i < l.length; i++) { try { l[i](arg) } catch (e) { if (W.console) console.error(e) } } }
 
   /* ───────────── data + styles ───────────── */
-  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful + 3 studio + 5 storybook styles
-  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush']
-  // how the home page and pickers group them (kind stays 'universal' | 'creative' for the data contract)
+  // the contract order (forge/CONTRACT.md): 3 everyday + 4 crafted + 5 playful + 3 studio + 5 storybook + 8 rich + 6 holiday styles
+  var ORDER = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro', 'luxe', 'bauhaus', 'skeuo', 'anime', 'gothic', 'pastel', 'coquette', 'plush', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
+  // How every page and picker groups the styles: six groups named for what people make, at most 7 styles each
+  // (site/STYLE-PICKER.md). One source of truth: forge/tools/style-groups.mjs reads this array for the generators.
+  // kind stays 'universal' | 'creative' for the data contract.
   var GROUPS = [
-    { id: 'everyday', title: 'Everyday', blurb: 'Clean and quiet. For interfaces, docs and slides.', styles: ['line', 'solid', 'duo'] },
-    { id: 'crafted', title: 'Crafted', blurb: 'Illustrated looks with character.', styles: ['gloss', 'engrave', 'blueprint', 'sketch'] },
-    { id: 'playful', title: 'Playful', blurb: 'Colourful, cute and nostalgic.', styles: ['glass', 'kawaii', 'sticker', 'pixel', 'retro'] },
-    { id: 'studio', title: 'Studio', blurb: 'Art-directed and premium: layered 3D, Bauhaus geometry, real materials.', styles: ['luxe', 'bauhaus', 'skeuo'] },
-    { id: 'storybook', title: 'Storybook', blurb: 'Illustrated worlds: anime, gothic cathedrals, pastels, coquette bows and plush toys. New!', styles: ['anime', 'gothic', 'pastel', 'coquette', 'plush'] }
+    { id: 'essentials', title: 'Essentials', blurb: 'Clean icons for apps, websites and documents.', styles: ['line', 'solid', 'duo', 'suite'] },
+    { id: 'product', title: 'Product & brand', blurb: 'For SaaS sites, launches and bold brand graphics: tiles, app icons and loud shapes.', styles: ['bento', 'dock', 'brutal', 'bauhaus'] },
+    { id: 'depth', title: '3D & glass', blurb: 'Depth and shine for hero sections, decks and marketing.', styles: ['clay', 'glass', 'liquid', 'chrome', 'soft3d', 'luxe', 'skeuo'] },
+    { id: 'playful', title: 'Playful', blurb: 'Cute, colourful and fun: for kids, social posts and games.', styles: ['kawaii', 'plush', 'sticker', 'gloss', 'pastel', 'pixel', 'retro'] },
+    { id: 'artistic', title: 'Artistic', blurb: 'Illustrated looks with character: print, editorial and themed designs.', styles: ['sketch', 'engrave', 'blueprint', 'anime', 'gothic', 'coquette'] },
+    { id: 'holidays', title: 'Holidays', blurb: "For festivals and seasonal campaigns: Diwali, Durga Puja, Holi, Halloween, Christmas, Lunar New Year and Valentine's.", styles: ['utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine'] }
   ]
+  // shown first in every picker: the safe picks plus the most loved new looks
+  var FEATURED = ['line', 'solid', 'duo', 'clay', 'glass', 'suite', 'soft3d', 'kawaii']
+  // "What are you making?": a few great styles per job, best first
+  var USES = [
+    { id: 'app', title: 'An app or website', styles: ['line', 'duo', 'solid', 'suite'] },
+    { id: 'slides', title: 'Slides and documents', styles: ['solid', 'duo', 'suite', 'clay'] },
+    { id: 'saas', title: 'A SaaS landing page', styles: ['bento', 'soft3d', 'duo', 'dock'] },
+    { id: 'ai', title: 'An AI product', styles: ['clay', 'liquid', 'chrome', 'glass'] },
+    { id: 'brand', title: 'Something premium', styles: ['glass', 'luxe', 'chrome', 'dock'] },
+    { id: 'kids', title: 'Something playful', styles: ['kawaii', 'plush', 'sticker', 'gloss'] },
+    { id: 'print', title: 'Print or editorial', styles: ['engrave', 'sketch', 'blueprint', 'bauhaus'] },
+    { id: 'festive', title: 'A festival or seasonal campaign', styles: ['rangoli', 'christmas', 'halloween', 'lunar'] }
+  ]
+  // styles added in the latest release (a small "New" dot in pickers)
+  var NEW_STYLES = ['clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
   // plain-language copy for each style (shared by every page)
   var INFO = {
     line: { title: 'Line', kind: 'universal', color: '#2F5BFF', description: 'A clean, even outline.',
@@ -95,9 +113,9 @@
     solid: { title: 'Solid', kind: 'universal', color: '#FF5A36', description: 'Bold filled shapes.',
       plain: 'Bold, filled shapes that read from across the room.', good: 'Buttons, tab bars, tiny sizes, signs',
       who: 'Selected and active states, tab bars, tiny sizes, high contrast.', why: 'The filled twin of Line. Pair them for on/off states.' },
-    duo: { title: 'Duo', kind: 'universal', color: '#7B5CFF', description: 'An outline over a soft tint.',
-      plain: 'An outline with a soft tint inside. Friendly and calm.', good: 'Feature lists, onboarding, landing pages',
-      who: 'Feature lists, empty states, onboarding and marketing surfaces.', why: 'Adds depth without adding a second colour.' },
+    duo: { title: 'Duo', kind: 'universal', color: '#7B5CFF', description: 'An outline over a soft tint, with one accent.',
+      plain: 'An outline with a soft tint inside and one small accent detail. Friendly and calm.', good: 'Feature lists, onboarding, SaaS and landing pages',
+      who: 'Feature lists, empty states, onboarding, product UI and SaaS marketing.', why: 'Adds depth and one accent colour (or an opt-in gradient stroke) without getting loud.' },
     gloss: { title: 'Gloss', kind: 'creative', color: '#FF4FA3', description: 'Puffy, shiny, toy-like.',
       plain: 'Puffy and shiny, like glossy stickers. Playful and fun.', good: 'Social posts, kids, games, launches',
       who: 'App launchers, hero moments and playful consumer brands.', why: 'Tactile highlights cut into one flat colour.' },
@@ -110,9 +128,9 @@
     sketch: { title: 'Sketch', kind: 'creative', color: '#22A861', description: 'Hand-drawn marker.',
       plain: 'Hand-drawn marker lines, like a whiteboard doodle.', good: 'Classes, workshops, notes, friendly brands',
       who: 'Whiteboards, onboarding, education and friendly products.', why: 'Warmth on purpose: hand-made, yet identical on every build.' },
-    glass: { title: 'Glass', kind: 'creative', color: '#5B9DFF', description: 'Layered frosted glass.', group: 'playful',
-      plain: 'Layers of frosted glass with soft light. Modern and airy.', good: 'App screens, dashboards, tech launches, dark mode',
-      who: 'Modern apps, fintech, dashboards and product launches.', why: 'Depth from stacked translucent panes, no blur filters needed.' },
+    glass: { title: 'Glass', kind: 'creative', color: '#7484FF', description: 'Soft frosted glass.', group: 'playful',
+      plain: 'Soft, luxurious frosted glass with gentle light and depth. Modern and airy.', good: 'App screens, dashboards, tech launches, dark mode',
+      who: 'Modern apps, fintech, dashboards and product launches.', why: 'A calm colour glows through a translucent pane with a fine light rim and a gentle shadow.' },
     kawaii: { title: 'Kawaii', kind: 'creative', color: '#FF7A9A', description: 'Chubby, cute, with a tiny face.', group: 'playful',
       plain: 'Chubby, soft and cute, with a tiny smiling face and rosy cheeks.', good: 'Journals, kids, cafés, stickers, social posts',
       who: 'Creators, planners, small shops and anything that should feel friendly.', why: 'Every object gets a personality, so a set feels like a family.' },
@@ -134,37 +152,83 @@
     skeuo: { title: 'Skeuo', kind: 'creative', color: '#5A6E86', description: 'Real materials and depth.', group: 'studio',
       plain: 'Real materials, bevels and shadows, like objects you could pick up.', good: 'App icons, dashboards, music and photo apps',
       who: 'App icons, tools, dashboards and nostalgic product UIs.', why: 'Light, material and texture make each icon feel touchable.' },
-    anime: { title: 'Anime', kind: 'creative', color: '#2E9BF0', description: 'Cel-shaded anime art.', group: 'storybook', isNew: true,
+    anime: { title: 'Anime', kind: 'creative', color: '#2E9BF0', description: 'Cel-shaded anime art.', group: 'storybook',
       plain: 'Anime cel shading: bold ink, bright colour, hard shadows and starry highlights.', good: 'Games, streaming, fan sites, social posts',
       who: 'Games, streaming, creators, fan communities and youthful brands.', why: 'Hard cel shadows and sparkling highlights, like a frame from a favourite show.' },
-    gothic: { title: 'Gothic', kind: 'creative', color: '#7A1F3D', description: 'Cathedral stone and stained glass.', group: 'storybook', isNew: true,
+    gothic: { title: 'Gothic', kind: 'creative', color: '#7A1F3D', description: 'Cathedral stone and stained glass.', group: 'storybook',
       plain: 'Old-world Gothic detail: pointed arches, carved stone and jewel-toned stained glass.', good: 'Fantasy games, books, music, Halloween',
       who: 'Fantasy and RPG games, publishers, bands, tattoo studios and dark-luxe brands.', why: 'Each icon carved like a cathedral window: arches, tracery and glowing glass.' },
-    pastel: { title: 'Pastel', kind: 'creative', color: '#3DBFA0', description: 'Soft candy pastels.', group: 'storybook', isNew: true,
+    pastel: { title: 'Pastel', kind: 'creative', color: '#3DBFA0', description: 'Soft candy pastels.', group: 'storybook',
       plain: 'Soft, airy pastel colours with gentle shading. Calm and dreamy.', good: 'Wellness, journals, planners, lifestyle',
       who: 'Wellness, journaling, planners, baby and lifestyle brands.', why: 'Low-contrast candy colours that stay calm, even in a dense grid.' },
-    coquette: { title: 'Coquette', kind: 'creative', color: '#E2456F', description: 'Bows, pearls and blush pink.', group: 'storybook', isNew: true,
+    coquette: { title: 'Coquette', kind: 'creative', color: '#E2456F', description: 'Bows, pearls and blush pink.', group: 'storybook',
       plain: 'Romantic and feminine: blush pink, satin bows, pearls and lace.', good: 'Beauty, fashion, weddings, boutiques',
       who: 'Beauty, fashion, weddings, boutiques and feminine brands.', why: 'Ribbons, pearls and lace turn everyday objects into keepsakes.' },
-    plush: { title: 'Plush', kind: 'creative', color: '#F2AE24', description: 'Soft stuffed-toy felt.', group: 'storybook', isNew: true,
+    plush: { title: 'Plush', kind: 'creative', color: '#F2AE24', description: 'Soft stuffed-toy felt.', group: 'storybook',
       plain: 'Soft stuffed toys in felt, with stitched seams. Made for kids.', good: 'Kids apps, learning, toys, nurseries',
-      who: 'Kids apps, learning games, toy shops, nurseries and family brands.', why: 'Plump felt shapes and stitched seams you almost want to squeeze.' }
+      who: 'Kids apps, learning games, toy shops, nurseries and family brands.', why: 'Plump felt shapes and stitched seams you almost want to squeeze.' },
+    clay: { title: 'Clay', kind: 'creative', color: '#C8714E', description: 'Soft faux-3D clay.', group: 'ai', isNew: true, rich: true,
+      plain: 'Soft, rounded 3D objects that look sculpted from matte clay.', good: 'AI products, onboarding, landing pages, empty states',
+      who: 'AI assistants, consumer apps, onboarding flows and friendly SaaS landing pages.', why: 'Puffy matte forms and soft studio light: the warm, tactile look of AI-era product art.' },
+    bento: { title: 'Bento', kind: 'creative', color: '#0E9F9A', description: 'Icons in tinted tiles.', group: 'product', isNew: true, rich: true,
+      plain: 'Each icon sits in its own soft tinted tile, like a bento-grid feature card.', good: 'Feature grids, settings, landing pages, app menus',
+      who: 'Landing pages with bento grids, settings screens, menus and marketing sites.', why: 'A ready-made tile turns every icon into a tidy, colour-coded feature card.' },
+    suite: { title: 'Suite', kind: 'creative', color: '#0B6CD4', description: 'Enterprise colour icons.', group: 'product', isNew: true, rich: true,
+      plain: 'Polished full-colour icons, like the ones in an office or cloud suite.', good: 'Business apps, intranets, admin consoles, docs',
+      who: 'Enterprise software, productivity suites, intranets and cloud consoles.', why: 'Clear shapes, calm gradients and a consistent colour system teams trust.' },
+    dock: { title: 'Dock', kind: 'creative', color: '#3A3F4B', description: 'App-icon tiles.', group: 'product', isNew: true, rich: true,
+      plain: 'Glossy rounded app tiles, like the icons in a desktop dock.', good: 'App launchers, app stores, portfolios, product pages',
+      who: 'App launchers, product showcases, portfolios and download pages.', why: 'A rounded tile with light and depth turns any icon into an app icon.' },
+    liquid: { title: 'Liquid', kind: 'creative', color: '#38BDF8', description: 'Clear refractive glass.', group: 'trend', isNew: true, rich: true,
+      plain: 'Clear liquid glass that bends the light, with bright rims and soft reflections.', good: 'Modern app UIs, dashboards, hero art, dark mode',
+      who: 'Modern OS-style interfaces, product launches and premium apps.', why: 'Rims of light and refracted colour: the newest look in interface design.' },
+    chrome: { title: 'Chrome', kind: 'creative', color: '#8D99AE', description: 'Liquid metal.', group: 'trend', isNew: true, rich: true,
+      plain: 'Polished liquid chrome with mirror highlights. Y2K and futuristic.', good: 'Music, fashion, events, posters, Y2K brands',
+      who: 'Music and fashion brands, events, streetwear and futuristic launches.', why: 'Mirror-bright metal from banded gradients, sharp at any size.' },
+    soft3d: { title: 'Soft 3D', kind: 'creative', color: '#E0A800', description: 'Soft studio-lit 3D.', group: 'depth', isNew: true, rich: true,
+      plain: 'Soft, studio-lit 3D objects with real depth. Physical things sit at a gentle angle; people look like friendly 3D avatars.', good: 'Landing pages, onboarding, app stores, avatars, explainers',
+      who: 'Product launches, onboarding flows, consumer apps, avatar pickers and marketing pages.', why: 'Real volume and soft light, tilted only when the object is a physical thing, so symbols stay readable and people come out as Memoji-like busts.' },
+    brutal: { title: 'Brutal', kind: 'creative', color: '#FF4F79', description: 'Bold neo-brutalism.', group: 'trend', isNew: true,
+      plain: 'Thick black outlines, loud flat colour and a hard offset shadow.', good: 'Startups, portfolios, posters, Gen Z brands',
+      who: 'Indie startups, portfolios, newsletters and bold Gen Z brands.', why: 'Raw, confident shapes with a hard shadow that pops off the page.' },
+    utsav: { title: 'Utsav', kind: 'creative', color: '#EA7A0C', description: 'Indian festive craft.', group: 'holidays', isNew: true, rich: true,
+      plain: 'Warm marigold and saffron shapes with a plum outline, a fine gold inner line and rangoli dot-work.', good: 'Diwali and Durga Puja greetings, Indian brands, wedding and festive menus',
+      who: 'Indian brands, festive offers, wedding cards, restaurants and cultural events.', why: 'Saree-border arches, rosettes and a tiny diya flame give every icon a handcrafted festive finish.' },
+    rangoli: { title: 'Rangoli', kind: 'creative', color: '#E81F7A', description: 'Diwali, Durga Puja and Holi.', group: 'holidays', isNew: true, rich: true,
+      plain: 'Clean objects in a warm festive glow, each with one Indian festival motif: petals, a lotus, a toran or a diya.', good: 'Diwali, Durga Puja and Holi campaigns, festive sales, app themes',
+      who: 'Brands and apps running Diwali, Durga Puja, Holi or Navratri campaigns, offers and greetings.', why: 'Modern and premium, never kitsch: one palette switches the whole set from Diwali to Durga Puja to Holi.' },
+    halloween: { title: 'Halloween', kind: 'creative', color: '#F2690F', description: 'Spooky-cute Halloween.', group: 'holidays', isNew: true, rich: true,
+      plain: 'Spooky-cute pumpkin, witch-purple and midnight shapes with candle-lit carvings, slime drips and a tiny bat.', good: 'Halloween campaigns, party invites, app themes, social posts',
+      who: 'Shops, games, apps and creators dressing up for October.', why: 'Carved details glow from inside, so even a calendar or a cart looks ready for trick-or-treat.' },
+    christmas: { title: 'Christmas', kind: 'creative', color: '#1F7A4D', description: 'Cosy Christmas.', group: 'holidays', isNew: true, rich: true,
+      plain: 'Cosy cranberry, pine and gold shapes with a snow cap on every top edge, candy-cane stripes and a sprig of holly.', good: 'Christmas campaigns, holiday emails, gift guides, app themes',
+      who: 'Shops, newsletters, apps and brands with a holiday season to celebrate.', why: 'Real snow resting on each silhouette and a warm glow make any icon feel festive and still readable.' },
+    lunar: { title: 'Lunar New Year', kind: 'creative', color: '#E8282E', description: 'Lucky red and gold.', group: 'holidays', isNew: true, rich: true,
+      plain: 'Lucky red lacquer with a gold-foil rim, jade details, paper-cut cloud scrolls, silk tassels and plum blossoms.', good: 'Lunar New Year campaigns, red-envelope promos, greetings, app themes',
+      who: 'Brands, apps and shops across East and Southeast Asia celebrating Lunar New Year (Chinese New Year, Tết, Seollal).', why: 'Red and gold, with no text or characters, so it suits every market and every icon.' },
+    valentine: { title: 'Valentine', kind: 'creative', color: '#FF5C82', description: "Cute Valentine's stickers.", group: 'holidays', isNew: true, rich: true,
+      plain: "Cute pink-to-red cartoon shapes with a warm berry outline, polka dots, tiny blushing faces and floating hearts.", good: "Valentine's campaigns, cards, dating apps, gift shops",
+      who: "Gift shops, florists, dating apps, cafés and anyone running a Valentine's or Galentine's promo.", why: 'Every object becomes a little love note, sweet without losing what it means.' }
   }
   ;['line', 'solid', 'duo'].forEach(function (n) { INFO[n].group = 'everyday' })
   ;['gloss', 'engrave', 'blueprint', 'sketch'].forEach(function (n) { INFO[n].group = 'crafted' })
   // live counts: from data/meta.js once loaded, otherwise the published totals
-  var FALLBACK_TOTAL = 500
+  var FALLBACK_TOTAL = 734
+  var FALLBACK_LIVE = 50
   function counts() {
     var d = W.WITH || W.EGI
     var n = d && d.icons && d.icons.length ? d.icons.length : (d && d.total) || FALLBACK_TOTAL
     // styles: the contract order plus anything extra the data declares (a style is announced before every file lands)
     var st = ORDER.length
     if (d && d.styles) d.styles.forEach(function (x) { if (x && ORDER.indexOf(x.name) < 0) st++ })
-    return { icons: n, styles: st, svgs: n * st }
+    // "over 25,000": every icon in every style plus the live icons (forge/dynamic generators, each in every style),
+    // rounded DOWN to a whole 5,000 so it stays true as icons come and go. data/meta.js may carry `live`; else the published 50
+    var live = d && d.live != null ? (d.live.length != null ? d.live.length : +d.live) : FALLBACK_LIVE
+    return { icons: n, styles: st, svgs: n * st, live: live, over: Math.floor((n + live) * st / 5000) * 5000 }
   }
-  var NUM_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five']
+  var NUM_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five', 'twenty-six', 'twenty-seven', 'twenty-eight', 'twenty-nine', 'thirty', 'thirty-one', 'thirty-two', 'thirty-three', 'thirty-four', 'thirty-five', 'thirty-six', 'thirty-seven', 'thirty-eight', 'thirty-nine', 'forty']
   function numWord(n) { return NUM_WORDS[n] || String(n) }
-  /* Live counts. Put data-count="icons|styles|svgs|styles-word|Styles-word" on any element holding a static number
+  /* Live counts. Put data-count="icons|styles|svgs|over|styles-word|Styles-word" on any element holding a static number
      (keep the correct published number as its text: it is the no-JS fallback). Painted when data/meta.js is present. */
   function paintCounts(root) {
     if (!(W.WITH || W.EGI)) return
@@ -174,6 +238,7 @@
       if (k === 'icons') v = fmt(c.icons)
       else if (k === 'styles') v = String(c.styles)
       else if (k === 'svgs') v = fmt(c.svgs)
+      else if (k === 'over') v = fmt(c.over)
       else if (k === 'styles-word') v = numWord(c.styles)
       else if (k === 'Styles-word') { v = numWord(c.styles); v = v.charAt(0).toUpperCase() + v.slice(1) }
       if (v != null && el.textContent !== v) el.textContent = v
@@ -222,7 +287,7 @@
   function icon(name) { return byName()[name] || null }
   function hasIcon(name, style) {
     if (!style) return !!byName()[name]
-    var m = svgMap(style); return !!(m && m[name] != null)
+    return innerOf(name, style) != null
   }
   function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') }
   var ROOTS = {
@@ -236,7 +301,9 @@
     glass: { fill: 'none' }, kawaii: { fill: 'currentColor' }, sticker: { fill: 'currentColor' },
     pixel: { fill: 'currentColor', 'shape-rendering': 'crispEdges' }, retro: { fill: 'currentColor' },
     luxe: { fill: 'none' }, bauhaus: { fill: 'currentColor' }, skeuo: { fill: 'none' },
-    anime: { fill: 'none' }, gothic: { fill: 'none' }, pastel: { fill: 'none' }, coquette: { fill: 'none' }, plush: { fill: 'none' }
+    anime: { fill: 'none' }, gothic: { fill: 'none' }, pastel: { fill: 'none' }, coquette: { fill: 'none' }, plush: { fill: 'none' },
+    clay: { fill: 'none' }, bento: { fill: 'none' }, suite: { fill: 'none' }, dock: { fill: 'none' }, liquid: { fill: 'none' }, chrome: { fill: 'none' }, soft3d: { fill: 'none' }, brutal: { fill: 'none' },
+    utsav: { fill: 'none' }, rangoli: { fill: 'none' }, halloween: { fill: 'none' }, christmas: { fill: 'none' }, lunar: { fill: 'none' }, valentine: { fill: 'none' }
   }
   function rootAttrs(style) { var m = styleMeta(style); return (m && m.root) || ROOTS[style] || { fill: 'currentColor' } }
   function svgFrom(inner, style, size, opts) {
@@ -256,8 +323,7 @@
   function svg(name, style, size, opts) {
     style = style || 'line'
     size = size == null ? 24 : size
-    var m = svgMap(style)
-    var inner = m && m[name]
+    var inner = innerOf(name, style)
     if (inner == null) return ''
     return svgFrom(inner, style, size, opts)
   }
@@ -271,12 +337,91 @@
     else s = s.replace(/var\(--(?:eg|with)-(?:duo|accent),\s*currentColor\)/g, 'currentColor')
     return s
   }
+  /* ───────────── rich icons: gradient ids stay unique per copy ─────────────
+     Rich styles (forge/CONTRACT.md "Rich styles": clay, liquid, chrome, the holiday styles…) carry one <defs> of gradients with ids
+     wg-<style>-<icon>-<n>, painted through url(#…). Two copies of one drawing on a page would share those ids, and every
+     copy would then paint with the FIRST copy's gradients: wrong colours once that one is recoloured (a gradient's
+     stop-color var(--with-…) resolves where the gradient lives), nothing at all when it sits in display:none or is
+     removed. So every copy owns its gradients: uniqIds() gives a markup string fresh ids, and one MutationObserver does
+     the same for any SVG any script on any page inserts (library grid and drawer, studio previews, home, live,
+     alternatives…). Ids keep their readable base: wg-clay-home-0 -> wg-clay-home-0_u7. */
+  var uidN = 0
+  var WG_ID = /(\bid="|url\(#|href="#)(wg-[\w-]*?)(?:_u[0-9a-z]+)?(?=["')])/g
+  function uniqIds(markup) {
+    var s = String(markup == null ? '' : markup)
+    if (s.indexOf('wg-') < 0) return s
+    var suf = '_u' + (++uidN).toString(36)
+    return s.replace(WG_ID, function (m, a, id) { return a + id + suf })
+  }
+  // a style is rich when its drawings carry gradients (data/meta.js says so; before it loads, INFO's guess for the run-12 styles)
+  function isRich(style) { var m = styleMeta(style); return m ? !!m.rich : !!(INFO[style] && INFO[style].rich) }
+  // give every wg- id inside one (outermost) <svg> a fresh suffix and point its url(#…)/href="#…" at the new ids
+  function fixIds(svgEl) {
+    var els = svgEl.querySelectorAll('[id^="wg-"]'); if (!els.length) return
+    var suf = '_u' + (++uidN).toString(36), map = {}, i, j
+    for (i = 0; i < els.length; i++) { var old = els[i].id, nu = old.replace(/_u[0-9a-z]+$/, '') + suf; map[old] = nu; els[i].id = nu }
+    var all = svgEl.querySelectorAll('*')
+    for (i = 0; i < all.length; i++) {
+      var at = all[i].attributes
+      for (j = 0; j < at.length; j++) {
+        var v = at[j].value
+        if (v.indexOf('#wg-') < 0) continue
+        var nv = v.replace(/#(wg-[\w-]+)/g, function (m, id) { return map[id] ? '#' + map[id] : m })
+        if (nv !== v) all[i].setAttribute(at[j].name, nv)
+      }
+    }
+  }
+  function topSvgs(node) {
+    if (!node || node.nodeType !== 1) return []
+    if (node.ownerSVGElement || node.tagName.toLowerCase() === 'svg') {
+      var top = node.tagName.toLowerCase() === 'svg' ? node : node.ownerSVGElement
+      while (top.ownerSVGElement) top = top.ownerSVGElement
+      return [top]
+    }
+    if (!node.querySelector || !node.querySelector('[id^="wg-"]')) return []
+    return Array.prototype.filter.call(node.querySelectorAll('svg'), function (s) { return !s.ownerSVGElement && s.querySelector('[id^="wg-"]') })
+  }
+  function watchIds() {
+    if (!W.MutationObserver || !doc.documentElement) return
+    new MutationObserver(function (recs) {
+      var seen = []
+      for (var r = 0; r < recs.length; r++) {
+        var added = recs[r].addedNodes
+        for (var k = 0; k < added.length; k++) {
+          var n = added[k]
+          // only work when something with a wg- id came in (cheap for every other insert)
+          if (n.nodeType !== 1 || !((n.id && n.id.indexOf('wg-') === 0) || (n.querySelector && n.querySelector('[id^="wg-"]')))) continue
+          topSvgs(n).forEach(function (s) { if (seen.indexOf(s) < 0) seen.push(s) })
+        }
+      }
+      seen.forEach(function (s) { if (s.isConnected !== false) fixIds(s) })
+    }).observe(doc.documentElement, { childList: true, subtree: true })
+  }
+  // copies already in the HTML: only the second and later holders of an id need new ones
+  function dedupeIds() {
+    var have = {}
+    $$('[id^="wg-"]').forEach(function (el) {
+      if (!have[el.id]) { have[el.id] = 1; return }
+      var t = topSvgs(el)[0]; if (t) fixIds(t)
+    })
+  }
+  watchIds()
+
   function loadScript(src) {
+    // the page may already have it (a static <script async/defer>, or an earlier call): never download a file twice
+    var abs = src; try { abs = new URL(src, doc.baseURI).href } catch (e) { /* old engine */ }
+    var have = null
+    for (var i = 0; i < doc.scripts.length; i++) if (doc.scripts[i].src === abs && !doc.scripts[i].__wiFail) { have = doc.scripts[i]; break }
+    if (have) return new Promise(function (resolve) {
+      if (have.__wiDone || doc.readyState === 'complete') { resolve(true); return }
+      have.addEventListener('load', function () { resolve(true) }); have.addEventListener('error', function () { resolve(false) })
+      W.addEventListener('load', function () { resolve(true) })
+    })
     return new Promise(function (resolve) {
       var s = doc.createElement('script')
       s.src = src; s.async = true
-      s.onload = function () { resolve(true) }
-      s.onerror = function () { resolve(false) }
+      s.onload = function () { s.__wiDone = true; resolve(true) }
+      s.onerror = function () { s.__wiFail = true; resolve(false) }
       doc.head.appendChild(s)
     })
   }
@@ -286,10 +431,88 @@
     if (!pending.__meta) pending.__meta = loadScript(scriptBase + 'data/meta.js').then(function () { iconIndex = null; emit('meta'); return !!(W.WITH || W.EGI) })
     return pending.__meta
   }
+  /* Heavy styles also come in chunks (forge/tools/site-data.mjs styleChunks): data/chunks/<style>.<k>.js puts
+     window.WITH_SVG_PART['<style>.<k>'] = { icon: markup } for `meta.chunks.size` icons in the library's browse order
+     (meta.categories order, then name). loadStyleFor(style, names) fetches only the chunks those icons live in, so a
+     screenful of a 7 MB style costs one ~50 KB file; loadStyle(style) fetches every chunk and puts WITH_SVG[style]
+     together, so pages that want a whole style get exactly what they got before. */
+  function chunkCount(style) { var m = styleMeta(style); return m && m.chunks && DATA().chunks ? m.chunks : 0 }
+  var browsePos = null
+  function chunkOf(name) {
+    if (!browsePos || browsePos.length !== (DATA().icons || []).length) {
+      var D0 = DATA(), cats = D0.categories || [], rank = function (c) { var i = cats.indexOf(c); return i < 0 ? 1e6 : i }
+      var list = (D0.icons || []).slice().sort(function (a, b) { return (rank(a.category) - rank(b.category)) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0) })
+      browsePos = { length: list.length, at: {} }; list.forEach(function (ic, i) { browsePos.at[ic.name] = i })
+    }
+    var p = browsePos.at[name]; return p == null ? -1 : Math.floor(p / ((DATA().chunks || {}).size || 48))
+  }
+  function partOf(style, k) { var P = W.WITH_SVG_PART; return (P && P[style + '.' + k]) || null }
+  // one drawing, from the whole style or from the chunk it lives in
+  function innerOf(name, style) {
+    var m = svgMap(style); if (m && m[name] != null) return m[name]
+    var n = chunkCount(style); if (!W.WITH_SVG_PART || !n) return null
+    var p = partOf(style, chunkOf(name)); if (p && p[name] != null) return p[name]
+    // (a cached meta.js from before icons were added can point at the wrong chunk: look in the others too)
+    for (var k = 0; k < n; k++) { p = partOf(style, k); if (p && p[name] != null) return p[name] }
+    return null
+  }
+  function assemble(style) {
+    if (svgMap(style)) return true
+    var n = chunkCount(style), all = {}, k
+    for (k = 0; k < n; k++) if (!partOf(style, k)) return false
+    ;(DATA().icons || []).forEach(function (ic) { var m = innerOf(ic.name, style); if (m != null) all[ic.name] = m })
+    ;(W.WITH_SVG = W.WITH_SVG || {})[style] = all
+    return true
+  }
+  function loadChunk(style, k) {
+    var key = style + '.' + k
+    if (partOf(style, k)) return Promise.resolve(true)
+    if (pending[key]) return pending[key]
+    // the page's own <head> may have started it already (icons.html)
+    var tag = doc.querySelector('script[data-with-chunk="' + key + '"]')
+    var fetch = tag && !tag.hasAttribute('data-done')
+      ? new Promise(function (r) { tag.addEventListener('load', r); tag.addEventListener('error', r) })
+      : loadScript(scriptBase + ((DATA().chunks || {}).dir || 'data/chunks/') + key + '.js')
+    pending[key] = fetch.then(function () {
+      var ok = !!partOf(style, k)
+      if (!ok) { delete pending[key]; return false }
+      emit('chunk', { style: style, k: k })
+      if (!svgMap(style) && assemble(style)) emit('style', style)
+      return true
+    })
+    return pending[key]
+  }
+  // the chunks that hold `names` (all of them when names is empty), the ones asked for first
+  function loadStyleFor(style, names) {
+    var n = chunkCount(style)
+    if (!n || svgMap(style)) return loadStyle(style)
+    var want = []
+    ;(names || []).forEach(function (nm) { var k = chunkOf(nm); if (k >= 0 && want.indexOf(k) < 0) want.push(k) })
+    if (!want.length) want.push(0)
+    return Promise.all(want.map(function (k) { return loadChunk(style, k) })).then(function (r) { return r.every(Boolean) })
+  }
   function loadStyle(name) {
     if (svgMap(name)) return Promise.resolve(true)
     if (ORDER.indexOf(name) < 0 && !styleMeta(name)) return Promise.resolve(false)
     if (pending[name]) return pending[name]
+    var n = chunkCount(name)
+    if (n) {
+      // every chunk, in order, a few at a time (the first screens arrive first)
+      pending[name] = new Promise(function (resolve) {
+        var next = 0, live = 0
+        function pump() {
+          if (svgMap(name)) { resolve(true); return }
+          if (assemble(name)) { emit('style', name); resolve(true); return }
+          if (next >= n && !live) { delete pending[name]; resolve(false); return }
+          while (live < 6 && next < n) {
+            live++
+            loadChunk(name, next++).then(function () { live--; pump() })
+          }
+        }
+        pump()
+      })
+      return pending[name]
+    }
     pending[name] = loadScript(scriptBase + 'data/style-' + name + '.js').then(function () {
       var ok = !!svgMap(name); if (ok) emit('style', name); return ok
     })
@@ -789,7 +1012,7 @@
     return hit
   }
   // nav links and the mobile menu cycle through the signature colours (old and new styles interleaved)
-  var NAV_STYLE = ['line', 'anime', 'luxe', 'kawaii', 'pastel', 'solid', 'pixel', 'gothic', 'duo', 'retro', 'coquette', 'gloss', 'bauhaus', 'glass', 'plush', 'sketch', 'sticker', 'skeuo', 'blueprint', 'engrave']
+  var NAV_STYLE = ['line', 'rangoli', 'anime', 'luxe', 'clay', 'kawaii', 'pastel', 'liquid', 'solid', 'pixel', 'christmas', 'gothic', 'duo', 'bento', 'retro', 'coquette', 'soft3d', 'halloween', 'gloss', 'bauhaus', 'suite', 'glass', 'plush', 'brutal', 'lunar', 'sketch', 'sticker', 'utsav', 'skeuo', 'chrome', 'blueprint', 'dock', 'valentine', 'engrave']
   function initHeader() {
     var header = $('[data-header]') || $('.site-header')
     if (!header) return
@@ -979,7 +1202,7 @@
         loadMeta().then(function () {
           spans.forEach(function (sp) {
             var s = sp.getAttribute('data-style') || 'line'
-            loadStyle(s).then(function () { sp.innerHTML = svg(sp.getAttribute('data-icon'), s, 24) })
+            loadStyleFor(s, [sp.getAttribute('data-icon')]).then(function () { sp.innerHTML = svg(sp.getAttribute('data-icon'), s, 24) })
           })
         })
       }, '400px')
@@ -1088,6 +1311,7 @@
       }
     })
     on('style', function (s) { if (so.open && s === so.style) render(so.hits, so.lastQ, true) })
+    on('chunk', function (c) { if (so.open && c && c.style === so.style && !svgMap(c.style)) render(so.hits, so.lastQ, true) })
     on('search-ready', function () { if (so.open && so.input.value) runSearch() })
     paintSoStyle(); paintSoView()
     return so
@@ -1115,7 +1339,8 @@
     if (fromKey) announce(INFO[s].title + ' style')
     if (!fromKey) so.input.focus({ preventScroll: true })
     render(so.hits, so.lastQ, true)
-    loadStyle(s).then(function () { render(so.hits, so.lastQ, true) })
+    // (a chunked heavy style: render() itself asks for the chunks its hits need)
+    if (!chunkCount(s)) loadStyle(s).then(function () { render(so.hits, so.lastQ, true) })
   }
   function setSoView(v) {
     so.view = v; paintSoView()
@@ -1130,13 +1355,13 @@
     if (act === 'png') copyPng(name, style)
   }
   function copySvg(name, style) {
-    return loadStyle(style).then(function () {
+    return loadStyleFor(style, [name]).then(function () {
       var s = svgFile(name, style)
       if (s) return copy(s, 'Copied ' + name + ' · ' + INFO[style].title + ' SVG')
     })
   }
   function pngFile(name, style, px) {
-    return loadStyle(style).then(function () {
+    return loadStyleFor(style, [name]).then(function () {
       var s = svgFile(name, style, { color: INFO[style].color, size: px })
       if (!s) throw new Error('missing')
       return svgToPng(s, px)
@@ -1210,6 +1435,8 @@
     so.lastQ = q || ''
     var style = so.style, list = so.view === 'list', h = ''
     var size = list ? 26 : 36
+    // a chunked heavy style: only the chunks of the first screens of hits (each one re-renders as it lands)
+    if (chunkCount(style) && !svgMap(style)) loadStyleFor(style, so.hits.slice(0, 60).map(function (x) { return x.name }))
     so.hits.forEach(function (hit, i) {
       var ic = svg(hit.name, style, size) || svg(hit.name, 'line', size)
       h += '<a class="so-hit" id="so-opt-' + i + '" role="option" tabindex="-1" data-i="' + i + '" style="--i:' + Math.min(i, 18) + '" aria-selected="false" href="' + esc(iconUrl(hit.name)) + '"' +
@@ -1249,7 +1476,7 @@
     var q = so.input.value.trim()
     ensureSearch().then(function () {
       if (q !== so.input.value.trim()) return // a newer keystroke owns the UI
-      loadStyle(so.style)
+      if (!chunkCount(so.style)) loadStyle(so.style)
       if (!q) {
         so.label.textContent = 'Popular icons'
         so.empty.hidden = true
@@ -1424,7 +1651,7 @@
       add('Reply with:')
       add('1. Best fit: exact name + one line on why my users will read it right.')
       add('2. Up to 2 alternatives, one line each.')
-      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles (gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush) only at 32px+).')
+      add('3. The best style for this context, and why (line or solid for UI controls; the illustrated styles (' + ORDER.filter(function (s) { return ['line', 'solid', 'duo'].indexOf(s) < 0 }).join(', ') + ') only at 32px+; duo with its accent also suits product UI; the holiday styles (utsav, rangoli, halloween, christmas, lunar, valentine) for seasonal campaigns).')
       add('4. Ready-to-paste code for my stack, or steps for my app. Ask if you don’t know it (React, Vue, Svelte, plain HTML, or Slides, Canva, Figma, Docs). Include an accessible label.')
       add('5. A link for each pick: ' + AI_SITE + '/icons/NAME.html')
     } else if (intent === 'code') {
@@ -1823,178 +2050,166 @@
   }
 
   /* ───────────── "On this page": the floating section map (icon pages, live pages) ─────────────
-     The page script owns the map itself (a <details> pill that shows once the hero has scrolled away and opens a list
-     of sections). This layer makes it polite: a small round "hide" button tucks it into a tab on the right edge (click
-     or drag the tab left to bring it back; the choice is remembered), it tucks itself whenever it would sit on top of
-     text or controls, and its one-time hint only appears where it covers nothing.
-     <details data-pm-dock="(max-width: 760px)"> docks the pill elsewhere in that media query (the icon pages' mobile
-     action bar): no tab and no tucking there. */
-  var PM_KEY = 'with-pagemap-tucked', PM_HINT = 'with-pagemap-hint'
-  var pmGet = function (k) { try { return localStorage.getItem(k) } catch (e) { return null } }
-  var pmSet = function (k, v) { try { localStorage.setItem(k, v) } catch (e) { /* private mode */ } }
-  var PM_TEXT = /^(P|LI|H[1-6]|A|BUTTON|LABEL|INPUT|SELECT|TEXTAREA|CODE|PRE|TD|TH|CAPTION|FIGCAPTION|BLOCKQUOTE|DT|DD|SUMMARY|IMG|CANVAS|VIDEO|KBD|B|STRONG|EM|I|SMALL|SPAN|MARK|TIME|Q|CITE|SUP|SUB)$/
-  function pmIsContent(el) {
-    if (!el || el === html || el === doc.body) return false
-    if ((W.SVGElement && el instanceof W.SVGElement) || PM_TEXT.test(el.tagName)) return true
-    for (var n = el.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && /\S/.test(n.nodeValue)) return true
-    return false
-  }
-  // does anything readable or clickable sit under this viewport rectangle? (the map's own parts don't count)
-  function pmCovers(r, skip) {
-    if (!doc.elementsFromPoint || r.w <= 0 || r.h <= 0) return false
-    var cols = Math.max(3, Math.ceil(r.w / 40)), rows = Math.max(2, Math.ceil(r.h / 20))
-    for (var i = 0; i <= cols; i++) for (var j = 0; j <= rows; j++) {
-      var x = r.x + 2 + (r.w - 4) * i / cols, y = r.y + 2 + (r.h - 4) * j / rows
-      var els = doc.elementsFromPoint(x, y)
-      for (var k = 0; k < els.length; k++) {
-        var el = els[k], mine = false
-        for (var s = 0; s < skip.length; s++) if (skip[s] && skip[s].contains(el)) mine = true
-        if (mine || (el.closest && el.closest('[data-pm-ignore], .toast'))) continue
-        if (pmIsContent(el)) return true
-        break // the first thing under the map that isn't the map: a background or a card's padding is fine
-      }
-    }
-    return false
-  }
+     One component for every <details data-map | data-lv-map | data-page-map> (generated by forge/tools/site-seo.mjs and
+     site-dynamic.mjs). Without JS it stays a plain disclosure after the hero. With JS it is a slim pill at the bottom
+     right (the current section + a reading-progress ring) that opens a compact card of sections (a bottom sheet on
+     phones). Styled in chrome.css (.pm-*); DESIGN.md "Page map". Three pieces of state, each with one owner:
+       open    only the visitor opens or closes it (the pill, Esc, a link, a click or focus outside). Scrolling never does.
+       shown   the pill appears once the hero has scrolled away and steps aside while the footer is on screen, each with a
+               hysteresis band, and never changes while the card is open. Docked (data-pm-dock="<media query>") it follows
+               the html class in data-pm-follow (default ip-bar-on: the icon pages' phone action bar).
+       active  the section under a line 35% down the screen, with 16px of hysteresis.
+     Speed: section/hero/footer offsets are measured once after idle and again only when the page's height changes
+     (ResizeObserver); a scroll frame reads scrollY and writes only what changed. The pill has a fixed size, so nothing
+     moves when the section name changes. The hero is data-pm-hero (a selector) or the element right before the map.
+     After a jump the map fires 'pagemap:jump' (detail: the target section) so the page can open what that section hides. */
   function pageMap(map) {
     if (!map || map.__pm) return map && map.__pm
-    var sum = map.querySelector('summary'); if (!sum || !map.parentNode) return null
-    if (!sum.id) sum.id = 'pm-sum-' + (map.className.split(' ')[0] || 'map')
+    var sum = map.querySelector('summary'), card = map.querySelector('nav')
+    if (!sum || !card) return null
+    var links = [].slice.call(card.querySelectorAll('a[href^="#"]'))
+    var secs = links.map(function (a) { return doc.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))) })
+    var nowEl = map.querySelector('[data-map-now], [data-lv-map-now], [data-pm-now]')
+    var prog = map.querySelector('[data-map-prog], [data-lv-map-prog], [data-pm-prog]')
+    var heroSel = map.getAttribute('data-pm-hero'), hero = heroSel ? $(heroSel) : map.previousElementSibling
+    var foot = $('.site-footer')
     var dockMq = map.getAttribute('data-pm-dock') && W.matchMedia ? W.matchMedia(map.getAttribute('data-pm-dock')) : null
-    var tab = doc.createElement('button')
-    tab.type = 'button'; tab.className = 'pm-tab'; tab.setAttribute('aria-controls', sum.id)
-    tab.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 6l6 6-6 6"/></svg>'
-    map.parentNode.insertBefore(tab, map.nextSibling)
-    html.classList.add('pm-on')
-    // mode: 'full' (the pill with its label), 'compact' (just the round button, in the margin) or 'tab' (tucked to the edge)
-    var userTucked = pmGet(PM_KEY) === '1', mode = 'full', forced = false, shown = false, hint = null, hintTries = 0, hintY = 0, fullW = 0
-    var COMPACT = 52, HIDE = 32, GAP = 8
+    var follow = map.getAttribute('data-pm-follow') || 'ip-bar-on'
+    var uid = (map.className.split(' ')[0] || 'pm') + '-list'
+    if (!card.id) card.id = uid
+    map.classList.add('pm')
+    sum.setAttribute('aria-controls', card.id)
+    sum.setAttribute('aria-expanded', String(!!map.open))
+    // the name in the pill is visible text; screen readers get "On this page" + the expanded state from the summary
+    if (nowEl) { nowEl.setAttribute('aria-hidden', 'true'); if (!nowEl.textContent) nowEl.textContent = 'Jump to a section' }
+
+    var isOpen = !!map.open, shown = false, past = false, nearFoot = false, active = -2, pct = -1, closeT = 0, lock = -1
+    var tops = [], heroEnd = 0, footTop = Infinity, docH = 0, vh = 0, measured = false
+
+    /* ── measuring: only on load, resize and when the page's height changes ── */
+    function measure() {
+      var y = W.scrollY || 0
+      vh = W.innerHeight || 800; docH = html.scrollHeight
+      tops = secs.map(function (s) { return s ? s.getBoundingClientRect().top + y : Infinity })
+      heroEnd = hero ? hero.getBoundingClientRect().bottom + y : 0
+      footTop = foot ? foot.getBoundingClientRect().top + y : Infinity
+      measured = true
+      frame()
+    }
+    var mRaf = 0
+    function measureSoon() { if (!mRaf) mRaf = requestAnimationFrame(function () { mRaf = 0; measure() }) }
+
+    /* ── one scroll frame: no layout reads, writes only on change ── */
+    var BAND = 24
+    function frame() {
+      if (!measured) return
+      var y = W.scrollY || 0
+      // shown: past the hero (on 40px above its end, off 48px lower down), away while 40px of footer shows (back at -24px)
+      var edge = heroEnd - 40
+      if (!past && y > edge + BAND) past = true; else if (past && y < edge - BAND) past = false
+      var fy = y + vh - footTop
+      if (!nearFoot && fy > 40) nearFoot = true; else if (nearFoot && fy < -24) nearFoot = false
+      apply()
+      // active: the last section whose top is above the reading line; switching needs 16px past the boundary
+      var line = y + vh * 0.35, idx = -1
+      for (var i = 0; i < tops.length; i++) if (tops[i] <= line) idx = i
+      if (lock >= 0) idx = lock // after a jump the chosen section stays current until the visitor scrolls on their own
+      else if (y >= docH - vh - 4) { for (var j = tops.length - 1; j >= 0; j--) if (tops[j] < Infinity) { idx = j; break } }
+      else if (idx !== active && active > -2) {
+        var l2 = idx > active ? line - 16 : line + 16, k = -1
+        for (var n = 0; n < tops.length; n++) if (tops[n] <= l2) k = n
+        if (k !== idx) idx = active
+      }
+      if (idx !== active) setActive(idx)
+      // progress ring, in 1% steps
+      var p = Math.round(Math.min(1, Math.max(0, y / Math.max(1, docH - vh))) * 100)
+      if (p !== pct && prog) { pct = p; prog.style.strokeDashoffset = String(100 - p) }
+    }
+    var sRaf = 0
+    function onScroll() { if (!sRaf) sRaf = requestAnimationFrame(function () { sRaf = 0; frame() }) }
+
+    function setActive(idx) {
+      active = idx
+      links.forEach(function (a, i) { if (i === idx) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current') })
+      if (!nowEl) return
+      var b = idx >= 0 && links[idx].querySelector('b'), txt = b ? b.textContent : 'Jump to a section'
+      if (nowEl.textContent === txt) return
+      nowEl.textContent = txt
+      if (nowEl.animate && !reduced && shown) nowEl.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 180, easing: 'cubic-bezier(.2,.8,.2,1)' })
+    }
     function docked() { return !!(dockMq && dockMq.matches) }
-    // where the map's parts sit in each mode, from the map's own CSS position (whatever transform it has right now)
-    function spots() {
-      var cs = W.getComputedStyle(map), h = map.offsetHeight || COMPACT
-      var right = parseFloat(cs.right) || 20, bottom = parseFloat(cs.bottom) || 20
-      var vw = html.clientWidth || W.innerWidth, vh = W.innerHeight, w = fullW || map.offsetWidth
-      return {
-        right: right, bottom: bottom,
-        full: { x: vw - right - w - HIDE - GAP, y: vh - bottom - h, w: w + HIDE + GAP, h: h },            // the pill + its hide button on the left
-        compact: { x: vw - right - COMPACT, y: vh - bottom - COMPACT - GAP - HIDE, w: COMPACT, h: COMPACT + GAP + HIDE } // the round button + hide button above
-      }
+    function apply() {
+      var want = docked() ? html.classList.contains(follow) : past && !nearFoot
+      if (isOpen) want = shown || want // never hide (or show) under an open card
+      if (want === shown) return
+      shown = want; map.classList.toggle('is-shown', want)
     }
-    function covered(r) { return pmCovers(r, [map, tab, hint]) }
-    // the edge tab: the lowest of a few heights where it covers nothing; if none is free it slims down to a sliver
-    var TAB_SPOTS = [0, 76, 152, 228, 304, 380]
-    function placeTab(sp) {
-      var vw = html.clientWidth || W.innerWidth, vh = W.innerHeight, tw = vw <= 600 ? 22 : 26, th = vw <= 600 ? 52 : 56, base = Math.max(18, sp.bottom - 2)
-      for (var i = 0; i < TAB_SPOTS.length; i++) {
-        var b = base + TAB_SPOTS[i]; if (b + th > vh * 0.6) break
-        if (!covered({ x: vw - tw, y: vh - b - th, w: tw, h: th })) { tab.style.bottom = b + 'px'; tab.classList.remove('is-slim'); return }
-      }
-      tab.style.bottom = base + 'px'; tab.classList.add('is-slim')
-    }
-    function paint() {
-      var dock = docked(), tucked = !dock && !forced && mode === 'tab', compact = !dock && !forced && mode === 'compact'
-      map.classList.toggle('pm-tucked', tucked)
-      map.classList.toggle('pm-compact', compact)
-      tab.classList.toggle('is-tucked', tucked)
-      tab.classList.toggle('is-compact', compact)
-      tab.classList.toggle('is-shown', shown && !dock)
-      tab.hidden = dock
-      if (!tucked) { tab.style.bottom = ''; tab.classList.remove('is-slim') }
-      tab.setAttribute('aria-expanded', String(!tucked))
-      tab.setAttribute('aria-label', tucked ? 'Show the section map' : 'Hide the section map')
-      tab.title = tucked ? 'Show “On this page” (click, or drag me left)' : 'Tuck “On this page” to the edge'
-      if ('inert' in map) map.inert = tucked
-      else if (tucked) sum.setAttribute('tabindex', '-1'); else sum.removeAttribute('tabindex')
-      if (tucked && map.open) map.open = false
-      // keep the hide button just left of the full pill, whatever its width is right now
-      if (!tucked && !compact && map.offsetWidth > COMPACT + 4 && map.offsetWidth !== fullW) { fullW = map.offsetWidth; html.style.setProperty('--pm-w', fullW + 'px') }
-    }
-    // the least it takes to cover nothing: the full pill, else the round button, else the edge tab
-    function wanted(sp) { return userTucked ? 'tab' : !covered(sp.full) ? 'full' : !covered(sp.compact) ? 'compact' : 'tab' }
-    var RANK = { full: 0, compact: 1, tab: 2 }, settle = 0
-    function check() {
-      shown = map.classList.contains('is-shown')
-      if (docked() || !shown || map.open) { if (!shown && !userTucked) mode = 'full'; paint(); return }
-      var sp = spots(), want = wanted(sp)
-      if (RANK[want] > RANK[mode]) { clearTimeout(settle); settle = 0; mode = want; paint() }
-      else if (RANK[want] < RANK[mode]) {
-        // step back out only once the page has settled, so it doesn't flicker while text scrolls past
-        if (!settle) settle = setTimeout(function () { settle = 0; var s2 = spots(), w2 = wanted(s2); if (RANK[w2] < RANK[mode]) { mode = w2; paint(); if (mode === 'tab') placeTab(s2) } }, 300)
-      } else if (settle && RANK[want] === RANK[mode]) { clearTimeout(settle); settle = 0 }
-      paint()
-      if (mode === 'tab' && !forced) placeTab(sp)
-      hintSoon()
-    }
-    var raf = 0
-    function soon() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; check() }) }
-    W.addEventListener('scroll', soon, { passive: true })
-    W.addEventListener('resize', soon)
-    if (dockMq && dockMq.addEventListener) dockMq.addEventListener('change', soon)
-    if (W.MutationObserver) new MutationObserver(soon).observe(map, { attributes: true, attributeFilter: ['class'] })
-    // late layout (images, tabs, revealed sections) moves things under it without a scroll: look again now and then
-    setInterval(function () { if (shown && !map.open && !docked() && !doc.hidden) soon() }, 1200)
-    map.addEventListener('toggle', function () { dropHint(); if (!map.open && forced) { forced = false; soon() } })
 
-    function focusSum() { setTimeout(function () { try { sum.focus({ preventScroll: true }) } catch (e) { } }, 30) }
-    function untuck() {
-      if (userTucked) { userTucked = false; pmSet(PM_KEY, '0') }
-      mode = wanted(spots())
-      // still nowhere free to stand: open the list straight away (it closes back into the tab)
-      if (mode === 'tab') { forced = true; paint(); map.open = true } else paint()
-      focusSum()
-    }
-    function tuck() { userTucked = true; pmSet(PM_KEY, '1'); forced = false; mode = 'tab'; dropHint(); paint(); placeTab(spots()); try { tab.focus({ preventScroll: true }) } catch (e) { } }
-    var dragged = false
-    tab.addEventListener('click', function (e) {
-      if (dragged) { dragged = false; e.preventDefault(); return }
-      if (tab.classList.contains('is-tucked')) untuck(); else tuck()
-    })
-    // drag the edge tab to the left to pull the map back out
-    tab.addEventListener('pointerdown', function (e) {
-      if (!tab.classList.contains('is-tucked') || e.button > 0) return
-      var x0 = e.clientX, dx = 0
-      try { tab.setPointerCapture(e.pointerId) } catch (err) { }
-      function mv(ev) { dx = Math.min(0, ev.clientX - x0); if (dx < -4) { tab.classList.add('is-drag'); tab.style.transform = 'translateX(' + Math.max(-56, dx) + 'px)' } }
-      function up() {
-        tab.removeEventListener('pointermove', mv); tab.removeEventListener('pointerup', up); tab.removeEventListener('pointercancel', up)
-        tab.classList.remove('is-drag'); tab.style.transform = ''
-        if (dx < -24) { dragged = true; untuck(); setTimeout(function () { dragged = false }, 400) }
+    /* ── open / close: the visitor's only ── */
+    function setOpen(v, focusBack) {
+      if (v === isOpen) return
+      isOpen = v; clearTimeout(closeT)
+      sum.setAttribute('aria-expanded', String(v))
+      if (v) {
+        map.open = true
+        if (!shown) { shown = true; map.classList.add('is-shown') }
+        // let the closed pose paint once, then animate to open (transform + opacity only)
+        requestAnimationFrame(function () { requestAnimationFrame(function () { if (isOpen) map.classList.add('pm-open') }) })
+        var cur = links[active] || links[0]
+        if (cur) {
+          if (card.scrollHeight > card.clientHeight) card.scrollTop = Math.max(0, cur.offsetTop - card.clientHeight / 2)
+          setTimeout(function () { if (isOpen) try { cur.focus({ preventScroll: true }) } catch (e) { } }, 20)
+        }
+      } else {
+        map.classList.remove('pm-open')
+        closeT = setTimeout(function () { if (!isOpen) map.open = false; frame() }, reduced ? 0 : 200)
+        if (focusBack) try { sum.focus({ preventScroll: true }) } catch (e) { }
       }
-      tab.addEventListener('pointermove', mv); tab.addEventListener('pointerup', up); tab.addEventListener('pointercancel', up)
+    }
+    sum.addEventListener('click', function (e) { e.preventDefault(); setOpen(!isOpen) })
+    // the browser can open a <details> on its own (find in page): follow it
+    map.addEventListener('toggle', function () { if (map.open && !isOpen) setOpen(true); else if (!map.open && isOpen) { isOpen = false; map.classList.remove('pm-open'); sum.setAttribute('aria-expanded', 'false') } })
+    doc.addEventListener('keydown', function (e) { if (isOpen && e.key === 'Escape') { e.preventDefault(); setOpen(false, true) } })
+    // a press outside closes it (and still reaches what was pressed); on phones the scrim (the map's ::before, so the
+    // <details> itself is the target) swallows the tap and closes on click, so nothing under it gets a ghost click
+    doc.addEventListener('pointerdown', function (e) { if (isOpen && !map.contains(e.target)) setOpen(false) }, true)
+    map.addEventListener('click', function (e) { if (isOpen && e.target === map) { e.preventDefault(); setOpen(false) } })
+    map.addEventListener('focusout', function (e) { if (isOpen && e.relatedTarget && !map.contains(e.relatedTarget)) setOpen(false) })
+    card.addEventListener('keydown', function (e) {
+      var i = links.indexOf(doc.activeElement), k = e.key, n = links.length
+      if (i < 0 || !/^(ArrowDown|ArrowUp|Home|End)$/.test(k)) return
+      e.preventDefault()
+      var t = k === 'Home' ? 0 : k === 'End' ? n - 1 : (i + (k === 'ArrowDown' ? 1 : -1) + n) % n
+      links[t].focus()
+    })
+    links.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        var t = secs[i]; if (!t) return
+        e.preventDefault()
+        setOpen(false)
+        try { map.dispatchEvent(new CustomEvent('pagemap:jump', { detail: t })) } catch (err) { }
+        t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
+        if (history.replaceState) history.replaceState(history.state, '', '#' + t.id)
+        lock = i; setActive(i)
+        // focus lands on the section (its heading reads first) without a second jump
+        if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1')
+        setTimeout(function () { try { t.focus({ preventScroll: true }) } catch (err) { } }, reduced ? 0 : 450)
+      })
     })
 
-    /* the first-visit hint: short, attached to whichever control is out, dismissible, gone after 5 s or a scroll,
-       and only shown where it covers nothing (tried again as the page moves, a dozen times at most) */
-    var hintTimer = 0
-    function hintSoon() {
-      if (hint || hintTries > 12 || pmGet(PM_HINT) || !shown || docked() || map.open) return
-      clearTimeout(hintTimer); hintTimer = setTimeout(showHint, 700)
-    }
-    function showHint() {
-      if (hint || pmGet(PM_HINT) || !map.classList.contains('is-shown') || docked() || map.open) return
-      hintTries++
-      var tucked = tab.classList.contains('is-tucked'), side = tucked || map.classList.contains('pm-compact'), h = doc.createElement('div')
-      h.className = 'pm-hint' + (side ? ' is-tab' : ''); h.setAttribute('role', 'note')
-      h.innerHTML = '<span>' + (tucked ? 'Sections, tucked away' : 'Jump to any section') + '</span><button type="button" class="pm-hint-x" aria-label="Dismiss tip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17"/></svg></button>'
-      doc.body.appendChild(h)
-      var t = (tucked ? tab : sum).getBoundingClientRect(), vw = html.clientWidth || W.innerWidth, w = h.offsetWidth, hh = h.offsetHeight
-      // beside the edge tab or the round button (the hide button sits above that one), above the full pill
-      var x = side ? t.left - w - 10 : Math.min(vw - w - 12, t.right - w), y = side ? t.top + (t.height - hh) / 2 : t.top - hh - 10
-      x = Math.max(12, x); y = Math.max(12, y)
-      h.style.left = x + 'px'; h.style.top = y + 'px'
-      if (pmCovers({ x: x, y: y, w: w, h: hh }, [map, tab, h])) { h.remove(); return }
-      hint = h; hintY = W.scrollY; pmSet(PM_HINT, '1')
-      requestAnimationFrame(function () { h.classList.add('is-on') })
-      h.querySelector('button').addEventListener('click', dropHint)
-      setTimeout(dropHint, 5000)
-    }
-    function dropHint() { clearTimeout(hintTimer); if (!hint) return; var h = hint; hint = null; h.classList.remove('is-on'); setTimeout(function () { h.remove() }, reduced ? 0 : 300) }
-    W.addEventListener('scroll', function () { if (hint && Math.abs(W.scrollY - hintY) > 160) dropHint() }, { passive: true })
-
-    if (userTucked) mode = 'tab'
-    paint(); soon()
-    map.__pm = { tuck: tuck, untuck: untuck, check: soon, tab: tab, mode: function () { return mode } }
+    /* ── start: listeners now, the first measure when the browser is idle ── */
+    W.addEventListener('scroll', onScroll, { passive: true })
+    function unlock() { if (lock >= 0) { lock = -1; onScroll() } }
+    ['wheel', 'touchstart', 'keydown'].forEach(function (t) { W.addEventListener(t, unlock, { passive: true }) })
+    W.addEventListener('resize', measureSoon, { passive: true })
+    if (dockMq) { if (dockMq.addEventListener) dockMq.addEventListener('change', measureSoon); else if (dockMq.addListener) dockMq.addListener(measureSoon) }
+    if (dockMq && W.MutationObserver) new MutationObserver(function () { if (docked()) apply() }).observe(html, { attributes: true, attributeFilter: ['class'] })
+    idle(function () {
+      measure()
+      // late layout (images, revealed sections, opened panels) changes the page's height: measure again then
+      if (W.ResizeObserver) { var h0 = 0; new ResizeObserver(function () { var h = html.scrollHeight; if (h !== h0) { h0 = h; measureSoon() } }).observe(doc.body) }
+    }, 800)
+    map.__pm = { open: function () { setOpen(true) }, close: function () { setOpen(false) }, measure: measureSoon, isOpen: function () { return isOpen } }
     return map.__pm
   }
   function initPageMap() { $$('details[data-map], details[data-lv-map], details[data-page-map]').forEach(pageMap) }
@@ -2002,8 +2217,8 @@
   /* ───────────── public API ───────────── */
   var API = {
     version: function () { return DATA().version },
-    data: DATA, svg: svg, svgFrom: svgFrom, svgFile: svgFile, has: hasIcon, icon: icon, icons: icons, styles: styles, styleInfo: INFO, ORDER: ORDER,
-    loadStyle: loadStyle, loadAllStyles: loadAllStyles, loadMeta: loadMeta, loadScript: loadScript,
+    data: DATA, svg: svg, svgFrom: svgFrom, svgFile: svgFile, uniqIds: uniqIds, fixIds: fixIds, isRich: isRich, has: hasIcon, icon: icon, icons: icons, styles: styles, styleInfo: INFO, ORDER: ORDER,
+    loadStyle: loadStyle, loadStyleFor: loadStyleFor, chunkOf: chunkOf, chunkCount: chunkCount, inner: innerOf, loadAllStyles: loadAllStyles, loadMeta: loadMeta, loadScript: loadScript,
     resolve: resolve, suggest: suggest, search: search, ensureSearch: ensureSearch, whyMatched: whyMatched,
     copy: copyText, copyWithToast: copy, toast: toast, download: download, svgToPng: svgToPng, announce: announce,
     highlight: highlight, codeBlock: codeBlock, copyButton: copyButton, esc: esc,
@@ -2013,7 +2228,7 @@
     whenVisible: whenVisible, visibility: visibility, idle: idle, pick: pick, fmt: fmt, $: $, $$: $$,
     base: scriptBase, url: rel, iconUrl: iconUrl, magnetic: magnetic, icon_svg: ICON,
     askAI: askAI, copyPng: copyPng, manualCopy: manualCopy,
-    GROUPS: GROUPS, pageMap: pageMap, counts: counts, numWord: numWord, paintCounts: paintCounts
+    GROUPS: GROUPS, FEATURED: FEATURED, USES: USES, NEW_STYLES: NEW_STYLES, pageMap: pageMap, counts: counts, numWord: numWord, paintCounts: paintCounts
   }
   // live: WI.reduced always reads the current state; WI.on('motion', fn(reduced)) hears changes
   Object.defineProperty(API, 'reduced', { enumerable: true, get: function () { return reduced } })
@@ -2052,8 +2267,17 @@
     if (c) W.gtag('consent', 'update', { analytics_storage: c })
     W.gtag('js', new Date())
     W.gtag('config', GA_ID)
-    var s = doc.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID
-    doc.head.appendChild(s)
+    // the tag itself (~100 KB) waits until the page has loaded and gone idle (or the first tap or key), so it never
+    // competes with the page; everything queued above (consent first, then the page view) is sent when it arrives
+    var tag = function () {
+      if (tag.done) return; tag.done = true
+      ;['pointerdown', 'keydown'].forEach(function (t) { W.removeEventListener(t, tag, true) })
+      var s = doc.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID
+      doc.head.appendChild(s)
+    }
+    var later = function () { if (W.requestIdleCallback) W.requestIdleCallback(tag, { timeout: 4000 }); else setTimeout(tag, 1500) }
+    if (doc.readyState === 'complete') later(); else W.addEventListener('load', later, { once: true })
+    ;['pointerdown', 'keydown'].forEach(function (t) { W.addEventListener(t, tag, { capture: true, passive: true }) })
   }
   function consentChoose(v) {
     consentSet(v)
@@ -2089,6 +2313,7 @@
   }
 
   function boot() {
+    dedupeIds()
     $$('[data-theme-toggle]').forEach(function (b) { b.addEventListener('click', toggleTheme) })
     paintToggles()
     initHeader()

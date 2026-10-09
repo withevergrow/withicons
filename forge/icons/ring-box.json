@@ -1,0 +1,81 @@
+{
+  "name": "ring-box",
+  "category": "valentines",
+  "description": "An open ring box with a ring, for proposals and engagements.",
+  "aliases": [
+    "engagement-ring",
+    "proposal",
+    "propose",
+    "diamond-ring",
+    "ring-case",
+    "jewelry-box",
+    "wedding-ring",
+    "marry-me",
+    "engagement"
+  ],
+  "synonyms": [
+    "ring box",
+    "engagement ring",
+    "diamond ring",
+    "wedding ring",
+    "ring",
+    "proposal ring",
+    "will you marry me",
+    "marry",
+    "marriage",
+    "get engaged",
+    "engaged",
+    "fiance",
+    "fiancee",
+    "wedding",
+    "bride",
+    "groom",
+    "jeweller",
+    "jeweler",
+    "jewellery",
+    "jewelry",
+    "diamond",
+    "solitaire",
+    "anniversary",
+    "promise ring",
+    "valentine",
+    "romance",
+    "commitment",
+    "luxury",
+    "gift"
+  ],
+  "tags": [
+    "valentine",
+    "wedding",
+    "ring",
+    "proposal",
+    "jewelry"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 15.5 H20.5 V19 A2 2 0 0 1 18.5 21 H5.5 A2 2 0 0 1 3.5 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 15.5 L3.75 5 A2 2 0 0 1 5.75 3 H18.25 A2 2 0 0 1 20.25 5 L19.5 15.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 11.25 A2.5 2.5 0 1 1 9.5 11.25 A2.5 2.5 0 1 1 14.5 11.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M9.75 4.5 H14.25 L15.75 6.25 L12 8.75 L8.25 6.25 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.5 15.5 H20.5 V19 A2 2 0 0 1 18.5 21 H5.5 A2 2 0 0 1 3.5 19 Z",
+    "M4.5 15.5 L3.75 5 A2 2 0 0 1 5.75 3 H18.25 A2 2 0 0 1 20.25 5 L19.5 15.5 Z"
+  ],
+  "cutouts": [
+    "M3.5 15.5 H20.5",
+    "M14.5 11.25 A2.5 2.5 0 1 1 9.5 11.25 A2.5 2.5 0 1 1 14.5 11.25",
+    "M9.75 4.5 H14.25 L15.75 6.25 L12 8.75 L8.25 6.25 Z"
+  ]
+}

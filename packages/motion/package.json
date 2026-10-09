@@ -1,7 +1,7 @@
 {
   "name": "@withicons/motion",
   "version": "0.3.1",
-  "description": "Optional animations for with icons: 32 CSS presets, per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.",
+  "description": "Optional animations for with icons: 47 CSS presets (15 in 3D, style-aware), per-icon defaults, icon-to-icon swaps and animated SVG/GIF export. Pure CSS core, tiny dependency-free JS.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",

@@ -1,8 +1,8 @@
 // @withicons/motion — the CSS of parts choreography (forge/MOTION.md "Parts choreography"), shared by motion.css
 // (built by forge/lib/emit-motion.mjs) and by <with-icon>'s shadow root (element.js), where the document's
 // @keyframes are not visible, so the shadow root carries its own copy (built once, on first use).
-import { PRESETS, hasLoopVariant, GROUND_PRESETS } from './meta.js'
-import { presetStops, keyframesCss, DECO_STOPS, shadowStops } from './keyframes.js'
+import { PRESETS, hasLoopVariant, GROUND_PRESETS, SHINE_PRESETS, PLATE_PRESETS } from './meta.js'
+import { presetStops, keyframesCss, DECO_STOPS, shadowStops, shineStops, plateStops } from './keyframes.js'
 
 export const PART_TAGS = '.wm-deco,.wm-shadow,.wm-a,.wm-s'
 const NOT_SHAPE = 'defs,title,desc,style,script,metadata'
@@ -12,7 +12,8 @@ const NOT_SHAPE = 'defs,title,desc,style,script,metadata'
  * The wrapper resolves every variable (--_an, --_dur, --_ox… for the object, --_an/--_ad… per plate, --_dk/--_dd for
  * decorations, --_sh for the shadow) and the nodes inherit them: object nodes play the preset about the icon's origin
  * (transform-box: view-box), plates their override, decorations their own loop about their own centre (fill-box),
- * shadows their lift keyframes (lag + fade; otherwise the object's own).
+ * shadows their lift keyframes (lag + fade; otherwise the object's own), highlights (wm-shine) their 3D slide (--_sn,
+ * otherwise the object's own).
  */
 export function partNodeRules(kids) {
   const sel = child => kids.map(k => k + child).join(',')
@@ -21,17 +22,27 @@ export function partNodeRules(kids) {
   return [
     `${sel(`:not(${NOT_SHAPE},${PART_TAGS})`)},${sel('.wm-shadow')}{transform-box:view-box;transform-origin:var(--_ox) var(--_oy);${anim('--_an', '--_dur', '--_ae', '--_dl')}}`,
     `${sel('.wm-shadow')}{animation-name:var(--_sh)}`,
+    `${sel('.wm-shine')}{animation-name:var(--_sn, var(--_an))}`,
     `${sel(':is(.wm-a,.wm-s)')}{transform-box:view-box}`, plate('a'), plate('s'),
     `${sel('.wm-deco')}{transform-box:fill-box;transform-origin:50% 50%;animation:var(--_dk) var(--_dd) linear var(--_ddl) var(--_ai, infinite) both}`,
   ].join('\n')
 }
 
-/** @keyframes of the decoration loops (wm-deco-<kind>) and ground shadows (wm-shadow-<preset>[-loop]). */
+/** @keyframes of the decoration loops (wm-deco-<kind>), ground shadows (wm-shadow-<preset>[-loop]) and the
+ *  highlights of 3D presets (wm-shine-<preset>[-loop]). */
 export function partKeyframes() {
   const out = Object.keys(DECO_STOPS).map(n => keyframesCss('wm-deco-' + n, DECO_STOPS[n]))
   for (const p of GROUND_PRESETS) {
     out.push(keyframesCss('wm-shadow-' + p, shadowStops(p, false)))
     if (hasLoopVariant(p)) out.push(keyframesCss('wm-shadow-' + p + '-loop', shadowStops(p, true)))
+  }
+  for (const p of PLATE_PRESETS) {
+    out.push(keyframesCss('wm-plate-' + p, plateStops(p, false)))
+    if (hasLoopVariant(p)) out.push(keyframesCss('wm-plate-' + p + '-loop', plateStops(p, true)))
+  }
+  for (const p of SHINE_PRESETS) {
+    out.push(keyframesCss('wm-shine-' + p, shineStops(p, false)))
+    if (hasLoopVariant(p)) out.push(keyframesCss('wm-shine-' + p + '-loop', shineStops(p, true)))
   }
   return out.join('\n')
 }

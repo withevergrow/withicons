@@ -1,0 +1,32 @@
+{
+  "name": "component",
+  "intent": "breathes, then turns like a design-system symbol",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.8,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "twinkle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "component@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "blocks",
+      "effect": "morph"
+    }
+  ]
+}

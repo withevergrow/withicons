@@ -1,0 +1,67 @@
+{
+  "name": "voicemail",
+  "category": "communication",
+  "description": "Two reels joined by a line, for voicemail and recorded messages.",
+  "aliases": [
+    "voice-mail",
+    "voice-message",
+    "answering-machine",
+    "recorded-message",
+    "voice-note",
+    "tape",
+    "cassette-reels",
+    "message-recording",
+    "vm"
+  ],
+  "tags": [
+    "phone",
+    "message",
+    "audio",
+    "recording",
+    "call",
+    "communication"
+  ],
+  "paths": [
+    {
+      "d": "M10 12 A4 4 0 1 1 2 12 A4 4 0 1 1 10 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 12 A4 4 0 1 1 14 12 A4 4 0 1 1 22 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 16 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10 12 A4 4 0 1 1 2 12 A4 4 0 1 1 10 12 Z",
+    "M22 12 A4 4 0 1 1 14 12 A4 4 0 1 1 22 12 Z"
+  ],
+  "cutouts": [
+    "M7.5 12 A1.5 1.5 0 1 1 4.5 12 A1.5 1.5 0 1 1 7.5 12 Z",
+    "M19.5 12 A1.5 1.5 0 1 1 16.5 12 A1.5 1.5 0 1 1 19.5 12 Z"
+  ],
+  "synonyms": [
+    "voicemail box",
+    "missed call message",
+    "leave a message",
+    "listen to message",
+    "phone message",
+    "call recording",
+    "answerphone",
+    "voice memo",
+    "audio message",
+    "tape recorder",
+    "reel to reel",
+    "cassette",
+    "playback",
+    "inbox",
+    "call center",
+    "telephony",
+    "visual voicemail",
+    "greeting",
+    "voicemial"
+  ]
+}

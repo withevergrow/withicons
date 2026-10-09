@@ -1,43 +1,36 @@
-// DUO — universal. Line on top of the icon's mass at 20%. The tint defaults to
-// currentColor, and can be recoloured with --with-duo without touching the line.
+// DUO — universal. Line on top of the icon's mass at 20%. Everything defaults to currentColor; the optional looks are
+// CSS variables (one-click presets as data in _duo-presets.mjs):
+//   --with-duo          the tint (the object's mass)
+//   --with-duo-accent   ONE accent detail per icon (badge / slash / inner part; _duo-accent.mjs, from Linear)
+//   --with-duo-from/to  the lines swept with one diagonal gradient (from Spectrum): only in the gradient render,
+//                       variants.gradient below (one defs node, id wg-duo-<icon>-0, rich-style rules)
+// With no variable set both renders look exactly like plain Duo. The default render has no defs (see _duo-core.mjs
+// for why). Build logic: _duo-core.mjs.
 //
 // Parts (forge/MOTION.md "Parts choreography"): lines carry their plate like Line
 // (wm-a / wm-s, K untagged). A tone fill takes the plate whose centrelines its
 // outline follows, so a moving part's tint moves with it.
-import { distToPolyline } from '../kernel/geom.mjs'
-import { PLATE_CLASS } from './line.mjs'
+import { snowmanFor } from './_line-snowman.mjs'
+import { build, plain } from './_duo-core.mjs'
 
-// the plate a fill belongs to: the A or S plate when most of its outline runs along
-// that plate's centrelines (within 0.4u) and closer than along K; otherwise K
-function fillPlate(f, lines) {
-  const pts = f.subs.flatMap(s => s.pts)
-  if (!pts.length) return 'K'
-  const share = plate => {
-    const ls = lines.filter(l => l.plate === plate && l.pts.length)
-    if (!ls.length) return 0
-    return pts.filter(p => ls.some(l => distToPolyline(p, l.pts, l.closed) < 0.4)).length / pts.length
+const safely = fn => icon => {
+  icon = snowmanFor('duo', icon)
+  try { return fn(icon) } catch {
+    try { return plain(icon) } catch { return [] }
   }
-  const k = share('K')
-  let best = 'K', bestShare = 0.6
-  for (const pl of ['A', 'S']) { const s = share(pl); if (s > bestShare && s > k) { best = pl; bestShare = s } }
-  return best
 }
 
 export default {
   name: 'duo',
   title: 'Duo',
   kind: 'universal',
-  description: 'The line drawing over a soft tonal fill of the object\'s mass. Recolour the tone with --with-duo.',
+  description: 'The line drawing over a soft tonal fill of the object\'s mass. Recolour the tone with --with-duo and the accent detail with --with-duo-accent.',
   strokeWidth: 1.75,
   root: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.75, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
-  render(icon) {
-    const parted = icon.paths.some(p => PLATE_CLASS[p.plate])
-    const tone = icon.fills.map(f => {
-      const a = { d: f.d, fill: 'var(--with-duo, currentColor)', 'fill-opacity': 0.2, stroke: 'none', 'fill-rule': 'evenodd' }
-      const cls = parted ? PLATE_CLASS[fillPlate(f, icon.lines || [])] : null
-      if (cls) a.class = cls
-      return ['path', a]
-    })
-    return [...tone, ...icon.paths.map(p => ['path', PLATE_CLASS[p.plate] ? { d: p.d, class: PLATE_CLASS[p.plate] } : { d: p.d }])]
+  render: safely(icon => build(icon)),
+  // opt-in renders of the same style (same root, strokeWidth, part classes): gradient = lines painted with
+  // var(--with-duo-from) -> var(--with-duo-to) (both default currentColor). Used by the "gradient" preset.
+  variants: {
+    gradient: safely(icon => build(icon, { gradient: true })),
   },
 }

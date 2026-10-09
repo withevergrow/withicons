@@ -11,6 +11,8 @@ import { schemeOf } from './_plush-tune.mjs'
 import { EXEMPLAR } from './_plush-exemplars.mjs'
 import { liveOf } from './_plush-live.mjs'
 import { labelText } from './_plush-text.mjs'
+import { isPerson } from './_people.mjs'
+import { personize, recolor } from './_plush-people.mjs'
 
 export { EXEMPLAR }
 const BASE = Object.freeze({ ...Prim, ...Kit })
@@ -80,5 +82,6 @@ export default function render(icon) {
       } catch (e) { if (globalThis.process?.env?.PLUSH_DEBUG) throw e }
     }
   }
+  if (isPerson(icon)) return recolor(compose(personize(build(icon), icon), icon), icon)
   return compose(icon && icon.params ? labelText(build(icon), icon.name, icon.params) : build(icon), icon)
 }

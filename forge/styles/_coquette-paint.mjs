@@ -44,6 +44,12 @@ export const MATS = {
   gold:   { base: 'accent', shade: 'ink', shadeOp: 0.26, ramp: 'edge', rampOp: 0.38, sheen: 'shine', sheenOp: 0.9, line: 'ink' },
   pearl:  { base: 'c4', shade: 'c2', shadeOp: 0.5, ramp: 'edge', rampOp: 0.9, sheen: 'shine', sheenOp: 1, line: 'ink', ow: 0.6 },
   lace:   { base: 'edge', shade: 'c1', shadeOp: 0.55, ramp: null, sheen: null, line: 'ink', ow: 0.6 },
+  // people avatars (_coquette-people.mjs): skin satin in the skin roles (c1, its light tint, its shade shadow), hair
+  // satin (c2, shaded c3), clothing satin (c4) and the ribbon-red bow / headphone cups (accent)
+  skin:   { base: 'c1', shade: 'shadow', shadeOp: 0.5, ramp: 'tint', rampOp: 0.8, sheen: 'shine', sheenOp: 0.6, line: 'ink' },
+  hair:   { base: 'c2', shade: 'c3', shadeOp: 0.6, ramp: 'edge', rampOp: 0.16, sheen: 'shine', sheenOp: 0.55, line: 'ink' },
+  cloth:  { base: 'c4', shade: 'ink', shadeOp: 0.2, ramp: 'edge', rampOp: 0.45, sheen: 'shine', sheenOp: 0.85, line: 'ink' },
+  bowp:   { base: 'accent', shade: 'ink', shadeOp: 0.3, ramp: 'edge', rampOp: 0.3, sheen: 'shine', sheenOp: 0.8, line: 'ink' },
   // flat: no shading at all (tiny glyphs, text, the inside of a badge)
   flat:   { base: 'c4', shade: null, ramp: null, sheen: null, line: null },
 }
@@ -151,7 +157,7 @@ function roundTips(S, r) {
 // parts -> IconNodes
 //   part: { f, mat, plate: 'K'|'A'|'S'|'deco', ow?, flat?, detail? (field), detailRole?,
 //           noShadow?, lineRole?, sheenBias? }
-export function paint(parts) {
+export function paint(parts, o = {}) {
   const live = []
   for (const p of parts) {
     if (!p || !p.f || !F.any(p.f)) continue
@@ -171,7 +177,7 @@ export function paint(parts) {
     for (const p of ps) F.union(U, p.E)
     const s1 = mv(U, 0.3, 0.75)
     const s = d(s1, 0.08, 0.3)
-    if (s) layers.push({ role: 'shadow', op, d: s, cls: 'wm-shadow' })
+    if (s) layers.push({ role: o.cast || 'shadow', op, d: s, cls: 'wm-shadow' })
   }
   cast(obj, 0.2)
   cast(deco, 0.14)

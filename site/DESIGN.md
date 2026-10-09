@@ -316,14 +316,14 @@ Facts about other libraries must be accurate, sourced and dated; fair, never dis
 
 ## Page map, feedback link, style groups (added 2026-10-07)
 - **"On this page" map** (`details[data-map]` on icon pages, `details[data-lv-map]` on live pages, or any `details[data-page-map]`):
-  the page script shows/hides the pill (`.is-shown`) and runs the section list; `js/site.js` (`WI.pageMap`, styled in chrome.css
-  `.pm-*`) keeps it off the text. It takes the least room that covers nothing: the full pill, else just its round button in
-  the margin (`.pm-compact`), else a tab on the right edge (`.pm-tucked`; the lowest free height, a slim sliver if none).
-  A small round button tucks it on purpose (remembered in localStorage `with-pagemap-tucked`); click the tab, press Enter on
-  it or drag it left to bring it back. The first-visit hint (`with-pagemap-hint`) is one short line with a close button,
-  only shown where it covers nothing, gone after 5 s or a scroll. `data-pm-dock="(max-width: 760px)"` docks the map elsewhere
-  in that query (icon pages: the round button at the right end of the phone action bar `.ip-bar`). Mark other floating UI
-  that may sit under it with `data-pm-ignore`.
+  one component, `WI.pageMap` in `js/site.js`, styled once in chrome.css. A slim pill at the bottom right (reading-progress
+  ring + the current section's name, fixed size) that opens a compact card of sections; at 760px and below the card is a
+  bottom sheet over a scrim (icon pages dock the pill as a round button at the end of the phone action bar `.ip-bar`,
+  `data-pm-dock` + `data-pm-follow`). Rules: only the visitor opens or closes it (pill, Esc, a link, a press outside);
+  scrolling never does. The pill shows once the hero has scrolled away and steps aside while the footer is on screen, both
+  with hysteresis, and never changes while open. Offsets are measured after idle and on height changes, never on scroll;
+  only transform/opacity animate (~200ms). A jump smooth-scrolls, sets the hash without a jump, focuses the section and
+  fires `pagemap:jump` on the map. Without JS it is a plain disclosure after the hero.
 - **Feedback:** header `.feedback-link` (round, icon only; hidden at 1081-1160px and at 520px and below, where the header has no room; the CTA steps aside at 901-1080px instead) and the footer's About
   column link to GitHub: request an icon `https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml`,
   anything else `.../issues/new/choose`.

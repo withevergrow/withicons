@@ -1,0 +1,65 @@
+{
+  "name": "heart-gift",
+  "intent": "the present hops, ready to be opened",
+  "loop": {
+    "preset": "bounce",
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        8
+      ],
+      "amount": 1.2,
+      "delay": 0.1
+    },
+    "S": {
+      "preset": "beat",
+      "origin": [
+        12,
+        16.5
+      ],
+      "amount": 0.9
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "gift",
+      "effect": "flip"
+    },
+    {
+      "to": "heart",
+      "effect": "scale"
+    },
+    {
+      "to": "heart-gift@solid",
+      "effect": "fade"
+    }
+  ]
+}

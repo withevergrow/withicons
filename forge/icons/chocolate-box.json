@@ -1,0 +1,84 @@
+{
+  "name": "chocolate-box",
+  "category": "valentines",
+  "description": "A heart-shaped box of chocolates, for Valentine's Day.",
+  "aliases": [
+    "box-of-chocolates",
+    "chocolates",
+    "heart-box",
+    "truffles",
+    "bonbons",
+    "pralines",
+    "chocolate-gift",
+    "candy-box"
+  ],
+  "synonyms": [
+    "box of chocolates",
+    "heart shaped box",
+    "chocolate",
+    "chocolatier",
+    "confectionery",
+    "candy",
+    "sweets",
+    "treat",
+    "dessert",
+    "assorted chocolates",
+    "chocolate truffles",
+    "praline",
+    "gift",
+    "present",
+    "valentine",
+    "valentines day",
+    "love",
+    "romantic gift",
+    "mothers day",
+    "sweet tooth",
+    "cocoa",
+    "bon bon",
+    "choclate",
+    "chocolat"
+  ],
+  "tags": [
+    "valentine",
+    "chocolate",
+    "gift",
+    "sweets",
+    "food"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.25 9.25 A0.5 0.5 0 1 1 7.25 9.25 A0.5 0.5 0 1 1 8.25 9.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 10.5 A0.5 0.5 0 1 1 11.5 10.5 A0.5 0.5 0 1 1 12.5 10.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M16.75 9.25 A0.5 0.5 0 1 1 15.75 9.25 A0.5 0.5 0 1 1 16.75 9.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.25 14.5 A0.5 0.5 0 1 1 9.25 14.5 A0.5 0.5 0 1 1 10.25 14.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M14.75 14.5 A0.5 0.5 0 1 1 13.75 14.5 A0.5 0.5 0 1 1 14.75 14.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"
+  ],
+  "cutouts": [
+    "M9.25 9.25 A1.5 1.5 0 1 1 6.25 9.25 A1.5 1.5 0 1 1 9.25 9.25 Z",
+    "M13.5 10.5 A1.5 1.5 0 1 1 10.5 10.5 A1.5 1.5 0 1 1 13.5 10.5 Z",
+    "M17.75 9.25 A1.5 1.5 0 1 1 14.75 9.25 A1.5 1.5 0 1 1 17.75 9.25 Z",
+    "M11.25 14.5 A1.5 1.5 0 1 1 8.25 14.5 A1.5 1.5 0 1 1 11.25 14.5 Z",
+    "M15.75 14.5 A1.5 1.5 0 1 1 12.75 14.5 A1.5 1.5 0 1 1 15.75 14.5 Z"
+  ]
+}

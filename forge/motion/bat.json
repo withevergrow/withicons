@@ -1,0 +1,44 @@
+{
+  "name": "bat",
+  "intent": "flaps its wings as it flutters through the night",
+  "loop": {
+    "preset": "float",
+    "amount": 0.8,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 1.3
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        8
+      ]
+    },
+    {
+      "preset": "nudge",
+      "dir": 315
+    },
+    {
+      "preset": "pass",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "moon",
+      "effect": "morph"
+    },
+    {
+      "to": "bat@solid",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "contrast",
+  "category": "layout",
+  "description": "A half-filled circle, for contrast, dark mode and themes.",
+  "aliases": [
+    "half-circle",
+    "contrast-mode",
+    "invert-colors",
+    "circle-half",
+    "appearance",
+    "high-contrast",
+    "theme-contrast",
+    "invert"
+  ],
+  "tags": [
+    "theme",
+    "contrast",
+    "appearance",
+    "accessibility",
+    "display"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6 A6 6 0 0 1 12 18 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 6 A6 6 0 0 1 12 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "darkmode",
+    "dark theme",
+    "light and dark",
+    "night mode",
+    "invert colours",
+    "accessibility",
+    "a11y",
+    "brightness contrast",
+    "half filled circle",
+    "yin yang",
+    "monochrome",
+    "black and white",
+    "display settings",
+    "visual",
+    "tone",
+    "exposure",
+    "dark-mode",
+    "theme"
+  ]
+}

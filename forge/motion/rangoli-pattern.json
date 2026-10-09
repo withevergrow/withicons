@@ -1,0 +1,40 @@
+{
+  "name": "rangoli-pattern",
+  "intent": "turns slowly like a mandala being drawn",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once"
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "amount": 0.6,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "alpana",
+      "effect": "spin"
+    },
+    {
+      "to": "marigold",
+      "effect": "morph"
+    }
+  ]
+}

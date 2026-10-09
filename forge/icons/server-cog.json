@@ -1,0 +1,77 @@
+{
+  "name": "server-cog",
+  "category": "development",
+  "description": "A server stack with a gear, for server settings and infrastructure.",
+  "aliases": [
+    "server-settings",
+    "server-config",
+    "server-gear",
+    "server-admin",
+    "backend-settings",
+    "server-configuration",
+    "server-preferences"
+  ],
+  "tags": [
+    "server",
+    "settings",
+    "infrastructure",
+    "admin",
+    "backend"
+  ],
+  "paths": [
+    {
+      "d": "M5 2.5 H19 A2 2 0 0 1 21 4.5 V8 A2 2 0 0 1 19 10 H5 A2 2 0 0 1 3 8 V4.5 A2 2 0 0 1 5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11 21.5 H5 A2 2 0 0 1 3 19.5 V16 A2 2 0 0 1 5 14 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M7 6.25 V6.26 M11 6.25 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.75 V17.76",
+      "plate": "A"
+    },
+    {
+      "d": "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 16.25 V16.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M5 2.5 H19 A2 2 0 0 1 21 4.5 V8 A2 2 0 0 1 19 10 H5 A2 2 0 0 1 3 8 V4.5 A2 2 0 0 1 5 2.5 Z",
+    "M11 21.5 H5 A2 2 0 0 1 3 19.5 V16 A2 2 0 0 1 5 14 H11 Z",
+    "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z"
+  ],
+  "cutouts": [
+    "M8 6.25 A1 1 0 1 1 6 6.25 A1 1 0 1 1 8 6.25 Z",
+    "M8 17.75 A1 1 0 1 1 6 17.75 A1 1 0 1 1 8 17.75 Z",
+    "M11 6.25 H17",
+    "M19.25 16.5 A1.75 1.75 0 1 1 15.75 16.5 A1.75 1.75 0 1 1 19.25 16.5 Z"
+  ],
+  "synonyms": [
+    "server management",
+    "configure server",
+    "sysadmin",
+    "system admin",
+    "devops",
+    "infrastructure",
+    "backend",
+    "hosting settings",
+    "data center",
+    "maintenance",
+    "deployment config",
+    "ops",
+    "self hosted",
+    "on premise",
+    "rack",
+    "gear",
+    "cog"
+  ]
+}

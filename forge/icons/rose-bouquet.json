@@ -1,0 +1,83 @@
+{
+  "name": "rose-bouquet",
+  "category": "valentines",
+  "description": "A wrapped bouquet of roses with a bow, for Valentine's Day.",
+  "aliases": [
+    "bouquet",
+    "flower-bouquet",
+    "bunch-of-flowers",
+    "roses",
+    "bouquet-of-roses",
+    "posy",
+    "floral-bouquet"
+  ],
+  "synonyms": [
+    "bouquet of roses",
+    "flowers",
+    "bunch of roses",
+    "florist",
+    "flower delivery",
+    "flower shop",
+    "gift flowers",
+    "valentine",
+    "valentines day",
+    "mothers day",
+    "wedding",
+    "bridal bouquet",
+    "bride",
+    "anniversary",
+    "congratulations",
+    "thank you",
+    "get well soon",
+    "romance",
+    "romantic",
+    "love",
+    "bloom",
+    "blossoms",
+    "wrapped flowers",
+    "nosegay",
+    "red roses",
+    "boquet",
+    "bouqet"
+  ],
+  "tags": [
+    "valentine",
+    "flowers",
+    "gift",
+    "roses",
+    "romance"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 11 C7 12.25 9.5 12.75 12 12.75 C14.5 12.75 17 12.25 19.5 11 L13.5 21.5 H10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 5.5 V7 A2.25 2.25 0 0 0 8.5 7 V5.5 L7.35 6.5 L6.25 4.5 L5.15 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M9.75 3.25 V4.75 A2.25 2.25 0 0 0 14.25 4.75 V3.25 L13.1 4.25 L12 2.25 L10.9 4.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 5.5 V7 A2.25 2.25 0 0 0 20 7 V5.5 L18.85 6.5 L17.75 4.5 L16.65 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7 V11.5 M6.25 9.25 L8 11.5 M17.75 9.25 L16 11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4 10.75 L2.5 9.75 M20 10.75 L21.5 9.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 11 C7 12.25 9.5 12.75 12 12.75 C14.5 12.75 17 12.25 19.5 11 L13.5 21.5 H10.5 Z",
+    "M4 5.5 V7 A2.25 2.25 0 0 0 8.5 7 V5.5 L7.35 6.5 L6.25 4.5 L5.15 6.5 Z",
+    "M9.75 3.25 V4.75 A2.25 2.25 0 0 0 14.25 4.75 V3.25 L13.1 4.25 L12 2.25 L10.9 4.25 Z",
+    "M15.5 5.5 V7 A2.25 2.25 0 0 0 20 7 V5.5 L18.85 6.5 L17.75 4.5 L16.65 6.5 Z"
+  ],
+  "cutouts": []
+}

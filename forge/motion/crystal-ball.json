@@ -1,0 +1,47 @@
+{
+  "name": "crystal-ball",
+  "intent": "glows as a vision sparkles inside the orb",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "twinkle"
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        10
+      ],
+      "amount": 1.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "orbit"
+    },
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sparkles",
+      "effect": "blur"
+    },
+    {
+      "to": "crystal-ball@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "eye",
+      "effect": "morph"
+    }
+  ]
+}

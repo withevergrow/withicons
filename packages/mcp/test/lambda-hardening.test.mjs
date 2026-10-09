@@ -2,12 +2,14 @@
 // export_icon serves any export in pages that fit the Lambda (6 MB response, 10 s, 512 MB).
 import { test, describe, before } from 'node:test'
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const dist = path.join(here, '..', 'dist')
 const LAMBDA_MAX = 6 * 1024 * 1024
+const STYLE_COUNT = JSON.parse(fs.readFileSync(path.join(dist, 'data', 'meta.json'), 'utf8')).styles.length
 
 describe('hosted API hardening', () => {
   let handler
@@ -88,9 +90,9 @@ describe('hosted API hardening', () => {
       if (s.next) assert.match(s.notes[0], /cursor: \d+/)
       pages++
     } while (cursor !== undefined && pages < 500)
-    assert.equal(urls, 50 * 20)
+    assert.equal(urls, 50 * STYLE_COUNT)
     assert.equal(rendered, of)
-    assert.equal(of, 50 * 20 * 4)
+    assert.equal(of, 50 * STYLE_COUNT * 4)
     assert.ok(pages > 1)
   })
   test('remote export_icon: pages make the same files as one call (palette borrowed across pages too)', async () => {

@@ -1,0 +1,55 @@
+{
+  "name": "cupid-bow",
+  "intent": "cupid lets the heart arrow fly",
+  "loop": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.7,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 315,
+    "amount": 0.8,
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 1.2,
+      "delay": 0.05
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        9,
+        15
+      ]
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        9,
+        15
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "morph"
+    },
+    {
+      "to": "heart-pair",
+      "effect": "scale"
+    }
+  ]
+}

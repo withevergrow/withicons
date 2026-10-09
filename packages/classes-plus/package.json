@@ -1,0 +1,56 @@
+{
+  "name": "@withicons/classes-plus",
+  "version": "0.3.1",
+  "description": "CSS icon classes for the 7 newer with icons styles (clay, bento, suite, dock, liquid, chrome, brutal). Companion of @withicons/classes, whose loader finds them by itself.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/classes-plus"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "css",
+    "css-icons",
+    "icon-classes",
+    "cdn",
+    "clay",
+    "bento",
+    "suite",
+    "dock",
+    "liquid",
+    "chrome",
+    "brutal",
+    "multicolor-icons"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./*": "./dist/*"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "unpkg": "./dist/with-base.css",
+  "jsdelivr": "./dist/with-base.css",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "sky-lantern",
+  "intent": "the lantern swings slowly from its hook and glows",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 0.7,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      2
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.8,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "float"
+    }
+  ]
+}

@@ -241,6 +241,19 @@ function prepare(raw) {
 }
 const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const attrs = o => Object.entries(o).filter(([, v]) => v !== undefined && v !== null && v !== false).map(([k, v]) => ` ${k}="${esc(v)}"`).join('')
+// nodes -> markup; a node's optional third element holds children (the gradient definitions of rich styles)
+const markupOf = list => list.map(([t, a, kids]) => kids && kids.length ? `<${t}${attrs(a)}>${markupOf(kids)}</${t}>` : `<${t}${attrs(a)}/>`).join('')
+const copyNodes = list => list.map(([t, a, kids]) => kids && kids.length ? [t, { ...a }, copyNodes(kids)] : [t, { ...a }])
+/**
+ * Rich styles draw gradients whose ids (wg-<style>-<icon>-<n>) every inline copy on a page must not share: this gives
+ * id="…" and every url(#…) in the markup a suffix. Markup without gradients comes back unchanged.
+ */
+export function uniqueIds(markup, suffix) {
+  const s = String(markup == null ? '' : markup)
+  if ((s.indexOf('url(#') < 0 && s.indexOf(' id="') < 0) || suffix == null || suffix === '') return s
+  const sfx = '-' + String(suffix).replace(/[^\w-]/g, '')
+  return s.replace(/(\sid="|url\(#)([^")\s]+)/g, '$1$2' + sfx)
+}
 function styleOf(style) {
   const v = style || DEFAULT_STYLE
   if (RENDERERS[v]) return RENDERERS[v]
@@ -270,7 +283,7 @@ function inner(g, p, style) {
   // first draw of an icon is cold (code still compiling), so it does not count
   const rk = g.name + '\u0001' + st.name, r = REAL[rk] || (REAL[rk] = { n: 0, ms: null })
   if (r.n++) r.ms = r.ms == null ? dt : r.ms * 0.6 + dt * 0.4
-  return remember(key, { nodes: clean, markup: clean.map(([t, a]) => `<${t}${attrs(a)}/>`).join('') })
+  return remember(key, { nodes: clean, markup: markupOf(clean) })
 }
 
 // ------------------------------------------------------------------ cost + off-main-thread rendering
@@ -468,7 +481,7 @@ export function serveWorker(scope) {
 /** The style's IconNode list for params: { root, nodes: [[tag, attrs], ...] } (for framework wrappers). */
 export function nodes(name, params, style) {
   const g = gen(name), st = styleOf(style)
-  return { root: { ...st.root }, nodes: inner(g, resolveParams(g, params), st.name).nodes.map(([t, a]) => [t, { ...a }]) }
+  return { root: { ...st.root }, nodes: copyNodes(inner(g, resolveParams(g, params), st.name).nodes) }
 }
 
 const VAR_KEY = k => { const s = String(k).trim(); return s.startsWith('--') ? s : s.startsWith('with-') ? '--' + s : '--with-' + s }
@@ -509,7 +522,8 @@ function rootAttrs(st, o) {
  * Render a live icon to an SVG string. Sync; memoized.
  *   render('calendar-date', { day: 9, month: 'MAY' }, 'glass', { size: 48, color: '#0b7', vars: { 'glass-pane': '#cde' }, label: 'May 9' })
  * options: size (24), color (currentColor), vars ({ name: value } CSS custom properties), label (accessible name),
- *          class, strokeWidth / absoluteStrokeWidth (stroke styles), flat (resolve var() paints for <img>/canvas).
+ *          class, strokeWidth / absoluteStrokeWidth (stroke styles), flat (resolve var() paints for <img>/canvas),
+ *          idSuffix (rich styles: appended to the gradient ids, give every inline copy in one page its own).
  */
 export function render(name, params, style, options) {
   const o = options || {}
@@ -524,7 +538,8 @@ export function render(name, params, style, options) {
 export function parts(name, params, style, options) {
   const g = gen(name), p = resolveParams(g, params), v = style || DEFAULT_STYLE
   const st = RENDERERS[v] || (META_BY[v] && CACHE.has(keyOf3(g, p, v)) ? META_BY[v] : styleOf(v))
-  return { attrs: rootAttrs(st, options || {}), inner: inner(g, p, st.name).markup, params: p }
+  const o = options || {}
+  return { attrs: rootAttrs(st, o), inner: uniqueIds(inner(g, p, st.name).markup, o.idSuffix), params: p }
 }
 /**
  * Same as render(), but loads the style first if needed and draws styles that take longer than a frame off the main

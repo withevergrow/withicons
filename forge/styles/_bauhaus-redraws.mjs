@@ -11,5 +11,7 @@ import { R as R9 } from './_bauhaus-redraw-9.mjs'
 import { R as R10 } from './_bauhaus-redraw-10.mjs'
 import { R as R11 } from './_bauhaus-redraw-11.mjs'
 import { R as R12 } from './_bauhaus-redraw-12.mjs'
+import { R as RS } from './_bauhaus-snowman.mjs'
+import { R as RD } from './_bauhaus-dragon.mjs'
 
-export const REDRAW = Object.assign(Object.create(null), R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12)
+export const REDRAW = Object.assign(Object.create(null), R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, RS, RD)

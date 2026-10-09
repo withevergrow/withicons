@@ -1292,3 +1292,15 @@ html:not(.has-motion) .ga-pair[aria-pressed="true"] .wm-b { display: inline; }
 .lc-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 650; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: pointer }
 .lc-link:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: 2px; border-radius: 4px }
 .lc-one + .lc-one { margin-top: 16px }
+
+/* developers: Popular styles, then the five groups as calm disclosures (site/STYLE-PICKER.md) */
+.dv-group { margin-top: 12px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--card); }
+.dv-group > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; min-height: 44px; padding: 14px 18px; cursor: pointer; list-style: none; }
+.dv-group > summary::-webkit-details-marker { display: none; }
+.dv-group > summary::after { content: '+'; margin-left: auto; font: 600 20px/1 var(--font-sans); color: var(--muted); transition: transform .25s var(--e-out); }
+.dv-group[open] > summary::after { transform: rotate(45deg); }
+.dv-group-t { font: 750 var(--step-1)/1.1 var(--font-display); color: var(--ink); }
+.dv-group-n { font-size: 13px; color: var(--muted); }
+.dv-group-b { flex-basis: 100%; order: 3; font-size: 14px; color: var(--ink-2); }
+.dv-group > .dv-styles { margin: 0; padding: 0 14px 14px; }
+.dv-group > summary:focus-visible { outline: 3px solid var(--focus, var(--sun)); outline-offset: 2px; border-radius: var(--radius); }

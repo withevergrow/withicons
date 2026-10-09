@@ -1,0 +1,93 @@
+{
+  "name": "dragon-head",
+  "category": "lunar-new-year",
+  "description": "A festive front-facing Chinese dragon head with branching antlers, angry brows, long whiskers, a toothy grin and a spiky beard, for Lunar New Year and dragon dances.",
+  "aliases": [
+    "dragon",
+    "chinese-dragon",
+    "dragon-dance",
+    "dragon-mask",
+    "lunar-dragon",
+    "loong",
+    "year-of-the-dragon",
+    "dragon-face"
+  ],
+  "synonyms": [
+    "zodiac",
+    "chinese zodiac",
+    "myth",
+    "mythical",
+    "legend",
+    "creature",
+    "long",
+    "ryu",
+    "yong",
+    "rong",
+    "wu long",
+    "mua rong",
+    "dragon dancer",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "festival",
+    "parade",
+    "power",
+    "strength",
+    "luck",
+    "celebration",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "festival",
+    "zodiac",
+    "mythical",
+    "animal"
+  ],
+  "paths": [
+    {
+      "d": "M12 9.5 C15.5 9.5 17.5 11.5 17.5 14.5 C17.5 15.5 17.75 16.25 18 17 C18.5 19 16.25 21.25 12 21.25 C7.75 21.25 5.5 19 6 17 C6.25 16.25 6.5 15.5 6.5 14.5 C6.5 11.5 8.5 9.5 12 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9.75 C9.25 7 8 4.75 6 2.5 M8.6 5.75 L10.5 3.5 M7.4 4.15 L4 4 M14.5 9.75 C14.75 7 16 4.75 18 2.5 M15.4 5.75 L13.5 3.5 M16.6 4.15 L20 4",
+      "plate": "A"
+    },
+    {
+      "d": "M6 17.75 C4.5 17.25 3.5 18.5 2 17.75 M18 17.75 C19.5 17.25 20.5 18.5 22 17.75",
+      "plate": "A"
+    },
+    {
+      "d": "M8.25 12.25 L10.75 13.5 M15.75 12.25 L13.25 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.25 15.25 A0.75 0.75 0 1 1 8.75 15.25 A0.75 0.75 0 1 1 10.25 15.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.25 15.25 A0.75 0.75 0 1 1 13.75 15.25 A0.75 0.75 0 1 1 15.25 15.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M11.35 18.5 A0.6 0.6 0 1 1 10.15 18.5 A0.6 0.6 0 1 1 11.35 18.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13.85 18.5 A0.6 0.6 0 1 1 12.65 18.5 A0.6 0.6 0 1 1 13.85 18.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 9.5 C15.5 9.5 17.5 11.5 17.5 14.5 C17.5 15.5 17.75 16.25 18 17 C18.5 19 16.25 21.25 12 21.25 C7.75 21.25 5.5 19 6 17 C6.25 16.25 6.5 15.5 6.5 14.5 C6.5 11.5 8.5 9.5 12 9.5 Z"
+  ],
+  "cutouts": [
+    "M10.25 15.25 A0.75 0.75 0 1 1 8.75 15.25 A0.75 0.75 0 1 1 10.25 15.25 Z",
+    "M15.25 15.25 A0.75 0.75 0 1 1 13.75 15.25 A0.75 0.75 0 1 1 15.25 15.25 Z",
+    "M8.25 12.25 L10.75 13.5",
+    "M15.75 12.25 L13.25 13.5",
+    "M11.35 18.5 A0.6 0.6 0 1 1 10.15 18.5 A0.6 0.6 0 1 1 11.35 18.5 Z",
+    "M13.85 18.5 A0.6 0.6 0 1 1 12.65 18.5 A0.6 0.6 0 1 1 13.85 18.5 Z"
+  ]
+}

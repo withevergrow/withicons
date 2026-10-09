@@ -163,13 +163,15 @@ export const R = {
     const f = rr(2, 4, 22, 20, 3)
     return [['c3', f], ['c2', cornerQuarter(f, 2, 4, 7.5, 'se')], ['c1', rr(11, 10.5, 19.5, 17.5, 2)]]
   },
-  // red pig, ink legs and eye, cream coin slot, yellow snout, a yellow coin dropping in
+  // red pig in 3/4 view: ink legs, eye and nostrils, a perky red ear, a yellow oval snout, cream coin slot,
+  // a yellow coin dropping in
   'piggy-bank': ({ ellipse, pill, poly, circle }) => [
-    ['ink', pill(6, 16, 8.5, 21.5), pill(13.5, 16, 16, 21.5)],
-    ['c1', poly([[12.75, 8.25], [15.5, 4], [17.25, 9]], 1), ellipse(11, 13, 8, 6)],
-    ['c2', pill(17.25, 10.5, 21.75, 15.5), circle(9.75, 2.75, 1.75)],
-    ['tint', pill(8, 9.25, 12, 10.75)],
-    ['ink', circle(15, 11, 1)],
+    ['ink', pill(5.75, 16, 8.25, 21.5), pill(13.75, 16, 16.25, 21.5)],
+    ['c1', poly([[16.6, 10.6], [20.5, 5.7], [19.9, 11.6]], 0.6)],
+    ['c1', poly([[12.75, 11], [16.5, 3.25], [18.25, 11]], 1.2), ellipse(11.75, 14, 7.75, 5.75)],
+    ['c2', ellipse(19.75, 13.5, 2, 2.75), circle(10, 3.75, 1.85)],
+    ['tint', pill(8.25, 10, 11.75, 11.5)],
+    ['ink', circle(15.75, 12, 1), circle(19.15, 13.1, 0.42), circle(20.35, 13.1, 0.42)],
   ],
   // red bowl, blue stem with the top bar, ink second stem standing flush under it
   // red D bowl, a blue stem carrying the top bar, an ink stem whose round top caps the bar

@@ -35,6 +35,12 @@ export function valuesFor(mode) {
       dx: n => `calc(var(--_dx) * ${n}% * var(--_k))`,
       dy: n => `calc(var(--_dy) * ${n}% * var(--_k))`,
       clip: t => `inset(max(0%, calc(var(--_dy) * ${-t}% * var(--_k))) max(0%, calc(var(--_dx) * ${t}% * var(--_k))) max(0%, calc(var(--_dy) * ${t}% * var(--_k))) max(0%, calc(var(--_dx) * ${-t}% * var(--_k))))`,
+      dirPoly: (rest, d, unit) => {
+        const terms = dirTerms(d).map(([c, f]) => `${c} * ${f === 'x' ? 'var(--_dx)' : f === 'y' ? 'var(--_dy)' : f === 'xx' ? 'var(--_dx) * var(--_dx)' : 'var(--_dy) * var(--_dy)'}`)
+        if (!terms.length) return unit === '' ? String(rest) : rest + unit
+        const sum = `(${terms.join(' + ')}) * var(--_k)`
+        return unit === '' ? `calc(${rest} + ${sum})` : `calc(${rest ? rest + unit + ' + ' : ''}${sum} * 1${unit})`
+      },
       legacyGlow: !!(mode && mode.legacyGlow),
     }
   }
@@ -50,7 +56,19 @@ export function valuesFor(mode) {
     dx: n => p(dx * n * k),
     dy: n => p(dy * n * k),
     clip: t => `inset(${p(Math.max(0, -dy * t * k))} ${p(Math.max(0, dx * t * k))} ${p(Math.max(0, dy * t * k))} ${p(Math.max(0, -dx * t * k))})`,
+    dirPoly: (rest, d, unit) => {
+      const val = { x: dx, y: dy, xx: dx * dx, yy: dy * dy }
+      return r(rest + dirTerms(d).reduce((a, [c, f]) => a + c * val[f], 0) * k) + unit
+    },
   }
+}
+
+// A value measured for a move right, left, down and up (deltas from rest) -> its odd and even parts in dx / dy:
+// [[coefficient, 'x' | 'xx' | 'y' | 'yy'], ...] (zero terms dropped), so value = rest + sum(c * term) * k.
+function dirTerms(d) {
+  const q = n => Math.round(n * 1e4) / 1e4
+  const t = [[q((d[0] - d[1]) / 2), 'x'], [q((d[0] + d[1]) / 2), 'xx'], [q((d[2] - d[3]) / 2), 'y'], [q((d[2] + d[3]) / 2), 'yy']]
+  return t.filter(([c]) => c !== 0)
 }
 
 // helpers to keep stop lists readable
@@ -157,6 +175,198 @@ export const PRESET_STOPS = {
 }
 // draw: the element-level fallback (non-stroked styles, or no JS) is pop
 PRESET_STOPS.draw = PRESET_STOPS.pop
+
+// ---- 3D presets (run 12, forge/MOTION.md "3D motion"). Each is a list of POSES of a solid object in front of a camera
+// a little above it (CAMERA = sin of its elevation): turned about its vertical axis (ry) and its horizontal axis (rx,
+// top toward you > 0), turned in the picture plane (rz), moved (x, y in % of the box), brought toward you (s, a scale
+// delta) and squashed (qx, qy). A pose is projected to a plain 2D affine transform, always the same function list
+//   translate(x, y) rotate(rz) scale(sx, sy) skewY(ky) skewX(kx)
+// so browsers (inline SVG nodes, which flatten CSS 3D anyway), the export sampler, the CLI's resvg freezer and Lottie
+// all interpolate it the same way (per function, linearly): what you see live is what you download. Amount (--_k)
+// scales every delta from rest linearly; `turn` keeps its literal foreshortening (a half turn is a half turn).
+// Each pose also drives the specular highlight (wm-shine: slides against the turn, dims as the face turns from the
+// light) and, for lifting / turning presets, the ground shadow (wm-shadow: lags, shrinks and fades as it lifts).
+const RAD = Math.PI / 180
+export const CAMERA = 0.26
+const LIGHT = (() => { const l = [-0.42, -0.58, 0.7], n = Math.hypot(...l); return l.map(x => x / n) })()
+const R4 = n => { const v = Math.round(n * 1e4) / 1e4; return Object.is(v, -0) ? 0 : v }
+/** A pose -> { x, y, rz, sx, sy, ky, kx } (the affine parameters at amount 1) for a camera at elevation `elev`. */
+export function project(p, elev) {
+  const sf = elev == null ? CAMERA : elev, cf = Math.sqrt(1 - sf * sf)
+  const a = (p.rx || 0) * RAD, b = (p.ry || 0) * RAD
+  // orthographic view of R = Ry(b) Rx(a) from above (normalised so the rest pose is the identity)
+  const n11 = Math.cos(b), n12 = -Math.sin(a) * Math.sin(b) / cf
+  const n21 = -Math.sin(b) * sf, n22 = (Math.cos(a) * cf - Math.sin(a) * Math.cos(b) * sf) / cf
+  const g = 1 + (p.s || 0), gx = g * (1 + (p.qx || 0)), gy = g * (1 + (p.qy || 0))
+  const m11 = n11 * gx, m12 = n12 * gy, m21 = n21 * gx, m22 = n22 * gy
+  // = scale(P, Q) skewY(atan u) skewX(atan t): [[P, P t], [Q u, Q (u t + 1)]]
+  const P = m11, t = Math.abs(P) > 1e-9 ? m12 / P : 0, Q = m22 - m21 * t, u = Math.abs(Q) > 1e-9 ? m21 / Q : 0
+  return { x: p.x || 0, y: p.y || 0, rz: p.rz || 0, sx: P, sy: Q, ky: Math.atan(u) / RAD, kx: Math.atan(t) / RAD }
+}
+// the surface normal of a pose and how much it faces the light (1 at rest), for the highlight
+function facing(p) {
+  const a = (p.rx || 0) * RAD, b = (p.ry || 0) * RAD
+  const n = [Math.cos(a) * Math.sin(b), Math.sin(a), Math.cos(a) * Math.cos(b)]
+  return { n, f: (n[0] * LIGHT[0] + n[1] * LIGHT[1] + n[2] * LIGHT[2]) / LIGHT[2] }
+}
+// Projected parameters -> the transform string. Directional presets (lean) pass `dir`: parameters measured for a lean
+// to the right (+x), left, down and up, recombined per icon from --_dx / --_dy (odd and even parts).
+function affineCss(v, q, o) {
+  o = o || {}
+  const f = (key, rest, unit) => {
+    if (o.dir) return v.dirPoly(rest, o.dir.map(d => d[key] - rest), unit)
+    const d = R4(q[key] - rest)
+    if (o.lit && (key === 'sx' || key === 'sy')) return String(R4(q[key]))
+    if (!d) return unit === '' ? '1' : '0' + unit
+    return unit === 'deg' ? v.deg(d) : unit === '%' ? v.len(d) : v.sc(d)
+  }
+  // only the functions a preset ever uses (o.keep), always the same list for every stop of a track
+  const k = o.keep || FNS
+  const out = []
+  if (k.has('translate')) out.push(`translate(${f('x', 0, '%')}, ${f('y', 0, '%')})`)
+  if (k.has('rotate')) out.push(`rotate(${f('rz', 0, 'deg')})`)
+  if (k.has('scale')) out.push(`scale(${f('sx', 1, '')}, ${f('sy', 1, '')})`)
+  if (k.has('skewY')) out.push(`skewY(${f('ky', 0, 'deg')})`)
+  if (k.has('skewX')) out.push(`skewX(${f('kx', 0, 'deg')})`)
+  return out.join(' ')
+}
+const FNS = new Set(['translate', 'rotate', 'scale', 'skewY', 'skewX'])
+const FN_OF = { x: 'translate', y: 'translate', rz: 'rotate', sx: 'scale', sy: 'scale', ky: 'skewY', kx: 'skewX' }
+const REST = { x: 0, y: 0, rz: 0, sx: 1, sy: 1, ky: 0, kx: 0 }
+// the functions a list of projections ever moves away from rest (at least a translate, so a track is never empty)
+function usedFns(qs) {
+  const k = new Set()
+  for (const q of qs) for (const key in REST) if (Math.abs(q[key] - REST[key]) > 5e-4) k.add(FN_OF[key])
+  if (!k.size) k.add('translate')
+  return k
+}
+// the highlight's extra slide (in % of the box) and opacity for a pose: it slides against the turn, dims as the face
+// turns from the light, and a pose may set its own (sh: { x, y, o }) for a deliberate sweep (gleam)
+const SHINE_SLIDE = 16
+function shineOf(p) {
+  if (p.sh) return { x: p.sh.x || 0, y: p.sh.y || 0, o: p.sh.o == null ? 1 : p.sh.o }
+  const { n, f } = facing(p)
+  return { x: -n[0] * SHINE_SLIDE, y: -n[1] * SHINE_SLIDE * 0.6, o: Math.max(0.12, Math.min(1, 1 + 2.4 * (f - 1))) }
+}
+// 3D presets: { lit?, dir?, ground?: pose -> { pose, o } (the shadow's own pose), stops: [[at, pose, ease], ...] }
+const lerpPose = (a, b, f) => { const o = {}; for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) if (k !== 'sh') o[k] = (a[k] || 0) + ((b[k] || 0) - (a[k] || 0)) * f; return o }
+const sampled = (n, fn, ease) => Array.from({ length: n + 1 }, (_, i) => [R4(i * 100 / n), fn(i / n), ease || 'linear'])
+const swingsOf = (pts, pose) => pts.map(([at, w], i) => [at, pose(w), i === 0 ? E.sineOut : E.sine])
+const TAU = Math.PI * 2
+// the ground shadow while the object lifts (h = height 0..1): it stays a little behind, shrinks and fades
+const groundLift = (lag, shrink, fade, H) => p => {
+  const h = Math.max(0, -(p.y || 0) / H)
+  return { pose: { x: p.x, y: (p.y || 0) * lag, qx: p.qx, qy: (p.qy || 0) * 0.5, s: (p.s || 0) * 0.4 - shrink * h }, o: 1 - fade * h }
+}
+export const D3 = {
+  // a full turn on a turntable: the face narrows to its edge and shows its back (mirrored), the camera above makes
+  // the near side dip; the highlight slides off and the back stays matte; the shadow turns along, dimmer edge-on
+  'turn': { lit: true, ground: p => ({ pose: { ry: p.ry }, o: 0.55 + 0.45 * Math.abs(Math.cos(p.ry * RAD)) }),
+    stops: sampled(12, t => ({ ry: -360 * t })) },
+  // one turn with anticipation and a settling overshoot
+  'turn-once': { lit: true, ground: p => ({ pose: { ry: p.ry }, o: 0.55 + 0.45 * Math.abs(Math.cos(p.ry * RAD)) }),
+    stops: [[0, { ry: 0 }, E.sineOut], [12, { ry: 18 }, E.sineIn], [22, { ry: -12 }, 'linear'], [28, { ry: -52 }, 'linear'], [34, { ry: -100 }, 'linear'],
+      [40, { ry: -148 }, 'linear'], [46, { ry: -196 }, 'linear'], [52, { ry: -242 }, 'linear'], [58, { ry: -284 }, 'linear'], [64, { ry: -320 }, 'linear'],
+      [71, { ry: -350 }, E.sineOut], [80, { ry: -368 }, E.sine], [90, { ry: -357 }, E.sine], [100, { ry: -360 }]] },
+  // precession like a spinning top: the face circles toward you twice, swelling in and out of the cycle
+  'wobble': { stops: sampled(16, t => { const A = 26 * Math.sin(Math.PI * t), ph = 2 * TAU * t; return { rx: A * Math.cos(ph), ry: A * Math.sin(ph), rz: -0.2 * A * Math.sin(ph), x: 0.12 * A * Math.sin(ph) } }) },
+  // a ringing bell in depth: the swing about its hook twists the face toward you and away
+  'chime': { stops: swingsOf([[0, 0], [9, 16], [21, -14], [33, 11], [45, -8], [57, 5], [69, -2.5], [81, 1], [100, 0]], w => ({ rz: w * 0.7, ry: w * 2.4 })) },
+  // shakes its head: turns away left and right, decaying
+  'swivel': { stops: swingsOf([[0, 0], [14, -32], [32, 27], [50, -18], [68, 10], [84, -3], [100, 0]], w => ({ ry: w, x: w * 0.06 })) },
+  // nods toward you: the top tips forward and back
+  'bow': { stops: swingsOf([[0, 0], [18, 28], [38, -9], [58, 15], [78, -3], [100, 0]], w => ({ rx: w, y: w * 0.1 })) },
+  // leans the way it points (dir): the face turns that way while it pushes, and springs back
+  'lean': { dir: true, stops: [[0, { lean: 0 }, 'cubic-bezier(.4,0,.2,1)'], [36, { lean: 1 }, E.inOut], [64, { lean: -0.16 }, E.sine], [84, { lean: 0.04 }, E.sine], [100, { lean: 0 }]] },
+  // rises toward you (bigger, its top tipping back), hangs, and lands with a little squash
+  'lift': { ground: groundLift(0.3, 0.18, 0.5, 7),
+    stops: [[0, {}, E.out], [10, { s: -0.02, qx: 0.03, qy: -0.05 }, E.lift], [40, { s: 0.14, y: -7, rx: -10 }, E.sine], [64, { s: 0.12, y: -6, rx: -7 }, E.fall],
+      [86, { s: -0.01, qx: 0.03, qy: -0.045 }, E.out], [100, {}]] },
+  // a heartbeat toward you: two thumps that bring it closer, the top tipping in; the shadow tightens under it
+  'pump': { ground: p => ({ pose: { s: (p.s || 0) * 0.35, y: (p.y || 0) * 0.5 }, o: 1 - 2.6 * Math.max(0, p.s || 0) }),
+    stops: [[0, {}, E.out], [20, { s: 0.15, rx: 9, y: -2 }, E.inOut], [40, { s: -0.02, rx: -1 }, E.out], [58, { s: 0.09, rx: 5, y: -1.2 }, E.sine], [100, {}]] },
+  // hops: crouches (squash), leaps tipping back (stretch), lands (squash), rebounds and settles; pivot at its base
+  'squish': { ground: groundLift(0.25, 0.32, 0.55, 24),
+    stops: [[0, {}, E.out], [12, { qx: 0.12, qy: -0.14 }, E.lift], [40, { y: -24, qx: -0.06, qy: 0.1, rx: -12 }, E.fall], [58, { qx: 0.16, qy: -0.2 }, E.out],
+      [72, { y: -5, qx: -0.03, qy: 0.05, rx: -3 }, E.fall], [84, { qx: 0.04, qy: -0.05 }, E.out], [100, {}]] },
+  // drifts in the air: a slow bob while it turns a little left and right and tips in and out (a lazy figure eight)
+  'drift': { ground: groundLift(0.3, 0.14, 0.4, 8),
+    stops: sampled(12, t => ({ y: -8 * (1 - Math.cos(TAU * t)) / 2, ry: 16 * Math.sin(TAU * t), rx: 9 * Math.sin(2 * TAU * t), rz: -2.5 * Math.sin(TAU * t) })) },
+  // turns to the light: tips toward the upper left while the highlight sweeps across it and flashes back
+  'gleam': { stops: [[0, { sh: { o: 1 } }, E.inOut], [20, { ry: -6, rx: 4, s: 0.01, sh: { x: -9, y: -6, o: 0.25 } }, E.inOut], [42, { ry: -15, rx: 10, s: 0.035, sh: { x: 4, y: 2.5, o: 1 } }, E.sine],
+    [60, { ry: -13, rx: 8, s: 0.03, sh: { x: 10, y: 6, o: 0.6 } }, E.inOut], [100, { sh: { o: 1 } }]] },
+  // ---- part moves (soft3d and every style that keeps raised parts as plates wm-a / wm-s). `plates` is the plates' own
+  // track (same stop times as the body's), `ground(pose, i)` may read it (the i-th plate pose).
+  // the raised parts (buttons, lenses, lids, badges) pop up off the body and land back; the body gives under the
+  // launch and the landing; the ground shadow stays and softens while they are up
+  'pop-up': { ground: (p, i) => { const h = Math.max(0, -(D3['pop-up'].plates[i][1].y || 0) / 16); return { pose: { s: -0.05 * h }, o: 1 - 0.3 * h } },
+    stops: [[0, {}, E.out], [14, { qx: 0.015, qy: -0.03 }, E.out], [40, {}, E.sine], [56, {}, E.fall], [72, { qx: 0.012, qy: -0.025 }, E.out], [86, {}, E.sine], [100, {}]],
+    plates: [[0, {}, E.out], [14, { y: 1.5, qx: 0.04, qy: -0.08 }, E.lift], [40, { y: -16, s: 0.05, rx: -8 }, E.sine], [56, { y: -14, s: 0.05, rx: -6 }, E.fall],
+      [72, { y: 1, qx: 0.05, qy: -0.1 }, E.out], [86, { y: -1.5, qy: 0.03 }, E.sine], [100, {}]] },
+  // the raised parts push down like a button, hold, and spring back; the body gives a little, its shadow spreads
+  'press': { ground: p => ({ pose: { qx: (p.qx || 0) * 1.5 }, o: 1 }),
+    stops: [[0, {}, E.out], [22, { y: 1, qx: 0.02, qy: -0.04 }, E.sine], [40, { y: 0.8, qx: 0.018, qy: -0.035 }, E.back], [62, { qy: 0.01 }, E.sine], [80, {}, E.sine], [100, {}]],
+    plates: [[0, {}, E.out], [22, { y: 9, qx: 0.06, qy: -0.14 }, E.sine], [40, { y: 8, qx: 0.05, qy: -0.12 }, E.back], [62, { y: -2.5, qy: 0.05 }, E.sine], [80, { y: 0.5 }, E.sine], [100, {}]] },
+  // a quick hop of the whole object: crouch, leap, squash landing; its raised parts land a beat late (jiggle); the
+  // ground shadow stays down, shrinks and fades in the air
+  'hop': { ground: groundLift(0.25, 0.3, 0.5, 16),
+    stops: [[0, {}, E.out], [14, { qx: 0.1, qy: -0.12 }, E.lift], [42, { y: -16, qx: -0.05, qy: 0.08, rx: -6 }, E.fall], [62, { qx: 0.13, qy: -0.15 }, E.out], [78, { qx: -0.03, qy: 0.03 }, E.sine], [100, {}]],
+    plates: [[0, {}, E.out], [14, { y: 1, qx: 0.1, qy: -0.12 }, E.lift], [42, { y: -17.5, qx: -0.05, qy: 0.1, rx: -6 }, E.fall], [62, { y: 2.5, qx: 0.13, qy: -0.15 }, E.out], [78, { y: -1.5, qx: -0.03, qy: 0.04 }, E.sine], [100, {}]] },
+}
+// a lean pose for a direction: the face turns toward (dx, dy) by 34deg and the object pushes 10% that way
+const leanPose = (f, dx, dy) => ({ ry: 34 * f * dx, rx: -34 * f * dy, x: 10 * f * dx, y: 10 * f * dy })
+// Stops of one track of a 3D preset: 'obj', 'shine', 'shadow' or 'plate' (part moves: the raised parts' own track).
+const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+export function stops3d(preset, track, v) {
+  const P = D3[preset]
+  const list = track === 'plate' && P.plates ? P.plates : P.stops
+  const projOf = (pose, i) => P.dir ? DIRS.map(([dx, dy]) => project(leanPose(pose.lean, dx, dy))) : [track === 'shadow' ? project(P.ground(pose, i).pose, 0) : project(pose)]
+  const keep = usedFns(list.flatMap(([, pose], i) => projOf(pose, i)))
+  return list.map(([at, pose, ease], i) => {
+    let tf, op = null
+    if (P.dir) {
+      // four measured leans -> per-parameter odd / even parts in --_dx / --_dy
+      const dirs = projOf(pose)
+      tf = affineCss(v, null, { dir: dirs, keep })
+      if (track === 'shine') {
+        const sh = DIRS.map(([dx, dy]) => shineOf(leanPose(pose.lean, dx, dy)))
+        tf += ` translate(${v.dirPoly(0, sh.map(s => s.x), '%')}, ${v.dirPoly(0, sh.map(s => s.y), '%')})`
+        op = v.dirPoly(1, sh.map(s => s.o - 1), '')
+      }
+    } else if (track === 'shadow') {
+      const g = P.ground(pose, i)
+      tf = affineCss(v, project(g.pose, 0), { lit: P.lit, keep })
+      op = R4(g.o) === 1 ? 1 : (P.lit ? String(R4(g.o)) : v.sc(R4(g.o - 1)))
+    } else {
+      tf = affineCss(v, project(pose), { lit: P.lit, keep })
+      if (track === 'shine') {
+        const s = shineOf(pose)
+        tf += ` translate(${R4(s.x) ? v.len(R4(s.x)) : '0%'}, ${R4(s.y) ? v.len(R4(s.y)) : '0%'})`
+        op = R4(s.o) === 1 ? 1 : (P.lit ? String(R4(s.o)) : v.sc(R4(s.o - 1)))
+      }
+    }
+    const props = { transform: tf }
+    if (op != null) props.opacity = op
+    return ease && at < 100 ? [at, props, ease] : [at, props]
+  })
+}
+for (const p of Object.keys(D3)) PRESET_STOPS[p] = v => stops3d(p, 'obj', v)
+/** The raised parts' keyframes of a part move (wm-plate-<preset>[-loop]: pop-up, press, hop), or null. */
+export function plateStops(preset, loop, mode) {
+  if (!D3[preset] || !D3[preset].plates) return null
+  const stops = stops3d(preset, 'plate', valuesFor(mode))
+  if (!loop || !hasLoopVariant(preset)) return stops
+  const d = PRESET_DEFAULTS[preset]
+  return loopStops(stops, d.shot / d.cycle)
+}
+/** Highlight keyframes of a 3D preset (wm-shine-<preset>[-loop]), or null. */
+export function shineStops(preset, loop, mode) {
+  if (!D3[preset]) return null
+  const stops = stops3d(preset, 'shine', valuesFor(mode))
+  if (!loop || !hasLoopVariant(preset)) return stops
+  const d = PRESET_DEFAULTS[preset]
+  return loopStops(stops, d.shot / d.cycle)
+}
 
 // stroke draw-on for paths that carry pathLength="1" (prepared by the runtime)
 export const DRAW_KEYFRAMES = {
@@ -270,6 +480,8 @@ export const SHADOW_STOPS = {
   'rise': v => [[0, { transform: 'translateY(0%) scale(1)', opacity: 1 }, E.in], [44, { transform: `translateY(${lift(v, -38)}) scale(.92)`, opacity: 0 }, 'step-end'],
     [44.01, { transform: 'translateY(0%) scale(.4)', opacity: 0 }, E.back], [86, { transform: 'translateY(0%) scale(1)', opacity: 1 }], [100, { transform: 'translateY(0%) scale(1)', opacity: 1 }]],
 }
+// 3D presets that lift or turn: the shadow's own ground track (D3[p].ground)
+for (const p of Object.keys(D3)) if (D3[p].ground) SHADOW_STOPS[p] = v => stops3d(p, 'shadow', v)
 export const GROUND = Object.keys(SHADOW_STOPS)
 export function shadowStops(preset, loop, mode) {
   if (!SHADOW_STOPS[preset]) return null

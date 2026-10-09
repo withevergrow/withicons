@@ -1,0 +1,64 @@
+{
+  "name": "candy-bucket",
+  "intent": "swings on its handle on the way door to door",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      3
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "bounce",
+      "origin": [
+        12,
+        9
+      ],
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "jack-o-lantern",
+      "effect": "morph"
+    },
+    {
+      "to": "candy-corn",
+      "effect": "slide-up"
+    },
+    {
+      "to": "candy-bucket@solid",
+      "effect": "fade"
+    }
+  ]
+}

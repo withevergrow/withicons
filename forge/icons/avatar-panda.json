@@ -1,0 +1,83 @@
+{
+  "name": "avatar-panda",
+  "category": "avatars",
+  "description": "A cute panda face avatar, for profiles and playful apps.",
+  "aliases": [
+    "panda-avatar",
+    "panda",
+    "panda-face",
+    "panda-bear",
+    "giant-panda",
+    "panda-profile",
+    "panda-pfp",
+    "panda-head"
+  ],
+  "tags": [
+    "avatar",
+    "animal",
+    "panda",
+    "cute",
+    "profile"
+  ],
+  "paths": [
+    {
+      "d": "M19 13.75 A7 7 0 1 1 5 13.75 A7 7 0 1 1 19 13.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.75 7.25 A1.5 1.5 0 1 1 4.75 7.25 A1.5 1.5 0 1 1 7.75 7.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.25 7.25 A1.5 1.5 0 1 1 16.25 7.25 A1.5 1.5 0 1 1 19.25 7.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 14.25 A1.25 1.75 30 1 1 10.25 11.25 A1.25 1.75 30 1 1 8.5 14.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.75 14.25 A1.25 1.75 -30 1 1 14 11.25 A1.25 1.75 -30 1 1 15.75 14.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M11.25 16 H12.75 L12 16.75 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 13.75 A7 7 0 1 1 5 13.75 A7 7 0 1 1 19 13.75 Z",
+    "M8.75 7.25 A2.5 2.5 0 1 1 3.75 7.25 A2.5 2.5 0 1 1 8.75 7.25 Z",
+    "M20.25 7.25 A2.5 2.5 0 1 1 15.25 7.25 A2.5 2.5 0 1 1 20.25 7.25 Z",
+    "M8 15.25 A2.25 2.75 30 1 1 10.75 10.25 A2.25 2.75 30 1 1 8 15.25 Z",
+    "M16.25 15.25 A2.25 2.75 -30 1 1 13.5 10.25 A2.25 2.75 -30 1 1 16.25 15.25 Z"
+  ],
+  "cutouts": [
+    "M8 15.25 A2.25 2.75 30 1 1 10.75 10.25 A2.25 2.75 30 1 1 8 15.25 Z M9.75 12.75 A0.5 0.75 0 1 1 8.75 12.75 A0.5 0.75 0 1 1 9.75 12.75 Z",
+    "M16.25 15.25 A2.25 2.75 -30 1 1 13.5 10.25 A2.25 2.75 -30 1 1 16.25 15.25 Z M15.25 12.75 A0.5 0.75 0 1 1 14.25 12.75 A0.5 0.75 0 1 1 15.25 12.75 Z",
+    "M10.75 15.75 H13.25 L12 17 Z"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "animal avatar",
+    "pet avatar",
+    "face",
+    "bamboo",
+    "black and white",
+    "china",
+    "bear",
+    "endangered",
+    "wildlife",
+    "zoo"
+  ]
+}

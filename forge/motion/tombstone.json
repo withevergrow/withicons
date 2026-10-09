@@ -1,0 +1,51 @@
+{
+  "name": "tombstone",
+  "intent": "stands still in the graveyard, swaying with the mist",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.6
+  },
+  "alt": [
+    {
+      "preset": "rise"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "ghost",
+      "effect": "slide-up"
+    },
+    {
+      "to": "coffin",
+      "effect": "morph"
+    },
+    {
+      "to": "tombstone@solid",
+      "effect": "fade"
+    }
+  ]
+}

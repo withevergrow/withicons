@@ -1,0 +1,40 @@
+{
+  "name": "database-zap",
+  "intent": "data crackles with a burst of speed",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "origin": [
+        17.75,
+        16.75
+      ],
+      "amount": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "database",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "scale"
+    }
+  ]
+}

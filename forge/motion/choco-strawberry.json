@@ -1,0 +1,48 @@
+{
+  "name": "choco-strawberry",
+  "intent": "a sweet treat swings from its stem",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.6,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "drop",
+    "amount": 0.5,
+    "duration": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        3
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "chocolate-box",
+      "effect": "flip"
+    },
+    {
+      "to": "choco-strawberry@solid",
+      "effect": "scale"
+    }
+  ]
+}

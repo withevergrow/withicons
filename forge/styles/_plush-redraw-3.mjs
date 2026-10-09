@@ -155,6 +155,22 @@ export const R = {
     ]
   },
   // the cupped mitten holding a sunflower coin stack in its palm
+  // the open hand: four separate stuffed finger pills sewn left to right (each one's piping overlaps its
+  // neighbour, so the fingers read apart instead of fusing into a mitten), a palm panel over their bases
+  // (the knuckle seam) and the thumb lobe on top; tomato felt like the automatic version
+  hand: (icon, P) => {
+    const k = 0.9, q = ([x, y]) => [(x - 12) * k + 12, (y - 12) * k + 12.15]
+    const pill = (x0, y0, x1, y1) => { const [a, b] = q([x0, y0]), [c, d] = q([x1, y1]); return P.pill(a, b, c, d) }
+    const fingers = [[2.5, 9, 6.5, 16], [6.5, 5, 10.5, 14], [10.5, 3, 14.5, 14], [14.5, 4.5, 18.5, 14]]
+    const [p0, p1] = [q([2.5, 11.75]), q([18.5, 21.5])]
+    const palm = P.fillet(P.unite(P.rr(p0[0], p0[1], p1[0], p1[1], [1.2, 1.2, 3, 5]), P.rr(...q([2.5, 11.75]), ...q([7, 18]), [1.2, 0, 0, 3])), 0.6)
+    const [t0, t1] = [q([15.4, 19.2]), q([19.7, 14.85])]
+    return [
+      ...fingers.map(f => P.felt('c1', pill(...f), { part: 'K', stitch: false, out: 0.55, hi: false })),
+      P.felt('c1', palm, { part: 'K', stitchMin: 1.4 }),
+      P.felt('c1', P.seg(t0[0], t0[1], t1[0], t1[1], 3.7), { part: 'K', stitch: false, out: 0.55 }),
+    ]
+  },
   'hand-coins': (icon, P) => {
     const h = hand(P)
     return [

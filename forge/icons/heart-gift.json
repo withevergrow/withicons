@@ -1,0 +1,83 @@
+{
+  "name": "heart-gift",
+  "category": "valentines",
+  "description": "A gift box with heart wrapping, for Valentine's presents.",
+  "aliases": [
+    "valentine-gift",
+    "love-gift",
+    "gift-heart",
+    "heart-present",
+    "valentine-present",
+    "romantic-gift",
+    "gift-for-her",
+    "gift-for-him"
+  ],
+  "synonyms": [
+    "valentine gift",
+    "valentines present",
+    "present",
+    "gift box",
+    "wrapped gift",
+    "surprise",
+    "gift idea",
+    "gift guide",
+    "romantic gift",
+    "anniversary gift",
+    "love",
+    "valentine",
+    "valentines day",
+    "birthday",
+    "mothers day",
+    "wedding gift",
+    "giving",
+    "gift shop",
+    "gift wrap",
+    "ribbon",
+    "bow",
+    "treat yourself",
+    "self love",
+    "gfit"
+  ],
+  "tags": [
+    "valentine",
+    "gift",
+    "present",
+    "love",
+    "shopping"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 8 H19.5 A1.5 1.5 0 0 1 21 9.5 V10.5 A1.5 1.5 0 0 1 19.5 12 H4.5 A1.5 1.5 0 0 1 3 10.5 V9.5 A1.5 1.5 0 0 1 4.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 12 V19 A2 2 0 0 0 6.5 21 H17.5 A2 2 0 0 0 19.5 19 V12",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 V12",
+      "plate": "A"
+    },
+    {
+      "d": "M8 8 A2.25 2.25 0 0 1 8 3.5 C10 3.5 11.5 5.5 12 8 C12.5 5.5 14 3.5 16 3.5 A2.25 2.25 0 0 1 16 8",
+      "plate": "A"
+    },
+    {
+      "d": "M12 19 C12 19 9.25 17.5 9.25 15.5 C9.25 14.75 10 14 10.75 14 C11.25 14 11.75 14.25 12 14.75 C12.25 14.25 12.75 14 13.25 14 C14 14 14.75 14.75 14.75 15.5 C14.75 17.5 12 19 12 19 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 8 H19.5 A1.5 1.5 0 0 1 21 9.5 V10.5 A1.5 1.5 0 0 1 19.5 12 H4.5 A1.5 1.5 0 0 1 3 10.5 V9.5 A1.5 1.5 0 0 1 4.5 8 Z",
+    "M4.5 12 H19.5 V19 A2 2 0 0 1 17.5 21 H6.5 A2 2 0 0 1 4.5 19 Z",
+    "M8 8 A2.25 2.25 0 0 1 8 3.5 C10 3.5 11.5 5.5 12 8 Z",
+    "M12 8 C12.5 5.5 14 3.5 16 3.5 A2.25 2.25 0 0 1 16 8 Z"
+  ],
+  "cutouts": [
+    "M3 12 H21",
+    "M12 8 V12",
+    "M8 7 A1.25 1.25 0 0 1 8 4.5 C9.2 4.5 10.2 5.6 10.6 7 Z",
+    "M13.4 7 C13.8 5.6 14.8 4.5 16 4.5 A1.25 1.25 0 0 1 16 7 Z",
+    "M12 19 C12 19 9.25 17.5 9.25 15.5 C9.25 14.75 10 14 10.75 14 C11.25 14 11.75 14.25 12 14.75 C12.25 14.25 12.75 14 13.25 14 C14 14 14.75 14.75 14.75 15.5 C14.75 17.5 12 19 12 19 Z"
+  ]
+}

@@ -66,7 +66,7 @@ test('<with-icon motion>: host still, parts animate with the spec lags, same as 
     for (const m of MOTIONS) {
       assert.ok(get(`${m}|bell|line`).some(p => /^wm-a:wm-ring(-loop)?:80$/.test(p)), `${m} bell: the clapper rings 0.08 s behind`)
       assert.ok(get(`${m}|bell|line`).some(p => /^obj:wm-ring(-loop)?:0$/.test(p)), `${m} bell: the body starts at once`)
-      assert.ok(get(`${m}|piggy-bank|line`).some(p => /^wm-a:wm-blink(-loop)?:400$/.test(p)), `${m} piggy-bank: the eye blinks 0.4 s in`)
+      assert.ok(get(`${m}|piggy-bank|line`).some(p => /^wm-s:wm-drop(-loop)?:\d+$/.test(p)), `${m} piggy-bank: the coin drops in on its own track (${get(`${m}|piggy-bank|line`).join(' ')})`)
     }
     assert.deepEqual(r.after, [], 'hover one-shots clear wm-run once every part has ended (so they play again)')
   } finally {

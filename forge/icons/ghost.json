@@ -1,0 +1,72 @@
+{
+  "name": "ghost",
+  "category": "halloween",
+  "description": "A friendly floating ghost, for Halloween and spooky fun.",
+  "aliases": [
+    "boo",
+    "spook",
+    "phantom",
+    "spirit",
+    "specter",
+    "spectre",
+    "apparition",
+    "haunt",
+    "poltergeist"
+  ],
+  "tags": [
+    "halloween",
+    "spooky",
+    "spirit",
+    "cute",
+    "holiday"
+  ],
+  "paths": [
+    {
+      "d": "M5 20 V10 A7 7 0 0 1 19 10 V20 Q17.83 18.5 16.67 20 Q15.5 21.5 14.33 20 Q13.17 18.5 12 20 Q10.83 21.5 9.67 20 Q8.5 18.5 7.33 20 Q6.17 21.5 5 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9.75 V11.25 M14.5 9.75 V11.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 14.25 V15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 20 V10 A7 7 0 0 1 19 10 V20 Q17.83 18.5 16.67 20 Q15.5 21.5 14.33 20 Q13.17 18.5 12 20 Q10.83 21.5 9.67 20 Q8.5 18.5 7.33 20 Q6.17 21.5 5 20 Z"
+  ],
+  "cutouts": [
+    "M10.5 10.5 A1 1.75 0 1 1 8.5 10.5 A1 1.75 0 1 1 10.5 10.5 Z",
+    "M15.5 10.5 A1 1.75 0 1 1 13.5 10.5 A1 1.75 0 1 1 15.5 10.5 Z",
+    "M13 14.75 A1 1.5 0 1 1 11 14.75 A1 1.5 0 1 1 13 14.75 Z"
+  ],
+  "synonyms": [
+    "ghosts",
+    "ghostly",
+    "haunted",
+    "haunting",
+    "spooky",
+    "creepy",
+    "scary",
+    "scare",
+    "boo ghost",
+    "friendly ghost",
+    "cute ghost",
+    "sheet ghost",
+    "ghosted",
+    "ghosting",
+    "invisible",
+    "anonymous",
+    "incognito",
+    "hidden user",
+    "afterlife",
+    "paranormal",
+    "supernatural",
+    "halloween",
+    "october",
+    "gost",
+    "ghots"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "test-tube",
+  "category": "education",
+  "description": "A test tube with liquid, for experiments, testing and labs.",
+  "aliases": [
+    "vial",
+    "lab-test",
+    "sample",
+    "tube",
+    "testing"
+  ],
+  "synonyms": [
+    "experiment",
+    "laboratory",
+    "science",
+    "chemistry",
+    "biology",
+    "lab",
+    "research",
+    "blood test",
+    "specimen",
+    "medical test",
+    "diagnostics",
+    "beta",
+    "trial",
+    "a/b test",
+    "unit test",
+    "test run",
+    "reagent",
+    "liquid",
+    "potion",
+    "scientist",
+    "pipette"
+  ],
+  "tags": [
+    "science",
+    "lab",
+    "chemistry",
+    "experiment",
+    "test"
+  ],
+  "paths": [
+    {
+      "d": "M15.88 3.88 L5.98 13.78 A3 3 0 0 0 10.22 18.02 L20.12 8.12",
+      "plate": "K"
+    },
+    {
+      "d": "M14.82 2.82 L21.18 9.18",
+      "plate": "K"
+    },
+    {
+      "d": "M10.22 9.54 L14.46 13.78",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M15.88 3.88 L5.98 13.78 A3 3 0 0 0 10.22 18.02 L20.12 8.12 Z"
+  ],
+  "cutouts": [
+    "M9.51 8.83 L15.17 14.49"
+  ]
+}

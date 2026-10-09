@@ -4,8 +4,6 @@
   "description": "A checklist: checkmarks beside lines for tasks and to-dos.",
   "aliases": [
     "checklist",
-    "todo",
-    "todo-list",
     "to-do",
     "task-list",
     "tasks",
@@ -73,6 +71,8 @@
     "accomplished",
     "onboarding checklist",
     "onboarding steps",
-    "getting started"
+    "getting started",
+    "todo",
+    "todo-list"
   ]
 }

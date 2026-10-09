@@ -1,0 +1,46 @@
+{
+  "name": "firecracker",
+  "intent": "the anar fountains sparks from its tip",
+  "loop": {
+    "preset": "flicker",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "A": {
+      "preset": "rise",
+      "origin": [
+        12,
+        11
+      ],
+      "amount": 0.5,
+      "duration": 1.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "sparkler",
+      "effect": "fade"
+    }
+  ]
+}

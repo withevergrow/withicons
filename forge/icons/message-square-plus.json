@@ -1,0 +1,65 @@
+{
+  "name": "message-square-plus",
+  "category": "communication",
+  "description": "A square chat bubble with a plus, for starting a new chat or conversation.",
+  "aliases": [
+    "new-chat",
+    "add-comment",
+    "new-conversation",
+    "start-chat",
+    "compose-message",
+    "add-message",
+    "new-comment",
+    "comment-plus",
+    "chat-plus"
+  ],
+  "tags": [
+    "message",
+    "chat",
+    "add",
+    "new",
+    "comment",
+    "conversation"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V14",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 10.5 H15.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z"
+  ],
+  "cutouts": [
+    "M12 7 V14",
+    "M8.5 10.5 H15.5"
+  ],
+  "synonyms": [
+    "new message",
+    "new thread",
+    "start conversation",
+    "new discussion",
+    "create chat",
+    "open chat",
+    "write message",
+    "compose",
+    "add note",
+    "leave a comment",
+    "reply",
+    "new prompt",
+    "new session",
+    "fresh chat",
+    "speech bubble plus",
+    "plus",
+    "create",
+    "feedback"
+  ]
+}

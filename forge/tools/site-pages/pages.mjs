@@ -1,9 +1,10 @@
 import vm from 'vm'
 import { pathToFileURL } from 'url'
 import fs from 'fs'
-import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI, STYLE_INFO, STYLE_GROUPS, styleTitle, stylesIn, groupTitle, listTitles, N_ICONS, N_STYLES, N_TOTAL, num, word, Word, MOTION, PRESETS, siteExists, hasStyle } from './lib.mjs'
+import { COPY_ICON, icon, esc, page, write, crumbs, cvar, code, ORIGIN, GITHUB, STYLES, ROOT, META, rawSvg, askAI, STYLE_INFO, STYLE_GROUPS, styleTitle, stylesIn, groupTitle, listTitles, N_ICONS, N_STYLES, N_TOTAL, N_LIVE, N_OVER, OVER_TEXT, num, word, Word, MOTION, PRESETS, siteExists, hasStyle } from './lib.mjs'
 import { motionSection, MOTION_TOC, motionAssets } from './motion.mjs'
 import { motionVars } from './lib.mjs'
+import { FEATURED, USES } from '../style-groups.mjs'
 import { FORMATS, CLI_FORMATS, GROUPS as FMT_GROUPS, seeThrough } from './formats.mjs'
 
 const I = (n, s = 'line', size = 24, cls = '') => icon(n, s, { size, cls })
@@ -15,7 +16,7 @@ const STYLE_PLAIN = {
   engrave: ['Engrave', 'Fine lines like the art on a banknote. Classic and a bit fancy.'],
   blueprint: ['Blueprint', 'An architect’s drawing, guides and measurements included.'],
   sketch: ['Sketch', 'Drawn by hand with a marker. Warm and human.'],
-  glass: ['Glass', 'Frosted glass panes stacked in layers. Soft, light and modern.'],
+  glass: ['Glass', 'Soft, luxurious frosted glass with gentle light. Airy and modern.'],
   kawaii: ['Kawaii', 'Chubby and soft, with a tiny happy face and rosy cheeks.'],
   sticker: ['Sticker', 'A die-cut sticker with a puffy white border and a sparkle.'],
   pixel: ['Pixel', 'Crisp pixel art, like your favourite old video game.'],
@@ -28,19 +29,44 @@ const STYLE_PLAIN = {
   pastel: ['Pastel', 'Soft candy pastels with gentle shading. Calm and dreamy.'],
   coquette: ['Coquette', 'Blush pink, satin bows, pearls and lace. Romantic.'],
   plush: ['Plush', 'Soft felt toys with stitched seams. Made for kids.'],
+  clay: ['Clay', 'Soft, rounded 3D shapes in matte clay. Warm and friendly.'],
+  bento: ['Bento', 'Each icon in its own soft tinted tile. Ready for bento grids.'],
+  suite: ['Suite', 'Polished full-colour icons, like an office or cloud suite.'],
+  dock: ['Dock', 'Glossy rounded app tiles, like the icons in a desktop dock.'],
+  liquid: ['Liquid', 'Clear liquid glass that bends the light, with bright rims.'],
+  chrome: ['Chrome', 'Polished liquid chrome with mirror highlights. Y2K.'],
+  soft3d: ['Soft 3D', 'Soft, studio-lit 3D objects with real depth, and Memoji-like people.'],
+  brutal: ['Brutal', 'Thick black outlines, loud colour and a hard shadow.'],
+  utsav: ['Utsav', 'Indian festive craft: marigold, gold line work and a tiny diya flame.'],
+  rangoli: ['Rangoli', 'Diwali, Durga Puja and Holi: a festive glow with one Indian motif.'],
+  halloween: ['Halloween', 'Spooky-cute pumpkins, witch purple, slime drips and bats.'],
+  christmas: ['Christmas', 'Cosy cranberry and pine, a snow cap and a sprig of holly.'],
+  lunar: ['Lunar New Year', 'Lucky red lacquer, gold foil, cloud scrolls and tassels.'],
+  valentine: ['Valentine', 'Cute pink stickers with blushing faces and little hearts.'],
 }
 const plain = s => STYLE_PLAIN[s] || [styleTitle(s), (STYLE_INFO[s] && STYLE_INFO[s].description) || '']
-// the five style groups (Everyday, Crafted, Playful, Studio, Storybook) come from site/js/site.js GROUPS via lib.mjs;
-// the old ids 'universal' / 'creative' read as Everyday / Crafted
+// the style groups (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) come from site/js/site.js GROUPS via
+// ../style-groups.mjs (site/STYLE-PICKER.md); Popular is site.js FEATURED, the jobs are site.js USES
 const GROUP_LABEL = new Proxy({}, { get: (_, g) => groupTitle(String(g)) })
-const groupOf = s => (STYLE_INFO[s] && STYLE_INFO[s].group) || 'crafted'
-const UNI = stylesIn('universal'), CRE = stylesIn('creative'), PLAY = stylesIn('playful'), STU = stylesIn('studio'), STORY = stylesIn('storybook')
+const G5 = (() => {
+  const gs = STYLE_GROUPS.map(g => ({ ...g, styles: g.styles.filter(hasStyle) })).filter(g => g.styles.length)
+  return gs
+})()
+const G = id => (G5.find(g => g.id === id) || { styles: [] }).styles
+const POPULAR = FEATURED.filter(hasStyle)
+const N_GROUPS = G5.length
+// multi-colour styles (their own colours as CSS variables) and the rich ones (real gradients)
+const MULTI = STYLES.filter(st => !['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch'].includes(st))
+const RICH = ['clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'rangoli', 'christmas'].filter(hasStyle)
+/** "Essentials (Line, Solid…), Product & brand (…)…" */
+const groupsSay = () => G5.map(g => `${esc(g.title)} (${listTitles(g.styles)})`).join('; ')
 const tabs = (id, items, label) => `<div class="pg-tabs" data-tabs>
   <div class="pg-tablist" role="tablist" aria-label="${esc(label)}">${items.map(([k, l], i) => `<button type="button" role="tab" id="${id}-t-${k}" aria-controls="${id}-p-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join('')}</div>
   ${items.map(([k, , html], i) => `<div class="pg-tabpanel" role="tabpanel" id="${id}-p-${k}" aria-labelledby="${id}-t-${k}" tabindex="0"${i === 0 ? '' : ' hidden'}>${html}</div>`).join('\n  ')}
 </div>`
 
 /* ───────────────────────── developers ───────────────────────── */
+const dvStyle = st => `<div class="dv-style" style="--g:${cvar(st)}"><span class="dv-style-ic">${I('camera', st, 44)}</span><b>${plain(st)[0]}</b><code>@withicons/react${st === 'line' ? '' : '/' + st}</code><span class="dv-kind">${esc(groupTitle(STYLE_INFO[st] ? STYLE_INFO[st].group : '').toLowerCase())}</span></div>`
 function developers() {
   const path = 'developers.html'
   const install = pkg => code(`npm i ${pkg}`, 'sh', 'Terminal')
@@ -210,8 +236,11 @@ import { Icon } from '@withicons/react'
 
     <section id="styles" class="dv-sec">
       <h2>Styles</h2>
-      <p>${Word(N_STYLES)} styles in five groups. <b>${GROUP_LABEL.everyday}</b> styles (${listTitles(UNI)}) are for interfaces at any size. <b>${GROUP_LABEL.crafted}</b> styles (${listTitles(CRE)}) shine at 32 px and up: marketing pages, empty states, illustrations.${PLAY.length ? ` <b>Playful</b> styles (${listTitles(PLAY)}) come with their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a CSS variable you can override.` : ''}${STU.length ? ` <b>Studio</b> styles (${listTitles(STU)}) are art-directed, premium looks for heroes, app tiles and brand moments; their colours are role-named variables (<code>--with-luxe-c1</code>, <code>--with-bauhaus-accent</code>…), so one palette recolours every one of them.` : ''}${STORY.length ? ` <b>Storybook</b> styles (${listTitles(STORY)}) are small illustrations: anime cel shading, Gothic cathedral detail, soft pastels, coquette bows and plush felt toys, with role-named colour variables too (<code>--with-anime-c1</code>, <code>--with-plush-accent</code>…).` : ''}</p>
-      ${[['everyday', UNI], ['crafted', CRE], ['playful', PLAY], ['studio', STU], ['storybook', STORY]].filter(([, l]) => l.length).map(([g, list]) => `<h3 class="dv-style-h">${GROUP_LABEL[g]}</h3><div class="dv-styles">${list.map(s => `<div class="dv-style" style="--g:${cvar(s)}" data-reveal><span class="dv-style-ic">${I('camera', s, 44)}</span><b>${plain(s)[0]}</b><code>@withicons/react${s === 'line' ? '' : '/' + s}</code><span class="dv-kind">${GROUP_LABEL[g].toLowerCase()}</span></div>`).join('')}</div>`).join('\n      ')}
+      <p>${Word(N_STYLES)} styles in ${word(N_GROUPS)} groups, named for what people make. Every style is a separate entry point (<code>@withicons/react/&lt;style&gt;</code>), so you only ship the ones you import. Start with the popular ones; open a group for the rest.</p>
+      <p class="pg-note">Line, Solid, Duo, Gloss, Engrave, Blueprint and Sketch draw in one colour that follows <code>currentColor</code>. The other styles bring their own colours: the outline still follows <code>currentColor</code>, and every extra colour is a role-named CSS variable (<code>--with-kawaii-c1</code>, <code>--with-luxe-accent</code>…), so one palette recolours them all. The rich styles (${listTitles(RICH)}) use real gradients whose stops are variables too (<code>stop-color="var(--with-clay-c1, #hex)"</code>); gradient ids (<code>wg-&lt;style&gt;-&lt;icon&gt;-&lt;n&gt;</code>) are made unique per copy by every package.</p>
+      <h3 class="dv-style-h">Popular</h3><div class="dv-styles">${POPULAR.map(st => dvStyle(st)).join('')}</div>
+      <h3 class="dv-style-h">Every style, by group</h3>
+      ${G5.map(g => `<details class="dv-group"><summary><span class="dv-group-t">${esc(g.title)}</span><span class="dv-group-n">${g.styles.length} styles</span><span class="dv-group-b">${esc(g.blurb || '')}</span></summary><div class="dv-styles">${g.styles.map(st => dvStyle(st)).join('')}</div></details>`).join('\n      ')}
     </section>
 
     ${motionSection()}
@@ -224,7 +253,7 @@ import { Icon } from '@withicons/react'
 <i class="with with-home"></i>
 <i class="with with-home with-solid"></i>
 <i class="with with-trash" role="img" aria-label="Delete"></i>`, 'html')}
-      <p>No JavaScript at all? Link one stylesheet per style you use instead. Each holds every icon of that style: <code>with-line.css</code> is about 26 KB gzipped, the richest styles several hundred KB, and <code>with-all.css</code> (every style, about 6 MB gzipped) is for prototypes only.</p>
+      <p>No JavaScript at all? Link one stylesheet per style you use instead. Each holds every icon of that style: <code>with-line.css</code> is about 26 KB gzipped, the richest styles several hundred KB, and <code>with-all.css</code> (every style, about 20 MB gzipped) is for prototypes only. To ship only a few icons, link <code>with-base.css</code> plus one small file per icon (see the <code>@withicons/classes</code> README).</p><p>React, Vue or Solid from a CDN without a bundler? Name the icons you use, so only those load: <code>https://esm.sh/@withicons/react?exports=Home,Search</code>.</p>
       ${code(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-line.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/classes@latest/dist/with-solid.css">   <!-- for with-solid -->`, 'html')}
       <p>With a bundler, install <code>@withicons/classes</code> and import the same files:</p>
@@ -484,7 +513,7 @@ async function ai() {
     ['animate_icon', '{ name, trigger?, preset?, to?, effect?, style?, format? }', 'Paste-ready animation code for the optional <code>@withicons/motion</code> package: <code>loop</code>, <code>hover</code>, <code>once</code>, <code>inview</code> or <code>swap</code> (play turns into pause), in HTML, React, Vue, Svelte, Solid, Angular or a web component.'],
     ['export_icon', '{ name, style?, format?, size?, background?, palette?, motion?, out_dir? }', 'Files, not code: SVG, PNG, PDF, PowerPoint, Word, favicons, app assets, Lottie, and animated GIF, APNG, SVG or a PowerPoint slide with the moving icon, for slides and docs. The local server (<code>npx -y @withicons/mcp</code>) saves them to <code>out_dir</code> or returns them inline; the remote one makes the vector files and answers the rest with the exact <code>npx withicons export</code> command.'],
     ['resolve_icon', '{ name }', 'Check a guess: <code>resolved</code> (with the alias it came through), <code>ambiguous</code> (with candidates) or <code>unknown</code> (with the nearest names).'],
-    ['list_styles', '{}', `The ${N_STYLES} styles in their five groups (${STYLE_GROUPS.map(g => g.title).join(', ')}) and what each looks like.`],
+    ['list_styles', '{}', `The ${N_STYLES} styles in their ${word(N_GROUPS)} groups (${STYLE_GROUPS.filter(g => g.styles.some(hasStyle)).map(g => g.title).join(', ')}) and what each looks like.`],
     ['list_categories', '{ category? }', 'Every category with icon counts, or, with <code>category</code>, every icon in that category.'],
   ]
   const L = await import(pathToFileURL(ROOT + '/packages/mcp/dist/lib.mjs').href)
@@ -635,7 +664,7 @@ npx withicons resolve bin --json`, 'sh', 'Terminal')}
   </section>
 </div>`
   const ld = [{ '@type': 'TechArticle', headline: 'with icons for AI agents: MCP server, skill, llms.txt', description: 'Connect AI assistants to with icons through the MCP server, an agent skill, llms.txt, icons.json and a search API.', url: ORIGIN + '/' + path }]
-  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'Ask your AI for icons | with icons', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${num(N_TOTAL)} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: [] }))
+  write(path, page({ path, current: 'ai', title: 'Ask your AI for icons: Claude, ChatGPT, Gemini, MCP and llms.txt · with icons', ogTitle: 'Ask your AI for icons | with icons', desc: `One click sends Claude, ChatGPT, Gemini, Perplexity or Grok a prompt that teaches it to find and use ${OVER_TEXT} free icons.` + ' Plus an MCP server, agent skill, llms.txt and a search API.', body, ld, crumbsLd: [['Home', ''], ['For AI', path]], bodyClass: 'pg-ai', scripts: [] }))
 }
 
 /* ───────────────────────── about ───────────────────────── */
@@ -665,7 +694,7 @@ function about() {
   ]
   const matrixIcons = ['home', 'bell', 'camera', 'heart', 'star']
   // "Drawn once": the drawing, then one step per style family (the stage shows the family side by side)
-  const fams = [['universal', UNI, 'For apps and websites. One colour that follows your text, sharp at 16 px.'], ['creative', CRE, 'Crafted single-colour looks for posters, slides and editorial work.'], ['playful', PLAY, 'Cheerful built-in colours you can swap with a palette.'], ['studio', STU, 'Rich, layered, premium. Gold, enamel, real materials and bold primaries.'], ['storybook', STORY, 'Illustrated worlds: anime ink, cathedral glass, pastels, bows and felt toys.']].filter(f => f[1].length)
+  const fams = G5.map(g => [g.id, g.styles, g.blurb || ''])
   const story = 'rocket'
   // live icons: each cycles through its sample states with CSS alone (site/data/live-<style>.js, from emit-dynamic)
   const live = (() => {
@@ -697,7 +726,7 @@ function about() {
   const stats = [
     [N_ICONS, 'icons', 'each drawn by hand'],
     [N_STYLES, 'styles', 'from one drawing'],
-    [N_TOTAL, 'icons in all', 'SVG, PNG and more'],
+    [N_OVER, 'icons in all', 'with the live icons', '+'],
     everyAnimated ? [nAnimated, 'animated', 'every single icon'] : [nAnimated, 'animated', 'with their own moves'],
     nLive ? [nLive, 'live icons', 'dates, times, counts'] : null,
     nPalettes ? [nPalettes, 'colour palettes', 'picked per icon'] : null,
@@ -733,7 +762,7 @@ function about() {
 
   <section class="abx-stats" aria-labelledby="stats-h">
     <h2 id="stats-h" class="pg-sr">with icons in numbers</h2>
-    <ul>${stats.map(([n, l, d], i) => `<li data-reveal style="--d:${i}"><b data-count="${n}">${num(n)}</b><span class="abx-stat-l">${l}</span><span class="abx-stat-d">${d}</span></li>`).join('')}<li data-reveal style="--d:${stats.length}" class="abx-stat-free"><b>$0</b><span class="abx-stat-l">to use</span><span class="abx-stat-d">today and forever</span></li></ul>
+    <ul>${stats.map(([n, l, d, plus], i) => `<li data-reveal style="--d:${i}">${plus ? `<b><span data-count="${n}">${num(n)}</span>${plus}</b>` : `<b data-count="${n}">${num(n)}</b>`}<span class="abx-stat-l">${l}</span><span class="abx-stat-d">${d}</span></li>`).join('')}<li data-reveal style="--d:${stats.length}" class="abx-stat-free"><b>$0</b><span class="abx-stat-l">to use</span><span class="abx-stat-d">today and forever</span></li></ul>
   </section>
 
   <section class="abx-story" aria-labelledby="story-h">
@@ -786,9 +815,9 @@ function about() {
 
   <section class="ab-matrix" aria-labelledby="matrix-h">
     <h2 id="matrix-h" class="ab-h">Same name. Same grid. Same size.</h2>
-    <p class="ab-sub">Because every style comes from the same drawing, you can switch styles any time and nothing moves.</p>
-    <div class="abx-matrix-scroll"><div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in all ${word(N_STYLES)} styles" style="--cols:${N_STYLES}">
-      ${STYLES.map((s, c) => `<div class="ab-col" style="--g:${cvar(s)};--c:${c}"><span class="ab-col-h">${plain(s)[0]}</span>${matrixIcons.map(n => I(n, s, 40)).join('')}</div>`).join('')}
+    <p class="ab-sub">Because every style comes from the same drawing, you can switch styles any time and nothing moves. Here are the popular ones; <a href="styles/index.html">see all ${N_STYLES} styles</a>.</p>
+    <div class="abx-matrix-scroll"><div class="ab-matrix-grid" data-reveal role="img" aria-label="Five icons shown in the ${word(POPULAR.length)} popular styles" style="--cols:${POPULAR.length}">
+      ${POPULAR.map((s, c) => `<div class="ab-col" style="--g:${cvar(s)};--c:${c}"><span class="ab-col-h">${plain(s)[0]}</span>${matrixIcons.map(n => I(n, s, 40)).join('')}</div>`).join('')}
     </div></div>
   </section>
 
@@ -893,7 +922,7 @@ node forge/tools/serve.mjs`, 'sh', 'Build it yourself')}</div>
   const EG = { '@type': 'Organization', '@id': 'https://withevergrow.com/#organization', name: 'Evergrow', url: 'https://withevergrow.com/', logo: ORIGIN + '/brand/evergrow_black.png' }
   const WI = { '@type': 'Organization', '@id': ORIGIN + '/#organization', name: 'with icons', url: ORIGIN + '/', logo: ORIGIN + '/brand/icon-512.png', sameAs: [GITHUB], parentOrganization: { '@id': EG['@id'] }, brand: { '@id': EG['@id'] } }
   const ld = [
-    { '@type': 'AboutPage', '@id': ORIGIN + '/' + path + '#page', name: 'About with icons', url: ORIGIN + '/' + path, description: `Why with icons exists, who makes it, and how ${num(N_ICONS)} hand-drawn icons become ${num(N_TOTAL)} in ${word(N_STYLES)} styles. Free under MIT, powered by Evergrow.`, mainEntity: { '@id': WI['@id'] }, publisher: { '@id': EG['@id'] }, isPartOf: { '@id': ORIGIN + '/#website' }, inLanguage: 'en' },
+    { '@type': 'AboutPage', '@id': ORIGIN + '/' + path + '#page', name: 'About with icons', url: ORIGIN + '/' + path, description: `Why with icons exists, who makes it, and how ${num(N_ICONS)} hand-drawn icons become ${OVER_TEXT} in ${word(N_STYLES)} styles. Free under MIT, powered by Evergrow.`, mainEntity: { '@id': WI['@id'] }, publisher: { '@id': EG['@id'] }, isPartOf: { '@id': ORIGIN + '/#website' }, inLanguage: 'en' },
     WI, EG,
   ]
   write(path, page({ path, current: 'about', title: `About with icons: free icons, drawn once, rendered ${word(N_STYLES)} ways`, ogTitle: 'About with icons', desc: `The story of with icons: ${N_ICONS} free icons drawn once and rendered in ${word(N_STYLES)} styles, ${everyAnimated ? 'every one animated' : 'with animations'}, for slides, websites, apps and AI. Free under MIT. Powered by Evergrow.`, body, ld, crumbsLd: [['Home', ''], ['About', path]], bodyClass: 'pg-about', styles: [...motionAssets().css, 'css/about.css'], scripts: motionAssets().js }))
@@ -927,7 +956,7 @@ function license() {
     ['yes', 'Can I put them in something I sell?', 'Yes: templates, themes, apps, slide decks and print designs are fine.'],
     ['careful', 'Can I resell the icons themselves?', 'The licence allows it, as long as the licence text goes with the files. But anyone can get them free here, so it’s rarely worth it.'],
     ['yes', 'Can I use them in apps built with AI?', 'Yes. The same rules apply however the work gets made.'],
-    ['yes', 'Are the animations and playful styles free too?', `Yes. All ${word(N_STYLES)} styles${PLAY.length || STU.length || STORY.length ? `, including ${listTitles([...PLAY, ...STU, ...STORY])},` : ''} and every animation (animated SVGs, GIFs and the motion package) come under the same MIT licence.`],
+    ['yes', 'Are the animations and playful styles free too?', `Yes. All ${word(N_STYLES)} styles, from ${listTitles(G('essentials').slice(0, 3))} to the 3D, glass, playful and illustrated looks, and every animation (animated SVGs, GIFs and the motion package) come under the same MIT licence.`],
   ]
   const badge = { yes: ['Yes', 'check-circle'], no: ['No', 'x-circle'], careful: ['Yes, but…', 'alert-circle'] }
   const body = `
@@ -982,7 +1011,7 @@ export const FAQ = [
   ['The basics', [
     ['Is with icons really free?', 'Yes. Every icon is free for personal and commercial use under the MIT licence. There’s no paid tier, no account and no watermark.'],
     ['Do I need an account to download icons?', 'No. Open the library, click an icon, and copy or download it. That’s all.'],
-    ['How many icons are there?', `${num(N_ICONS)} icons, each in ${N_STYLES} styles: ${num(N_TOTAL)} icons in total. Every style uses the same names and the same 24 × 24 grid.`],
+    ['How many icons are there?', `${num(N_ICONS)} icons, each in ${N_STYLES} styles, plus ${N_LIVE} live icons for dates, counts and labels: ${OVER_TEXT} icons in total. Every style uses the same names and the same 24 × 24 grid.`],
     ['Who makes with icons?', 'with icons is made and maintained by <a href="https://withevergrow.com">Evergrow</a>. Read <a href="about.html">our story</a>.'],
     ['Can I request a new icon?', 'Yes. Requests will open on our <a href="' + GITHUB + '">GitHub</a> at launch. Before asking, search with a few different words: icons have dozens of aliases, so “bin”, “delete” and “throw away” all find trash.'],
   ]],
@@ -1004,9 +1033,9 @@ export const FAQ = [
     ['Can I make a favicon or an app icon?', 'Yes. Download the favicon pack (every size a website needs, plus the lines to paste), an ICO file, an iOS imageset for Xcode or an Android VectorDrawable.'],
   ]]] : []),
   ['Styles', [
-    [`What’s the difference between the ${['everyday', 'crafted', 'playful', 'studio'].map(g => GROUP_LABEL[g]).join(', ')} and ${GROUP_LABEL.storybook} styles?`, `${GROUP_LABEL.everyday} styles (${listTitles(UNI)}) are clear at small sizes and made for interfaces. ${GROUP_LABEL.crafted} styles (${listTitles(CRE)}) are full of detail and look best at 32 px and larger, on posters, landing pages and illustrations.${PLAY.length ? ` Playful styles (${listTitles(PLAY)}) bring their own cheerful colours, for social posts, stickers, kids’ and hobby projects and anything that should feel fun.` : ''}${STU.length ? ` Studio styles (${listTitles(STU)}) are art-directed and premium: layered 3D, Bauhaus geometry and real materials, for hero sections, app tiles and brand moments at 48 px and up.` : ''}${STORY.length ? ` Storybook styles (${listTitles(STORY)}) are tiny illustrations: anime, Gothic, pastel, coquette and plush looks for games, kids’ apps, beauty and lifestyle brands, at 48 px and up.` : ''}`],
-    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Save the ${GROUP_LABEL.crafted}${PLAY.length ? `, ${GROUP_LABEL.playful}` : ''}${STU.length ? `, ${GROUP_LABEL.studio}` : ''}${STORY.length ? ` and ${GROUP_LABEL.storybook}` : ''} styles for big, eye-catching moments.`],
-    ...(PLAY.length ? [['Can I change the colours of the playful, studio and storybook styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost, gold trim, Bauhaus primaries, satin bows, stained glass and so on) have their own defaults, and on a website each one is a CSS variable you can change. Pick a palette in the icon editor to recolour them all at once.']] : []),
+    ['What’s the difference between the style groups?', `Every icon comes in ${word(N_STYLES)} styles, in ${word(N_GROUPS)} groups named for what people make. ${G5.map(g => `<b>${esc(g.title)}</b> (${listTitles(g.styles)}): ${esc((g.blurb || '').replace(/.$/, '').replace(/^./, c => c.toLowerCase()))}.`).join(' ')}`],
+    ['Which style should I pick?', `If unsure, choose Line. Use Solid for selected or active states and Duo for a softer, friendlier feel. Or start from what you’re making: ${USES.map(u => `${esc(u.title.replace(/^./, c => c.toLowerCase()))}: ${listTitles(u.styles.filter(hasStyle).slice(0, 2), 'or')}`).join('; ')}. The colourful and 3D styles look best at 32 px and up.`],
+    ...(MULTI.length ? [['Can I change the colours of the multi-colour styles?', 'Yes. The outline follows the colour you pick, like every other style. The extra colours (blush, stripes, frost, gold trim, Bauhaus primaries, satin bows, stained glass, clay, glow and gradient stops) have their own defaults, and on a website each one is a CSS variable you can change. Pick a palette in the icon editor to recolour them all at once.']] : []),
     ['Can I mix styles?', 'Yes, they share one grid, so they line up perfectly. A common pattern is Line for normal buttons and Solid for the selected one. Avoid mixing many styles in the same row.'],
   ]],
   ['Animations', [

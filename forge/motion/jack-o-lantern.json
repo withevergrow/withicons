@@ -1,0 +1,60 @@
+{
+  "name": "jack-o-lantern",
+  "intent": "glows and flickers like a candle inside a carved pumpkin",
+  "loop": {
+    "preset": "flicker",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.7,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "sway",
+      "origin": [
+        13,
+        6
+      ],
+      "amount": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "ghost",
+      "effect": "morph"
+    },
+    {
+      "to": "candy-bucket",
+      "effect": "slide-up"
+    },
+    {
+      "to": "jack-o-lantern@solid",
+      "effect": "fade"
+    }
+  ]
+}

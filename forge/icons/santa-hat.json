@@ -1,0 +1,78 @@
+{
+  "name": "santa-hat",
+  "category": "christmas",
+  "description": "A floppy Santa hat with a fluffy trim and pompom, for Christmas.",
+  "aliases": [
+    "santa",
+    "santa-claus",
+    "father-christmas",
+    "christmas-hat",
+    "xmas-hat",
+    "holiday-hat",
+    "elf-hat",
+    "st-nick"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "saint nicholas",
+    "kris kringle",
+    "pompom",
+    "pom pom",
+    "red hat",
+    "secret santa",
+    "costume",
+    "party hat",
+    "winter hat",
+    "ho ho ho",
+    "holiday party",
+    "christmas party",
+    "beanie",
+    "sant hat"
+  ],
+  "tags": [
+    "christmas",
+    "santa",
+    "hat",
+    "holiday",
+    "costume"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 16.5 C6 10.5 9 5 14.5 5 C17 5 18.5 7 19 8.75",
+      "plate": "K"
+    },
+    {
+      "d": "M17.2 11.6 C16.6 13.25 17.25 15 18.5 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 16.5 H19 A2 2 0 0 1 19 20.5 H5 A2 2 0 0 1 5 16.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 11 A2.25 2.25 0 1 1 17 11 A2.25 2.25 0 1 1 21.5 11 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 16.5 C6 10.5 9 5 14.5 5 C17 5 18.5 7 19 9.25 L17.4 10.6 C16.5 12.25 17 14.5 18.5 16.5 Z",
+    "M5 16.5 H19 A2 2 0 0 1 19 20.5 H5 A2 2 0 0 1 5 16.5 Z",
+    "M21.5 11 A2.25 2.25 0 1 1 17 11 A2.25 2.25 0 1 1 21.5 11 Z"
+  ],
+  "cutouts": [
+    "M5 16.5 H19",
+    "M17.05 9.9 A2.75 2.75 0 0 0 17.35 12.4",
+    "M8 18.5 H8.5",
+    "M11.75 18.5 H12.25",
+    "M15.5 18.5 H16"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "avatar-penguin",
+  "category": "avatars",
+  "description": "A cute penguin face avatar, for profiles and playful apps.",
+  "aliases": [
+    "penguin-avatar",
+    "penguin",
+    "penguin-face",
+    "penguin-profile",
+    "penguin-pfp",
+    "pingu",
+    "tux-avatar",
+    "penguin-head"
+  ],
+  "tags": [
+    "avatar",
+    "bird",
+    "penguin",
+    "cute",
+    "winter"
+  ],
+  "paths": [
+    {
+      "d": "M12 4 C16.25 4 19.5 7.25 19.5 11.5 V14.5 C19.5 18.25 16.25 21 12 21 C7.75 21 4.5 18.25 4.5 14.5 V11.5 C4.5 7.25 7.75 4 12 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.75 14 C5.25 9.5 10 8 12 10.75 C14 8 18.75 9.5 19.25 14",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 12.75 V13.25",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 12.75 V13.25",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 15.25 H13.25 L12 16.75 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 4 C16.25 4 19.5 7.25 19.5 11.5 V14.5 C19.5 18.25 16.25 21 12 21 C7.75 21 4.5 18.25 4.5 14.5 V11.5 C4.5 7.25 7.75 4 12 4 Z",
+    "M4.75 14 C5.25 9.5 10 8 12 10.75 C14 8 18.75 9.5 19.25 14 V14.5 C19.25 18 16 20.75 12 20.75 C8 20.75 4.75 18 4.75 14.5 Z",
+    "M10.75 15.25 H13.25 L12 16.75 Z"
+  ],
+  "cutouts": [
+    "M6 14 C6.5 10.75 10 9.75 12 12.25 C14 9.75 17.5 10.75 18 14 V14.5 C18 17.5 15.5 19.5 12 19.5 C8.5 19.5 6 17.5 6 14.5 Z M10.25 13 A0.75 1 0 1 1 8.75 13 A0.75 1 0 1 1 10.25 13 Z M15.25 13 A0.75 1 0 1 1 13.75 13 A0.75 1 0 1 1 15.25 13 Z M10.25 15 H13.75 L12 17.25 Z"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "bird",
+    "bird avatar",
+    "face",
+    "antarctic",
+    "polar",
+    "ice",
+    "winter",
+    "arctic",
+    "linux",
+    "tux"
+  ]
+}

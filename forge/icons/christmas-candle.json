@@ -1,0 +1,84 @@
+{
+  "name": "christmas-candle",
+  "category": "christmas",
+  "description": "A lit pillar candle with holly leaves and a berry at its base, for Christmas evenings.",
+  "aliases": [
+    "holiday-candle",
+    "xmas-candle",
+    "advent-candle",
+    "candle-holly",
+    "festive-candle",
+    "yule-candle"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "candle",
+    "candlelight",
+    "flame",
+    "light",
+    "advent",
+    "holly",
+    "evening",
+    "cosy",
+    "cozy",
+    "warm",
+    "church",
+    "christmas eve",
+    "candle light service",
+    "decor",
+    "christmas candel"
+  ],
+  "tags": [
+    "christmas",
+    "candle",
+    "light",
+    "holiday",
+    "advent"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 9 H14.5 A1 1 0 0 1 15.5 10 V18 H8.5 V10 A1 1 0 0 1 9.5 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7.25 V9",
+      "plate": "A"
+    },
+    {
+      "d": "M12 2.25 C13.25 3.5 14 4.5 14 5.25 A2 2 0 0 1 10 5.25 C10 4.5 10.75 3.5 12 2.25 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M11 19 L8.58 16.07 A2.07 2.07 0 0 1 6 15.86 A2.91 2.91 0 0 1 2.75 17.5 A2.91 2.91 0 0 1 5.22 20.18 A2.07 2.07 0 0 1 7.7 20.89 L11 19 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13 19 L16.3 20.89 A2.07 2.07 0 0 1 18.78 20.18 A2.91 2.91 0 0 1 21.25 17.5 A2.91 2.91 0 0 1 18 15.86 A2.07 2.07 0 0 1 15.42 16.07 L13 19 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13.6 19.25 A1.6 1.6 0 1 1 10.4 19.25 A1.6 1.6 0 1 1 13.6 19.25 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.5 9 H14.5 A1 1 0 0 1 15.5 10 V18 H8.5 V10 A1 1 0 0 1 9.5 9 Z",
+    "M12 2.25 C13.25 3.5 14 4.5 14 5.25 A2 2 0 0 1 10 5.25 C10 4.5 10.75 3.5 12 2.25 Z",
+    "M11 19 L8.58 16.07 A2.07 2.07 0 0 1 6 15.86 A2.91 2.91 0 0 1 2.75 17.5 A2.91 2.91 0 0 1 5.22 20.18 A2.07 2.07 0 0 1 7.7 20.89 L11 19 Z",
+    "M13 19 L16.3 20.89 A2.07 2.07 0 0 1 18.78 20.18 A2.91 2.91 0 0 1 21.25 17.5 A2.91 2.91 0 0 1 18 15.86 A2.07 2.07 0 0 1 15.42 16.07 L13 19 Z",
+    "M13.6 19.25 A1.6 1.6 0 1 1 10.4 19.25 A1.6 1.6 0 1 1 13.6 19.25 Z"
+  ],
+  "cutouts": [
+    "M14 10.25 V12.25",
+    "M14.4 19.25 A2.4 2.4 0 1 1 9.6 19.25 A2.4 2.4 0 1 1 14.4 19.25 Z M13.6 19.25 A1.6 1.6 0 1 1 10.4 19.25 A1.6 1.6 0 1 1 13.6 19.25 Z"
+  ]
+}

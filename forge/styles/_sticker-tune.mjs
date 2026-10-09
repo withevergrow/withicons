@@ -65,6 +65,8 @@ export const TUNE = {
   'thumbs-down': { primary: 'grape' },
   'heart-pulse': { primary: 'bubblegum', accent: 'lemon' },
   'coffee': { primary: 'peach' },
+  // a pink piggy: snout in the body pink, a lemon coin dropping in
+  'piggy-bank': { primary: 'bubblegum', accent: 'lemon', fillColours: { 2: 'bubblegum', 3: 'lemon' }, tubePaths: [2], tube: 'bubblegum', deco: 'heart' },
   'pill': { primary: 'bubblegum' },
   'rocket': { primary: 'sky', accent: 'bubblegum' },
   'flag': { primary: 'bubblegum' },

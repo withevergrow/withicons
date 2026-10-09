@@ -1,0 +1,33 @@
+{
+  "name": "paper-fan",
+  "intent": "the folding fan flutters back and forth",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      18.5
+    ],
+    "amount": 0.8,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      18.5
+    ],
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        18.5
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "@withicons/svelte",
   "version": "0.3.1",
-  "description": "500 icons x 20 styles as tree-shakable Svelte components (Svelte 4 and 5).",
+  "description": "734 icons x 34 styles as tree-shakable Svelte components (Svelte 4 and 5).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -48,7 +48,21 @@
     "gothic-icons",
     "pastel-icons",
     "coquette-icons",
-    "plush-icons"
+    "plush-icons",
+    "clay-icons",
+    "bento-icons",
+    "suite-icons",
+    "dock-icons",
+    "liquid-icons",
+    "chrome-icons",
+    "soft3d-icons",
+    "brutal-icons",
+    "utsav-icons",
+    "rangoli-icons",
+    "halloween-icons",
+    "christmas-icons",
+    "lunar-icons",
+    "valentine-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -161,6 +175,76 @@
       "types": "./dist/plush/index.d.ts",
       "svelte": "./dist/plush/index.js",
       "default": "./dist/plush/index.js"
+    },
+    "./clay": {
+      "types": "./dist/clay/index.d.ts",
+      "svelte": "./dist/clay/index.js",
+      "default": "./dist/clay/index.js"
+    },
+    "./bento": {
+      "types": "./dist/bento/index.d.ts",
+      "svelte": "./dist/bento/index.js",
+      "default": "./dist/bento/index.js"
+    },
+    "./suite": {
+      "types": "./dist/suite/index.d.ts",
+      "svelte": "./dist/suite/index.js",
+      "default": "./dist/suite/index.js"
+    },
+    "./dock": {
+      "types": "./dist/dock/index.d.ts",
+      "svelte": "./dist/dock/index.js",
+      "default": "./dist/dock/index.js"
+    },
+    "./liquid": {
+      "types": "./dist/liquid/index.d.ts",
+      "svelte": "./dist/liquid/index.js",
+      "default": "./dist/liquid/index.js"
+    },
+    "./chrome": {
+      "types": "./dist/chrome/index.d.ts",
+      "svelte": "./dist/chrome/index.js",
+      "default": "./dist/chrome/index.js"
+    },
+    "./soft3d": {
+      "types": "./dist/soft3d/index.d.ts",
+      "svelte": "./dist/soft3d/index.js",
+      "default": "./dist/soft3d/index.js"
+    },
+    "./brutal": {
+      "types": "./dist/brutal/index.d.ts",
+      "svelte": "./dist/brutal/index.js",
+      "default": "./dist/brutal/index.js"
+    },
+    "./utsav": {
+      "types": "./dist/utsav/index.d.ts",
+      "svelte": "./dist/utsav/index.js",
+      "default": "./dist/utsav/index.js"
+    },
+    "./rangoli": {
+      "types": "./dist/rangoli/index.d.ts",
+      "svelte": "./dist/rangoli/index.js",
+      "default": "./dist/rangoli/index.js"
+    },
+    "./halloween": {
+      "types": "./dist/halloween/index.d.ts",
+      "svelte": "./dist/halloween/index.js",
+      "default": "./dist/halloween/index.js"
+    },
+    "./christmas": {
+      "types": "./dist/christmas/index.d.ts",
+      "svelte": "./dist/christmas/index.js",
+      "default": "./dist/christmas/index.js"
+    },
+    "./lunar": {
+      "types": "./dist/lunar/index.d.ts",
+      "svelte": "./dist/lunar/index.js",
+      "default": "./dist/lunar/index.js"
+    },
+    "./valentine": {
+      "types": "./dist/valentine/index.d.ts",
+      "svelte": "./dist/valentine/index.js",
+      "default": "./dist/valentine/index.js"
     },
     "./icon": {
       "types": "./dist/icon.d.ts",
@@ -377,6 +461,146 @@
       "svelte": "./dist/plush/icons/*.svelte",
       "default": "./dist/plush/icons/*.svelte"
     },
+    "./clay/icons/*.svelte": {
+      "types": "./dist/clay/icons/*.svelte.d.ts",
+      "svelte": "./dist/clay/icons/*.svelte",
+      "default": "./dist/clay/icons/*.svelte"
+    },
+    "./clay/icons/*": {
+      "types": "./dist/clay/icons/*.svelte.d.ts",
+      "svelte": "./dist/clay/icons/*.svelte",
+      "default": "./dist/clay/icons/*.svelte"
+    },
+    "./bento/icons/*.svelte": {
+      "types": "./dist/bento/icons/*.svelte.d.ts",
+      "svelte": "./dist/bento/icons/*.svelte",
+      "default": "./dist/bento/icons/*.svelte"
+    },
+    "./bento/icons/*": {
+      "types": "./dist/bento/icons/*.svelte.d.ts",
+      "svelte": "./dist/bento/icons/*.svelte",
+      "default": "./dist/bento/icons/*.svelte"
+    },
+    "./suite/icons/*.svelte": {
+      "types": "./dist/suite/icons/*.svelte.d.ts",
+      "svelte": "./dist/suite/icons/*.svelte",
+      "default": "./dist/suite/icons/*.svelte"
+    },
+    "./suite/icons/*": {
+      "types": "./dist/suite/icons/*.svelte.d.ts",
+      "svelte": "./dist/suite/icons/*.svelte",
+      "default": "./dist/suite/icons/*.svelte"
+    },
+    "./dock/icons/*.svelte": {
+      "types": "./dist/dock/icons/*.svelte.d.ts",
+      "svelte": "./dist/dock/icons/*.svelte",
+      "default": "./dist/dock/icons/*.svelte"
+    },
+    "./dock/icons/*": {
+      "types": "./dist/dock/icons/*.svelte.d.ts",
+      "svelte": "./dist/dock/icons/*.svelte",
+      "default": "./dist/dock/icons/*.svelte"
+    },
+    "./liquid/icons/*.svelte": {
+      "types": "./dist/liquid/icons/*.svelte.d.ts",
+      "svelte": "./dist/liquid/icons/*.svelte",
+      "default": "./dist/liquid/icons/*.svelte"
+    },
+    "./liquid/icons/*": {
+      "types": "./dist/liquid/icons/*.svelte.d.ts",
+      "svelte": "./dist/liquid/icons/*.svelte",
+      "default": "./dist/liquid/icons/*.svelte"
+    },
+    "./chrome/icons/*.svelte": {
+      "types": "./dist/chrome/icons/*.svelte.d.ts",
+      "svelte": "./dist/chrome/icons/*.svelte",
+      "default": "./dist/chrome/icons/*.svelte"
+    },
+    "./chrome/icons/*": {
+      "types": "./dist/chrome/icons/*.svelte.d.ts",
+      "svelte": "./dist/chrome/icons/*.svelte",
+      "default": "./dist/chrome/icons/*.svelte"
+    },
+    "./soft3d/icons/*.svelte": {
+      "types": "./dist/soft3d/icons/*.svelte.d.ts",
+      "svelte": "./dist/soft3d/icons/*.svelte",
+      "default": "./dist/soft3d/icons/*.svelte"
+    },
+    "./soft3d/icons/*": {
+      "types": "./dist/soft3d/icons/*.svelte.d.ts",
+      "svelte": "./dist/soft3d/icons/*.svelte",
+      "default": "./dist/soft3d/icons/*.svelte"
+    },
+    "./brutal/icons/*.svelte": {
+      "types": "./dist/brutal/icons/*.svelte.d.ts",
+      "svelte": "./dist/brutal/icons/*.svelte",
+      "default": "./dist/brutal/icons/*.svelte"
+    },
+    "./brutal/icons/*": {
+      "types": "./dist/brutal/icons/*.svelte.d.ts",
+      "svelte": "./dist/brutal/icons/*.svelte",
+      "default": "./dist/brutal/icons/*.svelte"
+    },
+    "./utsav/icons/*.svelte": {
+      "types": "./dist/utsav/icons/*.svelte.d.ts",
+      "svelte": "./dist/utsav/icons/*.svelte",
+      "default": "./dist/utsav/icons/*.svelte"
+    },
+    "./utsav/icons/*": {
+      "types": "./dist/utsav/icons/*.svelte.d.ts",
+      "svelte": "./dist/utsav/icons/*.svelte",
+      "default": "./dist/utsav/icons/*.svelte"
+    },
+    "./rangoli/icons/*.svelte": {
+      "types": "./dist/rangoli/icons/*.svelte.d.ts",
+      "svelte": "./dist/rangoli/icons/*.svelte",
+      "default": "./dist/rangoli/icons/*.svelte"
+    },
+    "./rangoli/icons/*": {
+      "types": "./dist/rangoli/icons/*.svelte.d.ts",
+      "svelte": "./dist/rangoli/icons/*.svelte",
+      "default": "./dist/rangoli/icons/*.svelte"
+    },
+    "./halloween/icons/*.svelte": {
+      "types": "./dist/halloween/icons/*.svelte.d.ts",
+      "svelte": "./dist/halloween/icons/*.svelte",
+      "default": "./dist/halloween/icons/*.svelte"
+    },
+    "./halloween/icons/*": {
+      "types": "./dist/halloween/icons/*.svelte.d.ts",
+      "svelte": "./dist/halloween/icons/*.svelte",
+      "default": "./dist/halloween/icons/*.svelte"
+    },
+    "./christmas/icons/*.svelte": {
+      "types": "./dist/christmas/icons/*.svelte.d.ts",
+      "svelte": "./dist/christmas/icons/*.svelte",
+      "default": "./dist/christmas/icons/*.svelte"
+    },
+    "./christmas/icons/*": {
+      "types": "./dist/christmas/icons/*.svelte.d.ts",
+      "svelte": "./dist/christmas/icons/*.svelte",
+      "default": "./dist/christmas/icons/*.svelte"
+    },
+    "./lunar/icons/*.svelte": {
+      "types": "./dist/lunar/icons/*.svelte.d.ts",
+      "svelte": "./dist/lunar/icons/*.svelte",
+      "default": "./dist/lunar/icons/*.svelte"
+    },
+    "./lunar/icons/*": {
+      "types": "./dist/lunar/icons/*.svelte.d.ts",
+      "svelte": "./dist/lunar/icons/*.svelte",
+      "default": "./dist/lunar/icons/*.svelte"
+    },
+    "./valentine/icons/*.svelte": {
+      "types": "./dist/valentine/icons/*.svelte.d.ts",
+      "svelte": "./dist/valentine/icons/*.svelte",
+      "default": "./dist/valentine/icons/*.svelte"
+    },
+    "./valentine/icons/*": {
+      "types": "./dist/valentine/icons/*.svelte.d.ts",
+      "svelte": "./dist/valentine/icons/*.svelte",
+      "default": "./dist/valentine/icons/*.svelte"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -527,6 +751,104 @@
       "plush/icons/*": [
         "./dist/plush/icons/*.svelte.d.ts",
         "./dist/plush/icons/*.d.ts"
+      ],
+      "clay": [
+        "./dist/clay/index.d.ts"
+      ],
+      "clay/icons/*": [
+        "./dist/clay/icons/*.svelte.d.ts",
+        "./dist/clay/icons/*.d.ts"
+      ],
+      "bento": [
+        "./dist/bento/index.d.ts"
+      ],
+      "bento/icons/*": [
+        "./dist/bento/icons/*.svelte.d.ts",
+        "./dist/bento/icons/*.d.ts"
+      ],
+      "suite": [
+        "./dist/suite/index.d.ts"
+      ],
+      "suite/icons/*": [
+        "./dist/suite/icons/*.svelte.d.ts",
+        "./dist/suite/icons/*.d.ts"
+      ],
+      "dock": [
+        "./dist/dock/index.d.ts"
+      ],
+      "dock/icons/*": [
+        "./dist/dock/icons/*.svelte.d.ts",
+        "./dist/dock/icons/*.d.ts"
+      ],
+      "liquid": [
+        "./dist/liquid/index.d.ts"
+      ],
+      "liquid/icons/*": [
+        "./dist/liquid/icons/*.svelte.d.ts",
+        "./dist/liquid/icons/*.d.ts"
+      ],
+      "chrome": [
+        "./dist/chrome/index.d.ts"
+      ],
+      "chrome/icons/*": [
+        "./dist/chrome/icons/*.svelte.d.ts",
+        "./dist/chrome/icons/*.d.ts"
+      ],
+      "soft3d": [
+        "./dist/soft3d/index.d.ts"
+      ],
+      "soft3d/icons/*": [
+        "./dist/soft3d/icons/*.svelte.d.ts",
+        "./dist/soft3d/icons/*.d.ts"
+      ],
+      "brutal": [
+        "./dist/brutal/index.d.ts"
+      ],
+      "brutal/icons/*": [
+        "./dist/brutal/icons/*.svelte.d.ts",
+        "./dist/brutal/icons/*.d.ts"
+      ],
+      "utsav": [
+        "./dist/utsav/index.d.ts"
+      ],
+      "utsav/icons/*": [
+        "./dist/utsav/icons/*.svelte.d.ts",
+        "./dist/utsav/icons/*.d.ts"
+      ],
+      "rangoli": [
+        "./dist/rangoli/index.d.ts"
+      ],
+      "rangoli/icons/*": [
+        "./dist/rangoli/icons/*.svelte.d.ts",
+        "./dist/rangoli/icons/*.d.ts"
+      ],
+      "halloween": [
+        "./dist/halloween/index.d.ts"
+      ],
+      "halloween/icons/*": [
+        "./dist/halloween/icons/*.svelte.d.ts",
+        "./dist/halloween/icons/*.d.ts"
+      ],
+      "christmas": [
+        "./dist/christmas/index.d.ts"
+      ],
+      "christmas/icons/*": [
+        "./dist/christmas/icons/*.svelte.d.ts",
+        "./dist/christmas/icons/*.d.ts"
+      ],
+      "lunar": [
+        "./dist/lunar/index.d.ts"
+      ],
+      "lunar/icons/*": [
+        "./dist/lunar/icons/*.svelte.d.ts",
+        "./dist/lunar/icons/*.d.ts"
+      ],
+      "valentine": [
+        "./dist/valentine/index.d.ts"
+      ],
+      "valentine/icons/*": [
+        "./dist/valentine/icons/*.svelte.d.ts",
+        "./dist/valentine/icons/*.d.ts"
       ]
     }
   },

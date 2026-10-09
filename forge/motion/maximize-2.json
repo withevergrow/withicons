@@ -1,0 +1,32 @@
+{
+  "name": "maximize-2",
+  "intent": "arrows push out to the corners like going full screen",
+  "loop": {
+    "preset": "zoom",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.9,
+    "duration": 0.5
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "minimize-2",
+      "effect": "morph"
+    },
+    {
+      "to": "maximize",
+      "effect": "rotate"
+    }
+  ]
+}

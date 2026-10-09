@@ -1,0 +1,68 @@
+{
+  "name": "cloud-drizzle",
+  "category": "weather",
+  "description": "A cloud with light rain dashes, for drizzle and showers.",
+  "aliases": [
+    "light-rain",
+    "sprinkle",
+    "spitting"
+  ],
+  "synonyms": [
+    "drizzle",
+    "showers",
+    "rainy",
+    "light showers",
+    "rain",
+    "rainfall",
+    "scattered showers",
+    "wet weather",
+    "precipitation",
+    "mizzle",
+    "shower",
+    "raindrops",
+    "weather forecast",
+    "damp",
+    "drippy",
+    "sprinkles",
+    "cloudy with rain",
+    "chance of rain",
+    "umbrella weather"
+  ],
+  "tags": [
+    "weather",
+    "rain",
+    "drizzle",
+    "cloud",
+    "forecast"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 17 V18",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17 V18",
+      "plate": "A"
+    },
+    {
+      "d": "M16 17 V18",
+      "plate": "A"
+    },
+    {
+      "d": "M10 20.5 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 20.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z"
+  ],
+  "cutouts": []
+}

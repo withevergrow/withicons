@@ -1,0 +1,71 @@
+{
+  "name": "file-json",
+  "category": "files",
+  "description": "A document with curly braces, for JSON files, configs and structured data.",
+  "aliases": [
+    "json-file",
+    "json-document",
+    "config-file",
+    "data-file",
+    "file-braces",
+    "settings-file",
+    "json-config",
+    "jsonl"
+  ],
+  "tags": [
+    "json",
+    "file",
+    "data",
+    "config",
+    "developer",
+    "braces"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 11 A1 1 0 0 0 9.5 12 V13 C9.5 14 9 14.5 8 14.5 C9 14.5 9.5 15 9.5 16 V17 A1 1 0 0 0 10.5 18",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 11 A1 1 0 0 1 14.5 12 V13 C14.5 14 15 14.5 16 14.5 C15 14.5 14.5 15 14.5 16 V17 A1 1 0 0 1 13.5 18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M10.5 11 A1 1 0 0 0 9.5 12 V13 C9.5 14 9 14.5 8 14.5 C9 14.5 9.5 15 9.5 16 V17 A1 1 0 0 0 10.5 18",
+    "M13.5 11 A1 1 0 0 1 14.5 12 V13 C14.5 14 15 14.5 16 14.5 C15 14.5 14.5 15 14.5 16 V17 A1 1 0 0 1 13.5 18"
+  ],
+  "synonyms": [
+    "json",
+    "json file",
+    "curly braces",
+    "configuration",
+    "package json",
+    "tsconfig",
+    "manifest",
+    "schema",
+    "structured data",
+    "structured output",
+    "data export",
+    "api response",
+    "payload",
+    "object",
+    "key value",
+    "yaml",
+    "javascript object notation",
+    "dataset",
+    "jsonc",
+    "settings"
+  ]
+}

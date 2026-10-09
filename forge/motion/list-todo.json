@@ -1,0 +1,48 @@
+{
+  "name": "list-todo",
+  "intent": "the first task ticks off while the empty box waits its turn",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        6,
+        12
+      ],
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list-checks",
+      "effect": "fade"
+    },
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "clipboard-check",
+      "effect": "flip"
+    }
+  ]
+}

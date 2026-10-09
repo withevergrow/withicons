@@ -3,6 +3,10 @@ export type Preset =
   | 'spin' | 'spin-once' | 'tick' | 'pulse' | 'beat' | 'breathe' | 'float' | 'bounce' | 'sway' | 'ring' | 'wiggle' | 'shake'
   | 'nod' | 'nudge' | 'pass' | 'rise' | 'drop' | 'blink' | 'flicker' | 'twinkle' | 'pop' | 'tada' | 'jelly' | 'flip' | 'rock'
   | 'tilt' | 'zoom' | 'orbit' | 'glow' | 'draw' | 'type' | 'fill'
+  | Preset3D
+/** 3D presets (forge/MOTION.md "3D motion"): turns in depth as plain 2D affine keyframes, with highlight and ground shadow. */
+export type Preset3D = 'turn' | 'turn-once' | 'wobble' | 'chime' | 'swivel' | 'bow' | 'lean' | 'lift' | 'pump' | 'squish' | 'drift' | 'gleam'
+  | 'pop-up' | 'press' | 'hop'
 export type SwapEffect =
   | 'fade' | 'scale' | 'rotate' | 'flip' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'blur' | 'spin' | 'morph' | 'draw'
 export type Trigger = 'loop' | 'hover' | 'once' | 'inview'
@@ -39,6 +43,8 @@ export interface MotionSpec {
   deco?: DecoKind
   /** true when derived automatically (no hand-written spec yet). */
   auto?: boolean
+  /** true on a spec mapped for a 3D style (styleSpec). */
+  d3?: boolean
 }
 /** How decorations (nodes tagged wm-deco: backdrops, sparkles, accent dots) move while the icon animates. */
 export type DecoKind = 'breathe' | 'float' | 'twinkle' | 'still'
@@ -53,9 +59,32 @@ export interface PresetDefaults {
   /** Shortest allowed duration in seconds (flicker: stays under 3 flashes per second). */
   min?: number
   intent: string
+  /** A 3D preset. */
+  d3?: boolean
 }
 
 export const PRESETS: Preset[]
+export const PRESETS_3D: Preset3D[]
+/** Styles whose motion plays in 3D: clay dock liquid chrome soft3d luxe skeuo glass plush. */
+export const STYLES_3D: string[]
+/** Styles whose decoration is a still backdrop tile: bento dock. */
+export const BACKDROP_STYLES: string[]
+/** Flat preset -> its 3D counterpart (amount / time: multipliers). Unlisted presets keep themselves. */
+export const PROFILE_3D: Record<string, { preset: Preset3D; amount?: number; time?: number }>
+export function is3dStyle(style?: string | null): boolean
+export function isBackdropStyle(style?: string | null): boolean
+/** A motion object -> its 3D counterpart (stepped motion is never mapped). */
+export function motion3d(m: MotionObject): MotionObject
+/** A motion object as the style plays it (3D counterpart for STYLES_3D). */
+export function styleMotion(m: MotionObject, style?: string | null): MotionObject
+/** A spec as the style plays it: 3D counterparts for STYLES_3D, deco 'still' for BACKDROP_STYLES; others unchanged. */
+export function styleSpec(spec: MotionSpec, style?: string | null): MotionSpec
+/** Part moves: their plates (wm-a / wm-s) play their own keyframes: pop-up, press, hop. */
+export const PLATE_PRESETS: Preset3D[]
+/** Per-style move lists (soft3d: 3-5 moves per icon). */
+export const MOVE_PROFILES: Record<string, { min: number; max: number; parts: Preset[]; generic: Preset[] }>
+/** The moves an icon offers in a style (own first, then part moves when parts, then generic ones; flat styles: [loop, hover, ...alt]). */
+export function styleMoves(spec: MotionSpec | null, style?: string | null, options?: { parts?: boolean }): MotionObject[]
 export const EFFECTS: SwapEffect[]
 export const PRESET_DEFAULTS: Record<Preset, PresetDefaults>
 export const EFFECT_DEFAULTS: Record<SwapEffect, { dur: number }>
@@ -70,13 +99,18 @@ export function swapEase(ease?: SwapEaseName | string | null): string | null
 export function swapCycle(duration: number, hold?: number): number
 
 /** The icon's motion spec, or null. Uses the full spec table (about 29 KB gzipped), so bundlers include it only when this (or motionAttrs) is imported. */
-export function motionFor(name: string): MotionSpec | null
+export function motionFor(name: string, style?: string): MotionSpec | null
 
 export interface MotionOptions {
   /** Default 'loop'. 'hover' plays the one-shot on pointer enter / focus / tap of the element or its closest .wm-trigger. */
   trigger?: Trigger
-  /** Overrides the icon's own preset. */
+  /** Overrides the icon's own preset (always taken as it is, whatever the style). */
   preset?: Preset
+  /**
+   * The icon's style. A 3D style (STYLES_3D) adds wm-3d, so the icon plays its 3D counterpart (icons.css); a backdrop
+   * style (bento, dock) adds wm-backdrop, so its tile stays still. Other styles change nothing.
+   */
+  style?: string
   /** Seconds. */
   duration?: number
   amount?: number

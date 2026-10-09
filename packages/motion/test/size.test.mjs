@@ -20,14 +20,16 @@ const bundle = async code => {
 test('motion() + swap() bundle without the spec table', { skip: !esbuild && 'esbuild not available' }, async () => {
   const js = await bundle(`import { motion, swap } from './index.js'; window.x = [motion, swap]`)
   assert.ok(!js.includes(SENTINEL), 'icons.js is tree-shaken away')
-  assert.ok(js.length < 16000, 'runtime stays small: ' + js.length + ' bytes minified')
+  // 16 KB until run 12; + the 3D profile (PROFILE_3D, styleSpec: style-aware motion)
+  assert.ok(js.length < 17500, 'runtime stays small: ' + js.length + ' bytes minified')
 })
 
 test('the element bundles without the spec table', { skip: !esbuild && 'esbuild not available' }, async () => {
   const js = await bundle(`import './element.js'`)
   assert.ok(!js.includes(SENTINEL))
   // + the parts keyframes generator for shadow roots (parts-css.js)
-  assert.ok(js.length < 40000, js.length + ' bytes minified')
+  // + the 3D keyframes generator (run 12)
+  assert.ok(js.length < 44000, js.length + ' bytes minified')
 })
 
 test('motionFor() still brings the table', { skip: !esbuild && 'esbuild not available' }, async () => {

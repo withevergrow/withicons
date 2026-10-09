@@ -29,6 +29,7 @@ import { tuneFor } from './_luxe-tune.mjs'
 import { setOf } from '../kernel/bool.mjs'
 import { ringsD } from './_luxe-path.mjs'
 import { markIds as liveMarks } from './_luxe-live.mjs'
+import { isPerson, tones, fillParts, partAt } from './_people.mjs'
 
 export const K = {
   SCALE: 0.9,            // drawing scale about the centre (room for depth and shadow)
@@ -54,7 +55,9 @@ const P = { // palette role -> default
   tint: '#FFEFC4', accent: '#E3AE47', shadow: '#0A0B26', shine: '#FFFFFF', edge: '#9CC2FF',
 }
 export const PALETTE = P
-export const col = r => `var(--with-luxe-${r}, ${P[r]})`
+// a person avatar paints its own natural defaults (skin c1/tint/shadow, hair c2/c3, clothing c4): see _people.mjs
+let OV = null
+export const col = r => `var(--with-luxe-${r}, ${(OV && OV[r]) || P[r]})`
 
 // materials: which roles paint each layer
 const MAT = {
@@ -63,6 +66,45 @@ const MAT = {
   champagne: { base: 'tint', dark: 'accent', darkOp: 0.55, light: 'shine', lightOp: 0.3, steps: [[0.3, 0.16]], discs: [], wall: 'c4', rim: 'tint', rimOp: 0, chamfer: 'shine', chamferOp: 0.85, spec: 'shine', glaze: 0 },
   pearl:  { base: 'tint', dark: 'c4', darkOp: 0.28, light: 'shine', lightOp: 0.5, steps: [[0.25, 0.14]], discs: [0.3], wall: 'c4', rim: 'edge', rimOp: 0, chamfer: 'shine', chamferOp: 0.6, spec: 'shine', glaze: 0 },
   jewel:  { base: 'c2', dark: 'shadow', darkOp: 0.36, light: 'shine', lightOp: 0.1, steps: [[0.25, 0.14]], discs: [0.3], wall: 'c4', rim: 'edge', rimOp: 0.0, chamfer: 'shine', chamferOp: 0.3, spec: 'shine', glaze: 0.18 },
+}
+
+// PEOPLE avatars (forge/styles/_people.mjs convention): the face is glossy skin enamel on c1, lit by tint and
+// shaded by shadow; hair (or a turban, a cap) is lacquered c2 with its c3 shade; clothing is enamel c4; gold
+// (accent) stays for trims, headphone cups and bezels. None of these lean on c3/c4 as gold's dark, which a person's
+// palette repurposes, so a skin-tone pick recolours exactly the face.
+const PM = {
+  skin:  { base: 'c1', dark: 'shadow', darkOp: 0.3, light: 'tint', lightOp: 0.2, steps: [[0.42, 0.24]], discs: [0.4, 0.24], wall: 'shadow', rim: 'tint', rimOp: 0.35, chamfer: 'shine', chamferOp: 0.4, spec: 'shine', glaze: 0.16, specOp: 0.8 },
+  hair:  { base: 'c2', dark: 'c3', darkOp: 0.55, light: 'shine', lightOp: 0.07, steps: [[0.42, 0.24]], discs: [0.4], wall: 'c3', rim: 'shine', rimOp: 0, chamfer: 'shine', chamferOp: 0.3, spec: 'shine', glaze: 0.12, specOp: 0.6 },
+  cloth: { base: 'c4', dark: 'ink', darkOp: 0.3, light: 'shine', lightOp: 0.09, steps: [[0.42, 0.24]], discs: [0.4], wall: 'c4', wallShade: 0.4, rim: 'shine', rimOp: 0, chamfer: 'shine', chamferOp: 0.4, spec: 'shine', glaze: 0.16 },
+  gold:  { base: 'accent', dark: 'ink', darkOp: 0.36, light: 'tint', lightOp: 0.24, steps: [[0.3, 0.16], [0.62, 0.36]], discs: [], wall: 'accent', wallShade: 0.45, rim: 'tint', rimOp: 0, chamfer: 'shine', chamferOp: 0.7, spec: 'shine', glaze: 0.22 },
+  jewel: { base: 'c4', dark: 'ink', darkOp: 0.36, light: 'shine', lightOp: 0.1, steps: [[0.25, 0.14]], discs: [0.3], wall: 'c4', wallShade: 0.4, rim: 'edge', rimOp: 0, chamfer: 'shine', chamferOp: 0.3, spec: 'shine', glaze: 0.18 },
+  pearl: { base: 'shine', dark: 'ink', darkOp: 0.2, light: 'shine', lightOp: 0.5, steps: [[0.25, 0.14]], discs: [0.3], wall: 'accent', wallShade: 0.45, rim: 'edge', rimOp: 0, chamfer: 'shine', chamferOp: 0.6, spec: 'shine', glaze: 0 },
+}
+const PMAT = new Map([[MAT.enamel, PM.skin], [MAT.gold, PM.gold], [MAT.champagne, PM.gold], [MAT.pearl, PM.pearl], [MAT.jewel, PM.jewel]])
+const CAT_MAT = { skin: PM.skin, hair: PM.hair, wear: PM.hair, cloth: PM.cloth, gear: PM.gold }
+const CATS = ['cloth', 'skin', 'hair', 'wear', 'gear'] // paint order: a later part's side wall falls over an earlier face
+// one signed field per part kind: a point belongs to the LAST skeleton fill holding it (hair over the forehead,
+// clothing over the neck); a stroke's overhang outside every fill goes to the nearest fill
+function personParts(icon, T) {
+  const parts = fillParts(icon)
+  const R = (icon.fills || []).map(f => {
+    const subs = f.set && f.set.length ? f.set : (f.subs || parsePath(typeof f === 'string' ? f : f.d)).map(x => x.pts)
+    const rings = subs.filter(r => r && r.length > 2).map(r => r.map(p => tf(p, T)))
+    return rings.length ? F.region(rings, 2.5) : F.field(9)
+  })
+  const n = R.length, NN = F.N * F.N, out = {}
+  if (!n) return null
+  for (let i = 0; i < n; i++) {
+    const c = parts[i] || 'cloth', V = out[c] || (out[c] = F.field(9))
+    for (let q = 0; q < NN; q++) {
+      let mo = Infinity, ml = Infinity // nearest other fill, nearest later fill
+      for (let j = 0; j < n; j++) if (j !== i) { const v = R[j][q]; if (v < mo) mo = v; if (j > i && v < ml) ml = v }
+      const r = R[i][q]
+      const u = Math.min(Math.max(r, -ml), Math.max(r - mo, -mo, r - 1.6))
+      if (u < V[q]) V[q] = u
+    }
+  }
+  return out
 }
 
 // ---------------------------------------------------------------------------
@@ -159,6 +201,10 @@ export function model(icon0) {
   // cutouts
   const cutArea = [], cutLine = []
   const cutouts = [...(icon.cutouts || []), ...(T.addCutouts || []).map(d => ({ d, subs: parsePath(d) }))]
+  // a person: a parting line drawn along a hair (or headwear) edge is not engraved, the change of material is the edge
+  const hairRings = !live && isPerson(icon0) ? (icon.fills || []).flatMap((f, i) => ['hair', 'wear'].includes(fillParts(icon0)[i])
+    ? (f.set && f.set.length ? f.set : (f.subs || []).map(x => x.pts)).filter(r => r && r.length > 2) : []) : []
+  const onHairEdge = s => hairRings.length && !s.closed && s.pts.length > 1 && resample(s.pts, 0.25, false).every(o => hairRings.some(r => distToPolyline(o.p, r, true) < 0.3))
   if (!T.noCutouts) for (const c of cutouts) {
     let subs = c.subs || []
     // live: a letter that ends where it starts (O, D, 0) is a line, not an area; only an explicit Z closes it
@@ -167,7 +213,7 @@ export function model(icon0) {
       if (z.length === subs.length) subs = subs.map((s, i) => s.closed && !z[i] ? { ...s, closed: false, pts: [...s.pts, s.pts[0]] } : s)
     }
     for (const s of subs) {
-      if (!s.pts || !s.pts.length) continue
+      if (!s.pts || !s.pts.length || onHairEdge(s)) continue
       const pts = s.pts.map(p => tf(p, T))
       if (s.closed && pts.length > 2) cutArea.push(pts); else cutLine.push({ pts, closed: false })
     }
@@ -225,7 +271,22 @@ export function model(icon0) {
   const fTf = freeTxt.length ? freeTextField(freeTxt, K.M) : null
   const fK = freeK ? textField(KlB, K.M, 1.12) || F.field(K.M) : F.strokes(KlB, T.wk || K.WK, K.M)
   F.union(fK, mass)
-  const fAf = F.strokes(front, T.wa || K.WA, K.M)
+  // (a person's fringe and features lying on the face are finer, so the eyes under a fringe stay open)
+  // a person: closed gold rings lying on the face (spectacles) and what joins them stay polished gold trims
+  const person = !live && isPerson(icon0)
+  const trims = [], gloss = []
+  if (person) {
+    const s0 = K.SCALE * (T.scale || 1), un = p => [(p[0] - 12 - K.TX - (T.dx || 0)) / s0 + 12, (p[1] - 12 - K.TY - (T.dy || 0)) / s0 + 12]
+    const onFace = l => { const P = dense(l); return P.filter(p => partAt(icon0, un(p)) === 'skin').length / P.length > 0.8 }
+    for (const l of front) if (l.closed && l.pts.length > 2 && onFace(l)) trims.push(l)
+    for (const l of front) if (!trims.includes(l) && !l.closed && onFace(l) && trims.some(t => l.pts.some(p => distToPolyline(p, t.pts, true) < 0.6))) trims.push(l)
+    for (const l of trims) front.splice(front.indexOf(l), 1)
+    // a short free line on the face (a bald head's sheen) is a gloss streak, not a raised ridge
+    for (const l of [...front]) if (!l.closed && onFace(l) && arclen(l.pts, false) < 3.5) { gloss.push(l); front.splice(front.indexOf(l), 1) }
+  }
+  const fTr = trims.length ? F.strokes(trims, 1.25, K.M) : null
+  // (a person's fringe and features lying on the face are finer, so the eyes under a fringe stay open)
+  const fAf = F.strokes(front, T.wa || (person ? 1.35 : K.WA), K.M)
   // Live: a closed gold part on the face knocked out by its own cutout (a stopwatch's elapsed sweep) is solid
   // polished gold, not a gold outline round a dark well, so the value reads as a mass at 24px
   if (live) for (const l of front) {
@@ -263,10 +324,15 @@ export function model(icon0) {
   // overlays clear moats through what lies below them
   const hasS = F.any(fS), hasAf = F.any(fAf)
   const moatS = hasS ? F.offset(F.copy(fS), -K.MOAT) : null
-  const gapA = hasAf ? F.offset(F.copy(fAf), -K.GAP) : null
+  const gapA = hasAf || fTr ? F.offset(fTr ? F.union(F.copy(fAf), fTr) : F.copy(fAf), -K.GAP) : null
   let K0 = fK
   if (gapA) K0 = minus(K0, gapA)
   if (moatS) K0 = minus(K0, moatS)
+  // a person's eyes punch through a fringe lying over them (and its parting groove): they always stay open
+  if (person && gapA) {
+    const eyes = cutArea.filter(r => r.length > 2 && polyArea(r) < 3)
+    if (eyes.length) { const E = F.offset(F.region(eyes, K.M), -0.3); F.subtract(gapA, E); F.subtract(fAf, E) }
+  }
   let Af = fAf, Ab = fAb
   if (moatS) { Af = minus(Af, moatS); Ab = minus(Ab, moatS) }
   // a hole cut clean through: closed cutouts that touch the outside of the mass keep it open
@@ -285,10 +351,11 @@ export function model(icon0) {
   let fT = textField(textA.filter(l => !isDot(l)), K.M)
   const fSg = textField(inBadge, K.M, 0.82), dotsA = textA.filter(isDot)
   if (dotsA.length) { fT = fT || F.field(K.M); F.strokes(dotsA, 1.75, K.M, fT) }
+  const people = person ? personParts(icon, T) : null
   return {
-    live, T, K0: exact(K0), Ab: exact(Ab), Af: exact(Af), S: exact(hasP ? minus(fS, fP) : fS), P: hasP ? exact(fP) : null, rec: exact(recIn), recAf: recOf(Af), recAb: recOf(Ab), hasS, hasAf,
+    live, T, people, Gl: gloss.length ? F.strokes(gloss, 0.7, K.M) : null, Tr: fTr && exact(moatS ? minus(fTr, moatS) : fTr), K0: exact(K0), Ab: exact(Ab), Af: exact(Af), S: exact(hasP ? minus(fS, fP) : fS), P: hasP ? exact(fP) : null, rec: exact(recIn), recAf: recOf(Af), recAb: recOf(Ab), hasS, hasAf,
     Tx: fT && exact(moatS ? minus(fT, moatS) : fT), Sg: fSg && exact(fSg), Tf: fTf && exact(fTf),
-    sil: unionAll([fK, fAf, fAb, fS, ...(fTf ? [fTf] : [])]),
+    sil: unionAll([fK, fAf, fAb, fS, ...(fTf ? [fTf] : []), ...(fTr ? [fTr] : [])]),
   }
 }
 // lettering is stroked by text row: a row with the font's large caps gets a fuller line,
@@ -355,6 +422,12 @@ const BUDGET = 5700, SAVE = [1, 0.9, 0.7, 0], LIVE_CAP = 15000
 const TEXTN = new WeakSet()
 const bytes = nodes => nodes.reduce((a, n) => a + (TEXTN.has(n) ? 0 : n[1].d.length + 60), 0)
 export function build(icon) {
+  const tn = !icon.params && isPerson(icon) ? tones(icon) : null
+  const tone = !icon.params && (tuneFor(icon.name) || {}).tone
+  OV = tn ? { c1: tn.c1, tint: tn.tint, shadow: tn.shadow, c2: tn.c2, c3: tn.c3, c4: tn.c4 } : tone || null
+  try { return build0(icon) } finally { OV = null }
+}
+function build0(icon) {
   const M = model(icon)
   // a Live icon paints in one fixed tier (dense: every light but the second ramp step and sheen disc), so its
   // look never jumps between tiers as the value changes; only a pathological drawing drops to lite
@@ -422,6 +495,7 @@ function paint(M, budget) {
   if (!empty(M.Ab)) parts.push([M.Ab, MAT.gold, M.recAb, false, { plate: 'A', body: true }])
   if (!empty(M.K0)) parts.push([M.K0, MAT.enamel, M.rec, false, { floor: M.T.recFloor, plate: 'K', matte: M.T.matte }])
   if (!empty(M.Af)) parts.push([M.Af, MAT.gold, M.recAf, false, { plate: 'A' }])
+  if (M.Tr && !empty(M.Tr)) parts.push([M.Tr, MAT.gold, null, false, { plate: 'A', trim: true }])
   // lettering: a shallow gold inlay seated in a dark groove (live text and hands: A lines)
   if (M.Tx && !empty(M.Tx)) parts.push([M.Tx, MAT.gold, null, false, { depth: 0.42, groove: 0.24, plate: 'A', text: true }])
   if (M.Tf && !empty(M.Tf)) parts.push([M.Tf, MAT.gold, null, false, { depth: 0.3, groove: 0.28, grooveOp: 1, small: true, plate: 'A', text: true }])
@@ -430,11 +504,29 @@ function paint(M, budget) {
   // (a Live count on a ruby jewel is champagne gold: the ruby is dark, the numerals must read by light at 24px)
   if (M.Sg && !empty(M.Sg)) parts.push([M.Sg, M.live ? MAT.champagne : MAT.gold, null, false, { depth: 0.3, groove: 0.2, small: true, plate: 'S', text: M.live }])
   const multi = parts.some(p => p[4].plate !== 'K')
-  for (const [Fd, mat, rec, jewel, o = {}] of parts) {
+  const PP = M.people
+  for (const [Fd, mat0, rec, jewel, o = {}] of parts) {
+    const mat = PP ? PMAT.get(mat0) || mat0 : mat0
     cls = multi ? PLATE[o.plate] : null
     isText = !!o.text || (M.live && o.plate !== 'K' && !o.body)
     shineCls = o.plate === 'K' ? 'wm-shine' : null
     if (o.groove) add(F.offset(F.copy(Fd), -o.groove), 'ink', o.grooveOp ?? 0.72, FINE)
+    // a person: the piece is split by what it is (skin, hair, clothing, gear), each in its own material
+    if (PP && !jewel && !o.text && !o.trim && (o.plate === 'K' || o.plate === 'A')) {
+      let rest = F.copy(Fd)
+      for (const c of CATS) {
+        if (!PP[c]) continue
+        const sub = F.intersect(F.copy(Fd), PP[c])
+        rest = minus(rest, PP[c])
+        if (empty(sub)) continue
+        const S = exact(sub), m = CAT_MAT[c]
+        wall(S, m, add, o.depth)
+        face(S, m, add, {})
+        if (rec && !empty(rec)) { const r = F.intersect(F.copy(rec), PP[c]); if (!empty(r)) recess(exact(r), m, add, c === 'skin' ? null : o.floor, c === 'skin') }
+      }
+      if (!empty(rest)) { const S = exact(rest); if (!empty(S)) { wall(S, mat, add, o.depth); face(S, mat, add, {}) } }
+      continue
+    }
     wall(Fd, mat, add, o.depth)
     if (jewel) {
       // a gold bezel with a ruby cabochon set into it
@@ -444,6 +536,8 @@ function paint(M, budget) {
     } else face(Fd, mat, add, { small: o.small, matte: o.matte, lite: M.live && o.text })
     if (rec && !empty(rec)) recess(rec, mat, add, o.floor)
   }
+  // a person's gloss streak (a bald head's sheen) on top of the skin
+  if (M.Gl) { cls = multi ? 'wm-shine' : null; isText = false; add(M.Gl, 'shine', 0.75, FINE) }
   return out
 }
 
@@ -458,6 +552,7 @@ function wall(Fd, mat, add, depth = K.DEPTH) {
     F.union(W, F.shift(Fd, di, dj, 1)); li = di; lj = dj
   }
   add(W, mat.wall, 1, BODY)
+  if (mat.wallShade) add(W, 'ink', mat.wallShade, BODY)
 }
 
 function face(Fd, mat, add, o = {}) {
@@ -505,16 +600,34 @@ function face(Fd, mat, add, o = {}) {
     if (!empty(E)) {
       const sk = minus(E, mv(E, 0.42 * D, 0.42 * D))
       F.intersect(sk, zone(Fd, 0.55))
-      add(sk, mat.spec, 0.92, FINE, true)
+      add(sk, mat.spec, mat.specOp || 0.92, FINE, true)
     }
   }
 }
 
 // a recess: dark well, its floor lit below the shadowed upper-left lip
-function recess(R, mat, add, floorRole) {
+function recess(R, mat, add, floorRole, eyes) {
   const D = 0.7071
   add(R, 'ink', 1, BODY)
-  const floor = F.intersect(mv(R, 0.4 * D, 0.4 * D), R)
+  let floor = F.intersect(mv(R, 0.4 * D, 0.4 * D), R)
+  // a person's eyes: dark wells (no lit floor) with a bright catch-light, so they read on light and deep skin
+  const E = eyes ? compsOf(R).filter(c => { const w = c.x1 - c.x0, h = c.y1 - c.y0; return w >= 0.4 && h >= 0.6 && w <= 2.2 && h <= 2.6 && h >= w * 0.9 }) : []
+  if (E.length) {
+    const Z = F.field(9), L = F.field(9)
+    for (const c of E) {
+      const w = c.x1 - c.x0, h = c.y1 - c.y0, mx = (c.x0 + c.x1) / 2, my = (c.y0 + c.y1) / 2
+      const cx = c.x0 + w * 0.36, cy = c.y0 + h * 0.3, r = Math.max(0.17, Math.min(w, h) * 0.25)
+      for (let j = 0; j < F.N; j++) for (let i = 0; i < F.N; i++) {
+        const q = j * F.N + i, x = i * F.H, y = j * F.H
+        Z[q] = Math.min(Z[q], Math.hypot((x - mx) / (w / 2 + 0.3), (y - my) / (h / 2 + 0.3)) - 1)
+        L[q] = Math.min(L[q], Math.hypot(x - cx, y - cy) - r)
+      }
+    }
+    floor = minus(floor, Z)
+    add(floor, floorRole || mat.wall, 1, FINE)
+    add(L, 'shine', 0.95, FINE)
+    return
+  }
   add(floor, floorRole || mat.wall, 1, FINE)
 }
 

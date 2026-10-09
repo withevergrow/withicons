@@ -1,0 +1,87 @@
+{
+  "name": "lotus",
+  "category": "indian-festivals",
+  "description": "A lotus flower in bloom, for purity, calm and festivals.",
+  "aliases": [
+    "kamal",
+    "padma",
+    "lotus-flower",
+    "water-lily",
+    "kamalam",
+    "tamarai",
+    "nelumbo"
+  ],
+  "synonyms": [
+    "flower",
+    "bloom",
+    "blossom",
+    "petals",
+    "pond",
+    "water flower",
+    "purity",
+    "calm",
+    "peace",
+    "serenity",
+    "meditation",
+    "mindfulness",
+    "yoga",
+    "lotus pose",
+    "zen",
+    "spa",
+    "wellness",
+    "spiritual",
+    "enlightenment",
+    "buddhism",
+    "buddha purnima",
+    "diwali",
+    "lakshmi puja",
+    "durga puja",
+    "national flower",
+    "indian festival",
+    "india",
+    "lotos"
+  ],
+  "tags": [
+    "flower",
+    "calm",
+    "purity",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M12 3.5 C14.75 6 15.5 9 15.5 11.75 C15.5 14.75 13.75 17 12 18 C10.25 17 8.5 14.75 8.5 11.75 C8.5 9 9.25 6 12 3.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 17.75 C6.5 17.25 4 13.75 4 8 C6 8.75 7.5 9.75 8.6 11",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 17.75 C17.5 17.25 20 13.75 20 8 C18 8.75 16.5 9.75 15.4 11",
+      "plate": "K"
+    },
+    {
+      "d": "M8 18 C5 18 2.75 16.75 2 14 C3 13.75 4 13.75 5 14",
+      "plate": "A"
+    },
+    {
+      "d": "M16 18 C19 18 21.25 16.75 22 14 C21 13.75 20 13.75 19 14",
+      "plate": "A"
+    },
+    {
+      "d": "M6 21 H18",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 3.5 C14.75 6 15.5 9 15.5 11.75 C15.5 14.75 13.75 17 12 18 C10.25 17 8.5 14.75 8.5 11.75 C8.5 9 9.25 6 12 3.5 Z",
+    "M12 18 C6.5 17.25 4 13.75 4 8 C7 9.25 9 11 10 13 Z",
+    "M12 18 C17.5 17.25 20 13.75 20 8 C17 9.25 15 11 14 13 Z",
+    "M12 18 C5 18 2.75 16.75 2 14 C5 13.5 8 14.5 10 16 Z",
+    "M12 18 C19 18 21.25 16.75 22 14 C19 13.5 16 14.5 14 16 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V14.5"
+  ]
+}

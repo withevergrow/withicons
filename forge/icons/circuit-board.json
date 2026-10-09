@@ -1,0 +1,78 @@
+{
+  "name": "circuit-board",
+  "category": "devices",
+  "description": "A chip board with traces and pads, for hardware, GPUs, compute and AI chips.",
+  "aliases": [
+    "pcb",
+    "motherboard",
+    "circuit",
+    "mainboard",
+    "logic-board",
+    "electronics",
+    "hardware-board",
+    "printed-circuit",
+    "board-chip"
+  ],
+  "tags": [
+    "hardware",
+    "electronics",
+    "circuit",
+    "board",
+    "compute",
+    "chip"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 9.5 V13.5 L11 16.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M16 14.5 V10.5 L13 7.5 V3",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 8 A1.5 1.5 0 1 1 6.5 8 A1.5 1.5 0 1 1 9.5 8 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 16 A1.5 1.5 0 1 1 14.5 16 A1.5 1.5 0 1 1 17.5 16 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M8 9.5 V13.5 L11 16.5 V21.5",
+    "M16 14.5 V10.5 L13 7.5 V2.5",
+    "M10.25 8 A2.25 2.25 0 1 1 5.75 8 A2.25 2.25 0 1 1 10.25 8 Z M8.75 8 A0.75 0.75 0 1 1 7.25 8 A0.75 0.75 0 1 1 8.75 8 Z",
+    "M18.25 16 A2.25 2.25 0 1 1 13.75 16 A2.25 2.25 0 1 1 18.25 16 Z M16.75 16 A0.75 0.75 0 1 1 15.25 16 A0.75 0.75 0 1 1 16.75 16 Z"
+  ],
+  "synonyms": [
+    "circuit board",
+    "printed circuit board",
+    "hardware",
+    "gpu",
+    "compute",
+    "ai chip",
+    "tpu",
+    "processor",
+    "silicon",
+    "traces",
+    "pads",
+    "soldering",
+    "embedded",
+    "iot",
+    "arduino",
+    "raspberry pi",
+    "engineering",
+    "tech",
+    "technology",
+    "firmware",
+    "electrical engineering"
+  ]
+}

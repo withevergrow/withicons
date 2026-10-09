@@ -739,6 +739,13 @@
 .wcp-reset:disabled { opacity: .28; cursor: default }
 
 .wcp-pal { display: grid; gap: 10px; min-width: 0 }
+.wcp-skin { display: grid; gap: 8px; margin: 2px 0 4px }
+.wcp-skins { display: flex; flex-wrap: wrap; gap: 8px }
+.wcp-skin-b { width: 34px; height: 34px; padding: 3px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); cursor: pointer; transition: border-color .2s }
+.wcp-skin-b span { display: block; width: 100%; height: 100%; border-radius: inherit; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--sk) 70%, #fff), var(--sk) 55%, var(--sk-s)) }
+.wcp-skin-b:hover { border-color: var(--cp-sc, var(--ink)) }
+.wcp-skin-b[aria-checked="true"] { border: 2px solid var(--ink); padding: 2px }
+.wcp-skin-b:focus-visible { outline: 2px solid var(--cp-sc, var(--ink)); outline-offset: 2px }
 .wcp-tags { display: flex; gap: 6px; margin: 0 -2px; padding: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain }
 .wcp-tags::-webkit-scrollbar { display: none }
 .wcp-tag { display: inline-flex; align-items: center; gap: 5px; flex: none; height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); font: 600 12.5px/1 var(--font-sans); color: var(--ink-2, var(--ink)); cursor: pointer; transition: border-color .2s, background .2s, color .2s }
@@ -950,3 +957,32 @@
   .wdl-num .wk-step { inline-size: 44px }
   .wdl-num .wk-step-in { font-size: 16px }
 }
+
+/* ───────── style rows (the shared picker, css/style-picker.css): a few styles + "All N styles" ───────── */
+.wied-srow { margin-top: 2px; }
+.wied-srow.sp-row { flex-wrap: nowrap; }
+.wied-lrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.wied-lrow .wied-l { margin-bottom: 0; }
+.wsw-same {
+  flex: none; min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px dashed var(--rule-strong); background: transparent;
+  color: var(--muted); font: 600 12.5px/1 var(--font-sans); cursor: pointer; transition: border-color .15s, color .15s, background-color .15s;
+}
+.wsw-same:hover { border-color: var(--ink); color: var(--ink); }
+.wsw-same[aria-pressed="true"] { border-style: solid; border-color: var(--ink); color: var(--ink); background: var(--card); }
+.wied-lrow + .wied-srow { margin-top: 8px; }
+@media (pointer: coarse) { .wsw-same { min-height: 40px; } }
+
+/* Duo look (Look pane, Duo only): Classic / With an accent / Gradient + the presets from data/duo-presets.js */
+.wied-duo .wied-seg button { white-space: normal; line-height: 1.1 }
+.wied-duo-sw { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px }
+.wied-duo-sw:empty { display: none }
+.wied-duo-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 4px 14px 4px 5px; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); color: var(--ink-2, var(--ink)); font: 600 13px/1.1 var(--font-sans); cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .2s }
+.wied-duo-chip:hover { border-color: var(--rule-strong); transform: translateY(-1px) }
+.wied-duo-chip:focus-visible { outline: 2px solid var(--focus-ring, var(--ink)); outline-offset: 2px }
+.wied-duo-chip[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); color: var(--ink) }
+.wied-duo-dot { flex: none; width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(17, 19, 24, .12) }
+.wied-duo-note { margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--paper-2); color: var(--muted); font-size: 13px; line-height: 1.45 }
+.wied-duo-note b { color: var(--ink); font-weight: 650 }
+.wied-duo-note[hidden] { display: none }
+@media (forced-colors: active) { .wied-duo-chip[aria-pressed="true"] { border-color: Highlight } }
+.wcp-skin[hidden] { display: none }

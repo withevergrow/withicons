@@ -5,7 +5,7 @@ an arrow that nudges the way it points, a play button that flips into pause.
 
 - **Optional and separate.** The icons never depend on it. Add it only where you want motion.
 - **Pure CSS at its core.** Add a class and the icon moves. The small JavaScript helper is optional.
-- **Works with all 500 icons, in all 20 styles, from every package.** It animates the element that holds the icon: an inline `<svg>`,
+- **Works with every icon, in every style, from every package.** It animates the element that holds the icon: an inline `<svg>`,
   a `<with-icon>`, an `<i class="with ...">` or any wrapper.
 - **Every icon already knows how to move.** Each of the 500 has its own continuous loop and hover animation, tuned by hand.
 - **Respects people.** When someone asks their system for reduced motion, everything stops (unless you opt in with `wm-force`).
@@ -118,6 +118,40 @@ Filters repaint every frame, so keep looping glows to one or two per screen.
 | `type` | jitters like keystrokes | keyboard, terminal, chat |
 | `fill` | dims and fills up again, like charging | battery, signal, volume |
 
+### 3D motion
+
+Twelve presets move the icon as a solid object seen from a camera a little above it: its highlight (`wm-shine`)
+slides and dims as the face turns from the light, and its ground shadow (`wm-shadow`) stays down, shrinks and fades
+as it lifts.
+
+| preset | motion |
+|---|---|
+| `turn` | turns round on a turntable (shows its back) |
+| `turn-once` | swivels all the way round once, with anticipation and a settle |
+| `wobble` | precesses like a spinning top |
+| `chime` | swings and twists like a ringing bell |
+| `swivel` | turns its head: no |
+| `bow` | tips toward you: yes |
+| `lean` | turns and pushes the way it points (`dir`) |
+| `lift` | rises toward you and settles with a little squash |
+| `pump` | a heartbeat toward you |
+| `squish` | hops: crouch, stretch, land with a squash |
+| `drift` | a lazy figure-eight float in depth |
+| `gleam` | tips to the light while the highlight sweeps across |
+
+**Style-aware.** In a 3D style (`clay dock liquid chrome soft3d luxe skeuo glass plush`) an icon's own motion plays
+as its 3D counterpart, keeping its intent: `spin` turns, `pop` / `bounce` / `jelly` squish, `float` drifts, `beat`
+pumps, `ring` chimes, `shake` swivels, `nod` bows, `nudge` leans… Pass the style:
+`motion(el, 'bell', { style: 'clay' })`, `motionAttrs('bell', { style: 'clay' })` (adds `wm-3d`),
+`animatedSvg(svg, { name: 'bell', style: 'clay' })`, `motionFor('bell', 'clay')`; `<with-icon variant="clay">` does it
+by itself. In CSS only, add the class `wm-3d` next to `data-wm`. An explicit preset is always taken as it is.
+Backdrop styles (`bento`, `dock`) keep their tile still (`wm-backdrop`).
+
+**Part moves.** `pop-up` (raised parts lift off the body and land), `press` (they push down like a button) and `hop`
+(the object hops, its raised parts landing a beat late) move the plates `wm-a` / `wm-s` on their own. In `soft3d` every
+icon offers 3–5 moves: `styleMoves(spec, 'soft3d', { parts })` returns its own moves, then the part moves when the drawing
+has raised parts, then generic 3D ones.
+
 ### Parts move on their own
 
 Styles that compose more than the object (a Bauhaus backdrop square, sticker sparkles, a luxe cast shadow) tag those
@@ -125,7 +159,7 @@ shapes, and an inline SVG then animates part by part instead of as one block:
 
 | class on a node | while the icon animates |
 |---|---|
-| none, `wm-k`, `wm-shine` | the object: plays the preset about the icon's origin |
+| none, `wm-k`, `wm-shine` | the object: plays the preset about the icon's origin (3D presets slide `wm-shine` on its own) |
 | `wm-a`, `wm-s` | a moving part / badge: the icon's own override (a bell's clapper rings a beat later), else follows the object |
 | `wm-deco` | a decoration: its own gentle loop (`breathe`, `float` or `twinkle`, counter-phased), never the main preset |
 | `wm-shadow` | stays on the ground and shrinks / fades for `bounce`, `float`, `rise`, `drop`, `jelly`; otherwise stays attached |
@@ -218,7 +252,7 @@ motionAttrs('bell', { trigger: 'hover' })  // { class: 'wm wm-hover', 'data-wm':
 
 Size: `motion()` and `swap()` are about 4 KB gzipped, the `<with-icon>` upgrade about 5 KB. They read each icon's own
 defaults from `icons.css` (or the icon's own `icons/<name>.css`) on the element, so load it before calling them.
-`motionFor()`, `motionAttrs()` and the export helpers need the full spec table of all 500 icons (`@withicons/motion/icons`,
+`motionFor()`, `motionAttrs()` and the export helpers need the full spec table of every icon (`@withicons/motion/icons`,
 about 29 KB gzipped); bundlers only include it when you import one of those. Without a bundler (a CDN
 `<script type="module">`), import `@withicons/motion/runtime` (`dist/runtime.js`: `motion()`, `swap()` and the rest without
 the table) or the element, never `dist/index.js` unless you need `motionFor()`, since an unbundled import downloads every

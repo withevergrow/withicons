@@ -137,3 +137,13 @@ test('get --palette / colour roles recolour every colour', { skip: !hasPalettes 
   assert.match(line.stdout, new RegExp(`color: ${p.colors.ink}`))
   assert.match(line.stderr, /one colour/)
 })
+test('styles --for: the best styles for a job; styles grouped; motions --style lists the moves', () => {
+  const j = JSON.parse(run('styles', '--for', 'diwali sale banner', '--icon', 'diya', '--json').stdout)
+  assert.equal(j.recommendations[0].style, 'rangoli')
+  assert.match(j.recommendations[0].webComponent, /variant="rangoli"/)
+  const t = run('styles', '--for', 'christmas email')
+  assert.equal(t.status, 0)
+  assert.match(t.stdout, /christmas[\s\S]*palettes: classic/)
+  assert.match(run('styles').stdout, /Holidays[\s\S]*christmas/)
+  assert.match(run('motions', 'camera', '--style', 'soft3d').stdout, /moves in soft3d/)
+})

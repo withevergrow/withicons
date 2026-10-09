@@ -1,0 +1,67 @@
+{
+  "name": "monitor-smartphone",
+  "category": "devices",
+  "description": "A monitor with a phone in front, for responsive design and devices.",
+  "aliases": [
+    "responsive",
+    "responsive-design",
+    "devices",
+    "multi-device",
+    "desktop-and-mobile",
+    "cross-platform",
+    "monitor-phone",
+    "screens"
+  ],
+  "tags": [
+    "responsive",
+    "devices",
+    "desktop",
+    "mobile",
+    "screens"
+  ],
+  "paths": [
+    {
+      "d": "M12 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 H18 A2 2 0 0 1 20 5.5 V6",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 16.5 V20.5 M4.5 20.5 H10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17 9.5 H20 A1.5 1.5 0 0 1 21.5 11 V20 A1.5 1.5 0 0 1 20 21.5 H17 A1.5 1.5 0 0 1 15.5 20 V11 A1.5 1.5 0 0 1 17 9.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.75 19 H19.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4 3.5 H18 A2 2 0 0 1 20 5.5 V6 H13.5 A1.5 1.5 0 0 0 12 7.5 V16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z",
+    "M17 9.5 H20 A1.5 1.5 0 0 1 21.5 11 V20 A1.5 1.5 0 0 1 20 21.5 H17 A1.5 1.5 0 0 1 15.5 20 V11 A1.5 1.5 0 0 1 17 9.5 Z"
+  ],
+  "cutouts": [
+    "M5 5.5 H10 V13.5 H5 A1 1 0 0 1 4 12.5 V6.5 A1 1 0 0 1 5 5.5 Z",
+    "M17.75 19 H19.25"
+  ],
+  "synonyms": [
+    "responsive web",
+    "mobile friendly",
+    "adaptive",
+    "all devices",
+    "computer and phone",
+    "desktop mobile",
+    "multi screen",
+    "multiscreen",
+    "omnichannel",
+    "sync devices",
+    "web and app",
+    "breakpoints",
+    "viewport",
+    "display",
+    "mobile first",
+    "device preview",
+    "cross device"
+  ]
+}

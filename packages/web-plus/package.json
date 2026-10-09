@@ -1,0 +1,63 @@
+{
+  "name": "@withicons/web-plus",
+  "version": "0.3.1",
+  "description": "Icon data of the 14 newest with icons styles (clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine) for @withicons/web: loaded by <with-icon> by itself.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/web-plus"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-library",
+    "withicons",
+    "with-icons",
+    "web-components",
+    "cdn",
+    "clay",
+    "bento",
+    "suite",
+    "dock",
+    "liquid",
+    "chrome",
+    "soft3d",
+    "brutal",
+    "utsav",
+    "rangoli",
+    "halloween",
+    "christmas",
+    "lunar",
+    "valentine"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./data/*": {
+      "types": "./dist/data/*.d.ts",
+      "default": "./dist/data/*.js"
+    },
+    "./icons/*": "./dist/icons/*",
+    "./package.json": "./package.json",
+    "./*": "./dist/*"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "unpkg": "./package.json",
+  "jsdelivr": "./package.json",
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

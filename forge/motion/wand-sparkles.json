@@ -1,0 +1,59 @@
+{
+  "name": "wand-sparkles",
+  "intent": "the wand flicks and its sparkles twinkle like a spell being cast",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      4.5,
+      19.5
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      4.5,
+      19.5
+    ],
+    "amount": 1,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        16.5,
+        6
+      ],
+      "amount": 1,
+      "delay": 0.12
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle",
+      "origin": [
+        16.5,
+        6
+      ]
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sparkles",
+      "effect": "morph"
+    },
+    {
+      "to": "wand",
+      "effect": "fade"
+    }
+  ]
+}

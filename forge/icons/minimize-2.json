@@ -1,0 +1,56 @@
+{
+  "name": "minimize-2",
+  "category": "layout",
+  "description": "Two diagonal arrows pointing in, for collapse and exit full screen.",
+  "aliases": [
+    "collapse-diagonal",
+    "exit-fullscreen-alt",
+    "minimize-alt",
+    "arrows-in-diagonal",
+    "shrink-alt",
+    "collapse-alt",
+    "contract-alt"
+  ],
+  "tags": [
+    "collapse",
+    "shrink",
+    "arrows",
+    "resize"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 L10 10",
+      "plate": "K"
+    },
+    {
+      "d": "M10 4 V10 H4",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 20.5 L14 14",
+      "plate": "K"
+    },
+    {
+      "d": "M20 14 H14 V20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "exit full screen",
+    "leave fullscreen",
+    "collapse",
+    "shrink",
+    "smaller",
+    "reduce",
+    "resize",
+    "scale down",
+    "minimise",
+    "restore",
+    "diagonal arrows",
+    "compress",
+    "condense",
+    "close fullscreen"
+  ]
+}

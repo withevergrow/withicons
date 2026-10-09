@@ -1,0 +1,61 @@
+{
+  "name": "haunted-house",
+  "intent": "shivers in the moonlight as something stirs inside",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        19.5,
+        4
+      ],
+      "amount": 0.8
+    }
+  },
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "home",
+      "effect": "morph"
+    },
+    {
+      "to": "ghost",
+      "effect": "fade"
+    },
+    {
+      "to": "haunted-house@solid",
+      "effect": "fade"
+    }
+  ]
+}

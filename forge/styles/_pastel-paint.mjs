@@ -43,6 +43,8 @@ const hx = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16))
 const mix = (a, b, t) => '#' + hx(a).map((c, i) => Math.round(c + (hx(b)[i] - c) * t).toString(16).padStart(2, '0')).join('').toUpperCase()
 for (const H of Object.values(HUES)) { H.rim = mix(H.base, H.deep, 0.5); H.light = mix(H.base, '#FFFFFF', 0.62) }
 HUES.paper.rim = HUES.paper.deep
+// a swatch from a base / deep / ink (+ light) set, with the house rim and light tones
+export const swatch = (base, deep, ink, light) => ({ base, deep, ink, rim: mix(base, deep, 0.5), light: light || mix(base, '#FFFFFF', 0.62) })
 export const HUE_NAMES = Object.keys(HUES)
 // the style's default palette (for docs, the editor, palette tooling): lavender leads
 export const PALETTE = {
@@ -198,6 +200,9 @@ function thicknessOf(e) {
 const CLS = { K: 'wm-k', A: 'wm-a', S: 'wm-s', deco: 'wm-deco' }
 
 export function paintEntries(entries, o = {}) {
+  // o.hues: extra per-icon swatches ({ name: { base, deep, ink, rim, light } }); o.roles: fixed swatch -> role
+  // (people avatars: skin -> c1, hair -> c2, clothing -> c4 by the avatar convention, not by order of appearance)
+  const HU = o.hues ? { ...HUES, ...o.hues } : HUES
   const live = entries.filter(e => e && e.F && anyInk(e.F))
   if (!live.length) return []
   // roles: c1 is the body's hue (the largest K field), then hues by first appearance -> c2..c4,
@@ -205,7 +210,7 @@ export function paintEntries(entries, o = {}) {
   const role = new Map()
   const order = ['c1', 'c2', 'c3', 'c4', 'accent']
   const isField = e => ['lit', 'flat', 'well'].includes(e.mode || 'lit')
-  const hueKey = e => HUES[e.hue] ? e.hue : 'lavender'
+  const hueKey = e => HU[e.hue] ? e.hue : 'lavender'
   let main = null, mainA = 0
   for (const pass of ['K', null]) {
     for (const e of live) {
@@ -222,9 +227,9 @@ export function paintEntries(entries, o = {}) {
     if (h === 'paper' || role.has(h)) continue
     role.set(h, order[Math.min(role.size, order.length - 1)])
   }
-  const roleOf = h => h === 'paper' ? 'tint' : role.get(h) || 'c1'
+  const roleOf = h => h === 'paper' ? 'tint' : (o.roles && o.roles[h]) || role.get(h) || 'c1'
   if (!main) main = live.find(e => (e.mode || 'lit') !== 'ink' && e.hue !== 'paper') || live[0]
-  const mainHue = HUES[main.hue] ? main.hue : 'lavender'
+  const mainHue = HU[main.hue] ? main.hue : 'lavender'
   const nodes = []
   const tag = (a, part) => { const c = CLS[part] || 'wm-k'; a.class = c; return a }
 
@@ -239,7 +244,7 @@ export function paintEntries(entries, o = {}) {
     if (has) {
       const S = F.shift(U, cells(L.CAST_DX), cells(L.CAST_DY), L.MARGIN)
       const d = traceD(S, 0.06, 0.2, 1)
-      if (d) nodes.push(['path', { d, fill: v('shadow', HUES[mainHue].deep), 'fill-opacity': L.CAST, class: 'wm-shadow' }])
+      if (d) nodes.push(['path', { d, fill: v('shadow', HU[mainHue].deep), 'fill-opacity': L.CAST, class: 'wm-shadow' }])
     }
   }
   // which lit field an ink entry sits on (topmost before it, by covered area)
@@ -257,8 +262,8 @@ export function paintEntries(entries, o = {}) {
   let glinted = o.glint === false
   live.forEach((e, k) => {
     const mode = e.mode || 'lit'
-    const hue = HUES[e.hue] ? e.hue : 'lavender'
-    const H = HUES[hue]
+    const hue = HU[e.hue] ? e.hue : 'lavender'
+    const H = HU[hue]
     const part = e.part || 'K'
     if (mode === 'ink') {
       const host = hostOf(k)
@@ -268,7 +273,7 @@ export function paintEntries(entries, o = {}) {
       // (Live-icon TEXT on the page takes the main hue's ink lifted a quarter toward its deep tone: a mid-luminance
       // tone that reads on white AND on dark)
       // and TEXT on a field prints a deeper ink of that hue, so a lone "I" or "1" holds its contrast at 24px)
-      const fill = host ? v('ink', e.text ? mix(HUES[HUES[host.hue] ? host.hue : 'lavender'].ink, '#000000', host.deep ? 0.55 : 0.28) : HUES[HUES[host.hue] ? host.hue : 'lavender'].ink) : e.text ? v('ink', mix(HUES[mainHue].ink, HUES[mainHue].deep, 0.25)) : v('edge', HUES[mainHue].deep)
+      const fill = host ? v('ink', e.text ? mix(HU[HU[host.hue] ? host.hue : 'lavender'].ink, '#000000', host.deep ? 0.55 : 0.28) : HU[HU[host.hue] ? host.hue : 'lavender'].ink) : e.text ? v('ink', mix(HU[mainHue].ink, HU[mainHue].deep, 0.25)) : v('edge', HU[mainHue].deep)
       nodes.push(['path', tag({ d, fill }, part)])
       return
     }
@@ -300,7 +305,7 @@ export function paintEntries(entries, o = {}) {
     const bot = facing(e.F, 0, bd)
     if (inkArea(bot) > 0.2) {
       const bdD = traceD(bot, 0.05, 0.12, 1)
-      if (bdD) nodes.push(['path', tag({ d: bdD, fill: v('shadow', H.deep), 'fill-opacity': thick < L.TOP_MIN ? L.BOT_THIN : L.BOT }, part)])
+      if (bdD) nodes.push(['path', tag({ d: bdD, fill: v(H.bot || 'shadow', H.deep), 'fill-opacity': thick < L.TOP_MIN ? L.BOT_THIN : L.BOT }, part)])
     }
     if (mode === 'well') {
       const sh = facing(e.F, 0, -Math.max(0.8, Math.min(1.6, thick * 0.3)))
@@ -321,7 +326,7 @@ export function paintEntries(entries, o = {}) {
       const top = facing(E, 0, -td * k)
       if (inkArea(top) < 0.3) return
       const tD = traceD(top, 0.05, 0.15, 1)
-      if (tD) nodes.push(['path', tag({ d: tD, fill: v('tint', H.light), 'fill-opacity': op }, part)])
+      if (tD) nodes.push(['path', tag({ d: tD, fill: v(H.top || 'tint', H.light), 'fill-opacity': op }, part)])
     })
     // one glint per icon, on the body (the biggest K field), never on a moving part
     if (!glinted && e === main && thick >= 3.4) {

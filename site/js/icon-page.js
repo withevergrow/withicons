@@ -174,19 +174,185 @@
     return out + esc(code.slice(last))
   }
 
+  /* ───────── style hubs: heavy styles' grids arrive one category at a time ─────────
+     (styles/<style>.html inlines its first category; every other one is a line drawing marked data-ph until
+     data/hub/<style>/<category>.js comes in, fetched as the category nears the screen) */
+  ;(function hubLazy() {
+    var groups = $$('[data-hub-lazy]'); if (!groups.length) return
+    function attrs(o) { return Object.keys(o || {}).map(function (k) { return o[k] == null || o[k] === false ? '' : ' ' + k + '="' + esc(o[k]) + '"' }).join('') }
+    function fill(g) {
+      var key = g.getAttribute('data-hub-key'), map = W.WITH_HUB && W.WITH_HUB[key]; if (!map) return
+      var root = {}; try { root = JSON.parse(g.getAttribute('data-root') || '{}') } catch (e) { }
+      $$('svg[data-ph]', g).forEach(function (sv) {
+        var m = map[sv.getAttribute('data-ph')]; if (m == null) return
+        var r = root; if (sv.hasAttribute('data-root')) try { r = JSON.parse(sv.getAttribute('data-root')) } catch (e) { }
+        sv.outerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"' + attrs(r) + ' aria-hidden="true" focusable="false">' + m + '</svg>'
+      })
+      g.removeAttribute('data-hub-lazy'); g.classList.add('is-in')
+    }
+    function load(g) {
+      if (g._hub) return; g._hub = 1
+      var s = D.createElement('script'); s.src = g.getAttribute('data-hub-lazy'); s.async = true
+      s.onload = function () { fill(g) }; s.onerror = function () { g._hub = 0 }
+      D.head.appendChild(s)
+    }
+    if (!W.IntersectionObserver) { groups.forEach(load); return }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); load(e.target) } }) }, { rootMargin: '900px 0px' })
+    groups.forEach(function (g) { io.observe(g) })
+  })()
+
+  /* ───────── choosing a style (site/STYLE-PICKER.md) ─────────
+     The shared full picker (js/style-picker.js + css/style-picker.css) loads only when someone reaches for it.
+     "What are you making?" chips lift a job's best styles into a row above the five groups, best first. */
+  var assets = {}
+  function asset(url, css) {
+    return assets[url] || (assets[url] = new Promise(function (ok) {
+      var el = D.createElement(css ? 'link' : 'script')
+      if (css) { el.rel = 'stylesheet'; el.href = url } else { el.src = url; el.async = true }
+      el.onload = function () { ok(true) }; el.onerror = function () { ok(false) }
+      D.head.appendChild(el)
+    }))
+  }
+  function picker() {
+    var wi = W.WI || W.EG
+    if (wi && wi.stylePicker) return Promise.resolve(wi.stylePicker)
+    return Promise.all([asset(BASE + 'css/style-picker.css', true), asset(BASE + 'js/style-picker.js')]).then(function () {
+      var w = W.WI || W.EG; return (w && w.stylePicker) || W.WIStylePicker || null
+    })
+  }
+  // warm the picker once the page is idle, or the moment a pointer or focus nears an "All styles" control
+  function warmPicker() { if (!warmPicker.on) { warmPicker.on = 1; picker() } }
+  $$('[data-pick-all], [data-style-all]').forEach(function (a) {
+    ;['pointerenter', 'focus', 'touchstart'].forEach(function (ev) { a.addEventListener(ev, warmPicker, { once: true, passive: true }) })
+    a.setAttribute('aria-haspopup', 'dialog')
+  })
+  function remember(st) {
+    var sp = (W.WI && W.WI.stylePicker) || W.WIStylePicker
+    if (sp) return sp.remember(st)
+    try {
+      var r = []; try { r = JSON.parse(localStorage.getItem('with-style-recent') || '[]') } catch (e) { }
+      localStorage.setItem('with-style', st)
+      localStorage.setItem('with-style-recent', JSON.stringify([st].concat((Array.isArray(r) ? r : []).filter(function (x) { return x !== st })).slice(0, 4)))
+    } catch (e) { }
+  }
+  function recentStyles() {
+    var sp = (W.WI && W.WI.stylePicker) || W.WIStylePicker
+    if (sp) return sp.recent()
+    try { var r = JSON.parse(localStorage.getItem('with-style-recent') || '[]'); return Array.isArray(r) ? r.filter(function (x) { return typeof x === 'string' }) : [] } catch (e) { return [] }
+  }
+  function lastStyle() { try { return localStorage.getItem('with-style') || null } catch (e) { return null } }
+  // the hubs' "All N styles": the full picker, and picking a style opens its page (no JS: the link to the list)
+  $$('[data-style-all]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
+      e.preventDefault()
+      picker().then(function (sp) {
+        if (!sp) { location.href = a.getAttribute('href'); return }
+        sp.open({ current: a.getAttribute('data-current') || null, icon: 'home', anchor: a, title: 'Choose a style' }).then(function (st) {
+          if (st) location.href = BASE + 'styles/' + st + '.html'
+        })
+      })
+    })
+    a.setAttribute('role', 'button')
+    a.addEventListener('keydown', function (e) { if (e.key === ' ') { e.preventDefault(); a.click() } })
+  })
+  // hub rows: show as many tiles as fit, so "All N styles" sits right after the last one (no JS: the extra ones clip)
+  var rows = $$('.st-row')
+  function fitRows() {
+    rows.forEach(function (nav) {
+      var ul = $('ul', nav), all = $('.st-row-all', nav), lis = $$('li', ul); if (!ul || !all || !lis.length) return
+      lis.forEach(function (li) { li.hidden = false })
+      var t = lis[0].offsetWidth; if (!t) return
+      var n = Math.max(3, Math.floor((nav.clientWidth - all.offsetWidth - parseFloat(getComputedStyle(all).marginLeft || 0) + 4) / (t + 4)))
+      lis.forEach(function (li, k) { li.hidden = k >= n })
+    })
+  }
+  if (rows.length) {
+    fitRows()
+    var rowQ = 0; W.addEventListener('resize', function () { if (!rowQ) rowQ = requestAnimationFrame(function () { rowQ = 0; fitRows() }) })
+  }
+  // "What are you making?"
+  $$('[data-uses]').forEach(function (box) {
+    var scope = box.closest('[data-uses-scope]') || D.body
+    var wrap = $('[data-best-wrap]', box), list = $('[data-best]', box), head = $('[data-best-h]', box)
+    var chips = $$('[data-use]', box)
+    box.hidden = false
+    function show(chip) {
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false') })
+      $$('[data-style-card].is-match', scope).forEach(function (c) { c.classList.remove('is-match') })
+      list.innerHTML = ''
+      if (!chip) { wrap.hidden = true; return }
+      var t = chip.textContent
+      head.innerHTML = 'Best for ' + esc(t.charAt(0).toLowerCase() + t.slice(1)) + '<span>best first</span>'
+      chip.getAttribute('data-use-styles').split(' ').forEach(function (st, k) {
+        var card = $$('[data-style-card="' + st + '"]', scope).filter(function (c) { return !list.contains(c) })[0]; if (!card) return
+        card.classList.add('is-match')
+        var cl = card.cloneNode(true)
+        cl.removeAttribute('id'); $$('[id]', cl).forEach(function (x) { x.removeAttribute('id') })
+        cl.classList.remove('is-match'); cl.classList.add('is-best')
+        if (!k) { var b = D.createElement('span'); b.className = 'st-badge'; b.textContent = 'Best pick'; cl.insertBefore(b, cl.firstChild) }
+        list.appendChild(cl)
+      })
+      wrap.hidden = false
+      if (!reduced() && list.animate) list.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' })
+    }
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        show(c.getAttribute('aria-pressed') === 'true' ? null : c)
+        // phones scroll the chips sideways: keep the pressed one in view
+        if (c.parentNode.scrollWidth > c.parentNode.clientWidth) try { c.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }) } catch (e) { }
+      })
+    })
+  })
+
   /* ───────── icon page ───────── */
   var dataEl = $('#ip-data'), root = $('[data-ip]')
   if (!dataEl || !root) return
   var DATA; try { DATA = JSON.parse(dataEl.textContent) } catch (e) { return }
-  // each style's markup lives once in the page, in the <symbol>s the previews <use>
-  Object.keys(DATA.styles).forEach(function (s) { var sym = D.getElementById('s-' + s); if (sym && DATA.styles[s].inner == null) DATA.styles[s].inner = sym.innerHTML })
+  // each style's markup lives once in the page, in the <symbol>s the previews <use> (a rich style's gradient <defs> sit
+  // beside its symbol, marked data-for, where every <use> can reach them; never inside display:none)
+  var sprite = $('.ip-sprite') || (D.getElementById('s-line') && D.getElementById('s-line').ownerSVGElement)
+  function symInner(s) {
+    var sym = D.getElementById('s-' + s); if (!sym || sym.hasAttribute('data-lazy')) return null
+    var df = sprite && sprite.querySelector('defs[data-for="s-' + s + '"]')
+    return (df ? '<defs>' + df.innerHTML + '</defs>' : '') + sym.innerHTML
+  }
+  Object.keys(DATA.styles).forEach(function (s) { if (DATA.styles[s].inner == null) DATA.styles[s].inner = symInner(s) })
+  // heavy styles (rich gradients, big drawings) are not in the HTML: their symbols start empty and fill from
+  // data/by-icon/<name>.js (this icon in every style, the same file the library and the studio use) right after first paint
+  var lazyStyles = (root.getAttribute('data-lazy-styles') || '').split(' ').filter(Boolean)
+  var lazyP = null
+  function fillLazy() {
+    var all = W.WITH_ICON && W.WITH_ICON[DATA.name]; if (!all) return false
+    lazyStyles.forEach(function (s) {
+      var m = all[s], sym = D.getElementById('s-' + s); if (m == null || !sym || !sym.hasAttribute('data-lazy')) return
+      DATA.styles[s].inner = m
+      var d = /<defs>([\s\S]*?)<\/defs>/.exec(m), body = d ? m.replace(d[0], '') : m
+      if (d && sprite) { var df = D.createElementNS('http://www.w3.org/2000/svg', 'defs'); df.setAttribute('data-for', 's-' + s); df.innerHTML = d[1]; sprite.insertBefore(df, sprite.firstChild) }
+      sym.innerHTML = body; sym.removeAttribute('data-lazy')
+    })
+    $$('.ip-pick-b.is-lazy').forEach(function (b) { var d = DATA.styles[b.getAttribute('data-pick')]; if (d && d.inner != null) b.classList.remove('is-lazy') })
+    return true
+  }
+  function loadLazy() {
+    if (lazyP) return lazyP
+    if (!lazyStyles.length || fillLazy()) return (lazyP = Promise.resolve(true))
+    lazyP = new Promise(function (ok) {
+      var el = D.createElement('script'); el.src = BASE + 'data/by-icon/' + DATA.name + '.js'; el.async = true
+      el.onload = el.onerror = function () { ok(fillLazy()) }
+      D.head.appendChild(el)
+    })
+    lazyP.then(function () { if (typeof paint === 'function') paint() })
+    return lazyP
+  }
+  if (lazyStyles.length) loadLazy()
   var qsStyle = null
   try { qsStyle = new URLSearchParams(location.search).get('style'); if (!DATA.styles[qsStyle]) qsStyle = null } catch (e) { }
 
   // until the studio is here, the hero wears what the visitor chose last time (the studio's own memory), so nothing jumps
   var mem = store('with-editor-v1') || {}
   var S = {
-    style: qsStyle || (DATA.styles[mem.style] ? mem.style : root.getAttribute('data-style')),
+    style: qsStyle || (DATA.styles[lastStyle()] ? lastStyle() : DATA.styles[mem.style] ? mem.style : root.getAttribute('data-style')),
     color: typeof mem.color === 'string' && (mem.color === 'ink' || mem.color === 'style' || /^#[0-9a-f]{6}$/i.test(mem.color)) ? mem.color : 'ink',
     px: [64, 128, 256, 512, 1024].indexOf(mem.px) >= 0 ? mem.px : 256, size: +mem.size >= 12 && +mem.size <= 128 ? +mem.size : 24,
     anim: /^(none|loop|hover|once)$/.test(mem.anim) ? mem.anim : 'loop', colorName: 'black'
@@ -215,7 +381,7 @@
     var js = [loadJs(BASE + 'vendor/motion/motion.js'), loadJs(BASE + 'js/palette-map.js')]
     if (root.hasAttribute('data-palettes')) js.push(loadJs(BASE + 'data/palettes/' + DATA.name + '.js'))
     js.push(loadJs(BASE + 'js/editor.js'))
-    studioP = Promise.all(js.concat([css])).then(function () {
+    studioP = Promise.all(js.concat([css, loadLazy()])).then(function () {
       Editor = (W.WI && W.WI.Editor) || W.WithEditor || null
       if (!Editor) throw new Error('studio')
       mountStudio()
@@ -241,8 +407,11 @@
     if (pendingPlay) { pendingPlay = false; setTimeout(playOnce, 120) }
   }
   // warm it: when the page is idle, or as soon as the visitor reaches for anything that needs it
+  // (on Save-Data or a 2G link the idle warm-up is skipped: the studio then loads when it is reached for)
   function warm() { loadStudio() }
-  if (W.requestIdleCallback) W.addEventListener('load', function () { W.requestIdleCallback(warm, { timeout: 2500 }) })
+  var lowData = (function () { var c = navigator.connection; return !!(c && (c.saveData || /2g/.test(c.effectiveType || ''))) })()
+  if (lowData) { /* only on demand */ }
+  else if (W.requestIdleCallback) W.addEventListener('load', function () { W.requestIdleCallback(warm, { timeout: 2500 }) })
   else W.addEventListener('load', function () { setTimeout(warm, 1200) })
   $$('[data-actions], .ip-pick, [data-open], [data-stage], .ip-make').forEach(function (el) {
     el.addEventListener('pointerenter', warm, { once: true }); el.addEventListener('focusin', warm, { once: true }); el.addEventListener('touchstart', warm, { once: true, passive: true })
@@ -275,7 +444,7 @@
   }
   function nowrapTokens(t) { return t.split(' ').map(function (w) { return '<span class="nw">' + esc(w) + '</span>' }).join(' ') }
   // the "Use it in code" bar follows the picked style (and, for the <i> tag, the studio's custom colours)
-  function quickFill(t, s) { return t.replace(/\{sub\}/g, s === 'line' ? '' : '/' + s).replace(/\{cls\}/g, s === 'line' ? '' : ' with-' + s).replace(/\{var\}/g, s === 'line' ? '' : ' variant="' + s + '"').replace(/\{style\}/g, s) }
+  function quickFill(t, s) { return t.replace(/\{sub\}/g, s === 'line' ? '' : '/' + s).replace(/\{cls\}/g, s === 'line' ? '' : ' with-' + s).replace(/\{var\}/g, s === 'line' ? '' : ' variant="' + s + '"').replace(/\{style\}/g, s).replace(/\{core\}/g, ((DATA.homes && DATA.homes[s]) || 'core') + '@latest/dist') }
   function quickPaint() {
     if (!qu || !DATA.qu) return
     Object.keys(DATA.qu).forEach(function (id) {
@@ -325,8 +494,9 @@
   }
 
   /* ───────── the hero, the entry card and the sheet mirror the studio's state ───────── */
-  var picks = $$('[data-pick]')
-  var lastStyle = null
+  var tilesEl = $('[data-pick-tiles]', root), pickAll = $('[data-pick-all]', root)
+  var phoneMq = W.matchMedia ? W.matchMedia('(max-width: 640px)') : { matches: false }
+  var prevStyle = null
   // multi-colour styles wear their own colours (or a palette); one-colour styles one colour
   function multi() { return S.colors ? !!S.colors.multi : /var\(\s*--with-/.test(DATA.styles[S.style].inner || '') }
   function colourWord() { return multi() ? (S.colors && S.colors.custom ? S.colorName || 'your colours' : 'own colours') : (S.colorName || 'black') }
@@ -338,8 +508,9 @@
   }
   function paint() {
     var s = DATA.styles[S.style]; if (!s) return
-    var changed = lastStyle !== null && lastStyle !== S.style
-    lastStyle = S.style
+    var changed = prevStyle !== null && prevStyle !== S.style
+    prevStyle = S.style
+    syncRow()
     root.setAttribute('data-style', S.style)
     D.body.className = D.body.className.replace(/\bs-[a-z]+\b/g, '').trim() + ' s-' + S.style
     ;[root, sheet].forEach(function (el) {
@@ -361,8 +532,8 @@
       var u = $('use', svg); if (u) u.setAttribute('href', '#s-' + S.style)
     })
     // the big stage icon is inline (not <use>) so the draw preset can reach its strokes
-    var big = $('.ip-stage-art svg', root); if (big && s.inner != null) big.innerHTML = s.inner
-    picks.forEach(function (b) { var on = b.getAttribute('data-pick') === S.style; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+    var big = $('.ip-stage-art svg', root); var bigIn = (ed && ed.inner && ed.inner(S.style)) || s.inner; if (big && bigIn != null) big.innerHTML = bigIn
+    $$('[data-pick]', root).forEach(function (b) { var on = b.getAttribute('data-pick') === S.style; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
     $$('[data-px-label]').forEach(function (l) { l.textContent = S.px + ' px' })
     $$('[data-color-label]').forEach(function (c) { c.textContent = colourWord() })
     var pn = $('[data-pick-name]', root); if (pn) pn.textContent = s.title
@@ -380,6 +551,7 @@
     sheetFoot()
     miniMotion()
     askAI()
+    dlSet()
     stageMotion()
     if (changed && !reduced()) {
       var art = $('.ip-stage-art', root)
@@ -388,16 +560,81 @@
       var mini = $('[data-mini]'); if (mini && mini.animate) mini.animate([{ transform: 'scale(.86)', opacity: 0.4 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' })
     }
   }
-  picks.forEach(function (b, i) {
-    b.addEventListener('click', function () {
-      var v = b.getAttribute('data-pick')
-      if (ed) ed.set({ style: v }); else { S.style = v; paint(); loadStudio().then(function () { if (S.style !== v) ed.set({ style: v }) }) }
+  /* the short style row: the current style, then recently used, then the featured ones (8, phones 5) */
+  function choose(v) {
+    if (!DATA.styles[v]) return
+    remember(v)
+    if (ed) ed.set({ style: v }); else { S.style = v; paint(); loadStudio().then(function () { if (S.style !== v) ed.set({ style: v }) }) }
+  }
+  // as many tiles as the row's width holds (8 at most, 5 on phones), so "All N styles" sits right after the last one
+  function rowWant() {
+    var max = phoneMq.matches ? 5 : 8, t = tilesEl && tilesEl.firstElementChild
+    if (!t || !pickAll || !t.offsetWidth) return max
+    var avail = tilesEl.parentNode.clientWidth - pickAll.offsetWidth - parseFloat(getComputedStyle(pickAll).marginLeft || 0)
+    return Math.max(3, Math.min(max, Math.floor((avail + 4) / (t.offsetWidth + 4))))
+  }
+  function rowList(cur) {
+    var want = rowWant(), out = [cur], feat = (W.WI && W.WI.FEATURED) || []
+    recentStyles().concat(feat, Object.keys(DATA.styles)).forEach(function (s) { if (out.length < want && out.indexOf(s) < 0 && DATA.styles[s]) out.push(s) })
+    return out
+  }
+  function rowTile(s) {
+    var d = DATA.styles[s], on = s === S.style, isNew = ((W.WI && W.WI.NEW_STYLES) || []).indexOf(s) >= 0
+    var a = Object.keys(d.root || {}).map(function (k) { return ' ' + k + '="' + esc(d.root[k]) + '"' }).join('')
+    return '<button type="button" role="radio" class="ip-pick-b s-' + s + (d.inner == null ? ' is-lazy' : '') + '" data-pick="' + s + '" aria-checked="' + on + '"' + (on ? '' : ' tabindex="-1"') +
+      ' style="--sc:var(--c-' + s + ', ' + d.hex + ');--sc-on:var(--c-' + s + '-on, ' + (d.on || '#FFFFFF') + ')" title="' + esc(d.title) + (d.good ? ': good for ' + esc(d.good.toLowerCase()) : '') + '">' +
+      '<span class="ip-pick-i"><svg viewBox="0 0 24 24" width="24" height="24"' + a + ' aria-hidden="true" focusable="false"><use href="#s-' + s + '"/></svg></span>' +
+      '<span class="ip-pick-n">' + esc(d.title) + '</span>' + (isNew ? '<i class="ip-new" aria-hidden="true"></i>' : '') + '</button>'
+  }
+  var rowStyles = tilesEl ? $$('[data-pick]', tilesEl).map(function (b) { return b.getAttribute('data-pick') }) : []
+  function buildRow(list) {
+    if (!tilesEl) return
+    var had = tilesEl.contains(D.activeElement)
+    rowStyles = list
+    tilesEl.innerHTML = list.map(rowTile).join('')
+    if (had) { var on = $('[aria-checked="true"]', tilesEl); if (on) on.focus() }
+  }
+  // keep the current style visible in the row: a style picked elsewhere (the full picker, the studio) joins at the front
+  function syncRow() {
+    if (!tilesEl) return
+    var b = $('[data-pick="' + S.style + '"]', tilesEl), f0 = tilesEl.firstElementChild
+    if (b && (!f0.offsetParent || (b.offsetParent && b.offsetTop === f0.offsetTop))) return
+    buildRow([S.style].concat(rowStyles.filter(function (s) { return s !== S.style })).slice(0, rowWant()))
+  }
+  if (tilesEl) {
+    var first = rowList(S.style)
+    if (first.join(' ') !== rowStyles.join(' ')) buildRow(first)
+    var onMq = function () { buildRow(rowList(S.style)) }
+    if (phoneMq.addEventListener) phoneMq.addEventListener('change', onMq); else if (phoneMq.addListener) phoneMq.addListener(onMq)
+    var rq = 0
+    W.addEventListener('resize', function () { if (!rq) rq = requestAnimationFrame(function () { rq = 0; if (rowWant() !== rowStyles.length) buildRow(rowList(S.style)) }) })
+    tilesEl.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-pick]'); if (!b) return
+      choose(b.getAttribute('data-pick'))
     })
-    b.addEventListener('keydown', function (e) {
+    tilesEl.addEventListener('keydown', function (e) {
       var k = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
-      if (k) { e.preventDefault(); var n = picks[(i + k + picks.length) % picks.length]; n.focus(); n.click() }
+      // only the tiles on the visible line (a narrow row clips the rest)
+      var all = $$('[data-pick]', tilesEl), top = all.length ? all[0].offsetTop : 0
+      var bs = Array.prototype.filter.call(all, function (b) { return b.offsetParent && b.offsetTop === top }), i = bs.indexOf(e.target.closest('[data-pick]'))
+      if (i < 0) return
+      var to = k ? bs[(i + k + bs.length) % bs.length] : e.key === 'Home' ? bs[0] : e.key === 'End' ? bs[bs.length - 1] : null
+      if (to) { e.preventDefault(); to.focus(); choose(to.getAttribute('data-pick')) }
     })
-  })
+  }
+  // "All N styles": the full picker (popover on desktop, sheet on phones); without it, the grouped list below
+  if (pickAll) {
+    pickAll.setAttribute('role', 'button')
+    pickAll.addEventListener('keydown', function (e) { if (e.key === ' ') { e.preventDefault(); pickAll.click() } })
+    pickAll.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
+      e.preventDefault()
+      picker().then(function (sp) {
+        if (!sp) { jumpTo('#styles'); return }
+        sp.open({ current: S.style, icon: DATA.name, anchor: pickAll, title: 'Choose a style for ' + DATA.title }).then(function (st) { if (st) choose(st) })
+      })
+    })
+  }
   root.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b || !root.contains(b) || (host && host.contains(b))) return
     if (b.hasAttribute('data-act')) act(b.getAttribute('data-act'), b.getAttribute('data-style'), b)
@@ -409,7 +646,7 @@
   function stageMotion() {
     if (!mo || !Editor || !DATA.motion) return
     var e = looping ? DATA.motion.loop : DATA.motion.hover
-    var a = Editor.motionAttrs(e, { trigger: looping ? 'loop' : 'hover', stroked: stroked() })
+    var a = Editor.motionAttrs(e, { trigger: looping ? 'loop' : 'hover', stroked: stroked(), style: S.style })
     if (!a) return
     mo.className = 'ip-mo ' + a.cls + (looping ? ' wm-force' : '')
     mo.setAttribute('style', a.style)
@@ -429,7 +666,7 @@
   function playOnce() {
     if (!mo || !DATA.motion || reduced() || looping) return
     if (!Editor) { pendingPlay = true; return }
-    var a = Editor.motionAttrs(DATA.motion.hover, { trigger: 'once', stroked: stroked() })
+    var a = Editor.motionAttrs(DATA.motion.hover, { trigger: 'once', stroked: stroked(), style: S.style })
     if (!a) return
     mo.className = 'ip-mo ' + a.cls; mo.setAttribute('style', a.style)
     if (Editor.prepareDraw) Editor.prepareDraw(mo.parentNode)
@@ -447,6 +684,30 @@
     var played = false
     new IntersectionObserver(function (es, ob) { es.forEach(function (en) { if (en.isIntersecting && !played) { played = true; setTimeout(playOnce, 450); ob.disconnect() } }) }, { threshold: 0.5 }).observe(mo)
   }
+
+  /* ───────── "Download all" in the All styles section follows the chosen style ─────────
+     The link is plain <a download> (generated by site-seo.mjs from data/downloads.json); the sizes for other styles come
+     from data/downloads.js (window.WITH_DOWNLOADS), loaded the first time the style changes. */
+  function dlSet() {
+    var a = $('[data-dl-set]'); if (!a) return
+    var st = S.style; if (a.getAttribute('data-dl-set') === st) return
+    function put(d) {
+      var x = d && d.styles && d.styles[st]
+      if (!x) { a.parentNode.hidden = true; return }
+      a.parentNode.hidden = false
+      a.setAttribute('data-dl-set', st)
+      a.href = BASE + x.file
+      a.setAttribute('download', x.file.split('/').pop())
+      var t = $('[data-dl-set-t]', a), n = $('[data-dl-set-n]', a)
+      if (t) t.textContent = 'Download all ' + Number(x.icons).toLocaleString('en-US') + ' ' + (x.title || (DATA.styles[st] && DATA.styles[st].title) || st) + ' SVGs'
+      if (n) n.textContent = '(.zip, ' + x.size + ')'
+    }
+    if (W.WITH_DOWNLOADS) put(W.WITH_DOWNLOADS)
+    else asset(BASE + 'data/downloads.js').then(function () { if (S.style === st) put(W.WITH_DOWNLOADS) })
+  }
+  $$('[data-dl-set]').forEach(function (a) {
+    a.addEventListener('click', function () { try { if (typeof W.gtag === 'function') W.gtag('event', 'download_all', { style: a.getAttribute('data-dl-set') }) } catch (e) { } })
+  })
 
   /* ───────── Ask-AI task widget follows the chosen style ───────── */
   function askAI() {
@@ -710,71 +971,12 @@
     }
   }
 
-  /* ═════════ "On this page": a quiet floating pill that opens a section map ═════════
-     Shows once the hero has scrolled away (on phones: together with the action bar, docked into it). The open map marks
-     the section in view; the pill's ring fills as the page is read. js/site.js (WI.pageMap) lets the visitor tuck it
-     into an edge tab, tucks it while it would cover text and shows the one-time hint. Without JS it is a plain disclosure
-     after the hero. */
+  /* ═════════ "On this page" ═════════
+     js/site.js (WI.pageMap) runs the whole map: the pill, its section list, the active section and the progress ring.
+     It shows once the hero has scrolled away; on phones it docks into the action bar and follows it (html.ip-bar-on).
+     Here only: a jump to "For developers" opens the developer panel. Without JS it is a plain disclosure after the hero. */
   var map = $('[data-map]')
-  if (map) {
-    D.documentElement.classList.add('ip-has-map')
-    var mapBtn = $('summary', map), links = $$('[data-map-link]', map), now = $('[data-map-now]', map), prog = $('[data-map-prog]', map)
-    var secs = links.map(function (a) { return $(a.getAttribute('href')) }).filter(Boolean)
-    var hero = $('.ip-hero')
-    var shown = false
-    function setShown(v) {
-      if (v === shown) return
-      shown = v; map.classList.toggle('is-shown', v)
-      if (!v && map.open) map.open = false
-    }
-    function current() {
-      var y = (W.innerHeight || 800) * 0.35, cur = null
-      secs.forEach(function (s) { if (s.getBoundingClientRect().top <= y) cur = s })
-      return cur
-    }
-    var raf = 0
-    function onScroll() {
-      if (raf) return
-      raf = requestAnimationFrame(function () {
-        raf = 0
-        setShown(bar && phoneMq.matches ? barOn : (!hero || hero.getBoundingClientRect().bottom < 40))
-        var c = current(), id = c ? c.id : ''
-        links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current') })
-        var on = id && $('[data-map-link][aria-current]', map)
-        if (now) now.textContent = on ? $('b', on).textContent : ''
-        var max = D.documentElement.scrollHeight - (W.innerHeight || 800)
-        if (prog) prog.style.strokeDashoffset = String(100 - Math.round(Math.min(1, Math.max(0, W.scrollY / Math.max(1, max))) * 100))
-      })
-    }
-    W.addEventListener('scroll', onScroll, { passive: true }); W.addEventListener('resize', onScroll)
-    onScroll()
-    map.addEventListener('toggle', function () {
-      if (map.open) {
-        var cur = $('[data-map-link][aria-current]', map) || links[0]
-        var card = $('.ip-map-card', map)
-        if (card && card.animate && !reduced()) {
-          card.animate([{ opacity: 0, transform: 'translateY(12px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: SPRING })
-          links.forEach(function (a, i) { a.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 360, delay: 40 + i * 22, easing: EASE, fill: 'backwards' }) })
-        }
-        if (cur && map.contains(D.activeElement)) setTimeout(function () { cur.focus({ preventScroll: true }) }, 30)
-      }
-    })
-    links.forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        var t = $(a.getAttribute('href')); if (!t) return
-        e.preventDefault(); map.open = false
-        t.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' })
-        if (history.replaceState) history.replaceState(null, '', a.getAttribute('href'))
-        if (t.id === 'developers') { var dv = $('.ip-dev'); if (dv) dv.open = true }
-        // focus lands on the section (its heading reads first), without a second jump
-        if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1')
-        setTimeout(function () { try { t.focus({ preventScroll: true }) } catch (err) { } }, reduced() ? 0 : 500)
-      })
-    })
-    D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && map.open) { map.open = false; mapBtn.focus() } })
-    D.addEventListener('pointerdown', function (e) { if (map.open && !map.contains(e.target)) map.open = false })
-    map.addEventListener('focusout', function (e) { if (map.open && e.relatedTarget && !map.contains(e.relatedTarget)) map.open = false })
-  }
+  if (map) map.addEventListener('pagemap:jump', function (e) { if (e.detail && e.detail.id === 'developers') { var dv = $('.ip-dev'); if (dv) dv.open = true } })
 
   paint()
 })()

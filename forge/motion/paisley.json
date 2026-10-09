@@ -1,0 +1,34 @@
+{
+  "name": "paisley",
+  "intent": "the paisley curls and sways like a printed motif",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      10,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      10,
+      21.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "breathe",
+      "amount": 0.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "twinkle"
+    }
+  ]
+}

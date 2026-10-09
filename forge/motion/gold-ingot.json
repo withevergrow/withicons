@@ -1,0 +1,38 @@
+{
+  "name": "gold-ingot",
+  "intent": "the gold ingot gleams with good fortune",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        19,
+        4.5
+      ]
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "lucky-coin",
+      "effect": "flip"
+    },
+    {
+      "to": "red-envelope",
+      "effect": "scale"
+    }
+  ]
+}

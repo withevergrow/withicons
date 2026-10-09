@@ -1,0 +1,44 @@
+{
+  "name": "broom",
+  "intent": "sweeps back and forth, or takes off for a night flight",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      21,
+      3
+    ],
+    "amount": 0.8,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      21,
+      3
+    ]
+  },
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 1
+    },
+    {
+      "preset": "nudge",
+      "dir": 315
+    },
+    {
+      "preset": "pass",
+      "dir": 315
+    }
+  ],
+  "swap": [
+    {
+      "to": "witch-hat",
+      "effect": "morph"
+    },
+    {
+      "to": "broom@solid",
+      "effect": "fade"
+    }
+  ]
+}

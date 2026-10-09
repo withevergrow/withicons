@@ -1,0 +1,44 @@
+{
+  "name": "stamp",
+  "intent": "the rubber stamp presses down and marks the page",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 1
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        17
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "badge-check",
+      "effect": "scale"
+    },
+    {
+      "to": "stamp@solid",
+      "effect": "fade"
+    }
+  ]
+}

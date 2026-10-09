@@ -1,0 +1,46 @@
+{
+  "name": "api",
+  "intent": "requests flow in and out through the ports of the block",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "webhook",
+      "effect": "morph"
+    },
+    {
+      "to": "plug",
+      "effect": "fade"
+    },
+    {
+      "to": "code",
+      "effect": "flip"
+    }
+  ]
+}

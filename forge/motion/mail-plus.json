@@ -1,0 +1,48 @@
+{
+  "name": "mail-plus",
+  "intent": "a new letter is added; the plus pops in",
+  "loop": {
+    "preset": "float",
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      18,
+      18
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        18,
+        18
+      ],
+      "amount": 0.8,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "nudge",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "fade"
+    },
+    {
+      "to": "mail-check",
+      "effect": "flip"
+    }
+  ]
+}

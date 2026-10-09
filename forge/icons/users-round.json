@@ -1,0 +1,76 @@
+{
+  "name": "users-round",
+  "category": "users",
+  "description": "Two round-headed people, for teams, members and groups.",
+  "aliases": [
+    "people-round",
+    "team-round",
+    "group-round",
+    "members-round",
+    "round-users",
+    "avatars",
+    "user-avatars",
+    "people-group",
+    "two-people"
+  ],
+  "tags": [
+    "people",
+    "team",
+    "group",
+    "members",
+    "social"
+  ],
+  "paths": [
+    {
+      "d": "M12.5 8 A3.5 3.5 0 1 1 5.5 8 A3.5 3.5 0 1 1 12.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 A7 5.5 0 0 1 16 21",
+      "plate": "K"
+    },
+    {
+      "d": "M14.54 3.32 A3.5 3.5 0 1 1 15.97 10",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 15 A4 6 0 0 1 21.5 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.5 8 A3.5 3.5 0 1 1 5.5 8 A3.5 3.5 0 1 1 12.5 8 Z",
+    "M2 21 A7 5.5 0 0 1 16 21 Z",
+    "M13.69 3.87 A3.5 3.5 0 1 1 14.97 9.85 A6.25 6.25 0 0 0 13.69 3.87 Z",
+    "M17.5 15 A4 6 0 0 1 21.5 21 H18.5 C18.5 18.5 18.25 16.5 17.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "users",
+    "people",
+    "team",
+    "teams",
+    "group",
+    "groups",
+    "members",
+    "membership",
+    "community",
+    "audience",
+    "friends",
+    "family",
+    "colleagues",
+    "coworkers",
+    "staff",
+    "employees",
+    "organization",
+    "workspace members",
+    "collaborators",
+    "participants",
+    "attendees",
+    "followers",
+    "contacts",
+    "customers",
+    "share with people",
+    "everyone"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "server-cog",
+  "intent": "the gear turns while the server hums",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "spin",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "duration": 4
+    }
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "server",
+      "effect": "fade"
+    },
+    {
+      "to": "settings",
+      "effect": "morph"
+    }
+  ]
+}

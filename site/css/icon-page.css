@@ -18,9 +18,24 @@
 .crumbs [aria-current] { color: var(--ink); font-weight: 600 }
 
 /* shared type */
-.ip-eyebrow { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; font: 600 12.5px/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+/* hero eyebrow (shared with the home hero kicker): one quiet pill, a tinted chip naming what this is (group, category)
+   and the facts beside it. Older markup (dot + text, no chip) still reads as a pill. */
+.ip-eyebrow { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; max-width: 100%; min-height: 36px; margin: 0 0 18px; padding: 3px 14px 3px 3px;
+  border-radius: 18px; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow-s, 0 1px 2px rgba(17, 19, 24, .06));
+  font: 550 13.5px/1.25 var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--ink-2, var(--ink)); }
+.ip-eyebrow:not(:has(.ip-eb-chip)) { gap: 8px; padding-left: 12px }
+.ip-eyebrow { width: fit-content; justify-self: start }
+@media (max-width: 420px) { .ip-eb-opt { display: none } }
 .ip-eyebrow a { color: inherit }
-.ip-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sc) 22%, transparent); transition: background .5s var(--ip-e); }
+.ip-eb-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 28px; padding: 0 12px 0 9px; border-radius: 999px;
+  background: color-mix(in srgb, var(--sc) 15%, var(--card)); color: var(--style-text, var(--ink)); font-weight: 680; text-decoration: none; white-space: nowrap;
+  transition: background-color .25s var(--ip-e), box-shadow .25s var(--ip-e); }
+a.ip-eb-chip:hover { background: color-mix(in srgb, var(--sc) 26%, var(--card)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sc) 45%, transparent) }
+.ip-eyebrow a.ip-eb-chip { color: var(--style-text, var(--ink)) }
+.ip-eb-meta { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; min-width: 0; padding-left: 2px }
+.ip-eb-meta b { font-weight: 720; color: var(--ink); font-variant-numeric: tabular-nums }
+.ip-eb-meta i { font-style: normal; color: var(--muted); opacity: .8 }
+.ip-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sc) 24%, transparent); transition: background .5s var(--ip-e); }
 .ip-h1 { margin: 0; font: 800 clamp(44px, 6.5vw, 92px)/.94 var(--font-display); letter-spacing: -.04em; text-wrap: balance; }
 .ip-hand { font-family: var(--font-hand); font-weight: 700; letter-spacing: 0; color: var(--style-text, var(--sc)); display: inline-block; transform: rotate(-3deg); font-size: 1.08em; transition: color .5s var(--ip-e); }
 .ip-lede { max-width: 54ch; margin: 18px 0 0; font: 400 clamp(17px, 1.5vw, 20px)/1.5 var(--font-sans); color: var(--ink-2, var(--ink)); text-wrap: pretty; }
@@ -178,7 +193,12 @@
 /* ─────────── hubs ─────────── */
 .hub-hero { padding: clamp(18px, 3vw, 32px) 0 0 }
 .hub-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 64px); align-items: center; margin-top: clamp(18px, 3vw, 36px) }
-.hub-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0 }
+.hub-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 26px 0 0 }
+/* three actions in one row: the library (primary), See all, Download all (quiet); a touch narrower so they fit the column */
+.hub-cta.has-dl { gap: 8px }
+.hub-cta.has-dl .btn-lg { padding-inline: 22px }
+.hub-cta.has-dl .dl-all { padding-left: 9px; padding-right: 22px }
+@media (min-width: 1100px) { .hub-style .hub-hero-grid:has(.hub-cta.has-dl) { grid-template-columns: minmax(0, 1.22fr) minmax(0, .78fr) } }
 .hub-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.4vw, 14px) }
 .hub-strip span { aspect-ratio: 1; display: grid; place-items: center; border-radius: clamp(18px, 2vw, 28px); background: var(--sc); color: #fff; box-shadow: 0 18px 34px -24px var(--sc); animation: hub-in .7s var(--ip-spring) both; animation-delay: calc(var(--i) * 60ms) }
 .hub-strip span svg { width: 46%; height: auto; aspect-ratio: 1 }
@@ -425,9 +445,10 @@
 [data-theme="dark"] .ip-dev { background: var(--dark-2); border: 1px solid var(--rule-strong) }
 [data-theme="dark"] .ip-tag-btn { background: var(--dark-2) }
 @media (max-width: 640px) {
-  .hub-cta { flex-wrap: nowrap; gap: 8px }
-  .hub-cta .btn { flex: 1 1 auto; justify-content: center; min-width: 0; padding-inline: 16px; font-size: 16px; white-space: nowrap }
-  .hub-cta .btn-ghost { flex: 0 0 auto }
+  /* phones: the library + "See all" share a row; "Download all" takes the full row under them, at the same height */
+  .hub-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px }
+  .hub-cta .btn { justify-content: center; min-width: 0; padding-inline: 16px; font-size: 16px; white-space: nowrap }
+  .hub-cta .dl-all { grid-column: 1 / -1; justify-content: flex-start }
 }
 .hub-dev { display: grid; gap: 6px; margin: 0 0 10px; padding: 0; list-style: none }
 .hub-dev code { display: inline-block; max-width: 100%; font-size: 12.5px; line-height: 1.4; overflow-wrap: anywhere; white-space: normal }
@@ -449,12 +470,6 @@
 
 /* steps */
 
-/* style picker, grouped: Everyday · Crafted · Playful */
-.ip-pick { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: none; margin: 0 }
-.ip-pick-g { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: center; gap: 10px }
-.ip-pick-gl { display: grid; gap: 4px; justify-items: start; font: 600 11px/1.2 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
-.ip-pick-gl em { font-style: normal; padding: 3px 7px; border-radius: 999px; background: var(--sun); color: #111318; font-size: 9.5px; letter-spacing: .08em }
-.ip-pick-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px }
 .ip-pick-b { padding: 10px 2px 8px }
 .ip-pick-b svg { color: var(--style-text, var(--sc)) }
 
@@ -522,8 +537,6 @@
   .ip-stage-hint { bottom: auto }
 }
 @media (max-width: 640px) {
-  .ip-pick-g { grid-template-columns: minmax(0, 1fr); gap: 6px }
-  .ip-pick-gl { display: flex; align-items: center; gap: 6px }
   .ip-intent { max-width: calc(100% - 28px); padding-right: 12px }
   .ip-stage-hint { display: none }
   .ip-section { padding-top: clamp(64px, 16vw, 88px) }
@@ -576,16 +589,16 @@
 .ip-pick-k { font: 650 11.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
 .ip-pick-head b { font: 750 17px/1.2 var(--font-display); letter-spacing: -.01em; color: var(--style-text, var(--ink)) }
 .ip-pick-say { flex: 1 1 260px; min-width: 0 }
-.ip-pick { --t: min(52px, calc((100vw - 2 * var(--gutter, 16px) - 18px - 42px) / 8)); display: flex; flex-wrap: wrap; gap: 0 18px; margin: 0 }
-/* three rows: Everyday + Crafted (7) · Playful + Studio (8) · Storybook (5); the two pseudo-elements are the line breaks */
-.ip-pick::after, .ip-pick::before { content: ""; flex-basis: 100%; height: 14px; order: 1 }
-.ip-pick::before { order: 3 }
-.ip-pick-g.is-playful, .ip-pick-g.is-studio { order: 2 }
-.ip-pick-g.is-storybook, .ip-pick-g.is-more { order: 4 }
-.ip-pick-g { display: grid; grid-template-columns: none; gap: 6px; align-content: start }
-.ip-pick-gl { display: flex; align-items: center; gap: 6px; font: 600 10.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.ip-pick-gl em { padding: 2px 6px; font-size: 9px }
-.ip-pick-row { display: flex; gap: 6px }
+/* a heavy style's drawing arrives right after first paint (data/by-icon): a soft placeholder until then */
+.ip-pick-b.is-lazy::before { content: ""; position: absolute; inset: 26%; border-radius: 30%; background: color-mix(in srgb, var(--sc) 22%, transparent); animation: ip-lazy 1.1s ease-in-out infinite alternate }
+@keyframes ip-lazy { from { opacity: .35 } to { opacity: .9 } }
+@media (prefers-reduced-motion: reduce) { .ip-pick-b.is-lazy::before { animation: none; opacity: .6 } }
+/* style hubs: the categories still on their way show the line drawing, faintly */
+.ip-grid svg.is-ph { opacity: .28 }
+.ip-grid svg.is-ph:empty { border-radius: 30%; background: var(--rule); opacity: .45 }
+.hub-group.is-in .ip-grid svg { animation: ip-hub-in .4s ease-out both }
+@keyframes ip-hub-in { from { opacity: .28 } }
+@media (prefers-reduced-motion: reduce) { .hub-group.is-in .ip-grid svg { animation: none } }
 .ip-pick-b { position: relative; flex: none; width: var(--t); height: var(--t); padding: 0; border-radius: calc(var(--t) * .3); border: 1.5px solid var(--rule); background: var(--card); box-shadow: 0 1px 0 rgba(17, 19, 24, .03); transition: transform .35s var(--ip-spring), border-color .2s, background .3s, box-shadow .3s }
 .ip-pick-b span { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 .ip-pick-b svg { width: 54%; height: 54%; color: var(--style-text, var(--sc)) }
@@ -658,48 +671,7 @@
 .ip-live-chip .ip-live-dot { animation: ip-live 2.4s ease-in-out infinite }
 @keyframes ip-live { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--sc) 0%, transparent) } }
 
-/* ─────────── "On this page": a floating pill + its section map ─────────── */
-.ip-map { position: relative; z-index: 70 }
-html:not(.js) .ip-map { box-sizing: border-box; max-width: var(--maxw, 1200px); margin: clamp(48px, 6vw, 72px) auto 0; padding-inline: var(--gutter, 16px) }
-html:not(.js) .ip-map-l::after { content: " +"; color: var(--muted) }
-html:not(.js) .ip-map-btn { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font: 700 16px/1.2 var(--font-display); color: var(--ink) }
-html:not(.js) .ip-map-ic, html:not(.js) .ip-map-now { display: none }
-html:not(.js) .ip-map-card { margin-top: 10px }
-.ip-map-btn { position: relative; list-style: none }
-.ip-map-btn::-webkit-details-marker { display: none }
-.js .ip-map { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); width: auto; margin: 0; transform: translateY(calc(100% + 32px)); opacity: 0; pointer-events: none; transition: transform .55s var(--ip-spring), opacity .3s }
-.js .ip-map.is-shown { transform: none; opacity: 1; pointer-events: auto }
-.js .ip-map-btn { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px 0 8px; border-radius: 999px; background: #111318; color: #F7F3EC; box-shadow: 0 18px 40px -16px rgba(17, 19, 24, .55), inset 0 1px 0 rgba(255, 255, 255, .08); cursor: pointer; user-select: none; transition: transform .3s var(--ip-spring), box-shadow .3s }
-.js[data-theme="dark"] .ip-map-btn { background: #F4F0E8; color: #111318; box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .8) }
-.js .ip-map-btn:hover { transform: translateY(-2px) }
-.js .ip-map-btn:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 3px; box-shadow: 0 0 0 7px var(--focus-halo) }
-.ip-map-ic { position: relative; display: grid; place-items: center; flex: none; width: 36px; height: 36px }
-.ip-map-ic svg { position: absolute; inset: 0; transform: rotate(-90deg) }
-.ip-map-track { fill: none; stroke: currentColor; stroke-width: 2.5; opacity: .18 }
-.ip-map-prog { fill: none; stroke: var(--sc); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .3s linear, stroke .4s }
-.ip-map-ic i { position: absolute; left: 11px; width: 14px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .35s var(--ip-spring), opacity .2s }
-.ip-map-ic i:nth-of-type(1) { top: 12px }
-.ip-map-ic i:nth-of-type(2) { top: 17px; width: 10px }
-.ip-map-ic i:nth-of-type(3) { top: 22px; width: 12px }
-.ip-map[open] .ip-map-ic i:nth-of-type(1) { transform: translateY(5px) rotate(45deg); width: 14px }
-.ip-map[open] .ip-map-ic i:nth-of-type(2) { opacity: 0 }
-.ip-map[open] .ip-map-ic i:nth-of-type(3) { transform: translateY(-5px) rotate(-45deg); width: 14px }
-.ip-map-l { font: 700 15px/1 var(--font-display); letter-spacing: -.005em; white-space: nowrap }
-.ip-map-now { max-width: 0; overflow: hidden; white-space: nowrap; font: 500 13.5px/1 var(--font-sans); opacity: .72; transition: max-width .45s var(--ip-out), opacity .3s }
-.ip-map-now:not(:empty) { max-width: 180px; padding-left: 12px; border-left: 1px solid color-mix(in srgb, currentColor 30%, transparent) }
-.js .ip-map-card { position: absolute; right: 0; bottom: calc(100% + 12px); width: min(360px, calc(100vw - 32px)); max-height: min(560px, calc(100dvh - var(--header-h, 72px) - 110px)); overflow: auto; overscroll-behavior: contain; padding: 10px; border-radius: 26px; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow-l); transform-origin: 100% 100% }
-.ip-map-k { margin: 6px 10px 8px; font: 650 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-.ip-map-card ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none }
-.ip-map-card a { position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 10px; border-radius: 16px; color: var(--ink); text-decoration: none; transition: background .2s }
-.ip-map-n { font: 600 11.5px/1 var(--font-mono); color: var(--muted); text-align: center }
-.ip-map-t { min-width: 0 }
-.ip-map-t b { display: block; font: 680 15px/1.2 var(--font-display) }
-.ip-map-t small { display: block; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12.5px/1.3 var(--font-sans); color: var(--muted) }
-.ip-map-card a:hover { background: var(--paper-2) }
-.ip-map-card a[aria-current] { background: color-mix(in srgb, var(--sc) 12%, var(--card)) }
-.ip-map-card a[aria-current]::before { content: ""; position: absolute; left: 2px; top: 12px; bottom: 12px; width: 3px; border-radius: 3px; background: var(--sc) }
-.ip-map-card a[aria-current] .ip-map-n { color: var(--style-text, var(--sc)); font-weight: 700 }
-.ip-map-card a:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: -2px }
+/* "On this page" (.ip-map): styled with the live pages' map in chrome.css, run by js/site.js pageMap */
 
 /* ─────────── "Make it yours": the studio and the downloads, one step away ─────────── */
 .ip-make-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; align-items: stretch }
@@ -830,8 +802,6 @@ html.ip-locked { overflow: hidden }
   .ip-sheet .toast, .ip-sheet .wied-toast, .ip-sheet .ip-toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)) }
 }
 @media (max-width: 640px) {
-  .ip-pick { column-gap: 14px; --t: min(48px, calc((100vw - 2 * var(--gutter, 16px) - 14px - 42px) / 8)) }
-  .ip-pick-gl { font-size: 10px }
   .ip-pick-head { min-height: 4.2em }
   .ip-go { min-height: 62px; padding-left: 16px; gap: 12px }
   .ip-go b { font-size: 18px }
@@ -863,9 +833,6 @@ html:not(.js) .ip-cta, html:not(.js) .ip-minor > button { display: none }
 .ip-sheet-body .wdl-top { justify-content: flex-start }
 .ip-sheet-body .wdl-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 @media (max-width: 720px) { .ip-sheet-body .wied-canvas { min-height: 240px } .ip-sheet-body .wied-art { min-height: 150px } .ip-sheet-body .wied-sizes { min-height: 84px; padding-block: 10px 8px } }
-/* keyboard: the map sits right after the hero in tab order, and shows itself when it receives focus (a skip link to any section) */
-.js .ip-map:focus-within { transform: none; opacity: 1; pointer-events: auto }
-@media (max-width: 720px) { .js .ip-map:focus-within { transform: translate(50%, 0) } }
 
 /* ═══════════ v5: "Use it in code" up top + a calmer developer panel ═══════════
    The hero carries one line of code for the visitor's stack (remembered in localStorage 'with-stack', shared with the
@@ -1048,13 +1015,195 @@ html:not(.js) .ip-tabs-row { display: none }
   .ip-bar button:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
   html.ip-has-bar body { padding-bottom: calc(72px + env(safe-area-inset-bottom)) }
   html.ip-bar-on .toast { bottom: calc(86px + env(safe-area-inset-bottom)) }
-  /* the map: a round button at the bar's right end; its list opens upward from there */
-  .js .ip-map { right: max(12px, env(safe-area-inset-right)); bottom: calc(10px + env(safe-area-inset-bottom)); transform: translateY(calc(100% + 40px)) }
-  .js .ip-map.is-shown { transform: none }
-  .js .ip-map-btn { width: 48px; height: 48px; padding: 0; gap: 0; justify-content: center }
-  .js .ip-map-btn:hover { transform: none }
-  .js .ip-map-l { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
-  .ip-map-now { display: none }
-  .js .ip-map-card { right: 0; bottom: calc(100% + 12px); width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - var(--header-h, 64px) - 100px) }
+  /* the map docks as a round button at the bar's right end: chrome.css */
 }
 @media (max-width: 380px) { .ip-bar button { padding: 0 10px; font-size: 14.5px; gap: 6px } .ip-bar-copy svg { display: none } }
+
+/* ═══════════ choosing a style, calmly (site/STYLE-PICKER.md) ═══════════
+   One short row everywhere (the current style, recent, featured: 8 tiles, 5 on phones) + "All N styles" for the shared
+   picker (js/style-picker.js). Neutral plates, one ink ring for the selected style, one small dot for new styles.
+   The full list is grouped by what people make, with "What are you making?" chips that lift the best four. */
+/* the row never wraps: tiles that do not fit the width wrap onto a clipped second line (the current style is always
+   first), so "All N styles" stays in reach at every width, with or without JS */
+.ip-pick.is-row, .st-row { --pl: 44px; display: flex; align-items: flex-start; margin: 0 }
+.ip-pick-tiles, .st-row ul { flex: 0 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0 4px; height: calc(var(--pl) + 38px); overflow: hidden; margin: -8px; padding: 8px; list-style: none }
+.ip-pick-b, .ip-pick-all, .st-row a { position: relative; flex: none; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; width: calc(var(--pl) + 10px); height: auto; min-height: 44px; padding: 2px 0 0; margin: 0; border: 0; border-radius: 14px; background: none; box-shadow: none; color: var(--ink); font: inherit; text-decoration: none; cursor: pointer; transform: none; transition: none; -webkit-tap-highlight-color: transparent }
+.ip-pick-i, .st-row-i { position: relative; display: grid; place-items: center; width: var(--pl); height: var(--pl); border-radius: 14px; background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--rule); transition: box-shadow .16s ease-out, background-color .16s ease-out, transform .16s ease-out }
+.ip-pick-b .ip-pick-i svg, .st-row-i svg { width: 24px; height: 24px; color: var(--ink); overflow: visible }
+.ip-pick-b span.ip-pick-n, .ip-pick-all .ip-pick-n, .st-row-n { position: static !important; width: auto; height: auto; clip: auto; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 550 11.5px/14px var(--font-sans); color: var(--muted); letter-spacing: .005em }
+.ip-pick-b span.ip-pick-i { position: relative !important; width: var(--pl); height: var(--pl); clip: auto; overflow: visible }
+.ip-new { position: absolute; top: 0; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 2px var(--paper); pointer-events: none }
+.ip-pick-b[aria-checked="true"], .st-row a[aria-current] { background: none; border: 0; box-shadow: none; transform: none }
+.ip-pick-b[aria-checked="true"]::after { content: none }
+.ip-pick-b[aria-checked="true"] .ip-pick-i, .st-row a[aria-current] .st-row-i { background: var(--card); box-shadow: inset 0 0 0 2px var(--ink) }
+.ip-pick-b[aria-checked="true"] svg { color: var(--ink) }
+.ip-pick-b[aria-checked="true"] .ip-pick-n, .st-row a[aria-current] .st-row-n { color: var(--ink); font-weight: 700 }
+.ip-pick-all .ip-pick-i, .st-row .st-row-all .st-row-i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--rule-strong) }
+.ip-pick-all .ip-pick-i svg, .st-row .st-row-all .st-row-i svg { width: 22px; height: 22px; color: var(--ink) }
+.ip-pick-all, .st-row a.st-row-all { flex: none; width: auto; min-width: calc(var(--pl) + 10px); margin-left: 8px }
+.ip-pick-all .ip-pick-n, .st-row .st-row-all .st-row-n { max-width: none; overflow: visible; color: var(--ink); font-weight: 650 }
+@media (hover: hover) and (pointer: fine) {
+  .ip-pick-b:hover, .st-row a:hover { transform: none; box-shadow: none }
+  .ip-pick-b:hover .ip-pick-i, .st-row a:hover .st-row-i { background: var(--card); box-shadow: inset 0 0 0 1px var(--rule-strong), 0 6px 16px -10px rgba(17, 19, 24, .35) }
+  .ip-pick-b:hover .ip-pick-n, .st-row a:hover .st-row-n { color: var(--ink) }
+  .ip-pick-b[aria-checked="true"]:hover .ip-pick-i, .st-row a[aria-current]:hover .st-row-i { box-shadow: inset 0 0 0 2px var(--ink) }
+  .ip-pick-all:hover .ip-pick-i, .st-row a.st-row-all:hover .st-row-i { background: var(--card); box-shadow: inset 0 0 0 1.5px var(--ink) }
+}
+.ip-pick-b:active .ip-pick-i, .ip-pick-all:active .ip-pick-i, .st-row a:active .st-row-i { transform: scale(.96) }
+.ip-pick-b:focus-visible, .ip-pick-all:focus-visible, .st-row a:focus-visible { outline: none; box-shadow: none }
+.ip-pick-b:focus-visible .ip-pick-i, .ip-pick-all:focus-visible .ip-pick-i, .st-row a:focus-visible .st-row-i { outline: 2px solid var(--focus-ring); outline-offset: 2px; box-shadow: inset 0 0 0 1px var(--rule-strong), 0 0 0 6px var(--focus-halo) }
+.ip-pick-b[aria-checked="true"]:focus-visible .ip-pick-i { box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 6px var(--focus-halo) }
+/* a heavy style's drawing arrives right after first paint: a quiet skeleton in the plate until then (no size change) */
+.ip-pick-b.is-lazy::before { content: none }
+.ip-pick-b.is-lazy .ip-pick-i::before { content: ""; position: absolute; inset: 26%; border-radius: 30%; background: var(--rule); opacity: .55 }
+svg.is-sk { border-radius: 30%; background: var(--rule); opacity: .55 }
+html:not(.reduced) .ip-pick-b.is-lazy .ip-pick-i::before, html:not(.reduced) svg.is-sk { animation: ip-lazy 1.2s ease-in-out infinite alternate }
+.ip-pickwrap { max-width: 600px }
+.ip-pick-head { min-height: 2.8em; margin-bottom: 14px }
+@media (max-width: 640px) { .ip-pick-head { min-height: 4.2em } }
+@media (max-width: 640px) {
+  .ip-pick-b, .ip-pick-all, .st-row a { width: calc(var(--pl) + 8px) }
+  .ip-pick-tiles, .st-row ul { gap: 0 2px }
+  .ip-pick-tiles .ip-pick-b:nth-child(n+6), .st-row li:nth-child(n+6) { display: none }
+  .ip-pick-all, .st-row a.st-row-all { min-width: 0; margin-left: 6px }
+  .ip-pick-x { display: none }
+}
+@media (max-width: 380px) { .ip-pick.is-row, .st-row { --pl: 42px } .ip-pick-b, .ip-pick-all, .st-row a { width: calc(var(--pl) + 6px) } }
+@media print { .ip-pick.is-row, .st-row, .st-uses { display: none } }
+
+/* hub rows: the same tiles, as links to each style's page */
+.st-row li { position: relative; display: flex }
+.st-row li[hidden] { display: none }
+.st-row svg.is-sk { width: 24px; height: 24px }
+.st-switch { margin-top: clamp(24px, 3vw, 34px) }
+.st-switch-k { margin: 0 0 10px; font: 650 11.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+
+/* "What are you making?" */
+.st-uses { margin: 0 0 clamp(22px, 3vw, 30px) }
+.st-uses[hidden] { display: none }
+.st-uses-k { margin: 0 0 12px; font: 700 16px/1.3 var(--font-display); color: var(--ink) }
+.st-uses-row { display: flex; flex-wrap: wrap; gap: 8px }
+.st-uses-row button { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--rule-strong); background: var(--card); color: var(--ink); font: 600 14.5px/1 var(--font-sans); cursor: pointer; transition: background-color .16s ease-out, border-color .16s ease-out, color .16s ease-out }
+@media (hover: hover) and (pointer: fine) { .st-uses-row button:hover { border-color: var(--ink) } }
+.st-uses-row button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper) }
+.st-uses-row button:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+@media (max-width: 640px) {
+  .st-uses-row { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter, 16px)); padding: 2px var(--gutter, 16px) 6px; scroll-padding-inline: var(--gutter, 16px) }
+  .st-uses-row::-webkit-scrollbar { display: none }
+  .st-uses-row button { flex: none; min-height: 44px }
+}
+.st-best-wrap { margin-top: 16px; padding: clamp(14px, 2vw, 20px); border-radius: 24px; background: var(--paper-2) }
+.st-best-wrap[hidden] { display: none }
+.st-best-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 0 0 14px; font: 700 16px/1.3 var(--font-display); color: var(--ink) }
+.st-best-h span { font: 500 13.5px/1.3 var(--font-sans); color: var(--muted) }
+.st-best .st-badge { position: absolute; z-index: 1; top: 10px; left: 10px; padding: 4px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); font: 650 11px/1 var(--font-sans); letter-spacing: .01em; pointer-events: none }
+@media (min-width: 1100px) { .ip-allst .ip-styles.st-best, .st-cards.st-best { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
+.st-best .st-art, .st-best .ip-sc-art { background: var(--paper-2) }
+[data-style-card].is-match { box-shadow: 0 0 0 2px var(--ink); border-radius: 20px }
+
+/* the five groups */
+.st-group + .st-group, .st-uses + .st-group { margin-top: clamp(28px, 4vw, 44px) }
+.st-group-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 0 14px }
+.st-group-h h3 { margin: 0; font: 750 20px/1.2 var(--font-display); letter-spacing: -.01em; color: var(--ink) }
+.st-group-h p { margin: 0; font-size: 14.5px; line-height: 1.45; color: var(--muted) }
+
+/* icon page: every style, grouped. Cards are quiet: the drawing, the name, what it is good for; buttons on hover */
+.ip-allst .ip-styles { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; margin-inline: 0; padding: 0; gap: 10px }
+@media (min-width: 1100px) { .ip-allst .ip-styles { grid-template-columns: repeat(7, minmax(0, 1fr)) } }
+@media (min-width: 641px) and (max-width: 1099px) { .ip-allst .ip-styles { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) } }
+@media (max-width: 640px) { .ip-allst .ip-styles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px } }
+.ip-allst .ip-sc { position: relative; display: flex; flex-direction: column; padding: 10px 10px 12px; border-radius: 20px; grid-template-columns: none; grid-template-areas: none }
+.ip-allst .ip-sc:hover { transform: none; box-shadow: 0 14px 30px -24px rgba(17, 19, 24, .45) }
+.ip-allst .ip-sc.is-match, .ip-allst .ip-sc.is-match:hover { box-shadow: 0 0 0 2px var(--ink) }
+.ip-allst .ip-sc-art { grid-area: auto; height: 112px; padding: 0; margin: 0 0 10px; align-self: stretch; border-radius: 14px; background: var(--paper-2) }
+.ip-allst .ip-sc:hover .ip-sc-art { background: var(--paper-2); color: var(--ink) }
+.ip-allst .ip-sc-art svg { width: 56px; height: 56px }
+.ip-allst .ip-sc:hover .ip-sc-art svg { transform: scale(1.06) }
+.ip-sc h4 { display: flex; align-items: center; gap: 6px; margin: 0 2px; font: 720 16px/1.2 var(--font-display); color: var(--ink) }
+.ip-sc h4 a { color: inherit; text-decoration: none }
+.ip-sc h4 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px }
+.ip-sc h4 .ip-new, .st-t .ip-new { position: static; flex: none }
+.ip-allst .ip-sc p { grid-area: auto; flex: 1; margin: 4px 2px 10px; font-size: 13px; line-height: 1.4; color: var(--muted) }
+.ip-allst .ip-sc-act { grid-area: auto }
+.ip-allst .ip-sc-act button { height: 34px; font-size: 12.5px }
+.ip-allst .ip-sc-act button:last-child { width: 34px }
+@media (max-width: 640px) { .ip-allst .ip-sc-art { height: 92px } .ip-allst .ip-sc-art svg { width: 48px; height: 48px } }
+
+/* hubs: style cards */
+.st-cards { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none }
+@media (max-width: 1099px) { .st-cards { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) } }
+@media (max-width: 640px) { .st-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px } }
+.st-card { position: relative; display: flex; border-radius: 20px }
+.st-card a { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 14px; border-radius: 20px; background: var(--card); border: 1px solid var(--rule); color: var(--ink); text-decoration: none; transition: box-shadow .2s ease-out, border-color .2s ease-out }
+.st-art { display: grid; place-items: center; height: 96px; margin-bottom: 8px; border-radius: 14px; background: var(--paper-2) }
+.st-art svg { width: 48px; height: 48px; color: var(--ink); overflow: visible }
+.st-t { display: flex; align-items: center; gap: 6px; margin: 0 2px }
+.st-t b { font: 720 16px/1.2 var(--font-display) }
+.st-card small { margin: 0 2px; font-size: 13px; line-height: 1.4; color: var(--muted) }
+@media (hover: hover) and (pointer: fine) {
+  .st-card a:hover { border-color: var(--rule-strong); box-shadow: 0 14px 30px -24px rgba(17, 19, 24, .45) }
+  .st-card a:hover b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px }
+}
+.st-card a[aria-current] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink) }
+.st-card a[aria-current] .st-t::after { content: "This page"; margin-left: auto; font: 600 11px/1 var(--font-sans); color: var(--muted) }
+.st-card a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+.st-card svg.is-sk { width: 40px; height: 40px }
+@media (max-width: 640px) { .st-art { height: 84px } .st-art svg { width: 42px; height: 42px } .st-card a[aria-current] .st-t::after { content: none } }
+
+/* styles index: "What are you making?" as jobs, each with its best styles */
+.st-jobs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none }
+.st-job { padding: 18px 16px 14px; border-radius: 22px; background: var(--card); border: 1px solid var(--rule) }
+.st-job h3 { margin: 0 0 14px 4px; font: 720 17px/1.25 var(--font-display); color: var(--ink) }
+.st-job ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none }
+.st-job a { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 4px 2px 6px; border-radius: 14px; color: var(--ink); text-decoration: none; text-align: center }
+.st-job .st-art { width: 100%; height: auto; aspect-ratio: 1; max-width: 64px; margin: 0 }
+.st-job .st-art svg { width: 30px; height: 30px }
+.st-job svg.is-sk { width: 28px; height: 28px }
+.st-job .st-t { flex-direction: column; gap: 3px; margin: 0 }
+.st-job .st-t b { font: 650 13px/1.2 var(--font-sans) }
+.st-job .st-t small { font: 600 10.5px/1 var(--font-sans); color: var(--muted) }
+.st-job li:first-child .st-art { background: var(--card); box-shadow: inset 0 0 0 2px var(--ink) }
+@media (hover: hover) and (pointer: fine) {
+  .st-job a:hover .st-art { background: var(--card); box-shadow: inset 0 0 0 1px var(--rule-strong), 0 6px 16px -10px rgba(17, 19, 24, .35) }
+  .st-job li:first-child a:hover .st-art { box-shadow: inset 0 0 0 2px var(--ink) }
+  .st-job a:hover b { text-decoration: underline; text-underline-offset: 3px }
+}
+.st-job a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus-halo) }
+
+/* styles index: the comparison table waits behind one quiet disclosure */
+.st-compare { border-radius: 22px; background: var(--card); border: 1px solid var(--rule) }
+.st-compare > summary { display: flex; flex-direction: column; gap: 6px; padding: 22px 56px 22px 22px; cursor: pointer; list-style: none; position: relative }
+.st-compare > summary::-webkit-details-marker { display: none }
+.st-compare > summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font: 400 26px/1 var(--font-sans); color: var(--muted) }
+.st-compare[open] > summary::after { content: "\2013" }
+.st-compare > summary small { font-size: 14.5px; color: var(--muted) }
+.st-compare > summary:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 22px }
+.st-compare .hub-table-wrap { border: 0; border-radius: 0 0 22px 22px; border-top: 1px solid var(--rule) }
+/* calm hero strips (category pages, the indexes): neutral tiles, each drawing in its own style, one ink tile for rhythm */
+.hub-strip.is-calm span { background: var(--card); color: var(--ink); border: 1px solid var(--rule); box-shadow: 0 18px 34px -30px rgba(17, 19, 24, .45) }
+.hub-strip.is-calm span:nth-child(5) { background: var(--paper-2) }
+.st-jobs { grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)) }
+.st-job.is-more { display: flex; padding: 0; background: transparent; border-style: dashed; border-color: var(--rule-strong) }
+.st-job.is-more a { flex: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; padding: 18px 20px; border-radius: 22px; color: var(--ink); text-decoration: none }
+.st-job.is-more .st-row-i { --pl: 44px; background: transparent; box-shadow: inset 0 0 0 1.5px var(--rule-strong); margin-bottom: 6px }
+.st-job.is-more .st-row-i svg { width: 22px; height: 22px }
+.st-job.is-more b { font: 720 17px/1.25 var(--font-display) }
+.st-job.is-more small { font-size: 14px; color: var(--muted) }
+@media (hover: hover) and (pointer: fine) { .st-job.is-more a:hover b { text-decoration: underline; text-underline-offset: 3px } }
+
+/* "Download all" (site/downloads/*.zip, forge/tools/site-seo.mjs dlButton / dlSet; css/download-all.css styles the button) */
+.ip-head > p.ip-dlset { flex: 1 1 100%; max-width: none; margin-top: -4px; font-size: 14px }
+.ip-head .ip-dlset a { white-space: normal; display: inline-flex; align-items: center; gap: 8px; font-weight: 600 }
+.ip-dlset svg { flex: none; width: 18px; height: 18px; color: var(--sc) }
+.ip-dlset small { color: var(--muted); font-weight: 500; font-size: 1em }
+.ip-dlset[hidden] { display: none }
+
+
+/* ─────────── speed: below-the-fold sections render when they come near ───────────
+   content-visibility skips their layout and paint until then (and after every font swap), so the hero paints sooner;
+   `auto` remembers each section's real height once it has been drawn. Find-in-page, anchors and screen readers still
+   see everything. */
+.ip-section, .hub-group { content-visibility: auto; contain-intrinsic-size: auto 900px }
+.hub-group { contain-intrinsic-size: auto 640px }
+/* (an in-page jump to #styles, #faq…: everything renders first, so the browser lands exactly on the target) */
+html:has(:target) :is(.ip-section, .hub-group) { content-visibility: visible }

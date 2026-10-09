@@ -1,0 +1,50 @@
+{
+  "name": "gulal",
+  "intent": "puffs of colour powder float up from the bowls",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tada"
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 2
+    },
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        15
+      ],
+      "amount": 0.6
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "holi-splash",
+      "effect": "morph"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "circuit-board",
+  "intent": "current runs along the traces as the board powers up",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "glow",
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "cpu",
+      "effect": "flip"
+    },
+    {
+      "to": "brain-circuit",
+      "effect": "morph"
+    }
+  ]
+}

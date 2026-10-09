@@ -1,0 +1,53 @@
+{
+  "name": "chocolate-box",
+  "intent": "the heart box beats with sweet truffles",
+  "loop": {
+    "preset": "beat",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "amount": 0.8,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "fade"
+    },
+    {
+      "to": "choco-strawberry",
+      "effect": "flip"
+    }
+  ]
+}

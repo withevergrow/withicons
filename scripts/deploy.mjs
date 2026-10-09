@@ -43,6 +43,10 @@ const YEAR = 31536000
 const CLASSES = [
   { name: 'hashed', test: k => /\.[0-9a-f]{8,}\.[a-z0-9]+$/i.test(k), cc: `public, max-age=${YEAR}, immutable` },
   { name: 'fonts', test: k => /^fonts\/.*\.(woff2?|ttf|otf)$/.test(k), cc: `public, max-age=${YEAR}, immutable` },
+  // 'Download all' zips (forge/tools/site-downloads.mjs): stable names (with-icons-<style>.zip, linked from pages and
+  // data/downloads.json), deterministic bytes, so only changed zips upload and get invalidated below. Browsers recheck
+  // hourly; CloudFront keeps them until a deploy invalidates the changed ones.
+  { name: 'zips', test: k => /^downloads\/[^/]+\.zip$/.test(k), cc: `public, max-age=3600, s-maxage=${YEAR}, stale-while-revalidate=86400` },
   { name: 'html', test: k => k.endsWith('.html'), cc: 'public, max-age=300, s-maxage=86400, stale-while-revalidate=86400, stale-if-error=604800' },
   { name: 'data', test: k => /^data\/.*\.js$/.test(k), cc: `public, max-age=86400, s-maxage=${YEAR}, stale-while-revalidate=604800` },
   { name: 'js-css', test: k => /\.(m?js|css)$/.test(k), cc: `public, max-age=3600, s-maxage=${YEAR}, stale-while-revalidate=86400` },
@@ -57,7 +61,7 @@ const TYPES = {
   png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', avif: 'image/avif', gif: 'image/gif',
   ico: 'image/x-icon', woff2: 'font/woff2', woff: 'font/woff', ttf: 'font/ttf', otf: 'font/otf',
   txt: 'text/plain; charset=utf-8', xml: 'application/xml; charset=utf-8', md: 'text/markdown; charset=utf-8',
-  ts: 'text/plain; charset=utf-8', webmanifest: 'application/manifest+json', pdf: 'application/pdf',
+  ts: 'text/plain; charset=utf-8', webmanifest: 'application/manifest+json', pdf: 'application/pdf', zip: 'application/zip',
 }
 // Never published: authoring docs and dotfiles.
 const EXCLUDE = [/^DESIGN\.md$/, /(^|\/)\./, /\.map$/, /(^|\/)Thumbs\.db$/]
@@ -142,6 +146,15 @@ function walk(dir, base = dir, out = []) {
   return out
 }
 const md5 = f => crypto.createHash('md5').update(fs.readFileSync(f)).digest('hex')
+// `aws s3 cp` uploads files of 8 MB and more in 8 MB parts; S3 then reports the ETag md5(part md5s)-<parts>, not the
+// file's MD5 (the all-styles download zip is ~36 MB). Compute that form so unchanged big files are not re-uploaded.
+const PART = 8 * 1048576
+function multipartEtag(f) {
+  const b = fs.readFileSync(f), parts = []
+  for (let o = 0; o < b.length; o += PART) parts.push(crypto.createHash('md5').update(b.subarray(o, o + PART)).digest())
+  return crypto.createHash('md5').update(Buffer.concat(parts)).digest('hex') + '-' + parts.length
+}
+const sameEtag = (etag, l) => etag === l.md5 || (etag.includes('-') && etag === multipartEtag(l.file))
 
 const plan = { uploads: [], deletes: [], invalidate: [] }
 let changedKeys = []
@@ -159,7 +172,7 @@ if (!flag('skip-site')) {
   }
   for (const [k, l] of local) {
     const r = remote.get(k)
-    if (flag('force') || !r || r.etag !== l.md5) plan.uploads.push({ key: k, ...l, isNew: !r })
+    if (flag('force') || !r || !sameEtag(r.etag, l)) plan.uploads.push({ key: k, ...l, isNew: !r })
   }
   for (const k of remote.keys()) if (!local.has(k)) plan.deletes.push(k)
   changedKeys = [...plan.uploads.filter(u => !u.isNew).map(u => u.key), ...plan.deletes]

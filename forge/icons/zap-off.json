@@ -1,0 +1,56 @@
+{
+  "name": "zap-off",
+  "category": "devices",
+  "description": "A lightning bolt crossed out, for power off and no charge.",
+  "aliases": [
+    "no-power",
+    "lightning-off",
+    "bolt-off",
+    "flash-off",
+    "no-charge",
+    "unpowered",
+    "electricity-off"
+  ],
+  "synonyms": [
+    "power off",
+    "power outage",
+    "blackout",
+    "no electricity",
+    "not charging",
+    "disconnected",
+    "flash disabled",
+    "no flash",
+    "disable",
+    "energy off",
+    "power cut",
+    "outage",
+    "offline",
+    "zap disabled",
+    "turn off",
+    "unplugged",
+    "electric off",
+    "no energy"
+  ],
+  "tags": [
+    "power",
+    "electricity",
+    "off",
+    "bolt",
+    "energy"
+  ],
+  "paths": [
+    {
+      "d": "M13.1 8.5 L13.5 2.5 L10.69 6.09 M6.65 11.25 L4.5 14 L9.4 14 M10.9 15.5 L10.5 21.5 L13.31 17.91 M17.35 12.75 L19.5 10 L14.6 10",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M13.01 9.83 L13.5 2.5 L10.07 6.89 L16.73 13.54 L19.5 10 L13.18 10 L13.01 9.83 Z",
+    "M7.27 10.46 L4.5 14 L10.82 14 L10.99 14.17 L10.5 21.5 L13.93 17.11 L7.27 10.46 Z"
+  ],
+  "cutouts": []
+}

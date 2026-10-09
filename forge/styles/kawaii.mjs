@@ -15,6 +15,8 @@
 // Bodies are laid at 55-72% opacity: soft pastels on white, jewel tones on dark.
 // Per-icon expression / position / colour: ./_kawaii-tune.mjs.
 import { render as renderCore, INK } from './_kawaii-core.mjs'
+import { kawaiiSnowman } from './_kawaii-snowman.mjs'
+import { kawaiiDragon } from './_kawaii-dragon.mjs'
 
 export default {
   name: 'kawaii',
@@ -24,6 +26,9 @@ export default {
   strokeWidth: INK,
   root: { fill: 'none', stroke: 'currentColor', 'stroke-width': INK, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
   render(icon) {
+    // hand-drawn per-icon drawings (the skeleton stays the base for every other style)
+    if (icon.name === 'snowman' && !icon.params) { try { return kawaiiSnowman() } catch { /* the generic build below */ } }
+    if (icon.name === 'dragon-head' && !icon.params) { try { return kawaiiDragon() } catch { /* the generic build below */ } }
     try {
       const nodes = renderCore(icon)
       if (nodes && nodes.length) return nodes

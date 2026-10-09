@@ -1,0 +1,39 @@
+{
+  "name": "cloud-drizzle",
+  "intent": "a light drizzle falls from a soft cloud",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "float",
+    "amount": 1,
+    "duration": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.7,
+      "duration": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "drop"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud",
+      "effect": "fade"
+    }
+  ]
+}

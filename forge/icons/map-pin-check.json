@@ -1,0 +1,56 @@
+{
+  "name": "map-pin-check",
+  "category": "maps",
+  "description": "A map pin with a check, for confirmed locations and check-ins.",
+  "aliases": [
+    "location-check",
+    "check-in",
+    "location-confirmed",
+    "verified-location",
+    "pin-check",
+    "checked-in",
+    "visited"
+  ],
+  "synonyms": [
+    "checkin",
+    "arrived",
+    "destination reached",
+    "confirmed address",
+    "verified address",
+    "location saved",
+    "place visited",
+    "been here",
+    "delivered",
+    "delivery confirmed",
+    "geotag",
+    "marker",
+    "pin",
+    "location",
+    "map marker check",
+    "here",
+    "attendance"
+  ],
+  "tags": [
+    "location",
+    "map",
+    "check",
+    "confirmed",
+    "pin"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 10 L11 12.5 L15.5 8",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z"
+  ],
+  "cutouts": [
+    "M8.5 10 L11 12.5 L15.5 8"
+  ]
+}

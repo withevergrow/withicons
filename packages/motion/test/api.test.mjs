@@ -74,7 +74,8 @@ test('motionFor returns specs, null for unknown', () => {
 })
 
 test('PRESETS / EFFECTS are the closed vocabulary', () => {
-  assert.equal(M.PRESETS.length, 32)
+  assert.equal(M.PRESETS.length, 47)   // 32 flat + 12 3D + 3 part moves (run 12)
+  assert.equal(M.PRESETS_3D.length, 15)
   assert.equal(M.EFFECTS.length, 12)
   assert.ok(M.PRESETS.includes('spin-once') && M.EFFECTS.includes('slide-up'))
 })

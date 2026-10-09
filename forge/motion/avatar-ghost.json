@@ -1,0 +1,9 @@
+{
+  "name": "avatar-ghost",
+  "intent": "floats and fades softly, like a friendly little ghost",
+  "loop": { "preset": "float", "amount": 1, "duration": 2.8 },
+  "hover": { "preset": "wiggle", "origin": [12,21], "amount": 0.8 },
+  "parts": { "A": { "preset": "blink", "origin": [12,11.5], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "breathe" },{ "preset": "flicker" }],
+  "swap": [{ "to": "ghost", "effect": "fade" },{ "to": "avatar-ghost@solid", "effect": "blur" }]
+}

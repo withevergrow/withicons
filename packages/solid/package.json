@@ -1,7 +1,7 @@
 {
   "name": "@withicons/solid",
   "version": "0.3.1",
-  "description": "500 icons x 20 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
+  "description": "734 icons x 34 styles as tree-shakable SolidJS components (no JSX compile step, SSR + hydration).",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -52,7 +52,21 @@
     "gothic-icons",
     "pastel-icons",
     "coquette-icons",
-    "plush-icons"
+    "plush-icons",
+    "clay-icons",
+    "bento-icons",
+    "suite-icons",
+    "dock-icons",
+    "liquid-icons",
+    "chrome-icons",
+    "soft3d-icons",
+    "brutal-icons",
+    "utsav-icons",
+    "rangoli-icons",
+    "halloween-icons",
+    "christmas-icons",
+    "lunar-icons",
+    "valentine-icons"
   ],
   "type": "module",
   "sideEffects": false,
@@ -291,6 +305,160 @@
         "default": "./dist/plush/index.cjs"
       }
     },
+    "./clay": {
+      "solid": "./dist/clay/index.js",
+      "import": {
+        "types": "./dist/clay/index.d.ts",
+        "default": "./dist/clay/index.js"
+      },
+      "require": {
+        "types": "./dist/clay/index.d.cts",
+        "default": "./dist/clay/index.cjs"
+      }
+    },
+    "./bento": {
+      "solid": "./dist/bento/index.js",
+      "import": {
+        "types": "./dist/bento/index.d.ts",
+        "default": "./dist/bento/index.js"
+      },
+      "require": {
+        "types": "./dist/bento/index.d.cts",
+        "default": "./dist/bento/index.cjs"
+      }
+    },
+    "./suite": {
+      "solid": "./dist/suite/index.js",
+      "import": {
+        "types": "./dist/suite/index.d.ts",
+        "default": "./dist/suite/index.js"
+      },
+      "require": {
+        "types": "./dist/suite/index.d.cts",
+        "default": "./dist/suite/index.cjs"
+      }
+    },
+    "./dock": {
+      "solid": "./dist/dock/index.js",
+      "import": {
+        "types": "./dist/dock/index.d.ts",
+        "default": "./dist/dock/index.js"
+      },
+      "require": {
+        "types": "./dist/dock/index.d.cts",
+        "default": "./dist/dock/index.cjs"
+      }
+    },
+    "./liquid": {
+      "solid": "./dist/liquid/index.js",
+      "import": {
+        "types": "./dist/liquid/index.d.ts",
+        "default": "./dist/liquid/index.js"
+      },
+      "require": {
+        "types": "./dist/liquid/index.d.cts",
+        "default": "./dist/liquid/index.cjs"
+      }
+    },
+    "./chrome": {
+      "solid": "./dist/chrome/index.js",
+      "import": {
+        "types": "./dist/chrome/index.d.ts",
+        "default": "./dist/chrome/index.js"
+      },
+      "require": {
+        "types": "./dist/chrome/index.d.cts",
+        "default": "./dist/chrome/index.cjs"
+      }
+    },
+    "./soft3d": {
+      "solid": "./dist/soft3d/index.js",
+      "import": {
+        "types": "./dist/soft3d/index.d.ts",
+        "default": "./dist/soft3d/index.js"
+      },
+      "require": {
+        "types": "./dist/soft3d/index.d.cts",
+        "default": "./dist/soft3d/index.cjs"
+      }
+    },
+    "./brutal": {
+      "solid": "./dist/brutal/index.js",
+      "import": {
+        "types": "./dist/brutal/index.d.ts",
+        "default": "./dist/brutal/index.js"
+      },
+      "require": {
+        "types": "./dist/brutal/index.d.cts",
+        "default": "./dist/brutal/index.cjs"
+      }
+    },
+    "./utsav": {
+      "solid": "./dist/utsav/index.js",
+      "import": {
+        "types": "./dist/utsav/index.d.ts",
+        "default": "./dist/utsav/index.js"
+      },
+      "require": {
+        "types": "./dist/utsav/index.d.cts",
+        "default": "./dist/utsav/index.cjs"
+      }
+    },
+    "./rangoli": {
+      "solid": "./dist/rangoli/index.js",
+      "import": {
+        "types": "./dist/rangoli/index.d.ts",
+        "default": "./dist/rangoli/index.js"
+      },
+      "require": {
+        "types": "./dist/rangoli/index.d.cts",
+        "default": "./dist/rangoli/index.cjs"
+      }
+    },
+    "./halloween": {
+      "solid": "./dist/halloween/index.js",
+      "import": {
+        "types": "./dist/halloween/index.d.ts",
+        "default": "./dist/halloween/index.js"
+      },
+      "require": {
+        "types": "./dist/halloween/index.d.cts",
+        "default": "./dist/halloween/index.cjs"
+      }
+    },
+    "./christmas": {
+      "solid": "./dist/christmas/index.js",
+      "import": {
+        "types": "./dist/christmas/index.d.ts",
+        "default": "./dist/christmas/index.js"
+      },
+      "require": {
+        "types": "./dist/christmas/index.d.cts",
+        "default": "./dist/christmas/index.cjs"
+      }
+    },
+    "./lunar": {
+      "solid": "./dist/lunar/index.js",
+      "import": {
+        "types": "./dist/lunar/index.d.ts",
+        "default": "./dist/lunar/index.js"
+      },
+      "require": {
+        "types": "./dist/lunar/index.d.cts",
+        "default": "./dist/lunar/index.cjs"
+      }
+    },
+    "./valentine": {
+      "solid": "./dist/valentine/index.js",
+      "import": {
+        "types": "./dist/valentine/index.d.ts",
+        "default": "./dist/valentine/index.js"
+      },
+      "require": {
+        "types": "./dist/valentine/index.d.cts",
+        "default": "./dist/valentine/index.cjs"
+      }
+    },
     "./icon": {
       "types": "./dist/icon.d.ts",
       "solid": "./dist/icon.js",
@@ -400,6 +568,76 @@
       "types": "./dist/plush/deep.d.ts",
       "solid": "./dist/plush/icons/*.js",
       "default": "./dist/plush/icons/*.js"
+    },
+    "./clay/icons/*": {
+      "types": "./dist/clay/deep.d.ts",
+      "solid": "./dist/clay/icons/*.js",
+      "default": "./dist/clay/icons/*.js"
+    },
+    "./bento/icons/*": {
+      "types": "./dist/bento/deep.d.ts",
+      "solid": "./dist/bento/icons/*.js",
+      "default": "./dist/bento/icons/*.js"
+    },
+    "./suite/icons/*": {
+      "types": "./dist/suite/deep.d.ts",
+      "solid": "./dist/suite/icons/*.js",
+      "default": "./dist/suite/icons/*.js"
+    },
+    "./dock/icons/*": {
+      "types": "./dist/dock/deep.d.ts",
+      "solid": "./dist/dock/icons/*.js",
+      "default": "./dist/dock/icons/*.js"
+    },
+    "./liquid/icons/*": {
+      "types": "./dist/liquid/deep.d.ts",
+      "solid": "./dist/liquid/icons/*.js",
+      "default": "./dist/liquid/icons/*.js"
+    },
+    "./chrome/icons/*": {
+      "types": "./dist/chrome/deep.d.ts",
+      "solid": "./dist/chrome/icons/*.js",
+      "default": "./dist/chrome/icons/*.js"
+    },
+    "./soft3d/icons/*": {
+      "types": "./dist/soft3d/deep.d.ts",
+      "solid": "./dist/soft3d/icons/*.js",
+      "default": "./dist/soft3d/icons/*.js"
+    },
+    "./brutal/icons/*": {
+      "types": "./dist/brutal/deep.d.ts",
+      "solid": "./dist/brutal/icons/*.js",
+      "default": "./dist/brutal/icons/*.js"
+    },
+    "./utsav/icons/*": {
+      "types": "./dist/utsav/deep.d.ts",
+      "solid": "./dist/utsav/icons/*.js",
+      "default": "./dist/utsav/icons/*.js"
+    },
+    "./rangoli/icons/*": {
+      "types": "./dist/rangoli/deep.d.ts",
+      "solid": "./dist/rangoli/icons/*.js",
+      "default": "./dist/rangoli/icons/*.js"
+    },
+    "./halloween/icons/*": {
+      "types": "./dist/halloween/deep.d.ts",
+      "solid": "./dist/halloween/icons/*.js",
+      "default": "./dist/halloween/icons/*.js"
+    },
+    "./christmas/icons/*": {
+      "types": "./dist/christmas/deep.d.ts",
+      "solid": "./dist/christmas/icons/*.js",
+      "default": "./dist/christmas/icons/*.js"
+    },
+    "./lunar/icons/*": {
+      "types": "./dist/lunar/deep.d.ts",
+      "solid": "./dist/lunar/icons/*.js",
+      "default": "./dist/lunar/icons/*.js"
+    },
+    "./valentine/icons/*": {
+      "types": "./dist/valentine/deep.d.ts",
+      "solid": "./dist/valentine/icons/*.js",
+      "default": "./dist/valentine/icons/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -530,6 +768,90 @@
       ],
       "plush/icons/*": [
         "./dist/plush/deep.d.ts"
+      ],
+      "clay": [
+        "./dist/clay/index.d.ts"
+      ],
+      "clay/icons/*": [
+        "./dist/clay/deep.d.ts"
+      ],
+      "bento": [
+        "./dist/bento/index.d.ts"
+      ],
+      "bento/icons/*": [
+        "./dist/bento/deep.d.ts"
+      ],
+      "suite": [
+        "./dist/suite/index.d.ts"
+      ],
+      "suite/icons/*": [
+        "./dist/suite/deep.d.ts"
+      ],
+      "dock": [
+        "./dist/dock/index.d.ts"
+      ],
+      "dock/icons/*": [
+        "./dist/dock/deep.d.ts"
+      ],
+      "liquid": [
+        "./dist/liquid/index.d.ts"
+      ],
+      "liquid/icons/*": [
+        "./dist/liquid/deep.d.ts"
+      ],
+      "chrome": [
+        "./dist/chrome/index.d.ts"
+      ],
+      "chrome/icons/*": [
+        "./dist/chrome/deep.d.ts"
+      ],
+      "soft3d": [
+        "./dist/soft3d/index.d.ts"
+      ],
+      "soft3d/icons/*": [
+        "./dist/soft3d/deep.d.ts"
+      ],
+      "brutal": [
+        "./dist/brutal/index.d.ts"
+      ],
+      "brutal/icons/*": [
+        "./dist/brutal/deep.d.ts"
+      ],
+      "utsav": [
+        "./dist/utsav/index.d.ts"
+      ],
+      "utsav/icons/*": [
+        "./dist/utsav/deep.d.ts"
+      ],
+      "rangoli": [
+        "./dist/rangoli/index.d.ts"
+      ],
+      "rangoli/icons/*": [
+        "./dist/rangoli/deep.d.ts"
+      ],
+      "halloween": [
+        "./dist/halloween/index.d.ts"
+      ],
+      "halloween/icons/*": [
+        "./dist/halloween/deep.d.ts"
+      ],
+      "christmas": [
+        "./dist/christmas/index.d.ts"
+      ],
+      "christmas/icons/*": [
+        "./dist/christmas/deep.d.ts"
+      ],
+      "lunar": [
+        "./dist/lunar/index.d.ts"
+      ],
+      "lunar/icons/*": [
+        "./dist/lunar/deep.d.ts"
+      ],
+      "valentine": [
+        "./dist/valentine/index.d.ts"
+      ],
+      "valentine/icons/*": [
+        "./dist/valentine/deep.d.ts"
       ]
     }
   },

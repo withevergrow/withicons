@@ -1,0 +1,42 @@
+{
+  "name": "blocks",
+  "intent": "the loose block wiggles into place like an add-on snapping in",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        17.5,
+        6.5
+      ],
+      "amount": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "component",
+      "effect": "morph"
+    },
+    {
+      "to": "blocks@solid",
+      "effect": "scale"
+    }
+  ]
+}

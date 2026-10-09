@@ -31,7 +31,7 @@ export const CASES = [
   ['downloading', 'download', 1],
   ['uploaded', 'upload', 1],
   ['messages', ['messages', 'message-square', 'message-circle'], 1],
-  ['charts', ['chart-bar', 'chart-line', 'chart-pie', 'chart-area'], 1],
+  ['charts', ['chart-bar', 'chart-line', 'chart-pie', 'chart-area', 'chart-scatter', 'chart-candlestick', 'chart-column-stacked', 'chart-funnel'], 1],
   ['batteries', 'battery', 1],
   ['bookmarks', ['bookmark', 'bookmark-plus'], 1], // 2026-10: bookmark-plus joined the set
 
@@ -203,7 +203,7 @@ export const HARD = [
   ['copy to clipboard', ['copy', 'clipboard'], 2],
   ['open in new tab', 'external-link', 1],
   ['attach file', 'paperclip', 1],
-  ['user settings', ['user', 'settings', 'user-circle'], 3],
+  ['user settings', ['user', 'settings', 'user-circle', 'user-cog'], 3],
   ['bank', ['landmark', 'piggy-bank'], 1], // 2026-10: piggy-bank joined the set
   ['receipt', 'receipt', 1],
   ['invoice', 'receipt', 1],
@@ -277,7 +277,7 @@ export const MISSPELL = [
   ['shuffel', 'shuffle', 1],
   ['volumn', 'volume', 1],
   ['compas', 'compass', 1],
-  ['recipt', 'receipt', 1],
+  ['recipt', ['receipt', 'receipt-text'], 1],
   ['reciept', 'receipt', 1],
   ['tempreture', 'thermometer', 3],
   ['brifcase', 'briefcase', 1],

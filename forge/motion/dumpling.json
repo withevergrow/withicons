@@ -1,0 +1,36 @@
+{
+  "name": "dumpling",
+  "intent": "a fresh dumpling steams and wobbles",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      19.75
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 1.8
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chopsticks",
+      "effect": "slide-up"
+    }
+  ]
+}

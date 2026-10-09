@@ -1,0 +1,49 @@
+{
+  "name": "bot-off",
+  "intent": "the switched-off robot dozes, breathing slowly as if powered down",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "amount": 0.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "blink",
+      "origin": [
+        12,
+        15
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "bot",
+      "effect": "fade"
+    },
+    {
+      "to": "bot@solid",
+      "effect": "scale"
+    }
+  ]
+}

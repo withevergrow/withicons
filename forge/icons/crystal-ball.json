@@ -1,0 +1,73 @@
+{
+  "name": "crystal-ball",
+  "category": "halloween",
+  "description": "A crystal ball on a stand, for fortune telling and Halloween.",
+  "aliases": [
+    "fortune-teller",
+    "fortune",
+    "orb",
+    "magic-ball",
+    "scrying-orb",
+    "seer",
+    "psychic",
+    "prophecy"
+  ],
+  "tags": [
+    "halloween",
+    "magic",
+    "fortune",
+    "prediction",
+    "mystic"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 10 A7.5 7.5 0 1 1 4.5 10 A7.5 7.5 0 1 1 19.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.25 16.5 L6 21 H18 L15.75 16.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6.5 C12.4 8.9 13.1 9.6 15.5 10 C13.1 10.4 12.4 11.1 12 13.5 C11.6 11.1 10.9 10.4 8.5 10 C10.9 9.6 11.6 8.9 12 6.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M19.5 10 A7.5 7.5 0 1 1 4.5 10 A7.5 7.5 0 1 1 19.5 10 Z",
+    "M8.25 16.5 L6 21 H18 L15.75 16.5 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 C12.4 8.9 13.1 9.6 15.5 10 C13.1 10.4 12.4 11.1 12 13.5 C11.6 11.1 10.9 10.4 8.5 10 C10.9 9.6 11.6 8.9 12 6.5 Z",
+    "M7 8 A5.25 5.25 0 0 1 9.5 5.25",
+    "M8.25 16.5 A7.5 7.5 0 0 0 15.75 16.5"
+  ],
+  "synonyms": [
+    "fortune telling",
+    "future",
+    "predict",
+    "prediction",
+    "forecast",
+    "foresee",
+    "foresight",
+    "clairvoyant",
+    "clairvoyance",
+    "divination",
+    "oracle",
+    "mystic",
+    "mystical",
+    "occult",
+    "tarot",
+    "medium",
+    "seance",
+    "magic",
+    "wizard",
+    "witch",
+    "carnival",
+    "what's next",
+    "insight",
+    "ai prediction",
+    "halloween",
+    "chrystal ball"
+  ]
+}

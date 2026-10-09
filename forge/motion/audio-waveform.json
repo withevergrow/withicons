@@ -1,0 +1,35 @@
+{
+  "name": "audio-waveform",
+  "intent": "the waveform swells and settles like a voice speaking",
+  "loop": {
+    "preset": "jelly",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "pulse",
+    "amount": 1.2,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "audio-lines",
+      "effect": "morph"
+    },
+    {
+      "to": "microphone",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "paper-fan",
+  "category": "lunar-new-year",
+  "description": "An open folding paper fan, for festivals and East Asian decor.",
+  "aliases": [
+    "folding-fan",
+    "hand-fan",
+    "chinese-fan",
+    "japanese-fan",
+    "sensu",
+    "silk-fan",
+    "open-fan"
+  ],
+  "synonyms": [
+    "fan",
+    "hand fan",
+    "shan zi",
+    "uchiwa",
+    "buchae",
+    "dance fan",
+    "festival",
+    "lunar new year",
+    "chinese new year",
+    "east asian",
+    "decor",
+    "cool",
+    "summer",
+    "elegant",
+    "traditional",
+    "souvenir",
+    "opera",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "decor",
+    "accessory",
+    "festival"
+  ],
+  "paths": [
+    {
+      "d": "M8 16 L1.75 12.25 A5.5 5.5 0 0 1 6.25 8 A5.5 5.5 0 0 1 12 6.5 A5.5 5.5 0 0 1 17.75 8 A5.5 5.5 0 0 1 22.25 12.25 L16 16 A4.75 4.75 0 0 0 8 16 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.75 14.25 L6.25 8",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13.75 L12 6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.25 14.25 L17.75 8",
+      "plate": "A"
+    },
+    {
+      "d": "M8 16 L12 18.5 L16 16",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 18.5 A1.5 1.5 0 1 1 10.5 18.5 A1.5 1.5 0 1 1 13.5 18.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8 16 L1.75 12.25 A5.5 5.5 0 0 1 6.25 8 A5.5 5.5 0 0 1 12 6.5 A5.5 5.5 0 0 1 17.75 8 A5.5 5.5 0 0 1 22.25 12.25 L16 16 A4.75 4.75 0 0 0 8 16 Z",
+    "M13.5 18.5 A1.5 1.5 0 1 1 10.5 18.5 A1.5 1.5 0 1 1 13.5 18.5 Z"
+  ],
+  "cutouts": [
+    "M9.75 14.25 L6.25 8",
+    "M12 13.75 L12 6.5",
+    "M14.25 14.25 L17.75 8"
+  ]
+}

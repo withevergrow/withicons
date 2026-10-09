@@ -1,0 +1,80 @@
+{
+  "name": "lunar-drum",
+  "category": "lunar-new-year",
+  "description": "A festival drum with studs, for Lunar New Year parades.",
+  "aliases": [
+    "festival-drum",
+    "chinese-drum",
+    "lion-dance-drum",
+    "parade-drum",
+    "barrel-drum",
+    "new-year-drum"
+  ],
+  "synonyms": [
+    "drum",
+    "drums",
+    "percussion",
+    "beat",
+    "rhythm",
+    "music",
+    "gu",
+    "buk",
+    "taiko",
+    "drumsticks",
+    "lion dance",
+    "dragon dance",
+    "parade",
+    "lunar new year",
+    "chinese new year",
+    "spring festival",
+    "celebration",
+    "festival",
+    "tet",
+    "cny"
+  ],
+  "tags": [
+    "lunar-new-year",
+    "music",
+    "festival",
+    "percussion"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 9.5 A8.5 2.75 0 1 1 3.5 9.5 A8.5 2.75 0 1 1 20.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 9.5 C3 12.5 3 15.5 3.5 18.5 A8.5 2.75 0 0 0 20.5 18.5 C21 15.5 21 12.5 20.5 9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 14.25 V14.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12 15 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 14.25 V14.75",
+      "plate": "A"
+    },
+    {
+      "d": "M7 2.5 L14.5 6.25",
+      "plate": "S"
+    },
+    {
+      "d": "M17 2.5 L9.5 6.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.5 9.5 A8.5 2.75 0 0 1 20.5 9.5 C21 12.5 21 15.5 20.5 18.5 A8.5 2.75 0 0 1 3.5 18.5 C3 15.5 3 12.5 3.5 9.5 Z"
+  ],
+  "cutouts": [
+    "M20.5 9.5 A8.5 2.75 0 1 1 3.5 9.5 A8.5 2.75 0 1 1 20.5 9.5",
+    "M6.5 14.25 V14.75",
+    "M12 15 V15.5",
+    "M17.5 14.25 V14.75"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "name": "snowman",
+  "category": "christmas",
+  "description": "A snowman with a top hat, a scarf and twig arms, for winter and Christmas.",
+  "aliases": [
+    "snow-man",
+    "frosty",
+    "snowperson",
+    "snow-figure",
+    "winter-man",
+    "snowmen"
+  ],
+  "synonyms": [
+    "christmas",
+    "xmas",
+    "holiday",
+    "holidays",
+    "festive",
+    "december",
+    "noel",
+    "merry christmas",
+    "happy holidays",
+    "seasons greetings",
+    "winter",
+    "snow",
+    "snow day",
+    "cold",
+    "frozen",
+    "build a snowman",
+    "top hat",
+    "scarf",
+    "carrot nose",
+    "snowball",
+    "winter holidays",
+    "winter sale",
+    "kids",
+    "snowmman"
+  ],
+  "tags": [
+    "winter",
+    "snow",
+    "christmas",
+    "holiday",
+    "cold"
+  ],
+  "paths": [
+    {
+      "d": "M10.2 5 A3.5 3.5 0 0 0 10 10.9 A5.5 5.5 0 1 0 14 10.9 A3.5 3.5 0 0 0 13.8 5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 5 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.75 5 V3 A1 1 0 0 1 10.75 2 H13.25 A1 1 0 0 1 14.25 3 V5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 11 C11 12 13 12 15 11",
+      "plate": "A"
+    },
+    {
+      "d": "M10.75 7.25 H11 M13 7.25 H13.25",
+      "plate": "A"
+    },
+    {
+      "d": "M12 9 L14 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.75 14 L4.5 12.5 M4.5 12.5 V10.25 M4.5 12.5 L2.5 12.25",
+      "plate": "A"
+    },
+    {
+      "d": "M17.25 14 L19.5 12.5 M19.5 12.5 V10.25 M19.5 12.5 L21.5 12.25",
+      "plate": "A"
+    },
+    {
+      "d": "M11.75 14.75 H12.25 M11.75 18 H12.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10.2 5 A3.5 3.5 0 0 0 10 10.9 A5.5 5.5 0 1 0 14 10.9 A3.5 3.5 0 0 0 13.8 5 Z",
+    "M9.75 5 V3 A1 1 0 0 1 10.75 2 H13.25 A1 1 0 0 1 14.25 3 V5 Z",
+    "M7.5 4.25 H16.5 V5.75 H7.5 Z"
+  ],
+  "cutouts": [
+    "M8 5 H16",
+    "M9 11 C11 12 13 12 15 11",
+    "M11.35 7.25 A0.6 0.6 0 1 1 10.15 7.25 A0.6 0.6 0 1 1 11.35 7.25 Z",
+    "M13.85 7.25 A0.6 0.6 0 1 1 12.65 7.25 A0.6 0.6 0 1 1 13.85 7.25 Z",
+    "M12 9 L13.75 9.5",
+    "M12.75 14.75 A0.75 0.75 0 1 1 11.25 14.75 A0.75 0.75 0 1 1 12.75 14.75 Z",
+    "M12.75 18 A0.75 0.75 0 1 1 11.25 18 A0.75 0.75 0 1 1 12.75 18 Z"
+  ]
+}

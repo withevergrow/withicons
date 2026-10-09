@@ -1,0 +1,64 @@
+{
+  "name": "marigold",
+  "category": "indian-festivals",
+  "description": "A marigold flower, for garlands, puja and Indian festivals.",
+  "aliases": [
+    "genda",
+    "genda-phool",
+    "gainda",
+    "zendu",
+    "chendumalli",
+    "marigold-flower",
+    "saffron-flower",
+    "calendula"
+  ],
+  "synonyms": [
+    "flower",
+    "orange flower",
+    "yellow flower",
+    "garland",
+    "mala",
+    "puja flower",
+    "offering",
+    "diwali",
+    "dussehra",
+    "navratri",
+    "wedding",
+    "day of the dead",
+    "dia de muertos",
+    "cempasuchil",
+    "festival flower",
+    "blossom",
+    "bloom",
+    "bright",
+    "tagetes",
+    "indian festival",
+    "india",
+    "merigold",
+    "marygold"
+  ],
+  "tags": [
+    "flower",
+    "garland",
+    "puja",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M14.04 4.37 A1.9 1.9 0 1 1 17.59 6.41 A1.9 1.9 0 1 1 19.63 9.96 A1.9 1.9 0 1 1 19.63 14.04 A1.9 1.9 0 1 1 17.59 17.59 A1.9 1.9 0 1 1 14.04 19.63 A1.9 1.9 0 1 1 9.96 19.63 A1.9 1.9 0 1 1 6.41 17.59 A1.9 1.9 0 1 1 4.37 14.04 A1.9 1.9 0 1 1 4.37 9.96 A1.9 1.9 0 1 1 6.41 6.41 A1.9 1.9 0 1 1 9.96 4.37 A1.9 1.9 0 1 1 14.04 4.37 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.38 8.67 A1.45 1.45 0 1 1 15.33 10.62 A1.45 1.45 0 1 1 15.33 13.38 A1.45 1.45 0 1 1 13.38 15.33 A1.45 1.45 0 1 1 10.62 15.33 A1.45 1.45 0 1 1 8.67 13.38 A1.45 1.45 0 1 1 8.67 10.62 A1.45 1.45 0 1 1 10.62 8.67 A1.45 1.45 0 1 1 13.38 8.67 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14.04 4.37 A1.9 1.9 0 1 1 17.59 6.41 A1.9 1.9 0 1 1 19.63 9.96 A1.9 1.9 0 1 1 19.63 14.04 A1.9 1.9 0 1 1 17.59 17.59 A1.9 1.9 0 1 1 14.04 19.63 A1.9 1.9 0 1 1 9.96 19.63 A1.9 1.9 0 1 1 6.41 17.59 A1.9 1.9 0 1 1 4.37 14.04 A1.9 1.9 0 1 1 4.37 9.96 A1.9 1.9 0 1 1 6.41 6.41 A1.9 1.9 0 1 1 9.96 4.37 A1.9 1.9 0 1 1 14.04 4.37 Z"
+  ],
+  "cutouts": [
+    "M13.38 8.67 A1.45 1.45 0 1 1 15.33 10.62 A1.45 1.45 0 1 1 15.33 13.38 A1.45 1.45 0 1 1 13.38 15.33 A1.45 1.45 0 1 1 10.62 15.33 A1.45 1.45 0 1 1 8.67 13.38 A1.45 1.45 0 1 1 8.67 10.62 A1.45 1.45 0 1 1 10.62 8.67 A1.45 1.45 0 1 1 13.38 8.67 Z",
+    "M12.9 12 A0.9 0.9 0 1 1 11.1 12 A0.9 0.9 0 1 1 12.9 12 Z"
+  ]
+}

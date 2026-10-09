@@ -1,0 +1,86 @@
+{
+  "name": "thandai",
+  "category": "indian-festivals",
+  "description": "A glass of thandai with garnish, for Holi and festive drinks.",
+  "aliases": [
+    "sardai",
+    "thandai-glass",
+    "holi-drink",
+    "badam-milk",
+    "kesar-milk",
+    "festive-drink"
+  ],
+  "synonyms": [
+    "holi",
+    "happy holi",
+    "drink",
+    "milk drink",
+    "almond milk",
+    "badam",
+    "kesar",
+    "saffron",
+    "rose",
+    "fennel",
+    "cardamom",
+    "garnish",
+    "cold drink",
+    "beverage",
+    "glass",
+    "refreshment",
+    "summer drink",
+    "shivratri",
+    "maha shivratri",
+    "lassi",
+    "milkshake",
+    "indian drink",
+    "indian festival",
+    "india",
+    "thandaai",
+    "thandayi"
+  ],
+  "tags": [
+    "holi",
+    "drink",
+    "beverage",
+    "festival",
+    "india"
+  ],
+  "paths": [
+    {
+      "d": "M5 6.5 H17.5 L16.1 20.12 A1.5 1.5 0 0 1 14.6 21.5 H7.9 A1.5 1.5 0 0 1 6.4 20.12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 10.75 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 6.5 C15.5 4 17.5 2.25 20.5 2.25 C20.5 5 18.5 6.75 15.5 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8 8.5 L9 8.75",
+      "plate": "A"
+    },
+    {
+      "d": "M11 8.75 H12",
+      "plate": "A"
+    },
+    {
+      "d": "M14 8.75 L14.75 8.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 6.5 H17.5 L16.1 20.12 A1.5 1.5 0 0 1 14.6 21.5 H7.9 A1.5 1.5 0 0 1 6.4 20.12 Z",
+    "M15.5 6.5 C15.5 4 17.5 2.25 20.5 2.25 C20.5 5 18.5 6.75 15.5 6.5 Z"
+  ],
+  "cutouts": [
+    "M5.5 10.75 H17",
+    "M8 8.5 L9 8.75",
+    "M11 8.75 H12",
+    "M14 8.75 L14.75 8.5",
+    "M8 13.5 C8.25 15.75 8.5 17.25 9 18.5",
+    "M16.5 5.75 L18.75 3.75"
+  ]
+}

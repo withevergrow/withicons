@@ -1,0 +1,83 @@
+{
+  "name": "avatar-owl",
+  "category": "avatars",
+  "description": "A cute owl face avatar, for profiles, learning and night owls.",
+  "aliases": [
+    "owl-avatar",
+    "owl",
+    "owl-face",
+    "night-owl",
+    "owl-profile",
+    "owl-pfp",
+    "wise-owl",
+    "owlet"
+  ],
+  "tags": [
+    "avatar",
+    "bird",
+    "owl",
+    "cute",
+    "learning"
+  ],
+  "paths": [
+    {
+      "d": "M5 7.5 L4.5 3.5 L8.5 5.5 C9.5 5.25 10.75 5 12 5 C13.25 5 14.5 5.25 15.5 5.5 L19.5 3.5 L19 7.5 C20 9 20.5 10.75 20.5 12.75 C20.5 17.5 16.75 21 12 21 C7.25 21 3.5 17.5 3.5 12.75 C3.5 10.75 4 9 5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 11.5 A2.75 2.75 0 1 1 6 11.5 A2.75 2.75 0 1 1 11.5 11.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M18 11.5 A2.75 2.75 0 1 1 12.5 11.5 A2.75 2.75 0 1 1 18 11.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 11.5 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M15 11.5 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M11 15.25 H13 L12 17 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 7.5 L4.5 3.5 L8.5 5.5 C9.5 5.25 10.75 5 12 5 C13.25 5 14.5 5.25 15.5 5.5 L19.5 3.5 L19 7.5 C20 9 20.5 10.75 20.5 12.75 C20.5 17.5 16.75 21 12 21 C7.25 21 3.5 17.5 3.5 12.75 C3.5 10.75 4 9 5 7.5 Z",
+    "M11.5 11.5 A2.75 2.75 0 1 1 6 11.5 A2.75 2.75 0 1 1 11.5 11.5 Z",
+    "M18 11.5 A2.75 2.75 0 1 1 12.5 11.5 A2.75 2.75 0 1 1 18 11.5 Z",
+    "M11 15.25 H13 L12 17 Z"
+  ],
+  "cutouts": [
+    "M10.75 11.5 A2 2 0 1 1 6.75 11.5 A2 2 0 1 1 10.75 11.5 Z M9.5 11.5 A0.75 0.75 0 1 1 8 11.5 A0.75 0.75 0 1 1 9.5 11.5 Z",
+    "M17.25 11.5 A2 2 0 1 1 13.25 11.5 A2 2 0 1 1 17.25 11.5 Z M16 11.5 A0.75 0.75 0 1 1 14.5 11.5 A0.75 0.75 0 1 1 16 11.5 Z",
+    "M10.5 15 H13.5 L12 17.5 Z"
+  ],
+  "synonyms": [
+    "avatar",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "cute",
+    "kawaii",
+    "character",
+    "mascot",
+    "playful",
+    "emoji",
+    "animal",
+    "bird",
+    "bird avatar",
+    "face",
+    "wise",
+    "wisdom",
+    "learning",
+    "study",
+    "night",
+    "hoot",
+    "education",
+    "nocturnal"
+  ]
+}

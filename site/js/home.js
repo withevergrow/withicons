@@ -35,17 +35,32 @@
       if (opts['class']) s += ' class="' + esc(opts['class']) + '"'
       return s + ' aria-hidden="true" focusable="false">' + innerS + '</svg>'
     }
+    // multi-colour styles keep their own palette and draw their outline in ink, exactly like the library's default
+    // (icons.html colour 'ink'); one-colour styles wear the style colour. home.css: svg[data-ink] { color: ink }
+    // A colour variable that falls back to currentColor or white (Pixel's sprite fill and shine) keeps a style one-colour.
+    var VAR_RE = /var\(--(?:with|eg)-(?!duo\b|accent\b)[\w-]+\s*,\s*([^()]+?)\s*\)/g
+    function multiColour(s) {
+      if (/<(?:linear|radial)Gradient/.test(s)) return true
+      VAR_RE.lastIndex = 0
+      for (var m; (m = VAR_RE.exec(s));) if (!/^(?:currentColor|#fff(?:fff)?)$/i.test(m[1])) return true
+      return false
+    }
+    function inked(s) { return s && multiColour(s) ? s.replace('<svg ', '<svg data-ink="" ') : s }
     function ic(name, style, size, opts) {
       var i = inner(name, style)
-      if (i != null) return build(i, style, size || 24, opts)
-      return WI.svg(name, style, size || 24, opts) || ''
+      if (i != null) return inked(build(i, style, size || 24, opts))
+      return inked(WI.svg(name, style, size || 24, opts) || '')
     }
     function hasIc(name, style) { return inner(name, style) != null || WI.has(name, style) }
+    // the drawings of a few icons in a style: a heavy style comes in chunks (site.js loadStyleFor), never the whole 1-7 MB file
+    function styleFor(style, names) { return WI.loadStyleFor ? WI.loadStyleFor(style, names) : WI.loadStyle(style) }
+    function namesOf(hits) { return (hits || []).map(function (h) { return h && h.name ? h.name : h }).filter(Boolean) }
     function fileFor(name, style, color) {
       var s = ic(name, style, 24, {})
       if (!s) return ''
-      s = s.replace(' aria-hidden="true" focusable="false"', '')
-      var c = color || 'currentColor'
+      var ink = s.indexOf(' data-ink=""') > 0
+      s = s.replace(' aria-hidden="true" focusable="false"', '').replace(' data-ink=""', '')
+      var c = color || (ink ? '#111318' : 'currentColor')
       return s.replace(/var\(--(?:eg|with)-(?:duo|accent),\s*currentColor\)/g, c).replace(/currentColor/g, c)
     }
     function loop(el, fn, every) {
@@ -89,23 +104,26 @@
     var ST = null
     // its own scope: boot() declares paint/show/… again further down, and `var` would hoist them over these
     if (stage) (function () {
+      // the stage walks the Popular styles (WI.FEATURED): eight calm slides, one line of dots; the picker below has the rest
+      var SAV = (WI.FEATURED || []).filter(function (s) { return AV.indexOf(s) >= 0 })
+      if (SAV.length < 3) SAV = AV
       var art = $('[data-stage-art]', stage), bloom = $('.stage-scan', stage), card = $('.stage-card', stage)
       var nameEl = $('[data-stage-name]', stage), nEl = $('[data-stage-n]', stage), styleEl = $('[data-stage-style]', stage), plainEl = $('[data-stage-plain]', stage)
       var cap = $('.stage-cap', stage), dotsWrap = $('[data-stage-dots]', stage), totEl = $('[data-stage-total]', stage), stTop = $('.stage-top', stage)
       var HOLD = 2600, OUT = 150
       var SHOW = P.show || {}
-      if (totEl) totEl.textContent = String(AV.length)
+      if (totEl) totEl.textContent = String(SAV.length)
       ST = { si: 0, round: 0, timer: 0, swapT: 0, tok: 0, layer: null, playing: false, visible: false, focus: false, pausedUntil: 0, locked: false, lockIcon: null }
-      dotsWrap.innerHTML = AV.map(function (s, i) {
+      dotsWrap.innerHTML = SAV.map(function (s, i) {
         return '<button type="button" class="stage-dot" style="--dot: var(--c-' + s + ')" data-i="' + i + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false" aria-label="' + INFO[s].title + '"></button>'
       }).join('')
-      dotsWrap.style.setProperty('--n', AV.length)
+      dotsWrap.style.setProperty('--n', SAV.length)
       var dots = $$('.stage-dot', dotsWrap)
       // the dot fills during the hold and is full just as the next swap starts
       stage.style.setProperty('--hold', (HOLD - OUT) + 'ms')
       // the icon slide k shows this round (null: not drawable yet)
       var pick = function (k) {
-        var s = AV[k]
+        var s = SAV[k]
         if (ST.locked) return hasIc(ST.lockIcon, s) ? ST.lockIcon : null
         var list = SHOW[s] && SHOW[s].length ? SHOW[s] : P.stage
         var n = list[ST.round % list.length]
@@ -114,7 +132,7 @@
         return null
       }
       var paint = function (k, name, instant) {
-        var style = AV[k]
+        var style = SAV[k]
         ST.icon = name // the washing line reads it (its gust never echoes the hero's icon)
         setStyleClass(stage, style)
         stage.setAttribute('data-icon', name); stage.setAttribute('data-style', style)
@@ -134,7 +152,7 @@
         })
       }
       var show = function (k, name, instant) {
-        var style = AV[k], svg = ic(name, style, 24)
+        var style = SAV[k], svg = ic(name, style, 24)
         if (!svg) return false
         // a swap still waiting to commit: don't blank the art for another OUT, hand over straight away
         var pending = !!ST.swapT
@@ -178,34 +196,34 @@
         return true
       }
       var prefetch = function (k) {
-        var j = (k + 1) % AV.length
-        if (ST.locked && !hasIc(ST.lockIcon, AV[j])) WI.loadStyle(AV[j])
+        var j = (k + 1) % SAV.length
+        if (ST.locked && !hasIc(ST.lockIcon, SAV[j])) styleFor(SAV[j], [ST.lockIcon])
       }
       // go to slide k, or the first drawable one after it; a locked (searched) icon waits for its style file
       var go = function (k) {
         var tok = ++ST.tok
         var tryFrom = function (k, left) {
-          for (; left > 0; left--, k = (k + 1) % AV.length) {
+          for (; left > 0; left--, k = (k + 1) % SAV.length) {
             var n = pick(k)
             if (n) { show(k, n); prefetch(k); return }
             if (ST.locked) {
               var j = k, rest = left - 1
-              WI.loadStyle(AV[j]).then(null, function () { return false }).then(function () {
+              styleFor(SAV[j], [ST.lockIcon]).then(null, function () { return false }).then(function () {
                 if (tok !== ST.tok) return
                 var n2 = pick(j)
-                if (n2) { show(j, n2); prefetch(j) } else tryFrom((j + 1) % AV.length, rest)
+                if (n2) { show(j, n2); prefetch(j) } else tryFrom((j + 1) % SAV.length, rest)
               })
               return
             }
           }
         }
-        tryFrom(k, AV.length)
+        tryFrom(k, SAV.length)
       }
       var next = function () {
-        var k = (ST.si + 1) % AV.length
+        var k = (ST.si + 1) % SAV.length
         if (k === 0 && !ST.locked) ST.round++
         // the alternates ride in the second pack: someone still watching near the end of a round gets it fetched
-        if (!P2 && k === AV.length - 5 && typeof loadMore === 'function') loadMore()
+        if (!P2 && k === SAV.length - 5 && typeof loadMore === 'function') loadMore()
         go(k)
       }
       var schedule = function () {
@@ -232,7 +250,7 @@
       ST.release = function () { ST.locked = false; ST.lockIcon = null }
       var jump = function (k) {
         // the alternates ride in the second pack: a jump near the end of a round fetches it too
-        if (!P2 && k >= AV.length - 5 && typeof loadMore === 'function') loadMore()
+        if (!P2 && k >= SAV.length - 5 && typeof loadMore === 'function') loadMore()
         if (k !== ST.si || ST.swapT) go(k)
         ST.pausedUntil = Date.now() + 6000; schedule()
       }
@@ -244,10 +262,10 @@
       dotsWrap.addEventListener('keydown', function (e) {
         var d = e.target.closest('.stage-dot'); if (!d) return
         var k = +d.getAttribute('data-i'), to = -1
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (k + 1) % AV.length
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (k - 1 + AV.length) % AV.length
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (k + 1) % SAV.length
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (k - 1 + SAV.length) % SAV.length
         else if (e.key === 'Home') to = 0
-        else if (e.key === 'End') to = AV.length - 1
+        else if (e.key === 'End') to = SAV.length - 1
         if (to < 0) return
         e.preventDefault()
         dots[to].focus(); jump(to)
@@ -311,7 +329,8 @@
       /* moments: each style's little trick (one card at a time, now and then) */
       var MOMENT = { line: 'pop', solid: 'pop', duo: 'pop', gloss: 'shine', engrave: 'shine', blueprint: 'measure', sketch: 'wiggle',
         glass: 'shine', kawaii: 'hearts', sticker: 'peel', pixel: 'steps', retro: 'sway', luxe: 'glint', bauhaus: 'spin', skeuo: 'press',
-        anime: 'sparkle', gothic: 'glow', pastel: 'bubbles', coquette: 'hearts', plush: 'squish' }
+        anime: 'sparkle', gothic: 'glow', pastel: 'bubbles', coquette: 'hearts', plush: 'squish',
+        clay: 'squish', bento: 'pop', suite: 'pop', dock: 'press', liquid: 'shine', chrome: 'glint', soft3d: 'spin', brutal: 'press', utsav: 'glint', rangoli: 'shine', halloween: 'wiggle', christmas: 'sparkle', lunar: 'glint', valentine: 'hearts' }
       var fxi = function (cls, x, y, s, d, inner, r) { return '<i class="wl-fx-' + cls + '" style="--fx:' + x + '%;--fy:' + y + '%;--fs:' + s + '%' + (d ? ';--fd:' + d + 's' : '') + (r ? ';--fr:' + r + 'deg' : '') + '">' + (inner || '') + '</i>' }
       var FX = {
         pop: function () { return '<i class="wl-fx-ring"></i>' },
@@ -340,6 +359,8 @@
       seq.push({ kind: 'tag', group: seq[seq.length - 1].group })
       var items = [], cards = [], signs = [], poms = [], tagIt = null
       var CN = WI.counts ? WI.counts() : { icons: 500, styles: AV.length, svgs: 500 * AV.length }
+      // "over 25,000": WI.counts().over (site.js: every icon in every style plus the live icons, rounded down to 5,000)
+      function overCount(c) { return c.over != null ? c.over : Math.floor((c.icons + 50) * c.styles / 5000) * 5000 }
       var fmt = WI.fmt || String
       list.innerHTML = ''
       seq.forEach(function (it, i) {
@@ -354,8 +375,7 @@
           } else {
             // the sum, as a kraft luggage tag on the line (aria-hidden: the same words are in the list's description)
             el.className = 'wl-sign wl-tag'
-            el.innerHTML = '<div class="wl-swing"><span class="wl-sign-thread"></span><span class="wl-tag-card"><b data-count="icons">' + fmt(CN.icons) + '</b> × <b data-count="styles">' + CN.styles +
-              '</b> = <b class="wl-tag-sum"><span data-count="svgs">' + fmt(CN.svgs) + '</span> ways</b></span></div>'
+            el.innerHTML = '<div class="wl-swing"><span class="wl-sign-thread"></span><span class="wl-tag-card"><b class="wl-tag-sum">over <span data-count="over">' + fmt(overCount(CN)) + '</span> icons</b></span></div>'
             tagIt = it
           }
           signsBox.appendChild(el)
@@ -939,14 +959,18 @@
       }
       root.classList.add('is-ready')   // before measuring: the no-JS layout of the list must not apply
       layout()
-      // open on the newest, cutest end of the set: with a mouse the storybook family (its sign, its five cards and the
+      // open on the newest end of the set: with a mouse the new families (their signs, their cards and the
       // kraft tag with the sum) sits in the middle, and the drift then brings the everyday family round; on a parked
       // (touch) line the plush bunny is in the middle, with the tag peeking in to invite a swipe
-      var story = items.filter(function (it) { return it.group && it.group.id === 'storybook' && it.kind !== 'tag' })
-      var plush = cards.filter(function (c) { return c.style === 'plush' })[0]
+      // (the newest families are the ones site.js GROUPS marks isNew: AI, Product and Trend; Storybook before them)
+      var NEWG = (WI.GROUPS || []).filter(function (g) { return g.isNew }).map(function (g) { return g.id })
+      if (!NEWG.length) NEWG = ['storybook']
+      var isNewG = function (g) { return !!g && NEWG.indexOf(g.id) >= 0 }
+      var story = items.filter(function (it) { return isNewG(it.group) && it.kind !== 'tag' })
+      var plush = cards.filter(function (c) { return isNewG(c.group) })[0] || cards.filter(function (c) { return c.style === 'plush' })[0]
       function home() {
         if (parked && plush) return Wd / 2 + pad - plush.bx
-        if (story.length) { var a = story[0], b = tagIt && tagIt.group.id === 'storybook' ? tagIt : story[story.length - 1]; return Wd / 2 + pad - (a.bx - a.w / 2 + b.bx + b.w / 2) / 2 }
+        if (story.length) { var a = story[0], b = tagIt && isNewG(tagIt.group) ? tagIt : story[story.length - 1]; return Wd / 2 + pad - (a.bx - a.w / 2 + b.bx + b.w / 2) / 2 }
         return Wd / 2 + pad - cards[Math.floor(N / 2)].bx
       }
       offset = home()
@@ -979,8 +1003,8 @@
         })
       }, { passive: true })
       WI.visibility(root, onVisible)
-      // the hero's "New: Anime, gothic & plush" link: bring the band into view and glide to the storybook sign
-      var kickNew = $('.kick-new'), firstStory = cards.filter(function (c) { return c.group.id === 'storybook' })[0]
+      // the hero's "New: …" link: bring the band into view and glide to the first new family's sign
+      var kickNew = $('.kick-new'), firstStory = cards.filter(function (c) { return isNewG(c.group) })[0]
       if (kickNew && firstStory) kickNew.addEventListener('click', function (e) {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
         e.preventDefault()
@@ -1009,7 +1033,10 @@
       var input = $('.hs-input', hs), panel = $('.hs-panel', hs), grid = $('.hs-grid', hs), count = $('.hs-count', hs)
       var stylesBox = $('.hs-styles', hs), all = $('.hs-all', hs), ghostW = $('.hs-ghost-word', hs), form = $('.hs-box', hs)
       var hsStyle = 'line'
-      stylesBox.innerHTML = AV.map(function (s) { return '<button type="button" class="hs-sw s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === hsStyle) + '" aria-label="Show in ' + INFO[s].title + '" title="' + INFO[s].title + '"></button>' }).join('')
+      // the results' style: the compact row (current, recent, Popular, then All styles; site/STYLE-PICKER.md)
+      var hsPick = function (st) { hsStyle = st; styleFor(hsStyle, namesOf(lastHits)).then(function () { if (lastQ) render(lastHits, lastQ) }) }
+      if (WI.stylePicker) WI.stylePicker.row(stylesBox, { current: hsStyle, icon: null, max: 6, size: 22, label: 'Show results in style', title: 'Show the results in', onPick: hsPick })
+      else stylesBox.innerHTML = AV.filter(function (s) { return (WI.FEATURED || AV).indexOf(s) >= 0 }).map(function (s) { return '<button type="button" class="hs-sw s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === hsStyle) + '" aria-label="Show in ' + INFO[s].title + '" title="' + INFO[s].title + '"></button>' }).join('')
       var lastQ = '', lastHits = []
       var render = function (hits, q) {
         if (!hits.length) {
@@ -1023,7 +1050,7 @@
         var top = hits[0]
         count.innerHTML = hits.length + (hits.length === 1 ? ' icon' : ' icons') + ' for “' + esc(q) + '”' + '<small>' + (WI.whyMatched(top, q) || '') + '</small>'
         grid.innerHTML = hits.map(function (hit, i) {
-          var svg = WI.svg(hit.name, hsStyle, 34) || ic(hit.name, hsStyle, 34) || WI.svg(hit.name, 'line', 34)
+          var svg = ic(hit.name, hsStyle, 34) || WI.svg(hit.name, 'line', 34)
           return '<li style="--i:' + Math.min(i, 18) + '"><a class="hs-tile s-' + hsStyle + '" href="' + esc(WI.iconUrl(hit.name)) + '"><span class="hs-ic">' + svg + '</span><span class="hs-name">' + esc(hit.name) + '</span></a>' +
             '<button class="hs-copy" type="button" data-copy-name="' + esc(hit.name) + '" aria-label="Copy ' + esc(hit.name) + ' SVG" title="Copy SVG">' + WI.icon_svg.copy + '</button></li>'
         }).join('')
@@ -1031,9 +1058,12 @@
       var run = function () {
         var q = input.value.trim()
         if (!q) { panel.hidden = true; lastQ = ''; if (ST) ST.release(); return }
-        Promise.all([WI.ensureSearch(), WI.loadStyle(hsStyle)]).then(function () {
+        WI.ensureSearch().then(function () {
           if (input.value.trim() !== q) return
           var hits = WI.search(q, { limit: 24 })
+          return styleFor(hsStyle, namesOf(hits)).then(function () { return hits })
+        }).then(function (hits) {
+          if (!hits || input.value.trim() !== q) return
           lastQ = q; lastHits = hits
           panel.hidden = false
           all.setAttribute('href', WI.url('icons.html') + '?q=' + encodeURIComponent(q))
@@ -1044,7 +1074,7 @@
       var debounce = 0
       input.addEventListener('input', function () { clearTimeout(debounce); debounce = setTimeout(run, 40) })
       input.addEventListener('focus', function () {
-        WI.ensureSearch(); WI.loadStyle(hsStyle)
+        WI.ensureSearch(); if (!(WI.chunkCount && WI.chunkCount(hsStyle))) WI.loadStyle(hsStyle)
         if (input.value.trim() && lastQ) panel.hidden = false
       }, { passive: true })
       input.addEventListener('keydown', function (e) {
@@ -1071,16 +1101,15 @@
         if (p) { input.value = p.getAttribute('data-q'); run(); input.focus(); return }
         var sw = e.target.closest('.hs-sw')
         if (sw) {
-          hsStyle = sw.getAttribute('data-s')
-          $$('.hs-sw', stylesBox).forEach(function (b) { b.setAttribute('aria-pressed', b === sw ? 'true' : 'false') })
-          WI.loadStyle(hsStyle).then(function () { if (lastQ) render(lastHits, lastQ) })
+          $('.hs-sw', stylesBox).forEach(function (b) { b.setAttribute('aria-pressed', b === sw ? 'true' : 'false') })
+          hsPick(sw.getAttribute('data-s'))
           return
         }
         var cp = e.target.closest('[data-copy-name]')
         if (cp) {
           e.preventDefault()
           var n = cp.getAttribute('data-copy-name')
-          WI.loadStyle(hsStyle).then(function () { WI.copyWithToast(WI.svgFile(n, hsStyle) || fileFor(n, hsStyle), 'Copied ' + n + '. Paste it anywhere.') })
+          styleFor(hsStyle, [n]).then(function () { WI.copyWithToast(WI.svgFile(n, hsStyle) || fileFor(n, hsStyle), 'Copied ' + n + '. Paste it anywhere.') })
         }
       })
       doc.addEventListener('pointerdown', function (e) { if (!hs.contains(e.target)) panel.hidden = true })
@@ -1107,55 +1136,147 @@
       try { var q0 = new URLSearchParams(location.search).get('q'); if (q0) { input.value = q0; run() } } catch (err) { /* noop */ }
     }
 
-    /* ───────── pick a style: grouped tabs (Everyday · Crafted · Playful · Studio · Storybook) ───────── */
+    /* ───────── pick a style (site/STYLE-PICKER.md): "What are you making?" shows a job's best styles, best first; or
+       browse one of the five groups (WI.GROUPS), Popular (WI.FEATURED) first. At most 8 styles on screen at a time; every
+       style is one click away, and "See all N styles" leads to the styles index. ───────── */
     var picker = $('[data-picker]')
     if (picker) {
-      var tabs = $('[data-picker-tabs]', picker), pgrid = $('[data-picker-grid]', picker)
+      var usesBox = $('[data-pk-uses]', picker), groupsBox = $('[data-pk-groups]', picker), pkList = $('[data-pk-list]', picker), pkCap = $('[data-pk-cap]', picker)
+      var pgrid = $('[data-picker-grid]', picker), panelEl = $('[data-picker-panel]', picker)
       var ptitle = $('[data-picker-title]', picker), pplain = $('[data-picker-plain]', picker), pgood = $('[data-picker-good]', picker), plink = $('[data-picker-link]', picker)
-      var groups = (WI.GROUPS || [{ id: 'all', title: '', styles: ORDER }]).map(function (g) {
-        return { id: g.id, title: g.title, styles: g.styles.filter(function (s) { return AV.indexOf(s) >= 0 }) }
-      }).filter(function (g) { return g.styles.length })
-      var TAB_ORDER = [].concat.apply([], groups.map(function (g) { return g.styles }))
-      var curS = 'line'
-      tabs.innerHTML = groups.map(function (g) {
-        return '<div class="pt-group" role="presentation"><span class="pt-gl" aria-hidden="true">' + esc(g.title) + '</span>' +
-          g.styles.map(function (s) {
-            return '<button class="pt s-' + s + '" role="tab" type="button" id="pt-' + s + '" aria-selected="' + (s === curS) + '" tabindex="' + (s === curS ? 0 : -1) + '" data-s="' + s + '">' +
-              '<span class="pt-dot" aria-hidden="true"></span>' + INFO[s].title + newTag(s) + '</button>'
-          }).join('') + '</div>'
+      var avail = function (list) { return (list || []).filter(function (s) { return AV.indexOf(s) >= 0 }) }
+      var NEWS = WI.NEW_STYLES || []
+      var SETS = [{ id: 'popular', kind: 'group', title: 'Popular', blurb: 'The safe picks and the most-loved new looks.', styles: avail(WI.FEATURED && WI.FEATURED.length ? WI.FEATURED : AV.slice(0, 8)) }]
+        .concat((WI.GROUPS || []).map(function (g) { return { id: g.id, kind: 'group', title: g.title, blurb: g.blurb, styles: avail(g.styles) } }))
+        .concat((WI.USES || []).map(function (u) { return { id: u.id, kind: 'use', title: u.title, styles: avail(u.styles).slice(0, 4) } }))
+        .filter(function (x) { return x.styles.length })
+      var setById = function (id) { for (var i = 0; i < SETS.length; i++) if (SETS[i].id === id) return SETS[i]; return SETS[0] }
+      var PK = { set: SETS[0], style: SETS[0].styles[0] || 'line' }
+      try { var last = localStorage.getItem('with-style'); if (last && PK.set.styles.indexOf(last) >= 0) PK.style = last } catch (err) { /* noop */ }
+      var TILE_ICONS = ['rocket', 'gift', 'camera', 'coffee', 'heart']
+      // one icon for the whole set, so the styles compare like for like; a style that lacks it shows its own polaroid icon
+      var tileIcon = function (s) {
+        for (var i = 0; i < TILE_ICONS.length; i++) if (hasIc(TILE_ICONS[i], s)) return TILE_ICONS[i]
+        return (P.washline && P.washline.cards && P.washline.cards[s]) || (P.stage && P.stage[0]) || 'home'
+      }
+      var ARR = '<svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12 H19 M13 6 L19 12 L13 18"/></svg>'
+      usesBox.innerHTML = SETS.filter(function (x) { return x.kind === 'use' }).map(function (u, i) {
+        return '<button type="button" class="pk-use" data-pk-set="' + esc(u.id) + '" aria-pressed="false" tabindex="' + (i ? -1 : 0) + '">' + esc(u.title) + '</button>'
       }).join('')
-      var panelEl = $('[data-picker-panel]', picker)
-      var choose = function (s, focus) {
-        curS = s
-        $$('.pt', tabs).forEach(function (t) { var on = t.getAttribute('data-s') === s; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus() })
+      groupsBox.innerHTML = SETS.filter(function (x) { return x.kind === 'group' }).map(function (g) {
+        var on = g === PK.set
+        return '<button type="button" class="pk-group" data-pk-set="' + esc(g.id) + '" aria-pressed="' + on + '" tabindex="' + (on ? 0 : -1) + '">' + esc(g.title) + '</button>'
+      }).join('')
+      var paintList = function (anim) {
+        var st = PK.set, isUse = st.kind === 'use'
+        pkCap.textContent = isUse ? 'The best styles for ' + st.title.charAt(0).toLowerCase() + st.title.slice(1) + ', best first.' : st.blurb
+        pkList.setAttribute('aria-label', isUse ? 'Styles for ' + st.title.toLowerCase() : st.title + ' styles')
+        pkList.innerHTML = st.styles.map(function (s, i) {
+          var on = s === PK.style, n = tileIcon(s)
+          return '<li><button type="button" class="pk-st s-' + s + (anim && !reduced ? ' is-in' : '') + '" style="--i:' + i + '" data-s="' + s + '" aria-pressed="' + on + '" tabindex="' + (on ? 0 : -1) + '">' +
+            '<span class="pk-ic" aria-hidden="true">' + ic(n, s, 40) + '</span>' +
+            '<span class="pk-t"><span class="pk-n">' + esc(INFO[s].title) +
+            (NEWS.indexOf(s) >= 0 ? '<span class="pk-new" title="New style"><span class="visually-hidden">, new</span></span>' : '') +
+            (isUse && i === 0 ? '<span class="pk-best">Best pick</span>' : '') + '</span>' +
+            '<span class="pk-g">' + esc(INFO[s].good || INFO[s].description || '') + '</span></span></button></li>'
+        }).join('')
+      }
+      var paintPanel = function (anim) {
+        var s = PK.style
         setStyleClass(panelEl, s)
-        panelEl.setAttribute('aria-labelledby', 'pt-' + s)
         var names = P2 ? P2.grid : P.stage
-        pgrid.innerHTML = names.map(function (n, i) {
-          return '<a class="pg' + (reduced ? '' : ' is-in') + '" style="--i:' + i + '" href="' + esc(WI.iconUrl(n)) + '" title="' + esc(n) + '"><span class="visually-hidden">' + esc(n) + ' in ' + INFO[s].title + '</span>' + ic(n, s, 48) + '</a>'
+        var list = names.filter(function (n) { return hasIc(n, s) })
+        // before pack 2 arrives a rich style has only its own couple of icons in pack 1: show those, never an empty panel
+        if (list.length < 4 && P.svg[s]) list = list.concat(Object.keys(P.svg[s]).filter(function (n) { return list.indexOf(n) < 0 }))
+        pgrid.innerHTML = list.slice(0, 12).map(function (n, i) {
+          return '<a class="pg' + (anim && !reduced ? ' is-in' : '') + '" style="--i:' + i + '" href="' + esc(WI.iconUrl(n) + '?style=' + s) + '" title="' + esc(n) + '"><span class="visually-hidden">' + esc(n) + ' in ' + INFO[s].title + '</span>' + ic(n, s, 48) + '</a>'
         }).join('')
         ptitle.textContent = INFO[s].title
         pplain.textContent = INFO[s].plain
         pgood.textContent = INFO[s].good
         plink.setAttribute('href', WI.url('styles/' + s + '.html'))
-        plink.firstChild.nodeValue = 'See all ' + INFO[s].title + ' icons '
+        plink.innerHTML = 'See all ' + esc(INFO[s].title) + ' icons ' + ARR
+        fitPicker()
       }
-      tabs.addEventListener('click', function (e) { var t = e.target.closest('.pt'); if (t) choose(t.getAttribute('data-s')) })
-      tabs.addEventListener('keydown', function (e) {
-        var cur = TAB_ORDER.indexOf((doc.activeElement && doc.activeElement.getAttribute('data-s')) || 'line')
-        var k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]
-        if (k) { e.preventDefault(); choose(TAB_ORDER[(cur + k + TAB_ORDER.length) % TAB_ORDER.length], true) }
-        if (e.key === 'Home') { e.preventDefault(); choose(TAB_ORDER[0], true) }
-        if (e.key === 'End') { e.preventDefault(); choose(TAB_ORDER[TAB_ORDER.length - 1], true) }
+      // desktop: the panel is as tall as the style list (home.css), so the grid takes the columns x rows that keep its
+      // tiles closest to square in the space it gets (12 icons: 4x3 when wide, 3x4 when tall, 6x2 when short)
+      var DESK = W.matchMedia ? W.matchMedia('(min-width: 1025px)') : null
+      var fitPicker = function () {
+        var n = pgrid.children.length
+        if (!DESK || !DESK.matches || !n) { pgrid.style.gridTemplateColumns = pgrid.style.gridTemplateRows = ''; return }
+        var w = pgrid.clientWidth, h = pgrid.clientHeight, gap = parseFloat(getComputedStyle(pgrid).rowGap) || 10
+        if (!w || !h) return
+        var best = null
+        for (var c = 2; c <= 6; c++) {
+          var r = Math.ceil(n / c)
+          if (c * r - n >= c) continue
+          var tw = (w - gap * (c - 1)) / c, th = (h - gap * (r - 1)) / r
+          var score = Math.abs(Math.log(tw / th)) + (c * r !== n ? 0.35 : 0) + (th < 56 ? 2 : 0)
+          if (!best || score < best.score) best = { c: c, r: r, score: score }
+        }
+        pgrid.style.gridTemplateColumns = 'repeat(' + best.c + ', minmax(0, 1fr))'
+        pgrid.style.gridTemplateRows = 'repeat(' + best.r + ', minmax(0, 1fr))'
+      }
+      if (W.ResizeObserver) new ResizeObserver(function () { fitPicker() }).observe(pgrid)
+      if (DESK && DESK.addEventListener) DESK.addEventListener('change', fitPicker)
+      var chooseStyle = function (s, focus) {
+        if (!INFO[s] || AV.indexOf(s) < 0 || s === PK.style) return
+        PK.style = s
+        $$('.pk-st', pkList).forEach(function (b) { var on = b.getAttribute('data-s') === s; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus() })
+        paintPanel(true)
+      }
+      var chooseSet = function (id, anim) {
+        var st = setById(id)
+        PK.set = st
+        ;[usesBox, groupsBox].forEach(function (box) {
+          var btns = $$('[data-pk-set]', box), any = false
+          btns.forEach(function (b) { var on = b.getAttribute('data-pk-set') === st.id; any = any || on; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
+          if (!any && btns[0]) btns[0].tabIndex = 0 // one Tab stop per row, even when nothing in it is pressed
+        })
+        picker.setAttribute('data-mode', st.kind)
+        // a job's best pick (or the group's first style) takes the panel, unless the current style is already in the group
+        if (st.kind === 'use' || st.styles.indexOf(PK.style) < 0) PK.style = st.styles[0]
+        paintList(anim); paintPanel(anim)
+      }
+      // arrow keys walk a row (one Tab stop each: the jobs, the groups, the styles)
+      var rove = function (box, sel, e, act) {
+        var items = $$(sel, box), i = items.indexOf(doc.activeElement), j = -1
+        if (i < 0) return
+        var k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]
+        if (k) j = (i + k + items.length) % items.length
+        else if (e.key === 'Home') j = 0
+        else if (e.key === 'End') j = items.length - 1
+        if (j < 0) return
+        e.preventDefault()
+        items.forEach(function (b, n) { b.tabIndex = n === j ? 0 : -1 })
+        items[j].focus()
+        if (act) act(items[j])
+      }
+      usesBox.addEventListener('keydown', function (e) { rove(usesBox, '[data-pk-set]', e) })
+      groupsBox.addEventListener('keydown', function (e) { rove(groupsBox, '[data-pk-set]', e) })
+      pkList.addEventListener('keydown', function (e) { rove(pkList, '.pk-st', e, function (b) { chooseStyle(b.getAttribute('data-s')) }) })
+      picker.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-pk-set]')
+        if (b) {
+          // a pressed job chip toggles back to Popular
+          if (b.getAttribute('aria-pressed') === 'true') { if (b.classList.contains('pk-use')) chooseSet(SETS[0].id, true); return }
+          chooseSet(b.getAttribute('data-pk-set'), true)
+          WI.announce && WI.announce(pkCap.textContent)
+          return
+        }
+        var t = e.target.closest('.pk-st')
+        if (t) { var s = t.getAttribute('data-s'); chooseStyle(s); if (WI.stylePicker && WI.stylePicker.remember) WI.stylePicker.remember(s) }
       })
+      // a mouse resting on a style previews it (never on touch)
       var hoverT = 0
-      tabs.addEventListener('pointerover', function (e) {
-        var t = e.target.closest('.pt'); if (!t || t.getAttribute('aria-selected') === 'true' || e.pointerType === 'touch') return
-        clearTimeout(hoverT); hoverT = setTimeout(function () { choose(t.getAttribute('data-s')) }, 160)
+      pkList.addEventListener('pointerover', function (e) {
+        var t = e.target.closest('.pk-st'); if (!t || t.getAttribute('aria-pressed') === 'true' || e.pointerType === 'touch') return
+        clearTimeout(hoverT); hoverT = setTimeout(function () { chooseStyle(t.getAttribute('data-s')) }, 180)
       })
-      tabs.addEventListener('pointerleave', function () { clearTimeout(hoverT) })
-      choose('line')
-      more.push(function () { choose(curS) })
+      pkList.addEventListener('pointerleave', function () { clearTimeout(hoverT) })
+      picker.classList.add('is-ready')
+      chooseSet(SETS[0].id)
+      more.push(function () { paintList(); paintPanel() })
     }
 
     /* ───────── anywhere mock ───────── */
@@ -1256,7 +1377,7 @@
         })
         return out
       }
-      var inner0 = function (style) { return inner(T.icon, style) || '' }
+      var inner0 = function (style) { return inner(T.icon, style) || WI.svg(T.icon, style, 24) || '' }
       var isMulti = function (style) { return colourVars(inner0(style)).length > 0 }
       // { vars: {'--with-x': hex}, color: hex|null } — one plan shared by preview and every output
       var planFor = function (style, hex) {
@@ -1289,9 +1410,10 @@
       var outFor = function (pl) {
         var s = ic(T.icon, T.style, 24, {})
         if (!s) return ''
-        s = s.replace(' aria-hidden="true" focusable="false"', '')
+        var ink = s.indexOf(' data-ink=""') > 0
+        s = s.replace(' aria-hidden="true" focusable="false"', '').replace(' data-ink=""', '')
         s = s.replace(/var\(\s*(--with-[\w-]+)\s*,\s*([^()]*?)\s*\)/g, function (all, v) { return pl.vars[v] || all })
-        var c = pl.color || INFO[T.style].color
+        var c = pl.color || (ink ? '#111318' : INFO[T.style].color)
         return s.replace(/var\(--(?:eg|with)-(?:duo|accent),\s*currentColor\)/g, c).replace(/currentColor/g, c)
       }
       // the icon's own colours, for the "Style colours" swatch
@@ -1305,7 +1427,10 @@
         return 'conic-gradient(' + cs.map(function (c, i) { return c + ' ' + (i * step) + '% ' + ((i + 1) * step) + '%' }).join(',') + ')'
       }
       var PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>'
-      tStyles.innerHTML = AV.map(function (s) { return '<button type="button" class="chip s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === T.style) + '">' + INFO[s].title + '</button>' }).join('')
+      // the style: the compact row with the rocket drawn in each style, and All styles for the rest (site/STYLE-PICKER.md)
+      var tryPick = function (st) { if (!INFO[st]) return; T.style = st; var go = function () { paintTry(); paintRow() }; if (hasIc(T.icon, st)) go(); else styleFor(st, [T.icon]).then(go, go) }
+      if (WI.stylePicker) WI.stylePicker.row(tStyles, { current: T.style, icon: T.icon, max: 6, size: 28, label: 'Style', title: 'Try the rocket in', onPick: tryPick })
+      else tStyles.innerHTML = AV.filter(function (s) { return (WI.FEATURED || AV).indexOf(s) >= 0 }).map(function (s) { return '<button type="button" class="chip s-' + s + '" data-s="' + s + '" aria-pressed="' + (s === T.style) + '">' + INFO[s].title + '</button>' }).join('')
       tColors.innerHTML = '<button type="button" class="try-sw is-auto" data-tc="auto" aria-pressed="true" aria-label="Style colours" title="Style colours"></button>' +
         COLORS.map(function (c) { return '<button type="button" class="try-sw" style="--sw:' + c[1] + '" data-tc="' + c[1] + '" aria-pressed="false" aria-label="' + c[0] + '" title="' + c[0] + '"></button>' }).join('') +
         '<span class="try-sw-sep" aria-hidden="true"></span>' +
@@ -1359,9 +1484,8 @@
       tryEl.addEventListener('click', function (e) {
         var s = e.target.closest('[data-s]')
         if (s && tStyles.contains(s)) {
-          T.style = s.getAttribute('data-s')
-          $$('[data-s]', tStyles).forEach(function (b) { b.setAttribute('aria-pressed', b === s ? 'true' : 'false') })
-          paintTry(); paintRow(); return
+          $('[data-s]', tStyles).forEach(function (b) { b.setAttribute('aria-pressed', b === s ? 'true' : 'false') })
+          tryPick(s.getAttribute('data-s')); return
         }
         var c = e.target.closest('[data-tc]')
         if (c && tColors.contains(c)) {
@@ -1447,7 +1571,7 @@
             var svg = ic(s[2], style, 22) || WI.svg(s[2], style, 22) || ic(s[2], 'line', 22) || WI.svg(s[2], 'line', 22)
             msgs[2].querySelector('p').innerHTML = '<span class="chat-ic" style="color:var(--c-' + style + ')">' + svg + '</span><span>Added <b>' + esc(s[2]) + '</b> in ' + s[3] + ', with an accessible label.</span>'
           }
-          if (hasIc(s[2], style)) draw(); else WI.loadStyle(style).then(draw)
+          if (hasIc(s[2], style)) draw(); else styleFor(style, [s[2]]).then(draw)
           msgs[0].classList.add('is-in')
         }, 250))
         chatTimers.push(setTimeout(function () { msgs[1].classList.add('is-in') }, 1050))
@@ -1590,6 +1714,35 @@
         if (W.WithLive) { lvStart(); return }
         WI.loadScript((WI.base || '') + 'vendor/dynamic/dynamic.js').then(lvStart, function () { /* no runtime yet: keep the stand-ins */ })
       }, '400px')
+    }
+
+    /* ───────── every style at a glance (the bento): its light cards are drawn in the HTML; the rich and heavy
+       ones wait in js/home-bento.js (window.WITH_HOME_BENTO, from forge/tools/site-data.mjs homeBento), loaded when the
+       section comes near and dropped into their reserved slots (site.js gives each copy its own gradient ids) ───────── */
+    var bento = $('[data-bento]')
+    if (bento) {
+      var fillBento = function () {
+        var B = W.WITH_HOME_BENTO || {}
+        $$('[data-sb-ic]', bento).forEach(function (el) {
+          var m = B[el.getAttribute('data-sb-ic')]
+          if (!m) return
+          el.innerHTML = m
+          el.classList.remove('is-lazy')
+          el.removeAttribute('data-sb-ic')
+        })
+      }
+      var bentoGroups = $$('[data-sb-src]', bento)
+      if (W.WITH_HOME_BENTO) fillBento()
+      // each group's drawings (js/home-bento-<group>.js) arrive as that group comes near
+      else if (bentoGroups.length) bentoGroups.forEach(function (g) {
+        WI.whenVisible(g, function () { WI.loadScript((WI.base || '') + g.getAttribute('data-sb-src')).then(fillBento) }, '600px')
+      })
+      else if ($('[data-sb-ic]', bento)) WI.whenVisible(bento, function () {
+        var sb = doc.createElement('script')
+        sb.src = (WI.base || '') + 'js/home-bento.js'
+        sb.onload = fillBento
+        doc.head.appendChild(sb)
+      }, '600px')
     }
 
     /* ───────── part 2 of the pack: picker grid + "Icons that move" ───────── */
@@ -1736,13 +1889,22 @@
       // style carousel: the same icon (a heart, in the first pack for every style) drawn in each style, with its name
       var STRIP = hasIc('heart', AV[0]) ? 'heart' : MV.loops[0]
       var stripM = (M[STRIP] && M[STRIP].loop) || { preset: 'beat' }
-      boxStyles.innerHTML = AV.map(function (s) {
-        var on = s === S.style
-        return '<button type="button" class="mo-st s-' + s + '" data-mo-style="' + s + '" tabindex="' + (on ? '0' : '-1') + '"' + (on ? ' aria-current="true"' : '') + '>' +
-          '<span class="mo-st-ic" aria-hidden="true">' + wm(STRIP, on ? 'loop' : 'idle', stripM, ic(STRIP, s, 24)) + '</span>' +
-          '<span class="mo-st-t">' + esc(INFO[s].title) + '</span><span class="mo-st-bar" aria-hidden="true"><i></i></span></button>'
-      }).join('')
-      var stItems = $$('[data-mo-style]', boxStyles)
+      // the strip shows the Popular styles (WI.FEATURED); "More styles" opens the shared picker, and a style picked there
+      // joins the strip (site/STYLE-PICKER.md: few choices first, everything one step away)
+      var ST_LIST = (WI.FEATURED || []).filter(function (s) { return AV.indexOf(s) >= 0 })
+      if (ST_LIST.length < 3) ST_LIST = AV.slice()
+      var stItems = []
+      var MORE_GLYPH = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="2.2" fill="currentColor"/><rect x="13.5" y="3.5" width="7" height="7" rx="2.2" fill="currentColor" opacity=".55"/><rect x="3.5" y="13.5" width="7" height="7" rx="2.2" fill="currentColor" opacity=".55"/><rect x="13.5" y="13.5" width="7" height="7" rx="2.2" fill="currentColor" opacity=".3"/></svg>'
+      function buildStrip() {
+        boxStyles.innerHTML = ST_LIST.map(function (s) {
+          var on = s === S.style
+          return '<button type="button" class="mo-st s-' + s + '" data-mo-style="' + s + '" tabindex="' + (on ? '0' : '-1') + '"' + (on ? ' aria-current="true"' : '') + '>' +
+            '<span class="mo-st-ic" aria-hidden="true">' + wm(STRIP, on ? 'loop' : 'idle', stripM, ic(STRIP, s, 24)) + '</span>' +
+            '<span class="mo-st-t">' + esc(INFO[s].title) + '</span><span class="mo-st-bar" aria-hidden="true"><i></i></span></button>'
+        }).join('') + (WI.stylePicker ? '<button type="button" class="mo-st mo-more" data-mo-more aria-haspopup="dialog"><span class="mo-st-ic" aria-hidden="true">' + MORE_GLYPH + '</span><span class="mo-st-t">All ' + (WI.counts ? WI.counts().styles : AV.length) + ' styles</span></button>' : '')
+        stItems = $$('[data-mo-style]', boxStyles)
+      }
+      buildStrip()
       boxFx.innerHTML = '<span class="mo-k">Effect</span>' + EFFECTS.map(function (f) {
         return '<button type="button" class="mo-fxb" data-mo-fx="' + f + '" aria-pressed="' + (f === S.fx) + '">' + (f === 'auto' ? 'Best fit' : f.replace('-', ' ')) + '</button>'
       }).join('')
@@ -1802,7 +1964,7 @@
       var EVERY = 5000
       var C = { anim: null, holds: {}, vis: false, rt: 0, tt: 0 }
       function autoOn() { return !reduced || S.force }
-      function stIndex(s) { return AV.indexOf(s) }
+      function stIndex(s) { return ST_LIST.indexOf(s) }
       function keepInView(b, smooth) {
         var bx = boxStyles, max = bx.scrollWidth - bx.clientWidth
         if (max <= 0) return
@@ -1828,7 +1990,7 @@
           var bar = stItems[stIndex(S.style)] && $('.mo-st-bar i', stItems[stIndex(S.style)])
           if (!bar || !bar.animate) return
           C.anim = bar.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: EVERY, easing: 'linear', fill: 'forwards' })
-          C.anim.onfinish = function () { C.anim = null; select(AV[(stIndex(S.style) + 1) % AV.length], 'auto') }
+          C.anim.onfinish = function () { C.anim = null; select(ST_LIST[(stIndex(S.style) + 1) % ST_LIST.length], 'auto') }
           if (!shouldRun()) C.anim.pause()
           return
         }
@@ -1838,8 +2000,9 @@
       function hold(k, on) { C.holds[k] = !!on; sync() }
       // how: 'user' (click), 'key' (arrow keys) or 'auto' (the carousel); the carousel always carries on from here
       function select(s, how) {
-        if (!INFO[s] || stIndex(s) < 0) return
+        if (!INFO[s] || AV.indexOf(s) < 0) return
         S.style = s
+        if (stIndex(s) < 0) { ST_LIST.push(s); stopAnim(); buildStrip(); edges() }
         stItems.forEach(function (x) {
           var on = x.getAttribute('data-mo-style') === s
           if (on) x.setAttribute('aria-current', 'true'); else x.removeAttribute('aria-current')
@@ -1891,6 +2054,11 @@
           renderAll(); sync(); return
         }
         if ((b = e.target.closest('[data-mo-style]'))) { select(b.getAttribute('data-mo-style'), 'user'); return }
+        if ((b = e.target.closest('[data-mo-more]'))) {
+          hold('picker', true)
+          WI.stylePicker.open({ current: S.style, icon: STRIP, anchor: b, title: 'Show the demos in' }).then(function (st) { hold('picker', false); if (st) select(st, 'user') })
+          return
+        }
         if ((b = e.target.closest('[data-mo-fx]'))) {
           S.fx = b.getAttribute('data-mo-fx')
           $$('[data-mo-fx]', boxFx).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })

@@ -1,0 +1,43 @@
+{
+  "name": "gingerbread-man",
+  "intent": "a cheeky cookie rocking side to side",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.7
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cookie",
+      "effect": "morph"
+    }
+  ]
+}

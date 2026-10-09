@@ -1,0 +1,47 @@
+{
+  "name": "chart-gantt",
+  "intent": "the task bars slide along the timeline as the plan moves",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-bar",
+      "effect": "rotate"
+    },
+    {
+      "to": "kanban",
+      "effect": "fade"
+    },
+    {
+      "to": "calendar",
+      "effect": "flip"
+    }
+  ]
+}

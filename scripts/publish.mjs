@@ -8,7 +8,10 @@
 //   node scripts/publish.mjs --only @withicons/core,withicons
 //   node scripts/publish.mjs --order                print the publish order and exit
 //
-// Packages (lockstep, one version): core react vue svelte angular solid web classes static search mcp motion dynamic + the `withicons` CLI.
+// Packages (lockstep, one version): core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static
+// static-plus search mcp
+// motion dynamic + the `withicons` CLI. core-plus, classes-plus, web-plus, static-plus, soft3d and holiday are companions holding the newest styles (jsDelivr's
+// 150 MB package limit): core-plus, soft3d and holiday depend on core, web on web-plus; classes goes out after its companions, since its loader links them.
 // The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
 // git tag v<version> already exists on a different commit: that version was released with other content, so bump first.
 //
@@ -19,6 +22,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { measure, overBudget } from './package-budget.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const argv = process.argv.slice(2)
@@ -45,7 +49,7 @@ const pkgs = fs.readdirSync(path.join(ROOT, 'packages'))
 const only = opt('only')?.split(',')
 const names = new Set(pkgs.map(p => p.json.name))
 // every package of the lockstep release; a missing one means its emitter did not run (node forge/build.mjs)
-const EXPECTED = ['@withicons/core', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
+const EXPECTED = ['@withicons/core', '@withicons/core-plus', '@withicons/soft3d', '@withicons/holiday', '@withicons/classes-plus', '@withicons/web-plus', '@withicons/static-plus', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
   '@withicons/web', '@withicons/classes', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
 const missing = EXPECTED.filter(n => !names.has(n))
 
@@ -53,7 +57,10 @@ const missing = EXPECTED.filter(n => !names.has(n))
 // CLI (it installs @withicons/mcp) strictly last. 0.2.1 published the CLI while @withicons/mcp@0.2.1 was not yet
 // installable, and `npx withicons@latest` failed for minutes; the guard below and the registry wait prevent that.
 const CLI = 'withicons'
+// runtime links that are not npm dependencies: the classes loader loads the companions' CSS from the same CDN version
+const AFTER = { '@withicons/classes': ['@withicons/classes-plus', '@withicons/soft3d', '@withicons/holiday', '@withicons/web-plus'], '@withicons/static': ['@withicons/static-plus'] }
 const deps = p => [...new Set([
+  ...(AFTER[p.json.name] || []),
   ...Object.keys({ ...p.json.dependencies, ...p.json.peerDependencies, ...p.json.optionalDependencies }),
   ...[].concat(p.json.bundleDependencies || p.json.bundledDependencies || []),
 ])].filter(n => names.has(n))
@@ -82,7 +89,7 @@ console.log(`order: ${order.map(p => p.json.name).join(' -> ')}`)
 
 if (flag('order')) process.exit(0)   // print the order only (packages/cli/test/publish-order.test.mjs)
 
-// --- checks: same version everywhere, built output present, repository url (provenance needs it)
+// --- checks: same version everywhere, built output present, size budget, repository url (provenance needs it)
 const expect = opt('expect')?.replace(/^v/, '')
 const problems = []
 if (missing.length && !only) problems.push(`missing packages (no packages/<dir>/package.json): ${missing.join(', ')} - run node forge/build.mjs`)
@@ -93,6 +100,8 @@ for (const { dir, json } of pkgs) {
   for (const f of json.files || []) if (!f.includes('*') && !f.startsWith('!') && !fs.existsSync(path.join(dir, f))) problems.push(`${json.name}: "${f}" listed in files but missing (run node forge/build.mjs)`)
   const repo = typeof json.repository === 'string' ? json.repository : json.repository?.url
   if (!repo || !repo.includes(REPO)) problems.push(`${json.name}: package.json "repository.url" must point to https://${REPO} (npm provenance verifies it)`)
+  // jsDelivr serves at most 150 MB per package version (~20 MB per file): refuse a package over the budget
+  if (fs.existsSync(path.join(dir, 'dist'))) problems.push(...overBudget(measure(dir)))
   if (json.name.startsWith('@') && json.publishConfig?.access !== 'public') console.warn(`  note: ${json.name} has no publishConfig.access=public; passing --access public`)
 }
 // a version whose git tag already exists on another commit was released with other content (e.g. v0.1.0 = 300 icons x 7

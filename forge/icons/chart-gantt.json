@@ -1,0 +1,65 @@
+{
+  "name": "chart-gantt",
+  "category": "charts",
+  "description": "Staggered horizontal bars on a timeline, for project plans, roadmaps and schedules.",
+  "aliases": [
+    "gantt",
+    "gantt-chart",
+    "roadmap",
+    "project-plan",
+    "project-timeline",
+    "timeline-chart",
+    "milestones"
+  ],
+  "tags": [
+    "chart",
+    "timeline",
+    "project",
+    "plan",
+    "schedule"
+  ],
+  "paths": [
+    {
+      "d": "M3 3 V19 A2 2 0 0 0 5 21 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 7 H12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 12 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M14 17 H20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "timeline",
+    "schedule",
+    "project management",
+    "project schedule",
+    "plan",
+    "planning",
+    "sprint",
+    "sprints",
+    "tasks over time",
+    "dependencies",
+    "phases",
+    "stages",
+    "deadline",
+    "delivery dates",
+    "program plan",
+    "release plan",
+    "calendar view",
+    "resource planning",
+    "bars",
+    "horizontal bars",
+    "workback",
+    "critical path"
+  ]
+}

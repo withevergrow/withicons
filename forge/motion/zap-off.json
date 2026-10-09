@@ -1,0 +1,27 @@
+{
+  "name": "zap-off",
+  "intent": "the bolt sputters but the power stays off",
+  "loop": {
+    "preset": "flicker",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "zap",
+      "effect": "fade"
+    }
+  ]
+}

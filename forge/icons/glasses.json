@@ -1,0 +1,71 @@
+{
+  "name": "glasses",
+  "category": "objects",
+  "description": "A pair of glasses, for reading, vision and accessibility.",
+  "aliases": [
+    "spectacles",
+    "eyeglasses",
+    "specs",
+    "reading-glasses",
+    "eyewear",
+    "optician"
+  ],
+  "synonyms": [
+    "vision",
+    "read",
+    "reading",
+    "reading mode",
+    "see",
+    "sight",
+    "eyesight",
+    "optical",
+    "optometrist",
+    "nerd",
+    "smart",
+    "study",
+    "review",
+    "look closer",
+    "accessibility",
+    "low vision",
+    "lenses",
+    "frames",
+    "sunglasses",
+    "geek",
+    "intellectual",
+    "eye test"
+  ],
+  "tags": [
+    "vision",
+    "eyewear",
+    "reading",
+    "accessibility",
+    "optical"
+  ],
+  "paths": [
+    {
+      "d": "M10.5 14.5 A3.75 3.75 0 1 1 3 14.5 A3.75 3.75 0 1 1 10.5 14.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M21 14.5 A3.75 3.75 0 1 1 13.5 14.5 A3.75 3.75 0 1 1 21 14.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 13.5 A2.25 2.25 0 0 1 13.5 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.25 13.25 L5.5 6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20.75 13.25 L18.5 6.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M10.5 14.5 A3.75 3.75 0 1 1 3 14.5 A3.75 3.75 0 1 1 10.5 14.5 Z",
+    "M21 14.5 A3.75 3.75 0 1 1 13.5 14.5 A3.75 3.75 0 1 1 21 14.5 Z"
+  ],
+  "cutouts": []
+}

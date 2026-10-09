@@ -1,0 +1,46 @@
+{
+  "name": "workflow",
+  "intent": "steps run in order as the connector draws from one box to the next",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "nudge",
+      "dir": 45,
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-branch",
+      "effect": "morph"
+    },
+    {
+      "to": "network",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "scale"
+    }
+  ]
+}

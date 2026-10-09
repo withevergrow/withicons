@@ -1,0 +1,9 @@
+{
+  "name": "avatar-bunny",
+  "intent": "hops softly with a twitch of its long ears",
+  "loop": { "preset": "bounce", "origin": [12,20.5], "amount": 0.5, "duration": 1.4 },
+  "hover": { "preset": "wiggle", "origin": [12,10], "amount": 0.7 },
+  "parts": { "A": { "preset": "sway", "origin": [12,9.5], "amount": 1.2, "delay": 0.1 } },
+  "alt": [{ "preset": "jelly", "origin": [12,21] },{ "preset": "nod", "origin": [12,21] }],
+  "swap": [{ "to": "rabbit", "effect": "fade" },{ "to": "avatar-cat", "effect": "morph" },{ "to": "avatar-bunny@solid", "effect": "scale" }]
+}

@@ -4,9 +4,10 @@
 // This entry adds the 500-icon spec table (icons.js) for motionFor() and motionAttrs(); a bundler drops the table from
 // apps that only animate, and an unbundled page (CDN) that only animates imports runtime.js or the element instead.
 import SPECS from './icons.js'
-import { plan } from './runtime.js'
+import { plan, styleSpec } from './runtime.js'
 
 export { PRESETS, EFFECTS, PRESET_DEFAULTS, EFFECT_DEFAULTS, SWAP_HOLD, SWAP_EASES, swapEase, swapCycle, specVars, slotVars, keyframeName } from './runtime.js'
+export { PRESETS_3D, STYLES_3D, PROFILE_3D, is3dStyle, motion3d, styleMotion, styleSpec, BACKDROP_STYLES, isBackdropStyle, styleMoves, MOVE_PROFILES, PLATE_PRESETS } from './runtime.js'
 export { prepareDraw, unprepareDraw, partsSvg, pauseWhenOffscreen, motion, swap } from './runtime.js'
 
 // The spec table (500 icons, ~29 KB gzipped) is only reached through motionFor() and motionAttrs(). motion(), swap() and
@@ -14,16 +15,19 @@ export { prepareDraw, unprepareDraw, partsSvg, pauseWhenOffscreen, motion, swap 
 const specTable = () => SPECS
 const own = (o, k) => !!o && Object.prototype.hasOwnProperty.call(o, k)
 
-/** The icon's motion spec ({ intent, loop, hover, alt?, swap? }), or null. */
-export function motionFor(name) {
+/** The icon's motion spec ({ intent, loop, hover, alt?, swap? }), or null. motionFor(name, style): as that style plays
+ *  it (a 3D style gets the 3D counterpart, styleSpec). */
+export function motionFor(name, style) {
   const t = specTable()
-  return typeof name === 'string' && own(t, name) ? t[name] : null
+  const s = typeof name === 'string' && own(t, name) ? t[name] : null
+  return style ? styleSpec(s, style) : s
 }
 
 /**
  * The attributes that make an icon wrapper move, for markup you write yourself (frameworks, SSR, copy-paste):
  * motionAttrs('bell', { trigger: 'hover', preset: 'shake', amount: 1.5 })
  *   -> { class: 'wm wm-hover wm-p-shake', 'data-wm': 'bell', style: '--wm-k:1.5' }
+ * motionAttrs('bell', { style: 'clay' }) -> { class: 'wm wm-loop wm-3d', 'data-wm': 'bell' }   (icons.css: the 3D chime)
  * Note: 'inview', hover that always finishes, and 'draw' strokes also need motion() at runtime.
  */
 export function motionAttrs(nameOrSpec, options) {

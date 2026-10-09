@@ -4,6 +4,8 @@
 //   node forge/tools/preview-motion.mjs sun,heart,rocket --styles line,solid,bauhaus,sticker,luxe --out .preview/motion2-x.png
 //   options: --trigger loop|hover (default loop)  --frames 8  --size 64  --dark  --spec '{"loop":{"preset":"spin"}}' (override)
 //            --span cycle (default: one object cycle; "cycle" = the whole cycle incl. the slower decoration loop)
+//            --flat (every style plays the flat motion; by default a 3D style such as clay / luxe plays the icon's 3D
+//            counterpart and a backdrop style (bento, dock) keeps its tile still: MOTION.md "3D motion")
 //
 // Each row is one icon in one style, each column one moment, evenly spaced over one loop (or over the one-shot plus a
 // short rest for --trigger hover). It applies the SAME keyframes and easings as motion.css (packages/motion/src:
@@ -57,6 +59,7 @@ export function frameMarkup(nodes, rootAttrs, plan, t, ids) {
   const mode = { k: plan.obj.k, dx: 0, dy: 0, em: 16 }
   const modeOf = r => { const [dx, dy] = meta.dirVec(r.dir || 0); return { k: r.k == null ? 1 : r.k, dx, dy, em: 16 } }
   const parts = nodes.some(([, a]) => meta.partRole(a.class) !== 'obj')
+  const roleOf = cls => meta.partRole(cls, { shine: plan.shine && plan.shine !== plan.obj })
   const moved = new Set()
   let defs = '', body = '', n = 0
   const wrap = (role, r, inner, box) => {
@@ -87,11 +90,13 @@ export function frameMarkup(nodes, rootAttrs, plan, t, ids) {
     }
     return `<g${a}>${inner}</g>`
   }
-  const mk = ([tag, a]) => `<${tag}${attrs(a)}/>`
-  if (!parts) body = wrap('obj', plan.obj, nodes.map(mk).join(''))
+  // rich styles: a node's optional third element holds children (defs > linearGradient > stop)
+  const mk = ([tag, a, kids]) => Array.isArray(kids) && kids.length ? `<${tag}${attrs(a)}>${kids.map(mk).join('')}</${tag}>` : `<${tag}${attrs(a)}/>`
+  if (!parts) body = nodes.filter(n => n[0] === 'defs').map(mk).join('') + wrap('obj', plan.obj, nodes.filter(n => n[0] !== 'defs').map(mk).join(''))
   else {
     for (const nd of nodes) {
-      const role = meta.partRole(nd[1].class)
+      if (nd[0] === 'defs') { body += mk(nd); continue }
+      const role = roleOf(nd[1].class)
       const m = mk(nd)
       const r = plan[role]
       body += wrap(role, r, m, r && r.box === 'fill-box' ? bboxOf(rootAttrs, m) : null)
@@ -114,10 +119,10 @@ export async function renderStrip(o) {
   let uid = 0
   for (const name of names) {
     const spec = o.spec ? Object.assign({ name }, specOf(name), o.spec) : specOf(name)
-    const m = resolveSpecMotion(spec, { trigger: trigger === 'hover' ? 'once' : 'loop' })
-    const plan0 = partsPlan(m, spec)
     for (const sn of Object.keys(styles)) {
       const st = styles[sn]
+      const m = resolveSpecMotion(spec, { trigger: trigger === 'hover' ? 'once' : 'loop', style: o.flat ? undefined : sn })
+      const plan0 = partsPlan(m, spec)
       let nodes
       try { nodes = o.nodes ? o.nodes(name, sn, renderIcon(st, loadIcon(name))) : renderIcon(st, loadIcon(name)) }
       catch (e) { body += `<text x="16" y="${y + 20}" font-size="11" fill="#e03" font-family="Segoe UI, Arial">${esc(name)} / ${sn}: ${esc(e.message)}</text>`; y += SIZE + PAD; continue }
@@ -134,8 +139,7 @@ export async function renderStrip(o) {
         cells += `<rect x="${x}" y="${y}" width="${SIZE}" height="${SIZE}" fill="none" stroke="${grid}"/>`
         cells += `<svg x="${x}" y="${y}" width="${SIZE}" height="${SIZE}" viewBox="0 0 24 24" overflow="visible"${attrs(root)} color="${fg}">${f.markup}</svg>`
       }
-      const a = spec[trigger === 'hover' ? 'hover' : 'loop']
-      const info = `${a.preset}${spec.parts ? ' +parts ' + Object.keys(spec.parts).join('') : ''}${tagged.has('deco') ? ' · deco ' + (plan.deco ? plan.deco.preset : 'still') : ''}`
+      const info = `${m.preset}${spec.parts ? ' +parts ' + Object.keys(spec.parts).join('') : ''}${tagged.has('deco') ? ' · deco ' + (plan.deco ? plan.deco.preset : 'still') : ''}`
       body += `<text x="16" y="${y + 18}" font-family="Segoe UI, Arial" font-size="13" font-weight="700" fill="${fg}">${esc(name)}</text>`
       body += `<text x="16" y="${y + 34}" font-family="Segoe UI, Arial" font-size="11" fill="${mut}">${esc(sn)} · ${esc(info)}</text>`
       body += `<text x="16" y="${y + 50}" font-family="Segoe UI, Arial" font-size="10" fill="${mut}">tags: ${esc([...tagged].join(' '))}</text>`
@@ -167,7 +171,7 @@ if (isMain) {
   if (bad.length) { console.error('unknown icon(s): ' + bad.join(', ')); process.exit(1) }
   const styles = opt.styles && opt.styles !== 'all' ? String(opt.styles).split(',') : (opt.styles === 'all' ? undefined : ['line', 'solid', 'bauhaus', 'sticker', 'luxe'])
   const r = await renderStrip({ icons, styles, trigger: opt.trigger, frames: opt.frames, size: opt.size, dark: !!opt.dark, span: opt.span,
-    spec: opt.spec ? JSON.parse(opt.spec) : null })
+    spec: opt.spec ? JSON.parse(opt.spec) : null, flat: !!opt.flat })
   const out = path.resolve(ROOT, String(opt.out || '.preview/motion2-strip.png'))
   fs.mkdirSync(path.dirname(out), { recursive: true })
   fs.writeFileSync(out, r.png)

@@ -1,0 +1,9 @@
+{
+  "name": "avatar-robot",
+  "intent": "nods like an assistant ready to help, antenna blinking",
+  "loop": { "preset": "float", "amount": 0.5, "duration": 2.6 },
+  "hover": { "preset": "nod", "origin": [12,20.5] },
+  "parts": { "A": { "preset": "pulse", "origin": [12,12.75], "amount": 0.6, "delay": 0.1 } },
+  "alt": [{ "preset": "type" },{ "preset": "wiggle", "origin": [12,20.5], "amount": 0.6 }],
+  "swap": [{ "to": "bot", "effect": "fade" },{ "to": "avatar-alien", "effect": "morph" },{ "to": "avatar-robot@solid", "effect": "scale" }]
+}

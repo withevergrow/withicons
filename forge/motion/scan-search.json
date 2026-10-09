@@ -1,0 +1,49 @@
+{
+  "name": "scan-search",
+  "intent": "the lens leans and peers inside the scan frame, looking closer",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "tilt",
+      "origin": [
+        11,
+        11
+      ],
+      "amount": 1,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        11,
+        11
+      ]
+    },
+    {
+      "preset": "orbit",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "search",
+      "effect": "scale"
+    },
+    {
+      "to": "scan-face",
+      "effect": "fade"
+    }
+  ]
+}

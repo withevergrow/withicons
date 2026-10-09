@@ -1,0 +1,31 @@
+{
+  "name": "git-compare",
+  "intent": "rocks back and forth like a diff going both ways",
+  "loop": {
+    "preset": "rock",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-merge",
+      "effect": "morph"
+    },
+    {
+      "to": "git-pull-request",
+      "effect": "fade"
+    }
+  ]
+}

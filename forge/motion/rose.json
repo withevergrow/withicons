@@ -1,0 +1,70 @@
+{
+  "name": "rose",
+  "intent": "the rose sways on its stem",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.7,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.4,
+      "delay": 0.2
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        8
+      ]
+    },
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "flower",
+      "effect": "morph"
+    },
+    {
+      "to": "rose-bouquet",
+      "effect": "scale"
+    },
+    {
+      "to": "rose@solid",
+      "effect": "fade"
+    }
+  ]
+}
