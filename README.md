@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png" alt="with icons: 734 icons, 34 styles, all animated. Over 25,000 free, open-source icons." width="100%"></a>
+<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png?v=0.4.0" alt="with icons: 734 icons, 34 styles, all animated. Over 25,000 free, open-source icons." width="100%"></a>
 
 <h3>Free, open-source icons that can’t sit still.</h3>
 
@@ -43,8 +43,8 @@ For slides, Canva, Figma, websites, apps and AI agents.
 - **Free means free.** MIT. Commercial use, no credit needed.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/styles-dark.png">
-  <img src="https://withicons.com/media/github/styles-light.png" alt="The rocket icon in all 34 styles, in six groups: Essentials (line, solid, duo, suite), Product and brand (bento, dock, brutal, bauhaus), 3D and glass (clay, glass, liquid, chrome, soft 3D, luxe, skeuo), Playful (kawaii, plush, sticker, gloss, pastel, pixel, retro), Artistic (sketch, engrave, blueprint, anime, gothic, coquette) and Holidays (utsav, rangoli, halloween, christmas, lunar, valentine)." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/styles-dark.png?v=0.4.0">
+  <img src="https://withicons.com/media/github/styles-light.png?v=0.4.0" alt="The rocket icon in all 34 styles, in six groups: Essentials (line, solid, duo, suite), Product and brand (bento, dock, brutal, bauhaus), 3D and glass (clay, glass, liquid, chrome, soft 3D, luxe, skeuo), Playful (kawaii, plush, sticker, gloss, pastel, pixel, retro), Artistic (sketch, engrave, blueprint, anime, gothic, coquette) and Holidays (utsav, rangoli, halloween, christmas, lunar, valentine)." width="100%">
 </picture>
 
 ## Quick start
@@ -383,7 +383,7 @@ The licence does not cover the with icons and Evergrow names and logos. Plain-En
 
 <div align="center">
 
-<a href="https://withicons.com"><img src="https://withicons.com/media/github/producthunt.gif" alt="One icon in each style turning into the next, ending on the with icons logo" width="120"></a>
+<a href="https://withicons.com"><img src="https://withicons.com/media/github/producthunt.gif?v=0.4.0" alt="One icon in each style turning into the next, ending on the with icons logo" width="120"></a>
 
 **[withicons.com](https://withicons.com)**
 
