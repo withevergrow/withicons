@@ -2,13 +2,24 @@
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { exportIcon, EXPORT_FORMATS } from './export-tool.mjs'
-import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES, recommendStyles, styleGroups, styleUses, iconMotions } from './lib.mjs'
+import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES, recommendStyles, styleGroups, styleUses, iconMotions, styleColours, brandExactness } from './lib.mjs'
 
 export const SERVER_NAME = 'withicons'
 export const VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0-dev'
 
+// colour facts for the descriptions, all read from the rendered icons (lib.styleColours: the bundle-time role table)
+function colourFacts(d) {
+  const one = d.styleNames.filter(s => { const c = styleColours(s); return c && !c.roles.length })
+  // multi-colour styles that are not palette styles (duo, blueprint): their roles, in plain words
+  const extra = d.meta.styles.filter(s => !s.palette).map(s => [s.name, styleColours(s.name)]).filter(([, c]) => c && c.roles.length)
+  return { one, extra, ...brandExactness() }
+}
+const themeText = f => 'Brand colours (hex): "#0ea5e9" or { primary, secondary?, tertiary?, ink? }, put on each icon\'s own parts by size (primary on the largest part, ' +
+  'secondary the next, tertiary the third; further parts, tint and shadow take primary\'s hue) in any style, so one theme fits a mixed set. ' +
+  `Exact hex (flat): ${f.exact.join(', ')}; shaded (gradients, see-through tones or shading, so the hex is one tone of several): ${f.shaded.join(', ')}. Not with palette.`
+
 const instructions = (d, remote) => {
-  const pal = d.meta.styles.filter(s => s.palette).map(s => s.name)
+  const cf = colourFacts(d)
   const groups = styleGroups(), uses = styleUses()
   const cats = new Set(d.meta.categories.map(c => c.name))
   const fest = ['indian-festivals', 'christmas', 'lunar-new-year', 'valentines', 'halloween'].filter(c => cats.has(c))
@@ -16,7 +27,9 @@ const instructions = (d, remote) => {
 Workflow: search_icons with what the icon should show ("delete", "throw away", "user settings") -> pick a name -> get_icon(name, style, format) for paste-ready code.
 Choosing a style: recommend_styles(for: "what you are making", e.g. "Diwali sale banner", "avatar picker for a kids app", "AI landing page") returns the best styles with packages, snippets, presets and palettes.${uses.length ? ` Best per job: ${uses.map(u => `${u.title.toLowerCase()}: ${u.styles.join(', ')}`).join('; ')}.` : ''} One style per page or UI region; only line, solid and duo go in 16-24px controls, the others at 32px+.
 ${fest.length ? `Festivals: icon categories ${fest.join(', ')} plus holiday styles with festival palettes. ` : ''}${cats.has('avatars') ? 'Avatars: category avatars (people with true-to-life skin-tone and hair palettes: offer several; animals; friendly monsters). ' : ''}Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "isometric server" -> soft3d, "claymorphism" -> clay, "manga" -> anime, "toy" or "kids" -> plush).
-${pal.length ? `Multi-colour styles (${pal.join(', ')}) and duo's tint + accent are CSS variables with defaults; the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
+Colours: ${cf.one.length ? `${cf.one.join(', ')} draw in one colour (currentColor: set color); the` : 'The'} others paint colour roles as CSS variables with defaults (the ink follows currentColor). list_styles gives each style's roles as its icons paint them${cf.extra.length ? ` (${cf.extra.map(([n, c]) => `${n}: ${c.summary}`).join('; ')})` : ''}. ` +
+`Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon / export_icon take palette: "<id>" or colors: { c1, c2, ink, ... }. ` +
+`Brand colours: theme: { primary, secondary?, tertiary?, ink? } (hex) puts them on each icon's own parts, largest first, in any style (per_icon on export_icon colours single icons); the hex shows exactly in ${cf.exact.join(', ')}, shaded in the rest.
 Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format, style) returns code for the optional @withicons/motion package (loops, hover effects, icon-to-icon swaps); 3D styles (clay, glass, liquid, chrome, soft3d, luxe, skeuo ...) play it in 3D and soft3d returns 3-5 moves per icon.
 Whole styles as files: https://withicons.com/downloads/with-icons-<style>.zip (every SVG + an offline viewer) and with-icons-all.zip.
 Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'On this remote server PNG-based and animated formats come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
@@ -55,6 +68,9 @@ export function createServer(opts = {}) {
   const categoryNames = d.meta.categories.map(c => c.name)
   const server = new McpServer({ name: SERVER_NAME, version: VERSION, title: 'with icons', websiteUrl: 'https://withicons.com' }, { instructions: instructions(d, remote), capabilities: { tools: {}, resources: {} } })
   const ro = { readOnlyHint: true, openWorldHint: false }
+  const cf = colourFacts(d)
+  const hex = z.string().max(40)
+  const themeShape = z.union([hex, z.object({ primary: hex, secondary: hex.optional(), tertiary: hex.optional(), ink: hex.optional() }).strict()])
 
   server.registerTool('search_icons', {
     title: 'Search icons',
@@ -72,8 +88,8 @@ export function createServer(opts = {}) {
   server.registerTool('get_icon', {
     title: 'Get icon code',
     description: `Get one icon as paste-ready code or SVG. name takes a canonical name or an alias ("delete" -> trash). format: ${FORMATS.join(', ')} (default svg). ` +
-      'Colours: palette (an id from list_palettes) and/or colors (roles ink, c1-c4, tint, accent, shadow, shine, edge -> hex; merged over the palette); color replaces currentColor in svg / data-uri; flat bakes the CSS variables into the svg (for <img>, Figma, slides). ' +
-      'The result has colors.mainRole (the role that paints the body: set it for a brand colour), warnings (colours that change nothing in this style), motion (whether animate_icon has a tuned animation) and, with include_palettes (default: a palette style with no format), the icon palette ids.',
+      'Colours: palette (an id from list_palettes) and/or colors (roles ink, c1-c4, tint, accent, shadow, shine, edge -> hex; merged over the palette); theme puts brand colours on this icon\'s own parts; color replaces currentColor in svg / data-uri; flat bakes the CSS variables into the svg (for <img>, Figma, slides). ' +
+      'The result has colors.mainRole (the colour role that paints the largest part, measured on the render) and colors.roleAreas (each role\'s share), warnings (colours that change nothing in this style), notes (e.g. a colour this style paints only as a see-through tone), appliedTheme (where each theme colour went; exact: primary shows unmixed), motion (whether animate_icon has a tuned animation) and, with include_palettes (default: a palette style with no format), the icon palette ids. list_styles says which roles each style paints.',
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias, e.g. "home", "arrow-right", "delete"'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
@@ -83,7 +99,8 @@ export function createServer(opts = {}) {
       flat: z.boolean().optional().describe('svg only: bake CSS-variable colours into the file (for <img>, Figma, slides, rasterizers)'),
       palette: z.string().max(60).optional().describe('Apply one of the icon colour palettes by id (see colors.suggestions in the result, or list_palettes), e.g. "classic-red"'),
       colors: z.object(Object.fromEntries(PALETTE_ROLES.map(r => [r, z.string().max(40).optional()]))).catchall(z.string().max(40)).optional()
-        .describe('Change any colour: roles ink (outline), c1 (main), c2, c3, c4, tint, accent, shadow, shine, edge -> "#hex" or a CSS colour name; also accepts --with-* variable names. Merged over palette.'),
+        .describe('Change any colour: roles ink (outline), c1 (main), c2, c3, c4, tint, accent, shadow, shine, edge -> "#hex" or a CSS colour name; also accepts --with-* variable names. Merged over palette (or theme). Which roles a style paints: list_styles colours.'),
+      theme: themeShape.optional().describe(themeText(cf)),
       include_palettes: z.boolean().optional().describe("List the icon's palette ids (colors.suggestions). Default: only for a palette style when no format is given"),
     },
     annotations: { title: 'Get icon code', ...ro },
@@ -95,7 +112,9 @@ export function createServer(opts = {}) {
 
   server.registerTool('list_styles', {
     title: 'List styles',
-    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays), goodFor, what each looks like, minSize (the smallest px it reads well at: 16 for UI styles, 32 creative and palette, 48 studio and storybook) and onDark (how to use it on dark backgrounds); palette styles list their colour variables.`,
+    description: `The ${styleNames.length} visual styles every icon is drawn in (${styleNames.join(', ')}), with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays), goodFor, what each looks like, minSize (the smallest px it reads well at: 16 for UI styles, 32 creative and palette, 48 studio and storybook) and onDark (how to use it on dark backgrounds); palette styles list their colour variables. ` +
+      'Every style has colours: the roles its icons really paint, read from the rendered icons (each role\'s variables, whether it is a solid, see-through tone or gradient fill / stroke, on how many icons; empty for one-colour styles), ' +
+      'and exact (whether a brand hex shows unmixed, see theme on get_icon / export_icon).',
     inputSchema: {},
     annotations: { title: 'List styles', ...ro },
   }, safe(() => json({ styles: listStyles(), groups: styleGroups().map(g => ({ id: g.id, title: g.title, blurb: g.blurb, styles: g.styles })), uses: styleUses(), next: 'recommend_styles(for: "what you are making") picks the best styles for a job, with packages and presets.' })))
@@ -134,8 +153,8 @@ export function createServer(opts = {}) {
   server.registerTool('list_palettes', {
     title: 'List colour palettes',
     description: 'The 20-30 colour palettes picked for one icon (true-to-life first, then moods: pastel, neon, retro, earthy, luxe, ...), each with its ten role colours ' +
-      '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, the icon variables with their roles and defaults, and mainRole: the role that covers most of the icon body (e.g. c2): set that one for a brand colour. ' +
-      `Multi-colour styles: ${d.meta.styles.filter(x => x.palette).map(x => x.name).join(', ')}, plus the duo and blueprint accents (one-colour styles only take the ink). Apply one with get_icon(name, style, format, palette: "<id>").`,
+      '(ink, c1-c4, tint, accent, shadow, shine, edge). With a style, every palette also lists the exact CSS variables it sets on that icon in that style, the icon variables with their roles and defaults, mainRole (the colour role that paints the largest part of the icon, measured on the render, e.g. c2) and roleAreas (each role\'s share of the drawn icon). ' +
+      `Multi-colour styles: ${d.meta.styles.filter(x => x.palette).map(x => x.name).join(', ')}${cf.extra.length ? `, plus ${cf.extra.map(([n]) => n).join(' and ')} (their roles: list_styles)` : ''}; one-colour styles only take the ink. Apply one with get_icon(name, style, format, palette: "<id>"); for brand colours across a set use theme (get_icon / export_icon).`,
     inputSchema: {
       name: z.string().min(1).describe('Icon name or alias'),
       style: z.enum(styleNames).optional().describe('Style to map the palettes onto (e.g. kawaii, sticker, retro)'),
@@ -183,7 +202,8 @@ export function createServer(opts = {}) {
         ? 'This remote server makes the vector, code and Lottie formats; for png-based and animated formats it returns the exact `npx withicons export …` command to run. ' +
           'Large exports come in pages: when the result has next ({ cursor, remaining }), call again with the same arguments plus cursor; plain svg-flat files then come back as urls[] to the prebuilt @withicons/static SVGs on jsDelivr. '
         : 'Files are saved to out_dir when given and returned inline when small. ') +
-      'Colours are baked in: set palette / colors / color here. Several icons: names: ["home", "settings"], or a map { "receipt": "orders" } to name each file; icons without the palette borrow it from the first that has it (strict_palette: true fails instead). ' +
+      'Colours are baked in: set palette / colors / color, or theme (brand colours put on each icon\'s own parts, in any style) and per_icon (different colours for some icons) here. Several icons: names: ["home", "settings"], or a map { "receipt": "orders" } to name each file; icons without the palette borrow it from the first that has it, matched by part size (strict_palette: true fails instead). ' +
+      'colorReport says per icon and style which colours changed nothing there (ignored), where the theme colours went (and whether primary shows exactly) and what a borrowed palette put on which part; warnings come first. ' +
       'File names default to <name>-<style>[-<variant>].<ext>; filename takes a template ({name} {style} {format} {variant} {default}) or an exact name.',
     inputSchema: {
       name: z.string().min(1).optional().describe('Icon name or alias'),
@@ -198,8 +218,12 @@ export function createServer(opts = {}) {
       matte: z.string().max(40).optional().describe('gif: edge colour to blend with, kept transparent'),
       palette: z.string().max(60).optional().describe('Palette id (list_palettes)'),
       strict_palette: z.boolean().optional().describe('Fail when an icon lacks the palette'),
-      colors: colorShape.optional().describe('Role -> colour (ink, c1-c4, tint, accent, shadow, shine, edge)'),
+      colors: colorShape.optional().describe('Role -> colour (ink, c1-c4, tint, accent, shadow, shine, edge); wins over theme'),
       color: z.string().max(40).optional().describe('Ink colour (currentColor)'),
+      theme: themeShape.optional().describe(themeText(cf)),
+      per_icon: z.record(z.string().min(1), z.union([hex, z.object(Object.fromEntries([...['primary', 'secondary', 'tertiary'], ...PALETTE_ROLES].map(k => [k, hex.optional()]))).strict()])).optional()
+        .describe('Colours for single icons, over theme: { "heart": "#e11d48", "star": { "primary": "#f59e0b", "secondary": "#fde68a" } } (a string is the primary); role keys (c1 ...) set that role on that icon only, ' +
+          'e.g. keep a people avatar\'s skin (c1; hair c2, clothes c4): { "avatar-woman": { "c1": "#f6d2b6" } }. Names among the exported icons.'),
       motion: z.string().max(40).optional().describe('loop (default), hover, once, swap, none or a preset'),
       to: z.string().max(60).optional().describe('swap target, "name" or "name@style"'),
       effect: z.enum(mo.effects).optional().describe('swap transition'),

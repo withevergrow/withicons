@@ -16,6 +16,13 @@ export function exportCommand(a) {
   add('--style', a.style); add('--format', a.format); add('--size', a.size); add('--background', a.background); add('--matte', a.matte)
   add('--palette', a.palette); if (a.palette && a.strict_palette) parts.push('--strict'); add('--color', a.color)
   for (const [k, v] of Object.entries(a.colors || {})) add(k.startsWith('--') ? '--colors' : '--' + k, k.startsWith('--') ? `${k.slice(2)}=${v}` : v)
+  // themes: --theme "#a,#b,#c,ink=#d"; per icon: --per-icon "heart=#a,star=#b/#c/ink:#d"
+  // primary, secondary, tertiary in order stay bare; any other key (ink, c1 ...) is named
+  const ORDER = ['primary', 'secondary', 'tertiary']
+  const themeList = (t, sep, kv) => typeof t === 'string' ? t : Object.keys(t || {}).filter(k => t[k]).sort((a, b) => (ORDER.indexOf(a) + 1 || 9) - (ORDER.indexOf(b) + 1 || 9))
+    .map((k, i) => (ORDER.indexOf(k) === i ? t[k] : `${k}${kv}${t[k]}`)).join(sep)
+  if (a.theme) add('--theme', themeList(a.theme, ',', '='))
+  if (a.per_icon && typeof a.per_icon === 'object') add('--per-icon', Object.entries(a.per_icon).map(([n, t]) => `${n}=${themeList(t, '/', ':')}`).join(','))
   add('--motion', a.motion); add('--to', a.to); add('--effect', a.effect); add('--hold', a.hold); add('--fps', a.fps); add('--seconds', a.seconds); add('--loop', a.loop)
   add('--duration', a.duration); add('--padding', a.padding); add('--stroke-width', a.stroke_width); if (a.all_styles) parts.push('--all-styles')
   add('--name', a.filename)

@@ -47,7 +47,8 @@ class PageTimeout extends Error {}
 
 /**
  * args: { name | names[] | names{icon: file base name}, style?, format? (one or a comma list), all_styles?, size?, background?, matte?, palette?, strict_palette?,
- *   colors?, color?, motion?, to?, effect?, hold?, duration?, fps?, seconds?, loop?, padding?, filename?, out_dir?, inline? } ; ctx: { remote }
+ *   colors?, color?, theme? ("#hex" | { primary, secondary?, tertiary?, ink? }), per_icon? ({ icon: "#hex" | { primary?, ... } }),
+ *   motion?, to?, effect?, hold?, duration?, fps?, seconds?, loop?, padding?, filename?, out_dir?, inline? } ; ctx: { remote }
  * -> MCP tool result ({ content, structuredContent })
  */
 export async function exportIcon(a = {}, o = {}) {
@@ -87,7 +88,7 @@ async function run(a, { remote = false }) {
   try {
     r = await exportIcons(lib, {
       names, nameMap: mapForm ? a.names : undefined, colorLabel: k => (k.startsWith('--') ? k : 'colors.' + k), format: formats.join(','), style, allStyles: !!a.all_styles, filename: a.filename, strictPalette: !!a.strict_palette, size: a.size, padding: a.padding, strokeWidth: a.stroke_width, background: a.background,
-      palette: a.palette, colors, color: a.color, motion: a.motion, duration: a.duration, fps: a.fps, seconds: a.seconds, loop: a.loop,
+      palette: a.palette, colors, color: a.color, theme: a.theme, perIcon: a.per_icon, motion: a.motion, duration: a.duration, fps: a.fps, seconds: a.seconds, loop: a.loop,
       matte: a.matte, to: a.to, effect: a.effect, hold: a.hold, out: outDir || '-', keepData: true,
     })
   } catch (e) {
@@ -117,10 +118,12 @@ async function run(a, { remote = false }) {
   })
   const tooBig = files.filter(f => inline && f.inline === false)
   const summary = {
+    // warnings first: the text block (this object as JSON) then starts with them
+    ...(r.warnings && r.warnings.length ? { warnings: r.warnings } : {}),
     name, ...(names.length > 1 ? { names } : {}), style: a.all_styles ? 'all' : style, formats, made: true, count: files.length, files,
     ...(outDir ? { outDir } : {}),
     notes: [...r.notes, ...(tooBig.length ? [`${tooBig.map(f => f.filename).join(', ')} ${tooBig.length === 1 ? 'is' : 'are'} too large to return inline: pass out_dir to save ${tooBig.length === 1 ? 'it' : 'them'} to disk.`] : [])],
-    ...(r.warnings && r.warnings.length ? { warnings: r.warnings } : {}),
+    ...(r.colorReport && r.colorReport.length ? { colorReport: r.colorReport } : {}),
     command: cmd, page: iconPage(name), ...(names.length > 1 ? { pages: names.map(iconPage) } : {}),
     ...(formats.some(f => ['gif', 'pptx-animated'].includes(f)) ? { tip: 'GIF edges are blended with the background (or matte) colour: export again with background set to your slide colour. Colours cannot be changed after export.' } : {}),
   }
@@ -153,7 +156,7 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
     }
   }
   // svg-flat with no colour, size or stroke options is a prebuilt file: a URL when the export needs more than one page
-  const plain = !a.palette && !a.color && !(a.colors && Object.keys(a.colors).length) && (a.size === undefined || a.size === 24) &&
+  const plain = !a.palette && !a.color && !(a.colors && Object.keys(a.colors).length) && !a.theme && !(a.per_icon && Object.keys(a.per_icon).length) && (a.size === undefined || a.size === 24) &&
     !a.padding && a.stroke_width === undefined && !a.background
   const est = (n, st, f) => sentBytes(lib.svgOf(n, st).length * (SIZE_FACTOR[f] || 6) + 2048, BINARY_FORMATS.has(f))
   let total = 0
@@ -171,10 +174,17 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
     urls.push({ ...(names.length > 1 ? { name: n } : {}), format: f, style: st, filename: filename ? applyNameTemplate(filename, { name: n, style: st, format: f, filename: def, as: nameMap && nameMap.get(n) }) : def, url: staticSvgUrl(st, n) })
   }
 
+  // per-icon colours: checked once for the whole export, then each call gets the entries of its own icons
+  const perIcon = new Map()
+  if (a.per_icon && typeof a.per_icon === 'object') for (const [k, v] of Object.entries(a.per_icon)) {
+    const n = lib.resolveName(k)
+    if (!names.includes(n)) throw new lib.IconError(`per_icon: "${k}" is not one of the icons being exported (${names.join(', ')})`, { code: 'invalid_option' })
+    perIcon.set(n, v)
+  }
   // one exportIcons call: the given icons, every rendered format, one style or all; or a single file
   const opts = {
     colorLabel: k => (k.startsWith('--') ? k : 'colors.' + k), filename, strictPalette: false, size: a.size, padding: a.padding, strokeWidth: a.stroke_width, background: a.background,
-    palette: a.palette, colors: { ...(a.colors || {}) }, color: a.color, motion: a.motion, duration: a.duration, fps: a.fps, seconds: a.seconds, loop: a.loop,
+    palette: a.palette, colors: { ...(a.colors || {}) }, color: a.color, theme: a.theme, motion: a.motion, duration: a.duration, fps: a.fps, seconds: a.seconds, loop: a.loop,
     matte: a.matte, to: a.to, effect: a.effect, hold: a.hold, out: '-', keepData: true,
   }
   // the engine asks for each file's SVG just before making it: past PAGE.hardMs a call stops there and is dropped, unless
@@ -184,11 +194,12 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
   const call = async (callNames, format, st) => {
     const withDonor = donor && !callNames.includes(donor) && callNames.some(n => n !== donor) ? [donor, ...callNames] : callNames
     const map = nameMap ? Object.fromEntries(withDonor.filter(n => nameMap.has(n)).map(n => [n, nameMap.get(n)])) : undefined
+    const per = Object.fromEntries(withDonor.filter(n => perIcon.has(n)).map(n => [n, perIcon.get(n)]))
     const r = await exportIcons(guarded, { ...opts, names: withDonor, nameMap: map && Object.keys(map).length ? map : undefined,
-      format, style: st || style, allStyles: !st && !!a.all_styles })
-    return { ...r, files: r.files.filter(f => callNames.includes(f.name)) }
+      perIcon: Object.keys(per).length ? per : undefined, format, style: st || style, allStyles: !st && !!a.all_styles })
+    return { ...r, files: r.files.filter(f => callNames.includes(f.name)), colorReport: (r.colorReport || []).filter(e => callNames.includes(e.name)) }
   }
-  const notes = new Set(), warnings = new Set()
+  const notes = new Set(), warnings = new Set(), report = new Map()
   let sent = 0, i = cursor
   try {
     const per = renderFormats.length * styles.length
@@ -218,6 +229,7 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
         sent += b; files.push(f); kept++
       }
       r.notes.forEach(n => notes.add(n)); (r.warnings || []).forEach(w => warnings.add(w))
+      for (const e of r.colorReport || []) if (!report.has(e.name + '|' + e.style)) report.set(e.name + '|' + e.style, e)
       i += kept
       if (kept < r.files.length) break
     }
@@ -239,6 +251,7 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
   const tooBig = list.filter(f => f.inline === false)
   const next = i < jobs.length ? { cursor: i, remaining: jobs.length - i } : null
   const summary = {
+    ...(warnings.size ? { warnings: [...warnings] } : {}),
     name, ...(names.length > 1 ? { names } : {}), style: a.all_styles ? 'all' : style, formats, made: true, count: list.length, files: list,
     ...(urls.length ? { urls } : {}),
     ...(paged ? { pageInfo: { cursor, files: list.length, of: jobs.length, ...(urls.length ? { urls: urls.length } : {}) } } : {}),
@@ -249,7 +262,7 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
       ...notes,
       ...(tooBig.length ? [`${tooBig.map(f => f.filename).join(', ')} ${tooBig.length === 1 ? 'is' : 'are'} too large to return here: run the command to make ${tooBig.length === 1 ? 'it' : 'them'} locally.`] : []),
     ],
-    ...(warnings.size ? { warnings: [...warnings] } : {}),
+    ...(report.size ? { colorReport: [...report.values()] } : {}),
     command: cmd, page: iconPage(name), ...(names.length > 1 ? { pages: names.map(iconPage) } : {}),
   }
   return { content: [{ type: 'text', text: JSON.stringify(summary) }, ...content], structuredContent: summary }
