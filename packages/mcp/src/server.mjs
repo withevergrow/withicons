@@ -32,9 +32,16 @@ const fail = e => {
 }
 // search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent)
 export function searchSummary(r) {
-  if (!r.count) return `No icons for "${r.query}".${r.suggestions && r.suggestions.length ? ` Did you mean: ${r.suggestions.join(', ')}?` : ''}${r.hint ? ` ${r.hint}` : ''}`
+  // similar icons, kept apart from the matches: never mistaken for what the query names
+  const extra = r.additional && r.additional.length
+    ? ['', 'Additional results (loosely related, not exact matches):', ...r.additional.map(x => `- ${x.name} (${x.category}): ${x.reason}`)] : []
+  if (!r.count) {
+    if (extra.length) return [`No exact match for "${r.query}".`, ...extra, '', 'Use one only if it fits, or try a simpler or more general word, or browse a category (list_categories). get_icon(name, style, format) returns any icon as code.'].join('\n')
+    return `No icons for "${r.query}".${r.suggestions && r.suggestions.length ? ` Did you mean: ${r.suggestions.join(', ')}?` : ''}${r.hint ? ` ${r.hint}` : ''}`
+  }
   const lines = [`${r.count} icon${r.count === 1 ? '' : 's'} for "${r.query}"${r.didYouMean ? ` (showing results for "${r.didYouMean}")` : ''}, style ${r.style}:`]
   r.results.forEach((x, i) => lines.push(`${i + 1}. ${x.name} (${x.category}): ${x.reason}`))
+  lines.push(...extra)
   lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
   return lines.join("\n")
 }
@@ -51,7 +58,7 @@ export function createServer(opts = {}) {
 
   server.registerTool('search_icons', {
     title: 'Search icons',
-    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked icon names, why each matched, and a ready-to-paste snippet; didYouMean when the query was spell-corrected, and a hint (where to browse) when nothing matched.',
+    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked exact matches (icon names, why each matched, a ready-to-paste snippet); didYouMean when the query was spell-corrected. When no icon carries the words it says noExactMatch and lists a few similar icons under additional (loosely related, no snippet): use one only if it fits, otherwise try a simpler word or browse a category. A hint says where to browse when nothing is close.',
     inputSchema: {
       query: z.string().min(1).describe('What the icon should show, in plain words'),
       limit: z.number().int().min(1).max(100).optional().describe('Max results (default 10)'),

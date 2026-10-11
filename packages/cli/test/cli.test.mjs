@@ -13,10 +13,25 @@ test('search "throw away" -> trash first', () => {
   assert.equal(r.status, 0)
   assert.match(r.stdout.split('\n')[0], /^\s+trash\s/)
 })
+test('search: no exact match says so, lists additional results and exits 1', t => {
+  if (run('get', 'croissant').status === 0) return t.skip('"croissant" is now an icon: choose another word')
+  const r = run('search', 'croissant')
+  assert.equal(r.status, 1)
+  assert.match(r.stdout, /^No exact match for "croissant"/)
+  assert.match(r.stdout, /\nAdditional results \(loosely related, not exact matches\):\n\s+\S+\s+\S+/)
+})
+test('search --json carries noExactMatch and additional', t => {
+  if (run('get', 'croissant').status === 0) return t.skip('"croissant" is now an icon: choose another word')
+  const j = JSON.parse(run('search', 'croissant', '--json').stdout)
+  assert.equal(j.noExactMatch, true)
+  assert.ok(j.additional.length >= 1)
+})
 test('search --json', () => {
   const j = JSON.parse(run('search', 'settigns', '--json', '-n', '3').stdout)
   assert.equal(j.results[0].name, 'settings')
-  assert.equal(j.results.length, 3)
+  // exact matches only (loosely related icons are in `additional`); -n caps them
+  assert.ok(j.results.length >= 1 && j.results.length <= 3)
+  assert.equal(JSON.parse(run('search', 'settigns', '--json', '-n', '1').stdout).results.length, 1)
 })
 test('get home --style solid --format react', () => {
   const r = run('get', 'home', '--style', 'solid', '--format', 'react')

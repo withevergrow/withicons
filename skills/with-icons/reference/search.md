@@ -52,7 +52,7 @@ x/dismiss -> `close`, hamburger -> `menu`, house -> `home`, magnifier -> `search
 Remote (no install, Streamable HTTP, stateless): **`https://withicons.com/mcp`**
 Local (stdio): **`npx -y @withicons/mcp`**
 
-The hosted server and `/api/*` share a per-IP limit (about 200 requests every 5 minutes). Over it, they answer
+The hosted server and `/api/*` share a per-IP limit (about 1,000 requests every 5 minutes). Over it, they answer
 HTTP 429 with `Retry-After: 300` and a JSON-RPC error (code -32029) whose message points to the local server. The local
 server, the CLI and the npm packages have no limit and work offline, so use them for batch work (many exports, whole
 icon sets) and switch to them when you see a 429.

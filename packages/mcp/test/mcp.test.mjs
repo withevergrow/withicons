@@ -52,6 +52,70 @@ describe('stdio server (SDK client)', () => {
     assert.match(r.results[0].reason, /trash/)
     assert.match(r.results[0].snippet, /import \{ Trash \} from '@withicons\/react'/)
   })
+  // search_icons separates what the query names from what is only related. The words below are unknown to the library today;
+  // if an icon with that name is ever added the test skips itself (pick another word that no icon carries).
+  const unknownWord = async (t, word) => {
+    const known = parse(await client.callTool({ name: 'resolve_icon', arguments: { name: word } }))
+    if (known.status !== 'unknown') { t.skip(`"${word}" is now an icon or alias: choose another word`); return false }
+    return true
+  }
+  test('search_icons: a word no icon carries is "no exact match", with similar icons as additional results', async t => {
+    if (!await unknownWord(t, 'croissant')) return
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'croissant' } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.deepEqual(r.results, [])
+    assert.equal(r.confidence, null)
+    assert.ok(r.additional.length >= 1 && r.additional.length <= 5, `additional: ${r.additional.length}`)
+    for (const x of r.additional) {
+      assert.ok(x.name && x.category && x.url, x.name)
+      assert.match(x.reason, /loosely related/)
+      assert.equal(x.snippet, undefined, 'additional results stay short: no snippet')
+    }
+    assert.match(r.hint, /^No exact match for "croissant"/)
+    assert.deepEqual(r.suggestions, [])
+    const text = raw.content[0].text
+    assert.match(text, /^No exact match for "croissant"/)
+    assert.match(text, /\nAdditional results \(loosely related, not exact matches\):\n- \S+ \(/)
+    assert.ok(text.length < 900, `summary stays short: ${text.length}`)
+  })
+  test('search_icons: a related concept is not an exact match ("bread" -> bakery icons only as additional results)', async t => {
+    if (!await unknownWord(t, 'bread')) return
+    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'bread' } }))
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.ok(r.additional.length >= 1)
+  })
+  test('search_icons: exact matches stay in results, loose ones go to additional', async () => {
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'trash can', limit: 5 } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, undefined)
+    assert.equal(r.results[0].name, 'trash')
+    assert.equal(r.count, r.results.length)
+    assert.ok(r.results.every(x => x.confidence !== 'low'), 'no low-confidence icon among the matches')
+    assert.ok((r.additional || []).length <= 5)
+    const names = new Set(r.results.map(x => x.name))
+    assert.ok((r.additional || []).every(x => !names.has(x.name)), 'additional never repeats a match')
+    // beside real matches only related-concept icons are offered, never low-confidence guesses ("trash can" -> calendar-x)
+    assert.ok((r.additional || []).every(x => x.confidence !== 'low'), 'no guesses beside exact matches')
+    if (r.additional && r.additional.length) assert.match(raw.content[0].text, /\nAdditional results \(loosely related, not exact matches\):\n/)
+  })
+  test('search_icons: a misspelling is still an exact match, spell-corrected', async () => {
+    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'calandar' } }))
+    assert.equal(r.noExactMatch, undefined)
+    assert.equal(r.results[0].name, 'calendar')
+    assert.equal(r.didYouMean, 'calendar')
+  })
+  test('search_icons: gibberish has no matches and nothing to offer: browse hint, no additional results', async () => {
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'xqzvk' } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.equal(r.additional, undefined)
+    assert.ok(r.hint)
+    assert.match(raw.content[0].text, /^No icons for "xqzvk"/)
+  })
   test('get_icon home react', async () => {
     const r = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'home', format: 'react' } }))
     assert.equal(r.name, 'home')
@@ -481,7 +545,10 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(r.statusCode, 200)
     const b = JSON.parse(r.body)
     assert.equal(b.results[0].name, 'trash')
-    assert.equal(b.results.length, 3)
+    // results are exact matches only (loosely related icons are in `additional`); limit caps them
+    assert.ok(b.results.length >= 1 && b.results.length <= 3)
+    assert.ok(b.results.every(x => x.confidence !== 'low'))
+    assert.equal(JSON.parse((await handler(ev('GET', '/api/search', 'q=trash%20can&limit=1'))).body).results.length, 1)
     assert.equal(r.headers['access-control-allow-origin'], '*')
   })
   test('GET /api/recommend', async () => {

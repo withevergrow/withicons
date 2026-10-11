@@ -124,7 +124,7 @@ Parameters:
     Description: AWS WAF web ACL with a per-IP rate limit (~$6/month + $0.60 per million requests).
   WafRateLimitPer5Min:
     Type: Number
-    Default: 200
+    Default: 1000
     MinValue: 100
     Description: >-
       Requests per 5 minutes per IP to the hosted API (/mcp and /api/*) before WAF answers 429 with a message

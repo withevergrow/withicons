@@ -1620,7 +1620,7 @@ This is the short index. The full reference (usage, every style, motion, live ic
 ## Find an icon
 
 - Search API (JSON, understands synonyms and typos): \`${BASE}/api/search?q=<words>\`; also \`/api/icon/<name>?style=&format=\`, \`/api/icon/<name>.svg\`, \`/api/palettes/<name>\`, \`/api/motion/<name>\`.
-- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 200 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, list_palettes, list_styles, list_categories.
+- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 1,000 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, list_palettes, list_styles, list_categories.
 - Set up an AI coding tool (skill + MCP): \`npx withicons init\` (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; \`--dry-run\` first).
 - CLI: \`npx withicons search "<words>"\`, \`npx withicons get <name> --style <style> --format react\`.
 - Static data (no server): ${BASE}/icons.json and \`${BASE}/icons/<name>.html\`. Library: \`${BASE}/icons.html?q=<words>\`.

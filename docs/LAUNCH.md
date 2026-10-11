@@ -266,7 +266,7 @@ curl -s -o /dev/null -w "%{time_total}\n" "https://withicons.com/api/search?q=do
 
 Every real `scripts/deploy.mjs` run ends with the same warm (`--skip-warm` turns it off): it invalidates `/api/*` when
 the Lambda code changed, waits for the invalidation, then requests the top 150 `/api/search?q=` queries (curated words +
-icon names). The WAF counts those against the runner's IP (limit 200 per 5 minutes), so the warm is capped at 180.
+icon names). The WAF counts those against the runner's IP (limit 1000 per 5 minutes), so the warm stays capped at 180 (well under it).
 
 **Notes on the design** (details in `infra/site.yaml` comments and `docs/COSTS.md`):
 - `/mcp` and `/api/*` share the site's distribution and certificate (no CORS for the site's own calls, one hostname

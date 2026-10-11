@@ -11,7 +11,7 @@
 //        --bucket <b> --distribution <id> --function <name>   (override the stack outputs)
 // Env overrides: WITHICONS_BUCKET, WITHICONS_DISTRIBUTION_ID, WITHICONS_FUNCTION_NAME, WITHICONS_STACK.
 // Cache warm (after a real deploy): --skip-warm  --warm-only (just warm, no build/upload)  --warm-limit <n> (default 150,
-//        max 180: WAF allows 200 API requests per IP per 5 min)  --warm-base <url> (default https://withicons.com)
+//        max 180: the WAF allows 1000 API requests per IP per 5 min, keep the warm well under it)  --warm-base <url> (default https://withicons.com)
 //
 // Why not plain `aws s3 sync`: in CI every checked-out file has a fresh mtime, so sync re-uploads all
 // ~700 files and cannot tell us which paths really changed. We diff local MD5s against S3 ETags instead,
@@ -306,7 +306,7 @@ async function postDeployCacheWarm() {
 }
 
 // Queries: a curated list of what people and agents actually type, then icon names from site/icons.json, deduped.
-// Budget: the WAF rule (WafRateLimitPer5Min, default 200) counts EVERY /api/* request per IP over 5 minutes, cache
+// Budget: the WAF rule (WafRateLimitPer5Min, default 1000) counts EVERY /api/* request per IP over 5 minutes, cache
 // hits included, so one warm run stays at <= 180 and stops at the first 429. Two deploys within 5 minutes from the
 // same runner can still trip it for that runner only (the warm then stops; nothing else is affected).
 async function warmApiCache() {

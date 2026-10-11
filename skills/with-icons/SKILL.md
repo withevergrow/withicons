@@ -102,7 +102,7 @@ More in [reference/frameworks.md](reference/frameworks.md#accessibility).
 
 ## 5. Find the right icon
 
-- **MCP** (best for agents): remote `https://withicons.com/mcp` (about 200 requests per IP per 5 minutes, then HTTP 429),
+- **MCP** (best for agents): remote `https://withicons.com/mcp` (about 1,000 requests per IP per 5 minutes, then HTTP 429),
   local and unlimited `npx -y @withicons/mcp` (prefer it for batch work). Tools: `search_icons`, `get_icon`,
   `resolve_icon`, `recommend_styles` (best styles for a job, a festival or an audience, with packages, presets and
   palettes), `animate_icon`, `export_icon`, `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with

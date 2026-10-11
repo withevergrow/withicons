@@ -125,6 +125,12 @@ export function usageLine(name, framework = 'react', style = 'line') {
 }
 
 const REASON = { name: 'name', alias: 'alias', synonym: 'related word', tag: 'tag', category: 'category', description: 'description' }
+// an exact match is what the query names (high) or a sound, direct match (medium: a spelling fix, a stem, a partial match
+// that misses a modifier). What the engine only reached through a related concept ("bread" -> bakery icons, kind
+// "concept") or guessed (low) is similar, not exact: it goes to `additional`, never into `results`.
+const isExact = x => x.confidence === 'high' || (x.confidence === 'medium' && x.match.kind !== 'concept')
+const ADDITIONAL_MAX = 5
+const ADDITIONAL_POOL = 12   // extra ranked results fetched so loose ones cannot push exact matches out of the limit
 export function searchIcons({ query, limit = 10, style, category, format = 'react' } = {}) {
   const d = data()
   const st = style ? checkStyle(style) : null
@@ -133,29 +139,39 @@ export function searchIcons({ query, limit = 10, style, category, format = 'reac
   const q = String(query || '')
   // one call: ranked results with a calibrated confidence, the best matches the category filter hid, and the
   // spelling the engine understood
-  const r = d.engine.query(q, { limit: lim, category, style: st || undefined })
+  const r = d.engine.query(q, { limit: lim + ADDITIONAL_POOL, category, style: st || undefined })
   const useStyle = st || r.parsed.style || 'line'
-  const results = r.results
+  const results = r.results.filter(isExact).slice(0, lim)
+  // beside real matches, low-confidence guesses are noise ("trash can" -> calendar-x via "cancel"): they are offered only
+  // when nothing matches exactly, where a guess is better than silence
+  const similar = r.results.filter(x => !isExact(x) && (!results.length || x.confidence !== 'low')).slice(0, ADDITIONAL_MAX)
   // "Showing results for ...": only when the top result needed a spelling correction
   const dym = results.length && results[0].match.typo ? r.didYouMean || null : null
-  const allWeak = results.length > 0 && results.every(x => x.confidence === 'low')
-  const hint = !results.length ? browseHint(r.parsed.category)
-    : allWeak ? `No icon names "${q}" directly; these are loosely related (confidence low). Prefer a simpler word, or browse a category (list_categories).` : null
+  const hint = results.length ? null
+    : similar.length ? `No exact match for "${q}". The additional results are only loosely related: use one only if it fits, or try a simpler or more general word, or browse a category (list_categories).`
+    : browseHint(r.parsed.category)
   return {
     query, style: useStyle, count: results.length,
+    ...(results.length ? {} : { noExactMatch: true }),
     confidence: results.length ? results[0].confidence : null,
     ...(dym ? { didYouMean: dym } : {}),
     ...(hint ? { hint } : {}),
     results: results.map(x => ({
-      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
-      reason: `matched ${REASON[x.match.field]} "${x.match.term}"${x.match.typo ? ' (typo-tolerant)' : ''}${x.confidence === 'low' ? ' (related, low confidence)' : ''}`,
+      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence,
+      reason: `matched ${REASON[x.match.field]} "${x.match.term}"${x.match.typo ? ' (typo-tolerant)' : ''}`,
       match: x.match,
       snippet: snippet(x.name, useStyle, format),
       url: `${SITE}/icons/${x.name}.html`,
     })),
+    // similar icons, clearly apart from the matches and short (no snippet: get_icon returns the code of the one that fits)
+    ...(similar.length ? { additional: similar.map(x => ({
+      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
+      reason: `matched ${REASON[x.match.field]} "${x.match.term}" (loosely related${x.confidence === 'low' ? ', low confidence' : ''})`,
+      url: `${SITE}/icons/${x.name}.html`,
+    })) } : {}),
     // a category filter hid stronger matches: name them so the caller can widen the search
     ...(r.outside && r.outside.length ? { outside: r.outside.map(x => ({ name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, url: `${SITE}/icons/${x.name}.html` })) } : {}),
-    suggestions: results.length ? [] : d.engine.suggest(q, 5),
+    suggestions: results.length || similar.length ? [] : d.engine.suggest(q, 5),
   }
 }
 

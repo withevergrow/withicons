@@ -436,12 +436,23 @@ async function run(argv) {
         if (!query.trim()) return usage('withicons search: give some words, e.g. withicons search "throw away"')
         const r = lib.searchIcons({ query, limit: num(o, 'limit', { int: true }) || 10, style: o.style, category: o.category, format: o.format || o.framework || 'react' })
         if (o.json) { out(r); return r.count ? 0 : 1 }
+        // similar icons (loosely related, not exact matches), apart from the matches
+        const extra = r.additional || []
+        const listExtra = () => {
+          const aw = Math.max(...extra.map(x => x.name.length))
+          console.log('Additional results (loosely related, not exact matches):')
+          for (const x of extra) console.log(`  ${x.name.padEnd(aw)}  ${dim(x.category.padEnd(13))} ${dim(x.reason)}`)
+        }
         if (!r.count) {
-          console.log(`No icons for "${query}".` + (r.suggestions.length ? ` Did you mean: ${r.suggestions.map(cyan).join(', ')}?` : ''))
+          if (!extra.length) { console.log(`No icons for "${query}".` + (r.suggestions.length ? ` Did you mean: ${r.suggestions.map(cyan).join(', ')}?` : '')); return 1 }
+          console.log(`No exact match for "${query}".\n`)
+          listExtra()
+          console.log(dim('\n  Use one only if it fits, or try a simpler or more general word.'))
           return 1
         }
         const w = Math.max(...r.results.map(x => x.name.length))
         for (const x of r.results) console.log(`  ${bold(x.name.padEnd(w))}  ${dim(x.category.padEnd(13))} ${dim(x.reason)}`)
+        if (extra.length) { console.log(); listExtra() }
         console.log(dim(`\n  withicons get ${r.results[0].name}${r.style !== 'line' ? ' --style ' + r.style : ''} --format react   ·   ${r.results[0].url}`))
         return 0
       }

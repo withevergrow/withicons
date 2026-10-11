@@ -28,22 +28,41 @@ export declare class IconError extends Error {
 export type Confidence = 'high' | 'medium' | 'low'
 export type MatchKind = 'exact' | 'prefix' | 'stem' | 'typo' | 'similar' | 'phonetic' | 'concept'
 export interface SearchMatch { field: 'name' | 'alias' | 'synonym' | 'tag' | 'category' | 'description' | string; term: string; typo?: boolean; kind?: MatchKind }
+/** an exact match: what the query names (high) or a sound, direct match (medium); `results` holds only these */
 export interface SearchResult {
   name: string; title: string; category: string; score: number
   confidence?: Confidence
-  /** set when confidence is low: a loosely related icon, not what the query names */
-  weak?: true
   reason: string; match: SearchMatch
   snippet: string; url: string
 }
+/** a similar icon, not an exact match (low confidence, or reached only through a related concept: "bread" -> bakery
+ *  icons). Short on purpose: no snippet, get_icon returns the code of the one that fits. */
+export interface AdditionalResult {
+  name: string; title: string; category: string; score: number
+  confidence?: Confidence
+  /** set when confidence is low */
+  weak?: true
+  reason: string; url: string
+}
 /** a strong match the category filter hid */
 export interface OutsideResult { name: string; title: string; category: string; score: number; confidence?: Confidence; url: string }
-export interface SearchResponse { query: string; style: string; count: number; results: SearchResult[]; suggestions: string[]
-  /** confidence of the top result, null when there is none */
+export interface SearchResponse { query: string; style: string
+  /** the number of exact matches (results.length) */
+  count: number
+  /** exact matches only, best first */
+  results: SearchResult[]
+  /** true when no icon carries the query's words (count is 0): look at `additional`, or try another word */
+  noExactMatch?: true
+  /** up to 5 similar icons, apart from the matches: loosely related, use one only if it fits. Beside exact matches only
+   *  related-concept icons appear; low-confidence guesses are listed only when there is no exact match. */
+  additional?: AdditionalResult[]
+  /** names closest to the query, only when there are neither matches nor additional results */
+  suggestions: string[]
+  /** confidence of the top exact match, null when there is none */
   confidence: Confidence | null
   /** the query as the engine understood it, when the top result needed a spelling correction */
   didYouMean?: string
-  /** no results, or only low-confidence ones: where to browse instead */
+  /** no exact match: what to do next (use an additional result only if it fits, a simpler word, or where to browse) */
   hint?: string
   /** the best matches the category filter hid (only when the filtered results are weak) */
   outside?: OutsideResult[] }

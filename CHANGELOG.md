@@ -6,6 +6,15 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+### Changed
+- `search_icons` (MCP), `searchIcons` (`@withicons/mcp/lib`, `/api/search`) and `withicons search` keep `results` for exact matches only
+  (what the query names, or a direct match such as a spelling fix). When no icon carries the words they say `noExactMatch`, and up to
+  five similar icons come back apart, in `additional` (loosely related, no snippet), instead of being padded into `results` as
+  low-confidence matches. A word the engine only reached through a related concept ("bread" -> bakery icons) counts as similar, not exact.
+- Hosted API and `/mcp`: the per-IP rate limit (`WafRateLimitPer5Min`) now defaults to 1000 requests per 5 minutes (was 200). The live limit
+  changes when the CloudFormation stack is updated.
+- `docs/MCP-AGENT-EVAL.md`: results of five agent-built pitch decks and the prioritised fix list that followed.
+
 ## 0.4.0 - 2026-10-09
 
 ### Added
