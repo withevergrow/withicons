@@ -10,6 +10,11 @@ import { webcrypto } from 'node:crypto'
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { createServer, VERSION } from './server.mjs'
 import { IconError, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, data, animateIcon, listMotion, listPalettes, PALETTE_ROLES, recommendStyles } from './lib.mjs'
+import { useHostedRenderer } from './export-tool.mjs'
+import { initResvg } from './resvg-wasm.mjs'
+
+// export_icon's PNG-based files: @resvg/resvg-wasm (resvg.wasm next to this bundle), compiled on the first PNG export
+useHostedRenderer(initResvg)
 
 const CORS = {
   'access-control-allow-origin': '*',

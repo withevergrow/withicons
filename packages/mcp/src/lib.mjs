@@ -920,6 +920,7 @@ export function recommendStyles({ for: text = '', use, icon, limit = 6 } = {}) {
   const recommendations = ranked.slice(0, Math.max(1, Math.min(12, +limit || 6))).map(s => ({ ...styleInfo(s, name || 'home'), ...(name ? { page: `${SITE}/icons/${name}.html` } : {}) }))
   const notes = []
   if (festivals.length) notes.push(`Festival icons: list_categories(category: "${festivals[0].category}"), or search_icons for the object; everyday icons (shopping-bag, gift, tag, calendar) render in the holiday styles too. Holiday styles carry festival palettes (stylePalettes on each style): set their CSS variables on a parent, e.g. ${stylePaletteHint(recommendations)}.`)
+  for (const u of hits) if (u.note) notes.push(u.note)   // a use's own advice (the guide's uses[].note, e.g. slides: which files)
   if (avatars) notes.push('Avatars: list_categories(category: "avatars") (people, animals, friendly monsters, all avatar-*). People avatars have true-to-life palettes for many skin tones and hair colours: list_palettes(name: "avatar-woman", tag: "true-to-life") and let users choose; never one default skin tone.')
   if (recommendations.some(r => r.style === 'duo')) notes.push('Duo presets (on the duo entry): "Duo with an accent" works in every package via CSS variables; "Duo gradient" is site and studio only.')
   if (recommendations.some(r => r.motion3d)) notes.push('3D styles animate in 3D: animate_icon(name, style: "<3D style>") adds wm-3d (and soft3d returns 3-5 moves); <with-icon variant="…" motion="loop"> does it by itself.')

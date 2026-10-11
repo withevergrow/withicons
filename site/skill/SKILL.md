@@ -154,10 +154,11 @@ npx withicons export bell --format gif --background "#ffffff" --out slides      
 npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a" --color "#ffffff"
 ```
 
-MCP `export_icon` takes the same options in snake_case (`out_dir` on the local server). The remote server answers
-PNG-based and animated formats with the `npx withicons export …` command to run.
+MCP `export_icon` takes the same options in snake_case (`out_dir` on the local server). The remote server makes PNG and
+the other still formats itself (inline, base64) and answers `gif`, `apng`, `pptx-animated` and `pptx-sheet` with the
+`npx withicons export …` command to run.
 
-- Slides and design tools: `svg-flat` or `png`; print: `pdf`, `eps` or `svg-flat` (never PNG); email: PNG at 2x,
+- Slides and docs: `png` at 512 px, transparent, embedded as a picture (PNG, not SVG); design tools: `svg-flat`; print: `pdf`, `eps` or `svg-flat` (never PNG); email: PNG at 2x,
   hosted on your https URLs (never SVG); a moving icon: `gif` (plays in PowerPoint, Keynote, Google Slides, Gmail, Slack).
 - Colours are baked in; a `currentColor` ink becomes black (role-named styles keep their own ink colour): on dark backgrounds pass `--color "#ffffff"` and the slide colour
   as `--background` (GIF), and pick an `on-dark` palette for multi-colour styles. Quote colours (`#` starts a comment).

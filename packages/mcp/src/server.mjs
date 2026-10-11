@@ -7,6 +7,14 @@ import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, re
 export const SERVER_NAME = 'withicons'
 export const VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '0.0.0-dev'
 
+// How to put icons in a deck or a document: one paragraph of the instructions, worded for the local or the hosted server
+const slideRecipe = remote => 'Making slides and docs: call recommend_styles({ use: \'slides\' }) first, then make the whole set in one call: ' +
+  `export_icon({ names: [...], style, format: 'png', size: 512, colors: { ... }${remote ? '' : ', out_dir'} }) ` +
+  `(one colors set for every icon; the background stays transparent unless you set one)${remote ? '; the PNGs come back inline as base64 resources (save each under its filename), a large set in pages (next.cursor)' : ''}. ` +
+  'Embed PNG, not SVG (pptxgenjs slide.addImage({ path }) or python-pptx add_picture): a 512 px PNG stays crisp from 0.5 to 3 in on a slide; use size 1024 for larger or printed icons. ' +
+  "'pptx' is a one-slide deck with the icon to copy from, 'pptx-sheet' a deck of one icon in every style for choosing a look, 'pptx-animated' a ready slide with the moving icon: none of them merges into your own deck. " +
+  'Single-colour styles (solid, line: color sets the ink) match a brand hex exactly; gradient and shadow styles (clay, glass, liquid, soft3d, suite ...) shade the colours you give, so they never match a brand colour exactly.'
+
 const instructions = (d, remote) => {
   const pal = d.meta.styles.filter(s => s.palette).map(s => s.name)
   const groups = styleGroups(), uses = styleUses()
@@ -19,7 +27,8 @@ ${fest.length ? `Festivals: icon categories ${fest.join(', ')} plus holiday styl
 ${pal.length ? `Multi-colour styles (${pal.join(', ')}) and duo's tint + accent are CSS variables with defaults; the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
 Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format, style) returns code for the optional @withicons/motion package (loops, hover effects, icon-to-icon swaps); 3D styles (clay, glass, liquid, chrome, soft3d, luxe, skeuo ...) play it in 3D and soft3d returns 3-5 moves per icon.
 Whole styles as files: https://withicons.com/downloads/with-icons-<style>.zip (every SVG + an offline viewer) and with-icons-all.zip.
-Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'On this remote server PNG-based and animated formats come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
+Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'This hosted server makes PNG, every still format, animated-svg and Lottie itself and returns the files inline (base64 resources named by filename); gif, apng, pptx-animated and pptx-sheet come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
+${slideRecipe(remote)}
 Formats: ${FORMATS.join(', ')}. Packages: @withicons/react|vue|svelte|angular|solid|web|classes|core|static|motion|dynamic (web = <with-icon> element, classes = <i class="with with-home"> CSS icons); every framework package, <with-icon> and the class loader carry every style. Raw files of the newest styles live in companions: @withicons/core-plus, soft3d, holiday (SVG + node data), static-plus (prebuilt SVG, sprites), classes-plus; recommend_styles names the package per style. Names and common aliases both work (e.g. "delete" -> trash).`
 }
 
@@ -47,7 +56,7 @@ export function searchSummary(r) {
 }
 const safe = fn => async args => { try { return await fn(args || {}) } catch (e) { return fail(e) } }
 
-// opts.remote: the HTTP / Lambda server (no PNG renderer: export_icon answers raster and animated formats with a command)
+// opts.remote: the HTTP / Lambda server (PNG from resvg-wasm; export_icon answers the frame-by-frame formats with a command)
 export function createServer(opts = {}) {
   const remote = !!opts.remote
   const d = data()
@@ -180,7 +189,7 @@ export function createServer(opts = {}) {
       'Animated: gif (plays everywhere; set background to the slide colour), apng, animated-svg, pptx-animated (a ready 16:9 slide), lottie / dotlottie; motion picks the movement. ' +
       'Still: svg, svg-flat (colours baked in), pdf, eps, png, png-set, ico, favicon-pack, android, ios, pptx, pptx-sheet (every style), docx, and code (jsx, tsx, vue, svelte, html, css, data-uri ...). ' +
       (remote
-        ? 'This remote server makes the vector, code and Lottie formats; for png-based and animated formats it returns the exact `npx withicons export …` command to run. ' +
+        ? 'This hosted server makes png and every other still format, animated-svg and Lottie itself, returned inline (base64 resources named by filename); for gif, apng, pptx-animated and pptx-sheet (too slow for one request) it returns the exact `npx withicons export …` command to run. ' +
           'Large exports come in pages: when the result has next ({ cursor, remaining }), call again with the same arguments plus cursor; plain svg-flat files then come back as urls[] to the prebuilt @withicons/static SVGs on jsDelivr. '
         : 'Files are saved to out_dir when given and returned inline when small. ') +
       'Colours are baked in: set palette / colors / color here. Several icons: names: ["home", "settings"], or a map { "receipt": "orders" } to name each file; icons without the palette borrow it from the first that has it (strict_palette: true fails instead). ' +
@@ -190,7 +199,7 @@ export function createServer(opts = {}) {
       names: z.union([z.array(z.string().min(1)).max(50), z.record(z.string().min(1), z.string().min(1).max(120))]).optional()
         .describe('List, or map icon -> file base name'),
       style: z.enum(styleNames).optional().describe('Style (default line)'),
-      format: z.string().max(200).optional().describe('One format or a comma list (see the tool description)'),
+      format: z.string().max(200).optional().describe('One format or a comma list (see the tool description). Slides and docs: png at size 512, transparent, embedded as a picture (PNG, not SVG)'),
       filename: z.string().max(120).optional().describe('Template or exact name; extension added'),
       all_styles: z.boolean().optional().describe('One file per style'),
       size: z.number().int().min(8).max(2048).optional().describe('Pixels (animated formats up to 2048)'),

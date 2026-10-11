@@ -1,4 +1,4 @@
-// The deployed Lambda layout (scripts/deploy.mjs): index.mjs (infra/lambda) + mcp/lambda.mjs + mcp/data/{svg-*,palettes}.json.
+// The deployed Lambda layout (scripts/deploy.mjs): index.mjs (infra/lambda) + mcp/lambda.mjs + mcp/resvg.wasm + mcp/data/{svg-*,palettes}.json.
 // Checks the origin guard, the keep-warm ping, that the SVG data is read from mcp/data/ (not inlined), and that the
 // precomputed multi-colour table matches what the npm library computes from the SVGs.
 import { test, describe, before, after } from 'node:test'
@@ -20,6 +20,7 @@ describe('Lambda zip layout (infra/lambda/index.mjs + mcp/)', () => {
     fs.mkdirSync(path.join(dir, 'mcp', 'data'), { recursive: true })
     fs.copyFileSync(entry, path.join(dir, 'index.mjs'))
     fs.copyFileSync(path.join(dist, 'lambda.mjs'), path.join(dir, 'mcp', 'lambda.mjs'))
+    fs.copyFileSync(path.join(dist, 'resvg.wasm'), path.join(dir, 'mcp', 'resvg.wasm'))
     fs.writeFileSync(path.join(dir, 'mcp', 'package.json'), '{"type":"module"}\n')
     for (const f of fs.readdirSync(path.join(dist, 'data'))) if (/^(svg-[a-z0-9-]+|palettes)\.json$/.test(f)) fs.copyFileSync(path.join(dist, 'data', f), path.join(dir, 'mcp', 'data', f))
     process.env.ORIGIN_VERIFY_SECRET = SECRET
@@ -49,6 +50,17 @@ describe('Lambda zip layout (infra/lambda/index.mjs + mcp/)', () => {
     assert.equal((await handler(spoof)).statusCode, 401)
     const spoof2 = { source: 'withicons.warm', requestContext: {} }
     assert.equal((await handler(spoof2)).statusCode, 401)
+  })
+  test('export_icon PNG works from the zip layout (mcp/resvg.wasm, loaded on the first PNG)', async () => {
+    const r = await handler({ ...ev('/mcp'), requestContext: { http: { method: 'POST', path: '/mcp', sourceIp: '1.2.3.4' } },
+      headers: { host: 'withicons.com', 'x-origin-verify': SECRET, 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'export_icon', arguments: { name: 'home', style: 'solid', format: 'png', size: 64 } } }) })
+    assert.equal(r.statusCode, 200)
+    const res = JSON.parse(r.body).result
+    assert.equal(res.structuredContent.made, true, res.content[0].text)
+    const png = Buffer.from(res.content.find(c => c.type === 'resource').resource.blob, 'base64')
+    assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10])
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [64, 64])
   })
   test('every style is read from mcp/data/', async () => {
     const styles = JSON.parse((await handler(ev('/api/styles'))).body).styles.map(s => s.name)
