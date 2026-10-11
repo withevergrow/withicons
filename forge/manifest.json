@@ -1,5 +1,5 @@
 {
- "count": 734,
+ "count": 741,
  "categories": [
   "ai",
   "navigation",
@@ -8367,6 +8367,133 @@
    "description": "A friendly dinosaur avatar, for playful profiles and kids.",
    "aliases": [],
    "batch": "new-36"
+  },
+  {
+   "name": "playground",
+   "category": "education",
+   "description": "A playground slide with a ladder, for parks, day cares, kindergartens and play areas.",
+   "aliases": [
+    "play-area",
+    "playset",
+    "play-park",
+    "playpark",
+    "jungle-gym",
+    "climbing-frame",
+    "kids-slide",
+    "playground-slide",
+    "slide-and-ladder",
+    "play-equipment",
+    "swing-set"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "crayon",
+   "category": "education",
+   "description": "A wax crayon with a blunt tip and a paper wrapper, for colouring, kids’ art and drawing.",
+   "aliases": [
+    "crayons",
+    "wax-crayon",
+    "coloring",
+    "colouring",
+    "color-crayon",
+    "colour-crayon",
+    "oil-pastel",
+    "drawing-crayon",
+    "coloring-crayon"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "stroller",
+   "category": "travel",
+   "description": "A baby pram with a hood, handle and wheels, for strollers, babies and family-friendly places.",
+   "aliases": [
+    "pram",
+    "baby-carriage",
+    "pushchair",
+    "buggy",
+    "baby-stroller",
+    "baby-buggy",
+    "baby-pram",
+    "perambulator",
+    "strollers"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "baby-bottle",
+   "category": "food",
+   "description": "A baby feeding bottle with a teat and measuring marks, for infant feeding, milk and formula.",
+   "aliases": [
+    "feeding-bottle",
+    "milk-bottle",
+    "nursing-bottle",
+    "bottle-feeding",
+    "baby-feeding",
+    "baby-milk",
+    "infant-formula",
+    "baby-formula",
+    "feeder",
+    "baby-bottles"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "dental-chair",
+   "category": "health",
+   "description": "A dentist’s chair with its overhead light, for dental clinics, appointments and treatments.",
+   "aliases": [
+    "dentist-chair",
+    "dentists-chair",
+    "dental-unit",
+    "dental-office",
+    "dentist-office",
+    "dental-practice",
+    "treatment-chair",
+    "patient-chair",
+    "operatory",
+    "exam-chair"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "tooth-crown",
+   "category": "health",
+   "description": "A tooth with its dental crown cap lifted off, for crowns, caps, restorations and dental treatments.",
+   "aliases": [
+    "dental-crown",
+    "tooth-cap",
+    "dental-cap",
+    "crown-tooth",
+    "crowned-tooth",
+    "dental-restoration",
+    "tooth-restoration",
+    "porcelain-crown",
+    "ceramic-crown",
+    "cap-tooth"
+   ],
+   "batch": "new-38"
+  },
+  {
+   "name": "worried",
+   "category": "users",
+   "description": "A worried face with raised inner brows, a wavy mouth and a sweat drop, for anxiety, nerves and concern.",
+   "aliases": [
+    "anxious",
+    "nervous",
+    "worry",
+    "worried-face",
+    "anxious-face",
+    "nervous-face",
+    "concerned",
+    "uneasy",
+    "stressed",
+    "fearful",
+    "sweat-face",
+    "apprehensive"
+   ],
+   "batch": "new-38"
   }
  ]
 }
