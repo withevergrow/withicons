@@ -2,6 +2,7 @@
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { exportIcon, EXPORT_FORMATS } from './export-tool.mjs'
+import { registerPreviewTool } from './preview-tool.mjs'
 import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES, recommendStyles, styleGroups, styleUses, iconMotions } from './lib.mjs'
 
 export const SERVER_NAME = 'withicons'
@@ -14,6 +15,7 @@ const instructions = (d, remote) => {
   const fest = ['indian-festivals', 'christmas', 'lunar-new-year', 'valentines', 'halloween'].filter(c => cats.has(c))
   return `with icons (withicons.com): ${d.meta.icons.length} open-source (MIT) icons, each drawn in ${d.styleNames.length} styles${groups.length ? `, in ${groups.length} groups: ${groups.map(g => `${g.title} (${g.styles.join(', ')})`).join('; ')}` : ` (${d.styleNames.join(', ')})`}.
 Workflow: search_icons with what the icon should show ("delete", "throw away", "user settings") -> pick a name -> get_icon(name, style, format) for paste-ready code.
+Look before you choose: preview_icons(names, styles) returns ONE labelled picture (${remote ? 'an SVG sheet' : 'a PNG'}) of several icons in several styles, rows = icons, columns = styles, optionally on a dark or brand-colour background; use it to compare styles and pick between candidates instead of guessing.
 Choosing a style: recommend_styles(for: "what you are making", e.g. "Diwali sale banner", "avatar picker for a kids app", "AI landing page") returns the best styles with packages, snippets, presets and palettes.${uses.length ? ` Best per job: ${uses.map(u => `${u.title.toLowerCase()}: ${u.styles.join(', ')}`).join('; ')}.` : ''} One style per page or UI region; only line, solid and duo go in 16-24px controls, the others at 32px+.
 ${fest.length ? `Festivals: icon categories ${fest.join(', ')} plus holiday styles with festival palettes. ` : ''}${cats.has('avatars') ? 'Avatars: category avatars (people with true-to-life skin-tone and hair palettes: offer several; animals; friendly monsters). ' : ''}Style words in a query pick the style ("cute heart" -> kawaii, "8-bit star" -> pixel, "isometric server" -> soft3d, "claymorphism" -> clay, "manga" -> anime, "toy" or "kids" -> plush).
 ${pal.length ? `Multi-colour styles (${pal.join(', ')}) and duo's tint + accent are CSS variables with defaults; the ink follows currentColor. ` : ''}Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon(..., palette: "<id>") applies one, colors: { c1, c2, ink, ... } changes any colour.
@@ -219,6 +221,8 @@ export function createServer(opts = {}) {
     },
     annotations: { title: 'Export icon files', readOnlyHint: remote, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   }, safe(a => exportIcon(a, { remote })))
+
+  registerPreviewTool(server, { remote })
 
   // icon://<style>/<name>.svg
   server.registerResource('icon', new ResourceTemplate('icon://{style}/{name}.svg', {

@@ -27,9 +27,9 @@ describe('stdio server (SDK client)', () => {
   })
   after(async () => { await client.close() })
 
-  test('lists the nine tools', async () => {
+  test('lists the ten tools', async () => {
     const { tools } = await client.listTools()
-    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'recommend_styles', 'resolve_icon', 'search_icons'])
+    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'preview_icons', 'recommend_styles', 'resolve_icon', 'search_icons'])
     const x = tools.find(t => t.name === 'export_icon')
     for (const k of ['name', 'format', 'motion', 'background', 'out_dir', 'to', 'fps']) assert.ok(x.inputSchema.properties[k], k)
     assert.match(x.description, /gif/)
@@ -516,7 +516,7 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(JSON.parse(init.body).result.serverInfo.name, 'withicons')
     const list = await handler(rpc(2, 'tools/list', {}))
     const tools = JSON.parse(list.body).result.tools
-    assert.equal(tools.length, 9)
+    assert.equal(tools.length, 10)
     // remote: no out_dir (nothing to write to), raster / animated formats answer with the command
     assert.ok(!tools.find(t => t.name === 'export_icon').inputSchema.properties.out_dir)
     const call = await handler(rpc(3, 'tools/call', { name: 'search_icons', arguments: { query: 'throw away' } }))

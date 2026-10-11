@@ -9,6 +9,7 @@ import { is3dStyle, isBackdropStyle, styleMoves, motion3d, hasParts, MOVE_PROFIL
 export const FORMATS = ['svg', 'react', 'vue', 'svelte', 'angular', 'solid', 'html-class', 'web-component', 'data-uri']
 export const FRAMEWORKS = ['react', 'vue', 'svelte', 'angular', 'solid', 'web-component', 'html-class', 'svg']
 export const SITE = 'https://withicons.com'
+export { previewSheet, PREVIEW_LIMITS } from './preview-sheet.mjs'   // the preview_icons sheet as SVG (preview-tool.mjs adds the PNG and the MCP tool)
 const CDN = 'https://cdn.jsdelivr.net/npm/@withicons'
 
 let state = null
