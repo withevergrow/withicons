@@ -134,9 +134,28 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
     }
     return 'export const multiRaw = ' + JSON.stringify(JSON.stringify(multi)) + '\nexport const rangesRaw = ' + JSON.stringify(JSON.stringify(ranges)) + '\n'
   }
+  // '#style-roles' (every bundle): each style's colour roles, read from every icon it renders, plus how exactly a brand
+  // colour shows in it (packages/mcp/src/colour-model.mjs styleColourTable; list_styles, the theme docs). Built once.
+  let styleRolesJs = null
+  const styleRoles = async () => {
+    if (styleRolesJs) return styleRolesJs
+    const dataDir = path.join(mcpDir, 'dist', 'data')
+    const meta = JSON.parse(fs.readFileSync(path.join(dataDir, 'meta.json'), 'utf8'))
+    const { styleColourTable } = await import(pathToFileURL(path.join(mcpDir, 'src', 'colour-model.mjs')).href)
+    const names = meta.icons.map(i => i.name), every = Math.max(1, Math.floor(names.length / 16))
+    const sample = names.filter((_, i) => i % every === 0)
+    const table = {}
+    for (const s of meta.styles) {
+      const f = path.join(dataDir, 'svg-' + s.name + '.json')
+      if (fs.existsSync(f)) table[s.name] = styleColourTable(JSON.parse(fs.readFileSync(f, 'utf8')), { sample, inkDraws: !s.palette })
+    }
+    return (styleRolesJs = 'export default JSON.parse(' + JSON.stringify(JSON.stringify(table)) + ')\n')
+  }
   const dataPlugin = file => ({
     name: 'data', setup(b) {
       b.onResolve({ filter: /^#data$/ }, () => ({ path: path.join(mcpDir, 'src', file) }))
+      b.onResolve({ filter: /^#style-roles$/ }, () => ({ path: 'style-roles', namespace: 'style-roles' }))
+      b.onLoad({ filter: /.*/, namespace: 'style-roles' }, async () => ({ contents: await styleRoles(), loader: 'js' }))
       b.onResolve({ filter: /^#lambda-index$/ }, () => ({ path: 'lambda-index', namespace: 'lambda-index' }))
       b.onLoad({ filter: /.*/, namespace: 'lambda-index' }, () => ({ contents: lambdaIndex(), loader: 'js' }))
       // "<file>.json?text" -> export default "<file contents as one string>"

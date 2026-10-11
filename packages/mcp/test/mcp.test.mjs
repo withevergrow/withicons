@@ -282,8 +282,9 @@ describe('stdio server (SDK client)', () => {
     assert.equal(g.colors.mainRole, 'c1')   // bubblegum pink body (sticker paints its main body with c1)
     const p = parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'bell', style: 'sticker', limit: 1 } }))
     assert.equal(p.mainRole, 'c1')
-    assert.ok(p.mainRoleShare > 0.3 && p.mainRoleShare <= 1)
-    assert.match(p.mainRoleNote, /c1 paints the main body of bell in sticker/)
+    // the share is of the whole drawn icon (its outline and die-cut border included), measured on the render
+    assert.ok(p.mainRoleShare > 0.2 && p.mainRoleShare <= 1)
+    assert.match(p.mainRoleNote, /c1 \(Main colour\) paints the largest part of bell in sticker/)
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'duo', limit: 1 } })).mainRole, 'c1')
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'line', limit: 1 } })).mainRole, 'ink')
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', limit: 1 } })).mainRole, undefined, 'needs a style')

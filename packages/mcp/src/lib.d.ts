@@ -94,14 +94,29 @@ export interface AppliedPalette {
   /** roles / variables passed that change nothing here */
   ignored?: string[]
 }
+/** Brand colours: primary goes on the icon's largest colour part, secondary the next, tertiary the third (hex). */
+export interface Theme { primary: string; secondary?: string; tertiary?: string; ink?: string }
+/** where a theme's colours went on one icon in one style: the role each one landed on */
+export interface ThemeParts { primary?: PaletteRole | null; secondary?: PaletteRole; tertiary?: PaletteRole }
+export interface AppliedTheme {
+  theme: Theme; parts: ThemeParts
+  /** primary shows unmixed on most of what it paints (flat styles); false where gradients, tones or shading mix it */
+  exact: boolean; exactShare: number
+  /** the icon is drawn mostly in the ink, which the theme keeps as the style draws it: theme.ink colours it */
+  inkLeads?: true
+}
 export interface IconResponse {
   name: string; requested?: string; title: string; category: string; style: string; format: Format; size: number
   code: string; url: string
   appliedPalette?: AppliedPalette
+  appliedTheme?: AppliedTheme
   /** style-wide palette variables and their defaults (palette styles only) */
   palette?: Record<string, string>
   /** multi-colour styles only: this icon's colour variables and its palette ids */
-  colors?: { note: string; variables: ColorVariable[]; palettes: number; suggestions?: { id: string; name: string; tags: string[] }[]; hint?: string }
+  colors?: { note: string; variables: ColorVariable[]
+    /** the colour role that paints the largest visible part (measured on the render) and every role's share of the drawn icon */
+    mainRole: PaletteRole; roleAreas: Partial<Record<PaletteRole, number>>
+    palettes: number; suggestions?: { id: string; name: string; tags: string[] }[]; hint?: string }
   notes?: string[]
   /** colours that change nothing in this style, and the roles it uses */
   warnings?: string[]
@@ -112,6 +127,8 @@ export declare function getIcon(opts: {
   /** id (or name) of one of the icon's palettes */
   palette?: string
   colors?: PaletteColors
+  /** brand colours put on this icon's own parts ("#hex" = { primary }); not with palette */
+  theme?: string | Theme
   /** false: leave out colors.suggestions (default true) */
   includePalettes?: boolean
 }): IconResponse
@@ -120,8 +137,9 @@ export interface PalettesResponse {
   name: string; requested?: string; auto: boolean; count: number; total: number
   roles: Record<PaletteRole, string>; multiColourStyles: string[]
   style?: string; variables?: ColorVariable[]
-  /** with a style: the role that paints most of the icon body (set it for a brand colour); 'ink' for one-colour styles */
-  mainRole?: PaletteRole; mainRoleShare?: number; mainRoleNote?: string
+  /** with a style: the colour role that paints the largest visible part (measured on the render); 'ink' for one-colour
+   *  styles; mainRoleShare is its share of the drawn icon, roleAreas every role's share */
+  mainRole?: PaletteRole; mainRoleShare?: number; mainRoleNote?: string; roleAreas?: Partial<Record<PaletteRole, number>>
   palettes: (Palette & { vars?: Record<string, string>; css?: string })[]
   howTo: string; note?: string
 }
@@ -130,10 +148,33 @@ export declare function applyColors(name: string, style: string, opts: { palette
 export declare function colorWarning(name: string, style: string, applied: AppliedPalette | null): string | null
 export declare function colorVars(name: string, style: string): ColorVariable[]
 /** One note / warning per colour for a whole command (several icons or styles) instead of one per icon. */
-export declare function colorSummary(entries: { name: string; style: string; applied: AppliedPalette | null }[],
+export declare function colorSummary(entries: { name: string; style: string; applied: AppliedPalette | null; theme?: { theme: Theme; parts: ThemeParts; exact: boolean; inkLeads?: true } }[],
   opts?: { keys?: string[]; palette?: boolean; label?: (key: string) => string }): { notes: string[]; warnings: string[] }
-/** The colour role covering the largest visible area of the icon body in a style, with its share of the drawn area. */
+/** The hue role (c1-c4, accent) painting the largest visible area in a real render; else tint / shadow / edge / shine; else the ink. */
 export declare function mainRole(name: string, style: string): { role: PaletteRole; share: number | null }
+/** Each role's share of the icon's drawn area in a style, largest first. */
+export declare function roleAreas(name: string, style: string): Partial<Record<PaletteRole, number>>
+export declare const THEME_KEYS: ('primary' | 'secondary' | 'tertiary' | 'ink')[]
+/** "#hex" or a theme object -> clean #rrggbb values (IconError code invalid_theme / invalid_color); partial: primary optional */
+export declare function checkTheme(theme: string | Partial<Theme>, opts?: { partial?: boolean; what?: string }): Theme
+/** A theme resolved onto one icon in one style: the role colours to apply, where each brand colour went, and exactness. */
+export declare function themeColors(name: string, style: string, theme: string | Theme, opts?: { shades?: Partial<Record<PaletteRole, string>> }):
+  { colors: Record<string, string>; parts: ThemeParts; exact: boolean; exactShare: number; inkLeads?: true; theme: Theme }
+/** Another icon's palette on an icon that lacks it, matched by part size: { colors, parts: { <icon role>: <donor role> } } */
+export declare function borrowColors(name: string, style: string, donor: string, palette: string):
+  { colors: Record<string, string>; parts: Partial<Record<PaletteRole, PaletteRole>>; from: string; palette: string }
+/** A style's colour roles as its rendered icons paint them (empty roles: one colour, the ink). */
+export interface StyleColours {
+  icons: number
+  roles: { role: PaletteRole; label: string | null; vars: string[]; icons: number; paints: 'solid' | 'tone' | 'gradient'; as: 'fill' | 'stroke' | 'fill and stroke'; opacity?: number }[]
+  inkFollowsColor: boolean
+  /** a theme's primary shows unmixed on most of what it paints */
+  exact: boolean; exactShare: number | null
+  summary: string
+}
+export declare function styleColours(style: string): StyleColours | null
+/** styles a brand hex shows exactly in (flat) and the ones that shade it */
+export declare function brandExactness(): { exact: string[]; shaded: string[] }
 /** Removes the @withicons/motion part classes (wm-a, wm-k, wm-deco, …) from SVG markup, for files. */
 export declare function stripMotion(svg: string): string
 export declare function multiColourStyles(name: string): string[]
@@ -177,7 +218,9 @@ export declare function listStyles(): { name: string; title: string; kind: strin
   minSize: 16 | 32 | 48
   /** how to use it on a dark background */
   onDark: string
-  palette?: boolean; vars?: Record<string, string> }[]
+  palette?: boolean; vars?: Record<string, string>
+  /** the roles the style's icons really paint, and whether a brand hex shows exactly */
+  colours?: StyleColours }[]
 export declare function listCategories(): { total: number; categories: { name: string; count: number; examples: string[] }[] }
 export declare function listCategories(category: string): { category: string; count: number; icons: { name: string; title: string; description: string }[] }
 export declare function info(): { version: string; icons: number; styles: string[]; groups: { id: string; title: string; styles: string[] }[]; uses: StyleUse[]; paletteStyles: string[]; formats: Format[]; site: string; animated: number; palettes: number }

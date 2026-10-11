@@ -3,6 +3,8 @@
 import { create, titleOf } from '../../search/src/engine.mjs'
 import { loadData } from '#data'
 import { rolesFor, ROLES, ROLE_LABELS } from '../../../forge/lib/palette-map.mjs'
+import { paintModel, mainRoleOf, roleShares, resolveTheme, rankParts, paintsOf, HUE_ROLES } from './colour-model.mjs'
+import STYLE_ROLES from '#style-roles'
 import GUIDE from './style-guide.mjs'
 import { is3dStyle, isBackdropStyle, styleMoves, motion3d, hasParts, MOVE_PROFILES } from '../../motion/src/meta.js'
 
@@ -56,13 +58,22 @@ export function flatten(s) {
 }
 export const isPaletteStyle = style => !!(data().meta.styles.find(s => s.name === style) || {}).palette
 
+// currentColor -> the ink, except inside an element with its own `color` (blueprint paints its accent strokes that way:
+// color="var(--with-accent, …)" stroke="currentColor"), where currentColor is that colour
+function inkCurrentColor(svg, ink) {
+  return svg.replace(/<[a-zA-Z][^>]*>/g, tag => {
+    if (!/currentColor/.test(tag)) return tag
+    const own = /\scolor="([^"]*)"/.exec(tag)
+    return own && !/currentColor/.test(own[1]) ? tag.replace(/(\s(?!color=)[\w:-]+=")currentColor"/g, `$1${own[1]}"`) : tag.replace(/currentColor/g, ink)
+  })
+}
 export function svgOf(name, style, { size, color, strokeWidth, flat } = {}) {
   const d = data()
   let svg = d.svg(style)[name]
   if (!svg) throw new IconError(`"${name}" is not available in style "${style}"`, { code: 'missing_style' })
   if (flat) svg = stripMotion(flatten(svg))   // a flat SVG is a file: no motion hooks
   if (size && +size !== 24) svg = svg.replace(/^<svg([^>]*?) width="24" height="24"/, `<svg$1 width="${+size}" height="${+size}"`)
-  if (color) svg = svg.replace(/currentColor/g, String(color).replace(/[^#\w(),.%\s-]/g, ''))
+  if (color) svg = flat ? inkCurrentColor(svg, String(color).replace(/[^#\w(),.%\s-]/g, '')) : svg.replace(/currentColor/g, String(color).replace(/[^#\w(),.%\s-]/g, ''))
   if (strokeWidth) svg = svg.replace(/stroke-width="[\d.]+"/, `stroke-width="${+strokeWidth}"`)
   return svg
 }
@@ -245,7 +256,8 @@ export function searchIcons({ query, limit = 10, style, category, format = 'reac
 }
 
 // includePalettes: false leaves out colors.suggestions (the 20-30 palette ids) and keeps a one-line hint instead
-export function getIcon({ name, style = 'line', format = 'svg', size, color, strokeWidth, flat, palette, colors, includePalettes = true } = {}) {
+// theme: brand colours resolved onto this icon's own roles in this style (themeColors); not with a palette
+export function getIcon({ name, style = 'line', format = 'svg', size, color, strokeWidth, flat, palette, colors, theme, includePalettes = true } = {}) {
   const canonical = resolveName(name)
   style = checkStyle(style); format = checkFormat(format)
   const m = data().byName.get(canonical)
@@ -253,14 +265,22 @@ export function getIcon({ name, style = 'line', format = 'svg', size, color, str
   const pal = isPaletteStyle(style)
   const vars = colorVars(canonical, style)
   const custom = colors && typeof colors === 'object' && Object.keys(colors).length
-  // with a palette, `color` is the ink (unless colors.ink says otherwise)
-  const applied = palette || custom ? applyColors(canonical, style, { palette, colors: color ? { ink: color, ...(colors || {}) } : colors }) : null
+  let themed = null
+  if (theme != null && theme !== '') {
+    if (palette) throw new IconError('theme and palette both recolour the icon: pass one (theme for brand colours, palette for a set picked for this icon).', { code: 'theme_and_palette' })
+    themed = themeColors(canonical, style, theme)
+  }
+  // with a palette, `color` is the ink (unless colors.ink says otherwise); a theme's colours come first, colors win
+  const roleCols = themed ? { ...themed.colors, ...(color ? { ink: color } : {}), ...(colors || {}) } : color ? { ink: color, ...(colors || {}) } : colors
+  const applied = palette || custom || themed ? applyColors(canonical, style, { palette, colors: roleCols }) : null
   const notes = []
   let code
   if (applied) {
     code = paletteSnippet(canonical, style, format, { size, strokeWidth, flat }, applied)
     if (format === 'html-class' && vars.length) notes.push('CSS-class icons bake their colours into a data URI, so only the ink (color) applies there; use svg, web-component or a framework format for the full palette.')
     if (!vars.length && (palette || Object.keys(colors || {}).some(k => String(k).toLowerCase() !== 'ink'))) notes.push(`The ${style} style draws "${canonical}" in one colour (the ink), so only the palette's ink applies. Multi-colour styles for this icon: ${multiColourStyles(canonical).join(', ')}.`)
+    for (const t of tonesOf(canonical, style, applied)) notes.push(toneText(style, t.role, [canonical], t.opacity))
+    if (themed && themed.inkLeads && !color && !(colors && colors.ink)) notes.push(inkLeadText(style, [canonical]))
   } else code = snippet(canonical, style, format, { size, color, strokeWidth, flat })
   // one-colour styles: the note above says it once (no second, per-role warning)
   const warning = vars.length ? colorWarning(canonical, style, applied) : null
@@ -270,14 +290,16 @@ export function getIcon({ name, style = 'line', format = 'svg', size, color, str
     title: titleOf(canonical), category: m.category, style, format, size: size ? +size : 24,
     code,
     ...(applied ? { appliedPalette: applied } : {}),
+    ...(themed ? { appliedTheme: { theme: themed.theme, parts: themed.parts, exact: themed.exact, exactShare: themed.exactShare, ...(themed.inkLeads ? { inkLeads: true } : {}) } } : {}),
     url: `${SITE}/icons/${canonical}.html`,
     ...(pal ? { palette: (data().meta.styles.find(s => s.name === style) || {}).vars || {} } : {}),
     ...(vars.length ? {
       colors: {
-        note: 'Every colour is a CSS variable with a default (override any of them on the icon or a parent); the ink follows currentColor. Recolour with palette: "<id>" (one of suggestions) and/or colors: { c1: "#hex", ink: "#hex", ... }; flat: true bakes the colours into the file (for <img>, Figma, slides). list_palettes shows every palette\'s colours.',
+        note: 'Every colour is a CSS variable with a default (override any of them on the icon or a parent); the ink follows currentColor. Recolour with palette: "<id>" (one of suggestions), colors: { c1: "#hex", ink: "#hex", ... }, or theme: { primary: "#hex", ... } for brand colours (put on this icon\'s own parts); flat: true bakes the colours into the file (for <img>, Figma, slides). list_palettes shows every palette\'s colours.',
         variables: vars,
-        // the role to set for a brand colour: the one that covers most of the icon's body in this style
+        // the colour role that paints the largest visible part of the icon in this style (measured on the render)
         mainRole: mainRole(canonical, style).role,
+        roleAreas: roleAreas(canonical, style),
         palettes: list.length,
         ...(includePalettes ? { suggestions: list.map(p => ({ id: p.id, name: p.name, tags: p.tags })) }
           : { hint: `${list.length} palettes picked for ${canonical}: list_palettes(name: "${canonical}", style: "${style}") or get_icon(..., include_palettes: true) lists them.` }),
@@ -342,6 +364,7 @@ export function listStyles() {
     minSize: minSizeOf(s), onDark: s.palette ? ON_DARK_PALETTE : ON_DARK_INK,
     ...(is3dStyle(s.name) ? { motion3d: true } : {}),
     ...(s.palette ? { palette: true, vars: s.vars || {} } : {}),
+    ...(styleColours(s.name) ? { colours: styleColours(s.name) } : {}),
   }))
 }
 
@@ -471,6 +494,28 @@ export function colorSummary(entries, { keys = [], palette = false, label = k =>
     notes.push(`${st.join(', ')} ${st.length === 1 ? 'draws' : 'draw'} ${listOf(nm)} in one colour, so only the ${palette ? "palette's " : ''}ink applies${what}. ` +
       `Multi-colour styles: ${multiColourStyles(nm[0]).join(', ')}`)
   }
+  // brand themes: how many icons show primary unmixed, and where it is one tone of several
+  const themed = entries.filter(e => e.theme)
+  if (themed.length) {
+    const exact = themed.filter(e => e.theme.exact), shaded = [...new Set(themed.filter(e => !e.theme.exact).map(e => e.style))]
+    notes.push(`theme: primary shows exactly (unmixed) on ${exact.length} of ${themed.length} ${themed.length === 1 ? 'icon' : 'icons'}` +
+      (shaded.length ? `; ${shaded.join(', ')} ${shaded.length === 1 ? 'shades' : 'shade'} it (gradients, see-through tones or shading), so the brand hex is one tone of several there` : '') +
+      '. colorReport names the part each colour went on.')
+    for (const k of ['secondary', 'tertiary']) {
+      const unused = themed.filter(e => e.theme.theme && e.theme.theme[k] && !e.theme.parts[k])
+      if (unused.length) notes.push(`theme.${k} has no part of its own on ${listOf([...new Set(unused.map(who))])} (fewer colour parts there).`)
+    }
+    const inked = themed.filter(e => e.theme.inkLeads)
+    for (const st of [...new Set(inked.map(e => e.style))]) notes.push(inkLeadText(st, [...new Set(inked.filter(e => e.style === st).map(e => e.name))], listOf))
+  }
+  // a colour painted only as a see-through tone (duo's c1 at 20%) shows much lighter than the hex that was set
+  const tones = new Map()
+  for (const e of multi) for (const t of tonesOf(e.name, e.style, e.applied)) {
+    const k = `${e.style}|${t.role}|${t.opacity}`
+    if (!tones.has(k)) tones.set(k, { style: e.style, role: t.role, opacity: t.opacity, names: [] })
+    tones.get(k).names.push(e.name)
+  }
+  for (const t of tones.values()) notes.push(toneText(t.style, t.role, [...new Set(t.names)], t.opacity, listOf))
   if (!multi.length) return { notes, warnings }
   for (const k of set) {
     const yes = multi.filter(e => e.applied && !(e.applied.ignored || []).includes(k)), no = multi.filter(e => !yes.includes(e))
@@ -488,119 +533,130 @@ export function colorSummary(entries, { keys = [], palette = false, label = k =>
 }
 const isMultiColour = (name, style) => /var\(\s*--with-/.test(svgOf(name, style))
 
-// ---- the main colour of an icon in a style: the role that covers the largest visible area of its body ----
-// The rendered SVG's filled paths are scan-converted on a 48 x 48 grid in paint order (later paths cover earlier
-// ones); shadows, shines and decorations are not the body, and fills under 30% opacity are glazes over it. The role
-// with the most visible cells among the colour roles (c1-c4, tint, accent) wins; else any role; else the ink.
-const BODY_ROLES = ['c1', 'c2', 'c3', 'c4', 'tint', 'accent']
-const GRID = 48
-function pathPolys(d) {
-  const polys = []
-  let poly = null, x = 0, y = 0, sx = 0, sy = 0, cx = 0, cy = 0, prev = ''
-  const toks = String(d).match(/[a-zA-Z]|-?(?:\d+\.?\d*|\.\d+)(?:e-?\d+)?/g) || []
-  let i = 0, cmd = ''
-  const num = () => Number(toks[i++])
-  const line = (nx, ny) => { poly.push([nx, ny]); x = nx; y = ny }
-  const cubic = (x1, y1, x2, y2, ex, ey) => {
-    const x0 = x, y0 = y
-    for (let t = 1; t <= 8; t++) { const s = t / 8, u = 1 - s; poly.push([u * u * u * x0 + 3 * u * u * s * x1 + 3 * u * s * s * x2 + s * s * s * ex, u * u * u * y0 + 3 * u * u * s * y1 + 3 * u * s * s * y2 + s * s * s * ey]) }
-    x = ex; y = ey
-  }
-  const quad = (x1, y1, ex, ey) => { const x0 = x, y0 = y; for (let t = 1; t <= 6; t++) { const s = t / 6, u = 1 - s; poly.push([u * u * x0 + 2 * u * s * x1 + s * s * ex, u * u * y0 + 2 * u * s * y1 + s * s * ey]) } x = ex; y = ey }
-  const arc = (rx, ry, rot, large, sweep, ex, ey) => {
-    rx = Math.abs(rx); ry = Math.abs(ry)
-    if (!rx || !ry || (ex === x && ey === y)) return line(ex, ey)
-    const ph = rot * Math.PI / 180, cs = Math.cos(ph), sn = Math.sin(ph)
-    const dx = (x - ex) / 2, dy = (y - ey) / 2, x1 = cs * dx + sn * dy, y1 = -sn * dx + cs * dy
-    const l = x1 * x1 / (rx * rx) + y1 * y1 / (ry * ry)
-    if (l > 1) { rx *= Math.sqrt(l); ry *= Math.sqrt(l) }
-    const num2 = rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1, den = rx * rx * y1 * y1 + ry * ry * x1 * x1
-    const k = (large === sweep ? -1 : 1) * Math.sqrt(Math.max(0, num2 / den))
-    const ccx = k * rx * y1 / ry, ccy = -k * ry * x1 / rx
-    const mx = cs * ccx - sn * ccy + (x + ex) / 2, my = sn * ccx + cs * ccy + (y + ey) / 2
-    const ang = (ux, uy, vx, vy) => Math.atan2(ux * vy - uy * vx, ux * vx + uy * vy)
-    const t1 = ang(1, 0, (x1 - ccx) / rx, (y1 - ccy) / ry)
-    let dt = ang((x1 - ccx) / rx, (y1 - ccy) / ry, (-x1 - ccx) / rx, (-y1 - ccy) / ry)
-    if (!sweep && dt > 0) dt -= 2 * Math.PI
-    if (sweep && dt < 0) dt += 2 * Math.PI
-    const n = Math.max(4, Math.ceil(Math.abs(dt) / (Math.PI / 8)))
-    for (let j = 1; j <= n; j++) { const t = t1 + dt * j / n; poly.push([mx + rx * Math.cos(t) * cs - ry * Math.sin(t) * sn, my + rx * Math.cos(t) * sn + ry * Math.sin(t) * cs]) }
-    x = ex; y = ey
-  }
-  while (i < toks.length) {
-    if (/[a-zA-Z]/.test(toks[i])) cmd = toks[i++]
-    const rel = cmd === cmd.toLowerCase(), C = cmd.toUpperCase(), ox = rel ? x : 0, oy = rel ? y : 0
-    if (C === 'Z') { if (poly) { x = sx; y = sy } prev = 'Z'; poly = null; if (i < toks.length && !/[a-zA-Z]/.test(toks[i])) i++; continue }
-    if (C === 'M') { const nx = num() + ox, ny = num() + oy; poly = [[nx, ny]]; polys.push(poly); x = sx = nx; y = sy = ny; cmd = rel ? 'l' : 'L'; prev = 'M'; continue }
-    if (!poly) { poly = [[x, y]]; polys.push(poly) }
-    if (C === 'L') line(num() + ox, num() + oy)
-    else if (C === 'H') line(num() + ox, y)
-    else if (C === 'V') line(x, num() + oy)
-    else if (C === 'C') { const a = [num() + ox, num() + oy, num() + ox, num() + oy, num() + ox, num() + oy]; cubic(...a); cx = a[2]; cy = a[3] }
-    else if (C === 'S') { const rx1 = /[CS]/.test(prev) ? 2 * x - cx : x, ry1 = /[CS]/.test(prev) ? 2 * y - cy : y; const a = [num() + ox, num() + oy, num() + ox, num() + oy]; cubic(rx1, ry1, ...a); cx = a[0]; cy = a[1] }
-    else if (C === 'Q') { const a = [num() + ox, num() + oy, num() + ox, num() + oy]; quad(...a); cx = a[0]; cy = a[1] }
-    else if (C === 'T') { const qx = /[QT]/.test(prev) ? 2 * x - cx : x, qy = /[QT]/.test(prev) ? 2 * y - cy : y; quad(qx, qy, num() + ox, num() + oy); cx = qx; cy = qy }
-    else if (C === 'A') arc(num(), num(), num(), num(), num(), num() + ox, num() + oy)
-    else { i++; continue }
-    prev = C
-  }
-  return polys.filter(p => p.length > 2)
+// hue roles that received a colour but are painted only as a see-through tone on this icon (duo's c1 at 20%):
+// [{ role, opacity }]; under half opacity the colour shows much lighter than the hex that was set
+function tonesOf(name, style, applied) {
+  if (!applied || !applied.vars) return []
+  const svg = svgOf(name, style), roles = rolesFor(svg), how = paintsOf(svg)
+  const got = new Set(Object.keys(applied.vars).map(v => roles[v]).filter(r => HUE_ROLES.includes(r)))
+  return [...got].filter(r => how[r] && !how[r].solid && !how[r].gradient && how[r].tone && how[r].opacity < 0.5)
+    .map(r => ({ role: r, opacity: Math.round(how[r].opacity * 100) / 100 }))
 }
-// cells (row-major indexes) inside the polygons, nonzero or evenodd
-function cellsOf(polys, evenodd) {
-  const out = []
-  const step = 24 / GRID
-  for (let r = 0; r < GRID; r++) {
-    const yy = (r + 0.5) * step, xs = []
-    for (const p of polys) for (let j = 0; j < p.length; j++) {
-      const [x1, y1] = p[j], [x2, y2] = p[(j + 1) % p.length]
-      if ((y1 <= yy) !== (y2 <= yy)) xs.push([x1 + (yy - y1) / (y2 - y1) * (x2 - x1), y2 > y1 ? 1 : -1])
-    }
-    if (!xs.length) continue
-    xs.sort((a, b) => a[0] - b[0])
-    let w = 0, k = 0
-    for (let c = 0; c < GRID; c++) {
-      const xx = (c + 0.5) * step
-      while (k < xs.length && xs[k][0] <= xx) { w += evenodd ? 1 : xs[k][1]; k++ }
-      if (evenodd ? w % 2 : w) out.push(r * GRID + c)
-    }
+const toneText = (style, role, names, opacity, listOf = xs => xs.join(', ')) =>
+  `${style} paints ${role} on ${listOf(names)} as a see-through tone (about ${Math.round(opacity * 100)}% opacity), so that colour shows much lighter than the hex you set; ` +
+  'the outline is the ink (color). For a full-strength fill pick a style that paints it solid (list_styles: colours.roles).'
+
+const inkLeadText = (style, names, listOf = xs => xs.join(', ')) =>
+  `${style} draws ${listOf(names)} mostly in the ink (the outline colour): the theme keeps the style's ink so every icon of a set matches; theme.ink (or color) colours it.`
+
+// ---------------------------------------------------------------- the colour roles of each style (list_styles)
+// Read at bundle time from every icon each style renders (forge/lib/emit-mcp.mjs, colour-model.mjs styleColourTable).
+const PAINT_WORD = { solid: 'a solid', gradient: 'gradient' }
+const roleText = (r, total) => `${r.role} = ${r.paints === 'tone' ? `a ${Math.round((r.opacity || 0) * 100)}% tone` : PAINT_WORD[r.paints] || r.paints} ${r.as}` +
+  (r.icons < total ? ` (${r.icons} of ${total} icons)` : '')
+/**
+ * What colours a style really paints, from its rendered icons: { icons, roles: [{ role, label, vars, icons, paints, as,
+ * opacity? }], inkFollowsColor, exact, exactShare, summary } (null without the table). roles is empty for one-colour styles.
+ */
+export function styleColours(style) {
+  const t = (STYLE_ROLES || {})[style]
+  if (!t) return null
+  const hue = t.roles.filter(r => r.role !== 'ink')
+  return {
+    icons: t.icons,
+    roles: t.roles.map(r => ({ role: r.role, label: ROLE_LABELS[r.role] || null, vars: r.vars, icons: r.icons, paints: r.paints, as: r.as, ...(r.opacity != null ? { opacity: r.opacity } : {}) })),
+    inkFollowsColor: t.currentColor > 0,
+    // a theme's primary shows unmixed on most of what it paints (flat styles); else it is one tone of several
+    exact: !!t.exact, exactShare: t.exactShare,
+    summary: hue.length ? hue.map(r => roleText(r, t.icons)).join(', ') : 'one colour: the ink (color / currentColor)',
   }
+}
+/** styles a theme's primary shows exactly in (flat), and the ones that shade it (gradients, tones, shading) */
+export function brandExactness() {
+  const exact = [], shaded = []
+  for (const s of data().styleNames) { const c = styleColours(s); (c && c.exact ? exact : shaded).push(s) }
+  return { exact, shaded }
+}
+
+// ---------------------------------------------------------------- brand themes
+export const THEME_KEYS = ['primary', 'secondary', 'tertiary', 'ink']
+const THEME_HEX = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i
+/**
+ * "#hex" or { primary, secondary?, tertiary?, ink? } -> the same with clean #rrggbb values (IconError otherwise).
+ * o.partial: primary may be left out (a per-icon override of a theme).
+ */
+export function checkTheme(theme, { partial = false, what = 'theme' } = {}) {
+  const t = typeof theme === 'string' ? { primary: theme } : theme
+  if (!t || typeof t !== 'object' || Array.isArray(t)) throw new IconError(`${what}: give a hex colour ("#0ea5e9") or { primary, secondary?, tertiary?, ink? }`, { code: 'invalid_theme', keys: THEME_KEYS })
+  const out = {}
+  for (const [k, v] of Object.entries(t)) {
+    if (v == null || v === '') continue
+    if (!THEME_KEYS.includes(k)) throw new IconError(`${what}: unknown key "${k}". Keys: ${THEME_KEYS.join(', ')} (hex colours).`, { code: 'invalid_theme', keys: THEME_KEYS })
+    const m = THEME_HEX.exec(String(v).trim())
+    if (!m) throw new IconError(`${what}.${k}: "${v}" is not a hex colour (e.g. #0ea5e9)`, { code: 'invalid_color' })
+    out[k] = '#' + (m[1].length === 3 ? m[1].split('').map(c => c + c).join('') : m[1]).toLowerCase()
+  }
+  if (!partial && !out.primary) throw new IconError(`${what} needs primary (a hex colour, e.g. "#0ea5e9")`, { code: 'invalid_theme', keys: THEME_KEYS })
   return out
 }
-const mainCache = new Map()
-/** { role, share } of the colour role that covers most of the icon's body in this style ({ role: 'ink' } for one-colour styles). */
-export function mainRole(name, style) {
+/**
+ * Brand colours onto ONE icon in ONE style, through its own roles (colour-model.mjs resolveTheme): primary on the part
+ * that paints the largest area, secondary on the next, tertiary on the third; the other parts, tint, shadow and edge in
+ * their default lightness but the primary's hue; the ink where it is the drawing (one-colour styles, duo, blueprint).
+ * -> { colors (for applyColors), parts: { primary: 'c2', ... }, exact, exactShare, theme }
+ */
+export function themeColors(name, style, theme, { shades } = {}) {
+  const canonical = resolveName(name)
+  style = checkStyle(style)
+  const t = checkTheme(theme)
+  const r = resolveTheme(svgOf(canonical, style), t, { model: modelOf(canonical, style), inkDraws: !isPaletteStyle(style), shades })
+  return { ...r, theme: t }
+}
+/**
+ * A palette of `donor` worn by an icon that lacks it (export with a palette several icons share only in part): the donor's
+ * colours go on the icon's parts by size, as a theme (the donor's largest part's colour on the icon's largest part ...),
+ * never role by role, plus the palette's ink, tint, shadow, shine and edge. One-colour styles take the palette's ink.
+ * -> { colors (for applyColors), parts: { <icon role>: <donor role> }, from, palette }
+ */
+export function borrowColors(name, style, donor, palette) {
+  const canonical = resolveName(name), from = resolveName(donor)
+  style = checkStyle(style)
+  const { list } = iconPalettes(from)
+  const want = String(palette).trim().toLowerCase()
+  const p = list.find(x => x.id === want) || list.find(x => x.name.toLowerCase() === want)
+  if (!p) throw new IconError(`"${from}" has no palette "${palette}".`, { code: 'unknown_palette', palettes: list.map(x => x.id) })
+  if (!colorVars(canonical, style).length) return { colors: p.colors.ink ? { ink: p.colors.ink } : {}, parts: {}, from, palette: p.id }
+  const dm = modelOf(from, style)
+  let ranked = rankParts(dm, dm.roles).filter(r => p.colors[r])
+  if (!ranked.length) ranked = HUE_ROLES.filter(r => p.colors[r])
+  const keys = ['primary', 'secondary', 'tertiary'], theme = {}, src = {}
+  ranked.slice(0, 3).forEach((r, i) => { theme[keys[i]] = p.colors[r]; src[keys[i]] = r })
+  if (p.colors.ink) theme.ink = p.colors.ink
+  const shades = Object.fromEntries(['tint', 'shadow', 'shine', 'edge'].filter(r => p.colors[r]).map(r => [r, p.colors[r]]))
+  const r = resolveTheme(svgOf(canonical, style), theme, { model: modelOf(canonical, style), inkDraws: !isPaletteStyle(style), shades })
+  const parts = {}
+  for (const k of keys) if (r.parts[k] && src[k]) parts[r.parts[k]] = src[k]
+  return { colors: r.colors, parts, from, palette: p.id }
+}
+
+// ---- the main colour of an icon in a style, from what a render shows (packages/mcp/src/colour-model.mjs) ----
+// Every role's visible area is measured on the rendered SVG (paint order, opacities, gradients, strokes); the main role
+// is the hue role (c1-c4, accent) that paints the largest area, else the largest of tint / shadow / edge / shine, else
+// the ink. test/colours.test.mjs checks it against resvg renders.
+const modelCache = new Map()
+function modelOf(name, style) {
   const key = name + '|' + style
-  if (mainCache.has(key)) return mainCache.get(key)
-  const svg = svgOf(name, style), roles = rolesFor(svg)
-  const fills = []
-  for (const m of svg.matchAll(/<path\b([^>]*)\/?>/g)) {
-    const a = {}
-    for (const x of m[1].matchAll(/([\w:-]+)="([^"]*)"/g)) a[x[1]] = x[2]
-    if (!a.d || !a.fill || a.fill === 'none' || /\bwm-(shadow|shine|deco)\b/.test(a.class || '')) continue
-    const v = /var\(\s*(--with-[\w-]+)/.exec(a.fill)
-    fills.push({ a, role: v ? roles[v[1]] || null : /currentColor/i.test(a.fill) ? 'ink' : null, glaze: a['fill-opacity'] != null && Number(a['fill-opacity']) < 0.3 })
-  }
-  // first the solid fills; an icon whose only colour is a see-through glaze (duo's 20% tint) is measured with it
-  const measure = withGlaze => {
-    const top = new Array(GRID * GRID).fill(null)
-    for (const f of fills) if (withGlaze || !f.glaze) for (const c of cellsOf(pathPolys(f.a.d), f.a['fill-rule'] === 'evenodd')) top[c] = f.role || ''
-    const count = {}
-    let body = 0
-    for (const r of top) if (r != null) { body++; if (r) count[r] = (count[r] || 0) + 1 }
-    return { count, body }
-  }
-  let { count, body } = measure(false)
-  const best = list => list.filter(r => count[r]).sort((p, q) => count[q] - count[p])[0]
-  if (!best(Object.keys(count).filter(r => r !== 'ink'))) ({ count, body } = measure(true))
-  // no colour role fills the body (strokes only, e.g. blueprint's accent): the first colour role the icon paints with,
-  // before a backing (sticker edge) or shading role
-  const painted = [...new Set(Object.values(roles).filter(Boolean))]
-  const role = best(BODY_ROLES) || BODY_ROLES.find(r => painted.includes(r)) || best(Object.keys(count).filter(r => r !== 'ink')) ||
-    painted.find(r => r !== 'ink') || 'ink'
-  const res = { role, share: body && count[role] ? Math.round(count[role] / body * 100) / 100 : null }
-  mainCache.set(key, res)
-  return res
+  let m = modelCache.get(key)
+  if (!m) { m = paintModel(svgOf(name, style)); modelCache.set(key, m) }
+  return m
+}
+/** { role, share } of the colour role that paints the largest visible part of the icon in this style ({ role: 'ink' } for one-colour styles). */
+export function mainRole(name, style) {
+  return mainRoleOf(modelOf(name, style))
+}
+/** each role's share of the icon's drawn area in this style, largest first: { c2: 0.38, c1: 0.14, ink: 0.09, ... } */
+export function roleAreas(name, style) {
+  return roleShares(modelOf(name, style))
 }
 // ---- motion hooks (class="wm-a", wm-k, wm-s, wm-deco, wm-shadow, wm-shine) are for inline SVG + @withicons/motion only ----
 /** Removes the motion part classes from SVG markup (files, flat SVG, data URIs): they do nothing outside the page's motion CSS. */
@@ -611,9 +667,9 @@ export function stripMotion(svg) {
   })
 }
 function bakeColors(svg, applied) {
-  let s = svg.replace(DEF_RE, (all, v, d) => applied.vars[v] || d)
-  if (applied.color) s = s.replace(/currentColor/g, applied.color)
-  return stripMotion(flatten(s))
+  let s = flatten(svg.replace(DEF_RE, (all, v, d) => applied.vars[v] || d))
+  if (applied.color) s = inkCurrentColor(s, applied.color)
+  return stripMotion(s)
 }
 // keep the variables but set them on the root <svg> (inline SVG stays themeable)
 const styleOnRoot = (svg, decl) => /^<svg[^>]*\sstyle="/.test(svg) ? svg.replace(/^(<svg[^>]*\sstyle=")/, `$1${decl}; `) : svg.replace(/^<svg/, `<svg style="${decl}"`)
@@ -642,9 +698,10 @@ function paletteSnippet(name, style, format, opts, applied) {
 // { mainRole, mainRoleShare, mainRoleNote } for list_palettes / `withicons palettes --style`
 function mainRoleInfo(name, style) {
   const m = mainRole(name, style)
-  if (m.role === 'ink') return { mainRole: 'ink', mainRoleNote: `${style} draws ${name} in one colour: set the ink (color).` }
-  return { mainRole: m.role, ...(m.share != null ? { mainRoleShare: m.share } : {}),
-    mainRoleNote: `${m.role} paints the main body of ${name} in ${style}${m.share != null ? ` (about ${Math.round(m.share * 100)}% of the drawn area)` : ''}: set it for a brand colour, e.g. colors: { ${m.role}: "#hex" }.` }
+  if (m.role === 'ink') return { mainRole: 'ink', roleAreas: roleAreas(name, style), mainRoleNote: `${style} draws ${name} in one colour: set the ink (color), or theme: "#hex".` }
+  return { mainRole: m.role, ...(m.share != null ? { mainRoleShare: m.share } : {}), roleAreas: roleAreas(name, style),
+    mainRoleNote: `${m.role} (${ROLE_LABELS[m.role] || m.role}) paints the largest part of ${name} in ${style}${m.share != null ? ` (about ${Math.round(m.share * 100)}% of the drawn area)` : ''}: ` +
+      `colors: { ${m.role}: "#hex" } recolours it. roleAreas has every role's share. For brand colours across several icons use theme: { primary, secondary } (get_icon / export_icon), which finds each icon's own parts.` }
 }
 // Palettes picked for one icon. With a style: each palette also says which CSS variables it sets on that icon in that style.
 export function listPalettes({ name, style, tag, limit } = {}) {
