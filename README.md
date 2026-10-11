@@ -1,16 +1,16 @@
 <div align="center">
 
-<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png" alt="with icons: 500 icons, 20 styles, all animated. 10,000 free, open-source icons." width="100%"></a>
+<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png" alt="with icons: 734 icons, 34 styles, all animated. Over 25,000 free, open-source icons." width="100%"></a>
 
 <h3>Free, open-source icons that can’t sit still.</h3>
 
-**500 icons x 20 styles = 10,000 icons.** Every one animated. Plus 50 live icons. MIT, no sign-up.<br>
+**734 icons x 34 styles = 24,956 icons.** Every one animated. Plus 50 live icons in every style: over 25,000 free icons. MIT, no sign-up.<br>
 For slides, Canva, Figma, websites, apps and AI agents.
 
 [![npm](https://img.shields.io/npm/v/@withicons/react?label=npm&color=2F5BFF&logo=npm)](https://www.npmjs.com/package/@withicons/react)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22A861)](LICENSE)
 [![npm provenance](https://img.shields.io/badge/npm-provenance-7252FF?logo=githubactions&logoColor=white)](https://www.npmjs.com/package/@withicons/react#provenance)
-[![Icons](https://img.shields.io/badge/icons-10%2C000-FF5A36)](https://withicons.com/icons.html)
+[![Icons](https://img.shields.io/badge/icons-25%2C000%2B-FF5A36)](https://withicons.com/icons.html)
 [![Web component](https://img.shields.io/badge/web%20component-7%20KB%20gzipped-FF4FA3)](https://withicons.com/developers.html)
 [![MCP](https://img.shields.io/badge/MCP-ready-111318)](https://withicons.com/ai.html)
 
@@ -23,19 +23,20 @@ For slides, Canva, Figma, websites, apps and AI agents.
 
 <br>
 
-<img src="https://withicons.com/media/github/animated.gif" alt="Eight animated icons in eight styles: a bell, a heart, a rocket, a cat, a sun, a gift, a star and a cloud." width="100%">
+<img src="https://withicons.com/media/github/styles-morph.gif" alt="The cat icon turning into each of the 34 styles in turn: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar and valentine." width="100%">
 
 </div>
 
-> **New in v0.3.0:** imports are fast everywhere (`import { Home } from '@withicons/react'` loads in about 0.15 s in
-> Node, one icon is under 1 KB gzipped), the dynamic `<Icon>` loads styles on demand, smarter search with confidence and
-> "no exact icon" hints, paged exports on the hosted MCP server, and a slimmer agent skill.
-> [Full changelog](CHANGELOG.md)
+> **New in v0.4.0:** 14 new styles (34 in all): soft 3D (`clay`, `soft3d`), clear and metal (`liquid`, `chrome`), product
+> looks (`bento`, `suite`, `dock`, `brutal`) and six holiday styles (`utsav`, `rangoli`, `halloween`, `christmas`, `lunar`,
+> `valentine`); a redrawn `glass` and a duo accent; 234 new icons (734 in all), among them 39 avatars with six skin tones
+> and 95 festival icons. [Full changelog](CHANGELOG.md)
 
 ## Why with icons
 
-- **One family, twenty looks.** Every icon is drawn once by hand on a 24x24 grid. Twenty deterministic renderers turn that
-  drawing into twenty styles, from clean `line` to `luxe` 3D, `anime`, `kawaii`, `bauhaus` and felt `plush`. Switch styles and nothing moves.
+- **One family, thirty-four looks.** Every icon is drawn once by hand on a 24x24 grid. Thirty-four deterministic renderers turn
+  that drawing into thirty-four styles, from clean `line` to `clay` and `soft3d` 3D, `liquid` glass, `chrome`, `anime`, `kawaii`,
+  felt `plush` and six holiday styles. Switch styles and nothing moves.
 - **Every icon moves.** Each one has its own tuned loop and hover animation, plus icon-to-icon swaps. Pure CSS, off for reduced motion.
 - **Live icons.** A calendar with your date, a clock with your time, a bell with your count, in every style.
 - **Built for people and AI agents.** Copy into Slides, Canva or Figma, install a package, or let your agent search by meaning through MCP.
@@ -43,7 +44,7 @@ For slides, Canva, Figma, websites, apps and AI agents.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/styles-dark.png">
-  <img src="https://withicons.com/media/github/styles-light.png" alt="The rocket icon in all 20 styles: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette and plush." width="100%">
+  <img src="https://withicons.com/media/github/styles-light.png" alt="The rocket icon in all 34 styles, in six groups: Essentials (line, solid, duo, suite), Product and brand (bento, dock, brutal, bauhaus), 3D and glass (clay, glass, liquid, chrome, soft 3D, luxe, skeuo), Playful (kawaii, plush, sticker, gloss, pastel, pixel, retro), Artistic (sketch, engrave, blueprint, anime, gothic, coquette) and Holidays (utsav, rangoli, halloween, christmas, lunar, valentine)." width="100%">
 </picture>
 
 ## Quick start
@@ -166,50 +167,65 @@ Then just ask: *“Add a settings icon in the duo style to the sidebar”* or *�
 
 ## Reference
 
-### The 20 styles
+### The 34 styles
 
 | style | group | subpath | look |
 |---|---|---|---|
-| `line` | Everyday | *(default)* | A precise 1.75px outline with round caps and joins. The default for any interface. |
-| `solid` | Everyday | `/solid` | The filled companion to Line: bold mass and crisp knockouts. |
-| `duo` | Everyday | `/duo` | The line drawing over a soft tonal fill. Recolour the tone with `--with-duo`. |
-| `gloss` | Crafted | `/gloss` | Inflated, glossy and pillowy, with carved specular highlights, in one flat colour. |
-| `engrave` | Crafted | `/engrave` | Banknote intaglio: a swelling contour and burin hatching that models light and shade. |
-| `blueprint` | Crafted | `/blueprint` | A drafting-table drawing: hairline keylines, centre lines and open control nodes. |
-| `sketch` | Crafted | `/sketch` | Loose marker strokes drawn twice, with crossing corners and a light hachure. |
-| `glass` | Playful | `/glass` | Layered frosted glass (glassmorphism): a vivid colour glowing through a translucent pane with a crisp rim. |
+| `line` | Essentials | *(default)* | A precise 1.75px outline with round caps and joins. The default for any interface. |
+| `solid` | Essentials | `/solid` | The filled companion to Line: bold mass and crisp knockouts. |
+| `duo` | Essentials | `/duo` | The line drawing over a soft tonal fill with one small accent detail. Recolour them with `--with-duo` and `--with-duo-accent`. |
+| `suite` | Essentials | `/suite` | Polished full-colour icons, like the ones in an office or cloud suite. |
+| `bento` | Product & brand | `/bento` | Each icon sits in its own soft tinted tile, like a bento-grid feature card. |
+| `dock` | Product & brand | `/dock` | Glossy rounded app tiles, like the icons in a desktop dock. |
+| `brutal` | Product & brand | `/brutal` | Thick black outlines, loud flat colour and a hard offset shadow. |
+| `bauhaus` | Product & brand | `/bauhaus` | Bauhaus posters in miniature: pure circles, squares and bars in red, yellow and blue, overprinted where they meet. |
+| `clay` | 3D & glass | `/clay` | Soft, rounded 3D objects that look sculpted from matte clay. |
+| `glass` | 3D & glass | `/glass` | Soft, luxurious frosted glass with gentle light and depth, drawn with soft gradients. |
+| `liquid` | 3D & glass | `/liquid` | Clear liquid glass that bends the light, with bright rims and soft reflections. |
+| `chrome` | 3D & glass | `/chrome` | Polished liquid chrome with mirror highlights. Y2K and futuristic. |
+| `soft3d` | 3D & glass | `/soft3d` | Soft, studio-lit 3D objects with real depth. Physical things sit at a gentle angle; people look like friendly 3D avatars. |
+| `luxe` | 3D & glass | `/luxe` | Premium multi-layered 3D: sapphire enamel slabs with an extruded wall, polished gold, a jewel, lit chamfers and a crisp highlight. |
+| `skeuo` | 3D & glass | `/skeuo` | Skeuomorphic: each icon a small object in a real material (paper, leather, metal, brass, glass), lit from above. |
 | `kawaii` | Playful | `/kawaii` | Chubby pastel shapes with a soft thick outline and a tiny blushing face. |
+| `plush` | Playful | `/plush` | Stuffed toys sewn from felt for kids: puffy panels, dark piping, running stitches, buttons and embroidery. |
 | `sticker` | Playful | `/sticker` | Y2K die-cut vinyl stickers: candy colours, a puffy white border, a glossy shine and sparkles. |
+| `gloss` | Playful | `/gloss` | Inflated, glossy and pillowy, with carved specular highlights, in one flat colour. |
+| `pastel` | Playful | `/pastel` | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
 | `pixel` | Playful | `/pixel` | Hand-tuned 16-bit pixel art, sharp at 16, 32 and 48px. |
 | `retro` | Playful | `/retro` | Warm 70s patches: chunky outlines, sunset-striped fills and a hard offset shadow. |
-| `luxe` | Studio | `/luxe` | Premium multi-layered 3D: sapphire enamel slabs with an extruded wall, polished gold, a jewel, lit chamfers and a crisp highlight. |
-| `bauhaus` | Studio | `/bauhaus` | Bauhaus posters in miniature: pure circles, squares and bars in red, yellow and blue, overprinted where they meet. |
-| `skeuo` | Studio | `/skeuo` | Skeuomorphic: each icon a small object in a real material (paper, leather, metal, brass, glass), lit from above. |
-| `anime` | Storybook | `/anime` | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow, a bright specular shine and the odd sparkle. |
-| `gothic` | Storybook | `/gothic` | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches and tracery. |
-| `pastel` | Storybook | `/pastel` | Soft pastel colour fields in lavender, peach, mint, baby blue, butter and blush, with gentle tonal depth. |
-| `coquette` | Storybook | `/coquette` | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
-| `plush` | Storybook | `/plush` | Stuffed toys sewn from felt for kids: puffy panels, dark piping, running stitches, buttons and embroidery. |
+| `sketch` | Artistic | `/sketch` | Loose marker strokes drawn twice, with crossing corners and a light hachure. |
+| `engrave` | Artistic | `/engrave` | Banknote intaglio: a swelling contour and burin hatching that models light and shade. |
+| `blueprint` | Artistic | `/blueprint` | A drafting-table drawing: hairline keylines, centre lines and open control nodes. |
+| `anime` | Artistic | `/anime` | Anime cel style: crisp tapered ink line art, flat cel colour with one hard shadow, a bright specular shine and the odd sparkle. |
+| `gothic` | Artistic | `/gothic` | Cathedral craft: carved limestone, stained glass in ruby, sapphire, gold and emerald set in dark lead, pointed arches and tracery. |
+| `coquette` | Artistic | `/coquette` | Ballet-pink romance: blush satin objects tied with ribbon-red bows, pearls, lace and delicate gold. |
+| `utsav` | Holidays | `/utsav` | Warm marigold and saffron shapes with a plum outline, a fine gold inner line and rangoli dot-work. |
+| `rangoli` | Holidays | `/rangoli` | Clean objects in a warm festive glow, each with one Indian festival motif: petals, a lotus, a toran or a diya. |
+| `halloween` | Holidays | `/halloween` | Spooky-cute pumpkin, witch-purple and midnight shapes with candle-lit carvings, slime drips and a tiny bat. |
+| `christmas` | Holidays | `/christmas` | Cosy cranberry, pine and gold shapes with a snow cap on every top edge, candy-cane stripes and a sprig of holly. |
+| `lunar` | Holidays | `/lunar` | Lucky red lacquer with a gold-foil rim, jade details, paper-cut cloud scrolls, silk tassels and plum blossoms. |
+| `valentine` | Holidays | `/valentine` | Cute pink-to-red cartoon shapes with a warm berry outline, polka dots, tiny blushing faces and floating hearts. |
 
-The seven mono styles paint in `currentColor`, so they follow your text colour on light and dark backgrounds (duo's tone and
-blueprint's accent can take a second colour through `--with-duo` and `--with-accent`).
-The five Playful styles, the three Studio styles and the five Storybook styles ship a default palette that reads on white and on
-near-black; every colour is a CSS variable (`--with-<style>-<role>`; the Studio and Storybook styles use the palette role names:
-`--with-luxe-c1`, `--with-bauhaus-c3`, `--with-anime-shadow`)
-and the ink still follows `currentColor`, so one line of CSS re-themes them:
+The seven mono styles (`line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint`, `sketch`) paint in `currentColor`, so they
+follow your text colour on light and dark backgrounds (duo's tone and accent and blueprint's accent can take more colour
+through `--with-duo`, `--with-duo-accent` and `--with-accent`). The other 27 ship a default palette that reads on white and
+on near-black; every colour is a CSS variable (`--with-<style>-<role>`, for example `--with-luxe-c1`, `--with-clay-shine`,
+`--with-anime-shadow`) and the ink still follows `currentColor`. The rich styles (`glass`, `clay`, `bento`, `suite`, `dock`,
+`liquid`, `chrome`, `soft3d` and the holiday styles) also draw gradients whose stops are those same variables, so one line
+of CSS re-themes them:
 
 ```css
 .hero { --with-kawaii-fill-1: #c4b5fd; --with-retro-1: #fde047; --with-luxe-c1: #0f766e; --with-coquette-c3: #be123c; }
 ```
 
-The styles come in five groups. Everyday (line, solid, duo) is for UI; Crafted, Playful, Studio and Storybook are for illustration, marketing, slides and empty states.
+The styles come in six groups, as on the site: Essentials (line, solid, duo, suite) is for interfaces; Product & brand, 3D & glass, Playful and Artistic are for marketing, slides, illustration and empty states; Holidays is for festivals and seasonal campaigns.
 
 ### Colour palettes
 
-Every icon ships 20-30 colour palettes picked for that icon (pizza: Margherita, Pepperoni, Pesto verde…), 11,423 in all.
+Every icon ships 20-30 colour palettes picked for that icon (pizza: Margherita, Pepperoni, Pesto verde…), 17,303 in all.
 A palette sets ten colour roles (`ink`, `c1`-`c4`, `tint`, `accent`, `shadow`, `shine`, `edge`) and every multi-colour
-style (`duo`, `blueprint`, `glass`, `kawaii`, `sticker`, `pixel`, `retro`, `luxe`, `bauhaus`, `skeuo`, `anime`, `gothic`, `pastel`,
-`coquette`, `plush`) maps them onto its own variables, so one palette
+style (`duo`, `blueprint` and the 27 colour styles, from `glass` and `kawaii` to `clay`, `soft3d` and the holiday styles)
+maps them onto its own variables, so one palette
 changes **every** colour of an icon in any of those styles:
 
 ```js
@@ -231,6 +247,8 @@ The MCP server (`list_palettes`, and `get_icon` with `palette` / `colors`) and t
 Optional and separate: [`@withicons/motion`](packages/motion) animates the element that holds any icon, in any style
 or package, with pure CSS. Every icon has a tuned continuous loop and hover effect, plus icon-to-icon swaps.
 
+<img src="https://withicons.com/media/github/animated.gif" alt="Eight animated icons in eight styles: a bell, a heart, a rocket, a cat, a sun, a gift, a star and a cloud." width="100%">
+
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/motion.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@withicons/motion@latest/dist/icons/bell.css">  <!-- one file per animated icon -->
@@ -241,7 +259,7 @@ or package, with pure CSS. Every icon has a tuned continuous loop and hover effe
 ```
 
 `motion.css` (the presets) is about 10 KB gzipped and each icon's own moves are a 0.3 KB file; in a bundled app,
-`import '@withicons/motion/icons.css'` has all 500 (about 18 KB gzipped). With `<with-icon motion="loop">` the element
+`import '@withicons/motion/icons.css'` has all 734. With `<with-icon motion="loop">` the element
 links each icon's file for you. `prefers-reduced-motion` switches everything off. Agents get exact code from the MCP tool `animate_icon` or
 `npx withicons animate bell --trigger hover --format react`. Spec: [`forge/MOTION.md`](forge/MOTION.md).
 
@@ -274,7 +292,11 @@ Try them at [withicons.com/live.html](https://withicons.com/live.html). Spec: [`
 | [`@withicons/web`](packages/web) | `npm i @withicons/web` | `import '@withicons/web'` then `<with-icon name="home">` |
 | [`@withicons/classes`](packages/classes) | `npm i @withicons/classes` | `import '@withicons/classes/with-line.css'` then `<i class="with with-home">` |
 | [`@withicons/static`](packages/static) | `npm i @withicons/static` | `<svg><use href="sprite-line.svg#with-home"/></svg>` |
+| [`@withicons/web-plus`](packages/web-plus), [`classes-plus`](packages/classes-plus), [`static-plus`](packages/static-plus) | `npm i @withicons/web-plus` | the newer styles for `web`, `classes` and `static` (jsDelivr serves at most 150 MB per package) |
 | [`@withicons/core`](packages/core) | `npm i @withicons/core` | `import { resolve, search } from '@withicons/core'` |
+| [`@withicons/core-plus`](packages/core-plus) | `npm i @withicons/core-plus` | SVGs and node data of clay, bento, suite, dock, liquid, chrome and brutal (same paths as core) |
+| [`@withicons/soft3d`](packages/soft3d) | `npm i @withicons/soft3d` | the `soft3d` style's SVGs, node data and CSS classes |
+| [`@withicons/holiday`](packages/holiday) | `npm i @withicons/holiday` | the six holiday styles' SVGs, node data and CSS classes |
 | [`@withicons/motion`](packages/motion) | `npm i @withicons/motion` | `import '@withicons/motion/motion.css'` (animations, optional) |
 | [`@withicons/dynamic`](packages/dynamic) | `npm i @withicons/dynamic` | `import { render } from '@withicons/dynamic'` (live icons) |
 | [`@withicons/search`](packages/search) | `npm i @withicons/search` | `import { create } from '@withicons/search'` |
@@ -297,13 +319,12 @@ Font Awesome-style `<i>` tags? `with-loader.js` (6 KB gzipped) links just the CS
 ```
 
 Zero JavaScript: link one stylesheet per style (`with-line.css`, 26 KB gzipped). `with-all.css` imports every style
-(about 6.3 MB gzipped) and is for prototypes only. Details: [`@withicons/classes`](packages/classes).
+(about 20 MB gzipped) and is for prototypes only. Details: [`@withicons/classes`](packages/classes).
 
 ### The same API everywhere
 
-- **Default path = `line`.** Other styles: `<pkg>/solid`, `<pkg>/duo`, `<pkg>/gloss`, `<pkg>/engrave`, `<pkg>/blueprint`, `<pkg>/sketch`,
-  `<pkg>/glass`, `<pkg>/kawaii`, `<pkg>/sticker`, `<pkg>/pixel`, `<pkg>/retro`, `<pkg>/luxe`, `<pkg>/bauhaus`, `<pkg>/skeuo`,
-  `<pkg>/anime`, `<pkg>/gothic`, `<pkg>/pastel`, `<pkg>/coquette`, `<pkg>/plush`.
+- **Default path = `line`.** Other styles: `<pkg>/solid`, `<pkg>/duo`, `<pkg>/gloss`, `<pkg>/engrave`, `<pkg>/blueprint`, `<pkg>/sketch`, `<pkg>/glass`, `<pkg>/kawaii`, `<pkg>/sticker`, `<pkg>/pixel`, `<pkg>/retro`, `<pkg>/luxe`, `<pkg>/bauhaus`, `<pkg>/skeuo`, `<pkg>/anime`, `<pkg>/gothic`, `<pkg>/pastel`, `<pkg>/coquette`, `<pkg>/plush`, `<pkg>/clay`, `<pkg>/bento`, `<pkg>/suite`, `<pkg>/dock`, `<pkg>/liquid`, `<pkg>/chrome`, `<pkg>/soft3d`, `<pkg>/brutal`, `<pkg>/utsav`, `<pkg>/rangoli`, `<pkg>/halloween`, `<pkg>/christmas`, `<pkg>/lunar`, `<pkg>/valentine`.
+  The framework packages hold every style.
 - **Names:** PascalCase of the kebab-case icon name, exported twice: `ArrowRight` and `ArrowRightIcon`.
 - **Deep imports:** `<pkg>/icons/home` (line) and `<pkg>/solid/icons/home`.
 - **Props:** `size` (24), `color` (`currentColor`), `strokeWidth` (styles with live strokes), `absoluteStrokeWidth`,
@@ -325,7 +346,7 @@ favicons or framework code.
 
 ```
 forge/icons/<name>.json    one skeleton per icon (the only hand-drawn input)
-forge/styles/<style>.mjs   the twenty style renderers
+forge/styles/<style>.mjs   the 34 style renderers
 forge/dynamic/<name>.mjs   live icon generators (forge/DYNAMIC.md)
 forge/motion/<name>.json   one animation spec per icon (forge/MOTION.md)
 forge/palettes/<name>.json 20-30 colour palettes per icon (forge/PALETTES.md)
@@ -362,7 +383,7 @@ The licence does not cover the with icons and Evergrow names and logos. Plain-En
 
 <div align="center">
 
-<a href="https://withicons.com"><img src="https://withicons.com/media/github/producthunt.gif" alt="An animated cat icon" width="120"></a>
+<a href="https://withicons.com"><img src="https://withicons.com/media/github/producthunt.gif" alt="One icon in each style turning into the next, ending on the with icons logo" width="120"></a>
 
 **[withicons.com](https://withicons.com)**
 
