@@ -105,7 +105,8 @@ More in [reference/frameworks.md](reference/frameworks.md#accessibility).
 - **MCP** (best for agents): remote `https://withicons.com/mcp` (about 1,000 requests per IP per 5 minutes, then HTTP 429),
   local and unlimited `npx -y @withicons/mcp` (prefer it for batch work). Tools: `search_icons`, `get_icon`,
   `resolve_icon`, `recommend_styles` (best styles for a job, a festival or an audience, with packages, presets and
-  palettes), `animate_icon`, `export_icon`, `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with
+  palettes), `preview_icons` (one labelled picture of icons x styles: look before you choose), `animate_icon`, `export_icon`,
+  `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with
   `tools/list`. Not connected? `npx withicons init` adds the skill and the server to the project's AI tools (`--dry-run` first).
 - **CLI** `npx withicons search "throw away"` · **HTTP** `https://withicons.com/api/search?q=throw+away&limit=5` (on a
   timeout retry once, or read `https://withicons.com/icons.json`) · **offline** [reference/icons.md](reference/icons.md)

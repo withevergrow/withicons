@@ -215,3 +215,44 @@ export declare function checkStyle(style?: string): string
 export declare function checkFormat(format?: string): Format
 export declare function data(): unknown
 export declare function motionData(): { icons: Record<string, unknown>; presets: string[]; effects: string[]; css: string[]; cdn: string[]; source: string }
+
+// ---- preview_icons: look before you choose
+export interface PreviewOptions {
+  /** icons, one row each (names or aliases, 1-24) */
+  names: string[]
+  /** styles, one column each (1-6, default ['line']); one style makes a gallery */
+  styles?: string[]
+  /** icon size in px, 12-256 (default 64) */
+  size?: number
+  /** 'light' (default), 'dark' (outlines drawn light) or a hex colour such as '#fde68a' */
+  background?: string
+  /** write icon and style names on the sheet (default true) */
+  labels?: boolean
+  /** one style only: icons per row (1-12; default balanced, at most 6) */
+  columns?: number
+  /** palette id (list_palettes), applied to the icons that have it */
+  palette?: string
+  /** role -> colour, for a brand preview */
+  colors?: PaletteColors
+}
+export interface PreviewSheet {
+  /** one self-contained SVG: no external references, colours baked in, labels drawn as paths, ids unique to this sheet */
+  svg: string
+  width: number; height: number
+  /** 'matrix': rows = icons, columns = styles. 'grid': one style, icons left to right then top to bottom */
+  layout: 'matrix' | 'grid'
+  rows: number; columns: number; cells: number
+  /** canonical icon names in order, the styles, the icon size, the page colour and the outline ink used */
+  icons: string[]; styles: string[]; size: number; background: string; ink: string
+  aliases?: Record<string, string>
+  /** tile size, gap and margin in px */
+  grid: { cell: number; gap: number; margin: number }
+  /** how to read the picture */
+  reading: string
+  /** sizes under a style's minSize, a dark background, colours that change nothing, an oversized sheet */
+  notes: string[]; warnings: string[]
+}
+export declare const PREVIEW_LIMITS: Readonly<{ names: 24; styles: 6; minSize: 12; maxSize: 256; defaultSize: 64; columns: 12; side: 4096 }>
+/** The preview_icons sheet as SVG. Throws IconError (unknown_icon, unknown_style, too_many_icons, too_many_styles, invalid_size,
+ *  invalid_background, invalid_columns, sheet_too_large). The MCP tool adds the PNG (local server) and the saved file (out_dir). */
+export declare function previewSheet(opts: PreviewOptions): PreviewSheet
