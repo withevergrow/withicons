@@ -1,0 +1,108 @@
+{
+  "name": "avatar-person-wheelchair",
+  "category": "avatars",
+  "description": "A friendly avatar of a person using a wheelchair, for profiles, accessibility and inclusive teams.",
+  "aliases": [
+    "wheelchair-user",
+    "person-wheelchair",
+    "wheelchair-avatar",
+    "person-in-wheelchair",
+    "wheelchair-person",
+    "disabled-person",
+    "person-with-disability",
+    "disability-avatar",
+    "accessible-avatar",
+    "manual-wheelchair"
+  ],
+  "tags": [
+    "person",
+    "wheelchair",
+    "avatar",
+    "accessibility",
+    "inclusion"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 9 A4.75 5.25 0 0 0 14 9",
+      "plate": "K"
+    },
+    {
+      "d": "M7 9 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M11.5 9 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 11.75 C8.25 12.5 10.25 12.5 11 11.75",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 9 C3.75 5 6 2.5 9.25 2.5 C12.5 2.5 14.75 5 14 9 C13.5 8.25 13.25 7.75 13.25 7 C11.75 7.25 10.25 7 9.25 6.5 C8.25 7 6.75 7.25 5.25 7 C5.25 7.75 5 8.25 4.5 9 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 21.5 C2.5 19.25 4 17.75 6.25 17.75 C7.25 17.75 8.25 18.25 9.25 18.25 C10.25 18.25 11 18 11.75 17.75",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 17.75 A3.75 3.75 0 1 1 14 17.75 A3.75 3.75 0 1 1 21.5 17.75 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17.75 17.5 V18",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 12.5 H20 V8.75 H21.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 9 A4.75 5.25 0 1 1 4.5 9 A4.75 5.25 0 1 1 14 9 Z",
+    "M4.5 9 C3.75 5 6 2.5 9.25 2.5 C12.5 2.5 14.75 5 14 9 C13.5 8.25 13.25 7.75 13.25 7 C11.75 7.25 10.25 7 9.25 6.5 C8.25 7 6.75 7.25 5.25 7 C5.25 7.75 5 8.25 4.5 9 Z",
+    "M2.5 21.5 C2.5 19.25 4 17.75 6.25 17.75 C7.25 17.75 8.25 18.25 9.25 18.25 C10.25 18.25 11 18 11.75 17.75 L12.75 21.5 Z",
+    "M22.5 17.75 A4.75 4.75 0 1 1 13 17.75 A4.75 4.75 0 1 1 22.5 17.75 Z M20.75 17.75 A3 3 0 1 1 14.75 17.75 A3 3 0 1 1 20.75 17.75 Z",
+    "M15.5 11.5 H19 V7.75 H21.75 V9.75 H21 V13.5 H15.5 Z"
+  ],
+  "cutouts": [
+    "M7.75 9.25 A0.75 1 0 1 1 6.25 9.25 A0.75 1 0 1 1 7.75 9.25 Z",
+    "M12.25 9.25 A0.75 1 0 1 1 10.75 9.25 A0.75 1 0 1 1 12.25 9.25 Z",
+    "M7.5 11.75 C8.25 12.5 10.25 12.5 11 11.75",
+    "M14 9 C13.5 8.25 13.25 7.75 13.25 7 C11.75 7.25 10.25 7 9.25 6.5 C8.25 7 6.75 7.25 5.25 7 C5.25 7.75 5 8.25 4.5 9"
+  ],
+  "synonyms": [
+    "wheelchair",
+    "wheelchair user",
+    "accessible person",
+    "disability",
+    "disabilities",
+    "disabled",
+    "person with a disability",
+    "accessibility",
+    "accessible",
+    "inclusive",
+    "inclusion",
+    "diversity",
+    "mobility",
+    "mobility aid",
+    "reduced mobility",
+    "paraplegic",
+    "seated",
+    "profile picture",
+    "pfp",
+    "user avatar",
+    "account",
+    "profile",
+    "member",
+    "contact",
+    "people",
+    "person",
+    "customer",
+    "employee",
+    "team member",
+    "patient",
+    "headshot"
+  ]
+}
