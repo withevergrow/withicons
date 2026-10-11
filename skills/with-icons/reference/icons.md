@@ -1,4 +1,4 @@
-# with icons: all 734 icon names
+# with icons: all 750 icon names
 
 Generated from the icon sources. Do not edit by hand.
 Use the **name** (kebab-case) in name-based APIs and the **component** in imports. Aliases resolve in name-based APIs
@@ -255,7 +255,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `video-call` | `VideoCall` | video-chat, video-meeting, video-conference, webcam-call, facetime, zoom-call, join-call, face-call |
 | `voicemail` | `Voicemail` | voice-mail, voice-message, answering-machine, recorded-message, voice-note, tape, cassette-reels, message-recording |
 
-## users (27)
+## users (28)
 
 | name | component | aliases |
 |---|---|---|
@@ -286,6 +286,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `user` | `User` | person, account, profile, member, individual, human, me, single-user |
 | `users-round` | `UsersRound` | people-round, team-round, group-round, members-round, round-users, avatars, user-avatars, people-group |
 | `users` | `Users` | group, team, people, members, community, audience, persons, user-group |
+| `worried` | `Worried` | anxious, nervous, worry, worried-face, anxious-face, nervous-face, concerned, uneasy |
 
 ## commerce (33)
 
@@ -460,7 +461,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `underline` | `Underline` | underlined, text-underline, underscore, format-underline, letter-u |
 | `wrap-text` | `WrapText` | word-wrap, text-wrap, line-wrap, soft-wrap, wrap, reflow, wrap-lines, text-flow |
 
-## maps (13)
+## maps (14)
 
 | name | component | aliases |
 |---|---|---|
@@ -473,6 +474,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `globe` | `Globe` | world, earth, internet, web, worldwide, international, global, planet |
 | `map-pin-check` | `MapPinCheck` | location-check, check-in, location-confirmed, verified-location, pin-check, checked-in, visited |
 | `map` | `Map` | folded-map, paper-map, atlas, cartography, route-map, travel-map, street-map, road-map |
+| `mosque` | `Mosque` | masjid, masjed, musalla, jama-masjid, minaret, mosque-building, islamic, islam |
 | `mountain` | `Mountain` | mountains, peak, summit, hill, terrain, landscape, alps, mountain-range |
 | `navigation` | `Navigation` | location-arrow, navigate, gps, my-location, direction, bearing, current-location, direction-arrow |
 | `plane` | `Plane` | airplane, aeroplane, flight, aircraft, airport, jet, airliner, flights |
@@ -621,29 +623,36 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `trophy` | `Trophy` | winner, cup, prize, champion, achievement, leaderboard, reward, first-place |
 | `zap` | `Zap` | lightning, flash, electric, lightning-bolt, thunderbolt, bolt |
 
-## food (17)
+## food (24)
 
 | name | component | aliases |
 |---|---|---|
 | `apple` | `Apple` | fruit, healthy-snack, nutrition, red-apple, teacher-apple, produce, orchard, green-apple |
+| `baby-bottle` | `BabyBottle` | feeding-bottle, milk-bottle, nursing-bottle, bottle-feeding, baby-feeding, baby-milk, infant-formula, baby-formula |
+| `baguette` | `Baguette` | french-bread, french-stick, french-loaf, baguettes, long-loaf, stick-loaf, ficelle, parisian-loaf |
 | `beer` | `Beer` | beer-mug, pint, pub, bar, brewery, ale, happy-hour, cheers |
+| `bread` | `Bread` | loaf, bread-loaf, loaf-of-bread, sourdough, sourdough-loaf, bakery-bread, artisan-bread, white-bread |
 | `burger` | `Burger` | hamburger-food, cheeseburger, fastfood, sandwich-burger, beef-burger, junk-food, diner, burgers |
 | `cake` | `Cake` | birthday-cake, birthday, dessert, anniversary, celebration-cake, bakery, party-cake, gateau |
 | `chef-hat` | `ChefHat` | cooking, chef, cook, toque, recipe, kitchen, baker, chefs-hat |
 | `cookie` | `Cookie` | biscuit, cookies, snack, chocolate-chip, cookie-consent, treat, baked-goods, cookie-banner |
 | `cooking-pot` | `CookingPot` | pot, saucepan, casserole, stockpot, boil, cook-pot, kitchen-pot, stew-pot |
+| `croissant` | `Croissant` | pastry, croissants, crescent-roll, french-pastry, viennoiserie, breakfast-pastry, butter-croissant, kipferl |
 | `cup-soda` | `CupSoda` | soda, soft-drink, drink, beverage, smoothie, milkshake, takeaway-cup, pop |
 | `donut` | `Donut` | doughnut, pastry, sprinkles, glazed, bakery-sweet, dessert-ring, sweets, donuts |
 | `egg` | `Egg` | eggs, breakfast, easter-egg, protein, ovum, hatch, chicken-egg, boiled-egg |
 | `ice-cream` | `IceCream` | ice-cream-cone, gelato, dessert-cone, frozen-treat, soft-serve, sundae, icecream, frozen-yogurt |
+| `oven` | `Oven` | baking-oven, stove, cooker, kitchen-oven, range-cooker, electric-oven, gas-oven, built-in-oven |
 | `pizza` | `Pizza` | pizza-slice, takeaway, italian-food, slice, pepperoni, fast-food, pizzeria, slice-of-pizza |
 | `popcorn` | `Popcorn` | movie-snack, film-night, movie-night |
+| `rolling-pin` | `RollingPin` | dough-roller, pastry-roller, baking-roller, rolling-pins, roller-pin, dough-pin |
 | `salad` | `Salad` | salad-bowl, healthy-food, vegan, vegetarian, greens, diet, fresh-food, healthy-eating |
 | `soup` | `Soup` | bowl, ramen, noodles, broth, stew, hot-meal, soup-bowl, hot-soup |
 | `utensils` | `Utensils` | fork-knife, knife-fork, restaurant, dining, cutlery, meal, eat, food-menu |
+| `wheat` | `Wheat` | grain, grains, flour, harvest, ear-of-wheat, wheat-ear, wheat-stalk, barley |
 | `wine` | `Wine` | wine-glass, glass-of-wine, winery, toast, drinks, red-wine, white-wine, vino |
 
-## health (8)
+## health (10)
 
 | name | component | aliases |
 |---|---|---|
@@ -651,20 +660,24 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `ambulance` | `Ambulance` | emergency-vehicle, paramedic, ems, rescue, urgent-care, emergency-services, first-responder, medevac |
 | `bandage` | `Bandage` | band-aid, bandaid, plaster, adhesive-bandage, injury, wound, patch, sticking-plaster |
 | `briefcase-medical` | `BriefcaseMedical` | first-aid-kit, medical-kit, medkit, health-kit, emergency-kit, doctor-bag, aid-kit, first-aid |
+| `dental-chair` | `DentalChair` | dentist-chair, dentists-chair, dental-unit, dental-office, dentist-office, dental-practice, treatment-chair, patient-chair |
 | `hospital` | `Hospital` | hospital-building, clinic-building, medical-center, medical-centre, emergency-room, infirmary, health-center, healthcare |
 | `stethoscope` | `Stethoscope` | doctor, physician, checkup, medical, clinic, diagnosis, gp, medic |
 | `syringe` | `Syringe` | injection, vaccine, vaccination, needle, jab, immunization, immunisation, inject |
+| `tooth-crown` | `ToothCrown` | dental-crown, tooth-cap, dental-cap, crown-tooth, crowned-tooth, dental-restoration, tooth-restoration, porcelain-crown |
 | `tooth` | `Tooth` | dental, dentist, teeth, molar, oral-care, dentistry, orthodontics, orthodontist |
 
-## education (9)
+## education (11)
 
 | name | component | aliases |
 |---|---|---|
 | `atom` | `Atom` | physics, nucleus, electron, nuclear, molecule, science-atom, quantum, atomic |
 | `backpack` | `Backpack` | rucksack, schoolbag, bag-pack, knapsack, school-bag, daypack, hiking-bag, back-pack |
+| `crayon` | `Crayon` | crayons, wax-crayon, coloring, colouring, color-crayon, colour-crayon, oil-pastel, drawing-crayon |
 | `dna` | `Dna` | double-helix, genetics, gene, genome, biotech, helix, heredity, genetic |
 | `flask-conical` | `FlaskConical` | flask, beaker, chemistry, experiment, erlenmeyer, potion, lab-flask, conical-flask |
 | `microscope` | `Microscope` | lab, laboratory, research, biology, science, magnify-cells, analysis, microscopy |
+| `playground` | `Playground` | play-area, playset, play-park, playpark, jungle-gym, climbing-frame, kids-slide, playground-slide |
 | `presentation` | `Presentation` | slides, whiteboard, lecture, pitch, slideshow-board, training, seminar, easel |
 | `school` | `School` | school-building, schoolhouse, campus, elementary, primary-school, institute, high-school, secondary-school |
 | `telescope` | `Telescope` | astronomy, stargazing, observatory, spyglass, space, vision, star-gazing, refractor |
@@ -703,7 +716,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `toilet` | `Toilet` | restroom, wc, loo, lavatory, bathroom-sign, washroom, restrooms, water-closet |
 | `washing-machine` | `WashingMachine` | washer, laundry, washing, clothes-washer, laundromat, wash, dryer, tumble-dryer |
 
-## travel (18)
+## travel (19)
 
 | name | component | aliases |
 |---|---|---|
@@ -721,6 +734,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `satellite` | `Satellite` | orbiter, sat, space-station, satcom, broadcast-satellite |
 | `ship` | `Ship` | boat, cruise, ferry, vessel, sea-freight, ocean-liner, cruise-ship, steamship |
 | `signpost` | `Signpost` | sign-post, direction-sign, crossroads, guidepost, fingerpost, road-sign, waypost, trail-sign |
+| `stroller` | `Stroller` | pram, baby-carriage, pushchair, buggy, baby-stroller, baby-buggy, baby-pram, perambulator |
 | `taxi` | `Taxi` | cab, taxicab, ride-hailing, car-service, hail, rideshare, taxi-cab, minicab |
 | `tent` | `Tent` | camping, campsite, camp, outdoors, shelter, glamping, festival, teepee |
 | `traffic-cone` | `TrafficCone` | roadworks, under-construction, work-in-progress, road-closed, safety-cone, road-cone, pylon, construction-cone |
@@ -859,7 +873,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `tombstone` | `Tombstone` | gravestone, headstone, grave, rip, rest-in-peace, grave-marker, memorial-stone, cemetery |
 | `witch-hat` | `WitchHat` | witch, witches-hat, wizard-hat, pointed-hat, sorcerer-hat, halloween-hat, magic-hat |
 
-## avatars (39)
+## avatars (41)
 
 | name | component | aliases |
 |---|---|---|
@@ -892,6 +906,7 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `avatar-penguin` | `AvatarPenguin` | penguin-avatar, penguin, penguin-face, penguin-profile, penguin-pfp, pingu, tux-avatar, penguin-head |
 | `avatar-person-glasses` | `AvatarPersonGlasses` | person-glasses, glasses-avatar, nerd, geek, spectacles-avatar, person-with-glasses, bespectacled, specs-avatar |
 | `avatar-person-headphones` | `AvatarPersonHeadphones` | person-headphones, headphones-avatar, listener, gamer, support-agent, dj, podcaster, person-with-headphones |
+| `avatar-person-wheelchair` | `AvatarPersonWheelchair` | wheelchair-user, person-wheelchair, wheelchair-avatar, person-in-wheelchair, wheelchair-person, disabled-person, person-with-disability, disability-avatar |
 | `avatar-person` | `AvatarPerson` | person-avatar, neutral-avatar, default-person, guest-avatar, nonbinary-avatar, gender-neutral, anyone, unisex-avatar |
 | `avatar-robot` | `AvatarRobot` | robot-avatar, robot-face, droid, android-avatar, bot-avatar, mech, automaton |
 | `avatar-teen` | `AvatarTeen` | teen, teenager, teen-avatar, adolescent, youth, hoodie, young-person, student-avatar |
@@ -901,5 +916,6 @@ and search only, and are never exports. Every icon exists in all 34 styles (line
 | `avatar-woman-braids` | `AvatarWomanBraids` | braids, woman-braids, braided-hair, plaits, braids-avatar, pigtail-braids, woman-plaits, braided-woman |
 | `avatar-woman-bun` | `AvatarWomanBun` | bun, woman-bun, hair-bun, top-knot, topknot, bun-avatar, updo, messy-bun |
 | `avatar-woman-curly` | `AvatarWomanCurly` | curly-hair, woman-curly, curly-woman, curls, curly-avatar, woman-curly-hair, ringlets, curly-haired-woman |
+| `avatar-woman-hijab` | `AvatarWomanHijab` | hijab, woman-hijab, hijab-avatar, hijabi, muslim-woman, woman-with-hijab, headscarf, headscarf-woman |
 | `avatar-woman` | `AvatarWoman` | woman, woman-avatar, female-avatar, female-user, woman-profile, lady, female, woman-face |
 

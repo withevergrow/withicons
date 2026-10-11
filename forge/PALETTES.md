@@ -1,6 +1,6 @@
 # with icons — per-icon colour palettes
 
-Six styles paint with more than one colour: `duo` (tint), and the five palette styles `glass`, `kawaii`, `sticker`,
+Six styles paint with more than one colour: `duo` (its tint plane is the role `c1`; the role named `tint` is the glass front pane and paints nothing in duo), and the five palette styles `glass`, `kawaii`, `sticker`,
 `pixel`, `retro` (every colour is a CSS variable `--with-<style>-<role>` with a default; see `forge/CONTRACT.md`).
 Users can change **every** colour in the editor, and every icon ships **20–30 hand-picked palette suggestions**
 written for that icon specifically.

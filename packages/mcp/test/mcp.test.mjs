@@ -60,8 +60,8 @@ describe('stdio server (SDK client)', () => {
     return true
   }
   test('search_icons: a word no icon carries is "no exact match", with similar icons as additional results', async t => {
-    if (!await unknownWord(t, 'croissant')) return
-    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'croissant' } })
+    if (!await unknownWord(t, 'steak')) return
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'steak' } })
     const r = parse(raw)
     assert.equal(r.noExactMatch, true)
     assert.equal(r.count, 0)
@@ -73,16 +73,16 @@ describe('stdio server (SDK client)', () => {
       assert.match(x.reason, /loosely related/)
       assert.equal(x.snippet, undefined, 'additional results stay short: no snippet')
     }
-    assert.match(r.hint, /^No exact match for "croissant"/)
+    assert.match(r.hint, /^No exact match for "steak"/)
     assert.deepEqual(r.suggestions, [])
     const text = raw.content[0].text
-    assert.match(text, /^No exact match for "croissant"/)
+    assert.match(text, /^No exact match for "steak"/)
     assert.match(text, /\nAdditional results \(loosely related, not exact matches\):\n- \S+ \(/)
     assert.ok(text.length < 900, `summary stays short: ${text.length}`)
   })
-  test('search_icons: a related concept is not an exact match ("bread" -> bakery icons only as additional results)', async t => {
-    if (!await unknownWord(t, 'bread')) return
-    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'bread' } }))
+  test('search_icons: a related concept is not an exact match ("toaster" -> kitchen icons only as additional results)', async t => {
+    if (!await unknownWord(t, 'toaster')) return
+    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'toaster' } }))
     assert.equal(r.noExactMatch, true)
     assert.equal(r.count, 0)
     assert.ok(r.additional.length >= 1)
@@ -557,6 +557,14 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(r.statusCode, 200)
     assert.equal(JSON.parse(r.body).recommendations[0].style, 'christmas')
     assert.equal((await handler(ev('GET', '/api/recommend', 'use=nope'))).statusCode, 400)
+  })
+  test('GET /api/recommend?compact=1: the short form, same ranking', async () => {
+    const full = JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck%20for%20a%20dentist'))).body)
+    const small = JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck%20for%20a%20dentist&compact=1'))).body)
+    assert.deepEqual(small.recommendations.map(x => x.style), full.recommendations.map(x => x.style))
+    assert.ok(JSON.stringify(small).length < JSON.stringify(full).length / 2, 'compact is much smaller')
+    assert.deepEqual(Object.keys(small.recommendations[0]).sort(), ['group', 'react', 'style', 'suits', 'webComponent'])
+    assert.equal(JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck&compact=0'))).body).recommendations[0].files !== undefined, true, 'compact=0 is the full form')
   })
   test('GET /api/icon/<name>', async () => {
     const r = JSON.parse((await handler(ev('GET', '/api/icon/home', 'style=solid&format=react'))).body)

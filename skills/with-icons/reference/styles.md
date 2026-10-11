@@ -1,6 +1,6 @@
 # with icons: the 34 styles
 
-All styles render the same 734 skeletons, so `home` looks like the same house in every style. They come in six groups,
+All styles render the same 750 skeletons, so `home` looks like the same house in every style. They come in six groups,
 named for what people make (the site, its pickers and MCP `recommend_styles` use the same groups). Line, solid, duo,
 gloss, engrave, blueprint and sketch are single-colour `currentColor` (duo and blueprint add opt-in CSS variables); every
 other style ships a default palette whose colours are CSS variables, while its ink still follows `currentColor`.
@@ -128,7 +128,7 @@ tile, stay object words.) For festivals, search for the object and pass the styl
 
 ## Duo presets
 
-Duo's lines and tint follow `currentColor` by default. Its variables: `--with-duo` (the tint plane) and `--with-duo-accent`
+Duo's lines and tint follow `currentColor` by default. Its variables: `--with-duo` (the tint plane, a 20% tone; in the role vocabulary of `export_icon` / `get_icon` it is `c1`, and the role named `tint` paints nothing in duo) and `--with-duo-accent`
 (one accent detail per icon, picked automatically: the icon's modifier, like a badge, plus sign or slash, if it has one;
 else its inner parts, like a bell's clapper or a lock's keyhole; pure line glyphs such as arrows get none). Tint and
 accent are independent: one colour for both (the preset) or two (`--with-duo: #c7d2fe; --with-duo-accent: #e11d48`). `--with-duo-from` / `--with-duo-to` exist only in the studio's
@@ -275,7 +275,7 @@ Hair (c2 = hair, c3 = its shade):
 | platinum | #EFE2BC | #ACA387 |
 | honey | #C99A4B | #916F36 |
 
-Avatars (39): `avatar-alien`, `avatar-baby`, `avatar-bear`, `avatar-boy`, `avatar-bunny`, `avatar-cat`, `avatar-dino`, `avatar-dog`, `avatar-fox`, `avatar-frog`, `avatar-ghost`, `avatar-girl`, `avatar-koala`, `avatar-man-afro`, `avatar-man-bald`, `avatar-man-beard`, `avatar-man-cap`, `avatar-man-turban`, `avatar-man`, `avatar-monster-fluffy`, `avatar-monster-horns`, `avatar-monster`, `avatar-older-man`, `avatar-older-woman`, `avatar-owl`, `avatar-panda`, `avatar-penguin`, `avatar-person-glasses`, `avatar-person-headphones`, `avatar-person`, `avatar-robot`, `avatar-teen`, `avatar-tiger`, `avatar-unicorn`, `avatar-woman-bob`, `avatar-woman-braids`, `avatar-woman-bun`, `avatar-woman-curly`, `avatar-woman`.
+Avatars (41): `avatar-alien`, `avatar-baby`, `avatar-bear`, `avatar-boy`, `avatar-bunny`, `avatar-cat`, `avatar-dino`, `avatar-dog`, `avatar-fox`, `avatar-frog`, `avatar-ghost`, `avatar-girl`, `avatar-koala`, `avatar-man-afro`, `avatar-man-bald`, `avatar-man-beard`, `avatar-man-cap`, `avatar-man-turban`, `avatar-man`, `avatar-monster-fluffy`, `avatar-monster-horns`, `avatar-monster`, `avatar-older-man`, `avatar-older-woman`, `avatar-owl`, `avatar-panda`, `avatar-penguin`, `avatar-person-glasses`, `avatar-person-headphones`, `avatar-person-wheelchair`, `avatar-person`, `avatar-robot`, `avatar-teen`, `avatar-tiger`, `avatar-unicorn`, `avatar-woman-bob`, `avatar-woman-braids`, `avatar-woman-bun`, `avatar-woman-curly`, `avatar-woman-hijab`, `avatar-woman`.
 <!-- avatars:end -->
 
 People avatars: `avatar-person`, `-man`, `-woman`, `-boy`, `-girl`, `-teen`, `-baby`, `-older-man`, `-older-woman`,
@@ -290,7 +290,7 @@ Set skin and hair as two separate choices, or offer the named pairs from `withic
 ## Download a whole style
 
 <!-- downloads:start -->
-Every style as one zip: `https://withicons.com/downloads/with-icons-<style>.zip` (all 734 SVGs with the colours baked in,
+Every style as one zip: `https://withicons.com/downloads/with-icons-<style>.zip` (all 750 SVGs with the colours baked in,
 an offline searchable viewer `index.html`, LICENSE and README), e.g. `https://withicons.com/downloads/with-icons-line.zip`, `https://withicons.com/downloads/with-icons-solid.zip`, `https://withicons.com/downloads/with-icons-duo.zip`. Every style in one: `https://withicons.com/downloads/with-icons-all.zip` (svg/<style>/<name>.svg, no viewer). Styles: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine.
 <!-- downloads:end -->
 
@@ -303,7 +303,7 @@ ids unique and keep the CSS variables themable); the zip SVGs have the colours b
   older palette styles (glass, kawaii, sticker, pixel, retro) this recolours the ink. Most role-named styles (clay, plush,
   luxe, the holiday styles …) paint their outline with `--with-<style>-ink`, which has a hex default: set that variable
   (or the `ink` role) to recolour it; `color` alone does not. The palette table below shows which styles have an ink default.
-- `--with-duo`: the tint colour of duo (defaults to translucent currentColor); `--with-duo-accent`: its one accent detail (Duo presets above).
+- `--with-duo`: the tint colour of duo (role `c1`; defaults to translucent currentColor); `--with-duo-accent`: its one accent detail (Duo presets above).
 - `--with-accent`: a second colour for blueprint construction lines.
 - Palette styles: `--with-<style>-<role>` per colour (table below). Set them on any parent, a theme class or one icon:
   `.cozy { --with-kawaii-fill-1: #fbcfe8; --with-kawaii-blush: #f472b6 }`.
@@ -358,8 +358,8 @@ ids unique and keep the CSS variables themable); the zip SVGs have the colours b
 | style | CSS variables (default) |
 |---|---|
 | `glass` | `--with-glass-accent` #F2679E, `--with-glass-back` #7484FF, `--with-glass-c1` #F07CA2, `--with-glass-c2` #E2577F, `--with-glass-c3` #F5B82E, `--with-glass-c4` #FF8A3D, `--with-glass-etch` #3E3A8C, `--with-glass-frost` #FFFFFF, `--with-glass-pane` #E4E8FF, `--with-glass-shadow` #6A45D6, `--with-glass-shine` #FFFFFF |
-| `kawaii` | `--with-kawaii-accent` #FF5C9A, `--with-kawaii-blush` #FF6F9C, `--with-kawaii-c1` #BB9275, `--with-kawaii-c2` #504948, `--with-kawaii-c4` #85CDC5, `--with-kawaii-fill-1` #FF6FA5, `--with-kawaii-fill-2` #FF9A66, `--with-kawaii-fill-3` #FFD23A, `--with-kawaii-fill-4` #45D99A, `--with-kawaii-fill-5` #5AB4FF, `--with-kawaii-fill-6` #A98BFF, `--with-kawaii-shine` #FFFFFF, `--with-kawaii-sparkle` #FFB627 |
-| `sticker` | `--with-sticker-accent` #FF6FB5, `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-c1` #A96539, `--with-sticker-c2` #2A2120, `--with-sticker-c4` #22A495, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
+| `kawaii` | `--with-kawaii-accent` #FF5C9A, `--with-kawaii-blush` #FF6F9C, `--with-kawaii-c1` #D4A688, `--with-kawaii-c2` #504948, `--with-kawaii-c4` #85CDC5, `--with-kawaii-fill-1` #FF6FA5, `--with-kawaii-fill-2` #FF9A66, `--with-kawaii-fill-3` #FFD23A, `--with-kawaii-fill-4` #45D99A, `--with-kawaii-fill-5` #5AB4FF, `--with-kawaii-fill-6` #A98BFF, `--with-kawaii-shine` #FFFFFF, `--with-kawaii-sparkle` #FFB627 |
+| `sticker` | `--with-sticker-accent` #FF6FB5, `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-c1` #CD8151, `--with-sticker-c2` #2A2120, `--with-sticker-c4` #22A495, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
 | `pixel` | `--with-pixel-accent` #FF8A1F, `--with-pixel-c2` #E53935, `--with-pixel-c3` #B71C1C, `--with-pixel-ink` #23263A, `--with-pixel-shadow` #7A4A2A, `--with-pixel-shine` #FFFFFF, `--with-pixel-tint` #B9D5F3 |
 | `retro` | `--with-retro-1` #F4B53F, `--with-retro-2` #EF7D2D, `--with-retro-3` #DE4B3A, `--with-retro-4` #178A86, `--with-retro-cream` #FFF3D9, `--with-retro-letter` #2A160E, `--with-retro-shadow` #6B3323, `--with-retro-tint` #FFF3D9 |
 | `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
@@ -377,12 +377,12 @@ ids unique and keep the CSS variables themable); the zip SVGs have the colours b
 | `liquid` | `--with-liquid-accent` #FF5F8F, `--with-liquid-c1` #4A9DFF, `--with-liquid-c2` #A77BFF, `--with-liquid-c3` #1C3F9E, `--with-liquid-c4` #FF7EC1, `--with-liquid-edge` #B9E6FF, `--with-liquid-ink` #2A1414, `--with-liquid-shadow` #0C1A3A, `--with-liquid-shine` #FFFFFF, `--with-liquid-tint` #FFE3B0 |
 | `chrome` | `--with-chrome-accent` #FF3E9E, `--with-chrome-c1` #8794AA, `--with-chrome-c2` #5E6A82, `--with-chrome-c3` #3E4556, `--with-chrome-c4` #CDB9A4, `--with-chrome-edge` #F4F7FC, `--with-chrome-ink` #10131B, `--with-chrome-shadow` #1A1E2A, `--with-chrome-shine` #FFFFFF, `--with-chrome-tint` #DCE5F2 |
 | `soft3d` | `--with-soft3d-accent` #FF6A4D, `--with-soft3d-c1` #E5483F, `--with-soft3d-c2` #EEF1F5, `--with-soft3d-c3` #3A404C, `--with-soft3d-c4` #BFC7D2, `--with-soft3d-edge` #FFF8EE, `--with-soft3d-ink` #2A2226, `--with-soft3d-shadow` #1D2130, `--with-soft3d-shine` #FFFFFF, `--with-soft3d-tint` #A9D8F2 |
-| `brutal` | `--with-brutal-accent` #FF8A3D, `--with-brutal-c1` #FFD23F, `--with-brutal-c2` #FF6BA8, `--with-brutal-c3` #4D7CFE, `--with-brutal-c4` #3DDC97, `--with-brutal-shine` #FFFFFF, `--with-brutal-tint` #DDB89C |
-| `utsav` | `--with-utsav-accent` #D4A017, `--with-utsav-c1` #F59E0B, `--with-utsav-c2` #F97316, `--with-utsav-c3` #E11D74, `--with-utsav-c4` #0F766E, `--with-utsav-edge` #F4C95D, `--with-utsav-ink` #3B0A45, `--with-utsav-shadow` #5E3518, `--with-utsav-shine` #FFF4DC, `--with-utsav-tint` #E8B48C |
+| `brutal` | `--with-brutal-accent` #FF8A3D, `--with-brutal-c1` #FFD23F, `--with-brutal-c2` #FF6BA8, `--with-brutal-c3` #4D7CFE, `--with-brutal-c4` #3DDC97, `--with-brutal-shine` #FFFFFF, `--with-brutal-tint` #FBE4D2 |
+| `utsav` | `--with-utsav-accent` #D4A017, `--with-utsav-c1` #F59E0B, `--with-utsav-c2` #F97316, `--with-utsav-c3` #E11D74, `--with-utsav-c4` #0F766E, `--with-utsav-edge` #F4C95D, `--with-utsav-ink` #3B0A45, `--with-utsav-shadow` #A9714C, `--with-utsav-shine` #FFF4DC, `--with-utsav-tint` #FFDFBD |
 | `rangoli` | `--with-rangoli-accent` #FFC21A, `--with-rangoli-c1` #FFB21F, `--with-rangoli-c2` #F2462C, `--with-rangoli-c3` #E81F7A, `--with-rangoli-c4` #7B2FE0, `--with-rangoli-edge` #7B2FE0, `--with-rangoli-ink` #2B1660, `--with-rangoli-shadow` #5A1240, `--with-rangoli-shine` #FFFFFF, `--with-rangoli-tint` #FFF3D8 |
 | `halloween` | `--with-halloween-accent` #FFB52E, `--with-halloween-c1` #FF9F2E, `--with-halloween-c2` #E5530F, `--with-halloween-c3` #8B55E0, `--with-halloween-c4` #86D13A, `--with-halloween-edge` #7344C9, `--with-halloween-ink` #1D1029, `--with-halloween-shadow` #2A1642, `--with-halloween-shine` #FFF6E2, `--with-halloween-tint` #FFF1B8 |
 | `christmas` | `--with-christmas-accent` #F4C24D, `--with-christmas-c1` #C8203A, `--with-christmas-c2` #1F6E46, `--with-christmas-c3` #E2A93B, `--with-christmas-c4` #FFF5E6, `--with-christmas-edge` #FFB347, `--with-christmas-ink` #3A0F17, `--with-christmas-shadow` #4A0716, `--with-christmas-shine` #FFFFFF, `--with-christmas-tint` #C9DAEC |
-| `lunar` | `--with-lunar-accent` #E8B030, `--with-lunar-c1` #E8282E, `--with-lunar-c2` #B0101E, `--with-lunar-c3` #11896A, `--with-lunar-c4` #E8B030, `--with-lunar-edge` #A8700F, `--with-lunar-ink` #4A0A10, `--with-lunar-shadow` #5E3518, `--with-lunar-shine` #FFEBA6, `--with-lunar-tint` #FFF1D6 |
+| `lunar` | `--with-lunar-accent` #E8B030, `--with-lunar-c1` #E8282E, `--with-lunar-c2` #B0101E, `--with-lunar-c3` #11896A, `--with-lunar-c4` #E8B030, `--with-lunar-edge` #A8700F, `--with-lunar-ink` #4A0A10, `--with-lunar-shadow` #A9714C, `--with-lunar-shine` #FFEBA6, `--with-lunar-tint` #FFF1D6 |
 | `valentine` | `--with-valentine-accent` #5DB86A, `--with-valentine-c1` #FF6B8E, `--with-valentine-c2` #E8304F, `--with-valentine-c3` #8B4A36, `--with-valentine-c4` #FFF3E3, `--with-valentine-edge` #FF8FB0, `--with-valentine-ink` #6A1B3A, `--with-valentine-shadow` #A3163F, `--with-valentine-shine` #FFFFFF, `--with-valentine-tint` #F5C451 |
 <!-- palettes:end -->
 

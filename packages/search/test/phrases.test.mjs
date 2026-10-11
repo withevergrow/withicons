@@ -17,7 +17,7 @@ const someIn = (got, names) => got.some(n => names.includes(n))
 const noneIn = (got, names) => !got.some(n => names.includes(n))
 
 const MEDIA = ['play', 'audio-lines', 'list-music', 'circle-play', 'repeat', 'shuffle', 'picture-in-picture', 'triangle']
-const KIDS = ['teddy-bear', 'kite', 'water-balloon', 'balloon', 'baby', 'avatar-boy', 'avatar-girl', 'avatar-baby', 'avatar-teen', 'shapes', 'pichkari', 'rainbow']
+const KIDS = ['playground', 'teddy-bear', 'kite', 'water-balloon', 'balloon', 'baby', 'avatar-boy', 'avatar-girl', 'avatar-baby', 'avatar-teen', 'shapes', 'pichkari', 'rainbow']
 
 describe('query understanding: function words, hyphenated compounds, style words', () => {
   test('"X-based" marks X as a modifier: "based" carries nothing', () => {
@@ -65,7 +65,8 @@ describe('the head sense wins over a stray word', () => {
     // "working" describes the parent. Only two icons carry "parent", so loader (alias "working") still follows them,
     // flagged low: the honest fix for the rest is data (a working-parent icon), not ranking
     const got = top('working parent')
-    assert.deepEqual(got.slice(0, 2).sort(), ['avatar-baby', 'baby'], show('working parent'))
+    // a stroller is a fair third answer for a parent (it arrived with the kids and dental icons)
+    assert.deepEqual(got.slice(0, 3).sort(), ['avatar-baby', 'baby', 'stroller'], show('working parent'))
     assert.ok(noneIn(got, ['dumbbell', 'bug', 'clock']), show('working parent'))
     assert.ok(noneIn(exact('working parent'), ['loader', 'dumbbell', 'bug', 'clock']), exact('working parent').join(', '))
   })
@@ -104,8 +105,11 @@ describe('calibration: a partial match is exact only when it covers the head', (
     assert.ok(exact('nature-based day care').includes('baby'), exact('nature-based day care').join(', '))
     assert.ok(exact('shop counter').includes('store') || engine.query('shop counter').results[0].name === 'store')
   })
+  test('"anxious worried patient" is answered by the worried face (it had no honest icon before `worried` existed)', () => {
+    assert.equal(engine.query('anxious worried patient').results[0].name, 'worried')
+  })
   test('queries with no honest icon find nothing exact', () => {
-    for (const q of ['unit economics', 'market size', 'anxious worried patient', 'diaspora family']) {
+    for (const q of ['unit economics', 'market size', 'diaspora family']) {
       const ex = exact(q)
       assert.ok(ex.length === 0 || q === 'diaspora family', `${q}: ${ex.join(', ')}`)
     }

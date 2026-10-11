@@ -148,12 +148,12 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 
 | file | what | size | gzip |
 |---|---|---|---|
-| `index.js` | full runtime, all 34 styles, sync render() | 2052 KB | 743 KB |
-| `lite.js` | core + line; other styles load on first use | 172 KB | 62.8 KB |
+| `index.js` | full runtime, all 34 styles, sync render() | 2058 KB | 745 KB |
+| `lite.js` | core + line; other styles load on first use | 172 KB | 62.9 KB |
 | `element.js` | `<with-live-icon>` on lite | 179 KB | 65.8 KB |
 | `react.js` | `<LiveIcon>` on lite (react not included) | 174 KB | 63.9 KB |
 | `vue.js` | `<LiveIcon>` on lite (vue not included) | 173 KB | 63.7 KB |
-| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (225 KB / 74.1 KB gzip) | 3.9 KB | 2.0 KB |
+| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (225 KB / 74.3 KB gzip) | 3.9 KB | 2.0 KB |
 | `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 125 KB | 43.6 KB |
 | `cdn/gens/<name>.js` | one live icon's drawing code (typical `price-tag`; largest `cart-count` 9.9 KB / 4.5 KB gzip) | 3.9 KB | 2.0 KB |
 | `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 180 KB | 65.1 KB |

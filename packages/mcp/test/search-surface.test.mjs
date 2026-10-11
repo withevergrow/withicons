@@ -142,7 +142,9 @@ describe('no-match suggestions', () => {
   // the first eight are the evidence (docs/MCP-AGENT-EVAL.md #12); the rest are words one letter from a real name, alias or
   // tag (sheep / sleep, shark / share, comet / comment, swing / sing, taco / tack, beaver / beaker): another word, not a typo
   for (const q of ['nervous', 'wheat', 'playground', 'crayon', 'stroller', 'mosque', 'hijab', 'anxious', 'xylophone', 'pacifier', 'wheat field', 'nervous face',
-    'sheep', 'shark', 'comet', 'swing', 'taco', 'beaver', 'rooster', 'grape', 'pepper', 'butter', 'brownie', 'swan', 'lamb', 'pretzel']) {
+    'sheep', 'shark', 'comet', 'swing', 'taco', 'beaver', 'rooster', 'grape', 'pepper', 'butter', 'brownie', 'swan', 'lamb', 'pretzel',
+    // the words above that became icons skip themselves (wheat, playground, mosque ...); these stand in for them
+    'trombone', 'giraffe', 'cactus', 'trampoline', 'harmonica', 'walrus', 'lighthouse', 'pancake', 'hedgehog', 'windmill', 'scarecrow', 'pelican', 'abacus']) {
     test(`"${q}": nothing is close enough to suggest`, t => {
       const r = unmatched(t, q)
       if (!r) return
@@ -151,12 +153,12 @@ describe('no-match suggestions', () => {
     })
   }
   test('junk suggestions are gone from the MCP text too', async t => {
-    const r = unmatched(t, 'nervous')
+    const r = unmatched(t, 'hedgehog')
     if (!r) return
     const client = new Client({ name: 'withicons-test', version: '1.0.0' })
     await client.connect(new StdioClientTransport({ command: process.execPath, args: [path.join(dist, 'stdio.mjs')], stderr: 'ignore' }))
     try {
-      const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'nervous' } })
+      const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'hedgehog' } })
       assert.doesNotMatch(raw.content[0].text, /Did you mean/)
       assert.deepEqual(parse(raw).suggestions, [])
     } finally { await client.close() }

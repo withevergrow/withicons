@@ -96,11 +96,11 @@ describe('preview_icons on the local server (stdio)', () => {
   after(async () => { await client.close() })
   const call = args => client.callTool({ name: 'preview_icons', arguments: args })
 
-  test('is listed: read-only, with the documented arguments', async () => {
+  test('is listed: not read-only locally (out_dir writes a file), with the documented arguments', async () => {
     const { tools } = await client.listTools()
     const t = tools.find(x => x.name === 'preview_icons')
     assert.ok(t, 'preview_icons is a tool')
-    assert.equal(t.annotations.readOnlyHint, true)
+    assert.equal(t.annotations.readOnlyHint, false)   // like export_icon: only the hosted server (no out_dir) is read-only
     for (const k of ['names', 'styles', 'size', 'background', 'labels', 'columns', 'format', 'out_dir', 'palette', 'colors']) assert.ok(t.inputSchema.properties[k], k)
     assert.deepEqual(t.inputSchema.required, ['names'])
     assert.match(t.description, /rows/i)
@@ -293,14 +293,14 @@ describe('preview_icons on the local server (stdio)', () => {
   })
 
   test('unknown icons: one error naming each with its nearest icons', async () => {
-    const r = await call({ names: ['cake', 'croissant', 'zzzqqq'], styles: ['line'] })
+    const r = await call({ names: ['cake', 'croisant', 'zzzqqq'], styles: ['line'] })
     assert.equal(r.isError, true)
     const e = JSON.parse(r.content[0].text)
-    assert.match(e.error, /croissant/)
+    assert.match(e.error, /croisant/)
     assert.match(e.error, /zzzqqq/)
     assert.match(e.error, /Did you mean/)
     assert.equal(e.code, 'unknown_icon')
-    assert.ok(e.unknown.find(x => x.name === 'croissant').nearest.length > 0)
+    assert.ok(e.unknown.find(x => x.name === 'croisant').nearest.length > 0)
     assert.match(e.error, /search_icons|resolve_icon/)
   })
   test('unknown styles: the style list and the closest style', async () => {
@@ -437,7 +437,7 @@ describe('preview_icons on the hosted server (Lambda handler): an SVG sheet', ()
     assert.equal(png.height, r.structuredContent.height)
   })
   test('the same errors as the other tools, and the same limits', async () => {
-    const bad = await call({ names: ['croissant'], styles: ['line'] })
+    const bad = await call({ names: ['croisant'], styles: ['line'] })   // a typo of an icon: unknown, with a nearest name
     assert.equal(bad.isError, true)
     assert.match(bad.content[0].text, /Did you mean/)
     const badStyle = await call({ names: ['cake'], styles: ['nope'] })
@@ -472,7 +472,7 @@ describe('previewSheet in @withicons/mcp/lib: the same sheet as a function', () 
   })
   test('throws IconError with a code for what to change', () => {
     const code = a => { try { lib.previewSheet(a) } catch (e) { assert.ok(e instanceof lib.IconError); return e.code } assert.fail('should throw') }
-    assert.equal(code({ names: ['croissant'] }), 'unknown_icon')
+    assert.equal(code({ names: ['croisant'] }), 'unknown_icon')
     assert.equal(code({ names: ['cake'], styles: ['glas'] }), 'unknown_style')
     assert.equal(code({ names: [] }), 'missing_name')
     assert.equal(code({ names: ['cake'], size: 5 }), 'invalid_size')

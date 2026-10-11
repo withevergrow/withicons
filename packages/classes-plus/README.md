@@ -1,6 +1,6 @@
 # @withicons/classes-plus
 
-CSS icon classes for the 7 newer with icons styles (`clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`), for all 734 icons.
+CSS icon classes for the 7 newer with icons styles (`clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`), for all 750 icons.
 A companion of [`@withicons/classes`](https://www.npmjs.com/package/@withicons/classes): its loader (`with-loader.js`) and
 runtime (`with-icons.js`) find these styles by themselves, so a page needs nothing extra:
 

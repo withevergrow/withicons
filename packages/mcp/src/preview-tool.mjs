@@ -98,7 +98,7 @@ export function registerPreviewTool(server, { remote = false } = {}) {
       format: z.enum(['png', 'svg']).optional().describe(remote ? 'svg (this server has no PNG renderer)' : 'png (default: an image you can see) or svg'),
       ...(remote ? {} : { out_dir: z.string().max(500).optional().describe('Folder to save the sheet in') }),
     },
-    annotations: { title: 'Preview icons', readOnlyHint: true, openWorldHint: false },
+    annotations: { title: 'Preview icons', readOnlyHint: remote, openWorldHint: false },   // the local server can save a file (out_dir), like export_icon
   }, async args => {
     try { return await previewIcons(args || {}, { remote }) } catch (e) {
       if (e instanceof lib.IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }) }] } }

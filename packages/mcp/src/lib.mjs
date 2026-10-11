@@ -47,7 +47,8 @@ export function resolveName(name) {
   const r = data().engine.resolve(String(name || ''))
   if (r.name) return r.name
   if (r.ambiguous) throw new IconError(`"${name}" is ambiguous: ${r.ambiguous.join(', ')}`, { code: 'ambiguous', candidates: r.ambiguous })
-  throw new IconError(`No icon named "${name}".${r.nearest && r.nearest.length ? ` Did you mean: ${r.nearest.join(', ')}?` : ''}`, { code: 'unknown_icon', nearest: r.nearest || [] })
+  const nearest = nearestNames(String(name || ''))
+  throw new IconError(`No icon named "${name}".${nearest.length ? ` Did you mean: ${nearest.join(', ')}?` : ''}`, { code: 'unknown_icon', nearest })
 }
 
 // CSS variables -> their defaults (palette colours, --with-duo, --with-accent): for files, <img>, data URIs and rasterizers
@@ -205,6 +206,13 @@ function nearNames(query, max = 5) {
   return ranked.filter(x => x[1] === best).map(x => x[0]).slice(0, max)
 }
 
+// the "nearest" icons of an unknown word: what it means (exact search hits) plus names really near its spelling; never the
+// engine's padding ("sheep" -> moon, radar, table)
+function nearestNames(q, hits) {
+  const found = hits || (q.trim() ? data().engine.search(q, { limit: 8 }) : [])
+  return [...new Set([...found.filter(isExact).map(h => h.name), ...nearNames(q)])].slice(0, 5)
+}
+
 // format "none" (also "names"): a result carries no snippet at all, in structuredContent or in the text block
 const isNoCode = f => /^(none|names?)$/i.test(String(f == null ? '' : f).trim())
 export function searchIcons({ query, limit = 10, style, category, format = 'react' } = {}) {
@@ -328,7 +336,7 @@ export function resolveIcon(name) {
   const hits = q.trim() ? data().engine.search(q, { limit: 8 }) : []
   const dym = q.trim() ? data().engine.didYouMean(q) : null
   const strong = h => !h.match.typo && h.confidence !== 'low' && (h.match.kind === 'exact' || h.match.kind === 'stem') && RESOLVE_FIELDS.has(h.match.field) && h.score >= 55
-  const nearest = [...new Set([...hits.map(h => h.name), ...(r.nearest || [])])].slice(0, 5)
+  const nearest = nearestNames(q, hits)
   if (hits.length && strong(hits[0])) {
     const top = hits[0], m = data().byName.get(top.name)
     // other icons that carry the same word as a whole entry, about as strongly ("favourites": star and heart, not a "favourites playlist")

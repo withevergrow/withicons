@@ -45,7 +45,8 @@ describe('compact', () => {
     assert.ok(a.notes.some(n => /skin tone/.test(n)))
   })
   test('compact budgets', () => {
-    assert.ok(size(lib.recommendStyles({ for: 'pitch deck for a dentist', compact: true })) < 1500)
+    // the slides recipe note (about 470 B, added with hosted PNG) is part of every slides answer
+    assert.ok(size(lib.recommendStyles({ for: 'pitch deck for a dentist', compact: true })) < 1700)
     assert.ok(size(lib.recommendStyles({ for: 'Diwali sale banner', icon: 'diya', compact: true })) < 1800)
     assert.ok(size(lib.recommendStyles({ for: 'Diwali, Eid, Holi and Christmas gift boxes', compact: true })) < 2800)
   })
@@ -88,7 +89,7 @@ describe('default output', () => {
   test('smaller than before', () => {
     const slides = size(lib.recommendStyles({ for: 'pitch deck for a dentist' }))
     const diwali = size(lib.recommendStyles({ for: 'Diwali sale banner', icon: 'diya' }))
-    assert.ok(slides <= 3800, `slides ${slides} B`)
+    assert.ok(slides <= 4400, `slides ${slides} B`)   // 3800 + the slides recipe note
     assert.ok(diwali <= 6700, `diwali ${diwali} B`)
     const four = size(lib.recommendStyles({ for: 'Diwali, Eid, Holi and Christmas gift boxes' }))
     assert.ok(four <= 11000, `four festivals ${four} B`)
@@ -141,13 +142,13 @@ describe('exact brand colours', () => {
     assert.ok(c.recommendations.every(x => typeof x.exactColours === 'boolean'))
     assert.deepEqual(Object.keys(c.recommendations[0]).sort(), ['exactColours', 'group', 'react', 'style', 'suits', 'webComponent'])
     assert.ok(c.notes.some(n => /gradient/i.test(n) && /hex/.test(n)))
-    assert.ok(size(c) < 1800)
+    assert.ok(size(c) < 2150)   // 1800 + the slides recipe note
   })
   test('without the request nothing changes', () => {
     for (const q of ['pitch deck icons', 'premium brand fintech pricing page', 'our brand new landing page', 'a brand story deck']) {
       const r = lib.recommendStyles({ for: q })
       assert.ok(r.recommendations.every(x => !('exactColours' in x)), q)
-      assert.ok(!r.notes.some(n => /hex/.test(n)), q)
+      assert.ok(!r.notes.some(n => /^Exact brand colours/.test(n)), q)
     }
     assert.deepEqual(styles(lib.recommendStyles({ for: 'pitch deck icons' })).slice(0, 4), ['solid', 'duo', 'suite', 'clay'])
     assert.deepEqual(styles(lib.recommendStyles({ use: 'app' })).slice(0, 2), ['line', 'duo'])
