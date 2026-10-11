@@ -76,6 +76,11 @@ export const TUNE = {
   smile: { motif: 'ring' },
   store: { motif: 'toran' },
   'map-pin': { motif: 'lotus' },
+  // run 14: the same motif as the automatic pick, with the A parts in the warm gold (a wheat stalk, a gold minaret,
+  // a tooth-crown's roots near the saffron of tooth instead of the purple second hue)
+  wheat: { motif: 'auto', fallback: 'marigold', fire: true },
+  mosque: { motif: 'auto', fallback: 'marigold', fire: true },
+  'tooth-crown': { motif: 'lotus', auto: true, fire: true },
 }
 
 // keyword -> motif (matched against the hyphen-split name)
