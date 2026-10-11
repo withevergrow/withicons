@@ -122,6 +122,8 @@ export const TUNE = {
   // live bars: satin enamel (no specular sickle) with a polished gold cap on each bar's top, the end that moves,
   // so a bar's height reads on light and dark pages alike
   'bar-values': { matte: true, caps: true },
+  // a polished gold crown over a tooth in the tooth's own navy enamel (as the piggy bank's coin: the gold part is A)
+  'tooth-crown': { plate: { p0: 'A', p1: 'K' } },
 }
 // an entry may be a function of a Live icon's params
 export const tuneFor = (name, params) => { const t = TUNE[name]; return typeof t === 'function' ? t(params || {}) || {} : t || {} }

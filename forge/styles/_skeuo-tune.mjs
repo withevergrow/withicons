@@ -77,6 +77,14 @@ const T = {
   refrigerator: { body: 'white', part: 'steel' }, 'washing-machine': { body: 'white', part: 'steel' },
   cookie: { body: 'kraft' }, donut: { body: 'pink', w: 1.3 },
   football: { body: 'white' }, volleyball: { body: 'white' }, turtle: { body: 'leaf', part: 'leaf' },
+  // run 14: golden kraft bakes like cookie, a wooden rolling pin, a steel oven with a glass door, baby pastels,
+  // a teal clinic chair, a gold crown over a white tooth, a yellow worried face (as smile and frown) with a water
+  // drop, a white mosque with green door and minaret and a gold crescent
+  bread: { body: 'kraft' }, baguette: { body: 'kraft' }, croissant: { body: 'kraft' }, wheat: { body: 'kraft', part: 'kraft' },
+  'rolling-pin': { body: 'wood', part: 'wood' }, oven: { body: 'steel', part: 'charcoal', screen: true },
+  stroller: { body: 'sky', part: 'white' }, 'baby-bottle': { body: 'white', part: 'sky' },
+  'dental-chair': { body: 'teal', part: 'white' }, 'tooth-crown': { body: 'gold', part: 'white' },
+  worried: { body: 'yellow', part: 'yellow', sig: 'water' }, mosque: { body: 'white', part: 'green', sig: 'gold' },
 }
 
 // ---- Live icons (forge/dynamic): the generator name is the icon name; params ride along on icon.params.

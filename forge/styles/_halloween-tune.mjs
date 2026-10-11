@@ -38,6 +38,11 @@ export const TUNE = {
   cookie: { mat: 'pumpkin' },
   eye: { mat: 'bone' },
   'eye-off': { mat: 'bone' },
+  // run 14: pumpkin bakes and rolling pin like cookie, a bone baby bottle and clinic chair, a tooth-crown all in the
+  // bone of tooth, a pumpkin worried face like frown
+  bread: { mat: 'pumpkin' }, baguette: { mat: 'pumpkin' }, wheat: { mat: 'pumpkin' }, 'rolling-pin': { mat: 'pumpkin' },
+  'baby-bottle': { mat: 'bone' }, 'dental-chair': { mat: 'bone' }, 'tooth-crown': { mat: 'bone', A: 'body' },
+  worried: { mat: 'pumpkin' },
 }
 
 // body material: the tune, then a word in the name, then a seeded mix (pumpkin first)

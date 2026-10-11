@@ -84,6 +84,22 @@ export const TUNE = {
   'rainbow': { primary: 'grape', panelColours: { 0: 'bubblegum', 1: 'lemon', 2: 'sky' }, sparkles: 2 },
   // the body wedge is thin: print it in a loud colour, the wheels as ink tyres with candy hubs, the fork as a tube
   'motorcycle': { primary: 'bubblegum', accent: 'lemon', fillColours: { 0: 'lemon', 1: 'lemon' }, hub: 'ink', tubePaths: [4], tube: 'sky' },
+  // bakery in golden and toasted candy, a lemon slide, a tangerine crayon, baby pastels, a mint clinic chair,
+  // a gold crown over a tooth in the tooth's peach, a grape worried face like frown, a mint mosque with a gold crescent
+  'bread': { primary: 'peach', accent: 'lemon' },
+  'baguette': { primary: 'lemon', accent: 'peach' },
+  'croissant': { primary: 'lemon', accent: 'peach' },
+  'wheat': { primary: 'lemon', accent: 'peach' },
+  'rolling-pin': { primary: 'lemon', accent: 'peach' },
+  'oven': { primary: 'peach', accent: 'lemon' },
+  'playground': { primary: 'lemon', accent: 'sky' },
+  'crayon': { primary: 'peach', accent: 'lemon' },
+  'stroller': { primary: 'bubblegum', accent: 'sky' },
+  'baby-bottle': { primary: 'sky', accent: 'bubblegum' },
+  'dental-chair': { primary: 'mint', accent: 'sky' },
+  'tooth-crown': { primary: 'lemon', accent: 'peach' },
+  'worried': { primary: 'grape', accent: 'sky' },
+  'mosque': { primary: 'mint', accent: 'lemon' },
 }
 
 const hash = s => { const r = rng('sticker:' + s); r(); return r() }

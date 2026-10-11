@@ -206,6 +206,8 @@ const NATURAL = [
   ['binoculars telescope microscope', C.dark, [C.silver, C.sky]],
   // health and science
   ['stethoscope syringe pill bandage tooth', C.white, [C.sky, C.red]],
+  ['tooth-crown', C.gold, [C.white, C.silver]],
+  ['dental-chair', C.teal, [C.white, C.silver]],
   ['flask-conical test-tube', C.white, [C.green, C.silver]],
   ['backpack-school presentation', C.white, [C.blue, C.wood]],
   // food
@@ -218,6 +220,11 @@ const NATURAL = [
   ['ice-cream', C.pink, [C.sand, C.choc]],
   ['cookie', C.sand, [C.choc, C.choc]],
   ['donut', C.sand, [C.pink, C.yellow]],
+  ['bread croissant', C.amber, [C.cream, C.wood]],
+  ['baguette wheat', C.gold, [C.cream, C.wood]],
+  ['rolling-pin', C.sand, [C.wood, C.brown]],
+  ['oven', C.silver, [C.dark, C.red]],
+  ['baby-bottle', C.white, [C.sky, C.pink]],
   ['apple', C.red, [C.green, C.brown]],
   ['cup-soda', C.red, [C.white, C.white]],
   ['beer', C.amber, [C.white, C.white]],
@@ -249,6 +256,11 @@ const NATURAL = [
   ['rose rose-bouquet', C.rose, [C.green, C.white]],
   ['choco-strawberry chocolate-box', C.choc, [C.red, C.gold]],
   ['teddy-bear', C.wood, [C.sand, C.choc]],
+  ['stroller', C.pink, [C.white, C.silver]],
+  ['playground', C.red, [C.yellow, C.blue]],
+  ['crayon', C.red, [C.cream, C.dark]],
+  ['worried', C.yellow, [C.dark, C.dark], C.sky],
+  ['mosque', C.white, [C.forest, C.gold], C.gold],
   ['love-lock', C.red, [C.silver, C.gold]],
   ['jack-o-lantern candy-corn', C.orange, [C.green, C.yellow]],
   ['witch-hat cauldron', C.black, [C.purple, C.green]],
@@ -328,5 +340,7 @@ export const isLens = icon => LENS.has(icon.name)
 
 // per-icon construction hints: onlyFill (the body is the fill alone, stray K strokes such as tent poles dropped),
 // baseY (the body below this y in the second colour: a hull), inset (the upper body narrower in depth: a cabin)
-const TUNE = { tent: { onlyFill: true }, 'dragon-head': { roles: ['c2'] }, ship: { baseY: 12.1, inset: 1.2 }, sailboat: { baseY: 15 } }
+const TUNE = { tent: { onlyFill: true }, 'dragon-head': { roles: ['c2'] }, ship: { baseY: 12.1, inset: 1.2 }, sailboat: { baseY: 15 },
+  // one colour for every raised part: a loaf's scoring, a croissant's folds, a face's features
+  bread: { roles: ['c2'] }, baguette: { roles: ['c2'] }, croissant: { roles: ['c3'] }, wheat: { roles: ['c3'] }, worried: { roles: ['c2'] } }
 export const tuneOf = icon => TUNE[icon.name] || {}

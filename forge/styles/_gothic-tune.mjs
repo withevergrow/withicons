@@ -36,6 +36,13 @@ const TUNE = {
   stopwatch: { tracery: 'none', fillPlate: 'K', glass: 'c3' },
   // (a Live icon's glass is plain unless its tracery cannot move with the value: a die's pips sit on it)
   dice: { glass: 'c1', tracery: 'quarry' },
+  // run 14: gold glass for bakes and wood, a ruby oven and crayon, sapphire baby things, an emerald clinic chair and
+  // mosque (gold crescent roundel), a gold worried face (as smile) with a sapphire drop, a gilt crown over a stone
+  // tooth like tooth
+  bread: { glass: 'c3' }, baguette: { glass: 'c3' }, croissant: { glass: 'c3' }, wheat: { glass: 'c3' }, 'rolling-pin': { glass: 'c3' },
+  oven: { glass: 'c1' }, crayon: { glass: 'c1' }, stroller: { glass: 'c2' }, 'baby-bottle': { glass: 'c2' },
+  'dental-chair': { glass: 'c4' }, worried: { glass: 'c3', badge: 'c2' }, mosque: { glass: 'c4', badge: 'c3' },
+  'tooth-crown': { plate: { p0: 'A', p1: 'K' }, glass: 'c2' },
 }
 
 export function tuneFor(name, params) {
