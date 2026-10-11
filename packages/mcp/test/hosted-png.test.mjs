@@ -183,13 +183,11 @@ describe('hosted export_icon makes PNG (resvg-wasm in the Lambda)', () => {
   })
 
   test('a large PNG export comes in pages, every page under the 6 MB response limit', { timeout: 300000 }, async () => {
-    const all = JSON.parse((await handler(ev('GET', '/api/categories/' + 'ui'))).body)
-    let names = (all.icons || []).map(x => x.name || x)
-    if (names.length < 40) {
-      const cats = JSON.parse((await handler(ev('GET', '/api/categories'))).body).categories
-      for (const c of cats) for (const ic of JSON.parse((await handler(ev('GET', '/api/categories/' + c.name))).body).icons || []) if (!names.includes(ic.name || ic)) names.push(ic.name || ic)
+    const names = []
+    for (const c of JSON.parse((await handler(ev('GET', '/api/categories'))).body).categories) {
+      for (const ic of JSON.parse((await handler(ev('GET', '/api/categories/' + c.name))).body).icons || []) if (names.length < 40 && !names.includes(ic.name || ic)) names.push(ic.name || ic)
     }
-    names = names.slice(0, 40)
+    assert.equal(names.length, 40)
     const args = { names, style: 'liquid', format: 'png', size: 1024 }
     let cursor, pages = 0, made = 0
     const seen = new Set()

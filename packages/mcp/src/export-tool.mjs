@@ -40,7 +40,7 @@ const sentBytes = (bytes, binary) => binary ? Math.ceil(bytes / 3) * 4 : Math.ce
 // formats that need the PNG renderer: the PNG-based ones, and animated-svg (it measures the motion with it)
 const usesRenderer = f => NEEDS_PNG.has(f) || f === 'animated-svg'
 // PNG-based formats the hosted server still answers with the command: they render dozens of frames (or every style) in
-// one file, and the Lambda has about a third of a CPU at 512 MB and a 10 s timeout. Measured on a desktop core with the
+// one file, and the Lambda has about a third of a CPU at 512 MB (pages must end well within its timeout). Measured on a desktop core with the
 // wasm renderer (expect ~3-4x on the Lambda): png 512 px 40-90 ms, png 2048 px ~0.75 s, pptx / docx / favicon-pack
 // ~0.2 s, animated-svg 0.1-0.4 s; but gif 0.5-2.3 s, apng ~2.5 s, pptx-sheet ~2.2 s (and ~2.7 MB), pptx-animated ~4.3 s.
 export const HOSTED_COMMAND_ONLY = new Set(['gif', 'apng', 'pptx-animated', 'pptx-sheet'])
