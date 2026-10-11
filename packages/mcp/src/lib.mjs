@@ -131,9 +131,65 @@ const REASON = { name: 'name', alias: 'alias', synonym: 'related word', tag: 'ta
 const isExact = x => x.confidence === 'high' || (x.confidence === 'medium' && x.match.kind !== 'concept')
 const ADDITIONAL_MAX = 5
 const ADDITIONAL_POOL = 12   // extra ranked results fetched so loose ones cannot push exact matches out of the limit
+
+// ---- no-match suggestions ("did you mean"): the engine's nearest names, kept only when they really are near ----
+// engine.suggest ranks every name by distance and then pads with loosely related icons, so "nervous" got angry and
+// arrow-left and "wheat" got thermometer and heart. A name passes the floor when the query (or one of its words)
+// is, against the name, its words or a one-word alias: the same compact spelling, the start of it without losing
+// most of the word ("calend"), the word plus an ending ("thermometers"), or one slip away (a missing, extra, wrong or
+// swapped letter), two on a word of 7+ letters that starts the same ("caendr" -> calendar). The first letter must
+// agree: typos rarely hit it, and it is what keeps "wheat" away from "heat", "heart" and "wreath".
+const compactOf = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '')
+function osaDistance(a, b) {   // Damerau-Levenshtein (optimal string alignment): a swap of two letters costs 1
+  const m = a.length, n = b.length
+  let p2 = null, p1 = Array.from({ length: n + 1 }, (_, j) => j)
+  for (let i = 1; i <= m; i++) {
+    const cur = [i]
+    for (let j = 1; j <= n; j++) {
+      let v = Math.min(p1[j] + 1, cur[j - 1] + 1, p1[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1))
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, p2[j - 2] + 1)
+      cur.push(v)
+    }
+    p2 = p1; p1 = cur
+  }
+  return p1[n]
+}
+function nearSpelling(q, t) {
+  const lq = q.length, lt = t.length
+  if (lq < 3 || lt < 3) return false
+  if (q === t) return true
+  if (lq >= 4 && t.startsWith(q) && lq * 2 >= lt) return true
+  if (lt >= 5 && q.startsWith(t) && lt >= lq * 0.7) return true
+  if (q[0] !== t[0] && !(q[0] === t[1] && q[1] === t[0])) return false
+  const dist = osaDistance(q, t)
+  if (dist <= 1) return Math.min(lq, lt) >= 4 || (dist === 1 && Math.abs(lq - lt) === 1)
+  return dist === 2 && Math.max(lq, lt) >= 7 && q[1] === t[1]
+}
+// 1: near the name or one of its words; 2: near a one-word alias only; 0: not near
+function nearRank(forms, name) {
+  const words = name.split('-').filter(w => w.length >= 3)
+  if (forms.some(q => [compactOf(name), ...words].some(t => nearSpelling(q, t)))) return 1
+  const ic = data().byName.get(name)
+  const aliases = ((ic && ic.aliases) || []).filter(a => /^[a-z0-9]{4,}$/i.test(a)).map(a => a.toLowerCase())
+  return forms.some(q => aliases.some(t => nearSpelling(q, t))) ? 2 : 0
+}
+// names close to the query, closest kind first: when some are near by name, aliases are left out ("keybord" is a letter
+// from the alias "keyword" of tag, but keyboard is what was typed)
+function nearNames(query, max = 5) {
+  const words = String(query).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+  const forms = [...new Set([words.join(''), ...words.filter(w => w.length >= 5)])]
+  const ranked = data().engine.suggest(query, 15).map(n => [n, nearRank(forms, n)]).filter(x => x[1])
+  const best = Math.min(...ranked.map(x => x[1]))
+  return ranked.filter(x => x[1] === best).map(x => x[0]).slice(0, max)
+}
+
+// format "none" (also "names"): a result carries no snippet at all, in structuredContent or in the text block
+const isNoCode = f => /^(none|names?)$/i.test(String(f == null ? '' : f).trim())
 export function searchIcons({ query, limit = 10, style, category, format = 'react' } = {}) {
   const d = data()
   const st = style ? checkStyle(style) : null
+  const noCode = isNoCode(format)
+  const fmt = noCode ? 'none' : checkFormat(format)
   const lim = Math.max(1, Math.min(100, +limit || 10))
   if (category && !d.meta.categories.some(c => c.name === category)) throw new IconError(`Unknown category "${category}". Categories: ${d.meta.categories.map(c => c.name).join(', ')}`, { code: 'unknown_category' })
   const q = String(query || '')
@@ -151,27 +207,29 @@ export function searchIcons({ query, limit = 10, style, category, format = 'reac
     : similar.length ? `No exact match for "${q}". The additional results are only loosely related: use one only if it fits, or try a simpler or more general word, or browse a category (list_categories).`
     : browseHint(r.parsed.category)
   return {
-    query, style: useStyle, count: results.length,
+    query, style: useStyle, format: fmt, count: results.length,
     ...(results.length ? {} : { noExactMatch: true }),
     confidence: results.length ? results[0].confidence : null,
     ...(dym ? { didYouMean: dym } : {}),
     ...(hint ? { hint } : {}),
     results: results.map(x => ({
-      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence,
+      name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence,
       reason: `matched ${REASON[x.match.field]} "${x.match.term}"${x.match.typo ? ' (typo-tolerant)' : ''}`,
-      match: x.match,
-      snippet: snippet(x.name, useStyle, format),
+      ...(noCode ? {} : { match: x.match }),
+      // every exact match carries a snippet; format "none" leaves it out (names, titles, reasons and urls only)
+      ...(noCode ? {} : { snippet: snippet(x.name, useStyle, fmt) }),
       url: `${SITE}/icons/${x.name}.html`,
     })),
     // similar icons, clearly apart from the matches and short (no snippet: get_icon returns the code of the one that fits)
     ...(similar.length ? { additional: similar.map(x => ({
-      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
+      name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
       reason: `matched ${REASON[x.match.field]} "${x.match.term}" (loosely related${x.confidence === 'low' ? ', low confidence' : ''})`,
       url: `${SITE}/icons/${x.name}.html`,
     })) } : {}),
     // a category filter hid stronger matches: name them so the caller can widen the search
-    ...(r.outside && r.outside.length ? { outside: r.outside.map(x => ({ name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, url: `${SITE}/icons/${x.name}.html` })) } : {}),
-    suggestions: results.length || similar.length ? [] : d.engine.suggest(q, 5),
+    ...(r.outside && r.outside.length ? { outside: r.outside.map(x => ({ name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence, url: `${SITE}/icons/${x.name}.html` })) } : {}),
+    // names one typo away from the query, above a similarity floor (nearNames); never the engine's padding
+    suggestions: results.length || similar.length ? [] : nearNames(q),
   }
 }
 

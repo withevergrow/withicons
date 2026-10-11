@@ -30,7 +30,9 @@ const fail = e => {
   if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }) }] } }
   return { isError: true, content: [{ type: 'text', text: `Error: ${e && e.message ? e.message : String(e)}` }] }
 }
-// search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent)
+// search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent).
+// The rule for code, in every format: each exact match carries a snippet in structuredContent, this text shows the first
+// result's only, additional and outside results never carry any; format "none" leaves the code out of both.
 export function searchSummary(r) {
   // similar icons, kept apart from the matches: never mistaken for what the query names
   const extra = r.additional && r.additional.length
@@ -42,7 +44,8 @@ export function searchSummary(r) {
   const lines = [`${r.count} icon${r.count === 1 ? '' : 's'} for "${r.query}"${r.didYouMean ? ` (showing results for "${r.didYouMean}")` : ''}, style ${r.style}:`]
   r.results.forEach((x, i) => lines.push(`${i + 1}. ${x.name} (${x.category}): ${x.reason}`))
   lines.push(...extra)
-  lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
+  if (r.results[0].snippet === undefined) lines.push('', 'No code in this answer (format: none). get_icon(name, style, format) returns any of them as code; structuredContent has every page url.')
+  else lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
   return lines.join("\n")
 }
 const safe = fn => async args => { try { return await fn(args || {}) } catch (e) { return fail(e) } }
@@ -58,13 +61,14 @@ export function createServer(opts = {}) {
 
   server.registerTool('search_icons', {
     title: 'Search icons',
-    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked exact matches (icon names, why each matched, a ready-to-paste snippet); didYouMean when the query was spell-corrected. When no icon carries the words it says noExactMatch and lists a few similar icons under additional (loosely related, no snippet): use one only if it fits, otherwise try a simpler word or browse a category. A hint says where to browse when nothing is close.',
+    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked exact matches (icon name, title, category, confidence, why it matched, page url and a ready-to-paste snippet); didYouMean when the query was spell-corrected. When no icon carries the words it says noExactMatch and lists a few similar icons under additional (loosely related, never with a snippet): use one only if it fits, otherwise try a simpler word or browse a category. A hint says where to browse when nothing is close; suggestions (names a typo away) appear only when a name really is close. ' +
+      'Snippets: every exact match carries one in structuredContent (in the format you ask for, default react) and the text shows the first one only; format "none" returns names only, with no snippet in either, so pick a name here and call get_icon for the code (use it for lists, comparisons and long queries; svg snippets are large).',
     inputSchema: {
       query: z.string().min(1).describe('What the icon should show, in plain words'),
       limit: z.number().int().min(1).max(100).optional().describe('Max results (default 10)'),
       style: z.enum(styleNames).optional().describe('Style for the snippet (default line)'),
       category: z.enum(categoryNames).optional().describe('Only icons in this category'),
-      format: z.enum(FORMATS).optional().describe('Snippet format (default react)'),
+      format: z.enum([...FORMATS, 'none']).optional().describe('Snippet format (default react), or "none" for names only: no snippet in the result or the text'),
     },
     annotations: { title: 'Search icons', ...ro },
   }, safe(a => { const r = searchIcons(a); return json(r, searchSummary(r)) }))
