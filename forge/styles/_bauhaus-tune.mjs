@@ -29,6 +29,11 @@ const T = {
   'map-pin-number': { main: 'c1' }, 'folder-label': { main: 'c1' }, 'thermometer-level': { main: 'c3' }, humidity: { main: 'c3' },
   'price-tag': { main: 'c1' }, 'tag-label': { main: 'c1' }, 'ticket-number': { main: 'c1' }, 'rating-stars': { main: 'c2' },
   'file-type': { main: 'c3' }, keycap: { main: 'c3' },
+  // run 14 statics (automatic composer): yellow bakes like cookie, a red oven with a black window, a blue baby
+  // bottle and clinic chair, a yellow (gold) crown over a blue tooth like tooth
+  bread: { main: 'c2' }, baguette: { main: 'c2' }, croissant: { main: 'c2' }, wheat: { main: 'c2' }, 'rolling-pin': { main: 'c2' },
+  oven: { main: 'c1', inlay: 'ink' }, 'baby-bottle': { main: 'c3' }, 'dental-chair': { main: 'c3' },
+  'tooth-crown': { main: 'c2', part: 'c3' },
 }
 export const autoTune = name => T[name] || {}
 
