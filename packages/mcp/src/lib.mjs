@@ -1049,6 +1049,7 @@ export function recommendStyles({ for: text = '', use, icon, limit = 6, compact 
       ? `Festival icons: list_categories(category: "${festivals[0].category}"). Holiday styles carry festival palettes: recommend_styles without compact lists them.`
       : `Festival icons: list_categories(category: "${festivals[0].category}"), or search_icons for the object; everyday icons (shopping-bag, gift, tag, calendar) render in the holiday styles too. Holiday styles carry festival palettes (stylePalettes on each style): set their CSS variables on a parent, e.g. ${stylePaletteHint(full)}.`)
   }
+  for (const u of hits) if (u.note) notes.push(u.note)   // a use's own advice (the guide's uses[].note, e.g. slides: which files)
   if (several || others.length) {
     const shown = new Set(full.map(r => r.style))
     const byCover = new Map()

@@ -1,5 +1,5 @@
 // The hosted API (dist/lambda.mjs): only canonical paths are served, raw SVG / code answers carry a sandboxing CSP, and
-// export_icon serves any export in pages that fit the Lambda (6 MB response, 10 s, 512 MB).
+// export_icon serves any export in pages that fit the Lambda (6 MB response, 10 s, 512 MB). PNG: hosted-png.test.mjs.
 import { test, describe, before } from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
@@ -54,10 +54,16 @@ describe('hosted API hardening', () => {
     assert.equal(s.urls, undefined)
     assert.equal(s.pageInfo, undefined)
   })
-  test('remote export_icon: animated-svg answers with the command (no renderer on the server)', async () => {
-    const { s } = await exportCall({ name: 'bell', format: 'animated-svg' })
-    assert.equal(s.made, false)
-    assert.match(s.command, /^npx withicons export bell --format animated-svg/)
+  test('remote export_icon: animated-svg is made here (resvg-wasm measures the motion); frame formats answer with the command', async () => {
+    const { s, res } = await exportCall({ name: 'bell', format: 'animated-svg' })
+    assert.equal(s.made, true)
+    assert.match(res.content[1].text, /^--- bell-line-[a-z-]+\.svg ---\n(<\?xml[^>]*>\n)?<svg[^>]*><style>@keyframes/)
+    for (const format of ['gif', 'apng', 'pptx-animated', 'pptx-sheet']) {
+      const { s: c } = await exportCall({ name: 'bell', format })
+      assert.equal(c.made, false, format)
+      assert.match(c.command, new RegExp(`^npx withicons export bell --format ${format}`))
+      assert.match(c.reason, /frame by frame|longer than/)
+    }
   })
   test('remote export_icon: 50 icons x all styles x many formats is served page by page, every page < 6 MB', { timeout: 600000 }, async () => {
     const all = JSON.parse((await handler(ev('GET', '/api/categories'))).body)

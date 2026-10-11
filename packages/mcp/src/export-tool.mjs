@@ -3,8 +3,10 @@
 //   local (stdio, npx @withicons/mcp): every CLI format, animated ones included (gif, apng, animated-svg, pptx-animated);
 //     files are written to out_dir when given, and small results also come back inline (text, MCP image content for
 //     PNG / GIF, or an embedded base64 resource for zips, PDFs, PowerPoint ...).
-//   remote (the HTTP API / Lambda): no PNG renderer there, so only the vector, code and Lottie formats are made; for
-//     PNG-based and animated formats the result is the exact `npx withicons export …` command plus the icon's page.
+//   remote (the HTTP API / Lambda): PNG-based files are rendered by @resvg/resvg-wasm (src/resvg-wasm.mjs, registered by
+//     lambda.mjs through useHostedRenderer: the same export engine as local, the wasm build of the same renderer); the
+//     formats in HOSTED_COMMAND_ONLY (gif, apng, pptx-animated, pptx-sheet: too slow for one Lambda request), and every
+//     PNG-based format when no renderer starts, answer with the exact `npx withicons export …` command plus the icon's page.
 //     Every remote export is served, however large, within the Lambda's limits (6 MB response, 10 s, 512 MB): files are
 //     made in pages of at most PAGE.bytes (as sent: JSON-escaped text, base64 binaries) and PAGE.ms; a page that does not
 //     finish the export returns next.cursor, and the same call with that cursor returns the next files. When an export
@@ -26,17 +28,41 @@ const iconPage = name => `${lib.SITE}/icons/${name}.html`
 
 // ---- remote paging ----
 // One response: at most PAGE.bytes as sent (Lambda Function URL responses max out at 6 MB; ~1.5 MB is left for the JSON
-// around the files and estimate error) and no new rendering after PAGE.ms (the Lambda Timeout is 10 s; PAGE.hardMs stops
-// a render in progress). Measured worst pages: docs/COSTS.md.
-export const PAGE = Object.freeze({ bytes: 4.5 * 1024 * 1024, ms: 4000, hardMs: 7000, files: 400 })
+// around the files and estimate error) and no new rendering after PAGE.ms, or PAGE.rasterMs when PNGs are rendered (the
+// Lambda Timeout is 10 s; PAGE.hardMs stops a render in progress). Measured worst pages: docs/COSTS.md.
+export const PAGE = Object.freeze({ bytes: 4.5 * 1024 * 1024, ms: 4000, rasterMs: 3000, hardMs: 7000, files: 400 })
 // bytes of one file per byte of its source SVG (about the largest ratio measured over every style) + 2 KB; EPS of the
 // gradient-heavy styles can reach ~1 MB a file, so every file is also measured after rendering
 const SIZE_FACTOR = { svg: 1.05, 'svg-flat': 1.05, pdf: 3.2, eps: 4, android: 3, ios: 5, jsx: 3.2, tsx: 4.2, vue: 2.5, svelte: 2.2, 'react-native': 2.6,
   angular: 3.5, html: 1.5, css: 5.6, 'data-uri': 1.2, base64: 1.4, lottie: 13, dotlottie: 14.5 }
-const BINARY_FORMATS = new Set(['pdf', 'ios', 'dotlottie'])   // sent base64 (resource blobs)
+const BINARY_FORMATS = new Set(['pdf', 'ios', 'dotlottie', ...NEEDS_PNG])   // sent base64 (resource blobs)
 const sentBytes = (bytes, binary) => binary ? Math.ceil(bytes / 3) * 4 : Math.ceil(bytes * 1.12) + 40
-// formats this remote server never makes: PNG-based ones, and animated-svg (it measures the motion with the PNG renderer)
-const remoteCommandOnly = f => NEEDS_PNG.has(f) || f === 'animated-svg'
+// formats that need the PNG renderer: the PNG-based ones, and animated-svg (it measures the motion with it)
+const usesRenderer = f => NEEDS_PNG.has(f) || f === 'animated-svg'
+// PNG-based formats the hosted server still answers with the command: they render dozens of frames (or every style) in
+// one file, and the Lambda has about a third of a CPU at 512 MB (pages must end well within its timeout). Measured on a desktop core with the
+// wasm renderer (expect ~3-4x on the Lambda): png 512 px 40-90 ms, png 2048 px ~0.75 s, pptx / docx / favicon-pack
+// ~0.2 s, animated-svg 0.1-0.4 s; but gif 0.5-2.3 s, apng ~2.5 s, pptx-sheet ~2.2 s (and ~2.7 MB), pptx-animated ~4.3 s.
+export const HOSTED_COMMAND_ONLY = new Set(['gif', 'apng', 'pptx-animated', 'pptx-sheet'])
+// bytes of one PNG-based file, before base64, at the asked size (an estimate for paging; every file is measured after rendering)
+const PNG_DEFAULT_PX = { png: 512, 'png-set': 24, pptx: 512, docx: 512 }
+const rasterBytes = (f, size) => {
+  const px = Number(size) || PNG_DEFAULT_PX[f] || 256
+  const png = s => s * s * 0.45 + 4096   // bytes a pixel: ~0.3 for the gradient-heavy styles (liquid), 0.02-0.1 for flat ones
+  if (f === 'png-set') return png(px) + png(2 * px) + png(3 * px) + png(4 * px) + 4096
+  if (f === 'ico' || f === 'favicon-pack') return 400 * 1024
+  return png(px) + (f === 'png' ? 0 : 40 * 1024)
+}
+// the hosted PNG renderer: an async init (resolves when it can render), registered by lambda.mjs
+let hostedRenderer = null, hostedFailed = false
+export function useHostedRenderer(init) { hostedRenderer = init; hostedFailed = false }
+async function hostedReady() {
+  if (!hostedRenderer) return false
+  try { await hostedRenderer(); return true } catch (e) {
+    if (!hostedFailed) { hostedFailed = true; console.error('withicons: the PNG renderer did not start; PNG exports answer with the command:', e && e.message) }
+    return false
+  }
+}
 const PKG_VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : 'latest'
 // the prebuilt standalone SVG of @withicons/static (colours baked in, ink currentColor), same release as this server
 // the newest styles' files live in @withicons/static-plus (meta.styles[].static: the package holding the style; jsDelivr
@@ -67,15 +93,20 @@ async function run(a, { remote = false }) {
   const formats = parseFormats(a.format || 'svg')
   const style = lib.checkStyle(a.style || 'line')
   const cmd = exportCommand({ ...a, name: names, style: a.style ? style : undefined, format: formats.join(','), ...(mapForm ? { name_map: a.names } : {}) })
-  const raster = formats.filter(f => remote ? remoteCommandOnly(f) : NEEDS_PNG.has(f))
+  // remote: PNG-based formats need the hosted renderer to start; without it (or for the frame formats) the command answers
+  const hosted = remote && formats.some(usesRenderer) ? await hostedReady() : false
+  const raster = formats.filter(f => remote ? usesRenderer(f) && (!hosted || HOSTED_COMMAND_ONLY.has(f)) : NEEDS_PNG.has(f))
   if (remote && raster.length) {
+    const madeHere = EXPORT_FORMATS.filter(f => hosted ? !HOSTED_COMMAND_ONLY.has(f) : !usesRenderer(f))
     const summary = {
       name, ...(names.length > 1 ? { names } : {}), style, formats, made: false,
-      reason: `${raster.join(', ')} ${raster.length === 1 ? 'is' : 'are'} rendered frame by frame on your machine (PNG renderer), which this remote server does not run.`,
+      reason: hosted
+        ? `${raster.join(', ')} ${raster.length === 1 ? 'is' : 'are'} drawn frame by frame, which takes longer than this hosted server may spend on one request.`
+        : `${raster.join(', ')} need${raster.length === 1 ? 's' : ''} the PNG renderer, which is not available on this server right now.`,
       command: cmd, page: iconPage(name), ...(names.length > 1 ? { pages: names.map(iconPage) } : {}),
       howTo: 'Run the command in a terminal (Node 18+; it installs the withicons CLI on first use) and the files appear in --out. ' +
         'Or use the local MCP server (npx -y @withicons/mcp), whose export_icon writes these files directly. The icon page on withicons.com downloads every format too.',
-      vectorHere: 'svg, svg-flat, pdf, eps, android, ios, lottie, dotlottie and the code formats are made right here.',
+      madeHere: `${madeHere.join(', ')} are made right here${formats.length > raster.length ? ': export the other formats in a separate call' : ''}.`,
     }
     return { content: [{ type: 'text', text: JSON.stringify(summary) }], structuredContent: summary }
   }
@@ -155,7 +186,7 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
   // svg-flat with no colour, size or stroke options is a prebuilt file: a URL when the export needs more than one page
   const plain = !a.palette && !a.color && !(a.colors && Object.keys(a.colors).length) && (a.size === undefined || a.size === 24) &&
     !a.padding && a.stroke_width === undefined && !a.background
-  const est = (n, st, f) => sentBytes(lib.svgOf(n, st).length * (SIZE_FACTOR[f] || 6) + 2048, BINARY_FORMATS.has(f))
+  const est = (n, st, f) => sentBytes(NEEDS_PNG.has(f) ? rasterBytes(f, a.size) : lib.svgOf(n, st).length * (SIZE_FACTOR[f] || 6) + 2048, BINARY_FORMATS.has(f))
   let total = 0
   for (const n of names) for (const st of styles) for (const f of formats) total += est(n, st, f)
   const paged = a.cursor !== undefined || total > PAGE.bytes || names.length * styles.length * formats.length > PAGE.files
@@ -193,10 +224,14 @@ async function remoteRun(a, { names, name, formats, style, cmd, mapForm }) {
   try {
     const per = renderFormats.length * styles.length
     const sizeOf = f => sentBytes(f.bytes, !TEXT_MIME.test(f.mime))
-    while (i < jobs.length && files.length < PAGE.files && Date.now() - t0 < PAGE.ms) {
+    // rendered PNGs take time as well as bytes: one file per call, so the time is checked between files, and no new render
+    // starts after PAGE.rasterMs (one render in progress can take a few seconds on the Lambda: a 2048 px PNG)
+    const rendering = renderFormats.some(usesRenderer)
+    const pageMs = rendering ? PAGE.rasterMs : PAGE.ms
+    while (i < jobs.length && files.length < PAGE.files && Date.now() - t0 < pageMs) {
       // at an icon boundary: as many whole icons as fit (estimated) in one call; else the next single file
       const group = []
-      if (i % per === 0) {
+      if (i % per === 0 && !rendering) {
         let add = 0
         for (let k = i; k < jobs.length; k += per) {
           let b = 0
