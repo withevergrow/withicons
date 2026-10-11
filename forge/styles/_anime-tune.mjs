@@ -83,6 +83,15 @@ export const TUNE = {
   'thermometer': { main: 'tint', second: 'accent' }, 'rainbow': { main: 'c2', second: 'c1' }, 'wind': { main: 'c1' },
   'search': { main: 'c1', panel: 'tint' }, 'zoom-in': { main: 'c1', panel: 'tint' }, 'zoom-out': { main: 'c1', panel: 'tint' },
   'eye': { main: 'tint', second: 'c1' }, 'moon': { main: 'c3' },
+  // run 14: golden bakes with cream scoring, a cream oven with a dark glass door, baby pastels, a sky-blue clinic chair,
+  // a gold crown over a cream tooth, a gold worried face with a blue sweat drop (as frown), a green and gold mosque
+  'bread': { main: 'c3', second: 'tint' }, 'baguette': { main: 'c3', second: 'tint' }, 'croissant': { main: 'c3', second: 'c3' },
+  'wheat': { main: 'c3', second: 'c3' }, 'rolling-pin': { main: 'c3', second: 'c3' },
+  'oven': { main: 'tint', second: 'accent', panel: 'ink' },
+  'crayon': { main: 'accent', second: 'tint' },
+  'stroller': { main: 'c2', second: 'c1' }, 'baby-bottle': { main: 'tint', second: 'c1' },
+  'dental-chair': { main: 'c1', second: 'tint' }, 'tooth-crown': { main: 'c3', second: 'tint' },
+  'worried': { main: 'c3', badge: 'c1' }, 'mosque': { main: 'c4', second: 'c3', badge: 'c3' },
 }
 
 export function cast(icon) {
