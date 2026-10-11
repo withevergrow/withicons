@@ -1,0 +1,9 @@
+{
+  "name": "bread",
+  "intent": "the loaf rises slowly like dough proving in a warm kitchen",
+  "loop": { "preset": "pulse", "origin": [12, 20], "amount": 0.4, "duration": 3.4 },
+  "hover": { "preset": "jelly", "origin": [12, 20], "amount": 0.8, "duration": 0.9 },
+  "deco": "twinkle",
+  "alt": [ { "preset": "breathe", "origin": [12, 20], "amount": 0.7 }, { "preset": "bounce", "origin": [12, 20], "amount": 0.5 }, { "preset": "pop" } ],
+  "swap": [ { "to": "bread@solid", "effect": "scale" }, { "to": "baguette", "effect": "slide-left" }, { "to": "croissant", "effect": "fade" } ]
+}

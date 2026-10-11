@@ -1,0 +1,79 @@
+{
+  "name": "croissant",
+  "category": "food",
+  "description": "A flaky crescent croissant for bakeries, pastry shops, and breakfast.",
+  "aliases": [
+    "pastry",
+    "croissants",
+    "crescent-roll",
+    "french-pastry",
+    "viennoiserie",
+    "breakfast-pastry",
+    "butter-croissant",
+    "kipferl",
+    "cornetto"
+  ],
+  "tags": [
+    "food",
+    "bakery",
+    "pastry",
+    "breakfast",
+    "french"
+  ],
+  "paths": [
+    {
+      "d": "M3 19 A4.58 4.58 0 0 1 4.5 13 A3.77 3.77 0 0 1 8.5 8.5 A3.54 3.54 0 0 1 15.5 8.5 A3.77 3.77 0 0 1 19.5 13 A4.58 4.58 0 0 1 21 19 A11.25 11.25 0 0 0 3 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 13 Q4.58 14.5 6.25 16",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 8.5 Q8.2 11.63 9.5 14.75",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 13 Q19.43 14.5 17.75 16",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 8.5 Q15.8 11.63 14.5 14.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 19 A4.58 4.58 0 0 1 4.5 13 A3.77 3.77 0 0 1 8.5 8.5 A3.54 3.54 0 0 1 15.5 8.5 A3.77 3.77 0 0 1 19.5 13 A4.58 4.58 0 0 1 21 19 A11.25 11.25 0 0 0 3 19 Z"
+  ],
+  "cutouts": [
+    "M4.5 13 Q4.58 14.5 6.25 16",
+    "M8.5 8.5 Q8.2 11.63 9.5 14.75",
+    "M19.5 13 Q19.43 14.5 17.75 16",
+    "M15.5 8.5 Q15.8 11.63 14.5 14.75"
+  ],
+  "synonyms": [
+    "pastries",
+    "puff pastry",
+    "flaky pastry",
+    "pastry shop",
+    "patisserie",
+    "boulangerie",
+    "bakery",
+    "baker",
+    "baking",
+    "breakfast",
+    "continental breakfast",
+    "coffee and croissant",
+    "french",
+    "france",
+    "paris",
+    "butter",
+    "laminated dough",
+    "pain au chocolat",
+    "almond croissant",
+    "croisant",
+    "crossant",
+    "croissan",
+    "kwasong"
+  ]
+}

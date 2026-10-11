@@ -1,0 +1,75 @@
+{
+  "name": "oven",
+  "category": "food",
+  "description": "A baking oven with control knobs and a door with a handle and window, for kitchens and bakeries.",
+  "aliases": [
+    "baking-oven",
+    "stove",
+    "cooker",
+    "kitchen-oven",
+    "range-cooker",
+    "electric-oven",
+    "gas-oven",
+    "built-in-oven",
+    "convection-oven",
+    "ovens"
+  ],
+  "tags": [
+    "food",
+    "kitchen",
+    "appliance",
+    "baking",
+    "cooking"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 6 H7.5 M10.5 6 H11 M14 6 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M7 9.5 H17",
+      "plate": "A"
+    },
+    {
+      "d": "M8 13.5 H16 A1.5 1.5 0 0 1 17.5 15 V16.5 A1.5 1.5 0 0 1 16 18 H8 A1.5 1.5 0 0 1 6.5 16.5 V15 A1.5 1.5 0 0 1 8 13.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M7 6 H7.5",
+    "M10.5 6 H11",
+    "M14 6 H17",
+    "M7 9.5 H17",
+    "M8 13.5 H16 A1.5 1.5 0 0 1 17.5 15 V16.5 A1.5 1.5 0 0 1 16 18 H8 A1.5 1.5 0 0 1 6.5 16.5 V15 A1.5 1.5 0 0 1 8 13.5 Z"
+  ],
+  "synonyms": [
+    "bake",
+    "baking",
+    "baked",
+    "roast",
+    "roasting",
+    "broil",
+    "preheat",
+    "oven timer",
+    "oven door",
+    "kitchen",
+    "kitchen appliance",
+    "stovetop",
+    "stove top",
+    "cooking",
+    "cook",
+    "bakery",
+    "bakery oven",
+    "pizza oven",
+    "toaster oven",
+    "ovan",
+    "ovin"
+  ]
+}

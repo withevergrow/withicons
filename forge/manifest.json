@@ -1,5 +1,5 @@
 {
- "count": 734,
+ "count": 740,
  "categories": [
   "ai",
   "navigation",
@@ -8367,6 +8367,112 @@
    "description": "A friendly dinosaur avatar, for playful profiles and kids.",
    "aliases": [],
    "batch": "new-36"
+  },
+  {
+   "name": "bread",
+   "category": "food",
+   "description": "A domed loaf of bread with a scored crust for bakeries, sourdough, and breakfast.",
+   "aliases": [
+    "loaf",
+    "bread-loaf",
+    "loaf-of-bread",
+    "sourdough",
+    "sourdough-loaf",
+    "bakery-bread",
+    "artisan-bread",
+    "white-bread",
+    "brown-bread",
+    "rye-bread",
+    "wholemeal-bread",
+    "boule"
+   ],
+   "batch": "new-37"
+  },
+  {
+   "name": "baguette",
+   "category": "food",
+   "description": "A long French baguette with diagonal scores for bakeries, French food, and picnics.",
+   "aliases": [
+    "french-bread",
+    "french-stick",
+    "french-loaf",
+    "baguettes",
+    "long-loaf",
+    "stick-loaf",
+    "ficelle",
+    "parisian-loaf",
+    "french-baguette"
+   ],
+   "batch": "new-37"
+  },
+  {
+   "name": "croissant",
+   "category": "food",
+   "description": "A flaky crescent croissant for bakeries, pastry shops, and breakfast.",
+   "aliases": [
+    "pastry",
+    "croissants",
+    "crescent-roll",
+    "french-pastry",
+    "viennoiserie",
+    "breakfast-pastry",
+    "butter-croissant",
+    "kipferl",
+    "cornetto"
+   ],
+   "batch": "new-37"
+  },
+  {
+   "name": "wheat",
+   "category": "food",
+   "description": "An ear of wheat on its stalk for grain, flour, harvest, and gluten labels.",
+   "aliases": [
+    "grain",
+    "grains",
+    "flour",
+    "harvest",
+    "ear-of-wheat",
+    "wheat-ear",
+    "wheat-stalk",
+    "barley",
+    "rye",
+    "gluten",
+    "wheat-grain",
+    "spelt"
+   ],
+   "batch": "new-37"
+  },
+  {
+   "name": "oven",
+   "category": "food",
+   "description": "A baking oven with control knobs and a door with a handle and window, for kitchens and bakeries.",
+   "aliases": [
+    "baking-oven",
+    "stove",
+    "cooker",
+    "kitchen-oven",
+    "range-cooker",
+    "electric-oven",
+    "gas-oven",
+    "built-in-oven",
+    "convection-oven",
+    "ovens"
+   ],
+   "batch": "new-37"
+  },
+  {
+   "name": "rolling-pin",
+   "category": "food",
+   "description": "A wooden rolling pin with handles for rolling out dough, baking, and pastry.",
+   "aliases": [
+    "dough-roller",
+    "pastry-roller",
+    "baking-roller",
+    "rolling-pins",
+    "roller-pin",
+    "dough-pin"
+   ],
+   "batch": "new-37"
   }
  ]
 }
