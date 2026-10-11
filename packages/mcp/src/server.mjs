@@ -109,12 +109,16 @@ export function createServer(opts = {}) {
     description: 'Which style(s) to use for a job. for: plain words about what you are making ("Diwali sale banner", "avatar picker for a kids app", "animated 3D icons for an AI landing page", "admin dashboard", "Christmas email"); or use: one of the "What are you making?" ids from withicons.com. ' +
       'Ranks by your own words: a festival named in for wins ("Halloween party app" -> halloween, "Christmas email" -> christmas, "Diwali sale" -> rangoli, utsav), then the job (AI, SaaS, kids, print ...) and look words (isometric, claymorphism, neo-brutalism); use: "festive" lists every festival with its style. ' +
       'Returns ranked styles, each with its group, what it is good for, the React import, <with-icon> and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes and Duo presets; plus festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. ' +
+      'Several festivals named ("Diwali, Eid, Holi and Christmas"): styles rank by how many of them each covers, and a note says which style covers which festival (and that Eid has none): use a festival style per festival, or one neutral style across them. ' +
+      '"Exact brand colours", a brand palette or a hex in for: flat styles (solid, line, duo ...) rank first, each entry says exactColours true or false, and a note says gradient and shadow styles cannot match a hex exactly. ' +
+      'compact: true returns per style only the name, group, what it suits and the React and <with-icon> snippets (no palettes, packages, presets or downloads; about a third of the size). ' +
       'Then search_icons / get_icon(name, style) for the icons themselves.',
     inputSchema: {
       for: z.string().max(300).optional().describe('What you are making, in plain words'),
       use: z.enum(styleUses().map(u => u.id).length ? styleUses().map(u => u.id) : ['app']).optional().describe('A job id: ' + styleUses().map(u => `${u.id} (${u.title})`).join(', ')),
       icon: z.string().max(60).optional().describe('Icon the snippets show (default home), e.g. "diya" or "avatar-woman"'),
       limit: z.number().int().min(1).max(12).optional().describe('Max styles (default 6)'),
+      compact: z.boolean().optional().describe('Short answer: per style only name, group, what it suits and the React and <with-icon> snippets, with no palette lists, packages, presets or downloads (default false)'),
     },
     annotations: { title: 'Recommend styles', ...ro },
   }, safe(a => json(recommendStyles(a))))

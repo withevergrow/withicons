@@ -206,13 +206,22 @@ export declare function styleUses(): StyleUse[]
 export declare function styleInfo(style: string, icon?: string): StyleInfo
 export declare function duoPresets(): DuoPreset[]
 export declare function stylePalette(style: string, id?: string): { style: string; id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>>; vars: Record<string, string>; css: string; /** for the CLI: --colors "<flags>" */ flags: string }
-export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number }): {
+/** compact: true -> per style only { style, group, suits, react, webComponent } (+ exactColours), shorter notes, no palettes,
+ *  packages, presets, downloads, groups. */
+export interface CompactStyle { style: string; group: string; suits: string; react: string; webComponent: string; exactColours?: boolean }
+export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number; compact?: boolean }): {
   query: string | null; matched: boolean; uses: StyleUse[]
-  festivals?: { festival: string; styles: string[]; category: string }[]
+  /** the festivals the text names (or every festival for use "festive"); `named` lists the festival names found in the text */
+  festivals?: { festival: string; styles: string[]; category: string; named?: string[] }[]
+  /** festivals named in the text that no style is drawn for (Eid, Easter, Hanukkah ...) */
+  otherFestivals?: string[]
   avatars?: { category: 'avatars'; paletteTag: 'true-to-life' }
-  recommendations: StyleInfo[]
-  hint?: string; allUses?: StyleUse[]; groups?: StyleGroup[]
-  notes: string[]; downloads: { style: string; all: string }
+  /** with several festivals named, ranked by how many each style covers; with "exact brand colours", flat styles first */
+  recommendations: (StyleInfo & { exactColours?: boolean })[] | CompactStyle[]
+  /** how to apply the style palettes (once; the entries carry stylePalettes), not in compact */
+  stylePalettesHow?: string
+  hint?: string; allUses?: (StyleUse | { id: string; title: string })[]; groups?: StyleGroup[]
+  notes: string[]; downloads?: { style: string; all: string }
 }
 
 export declare function snippet(name: string, style?: string, format?: Format | string, opts?: { size?: number; color?: string; strokeWidth?: number; flat?: boolean }): string

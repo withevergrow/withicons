@@ -139,7 +139,10 @@ describe('no-match suggestions', () => {
     if (r.count || (r.additional || []).length) { t.skip(`"${q}" now matches an icon: choose another word`); return null }
     return r
   }
-  for (const q of ['nervous', 'wheat', 'playground', 'crayon', 'stroller', 'mosque', 'hijab', 'anxious', 'xylophone', 'pacifier', 'wheat field', 'nervous face']) {
+  // the first eight are the evidence (docs/MCP-AGENT-EVAL.md #12); the rest are words one letter from a real name, alias or
+  // tag (sheep / sleep, shark / share, comet / comment, swing / sing, taco / tack, beaver / beaker): another word, not a typo
+  for (const q of ['nervous', 'wheat', 'playground', 'crayon', 'stroller', 'mosque', 'hijab', 'anxious', 'xylophone', 'pacifier', 'wheat field', 'nervous face',
+    'sheep', 'shark', 'comet', 'swing', 'taco', 'beaver', 'rooster', 'grape', 'pepper', 'butter', 'brownie', 'swan', 'lamb', 'pretzel']) {
     test(`"${q}": nothing is close enough to suggest`, t => {
       const r = unmatched(t, q)
       if (!r) return
