@@ -62,6 +62,11 @@ const WORDS = [
   [/^(gulal|holi-splash|rangoli-pattern|alpana|lotus|rakhi)$/, 'pink'],
   [/^(snowman|snow-globe|sleigh)$/, 'sky'],
   [/^piggy-bank$/, 'piggy'],
+  // run 14: a golden wheat tile, a teal clinic chair, baby-blue and pink baby things
+  [/^wheat$/, 'amber'],
+  [/^dental-chair$/, 'teal'],
+  [/^stroller$/, 'sky'],
+  [/^baby-bottle$/, 'pink'],
   [/(^|-)(alert|warning|warn|triangle-alert)(-|$)/, 'amber'],
   [/(^|-)(x|error|ban|trash|delete|stop|record|heart|flame|fire)(-|$)/, 'red'],
   [/(^|-)(check|success|done|leaf|plant|tree|battery)(-|$)/, 'green'],
