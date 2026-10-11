@@ -94,6 +94,7 @@ function person(name) {
   let hair = HAIR[(n * 7 + 1) % HAIR.length]
   if (k.startsWith('older')) hair = '#C9C4D2'
   if (k === 'man-turban') hair = '#E2574C'
+  if (k === 'woman-hijab') hair = '#2CC0A8'           // the hijab owns c2: a fabric colour, never a skin-like brown
   if (k === 'person-headphones') hair = '#3A3550'
   if (k === 'person-glasses') hair = '#2B2230'          // hair and frames share the role
   if (t >= 3 && hair === '#E0B062') hair = '#2B2230'

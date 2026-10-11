@@ -1,5 +1,5 @@
 {
- "count": 747,
+ "count": 750,
  "categories": [
   "ai",
   "navigation",
@@ -8600,6 +8600,58 @@
     "apprehensive"
    ],
    "batch": "new-38"
+  },
+  {
+   "name": "mosque",
+   "category": "maps",
+   "description": "A mosque with an onion dome, a crescent finial and a minaret, for mosques, Islamic places of worship, Eid and Ramadan.",
+   "aliases": [
+    "masjid",
+    "masjed",
+    "musalla",
+    "jama-masjid",
+    "minaret",
+    "mosque-building",
+    "islamic",
+    "islam"
+   ],
+   "batch": "new-39"
+  },
+  {
+   "name": "avatar-woman-hijab",
+   "category": "avatars",
+   "description": "A friendly avatar of a woman wearing a hijab, for profiles, user lists and inclusive teams.",
+   "aliases": [
+    "hijab",
+    "woman-hijab",
+    "hijab-avatar",
+    "hijabi",
+    "muslim-woman",
+    "woman-with-hijab",
+    "headscarf",
+    "headscarf-woman",
+    "woman-headscarf",
+    "khimar"
+   ],
+   "batch": "new-39"
+  },
+  {
+   "name": "avatar-person-wheelchair",
+   "category": "avatars",
+   "description": "A friendly avatar of a person using a wheelchair, for profiles, accessibility and inclusive teams.",
+   "aliases": [
+    "wheelchair-user",
+    "person-wheelchair",
+    "wheelchair-avatar",
+    "person-in-wheelchair",
+    "wheelchair-person",
+    "disabled-person",
+    "person-with-disability",
+    "disability-avatar",
+    "accessible-avatar",
+    "manual-wheelchair"
+   ],
+   "batch": "new-39"
   }
  ]
 }
