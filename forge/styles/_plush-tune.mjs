@@ -51,4 +51,11 @@ export const TUNE = {
   'bell-count': { main: 'c2', scheme: { part: 'c3', badge: 'c4' } },
   'folder-label': { main: 'c2', scheme: { part: 'c1' } },
   ...Object.fromEntries(['battery-level', 'battery-percent', 'battery-vertical', 'battery-charging-level'].map(k => [k, { main: 'c3', scheme: { part: 'c4' } }])),
+  // run 14 statics: mustard bakes like cookie (cream scoring), a mustard rolling pin, a blue clinic chair, a mustard
+  // crown over a cream tooth like tooth, a mustard worried face (as smile and frown) with dark felt eyes and a blue
+  // drop, a green mosque with a mustard crescent
+  bread: { main: 'c2', scheme: { part: 'tint' } }, baguette: { main: 'c2', scheme: { part: 'tint' } },
+  croissant: { main: 'c2', scheme: { part: 'tint' } }, wheat: { main: 'c2', scheme: { part: 'c2' } }, 'rolling-pin': { main: 'c2' },
+  'dental-chair': { main: 'c3', scheme: { part: 'tint' } }, 'tooth-crown': { main: 'c2', scheme: { part: 'tint' } },
+  worried: { main: 'c2', scheme: { badge: 'c3', patch: 'ink' } }, mosque: { main: 'c4', scheme: { badge: 'c2' } },
 }
