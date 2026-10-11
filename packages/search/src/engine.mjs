@@ -2,7 +2,7 @@
 // This file is the single source; forge/lib/emit-search.mjs wraps it into ESM, CJS and a browser global.
 // Keep it free of imports and of anything environment-specific.
 
-export const ENGINE_VERSION = '1.5.0'
+export const ENGINE_VERSION = '1.6.0'
 
 // ---------------------------------------------------------------- text normalisation
 const FOLD = { 'ß': 'ss', 'æ': 'ae', 'œ': 'oe', 'ø': 'o', 'ł': 'l', 'đ': 'd', 'ð': 'd', 'þ': 'th', 'ı': 'i' }
@@ -362,7 +362,18 @@ const CONCEPTS = [
 const MODIFIERS = new Set(('fast quick quickly instant live realtime real secure secured safe smart new latest my your our free easy ' +
   'simple modern online digital pro premium best top auto automatic custom personal private public mobile global virtual ' +
   'daily weekly monthly local main mini basic advanced full total quick express instant cool nice good great better ' +
-  'super ultra smart intelligent responsive interactive dynamic active inactive current default').split(' '))
+  'super ultra smart intelligent responsive interactive dynamic active inactive current default working').split(' '))
+
+// Phrase structure (engine 1.6). In "nature-based day care" or "AI-powered tool" the tail only says that the word before
+// it modifies the rest: it is a function word, never content.
+const TAIL = new Set(['based', 'related', 'oriented', 'centric', 'driven', 'focused', 'powered'])
+// "N1 of N2" is headed by N1 ("photo of child", "cup of coffee") unless N1 is a quantity or a place word
+const OF_NOT_HEAD = new Set(('out all most some any one each none kind sort type lot lots full made instead because ahead inside ' +
+  'outside front top bottom middle side end part piece slice bit couple pair number amount set group bunch range variety').split(' '))
+// weights in a phrase: a participle after its plural subject describes it and weighs like the generic modifiers above
+// ("children playing" is about children); what follows the head of "N1 of N2" or precedes a tail describes it; a word
+// that matches only one half of a compound the query names ("day" of "day care", "same-day") is another sense of that word
+const W_PARTICIPLE = 0.5, W_MODIFIER = 0.7, W_HALF = 0.5
 
 // Common English words the vocabulary does not carry. A word here is a real word, never a typo of a nearby
 // vocabulary word ("bean" is not "ban", "grinder" is not "gender", "bear" is not "beer"): it is only corrected when
@@ -605,11 +616,17 @@ export function create(index) {
 
   // concept map: stem -> expansion words
   const concept = new Map()
+  // the other keys of a word's concept lines: real synonyms ("create" ~ "add"), where an expansion that is only an
+  // expansion is a related word ("update" -> rotate)
+  const conceptSyn = new Map()
   for (const [keys, exp] of CONCEPTS) {
-    const ex = exp.split(' ')
-    for (const k of keys.split(' ')) {
+    const ex = exp.split(' '), ks = keys.split(' ')
+    for (const k of ks) {
       const st = stem(k)
-      for (const key of st.length >= 4 && st !== k ? [k, st] : [k]) concept.set(key, [...new Set([...(concept.get(key) || []), ...ex])])
+      for (const key of st.length >= 4 && st !== k ? [k, st] : [k]) {
+        concept.set(key, [...new Set([...(concept.get(key) || []), ...ex])])
+        conceptSyn.set(key, new Set([...(conceptSyn.get(key) || []), ...ks]))
+      }
     }
   }
 
@@ -743,35 +760,50 @@ export function create(index) {
     }
     // concept expansions (exact / stem only, or the single best correction of an unknown word)
     let ex = concept.get(w) || (s.length >= 4 ? concept.get(s) : null), cq = 1, ck = 4, bt
+    let syn = conceptSyn.get(w) || (s.length >= 4 ? conceptSyn.get(s) : null)
     if (!ex && exact === undefined) {
       let bq = 0
       for (const o of out.values()) if (CORRECTED(o.kind) && o.q > bq) { bq = o.q; bt = tokens[o.id]; ck = o.kind }
-      if (bt) { ex = concept.get(bt) || concept.get(stem(bt)); cq = bq * 0.8 }
+      if (bt) { ex = concept.get(bt) || concept.get(stem(bt)); syn = conceptSyn.get(bt) || conceptSyn.get(stem(bt)); cq = bq * 0.8 }
     }
     if (ex) for (const e of ex) {
       if (e === w) continue
-      const id = vocab.get(e)
-      if (id !== undefined) put(id, Q_CONCEPT * cq, ck, 0, bt)
-      for (const sid of stems.get(stem(e)) || []) put(sid, Q_CONCEPT * 0.92 * cq, ck, 0, bt)
+      const id = vocab.get(e), sy = !!(syn && syn.has(e))
+      if (id !== undefined) { put(id, Q_CONCEPT * cq, ck, 0, bt); if (sy) out.get(id).syn = true }
+      for (const sid of stems.get(stem(e)) || []) { put(sid, Q_CONCEPT * 0.92 * cq, ck, 0, bt); if (sy) out.get(sid).syn = true }
     }
     return [...out.values()]
   }
 
   // query -> { all: every word, required/soft: [{ w, pos }] indexes into all, style }
   function parse(query) {
-    let all = words(query)
+    // every word with the hyphenated chunk it came from ("same-day" -> same, day in one group; -1 = a word on its own)
+    let all = [], grp = [], g = 0
+    for (const chunk of String(query == null ? '' : query).split(/\s+/)) {
+      const ws = words(chunk)
+      for (const w of ws) { all.push(w); grp.push(ws.length > 1 ? g : -1) }
+      if (ws.length > 1) g++
+    }
     // missing spaces: "lightbulbidea" -> "lightbulb idea" (only unknown words that split into two real words)
     let split = false
-    if (all.some(w => w.length >= 6)) all = all.flatMap(w => { const sp = styleOf(w) ? null : splitWord(w); if (sp) split = true; return sp || [w] })
-    // "a picture of a house", "icon of a cat": the meta word names the medium, not the subject
-    all = all.filter((w, k) => !(META.has(w) && all[k + 1] === 'of' && k + 2 < all.length))
+    if (all.some(w => w.length >= 6)) {
+      const a2 = [], g2 = []
+      all.forEach((w, k) => { const sp = styleOf(w) ? null : splitWord(w); if (sp) split = true; for (const x of sp || [w]) { a2.push(x); g2.push(grp[k]) } })
+      all = a2; grp = g2
+    }
+    // "a picture of a house", "icon of a cat": the meta word names the medium, not the subject. With more than the subject
+    // after it ("photo of child daily update") the photo is part of what is described and stays.
+    const contentAfter = k => { let n = 0; for (let j = k; j < all.length; j++) if (!STOP.has(all[j])) n++; return n }
+    const keep = all.map((w, k) => !(META.has(w) && all[k + 1] === 'of' && k + 2 < all.length && contentAfter(k + 2) <= 2))
+    all = all.filter((w, k) => keep[k]); grp = grp.filter((x, k) => keep[k])
     // "8 bit heart" -> "8bit heart": only phrases whose joined form maps to a style this index has
     for (let k = 0; k + 1 < all.length; k++) {
       const j = STYLE_PHRASES[all[k] + ' ' + all[k + 1]]
-      if (j && styleIdx.has(STYLE_WORDS[j] || j)) { all = all.slice(0, k).concat([j], all.slice(k + 2)); k-- }
+      if (j && styleIdx.has(STYLE_WORDS[j] || j)) { all = all.slice(0, k).concat([j], all.slice(k + 2)); grp = grp.slice(0, k).concat([-1], grp.slice(k + 2)); k-- }
     }
     let style = null
-    const content = all.map((w, pos) => ({ w, pos })).filter(t => !STOP.has(t.w))
+    // "nature-based", "data driven": the tail is a function word after a content word
+    const content = all.map((w, pos) => ({ w, pos })).filter(t => !STOP.has(t.w) && !(TAIL.has(t.w) && t.pos > 0 && !STOP.has(all[t.pos - 1])))
     const ws = content.length ? content : all.map((w, pos) => ({ w, pos }))
     const required = [], soft = []
     let prevStyle = false
@@ -789,8 +821,10 @@ export function create(index) {
       }
       const target = styleOf(w)
       // a style word that also names a thing ("wine glass", "pixel ruler") is only a style when it leads the
-      // query or is followed by "style"/"look" -- and never as "glass of water"
-      if (target && !(all[t.pos + 1] === 'of' && namesThing(w)) && (k === 0 || !namesThing(w) || (ws[k + 1] && STYLE_MARK.has(ws[k + 1].w)))) {
+      // query or is followed by "style"/"look" -- and never as "glass of water", nor as the subject of a closing
+      // participle ("children playing": a style describes a noun, "playing" is what the children do)
+      const subject = namesThing(w) && k === ws.length - 2 && participle(ws[k + 1].w)
+      if (target && !subject && !(all[t.pos + 1] === 'of' && namesThing(w)) && (k === 0 || !namesThing(w) || (ws[k + 1] && STYLE_MARK.has(ws[k + 1].w)))) {
         style = style || target
         prevStyle = true
         if (ws.length > 1) soft.push(t)
@@ -814,7 +848,48 @@ export function create(index) {
       const real = segs.filter(sg => sg.some(w => !STOP.has(w) && !styleOf(w) && !SOFT.has(w)))
       if (real.length >= 2) segments = real.map(sg => sg.join(' '))
     }
-    return { all, required, soft, style, split, words: ws.map(t => t.w), category, segments }
+    return { all, grp, required, soft, style, split, words: ws.map(t => t.w), category, segments }
+  }
+
+  // "playing", "working", "running": an -ing form of a verb the engine knows ("spring", "thing" are not)
+  function participle(w) {
+    if (w.length < 5 || !w.endsWith('ing')) return false
+    const b = w.slice(0, -3), known = x => x.length >= 2 && (vocab.has(x) || isCommon(x))
+    return known(b) || known(b + 'e') || (b.length >= 3 && b[b.length - 1] === b[b.length - 2] && known(b.slice(0, -1)))
+  }
+  // "children", "kids", "people": a plural noun (an irregular plural, or -s on a word the engine knows)
+  function pluralNoun(w) {
+    if (IRREGULAR[w]) return true
+    if (w.length < 4 || !w.endsWith('s') || /(ss|us|is)$/.test(w)) return false
+    const b = w.endsWith('ies') ? w.slice(0, -3) + 'y' : w.slice(0, -1)
+    return vocab.has(b) || isCommon(b)
+  }
+  // two adjacent query words that the data or the query writes as one compound: "day care" (the vocabulary has
+  // "daycare"), "credit card" (a phrase some icon carries whole), "same-day" (hyphenated)
+  const compound = (p, a, b) => b.pos === a.pos + 1 && ((p.grp[a.pos] >= 0 && p.grp[a.pos] === p.grp[b.pos]) || vocab.has(a.w + b.w))
+  // term weights for the required words: generic modifiers weigh less (termWeight), and so does a participle after a
+  // plural subject ("children playing" is about the children). In "N1 of N2" ("photo of child daily update") N1 heads
+  // the phrase and what follows describes it. Otherwise words keep equal weights, whatever their order: in "car wash",
+  // "sleep tracking" or "waiting list" the first word is often what the icon draws, and an -ing word before a noun
+  // is as often a gerund ("waiting list", "deleting things") as a participle.
+  function weigh(p, qt, nreq) {
+    const wk = qt.map((t, k) => (k < nreq ? termWeight(t.w) : 0))
+    // one generic word on its own ("fast") is the query's head: it weighs in full
+    if (nreq === 1) { wk[0] = 1; return wk }
+    if (p.segments) return wk
+    const z = nreq - 1
+    if (participle(qt[z].w) && qt[z - 1].pos === qt[z].pos - 1 && pluralNoun(qt[z - 1].w) && !compound(p, qt[z - 1], qt[z])) wk[z] *= W_PARTICIPLE
+    const of = p.all.indexOf('of')
+    let n1 = -1
+    if (of > 0) for (let k = 0; k < nreq; k++) if (qt[k].pos < of) n1 = k
+    if (n1 >= 0 && n1 < nreq - 1 && !OF_NOT_HEAD.has(qt[n1].w)) for (let k = n1 + 1; k < nreq; k++) wk[k] *= W_MODIFIER
+    // "nature-based day care": the word before a tail modifies the rest
+    for (let k = 0; k < nreq; k++) if (TAIL.has(p.all[qt[k].pos + 1])) wk[k] *= W_MODIFIER
+    // a hyphenated word is one word: "same-day" weighs like "fast" in "same-day fast turnaround", not twice as much
+    const size = new Map()
+    for (let k = 0; k < nreq; k++) { const g = p.grp[qt[k].pos]; if (g >= 0) size.set(g, (size.get(g) || 0) + 1) }
+    for (let k = 0; k < nreq; k++) { const n = size.get(p.grp[qt[k].pos]); if (n > 1) wk[k] /= n }
+    return wk
   }
 
   // -------------------------------------------------------------- term importance
@@ -846,11 +921,9 @@ export function create(index) {
     }
     const qt = p.required.concat(p.soft)
     const nq = qt.length, nreq = p.required.length
-    const wk = qt.map((t, k) => (k < nreq ? termWeight(t.w) : 0))
+    const wk = weigh(p, qt, nreq)
     let wsum = 0
     for (let k = 0; k < nreq; k++) wsum += wk[k]
-    // one generic word on its own ("fast") is the query's head: it weighs in full
-    if (nreq === 1) { wk[0] = 1; wsum = 1 }
     const best = qt.map(() => new Float64Array(N))
     const bestInfo = qt.map(() => new Array(N))
     const extra = new Float64Array(N)
@@ -863,27 +936,48 @@ export function create(index) {
       return h
     }
     const lastPos = Math.max(...qt.map(t => t.pos))
+    // the head word of a several-word query: its last required word
+    let headK = 0
+    for (let k = 1; k < nreq; k++) if (qt[k].pos > qt[headK].pos) headK = k
+    // prefix (as-you-type) only for the word being typed: the last one
+    const ms = qt.map(t => matchToken(t.w, t.pos === lastPos && (t.w.length >= 2 || nq === 1)))
+    // several words: which query words reach each multi-word entry, so a phrase can tell its own words from others
+    let touch = null
+    if (nq > 1) {
+      touch = new Map()
+      for (let k = 0; k < nq; k++) for (const m of ms[k]) {
+        if (m.kind === 4 && !m.syn) continue
+        const post = postings[m.id]
+        for (let x = 0; x < post.length; x += 2) { const e = post[x]; if (post[x + 1] >= 0 && eLen[e] > 1) touch.set(e, (touch.get(e) || 0) | (1 << k)) }
+      }
+    }
     for (let k = 0; k < nq; k++) {
       const w = qt[k].w
-      // prefix (as-you-type) only for the word being typed: the last one
-      const allowPrefix = qt[k].pos === lastPos && (w.length >= 2 || nq === 1)
-      for (const m of matchToken(w, allowPrefix)) {
+      for (const m of ms[k]) {
         const post = postings[m.id]
         for (let x = 0; x < post.length; x += 2) {
           const e = post[x], f = eField[e], i = eIcon[e], ps = post[x + 1]
           if (f === F_DESC && m.kind !== 0 && m.kind !== 2) continue
           if (f === F_CAT && CORRECTED(m.kind)) continue
-          const cov = ps < 0 ? (m.kind === 1 ? 0.8 : 1) : (nq === 1 ? 0.55 + 0.45 / eLen[e] : 0.75 + 0.25 / eLen[e])
+          // in a several-word query, an entry that carries this word and nothing else of the query is another, narrower
+          // sense ("font family", "doggy daycare", "now playing" beside "diaspora family", "day care", "children
+          // playing"): it counts like a partial match of a one-word query, not like part of the phrase
+          const part = nq > 1 && ps >= 0 && eLen[e] > 1 && f < F_CAT && !(touch.get(e) & ~(1 << k))
+          const cov = ps < 0 ? (m.kind === 1 ? 0.8 : 1) : (nq === 1 || part ? 0.55 + 0.45 / eLen[e] : 0.75 + 0.25 / eLen[e])
           // a one-word query that only leads a natural phrase ("tracking" in "tracking cookie", "live" in
           // "live support") names the modifier, not the thing: the phrase's head noun is what the icon shows
-          // (only the best match is discounted; every entry still counts as extra evidence)
-          const lead = nq === 1 && f >= F_ALIAS && f <= F_TAG && (ps >= 0 ? ps < eLen[e] - 1 : m.kind === 1 && (phraseOf.get(tokens[m.id]) || '').startsWith(w + ' '))
+          // (only the best match is discounted; every entry still counts as extra evidence). In a several-word query
+          // the same holds for the head word (the last one) when it only leads an entry of other words: "counter" ends
+          // "shop counter" but leads "counter-clockwise". A modifier leading an entry keeps its role ("contact list").
+          const lead = (nq === 1 || (part && k === headK)) && f >= F_ALIAS && f <= F_TAG && (ps >= 0 ? ps < eLen[e] - 1 : m.kind === 1 && (phraseOf.get(tokens[m.id]) || '').startsWith(w + ' '))
           const raw = FW[f] * m.q * cov, sc = lead ? raw * 0.82 : raw
           if (sc > best[k][i]) {
             if (best[k][i] > 0) extra[i] += best[k][i] * 0.03
-            best[k][i] = sc; bestInfo[k][i] = { e, kind: m.kind, w: m.src || tokens[m.id], d: m.d, df: CORRECTED(m.kind) && !m.d && !m.src, dp: !!m.dp, pk: !!m.pk, ps, lead }
+            best[k][i] = sc; bestInfo[k][i] = { e, kind: m.kind, w: m.src || tokens[m.id], d: m.d, df: CORRECTED(m.kind) && !m.d && !m.src, dp: !!m.dp, pk: !!m.pk, ps, lead: lead && nq === 1, part }
           } else extra[i] += raw * 0.03
-          if (nq > 1 && ps >= 0) hit(e, k, m.q, ps)
+          // a concept expansion that is only a related word ("update" -> rotate) never makes an entry the query's own
+          // phrase; a synonym from the same concept line does ("create new" -> "add new")
+          if (nq > 1 && ps >= 0 && (m.kind !== 4 || m.syn)) hit(e, k, m.q, ps)
         }
       }
     }
@@ -895,16 +989,19 @@ export function create(index) {
         if (id === undefined) continue
         const jk = knownFix(tokens[id]) || all.slice(a, b + 1).some(knownFix) ? 3 : 0
         const ks = []
-        for (let k = 0; k < nq; k++) if (qt[k].pos >= a && qt[k].pos <= b) ks.push(k)
+        let km = 0
+        for (let k = 0; k < nq; k++) if (qt[k].pos >= a && qt[k].pos <= b) { ks.push(k); km |= 1 << k }
         if (!ks.length) continue
         const post = postings[id]
         for (let x = 0; x < post.length; x += 2) {
           const e = post[x], f = eField[e], i = eIcon[e]
           if (f === F_DESC) continue
           const whole = post[x + 1] < 0 || eLen[e] === 1
-          const sc = FW[f] * (whole ? 1 : 0.75 + 0.25 / eLen[e])
+          // "day care" -> "doggy daycare": the rest of the entry is not in the query, a narrower sense
+          const part = !whole && f < F_CAT && !((touch && touch.get(e)) & ~km)
+          const sc = FW[f] * (whole ? 1 : part ? 0.55 + 0.45 / eLen[e] : 0.75 + 0.25 / eLen[e])
           for (const k of ks) {
-            if (sc > best[k][i]) { best[k][i] = sc; bestInfo[k][i] = { e, kind: jk, w: jk ? all[qt[k].pos] : tokens[id], d: 0, df: !!jk, ps: whole ? -1 : post[x + 1] } }
+            if (sc > best[k][i]) { best[k][i] = sc; bestInfo[k][i] = { e, kind: jk, w: jk ? all[qt[k].pos] : tokens[id], d: 0, df: !!jk, ps: whole ? -1 : post[x + 1], part } }
             const h = hit(e, k, 1, post[x + 1] < 0 ? k : post[x + 1])
             if (whole) h.joined = true
           }
@@ -913,15 +1010,35 @@ export function create(index) {
     }
     // phrase bonus: one entry carrying several (or all) query words, in order and adjacent counts most
     const phrase = new Float64Array(N), phraseEntry = new Array(N)
+    const pwsum = wsum + (nq - nreq)
     for (const [e, h] of entryHits) {
       if (h.n < 2 && !h.joined) continue
       const i = eIcon[e]
       let adj = 1, q = 0
       for (let k = 0; k < nq; k++) if (h.mask & (1 << k)) q += h.qk[k]
       if (!h.joined) { let prev = null; for (let k = 0; k < nq; k++) { const ps = h.pos[k]; if (ps === undefined) continue; if (prev !== null && ps !== prev + 1) adj = 0.8; prev = ps } }
-      const entryCov = h.joined ? 1 : Math.min(1, h.n / eLen[e])
-      const b = FW[eField[e]] * (q / h.n) * entryCov * (h.n / nq) * adj * 0.7
-      if (b > phrase[i]) { phrase[i] = b; phraseEntry[i] = { e, full: h.n === nq, whole: h.joined || (h.n === nq && h.n >= eLen[e]) } }
+      // how much of the entry the query covers: its distinct word positions ("day" and "care" both land on the one
+      // word "daycare" of "doggy daycare", which covers half of that entry, not all of it)
+      const at = new Set()
+      for (let k = 0; k < nq; k++) if (h.mask & (1 << k)) at.add(h.pos[k])
+      const entryCov = h.joined ? 1 : Math.min(1, at.size / eLen[e])
+      // the share of the query the phrase covers, by term weight ("real-time chat": "real time" is the lesser part)
+      let pw = 0
+      for (let k = 0; k < nq; k++) if (h.mask & (1 << k)) pw += k < nreq ? wk[k] : 1
+      const b = FW[eField[e]] * (q / h.n) * entryCov * (pw / pwsum) * adj * 0.7
+      if (b > phrase[i]) { phrase[i] = b; phraseEntry[i] = { e, full: h.n === nq, whole: h.joined || (h.n === nq && at.size >= eLen[e]) } }
+    }
+    // a compound the query names ("day care", "same-day", "gift card") is one unit of meaning: an icon whose entries
+    // carry only one half of it ("day" -> sun, "care" -> heart), or the halves apart in other phrases ("gift box",
+    // "cardboard"), matches other senses of those words. It has the compound when one entry carries both halves.
+    for (let k = 0; k + 1 < nreq; k++) {
+      if (!compound(p, qt[k], qt[k + 1])) continue
+      const both = (1 << k) | (1 << (k + 1)), has = new Uint8Array(N)
+      for (const [e, h] of entryHits) if ((h.mask & both) === both) has[eIcon[e]] = 1
+      for (let i = 0; i < N; i++) {
+        if (has[i]) continue
+        for (const j of [k, k + 1]) if (best[j][i] > 0) { best[j][i] *= W_HALF; bestInfo[j][i] = { ...bestInfo[j][i], part: true } }
+      }
     }
     // per query word: does anything other than a correction (typo / similar / phonetic) explain it?
     // A word with a real match anywhere is a real word, so its corrections elsewhere are noise.
@@ -957,11 +1074,14 @@ export function create(index) {
       if (s <= 0) continue
       const r = result(i, s, explain(i, nq, best, bestInfo, phraseEntry[i]))
       // evidence for the confidence model: the weakest way a word matched (a fix the data carries counts as exact)
-      let kind = -1, bk = -1, dp = false, pk = false, orphan = false, firm = 0
+      let kind = -1, bk = -1, dp = false, pk = false, orphan = false, firm = 0, covW = 0
       for (let k = 0; k < nq; k++) {
         const b = bestInfo[k][i]
         if (!b) continue
         if (b.dp) dp = true; else if (k < nreq) firm++
+        // coverage for confidence: a word met only in another sense (a narrower phrase, half a compound) or only
+        // through the category counts half
+        if (k < nreq) covW += wk[k] * (b.part || eField[b.e] >= F_CAT ? 0.5 : 1)
         if (b.pk) pk = true
         if (b.kind === 4 && !direct[k] && k < nreq) orphan = true
         const bkind = b.kind === 3 && !guess(b) ? 0 : b.kind
@@ -971,7 +1091,7 @@ export function create(index) {
       // a complete common word that only starts other words ("mat" -> math, match) is no evidence at all
       if (!firm) continue
       const bi = bestInfo[bk][i], pe = phraseEntry[i]
-      r._cov = 1 - missW / wsum; r._kind = kind; r._dp = dp || orphan || (nq === 1 && bi.lead && !named); r._pk = pk || (nq === 1 && bi.lead)
+      r._cov = nreq > 1 ? covW / wsum : 1 - missW / wsum; r._kind = kind; r._dp = dp || orphan || (nq === 1 && bi.lead && !named); r._pk = pk || (nq === 1 && bi.lead)
       r._field = pe && pe.full ? eField[pe.e] : eField[bi.e]
       r._whole = nreq === 1 ? (bi.ps < 0 || eLen[bi.e] === 1 || (eLen[bi.e] === 2 && eField[bi.e] === F_NAME)) : !!(pe && pe.full && pe.whole)
       if (opts.trace) r.trace = { all: p.all, split: p.split, tokens: qt.map((t, k) => ({ pos: t.pos, b: bestInfo[k][i] })) }

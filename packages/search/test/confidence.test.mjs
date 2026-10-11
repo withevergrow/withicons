@@ -162,7 +162,8 @@ describe('query() and no-result honesty', () => {
       assert.ok(r.browse && r.browse.categories.length > 10, q)
     }
   })
-  test('the engine version is 1.5', () => assert.ok(ENGINE_VERSION.startsWith('1.5')))
+  // 1.6: phrase structure (function words, hyphenated compounds, participles, narrower-sense entries) changes ranking
+  test('the engine version is 1.6', () => assert.ok(ENGINE_VERSION.startsWith('1.6')))
 })
 
 describe('evaluation set (eval/golden.json)', () => {
