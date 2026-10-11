@@ -1,0 +1,78 @@
+{
+  "name": "dental-chair",
+  "category": "health",
+  "description": "A dentist’s chair with its overhead light, for dental clinics, appointments and treatments.",
+  "aliases": [
+    "dentist-chair",
+    "dentists-chair",
+    "dental-unit",
+    "dental-office",
+    "dentist-office",
+    "dental-practice",
+    "treatment-chair",
+    "patient-chair",
+    "operatory",
+    "exam-chair"
+  ],
+  "tags": [
+    "health",
+    "dental",
+    "dentist",
+    "clinic",
+    "chair",
+    "treatment"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 3.75 L9.5 10.25 H15.25 L19.75 15.25 A1.75 1.75 0 0 1 17.25 17.75 L13.75 13.75 H7.5 L3.5 5.25 A1.75 1.75 0 0 1 6.5 3.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11 13.75 V20.5 M7 20.5 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 6.5 A3 2.5 0 0 1 18.5 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 4 V2.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 3.75 L9.5 10.25 H15.25 L19.75 15.25 A1.75 1.75 0 0 1 17.25 17.75 L13.75 13.75 H7.5 L3.5 5.25 A1.75 1.75 0 0 1 6.5 3.75 Z",
+    "M12.5 6.5 A3 2.5 0 0 1 18.5 6.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "dentist",
+    "dental",
+    "dentistry",
+    "dental clinic",
+    "dental surgery",
+    "dental care",
+    "dental appointment",
+    "dental visit",
+    "dental checkup",
+    "dental check-up",
+    "dental treatment",
+    "dental exam",
+    "dental procedure",
+    "oral surgery",
+    "oral care",
+    "hygienist",
+    "dental hygienist",
+    "orthodontist",
+    "teeth cleaning",
+    "scale and polish",
+    "chair",
+    "reclining chair",
+    "recliner",
+    "dental light",
+    "dental lamp",
+    "operating light",
+    "clinic",
+    "dental patient"
+  ]
+}

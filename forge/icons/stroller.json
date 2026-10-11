@@ -1,0 +1,85 @@
+{
+  "name": "stroller",
+  "category": "travel",
+  "description": "A baby pram with a hood, handle and wheels, for strollers, babies and family-friendly places.",
+  "aliases": [
+    "pram",
+    "baby-carriage",
+    "pushchair",
+    "buggy",
+    "baby-stroller",
+    "baby-buggy",
+    "baby-pram",
+    "perambulator",
+    "strollers"
+  ],
+  "tags": [
+    "baby",
+    "pram",
+    "stroller",
+    "transport"
+  ],
+  "paths": [
+    {
+      "d": "M3 9.5 H17 A7 5 0 0 1 3 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 9.5 A7 7 0 0 1 10 2.5 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17 9.5 L19 4.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 19.5 A2 2 0 1 1 4 19.5 A2 2 0 1 1 8 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 19.5 A2 2 0 1 1 12 19.5 A2 2 0 1 1 16 19.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 9.5 H17 A7 5 0 0 1 3 9.5 Z",
+    "M3 9.5 A7 7 0 0 1 10 2.5 V9.5 Z",
+    "M8 19.5 A2 2 0 1 1 4 19.5 A2 2 0 1 1 8 19.5 Z",
+    "M16 19.5 A2 2 0 1 1 12 19.5 A2 2 0 1 1 16 19.5 Z"
+  ],
+  "cutouts": [
+    "M3 9.5 H10"
+  ],
+  "synonyms": [
+    "baby",
+    "newborn",
+    "infant",
+    "toddler",
+    "parenting",
+    "family friendly",
+    "baby friendly",
+    "mom",
+    "dad",
+    "mother",
+    "father",
+    "maternity",
+    "paternity",
+    "parental leave",
+    "childcare",
+    "daycare",
+    "nursery",
+    "stroll",
+    "walk",
+    "baby walk",
+    "baby shower",
+    "baby gear",
+    "travel system",
+    "pram parking",
+    "buggy parking",
+    "baby changing",
+    "prams",
+    "buggies",
+    "stroler",
+    "strolller"
+  ]
+}

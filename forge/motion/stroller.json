@@ -1,0 +1,51 @@
+{
+  "name": "stroller",
+  "intent": "rocks gently like a pram lulling a baby, rolls off and back on hover",
+  "loop": {
+    "preset": "rock",
+    "origin": [10, 19.5],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pass",
+    "dir": 180,
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [10, 9.5],
+      "amount": 0.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.3,
+      "duration": 1.6
+    },
+    {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.5
+    },
+    {
+      "preset": "bounce",
+      "origin": [10, 21.5],
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "baby",
+      "effect": "fade"
+    },
+    {
+      "to": "stroller@solid",
+      "effect": "scale"
+    }
+  ]
+}

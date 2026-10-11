@@ -1,0 +1,45 @@
+{
+  "name": "crayon",
+  "intent": "sways on its tip like it is colouring in, scribbles on hover",
+  "loop": {
+    "preset": "sway",
+    "origin": [6.9, 17.1],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [6.9, 17.1],
+    "amount": 1,
+    "duration": 0.7
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "tilt",
+      "origin": [6.9, 17.1]
+    },
+    {
+      "preset": "bounce",
+      "origin": [12, 21],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "palette",
+      "effect": "fade"
+    },
+    {
+      "to": "pencil",
+      "effect": "rotate"
+    },
+    {
+      "to": "crayon@solid",
+      "effect": "scale"
+    }
+  ]
+}
