@@ -28,25 +28,35 @@ export declare class IconError extends Error {
 export type Confidence = 'high' | 'medium' | 'low'
 export type MatchKind = 'exact' | 'prefix' | 'stem' | 'typo' | 'similar' | 'phonetic' | 'concept'
 export interface SearchMatch { field: 'name' | 'alias' | 'synonym' | 'tag' | 'category' | 'description' | string; term: string; typo?: boolean; kind?: MatchKind }
+/** a snippet format for search results: any Format, or 'none' for names only (also accepted: 'names') */
+export type SearchFormat = Format | 'none'
 /** an exact match: what the query names (high) or a sound, direct match (medium); `results` holds only these */
 export interface SearchResult {
-  name: string; title: string; category: string; score: number
+  name: string; title: string; category: string
   confidence?: Confidence
-  reason: string; match: SearchMatch
-  snippet: string; url: string
+  reason: string
+  /** ranking detail: left out with format 'none', which returns name, title, category, confidence, reason and url only */
+  score?: number; match?: SearchMatch
+  /** Which results carry code, in every format: each exact match in `results` has a snippet (in the format asked for,
+   *  default react), none of `additional` / `outside` has one, and with format 'none' no result has one (names, title,
+   *  category, confidence, reason and url only). get_icon / getIcon returns the code of the one you pick. */
+  snippet?: string
+  url: string
 }
 /** a similar icon, not an exact match (low confidence, or reached only through a related concept: "bread" -> bakery
  *  icons). Short on purpose: no snippet, get_icon returns the code of the one that fits. */
 export interface AdditionalResult {
-  name: string; title: string; category: string; score: number
+  name: string; title: string; category: string; score?: number
   confidence?: Confidence
   /** set when confidence is low */
   weak?: true
   reason: string; url: string
 }
 /** a strong match the category filter hid */
-export interface OutsideResult { name: string; title: string; category: string; score: number; confidence?: Confidence; url: string }
+export interface OutsideResult { name: string; title: string; category: string; score?: number; confidence?: Confidence; url: string }
 export interface SearchResponse { query: string; style: string
+  /** the snippet format of the results ('none': no result carries a snippet) */
+  format: SearchFormat
   /** the number of exact matches (results.length) */
   count: number
   /** exact matches only, best first */
@@ -56,7 +66,8 @@ export interface SearchResponse { query: string; style: string
   /** up to 5 similar icons, apart from the matches: loosely related, use one only if it fits. Beside exact matches only
    *  related-concept icons appear; low-confidence guesses are listed only when there is no exact match. */
   additional?: AdditionalResult[]
-  /** names closest to the query, only when there are neither matches nor additional results */
+  /** names a typo away from the query (a missing, extra, wrong or swapped letter, or the start of a name): only when there
+   *  are neither matches nor additional results, and only names above a similarity floor, so often empty. */
   suggestions: string[]
   /** confidence of the top exact match, null when there is none */
   confidence: Confidence | null
@@ -66,7 +77,7 @@ export interface SearchResponse { query: string; style: string
   hint?: string
   /** the best matches the category filter hid (only when the filtered results are weak) */
   outside?: OutsideResult[] }
-export declare function searchIcons(opts: { query: string; limit?: number; style?: string; category?: string; format?: Format | string }): SearchResponse
+export declare function searchIcons(opts: { query: string; limit?: number; style?: string; category?: string; format?: SearchFormat | string }): SearchResponse
 
 export interface ColorVariable { var: string; role: PaletteRole | null; label: string | null; default: string }
 export interface Palette { id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>> }
@@ -195,13 +206,22 @@ export declare function styleUses(): StyleUse[]
 export declare function styleInfo(style: string, icon?: string): StyleInfo
 export declare function duoPresets(): DuoPreset[]
 export declare function stylePalette(style: string, id?: string): { style: string; id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>>; vars: Record<string, string>; css: string; /** for the CLI: --colors "<flags>" */ flags: string }
-export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number }): {
+/** compact: true -> per style only { style, group, suits, react, webComponent } (+ exactColours), shorter notes, no palettes,
+ *  packages, presets, downloads, groups. */
+export interface CompactStyle { style: string; group: string; suits: string; react: string; webComponent: string; exactColours?: boolean }
+export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number; compact?: boolean }): {
   query: string | null; matched: boolean; uses: StyleUse[]
-  festivals?: { festival: string; styles: string[]; category: string }[]
+  /** the festivals the text names (or every festival for use "festive"); `named` lists the festival names found in the text */
+  festivals?: { festival: string; styles: string[]; category: string; named?: string[] }[]
+  /** festivals named in the text that no style is drawn for (Eid, Easter, Hanukkah ...) */
+  otherFestivals?: string[]
   avatars?: { category: 'avatars'; paletteTag: 'true-to-life' }
-  recommendations: StyleInfo[]
-  hint?: string; allUses?: StyleUse[]; groups?: StyleGroup[]
-  notes: string[]; downloads: { style: string; all: string }
+  /** with several festivals named, ranked by how many each style covers; with "exact brand colours", flat styles first */
+  recommendations: (StyleInfo & { exactColours?: boolean })[] | CompactStyle[]
+  /** how to apply the style palettes (once; the entries carry stylePalettes), not in compact */
+  stylePalettesHow?: string
+  hint?: string; allUses?: (StyleUse | { id: string; title: string })[]; groups?: StyleGroup[]
+  notes: string[]; downloads?: { style: string; all: string }
 }
 
 export declare function snippet(name: string, style?: string, format?: Format | string, opts?: { size?: number; color?: string; strokeWidth?: number; flat?: boolean }): string

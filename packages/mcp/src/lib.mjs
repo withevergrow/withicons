@@ -132,9 +132,75 @@ const REASON = { name: 'name', alias: 'alias', synonym: 'related word', tag: 'ta
 const isExact = x => x.confidence === 'high' || (x.confidence === 'medium' && x.match.kind !== 'concept')
 const ADDITIONAL_MAX = 5
 const ADDITIONAL_POOL = 12   // extra ranked results fetched so loose ones cannot push exact matches out of the limit
+
+// ---- no-match suggestions ("did you mean"): the engine's nearest names, kept only when they really are near ----
+// engine.suggest ranks every name by distance and then pads with loosely related icons, so "nervous" got angry and
+// arrow-left and "wheat" got thermometer and heart. A name passes the floor when the query (or one of its words) is
+// near the name, one of its words or a one-word alias of 6+ letters (names first: aliases only when no name is near):
+// the same compact spelling; most of the start of a name ("calend"); a name plus an ending ("thermometers"); or a typo
+// away: a missing or extra letter, two letters swapped, a wrong letter only on words of 8+ ("calandar"; on short words
+// it is another word: sheep / sleep, shark / share), two slips on a long word that starts the same, or two missing
+// letters in one of 7 ("gaepd" -> gamepad). The first letter must agree: typos rarely hit it, and it keeps "wheat"
+// away from "heat", "heart" and "wreath".
+const compactOf = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '')
+function osaDistance(a, b) {   // Damerau-Levenshtein (optimal string alignment): a swap of two letters costs 1
+  const m = a.length, n = b.length
+  let p2 = null, p1 = Array.from({ length: n + 1 }, (_, j) => j)
+  for (let i = 1; i <= m; i++) {
+    const cur = [i]
+    for (let j = 1; j <= n; j++) {
+      let v = Math.min(p1[j] + 1, cur[j - 1] + 1, p1[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1))
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, p2[j - 2] + 1)
+      cur.push(v)
+    }
+    p2 = p1; p1 = cur
+  }
+  return p1[n]
+}
+function nearSpelling(q, t) {
+  const lq = q.length, lt = t.length
+  if (lq < 3 || lt < 3) return false
+  if (q === t) return true
+  // the start of a name with most of it typed ("calend"), or a name plus an ending ("thermometers")
+  if (lq >= 4 && t.startsWith(q) && lq >= lt * 0.75) return true
+  if (lt >= 5 && q.startsWith(t) && lt >= lq * 0.7) return true
+  if (q[0] !== t[0] && !(q[0] === t[1] && q[1] === t[0])) return false
+  const dist = osaDistance(q, t)
+  if (dist === 1) {
+    if (lq !== lt) return true   // a missing or an extra letter
+    // same length: two letters swapped is a typo; one wrong letter is usually another word (sheep / sleep, shark / share)
+    let i = 0
+    while (q[i] === t[i]) i++
+    return (q[i] === t[i + 1] && q[i + 1] === t[i]) || Math.min(lq, lt) >= 8
+  }
+  const longest = Math.max(lq, lt)
+  return dist === 2 && q[1] === t[1] && (longest >= 8 || (longest >= 7 && Math.abs(lq - lt) === 2))
+}
+// 1: near the name or one of its words; 2: near a one-word alias only; 0: not near
+function nearRank(forms, name) {
+  const words = name.split('-').filter(w => w.length >= 3)
+  if (forms.some(q => [compactOf(name), ...words].some(t => nearSpelling(q, t)))) return 1
+  const ic = data().byName.get(name)
+  const aliases = ((ic && ic.aliases) || []).filter(a => /^[a-z0-9]{6,}$/i.test(a)).map(a => a.toLowerCase())   // 6+ letters: "sing" is not a typo of "swing", "comet" is not "comment"
+  return forms.some(q => q.length >= 6 && aliases.some(t => nearSpelling(q, t))) ? 2 : 0
+}
+// names close to the query, closest kind first: when some are near by name, aliases are left out ("keybord" is a letter
+// from the alias "keyword" of tag, but keyboard is what was typed)
+function nearNames(query, max = 5) {
+  const words = String(query).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+  const forms = [...new Set([words.join(''), ...words.filter(w => w.length >= 5)])]
+  const ranked = data().engine.suggest(query, 15).map(n => [n, nearRank(forms, n)]).filter(x => x[1])
+  const best = Math.min(...ranked.map(x => x[1]))
+  return ranked.filter(x => x[1] === best).map(x => x[0]).slice(0, max)
+}
+
+// format "none" (also "names"): a result carries no snippet at all, in structuredContent or in the text block
+const isNoCode = f => /^(none|names?)$/i.test(String(f == null ? '' : f).trim())
 export function searchIcons({ query, limit = 10, style, category, format = 'react' } = {}) {
   const d = data()
   const st = style ? checkStyle(style) : null
+  const noCode = isNoCode(format)
+  const fmt = noCode ? 'none' : checkFormat(format)
   const lim = Math.max(1, Math.min(100, +limit || 10))
   if (category && !d.meta.categories.some(c => c.name === category)) throw new IconError(`Unknown category "${category}". Categories: ${d.meta.categories.map(c => c.name).join(', ')}`, { code: 'unknown_category' })
   const q = String(query || '')
@@ -152,27 +218,29 @@ export function searchIcons({ query, limit = 10, style, category, format = 'reac
     : similar.length ? `No exact match for "${q}". The additional results are only loosely related: use one only if it fits, or try a simpler or more general word, or browse a category (list_categories).`
     : browseHint(r.parsed.category)
   return {
-    query, style: useStyle, count: results.length,
+    query, style: useStyle, format: fmt, count: results.length,
     ...(results.length ? {} : { noExactMatch: true }),
     confidence: results.length ? results[0].confidence : null,
     ...(dym ? { didYouMean: dym } : {}),
     ...(hint ? { hint } : {}),
     results: results.map(x => ({
-      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence,
+      name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence,
       reason: `matched ${REASON[x.match.field]} "${x.match.term}"${x.match.typo ? ' (typo-tolerant)' : ''}`,
-      match: x.match,
-      snippet: snippet(x.name, useStyle, format),
+      ...(noCode ? {} : { match: x.match }),
+      // every exact match carries a snippet; format "none" leaves it out (names, titles, reasons and urls only)
+      ...(noCode ? {} : { snippet: snippet(x.name, useStyle, fmt) }),
       url: `${SITE}/icons/${x.name}.html`,
     })),
     // similar icons, clearly apart from the matches and short (no snippet: get_icon returns the code of the one that fits)
     ...(similar.length ? { additional: similar.map(x => ({
-      name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
+      name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence, ...(x.weak ? { weak: true } : {}),
       reason: `matched ${REASON[x.match.field]} "${x.match.term}" (loosely related${x.confidence === 'low' ? ', low confidence' : ''})`,
       url: `${SITE}/icons/${x.name}.html`,
     })) } : {}),
     // a category filter hid stronger matches: name them so the caller can widen the search
-    ...(r.outside && r.outside.length ? { outside: r.outside.map(x => ({ name: x.name, title: x.title, category: x.category, score: x.score, confidence: x.confidence, url: `${SITE}/icons/${x.name}.html` })) } : {}),
-    suggestions: results.length || similar.length ? [] : d.engine.suggest(q, 5),
+    ...(r.outside && r.outside.length ? { outside: r.outside.map(x => ({ name: x.name, title: x.title, category: x.category, ...(noCode ? {} : { score: x.score }), confidence: x.confidence, url: `${SITE}/icons/${x.name}.html` })) } : {}),
+    // names one typo away from the query, above a similarity floor (nearNames); never the engine's padding
+    suggestions: results.length || similar.length ? [] : nearNames(q),
   }
 }
 
@@ -845,13 +913,39 @@ export function stylePalette(style, id) {
     flags: Object.entries(p.colors).map(([r, v]) => `${r}=${v}`).join(',') }
 }
 
-// words -> a festival (holiday styles + icon category) or a use (USES id); every hit counts
+// words -> a festival (holiday styles + icon category) or a use (USES id); every hit counts.
+// `re` finds the festival (and its look: "wedding", "spooky"); `names` are the festival names themselves, what "several
+// festivals named" counts and what a style is said to cover.
 const FESTIVALS = [
-  { re: /\b(diwali|deepavali|dussehra|dasara|navratri|durga|puja|pujo|holi|rakhi|raksha|onam|pongal|lohri|ganesh|ganpati|karva|bhai dooj|chhath|indian (?:festival|festive|wedding)|mehndi|sangeet)\b/i, festival: 'Indian festivals', styles: ['rangoli', 'utsav'], category: 'indian-festivals' },
-  { re: /\b(halloween|spooky|trick or treat|haunted)\b/i, festival: 'Halloween', styles: ['halloween'], category: 'halloween' },
-  { re: /\b(christmas|xmas|x-mas|santa|noel|yuletide|advent|holiday season|winter holidays?)\b/i, festival: 'Christmas and winter', styles: ['christmas'], category: 'christmas' },
-  { re: /\b(lunar new year|chinese new year|spring festival|tet|seollal|year of the|red envelope|hongbao)\b/i, festival: 'Lunar New Year', styles: ['lunar'], category: 'lunar-new-year' },
-  { re: /\b(valentine'?s?|romance|romantic|love|anniversary|wedding|dating|galentine'?s?)\b/i, festival: "Valentine's and love", styles: ['valentine', 'coquette'], category: 'valentines' },
+  { re: /\b(diwali|deepavali|dussehra|dasara|navratri|durga|puja|pujo|holi|rakhi|raksha|onam|pongal|lohri|ganesh|ganpati|karva|bhai dooj|chhath|indian (?:festival|festive|wedding)|mehndi|sangeet)\b/i, names: /\b(diwali|deepavali|dussehra|dasara|navratri|durga pujo?|holi|rakhi|raksha bandhan|onam|pongal|lohri|ganesh chaturthi|karva chauth|bhai dooj|chhath)\b/gi, festival: 'Indian festivals', styles: ['rangoli', 'utsav'], category: 'indian-festivals' },
+  { re: /\b(halloween|spooky|trick or treat|haunted)\b/i, names: /\b(halloween)\b/gi, festival: 'Halloween', styles: ['halloween'], category: 'halloween' },
+  { re: /\b(christmas|xmas|x-mas|santa|noel|yuletide|advent|holiday season|winter holidays?)\b/i, names: /\b(christmas|xmas|x-mas|yuletide)\b/gi, festival: 'Christmas and winter', styles: ['christmas'], category: 'christmas' },
+  { re: /\b(lunar new year|chinese new year|spring festival|tet|seollal|year of the|red envelope|hongbao)\b/i, names: /\b(lunar new year|chinese new year|spring festival|tet|seollal|hongbao)\b/gi, festival: 'Lunar New Year', styles: ['lunar'], category: 'lunar-new-year' },
+  { re: /\b(valentine'?s?|romance|romantic|love|anniversary|wedding|dating|galentine'?s?)\b/i, names: /\b(valentine'?s?|galentine'?s?)\b/gi, festival: "Valentine's and love", styles: ['valentine', 'coquette'], category: 'valentines' },
+]
+// festivals no style is drawn for: named in the text they are counted and said so, never ranked
+const OTHER_FESTIVALS = /\b(eid|ramadan|ramzan|hanukkah|chanukah|easter|thanksgiving|passover|kwanzaa|oktoberfest|mardi gras|st\.? patrick'?s?)\b/gi
+const titleCase = s => s.replace(/(^|[\s-])([a-z])/g, (m, a, b) => a + b.toUpperCase()).replace(/'S\b/g, "'s")
+// the festivals the text names, in the order it names them: [{ name, group: FESTIVALS entry | null }]
+function namedFestivals(q) {
+  const found = [], seen = new Set()
+  const take = (re, group) => { for (const m of q.matchAll(re)) { const k = m[1].toLowerCase().replace(/'s$/, ''); if (!seen.has(k)) { seen.add(k); found.push({ name: titleCase(m[1].toLowerCase()), group, at: m.index }) } } }
+  for (const f of FESTIVALS) take(f.names, f)
+  take(OTHER_FESTIVALS, null)
+  return found.sort((a, b) => a.at - b.at)
+}
+const listOf = xs => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`
+
+// "exact brand colours" / a hex in the text: flat styles first. These keep the colour you give them (the ink, or one
+// flat colour per part); every other style shades it (gradients, glass, soft shadows, materials), so a brand hex lands
+// close but never exact. solid / line / duo are the plain choices; gloss, engrave and sketch are one-ink looks; the last
+// four are flat role-coloured looks with hard shadows only. (A test checks them against the data: no gradients.)
+const FLAT_STYLES = ['solid', 'line', 'duo', 'gloss', 'engrave', 'sketch', 'bauhaus', 'brutal', 'retro', 'pixel']
+const EXACT_COLOUR = [
+  /\b(?:exact(?:ly)?|precise(?:ly)?|accurate(?:ly)?|specific)\b.{0,30}\b(?:colou?rs?|hex|palette|pantone|swatch(?:es)?|shades?)\b/i,
+  /\b(?:brand|company|corporate|official|house)\s+(?:colou?rs?|palette|hex|swatch(?:es)?|guidelines?|pantone)\b/i,
+  /\bhex\s+(?:codes?|values?|colou?rs?)\b|#[0-9a-f]{6}\b|\bpantone\b/i,
+  /\bmatch(?:es|ing)?\s+(?:our|the|my|their|your)\s+(?:brand|colou?rs?|palette|logo)/i,
 ]
 const USE_WORDS = [
   ['festive', /\b(festival|festive|seasonal|holiday|celebration|greeting card)\b/i],
@@ -878,10 +972,14 @@ const LOOK_WORDS = [
 const AVATAR_RE = /\b(avatars?|profile (?:pic(?:ture)?|photo|image)s?|people|persons?|team members?|user picker|characters?)\b/i
 /**
  * Best styles for a job. opts: { for: free text ("Diwali sale banner", "avatar picker for a kids app"), use: a USES id,
- * icon: the icon the snippets show (default home), limit }. Returns the matched uses and festivals, ranked styles with
- * how to get each, festival categories, avatar advice, Duo presets and holiday palettes where they apply.
+ * icon: the icon the snippets show (default home), limit, compact }. Returns the matched uses and festivals, ranked styles
+ * with how to get each, festival categories, avatar advice, Duo presets and holiday palettes where they apply.
+ *   - several festivals named: styles rank by how many of them each covers, and a note says who covers what
+ *   - "exact brand colours" (or a hex) in the text: flat styles first, every entry says exactColours true / false
+ *   - compact: per style only the name, group, what it suits and the React / <with-icon> snippets (no palettes, packages,
+ *     presets or downloads), and shorter notes
  */
-export function recommendStyles({ for: text = '', use, icon, limit = 6 } = {}) {
+export function recommendStyles({ for: text = '', use, icon, limit = 6, compact = false } = {}) {
   const uses = styleUses()
   const q = String(text || '')
   const hits = [], festivals = [], scores = new Map()
@@ -892,6 +990,14 @@ export function recommendStyles({ for: text = '', use, icon, limit = 6 } = {}) {
     hits.push(u)
   }
   for (const f of FESTIVALS) if (f.re.test(q)) { festivals.push(f); f.styles.forEach((s, i) => add(s, 12 - i * 2)) }
+  // the festivals the text names, and which of them each festival style covers
+  const named = namedFestivals(q)
+  const coverage = new Map()
+  for (const n of named) if (n.group) for (const s of live(n.group.styles)) coverage.set(s, [...(coverage.get(s) || []), n.name])
+  const several = named.length >= 2
+  const others = named.filter(n => !n.group).map(n => n.name)
+  // a festival no style is drawn for, or several festivals: a neutral style recoloured per festival is the way out
+  if (others.length || several) add('solid', 3)
   // a use named by more words weighs more ("premium fintech pricing page": premium + fintech beat pricing); an explicit use leads
   const found = []
   for (const [id, re] of USE_WORDS) {
@@ -905,40 +1011,91 @@ export function recommendStyles({ for: text = '', use, icon, limit = 6 } = {}) {
   const avatars = AVATAR_RE.test(q) || /^avatar-/.test(name || '')
   if (avatars) ['plush', 'kawaii', 'clay', 'pastel', 'duo'].forEach((s, i) => add(s, 5 - i * 0.5))
   // style names and their "good for" words in the text ("isometric", "neo-brutalism", "clay")
-  const lower = q.toLowerCase()
+  const lower = q.toLowerCase(), asked = new Set()   // asked: styles the text names or describes
   for (const s of data().styleNames) {
     const g = (GUIDE.styles || {})[s] || {}
-    if (new RegExp(`\\b${s}\\b`).test(lower)) add(s, 9)
+    if (new RegExp(`\\b${s}\\b`).test(lower)) { add(s, 9); asked.add(s) }
     const words = [...new Set(`${g.good || ''} ${g.who || ''}`.toLowerCase().split(/[^a-z]+/).filter(w => w.length > 3))]
     const n = words.filter(w => new RegExp(`\\b${w}s?\\b`).test(lower)).length
     if (n) add(s, Math.min(2, n * 0.5))
   }
-  for (const [re, st] of LOOK_WORDS) if (re.test(q)) add(st, 7)
+  for (const [re, st] of LOOK_WORDS) if (re.test(q)) { add(st, 7); asked.add(st) }
+  // exact brand colours: the plain flat styles are always candidates
+  const exact = EXACT_COLOUR.some(re => re.test(q))
+  if (exact) { add('solid', 12); add('line', 11.5); add('duo', 10) }
   const matched = scores.size > 0
   // drop stray weak matches (a single "good for" word) when the text clearly named a job
   const top = Math.max(0, ...scores.values())
-  const ranked = [...scores.entries()].filter(([, v]) => top < 5 || v >= 1.5).sort((a, b) => b[1] - a[1]).map(([s]) => s)
-  const recommendations = ranked.slice(0, Math.max(1, Math.min(12, +limit || 6))).map(s => ({ ...styleInfo(s, name || 'home'), ...(name ? { page: `${SITE}/icons/${name}.html` } : {}) }))
+  let ranked = [...scores.entries()].filter(([, v]) => top < 5 || v >= 1.5).sort((a, b) => b[1] - a[1]).map(([s]) => s)
+  // several festivals: the style that covers most of them first, then by score ("christmas" named in the text must not
+  // outrank the styles that cover two of the four festivals)
+  if (several) { const cov = s => (coverage.get(s) || []).length; ranked = ranked.map((s, i) => [s, i]).sort((a, b) => cov(b[0]) - cov(a[0]) || a[1] - b[1]).map(x => x[0]) }
+  // exact colours: a flat style the text asked for, then solid and line (the plain ones), then the other flat styles, then
+  // the shaded ones; each group keeps its order
+  if (exact) {
+    const tier = s => FLAT_STYLES.includes(s) ? (asked.has(s) ? 0 : s === 'solid' || s === 'line' ? 1 : 2) : 3
+    ranked = ranked.map((s, i) => [s, i]).sort((a, b) => tier(a[0]) - tier(b[0]) || a[1] - b[1]).map(x => x[0])
+  }
+  const full = ranked.slice(0, Math.max(1, Math.min(12, +limit || 6))).map(s => ({ ...styleInfo(s, name || 'home'), ...(name ? { page: `${SITE}/icons/${name}.html` } : {}), ...(exact ? { exactColours: FLAT_STYLES.includes(s) } : {}) }))
+  // how to apply a style palette is the same for every style: once, at the top
+  const paletteHow = full.some(r => r.stylePalettes) ? 'Style palettes: pass colors: { c1: "#hex", ... } to get_icon / export_icon (CLI: --colors "c1=#…,c2=#…"), or set --with-<style>-<role> on a parent.' : null
+  for (const r of full) { delete r.stylePalettesHow; if (!r.motion3d) delete r.motion3d }
+  const recommendations = compact
+    ? full.map(r => ({ style: r.style, group: r.group, suits: r.goodFor || r.looks || '', react: r.react, webComponent: r.webComponent, ...('exactColours' in r ? { exactColours: r.exactColours } : {}) }))
+    : full
   const notes = []
-  if (festivals.length) notes.push(`Festival icons: list_categories(category: "${festivals[0].category}"), or search_icons for the object; everyday icons (shopping-bag, gift, tag, calendar) render in the holiday styles too. Holiday styles carry festival palettes (stylePalettes on each style): set their CSS variables on a parent, e.g. ${stylePaletteHint(recommendations)}.`)
-  if (avatars) notes.push('Avatars: list_categories(category: "avatars") (people, animals, friendly monsters, all avatar-*). People avatars have true-to-life palettes for many skin tones and hair colours: list_palettes(name: "avatar-woman", tag: "true-to-life") and let users choose; never one default skin tone.')
-  if (recommendations.some(r => r.style === 'duo')) notes.push('Duo presets (on the duo entry): "Duo with an accent" works in every package via CSS variables; "Duo gradient" is site and studio only.')
-  if (recommendations.some(r => r.motion3d)) notes.push('3D styles animate in 3D: animate_icon(name, style: "<3D style>") adds wm-3d (and soft3d returns 3-5 moves); <with-icon variant="…" motion="loop"> does it by itself.')
-  notes.push('One style per page or UI region; only line, solid and duo belong in 16-24px controls. A whole style as files: each style\'s zip.')
+  if (festivals.length) {
+    notes.push(compact
+      ? `Festival icons: list_categories(category: "${festivals[0].category}"). Holiday styles carry festival palettes: recommend_styles without compact lists them.`
+      : `Festival icons: list_categories(category: "${festivals[0].category}"), or search_icons for the object; everyday icons (shopping-bag, gift, tag, calendar) render in the holiday styles too. Holiday styles carry festival palettes (stylePalettes on each style): set their CSS variables on a parent, e.g. ${stylePaletteHint(full)}.`)
+  }
+  if (several || others.length) {
+    const shown = new Set(full.map(r => r.style))
+    const byCover = new Map()
+    for (const s of ranked) { const c = (coverage.get(s) || []); if (c.length && shown.has(s)) byCover.set(c.join('|'), [...(byCover.get(c.join('|')) || []), s]) }
+    const clauses = [...byCover].map(([k, ss]) => `${listOf(ss)} ${ss.length > 1 ? 'cover' : 'covers'} ${listOf(k.split('|'))}`)
+    const eidPal = others.some(o => /^eid$/i.test(o)) && ((GUIDE.stylePalettes || {}).rangoli || []).some(p => p.id === 'eid-jewels') ? ' rangoli has an eid-jewels palette (jewel tones) you can borrow for Eid.' : ''
+    const gap = others.length ? `no dedicated style for ${listOf(others)}` : ''
+    if (several) notes.push(`Several festivals named (${listOf(named.map(n => n.name))}): ${[...clauses, gap].filter(Boolean).join('; ')}. Use one festival style per festival (each campaign in its own style), or one neutral style across all of them (solid, line or duo, one ink colour per festival).${eidPal}`)
+    else notes.push(`There is no dedicated style for ${listOf(others)}: use a neutral one (solid, line or duo) and set the colours yourself.${eidPal}`)
+  }
+  if (exact) {
+    const shaded = full.filter(r => !FLAT_STYLES.includes(r.style)).map(r => r.style)
+    notes.push(compact
+      ? `Exact brand colours: gradient and shadow styles (${shaded.join(', ') || 'clay, suite, soft3d ...'}) cannot match a hex exactly; solid and line keep it (color: "#hex").`
+      : `Exact brand colours: gradient and shadow styles (${shaded.join(', ') || 'clay, suite, bento, dock, soft3d ...'}) shade the colour you give them, so a brand hex lands close but never exact (exactColours: false). Flat styles keep it: solid and line draw in one ink (get_icon color: "#hex", export_icon colors: { ink: "#hex" }), duo adds a tint of the same hex, and bauhaus, brutal, retro and pixel colour each part with one flat role colour (colors: { c1: "#hex", ... }).`)
+  }
+  if (avatars) notes.push(compact
+    ? 'Avatars: list_categories(category: "avatars"); true-to-life skin-tone palettes (list_palettes tag "true-to-life"): let users choose, never one default skin tone.'
+    : 'Avatars: list_categories(category: "avatars") (people, animals, friendly monsters, all avatar-*). People avatars have true-to-life palettes for many skin tones and hair colours: list_palettes(name: "avatar-woman", tag: "true-to-life") and let users choose; never one default skin tone.')
+  if (!compact) {
+    const more = []
+    if (full.some(r => r.style === 'duo')) more.push('duo presets sit on the duo entry (the accent one works in every package, the gradient one is site and studio only)')
+    if (full.some(r => r.motion3d)) more.push('3D styles animate in 3D (animate_icon with style)')
+    notes.push(`One style per page or UI region; only line, solid and duo belong in 16-24px controls${more.length ? '; ' + more.join('; ') : ''}.`)
+  }
+  const festivalList = (festivals.length ? festivals : FESTIVALS).map(f => {
+    const n = named.filter(x => x.group === f).map(x => x.name)
+    return { festival: f.festival, styles: live(f.styles), category: f.category, ...(n.length ? { named: n } : {}) }
+  })
   return {
     query: q || null, matched,
     uses: hits.map(u => ({ id: u.id, title: u.title, styles: u.styles })),
     // a festival named in the text: that one; "festive" in general (use festive, or festival / seasonal words): every festival's style
-    ...((festivals.length || hits.some(u => u.id === 'festive')) ? { festivals: (festivals.length ? festivals : FESTIVALS).map(f => ({ festival: f.festival, styles: live(f.styles), category: f.category })) } : {}),
+    ...((festivals.length || hits.some(u => u.id === 'festive')) ? { festivals: festivalList } : {}),
+    ...(others.length ? { otherFestivals: others } : {}),
     ...(avatars ? { avatars: { category: 'avatars', paletteTag: 'true-to-life' } } : {}),
     recommendations,
-    ...(matched ? {} : { hint: 'Nothing in the text named a job, so here is every use: pass use (one of the ids) or describe what you are making.', allUses: uses, groups: styleGroups() }),
+    ...(paletteHow && !compact ? { stylePalettesHow: paletteHow } : {}),
+    ...(matched ? {} : { hint: 'Nothing in the text named a job, so here is every use: pass use (one of the ids) or describe what you are making.',
+      allUses: compact ? uses.map(u => ({ id: u.id, title: u.title })) : uses, ...(compact ? {} : { groups: styleGroups() }) }),
     notes,
-    downloads: GUIDE.downloads || { style: `${SITE}/downloads/with-icons-<style>.zip`, all: `${SITE}/downloads/with-icons-all.zip` },
+    ...(compact ? {} : { downloads: GUIDE.downloads || { style: `${SITE}/downloads/with-icons-<style>.zip`, all: `${SITE}/downloads/with-icons-all.zip` } }),
   }
 }
 function stylePaletteHint(recs) {
   const r = recs.find(x => x.stylePalettes && x.stylePalettes.length > 1)
   if (!r) return 'see stylePalettes'
-  try { return `.campaign { ${stylePalette(r.style, r.stylePalettes[1].id).css} }` } catch { return 'see stylePalettes' }
+  const c = r.stylePalettes[1].colors   // one example is enough: every palette's colours are in stylePalettes
+  return `.campaign { --with-${r.style}-c1: ${c.c1}; --with-${r.style}-c2: ${c.c2}; --with-${r.style}-accent: ${c.accent}; ... }`
 }

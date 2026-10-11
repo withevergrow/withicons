@@ -151,7 +151,7 @@ Options
   --limit, -n <n>           max results (default 10)
   --category, -c <name>     only this category (withicons categories)
   --style, -s <style>       style for the suggested command: ${st}
-  --format, -f <format>     snippet format in --json (default react)
+  --format, -f <format>     snippet format in --json (default react); none = names only, no snippet
   --json                    machine-readable output
 Exit codes: 0 found, 1 nothing found, 2 usage error
 

@@ -32,7 +32,9 @@ const fail = e => {
   if (e instanceof IconError) { const { message, name, stack, ...rest } = e; return { isError: true, content: [{ type: 'text', text: JSON.stringify({ error: e.message, ...rest }) }] } }
   return { isError: true, content: [{ type: 'text', text: `Error: ${e && e.message ? e.message : String(e)}` }] }
 }
-// search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent)
+// search_icons as text: one line per icon and the top icon's snippet (snippets and urls of all are in structuredContent).
+// The rule for code, in every format: each exact match carries a snippet in structuredContent, this text shows the first
+// result's only, additional and outside results never carry any; format "none" leaves the code out of both.
 export function searchSummary(r) {
   // similar icons, kept apart from the matches: never mistaken for what the query names
   const extra = r.additional && r.additional.length
@@ -44,7 +46,8 @@ export function searchSummary(r) {
   const lines = [`${r.count} icon${r.count === 1 ? '' : 's'} for "${r.query}"${r.didYouMean ? ` (showing results for "${r.didYouMean}")` : ''}, style ${r.style}:`]
   r.results.forEach((x, i) => lines.push(`${i + 1}. ${x.name} (${x.category}): ${x.reason}`))
   lines.push(...extra)
-  lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
+  if (r.results[0].snippet === undefined) lines.push('', 'No code in this answer (format: none). get_icon(name, style, format) returns any of them as code; structuredContent has every page url.')
+  else lines.push('', `${r.results[0].name}:`, r.results[0].snippet, '', 'get_icon(name, style, format) returns any of them as code; structuredContent has every snippet and page url.')
   return lines.join("\n")
 }
 const safe = fn => async args => { try { return await fn(args || {}) } catch (e) { return fail(e) } }
@@ -60,13 +63,14 @@ export function createServer(opts = {}) {
 
   server.registerTool('search_icons', {
     title: 'Search icons',
-    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked exact matches (icon names, why each matched, a ready-to-paste snippet); didYouMean when the query was spell-corrected. When no icon carries the words it says noExactMatch and lists a few similar icons under additional (loosely related, no snippet): use one only if it fits, otherwise try a simpler word or browse a category. A hint says where to browse when nothing is close.',
+    description: 'Find icons by meaning. Understands plain English, synonyms, plurals, phrases and typos ("trash can", "throw away", "settigns", "money"). Returns ranked exact matches (icon name, title, category, confidence, why it matched, page url and a ready-to-paste snippet); didYouMean when the query was spell-corrected. When no icon carries the words it says noExactMatch and lists a few similar icons under additional (loosely related, never with a snippet): use one only if it fits, otherwise try a simpler word or browse a category. A hint says where to browse when nothing is close; suggestions (names a typo away) appear only when a name really is close. ' +
+      'Snippets: every exact match carries one in structuredContent (in the format you ask for, default react) and the text shows the first one only; format "none" returns names only, with no snippet in either, so pick a name here and call get_icon for the code (use it for lists, comparisons and long queries; svg snippets are large).',
     inputSchema: {
       query: z.string().min(1).describe('What the icon should show, in plain words'),
       limit: z.number().int().min(1).max(100).optional().describe('Max results (default 10)'),
       style: z.enum(styleNames).optional().describe('Style for the snippet (default line)'),
       category: z.enum(categoryNames).optional().describe('Only icons in this category'),
-      format: z.enum(FORMATS).optional().describe('Snippet format (default react)'),
+      format: z.enum([...FORMATS, 'none']).optional().describe('Snippet format (default react), or "none" for names only: no snippet in the result or the text'),
     },
     annotations: { title: 'Search icons', ...ro },
   }, safe(a => { const r = searchIcons(a); return json(r, searchSummary(r)) }))
@@ -107,12 +111,16 @@ export function createServer(opts = {}) {
     description: 'Which style(s) to use for a job. for: plain words about what you are making ("Diwali sale banner", "avatar picker for a kids app", "animated 3D icons for an AI landing page", "admin dashboard", "Christmas email"); or use: one of the "What are you making?" ids from withicons.com. ' +
       'Ranks by your own words: a festival named in for wins ("Halloween party app" -> halloween, "Christmas email" -> christmas, "Diwali sale" -> rangoli, utsav), then the job (AI, SaaS, kids, print ...) and look words (isometric, claymorphism, neo-brutalism); use: "festive" lists every festival with its style. ' +
       'Returns ranked styles, each with its group, what it is good for, the React import, <with-icon> and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes and Duo presets; plus festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. ' +
+      'Several festivals named ("Diwali, Eid, Holi and Christmas"): styles rank by how many of them each covers, and a note says which style covers which festival (and that Eid has none): use a festival style per festival, or one neutral style across them. ' +
+      '"Exact brand colours", a brand palette or a hex in for: flat styles (solid, line, duo ...) rank first, each entry says exactColours true or false, and a note says gradient and shadow styles cannot match a hex exactly. ' +
+      'compact: true returns per style only the name, group, what it suits and the React and <with-icon> snippets (no palettes, packages, presets or downloads; about a third of the size). ' +
       'Then search_icons / get_icon(name, style) for the icons themselves.',
     inputSchema: {
       for: z.string().max(300).optional().describe('What you are making, in plain words'),
       use: z.enum(styleUses().map(u => u.id).length ? styleUses().map(u => u.id) : ['app']).optional().describe('A job id: ' + styleUses().map(u => `${u.id} (${u.title})`).join(', ')),
       icon: z.string().max(60).optional().describe('Icon the snippets show (default home), e.g. "diya" or "avatar-woman"'),
       limit: z.number().int().min(1).max(12).optional().describe('Max styles (default 6)'),
+      compact: z.boolean().optional().describe('Short answer: per style only name, group, what it suits and the React and <with-icon> snippets, with no palette lists, packages, presets or downloads (default false)'),
     },
     annotations: { title: 'Recommend styles', ...ro },
   }, safe(a => json(recommendStyles(a))))
