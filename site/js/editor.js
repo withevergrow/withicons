@@ -2693,7 +2693,22 @@
       }
       var FAM = { png: 'img', webp: 'img', jpg: 'img', avif: 'img', 'png-set': 'img', pptx: 'doc', 'pptx-sheet': 'doc', 'pptx-animated': 'doc', docx: 'doc', pdf: 'doc', eps: 'doc', 'svg-flat': 'vec', svg: 'vec',
         ico: 'app', 'favicon-pack': 'app', android: 'app', ios: 'app', lottie: 'mo', dotlottie: 'mo', gif: 'mo', apng: 'mo', 'webp-animated': 'mo', webm: 'mo', mp4: 'mo', 'animated-svg': 'mo', 'png-sequence': 'mo' }
+      // { pick: true } (the library drawer): pick, then download. The formats are a radio list with a check on the chosen
+      // one, the Download button sits right under them and names the choice ("Download PNG · 256 px"), the "more formats"
+      // fold is one slim row between them, and a double-click on a format downloads it at once. The preview and Options
+      // sit beside (wide) or below (narrow). Every other host keeps the original layout.
+      var PK = !!po.pick
+      var G_SHORT = { slides: 'Slides & docs', design: 'Design', web: 'Web & apps', animated: 'Animated' }
       function shell() {
+        var hintHtml = '<p class="wdl-hint" id="' + id + '-fh"><span class="wdl-hint-n" aria-hidden="true">1</span>Pick a format<span class="wdl-hint-sep"><span class="visually-hidden">, then </span></span><span class="wdl-hint-n" aria-hidden="true">2</span>Download</p>'
+        var goHtml = '<div class="wdl-qual" data-dl-qual hidden></div>' +
+          '<div class="wdl-go">' +
+            '<button type="button" class="wdl-dl" data-dl-go' + (PK ? ' aria-describedby="' + id + '-sum"' : '') + '><span class="wdl-dl-i">' + G.down + '<i class="wdl-spin" aria-hidden="true"></i></span><span class="wdl-dl-t"><b data-dl-gol>Download</b><small id="' + id + '-sum" data-dl-sum></small></span><span class="wdl-bar" aria-hidden="true"></span></button>' +
+            '<button type="button" class="wdl-copy" data-dl-copy hidden>' + G.copy + '<span>Copy</span></button>' +
+          '</div>' +
+          '<p class="wdl-warn" data-dl-warn hidden></p>' +
+          '<p class="wdl-status" role="status" aria-live="polite" data-dl-status></p>' +
+          '<div class="wdl-err" role="alert" data-dl-err hidden></div>'
         var q = po.quick === false ? '' :
           '<div class="wdl-quick" role="group" aria-label="Quick downloads">' +
             '<button type="button" class="wdl-q is-copy" data-dlq="copy">' + G.copy + '<span><b>Copy image</b><small>paste into Slides, Docs, Notion</small></span></button>' +
@@ -2701,28 +2716,26 @@
               return '<button type="button" class="wdl-q" data-dlq="' + x[0] + '"><span class="wdl-badge is-' + x[3] + '" aria-hidden="true">' + (x[0] === 'pptx' ? 'PPTX' : x[1]) + '</span><span><b>' + x[1] + '</b><small data-dlq-l="' + x[0] + '">' + x[2] + '</small></span><i class="wdl-spin" aria-hidden="true"></i></button>'
             }).join('') +
           '</div>'
-        return '<section class="wdl' + (po.quick === false ? ' no-quick' : '') + '"' + (po.anchor ? ' id="' + esc(po.anchor) + '"' : '') + ' aria-labelledby="' + id + '-h">' +
+        return '<section class="wdl' + (po.quick === false ? ' no-quick' : '') + (PK ? ' is-pick' : '') + '"' + (po.anchor ? ' id="' + esc(po.anchor) + '"' : '') + ' aria-labelledby="' + id + '-h">' +
           '<div class="wdl-top"><h3 class="wdl-h" id="' + id + '-h">' + esc(po.title || 'Download') + '</h3><p class="wdl-sub">Any format, in your style and colours. <span class="wdl-chk" aria-hidden="true"></span>See-through background unless you pick one.</p></div>' + q +
-          '<div class="wdl-groups" role="tablist" aria-label="Formats, by what you need them for">' + DL_GROUPS.map(function (g) {
+          '<div class="wdl-groups" role="tablist" aria-label="Formats, by what you need them for">' + (PK ? '<span class="wdl-g-ink" aria-hidden="true"></span>' : '') + DL_GROUPS.map(function (g) {
+            // pick layout: a segmented control. One short line under the same outline icon in every state; the full name
+            // is the tab's accessible name and tooltip; a sliding indicator (transform only) marks the chosen one
+            if (PK) return '<button type="button" role="tab" class="wdl-g" id="' + id + '-g-' + g.id + '" data-dlg="' + g.id + '" aria-controls="' + id + '-p" aria-selected="false" tabindex="-1" aria-label="' + esc(g.title) + '" title="' + esc(g.title + ': ' + g.say) + '">' +
+              '<span class="wdl-g-i" aria-hidden="true">' + GI[g.id] + '</span><span class="wdl-g-l" aria-hidden="true">' + esc(G_SHORT[g.id] || g.title) + '</span></button>'
             return '<button type="button" role="tab" class="wdl-g" id="' + id + '-g-' + g.id + '" data-dlg="' + g.id + '" aria-controls="' + id + '-p" aria-selected="false" tabindex="-1">' +
               '<span class="wdl-g-i">' + GI[g.id] + '</span><span class="wdl-g-t"><b>' + (g.id === 'animated' ? esc(g.title) : '<span class="wdl-for">For ' + esc(g.title.charAt(0).toLowerCase() + g.title.slice(1)) + '</span><span class="wdl-short">' + esc(g.title) + '</span>') + '</b><small>' + esc(g.say) + '</small></span></button>'
           }).join('') + '</div>' +
           '<div class="wdl-body" role="tabpanel" id="' + id + '-p" data-dl-body>' +
             '<p class="wdl-gsay" data-dl-gsay></p>' +
-            '<div class="wdl-fcol"><div class="wdl-fmts" id="' + id + '-f" role="radiogroup" aria-label="Format" data-dl-fmts></div></div>' +
+            (PK ? '<div class="wdl-fcol">' + hintHtml + '<div class="wdl-fmts" id="' + id + '-f" role="radiogroup" aria-label="Format" aria-describedby="' + id + '-fh" data-dl-fmts></div>' + goHtml + '</div>'
+              : '<div class="wdl-fcol"><div class="wdl-fmts" id="' + id + '-f" role="radiogroup" aria-label="Format" data-dl-fmts></div></div>') +
             '<div class="wdl-side">' +
               '<div class="wdl-prev"><div class="wdl-box" role="img" data-dl-box><span class="wdl-art" data-dl-art></span></div>' +
                 '<div class="wdl-about"><p class="wdl-name"><span class="wdl-badge" data-dl-badge aria-hidden="true"></span><b data-dl-name></b></p><p class="wdl-note" data-dl-note></p><p class="wdl-aud" data-dl-aud></p></div></div>' +
               '<button type="button" class="wdl-adj" data-dl-adj aria-expanded="false" aria-controls="' + id + '-opts"><span class="wdl-adj-i" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="wdl-adj-t"><b>Options</b><small data-dl-adjsum></small></span><span class="wdl-adj-x" aria-hidden="true"></span></button>' +
               '<div class="wdl-opts" id="' + id + '-opts" data-dl-opts></div>' +
-              '<div class="wdl-qual" data-dl-qual hidden></div>' +
-              '<div class="wdl-go">' +
-                '<button type="button" class="wdl-dl" data-dl-go><span class="wdl-dl-i">' + G.down + '<i class="wdl-spin" aria-hidden="true"></i></span><span class="wdl-dl-t"><b data-dl-gol>Download</b><small id="' + id + '-sum" data-dl-sum></small></span><span class="wdl-bar" aria-hidden="true"></span></button>' +
-                '<button type="button" class="wdl-copy" data-dl-copy hidden>' + G.copy + '<span>Copy</span></button>' +
-              '</div>' +
-              '<p class="wdl-warn" data-dl-warn hidden></p>' +
-              '<p class="wdl-status" role="status" aria-live="polite" data-dl-status></p>' +
-              '<div class="wdl-err" role="alert" data-dl-err hidden></div>' +
+              (PK ? '' : goHtml) +
             '</div>' +
           '</div>' +
         '</section>'
@@ -2732,9 +2745,11 @@
       var sec = $('.wdl', el)
       function fmtBtn(f) {
         var d = DL_FMT[f] || [f, '', f.toUpperCase()], ok = avail(f)
-        return '<button type="button" role="radio" class="wdl-f' + (ok ? '' : ' is-na') + '" data-dlf="' + f + '" aria-checked="false" tabindex="-1">' +
+        return '<button type="button" role="radio" class="wdl-f' + (ok ? '' : ' is-na') + '" data-dlf="' + f + '" aria-checked="false" tabindex="-1"' + (PK && ok ? ' title="' + esc(d[0]) + ': pick it, then press Download (or double-click to download now)"' : '') + '>' +
           '<span class="wdl-badge is-' + (isCode(f) ? 'code' : FAM[f] || 'img') + '" aria-hidden="true">' + d[2] + '</span>' +
-          '<span class="wdl-f-t"><b>' + esc(d[0]) + '</b><small>' + esc(ok ? d[1] : 'Not in this browser') + '</small></span></button>'
+          '<span class="wdl-f-t"><b>' + esc(d[0]) + '</b><small>' + esc(ok ? d[1] : 'Not in this browser') + '</small></span>' +
+          // a choice, not a download: the round mark fills with a check on the one picked
+          (PK ? '<span class="wdl-f-r" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5.5 12.5l4.2 4.2L18.5 8"/></svg></span>' : '') + '</button>'
       }
       function seg(name, label, items, value, cls) {
         var lid = id + '-o-' + name
@@ -2799,8 +2814,19 @@
         if (z.x2 && P.x2) return (v * 2) + ' × ' + (v * 2) + ' px (@2x)'
         return v + ' × ' + v + ' ' + z.unit
       }
+      // pick layout: the size in the button's own label, "Download PNG · 256 px" (the line under it says the rest)
+      function shortSize(f) {
+        var k = kind(f), z = k && DL_SIZE[k]
+        if (!PK || !z || f === 'ico' || f === 'favicon-pack' || /^pptx/.test(f)) return ''
+        var v = sizeVal(k)
+        if (z.unit === 'in') return v + ' in'
+        if (z.x2 && P.x2) return (v * 2) + ' px'
+        return v + ' ' + z.unit
+      }
+      function goLabel(f) { var ss = avail(f) ? shortSize(f) : ''; return 'Download ' + (DL_FMT[f] ? DL_FMT[f][0] : f) + (ss ? ' · ' + ss : '') }
       function summary(f) {
-        var parts = [], s = sizeTxt(f), bm = bgMode(f), bg = bm ? bgHex(f) : null
+        var st = sizeTxt(f), s = !shortSize(f) ? st : kind(f) === 'set' ? '@1x to @4x' : /@2x/.test(st) ? 'for sharp screens (@2x)' : ''
+        var parts = [], bm = bgMode(f), bg = bm ? bgHex(f) : null
         if (s) parts.push(s)
         if (bm) parts.push(bg ? (bgVal(f) === 'white' ? 'on white' : bgVal(f) === 'page' ? 'on the page colour' : 'on ' + bg) : bm === 'matte' ? 'see-through, edges on ' + (P.matte === 'custom' ? P.matteHex : P.matte === 'page' ? 'the page colour' : P.matte) : 'see-through')
         if (moving(f) && motionPick(f) !== 'still') { var sec2 = loopSecs(f); if (sec2) parts.push(sec2 + ' s loop') }
@@ -2832,6 +2858,7 @@
       function paintGroups() {
         $$('[data-dlg]', sec).forEach(function (b) { var on = b.getAttribute('data-dlg') === P.group; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
         $('[data-dl-body]', sec).setAttribute('aria-labelledby', id + '-g-' + P.group)
+        if (PK) { var gi = 0; DL_GROUPS.forEach(function (g, i) { if (g.id === P.group) gi = i }); $('.wdl-groups', sec).style.setProperty('--wdl-gi', gi) }
         $('[data-dl-gsay]', sec).textContent = groupOf(P.group).use
       }
       function update() {
@@ -2849,11 +2876,11 @@
           var extra = rest.concat(g.code || [])
           if (extra.length && !mb) {
             mb = D.createElement('button'); mb.type = 'button'; mb.className = 'wdl-more'; mb.setAttribute('data-dl-more', ''); mb.setAttribute('aria-expanded', 'false'); mb.setAttribute('aria-controls', id + '-f')
-            box.parentNode.appendChild(mb)
+            if (PK) box.insertAdjacentElement('afterend', mb); else box.parentNode.appendChild(mb)
           } else if (!extra.length && mb) mb.remove()
           if (mb) {
             var nm = rest.map(function (x) { return DL_FMT[x] ? DL_FMT[x][0] : x }).concat(g.code ? ['code files'] : [])
-            mb.innerHTML = '<span class="wdl-more-i" aria-hidden="true">+</span><span><b data-dl-morel></b><small>' + esc(nm.length > 3 ? nm.slice(0, 3).join(' · ') + ' + ' + (nm.length - 3) + ' more' : nm.join(' · ')) + '</small></span>'
+            mb.innerHTML = '<span class="wdl-more-i" aria-hidden="true">+</span><span' + (PK ? ' class="wdl-more-t"' : '') + '><b data-dl-morel></b><small>' + esc(nm.length > 3 ? nm.slice(0, 3).join(' · ') + ' + ' + (nm.length - 3) + ' more' : nm.join(' · ')) + '</small></span>'
             mb._n = extra.length
           }
         }
@@ -2918,8 +2945,8 @@
         if (ak !== P.akey) { P.akey = ak; var art = $('[data-dl-art]', sec); art.innerHTML = ah; prepareDraw(art); prepareSwaps(art) }
         boxEl.setAttribute('aria-label', 'Preview: ' + (P.which === 'b' && !moving(f) && swapOn() ? swapTarget().title : I.title) + ', ' + (bg ? 'on ' + bg : 'see-through background'))
         // the big button
-        $('[data-dl-gol]', sec).textContent = P.busy ? $('[data-dl-gol]', sec).textContent : 'Download ' + dd[0]
-        if (!P.busy) $('[data-dl-sum]', sec).textContent = ok ? summary(f) : 'Not available in ' + (browserName() === 'This browser' ? 'this browser' : browserName())
+        $('[data-dl-gol]', sec).textContent = P.busy ? $('[data-dl-gol]', sec).textContent : goLabel(f)
+        if (!P.busy) $('[data-dl-sum]', sec).textContent = ok ? (summary(f) || (PK ? dd[1] : '')) : 'Not available in ' + (browserName() === 'This browser' ? 'this browser' : browserName())
         var go = $('[data-dl-go]', sec)
         go.disabled = !ok
         var cp = $('[data-dl-copy]', sec), copyable = ok && (f === 'png' || f === 'svg-flat' || f === 'svg' || isCode(f) || f === 'animated-svg' || f === 'lottie' || f === 'android')
@@ -3072,7 +3099,12 @@
         var b = e.target.closest('button'); if (!b || !sec.contains(b)) return
         var v
         if ((v = b.getAttribute('data-dlg'))) { P.group = v; P.more = false; save(); update() }
-        else if ((v = b.getAttribute('data-dlf'))) { P.pick[P.group] = v; save(); err(''); status('', ''); update() }
+        else if ((v = b.getAttribute('data-dlf'))) {
+          P.pick[P.group] = v; save(); err(''); status('', ''); update()
+          // pick layout: the next step is the button under the list; 'nearest' leaves it alone while it is in view
+          var go1 = PK && e.detail === 1 && $('[data-dl-go]', sec)
+          if (go1 && go1.scrollIntoView) go1.scrollIntoView({ block: 'nearest', behavior: reducedMq.matches ? 'auto' : 'smooth' })
+        }
         else if ((v = b.getAttribute('data-dl-o'))) { if (!b.disabled) pick(v, b.getAttribute('data-v')) }
         else if (b.hasAttribute('data-dl-x2')) { P.x2 = !P.x2; save(); update() }
         else if (b.hasAttribute('data-dl-more')) {
@@ -3122,12 +3154,22 @@
         var k = t.getAttribute('data-dl-num'), z = DL_SIZE[k], v = +t.value
         if (!(v >= z.min && v <= z.max)) { if (commit) { t.value = sizeVal(k) } return }
         P.size[k] = z.unit === 'in' ? Math.round(v * 4) / 4 : Math.round(v); save()
-        if (commit) update(); else $('[data-dl-sum]', sec).textContent = summary(cur())
+        if (commit) update()
+        else { $('[data-dl-sum]', sec).textContent = summary(cur()); if (PK && !P.busy) $('[data-dl-gol]', sec).textContent = goLabel(cur()) }
       }
       function onInput(e) { var t = e.target; if (t.hasAttribute('data-dl-pick')) hexIn(t, false); else if (t.hasAttribute('data-dl-hex') && t.value.replace('#', '').length >= 6) hexIn(t, false); else if (t.hasAttribute('data-dl-num')) numIn(t, false) }
       function onChange(e) { var t = e.target; if (t.hasAttribute('data-dl-pick') || t.hasAttribute('data-dl-hex')) hexIn(t, true); else if (t.hasAttribute('data-dl-num')) numIn(t, true) }
       function onKeyField(e) { var t = e.target; if (e.key === 'Enter' && t.tagName === 'INPUT' && (t.hasAttribute('data-dl-hex') || t.hasAttribute('data-dl-num'))) { e.preventDefault(); onChange(e); t.select() } }
       function onFocusOut(e) { if (e.target.tagName === 'INPUT') setTimeout(update, 0) }
+      // pick layout, the quick way: a double-click on a format (its first click picked it) downloads it at once
+      function onDbl(e) {
+        var b = e.target.closest && e.target.closest('[data-dlf]'); if (!b || !sec.contains(b)) return
+        var f = b.getAttribute('data-dlf'), go = $('[data-dl-go]', sec)
+        if (f !== cur() || !avail(f) || go.disabled) return
+        var sel = W.getSelection && W.getSelection(); if (sel && sel.removeAllRanges) sel.removeAllRanges()
+        download(f, go)
+      }
+      if (PK) sec.addEventListener('dblclick', onDbl)
       sec.addEventListener('click', onClick); sec.addEventListener('keydown', onKey); sec.addEventListener('keydown', onKeyField); sec.addEventListener('input', onInput); sec.addEventListener('change', onChange)
       sec.addEventListener('pointerenter', onPointer); sec.addEventListener('focusin', onPointer); sec.addEventListener('focusout', onFocusOut)
       var api3 = {
@@ -3136,7 +3178,7 @@
         make: make, select: function (g, f) { if (g && g !== P.group) { P.group = g; P.more = false } if (f) P.pick[P.group] = f; save(); update() },
         destroy: function () {
           if (io) io.disconnect(); clearInterval(P.tick)
-          sec.removeEventListener('click', onClick); sec.removeEventListener('keydown', onKey); sec.removeEventListener('keydown', onKeyField); sec.removeEventListener('input', onInput); sec.removeEventListener('change', onChange)
+          sec.removeEventListener('dblclick', onDbl); sec.removeEventListener('click', onClick); sec.removeEventListener('keydown', onKey); sec.removeEventListener('keydown', onKeyField); sec.removeEventListener('input', onInput); sec.removeEventListener('change', onChange)
           sec.removeEventListener('pointerenter', onPointer); sec.removeEventListener('focusin', onPointer); sec.removeEventListener('focusout', onFocusOut)
           dlPanels = dlPanels.filter(function (x) { return x !== api3 }); kitUnwatch(el); el.innerHTML = ''
         }

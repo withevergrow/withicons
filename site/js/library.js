@@ -1187,8 +1187,8 @@
     if (e.metaKey || e.ctrlKey || e.target.closest('.t-chk') || root.classList.contains('is-selecting')) { toggleSel(it.k); lastClickIdx = idx; return }
     lastClickIdx = idx
     peekHide(true)
-    // desktop: copy + show details beside the grid. phones: open the sheet (it has a big Copy button)
-    if (!isSheet()) copyImage(it.st, it.name).then(function (ok) { if (ok) tileYay(n) })
+    // a click only opens the details (docked panel on desktop, bottom sheet on phones): copying is a deliberate press
+    // there (Copy SVG / Copy image), or the C key on a focused tile. One response per click: no toast racing the drawer.
     openViewer(it.name, it.st, { from: n })
   })
   function toggleSel(k) {
@@ -1232,7 +1232,7 @@
       case 'End': next = e.ctrlKey ? ITEMS.length - 1 : Math.min(ITEMS.length - 1, idx - (idx % cols) + cols - 1); break
       case 'PageDown': next = idx + cols * Math.max(1, Math.floor(W.innerHeight / L.rowH) - 1); break
       case 'PageUp': next = idx - cols * Math.max(1, Math.floor(W.innerHeight / L.rowH) - 1); break
-      case 'Enter': e.preventDefault(); peekHide(true); if (!isSheet()) copyImage(ITEMS[idx].st, ITEMS[idx].name); openViewer(ITEMS[idx].name, ITEMS[idx].st, { from: n, keyboard: true }); return
+      case 'Enter': e.preventDefault(); peekHide(true); openViewer(ITEMS[idx].name, ITEMS[idx].st, { from: n, keyboard: true }); return
       case ' ': e.preventDefault(); toggleSel(ITEMS[idx].k); return
       case 'a': case 'A': if (e.ctrlKey || e.metaKey) { e.preventDefault(); selectRange(0, ITEMS.length - 1) } return
       case 'd': case 'D': if (!e.ctrlKey && !e.metaKey) downloadPng(ITEMS[idx].st, ITEMS[idx].name); return
@@ -1424,8 +1424,8 @@
     alEl.innerHTML = al.length ? '<span>Also</span>' + al.map(function (a) { return '<b>' + esc(String(a).replace(/-/g, ' ')) + '</b>' }).join('') : ''
     var k = function (x) { return '<kbd>' + x + '</kbd>' }
     $('[data-pk-keys]', el).innerHTML = PK.kb
-      ? '<span>' + k('↵') + ' copy &amp; open</span><span>' + k('C') + ' SVG</span><span>' + k('D') + ' PNG</span><span>' + k('Space') + ' select</span>'
-      : '<span class="pk-click">' + ICO.copy + 'Click to copy</span><span>' + k('↵') + ' open</span><span>' + k('C') + ' SVG</span><span>' + k('D') + ' PNG</span>'
+      ? '<span>' + k('↵') + ' open</span><span>' + k('C') + ' copy SVG</span><span>' + k('D') + ' PNG</span><span>' + k('Space') + ' select</span>'
+      : '<span class="pk-click">' + ICO.expand + 'Click to open</span><span>' + k('C') + ' copy SVG</span><span>' + k('D') + ' PNG</span><span>' + k('S') + ' SVG</span>'
   }
   function peekPlace(n) {
     var el = PK.el, r = n.getBoundingClientRect(), w = el.offsetWidth, h = el.offsetHeight
@@ -1455,7 +1455,7 @@
     if (a && a !== D.body && a !== D.documentElement) return
     var it = itemOf(PK.tile); if (!it) return
     var k = e.key.toLowerCase(), n = PK.tile
-    if (k === 'enter') { e.preventDefault(); peekHide(true); if (!isSheet()) copyImage(it.st, it.name); openViewer(it.name, it.st, { from: n }) }
+    if (k === 'enter') { e.preventDefault(); peekHide(true); openViewer(it.name, it.st, { from: n }) }
     else if (k === 'c') { e.preventDefault(); copySvgCode(it.st, it.name) }
     else if (k === 'd') { e.preventDefault(); downloadPng(it.st, it.name) }
     else if (k === 's') { e.preventDefault(); downloadSvg(it.st, it.name) }
@@ -1655,11 +1655,13 @@
     // Always there, always the same size: nothing appears, hides or resizes while you scroll, so nothing under it jumps.
     var live = D.createElement('p'); live.className = 'vh'; live.setAttribute('aria-live', 'polite'); live.setAttribute('data-vw-live', ''); viewer.appendChild(live)
     var foot = D.createElement('div'); foot.className = 'vw-foot'; foot.setAttribute('data-vw-foot', ''); foot.setAttribute('role', 'group'); foot.setAttribute('aria-label', 'Copy and download')
-    foot.innerHTML = '<div class="vw-foot-in"><button type="button" class="vw-fb is-primary" data-vw="copy-img" title="Copy image: paste into Slides, Docs, Notion, Canva (Enter)">' + ICO.copy + '<span>Copy image</span><kbd class="vw-kbd" aria-hidden="true">Enter</kbd></button>' +
+    // Copy SVG leads (the click on a tile only opens this drawer, so copying is this one clear press, or C); Copy image
+    // sits beside it for slides and docs; then the two downloads, PNG with its size and SVG.
+    foot.innerHTML = '<div class="vw-foot-in"><button type="button" class="vw-fb is-primary" data-vw="copy-svg" title="Copy the SVG: paste into Figma, Canva or your HTML (C)">' + ICO.copy + '<span>Copy SVG</span><kbd class="vw-kbd" aria-hidden="true">C</kbd></button>' +
+      '<button type="button" class="vw-fb" data-vw="copy-img" aria-label="Copy image" title="Copy as an image: paste into Slides, Docs, Notion or Canva">' + ICO.copy + '<span class="vw-fb-long" aria-hidden="true">Copy image</span><span class="vw-fb-short" aria-hidden="true">Image</span></button>' +
       '<div class="vw-pngw"><button type="button" class="vw-fb" data-vw="png" title="Download a PNG">' + ICO.down + '<span>PNG<small class="vh" data-vw-pngsize></small></span></button>' +
         '<label class="vw-pxsel" title="PNG size"><span class="vh">PNG size</span><select data-vw-pxsel>' + SIZES.filter(function (p) { return p >= 32 }).map(function (p) { return '<option value="' + p + '">' + p + '</option>' }).join('') + '</select></label></div>' +
-      '<button type="button" class="vw-fb" data-vw="svg" title="Download an SVG: sharp at any size">' + ICO.down + '<span>SVG</span></button>' +
-      '<button type="button" class="vw-fb is-icon" data-vw="copy-svg" title="Copy SVG code for Figma, Canva or HTML">' + ICO.code + '<span class="vh">Copy SVG code</span></button></div>'
+      '<button type="button" class="vw-fb" data-vw="svg" title="Download an SVG: sharp at any size">' + ICO.down + '<span>SVG</span></button></div>'
     vwPanel.appendChild(foot)
     // the compact title in the sticky top line: on once the big title has scrolled under it, off only well above that
     // (hysteresis), and a cross-fade in one fixed cell, so the toggle never moves the content or the scroll position
@@ -1798,7 +1800,7 @@
     el.style.width = b.width + 'px'; el.style.height = b.height + 'px'
     D.body.appendChild(el)
     var k = fromRect.width / b.width
-    var a = el.animate([{ transform: 'translate(' + fromRect.left + 'px,' + fromRect.top + 'px) scale(' + k + ')' }, { transform: 'translate(' + b.left + 'px,' + b.top + 'px) scale(1)' }], { duration: 480, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'both' })
+    var a = el.animate([{ transform: 'translate(' + fromRect.left + 'px,' + fromRect.top + 'px) scale(' + k + ')' }, { transform: 'translate(' + b.left + 'px,' + b.top + 'px) scale(1)' }], { duration: 360, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'both' })
     el.style.transformOrigin = '0 0'
     var end = function () { if (done) done(); el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 140, fill: 'forwards' }).onfinish = function () { el.remove() } }
     a.onfinish = end; a.oncancel = function () { el.remove() }
@@ -1821,7 +1823,8 @@
       if (fs) { flyFrom = fi.getBoundingClientRect(); flyHtml = fs.outerHTML; flyColor = getComputedStyle(fi).color }
     }
     V.open = true
-    if (!wasOpen) V.returnFocus = o.from || D.activeElement
+    // Escape / close hands focus back to the tile that opened the drawer, or to the last tile picked while it was open
+    if (!wasOpen || (o.from && o.from.classList && o.from.classList.contains('tile'))) V.returnFocus = o.from || D.activeElement
     setViewerIcon(name, st || V.st || S.style, true)
     loadViewerStyles()
     loadMotion().then(mountEditor)
@@ -1835,10 +1838,13 @@
       paintScrim()
       if (flyFrom) { var art0 = $('[data-vw-art]', vwBody); art0.classList.add('is-landing'); fly(flyFrom, art0, flyHtml, flyColor, function () { art0.classList.remove('is-landing'); art0.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 140 }) }) }
     }
-    if (isSheet() || V.full || o.focus) focusTitle()
+    // focus moves into the drawer (its title, which reads the icon's name), whatever opened it: a click, Enter or a key.
+    // Arrow keys there step to the next / previous icon, Escape closes and focus goes back to the tile.
+    // (a drawer restored from the URL on load leaves focus where the page put it, except in the modal sheet)
+    if (isSheet() || V.full || o.focus || o.from) focusTitle()
     syncUrl(); histSync(); centreOverlays()
   }
-  function focusTitle() { var t = $('[data-vw-title]', vwBody); if (t) setTimeout(function () { t.focus({ preventScroll: true }) }, reduced ? 0 : 60) }
+  function focusTitle() { var t = $('[data-vw-title]', vwBody); if (t) setTimeout(function () { if (V.open) t.focus({ preventScroll: true }) }, reduced ? 0 : 60) }
   function closeViewer() {
     if (!V.open) return
     var back = null
@@ -1851,7 +1857,7 @@
       fitViewer()   // the hero stays slim until the visitor is back to plain browsing (update)
       if (!isSheet()) { updateBodyCols(); relayout(true) }
     }
-    if (isSheet()) { setSnap('closed'); lockScroll(false); setTimeout(function () { if (!V.open) finish() }, reduced ? 0 : 320) }
+    if (isSheet()) { setSnap('closed'); lockScroll(false); setTimeout(function () { if (!V.open) finish() }, reduced ? 0 : 300) }
     else {
       finish()
       // the icon flies home to its tile (where the tile is going to be once the grid has re-flowed)
@@ -1861,7 +1867,7 @@
         var k2 = back.r.width / to.width
         var el2 = D.createElement('div'); el2.className = 'vw-fly'; el2.innerHTML = back.html; el2.style.color = back.color; el2.style.width = to.width + 'px'; el2.style.height = to.height + 'px'; el2.style.transformOrigin = '0 0'
         D.body.appendChild(el2)
-        var an = el2.animate([{ transform: 'translate(' + back.r.left + 'px,' + back.r.top + 'px) scale(' + k2 + ')', opacity: 1 }, { transform: 'translate(' + to.left + 'px,' + to.top + 'px) scale(1)', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'both' })
+        var an = el2.animate([{ transform: 'translate(' + back.r.left + 'px,' + back.r.top + 'px) scale(' + k2 + ')', opacity: 1 }, { transform: 'translate(' + to.left + 'px,' + to.top + 'px) scale(1)', opacity: 1 }], { duration: 320, easing: 'cubic-bezier(.32,.72,0,1)', fill: 'both' })
         an.onfinish = function () { ti.style.opacity = ''; el2.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, fill: 'forwards' }).onfinish = function () { el2.remove() } }
         an.oncancel = function () { ti.style.opacity = ''; el2.remove() }
       }
@@ -1888,9 +1894,17 @@
     V.name = name; V.st = STYLE[st] ? st : V.st
     paintViewer(changedName ? 'all' : 'style')
     mounted.forEach(paintTileState)
-    if (changedName && oldName && !reduced) {
-      var art = $('[data-vw-art]', vwBody)
-      if (art) art.animate([{ transform: 'scale(.82)', opacity: 0 }, { transform: 'scale(1.03)', opacity: 1, offset: 0.65 }, { transform: 'none', opacity: 1 }], { duration: 360, easing: 'cubic-bezier(.2,.8,.2,1)' })
+    // another icon while the drawer is open: the drawer itself holds still and only its content cross-fades in
+    // (the drawing settles from a hair smaller, the name and description fade up). Rapid steps (held arrow keys)
+    // skip it, so browsing never queues animations; reduced motion skips it too.
+    if (changedName && oldName && V.open && !viewer.hidden) {
+      var now = performance.now(), quick = now - (V.swapAt || 0) < 180
+      V.swapAt = now
+      if (!reduced && !quick) {
+        var art = $('[data-vw-art]', vwBody), head = $('.vw-head', vwBody), ez = 'cubic-bezier(.23,1,.32,1)'
+        if (art && art.animate) art.animate([{ transform: 'scale(.94)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 240, easing: ez })
+        if (head && head.animate) head.animate([{ transform: 'translateY(4px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 200, easing: ez })
+      }
     }
     syncUrl()
   }
@@ -2162,7 +2176,7 @@
     try { ED.colorsPanel($('[data-vw-colors]', vwBody)) } catch (err) { if (W.console) console.error(err) }
     // the Download panel: every format (slides, design tools, websites, animated), from the same state as the studio.
     // The drawer's own buttons above already cover Copy image, PNG and SVG, so it comes without the quick row.
-    try { if (ED.downloadPanel) ED.downloadPanel($('[data-vw-dl]', vwBody), { quick: false, title: 'Download in any format', motionTab: 'Animate' }) } catch (err) { if (W.console) console.error(err) }
+    try { if (ED.downloadPanel) ED.downloadPanel($('[data-vw-dl]', vwBody), { quick: false, pick: true, title: 'Download in any format', motionTab: 'Animate' }) } catch (err) { if (W.console) console.error(err) }
     V.ck = ED.get().colorsKey
     // the stage's live swap follows the studio's shared state (and its own hover / focus): switching animates in place
     try { if (ED.swapHost) ED.swapHost($('[data-vw-art]', vwBody)) } catch (err) { }
@@ -2831,7 +2845,7 @@
     else if ((e.key === 'ArrowLeft' || e.key === '[') && !inWidget) { e.preventDefault(); stepViewer(-1) }
     else if ((e.key === 'f' || e.key === 'F') && !isSheet()) { e.preventDefault(); setFull(!V.full) }
     else if (inViewer && /^[0-9]$/.test(e.key) && SNAMES[(+e.key + 9) % 10]) { e.preventDefault(); setViewerStyle(SNAMES[(+e.key + 9) % 10]) }
-    else if (inViewer && e.key === 'Enter' && e.target === $('[data-vw-title]', vwBody)) { e.preventDefault(); copyImage(V.st, V.name) }
+    else if (inViewer && ((e.key === 'Enter' && e.target === $('[data-vw-title]', vwBody)) || ((e.key === 'c' || e.key === 'C') && !e.target.closest('.vw-ed, .vw-dl')))) { e.preventDefault(); var cb = $('[data-vw="copy-svg"]', viewer); copySvgCode(V.st, V.name).then(function (ok) { if (ok && cb) yay(cb) }) }
   }, true)
   $$('[data-search-open]').forEach(function (b) {
     b.addEventListener('click', function (e) { e.preventDefault(); e.stopImmediatePropagation(); input.focus({ preventScroll: true }); input.select(); input.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' }) }, true)
