@@ -22,7 +22,7 @@
 
   const SCRIPT = document.currentScript || document.querySelector('script[src*="demo-kit"]')
   const DS = (SCRIPT && SCRIPT.dataset) || {}
-  const V = { web: '0.4.0', dynamic: '0.4.0', motion: '0.4.0', search: '0.4.0' }
+  const V = { web: '0.5.0', dynamic: '0.5.0', motion: '0.5.0', search: '0.5.0' }
   const CDN = 'https://cdn.jsdelivr.net/npm/'
   const URL_WEB = CDN + '@withicons/web@' + V.web + '/dist/cdn.js'
   const URL_LIVE = CDN + '@withicons/dynamic@' + V.dynamic + '/dist/cdn/lite.js'
