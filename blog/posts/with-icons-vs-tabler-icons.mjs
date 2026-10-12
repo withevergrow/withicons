@@ -1,4 +1,4 @@
-import { p, h2, figure, iconGrid, styleRow, sizeRamp, table, yes, no, meh, verdict, callout, cta, doDont, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, figure, iconGrid, styleRow, sizeRamp, table, yes, no, meh, verdict, callout, cta, doDont, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_CATEGORIES, N_SVGS } from '../lib/blocks.mjs'
 
 const N_CREATIVE = N_STYLES - 3 // line, solid and duo are the interface styles
 const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
@@ -71,7 +71,7 @@ ${h2(`Why would anyone pick ${N_ICONS} icons over 6,000?`)}
 ${p('It sounds backwards, so let us explain. Designers who build apps for a living notice the same thing again and again: a typical website or app uses a few dozen icons, and they are nearly always the same ones. Home, search, user, bell, settings, calendar, cart, arrows, checkmarks.')}
 ${p('A giant set has those too, of course. But it also gives you twelve kinds of arrow and nine kinds of chart for every search, and you spend time choosing between near-identical options. A curated set gives you one good answer per idea, which keeps a product consistent almost by accident.')}
 ${iconGrid(['menu', 'filter', 'plus', 'check', 'arrow-right', 'chevron-down', 'edit', 'share', 'upload', 'link', 'lock', 'info-circle'], 'line', 'Twelve more workhorse icons in the with icons line style. Together with the twelve in the face-off above, they cover most everyday screens.')}
-${p(`with icons covers ${N_ICONS} concepts across 19 categories, from navigation and files to weather and money. Search also understands everyday words, so “bin” finds trash and “gear” finds settings. If what you need is on that list, you will find it fast. If it is not, Tabler is a great place to look. Our post on ${L.post('consistent-icons', 'keeping icons consistent')} explains why one tidy family usually beats a bigger mixed one.`)}
+${p(`with icons covers ${N_ICONS} concepts across ${N_CATEGORIES} categories, from navigation and files to weather and money. Search also understands everyday words, so “bin” finds trash and “gear” finds settings. If what you need is on that list, you will find it fast. If it is not, Tabler is a great place to look. Our post on ${L.post('consistent-icons', 'keeping icons consistent')} explains why one tidy family usually beats a bigger mixed one.`)}
 
 ${h2('How many styles do Tabler Icons and with icons have?')}
 ${p('Tabler gives you outline icons, plus a filled version for roughly one in five of them. That is perfect for interfaces, where filled often means “selected”.')}

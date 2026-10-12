@@ -25,7 +25,7 @@ export default {
     '<strong>Line (outline)</strong> icons are drawn with a thin stroke. They are calm and clear, and the best default for menus, buttons and forms.',
     '<strong>Solid (filled)</strong> icons are filled shapes. Use them for the selected tab or button, for very small sizes, and on busy backgrounds.',
     '<strong>Duotone</strong> icons add a soft second tone behind the outline. They feel friendly in dashboards, cards and onboarding screens.',
-    `<strong>Creative styles</strong> are mini illustrations. with icons has ${N_CREATIVE} of them in four families: shiny and 3D (gloss, glass, luxe, skeuo), printed and hand-made (engrave, blueprint, sketch, gothic), retro and graphic (retro, bauhaus, pixel), and cute (kawaii, sticker, plush, pastel, anime, coquette). Use them at 32px or larger.`,
+    `<strong>Creative styles</strong> are mini illustrations. with icons has ${N_CREATIVE} of them in six families: shiny and 3D (gloss, glass, luxe, skeuo), product and trend (clay, bento, suite, dock, liquid, chrome, soft 3D, brutal), printed and hand-made (engrave, blueprint, sketch, gothic), retro and graphic (retro, bauhaus, pixel), cute (kawaii, sticker, plush, pastel, anime, coquette) and holidays (utsav, rangoli, halloween, christmas, lunar, valentine). Use them at 32px or larger.`,
     'Pick one style per area of your page. The one common mix is line for normal states and solid for the active one.',
   ],
   faq: [
@@ -87,7 +87,7 @@ ${ul([
 
 ${h2('What are creative icon styles?')}
 ${p(`Most icon sets stop at line and solid, sometimes with a duotone option. with icons adds ${N_CREATIVE} <strong>creative styles</strong>. They are less like buttons and more like small illustrations, made for places where the icon is the star: hero sections, feature grids, slides, posters, social posts and classroom handouts.`)}
-${p(`That is a lot to keep in your head, so we sort them into four families by how they feel. Each icon also comes with 20 to 30 hand-picked colour palettes that recolour every multi-colour style, and optional motion, so the same rocket can be warm, cool or on-brand without any drawing skills.`)}
+${p(`That is a lot to keep in your head, so we sort them into six families by how they feel. Each icon also comes with 20 to 30 hand-picked colour palettes that recolour every multi-colour style, and optional motion, so the same rocket can be warm, cool or on-brand without any drawing skills.`)}
 
 ${h2('Which icon styles look shiny and 3D?')}
 ${p('These four give icons depth, light and a sense of material. They feel premium and are lovely in app-store style graphics and landing pages.')}
@@ -100,6 +100,21 @@ ${ul([
 ])}
 ${iconGrid(['rocket', 'heart', 'star', 'sparkles', 'zap', 'trophy'], 'glass', 'Glass icons feel light and modern, a good match for the frosted look that operating systems use today.')}
 ${p('<strong>Best for:</strong> feature grids, landing pages and title slides. Gloss and glass feel fresh; luxe and skeuo feel expensive.')}
+
+${h2('Which icon styles look like modern product art?')}
+${p('Eight newer styles follow what product teams and app makers use today: soft 3D objects, tidy tiles and bold flat graphics. They are rich styles, so they may use gentle gradients, and like every style they come from the same drawings.')}
+${styleRow('rocket', 'A rocket in the eight product and trend styles.', { styles: ['clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal'] })}
+${ul([
+  `<strong>${L.style('clay', 'Clay')}:</strong> soft, rounded 3D objects that look sculpted from matte clay.`,
+  `<strong>${L.style('bento', 'Bento')}:</strong> each icon sits in its own soft tinted tile, like a feature card in a bento grid.`,
+  `<strong>${L.style('suite', 'Suite')}:</strong> polished full-colour icons, like the ones in an office or cloud suite.`,
+  `<strong>${L.style('dock', 'Dock')}:</strong> glossy rounded app tiles, like the icons in a desktop dock.`,
+  `<strong>${L.style('liquid', 'Liquid')}:</strong> clear liquid glass that bends the light, with bright rims and soft reflections.`,
+  `<strong>${L.style('chrome', 'Chrome')}:</strong> polished liquid metal with mirror highlights, for a Y2K or futuristic feel.`,
+  `<strong>${L.style('soft3d', 'Soft 3D')}:</strong> studio-lit 3D objects with real depth; people come out as friendly 3D avatars.`,
+  `<strong>${L.style('brutal', 'Brutal')}:</strong> thick black outlines, loud flat colour and a hard offset shadow.`,
+])}
+${p('<strong>Best for:</strong> landing pages, app stores, onboarding screens and product launches.')}
 
 ${h2('Which icon styles look printed or hand-made?')}
 ${p('These four borrow from old crafts: printing, drafting, drawing and stonework. They make a page feel thoughtful and a little classic.')}
@@ -128,7 +143,7 @@ ${iconGrid(['gamepad', 'trophy', 'heart', 'star', 'coins', 'music-note'], 'pixel
 ${p('<strong>Best for:</strong> event posters, music, gaming and playful brands.')}
 
 ${h2('Which icon styles are cute and playful?')}
-${p('The biggest family. These six are soft, colourful and happy, made for kids’ products, classrooms, wellness apps and social posts.')}
+${p('These six are soft, colourful and happy, made for kids’ products, classrooms, wellness apps and social posts.')}
 ${styleRow('cat', 'A cat in the two cute styles this page can show: kawaii and sticker.', { styles: ['kawaii', 'sticker'] })}
 ${ul([
   `<strong>${L.style('kawaii', 'Kawaii')}:</strong> chubby pastel shapes with a soft thick outline and a tiny blushing face. “Kawaii” is Japanese for cute.`,
@@ -139,6 +154,17 @@ ${ul([
   `<strong>${L.style('coquette', 'Coquette')}:</strong> ballet-pink romance: blush satin objects tied with red bows, pearls, lace and delicate gold.`,
 ])}
 ${iconGrid(['heart', 'coffee', 'cake', 'flower', 'dog', 'gift'], 'kawaii', 'Kawaii icons: impossible not to smile at.')}
+
+${h2('Are there icon styles for holidays and festivals?')}
+${p('Yes. Six holiday styles dress the same icons up for a celebration, so even a calendar or a shopping cart looks ready for the season.')}
+${styleRow('gift', 'A gift in the six holiday styles.', { styles: ['utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine'] })}
+${ul([
+  `<strong>${L.style('utsav', 'Utsav')} and ${L.style('rangoli', 'Rangoli')}:</strong> warm marigold, saffron and festive glow for Diwali, Durga Puja and Holi.`,
+  `<strong>${L.style('halloween', 'Halloween')}:</strong> spooky-cute pumpkin orange and witch purple, with carved details that glow from inside.`,
+  `<strong>${L.style('christmas', 'Christmas')}:</strong> cranberry, pine and gold, with a snow cap on every top edge.`,
+  `<strong>${L.style('lunar', 'Lunar')}:</strong> lucky red lacquer and gold for Lunar New Year, with no text or characters.`,
+  `<strong>${L.style('valentine', 'Valentine')}:</strong> cute pink-to-red shapes with polka dots and floating hearts.`,
+])}
 
 ${h2('Why should creative styles be used at 32px or larger?')}
 ${p('Creative styles have extra details: highlights, hatching, construction lines, stitches, little faces. At large sizes those details are the whole point. At tiny sizes they get squeezed into a few pixels and turn into fuzz. Here is the blueprint style at five sizes:')}
@@ -153,8 +179,10 @@ ${table(['Style or family', 'Feels', 'Best for', 'Small sizes', 'Big sizes'], [
   [L.style('duo', 'Duo'), 'Friendly, warm', 'Dashboards, cards, onboarding', meh('Yes, tint is subtle'), yes('Yes')],
   ['Shiny and 3D: gloss, glass, luxe, skeuo', 'Premium, fresh', 'Landing pages, feature grids, title slides', no('Use 32px+'), yes('Yes')],
   ['Printed and hand-made: engrave, blueprint, sketch, gothic', 'Classic, clever, human', 'Finance, dev tools, education, storytelling', no('Use 32px+'), yes('Yes')],
+  ['Product and trend: clay, bento, suite, dock, liquid, chrome, soft 3D, brutal', 'Modern, polished', 'Landing pages, app stores, onboarding', no('Use 32px+'), yes('Yes')],
   ['Retro and graphic: retro, bauhaus, pixel', 'Bold, nostalgic', 'Events, games, music, creative brands', meh('Pixel only'), yes('Yes')],
   ['Cute: kawaii, sticker, plush, pastel, anime, coquette', 'Happy, soft', 'Kids, classrooms, wellness, social posts', no('Use 32px+'), yes('Yes')],
+  ['Holidays: utsav, rangoli, halloween, christmas, lunar, valentine', 'Festive, seasonal', 'Greetings, festive sales, invitations', no('Use 32px+'), yes('Yes')],
 ], `All ${N_STYLES} with icons styles at a glance`)}
 
 ${h2('Can you mix icon styles on one page?')}

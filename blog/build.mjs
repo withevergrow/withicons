@@ -95,7 +95,7 @@ for (const p of posts) {
     if (VS[p.slug] && !p.html.includes('class="b-face"')) w('comparison post should show the real rival icons with faceOff()')
     if (!p.html.includes('class="b-pc"')) w('comparison post should explain pros and cons in words with prosCons()')
   }
-  const stale = (p.html.replace(/<svg[\s\S]*?<\/svg>/g, ' ') + p.tldr.join(" ") + p.description + p.dek + JSON.stringify(p.faq)).match(/\b300 (free |everyday |hand-drawn |carefully |curated )?icons\b|\b2,100\b|\bseven (matching |different )?styles\b|\b(7|12|13|15) (matching |free |different )?styles\b|\bour 300\b|\ball 7\b/i)
+  const stale = (p.html.replace(/<svg[\s\S]*?<\/svg>/g, ' ') + p.tldr.join(" ") + p.description + p.dek + JSON.stringify(p.faq)).match(/\b300 (free |everyday |hand-drawn |carefully |curated )?icons\b|\b2,100\b|\bseven (matching |different )?styles\b|\b(7|12|13|15|17|20) (matching |free |different |creative )?styles\b|\b(17|20) creative ones\b|\b19 categories\b|\b(10|15),000 SVGs\b|\bour 300\b|\ball 7\b/i)
   if (stale) w(`stale number "${stale[0]}": we now have ${N_ICONS} icons in ${N_STYLES} styles (use N_ICONS / N_STYLES / N_SVGS)`)
   const firstP = (p.html.match(/<p>([\s\S]*?)<\/p>/) || [, ''])[1].replace(/<[^>]+>/g, '')
   if (firstP.length < 120) w('the first paragraph should answer the question directly in 2-3 sentences')

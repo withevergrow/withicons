@@ -1,4 +1,4 @@
-import { p, h2, ul, figure, iconGrid, styleRow, table, yes, meh, callout, stats, cta, faceOff, prosCons, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, ul, figure, iconGrid, styleRow, table, yes, meh, callout, stats, cta, faceOff, prosCons, L, N_ICONS, N_STYLES, N_CATEGORIES, timesOurs, N_SVGS } from '../lib/blocks.mjs'
 
 export default {
   slug: 'with-icons-vs-hugeicons',
@@ -26,7 +26,7 @@ export default {
     { q: 'How many free icons does Hugeicons have?', a: 'Hugeicons says its free package has over 6,000 icons, all in the Stroke Rounded style. When we downloaded the free npm package (version 4.3.5) in October 2026, it contained a little over 6,000 icon files.' },
     { q: 'Does Hugeicons Free include solid or filled icons?', a: 'No. The free Hugeicons package has one style, Stroke Rounded, which is an outline style. The solid, bulk, duotone, twotone and sharp styles are part of Hugeicons Pro. with icons includes a filled (solid) and a tinted (duo) version of every icon for free.' },
     { q: 'How much does Hugeicons Pro cost?', a: 'When we checked in October 2026, Hugeicons Pro cost $99 a year for one seat, and Pro Plus cost $1,197 as a one-time payment with lifetime access to the files. Both unlock 60,000+ icons in 10 styles. Team seats are priced separately. Check the pricing page for current numbers.' },
-    { q: 'Is with icons a good Hugeicons alternative?', a: `It is if you mostly need everyday interface and business icons and you want more than one style without paying. with icons has ${N_ICONS} icons in ${N_STYLES} styles, all free under MIT. If you need thousands of specific icons, Hugeicons Free has about twelve times as many.` },
+    { q: 'Is with icons a good Hugeicons alternative?', a: `It is if you mostly need everyday interface and business icons and you want more than one style without paying. with icons has ${N_ICONS} icons in ${N_STYLES} styles, all free under MIT. If you need thousands of specific icons, Hugeicons Free has about ${timesOurs(6000)} times as many.` },
     { q: 'Hugeicons vs Lucide: which is bigger?', a: 'Hugeicons Free is bigger. It lists over 6,000 free icons, while Lucide lists over 1,600 on GitHub (its website showed 1,857 when we checked). Both are free outline sets. Lucide uses the ISC licence and is the default in shadcn/ui; Hugeicons Free uses MIT.' },
     { q: 'Can I mix Hugeicons and with icons on one page?', a: 'You can, and both licences allow it, but the line weights and corner shapes differ, so mixed icons can look slightly off. Keep each set to its own area of the page, or pick one set per screen.' },
   ],
@@ -47,7 +47,7 @@ ${h2('How do Hugeicons and with icons compare at a glance?')}
 ${table(['', 'with icons', 'Hugeicons'], [
   ['Price', yes('Free, everything'), meh('Free tier. Pro $99/year or Pro Plus $1,197 one time')],
   ['Free icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, yes('Over 6,000 icons')],
-  ['Free styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus 17 creative styles such as glass, pixel, retro, kawaii and luxe`), meh('1: Stroke Rounded')],
+  ['Free styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus ${N_STYLES - 3} creative styles such as glass, pixel, retro, kawaii and luxe`), meh('1: Stroke Rounded')],
   ['Paid catalogue', 'None, there is nothing to upgrade to', '60,000+ icons in 10 styles'],
   ['Licence of the free icons', yes('MIT, no visible credit'), yes('MIT, no visible credit')],
   ['Developer packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, Svelte, Angular, React Native, Flutter and more')],
@@ -62,7 +62,7 @@ ${faceOff('hugeicons', { caption: 'Real Hugeicons Free icons (Stroke Rounded, bo
 ${p('Hugeicons also has official packages for most popular frameworks, a free Figma file and plugin, a web app for browsing, and icon pages where you can copy or download an SVG in the colour and size you want.')}
 
 ${h2('What is with icons?')}
-${p(`with icons is a free icon set from Evergrow. We drew <strong>${N_ICONS} everyday icons</strong> by hand, once each, and a program renders every drawing into ${N_STYLES} styles: three everyday interface styles (line, solid and duo) and 17 creative ones, from frosted glass and 16-bit pixel art to 70s retro, cute kawaii and polished gold luxe. That is why the styles always match: the rocket in the line style is the exact same shape as the rocket in the glossy one. Each icon also comes with 20 to 30 hand-picked colour palettes and optional motion.`)}
+${p(`with icons is a free icon set from Evergrow. We drew <strong>${N_ICONS} everyday icons</strong> by hand, once each, and a program renders every drawing into ${N_STYLES} styles: three everyday interface styles (line, solid and duo) and ${N_STYLES - 3} creative ones, from frosted glass and 16-bit pixel art to 70s retro, cute kawaii and polished gold luxe. That is why the styles always match: the rocket in the line style is the exact same shape as the rocket in the glossy one. Each icon also comes with 20 to 30 hand-picked colour palettes and optional motion.`)}
 ${styleRow('rocket')}
 ${stats([[String(N_ICONS), 'hand-drawn icons'], [String(N_STYLES), 'styles, all free'], [N_SVGS, 'SVG files'], ['0', 'paid tiers']])}
 
@@ -70,11 +70,11 @@ ${h2('What does “free” actually get you?')}
 ${p('This is the heart of the comparison, so let’s be precise. Imagine you are building a dashboard and you want an outline icon for normal buttons and a filled icon for the active tab.')}
 ${ul([
   '<strong>With Hugeicons Free</strong>, you get the outline (Stroke Rounded) version of thousands of icons. The filled version of the same icon is in Hugeicons Pro.',
-  '<strong>With with icons</strong>, you get the outline version (line), the filled version (solid) and a tinted version (duo) of the same icon, plus 17 creative styles. All free.',
+  `<strong>With with icons</strong>, you get the outline version (line), the filled version (solid) and a tinted version (duo) of the same icon, plus ${N_STYLES - 3} creative styles. All free.`,
 ])}
 ${iconGrid(['layout-dashboard', 'chart-bar', 'users', 'calendar-check', 'credit-card', 'bell'], 'line', 'A dashboard menu in the free with icons line style…')}
 ${iconGrid(['layout-dashboard', 'chart-bar', 'users', 'calendar-check', 'credit-card', 'bell'], 'solid', '…and the same icons in solid, for the active item. Same names, same shapes, no upgrade needed.')}
-${p(`So the honest summary is this: Hugeicons Free is <em>wide</em> (about twelve times as many icons, in one style). with icons is <em>deep</em> (fewer icons, ${N_STYLES} styles each). If you only ever need one outline style, the width of Hugeicons is a real advantage.`)}
+${p(`So the honest summary is this: Hugeicons Free is <em>wide</em> (about ${timesOurs(6000)} times as many icons, in one style). with icons is <em>deep</em> (fewer icons, ${N_STYLES} styles each). If you only ever need one outline style, the width of Hugeicons is a real advantage.`)}
 
 ${h2('Is Hugeicons free for commercial use?')}
 ${p('Yes, for the free icons. We read the actual licence file in the Hugeicons GitHub repository and in the free npm package: it is the standard <strong>MIT License</strong>. In plain words, you can use the free Stroke Rounded icons in websites, apps, client work and products you sell. You do not need to show a credit on screen. If you share the source files themselves, keep the licence notice with them.')}
@@ -95,12 +95,12 @@ ${figure('huge3', 'A big catalogue is great for variety. A small, matched one is
 
 ${h2(`6,000 icons vs ${N_ICONS}: does the number matter?`)}
 ${p(`Sometimes, a lot. If you are building a travel app that needs a suitcase, a passport, a boarding gate and a seat map, a catalogue of thousands will almost certainly have them, and a catalogue of ${N_ICONS} may not. That is a real point for Hugeicons.`)}
-${p('But most websites, decks and apps lean on the same few dozen ideas: home, search, menu, user, settings, bell, mail, calendar, charts, files, money, arrows. with icons covers those across 19 categories, and its search understands everyday words, so typing “bin” finds trash and “gear” finds settings.')}
+${p(`But most websites, decks and apps lean on the same few dozen ideas: home, search, menu, user, settings, bell, mail, calendar, charts, files, money, arrows. with icons covers those across ${N_CATEGORIES} categories, and its search understands everyday words, so typing “bin” finds trash and “gear” finds settings.`)}
 ${p('A good test: write down the 20 icons your project really needs, then search for them in both libraries. If with icons has all 20, its extra styles are a bonus. If it is missing five, Hugeicons is probably the better fit.')}
 
 ${h2('Which one looks better in slides and marketing pages?')}
 ${p('Hugeicons’ free style is clean and friendly. It is designed for interfaces, and it does that job well.')}
-${p(`with icons adds 17 creative styles meant for bigger, more expressive uses. ${L.style('gloss')} looks like a glossy app icon, ${L.style('glass')} like frosted glass, ${L.style('pixel')} like 16-bit game art, ${L.style('retro')} like a 70s patch and ${L.style('sketch')} like a marker drawing. They shine at 32px and larger: in a pitch deck, on a landing page hero, or on a poster.`)}
+${p(`with icons adds ${N_STYLES - 3} creative styles meant for bigger, more expressive uses. ${L.style('gloss')} looks like a glossy app icon, ${L.style('glass')} like frosted glass, ${L.style('pixel')} like 16-bit game art, ${L.style('retro')} like a 70s patch and ${L.style('sketch')} like a marker drawing. They shine at 32px and larger: in a pitch deck, on a landing page hero, or on a poster.`)}
 ${iconGrid(['lightbulb', 'target', 'trophy', 'chart-line', 'shield-check', 'globe'], 'sketch', 'A pitch-deck row in the sketch style. Copy any of them as an image and paste it into your slide.')}
 ${p(`Every with icons page has Copy image, PNG and SVG buttons, plus step-by-step guides for ${L.guide('powerpoint', 'PowerPoint')}, ${L.guide('google-slides', 'Google Slides')} and ${L.guide('canva', 'Canva')}. Hugeicons’ icon pages let you copy or download the SVG and pick a colour and size, which also works well for slides.`)}
 
@@ -136,7 +136,7 @@ ${prosCons('with icons', { pros: [
   ['A much smaller catalogue', `There are ${N_ICONS} icons against Hugeicons’ 6,000+ free ones, about a twelfth as many. Everyday ideas are covered, but niche icons may be missing.`],
   ['No brand logos', 'You will not find company or social media logos here, so you may need a brand icon set alongside.'],
   ['Web only', 'There are no React Native or Flutter packages, so for mobile apps you use the SVG files yourself.'],
-  ['Newer, with a smaller community', 'There are fewer tutorials built around it so far. And the 17 creative styles are made for 32px and up, not for tiny buttons.'],
+  ['Newer, with a smaller community', `There are fewer tutorials built around it so far. And the ${N_STYLES - 3} creative styles are made for 32px and up, not for tiny buttons.`],
 ] })}
 ${p('In short: Hugeicons suits people who need thousands of icons in one tidy outline style, want React Native or Flutter packages, and might pay for Pro later. with icons suits people who mostly need everyday icons and want filled, tinted and illustrated looks for free, for apps, slides and docs alike.')}
 

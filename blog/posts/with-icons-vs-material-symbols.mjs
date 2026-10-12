@@ -1,4 +1,4 @@
-import { p, h2, h3, ul, figure, iconGrid, styleRow, table, yes, meh, verdict, callout, stats, steps, cta, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, h3, ul, figure, iconGrid, styleRow, table, yes, meh, verdict, callout, stats, steps, cta, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_SVGS, timesOurs } from '../lib/blocks.mjs'
 
 const N_CREATIVE = N_STYLES - 3 // everything beyond line, solid and duo
 
@@ -21,7 +21,7 @@ export default {
     `<strong>Pick with icons</strong> if you want your product to look like your brand rather than Google’s, with ${N_STYLES} matching styles and ready-made PNG and SVG files for slides.`,
     'Material Symbols comes in 3 styles (Outlined, Rounded, Sharp) inside a variable font with sliders for fill, weight, grade and size.',
     'Both are free for commercial use. Material Symbols uses Apache 2.0, with icons uses MIT, and neither asks you to show a credit.',
-    `with icons has ${N_ICONS} icons drawn once and rendered in ${N_STYLES} styles (${N_SVGS} SVGs). Material Symbols has about five times as many icons, but one design language.`,
+    `with icons has ${N_ICONS} icons drawn once and rendered in ${N_STYLES} styles (${N_SVGS} SVGs). Material Symbols has about ${timesOurs(2500)} times as many icons, but one design language.`,
   ],
   faq: [
     { q: 'Is Material Symbols free for commercial use?', a: 'Yes. Google publishes Material Symbols under the Apache License 2.0, which allows commercial use. Google says attribution is appreciated (for example on an app’s about screen) but not required.' },
@@ -118,7 +118,7 @@ ${p('Tables are handy, but they hide the “why”. Here is each set’s honest 
 ${prosCons('Material Symbols', {
   lib: 'material-symbols',
   pros: [
-    ['A huge catalogue', `Google lists over 2,500 icons, about five times our ${N_ICONS}. If you need a rare idea, like a specific device or a settings screen detail, it is probably there.`],
+    ['A huge catalogue', `Google lists over 2,500 icons, about ${timesOurs(2500)} times our ${N_ICONS}. If you need a rare idea, like a specific device or a settings screen detail, it is probably there.`],
     ['Sliders built in', 'The variable font lets you change fill, weight, grade and size without new files. A tab icon can switch smoothly from outline to filled when someone taps it.'],
     ['Three styles for every icon', 'Outlined, Rounded and Sharp each cover the whole set, so you can soften or sharpen your app without swapping libraries.'],
     ['Free, with no credit required', 'The Apache 2.0 licence allows commercial use. Google appreciates a mention but does not require one.'],
