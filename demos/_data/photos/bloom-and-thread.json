@@ -1,0 +1,331 @@
+{
+  "slug": "bloom-and-thread",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "29839296",
+      "page": "https://www.pexels.com/photo/29839296/",
+      "url": "https://images.pexels.com/photos/29839296/pexels-photo-29839296.jpeg",
+      "photographer": "Zenia Diamond",
+      "photographerUrl": "https://www.pexels.com/@zenia-diamond-2147728402",
+      "alt": "A woman with long auburn hair sits beside a tall bright window in a white studio, wearing an off-the-shoulder floral organza dress with puffed sleeves.",
+      "colors": "white, blush pink, soft sage-grey",
+      "focal": "70% 45%",
+      "notes": "Portrait 2:3, soft window light. The tall bright window and grey curtain sit on the left and a plain white wall fills the upper right, so a split hero (text left, photo right) works, or a full-bleed crop at 70% 45% with a light overlay. Faces the camera, so keep the crop above the knees. Best fit for the blush and cream mood; spare-1 is the landscape alternative.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/bloom-and-thread/29839296-800.jpg",
+        "1200": "_img/bloom-and-thread/29839296-1200.jpg"
+      }
+    },
+    {
+      "slot": "dress",
+      "src": "unsplash",
+      "id": "Sb8foZVY8zA",
+      "page": "https://unsplash.com/photos/woman-poses-in-a-floral-dress-on-a-path-Sb8foZVY8zA",
+      "url": "https://images.unsplash.com/photo-1752681329832-b020392ef9cc",
+      "photographer": "Ionela Mat",
+      "photographerUrl": "https://unsplash.com/@ionelaaaaa",
+      "alt": "A smiling woman in a sleeveless blue-and-white floral halter dress with a tie waist and ruffled hem stands on a sunlit woodland path.",
+      "colors": "cobalt blue, white, olive green",
+      "focal": "50% 45%",
+      "notes": "Portrait, dress fully visible from collar to hem. Works as the dress product card, the Dresses category tile or a second hero. Blue florals contrast nicely with a blush palette; keep the whole dress in a 4:5 crop.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-200.jpg",
+        "480": "_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-480.jpg",
+        "700": "_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-700.jpg",
+        "900": "_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-900.jpg"
+      }
+    },
+    {
+      "slot": "cardigan",
+      "src": "pexels",
+      "id": "30863768",
+      "page": "https://www.pexels.com/photo/30863768/",
+      "url": "https://images.pexels.com/photos/30863768/pexels-photo-30863768.jpeg",
+      "photographer": "Evelina Rusinova",
+      "photographerUrl": "https://www.pexels.com/@evelina-rusinova-2068905069",
+      "alt": "A woman, head cropped at the hair, in a cream cable-knit cardigan with tortoiseshell buttons and a floral midi skirt holds a bunch of white daisies in a golden barley field.",
+      "colors": "cream, oat, wheat gold, daisy white",
+      "focal": "50% 40%",
+      "notes": "Portrait about 4:5, golden-hour field. Faceless (the head is cropped at the hair), so safe for the Knitwear tile or a product card. The cable-knit fills the centre: a 4:5 or square crop at 50% 40% keeps the buttons and the daisies. Warmer and more golden than the blush palette, so pair it with the sage accent.",
+      "width": 1200,
+      "height": 1496,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/30863768-200.jpg",
+        "480": "_img/bloom-and-thread/30863768-480.jpg",
+        "700": "_img/bloom-and-thread/30863768-700.jpg",
+        "900": "_img/bloom-and-thread/30863768-900.jpg"
+      }
+    },
+    {
+      "slot": "blouse",
+      "src": "pexels",
+      "id": "8452066",
+      "page": "https://www.pexels.com/photo/8452066/",
+      "url": "https://images.pexels.com/photos/8452066/pexels-photo-8452066.jpeg",
+      "photographer": "Vlada Karpovich",
+      "photographerUrl": "https://www.pexels.com/@vlada-karpovich",
+      "alt": "Close-up of a woman in a white broderie-trimmed blouse with a ruffled collar and cuffs, one hand resting at her chest wearing a ring; her face is cropped below the lips.",
+      "colors": "white, cream, warm tan",
+      "focal": "50% 55%",
+      "notes": "Portrait 2:3, bright and clean. Detail-led product shot with no identifiable face; works at 4:5 or square around the collar and hand.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/8452066-200.jpg",
+        "480": "_img/bloom-and-thread/8452066-480.jpg",
+        "700": "_img/bloom-and-thread/8452066-700.jpg",
+        "900": "_img/bloom-and-thread/8452066-900.jpg"
+      }
+    },
+    {
+      "slot": "scarf",
+      "src": "pexels",
+      "id": "36455711",
+      "page": "https://www.pexels.com/photo/36455711/",
+      "url": "https://images.pexels.com/photos/36455711/pexels-photo-36455711.jpeg",
+      "photographer": "Đậu Photograph",
+      "photographerUrl": "https://www.pexels.com/@dauphotographer",
+      "alt": "A yellow and orange patterned silk scarf, loosely twisted into a loop, rests on a white shirt against a white background.",
+      "colors": "lemon yellow, orange, white",
+      "focal": "50% 55%",
+      "notes": "Tall portrait, lots of clean white space around the scarf. The yellow is the one warm accent in the set; good for a sunny product card on a cream card background.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/36455711-200.jpg",
+        "480": "_img/bloom-and-thread/36455711-480.jpg",
+        "700": "_img/bloom-and-thread/36455711-700.jpg",
+        "900": "_img/bloom-and-thread/36455711-900.jpg"
+      }
+    },
+    {
+      "slot": "bag",
+      "src": "pexels",
+      "id": "32128851",
+      "page": "https://www.pexels.com/photo/32128851/",
+      "url": "https://images.pexels.com/photos/32128851/pexels-photo-32128851.jpeg",
+      "photographer": "Kader D. Kahraman",
+      "photographerUrl": "https://www.pexels.com/@kaderdygnn",
+      "alt": "A woman in a white shirt and long white skirt, face cropped at the lips, carries a woven seagrass tote with a black woven band, filled with pink blossoms, across a bright green lawn.",
+      "colors": "straw tan, white, spring green, pink",
+      "focal": "35% 55%",
+      "notes": "Portrait 2:3. Keep the tote and the blossoms in frame; at square crop use position 35% 55%. Fresh and spring-like, pairs well with the sage accent.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/32128851-200.jpg",
+        "480": "_img/bloom-and-thread/32128851-480.jpg",
+        "700": "_img/bloom-and-thread/32128851-700.jpg",
+        "900": "_img/bloom-and-thread/32128851-900.jpg"
+      }
+    },
+    {
+      "slot": "earrings",
+      "src": "unsplash",
+      "id": "3ai_aJpH9hA",
+      "page": "https://unsplash.com/photos/a-pair-of-pearl-earrings-sitting-on-top-of-a-table-3ai_aJpH9hA",
+      "url": "https://images.unsplash.com/photo-1682822749969-61a63203c501",
+      "photographer": "Nataliia Hordiiuk",
+      "photographerUrl": "https://unsplash.com/@whynotnatali",
+      "alt": "A pair of gold-and-pearl stud earrings, each a faceted gold nugget with a large freshwater pearl drop, rest on a warm peach surface with dappled sunlight shadows.",
+      "colors": "peach, gold, cream white",
+      "focal": "55% 58%",
+      "notes": "Square, warm editorial light with soft shadows. Already a ready-made product-card crop for the Jewellery tile; keep the earrings in the lower middle (55% 58%) when it is cropped wider. The textured light gives the page a premium feel.",
+      "width": 1200,
+      "height": 1200,
+      "orientation": "square",
+      "local": {
+        "200": "_img/bloom-and-thread/photo-1682822749969-61a63203c501-200.jpg",
+        "480": "_img/bloom-and-thread/photo-1682822749969-61a63203c501-480.jpg",
+        "700": "_img/bloom-and-thread/photo-1682822749969-61a63203c501-700.jpg",
+        "900": "_img/bloom-and-thread/photo-1682822749969-61a63203c501-900.jpg"
+      }
+    },
+    {
+      "slot": "hairclips",
+      "src": "pexels",
+      "id": "31702117",
+      "page": "https://www.pexels.com/photo/31702117/",
+      "url": "https://images.pexels.com/photos/31702117/pexels-photo-31702117.jpeg",
+      "photographer": "Rumeysa Demir",
+      "photographerUrl": "https://www.pexels.com/@nerosable",
+      "alt": "Handmade white linen snap hair clips embroidered with coral, cream and olive-green flowers and sprigs, laid out in two diagonal rows on a pale warm-grey surface, seen from above.",
+      "colors": "cream white, coral, olive green, warm grey",
+      "focal": "50% 50%",
+      "notes": "Portrait 3:4, top-down on a seamless pale backdrop, no text or logos. A handmade product shot that suits the \"thread\" half of the brand; square crop at 50% 50% keeps both rows of clips. Soft shadows, so it sits well on a cream card background.",
+      "width": 1200,
+      "height": 1600,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/31702117-200.jpg",
+        "480": "_img/bloom-and-thread/31702117-480.jpg",
+        "700": "_img/bloom-and-thread/31702117-700.jpg",
+        "900": "_img/bloom-and-thread/31702117-900.jpg"
+      }
+    },
+    {
+      "slot": "shoes",
+      "src": "pexels",
+      "id": "35222104",
+      "page": "https://www.pexels.com/photo/35222104/",
+      "url": "https://images.pexels.com/photos/35222104/pexels-photo-35222104.jpeg",
+      "photographer": "Vero Lova",
+      "photographerUrl": "https://www.pexels.com/@verolova",
+      "alt": "Top view of a pair of cream ballet flats embroidered with pink and turquoise beaded flowers, resting on gathered pink fabric.",
+      "colors": "bubblegum pink, cream, turquoise",
+      "focal": "50% 60%",
+      "notes": "Portrait 3:4, shot from above. The pink-on-pink floral detail suits the coquette style; crop to 4:5 and keep both toes visible.",
+      "width": 1200,
+      "height": 1600,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/35222104-200.jpg",
+        "480": "_img/bloom-and-thread/35222104-480.jpg",
+        "700": "_img/bloom-and-thread/35222104-700.jpg",
+        "900": "_img/bloom-and-thread/35222104-900.jpg"
+      }
+    },
+    {
+      "slot": "flatlay",
+      "src": "pexels",
+      "id": "3808229",
+      "page": "https://www.pexels.com/photo/3808229/",
+      "url": "https://images.pexels.com/photos/3808229/pexels-photo-3808229.jpeg",
+      "photographer": "Dina Nasyrova",
+      "photographerUrl": "https://www.pexels.com/@dina-nasyrova-2006209",
+      "alt": "Overhead view of a white leather crossbody bag with the flap open, showing tortoiseshell sunglasses and a floral wallet beside a blush pouch, resting on chunky cream knitwear.",
+      "colors": "cream, blush pink, tortoiseshell",
+      "focal": "58% 55%",
+      "notes": "Square 1:1, shot from above in bright soft light, with no text and no readable logos. Good for the Accessories tile, a newsletter band or a lookbook strip; the chunky knit gives texture and the white bag keeps it feminine without being sugary.",
+      "width": 1200,
+      "height": 1200,
+      "orientation": "square",
+      "local": {
+        "200": "_img/bloom-and-thread/3808229-200.jpg",
+        "480": "_img/bloom-and-thread/3808229-480.jpg",
+        "700": "_img/bloom-and-thread/3808229-700.jpg",
+        "900": "_img/bloom-and-thread/3808229-900.jpg"
+      }
+    },
+    {
+      "slot": "story",
+      "src": "unsplash",
+      "id": "Apw4z0D9xVE",
+      "page": "https://unsplash.com/photos/clothing-rack-with-neutral-colored-dresses-and-a-cactus-Apw4z0D9xVE",
+      "url": "https://images.unsplash.com/photo-1769107805465-bfd41863f1a0",
+      "photographer": "Caroline Badran",
+      "photographerUrl": "https://unsplash.com/@___atmos",
+      "alt": "A bright minimalist boutique interior with a rail of cream and oat linen clothes on wooden hangers, a tall cactus, a concrete pillar and curved boucle chairs.",
+      "colors": "cream, oat, soft white",
+      "focal": "50% 45%",
+      "notes": "Tall portrait, airy and calm. Use it beside the \"our story\" copy as a tall image; it also makes a good shop-floor atmosphere shot.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-700.jpg",
+        "1000": "_img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-1000.jpg",
+        "1100": "_img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-1100.jpg"
+      }
+    },
+    {
+      "slot": "gift",
+      "src": "pexels",
+      "id": "23784969",
+      "page": "https://www.pexels.com/photo/23784969/",
+      "url": "https://images.pexels.com/photos/23784969/pexels-photo-23784969.jpeg",
+      "photographer": "Adriana Coulson",
+      "photographerUrl": "https://www.pexels.com/@adriana-coulson-1070894176",
+      "alt": "A white gift box wrapped in paper printed with tiny gold motifs and topped with a pink satin pull-bow sits on a wooden table in front of a lavender-print wrapped present.",
+      "colors": "ivory, blush pink, warm oak",
+      "focal": "45% 50%",
+      "notes": "Tall portrait, soft daylight. Keep the bow in the middle of the crop; works for the Gifts tile and the gift-wrapping upsell in the cart drawer.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/23784969-200.jpg",
+        "480": "_img/bloom-and-thread/23784969-480.jpg",
+        "700": "_img/bloom-and-thread/23784969-700.jpg",
+        "900": "_img/bloom-and-thread/23784969-900.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "4589213",
+      "page": "https://www.pexels.com/photo/4589213/",
+      "url": "https://images.pexels.com/photos/4589213/pexels-photo-4589213.jpeg",
+      "photographer": "ArtHouse Studio",
+      "photographerUrl": "https://www.pexels.com/@arthousestudio",
+      "alt": "A woman in a pink-and-cream floral sweetheart dress and straw hat sits on weathered white wooden steps beside a wicker basket of daisies and market produce, in tan suede loafers.",
+      "colors": "cream, blush, weathered white, tan",
+      "focal": "52% 40%",
+      "notes": "Landscape 3:2 editorial lookbook shot, sharp and softly lit: the landscape alternative to the portrait hero. The subject is centred, so for a full-bleed hero lay a soft white gradient over one side (the white stair rails take text well) or use a split layout. Crop to 16:9 at 52% 40% to keep the face, hat and basket.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/bloom-and-thread/4589213-200.jpg",
+        "480": "_img/bloom-and-thread/4589213-480.jpg",
+        "700": "_img/bloom-and-thread/4589213-700.jpg",
+        "900": "_img/bloom-and-thread/4589213-900.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "I7C5S7868Jk",
+      "page": "https://unsplash.com/photos/a-wrapped-gift-box-with-a-pink-ribbon-I7C5S7868Jk",
+      "url": "https://images.unsplash.com/photo-1646182504958-560a709fd368",
+      "photographer": "Katie Goertzen",
+      "photographerUrl": "https://unsplash.com/@oakandmaystockshop",
+      "alt": "Soft-focus pink and white watercolour-floral wrapping paper on a pale blue-grey ground, with a pink ribbon on the corner of a gift box at the top left.",
+      "colors": "powder blue, blush pink, white",
+      "focal": "60% 60%",
+      "notes": "Texture shot: use it as a background for the newsletter or announcement band with a light overlay, or as a pattern behind the gift section. Almost no subject, so text sits on it easily.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/bloom-and-thread/photo-1646182504958-560a709fd368-200.jpg",
+        "480": "_img/bloom-and-thread/photo-1646182504958-560a709fd368-480.jpg",
+        "700": "_img/bloom-and-thread/photo-1646182504958-560a709fd368-700.jpg",
+        "900": "_img/bloom-and-thread/photo-1646182504958-560a709fd368-900.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "36977878",
+      "page": "https://www.pexels.com/photo/36977878/",
+      "url": "https://images.pexels.com/photos/36977878/pexels-photo-36977878.jpeg",
+      "photographer": "Alexander Mass",
+      "photographerUrl": "https://www.pexels.com/@rebornfilmes",
+      "alt": "A woman, seen from behind, clips a cream satin bow barrette into her long chestnut hair, with golden sunlit foliage blurred behind.",
+      "colors": "cream, chestnut brown, golden green",
+      "focal": "50% 55%",
+      "notes": "Atmosphere shot with warm light and no face. Good as an editorial strip between sections or a second hair-accessories image (the hairclips slot holds the embroidered clips).",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "480": "_img/bloom-and-thread/36977878-480.jpg",
+        "700": "_img/bloom-and-thread/36977878-700.jpg",
+        "900": "_img/bloom-and-thread/36977878-900.jpg"
+      }
+    }
+  ]
+}

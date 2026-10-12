@@ -1,0 +1,290 @@
+{
+  "slug": "hartwell-hardware",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "16472137",
+      "page": "https://www.pexels.com/photo/16472137/",
+      "url": "https://images.pexels.com/photos/16472137/pexels-photo-16472137.jpeg",
+      "photographerUrl": "https://www.pexels.com/@t6adventures",
+      "photographer": "T6 Adventures",
+      "alt": "Old hardware store interior with tall dark wooden pigeonhole shelves, hand-numbered bins of small parts, iron gear wheels hung on the side, and daylight pouring in through large paned windows.",
+      "colors": "dark brown wood, warm grey, window white, amber",
+      "focal": "50% 55%",
+      "notes": "Natural-light photo of an old parts store, titled 'Old Hardware Store' on Pexels, sharp and unfiltered (replaces a heavily oil-paint-filtered B&W). Only hand-painted bin numbers, no brand signage. The big window on the left is bright, so put the headline panel or an ink/cream wash on the left third, or frame it as a catalogue plate. Warm browns sit well with the forest-green/brass palette.",
+      "width": 1200,
+      "height": 857,
+      "orientation": "landscape",
+      "local": {
+        "1200": "_img/hartwell-hardware/16472137-1200.jpg"
+      }
+    },
+    {
+      "slot": "hammer",
+      "src": "unsplash",
+      "id": "Okg5ne7l-Vg",
+      "page": "https://unsplash.com/photos/a-group-of-hammers-and-a-hammer-on-a-wooden-surface-Okg5ne7l-Vg",
+      "url": "https://images.unsplash.com/photo-1658762965198-aa42a8d49c46",
+      "photographerUrl": "https://unsplash.com/@roblaughter",
+      "photographer": "Rob Laughter",
+      "alt": "Several old hammers and other hand tools laid out on dark, weathered wooden boards.",
+      "colors": "dark brown, steel grey, yellow and red accents",
+      "focal": "50% 50%",
+      "notes": "Moody flat lay with a yellow-handled hammer as the colour pop. Works as a card thumbnail (crop square) or a wide strip; darken-friendly for text.",
+      "width": 1200,
+      "height": 798,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/photo-1658762965198-aa42a8d49c46-1000.jpg"
+      }
+    },
+    {
+      "slot": "wrench",
+      "src": "pexels",
+      "id": "5853933",
+      "page": "https://www.pexels.com/photo/5853933/",
+      "url": "https://images.pexels.com/photos/5853933/pexels-photo-5853933.jpeg",
+      "photographerUrl": "https://www.pexels.com/@shkrabaanthony",
+      "photographer": "Antoni Shkraba",
+      "alt": "Four metal combination wrenches arranged in a row on a rustic wooden board.",
+      "colors": "warm brown, polished silver",
+      "focal": "50% 50%",
+      "notes": "Clean, symmetrical, bright metal on warm wood. Great for the hand-tools department card at any crop.",
+      "width": 1200,
+      "height": 786,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/hartwell-hardware/5853933-700.jpg"
+      }
+    },
+    {
+      "slot": "paint",
+      "src": "unsplash",
+      "id": "XwCMpO5TkRc",
+      "page": "https://unsplash.com/photos/a-close-up-of-a-group-of-paint-cans-XwCMpO5TkRc",
+      "url": "https://images.unsplash.com/photo-1643822308521-1da534425d82",
+      "photographerUrl": "https://unsplash.com/@ximenaphoto",
+      "photographer": "Ximena Balderas",
+      "alt": "Close-up from above of open tins of paint in lavender, orange-red, teal, yellow and deep blue.",
+      "colors": "lavender, orange-red, teal, yellow, blue",
+      "focal": "50% 45%",
+      "notes": "Saturated, tight macro of paint tins. The one bright colour hit on the page: use it for the Paint department and the paint-matching service.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/photo-1643822308521-1da534425d82-1000.jpg"
+      }
+    },
+    {
+      "slot": "fasteners",
+      "src": "pexels",
+      "id": "38575500",
+      "page": "https://www.pexels.com/photo/38575500/",
+      "url": "https://images.pexels.com/photos/38575500/pexels-photo-38575500.jpeg",
+      "photographerUrl": "https://www.pexels.com/@joaquinrr",
+      "photographer": "Joaquin Reyes Ramos",
+      "alt": "Dark compartment bins sorted with nuts, bolts, washers and small fittings, with a few yellow connectors.",
+      "colors": "steel grey, black, yellow flecks",
+      "focal": "50% 50%",
+      "notes": "Looks like a real fastener wall, exactly the nuts-and-bolts-by-the-pound feel. Works as a wide banner or square card.",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/38575500-1000.jpg"
+      }
+    },
+    {
+      "slot": "workbench",
+      "src": "unsplash",
+      "id": "gKvDtyVPNYw",
+      "page": "https://unsplash.com/photos/a-workbench-in-a-wooden-cabin-with-lots-of-tools-gKvDtyVPNYw",
+      "url": "https://images.unsplash.com/photo-1680798790180-540f147976d7",
+      "photographerUrl": "https://unsplash.com/@lawrnsky",
+      "photographer": "Lawrence Chismorie",
+      "alt": "A sunlit wooden workshop with a cluttered workbench and hand tools lined up on shelves above it.",
+      "colors": "honey wood, amber, tan",
+      "focal": "50% 55%",
+      "notes": "Portrait, warm and golden. Lovely for the \"ask Walt\" how-to section or the local-pride blurb; crop to landscape around the bench and shelves.",
+      "width": 1200,
+      "height": 1790,
+      "orientation": "portrait",
+      "local": {
+        "900": "_img/hartwell-hardware/photo-1680798790180-540f147976d7-900.jpg"
+      }
+    },
+    {
+      "slot": "saw",
+      "src": "pexels",
+      "id": "15018793",
+      "page": "https://www.pexels.com/photo/15018793/",
+      "url": "https://images.pexels.com/photos/15018793/pexels-photo-15018793.jpeg",
+      "photographerUrl": "https://www.pexels.com/@ffd-restorations-400571257",
+      "photographer": "FFD Restorations",
+      "alt": "A row of vintage hand saws with worn wooden handles, blades upright, resting side by side on a wooden rack against a grey wall.",
+      "colors": "warm wood, dark steel",
+      "focal": "50% 40%",
+      "notes": "Wide, shallow depth of field, very heritage. Good as a thin banner for the hand-tools section.",
+      "width": 1200,
+      "height": 675,
+      "orientation": "landscape",
+      "local": {
+        "1200": "_img/hartwell-hardware/15018793-1200.jpg"
+      }
+    },
+    {
+      "slot": "tape",
+      "src": "pexels",
+      "id": "5973909",
+      "page": "https://www.pexels.com/photo/5973909/",
+      "url": "https://images.pexels.com/photos/5973909/pexels-photo-5973909.jpeg",
+      "photographerUrl": "https://www.pexels.com/@ono-kosuki",
+      "photographer": "Ono Kosuki",
+      "alt": "Close-up of a hand marking a timber plank with a pencil against a yellow tape measure.",
+      "colors": "yellow, tan wood, skin tones",
+      "focal": "55% 60%",
+      "notes": "Faceless hands-only shot. Yellow tape gives a clear accent against the cream paper look.",
+      "width": 1200,
+      "height": 760,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/hartwell-hardware/5973909-700.jpg"
+      }
+    },
+    {
+      "slot": "drill",
+      "src": "pexels",
+      "id": "30413428",
+      "page": "https://www.pexels.com/photo/30413428/",
+      "url": "https://images.pexels.com/photos/30413428/pexels-photo-30413428.jpeg",
+      "photographerUrl": "https://www.pexels.com/@christina99999",
+      "photographer": "Christina & Peter",
+      "alt": "Close-up of a well-used cordless drill with a nail in its chuck, with more drills blurred behind it, against warm wood.",
+      "colors": "orange, teal-black, warm wood",
+      "focal": "40% 50%",
+      "notes": "Shallow focus with warm orange blur; the drill sits left of centre, so keep the crop biased left. Good for the power-tools card and the tool-rental table.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/30413428-1000.jpg"
+      }
+    },
+    {
+      "slot": "garden",
+      "src": "unsplash",
+      "id": "9EH5AkClwZ0",
+      "page": "https://unsplash.com/photos/a-row-of-yellow-garden-tools-sitting-on-top-of-a-wooden-floor-9EH5AkClwZ0",
+      "url": "https://images.unsplash.com/photo-1573561368183-fd88bdb4503d",
+      "photographerUrl": "https://unsplash.com/@lmfeliciano",
+      "photographer": "Luis Feliciano",
+      "alt": "A row of yellow-painted garden tools (two hoes, a rake, a shovel, a pitchfork and a twig broom) standing against a dark wooden wall.",
+      "colors": "mustard yellow, dark brown",
+      "focal": "50% 50%",
+      "notes": "Graphic and flat, almost a print-ad layout. Mustard yellow matches the brass accents. Works at any crop.",
+      "width": 1200,
+      "height": 830,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/photo-1573561368183-fd88bdb4503d-1000.jpg"
+      }
+    },
+    {
+      "slot": "lumber",
+      "src": "pexels",
+      "id": "12278566",
+      "page": "https://www.pexels.com/photo/12278566/",
+      "url": "https://images.pexels.com/photos/12278566/pexels-photo-12278566.jpeg",
+      "photographerUrl": "https://www.pexels.com/@nc-farm-bureau-mark",
+      "photographer": "Mark Stebnicki",
+      "alt": "Stacks of sawn timber planks on pallets at an outdoor lumber yard, under a covered shed.",
+      "colors": "honey timber, gravel grey, overcast sky",
+      "focal": "50% 55%",
+      "notes": "Honest working yard, soft overcast light. Good for the Lumber department and the yard-delivery note.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/12278566-1000.jpg"
+      }
+    },
+    {
+      "slot": "keys",
+      "src": "pexels",
+      "id": "17124735",
+      "page": "https://www.pexels.com/photo/17124735/",
+      "url": "https://images.pexels.com/photos/17124735/pexels-photo-17124735.jpeg",
+      "photographerUrl": "https://www.pexels.com/@my-car-key-hero-592675237",
+      "photographer": "My Car Key Hero",
+      "alt": "Close-up of a locksmith's hands filing a key blank clamped in a small vise, with a red handle and fine metal shavings in the air.",
+      "colors": "soft blue-grey stripes, steel, skin tones, red accent",
+      "focal": "50% 60%",
+      "notes": "Faceless hands-only key-cutting shot in warm daylight, no brand names (replaces a wall of key blanks whose maker names were legible). Portrait; the action sits in the lower middle, so keep the crop biased down for a landscape card. Good for the key-cutting service panel.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/hartwell-hardware/17124735-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "unsplash",
+      "id": "t5YUoHW6zRo",
+      "page": "https://unsplash.com/photos/assorted-handheld-tools-in-tool-rack-t5YUoHW6zRo",
+      "url": "https://images.unsplash.com/photo-1426927308491-6380b6a9936f",
+      "photographerUrl": "https://unsplash.com/@barnimages",
+      "photographer": "Barn Images",
+      "alt": "A wooden tool wall with hand planes, chisels, screwdrivers, saws and pliers hung in tidy rows.",
+      "colors": "honey wood, white wall, red and blue handles",
+      "focal": "50% 45%",
+      "notes": "Second hero candidate: bright, orderly, instantly \"proper tools\". Landscape, but detailed, so use it as a plate or under a wash, not behind raw headline text.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/hartwell-hardware/photo-1426927308491-6380b6a9936f-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "32209162",
+      "page": "https://www.pexels.com/photo/32209162/",
+      "url": "https://images.pexels.com/photos/32209162/pexels-photo-32209162.jpeg",
+      "photographerUrl": "https://www.pexels.com/@volker-morr-57769261",
+      "photographer": "Volker Morr",
+      "alt": "A weathered wooden wall cabinet holding old wooden hand planes, chisels and a marking gauge, with two small drawers underneath, against a plain pale wall.",
+      "colors": "weathered brown, tan, pale grey wall",
+      "focal": "50% 45%",
+      "notes": "Heritage tool cabinet, portrait, clean pale background and no text (replaces a Thai hardware-shop photo with legible Thai cartons). Reads as a catalogue plate; use as a tall side plate on the department index or the local-pride blurb. Plenty of calm wall space on both sides for captions.",
+      "width": 1200,
+      "height": 1860,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/hartwell-hardware/32209162-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "13460134",
+      "page": "https://www.pexels.com/photo/13460134/",
+      "url": "https://images.pexels.com/photos/13460134/pexels-photo-13460134.jpeg",
+      "photographerUrl": "https://www.pexels.com/@fadime-demirtas-42037863",
+      "photographer": "Fadime Demirtaş",
+      "alt": "A grey-haired man in glasses and a maroon polo shirt concentrates on fine woodwork with a small fretsaw, a plank clamped on the bench in front of him.",
+      "colors": "maroon, warm pine, grey hair, red and blue textile behind",
+      "focal": "50% 35%",
+      "notes": "Human face for the \"ask Walt\" how-to tips; portrait, bright daylight, no logos or text (replaces a shopkeeper photo with a prominent Nike swoosh on his vest). He looks down at his work, so it reads as 'showing you how'. Crop to the head, hands and plank for a square or 4:5 card.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/hartwell-hardware/13460134-800.jpg"
+      }
+    }
+  ]
+}

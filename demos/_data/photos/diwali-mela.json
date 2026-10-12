@@ -1,0 +1,233 @@
+{
+  "slug": "diwali-mela",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "31559552",
+      "page": "https://www.pexels.com/photo/31559552/",
+      "url": "https://images.pexels.com/photos/31559552/pexels-photo-31559552.jpeg",
+      "photographer": "Ajay Kumar",
+      "photographerUrl": "https://www.pexels.com/@ajay-kumar-602391836",
+      "alt": "Tall glowing paper lanterns in orange, yellow, green and pink line a night street under strings of festival bunting while people stroll toward the lit end of the road.",
+      "colors": "deep indigo-black, saffron, magenta",
+      "focal": "30% 50%",
+      "notes": "Wide cinematic night street. Lanterns fill the left third, the right half is dark street and sky with small bunting: put the headline right or lower-right with a 40-55% dark scrim. Landscape about 4:3 (1200x878), crops to 16:9 at 30% 50%.",
+      "width": 1200,
+      "height": 878,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-mela/31559552-1600.jpg"
+      }
+    },
+    {
+      "slot": "streetfood",
+      "src": "pexels",
+      "id": "39025942",
+      "page": "https://www.pexels.com/photo/39025942/",
+      "url": "https://images.pexels.com/photos/39025942/pexels-photo-39025942.jpeg",
+      "photographer": "Diana Teronpi",
+      "photographerUrl": "https://www.pexels.com/@diana-teronpi-2153298285",
+      "alt": "A vendor in black gloves plates chaat at a counter lined with bowls of green chutney, sev, peanuts and yogurt.",
+      "colors": "black, chutney green, saffron",
+      "focal": "45% 60%",
+      "notes": "Warm, well-lit counter shot with gloved hands only, no face. Good for the Chaat stall card; square crop at 45% 60% keeps the plate and chutney bowls.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/diwali-mela/39025942-600.jpg"
+      }
+    },
+    {
+      "slot": "stalls",
+      "src": "unsplash",
+      "id": "8YbJMuAk2BU",
+      "page": "https://unsplash.com/photos/colorful-bangles-and-jewelry-displayed-at-a-market-stall-8YbJMuAk2BU",
+      "url": "https://images.unsplash.com/photo-1760786933035-32da5ebb881c",
+      "photographer": "Zoshua Colah",
+      "photographerUrl": "https://unsplash.com/@zoshuacolah",
+      "alt": "Market shelves stacked with red and ivory bangles beside gold tassels and necklaces against a red wall.",
+      "colors": "red, gold, ivory",
+      "focal": "60% 50%",
+      "notes": "Saturated red and gold, Chandni Chowk bazaar. Works as a Crafts and bangles stall card or a strip behind the vendor-call section; no people, no legible signage.",
+      "width": 1200,
+      "height": 825,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-mela/photo-1760786933035-32da5ebb881c-1600.jpg"
+      }
+    },
+    {
+      "slot": "dance",
+      "src": "pexels",
+      "id": "17264037",
+      "page": "https://www.pexels.com/photo/17264037/",
+      "url": "https://images.pexels.com/photos/17264037/pexels-photo-17264037.jpeg",
+      "photographer": "Teja J",
+      "photographerUrl": "https://www.pexels.com/@djvvadi",
+      "alt": "Hands wearing bangles and colourful sleeves meet in a starburst of painted dandiya sticks during a Navratri dance.",
+      "colors": "saffron, magenta, yellow, blue",
+      "focal": "50% 50%",
+      "notes": "Radial composition centred on the stick tips: ideal for a round or circular crop, or a garba section banner. Anonymous hands, no faces.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/diwali-mela/17264037-1000.jpg"
+      }
+    },
+    {
+      "slot": "fireworks",
+      "src": "unsplash",
+      "id": "lFMNlflDdow",
+      "page": "https://unsplash.com/photos/colorful-fireworks-explode-in-the-night-sky-above-silhouetted-crowd-lFMNlflDdow",
+      "url": "https://images.unsplash.com/photo-1760881973494-6df29de5e36f",
+      "photographer": "Gabriel Mihalcea",
+      "photographerUrl": "https://unsplash.com/@lovelyscape",
+      "alt": "Multicoloured fireworks burst across a black night sky above a silhouetted crowd watching.",
+      "colors": "black, white-blue sparks, magenta, amber",
+      "focal": "50% 45%",
+      "notes": "Shot at a Bonfire Night display (UK) but reads as any fireworks finale. Near-black corners take text well; keep the burst centred, crowd silhouettes stay at the bottom edge.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-mela/photo-1760881973494-6df29de5e36f-1600.jpg"
+      }
+    },
+    {
+      "slot": "rangoli",
+      "src": "pexels",
+      "id": "34400019",
+      "page": "https://www.pexels.com/photo/34400019/",
+      "url": "https://images.pexels.com/photos/34400019/pexels-photo-34400019.jpeg",
+      "photographer": "Anshu Kumar",
+      "photographerUrl": "https://www.pexels.com/@anshu",
+      "alt": "Close view of a coloured-powder rangoli on the ground: a yellow medallion with a magenta flower and green leaves, ringed by white scrollwork and big green petals.",
+      "colors": "yellow, magenta, leaf green, white",
+      "focal": "62% 45%",
+      "notes": "Sharp, saturated top-down-at-an-angle crop of a real powder rangoli, no people. Portrait 3:4; the flower medallion sits right of centre, so crop square or 16:9 at 62% 45%. Grey pavement shows only along the top edge.",
+      "width": 1200,
+      "height": 1600,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/diwali-mela/34400019-1000.jpg"
+      }
+    },
+    {
+      "slot": "sparklers",
+      "src": "pexels",
+      "id": "19120891",
+      "page": "https://www.pexels.com/photo/19120891/",
+      "url": "https://images.pexels.com/photos/19120891/pexels-photo-19120891.jpeg",
+      "photographer": "Rohit Photography",
+      "photographerUrl": "https://www.pexels.com/@rohit-photography-751545565",
+      "alt": "A little girl in a floral dress holds two sparklers at night in a lane strung with fairy lights, with small diyas glowing at her feet.",
+      "colors": "amber, warm gold, black",
+      "focal": "50% 30%",
+      "notes": "Portrait 2:3. Small full-length figure, face is modest in size. Crop 4:5 around the sparklers; the fairy lights frame the top, so keep text at the bottom or to the side.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/diwali-mela/19120891-800.jpg"
+      }
+    },
+    {
+      "slot": "sweets",
+      "src": "pexels",
+      "id": "11484120",
+      "page": "https://www.pexels.com/photo/11484120/",
+      "url": "https://images.pexels.com/photos/11484120/pexels-photo-11484120.jpeg",
+      "photographer": "Towfiqu barbhuiya",
+      "photographerUrl": "https://www.pexels.com/@towfiqu-barbhuiya-3440682",
+      "alt": "Overhead view of a white box of assorted Indian sweets: almond-flaked barfi, creamy sweets topped with pistachio, pink coconut-dusted rolls and golden laddoo.",
+      "colors": "cream, magenta pink, golden yellow",
+      "focal": "50% 50%",
+      "notes": "Tight, evenly lit overhead mithai box with almonds and pistachios; no people, no brand names or text. Landscape 3:2: works as the Sweets stall card or the gift-box call-out; crops cleanly to 4:3 or square.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/diwali-mela/11484120-600.jpg"
+      }
+    },
+    {
+      "slot": "diyas",
+      "src": "pexels",
+      "id": "8887005",
+      "page": "https://www.pexels.com/photo/8887005/",
+      "url": "https://images.pexels.com/photos/8887005/pexels-photo-8887005.jpeg",
+      "photographer": "Lara Jameson",
+      "photographerUrl": "https://www.pexels.com/@lara-jameson",
+      "alt": "A painted clay diya in pink, green and gold sits among marigold petals and pink flowers.",
+      "colors": "magenta, gold, marigold orange",
+      "focal": "50% 60%",
+      "notes": "Portrait close-up, shallow depth of field. Decorated diya reads as hand-painted; ideal for the diya-painting workshop card. Crop square at 50% 60%.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/diwali-mela/8887005-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "unsplash",
+      "id": "DksFIwoPLAA",
+      "page": "https://unsplash.com/photos/tilt-shift-lens-photography-of-street-lights-DksFIwoPLAA",
+      "url": "https://images.unsplash.com/photo-1508519829430-40f7d3d161b4",
+      "photographer": "Pratham Gupta",
+      "photographerUrl": "https://unsplash.com/@pratham061",
+      "alt": "Strings of fairy lights stretch across a market lane at night with red paper lanterns hanging beneath them.",
+      "colors": "black, warm white, crimson",
+      "focal": "50% 35%",
+      "notes": "Second hero candidate: soft, blurred Delhi market lane, lights across the upper half, calm dark lower half for headline text. Landscape 3:2.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-mela/photo-1508519829430-40f7d3d161b4-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "32194484",
+      "page": "https://www.pexels.com/photo/32194484/",
+      "url": "https://images.pexels.com/photos/32194484/pexels-photo-32194484.jpeg",
+      "photographer": "Abin Daniel K",
+      "photographerUrl": "https://www.pexels.com/@abin-daniel-k-2152430448",
+      "alt": "Terracotta pots beside a wicker basket and a wide bowl heaped with small unlit clay diyas in warm sunlight.",
+      "colors": "terracotta orange, brown, sand",
+      "focal": "50% 65%",
+      "notes": "Detail/texture shot of clay diyas and pots for sale. Crop to landscape at 50% 70% for a crafts or diya-stall band; very warm, pairs with saffron palettes.",
+      "width": 1200,
+      "height": 1648,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/diwali-mela/32194484-600.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "19338044",
+      "page": "https://www.pexels.com/photo/19338044/",
+      "url": "https://images.pexels.com/photos/19338044/pexels-photo-19338044.jpeg",
+      "photographer": "SK Siddique Ali",
+      "photographerUrl": "https://www.pexels.com/@sk-siddique-ali-274855415",
+      "alt": "Two children bend over a long row of small lit diyas set along a wall at night.",
+      "colors": "black, amber, gold",
+      "focal": "60% 40%",
+      "notes": "Atmosphere shot for the aarti and diya-lighting moments. Children seen mostly in shadow and profile; dark top-left and bottom edges take text.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/diwali-mela/19338044-1000.jpg"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diwali at the Mehta House (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: Anjali and Rohan Mehta invite you to a vegetarian Diwali dinner on Sunday 8 November 2026: Lakshmi puja at 7:15 pm, a long table of mithai, a kids' rangoli corner and sparklers. Please reply by 29 October.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#4a0f24">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ───────────── tokens ───────────── */
+:root{
+  --wine:#4a0f24; --wine-deep:#2a0716; --wine-mid:#6e1a38;
+  --saffron:#f5a41f; --marigold:#ee7a1c; --gulab:#c52a68; --gulab-soft:#e0527f;
+  --gold:#c8962f; --gold-light:#ecd290; --gold-pale:#f6e7bd;
+  --cream:#fbf2e1; --paper:#fffaf1; --sand:#f3e4c6;
+  --ink:#3a1220; --ink-soft:#6a4650; --line:#e4d0a8;
+  --wa:#0d5c4b; --wa-out:#d8f4c6;
+  --f-display:"Cormorant Garamond","Hind",Georgia,serif;
+  --f-ui:"Hind",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  /* palette styles, tuned to the maroon + saffron brand (roles: c1-c4 accent ink shadow edge tint shine) */
+  --with-rangoli-c1:#f6a21b; --with-rangoli-c2:#e8531f; --with-rangoli-c3:#d2306e; --with-rangoli-c4:#7d1c3c;
+  --with-rangoli-accent:#f3c64f; --with-rangoli-edge:#7d1c3c; --with-rangoli-ink:#4a0f24; --with-rangoli-shadow:#5a1230; --with-rangoli-tint:#fff1d4;
+  --with-utsav-c4:#7d1c3c; --with-utsav-ink:#4a0f24; --with-utsav-shadow:#4a1a10;
+  --with-luxe-c1:#8a1f3d; --with-luxe-c2:#e0792a; --with-luxe-c3:#4a0f24; --with-luxe-edge:#f2c9a0; --with-luxe-ink:#2a0716; --with-luxe-shadow:#1c050f;
+  --with-coquette-ink:#6e1a38; --with-coquette-shadow:#9c2a55;
+  --with-soft3d-c1:#d8431f; --with-soft3d-accent:#f5a41f; --with-soft3d-tint:#f6d9a8;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:92px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1rem/1.65 var(--f-ui);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:600;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0 0 1em}
+a{color:inherit}
+ul,ol{margin:0;padding:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gulab);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--wine);color:var(--cream);padding:10px 16px;border-radius:8px}
+.skip:focus{top:12px}
+
+/* ───────────── rangoli patterns (CSS only) ───────────── */
+.rg-chain{height:10px;background:conic-gradient(from 45deg at 50% 50%,var(--gold) 0 25%,var(--wine) 0 50%,var(--gold) 0 75%,var(--wine) 0) 0 0/10px 10px repeat-x}
+.rg-chain.warm{background:conic-gradient(from 45deg at 50% 50%,var(--saffron) 0 25%,var(--gulab) 0 50%,var(--saffron) 0 75%,var(--gulab) 0) 0 0/10px 10px repeat-x}
+.rg-flowers{height:24px;background:
+    radial-gradient(circle at 50% 50%,var(--wine) 0 2px,transparent 2.6px),
+    radial-gradient(circle at 50% 50%,var(--gulab) 0 5.5px,transparent 6px),
+    repeating-conic-gradient(from 0deg at 50% 50%,var(--saffron) 0 15deg,var(--marigold) 0 30deg);
+  background-size:24px 24px;background-repeat:repeat-x;
+  -webkit-mask:radial-gradient(circle at 50% 50%,#000 0 11.5px,transparent 12px) 0 0/24px 24px repeat-x;mask:radial-gradient(circle at 50% 50%,#000 0 11.5px,transparent 12px) 0 0/24px 24px repeat-x}
+.rg-dots{background-image:radial-gradient(circle,rgba(200,150,47,.38) 1.4px,transparent 2px),radial-gradient(circle,rgba(200,150,47,.2) 1.4px,transparent 2px);background-size:26px 26px;background-position:0 0,13px 13px}
+.rg-frame{--bw:9px;border:var(--bw) solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,conic-gradient(from 45deg at 50% 50%,var(--gold) 0 25%,var(--wine-mid) 0 50%,var(--gold) 0 75%,var(--wine-mid) 0) 0 0/9px 9px border-box;box-shadow:inset 0 0 0 1px var(--gold),0 18px 40px -18px rgba(74,15,36,.35)}
+/* section divider: a chain of rosettes with an ornament between two hairlines */
+.rule{display:flex;align-items:center;gap:16px;margin:0 auto;width:min(560px,100% - 40px);color:var(--wine)}
+.rule .rside{flex:1;display:block;-webkit-mask-image:linear-gradient(90deg,transparent,#000 60%);mask-image:linear-gradient(90deg,transparent,#000 60%)}
+.rule .rside:last-child{transform:scaleX(-1)}
+.rule .rg-flowers{display:block;opacity:.95}
+.rule-orn{display:inline-flex;min-width:36px;justify-content:center;font-size:26px;line-height:1}
+.rule.on-dark{color:var(--gold-light)}
+.rule .rule-mg{display:inline-flex;color:var(--marigold);margin:0 -4px}
+/* Full level: marigold flourishes on the corners of the framed cards */
+.corner{position:absolute;z-index:3;pointer-events:none;color:var(--marigold);line-height:0}
+.corner.c-tl{left:-14px;top:-14px}.corner.c-br{right:-14px;bottom:-14px}
+.corner.in.c-tl{left:8px;top:8px}.corner.in.c-br{right:8px;bottom:8px}
+@media (max-width:560px){.corner.c-tl{left:-10px;top:-10px}.corner.c-br{right:-10px;bottom:-10px}}
+
+/* ───────────── buttons & small parts ───────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;border:1.5px solid transparent;font:600 1rem/1 var(--f-ui);letter-spacing:.02em;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .2s var(--ease),box-shadow .2s,background .2s,color .2s,border-color .2s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(180deg,#f8c54f,#e49a22);color:var(--wine-deep);box-shadow:0 10px 24px -8px rgba(228,154,34,.65),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(228,154,34,.8),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-ghost{border-color:rgba(251,242,225,.6);color:var(--cream);background:rgba(251,242,225,.07)}
+.btn-ghost:hover{background:rgba(251,242,225,.16)}
+.btn-wine{background:var(--wine);color:var(--cream)}
+.btn-wine:hover{background:var(--wine-mid);transform:translateY(-2px)}
+.btn-line{border-color:var(--wine);color:var(--wine);background:transparent}
+.btn-line:hover{background:var(--wine);color:var(--cream)}
+.btn-sm{min-height:44px;padding:0 18px;font-size:.95rem}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:600 .8rem/1.2 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--gulab);margin:0 0 14px}
+.on-dark .kicker,.kicker.on-dark{color:var(--gold-light)}
+.sec{padding:clamp(64px,9vw,112px) 0;position:relative}
+.sec-head{text-align:center;max-width:720px;margin:0 auto clamp(36px,5vw,60px)}
+.sec-head h2{font-size:clamp(2.3rem,5vw,3.8rem);color:var(--wine)}
+.sec-head p{font:italic 500 clamp(1.15rem,2vw,1.4rem)/1.5 var(--f-display);color:var(--ink-soft);margin:16px 0 0}
+.on-dark .sec-head h2{color:var(--cream)}
+.on-dark .sec-head p{color:var(--gold-pale)}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;font:600 .7rem/1.5 var(--f-ui);letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor}
+.credit-tag{position:absolute;z-index:3;right:12px;bottom:10px;white-space:nowrap;font-size:.7rem;line-height:1.3;color:rgba(255,248,235,.85);background:rgba(42,7,22,.55);padding:3px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+.credit-tag a{text-underline-offset:2px}
+
+/* Basic level: the emoji fallbacks grow with the slot, like a plain site that sized its emoji by hand */
+html[data-level="0"] .kit-ico[data-size="16"]>.kit-fb{font-size:12px}
+html[data-level="0"] .kit-ico[data-size="18"]>.kit-fb{font-size:14px}
+html[data-level="0"] .kit-ico[data-size="20"]>.kit-fb{font-size:16px}
+html[data-level="0"] .kit-ico[data-size="22"]>.kit-fb{font-size:17px}
+html[data-level="0"] .kit-ico[data-size="24"]>.kit-fb{font-size:19px}
+html[data-level="0"] .kit-ico[data-size="26"]>.kit-fb{font-size:20px}
+html[data-level="0"] .kit-ico[data-size="30"]>.kit-fb{font-size:23px}
+html[data-level="0"] .kit-ico[data-size="34"]>.kit-fb{font-size:27px}
+html[data-level="0"] .kit-ico[data-size="36"]>.kit-fb{font-size:28px}
+html[data-level="0"] .kit-ico[data-size="40"]>.kit-fb{font-size:31px}
+html[data-level="0"] .kit-ico[data-size="42"]>.kit-fb{font-size:33px}
+html[data-level="0"] .kit-ico[data-size="44"]>.kit-fb{font-size:34px}
+html[data-level="0"] .kit-ico[data-size="46"]>.kit-fb{font-size:36px}
+html[data-level="0"] .kit-ico[data-size="48"]>.kit-fb{font-size:37px}
+html[data-level="0"] .kit-ico[data-size="50"]>.kit-fb{font-size:39px}
+html[data-level="0"] .kit-ico[data-size="56"]>.kit-fb{font-size:44px}
+html[data-level="0"] .kit-ico[data-size="60"]>.kit-fb{font-size:47px}
+html[data-level="0"] .kit-ico[data-size="64"]>.kit-fb{font-size:50px}
+html[data-level="0"] .kit-ico[data-size="68"]>.kit-fb{font-size:53px}
+html[data-level="0"] .kit-ico[data-size="76"]>.kit-fb{font-size:59px}
+html[data-level="0"] .kit-ico[data-size="84"]>.kit-fb{font-size:66px}
+html[data-level="0"] .kit-ico[data-size="88"]>.kit-fb{font-size:69px}
+html[data-level="0"] .kit-ico[data-size="150"]>.kit-fb{font-size:117px}
+html[data-level="0"] .kit-ico>.kit-fb{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+
+/* ───────────── announcement + header ───────────── */
+.announce{background:var(--wine-deep);color:var(--gold-light);text-align:center;font-size:.875rem;line-height:1.4;padding:9px 16px;letter-spacing:.02em}
+.announce b{color:var(--cream);font-weight:600}
+.announce .kit-ico{margin-right:6px;vertical-align:-4px}
+.site-head{position:sticky;top:0;z-index:60;background:rgba(251,242,225,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.site-head::after{content:"";display:block;height:6px;background:conic-gradient(from 45deg at 50% 50%,var(--gold) 0 25%,var(--wine) 0 50%,var(--gold) 0 75%,var(--wine) 0) 0 0/6px 6px repeat-x}
+.head-in{display:flex;align-items:center;gap:14px;min-height:70px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--wine);margin-right:auto;min-height:44px}
+.brand b{display:block;font:700 1.55rem/1 var(--f-display);letter-spacing:.005em}
+.brand small{display:block;font:500 .68rem/1.3 var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-weight:500;font-size:.95rem;text-decoration:none;color:var(--ink);border-radius:10px;position:relative}
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:7px;height:2px;background:var(--gulab);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+.menu-btn{display:none;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;border:1.5px solid var(--wine);background:transparent;color:var(--wine);cursor:pointer}
+.head-cta{display:inline-flex}
+@media (max-width:1040px){
+  .menu-btn{display:inline-flex}
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--cream);padding:8px 20px 18px;border-bottom:1px solid var(--line);box-shadow:0 20px 30px -20px rgba(42,7,22,.4)}
+  .nav.open{display:flex}
+  .nav a{min-height:50px;font-size:1.05rem;border-bottom:1px solid var(--line);border-radius:0}
+  .nav a::after{display:none}
+}
+@media (max-width:480px){.brand small{display:none}.brand b{font-size:1.4rem}.head-cta .btn{padding:0 16px}.head-in{gap:10px}}
+.brand b{white-space:nowrap}
+@media (max-width:380px){.brand{gap:8px}.brand b{font-size:1.2rem}.head-in{gap:8px}.menu-btn{width:44px;height:44px}.head-cta .btn{padding:0 12px;gap:6px}}
+.head-cta .btn.on{box-shadow:0 0 0 2px var(--cream),0 0 0 4px var(--gulab)}
+
+/* ───────────── diyas (CSS only, flickering) ───────────── */
+.diyas{display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,2vw,26px);height:70px;margin:0 auto}
+.diya{position:relative;width:46px;height:26px;flex:none}
+.diya:nth-child(even){transform:scale(.84);transform-origin:50% 100%}
+.diya:nth-child(4n+3){transform:scale(.92);transform-origin:50% 100%}
+.diya .cup{position:absolute;left:0;right:0;bottom:0;height:20px;border-radius:3px 3px 24px 24px/3px 3px 20px 20px;background:linear-gradient(180deg,#f2a84e 0,#c9661f 38%,#7a2b12 100%);box-shadow:inset 0 1.5px 0 rgba(255,228,176,.6),0 10px 14px -4px rgba(0,0,0,.55)}
+.diya .cup::before{content:"";position:absolute;left:-7px;top:-1px;width:14px;height:9px;border-radius:9px 0 9px 0;background:#d9792c;transform:rotate(16deg)}
+.diya .cup::after{content:"";position:absolute;left:4px;right:4px;top:-2px;height:8px;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#ffe39a,#e8992b)}
+.diya .flame{position:absolute;left:50%;bottom:15px;width:14px;height:14px;margin-left:-7px;transform-origin:50% 100%;animation:flick var(--t,1.5s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.diya .flame::before{content:"";position:absolute;inset:0;border-radius:0 50% 50% 50%;transform:rotate(45deg);background:radial-gradient(circle at 36% 64%,#fffbe2 0 20%,#ffd54f 46%,#ff9d22 76%,#ff7a12);box-shadow:0 0 10px 2px rgba(255,170,50,.7)}
+.diya .flame::after{content:"";position:absolute;left:50%;top:30%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:radial-gradient(circle,rgba(255,176,60,.40),rgba(255,120,20,.12) 46%,transparent 70%);animation:glow 2.6s ease-in-out infinite alternate;animation-delay:var(--d,0s);pointer-events:none}
+@keyframes flick{0%{transform:scale(.92,1.5) skewX(-3deg)}35%{transform:scale(1.02,1.68) skewX(2deg)}70%{transform:scale(.9,1.44) skewX(-1deg)}100%{transform:scale(1.05,1.6) skewX(3deg)}}
+@keyframes glow{from{opacity:.7;transform:scale(.92)}to{opacity:1;transform:scale(1.08)}}
+.diyas.small{height:56px;transform:scale(.78);transform-origin:50% 100%}
+@media (prefers-reduced-motion:reduce){.diya .flame,.diya .flame::after{animation:none}}
+@media (max-width:560px){.diya{width:38px}.diyas .diya:nth-child(n+8){display:none}.diyas{gap:8px}}
+.diyas .diya:nth-child(1){--d:-.3s;--t:1.3s}.diyas .diya:nth-child(2){--d:-1.1s;--t:1.7s}.diyas .diya:nth-child(3){--d:-.7s;--t:1.45s}.diyas .diya:nth-child(4){--d:-1.4s;--t:1.2s}.diyas .diya:nth-child(5){--d:-.2s;--t:1.6s}.diyas .diya:nth-child(6){--d:-.9s;--t:1.35s}.diyas .diya:nth-child(7){--d:-1.2s;--t:1.55s}.diyas .diya:nth-child(8){--d:-.5s;--t:1.25s}.diyas .diya:nth-child(9){--d:-.8s;--t:1.65s}
+
+/* ───────────── hero ───────────── */
+.hero{position:relative;isolation:isolate;overflow:hidden;color:var(--cream);background:var(--wine-deep);text-align:center;padding:clamp(40px,5vw,62px) 20px clamp(132px,13vw,160px)}
+/* the hero photo credit clears the facts plate that overlaps the bottom of the hero */
+.hero>.credit-tag{bottom:104px}
+@media (max-width:560px){.hero>.credit-tag{bottom:72px}}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 84%;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(ellipse 62% 52% at 50% 40%,rgba(42,7,22,.74),rgba(42,7,22,.3) 72%,transparent),
+  linear-gradient(180deg,rgba(42,7,22,.86) 0,rgba(42,7,22,.5) 42%,rgba(42,7,22,.12) 68%,rgba(42,7,22,.7) 100%)}
+.hero-in{position:relative;max-width:900px;margin:0 auto}
+.hero .kicker{color:var(--gold-light);margin-bottom:10px;font-size:.85rem}
+.hero .deva{font:600 1.1rem/1 var(--f-ui);letter-spacing:.08em;text-transform:none}
+.hero h1{display:flex;flex-direction:column;align-items:center;gap:0}
+.h1-a{font:italic 700 clamp(5rem,15vw,9.2rem)/.84 var(--f-display);background:linear-gradient(180deg,#fff0bd 0,#f4c552 38%,#d79527 70%,#f0c15a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 18px rgba(0,0,0,.4));padding:0 .08em .06em}
+.h1-b{font:600 clamp(1.7rem,4.6vw,3.2rem)/1.1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--cream);margin-top:6px;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.hero .lede{font:italic 500 clamp(1.2rem,2.4vw,1.6rem)/1.4 var(--f-display);color:var(--gold-pale);margin:14px auto 22px;max-width:640px;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.hero .invite-line{margin:20px auto 22px;max-width:700px;font-size:1.02rem;color:rgba(251,242,225,.92)}
+.hero .invite-line b{color:#fff;font-weight:600}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.countdown{display:inline-flex;flex-direction:column;align-items:center;gap:9px;margin-top:26px}
+.countdown>p{margin:0;font:600 .74rem/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light)}
+.cd{display:flex;gap:10px}
+.cd[hidden]{display:none}
+.cd div{min-width:66px;padding:8px 8px 7px;border-radius:14px;background:rgba(42,7,22,.55);border:1px solid rgba(236,210,144,.4);backdrop-filter:blur(6px)}
+.cd b{display:block;font:600 1.9rem/1 var(--f-display);color:#fff;font-variant-numeric:tabular-nums}
+.cd span{display:block;font:500 .66rem/1.3 var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-top:4px}
+/* "has come and gone" / "the diyas are lit": needs the extra specificity to beat .countdown>p */
+.countdown>p.cd-msg{margin:0;max-width:520px;font:italic 600 clamp(1.2rem,3.6vw,1.5rem)/1.3 var(--f-display);text-transform:none;letter-spacing:0;text-align:center;color:var(--gold-pale);text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.hero .hero-art{position:absolute;top:50%;z-index:1;display:none;color:var(--saffron)}
+.hero .hero-art.l{left:max(2vw,calc(50% - 640px))}.hero .hero-art.r{right:max(2vw,calc(50% - 640px))}
+.hero-toran{position:absolute;left:0;right:0;top:0;display:none;justify-content:space-evenly;pointer-events:none}
+html[data-level="2"] .hero-toran{display:flex}
+@media (min-width:1180px){html[data-level="2"] .hero .hero-art{display:inline-flex;transform:translateY(-62%)}}
+/* Full level below 1180px: a scaled-down diya and rangoli flank the "Diwali" wordmark instead of the big corner pieces */
+.hero-flank{display:none;position:absolute;left:50%;top:44px;transform:translateX(-50%);width:min(100%,calc(clamp(5rem,15vw,9.2rem) * 2.4 + 168px));height:calc(clamp(5rem,15vw,9.2rem) * .84);justify-content:space-between;align-items:center;color:var(--saffron);pointer-events:none}
+html[data-level="2"] .hero-flank{display:flex}
+@media (min-width:700px){.hero-flank .kit-ico{transform:scale(1.3)}}
+@media (min-width:1180px){html[data-level="2"] .hero-flank{display:none}}
+@media (max-width:1100px){html[data-level="2"] .hero{padding-top:84px}}
+@media (max-width:700px){.hero .hero-toran .kit-ico:nth-child(n+6){display:none}}
+@media (max-width:430px){.hero .hero-toran .kit-ico:nth-child(n+5){display:none}}
+@media (max-width:620px){.cd{gap:6px}.cd div{min-width:60px}.cd b{font-size:1.8rem}}
+
+/* ───────────── facts plate ───────────── */
+.facts-wrap{position:relative;z-index:5;margin-top:-92px}
+.facts{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-radius:18px;padding:0}
+.fact{display:flex;align-items:center;gap:16px;padding:24px 22px;position:relative}
+.fact+.fact::before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:1px;background:linear-gradient(transparent,var(--gold),transparent)}
+.fact .fi{color:var(--wine);flex:none}
+.fact small{display:block;font:600 .7rem/1.3 var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gulab)}
+.fact strong{display:block;font:700 1.5rem/1.15 var(--f-display);color:var(--wine);margin:2px 0}
+.fact span.sub{display:block;font-size:.88rem;line-height:1.4;color:var(--ink-soft)}
+html[data-level="0"] .fact [data-live]{border:1.5px solid var(--wine);border-radius:12px;font:700 1.15rem/1.1 var(--f-display);color:var(--wine);text-align:center;padding:4px}
+@media (max-width:1020px){.facts{grid-template-columns:1fr 1fr}.fact:nth-child(3)::before{display:none}.fact:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.facts{grid-template-columns:1fr}.fact+.fact::before{display:none}.fact:nth-child(n+2){border-top:1px solid var(--line)}.facts-wrap{margin-top:-60px}.fact{padding:18px 18px}}
+
+/* ───────────── welcome ───────────── */
+.welcome{padding-top:clamp(56px,8vw,96px)}
+.welcome-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,84px);align-items:start}
+.arch{position:relative;max-width:440px;margin:0 auto;width:100%;--bw:11px;border-radius:999px 999px 18px 18px}
+.arch img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%;border-radius:999px 999px 6px 6px;background:var(--sand)}
+.arch-badge{position:absolute;right:-14px;top:42%;background:var(--paper);border-radius:50%;padding:8px;box-shadow:0 10px 24px rgba(74,15,36,.28);color:var(--wine);z-index:2}
+.welcome h2{font-size:clamp(2.3rem,4.6vw,3.6rem);color:var(--wine);margin-bottom:22px}
+.welcome h2 em{color:var(--gulab);font-weight:600}
+.letter{font:500 clamp(1.18rem,1.7vw,1.4rem)/1.62 var(--f-display);color:var(--ink)}
+.letter p{margin-bottom:.9em}
+.letter .hi::first-letter{float:left;font:700 4.3em/.78 var(--f-display);color:var(--gulab);padding:.06em .1em 0 0}
+.sign{display:flex;align-items:center;gap:14px;margin-top:6px}
+.sign .names{font:italic 700 1.9rem/1 var(--f-display);color:var(--wine)}
+.sign small{display:block;font:500 .85rem/1.3 var(--f-ui);color:var(--ink-soft);letter-spacing:.02em;margin-top:4px;font-style:normal}
+.save{display:grid;grid-template-columns:auto 1fr;gap:18px 22px;align-items:center;margin-top:34px;padding:22px 24px;border-radius:18px;background:var(--sand);border:1px solid var(--line)}
+.save h3{font-size:1.5rem;color:var(--wine)}
+.save p{margin:4px 0 12px;font-size:.95rem;color:var(--ink-soft)}
+.save .acts{display:flex;flex-wrap:wrap;gap:10px}
+.save .ring{color:var(--wine)}
+.save .ring-cap{display:block;text-align:center;font:600 .66rem/1.2 var(--f-ui);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+html[data-level="0"] .save .ring [data-live]{font:700 1.8rem/1 var(--f-display);color:var(--wine);border:2px solid var(--wine);border-radius:50%}
+@media (max-width:900px){.welcome-grid{grid-template-columns:1fr}.arch{max-width:340px;margin-bottom:24px}}
+@media (max-width:520px){.save{grid-template-columns:1fr;justify-items:start}}
+
+/* ───────────── the evening (timeline) ───────────── */
+.evening{background:linear-gradient(180deg,#42102a 0,#2b0a22 38%,#181634 100%);color:var(--cream);overflow:hidden}
+.evening::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.9;background-image:
+  radial-gradient(1.6px 1.6px at 30px 40px,#ffe9b0,transparent),radial-gradient(1px 1px at 120px 90px,#fff,transparent),radial-gradient(1.4px 1.4px at 210px 30px,#ffd9a0,transparent),radial-gradient(1px 1px at 70px 160px,#fff,transparent),radial-gradient(1.5px 1.5px at 250px 190px,#ffe9b0,transparent),radial-gradient(1px 1px at 170px 230px,#fff,transparent);
+  background-size:300px 270px;-webkit-mask-image:linear-gradient(180deg,transparent 18%,#000 80%);mask-image:linear-gradient(180deg,transparent 18%,#000 80%)}
+.evening .wrap{position:relative}
+.evening-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(36px,6vw,80px);align-items:start}
+.tl{list-style:none;position:relative;--tc:92px}
+.tl::before{content:"";position:absolute;left:calc(var(--tc) + 14px + 21px);top:30px;bottom:34px;width:2px;background:linear-gradient(180deg,var(--gold),rgba(200,150,47,.18))}
+.tl-item{display:grid;grid-template-columns:var(--tc) 44px minmax(0,1fr);gap:0 14px;align-items:start;padding-bottom:26px;position:relative}
+.tl-time{text-align:center;color:var(--gold-light)}
+.tl-time b{display:block;font:700 1.1rem/1.2 var(--f-display);letter-spacing:.04em;margin-top:6px;color:var(--cream)}
+.tl-node{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;z-index:1}
+.tl-node i{position:relative;width:16px;height:16px;border-radius:50%;background:#5a2a3c;border:2px solid var(--gold);transition:background .6s,box-shadow .6s,transform .6s var(--ease)}
+.tl-item.lit .tl-node i{background:radial-gradient(circle at 40% 40%,#fff6cf,#ffc447 60%,#f08a1d);box-shadow:0 0 0 5px rgba(245,164,31,.18),0 0 24px 6px rgba(255,170,50,.55);transform:scale(1.15)}
+.tl-card{padding:20px 22px 20px;border-radius:18px;background:linear-gradient(160deg,rgba(255,248,235,.10),rgba(255,248,235,.04));border:1px solid rgba(236,210,144,.28);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.tl-card h3{display:flex;align-items:center;gap:12px;font-size:1.75rem;color:var(--cream);margin-bottom:8px}
+.tl-card h3 .kit-ico{color:var(--saffron)}
+.tl-card p{margin:0 0 .6em;color:rgba(251,242,225,.88);font-size:1rem}
+.tl-card p:last-child{margin-bottom:0}
+.tl-card .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px 5px 8px;border-radius:999px;font-size:.84rem;font-weight:500;background:rgba(251,242,225,.1);border:1px solid rgba(236,210,144,.3);color:var(--gold-pale)}
+.light .chip,.chip.light{background:var(--paper);border-color:var(--line);color:var(--ink)}
+/* Basic: the plain site only prints the time once (the bold line); the clock and the glyph are the upgrade */
+html[data-level="0"] .tl-time .kit-live,html[data-level="0"] .tl-time .kit-ico{display:none}
+html[data-level="0"] .tl-time b{margin-top:22px}
+.aside-sticky{display:grid;gap:22px}
+.puja-photo{position:relative;border-radius:200px 200px 22px 22px;overflow:hidden;border:2px solid var(--gold);box-shadow:0 26px 50px -22px rgba(0,0,0,.7)}
+.puja-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:35% 30%}
+.muhurat{padding:24px 24px 22px;border-radius:20px;background:var(--paper);color:var(--ink);border:1px solid var(--gold);position:relative}
+.muhurat h3{font-size:1.7rem;color:var(--wine);margin:2px 0 10px;display:flex;gap:12px;align-items:center}
+.muhurat p{font-size:.98rem;margin:0 0 .8em;color:var(--ink)}
+.muhurat .mini{display:block;font:600 .68rem/1.2 var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gulab);margin-bottom:4px}
+.mbar{position:relative;margin:24px 2px 40px}
+.mtrack{position:relative;height:16px;border-radius:999px;background:var(--sand);box-shadow:inset 0 0 0 1px var(--line)}
+.mtrack .win{position:absolute;top:0;bottom:0;border-radius:999px;background:repeating-linear-gradient(135deg,var(--gold-pale) 0 6px,var(--gold-light) 6px 12px);box-shadow:inset 0 0 0 1px var(--gold)}
+.mtrack .puj{position:absolute;top:-4px;bottom:-4px;border-radius:999px;background:linear-gradient(180deg,#f58f2a,#d4332b);box-shadow:0 4px 10px -2px rgba(212,51,43,.55)}
+.mtick{position:absolute;top:22px;transform:translateX(-50%);font:600 .72rem/1.2 var(--f-ui);color:var(--ink-soft);white-space:nowrap;text-align:center}
+.mtick::before{content:"";position:absolute;left:50%;top:-8px;height:6px;width:1px;background:var(--ink-soft)}
+.mtick:first-of-type{transform:none}.mtick:first-of-type::before{left:0}
+.mtick.t-opt{}
+@media (max-width:520px){.mtick.t-opt{font-size:0}}
+.mkey{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 12px;font-size:.84rem;color:var(--ink-soft)}
+.mkey i{display:inline-block;width:22px;height:9px;border-radius:99px;vertical-align:middle;margin-right:6px}
+.mkey .k1{background:repeating-linear-gradient(135deg,var(--gold-pale) 0 4px,var(--gold-light) 4px 8px);box-shadow:inset 0 0 0 1px var(--gold)}
+.mkey .k2{background:linear-gradient(180deg,#f58f2a,#d4332b)}
+.finale{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:0;margin-top:clamp(28px,5vw,56px);border-radius:26px;overflow:hidden;border:1px solid rgba(236,210,144,.4);background:linear-gradient(160deg,#20204a,#141330);box-shadow:0 40px 70px -30px rgba(0,0,0,.8)}
+.finale-img{position:relative;min-height:380px}
+.finale-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:55% 38%}
+.finale-body{padding:clamp(22px,4vw,44px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.finale-body h3{font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--cream);display:flex;align-items:center;gap:14px}
+.finale-body h3 .kit-ico{color:var(--saffron)}
+.finale-body>p{margin:0;color:rgba(251,242,225,.9);font-size:1.02rem}
+.safe{list-style:none;display:grid;gap:10px;margin:4px 0 0}
+.safe li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:rgba(251,242,225,.92)}
+.safe .kit-ico{margin-top:1px;color:var(--gold-light)}
+.diya-row{display:flex;justify-content:center;gap:clamp(8px,2vw,16px);padding-top:4px;color:var(--saffron)}
+.live-row{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center;padding:16px 18px;border-radius:16px;background:rgba(255,248,235,.07);border:1px solid rgba(236,210,144,.25);color:var(--gold-light)}
+.live-row .lr{display:flex;align-items:center;gap:12px;font-size:.92rem;line-height:1.35;color:var(--gold-pale);min-width:0}
+.live-row .lr>div{min-width:0;flex:1 1 140px}
+.live-row .lr b{display:block;color:var(--cream);font:700 1.15rem/1.1 var(--f-display)}
+html:not([data-level="0"]) .live-row [data-live]{background:rgba(255,248,235,.94);border-radius:18px;padding:5px;color:var(--wine)}
+html[data-level="0"] .live-row [data-live]{font:700 1rem/1.1 var(--f-ui);color:var(--cream);border:1.5px solid var(--gold);border-radius:12px;padding:6px 10px}
+@media (max-width:980px){
+  .evening-grid{grid-template-columns:1fr}
+  .aside-sticky{position:static;grid-template-columns:1fr;max-width:560px;margin:10px auto 0}
+  .puja-photo{max-width:380px;margin:0 auto}
+  .finale{grid-template-columns:minmax(0,1fr)}.finale-img{min-height:300px;aspect-ratio:4/3}
+}
+@media (max-width:620px){
+  .tl{--tc:0px}
+  .tl::before{left:21px}
+  .tl-item{grid-template-columns:44px minmax(0,1fr);grid-template-areas:"n c";padding-bottom:20px}
+  .tl-time{grid-area:c;display:flex;align-items:center;gap:12px;text-align:left;margin:0 0 -4px;position:relative;z-index:1;padding:0 0 8px}
+  .tl-time b{margin:0;font-size:1.3rem}
+  html[data-level="0"] .tl-time b{margin:0}
+  .tl-node{grid-area:n}
+  .tl-card{grid-area:c;margin-top:70px}
+  html[data-level="0"] .tl-card{margin-top:42px}
+  .tl-card h3{font-size:1.55rem}
+}
+
+.puja-steps{padding:24px 24px 18px;border-radius:20px;background:linear-gradient(160deg,rgba(255,248,235,.10),rgba(255,248,235,.04));border:1px solid rgba(236,210,144,.28)}
+.puja-steps h3{display:flex;align-items:center;gap:12px;font-size:1.65rem;color:var(--cream);margin-bottom:12px}
+.puja-steps h3 .kit-ico{color:var(--saffron)}
+.puja-steps ol{list-style:none;display:grid;gap:14px}
+.puja-steps li{display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px;align-items:start;font-size:.96rem;line-height:1.5;color:rgba(251,242,225,.86)}
+.puja-steps li b{display:block;font:700 1.2rem/1.2 var(--f-display);color:var(--gold-pale);margin-bottom:2px}
+html[data-level="0"] .puja-steps [data-live]{width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--wine-deep);font:700 1.1rem/1 var(--f-display)}
+/* ───────────── menu: the thali card ───────────── */
+.menu{background:var(--cream);position:relative}
+.menu.rg-dots{background-color:var(--cream)}
+.diet{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 10px;margin:-18px 0 34px}
+.diet-label{font:600 .8rem/1 var(--f-ui);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-right:6px}
+.diet button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font-weight:500;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.diet button:hover{border-color:var(--wine)}
+.diet button[aria-pressed="true"]{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+.diet-count{flex-basis:100%;text-align:center;font-size:.9rem;color:var(--ink-soft);margin:2px 0 0;min-height:1.4em}
+.menu-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,5vw,72px);align-items:start}
+.menu-aside{position:sticky;top:98px;display:grid;gap:30px;justify-items:center}
+.plate{position:relative;width:min(100%,400px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 36% 28%,#fbe7a6 0,#e2b550 34%,#bf8a26 66%,#8f6112 100%);box-shadow:0 0 0 7px #e7c36d,0 0 0 8px #946813,0 34px 50px -20px rgba(74,15,36,.55),inset 0 0 0 1px rgba(255,255,255,.25)}
+.plate::before{content:"";position:absolute;inset:3.5%;border-radius:50%;background:radial-gradient(circle,transparent 0 90%,rgba(74,15,36,.5) 90.5% 92%,transparent 92.5%),radial-gradient(circle at 50% 50%,#f4d98a 0,#d5a63d 70%,#c0902a);box-shadow:inset 0 3px 12px rgba(74,15,36,.35),inset 0 -2px 6px rgba(255,255,255,.35)}
+.plate::after{content:"";position:absolute;inset:8%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(74,15,36,.55) 0 1.2deg,transparent 0 6deg);-webkit-mask:radial-gradient(circle,transparent 0 86%,#000 87% 91%,transparent 92%);mask:radial-gradient(circle,transparent 0 86%,#000 87% 91%,transparent 92%)}
+.plate-mid{position:absolute;inset:34%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--wine);background:radial-gradient(circle,rgba(255,250,235,.94),rgba(250,232,185,.85));box-shadow:inset 0 0 0 2px rgba(74,15,36,.45),0 0 0 4px rgba(255,255,255,.18);padding:6px;z-index:1}
+.plate-mid small{font:600 .6rem/1.2 var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gulab)}
+.plate-mid b{font:700 clamp(1.05rem,2.3vw,1.4rem)/1.05 var(--f-display);margin-top:2px}
+.plate-mid .count{font:500 .72rem/1.2 var(--f-ui);color:var(--ink-soft);margin-top:3px}
+.katori{--a:0deg;position:absolute;left:50%;top:50%;width:27%;aspect-ratio:1;margin:-13.5% 0 0 -13.5%;border:0;padding:0;border-radius:50%;cursor:pointer;transform:rotate(var(--a)) translateY(-122%) rotate(calc(var(--a) * -1));background:radial-gradient(circle at 34% 28%,#ffffff,#d9d6d0 48%,#a9a59d 100%);box-shadow:0 10px 14px -4px rgba(74,15,36,.55),inset 0 0 0 2px rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;color:var(--wine);transition:filter .2s;z-index:2}
+.katori::before{content:"";position:absolute;inset:11%;border-radius:50%;background:radial-gradient(circle at 50% 36%,#fffaf0,#f6e8c8);box-shadow:inset 0 3px 8px rgba(74,15,36,.38),inset 0 0 0 1px rgba(74,15,36,.15)}
+.katori .kit-ico{position:relative;z-index:1}
+.katori:hover,.katori:focus-visible,.katori.on{filter:brightness(1.07) drop-shadow(0 0 10px rgba(255,255,255,.7))}
+.katori.on::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2.5px solid var(--gulab)}
+.katori:nth-of-type(1){--a:0deg}.katori:nth-of-type(2){--a:72deg}.katori:nth-of-type(3){--a:144deg}.katori:nth-of-type(4){--a:216deg}.katori:nth-of-type(5){--a:288deg}
+.menu-photo{position:relative;width:100%;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -22px rgba(74,15,36,.5)}
+.menu-photo img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:42% 62%}
+.thali-card{container-type:inline-size;padding:0;border-radius:10px;overflow:hidden;--bw:9px}
+.tc-banner{position:relative;height:clamp(110px,16vw,168px);margin:-1px -1px 0}
+.tc-banner img{width:100%;height:100%;object-fit:cover;object-position:50% 66%}
+.tc-banner .credit-tag{top:10px;bottom:auto}
+.tc-in{padding:6px clamp(18px,4cqi,40px) clamp(24px,4cqi,40px);position:relative}
+.tc-head{text-align:center;margin:22px 0 22px;position:relative}
+.tc-head small{display:block;font:600 .7rem/1.3 var(--f-ui);letter-spacing:.24em;text-transform:uppercase;color:var(--gulab)}
+.tc-head h3{font:700 clamp(2rem,6cqi,2.7rem)/1.05 var(--f-display);color:var(--wine);margin:4px 0 4px}
+.tc-head p{margin:0;font:italic 500 1.1rem/1.4 var(--f-display);color:var(--ink-soft)}
+.course{padding:22px 0 8px;border-top:1px dashed var(--gold);transition:background .5s}
+.course:first-of-type{border-top:0;padding-top:10px}
+.course.flash{background:linear-gradient(90deg,rgba(245,164,31,.22),transparent)}
+.course-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.bowl{flex:none;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--wine);background:radial-gradient(circle at 34% 28%,#fff,#d9d6d0 52%,#a9a59d);box-shadow:0 5px 8px -3px rgba(74,15,36,.5),inset 0 0 0 2px rgba(255,255,255,.55);position:relative}
+.bowl::before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle at 50% 36%,#fffaf0,#f6e8c8);box-shadow:inset 0 2px 5px rgba(74,15,36,.35)}
+.bowl .kit-ico{position:relative;z-index:1}
+.course-head h4{font:700 1.7rem/1.05 var(--f-display);color:var(--wine)}
+.course-head small{display:block;font:500 .8rem/1.3 var(--f-ui);color:var(--ink-soft);letter-spacing:.04em;margin-top:3px}
+.dishes{list-style:none;display:grid;grid-template-columns:1fr;gap:4px 34px}
+@container (min-width:600px){.dishes{grid-template-columns:1fr 1fr}}
+.dish{padding:10px 0 12px;border-bottom:1px solid rgba(200,150,47,.25);transition:opacity .3s,filter .3s}
+.dish-top{display:flex;align-items:baseline;gap:8px}
+.dish h5{font:700 1.28rem/1.2 var(--f-display);margin:0;color:var(--ink)}
+.dish .lead{flex:1;border-bottom:2px dotted rgba(200,150,47,.7);transform:translateY(-4px);min-width:12px}
+.dish .region{font:600 .7rem/1.2 var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--gulab);white-space:nowrap}
+.dish p{margin:3px 0 6px;font-size:.92rem;line-height:1.5;color:var(--ink-soft)}
+.dish .tags{display:flex;flex-wrap:wrap;gap:6px}
+.dish .tag{font-size:.64rem;padding:1px 8px;color:var(--wine-mid);border-color:rgba(110,26,56,.4)}
+.dish .tag.nuts{color:#8a4a00;border-color:rgba(138,74,0,.5)}
+.dishes.filtered .dish:not(.match){opacity:.28;filter:grayscale(.8)}
+.dishes.filtered .dish.match{background:linear-gradient(90deg,rgba(245,164,31,.14),transparent)}
+.tc-foot{margin:18px 0 0;padding:14px 18px;border-radius:12px;background:var(--sand);font-size:.92rem;color:var(--ink-soft);display:flex;gap:12px;align-items:flex-start}
+.tc-foot .kit-ico{margin-top:2px;color:var(--wine)}
+/* the thali plate stays pinned on every desktop height: it shrinks with short windows and the photo steps aside when there is no room for both */
+@media (min-width:901px){.plate{width:min(100%,400px,max(280px,calc(100vh - 210px)))}}
+@media (min-width:901px) and (max-height:799px){.menu-photo{display:none}}
+@media (max-width:900px){
+  .menu-grid{grid-template-columns:1fr}
+  .menu-aside{position:static}
+  .menu-photo{max-width:560px}
+  .menu-photo img{aspect-ratio:4/3}
+}
+@media (max-width:480px){.bowl{width:54px;height:54px}.course-head h4{font-size:1.5rem}}
+
+/* ───────────── mithai band ───────────── */
+.mithai{background:linear-gradient(180deg,var(--sand),var(--cream));overflow:hidden}
+.mithai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0;border-radius:28px;overflow:hidden;box-shadow:0 40px 70px -40px rgba(74,15,36,.55);border:1px solid var(--line);background:var(--paper)}
+.mithai-photo{position:relative;min-height:420px;order:2}
+.mithai-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 45%}
+.mithai-body{padding:clamp(26px,4.6vw,56px);order:1}
+.mithai-body h2{font-size:clamp(2.1rem,4vw,3.1rem);color:var(--wine);margin-bottom:14px}
+.mithai-body>p{color:var(--ink-soft);font-size:1.02rem}
+.sheet{margin:22px 0 0;padding:0;list-style:none;border-radius:14px;border:1px solid var(--line);background:var(--cream);overflow:hidden}
+.sheet li{display:flex;align-items:center;gap:12px;padding:10px 16px;font-size:.95rem;border-bottom:1px solid var(--line)}
+.sheet li:last-child{border-bottom:0}
+.sheet .kit-ico{color:var(--wine)}
+.sheet b{font-weight:600;color:var(--ink)}
+.sheet span.what{margin-left:auto;font:italic 500 1.05rem/1.2 var(--f-display);color:var(--gulab);text-align:right}
+.sheet li.new{animation:pop .9s var(--ease)}
+@keyframes pop{from{background:rgba(245,164,31,.45);transform:translateX(-8px)}to{background:transparent;transform:none}}
+.sheet-head{display:flex;justify-content:space-between;align-items:baseline;margin-top:22px;font:600 .74rem/1.3 var(--f-ui);letter-spacing:.18em;text-transform:uppercase;color:var(--gulab)}
+.sheet-head span:last-child{letter-spacing:.04em;text-transform:none;color:var(--ink-soft);font-weight:500;font-size:.85rem}
+@media (max-width:900px){.mithai-grid{grid-template-columns:1fr}.mithai-photo{order:0;min-height:0;aspect-ratio:3/2}.mithai-body{order:1}}
+
+/* ───────────── good to know ───────────── */
+.know{background:var(--cream)}
+.know-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.kn{position:relative;padding:28px 22px 24px;border-radius:20px;background:var(--paper);border:1px solid var(--line);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.kn::before{content:"";position:absolute;left:22px;right:22px;top:0;height:5px;border-radius:0 0 6px 6px;background:conic-gradient(from 45deg at 50% 50%,var(--gold) 0 25%,var(--wine) 0 50%,var(--gold) 0 75%,var(--wine) 0) 0 0/5px 5px repeat-x}
+.kn:hover{transform:translateY(-5px);box-shadow:0 24px 40px -24px rgba(74,15,36,.5);border-color:var(--gold)}
+.kn .ic{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--wine);background:radial-gradient(circle at 36% 30%,#fff,var(--gold-pale));box-shadow:inset 0 0 0 2px var(--gold-light),0 8px 14px -8px rgba(74,15,36,.5)}
+.kn h3{font-size:1.55rem;color:var(--wine);margin-bottom:8px}
+.kn p{margin:0;font-size:.95rem;line-height:1.55;color:var(--ink-soft)}
+.kn p+p{margin-top:.6em}
+.kn b{color:var(--ink);font-weight:600}
+@media (max-width:1080px){.know-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.know-grid{grid-template-columns:1fr;gap:14px}.kn{display:grid;grid-template-columns:66px minmax(0,1fr);gap:0 16px;padding:22px 18px 20px}.kn .ic{grid-row:1/3;width:66px;height:66px;margin:0}.kn h3{font-size:1.45rem;margin:0 0 6px;align-self:center}.kn p{grid-column:2}}
+
+/* ───────────── kids' rangoli corner ───────────── */
+.kids{background:linear-gradient(180deg,#fdebc6,#f9d79b);overflow:hidden}
+.kids::before{content:"";position:absolute;inset:0;opacity:.7;background-image:radial-gradient(circle,rgba(200,150,47,.35) 1.5px,transparent 2px);background-size:24px 24px;pointer-events:none}
+.kids .wrap{position:relative}
+.kids-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(30px,6vw,84px);align-items:center}
+.ring-photo{position:relative;width:min(100%,460px);aspect-ratio:1;margin:0 auto;border-radius:50%;padding:22px}
+.ring-photo::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,var(--gulab) 0 6deg,var(--saffron) 0 12deg,var(--wine) 0 18deg,var(--saffron) 0 24deg);-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 22px),#000 calc(100% - 21px));mask:radial-gradient(closest-side,transparent calc(100% - 22px),#000 calc(100% - 21px));animation:spin 90s linear infinite}
+.ring-photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 50%;box-shadow:0 30px 50px -24px rgba(74,15,36,.7);border:4px solid var(--paper)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.ring-photo::before{animation:none}}
+.ring-photo .credit-tag{right:50%;transform:translateX(50%);bottom:-6px}
+.kids h2{font-size:clamp(2.2rem,4.4vw,3.4rem);color:var(--wine);margin-bottom:14px}
+.kids .lead{font:500 clamp(1.15rem,1.7vw,1.35rem)/1.55 var(--f-display);color:var(--ink);margin-bottom:18px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px;padding:0;list-style:none}
+.pills li{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 10px;border-radius:999px;background:var(--paper);border:1px solid rgba(200,150,47,.6);font-size:.92rem;font-weight:500;color:var(--ink)}
+.pills .kit-ico{color:var(--wine)}
+.toy{display:grid;grid-template-columns:auto 1fr;gap:22px 28px;align-items:center;padding:22px 24px;border-radius:22px;background:rgba(255,250,241,.86);border:1px solid var(--gold);box-shadow:0 26px 40px -28px rgba(74,15,36,.6)}
+.mandala{width:min(200px,36vw);aspect-ratio:1;flex:none}
+.mandala svg{width:100%;height:100%;display:block;overflow:visible}
+.toy h3{font-size:1.55rem;color:var(--wine);margin-bottom:4px}
+.toy p{font-size:.92rem;color:var(--ink-soft);margin:0 0 12px}
+.toy .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:12px}
+.toy .row>span.lb{font:600 .72rem/1 var(--f-ui);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);min-width:58px}
+.sw{display:inline-flex;gap:8px}
+.sw button{width:44px;height:44px;border-radius:50%;border:2px solid var(--paper);cursor:pointer;box-shadow:0 0 0 1.5px var(--line);position:relative;padding:0}
+.sw button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--wine)}
+.sw button[title]{background:conic-gradient(var(--s1) 0 33%,var(--s2) 0 66%,var(--s3) 0)}
+.seg{display:inline-flex;border-radius:999px;border:1.5px solid var(--line);background:#fff;overflow:hidden}
+.seg button{min-width:48px;min-height:44px;padding:0 12px;border:0;background:transparent;cursor:pointer;font-weight:600;color:var(--wine)}
+.seg button[aria-pressed="true"]{background:var(--wine);color:var(--cream)}
+@media (max-width:900px){.kids-grid{grid-template-columns:1fr}.ring-photo{width:min(100%,360px)}}
+@media (max-width:520px){.toy{grid-template-columns:1fr;justify-items:center;text-align:center}.toy .row{justify-content:center}.mandala{width:180px}}
+
+/* ───────────── find us ───────────── */
+.find{background:var(--cream);padding-top:0}
+.find-hero{position:relative;isolation:isolate;min-height:clamp(280px,34vw,400px);display:flex;align-items:flex-end;color:var(--cream);overflow:hidden}
+.find-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;z-index:-2}
+.find-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(42,7,22,.45),rgba(42,7,22,.15) 45%,rgba(42,7,22,.88)),linear-gradient(90deg,rgba(42,7,22,.7),transparent 65%)}
+.find-hero .wrap{padding-bottom:clamp(40px,6vw,84px);padding-top:80px}
+.find-hero h2{font-size:clamp(2.4rem,5.4vw,4.2rem);max-width:640px}
+.find-hero p{margin:12px 0 0;font:italic 500 clamp(1.15rem,2vw,1.5rem)/1.4 var(--f-display);color:var(--gold-pale);max-width:560px}
+/* credit sits top-right: the address card overlaps the bottom edge of this photo */
+.find-hero>.credit-tag{top:14px;right:20px;bottom:auto}
+.find-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(24px,4vw,52px);margin-top:clamp(-70px,-5vw,-40px);position:relative;z-index:2;align-items:start}
+.map{position:relative;border-radius:24px;overflow:hidden;background:#f1e1bc;box-shadow:0 30px 50px -28px rgba(74,15,36,.6);aspect-ratio:640/440;border:2px solid var(--gold)}
+.map-wrap{min-width:0}
+.map>svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;transform:translate(-50%,-92%);z-index:2;filter:drop-shadow(0 6px 6px rgba(74,15,36,.35))}
+html:not([data-level="0"]) .pin::before{content:"";position:absolute;left:24%;top:15%;width:52%;height:52%;border-radius:50%;background:var(--paper);z-index:-1}
+html[data-level="0"] .pin{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50% 50% 50% 0;transform:translate(-50%,-80%) rotate(-45deg);background:var(--gulab);color:#fff;font:700 .9rem/1 var(--f-ui)}
+html[data-level="0"] .pin .kit-fb{transform:rotate(45deg)}
+.map-key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;color:var(--ink-soft);margin-top:14px;padding:0 6px}
+.map-key span{display:inline-flex;align-items:center;gap:8px}
+.map-key b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--wine);color:var(--cream);font:700 .78rem/1 var(--f-ui)}
+.map-key b{font-weight:700}
+.addr{padding:26px 26px 24px;border-radius:22px;background:var(--paper);border:1px solid var(--gold);box-shadow:0 24px 40px -28px rgba(74,15,36,.55)}
+.addr h3{font-size:1.7rem;color:var(--wine);margin-bottom:6px}
+.addr address{font-style:normal;font-size:1.05rem;line-height:1.55;margin-bottom:14px}
+.addr .acts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.ways{list-style:none;display:grid;gap:14px;margin:0}
+.ways li{display:flex;gap:14px;align-items:flex-start;font-size:.95rem;line-height:1.5;color:var(--ink-soft)}
+.ways li b{display:block;color:var(--wine);font:700 1.2rem/1.2 var(--f-display);margin-bottom:2px}
+.ways .kit-ico{color:var(--wine);margin-top:2px}
+@media (max-width:900px){.find-grid{grid-template-columns:1fr;margin-top:-34px}}
+
+/* ───────────── RSVP (WhatsApp-style) ───────────── */
+.rsvp{background:var(--wine-deep);color:var(--cream);isolation:isolate;overflow:hidden}
+.rsvp-bg{position:absolute;inset:0;z-index:-2}
+.rsvp-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.rsvp::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(42,7,22,.95),rgba(42,7,22,.84) 40%,rgba(42,7,22,.95))}
+.rsvp-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(26px,4vw,60px);align-items:start}
+.form-card{position:relative;color:var(--ink);border-radius:22px;padding:0;--bw:9px}
+.form-in{padding:clamp(20px,3.4vw,38px)}
+.seats{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:16px;background:var(--sand);border:1px solid var(--line);margin-bottom:26px}
+.seats .ring{color:var(--wine);flex:none}
+.seats strong{display:block;font:700 1.35rem/1.15 var(--f-display);color:var(--wine)}
+.seats span{font-size:.9rem;color:var(--ink-soft)}
+html[data-level="0"] .seats [data-live]{font:700 1.1rem/1 var(--f-display);color:var(--wine);border:2px solid var(--wine);border-radius:50%}
+.fld{border:0;padding:0;margin:0 0 20px;min-width:0}
+.fld>label,.fld>legend,.lab{display:block;padding:0;font:600 .88rem/1.3 var(--f-ui);letter-spacing:.02em;color:var(--wine);margin-bottom:7px}
+.fld .opt{font-weight:400;color:var(--ink-soft)}
+.inp{width:100%;min-height:50px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:1rem;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+textarea.inp{min-height:84px;resize:vertical;line-height:1.5}
+.inp:focus{outline:none;border-color:var(--gulab);box-shadow:0 0 0 4px rgba(197,42,104,.2)}
+.inp[aria-invalid="true"]{border-color:#b3261e;background:#fff6f5}
+.err{display:block;color:#a3231b;font-size:.86rem;line-height:1.4;margin-top:6px;font-weight:500}
+.err:empty{display:none}
+.err:focus{outline:none}
+.hint{display:block;font-size:.84rem;line-height:1.45;color:var(--ink-soft);margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stepper{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.stepper button{width:50px;height:50px;border:0;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--wine);transition:background .15s}
+.stepper button:hover{background:var(--sand)}
+.stepper button:disabled{opacity:.35;cursor:not-allowed}
+.stepper output{min-width:46px;text-align:center;font:700 1.5rem/1 var(--f-display);color:var(--ink)}
+.choice{display:flex;flex-wrap:wrap;gap:8px}
+.pill{position:relative;display:inline-flex}
+.pill input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pill span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:.95rem;font-weight:500;color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.pill:hover span{border-color:var(--wine)}
+.pill input:checked+span{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+.pill input:focus-visible+span{outline:3px solid var(--gulab);outline-offset:2px}
+.kidsonly[hidden],.sweetonly[hidden]{display:none}
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:8px}
+.submit-row small{color:var(--ink-soft);font-size:.84rem;flex:1;min-width:200px}
+.summary{display:grid;gap:10px;margin:18px 0 22px;padding:0;list-style:none}
+.summary li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--sand);font-size:.97rem}
+.summary .kit-ico{color:var(--wine);margin-top:1px}
+.thanks{text-align:center}
+.thanks:focus{outline:none}
+.thanks h3{font-size:clamp(2rem,4vw,2.8rem);color:var(--wine);margin:6px 0 8px}
+.thanks .ticket{display:inline-flex;align-items:center;gap:14px;margin:10px auto 6px;color:var(--wine)}
+.thanks .ticket div{text-align:left;font-size:.9rem;color:var(--ink-soft);line-height:1.35}
+.thanks .ticket b{display:block;font:700 1.2rem/1.2 var(--f-display);color:var(--wine)}
+html[data-level="0"] .thanks .ticket [data-live]{font:700 1.2rem/1 var(--f-display);border:2px dashed var(--wine);border-radius:10px;padding:8px 12px}
+.thanks .summary{text-align:left}
+.thanks .acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.phone{position:sticky;top:100px;max-width:380px;width:100%;margin-inline:auto;padding:10px;border-radius:38px;background:#17110f;box-shadow:0 44px 70px -26px rgba(0,0,0,.85),inset 0 0 0 2px #3a302d}
+.phone-screen{border-radius:29px;overflow:hidden;background:#ece0cc;display:flex;flex-direction:column;min-height:590px;color:#1c1a18}
+.wa-head{display:flex;align-items:center;gap:11px;padding:12px 14px;background:var(--wa);color:#fff}
+.wa-head .who{flex:1;min-width:0}
+.wa-head b{display:block;font:600 1rem/1.2 var(--f-ui)}
+.wa-head small{display:block;font-size:.76rem;opacity:.85;line-height:1.3}
+.wa-head .kit-ico{color:#fff}
+.wa-body{flex:1;padding:14px 12px 18px;display:flex;flex-direction:column;gap:8px;background-color:#ece0cc;background-image:radial-gradient(circle,rgba(150,120,70,.18) 1.2px,transparent 1.8px);background-size:22px 22px}
+.wa-day{align-self:center;background:rgba(255,255,255,.85);border-radius:8px;padding:3px 10px;font-size:.72rem;color:#5b5348;margin-bottom:2px}
+.msg{max-width:88%;padding:8px 11px 5px;border-radius:12px;font-size:.92rem;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.14);overflow-wrap:anywhere}
+.msg.in{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.msg.out{align-self:flex-end;background:var(--wa-out);border-top-right-radius:3px;white-space:pre-line}
+.msg time{display:block;text-align:right;font-size:.66rem;color:#6a746e;margin-top:3px;white-space:normal}
+.msg.out time::after{content:"  \2713\2713";color:#2a9bd8;letter-spacing:-2px}
+.msg.draft{opacity:.92}
+.msg.typing{display:inline-flex;gap:4px;padding:11px 14px}
+.msg.typing i{width:7px;height:7px;border-radius:50%;background:#9a948a;animation:blip 1s infinite}
+.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blip{0%,80%,100%{opacity:.3;transform:none}40%{opacity:1;transform:translateY(-3px)}}
+.wa-foot{display:flex;align-items:center;gap:8px;padding:9px 10px;background:#f2efe9}
+.wa-foot div{flex:1;background:#fff;border-radius:999px;padding:9px 14px;font-size:.88rem;color:#8a857c}
+.wa-foot .kit-ico{color:#5c6b64}
+@media (max-width:980px){.rsvp-grid{grid-template-columns:1fr}.phone{position:static;order:2}.phone-screen{min-height:0}}
+@media (max-width:520px){.two{grid-template-columns:1fr}.form-in{padding:20px 16px}}
+
+/* ───────────── FAQ ───────────── */
+.faq{background:var(--paper)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,6vw,90px);align-items:start}
+.faq-side{position:sticky;top:104px}
+.faq-side h2{font-size:clamp(2.2rem,4.4vw,3.3rem);color:var(--wine);margin-bottom:14px}
+.faq-side>p{font:italic 500 1.25rem/1.5 var(--f-display);color:var(--ink-soft)}
+.contact{margin-top:24px;padding:20px 22px;border-radius:18px;background:var(--sand);border:1px solid var(--line);display:grid;gap:12px}
+.contact a{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:500;min-height:44px}
+.contact a:hover{color:var(--gulab)}
+.contact .kit-ico{color:var(--wine)}
+.q{border-bottom:1px solid var(--line)}
+.q:first-child{border-top:1px solid var(--line)}
+.q summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 4px;min-height:60px;font:700 1.4rem/1.25 var(--f-display);color:var(--wine)}
+.q summary::-webkit-details-marker{display:none}
+.q summary::marker{content:""}
+.q summary:hover{color:var(--gulab)}
+.q summary .kit-ico{margin-left:auto;transition:transform .3s var(--ease);color:var(--gulab)}
+.q[open] summary .kit-ico{transform:rotate(180deg)}
+.q .ans{padding:0 4px 22px;color:var(--ink-soft);max-width:62ch;font-size:1rem}
+.q .ans p:last-child{margin-bottom:0}
+@media (max-width:900px){.faq-grid{grid-template-columns:1fr}.faq-side{position:static}}
+
+/* ───────────── sign-off ───────────── */
+.signoff{position:relative;isolation:isolate;text-align:center;color:var(--cream);padding:clamp(80px,11vw,140px) 0 clamp(80px,10vw,120px);overflow:hidden;background:var(--wine-deep)}
+.signoff-bg{position:absolute;inset:0;z-index:-2}
+.signoff-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.signoff::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(42,7,22,.88),rgba(42,7,22,.6)),linear-gradient(180deg,rgba(42,7,22,.7),rgba(42,7,22,.5) 50%,rgba(42,7,22,.9))}
+.deva-big{font:700 clamp(3.2rem,11vw,7rem)/1.15 var(--f-ui);background:linear-gradient(180deg,#fff0bd,#f4c552 45%,#d79527);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 18px rgba(0,0,0,.45));margin:6px 0 0}
+.signoff h2{font:italic 600 clamp(1.8rem,4vw,2.8rem)/1.1 var(--f-display);color:var(--cream);margin:2px 0 18px}
+.signoff .blessing{max-width:640px;margin:0 auto 34px;font:500 clamp(1.15rem,1.9vw,1.4rem)/1.6 var(--f-display);color:var(--gold-pale)}
+.family{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(12px,3vw,30px);margin:0 0 30px;padding:0;list-style:none}
+.family li{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.9rem;color:var(--gold-pale)}
+.family li b{display:block;font:700 1.15rem/1.1 var(--f-display);color:var(--cream);text-align:center}
+.family li span.who{display:block;text-align:center;font-size:.76rem;letter-spacing:.06em}
+.family .face{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 36% 30%,#fff7e4,#f4dba3);border:2px solid var(--gold);box-shadow:0 10px 24px -10px rgba(0,0,0,.7);color:var(--wine)}
+.signoff .with-love{font:italic 600 1.4rem/1.3 var(--f-display);color:var(--gold-light);margin:0 0 6px}
+.signoff .diyas{margin-top:20px}
+.signoff .so-art{position:absolute;top:30%;display:none;color:var(--saffron);z-index:1}
+.signoff .so-art.l{left:max(2vw,calc(50% - 640px))}.signoff .so-art.r{right:max(2vw,calc(50% - 640px))}
+@media (min-width:1100px){html[data-level="2"] .signoff .so-art{display:inline-flex}}
+
+/* ───────────── credits + footer ───────────── */
+.credits{background:var(--sand);padding:clamp(44px,6vw,68px) 0;font-size:.92rem;color:var(--ink-soft)}
+.credits h2{font-size:2rem;color:var(--wine);margin-bottom:6px}
+.credits>.wrap>p{margin:0 0 18px;max-width:70ch}
+.credits ul{list-style:none;columns:2 380px;column-gap:40px}
+.credits li{break-inside:avoid;padding:6px 0;border-bottom:1px dotted rgba(200,150,47,.6);line-height:1.5}
+.credits li b{color:var(--ink);font-weight:600}
+.credits a{color:var(--wine);text-underline-offset:2px}
+.credits a:hover{color:var(--gulab)}
+.site-foot{background:var(--wine-deep);color:rgba(251,242,225,.82);padding:0 0 96px}
+.site-foot .rg-chain{margin-bottom:46px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:34px 50px;align-items:start}
+.foot-brand{display:flex;gap:12px;align-items:center;font:700 1.7rem/1 var(--f-display);color:var(--cream);margin-bottom:12px}
+.site-foot h3{font:600 .76rem/1.3 var(--f-ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px}
+.site-foot ul{list-style:none;display:grid;gap:2px}
+.site-foot a{text-decoration:none;display:inline-flex;align-items:center;gap:9px;min-height:36px}
+.site-foot a:hover{color:var(--gold-light);text-decoration:underline}
+.site-foot p{margin:0 0 .8em;font-size:.95rem}
+.fine{margin-top:40px;padding-top:20px;border-top:1px solid rgba(236,210,144,.22);font-size:.84rem;color:rgba(251,242,225,.66);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr}}
+
+/* toast + misc */
+.page-toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);z-index:90;background:var(--wine);color:var(--cream);padding:10px 18px;border-radius:999px;font-size:.92rem;box-shadow:0 14px 30px -10px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s var(--ease);max-width:calc(100vw - 32px);text-align:center}
+.page-toast.show{opacity:1;transform:translate(-50%,0)}
+@media print{.site-head,.announce{display:none}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Diwali at the Mehta House is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#main">Skip to the invitation</a>
+
+<div class="announce"><span data-ico="diya" data-size="16">🪔</span> <b>Sunday 8 November 2026</b> &middot; 6:30 to 10:30 pm &middot; Please reply by Thursday 29 October</div>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Diwali at the Mehta House, back to the top">
+      <span data-ico="diya" data-size="34" data-motion="hover" data-sample>🪔</span>
+      <span><b>Mehta House</b><small>Deepavali 2026</small></span>
+    </a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span data-ico="menu" data-size="24" data-fixed-style="line">☰</span></button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#evening">The evening</a>
+      <a href="#menu">The menu</a>
+      <a href="#know">Good to know</a>
+      <a href="#rangoli">Rangoli corner</a>
+      <a href="#find">Find us</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="head-cta"><a class="btn btn-wine btn-sm" href="#rsvp" aria-label="RSVP"><span data-ico="mail" data-size="20">✉️</span><span class="lbl">RSVP</span></a></div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═════════ hero ═════════ -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <img class="hero-img" src="_img/diwali-dinner/29422096-1600.jpg" width="1200" height="800" fetchpriority="high" alt="Small clay diyas burning with tall flames in loose rows along the bottom of a dark frame, with soft amber and violet bokeh lights and wisps of smoke above.">
+  <div class="hero-toran" aria-hidden="true">
+    <span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span><span data-ico="toran" data-size="68" data-min-level="2"></span>
+  </div>
+  <span class="hero-art l" data-ico="diya" data-size="150" data-min-level="2" data-motion="loop" aria-hidden="true"></span>
+  <span class="hero-art r" data-ico="rangoli-pattern" data-size="150" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+  <div class="hero-in">
+    <div class="hero-flank" aria-hidden="true"><span data-ico="diya" data-size="64" data-min-level="2" data-motion="loop"></span><span data-ico="rangoli-pattern" data-size="64" data-min-level="2" data-motion="hover"></span></div>
+    <p class="kicker"><span data-ico="sparkles" data-size="18" data-min-level="1"></span><span class="deva" lang="hi">शुभ दीपावली</span> &middot; Deepavali 2026<span data-ico="sparkles" data-size="18" data-min-level="1"></span></p>
+    <h1 id="h1"><span class="h1-a">Diwali</span><span class="h1-b">at the Mehta House</span></h1>
+    <p class="lede">Lakshmi puja, a long table of mithai and diyas on every sill</p>
+    <div class="diyas" aria-hidden="true">
+      <span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span>
+    </div>
+    <p class="invite-line"><b>Anjali &amp; Rohan Mehta</b> invite you to a family Diwali dinner: pure vegetarian, children very welcome.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="#rsvp"><span data-ico="mail" data-size="22">✉️</span> RSVP by 29 October</a>
+      <button class="btn btn-ghost" type="button" data-act="ics"><span data-ico="calendar-plus" data-size="22">📅</span> Add to calendar</button>
+    </div>
+    <div class="countdown" id="countdown" role="timer">
+      <p id="cd-label">The first diya is lit in</p>
+      <div class="cd" id="cd">
+        <div><b id="cd-d">00</b><span>days</span></div><div><b id="cd-h">00</b><span>hours</span></div><div><b id="cd-m">00</b><span>minutes</span></div><div><b id="cd-s">00</b><span>seconds</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="credit-tag">Photo: <a href="https://www.pexels.com/@trishik-bose-166596160">Trishik Bose</a> / <a href="https://www.pexels.com/photo/29422096/">Pexels</a></span>
+</section>
+
+<!-- ═════════ the facts ═════════ -->
+<div class="wrap facts-wrap">
+  <div class="facts rg-frame">
+    <span class="corner c-tl" data-ico="marigold" data-size="44" data-min-level="2" aria-hidden="true"></span><span class="corner c-br" data-ico="marigold" data-size="44" data-min-level="2" aria-hidden="true"></span>
+    <div class="fact">
+      <span class="fi" data-live="calendar-date" data-p-day="8" data-p-month="NOV" data-size="76" data-label="Sunday 8 November 2026">8 Nov</span>
+      <div><small>When</small><strong>Sunday 8 November</strong><span class="sub">Diwali night, 2026</span></div>
+    </div>
+    <div class="fact">
+      <span class="fi" data-live="clock-time" data-p-time="18:30" data-size="76" data-label="6:30 in the evening">6:30</span>
+      <div><small>Time</small><strong>6:30 to 10:30 pm</strong><span class="sub">Puja begins at 7:15 sharp</span></div>
+    </div>
+    <div class="fact">
+      <span class="fi" data-ico="map-pin" data-size="60" data-label="Location">📍</span>
+      <div><small>Where</small><strong>301 Jasmine Row</strong><span class="sub">The Mehta residence. Street parking is free after 6 pm</span></div>
+    </div>
+    <div class="fact">
+      <span class="fi" data-ico="shirt" data-size="60" data-label="Dress code">👘</span>
+      <div><small>Dress code</small><strong>Festive Indian or smart</strong><span class="sub">Silks, kurtas, saris, jewel tones</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ welcome ═════════ -->
+<section class="sec welcome" aria-labelledby="welcome-h">
+  <div class="wrap welcome-grid">
+    <figure class="arch rg-frame" style="margin-inline:auto">
+      <img src="_img/diwali-dinner/photo-1789971649652-ae5dfeeaa7b4-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="Hanging strands of orange marigolds with white jasmine, ending in white tassels and marigold clusters, under a dark wooden roof against a softly blurred green-grey background.">
+      <span class="arch-badge" data-ico="marigold" data-size="48" data-motion="hover">🌼</span>
+      <span class="credit-tag">Photo: <a href="https://unsplash.com/@najaratonajaria?utm_source=withicons_demos&utm_medium=referral">Sangram Rakate</a> / <a href="https://unsplash.com/photos/marigold-and-jasmine-flower-garlands-EEeGY0XgNSw?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></span>
+    </figure>
+    <div>
+      <p class="kicker"><span data-ico="lotus" data-size="22">🪷</span> A note from the hosts</p>
+      <h2 id="welcome-h">Come hungry, come bright, <em>bring a diya</em></h2>
+      <div class="letter">
+        <p class="hi">Namaste, dear friends and family. Every year our little house on Jasmine Row fills up a bit more than it should, and every year we wouldn't have it any other way. This Diwali we would love you to be at our table.</p>
+        <p>We begin with a short Lakshmi puja at 7:15, sit down to a long, slow, entirely vegetarian dinner, and finish in the courtyard with sparklers for the children (and the grown-ups who pretend they don't want one). The diyas will be lit on every windowsill by then.</p>
+        <p>Come in your brightest clothes, leave your shoes at the porch, and bring one diya of your own if you have it. Everything else is taken care of.</p>
+      </div>
+      <div class="sign">
+        <span data-ico="avatar-woman-bun" data-size="56" data-label="Anjali">👩</span>
+        <span data-ico="avatar-man-beard" data-size="56" data-label="Rohan">👨</span>
+        <div><span class="names">Anjali &amp; Rohan</span><small>with Aarav, Meera and Dadi</small></div>
+      </div>
+      <div class="save" id="save">
+        <div class="ring">
+          <span data-live="timer-ring" data-p-left="28" data-p-total="54" data-size="88" data-label="28 days to go" id="ring-days">28</span>
+          <span class="ring-cap">days to go</span>
+        </div>
+        <div>
+          <h3>Save the evening</h3>
+          <p>Sunday 8 November, 6:30 to 10:30 pm. Add it to your calendar now, before it gets lost between Diwali shopping and school runs.</p>
+          <div class="acts">
+            <button class="btn btn-wine btn-sm" type="button" data-act="ics"><span data-ico="calendar-plus" data-size="20">📅</span> Add to calendar (.ics)</button>
+            <a class="btn btn-line btn-sm" id="gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Diwali%20at%20the%20Mehta%20House&amp;dates=20261108T183000%2F20261108T223000&amp;location=The%20Mehta%20residence%2C%20301%20Jasmine%20Row&amp;details=Family%20Diwali%20dinner%20(vegetarian).%20Lakshmi%20puja%20at%207%3A15%20pm%2C%20dinner%20at%208%3A15%2C%20mithai%20at%209%3A30%2C%20sparklers%20at%2010.%20Bring%20one%20diya.%20Shoes%20off%20at%20the%20door." target="_blank" rel="noopener"><span data-ico="external-link" data-size="18">↗</span> Google Calendar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule" aria-hidden="true"><span class="rside"><span class="rg-flowers"></span></span><span class="rule-mg" data-ico="marigold" data-size="28" data-min-level="2"></span><span class="rule-orn" data-ico="rangoli-pattern" data-size="44" data-motion="hover">✿</span><span class="rule-mg" data-ico="marigold" data-size="28" data-min-level="2"></span><span class="rside"><span class="rg-flowers"></span></span></div>
+
+<!-- ═════════ the evening ═════════ -->
+<section class="sec evening on-dark" id="evening" aria-labelledby="evening-h" style="margin-top:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="moon" data-size="20">🌙</span> Sunday 8 November</p>
+      <h2 id="evening-h">How the evening unfolds</h2>
+      <p>From the first cup of chai to the last sparkler: four unhurried hours, in this order.</p>
+    </div>
+
+    <div class="evening-grid">
+      <ol class="tl" id="tl">
+        <li class="tl-item">
+          <div class="tl-time"><span data-live="clock-time" data-p-time="18:30" data-size="64" data-label="6:30 in the evening">6:30</span><b>6:30 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="door-open" data-size="30">🚪</span> Arrival, tilak and chai</h3>
+            <p>The porch light is a string of four hundred marigold bulbs, so you can't miss us. Leave your shoes on the porch rack and Anjali or Rohan will put a tilak on your forehead. Masala chai and kesar-badam milk are waiting in the hall.</p>
+            <div class="chips">
+              <span class="chip"><span data-ico="coffee" data-size="20">☕</span> Chai and kesar milk</span>
+              <span class="chip"><span data-ico="palette" data-size="20">🎨</span> Children go straight to the rangoli corner</span>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time"><span data-live="clock-time" data-p-time="19:15" data-size="64" data-label="7:15 in the evening">7:15</span><b>7:15 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="puja-thali" data-size="30" data-motion="hover">🙏</span> Lakshmi puja</h3>
+            <p>Our family pandit, Shri Vishnu Joshi, leads a short puja in the front room: kalash, mantras, flowers and sweets as offerings, and a diya lit by every household. Sit on the floor or on the chairs along the wall. Phones on silent, please; photographs are welcome after the aarti.</p>
+            <div class="chips">
+              <span class="chip"><span data-ico="hourglass" data-size="20">⏳</span> About 45 minutes</span>
+              <span class="chip"><span data-ico="bell" data-size="20">🔔</span> Aarti around 7:55</span>
+              <span class="chip"><span data-ico="gift" data-size="20">🎁</span> Prasad for everyone</span>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time"><span data-ico="soup" data-size="60">🍲</span><b>8:15 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="utensils" data-size="30">🍽️</span> Dinner, served thali-style</h3>
+            <p>No buffet queue. Steel katoris come to the long table course by course, so nobody balances a plate on a knee. Seconds are not just allowed, they are expected. Everything is vegetarian, and the Jain and vegan dishes are marked on the <a href="#menu">thali card</a>.</p>
+            <div class="chips">
+              <span class="chip"><span data-ico="leaf" data-size="20">🌿</span> Pure vegetarian</span>
+              <span class="chip"><span data-ico="users" data-size="20">👪</span> One long table, 40 seats</span>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time"><span data-ico="jalebi" data-size="60">🍥</span><b>9:30 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="mithai-box" data-size="30">🍬</span> Mithai and chai</h3>
+            <p>Kaju katli, motichoor ladoo, mohanthal and hot jalebi with rabri come out on the brass stand, next to whatever sweets you bring. Fresh masala chai and copper tumblers of kesar-badam doodh go round. Everyone leaves with a small box for the road.</p>
+            <div class="chips">
+              <span class="chip"><span data-ico="laddoo" data-size="20">🟠</span> Bring a sweet if you like</span>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time"><span data-live="clock-time" data-p-time="22:00" data-size="64" data-label="10 at night">10:00</span><b>10:00 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="sparkles" data-size="30" data-motion="hover">✨</span> Sparklers in the courtyard</h3>
+            <p>Phuljhadi for every age, one at a time, lit by a grown-up. The children go first, then the rest of us. Details below.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-time"><span data-ico="moon" data-size="60">🌙</span><b>10:30 pm</b></div>
+          <div class="tl-node"><i></i></div>
+          <div class="tl-card">
+            <h3><span data-ico="home" data-size="30">🏠</span> Shubh ratri</h3>
+            <p>The last diya goes out at half past ten, rickshaws and cars are called, and we wave you off from the porch.</p>
+          </div>
+        </li>
+      </ol>
+
+      <aside class="aside-sticky" aria-label="About the puja">
+        <figure class="puja-photo" style="margin:0">
+          <img src="_img/diwali-dinner/4094848-800.jpg" width="1200" height="1662" loading="lazy" decoding="async" alt="A smiling woman in a red sari lights small clay diyas in front of a blurred deity figure, her face lit by the warm flames in a dark room.">
+          <span class="credit-tag">Photo: <a href="https://www.pexels.com/@bhargava-marripati-674798">Bhargava Marripati</a> / <a href="https://www.pexels.com/photo/4094848/">Pexels</a></span>
+        </figure>
+        <div class="muhurat">
+          <span class="mini">The muhurat, in plain language</span>
+          <h3><span data-ico="kalash" data-size="36" data-motion="inview">🏺</span> When exactly is the puja?</h3>
+          <p>Lakshmi puja is done in the early evening, after sunset. For our city this year our pandit-ji gives a window of <b>6:52 to 8:34 pm</b>. We light the first diya at <b>7:15</b> and finish with aarti around <b>7:55</b>.</p>
+          <div class="mkey"><span><i class="k1"></i>Auspicious window</span><span><i class="k2"></i>Our puja</span></div>
+          <div class="mbar" role="img" aria-label="Timeline from 6:30 to 10:30 pm. The auspicious window runs from 6:52 to 8:34. Our puja runs from 7:15 to about 8:00. Dinner at 8:15, mithai at 9:30, sparklers at 10:00.">
+            <div class="mtrack"><span class="win" style="left:9.17%;width:42.5%"></span><span class="puj" style="left:18.75%;width:19%"></span></div>
+            <span class="mtick" style="left:0">6:30</span><span class="mtick" style="left:18.75%">7:15</span><span class="mtick" style="left:43.75%">8:15</span><span class="mtick" style="left:75%">9:30</span><span class="mtick t-opt" style="left:87.5%">10:00</span><span class="mtick" style="left:100%;transform:translateX(-100%)">10:30</span>
+          </div>
+          <p>Please be seated by 7:10. If you arrive a little late, slip in at the back; nobody minds, and you will still catch the aarti.</p>
+        </div>
+        <div class="puja-steps">
+          <h3><span data-ico="kalash" data-size="30" data-motion="hover">🏺</span> What happens in the puja</h3>
+          <ol>
+            <li><span data-live="step-number" data-p-step="1" data-size="46" data-label="Step 1">1</span><div><b>Ganesh vandana</b>A short prayer to Ganesha, who clears the way for everything that follows.</div></li>
+            <li><span data-live="step-number" data-p-step="2" data-size="46" data-label="Step 2">2</span><div><b>Kalash and the first diya</b>The kalash is set down, and the oldest person in the room lights the first diya.</div></li>
+            <li><span data-live="step-number" data-p-step="3" data-size="46" data-label="Step 3">3</span><div><b>Offerings to Lakshmi</b>Flowers, rice and sweets, while Pandit-ji chants. Repeat the words, or simply listen.</div></li>
+            <li><span data-live="step-number" data-p-step="4" data-size="46" data-label="Step 4">4</span><div><b>Aarti and prasad</b>Everyone stands, sings or claps along, and leaves the room with a tilak and a sweet.</div></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+
+    <div class="finale">
+      <div class="finale-img">
+        <img src="_img/diwali-dinner/photo-1501213045308-cfe6e352d850-800.jpg" width="1200" height="1628" loading="lazy" decoding="async" alt="A hand holds a lit sparkler throwing fine sparks against a dusky blue and orange sky, with other hands blurred in the background.">
+        <span class="credit-tag">Photo: <a href="https://unsplash.com/@wflwong?utm_source=withicons_demos&utm_medium=referral">Warren</a> / <a href="https://unsplash.com/photos/photo-of-person-holding-lighted-sparkler-kMRMcUcO81M?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></span>
+      </div>
+      <div class="finale-body">
+        <p class="kicker on-dark" style="margin:0"><span data-ico="sparkles" data-size="18">✨</span> 10:00 pm</p>
+        <h3><span data-ico="sparkler" data-size="46" data-motion="loop">🎇</span> Sparklers, the gentle kind</h3>
+        <p>Phuljhadi only: no bangers, no rockets. A sparkler burns for about a minute, so we hand them out in small rounds and everyone gets two.</p>
+        <ul class="safe">
+          <li><span data-ico="shield-check" data-size="24">🛡️</span><span>A grown-up lights and holds every child's sparkler. Under-fives watch from the porch with Dadi.</span></li>
+          <li><span data-ico="droplets" data-size="24">💧</span><span>Two buckets of water at the gate, and a hose within reach.</span></li>
+          <li><span data-ico="dog" data-size="24">🐕</span><span>Pinto the dog hates loud noise, which is one more reason for sparklers only.</span></li>
+        </ul>
+        <div class="live-row">
+          <div class="lr"><span data-live="weather" data-p-condition="night" data-p-temperature="13" data-p-unit="celsius" data-size="84" data-label="Clear night, 13 degrees Celsius">13°C</span><div><b>Clear and cool</b>A typical early November night here. Bring a shawl.</div></div>
+          <div class="lr"><span data-live="stopwatch" data-p-seconds="45" data-size="60" data-label="A sparkler burns for about 45 seconds">45s</span><div><b>About a minute</b>That is how long one phuljhadi lasts.</div></div>
+        </div>
+        <div class="diya-row" data-min-level="2" aria-hidden="true"><span data-ico="diya" data-size="40" data-motion="inview"></span><span data-ico="diya" data-size="40" data-motion="inview"></span><span data-ico="diya" data-size="40" data-motion="inview"></span><span data-ico="diya" data-size="40" data-motion="inview"></span><span data-ico="diya" data-size="40" data-motion="inview"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ the menu: thali card ═════════ -->
+<section class="sec menu rg-dots" id="menu" aria-labelledby="menu-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="leaf" data-size="20">🌿</span> Pure vegetarian</p>
+      <h2 id="menu-h">The thali card</h2>
+      <p>Each course arrives in its own small steel bowl, the way Anjali's mother served it. Tap a katori to jump to its course.</p>
+    </div>
+
+    <div class="diet" role="group" aria-label="Filter the menu by diet">
+      <span class="diet-label">Show me</span>
+      <button type="button" aria-pressed="true" data-diet="all"><span data-ico="utensils" data-size="20">🍽️</span> Everything</button>
+      <button type="button" aria-pressed="false" data-diet="jain"><span data-ico="leaf" data-size="20">🌿</span> Jain-friendly</button>
+      <button type="button" aria-pressed="false" data-diet="vegan"><span data-ico="sprout" data-size="20">🌱</span> Vegan</button>
+      <button type="button" aria-pressed="false" data-diet="nutfree"><span data-ico="ban" data-size="20">🚫</span> Nut-free</button>
+      <p class="diet-count" id="diet-count" aria-live="polite">All 20 dishes, all vegetarian.</p>
+      <p class="sr" id="course-status" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-aside">
+        <div class="plate" id="plate" role="group" aria-label="The five courses, as bowls on a thali">
+          <button class="katori" type="button" data-course="c-starters" data-name="Chaat &amp; starters" aria-label="Chaat and starters"><span data-ico="salad" data-size="34" data-motion="inview">🥗</span></button>
+          <button class="katori" type="button" data-course="c-mains" data-name="Dal &amp; sabzi" aria-label="Dal and sabzi"><span data-ico="soup" data-size="34" data-motion="inview">🍲</span></button>
+          <button class="katori" type="button" data-course="c-rice" data-name="Rice &amp; breads" aria-label="Rice and breads"><span data-ico="cooking-pot" data-size="34" data-motion="inview">🍚</span></button>
+          <button class="katori" type="button" data-course="c-mithai" data-name="Mithai" aria-label="Mithai"><span data-ico="laddoo" data-size="34" data-motion="inview">🍬</span></button>
+          <button class="katori" type="button" data-course="c-chai" data-name="Chai &amp; coolers" aria-label="Chai and coolers"><span data-ico="thandai" data-size="34" data-motion="inview">🥛</span></button>
+          <div class="plate-mid" id="plate-mid"><small>थाली</small><b>Five katoris</b><span class="count">Tap a bowl</span></div>
+        </div>
+        <figure class="menu-photo" style="margin:0">
+          <img src="_img/diwali-dinner/8818657-800.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Overhead view of a woman in a sari spooning curry from a steel thali that also holds a pea curry, a white creamy sweet, a pink beetroot raita, rice and a papad, on a cream table with copper tumblers and small lit diyas.">
+          <span class="credit-tag">Photo: <a href="https://www.pexels.com/@yankrukov">Yan Krukau</a> / <a href="https://www.pexels.com/photo/8818657/">Pexels</a></span>
+        </figure>
+      </div>
+
+      <article class="thali-card rg-frame" aria-labelledby="tc-h">
+        <div class="tc-banner">
+          <span class="corner in c-tl" data-ico="marigold" data-size="40" data-min-level="2" aria-hidden="true"></span>
+          <img src="_img/diwali-dinner/8818662-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="Small lit clay diyas and a bowl of yellow marigolds on a table where a Diwali meal is being served, with blurred guests in the background.">
+          <span class="credit-tag">Photo: <a href="https://www.pexels.com/@yankrukov">Yan Krukau</a> / <a href="https://www.pexels.com/photo/8818662/">Pexels</a></span>
+        </div>
+        <div class="tc-in">
+          <header class="tc-head">
+            <small>Printed menu &middot; Sunday 8 November 2026</small>
+            <h3 id="tc-h">Diwali Thali</h3>
+            <p>Twenty dishes in five katoris, cooked by the family</p>
+          </header>
+
+          <section class="course" id="c-starters" aria-labelledby="c1">
+            <div class="course-head"><span class="bowl"><span data-ico="salad" data-size="36">🥗</span></span><div><h4 id="c1">Chaat &amp; starters</h4><small>Katori 1 &middot; bright, crisp and sharp, to wake everyone up</small></div></div>
+            <ul class="dishes">
+              <li class="dish" data-d=""><div class="dish-top"><h5>Paneer tikka</h5><span class="lead"></span><span class="region">Punjab</span></div><p>Cottage cheese marinated in hung curd, ajwain and kasuri methi, charred in the oven until the edges blister.</p></li>
+              <li class="dish" data-d=""><div class="dish-top"><h5>Dahi papdi chaat</h5><span class="lead"></span><span class="region">Delhi</span></div><p>Crisp papdi under whipped curd, tamarind and mint chutneys, pomegranate and a dusting of chaat masala.</p></li>
+              <li class="dish" data-d="vegan jain"><div class="dish-top"><h5>Khaman dhokla</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Steamed chickpea-flour sponge with a mustard seed and curry leaf tempering, green chutney on the side.</p><div class="tags"><span class="tag">Vegan</span><span class="tag">Jain</span></div></li>
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Hara bhara kebab</h5><span class="lead"></span><span class="region">Punjab</span></div><p>Spinach and green pea patties, pan-seared, with a mint and yoghurt dip.</p><div class="tags"><span class="tag nuts">Contains cashew</span></div></li>
+            </ul>
+          </section>
+
+          <section class="course" id="c-mains" aria-labelledby="c2">
+            <div class="course-head"><span class="bowl"><span data-ico="soup" data-size="36">🍲</span></span><div><h4 id="c2">Dal &amp; sabzi</h4><small>Katori 2 &middot; the slow-cooked heart of the meal</small></div></div>
+            <ul class="dishes">
+              <li class="dish" data-d=""><div class="dish-top"><h5>Dal makhani</h5><span class="lead"></span><span class="region">Punjab</span></div><p>Whole black lentils and kidney beans simmered overnight with butter, cream and a little smoke.</p></li>
+              <li class="dish" data-d="vegan nuts"><div class="dish-top"><h5>Undhiyu</h5><span class="lead"></span><span class="region">Surat, Gujarat</span></div><p>The winter classic: surti papdi, baby aubergine, purple yam and methi muthiya, slow-cooked with coconut and peanuts.</p><div class="tags"><span class="tag">Vegan</span><span class="tag nuts">Contains peanuts</span></div></li>
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Shahi paneer</h5><span class="lead"></span><span class="region">Awadh</span></div><p>Paneer in a silky tomato and cashew gravy, finished with cream and a pinch of cardamom.</p><div class="tags"><span class="tag nuts">Contains cashew</span></div></li>
+              <li class="dish" data-d="jain"><div class="dish-top"><h5>Gujarati dal</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Thin, sweet-sour toor dal with jaggery, kokum and a ghee tempering. No onion, no garlic.</p><div class="tags"><span class="tag">Jain</span></div></li>
+            </ul>
+          </section>
+
+          <section class="course" id="c-rice" aria-labelledby="c3">
+            <div class="course-head"><span class="bowl"><span data-ico="cooking-pot" data-size="36">🍚</span></span><div><h4 id="c3">Rice &amp; breads</h4><small>Katori 3 &middot; for mopping up everything above</small></div></div>
+            <ul class="dishes">
+              <li class="dish" data-d="jain"><div class="dish-top"><h5>Jeera pulao</h5><span class="lead"></span><span class="region">Punjab</span></div><p>Basmati rice with toasted cumin, green peas and whole spices.</p><div class="tags"><span class="tag">Jain</span></div></li>
+              <li class="dish" data-d="vegan jain"><div class="dish-top"><h5>Puri &amp; phulka</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Puffed puris and soft phulkas straight from the tawa, brought hot in small batches. Ghee only if you ask.</p><div class="tags"><span class="tag">Vegan</span><span class="tag">Jain</span></div></li>
+              <li class="dish" data-d=""><div class="dish-top"><h5>Beetroot raita</h5><span class="lead"></span><span class="region">North India</span></div><p>Grated beetroot in whisked curd with roasted cumin and a few curry leaves.</p></li>
+              <li class="dish" data-d="vegan"><div class="dish-top"><h5>Papad &amp; pickles</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Roasted masala papad, lime pickle, mango chhundo and coriander chutney.</p><div class="tags"><span class="tag">Vegan</span></div></li>
+            </ul>
+          </section>
+
+          <section class="course" id="c-mithai" aria-labelledby="c4">
+            <div class="course-head"><span class="bowl"><span data-ico="laddoo" data-size="36">🍬</span></span><div><h4 id="c4">Mithai</h4><small>Katori 4 &middot; made at home and bought from Hari Sweets, with no shame</small></div></div>
+            <ul class="dishes">
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Kaju katli</h5><span class="lead"></span><span class="region">All over India</span></div><p>Thin diamonds of cashew fudge with a flick of silver leaf, the one everybody reaches for first.</p><div class="tags"><span class="tag nuts">Contains cashew</span></div></li>
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Motichoor ladoo</h5><span class="lead"></span><span class="region">Rajasthan</span></div><p>Tiny boondi pearls pressed into soft saffron ladoos with a pistachio sliver on top.</p><div class="tags"><span class="tag nuts">Contains pistachio</span></div></li>
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Mohanthal</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Fudgy gram-flour squares with ghee, saffron and almond; the Mehta family recipe.</p><div class="tags"><span class="tag nuts">Contains almond</span></div></li>
+              <li class="dish" data-d=""><div class="dish-top"><h5>Jalebi with rabri</h5><span class="lead"></span><span class="region">Madhya Pradesh</span></div><p>Saffron jalebis fried to order, served hot over cold, slowly thickened rabri.</p></li>
+            </ul>
+          </section>
+
+          <section class="course" id="c-chai" aria-labelledby="c5">
+            <div class="course-head"><span class="bowl"><span data-ico="thandai" data-size="36">🥛</span></span><div><h4 id="c5">Chai &amp; coolers</h4><small>Katori 5 &middot; to end on, or to start again with</small></div></div>
+            <ul class="dishes">
+              <li class="dish" data-d=""><div class="dish-top"><h5>Masala chai</h5><span class="lead"></span><span class="region">Mumbai</span></div><p>Strong Assam leaf, ginger and cardamom, with a little too much sugar, the cutting-chai way.</p></li>
+              <li class="dish" data-d="nuts"><div class="dish-top"><h5>Kesar-badam doodh</h5><span class="lead"></span><span class="region">Gujarat</span></div><p>Hot milk with saffron, almonds and pistachio, served in copper tumblers.</p><div class="tags"><span class="tag nuts">Contains almond</span></div></li>
+              <li class="dish" data-d="vegan jain"><div class="dish-top"><h5>Jaljeera</h5><span class="lead"></span><span class="region">Rajasthan</span></div><p>Cumin, mint, tamarind and black salt over ice: a palate cleanser and an old digestif.</p><div class="tags"><span class="tag">Vegan</span><span class="tag">Jain</span></div></li>
+              <li class="dish" data-d="vegan jain"><div class="dish-top"><h5>Nimbu masala soda</h5><span class="lead"></span><span class="region">Mumbai</span></div><p>Sweet-salty lemon soda with roasted cumin, the kind from the street cart.</p><div class="tags"><span class="tag">Vegan</span><span class="tag">Jain</span></div></li>
+            </ul>
+          </section>
+
+          <p class="tc-foot"><span data-ico="bookmark" data-size="24">🔖</span><span>Need a fully Jain thali, or a nut-free plate for a child? Say so in your RSVP and Meena masi will cook it separately in her own pans. The main kitchen does use nuts, so we cannot promise a nut-free room.</span></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ mithai table ═════════ -->
+<section class="sec mithai" id="mithai" aria-labelledby="mithai-h">
+  <div class="wrap">
+    <div class="mithai-grid">
+      <div class="mithai-body">
+        <p class="kicker"><span data-ico="mithai-box" data-size="22">🎁</span> The mithai table</p>
+        <h2 id="mithai-h">Bring a sweet, take a box home</h2>
+        <p>Our dining room has a brass stand that has held mithai every Diwali since 1987. Bring a box of your own family's favourite and we will set it out with your name beside it, so everyone knows whose halwa is whose. Nut-free where you can, please: one of Aarav's classmates is allergic to peanuts.</p>
+        <div class="sheet-head"><span>On the table so far</span><span id="sheet-count">5 sweets</span></div>
+        <ul class="sheet" id="sheet" aria-live="polite">
+          <li><span data-ico="mithai-box" data-size="24">🍬</span><b>Nisha &amp; Dev Patel</b><span class="what">Soan papdi</span></li>
+          <li><span data-ico="jalebi" data-size="24">🍥</span><b>Prakash Uncle</b><span class="what">Hot jalebis from Hari Sweets</span></li>
+          <li><span data-ico="laddoo" data-size="24">🟠</span><b>Tanvi Shah</b><span class="what">Besan ladoo (nut-free)</span></li>
+          <li><span data-ico="cake" data-size="24">🍰</span><b>The Iyer family</b><span class="what">Rava kesari</span></li>
+          <li><span data-ico="cookie" data-size="24">🍪</span><b>Maya &amp; Ben Okafor</b><span class="what">Coconut barfi</span></li>
+        </ul>
+        <p style="margin:20px 0 0"><a class="btn btn-wine btn-sm" href="#rsvp"><span data-ico="plus" data-size="20">＋</span> Add yours when you RSVP</a></p>
+      </div>
+      <figure class="mithai-photo" style="margin:0">
+        <img src="_img/diwali-dinner/8887011-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Antique brass pedestal bowls holding bright orange ladoo and colourful modak sweets, with pink and white flowers softly blurred in front.">
+        <span class="credit-tag">Photo: <a href="https://www.pexels.com/@lara-jameson">Lara Jameson</a> / <a href="https://www.pexels.com/photo/8887011/">Pexels</a></span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ good to know ═════════ -->
+<section class="sec know" id="know" aria-labelledby="know-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="lightbulb" data-size="22">💡</span> Good to know</p>
+      <h2 id="know-h">Small things that make the night easy</h2>
+      <p>The questions our friends always ask, answered before they ask them.</p>
+    </div>
+    <div class="know-grid">
+      <article class="kn"><span class="ic" data-ico="shirt" data-size="50" data-motion="hover">👘</span><h3>Dress code</h3><p><b>Festive Indian or smart.</b> Silks, kurtas, anarkalis, sherwanis and saris are all welcome, and so is a good jacket. Jewel tones and gold glow beautifully by lamplight. Black is traditionally skipped on Lakshmi puja evening.</p></article>
+      <article class="kn"><span class="ic" data-ico="door-open" data-size="50" data-motion="hover">🚪</span><h3>Shoes off</h3><p>Shoes come off at the porch, where there is a rack and a bench. Socks are fine, and there is a basket of spare indoor chappals in sizes 5 to 11. The floors are cool, so bring socks if you are the sort who feels it.</p></article>
+      <article class="kn"><span class="ic" data-ico="diya" data-size="50" data-motion="hover">🪔</span><h3>Bring a diya</h3><p>Bring <b>one diya</b> if you have it. We provide oil, wicks and matches, plus sixty spare clay ones the children painted last weekend. After the puja, yours goes on a windowsill for the night.</p></article>
+      <article class="kn"><span class="ic" data-ico="parking" data-size="50" data-motion="hover">🅿️</span><h3>Parking</h3><p>Street parking on Jasmine Row is free after 6 pm. The overflow is St. Anselm's Hall lot, two minutes' walk (the sign says Visitors). Please keep the driveway at No. 297 clear.</p></article>
+      <article class="kn"><span class="ic" data-ico="baby" data-size="50" data-motion="hover">👶</span><h3>Little ones</h3><p>Children are the guests of honour. There is a high chair, a quiet room upstairs with mats and cushions, and a kids' plate of plain rice, dal and paneer cubes. Tell us ages in the RSVP.</p></article>
+      <article class="kn"><span class="ic" data-ico="accessibility" data-size="50" data-motion="hover">♿</span><h3>Step-free access</h3><p>Step-free entry through the side gate on Maple Lane, a ground-floor bathroom, and a chair in the puja room for anyone who prefers one. Tell us in the RSVP if you need anything else.</p></article>
+      <article class="kn"><span class="ic" data-ico="gift" data-size="50" data-motion="hover">🎁</span><h3>Gifts</h3><p>No gifts, please: your company is the gift. If you must, a box of sweets for the mithai table, or a donation to the Jasmine Row food bank, which Rohan will collect in a little brass pot by the door.</p></article>
+      <article class="kn"><span class="ic" data-ico="camera" data-size="50" data-motion="hover">📷</span><h3>Photos &amp; phones</h3><p>Photographs are lovely after the aarti. During the puja we ask for phones on silent and in pockets. We will share a group album the morning after, so you can put the camera down.</p></article>
+    </div>
+  </div>
+</section>
+
+<div class="rule" aria-hidden="true"><span class="rside"><span class="rg-flowers"></span></span><span class="rule-mg" data-ico="marigold" data-size="28" data-min-level="2"></span><span class="rule-orn" data-ico="lotus" data-size="44" data-motion="hover">✿</span><span class="rule-mg" data-ico="marigold" data-size="28" data-min-level="2"></span><span class="rside"><span class="rg-flowers"></span></span></div>
+
+<!-- ═════════ kids' rangoli corner ═════════ -->
+<section class="sec kids" id="rangoli" aria-labelledby="kids-h" style="margin-top:clamp(40px,6vw,72px)">
+  <div class="wrap kids-grid">
+    <figure class="ring-photo" style="margin:0">
+      <img src="_img/diwali-dinner/photo-1635192592106-77a5aacbe1a3-800.jpg" width="1200" height="905" loading="lazy" decoding="async" alt="Top-down view of a circular floral rangoli on a tiled floor, built from red powder, orange and yellow marigold petals and pink flower motifs, ringed by small lit diyas.">
+      <span class="credit-tag">Photo: <a href="https://unsplash.com/@artsy_lens21?utm_source=withicons_demos&utm_medium=referral">Suchandra Roy Chowdhury</a> / <a href="https://unsplash.com/photos/a-circular-arrangement-of-candles-on-a-floor-cM8X2DDvnGE?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></span>
+    </figure>
+    <div>
+      <p class="kicker"><span data-ico="rangoli-pattern" data-size="24">🏵️</span> For the little ones</p>
+      <h2 id="kids-h">The kids' rangoli corner</h2>
+      <p class="lead">Every Diwali our foyer floor becomes a canvas. Meera, who is eleven, runs the corner with mats, stencils, bowls of coloured powder and a basket of marigold petals. Children from four to twelve make one big pattern together, and at seven o'clock we ring it with diyas.</p>
+      <ul class="pills">
+        <li><span data-ico="avatar-girl" data-size="24">🧒</span> Ages 4 to 12</li>
+        <li><span data-ico="timer" data-size="24">⏱️</span> 6:30 to 7:10 pm</li>
+        <li><span data-ico="droplets" data-size="24">💧</span> Washable colours</li>
+        <li><span data-ico="shirt" data-size="24">👕</span> Aprons provided</li>
+      </ul>
+      <div class="toy" id="toy">
+        <div class="mandala" id="mandala" role="img" aria-label="A rangoli design that changes when you pick petals and colours"></div>
+        <div>
+          <h3>Design your own</h3>
+          <p>Pick the petals and a colour mix, then ask Meera to help you draw it in powder on the night.</p>
+          <div class="row"><span class="lb">Petals</span><div class="seg" role="group" aria-label="Number of petals"><button type="button" aria-pressed="false" data-n="6">6</button><button type="button" aria-pressed="true" data-n="8">8</button><button type="button" aria-pressed="false" data-n="12">12</button></div></div>
+          <div class="row"><span class="lb">Colours</span><div class="sw" role="group" aria-label="Colour mixes">
+            <button type="button" aria-pressed="true" title="Marigold" aria-label="Marigold mix" data-mix="0" style="--s1:#f6a21b;--s2:#e8531f;--s3:#d2306e"></button>
+            <button type="button" aria-pressed="false" title="Gulal" aria-label="Gulal mix" data-mix="1" style="--s1:#e8447f;--s2:#9b2fa6;--s3:#ffd0e2"></button>
+            <button type="button" aria-pressed="false" title="Peacock" aria-label="Peacock mix" data-mix="2" style="--s1:#10867f;--s2:#2457c5;--s3:#f3c64f"></button>
+            <button type="button" aria-pressed="false" title="Haldi and kumkum" aria-label="Haldi and kumkum mix" data-mix="3" style="--s1:#f3c64f;--s2:#c8281f;--s3:#7d1c3c"></button>
+          </div></div>
+          <button class="btn btn-line btn-sm" id="shuffle-rangoli" type="button"><span data-ico="shuffle" data-size="18">🔀</span> Surprise me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ find us ═════════ -->
+<section class="sec find" id="find" aria-labelledby="find-h">
+  <div class="find-hero">
+    <img src="_img/diwali-dinner/35113256-1400.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Two hands, one reaching in from each side, touch lit sparklers together in front of a building outlined with rows of warm fairy lights at night.">
+    <div class="wrap">
+      <p class="kicker on-dark"><span data-ico="map-pin" data-size="20">📍</span> Getting here</p>
+      <h2 id="find-h">Find us on Jasmine Row</h2>
+      <p>Look for the house outlined in marigold-coloured lights. The porch light goes on at six.</p>
+    </div>
+    <span class="credit-tag">Photo: <a href="https://www.pexels.com/@hanshraj-cinematic-short-2155566212">Hanshraj Cinematic short</a> / <a href="https://www.pexels.com/photo/35113256/">Pexels</a></span>
+  </div>
+  <div class="wrap find-grid">
+    <div class="map-wrap"><div class="map" id="map" role="group" aria-label="Sketch map of the streets around 301 Jasmine Row">
+      <svg viewBox="0 0 640 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <rect width="640" height="440" fill="#f3e4c0"/>
+        <path d="M-10 88 C 120 60 230 120 330 96 S 560 40 650 74" fill="none" stroke="#c9e0dc" stroke-width="30" stroke-linecap="round"/>
+        <g fill="#ead7a8">
+          <rect x="22" y="132" width="76" height="62" rx="8"/><rect x="112" y="132" width="70" height="62" rx="8"/><rect x="232" y="126" width="70" height="52" rx="8"/><rect x="380" y="126" width="64" height="62" rx="8"/><rect x="462" y="132" width="80" height="62" rx="8"/><rect x="552" y="132" width="70" height="62" rx="8"/>
+          <rect x="232" y="276" width="92" height="64" rx="8"/><rect x="336" y="276" width="106" height="64" rx="8"/><rect x="232" y="356" width="92" height="70" rx="8"/><rect x="336" y="356" width="106" height="70" rx="8"/><rect x="494" y="276" width="62" height="64" rx="8"/><rect x="566" y="276" width="56" height="64" rx="8"/><rect x="494" y="356" width="128" height="70" rx="8"/>
+        </g>
+        <path d="M18 268 H178 V430 H18 Z" fill="#cfdca6"/>
+        <g fill="#a9bf7a"><circle cx="52" cy="310" r="13"/><circle cx="96" cy="350" r="16"/><circle cx="140" cy="312" r="12"/><circle cx="62" cy="394" r="14"/><circle cx="130" cy="396" r="13"/></g>
+        <g fill="none" stroke-linecap="butt">
+          <path d="M-10 240 H650" stroke="#d3b777" stroke-width="32"/><path d="M200 -10 V450" stroke="#d3b777" stroke-width="28"/><path d="M650 98 C 520 112 440 168 404 240" stroke="#d3b777" stroke-width="24"/><path d="M470 240 V450" stroke="#d3b777" stroke-width="22"/>
+          <path d="M-10 240 H650" stroke="#fffaf0" stroke-width="27"/><path d="M200 -10 V450" stroke="#fffaf0" stroke-width="23"/><path d="M650 98 C 520 112 440 168 404 240" stroke="#fffaf0" stroke-width="19"/><path d="M470 240 V450" stroke="#fffaf0" stroke-width="17"/>
+          <path d="M-10 240 H650" stroke="#e8c77b" stroke-width="1.5" stroke-dasharray="10 12"/>
+        </g>
+        <rect x="316" y="188" width="52" height="36" rx="6" fill="#f5a41f" stroke="#7d1c3c" stroke-width="2.5"/>
+        <g font-family="Hind,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#8a5d1e" letter-spacing=".08em">
+          <text x="440" y="262" text-anchor="end">JASMINE ROW</text>
+          <text transform="translate(190 216) rotate(-90)">MILL STREET</text>
+          <text transform="translate(487 340) rotate(-90)">MAPLE LANE</text>
+          <text x="98" y="298" text-anchor="middle" fill="#5b7035">MARIGOLD PARK</text>
+          <text x="580" y="100" text-anchor="middle" fill="#4f8782" font-style="italic">Tulsi Canal</text>
+        </g>
+      </svg>
+      <span class="pin" style="left:53.4%;top:51%" data-live="map-pin-number" data-p-param-label="1" data-size="52" data-label="Pin 1: the Mehta house, 301 Jasmine Row">1</span>
+      <span class="pin" style="left:15.5%;top:63%" data-live="map-pin-number" data-p-param-label="P" data-size="46" data-label="Pin P: St. Anselm's Hall parking">P</span>
+      <span class="pin" style="left:35.6%;top:36%" data-live="map-pin-number" data-p-param-label="B" data-size="46" data-label="Pin B: bus stop, Route 14">B</span>
+      <span class="pin" style="left:34.8%;top:58.5%" data-live="map-pin-number" data-p-param-label="D" data-size="46" data-label="Pin D: rideshare drop-off">D</span>
+      <span class="map-compass" data-ico="compass" data-size="34" data-label="North is up" style="position:absolute;right:14px;top:12px;z-index:2;color:var(--wine)">🧭</span>
+    </div>
+    <div class="map-key"><span><b>1</b> The Mehta house</span><span><b>P</b> Hall parking</span><span><b>B</b> Bus, Route 14</span><span><b>D</b> Drop-off</span></div></div>
+    <div class="addr">
+      <h3>301 Jasmine Row</h3>
+      <address>The Mehta residence<br>The house with the marigold lights<br>(a fictional address, for this demo)</address>
+      <div class="acts">
+        <button class="btn btn-wine btn-sm" type="button" id="copy-addr"><span data-ico="copy" data-size="20">📋</span> Copy address</button>
+        <a class="btn btn-line btn-sm" href="tel:+15550142"><span data-ico="phone-call" data-size="20">📞</span> Call Rohan</a>
+      </div>
+      <ul class="ways">
+        <li><span data-ico="car-front" data-size="30">🚗</span><span><b>By car</b>Take Mill Street to Jasmine Row. Park on the street (free after 6 pm) or in St. Anselm's Hall lot, marked P, two minutes away.</span></li>
+        <li><span data-ico="bus" data-size="30">🚌</span><span><b>By bus</b>Route 14 stops at Mill Street and Jasmine Row, marked B, four minutes' walk. The last bus back leaves at 10:52 pm.</span></li>
+        <li><span data-ico="taxi" data-size="30">🚕</span><span><b>By rideshare</b>Ask to be dropped at the Mill Street corner, marked D. Our end of Jasmine Row is narrow and gets busy.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ RSVP ═════════ -->
+<section class="sec rsvp on-dark" id="rsvp" aria-labelledby="rsvp-h">
+  <div class="rsvp-bg" aria-hidden="true">
+    <img src="_img/diwali-dinner/photo-1577083753695-e010191bacb5-1600.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Lit clay oil lamps arranged on an ornate brass tray among scattered pink and magenta flower petals.">
+  </div>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker on-dark"><span data-ico="mail-open" data-size="22">💌</span> RSVP</p>
+      <h2 id="rsvp-h">Tell us you're coming</h2>
+      <p>Please reply by Thursday 29 October. It works like a message to Anjali, because that is exactly what it is.</p>
+    </div>
+
+    <div class="rsvp-grid">
+      <div class="form-card rg-frame"><span class="corner c-tl" data-ico="marigold" data-size="44" data-min-level="2" aria-hidden="true"></span><span class="corner c-br" data-ico="marigold" data-size="44" data-min-level="2" aria-hidden="true"></span><div class="form-in">
+        <div class="seats">
+          <span class="ring" data-live="progress-ring" data-p-value="78" data-size="64" id="seat-ring" data-label="31 of 40 places taken">78%</span>
+          <div><strong id="seat-main">31 of 40 places taken</strong><span id="seat-sub">9 left. We'll keep a waiting list after that.</span></div>
+        </div>
+
+        <form id="rsvp-form" action="#" novalidate>
+          <div class="two">
+            <div class="fld">
+              <label for="f-name"><span data-ico="user" data-size="18">👤</span> Your name</label>
+              <input class="inp" id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Priya Shah" required aria-describedby="e-name">
+              <span class="err" id="e-name" role="alert"></span>
+            </div>
+            <div class="fld">
+              <label for="f-contact"><span data-ico="phone" data-size="18">📱</span> WhatsApp number or email</label>
+              <input class="inp" id="f-contact" name="contact" type="text" autocomplete="off" placeholder="+1 555-0119 or priya@example.com" required aria-describedby="e-contact">
+              <span class="err" id="e-contact" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="two">
+            <div class="fld">
+              <span class="lab" id="l-adults"><span data-ico="users" data-size="18">👪</span> Adults</span>
+              <div class="stepper" role="group" aria-labelledby="l-adults">
+                <button type="button" data-step="adults" data-d="-1" aria-label="Fewer adults"><span data-ico="minus" data-size="22" data-fixed-style="line">−</span></button>
+                <output id="o-adults" aria-live="polite">2</output>
+                <button type="button" data-step="adults" data-d="1" aria-label="More adults"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span></button>
+              </div>
+            </div>
+            <div class="fld">
+              <span class="lab" id="l-kids"><span data-ico="baby" data-size="18">🧒</span> Children</span>
+              <div class="stepper" role="group" aria-labelledby="l-kids">
+                <button type="button" data-step="kids" data-d="-1" aria-label="Fewer children"><span data-ico="minus" data-size="22" data-fixed-style="line">−</span></button>
+                <output id="o-kids" aria-live="polite">0</output>
+                <button type="button" data-step="kids" data-d="1" aria-label="More children"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span></button>
+              </div>
+            </div>
+          </div>
+          <span class="err" id="e-guests" role="alert" tabindex="-1" style="margin:-10px 0 14px"></span>
+
+          <div class="fld kidsonly" id="kids-extra" hidden>
+            <label for="f-ages">Children's ages</label>
+            <input class="inp" id="f-ages" name="ages" type="text" placeholder="e.g. 6 and 9">
+            <span class="hint">So we can seat them with friends and set aside the right size apron.</span>
+            <div class="choice" style="margin-top:10px"><label class="pill"><input type="checkbox" id="f-rangoli" checked><span>Join the rangoli corner at 6:30</span></label></div>
+          </div>
+
+          <fieldset class="fld">
+            <legend><span data-ico="clock" data-size="18">🕰️</span> When will you arrive?</legend>
+            <div class="choice">
+              <label class="pill"><input type="radio" name="arrive" value="for the 6:30 welcome"><span>6:30 welcome</span></label>
+              <label class="pill"><input type="radio" name="arrive" value="for the 7:15 puja" checked><span>7:15 puja</span></label>
+              <label class="pill"><input type="radio" name="arrive" value="in time for the 8:15 dinner"><span>8:15 dinner</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="fld">
+            <legend><span data-ico="leaf" data-size="18">🌿</span> Food notes <span class="opt">(everything is vegetarian already)</span></legend>
+            <div class="choice">
+              <label class="pill"><input type="checkbox" name="diet" value="Jain"><span>Jain</span></label>
+              <label class="pill"><input type="checkbox" name="diet" value="vegan"><span>Vegan</span></label>
+              <label class="pill"><input type="checkbox" name="diet" value="nut allergy"><span>Nut allergy</span></label>
+              <label class="pill"><input type="checkbox" name="diet" value="gluten-free"><span>Gluten-free</span></label>
+              <label class="pill"><input type="checkbox" name="diet" value="no onion or garlic"><span>No onion or garlic</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="fld">
+            <legend><span data-ico="mithai-box" data-size="18">🎁</span> Bringing a sweet?</legend>
+            <div class="choice">
+              <label class="pill"><input type="radio" name="sweet" value="yes"><span>Yes, I'll bring one</span></label>
+              <label class="pill"><input type="radio" name="sweet" value="no" checked><span>No, I'll enjoy yours</span></label>
+              <label class="pill"><input type="radio" name="sweet" value="maybe"><span>Not sure yet</span></label>
+            </div>
+            <div class="sweetonly" id="sweet-extra" hidden style="margin-top:12px">
+              <label for="f-sweet" class="sr">What are you bringing?</label>
+              <input class="inp" id="f-sweet" name="sweetname" type="text" list="sweet-ideas" placeholder="What are you bringing? e.g. besan ladoo" aria-describedby="e-sweet">
+              <datalist id="sweet-ideas"><option value="Besan ladoo"><option value="Gulab jamun"><option value="Kaju katli"><option value="Soan papdi"><option value="Shrikhand"><option value="Rasmalai"></datalist>
+              <span class="err" id="e-sweet" role="alert"></span>
+              <span class="hint">Nut-free is wonderful if you can manage it.</span>
+            </div>
+          </fieldset>
+
+          <div class="fld">
+            <label for="f-note">A note for Anjali <span class="opt">(optional)</span></label>
+            <textarea class="inp" id="f-note" name="note" rows="2" placeholder="Anything we should know? Wheelchair, a baby, a late arrival."></textarea>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn btn-wine" type="submit"><span data-ico="send" data-size="20">➤</span> Send my RSVP</button>
+            <small>We'll reply on WhatsApp or email within a day. Nothing leaves this page in this demo.</small>
+          </div>
+        </form>
+
+        <div class="thanks" id="thanks" hidden tabindex="-1" aria-labelledby="thanks-h">
+          <span data-ico="diya" data-size="84" data-motion="loop">🪔</span>
+          <h3 id="thanks-h">Thank you, <span id="t-name">friend</span>!</h3>
+          <p id="t-lead">We have saved your seats.</p>
+          <div class="ticket">
+            <span data-live="ticket-number" data-p-number="32" data-p-hash="true" data-size="76" id="t-ticket" data-label="Your RSVP number is 32">32</span>
+            <div><b>Your RSVP number</b>Quote it if you message us.</div>
+          </div>
+          <ul class="summary" id="t-summary"></ul>
+          <div class="acts">
+            <button class="btn btn-wine btn-sm" type="button" data-act="ics"><span data-ico="calendar-plus" data-size="20">📅</span> Add to calendar</button>
+            <button class="btn btn-line btn-sm" type="button" id="copy-msg"><span data-ico="copy" data-size="20">📋</span> Copy my message</button>
+            <button class="btn btn-line btn-sm" type="button" id="edit-rsvp"><span data-ico="pencil" data-size="20">✏️</span> Change my reply</button>
+          </div>
+        </div>
+      </div></div>
+
+      <aside class="phone" aria-label="Preview of your message to Anjali">
+        <div class="phone-screen">
+          <div class="wa-head">
+            <span data-live="avatar-initials" data-p-initials="AM" data-p-status="online" data-size="46" data-label="Anjali Mehta, online">AM</span>
+            <div class="who"><b>Anjali Mehta</b><small>online &middot; usually replies within the hour</small></div>
+            <span data-ico="phone-call" data-size="22" data-fixed-style="line">📞</span>
+          </div>
+          <div class="wa-body" id="wa-body">
+            <div class="wa-day">Reply by Thursday 29 October</div>
+            <div class="msg in">Namaste! So glad you can join us this Diwali.<time>6:02 pm</time></div>
+            <div class="msg in">Tell us who's coming and what you'd like to bring, and we'll save your seats. Your message builds itself here as you fill in the form.<time>6:02 pm</time></div>
+            <div class="msg out draft" id="wa-draft"><span id="wa-text"></span><time id="wa-time"></time></div>
+          </div>
+          <div class="wa-foot"><div>Type a message</div><span data-ico="send" data-size="22" data-fixed-style="line">➤</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FAQ ═════════ -->
+<section class="sec faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <p class="kicker"><span data-ico="book-open" data-size="22">📖</span> Questions</p>
+      <h2 id="faq-h">Before you ask</h2>
+      <p>If it isn't here, message us. Anjali answers faster than Rohan, but only slightly.</p>
+      <div class="contact">
+        <a href="tel:+15550178"><span data-ico="message-circle" data-size="24">💬</span> WhatsApp Anjali: 555-0178</a>
+        <a href="tel:+15550142"><span data-ico="phone-call" data-size="24">📞</span> Call Rohan: 555-0142</a>
+        <a href="mailto:hello@mehtahouse.example"><span data-ico="mail" data-size="24">✉️</span> hello@mehtahouse.example</a>
+      </div>
+    </div>
+    <div>
+      <details class="q" open><summary>Can I bring a friend, or my parents?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>Of course; just count them in your RSVP, adults and children separately. We have forty seats and the counter above shows how many are left, so reply early. If you are a group of more than five, send Anjali a message first.</p></div></details>
+      <details class="q"><summary>Is the food really all vegetarian?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>Yes. No meat, fish, egg or gelatine will cross the threshold that night. Dairy is used freely, and the vegan and Jain dishes are marked on the thali card. Tell us about any allergy in the RSVP.</p></div></details>
+      <details class="q"><summary>How long is the puja, and must I take part?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>About forty-five minutes. Sit and watch, or join in; both are welcome. Restless children can wander to the back with Dadi, who will have a plate of fruit waiting.</p></div></details>
+      <details class="q"><summary>What should the children wear?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>Anything bright and comfortable. The rangoli powder washes out, but it is enthusiastic, so we hand out aprons. Many children like to wear their festive outfit after the rangoli corner closes at 7:10.</p></div></details>
+      <details class="q"><summary>Will there be alcohol?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>No. There is masala chai, kesar-badam doodh, jaljeera and nimbu masala soda, all on the thali card, and nobody has ever complained.</p></div></details>
+      <details class="q"><summary>Can I bring flowers or a gift?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>A marigold garland for the front door is always welcome. Otherwise, a box of sweets for the mithai table is perfect. No other gifts, please.</p></div></details>
+      <details class="q"><summary>What about fireworks?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>Sparklers only, lit by grown-ups, with water at hand. No bangers or rockets: our neighbours, the babies and Pinto the dog all thank you.</p></div></details>
+      <details class="q"><summary>What if I need to cancel?<span data-ico="chevron-down" data-size="26" data-fixed-style="line">▾</span></summary><div class="ans"><p>Message Anjali as early as you can and your seat goes to someone on the waiting list. Life happens, and no explanation is needed.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ sign-off ═════════ -->
+<section class="signoff" id="signoff" aria-labelledby="signoff-h">
+  <div class="signoff-bg" aria-hidden="true">
+    <img src="_img/diwali-dinner/18376982-1400.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Rows of small clay lamps burning along stone steps at night, converging toward the distance.">
+  </div>
+  <span class="so-art l" data-ico="marigold" data-size="130" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+  <span class="so-art r" data-ico="kalash" data-size="130" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="kicker on-dark"><span data-ico="sparkles" data-size="18" data-min-level="1"></span> With love from our home to yours <span data-ico="sparkles" data-size="18" data-min-level="1"></span></p>
+    <p class="deva-big" lang="hi">शुभ दीपावली</p>
+    <h2 id="signoff-h">Shubh Deepavali</h2>
+    <p class="blessing">May every window of your home be lit, every table be long, and every guest leave with something sweet in their hands. We cannot wait to celebrate with you.</p>
+    <ul class="family">
+      <li><span class="face" data-ico="avatar-woman-bun" data-size="64" data-label="Anjali">👩</span><b>Anjali</b><span class="who">host and head cook</span></li>
+      <li><span class="face" data-ico="avatar-man-beard" data-size="64" data-label="Rohan">👨</span><b>Rohan</b><span class="who">host and head taster</span></li>
+      <li><span class="face" data-ico="avatar-boy" data-size="64" data-label="Aarav">👦</span><b>Aarav</b><span class="who">sparkler captain</span></li>
+      <li><span class="face" data-ico="avatar-girl" data-size="64" data-label="Meera">👧</span><b>Meera</b><span class="who">rangoli boss</span></li>
+      <li><span class="face" data-ico="avatar-older-woman" data-size="64" data-label="Dadi">👵</span><b>Dadi</b><span class="who">keeper of recipes</span></li>
+    </ul>
+    <p class="with-love">With love and a great deal of ghee,</p>
+    <div class="diyas small" aria-hidden="true">
+      <span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span><span class="diya"><span class="cup"></span><span class="flame"></span></span>
+    </div>
+    <p style="margin:34px 0 0"><a class="btn btn-gold" href="#rsvp"><span data-ico="mail" data-size="22">✉️</span> RSVP before 29 October</a></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ═════════ credits ═════════ -->
+<section class="credits" id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <p>Every photograph on this page is hot-linked from Pexels or Unsplash and credited to its photographer. Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT licensed. This is a demo page: the family, the house, the street and the dishes' hosts are fictional.</p>
+    <ul>
+      <li><b>Hero, diyas in rows.</b> Photo by <a href="https://www.pexels.com/@trishik-bose-166596160">Trishik Bose</a> on <a href="https://www.pexels.com/photo/29422096/">Pexels</a></li>
+      <li><b>Marigold garlands.</b> Photo by <a href="https://unsplash.com/@najaratonajaria?utm_source=withicons_demos&utm_medium=referral">Sangram Rakate</a> on <a href="https://unsplash.com/photos/marigold-and-jasmine-flower-garlands-EEeGY0XgNSw?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li><b>Lighting the diyas at the puja.</b> Photo by <a href="https://www.pexels.com/@bhargava-marripati-674798">Bhargava Marripati</a> on <a href="https://www.pexels.com/photo/4094848/">Pexels</a></li>
+      <li><b>Sparkler against the dusk.</b> Photo by <a href="https://unsplash.com/@wflwong?utm_source=withicons_demos&utm_medium=referral">Warren</a> on <a href="https://unsplash.com/photos/photo-of-person-holding-lighted-sparkler-kMRMcUcO81M?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li><b>Festive vegetarian thali.</b> Photo by <a href="https://www.pexels.com/@yankrukov">Yan Krukau</a> on <a href="https://www.pexels.com/photo/8818657/">Pexels</a></li>
+      <li><b>Diwali dinner table with diyas.</b> Photo by <a href="https://www.pexels.com/@yankrukov">Yan Krukau</a> on <a href="https://www.pexels.com/photo/8818662/">Pexels</a></li>
+      <li><b>Brass bowls of ladoo and modak.</b> Photo by <a href="https://www.pexels.com/@lara-jameson">Lara Jameson</a> on <a href="https://www.pexels.com/photo/8887011/">Pexels</a></li>
+      <li><b>Circular floral rangoli.</b> Photo by <a href="https://unsplash.com/@artsy_lens21?utm_source=withicons_demos&utm_medium=referral">Suchandra Roy Chowdhury</a> on <a href="https://unsplash.com/photos/a-circular-arrangement-of-candles-on-a-floor-cM8X2DDvnGE?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li><b>House outlined in fairy lights, with sparklers.</b> Photo by <a href="https://www.pexels.com/@hanshraj-cinematic-short-2155566212">Hanshraj Cinematic short</a> on <a href="https://www.pexels.com/photo/35113256/">Pexels</a></li>
+      <li><b>Lamps on a brass tray with petals.</b> Photo by <a href="https://unsplash.com/@nookscribe?utm_source=withicons_demos&utm_medium=referral">Udayaditya Barua</a> on <a href="https://unsplash.com/photos/lit-oil-lamps-on-decorative-tray-xisPXJqwQkA?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li><b>Lamps along stone steps.</b> Photo by <a href="https://www.pexels.com/@yogendras31">Yogendra Singh</a> on <a href="https://www.pexels.com/photo/18376982/">Pexels</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="rg-chain warm" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span data-ico="diya" data-size="40">🪔</span> Mehta House</div>
+        <p>Diwali dinner, Sunday 8 November 2026, 6:30 to 10:30 pm.<br>301 Jasmine Row.</p>
+        <p>Please reply by Thursday 29 October.</p>
+      </div>
+      <div>
+        <h3>The evening</h3>
+        <ul>
+          <li><a href="#evening"><span data-ico="alarm-clock" data-size="18">⏰</span> Timeline</a></li>
+          <li><a href="#menu"><span data-ico="utensils" data-size="18">🍽️</span> The thali card</a></li>
+          <li><a href="#know"><span data-ico="lightbulb" data-size="18">💡</span> Good to know</a></li>
+          <li><a href="#rangoli"><span data-ico="palette" data-size="18">🎨</span> Rangoli corner</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Reach us</h3>
+        <ul>
+          <li><a href="#rsvp"><span data-ico="mail" data-size="18">✉️</span> RSVP</a></li>
+          <li><a href="tel:+15550178"><span data-ico="phone" data-size="18">📱</span> 555-0178 (Anjali)</a></li>
+          <li><a href="tel:+15550142"><span data-ico="phone-call" data-size="18">📞</span> 555-0142 (Rohan)</a></li>
+          <li><a href="mailto:hello@mehtahouse.example"><span data-ico="mail" data-size="18">✉️</span> hello@mehtahouse.example</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      <span>Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional.</span>
+      <span>Shubh Deepavali.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="page-toast" id="page-toast" role="status" aria-live="polite"></div>
+
+<script src="_kit/demo-kit.js" data-style="rangoli" data-recommend="rangoli,utsav,luxe,coquette,glass,line,solid,soft3d" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); };
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The event (local time; the page is a fictional demo)
+  var START = new Date(2026, 10, 8, 18, 30, 0);
+  var END = new Date(2026, 10, 8, 22, 30, 0);
+  var INVITES_OUT = new Date(2026, 8, 15, 12, 0, 0); // used for the days-to-go ring
+  var CAP = 40, taken = 31, families = 24;
+
+  var toastT = 0;
+  function toast(msg) {
+    var t = $('#page-toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2800);
+  }
+  function setLive(el, p, fallback) {
+    if (!el) return;
+    if (window.WithKit && el._kit) { try { window.WithKit.setLive(el, p); } catch (e) {} }
+    var fb = el.querySelector('.kit-fb');
+    if (fb && fallback != null) fb.textContent = fallback;
+    else if (!el._kit && fallback != null) el.textContent = fallback;
+  }
+  function copy(text, msg) {
+    var done = function () { toast(msg || 'Copied'); };
+    var fallback = function () {
+      var ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { toast('Could not copy. Select the text and copy it by hand.'); }
+      ta.remove();
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+
+  /* ───────── navigation ───────── */
+  var navBtn = $('#menu-btn'), nav = $('#nav');
+  function closeNav() { nav.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
+  navBtn.addEventListener('click', function () {
+    var open = !nav.classList.contains('open');
+    nav.classList.toggle('open', open); navBtn.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) closeNav(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+  if ('IntersectionObserver' in window) {
+    // scroll-spy: every section is watched (also the ones with no nav link, such as RSVP and the sign-off),
+    // so the underline moves off "Find us" when the visitor reaches the RSVP form, and the header RSVP button lights up there
+    var SPY = ['evening', 'menu', 'mithai', 'know', 'rangoli', 'find', 'rsvp', 'faq', 'signoff'], seen = {}, rsvpBtn = $('.head-cta .btn');
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+      var cur = SPY.filter(function (id) { return seen[id]; })[0] || '';
+      var link = cur === 'mithai' ? 'menu' : cur; // the mithai table belongs to the menu
+      $$('a', nav).forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + link); });
+      if (rsvpBtn) rsvpBtn.classList.toggle('on', cur === 'rsvp');
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    SPY.forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
+    var lit = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('lit'); lit.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -30% 0px' });
+    $$('.tl-item').forEach(function (li) { lit.observe(li); });
+  } else $$('.tl-item').forEach(function (li) { li.classList.add('lit'); });
+
+  /* ───────── countdown ───────── */
+  var ring = $('#ring-days');
+  function tick() {
+    var now = new Date(), diff = START - now;
+    var lab = $('#cd-label'), cd = $('#cd');
+    if (diff > 0) {
+      var d = Math.floor(diff / 864e5), h = Math.floor(diff % 864e5 / 36e5), m = Math.floor(diff % 36e5 / 6e4), s = Math.floor(diff % 6e4 / 1e3);
+      $('#cd-d').textContent = pad(d); $('#cd-h').textContent = pad(h); $('#cd-m').textContent = pad(m); $('#cd-s').textContent = pad(s);
+      var lastDay = d === 0;
+      var left = lastDay ? h : Math.min(99, d);
+      var total = lastDay ? 24 : Math.max(left, Math.min(99, Math.round((START - INVITES_OUT) / 864e5)));
+      var unit = lastDay ? 'hour' : 'day';
+      var key = unit + left;
+      if (ring && ring.dataset.key !== key) {
+        ring.dataset.key = key;
+        setLive(ring, { left: left, total: total, label: plural(left, unit) + ' to go' }, left);
+        var cap = ring.parentNode.querySelector('.ring-cap'); if (cap) cap.textContent = unit + (left === 1 ? '' : 's') + ' to go';
+      }
+    } else {
+      cd.hidden = true; lab.className = 'cd-msg';
+      lab.textContent = now < END ? 'The diyas are lit. Come in, and leave your shoes at the porch.' : 'Diwali at the Mehta House has come and gone. Thank you for celebrating with us. Shubh Deepavali!';
+      if (ring) { setLive(ring, { left: 0, total: 54, label: 'The evening has arrived' }, 0); var c2 = ring.parentNode.querySelector('.ring-cap'); if (c2) c2.textContent = now < END ? 'tonight' : 'until next year'; }
+    }
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ───────── add to calendar ───────── */
+  function fold(line) {
+    var out = [], l = line;
+    while (l.length > 74) { out.push(l.slice(0, 74)); l = ' ' + l.slice(74); }
+    out.push(l); return out.join('\r\n');
+  }
+  function icsText() {
+    var n = new Date();
+    var stamp = n.getUTCFullYear() + pad(n.getUTCMonth() + 1) + pad(n.getUTCDate()) + 'T' + pad(n.getUTCHours()) + pad(n.getUTCMinutes()) + pad(n.getUTCSeconds()) + 'Z';
+    var lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demo//Diwali at the Mehta House//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:diwali-2026@mehta-house.example', 'DTSTAMP:' + stamp,
+      'DTSTART:20261108T183000', 'DTEND:20261108T223000',
+      'SUMMARY:Diwali at the Mehta House',
+      'LOCATION:The Mehta residence\\, 301 Jasmine Row',
+      'DESCRIPTION:Family Diwali dinner (vegetarian). Arrive from 6:30 pm\\; Lakshmi puja at 7:15\\; dinner at 8:15\\; mithai at 9:30\\; sparklers at 10:00. Bring one diya. Shoes off at the door.\\nRSVP by 29 October: hello@mehtahouse.example',
+      'ORGANIZER;CN="Anjali and Rohan Mehta":mailto:hello@mehtahouse.example',
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:Diwali at the Mehta House tomorrow at 6:30 pm', 'END:VALARM',
+      'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:Diwali at the Mehta House starts in two hours', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ];
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+  function downloadIcs() {
+    var blob = new Blob([icsText()], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = 'diwali-at-the-mehta-house.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    toast('Calendar file downloaded: Sunday 8 November, 6:30 pm');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act="ics"]');
+    if (b) { e.preventDefault(); downloadIcs(); }
+  });
+  window.__mehta = { icsText: icsText };
+
+  /* ───────── menu: diet filter + katori ───────── */
+  var dishes = $$('.dish'), lists = $$('.dishes');
+  var DIET = { jain: 'Jain-friendly', vegan: 'vegan', nutfree: 'nut-free' };
+  function setDiet(k) {
+    $$('.diet [data-diet]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.diet === k)); });
+    var n = 0;
+    dishes.forEach(function (d) {
+      var t = (d.dataset.d || '').split(' ');
+      var m = k === 'all' || (k === 'jain' && t.indexOf('jain') > -1) || (k === 'vegan' && t.indexOf('vegan') > -1) || (k === 'nutfree' && t.indexOf('nuts') < 0);
+      d.classList.toggle('match', m); if (m) n++;
+    });
+    lists.forEach(function (u) { u.classList.toggle('filtered', k !== 'all'); });
+    $('#diet-count').textContent = k === 'all' ? 'All ' + dishes.length + ' dishes, all vegetarian.' : n + ' of ' + dishes.length + ' dishes are ' + DIET[k] + '. The rest are dimmed.';
+  }
+  $$('.diet [data-diet]').forEach(function (b) { b.addEventListener('click', function () { setDiet(b.dataset.diet); }); });
+  setDiet('all');
+
+  var katoris = $$('.katori'), mid = $('#plate-mid');
+  function showCourse(btn, scroll) {
+    katoris.forEach(function (k) { k.classList.toggle('on', k === btn); });
+    var sec = document.getElementById(btn.dataset.course);
+    var idx = katoris.indexOf(btn) + 1;
+    mid.innerHTML = '<small>Katori ' + idx + '</small><b>' + btn.dataset.name + '</b><span class="count">' + plural(sec.querySelectorAll('.dish').length, 'dish', 'dishes') + '</span>';
+    if (scroll) {
+      // announced only when the visitor picks a bowl, not while the page merely scrolls past the courses
+      var say = $('#course-status');
+      if (say) say.textContent = 'Katori ' + idx + ', ' + btn.dataset.name.replace(/&amp;/g, '&') + ': ' + plural(sec.querySelectorAll('.dish').length, 'dish', 'dishes') + '.';
+      sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      sec.classList.add('flash'); setTimeout(function () { sec.classList.remove('flash'); }, 1600);
+    }
+  }
+  katoris.forEach(function (k) { k.addEventListener('click', function () { showCourse(k, true); }); });
+  if ('IntersectionObserver' in window) {
+    var cs = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var btn = katoris.filter(function (k) { return k.dataset.course === en.target.id; })[0];
+        if (btn) showCourse(btn, false);
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    $$('.course').forEach(function (c) { cs.observe(c); });
+  }
+
+  /* ───────── rangoli toy ───────── */
+  var MIX = [['#f6a21b', '#e8531f', '#d2306e'], ['#e8447f', '#9b2fa6', '#ffd0e2'], ['#10867f', '#2457c5', '#f3c64f'], ['#f3c64f', '#c8281f', '#7d1c3c']];
+  var rg = { n: 8, mix: 0 };
+  function leaves(n, r, len, hw, fill, rot) {
+    var out = '';
+    for (var i = 0; i < n; i++) {
+      var a = (360 / n) * i + (rot || 0);
+      out += '<path transform="rotate(' + a.toFixed(2) + ')" d="M0 ' + (-r) + ' C ' + hw + ' ' + (-r - len * 0.25) + ' ' + hw + ' ' + (-r - len * 0.75) + ' 0 ' + (-r - len) + ' C ' + (-hw) + ' ' + (-r - len * 0.75) + ' ' + (-hw) + ' ' + (-r - len * 0.25) + ' 0 ' + (-r) + 'Z" fill="' + fill + '" stroke="#4a0f24" stroke-width="1.3" stroke-linejoin="round"/>';
+    }
+    return out;
+  }
+  function dots(n, r, rad, fill, rot) {
+    var out = '';
+    for (var i = 0; i < n; i++) {
+      var a = ((360 / n) * i + (rot || 0)) * Math.PI / 180;
+      out += '<circle cx="' + (Math.sin(a) * r).toFixed(2) + '" cy="' + (-Math.cos(a) * r).toFixed(2) + '" r="' + rad + '" fill="' + fill + '"/>';
+    }
+    return out;
+  }
+  function drawRangoli() {
+    var n = rg.n, c = MIX[rg.mix];
+    var hwOut = Math.min(19, Math.PI * 50 / n * 0.6), hwMid = Math.min(12, Math.PI * 44 / n * 0.5), hwIn = Math.min(11, Math.PI * 16 / n * 0.62);
+    var svg = '<svg viewBox="-100 -100 200 200" aria-hidden="true" focusable="false">' +
+      '<circle r="99" fill="#fff6e0" stroke="#c8962f" stroke-width="1.5"/>' +
+      dots(n * 2, 93, 2.6, c[1]) +
+      leaves(n, 50, 42, hwOut, c[0]) +
+      leaves(n, 46, 27, hwMid, c[1], 180 / n) +
+      dots(n, 38, 3.4, c[2], 180 / n) +
+      leaves(n, 15, 24, hwIn, c[2]) +
+      '<circle r="15" fill="#4a0f24"/><circle r="9" fill="' + c[0] + '"/><circle r="3.6" fill="#4a0f24"/></svg>';
+    $('#mandala').innerHTML = svg;
+    $$('.seg [data-n]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.n === rg.n)); });
+    $$('.sw [data-mix]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.mix === rg.mix)); });
+  }
+  $$('.seg [data-n]').forEach(function (b) { b.addEventListener('click', function () { rg.n = +b.dataset.n; drawRangoli(); }); });
+  $$('.sw [data-mix]').forEach(function (b) { b.addEventListener('click', function () { rg.mix = +b.dataset.mix; drawRangoli(); }); });
+  $('#shuffle-rangoli').addEventListener('click', function () {
+    var ns = [6, 8, 12]; rg.n = ns[Math.floor(Math.random() * 3)]; rg.mix = (rg.mix + 1 + Math.floor(Math.random() * 3)) % MIX.length; drawRangoli();
+  });
+  drawRangoli();
+
+  /* ───────── copy address ───────── */
+  $('#copy-addr').addEventListener('click', function () { copy('The Mehta residence, 301 Jasmine Row', 'Address copied'); });
+
+  /* ───────── RSVP ───────── */
+  var form = $('#rsvp-form'), thanks = $('#thanks');
+  var guests = { adults: 2, kids: 0 };
+  var mine = null; // { n: guests, sweetEl }
+  function val(id) { return ($('#' + id).value || ''); }
+  function fmtTime(d) { var h = d.getHours(), m = d.getMinutes(); return (h % 12 || 12) + ':' + pad(m) + ' ' + (h < 12 ? 'am' : 'pm'); }
+  function readForm() {
+    var diet = $$('input[name="diet"]:checked', form).map(function (i) { return i.value; });
+    var arrive = $('input[name="arrive"]:checked', form).value;
+    var sweet = $('input[name="sweet"]:checked', form).value;
+    return {
+      name: val('f-name'), contact: val('f-contact'), adults: guests.adults, kids: guests.kids, ages: val('f-ages').trim(),
+      rangoli: $('#f-rangoli').checked, arrive: arrive, diet: diet, sweet: sweet, sweetname: val('f-sweet').trim(), note: val('f-note').trim()
+    };
+  }
+  function buildMessage(v) {
+    var name = v.name.trim() || '[your name]';
+    var who = plural(v.adults, 'adult') + (v.kids ? ' and ' + (v.kids === 1 ? '1 child' : v.kids + ' children') + (v.ages ? ' (ages ' + v.ages + ')' : '') : '');
+    var lines = ['Namaste Anjali and Rohan, this is ' + name + '.', 'We will be ' + who + ', arriving ' + v.arrive + '.'];
+    if (v.kids && v.rangoli) lines.push(v.kids === 1 ? 'Our child would love the rangoli corner.' : 'The children would love the rangoli corner.');
+    lines.push('Food: ' + (v.diet.length ? v.diet.join(', ') : 'nothing special') + '.');
+    if (v.sweet === 'yes') lines.push('I will bring ' + (v.sweetname || 'a sweet') + ' for the mithai table.');
+    else if (v.sweet === 'maybe') lines.push('I might bring a sweet and will confirm.');
+    if (v.note) lines.push(v.note);
+    lines.push('Looking forward to it!');
+    return lines.join('\n');
+  }
+  function remaining() { return CAP - taken + (mine ? mine.n : 0); }
+  function updatePreview() {
+    var v = readForm();
+    $('#wa-text').textContent = buildMessage(v);
+    if (!$('#wa-time').dataset.fixed) $('#wa-time').textContent = fmtTime(new Date());
+  }
+  function syncSteppers() {
+    $('#o-adults').textContent = guests.adults; $('#o-kids').textContent = guests.kids;
+    $$('[data-step]').forEach(function (b) {
+      var k = b.dataset.step, d = +b.dataset.d;
+      var min = k === 'adults' ? 1 : 0, max = 8;
+      b.disabled = (d < 0 && guests[k] <= min) || (d > 0 && guests[k] >= max);
+    });
+    $('#kids-extra').hidden = guests.kids === 0;
+    $('#e-guests').textContent = '';
+    updatePreview();
+  }
+  $$('[data-step]').forEach(function (b) {
+    b.addEventListener('click', function () { guests[b.dataset.step] += +b.dataset.d; syncSteppers(); });
+  });
+  $$('input[name="sweet"]', form).forEach(function (r) {
+    r.addEventListener('change', function () { $('#sweet-extra').hidden = $('input[name="sweet"]:checked', form).value !== 'yes'; updatePreview(); });
+  });
+  form.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.getAttribute('aria-invalid')) { t.removeAttribute('aria-invalid'); var er = $('#e-' + t.id.replace('f-', '')); if (er) er.textContent = ''; }
+    updatePreview();
+  });
+  form.addEventListener('change', updatePreview);
+
+  function fail(id, msg) {
+    var el = $('#f-' + id); if (el) el.setAttribute('aria-invalid', 'true');
+    $('#e-' + id).textContent = msg;
+  }
+  function validate(v) {
+    var bad = [];
+    $$('[aria-invalid]', form).forEach(function (el) { el.removeAttribute('aria-invalid'); });
+    $$('.err', form).forEach(function (e) { e.textContent = ''; });
+    if (v.name.trim().length < 2) { fail('name', 'Please tell us your name so we can find you at the door.'); bad.push('f-name'); }
+    var c = v.contact.trim(), digits = c.replace(/[\s().+-]/g, '');
+    var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c), okTel = /^\d{7,15}$/.test(digits);
+    if (!okMail && !okTel) { fail('contact', c ? 'That does not look like a WhatsApp number or an email. Try +1 555-0119 or name@example.com.' : 'Add a WhatsApp number or an email so Anjali can reply.'); bad.push('f-contact'); }
+    var n = v.adults + v.kids;
+    if (n > remaining()) { $('#e-guests').textContent = remaining() <= 0 ? 'We are full, but Anjali keeps a waiting list: message her and she will add you.' : 'We only have ' + plural(remaining(), 'place') + ' left. Please reduce your party or message Anjali to join the waiting list.'; bad.push('e-guests'); }
+    if (v.sweet === 'yes' && !v.sweetname) { fail('sweet', 'What are you bringing? A guess is fine.'); bad.push('f-sweet'); }
+    return bad;
+  }
+
+  function addBubble(cls, text, time) {
+    var d = document.createElement('div'); d.className = 'msg ' + cls; d.textContent = text;
+    var t = document.createElement('time'); t.textContent = time || fmtTime(new Date()); d.appendChild(t);
+    $('#wa-body').appendChild(d); return d;
+  }
+  var replyTimer = 0;
+  function summaryItem(icon, emoji, text) {
+    var li = document.createElement('li'), ic = document.createElement('span'), tx = document.createElement('span');
+    ic.setAttribute('data-ico', icon); ic.setAttribute('data-size', '22'); ic.textContent = emoji;
+    tx.textContent = text; li.appendChild(ic); li.appendChild(tx); return li;
+  }
+  function sweetEmoji() { return '🍬'; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = readForm(), bad = validate(v);
+    if (bad.length) { var f = document.getElementById(bad[0]); if (f) { f.focus({ preventScroll: true }); f.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); } return; }
+    var n = v.adults + v.kids;
+    // seats: undo a previous submission from this visitor first
+    if (mine) { taken -= mine.n; if (mine.sweetEl) mine.sweetEl.remove(); }
+    taken += n;
+    var first = v.name.trim().split(/\s+/)[0];
+    var number = mine ? mine.number : families + 1;
+    mine = { n: n, number: number, sweetEl: null, msg: buildMessage(v) };
+    // seat counter
+    var pct = Math.round(taken / CAP * 100);
+    setLive($('#seat-ring'), { value: pct, label: taken + ' of ' + CAP + ' places taken' }, pct + '%');
+    $('#seat-main').textContent = taken + ' of ' + CAP + ' places taken';
+    $('#seat-sub').textContent = taken >= CAP ? 'We are full. Anjali keeps a waiting list.' : (CAP - taken) + ' left. We’ll keep a waiting list after that.';
+    // mithai sheet
+    if (v.sweet === 'yes') {
+      var li = document.createElement('li'); li.className = 'new';
+      li.innerHTML = '<span data-ico="mithai-box" data-size="24">' + sweetEmoji() + '</span><b></b><span class="what"></span>';
+      li.querySelector('b').textContent = v.name.trim(); li.querySelector('.what').textContent = v.sweetname;
+      $('#sheet').appendChild(li); mine.sweetEl = li;
+    }
+    var cnt = $('#sheet').children.length; $('#sheet-count').textContent = plural(cnt, 'sweet');
+    // thank-you panel
+    $('#t-name').textContent = first;
+    $('#t-lead').textContent = 'We have saved ' + plural(n, 'seat') + ' for you. Anjali will confirm on ' + (/@/.test(v.contact) ? 'email' : 'WhatsApp') + ' within a day.';
+    setLive($('#t-ticket'), { number: number, label: 'Your RSVP number is ' + number }, number);
+    var ul = $('#t-summary'); ul.innerHTML = '';
+    ul.appendChild(summaryItem('users', '👪', plural(v.adults, 'adult') + (v.kids ? ' and ' + (v.kids === 1 ? '1 child' : v.kids + ' children') : '')));
+    ul.appendChild(summaryItem('clock', '🕰️', 'Arriving ' + v.arrive));
+    ul.appendChild(summaryItem('leaf', '🌿', v.diet.length ? 'Food notes: ' + v.diet.join(', ') : 'No special food notes'));
+    if (v.sweet === 'yes') ul.appendChild(summaryItem('mithai-box', '🎁', 'Bringing ' + v.sweetname + ' for the mithai table'));
+    ul.appendChild(summaryItem('message-circle', '💬', 'We will reply to ' + v.contact.trim()));
+    // chat: the draft becomes sent, Anjali "types", then answers
+    var draft = $('#wa-draft'); draft.classList.remove('draft'); $('#wa-time').dataset.fixed = '1'; $('#wa-time').textContent = fmtTime(new Date());
+    $$('.msg.reply, .msg.typing').forEach(function (m) { m.remove(); });
+    var typing = document.createElement('div'); typing.className = 'msg in typing'; typing.innerHTML = '<i></i><i></i><i></i>'; typing.setAttribute('aria-label', 'Anjali is typing');
+    $('#wa-body').appendChild(typing);
+    clearTimeout(replyTimer);
+    replyTimer = setTimeout(function () {
+      typing.remove();
+      var r = addBubble('in reply', 'Wonderful, ' + first + '! I have saved ' + plural(n, 'seat') + '. See you on the 8th, and bring your appetite. Anjali');
+      r.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    }, reduce ? 200 : 1500);
+    form.hidden = true; thanks.hidden = false;
+    thanks.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    thanks.focus({ preventScroll: true });
+  });
+  $('#edit-rsvp').addEventListener('click', function () {
+    thanks.hidden = true; form.hidden = false;
+    var draft = $('#wa-draft'); draft.classList.add('draft'); delete $('#wa-time').dataset.fixed;
+    $$('.msg.reply, .msg.typing').forEach(function (m) { m.remove(); });
+    clearTimeout(replyTimer);
+    updatePreview();
+    $('#f-name').focus();
+  });
+  $('#copy-msg').addEventListener('click', function () { copy(mine ? mine.msg : buildMessage(readForm()), 'Message copied. Paste it into WhatsApp if you like.'); });
+  var past = fmtTime(new Date(Date.now() - 180000));
+  $$('.msg.in time').forEach(function (t) { t.textContent = past; });
+  syncSteppers();
+})();
+</script>
+</body>
+</html>

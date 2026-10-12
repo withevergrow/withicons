@@ -1,0 +1,1316 @@
+{
+  "version": 1,
+  "today": "2026-10-11",
+  "note": "Master brief for the 15 demo pages. The hub (demos/index.html), the research agents, the page authors and the QA all read this file. Everything in it is FICTIONAL (people, places, shops, phone numbers use 555 / example.com).",
+  "demos": [
+    {
+      "slug": "haunted-hollow",
+      "n": 1,
+      "kind": "invite",
+      "group": "Halloween",
+      "title": "The Hollow Hill Masquerade",
+      "tagline": "An adults-only Halloween house party by candlelight",
+      "defaultStyle": "gothic",
+      "recommend": [
+        "gothic",
+        "halloween",
+        "glass",
+        "sketch",
+        "engrave",
+        "luxe",
+        "chrome",
+        "line"
+      ],
+      "event": {
+        "date": "2026-10-31",
+        "start": "20:00",
+        "end": "01:00",
+        "venue": "Hollow Hill House, 14 Larkspur Lane (fictional)",
+        "host": "Mara & Theo Vance"
+      },
+      "mood": "Dark, candle-lit gothic: near-black plum, bone white, tarnished gold, blood red. Serif display type (Cinzel / Cormorant / IM Fell), grainy photos, flicker of candlelight.",
+      "must": "Masquerade dress code, 'midnight unmasking' schedule, signature cocktails menu (cauldron punch, 'Bloody Hour' etc.), house rules (no real knives, no photos in the Séance Room), RSVP with +1 and costume field, add-to-calendar, FAQ (parking, coat check, sober-ride list), a hidden-until-midnight easter egg.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "wide, moody: glowing jack-o'-lanterns or candle-lit haunted atmosphere, lots of dark negative space for text",
+          "orient": "landscape"
+        },
+        {
+          "slot": "pumpkins",
+          "want": "carved pumpkins glowing at night",
+          "orient": "any"
+        },
+        {
+          "slot": "masks",
+          "want": "elegant masquerade / venetian masks, adult costume",
+          "orient": "any"
+        },
+        {
+          "slot": "cocktail",
+          "want": "dark moody cocktail or potion-like drink, smoke or dry-ice optional",
+          "orient": "any"
+        },
+        {
+          "slot": "candles",
+          "want": "candelabra / candles / skulls table decor, gothic",
+          "orient": "any"
+        },
+        {
+          "slot": "house",
+          "want": "spooky old mansion, foggy woods, or haunted-house exterior",
+          "orient": "any"
+        },
+        {
+          "slot": "guests",
+          "want": "adults in Halloween costumes at a party (not identifiable close-ups preferred)",
+          "orient": "any"
+        },
+        {
+          "slot": "treats",
+          "want": "spooky food: skull cake, black cupcakes, witch-finger cookies",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "boo-bash",
+      "n": 2,
+      "kind": "invite",
+      "group": "Halloween",
+      "title": "Pumpkin Patch Boo Bash",
+      "tagline": "A little-monsters costume party and trick-or-treat trail for ages 3 to 9",
+      "defaultStyle": "halloween",
+      "recommend": [
+        "halloween",
+        "sticker",
+        "kawaii",
+        "plush",
+        "pastel",
+        "brutal",
+        "clay",
+        "line"
+      ],
+      "event": {
+        "date": "2026-10-24",
+        "start": "14:00",
+        "end": "17:00",
+        "venue": "The Okafor-Lindqvist backyard, 82 Maple Court (fictional)",
+        "host": "Ada & Jonas, parents of Pip (turning 6)"
+      },
+      "mood": "Bright and silly-spooky for kids: pumpkin orange, grape purple, slime green, cream. Rounded playful type (Fredoka / Baloo / Chewy), sticker-like badges, wobbly rotated cards.",
+      "must": "Costume parade at 3pm, trick-or-treat trail map (numbered stops, uses live map-pin-number icons), craft stations (pumpkin painting, mummy wrap race), snack menu with allergen tags (nut-free!), what to bring, parents' drop-off vs stay info, RSVP with kids' names + allergies, add-to-calendar.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "kids in cheerful Halloween costumes with pumpkins, daylight, smiling",
+          "orient": "landscape"
+        },
+        {
+          "slot": "patch",
+          "want": "pumpkin patch / rows of orange pumpkins",
+          "orient": "any"
+        },
+        {
+          "slot": "trick",
+          "want": "children trick-or-treating with buckets",
+          "orient": "any"
+        },
+        {
+          "slot": "candy",
+          "want": "halloween candy, treat bags, sweets",
+          "orient": "any"
+        },
+        {
+          "slot": "cupcakes",
+          "want": "halloween cupcakes / cookies decorated by kids",
+          "orient": "any"
+        },
+        {
+          "slot": "carving",
+          "want": "kids painting or carving pumpkins, craft table",
+          "orient": "any"
+        },
+        {
+          "slot": "ghosts",
+          "want": "cute (not scary) ghost or bat decorations, garlands",
+          "orient": "any"
+        },
+        {
+          "slot": "party",
+          "want": "kids party games outdoors, autumn leaves",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "diwali-dinner",
+      "n": 3,
+      "kind": "invite",
+      "group": "Diwali",
+      "title": "Diwali at the Mehta House",
+      "tagline": "Lakshmi puja, a long table of mithai and diyas on every sill",
+      "defaultStyle": "rangoli",
+      "recommend": [
+        "rangoli",
+        "utsav",
+        "luxe",
+        "coquette",
+        "glass",
+        "line",
+        "solid",
+        "soft3d"
+      ],
+      "event": {
+        "date": "2026-11-08",
+        "start": "18:30",
+        "end": "22:30",
+        "venue": "The Mehta residence, 301 Jasmine Row (fictional)",
+        "host": "Anjali & Rohan Mehta"
+      },
+      "mood": "Warm, elegant, family-run: deep maroon and saffron, marigold orange, pink, gold leaf. Serif display (Cormorant / Playfair / Yatra One for accents), rangoli-inspired CSS patterns. Clean and brand-friendly rather than over-ornate.",
+      "must": "Puja timing (muhurat shown as a plain-language schedule), dress code (festive Indian or smart), vegetarian menu with dish names and region (kaju katli, dal makhani, paneer tikka, jalebi...), 'bring a diya' note, kids' rangoli corner, shoes-off note, parking, WhatsApp-style RSVP form (adults/kids, dietary, bringing a sweet?), add-to-calendar, a gentle 'Happy Diwali / Shubh Deepavali' sign-off.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "rows of lit diyas, warm golden bokeh, wide",
+          "orient": "landscape"
+        },
+        {
+          "slot": "rangoli",
+          "want": "colourful rangoli on a floor/doorway",
+          "orient": "any"
+        },
+        {
+          "slot": "sweets",
+          "want": "Indian sweets mithai on a plate (kaju katli, ladoo, jalebi)",
+          "orient": "any"
+        },
+        {
+          "slot": "thali",
+          "want": "festive Indian vegetarian dinner thali or dishes on a table",
+          "orient": "any"
+        },
+        {
+          "slot": "marigold",
+          "want": "marigold flower garlands / flower decoration",
+          "orient": "any"
+        },
+        {
+          "slot": "family",
+          "want": "family or hands lighting a diya / puja, warm light",
+          "orient": "any"
+        },
+        {
+          "slot": "lights",
+          "want": "fairy lights / lanterns / lit house at night for Diwali",
+          "orient": "any"
+        },
+        {
+          "slot": "sparklers",
+          "want": "sparklers phuljhadi or festive fireworks (kid-safe feeling)",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "diwali-mela",
+      "n": 4,
+      "kind": "invite",
+      "group": "Diwali",
+      "title": "Rangoli Square Diwali Mela",
+      "tagline": "A neighbourhood festival of lights: food stalls, garba, rangoli contest and fireworks",
+      "defaultStyle": "utsav",
+      "recommend": [
+        "utsav",
+        "rangoli",
+        "brutal",
+        "sticker",
+        "bento",
+        "engrave",
+        "duo",
+        "retro"
+      ],
+      "event": {
+        "date": "2026-11-07",
+        "start": "16:00",
+        "end": "22:00",
+        "venue": "Rangoli Square community plaza, Eastgate (fictional)",
+        "host": "Eastgate Indian Cultural Association (fictional)"
+      },
+      "mood": "Ornate, maximal, joyful festival poster energy: magenta, gold, teal, saffron, deep indigo night. Display type with presence (Rozha One / Yatra One / Poppins). Bunting, paisley and mandala CSS, bright and loud versus the quiet dinner demo.",
+      "must": "Event day timetable (stalls open 4pm, rangoli contest 5pm, garba 7pm, aarti 8pm, fireworks 9:30pm) as a scannable schedule, stall/food directory with filter chips (Chaat, Sweets, Chai, Crafts, Henna), a rangoli contest sign-up form, volunteer + vendor call, free-entry & parking/transit info, accessibility notes, safety (fireworks zone), tickets-free RSVP count.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "Indian festival of lights at night: lanterns, lit streets or market, wide",
+          "orient": "landscape"
+        },
+        {
+          "slot": "streetfood",
+          "want": "Indian street food chaat / snacks stall",
+          "orient": "any"
+        },
+        {
+          "slot": "stalls",
+          "want": "colourful market stalls, bangles, textiles, lamps",
+          "orient": "any"
+        },
+        {
+          "slot": "dance",
+          "want": "garba / dandiya / festival dance in traditional dress",
+          "orient": "any"
+        },
+        {
+          "slot": "fireworks",
+          "want": "fireworks over crowd/night sky",
+          "orient": "landscape"
+        },
+        {
+          "slot": "rangoli",
+          "want": "large, vivid rangoli artwork",
+          "orient": "any"
+        },
+        {
+          "slot": "sparklers",
+          "want": "children with sparklers or lamps",
+          "orient": "any"
+        },
+        {
+          "slot": "sweets",
+          "want": "stall of Indian sweets and dry fruit gift boxes",
+          "orient": "any"
+        },
+        {
+          "slot": "diyas",
+          "want": "hand-painted clay diyas for sale / being painted",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "rooftop-house-party",
+      "n": 5,
+      "kind": "invite",
+      "group": "House party",
+      "title": "Last Rooftop of the Season",
+      "tagline": "Sunset to skyline: a house party on the roof before the cold comes",
+      "defaultStyle": "liquid",
+      "recommend": [
+        "liquid",
+        "chrome",
+        "glass",
+        "brutal",
+        "sticker",
+        "pixel",
+        "bauhaus",
+        "solid"
+      ],
+      "event": {
+        "date": "2026-10-17",
+        "start": "19:00",
+        "end": "00:00",
+        "venue": "The roof at 9 Foundry Street, apt 4C (fictional)",
+        "host": "Dee, Marcus & the 4C crew"
+      },
+      "mood": "Dusk-to-night gradients: electric violet, hot pink, sunset orange, deep navy. Glassy cards, big grotesk type (Space Grotesk / Syne / Unbounded), glow effects. Feels like a good party flyer meets an event app.",
+      "must": "Live weather icon for the forecast (weather live icon) + 'what to wear' advice (blankets provided), set times for DJs, a playlist/request box, BYOB + snacks list ('sign up to bring' tracker that actually toggles), house rules (neighbours: quiet after 11), who's coming (avatar-initials live icons), RSVP with plus-one, add-to-calendar, how to get in (buzzer 4C, stairs only to the roof).",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "rooftop party at dusk with city skyline, string lights",
+          "orient": "landscape"
+        },
+        {
+          "slot": "lights",
+          "want": "string/festoon lights glowing at dusk",
+          "orient": "any"
+        },
+        {
+          "slot": "toast",
+          "want": "friends toasting drinks, laughing, evening (not close faces ideal)",
+          "orient": "any"
+        },
+        {
+          "slot": "drinks",
+          "want": "colourful cocktails on a table at night",
+          "orient": "any"
+        },
+        {
+          "slot": "dj",
+          "want": "DJ decks / turntables / vinyl",
+          "orient": "any"
+        },
+        {
+          "slot": "dance",
+          "want": "people dancing, party lights",
+          "orient": "any"
+        },
+        {
+          "slot": "food",
+          "want": "snack spread: tacos, pizza, or grill at a party",
+          "orient": "any"
+        },
+        {
+          "slot": "skyline",
+          "want": "city skyline at night from above",
+          "orient": "landscape"
+        }
+      ]
+    },
+    {
+      "slug": "sunny-playdate",
+      "n": 6,
+      "kind": "invite",
+      "group": "Kids",
+      "title": "Sunny Day Playdate",
+      "tagline": "Toddlers, bubbles and a picnic blanket in the Reyes backyard",
+      "defaultStyle": "kawaii",
+      "recommend": [
+        "kawaii",
+        "plush",
+        "pastel",
+        "sticker",
+        "clay",
+        "anime",
+        "bento",
+        "duo"
+      ],
+      "event": {
+        "date": "2026-10-21",
+        "start": "10:00",
+        "end": "12:00",
+        "venue": "The Reyes backyard, 27 Wren Street (fictional)",
+        "host": "Lucia Reyes & Priya Shah"
+      },
+      "mood": "Soft sunny pastels for ages 1 to 4 and their grown-ups: butter yellow, sky blue, blush, mint. Friendly rounded type (Nunito / Quicksand / Baloo 2), hand-drawn-feeling shapes, big tap targets. Calm and warm, not loud.",
+      "must": "Plain-language plan for the 2 hours (arrival and shoes off, free play, bubble time, snack, story circle), what to bring (water bottle, change of clothes, sun hat, one snack to share), allergy-aware snack list, parent-info panel (nap windows, stroller parking, changing station, bathroom, rain plan), weather-check live icon, RSVP with child's name + age + allergies, small 'friends coming' avatar row.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "toddlers playing happily outdoors in sunshine, wide, soft light",
+          "orient": "landscape"
+        },
+        {
+          "slot": "bubbles",
+          "want": "bubbles being blown, children chasing bubbles",
+          "orient": "any"
+        },
+        {
+          "slot": "picnic",
+          "want": "picnic blanket with healthy kids' snacks",
+          "orient": "any"
+        },
+        {
+          "slot": "sand",
+          "want": "sandbox or water play, toddlers",
+          "orient": "any"
+        },
+        {
+          "slot": "crafts",
+          "want": "toddler painting / sensory play",
+          "orient": "any"
+        },
+        {
+          "slot": "blocks",
+          "want": "colourful building blocks or wooden toys on the floor",
+          "orient": "any"
+        },
+        {
+          "slot": "parents",
+          "want": "parents chatting with coffee while kids play",
+          "orient": "any"
+        },
+        {
+          "slot": "garden",
+          "want": "sunny garden, balloons, flowers",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "nani-turns-80",
+      "n": 7,
+      "kind": "invite",
+      "group": "Family",
+      "title": "Nani Rosa Turns 80",
+      "tagline": "A surprise lunch for the woman who fed us all",
+      "defaultStyle": "coquette",
+      "recommend": [
+        "coquette",
+        "pastel",
+        "valentine",
+        "soft3d",
+        "sketch",
+        "engrave",
+        "luxe",
+        "line"
+      ],
+      "event": {
+        "date": "2026-11-22",
+        "start": "12:30",
+        "end": "16:30",
+        "venue": "The Garden Room at Fennel & Fig, 6 Orchard Walk (fictional)",
+        "host": "Her grandchildren: Isa, Mateo, Noor & Kit"
+      },
+      "mood": "Warm, tender and a little vintage, like a family photo album: cream paper, rose, sage, butter yellow, faded gold. Serif display (Fraunces / Playfair / Lora) plus a handwriting accent (Caveat / Homemade Apple). Large, easy-to-read text because many readers are older; high contrast.",
+      "must": "SURPRISE logistics ('please arrive by 12:00, she arrives 12:30, don't post online'), a photo-timeline strip of her life (1946 to 2026 with 5 milestones), memory-wall form (leave a memory, shows instantly on page), menu (her favourite dishes), accessibility info (step-free, parking, seating), gift note ('no gifts, bring a recipe card or a story'), RSVP with dietary + 'can you share a memory', add-to-calendar, big readable type.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "warm portrait-style: smiling elderly woman with family, or hands holding birthday cake with candles, soft light",
+          "orient": "any"
+        },
+        {
+          "slot": "cake",
+          "want": "birthday cake with candles",
+          "orient": "any"
+        },
+        {
+          "slot": "flowers",
+          "want": "pastel bouquet / flowers on table",
+          "orient": "any"
+        },
+        {
+          "slot": "grandchild",
+          "want": "grandmother and grandchild together, tender moment",
+          "orient": "any"
+        },
+        {
+          "slot": "tea",
+          "want": "afternoon tea table, tea cups, pastries",
+          "orient": "any"
+        },
+        {
+          "slot": "lunch",
+          "want": "family lunch around a long table",
+          "orient": "any"
+        },
+        {
+          "slot": "album",
+          "want": "vintage photos / photo album / old letters",
+          "orient": "any"
+        },
+        {
+          "slot": "hobby",
+          "want": "knitting, baking or gardening hands (older hands)",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "cookie-swap",
+      "n": 8,
+      "kind": "invite",
+      "group": "Holiday",
+      "title": "The Great Cookie Swap",
+      "tagline": "Bake a dozen, leave with a dozen different dozens. Ugly sweaters strongly encouraged",
+      "defaultStyle": "christmas",
+      "recommend": [
+        "christmas",
+        "plush",
+        "sticker",
+        "retro",
+        "engrave",
+        "line",
+        "clay",
+        "lunar"
+      ],
+      "event": {
+        "date": "2026-12-12",
+        "start": "16:00",
+        "end": "20:00",
+        "venue": "Nell & Abe's, 55 Spruce Hollow Road (fictional)",
+        "host": "Nell Brandt & Abe Okoye"
+      },
+      "mood": "Cosy retro-Christmas: cranberry, pine, cream, gold, a pop of mint. Slab or script display (Fraunces / Lobster Two / Rye alternatives), paper-cut garlands, snowfall CSS (tasteful, reduced-motion safe).",
+      "must": "How a swap works (bake 12 dozen-style, bring recipe cards, take home a mixed box), sign-up sheet to claim a cookie type that actually toggles so there are no 5 gingerbreads, ugly-sweater contest voting, tin/packaging checklist, allergy labels (nuts, gluten-free), cocoa bar menu, RSVP with the cookie you will bake, add-to-calendar, charity note (leftover cookies donated).",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "Christmas cookies on a table, warm lights, wide",
+          "orient": "landscape"
+        },
+        {
+          "slot": "decorating",
+          "want": "decorating gingerbread / sugar cookies with icing",
+          "orient": "any"
+        },
+        {
+          "slot": "sweaters",
+          "want": "friends in Christmas sweaters, fun",
+          "orient": "any"
+        },
+        {
+          "slot": "cocoa",
+          "want": "hot cocoa mugs with marshmallows",
+          "orient": "any"
+        },
+        {
+          "slot": "tree",
+          "want": "Christmas tree lights, cosy",
+          "orient": "any"
+        },
+        {
+          "slot": "wrap",
+          "want": "gift wrapping, ribbon, kraft paper",
+          "orient": "any"
+        },
+        {
+          "slot": "tins",
+          "want": "cookie tin / box of assorted cookies",
+          "orient": "any"
+        },
+        {
+          "slot": "kitchen",
+          "want": "friends baking together in a kitchen",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "bloom-and-thread",
+      "n": 9,
+      "kind": "shop",
+      "group": "Feminine",
+      "title": "Bloom & Thread",
+      "tagline": "Small-batch dresses, knits and keepsakes for soft, sunny days",
+      "defaultStyle": "coquette",
+      "recommend": [
+        "coquette",
+        "pastel",
+        "luxe",
+        "line",
+        "valentine",
+        "sketch",
+        "soft3d",
+        "duo"
+      ],
+      "brand": "Independent women-run boutique (fictional) in a market town. Prices in USD, free shipping over $75, 30-day returns, gift wrapping.",
+      "mood": "Soft, feminine, editorial: blush, cream, sage, a dusty rose accent, small caps and an elegant serif (Cormorant Garamond / Playfair) with a light sans (Jost / DM Sans). Plenty of white space, thin rules, hover zoom on photos.",
+      "must": "Announcement bar (free shipping), header with search + wishlist + live cart-count icon, hero, category tiles (Dresses, Knitwear, Accessories, Jewellery, Gifts), 8 to 12 product cards with price, rating (rating-stars live icon), sale/new badges (ribbon-label / sale-sticker live icons), working filter chips + sort, add-to-cart with a working cart drawer (qty, subtotal, free-shipping progress bar), size guide modal, reviews, newsletter, footer with shipping/returns/payment info.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "feminine fashion lifestyle, woman in a soft floral or pastel dress, airy light",
+          "orient": "any"
+        },
+        {
+          "slot": "dress",
+          "want": "floral summer dress product/ on model",
+          "orient": "portrait"
+        },
+        {
+          "slot": "cardigan",
+          "want": "knit cardigan or sweater, cream/pink",
+          "orient": "portrait"
+        },
+        {
+          "slot": "blouse",
+          "want": "white / lace blouse",
+          "orient": "portrait"
+        },
+        {
+          "slot": "scarf",
+          "want": "silk scarf or hair ribbons",
+          "orient": "any"
+        },
+        {
+          "slot": "bag",
+          "want": "tote or small handbag",
+          "orient": "any"
+        },
+        {
+          "slot": "earrings",
+          "want": "pearl/gold earrings or necklace jewellery",
+          "orient": "any"
+        },
+        {
+          "slot": "hairclips",
+          "want": "hair clips, scrunchies, bows",
+          "orient": "any"
+        },
+        {
+          "slot": "shoes",
+          "want": "ballet flats / sandals",
+          "orient": "any"
+        },
+        {
+          "slot": "flatlay",
+          "want": "flat lay of accessories, pastel",
+          "orient": "any"
+        },
+        {
+          "slot": "story",
+          "want": "sewing/atelier/shop interior for the 'our story' section",
+          "orient": "any"
+        },
+        {
+          "slot": "gift",
+          "want": "gift box with ribbon, wrapped keepsake",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "maison-rose",
+      "n": 10,
+      "kind": "shop",
+      "group": "Feminine",
+      "title": "Maison Rose",
+      "tagline": "Botanical skincare, formulated in small batches",
+      "defaultStyle": "luxe",
+      "recommend": [
+        "luxe",
+        "glass",
+        "soft3d",
+        "line",
+        "duo",
+        "chrome",
+        "coquette",
+        "clay"
+      ],
+      "brand": "Premium botanical skincare and fragrance (fictional). Prices in USD ($28 to $128), refill programme, sample on every order.",
+      "mood": "Quiet luxury: warm ivory, rose clay, deep burgundy, a touch of champagne gold. Large editorial serif (Cormorant / Bodoni Moda / Playfair Display) and a clean sans (Manrope / Jost). Big photography, slow fades, generous spacing.",
+      "must": "Hero with 'Find your ritual' CTA, a skin-concern quiz (3 questions, shows a recommended routine, works), best-sellers carousel/grid, product cards with size picker, ingredient spotlight (icons), AM/PM routine builder, refill/sustainability section, reviews with live rating-stars icons, cart drawer, free-sample banner with progress, footer with certifications (cruelty-free etc. phrased as demo claims).",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "skincare lifestyle: serum bottle with soft shadow, rose petals or botanical, luxe",
+          "orient": "landscape"
+        },
+        {
+          "slot": "serum",
+          "want": "dropper serum bottle",
+          "orient": "portrait"
+        },
+        {
+          "slot": "cream",
+          "want": "face cream jar",
+          "orient": "any"
+        },
+        {
+          "slot": "mask",
+          "want": "clay face mask / skincare routine",
+          "orient": "any"
+        },
+        {
+          "slot": "petals",
+          "want": "rose petals / botanical ingredient close-up",
+          "orient": "any"
+        },
+        {
+          "slot": "perfume",
+          "want": "perfume bottle elegant",
+          "orient": "any"
+        },
+        {
+          "slot": "lipstick",
+          "want": "lipstick/ cosmetics in rose tones",
+          "orient": "any"
+        },
+        {
+          "slot": "candle",
+          "want": "candle or bath salts, spa vibes",
+          "orient": "any"
+        },
+        {
+          "slot": "routine",
+          "want": "woman applying skincare, towel, glowing skin (not identifiable close-up preferred)",
+          "orient": "any"
+        },
+        {
+          "slot": "ingredients",
+          "want": "herbs/oils/flowers on stone, ingredient spotlight",
+          "orient": "any"
+        },
+        {
+          "slot": "brush",
+          "want": "makeup brushes or a vanity shelf",
+          "orient": "any"
+        },
+        {
+          "slot": "spa",
+          "want": "spa treatment calm interior",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "little-sprout",
+      "n": 11,
+      "kind": "shop",
+      "group": "Kids",
+      "title": "Little Sprout Toy Co.",
+      "tagline": "Wooden toys, picture books and plush friends for curious little humans",
+      "defaultStyle": "plush",
+      "recommend": [
+        "plush",
+        "kawaii",
+        "clay",
+        "sticker",
+        "pastel",
+        "bento",
+        "duo",
+        "brutal"
+      ],
+      "brand": "Family-run toy shop (fictional) focused on safe, long-lasting toys. Age filters (0-1, 1-3, 3-5, 5+), free shipping over $50, gift cards, EN 71 / ASTM safety messaging phrased as a demo.",
+      "mood": "Playful but tidy for parents: cream background, sprout green, sunshine yellow, sky blue, tomato red accent. Rounded friendly type (Baloo 2 / Nunito / Fredoka) with a tidy sans for body. Big rounded cards, stickers, wiggle on hover.",
+      "must": "Age finder (chips that really filter), category tiles (Blocks, Plush, Books, Pretend play, Puzzles, Nursery), product cards with age badges + rating + price, 'gift finder' (budget + age) that really recommends, working cart drawer, safety & materials trust strip, gift-wrap toggle, bundle deals with sale-sticker live icons, newsletter, store-hours and the shop's address (fictional).",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "child playing with wooden toys, bright, joyful",
+          "orient": "landscape"
+        },
+        {
+          "slot": "blocks",
+          "want": "wooden building blocks",
+          "orient": "any"
+        },
+        {
+          "slot": "plush",
+          "want": "teddy bear / stuffed animal",
+          "orient": "any"
+        },
+        {
+          "slot": "books",
+          "want": "children's picture books",
+          "orient": "any"
+        },
+        {
+          "slot": "puzzle",
+          "want": "wooden puzzle",
+          "orient": "any"
+        },
+        {
+          "slot": "train",
+          "want": "wooden train set",
+          "orient": "any"
+        },
+        {
+          "slot": "kitchen",
+          "want": "toy play kitchen / pretend play",
+          "orient": "any"
+        },
+        {
+          "slot": "art",
+          "want": "crayons / paints for kids",
+          "orient": "any"
+        },
+        {
+          "slot": "horse",
+          "want": "rocking horse or push toy",
+          "orient": "any"
+        },
+        {
+          "slot": "nursery",
+          "want": "nursery with soft toys",
+          "orient": "any"
+        },
+        {
+          "slot": "rattle",
+          "want": "baby rattle / teething toys",
+          "orient": "any"
+        },
+        {
+          "slot": "gift",
+          "want": "gift-wrapped toy",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "puddle-and-pip",
+      "n": 12,
+      "kind": "shop",
+      "group": "Kids",
+      "title": "Puddle & Pip",
+      "tagline": "Kids' rainwear, wellies and cosy layers built for jumping in puddles",
+      "defaultStyle": "sticker",
+      "recommend": [
+        "sticker",
+        "kawaii",
+        "brutal",
+        "bauhaus",
+        "anime",
+        "gloss",
+        "pixel",
+        "bento"
+      ],
+      "brand": "Direct-to-parent kids' clothing brand (fictional), sizes 2 to 10 years. Free returns, 'grow-with-me' adjustable cuffs, recycled fabrics claims phrased as demo copy.",
+      "mood": "Loud, fun and colourful (but organised): school-bus yellow, sky blue, tomato red, mint, big black outlines like stickers. Chunky display type (Lilita One / Bowlby One / Rubik) with a clean body sans. Offset hard shadows, tilted tags.",
+      "must": "Size finder (by age/height, works and recommends a size), weather-picker hero ('rainy' / 'sunny' / 'snowy' chips swap the featured products, uses the weather live icon), product grid with colour swatches that change the product image tint/label, add-to-cart with cart drawer, 'grow-with-me' feature explainer with icons, reviews, sale-sticker + percent-badge live icons, footer with delivery info.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "child in yellow raincoat jumping in puddle or smiling in rain, joyful",
+          "orient": "landscape"
+        },
+        {
+          "slot": "raincoat",
+          "want": "kids raincoat",
+          "orient": "any"
+        },
+        {
+          "slot": "boots",
+          "want": "rain boots / wellies",
+          "orient": "any"
+        },
+        {
+          "slot": "sweater",
+          "want": "kids knit sweater / hoodie",
+          "orient": "any"
+        },
+        {
+          "slot": "overalls",
+          "want": "kids dungarees / overalls",
+          "orient": "any"
+        },
+        {
+          "slot": "backpack",
+          "want": "kids backpack",
+          "orient": "any"
+        },
+        {
+          "slot": "hat",
+          "want": "kids beanie or sun hat",
+          "orient": "any"
+        },
+        {
+          "slot": "pyjamas",
+          "want": "kids pyjamas",
+          "orient": "any"
+        },
+        {
+          "slot": "sneakers",
+          "want": "kids sneakers",
+          "orient": "any"
+        },
+        {
+          "slot": "socks",
+          "want": "colourful socks",
+          "orient": "any"
+        },
+        {
+          "slot": "flatlay",
+          "want": "kids outfit flat lay",
+          "orient": "any"
+        },
+        {
+          "slot": "umbrella",
+          "want": "colourful umbrellas / rainy day kids",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "hartwell-hardware",
+      "n": 13,
+      "kind": "shop",
+      "group": "Old school",
+      "title": "Hartwell & Sons Hardware",
+      "tagline": "Serving the neighbourhood since 1952. Ask us how, we'll show you",
+      "defaultStyle": "engrave",
+      "recommend": [
+        "engrave",
+        "blueprint",
+        "retro",
+        "sketch",
+        "line",
+        "bauhaus",
+        "solid",
+        "brutal"
+      ],
+      "brand": "Third-generation family hardware store (fictional), est. 1952. Phone orders and in-store pickup are king; the web shop is new. Open Mon-Sat 7am-6pm, Sun 9-3. Key cutting, paint mixing, tool rental, free advice.",
+      "mood": "Old-school printed catalogue: aged cream paper, forest green, tool-box red, ink black, brass accents. Slab/serif display (Alfa Slab One / Rokkitt / Bitter) and a typewriter-ish mono (Courier Prime / Special Elite) for part numbers. Rules, boxed ads, 'Est. 1952' stamps. Deliberately NOT slick.",
+      "must": "Big phone number + hours at the top, 'Basic' mode should feel like the plain, text-heavy site they have today (and Upgraded is the same content with icons and order), department index (Hand tools, Power tools, Paint, Plumbing, Electrical, Garden, Fasteners, Lumber), catalogue-style product list with part numbers and prices, quick search that filters, 'Pick-up in 2 hours' basket (works), services panel (key cutting, paint matching, screen repair, tool rental with a daily rate table), 'ask Walt' how-to tips cards, store map/hours/address, local-pride blurb.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "hardware store interior shelves or classic storefront",
+          "orient": "landscape"
+        },
+        {
+          "slot": "hammer",
+          "want": "hand tools: hammer, pliers on bench",
+          "orient": "any"
+        },
+        {
+          "slot": "wrench",
+          "want": "wrench / spanner set",
+          "orient": "any"
+        },
+        {
+          "slot": "paint",
+          "want": "paint cans, brushes, colour swatches",
+          "orient": "any"
+        },
+        {
+          "slot": "fasteners",
+          "want": "nails screws bolts in bins/ jars",
+          "orient": "any"
+        },
+        {
+          "slot": "workbench",
+          "want": "workbench, tools, wood shavings",
+          "orient": "any"
+        },
+        {
+          "slot": "saw",
+          "want": "hand saw / chisels",
+          "orient": "any"
+        },
+        {
+          "slot": "tape",
+          "want": "tape measure, pencil, carpenter's tools",
+          "orient": "any"
+        },
+        {
+          "slot": "drill",
+          "want": "cordless drill / power tools",
+          "orient": "any"
+        },
+        {
+          "slot": "garden",
+          "want": "garden tools shovel rake",
+          "orient": "any"
+        },
+        {
+          "slot": "lumber",
+          "want": "lumber / timber yard",
+          "orient": "any"
+        },
+        {
+          "slot": "keys",
+          "want": "key cutting / keys / padlocks",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "rosas-bakery",
+      "n": 14,
+      "kind": "shop",
+      "group": "Old school",
+      "title": "Rosa's Corner Bakery",
+      "tagline": "Bread baked at 4am, since 1961. Order ahead, pick up warm",
+      "defaultStyle": "retro",
+      "recommend": [
+        "retro",
+        "engrave",
+        "sketch",
+        "coquette",
+        "pastel",
+        "line",
+        "solid",
+        "sticker"
+      ],
+      "brand": "Three-generation neighbourhood bakery (fictional), est. 1961. Cakes to order, daily bread list, pre-order for pick-up (no delivery), cash-and-card, closed Mondays.",
+      "mood": "Mid-century bakery packaging: warm cream, tomato red, butter yellow, chocolate brown, a teal accent, scalloped awnings, little stamps. Display (Chonburi / Abril Fatface / Bree Serif) and a friendly serif body (Libre Baskerville / Lora). Paper-bag textures with CSS only.",
+      "must": "Today's baked list with 'fresh out at' times and sold-out states, order-ahead basket for pick-up with a time-slot picker (works), custom cake builder (size, flavour, filling, message, works and prices live), allergens legend, hours + the oven schedule, 'Rosa's story' with Est. 1961, wedding cake enquiry form, gift cards, ticket-number live icon for the pick-up queue, footer.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "bakery counter / shop with fresh bread, warm",
+          "orient": "landscape"
+        },
+        {
+          "slot": "bread",
+          "want": "rustic bread loaves",
+          "orient": "any"
+        },
+        {
+          "slot": "croissants",
+          "want": "croissants",
+          "orient": "any"
+        },
+        {
+          "slot": "cake",
+          "want": "layer cake",
+          "orient": "any"
+        },
+        {
+          "slot": "cupcakes",
+          "want": "cupcakes",
+          "orient": "any"
+        },
+        {
+          "slot": "cookies",
+          "want": "cookies",
+          "orient": "any"
+        },
+        {
+          "slot": "pie",
+          "want": "fruit pie",
+          "orient": "any"
+        },
+        {
+          "slot": "baker",
+          "want": "baker kneading dough or flour dusting",
+          "orient": "any"
+        },
+        {
+          "slot": "baguette",
+          "want": "baguettes in a basket",
+          "orient": "any"
+        },
+        {
+          "slot": "donuts",
+          "want": "donuts / pastries",
+          "orient": "any"
+        },
+        {
+          "slot": "display",
+          "want": "pastry display case",
+          "orient": "any"
+        },
+        {
+          "slot": "wedding",
+          "want": "tiered wedding cake",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "tonys-barbershop",
+      "n": 15,
+      "kind": "shop",
+      "group": "Old school",
+      "title": "Tony's Barber & Shave Parlor",
+      "tagline": "Hot towels, straight razors and a proper haircut. Walk-ins welcome, appointments better",
+      "defaultStyle": "skeuo",
+      "recommend": [
+        "skeuo",
+        "retro",
+        "engrave",
+        "brutal",
+        "chrome",
+        "sketch",
+        "bauhaus",
+        "line"
+      ],
+      "brand": "Classic neighbourhood barbershop (fictional), est. 1974, three chairs. Cuts from $28, hot-towel shave $35, kids $18. Cash-friendly, tips appreciated.",
+      "mood": "Americana barbershop: oxblood red, navy, cream, brass and black leather, barber-pole stripes in CSS. Display (Bebas Neue / Oswald / Rye / Playfair) and a plain sans body. Chalkboard price list, paper appointment-card feel.",
+      "must": "Booking widget that works (pick service, barber, day, time slots, confirm summary + 'add to calendar'), price menu in chalkboard style with icons (cut, shave, beard, kids, combo), meet-the-barbers cards, 'now serving' ticket-number live icon + wait-time (clock-time live icon), shop hours + address, gift certificates, product shelf (pomade, beard oil) with add-to-cart, reviews, footer.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "classic barbershop interior with vintage chair, warm light",
+          "orient": "landscape"
+        },
+        {
+          "slot": "haircut",
+          "want": "barber cutting hair",
+          "orient": "any"
+        },
+        {
+          "slot": "shave",
+          "want": "straight razor shave / hot towel",
+          "orient": "any"
+        },
+        {
+          "slot": "beard",
+          "want": "beard trim",
+          "orient": "any"
+        },
+        {
+          "slot": "products",
+          "want": "pomade, beard oil, grooming products",
+          "orient": "any"
+        },
+        {
+          "slot": "pole",
+          "want": "barber pole",
+          "orient": "any"
+        },
+        {
+          "slot": "tools",
+          "want": "scissors, comb, clippers on counter",
+          "orient": "any"
+        },
+        {
+          "slot": "towel",
+          "want": "hot towel / shaving brush / soap",
+          "orient": "any"
+        },
+        {
+          "slot": "customer",
+          "want": "satisfied customer in the chair (not identifiable close-up preferred)",
+          "orient": "any"
+        },
+        {
+          "slot": "exterior",
+          "want": "barbershop storefront",
+          "orient": "any"
+        }
+      ]
+    },
+    {
+      "slug": "lunar-reunion",
+      "n": 16,
+      "kind": "invite",
+      "group": "Holiday",
+      "title": "The Reunion Dinner",
+      "tagline": "Farewell Horse, welcome Goat: a Lunar New Year feast with lanterns, red envelopes and fortunes",
+      "defaultStyle": "lunar",
+      "recommend": [
+        "lunar",
+        "utsav",
+        "sticker",
+        "clay",
+        "soft3d",
+        "luxe",
+        "kawaii",
+        "line"
+      ],
+      "event": {
+        "date": "2027-02-06",
+        "start": "18:00",
+        "end": "22:30",
+        "venue": "The Lam family home, 18 Plum Blossom Court (fictional)",
+        "host": "Grace & Daniel Lam"
+      },
+      "mood": "Festive red and gold with jade accents and cream paper; elegant serif display (Cormorant / Noto Serif) plus a clean sans; paper-cut lattice patterns in CSS; warm lantern glow.",
+      "must": "MOTION SHOWCASE: at least 35 animated icons (data-motion hover/loop/once/inview): swinging lanterns, a spinning coin, firework bursts, a bobbing lucky cat or horse, pulsing hearts, ringing bell, twinkling stars, countdown ring. Content: banquet menu of 8 auspicious dishes with meaning (fish for surplus, dumplings for wealth...), red-envelope etiquette, zodiac fortune cards that flip, dress code (wear red), schedule (lion dance, toast yum seng, dinner, mahjong, fireworks), RSVP with headcount + dietary, add-to-calendar, live countdown to 6 Feb 2027, FAQ.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "red lanterns / Lunar New Year celebration, wide, room for text",
+          "orient": "landscape"
+        },
+        {
+          "slot": "lanterns",
+          "want": "hanging red lanterns",
+          "orient": "any"
+        },
+        {
+          "slot": "dumplings",
+          "want": "dumplings or banquet dishes",
+          "orient": "any"
+        },
+        {
+          "slot": "fish",
+          "want": "whole steamed fish or festive Chinese dish",
+          "orient": "any"
+        },
+        {
+          "slot": "envelopes",
+          "want": "red envelopes / hongbao",
+          "orient": "any"
+        },
+        {
+          "slot": "liondance",
+          "want": "lion dance or dragon",
+          "orient": "any"
+        },
+        {
+          "slot": "fireworks",
+          "want": "fireworks night sky",
+          "orient": "any"
+        },
+        {
+          "slot": "mahjong",
+          "want": "mahjong tiles or tea set",
+          "orient": "any"
+        },
+        {
+          "slot": "family",
+          "want": "family dinner around a round table, from a distance",
+          "orient": "any"
+        },
+        {
+          "slot": "blossom",
+          "want": "plum or peach blossom branches",
+          "orient": "any"
+        }
+      ],
+      "motion": true
+    },
+    {
+      "slug": "whisker-and-wag",
+      "n": 17,
+      "kind": "shop",
+      "group": "Pets",
+      "title": "Whisker & Wag",
+      "tagline": "Treats, toys and cosy beds for dogs, cats and the small fluffy ones",
+      "defaultStyle": "sticker",
+      "recommend": [
+        "sticker",
+        "plush",
+        "kawaii",
+        "clay",
+        "pastel",
+        "brutal",
+        "soft3d",
+        "duo"
+      ],
+      "brand": "Independent pet supply shop (fictional), est. 2016, free local delivery over $40, subscribe-and-save 10%, adoption-day Saturdays with a local shelter. Prices in USD.",
+      "mood": "Friendly, bouncy and bright: sunny yellow, tomato, mint, sky blue on warm cream; chunky rounded display (Fredoka / Baloo 2 / Lilita One); sticker badges, paw-print patterns.",
+      "must": "MOTION SHOWCASE: at least 40 animated icons (data-motion hover/loop/once/inview): wagging/bouncing paw, beating hearts on wishlist, ringing bell, bobbing bone, swinging tag, spinning loader on add-to-cart, cart-count that pops, star ratings that pop in when scrolled into view, delivery truck driving. Content: pet-type picker (dog/cat/small pets) that really filters 12 products, product cards with ratings and prices, subscribe-and-save toggle that updates prices, cart drawer, treat finder quiz (size, age, tummy) with recommendation, adoption-day section with live countdown to next Saturday, reviews, newsletter.",
+      "photos": [
+        {
+          "slot": "hero",
+          "want": "happy dog or cat, bright, room for headline",
+          "orient": "landscape"
+        },
+        {
+          "slot": "dog",
+          "want": "dog portrait",
+          "orient": "any"
+        },
+        {
+          "slot": "cat",
+          "want": "cat portrait",
+          "orient": "any"
+        },
+        {
+          "slot": "treats",
+          "want": "dog treats / biscuits",
+          "orient": "any"
+        },
+        {
+          "slot": "toys",
+          "want": "pet toys",
+          "orient": "any"
+        },
+        {
+          "slot": "bed",
+          "want": "pet bed or cozy cat",
+          "orient": "any"
+        },
+        {
+          "slot": "leash",
+          "want": "collar / leash / harness",
+          "orient": "any"
+        },
+        {
+          "slot": "bowl",
+          "want": "pet food bowl",
+          "orient": "any"
+        },
+        {
+          "slot": "smallpet",
+          "want": "rabbit or hamster or guinea pig",
+          "orient": "any"
+        },
+        {
+          "slot": "grooming",
+          "want": "pet grooming or brushing",
+          "orient": "any"
+        },
+        {
+          "slot": "shelter",
+          "want": "adoption / puppy kitten with person",
+          "orient": "any"
+        },
+        {
+          "slot": "walk",
+          "want": "dog walk in park",
+          "orient": "any"
+        }
+      ],
+      "motion": true
+    }
+  ]
+}

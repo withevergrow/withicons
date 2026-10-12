@@ -1,0 +1,214 @@
+{
+  "slug": "sunny-playdate",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "unsplash",
+      "id": "T2S4CatGdfQ",
+      "page": "https://unsplash.com/photos/toddler-with-teal-dress-on-green-grass-field-during-daytime-T2S4CatGdfQ",
+      "url": "https://images.unsplash.com/photo-1507250671672-b76f9dde4188",
+      "photographer": "Patrick Fore",
+      "photographerUrl": "https://unsplash.com/@patrickian4",
+      "alt": "A smiling toddler in a turquoise striped dress claps her hands while standing in sunlit tall green grass.",
+      "colors": "fresh green, aqua blue, warm skin tones",
+      "focal": "68% 40%",
+      "notes": "Landscape 3:2. Toddler sits right of centre with soft blurred green grass on the left, so put the headline on the left half and keep object-position right. Bright, soft sunlight; best full-bleed under a gentle butter-yellow or white wash.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/sunny-playdate/photo-1507250671672-b76f9dde4188-1600.jpg"
+      }
+    },
+    {
+      "slot": "bubbles",
+      "src": "unsplash",
+      "id": "qojqVPsfAiE",
+      "page": "https://unsplash.com/photos/a-young-boy-plays-with-bubbles-outdoors-qojqVPsfAiE",
+      "url": "https://images.unsplash.com/photo-1754423840139-a1a0265327f8",
+      "photographer": "Ifrah Akhter",
+      "photographerUrl": "https://unsplash.com/@ifakhter",
+      "alt": "A small boy in a striped shirt, seen from the side, reaches toward dozens of soap bubbles floating in a shady park.",
+      "colors": "deep green, warm cream, iridescent bubble highlights",
+      "focal": "50% 45%",
+      "notes": "Landscape 3:2. Child turned away so no clear face. Bubbles fill the upper right; keep the top half in view when cropping. Slightly dark and moody, so lighten with a pastel overlay or place it in a rounded card.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/sunny-playdate/photo-1754423840139-a1a0265327f8-1000.jpg"
+      }
+    },
+    {
+      "slot": "picnic",
+      "src": "pexels",
+      "id": "5119630",
+      "page": "https://www.pexels.com/photo/5119630/",
+      "url": "https://images.pexels.com/photos/5119630/pexels-photo-5119630.jpeg",
+      "photographer": "Anna Tarazevich",
+      "photographerUrl": "https://www.pexels.com/@anntarazevich",
+      "alt": "Two smiling girls sit with their arms around each other on a pastel striped picnic blanket beside a wicker basket holding a baguette, juice bottles, an orange and a muffin, with a white sun hat on the lawn.",
+      "colors": "peach, powder blue and blush stripes, lawn green, white",
+      "focal": "50% 45%",
+      "notes": "Portrait about 3:4 (1200x1553). Faces in the upper half, basket and snacks in the lower half, so a 4:5 or tall-card crop at 50% 50% keeps both; for a landscape crop use object-position 50% 55%. Replaces the grapes, chips and cherries flat lay, which clashed with a toddler snack list (chips, whole cherries). Girls are older than the guests, which is fine for a picnic mood shot. No legible brands.",
+      "width": 1200,
+      "height": 1553,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/sunny-playdate/5119630-1000.jpg"
+      }
+    },
+    {
+      "slot": "sand",
+      "src": "pexels",
+      "id": "15091661",
+      "page": "https://www.pexels.com/photo/15091661/",
+      "url": "https://images.pexels.com/photos/15091661/pexels-photo-15091661.jpeg",
+      "photographer": "Daniel Duarte",
+      "photographerUrl": "https://www.pexels.com/@daniel-duarte-270529097",
+      "alt": "A toddler with twisted braids, a navy jumper and beige trousers sits barefoot in warm sand holding a toy dinosaur among colourful wooden shape-sorter pieces, with soft green grass behind.",
+      "colors": "warm sand, navy, grass green, primary toy colours",
+      "focal": "50% 60%",
+      "notes": "Portrait 4:5, sharp and sunlit with a calm blurred green top third. Crop square or 4:5 at object-position 50% 60% so the face and toys both stay in frame. Replaces the Polesie Toys sandbox shot, which had a legible POLESIE brand name on a toy boat. No logos in this one.",
+      "width": 1200,
+      "height": 1500,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/sunny-playdate/15091661-700.jpg"
+      }
+    },
+    {
+      "slot": "crafts",
+      "src": "pexels",
+      "id": "40103784",
+      "page": "https://www.pexels.com/photo/40103784/",
+      "url": "https://images.pexels.com/photos/40103784/pexels-photo-40103784.jpeg",
+      "photographer": "Caleb Oquendo",
+      "photographerUrl": "https://www.pexels.com/@caleboquendo",
+      "alt": "Overhead view of a toddler seen from behind reaching out to paint on a white floor splashed with bright paints, brushes and paint pots.",
+      "colors": "white, yellow, orange, blue splashes",
+      "focal": "50% 55%",
+      "notes": "Landscape 3:2 on a clean white ground, so there is lots of calm space around the child. No face visible. Works as a section banner or a tilted sticker-style card.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/sunny-playdate/40103784-700.jpg"
+      }
+    },
+    {
+      "slot": "blocks",
+      "src": "pexels",
+      "id": "7269700",
+      "page": "https://www.pexels.com/photo/7269700/",
+      "url": "https://images.pexels.com/photos/7269700/pexels-photo-7269700.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A red-haired toddler in a beige tee builds a row of natural wooden blocks and towers on a pale floor beside a wooden toy train.",
+      "colors": "natural wood, cream white, soft ginger",
+      "focal": "45% 55%",
+      "notes": "Portrait 2:3. Seen from above with the face turned down. Calm, neutral and light, so it takes pastel colour washes well. Crop to 4:5 and keep the blocks in the lower two thirds.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/sunny-playdate/7269700-700.jpg"
+      }
+    },
+    {
+      "slot": "parents",
+      "src": "pexels",
+      "id": "33578681",
+      "page": "https://www.pexels.com/photo/33578681/",
+      "url": "https://images.pexels.com/photos/33578681/pexels-photo-33578681.jpeg",
+      "photographer": "Rafael Oliveira",
+      "photographerUrl": "https://www.pexels.com/@rafael-oliveira-2149835472",
+      "alt": "A toddler in a white polo shirt toddles toward the camera holding a colourful ring toy while two smiling women in white blouses sit chatting on a white blanket in a sunlit park behind him.",
+      "colors": "sunlit green, white linen, warm gold",
+      "focal": "45% 50%",
+      "notes": "Landscape 3:2. Toddler plays in the foreground while two grown-ups relax and talk on a blanket, which is the parents-chatting-while-kids-play idea (no coffee in shot). Toddler sits left of centre and the women right of centre, so keep the full width or crop gently at 50% 50%. Warm golden light suits the parent-info panel. Replaces the cherry-blossom park shot, which was crowded with strangers and showed the adults playing with the child rather than chatting.",
+      "width": 1200,
+      "height": 783,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/sunny-playdate/33578681-1000.jpg"
+      }
+    },
+    {
+      "slot": "garden",
+      "src": "pexels",
+      "id": "10024455",
+      "page": "https://www.pexels.com/photo/10024455/",
+      "url": "https://images.pexels.com/photos/10024455/pexels-photo-10024455.jpeg",
+      "photographer": "Ron Lach",
+      "photographerUrl": "https://www.pexels.com/@ron-lach",
+      "alt": "A girl in a white dress arranges a pastel garden party table decorated with flowers, teddy bears, pink cups, paper pom-poms and bunting in front of a pale blue wooden house.",
+      "colors": "powder blue, blush pink, white, lawn green",
+      "focal": "50% 55%",
+      "notes": "Portrait 2:3. The best overall mood match: pastel bunting, pom-poms, flowers and soft light. Crop to 4:5 or a tall card; keep the table and the pom-poms in frame.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/sunny-playdate/10024455-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "unsplash",
+      "id": "sW6TRpgZLMw",
+      "page": "https://unsplash.com/photos/three-children-are-sitting-in-a-field-of-tall-grass-sW6TRpgZLMw",
+      "url": "https://images.unsplash.com/photo-1647627611823-d08fa901678e",
+      "photographer": "Laura Ohlman",
+      "photographerUrl": "https://unsplash.com/@ohlmanphotography",
+      "alt": "Three small children seen from behind sitting together in golden meadow grass in front of a backlit tree canopy.",
+      "colors": "leaf green, golden grass, warm shadow",
+      "focal": "50% 82%",
+      "notes": "Second hero candidate, portrait 2:3. Dreamy and backlit, children from behind (no faces). Dark leafy upper half gives calm space for a headline on a tall mobile hero; for a landscape crop use object-position 50% 82%.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/sunny-playdate/photo-1647627611823-d08fa901678e-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "4966471",
+      "page": "https://www.pexels.com/photo/4966471/",
+      "url": "https://images.pexels.com/photos/4966471/pexels-photo-4966471.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "Two children seen from behind sit side by side on a grey quilted blanket on sunlit grass, each holding an open picture book.",
+      "colors": "lawn green, slate grey, floral orange and purple",
+      "focal": "50% 50%",
+      "notes": "Story-circle spare, landscape 3:2. Faces turned away, so no identifiable faces. Use for the story-circle step of the plan. The book pages show only small illustrations; one has the word ZOO in a drawing, nothing branded. Replaces the finger-paint hands shot, which showed a partly legible diaper brand and repeated the crafts slot.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/sunny-playdate/4966471-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "29562280",
+      "page": "https://www.pexels.com/photo/29562280/",
+      "url": "https://images.pexels.com/photos/29562280/pexels-photo-29562280.jpeg",
+      "photographer": "Alexander Mass",
+      "photographerUrl": "https://www.pexels.com/@rebornfilmes",
+      "alt": "Two babies in soft green and pale printed outfits sit back to back on a grassy slope under tall trees, both smiling and looking off to the side.",
+      "colors": "sage green, cream, blush bow, soft brown",
+      "focal": "50% 55%",
+      "notes": "Portrait 2:3, soft muted greens, babies in profile. Friends-coming or RSVP card. Crop to 4:5 at object-position 50% 55%. Replaces the pastel bunting close-up, which came from the same shoot and house as the garden photo.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/sunny-playdate/29562280-800.jpg"
+      }
+    }
+  ]
+}

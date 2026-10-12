@@ -1,0 +1,214 @@
+{
+  "slug": "rooftop-house-party",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "4881662",
+      "page": "https://www.pexels.com/photo/4881662/",
+      "url": "https://images.pexels.com/photos/4881662/pexels-photo-4881662.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "A string of warm filament bulbs stretched across a rooftop at dusk, with a blue twilight sky and neighbouring apartment buildings behind.",
+      "colors": "dusk blue, warm amber, concrete beige",
+      "focal": "50% 60%",
+      "notes": "Landscape. Calm blue sky across the top third for the headline; push it toward the violet-to-navy mood with a left-to-right gradient overlay. Bulbs run diagonally through the middle, so keep object-position near 50% 60% on tall crops.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rooftop-house-party/4881662-1000.jpg"
+      }
+    },
+    {
+      "slot": "lights",
+      "src": "unsplash",
+      "id": "Bwg5L-sks3g",
+      "page": "https://unsplash.com/photos/string-lights-during-night-time-Bwg5L-sks3g",
+      "url": "https://images.unsplash.com/photo-1513201025652-45a8a3f21311",
+      "photographer": "Alonso Navarro",
+      "photographerUrl": "https://unsplash.com/@ojodeatronauta",
+      "alt": "Strings of small white festoon lights crisscrossing a city street at dusk under a deep navy sky with an orange glow on the horizon.",
+      "colors": "deep navy, warm white, sunset orange",
+      "focal": "50% 35%",
+      "notes": "Landscape. Dense dots of light over a dark frame: good as a full-bleed dark band behind a heading, or a wide crop from the upper half. A small vertical building sign (three letters) sits at roughly 36% across and 75-86% down, plus a one-way road sign at bottom left, so keep every crop above about 70% of the height (object-position 50% 35% with a wide band does this).",
+      "width": 1200,
+      "height": 803,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/rooftop-house-party/photo-1513201025652-45a8a3f21311-1600.jpg"
+      }
+    },
+    {
+      "slot": "toast",
+      "src": "pexels",
+      "id": "5638750",
+      "page": "https://www.pexels.com/photo/5638750/",
+      "url": "https://images.pexels.com/photos/5638750/pexels-photo-5638750.jpeg",
+      "photographer": "Askar Abayev",
+      "photographerUrl": "https://www.pexels.com/@askar-abayev/",
+      "alt": "Friends' hands clinking wine glasses and orange juice over a candlelit table at dusk, with warm filament bulbs strung overhead against a blue evening sky.",
+      "colors": "dusk blue, candle amber, rose",
+      "focal": "55% 50%",
+      "notes": "Portrait (2:3). Evening toast, hands only: no faces in frame (a hat is barely visible behind the glasses), and the strung bulbs plus candles already sit in the dusk palette, so it needs no tint. Garden table rather than a roof, but nothing in frame says otherwise. For a landscape or square crop use object-fit: cover with object-position 55% 50% so the clinking glasses stay centred; the upper third (plain wall, bulb string and a strip of blue sky) is calm enough for a short caption with a dark gradient.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/rooftop-house-party/5638750-800.jpg"
+      }
+    },
+    {
+      "slot": "drinks",
+      "src": "unsplash",
+      "id": "LX7xP75YS1Y",
+      "page": "https://unsplash.com/photos/a-bartender-holds-colorful-garnished-cocktails-LX7xP75YS1Y",
+      "url": "https://images.unsplash.com/photo-1745052818593-3aa7b29850d2",
+      "photographer": "Createasea",
+      "photographerUrl": "https://unsplash.com/@createasea",
+      "alt": "Three crimson cocktails garnished with orange marigold flowers on a pale bar top at night, with hands setting them down and a green cocktail beside them.",
+      "colors": "crimson, marigold orange, near-black",
+      "focal": "38% 62%",
+      "notes": "Portrait (2:3). Hot red drinks on a dark ground echo the hot-pink accent. Use object-fit: cover with 38% 62% for square or 4:3 crops; the dark upper third can carry a caption.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/rooftop-house-party/photo-1745052818593-3aa7b29850d2-800.jpg"
+      }
+    },
+    {
+      "slot": "dj",
+      "src": "pexels",
+      "id": "9789246",
+      "page": "https://www.pexels.com/photo/9789246/",
+      "url": "https://images.pexels.com/photos/9789246/pexels-photo-9789246.jpeg",
+      "photographer": "Jan Kopřiva",
+      "photographerUrl": "https://www.pexels.com/@koprivakart",
+      "alt": "A DJ in a denim jacket resting both hands on a spinning vinyl record on a turntable, next to a mixer with knobs and faders.",
+      "colors": "charcoal, denim blue, warm skin tones",
+      "focal": "70% 50%",
+      "notes": "Landscape. The mixer on the left is dark and quiet, so it takes text; hands and record sit at the right. No face in frame. Reads well as a card image or a narrow banner.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "900": "_img/rooftop-house-party/9789246-900.jpg"
+      }
+    },
+    {
+      "slot": "dance",
+      "src": "pexels",
+      "id": "11481894",
+      "page": "https://www.pexels.com/photo/11481894/",
+      "url": "https://images.pexels.com/photos/11481894/pexels-photo-11481894.jpeg",
+      "photographer": "Lloyd James",
+      "photographerUrl": "https://www.pexels.com/@lloyd-james-189552887/",
+      "alt": "A crowd seen from behind dancing in front of a DJ booth, with the DJ in silhouette and the whole room washed in hot-pink light and haze.",
+      "colors": "hot pink, magenta, near-black",
+      "focal": "50% 55%",
+      "notes": "Landscape (about 1.4:1). Adults seen from behind, hot-pink wash that matches the accent, no legible signs. The upper half is flat pink haze and takes a heading or the DJ set times with a light dark overlay; keep object-position near 50% 55% on tall or square crops so the crowd and booth stay in frame. Highlights are bright, so use a darkening gradient under any text.",
+      "width": 1200,
+      "height": 857,
+      "orientation": "landscape",
+      "local": {
+        "1400": "_img/rooftop-house-party/11481894-1400.jpg"
+      }
+    },
+    {
+      "slot": "food",
+      "src": "pexels",
+      "id": "4958730",
+      "page": "https://www.pexels.com/photo/4958730/",
+      "url": "https://images.pexels.com/photos/4958730/pexels-photo-4958730.jpeg",
+      "photographer": "Roman Odintsov",
+      "photographerUrl": "https://www.pexels.com/@roman-odintsov",
+      "alt": "Top-down view of tacos on plates and a wooden board with lime wedges, cilantro, chilli flakes, pomegranate seeds and an orange drink on a dark rustic table.",
+      "colors": "terracotta, lime green, orange",
+      "focal": "45% 50%",
+      "notes": "Landscape (3:2), overhead flat lay. Busy all over, so keep text outside the image and use it as a card for the sign-up-to-bring list. Warm tones sit well against the navy sections.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/rooftop-house-party/4958730-800.jpg"
+      }
+    },
+    {
+      "slot": "skyline",
+      "src": "unsplash",
+      "id": "1G7oszlOqcM",
+      "page": "https://unsplash.com/photos/city-skyline-illuminated-at-night-with-a-dark-blue-sky-1G7oszlOqcM",
+      "url": "https://images.unsplash.com/photo-1757445060456-c2194994d381",
+      "photographer": "CR",
+      "photographerUrl": "https://unsplash.com/@cr029",
+      "alt": "A high-rise city skyline seen from above at night, with lit towers, glowing streets and the lake edge under a deep blue dusk sky.",
+      "colors": "deep navy, amber windows, magenta accent",
+      "focal": "50% 68%",
+      "notes": "Landscape (3:2). A skyline at night from above, crisp and well exposed. The upper 45% is clean deep-navy sky that takes a headline or the how-to-get-in copy; the city sits in the lower half. Fine as a footer band at a wide crop (object-position 50% 68%). No legible signs or logos.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/rooftop-house-party/photo-1757445060456-c2194994d381-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "32163386",
+      "page": "https://www.pexels.com/photo/32163386/",
+      "url": "https://images.pexels.com/photos/32163386/pexels-photo-32163386.jpeg",
+      "photographer": "Pew Nguyen",
+      "photographerUrl": "https://www.pexels.com/@nguyendesigner/",
+      "alt": "A hand raising a rimmed champagne flute of pink cocktail on a rooftop at blue hour, with a lit tower and string-light bokeh softly blurred behind.",
+      "colors": "dusk blue, blush pink, warm bokeh",
+      "focal": "55% 50%",
+      "notes": "Portrait (2:3). Alternative for toast, or a sidebar or RSVP card image. One hand only, no face; the blurred skyline and string lights say rooftop at dusk at once. The upper half is smooth blue sky and takes text. Use object-position 55% 50% for square crops so the glass stays in frame.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/rooftop-house-party/32163386-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "33668125",
+      "page": "https://www.pexels.com/photo/33668125/",
+      "url": "https://images.pexels.com/photos/33668125/pexels-photo-33668125.jpeg",
+      "photographer": "Kirill Moiseev",
+      "photographerUrl": "https://www.pexels.com/@faceless",
+      "alt": "Thin strands of tiny warm lights running diagonally across a deep indigo twilight sky.",
+      "colors": "indigo, deep blue, warm yellow",
+      "focal": "50% 50%",
+      "notes": "Texture and detail shot. Almost empty indigo ground with fine light strands: ideal under a headline, as a section divider or a card background. Tint it toward violet.",
+      "width": 1200,
+      "height": 799,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rooftop-house-party/33668125-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "5935231",
+      "page": "https://www.pexels.com/photo/5935231/",
+      "url": "https://images.pexels.com/photos/5935231/pexels-photo-5935231.jpeg",
+      "photographer": "Kampus Production",
+      "photographerUrl": "https://www.pexels.com/@kampus",
+      "alt": "Silhouettes of four women dancing with raised arms on a rooftop ledge against a glowing orange sunset with wispy clouds.",
+      "colors": "sunset orange, navy, gold",
+      "focal": "70% 50%",
+      "notes": "Atmosphere shot and a possible alternative hero. Faceless silhouettes with the sun glow at left; put a headline or RSVP over the left half with a dark overlay. Landscape (3:2).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1400": "_img/rooftop-house-party/5935231-1400.jpg"
+      }
+    }
+  ]
+}

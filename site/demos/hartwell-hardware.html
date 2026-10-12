@@ -1,0 +1,2018 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hartwell &amp; Sons Hardware (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Third-generation neighborhood hardware store on Canal Street. Search the catalogue, build a basket and pick it up two hours later. Key cutting, paint matching, tool rental and free advice from Walt.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Rokkitt:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============ Hartwell & Sons Hardware: a printed catalogue that went online ============ */
+:root{
+  --paper:#efe5cb;--paper-2:#e4d6b1;--card:#f7f0da;--card-2:#fcf8ea;
+  --ink:#1c1913;--ink-2:#4a4334;--ink-3:#6b6250;
+  --green:#1d4d36;--green-2:#2a6a4a;--green-wash:#d9e0c4;
+  --red:#a52a1a;--red-2:#852014;--red-wash:#f0d6c8;
+  --brass:#a67c1f;--brass-2:#cda94e;--brass-ink:#6a4d0c;
+  --f-slab:'Rokkitt','Rockwell','Roboto Slab',Georgia,serif;
+  --f-type:'Courier Prime','Courier New',Courier,monospace;
+  --w:1240px;--sh:4px 4px 0 var(--ink);
+  /* the multi-colour styles we recommend, tuned to the shop: brass, tool-box red, forest green */
+  --with-retro-1:#cda94e;--with-retro-2:#c9632a;--with-retro-3:#a52a1a;--with-retro-4:#1d4d36;--with-retro-cream:#f7f0da;--with-retro-letter:#1c1913;--with-retro-shadow:#5a3a22;--with-retro-tint:#f7f0da;
+  --with-bauhaus-accent:#1d4d36;--with-bauhaus-c1:#a52a1a;--with-bauhaus-c2:#cda94e;--with-bauhaus-c3:#1d4d36;--with-bauhaus-c4:#2a5b7c;--with-bauhaus-shadow:#1c1913;--with-bauhaus-tint:#efe5cb;
+  --with-brutal-accent:#cda94e;--with-brutal-c1:#e2b73f;--with-brutal-c2:#c9432d;--with-brutal-c3:#2f7a55;--with-brutal-c4:#d9c690;--with-brutal-tint:#efe5cb;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:74px;-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+html.drawer-open{overflow:hidden}
+body{margin:0;color:var(--ink);font:500 19px/1.5 var(--f-slab);-webkit-font-smoothing:antialiased;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .27 0 0 0 0 .1 0 0 0 .5 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 60% at 50% 0,rgba(255,250,232,.7),transparent 60%),
+    radial-gradient(90% 50% at 100% 100%,rgba(150,110,40,.14),transparent 70%),
+    var(--paper)}
+img{max-width:100%;height:auto}
+a{color:var(--green);text-underline-offset:.16em;text-decoration-thickness:1.5px}
+a:hover{color:var(--red)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+/* red is fine on paper; on the green nav, the dark bars and the drawer head the ring is brass (about 7:1) */
+.ann :focus-visible,.nav :focus-visible,.dr-head :focus-visible,.foot :focus-visible{outline-color:#f1cf7a}
+.nav-links a:focus-visible{outline-offset:-3px}
+h1,h2,h3,h4{font-family:var(--f-slab);font-weight:900;line-height:1;margin:0;letter-spacing:-.005em}
+p{margin:0 0 1em}
+ul,ol{margin:0;padding:0}
+.wrap{width:min(var(--w),100% - 32px);margin-inline:auto}
+.hero-grid,.board,.idx,.tiles,.svc-grid,.rent,.walt,.visit,.pride,.foot-grid,.reviews,.mast-top,.cat-tools{grid-template-columns:minmax(0,1fr)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:8px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;font:700 15px var(--f-type)}
+.skip:focus{top:8px}
+.mono,.eyebrow{font-family:var(--f-type)}
+.eyebrow{font-weight:700;font-size:12.5px;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow b{color:var(--red)}
+.ic-green{color:var(--green)}.ic-red{color:var(--red)}.ic-brass{color:var(--brass-ink)}.ic-cream{color:#f6eed8}
+.ic-ink{color:var(--ink)}
+
+/* ---------- buttons, boxes, chips ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:46px;padding:0 20px;font:800 17px/1 var(--f-slab);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
+  border:2.5px solid var(--ink);background:var(--card-2);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .08s,box-shadow .08s,background .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink);color:var(--ink);background:#fff7de}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn--red{background:var(--red);color:#fff7e6}.btn--red:hover{background:var(--red-2);color:#fff}
+.btn--green{background:var(--green);color:#f6eed8}.btn--green:hover{background:var(--green-2);color:#fff}
+.btn--sm{min-height:44px;padding:0 14px;font-size:15px}
+.btn[disabled]{opacity:.5;cursor:not-allowed;box-shadow:none}
+.box{position:relative;background:var(--card);border:2.5px solid var(--ink)}
+.box::after{content:"";position:absolute;inset:5px;border:1px dashed rgba(28,25,19,.42);pointer-events:none}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 14px;font:700 14px/1.1 var(--f-type);letter-spacing:.02em;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none}
+.chip:hover{background:var(--green-wash)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#f6eed8}
+@media(pointer:fine){.chip{min-height:36px;padding:6px 12px}}
+.rule{height:0;border:0;border-top:3px double var(--ink);margin:0}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--brass-ink);margin:0 0 26px}
+.orn::before,.orn::after{content:"";height:0;flex:1;border-top:1.5px solid rgba(28,25,19,.5);max-width:240px}
+
+/* ---------- announcement + masthead ---------- */
+.ann{background:var(--ink);color:#f3e9cf;font:700 13.5px/1.35 var(--f-type);letter-spacing:.05em}
+.ann .wrap{display:flex;gap:6px 12px;align-items:center;justify-content:center;padding:9px 0;flex-wrap:wrap;text-align:center}
+.ann a{color:#f1cf7a}
+.ann .badge-slot{display:inline-flex;align-items:center}
+.ann-new{display:inline-block;background:var(--red);color:#fff7e6;padding:2px 8px;font-weight:700;letter-spacing:.12em}
+.mast{padding:26px 0 0}
+.mast-top{display:grid;gap:20px;align-items:center}
+.brand{display:flex;align-items:center;gap:18px;color:inherit;text-decoration:none}
+.stamp{flex:none;width:118px;height:118px;transform:rotate(-8deg);color:var(--red);opacity:.92;mix-blend-mode:multiply}
+.wordmark{line-height:.88}
+.wordmark small{display:block;margin-bottom:8px;font:700 12.5px var(--f-type);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.wordmark b{display:block;font:900 clamp(2.4rem,6.2vw,4.1rem)/.86 var(--f-slab);text-transform:uppercase;letter-spacing:-.012em}
+.wordmark i{font-style:normal;color:var(--red)}
+.phone-block{position:relative;border:3px double var(--ink);background:var(--card);padding:12px 18px 14px}
+.phone-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.phone-top .eyebrow{display:flex;align-items:center;gap:8px}
+.phone{display:block;font:900 clamp(2.3rem,10.6vw,5.7rem)/.98 var(--f-slab);color:var(--red);text-decoration:none;white-space:nowrap;letter-spacing:-.012em;margin:4px 0 8px}
+.phone:hover{color:var(--red-2)}
+.hours-strip{display:grid;gap:8px 12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));border-top:1.5px solid var(--ink);padding-top:10px}
+.hr-cell{display:flex;align-items:center;gap:10px;font:400 14px/1.3 var(--f-type)}
+.hr-cell b{display:block;font:700 12px var(--f-type);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.hr-cell .tm{font:800 20px/1.05 var(--f-slab);letter-spacing:0}
+.open-now{display:inline-flex;align-items:center;gap:8px;font:700 14px/1.2 var(--f-type)}
+.lamp{width:12px;height:12px;border-radius:50%;background:#7b7466;border:2px solid var(--ink);flex:none}
+.is-open .lamp{background:#2f9a5f;box-shadow:0 0 0 3px rgba(47,154,95,.25)}
+.mast-tag{margin:22px 0 0;border-block:3px double var(--ink);padding:9px 0;text-align:center;font:700 13px/1.4 var(--f-type);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.mast-top>*{min-width:0}
+/* two columns: size the wordmark and the number from the column they sit in (5fr / 7fr of the wrap), so (330) 555-0142 is never clipped between 980 and 1270px */
+@media(min-width:980px){.mast-top{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px}
+  .wordmark b{font-size:clamp(2.4rem,5.3vw,4.1rem)}
+  .phone{font-size:clamp(2.3rem,7.2vw,5.7rem)}}
+
+/* ---------- sticky nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:var(--green);color:#f6eed8;border-bottom:3px solid var(--ink);box-shadow:0 3px 0 var(--brass-2)}
+.nav-in{display:flex;align-items:stretch;gap:6px;min-height:56px}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{display:inline-flex;align-items:center;gap:8px;min-height:56px;padding:0 14px;color:#f6eed8;text-decoration:none;font:800 16.5px/1 var(--f-slab);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;border-bottom:4px solid transparent}
+.nav-links a:hover,.nav-links a.on{background:rgba(255,255,255,.1);border-bottom-color:#f1cf7a;color:#fff}
+.nav-basket{display:inline-flex;align-items:center;gap:8px;align-self:center;min-height:44px;padding:0 14px 0 8px;border:2.5px solid var(--ink);background:var(--red);color:#fff7e6;font:800 16px/1 var(--f-slab);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:2px 2px 0 var(--ink);flex:none}
+.nav-basket:hover{background:var(--red-2)}
+.nav-basket .nb-total{font:700 14px var(--f-type);letter-spacing:0}
+.nav-basket .kit-live{background:#fff7e6;border-radius:3px;color:var(--ink)}
+@media(max-width:560px){.nav-basket .lbl,.nav-basket .nb-total{display:none}.nav-basket{padding:0 8px}}
+
+/* ---------- sections ---------- */
+.sec{padding:60px 0}
+.sec--alt{background:rgba(214,196,150,.45);border-block:3px double var(--ink)}
+.sec-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 28px;border-bottom:3px double var(--ink);padding-bottom:14px;margin-bottom:30px}
+.sec-h h2{font-size:clamp(2.1rem,4.6vw,3.5rem);text-transform:uppercase;display:flex;align-items:center;gap:14px}
+.sec-h .eyebrow{margin-bottom:8px}
+.sec-h p{margin:0;max-width:44ch;color:var(--ink-2);font-size:18px}
+
+/* ---------- hero ---------- */
+.hero{padding:40px 0 54px}
+.hero-grid{display:grid;gap:36px}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:52px;align-items:start}}
+.hero-h{font-size:clamp(2.5rem,5.4vw,4.5rem);line-height:.93;text-transform:uppercase;margin:12px 0 20px}
+.hero-h em{font-style:normal;color:var(--red);box-shadow:inset 0 -.13em 0 rgba(205,169,78,.6)}
+.lede{font-size:clamp(19px,2vw,22px);line-height:1.45;max-width:36em;color:var(--ink)}
+.qs{display:flex;border:3px solid var(--ink);background:var(--card-2);box-shadow:var(--sh);max-width:640px;margin:26px 0 12px}
+.qs-ico{display:grid;place-items:center;padding:0 12px;border-right:2px solid var(--ink);color:var(--green);font-size:22px}
+.qs input{flex:1;min-width:0;border:0;background:transparent;font:700 19px var(--f-type);padding:15px 12px}
+.qs input::placeholder{color:var(--ink-3);font-weight:400}
+.qs input:focus-visible{outline:none}
+.qs:focus-within{outline:3px solid var(--red);outline-offset:2px}
+.qs button{border:0;border-left:3px solid var(--ink);background:var(--green);color:#f6eed8;font:800 17px var(--f-slab);letter-spacing:.06em;text-transform:uppercase;padding:0 20px;cursor:pointer}
+.qs button:hover{background:var(--green-2)}
+.qs-hint{min-height:1.5em;margin:0 0 10px;font:400 13.5px/1.4 var(--f-type);color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px 14px;margin-top:26px}
+.hero-cta{align-items:center}
+.or-call{font:700 14px var(--f-type);color:var(--ink-2)}
+.or-call a{color:var(--red)}
+.plate{margin-top:8px}
+.plate{position:relative;margin:0;background:var(--card-2);padding:12px 12px 0;border:2.5px solid var(--ink);box-shadow:9px 9px 0 rgba(28,25,19,.9);transform:rotate(1.1deg)}
+.plate>img,.plate .ph img{display:block;width:100%;aspect-ratio:5/4;object-fit:cover;object-position:50% 55%;border:1.5px solid var(--ink)}
+.plate .ph{position:relative}
+.plate figcaption{padding:11px 4px 13px;font:400 13px/1.45 var(--f-type);color:var(--ink-2)}
+.plate figcaption b{color:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+/* the stamp is pinned to the photo (not the figure), so a long caption can never sit under it; inside the frame below 960px */
+.tag-stamp{position:absolute;left:8px;bottom:18px;transform:rotate(-6deg);display:flex;align-items:center;gap:10px;border:3px double var(--red);color:var(--red);background:rgba(252,248,234,.95);padding:8px 14px 8px 10px;font:900 clamp(18px,2.1vw,25px)/1 var(--f-slab);text-transform:uppercase;letter-spacing:.02em}
+.tag-stamp small{display:block;font:700 11.5px var(--f-type);letter-spacing:.1em;color:var(--ink-2)}
+@media(min-width:960px){.plate .tag-stamp{left:-18px}}
+
+/* ---------- ads board ---------- */
+.board{display:grid;gap:24px}
+.ad{position:relative;display:flex;flex-direction:column;background:var(--card);border:2.5px solid var(--ink);box-shadow:var(--sh)}
+.ad-photo{position:relative;overflow:hidden;border-bottom:2.5px solid var(--ink);background:var(--paper-2);min-height:170px;flex:1 1 auto}
+.ribbon{position:absolute;z-index:2;left:14px;top:-4px;color:#fbf3dc;filter:drop-shadow(0 2px 2px rgba(0,0,0,.55))}
+.ad-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ad-body{padding:16px 20px 20px}
+.ad h3{font-size:clamp(1.55rem,2.2vw,2rem);text-transform:uppercase;margin:6px 0 8px}
+.ad p{font-size:17.5px;color:var(--ink-2);margin:0 0 12px}
+.ad .tagline{display:inline-block;font:700 11.5px var(--f-type);letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:#f6eed8;padding:3px 8px}
+.ad-pick{background:var(--card-2)}
+.steps{list-style:none;display:grid;gap:12px;margin:12px 0 18px}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;font-size:17.5px;line-height:1.3}
+.steps li b{font-weight:800}
+.ad-sale{border-color:var(--red);transform:rotate(-1deg);background:#fbf1de}
+.ad-sale .ad-body{padding-top:22px}
+.ad-sale h3{padding-right:88px}
+.ad-sale .tagline{max-width:calc(100% - 84px)}
+.ad-sale .sale-badge{position:absolute;right:8px;top:-26px;transform:rotate(8deg)}
+.sale-list{margin:4px 0 14px}
+.sale-list li{font-size:17px}.sale-list s{color:var(--ink-3);font:400 13px var(--f-type);margin-right:6px}
+.price-old{text-decoration:line-through;color:var(--ink-3)}
+.ad-h{flex-direction:column}
+.ad-h .ad-photo{min-height:200px}
+.wx{display:flex;align-items:center;gap:16px;margin:10px 0 0;padding:12px 16px;border:1.5px dashed var(--ink);background:rgba(255,255,255,.4)}
+.wx p{margin:0;font:400 14.5px/1.45 var(--f-type);color:var(--ink)}
+@media(min-width:900px){
+  .board{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .ad-pick{grid-column:1/5}
+  .ad-hammer{grid-column:5/9}
+  .ad-sale{grid-column:9/13}
+  .ad-fast,.ad-lumber{grid-column:span 6;flex-direction:row}
+  .ad-fast .ad-photo,.ad-lumber .ad-photo{flex:0 0 42%;border-bottom:0;border-right:2.5px solid var(--ink)}
+  .ad-fast .ad-body,.ad-lumber .ad-body{align-self:center}
+  .ad-garden{grid-column:1/13;flex-direction:row}
+  .ad-garden .ad-photo{flex:0 0 32%;border-bottom:0;border-right:2.5px solid var(--ink)}
+  .ad-garden .ad-body{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:0 32px;align-items:center;padding:20px 26px}
+}
+
+/* ---------- department index ---------- */
+.idx{display:grid;gap:30px}
+@media(min-width:940px){.idx{grid-template-columns:minmax(0,1fr) 290px;align-items:start}}
+.tiles{display:grid;gap:16px}
+@media(min-width:600px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{color:var(--ink);text-decoration:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:start;text-align:left;padding:16px 18px 14px 16px;background:var(--card);border:2.5px solid var(--ink);box-shadow:var(--sh);cursor:pointer;min-height:122px;transition:transform .1s,box-shadow .1s,background .12s}
+.tile:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--green-wash)}
+.tile-ico{grid-row:1/span 4;display:grid;place-items:center;width:76px;height:76px;border:3px double var(--ink);background:var(--card-2);color:var(--green);font-size:46px}
+.tile:nth-child(3n+2) .tile-ico{color:var(--red)}
+.tile-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0 8px;font:700 12.5px var(--f-type);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.tile-top>span{white-space:nowrap}
+.tile h3{font-size:1.55rem;text-transform:uppercase}
+.tile p{margin:0;font-size:16px;line-height:1.3;color:var(--ink-2)}
+.tile .go{font:700 13px var(--f-type);color:var(--green);letter-spacing:.04em}
+.tile:hover .go{text-decoration:underline}
+.idx-plate{position:relative;margin:0;background:var(--card-2);padding:10px 10px 0;border:2.5px solid var(--ink);box-shadow:var(--sh);transform:rotate(-1deg)}
+.idx-plate img{display:block;width:100%;aspect-ratio:1200/1500;object-fit:cover;object-position:50% 40%;border:1.5px solid var(--ink)}
+.idx-plate figcaption{padding:10px 4px 12px;font:400 12.5px/1.45 var(--f-type);color:var(--ink-2)}
+.idx-plate figcaption b{color:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:939px){.idx-plate{max-width:560px}.idx-plate img{aspect-ratio:16/9;object-position:50% 38%}}
+
+/* ---------- catalogue ---------- */
+.banner{position:relative;margin:0 0 26px;border:2.5px solid var(--ink);box-shadow:var(--sh);background:var(--card-2);padding:8px 8px 0}
+.banner img{display:block;width:100%;height:clamp(130px,17vw,220px);object-fit:cover;object-position:50% 40%;border:1.5px solid var(--ink)}
+.banner figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;padding:9px 4px 11px;font:400 12.5px/1.4 var(--f-type);color:var(--ink-2)}
+.banner figcaption b{color:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+.cat-tools{display:grid;gap:14px;background:var(--card);border:2.5px solid var(--ink);padding:16px 18px;box-shadow:var(--sh)}
+.cat-row{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.search-field{flex:1 1 320px;display:flex;align-items:center;border:2.5px solid var(--ink);background:var(--card-2);min-height:48px}
+.search-field .sf-ico{padding:0 10px;color:var(--green);font-size:20px;display:grid;place-items:center}
+.search-field input{flex:1;min-width:0;border:0;background:transparent;font:700 18px var(--f-type);padding:10px 4px}
+.search-field input:focus-visible{outline:none}
+.search-field:focus-within{outline:3px solid var(--red);outline-offset:2px}
+.search-field button{align-self:stretch;min-width:44px;border:0;border-left:1.5px solid var(--ink);background:transparent;cursor:pointer;display:grid;place-items:center}
+.search-field button:hover{background:var(--red-wash)}
+.field-inline{display:flex;align-items:center;gap:8px;font:700 13px var(--f-type);letter-spacing:.06em;text-transform:uppercase}
+.field-inline select{min-height:46px;border:2px solid var(--ink);background:var(--card-2);padding:0 10px;font:700 16px var(--f-type)}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:700 14px var(--f-type);cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--green)}
+.cat-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin:18px 0 0;font:400 14px/1.4 var(--f-type);color:var(--ink-2)}
+.cat-meta b{color:var(--ink)}
+.cat-list{display:block}
+.grp{margin:28px 0 0}
+.grp-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 16px;background:var(--ink);color:#f6eed8;font:900 1.5rem/1 var(--f-slab);text-transform:uppercase;letter-spacing:.03em}
+.grp-h h3{font:inherit;letter-spacing:inherit;text-transform:inherit;margin:0}
+.grp-h .letter{display:grid;place-items:center;width:34px;height:34px;border:2px solid #f1cf7a;color:#f1cf7a;font:700 17px var(--f-type)}
+.grp-h .aisle{margin-left:auto;font:400 13px var(--f-type);letter-spacing:.08em;color:#d8cba6}
+.grp-h .kit-ico{background:var(--card-2);color:var(--green);border:2px solid #f1cf7a;padding:3px}
+.rows{list-style:none;display:grid;border:2.5px solid var(--ink);border-top:0;background:var(--card)}
+/* rows are built once and filtered with [hidden]; JS marks the left-hand visible rows (r-left) so the divider survives filtering */
+@media(min-width:1000px){.rows{grid-template-columns:1fr 1fr}.rows .row.r-left{border-right:1.5px dashed rgba(28,25,19,.45)}}
+.row.fold{display:none}
+.grp-more{display:block;width:100%;min-height:48px;border:2.5px solid var(--ink);border-top:0;background:var(--card-2);font:800 15px var(--f-slab);letter-spacing:.07em;text-transform:uppercase;cursor:pointer;color:var(--green)}
+.grp-more:hover{background:var(--green-wash)}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:12px 16px;border-bottom:1.5px dashed rgba(28,25,19,.4);transition:background .12s}
+.row:hover{background:var(--card-2)}
+.r-ico{color:var(--green);font-size:24px;width:34px;display:grid;place-items:center}
+.r-line{display:flex;align-items:baseline;gap:8px}
+.r-name{font:800 19.5px/1.12 var(--f-slab)}
+.r-dots{flex:1;min-width:14px;border-bottom:2px dotted rgba(28,25,19,.5);transform:translateY(-4px)}
+.r-price{font:900 21px/1 var(--f-slab);white-space:nowrap}
+.r-price small{font:700 12px var(--f-type);color:var(--ink-3);margin-left:3px}
+.r-sub{font:400 13px/1.4 var(--f-type);color:var(--ink-2)}
+.r-sub .pn{font-weight:700;color:var(--ink)}
+.r-sub mark,.r-name mark{background:#f1cf7a;color:inherit;padding:0 1px}
+.stock{font-weight:700;white-space:nowrap}.stock.ok{color:var(--green)}.stock.low{color:var(--red)}.stock.so{color:var(--brass-ink)}
+.sale-tag{display:inline-block;white-space:nowrap;margin-left:6px;padding:0 6px;background:var(--red);color:#fff7e6;font:700 11px/1.5 var(--f-type);letter-spacing:.1em}
+.add{display:grid;place-items:center;width:46px;height:46px;border:2.5px solid var(--ink);background:var(--green);color:#f6eed8;cursor:pointer;box-shadow:2px 2px 0 var(--ink);font-size:22px;font-weight:700}
+.add:hover{background:var(--green-2)}
+.add:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.add.bump{animation:bump .35s}
+@keyframes bump{40%{transform:scale(1.18)}}
+.empty{margin:28px 0;padding:34px 24px;text-align:center;border:2.5px dashed var(--ink);background:var(--card)}
+.empty h3{font-size:1.9rem;text-transform:uppercase;margin:6px 0 8px}
+.empty p{max-width:46ch;margin:0 auto 14px;color:var(--ink-2)}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;gap:26px}
+@media(min-width:800px){.svc-grid{grid-template-columns:1fr 1fr}}
+.svc{display:flex;flex-direction:column;background:var(--card);border:2.5px solid var(--ink);box-shadow:var(--sh)}
+.svc-photo{position:relative;height:210px;overflow:hidden;border-bottom:2.5px solid var(--ink);background:var(--green)}
+.svc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svc-photo.plate-ico{display:grid;place-items:center;color:var(--green);font-size:92px;background:
+  repeating-linear-gradient(45deg,rgba(29,77,54,.13) 0 2px,transparent 2px 14px),var(--green-wash)}
+.svc-price{color:var(--ink);position:absolute;right:10px;bottom:10px;background:var(--card-2);border:2.5px solid var(--ink);padding:6px 12px;font:900 21px/1 var(--f-slab);transform:rotate(-2deg)}
+.svc-price small{font:700 11px var(--f-type);letter-spacing:.1em;display:block;color:var(--ink-2)}
+.svc-body{padding:18px 22px 22px;display:flex;flex-direction:column;flex:1}
+.svc-body h3{font-size:2rem;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.svc-body p{color:var(--ink-2);font-size:18px}
+.price-list{list-style:none;margin:2px 0 4px}
+.price-list li{display:flex;align-items:baseline;gap:8px;padding:5px 0;font-size:18px}
+.price-list li::after{content:"";order:2;flex:1;border-bottom:2px dotted rgba(28,25,19,.45);transform:translateY(-4px)}
+.price-list li span:last-child{order:3;font:900 19px var(--f-slab)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;margin:6px 0 12px;list-style:none}
+.swatches li{border:1.5px solid var(--ink);background:var(--card-2);font:400 12px/1.3 var(--f-type)}
+.swatches i{display:block;height:34px;border-bottom:1.5px solid var(--ink)}
+.swatches span{display:block;padding:4px 6px}
+.rent{display:grid;gap:26px;margin-top:34px}
+@media(min-width:1000px){.rent{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+.tbl-wrap{overflow-x:auto;border:2.5px solid var(--ink);background:var(--card);box-shadow:var(--sh)}
+.tbl{width:100%;border-collapse:collapse;min-width:560px}
+.tbl caption{padding:14px 16px;text-align:left;font:900 1.6rem var(--f-slab);text-transform:uppercase;background:var(--ink);color:#f6eed8}
+.tbl caption small{display:block;font:400 12.5px var(--f-type);letter-spacing:.04em;text-transform:none;color:#d8cba6;margin-top:4px}
+.tbl th,.tbl td{padding:10px 14px;text-align:right;border-bottom:1.5px dashed rgba(28,25,19,.4);font:400 15.5px var(--f-type);font-variant-numeric:tabular-nums}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl thead th{font:700 12px var(--f-type);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border-bottom:2.5px solid var(--ink)}
+.tbl td:first-child{font:800 18px/1.15 var(--f-slab)}
+.tbl tbody tr:nth-child(even){background:rgba(214,196,150,.3)}
+.tbl tbody tr.sel{background:#f1cf7a}
+.tbl td b{font-weight:700}
+@media(max-width:640px){
+  .tbl-wrap{overflow:visible}
+  .tbl,.tbl tbody{display:block;min-width:0}
+  .tbl caption{display:block}
+  .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .tbl tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px 6px;padding:12px 14px 12px;border-bottom:1.5px dashed rgba(28,25,19,.4)}
+  .tbl td{display:block;padding:0;border:0;text-align:left;font:900 20px/1.15 var(--f-slab)}
+  .tbl td::before{content:attr(data-label);display:block;margin-bottom:1px;font:700 10.5px/1.3 var(--f-type);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+  .tbl td:first-child{grid-column:1/-1;margin-bottom:6px;font:800 19px/1.15 var(--f-slab)}
+  .tbl td:first-child::before{display:none}
+  .tbl td:last-child{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding-top:6px;border-top:1.5px dotted rgba(28,25,19,.45);font:700 16px var(--f-type)}
+  .tbl td:last-child::before{display:inline;margin:0;font-size:11px}
+  .tbl td b{font-weight:700}
+}
+.est{background:var(--card-2);border:2.5px solid var(--ink);box-shadow:var(--sh);padding:20px 22px}
+.est h3{font-size:1.8rem;text-transform:uppercase;margin-bottom:6px}
+.est label{display:block;margin:14px 0 6px;font:700 12.5px var(--f-type);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.est select{width:100%;min-height:48px;border:2.5px solid var(--ink);background:var(--card);padding:0 12px;font:700 16px var(--f-type)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);border:2.5px solid var(--ink)}
+.seg label{margin:0;position:relative;font:700 13px var(--f-type);letter-spacing:.02em;text-transform:none;color:var(--ink)}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:grid;place-items:center;min-height:46px;text-align:center;border-right:1.5px solid var(--ink);padding:4px}
+.seg label:last-child span{border-right:0}
+.seg input:checked+span{background:var(--ink);color:#f6eed8}
+.seg input:focus-visible+span{outline:3px solid var(--red);outline-offset:-3px}
+.quote{display:flex;align-items:center;gap:16px;margin:18px 0 8px;padding:12px 14px;border:2px dashed var(--ink)}
+.quote strong{display:block;font:900 2.3rem/1 var(--f-slab);color:var(--red)}
+.quote small{font:400 13.5px/1.4 var(--f-type);color:var(--ink-2)}
+
+/* ---------- ask walt ---------- */
+.walt{display:grid;gap:34px}
+@media(min-width:1000px){.walt{grid-template-columns:minmax(0,4.3fr) minmax(0,7.7fr);align-items:start}}
+.walt-card{background:var(--card);border:2.5px solid var(--ink);box-shadow:var(--sh)}
+/* pinned only when the whole card (about 1000px tall) fits on screen, else its submit button would sit below the fold */
+@media(min-width:1000px) and (min-height:1100px){.walt-card{position:sticky;top:76px}}
+.walt-photo{position:relative;height:340px;overflow:hidden;border-bottom:2.5px solid var(--ink)}
+.walt-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.walt-photo .tag-stamp{left:auto;right:-8px;bottom:14px;font-size:20px}
+.walt-body{padding:20px 22px 24px}
+.walt-body blockquote{margin:0 0 16px;font:italic 500 21px/1.35 var(--f-slab);color:var(--ink)}
+.walt-body blockquote cite{display:block;margin-top:8px;font:700 12.5px var(--f-type);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.form-row{display:grid;gap:12px}
+@media(min-width:560px){.form-row.two{grid-template-columns:1fr 1fr}}
+.fld{display:block}
+.fld>span{display:block;margin-bottom:5px;font:700 12.5px var(--f-type);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.fld input,.fld select,.fld textarea{width:100%;min-height:48px;border:2.5px solid var(--ink);background:var(--card-2);padding:10px 12px;font:400 17px var(--f-type)}
+.fld textarea{min-height:104px;resize:vertical}
+.fld [aria-invalid="true"]{border-color:var(--red);background:#fbe7de}
+.err{display:none;margin:5px 0 0;font:700 13px var(--f-type);color:var(--red)}
+.fld.bad .err{display:block}
+.form-note{font:400 13px/1.45 var(--f-type);color:var(--ink-2);margin:10px 0 0}
+.ok-box{display:none;text-align:center;padding:24px 14px}
+.ok-box.show{display:block}
+.ok-box h3{font-size:1.9rem;text-transform:uppercase;margin:10px 0 6px}
+.tips{columns:1;column-gap:24px}
+@media(min-width:700px){.tips{columns:2}}
+.tip{break-inside:avoid;margin:0 0 24px;position:relative;display:flex;flex-direction:column;background-color:#fffbea;border:1px solid rgba(28,25,19,.4);border-top:4px solid var(--red);box-shadow:3px 5px 0 rgba(28,25,19,.28);padding:0 0 16px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 29px,rgba(48,96,140,.22) 29px 30px);background-position:0 78px}
+.tip:nth-child(even){transform:rotate(.5deg)}.tip:nth-child(odd){transform:rotate(-.4deg)}
+.tip-photo{height:150px;overflow:hidden;border-bottom:1.5px solid rgba(28,25,19,.5);margin-bottom:0;background:var(--paper-2)}
+.tip-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.tip-head{display:flex;align-items:center;gap:12px;padding:14px 18px 8px}
+.tip-n{display:grid;place-items:center;flex:none;width:40px;height:40px;border:2px solid var(--red);color:var(--red);font:700 17px var(--f-type);border-radius:50%}
+.tip h3{font-size:1.45rem;line-height:1.02}
+.tip-meta{display:flex;flex-wrap:wrap;gap:4px 14px;padding:0 18px;font:700 12px var(--f-type);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.tip-meta span{display:inline-flex;align-items:center;gap:6px}
+.tip ol{list-style:none;padding:10px 18px 0;display:grid;gap:3px;counter-reset:s}
+.tip ol li{counter-increment:s;position:relative;padding-left:28px;font-size:17px;line-height:30px;min-height:30px}
+.tip ol li::before{content:counter(s)".";position:absolute;left:0;font:700 15px var(--f-type);color:var(--red)}
+.tip-foot{margin-top:auto;padding:10px 18px 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.tip-foot .parts{font:400 12.5px/1.4 var(--f-type);color:var(--ink-2);flex:1 1 140px}
+.clinic{display:grid;gap:0;margin-top:44px;background:var(--card-2);border:2.5px solid var(--ink);box-shadow:var(--sh)}
+@media(min-width:800px){.clinic{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
+.clinic-photo{position:relative;min-height:260px;border-bottom:2.5px solid var(--ink);overflow:hidden}
+.clinic-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(min-width:800px){.clinic-photo{border-bottom:0;border-right:2.5px solid var(--ink)}}
+.clinic-body{padding:24px 28px 28px}
+.clinic-body h3{font-size:clamp(1.9rem,3.2vw,2.6rem);text-transform:uppercase;margin:8px 0 12px}
+.clinic-when{display:flex;align-items:center;gap:18px;margin:16px 0}
+.clinic-when p{margin:0;font:400 15px/1.45 var(--f-type)}
+.clinic-when p b{font:800 21px/1.1 var(--f-slab);display:block}
+
+/* ---------- visit ---------- */
+.visit{display:grid;gap:30px}
+@media(min-width:960px){.visit{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+.map{position:relative;border:2.5px solid var(--ink);box-shadow:var(--sh);background:#ece0bd;overflow:hidden;aspect-ratio:4/3}
+.map svg.map-art{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;color:var(--red)}
+.pin-label{margin-top:2px;background:var(--card-2);border:1.5px solid var(--ink);padding:1px 7px;font:700 11.5px/1.5 var(--f-type);letter-spacing:.04em;white-space:nowrap;color:var(--ink)}
+.map-cap{margin:10px 0 0;font:400 13px/1.4 var(--f-type);color:var(--ink-2)}
+.addr{margin:0 0 14px;font-style:normal;font:800 clamp(1.6rem,2.8vw,2.2rem)/1.08 var(--f-slab);text-transform:uppercase}
+.addr small{display:block;margin-top:6px;font:400 15px/1.45 var(--f-type);text-transform:none;color:var(--ink-2)}
+.dirs{list-style:none;display:grid;gap:12px;margin:16px 0 18px}
+.dirs li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;font-size:18px;line-height:1.35}
+.dirs .kit-ico,.dirs .d-ico{margin-top:2px;color:var(--green)}
+.htable{width:100%;border-collapse:collapse;margin:8px 0 18px;background:var(--card);border:2.5px solid var(--ink)}
+.htable th,.htable td{padding:9px 14px;text-align:left;border-bottom:1.5px dashed rgba(28,25,19,.4);font:400 15.5px var(--f-type)}
+.htable th{font:800 17px var(--f-slab);letter-spacing:.04em;text-transform:uppercase}
+.htable tr.today{background:#f1cf7a}
+.htable tr.today th::after{content:" (today)";font:700 12px var(--f-type);letter-spacing:.04em;text-transform:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------- local pride ---------- */
+.pride{display:grid;gap:32px}
+@media(min-width:960px){.pride{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:start}}
+.pride-photo{position:relative;margin:0;background:var(--card-2);padding:10px 10px 0;border:2.5px solid var(--ink);box-shadow:9px 9px 0 rgba(28,25,19,.9);transform:rotate(-.8deg)}
+.pride-photo img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 45%;border:1.5px solid var(--ink)}
+.pride-photo figcaption{padding:10px 4px 12px;font:400 12.5px/1.45 var(--f-type);color:var(--ink-2)}
+.pride-photo figcaption b{color:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+.pride h3{font-size:clamp(1.9rem,3.4vw,2.7rem);text-transform:uppercase;margin:6px 0 14px}
+.facts{list-style:none;display:grid;gap:12px 18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:20px 0}
+.facts li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:10px 12px;border:1.5px solid var(--ink);background:var(--card)}
+.facts b{display:block;font:900 1.6rem/1 var(--f-slab)}
+.facts small{font:400 13px/1.3 var(--f-type);color:var(--ink-2)}
+.timeline{list-style:none;margin:20px 0 0;border-left:3px double var(--ink);padding-left:18px;display:grid;gap:14px}
+.timeline li{position:relative;font-size:18px;line-height:1.35}
+.timeline li::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;background:var(--red);border:2px solid var(--ink);transform:rotate(45deg)}
+.timeline b{font:700 15px var(--f-type);color:var(--red);margin-right:8px}
+.reviews{display:grid;gap:22px;margin-top:44px}
+@media(min-width:800px){.reviews{grid-template-columns:repeat(3,1fr)}}
+.rev{background:var(--card);border:2.5px solid var(--ink);box-shadow:var(--sh);padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.rev-head{display:flex;align-items:center;gap:12px}
+.rev-head b{display:block;font:800 19px/1.1 var(--f-slab)}
+.rev-head small{font:400 12.5px var(--f-type);color:var(--ink-2)}
+.rev p{margin:0;font-size:18px;line-height:1.4}
+.rev .stars{display:flex;align-items:center;gap:2px;font:400 15px var(--f-type);color:var(--brass-ink)}
+.rev .stars .kit-ico{flex:none}
+.rating-big{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.rating-big p{margin:0;font:400 14.5px/1.4 var(--f-type);color:var(--ink-2)}
+.rating-big p b{font:900 1.9rem/1 var(--f-slab);color:var(--ink);display:block}
+
+/* ---------- credits + footer ---------- */
+#credits{padding:44px 0 36px;border-top:3px double var(--ink);background:rgba(214,196,150,.35)}
+#credits h2{font-size:1.9rem;text-transform:uppercase;margin-bottom:12px}
+#credits ul{list-style:none;columns:2 380px;column-gap:36px;font:400 13.5px/1.5 var(--f-type);color:var(--ink-2)}
+#credits li{break-inside:avoid;margin:0 0 7px}
+#credits p{font:400 13.5px/1.5 var(--f-type);color:var(--ink-2);margin:12px 0 0;max-width:80ch}
+.foot{background:var(--ink);color:#e6dcc0;padding:44px 0 96px}
+.foot a{color:#f1cf7a}
+.foot-grid{display:grid;gap:30px}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+.foot h3{font:700 12.5px var(--f-type);letter-spacing:.16em;text-transform:uppercase;color:#f1cf7a;margin-bottom:10px}
+.foot ul{list-style:none;display:grid;gap:6px;font-size:17px}
+.foot .fm{font:900 2rem/.95 var(--f-slab);text-transform:uppercase;color:#f6eed8;margin-bottom:10px}
+.foot .fm i{font-style:normal;color:#e8856f}
+.foot p{font-size:16px;color:#cfc4a4}
+.foot-legal{margin-top:30px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);font:400 13px/1.5 var(--f-type);color:#b9ad8c}
+
+/* ---------- basket drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(28,25,19,.55);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(460px,100vw);display:flex;flex-direction:column;background:var(--card-2);border-left:4px double var(--ink);box-shadow:-10px 0 0 rgba(28,25,19,.25);transform:translateX(104%);visibility:hidden;transition:transform .25s ease,visibility 0s .25s}
+.drawer.on{transform:none;visibility:visible;transition:transform .25s ease}
+.dr-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--green);color:#f6eed8;border-bottom:3px solid var(--ink)}
+.dr-head h2{font-size:1.75rem;text-transform:uppercase;flex:1}
+.dr-head>.kit-ico{background:var(--card-2);color:var(--green);padding:4px;border:2px solid #f1cf7a}
+.dr-x{display:grid;place-items:center;width:46px;height:46px;border:2px solid #f6eed8;background:transparent;color:#f6eed8;cursor:pointer;font-size:22px}
+.dr-x:hover{background:rgba(255,255,255,.14)}
+.dr-body{flex:1;overflow:auto;padding:16px 18px 110px}
+.ready{display:flex;align-items:center;gap:14px;padding:12px 14px;border:2.5px solid var(--red);background:#fbefe2;margin-bottom:16px}
+.ready p{margin:0;font:400 14px/1.4 var(--f-type)}
+.ready p b{display:block;font:900 1.45rem/1.05 var(--f-slab);color:var(--red)}
+.lines{list-style:none;display:grid;gap:0}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:12px 0;border-bottom:1.5px dashed rgba(28,25,19,.45)}
+.line b{font:800 18px/1.15 var(--f-slab)}
+.line small{display:block;font:400 12.5px var(--f-type);color:var(--ink-2)}
+.line .lt{font:900 19px var(--f-slab);text-align:right}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--ink);margin-top:6px}
+.qty button{width:44px;height:44px;border:0;background:var(--card);cursor:pointer;display:grid;place-items:center;font-size:18px;font-weight:700}
+.qty button:hover{background:var(--green-wash)}
+.qty output{min-width:40px;text-align:center;font:700 16px var(--f-type);border-inline:2px solid var(--ink);line-height:40px}
+.rm{align-self:end;justify-self:end;width:44px;height:44px;border:0;background:transparent;color:var(--red);cursor:pointer;display:grid;place-items:center;font-size:20px}
+.rm:hover{background:var(--red-wash)}
+.sum{margin:16px 0;font:400 15.5px var(--f-type)}
+.sum div{display:flex;justify-content:space-between;padding:3px 0}
+.sum .tot{border-top:3px double var(--ink);margin-top:6px;padding-top:8px;font:900 1.7rem/1 var(--f-slab)}
+.sum .tot span:last-child{color:var(--red)}
+.basket-empty{text-align:center;padding:30px 10px}
+.basket-empty p{color:var(--ink-2)}
+.pill{position:fixed;left:16px;bottom:20px;z-index:60;display:none;align-items:center;gap:10px;min-height:48px;padding:0 18px 0 12px;border:2.5px solid var(--ink);background:var(--red);color:#fff7e6;font:800 16px var(--f-slab);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+.pill.show{display:inline-flex}
+@media(max-width:700px){.pill{bottom:80px;left:12px}}
+.toast{position:fixed;left:16px;bottom:84px;z-index:95;max-width:min(360px,calc(100vw - 32px));background:var(--ink);color:#f6eed8;padding:12px 16px;border-left:6px solid #f1cf7a;font:700 14px/1.4 var(--f-type);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s,transform .2s}
+.toast.on{opacity:1;transform:none}
+@media(max-width:700px){.toast{bottom:136px}}
+
+
+.wm-hw{display:block;margin-top:9px;font:800 1.2rem/1 var(--f-slab);letter-spacing:.46em;text-transform:uppercase;color:var(--red)}
+.tbl-pick{background:none;border:0;padding:0;min-height:44px;font:inherit;text-align:left;cursor:pointer;color:inherit;text-decoration:underline dotted;text-underline-offset:5px}
+.tbl-pick:hover{color:var(--red)}
+.ann-del{display:inline-flex;align-items:center;gap:8px}
+@media(max-width:700px){.ann .sep{display:none}}
+/* Live icons are a Full-level thing: Basic and Upgraded show a static twin instead (data-max-level="1": an emoji or icon slot, or plain text,
+   class .lvfb), and the live icon itself carries data-min-level="2". Without the kit (no data-level) every Full-only element stays hidden. */
+html:not([data-level]) [data-min-level]{display:none!important}
+.kit-live>.kit-fb,.lvfb{font:700 15px/1.1 var(--f-type)}
+.lvfb{display:inline-flex;align-items:center;justify-content:center}
+.hr-cell .kit-live>.kit-fb{font-size:34px}
+.ready .kit-live>.kit-fb{font-size:42px}
+.steps .kit-live>.kit-fb,.steps .lvfb{display:grid;place-items:center;width:42px;height:42px;border:2.5px solid var(--ink);border-radius:50%;background:var(--card);font:900 20px/1 var(--f-slab)}
+.clinic-when .kit-live>.kit-fb{font:900 24px/1 var(--f-slab);border:3px solid var(--ink);padding:10px 12px;background:#fff}
+.wx .kit-live>.kit-fb{font:700 19px var(--f-type)}
+.quote .kit-live>.kit-fb{font:900 30px/1 var(--f-slab);color:var(--red)}
+.rating-big .kit-live>.kit-fb{font:900 26px/1 var(--f-slab);color:var(--brass-ink)}
+.ad-sale .sale-badge.kit-live>.kit-fb,.ad-sale .sale-badge.lvfb{display:grid;place-items:center;width:74px;height:74px;border-radius:50%;background:var(--red);color:#fff7e6;font:900 20px var(--f-slab);border:3px double #fff7e6;box-shadow:0 0 0 2px var(--red)}
+.ok-box .kit-live>.kit-fb{font:900 2.6rem/1 var(--f-slab);color:var(--red)}
+.nav-basket .kit-live>.kit-fb{font:700 15px var(--f-type);color:var(--ink);padding:3px 6px}
+.pin .kit-live>.kit-fb,.pin .lvfb{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff7e6;font:700 16px var(--f-type);border:2px solid var(--ink)}
+.ready>.kit-live,.ready>.kit-ico,.quote>.kit-live,.quote>.kit-ico{flex:none}
+/* the static twins: icon (or emoji) plus the number, in the same places the live icons sit */
+.cart-static,.wx-static,.th-static,.rt-static,.tk-static{display:inline-flex;align-items:center;gap:8px}
+.cart-static{gap:6px;background:#fff7e6;color:var(--ink);padding:3px 8px;border-radius:3px;font:700 15px var(--f-type)}
+.wx-static b,.th-static b{font:700 19px var(--f-type)}
+.rt-static b{font:900 26px/1 var(--f-slab);color:var(--brass-ink)}
+.tk-static{flex-direction:column;gap:4px}
+.tk-static b{font:900 2.6rem/1 var(--f-slab);color:var(--red)}
+/* ---------- Full-level flourishes: pegboard, seals, eyebrow ornaments ---------- */
+.peg{padding:4px 0 40px}
+.peg-board{position:relative;border:3px solid var(--ink);box-shadow:var(--sh);padding:16px 16px 20px;
+  background:radial-gradient(circle,rgba(28,25,19,.34) 0 2.3px,transparent 3px) 0 0/26px 26px,var(--paper-2)}
+.peg-cap{margin:0 0 14px;text-align:center}
+.peg-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media(min-width:640px){.peg-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:980px){.peg-row{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.peg-tool{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;overflow:hidden;padding:30px 8px 12px;color:var(--green);text-decoration:none;background:var(--card);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform-origin:50% 12px;transition:transform .18s,background .12s}
+.peg-tool::before{content:"";position:absolute;top:9px;left:50%;width:15px;height:15px;margin-left:-7.5px;border-radius:50%;border:3px solid var(--ink);background:var(--brass-2)}
+.peg-tool:nth-child(even){color:var(--red)}
+.peg-tool:hover{background:var(--green-wash);transform:rotate(-2deg)}
+.peg-lbl{font:800 15px/1.1 var(--f-slab);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-align:center}
+.peg-lbl small{display:block;margin-top:4px;font:400 11.5px/1.3 var(--f-type);letter-spacing:.03em;text-transform:none;color:var(--ink-2)}
+.seal{position:absolute;top:-16px;right:-10px;z-index:3;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:3px double var(--red);background:rgba(252,248,234,.97);color:var(--red);transform:rotate(9deg);box-shadow:2px 3px 0 rgba(28,25,19,.3)}
+.eyebrow .kit-ico{vertical-align:-5px;margin-right:6px}
+.sec-h .eyebrow .kit-ico{margin-bottom:-2px}
+.nav-links.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 38px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 38px),transparent)}
+@media(min-width:701px){.nav-links.more{-webkit-mask-image:none;mask-image:none}}
+.empty .btn-row{margin-top:4px}
+
+/* ---------- Basic vs Full tuning (same layout, same content) ---------- */
+html[data-level="0"] .tile:hover{box-shadow:var(--sh)}
+html[data-level="0"] .tile-ico,html[data-level="0"] .svc-photo.plate-ico{font-size:40px}
+html[data-level="0"] .svc-photo.plate-ico{font-size:72px}
+html[data-level="2"] .tile-ico{background:var(--card-2)}
+.kit-fb{font-style:normal}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media(max-width:560px){.r-line{display:block}.r-dots{display:none}.r-price{display:block;margin-top:4px}.row{padding:12px 12px;gap:4px 10px}}
+@media(max-width:700px){#deptChips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-inline:-18px;padding-inline:18px}#deptChips::-webkit-scrollbar{display:none}#deptChips .chip{flex:none}}
+@media(max-width:600px){
+  body{font-size:18px}
+  .sec{padding:44px 0}
+  .stamp{width:92px;height:92px}
+  .tag-stamp{bottom:14px}
+  .plate{box-shadow:6px 6px 0 rgba(28,25,19,.9)}
+}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Hartwell &amp; Sons Hardware is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#catalogue">Skip to the catalogue</a>
+
+<div class="ann">
+  <div class="wrap">
+    <span class="ann-new">NEW</span>
+    <span>The web shop is open: order by 4 pm (Sundays by 1 pm) and pick up two hours later. <a href="#catalogue">Start browsing</a></span>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <span class="ann-del"><span data-ico="truck" data-size="24" data-fixed-style="line" class="ic-cream">🚚</span> Free delivery over $75, within 8 miles</span>
+  </div>
+</div>
+
+<header class="mast" id="top">
+  <div class="wrap">
+    <div class="mast-top">
+      <a class="brand" href="#top" aria-label="Hartwell and Sons Hardware, back to the top">
+        <svg class="stamp" viewBox="0 0 120 120" role="img" aria-label="Established 1952">
+          <defs>
+            <path id="stc" d="M60,60 m-43,0 a43,43 0 1,1 86,0 a43,43 0 1,1 -86,0"/>
+            <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/></filter>
+          </defs>
+          <g filter="url(#rough)">
+            <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="3.2"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="60" cy="60" r="31" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text font-family="Courier Prime, Courier New, monospace" font-weight="700" font-size="10.4" fill="currentColor"><textPath href="#stc" textLength="262" lengthAdjust="spacing">HARTWELL &amp; SONS · HARDWARE · ★ ·</textPath></text>
+            <text x="60" y="53" text-anchor="middle" font-family="Rokkitt, Georgia, serif" font-weight="800" font-size="12" letter-spacing="3" fill="currentColor">EST.</text>
+            <text x="60" y="79" text-anchor="middle" font-family="Rokkitt, Georgia, serif" font-weight="900" font-size="28" fill="currentColor">1952</text>
+          </g>
+        </svg>
+        <span class="wordmark">
+          <small>Neighborhood hardware</small>
+          <b>Hartwell <i>&amp;</i> Sons</b>
+          <span class="wm-hw">Hardware</span>
+        </span>
+      </a>
+
+      <div class="phone-block">
+        <div class="phone-top">
+          <span class="eyebrow"><span data-ico="phone-call" data-size="30" data-motion="loop" class="ic-red">📞</span> Phone orders &middot; ask for the counter</span>
+          <span class="eyebrow">Real person, no menu</span>
+        </div>
+        <a class="phone" href="tel:+13305550142" aria-label="Call 3 3 0, 5 5 5, 0 1 4 2">(330) 555-0142</a>
+        <div class="hours-strip">
+          <div class="hr-cell">
+            <span data-ico="clock" data-size="44" data-max-level="1">🕖</span><span data-live="clock-time" data-p-time="07:00" data-size="44" data-min-level="2" data-label="Opens at 7 am, Monday to Saturday">🕖</span>
+            <span><b>Mon to Sat</b><span class="tm">7 am to 6 pm</span></span>
+          </div>
+          <div class="hr-cell">
+            <span data-ico="clock" data-size="44" data-max-level="1">🕘</span><span data-live="clock-time" data-p-time="09:00" data-size="44" data-min-level="2" data-label="Opens at 9 am on Sunday">🕘</span>
+            <span><b>Sunday</b><span class="tm">9 am to 3 pm</span></span>
+          </div>
+          <div class="hr-cell" id="openNow">
+            <span class="lamp" aria-hidden="true"></span>
+            <span><b>Right now</b><span class="tm" id="openTxt">Checking the door</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mast-tag">Serving the neighborhood since 1952 &middot; Ask us how, we'll show you</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap nav-in">
+    <div class="nav-links">
+      <a href="#departments"><span data-ico="hammer" data-size="30">🔨</span> Departments</a>
+      <a href="#catalogue"><span data-ico="book-open" data-size="30">📖</span> Catalogue</a>
+      <a href="#services"><span data-ico="key-round" data-size="30">🗝️</span> Services</a>
+      <a href="#walt"><span data-ico="lightbulb" data-size="30">💡</span> Ask Walt</a>
+      <a href="#visit"><span data-ico="map-pin" data-size="30">📍</span> Find us</a>
+    </div>
+    <button class="nav-basket" id="basketBtn" type="button" aria-haspopup="dialog" aria-controls="basket">
+      <span class="cart-static" data-max-level="1"><span data-ico="shopping-cart" data-size="28">🛒</span><b id="cartNum">0</b></span><span data-live="cart-count" data-p-count="0" data-size="36" data-min-level="2" id="cartBadge" data-label="Basket is empty">🛒 0</span>
+      <span class="lbl">Basket</span><span class="nb-total" id="navTotal">$0.00</span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow"><b>Catalogue No. 71</b> &middot; Fall and winter 2026 &middot; Prices in US dollars</p>
+      <h1 class="hero-h" id="h1">Everything for the job, and <em>the know-how</em> to finish it.</h1>
+      <p class="lede">Three generations behind the same counter on Canal Street. Call us, or order here, and your parts will be pulled, bagged and waiting on the pick-up shelf in two hours. Ask Walt how it's done: that part is free.</p>
+
+      <form class="qs" id="heroSearch" role="search" action="#" autocomplete="off">
+        <span class="qs-ico" data-ico="search" data-size="30">🔍</span>
+        <label class="sr" for="hq">Quick search the catalogue</label>
+        <input id="hq" type="search" placeholder="Try hinge, furnace, 3/8 bolt…" enterkeyhint="search">
+        <button type="submit">Find it</button>
+      </form>
+      <p class="qs-hint" id="hqHint" aria-live="polite">Quick search covers every listed item by name, part number and aisle.</p>
+      <div class="chips" role="group" aria-label="Popular searches">
+        <button class="chip" type="button" data-q="drill">drill</button>
+        <button class="chip" type="button" data-q="paint">paint</button>
+        <button class="chip" type="button" data-q="toilet">toilet</button>
+        <button class="chip" type="button" data-q="screws">screws</button>
+        <button class="chip" type="button" data-q="rake">rake</button>
+        <button class="chip" type="button" data-q="hinge">hinge</button>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn--red" href="#catalogue"><span data-ico="book-open" data-size="28">📖</span> Browse the catalogue</a>
+        <button class="btn" type="button" data-open-basket><span data-ico="shopping-basket" data-size="28">🛒</span> Pick-up basket</button>
+        <span class="or-call">or call <a href="tel:+13305550142">(330) 555-0142</a></span>
+      </div>
+    </div>
+
+    <figure class="plate">
+      <div class="ph">
+        <img src="_img/hartwell-hardware/16472137-1200.jpg" width="1200" height="857" fetchpriority="high"
+             alt="The back wall of an old hardware store: tall dark wooden pigeonhole shelves of hand-numbered bins, iron gear wheels on the side and daylight through large paned windows." style="object-position:50% 55%">
+        <div class="tag-stamp"><span data-ico="package-open" data-size="40" class="ic-red" data-motion="inview">📦</span><span>Pick-up in<br>2 hours<small>Order by 4 pm, Sun. 1 pm</small></span></div>
+      </div>
+      <figcaption><b>Plate 1.</b> The back wall on Canal Street. Every bin is still numbered by hand, and Walt still knows what lives in each one. <span class="cr">Photo: T6 Adventures, Pexels.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ THE PEGBOARD (Full level only) ============ -->
+<section class="peg" data-min-level="2" aria-labelledby="h-peg">
+  <div class="wrap">
+    <div class="peg-board">
+      <h2 class="sr" id="h-peg">The pegboard: quick searches</h2>
+      <p class="eyebrow peg-cap">Hung on Walt's pegboard &middot; tap a tool to search the catalogue</p>
+      <div class="peg-row">
+        <a class="peg-tool" href="#catalogue" data-q="hammer"><span data-ico="hammer" data-size="112" data-motion="hover" data-label="Hammer">🔨</span><span class="peg-lbl">Hammers<small>Dept. A, aisle 1</small></span></a>
+        <a class="peg-tool" href="#catalogue" data-q="wrench"><span data-ico="wrench" data-size="112" data-motion="hover" data-label="Wrench">🔧</span><span class="peg-lbl">Wrenches<small>Dept. A and D</small></span></a>
+        <a class="peg-tool" href="#catalogue" data-q="tape"><span data-ico="ruler" data-size="112" data-motion="hover" data-label="Tape measure">📏</span><span class="peg-lbl">Tapes &amp; levels<small>Dept. A, aisle 2</small></span></a>
+        <a class="peg-tool" href="#catalogue" data-q="brush"><span data-ico="paintbrush" data-size="112" data-motion="hover" data-label="Paintbrush">🖌️</span><span class="peg-lbl">Brushes<small>Dept. C, aisle 4</small></span></a>
+        <a class="peg-tool" href="#catalogue" data-q="shovel"><span data-ico="shovel" data-size="112" data-motion="hover" data-label="Shovel">⛏️</span><span class="peg-lbl">Shovels<small>Dept. F, aisle 7</small></span></a>
+        <a class="peg-tool" href="#services"><span data-ico="key-round" data-size="112" data-motion="hover" data-label="Key">🗝️</span><span class="peg-lbl">Key cutting<small>Back counter, $2.50</small></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ON THE SHELVES THIS WEEK ============ -->
+<section class="sec" id="shelves" aria-labelledby="h-shelves" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="tag" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 1</b> &middot; Front of the shop</p><h2 id="h-shelves">On the shelves this week</h2></div>
+      <p>The boxed ads from the front window, same as ever: how pick-up works, what's on sale, and what Walt would buy this week.</p>
+    </div>
+    <div class="orn" data-min-level="2" aria-hidden="true"><span data-ico="hammer" data-size="30" class="ic-brass">🔨</span><span data-ico="ruler" data-size="30" class="ic-brass">📏</span><span data-ico="wrench" data-size="30" class="ic-brass">🔧</span></div>
+
+    <div class="board">
+      <article class="ad box ad-pick" aria-labelledby="h-pick">
+        <div class="ad-body">
+          <span class="tagline">How pick-up works</span>
+          <h3 id="h-pick">Pick-up in 2 hours</h3>
+          <p>Order here or by phone before 4 pm (Sundays, 1 pm). Your parts are pulled, bagged and tagged while you finish your coffee.</p>
+          <ol class="steps">
+            <li><span class="lvfb" data-max-level="1">1</span><span data-live="step-number" data-p-step="1" data-size="46" data-min-level="2" data-label="Step 1">1.</span><span><b>Fill your basket.</b> Or phone the counter and read us the list.</span></li>
+            <li><span class="lvfb" data-max-level="1">2</span><span data-live="step-number" data-p-step="2" data-size="46" data-min-level="2" data-label="Step 2">2.</span><span><b>We pull and bag it.</b> You get a call when it is on the shelf.</span></li>
+            <li><span class="lvfb" data-max-level="1">3</span><span data-live="step-number" data-p-step="3" data-size="46" data-min-level="2" data-label="Step 3">3.</span><span><b>Walk up to the pick-up shelf.</b> Give your name and pay at the counter.</span></li>
+          </ol>
+          <button class="btn btn--red" type="button" data-open-basket><span data-ico="shopping-basket" data-size="28">🛒</span> Start a pick-up order</button>
+        </div>
+      </article>
+
+      <article class="ad box ad-hammer" aria-labelledby="h-hammer">
+        <div class="ad-photo"><span class="ribbon" data-min-level="2" data-live="ribbon-label" data-p-text="#1" data-size="76" data-label="Our number one seller"></span><img src="_img/hartwell-hardware/photo-1658762965198-aa42a8d49c46-1000.jpg" width="1200" height="798" loading="lazy" decoding="async"
+          alt="Several old hammers and other hand tools laid out on dark, weathered wooden boards." style="object-position:50% 50%"></div>
+        <div class="ad-body">
+          <span class="tagline">Dept. A &middot; Hand tools</span>
+          <h3 id="h-hammer">The No. 7 claw hammer</h3>
+          <p>Hickory handle, drop-forged head. Walt has sold the same one since 1974. Break it and we swap it.</p>
+          <div class="btn-row">
+            <button class="btn btn--green btn--sm" type="button" data-add="HT-1016"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span> Add, $18.95</button>
+            <a class="btn btn--sm" href="#catalogue" data-dept="A"><span data-ico="hammer" data-size="26" data-motion="hover">🔨</span> Hand tools</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ad box ad-sale" aria-labelledby="h-sale">
+        <span class="sale-badge lvfb" data-max-level="1">-20%</span><span class="sale-badge" data-live="sale-sticker" data-p-text="-20%" data-size="88" data-min-level="2" data-label="20 percent off">-20%</span>
+        <div class="ad-body">
+          <span class="tagline">Fall yard sale &middot; through Oct 31</span>
+          <h3 id="h-sale">Rakes, gloves &amp; frost cloth</h3>
+          <p>Twenty percent off while stocks last. The first hard frost is closer than you think.</p>
+          <ul class="price-list sale-list">
+            <li><span>Leaf rake, 24 tine</span><span><s>$21.95</s>$17.56</span></li>
+            <li><span>Goatskin gloves, pair</span><span><s>$11.95</s>$9.56</span></li>
+            <li><span>Frost cloth, 10 x 12 ft</span><span><s>$14.95</s>$11.96</span></li>
+          </ul>
+          <button class="btn btn--red btn--sm" type="button" data-sale><span data-ico="badge-percent" data-size="28">%</span> See the sale items</button>
+        </div>
+      </article>
+
+      <article class="ad box ad-fast ad-h" aria-labelledby="h-fast">
+        <div class="ad-photo"><img src="_img/hartwell-hardware/38575500-1000.jpg" width="1200" height="900" loading="lazy" decoding="async"
+          alt="Dark compartment bins sorted with nuts, bolts, washers and small fittings, with a few yellow connectors." style="object-position:50% 50%"></div>
+        <div class="ad-body">
+          <span class="tagline">Dept. G &middot; Fasteners</span>
+          <h3 id="h-fast">Nuts, bolts &amp; screws by the pound</h3>
+          <p>Scoop what you need from the bins, we weigh it on the brass scale. Need only three bolts? Take three. Deck screws start at $6.25 a pound.</p>
+          <div class="btn-row">
+            <a class="btn btn--sm" href="#catalogue" data-dept="G"><span data-ico="hexagon" data-size="26" data-motion="hover">🔩</span> Fasteners</a>
+            <a class="btn btn--sm" href="#visit"><span data-ico="scale" data-size="28">⚖️</span> Visit the bins</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ad box ad-lumber ad-h" aria-labelledby="h-lumber">
+        <div class="ad-photo"><img src="_img/hartwell-hardware/12278566-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+          alt="Stacks of sawn lumber planks on pallets at an outdoor lumber yard, under a covered shed." style="object-position:50% 55%"></div>
+        <div class="ad-body">
+          <span class="tagline">Dept. H &middot; Lumber &amp; yard</span>
+          <h3 id="h-lumber">Cut to length, delivered free</h3>
+          <p>The yard is open Monday to Saturday, 7 to 5. The first three cuts are on the house, and orders over $75 ride out on the blue truck within eight miles.</p>
+          <div class="btn-row">
+            <a class="btn btn--sm" href="#catalogue" data-dept="H"><span data-ico="tree-pine" data-size="26" data-motion="hover">🌲</span> Lumber</a>
+            <span class="eyebrow" style="display:inline-flex;align-items:center;gap:8px"><span data-ico="truck" data-size="28" class="ic-green">🚚</span> Free over $75</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ad box ad-garden ad-h" aria-labelledby="h-garden">
+        <div class="ad-photo"><img src="_img/hartwell-hardware/photo-1573561368183-fd88bdb4503d-1000.jpg" width="1200" height="830" loading="lazy" decoding="async"
+          alt="A row of yellow-painted garden tools (hoes, a rake, a shovel, a pitchfork and a twig broom) standing against a dark wooden wall." style="object-position:50% 50%"></div>
+        <div class="ad-body">
+          <div>
+            <span class="tagline">Dept. F &middot; Garden</span>
+            <h3 id="h-garden">Put the garden to bed</h3>
+            <p>Rake the leaves, drain the hose, wrap the spigot, and pull the tender plants in. Walt's checklist is on page 38, and everything on it is a short walk down aisle 7.</p>
+            <a class="btn btn--sm" href="#catalogue" data-dept="F"><span data-ico="sprout" data-size="26" data-motion="hover">🌱</span> Garden department</a>
+          </div>
+          <div class="wx">
+            <span class="wx-static" data-max-level="1"><span data-ico="snowflake" data-size="56">🌙</span><b>31°F</b></span><span data-live="weather" data-p-condition="night" data-p-temperature="31" data-p-unit="fahrenheit" data-size="72" data-min-level="2" data-label="Tonight: clear, 31 degrees Fahrenheit">🌙 31°F</span>
+            <p><b>Frost watch tonight.</b> Low of 31&deg;F expected after midnight. Cover tender plants by dusk and drain the hose.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPARTMENT INDEX ============ -->
+<section class="sec sec--alt" id="departments" aria-labelledby="h-dept">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="layout-list" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 2</b> &middot; Index</p><h2 id="h-dept">Index of departments</h2></div>
+      <p>Eight departments, one page each. Pick a letter and we'll open that page of the catalogue below.</p>
+    </div>
+    <div class="idx">
+      <div class="tiles" id="tiles">
+        <a class="tile" href="#catalogue" data-dept="A"><span class="tile-ico"><span data-ico="hammer" data-size="48" data-motion="inview" data-sample>🔨</span></span>
+          <span class="tile-top"><span>Dept. A &middot; Aisles 1-2</span><span class="cnt" data-cnt="A"></span></span>
+          <h3>Hand tools</h3><p>Hammers, wrenches, pliers, saws, chisels and tape measures.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="B"><span class="tile-ico"><span data-ico="zap" data-size="48" data-motion="inview">⚡</span></span>
+          <span class="tile-top"><span>Dept. B &middot; Aisle 3</span><span class="cnt" data-cnt="B"></span></span>
+          <h3>Power tools</h3><p>Drills, saws, sanders and cords. The big ones you can rent.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="C"><span class="tile-ico"><span data-ico="paintbrush" data-size="48" data-motion="inview">🖌️</span></span>
+          <span class="tile-top"><span>Dept. C &middot; Aisle 4</span><span class="cnt" data-cnt="C"></span></span>
+          <h3>Paint</h3><p>Interior and exterior, tinted in fifteen minutes. Brushes, rollers, tape.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="D"><span class="tile-ico"><span data-ico="droplet" data-size="48" data-motion="inview">💧</span></span>
+          <span class="tile-top"><span>Dept. D &middot; Aisle 5</span><span class="cnt" data-cnt="D"></span></span>
+          <h3>Plumbing</h3><p>Fill valves, washers, supply lines and tape: tonight's drip, fixed.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="E"><span class="tile-ico"><span data-ico="lightbulb" data-size="48" data-motion="inview">💡</span></span>
+          <span class="tile-top"><span>Dept. E &middot; Aisle 6</span><span class="cnt" data-cnt="E"></span></span>
+          <h3>Electrical</h3><p>Bulbs, outlets, switches, testers and surge-protected strips.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="F"><span class="tile-ico"><span data-ico="sprout" data-size="48" data-motion="inview">🌱</span></span>
+          <span class="tile-top"><span>Dept. F &middot; Aisle 7</span><span class="cnt" data-cnt="F"></span></span>
+          <h3>Garden</h3><p>Rakes, shovels, hoses, gloves and frost cloth for the cold snap.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="G"><span class="tile-ico"><span data-ico="hexagon" data-size="48" data-motion="inview">🔩</span></span>
+          <span class="tile-top"><span>Dept. G &middot; Aisle 8</span><span class="cnt" data-cnt="G"></span></span>
+          <h3>Fasteners</h3><p>Nails, screws, bolts and anchors, sold by the pound from the bins.</p><span class="go">Open this page &rarr;</span></a>
+        <a class="tile" href="#catalogue" data-dept="H"><span class="tile-ico"><span data-ico="tree-pine" data-size="48" data-motion="inview">🌲</span></span>
+          <span class="tile-top"><span>Dept. H &middot; The yard</span><span class="cnt" data-cnt="H"></span></span>
+          <h3>Lumber</h3><p>Studs, boards, plywood and pickets, cut to length in the yard.</p><span class="go">Open this page &rarr;</span></a>
+      </div>
+      <figure class="idx-plate">
+        <img src="_img/hartwell-hardware/32209162-800.jpg" width="1200" height="1860" loading="lazy" decoding="async"
+          alt="A weathered wooden wall cabinet holding old wooden hand planes, chisels and a marking gauge, with two small drawers underneath, against a plain pale wall." style="object-position:50% 45%">
+        <span class="seal" data-min-level="2"><span data-ico="stamp" data-size="40" data-motion="hover"></span></span>
+        <figcaption><b>Plate 2.</b> Harold Hartwell's own tool cabinet, still on the wall behind the counter. Photo: Volker Morr, Pexels.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATALOGUE ============ -->
+<section class="sec" id="catalogue" aria-labelledby="h-cat">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="book-open" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 4</b> &middot; Price list No. 71 &middot; prices as of 1 October 2026</p><h2 id="h-cat">The catalogue</h2></div>
+      <p>The best-selling lines, with the same part numbers we use on the shop floor. Don't see it? We stock over 14,000 items, so <a href="tel:+13305550142">call the counter</a>.</p>
+    </div>
+
+    <figure class="banner">
+      <img src="_img/hartwell-hardware/15018793-1200.jpg" width="1200" height="675" loading="lazy" decoding="async"
+        alt="A row of vintage hand saws with worn wooden handles, blades upright, resting side by side on a wooden rack against a gray wall." style="object-position:50% 40%">
+      <span class="seal" data-min-level="2"><span data-ico="award" data-size="40" data-motion="hover"></span></span>
+      <figcaption><span><b>Plate 3.</b> Hand saws from the back of Dept. A. Photo: FFD Restorations, Pexels.</span><span>Part numbers in <b>bold</b> are the ones Walt reads off the bin labels.</span></figcaption>
+    </figure>
+
+    <div class="cat-tools">
+      <div class="cat-row">
+        <div class="search-field" role="search">
+          <span class="sf-ico" data-ico="search" data-size="28">🔍</span>
+          <label class="sr" for="q">Search the catalogue</label>
+          <input id="q" type="search" placeholder="Search by name, part number or aisle" autocomplete="off">
+          <button type="button" id="qClear" aria-label="Clear the search" hidden><span data-ico="close" data-size="22" data-fixed-style="line">✕</span></button>
+        </div>
+        <label class="field-inline"><span>Sort</span>
+          <select id="sort">
+            <option value="dept">By department</option>
+            <option value="pn">Part number</option>
+            <option value="name">Name, A to Z</option>
+            <option value="low">Price, low to high</option>
+            <option value="high">Price, high to low</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="inStock"> In stock today</label>
+        <label class="check"><input type="checkbox" id="onSale"> On sale</label>
+      </div>
+      <div class="chips" id="deptChips" role="group" aria-label="Filter by department">
+        <button class="chip" type="button" data-dept="" aria-pressed="true"><span data-ico="layout-list" data-size="24" data-fixed-style="line">📋</span> All <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="A" aria-pressed="false"><span data-ico="hammer" data-size="24" data-fixed-style="line">🔨</span> Hand tools <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="B" aria-pressed="false"><span data-ico="zap" data-size="24" data-fixed-style="line">⚡</span> Power tools <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="C" aria-pressed="false"><span data-ico="paintbrush" data-size="24" data-fixed-style="line">🖌️</span> Paint <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="D" aria-pressed="false"><span data-ico="droplet" data-size="24" data-fixed-style="line">💧</span> Plumbing <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="E" aria-pressed="false"><span data-ico="lightbulb" data-size="24" data-fixed-style="line">💡</span> Electrical <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="F" aria-pressed="false"><span data-ico="sprout" data-size="24" data-fixed-style="line">🌱</span> Garden <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="G" aria-pressed="false"><span data-ico="hexagon" data-size="24" data-fixed-style="line">🔩</span> Fasteners <span class="n"></span></button>
+        <button class="chip" type="button" data-dept="H" aria-pressed="false"><span data-ico="tree-pine" data-size="24" data-fixed-style="line">🌲</span> Lumber <span class="n"></span></button>
+      </div>
+    </div>
+    <div class="cat-meta"><p id="catMeta" aria-live="polite">Loading the price list&hellip;</p><p>Prices in US dollars. Sales tax is added at the counter.</p></div>
+    <div class="cat-list" id="catList"><noscript><p>The price list needs JavaScript. Or just phone the counter on (330) 555-0142, we'll read it to you.</p></noscript></div>
+    <div class="empty" id="catEmpty" hidden>
+      <span data-ico="search" data-size="64" class="ic-brass">🔍</span>
+      <h3 id="emptyH">Nothing on the list</h3>
+      <p id="emptyP"></p>
+      <div class="btn-row" id="emptyFix" style="justify-content:center"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="sec sec--alt" id="services" aria-labelledby="h-svc">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="key-round" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 31</b> &middot; At the back counter</p><h2 id="h-svc">Services</h2></div>
+      <p>Things we do while you wait, no appointment needed. Most take under fifteen minutes. Ask at the counter, or phone ahead.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc" aria-labelledby="h-keys">
+        <div class="svc-photo">
+          <img src="_img/hartwell-hardware/17124735-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async"
+            alt="A locksmith's hands filing a key blank clamped in a small vise, with a red handle and fine metal shavings in the air." style="object-position:50% 62%">
+          <div class="svc-price"><small>House keys</small>$2.50 each</div>
+        </div>
+        <div class="svc-body">
+          <h3 id="h-keys"><span data-ico="key" data-size="44" data-motion="hover" class="ic-green">🔑</span> Key cutting</h3>
+          <p>House, padlock, mailbox and file-cabinet keys, cut while you wait. About three minutes at the machine. Bring the original, not a copy of a copy.</p>
+          <ul class="price-list">
+            <li><span>House or padlock key</span><span>$2.50</span></li>
+            <li><span>Three or more, each</span><span>$1.75</span></li>
+            <li><span>Car key, metal blade only</span><span>$4.95</span></li>
+            <li><span>Re-key a lock cylinder</span><span>$12.00</span></li>
+          </ul>
+          <p class="form-note">Chipped car fobs: we cut the blade, your dealer programs the chip.</p>
+        </div>
+      </article>
+
+      <article class="svc" aria-labelledby="h-match">
+        <div class="svc-photo">
+          <img src="_img/hartwell-hardware/photo-1643822308521-1da534425d82-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+            alt="Close-up from above of open tins of paint in lavender, orange-red, teal, yellow and deep blue." style="object-position:50% 45%">
+          <div class="svc-price"><small>Test pot</small>$4.95</div>
+        </div>
+        <div class="svc-body">
+          <h3 id="h-match"><span data-ico="palette" data-size="44" data-motion="hover" class="ic-red">🎨</span> Paint matching</h3>
+          <p>Bring a chip, a cabinet door or a photo of the wall. We scan it, mix it and hand you a test pot in about fifteen minutes. Your formula stays on file for touch-ups.</p>
+          <ul class="swatches" aria-label="Some house colors we mix often">
+            <li><i style="background:#8a2a1c"></i><span>Boxcar Red</span></li>
+            <li><i style="background:#2f5b44"></i><span>Millrace Green</span></li>
+            <li><i style="background:#c9a24a"></i><span>Brass Rail</span></li>
+            <li><i style="background:#b9c2bd"></i><span>Canal Fog</span></li>
+            <li><i style="background:#7b4a31"></i><span>Walt's Cardigan</span></li>
+            <li><i style="background:#eadfc4"></i><span>Plaster Dust</span></li>
+          </ul>
+          <ul class="price-list">
+            <li><span>Quart</span><span>$14.95</span></li>
+            <li><span>Gallon (match is free)</span><span>$38.99</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="svc" aria-labelledby="h-screen">
+        <div class="svc-photo plate-ico">
+          <span data-ico="columns" data-size="104" data-motion="hover" data-label="A window with two panes">🪟</span>
+          <div class="svc-price"><small>Re-screen from</small>$14.00</div>
+        </div>
+        <div class="svc-body">
+          <h3 id="h-screen"><span data-ico="ruler" data-size="44" data-motion="hover" class="ic-green">📏</span> Screen &amp; glass repair</h3>
+          <p>Bring the frame, not the whole window. Screens are re-meshed while you wait, glass is cut to size, and sash cords are replaced the same day.</p>
+          <ul class="price-list">
+            <li><span>Window screen, up to 36 in</span><span>$14.00</span></li>
+            <li><span>Door or slider screen</span><span>$22.00</span></li>
+            <li><span>Glass cut to size, per sq ft</span><span>$4.00</span></li>
+            <li><span>Sash cord, per window</span><span>$9.00</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="svc" aria-labelledby="h-rent">
+        <div class="svc-photo">
+          <img src="_img/hartwell-hardware/30413428-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+            alt="Close-up of a well-used cordless drill with a nail in its chuck, with more drills blurred behind it, against warm wood." style="object-position:40% 50%">
+          <div class="svc-price"><small>Rentals from</small>$10 / 4 hrs</div>
+        </div>
+        <div class="svc-body">
+          <h3 id="h-rent"><span data-ico="wrench" data-size="44" data-motion="hover" class="ic-red">🔧</span> Tool rental</h3>
+          <p>From a cordless hammer drill to a drum floor sander, by the half-day, day, weekend or week. Bring photo ID and a refundable deposit, and we'll show you how it works before you leave.</p>
+          <ul class="price-list">
+            <li><span>Hammer drill, 4 hours</span><span>$14.00</span></li>
+            <li><span>Shop vacuum, a day</span><span>$16.00</span></li>
+            <li><span>Pressure washer, weekend</span><span>$82.00</span></li>
+          </ul>
+          <div class="btn-row" style="margin-top:auto">
+            <a class="btn btn--green btn--sm" href="#rates"><span data-ico="receipt-text" data-size="28">🧾</span> See the rate card</a>
+            <a class="btn btn--sm" href="tel:+13305550142"><span data-ico="phone" data-size="28">📞</span> Reserve by phone</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="rent" id="rates">
+      <div class="tbl-wrap" tabindex="0" role="region" aria-label="Tool rental rate card">
+        <table class="tbl" id="rateTbl" role="table">
+          <caption>Tool rental rate card <small>Weekend runs Saturday 7 am to Monday 9 am. Deposits are refunded when the tool comes back clean.</small></caption>
+          <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Tool</th><th scope="col" role="columnheader">4 hrs</th><th scope="col" role="columnheader">Day</th><th scope="col" role="columnheader">Weekend</th><th scope="col" role="columnheader">Week</th><th scope="col" role="columnheader">Deposit</th></tr></thead>
+          <tbody role="rowgroup"></tbody>
+        </table>
+      </div>
+      <form class="est" id="estForm" action="#" aria-labelledby="h-est">
+        <h3 id="h-est"><span data-ico="calculator" data-size="36" class="ic-green" style="vertical-align:-8px">🧮</span> What will it cost?</h3>
+        <p class="form-note" style="margin:0">Pick a tool and a length of time. We'll add it up.</p>
+        <label for="estTool">Tool</label>
+        <select id="estTool"></select>
+        <label id="estPerLbl">For how long</label>
+        <div class="seg" role="radiogroup" aria-labelledby="estPerLbl">
+          <label><input type="radio" name="per" value="h4" checked><span>4 hrs</span></label>
+          <label><input type="radio" name="per" value="day"><span>Day</span></label>
+          <label><input type="radio" name="per" value="wk"><span>Weekend</span></label>
+          <label><input type="radio" name="per" value="week"><span>Week</span></label>
+        </div>
+        <div class="quote" aria-live="polite">
+          <span data-ico="tag" data-size="64" data-max-level="1">🏷️</span><span data-live="price-tag" data-p-amount="14" data-p-currency="usd" data-size="76" data-min-level="2" id="estTag" data-label="14 dollars">$14</span>
+          <div><strong id="estTotal">$14.00</strong><small id="estNote">plus a $50.00 refundable deposit.</small></div>
+        </div>
+        <a class="btn btn--red" id="estCall" href="tel:+13305550142"><span data-ico="phone-call" data-size="28">📞</span> Reserve it: (330) 555-0142</a>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASK WALT ============ -->
+<section class="sec" id="walt" aria-labelledby="h-walt">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="lightbulb" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 38</b> &middot; Free advice, since 1974</p><h2 id="h-walt">Ask Walt</h2></div>
+      <p>Walt has answered roughly four hundred thousand questions at this counter. Here are six of the usual ones, with the parts to match. Add them in one tap.</p>
+    </div>
+    <div class="walt">
+      <aside class="walt-card" aria-labelledby="h-ask">
+        <div class="walt-photo">
+          <img src="_img/hartwell-hardware/13460134-800.jpg" width="1200" height="1800" loading="lazy" decoding="async"
+            alt="A gray-haired man in glasses and a maroon polo shirt concentrates on fine woodwork with a small fretsaw, a plank clamped on the bench in front of him." style="object-position:50% 22%">
+          <div class="tag-stamp"><span data-ico="award" data-size="36" class="ic-red">🏅</span><span>Free advice<small>Always</small></span></div>
+        </div>
+        <div class="walt-body">
+          <blockquote>There's no such thing as a dumb question at this counter. There's just the one you didn't ask before you bought the wrong part.
+            <cite>Walt Hartwell, behind the counter since 1974</cite></blockquote>
+          <form id="askForm" action="#" novalidate>
+            <h3 id="h-ask" style="font-size:1.6rem;text-transform:uppercase;margin-bottom:12px"><span data-ico="message-square-text" data-size="34" class="ic-green" style="vertical-align:-8px">💬</span> Ask Walt a question</h3>
+            <div class="form-row two">
+              <label class="fld"><span>Your name</span><input id="aName" name="name" autocomplete="given-name" required><p class="err">Tell Walt who's asking.</p></label>
+              <label class="fld"><span>Email or phone</span><input id="aContact" name="contact" autocomplete="email" required><p class="err">Walt needs a way to reply.</p></label>
+            </div>
+            <div class="form-row" style="margin-top:12px">
+              <label class="fld"><span>What's it about?</span>
+                <select id="aTopic" name="topic"><option>Plumbing</option><option>Electrical</option><option>Paint &amp; finishes</option><option>Carpentry</option><option>Garden &amp; yard</option><option>Something else</option></select></label>
+              <label class="fld"><span>Your question</span><textarea id="aMsg" name="msg" required minlength="12" placeholder="What are you trying to fix, and what have you tried?"></textarea><p class="err">A sentence or two helps Walt: at least twelve characters.</p></label>
+            </div>
+            <div style="margin-top:14px"><button class="btn btn--green" type="submit"><span data-ico="send" data-size="28">✉️</span> Send to Walt</button></div>
+            <p class="form-note">Walt answers by hand, Monday to Saturday, usually before supper. We never share your details.</p>
+          </form>
+          <div class="ok-box" id="askOk" role="status" tabindex="-1">
+            <span data-ico="badge-check" data-size="72" class="ic-green" data-label="Sent">✔️</span>
+            <h3 id="askOkH">Sent to Walt</h3>
+            <p id="askOkP"></p>
+            <button class="btn btn--sm" type="button" id="askAgain">Ask another</button>
+          </div>
+        </div>
+      </aside>
+
+      <div>
+        <div class="tips">
+          <article class="tip" aria-labelledby="t1">
+            <div class="tip-head"><span class="tip-n">01</span><h3 id="t1">My toilet keeps running</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> 30 min</span><span><span data-ico="thumbs-up" data-size="22" data-fixed-style="line">👍</span> Easy</span><span><span data-ico="droplet" data-size="22" data-fixed-style="line">💧</span> Dept. D</span></div>
+            <ol>
+              <li>Shut the valve under the tank, then flush to empty it.</li>
+              <li>Unscrew the supply line and the big lock nut, and lift the old fill valve out.</li>
+              <li>Set the new one so its top sits an inch above the overflow tube. Hand-tight plus a quarter turn.</li>
+              <li>Reconnect, open the valve slowly, flush twice. Listen for the hiss to stop.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: PL-4012 fill valve, PL-4511 supply line. About $18.</span><button class="btn btn--green btn--sm" type="button" data-add="PL-4012,PL-4511"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add parts</button></div>
+          </article>
+
+          <article class="tip" aria-labelledby="t2">
+            <div class="tip-photo"><img src="_img/hartwell-hardware/5973909-700.jpg" width="1200" height="760" loading="lazy" decoding="async"
+              alt="Close-up of a hand marking a lumber plank with a pencil against a yellow tape measure." style="object-position:55% 60%"></div>
+            <div class="tip-head"><span class="tip-n">02</span><h3 id="t2">Measure twice, mark once</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> 5 min</span><span><span data-ico="thumbs-up" data-size="22" data-fixed-style="line">👍</span> Easy</span><span><span data-ico="ruler" data-size="22" data-fixed-style="line">📏</span> Dept. A</span></div>
+            <ol>
+              <li>Hook the tape on the board's end and pull it flat and tight.</li>
+              <li>Mark a sharp pencil V, not a line. The point is the measurement.</li>
+              <li>Cut on the waste side so the mark stays on your board.</li>
+              <li>The hook slides on purpose: its play equals its own thickness.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: HT-1207 tape measure, 25 ft.</span><button class="btn btn--green btn--sm" type="button" data-add="HT-1207"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add part</button></div>
+          </article>
+
+          <article class="tip" aria-labelledby="t3">
+            <div class="tip-photo"><img src="_img/hartwell-hardware/5853933-700.jpg" width="1200" height="786" loading="lazy" decoding="async"
+              alt="Four metal combination wrenches arranged in a row on a rustic wooden board." style="object-position:50% 50%"></div>
+            <div class="tip-head"><span class="tip-n">03</span><h3 id="t3">The bolt won't budge</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> 10 min</span><span><span data-ico="thumbs-up" data-size="22" data-fixed-style="line">👍</span> Easy</span><span><span data-ico="wrench" data-size="22" data-fixed-style="line">🔧</span> Dept. A</span></div>
+            <ol>
+              <li>A drop of penetrating oil, then go and make a coffee for ten minutes.</li>
+              <li>Use the closed end of the wrench. It grips all six sides.</li>
+              <li>Push with the heel of your hand. Pull and you'll skin a knuckle.</li>
+              <li>Still stuck? Tighten a hair first, then loosen.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: HT-1122 wrench set, 8 piece.</span><button class="btn btn--green btn--sm" type="button" data-add="HT-1122"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add part</button></div>
+          </article>
+
+          <article class="tip" aria-labelledby="t4">
+            <div class="tip-head"><span class="tip-n">04</span><h3 id="t4">Don't paint below 50&deg;F</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> A weekend</span><span><span data-ico="hard-hat" data-size="22" data-fixed-style="line">⛑️</span> Moderate</span><span><span data-ico="paintbrush" data-size="22" data-fixed-style="line">🖌️</span> Dept. C</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 0">
+              <span class="th-static" data-max-level="1"><span data-ico="thermometer" data-size="48">🌡️</span><b>50°F</b></span><span data-live="thermometer-level" data-p-value="50" data-p-unit="fahrenheit" data-p-level="0.5" data-p-scale="manual" data-size="64" data-min-level="2" data-label="Fifty degrees Fahrenheit, the minimum for latex paint">50°F</span>
+              <p style="margin:0;font:400 13.5px/1.4 var(--f-type)">Interior latex wants the air and the wall at 50&deg;F or warmer.</p>
+            </div>
+            <ol>
+              <li>Run the heat a day ahead and crack a window an inch for the fumes.</li>
+              <li>Tape the trim, and peel the tape while the paint is still wet.</li>
+              <li>Two thin coats beat one heavy one. Wait four hours between.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: PA-3001 paint, PA-3102 roller kit, PA-3205 tape.</span><button class="btn btn--green btn--sm" type="button" data-add="PA-3001,PA-3102,PA-3205"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add parts</button></div>
+          </article>
+
+          <article class="tip" aria-labelledby="t5">
+            <div class="tip-head"><span class="tip-n">05</span><h3 id="t5">Winterize the hose bib</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> 20 min</span><span><span data-ico="thumbs-up" data-size="22" data-fixed-style="line">👍</span> Easy</span><span><span data-ico="snowflake" data-size="22" data-fixed-style="line">❄️</span> Before frost</span></div>
+            <ol>
+              <li>Unscrew the hose, drain it, and coil it indoors.</li>
+              <li>Shut the inside valve that feeds the outside spigot, then open the spigot to drain.</li>
+              <li>Wrap the spigot in frost cloth and tie it off.</li>
+              <li>Leave the outside spigot open a crack so trapped water can expand.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: GD-6514 frost cloth, 20% off this week.</span><button class="btn btn--green btn--sm" type="button" data-add="GD-6514"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add part</button></div>
+          </article>
+
+          <article class="tip" aria-labelledby="t6">
+            <div class="tip-head"><span class="tip-n">06</span><h3 id="t6">Hang a heavy mirror on drywall</h3></div>
+            <div class="tip-meta"><span><span data-ico="timer" data-size="22" data-fixed-style="line">⏱️</span> 25 min</span><span><span data-ico="hard-hat" data-size="22" data-fixed-style="line">⛑️</span> Moderate</span><span><span data-ico="hexagon" data-size="22" data-fixed-style="line">🔩</span> Dept. G</span></div>
+            <ol>
+              <li>Knock for the studs, then mark them with painter's tape.</li>
+              <li>No stud where you need it? Use anchors rated for twice the mirror's weight.</li>
+              <li>Drill the pilot holes, set the anchors, and drive the screws until snug.</li>
+              <li>Hang it, then check it with a level before you let go.</li>
+            </ol>
+            <div class="tip-foot"><span class="parts">Parts: FS-7305 anchors, PT-2105 bit set.</span><button class="btn btn--green btn--sm" type="button" data-add="FS-7305,PT-2105"><span data-ico="shopping-cart-plus" data-size="24" data-fixed-style="line">🛒</span> Add parts</button></div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="clinic" aria-labelledby="h-clinic">
+      <div class="clinic-photo">
+        <img src="_img/hartwell-hardware/photo-1680798790180-540f147976d7-900.jpg" width="1200" height="1790" loading="lazy" decoding="async"
+          alt="A sunlit wooden workshop with a cluttered workbench and hand tools lined up on shelves above it." style="object-position:50% 58%">
+      </div>
+      <div class="clinic-body">
+        <p class="eyebrow"><b>Saturday fix-it clinic</b> &middot; Third Saturday, every month</p>
+        <h3 id="h-clinic">Bring the broken thing. Walt will show you how.</h3>
+        <p>A lamp that flickers, a drawer that sticks, a chair with one short leg. Two hours at the back bench with Walt and Meg, free, with coffee. You do the fixing, we hand you the tools.</p>
+        <div class="clinic-when">
+          <span data-ico="calendar-days" data-size="72" data-max-level="1">📅</span><span data-live="calendar-date" data-p-day="17" data-p-month="OCT" data-size="84" data-min-level="2" id="clinicCal" data-label="Saturday 17 October">17 Oct</span>
+          <p><b id="clinicDate">Saturday 17 October</b>10 am to 12 noon, at the back of the store.<br>No sign-up. Free.</p>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn--red" type="button" id="icsBtn"><span data-ico="calendar-plus" data-size="28">📅</span> Add to calendar</button>
+          <a class="btn" href="#walt" data-focus="aName"><span data-ico="message-square-text" data-size="28">💬</span> Ask a question first</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="sec sec--alt" id="visit" aria-labelledby="h-visit">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="map-pin" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 44</b> &middot; Where to find us</p><h2 id="h-visit">Come on in</h2></div>
+      <p>The brick building with the red door, one block up from the canal. Free parking behind the store, and the yard gate is on Mill Race Road.</p>
+    </div>
+    <div class="visit">
+      <div class="map-wrap">
+      <div class="map" role="img" aria-label="A hand-drawn map: Hartwell and Sons on Canal Street between Main Street and Mill Race Road, with a free parking lot behind it reached from Dowd Lane, and the lumber yard gate on Mill Race Road.">
+        <svg class="map-art" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <rect width="400" height="300" fill="#ece0bd"/>
+          <path d="M338,0 C322,40 352,70 336,110 C320,150 350,190 336,230 C326,262 344,282 338,300 L400,300 L400,0Z" fill="#9dbcab" stroke="#1c1913" stroke-width="1.5"/>
+          <g fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"><path d="M355,30 q10,-6 20,0 t20,0"/><path d="M352,120 q10,-6 20,0 t20,0"/><path d="M356,210 q10,-6 20,0 t20,0"/></g>
+          <g stroke="#1c1913" stroke-width="1.5" fill="#f9f3df">
+            <rect x="0" y="136" width="338" height="28"/>
+            <rect x="112" y="0" width="28" height="300"/>
+            <rect x="140" y="226" width="130" height="18"/>
+            <rect x="266" y="164" width="22" height="136"/>
+          </g>
+          <g fill="none" stroke="#1c1913" stroke-opacity=".35" stroke-dasharray="7 6"><path d="M0,150 H338"/><path d="M126,0 V300"/></g>
+          <rect x="22" y="70" width="70" height="46" fill="#d8cfae" stroke="#1c1913" stroke-width="1.5"/>
+          <rect x="22" y="184" width="70" height="42" fill="#d8cfae" stroke="#1c1913" stroke-width="1.5"/>
+          <rect x="22" y="246" width="70" height="40" fill="#bcd0a5" stroke="#1c1913" stroke-width="1.5"/>
+          <rect x="152" y="68" width="104" height="52" fill="#a52a1a" stroke="#1c1913" stroke-width="2.5"/>
+          <rect x="152" y="176" width="104" height="38" fill="#e3d6b3" stroke="#1c1913" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="296" y="176" width="34" height="96" fill="#cfb27a" stroke="#1c1913" stroke-width="1.5"/>
+          <rect x="152" y="252" width="104" height="36" fill="#d8cfae" stroke="#1c1913" stroke-width="1.5"/>
+          <g font-family="Courier Prime, Courier New, monospace" font-weight="700" fill="#1c1913">
+            <text x="204" y="93" text-anchor="middle" font-size="13" fill="#fff7e6" font-family="Rokkitt, Georgia, serif" font-weight="900">HARTWELL</text>
+            <text x="204" y="106" text-anchor="middle" font-size="11" fill="#fff7e6" font-family="Rokkitt, Georgia, serif" font-weight="900">&amp; SONS</text>
+            <text x="204" y="116" text-anchor="middle" font-size="7.5" fill="#f1cf7a">no. 214</text>
+            <text x="30" y="96" font-size="8.5">LIBRARY</text>
+            <text x="30" y="208" font-size="8.5">POST OFFICE</text>
+            <text x="30" y="268" font-size="8.5">PARK</text>
+            <text x="160" y="198" font-size="8.5">FREE PARKING</text>
+            <text x="160" y="272" font-size="8.5">BETTY'S DINER</text>
+            <text x="8" y="154" font-size="9" letter-spacing="1.4">CANAL STREET</text>
+            <text transform="translate(131,12) rotate(90)" font-size="9" letter-spacing="1.4">MAIN STREET</text>
+            <text x="186" y="238" font-size="8" letter-spacing="1">DOWD LANE</text>
+            <text transform="translate(281,172) rotate(90)" font-size="8" letter-spacing="1">MILL RACE RD</text>
+            <text x="304" y="228" font-size="8" transform="rotate(0)">YARD</text>
+            <text x="346" y="272" font-size="8" fill="#1c1913" transform="rotate(-90 352 272)">MILL RACE (CANAL)</text>
+          </g>
+          <g transform="translate(372,34)" fill="#1c1913" font-family="Courier Prime, monospace" font-weight="700"><path d="M0,-18 L6,2 L0,-3 L-6,2Z"/><text y="14" text-anchor="middle" font-size="9">N</text></g>
+        </svg>
+        <div class="pin" style="left:51%;top:23.5%"><span class="lvfb" data-max-level="1">1</span><span data-live="map-pin-number" data-p-param-label="1" data-size="46" data-min-level="2" data-label="Pin 1: Hartwell and Sons, 214 Canal Street">1</span></div>
+        <div class="pin" style="left:51%;top:59%"><span class="lvfb" data-max-level="1">2</span><span data-live="map-pin-number" data-p-param-label="2" data-size="46" data-min-level="2" data-label="Pin 2: free parking behind the store, off Dowd Lane">2</span></div>
+        <div class="pin" style="left:78.5%;top:59%"><span class="lvfb" data-max-level="1">3</span><span data-live="map-pin-number" data-p-param-label="3" data-size="46" data-min-level="2" data-label="Pin 3: lumber yard gate on Mill Race Road">3</span></div>
+      </div>
+      <p class="map-cap" aria-hidden="true"><b>1</b> Shop &middot; <b>2</b> Free parking &middot; <b>3</b> Yard gate &middot; Not to scale, but close</p>
+    </div>
+
+      <div>
+        <address class="addr">214 Canal Street<small>Pennock Falls, Ohio &middot; one block up from the canal, red door</small></address>
+        <ul class="dirs">
+          <li><span class="d-ico" data-ico="route" data-size="36">🛣️</span><span><b>From Route 30:</b> take Exit 12 for Pennock Falls, left on Main Street, right on Canal Street.</span></li>
+          <li><span class="d-ico" data-ico="parking" data-size="36">🅿️</span><span><b>Parking:</b> free lot behind the store. Turn into Dowd Lane, one block past the library.</span></li>
+          <li><span class="d-ico" data-ico="truck" data-size="36">🚚</span><span><b>Trucks and trailers:</b> use the yard gate on Mill Race Road, Monday to Saturday 7 to 5.</span></li>
+          <li><span class="d-ico" data-ico="bus" data-size="36">🚌</span><span><b>By bus:</b> the 14 stops at Canal and Main, a one-minute walk.</span></li>
+        </ul>
+        <table class="htable" id="htable">
+          <caption class="sr">Opening hours</caption>
+          <tbody>
+            <tr data-days="1,2,3,4,5,6"><th scope="row">Mon to Sat</th><td>7:00 am to 6:00 pm</td></tr>
+            <tr data-days="0"><th scope="row">Sunday</th><td>9:00 am to 3:00 pm</td></tr>
+            <tr><th scope="row">The yard</th><td>Mon to Sat, 7 am to 5 pm</td></tr>
+          </tbody>
+        </table>
+        <div class="btn-row">
+          <button class="btn btn--green" type="button" id="copyAddr"><span data-ico="copy" data-size="28">📋</span> Copy the address</button>
+          <a class="btn" href="tel:+13305550142"><span data-ico="phone" data-size="28">📞</span> (330) 555-0142</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCAL PRIDE ============ -->
+<section class="sec" id="about" aria-labelledby="h-about">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="eyebrow"><span data-ico="handshake" data-size="22" class="ic-brass" data-min-level="2"></span><b>Page 47</b> &middot; Our story</p><h2 id="h-about">Three generations, one counter</h2></div>
+      <p>We're a small shop in a small town, and we'd like to keep it that way.</p>
+    </div>
+    <div class="pride">
+      <div>
+      <figure class="pride-photo">
+        <img src="_img/hartwell-hardware/photo-1426927308491-6380b6a9936f-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+          alt="A wooden tool wall with hand planes, chisels, screwdrivers, saws and pliers hung in tidy rows." style="object-position:50% 45%">
+        <span class="seal" data-min-level="2"><span data-ico="badge-check" data-size="40" data-motion="hover"></span></span>
+        <figcaption><b>Plate 4.</b> The tool wall by the paint counter. Everything on it is for sale, except the red-handled plane. Photo: Barn Images, Unsplash.</figcaption>
+      </figure>
+        <ul class="facts" style="margin-top:34px">
+          <li><span data-ico="key" data-size="40" class="ic-red">🔑</span><span><b>90,000</b><small>keys cut since 1996</small></span></li>
+          <li><span data-ico="trophy" data-size="40" class="ic-green">🏆</span><span><b>Since 1968</b><small>Little League sponsor</small></span></li>
+          <li><span data-ico="boxes" data-size="40" class="ic-brass">📦</span><span><b>14,000+</b><small>items on the shelves</small></span></li>
+          <li><span data-ico="handshake" data-size="40" class="ic-green">🤝</span><span><b>10% off</b><small>for veterans, always</small></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pennock Falls has been fixing things here since 1952</h3>
+        <p>Harold Hartwell opened with one counter, six kegs of nails and a hand-lettered sign. His sons Walt and Ray joined the counter and the sign got longer. Today Walt's daughter Meg runs the books and her brother Tom runs the yard, and Walt still takes the questions nobody else can answer.</p>
+        <p>We sponsor the Pennock Falls Hammers, we run the Saturday fix-it clinic at the back bench, and we've never charged a neighbor for advice.</p>
+<ol class="timeline" aria-label="Our history">
+          <li><b>1952</b> Harold opens at 214 Canal Street with a counter and six kegs of nails.</li>
+          <li><b>1974</b> Walt, aged seventeen, starts behind the counter. The first of four hundred thousand questions.</li>
+          <li><b>1979</b> Ray joins. The sign gets painted: Hartwell &amp; Sons.</li>
+          <li><b>1996</b> The paint counter and key machine arrive. The line gets longer.</li>
+          <li><b>2008</b> Meg and Tom take over the books and the yard.</li>
+          <li><b>2026</b> The web shop opens. The phone still rings first.</li>
+        </ol>
+
+      </div>
+    </div>
+
+    <h3 style="font-size:clamp(1.9rem,3.4vw,2.6rem);text-transform:uppercase;margin-top:56px">What the neighbors say</h3>
+    <div class="rating-big" style="margin-top:14px">
+      <span class="rt-static" data-max-level="1"><span data-ico="star" data-size="44" class="ic-brass">⭐</span><b>4.5</b></span><span data-live="rating-stars" data-p-rating="4.5" data-p-layout="score" data-size="88" data-min-level="2" data-label="4.5 out of 5 stars">★ 4.5</span>
+      <p><b>4.5 out of 5</b>from 612 reviews on the Pennock Falls neighborhood board</p>
+    </div>
+    <div class="reviews">
+      <figure class="rev" style="margin:0">
+        <div class="rev-head"><span data-ico="avatar-older-woman" data-size="56" data-label="Dolores M.">👵</span><span><b>Dolores M.</b><small>Larkfield Street, since 1988</small></span></div>
+        <p>"Walt talked me through the toilet at nine at night over the phone. Parts were waiting the next morning in a paper bag with my name on it."</p>
+        <span class="stars"><span class="sr">Rated 5 out of 5</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span></span>
+      </figure>
+      <figure class="rev" style="margin:0">
+        <div class="rev-head"><span data-ico="avatar-man-cap" data-size="56" data-label="Ray T.">🧢</span><span><b>Ray T.</b><small>Contractor, two trucks</small></span></div>
+        <p>"I order the lumber by phone before 4 and the blue truck is on site by noon. Never short a stud in nine years."</p>
+        <span class="stars"><span class="sr">Rated 5 out of 5</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span></span>
+      </figure>
+      <figure class="rev" style="margin:0">
+        <div class="rev-head"><span data-ico="avatar-teen" data-size="56" data-label="Priya K.">🧑</span><span><b>Priya K.</b><small>First apartment, third repair</small></span></div>
+        <p>"Went in not knowing what a fill valve was. Left with one, a roll of tape and a hand-drawn diagram. Fixed it in twenty minutes."</p>
+        <span class="stars"><span class="sr">Rated 5 out of 5</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span><span data-ico="star" data-size="20" data-fixed-style="solid" aria-hidden="true">★</span></span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ CREDITS ============ -->
+<section id="credits" aria-labelledby="h-credits">
+  <div class="wrap">
+    <h2 id="h-credits">Photo credits</h2>
+    <ul>
+      <li>The shop back wall (hero, Plate 1): Photo by <a href="https://www.pexels.com/@t6adventures">T6 Adventures</a> on <a href="https://www.pexels.com/photo/16472137/">Pexels</a></li>
+      <li>Hammers on weathered boards (hand tools ad): Photo by <a href="https://unsplash.com/@roblaughter?utm_source=withicons_demos&amp;utm_medium=referral">Rob Laughter</a> on <a href="https://unsplash.com/photos/a-group-of-hammers-and-a-hammer-on-a-wooden-surface-Okg5ne7l-Vg?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Four combination wrenches (tip 03): Photo by <a href="https://www.pexels.com/@shkrabaanthony">Antoni Shkraba</a> on <a href="https://www.pexels.com/photo/5853933/">Pexels</a></li>
+      <li>Open tins of paint (paint matching): Photo by <a href="https://unsplash.com/@ximenaphoto?utm_source=withicons_demos&amp;utm_medium=referral">Ximena Balderas</a> on <a href="https://unsplash.com/photos/a-close-up-of-a-group-of-paint-cans-XwCMpO5TkRc?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Bins of nuts and bolts (fasteners ad): Photo by <a href="https://www.pexels.com/@joaquinrr">Joaquin Reyes Ramos</a> on <a href="https://www.pexels.com/photo/38575500/">Pexels</a></li>
+      <li>Sunlit workshop bench (Saturday clinic): Photo by <a href="https://unsplash.com/@lawrnsky?utm_source=withicons_demos&amp;utm_medium=referral">Lawrence Chismorie</a> on <a href="https://unsplash.com/photos/a-workbench-in-a-wooden-cabin-with-lots-of-tools-gKvDtyVPNYw?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Row of vintage hand saws (catalogue banner, Plate 3): Photo by <a href="https://www.pexels.com/@ffd-restorations-400571257">FFD Restorations</a> on <a href="https://www.pexels.com/photo/15018793/">Pexels</a></li>
+      <li>Pencil mark on a tape measure (tip 02): Photo by <a href="https://www.pexels.com/@ono-kosuki">Ono Kosuki</a> on <a href="https://www.pexels.com/photo/5973909/">Pexels</a></li>
+      <li>Cordless drill (tool rental): Photo by <a href="https://www.pexels.com/@christina99999">Christina &amp; Peter</a> on <a href="https://www.pexels.com/photo/30413428/">Pexels</a></li>
+      <li>Yellow garden tools (garden ad): Photo by <a href="https://unsplash.com/@lmfeliciano?utm_source=withicons_demos&amp;utm_medium=referral">Luis Feliciano</a> on <a href="https://unsplash.com/photos/a-row-of-yellow-garden-tools-sitting-on-top-of-a-wooden-floor-9EH5AkClwZ0?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Lumber stacked at the yard (lumber ad): Photo by <a href="https://www.pexels.com/@nc-farm-bureau-mark">Mark Stebnicki</a> on <a href="https://www.pexels.com/photo/12278566/">Pexels</a></li>
+      <li>Filing a key blank (key cutting): Photo by <a href="https://www.pexels.com/@my-car-key-hero-592675237">My Car Key Hero</a> on <a href="https://www.pexels.com/photo/17124735/">Pexels</a></li>
+      <li>The tool wall (our story, Plate 4): Photo by <a href="https://unsplash.com/@barnimages?utm_source=withicons_demos&amp;utm_medium=referral">Barn Images</a> on <a href="https://unsplash.com/photos/assorted-handheld-tools-in-tool-rack-t5YUoHW6zRo?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Heritage tool cabinet (department index, Plate 2): Photo by <a href="https://www.pexels.com/@volker-morr-57769261">Volker Morr</a> on <a href="https://www.pexels.com/photo/32209162/">Pexels</a></li>
+      <li>Woodworker with a fretsaw (Ask Walt): Photo by <a href="https://www.pexels.com/@fadime-demirtas-42037863">Fadime Demirta&scedil;</a> on <a href="https://www.pexels.com/photo/13460134/">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT license. Fonts: Rokkitt and Courier Prime, via Google Fonts.</p>
+    <p>Hartwell &amp; Sons is a fictional shop. The people, the street names, the prices, the part numbers and the phone number are all made up for this demo.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="fm">Hartwell <i>&amp;</i> Sons</p>
+        <p>Neighborhood hardware since 1952.<br>214 Canal Street, Pennock Falls, Ohio</p>
+        <p><a href="tel:+13305550142" style="font:700 1.5rem var(--f-slab)">(330) 555-0142</a></p>
+      </div>
+      <div>
+        <h3>Hours</h3>
+        <ul><li>Mon to Sat: 7 am to 6 pm</li><li>Sunday: 9 am to 3 pm</li><li>The yard: Mon to Sat, 7 to 5</li></ul>
+      </div>
+      <div>
+        <h3>Departments</h3>
+        <ul><li><a href="#catalogue" data-dept="A">Hand tools</a></li><li><a href="#catalogue" data-dept="B">Power tools</a></li><li><a href="#catalogue" data-dept="C">Paint</a></li><li><a href="#catalogue" data-dept="D">Plumbing</a></li></ul>
+      </div>
+      <div>
+        <h3>The shop</h3>
+        <ul><li><a href="#services">Key cutting</a></li><li><a href="#rates">Tool rental</a></li><li><a href="#walt">Ask Walt</a></li><li><a href="#about">Our story</a></li></ul>
+      </div>
+    </div>
+    <p class="foot-legal">Demo page made with with icons (withicons.com). Names, places and products are fictional. Pick-up orders on this page are a demonstration and are not sent anywhere.</p>
+  </div>
+</footer>
+
+<!-- ============ BASKET ============ -->
+<button class="pill" id="pill" type="button" aria-haspopup="dialog" aria-controls="basket"><span data-ico="shopping-basket" data-size="30">🛒</span><span id="pillTxt">Basket</span></button>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="basket" role="dialog" aria-modal="true" aria-labelledby="basketTitle" aria-hidden="true">
+  <div class="dr-head">
+    <span data-ico="shopping-basket" data-size="36">🛒</span>
+    <h2 id="basketTitle">Pick-up basket</h2>
+    <button class="dr-x" id="basketClose" type="button" aria-label="Close the basket"><span data-ico="close" data-size="24" data-fixed-style="line">✕</span></button>
+  </div>
+  <div class="dr-body">
+    <div id="basketView">
+      <div class="ready">
+        <span data-ico="clock" data-size="60" data-max-level="1">🕒</span><span data-live="clock-time" data-p-time="15:40" data-size="60" data-min-level="2" id="readyClock" data-label="Ready at 3:40 pm">🕒</span>
+        <p>Earliest pick-up<b id="readyTxt">today at 3:40 pm</b><span id="readyNote">Two hours after you place the order.</span></p>
+      </div>
+      <div class="basket-empty" id="basketEmpty">
+        <span data-ico="package-open" data-size="84" class="ic-brass">📦</span>
+        <h3 style="font-size:1.7rem;text-transform:uppercase;margin:10px 0 6px">Nothing in here yet</h3>
+        <p>Add a few parts from the catalogue and we'll start pulling them.</p>
+        <button class="btn btn--green btn--sm" type="button" data-go="catalogue"><span data-ico="book-open" data-size="28">📖</span> Browse the catalogue</button>
+      </div>
+      <ul class="lines" id="lines"></ul>
+      <div class="sum" id="sum"></div>
+      <form id="coForm" action="#" novalidate hidden>
+        <div class="form-row">
+          <label class="fld"><span>Name for the pick-up shelf</span><input id="cName" name="name" autocomplete="name" required><p class="err">We need a name to write on the bag.</p></label>
+          <label class="fld"><span>Phone, so we can call you</span><input id="cPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(330) 555-0100" required><p class="err">Please give a phone number with at least ten digits.</p></label>
+        </div>
+        <div style="margin-top:14px"><button class="btn btn--red" type="submit" style="width:100%"><span data-ico="check-circle" data-size="30">✅</span> Place pick-up order</button></div>
+        <p class="form-note">You pay at the counter, with cash, card or a house account. No card details are asked for here, and nothing on this demo page is actually sent.</p>
+      </form>
+    </div>
+    <div class="ok-box" id="orderOk" role="status" tabindex="-1">
+      <span class="tk-static" data-max-level="1"><span data-ico="ticket" data-size="72">🎫</span><b id="ticketNoS">417</b></span><span data-live="ticket-number" data-p-number="417" data-p-hash="true" data-size="104" data-min-level="2" id="ticketNo" data-label="Order number 417">🎫 417</span>
+      <h3 id="okH">Order placed</h3>
+      <p id="okP"></p>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn btn--sm" type="button" id="okNew">Start another order</button>
+        <button class="btn btn--green btn--sm" type="button" id="okClose">Back to the shop</button>
+      </div>
+    </div>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="_kit/demo-kit.js" data-style="engrave" data-recommend="engrave,blueprint,retro,sketch,line,bauhaus,solid,brutal" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var escRe = function (s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }
+  var money = function (n) { return '$' + n.toFixed(2) }
+  var pad = function (n) { return String(n).padStart(2, '0') }
+  var store = { get: function (k) { try { return sessionStorage.getItem(k) } catch (e) { return null } }, set: function (k, v) { try { sessionStorage.setItem(k, v) } catch (e) {} } }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Basic-level emoji: size the fallback glyph to the slot so big icons do not shrink to body text (this runs before the kit)
+  $$('[data-ico][data-size]').forEach(function (el) { var s = parseFloat(el.dataset.size); if (s >= 30) el.style.fontSize = Math.round(s * 0.7) + 'px' })
+
+  // update a live icon (and its Basic fallback text) whether or not the kit has initialised it yet
+  function live(el, params, text, label) {
+    if (!el) return
+    Object.keys(params).forEach(function (k) { el.setAttribute('data-p-' + k, params[k]) })
+    if (label != null) { el.setAttribute('data-label', label); if (el._kit && el._kit.wi) el._kit.wi.setAttribute('label', label) }
+    var fb = $('.kit-fb', el)
+    if (fb) fb.textContent = text; else if (!el._kit) el.textContent = text
+    if (el._kit && window.WithKit) window.WithKit.setLive(el, params)
+  }
+  var toastT = 0
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg; t.classList.add('on')
+    clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on') }, 2600)
+  }
+
+  /* ================= data ================= */
+  var DEPTS = {
+    A: { n: 'Hand tools', ic: 'hammer', em: '🔨', aisle: 'Aisles 1-2', an: [1, 2] },
+    B: { n: 'Power tools', ic: 'zap', em: '⚡', aisle: 'Aisle 3', an: [3] },
+    C: { n: 'Paint', ic: 'paintbrush', em: '🖌️', aisle: 'Aisle 4', an: [4] },
+    D: { n: 'Plumbing', ic: 'droplet', em: '💧', aisle: 'Aisle 5', an: [5] },
+    E: { n: 'Electrical', ic: 'lightbulb', em: '💡', aisle: 'Aisle 6', an: [6] },
+    F: { n: 'Garden', ic: 'sprout', em: '🌱', aisle: 'Aisle 7', an: [7] },
+    G: { n: 'Fasteners', ic: 'hexagon', em: '🔩', aisle: 'Aisle 8', an: [8] },
+    H: { n: 'Lumber', ic: 'tree-pine', em: '🌲', aisle: 'The yard', an: [] }
+  }
+  var ORDER = Object.keys(DEPTS)
+  // dept, part no, name, spec, unit, price, stock (ok | low:n | so), extra search words, on sale (20% off)
+  var RAW = [
+    ['A', 'HT-1016', 'Claw hammer, 16 oz', 'Hickory handle, drop-forged head, curved claw', 'each', 18.95, 'ok', 'nail pound'],
+    ['A', 'HT-1122', 'Combination wrench set', '8 piece, SAE 3/8 to 3/4 in, chrome vanadium, roll pouch', 'set', 34.50, 'ok', 'wrenches'],
+    ['A', 'HT-1207', 'Tape measure, 25 ft', '1 in blade, magnetic hook, belt clip', 'each', 12.75, 'ok', 'ruler measuring'],
+    ['A', 'HT-1310', 'Screwdriver set', '6 piece, slotted and Phillips, magnetic tips', 'set', 16.95, 'ok', 'phillips flathead'],
+    ['A', 'HT-1445', 'Hand saw, 15 in', 'Crosscut, 8 teeth per inch, hardwood handle', 'each', 22.00, 'low:3', 'handsaw'],
+    ['A', 'HT-1561', 'Wood chisel set', '4 piece: 1/4, 1/2, 3/4 and 1 in, beech handles', 'set', 39.95, 'ok', ''],
+    ['A', 'HT-1604', 'Spirit level, 24 in', '3 vials, aluminum frame', 'each', 17.50, 'ok', 'level'],
+    ['B', 'PT-2018', 'Cordless drill/driver, 18 V', 'Two batteries, charger and carry case', 'each', 119.00, 'ok', 'power drill'],
+    ['B', 'PT-2105', 'Drill bit set', '29 piece, titanium-coated, indexed case', 'set', 24.95, 'ok', 'bits'],
+    ['B', 'PT-2211', 'Circular saw, 7-1/4 in', '15 amp corded, 24-tooth carbide blade', 'each', 79.00, 'low:2', ''],
+    ['B', 'PT-2307', 'Random-orbit sander, 5 in', 'Dust bag, hook-and-loop pads', 'each', 54.50, 'ok', 'sanding'],
+    ['B', 'PT-2412', 'Jigsaw, variable speed', 'Tool-free blade change, 3 blades', 'each', 64.00, 'so', ''],
+    ['B', 'PT-2520', 'Extension cord, 50 ft', '14/3 outdoor rated, lighted end', 'each', 29.95, 'ok', 'power lead'],
+    ['C', 'PA-3001', 'Interior latex paint, eggshell', 'Gallon, tintable base: any color, matched free', 'gal', 38.99, 'ok', 'wall color'],
+    ['C', 'PA-3014', 'Exterior latex paint, satin', 'Gallon, mildew-resistant, tintable', 'gal', 44.99, 'ok', 'outside'],
+    ['C', 'PA-3102', 'Roller kit, 9 in', 'Frame, three covers, tray', 'kit', 13.95, 'ok', ''],
+    ['C', 'PA-3120', 'Angled sash brush, 2-1/2 in', 'Polyester bristles for trim and cutting in', 'each', 11.50, 'ok', 'paintbrush'],
+    ['C', 'PA-3205', "Painter's tape", '1.41 in x 60 yd, blue, 14-day release', 'roll', 6.95, 'ok', 'masking'],
+    ['C', 'PA-3310', 'Canvas drop cloth', '4 x 15 ft, heavyweight', 'each', 16.95, 'ok', 'tarp cover'],
+    ['D', 'PL-4012', 'Toilet fill valve', 'Universal, fits most 2 in tanks', 'each', 9.95, 'ok', 'running toilet tank'],
+    ['D', 'PL-4108', 'Faucet washer and O-ring kit', '100 pieces in a sorted tray', 'kit', 7.95, 'ok', 'drip faucet leak'],
+    ['D', 'PL-4215', 'PTFE thread tape', '1/2 in x 520 in, 3 pack', 'pack', 4.50, 'ok', 'plumbers tape teflon'],
+    ['D', 'PL-4320', 'Pipe wrench, 14 in', 'Adjustable, forged jaw', 'each', 29.95, 'low:4', ''],
+    ['D', 'PL-4404', 'Drain auger, 25 ft', 'Hand-crank snake for sinks and tubs', 'each', 21.95, 'ok', 'clog blocked'],
+    ['D', 'PL-4511', 'Braided supply line', '3/8 x 20 in, stainless, toilet or faucet', 'each', 8.25, 'ok', 'hose connector'],
+    ['E', 'EL-5010', 'LED bulb, A19', '60 W equivalent, soft white, 4 pack', 'pack', 7.95, 'ok', 'light lamp'],
+    ['E', 'EL-5104', 'Receptacle, 15 A', 'Tamper-resistant duplex outlet, white', 'each', 2.95, 'ok', 'outlet socket'],
+    ['E', 'EL-5201', 'Toggle switch, single pole', '15 A, white', 'each', 2.25, 'ok', 'light switch'],
+    ['E', 'EL-5309', 'Wire connectors', 'Assorted sizes, 100 pieces', 'box', 5.95, 'ok', 'wire nuts'],
+    ['E', 'EL-5415', 'Voltage tester', 'Non-contact, beeps and lights', 'each', 17.95, 'ok', ''],
+    ['E', 'EL-5522', 'Surge-protected power strip', '6 outlets, 6 ft cord', 'each', 14.95, 'ok', 'extension'],
+    ['F', 'GD-6003', 'Leaf rake', '24 tines, poly head, 48 in handle', 'each', 21.95, 'ok', 'leaves fall', 1],
+    ['F', 'GD-6101', 'Round-point shovel', 'Ash handle, 48 in', 'each', 28.95, 'ok', 'spade digging'],
+    ['F', 'GD-6212', 'Garden gloves', 'Goatskin, pair, sizes M to XL', 'pair', 11.95, 'ok', 'work gloves', 1],
+    ['F', 'GD-6320', 'Garden hose', '5/8 in x 50 ft, brass fittings', 'each', 32.50, 'low:3', 'watering'],
+    ['F', 'GD-6407', 'Bypass pruning shears', '8 in, hardened steel blades', 'each', 19.95, 'ok', 'pruners clippers'],
+    ['F', 'GD-6514', 'Frost cloth', '10 x 12 ft, protects plants to 28°F', 'each', 14.95, 'low:5', 'frost cover winter', 1],
+    ['G', 'FS-7001', 'Deck screws, #8 x 2-1/2 in', 'Exterior coated, sold by the pound', 'lb', 6.25, 'ok', 'screw'],
+    ['G', 'FS-7012', 'Common nails, 16d', 'Bright finish, sold by the pound', 'lb', 2.95, 'ok', 'nail'],
+    ['G', 'FS-7108', 'Hex bolt, 3/8-16 x 2 in', 'Zinc plated, with nut', 'each', 0.65, 'ok', 'bolts nut'],
+    ['G', 'FS-7220', 'Wood screw assortment', '300 pieces in a sorted case', 'case', 16.95, 'ok', 'screw'],
+    ['G', 'FS-7305', 'Drywall anchors with screws', '50 pieces, rated 50 lb each', 'box', 5.95, 'ok', 'wall plugs'],
+    ['G', 'FS-7418', 'Cabinet hinge, brushed nickel', 'Self-closing, pair with screws', 'pair', 6.75, 'ok', 'door hinges'],
+    ['H', 'LB-8002', 'Stud, 2 x 4 x 8 ft', 'Kiln-dried spruce-pine-fir', 'each', 4.95, 'ok', '2x4 lumber wood'],
+    ['H', 'LB-8010', 'Board, 2 x 6 x 8 ft', 'Kiln-dried spruce-pine-fir', 'each', 8.25, 'ok', '2x6 lumber wood'],
+    ['H', 'LB-8105', 'Pine board, 1 x 6 x 6 ft', 'Select grade, smooth faced', 'each', 11.95, 'ok', '1x6 shelf lumber wood'],
+    ['H', 'LB-8220', 'Plywood, 3/4 in, 4 x 8 ft', 'Sanded birch face, yard pick-up or delivery', 'sheet', 74.00, 'low:6', 'sheet wood'],
+    ['H', 'LB-8311', 'Cedar fence picket, 6 ft', 'Dog-ear top, rough sawn', 'each', 3.95, 'ok', 'fencing wood'],
+    ['H', 'LB-8420', 'Poplar dowel, 1 in x 36 in', 'Smooth, for rails and rods', 'each', 4.25, 'so', 'rod wood']
+  ]
+  var ITEMS = RAW.map(function (r) {
+    var sale = !!r[8], price = sale ? Math.round(r[5] * 80) / 100 : r[5]
+    var st = r[6].split(':')
+    return { d: r[0], pn: r[1], name: r[2], spec: r[3], unit: r[4], was: r[5], price: price, sale: sale, stock: st[0], left: +st[1] || 0, kw: r[7] || '' }
+  })
+  var BY = {}; ITEMS.forEach(function (i) { BY[i.pn] = i })
+  // one closest glyph per part (the library has no drill or saw, so the nearest honest picture; the text always says what it is)
+  var IC = {
+    'HT-1016': ['hammer', '🔨'], 'HT-1122': ['wrench', '🔧'], 'HT-1207': ['ruler', '📏'], 'HT-1310': ['pipette', '🪛'], 'HT-1445': ['scissors', '🪚'], 'HT-1561': ['pen-tool', '🛠️'], 'HT-1604': ['scale', '📐'],
+    'PT-2018': ['battery-charging', '🔋'], 'PT-2105': ['settings-2', '🔩'], 'PT-2211': ['settings', '🪚'], 'PT-2307': ['layers', '🛠️'], 'PT-2412': ['sliders', '🪚'], 'PT-2520': ['plug', '🔌'],
+    'PA-3001': ['palette', '🎨'], 'PA-3014': ['home', '🏠'], 'PA-3102': ['layers', '🖌️'], 'PA-3120': ['paintbrush', '🖌️'], 'PA-3205': ['circle-dot', '🧻'], 'PA-3310': ['square', '🧺'],
+    'PL-4012': ['toilet', '🚽'], 'PL-4108': ['circle', '⭕'], 'PL-4215': ['link', '🧵'], 'PL-4320': ['wrench', '🔧'], 'PL-4404': ['route', '🪠'], 'PL-4511': ['link-2', '🔗'],
+    'EL-5010': ['lightbulb', '💡'], 'EL-5104': ['plug', '🔌'], 'EL-5201': ['toggle', '🔘'], 'EL-5309': ['circuit-board', '🔗'], 'EL-5415': ['zap', '⚡'], 'EL-5522': ['plug-zap', '🔌'],
+    'GD-6003': ['leaf', '🍂'], 'GD-6101': ['shovel', '⛏️'], 'GD-6212': ['hand', '🧤'], 'GD-6320': ['droplets', '💦'], 'GD-6407': ['scissors', '✂️'], 'GD-6514': ['snowflake', '❄️'],
+    'FS-7001': ['rotate-cw', '🔩'], 'FS-7012': ['pin', '📌'], 'FS-7108': ['hexagon', '🔩'], 'FS-7220': ['boxes', '📦'], 'FS-7305': ['anchor', '⚓'], 'FS-7418': ['door-open', '🚪'],
+    'LB-8002': ['columns', '🪵'], 'LB-8010': ['ruler', '🪵'], 'LB-8105': ['tree-pine', '🌲'], 'LB-8220': ['layers', '🪵'], 'LB-8311': ['signpost', '🪵'], 'LB-8420': ['pencil', '🪵']
+  }
+  var UNIT = { each: '', set: '/set', pair: '/pair', gal: '/gal', lb: '/lb', pack: '/pack', kit: '/kit', box: '/box', roll: '/roll', case: '/case', sheet: '/sheet' }
+  var RENTALS = [
+    ['Cordless hammer drill', 14, 22, 38, 75, 50],
+    ['Drum floor sander', 38, 58, 98, 200, 150],
+    ['Wet/dry shop vacuum, 12 gal', 10, 16, 26, 52, 25],
+    ['Wet tile saw, 10 in', 28, 44, 76, 150, 100],
+    ['Pressure washer, 3000 psi', 30, 48, 82, 165, 100],
+    ['Extension ladder, 28 ft', 12, 18, 30, 60, 50],
+    ['Gas leaf blower and vacuum', 14, 22, 36, 70, 40],
+    ['Post-hole auger, two-person', 34, 52, 90, 180, 100]
+  ]
+
+  /* ================= hours: open now, today's row ================= */
+  var HOURS = { 0: [9, 15], 1: [7, 18], 2: [7, 18], 3: [7, 18], 4: [7, 18], 5: [7, 18], 6: [7, 18] }
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  var fmtH = function (h) { return (h % 12 || 12) + ' ' + (h >= 12 ? 'pm' : 'am') }
+  function fmtT(d) { var h = d.getHours(), m = d.getMinutes(); return (h % 12 || 12) + ':' + pad(m) + ' ' + (h >= 12 ? 'pm' : 'am') }
+  function openState(d) {
+    var o = HOURS[d.getDay()][0], c = HOURS[d.getDay()][1], m = d.getHours() + d.getMinutes() / 60
+    if (m >= o && m < c) return { open: true, text: 'Open, until ' + fmtH(c) }
+    if (m < o) return { open: false, text: 'Closed, opens at ' + fmtH(o) }
+    var nd = (d.getDay() + 1) % 7
+    return { open: false, text: 'Closed, opens ' + (nd === 0 ? 'Sunday' : 'tomorrow') + ' ' + fmtH(HOURS[nd][0]) }
+  }
+  function tickHours() {
+    var now = new Date(), s = openState(now)
+    $('#openNow').classList.toggle('is-open', s.open)
+    $('#openTxt').textContent = s.text
+    $$('#htable tr[data-days]').forEach(function (tr) { tr.classList.toggle('today', tr.dataset.days.split(',').indexOf(String(now.getDay())) >= 0) })
+  }
+  tickHours(); setInterval(tickHours, 60000)
+
+  /* ================= pick-up time ================= */
+  function readySlot(now) {
+    for (var i = 0; i < 8; i++) {
+      var day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i), h = HOURS[day.getDay()]
+      var open = new Date(day.getFullYear(), day.getMonth(), day.getDate(), h[0]), close = new Date(day.getFullYear(), day.getMonth(), day.getDate(), h[1])
+      if (i === 0 && now >= close) continue
+      var fromOpen = open > now, start = fromOpen ? open : now
+      var t = new Date(Math.ceil((start.getTime() + 120 * 60000) / 300000) * 300000)
+      if (t <= close) return { t: t, i: i, fromOpen: fromOpen, open: h[0] }
+    }
+    return null
+  }
+  function readyText(s) { return (s.i === 0 ? 'today' : s.i === 1 ? 'tomorrow' : DAYS[s.t.getDay()]) + ' at ' + fmtT(s.t) }
+
+  /* ================= the basket ================= */
+  var cart = {}
+  try { cart = JSON.parse(store.get('hw-cart') || '{}') || {} } catch (e) { cart = {} }
+  Object.keys(cart).forEach(function (k) { if (!BY[k] || !(cart[k] > 0)) delete cart[k] })
+  var TAX = 0.0725
+  var count = function () { return Object.keys(cart).reduce(function (a, k) { return a + cart[k] }, 0) }
+  var subtotal = function () { return Object.keys(cart).reduce(function (a, k) { return a + cart[k] * BY[k].price }, 0) }
+  function save() { store.set('hw-cart', JSON.stringify(cart)) }
+  function addItem(pn, n) { if (BY[pn]) { cart[pn] = Math.min(99, (cart[pn] || 0) + (n || 1)); save(); paintCart() } }
+
+  function paintCart() {
+    var n = count(), sub = subtotal()
+    live($('#cartBadge'), { count: n }, '🛒 ' + n, n ? 'Basket: ' + n + (n === 1 ? ' item' : ' items') : 'Basket is empty')
+    $('#cartNum').textContent = n
+    $('#navTotal').textContent = money(sub)
+    var pill = $('#pill')
+    $('#pillTxt').textContent = 'Basket, ' + n + (n === 1 ? ' item' : ' items') + ', ' + money(sub)
+    pill.classList.toggle('show', n > 0 && !drawerOn)
+    var keys = Object.keys(cart)
+    $('#basketEmpty').hidden = keys.length > 0
+    $('#sum').hidden = $('#lines').hidden = $('#coForm').hidden = keys.length === 0
+    $('#lines').innerHTML = keys.map(function (k) {
+      var i = BY[k], q = cart[k]
+      return '<li class="line"><div><b>' + esc(i.name) + '</b><small>' + esc(i.pn) + ' &middot; ' + money(i.price) + (UNIT[i.unit] || '') + (i.sale ? ' &middot; sale price' : '') + '</small>' +
+        '<div class="qty"><button type="button" data-q-dec="' + k + '" aria-label="One fewer ' + esc(i.name) + '"><span data-ico="minus" data-size="20" data-fixed-style="line">&minus;</span></button><output aria-live="polite">' + q + '</output>' +
+        '<button type="button" data-q-inc="' + k + '" aria-label="One more ' + esc(i.name) + '"><span data-ico="plus" data-size="20" data-fixed-style="line">+</span></button></div></div>' +
+        '<div><div class="lt">' + money(i.price * q) + '</div><button class="rm" type="button" data-rm="' + k + '" aria-label="Remove ' + esc(i.name) + ' from the basket"><span data-ico="trash-2" data-size="24" data-fixed-style="line">🗑️</span></button></div></li>'
+    }).join('')
+    var tax = Math.round(sub * TAX * 100) / 100
+    $('#sum').innerHTML = '<div><span>Items (' + n + ')</span><span>' + money(sub) + '</span></div><div><span>Pick-up</span><span>Free</span></div><div><span>Sales tax, est. 7.25%</span><span>' + money(tax) + '</span></div><div class="tot"><span>Pay at the counter</span><span>' + money(sub + tax) + '</span></div>'
+    paintReady()
+  }
+  function paintReady() {
+    var s = readySlot(new Date()); if (!s) return
+    var hhmm = pad(s.t.getHours()) + ':' + pad(s.t.getMinutes())
+    $('#readyTxt').textContent = readyText(s)
+    $('#readyNote').textContent = s.fromOpen ? 'We start the two hours when we open at ' + fmtH(s.open) + '.' : 'Two hours from now, if you order in the next few minutes.'
+    live($('#readyClock'), { time: hhmm }, '🕒', 'Ready ' + readyText(s))
+  }
+
+  var drawerOn = false, lastFocus = null
+  var BG = ['.skip', '.ann', '.mast', '.nav', '#main', '#credits', '.foot']
+  function lockBg(on) {
+    BG.forEach(function (sel) { var el = $(sel); if (el) { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert') } })
+    document.documentElement.classList.toggle('drawer-open', on)
+  }
+  function openDrawer(from) {
+    lastFocus = from || document.activeElement
+    drawerOn = true
+    $('#toast').classList.remove('on')
+    $('#orderOk').classList.remove('show'); $('#basketView').hidden = false
+    paintCart(); paintReady()
+    $('#basket').classList.add('on'); $('#basket').setAttribute('aria-hidden', 'false'); $('#scrim').classList.add('on')
+    $('#pill').classList.remove('show')
+    lockBg(true)
+    setTimeout(function () { $('#basketClose').focus() }, 60)
+  }
+  function closeDrawer() {
+    if (!drawerOn) return
+    drawerOn = false
+    $('#basket').classList.remove('on'); $('#basket').setAttribute('aria-hidden', 'true'); $('#scrim').classList.remove('on')
+    lockBg(false)
+    paintCart()
+    if (lastFocus && lastFocus.focus) lastFocus.focus()
+  }
+  $('#basketBtn').addEventListener('click', function (e) { openDrawer(e.currentTarget) })
+  $('#pill').addEventListener('click', function (e) { openDrawer(e.currentTarget) })
+  $('#basketClose').addEventListener('click', closeDrawer)
+  $('#scrim').addEventListener('click', closeDrawer)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrawer()
+    if (e.key === 'Tab' && drawerOn) {
+      var f = $$('button,input,a[href],select,textarea', $('#basket')).filter(function (x) { return !x.disabled && x.offsetParent !== null })
+      if (!f.length) return
+      var first = f[0], last = f[f.length - 1], ae = document.activeElement
+      if (e.shiftKey && (ae === first || !$('#basket').contains(ae))) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && ae === last) { e.preventDefault(); first.focus() }
+    }
+    if (e.key === '/' && !drawerOn && !/^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName || '') && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); gotoCatalogue(true) }
+  })
+  setInterval(function () { if (drawerOn) paintReady() }, 30000)
+
+  $('#lines').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return
+    var k = b.dataset.qInc || b.dataset.qDec || b.dataset.rm; if (!k) return
+    if (b.dataset.qInc) cart[k] = Math.min(99, cart[k] + 1)
+    else if (b.dataset.qDec) cart[k] = Math.max(0, cart[k] - 1)
+    else cart[k] = 0
+    if (cart[k] <= 0) delete cart[k]
+    save(); paintCart()
+    var again = $('[data-q-inc="' + k + '"]') || $('#basketClose'); if (again) again.focus()
+  })
+
+  // checkout
+  function setBad(input, bad) { var f = input.closest('.fld'); f.classList.toggle('bad', bad); input.setAttribute('aria-invalid', bad ? 'true' : 'false') }
+  var orderNo = parseInt(store.get('hw-order') || '416', 10)
+  $('#coForm').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = $('#cName'), phone = $('#cPhone')
+    var okName = name.value.trim().length >= 2, okPhone = phone.value.replace(/\D/g, '').length >= 10
+    setBad(name, !okName); setBad(phone, !okPhone)
+    if (!okName) return name.focus()
+    if (!okPhone) return phone.focus()
+    var s = readySlot(new Date()); var n = count(), sub = subtotal(), total = sub + Math.round(sub * TAX * 100) / 100
+    orderNo += 1; store.set('hw-order', String(orderNo))
+    live($('#ticketNo'), { number: orderNo }, '🎫 ' + orderNo, 'Order number ' + orderNo)
+    $('#ticketNoS').textContent = orderNo
+    var first = name.value.trim().split(/\s+/)[0]
+    $('#okH').textContent = 'Order placed, ' + first
+    $('#okP').innerHTML = 'We are pulling your <b>' + n + (n === 1 ? ' item' : ' items') + '</b> now. ' + (n === 1 ? 'It' : 'They') + ' will be bagged on the pick-up shelf <b>' + readyText(s) + '</b>, and we will call <b>' + esc(phone.value.trim()) + '</b> when ' + (n === 1 ? 'it is' : 'they are') + ' ready. Give your name and order number <b>' + orderNo + '</b> at the counter and pay there: <b>' + money(total) + '</b>, tax included.'
+    cart = {}; save(); paintCart()
+    $('#basketView').hidden = true
+    var ok = $('#orderOk'); ok.classList.add('show'); ok.focus()
+    $('#coForm').reset()
+  })
+  ;[$('#cName'), $('#cPhone')].forEach(function (i) { i.addEventListener('input', function () { if (i.getAttribute('aria-invalid') === 'true') setBad(i, false) }) })
+  $('#okNew').addEventListener('click', function () { $('#orderOk').classList.remove('show'); $('#basketView').hidden = false; paintCart(); closeDrawer(); gotoCatalogue(false) })
+  $('#okClose').addEventListener('click', closeDrawer)
+
+  /* ================= the catalogue: built once, then filtered in place ================= */
+  // The 49 rows (and their icons) are created a single time. Search, chips, sort and the checkboxes only toggle [hidden]
+  // and move existing nodes, so icons never re-initialise (no flash back to the emoji) and typing stays cheap on phones.
+  var state = { q: '', dept: '', sort: 'dept', stock: false, sale: false }
+  var rx = null, layout = '', rt = 0, openG = {}
+  var SORT_TITLE = { pn: 'By part number', name: 'By name, A to Z', low: 'Lowest price first', high: 'Highest price first' }
+  var sorters = {
+    pn: function (a, b) { return a.pn.localeCompare(b.pn) },
+    name: function (a, b) { return a.name.localeCompare(b.name) },
+    low: function (a, b) { return a.price - b.price },
+    high: function (a, b) { return b.price - a.price }
+  }
+  var narrow = window.matchMedia ? matchMedia('(max-width: 700px)') : { matches: false }
+  var FOLD = 3 // rows shown per department on a phone until "Show all"
+
+  // "aisle 6" is a phrase matched against the department's aisle numbers; bare numbers match whole numbers only ("6" is not "16 oz")
+  function parseQuery(q) {
+    var aisles = [], s = String(q).toLowerCase().replace(/\baisles?\s*#?\s*(\d+)/g, function (m, n) { aisles.push(+n); return ' ' })
+    return { aisles: aisles, toks: s.split(/[\s,]+/).filter(function (t) { return t && !/^aisles?$/.test(t) }) }
+  }
+  function hay(i) { return (i.name + ' ' + i.spec + ' ' + i.pn + ' ' + DEPTS[i.d].n + (i.d === 'H' ? ' yard' : '') + ' ' + i.kw + (i.sale ? ' sale' : '')).toLowerCase() }
+  function matches(i, p) {
+    if (p.aisles.length && !p.aisles.every(function (n) { return DEPTS[i.d].an.indexOf(n) >= 0 })) return false
+    var h = i._h || (i._h = hay(i))
+    return p.toks.every(function (t) {
+      if (/^\d+$/.test(t)) return new RegExp('(^|[^0-9a-z])' + t + '([^0-9a-z]|$)').test(h)
+      return h.indexOf(t) >= 0 || (t.length > 3 && /s$/.test(t) && h.indexOf(t.slice(0, -1)) >= 0)
+    })
+  }
+  function pool(ignoreDept, p) {
+    p = p || parseQuery(state.q)
+    return ITEMS.filter(function (i) {
+      return (ignoreDept || !state.dept || i.d === state.dept) && (!state.stock || i.stock !== 'so') && (!state.sale || i.sale) && matches(i, p)
+    })
+  }
+  function buildRx(toks) {
+    if (!toks.length) return null
+    var parts = []
+    toks.forEach(function (t) {
+      parts.push(/^\d+$/.test(t) ? '(?<![0-9a-z])' + t + '(?![0-9a-z])' : escRe(t))
+      if (t.length > 3 && /s$/.test(t) && !/^\d+$/.test(t)) parts.push(escRe(t.slice(0, -1)))
+    })
+    try { return new RegExp(parts.sort(function (a, b) { return b.length - a.length }).join('|'), 'gi') } catch (e) { return null }
+  }
+  function hl(text) {
+    if (!rx) return esc(text)
+    var out = '', last = 0
+    text.replace(rx, function (m, idx) { out += esc(text.slice(last, idx)) + '<mark>' + esc(m) + '</mark>'; last = idx + m.length; return m })
+    return out + esc(text.slice(last))
+  }
+  function stockHtml(i) {
+    if (i.stock === 'low') return '<span class="stock low">Only ' + i.left + ' left</span>'
+    if (i.stock === 'so') return '<span class="stock so">Special order, 2 days</span>'
+    return '<span class="stock ok">In stock</span>'
+  }
+
+  var rowEls = {}, G = {}
+  function buildRow(i) {
+    var d = IC[i.pn] ? { ic: IC[i.pn][0], em: IC[i.pn][1] } : DEPTS[i.d]
+    var price = money(i.price) + (UNIT[i.unit] ? '<small>' + UNIT[i.unit] + '</small>' : '')
+    var was = i.sale ? ' <span class="price-old" aria-label="was ' + money(i.was) + '"><small>' + money(i.was) + '</small></span>' : ''
+    var li = document.createElement('li'); li.className = 'row'
+    li.innerHTML = '<span class="r-ico" data-ico="' + d.ic + '" data-size="30">' + d.em + '</span>' +
+      '<div><div class="r-line"><span class="r-name"></span><span class="r-dots" aria-hidden="true"></span><span class="r-price">' + price + was + '</span></div>' +
+      '<div class="r-sub"><span class="pn"></span> &middot; <span class="r-spec"></span> &middot; ' + stockHtml(i) + (i.sale ? '<span class="sale-tag">SALE -20%</span>' : '') + '</div></div>' +
+      '<button class="add" type="button" data-pn="' + i.pn + '" aria-label="Add ' + esc(i.name) + ' to the pick-up basket"><span data-ico="plus" data-size="24" data-fixed-style="line">+</span></button>'
+    li._n = $('.r-name', li); li._p = $('.pn', li); li._s = $('.r-spec', li)
+    li._n.textContent = i.name; li._p.textContent = i.pn; li._s.textContent = i.spec
+    return li
+  }
+  function buildGroups() {
+    var host = $('#catList'), frag = document.createDocumentFragment()
+    ITEMS.forEach(function (i) { rowEls[i.pn] = buildRow(i) })
+    function group(k, head, label) {
+      var sec = document.createElement('section'); sec.className = 'grp'; sec.hidden = true
+      if (label) sec.setAttribute('aria-label', label)
+      sec.innerHTML = '<div class="grp-h">' + head + '<span class="aisle"></span></div><ul class="rows"></ul><button class="grp-more" type="button" aria-expanded="false" hidden></button>'
+      G[k] = { sec: sec, ul: $('.rows', sec), cnt: $('.aisle', sec), more: $('.grp-more', sec), h3: $('h3', sec) }
+      frag.appendChild(sec)
+    }
+    ORDER.forEach(function (k) {
+      var d = DEPTS[k]
+      group(k, '<span class="letter" aria-hidden="true">' + k + '</span><span data-ico="' + d.ic + '" data-size="34" aria-hidden="true">' + d.em + '</span><h3>' + esc(d.n) + '</h3>', d.n)
+    })
+    group('*', '<h3></h3>')
+    host.appendChild(frag)
+    G['*'].more.remove()
+    ORDER.forEach(function (k) { G[k].more.addEventListener('click', function () { openG[k] = !openG[k]; render() }) })
+  }
+  // reorder the existing nodes only when the sort changes (not on every keystroke)
+  function placeRows() {
+    if (layout === state.sort) return
+    layout = state.sort
+    if (layout === 'dept') ORDER.forEach(function (k) { ITEMS.forEach(function (i) { if (i.d === k) G[k].ul.appendChild(rowEls[i.pn]) }) })
+    else ITEMS.slice().sort(sorters[layout]).forEach(function (i) { G['*'].ul.appendChild(rowEls[i.pn]) })
+    G['*'].h3.textContent = SORT_TITLE[layout] || ''
+  }
+  function paintRow(i, el) {
+    var key = rx ? rx.source : ''
+    if (el._hl === key) return
+    el._hl = key
+    el._n.innerHTML = hl(i.name); el._p.innerHTML = hl(i.pn); el._s.innerHTML = hl(i.spec)
+  }
+  var plural = function (n, w) { return n + ' ' + w + (n === 1 ? '' : 's') }
+
+  function render() {
+    clearTimeout(rt)
+    var p = parseQuery(state.q), list = pool(false, p)
+    rx = buildRx(p.toks)
+    placeRows()
+    var flat = state.sort !== 'dept'
+    var fold = !flat && !state.q && !state.dept && !state.stock && !state.sale && narrow.matches
+    var show = {}; list.forEach(function (i) { show[i.pn] = 1 })
+    ITEMS.forEach(function (i) { var el = rowEls[i.pn], on = !!show[i.pn]; if (el.hidden === on) el.hidden = !on; if (on) paintRow(i, el) })
+    ORDER.concat(['*']).forEach(function (k) {
+      var g = G[k], isFlat = k === '*', rows = $$('.row:not([hidden])', g.ul)
+      var hide = isFlat !== flat || !rows.length
+      if (g.sec.hidden !== hide) g.sec.hidden = hide
+      if (hide) return
+      rows.forEach(function (el, n) { el.classList.toggle('r-left', n % 2 === 0); el.classList.toggle('fold', fold && n >= FOLD && !openG[k]) })
+      g.cnt.textContent = (isFlat ? '' : DEPTS[k].aisle + ' · ') + plural(rows.length, 'item')
+      if (!isFlat) {
+        var over = fold && rows.length > FOLD
+        g.more.hidden = !over
+        g.more.setAttribute('aria-expanded', String(!!openG[k]))
+        g.more.textContent = openG[k] ? 'Show fewer' : 'Show all ' + rows.length + ' ' + DEPTS[k].n.toLowerCase()
+      }
+    })
+    emptyState(list.length === 0)
+    // meta line
+    var depts = {}; list.forEach(function (i) { depts[i.d] = 1 })
+    var bits = []
+    if (state.q) bits.push('matching &ldquo;' + esc(state.q) + '&rdquo;'); if (state.dept) bits.push('in ' + DEPTS[state.dept].n); if (state.stock) bits.push('in stock'); if (state.sale) bits.push('on sale')
+    $('#catMeta').innerHTML = '<b>' + list.length + '</b> of ' + ITEMS.length + ' listed items' + (bits.length ? ', ' + bits.join(', ') : ', in ' + Object.keys(depts).length + ' departments') + (state.q || state.dept || state.stock || state.sale ? ' &middot; <a href="#catalogue" data-reset>Show everything</a>' : '')
+    // chips and tile counts
+    var others = pool(true, p)
+    $$('#deptChips .chip').forEach(function (c) {
+      var k = c.dataset.dept, n = k ? others.filter(function (i) { return i.d === k }).length : others.length
+      $('.n', c).textContent = '(' + n + ')'
+      c.setAttribute('aria-pressed', String((state.dept || '') === k))
+    })
+    $('#qClear').hidden = !state.q
+  }
+  function renderSoon() { clearTimeout(rt); rt = setTimeout(render, 120) }
+
+  // nothing found: say which filters did it and offer one-click ways out
+  function emptyState(on) {
+    var box = $('#catEmpty'); box.hidden = !on
+    if (!on) return
+    var d = state.dept ? DEPTS[state.dept].n : '', filt = state.dept || state.sale || state.stock
+    var title
+    if (state.q) title = 'Nothing matching “' + state.q + '”' + (state.sale ? ' on sale' : '') + (state.stock ? ', in stock' : '') + (d ? ' in ' + d : '')
+    else if (state.sale) title = 'No sale items' + (d ? ' in ' + d : '') + (state.stock ? ' in stock' : '')
+    else if (state.stock) title = 'Nothing in stock' + (d ? ' in ' + d : '')
+    else title = 'Nothing on the list'
+    $('#emptyH').textContent = title
+    $('#emptyP').textContent = state.q
+      ? 'We only list the best sellers here, and the shop stocks over 14,000 items. Phone the counter on (330) 555-0142, or ask Walt: he knows where everything lives.'
+      : (state.sale && state.dept !== 'F' ? 'This week’s sale is rakes, gloves and frost cloth, all in Garden. Turn the filters off, or phone the counter on (330) 555-0142.' : 'Nothing on the price list fits those filters. Loosen one, or phone the counter on (330) 555-0142.')
+    var btn = function (attrs, text) { return '<button class="btn btn--sm" type="button" ' + attrs + '>' + text + '</button>' }
+    var h = btn('data-clear', state.q && filt ? 'Clear everything' : state.q ? 'Clear the search' : 'Clear filters')
+    if (state.sale) h += btn('data-fix="sale"', 'Turn off On sale')
+    if (state.stock) h += btn('data-fix="stock"', 'Turn off In stock today')
+    if (state.dept && state.q) h += btn('data-fix="nodept"', 'Search every department')
+    if (state.dept && (state.sale || state.stock) && !state.q) h += btn('data-fix="alldept"', 'Show all ' + d)
+    h += '<a class="btn btn--green btn--sm" href="#walt">Ask Walt</a><a class="btn btn--sm" href="tel:+13305550142">Call the counter</a>'
+    $('#emptyFix').innerHTML = h
+  }
+  function resetChecks() { $('#inStock').checked = state.stock; $('#onSale').checked = state.sale }
+
+  buildGroups()
+  ORDER.forEach(function (k) { var n = ITEMS.filter(function (i) { return i.d === k }).length; var el = $('[data-cnt="' + k + '"]'); if (el) el.textContent = n + ' items' })
+  if (narrow.addEventListener) narrow.addEventListener('change', function () { render() })
+
+  function gotoCatalogue(focus) {
+    var s = $('#catalogue'); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+    if (focus) setTimeout(function () { $('#q').focus({ preventScroll: true }) }, 350)
+  }
+  function setQuery(v, opts) {
+    state.q = v; $('#q').value = v; $('#hq').value = v
+    if (opts && opts.resetDept) state.dept = ''
+    render()
+  }
+  $('#q').addEventListener('input', function () { state.q = this.value; $('#hq').value = this.value; $('#qClear').hidden = !state.q; renderSoon() })
+  $('#qClear').addEventListener('click', function () { setQuery('', {}); $('#q').focus() })
+  $('#sort').addEventListener('change', function () { state.sort = this.value; render() })
+  $('#inStock').addEventListener('change', function () { state.stock = this.checked; render() })
+  $('#onSale').addEventListener('change', function () { state.sale = this.checked; render() })
+  // hero quick search
+  $('#hq').addEventListener('input', function () {
+    var v = this.value.trim(), h = $('#hqHint')
+    if (!v) { h.textContent = 'Quick search covers every listed item by name, part number and aisle.'; return }
+    var p = parseQuery(v), n = ITEMS.filter(function (i) { return matches(i, p) }).length
+    h.textContent = n ? n + (n === 1 ? ' item matches' : ' items match') + '. Press Enter to see ' + (n === 1 ? 'it' : 'them') + ' in the catalogue.' : 'No match yet. Try a shorter word, or phone the counter.'
+  })
+  $('#heroSearch').addEventListener('submit', function (e) {
+    e.preventDefault(); state.stock = false; state.sale = false; resetChecks()
+    setQuery($('#hq').value.trim(), { resetDept: true }); gotoCatalogue(false)
+  })
+
+  // delegated clicks
+  document.addEventListener('click', function (e) {
+    var t = e.target
+    var add = t.closest('[data-pn]')
+    if (add) { addItem(add.dataset.pn, 1); add.classList.remove('bump'); void add.offsetWidth; add.classList.add('bump'); toast('Added: ' + BY[add.dataset.pn].name + ' (basket: ' + count() + ')'); return }
+    var multi = t.closest('[data-add]')
+    if (multi) { var ids = multi.dataset.add.split(','); ids.forEach(function (p) { addItem(p.trim(), 1) }); toast(ids.length === 1 ? 'Added: ' + BY[ids[0]].name + ' (basket: ' + count() + ')' : 'Added ' + ids.length + ' parts to your basket (' + count() + ' items)'); return }
+    if (t.closest('[data-open-basket]')) { openDrawer(t.closest('[data-open-basket]')); return }
+    var fix = t.closest('[data-fix]')
+    if (fix) {
+      var w = fix.dataset.fix
+      if (w === 'sale') state.sale = false
+      else if (w === 'stock') state.stock = false
+      else if (w === 'nodept') state.dept = ''
+      else if (w === 'alldept') { state.q = ''; state.sale = false; state.stock = false; $('#q').value = ''; $('#hq').value = '' }
+      resetChecks(); render(); return
+    }
+    var dept = t.closest('[data-dept]')
+    if (dept) {
+      var k = dept.dataset.dept
+      if (dept.classList.contains('chip')) state.dept = state.dept === k ? '' : k
+      else { state.dept = k; state.q = ''; $('#q').value = ''; $('#hq').value = ''; state.sale = false; state.stock = false; resetChecks() }
+      render(); return
+    }
+    var q = t.closest('[data-q]')
+    if (q) { if (q.tagName === 'A') e.preventDefault(); state.dept = ''; state.stock = false; state.sale = false; resetChecks(); setQuery(q.dataset.q, {}); gotoCatalogue(false); return }
+    if (t.closest('[data-sale]')) { e.preventDefault(); state.q = ''; state.dept = ''; state.sale = true; resetChecks(); $('#q').value = ''; $('#hq').value = ''; render(); gotoCatalogue(false); return }
+    if (t.closest('[data-clear],[data-reset]')) {
+      e.preventDefault(); state = { q: '', dept: '', sort: state.sort, stock: false, sale: false }
+      $('#q').value = ''; $('#hq').value = ''; resetChecks(); render(); return
+    }
+    var go = t.closest('[data-go]')
+    if (go) { closeDrawer(); gotoCatalogue(false); return }
+    var fo = t.closest('[data-focus]')
+    if (fo) { var id = fo.dataset.focus; setTimeout(function () { var el = document.getElementById(id); if (el) el.focus({ preventScroll: true }) }, 500) }
+  })
+
+  /* ================= tool rental estimator ================= */
+  var PER = { h4: 1, day: 2, wk: 3, week: 4 }
+  var PER_NAME = { h4: 'four hours', day: 'a day', wk: 'the weekend', week: 'a week' }
+  $('#rateTbl tbody').innerHTML = RENTALS.map(function (r, i) {
+    return '<tr role="row" data-i="' + i + '"><td role="cell"><button type="button" class="tbl-pick" data-pick="' + i + '">' + esc(r[0]) + '</button></td><td role="cell" data-label="4 hrs">$' + r[1] + '</td><td role="cell" data-label="Day">$' + r[2] + '</td><td role="cell" data-label="Weekend">$' + r[3] + '</td><td role="cell" data-label="Week">$' + r[4] + '</td><td role="cell" data-label="Deposit"><b>$' + r[5] + '</b></td></tr>'
+  }).join('')
+  $('#estTool').innerHTML = RENTALS.map(function (r, i) { return '<option value="' + i + '">' + esc(r[0]) + '</option>' }).join('')
+  function quote() {
+    var i = +$('#estTool').value, per = ($('input[name="per"]:checked') || {}).value || 'h4', r = RENTALS[i], amt = r[PER[per]]
+    live($('#estTag'), { amount: amt }, '$' + amt, amt + ' dollars')
+    $('#estTotal').textContent = money(amt)
+    $('#estNote').textContent = 'for ' + PER_NAME[per] + ', plus a ' + money(r[5]) + ' refundable deposit that comes back with the tool.'
+    $$('#rateTbl tbody tr').forEach(function (tr) { tr.classList.toggle('sel', +tr.dataset.i === i) })
+  }
+  $('#estForm').addEventListener('change', quote)
+  $('#estForm').addEventListener('submit', function (e) { e.preventDefault() })
+  $('#rateTbl').addEventListener('click', function (e) { var b = e.target.closest('[data-pick]'); if (b) { $('#estTool').value = b.dataset.pick; quote(); $('#estForm').scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }) } })
+  quote()
+
+  /* ================= Saturday clinic: next third Saturday + a real .ics ================= */
+  function thirdSat(y, m) { var dow = new Date(y, m, 1).getDay(); return new Date(y, m, 1 + ((6 - dow + 7) % 7) + 14, 10, 0, 0) }
+  function nextClinic(now) {
+    var d = thirdSat(now.getFullYear(), now.getMonth())
+    if (new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0) < now) d = thirdSat(now.getFullYear(), now.getMonth() + 1)
+    return d
+  }
+  var clinic = nextClinic(new Date())
+  var clinicTxt = 'Saturday ' + clinic.getDate() + ' ' + MONTHS[clinic.getMonth()]
+  live($('#clinicCal'), { day: clinic.getDate(), month: MONTHS[clinic.getMonth()].slice(0, 3).toUpperCase() }, clinic.getDate() + ' ' + MONTHS[clinic.getMonth()].slice(0, 3), clinicTxt)
+  $('#clinicDate').textContent = clinicTxt
+  function ymd(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) }
+  function buildIcs() {
+    var s = new Date(clinic), stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Hartwell and Sons Hardware//Fix-it Clinic//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+      'UID:fixit-' + ymd(s) + '@hartwell-hardware.example', 'DTSTAMP:' + stamp, 'DTSTART:' + ymd(s) + 'T100000', 'DTEND:' + ymd(s) + 'T120000',
+      'SUMMARY:Hartwell & Sons Saturday Fix-it Clinic', 'LOCATION:214 Canal Street\\, Pennock Falls\\, Ohio',
+      'DESCRIPTION:Bring the broken thing. Walt shows you how to fix it. Free\\, with coffee. No sign-up.', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n') + '\r\n'
+  }
+  $('#icsBtn').addEventListener('click', function () {
+    var blob = new Blob([buildIcs()], { type: 'text/calendar;charset=utf-8' }), a = document.createElement('a')
+    a.href = URL.createObjectURL(blob); a.download = 'hartwell-fixit-clinic-' + ymd(clinic) + '.ics'; document.body.appendChild(a); a.click()
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove() }, 500)
+    toast('Calendar file downloaded: ' + clinicTxt + ', 10 am')
+  })
+
+  /* ================= ask Walt ================= */
+  $('#askForm').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var n = $('#aName'), c = $('#aContact'), m = $('#aMsg')
+    var okN = n.value.trim().length >= 2, okC = /\S+@\S+\.\S+/.test(c.value) || c.value.replace(/\D/g, '').length >= 10, okM = m.value.trim().length >= 12
+    setBad(n, !okN); setBad(c, !okC); setBad(m, !okM)
+    if (!okN) return n.focus(); if (!okC) return c.focus(); if (!okM) return m.focus()
+    $('#askOkH').textContent = 'Sent to Walt, ' + n.value.trim().split(/\s+/)[0]
+    $('#askOkP').textContent = 'Your ' + $('#aTopic').value.toLowerCase() + ' question is on his bench. Walt answers by hand, usually before supper, to ' + c.value.trim() + '. Keep the broken part handy.'
+    $('#askForm').hidden = true; var ok = $('#askOk'); ok.classList.add('show'); ok.focus()
+  })
+  ;['#aName', '#aContact', '#aMsg'].forEach(function (s) { var i = $(s); i.addEventListener('input', function () { if (i.getAttribute('aria-invalid') === 'true') setBad(i, false) }) })
+  $('#askAgain').addEventListener('click', function () { $('#askForm').reset(); $('#askForm').hidden = false; $('#askOk').classList.remove('show'); $('#aMsg').focus() })
+
+  /* ================= small things ================= */
+  $('#copyAddr').addEventListener('click', function () {
+    var text = 'Hartwell & Sons Hardware, 214 Canal Street, Pennock Falls, Ohio'
+    function done() { toast('Address copied') }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fb); else fb()
+    function fb() { var ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done() } catch (e) { toast(text) } ta.remove() }
+  })
+  var navL = $('.nav-links')
+  function navMore() { navL.classList.toggle('more', navL.scrollLeft + navL.clientWidth < navL.scrollWidth - 4) }
+  navL.addEventListener('scroll', navMore, { passive: true }); window.addEventListener('resize', navMore)
+  navMore(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(navMore)
+  if ('IntersectionObserver' in window) {
+    var links = {}; $$('.nav-links a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a })
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { var a = links[en.target.id]; if (a && en.isIntersecting) { Object.keys(links).forEach(function (k) { links[k].classList.remove('on') }); a.classList.add('on') } }) }, { rootMargin: '-30% 0px -60% 0px' })
+    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s) })
+  }
+
+  render(); paintCart()
+})()
+</script>
+</body>
+</html>

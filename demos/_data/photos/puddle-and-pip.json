@@ -1,0 +1,316 @@
+{
+  "slug": "puddle-and-pip",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "3761522",
+      "page": "https://www.pexels.com/photo/3761522/",
+      "url": "https://images.pexels.com/photos/3761522/pexels-photo-3761522.jpeg",
+      "photographer": "Andrea Piacquadio",
+      "photographerUrl": "https://www.pexels.com/@olly",
+      "alt": "A smiling red-haired girl in a yellow raincoat holds a bright yellow umbrella and gives a thumbs up on a wet, tree-lined street on a grey rainy day.",
+      "colors": "sunshine yellow, wet grey, soft green",
+      "focal": "50% 45%",
+      "notes": "Landscape 3:2 (6000x4000). Joyful and smiling in the rain, which is the brief. Girl sits dead centre under the umbrella, so put the headline on a solid sticker panel at the left or shift object-position to the right; the blurred street either side is calm space. Yellow is the only saturated colour, so it pops against the sticker palette. Face is visible (thumbs-up pose).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/3761522-300.jpg",
+        "600": "_img/puddle-and-pip/3761522-600.jpg",
+        "1000": "_img/puddle-and-pip/3761522-1000.jpg"
+      }
+    },
+    {
+      "slot": "raincoat",
+      "src": "pexels",
+      "id": "14753847",
+      "page": "https://www.pexels.com/photo/14753847/",
+      "url": "https://images.pexels.com/photos/14753847/pexels-photo-14753847.jpeg",
+      "photographer": "Atahan Demir",
+      "photographerUrl": "https://www.pexels.com/@atahandemir",
+      "alt": "A small child in a yellow hooded raincoat with gathered reflective cuffs and pink rubber boots walks along a wet street in the rain, seen in profile with the hood up.",
+      "colors": "mustard yellow, raspberry pink, teal-grey, warm amber bokeh",
+      "focal": "42% 55%",
+      "notes": "Portrait 2:3 (4160x6240). Whole coat is visible (hood, toggles, cuff), face hidden, no logos. Moody evening street with bokeh, so keep it for a product tile or the grow-with-me cuff explainer, and avoid laying text over the dark top.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/14753847-300.jpg",
+        "600": "_img/puddle-and-pip/14753847-600.jpg",
+        "1000": "_img/puddle-and-pip/14753847-1000.jpg"
+      }
+    },
+    {
+      "slot": "boots",
+      "src": "pexels",
+      "id": "12932484",
+      "page": "https://www.pexels.com/photo/12932484/",
+      "url": "https://images.pexels.com/photos/12932484/pexels-photo-12932484.jpeg",
+      "photographer": "Atlantic Ambience",
+      "photographerUrl": "https://www.pexels.com/@freestockpro",
+      "alt": "Two children in bright rubber boots, one pair turquoise and one blue with red-and-white soles and toe caps, stand in a puddle among fallen autumn leaves.",
+      "colors": "turquoise, navy, autumn orange",
+      "focal": "50% 50%",
+      "notes": "Landscape 3:2. No faces, no logos. Turquoise adds the sky-blue the yellow-heavy set needs. Works as a product tile or a wide strip behind the boots collection.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/12932484-300.jpg",
+        "600": "_img/puddle-and-pip/12932484-600.jpg"
+      }
+    },
+    {
+      "slot": "sweater",
+      "src": "pexels",
+      "id": "6816484",
+      "page": "https://www.pexels.com/photo/6816484/",
+      "url": "https://images.pexels.com/photos/6816484/pexels-photo-6816484.jpeg",
+      "photographer": "Ivan S",
+      "photographerUrl": "https://www.pexels.com/@ivan-s",
+      "alt": "A toddler boy in a rust-orange bobble-knit sweater holds up a long paintbrush and looks off to the side against a softly blurred shelf of books.",
+      "colors": "rust orange, cream, soft blue",
+      "focal": "50% 40%",
+      "notes": "Portrait 2:3. Face is visible but turned away. Crop chest-up for cards; the bobble knit sells the cosy layers.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/6816484-300.jpg",
+        "600": "_img/puddle-and-pip/6816484-600.jpg"
+      }
+    },
+    {
+      "slot": "overalls",
+      "src": "pexels",
+      "id": "4715315",
+      "page": "https://www.pexels.com/photo/4715315/",
+      "url": "https://images.pexels.com/photos/4715315/pexels-photo-4715315.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "A smiling toddler in a striped long-sleeve top and navy denim dungarees with wooden buttons stands with hands in the pockets against a bright blue studio backdrop.",
+      "colors": "cobalt blue, navy denim, cream stripe, honey",
+      "focal": "35% 55%",
+      "notes": "Portrait 2:3 (3919x5878). Clean studio shot, no labels or text on the garment. The cobalt backdrop sits well with the sticker palette. Child is low in the frame with calm blue space above, good for a sale-sticker overlay.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/4715315-300.jpg",
+        "600": "_img/puddle-and-pip/4715315-600.jpg"
+      }
+    },
+    {
+      "slot": "backpack",
+      "src": "unsplash",
+      "id": "atLykI9IpEE",
+      "page": "https://unsplash.com/photos/atLykI9IpEE",
+      "url": "https://images.unsplash.com/photo-1742986410468-0a173a45a21d",
+      "photographer": "STONES and BONES",
+      "photographerUrl": "https://unsplash.com/@stones_and_bones",
+      "alt": "Two girls seen from behind in a green meadow wear a pink and an aqua school satchel with a floral giraffe print, one pointing and one shading her eyes as they look into the distance.",
+      "colors": "blush pink, sage green, forest green",
+      "focal": "50% 40%",
+      "notes": "Portrait 2:3. Backs only, no faces. Dark green backdrop, so white or yellow sticker tags read well on top.",
+      "width": 1200,
+      "height": 1799,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/photo-1742986410468-0a173a45a21d-300.jpg",
+        "600": "_img/puddle-and-pip/photo-1742986410468-0a173a45a21d-600.jpg"
+      }
+    },
+    {
+      "slot": "hat",
+      "src": "pexels",
+      "id": "26846575",
+      "page": "https://www.pexels.com/photo/26846575/",
+      "url": "https://images.pexels.com/photos/26846575/pexels-photo-26846575.jpeg",
+      "photographer": "Ayşin S.",
+      "photographerUrl": "https://www.pexels.com/@aysin",
+      "alt": "A girl with long wavy brown hair, seen from behind, wears a cream bucket sun hat and a white top in sunny green countryside.",
+      "colors": "cream, spring green, chestnut",
+      "focal": "50% 35%",
+      "notes": "Portrait 2:3. No face. Hat sits in the top third; use it for the sunny weather chip and the hats tile.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/26846575-300.jpg",
+        "600": "_img/puddle-and-pip/26846575-600.jpg"
+      }
+    },
+    {
+      "slot": "pyjamas",
+      "src": "pexels",
+      "id": "18820123",
+      "page": "https://www.pexels.com/photo/18820123/",
+      "url": "https://images.pexels.com/photos/18820123/pexels-photo-18820123.jpeg",
+      "photographer": "Dmitriy Steinke",
+      "photographerUrl": "https://www.pexels.com/@dmitriy-steinke-559643503",
+      "alt": "Two smiling children sit on a white studio floor in matching grey animal-print pyjamas and white socks.",
+      "colors": "soft grey, white, warm skin tones",
+      "focal": "50% 58%",
+      "notes": "Landscape 3:2. Seamless white backdrop, so it sits cleanly on a yellow or sky-blue panel. Children are small in frame.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/18820123-300.jpg",
+        "600": "_img/puddle-and-pip/18820123-600.jpg"
+      }
+    },
+    {
+      "slot": "sneakers",
+      "src": "pexels",
+      "id": "5275375",
+      "page": "https://www.pexels.com/photo/5275375/",
+      "url": "https://images.pexels.com/photos/5275375/pexels-photo-5275375.jpeg",
+      "photographer": "Antonius Ferret",
+      "photographerUrl": "https://www.pexels.com/@antonius-ferret",
+      "alt": "Close-up from above of children's hands sticking colourful stickers onto white canvas sneakers on a brick-red floor.",
+      "colors": "white, brick red, pastel sticker pops",
+      "focal": "45% 50%",
+      "notes": "Landscape 3:2. No faces, no brand logos. Fits the sticker theme of the page.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/5275375-300.jpg",
+        "600": "_img/puddle-and-pip/5275375-600.jpg"
+      }
+    },
+    {
+      "slot": "socks",
+      "src": "pexels",
+      "id": "15195444",
+      "page": "https://www.pexels.com/photo/15195444/",
+      "url": "https://images.pexels.com/photos/15195444/pexels-photo-15195444.jpeg",
+      "photographer": "Licalze Socks",
+      "photographerUrl": "https://www.pexels.com/@licalze-socks-427041938",
+      "alt": "Colourful patterned socks (polka dots, stripes, flames, leopard spots) on crossed legs and scattered over bright pink, orange, yellow and purple paper.",
+      "colors": "hot pink, orange, purple, yellow",
+      "focal": "50% 55%",
+      "notes": "Portrait 2:3. The legs are an adult's, so crop to the socks or use it as a pure colour tile. The loudest photo of the set; use it full bleed as a tile, not behind text.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/15195444-300.jpg",
+        "600": "_img/puddle-and-pip/15195444-600.jpg"
+      }
+    },
+    {
+      "slot": "flatlay",
+      "src": "pexels",
+      "id": "5693888",
+      "page": "https://www.pexels.com/photo/5693888/",
+      "url": "https://images.pexels.com/photos/5693888/pexels-photo-5693888.jpeg",
+      "photographer": "Đặng Thanh Tú",
+      "photographerUrl": "https://www.pexels.com/@d-ng-thanh-tu-2922122",
+      "alt": "Flat lay of a child's grey doodle-print T-shirt and olive-green shorts on a mint and grey background beside a ball of twine and a small postcard.",
+      "colors": "mint, olive, light grey, mustard",
+      "focal": "50% 50%",
+      "notes": "Square 1:1. Overhead, no people. Mint backdrop matches the palette.",
+      "width": 1200,
+      "height": 1200,
+      "orientation": "square",
+      "local": {
+        "300": "_img/puddle-and-pip/5693888-300.jpg",
+        "600": "_img/puddle-and-pip/5693888-600.jpg"
+      }
+    },
+    {
+      "slot": "umbrella",
+      "src": "pexels",
+      "id": "18903456",
+      "page": "https://www.pexels.com/photo/18903456/",
+      "url": "https://images.pexels.com/photos/18903456/pexels-photo-18903456.jpeg",
+      "photographer": "Umut Raw",
+      "photographerUrl": "https://www.pexels.com/@umudicreative",
+      "alt": "Rainbow-coloured umbrellas hang in overlapping layers under a ceiling, seen from below.",
+      "colors": "red, orange, yellow, blue",
+      "focal": "50% 45%",
+      "notes": "Portrait 2:3. No people. Texture shot: good as a pattern strip behind the umbrella product or the rainy chip.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "300": "_img/puddle-and-pip/18903456-300.jpg",
+        "600": "_img/puddle-and-pip/18903456-600.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "1104014",
+      "page": "https://www.pexels.com/photo/1104014/",
+      "url": "https://images.pexels.com/photos/1104014/pexels-photo-1104014.jpeg",
+      "photographer": "Luna Lovegood",
+      "photographerUrl": "https://www.pexels.com/@hotaru",
+      "alt": "A boy in a striped sweater and green wellies jumps over a small puddle on a gravel path in front of a green meadow and a pale sky.",
+      "colors": "meadow green, pale sky, sandy gravel",
+      "focal": "48% 55%",
+      "notes": "Landscape 3:2, sunny and spring-like. Use for the sunny weather chip. Calm sky across the top for text.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/1104014-300.jpg",
+        "600": "_img/puddle-and-pip/1104014-600.jpg",
+        "1000": "_img/puddle-and-pip/1104014-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "16l2ezZQ_Yw",
+      "page": "https://unsplash.com/photos/16l2ezZQ_Yw",
+      "url": "https://images.unsplash.com/photo-1612532678695-341cf593cd29",
+      "photographer": "Pauline Bernfeld",
+      "photographerUrl": "https://unsplash.com/@pizbern",
+      "alt": "A child in a dark teal jacket tumbles head-down over a large snowball in a snowy park with dark hedges behind.",
+      "colors": "snow white, deep teal, hedge green",
+      "focal": "62% 45%",
+      "notes": "Landscape 7:5. Face hidden. Use for the snowy weather chip; the snow is a calm area for text.",
+      "width": 1200,
+      "height": 857,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/photo-1612532678695-341cf593cd29-300.jpg",
+        "600": "_img/puddle-and-pip/photo-1612532678695-341cf593cd29-600.jpg",
+        "1000": "_img/puddle-and-pip/photo-1612532678695-341cf593cd29-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "6bnH1v-IQK0",
+      "page": "https://unsplash.com/photos/6bnH1v-IQK0",
+      "url": "https://images.unsplash.com/photo-1554995783-571a2b4d923a",
+      "photographer": "Xavi Cabrera",
+      "photographerUrl": "https://unsplash.com/@xavi_cabrera",
+      "alt": "A child in a yellow raincoat and yellow rubber boots crouches in a puddle scattered with green leaves while a second child in dark boots jumps beside them.",
+      "colors": "yellow, wet brown, leaf green",
+      "focal": "35% 45%",
+      "notes": "Landscape 3:2. Second hero candidate: a real puddle-jump moment, no faces. Busy, so pair it with a solid headline panel. Also crops well into a boots tile.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "300": "_img/puddle-and-pip/photo-1554995783-571a2b4d923a-300.jpg",
+        "600": "_img/puddle-and-pip/photo-1554995783-571a2b4d923a-600.jpg",
+        "1000": "_img/puddle-and-pip/photo-1554995783-571a2b4d923a-1000.jpg"
+      }
+    }
+  ],
+  "localize": {
+    "widths": [
+      300,
+      600
+    ]
+  }
+}

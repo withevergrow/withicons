@@ -1,0 +1,214 @@
+{
+  "slug": "haunted-hollow",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "unsplash",
+      "id": "QPZH5-XumCU",
+      "page": "https://unsplash.com/photos/jack-o-lantern-with-light-QPZH5-XumCU",
+      "url": "https://images.unsplash.com/photo-1604052261789-17b9a95175a0",
+      "photographer": "Antonio Gabola",
+      "photographerUrl": "https://unsplash.com/@antogabb",
+      "alt": "A single carved jack-o'lantern glows orange at the left of an almost black frame, its light pooling on the dark surface below.",
+      "colors": "near-black, ember orange, deep amber",
+      "focal": "27% 55%",
+      "notes": "Best hero: roughly 60% of the frame is pure dark space for the headline and RSVP card. Keep the pumpkin on the left third (object-position 27% 55%), put text on the right or top. Works with a plum/black gradient overlay and a candle-flicker animation. Landscape only; on portrait phones crop to the pumpkin.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/haunted-hollow/photo-1604052261789-17b9a95175a0-1600.jpg"
+      }
+    },
+    {
+      "slot": "pumpkins",
+      "src": "unsplash",
+      "id": "I93pgqYbXoQ",
+      "page": "https://unsplash.com/photos/a-group-of-jack-o-lantern-pumpkins-lit-up-in-the-dark-I93pgqYbXoQ",
+      "url": "https://images.unsplash.com/photo-1635014992324-d7e67ccbdca3",
+      "photographer": "Ksenia Yakovleva",
+      "photographerUrl": "https://unsplash.com/@ksyfffka07",
+      "alt": "Two carved jack-o'lanterns stacked one above the other, their jagged grins glowing amber against a pitch-black background.",
+      "colors": "black, ember orange, warm amber",
+      "focal": "50% 52%",
+      "notes": "Symmetrical and centred, so it crops well to square or 4:5 for a gallery tile or the \"house rules\" card. Very dark edges let it blend into a near-black section background.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "900": "_img/haunted-hollow/photo-1635014992324-d7e67ccbdca3-900.jpg"
+      }
+    },
+    {
+      "slot": "masks",
+      "src": "unsplash",
+      "id": "2947jb7vICU",
+      "page": "https://unsplash.com/photos/a-decorative-venetian-mask-with-a-jesters-hat-2947jb7vICU",
+      "url": "https://images.unsplash.com/photo-1745429806387-6224c9940799",
+      "photographer": "Fer Troulik",
+      "photographerUrl": "https://unsplash.com/@fertroulik",
+      "alt": "A white crackle-glaze Venetian jester mask with gold filigree, a red and gold peaked cap and small bells, lit against a black background.",
+      "colors": "black, antique gold, crimson, ivory",
+      "focal": "50% 52%",
+      "notes": "Showpiece for the masquerade dress-code section. Subject is centred with black margins, so it takes square, 4:5 or wide crops; gold and crimson match the tarnished gold / blood red palette.",
+      "width": 1200,
+      "height": 960,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/haunted-hollow/photo-1745429806387-6224c9940799-1000.jpg"
+      }
+    },
+    {
+      "slot": "cocktail",
+      "src": "pexels",
+      "id": "5605488",
+      "page": "https://www.pexels.com/photo/5605488/",
+      "url": "https://images.pexels.com/photos/5605488/pexels-photo-5605488.jpeg",
+      "photographer": "Nataliya Vaitkevich",
+      "photographerUrl": "https://www.pexels.com/@n-voitkevich",
+      "alt": "A wine glass of bright red drink beside a glossy red skull-shaped bottle and scattered candy eyeballs on a black background.",
+      "colors": "black, blood red, bone white",
+      "focal": "50% 62%",
+      "notes": "Perfect for the \"Bloody Hour\" cocktail menu. Portrait 2:3 with the top third empty black, so a title or price list can overlay the top; subjects sit in the lower 60%. Crop to square around the glass and bottle for a menu tile.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/haunted-hollow/5605488-1000.jpg"
+      }
+    },
+    {
+      "slot": "candles",
+      "src": "unsplash",
+      "id": "Hw7z3axsamQ",
+      "page": "https://unsplash.com/photos/a-skull-sitting-next-to-a-candle-holder-Hw7z3axsamQ",
+      "url": "https://images.unsplash.com/photo-1635647269326-13b967add6d0",
+      "photographer": "Thalia Ruiz",
+      "photographerUrl": "https://unsplash.com/@thalia_s_ruiz",
+      "alt": "Tall cream taper candles streaked with red wax drips in a dark candelabra, beside an ornate bronze-gold skull and a pale rose on dark red fabric.",
+      "colors": "oxblood red, bronze gold, black, blush",
+      "focal": "50% 55%",
+      "notes": "Gothic table decor for the Séance Room or house-rules section. Portrait; the candle tops bleed off the frame, so keep the crop tall (4:5 or 2:3) and avoid a wide landscape crop that loses the skull.",
+      "width": 1200,
+      "height": 1784,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/haunted-hollow/photo-1635647269326-13b967add6d0-1000.jpg"
+      }
+    },
+    {
+      "slot": "house",
+      "src": "unsplash",
+      "id": "WQUwN8JpMzo",
+      "page": "https://unsplash.com/photos/a-house-with-red-lights-WQUwN8JpMzo",
+      "url": "https://images.unsplash.com/photo-1659633874076-82f57ba8b486",
+      "photographer": "Imre Tomosvari",
+      "photographerUrl": "https://unsplash.com/@timester12",
+      "alt": "A symmetrical brick Georgian country house at night, most of its windows and the front door glowing orange under a dark, cloudy navy sky.",
+      "colors": "midnight navy, ember orange, faint red",
+      "focal": "50% 52%",
+      "notes": "Reads instantly as \"Hollow Hill House\" for the venue and directions block. Dark sky above is usable for a caption. Landscape; also a strong second hero if the pumpkin hero is used elsewhere.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/haunted-hollow/photo-1659633874076-82f57ba8b486-1000.jpg"
+      }
+    },
+    {
+      "slot": "guests",
+      "src": "pexels",
+      "id": "14190377",
+      "page": "https://www.pexels.com/photo/14190377/",
+      "url": "https://images.pexels.com/photos/14190377/pexels-photo-14190377.jpeg",
+      "photographer": "Fernando Paleta",
+      "photographerUrl": "https://www.pexels.com/@pxleta",
+      "alt": "Three adults in dark Halloween costumes stand close together in a room washed in red light: one with a pale cloth mask over their face, a man in skull-style face paint and a leather jacket, and a woman in a twig crown and dark eye makeup.",
+      "colors": "black, blood red, bone-white face paint, violet shadow",
+      "focal": "50% 35%",
+      "notes": "Costume inspiration for the dress-code or guest-list section: adults in heavy makeup and masks, so not readily identifiable as individuals. It is a staged group portrait rather than a crowd at a party (no gothic, anonymous party-crowd shot was available), so frame it as 'dress the part', not 'last year's guests'. Portrait 2:3; keep the crop on the upper two thirds to hold the faces. Red wash matches the blood-red accent.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/haunted-hollow/14190377-800.jpg"
+      }
+    },
+    {
+      "slot": "treats",
+      "src": "pexels",
+      "id": "27081983",
+      "page": "https://www.pexels.com/photo/27081983/",
+      "url": "https://images.pexels.com/photos/27081983/pexels-photo-27081983.jpeg",
+      "photographer": "Adriano Bragi",
+      "photographerUrl": "https://www.pexels.com/@adriano-bragi-1288014591",
+      "alt": "A tall black buttercream cake with black rosettes on top, drizzled with white spiderweb icing and a plastic spider, standing in drifts of fake cobweb on a dark slate surface.",
+      "colors": "charcoal black, ghost white, cool slate grey",
+      "focal": "50% 50%",
+      "notes": "The 'spooky bakes' shot for the menu or food section. Sharp studio still life, black and white on a dark slate ground, so it sits with the gothic palette with no tint needed (replaced a brighter orange graveyard cake on plastic plates that read as a kids' party). Portrait 2:3; the cake is centred and the dark top third is usable for a caption.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "900": "_img/haunted-hollow/27081983-900.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "14252774",
+      "page": "https://www.pexels.com/photo/14252774/",
+      "url": "https://images.pexels.com/photos/14252774/pexels-photo-14252774.jpeg",
+      "photographer": "Alfredo Marco Pradil",
+      "photographerUrl": "https://www.pexels.com/@marcologous",
+      "alt": "A glowing jack-o'lantern sits on the leaf-strewn ground of a dim forest at dusk, with blurred trees and soft lights behind it.",
+      "colors": "charcoal, forest dusk, ember orange",
+      "focal": "48% 60%",
+      "notes": "Second hero candidate: more atmosphere and depth than the main hero, but less empty space (top 40% is dark blurred trees, usable with an overlay). 4:3 landscape; keep the pumpkin lower-centre.",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/haunted-hollow/14252774-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "gol-A-T1fZY",
+      "page": "https://unsplash.com/photos/a-row-of-different-colored-masks-on-a-black-background-gol-A-T1fZY",
+      "url": "https://images.unsplash.com/photo-1643946323948-27efe56458bb",
+      "photographer": "Habib Beaini",
+      "photographerUrl": "https://unsplash.com/@hbeaini",
+      "alt": "Five Venetian masks in black, gold, red and ivory arranged in a row against a black background.",
+      "colors": "black, tarnished gold, ivory, crimson",
+      "focal": "50% 50%",
+      "notes": "Detail / divider shot: a wide, short strip (about 2.1:1) with masks centred on pure black. Use as a full-width band between sections or a masquerade banner; masks are small in frame so avoid tight crops.",
+      "width": 1200,
+      "height": 568,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/haunted-hollow/photo-1643946323948-27efe56458bb-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "pCgxm-HDMNs",
+      "page": "https://unsplash.com/photos/gray-wooden-house-covered-by-fog-pCgxm-HDMNs",
+      "url": "https://images.unsplash.com/photo-1494376877685-d3d2559d4f82",
+      "photographer": "M Wrona",
+      "photographerUrl": "https://unsplash.com/@mwrona",
+      "alt": "A lone wooden house on a hill half hidden in thick grey fog, with a bare tree rising behind it.",
+      "colors": "fog grey, olive-black, muted green",
+      "focal": "50% 45%",
+      "notes": "Atmosphere shot for the venue or directions section, or a faded background behind the FAQ. Low contrast and grey, so tint it plum or darken it before putting text over it. Landscape 3:2.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/haunted-hollow/photo-1494376877685-d3d2559d4f82-1600.jpg"
+      }
+    }
+  ]
+}

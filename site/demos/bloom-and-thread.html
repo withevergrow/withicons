@@ -1,0 +1,1607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom &amp; Thread (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Bloom &amp; Thread is an independent, women-run boutique making dresses, knitwear, accessories, jewellery and gifts in small batches. Free shipping over $75, 30-day returns, gift wrapping.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#FFFCFA">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ───────── tokens ───────── */
+:root{
+  --paper:#FFFCFA; --cream:#F9F2EA; --blush:#F6DEDA; --blush-d:#EDC7C5; --sage:#DDE6D7; --sage-d:#556B58; --butter:#F6EBCF; --lilac:#EBE2EC;
+  --rose:#9C4A5F; --rose-d:#7C3548; --ink:#2B2326; --muted:#6C6063; --rule:#E6DBD5; --star:#B0762A;
+  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif; --sans:"Jost",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.22,.7,.2,1); --gut:24px; --hdr:78px;
+  /* with icons: the palette styles tuned to the brand (blush, cream, sage, dusty rose) */
+  --with-coquette-c1:#F3C9CF; --with-coquette-c2:#DC95A4; --with-coquette-c3:#B4566B; --with-coquette-c4:#FAEEE3; --with-coquette-accent:#9DB496; --with-coquette-ink:#6E2F42; --with-coquette-shadow:#9C4A5F; --with-coquette-tint:#FBE6E3;
+  --with-pastel-c1:#E7A3B2; --with-pastel-c2:#E7A3B2; --with-pastel-c3:#F3DC9C; --with-pastel-c4:#BBD3B5; --with-pastel-accent:#F2C0CB; --with-pastel-edge:#C47A8D; --with-pastel-ink:#7A3F52; --with-pastel-shadow:#C47A8D; --with-pastel-tint:#F9E4E1;
+  --with-luxe-c1:#A8465F; --with-luxe-c2:#E8B7BE; --with-luxe-c3:#6E2F42; --with-luxe-c4:#8A6A3E; --with-luxe-accent:#D9AE5E; --with-luxe-edge:#F7DDD8; --with-luxe-ink:#2E141D; --with-luxe-shadow:#25101A; --with-luxe-tint:#FFF0E3;
+  --with-soft3d-c1:#D98C9C; --with-soft3d-accent:#E8A38F; --with-soft3d-tint:#F3D8D4; --with-soft3d-c3:#5C4A52; --with-soft3d-c4:#D8CDC6; --with-soft3d-ink:#3A2A31;
+  --with-clay-c1:#C98595; --with-clay-c2:#EBCB93; --with-clay-c3:#E8A0AE; --with-clay-c4:#9DB496; --with-clay-accent:#D9A45B; --with-clay-ink:#4A2A36; --with-clay-shadow:#5A2F3E; --with-clay-tint:#F3DDDA;
+  --with-valentine-c1:#EE8FA4; --with-valentine-c2:#C9486A; --with-valentine-accent:#8FAE8C; --with-valentine-c4:#FFF1E4; --with-valentine-tint:#F3D9A4;
+}
+@media(max-width:600px){:root{--gut:18px;--hdr:66px}}
+
+/* ───────── base ───────── */
+*,*::before,*::after{box-sizing:border-box}
+html{scrollbar-gutter:stable;scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hdr) + 16px)}
+body{margin:0;font:400 16px/1.6 var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+::selection{background:var(--blush-d)}
+.wrap{width:min(1240px,100% - 2*var(--gut));margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--ink);color:#fff;padding:10px 16px;text-decoration:none;font-size:14px}
+.skip:focus{top:12px}
+.eyebrow{display:flex;align-items:center;gap:10px;font:500 11.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+.eyebrow b{font-weight:500;color:var(--muted)}
+.h2{font:500 clamp(36px,4.6vw,60px)/1.02 var(--serif);letter-spacing:-.01em}
+.h2 em,.h1 em{font-style:italic;font-weight:400;color:var(--rose)}
+.lead{font-size:17px;line-height:1.7;color:#4b4144;max-width:46ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 30px;border:1px solid var(--ink);background:var(--ink);color:#fff;font:500 12.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.btn:hover{background:var(--rose-d);border-color:var(--rose-d)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.arrow-link{display:inline-flex;align-items:center;gap:8px;font:500 12.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:16px 2px;border-bottom:1px solid currentColor;min-height:44px}
+.arrow-link:hover{color:var(--rose)}
+.link-btn{background:none;border:0;padding:0;font:inherit;text-decoration:underline;text-underline-offset:3px;color:var(--rose-d)}
+.ibtn{width:44px;height:44px;display:inline-grid;place-items:center;background:none;border:0;color:inherit;cursor:pointer;border-radius:50%;position:relative;font-size:19px;line-height:1;transition:background .25s}
+.ibtn:hover{background:var(--blush)}
+.sec{padding:clamp(64px,9vw,128px) 0}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(32px,4vw,56px)}
+@media(min-width:900px){.sec-head{grid-template-columns:1fr auto;align-items:end}.sec-head .side{max-width:38ch;text-align:left}}
+.sec-head .side{color:var(--muted);font-size:15.5px;line-height:1.65}
+.orn{display:flex;align-items:center;gap:18px;color:var(--rose);margin:0 auto;max-width:520px}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:var(--rule)}
+/* icon fallbacks in Basic (emoji / glyph) sit at the slot's size */
+.f18 .kit-fb{font-size:18px}.f22 .kit-fb{font-size:22px}.f28 .kit-fb{font-size:28px}.f36 .kit-fb{font-size:34px}.f44 .kit-fb{font-size:42px}.f64 .kit-fb{font-size:60px}.f88 .kit-fb{font-size:80px}.f120 .kit-fb{font-size:104px}
+
+/* ───────── announcement + header ───────── */
+.announce{background:var(--blush);font-size:13px;letter-spacing:.03em}
+.announce-in{display:flex;justify-content:center;align-items:center;min-height:42px}
+.ann{display:flex;align-items:center;gap:9px;padding:0 30px;position:relative;white-space:nowrap}
+.ann+.ann::before{content:"";position:absolute;left:0;top:50%;height:14px;width:1px;background:rgba(43,35,38,.28);transform:translateY(-50%)}
+.hdr{position:sticky;top:0;z-index:40;background:rgba(255,252,250,.95);-webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--rule)}
+.hdr-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--hdr);gap:12px}
+.nav{display:none;gap:clamp(18px,1.9vw,26px)}
+.nav a{position:relative;display:inline-block;padding:12px 0;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:var(--rose);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+.burger{justify-self:start;margin-left:-8px}
+.logo{justify-self:center;text-align:center;text-decoration:none;line-height:1;white-space:nowrap}
+.logo b{display:block;font:500 clamp(25px,3vw,32px)/1 var(--serif);letter-spacing:.01em}
+.logo b i{font-weight:400;color:var(--rose);padding:0 .06em}
+.logo small{display:block;font:500 9.5px/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+.tools{display:flex;justify-content:flex-end;align-items:center;gap:0;margin-right:-8px}
+.tools .acct{display:none}
+.cnt{position:absolute;top:3px;right:1px;min-width:18px;height:18px;border-radius:9px;background:var(--rose-d);color:#fff;font:500 10.5px/18px var(--sans);text-align:center;padding:0 5px;pointer-events:none}
+.cnt[hidden]{display:none}
+.ibtn.cart{width:auto;min-width:44px;padding:0 6px;border-radius:22px;font-size:15px}
+.cart-fb{white-space:nowrap}
+.searchbar{border-top:1px solid var(--rule);background:var(--paper)}
+.searchbar[hidden],.mnav[hidden]{display:none}
+.sb-in{display:flex;align-items:center;gap:14px;height:76px}
+.sb-in input{flex:1;min-width:0;border:0;border-bottom:1px solid var(--ink);background:none;font:400 clamp(20px,3vw,26px)/1.2 var(--serif);padding:10px 2px;color:var(--ink);border-radius:0}
+.sb-in input::placeholder{color:#7a6d70}
+.sb-in input:focus-visible{outline:0;border-color:var(--rose);box-shadow:0 1px 0 var(--rose)}
+.sb-hint{font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.mnav{border-top:1px solid var(--rule);background:var(--paper)}
+.mnav a{display:flex;align-items:center;gap:16px;min-height:56px;border-bottom:1px solid var(--rule);font:500 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
+.mnav a:last-of-type{border-bottom:0}
+.mnav a span.n,.mnav .mrow span.n{margin-left:auto;color:var(--muted);letter-spacing:.06em;text-transform:none;font-weight:400;font-size:13px}
+.mnav .mrow{display:none;align-items:center;gap:16px;width:100%;min-height:56px;padding:0;border:0;border-top:1px solid var(--rule);background:none;text-align:left;font:500 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+@media(min-width:1200px){.nav{display:flex}.burger{display:none}.tools .acct{display:inline-grid}.mnav{display:none!important}.hdr-in{grid-template-columns:1fr auto 1fr}}
+@media(min-width:1200px) and (max-width:1319px){.nav{gap:18px}.nav a{letter-spacing:.1em}}
+@media(max-width:899px){.ann{display:none;padding:0}.ann.on{display:flex}}
+@media(max-width:759px){.sb-hint{display:none}.logo small{letter-spacing:.26em}}
+/* phones: logo and the two main controls must fit at 360px and below, so the wishlist heart moves into the menu */
+@media(max-width:400px){
+  .hdr-in{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:4px}
+  .logo b{font-size:23px}
+  .logo small{letter-spacing:.16em;margin-top:6px}
+  #wish-toggle{display:none}
+  .mnav .mrow{display:flex}
+  .ibtn.cart{padding:0 4px}
+}
+@media(max-width:340px){
+  .hdr-in{grid-template-columns:auto minmax(0,1fr) auto}
+  .logo b{font-size:21px}
+  .logo small{letter-spacing:.1em}
+}
+
+/* ───────── hero ───────── */
+.hero{display:grid;background:var(--cream)}
+.hero-photo{position:relative;order:-1;aspect-ratio:1/1.05;max-height:74vh;overflow:hidden;background:var(--blush)}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+.photo-credit{position:absolute;right:12px;top:12px;font-size:11px;line-height:1;letter-spacing:.08em;color:#fff;background:rgba(43,35,38,.42);padding:6px 11px;border-radius:99px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-shadow:0 1px 6px rgba(30,20,24,.5)}
+.photo-credit a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.6)}
+.hero-panel{position:relative;z-index:2;padding:44px var(--gut) 60px;display:flex;flex-direction:column;gap:26px}
+.hero-panel::before{content:"";position:absolute;inset:14px;border:1px solid rgba(43,35,38,.13);pointer-events:none}
+.hero-panel>*{position:relative}
+.h1{font:500 clamp(54px,12.5vw,76px)/.92 var(--serif);letter-spacing:-.015em}
+.h1 em{display:block}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px}
+.hero-facts{display:grid;gap:0;border-top:1px solid rgba(43,35,38,.16);margin-top:6px}
+.hero-facts li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(43,35,38,.1);font-size:14.5px;line-height:1.35}
+.hero-facts b{display:block;font-weight:500;letter-spacing:.02em}
+.hero-facts span.t{display:block;color:var(--muted);font-size:13.5px;text-wrap:balance}
+.hero-rate{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.hero-rate b{color:var(--ink);font-weight:500}
+.pictured{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:14px;background:rgba(255,252,250,.95);padding:12px 16px 12px 12px;text-decoration:none;box-shadow:0 20px 44px -22px rgba(43,35,38,.45);transition:transform .4s var(--ease)}
+.pictured:hover{transform:translateY(-3px)}
+.pictured .k,.pictured .n,.pictured .d{display:block}
+.pictured .k{font:500 10.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+.pictured .n{font:500 21px/1.15 var(--serif);margin:3px 0 2px}
+.pictured .d{font-size:13px;color:var(--muted)}
+.hero-art{position:absolute;pointer-events:none}
+.hero-art.a1{right:14px;top:-62px}
+/* Full-level ornaments pinned to the corners of the panel frame (the kit sets display on slots, so hide with a higher-specificity rule) */
+.hero-panel{--fi:14px}
+.hero-art.pin{background:var(--cream);border-radius:50%;padding:6px}
+.hero-art.p1{left:54%;top:calc(var(--fi) - 28px)}.hero-art.p2{left:36%;bottom:max(0px,calc(var(--fi) - 26px))}.hero-art.p3{right:12%;bottom:max(0px,calc(var(--fi) - 26px))}
+@media(max-width:599px){html .hero-art{display:none}}
+@media(min-width:600px){.hero-photo{aspect-ratio:16/10}.pictured{right:auto;left:24px;bottom:24px;max-width:380px}}
+@media(min-width:980px){
+  .hero{grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);min-height:clamp(640px,calc(100vh - var(--hdr) - 44px),800px)}
+  .hero-photo{order:0;aspect-ratio:auto;max-height:none;height:100%}
+  .hero-panel{padding:clamp(48px,5vw,72px) clamp(36px,5.2vw,92px) 44px;justify-content:center;gap:26px}
+  .hero-panel{--fi:22px}
+  .hero-panel::before{inset:22px}
+  .h1{font-size:clamp(72px,7.2vw,112px)}
+  .hero-art.a1{right:-40px;top:56px}.pictured{bottom:96px}
+}
+
+@media(min-width:1200px){
+  .hero-facts{grid-template-columns:repeat(3,1fr)}
+  .hero-facts li{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 16px 0 0;border-bottom:0}
+  .hero-facts li+li{padding-left:18px;border-left:1px solid rgba(43,35,38,.12)}
+}
+
+/* ───────── promise bar ───────── */
+.promise{border-bottom:1px solid var(--rule)}
+.promise ul{display:grid;grid-template-columns:1fr 1fr}
+.promise li{display:flex;gap:14px;align-items:center;padding:22px 12px 22px 0;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.35}
+.promise li:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}
+.promise li:nth-last-child(-n+2){border-bottom:0}
+.promise b{display:block;font-weight:500;font-size:14.5px}
+.promise span.t{color:var(--muted);font-size:13px}
+@media(min-width:980px){.promise ul{grid-template-columns:repeat(4,1fr)}.promise li{border-bottom:0;padding:30px 20px 30px 26px;border-left:1px solid var(--rule)}.promise li:first-child{border-left:0;padding-left:0}.promise li:nth-child(even){padding-left:26px}}
+@media(max-width:420px){.promise li{flex-direction:column;align-items:flex-start;gap:8px}}
+
+/* ───────── category arches ───────── */
+.tiles{display:grid;grid-auto-flow:column;grid-auto-columns:min(62vw,250px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);padding:4px var(--gut) 18px;margin:0 calc(-1*var(--gut));scrollbar-width:thin}
+.tile{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;gap:0}
+.tile-arch{position:relative;aspect-ratio:4/4.9;border-radius:999px 999px 6px 6px;background:var(--t,var(--blush));display:grid;place-items:center;transition:transform .6s var(--ease)}
+.tile-arch::before{content:"";position:absolute;inset:10px;border:1px solid rgba(43,35,38,.2);border-radius:999px 999px 2px 2px;pointer-events:none}
+.tile-arch .kit-ico,.tile-arch .kit-fb{position:relative}
+.tile:hover .tile-arch,.tile:focus-visible .tile-arch{transform:translateY(-8px)}
+.tile-name{font:500 28px/1.1 var(--serif);margin-top:18px;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.tile-sub{color:var(--muted);font-size:14px;line-height:1.4;margin-top:6px;min-height:2.8em}
+.tile-count{display:flex;align-items:center;gap:8px;margin-top:10px;font:500 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--rose-d)}
+.tile-arch .tile-spark{position:absolute;right:17%;top:20%}
+.tiles .t1{--t:#F6DEDA}.tiles .t2{--t:#DDE6D7}.tiles .t3{--t:#F6EBCF}.tiles .t4{--t:#EBE2EC}.tiles .t5{--t:#F1D2CE}
+@media(min-width:600px){.tiles{grid-auto-columns:min(34vw,250px)}}
+@media(min-width:1100px){.tiles{scroll-padding-inline:0;grid-auto-flow:row;grid-template-columns:repeat(5,1fr);grid-auto-columns:auto;overflow:visible;padding:0;margin:0;gap:22px}}
+
+/* ───────── shop toolbar + grid ───────── */
+.bar{display:flex;flex-direction:column;gap:16px;padding:18px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);margin-bottom:34px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+@media(min-width:900px){.chips{flex-wrap:wrap;overflow:visible}}
+@media(max-width:599px){.found{flex:1 0 100%;margin-right:0;min-height:24px}.sortlab{flex:1}.sortlab select{flex:1;min-width:0}.bar-r{padding-top:6px}}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 18px;border:1px solid var(--rule);border-radius:99px;background:transparent;font:400 14px/1 var(--sans);letter-spacing:.02em;transition:background .25s,color .25s,border-color .25s;white-space:nowrap}
+.chip[hidden]{display:none}
+.chip:hover{border-color:var(--ink)}
+.chip sup{font-size:10.5px;color:var(--muted);letter-spacing:.04em;top:-.3em;position:relative}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] sup{color:#e8d9d6}
+.bar-r{display:flex;align-items:center;justify-content:space-between;gap:10px 22px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--rule)}
+.sortlab{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+.sortlab select{appearance:none;-webkit-appearance:none;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);font:400 15px/1 var(--sans);padding:12px 26px 10px 2px;min-height:44px;border-radius:0;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 11px) 55%,calc(100% - 6px) 55%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.found{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:6px;min-height:44px;margin-right:auto;flex-wrap:wrap}
+.found b{color:var(--ink);font-weight:500}
+.sg-open{display:inline-flex;align-items:center;gap:8px;min-height:44px;background:none;border:0;border-bottom:1px solid var(--ink);padding:0 2px;font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.sg-open:hover{color:var(--rose)}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 12px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr);gap:52px 22px}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr);gap:58px 26px}}
+.card{position:relative;min-width:0}
+.card[hidden],.grid[hidden]{display:none}
+.card.pop{animation:rise .6s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--cream)}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 50%);transition:transform 1.1s var(--ease),opacity .6s}
+.media .alt{opacity:0}
+@media(hover:hover){.card:hover .media img.im{transform:scale(1.045)}.card:hover .media .alt{opacity:1}}
+.flag{position:absolute;left:10px;top:0;z-index:2;pointer-events:none}
+.flag.sale{top:10px}
+html:not([data-level="0"]) .flag{left:0;top:0;padding:7px 9px 5px 11px;background:rgba(255,252,250,.94);border-bottom-right-radius:16px}
+html:not([data-level="0"]) .flag.sale{left:8px;top:8px;padding:3px;border-radius:50%}
+.flag .kit-fb{display:inline-block;background:var(--rose-d);color:#fff;font:500 10.5px/1 var(--sans);letter-spacing:.14em;padding:14px 8px 8px}
+.flag.sale .kit-fb{border-radius:50%;padding:12px 8px;background:var(--sage-d)}
+.wish{position:absolute;right:8px;top:8px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,252,250,.9);display:grid;place-items:center;font-size:19px;color:var(--ink);transition:transform .3s var(--ease),background .3s}
+.wish:hover{transform:scale(1.08)}
+.wish[aria-pressed="true"]{background:var(--blush);color:var(--rose-d);box-shadow:inset 0 0 0 1.5px var(--rose)}
+.wish[aria-pressed="true"] .kit-ico,.wish[aria-pressed="true"] .kit-fb{animation:beat .5s var(--ease)}
+@keyframes beat{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+.qa{position:absolute;left:0;right:0;bottom:0;z-index:3}
+.qa-open{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:46px;border:0;background:rgba(255,252,250,.94);font:500 11.5px/1 var(--sans);letter-spacing:.17em;text-transform:uppercase;transform:translateY(101%);transition:transform .45s var(--ease),background .3s;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.qa-open:hover{background:var(--blush)}
+.card:hover .qa-open,.card:focus-within .qa-open,.card.sheet .qa-open{transform:none}
+.qa-sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);padding:16px 14px 14px;border-top:1px solid var(--ink);transform:translateY(102%);transition:transform .5s var(--ease);visibility:hidden}
+.card.sheet .qa-sheet{transform:none;visibility:visible}
+.card.sheet .qa-open{transform:translateY(101%)}
+.qa-h{display:flex;align-items:center;gap:10px;font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;margin:-6px 0 8px}
+.qa-h .sg{white-space:nowrap;background:none;border:0;padding:0 2px;font:500 12px/1 var(--sans);letter-spacing:.04em;text-transform:none;text-decoration:underline;text-underline-offset:3px;color:var(--rose-d);min-height:36px}
+.qa-x{margin-left:auto;margin-right:-8px;width:44px;height:44px;border:0;background:none;display:grid;place-items:center;font-size:15px;border-radius:50%}
+.qa-x:hover{background:var(--blush)}
+.qa-sizes{display:flex;flex-wrap:wrap;gap:6px}
+@media(max-width:759px){.qa-sheet{padding:14px 12px 12px}.qa-h{gap:6px;letter-spacing:.1em}.qa-sizes{gap:4px}.qa-sizes button{min-width:40px!important;height:42px!important;padding:0 4px!important}}
+.qa-sizes button{min-width:44px;height:44px;padding:0 10px;border:1px solid var(--rule);background:transparent;font:400 14px/1 var(--sans);transition:background .2s,color .2s,border-color .2s}
+.qa-sizes button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media(hover:none){.qa-open{transform:none;width:auto;min-width:44px;height:44px;min-height:44px;right:8px;left:auto;bottom:8px;border-radius:50%;padding:0;position:absolute;border:1px solid var(--rule)}.qa-open .qa-t{display:none}.card.sheet .qa-open{transform:translateY(300%)}}
+.meta{padding-top:16px;display:grid;gap:4px}
+.meta-row{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:4px}
+@media(min-width:760px){.meta-row{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 10px;margin-top:2px}}
+.meta-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.name{font:500 clamp(20px,1.9vw,23px)/1.15 var(--serif);letter-spacing:.005em;text-wrap:balance}
+.price{font:400 16px/1 var(--sans);white-space:nowrap;letter-spacing:.02em}
+.price s{color:var(--muted);margin-right:6px;font-size:13.5px}
+.price .now.sale{color:var(--rose-d);font-weight:500}
+.sub{font-size:13.5px;color:var(--muted);line-height:1.4}
+.rate{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-right:-2px}
+.rate b{color:var(--ink);font-weight:500;font-size:14px}
+.sw{display:flex;align-items:center;gap:12px;margin-top:2px;min-height:26px;flex-wrap:wrap}
+.sw button{width:24px;height:24px;border-radius:50%;border:1px solid rgba(43,35,38,.25);background:var(--c);padding:0;position:relative;transition:transform .25s var(--ease)}
+.sw button::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid transparent;transition:border-color .25s}
+.sw button::before{content:"";position:absolute;inset:-10px}
+.sw button[aria-checked="true"]::after{border-color:var(--ink)}
+.sw button:hover{transform:scale(1.12)}
+.sw .cn{font-size:12.5px;color:var(--muted);margin-left:4px}
+.empty-state{text-align:center;padding:70px 0 40px;display:grid;gap:14px;justify-items:center}
+.empty-state[hidden]{display:none}
+.empty-state h3{font:500 32px/1.1 var(--serif)}
+.empty-state p{color:var(--muted)}
+
+/* ───────── gift studio ───────── */
+.gift{background:var(--blush);position:relative;overflow:hidden}
+.gift::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(124,53,72,.1) 1.2px,transparent 1.5px);background-size:22px 22px;pointer-events:none}
+.gift-in{position:relative;display:grid;gap:44px;align-items:center}
+.gift-list{display:grid;gap:0;margin:28px 0 34px;border-top:1px solid rgba(43,35,38,.18)}
+.gift-list li{display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(43,35,38,.18);font-size:15.5px}
+.gift-list b{display:block;font-weight:500}
+.gift-list span.t{font-size:14px;color:#5a4a4e}
+.gift-list .pr{margin-left:auto;font-weight:500;font-size:14px;white-space:nowrap}
+.arches{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:14px;min-height:300px;padding-right:6px}
+.arches .tile-arch{width:clamp(106px,17vw,196px);aspect-ratio:3/5}
+.arches .tile-spark.l{right:auto;left:17%}
+.ga{position:absolute;pointer-events:none}
+.ga.b{right:2%;top:-96px}.ga.f{left:4%;bottom:-88px}.ga.s{left:31%;top:-74px}
+.arches .a2 .tile-arch{margin-bottom:46px}
+.arches>div:hover .tile-arch{transform:translateY(-8px)}
+.arches .tag{position:absolute;right:-6px;top:30%}
+@media(max-width:599px){.arches .tag{top:-4px;right:-14px}.arches{gap:8px}.arches .tile-arch .kit-ico{transform:scale(.8)}}
+@media(max-width:899px){.ga.b{top:-50px;right:4%}.ga.f{bottom:-54px;left:6%}.ga.s{left:36%;top:-46px}}
+@media(min-width:600px) and (max-width:899px){.arches{gap:18px;min-height:340px}.arches .tile-arch{width:clamp(150px,24vw,210px)}.arches .a2 .tile-arch{margin-bottom:54px}}
+@media(min-width:900px){.gift-in{grid-template-columns:1.05fr .95fr;gap:70px}}
+
+/* ───────── story ───────── */
+.story-in{display:grid;gap:44px}
+.story-photo{position:relative;margin:0 0 0 14px;max-width:540px}
+.story-photo .sp{position:relative}
+.story-photo .sp::before{content:"";position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--rose);opacity:.55;pointer-events:none}
+.story-photo img{position:relative;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 45%}
+.story-photo figcaption{font-size:12.5px;color:var(--muted);margin-top:12px;letter-spacing:.03em}
+.story-photo .est{position:absolute;right:-8px;top:24px;z-index:2}
+html:not([data-level="0"]) .story-photo .est{padding:8px 8px 6px;background:rgba(255,252,250,.94);border-bottom-left-radius:14px;right:0;top:0}
+.story-body{display:grid;gap:22px;align-content:center}
+.story-body p{max-width:54ch;color:#463c40}
+.sig{font:italic 400 34px/1 var(--serif);color:var(--rose-d);display:flex;align-items:center;gap:12px;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-top:6px}
+.stats div{padding:20px 14px 0 0}
+.stats div+div{padding-left:16px;border-left:1px solid var(--rule)}
+.stats b{display:block;font:500 clamp(34px,4.4vw,52px)/1 var(--serif);color:var(--rose-d);font-variant-numeric:lining-nums}
+.stats span{font-size:13px;color:var(--muted);line-height:1.35;display:block;margin-top:4px}
+.steps{display:grid;gap:0;margin-top:clamp(48px,6vw,84px);border-top:1px solid var(--ink)}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;align-content:start;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps .stp{justify-self:start}
+.steps h3{font:500 25px/1.15 var(--serif);display:flex;align-items:center;gap:10px}
+.steps p{font-size:14.5px;color:var(--muted);margin-top:6px;max-width:34ch}
+@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}.steps li{border-bottom:0;padding:28px 22px 0 0;grid-template-columns:1fr;gap:16px}.steps li+li{padding-left:22px;border-left:1px solid var(--rule)}}
+@media(min-width:960px){.story-in{grid-template-columns:5fr 6fr;gap:clamp(56px,7vw,110px)}.story-photo{margin-left:14px;max-width:none}}
+
+/* ───────── reviews ───────── */
+.reviews{background:var(--cream)}
+.rv-in{display:grid;gap:40px}
+.rv-sum{display:grid;gap:18px;align-content:start}
+.rv-big{display:flex;align-items:center;gap:20px}
+.rv-big b{font:500 clamp(64px,8vw,92px)/.9 var(--serif)}
+.rv-big span.t{font-size:14px;color:var(--muted);line-height:1.45;display:block}
+.dist{display:grid;gap:9px;margin-top:6px}
+.dist li{display:grid;grid-template-columns:34px 1fr 40px;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.dist i{display:block;height:5px;background:rgba(43,35,38,.1);position:relative}
+.dist i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--rose)}
+.rv-nav{display:flex;gap:10px;margin-top:6px}
+.rv-nav .ibtn{border:1px solid var(--ink);width:48px;height:48px}
+.rv-nav .ibtn:hover{background:var(--ink);color:#fff}
+.rv-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(86%,370px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;scrollbar-width:thin;outline-offset:4px}
+.rv{scroll-snap-align:start;background:var(--paper);border:1px solid var(--rule);padding:26px 24px 22px;display:flex;flex-direction:column;gap:14px}
+.rv-top{display:flex;align-items:center;gap:14px}
+.rv-who b{display:flex;align-items:center;gap:6px;font-weight:500;font-size:15px}
+.rv-who span.t{font-size:12.5px;color:var(--muted);display:block}
+.rv h3{font:italic 500 25px/1.15 var(--serif)}
+.rv p.q{font-size:15px;line-height:1.65;color:#463c40;flex:1}
+.rv-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
+.help{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 12px;border:1px solid var(--rule);border-radius:99px;background:none;font-size:12.5px;color:var(--ink)}
+.help[aria-pressed="true"]{background:var(--blush);border-color:var(--rose)}
+.rv-stars{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+@media(min-width:1000px){.rv-in{grid-template-columns:340px 1fr;gap:64px;align-items:start}.rv-track{grid-auto-columns:minmax(300px,340px)}}
+
+/* ───────── newsletter ───────── */
+.news{background:var(--sage);position:relative;overflow:hidden}
+.news-in{display:grid;gap:36px;align-items:center}
+.news form{display:grid;gap:10px;max-width:520px;margin-top:26px}
+.fld{display:flex;border:1px solid var(--ink);background:var(--paper)}
+.fld input{flex:1;min-width:0;border:0;background:none;font:400 16px/1 var(--sans);padding:0 18px;min-height:56px;color:var(--ink);border-radius:0}
+.fld input:focus-visible{outline:2px solid var(--rose);outline-offset:-2px}
+.fld .btn{border:0;min-height:56px}
+.fine{font-size:12.5px;color:#43544a}
+.err{color:#8a2a3e;font-size:13.5px;min-height:1.4em}
+.ok{display:none;gap:10px;padding:22px 24px;background:var(--paper);border:1px solid var(--ink);max-width:520px;margin-top:26px}
+.ok.show{display:grid}
+.ok h3{font:500 28px/1.1 var(--serif);display:flex;align-items:center;gap:10px}
+.news-art{display:flex;justify-content:center;align-items:center;gap:8px;position:relative;min-height:240px;flex-wrap:wrap}
+@media(max-width:599px){.news-art .side-ico{display:none}.news-art{min-height:190px}}
+.code{display:inline-block;font:500 14px/1 var(--sans);letter-spacing:.2em;border:1px dashed var(--ink);padding:9px 12px;margin:0 4px}
+@media(min-width:900px){.news-in{grid-template-columns:1.2fr .8fr;gap:70px}}
+
+/* ───────── info, credits, footer ───────── */
+.info{padding:clamp(56px,7vw,96px) 0}
+.info-grid{display:grid;gap:0;border-top:1px solid var(--ink)}
+.info-grid>div{display:grid;gap:12px;padding:28px 0;border-bottom:1px solid var(--rule);align-content:start}
+.info-grid h3{font:500 27px/1.1 var(--serif);display:flex;align-items:center;gap:12px}
+.info-grid p{font-size:14.5px;color:#4b4144;max-width:40ch}
+@media(min-width:760px){.info-grid{grid-template-columns:repeat(2,1fr)}.info-grid>div{padding:30px 30px 30px 0}.info-grid>div:nth-child(even){padding-left:30px;border-left:1px solid var(--rule)}}
+@media(min-width:1100px){.info-grid{grid-template-columns:repeat(4,1fr)}.info-grid>div,.info-grid>div:nth-child(even){border-bottom:0;padding:32px 26px 0 26px;border-left:1px solid var(--rule)}.info-grid>div:first-child{border-left:0;padding-left:0}}
+#credits{background:var(--cream);padding:48px 0 40px;border-top:1px solid var(--rule)}
+#credits h2{font:500 30px/1.1 var(--serif);margin-bottom:6px}
+#credits .note{font-size:13.5px;color:var(--muted);margin-bottom:22px;max-width:70ch}
+#credits ul{display:grid;gap:0 40px;font-size:13px;line-height:1.5;color:#4b4144}
+#credits li{padding:7px 0}
+#credits li b{font-weight:500}
+#credits a{color:var(--rose-d);text-underline-offset:2px;padding:12px 0}
+@media(min-width:900px){#credits ul{grid-template-columns:1fr 1fr}}
+.foot{background:var(--ink);color:#EADFDC;padding:64px 0 96px}
+.foot a{text-decoration:none;color:inherit}
+.foot a:hover{text-decoration:underline;text-underline-offset:3px}
+.foot-grid{display:grid;gap:40px}
+.foot .logo{justify-self:start;text-align:left}
+.foot .logo b{color:#fff}
+.foot .logo b i{color:#E8B3BE}
+.foot .logo small{color:#B9A9AB}
+.foot p.about{font-size:14.5px;line-height:1.7;max-width:36ch;margin:18px 0 20px;color:#CDBFBF}
+.foot h3{font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#E8B3BE;margin-bottom:18px}
+.foot ul{display:grid;gap:4px;font-size:14.5px}
+.foot ul a,.foot ul button{display:inline-flex;align-items:center;gap:10px;min-height:40px;color:#EADFDC;background:none;border:0;padding:0;font:inherit}
+.foot ul button:hover{text-decoration:underline;text-underline-offset:3px}
+.visit li{align-items:flex-start;display:flex;gap:12px;min-height:0;padding:3px 0;line-height:1.5}
+.social{display:flex;gap:10px}
+.social a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.28);border-radius:99px;font-size:13.5px}
+.foot-bot{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center;font-size:13px;color:#BDAEAF}
+.pay{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.pay span{display:inline-flex;align-items:center;gap:7px}
+@media(pointer:coarse),(max-width:899px){.foot ul{gap:0}.foot ul a,.foot ul button{min-height:44px}}
+@media(min-width:900px){.foot-grid{grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:56px}}
+
+/* ───────── Full-level flourishes: daisy-chain garlands and corner ornaments (decorative, aria-hidden, layout-neutral) ───────── */
+.chain{position:absolute;left:0;right:0;z-index:2;display:flex;justify-content:center;align-items:center;gap:clamp(4px,1.5vw,22px);pointer-events:none}
+.chain::before{content:"";position:absolute;left:6%;right:6%;top:50%;height:1px;background:var(--rule)}
+.chain>span{position:relative;background:var(--paper);border-radius:50%;padding:4px}
+.chain.top{top:clamp(0px,2.6vw,30px)}
+.chain.bot{top:-30px}
+.chain.bot::before{display:none}
+.foot{position:relative}
+#categories{position:relative}
+@media(max-width:599px){.chain .x{display:none}.chain.top{top:0}}
+.st-art{position:absolute;pointer-events:none;background:var(--paper);border-radius:50%;padding:5px}
+.st-art.b{left:-30px;top:52%}.st-art.s{left:-30px;top:-28px}
+.na{position:absolute;pointer-events:none}
+.na.a{left:6%;top:10%}.na.b{right:2%;top:2%}.na.c{right:12%;bottom:6%}
+/* ───────── cart drawer ───────── */
+.scrim{position:fixed;inset:0;z-index:90;background:rgba(43,35,38,.42);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.scrim.on{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(460px,100vw);background:var(--paper);display:flex;flex-direction:column;transform:translateX(102%);visibility:hidden;transition:transform .55s var(--ease),visibility 0s .55s;box-shadow:-30px 0 60px -30px rgba(43,35,38,.35)}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px 24px;border-bottom:1px solid var(--rule)}
+.dr-head h2{font:500 30px/1 var(--serif)}
+.dr-head h2 span{font:400 15px/1 var(--sans);color:var(--muted);margin-left:6px}
+.dr-ship{display:flex;align-items:center;gap:14px;padding:16px 24px;background:var(--cream);border-bottom:1px solid var(--rule)}
+.dr-ship p{font-size:14px;line-height:1.4;flex:1}
+.dr-ship b{font-weight:500}
+.dr-ship .meter{display:block;height:5px;background:rgba(43,35,38,.12);margin-top:9px;position:relative;overflow:hidden}
+.dr-ship .meter i{position:absolute;inset:0;width:var(--p,0%);background:var(--sage-d);transition:width .7s var(--ease)}
+.dr-ship.done .meter i{background:var(--rose)}
+.dr-scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 24px}
+.lines{display:grid}
+.line{display:grid;grid-template-columns:84px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--rule);animation:rise .45s var(--ease) both}
+.line img{width:84px;height:105px;object-fit:cover;background:var(--cream)}
+.line h3{font:500 20px/1.15 var(--serif);padding-right:30px}
+.line .opt{font-size:13px;color:var(--muted);margin-top:3px}
+.line .row{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.line .lp{font-weight:500;font-size:15px}
+.line .lp s{color:var(--muted);font-weight:400;font-size:13px;margin-right:5px}
+.line .rm{position:absolute;right:-8px;top:-8px}
+.line .li{position:relative}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--rule)}
+.qty button{width:40px;height:40px;background:none;border:0;display:grid;place-items:center;font-size:16px;line-height:1}
+.qty button:hover{background:var(--blush)}
+.qty button[aria-disabled="true"]{opacity:.38;cursor:not-allowed}.qty button[aria-disabled="true"]:hover{background:none}
+.qty output{min-width:30px;text-align:center;font-size:14.5px}
+.dr-empty{display:none;text-align:center;padding:56px 0 24px;justify-items:center;gap:14px}
+.dr-empty.show{display:grid}
+.dr-empty h3{font:500 30px/1.1 var(--serif)}
+.dr-empty p{color:var(--muted);font-size:15px;max-width:30ch}
+.upsell{padding:22px 0 8px}
+.upsell[hidden]{display:none}
+.upsell h3{font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:12px}
+.up{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--rule)}
+.up img{width:56px;height:70px;object-fit:cover}
+.up b{display:block;font:500 17px/1.15 var(--serif)}
+.up span.t{font-size:13px;color:var(--muted)}
+.up button{min-height:44px;padding:0 14px;border:1px solid var(--ink);background:none;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.up button:hover{background:var(--ink);color:#fff}
+.dr-foot{padding:16px 24px 74px;border-top:1px solid var(--ink);background:var(--paper);display:grid;gap:10px}
+.dr-opts{display:grid;gap:8px;padding:18px 0 4px}
+.dr-opts[hidden]{display:none}
+.totals div[hidden]{display:none}
+.dr-foot[hidden]{display:none}
+.opt-row{display:flex;align-items:center;gap:12px;font-size:14px;cursor:pointer;min-height:44px}
+.opt-row input{width:20px;height:20px;accent-color:var(--rose-d);flex:none}
+.opt-row .pr{margin-left:auto;font-weight:500}
+.note{display:none;gap:6px}
+.note.show{display:grid}
+.note textarea{width:100%;min-height:70px;resize:vertical;border:1px solid var(--rule);background:var(--cream);padding:10px 12px;font:400 14px/1.5 var(--sans);color:var(--ink);border-radius:0}
+.note small{font-size:12px;color:var(--muted);text-align:right}
+.promo{display:flex;border:1px solid var(--rule)}
+.promo input{flex:1;min-width:0;border:0;background:none;padding:0 14px;min-height:46px;font:400 14px/1 var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--ink);border-radius:0}
+.promo input::placeholder{text-transform:none;letter-spacing:.02em;color:#7a6d70}
+.promo button{border:0;border-left:1px solid var(--rule);background:none;padding:0 18px;font:500 11.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;min-height:46px}
+.promo button:hover{background:var(--ink);color:#fff}
+.promo-msg{font-size:12.5px;min-height:1.2em;color:var(--muted)}
+.promo-msg.good{color:var(--sage-d)}.promo-msg.bad{color:#8a2a3e}
+.totals{display:grid;gap:7px;font-size:14.5px}
+.totals div{display:flex;justify-content:space-between}
+.totals .disc{color:var(--sage-d)}
+.totals .grand{font:500 24px/1.2 var(--serif);padding-top:10px;margin-top:4px;border-top:1px solid var(--rule)}
+.dr-fine{font-size:12px;color:var(--muted);text-align:center}
+.demo-co{position:absolute;inset:0;z-index:5;background:var(--paper);display:none;flex-direction:column;justify-content:center;gap:16px;padding:40px 32px 100px;text-align:left}
+.demo-co.show{display:flex}
+.demo-co h3{font:500 36px/1.05 var(--serif)}
+.demo-co p{color:#4b4144;max-width:36ch}
+.demo-co .btn{align-self:flex-start}
+
+/* ───────── size guide modal ───────── */
+.modal{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:16px;background:rgba(43,35,38,.5);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
+.modal.open{opacity:1;visibility:visible;transition-delay:0s}
+.m-card{width:min(760px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--paper);padding:0;transform:translateY(18px);transition:transform .5s var(--ease);position:relative}
+.modal.open .m-card{transform:none}
+.m-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px 28px;border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:2}
+.m-head h2{font:500 36px/1 var(--serif)}
+.m-body{padding:22px 28px 96px}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin-bottom:20px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:0 20px 0 0;margin-right:10px;min-height:44px;font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--rose)}
+.unit{display:inline-flex;border:1px solid var(--ink);margin-bottom:14px}
+.unit button{border:0;background:none;min-width:56px;min-height:40px;font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.unit button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th,.tbl td{padding:12px 10px 12px 0;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
+.tbl th{font:500 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tbl tr.hit td{background:var(--blush);font-weight:500}
+.tbl th .u{font-size:10px;letter-spacing:.04em;text-transform:none;font-weight:400;margin-left:2px}
+.tblwrap{overflow-x:auto;background:linear-gradient(90deg,var(--paper) 30%,rgba(255,252,250,0)) 0 0/28px 100% no-repeat local,linear-gradient(270deg,var(--paper) 30%,rgba(255,252,250,0)) 100% 0/28px 100% no-repeat local,linear-gradient(90deg,rgba(43,35,38,.16),rgba(43,35,38,0)) 0 0/10px 100% no-repeat scroll,linear-gradient(270deg,rgba(43,35,38,.16),rgba(43,35,38,0)) 100% 0/10px 100% no-repeat scroll}
+@media(max-width:480px){.m-head{padding:18px 12px 14px 20px}.m-head h2{font-size:32px}.m-body{padding:18px 16px 96px}.tbl{font-size:13.5px}.tbl th,.tbl td{padding:11px 7px 11px 0}.tbl th{font-size:10px;letter-spacing:.08em}.finder{padding:18px 16px}}
+.finder{display:grid;gap:12px;margin:26px 0 0;padding:22px;background:var(--cream)}
+.finder h3,.measure h3{font:500 24px/1.1 var(--serif);display:flex;align-items:center;gap:10px}
+.finder .f{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.finder label{display:grid;gap:6px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.finder input{border:1px solid var(--ink);background:var(--paper);min-height:48px;padding:0 12px;font:400 16px var(--sans);color:var(--ink);border-radius:0}
+.finder .res{font-size:15px;min-height:1.6em}
+.finder .res b{font:500 22px var(--serif);color:var(--rose-d)}
+.measure{margin-top:26px;display:grid;gap:16px}
+.measure li{display:flex;gap:16px;align-items:flex-start;font-size:14.5px;color:#4b4144;padding:10px 0;border-bottom:1px solid var(--rule)}
+.measure li b{display:block;color:var(--ink);font-weight:500}
+.toast{position:fixed;left:16px;bottom:18px;z-index:120;background:var(--ink);color:#fff;padding:13px 20px;font-size:14px;max-width:calc(100vw - 32px);opacity:0;transform:translateY(10px);transition:opacity .35s,transform .4s var(--ease);pointer-events:none;display:flex;align-items:center;gap:10px}
+.toast.on{opacity:1;transform:none}
+
+/* ───────── levels and motion ───────── */
+html[data-level="0"] .tile-arch,html[data-level="0"] .arches .tile-arch{border-radius:4px}
+html[data-level="0"] .tile-arch::before{border-radius:2px}
+html[data-level="0"] .flag .kit-fb{padding:6px 8px}
+.tile-arch,.news-art,.hero-facts li>.kit-ico,.promise li>.kit-ico,.info-grid h3>.kit-ico,.gift-list li>.kit-ico{color:var(--rose-d)}
+.rate .kit-fb,.rv-stars .kit-fb,.hero-rate .kit-fb{color:var(--star);letter-spacing:.06em;font-size:15px}
+.rv-big .kit-fb{font-size:22px;color:var(--star)}
+.hero-rate .kit-fb{font-size:19px}
+#wish-toggle .kit-fb{font-size:25px}
+.stp .kit-fb{display:inline-grid;place-items:center;width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;font:500 15px/1 var(--sans)}
+.av .kit-fb{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--blush);color:var(--rose-d);font:500 15px/1 var(--sans);letter-spacing:.04em}
+.cal .kit-fb{display:inline-block;border:1px solid var(--ink);padding:6px 8px;font:500 15px/1.1 var(--serif);text-align:center;min-width:46px}
+.est .kit-fb{display:inline-block;background:var(--rose-d);color:#fff;font:500 12px/1 var(--sans);letter-spacing:.14em;padding:14px 9px 9px}
+.pct .kit-fb{display:inline-grid;place-items:center;width:120px;height:120px;border-radius:50%;background:var(--paper);border:1px solid var(--ink);font:500 30px/1 var(--serif)}
+.ring .kit-fb{font:500 12px/1 var(--sans);color:var(--sage-d)}
+.clk .kit-fb{font-size:14px}
+.cart-fb .kit-fb{font-size:15px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Bloom &amp; Thread is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce" role="region" aria-label="Shop announcements">
+  <div class="wrap announce-in">
+    <p class="ann on"><span data-ico="truck" data-size="22">🚚</span> Free shipping on orders over $75</p>
+    <p class="ann"><span data-ico="undo" data-size="22">↩️</span> 30-day easy returns</p>
+    <p class="ann"><span data-ico="gift" data-size="22">🎁</span> Complimentary gift wrapping, always</p>
+  </div>
+</div>
+
+<header class="hdr" id="top">
+  <div class="wrap hdr-in">
+    <div class="left">
+      <button class="ibtn burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><span data-ico="menu" data-size="26">☰</span></button>
+      <nav class="nav" aria-label="Shop by category">
+        <a href="#shop" data-filter="dresses">Dresses</a>
+        <a href="#shop" data-filter="knitwear">Knitwear</a>
+        <a href="#shop" data-filter="accessories">Accessories</a>
+        <a href="#shop" data-filter="jewellery">Jewellery</a>
+        <a href="#shop" data-filter="gifts">Gifts</a>
+      </nav>
+    </div>
+    <a class="logo" href="#top" aria-label="Bloom and Thread, home"><b>Bloom <i>&amp;</i> Thread</b><small>Willowmere &middot; est. 2016</small></a>
+    <div class="tools">
+      <button class="ibtn" id="search-toggle" type="button" aria-label="Search the shop" aria-expanded="false" aria-controls="searchbar"><span data-ico="search" data-size="30">🔍</span></button>
+      <a class="ibtn acct" href="#newsletter" aria-label="Letters from the studio"><span data-ico="mail" data-size="30">✉️</span></a>
+      <button class="ibtn" id="wish-toggle" type="button" aria-label="Wishlist, 0 saved pieces"><span data-ico="heart" data-size="30">♡</span><span class="cnt" id="wish-n" hidden>0</span></button>
+      <button class="ibtn cart" id="cart-toggle" type="button" aria-label="Open bag, 0 items" aria-haspopup="dialog"><span class="cart-fb" id="cart-badge" data-live="cart-count" data-p-count="0" data-size="34">Bag (0)</span></button>
+    </div>
+  </div>
+  <div class="searchbar" id="searchbar" hidden>
+    <div class="wrap sb-in">
+      <span data-ico="search" data-size="26">🔍</span>
+      <label class="sr" for="q">Search the shop</label>
+      <input id="q" type="search" placeholder="Search dresses, silk, pearls, gifts&hellip;" autocomplete="off">
+      <span class="sb-hint" id="sb-hint">Try &ldquo;silk&rdquo; or &ldquo;pearl&rdquo;</span>
+      <button class="ibtn" id="sb-close" type="button" aria-label="Close search"><span data-ico="close" data-size="22">✕</span></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Menu" hidden>
+    <div class="wrap">
+      <a href="#shop" data-filter="dresses"><span data-ico="flower" data-size="28">🌸</span> Dresses <span class="n">2 pieces</span></a>
+      <a href="#shop" data-filter="knitwear"><span data-ico="shirt" data-size="28">👚</span> Knitwear &amp; tops <span class="n">2 pieces</span></a>
+      <a href="#shop" data-filter="accessories"><span data-ico="shopping-bag" data-size="28">👜</span> Accessories <span class="n">4 pieces</span></a>
+      <a href="#shop" data-filter="jewellery"><span data-ico="gem" data-size="28">💍</span> Jewellery &amp; hair <span class="n">2 pieces</span></a>
+      <a href="#shop" data-filter="gifts"><span data-ico="gift" data-size="28">🎁</span> Gifts <span class="n">2 pieces</span></a>
+      <a href="#story"><span data-ico="hand-heart" data-size="28">💗</span> Our story</a>
+      <button class="mrow" id="wish-m" type="button"><span data-ico="heart" data-size="28">♡</span> Saved pieces <span class="n" id="wish-mn">none yet</span></button>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-h">
+  <div class="hero-panel">
+    <p class="eyebrow"><span data-ico="sparkles" data-size="22" data-min-level="1"></span>The Daisy Chain edit <b>&middot; Vol. 07</b></p>
+    <h1 class="h1" id="hero-h">Soft days, <em>sewn slowly.</em></h1>
+    <p class="lead">Dresses, knits and keepsakes designed at our kitchen-table studio in Willowmere and made in runs of forty or fewer. Easy to wear, made to last, and wrapped like a present.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#shop" data-filter="all">Shop the edit</a>
+      <a class="arrow-link" href="#story">Our story <span data-ico="arrow-right" data-size="22">→</span></a>
+    </div>
+    <div class="hero-rate">
+      <span class="stars-hero" data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.8 out of 5">★★★★★</span>
+      <span><b>4.8 out of 5</b><br>from 1,940 verified reviews</span>
+    </div>
+    <ul class="hero-facts">
+      <li><span data-ico="scissors" data-size="36">✂️</span><span><b>Cut in runs of forty</b><span class="t">Never more, never wasted</span></span></li>
+      <li><span data-ico="sprout" data-size="36">🌱</span><span><b>Organic &amp; recycled fibres</b><span class="t">Cotton, linen, merino</span></span></li>
+      <li><span data-ico="hand-heart" data-size="36">💗</span><span><b>Women-run since 2016</b><span class="t">Eleven makers, one street</span></span></li>
+    </ul>
+    <span class="hero-art a1" data-ico="butterfly" data-size="110" data-min-level="2" data-motion="loop"></span>
+    <span class="hero-art pin p1" data-ico="flower" data-size="44" data-min-level="2" data-motion="inview"></span>
+    <span class="hero-art pin p2" data-ico="sparkles" data-size="40" data-min-level="2" data-motion="inview"></span>
+    <span class="hero-art pin p3" data-ico="leaf" data-size="40" data-min-level="2" data-motion="inview"></span>
+  </div>
+  <figure class="hero-photo">
+    <img src="_img/bloom-and-thread/29839296-1200.jpg" srcset="_img/bloom-and-thread/29839296-800.jpg 800w, _img/bloom-and-thread/29839296-1200.jpg 1200w" sizes="(min-width:980px) 48vw, 100vw" width="1200" height="1800" alt="A woman with long auburn hair sits beside a tall bright window in a white studio, wearing an off-the-shoulder floral organza dress with puffed sleeves." style="object-position:70% 45%">
+    <a class="pictured" href="#newsletter" aria-label="Next small-batch drop, the Odile Organza Dress, Saturday 24 October. Join the list.">
+      <span class="cal" data-live="calendar-date" data-p-day="24" data-p-month="OCT" data-size="62" data-label="Saturday 24 October">24 Oct</span>
+      <span><span class="k">Next small-batch drop</span><span class="n">The Odile Organza Dress</span><span class="d" id="drop-count">Opens Saturday 24 October, 10 am</span></span>
+    </a>
+    <figcaption class="photo-credit">Photo <a href="https://www.pexels.com/@zenia-diamond-2147728402">Zenia Diamond</a> / Pexels</figcaption>
+  </figure>
+</section>
+
+<section class="promise" aria-label="Our promises">
+  <div class="wrap">
+    <ul>
+      <li><span data-ico="truck" data-size="40">🚚</span><span><b>Free shipping over $75</b><span class="t">Tracked, ships in 1 to 2 days</span></span></li>
+      <li><span data-ico="package-open" data-size="40">📦</span><span><b>30-day returns</b><span class="t">Free exchanges, printed label</span></span></li>
+      <li><span data-ico="gift" data-size="40">🎁</span><span><b>Gift wrapping</b><span class="t">Hand-tied, with a note</span></span></li>
+      <li><span data-ico="shield-check" data-size="40">🔒</span><span><b>Secure checkout</b><span class="t">Cards, wallets, gift cards</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="categories" aria-labelledby="cat-h">
+  <div class="chain top" data-min-level="2" aria-hidden="true">
+    <span class="x" data-ico="sparkles" data-size="28"></span><span class="x" data-ico="leaf" data-size="34" data-motion="inview"></span><span data-ico="flower" data-size="44" data-motion="inview"></span><span data-ico="sparkles" data-size="28"></span><span data-ico="butterfly" data-size="52" data-motion="inview"></span><span data-ico="sparkles" data-size="28"></span><span data-ico="flower" data-size="44" data-motion="inview"></span><span class="x" data-ico="leaf" data-size="34" data-motion="inview"></span><span class="x" data-ico="sparkles" data-size="28"></span>
+  </div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b>01</b> Browse</p><h2 class="h2" id="cat-h" style="margin-top:16px">Five little <em>edits</em></h2></div>
+      <p class="side">Every piece is cut in a run of forty or fewer, so each edit stays small, seasonal and a little bit special.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile t1" href="#shop" data-filter="dresses">
+        <span class="tile-arch"><span data-ico="flower" data-size="112" data-motion="hover" data-sample style="margin-top:36px">🌸</span><span class="tile-spark" data-ico="sparkles" data-size="30" data-min-level="2"></span></span>
+        <span class="tile-name">Dresses</span><span class="tile-sub">Florals, halters and sundresses for sunny days</span>
+        <span class="tile-count"><span data-count="dresses">2 pieces</span><span data-ico="arrow-right" data-size="20">→</span></span>
+      </a>
+      <a class="tile t2" href="#shop" data-filter="knitwear">
+        <span class="tile-arch"><span data-ico="shirt" data-size="112" data-motion="hover" style="margin-top:36px">👚</span></span>
+        <span class="tile-name">Knitwear &amp; tops</span><span class="tile-sub">Cable knits and broderie blouses</span>
+        <span class="tile-count"><span data-count="knitwear">2 pieces</span><span data-ico="arrow-right" data-size="20">→</span></span>
+      </a>
+      <a class="tile t3" href="#shop" data-filter="accessories">
+        <span class="tile-arch"><span data-ico="shopping-bag" data-size="112" data-motion="hover" style="margin-top:36px">👜</span></span>
+        <span class="tile-name">Accessories</span><span class="tile-sub">Silk scarves, totes, bags and beaded flats</span>
+        <span class="tile-count"><span data-count="accessories">4 pieces</span><span data-ico="arrow-right" data-size="20">→</span></span>
+      </a>
+      <a class="tile t4" href="#shop" data-filter="jewellery">
+        <span class="tile-arch"><span data-ico="gem" data-size="112" data-motion="hover" style="margin-top:36px">💍</span><span class="tile-spark" data-ico="sparkles" data-size="30" data-min-level="2"></span></span>
+        <span class="tile-name">Jewellery &amp; hair</span><span class="tile-sub">Pearl studs, embroidered clips, satin bows</span>
+        <span class="tile-count"><span data-count="jewellery">2 pieces</span><span data-ico="arrow-right" data-size="20">→</span></span>
+      </a>
+      <a class="tile t5" href="#shop" data-filter="gifts">
+        <span class="tile-arch"><span data-ico="gift" data-size="112" data-motion="hover" style="margin-top:36px">🎁</span></span>
+        <span class="tile-name">Gifts</span><span class="tile-sub">Keepsake boxes and e-gift cards</span>
+        <span class="tile-count"><span data-count="gifts">2 pieces</span><span data-ico="arrow-right" data-size="20">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="shop" aria-labelledby="shop-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b>02</b> The collection</p><h2 class="h2" id="shop-h" style="margin-top:16px">Shop the <em>Daisy Chain</em> edit</h2></div>
+      <p class="side">Twelve pieces, each made in a small batch. Choose a colour, tap quick add for your size, and we will wrap it for free.</p>
+    </div>
+    <div class="bar">
+      <div class="chips" id="chips" role="group" aria-label="Filter by category">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All <sup data-n="all">12</sup></button>
+        <button class="chip" type="button" data-f="new" aria-pressed="false"><span data-ico="sparkles" data-size="20" data-min-level="2"></span>New in <sup data-n="new">3</sup></button>
+        <button class="chip" type="button" data-f="dresses" aria-pressed="false">Dresses <sup data-n="dresses">2</sup></button>
+        <button class="chip" type="button" data-f="knitwear" aria-pressed="false">Knitwear &amp; tops <sup data-n="knitwear">2</sup></button>
+        <button class="chip" type="button" data-f="accessories" aria-pressed="false">Accessories <sup data-n="accessories">4</sup></button>
+        <button class="chip" type="button" data-f="jewellery" aria-pressed="false">Jewellery &amp; hair <sup data-n="jewellery">2</sup></button>
+        <button class="chip" type="button" data-f="gifts" aria-pressed="false">Gifts <sup data-n="gifts">2</sup></button>
+        <button class="chip" type="button" data-f="sale" aria-pressed="false">Sale <sup data-n="sale">2</sup></button>
+        <button class="chip" type="button" data-f="saved" aria-pressed="false" hidden><span data-ico="heart" data-size="20" data-min-level="1"></span>Saved <sup data-n="saved">0</sup></button>
+      </div>
+      <div class="bar-r">
+        <p class="found" id="found" role="status" aria-live="polite">Showing <b>12</b> pieces</p>
+        <label class="sortlab">Sort by
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="newest">Newest first</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+            <option value="rated">Top rated</option>
+          </select>
+        </label>
+        <button class="sg-open" type="button" data-sg><span data-ico="ruler" data-size="24">📏</span> Size guide</button>
+      </div>
+    </div>
+    <div class="grid" id="grid">
+    <article class="card" data-id="marguerite" data-name="Marguerite Halter Dress" data-cat="dresses" data-price="128" data-new="1" data-rating="4.8" data-n="212" data-date="2026-09-28" data-sizes="XS|S|M|L|XL" data-tags="marguerite halter dress cotton voile · tie waist · midi dress floral blue halter voile summer wedding guest" data-img="_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-200.jpg" data-fp="50% 40%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-700.jpg" srcset="_img/bloom-and-thread/photo-1752681329832-b020392ef9cc-480.jpg 480w, _img/bloom-and-thread/photo-1752681329832-b020392ef9cc-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Marguerite halter dress in blue-and-white floral cotton voile with a tie waist and ruffled hem, worn on a sunlit woodland path." style="--fp:50% 40%" loading="lazy" decoding="async">
+      <span class="flag" data-live="ribbon-label" data-p-text="NEW" data-size="44" data-label="New arrival">NEW</span>
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Marguerite Halter Dress to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose a size for Marguerite Halter Dress"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose a size for Marguerite Halter Dress">
+          <p class="qa-h"><span>Size</span><button class="sg" type="button" data-sg>Size guide</button><button class="qa-x" type="button" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="XS">XS</button><button type="button" data-v="S">S</button><button type="button" data-v="M">M</button><button type="button" data-v="L">L</button><button type="button" data-v="XL">XL</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Marguerite Halter Dress</h3>
+        <p class="sub">Cotton voile · tie waist · midi</p>
+        <div class="meta-row"><p class="price"><span class="now">$128</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.8 out of 5">★★★★★</span><span><b>4.8</b> (212)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Cornflower" data-colour="Cornflower" style="--c:#7E96C8"></button><button type="button" role="radio" aria-checked="false" aria-label="Ivory" data-colour="Ivory" style="--c:#F1E9DB"></button><span class="cn">Cornflower</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="wren" data-name="Wren Cable Cardigan" data-cat="knitwear" data-price="96" data-rating="4.6" data-n="138" data-date="2026-08-14" data-sizes="XS|S|M|L|XL" data-tags="wren cable cardigan cotton-merino · tortoiseshell buttons cardigan knit sweater cable cream wool layer" data-img="_img/bloom-and-thread/30863768-200.jpg" data-fp="50% 40%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/30863768-700.jpg" srcset="_img/bloom-and-thread/30863768-480.jpg 480w, _img/bloom-and-thread/30863768-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1496" alt="Wren cream cable-knit cardigan with tortoiseshell buttons, shown with a floral midi skirt and a bunch of white daisies in a barley field." style="--fp:50% 40%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Wren Cable Cardigan to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose a size for Wren Cable Cardigan"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose a size for Wren Cable Cardigan">
+          <p class="qa-h"><span>Size</span><button class="sg" type="button" data-sg>Size guide</button><button class="qa-x" type="button" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="XS">XS</button><button type="button" data-v="S">S</button><button type="button" data-v="M">M</button><button type="button" data-v="L">L</button><button type="button" data-v="XL">XL</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Wren Cable Cardigan</h3>
+        <p class="sub">Cotton-merino · tortoiseshell buttons</p>
+        <div class="meta-row"><p class="price"><span class="now">$96</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.6 out of 5">★★★★★</span><span><b>4.6</b> (138)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Oat" data-colour="Oat" style="--c:#E3D6C0"></button><button type="button" role="radio" aria-checked="false" aria-label="Blush" data-colour="Blush" style="--c:#E8C4C4"></button><button type="button" role="radio" aria-checked="false" aria-label="Sage" data-colour="Sage" style="--c:#A9B8A0"></button><span class="cn">Oat</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="daphne" data-name="Daphne Crossbody" data-cat="accessories" data-price="112" data-was="140" data-rating="4.8" data-n="177" data-date="2026-07-02" data-sizes="One size" data-tags="daphne leather crossbody vegetable-tanned leather · adjustable strap bag handbag crossbody leather white purse" data-img="_img/bloom-and-thread/3808229-200.jpg" data-fp="58% 55%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/3808229-700.jpg" srcset="_img/bloom-and-thread/3808229-480.jpg 480w, _img/bloom-and-thread/3808229-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1200" alt="Daphne white leather crossbody bag with the flap open beside tortoiseshell sunglasses and a floral wallet, resting on chunky cream knitwear." style="--fp:58% 55%" loading="lazy" decoding="async">
+      <span class="flag sale" data-live="sale-sticker" data-p-text="-20%" data-size="56" data-label="20 percent off">-20%</span>
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Daphne Crossbody to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Daphne Crossbody to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Daphne Crossbody</h3>
+        <p class="sub">Vegetable-tanned leather · adjustable strap</p>
+        <div class="meta-row"><p class="price"><s>$140</s><span class="now sale">$112</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.8 out of 5">★★★★★</span><span><b>4.8</b> (177)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Ivory" data-colour="Ivory" style="--c:#F4EFE8"></button><button type="button" role="radio" aria-checked="false" aria-label="Blush" data-colour="Blush" style="--c:#E7BFC0"></button><span class="cn">Ivory</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="isla" data-name="Isla Silk Scarf" data-cat="accessories" data-price="42" data-rating="4.5" data-n="87" data-date="2026-06-20" data-sizes="One size" data-tags="isla silk scarf hand-rolled silk twill · 70 cm square scarf silk neck hair sunny yellow gift" data-img="_img/bloom-and-thread/36455711-200.jpg" data-fp="50% 55%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/36455711-700.jpg" srcset="_img/bloom-and-thread/36455711-480.jpg 480w, _img/bloom-and-thread/36455711-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Isla silk scarf in a yellow and orange print, twisted into a loop on a white shirt." style="--fp:50% 55%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Isla Silk Scarf to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Isla Silk Scarf to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Isla Silk Scarf</h3>
+        <p class="sub">Hand-rolled silk twill · 70 cm square</p>
+        <div class="meta-row"><p class="price"><span class="now">$42</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.5 out of 5">★★★★★</span><span><b>4.5</b> (87)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Marigold" data-colour="Marigold" style="--c:#EBB43B"></button><button type="button" role="radio" aria-checked="false" aria-label="Poppy" data-colour="Poppy" style="--c:#D5543F"></button><span class="cn">Marigold</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="clementine" data-name="Clementine Sundress" data-cat="dresses" data-price="142" data-was="168" data-rating="4.7" data-n="164" data-date="2026-05-30" data-sizes="XS|S|M|L|XL" data-tags="clementine sweetheart sundress linen blend · sweetheart neckline dress sundress floral pink linen summer picnic" data-img="_img/bloom-and-thread/4589213-200.jpg" data-fp="52% 40%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/4589213-700.jpg" srcset="_img/bloom-and-thread/4589213-480.jpg 480w, _img/bloom-and-thread/4589213-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="800" alt="Clementine sweetheart sundress in pink-and-cream florals, styled with a straw hat on weathered white steps beside a basket of daisies." style="--fp:52% 40%" loading="lazy" decoding="async">
+      <span class="flag sale" data-live="sale-sticker" data-p-text="-15%" data-size="56" data-label="15 percent off">-15%</span>
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Clementine Sundress to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose a size for Clementine Sundress"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose a size for Clementine Sundress">
+          <p class="qa-h"><span>Size</span><button class="sg" type="button" data-sg>Size guide</button><button class="qa-x" type="button" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="XS">XS</button><button type="button" data-v="S">S</button><button type="button" data-v="M">M</button><button type="button" data-v="L">L</button><button type="button" data-v="XL">XL</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Clementine Sundress</h3>
+        <p class="sub">Linen blend · sweetheart neckline</p>
+        <div class="meta-row"><p class="price"><s>$168</s><span class="now sale">$142</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.7 out of 5">★★★★★</span><span><b>4.7</b> (164)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Blush floral" data-colour="Blush floral" style="--c:#E9B9BE"></button><button type="button" role="radio" aria-checked="false" aria-label="Meadow" data-colour="Meadow" style="--c:#A9BBA2"></button><span class="cn">Blush floral</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="meadow" data-name="Meadow Seagrass Tote" data-cat="accessories" data-price="68" data-new="1" data-rating="4.7" data-n="96" data-date="2026-09-18" data-sizes="One size" data-tags="meadow seagrass tote hand-woven seagrass · cotton lining tote bag basket market seagrass straw beach" data-img="_img/bloom-and-thread/32128851-200.jpg" data-fp="35% 55%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/32128851-700.jpg" srcset="_img/bloom-and-thread/32128851-480.jpg 480w, _img/bloom-and-thread/32128851-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Meadow seagrass tote with a black woven band, filled with pink blossoms and carried across a green lawn." style="--fp:35% 55%" loading="lazy" decoding="async">
+      <span class="flag" data-live="ribbon-label" data-p-text="NEW" data-size="44" data-label="New arrival">NEW</span>
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Meadow Seagrass Tote to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Meadow Seagrass Tote to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Meadow Seagrass Tote</h3>
+        <p class="sub">Hand-woven seagrass · cotton lining</p>
+        <div class="meta-row"><p class="price"><span class="now">$68</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.7 out of 5">★★★★★</span><span><b>4.7</b> (96)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Natural" data-colour="Natural" style="--c:#CDB68A"></button><span class="cn">Natural</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="odette" data-name="Odette Broderie Blouse" data-cat="knitwear" data-price="74" data-rating="4.9" data-n="301" data-date="2026-04-11" data-sizes="XS|S|M|L|XL" data-tags="odette broderie blouse organic cotton · broderie anglaise trim blouse top shirt white broderie lace ruffle cotton" data-img="_img/bloom-and-thread/8452066-200.jpg" data-fp="50% 55%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/8452066-700.jpg" srcset="_img/bloom-and-thread/8452066-480.jpg 480w, _img/bloom-and-thread/8452066-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Odette white broderie blouse with a ruffled collar and cuffs, one hand resting at the chest." style="--fp:50% 55%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Odette Broderie Blouse to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose a size for Odette Broderie Blouse"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose a size for Odette Broderie Blouse">
+          <p class="qa-h"><span>Size</span><button class="sg" type="button" data-sg>Size guide</button><button class="qa-x" type="button" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="XS">XS</button><button type="button" data-v="S">S</button><button type="button" data-v="M">M</button><button type="button" data-v="L">L</button><button type="button" data-v="XL">XL</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Odette Broderie Blouse</h3>
+        <p class="sub">Organic cotton · broderie anglaise trim</p>
+        <div class="meta-row"><p class="price"><span class="now">$74</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.9 out of 5">★★★★★</span><span><b>4.9</b> (301)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Ivory" data-colour="Ivory" style="--c:#F6F1E8"></button><button type="button" role="radio" aria-checked="false" aria-label="Blush" data-colour="Blush" style="--c:#EBCFCB"></button><span class="cn">Ivory</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="posy" data-name="Posy Clip &amp; Bow Set" data-cat="jewellery" data-price="36" data-rating="4.6" data-n="118" data-date="2026-08-30" data-sizes="One size" data-tags="posy clip &amp; bow set four embroidered clips and one satin bow hair clips barrette bow satin embroidered linen accessories" data-img="_img/bloom-and-thread/31702117-200.jpg" data-fp="50% 50%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/31702117-700.jpg" srcset="_img/bloom-and-thread/31702117-480.jpg 480w, _img/bloom-and-thread/31702117-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1600" alt="Posy handmade white linen snap hair clips embroidered with coral, cream and olive-green flowers, laid out in two diagonal rows." style="--fp:50% 50%" loading="lazy" decoding="async">
+      <img class="alt" src="_img/bloom-and-thread/36977878-700.jpg" srcset="_img/bloom-and-thread/36977878-480.jpg 480w, _img/bloom-and-thread/36977878-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="The satin bow barrette from the Posy set, clipped into long chestnut hair." style="--fp:50% 55%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Posy Clip &amp; Bow Set to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Posy Clip &amp; Bow Set to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Posy Clip &amp; Bow Set</h3>
+        <p class="sub">Four embroidered clips and one satin bow</p>
+        <div class="meta-row"><p class="price"><span class="now">$36</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.6 out of 5">★★★★★</span><span><b>4.6</b> (118)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Coral sprig" data-colour="Coral sprig" style="--c:#E58F7E"></button><button type="button" role="radio" aria-checked="false" aria-label="Olive sprig" data-colour="Olive sprig" style="--c:#8B9467"></button><span class="cn">Coral sprig</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="perle" data-name="Perle Pearl Studs" data-cat="jewellery" data-price="54" data-rating="4.9" data-n="342" data-date="2026-03-02" data-sizes="One size" data-tags="perle pearl studs freshwater pearl · gold-plated studs earrings pearl studs gold jewellery gift" data-img="_img/bloom-and-thread/photo-1682822749969-61a63203c501-200.jpg" data-fp="55% 58%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/photo-1682822749969-61a63203c501-700.jpg" srcset="_img/bloom-and-thread/photo-1682822749969-61a63203c501-480.jpg 480w, _img/bloom-and-thread/photo-1682822749969-61a63203c501-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1200" alt="Perle gold-and-pearl stud earrings, each a faceted gold nugget with a large freshwater pearl drop, on a warm peach surface." style="--fp:55% 58%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Perle Pearl Studs to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Perle Pearl Studs to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Perle Pearl Studs</h3>
+        <p class="sub">Freshwater pearl · gold-plated studs</p>
+        <div class="meta-row"><p class="price"><span class="now">$54</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.9 out of 5">★★★★★</span><span><b>4.9</b> (342)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Gold" data-colour="Gold" style="--c:#D4AF63"></button><span class="cn">Gold</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="cecily" data-name="Cecily Beaded Flats" data-cat="accessories" data-price="88" data-rating="4.4" data-n="59" data-date="2026-09-05" data-sizes="US 6|US 7|US 8|US 9|US 10" data-tags="cecily beaded ballet flats satin · hand-beaded florals shoes flats ballet beaded satin footwear" data-img="_img/bloom-and-thread/35222104-200.jpg" data-fp="50% 60%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/35222104-700.jpg" srcset="_img/bloom-and-thread/35222104-480.jpg 480w, _img/bloom-and-thread/35222104-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1600" alt="Cecily cream ballet flats embroidered with pink and turquoise beaded flowers, resting on gathered pink fabric." style="--fp:50% 60%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Cecily Beaded Flats to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose a size for Cecily Beaded Flats"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose a size for Cecily Beaded Flats">
+          <p class="qa-h"><span>US size</span><button class="sg" type="button" data-sg data-sg-tab="shoes">Size guide</button><button class="qa-x" type="button" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="US 6">6</button><button type="button" data-v="US 7">7</button><button type="button" data-v="US 8">8</button><button type="button" data-v="US 9">9</button><button type="button" data-v="US 10">10</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Cecily Beaded Flats</h3>
+        <p class="sub">Satin · hand-beaded florals</p>
+        <div class="meta-row"><p class="price"><span class="now">$88</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="Rated 4.4 out of 5">★★★★☆</span><span><b>4.4</b> (59)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Cream" data-colour="Cream" style="--c:#F1E7D6"></button><button type="button" role="radio" aria-checked="false" aria-label="Rosebud" data-colour="Rosebud" style="--c:#E9A9B8"></button><span class="cn">Cream</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="keepsake" data-name="Keepsake Gift Box" data-cat="gifts" data-price="38" data-rating="4.8" data-n="205" data-date="2026-02-10" data-sizes="One size" data-tags="keepsake gift box lavender sachet, rose soap and a card gift box present wrap ribbon birthday keepsake lavender" data-img="_img/bloom-and-thread/23784969-200.jpg" data-fp="45% 50%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/23784969-700.jpg" srcset="_img/bloom-and-thread/23784969-480.jpg 480w, _img/bloom-and-thread/23784969-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Keepsake gift box wrapped in paper printed with tiny gold motifs and topped with a pink satin pull-bow." style="--fp:45% 50%" loading="lazy" decoding="async">
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Keepsake Gift Box to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Add Keepsake Gift Box to your bag"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Add to bag</span></button>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Keepsake Gift Box</h3>
+        <p class="sub">Lavender sachet, rose soap and a card</p>
+        <div class="meta-row"><p class="price"><span class="now">$38</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.8 out of 5">★★★★★</span><span><b>4.8</b> (205)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Gold dots" data-colour="Gold dots" style="--c:#E3C788"></button><button type="button" role="radio" aria-checked="false" aria-label="Lavender" data-colour="Lavender" style="--c:#B9AAD0"></button><span class="cn">Gold dots</span></div>
+      </div>
+    </article>
+    <article class="card" data-id="giftcard" data-name="Bloom e-Gift Card" data-cat="gifts" data-price="25" data-new="1" data-rating="5" data-n="41" data-date="2026-10-01" data-sizes="$25|$50|$75|$100" data-amounts="1" data-tags="bloom e-gift card delivered by email, never expires gift card voucher e-gift present any occasion" data-img="_img/bloom-and-thread/photo-1646182504958-560a709fd368-200.jpg" data-fp="60% 60%">
+      <div class="media">
+      <img class="im" src="_img/bloom-and-thread/photo-1646182504958-560a709fd368-700.jpg" srcset="_img/bloom-and-thread/photo-1646182504958-560a709fd368-480.jpg 480w, _img/bloom-and-thread/photo-1646182504958-560a709fd368-900.jpg 900w" sizes="(min-width:1100px) 280px, (min-width:760px) 30vw, 46vw" width="1200" height="1800" alt="Bloom e-gift card artwork: soft pink and white watercolour florals on a pale blue-grey ground, with a pink ribbon in the corner." style="--fp:60% 60%" loading="lazy" decoding="async">
+      <span class="flag" data-live="ribbon-label" data-p-text="NEW" data-size="44" data-label="New arrival">NEW</span>
+      <button class="wish" type="button" aria-pressed="false" aria-label="Save Bloom e-Gift Card to your wishlist"><span data-ico="heart" data-size="26">♡</span></button>
+      <div class="qa">
+        <button class="qa-open" type="button" aria-expanded="false" aria-label="Choose an amount for Bloom e-Gift Card"><span data-ico="shopping-bag" data-size="22">🛍️</span><span class="qa-t">Quick add</span></button>
+        <div class="qa-sheet" role="group" aria-label="Choose an amount for Bloom e-Gift Card">
+          <p class="qa-h"><span>Amount</span><button class="qa-x" type="button" aria-label="Close amount picker"><span data-ico="close" data-size="22">✕</span></button></p>
+          <div class="qa-sizes"><button type="button" data-v="$25">$25</button><button type="button" data-v="$50">$50</button><button type="button" data-v="$75">$75</button><button type="button" data-v="$100">$100</button></div>
+        </div>
+      </div>
+      </div>
+      <div class="meta">
+        <h3 class="name">Bloom e-Gift Card</h3>
+        <p class="sub">Delivered by email, never expires</p>
+        <div class="meta-row"><p class="price"><span class="now">From $25</span></p><div class="rate"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 5 out of 5">★★★★★</span><span><b>5.0</b> (41)</span></div></div>
+        <div class="sw" role="radiogroup" aria-label="Colour"><button type="button" role="radio" aria-checked="true" aria-label="Watercolour" data-colour="Watercolour" style="--c:#E9C1C8"></button><span class="cn">Watercolour</span></div>
+      </div>
+    </article>
+    </div>
+    <div class="orn" data-min-level="2" style="margin-top:64px"><span data-ico="flower" data-size="40" data-motion="hover"></span></div>
+    <div class="empty-state" id="none" hidden>
+      <span data-ico="search" data-size="64" class="f64">🔍</span>
+      <h3 id="none-h">Nothing matches <em id="none-q"></em> yet</h3>
+      <p id="none-p">Try a softer word like &ldquo;silk&rdquo;, &ldquo;floral&rdquo; or &ldquo;gift&rdquo;, or clear your filters to see everything.</p>
+      <button class="btn ghost" type="button" id="clear-all">Clear search and filters</button>
+    </div>
+  </div>
+</section>
+
+<section class="gift sec" id="gifts" aria-labelledby="gift-h">
+  <div class="wrap gift-in">
+    <div>
+      <p class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b>03</b> Gift studio</p>
+      <h2 class="h2" id="gift-h" style="margin:16px 0 18px">Wrapped like a present, <em>because it is.</em></h2>
+      <p class="lead">Every order leaves the studio tied with cotton ribbon in recycled paper. Add a handwritten note and we will leave the receipt out.</p>
+      <ul class="gift-list">
+        <li><span data-ico="gift" data-size="44">🎁</span><span><b>Hand-tied gift wrap</b><span class="t">Recycled paper, cotton ribbon, a sprig of dried lavender</span></span><span class="pr">Free</span></li>
+        <li><span data-ico="love-letter" data-size="44">💌</span><span><b>A handwritten note</b><span class="t">Up to 140 characters, in Imogen&rsquo;s best handwriting</span></span><span class="pr">Free</span></li>
+        <li><span data-ico="heart-gift" data-size="44">💝</span><span><b>Ship it straight to them</b><span class="t">Gift receipt inside, prices left off the packing slip</span></span><span class="pr">Free</span></li>
+      </ul>
+      <a class="btn" href="#shop" data-filter="gifts">Shop gifts</a>
+    </div>
+    <div class="arches" aria-hidden="true">
+      <div class="a1"><span class="tile-arch" style="--t:#FFFCFA"><span class="f88" data-ico="rose-bouquet" data-size="112" data-motion="inview" style="margin-top:30px">💐</span><span class="tile-spark" data-ico="sparkles" data-size="32" data-min-level="2" data-motion="inview"></span></span></div>
+      <div class="a2" style="position:relative"><span class="tile-arch" style="--t:#DDE6D7"><span class="f88" data-ico="gift" data-size="128" data-motion="loop" style="margin-top:34px">🎁</span><span class="tile-spark l" data-ico="heart" data-size="30" data-min-level="2" data-motion="inview"></span></span>
+        <span class="tag pct2" data-live="price-tag" data-p-amount="38" data-size="64" data-label="Keepsake box from 38 dollars">$38</span></div>
+      <div class="a3"><span class="tile-arch" style="--t:#F6EBCF"><span class="f88" data-ico="teddy-bear" data-size="112" data-motion="inview" style="margin-top:30px">🧸</span><span class="tile-spark" data-ico="sparkles" data-size="32" data-min-level="2" data-motion="inview"></span></span></div>
+      <span class="ga b" data-ico="butterfly" data-size="72" data-min-level="2" data-motion="inview"></span>
+      <span class="ga s" data-ico="sparkles" data-size="40" data-min-level="2" data-motion="inview"></span>
+      <span class="ga f" data-ico="flower" data-size="56" data-min-level="2" data-motion="inview"></span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="story" aria-labelledby="story-h">
+  <div class="wrap">
+    <div class="story-in">
+      <figure class="story-photo">
+        <div class="sp"><img src="_img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-1000.jpg" srcset="_img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-700.jpg 700w, _img/bloom-and-thread/photo-1769107805465-bfd41863f1a0-1100.jpg 1100w" sizes="(min-width:960px) 42vw, 90vw" width="1200" height="1800" alt="A bright minimalist boutique interior with a rail of cream and oat linen clothes on wooden hangers, a tall cactus, a concrete pillar and curved boucle chairs." loading="lazy" decoding="async">
+        <span class="est" data-live="ribbon-label" data-p-text="2016" data-size="72" data-label="Established 2016">EST. 2016</span>
+        <span class="st-art b" data-ico="butterfly" data-size="64" data-min-level="2" data-motion="inview"></span>
+        <span class="st-art s" data-ico="sparkles" data-size="34" data-min-level="2" data-motion="inview"></span></div>
+        <figcaption>The shop floor on Cobbler&rsquo;s Row, with the rail of this month&rsquo;s linens.</figcaption>
+      </figure>
+      <div class="story-body">
+        <p class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b>04</b> Our story</p>
+        <h2 class="h2" id="story-h">Two friends, one sewing table above the <em>old hardware store.</em></h2>
+        <p>Bloom &amp; Thread began in 2016 on Imogen Hale&rsquo;s kitchen table, with a borrowed sewing machine and a stack of vintage dress patterns. Priya Raman, a weaver who lived upstairs, came down for a cup of tea and stayed for the next ten years.</p>
+        <p>Today we are eleven makers working from the old hardware store on Cobbler&rsquo;s Row. We cut each piece in a run of forty or fewer, finish the edges by hand and sell what we make through this little shop and one slightly larger one on the market square. Nothing is made until there is room for it on the rail.</p>
+        <p class="sig"><span data-ico="hand-heart" data-size="34" data-min-level="1">💗</span> Imogen &amp; Priya</p>
+        <div class="stats">
+          <div><b>10</b><span>years of kitchen-table to shopfront</span></div>
+          <div><b>40</b><span>pieces in our biggest ever run</span></div>
+          <div><b>11</b><span>makers, all within a mile of the shop</span></div>
+        </div>
+      </div>
+    </div>
+    <ol class="steps" aria-label="How a piece is made">
+      <li><span class="stp" data-live="step-number" data-p-step="1" data-size="46" data-label="Step 1">1</span><div><h3><span data-ico="pencil" data-size="30" data-min-level="1"></span>Sketch</h3><p>Imogen draws each piece twice: once for how it looks, once for how it moves.</p></div></li>
+      <li><span class="stp" data-live="step-number" data-p-step="2" data-size="46" data-label="Step 2">2</span><div><h3><span data-ico="sprout" data-size="30" data-min-level="1"></span>Source</h3><p>Organic cotton, European linen and recycled merino from mills we have visited.</p></div></li>
+      <li><span class="stp" data-live="step-number" data-p-step="3" data-size="46" data-label="Step 3">3</span><div><h3><span data-ico="scissors" data-size="30" data-min-level="1"></span>Stitch</h3><p>Runs of forty or fewer, cut and sewn within a mile of the shop.</p></div></li>
+      <li><span class="stp" data-live="step-number" data-p-step="4" data-size="46" data-label="Step 4">4</span><div><h3><span data-ico="gift" data-size="30" data-min-level="1"></span>Wrap</h3><p>Pressed, folded and tied up with ribbon before it goes in the post.</p></div></li>
+    </ol>
+    <div class="orn" data-min-level="2" style="margin-top:72px"><span data-ico="rose" data-size="40" data-motion="hover"></span></div>
+  </div>
+</section>
+
+<section class="sec reviews" id="reviews" aria-labelledby="rv-h">
+  <div class="wrap rv-in">
+    <div class="rv-sum">
+      <p class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b>05</b> Kind words</p>
+      <h2 class="h2" id="rv-h">Loved by nearly <em>two thousand</em> of you</h2>
+      <div class="rv-big"><b>4.8</b><span><span data-live="rating-stars" data-p-rating="5" data-size="76" data-label="Average rating 4.8 out of 5">★★★★★</span><span class="t">1,940 verified reviews</span></span></div>
+      <ul class="dist" aria-label="Rating breakdown">
+        <li><span>5 star</span><i style="--w:84%"></i><span>84%</span></li>
+        <li><span>4 star</span><i style="--w:12%"></i><span>12%</span></li>
+        <li><span>3 star</span><i style="--w:3%"></i><span>3%</span></li>
+        <li><span>2 star</span><i style="--w:1%"></i><span>1%</span></li>
+        <li><span>1 star</span><i style="--w:0%"></i><span>0%</span></li>
+      </ul>
+      <div class="rv-nav">
+        <button class="ibtn" id="rv-prev" type="button" aria-label="Previous reviews"><span data-ico="chevron-left" data-size="24">←</span></button>
+        <button class="ibtn" id="rv-next" type="button" aria-label="Next reviews"><span data-ico="chevron-right" data-size="24">→</span></button>
+      </div>
+    </div>
+    <div class="rv-track" id="rv-track" tabindex="0" role="group" aria-label="Customer reviews, scroll sideways">
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="HR" data-size="52" data-label="Hannah R.">HR</span><div class="rv-who"><b>Hannah R. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Portland, OR &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="5" data-size="56" data-label="5 out of 5">★★★★★</span><span>September 9, 2026</span></div>
+        <h3>Fits like it was made for me</h3>
+        <p class="q">I am between sizes and the tie waist solved it. The voile is light enough for a 90 degree day and the print is even prettier in person. Four compliments at the farmers&rsquo; market already.</p>
+        <div class="rv-foot"><span>Marguerite Halter Dress &middot; S</span><button class="help" type="button" aria-pressed="false" data-n="24"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">24</span></button></div>
+      </article>
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="MV" data-size="52" data-label="Marisol V.">MV</span><div class="rv-who"><b>Marisol V. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Austin, TX &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="4.5" data-size="56" data-label="4.5 out of 5">★★★★☆</span><span>August 28, 2026</span></div>
+        <h3>The buttons are the thing</h3>
+        <p class="q">Tortoiseshell buttons, a proper weight of cotton-merino, and no pilling after six washes. Size down if you like it neat; true to size if you like it slouchy.</p>
+        <div class="rv-foot"><span>Wren Cable Cardigan &middot; M</span><button class="help" type="button" aria-pressed="false" data-n="17"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">17</span></button></div>
+      </article>
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="IL" data-size="52" data-label="Ingrid L.">IL</span><div class="rv-who"><b>Ingrid L. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Minneapolis, MN &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="5" data-size="56" data-label="5 out of 5">★★★★★</span><span>October 2, 2026</span></div>
+        <h3>Bought a second pair for my sister</h3>
+        <p class="q">They came in a little linen pouch with a handwritten card. The pearls have real lustre, and the gold has not bothered my sensitive ears once.</p>
+        <div class="rv-foot"><span>Perle Pearl Studs</span><button class="help" type="button" aria-pressed="false" data-n="41"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">41</span></button></div>
+      </article>
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="DK" data-size="52" data-label="Dani K.">DK</span><div class="rv-who"><b>Dani K. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Asheville, NC &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="4" data-size="56" data-label="4 out of 5">★★★★☆</span><span>September 21, 2026</span></div>
+        <h3>Sturdy and so pretty</h3>
+        <p class="q">Holds a laptop, a baguette and a bunch of flowers without complaint. The handles are comfortable. Slightly stiff at first, and it softened within a week.</p>
+        <div class="rv-foot"><span>Meadow Seagrass Tote</span><button class="help" type="button" aria-pressed="false" data-n="9"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">9</span></button></div>
+      </article>
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="PS" data-size="52" data-label="Priyanka S.">PS</span><div class="rv-who"><b>Priyanka S. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Brooklyn, NY &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="5" data-size="56" data-label="5 out of 5">★★★★★</span><span>September 14, 2026</span></div>
+        <h3>Gifting, made easy</h3>
+        <p class="q">Ordered for my mum&rsquo;s birthday with a note in the box. The wrapping was gorgeous, it arrived two days early, and she is keeping the box for her buttons.</p>
+        <div class="rv-foot"><span>Keepsake Gift Box</span><button class="help" type="button" aria-pressed="false" data-n="33"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">33</span></button></div>
+      </article>
+      <article class="rv">
+        <div class="rv-top"><span class="av" data-live="avatar-initials" data-p-initials="EW" data-size="52" data-label="Eleanor W.">EW</span><div class="rv-who"><b>Eleanor W. <span data-ico="badge-check" data-size="22" data-label="Verified buyer">✔</span></b><span class="t">Burlington, VT &middot; Verified buyer</span></div></div>
+        <div class="rv-stars"><span data-live="rating-stars" data-p-rating="5" data-size="56" data-label="5 out of 5">★★★★★</span><span>August 11, 2026</span></div>
+        <h3>Ethereal, but actually practical</h3>
+        <p class="q">The broderie looks delicate and survived a trip, a toddler and the washing machine. I have ordered it in blush as well. Quick, kind service when I needed an exchange.</p>
+        <div class="rv-foot"><span>Odette Broderie Blouse &middot; XS</span><button class="help" type="button" aria-pressed="false" data-n="28"><span data-ico="thumbs-up" data-size="22">👍</span> Helpful <span class="hn">28</span></button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="news sec" id="newsletter" aria-labelledby="news-h">
+  <div class="wrap news-in">
+    <div>
+      <p class="eyebrow" style="color:#2f4034"><span data-ico="sparkles" data-size="20" data-min-level="2"></span><b style="color:#43544a">06</b> Letters from the studio</p>
+      <h2 class="h2" id="news-h" style="margin-top:16px">First Sunday, <em style="color:var(--rose-d)">once a month.</em></h2>
+      <p class="lead" style="margin-top:16px;color:#2f3d34">New drops, studio notes and the occasional pattern giveaway. Join today and take 10% off your first order.</p>
+      <form id="news-form" action="#" novalidate>
+        <label class="sr" for="email">Email address</label>
+        <div class="fld"><input id="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="email-err" required><button class="btn" type="submit">Subscribe</button></div>
+        <p class="err" id="email-err" role="alert"></p>
+        <p class="fine">One letter a month. Unsubscribe whenever you like. We never share your address.</p>
+      </form>
+      <div class="ok" id="news-ok" role="status">
+        <h3><span data-ico="mail-check" data-size="40">✅</span> You are on the list</h3>
+        <p>Thank you! Your code <span class="code">BLOOM10</span> is already waiting in your bag.</p>
+        <p class="fine">Look out for a welcome note from Imogen this week.</p>
+      </div>
+    </div>
+    <div class="news-art" aria-hidden="true">
+      <span class="side-ico" data-ico="mail-plus" data-size="112" data-motion="hover" data-min-level="1">✉️</span>
+      <span class="pct" data-live="percent-badge" data-p-value="10" data-p-sign="minus" data-size="176" data-label="10 percent off your first order">-10%</span>
+      <span class="side-ico" data-ico="flower" data-size="112" data-motion="hover" data-min-level="1">🌸</span>
+      <span class="na a" data-ico="sparkles" data-size="36" data-min-level="2" data-motion="inview"></span>
+      <span class="na b" data-ico="butterfly" data-size="56" data-min-level="2" data-motion="inview"></span>
+      <span class="na c" data-ico="heart" data-size="34" data-min-level="2" data-motion="inview"></span>
+    </div>
+  </div>
+</section>
+
+<section class="info" id="info" aria-labelledby="info-h">
+  <div class="wrap">
+    <h2 class="sr" id="info-h">Shipping, returns, payment and care</h2>
+    <div class="info-grid">
+      <div><h3><span data-ico="truck" data-size="44">🚚</span>Shipping</h3><p>Free over $75, otherwise a flat $6.50. Orders placed before 2 pm ship the same working day, with tracked delivery in 2 to 4 days across the US.</p></div>
+      <div><h3><span data-ico="package-open" data-size="44">📦</span>Returns</h3><p>Changed your mind? Return anything unworn within 30 days. Exchanges are free, and refunds land within 5 days of your parcel arriving.</p></div>
+      <div><h3><span data-ico="credit-card" data-size="44">💳</span>Payment</h3><p>Pay with any major card or digital wallet, or use a Bloom e-gift card. Orders over $100 can be split into four interest-free payments.</p></div>
+      <div><h3><span data-ico="droplets" data-size="44">💧</span>Care</h3><p>Wash cool, dry flat, press while damp. Every piece comes with a mending-thread card in matching colours, because we want you to keep it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <p class="note">Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Bloom &amp; Thread is a fictional boutique: every name, place, price and review on this page is made up for the demo.</p>
+    <ul>
+      <li><b>Hero:</b> floral organza dress by the window. Photo by <a href="https://www.pexels.com/@zenia-diamond-2147728402">Zenia Diamond</a> on <a href="https://www.pexels.com/photo/29839296/">Pexels</a>.</li>
+      <li><b>Marguerite Halter Dress:</b> Photo by <a href="https://unsplash.com/@ionelaaaaa?utm_source=withicons_demos&amp;utm_medium=referral">Ionela Mat</a> on <a href="https://unsplash.com/photos/woman-poses-in-a-floral-dress-on-a-path-Sb8foZVY8zA?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Clementine Sundress:</b> Photo by <a href="https://www.pexels.com/@arthousestudio">ArtHouse Studio</a> on <a href="https://www.pexels.com/photo/4589213/">Pexels</a>.</li>
+      <li><b>Odette Broderie Blouse:</b> Photo by <a href="https://www.pexels.com/@vlada-karpovich">Vlada Karpovich</a> on <a href="https://www.pexels.com/photo/8452066/">Pexels</a>.</li>
+      <li><b>Wren Cable Cardigan:</b> Photo by <a href="https://www.pexels.com/@evelina-rusinova-2068905069">Evelina Rusinova</a> on <a href="https://www.pexels.com/photo/30863768/">Pexels</a>.</li>
+      <li><b>Isla Silk Scarf:</b> Photo by <a href="https://www.pexels.com/@dauphotographer">Đậu Photograph</a> on <a href="https://www.pexels.com/photo/36455711/">Pexels</a>.</li>
+      <li><b>Meadow Seagrass Tote:</b> Photo by <a href="https://www.pexels.com/@kaderdygnn">Kader D. Kahraman</a> on <a href="https://www.pexels.com/photo/32128851/">Pexels</a>.</li>
+      <li><b>Daphne Crossbody:</b> Photo by <a href="https://www.pexels.com/@dina-nasyrova-2006209">Dina Nasyrova</a> on <a href="https://www.pexels.com/photo/3808229/">Pexels</a>.</li>
+      <li><b>Cecily Beaded Flats:</b> Photo by <a href="https://www.pexels.com/@verolova">Vero Lova</a> on <a href="https://www.pexels.com/photo/35222104/">Pexels</a>.</li>
+      <li><b>Perle Pearl Studs:</b> Photo by <a href="https://unsplash.com/@whynotnatali?utm_source=withicons_demos&amp;utm_medium=referral">Nataliia Hordiiuk</a> on <a href="https://unsplash.com/photos/a-pair-of-pearl-earrings-sitting-on-top-of-a-table-3ai_aJpH9hA?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Posy Clip &amp; Bow Set:</b> embroidered clips by <a href="https://www.pexels.com/@nerosable">Rumeysa Demir</a> on <a href="https://www.pexels.com/photo/31702117/">Pexels</a>; bow barrette (shown on hover) by <a href="https://www.pexels.com/@rebornfilmes">Alexander Mass</a> on <a href="https://www.pexels.com/photo/36977878/">Pexels</a>.</li>
+      <li><b>Keepsake Gift Box:</b> Photo by <a href="https://www.pexels.com/@adriana-coulson-1070894176">Adriana Coulson</a> on <a href="https://www.pexels.com/photo/23784969/">Pexels</a>.</li>
+      <li><b>Bloom e-Gift Card:</b> Photo by <a href="https://unsplash.com/@oakandmaystockshop?utm_source=withicons_demos&amp;utm_medium=referral">Katie Goertzen</a> on <a href="https://unsplash.com/photos/a-wrapped-gift-box-with-a-pink-ribbon-I7C5S7868Jk?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Our story:</b> boutique interior. Photo by <a href="https://unsplash.com/@___atmos?utm_source=withicons_demos&amp;utm_medium=referral">Caroline Badran</a> on <a href="https://unsplash.com/photos/clothing-rack-with-neutral-colored-dresses-and-a-cactus-Apw4z0D9xVE?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot" id="visit">
+  <div class="chain bot" data-min-level="2" aria-hidden="true">
+    <span class="x" data-ico="leaf" data-size="30"></span><span data-ico="flower" data-size="40" data-motion="inview"></span><span data-ico="sparkles" data-size="28"></span><span data-ico="rose" data-size="44" data-motion="inview"></span><span data-ico="sparkles" data-size="28"></span><span data-ico="flower" data-size="40" data-motion="inview"></span><span class="x" data-ico="leaf" data-size="30"></span>
+  </div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top" aria-label="Bloom and Thread, back to top"><b>Bloom <i>&amp;</i> Thread</b><small>Willowmere &middot; est. 2016</small></a>
+        <p class="about">An independent, women-run boutique making dresses, knits and keepsakes in small batches, from a former hardware store on Cobbler&rsquo;s Row.</p>
+        <div class="social"><a href="#newsletter"><span data-ico="camera" data-size="26">📷</span> Instagram</a><a href="#newsletter"><span data-ico="newspaper" data-size="26">📰</span> Journal</a></div>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="#shop" data-filter="new">New in</a></li>
+          <li><a href="#shop" data-filter="dresses">Dresses</a></li>
+          <li><a href="#shop" data-filter="knitwear">Knitwear &amp; tops</a></li>
+          <li><a href="#shop" data-filter="accessories">Accessories</a></li>
+          <li><a href="#shop" data-filter="jewellery">Jewellery &amp; hair</a></li>
+          <li><a href="#shop" data-filter="gifts">Gifts &amp; e-gift cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul>
+          <li><a href="#info"><span data-ico="truck" data-size="22">🚚</span>Shipping</a></li>
+          <li><a href="#info"><span data-ico="package-open" data-size="22">📦</span>Returns</a></li>
+          <li><button type="button" data-sg><span data-ico="ruler" data-size="22">📏</span>Size guide</button></li>
+          <li><a href="#info"><span data-ico="droplets" data-size="22">💧</span>Care guide</a></li>
+          <li><a href="#newsletter"><span data-ico="mail" data-size="22">✉️</span>Letters</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Visit the studio</h3>
+        <ul class="visit">
+          <li><span data-ico="map-pin" data-size="28">📍</span><span>14 Cobbler&rsquo;s Row<br>Willowmere, VT 05999</span></li>
+          <li><span class="clk" data-live="clock-time" data-p-time="10:00" data-size="44" data-label="Opens at 10 am">10am</span><span>Thursday to Sunday<br>10 am to 5 pm</span></li>
+          <li><span data-ico="phone" data-size="28">📞</span><span>555-0142</span></li>
+          <li><span data-ico="mail" data-size="28">✉️</span><span>hello@bloomandthread.example</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>&copy; 2026 Bloom &amp; Thread. Demo page made with with icons. Names, places and products are fictional.</p>
+      <div class="pay"><span><span data-ico="credit-card" data-size="26">💳</span>Cards</span><span><span data-ico="wallet" data-size="26">👛</span>Wallets</span><span><span data-ico="gift" data-size="26">🎁</span>E-gift cards</span></div>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title" aria-hidden="true">
+  <div class="dr-head">
+    <h2 id="dr-title">Your bag<span id="dr-n">(0)</span></h2>
+    <button class="ibtn" id="dr-close" type="button" aria-label="Close bag"><span data-ico="close" data-size="26">✕</span></button>
+  </div>
+  <div class="dr-ship" id="dr-ship">
+    <div style="flex:1;min-width:0"><p id="ship-msg">You are <b>$75.00</b> away from free shipping</p><span class="meter" aria-hidden="true"><i id="ship-fill"></i></span></div>
+    <span class="ring" id="ship-ring" data-live="progress-ring" data-p-value="0" data-size="54" data-label="Progress towards free shipping">0%</span>
+  </div>
+  <div class="dr-scroll" id="dr-scroll">
+    <div class="lines" id="lines"></div>
+    <div class="dr-empty show" id="dr-empty">
+      <span class="f88" data-ico="shopping-bag" data-size="84">🛍️</span>
+      <h3>Your bag is empty</h3>
+      <p>Nothing here yet, but the Daisy Chain edit is only a scroll away.</p>
+      <p class="promo-msg good" id="empty-promo" hidden>Your code BLOOM10 is saved and will take 10% off your first pieces.</p>
+      <button class="btn" type="button" id="dr-browse">Browse the edit</button>
+    </div>
+    <div class="dr-opts" id="dr-opts" hidden>
+      <label class="opt-row"><input type="checkbox" id="gw"><span data-ico="gift" data-size="28">🎁</span><span>Gift wrap my order</span><span class="pr">Free</span></label>
+      <div class="note" id="gw-note"><label class="sr" for="gw-text">Gift note</label><textarea id="gw-text" maxlength="140" placeholder="Write a note, up to 140 characters. We will copy it out by hand."></textarea><small id="gw-count">0 / 140</small></div>
+      <form class="promo" id="promo" action="#" novalidate><label class="sr" for="promo-in">Promo code</label><input id="promo-in" type="text" placeholder="Promo code" autocomplete="off"><button type="submit">Apply</button></form>
+      <p class="promo-msg" id="promo-msg" role="status"></p>
+    </div>
+    <section class="upsell" id="upsell" hidden aria-labelledby="up-h">
+      <h3 id="up-h">Complete the look</h3>
+      <div id="up-list"></div>
+    </section>
+  </div>
+  <div class="dr-foot" id="dr-foot" hidden>
+    <div class="totals">
+      <div><span>Subtotal</span><span id="t-sub">$0</span></div>
+      <div class="disc" id="t-disc-row" hidden><span id="t-disc-l">Code BLOOM10</span><span id="t-disc">-$0</span></div>
+      <div id="t-gw-row" hidden><span>Gift wrapping</span><span>Free</span></div>
+      <div><span>Shipping</span><span id="t-ship">$6.50</span></div>
+      <div class="grand"><span>Total</span><span id="t-total">$0</span></div>
+    </div>
+    <p class="dr-fine">Taxes are calculated at checkout. 30-day returns on every order.</p>
+    <button class="btn block" type="button" id="checkout">Checkout</button>
+  </div>
+  <div class="demo-co" id="demo-co">
+    <span data-ico="heart-gift" data-size="72" class="f64">💝</span>
+    <h3>This is a demo shop</h3>
+    <p>Nothing was charged and no order was placed. In the real Bloom &amp; Thread you would now add your delivery details and pick how to pay.</p>
+    <button class="btn" type="button" id="co-back">Back to my bag</button>
+    <button class="link-btn" type="button" id="co-clear" style="justify-self:start">Empty the bag and start over</button>
+  </div>
+</aside>
+
+<div class="modal" id="sizeguide" role="dialog" aria-modal="true" aria-labelledby="sg-title" aria-hidden="true">
+  <div class="m-card">
+    <div class="m-head"><h2 id="sg-title">Size guide</h2><button class="ibtn" id="sg-close" type="button" aria-label="Close size guide"><span data-ico="close" data-size="26">✕</span></button></div>
+    <div class="m-body">
+      <div class="tabs" role="tablist" aria-label="Size charts">
+        <button role="tab" id="tab-c" aria-selected="true" aria-controls="pan-c" type="button">Clothing</button>
+        <button role="tab" id="tab-s" aria-selected="false" aria-controls="pan-s" type="button" tabindex="-1">Shoes</button>
+      </div>
+      <div id="pan-c" role="tabpanel" aria-labelledby="tab-c">
+        <div class="unit" role="group" aria-label="Units"><button type="button" data-u="in" aria-pressed="true">Inches</button><button type="button" data-u="cm" aria-pressed="false">cm</button></div>
+        <div class="tblwrap"><table class="tbl" id="tbl-c"><thead><tr><th scope="col">Size</th><th scope="col">US</th><th scope="col">Bust <small class="u">in</small></th><th scope="col">Waist <small class="u">in</small></th><th scope="col">Hips <small class="u">in</small></th></tr></thead><tbody></tbody></table></div>
+        <div class="finder">
+          <h3><span data-ico="ruler" data-size="32">📏</span>Find my size</h3>
+          <div class="f">
+            <label>Bust <input id="f-bust" type="number" inputmode="decimal" min="20" max="70" placeholder="e.g. 35"></label>
+            <label>Waist <input id="f-waist" type="number" inputmode="decimal" min="20" max="70" placeholder="e.g. 28"></label>
+          </div>
+          <p class="res" id="f-res" role="status">Enter your bust and waist to see our suggestion.</p>
+        </div>
+        <div class="measure">
+          <h3>How to measure</h3>
+          <ol>
+            <li><span class="stp" data-live="step-number" data-p-step="1" data-size="40" data-label="Step 1">1</span><span><b>Bust</b>Wrap the tape around the fullest part of your chest, keeping it level across your back.</span></li>
+            <li><span class="stp" data-live="step-number" data-p-step="2" data-size="40" data-label="Step 2">2</span><span><b>Waist</b>Measure the narrowest part of your torso, usually just above the belly button.</span></li>
+            <li><span class="stp" data-live="step-number" data-p-step="3" data-size="40" data-label="Step 3">3</span><span><b>Hips</b>Measure around the fullest part, about 8 inches below your waist. Between sizes? Take the larger.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div id="pan-s" role="tabpanel" aria-labelledby="tab-s" hidden>
+        <div class="tblwrap"><table class="tbl"><thead><tr><th scope="col">US</th><th scope="col">EU</th><th scope="col">UK</th><th scope="col">Foot length</th></tr></thead><tbody>
+          <tr><td>6</td><td>36</td><td>3.5</td><td>9.1 in / 23.2 cm</td></tr>
+          <tr><td>7</td><td>37.5</td><td>4.5</td><td>9.4 in / 23.9 cm</td></tr>
+          <tr><td>8</td><td>39</td><td>5.5</td><td>9.7 in / 24.6 cm</td></tr>
+          <tr><td>9</td><td>40.5</td><td>6.5</td><td>10 in / 25.4 cm</td></tr>
+          <tr><td>10</td><td>42</td><td>7.5</td><td>10.3 in / 26.2 cm</td></tr>
+        </tbody></table></div>
+        <p class="sub" style="margin-top:16px">Our flats are cut on a classic last and run true to size. Half sizes: take the size up, and add a cushioned insole if you like a snug fit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="_kit/demo-kit.js" data-style="coquette" data-recommend="coquette,pastel,luxe,line,valentine,sketch,soft3d,duo" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  const $ = (s, r) => (r || document).querySelector(s)
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s))
+  const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+  const fmt = n => '$' + n.toFixed(2)
+  const FREE_AT = 75, SHIP = 6.5, MAXQ = 9
+  const store = { get(k) { try { return sessionStorage.getItem(k) } catch (e) { return null } }, set(k, v) { try { sessionStorage.setItem(k, v) } catch (e) {} } }
+  // the Basic fallback text lives in .kit-fb once the kit has set a slot up
+  const setFb = (el, text) => { const fb = el.querySelector('.kit-fb'); if (fb) fb.textContent = text; else el.textContent = text }
+
+  // Basic-level emoji scale with the slot's size, like the icon that replaces them
+  const fit = root => $$('[data-ico]', root).forEach(e => { e.style.fontSize = Math.round((+e.dataset.size || 24) * 0.78) + 'px' })
+  fit(document)
+
+  /* ───────── products (read from the markup) ───────── */
+  const P = {}
+  $$('.card').forEach((c, i) => {
+    const d = c.dataset
+    P[d.id] = { el: c, id: d.id, name: d.name, cat: d.cat, price: +d.price, was: +d.was || 0, isNew: !!d.new, rating: +d.rating, n: +d.n, date: d.date, sizes: d.sizes.split('|'), amounts: !!d.amounts, tags: d.tags, img: d.img, order: i, colour: $('.sw button', c).dataset.colour }
+  })
+  const list = Object.keys(P).map(k => P[k])
+  let cart = [], promo = false, gift = false, note = '', wish = {}
+  try { const s = JSON.parse(store.get('bt-state') || '{}'); cart = (s.cart || []).filter(l => P[l.id]); promo = !!s.promo; gift = !!s.gift; note = s.note || ''; wish = s.wish || {} } catch (e) {}
+  const save = () => store.set('bt-state', JSON.stringify({ cart, promo, gift, note, wish }))
+
+  let toastT = 0
+  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2800) }
+
+  /* ───────── filters, search, sort ───────── */
+  const st = { f: 'all', q: '', sort: 'featured' }
+  const labels = { all: 'All', new: 'New in', dresses: 'Dresses', knitwear: 'Knitwear & tops', accessories: 'Accessories', jewellery: 'Jewellery & hair', gifts: 'Gifts', sale: 'Sale', saved: 'Saved' }
+  const inF = (p, f) => f === 'all' || (f === 'new' ? p.isNew : f === 'sale' ? !!p.was : f === 'saved' ? !!wish[p.id] : p.cat === f)
+  const inQ = p => !st.q || st.q.split(/\s+/).every(w => p.tags.indexOf(w) > -1)
+  const sorters = { featured: (a, b) => a.order - b.order, newest: (a, b) => b.date.localeCompare(a.date), low: (a, b) => a.price - b.price, high: (a, b) => b.price - a.price, rated: (a, b) => b.rating - a.rating || b.n - a.n }
+  function counts() {
+    Object.keys(labels).forEach(f => { const n = list.filter(p => inF(p, f)).length; $$('[data-n="' + f + '"]').forEach(e => { e.textContent = n }); $$('[data-count="' + f + '"]').forEach(e => { e.textContent = n + (n === 1 ? ' piece' : ' pieces') }) })
+  }
+  function apply(animate) {
+    let shown = 0, i = 0
+    list.slice().sort(sorters[st.sort]).forEach((p, idx) => {
+      p.el.style.order = idx
+      const ok = inF(p, st.f) && inQ(p), was = !p.el.hidden
+      p.el.hidden = !ok
+      if (ok) { shown++; if (animate && !reduced) { p.el.classList.remove('pop'); p.el.style.animationDelay = (i++ * 45) + 'ms'; void p.el.offsetWidth; p.el.classList.add('pop') } }
+    })
+    $$('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.f === st.f)))
+    const filtered = st.f !== 'all' || st.q
+    $('#found').innerHTML = (filtered ? 'Showing <b>' + shown + '</b> of ' + list.length + ' pieces' + (st.q ? ' for &ldquo;' + esc(st.q) + '&rdquo;' : st.f === 'saved' ? ' you saved' : '') + ' <button class="link-btn" type="button" id="clr">Clear</button>' : 'Showing <b>' + shown + '</b> pieces')
+    $('#none').hidden = shown > 0
+    const savedEmpty = st.f === 'saved' && !st.q
+    $('#none-h').innerHTML = savedEmpty ? 'Your wishlist is empty' : 'Nothing matches <em id="none-q"></em> yet'
+    if (!savedEmpty) $('#none-q').textContent = st.q ? '“' + st.q + '”' : '(' + labels[st.f].toLowerCase() + ')'
+    $('#none-p').textContent = savedEmpty ? 'Tap the heart on any piece to save it here for later.' : 'Try a softer word like “silk”, “floral” or “gift”, or clear your filters to see everything.'
+    $('#clear-all').textContent = savedEmpty ? 'Browse the whole edit' : 'Clear search and filters'
+    $('#chips [data-f="saved"]').hidden = !Object.keys(wish).length && st.f !== 'saved'
+    $('#sb-hint').textContent = st.q ? shown + (shown === 1 ? ' result' : ' results') : 'Try “silk” or “pearl”'
+    $('#grid').hidden = shown === 0
+  }
+  function setFilter(f) { st.f = f; apply(true) }
+  $('#chips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) setFilter(c.dataset.f) })
+  $('#sort').addEventListener('change', e => { st.sort = e.target.value; apply(true) })
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-filter]')
+    if (a) { st.q = ''; $('#q').value = ''; setFilter(a.dataset.filter); closeMenu() }
+    if (e.target.closest('#clr') || e.target.closest('#clear-all')) { st.f = 'all'; st.q = ''; $('#q').value = ''; apply(true) }
+  })
+
+  /* header: menu, search, wishlist */
+  function closeMenu() { $('#mnav').hidden = true; $('#burger').setAttribute('aria-expanded', 'false'); $('#burger').setAttribute('aria-label', 'Open menu') }
+  $('#burger').addEventListener('click', () => { const open = $('#mnav').hidden; $('#mnav').hidden = !open; $('#burger').setAttribute('aria-expanded', String(open)); $('#burger').setAttribute('aria-label', open ? 'Close menu' : 'Open menu') })
+  function openSearch(on) {
+    $('#searchbar').hidden = !on; $('#search-toggle').setAttribute('aria-expanded', String(on))
+    if (on) { closeMenu(); $('#q').focus() } else if (st.q) { st.q = ''; $('#q').value = ''; apply() }
+  }
+  $('#search-toggle').addEventListener('click', () => openSearch($('#searchbar').hidden))
+  $('#sb-close').addEventListener('click', () => { openSearch(false); $('#search-toggle').focus() })
+  let firstType = true
+  $('#q').addEventListener('input', e => {
+    st.q = e.target.value.trim().toLowerCase(); apply(true)
+    if (st.q && firstType) { firstType = false; $('#shop').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }) }
+  })
+  $('#q').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#shop').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }) } })
+  function openSaved() {
+    const n = Object.keys(wish).length
+    if (!n) { toast('Tap the heart on any piece to save it for later'); return }
+    st.q = ''; $('#q').value = ''; $$('.chip').forEach(c => c.setAttribute('aria-pressed', 'false')); setFilter('saved'); $('#shop').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+  }
+  $('#wish-toggle').addEventListener('click', openSaved)
+  $('#wish-m').addEventListener('click', () => { if (Object.keys(wish).length) closeMenu(); openSaved() })
+  function wishUI() {
+    const n = Object.keys(wish).length, b = $('#wish-n')
+    b.hidden = !n; b.textContent = n
+    $('#wish-toggle').setAttribute('aria-label', 'Wishlist, ' + n + ' saved ' + (n === 1 ? 'piece' : 'pieces'))
+    $('#wish-mn').textContent = n ? n + ' saved' : 'none yet'
+    $('#chips [data-f="saved"]').hidden = !n && st.f !== 'saved'
+    counts()
+    list.forEach(p => { const w = $('.wish', p.el), on = !!wish[p.id]; w.setAttribute('aria-pressed', String(on)); setFb(w.firstElementChild, on ? '♥' : '♡') })
+  }
+
+  /* ───────── cards: colour, wishlist, quick add ───────── */
+  const grid = $('#grid')
+  const closeSheets = except => $$('.card.sheet').forEach(c => { if (c !== except) { c.classList.remove('sheet'); $('.qa-open', c).setAttribute('aria-expanded', 'false') } })
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.card'); if (!card) return
+    const p = P[card.dataset.id]
+    const sw = e.target.closest('.sw button')
+    if (sw) { p.colour = sw.dataset.colour; $$('.sw button', card).forEach(b => b.setAttribute('aria-checked', String(b === sw))); $('.cn', card).textContent = p.colour; return }
+    if (e.target.closest('.wish')) {
+      if (wish[p.id]) delete wish[p.id]; else wish[p.id] = 1
+      save(); wishUI(); toast(wish[p.id] ? 'Saved ' + p.name + ' to your wishlist' : 'Removed from your wishlist')
+      if (st.f === 'saved') apply()
+      return
+    }
+    if (e.target.closest('.qa-open')) {
+      if (p.sizes.length === 1) { add(p, p.sizes[0]); return }
+      const open = !card.classList.contains('sheet'); closeSheets(card); card.classList.toggle('sheet', open); $('.qa-open', card).setAttribute('aria-expanded', String(open))
+      if (open) { const f = $('.qa-sizes button', card); f && setTimeout(() => f.focus({ preventScroll: true }), 60) }
+      return
+    }
+    if (e.target.closest('.qa-x')) { closeSheets(); $('.qa-open', card).focus(); return }
+    const sz = e.target.closest('.qa-sizes button')
+    if (sz) { $('.qa-open', card).focus({ preventScroll: true }); closeSheets(); add(p, sz.dataset.v) }
+  })
+  document.addEventListener('click', e => { if (!e.target.closest('.card.sheet')) closeSheets() })
+
+  /* ───────── cart ───────── */
+  const lineOf = k => cart.find(l => l.key === k)
+  function add(p, size, qty) {
+    qty = qty || 1
+    const price = p.amounts ? parseInt(size.replace('$', ''), 10) : p.price
+    const key = [p.id, p.colour, size].join('|')
+    const l = lineOf(key)
+    if (l) l.qty = Math.min(MAXQ, l.qty + qty); else cart.push({ key, id: p.id, colour: p.colour, size, qty, price, was: p.amounts ? 0 : p.was })
+    save(); renderCart(); openDrawer()
+  }
+  function rowHTML(l) {
+    const p = P[l.id], opt = l.colour + (l.size !== 'One size' ? ' · ' + l.size : '')
+    return '<img src="' + p.img + '" alt="" width="84" height="105">' +
+      '<div class="li"><h3>' + esc(p.name) + '</h3><p class="opt">' + esc(opt) + '</p>' +
+      '<button class="ibtn rm" type="button" data-act="rm" aria-label="Remove ' + esc(p.name) + ' from your bag"><span data-ico="trash" data-size="22">🗑️</span></button>' +
+      '<div class="row"><div class="qty"><button type="button" data-act="dec" aria-label="One fewer ' + esc(p.name) + '"><span data-ico="minus" data-size="20">−</span></button><output></output><button type="button" data-act="inc" aria-label="One more ' + esc(p.name) + '"><span data-ico="plus" data-size="20">+</span></button></div><p class="lp"></p></div></div>'
+  }
+  function totals() {
+    const sub = cart.reduce((a, l) => a + l.price * l.qty, 0)
+    const disc = promo ? Math.round(sub * 10) / 100 : 0
+    const base = sub - disc
+    const ship = !sub ? 0 : base >= FREE_AT ? 0 : SHIP
+    return { sub, disc, base, ship, gw: !!(gift && sub), total: base + ship, n: cart.reduce((a, l) => a + l.qty, 0) }
+  }
+  let upKey = ''
+  function renderCart() {
+    const t = totals(), box = $('#lines')
+    $$('.line', box).forEach(r => { if (!lineOf(r.dataset.key)) r.remove() })
+    cart.forEach(l => {
+      let row = $$('.line', box).find(r => r.dataset.key === l.key)
+      if (!row) { row = document.createElement('div'); row.className = 'line'; row.dataset.key = l.key; row.innerHTML = rowHTML(l); fit(row); box.appendChild(row) }
+      $('output', row).textContent = l.qty
+      $('.lp', row).innerHTML = (l.was ? '<s>' + fmt(l.was * l.qty) + '</s>' : '') + fmt(l.price * l.qty)
+      $('[data-act="inc"]', row).setAttribute('aria-disabled', String(l.qty >= MAXQ))
+    })
+    // header badge (live icon + Basic fallback)
+    const b = $('#cart-badge'); b.dataset.pCount = t.n; if (window.WithKit) WithKit.setLive(b, { count: t.n }); setFb(b, 'Bag (' + t.n + ')')
+    $('#cart-toggle').setAttribute('aria-label', 'Open bag, ' + t.n + (t.n === 1 ? ' item' : ' items'))
+    $('#dr-n').textContent = '(' + t.n + ')'
+    $('#dr-empty').classList.toggle('show', !cart.length); $('#empty-promo').hidden = !promo; $('#dr-foot').hidden = !cart.length; $('#dr-opts').hidden = !cart.length
+    // free shipping meter
+    const pct = t.base >= FREE_AT ? 100 : Math.max(0, Math.round(t.base / FREE_AT * 100)), ship = $('#dr-ship')
+    $('#ship-fill').style.setProperty('--p', pct + '%'); $('#ship-fill').style.width = pct + '%'
+    ship.classList.toggle('done', t.base >= FREE_AT && t.sub > 0)
+    $('#ship-msg').innerHTML = !t.sub ? 'Free shipping on orders over <b>$75</b>' : t.base >= FREE_AT ? '<b>You have unlocked free shipping</b>' : 'You are <b>' + fmt(FREE_AT - t.base) + '</b> away from free shipping'
+    const ring = $('#ship-ring'); ring.dataset.pValue = pct; if (window.WithKit) WithKit.setLive(ring, { value: pct, label: pct + ' percent of the way to free shipping' }); setFb(ring, pct + '%')
+    // totals
+    $('#t-sub').textContent = fmt(t.sub)
+    $('#t-disc-row').hidden = !t.disc; $('#t-disc').textContent = '-' + fmt(t.disc)
+    $('#t-disc-l').innerHTML = 'Code BLOOM10 <button class="link-btn" type="button" id="promo-rm" style="font-size:13px">remove</button>'
+    $('#t-gw-row').hidden = !t.gw
+    $('#t-ship').textContent = t.ship ? fmt(t.ship) : 'Free'
+    $('#t-total').textContent = fmt(t.total)
+    $('#checkout').textContent = 'Checkout · ' + fmt(t.total)
+    $('#gw').checked = gift; $('#gw-note').classList.toggle('show', gift)
+    if ($('#gw-text').value !== note) $('#gw-text').value = note
+    $('#gw-count').textContent = note.length + ' / 140'
+    $('#promo-msg').textContent = promo ? 'Code BLOOM10 applied: 10% off your pieces.' : ''; $('#promo-msg').className = 'promo-msg' + (promo ? ' good' : '')
+    upsell()
+    save()
+  }
+  function upsell() {
+    const inBag = cart.map(l => l.id)
+    const picks = ['posy', 'giftcard', 'perle', 'isla', 'keepsake'].filter(id => inBag.indexOf(id) < 0).slice(0, 2)
+    const key = cart.length ? picks.join(',') : ''
+    if (key === upKey) return
+    upKey = key
+    $('#upsell').hidden = !key
+    $('#up-list').innerHTML = picks.map(id => { const p = P[id], amt = p.amounts ? '$50' : p.sizes[0]; return '<div class="up"><img src="' + p.img + '" alt="" width="56" height="70"><span><b>' + esc(p.name) + '</b><span class="t">' + (p.amounts ? 'Starts at $' + p.price : '$' + p.price) + '</span></span><button type="button" data-up="' + id + '" data-v="' + amt + '" aria-label="Add ' + esc(p.name) + ' to your bag"><span data-ico="plus" data-size="20">+</span> Add</button></div>' }).join('')
+    fit($('#up-list'))
+  }
+  $('#lines').addEventListener('click', e => {
+    const btn = e.target.closest('[data-act]'); if (!btn) return
+    const row = btn.closest('.line'), l = lineOf(row.dataset.key), act = btn.dataset.act
+    if (act === 'inc') { if (l.qty < MAXQ) l.qty++; else toast('Nine is our limit per piece, so everyone gets a turn') }
+    else if (act === 'dec') { if (l.qty > 1) l.qty-- }
+    else if (act === 'rm') { cart = cart.filter(x => x !== l); toast('Removed ' + P[l.id].name) }
+    renderCart()
+  })
+  $('#up-list').addEventListener('click', e => { const b = e.target.closest('[data-up]'); if (b) { const p = P[b.dataset.up]; add(p, b.dataset.v); toast('Added ' + p.name) } })
+  $('#gw').addEventListener('change', e => { gift = e.target.checked; renderCart(); if (gift) $('#gw-text').focus() })
+  $('#gw-text').addEventListener('input', e => { note = e.target.value; $('#gw-count').textContent = note.length + ' / 140'; save() })
+  $('#promo').addEventListener('submit', e => {
+    e.preventDefault()
+    const v = $('#promo-in').value.trim().toUpperCase(), m = $('#promo-msg')
+    if (!v) { m.textContent = 'Enter a code first. Try BLOOM10.'; m.className = 'promo-msg bad'; return }
+    if (v === 'BLOOM10') { promo = true; $('#promo-in').value = ''; renderCart() }
+    else { m.textContent = 'That code is not valid. Try BLOOM10.'; m.className = 'promo-msg bad' }
+  })
+  document.addEventListener('click', e => { if (e.target.closest('#promo-rm')) { promo = false; renderCart() } })
+  $('#checkout').addEventListener('click', () => { $('#demo-co').classList.add('show'); $('#co-back').focus() })
+  $('#co-back').addEventListener('click', () => { $('#demo-co').classList.remove('show'); $('#checkout').focus() })
+  $('#co-clear').addEventListener('click', () => { cart = []; promo = false; gift = false; note = ''; $('#demo-co').classList.remove('show'); renderCart() })
+  $('#dr-browse').addEventListener('click', () => { closeDrawer(); $('#shop').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }) })
+
+  /* ───────── drawer + modal plumbing ───────── */
+  let lastFocus = null, openLayer = null
+  const bg = () => [$('.hdr'), $('#main'), $('.foot'), $('.announce'), $('.skip')]
+  function layer(el, on, focusSel) {
+    if (on) { lastFocus = document.activeElement; openLayer = el } else openLayer = null
+    el.classList.toggle('open', on); el.setAttribute('aria-hidden', String(!on))
+    $('#scrim').classList.toggle('on', on && el.id === 'drawer')
+    bg().forEach(n => { if (n) n.inert = on })
+    document.documentElement.style.overflow = on ? 'hidden' : ''
+    if (on) setTimeout(() => { const f = $(focusSel, el); f && f.focus() }, 80); else if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true })
+  }
+  const openDrawer = () => { if (openLayer !== $('#drawer')) { if (openLayer) layer(openLayer, false); $('#demo-co').classList.remove('show'); layer($('#drawer'), true, '#dr-close') } }
+  const closeDrawer = () => { if (openLayer === $('#drawer')) layer($('#drawer'), false) }
+  $('#cart-toggle').addEventListener('click', openDrawer)
+  $('#dr-close').addEventListener('click', closeDrawer)
+  $('#scrim').addEventListener('click', closeDrawer)
+  const sg = $('#sizeguide')
+  document.addEventListener('click', e => { const o = e.target.closest('[data-sg]'); if (o) { closeSheets(); if (openLayer) layer(openLayer, false); selectTab(o.dataset.sgTab === 'shoes' ? $('#tab-s') : $('#tab-c')); layer(sg, true, '#sg-close') } })
+  $('#sg-close').addEventListener('click', () => layer(sg, false))
+  sg.addEventListener('click', e => { if (e.target === sg) layer(sg, false) })
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return
+    if (openLayer) layer(openLayer, false)
+    else if (!$('#searchbar').hidden) { openSearch(false); $('#search-toggle').focus() }
+    else if (!$('#mnav').hidden) closeMenu()
+    else { const open = $('.card.sheet'); if (open) $('.qa-open', open).focus({ preventScroll: true }); closeSheets() }
+  })
+
+  /* ───────── size guide ───────── */
+  const SZ = [['XS', '0–2', [31, 32.5], [24, 25.5], [34, 35.5]], ['S', '4–6', [33, 34.5], [26, 27.5], [36, 37.5]], ['M', '8–10', [35, 36.5], [28, 29.5], [38, 39.5]], ['L', '12–14', [37, 39], [30, 32], [40, 42]], ['XL', '16–18', [40, 42], [33, 35], [43, 45]]]
+  let unit = 'in', hit = -1
+  const rng = r => unit === 'in' ? r[0] + '–' + r[1] : Math.round(r[0] * 2.54) + '–' + Math.round(r[1] * 2.54)
+  function sizeTable() {
+    $$('#tbl-c th .u').forEach(u => { u.textContent = unit })
+    $('#tbl-c tbody').innerHTML = SZ.map((s, i) => '<tr' + (i === hit ? ' class="hit"' : '') + '><td><b>' + s[0] + '</b></td><td>' + s[1] + '</td><td>' + rng(s[2]) + '</td><td>' + rng(s[3]) + '</td><td>' + rng(s[4]) + '</td></tr>').join('')
+  }
+  // a measurement belongs to a row until the next row begins, so the numbers printed in the table always land on their own row
+  const idx = (v, k) => { for (let i = 0; i < SZ.length - 1; i++) if (v < SZ[i + 1][k][0]) return i; return v <= SZ[SZ.length - 1][k][1] + 0.5 ? SZ.length - 1 : SZ.length }
+  function finder() {
+    const k = unit === 'in' ? 1 : 1 / 2.54, bust = parseFloat($('#f-bust').value) * k, waist = parseFloat($('#f-waist').value) * k, res = $('#f-res')
+    if (!(bust > 0) || !(waist > 0)) { hit = -1; res.textContent = 'Enter your bust and waist to see our suggestion.'; sizeTable(); return }
+    const a = idx(bust, 2), b = idx(waist, 3), i = Math.max(a, b)
+    if (i > 4) { hit = -1; res.textContent = 'You are beyond our XL. Write to hello@bloomandthread.example and we will make a size to measure.'; sizeTable(); return }
+    hit = i
+    res.innerHTML = 'We suggest size <b>' + SZ[i][0] + '</b>' + (a !== b ? '. Your bust reads ' + SZ[a][0] + ' and your waist ' + SZ[Math.min(b, 4)][0] + ', so we went with the larger.' : '. Bust and waist agree, which makes it easy.')
+    sizeTable()
+  }
+  $('#sizeguide').addEventListener('click', e => {
+    const u = e.target.closest('[data-u]')
+    if (u) { if (u.dataset.u !== unit) ['#f-bust', '#f-waist'].forEach(id => { const el = $(id), v = parseFloat(el.value); if (v > 0) el.value = u.dataset.u === 'cm' ? Math.round(v * 2.54) : Math.round(v / 2.54 * 2) / 2 }); unit = u.dataset.u; $$('[data-u]').forEach(b => b.setAttribute('aria-pressed', String(b === u))); $('#f-bust').placeholder = unit === 'in' ? 'e.g. 35' : 'e.g. 89'; $('#f-waist').placeholder = unit === 'in' ? 'e.g. 28' : 'e.g. 71'; finder() }
+    const tab = e.target.closest('[role="tab"]')
+    if (tab) selectTab(tab)
+  })
+  function selectTab(tab, focus) {
+    $$('[role="tab"]', sg).forEach(t => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; $('#' + t.getAttribute('aria-controls')).hidden = !on })
+    if (focus) tab.focus()
+  }
+  $('.tabs', sg).addEventListener('keydown', e => {
+    const list = $$('[role="tab"]', sg), i = list.indexOf(document.activeElement); if (i < 0) return
+    const n = e.key === 'ArrowRight' ? (i + 1) % list.length : e.key === 'ArrowLeft' ? (i + list.length - 1) % list.length : e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : -1
+    if (n > -1) { e.preventDefault(); selectTab(list[n], true) }
+  })
+  $('#f-bust').addEventListener('input', finder); $('#f-waist').addEventListener('input', finder)
+  sizeTable()
+
+  /* ───────── newsletter ───────── */
+  $('#news-form').addEventListener('submit', e => {
+    e.preventDefault()
+    const v = $('#email').value.trim(), err = $('#email-err')
+    if (!v) { err.textContent = 'Please add your email address.'; $('#email').setAttribute('aria-invalid', 'true'); $('#email').focus(); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { err.textContent = 'That does not look like an email address yet.'; $('#email').setAttribute('aria-invalid', 'true'); $('#email').focus(); return }
+    err.textContent = ''; $('#email').removeAttribute('aria-invalid'); $('#news-form').style.display = 'none'; $('#news-ok').classList.add('show')
+    promo = true; renderCart(); toast('Welcome! BLOOM10 is saved in your bag')
+  })
+
+  $('#email').addEventListener('input', () => { if ($('#email-err').textContent) { $('#email-err').textContent = ''; $('#email').removeAttribute('aria-invalid') } })
+
+  /* ───────── reviews ───────── */
+  const track = $('#rv-track')
+  const slide = d => track.scrollBy({ left: d * Math.min(track.clientWidth * 0.8, 380), behavior: reduced ? 'auto' : 'smooth' })
+  $('#rv-prev').addEventListener('click', () => slide(-1)); $('#rv-next').addEventListener('click', () => slide(1))
+  track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); slide(1) } else if (e.key === 'ArrowLeft') { e.preventDefault(); slide(-1) } })
+  track.addEventListener('click', e => {
+    const h = e.target.closest('.help'); if (!h) return
+    const on = h.getAttribute('aria-pressed') !== 'true'; h.setAttribute('aria-pressed', String(on)); $('.hn', h).textContent = +h.dataset.n + (on ? 1 : 0)
+  })
+
+  /* ───────── announcement rotator + drop countdown ───────── */
+  const anns = $$('.ann'); let ai = 0
+  if (!reduced) setInterval(() => { anns[ai].classList.remove('on'); ai = (ai + 1) % anns.length; anns[ai].classList.add('on') }, 4200)
+  function drop() {
+    const target = new Date(2026, 9, 24, 10, 0, 0), ms = target - new Date(), el = $('#drop-count')
+    if (ms <= 0) { el.textContent = 'In the shop now. Be gentle with the organza.'; return }
+    const days = Math.floor(ms / 864e5), hrs = Math.floor(ms % 864e5 / 36e5), mins = Math.floor(ms % 36e5 / 6e4)
+    el.textContent = 'Opens Saturday 24 Oct, 10 am · in ' + (days ? days + (days === 1 ? ' day ' : ' days ') : '') + hrs + ' hr' + (days ? '' : ' ' + mins + ' min')
+  }
+  drop(); setInterval(drop, 60000)
+
+  /* boot */
+  counts(); wishUI(); apply(false); renderCart()
+})()
+</script>
+</body>
+</html>

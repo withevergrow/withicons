@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Sprout Toy Co. (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Little Sprout Toy Co. is a family-run toy shop for curious little humans: wooden blocks, picture books, plush friends and pretend play, sorted by age. A fictional demo shop made with with icons.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fff6e0;--paper:#fffcf3;--ink:#2a3b2e;--muted:#566657;--line:#efe2b8;--line-d:#dcc98c;
+  --sprout:#3aa655;--sprout-d:#1f6e34;--sprout-dd:#124a22;--sprout-l:#dcf2d6;
+  --sun:#ffc933;--sun-d:#d9a117;--sun-l:#fff1bd;
+  --sky:#5bb7ea;--sky-d:#176c9e;--sky-l:#dbf0fb;
+  --tomato:#e8493a;--tomato-d:#c4352a;--tomato-t:#b02f24;--tomato-l:#ffe2db;
+  --head:'Baloo 2','Fredoka',ui-rounded,system-ui,sans-serif;--body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --pop:cubic-bezier(.34,1.56,.64,1);--r-lg:32px;--r:24px;
+  --ks:var(--kit-scale,1); /* the kit's size slider: coins and buttons grow with their icons (Basic keeps 1) */
+  /* icon palette: the default style (plush) and the recommended ones follow the shop's colors */
+  --with-plush-c1:#ee5544;--with-plush-c2:#ffc933;--with-plush-c3:#5bb7ea;--with-plush-c4:#3fae60;--with-plush-accent:#ff8a6b;--with-plush-ink:#4a3026;--with-plush-edge:#fff9ef;--with-plush-tint:#fff0d1;
+  --with-kawaii-fill-1:#ee5544;--with-kawaii-fill-2:#ffa14a;--with-kawaii-fill-3:#ffc933;--with-kawaii-fill-4:#3fae60;--with-kawaii-fill-5:#5bb7ea;--with-kawaii-accent:#ee5544;--with-kawaii-blush:#ff8a7a;
+  --with-clay-c1:#3fae60;--with-clay-c2:#ffc933;--with-clay-c3:#ee5544;--with-clay-c4:#5bb7ea;--with-clay-ink:#2a3b2e;--with-clay-shadow:#1f5a30;--with-clay-tint:#dcf2d6;--with-clay-accent:#ee5544;
+  --with-sticker-lemon:#ffc933;--with-sticker-mint:#3fae60;--with-sticker-sky:#5bb7ea;--with-sticker-peach:#ee5544;--with-sticker-bubblegum:#ff8a6b;--with-sticker-grape:#5bb7ea;
+  --with-pastel-c1:#b9e3b5;--with-pastel-c2:#b9e3b5;--with-pastel-c3:#ffe29c;--with-pastel-c4:#bfe3f7;--with-pastel-accent:#ffb3a5;--with-pastel-ink:#3f7a52;--with-pastel-edge:#7fbf8e;--with-pastel-shadow:#7fbf8e;--with-pastel-tint:#e6f5e3;
+  --with-bento-c1:#3fae60;--with-bento-c3:#3fae60;--with-bento-c4:#3fae60;--with-bento-accent:#ee5544;--with-bento-ink:#1f4a2c;--with-bento-shadow:#1f5a30;--with-bento-tint:#e6f5e3;--with-bento-edge:#e6f5e3;
+  --with-brutal-c1:#ffc933;--with-brutal-c2:#ee5544;--with-brutal-c3:#5bb7ea;--with-brutal-c4:#3fae60;--with-brutal-accent:#ff8a3d;
+}
+*,*::before,*::after{box-sizing:border-box}
+html[data-level="0"]{--ks:1}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1.0625rem/1.55 var(--body);overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+[hidden]{display:none!important}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;line-height:1.08;letter-spacing:-.01em;margin:0}
+p{margin:0}ul{margin:0;padding:0;list-style:none}
+a{color:var(--sprout-d);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sky-d);outline-offset:3px;border-radius:10px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;z-index:200;transition:top .15s}.skip:focus{top:12px}
+.sec{padding:clamp(52px,7vw,84px) 0}
+.sec-head{max-width:720px;margin:0 auto clamp(26px,4vw,40px);text-align:center}
+.sec-head h2{font-size:clamp(2rem,4.8vw,3.1rem);margin:16px 0 10px;text-wrap:balance}
+.sec-head p{color:var(--muted);font-size:1.1rem}
+.sec-head{position:relative}.orn{position:absolute;top:6px;display:none;pointer-events:none}.orn.l{left:-9%;transform:rotate(-12deg)}.orn.r{right:-9%;transform:rotate(10deg)}
+@media(min-width:1100px){.orn{display:block}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 16px 5px 8px;background:var(--sun);color:var(--ink);border-radius:999px;font:800 .8rem var(--head);letter-spacing:.07em;text-transform:uppercase;transform:rotate(-2deg);box-shadow:0 3px 0 var(--sun-d)}
+.coin{display:inline-grid;place-items:center;flex:none;border-radius:50%;background:#fff;color:var(--ink);box-shadow:0 2px 0 rgba(42,59,46,.14)}
+.coin{--cs:44px;width:calc(var(--cs)*var(--ks));height:calc(var(--cs)*var(--ks))}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:10px 22px;border:0;border-radius:999px;font:800 1rem var(--head);background:var(--sun);color:var(--ink);text-decoration:none;box-shadow:0 4px 0 var(--sun-d);transition:transform .15s var(--pop),box-shadow .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--sun-d)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--sun-d)}
+.btn-go{background:var(--sprout-d);color:#fff;box-shadow:0 4px 0 var(--sprout-dd)}.btn-go:hover{box-shadow:0 6px 0 var(--sprout-dd)}.btn-go:active{box-shadow:0 1px 0 var(--sprout-dd)}
+.btn-ghost{background:#fff;color:var(--ink);box-shadow:0 4px 0 var(--line-d);border:2px solid var(--line-d)}.btn-ghost:hover{box-shadow:0 6px 0 var(--line-d)}
+.btn-red{background:var(--tomato-d);color:#fff;box-shadow:0 4px 0 #8f241b}
+.btn-sm{min-height:44px;padding:8px 16px;font-size:.95rem}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.card{background:#fff;border:2px solid var(--line);border-radius:var(--r-lg);box-shadow:0 5px 0 var(--line)}
+@keyframes wiggle{0%{transform:translateY(-4px) rotate(0)}22%{transform:translateY(-6px) rotate(-1.8deg)}45%{transform:translateY(-6px) rotate(1.6deg)}68%{transform:translateY(-5px) rotate(-.8deg)}100%{transform:translateY(-4px) rotate(0)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
+
+/* announcement + header + awning */
+.announce{background:var(--sun);color:var(--ink);font:700 .9rem var(--body);text-align:center}
+.announce .wrap{display:flex;justify-content:center;gap:10px 28px;flex-wrap:wrap;padding:7px 0}
+.announce p{display:inline-flex;align-items:center;gap:8px}
+.site-head{position:sticky;top:0;z-index:60;background:rgba(255,246,224,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:2px solid var(--line)}
+.site-head .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto;min-width:0}
+.logo .coin{--cs:48px;background:var(--sprout-l);box-shadow:0 3px 0 var(--sprout)}
+.logo b{display:block;font:800 1.5rem/1 var(--head);letter-spacing:-.02em;white-space:nowrap}
+.logo small{display:block;font:700 .7rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--sprout-d);margin-top:3px}
+.nav{display:none}
+.nav a{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:6px 12px;border-radius:999px;font:700 .95rem var(--head);color:var(--ink);text-decoration:none}
+.nav a:hover{background:var(--sun-l)}
+.nav a [data-ico]{display:none}.navopen .nav a [data-ico]{display:inline-flex}
+.icon-btn{--bs:48px;display:inline-grid;place-items:center;width:calc(var(--bs)*var(--ks));height:calc(var(--bs)*var(--ks));border:0;border-radius:50%;background:#fff;box-shadow:0 3px 0 var(--line-d)}
+.icon-btn:hover{background:var(--sun-l)}
+.cart-btn{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 14px 0 18px;border:0;border-radius:999px;background:var(--sun);color:var(--ink);font:800 1rem var(--head);box-shadow:0 4px 0 var(--sun-d)}
+.cart-btn:hover{transform:translateY(-1px)}
+.cart-btn .lbl{display:none}
+.navopen .nav{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;background:var(--paper);padding:10px 20px 18px;border-bottom:2px solid var(--line);box-shadow:0 14px 24px rgba(42,59,46,.12)}
+.awning{height:36px;margin-bottom:-6px;position:relative;z-index:5;pointer-events:none;background:repeating-linear-gradient(90deg,var(--sprout) 0 56px,#fff 56px 112px);-webkit-mask:linear-gradient(#000 0 0) top/100% 8px no-repeat,radial-gradient(circle at 28px 0,#000 27.5px,transparent 28.5px) 0 8px/56px 28px repeat-x;mask:linear-gradient(#000 0 0) top/100% 8px no-repeat,radial-gradient(circle at 28px 0,#000 27.5px,transparent 28.5px) 0 8px/56px 28px repeat-x;filter:drop-shadow(0 3px 0 rgba(42,59,46,.15))}
+
+/* scalloped colour bands */
+.band{position:relative;background:var(--band);margin:30px 0}
+.band::before,.band::after{content:"";position:absolute;left:0;right:0;height:22px;background:radial-gradient(circle at 22px 22px,var(--band) 21px,transparent 22px) 0 0/44px 22px repeat-x;pointer-events:none}
+.band::before{bottom:calc(100% - 1px)}.band::after{top:calc(100% - 1px);transform:scaleY(-1)}
+.band-sun{--band:var(--sun-l)}.band-sky{--band:var(--sky-l)}.band-green{--band:var(--sprout-d);color:#fff}.band-red{--band:var(--tomato-l)}
+
+/* hero */
+.hero{position:relative;padding:44px 0 70px;background:radial-gradient(circle,rgba(58,166,85,.16) 2px,transparent 2.5px) 0 0/26px 26px}
+.hero .wrap{display:grid;gap:44px;align-items:center}
+.hero .eyebrow{margin-bottom:18px}
+.hero h1{font-size:clamp(2.7rem,7.2vw,4.9rem);line-height:.98;letter-spacing:-.025em}
+.hero h1{position:relative;isolation:isolate}
+.hl{position:relative;white-space:nowrap}.hl::after{content:"";position:absolute;left:-.05em;right:-.05em;bottom:.12em;height:.26em;background:var(--sun);border-radius:.25em;z-index:-1;transform:rotate(-1.2deg)}
+.hero h1 [data-ico]{vertical-align:-.12em;margin:-16px 0 -16px .1em}
+.lede{font-size:clamp(1.08rem,2vw,1.25rem);color:var(--muted);margin:22px 0 28px;max-width:34em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-points{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font:700 .95rem var(--body)}
+.hero-points li{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hero-fig{position:relative;margin:0 auto;padding:14px 14px 34px 0;max-width:720px;width:100%}
+.hero-fig::before{content:"";position:absolute;right:-14px;bottom:36px;width:74%;height:74%;background:var(--sun);border-radius:50% 50% 46% 54%/55% 45% 55% 45%;z-index:0}
+.hero-frame{position:relative;z-index:1;border-radius:40px 40px 40px 110px;overflow:hidden;border:7px solid #fff;box-shadow:0 12px 0 rgba(42,59,46,.12),0 30px 50px -20px rgba(42,59,46,.35);aspect-ratio:5/4;background:#fff;transform:rotate(1.4deg)}
+.hero-frame img{width:100%;height:100%;object-fit:cover;object-position:48% 58%}
+.stk{position:absolute;z-index:3}
+.stk-rain{left:-18px;top:-14px;transform:rotate(-10deg)}
+.stk-sale{top:-6px;right:6px;--r:8deg;transform:rotate(8deg);animation:bob 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--ink)}
+.stk-sale:hover{animation-play-state:paused}
+.stk-cap{margin-top:-14px;padding:3px 12px;border-radius:999px;background:#fff;font:800 .8rem/1.3 var(--head);box-shadow:0 3px 0 var(--line-d);white-space:nowrap;position:relative;z-index:1}
+.rate-card{position:absolute;z-index:3;left:-8px;bottom:6px;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 10px;background:#fff;border-radius:22px;box-shadow:0 5px 0 var(--line-d),0 16px 30px -12px rgba(42,59,46,.4);transform:rotate(-2.5deg)}
+.rate-card b{display:block;font:800 1.15rem/1.1 var(--head)}.rate-card small{display:block;font-size:.8rem;color:var(--muted);line-height:1.25}
+.ph-credit{position:absolute;right:16px;bottom:6px;z-index:3;font-size:.72rem;color:var(--muted)}.ph-credit a{color:inherit}
+.float{position:absolute;pointer-events:none;z-index:0}
+.f1{right:9%;top:10px}
+
+/* trust strip */
+.trust{padding:40px 0 34px}
+.trust ul{display:grid;gap:22px 18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.trust li{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.trust .coin{--cs:68px;background:var(--sun-l)}
+.trust h3{font-size:1.1rem;color:#fff}.trust p{font-size:.92rem;color:#d7efd8;line-height:1.4}
+.trust .fine{margin-top:22px;font-size:.78rem;color:#d3eed5;max-width:60em}
+
+/* shop by play */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tile{position:relative;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px 16px 18px;border:3px solid transparent;border-radius:var(--r);background:var(--tb,#fff);text-align:left;box-shadow:0 5px 0 rgba(42,59,46,.12);transition:transform .2s var(--pop),box-shadow .2s;min-height:180px}
+.tile:hover{transform:translateY(-4px);box-shadow:0 9px 0 rgba(42,59,46,.14);animation:wiggle .55s ease-in-out}
+.tile[aria-pressed="true"]{border-color:var(--ink)}
+.tile .coin{--cs:96px;max-width:100%;height:auto;aspect-ratio:1;margin:-2px 0 4px}
+.tile b{font:800 1.25rem/1.1 var(--head)}.tile small{font-size:.88rem;color:#3d4d41}
+.tile .n{position:absolute;right:12px;top:12px;padding:2px 11px;border-radius:999px;background:#fff;font:800 .8rem var(--head);box-shadow:0 2px 0 rgba(42,59,46,.14)}
+.tb-sun{--tb:#ffe58a}.tb-sky{--tb:#bfe5f8}.tb-red{--tb:#ffc9bd}.tb-green{--tb:#c3e8bb}
+
+/* shop toolbar + grid */
+.finder{padding:22px;margin-bottom:26px}
+.finder-row{display:flex;flex-wrap:wrap;gap:14px;align-items:end}
+.finder h3{font-size:1.15rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.chip{display:flex;align-items:center;gap:10px;min-width:0;min-height:56px;padding:6px 14px 6px 8px;border:2px solid var(--line-d);border-radius:999px;background:#fff;text-align:left;transition:background .15s,transform .15s var(--pop),border-color .15s}
+.chip:hover{background:var(--sun-l);transform:translateY(-2px)}
+.chip .coin{--cs:44px;background:var(--sprout-l)}
+.chip b{display:block;font:800 1.02rem/1.1 var(--head)}.chip small{display:block;font-size:.78rem;color:var(--muted);line-height:1.2}
+.chip[aria-pressed="true"]{background:var(--sprout-d);border-color:var(--sprout-dd);color:#fff}
+.chip[aria-pressed="true"] small{color:#d7efd8}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}.tools>*{min-width:0}.search-f,.tools>.btn{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.field .lab{font:800 .85rem var(--head);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.input{width:100%;min-height:48px;padding:10px 16px;border:2px solid var(--line-d);border-radius:16px;background:#fff;color:var(--ink)}
+.input::placeholder{color:#7b8a7c}
+.input:focus{border-color:var(--sky-d);outline:none;box-shadow:0 0 0 4px var(--sky-l)}
+.search{position:relative}.search [data-ico]{position:absolute;left:12px;top:50%;transform:translateY(-50%)}.search .input{padding-left:52px}
+.status{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin:0 0 20px;scroll-margin-top:12px}
+.status p{font:700 1rem var(--body)}.status .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 12px;border-radius:999px;background:var(--sky-l);color:var(--sky-d);font:800 .85rem var(--head)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.prod{position:relative;display:flex;flex-direction:column;background:#fff;border:2px solid var(--line);border-radius:26px;box-shadow:0 5px 0 var(--line);transition:transform .2s var(--pop),box-shadow .2s}
+.prod:hover{transform:translateY(-4px);box-shadow:0 9px 0 var(--line-d);animation:wiggle .55s ease-in-out}
+.prod-media{position:relative;display:block;width:100%;padding:0;border:0;aspect-ratio:1;border-radius:24px 24px 0 0;overflow:hidden;background:var(--sun-l)}
+.prod-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.prod:hover .prod-media img{transform:scale(1.05)}
+.age{position:absolute;left:-7px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;padding:4px 12px 4px 8px;border-radius:999px;border:2.5px solid #fff;background:var(--ab,var(--sprout));color:var(--abt,#fff);font:800 .78rem var(--head);box-shadow:0 3px 0 rgba(42,59,46,.2);transform:rotate(-4deg)}
+.age-0{--ab:var(--sky);--abt:#0e3a56}.age-1{--ab:var(--sun);--abt:var(--ink)}.age-2{--ab:#ff9b7a;--abt:#4a1a10}.age-3{--ab:var(--sprout-d);--abt:#fff}
+.rib{position:absolute;right:6px;top:-4px;z-index:2}
+.wish{position:absolute;right:10px;bottom:10px;z-index:2;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:#fff;box-shadow:0 3px 0 rgba(42,59,46,.18);transition:transform .15s var(--pop)}
+.wish:hover{transform:scale(1.1)}.wish [data-ico]{filter:grayscale(1);opacity:.55;transition:filter .2s,opacity .2s}
+.wish[aria-pressed="true"]{background:var(--tomato-l);box-shadow:0 0 0 3px var(--tomato),0 3px 0 rgba(42,59,46,.18);animation:pop .3s}.wish[aria-pressed="true"] [data-ico]{filter:none;opacity:1}
+.prod-media .q-open{display:block;width:100%;height:100%;padding:0;border:0;background:none}
+.bump{animation:pop .35s var(--pop)}
+.prod-body{display:flex;flex-direction:column;gap:6px;padding:14px 14px 16px;flex:1}
+.prod-cat{font:800 .72rem var(--head);letter-spacing:.09em;text-transform:uppercase;color:var(--sprout-d)}
+.prod-name{padding:0;border:0;background:none;text-align:left;font:800 1.08rem/1.15 var(--head);color:var(--ink)}
+.prod-name:hover{text-decoration:underline;text-decoration-color:var(--sun-d);text-decoration-thickness:3px}
+.prod-sub{font-size:.85rem;color:var(--muted);line-height:1.35}
+.prod-desc{display:none;font-size:.92rem;color:var(--muted)}
+.rate{display:flex;align-items:center;gap:5px;font:700 .85rem var(--body);color:var(--muted)}.rate b{color:var(--ink)}
+.prod-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:8px}
+.price{font:800 1.4rem/1 var(--head)}
+.prod-foot .btn{flex:none}.price s{font:600 .85rem var(--body);color:var(--muted);margin-left:4px}
+.empty{grid-column:1/-1;text-align:center;padding:42px 20px;border:3px dashed var(--line-d);border-radius:var(--r-lg);background:#fff}
+.empty h3{font-size:1.5rem;margin:8px 0}.empty p{color:var(--muted);margin-bottom:18px}
+
+/* quick look */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(30,45,34,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.scrim.on{opacity:1;visibility:visible;transition:opacity .25s}
+.modal{position:fixed;z-index:90;left:50%;top:50%;width:min(900px,calc(100% - 24px));max-height:calc(100vh - 28px);overflow:auto;background:var(--paper);border-radius:30px;box-shadow:0 30px 80px rgba(0,0,0,.35);transform:translate(-50%,-46%) scale(.96);opacity:0;visibility:hidden;transition:transform .25s var(--pop),opacity .2s,visibility 0s .25s}
+.modal.on{transform:translate(-50%,-50%);opacity:1;visibility:visible;transition:transform .25s var(--pop),opacity .2s}
+.modal-x{position:absolute;right:12px;top:12px;z-index:3}
+.q-grid{display:grid}
+.q-img{position:relative;min-height:240px;background:var(--sun-l)}.q-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.q-body{padding:24px 22px 30px;display:flex;flex-direction:column;gap:12px}
+.q-body h2{font-size:clamp(1.7rem,4vw,2.3rem)}
+.specs{display:grid;gap:8px;margin:6px 0}.specs li{display:flex;gap:12px;align-items:flex-start;font-size:.95rem}.specs b{display:block;font:800 .72rem var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--line-d);border-radius:999px;background:#fff}
+.qty button{width:44px;height:44px;border:0;background:none;border-radius:50%;display:grid;place-items:center}.qty button:hover{background:var(--sun-l)}
+.qty output{min-width:30px;text-align:center;font:800 1.05rem var(--head)}
+
+/* bundles */
+.bundles{display:grid;gap:26px}
+.bundle{position:relative;display:flex;flex-direction:column;background:#fff;border:2px solid var(--line-d);border-radius:var(--r-lg);box-shadow:0 6px 0 var(--line-d);transition:transform .2s var(--pop)}
+.bundle:hover{transform:translateY(-4px);animation:wiggle .55s ease-in-out}
+.b-top{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0;padding:28px 18px 22px;border-radius:30px 30px 0 0;background:var(--bb)}
+.b-top .coin{--cs:92px;margin:0 -8px;box-shadow:0 4px 0 rgba(42,59,46,.16)}
+.b-top .coin:nth-child(2){transform:translateY(-8px) scale(1.08);z-index:1}
+.b-sale{position:absolute;right:4px;top:-20px;z-index:2;transform:rotate(10deg)}
+.b-body{display:flex;flex-direction:column;gap:12px;padding:22px 22px 24px;flex:1}
+.b-body h3{font-size:1.5rem}.b-body .lead{color:var(--muted);font-size:.98rem}
+.b-items{display:grid;gap:7px;margin:4px 0}.b-items li{display:flex;align-items:center;gap:10px;font-size:.95rem;font-weight:600}
+.b-items li span:last-child{margin-left:auto;color:var(--muted);font-weight:600}
+.b-price{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.b-price .was{font-size:.9rem;color:var(--muted)}.b-price .was s{margin-right:6px}.b-price .save{display:block;font:800 .95rem var(--head);color:var(--sprout-d)}
+.b-price .now{display:block;font:800 1.6rem/1.1 var(--head);color:var(--ink)}.b-price .now small{font:600 .85rem var(--body);color:var(--muted);margin-left:2px}
+.b-body .btn{width:100%}
+
+/* gift finder */
+.gift{display:grid;gap:26px;grid-template-areas:"panel" "picks" "cards"}.gift-panel{grid-area:panel}.gift-col{grid-area:picks;display:flex;flex-direction:column}.gcards{grid-area:cards}
+.gift-panel{padding:24px 22px}
+.step{display:grid;grid-template-columns:calc(48px*var(--ks)) 1fr;gap:6px 14px;margin-bottom:26px}
+.step:last-of-type{margin-bottom:6px}
+.step h3{font-size:1.2rem;align-self:center}.step>div{grid-column:1/-1}
+.gift-ages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.range{display:flex;gap:14px;align-items:center}.range>div{flex:1;min-width:0}
+.g-cap{display:block;font:700 .95rem var(--body);color:var(--muted)}.g-cap b{font:800 1.3rem var(--head);color:var(--ink)}
+.g-note{padding:10px 14px;border-radius:16px;background:var(--sun-l);color:#5a4a12;font-size:.9rem;line-height:1.35}
+input[type=range]{width:100%;height:36px;accent-color:var(--sprout-d)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.mini{min-height:44px;padding:6px 14px;border:2px solid var(--line-d);border-radius:999px;background:#fff;font:800 .9rem var(--head)}
+.mini:hover{background:var(--sun-l)}.mini[aria-pressed="true"]{background:var(--sprout-d);color:#fff;border-color:var(--sprout-dd)}
+.interests{display:flex;flex-wrap:wrap;gap:8px}
+.interests .chip{min-height:48px;padding-right:16px}.interests .chip .coin{--cs:34px}
+.picks{display:flex;flex-direction:column;gap:14px}
+.pick{display:grid;grid-template-columns:96px 1fr;gap:6px 16px;align-items:center;padding:14px;background:#fff;border:2px solid var(--line);border-radius:26px;box-shadow:0 5px 0 var(--line);animation:pop .35s var(--pop) both}
+.pick:nth-child(2){animation-delay:.07s}.pick:nth-child(3){animation-delay:.14s}
+.pick img{width:96px;height:96px;object-fit:cover;border-radius:20px}
+.pick .rank{display:inline-flex;margin-bottom:2px}
+.pick h4{font-size:1.12rem}.pick .why{font-size:.88rem;color:var(--muted);line-height:1.35;margin:3px 0 8px}
+.pick .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pick .row .price{margin-right:auto;font-size:1.25rem}
+.pick .over{display:inline-block;padding:1px 10px;border-radius:999px;background:var(--tomato-l);color:var(--tomato-t);font:800 .75rem var(--head);margin-left:6px;vertical-align:middle}
+.gift-photo{position:relative;border-radius:var(--r-lg);overflow:hidden;border:6px solid #fff;box-shadow:0 8px 0 rgba(42,59,46,.1);aspect-ratio:4/3;flex:1;min-height:220px}
+.gift-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 85%}
+.gift-photo figcaption{position:absolute;left:12px;bottom:12px;padding:6px 14px;background:#fff;border-radius:999px;font:800 .85rem var(--head);display:flex;gap:8px;align-items:center}
+.gcards{padding:22px;display:grid;gap:16px;align-content:start}
+.gcard{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:22px;background:linear-gradient(135deg,var(--sprout-d),var(--sprout) 70%);color:#fff;box-shadow:0 5px 0 var(--sprout-dd);overflow:hidden;min-height:96px}
+.gcard::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.14)}
+.gcard b{font:800 2.1rem/1 var(--head)}.gcard small{display:block;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+
+/* story */
+.story{display:grid;gap:34px;align-items:center}
+.story-fig{position:relative;margin:0}
+.story-fig img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:42% 60%;border-radius:36px;border:7px solid #fff;box-shadow:0 12px 0 rgba(42,59,46,.1);transform:rotate(-1.6deg)}
+.story-fig .tag{position:absolute;right:-6px;bottom:28px;display:flex;align-items:center;gap:8px;padding:8px 16px 8px 8px;background:var(--sun);border-radius:999px;font:800 .95rem var(--head);box-shadow:0 4px 0 var(--sun-d);transform:rotate(3deg)}
+.story h2{font-size:clamp(2rem,4.6vw,3rem);margin:16px 0 14px}
+.story p+p{margin-top:14px}.story p{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px}
+.facts li{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:14px 12px;background:#fff;border:2px solid var(--line);border-radius:22px}
+.facts b{font:800 1.4rem/1 var(--head)}.facts span{font-size:.82rem;color:var(--muted);line-height:1.3}
+.facts .coin{--cs:44px;background:var(--sprout-l)}
+
+/* reviews */
+.reviews{display:grid;gap:18px}
+.score{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:26px 20px;background:var(--sun-l);border:2px solid var(--sun);border-radius:var(--r-lg);box-shadow:0 5px 0 var(--sun-d)}
+.score b{font:800 1.3rem var(--head)}.score p{font-size:.92rem;color:#4b4a2f}
+.bars{width:100%;display:grid;gap:5px;margin-top:8px;font:700 .78rem var(--body)}
+.bars div{display:grid;grid-template-columns:22px 1fr 34px;gap:8px;align-items:center}
+.bars i{display:block;height:9px;border-radius:9px;background:rgba(42,59,46,.14);overflow:hidden}.bars i::after{content:"";display:block;height:100%;width:var(--w);background:var(--sprout-d);border-radius:9px}
+.review{display:flex;flex-direction:column;gap:12px;padding:22px;background:#fff;border:2px solid var(--line);border-radius:var(--r-lg);box-shadow:0 5px 0 var(--line)}
+.review:nth-of-type(odd){transform:rotate(-.6deg)}.review:nth-of-type(even){transform:rotate(.6deg)}
+.review .who{display:flex;align-items:center;gap:12px}.review .who b{display:block;font:800 1.05rem var(--head)}.review .who small{color:var(--muted);font-size:.84rem}
+.rv-rate{display:flex;align-items:center;gap:8px}.rv-rate b{font:800 1.5rem/1 var(--head)}.rv-rate small{font-size:.82rem;color:var(--muted)}
+.review>[data-live]{align-self:flex-start}.review blockquote{margin:0;font-size:1rem;color:var(--ink)}
+.review .buy{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--sprout-d);font-weight:700}
+.av{display:inline-grid;place-items:center;width:calc(56px*var(--ks));height:calc(56px*var(--ks));border-radius:50%;font:800 1.1rem var(--head)}
+html:not([data-level="0"]) .av{background:none}
+html[data-level="0"] .av{background:var(--sprout-l);color:var(--sprout-d)}
+
+/* newsletter */
+.news{display:grid;gap:28px;align-items:center}
+.news h2{font-size:clamp(2rem,4.6vw,3rem);margin:14px 0 12px}.news p{color:#5b3a35}
+.nl-form{display:grid;gap:12px;padding:22px;background:#fff;border:2px solid #ffb9ab;border-radius:var(--r-lg);box-shadow:0 5px 0 #ffb9ab}
+.nl-form .row2{display:grid;gap:12px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted)}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--sprout-d);flex:none}
+.err{min-height:1.2em;font-size:.85rem;font-weight:700;color:var(--tomato-t)}
+.ok-box{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:20px;background:var(--sprout-l);color:var(--sprout-dd)}
+.ok-box b{font:800 1.15rem var(--head)}.ok-box code{background:#fff;padding:2px 10px;border-radius:8px;font:800 1rem var(--head);letter-spacing:.06em}
+
+/* visit */
+.visit{display:grid;gap:22px}
+.v-card{padding:24px 22px}
+.v-card h3{font-size:1.4rem;margin-bottom:14px;display:flex;gap:10px;align-items:center}
+.addr{display:grid;gap:14px;font-style:normal}.addr li{display:flex;gap:12px;align-items:flex-start}.addr b{display:block}
+.hours{width:100%;border-collapse:collapse;font-size:.98rem}
+.hours th{text-align:left;font-weight:700}.hours td{text-align:right;color:var(--muted)}
+.hours tr{border-bottom:2px dotted var(--line)}.hours th,.hours td{padding:9px 6px}
+.hours tr[aria-current="date"]{background:var(--sun-l)}.hours tr[aria-current="date"] th,.hours tr[aria-current="date"] td{color:var(--ink);font-weight:800}
+.open-now{display:flex;align-items:center;gap:14px;margin-bottom:12px;padding:12px 14px;border-radius:20px;background:var(--sprout-l);color:var(--sprout-dd)}
+.open-now.closed{background:var(--tomato-l);color:var(--tomato-t)}.open-now b{font:800 1.1rem var(--head);display:block}.open-now small{font-size:.86rem}
+.map{position:relative;min-height:290px;border-radius:26px;overflow:hidden;background:#d6efcf;border:2px solid var(--line-d)}
+.map .mp{position:absolute;display:block}
+.map .park{background:#bfe3b0;border-radius:26px}.map .blk{background:#f6e7bd;border-radius:20px}
+.map .road{background:#fff;box-shadow:0 0 0 3px #f3e3ac}.map .road.h{left:0;right:0;height:30px}.map .road.v{top:0;bottom:15%;width:30px}
+.map .river{left:0;right:0;bottom:0;height:17%;background:#bfe5f6;border-radius:60% 40% 0 0/40px 26px 0 0}
+.map .shop{width:13%;height:13%;min-width:44px;min-height:36px;background:var(--sun);border:3px solid var(--ink);border-radius:10px}
+.map .lbl{font:800 .76rem var(--body);letter-spacing:.04em;color:#34513a;font-style:normal;white-space:nowrap}.map .road-l{color:#6b5a1a;font-size:.7rem}.map .vl{color:#6b5a1a;font-size:.7rem}
+.map .pin{position:absolute;transform:translate(-50%,-92%)}
+.map .legend{position:absolute;left:10px;bottom:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px 12px;padding:8px 14px;background:rgba(255,255,255,.93);border-radius:16px;font:700 .8rem var(--body)}
+.v-note{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:12px 14px;border-radius:18px;background:var(--sprout-l);color:var(--sprout-dd);font-size:.9rem;line-height:1.4}
+.event .ev-when{display:block;font:800 1rem var(--head);color:var(--sky-d);margin-bottom:2px}
+.event{display:grid;gap:16px;align-items:center;padding:20px 22px;background:var(--sky-l);border:2px solid var(--sky);border-radius:var(--r-lg);box-shadow:0 5px 0 #8ccbee}
+.event .when{display:flex;gap:6px;align-items:center}
+.event h3{font-size:1.4rem}.event p{color:#33566b}
+
+/* faq */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.faq details{background:#fff;border:2px solid var(--line);border-radius:22px;box-shadow:0 4px 0 var(--line);overflow:hidden}
+.faq summary{display:flex;align-items:center;gap:14px;min-height:64px;padding:10px 16px;cursor:pointer;font:800 1.08rem/1.2 var(--head);list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{margin-left:auto;transition:transform .25s}.faq details[open] .chev{transform:rotate(180deg)}
+.faq details[open]{border-color:var(--sprout)}
+.faq .ans{padding:0 20px 20px 70px;color:var(--muted)}
+
+/* credits + footer */
+#credits{padding:46px 0 30px;font-size:.88rem;color:var(--muted)}
+#credits h2{font-size:1.5rem;color:var(--ink);margin-bottom:10px}
+#credits ul{display:grid;gap:5px 28px;margin:14px 0}
+#credits li{line-height:1.4}
+.site-foot{background:#173a24;color:#d7efd8;padding:56px 0 96px;margin-top:20px;position:relative}
+.site-foot::before{content:"";position:absolute;left:0;right:0;bottom:calc(100% - 1px);height:22px;background:radial-gradient(circle at 22px 22px,#173a24 21px,transparent 22px) 0 0/44px 22px repeat-x}
+.foot-grid{display:grid;gap:30px}
+.site-foot h3{font-size:1.05rem;color:#fff;margin-bottom:12px}
+.site-foot a{color:#d7efd8;text-decoration:none}.site-foot a:hover{text-decoration:underline;color:#fff}
+.site-foot li{margin:7px 0}
+.site-foot .logo{color:#fff}.site-foot .logo small{color:#9fd6a6}
+.foot-ico{display:flex;gap:10px;align-items:center}.foot-ico .coin{--cs:40px;background:var(--cream)}
+.pay{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.pay .coin{--cs:44px;background:var(--cream)}
+.legal{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);font-size:.85rem;color:#a9d3ae;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+/* basket drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(450px,100%);display:flex;flex-direction:column;background:var(--paper);box-shadow:-12px 0 50px rgba(0,0,0,.25);transform:translateX(104%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+.drawer.on{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.d-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:2px solid var(--line)}
+.d-head h2{font-size:1.5rem;margin-right:auto}
+.d-body{flex:1;overflow:auto;padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.meter{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:22px;background:var(--sun-l)}
+.meter p{font-size:.92rem;line-height:1.3}.meter b{font-family:var(--head)}
+.meter.done{background:var(--sprout-l);color:var(--sprout-dd)}
+#d-shop{display:grid;gap:14px}
+.lines{display:grid;gap:12px}
+.line{display:grid;grid-template-columns:68px 1fr auto;gap:4px 12px;align-items:center;padding:10px;background:#fff;border:2px solid var(--line);border-radius:22px}
+.line .th{width:68px;height:68px;border-radius:16px;overflow:hidden;background:var(--sun-l);display:grid;place-items:center}
+.line .th img{width:100%;height:100%;object-fit:cover}
+.line h4{font-size:1rem;line-height:1.15}.line small{display:block;font-size:.8rem;color:var(--muted)}
+.line .lp{font:800 1.05rem var(--head);text-align:right}
+.line .ctl{grid-column:2/-1;display:flex;align-items:center;justify-content:space-between}
+.line .qty button{width:44px;height:44px}
+.line .rm{border:0;background:none;color:var(--muted);font-size:.85rem;font-weight:700;text-decoration:underline;display:inline-flex;gap:4px;align-items:center;min-height:44px}
+.d-empty{text-align:center;padding:30px 10px}.d-empty h3{font-size:1.4rem;margin:10px 0 6px}.d-empty p{color:var(--muted);margin-bottom:16px}
+.wrapbox{display:grid;gap:10px;padding:14px;background:#fff;border:2px dashed var(--line-d);border-radius:22px}
+.wrapbox label.sw{display:flex;align-items:center;gap:12px;cursor:pointer}
+.wrapbox img{width:56px;height:56px;border-radius:14px;object-fit:cover}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw .knob{position:relative;flex:none;width:52px;height:30px;border-radius:30px;background:#cfc7ae;transition:background .2s}
+.sw .knob::after{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.2);transition:transform .25s var(--pop)}
+.sw input:checked+.knob{background:var(--sprout-d)}.sw input:checked+.knob::after{transform:translateX(22px)}
+.sw input:focus-visible+.knob{outline:3px solid var(--sky-d);outline-offset:3px}
+.sw span.t b{display:block;font:800 1rem var(--head)}.sw span.t small{font-size:.82rem;color:var(--muted)}
+.promo{display:flex;gap:8px}.promo .input{min-height:44px}
+.d-foot{padding:14px 18px 88px;border-top:2px solid var(--line);background:#fff;display:grid;gap:8px}
+.sum{display:flex;justify-content:space-between;font-size:.95rem;color:var(--muted)}.sum.total{color:var(--ink);font:800 1.3rem var(--head);padding-top:6px;border-top:2px dotted var(--line)}
+.sum.disc{color:var(--sprout-d);font-weight:700}
+.thanks{text-align:center;padding:20px 8px;display:grid;gap:10px;justify-items:center}.thanks h3{font-size:1.6rem}.thanks p{color:var(--muted)}
+.toast{position:fixed;left:50%;top:84px;z-index:100;transform:translate(-50%,-14px);display:flex;align-items:center;gap:10px;max-width:calc(100% - 28px);padding:10px 20px 10px 12px;background:var(--ink);color:#fff;border-radius:999px;font:700 .95rem var(--body);box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .2s,transform .25s var(--pop)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast .coin{--cs:30px}
+
+/* levels: Basic is the same shop with plain emoji and text, so live slots shrink to what they say and get calm, tidy fallbacks */
+html[data-level="0"] .tile .coin,html[data-level="0"] .b-top .coin,html[data-level="0"] .chip .coin{background:transparent;box-shadow:none}
+html[data-level="0"] .kit-live{min-width:0!important;min-height:0!important}
+html[data-level="0"] .b-sale{transform:none;right:12px;top:12px;padding:2px 11px;border-radius:999px;background:var(--tomato-d);color:#fff;font:800 .85rem/1.5 var(--head)}
+html[data-level="0"] .stk-sale,html[data-level="0"] .float{display:none}
+html[data-level="0"] .tile .coin{font-size:2.8rem}
+html[data-level="0"] .b-top .coin{font-size:2.6rem}
+html[data-level="0"] .rib{top:12px;right:10px}
+html[data-level="0"] .rib .kit-fb{display:inline-block;padding:3px 11px;border-radius:999px;background:var(--tomato-d);color:#fff;font:800 .74rem/1.3 var(--head);box-shadow:0 2px 0 rgba(42,59,46,.25)}
+html[data-level="0"] .wish [data-ico]{filter:none;opacity:1;color:var(--ink);font-size:26px!important}
+html[data-level="0"] [data-live="rating-stars"]{color:#e0a300;font-size:1.25rem;letter-spacing:2px}
+html[data-level="0"] .score [data-live="rating-stars"]{font-size:2rem}
+html[data-level="0"] .event .when .kit-live{padding:6px 14px;border-radius:999px;background:#fff;font:800 1rem var(--head);box-shadow:0 2px 0 #8ccbee}
+html[data-level="0"] #today-cal{padding:3px 11px;border-radius:10px;background:var(--sun);font:800 .85rem var(--head)}
+html[data-level="0"] #open-clock{font:800 1.1rem var(--head);white-space:nowrap}
+html[data-level="0"] #meter-ring{font:800 1.2rem var(--head);min-width:2.6em;text-align:center}
+html[data-level="0"] .thanks [data-live]{font:800 2rem var(--head)}
+html[data-level="0"] #g-tag{font:800 1.6rem var(--head)}
+/* step numbers and map pins: a calm CSS badge at Basic and Upgraded, the live icon at Full */
+html:not([data-level="2"]) .step>.kit-live,html:not([data-level="2"]) .map .pin .kit-live{min-width:0!important;min-height:0!important}
+html:not([data-level="2"]) .step>.kit-live>.kit-fb{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--sprout-d);color:#fff;font:800 1.1rem var(--head);box-shadow:0 3px 0 var(--sprout-dd)}
+html:not([data-level="2"]) .map .pin .kit-fb{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--tomato-d);border:2.5px solid #fff;color:#fff;font:800 .9rem var(--head);box-shadow:0 3px 0 rgba(42,59,46,.25)}
+html[data-level="1"] .step>.kit-live>with-live-icon,html[data-level="1"] .map .pin .kit-live>with-live-icon{display:none!important}
+html[data-level="1"] .step>.kit-live>.kit-fb,html[data-level="1"] .map .pin .kit-live>.kit-fb{display:inline-grid!important}
+/* Full only: a strip of toy icons under the hero, and a burst of icons when something goes in the basket */
+.play-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;padding:0 24px;margin-top:26px}
+.play-strip>span{display:inline-grid;place-items:center;min-width:56px}
+.play-strip>span:nth-child(odd){transform:translateY(5px) rotate(-4deg)}.play-strip>span:nth-child(even){transform:rotate(5deg)}
+.burst{position:fixed;left:0;top:0;width:0;height:0;z-index:120;pointer-events:none}
+.burst>span{position:absolute;left:0;top:0;margin:-16px 0 0 -16px;animation:burst 1.15s cubic-bezier(.12,.7,.3,1) forwards;filter:drop-shadow(0 3px 0 rgba(42,59,46,.18))}
+@keyframes burst{0%{transform:translate(0,0) scale(.5) rotate(0);opacity:0}12%{opacity:1}68%{opacity:1}100%{transform:translate(var(--bx),var(--by)) scale(1.1) rotate(var(--br));opacity:0}}
+
+@media(max-width:559px){.tools select.input{padding:10px 4px 10px 12px;font-size:.92rem}}
+@media(min-width:560px){
+  .grid{gap:18px}.prod-desc{display:block}
+  .ages{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tools{grid-template-columns:1fr 1fr}.search-f{grid-column:1/-1}.tools>.btn{grid-column:1/-1;justify-self:start}
+  .nl-form .row2{grid-template-columns:1fr 1fr}
+  .trust ul{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .facts b{font-size:1.6rem}
+  #credits ul{grid-template-columns:1fr 1fr}
+}
+@media(min-width:720px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .bundles{grid-template-columns:1fr}.bundle{flex-direction:row}.b-top{flex:0 0 330px;border-radius:30px 0 0 30px;padding:24px}
+  .reviews{grid-template-columns:repeat(3,1fr)}.score{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:12px 36px;text-align:left}.score .bars{max-width:300px;margin-top:0}
+  .q-grid{grid-template-columns:.9fr 1.1fr}.q-img{min-height:100%}.q-body{padding:34px 32px 34px}
+  .visit{grid-template-columns:1fr 1fr}.map,.event{grid-column:1/-1}
+  .event{grid-template-columns:auto 1fr auto}
+  .foot-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}
+}
+@media(min-width:1100px){.nav{display:flex;gap:0}.nav a{padding:6px 10px;font-size:.93rem}.cart-btn .lbl{display:inline}.menu-btn{display:none}}
+@media(min-width:960px){
+  .f1{left:46%;right:auto;top:18px}
+  .hero .wrap{grid-template-columns:1.02fr .98fr}.hero-fig{max-width:none}
+  .gift{grid-template-columns:1.05fr .95fr;grid-template-areas:"panel picks" "cards picks";align-items:stretch}.gift-photo{aspect-ratio:auto}.gift-photo img{object-position:50% 62%}
+  .story{grid-template-columns:.95fr 1.05fr}
+  .news{grid-template-columns:1fr 1fr}
+  .visit{grid-template-columns:1fr 1fr 1.1fr}.visit .map{grid-column:3;grid-row:1/3}.visit .event{grid-column:1/-1}
+  .ages{gap:12px}
+  .tools{grid-template-columns:1.6fr 1fr 1fr auto}.search-f{grid-column:auto}.tools>.btn{grid-column:auto;justify-self:auto;align-self:end}
+}
+@media(min-width:1000px){.bundles{grid-template-columns:repeat(3,minmax(0,1fr))}.bundle{flex-direction:column}.b-top{flex:none;border-radius:30px 30px 0 0;padding:28px 18px 22px}}
+@media(min-width:1060px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.reviews{grid-template-columns:.85fr 1fr 1fr 1fr}.score{grid-column:auto;flex-direction:column;text-align:center;justify-content:flex-start}.score .bars{max-width:none;margin-top:8px}}
+@media(max-width:480px){.site-head .wrap{gap:6px 8px}.logo{gap:8px}.logo b{font-size:1.2rem}.logo small{letter-spacing:.1em}.logo .coin{--cs:40px}.icon-btn{--bs:44px}.cart-btn{padding:0 10px}}
+@media(max-width:420px){
+  .wrap{width:min(1180px,100% - 28px)}
+  .announce .wrap{gap:4px}.announce{font-size:.82rem}
+  .pick{grid-template-columns:76px 1fr}.pick img{width:76px;height:76px}
+  .prod-foot .add-t{display:none}.prod-foot .btn{min-width:48px;min-height:48px;padding:6px 10px}
+  .age{font-size:.72rem}
+  .tile{min-height:168px}.tile .coin{--cs:84px}
+  .facts{gap:8px}.facts li{padding:12px 10px}
+  .hero-frame{border-radius:30px 30px 30px 70px}
+}
+/* kit size slider at 1.5x and up (set from JS): calmer chrome so nothing is covered */
+html[data-big] .site-head{position:static}
+html[data-big] .logo small{display:none}
+html[data-big] .b-sale{position:static;flex:0 0 100%;display:flex;justify-content:flex-end;transform:none;margin:-14px 0 -6px}
+@media(max-width:700px){html[data-big] .ages,html[data-big] .gift-ages{grid-template-columns:1fr}html[data-big] .cart-btn{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+@media print{.announce,.awning,.site-head,.drawer,.scrim{display:none}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Little Sprout Toy Co. is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#main">Skip to the toys</a>
+
+<div class="announce" role="region" aria-label="Shop news">
+  <div class="wrap">
+    <p><span data-ico="truck" data-size="28">🚚</span> Free shipping over $50</p>
+    <p><span data-ico="gift" data-size="28">🎁</span> Free gift-wrap over $75</p>
+    <p><span data-ico="book-open" data-size="28">📖</span> Story Time every Saturday, 10:30 am</p>
+  </div>
+</div>
+
+<header class="site-head" id="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Little Sprout Toy Co., home">
+      <span class="coin"><span data-ico="sprout" data-size="40" data-sample data-motion="hover">🌱</span></span>
+      <span><b>Little Sprout</b><small>Toy Co.</small></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#play"><span data-ico="shapes" data-size="28">🧩</span>Shop by play</a>
+      <a href="#shop"><span data-ico="baby" data-size="28">🍼</span>Age finder</a>
+      <a href="#bundles"><span data-ico="package-open" data-size="28">📦</span>Bundles</a>
+      <a href="#gift"><span data-ico="gift" data-size="28">🎁</span>Gift finder</a>
+      <a href="#safety"><span data-ico="shield-check" data-size="28">🛡️</span>Our promise</a>
+      <a href="#visit"><span data-ico="store" data-size="28">🏪</span>Visit us</a>
+    </nav>
+    <button class="icon-btn" id="search-btn" type="button" aria-label="Search toys"><span data-ico="search" data-size="30">🔍</span></button>
+    <button class="cart-btn" id="cart-toggle" type="button" aria-label="Open basket, 0 items" aria-haspopup="dialog" aria-controls="drawer">
+      <span class="lbl">Basket</span>
+      <span data-live="cart-count" data-p-count="0" data-size="40" id="cart-badge" data-label="Basket, 0 items">🛒 0</span>
+    </button>
+    <button class="icon-btn menu-btn" id="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span data-ico="menu" data-size="30">☰</span></button>
+  </div>
+</header>
+<div class="awning" aria-hidden="true"></div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h">
+  <span class="float f1" data-min-level="2"><span data-ico="star" data-size="52" data-motion="loop">⭐</span></span>
+    <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow"><span data-ico="sparkles" data-size="28">✨</span> Family-run since 2011</p>
+      <h1 id="hero-h">Toys that <span class="hl">grow</span> with them.<span data-ico="sprout" data-size="64" data-motion="hover" data-min-level="1"></span></h1>
+      <p class="lede">Little Sprout is a small, family-run toy shop for curious little humans: sturdy wooden toys, picture books worth rereading and plush friends that survive the washing machine. Everything is sorted by age, so you can find the right thing in about a minute.</p>
+      <div class="hero-cta">
+        <a class="btn btn-go" href="#shop"><span data-ico="search" data-size="26">🔍</span> Find the right toy</a>
+        <a class="btn" href="#gift"><span data-ico="gift" data-size="26">🎁</span> Gift finder</a>
+      </div>
+      <ul class="hero-points">
+        <li><span data-ico="truck" data-size="32">🚚</span> Free shipping over $50</li>
+        <li><span data-ico="undo" data-size="32">↩️</span> 30-day happy returns</li>
+        <li><span data-ico="recycle" data-size="32">♻️</span> Plastic-free packaging</li>
+      </ul>
+    </div>
+    <figure class="hero-fig">
+      <div class="hero-frame"><img src="_img/little-sprout/7301166-1600.jpg" width="1200" height="801" fetchpriority="high" decoding="async" alt="A small child in a yellow top kneels on a white bedroom floor, building a tower from colorful wooden blocks with a few toys scattered around."></div>
+      <span class="stk stk-rain" data-min-level="2"><span data-ico="rainbow" data-size="76" data-motion="hover">🌈</span></span>
+      <a class="stk stk-sale" href="#bundles" data-min-level="2"><span data-live="sale-sticker" data-p-text="-15%" data-size="108" data-label="15 percent off">-15%</span><span class="stk-cap">Welcome Baby Box</span></a>
+      <div class="rate-card">
+        <span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="Rated 4.9 out of 5 stars">★★★★★</span>
+        <div><b>4.9 out of 5</b><small>from 1,240 parent reviews</small></div>
+      </div>
+      <figcaption class="ph-credit">Photo: <a href="https://www.pexels.com/@kseniachernaya">Ksenia Chernaya</a> / <a href="https://www.pexels.com/photo/7301166/">Pexels</a></figcaption>
+    </figure>
+  </div>
+  <div class="play-strip" aria-hidden="true" data-min-level="2">
+    <span><span data-ico="blocks" data-size="56" data-motion="hover"></span></span><span><span data-ico="teddy-bear" data-size="56" data-motion="hover"></span></span><span><span data-ico="kite" data-size="56" data-motion="hover"></span></span><span><span data-ico="train" data-size="56" data-motion="hover"></span></span><span><span data-ico="rainbow" data-size="56" data-motion="hover"></span></span><span><span data-ico="balloon" data-size="56" data-motion="hover"></span></span><span><span data-ico="palette" data-size="56" data-motion="hover"></span></span><span><span data-ico="puzzle-piece" data-size="56" data-motion="hover"></span></span><span><span data-ico="car" data-size="56" data-motion="hover"></span></span>
+  </div>
+</section>
+
+<!-- SAFETY & MATERIALS -->
+<section class="band band-green trust" id="safety" aria-labelledby="safety-h">
+  <div class="wrap">
+    <h2 class="sr" id="safety-h">Safety and materials</h2>
+    <ul>
+      <li><span class="coin"><span data-ico="shield-check" data-size="48" data-label="Safety tested">🛡️</span></span><h3>Tested for safety*</h3><p>Checked against EN 71 and ASTM F963 for the age printed on the box.</p></li>
+      <li><span class="coin"><span data-ico="tree-pine" data-size="48" data-label="Sustainable wood">🌲</span></span><h3>Sustainable wood</h3><p>FSC-certified beech and birch, sanded by hand until it feels like a pebble.</p></li>
+      <li><span class="coin"><span data-ico="paintbrush" data-size="48" data-label="Baby-safe paint">🖌️</span></span><h3>Baby-safe paints</h3><p>Water-based, saliva-proof colors and food-grade beeswax finishes.</p></li>
+      <li><span class="coin"><span data-ico="recycle" data-size="48" data-label="Plastic-free packaging">♻️</span></span><h3>Plastic-free boxes</h3><p>Paper, cardboard and a bit of string. Our mailers are compostable.</p></li>
+    </ul>
+    <p class="fine">*Demo copy: Little Sprout is a fictional shop, so these claims show how a real toy shop could phrase its safety and materials promises. A real shop would link each toy to its test report.</p>
+  </div>
+</section>
+
+<!-- SHOP BY PLAY -->
+<section class="sec" id="play" aria-labelledby="play-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="orn l" data-min-level="2"><span data-ico="kite" data-size="64" data-motion="hover">🪁</span></span><span class="orn r" data-min-level="2"><span data-ico="balloon" data-size="64" data-motion="hover">🎈</span></span>
+      <span class="eyebrow"><span data-ico="shapes" data-size="28">🧩</span> Shop by play</span>
+      <h2 id="play-h">What do they love doing?</h2>
+      <p>Eight shelves, one for every kind of play. Tap one to filter the toys below.</p>
+    </div>
+    <div class="tiles" id="tiles">
+      <button type="button" class="tile tb-sun" data-cat="blocks" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="blocks" data-size="72" data-motion="hover">🧱</span></span><b>Blocks</b><small>Build, stack, topple</small></button>
+      <button type="button" class="tile tb-red" data-cat="plush" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="teddy-bear" data-size="72" data-motion="hover">🧸</span></span><b>Plush</b><small>Cuddles on demand</small></button>
+      <button type="button" class="tile tb-sky" data-cat="books" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="book-open" data-size="72" data-motion="hover">📖</span></span><b>Books</b><small>One more page, please</small></button>
+      <button type="button" class="tile tb-green" data-cat="pretend" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="chef-hat" data-size="72" data-motion="hover">🍳</span></span><b>Pretend play</b><small>Kitchens and little worlds</small></button>
+      <button type="button" class="tile tb-green" data-cat="puzzles" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="puzzle-piece" data-size="72" data-motion="hover">🧩</span></span><b>Puzzles</b><small>Sort, fit, figure out</small></button>
+      <button type="button" class="tile tb-sky" data-cat="nursery" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="baby" data-size="72" data-motion="hover">🍼</span></span><b>Nursery</b><small>Rattles and first friends</small></button>
+      <button type="button" class="tile tb-red" data-cat="art" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="palette" data-size="72" data-motion="hover">🎨</span></span><b>Art &amp; craft</b><small>Crayons and color</small></button>
+      <button type="button" class="tile tb-sun" data-cat="rideons" aria-pressed="false"><span class="n">0</span><span class="coin"><span data-ico="car" data-size="72" data-motion="hover">🚗</span></span><b>Ride-ons</b><small>Rock, roll and go</small></button>
+    </div>
+  </div>
+</section>
+
+<!-- AGE FINDER + SHOP -->
+<section class="sec" id="shop" aria-labelledby="shop-h" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head"><span class="orn l" data-min-level="2"><span data-ico="leaf" data-size="56" data-motion="hover">🌿</span></span><span class="orn r" data-min-level="2"><span data-ico="flower" data-size="56" data-motion="hover">🌼</span></span>
+      <span class="eyebrow"><span data-ico="sprout" data-size="28">🌱</span> Age finder</span>
+      <h2 id="shop-h">How old is your little sprout?</h2>
+      <p>Pick an age and the shelf rearranges itself. Add a search or a sort if you like.</p>
+    </div>
+    <div class="finder card">
+      <div class="ages" id="age-chips" role="group" aria-label="Filter toys by age">
+        <button type="button" class="chip" data-age="all" aria-pressed="true"><span class="coin"><span data-ico="sparkles" data-size="36">✨</span></span><span><b>All ages</b><small>Everything</small></span></button>
+        <button type="button" class="chip" data-age="0" aria-pressed="false"><span class="coin"><span data-ico="sprout" data-size="36">🌱</span></span><span><b>0 to 1</b><small>Babies</small></span></button>
+        <button type="button" class="chip" data-age="1" aria-pressed="false"><span class="coin"><span data-ico="leaf" data-size="36">🌿</span></span><span><b>1 to 3</b><small>Toddlers</small></span></button>
+        <button type="button" class="chip" data-age="2" aria-pressed="false"><span class="coin"><span data-ico="flower" data-size="36">🌼</span></span><span><b>3 to 5</b><small>Explorers</small></span></button>
+        <button type="button" class="chip" data-age="3" aria-pressed="false"><span class="coin"><span data-ico="tree-pine" data-size="36">🌳</span></span><span><b>5 and up</b><small>Big kids</small></span></button>
+      </div>
+      <div class="tools">
+        <div class="field search-f"><label for="q">Search</label><div class="search"><span data-ico="search" data-size="28">🔍</span><input id="q" class="input" type="search" placeholder="Try train, rattle or bear" autocomplete="off"></div></div>
+        <div class="field"><label for="cat">Category</label>
+          <select id="cat" class="input"><option value="all">All categories</option><option value="blocks">Blocks</option><option value="plush">Plush</option><option value="books">Books</option><option value="pretend">Pretend play</option><option value="puzzles">Puzzles</option><option value="nursery">Nursery</option><option value="art">Art &amp; craft</option><option value="rideons">Ride-ons</option></select></div>
+        <div class="field"><label for="sort">Sort by</label>
+          <select id="sort" class="input"><option value="featured">Our favorites</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rated">Top rated</option></select></div>
+        <button type="button" class="btn btn-ghost" id="saved-only" aria-pressed="false"><span data-ico="heart" data-size="28">♡</span> Saved <b id="saved-n">0</b></button>
+      </div>
+    </div>
+    <div class="status" id="status" aria-live="polite">
+      <p id="count">Loading the shelves…</p>
+      <button type="button" class="btn btn-ghost btn-sm" id="reset" hidden><span data-ico="refresh" data-size="24">↺</span> Reset filters</button>
+    </div>
+    <div class="grid" id="grid"><noscript><p class="empty">The shop needs JavaScript to show the shelves. Visit us in person at 18 Acorn Lane instead.</p></noscript></div>
+  </div>
+</section>
+
+<!-- BUNDLES -->
+<section class="band band-sun sec" id="bundles" aria-labelledby="bundles-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="orn l" data-min-level="2"><span data-ico="party-popper" data-size="64" data-motion="hover">🎉</span></span><span class="orn r" data-min-level="2"><span data-ico="sparkles" data-size="56" data-motion="hover">✨</span></span>
+      <span class="eyebrow" style="background:#fff"><span data-ico="percent" data-size="28">％</span> Bundle deals</span>
+      <h2 id="bundles-h">Three toys, one tidy saving</h2>
+      <p>Our favorite combinations, packed together and priced a little kinder. Each bundle goes in the basket as one item.</p>
+    </div>
+    <div class="bundles" id="bundle-list"></div>
+  </div>
+</section>
+
+<!-- GIFT FINDER -->
+<section class="band band-sky sec" id="gift" aria-labelledby="gift-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="orn l" data-min-level="2"><span data-ico="balloon" data-size="64" data-motion="hover">🎈</span></span><span class="orn r" data-min-level="2"><span data-ico="party-popper" data-size="64" data-motion="hover">🎉</span></span>
+      <span class="eyebrow" style="background:#fff"><span data-ico="gift" data-size="28">🎁</span> Gift finder</span>
+      <h2 id="gift-h">Birthday on Saturday? Start here.</h2>
+      <p>Tell us their age, your budget and what they love. We will pick three toys and tell you why.</p>
+    </div>
+    <div class="gift">
+      <form class="gift-panel card" id="gift-form" action="#" novalidate>
+        <div class="step">
+          <span data-live="step-number" data-p-step="1" data-size="48" data-label="Step 1">1</span>
+          <h3>How old are they?</h3>
+          <div class="gift-ages" id="g-ages" role="group" aria-label="Age of the child">
+            <button type="button" class="chip" data-age="0" aria-pressed="false"><span class="coin"><span data-ico="sprout" data-size="36">🌱</span></span><span><b>0 to 1</b><small>Babies</small></span></button>
+            <button type="button" class="chip" data-age="1" aria-pressed="true"><span class="coin"><span data-ico="leaf" data-size="36">🌿</span></span><span><b>1 to 3</b><small>Toddlers</small></span></button>
+            <button type="button" class="chip" data-age="2" aria-pressed="false"><span class="coin"><span data-ico="flower" data-size="36">🌼</span></span><span><b>3 to 5</b><small>Explorers</small></span></button>
+            <button type="button" class="chip" data-age="3" aria-pressed="false"><span class="coin"><span data-ico="tree-pine" data-size="36">🌳</span></span><span><b>5 and up</b><small>Big kids</small></span></button>
+          </div>
+        </div>
+        <div class="step">
+          <span data-live="step-number" data-p-step="2" data-size="48" data-label="Step 2">2</span>
+          <h3>What is your budget?</h3>
+          <div>
+            <div class="range">
+              <span data-min-level="1"><span data-live="price-tag" data-p-amount="40" data-p-currency="none" data-size="76" id="g-tag" data-label="Budget 40 dollars">$40</span></span>
+              <div><label class="sr" for="g-budget">Budget in dollars</label><output class="g-cap" id="g-cap" for="g-budget">Up to <b>$40</b></output><input type="range" id="g-budget" min="10" max="150" step="5" value="40"></div>
+            </div>
+            <div class="presets" id="g-presets" role="group" aria-label="Budget shortcuts">
+              <button type="button" class="mini" data-v="20">Up to $20</button><button type="button" class="mini" data-v="40" aria-pressed="true">$40</button><button type="button" class="mini" data-v="75">$75</button><button type="button" class="mini" data-v="150">$150</button>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <span data-live="step-number" data-p-step="3" data-size="48" data-label="Step 3">3</span>
+          <h3>What do they love? <small style="font:600 .85rem var(--body);color:var(--muted)">(pick any)</small></h3>
+          <div class="interests" id="g-interests" role="group" aria-label="Interests">
+            <button type="button" class="chip" data-i="build" aria-pressed="false"><span class="coin"><span data-ico="blocks" data-size="28">🧱</span></span><b>Building</b></button>
+            <button type="button" class="chip" data-i="cuddle" aria-pressed="false"><span class="coin"><span data-ico="teddy-bear" data-size="28">🧸</span></span><b>Cuddles</b></button>
+            <button type="button" class="chip" data-i="stories" aria-pressed="false"><span class="coin"><span data-ico="book-open" data-size="28">📖</span></span><b>Stories</b></button>
+            <button type="button" class="chip" data-i="pretend" aria-pressed="false"><span class="coin"><span data-ico="chef-hat" data-size="28">🍳</span></span><b>Pretend play</b></button>
+            <button type="button" class="chip" data-i="puzzle" aria-pressed="false"><span class="coin"><span data-ico="puzzle-piece" data-size="28">🧩</span></span><b>Puzzling</b></button>
+            <button type="button" class="chip" data-i="art" aria-pressed="false"><span class="coin"><span data-ico="palette" data-size="28">🎨</span></span><b>Coloring</b></button>
+            <button type="button" class="chip" data-i="move" aria-pressed="false"><span class="coin"><span data-ico="car" data-size="28">🚗</span></span><b>Rolling &amp; rocking</b></button>
+          </div>
+        </div>
+      </form>
+      <div class="gift-col">
+        <h3 style="font-size:1.5rem;margin-bottom:14px;display:flex;align-items:center;gap:10px"><span data-ico="wand-sparkles" data-size="36">✨</span> Our three picks</h3>
+        <div class="picks" id="g-results"></div>
+        <p class="sr" id="g-status" role="status"></p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:12px"><button type="button" class="btn btn-go" id="g-all"><span data-ico="gift" data-size="26">🎁</span> Add all three, gift-wrapped</button></div>
+        <figure class="gift-photo" style="margin:22px 0 0">
+          <img src="_img/little-sprout/7722004-1000.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="A wooden toy car carries a red gift box tied with a green dotted ribbon on a pale concrete surface.">
+          <figcaption><span data-ico="heart-gift" data-size="30">🎀</span> Wrapped with a handwritten card</figcaption>
+        </figure>
+      </div>
+      <div class="gcards card">
+      <div>
+        <h3 style="font-size:1.4rem;display:flex;gap:10px;align-items:center;margin-bottom:6px"><span data-ico="wallet" data-size="40">👛</span> Still undecided? Send a gift card</h3>
+        <p style="color:var(--muted)">Emailed in a minute, valid for three years, and the child gets to choose. Pick an amount:</p>
+        <div class="presets" id="gc-amts" role="group" aria-label="Gift card amount"><button type="button" class="mini" data-v="15" aria-pressed="false">$15</button><button type="button" class="mini" data-v="25" aria-pressed="true">$25</button><button type="button" class="mini" data-v="50" aria-pressed="false">$50</button><button type="button" class="mini" data-v="100" aria-pressed="false">$100</button></div>
+      </div>
+      <div style="display:grid;gap:12px">
+        <div class="gcard"><div><small>Little Sprout gift card</small><b id="gc-val">$25</b></div><span data-ico="sprout" data-size="64" data-label="Sprout">🌱</span></div>
+        <button type="button" class="btn btn-go" id="gc-add"><span data-ico="shopping-cart-plus" data-size="26">🛒</span> Add gift card</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec" id="story" aria-labelledby="story-h">
+  <div class="wrap story">
+    <figure class="story-fig">
+      <img src="_img/little-sprout/8690656-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="A toddler seen from behind kneels on a wooden floor, playing with a looping wooden train track beside a bedroom wall.">
+      <span class="tag"><span data-ico="train" data-size="34">🚂</span> The first train, 2011</span>
+    </figure>
+    <div>
+      <span class="eyebrow"><span data-ico="heart-handshake" data-size="28">🤝</span> Our story</span>
+      <h2 id="story-h">It started on a living-room floor.</h2>
+      <p>In 2011 Nell and Ravi Hartley spent a rainy month searching for one wooden train that would not fall apart in their son's hands. They never found it, so they opened a shop instead.</p>
+      <p>Today Little Sprout is still the two of them, a handful of neighbors who know every toy by name, and a test panel of four sticky-fingered children. We only stock what survives them.</p>
+      <ul class="facts">
+        <li><span class="coin"><span data-ico="award" data-size="30">🏅</span></span><b>15 years</b><span>on Acorn Lane</span></li>
+        <li><span class="coin"><span data-ico="hammer" data-size="30">🔨</span></span><b>Free repairs</b><span>on every wooden toy, for life</span></li>
+        <li><span class="coin"><span data-ico="users" data-size="30">👥</span></span><b>40,000</b><span>little sprouts played with our toys</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" style="padding-top:20px" id="reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="orn l" data-min-level="2"><span data-ico="heart" data-size="56" data-motion="hover">❤️</span></span><span class="orn r" data-min-level="2"><span data-ico="star" data-size="56" data-motion="hover">⭐</span></span>
+      <span class="eyebrow"><span data-ico="smile" data-size="28">😊</span> Parent reviews</span>
+      <h2 id="rev-h">Kind words from tired, happy parents</h2>
+    </div>
+    <div class="reviews">
+      <div class="score">
+        <span data-live="rating-stars" data-p-rating="5" data-size="104" data-label="Rated 4.9 out of 5">★★★★★</span>
+        <div class="sc-txt"><b>4.9 average</b><p>from 1,240 verified reviews</p></div>
+        <div class="bars" aria-hidden="true"><div>5 <i style="--w:91%"></i> 91%</div><div>4 <i style="--w:7%"></i> 7%</div><div>3 <i style="--w:1%"></i> 1%</div><div>2 <i style="--w:1%"></i> 1%</div><div>1 <i style="--w:0.5%"></i> &lt;1%</div></div>
+      </div>
+      <article class="review">
+        <div class="who"><span class="av" data-live="avatar-initials" data-p-initials="PM" data-size="56" data-label="Priya M.">PM</span><div><b>Priya M.</b><small>Verified buyer, Portland</small></div></div>
+        <div class="rv-rate"><span data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5">★★★★★</span><b>5.0</b></div>
+        <blockquote>“Two years in and these are the only toys that still get used every single day. The edges are smooth, the colors have not chipped, and my four-year-old has built a hospital, a garage and something he calls the Moon Castle.”</blockquote>
+        <span class="buy"><span data-ico="blocks" data-size="28">🧱</span> Rainbow Builder Blocks</span>
+      </article>
+      <article class="review">
+        <div class="who"><span class="av" data-live="avatar-initials" data-p-initials="JO" data-size="56" data-label="Jonas O.">JO</span><div><b>Jonas O.</b><small>Verified buyer, Tacoma</small></div></div>
+        <div class="rv-rate"><span data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5">★★★★★</span><b>5.0</b></div>
+        <blockquote>“Barnaby arrived for our daughter's first birthday. He has been through the wash eleven times (I counted) and the stitching is perfect. Embroidered eyes meant I could finally stop worrying at nap time.”</blockquote>
+        <span class="buy"><span data-ico="teddy-bear" data-size="28">🧸</span> Barnaby the Bear</span>
+      </article>
+      <article class="review">
+        <div class="who"><span class="av" data-live="avatar-initials" data-p-initials="AK" data-size="56" data-label="Ama K.">AK</span><div><b>Ama K.</b><small>Verified buyer, Denver</small></div></div>
+        <div class="rv-rate"><span data-live="rating-stars" data-p-rating="4.5" data-size="72" data-label="4.5 out of 5">★★★★½</span><b>4.5</b></div>
+        <blockquote>“Plain paper packaging, no plastic anywhere, and the track clicks together without a fight. One bridge peg was loose and the shop mailed a new one the next day, free. That is why we shop here.”</blockquote>
+        <span class="buy"><span data-ico="train" data-size="28">🚂</span> Wooden Railway Starter Set</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="band band-red sec" id="news" aria-labelledby="news-h">
+  <div class="wrap news">
+    <div>
+      <span class="eyebrow" style="background:#fff"><span data-ico="mail" data-size="28">✉️</span> The Sprout Post</span>
+      <h2 id="news-h">One friendly email a month. 10% off the first order.</h2>
+      <p>New arrivals, a toy of the month, ideas for rainy afternoons and a birthday note when it is time to shop again. No spam, and you can leave with one click.</p>
+    </div>
+    <form class="nl-form" id="nl-form" action="#" novalidate>
+      <div class="field"><label for="nl-email">Email address</label><input class="input" id="nl-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="nl-err"></div>
+      <div class="row2">
+        <div class="field"><label for="nl-name">First name (optional)</label><input class="input" id="nl-name" name="name" type="text" autocomplete="given-name" placeholder="Sam"></div>
+        <div class="field"><label for="nl-age">Little one's age</label><select class="input" id="nl-age" name="age"><option>Not sure yet</option><option>Expecting</option><option>0 to 1</option><option>1 to 3</option><option>3 to 5</option><option>5 and up</option></select></div>
+      </div>
+      <label class="check"><input type="checkbox" id="nl-ok" required> <span>Yes, send me the Sprout Post. I can unsubscribe at any time.</span></label>
+      <p class="err" id="nl-err" role="alert"></p>
+      <button class="btn btn-red" type="submit"><span data-ico="send" data-size="26">📨</span> Join the Sprout Post</button>
+    </form>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec" id="visit" aria-labelledby="visit-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow"><span data-ico="store" data-size="28">🏪</span> Visit the shop</span>
+      <h2 id="visit-h">Come and play on Acorn Lane</h2>
+      <p>The shop has a play corner, a wooden train table and a kettle. Bring the little one and try before you buy.</p>
+    </div>
+    <div class="visit">
+      <div class="v-card card">
+        <h3><span data-ico="map-pin" data-size="36">📍</span> Find us</h3>
+        <ul class="addr">
+          <li><span data-ico="store" data-size="30">🏪</span><span><b>Little Sprout Toy Co.</b>18 Acorn Lane, Millbrook</span></li>
+          <li><span data-ico="phone" data-size="30">📞</span><span><b>Call</b><a href="tel:+15035550142">(503) 555-0142</a></span></li>
+          <li><span data-ico="mail" data-size="30">✉️</span><span><b>Write</b><a href="mailto:hello@littlesprout.example">hello@littlesprout.example</a></span></li>
+          <li><span data-ico="bus" data-size="30">🚌</span><span><b>Getting here</b>Bus 14 stops outside. Free parking behind the shop.</span></li>
+        </ul>
+        <p class="v-note"><span data-ico="accessibility" data-size="32" data-label="Accessible">♿</span><span><b>Step-free and stroller-friendly.</b> Flat entrance, wide aisles, a changing table by the play corner and room to park the stroller by the door.</span></p>
+        <button type="button" class="btn btn-ghost btn-sm" id="copy-addr" style="margin-top:18px"><span data-ico="navigation" data-size="26">🧭</span> Copy address</button>
+      </div>
+      <div class="v-card card">
+        <h3><span data-live="calendar-weekday" data-p-weekday="SAT" data-p-day="17" data-size="52" id="today-cal" data-label="Today">SAT</span> Opening hours</h3>
+        <div class="open-now" id="open-now"><span data-live="clock-time" data-p-time="09:00" data-size="52" id="open-clock" data-label="9 am">9am</span><div><b id="open-title">Checking the door…</b><small id="open-sub"></small></div></div>
+        <table class="hours"><caption class="sr">Opening hours</caption><tbody id="hours"></tbody></table>
+      </div>
+      <div class="map" role="img" aria-label="Sketch map: Little Sprout sits on Acorn Lane just east of Mill Street, across from Mill Park, with free parking behind the shop and the bus 14 stop on the corner.">
+        <i class="mp park" style="left:5%;top:5%;width:38%;height:34%"></i><b class="mp lbl" style="left:9%;top:15%">Mill Park</b>
+        <i class="mp blk" style="left:62%;top:5%;width:33%;height:31%"></i>
+        <i class="mp blk" style="left:5%;top:58%;width:30%;height:20%"></i>
+        <i class="mp road h" style="top:44%"></i><b class="mp lbl road-l" style="right:5%;top:calc(44% + 5px)">ACORN LANE</b>
+        <i class="mp road v" style="left:48%"></i><b class="mp lbl vl" style="left:calc(48% + 34px);top:8%">Mill St</b>
+        <i class="mp river"></i>
+        <i class="mp shop" style="left:56%;top:57%"></i>
+        <span class="pin" style="left:61%;top:56%"><span data-live="map-pin-number" data-p-param-label="1" data-size="60" data-label="Pin 1: Little Sprout Toy Co.">1</span></span>
+        <span class="pin" style="left:79%;top:73%"><span data-live="map-pin-number" data-p-param-label="2" data-size="52" data-label="Pin 2: free parking">2</span></span>
+        <span class="pin" style="left:39%;top:42%"><span data-live="map-pin-number" data-p-param-label="3" data-size="52" data-label="Pin 3: bus 14 stop">3</span></span>
+        <div class="legend"><span><b>1</b> The shop</span><span><b>2</b> Free parking</span><span><b>3</b> Bus 14 stop</span></div>
+      </div>
+      <div class="event">
+        <div class="when"><span data-live="calendar-date" data-p-day="17" data-p-month="OCT" data-size="80" id="ev-cal" data-label="Saturday 17 October">Sat 17 Oct</span><span data-live="digital-clock" data-p-time="10:30" data-p-format="12h" data-size="80" data-label="10:30 am">10:30 am</span></div>
+        <div><h3>Saturday Story Time</h3><p><b class="ev-when">Every Saturday, 10:30 to 11:45 am. Next one: <span id="ev-next">Saturday 17 October</span>.</b>Ms. Oyelaran reads three picture books aloud on the play-corner rug. Free, for ages 1 to 5, no booking needed. Cookies for grown-ups.</p></div>
+        <button type="button" class="btn btn-go" id="ics"><span data-ico="calendar-plus" data-size="28">📅</span> Add to calendar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="padding-top:20px" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow"><span data-ico="info-circle" data-size="28">ℹ️</span> Good to know</span><h2 id="faq-h">Questions parents ask</h2></div>
+    <div class="faq">
+      <details><summary><span class="coin"><span data-ico="baby" data-size="34">🍼</span></span> How do I pick the right age?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">Every toy shows the age we recommend, based on age grading and our test panel. If your child sits between two bands, go up for sturdy toys like blocks and down for anything with small parts. The age finder above does the sorting for you.</div></details>
+      <details><summary><span class="coin"><span data-ico="shield-check" data-size="34">🛡️</span></span> Is every toy really tested?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">In this fictional demo, the sample copy says every toy is checked against EN 71 and ASTM F963 by an independent lab before it reaches the shelf. A real shop would publish the report for each toy right here.</div></details>
+      <details><summary><span class="coin"><span data-ico="truck" data-size="34">🚚</span></span> How much is delivery?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">Free over $50, otherwise a flat $5.95. Orders placed before 3 pm ship the same day, packed in paper and cardboard.</div></details>
+      <details><summary><span class="coin"><span data-ico="gift" data-size="34">🎁</span></span> Can you gift-wrap?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">Yes. Switch on gift-wrap in your basket: recycled paper, a cotton ribbon and a handwritten card with your message. It is $4, and free on orders over $75.</div></details>
+      <details><summary><span class="coin"><span data-ico="hammer" data-size="34">🔨</span></span> What if a toy breaks?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">Wooden toys are repaired free for life. Send us a photo and we will mail a fix kit or a spare part. If it cannot be fixed, we will replace it.</div></details>
+      <details><summary><span class="coin"><span data-ico="undo" data-size="34">↩️</span></span> What is your returns policy?<span class="chev" data-ico="chevron-down" data-size="26">▾</span></summary><div class="ans">Thirty days, unused and in the original packaging. We include a free return label in every parcel.</div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<section id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <p>Every photograph on this page is hot-linked from Pexels or Unsplash and used with thanks to the photographers.</p>
+    <ul>
+      <li>Hero, child building with blocks: Photo by <a href="https://www.pexels.com/@kseniachernaya">Ksenia Chernaya</a> on <a href="https://www.pexels.com/photo/7301166/">Pexels</a></li>
+      <li>Rainbow Builder Blocks: Photo by <a href="https://unsplash.com/@bozu?utm_source=withicons_demos&amp;utm_medium=referral">Michał Bożek</a> on <a href="https://unsplash.com/photos/RcxR1aLw8X0?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Barnaby the Bear: Photo by <a href="https://unsplash.com/@sanateddy?utm_source=withicons_demos&amp;utm_medium=referral">Oxana Lyashenko</a> on <a href="https://unsplash.com/photos/07eCb8SVGus?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>First Words Board Books: Photo by <a href="https://www.pexels.com/@cottonbro">cottonbro studio</a> on <a href="https://www.pexels.com/photo/3661368/">Pexels</a></li>
+      <li>Pastel Shape Puzzle: Photo by <a href="https://www.pexels.com/@mikhail-nilov">Mikhail Nilov</a> on <a href="https://www.pexels.com/photo/7780916/">Pexels</a></li>
+      <li>Wooden Railway Starter Set: Photo by <a href="https://www.pexels.com/@vladimirsrajber">Vladimir Srajber</a> on <a href="https://www.pexels.com/photo/15250000/">Pexels</a></li>
+      <li>Little Chef Play Kitchen: Photo by <a href="https://www.pexels.com/@kimberly-alves-2160417495">Kimberly Alves</a> on <a href="https://www.pexels.com/photo/36738063/">Pexels</a></li>
+      <li>Crayon &amp; Color Tin: Photo by <a href="https://www.pexels.com/@cigdem-bilgin-2154409770">Çiğdem Bilgin</a> on <a href="https://www.pexels.com/photo/33590129/">Pexels</a></li>
+      <li>Dapple the Rocking Horse: Photo by <a href="https://unsplash.com/@elegeo?utm_source=withicons_demos&amp;utm_medium=referral">Georgii Eletskikh</a> on <a href="https://unsplash.com/photos/IM536k4QvVI?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Cloud Nursery Gift Set: Photo by <a href="https://www.pexels.com/@karola-g">Karolina Grabowska</a> on <a href="https://www.pexels.com/photo/4964488/">Pexels</a></li>
+      <li>Beechwood Barrel Rattle: Photo by <a href="https://www.pexels.com/@william-fortunato">William Fortunato</a> on <a href="https://www.pexels.com/photo/6392802/">Pexels</a></li>
+      <li>Rainbow Stacker &amp; Shape Sorter: Photo by <a href="https://www.pexels.com/@lee-hanson-2161337044">Lee Hanson</a> on <a href="https://www.pexels.com/photo/38695466/">Pexels</a></li>
+      <li>Zigzag Animal Pair: Photo by <a href="https://unsplash.com/@czon00?utm_source=withicons_demos&amp;utm_medium=referral">NAM CZ</a> on <a href="https://unsplash.com/photos/zlLfm8-DlN4?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Gift finder and gift-wrap, wooden car with a gift: Photo by <a href="https://www.pexels.com/@i-brahim-dogan-52378540">İbrahim Doğan</a> on <a href="https://www.pexels.com/photo/7722004/">Pexels</a></li>
+      <li>Our story, toddler with a wooden train track: Photo by <a href="https://www.pexels.com/@irina-kraskova-76947236">Irina Kraskova</a> on <a href="https://www.pexels.com/photo/8690656/">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT license. Little Sprout Toy Co. is a fictional demo shop: its people, products, prices, reviews and safety claims are made up.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top"><span class="coin"><span data-ico="sprout" data-size="40">🌱</span></span><span><b>Little Sprout</b><small>Toy Co.</small></span></a>
+        <p style="margin-top:14px;max-width:26em">Wooden toys, picture books and plush friends for curious little humans. Family-run on Acorn Lane since 2011.</p>
+        <div class="pay" aria-label="Payment methods">
+          <span class="coin"><span data-ico="credit-card" data-size="30" data-label="Cards">💳</span></span>
+          <span class="coin"><span data-ico="wallet" data-size="30" data-label="Digital wallets">👛</span></span>
+          <span class="coin"><span data-ico="banknote" data-size="30" data-label="Cash in the shop">💵</span></span>
+          <span class="coin"><span data-ico="lock" data-size="30" data-label="Secure checkout">🔒</span></span>
+        </div>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul><li><a href="#play">Shop by play</a></li><li><a href="#shop">Age finder</a></li><li><a href="#bundles">Bundle deals</a></li><li><a href="#gift">Gift finder &amp; gift cards</a></li></ul>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul><li><a href="#faq">Delivery and returns</a></li><li><a href="#safety">Safety and materials</a></li><li><a href="#story">Our story</a></li><li><a href="#news">The Sprout Post</a></li></ul>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <ul>
+          <li class="foot-ico"><span class="coin"><span data-ico="map-pin" data-size="26">📍</span></span><span>18 Acorn Lane, Millbrook</span></li>
+          <li class="foot-ico"><span class="coin"><span data-ico="phone" data-size="26">📞</span></span><a href="tel:+15035550142">(503) 555-0142</a></li>
+          <li class="foot-ico"><span class="coin"><span data-ico="clock" data-size="26">🕘</span></span><span>Mon to Fri 9 to 6, Sat 9 to 5, Sun 10 to 4</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional.</span><span>© Little Sprout Toy Co. (not a real company)</span></div>
+  </div>
+</footer>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="coin"><span data-ico="check-circle" data-size="26">✓</span></span><span id="toast-t"></span><button type="button" class="btn btn-sm" id="toast-view" hidden style="min-height:36px;padding:4px 14px">View basket</button></div>
+
+<!-- quick look -->
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="quick" role="dialog" aria-modal="true" aria-labelledby="q-title" aria-hidden="true">
+  <button class="icon-btn modal-x" id="q-close" type="button" aria-label="Close quick look"><span data-ico="close" data-size="28">✕</span></button>
+  <div class="q-grid"><div class="q-img" id="q-img"></div><div class="q-body" id="q-body"></div></div>
+</div>
+
+<!-- basket drawer -->
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-h" aria-hidden="true">
+  <div class="d-head">
+    <span data-ico="shopping-bag" data-size="40">🛍️</span>
+    <h2 id="drawer-h">Your basket</h2>
+    <button class="icon-btn" id="cart-close" type="button" aria-label="Close basket"><span data-ico="close" data-size="28">✕</span></button>
+  </div>
+  <div class="d-body" id="d-body">
+    <div id="d-shop">
+      <div class="meter" id="meter"><span data-live="progress-ring" data-p-value="0" data-p-number="false" data-size="68" id="meter-ring" data-label="0 percent of the way to free shipping">0%</span><p id="meter-text"></p></div>
+      <div class="lines" id="lines"></div>
+      <div class="d-empty" id="d-empty"><span data-ico="shopping-bag" data-size="88" data-label="Empty basket">🛍️</span><h3>Your basket is empty</h3><p>The shelves are full of things that want to come home with you.</p><button type="button" class="btn btn-go" id="d-browse"><span data-ico="teddy-bear" data-size="26">🧸</span> Browse the toys</button></div>
+      <div class="wrapbox" id="wrapbox">
+        <label class="sw"><input type="checkbox" id="wrap"><span class="knob"></span>
+          <span class="t"><b>Gift-wrap it</b><small id="wrap-note">Recycled paper, cotton ribbon and a handwritten card. $4, free over $75.</small></span>
+          <span data-ico="gift" data-size="40" style="margin-left:auto">🎁</span></label>
+        <div id="wrap-msg" hidden class="field"><label for="msg">Message for the card</label><textarea class="input" id="msg" rows="2" maxlength="120" placeholder="Happy 3rd birthday, Mia! Love, Grandma x"></textarea></div>
+      </div>
+      <form class="promo" id="promo-form" action="#" novalidate><label class="sr" for="promo">Promo code</label><input class="input" id="promo" placeholder="Promo code" autocomplete="off"><button class="btn btn-ghost btn-sm" type="submit"><span data-ico="tag" data-size="24">🏷️</span> Apply</button></form>
+      <p class="err" id="promo-msg" role="status" style="min-height:0;margin-top:-6px"></p>
+    </div>
+    <div id="d-thanks" hidden></div>
+  </div>
+  <div class="d-foot" id="d-foot">
+    <div class="sum"><span>Subtotal</span><span id="s-sub">$0</span></div>
+    <div class="sum disc" id="s-disc-row" hidden><span>Sprout Post, 10% off</span><span id="s-disc">$0</span></div>
+    <div class="sum"><span>Shipping</span><span id="s-ship">$0</span></div>
+    <div class="sum" id="s-wrap-row" hidden><span>Gift-wrap</span><span id="s-wrap">$0</span></div>
+    <div class="sum total"><span>Total</span><span id="s-total">$0</span></div>
+    <button type="button" class="btn btn-go" id="checkout" disabled><span data-ico="lock" data-size="26">🔒</span> Checkout</button>
+    <p style="font-size:.78rem;color:var(--muted);text-align:center">Demo checkout: no payment is taken.</p>
+  </div>
+</aside>
+
+<script src="_kit/demo-kit.js" data-style="plush" data-recommend="plush,kawaii,clay,sticker,pastel,bento,duo,brutal" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+  var money = function (n) { n = Math.round(n * 100) / 100; return '$' + (n % 1 ? n.toFixed(2) : String(n)) }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  // Basic level shows the emoji fallback: size it to the slot so it reads like an icon, then let the kit upgrade the slot
+  function fit(root) { Array.prototype.forEach.call((root || document).querySelectorAll('[data-ico]'), function (h) { if (!h.style.fontSize) h.style.fontSize = Math.round((parseFloat(h.dataset.size) || 24) * 0.7) + 'px' }) }
+  var kit = function (el) { fit(el); if (window.WithKit && el) WithKit.refresh(el) }
+  var store = { get: function (k) { try { return sessionStorage.getItem(k) } catch (e) { return null } }, set: function (k, v) { try { sessionStorage.setItem(k, v) } catch (e) {} } }
+  // update a live icon (works before and after the kit has started) and its Basic-level fallback text
+  function setLive(el, params, fallback) {
+    if (!el) return
+    Object.keys(params).forEach(function (k) { el.dataset['p' + k.charAt(0).toUpperCase() + k.slice(1)] = params[k] })
+    if (window.WithKit && el._kit) WithKit.setLive(el, params)
+    var fb = el.querySelector('.kit-fb')
+    if (fallback != null) { if (fb) fb.textContent = fallback; else if (!el._kit) el.textContent = fallback }
+    if (params.label != null) el.setAttribute('aria-label', params.label)
+  }
+  // markup for a slot whose icon name is only known at run time
+  function ico(name, size, emoji, motion) { return `<span data-ico="${name}" data-size="${size}"${motion ? ` data-motion="${motion}"` : ''}>${emoji}</span>` }
+  function setFb(el, text) { var fb = el && el.querySelector('.kit-fb'); if (fb) fb.textContent = text; else if (el && !el._kit) el.textContent = text }
+
+  /* ---------- data ---------- */
+  var PH = {
+    blocks: ['u', 'photo-1575364289437-fb1479d52732'], plush: ['u', 'photo-1581312742770-ce89199554af'], books: ['p', '3661368'],
+    puzzle: ['p', '7780916'], train: ['p', '15250000'], kitchen: ['p', '36738063'], art: ['p', '33590129'], horse: ['u', 'photo-1755092756284-226aea1995b6'],
+    nursery: ['p', '4964488'], rattle: ['p', '6392802'], stacker: ['p', '38695466'], animals: ['u', 'photo-1714618888538-8d15a9228236'], gift: ['p', '7722004']
+  }
+  function photo(k, w) {
+    var t = PH[k][0], id = PH[k][1]
+    return '_img/little-sprout/' + id + '-' + w + '.jpg' // self-hosted copies (demos/_tools/localize-photos.mjs)
+  }
+  var AGES = [
+    { id: 0, label: '0 to 1', name: 'Babies', ico: 'sprout', e: '🌱' }, { id: 1, label: '1 to 3', name: 'Toddlers', ico: 'leaf', e: '🌿' },
+    { id: 2, label: '3 to 5', name: 'Explorers', ico: 'flower', e: '🌼' }, { id: 3, label: '5 and up', name: 'Big kids', ico: 'tree-pine', e: '🌳' }
+  ]
+  var CATS = { blocks: 'Blocks', plush: 'Plush', books: 'Books', pretend: 'Pretend play', puzzles: 'Puzzles', nursery: 'Nursery', art: 'Art & craft', rideons: 'Ride-ons' }
+  var INTS = { build: 'building', cuddle: 'cuddles', stories: 'stories', pretend: 'pretend play', puzzle: 'puzzling', art: 'coloring', move: 'rolling and rocking' }
+  var P = [
+    { id: 'rainbow-blocks', name: 'Rainbow Builder Blocks', sub: '50 pieces in 12 shapes', cats: ['blocks'], fit: [1, 2, 3], age: 'Ages 1+', price: 38, rating: 4.8, n: 212, ph: 'blocks', pos: '62% 50%', rib: 'BEST', int: ['build'],
+      kw: 'wooden beech birch blocks building stacking tower bricks', alt: 'Colorful wooden blocks in blue, yellow, orange, red and green on a light wood table, with a child\'s hand placing a yellow triangle like a roof.',
+      desc: 'Fifty smooth beech and birch blocks in twelve shapes, from arches to little roofs, with a canvas tote so tidy-up takes two minutes. Rounded corners, water-based paints, and nothing small enough to swallow.',
+      specs: [['ruler', 'Size', 'Largest block 2.5 in, canvas tote included', '📏'], ['tree-pine', 'Made from', 'FSC-certified beech and birch', '🌲'], ['shield-check', 'Safety', 'Every piece too big for the small-parts cylinder', '🛡️']] },
+    { id: 'barnaby-bear', name: 'Barnaby the Bear', sub: '12 in, organic cotton, knit sweater', cats: ['plush'], fit: [0, 1, 2], age: 'From birth', price: 29, rating: 4.9, n: 341, ph: 'plush', pos: '40% 55%', rib: 'TOP', int: ['cuddle'],
+      kw: 'teddy bear plush soft toy stuffed animal', alt: 'A brown teddy bear in a navy and white striped knit sweater and a red scarf peeks out between weathered gray wooden planks.',
+      desc: 'Barnaby wears a striped sweater and a red scarf, and has embroidered eyes instead of plastic ones, so he is safe to snooze with from day one. Soft enough for newborns, tough enough for a toddler\'s grip.',
+      specs: [['ruler', 'Size', '12 in sitting', '📏'], ['leaf', 'Made from', 'Organic cotton plush and a wool-blend sweater', '🌿'], ['washing-machine', 'Care', 'Machine wash cold, gentle cycle', '🧺']] },
+    { id: 'first-words', name: 'First Words Board Books', sub: 'Set of four, wipe-clean pages', cats: ['books'], fit: [0, 1], age: '6 months to 3', price: 24, rating: 4.7, n: 158, ph: 'books', pos: '50% 45%', int: ['stories'],
+      kw: 'books reading board book stories words', alt: 'A toddler in mint overalls sits on a white bed beside a plush lamb and a green toy dinosaur, turning the pages of a large illustrated book.',
+      desc: 'Four chunky board books with rounded corners: First Words, Animal Sounds, Things That Go and Goodnight, Sprout. Wipe-clean pages and soy-based inks, made for being chewed, dropped and read forty times in a row.',
+      specs: [['book-open', 'Inside', 'Four books, 14 pages each', '📖'], ['ruler', 'Size', '6 in square, easy for small hands', '📏'], ['leaf', 'Printed with', 'Soy-based inks on FSC card', '🌿']] },
+    { id: 'pastel-puzzle', name: 'Pastel Shape Puzzle', sub: '24 chunky interlocking pieces', cats: ['puzzles'], fit: [1, 2], age: 'Ages 2 to 4', price: 22, rating: 4.6, n: 97, ph: 'puzzle', pos: '50% 45%', int: ['puzzle', 'build'],
+      kw: 'wooden beech puzzle shapes pieces jigsaw pastel', alt: 'Pastel pink, yellow, orange and blue wooden puzzle pieces scattered over a soft gray fabric, seen from above.',
+      desc: 'Twenty-four chunky wooden pieces in soft pink, yellow, orange and blue that slot together in dozens of ways. Solve it flat as a puzzle, or stand the pieces up and build with them.',
+      specs: [['puzzle-piece', 'Inside', '24 wooden pieces in a cotton bag', '🧩'], ['paintbrush', 'Finish', 'Water-based paint, no varnish', '🖌️'], ['shield-check', 'Safety', 'Each piece longer than 1.5 in', '🛡️']] },
+    { id: 'railway-set', name: 'Wooden Railway Starter Set', sub: '42 pieces with a magnetic train', cats: ['blocks'], fit: [2, 3], age: 'Ages 3 to 7', price: 64, rating: 4.8, n: 189, ph: 'train', pos: '40% 55%', int: ['build', 'move'],
+      kw: 'wooden beech train railway track bridge tunnel', alt: 'A wooden toy railway curves over an orange arched bridge, with a small white train in the foreground on a green play mat.',
+      desc: 'Curved and straight track, an orange arched bridge, a tunnel and a little white train with magnetic couplings. The track fits the big wooden railway brands, so the set grows with your collection.',
+      specs: [['train', 'Inside', 'Track, bridge, tunnel, train and two wagons', '🚂'], ['ruler', 'Layout', 'Builds a 6 ft figure eight', '📏'], ['tree-pine', 'Made from', 'FSC beech, water-based paints', '🌲']] },
+    { id: 'play-kitchen', name: 'Little Chef Play Kitchen', sub: 'Birch ply, 35 in tall, oven and tap', cats: ['pretend'], fit: [2, 3], age: 'Ages 3 to 7', price: 129, rating: 4.9, n: 76, ph: 'kitchen', pos: '50% 68%', int: ['pretend'],
+      kw: 'wooden birch plywood kitchen cooking pretend play chef oven', alt: 'Two small children, seen from behind, play at a gray toy kitchen in front of an orange and yellow arched wall.',
+      desc: 'A gray-washed kitchen with a clicking stovetop, an oven door that really opens, a pretend tap and a pegboard back for hanging utensils. Sturdy enough for two small chefs at once.',
+      specs: [['ruler', 'Size', '35 x 30 x 13 in', '📏'], ['hammer', 'Assembly', 'About 30 minutes, tools included', '🔨'], ['chef-hat', 'Comes with', 'Pot, pan, spatula and four felt vegetables', '🍳']] },
+    { id: 'crayon-tin', name: 'Crayon & Color Tin', sub: '24 crayons and a 20-sheet pad', cats: ['art'], fit: [2, 3], age: 'Ages 3+', price: 16, rating: 4.7, n: 264, ph: 'art', pos: '50% 55%', int: ['art'],
+      kw: 'crayons coloring colouring drawing art paint pad', alt: 'A child\'s crayon drawing of a sunny landscape with a blue river and green hills, with rainbow crayons lying across the page on a shaggy rug.',
+      desc: 'Twenty-four chunky beeswax-blend crayons, fat enough for small fists and washable from most fabrics, plus a pad of 20 sheets of recycled sketch paper, all in a tin that shuts properly.',
+      specs: [['palette', 'Colors', '24 shades, including a proper sky blue', '🎨'], ['leaf', 'Made from', 'Beeswax, soy wax and mineral pigments', '🌿'], ['package', 'In the tin', '7 x 5.5 in, reusable for pencils', '📦']] },
+    { id: 'dapple-horse', name: 'Dapple the Rocking Horse', sub: 'Solid beech, 15 in seat height', cats: ['rideons'], fit: [1, 2], age: '18 months to 5', price: 149, rating: 4.9, n: 54, ph: 'horse', pos: '50% 45%', int: ['move'],
+      kw: 'wooden beech rocking horse ride-on rocker', alt: 'A vintage dapple-gray wooden rocking horse with a dark mane stands on a bare wooden floor in a bright white room.',
+      desc: 'Dapple is a dapple-gray rocking horse in solid beech with a soft woven mane. Wide, stable rockers swing gently and stop well before tipping, and the grips are sized for little hands.',
+      specs: [['ruler', 'Seat height', '15 in, holds up to 66 lb', '📏'], ['tree-pine', 'Made from', 'Solid FSC beech, water-based paint', '🌲'], ['shield-check', 'Safety', 'Tested for stability and tipping', '🛡️']] },
+    { id: 'cloud-nursery', name: 'Cloud Nursery Gift Set', sub: 'Elephant blanket, lovey and muslin', cats: ['nursery', 'plush'], fit: [0, 1], age: 'Newborn+', price: 42, rating: 4.9, n: 128, ph: 'nursery', pos: '35% 60%', int: ['cuddle'],
+      kw: 'nursery blanket elephant lovey baby gift newborn', alt: 'A white baby crib with a gray elephant-print blanket sits against a sage-green wall beside a woven basket, with a small plush elephant at the crib corner.',
+      desc: 'A 32 x 40 in organic-cotton blanket printed with little elephants, a tiny Peanut the Elephant comforter and a muslin square, tied up in a recycled gift box. The easiest baby present we sell.',
+      specs: [['leaf', 'Made from', 'GOTS-certified organic cotton', '🌿'], ['gift', 'In the box', 'Blanket, Peanut lovey and muslin', '🎁'], ['washing-machine', 'Care', 'Machine wash warm', '🧺']] },
+    { id: 'barrel-rattle', name: 'Beechwood Barrel Rattle', sub: 'Four colored balls inside', cats: ['nursery'], fit: [0, 1], age: '3 months+', price: 14, rating: 4.8, n: 302, ph: 'rattle', pos: '58% 58%', int: ['cuddle'],
+      kw: 'wooden beech rattle baby teething barrel', alt: 'A parent\'s hand holds a wooden barrel rattle with colored balls inside above a cream woven rug, with a baby\'s bare feet at the top edge.',
+      desc: 'A smooth beechwood barrel with four colored balls that clack and roll inside. Sized for tiny hands and teething gums, and finished with food-grade beeswax instead of paint.',
+      specs: [['ruler', 'Size', '3.5 in long, easy to grip', '📏'], ['droplets', 'Finish', 'Food-grade beeswax, no paint', '💧'], ['baby', 'Good for', 'Grasping, shaking and teething', '🍼']] },
+    { id: 'rainbow-stacker', name: 'Rainbow Stacker & Shape Sorter', sub: 'Seven arches and a 10-shape cube', cats: ['puzzles'], fit: [1, 2], age: 'Ages 1 to 5', price: 46, rating: 4.8, n: 143, ph: 'stacker', pos: '40% 62%', rib: 'NEW', int: ['build', 'puzzle'],
+      kw: 'wooden beech birch rainbow stacker shape sorter stacking sorting', alt: 'A stacked wooden rainbow, a wooden shape sorter and a green dinosaur plush sit on a wooden floor in front of a green wall.',
+      desc: 'Seven rainbow arches to stack, nest, tunnel and bridge, plus a shape-sorter cube with ten shapes. It works as a puzzle for one-year-olds and as a block set for five-year-olds.',
+      specs: [['rainbow', 'Inside', 'Seven arches, sorter cube, ten shapes', '🌈'], ['paintbrush', 'Finish', 'Water-based, baby-safe colors', '🖌️'], ['tree-pine', 'Made from', 'FSC-certified beech and birch', '🌲']] },
+    { id: 'zigzag-animals', name: 'Zigzag Animal Pair & Stand', sub: 'Hand-painted zebra and bear', cats: ['pretend'], fit: [2, 3], age: 'Ages 3 to 8', price: 26, rating: 4.7, n: 61, ph: 'animals', pos: '50% 55%', int: ['pretend'],
+      kw: 'wooden beech animals zebra bear figures small world', alt: 'Two angular hand-painted wooden animal figures, one zebra-striped and one brown, stand on a small wooden toy stand in soft window light.',
+      desc: 'A zebra and a bear with angular, easy-to-grip shapes, hand-painted by a small family studio. They stand on their own and on a little wooden stand, so they look as good on a shelf as they do on the move.',
+      specs: [['paintbrush', 'Finish', 'Hand-painted, water-based paint', '🖌️'], ['ruler', 'Size', 'Tallest animal 4.5 in', '📏'], ['tree-pine', 'Made from', 'Solid beech', '🌲']] }
+  ]
+  var PROD = {}; P.forEach(function (p) { PROD[p.id] = p })
+  var B = [
+    { id: 'welcome', name: 'Welcome Baby Box', lead: 'Everything for the first cuddles: a rattle to grab, a blanket to snuggle and a bear to love.', items: ['barrel-rattle', 'cloud-nursery', 'barnaby-bear'], off: 15, bb: '#bfe5f8', icos: [['baby', '🍼'], ['teddy-bear', '🧸'], ['moon', '🌙']] },
+    { id: 'builder', name: 'Little Builder Bundle', lead: 'Blocks, track and a stacking rainbow: the three toys that keep a three-year-old busy all afternoon.', items: ['rainbow-blocks', 'railway-set', 'rainbow-stacker'], off: 20, bb: '#ffd0c6', icos: [['blocks', '🧱'], ['train', '🚂'], ['rainbow', '🌈']] },
+    { id: 'rainy', name: 'Rainy Day Pack', lead: 'Crayons, a stack of stories and a puzzle for the days when the garden is closed.', items: ['crayon-tin', 'first-words', 'pastel-puzzle'], off: 15, bb: '#c9ecc2', icos: [['palette', '🎨'], ['umbrella', '☂️'], ['puzzle-piece', '🧩']] }
+  ]
+  var BUN = {}
+  B.forEach(function (b) { b.sum = b.items.reduce(function (s, id) { return s + PROD[id].price }, 0); b.price = Math.round(b.sum * (1 - b.off / 100)); b.save = b.sum - b.price; BUN[b.id] = b })
+
+  /* ---------- shop: filters, grid ---------- */
+  var st = { age: 'all', cat: 'all', q: '', sort: 'featured', saved: false }
+  var SAVED = new Set(JSON.parse(store.get('sprout-saved') || '[]'))
+  var grid = $('#grid')
+  function ribLabel(t) { return { BEST: 'Best seller', TOP: 'Top rated', NEW: 'New in' }[t] || t }
+  function card(p) {
+    var a = AGES[p.fit[0]], sv = SAVED.has(p.id)
+    return '<article class="prod" data-id="' + p.id + '">' +
+      '<div class="prod-media"><button type="button" class="q-open" data-quick="' + p.id + '" aria-label="Quick look: ' + esc(p.name) + '"><img src="' + photo(p.ph, 600) + '" width="600" height="600" loading="lazy" decoding="async" alt="' + esc(p.alt) + '" style="object-position:' + p.pos + '"></button>' +
+      '<button type="button" class="wish" data-wish="' + p.id + '" aria-pressed="' + sv + '" aria-label="Save ' + esc(p.name) + ' for later"><span data-ico="heart" data-size="30">' + (sv ? '❤️' : '♡') + '</span></button></div>' +
+      '<span class="age age-' + p.fit[0] + '">' + ico(a.ico, 24, a.e) + esc(p.age) + '</span>' +
+      (p.rib ? '<span class="rib"><span data-live="ribbon-label" data-p-text="' + p.rib + '" data-size="54" data-label="' + ribLabel(p.rib) + '">' + ribLabel(p.rib) + '</span></span>' : '') +
+      '<div class="prod-body"><span class="prod-cat">' + esc(CATS[p.cats[0]]) + '</span>' +
+      '<h3><button type="button" class="prod-name" data-quick="' + p.id + '">' + esc(p.name) + '</button></h3>' +
+      '<p class="prod-sub">' + esc(p.sub) + '</p>' +
+      '<div class="rate"><span data-ico="star" data-size="24">⭐</span><b>' + p.rating.toFixed(1) + '</b> (' + p.n + ')</div>' +
+      '<div class="prod-foot"><span class="price">' + money(p.price) + '</span><button type="button" class="btn btn-sm" data-add="p:' + p.id + '" aria-label="Add ' + esc(p.name) + ' to basket"><span data-ico="shopping-cart-plus" data-size="26">🛒</span><span class="add-t">Add</span></button></div></div></article>'
+  }
+  function match(p) {
+    if (!st.q) return true
+    var hay = (p.name + ' ' + p.sub + ' ' + p.kw + ' ' + p.cats.map(function (c) { return CATS[c] }).join(' ')).toLowerCase()
+    return st.q.toLowerCase().split(/\s+/).every(function (t) { return hay.indexOf(t) > -1 })
+  }
+  function list() {
+    var l = P.filter(function (p) {
+      return (st.age === 'all' || p.fit.indexOf(+st.age) > -1) && (st.cat === 'all' || p.cats.indexOf(st.cat) > -1) && match(p) && (!st.saved || SAVED.has(p.id))
+    })
+    if (st.sort === 'low') l.sort(function (a, b) { return a.price - b.price })
+    else if (st.sort === 'high') l.sort(function (a, b) { return b.price - a.price })
+    else if (st.sort === 'rated') l.sort(function (a, b) { return b.rating - a.rating || b.n - a.n })
+    return l
+  }
+  function renderGrid() {
+    var l = list()
+    if (!l.length) {
+      grid.innerHTML = '<div class="empty"><span data-ico="search" data-size="80" data-label="No results">🔍</span><h3>Nothing on that shelf yet</h3><p>' + (st.saved && !SAVED.size ? 'You have not saved any toys yet. Tap the heart on a toy you like.' : 'No toys match that mix. Try a different age, or clear the search.') + '</p><button type="button" class="btn btn-go" data-reset><span data-ico="refresh" data-size="26">↺</span> Reset filters</button></div>'
+    } else grid.innerHTML = l.map(card).join('')
+    kit(grid)
+    var bits = []
+    if (st.age !== 'all') bits.push('for ages ' + AGES[+st.age].label)
+    if (st.cat !== 'all') bits.push('in ' + CATS[st.cat])
+    if (st.q) bits.push('matching "' + st.q + '"')
+    if (st.saved) bits.push('you saved')
+    $('#count').innerHTML = 'Showing <b>' + l.length + '</b> of ' + P.length + ' toys' + (bits.length ? ' ' + esc(bits.join(', ')) : '')
+    var dirty = st.age !== 'all' || st.cat !== 'all' || st.q || st.saved || st.sort !== 'featured'
+    $('#reset').hidden = !dirty
+    $$('#age-chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.age === String(st.age))) })
+    $$('#tiles .tile').forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.cat === st.cat)) })
+    $('#cat').value = st.cat; $('#sort').value = st.sort
+    $('#saved-only').setAttribute('aria-pressed', String(st.saved))
+  }
+  function resetFilters() { st = { age: 'all', cat: 'all', q: '', sort: 'featured', saved: false }; $('#q').value = ''; renderGrid() }
+  function scrollTo(sel) { var el = $(sel); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }) }
+  // after a tile or age tap: on phones the finder card is tall, so bring the "Showing N toys" line to the top instead of the section heading
+  var narrow = function () { return window.matchMedia && matchMedia('(max-width: 959px)').matches }
+  function toResults(onlyIfHidden) {
+    if (!narrow()) { if (!onlyIfHidden) scrollTo('#shop'); return }
+    var r = $('#status').getBoundingClientRect()
+    if (onlyIfHidden && r.top > 90 && r.top < window.innerHeight * 0.6) return
+    scrollTo('#status')
+  }
+  $('#age-chips').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; st.age = c.dataset.age; renderGrid(); toResults(true) })
+  $$('#tiles .tile').forEach(function (t) {
+    var n = P.filter(function (p) { return p.cats.indexOf(t.dataset.cat) > -1 }).length
+    t.querySelector('.n').textContent = n + (n === 1 ? ' toy' : ' toys')
+  })
+  $('#tiles').addEventListener('click', function (e) { var t = e.target.closest('.tile'); if (!t) return; st.cat = st.cat === t.dataset.cat ? 'all' : t.dataset.cat; renderGrid(); toResults(false) })
+  $('#cat').addEventListener('change', function (e) { st.cat = e.target.value; renderGrid() })
+  $('#sort').addEventListener('change', function (e) { st.sort = e.target.value; renderGrid() })
+  $('#q').addEventListener('input', function (e) { st.q = e.target.value.trim(); renderGrid() })
+  $('#saved-only').addEventListener('click', function () { st.saved = !st.saved; renderGrid() })
+  $('#reset').addEventListener('click', resetFilters)
+  $('#search-btn').addEventListener('click', function () { scrollTo('#shop'); setTimeout(function () { $('#q').focus({ preventScroll: true }) }, reduce ? 0 : 450) })
+  function saveWish() { store.set('sprout-saved', JSON.stringify(Array.from(SAVED))); $('#saved-n').textContent = SAVED.size }
+  saveWish()
+
+  /* ---------- bundles ---------- */
+  function renderBundles() {
+    $('#bundle-list').innerHTML = B.map(function (b) {
+      return '<article class="bundle"><div class="b-top" style="--bb:' + b.bb + '">' +
+        '<span class="b-sale"><span data-live="sale-sticker" data-p-text="-' + b.off + '%" data-size="92" data-label="' + b.off + ' percent off">-' + b.off + '%</span></span>' +
+        b.icos.map(function (i) { return '<span class="coin">' + ico(i[0], 72, i[1], 'inview') + '</span>' }).join('') + '</div>' +
+        '<div class="b-body"><h3>' + b.name + '</h3><p class="lead">' + b.lead + '</p>' +
+        '<ul class="b-items">' + b.items.map(function (id) { return '<li><span data-ico="check-circle" data-size="26">✓</span> ' + esc(PROD[id].name) + '<span>' + money(PROD[id].price) + '</span></li>' }).join('') + '</ul>' +
+        '<div class="b-price"><span data-min-level="1"><span data-live="price-tag" data-p-amount="' + b.price + '" data-p-currency="none" data-size="76" data-label="Bundle price ' + b.price + ' dollars">' + money(b.price) + '</span></span><div class="was"><b class="now">' + money(b.price) + ' <small>for all three</small></b><s>' + money(b.sum) + '</s><span class="save">You save ' + money(b.save) + '</span></div></div>' +
+        '<button type="button" class="btn btn-go" data-add="b:' + b.id + '"><span data-ico="package-open" data-size="26">📦</span> Add bundle to basket</button></div></article>'
+    }).join('')
+    kit($('#bundle-list'))
+  }
+
+  /* ---------- basket ---------- */
+  var cart = []
+  try { cart = JSON.parse(store.get('sprout-cart') || '[]') } catch (e) { cart = [] }
+  var wrapOn = store.get('sprout-wrap') === '1', promo = store.get('sprout-promo') === '1', thanksOn = false
+  function look(k) {
+    var t = k.charAt(0), id = k.slice(2)
+    if (t === 'p') { var p = PROD[id]; return { name: p.name, sub: p.age, price: p.price, ph: p.ph, pos: p.pos } }
+    if (t === 'b') { var b = BUN[id]; return { name: b.name, sub: 'Bundle of 3 toys, ' + b.off + '% off', price: b.price, ico: b.icos[0] } }
+    return { name: 'Gift card', sub: 'Emailed to you', price: +id, ico: ['gift', '🎁'] }
+  }
+  function totals() {
+    var sub = 0, n = 0, phys = 0
+    cart.forEach(function (c) { var L = look(c.k); sub += L.price * c.q; n += c.q; if (c.k.charAt(0) !== 'g') phys += L.price * c.q })
+    // SPROUT10 is 10% off the toys only (never gift cards); shipping and gift-wrap thresholds look at the toys after the discount
+    var disc = promo ? Math.round(phys * 10) / 100 : 0, after = sub - disc, physAfter = phys - disc
+    var ship = phys === 0 ? 0 : (physAfter >= 50 ? 0 : 5.95)
+    var wrap = wrapOn && phys > 0 ? (physAfter >= 75 ? 0 : 4) : 0
+    return { sub: sub, n: n, disc: disc, after: after, physAfter: physAfter, ship: ship, wrap: wrap, total: after + ship + wrap, phys: phys }
+  }
+  function saveCart() { store.set('sprout-cart', JSON.stringify(cart)); store.set('sprout-wrap', wrapOn ? '1' : '0'); store.set('sprout-promo', promo ? '1' : '0') }
+  function renderCart() {
+    var T = totals(), box = $('#lines')
+    box.innerHTML = cart.map(function (c) {
+      var L = look(c.k)
+      var th = L.ph ? '<img src="' + photo(L.ph, 200) + '" width="68" height="68" alt="" style="object-position:' + L.pos + '">' : ico(L.ico[0], 48, L.ico[1])
+      return '<div class="line" data-k="' + c.k + '"><span class="th">' + th + '</span><div><h4>' + esc(L.name) + '</h4><small>' + esc(L.sub) + '</small></div><span class="lp">' + money(L.price * c.q) + '</span>' +
+        '<div class="ctl"><div class="qty"><button type="button" data-q="-1" aria-label="One fewer ' + esc(L.name) + '"><span data-ico="minus" data-size="24">−</span></button><output aria-live="polite">' + c.q + '</output><button type="button" data-q="1" aria-label="One more ' + esc(L.name) + '"><span data-ico="plus" data-size="24">+</span></button></div>' +
+        '<button type="button" class="rm" data-rm><span data-ico="trash" data-size="24">🗑️</span> Remove</button></div></div>'
+    }).join('')
+    kit(box)
+    var empty = !cart.length
+    $('#d-empty').hidden = !empty; $('#wrapbox').hidden = empty; $('#promo-form').hidden = empty; $('#promo-msg').hidden = empty
+    $('#checkout').disabled = empty
+    $('#wrap').checked = wrapOn; $('#wrap-msg').hidden = !wrapOn
+    var pct = Math.min(100, Math.round(T.physAfter / 50 * 100)), left = Math.max(0, 50 - T.physAfter)
+    $('#meter').classList.toggle('done', T.phys > 0 && left === 0)
+    setLive($('#meter-ring'), { value: pct, label: pct + ' percent of the way to free shipping' }, pct + '%')
+    $('#meter-text').innerHTML = T.phys === 0 ? 'Add <b>$50</b> of toys and shipping is on us.' : (left === 0 ? '<b>Free shipping unlocked.</b> Your toys travel for free.' : 'You are <b>' + money(left) + '</b> away from free shipping.')
+    $('#s-sub').textContent = money(T.sub)
+    $('#s-disc-row').hidden = !promo || !T.disc; $('#s-disc').textContent = '-' + money(T.disc)
+    $('#s-ship').textContent = T.phys === 0 ? (T.n ? 'Digital, free' : '$0') : (T.ship ? money(T.ship) : 'Free')
+    $('#s-wrap-row').hidden = !(wrapOn && T.phys > 0); $('#s-wrap').textContent = T.wrap ? money(T.wrap) : 'Free'
+    $('#s-total').textContent = money(T.total)
+    $('#wrap-note').textContent = T.physAfter >= 75 ? 'Recycled paper, cotton ribbon and a handwritten card. Free on your order.' : 'Recycled paper, cotton ribbon and a handwritten card. $4, free over $75.'
+    var lbl = 'Basket, ' + T.n + (T.n === 1 ? ' item' : ' items')
+    setLive($('#cart-badge'), { count: T.n, label: lbl }, '🛒 ' + T.n)
+    $('#cart-toggle').setAttribute('aria-label', 'Open ' + lbl.toLowerCase())
+    saveCart()
+  }
+  function addItem(k, q, quiet) {
+    var c = cart.filter(function (x) { return x.k === k })[0], capped = false
+    if (c) { capped = c.q + (q || 1) > 9; c.q = Math.min(9, c.q + (q || 1)) } else cart.push({ k: k, q: q || 1 })
+    thanksOn = false; showShop()
+    renderCart()
+    if (capped) toast('Up to 9 of each item per order, so we kept it at 9', true)
+    else if (!quiet) { toast('Added ' + look(k).name, true); var b = $('#cart-toggle'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump') }
+  }
+  // a small burst of icons from the thing you just tapped (Full level only, and never with reduced motion)
+  function burst(from) {
+    if (reduce || !from || document.documentElement.getAttribute('data-level') !== '2') return
+    var r = from.getBoundingClientRect(), box = document.createElement('div'), names = [['party-popper', '🎉'], ['sparkles', '✨'], ['star', '⭐'], ['heart', '❤️'], ['balloon', '🎈'], ['sparkles', '✨'], ['star', '⭐'], ['party-popper', '🎉']]
+    box.className = 'burst'; box.setAttribute('aria-hidden', 'true'); box.style.left = (r.left + r.width / 2) + 'px'; box.style.top = (r.top + r.height / 2) + 'px'
+    box.innerHTML = names.map(function (n, i) {
+      var a = (-90 + (i - 3.5) * 24) * Math.PI / 180, d = 70 + (i % 3) * 22
+      return '<span style="--bx:' + Math.round(Math.cos(a) * d) + 'px;--by:' + Math.round(Math.sin(a) * d - 26) + 'px;--br:' + ((i % 2 ? 1 : -1) * (20 + i * 9)) + 'deg">' + ico(n[0], 32, n[1]) + '</span>'
+    }).join('')
+    document.body.appendChild(box); kit(box)
+    setTimeout(function () { box.remove() }, 1300)
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-add]'); if (a) { addItem(a.dataset.add, 1); if (a.dataset.add.charAt(0) === 'b') burst(a); return }
+    var w = e.target.closest('[data-wish]'); if (w) { var id = w.dataset.wish; if (SAVED.has(id)) SAVED.delete(id); else SAVED.add(id); var on = SAVED.has(id); w.setAttribute('aria-pressed', String(on)); setFb(w.querySelector('[data-ico]'), on ? '❤️' : '♡'); saveWish(); if (on) toast('Saved for later', false); if (st.saved) renderGrid(); return }
+    var qk = e.target.closest('[data-quick]'); if (qk) { openQuick(qk.dataset.quick); return }
+    if (e.target.closest('[data-reset]')) resetFilters()
+  })
+  $('#lines').addEventListener('click', function (e) {
+    var row = e.target.closest('.line'); if (!row) return
+    var k = row.dataset.k, c = cart.filter(function (x) { return x.k === k })[0]; if (!c) return
+    var q = e.target.closest('[data-q]')
+    if (q) { c.q += +q.dataset.q; if (c.q < 1) cart = cart.filter(function (x) { return x.k !== k }); else if (c.q > 9) { c.q = 9; toast('Up to 9 of each item per order', false) } renderCart(); return }
+    if (e.target.closest('[data-rm]')) { cart = cart.filter(function (x) { return x.k !== k }); renderCart() }
+  })
+  $('#wrap').addEventListener('change', function (e) { wrapOn = e.target.checked; renderCart(); if (wrapOn) $('#msg').focus() })
+  $('#promo-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var v = $('#promo').value.trim().toUpperCase(), m = $('#promo-msg')
+    if (v === 'SPROUT10') { promo = true; m.style.color = 'var(--sprout-d)'; m.textContent = 'Code SPROUT10 applied: 10% off your toys.'; renderCart() }
+    else { m.style.color = ''; m.textContent = v ? 'That code is not valid. Join the Sprout Post below to get SPROUT10.' : 'Type a code first.' }
+  })
+  function showShop() { $('#d-shop').hidden = false; $('#d-thanks').hidden = true; $('#d-foot').hidden = false }
+  $('#checkout').addEventListener('click', function () {
+    var T = totals(); if (!T.n) return
+    var no = 100 + (Date.now() % 900), msg = $('#msg').value.trim()
+    $('#d-thanks').innerHTML = '<div class="thanks"><span data-live="ticket-number" data-p-number="' + no + '" data-p-hash="true" data-size="96" data-label="Order number ' + no + '">#' + no + '</span><h3>Thank you, that is your order in!</h3>' +
+      '<p>Order <b>#' + no + '</b> totals <b>' + money(T.total) + '</b>' + (wrapOn && T.phys ? ', gift-wrapped' + (msg ? ' with your card: “' + esc(msg) + '”' : '') : '') + '. In a real shop, a confirmation email would land in a moment.</p>' +
+      '<p style="font-size:.85rem"><b>This is a demo:</b> nothing was charged and nothing will arrive.</p>' +
+      '<button type="button" class="btn btn-go" id="again"><span data-ico="teddy-bear" data-size="26">🧸</span> Back to the toys</button></div>'
+    cart = []; wrapOn = false; promo = false; thanksOn = true
+    // the next order starts clean: no card message, no promo text left over
+    $('#msg').value = ''; $('#promo').value = ''; $('#promo-msg').textContent = ''
+    $('#d-shop').hidden = true; $('#d-thanks').hidden = false; $('#d-foot').hidden = true
+    renderCart(); kit($('#d-thanks'))
+    $('#again').addEventListener('click', function () { closeAll(); scrollTo('#shop') })
+    $('#again').focus()
+  })
+  $('#d-browse').addEventListener('click', function () { closeAll(); scrollTo('#shop') })
+
+  /* ---------- drawer, quick look, toast, focus ---------- */
+  var drawer = $('#drawer'), quick = $('#quick'), scrim = $('#scrim'), lastFocus = null
+  function openLayer(el, focusSel) {
+    closeAll(true)
+    lastFocus = document.activeElement
+    el.classList.add('on'); scrim.classList.add('on'); el.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
+    setTimeout(function () { var f = $(focusSel, el); if (f) f.focus() }, 60)
+  }
+  function closeAll(keepFocus) {
+    if (drawer.classList.contains('on') && thanksOn) thanksOn = false // the next openDrawer() shows the (empty) basket, not the old thank-you
+    ;[drawer, quick].forEach(function (el) { el.classList.remove('on'); el.setAttribute('aria-hidden', 'true') })
+    scrim.classList.remove('on'); document.body.style.overflow = ''
+    if (!keepFocus && lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }) } catch (e) {} }
+  }
+  function openDrawer() { if (thanksOn) { $('#d-shop').hidden = true; $('#d-thanks').hidden = false; $('#d-foot').hidden = true } else showShop(); renderCart(); hideToast(); openLayer(drawer, '#cart-close') }
+  $('#cart-toggle').addEventListener('click', openDrawer)
+  $('#cart-close').addEventListener('click', function () { closeAll() })
+  $('#q-close').addEventListener('click', function () { closeAll() })
+  scrim.addEventListener('click', function () { closeAll() })
+  document.addEventListener('keydown', function (e) {
+    var open = drawer.classList.contains('on') ? drawer : quick.classList.contains('on') ? quick : null
+    if (e.key === 'Escape') { if (open) closeAll(); else { $('.site-head').classList.remove('navopen'); $('#nav-toggle').setAttribute('aria-expanded', 'false') } }
+    if (e.key === 'Tab' && open) {
+      var f = $$('button:not([disabled]),input,textarea,a[href],select', open).filter(function (x) { return x.offsetParent !== null && !x.hidden })
+      if (!f.length) return
+      var first = f[0], last = f[f.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+  })
+  var tt = 0
+  function toast(msg, withView) { var t = $('#toast'); $('#toast-t').textContent = msg; $('#toast-view').hidden = !withView; t.classList.add('on'); t.style.pointerEvents = 'auto'; clearTimeout(tt); tt = setTimeout(hideToast, 3400) }
+  function hideToast() { var t = $('#toast'); t.classList.remove('on'); t.style.pointerEvents = 'none' }
+  $('#toast-view').addEventListener('click', openDrawer)
+  function openQuick(id) {
+    var p = PROD[id], a = AGES[p.fit[0]], qn = 1
+    $('#q-img').innerHTML = '<img src="' + photo(p.ph, 1000) + '" alt="' + esc(p.alt) + '" style="object-position:' + p.pos + '">'
+    $('#q-body').innerHTML = '<span class="prod-cat">' + esc(CATS[p.cats[0]]) + '</span><h2 id="q-title">' + esc(p.name) + '</h2>' +
+      '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="price" style="font-size:1.9rem">' + money(p.price) + '</span><span class="rate"><span data-ico="star" data-size="28">⭐</span><b>' + p.rating.toFixed(1) + '</b> (' + p.n + ' reviews)</span><span class="age age-' + p.fit[0] + '" style="position:static;transform:rotate(-2deg)">' + ico(a.ico, 26, a.e) + esc(p.age) + '</span></div>' +
+      '<p>' + esc(p.desc) + '</p><ul class="specs">' + p.specs.map(function (s) { return '<li>' + ico(s[0], 34, s[3]) + '<span><b>' + s[1] + '</b>' + esc(s[2]) + '</span></li>' }).join('') + '</ul>' +
+      '<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><div class="qty"><button type="button" id="qq-minus" aria-label="One fewer"><span data-ico="minus" data-size="24">−</span></button><output id="qq" aria-live="polite">1</output><button type="button" id="qq-plus" aria-label="One more"><span data-ico="plus" data-size="24">+</span></button></div>' +
+      '<button type="button" class="btn btn-go" id="qq-add"><span data-ico="shopping-cart-plus" data-size="26">🛒</span> Add to basket</button></div>' +
+      '<p style="font-size:.88rem;color:var(--muted);display:flex;gap:8px;align-items:center"><span data-ico="truck" data-size="28">🚚</span> Free shipping over $50. 30-day happy returns.</p>'
+    kit(quick)
+    $('#qq-minus').onclick = function () { qn = Math.max(1, qn - 1); $('#qq').textContent = qn }
+    $('#qq-plus').onclick = function () { qn = Math.min(9, qn + 1); $('#qq').textContent = qn }
+    $('#qq-add').onclick = function () { closeAll(); addItem('p:' + id, qn) }
+    openLayer(quick, '#q-close')
+  }
+
+  /* ---------- gift finder ---------- */
+  var G = { age: 1, budget: 40, int: new Set() }, lastPicks = []
+  function recs() {
+    var el = P.filter(function (p) { return p.fit.indexOf(G.age) > -1 }).map(function (p) {
+      var m = p.int.filter(function (i) { return G.int.has(i) }), under = p.price <= G.budget
+      var fitB = under ? 1 - (G.budget - p.price) / G.budget * .6 : -(p.price - G.budget) / G.budget
+      return { p: p, m: m, under: under, s: m.length * 3 + (under ? 2 : 0) + fitB * 1.5 + p.rating / 5 }
+    }).sort(function (a, b) { return b.s - a.s })
+    var top = el.filter(function (x) { return x.under }).slice(0, 3)
+    if (top.length < 3) top = top.concat(el.filter(function (x) { return !x.under }).sort(function (a, b) { return a.p.price - b.p.price }).slice(0, 3 - top.length))
+    return top
+  }
+  var picksReady = false, statusT = 0
+  function renderPicks() {
+    lastPicks = recs()
+    var allOver = lastPicks.length > 0 && lastPicks.every(function (x) { return !x.under })
+    $('#g-results').innerHTML = (allOver ? '<p class="g-note">Nothing for this age is under ' + money(G.budget) + ', so these are our three cheapest. Nudge the slider up for more choice.</p>' : '') + lastPicks.map(function (x, i) {
+      var p = x.p, why = []
+      why.push('Right for ages ' + AGES[G.age].label)
+      if (x.m.length) why.push('matches ' + x.m.map(function (m) { return INTS[m] }).join(' and '))
+      why.push(x.under ? money(p.price) + ' fits your ' + money(G.budget) + ' budget' : money(p.price - G.budget) + ' over your budget')
+      return '<article class="pick"><img src="' + photo(p.ph, 300) + '" width="96" height="96" loading="lazy" alt="" style="object-position:' + p.pos + '"><div>' +
+        (i === 0 ? '<span class="eyebrow rank" style="font-size:.7rem;padding:2px 12px 2px 6px"><span data-ico="award" data-size="24">🏅</span> Top pick</span>' : '') +
+        '<h4>' + esc(p.name) + (x.under ? '' : '<span class="over">' + (p.price - G.budget <= G.budget * 0.3 ? 'a little over' : 'over budget') + '</span>') + '</h4><p class="why">' + esc(why.join(', ')) + '.</p>' +
+        '<div class="row"><span class="price">' + money(p.price) + '</span><button type="button" class="btn btn-sm" data-add="p:' + p.id + '" aria-label="Add ' + esc(p.name) + ' to basket"><span data-ico="shopping-cart-plus" data-size="26">🛒</span> Add</button></div></div></article>'
+    }).join('')
+    kit($('#g-results'))
+    // a quiet, debounced summary for screen readers instead of a live region that re-reads every slider tick
+    if (picksReady) { clearTimeout(statusT); statusT = setTimeout(function () { $('#g-status').textContent = 'Picks updated: ' + lastPicks.map(function (x) { return x.p.name + ', ' + money(x.p.price) }).join('; ') + '.' }, 900) }
+    picksReady = true
+  }
+  function setBudget(v) {
+    G.budget = +v; $('#g-budget').value = v
+    $('#g-cap').innerHTML = 'Up to <b>' + money(G.budget) + '</b>'
+    setLive($('#g-tag'), { amount: v, label: 'Budget ' + v + ' dollars' }, '$' + v)
+    $$('#g-presets .mini').forEach(function (m) { m.setAttribute('aria-pressed', String(+m.dataset.v === G.budget)) })
+    renderPicks()
+  }
+  $('#g-ages').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; G.age = +c.dataset.age; $$('#g-ages .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)) }); renderPicks() })
+  $('#g-interests').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; var i = c.dataset.i; if (G.int.has(i)) G.int.delete(i); else G.int.add(i); c.setAttribute('aria-pressed', String(G.int.has(i))); renderPicks() })
+  $('#g-budget').addEventListener('input', function (e) { setBudget(e.target.value) })
+  $('#g-presets').addEventListener('click', function (e) { var m = e.target.closest('.mini'); if (m) setBudget(m.dataset.v) })
+  $('#gift-form').addEventListener('submit', function (e) { e.preventDefault() })
+  $('#g-all').addEventListener('click', function () { burst(this); lastPicks.forEach(function (x) { addItem('p:' + x.p.id, 1, true) }); wrapOn = true; renderCart(); openDrawer() })
+  var gc = 25
+  $('#gc-amts').addEventListener('click', function (e) { var m = e.target.closest('.mini'); if (!m) return; gc = +m.dataset.v; $$('#gc-amts .mini').forEach(function (x) { x.setAttribute('aria-pressed', String(x === m)) }); $('#gc-val').textContent = '$' + gc })
+  $('#gc-add').addEventListener('click', function () { addItem('g:' + gc, 1); burst(this) })
+
+  /* ---------- newsletter ---------- */
+  $('#nl-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var em = $('#nl-email'), ok = $('#nl-ok'), err = $('#nl-err'), v = em.value.trim(), msg = ''
+    em.removeAttribute('aria-invalid')
+    if (!v) msg = 'Please enter your email address.'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) msg = 'That email does not look quite right. Try something like sam@example.com.'
+    else if (!ok.checked) msg = 'Please tick the box so we know you want the emails.'
+    err.textContent = msg
+    if (msg) { if (!ok.checked && v) ok.focus(); else { em.setAttribute('aria-invalid', 'true'); em.focus() } return }
+    var name = $('#nl-name').value.trim()
+    this.outerHTML = '<div class="nl-form" id="nl-done" tabindex="-1"><div class="ok-box"><span data-ico="party-popper" data-size="56" data-label="Celebration">🎉</span><div><b>Welcome to the Sprout Post' + (name ? ', ' + esc(name) : '') + '!</b><p style="color:inherit">We have sent a confirmation to ' + esc(v) + '. Your 10% code is <code>SPROUT10</code>. Pop it in your basket at checkout.</p></div></div>' +
+      '<button type="button" class="btn btn-go" id="nl-use"><span data-ico="shopping-bag" data-size="26">🛍️</span> Open my basket</button></div>'
+    kit($('#nl-done')); $('#nl-done').focus()
+    $('#nl-use').addEventListener('click', function () { $('#promo').value = 'SPROUT10'; openDrawer() })
+  })
+
+  /* ---------- visit: hours, address, calendar ---------- */
+  var HRS = [[10, 16], [9, 18], [9, 18], [9, 18], [9, 18], [9, 18], [9, 17]], DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], DAY3 = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  var hr = function (h) { return (h % 12 || 12) + (h >= 12 ? ' pm' : ' am') }
+  var now = new Date(), dow = now.getDay()
+  $('#hours').innerHTML = [1, 2, 3, 4, 5, 6, 0].map(function (d) { return '<tr' + (d === dow ? ' aria-current="date"' : '') + '><th scope="row">' + DAYS[d] + '</th><td>' + hr(HRS[d][0]) + ' to ' + hr(HRS[d][1]) + '</td></tr>' }).join('')
+  setLive($('#today-cal'), { weekday: DAY3[dow], day: now.getDate(), label: 'Today is ' + DAYS[dow] + ' ' + now.getDate() }, DAY3[dow])
+  // Story Time is every Saturday 10:30 to 11:45: the banner, the calendar slot and the .ics all use the next one
+  var M3 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'], MF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  function nextSat() {
+    var d = new Date(now.getFullYear(), now.getMonth(), now.getDate()), add = (6 - dow + 7) % 7
+    if (add === 0 && now.getHours() + now.getMinutes() / 60 >= 11.75) add = 7
+    d.setDate(d.getDate() + add); return d
+  }
+  ;(function () {
+    var ns = nextSat(), m = ns.getMonth(), day = ns.getDate(), today = ns.getDate() === now.getDate() && m === now.getMonth()
+    setLive($('#ev-cal'), { day: day, month: M3[m], label: 'Saturday, ' + MF[m] + ' ' + day }, 'Sat, ' + MF[m].slice(0, 3) + ' ' + day)
+    $('#ev-next').textContent = (today ? 'today, ' : '') + 'Saturday, ' + MF[m] + ' ' + day
+  })()
+  ;(function () {
+    var h = now.getHours() + now.getMinutes() / 60, o = HRS[dow][0], c = HRS[dow][1], box = $('#open-now'), t, s, clock
+    if (h >= o && h < c) { t = 'Open now'; s = 'Closes at ' + hr(c) + ' today. Come and play.'; clock = c; box.classList.remove('closed') }
+    else if (h < o) { t = 'Opening soon'; s = 'We open at ' + hr(o) + ' today.'; clock = o; box.classList.add('closed') }
+    else { var nd = (dow + 1) % 7; t = 'Closed for today'; s = 'We open ' + (nd === 0 ? 'on Sunday' : 'tomorrow') + ' at ' + hr(HRS[nd][0]) + '.'; clock = HRS[nd][0]; box.classList.add('closed') }
+    $('#open-title').textContent = t; $('#open-sub').textContent = s
+    var ct = (clock < 10 ? '0' : '') + clock + ':00'
+    setLive($('#open-clock'), { time: ct, label: hr(clock) }, hr(clock))
+  })()
+  $('#copy-addr').addEventListener('click', function () {
+    var txt = 'Little Sprout Toy Co., 18 Acorn Lane, Millbrook'
+    var done = function () { toast('Address copied. See you soon!', false) }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done)
+    else { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy') } catch (e) {} ta.remove(); done() }
+  })
+  $('#ics').addEventListener('click', function () {
+    var stamp = new Date().toISOString().replace(/[-:]|\.\d{3}/g, ''), ns = nextSat(), p2 = function (n) { return (n < 10 ? '0' : '') + n }
+    var ymd = ns.getFullYear() + p2(ns.getMonth() + 1) + p2(ns.getDate())
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Little Sprout Toy Co.//Demo//EN', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT', 'UID:storytime-weekly@littlesprout.example', 'DTSTAMP:' + stamp,
+      'DTSTART:' + ymd + 'T103000', 'DTEND:' + ymd + 'T114500', 'RRULE:FREQ=WEEKLY;BYDAY=SA', 'SUMMARY:Saturday Story Time at Little Sprout', 'LOCATION:Little Sprout Toy Co.\\, 18 Acorn Lane\\, Millbrook',
+      'DESCRIPTION:Three picture books read aloud on the play-corner rug. Free\\, for ages 1 to 5. No booking needed.', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
+    var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }))
+    var a = document.createElement('a'); a.href = url; a.download = 'little-sprout-story-time.ics'; document.body.appendChild(a); a.click(); a.remove()
+    setTimeout(function () { URL.revokeObjectURL(url) }, 1000); toast('Calendar file downloaded', false)
+  })
+
+  /* ---------- header nav ---------- */
+  var head = $('.site-head'), navBtn = $('#nav-toggle')
+  navBtn.addEventListener('click', function () { var o = head.classList.toggle('navopen'); navBtn.setAttribute('aria-expanded', String(o)) })
+  $('#nav').addEventListener('click', function (e) { if (e.target.closest('a')) { head.classList.remove('navopen'); navBtn.setAttribute('aria-expanded', 'false') } })
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]'); if (!a || a.getAttribute('href').length < 2) return
+    var t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return
+    e.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+    try { history.replaceState(null, '', location.pathname + location.search + location.hash) } catch (err) {}
+  })
+
+  /* ---------- go ---------- */
+  renderBundles(); renderGrid(); renderPicks(); renderCart(); fit(document)
+  // the kit's size slider: from 1.3x up the header stops being sticky and the bundle stickers move out of the way (see html[data-big])
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!window.WithKit) return
+    var big = function (k) { document.documentElement.toggleAttribute('data-big', k.level > 0 && k.scale > 1.3) }
+    big(WithKit.state()); WithKit.on(big)
+  })
+})()
+</script>
+</body>
+</html>

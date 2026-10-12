@@ -1,0 +1,1864 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosa&#39;s Corner Bakery (demo) · with icons</title>
+<meta name="theme-color" content="#D23A2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%A5%96%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Rosa's Corner Bakery has baked bread at 4 am since 1961. See today's bake with fresh-out times, order ahead for pick-up, build a custom cake or ask about a wedding cake.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF4DA;--cream-2:#FBE8C0;--paper:#F8E9C8;--kraft:#D2AC79;--kraft-d:#B88D57;
+  --red:#D23A2A;--red-d:#B02D1E;--red-band:#C73424;--butter:#F5B63C;--butter-l:#FBDC8B;--choc:#3A1D12;--choc-2:#5C3524;
+  --teal:#1E8783;--teal-d:#146562;--ink:#2B170F;--muted:#6B4636;--line:rgba(58,29,18,.3);
+  --fd:'Chonburi',Georgia,'Times New Roman',serif;--fb:'Lora',Georgia,'Times New Roman',serif;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --stripes:repeating-linear-gradient(90deg,var(--red) 0 36px,var(--cream) 36px 72px);
+  /* with icons: the page's own palette, tuned on the default style (retro) and three recommended ones */
+  --with-retro-1:#F5B63C;--with-retro-2:#E8742A;--with-retro-3:#D23A2A;--with-retro-4:#1E8783;--with-retro-cream:#FFF4DA;--with-retro-letter:#2B170F;--with-retro-shadow:#5C2A1A;--with-retro-tint:#FFF4DA;
+  --with-sticker-accent:#D23A2A;--with-sticker-lemon:#F5B63C;--with-sticker-peach:#E8742A;--with-sticker-mint:#2FB3A6;--with-sticker-bubblegum:#F2A29A;--with-sticker-ink:#3A1D12;--with-sticker-shadow:#3A1D12;--with-sticker-c4:#1E8783;
+  --with-coquette-accent:#F5B63C;--with-coquette-c1:#F8C9C0;--with-coquette-c2:#EC8D86;--with-coquette-c3:#D23A2A;--with-coquette-c4:#FFF1DA;--with-coquette-ink:#5C2A1A;--with-coquette-shadow:#B02D1E;--with-coquette-tint:#FFE4D9;
+  --with-pastel-accent:#FFD9A8;--with-pastel-c1:#F9C5BD;--with-pastel-c2:#F9C5BD;--with-pastel-c3:#FFE29C;--with-pastel-c4:#A8DDD6;--with-pastel-ink:#8A4A3A;--with-pastel-edge:#E7A79B;--with-pastel-shadow:#D58B7C;--with-pastel-tint:#FFF0E3;
+  --with-clay-c1:#D23A2A;--with-clay-c2:#F5B63C;--with-clay-c3:#E8742A;--with-clay-c4:#1E8783;--with-clay-accent:#F5B63C;--with-clay-ink:#3A1D12;--with-clay-shadow:#5C2A1A;--with-clay-tint:#FFE9C8;
+  --with-kawaii-c1:#C9965E;--with-kawaii-c2:#5C2A1A;--with-kawaii-c4:#6CC3B9;--with-kawaii-accent:#F26B5B;--with-kawaii-blush:#F58C7E;
+  --with-glass-c1:#F26B5B;--with-glass-c2:#D23A2A;--with-glass-c3:#F5B63C;--with-glass-c4:#E8742A;--with-glass-accent:#1E8783;--with-glass-back:#F8C98B;--with-glass-shadow:#8E3A24;--with-glass-etch:#5C2A1A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px;-webkit-text-size-adjust:100%}
+body{margin:0;font:400 17px/1.6 var(--fb);color:var(--ink);background:var(--cream);overflow-x:hidden}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:400;line-height:1.1;margin:0;color:var(--choc)}
+p{margin:0 0 1em}
+a{color:var(--red-d)}
+ul,ol{margin:0;padding:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 .8rem;font:700 .78rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;color:var(--red-d)}
+.kicker::before,.kicker::after{content:"";width:26px;height:2px;background:currentColor;opacity:.55}
+.kicker.k-light{color:var(--butter-l)}
+.kraft .kicker{color:var(--choc)}
+.sec-head{max-width:780px;margin:0 auto 2.2rem;text-align:center}
+.sec-head h2{font-size:clamp(2rem,5vw,3.2rem)}
+.sec-head p{margin:.9rem 0 0;color:var(--muted);font-size:1.05rem}
+.kraft .sec-head p{color:var(--choc)}
+.on-dark .sec-head p,.on-dark .sec-head h2{color:var(--cream)}
+.section{padding:72px 0;overflow-x:clip}
+.paper{background:var(--grain),var(--paper);background-color:var(--paper)}
+.kraft{background:var(--grain),linear-gradient(180deg,var(--kraft),#C9A06C);background-color:var(--kraft)}
+.scallop-bottom{position:relative}
+.scallop-bottom::after{content:"";position:absolute;left:0;right:0;top:100%;height:18px;background:inherit;-webkit-mask:radial-gradient(circle at 50% 0,#000 17.5px,transparent 18.5px) 0 0/36px 100% repeat-x;mask:radial-gradient(circle at 50% 0,#000 17.5px,transparent 18.5px) 0 0/36px 100% repeat-x}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:46px;padding:.6em 1.25em;border:2.5px solid var(--choc);border-radius:999px;background:var(--butter);color:var(--choc);font:700 .95rem/1.1 var(--fb);letter-spacing:.03em;text-decoration:none;box-shadow:3px 3px 0 var(--choc);transition:transform .12s,box-shadow .12s,background .15s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--choc)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--choc)}
+.btn-red{background:var(--red);color:#fff}
+.btn-teal{background:var(--teal-d);color:#fff}
+.btn-cream{background:var(--cream)}
+.btn-sm{min-height:44px;padding:.45em 1em;font-size:.88rem;white-space:nowrap}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.55;cursor:not-allowed;box-shadow:2px 2px 0 var(--choc);transform:none}
+.link-btn{background:none;border:0;padding:0;color:var(--red-d);font-weight:700;text-decoration:underline;text-underline-offset:3px;min-height:44px}
+
+/* announcement + header */
+.announce{background:var(--choc);color:var(--cream);font-size:.84rem;text-align:center;padding:9px 16px;line-height:1.35}
+.announce b{color:var(--butter)}
+.announce span[data-ico]{margin-right:6px}
+.site-head{position:sticky;top:0;z-index:40;background:var(--cream);border-bottom:3px solid var(--choc)}
+.head-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;min-height:70px}
+.head-left{display:flex;align-items:center;gap:8px}
+.head-right{display:flex;align-items:center;justify-content:flex-end;gap:22px}
+.nav-list{display:none;list-style:none;gap:18px}
+.nav-list a{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;font:700 .74rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--choc);text-decoration:none;border-bottom:3px solid transparent}
+.nav-list a:hover{border-color:var(--red)}
+.logo{justify-self:center;text-align:center;text-decoration:none;color:var(--red);line-height:1}
+.logo b{display:block;font:400 2.1rem/1 var(--fd);text-shadow:2px 2px 0 var(--choc);letter-spacing:.01em}
+.logo small{display:block;margin-top:4px;white-space:nowrap;font:700 .5rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--choc)}
+.menu-btn,.basket-btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;min-width:46px;justify-content:center;border:2.5px solid var(--choc);border-radius:999px;background:var(--cream);color:var(--choc);font-weight:700;padding:0 10px}
+.basket-btn{background:var(--butter);box-shadow:3px 3px 0 var(--choc);padding:0 14px 0 8px}
+.basket-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--choc)}
+.basket-btn .b-txt{display:none;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+.basket-sum{font:400 1rem var(--fd);min-width:3ch;text-align:right}
+.valance{position:absolute;top:100%;left:0;right:0;height:18px;pointer-events:none;filter:drop-shadow(0 3px 0 rgba(58,29,18,.28))}
+.valance i{display:block;height:100%;background:var(--stripes);-webkit-mask:radial-gradient(circle at 50% 0,#000 17.5px,transparent 18.5px) 0 0/36px 100% repeat-x;mask:radial-gradient(circle at 50% 0,#000 17.5px,transparent 18.5px) 0 0/36px 100% repeat-x}
+.mnav{display:none;border-top:2px dashed var(--line);background:var(--cream);padding:8px 16px 16px}
+.mnav.open{display:block}
+.mnav a{display:flex;align-items:center;gap:12px;min-height:50px;font:700 .9rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--choc);text-decoration:none;border-bottom:1px dotted var(--line)}
+
+/* hero */
+.hero{position:relative;color:var(--cream);background:var(--choc);isolation:isolate;padding:70px 0 56px;overflow-x:clip}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(40,19,11,.92) 0%,rgba(40,19,11,.8) 48%,rgba(40,19,11,.3) 100%),linear-gradient(0deg,rgba(40,19,11,.8),transparent 38%)}
+.hero-grid{display:grid;gap:36px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,10vw,4.9rem);color:var(--cream);text-shadow:3px 3px 0 rgba(0,0,0,.35);letter-spacing:-.005em}
+.nw{white-space:nowrap}
+.hero h1 em{display:block;font-style:normal;color:var(--butter)}
+.hero .lead{max-width:34em;margin:1.3rem 0 1.6rem;font-size:1.1rem;color:#FBEBCB}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-facts{list-style:none;display:grid;gap:8px;margin:1.8rem 0 0;font-size:.95rem;color:#F6DFB6}
+.hero-facts li{display:flex;gap:10px;align-items:center}
+.photo-credit{position:absolute;left:16px;bottom:8px;margin:0;font-size:.7rem;color:rgba(255,244,218,.8)}
+.photo-credit a{color:inherit}
+.tk{position:relative;max-width:360px;margin:0 10px;background:var(--grain),var(--cream);background-color:var(--cream);color:var(--ink);border:3px solid var(--choc);border-radius:14px;padding:22px 24px 22px;box-shadow:8px 8px 0 rgba(0,0,0,.35);transform:rotate(1.6deg)}
+.tk::before,.tk::after{content:"";position:absolute;top:96px;width:26px;height:26px;border-radius:50%;background:#3b1f13;border:3px solid var(--choc)}
+.tk::before{left:-16px}.tk::after{right:-16px}
+.tk-label{margin:0 0 4px;font:700 .72rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--red-d)}
+.tk-now{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;margin-bottom:14px;border-bottom:3px dashed var(--line)}
+.tk-now b{font:400 1.5rem/1.05 var(--fd);color:var(--choc)}
+.tk ul{list-style:none;display:grid;gap:10px;margin:0 0 18px;font-size:.95rem}
+.tk li{display:flex;gap:10px;align-items:center}
+.stamp{position:absolute;width:132px;height:132px;color:var(--red);pointer-events:none}
+.tk-hat{display:none;position:absolute;right:10px;top:-86px;transform:rotate(9deg);pointer-events:none;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.35))}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 1.3rem;max-width:440px;color:var(--red)}
+.orn i{flex:1;height:0;border-top:3px dotted rgba(58,29,18,.35)}
+.orn [data-ico]{flex:none}
+.voices .orn{margin-bottom:1.6rem}
+.hero .stamp{width:96px;height:96px;right:-2px;bottom:-78px;transform:rotate(14deg);color:var(--butter);filter:drop-shadow(2px 2px 0 rgba(0,0,0,.35))}
+
+/* facts strip */
+.strip{padding:22px 0;border-block:3px solid var(--choc);color:var(--choc)}
+.strip ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+.strip li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.9rem;line-height:1.25}
+.strip li small{display:block;font-weight:500;font-size:.8rem;color:#4A2A1B}
+.strip .ico-badge{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--cream);border:2.5px solid var(--choc);flex:none;color:var(--red-d)}
+
+@media(min-width:900px){
+  .hero{padding:96px 0 84px}
+  .hero-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)}
+  .tk{justify-self:end;margin:0 10px 0 0}
+  .hero .stamp{width:116px;height:116px;right:-22px;bottom:-96px}
+  .tk-hat{display:block}
+  .photo-credit{left:auto;right:16px}
+  .strip ul{grid-template-columns:repeat(4,1fr)}
+  .section{padding:96px 0}
+}
+/* the three-column header needs about 1000px: the hamburger stays until then */
+@media(min-width:1040px){
+  .head-row{grid-template-columns:1fr auto 1fr;min-height:84px}
+  .menu-btn{display:none}
+  .nav-list{display:flex}
+  .head-left{justify-content:flex-start}
+  .logo b{font-size:2.5rem}.logo small{font-size:.62rem;letter-spacing:.2em}
+  .mnav,.mnav.open{display:none}
+}
+@media(min-width:1140px){.basket-btn .b-txt{display:inline}}
+@media(min-width:1180px){.nav-list{gap:28px}.nav-list a{font-size:.8rem;letter-spacing:.14em}}
+@media(max-width:480px){.strip li small{display:none}}
+
+/* today's bake board */
+.bake{background:var(--cream)}
+.board{border:3px solid var(--choc);border-radius:20px;background:var(--grain),var(--paper);background-color:var(--paper);box-shadow:8px 8px 0 var(--choc);overflow:hidden;overflow:clip}
+.board-head{position:relative;z-index:2;background:var(--red-band);color:var(--cream);padding:26px 18px 34px;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.board-head h2{color:var(--cream);font-size:clamp(2.2rem,7vw,3.6rem);text-shadow:3px 3px 0 rgba(0,0,0,.28)}
+.board-head .date-line{margin:.5rem 0 0;font-weight:600;color:var(--cream)}
+.board-head .demo-note{margin:.6rem 0 0;font-size:.88rem;color:var(--cream);max-width:34em;line-height:1.45}
+.board-head .kicker{color:var(--cream)}
+.clockbox{background:var(--cream);color:var(--ink);border:3px solid var(--choc);border-radius:16px;padding:14px 16px;display:grid;gap:12px;box-shadow:4px 4px 0 var(--choc);align-self:start}
+.cb-row{display:flex;align-items:center;gap:14px}
+.cb-row .grow{flex:1;min-width:0}
+.cb-label{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px;font:700 .7rem/1.2 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--red-d)}
+.cb-time{white-space:nowrap;font:400 1.3rem/1 var(--fd);color:var(--choc);letter-spacing:0;text-transform:none}
+.clockbox input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:0}
+html[data-level="0"] #live-clock,html[data-level="0"] #live-ring{display:none}
+.cb-next{display:flex;align-items:center;gap:12px;padding-top:10px;border-top:2px dashed var(--line);font-size:.9rem;line-height:1.35}
+.cb-next b{display:block;font-family:var(--fd);font-weight:400;font-size:1.02rem;color:var(--choc)}
+.board-body{position:relative;z-index:1;padding:30px 0 6px}
+.filters{padding:0 18px 12px;display:grid;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 10px;border:2.5px solid var(--choc);border-radius:999px;background:var(--cream);font-weight:700;font-size:.88rem;color:var(--choc);transition:background .15s}
+.chip:hover{background:var(--butter-l)}
+.chip[aria-pressed=true]{background:var(--butter);box-shadow:inset 0 -3px 0 rgba(58,29,18,.25)}
+.filter-line{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.filter-line>b{font:700 .78rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--choc-2);margin-right:2px}
+.chip.alt[aria-pressed=true]{background:var(--choc);color:var(--cream)}
+.board-grid{display:grid;gap:22px;padding:0 0 18px}
+.plate-col{padding:12px 28px 0;order:-1}
+.plate-stack{position:relative;max-width:260px;margin:14px auto 0}
+.plate{margin:0;background:#fff;padding:11px 11px 12px;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 20px rgba(58,29,18,.28);transform:rotate(-2deg);position:relative}
+.plate::before{content:"";position:absolute;top:-13px;left:50%;width:92px;height:26px;margin-left:-46px;background:rgba(245,182,60,.8);transform:rotate(3deg);box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.plate img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:var(--cream-2)}
+.plate figcaption{font:400 1rem/1.25 var(--fd);padding-top:10px;text-align:center;color:var(--choc)}
+.plate[hidden]{display:none}
+.bake-list{list-style:none}
+.cat-head{display:flex;align-items:center;gap:12px;padding:20px 18px 8px;font:400 1.5rem/1 var(--fd);color:var(--choc)}
+.cat-head small{font:600 .85rem/1.3 var(--fb);color:var(--muted);margin-left:auto;text-align:right}
+.cat-head .ico-badge{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--butter-l);border:2.5px solid var(--choc);color:var(--choc);flex:none}
+.bake-row{position:relative;display:grid;gap:12px;padding:18px;border-top:2px dotted var(--line)}
+.b-main h3{font-size:1.28rem;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.b-tag{font:700 .64rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;background:var(--teal-d);color:#fff;padding:5px 8px;border-radius:5px}
+.b-main p{margin:.3rem 0 .6rem;color:var(--muted);font-size:.94rem;line-height:1.5;max-width:34em}
+.alg{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.alg li{display:inline-flex;align-items:center;gap:4px;font:700 .72rem/1 var(--fb);letter-spacing:.04em;border:1.5px solid var(--choc);border-radius:999px;padding:4px 9px 4px 5px;background:#FFFBEE;color:var(--choc)}
+.alg li.v{background:#DDF0EA;color:#0F5654;border-color:#0F5654}
+.b-when{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.9rem}
+.b-out{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--choc-2)}
+.status{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.84rem;padding:5px 11px 5px 7px;border-radius:999px;line-height:1.2}
+.s-warm{background:#D6EEE7;color:#0B4F4D}
+.s-low{background:#FFD8CC;color:#85200F}
+.s-soon{background:#FFE4A0;color:#623900}
+.s-gone{background:#E8DCC6;color:#54392B}
+.b-buy{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.b-price{font:400 1.5rem/1 var(--fd);color:var(--choc)}
+.b-price small{display:block;font:500 .72rem/1.3 var(--fb);color:var(--muted)}
+/* sold out: keep every word at full contrast, mark the row with a hatch, a struck-through price and quieter allergen chips */
+.bake-row.is-gone{background:repeating-linear-gradient(135deg,transparent 0 9px,rgba(58,29,18,.05) 9px 18px)}
+.bake-row.is-gone .b-main h3{color:var(--choc-2)}
+.bake-row.is-gone .b-price{color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:rgba(176,45,30,.65)}
+.bake-row.is-gone .alg li{background:transparent;border-color:rgba(58,29,18,.5)}
+.bake-row.is-gone .alg [data-ico]{opacity:.55}
+.status.rubber{white-space:nowrap;margin-top:4px;background:rgba(210,58,42,.05);color:var(--red-d);border:3px double var(--red-d);border-radius:6px;padding:6px 12px;font:400 1.05rem/1.1 var(--fd);letter-spacing:.1em;text-transform:uppercase;transform:rotate(-3deg);mix-blend-mode:multiply}
+.status.rubber small{font:700 .66rem/1.1 var(--fb);letter-spacing:.06em;text-transform:none;display:block}
+.empty{padding:36px 18px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;font:400 1.4rem var(--fd);color:var(--choc);margin:8px 0 4px}
+.board-foot{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;padding:16px 18px;border-top:3px solid var(--choc);background:var(--cream-2);font-size:.9rem}
+.board-foot ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+.board-foot li{display:flex;align-items:center;gap:6px;font-weight:600}
+
+/* from the case */
+.case{padding:78px 0 64px;border-block:3px solid var(--choc);overflow:hidden}
+.case h2{color:var(--choc)}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px 20px;padding:10px 6px 0}
+.pol{margin:0;background:#fff;padding:9px 9px 10px;box-shadow:0 8px 18px rgba(58,29,18,.32);transform:rotate(var(--r,-2deg));position:relative;transition:transform .2s}
+.pol:hover{transform:rotate(0) scale(1.03);z-index:2}
+.pol::before{content:"";position:absolute;top:-11px;left:50%;width:64px;height:20px;margin-left:-32px;background:rgba(255,244,218,.78);transform:rotate(var(--t,2deg));box-shadow:0 1px 2px rgba(0,0,0,.22)}
+.pol img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:var(--cream-2)}
+.pol figcaption{padding-top:9px;font:400 .95rem/1.2 var(--fd);color:var(--choc);text-align:center}
+.pol figcaption small{display:block;margin-top:3px;font:600 .74rem/1.3 var(--fb);color:var(--muted)}
+
+/* day-old band */
+.dayold{display:grid;background:var(--red-band);color:var(--cream);border-block:3px solid var(--choc);overflow:hidden}
+.dayold .kicker{color:var(--cream)}
+.dayold-img{position:relative;min-height:240px}
+.dayold-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dayold-copy{padding:44px 20px;display:flex;align-items:center;gap:22px;max-width:640px}
+.dayold h2{color:var(--cream);font-size:clamp(1.9rem,5vw,2.8rem);text-shadow:3px 3px 0 rgba(0,0,0,.25)}
+.dayold p{margin:.8rem 0 0;color:var(--cream)}
+.bagart{position:relative;flex:none;display:grid;place-items:center;min-width:112px;min-height:112px}
+.bagart .bag-ico{filter:drop-shadow(4px 4px 0 rgba(0,0,0,.25))}
+html[data-level="2"] .bagart .half-stamp{position:absolute;right:-18px;bottom:-14px;width:92px;height:92px;font-size:1rem}
+.half-stamp{flex:none;display:grid;place-items:center;width:104px;height:104px;border-radius:50%;background:var(--red-band);border:4px double var(--cream);color:var(--cream);font:400 1.15rem/1.05 var(--fd);text-transform:uppercase;letter-spacing:.06em;text-align:center;transform:rotate(10deg);box-shadow:0 0 0 6px var(--red-band),0 0 0 8px var(--butter)}
+
+/* order ahead */
+.order{background:var(--cream)}
+.how{list-style:none;display:grid;gap:14px;margin:0 auto 2.4rem;max-width:960px}
+.how li{display:flex;gap:14px;align-items:center;background:var(--paper);border:2.5px solid var(--choc);border-radius:14px;padding:12px 16px;font-weight:600;line-height:1.35;box-shadow:3px 3px 0 var(--choc)}
+.how li b{display:block;font:400 1.1rem var(--fd);color:var(--choc)}
+.how .ico-badge{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--butter);border:2.5px solid var(--choc);flex:none}
+.order-grid{display:grid;gap:26px;align-items:start;min-width:0;grid-template-areas:"basket" "pickup" "details" "photo"}
+.card{min-width:0;background:var(--grain),#FFF9EA;background-color:#FFF9EA;border:3px solid var(--choc);border-radius:18px;padding:20px 18px;box-shadow:6px 6px 0 var(--choc)}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.card h3{font-size:1.55rem}
+.card-head .ico-badge{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--butter-l);border:2.5px solid var(--choc);flex:none}
+.lines{list-style:none}
+.line{display:grid;grid-template-columns:1fr auto;gap:8px 14px;padding:12px 0;border-bottom:2px dotted var(--line);align-items:center}
+.l-name{font-weight:700;line-height:1.3}
+.l-name small{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:2px}
+.l-ctl{grid-column:1/-1;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--choc);border-radius:999px;background:var(--cream)}
+.qty button{width:44px;height:44px;border:0;background:none;display:grid;place-items:center;border-radius:50%;color:var(--choc)}
+.qty button:hover{background:var(--butter-l)}
+.qty output{min-width:2ch;text-align:center;font-weight:700}
+.l-price{font:400 1.1rem var(--fd);min-width:4.2ch;text-align:right}
+.icon-btn{display:inline-grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:none;color:var(--red-d)}
+.icon-btn:hover{background:#FFE0D8}
+.totals{display:grid;gap:8px;margin-top:14px}
+.tot-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.tot-row.big{font:400 1.5rem var(--fd);padding-top:10px;border-top:3px double var(--choc)}
+.tot-row small{font-size:.82rem;color:var(--muted)}
+.progress{height:16px;border:2.5px solid var(--choc);border-radius:99px;background:var(--cream);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--red) 0 10px,#E4604F 10px 20px);transition:width .4s}
+.perk{margin:12px 0 0;font-size:.9rem;display:flex;align-items:center;gap:10px;line-height:1.35}
+.empty-basket{text-align:center;padding:22px 8px;color:var(--muted)}
+.empty-basket b{display:block;font:400 1.3rem var(--fd);color:var(--choc);margin:8px 0 4px}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px;padding:6px 4px 12px}
+.day{display:grid;justify-items:center;padding:0;overflow:hidden;min-height:84px;border:2.5px solid var(--choc);border-radius:10px;background:#FFFDF5;color:var(--choc)}
+.day .wd{width:100%;background:var(--red);color:#fff;font:700 .66rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;padding:5px 0}
+.day .dn{font:400 1.7rem/1.15 var(--fd);margin-top:3px}
+.day .dm{font:600 .68rem/1.2 var(--fb);color:var(--muted);padding-bottom:4px}
+.day[aria-pressed=true]{background:var(--butter);box-shadow:3px 3px 0 var(--choc);transform:translate(-1px,-1px)}
+.day:disabled{opacity:.42;cursor:not-allowed}
+.day:disabled .wd{background:#8a6b58}
+.slots-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:8px 0 10px;font-weight:700}
+.slots-head small{font-weight:500;color:var(--muted);font-size:.84rem}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{min-height:50px;border:2px solid var(--choc);border-radius:10px;background:#FFFDF5;font-weight:700;font-size:.9rem;color:var(--choc);line-height:1.15;padding:4px}
+.slot small{display:block;font-weight:700;font-size:.66rem;color:var(--red-d);letter-spacing:.04em}
+.slot:hover:not(:disabled){background:var(--butter-l)}
+.slot[aria-pressed=true]{background:var(--red);color:#fff;box-shadow:3px 3px 0 var(--choc)}
+.slot[aria-pressed=true] small{color:#fff}
+.slot:disabled{background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(58,29,18,.09) 6px 12px);border-style:dashed;color:#7d5c49;cursor:not-allowed;text-decoration:line-through}
+.slot-note{display:flex;gap:10px;align-items:center;margin:14px 0 0;padding:10px 12px;border-radius:10px;background:var(--cream-2);font-size:.9rem;line-height:1.4}
+.pick-sum{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border:2.5px dashed var(--choc);border-radius:12px;font-weight:700;line-height:1.3}
+.pick-sum.ok{border-style:solid;background:#E4F3EC}
+.bag-photo{margin:26px 0 0;position:relative}
+.bag-photo img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:62% 55%;border:3px solid var(--choc);border-radius:16px;box-shadow:6px 6px 0 var(--choc)}
+.bag-photo figcaption{position:absolute;left:14px;bottom:14px;right:14px;background:var(--cream);border:2.5px solid var(--choc);border-radius:10px;padding:8px 12px;font-size:.88rem;line-height:1.35;font-weight:600}
+.field{display:grid;gap:6px;margin-bottom:14px;min-width:0}
+.field label,.field legend,.lbl{font-weight:700;font-size:.88rem;letter-spacing:.02em;padding:0}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:10px 14px;border:2.5px solid var(--choc);border-radius:12px;background:#FFFDF5}
+.field textarea{min-height:92px;resize:vertical}
+.field .hint{font-size:.82rem;color:var(--muted);margin:0}
+.field .err{display:none;color:var(--red-d);font-size:.86rem;font-weight:700;margin:0}
+.field.bad .err{display:block}
+.field.bad input,.field.bad select,.field.bad textarea{border-color:var(--red);background:#FFF0EC}
+fieldset.field{border:0;padding:0;margin:0 0 14px}
+.row2{display:grid;gap:0 14px}
+.check{display:flex;gap:12px;align-items:flex-start;min-height:44px;font-size:.95rem;line-height:1.4;padding:6px 0}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--red);flex:none}
+.form-msg{margin:0 0 12px;padding:10px 14px;border-radius:10px;background:#FFE3DC;border:2px solid var(--red);font-weight:700;font-size:.92rem;display:none}
+.form-msg.show{display:block}
+.done{text-align:center;padding:8px 0 4px}
+.done h3{font-size:1.9rem;margin:10px 0 6px}
+.done .tk-now{justify-content:center;gap:20px;border-bottom:0;margin:12px 0 6px}
+.done ul{list-style:none;display:grid;gap:8px;text-align:left;margin:14px auto;max-width:340px;font-size:.95rem}
+.done li{display:flex;gap:10px;align-items:center}
+.done .btn{margin:6px 4px}
+
+/* basket drawer + toast */
+.scrim{position:fixed;inset:0;background:rgba(40,19,11,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;z-index:60}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,100vw);background:var(--grain),var(--cream);background-color:var(--cream);border-left:3px solid var(--choc);z-index:61;transform:translateX(105%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility .32s;display:flex;flex-direction:column}
+.drawer.open{transform:none;visibility:visible}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px 14px 20px;border-bottom:3px dashed var(--line)}
+.drawer-head h2{font-size:1.6rem}
+.drawer-body{flex:1;overflow:auto;padding:6px 20px 14px}
+.drawer-foot{padding:16px 20px 96px;border-top:3px solid var(--choc);background:var(--paper)}
+.drawer-foot .btn{width:100%}
+.toast{position:fixed;top:84px;left:50%;z-index:70;transform:translate(-50%,-14px);opacity:0;pointer-events:none;background:var(--choc);color:var(--cream);border:2.5px solid var(--butter);border-radius:999px;padding:10px 18px 10px 12px;font-weight:600;font-size:.92rem;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 24px);transition:opacity .2s,transform .2s;box-shadow:4px 4px 0 rgba(0,0,0,.25)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(min-width:700px){
+  .row2{grid-template-columns:1fr 1fr}
+  .how{grid-template-columns:repeat(3,1fr)}
+  .case-grid{grid-template-columns:repeat(4,1fr);gap:24px}
+  .slots{grid-template-columns:repeat(4,1fr)}
+  .card{padding:26px 28px}
+  .board-head{padding:34px 34px 40px}
+  .filters{padding:0 34px 12px}
+  .cat-head{padding:22px 34px 8px}
+  .bake-row{padding:20px 34px}
+  .board-foot{padding:16px 34px}
+  .dayold{grid-template-columns:.8fr 1.2fr}
+}
+@media(min-width:760px){
+  .bake-row{grid-template-columns:minmax(0,1fr) 200px 150px;align-items:center;gap:6px 20px}
+  .b-when{flex-direction:column;align-items:flex-start;gap:8px}
+  .b-buy{flex-direction:column;align-items:flex-end;gap:8px}
+}
+@media(min-width:1100px){
+  .board-grid{grid-template-columns:minmax(0,1fr) 270px;padding-right:34px;gap:10px}
+  .plate-col{order:0;padding:36px 0 0}
+  .plate-stack{position:sticky;top:112px;max-width:none}
+  .bake-row{grid-template-columns:minmax(0,1fr) 220px 160px;gap:6px 22px}
+}
+@media(min-width:1000px){
+  .board-head{grid-template-columns:minmax(0,1fr) minmax(340px,400px);align-items:end}
+  .order-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:34px;grid-template-areas:"basket pickup" "details pickup" "photo photo"}
+  .bag-photo img{aspect-ratio:16/6}
+}
+
+/* cake builder */
+.cakes{background:var(--grain),var(--teal-d);background-color:var(--teal-d);color:var(--cream);border-block:3px solid var(--choc);position:relative}
+.cakes .kicker{color:var(--butter-l)}
+.builder{display:grid;gap:26px;align-items:start}
+.cake-stage{position:relative;background:radial-gradient(circle at 50% 40%,#FFFBEF 0 38%,var(--cream-2) 100%);border:3px solid var(--choc);border-radius:20px;padding:20px 16px 20px;box-shadow:8px 8px 0 var(--choc);color:var(--ink);display:grid;justify-items:center;gap:14px;overflow:hidden}
+.cake-stage .fl{position:absolute;pointer-events:none}
+.cake-stage .s1{right:9%;top:16%}.cake-stage .s2{left:8%;top:26%}.cake-stage .s3{right:7%;top:48%}
+.cake-stage .big1{right:12px;top:6px;transform:rotate(8deg);filter:drop-shadow(3px 3px 0 rgba(58,29,18,.28))}
+.cake-stage .big2{left:10px;bottom:92px;transform:rotate(-8deg);filter:drop-shadow(3px 3px 0 rgba(58,29,18,.28))}
+.cake-total{display:none}
+.stage-tag{justify-self:start;display:inline-flex;align-items:center;gap:8px;font:700 .72rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--red-d)}
+.cake-wrap{display:grid;place-items:end center;min-height:250px;width:100%;padding-top:44px}
+.cake{--w:330px;--bh:170px;--sp:#F3DDB3;--fil:#C0392B;--fr:#FFF8E8;position:relative;width:min(var(--w),100%);transition:width .35s}
+.skip:focus{position:fixed;left:12px;top:12px;width:auto;height:auto;clip:auto;z-index:100;background:var(--butter);color:var(--choc);padding:10px 16px;border-radius:8px;font-weight:700}
+.cake .c-top::after{content:"";position:absolute;inset:7px 9px;border:2.5px dotted rgba(58,29,18,.35);border-radius:50%}
+.cake .c-top{position:relative;z-index:3;height:46px;margin-bottom:-23px;background:var(--fr);border:3px solid var(--choc);border-radius:50%;transition:background .3s}
+.cake .c-body{position:relative;z-index:2;height:var(--bh);border:3px solid var(--choc);border-radius:0 0 16px 16px;background:linear-gradient(to bottom,var(--fr) 0 22px,transparent 22px),linear-gradient(to bottom,var(--sp) 0 27%,var(--fil) 27% 34%,var(--sp) 34% 61%,var(--fil) 61% 68%,var(--sp) 68% 100%);box-shadow:inset 10px 0 14px rgba(255,255,255,.22),inset -14px 0 16px rgba(58,29,18,.2);transition:height .35s,background .3s}
+.cake .c-body::before{content:"";position:absolute;left:0;right:0;top:21px;height:14px;background:radial-gradient(circle at 50% 0,var(--fr) 9px,transparent 9.5px) 0 0/22px 100% repeat-x;filter:drop-shadow(0 1.5px 0 rgba(58,29,18,.75))}
+.cake .c-body::after{content:"";position:absolute;left:-3px;right:-3px;bottom:-3px;height:16px;background:radial-gradient(circle at 50% 100%,var(--fr) 9px,transparent 9.5px) 0 0/24px 100% repeat-x}
+.cake .c-plate{height:18px;margin:-2px -30px 0;border:3px solid var(--choc);border-radius:50%;background:var(--kraft);position:relative;z-index:1}
+.c-msg{position:absolute;z-index:4;left:50%;bottom:30%;transform:translateX(-50%);max-width:88%;background:var(--fr);border:2px solid var(--choc);border-radius:8px;padding:3px 10px 4px;font:400 .82rem/1.2 var(--fd);color:var(--red-d);text-align:center;white-space:normal;word-break:break-word;letter-spacing:.02em}
+.c-msg:empty{display:none}
+.c-extra{position:absolute;left:0;right:0;top:12px;z-index:5;display:flex;justify-content:center;gap:10px;pointer-events:none;height:0}
+.cherry{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#FF8A7A 0 12%,#D23A2A 13% 60%,#8E1D12 100%);border:2px solid var(--choc);position:relative;transform:translateY(0)}
+.cherry::before{content:"";position:absolute;left:8px;top:-17px;width:12px;height:18px;border-top:2.5px solid #3b6a2d;border-right:2.5px solid #3b6a2d;border-radius:0 100% 0 0}
+.cherry:nth-child(2){transform:translateY(-6px)}
+.rose{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#8E1D12 0 12%,transparent 13%),radial-gradient(circle at 50% 50%,#C23A31 0 40%,#E5675C 41% 62%,#D23A2A 63%);border:2px solid var(--choc);transform:translateY(-2px)}
+.rose:nth-child(2){transform:translateY(-8px)}
+.candle{width:8px;height:34px;background:repeating-linear-gradient(0deg,var(--butter) 0 6px,#fff 6px 12px);border:2px solid var(--choc);position:relative;transform:translateY(-28px)}
+.candle::before{content:"";position:absolute;left:0;top:-15px;width:8px;height:12px;background:radial-gradient(ellipse at 50% 70%,#FFE27A 0 40%,#F58A2D 41%);border-radius:50% 50% 50% 50%/70% 70% 30% 30%;margin-left:-2px}
+.cake-meta{display:flex;align-items:center;gap:12px;justify-content:center;width:100%;text-align:left;border-top:3px dashed var(--line);padding-top:14px}
+.cake-meta b{display:block;font:400 1.35rem/1.1 var(--fd);color:var(--choc)}
+.cake-meta span{display:block;font-size:.9rem;color:var(--muted);line-height:1.35}
+.build-form{background:var(--cream);color:var(--ink);border:3px solid var(--choc);border-radius:20px;padding:22px 18px;box-shadow:8px 8px 0 var(--choc)}
+.build-form fieldset{border:0;margin:0 0 22px;padding:0;min-width:0}
+.build-form legend{display:flex;align-items:center;gap:10px;font:400 1.3rem/1.1 var(--fd);color:var(--choc);padding:0;margin-bottom:10px;width:100%}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt-in{display:flex;flex-direction:column;gap:2px;min-height:68px;height:100%;padding:10px 12px;border:2.5px solid var(--choc);border-radius:12px;background:#FFFDF5;line-height:1.25;transition:background .15s}
+.opt-in b{font-size:.95rem}
+.opt-in small{font-size:.8rem;color:var(--muted)}
+.opt-in em{font:400 .95rem var(--fd);font-style:normal;color:var(--red-d);margin-top:auto;padding-top:3px}
+.opt:hover .opt-in{background:var(--butter-l)}
+.opt input:checked+.opt-in{background:var(--butter);box-shadow:3px 3px 0 var(--choc);transform:translate(-1px,-1px)}
+.opt input:focus-visible+.opt-in{outline:3px solid var(--teal);outline-offset:3px}
+.opt .sw{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid var(--choc);margin-right:6px;vertical-align:-1px}
+.msg-row{display:flex;gap:10px;align-items:center}
+.count{font-size:.8rem;color:var(--muted);text-align:right}
+.build-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-top:14px;border-top:3px dashed var(--line)}
+.fav{display:flex;gap:14px;align-items:center;margin:0 0 22px;padding:10px 12px;border:2.5px dashed var(--choc);border-radius:14px;background:#FFF9EA}
+.fav img{width:84px;height:84px;object-fit:cover;object-position:50% 30%;border-radius:10px;border:2.5px solid var(--choc);flex:none}
+.fav p{margin:0;font-size:.9rem;line-height:1.4}
+.fav b{font-family:var(--fd);font-weight:400;font-size:1.05rem;display:block}
+
+/* story */
+.story{background:var(--grain),#2D170E;background-color:#2D170E;color:var(--cream);overflow:hidden;overflow:clip}
+.story h2{color:var(--cream);font-size:clamp(2.1rem,5.5vw,3.5rem)}
+.story .kicker{color:var(--butter-l)}
+.story-grid{display:grid;gap:56px;align-items:center}
+.story-photos{position:relative;padding-bottom:0}
+.story-photos .big{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 60%;border:5px solid var(--cream);border-radius:6px;transform:rotate(-1.5deg);box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.story-photos .stamp{z-index:2;left:-14px;top:-40px;color:var(--butter);transform:rotate(-12deg);filter:drop-shadow(2px 2px 0 rgba(0,0,0,.4))}
+.story-copy h2{margin-bottom:1.1rem}
+.story-copy p{color:#F3DEBD;font-size:1.05rem}
+.nums{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:34px 0 0;text-align:center}
+.nums li{padding:12px 6px;border:2px dashed rgba(255,244,218,.4);border-radius:12px;font-size:.82rem;line-height:1.3;color:#F3DEBD}
+.nums b{display:block;font:400 2rem/1.1 var(--fd);color:var(--butter)}
+.story blockquote{margin:1.4rem 0;padding:6px 0 6px 20px;border-left:5px solid var(--butter);font:italic 500 1.25rem/1.45 var(--fb);color:var(--cream)}
+.story blockquote cite{display:block;margin-top:8px;font:700 .8rem/1 var(--fb);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--butter-l)}
+.gens{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.6rem 0}
+.gens li{text-align:center;background:rgba(255,244,218,.08);border:2px solid rgba(255,244,218,.3);border-radius:14px;padding:12px 6px;font-size:.85rem;line-height:1.3}
+.gens b{display:block;font:400 1rem var(--fd);color:var(--butter-l);margin-top:4px}
+.gens .av{display:grid;place-items:center}
+.timeline{list-style:none;position:relative;margin:1.6rem 0 0;padding-left:30px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;border-left:3px dashed rgba(255,244,218,.4)}
+.timeline li{position:relative;padding:0 0 18px;color:#F3DEBD;font-size:.98rem;line-height:1.5}
+.timeline li::before{content:"";position:absolute;left:-29px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--butter);border:3px solid #2D170E;box-shadow:0 0 0 2px var(--butter)}
+.timeline b{font:400 1.25rem var(--fd);color:var(--butter);margin-right:8px}
+
+/* weddings */
+.wed{background:var(--grain),var(--butter-l);background-color:var(--butter-l);border-bottom:3px solid var(--choc)}
+.wed-grid{display:grid;gap:36px;align-items:start}
+.arch{position:relative;margin:0 auto;width:100%;max-width:460px;justify-self:center}
+.wed-copy h2{margin-bottom:.9rem}
+.arch img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:58% 50%;border:4px solid var(--choc);border-radius:230px 230px 14px 14px;box-shadow:8px 8px 0 var(--choc);background:var(--cream-2)}
+.arch .fl{position:absolute;right:-8px;top:30px;z-index:2;filter:drop-shadow(3px 3px 0 var(--choc))}
+.arch .stamp{right:-6px;bottom:-26px;color:var(--red);transform:rotate(-10deg);background:var(--cream);border-radius:50%;box-shadow:3px 3px 0 var(--choc)}
+.wed-steps{list-style:none;display:grid;gap:12px;margin:1.4rem 0 0}
+.wed-steps li{display:flex;gap:14px;align-items:flex-start;line-height:1.45;font-size:.98rem}
+.wed-steps .ico-badge{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--cream);border:2.5px solid var(--choc);flex:none}
+.wed-steps b{display:block;font:400 1.1rem var(--fd);color:var(--choc)}
+.tier-hint{display:flex;gap:12px;align-items:center;margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--cream-2);border:2px dashed var(--choc);font-size:.9rem;line-height:1.4;font-weight:600}
+.chk-grid{display:flex;flex-wrap:wrap;gap:8px}
+.pill{position:relative;display:inline-flex}
+.pill input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pill>span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:2.5px solid var(--choc);border-radius:999px;background:#FFFDF5;font-weight:700;font-size:.88rem}
+.pill input:checked+span{background:var(--butter);box-shadow:inset 0 -3px 0 rgba(58,29,18,.25)}
+.pill input:focus-visible+span{outline:3px solid var(--teal);outline-offset:3px}
+
+/* gifts + voices */
+.gifts{background:var(--cream)}
+.gift-grid{display:grid;gap:32px;align-items:center}
+.gc-wrap{position:relative;max-width:440px;margin:0 auto;width:100%}
+.gc-wrap .fl{position:absolute;z-index:2;filter:drop-shadow(2px 2px 0 rgba(58,29,18,.35))}
+.gc-wrap .f1{right:-14px;top:-26px}.gc-wrap .f2{left:-16px;bottom:-18px}
+.gift-card{position:relative;width:100%;max-width:440px;margin:0 auto;aspect-ratio:1.62;border:3px solid var(--choc);border-radius:16px;background:var(--stripes);box-shadow:8px 8px 0 var(--choc);transform:rotate(-2deg);overflow:hidden}
+.gift-card .gc-in{position:absolute;inset:14px;background:var(--grain),var(--cream);background-color:var(--cream);border:2.5px solid var(--choc);border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 16px}
+.gc-top{display:flex;justify-content:space-between;align-items:center}
+.gc-top b{font:400 1.5rem/1 var(--fd);color:var(--red);text-shadow:2px 2px 0 var(--choc)}
+.gc-amt{font:400 clamp(2.4rem,9vw,3.4rem)/1 var(--fd);color:var(--choc)}
+.gc-to{font-size:.85rem;color:var(--muted);line-height:1.3}
+.gc-to b{color:var(--ink);font-size:1rem}
+.amts{display:flex;flex-wrap:wrap;gap:8px}
+.voices{background:var(--paper);background-image:var(--grain);border-block:3px solid var(--choc)}
+.v-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin-bottom:34px;text-align:center}
+.v-head p{margin:0;font-weight:600}
+.v-grid{display:grid;gap:26px}
+.slip{position:relative;background:#FFFDF5;border:2.5px solid var(--choc);border-radius:6px;padding:20px 20px 26px;box-shadow:5px 5px 0 var(--choc);transform:rotate(var(--r,-1deg))}
+.slip::after{content:"";position:absolute;left:-2.5px;right:-2.5px;bottom:-12px;height:12px;background:radial-gradient(circle at 50% 0,transparent 6px,#FFFDF5 6.5px) 0 0/16px 100% repeat-x;filter:drop-shadow(0 2px 0 var(--choc))}
+.slip q{display:block;font-style:italic;font-size:1.02rem;line-height:1.55;quotes:none}
+.slip footer{display:flex;align-items:center;gap:10px;margin-top:14px;padding:0;background:none;color:var(--muted);font-size:.86rem;line-height:1.3}
+.slip footer b{display:block;color:var(--ink)}
+
+/* visit */
+.visit{border-block:3px solid var(--choc)}
+.visit-grid{display:grid;gap:26px}
+.hours{list-style:none;display:grid;gap:0;margin:0 0 14px}
+.hours li{display:flex;justify-content:space-between;gap:12px;padding:9px 6px;border-bottom:2px dotted var(--line);font-weight:600}
+.hours li.today{background:var(--butter-l);border-radius:8px;border-bottom-color:transparent}
+.hours li.shut{color:var(--red-d)}
+.open-now{display:flex;gap:10px;align-items:center;font-weight:700;padding:10px 12px;border-radius:10px;background:#D6EEE7;color:#0B4F4D;line-height:1.3}
+.open-now.closed{background:#FFD8CC;color:#85200F}
+.oven{list-style:none;position:relative;margin:0;padding:0 0 0 4px}
+.oven li{position:relative;display:grid;grid-template-columns:84px 1fr;gap:10px;padding:8px 0;line-height:1.35;font-size:.95rem;align-items:start}
+.oven-note{margin:.9rem 0 0;font-size:.86rem;line-height:1.45;color:var(--muted)}
+.oven .t{font:400 .95rem/1.4 var(--fd);color:var(--red-d);white-space:nowrap}
+.oven .d{display:flex;gap:10px;align-items:flex-start}
+.oven .d b{display:block}
+.oven li.now{background:var(--butter-l);border-radius:8px;margin:0 -8px;padding:8px}
+.map{position:relative;aspect-ratio:1/1;background:#EBDAB7;border:3px solid var(--choc);border-radius:16px;overflow:hidden;box-shadow:6px 6px 0 var(--choc);margin:0}
+.map .st{position:absolute;background:#FFF6DC;border:3px solid var(--choc)}
+.map .h{left:-4px;right:-4px;top:54%;height:46px;border-inline:0}
+.map .v{top:-4px;bottom:-4px;left:58%;width:46px;border-block:0}
+.map .h::after,.map .v::after{content:"";position:absolute;inset:50% 0 auto;border-top:3px dashed rgba(58,29,18,.35)}
+.map .v::after{inset:0 auto 0 50%;border-top:0;border-left:3px dashed rgba(58,29,18,.35)}
+.map .blk{position:absolute;background:#DCC08C;border:2.5px solid var(--choc);border-radius:8px}
+.map .park{position:absolute;background:#A9CF9F;border:2.5px solid var(--choc);border-radius:12px;display:grid;place-items:center;color:#1E5A2E;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.map .lbl{position:absolute;font:700 .62rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--choc);background:#FFF6DC;padding:2px 6px;border-radius:4px}
+.map .pin{position:absolute;display:grid;place-items:center;text-align:center;line-height:1}
+.map .pin span.cap{margin-top:3px;font:700 .64rem/1.1 var(--fb);background:var(--cream);border:2px solid var(--choc);border-radius:6px;padding:2px 5px;white-space:nowrap}
+.addr{font-style:normal;line-height:1.55}
+.contact{list-style:none;display:grid;gap:8px;margin:14px 0}
+.contact li{display:flex;gap:10px;align-items:center}
+.contact a{display:inline-flex;align-items:center;min-height:44px}
+
+/* allergens + faq */
+.allergens{background:var(--cream)}
+.alg-grid{display:grid;gap:14px;grid-template-columns:1fr}
+.alg-card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:#FFF9EA;border:2.5px solid var(--choc);border-radius:14px;padding:14px 16px;box-shadow:4px 4px 0 var(--choc)}
+.alg-card .ico-badge{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--butter-l);border:2.5px solid var(--choc);flex:none}
+.alg-card.v .ico-badge{background:#CDEBDD}
+.alg-card h3{font-size:1.2rem;margin-bottom:2px}
+.alg-card p{margin:0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.alg-card p b{color:var(--ink)}
+.alg-card p a{display:inline-block;padding:11px 2px;margin:-11px 0}
+.alg-note{display:flex;gap:14px;align-items:flex-start;margin:26px auto 0;max-width:820px;padding:16px 18px;border:3px solid var(--choc);border-radius:14px;background:var(--cream-2);line-height:1.5;font-size:.96rem}
+.faq{background:var(--paper);background-image:var(--grain);border-block:3px solid var(--choc)}
+.faq-list{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.faq details{background:#FFF9EA;border:2.5px solid var(--choc);border-radius:14px;box-shadow:4px 4px 0 var(--choc)}
+.faq summary{display:flex;align-items:center;gap:12px;list-style:none;min-height:56px;padding:10px 16px;font:400 1.1rem/1.25 var(--fd);color:var(--choc);cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{margin-left:auto;transition:transform .2s;flex:none}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+.faq details p{margin:0;padding:0 18px 18px 56px;line-height:1.6}
+
+/* credits + footer */
+#credits{background:var(--cream-2);padding:48px 0 40px;border-top:3px solid var(--choc);font-size:.88rem}
+#credits h2{font-size:1.6rem;margin-bottom:.8rem}
+#credits ul{list-style:none;display:grid;gap:6px 36px;margin:0 0 1rem;grid-template-columns:1fr}
+#credits li{line-height:1.45}
+#credits li b{font-weight:700}
+#credits p{margin:.4rem 0 0;color:var(--muted)}
+.site-foot{background:var(--choc);color:#F1DDBB;padding:56px 0 96px;font-size:.95rem}
+.site-foot a{color:#FBD98B}
+.foot-grid{display:grid;gap:34px}
+.foot-grid h3{font-size:1.1rem;color:var(--butter);margin-bottom:.7rem;letter-spacing:.02em}
+.foot-grid ul{list-style:none;display:grid;gap:4px}
+.foot-grid ul li{display:flex;gap:10px;align-items:center;min-height:36px}
+.foot-logo b{display:block;font:400 2.4rem/1 var(--fd);color:var(--butter);text-shadow:2px 2px 0 #000}
+.foot-logo .stamp{position:static;display:block;width:112px;height:112px;margin-top:22px;color:var(--butter);transform:rotate(-8deg)}
+.foot-logo p{margin:.8rem 0 0;max-width:30em;line-height:1.55}
+.news{display:flex;gap:8px;flex-wrap:wrap}
+.news input{flex:1 1 180px;min-height:48px;padding:10px 14px;border-radius:999px;border:2.5px solid var(--butter);background:#2A140C;color:var(--cream)}
+.news input::placeholder{color:#C9AE8B}
+.news-msg{margin:8px 0 0;font-size:.88rem;min-height:1.3em}
+.fine{margin:36px 0 0;padding-top:18px;border-top:2px dashed rgba(255,244,218,.3);font-size:.84rem;color:#D9BF98;line-height:1.55}
+
+@media(min-width:700px){
+  .opts{grid-template-columns:repeat(4,1fr)}
+  .opts.three{grid-template-columns:repeat(3,1fr)}
+  .alg-grid{grid-template-columns:1fr 1fr}
+  .v-grid{grid-template-columns:repeat(3,1fr)}
+  #credits ul{grid-template-columns:1fr 1fr}
+  .build-form{padding:30px 30px}
+  .foot-grid{grid-template-columns:1.3fr 1fr 1fr}
+  .gift-grid{grid-template-columns:1fr 1fr;gap:48px}
+}
+@media(min-width:1000px){
+  .builder{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px}
+  .cake-stage{position:sticky;top:112px}
+  .story-grid{grid-template-columns:1fr 1fr;gap:72px}
+  .story-photos{align-self:start;position:sticky;top:132px}
+  .wed-grid{grid-template-columns:.85fr 1.15fr;gap:56px}
+  .arch{position:sticky;top:112px}
+  .visit-grid{grid-template-columns:1fr 1fr 1fr;gap:34px}
+  .alg-grid{grid-template-columns:repeat(3,1fr)}
+}
+html[data-level="0"] .ico-badge{background:var(--cream)}
+.ico-badge .kit-fb{font-size:1.45rem}
+/* big feature slots: the Basic emoji grows with the slot so it never floats in an empty card */
+.empty-basket>.kit-ico>.kit-fb,.empty>.kit-ico>.kit-fb,.done>.kit-ico>.kit-fb{font-size:2.6rem;line-height:1}
+.gens .av>.kit-ico>.kit-fb{font-size:2.5rem;line-height:1}
+.alg-note>.kit-ico>.kit-fb{font-size:1.9rem;line-height:1}
+.gc-top>.kit-ico>.kit-fb{font-size:2.2rem;line-height:1}
+.map .pin>.kit-ico>.kit-fb{line-height:1}
+.map .pin>.kit-ico[data-ico=map-pin]>.kit-fb{font-size:2.4rem}
+.map .pin>.kit-ico:not([data-ico=map-pin])>.kit-fb{font-size:1.6rem}
+.alg .kit-fb{font-size:.95rem}
+.btn .kit-fb{font-size:1.1em;font-weight:700}
+#live-queue .kit-fb,.done .kit-live .kit-fb{font:400 2.6rem/1 var(--fd);color:var(--red-d)}
+#live-price .kit-fb{font:400 2.3rem/1 var(--fd);color:var(--red-d)}
+#live-clock .kit-fb,#live-ring .kit-fb{font:400 1.3rem/1 var(--fd);color:var(--choc)}
+#cart-live .kit-fb{font-size:1rem;font-weight:700}
+html[data-level="0"] #step-1 .kit-fb,html[data-level="0"] #step-2 .kit-fb,html[data-level="0"] #step-3 .kit-fb,html[data-level="0"] #step-4 .kit-fb{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--butter);border:2.5px solid var(--choc);font:400 1rem/1 var(--fd)}
+.v-head .kit-fb{font-size:2rem;color:var(--red);letter-spacing:.1em}
+html[data-level="0"] .cat-head .ico-badge{background:var(--butter-l)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
+@media print{.site-head,.drawer,.scrim,.toast{display:none}}
+</style>
+</head>
+<body id="top">
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Rosa&#39;s Corner Bakery is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs><path id="stamp-circ" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs>
+  <symbol id="stamp" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="3"/>
+    <circle cx="60" cy="60" r="51" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 3"/>
+    <circle cx="60" cy="60" r="32" fill="none" stroke="currentColor" stroke-width="2"/>
+    <text font-family="Chonburi,Georgia,serif" font-size="8.6" fill="currentColor"><textPath href="#stamp-circ" textLength="258" lengthAdjust="spacing">ROSA'S CORNER BAKERY ★ ALDER FALLS ★</textPath></text>
+    <text x="60" y="51" text-anchor="middle" font-family="Chonburi,Georgia,serif" font-size="10" letter-spacing="3" fill="currentColor">EST.</text>
+    <text x="60" y="75" text-anchor="middle" font-family="Chonburi,Georgia,serif" font-size="23" fill="currentColor">1961</text>
+  </symbol>
+</svg>
+
+<a class="sr skip" href="#main">Skip to the content</a>
+<div class="announce" role="note"><span data-ico="alarm-clock" data-size="18">⏰</span> Ovens are on at 4 am. <b>Closed Mondays.</b> Order by 5 pm for tomorrow, or the same day while slots last. Cakes need 48 hours.</div>
+
+<header class="site-head">
+  <div class="wrap head-row">
+    <div class="head-left">
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span data-ico="menu" data-size="24">☰</span></button>
+      <nav aria-label="Shop">
+        <ul class="nav-list">
+          <li><a href="#bake">Today's bake</a></li>
+          <li><a href="#order">Order ahead</a></li>
+          <li><a href="#cakes">Cakes</a></li>
+        </ul>
+      </nav>
+    </div>
+    <a class="logo" href="#top" aria-label="Rosa's Corner Bakery, home"><b>Rosa's</b><small>Corner Bakery · Est. 1961</small></a>
+    <div class="head-right">
+      <nav aria-label="About">
+        <ul class="nav-list">
+          <li><a href="#weddings">Weddings</a></li>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+      <button class="basket-btn" id="basket-btn" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-label="Open basket, empty">
+        <span data-live="cart-count" data-p-count="0" data-size="34" data-label="" id="cart-live">🛒 0</span>
+        <span class="b-txt">Basket</span><span class="basket-sum" id="basket-sum">$0</span>
+      </button>
+    </div>
+  </div>
+  <nav id="mnav" class="mnav" aria-label="Menu">
+    <a href="#bake"><span data-ico="chef-hat" data-size="24">🥖</span> Today's bake</a>
+    <a href="#order"><span data-ico="shopping-bag" data-size="24">🛍️</span> Order ahead</a>
+    <a href="#cakes"><span data-ico="cake" data-size="24">🎂</span> Custom cakes</a>
+    <a href="#weddings"><span data-ico="ring-box" data-size="24">💍</span> Wedding cakes</a>
+    <a href="#story"><span data-ico="heart" data-size="24">❤️</span> Our story</a>
+    <a href="#visit"><span data-ico="map-pin" data-size="24">📍</span> Hours and visit</a>
+  </nav>
+  <div class="valance" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <img class="hero-img" src="_img/rosas-bakery/29380155-1600.jpg" width="1200" height="800" fetchpriority="high" decoding="async" alt="A long wooden bakery counter in front of shelves of fresh loaves, rolls and pastries, with round loaves mounted on small plaques along the wall above.">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker k-light"><span data-ico="sparkles" data-size="18" data-min-level="2"></span> Neighbourhood bakery · Marigold &amp; Ninth</p>
+      <h1>Warm from <span class="nw">the oven</span> <em>since 1961.</em></h1>
+      <p class="lead">Rosa's has kept the corner of Marigold and Ninth awake since before the streetlights were electric. Sourdough at six, croissants at half past, a cherry-top cake on Saturdays. Pick from today's bake, choose a time, and we'll have it in a paper bag with your name on it.</p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="#bake"><span data-ico="shopping-bag" data-size="22">🛍️</span> Order ahead</a>
+        <a class="btn btn-cream" href="#cakes"><span data-ico="cake" data-size="22" data-sample data-motion="hover">🎂</span> Build a cake</a>
+      </div>
+      <ul class="hero-facts">
+        <li><span data-ico="door-open" data-size="22">🚪</span> <span id="hero-open">Checking the sign on the door</span></li>
+        <li><span data-ico="clock" data-size="22">🕐</span> Tue to Sat 6 am to 6 pm · Sun 6 am to 2 pm · closed Mon</li>
+        <li><span data-ico="map-pin" data-size="22">📍</span> 214 Marigold Street, Alder Falls. Pick-up only, no delivery.</li>
+      </ul>
+    </div>
+    <aside class="tk" aria-label="Pick-up counter">
+      <span class="tk-hat" data-ico="chef-hat" data-size="104" data-min-level="2" data-motion="inview"></span>
+      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><use href="#stamp"/></svg>
+      <p class="tk-label">Pick-up counter</p>
+      <div class="tk-now">
+        <b id="tk-title">Now serving</b>
+        <span data-live="ticket-number" data-p-number="47" data-p-hash="true" data-size="92" data-label="Now serving ticket 47" id="live-queue">#47</span>
+      </div>
+      <ul>
+        <li><span data-ico="shopping-bag" data-size="22">🛍️</span> <span id="tk-ready">6 orders waiting, names on the bags</span></li>
+        <li><span data-ico="flame" data-size="22">🔥</span> <span id="tk-next">Next out: apricot danish, 11:00 am</span></li>
+      </ul>
+      <a class="btn btn-red btn-sm" href="#order">Reserve a pick-up time <span data-ico="arrow-right" data-size="18">→</span></a>
+    </aside>
+  </div>
+  <p class="photo-credit">Photo by <a href="https://www.pexels.com/@valeriya">Valeria Boltneva</a> on <a href="https://www.pexels.com/photo/29380155/">Pexels</a></p>
+</section>
+
+<section class="strip kraft" aria-label="How Rosa's works">
+  <div class="wrap">
+    <ul>
+      <li><span class="ico-badge"><span data-ico="alarm-clock" data-size="30" data-motion="hover">⏰</span></span><span>Ovens on at 4 am<small>Bread is warm when the doors open</small></span></li>
+      <li><span class="ico-badge"><span data-ico="shopping-bag" data-size="30" data-motion="hover">🛍️</span></span><span>Order ahead, pick up<small>Skip the line, no delivery</small></span></li>
+      <li><span class="ico-badge"><span data-ico="wallet" data-size="30" data-motion="hover">💳</span></span><span>Cash and card<small>Pay at the counter</small></span></li>
+      <li><span class="ico-badge"><span data-ico="door-closed" data-size="30" data-motion="hover">🚪</span></span><span>Closed Mondays<small>The ovens get a day off</small></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section bake" id="bake" aria-labelledby="bake-h">
+  <div class="wrap">
+    <div class="board">
+      <div class="board-head scallop-bottom">
+        <div>
+          <p class="kicker k-light">Fresh out of the oven</p>
+          <h2 id="bake-h">Today's bake</h2>
+          <p class="date-line"><span data-ico="calendar-days" data-size="22">📅</span> <span id="bake-date">Today</span></p>
+          <p class="demo-note" id="demo-note" hidden></p>
+        </div>
+        <div class="clockbox">
+          <div class="cb-row">
+            <span data-live="clock-time" data-p-time="09:40" data-size="64" data-label="Bakery clock: 9:40 am" id="live-clock">9:40</span>
+            <div class="grow">
+              <div class="cb-label"><label for="clock-range">Bakery clock</label><output class="cb-time" id="clock-out" for="clock-range">9:40 am</output></div>
+              <input type="range" id="clock-range" min="240" max="1080" step="5" value="580" aria-describedby="clock-help">
+              <p class="sr" id="clock-help">Slide to see what is in the case at another time of day.</p>
+            </div>
+          </div>
+          <div class="cb-next">
+            <span data-live="timer-ring" data-p-left="20" data-p-total="60" data-size="54" id="live-ring" data-label="Minutes until the next batch">20</span>
+            <span id="next-out">Checking the ovens</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="board-body">
+        <div class="filters">
+          <div class="chips" id="cat-chips" role="group" aria-label="Show">
+            <button class="chip" type="button" data-cat="all" aria-pressed="true"><span data-ico="utensils" data-size="26">🍽️</span> Everything</button>
+            <button class="chip" type="button" data-cat="bread" aria-pressed="false"><span data-ico="chef-hat" data-size="26">🍞</span> Breads</button>
+            <button class="chip" type="button" data-cat="pastry" aria-pressed="false"><span data-ico="donut" data-size="26">🥐</span> Pastries</button>
+            <button class="chip" type="button" data-cat="sweet" aria-pressed="false"><span data-ico="cookie" data-size="26">🍪</span> Cookies and pies</button>
+            <button class="chip" type="button" data-cat="cake" aria-pressed="false"><span data-ico="cake" data-size="26">🎂</span> Cakes</button>
+          </div>
+          <div class="filter-line chips" id="avoid-chips" role="group" aria-label="Allergen filters">
+            <b>Hide anything with</b>
+            <button class="chip alt" type="button" data-avoid="W" aria-pressed="false"><span data-ico="sprout" data-size="24">🌾</span> Wheat</button>
+            <button class="chip alt" type="button" data-avoid="M" aria-pressed="false"><span data-ico="droplet" data-size="24">🥛</span> Milk</button>
+            <button class="chip alt" type="button" data-avoid="E" aria-pressed="false"><span data-ico="egg" data-size="24">🥚</span> Egg</button>
+            <button class="chip alt" type="button" data-avoid="N" aria-pressed="false"><span data-ico="hexagon" data-size="24">🌰</span> Tree nuts</button>
+            <button class="chip alt" type="button" data-vegan="1" aria-pressed="false"><span data-ico="leaf" data-size="24">🌱</span> Vegan only</button>
+          </div>
+        </div>
+        <div class="board-grid">
+          <div>
+            <ul class="bake-list" id="bake-list"></ul>
+            <div class="empty" id="bake-empty" hidden>
+              <span data-ico="search" data-size="44">🔍</span>
+              <b>Nothing matches that combination</b>
+              <p>Try turning one of the allergen filters off. Rosa's makes everything in one kitchen, so ask us at the counter if you are unsure.</p>
+              <button class="btn btn-sm" type="button" id="clear-filters">Show everything again</button>
+            </div>
+          </div>
+          <div class="plate-col">
+            <div class="plate-stack" id="plates">
+              <figure class="plate" data-cat="all"><img src="_img/rosas-bakery/9180199-600.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 35%" alt="Tall wicker baskets stacked with crusty baguettes beside a burnt-orange wall and a marble counter in the bakery."><figcaption>Baguettes, fresh at six</figcaption></figure>
+              <figure class="plate" data-cat="bread" hidden><img src="_img/rosas-bakery/30826792-600.jpg" width="1200" height="900" loading="lazy" decoding="async" style="object-position:50% 55%" alt="Round scored sourdough loaves standing in brown paper bags in a big wooden basket lined with burlap."><figcaption>Sourdough, ready in paper bags</figcaption></figure>
+              <figure class="plate" data-cat="pastry" hidden><img src="_img/rosas-bakery/16192282-600.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 55%" alt="Golden, flaky butter croissants piled in a black woven basket."><figcaption>Butter croissants, 6:30 am</figcaption></figure>
+              <figure class="plate" data-cat="sweet" hidden><img src="_img/rosas-bakery/20558711-600.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 50%" alt="Chocolate chip cookies on a parchment-lined baking tray, one broken open to show the melted chocolate inside."><figcaption>Brown-butter chocolate chip</figcaption></figure>
+              <figure class="plate" data-cat="cake" hidden><img src="_img/rosas-bakery/9045540-600.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 55%" alt="Chocolate and vanilla cupcakes with swirled frosting in paper cases on a rustic wooden board."><figcaption>Cupcakes from half past ten</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="board-foot">
+        <ul aria-label="What the labels mean">
+          <li><span data-ico="flame" data-size="20">🔥</span> Warm now</li>
+          <li><span data-ico="hourglass" data-size="20">⏳</span> Still in the oven</li>
+          <li><span data-ico="x-circle" data-size="20">❌</span> Sold out</li>
+        </ul>
+        <span><span data-ico="info-circle" data-size="20">ℹ️</span> Out times are when the tray leaves the oven. Counts are what is left in the case.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case kraft" aria-labelledby="case-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Pinned up like the old days</p>
+      <h2 id="case-h">Out of the case this week</h2>
+      <p>The counter changes with the season and with whatever Lucía felt like laminating. Here is what the regulars have been taking home.</p>
+    </div>
+    <div class="case-grid">
+      <figure class="pol" style="--r:-3deg;--t:4deg"><img src="_img/rosas-bakery/30681620-600.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:40% 55%" alt="Low view through a glass bakery case at silver trays of powdered-sugar puff pastries, strawberry and berry tartlets and cream-filled buns."><figcaption>Berry tartlets and cream buns<small>The pastry case, Tuesday to Saturday</small></figcaption></figure>
+      <figure class="pol" style="--r:2deg;--t:-3deg"><img src="_img/rosas-bakery/6163264-600.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 65%" alt="A lattice-topped fruit pie of dark cherries and diced apple dusted with powdered sugar on a white plate."><figcaption>Cherry-apple lattice pie<small>Whole 9-inch $28, order by Thursday</small></figcaption></figure>
+      <figure class="pol" style="--r:-1.5deg;--t:3deg"><img src="_img/rosas-bakery/14520462-600.jpg" width="1200" height="900" loading="lazy" decoding="async" style="object-position:40% 50%" alt="Close-up of oat-topped loaves and floured round breads on a wooden bakery shelf, sharp in front and softly blurred behind."><figcaption>Oat and honey loaves<small>Out at 6:30, $6.25</small></figcaption></figure>
+      <figure class="pol" style="--r:3deg;--t:-4deg"><img src="_img/rosas-bakery/photo-1725297952102-ab28892a31ab-600.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 50%" alt="Close-up of golden, flour-dusted loaves and rolls of bread piled together on a rustic cloth."><figcaption>Saturday hard rolls<small>$6 a half dozen, while they last</small></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="dayold" aria-labelledby="dayold-h">
+  <div class="dayold-img"><img src="_img/rosas-bakery/590771-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Rows of iced donuts with chocolate sprinkles in pink, pistachio-green and chocolate glazes on a metal tray."></div>
+  <div class="dayold-copy">
+    <div>
+      <p class="kicker k-light">After 4 pm, Tuesday to Saturday, in the shop only</p>
+      <h2 id="dayold-h">The day-old bag</h2>
+      <p>Six dollars buys a paper bag of whatever is left from today, about fifteen dollars' worth of bread, pastries and the odd donut. Nothing goes in the bin on Marigold Street, and it is the best deal on the block.</p>
+    </div>
+    <span class="bagart" aria-hidden="true"><span class="bag-ico" data-ico="shopping-bag" data-size="150" data-min-level="2" data-motion="inview"></span><span class="half-stamp">Under<br>half</span></span>
+  </div>
+</section>
+
+<section class="section order" id="order" aria-labelledby="order-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="orn" data-min-level="2" aria-hidden="true"><i></i><span data-ico="cookie" data-size="34"></span><span data-ico="donut" data-size="34"></span><span data-ico="chef-hat" data-size="40" data-motion="hover"></span><span data-ico="cake" data-size="34"></span><span data-ico="egg" data-size="34"></span><i></i></div>
+      <p class="kicker">Skip the line</p>
+      <h2 id="order-h">Order ahead, pick up warm</h2>
+      <p>Add what you like from today's bake, choose a day and a time, and give us your name. We set everything aside in a paper bag. You pay at the counter, cash or card.</p>
+    </div>
+    <ol class="how">
+      <li><span class="ico-badge"><span data-ico="shopping-basket" data-size="30" data-motion="hover">🧺</span></span><span><b>1. Choose</b>Add loaves, pastries or a cake to your basket.</span></li>
+      <li><span class="ico-badge"><span data-ico="calendar-clock" data-size="30" data-motion="hover">📅</span></span><span><b>2. Pick a time</b>A day and a half-hour slot. Cakes need 48 hours.</span></li>
+      <li><span class="ico-badge"><span data-ico="shopping-bag" data-size="30" data-motion="hover">🛍️</span></span><span><b>3. Collect</b>Say your name at the counter. We hold bags until closing.</span></li>
+    </ol>
+
+    <div class="order-grid">
+      <div class="card" id="basket-card" style="grid-area:basket">
+        <div class="card-head"><span class="ico-badge"><span data-ico="shopping-basket" data-size="28" data-motion="hover">🧺</span></span><h3>Your basket</h3></div>
+        <div class="empty-basket" id="basket-empty">
+          <span data-ico="shopping-bag" data-size="56">🛍️</span>
+          <b>Nothing in the basket yet</b>
+          <p>Tap Add on anything in today's bake, or build a cake, and it lands here.</p>
+          <a class="btn btn-sm" href="#bake">See today's bake</a>
+        </div>
+        <ul class="lines" id="basket-lines"></ul>
+        <div class="totals" id="basket-totals" hidden>
+          <div class="tot-row"><span>Subtotal</span><b id="sum-sub">$0</b></div>
+          <div class="progress" role="progressbar" aria-label="Progress to the free cookie" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="perk-bar"><i></i></div>
+          <p class="perk"><span data-ico="cookie" data-size="24">🍪</span> <span id="perk-text">Add $20 and Rosa tucks in a free cookie.</span></p>
+          <div class="tot-row big"><span>Total</span><span id="sum-total">$0</span></div>
+          <small class="tot-row"><small>Pay at the counter. Prices include tax.</small></small>
+        </div>
+      </div>
+
+      <div class="card" style="grid-area:pickup">
+        <div class="card-head"><span class="ico-badge"><span data-ico="calendar-clock" data-size="28" data-motion="hover">📅</span></span><h3>Pick-up day and time</h3></div>
+        <div class="lbl" id="days-lbl">Day</div>
+        <div class="days" id="days" role="group" aria-labelledby="days-lbl"></div>
+        <div class="slots-head"><span id="slots-lbl">Time</span><small id="slots-note">Every half hour</small></div>
+        <div class="slots" id="slots" role="group" aria-labelledby="slots-lbl"></div>
+        <p class="slot-note"><span data-ico="info-circle" data-size="22">ℹ️</span> <span id="ready-note">Crossed-out times are taken or too soon.</span></p>
+        <div class="pick-sum" id="pick-sum"><span data-ico="clock" data-size="26">🕐</span> <span id="pick-text">Choose a time to see your pick-up slot.</span></div>
+      </div>
+
+      <form class="card" id="order-form" action="#" novalidate style="grid-area:details">
+        <div class="card-head"><span class="ico-badge"><span data-ico="user" data-size="28" data-motion="hover">👤</span></span><h3>Name on the bag</h3></div>
+        <p class="form-msg" id="order-msg" role="alert"></p>
+        <div class="row2">
+          <div class="field" id="f-name"><label for="o-name">Your name</label><input id="o-name" name="name" type="text" autocomplete="name" placeholder="Maya Okafor" required aria-describedby="e-name"><p class="err" id="e-name">Please tell us whose bag it is.</p></div>
+          <div class="field" id="f-phone"><label for="o-phone">Phone</label><input id="o-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(415) 555-0123" required aria-describedby="e-phone"><p class="err" id="e-phone">Enter a number we can text, like (415) 555-0123.</p></div>
+        </div>
+        <label class="check"><input type="checkbox" id="o-slice"> Slice my loaves, no charge</label>
+        <div class="field"><label for="o-note">Anything we should know? <span style="font-weight:400">(optional)</span></label><textarea id="o-note" name="note" rows="3" placeholder="A candle for the cupcakes, please. Someone is turning six."></textarea></div>
+        <button class="btn btn-red" type="submit"><span data-ico="check-circle" data-size="22">✅</span> Place pre-order · <span id="submit-total">$0</span></button>
+        <p class="hint" style="margin:.9rem 0 0;font-size:.85rem;color:var(--muted)">Nothing is charged online. You can change or cancel by phone until 5 pm the day before.</p>
+      </form>
+
+      <div class="card" id="order-done" hidden style="grid-area:details"></div>
+
+      <figure class="bag-photo" style="grid-area:photo">
+        <img src="_img/rosas-bakery/14007233-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Fresh crusty rolls tucked into brown paper bags on a wooden counter beside a vintage red-and-steel slicer.">
+        <figcaption><span data-ico="heart" data-size="20">❤️</span> The slicer is older than Lucía. It still does a perfect half-inch.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section cakes on-dark" id="cakes" aria-labelledby="cakes-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="sparkles" data-size="18" data-min-level="2"></span> Made to order</p>
+      <h2 id="cakes-h">Build your own cake</h2>
+      <p>Pick a size, a flavour, a filling and what the icing should say. The price updates as you go and the cake changes with you. Custom cakes need 48 hours.</p>
+    </div>
+    <div class="builder">
+      <div class="cake-stage">
+        <span class="stage-tag"><span data-ico="sparkles" data-size="18" data-min-level="2"></span> Your cake, as ordered</span>
+        <span class="fl big1" data-ico="party-popper" data-size="88" data-min-level="2" data-motion="inview"></span><span class="fl big2" data-ico="balloon" data-size="72" data-min-level="2" data-motion="inview"></span><span class="fl s1" data-ico="star" data-size="34" data-min-level="2"></span><span class="fl s2" data-ico="sparkles" data-size="30" data-min-level="2"></span><span class="fl s3" data-ico="heart" data-size="28" data-min-level="2"></span>
+        <div class="cake-wrap">
+          <div class="cake" id="cake" role="img" aria-label="Preview of your cake">
+            <div class="c-extra" id="c-extra"></div>
+            <div class="c-top"></div>
+            <div class="c-body"><div class="c-msg" id="c-msg"></div></div>
+            <div class="c-plate"></div>
+          </div>
+        </div>
+        <div class="cake-meta">
+          <span data-live="ribbon-label" data-p-text="$58" data-size="92" id="live-price" data-label="Cake price, 58 dollars">$58</span>
+          <div><b id="cake-title">8 inch vanilla bean</b><span id="cake-sub">Raspberry jam, serves 12 to 14</span><span id="cake-ready">Ready from Thursday</span><div class="cake-total">Total <strong id="cake-total">$58</strong></div></div>
+        </div>
+      </div>
+
+      <form class="build-form" id="cake-form" action="#" novalidate>
+        <div class="fav">
+          <img src="_img/rosas-bakery/photo-1692623615620-b48b8dba0fc8-400.jpg" width="1200" height="890" loading="lazy" decoding="async" alt="A tall white buttercream layer cake with piped ruffles around the top and glossy red cherries on top, against a pale blue background.">
+          <p><b>The Cherry-top, our Saturday cake</b>Eight inches of vanilla, raspberry jam and piped buttercream, with three cherries. <button class="link-btn" type="button" id="start-cherry">Start from this one</button></p>
+        </div>
+
+        <fieldset>
+          <legend id="step-size-h"><span data-live="step-number" data-p-step="1" data-size="36" id="step-1" data-label="Step 1">1</span> Size</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="size" value="6" data-price="42" data-serves="6 to 8" data-w="270" data-h="146"><span class="opt-in"><b>6 inch</b><small>Serves 6 to 8</small><em>$42</em></span></label>
+            <label class="opt"><input type="radio" name="size" value="8" data-price="58" data-serves="12 to 14" data-w="330" data-h="172" checked><span class="opt-in"><b>8 inch</b><small>Serves 12 to 14</small><em>$58</em></span></label>
+            <label class="opt"><input type="radio" name="size" value="10" data-price="78" data-serves="20 to 24" data-w="390" data-h="196"><span class="opt-in"><b>10 inch</b><small>Serves 20 to 24</small><em>$78</em></span></label>
+            <label class="opt"><input type="radio" name="size" value="sheet" data-price="118" data-serves="40 to 48" data-w="470" data-h="118"><span class="opt-in"><b>Half sheet</b><small>Serves 40 to 48</small><em>$118</em></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span data-live="step-number" data-p-step="2" data-size="36" id="step-2" data-label="Step 2">2</span> Flavour</legend>
+          <div class="opts three">
+            <label class="opt"><input type="radio" name="flavour" value="Vanilla bean" data-add="0" data-c="#F5E1B0" checked><span class="opt-in"><b><i class="sw" style="background:#F5E1B0"></i>Vanilla bean</b><small>Our house sponge</small><em>Included</em></span></label>
+            <label class="opt"><input type="radio" name="flavour" value="Dark chocolate" data-add="0" data-c="#6B3A25"><span class="opt-in"><b><i class="sw" style="background:#6B3A25"></i>Dark chocolate</b><small>With cocoa and coffee</small><em>Included</em></span></label>
+            <label class="opt"><input type="radio" name="flavour" value="Red velvet" data-add="4" data-c="#B83A35"><span class="opt-in"><b><i class="sw" style="background:#B83A35"></i>Red velvet</b><small>Buttermilk, a little cocoa</small><em>+$4</em></span></label>
+            <label class="opt"><input type="radio" name="flavour" value="Lemon poppy seed" data-add="4" data-c="#F7E48E"><span class="opt-in"><b><i class="sw" style="background:#F7E48E"></i>Lemon poppy seed</b><small>Zest and a lemon soak</small><em>+$4</em></span></label>
+            <label class="opt"><input type="radio" name="flavour" value="Brown-butter almond" data-add="6" data-c="#E6C48C" data-nuts="1"><span class="opt-in"><b><i class="sw" style="background:#E6C48C"></i>Brown-butter almond</b><small>Contains tree nuts</small><em>+$6</em></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span data-live="step-number" data-p-step="3" data-size="36" id="step-3" data-label="Step 3">3</span> Filling</legend>
+          <div class="opts three">
+            <label class="opt"><input type="radio" name="filling" value="Raspberry jam" data-add="0" data-c="#C23B4E" checked><span class="opt-in"><b><i class="sw" style="background:#C23B4E"></i>Raspberry jam</b><small>Made in the back kitchen</small><em>Included</em></span></label>
+            <label class="opt"><input type="radio" name="filling" value="Chocolate ganache" data-add="4" data-c="#4A2517"><span class="opt-in"><b><i class="sw" style="background:#4A2517"></i>Chocolate ganache</b><small>Dark, glossy, rich</small><em>+$4</em></span></label>
+            <label class="opt"><input type="radio" name="filling" value="Lemon curd" data-add="4" data-c="#F3C623"><span class="opt-in"><b><i class="sw" style="background:#F3C623"></i>Lemon curd</b><small>Sharp and bright</small><em>+$4</em></span></label>
+            <label class="opt"><input type="radio" name="filling" value="Cream cheese" data-add="3" data-c="#FFF1CC"><span class="opt-in"><b><i class="sw" style="background:#FFF1CC"></i>Cream cheese</b><small>Tangy, whipped light</small><em>+$3</em></span></label>
+            <label class="opt"><input type="radio" name="filling" value="Salted caramel" data-add="5" data-c="#C47A2C"><span class="opt-in"><b><i class="sw" style="background:#C47A2C"></i>Salted caramel</b><small>Cooked until just dark</small><em>+$5</em></span></label>
+            <label class="opt"><input type="radio" name="filling" value="Strawberry cream" data-add="4" data-c="#F2A3A8"><span class="opt-in"><b><i class="sw" style="background:#F2A3A8"></i>Strawberry cream</b><small>Fresh berries, whipped</small><em>+$4</em></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span data-live="step-number" data-p-step="4" data-size="36" id="step-4" data-label="Step 4">4</span> What should it say?</legend>
+          <div class="field" style="margin-bottom:8px">
+            <label class="sr" for="c-text">Message piped on the cake</label>
+            <input id="c-text" type="text" maxlength="28" placeholder="Happy Birthday, Nonna" autocomplete="off" aria-describedby="c-count">
+            <div class="count" id="c-count">28 letters left. Piped in red icing.</div>
+          </div>
+          <div class="chk-grid" role="group" aria-label="Extras">
+            <label class="pill"><input type="checkbox" name="extra" value="cherries" data-add="3"><span><span data-ico="choco-strawberry" data-size="22">🍒</span> Cherries on top +$3</span></label>
+            <label class="pill"><input type="checkbox" name="extra" value="roses" data-add="8"><span><span data-ico="rose" data-size="22">🌹</span> Sugar roses +$8</span></label>
+            <label class="pill"><input type="checkbox" name="extra" value="candles" data-add="2"><span><span data-ico="christmas-candle" data-size="22">🕯️</span> Candles +$2</span></label>
+          </div>
+        </fieldset>
+
+        <div class="build-actions">
+          <p style="margin:0;font-size:.9rem;color:var(--muted);flex:1 1 220px" id="cake-allergy">Contains wheat, milk and egg. Made in a kitchen that also uses tree nuts.</p>
+          <button class="btn btn-red" type="submit"><span data-ico="shopping-cart-plus" data-size="22">🛒</span> Add to basket · <span id="cake-btn-price">$58</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section story" id="story" aria-labelledby="story-h">
+  <div class="wrap story-grid">
+    <div class="story-photos">
+      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><use href="#stamp"/></svg>
+      <img class="big" src="_img/rosas-bakery/photo-1649675602217-416a4fafcecb-1000.jpg" width="1200" height="820" loading="lazy" decoding="async" alt="A baker in a white jacket shapes a round of dough with flour-dusted hands on a floured wooden table.">
+      <ul class="nums"><li><b>40</b>loaves on the first morning</li><li><b>3</b>generations at the ovens</li><li><b>1</b>oven, rebuilt once</li></ul>
+    </div>
+    <div class="story-copy">
+      <p class="kicker"><span data-ico="star" data-size="18" data-min-level="2"></span> Est. 1961</p>
+      <h2 id="story-h">Three generations, one very old oven</h2>
+      <p>In March 1961 Rosa Valdivia signed a lease on a corner shop with a cracked window and a second-hand deck oven, and borrowed the deposit from her brother Tomás. She was twenty-six. She baked forty loaves that first morning and sold thirty-one. The rest went to the neighbours who had come to see whether the new baker would last.</p>
+      <p>She did. <span id="years-line">Sixty-five years</span> later the oven is still the same oven, the starter is still Old Nell, and the bread is still ready before the streetlights go off.</p>
+      <blockquote>A loaf is only done when the whole street smells like somebody's home.<cite>Rosa Valdivia, to every new apprentice</cite></blockquote>
+      <ul class="gens">
+        <li><span class="av"><span data-ico="avatar-older-woman" data-size="72" data-label="Rosa">👵</span></span><b>Rosa</b>Founder, 1961</li>
+        <li><span class="av"><span data-ico="avatar-woman-bun" data-size="72" data-label="Marisol">👩</span></span><b>Marisol</b>Pies and weddings</li>
+        <li><span class="av"><span data-ico="avatar-woman-braids" data-size="72" data-label="Lucía">👩</span></span><b>Lucía</b>Head baker</li>
+      </ul>
+      <ol class="timeline">
+        <li><b>1961</b> Rosa opens at 214 Marigold Street with forty loaves and a borrowed oven.</li>
+        <li><b>1974</b> The first wedding cake, three tiers for the family across the road.</li>
+        <li><b>1989</b> Marisol joins, and the pies and the Saturday cherry-top arrive.</li>
+        <li><b>2003</b> The oven is rebuilt brick by brick. Same bricks, new burners.</li>
+        <li><b>2016</b> Lucía comes home from baking school and moves the sourdough to a thirty-hour ferment.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section wed" id="weddings" aria-labelledby="wed-h">
+  <div class="wrap wed-grid">
+    <figure class="arch" style="margin:0 auto">
+      <img src="_img/rosas-bakery/30445121-1000.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="A three-tier white wedding cake ringed with red sugar roses and silver beading, with a cluster of roses on top, on a lace-covered table in a warmly lit banquet hall.">
+      <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><use href="#stamp"/></svg>
+      <span class="fl" data-ico="heart-pair" data-size="84" data-min-level="2" data-motion="inview"></span>
+    </figure>
+    <div class="wed-copy">
+      <p class="kicker"><span data-ico="heart" data-size="18" data-min-level="2"></span> Weddings and big days</p>
+      <h2 id="wed-h" style="font-size:clamp(2rem,5vw,3.2rem)">Wedding cakes, the old way</h2>
+      <p style="font-size:1.05rem">Marisol has been making wedding cakes since 1989, and this is the one time Rosa's delivers: we drive it, carry it in and set it up within twenty-five miles. We book about eight weeks ahead, longer for June and September Saturdays.</p>
+      <ol class="wed-steps">
+        <li><span class="ico-badge"><span data-ico="mail-check" data-size="26" data-motion="hover">📨</span></span><span><b>Tell us the day</b>Send the form. Marisol calls within two working days.</span></li>
+        <li><span class="ico-badge"><span data-ico="cake" data-size="26" data-motion="hover">🍰</span></span><span><b>Taste</b>A $35 tasting box of three sponges and three fillings, credited to your order.</span></li>
+        <li><span class="ico-badge"><span data-ico="pencil" data-size="26" data-motion="hover">✏️</span></span><span><b>Design</b>A pencil sketch, then a deposit to hold the date.</span></li>
+        <li><span class="ico-badge"><span data-ico="truck" data-size="26" data-motion="hover">🚚</span></span><span><b>Delivery and set-up</b>We arrive two hours early with extra roses, just in case.</span></li>
+      </ol>
+
+      <form class="card" id="wed-form" action="#" novalidate style="margin-top:28px">
+        <div class="card-head"><span class="ico-badge"><span data-ico="heart-pair" data-size="28" data-motion="hover">💕</span></span><h3>Wedding cake enquiry</h3></div>
+        <p class="form-msg" id="wed-msg" role="alert"></p>
+        <div class="row2">
+          <div class="field" id="w-names"><label for="w-name">Your names</label><input id="w-name" type="text" autocomplete="name" placeholder="Priya and Daniel" required aria-describedby="e-w-name"><p class="err" id="e-w-name">Tell us who is getting married.</p></div>
+          <div class="field" id="w-mail"><label for="w-email">Email</label><input id="w-email" type="email" autocomplete="email" placeholder="priya@example.com" required aria-describedby="e-w-email"><p class="err" id="e-w-email">Enter an email address Marisol can write to.</p></div>
+        </div>
+        <div class="row2">
+          <div class="field" id="w-date"><label for="w-day">Wedding date</label><input id="w-day" type="date" required aria-describedby="e-w-day"><p class="err" id="e-w-day">Choose a date at least three weeks away.</p></div>
+          <div class="field" id="w-guest"><label for="w-guests">Guests</label><input id="w-guests" type="number" min="10" max="400" inputmode="numeric" placeholder="90" required aria-describedby="e-w-guests"><p class="err" id="e-w-guests">Enter a guest count between 10 and 400.</p></div>
+        </div>
+        <p class="tier-hint" id="tier-hint"><span data-ico="lightbulb" data-size="26">💡</span> <span>Tell us your guest count and we will suggest tiers.</span></p>
+        <div class="field"><label for="w-venue">Venue <span style="font-weight:400">(optional)</span></label><input id="w-venue" type="text" placeholder="The Granary at Ninth Mill"></div>
+        <fieldset class="field">
+          <legend>Styles you like</legend>
+          <div class="chk-grid">
+            <label class="pill"><input type="checkbox" name="wstyle" value="Smooth buttercream"><span>Smooth buttercream</span></label>
+            <label class="pill"><input type="checkbox" name="wstyle" value="Semi-naked"><span>Semi-naked</span></label>
+            <label class="pill"><input type="checkbox" name="wstyle" value="Sugar roses"><span><span data-ico="rose" data-size="20">🌹</span> Sugar roses</span></label>
+            <label class="pill"><input type="checkbox" name="wstyle" value="Fresh flowers"><span><span data-ico="rose-bouquet" data-size="20">💐</span> Fresh flowers</span></label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="w-budget">Rough budget</label><select id="w-budget"><option>Not sure yet</option><option>Under $400</option><option>$400 to $700</option><option>$700 to $1,200</option><option>$1,200 and up</option></select></div>
+        <div class="field"><label for="w-note">Tell us about the day <span style="font-weight:400">(optional)</span></label><textarea id="w-note" rows="3" placeholder="Red and white, Grandma's lace, and a vegan tier for my cousin."></textarea></div>
+        <button class="btn btn-red" type="submit"><span data-ico="send" data-size="22">📨</span> Send the enquiry</button>
+      </form>
+      <div class="card" id="wed-done" hidden style="margin-top:28px"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section gifts" id="gifts" aria-labelledby="gift-h">
+  <div class="wrap gift-grid">
+    <div class="gc-wrap"><span class="fl f1" data-ico="sparkles" data-size="52" data-min-level="2" data-motion="hover"></span><span class="fl f2" data-ico="heart" data-size="40" data-min-level="2" data-motion="hover"></span>
+    <div class="gift-card" role="img" aria-label="Preview of a Rosa's gift card">
+      <div class="gc-in">
+        <div class="gc-top"><b>Rosa's</b><span data-ico="gift" data-size="44" data-motion="hover">🎁</span></div>
+        <div class="gc-amt" id="gc-amt">$50</div>
+        <div class="gc-to">Good for bread, cake and kindness, since 1961<br>For <b id="gc-for">someone lucky</b></div>
+      </div>
+    </div></div>
+    <form id="gift-form" action="#" novalidate>
+      <p class="kicker"><span data-ico="gift" data-size="18" data-min-level="2"></span> Gift cards</p>
+      <h2 id="gift-h" style="font-size:clamp(2rem,5vw,3.1rem)">Give somebody a warm morning</h2>
+      <p style="margin:.9rem 0 1.2rem;color:var(--muted)">A Rosa's card never expires and works on everything: loaves, cakes, the day-old bag. We hand you a printed card with your order, or email one the same day.</p>
+      <div class="field">
+        <span class="lbl" id="amt-lbl">Amount</span>
+        <div class="amts" role="group" aria-labelledby="amt-lbl" id="amts">
+          <button class="chip" type="button" data-amt="25" aria-pressed="false">$25</button>
+          <button class="chip" type="button" data-amt="50" aria-pressed="true">$50</button>
+          <button class="chip" type="button" data-amt="75" aria-pressed="false">$75</button>
+          <button class="chip" type="button" data-amt="100" aria-pressed="false">$100</button>
+        </div>
+      </div>
+      <div class="field" style="max-width:420px"><label for="g-for">Who is it for?</label><input id="g-for" type="text" maxlength="24" placeholder="Abuela Carmen" autocomplete="off"></div>
+      <button class="btn btn-red" type="submit"><span data-ico="heart-gift" data-size="22">🎁</span> Add gift card to basket</button>
+    </form>
+  </div>
+</section>
+
+<section class="section voices" aria-labelledby="voices-h">
+  <div class="wrap">
+    <div class="orn" data-min-level="2" aria-hidden="true"><i></i><span data-ico="star" data-size="30"></span><span data-ico="sparkles" data-size="34"></span><span data-ico="heart" data-size="40" data-motion="hover"></span><span data-ico="sparkles" data-size="34"></span><span data-ico="star" data-size="30"></span><i></i></div>
+    <div class="v-head">
+      <h2 id="voices-h" style="font-size:clamp(1.8rem,4.5vw,2.8rem)">What the neighbours say</h2>
+      <span data-live="rating-stars" data-p-rating="5" data-size="76" data-label="4.9 out of 5 stars">★★★★★</span>
+      <p>4.9 from 612 reviews</p>
+    </div>
+    <div class="v-grid">
+      <div class="slip" style="--r:-1.2deg">
+        <span data-ico="quote" data-size="30">❝</span>
+        <q>I order the rye on Thursday night and it is in my hand, still warm, at seven on Friday. My dad queued for this same loaf when I was in a stroller.</q>
+        <footer><span data-ico="avatar-man-beard" data-size="48" data-label="Tomasz">🧔</span><span><b>Tomasz W.</b>Ninth Avenue, since 1998</span></footer>
+      </div>
+      <div class="slip" style="--r:1deg">
+        <span data-ico="quote" data-size="30">❝</span>
+        <q>Lucía's cherry-top was the only thing at my daughter's party nobody wanted to share. The message was spelled perfectly and the cherries were the real thing.</q>
+        <footer><span data-ico="avatar-woman-curly" data-size="48" data-label="Aisha">👩</span><span><b>Aisha R.</b>Regular since 2011</span></footer>
+      </div>
+      <div class="slip" style="--r:-.6deg">
+        <span data-ico="quote" data-size="30">❝</span>
+        <q>Marisol made our wedding cake for 140 people and fixed a crooked rose herself. Four years on she still sends a slice on our anniversary.</q>
+        <footer><span data-ico="avatar-person" data-size="48" data-label="Priya and Daniel">🧑</span><span><b>Priya and Daniel</b>Married at the Granary</span></footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section visit kraft" id="visit" aria-labelledby="visit-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Come by</p>
+      <h2 id="visit-h">Hours, ovens and how to find us</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="card">
+        <div class="card-head"><span class="ico-badge"><span data-ico="clock" data-size="28" data-motion="hover">🕐</span></span><h3>Opening hours</h3></div>
+        <p class="open-now" id="open-now"><span data-ico="door-open" data-size="26">🚪</span> <span id="open-now-text">Checking the sign on the door</span></p>
+        <ul class="hours" id="hours" style="margin-top:14px">
+          <li data-d="2"><span>Tuesday</span><span>6 am to 6 pm</span></li>
+          <li data-d="3"><span>Wednesday</span><span>6 am to 6 pm</span></li>
+          <li data-d="4"><span>Thursday</span><span>6 am to 6 pm</span></li>
+          <li data-d="5"><span>Friday</span><span>6 am to 6 pm</span></li>
+          <li data-d="6"><span>Saturday</span><span>6 am to 6 pm</span></li>
+          <li data-d="0"><span>Sunday</span><span>6 am to 2 pm</span></li>
+          <li data-d="1" class="shut"><span>Monday</span><span>Closed</span></li>
+        </ul>
+        <p style="margin:0;font-size:.88rem;color:var(--muted)">Closed on Thanksgiving and Christmas Day. Open until noon on Christmas Eve, with the stollen.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="ico-badge"><span data-ico="flame" data-size="28" data-motion="hover">🔥</span></span><h3>The oven schedule</h3></div>
+        <ol class="oven" id="oven">
+          <li data-t="240"><span class="t">4:00 am</span><span class="d"><span data-ico="alarm-clock" data-size="24">⏰</span><span><b>Ovens on</b>Lucía lights the deck oven and feeds Old Nell.</span></span></li>
+          <li data-t="270"><span class="t">4:30 am</span><span class="d"><span data-ico="chef-hat" data-size="24">👩‍🍳</span><span><b>Sourdough and rye go in</b>Thirty-hour dough, first trays.</span></span></li>
+          <li data-t="360"><span class="t">6:00 am</span><span class="d"><span data-ico="door-open" data-size="24">🚪</span><span><b>Doors open</b>Baguettes and the first loaves, still ticking.</span></span></li>
+          <li data-t="390"><span class="t">6:30 am</span><span class="d"><span data-ico="donut" data-size="24">🥐</span><span><b>Croissants</b>Again at 9:00 and noon.</span></span></li>
+          <li data-t="600"><span class="t">10:00 am</span><span class="d"><span data-ico="cookie" data-size="24">🍪</span><span><b>Cookies and cakes</b>Cupcakes at half past, pie at eleven.</span></span></li>
+          <li data-t="840"><span class="t">2:00 pm</span><span class="d"><span data-ico="sun" data-size="24">☀️</span><span><b>Afternoon bake</b>Second sourdough and baguettes, Tuesday to Saturday.</span></span></li>
+          <li data-t="960"><span class="t">4:00 pm</span><span class="d"><span data-ico="shopping-bag" data-size="24">🛍️</span><span><b>Day-old bags</b>Six dollars, in the shop only.</span></span></li>
+          <li data-t="1080"><span class="t">6:00 pm</span><span class="d"><span data-ico="moon" data-size="24">🌙</span><span><b>Doors close</b>Ovens cool, tomorrow's dough rests.</span></span></li>
+        </ol>
+        <p class="oven-note">Sundays are shorter: doors close at 2 pm, with no afternoon bake and no day-old bags.</p>
+      </div>
+
+      <div>
+        <figure class="map" aria-label="Map: Rosa's is on the corner of Marigold Street and Ninth Avenue">
+          <div class="st h"></div><div class="st v"></div>
+          <span class="lbl" style="left:5%;top:calc(54% + 16px)">Marigold Street</span>
+          <span class="lbl" style="left:calc(58% + 15px);top:4%;writing-mode:vertical-rl;padding:6px 2px">Ninth Avenue</span>
+          <div class="blk" style="left:5%;top:7%;width:44%;height:36%"></div>
+          <div class="blk" style="left:5%;top:72%;width:34%;height:22%"></div>
+          <div class="blk" style="left:46%;top:72%;width:22%;height:22%"></div>
+          <div class="park" style="left:75%;top:6%;width:22%;height:36%"><span><span data-ico="tree-pine" data-size="32">🌲</span><br>Park</span></div>
+          <div class="pin" style="left:48%;top:50%;transform:translate(-50%,-100%)"><span data-ico="map-pin" data-size="56" data-label="Rosa's Corner Bakery" data-motion="loop">📍</span><span class="cap">Rosa's</span></div>
+          <div class="pin" style="left:84%;top:64%;transform:translate(-50%,-50%)"><span data-ico="bus" data-size="34" data-label="Bus stop">🚌</span><span class="cap">Route 9</span></div>
+          <div class="pin" style="left:22%;top:83%;transform:translate(-50%,-50%)"><span data-ico="parking" data-size="34" data-label="Parking">🅿️</span><span class="cap">6 spaces</span></div>
+          <div class="pin" style="left:86%;top:86%;transform:translate(-50%,-50%)"><span data-ico="bike" data-size="34" data-label="Bike racks">🚲</span><span class="cap">Bike racks</span></div>
+        </figure>
+        <address class="addr" style="margin-top:18px"><b>Rosa's Corner Bakery</b><br>214 Marigold Street, corner of Ninth<br>Alder Falls</address>
+        <ul class="contact">
+          <li><span data-ico="phone" data-size="22">📞</span> <a href="tel:+14155550142">(415) 555-0142</a></li>
+          <li><span data-ico="mail" data-size="22">✉️</span> <a href="mailto:orders@rosas-corner.example">orders@rosas-corner.example</a></li>
+        </ul>
+        <button class="btn btn-sm" type="button" id="copy-addr"><span data-ico="navigation" data-size="20">🧭</span> Copy the address</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section allergens" id="allergens" aria-labelledby="alg-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="orn" data-min-level="2" aria-hidden="true"><i></i><span data-ico="egg" data-size="34"></span><span data-ico="droplet" data-size="34"></span><span data-ico="leaf" data-size="40" data-motion="hover"></span><span data-ico="sprout" data-size="34"></span><span data-ico="cookie" data-size="34"></span><i></i></div>
+      <p class="kicker">Read before you order</p>
+      <h2 id="alg-h">Allergens, plainly</h2>
+      <p>Every item in today's bake carries these markers. Tap one in the bake list above to hide everything that contains it.</p>
+    </div>
+    <div class="alg-grid" id="alg-grid">
+      <div class="alg-card"><span class="ico-badge"><span data-ico="sprout" data-size="40" data-motion="hover" data-label="Wheat">🌾</span></span><div><h3>Wheat</h3><p>Flour is in the walls. <b>In:</b> <span data-alg-list="W">loading</span></p></div></div>
+      <div class="alg-card"><span class="ico-badge"><span data-ico="droplet" data-size="40" data-motion="hover" data-label="Milk">🥛</span></span><div><h3>Milk</h3><p>Butter, buttermilk and cream. <b>In:</b> <span data-alg-list="M">loading</span></p></div></div>
+      <div class="alg-card"><span class="ico-badge"><span data-ico="egg" data-size="40" data-motion="hover" data-label="Egg">🥚</span></span><div><h3>Egg</h3><p>Yolks, whites and the egg wash. <b>In:</b> <span data-alg-list="E">loading</span></p></div></div>
+      <div class="alg-card"><span class="ico-badge"><span data-ico="hexagon" data-size="40" data-motion="hover" data-label="Tree nuts">🌰</span></span><div><h3>Tree nuts</h3><p>Almonds, mostly. <b>In:</b> <span data-alg-list="N">loading</span></p></div></div>
+      <div class="alg-card v"><span class="ico-badge"><span data-ico="leaf" data-size="40" data-motion="hover" data-label="Vegan">🌱</span></span><div><h3>Vegan</h3><p>Nothing from an animal. <b>Our vegan list:</b> <span data-alg-list="V">loading</span></p></div></div>
+      <div class="alg-card"><span class="ico-badge"><span data-ico="phone-call" data-size="40" data-motion="hover" data-label="Call us">📞</span></span><div><h3>Not sure?</h3><p>Call the counter on <a href="tel:+14155550142">(415) 555-0142</a> and ask for whoever is closest to the oven.</p></div></div>
+    </div>
+    <p class="alg-note"><span data-ico="alert-triangle" data-size="34" data-label="Warning">⚠️</span><span><b>One kitchen, no promises.</b> Everything is made in a single room that handles wheat, milk, eggs, tree nuts, sesame and soy. We label what is in each recipe, but we cannot guarantee any item is free of traces. If an allergy is serious, call before you order.</span></p>
+  </div>
+</section>
+
+<section class="section faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">Good questions</p><h2 id="faq-h">Before you ask</h2></div>
+    <div class="faq-list">
+      <details><summary><span data-ico="truck" data-size="26">🚚</span> Do you deliver?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>No. Rosa's is pick-up only, which is how the bread gets to you still warm. The one exception is wedding cakes, which we drive, carry in and set up within twenty-five miles.</p></details>
+      <details><summary><span data-ico="calendar-clock" data-size="26">📅</span> How far ahead can I order?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Bread and pastries can be ordered up to ten days ahead, or for the same day while slots last. Order by 5 pm for tomorrow. Custom cakes need 48 hours, wedding cakes about eight weeks.</p></details>
+      <details><summary><span data-ico="edit" data-size="26">✏️</span> Can I change or cancel an order?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Yes, by phone until 5 pm the day before, no charge. Custom cakes can be changed until 24 hours out. We would rather hear early than throw out forty baguettes.</p></details>
+      <details><summary><span data-ico="wallet" data-size="26">💳</span> Do you take cards?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Cash and cards, both at the counter. Nothing is charged when you order ahead, so a change of plan costs you nothing.</p></details>
+      <details><summary><span data-ico="leaf" data-size="26">🌱</span> Do you bake gluten-free?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Not really. The almond-orange tea cake uses ground almonds instead of flour, but it is baked in a room full of wheat, so we cannot call it safe for coeliac customers. We would rather say so than guess.</p></details>
+      <details><summary><span data-ico="paw-print" data-size="26">🐾</span> Can I bring my dog?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Dogs wait on the bench outside, and any dog that sits politely gets a plain biscuit from the jar by the door. Assistance dogs are welcome inside, always.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<section id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <ul>
+      <li><b>Hero counter</b> Photo by <a href="https://www.pexels.com/@valeriya">Valeria Boltneva</a> on <a href="https://www.pexels.com/photo/29380155/">Pexels</a></li>
+      <li><b>Sourdough in paper bags</b> Photo by <a href="https://www.pexels.com/@magda-ehlers-pexels">Magda Ehlers</a> on <a href="https://www.pexels.com/photo/30826792/">Pexels</a></li>
+      <li><b>Croissants</b> Photo by <a href="https://www.pexels.com/@wijs-wise-136435282">Wijs (Wise)</a> on <a href="https://www.pexels.com/photo/16192282/">Pexels</a></li>
+      <li><b>Cherry-top cake</b> Photo by <a href="https://unsplash.com/@paulinaka?utm_source=withicons_demos&amp;utm_medium=referral">Paulina Kaminska</a> on <a href="https://unsplash.com/photos/a-close-up-of-a-cake-with-cherries-on-top-ibVD6ZZCwKY?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li><b>Cupcakes</b> Photo by <a href="https://www.pexels.com/@pickering">Candice Pickering</a> on <a href="https://www.pexels.com/photo/9045540/">Pexels</a></li>
+      <li><b>Chocolate chip cookies</b> Photo by <a href="https://www.pexels.com/@bigparadox">Meryem Şahin</a> on <a href="https://www.pexels.com/photo/20558711/">Pexels</a></li>
+      <li><b>Cherry-apple pie</b> Photo by <a href="https://www.pexels.com/@maksgelatin">Maksim Goncharenok</a> on <a href="https://www.pexels.com/photo/6163264/">Pexels</a></li>
+      <li><b>Baker shaping dough</b> Photo by <a href="https://unsplash.com/@moino007?utm_source=withicons_demos&amp;utm_medium=referral">DDP</a> on <a href="https://unsplash.com/photos/a-person-kneading-dough-on-top-of-a-wooden-table-5CRzqqWzEKQ?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li><b>Baguettes in baskets</b> Photo by <a href="https://www.pexels.com/@inna-rabotyagina-51317378">Inna Rabotyagina</a> on <a href="https://www.pexels.com/photo/9180199/">Pexels</a></li>
+      <li><b>Iced donuts</b> Photo by <a href="https://www.pexels.com/@blackphant">Ana Lourenco</a> on <a href="https://www.pexels.com/photo/590771/">Pexels</a></li>
+      <li><b>Pastry case</b> Photo by <a href="https://www.pexels.com/@nati-87264186">Nati</a> on <a href="https://www.pexels.com/photo/30681620/">Pexels</a></li>
+      <li><b>Wedding cake</b> Photo by <a href="https://www.pexels.com/@nshakya">Nishess Shakya</a> on <a href="https://www.pexels.com/photo/30445121/">Pexels</a></li>
+      <li><b>Oat and honey loaves</b> Photo by <a href="https://www.pexels.com/@kevin-nesh-2588991">Kevin Nesh</a> on <a href="https://www.pexels.com/photo/14520462/">Pexels</a></li>
+      <li><b>Hard rolls</b> Photo by <a href="https://unsplash.com/@eprouzet?utm_source=withicons_demos&amp;utm_medium=referral">Eric Prouzet</a> on <a href="https://unsplash.com/photos/a-bunch-of-breads-that-are-on-a-table-Q7b7nURc0YE?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li><b>Rolls in paper bags</b> Photo by <a href="https://www.pexels.com/@caricatte">Vinícius Caricatte</a> on <a href="https://www.pexels.com/photo/14007233/">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT licence. Type: Chonburi and Lora from Google Fonts.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-logo">
+        <b>Rosa's</b>
+        <p>Corner Bakery, Marigold Street, Alder Falls. Three generations, one oven, bread before the streetlights go off. Pick-up only. Closed Mondays.</p>
+        <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><use href="#stamp"/></svg>
+      </div>
+      <div>
+        <h3>Find us</h3>
+        <ul>
+          <li><span data-ico="map-pin" data-size="22">📍</span> 214 Marigold Street, Alder Falls</li>
+          <li><span data-ico="phone" data-size="22">📞</span> (415) 555-0142</li>
+          <li><span data-ico="clock" data-size="22">🕐</span> Tue to Sat 6 to 6 · Sun 6 to 2</li>
+          <li><span data-ico="heart" data-size="22">❤️</span> Since 1961</li>
+        </ul>
+      </div>
+      <div>
+        <h3>The Sunday list</h3>
+        <p style="margin:0 0 12px">One short email on Sundays: the week's oven schedule and any special bakes.</p>
+        <form class="news" id="news-form" action="#" novalidate>
+          <label class="sr" for="n-email">Email address</label>
+          <input id="n-email" type="email" placeholder="you@example.com" autocomplete="email">
+          <button class="btn btn-sm" type="submit"><span data-ico="mail-plus" data-size="20">✉️</span> Subscribe</button>
+        </form>
+        <p class="news-msg" id="news-msg" role="status"></p>
+      </div>
+    </div>
+    <p class="fine">Demo page made with with icons. Names, places and products are fictional. Phone numbers use the 555-01xx range, and nothing on this page is sent anywhere.</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-h" tabindex="-1">
+  <div class="drawer-head">
+    <h2 id="drawer-h">Your basket</h2>
+    <button class="icon-btn" id="drawer-close" type="button" aria-label="Close basket" style="color:var(--choc)"><span data-ico="close" data-size="26">✕</span></button>
+  </div>
+  <div class="drawer-body">
+    <div class="empty-basket" id="d-empty"><span data-ico="shopping-basket" data-size="56">🧺</span><b>Nothing in here yet</b><p>Add something warm from today's bake.</p></div>
+    <ul class="lines" id="d-lines"></ul>
+  </div>
+  <div class="drawer-foot">
+    <div class="tot-row big"><span>Subtotal</span><span id="d-sub">$0</span></div>
+    <div class="progress" aria-hidden="true" id="d-bar" style="margin:12px 0 8px"><i></i></div>
+    <p class="perk" style="margin:0 0 14px"><span data-ico="cookie" data-size="24">🍪</span> <span id="d-perk">Add $20 and Rosa tucks in a free cookie.</span></p>
+    <a class="btn btn-red" id="d-go" href="#order"><span data-ico="calendar-clock" data-size="22">📅</span> Choose a pick-up time</a>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"><span data-ico="check-circle" data-size="24">✅</span><span id="toast-text"></span></div>
+
+<script src="_kit/demo-kit.js" data-style="retro" data-recommend="retro,engrave,sketch,coquette,pastel,line,solid,sticker" data-level="2" defer></script>
+<script>
+(function () {
+'use strict';
+function $(s, r) { return (r || document).querySelector(s); }
+function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+function pad(n) { return (n < 10 ? '0' : '') + n; }
+var DAYN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function money(n) { n = Math.round(n * 100) / 100; return '$' + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2)); }
+function tfmt(m) { var h = Math.floor(m / 60), mm = m % 60; return (h % 12 || 12) + ':' + pad(mm) + ' ' + (h >= 12 ? 'pm' : 'am'); }
+function tshort(m) { var h = Math.floor(m / 60), mm = m % 60; return (h % 12 || 12) + (mm ? ':' + pad(mm) : '') + ' ' + (h >= 12 ? 'pm' : 'am'); }
+function thm(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+var ONES = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'], TEENS = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'], TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+function words(n) { if (n < 10) return ONES[n]; if (n < 20) return TEENS[n - 10]; if (n < 100) return TENS[Math.floor(n / 10)] + (n % 10 ? '-' + ONES[n % 10] : ''); return String(n); }
+function dur(m) { return m < 60 ? m + ' min' : Math.floor(m / 60) + ' hr' + (m % 60 ? ' ' + (m % 60) + ' min' : ''); }
+function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+function longDate(d) { return DAYN[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()]; }
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function attr(k, v) { return k + '="' + v + '"'; }
+function ico(name, size, fb, extra) { return '<span ' + attr('data-ico', name) + ' ' + attr('data-size', size) + (extra || '') + '>' + fb + '</span>'; }
+var store = { get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} } };
+var toastT = 0;
+function toast(msg) { var t = $('#toast'); $('#toast-text').textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2600); }
+function camel(k) { return k.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); }); }
+// live icons: update the params, the Basic fallback text and the accessible label together
+function setLive(el, params, fb, label) {
+  if (!el) return;
+  Object.keys(params).forEach(function (k) { el.dataset['p' + camel('-' + k)] = params[k]; });
+  var ready = window.WithKit && el._kit && el._kit.live;
+  if (ready) window.WithKit.setLive(el, params);
+  if (label != null) { el.dataset.label = label; if (ready) window.WithKit.setLive(el, { label: label }); }
+  if (fb != null) { var f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; else if (!ready) el.textContent = fb; }
+}
+
+/* ---------- time and the bakery clock ---------- */
+var HOURS = { 0: [360, 840], 1: null, 2: [360, 1080], 3: [360, 1080], 4: [360, 1080], 5: [360, 1080], 6: [360, 1080] };
+var real = new Date(), realMins = real.getHours() * 60 + real.getMinutes();
+var todayD = new Date(real.getFullYear(), real.getMonth(), real.getDate());
+var bakeD = todayD, demo = false, demoMsg = '';
+var hT = HOURS[todayD.getDay()];
+if (!hT) { bakeD = addDays(todayD, 1); demo = true; demoMsg = "Rosa's is closed on Mondays, so this is Tuesday's list. Slide the bakery clock to watch the day unfold."; }
+else if (realMins < hT[0]) { demo = true; demoMsg = 'The ovens are on but the doors do not open until 6 am. Slide the bakery clock to watch the day unfold.'; }
+else if (realMins >= hT[1]) { demo = true; demoMsg = "Rosa's has closed for today. Slide the bakery clock to replay the day."; }
+var bakeH = HOURS[bakeD.getDay()];
+var clock = demo ? 580 : Math.min(bakeH[1], Math.max(bakeH[0], Math.round(realMins / 5) * 5));
+function firstOpen(d) { while (!HOURS[d.getDay()]) d = addDays(d, 1); return d; }
+var NEXT = (function () { var d = firstOpen(addDays(bakeD, 1)); return ymd(d) === ymd(addDays(bakeD, 1)) ? 'tomorrow' : DAYN[d.getDay()]; })();
+
+/* ---------- today's bake data ---------- */
+var AL = {
+  W: { i: 'sprout', e: '🌾', t: 'Wheat' }, M: { i: 'droplet', e: '🥛', t: 'Milk' }, E: { i: 'egg', e: '🥚', t: 'Egg' },
+  N: { i: 'hexagon', e: '🌰', t: 'Tree nuts' }, V: { i: 'leaf', e: '🌱', t: 'Vegan' }
+};
+var CATS = [
+  { id: 'bread', name: 'Breads', short: 'Breads', i: 'sprout', e: '🍞', note: 'First trays out at 6 am' },
+  { id: 'pastry', name: 'Pastries', short: 'Pastries', i: 'donut', e: '🥐', note: 'Laminated by hand, daily' },
+  { id: 'sweet', name: 'Cookies and pies', short: 'Cookies and pies', i: 'cookie', e: '🍪', note: 'From ten in the morning' },
+  { id: 'cake', name: 'Cakes', short: 'Cakes', i: 'cake', e: '🎂', note: 'Whole cakes by order, slices by the case' }
+];
+var ITEMS = [
+  { id: 'sourdough', cat: 'bread', name: 'Country sourdough', short: 'Country sourdough', price: 7.5, outs: [360, 840], gone: 690, qty: 36, alg: ['W', 'V'], tag: 'Best seller', desc: 'Thirty-hour ferment, blistered crust and a crumb that keeps all week. Made with Old Nell, the starter Rosa began in 1961.' },
+  { id: 'rye', cat: 'bread', name: 'Caraway rye', short: 'Caraway rye', price: 6.75, outs: [360], gone: 615, qty: 18, alg: ['W', 'V'], desc: 'Dense, sour and seeded. The loaf the regulars call the real one. Gone before eleven most days.' },
+  { id: 'honeyoat', cat: 'bread', name: 'Honey oat sandwich loaf', short: 'Honey oat loaf', price: 6.25, outs: [390], gone: null, qty: 30, alg: ['W', 'M'], desc: 'Soft crumb, oat-crusted top, made with Alder Falls honey. Built for toast and lunchboxes.' },
+  { id: 'baguette', cat: 'bread', name: 'Marigold baguette', short: 'Marigold baguette', price: 3.75, outs: [360, 720, 930], gone: null, qty: 40, alg: ['W', 'V'], desc: 'Flour, water, salt and time. Crackles when you squeeze it. Three bakes a day.' },
+  { id: 'croissant', cat: 'pastry', name: 'Butter croissant', short: 'Croissant', price: 3.95, outs: [390, 540, 720], gone: 900, qty: 24, alg: ['W', 'M'], desc: 'Seventy-two hours, three folds, a lot of European-style butter. Shatters on the first bite.' },
+  { id: 'bun', cat: 'pastry', name: 'Cinnamon morning bun', short: 'Cinnamon bun', price: 4.25, outs: [420], gone: 520, qty: 16, alg: ['W', 'M', 'E'], tag: 'Goes fast', desc: 'Sticky, spiral-cut and glazed while still hot. One tray a day, and it is usually gone by nine.' },
+  { id: 'danish', cat: 'pastry', name: 'Apricot danish', short: 'Apricot danish', price: 4.5, outs: [450, 660], gone: 810, qty: 14, alg: ['W', 'M', 'E'], desc: 'Laminated dough, vanilla custard and a halved apricot glazed with its own jam.' },
+  { id: 'donut', cat: 'pastry', name: 'Old-fashioned glazed donut', short: 'Glazed donut', price: 2.25, outs: [360], gone: 645, qty: 30, alg: ['W', 'M', 'E'], desc: 'Cake-style with a cracked, crunchy edge. Dunk it in the coffee from next door.' },
+  { id: 'cookie', cat: 'sweet', name: 'Brown-butter chocolate chip cookie', short: 'Chocolate chip cookie', price: 2.75, outs: [600, 840], gone: null, qty: 40, alg: ['W', 'M', 'E'], desc: 'Salted brown butter, two kinds of chocolate, a gooey middle. Baked in small batches.' },
+  { id: 'pie', cat: 'sweet', name: 'Cherry-apple lattice pie, slice', short: 'Pie slice', price: 5.5, outs: [660], gone: 960, qty: 16, alg: ['W', 'M', 'E'], desc: 'Tart cherries, diced apple and a woven all-butter crust. Whole pies by order, $28.' },
+  { id: 'teacake', cat: 'sweet', name: 'Almond-orange tea cake', short: 'Almond tea cake', price: 4.25, outs: [480], gone: 1020, qty: 12, alg: ['M', 'E', 'N'], desc: 'Ground almonds instead of flour, with orange zest and a crackled sugar top. Moist for days.' },
+  { id: 'cupcake', cat: 'cake', name: 'Vanilla or chocolate cupcake', short: 'Cupcakes', price: 3.75, outs: [630], gone: 930, qty: 24, alg: ['W', 'M', 'E'], desc: 'Swirled buttercream on a tender crumb. Tell us which at the counter, or both.' },
+  { id: 'cherrytop', cat: 'cake', name: 'Cherry-top buttercream cake, slice', short: 'Cherry-top slice', price: 6.5, outs: [600], gone: 1020, qty: 20, alg: ['W', 'M', 'E'], tag: 'Saturday classic', desc: 'Vanilla sponge, raspberry jam and piped buttercream, with the cherry on top. Always the cherry.' },
+  { id: 'ready8', cat: 'cake', name: 'Ready-made 8 inch vanilla cake', short: 'Ready-made cake', price: 38, outs: [600], gone: 870, qty: 4, alg: ['W', 'M', 'E'], desc: 'For when the party is today. Fully iced, no message, serves twelve. Four a day, no more.' }
+];
+var byId = {}; ITEMS.forEach(function (it) { byId[it.id] = it; });
+
+function status(it, d, now) {
+  var h = HOURS[d.getDay()], close = h ? h[1] : 0;
+  var outs = it.outs.filter(function (o) { return o <= close - 30; });
+  var last = null, next = null;
+  outs.forEach(function (o) { if (o <= now) last = o; else if (next === null) next = o; });
+  var r = { outs: outs, last: last, next: next, s: 'soon' };
+  if (now >= close) { r.s = 'closed'; return r; }
+  if (last === null) return r;
+  var gone = it.gone;
+  if (gone != null && gone > last && gone <= now) { r.s = 'gone'; return r; }
+  var span = (gone != null && gone > last) ? gone - last : close - last;
+  r.left = Math.max(gone != null ? 1 : 3, Math.round(it.qty * (1 - (now - last) / span)));
+  r.s = (now - last <= 90) ? 'warm' : 'stale';
+  if (r.left <= 4) r.s = 'low';
+  return r;
+}
+
+/* ---------- bake board ---------- */
+var filt = { cat: 'all', avoid: {}, vegan: false };
+var listEl = $('#bake-list');
+function visibleItems() {
+  return ITEMS.filter(function (it) {
+    if (filt.cat !== 'all' && it.cat !== filt.cat) return false;
+    for (var c in filt.avoid) if (filt.avoid[c] && it.alg.indexOf(c) > -1) return false;
+    if (filt.vegan && it.alg.indexOf('V') < 0) return false;
+    return true;
+  });
+}
+function rowHTML(it) {
+  var algs = it.alg.map(function (c) { var a = AL[c]; return '<li' + (c === 'V' ? ' class="v"' : '') + '>' + ico(a.i, 22, a.e) + a.t + '</li>'; }).join('');
+  return '<li class="bake-row" data-id="' + it.id + '"><div class="b-main"><h3>' + esc(it.name) + (it.tag ? '<span class="b-tag">' + esc(it.tag) + '</span>' : '') + '</h3><p>' + esc(it.desc) + '</p><ul class="alg" aria-label="Contains">' + algs + '</ul></div><div class="b-when"></div><div class="b-buy"><span class="b-price">' + money(it.price) + '</span><span class="b-btn"></span></div></li>';
+}
+function buildList() {
+  var items = visibleItems(), html = '', lastCat = '';
+  items.forEach(function (it) {
+    if (it.cat !== lastCat) {
+      lastCat = it.cat;
+      var c = CATS.filter(function (x) { return x.id === it.cat; })[0];
+      html += '<li class="cat-head"><span class="ico-badge">' + ico(c.i, 34, c.e) + '</span><h3 style="font-size:inherit">' + c.name + '</h3><small>' + c.note + '</small></li>';
+    }
+    html += rowHTML(it);
+  });
+  listEl.innerHTML = html;
+  $('#bake-empty').hidden = items.length > 0;
+  updateRows();
+  $$('#plates .plate').forEach(function (p) { p.hidden = p.getAttribute('data-cat') !== filt.cat; });
+}
+function pillHTML(st) {
+  if (st.s === 'closed') return '<span class="status s-gone">' + ico('moon', 24, '🌙') + ' Closed for today</span>';
+  if (st.s === 'soon') return '<span class="status s-soon">' + ico('hourglass', 24, '⏳') + ' Coming at ' + tfmt(st.next) + ' · in ' + dur(st.next - clock) + '</span>';
+  if (st.s === 'gone') return '<span class="status rubber"><span>Sold out<small>' + (st.next !== null ? 'Back at ' + tfmt(st.next) : 'Back ' + NEXT) + '</small></span></span>';
+  if (st.s === 'low') return '<span class="status s-low">' + ico('flame', 24, '🔥') + ' Only ' + st.left + ' left</span>';
+  if (st.s === 'warm') return '<span class="status s-warm">' + ico('flame', 24, '🔥') + ' Warm now · about ' + st.left + ' left</span>';
+  return '<span class="status s-warm">' + ico('check-circle', 24, '✅') + ' In the case · about ' + st.left + ' left</span>';
+}
+function btnHTML(it, st) {
+  var tm = st.s === 'closed' || (st.s === 'gone' && st.next === null);
+  if (tm) return '<button class="btn btn-sm btn-cream" type="button" data-add="' + it.id + '" data-tomorrow="1" aria-label="Pre-order ' + esc(it.name) + ' for ' + NEXT + '">' + ico('calendar-plus', 22, '📅') + ' Pre-order</button>';
+  return '<button class="btn btn-sm" type="button" data-add="' + it.id + '" aria-label="Add ' + esc(it.name) + ' to the basket">' + ico('plus', 20, '+') + ' Add</button>';
+}
+function updateRows() {
+  $$('.bake-row', listEl).forEach(function (li) {
+    var it = byId[li.getAttribute('data-id')], st = status(it, bakeD, clock);
+    li.classList.toggle('is-gone', st.s === 'gone' || st.s === 'closed');
+    var outs = 'Out ' + st.outs.map(tshort).join(', ');
+    $('.b-when', li).innerHTML = '<span class="b-out">' + ico('clock', 22, '🕐') + outs + '</span>' + pillHTML(st) + '';
+    $('.b-btn', li).innerHTML = btnHTML(it, st);
+  });
+}
+function nextBake() {
+  var best = null;
+  ITEMS.forEach(function (it) {
+    var st = status(it, bakeD, clock);
+    if (st.next !== null && (best === null || st.next < best.t)) best = { t: st.next, it: it };
+  });
+  return best;
+}
+function updateClockUI() {
+  $('#clock-out').textContent = tfmt(clock);
+  $('#clock-range').setAttribute('aria-valuetext', tfmt(clock));
+  $('#clock-range').value = clock;
+  setLive($('#live-clock'), { time: thm(clock) }, tfmt(clock).replace(' ', ''), 'Bakery clock: ' + tfmt(clock));
+  var nb = nextBake(), ring = $('#live-ring'), line = $('#next-out'), tn = $('#tk-next');
+  if (nb) {
+    var mins = nb.t - clock;
+    setLive(ring, { left: Math.min(60, mins), total: 60 }, String(Math.min(60, mins)), mins + ' minutes until the next batch');
+    line.innerHTML = 'Next out of the oven<b>' + esc(nb.it.name) + ' at ' + tfmt(nb.t) + '</b>in ' + dur(mins);
+    tn.textContent = 'Next out: ' + nb.it.short.toLowerCase() + ', ' + tfmt(nb.t);
+  } else {
+    setLive(ring, { left: 0, total: 60 }, '0', 'No more batches today');
+    line.innerHTML = 'That was the last bake<b>Doors close at ' + tfmt(bakeH[1]) + '</b>Day-old bags after 4 pm';
+    tn.textContent = 'That was the last bake of the day';
+  }
+  var served = clock < bakeH[0] ? 0 : 11 + Math.floor((clock - bakeH[0]) / 9);
+  setLive($('#live-queue'), { number: served }, '#' + served, 'Now serving ticket ' + served);
+  $('#tk-ready').textContent = (3 + (Math.floor(clock / 5) % 6)) + ' orders waiting, names on the bags';
+  $('#tk-title').textContent = clock >= bakeH[1] ? 'Counter closed' : (clock < bakeH[0] ? 'Opens at 6 am' : 'Now serving');
+  // oven schedule highlight
+  var cur = null;
+  $$('#oven li').forEach(function (li) { li.classList.remove('now'); if (+li.getAttribute('data-t') <= clock) cur = li; });
+  if (cur) cur.classList.add('now');
+}
+function initBoard() {
+  $('#bake-date').textContent = longDate(bakeD) + (demo ? '' : ', open now');
+  var dn = $('#demo-note');
+  if (demo) { dn.hidden = false; dn.textContent = demoMsg; }
+  var rg = $('#clock-range'); rg.max = bakeH[1]; rg.value = clock;
+  var raf = 0;
+  rg.addEventListener('input', function () {
+    clock = +rg.value;
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = 0; updateRows(); updateClockUI(); if (window.__rosaPick) window.__rosaPick(); });
+  });
+  $('#cat-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cat]'); if (!b) return;
+    filt.cat = b.getAttribute('data-cat');
+    $$('#cat-chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+    buildList();
+  });
+  $('#avoid-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    var on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', String(on));
+    if (b.hasAttribute('data-vegan')) filt.vegan = on; else filt.avoid[b.getAttribute('data-avoid')] = on;
+    buildList();
+  });
+  $('#clear-filters').addEventListener('click', function () {
+    filt = { cat: 'all', avoid: {}, vegan: false };
+    $$('#cat-chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-cat') === 'all')); });
+    $$('#avoid-chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
+    buildList();
+  });
+  buildList(); updateClockUI();
+  // allergen lists in the legend, computed from the same data
+  $$('[data-alg-list]').forEach(function (el) {
+    var code = el.getAttribute('data-alg-list'), parts = [], rest = [];
+    CATS.forEach(function (c) {
+      var inCat = ITEMS.filter(function (it) { return it.cat === c.id; }), has = inCat.filter(function (it) { return it.alg.indexOf(code) > -1; });
+      if (has.length === inCat.length && has.length > 1) parts.push('all ' + c.short.toLowerCase());
+      else has.forEach(function (it) { rest.push(it.short.toLowerCase()); });
+    });
+    var all = parts.concat(rest);
+    if (all.length > 7) {
+      var miss = ITEMS.filter(function (it) { return it.alg.indexOf(code) < 0; }).map(function (it) { return it.short.toLowerCase(); });
+      el.textContent = 'Everything except ' + miss.join(', ') + '.';
+    } else var txt = all.join(', '); el.textContent = txt.charAt(0).toUpperCase() + txt.slice(1) + '.';
+  });
+}
+
+/* ---------- basket ---------- */
+var FREE_AT = 20;
+var cart = [];
+try { cart = JSON.parse(store.get('rosa-cart') || '[]').filter(function (l) { return l && l.key && l.qty > 0 && (l.kind !== 'item' || byId[l.id]); }); } catch (e) { cart = []; }
+function saveCart() { store.set('rosa-cart', JSON.stringify(cart)); }
+function cartCount() { return cart.reduce(function (n, l) { return n + l.qty; }, 0); }
+function cartSub() { return cart.reduce(function (n, l) { return n + l.qty * l.price; }, 0); }
+function lineHTML(l) {
+  var note = l.note ? '<small>' + esc(l.note) + '</small>' : '';
+  if (l.tomorrow) note += '<small>Pre-order for ' + NEXT + '</small>';
+  if (l.minDays) note += '<small>Needs 48 hours</small>';
+  return '<li class="line" data-key="' + esc(l.key) + '"><div class="l-name">' + esc(l.name) + note + '</div><span class="l-price">' + money(l.qty * l.price) + '</span>' +
+    '<div class="l-ctl"><div class="qty" role="group" aria-label="Quantity of ' + esc(l.name) + '"><button type="button" data-act="dec" aria-label="One fewer ' + esc(l.name) + '">' + ico('minus', 20, '−') + '</button><output aria-live="polite">' + l.qty + '</output><button type="button" data-act="inc" aria-label="One more ' + esc(l.name) + '">' + ico('plus', 20, '+') + '</button></div>' +
+    '<button class="icon-btn" type="button" data-act="rm" aria-label="Remove ' + esc(l.name) + '">' + ico('trash-2', 22, '🗑️') + '</button></div></li>';
+}
+function perkText(sub) {
+  return sub >= FREE_AT ? 'Free cookie unlocked. Rosa tucks one in the bag.' : 'Add ' + money(FREE_AT - sub) + ' more and Rosa tucks in a free cookie.';
+}
+function renderCart() {
+  var n = cartCount(), sub = cartSub(), html = cart.map(lineHTML).join('');
+  $('#basket-lines').innerHTML = html; $('#d-lines').innerHTML = html;
+  $('#basket-empty').hidden = n > 0; $('#d-empty').hidden = n > 0;
+  $('#basket-totals').hidden = n === 0;
+  $('#sum-sub').textContent = money(sub); $('#sum-total').textContent = money(sub); $('#d-sub').textContent = money(sub);
+  $('#submit-total').textContent = money(sub);
+  var pct = Math.min(100, sub / FREE_AT * 100);
+  $('#basket-totals .progress i').style.width = pct + '%'; $('#d-bar i').style.width = pct + '%';
+  $('#perk-bar').setAttribute('aria-valuenow', String(Math.min(FREE_AT, Math.round(sub))));
+  $('#perk-text').textContent = perkText(sub); $('#d-perk').textContent = perkText(sub);
+  setLive($('#cart-live'), { count: n }, '🛒 ' + n, n ? n + (n === 1 ? ' item' : ' items') + ' in the basket' : 'The basket is empty');
+  $('#basket-sum').textContent = money(sub);
+  $('#basket-btn').setAttribute('aria-label', 'Open basket, ' + (n ? n + (n === 1 ? ' item, ' : ' items, ') + money(sub) : 'empty'));
+  $('#d-go').setAttribute('aria-disabled', n ? 'false' : 'true');
+}
+function addLine(l, msg) {
+  var f = cart.filter(function (x) { return x.key === l.key; })[0];
+  if (f) f.qty += (l.qty || 1); else { l.qty = l.qty || 1; cart.push(l); }
+  saveCart(); renderCart(); renderPick();
+  toast(msg || ('Added ' + l.name));
+}
+function lineAction(e) {
+  var b = e.target.closest('[data-act]'); if (!b) return;
+  var li = b.closest('.line'), key = li.getAttribute('data-key'), l = cart.filter(function (x) { return x.key === key; })[0];
+  if (!l) return;
+  var a = b.getAttribute('data-act');
+  if (a === 'inc') l.qty = Math.min(24, l.qty + 1);
+  else if (a === 'dec') l.qty -= 1;
+  else l.qty = 0;
+  if (l.qty <= 0) cart = cart.filter(function (x) { return x !== l; });
+  saveCart(); renderCart(); renderPick();
+}
+$('#basket-lines').addEventListener('click', lineAction);
+$('#d-lines').addEventListener('click', lineAction);
+listEl.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-add]'); if (!b) return;
+  var it = byId[b.getAttribute('data-add')], tm = b.hasAttribute('data-tomorrow');
+  addLine({ key: it.id + (tm ? ':t' : ''), kind: 'item', id: it.id, name: it.name, price: it.price, tomorrow: tm }, tm ? 'Pre-ordered for ' + NEXT + ': ' + it.name : 'Added ' + it.name);
+});
+
+/* basket drawer */
+var drawer = $('#drawer'), scrim = $('#scrim'), lastFocus = null;
+function openDrawer() {
+  lastFocus = document.activeElement;
+  $('#toast').classList.remove('show');
+  drawer.classList.add('open'); scrim.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function () { $('#drawer-close').focus(); }, 40);
+}
+function closeDrawer() {
+  drawer.classList.remove('open'); scrim.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+$('#basket-btn').addEventListener('click', openDrawer);
+$('#drawer-close').addEventListener('click', closeDrawer);
+scrim.addEventListener('click', closeDrawer);
+$('#d-go').addEventListener('click', function (e) { closeDrawer(); if (!cartCount()) { e.preventDefault(); location.hash = '#bake'; } });
+document.addEventListener('keydown', function (e) {
+  if (!drawer.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeDrawer(); return; }
+  if (e.key === 'Tab') {
+    var f = $$('button,a[href],input', drawer).filter(function (x) { return !x.disabled && x.offsetParent !== null; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* mobile menu */
+var menuBtn = $('#menu-btn'), mnav = $('#mnav');
+menuBtn.addEventListener('click', function () {
+  var open = !mnav.classList.contains('open');
+  mnav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open));
+});
+mnav.addEventListener('click', function (e) { if (e.target.closest('a')) { mnav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
+
+/* ---------- pick-up day and time ---------- */
+var sel = { day: null, t: null };
+var booked = {};
+function minDay() {
+  var m = bakeD;
+  cart.forEach(function (l) {
+    var need = l.minDays ? addDays(bakeD, l.minDays) : (l.tomorrow ? addDays(bakeD, 1) : bakeD);
+    if (ymd(need) > ymd(m)) m = need;
+  });
+  return firstOpen(m);
+}
+function lineReady(l, d) {
+  if (l.kind !== 'item') return 0;
+  var it = byId[l.id], h = HOURS[d.getDay()];
+  if (ymd(d) === ymd(bakeD)) {
+    var st = status(it, d, clock);
+    if (st.s === 'soon') return st.next;
+    if (st.s === 'gone') return st.next === null ? 9999 : st.next;
+    return 0;
+  }
+  var outs = it.outs.filter(function (o) { return o <= h[1] - 30; });
+  return outs[0] || 0;
+}
+function earliest(d) {
+  var best = { t: 0, who: '' };
+  cart.forEach(function (l) { var r = lineReady(l, d); if (r > best.t) best = { t: r, who: l.name }; });
+  return best;
+}
+function takenAt(d, t) {
+  var key = ymd(d) + '|' + t;
+  var h = (d.getDate() * 7 + (t / 30) * 13 + d.getDay() * 5) % 5;
+  var busy = (t >= 420 && t <= 540) || (t >= 720 && t <= 780) || (t >= 990 && t <= 1050);
+  return Math.min(4, h + (busy ? 1 : 0) - (t > 600 && t < 700 ? 1 : 0)) + (booked[key] || 0);
+}
+function openDays() {
+  var out = [], d = bakeD;
+  while (out.length < 10) { if (HOURS[d.getDay()]) out.push(d); d = addDays(d, 1); }
+  return out;
+}
+function renderPick() {
+  var md = minDay(), days = openDays();
+  if (!sel.day || sel.day < ymd(md)) { var wasSet = !!sel.day; sel.day = ymd(md); if (wasSet && cartCount()) toast('Moved your pick-up to ' + longDate(md)); }
+  $('#days').innerHTML = days.map(function (d) {
+    var dis = ymd(d) < ymd(md), on = ymd(d) === sel.day;
+    var tag = (!demo && ymd(d) === ymd(todayD)) ? 'Today' : DAYN[d.getDay()].slice(0, 3);
+    return '<button class="day" type="button" data-day="' + ymd(d) + '" aria-pressed="' + on + '"' + (dis ? ' disabled' : '') + ' aria-label="' + longDate(d) + (dis ? ', not available for what is in your basket' : '') + '"><span class="wd">' + tag + '</span><span class="dn">' + d.getDate() + '</span><span class="dm">' + MON[d.getMonth()].slice(0, 3) + '</span></button>';
+  }).join('');
+  var d = days.filter(function (x) { return ymd(x) === sel.day; })[0] || md, h = HOURS[d.getDay()], er = earliest(d), same = ymd(d) === ymd(bakeD);
+  var html = '', anyOk = false;
+  for (var t = h[0] + 30; t <= h[1] - 30; t += 30) {
+    var why = '';
+    if (same && t < clock + 30) why = 'too soon';
+    else if (t < er.t) why = 'not ready';
+    var taken = takenAt(d, t), left = 4 - taken;
+    if (!why && left <= 0) why = 'fully booked';
+    if (!why) anyOk = true;
+    var on = sel.t === t && !why;
+    html += '<button class="slot" type="button" data-t="' + t + '" aria-pressed="' + on + '"' + (why ? ' disabled title="' + why + '"' : '') + ' aria-label="' + tfmt(t) + (why ? ', ' + why : (left <= 2 ? ', ' + left + ' left' : '')) + '">' + tfmt(t).replace(' ', '&nbsp;') + (!why && left <= 2 ? '<small>' + left + ' left</small>' : '') + '</button>';
+  }
+  $('#slots').innerHTML = html;
+  if (sel.t !== null) { var cur = $('#slots [data-t="' + sel.t + '"]'); if (!cur || cur.disabled) sel.t = null; }
+  $('#slots-note').textContent = DAYN[d.getDay()] + ', ' + tfmt(h[0]) + ' to ' + tfmt(h[1]);
+  var note = $('#ready-note');
+  if (cartCount() && er.t > 0 && er.t < 9000) note.textContent = 'Earliest slot ' + tfmt(Math.ceil(er.t / 30) * 30) + ': ' + er.who + ' is out of the oven at ' + tfmt(er.t) + '.';
+  else if (same) note.textContent = 'Today starts 30 minutes after the bakery clock (' + tfmt(clock) + '). Crossed-out times are taken or too soon.';
+  else note.textContent = 'Everything in your basket is ready from opening. Crossed-out times are taken.';
+  var ps = $('#pick-sum'), pt = $('#pick-text');
+  if (sel.t !== null) { ps.classList.add('ok'); pt.textContent = 'Pick-up: ' + longDate(d) + ' at ' + tfmt(sel.t); }
+  else { ps.classList.remove('ok'); pt.textContent = anyOk ? 'Choose a time to see your pick-up slot.' : 'Nothing left on this day, try another one.'; }
+}
+window.__rosaPick = renderPick;
+$('#days').addEventListener('click', function (e) { var b = e.target.closest('[data-day]'); if (!b || b.disabled) return; sel.day = b.getAttribute('data-day'); renderPick(); });
+$('#slots').addEventListener('click', function (e) { var b = e.target.closest('[data-t]'); if (!b || b.disabled) return; sel.t = +b.getAttribute('data-t'); renderPick(); $('#order-msg').classList.remove('show'); });
+
+/* ---------- placing the order ---------- */
+function field(id, ok) { var f = $('#' + id); f.classList.toggle('bad', !ok); return ok; }
+function phoneOk(v) { return (v.replace(/\D/g, '')).length >= 10; }
+function icsStamp(d, t) { return ymd(d).replace(/-/g, '') + 'T' + pad(Math.floor(t / 60)) + pad(t % 60) + '00'; }
+function downloadICS(d, t, name, lines) {
+  var stamp = new Date().toISOString().replace(/[-:]|\.\d{3}/g, '');
+  var desc = lines.map(function (l) { return l.qty + ' x ' + l.name; }).join('\\n');
+  var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Rosa\'s Corner Bakery//Demo//EN', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+    'UID:rosa-' + Date.now() + '@rosas-corner.example', 'DTSTAMP:' + stamp, 'DTSTART:' + icsStamp(d, t), 'DTEND:' + icsStamp(d, t + 30),
+    'SUMMARY:Pick up at Rosa\'s Corner Bakery', 'LOCATION:214 Marigold Street\\, Alder Falls', 'DESCRIPTION:Bag under the name ' + name.replace(/[,;]/g, ' ') + '.\\n' + desc + '\\nPay at the counter.',
+    'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:Rosa\'s pick-up in 30 minutes', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+  var blob = new Blob([ics], { type: 'text/calendar' }), a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'rosas-pickup-' + ymd(d) + '.ics';
+  document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+var form = $('#order-form'), done = $('#order-done');
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var msg = $('#order-msg'), name = $('#o-name').value.trim(), phone = $('#o-phone').value.trim();
+  var okN = field('f-name', name.length > 1), okP = field('f-phone', phoneOk(phone));
+  msg.classList.remove('show');
+  if (!cartCount()) { msg.textContent = 'Your basket is empty. Add something from today\'s bake first.'; msg.classList.add('show'); return; }
+  if (sel.t === null) { msg.textContent = 'Choose a pick-up time on the right first.'; msg.classList.add('show'); $('#days').scrollIntoView({ block: 'center' }); return; }
+  if (!okN) { $('#o-name').focus(); return; }
+  if (!okP) { $('#o-phone').focus(); return; }
+  var d = openDays().filter(function (x) { return ymd(x) === sel.day; })[0], t = sel.t;
+  var key = ymd(d) + '|' + t, ticket = Math.floor((t - 360) / 30) * 3 + takenAt(d, t) + 1;
+  booked[key] = (booked[key] || 0) + 1;
+  var lines = cart.slice(), total = cartSub(), slice = $('#o-slice').checked, first = name.split(/\s+/)[0];
+  var shown = lines.slice(0, 4).map(function (l) { return '<li>' + ico('check', 20, '✓') + '<span>' + l.qty + ' × ' + esc(l.name) + '</span></li>'; }).join('');
+  if (lines.length > 4) shown += '<li>' + ico('plus', 20, '+') + '<span>and ' + (lines.length - 4) + ' more</span></li>';
+  done.innerHTML = '<div class="done">' + ico('badge-check', 56, '✅', ' data-label="Order placed"') +
+    '<h3>Thanks, ' + esc(first) + '. It is in the book.</h3>' +
+    '<p>Your bag will be ready on <b>' + longDate(d) + ' at ' + tfmt(t) + '</b>' + (slice ? ', loaves sliced' : '') + '.</p>' +
+    '<div class="tk-now"><b>Your ticket</b><span data-live="ticket-number" data-p-number="' + ticket + '" data-p-hash="true" data-size="88" data-label="Your ticket, number ' + ticket + '">#' + ticket + '</span></div>' +
+    '<ul>' + shown + '<li>' + ico('wallet', 20, '💳') + '<span>' + money(total) + (total >= FREE_AT ? ', plus a free cookie' : '') + ', paid at the counter</span></li></ul>' +
+    '<button class="btn btn-teal btn-sm" type="button" id="ics-btn">' + ico('calendar-plus', 20, '📅') + ' Add to calendar</button>' +
+    '<button class="btn btn-cream btn-sm" type="button" id="new-order">' + ico('rotate-ccw', 20, '↺') + ' Start another order</button></div>';
+  form.hidden = true; done.hidden = false;
+  cart = []; sel.t = null; saveCart(); renderCart(); renderPick();
+  done.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  $('#ics-btn').addEventListener('click', function () { downloadICS(d, t, name, lines); toast('Calendar file downloaded'); });
+  $('#new-order').addEventListener('click', function () { form.reset(); form.hidden = false; done.hidden = true; sel.t = null; renderPick(); location.hash = '#bake'; });
+});
+['o-name', 'o-phone'].forEach(function (id) {
+  $('#' + id).addEventListener('input', function () { var f = $('#' + id).closest('.field'); if (f.classList.contains('bad')) f.classList.remove('bad'); });
+});
+
+/* ---------- cake builder ---------- */
+var cakeForm = $('#cake-form'), touched = {};
+function checked(name) { return $('input[name="' + name + '"]:checked', cakeForm); }
+function cakeState() {
+  var s = checked('size'), f = checked('flavour'), fi = checked('filling');
+  var ex = $$('input[name="extra"]:checked', cakeForm).map(function (x) { return x.value; });
+  var extraSum = $$('input[name="extra"]:checked', cakeForm).reduce(function (n, x) { return n + (+x.getAttribute('data-add')); }, 0);
+  var price = (+s.getAttribute('data-price')) + (+f.getAttribute('data-add')) + (+fi.getAttribute('data-add')) + extraSum;
+  var sizeName = s.value === 'sheet' ? 'Half sheet' : s.value + ' inch';
+  return { s: s, f: f, fi: fi, ex: ex, price: price, sizeName: sizeName, text: $('#c-text').value.trim(), nuts: f.hasAttribute('data-nuts') };
+}
+function renderCake() {
+  var c = cakeState(), cake = $('#cake');
+  cake.style.setProperty('--w', c.s.getAttribute('data-w') + 'px');
+  cake.style.setProperty('--bh', c.s.getAttribute('data-h') + 'px');
+  cake.style.setProperty('--sp', c.f.getAttribute('data-c'));
+  cake.style.setProperty('--fil', c.fi.getAttribute('data-c'));
+  $('#c-msg').textContent = c.text;
+  var ex = '';
+  if (c.ex.indexOf('candles') > -1) ex += '<i class="candle"></i><i class="candle"></i><i class="candle"></i>';
+  if (c.ex.indexOf('roses') > -1) ex += '<i class="rose"></i><i class="rose"></i>';
+  if (c.ex.indexOf('cherries') > -1) ex += '<i class="cherry"></i><i class="cherry"></i><i class="cherry"></i>';
+  $('#c-extra').innerHTML = ex;
+  cake.setAttribute('aria-label', 'Preview: ' + c.sizeName + ' ' + c.f.value.toLowerCase() + ' cake with ' + c.fi.value.toLowerCase() + (c.text ? ', saying ' + c.text : ''));
+  $('#cake-title').textContent = c.sizeName + ' ' + c.f.value.toLowerCase();
+  $('#cake-sub').textContent = c.fi.value + ', serves ' + c.s.getAttribute('data-serves');
+  var rd = firstOpen(addDays(bakeD, 2));
+  $('#cake-ready').textContent = 'Ready from ' + longDate(rd);
+  setLive($('#live-price'), { amount: c.price }, '$' + c.price, 'Cake price, ' + c.price + ' dollars');
+  $('#cake-btn-price').textContent = money(c.price);
+  $('#cake-allergy').textContent = c.nuts ? 'Contains wheat, milk, egg and tree nuts (almond). Made in a kitchen that also uses sesame and soy.' : 'Contains wheat, milk and egg. Made in a kitchen that also uses tree nuts, sesame and soy.';
+  $('#c-count').textContent = (28 - $('#c-text').value.length) + ' letters left. Piped in red icing.';
+  var map = { size: 1, flavour: 2, filling: 3 };
+  Object.keys(map).forEach(function (k) { if (touched[k]) setLive($('#step-' + map[k]), { done: true }, '✓'); });
+  setLive($('#step-4'), { done: !!(c.text || c.ex.length) }, (c.text || c.ex.length) ? '✓' : '4');
+}
+cakeForm.addEventListener('change', function (e) { var n = e.target.name; if (n) touched[n] = true; renderCake(); });
+$('#c-text').addEventListener('input', renderCake);
+$('#start-cherry').addEventListener('click', function () {
+  function pick(name, val) { var i = $('input[name="' + name + '"][value="' + val + '"]', cakeForm); if (i) i.checked = true; touched[name] = true; }
+  pick('size', '8'); pick('flavour', 'Vanilla bean'); pick('filling', 'Raspberry jam');
+  $$('input[name="extra"]', cakeForm).forEach(function (x) { x.checked = x.value === 'cherries'; });
+  $('#c-text').value = 'Happy Birthday'; renderCake(); toast('The Cherry-top is loaded. Change anything you like.');
+});
+cakeForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var c = cakeState(), bits = [c.fi.value];
+  if (c.text) bits.push('"' + c.text + '"');
+  c.ex.forEach(function (x) { bits.push(x === 'cherries' ? 'cherries on top' : x === 'roses' ? 'sugar roses' : 'candles'); });
+  addLine({ key: 'cake:' + c.s.value + '|' + c.f.value + '|' + c.fi.value + '|' + c.text + '|' + c.ex.join(','), kind: 'cake', name: c.sizeName + ' ' + c.f.value.toLowerCase() + ' cake', note: bits.join(', '), price: c.price, minDays: 2 }, 'Cake added. Earliest pick-up is ' + longDate(minDay()));
+});
+
+/* ---------- gift cards ---------- */
+var gift = { amt: 50 };
+$('#amts').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-amt]'); if (!b) return;
+  gift.amt = +b.getAttribute('data-amt');
+  $$('#amts .chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+  $('#gc-amt').textContent = '$' + gift.amt;
+});
+$('#g-for').addEventListener('input', function () { $('#gc-for').textContent = this.value.trim() || 'someone lucky'; });
+$('#gift-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var who = $('#g-for').value.trim();
+  addLine({ key: 'gift:' + gift.amt + ':' + who, kind: 'gift', name: "Rosa's gift card, $" + gift.amt, note: who ? 'For ' + who : 'Name left blank', price: gift.amt }, 'Gift card added to your basket');
+});
+
+/* ---------- wedding enquiry ---------- */
+var wDay = $('#w-day'), minWed = addDays(todayD, 21);
+wDay.min = ymd(minWed);
+function tierText(n) {
+  if (!n || n < 10) return 'Tell us your guest count and we will suggest tiers.';
+  if (n <= 30) return n + ' guests: two tiers, 6 and 8 inch, serves about 40.';
+  if (n <= 60) return n + ' guests: two tiers, 8 and 10 inch, serves about 70.';
+  if (n <= 100) return n + ' guests: three tiers, 6, 8 and 10 inch, serves about 110.';
+  if (n <= 160) return n + ' guests: three tiers, 8, 10 and 12 inch plus a kitchen cake, serves about 170.';
+  return n + ' guests: four tiers, 6, 8, 10 and 12 inch plus a kitchen cake for the back, serves 200 and up.';
+}
+$('#w-guests').addEventListener('input', function () { $('#tier-hint span:last-child').textContent = tierText(+this.value); });
+var wForm = $('#wed-form'), wDone = $('#wed-done');
+wForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var names = $('#w-name').value.trim(), mail = $('#w-email').value.trim(), day = wDay.value, g = +$('#w-guests').value;
+  var ok = [
+    field('w-names', names.length > 1),
+    field('w-mail', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)),
+    field('w-date', !!day && day >= ymd(minWed)),
+    field('w-guest', g >= 10 && g <= 400)
+  ];
+  var msg = $('#wed-msg'); msg.classList.remove('show');
+  var bad = ['w-name', 'w-email', 'w-day', 'w-guests'].filter(function (id, i) { return !ok[i]; });
+  if (bad.length) { msg.textContent = 'A few details need another look, marked in red below.'; msg.classList.add('show'); $('#' + bad[0]).focus(); return; }
+  var parts = day.split('-'), dd = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+  var styles = $$('input[name="wstyle"]:checked', wForm).map(function (x) { return x.value; });
+  var ref = 'WED-' + pad(dd.getMonth() + 1) + pad(dd.getDate()) + '-' + (1000 + (Date.now() % 9000));
+  wDone.innerHTML = '<div class="done">' + ico('ring-box', 56, '💍', ' data-label="Enquiry sent"') + '<h3>Thank you, ' + esc(names) + '.</h3>' +
+    '<p>Marisol will email <b>' + esc(mail) + '</b> or call within two working days to set up a tasting.</p>' +
+    '<ul><li>' + ico('calendar-days', 20, '📅') + '<span>' + longDate(dd) + ', about ' + g + ' guests</span></li>' +
+    '<li>' + ico('lightbulb', 20, '💡') + '<span>' + esc(tierText(g)) + '</span></li>' +
+    (styles.length ? '<li>' + ico('heart', 20, '❤️') + '<span>' + esc(styles.join(', ')) + '</span></li>' : '') +
+    '<li>' + ico('receipt-text', 20, '🧾') + '<span>Reference ' + ref + '</span></li></ul>' +
+    '<button class="btn btn-cream btn-sm" type="button" id="wed-again">' + ico('rotate-ccw', 20, '↺') + ' Send another enquiry</button></div>';
+  wForm.hidden = true; wDone.hidden = false; wDone.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  $('#wed-again').addEventListener('click', function () { wForm.reset(); wForm.hidden = false; wDone.hidden = true; $('#tier-hint span:last-child').textContent = tierText(0); });
+});
+['w-name', 'w-email', 'w-day', 'w-guests'].forEach(function (id) { $('#' + id).addEventListener('input', function () { this.closest('.field').classList.remove('bad'); }); });
+
+/* ---------- hours, newsletter, address ---------- */
+function initHours() {
+  var d = todayD.getDay(), h = HOURS[d];
+  $$('#hours li').forEach(function (li) { li.classList.toggle('today', +li.getAttribute('data-d') === d); });
+  var on = $('#open-now'), tx = $('#open-now-text');
+  function both(t) { tx.textContent = t; $('#hero-open').textContent = t; }
+  if (h && realMins >= h[0] && realMins < h[1]) { on.classList.remove('closed'); both('Open now, until ' + tfmt(h[1]).replace(':00', '') + ' today.'); }
+  else {
+    on.classList.add('closed');
+    var nd = h && realMins < h[0] ? todayD : firstOpen(addDays(todayD, 1)), nh = HOURS[nd.getDay()];
+    both('Closed right now. Opens ' + (ymd(nd) === ymd(todayD) ? 'today' : DAYN[nd.getDay()]) + ' at ' + tfmt(nh[0]).replace(':00', '') + '.');
+  }
+  var yrs = words(todayD.getFullYear() - 1961) + ' years'; $('#years-line').textContent = yrs.charAt(0).toUpperCase() + yrs.slice(1);
+}
+$('#copy-addr').addEventListener('click', function () {
+  var txt = "Rosa's Corner Bakery, 214 Marigold Street, Alder Falls";
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { toast('Address copied'); }, function () { toast(txt); });
+  else toast(txt);
+});
+$('#news-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var v = $('#n-email').value.trim(), m = $('#news-msg');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { m.textContent = 'That email does not look right. Try name@example.com.'; $('#n-email').focus(); return; }
+  m.textContent = 'You are on the Sunday list. The first email lands this weekend.'; this.reset();
+});
+
+initBoard(); initHours(); renderCart(); renderPick(); renderCake();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1758 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puddle &amp; Pip (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Rainwear, wellies and cosy layers for ages 2 to 10 with cuffs and straps that grow with them. Free 60-day returns. A fictional shop, made as a demo of the with icons library.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  --ink:#14132B;--muted:#4A4766;--cream:#FFF7E0;--paper:#FFFDF7;
+  --yellow:#FFC800;--yellow-l:#FFE27A;--sky:#7FD1FF;--sky-l:#D6F0FF;--tomato:#FF5A44;--tomato-d:#D93A25;
+  --mint:#5FE2AE;--mint-l:#CFF6E5;--grape:#9B7BFF;--pink:#FFA6D0;
+  --stage:var(--sky);
+  --sh:6px 6px 0 var(--ink);--sh-s:4px 4px 0 var(--ink);
+  --fd:'Lilita One','Arial Rounded MT Bold',system-ui,sans-serif;
+  --fb:'Rubik',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  /* the default style (sticker) and its neighbours, tuned to the brand: bus yellow, sky, tomato, mint */
+  --with-sticker-lemon:#FFC800;--with-sticker-sky:#4DB8FF;--with-sticker-peach:#FF5A44;--with-sticker-mint:#3FD9A0;
+  --with-sticker-accent:#FF5A44;--with-sticker-bubblegum:#FF8FC0;--with-sticker-grape:#FF5A44;--with-sticker-ink:#14132B;--with-sticker-shadow:#14132B;
+  --with-kawaii-fill-1:#FF6B57;--with-kawaii-fill-2:#FFA13D;--with-kawaii-fill-3:#FFC800;--with-kawaii-fill-4:#3FD9A0;--with-kawaii-fill-5:#4DB8FF;--with-kawaii-fill-6:#A98BFF;
+  --with-bauhaus-accent:#1FA97A;--with-brutal-c2:#FF5A44;--with-gloss-accent:#FF5A44;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{margin:0;font:400 16px/1.55 var(--fb);color:var(--ink);background:var(--cream) radial-gradient(rgba(20,19,43,.09) 1.4px,transparent 1.7px) 0 0/22px 22px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:3px solid #5B3BFF;outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:999;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;transition:top .15s}
+.skip:focus{top:12px}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.h2{font:400 clamp(34px,5.4vw,58px)/1 var(--fd);letter-spacing:.005em}
+.h3{font:400 clamp(24px,3vw,32px)/1.05 var(--fd)}
+.lead{font-size:clamp(17px,2vw,20px);font-weight:500;max-width:36em;text-wrap:pretty}
+.fine{font-size:13px;color:var(--muted)}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+/* ============ small parts ============ */
+.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 10px;border:3px solid var(--ink);border-radius:999px;background:var(--yellow);font:600 13px/1.2 var(--fb);text-transform:uppercase;letter-spacing:.06em;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
+.tag.red{background:var(--tomato)}.tag.sky{background:var(--sky)}.tag.mint{background:var(--mint)}.tag.white{background:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:10px 20px;border:3px solid var(--ink);border-radius:14px;background:var(--yellow);color:var(--ink);font:400 19px/1 var(--fd);letter-spacing:.02em;text-decoration:none;box-shadow:var(--sh-s);transition:transform .12s,box-shadow .12s,background .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.red{background:var(--tomato)}.btn.white{background:#fff}.btn.sky{background:var(--sky)}
+.btn.ink{background:var(--ink);color:var(--yellow);box-shadow:4px 4px 0 var(--tomato)}
+.btn.sm{min-height:44px;padding:8px 14px;font-size:17px}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.ibtn{position:relative;display:inline-grid;place-items:center;width:48px;height:48px;border:3px solid var(--ink);border-radius:14px;background:#fff;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .12s;padding:0}
+.ibtn:hover{background:var(--yellow);transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.ibtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.card{background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:var(--sh)}
+.live-pill{display:inline-flex}
+/* Basic level: a plain site, emoji and text where the icons go (same layout, no icon library) */
+html[data-level="0"] .kit-ico,html[data-level="0"] .kit-live{min-width:0!important;min-height:0!important}
+html[data-level="0"] .kit-ico .kit-fb{font-size:var(--emoji,18px);line-height:1}
+html[data-level="0"] .kit-live .kit-fb{font-size:inherit}
+html[data-level="0"] .live-pill{padding:2px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--tomato);font:700 14px/1.4 var(--fb)}
+html[data-level="0"] .hero-sale .kit-live,html[data-level="0"] .bundle-pct .kit-live{padding:6px 16px;border:3px solid var(--ink);border-radius:999px;background:var(--tomato);color:#fff;font:400 26px/1.1 var(--fd);box-shadow:3px 3px 0 var(--ink)}
+html[data-level="0"] #wx-live{font:400 48px/1 var(--fd)}
+html[data-level="0"] #kit-price,html[data-level="0"] .buy-row>.kit-live{font:400 44px/1 var(--fd)}
+html[data-level="0"] #res-badge{padding:6px 18px;border:3px solid var(--ink);border-radius:16px;background:var(--yellow);font:400 52px/1 var(--fd);box-shadow:4px 4px 0 var(--ink)}
+html[data-level="0"] .how .kit-live{flex:none;width:40px;height:40px;border:3px solid var(--ink);border-radius:50%;background:var(--mint);font:400 20px/1 var(--fd)}
+html[data-level="0"] [data-live="rating-stars"]{color:#E39B00;font-size:20px;letter-spacing:1px}
+html[data-level="0"] .sum [data-live="rating-stars"]{font-size:28px}
+html[data-level="0"] [data-live="avatar-initials"]{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sky);border:3px solid var(--ink);font:400 18px/1 var(--fd)}
+html[data-level="0"] #arrive{padding:6px 12px;border:3px solid var(--ink);border-radius:12px;background:var(--cream);font:400 22px/1.1 var(--fd)}
+html[data-level="0"] #ship-ring{flex:none;width:52px;height:52px;border:3px solid var(--ink);border-radius:50%;background:var(--mint);font:400 16px/1 var(--fd)}
+html[data-level="0"] #bag-live{font:400 18px/1 var(--fd)}
+.scallop{height:24px;background:radial-gradient(circle at 24px 0,var(--c,var(--cream)) 0 19.5px,var(--ink) 20.5px 23.5px,transparent 24.5px) 0 0/48px 24px repeat-x var(--next,var(--cream));margin-top:-3px;position:relative;z-index:1}
+
+/* ============ announcement + header ============ */
+.announce{background:var(--ink);color:var(--yellow);overflow:hidden;font:600 12.5px/1 var(--fb);text-transform:uppercase;letter-spacing:.08em}
+.ticker{display:flex;width:max-content;animation:tick 42s linear infinite}
+.ticker ul{display:flex;gap:34px;padding:11px 17px;flex:none}
+.ticker li{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.ticker li::after{content:"";width:8px;height:8px;background:var(--tomato);border-radius:50%;margin-left:26px}
+@keyframes tick{to{transform:translateX(-50%)}}
+.hdr{position:sticky;top:0;z-index:60;background:var(--cream);border-bottom:3px solid var(--ink)}
+.hdr-in{display:flex;align-items:center;gap:10px;min-height:68px;position:relative}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:400 27px/1 var(--fd);letter-spacing:.01em;margin-right:auto;white-space:nowrap}
+.logo .blob{display:grid;place-items:center;width:44px;height:44px;border:3px solid var(--ink);border-radius:50% 50% 50% 16%;background:var(--yellow);box-shadow:3px 3px 0 var(--ink);transform:rotate(-8deg);transition:transform .2s}
+.logo:hover .blob{transform:rotate(8deg) scale(1.06)}
+.logo i{font-style:normal;color:var(--tomato-d)}
+.nav{display:none}
+.nav a{display:inline-block;padding:10px 12px;border-radius:12px;font-weight:600;text-decoration:none}
+.nav a:hover{background:var(--yellow)}
+.hdr-act{display:flex;gap:10px;align-items:center}
+.bag-btn{display:inline-flex;align-items:center;width:auto;gap:6px;padding:0 12px 0 8px;font:400 18px/1 var(--fd);white-space:nowrap}
+.bag-btn .lbl{display:none}
+.heart-n{position:absolute;right:-8px;top:-8px;min-width:22px;height:22px;padding:0 5px;border:2px solid var(--ink);border-radius:999px;background:var(--tomato);font:700 12px/18px var(--fb);text-align:center;color:var(--ink)}
+.heart-n[hidden]{display:none}
+.menu-btn{display:inline-grid}
+.mnav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--cream);border-bottom:3px solid var(--ink);padding:10px 16px 18px;z-index:5}
+.mnav.open{display:block}
+.mnav a{display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 8px;border-bottom:2px dashed rgba(20,19,43,.25);font:400 22px/1 var(--fd);text-decoration:none}
+@media(min-width:960px){.nav{display:flex;gap:2px}.menu-btn{display:none}.mnav{display:none!important}.bag-btn .lbl{display:inline}}
+
+/* ============ hero ============ */
+.hero{position:relative;background:var(--stage);border-bottom:3px solid var(--ink);padding:26px 0 0;transition:background .4s}
+.hero[data-weather="rain"]{--stage:var(--sky)}.hero[data-weather="sun"]{--stage:var(--yellow)}.hero[data-weather="snow"]{--stage:var(--mint)}
+.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:repeating-linear-gradient(115deg,rgba(255,255,255,.2) 0 16px,transparent 16px 44px)}
+.fl{position:absolute;opacity:.9}
+.hero-grid>.fl{display:none;z-index:1;pointer-events:none}
+@media(min-width:960px){.hero-grid>.fl{display:block}}
+/* Full level: weather particles keyed to the picker (rain falls, snow sways down, the sun bobs) */
+.fx{position:absolute;top:-60px;left:var(--x,50%);opacity:.8;animation:fall var(--t,9s) linear var(--d,0s) infinite}
+.fx.sway{animation:fall var(--t,12s) linear var(--d,0s) infinite,sway 3.4s ease-in-out var(--d,0s) infinite alternate}
+.fx.bob{top:var(--y,30%);animation:bob var(--t,6s) ease-in-out var(--d,0s) infinite alternate}
+.hero:not([data-weather="rain"]) .fx-rain,.hero:not([data-weather="sun"]) .fx-sun,.hero:not([data-weather="snow"]) .fx-snow{display:none}
+@keyframes fall{0%{top:-60px;opacity:0}8%{opacity:.8}90%{opacity:.8}100%{top:100%;opacity:0}}
+@keyframes sway{from{margin-left:-16px}to{margin-left:16px}}
+@keyframes bob{from{transform:translateY(-10px) rotate(-8deg)}to{transform:translateY(12px) rotate(10deg)}}
+.hero-grid{position:relative;z-index:2;display:grid;gap:24px;grid-template-columns:1fr}
+.eyebrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:600;font-size:14px;margin-bottom:14px}
+.hero h1{font:400 clamp(48px,11.5vw,108px)/.93 var(--fd);letter-spacing:.005em;text-wrap:balance}
+.hl{display:inline-block;margin-top:.1em;padding:0 .16em .05em;border:3px solid var(--ink);border-radius:.2em;background:var(--tomato);color:#fff;transform:rotate(-2.5deg);box-shadow:.06em .06em 0 var(--ink)}
+.hero .lead{margin-top:18px}
+.wx{margin:22px 0 4px;padding:14px;max-width:560px}
+.wx-q{display:flex;align-items:center;gap:8px;font:400 20px/1 var(--fd);margin-bottom:12px}
+.wx-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wx-chip{display:grid;justify-items:center;gap:1px;min-height:44px;padding:10px 4px 8px;border:3px solid var(--ink);border-radius:16px;background:var(--cream);font:400 20px/1.1 var(--fd);transition:transform .12s,box-shadow .12s,background .2s}
+.wx-chip small{font:600 13px/1.2 var(--fb);color:var(--muted)}
+.wx-chip:hover{background:var(--yellow-l)}
+.wx-chip[aria-checked="true"]{background:var(--yellow);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.hero[data-weather="sun"] .hero-cta .btn:first-child{background:var(--tomato)}
+.hero-photo{position:relative;justify-self:center;width:min(100% - 16px,580px);margin:8px 0 0;transform:rotate(1.6deg)}
+.ph{position:relative;aspect-ratio:1.2;border:3px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:10px 10px 0 var(--ink);background:#fff}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s}
+.ph img.on{opacity:1}
+.hero-photo::before{content:"";position:absolute;left:50%;top:-14px;width:110px;height:30px;background:rgba(255,226,122,.9);border:2px solid rgba(20,19,43,.35);transform:translateX(-50%) rotate(-3deg);z-index:3}
+.hero-sale{position:absolute;left:-18px;top:-30px;z-index:4;transform:rotate(-9deg);display:grid;place-items:center;width:max-content;padding:11px;border:3px solid var(--ink);border-radius:50%;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+html[data-level="0"] .hero-sale{width:auto;height:auto;padding:0;border:0;background:none;box-shadow:none}
+.hero-photo figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:16px;font-size:12.5px;font-weight:500;transform:rotate(-1.6deg)}
+.hero-photo figcaption a{font-weight:600}
+.fc{position:relative;z-index:3;margin:34px 0 -70px;display:grid;gap:18px;padding:18px}
+.fc-now{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center}
+.fc-label{grid-column:1/-1;font:600 12px/1 var(--fb);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.fc-now p{font-weight:500}
+.kit{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.kit a{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:8px;border:3px solid var(--ink);border-radius:14px;background:var(--cream);text-decoration:none;min-height:60px;transition:background .15s,transform .15s}
+.kit a:hover{background:var(--yellow-l);transform:translate(-1px,-1px)}
+.kit img{width:100%;height:84px;border:2px solid var(--ink);border-radius:9px;object-fit:cover;flex:none}
+.kit b{display:block;font:400 16px/1.05 var(--fd)}
+.kit span{font-size:13px;font-weight:600;color:var(--muted)}
+.fc-buy{display:grid;justify-items:start;gap:8px;align-content:center}
+.fc-buy .btn{width:100%}
+.spacer-hero{height:70px}
+
+/* ============ shop ============ */
+.sec{padding:64px 0}
+.sec-head{display:grid;gap:12px;margin-bottom:28px}
+.sec-head .lead{color:var(--muted)}
+.shop{padding-top:56px}
+.tiles{display:flex;gap:12px;overflow-x:auto;padding:4px 4px 16px;margin:0 -4px 8px;scroll-snap-type:x proximity}
+.tile{flex:none;scroll-snap-align:start;display:grid;justify-items:center;gap:6px;min-width:112px;padding:12px 12px 10px;border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:var(--sh-s);font:400 17px/1.05 var(--fd);text-align:center;transition:transform .12s,box-shadow .12s,background .15s}
+.tile small{font:600 12px/1 var(--fb);color:var(--muted)}
+.tile:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:6px 6px 0 var(--ink)}
+.tile[aria-pressed="true"]{background:var(--sky);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.tile[aria-pressed="true"] small{color:var(--ink)}
+.tools{display:grid;gap:12px;margin-bottom:24px}
+.field{display:grid;gap:6px}
+.field>span,.field>label{font:600 13px/1.1 var(--fb);letter-spacing:.06em;text-transform:uppercase}
+.inp{display:flex;align-items:center;gap:8px;min-width:0;min-height:48px;padding:0 12px;border:3px solid var(--ink);border-radius:14px;background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.inp input,.inp select{flex:1;min-width:0;height:42px;border:0;background:transparent;outline:0;font-weight:500}
+.inp:focus-within{outline:3px solid #5B3BFF;outline-offset:3px}
+.inp select{cursor:pointer}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.pc{position:relative;display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:var(--sh);transition:transform .15s,box-shadow .15s}
+.pc:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.pc[hidden]{display:none}
+.pc.flash{animation:flash 1.2s}
+@keyframes flash{0%,100%{box-shadow:var(--sh)}25%,75%{box-shadow:0 0 0 6px var(--yellow),var(--sh)}}
+.pframe{position:relative;aspect-ratio:1;margin:10px 10px 0;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--tbg,#eee);isolation:isolate;transition:background .25s}
+.pframe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pframe .tint{position:absolute;inset:0;background:var(--tint,transparent);mix-blend-mode:hue;opacity:0;transition:opacity .25s,background .25s}
+.pframe .tint.t2{mix-blend-mode:color}
+.pframe img{filter:var(--filt,none);transition:filter .25s}
+.pc[data-neutral] .tint{display:none}
+.pc[data-tinted] .tint{opacity:1}.pc[data-tinted] .tint.t2{opacity:.3}
+.ptags{position:absolute;left:6px;top:6px;z-index:2;display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.ptags .tag{transform:rotate(-4deg)}
+.gchip{position:absolute;left:8px;bottom:8px;z-index:2;display:none;padding:3px 10px 3px 8px;font-size:11.5px;box-shadow:2px 2px 0 var(--ink);background:#fff}
+@media(min-width:760px){.gchip{display:inline-flex}}
+.wish{position:absolute;right:8px;top:8px;z-index:2;display:grid;place-items:center;width:44px;height:44px;padding:0;border:3px solid var(--ink);border-radius:50%;background:#fff;transition:background .15s,transform .15s}
+.wish:hover{transform:scale(1.08)}
+.wish[aria-pressed="true"]{background:var(--tomato)}
+.pbody{display:flex;flex-direction:column;gap:8px;padding:12px 14px 16px;flex:1}
+.pname{font:400 21px/1.08 var(--fd)}
+.pdesc{display:none;font-size:14px;color:var(--muted)}
+.prate{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600}
+.prate span:last-child{color:var(--muted);font-weight:500}
+.pprice{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;font:400 26px/1 var(--fd)}
+.pprice s{font:500 15px var(--fb);color:var(--muted)}
+.swatches{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.sw{position:relative;width:30px;height:30px;padding:0;border:3px solid var(--ink);border-radius:50%;background:var(--bg,var(--c))}
+.sw::after{content:"";position:absolute;inset:-8px}
+.sw[aria-checked="true"]{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--ink)}
+.stock{display:flex;align-items:center;gap:6px;min-height:20px;font:600 13px/1.2 var(--fb);color:var(--muted)}
+.stock[data-s="ok"]{color:#0B6B47}.stock[data-s="low"]{color:var(--tomato-d)}.stock[data-s="out"]{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px}
+.clabel{font-size:13px;font-weight:500;color:var(--muted);min-height:20px}
+.clabel b{color:var(--ink);font-weight:600}
+.pbody .btn{margin-top:auto;width:100%}
+.pc-cta{grid-column:1/-1;display:grid;justify-items:start;align-content:center;gap:10px;padding:22px;background:var(--yellow)}
+.empty{display:grid;justify-items:center;gap:10px;text-align:center;padding:46px 20px}
+.empty[hidden]{display:none}
+.count{font-weight:600;color:var(--muted);margin-top:18px;font-size:14px}
+
+/* ============ sale / bundle ============ */
+.bundle{position:relative;background:var(--yellow);border-block:3px solid var(--ink);padding:60px 0 68px}
+.bundle-grid{display:grid;gap:28px;align-items:center}
+.bundle-photo{position:relative;transform:rotate(-1.8deg);margin:0}
+.bundle-photo .ph{aspect-ratio:1.4}
+.bundle-photo .ph img{opacity:1;object-position:35% 45%}
+.bundle-pct{position:absolute;right:4px;bottom:-22px;transform:rotate(8deg)}
+.bundle h2{margin:12px 0 10px}
+.bundle ul.inc{display:grid;gap:8px;margin:16px 0 20px;font-weight:500}
+.bundle ul.inc li{display:flex;align-items:center;gap:10px}
+.buy-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.was{font-size:15px;font-weight:500}
+.was s{color:var(--muted)}
+.cd{display:flex;gap:8px;margin-top:20px;align-items:stretch;flex-wrap:wrap}
+.cd>div{min-width:62px;padding:8px 6px 6px;border:3px solid var(--ink);border-radius:12px;background:#fff;text-align:center;box-shadow:3px 3px 0 var(--ink)}
+.cd b{display:block;font:400 28px/1 var(--fd);font-variant-numeric:tabular-nums}
+.cd small{font:600 11px/1 var(--fb);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.cd-note{width:100%;font-size:13px;font-weight:600}
+
+.deco{position:absolute;display:none;pointer-events:none}
+@media(min-width:960px){.deco{display:block}}
+/* ============ size finder ============ */
+.size{background:var(--sky);border-block:3px solid var(--ink);position:relative;overflow:hidden}
+.size-grid{display:grid;gap:28px}
+.sf{padding:20px;display:grid;gap:18px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:3px solid var(--ink);border-radius:16px;background:var(--cream)}
+.seg button{min-height:44px;border:0;border-radius:11px;background:transparent;font:400 18px/1 var(--fd);display:flex;align-items:center;justify-content:center;gap:8px}
+.seg button[aria-pressed="true"]{background:var(--yellow);box-shadow:0 0 0 3px var(--ink)}
+.dial{display:grid;gap:10px}
+.readout{display:flex;align-items:baseline;gap:8px;font:400 52px/1 var(--fd)}
+.readout small{font:600 16px var(--fb);color:var(--muted)}
+.range{width:100%;height:44px;-webkit-appearance:none;appearance:none;background:transparent;margin:0}
+.range::-webkit-slider-runnable-track{height:16px;border:3px solid var(--ink);border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--yellow),var(--tomato))}
+.range::-moz-range-track{height:10px;border:3px solid var(--ink);border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--yellow),var(--tomato))}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;margin-top:-12px;border:3px solid var(--ink);border-radius:50%;background:#fff;box-shadow:3px 3px 0 var(--ink);cursor:grab}
+.range::-moz-range-thumb{width:28px;height:28px;border:3px solid var(--ink);border-radius:50%;background:#fff;box-shadow:3px 3px 0 var(--ink);cursor:grab}
+.stepper{display:flex;gap:10px;align-items:center}
+.stepper .inp{flex:1}
+.units{display:flex;gap:6px}
+.units button{min-height:44px;padding:0 14px;border:3px solid var(--ink);border-radius:12px;background:#fff;font:600 14px var(--fb)}
+.units button[aria-pressed="true"]{background:var(--ink);color:var(--yellow)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 12px;border:3px solid var(--ink);border-radius:14px;background:#fff;cursor:pointer;font-weight:500}
+.opt input{width:22px;height:22px;accent-color:var(--tomato-d);flex:none}
+.opt:has(input:checked){background:var(--yellow-l)}
+.opt small{display:block;color:var(--muted);font-size:13px}
+.res{padding:20px;display:grid;gap:16px;align-content:start;position:relative}
+.res-top{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.res h3{font:400 clamp(26px,3.4vw,36px)/1 var(--fd)}
+.res .big{font:400 18px/1.3 var(--fb);font-weight:600}
+.ruler{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.ruler li{display:grid;place-items:center;min-height:44px;border:2px solid var(--ink);border-radius:10px;background:var(--cream);font:400 15px/1 var(--fd);position:relative}
+.ruler li.grow{background:var(--mint-l)}
+.ruler li.me{background:var(--yellow);box-shadow:0 0 0 3px var(--ink);z-index:1;font-size:18px}
+.ruler-key{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;font-weight:500}
+.ruler-key i{display:inline-block;width:14px;height:14px;border:2px solid var(--ink);border-radius:4px;margin-right:6px;vertical-align:-2px}
+.how{display:grid;gap:12px}
+.how li{display:flex;gap:12px;align-items:center;font-weight:500}
+details.chart{border:3px solid var(--ink);border-radius:14px;background:#fff}
+details.chart summary{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;font:400 18px/1 var(--fd);cursor:pointer;list-style:none}
+details.chart summary::-webkit-details-marker{display:none}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:8px 10px;text-align:left;border-top:2px solid rgba(20,19,43,.2)}
+.tbl th{font:600 12px var(--fb);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tbl tr.me td{background:var(--yellow-l);font-weight:600}
+.tblw{overflow-x:auto;padding:0 6px 8px}
+
+/* ============ grow-with-me ============ */
+.grow{background:var(--mint);border-bottom:3px solid var(--ink)}
+.grow-grid{display:grid;gap:28px;align-items:start}
+.grow-photo{position:relative;margin:0;max-width:420px;justify-self:center;width:100%;transform:rotate(-1.6deg)}
+.grow-photo .ph{aspect-ratio:4/5}
+.grow-photo .ph img{opacity:1;object-position:42% 55%}
+.grow-tag{position:absolute;right:-10px;top:24px;transform:rotate(6deg)}
+.feats{display:grid;gap:14px}
+.feat{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px}
+.feat h3{font:400 22px/1.05 var(--fd);margin-bottom:2px}
+.feat p{font-size:15px;color:var(--muted)}
+.feat .ico{display:grid;place-items:center;width:74px;height:74px;border:3px solid var(--ink);border-radius:18px;background:var(--cream)}
+.slide{grid-column:1/-1;padding:20px;display:grid;gap:18px}
+.slide-l,.slide-r{display:grid;gap:12px;align-content:center}
+/* the sleeve: a real coat sleeve whose cuff rolls come undone as the child grows (1 unit = 1 cm, the track is 56 cm) */
+.sleeve{--full:46;--arm:33;--vis:34;position:relative;height:160px;margin:0}
+.sl-track{position:absolute;left:28px;right:8px;top:0;bottom:0}
+.sl-torso{position:absolute;left:0;top:34px;width:40px;height:92px;z-index:4;border:3px solid var(--ink);border-radius:22px 8px 8px 22px;background:var(--yellow)}
+.sl-torso::before{content:"";position:absolute;left:9px;top:11px;bottom:11px;border-left:3px dashed rgba(20,19,43,.55)}
+.sl-ghost,.sl-tuck,.sl-sleeve,.sl-pipe{position:absolute;top:38px;height:76px}
+.sl-ghost{left:0;width:calc(var(--full) / 56 * 100%);border:3px dashed rgba(20,19,43,.5);border-radius:0 18px 18px 0}
+.sl-tuck{left:calc(var(--vis) / 56 * 100%);width:calc((var(--full) - var(--vis)) / 56 * 100%);background:repeating-linear-gradient(135deg,rgba(20,19,43,.24) 0 3px,transparent 3px 9px);border-radius:0 15px 15px 0;transition:left .3s,width .3s}
+.sl-arm{position:absolute;left:0;top:58px;height:36px;width:calc(var(--arm) / 56 * 100%);background:#F4B896;border:3px solid var(--ink);border-radius:0 18px 18px 0;transition:width .3s}
+.sl-hand{position:absolute;z-index:1;left:calc(var(--arm) / 56 * 100% - 6px);top:50px;width:46px;height:50px;background:#F4B896;border:3px solid var(--ink);border-radius:46% 54% 50% 50%;transition:left .3s}
+.sl-hand::after{content:"";position:absolute;right:6px;top:-15px;width:16px;height:20px;border:3px solid var(--ink);border-bottom:0;border-radius:9px 9px 0 0;background:#F4B896}
+.sl-sleeve{left:0;z-index:2;width:calc(var(--vis) / 56 * 100%);background:var(--yellow);border:3px solid var(--ink);border-radius:0 16px 16px 0;box-shadow:inset 0 -14px 0 rgba(20,19,43,.1);transition:width .3s}
+.sl-pipe{z-index:3;width:14px;right:calc(100% - var(--vis) / 56 * 100%);background:repeating-linear-gradient(180deg,#fff 0 6px,#BFD0DD 6px 12px);border:3px solid var(--ink);transition:right .3s}
+.sl-rolls{position:absolute;z-index:3;top:32px;height:88px;right:calc(100% - var(--vis) / 56 * 100% + 14px);display:flex;transition:right .3s}
+.sl-rolls i{display:block;width:12px;margin-left:-3px;border:3px solid var(--ink);border-radius:7px;background:linear-gradient(90deg,#FFE066,#E5A800)}
+.sl-dim{position:absolute;top:10px;height:14px;border:2px solid var(--ink);border-bottom:0;transition:left .3s,width .3s}
+.sl-dim.a{left:0;width:calc(var(--vis) / 56 * 100%)}
+.sl-dim.b{left:calc(var(--vis) / 56 * 100%);width:calc((var(--full) - var(--vis)) / 56 * 100%);border-style:dashed;border-color:var(--tomato-d)}
+.sl-dim span{position:absolute;left:50%;top:-9px;transform:translateX(-50%);padding:2px 8px;background:#fff;border-radius:999px;white-space:nowrap;font:600 12px/1 var(--fb);color:var(--ink)}
+.sl-dim.b span{color:var(--tomato-d)}
+.sl-ruler{position:absolute;left:0;right:0;bottom:0;height:34px;border-top:3px solid var(--ink);background:repeating-linear-gradient(90deg,var(--ink) 0 3px,transparent 3px 17.857%) 0 0/100% 15px no-repeat,repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 3.5714%) 0 0/100% 8px no-repeat}
+.sl-ruler b{position:absolute;top:17px;transform:translateX(-50%);font:600 11px/1 var(--fb);color:var(--muted);white-space:nowrap}
+.sl-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.sl-stats li{display:flex;align-items:center;gap:10px;padding:8px 10px;border:3px solid var(--ink);border-radius:14px;background:var(--cream)}
+.sl-stats small{display:flex;align-items:center;gap:6px;font:600 11.5px/1.1 var(--fb);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sl-stats small i{flex:none;width:12px;height:12px;border:2px solid var(--ink);border-radius:4px}
+.sl-stats b{display:block;font:400 19px/1.1 var(--fd)}
+.slide-out{font-weight:500;min-height:48px}
+.slide-out b{font-family:var(--fd);font-weight:400;font-size:20px}
+
+/* ============ reviews ============ */
+.revs{background:var(--sky-l);border-bottom:3px solid var(--ink)}
+.rev-grid{display:grid;gap:22px}
+.sum{padding:20px;display:grid;gap:14px;align-content:start}
+@media(min-width:760px){.sum{position:sticky;top:110px}}
+.sum .num{display:flex;align-items:center;gap:14px}
+.sum .num b{font:400 64px/1 var(--fd)}
+.dist{display:grid;gap:8px;font-size:14px;font-weight:600}
+.dist li{display:grid;grid-template-columns:28px 1fr 38px;gap:10px;align-items:center}
+.dist .bar{height:14px;border:2px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}
+.dist .bar i{display:block;height:100%;background:var(--yellow);border-right:2px solid var(--ink)}
+.rlist{display:grid;gap:20px;align-content:start}
+.rev{padding:18px;display:grid;gap:10px}
+.rev:nth-child(odd){transform:rotate(-.5deg)}.rev:nth-child(even){transform:rotate(.5deg)}
+.rev-h{display:flex;align-items:center;gap:12px}
+.rev-h .stars{margin-left:auto}
+.rev-h b{display:block;font:400 19px/1.1 var(--fd)}
+.rev-h span{font-size:13px;color:var(--muted);font-weight:500}
+.rev h3{font:400 21px/1.15 var(--fd)}
+.rev p{font-size:15.5px}
+.rev-f{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;font-weight:500;color:var(--muted)}
+.rev-f .ok{display:flex;align-items:center;gap:6px}
+.help{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:3px solid var(--ink);border-radius:12px;background:#fff;font:600 14px var(--fb);color:var(--ink)}
+.help[aria-pressed="true"]{background:var(--mint)}
+.rev[hidden]{display:none}
+
+/* ============ delivery, faq, club ============ */
+.deliver{background:var(--cream);padding-bottom:56px}
+.dgrid{display:grid;gap:16px}
+.dcard{padding:18px;display:grid;gap:8px;align-content:start}
+.dcard h3{font:400 22px/1.05 var(--fd)}
+.dcard p{font-size:15px;color:var(--muted)}
+.dcard .top{display:flex;align-items:center;gap:12px}
+.dtbl{margin-top:22px;overflow-x:auto;padding:0}
+.dt-opt{display:flex;align-items:flex-start;flex-wrap:nowrap;gap:8px}
+.dt-opt>[data-ico]{flex:none}
+.faq{display:grid;gap:12px;margin-top:34px}
+.faq details{border:3px solid var(--ink);border-radius:16px;background:#fff;box-shadow:var(--sh-s)}
+.faq summary{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 16px;font:400 19px/1.15 var(--fd);cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{margin-left:auto;transition:transform .2s}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+.faq details p{padding:0 16px 16px 54px;font-size:15.5px}
+.club{position:relative;background:var(--tomato);border-block:3px solid var(--ink);padding:56px 0}
+@media(min-width:960px){.club{padding-top:108px}}
+.club-in{display:grid;gap:22px;align-items:center}
+.club .h2{color:#fff;text-shadow:3px 3px 0 var(--ink)}
+.club p{font-weight:500}
+.club-form{padding:18px;display:grid;gap:12px}
+.club-form .err{color:var(--tomato-d);font-weight:600;font-size:14px;min-height:20px}
+.ok-msg{display:grid;gap:8px;justify-items:start}
+.ok-msg[hidden]{display:none}
+#credits{background:var(--paper);padding:44px 0 36px;border-top:3px solid var(--ink);font-size:13.5px}
+#credits h2{font:400 28px/1 var(--fd);margin-bottom:14px}
+#credits ul{columns:1;column-gap:32px}
+#credits li{break-inside:avoid;padding:3px 0}
+#credits a{font-weight:600}
+.credit-note{margin-top:18px;padding-top:14px;border-top:2px dashed rgba(20,19,43,.3);color:var(--muted)}
+footer{background:var(--ink);color:#fff;padding:52px 0 96px}
+footer a{color:#fff}
+.f-grid{display:grid;gap:30px}
+.f-grid h3{font:400 20px/1 var(--fd);color:var(--yellow);margin-bottom:12px}
+.f-grid li{margin:6px 0;display:flex;gap:10px;align-items:flex-start}
+.f-grid li a{text-decoration:none;opacity:.92}
+.f-grid li a:hover{text-decoration:underline;opacity:1}
+.f-brand p{opacity:.85;max-width:30em;margin-top:12px}
+.f-brand .logo{color:#fff}
+.f-brand .logo i{color:var(--yellow)}
+.f-bot{margin-top:34px;padding-top:18px;border-top:2px solid rgba(255,255,255,.22);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;opacity:.9}
+.pay{display:flex;gap:10px;align-items:center}
+
+/* ============ layers: bag drawer + size sheet ============ */
+.scrim{position:fixed;inset:0;z-index:150;background:rgba(20,19,43,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s linear .25s}
+.scrim.on{opacity:1;visibility:visible;transition:opacity .25s,visibility 0s}
+.drawer{position:fixed;z-index:160;top:0;right:0;height:100%;width:min(440px,100%);display:flex;flex-direction:column;background:var(--cream);border-left:3px solid var(--ink);transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s}
+.drawer.on{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:3px solid var(--ink);background:var(--yellow)}
+.dr-ship{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:3px solid var(--ink);background:#fff;font-weight:500;font-size:14.5px}
+.dr-ship b{font-weight:700}
+.dr-rows{flex:1;overflow:auto;padding:14px 16px;display:grid;gap:12px;align-content:start}
+.line{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:10px;border:3px solid var(--ink);border-radius:16px;background:#fff}
+.line img{width:72px;height:84px;border:2px solid var(--ink);border-radius:10px;object-fit:cover}
+.line h3{font:400 18px/1.1 var(--fd)}
+.line .meta{font-size:13px;color:var(--muted);font-weight:500}
+.line .ctl{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+.qty{display:inline-flex;align-items:center;border:3px solid var(--ink);border-radius:12px;background:var(--cream)}
+.qty button{width:44px;height:38px;border:0;background:transparent;display:grid;place-items:center;padding:0}
+.qty output{min-width:28px;text-align:center;font:400 18px/1 var(--fd)}
+.line .lp{font:400 20px var(--fd)}
+.rm{border:0;background:transparent;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;text-decoration:underline;min-height:44px;padding:0 6px}
+.dr-empty{flex:1;display:none;place-content:center;justify-items:center;gap:12px;text-align:center;padding:30px}
+.drawer.is-empty .dr-empty{display:grid}.drawer.is-empty .dr-rows,.drawer.is-empty .dr-foot{display:none}
+.dr-foot{padding:14px 16px 84px;border-top:3px solid var(--ink);background:#fff;display:grid;gap:10px}
+.code{display:flex;gap:8px}
+.code .inp{flex:1;min-height:44px}
+.tot{display:grid;gap:4px;font-size:15px}
+.tot div{display:flex;justify-content:space-between}
+.tot .g{font:400 24px/1.1 var(--fd);padding-top:6px;border-top:2px dashed rgba(20,19,43,.35)}
+.tot .save{color:#0B6B47;font-weight:600}
+.msg{font-size:13.5px;font-weight:600;min-height:20px}
+.msg.bad{color:var(--tomato-d)}.msg.good{color:#0B6B47}
+.sheet{position:fixed;z-index:170;left:50%;top:50%;width:min(480px,100% - 28px);max-height:calc(100% - 28px);overflow:auto;padding:20px;transform:translate(-50%,-46%) scale(.96);opacity:0;visibility:hidden;transition:transform .22s,opacity .22s,visibility 0s linear .22s}
+.sheet.on{transform:translate(-50%,-50%);opacity:1;visibility:visible;transition:transform .22s,opacity .22s,visibility 0s}
+.sheet h2{font:400 32px/1 var(--fd);margin:6px 0 4px}
+.szs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.szs button{min-height:52px;border:3px solid var(--ink);border-radius:14px;background:var(--cream);font:400 22px/1 var(--fd);transition:background .12s,transform .12s}
+.szs button:hover{background:var(--yellow);transform:translate(-1px,-1px)}
+.szs button[disabled]{opacity:.45;cursor:not-allowed;background:var(--cream);transform:none}
+.szs button small{display:block;font:500 11px var(--fb);color:var(--muted);margin-top:3px}
+.toast{position:fixed;z-index:190;left:16px;bottom:96px;width:min(380px,100% - 32px);padding:12px 16px;border:3px solid var(--ink);border-radius:14px;background:var(--ink);color:#fff;font:500 14.5px/1.35 var(--fb);box-shadow:4px 4px 0 var(--tomato);opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}
+.toast:empty{display:none}
+.toast.on{opacity:1;transform:none}
+.wiggle{animation:wig .5s}
+@keyframes wig{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* ============ levels (same site, icons added) ============ */
+html[data-level="0"] .scallop{display:none}
+html[data-level="0"] .wish[aria-pressed="true"]{background:var(--yellow)}
+html[data-level="0"] .hero-bg{background:none}
+html[data-level="0"] .ph{box-shadow:6px 6px 0 var(--ink)}
+.orn{display:flex;justify-content:center;gap:clamp(10px,3vw,34px);padding:14px 0;flex-wrap:wrap}
+
+/* ============ breakpoints ============ */
+@media(min-width:620px){
+  .kit{grid-template-columns:repeat(4,1fr)}
+  .tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .tools .field:first-child{grid-column:1/-1}
+  .dgrid{grid-template-columns:repeat(2,1fr)}
+  .faq{grid-template-columns:repeat(2,1fr);align-items:start}
+  #credits ul{columns:2;column-gap:32px}
+  .f-grid{grid-template-columns:1.4fr 1fr 1fr}
+}
+@media(min-width:760px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  .pdesc{display:block}
+  .bag-btn .lbl{display:inline}
+  .fc{grid-template-columns:1fr 240px;align-items:center;padding:22px 24px;margin-bottom:-80px}
+  .fc-now{grid-template-columns:auto 1fr;justify-items:start}
+  .fc-kit{grid-column:1/-1;grid-row:2}
+  .spacer-hero{height:80px}
+  .rev-grid{grid-template-columns:340px 1fr;align-items:start}
+  .club-in{grid-template-columns:1.1fr 1fr}
+}
+@media(min-width:900px){
+  .tools{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr)}
+  .tools .field:first-child{grid-column:auto}
+}
+@media(min-width:960px){
+  .slide{grid-template-columns:1fr 1.25fr;gap:40px;padding:26px 30px}
+  .grow-photo{max-width:none;align-self:stretch;margin:6px 10px 6px 4px}
+  .grow-photo .ph{aspect-ratio:auto;height:100%;min-height:520px}
+  .hero{padding-top:40px}
+  /* sized for the copy column (1.1fr of the grid) so the longest headline, "for snowballs.", still sits on its own line */
+  .hero h1{font-size:clamp(56px,calc((100vw - 72px) * .083),100px)}
+  .hero-grid{grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .hero-photo{margin:0 14px 0 auto}
+  .bundle-grid{grid-template-columns:1fr 1fr;gap:56px}
+  .size-grid{grid-template-columns:1.05fr .95fr;gap:36px}
+  .grow-grid{grid-template-columns:.8fr 1.2fr;gap:48px}
+  .dgrid{grid-template-columns:repeat(4,1fr)}
+  .sec{padding:84px 0}
+  .shop{padding-top:92px}
+  .f-grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}
+}
+@media(min-width:1100px){
+  .fc{grid-template-columns:260px 1fr 230px}
+  .fc-now{grid-template-columns:1fr}
+  .fc-kit{grid-column:auto;grid-row:auto}
+}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.pc-cta{grid-column:auto}}
+/* phones */
+@media(max-width:759px){
+  .pbody{padding:10px 10px 12px;gap:6px}
+  .pname{font-size:18px}
+  .pprice{font-size:22px}
+  .swatches{gap:6px}
+  .sw{width:28px;height:28px}
+  .ptags{top:auto;bottom:6px;flex-direction:row;gap:0;max-width:calc(100% - 12px)}
+  /* the kit's size slider only enlarges icons up to their phone slot: tags, bag and sale sticker keep 1x when it goes above */
+  .ptags .kit-live,.bag-btn .kit-live,.hero-sale .kit-live{zoom:calc(1 / max(1, var(--kit-scale, 1)))}
+  .pc-cta.half{grid-column:auto;padding:14px;gap:8px}
+  .pc-cta.half .h3{font-size:21px}
+  .pc-cta.half p{font-size:13.5px}
+  .pc-cta.half .btn{width:100%;font-size:16px;padding:8px;gap:6px}
+  .pbody .btn{font-size:16px;gap:6px;padding:8px}
+  .clabel .as{display:none}
+}
+@media(max-width:959px){.hero-bg .fl{display:none}.hero-photo .ph{aspect-ratio:1.45}.hero-photo{width:min(100% - 16px,520px)}}
+@media(max-width:559px){#search-btn{display:none}.ibtn{width:44px;height:44px}.bag-btn{padding:0 8px 0 4px}.hdr-in{gap:8px}}
+@media(max-width:340px){.hero h1{font-size:44px}}
+@media(max-width:380px){.logo{font-size:23px}.logo .blob{width:38px;height:38px}.hdr-act{gap:6px}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .ticker{width:auto;flex-wrap:wrap;justify-content:center}.ticker ul[aria-hidden]{display:none}
+  .fx:not(.bob){top:var(--ry,30%)!important;opacity:.55}
+}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Puddle &amp; Pip is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#main">Skip to content</a>
+<div id="page">
+
+<div class="announce" role="region" aria-label="Shop announcements">
+  <div class="ticker">
+    <ul>
+      <li><span data-ico="truck" data-size="20">🚚</span> Free delivery over $60</li>
+      <li><span data-ico="rotate-ccw" data-size="20">↩️</span> Free returns for 60 days</li>
+      <li><span data-ico="ruler" data-size="20">📏</span> Sizes 2 to 10 years</li>
+      <li><span data-ico="sprout" data-size="20">🌱</span> Grow-with-me cuffs and straps</li>
+      <li><span data-ico="recycle" data-size="20">♻️</span> Recycled-fabric range (demo claim)</li>
+    </ul>
+    <ul aria-hidden="true">
+      <li><span data-ico="truck" data-size="20">🚚</span> Free delivery over $60</li>
+      <li><span data-ico="rotate-ccw" data-size="20">↩️</span> Free returns for 60 days</li>
+      <li><span data-ico="ruler" data-size="20">📏</span> Sizes 2 to 10 years</li>
+      <li><span data-ico="sprout" data-size="20">🌱</span> Grow-with-me cuffs and straps</li>
+      <li><span data-ico="recycle" data-size="20">♻️</span> Recycled-fabric range (demo claim)</li>
+    </ul>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#top" aria-label="Puddle and Pip, home">
+      <span class="blob"><span data-ico="droplet" data-size="26" data-motion="hover">💧</span></span>
+      <span>Puddle<i>&amp;</i>Pip</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#shop">Shop</a><a href="#size">Size finder</a><a href="#grow">Grow-with-me</a><a href="#reviews">Reviews</a><a href="#delivery">Delivery</a>
+    </nav>
+    <div class="hdr-act">
+      <a class="ibtn" href="#shop-search" id="search-btn" aria-label="Search the shop"><span data-ico="search" data-size="24">🔍</span></a>
+      <button class="ibtn" id="wish-btn" type="button" aria-pressed="false" aria-label="Saved favourites: none yet"><span data-ico="heart" data-size="24" data-motion="hover">🩷</span><span class="heart-n" id="wish-n" hidden>0</span></button>
+      <button class="ibtn bag-btn" id="bag-btn" type="button" aria-label="Open your bag, empty" aria-haspopup="dialog">
+        <span data-live="cart-count" id="bag-live" data-p-count="0" data-size="36" data-label="Bag, empty">🛍️ 0</span><span class="lbl">Bag</span>
+      </button>
+      <button class="ibtn menu-btn" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span data-ico="menu" data-size="24">☰</span></button>
+    </div>
+    <nav class="mnav" id="mnav" aria-label="Mobile">
+      <a href="#shop-search"><span data-ico="search" data-size="28">🔍</span> Search the shop</a>
+      <a href="#shop"><span data-ico="shopping-bag" data-size="28">🛍️</span> Shop</a>
+      <a href="#size"><span data-ico="ruler" data-size="28">📏</span> Size finder</a>
+      <a href="#grow"><span data-ico="sprout" data-size="28">🌱</span> Grow-with-me</a>
+      <a href="#reviews"><span data-ico="star" data-size="28">⭐</span> Reviews</a>
+      <a href="#delivery"><span data-ico="truck" data-size="28">🚚</span> Delivery</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" data-weather="rain" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="fl" data-min-level="2" style="right:4%;top:14px"><span data-ico="rainbow" data-size="92" data-motion="hover">🌈</span></span>
+    <span class="fl" data-min-level="2" style="left:47%;top:20px"><span data-ico="cloud" data-size="64" data-motion="loop">☁️</span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:4%;--t:9s;--d:0s;--ry:12%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:13%;--t:7.5s;--d:-3s;--ry:35%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:23%;--t:10s;--d:-6s;--ry:58%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:34%;--t:8.5s;--d:-2s;--ry:81%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:46%;--t:11s;--d:-8s;--ry:34%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:57%;--t:7s;--d:-4.5s;--ry:57%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:68%;--t:9.5s;--d:-1s;--ry:80%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:80%;--t:8s;--d:-6.5s;--ry:33%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-rain" data-min-level="2" style="--x:91%;--t:10.5s;--d:-3.5s;--ry:56%"><span data-ico="droplet" data-size="26"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:5%;--t:13s;--d:0s;--ry:10%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:15%;--t:11s;--d:-4s;--ry:39%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:26%;--t:14s;--d:-8s;--ry:68%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:37%;--t:12s;--d:-2s;--ry:25%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:49%;--t:15s;--d:-10s;--ry:54%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:60%;--t:11.5s;--d:-6s;--ry:11%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:71%;--t:13.5s;--d:-1s;--ry:40%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:83%;--t:12s;--d:-7s;--ry:69%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-snow sway" data-min-level="2" style="--x:93%;--t:14.5s;--d:-5s;--ry:26%"><span data-ico="snowflake" data-size="30"></span></span>
+    <span class="fx fx-sun bob" data-min-level="2" style="--x:6%;--y:12%;--t:6s;--d:0s"><span data-ico="sun" data-size="54"></span></span>
+    <span class="fx fx-sun bob" data-min-level="2" style="--x:48%;--y:7%;--t:7s;--d:-2s"><span data-ico="sun" data-size="40"></span></span>
+    <span class="fx fx-sun bob" data-min-level="2" style="--x:91%;--y:46%;--t:5.5s;--d:-1s"><span data-ico="sun" data-size="48"></span></span>
+    <span class="fx fx-sun bob" data-min-level="2" style="--x:32%;--y:60%;--t:4.5s;--d:-3s"><span data-ico="sparkles" data-size="30"></span></span>
+    <span class="fx fx-sun bob" data-min-level="2" style="--x:62%;--y:52%;--t:5s;--d:-1.5s"><span data-ico="sparkles" data-size="34"></span></span>
+  </div>
+  <div class="wrap hero-grid">
+    <span class="fl" data-min-level="2" aria-hidden="true" style="right:19%;bottom:-4px"><span data-ico="droplets" data-size="60"></span></span>
+    <span class="fl" data-min-level="2" aria-hidden="true" style="right:1%;bottom:-10px"><span data-ico="umbrella" data-size="76" data-motion="hover"></span></span>
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="tag red"><span data-ico="sparkles" data-size="18">✨</span> New in</span> The Autumn Puddle Collection, ages 2 to 10</p>
+      <h1 id="h1"><span id="h1-a">Puddles are</span> <span class="hl" id="h1-b">for jumping.</span></h1>
+      <p class="lead" id="wx-lede">Rain? Brilliant. Taped-seam coats, wellies with handles and brollies that won't bite, with cuffs and straps that grow right alongside them.</p>
+
+      <div class="wx card" role="group" aria-labelledby="wx-q">
+        <p class="wx-q" id="wx-q"><span data-ico="cloud-sun" data-size="30">⛅</span> What's it doing outside today?</p>
+        <div class="wx-chips" role="radiogroup" aria-labelledby="wx-q">
+          <button type="button" class="wx-chip" role="radio" aria-checked="true" data-wx="rain"><span data-ico="cloud-rain" data-size="44" data-sample data-motion="hover">🌧️</span>Rainy<small>11°</small></button>
+          <button type="button" class="wx-chip" role="radio" aria-checked="false" data-wx="sun"><span data-ico="sun" data-size="44" data-motion="hover">☀️</span>Sunny<small>24°</small></button>
+          <button type="button" class="wx-chip" role="radio" aria-checked="false" data-wx="snow"><span data-ico="snowflake" data-size="44" data-motion="hover">❄️</span>Snowy<small>-2°</small></button>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="#shop"><span data-ico="shopping-bag" data-size="22">🛍️</span> Shop the forecast</a>
+        <a class="btn white" href="#size"><span data-ico="ruler" data-size="22">📏</span> Find their size</a>
+      </div>
+    </div>
+
+    <figure class="hero-photo">
+      <span class="hero-sale"><span data-live="sale-sticker" data-p-text="-25%" data-size="104" data-label="Autumn sale: 25 percent off rainwear">-25%</span></span>
+      <div class="ph" id="hero-ph">
+        <img class="on" src="_img/puddle-and-pip/3761522-1000.jpg" width="1200" height="800" fetchpriority="high" alt="A smiling red-haired girl in a yellow raincoat holds a bright yellow umbrella and gives a thumbs up on a wet, tree-lined street on a grey rainy day." style="object-position:50% 45%" data-wx="rain">
+        <img src="_img/puddle-and-pip/1104014-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="A boy in a striped sweater and green wellies jumps over a small puddle on a gravel path in front of a green meadow and a pale sky." style="object-position:48% 55%" data-wx="sun">
+        <img src="_img/puddle-and-pip/photo-1612532678695-341cf593cd29-1000.jpg" width="1200" height="857" loading="lazy" decoding="async" alt="A child in a dark teal jacket tumbles head-down over a large snowball in a snowy park with dark hedges behind." style="object-position:62% 45%" data-wx="snow">
+      </div>
+      <figcaption><span class="tag white">Autumn sale: up to 25% off</span><span id="hero-credit">Photo by <a href="https://www.pexels.com/@olly">Andrea Piacquadio</a> on <a href="https://www.pexels.com/photo/3761522/">Pexels</a></span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <aside class="fc card" id="forecast" aria-labelledby="fc-t">
+      <div class="fc-now">
+        <p class="fc-label">Today in Puddleville</p>
+        <span data-live="weather" id="wx-live" data-p-condition="rain" data-p-temperature="11" data-p-unit="degree" data-size="150" data-label="Rainy, 11 degrees">🌧️ 11°</span>
+        <p id="wx-note">Drizzle until teatime. Perfect.</p>
+      </div>
+      <div class="fc-kit" aria-live="polite">
+        <h2 class="h3" id="fc-t">The Rainy-Day Kit</h2>
+        <p id="kit-blurb">Taped seams, wellies with handles and a brolly that won't bite. Tap any piece to see it in the shop.</p>
+        <ul class="kit" id="kit-list">
+          <li><a href="#shop" data-pid="raincoat"><img src="_img/puddle-and-pip/14753847-300.jpg" width="48" height="48" alt="" loading="lazy"><span><b>Pip Puddle-Proof Raincoat</b><span>$52</span></span></a></li>
+          <li><a href="#shop" data-pid="boots"><img src="_img/puddle-and-pip/12932484-300.jpg" width="48" height="48" alt="" loading="lazy"><span><b>Splash Wellies</b><span>$34</span></span></a></li>
+          <li><a href="#shop" data-pid="umbrella"><img src="_img/puddle-and-pip/18903456-300.jpg" width="48" height="48" alt="" loading="lazy"><span><b>Mini Brolly, Safe-Snap</b><span>$18</span></span></a></li>
+          <li><a href="#shop" data-pid="socks"><img src="_img/puddle-and-pip/15195444-300.jpg" width="48" height="48" alt="" loading="lazy"><span><b>Loud Socks, 3-Pack</b><span>$14</span></span></a></li>
+        </ul>
+      </div>
+      <div class="fc-buy">
+        <span data-live="price-tag" id="kit-price" data-p-amount="118" data-p-currency="usd" data-size="104" data-label="Kit price: 118 dollars">$118</span>
+        <button type="button" class="btn red" id="kit-add"><span data-ico="shopping-bag" data-size="22">🛍️</span> Add the whole kit</button>
+        <p class="fine row"><span data-ico="truck" data-size="18">🚚</span> Free delivery included</p>
+      </div>
+    </aside>
+  </div>
+</section>
+<div class="spacer-hero" aria-hidden="true"></div>
+
+<!-- ============ SHOP ============ -->
+<section class="sec shop" id="shop" aria-labelledby="shop-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p><span class="tag sky"><span data-ico="sparkles" data-size="18">✨</span> The puddle-proof wardrobe</span></p>
+      <h2 class="h2" id="shop-t">Everything they'll wear out. And in.</h2>
+      <p class="lead">Eleven pieces, sizes 2 to 10, and every colour comes with the same promise: if they outgrow it in the first 60 days, swapping up a size is on us.</p>
+    </div>
+
+    <div class="tiles" role="group" aria-label="Shop by type" id="tiles">
+      <button type="button" class="tile" aria-pressed="true" data-cat="all"><span data-ico="layout-grid" data-size="48" data-motion="hover">🛍️</span>Everything<small data-n="all">11 pieces</small></button>
+      <button type="button" class="tile" aria-pressed="false" data-cat="rain"><span data-ico="umbrella" data-size="48" data-motion="hover">☂️</span>Rain gear<small data-n="rain">3 pieces</small></button>
+      <button type="button" class="tile" aria-pressed="false" data-cat="layers"><span data-ico="shirt" data-size="48" data-motion="hover">👕</span>Layers<small data-n="layers">3 pieces</small></button>
+      <button type="button" class="tile" aria-pressed="false" data-cat="out"><span data-ico="backpack" data-size="48" data-motion="hover">🎒</span>Out and about<small data-n="out">3 pieces</small></button>
+      <button type="button" class="tile" aria-pressed="false" data-cat="cosy"><span data-ico="moon" data-size="48" data-motion="hover">🌙</span>Cosy and socks<small data-n="cosy">2 pieces</small></button>
+    </div>
+
+    <div class="tools">
+      <div class="field"><label for="shop-search">Search the shop</label>
+        <div class="inp"><span data-ico="search" data-size="22">🔍</span><input id="shop-search" type="search" placeholder="Try “boots” or “yellow”" autocomplete="off"></div></div>
+      <div class="field"><label for="sort">Sort by</label>
+        <div class="inp"><span data-ico="list-filter" data-size="22">↕️</span>
+          <select id="sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rated">Top rated</option><option value="sale">Biggest saving</option></select></div></div>
+      <div class="field"><label for="size-sel">Shopping for size</label>
+        <div class="inp"><span data-ico="ruler" data-size="22">📏</span>
+          <select id="size-sel" aria-describedby="size-sel-note"><option value="">Choose a size</option></select></div>
+        <p class="sr" id="size-sel-note">Choosing a size shows stock for that size on every piece.</p></div>
+    </div>
+
+    <ul class="grid" id="grid" aria-label="Products">
+      <li class="pc-cta card" id="cta-tile">
+        <span data-ico="ruler" data-size="84" data-motion="hover">📏</span>
+        <h3 class="h3">Not sure what size?</h3>
+        <p>Tell us their age or height and we'll pick for you, with room to grow built in.</p>
+        <a class="btn white" href="#size">Open the size finder <span data-ico="arrow-right" data-size="20">→</span></a>
+      </li>
+    </ul>
+    <div class="empty card" id="empty" hidden>
+      <span data-ico="droplet" data-size="72" data-label="Nothing found">💧</span>
+      <h3 class="h3">Nothing here but a puddle</h3>
+      <p>Nothing matches that search. Try another word, or clear the filters.</p>
+      <button type="button" class="btn sm" id="clear-filters"><span data-ico="rotate-cw" data-size="20">🔄</span> Clear filters</button>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="orn" aria-hidden="true" data-min-level="2">
+      <span data-ico="umbrella" data-size="52" data-motion="hover"></span><span data-ico="droplets" data-size="52" data-motion="hover"></span><span data-ico="rainbow" data-size="52" data-motion="hover"></span><span data-ico="sun" data-size="52" data-motion="hover"></span><span data-ico="cloud-snow" data-size="52" data-motion="hover"></span><span data-ico="wind" data-size="52" data-motion="hover"></span><span data-ico="leaf" data-size="52" data-motion="hover"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUNDLE ============ -->
+<section class="bundle" id="bundle" aria-labelledby="bundle-t">
+  <span class="deco" data-min-level="2" aria-hidden="true" style="right:3.5%;top:34px"><span data-ico="gift" data-size="84" data-motion="hover"></span></span>
+  <div class="wrap bundle-grid">
+    <figure class="bundle-photo">
+      <div class="ph"><img src="_img/puddle-and-pip/photo-1554995783-571a2b4d923a-1000.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="A child in a yellow raincoat and yellow rubber boots crouches in a puddle scattered with green leaves while a second child in dark boots jumps beside them."></div>
+      <span class="bundle-pct"><span data-live="sale-sticker" data-p-text="-14%" data-size="104" data-label="14 percent off the bundle">-14%</span></span>
+    </figure>
+    <div>
+      <p><span class="tag red"><span data-ico="gift" data-size="18">🎁</span> Bundle deal</span></p>
+      <h2 class="h2" id="bundle-t">The Puddle Starter Bundle</h2>
+      <p class="lead">Everything for the first puddle, and the fiftieth. Coat, wellies and brolly in one drawstring bag.</p>
+      <ul class="inc">
+        <li><span data-ico="cloud-rain" data-size="30">🌧️</span> Pip Puddle-Proof Raincoat, in Bus Yellow</li>
+        <li><span data-ico="droplets" data-size="30">💦</span> Splash Wellies, in Turquoise</li>
+        <li><span data-ico="umbrella" data-size="30">☂️</span> Mini Brolly with Safe-Snap ribs</li>
+        <li><span data-ico="package-open" data-size="30">📦</span> A reusable drawstring bag, free</li>
+      </ul>
+      <div class="buy-row">
+        <span data-live="price-tag" data-p-amount="89" data-p-currency="usd" data-size="96" data-label="Bundle price: 89 dollars">$89</span>
+        <div>
+          <p class="was">Worth <s>$104</s> separately</p>
+          <button type="button" class="btn red" id="bundle-add"><span data-ico="shopping-bag" data-size="22">🛍️</span> Add the bundle</button>
+        </div>
+      </div>
+      <div class="cd" role="timer" aria-label="Time left on the bundle price">
+        <div><b id="cd-d">00</b><small>days</small></div><div><b id="cd-h">00</b><small>hours</small></div><div><b id="cd-m">00</b><small>mins</small></div><div><b id="cd-s">00</b><small>secs</small></div>
+        <p class="cd-note row"><span data-ico="alarm-clock" data-size="22">⏰</span> <span id="cd-note">Bundle price ends Sunday at midnight.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="scallop" style="--c:var(--yellow);--next:var(--sky)" aria-hidden="true"></div>
+
+<!-- ============ SIZE FINDER ============ -->
+<section class="sec size" id="size" aria-labelledby="size-t">
+  <div class="wrap size-grid">
+    <div>
+      <div class="sec-head">
+        <p><span class="tag white"><span data-ico="ruler" data-size="18">📏</span> Size finder</span></p>
+        <h2 class="h2" id="size-t">Find their size in 20 seconds</h2>
+        <p class="lead" style="color:var(--ink)">Age or height, whichever you know. We'll pick a size and show you how far the cuffs and straps will stretch.</p>
+      </div>
+
+      <form class="sf card" id="sf" action="#" novalidate>
+        <div class="seg" role="group" aria-label="Measure by">
+          <button type="button" id="by-age" aria-pressed="true"><span data-ico="baby" data-size="24">👶</span> By age</button>
+          <button type="button" id="by-h" aria-pressed="false"><span data-ico="ruler" data-size="24">📏</span> By height</button>
+        </div>
+
+        <div class="dial" id="dial-age">
+          <label for="age-r" class="sr">Age in years</label>
+          <div class="readout"><span id="age-out">5</span><small>years old</small></div>
+          <input class="range" id="age-r" type="range" min="2" max="10" step="1" value="5" aria-valuetext="5 years old">
+          <div class="row fine" style="justify-content:space-between"><span>2 yrs</span><span>10 yrs</span></div>
+        </div>
+
+        <div class="dial" id="dial-h" hidden>
+          <div class="readout"><span id="h-out">110</span><small id="h-unit">cm tall</small></div>
+          <div class="stepper">
+            <button type="button" class="ibtn" id="h-minus" aria-label="Shorter by 1"><span data-ico="minus" data-size="22">−</span></button>
+            <div class="inp"><label for="h-in" class="sr">Height</label><input id="h-in" type="number" inputmode="decimal" min="30" max="160" step="1" value="110"></div>
+            <button type="button" class="ibtn" id="h-plus" aria-label="Taller by 1"><span data-ico="plus" data-size="22">+</span></button>
+          </div>
+          <div class="units" role="group" aria-label="Unit"><button type="button" id="u-cm" aria-pressed="true">cm</button><button type="button" id="u-in" aria-pressed="false">inches</button></div>
+          <p class="msg" id="h-msg" role="status"></p>
+        </div>
+
+        <div class="opts">
+          <label class="opt"><input type="checkbox" id="o-grow"><span><b>Room to grow</b><small>Go one size up. The cuffs and straps do the rest.</small></span></label>
+          <label class="opt"><input type="checkbox" id="o-layers"><span><b>Mostly worn over chunky knits</b><small>We'll flag which pieces to take a size up on.</small></span></label>
+        </div>
+      </form>
+    </div>
+
+    <div style="display:grid;gap:22px;align-content:start">
+      <div class="res card" id="res" aria-live="polite">
+        <div class="res-top">
+          <span data-live="badge-text" id="res-badge" data-p-text="5Y" data-p-shape="rounded" data-size="116" data-label="Recommended size: 5 years">5Y</span>
+          <div><p class="fine">We'd order</p><h3 id="res-h">Size 5 years</h3><p class="big" id="res-fit">Fits 107 to 113 cm</p></div>
+        </div>
+        <p id="res-note"></p>
+        <ol class="ruler" id="ruler" aria-label="All sizes"></ol>
+        <p class="ruler-key"><span><i style="background:var(--yellow)"></i>Best fit</span><span><i style="background:var(--mint-l)"></i>Cuffs and straps stretch this far</span></p>
+        <div class="row"><button type="button" class="btn red" id="res-shop"><span data-ico="shopping-bag" data-size="22">🛍️</span> <span id="res-shop-t">Shop size 5Y</span></button></div>
+      </div>
+
+      <div class="card sf how">
+        <h3 class="h3">How to measure</h3>
+        <ol class="how">
+          <li><span data-live="step-number" data-p-step="1" data-size="56" data-label="Step 1">1</span> Stand them barefoot with their heels against a wall.</li>
+          <li><span data-live="step-number" data-p-step="2" data-size="56" data-label="Step 2">2</span> Rest a book flat on their head and mark the wall under it.</li>
+          <li><span data-live="step-number" data-p-step="3" data-size="56" data-label="Step 3">3</span> Measure floor to mark, then pop the number in on the left.</li>
+        </ol>
+        <details class="chart">
+          <summary><span data-ico="table" data-size="24">📋</span> Full size chart <span class="chev" data-ico="chevron-down" data-size="22" style="margin-left:auto">⌄</span></summary>
+          <div class="tblw"><table class="tbl" id="tbl"><thead><tr><th>Size</th><th>Age</th><th>Height</th><th>Chest</th></tr></thead><tbody></tbody></table></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROW-WITH-ME ============ -->
+<section class="sec grow" id="grow" aria-labelledby="grow-t">
+  <div class="wrap grow-grid">
+    <figure class="grow-photo">
+      <div class="ph"><img src="_img/puddle-and-pip/14753847-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="A small child in a yellow hooded raincoat with gathered reflective cuffs and pink rubber boots walks along a wet street in the rain, seen in profile with the hood up."></div>
+      <span class="tag red grow-tag"><span data-ico="chevrons-up-down" data-size="18">↕️</span> Cuffs let out two sizes</span>
+    </figure>
+    <div>
+      <div class="sec-head">
+        <p><span class="tag white"><span data-ico="sprout" data-size="18">🌱</span> Grow-with-me</span></p>
+        <h2 class="h2" id="grow-t">One coat. Three winters.</h2>
+        <p class="lead" style="color:var(--ink)">Kids don't grow on a schedule, so our coats and dungarees don't have a fixed length. Here's what's built in.</p>
+      </div>
+      <ul class="feats">
+        <li class="feat card"><span class="ico"><span data-ico="chevrons-up-down" data-size="52" data-motion="inview" data-label="Roll-up cuffs">↕️</span></span><div><h3>Roll-up cuffs</h3><p>Rolled three times at 3, twice at 4, once at 5, and let right out at 6. Reflective piping stays visible either way.</p></div></li>
+        <li class="feat card"><span class="ico"><span data-ico="sliders" data-size="52" data-motion="inview" data-label="Adjustable straps">🎚️</span></span><div><h3>Three-notch straps</h3><p>Dungaree and satchel straps move with the shoulders, no sewing and no spare buttons.</p></div></li>
+        <li class="feat card"><span class="ico"><span data-ico="droplets" data-size="52" data-motion="inview" data-label="Taped seams">💦</span></span><div><h3>Taped seams, rated 8,000 mm*</h3><p>Every seam is sealed, so the water stays outside even when the puddle is above the knee.</p></div></li>
+        <li class="feat card"><span class="ico"><span data-ico="washing-machine" data-size="52" data-motion="inview" data-label="Machine washable">🧺</span></span><div><h3>Survives the washing machine</h3><p>40 degrees, tumble on low, and ready for the next hand-me-down. Made with 78% recycled polyester*.</p></div></li>
+      </ul>
+
+    </div>
+      <div class="slide card" id="slide">
+        <div class="slide-l">
+        <div class="row" style="justify-content:space-between"><h3 class="h3">Slide to grow</h3><span class="tag sky">Pip Raincoat, size 4Y</span></div>
+        <label for="grow-r" class="field"><span>How old are they?</span></label>
+        <div class="readout"><span id="grow-age">3</span><small>years old</small></div>
+        <input class="range" id="grow-r" type="range" min="3" max="6" step="1" value="3" aria-valuetext="3 years old">
+        </div>
+        <div class="slide-r">
+        <div class="sleeve" id="sleeve" role="img" aria-label="Sleeve diagram">
+          <span class="sl-torso"></span>
+          <div class="sl-track">
+            <span class="sl-dim a"><span id="sl-dim-a">Sleeve 34 cm</span></span>
+            <span class="sl-dim b" id="sl-dim-b"><span id="sl-dim-b-t">+12 cm</span></span>
+            <span class="sl-ghost"></span><span class="sl-tuck"></span>
+            <span class="sl-arm"></span><span class="sl-hand"></span>
+            <span class="sl-sleeve"></span><span class="sl-rolls" id="sl-rolls"></span><span class="sl-pipe"></span>
+            <div class="sl-ruler"><b style="left:0">0</b><b style="left:17.857%">10</b><b style="left:35.714%">20</b><b style="left:53.571%">30</b><b style="left:71.428%">40</b><b style="left:89.285%">50 cm</b></div>
+          </div>
+        </div>
+        <ul class="sl-stats">
+          <li><span data-ico="ruler" data-size="30">📏</span><span><small><i style="background:#F4B896"></i>Arm, shoulder to wrist</small><b id="sl-arm">33 cm</b></span></li>
+          <li><span data-ico="shirt" data-size="30">👕</span><span><small><i style="background:var(--yellow)"></i>Sleeve showing</small><b id="sl-vis">34 cm</b></span></li>
+          <li><span data-ico="chevrons-up-down" data-size="30">↕️</span><span><small><i style="background:repeating-linear-gradient(135deg,rgba(20,19,43,.5) 0 2px,#fff 2px 5px)"></i>Folded in the cuff</small><b id="sl-tuck">12 cm, 3 rolls</b></span></li>
+        </ul>
+        <p class="slide-out" id="grow-out"></p>
+        <p class="fine">*Demo claims: figures and fabric content on this page are fictional.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="sec revs" id="reviews" aria-labelledby="rev-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p><span class="tag white"><span data-ico="thumbs-up" data-size="18">👍</span> Parents say</span></p>
+      <h2 class="h2" id="rev-t">Muddy knees, five stars</h2>
+    </div>
+    <div class="rev-grid">
+      <aside class="sum card" aria-label="Rating summary">
+        <div class="num">
+          <b>4.8</b>
+          <span data-live="rating-stars" data-p-rating="4.8" data-size="104" data-label="4.8 out of 5 stars">★★★★★</span>
+        </div>
+        <p><b>2,481 parent reviews</b><br><span class="fine row" style="margin-top:4px"><span data-ico="badge-check" data-size="20">✅</span> Verified purchases only</span></p>
+        <ul class="dist" aria-label="Rating breakdown">
+          <li><span>5★</span><span class="bar"><i style="width:83%"></i></span><span>83%</span></li>
+          <li><span>4★</span><span class="bar"><i style="width:13%"></i></span><span>13%</span></li>
+          <li><span>3★</span><span class="bar"><i style="width:3%"></i></span><span>3%</span></li>
+          <li><span>2★</span><span class="bar"><i style="width:1%"></i></span><span>1%</span></li>
+          <li><span>1★</span><span class="bar"><i style="width:.6%"></i></span><span>&lt;1%</span></li>
+        </ul>
+        <p class="fine">Reviews are fictional demo copy.</p>
+      </aside>
+
+      <div class="rlist" id="rlist">
+        <article class="rev card">
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="MT" data-p-status="none" data-size="60" data-label="Marisol T.">MT</span><div><b>Marisol T.</b><span>Mum of Leo, 4 · Pip Puddle-Proof Raincoat</span></div><span class="stars" data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5 stars">★★★★★</span></div>
+          <h3>“Leo wears it every day, rain or not.”</h3>
+          <p>The cuffs let out exactly as promised and the hood stays up in a proper wind. We bought a 4Y when he was three and it's just starting to fit like a coat instead of a tent.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="41"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>41</span>)</button></div>
+        </article>
+        <article class="rev card">
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="DA" data-p-status="none" data-size="60" data-label="Dev A.">DA</span><div><b>Dev A.</b><span>Dad of Anaya, 6, and Kabir, 3 · Splash Wellies</span></div><span class="stars" data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5 stars">★★★★★</span></div>
+          <h3>“Hand-me-down test passed.”</h3>
+          <p>Kabir inherited Anaya's turquoise wellies and they still look new. Easy on, easy off, which matters at 7:40 in the morning. The handles are the best idea in the whole shop.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="27"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>27</span>)</button></div>
+        </article>
+        <article class="rev card">
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="GO" data-p-status="none" data-size="60" data-label="Grace O.">GO</span><div><b>Grace O.</b><span>Mum of twins, 5 · Bobble Knit Jumper</span></div><span class="stars" data-live="rating-stars" data-p-rating="4" data-size="72" data-label="4 out of 5 stars">★★★★</span></div>
+          <h3>“Survived paint club.”</h3>
+          <p>The bobble knit has been through two playgrounds and one very enthusiastic paintbrush. Washed cold, no pilling. Knocked off a star because the cream colour shows everything.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="19"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>19</span>)</button></div>
+        </article>
+        <article class="rev card" hidden data-more>
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="HR" data-p-status="none" data-size="60" data-label="Hannah R.">HR</span><div><b>Hannah R.</b><span>Mum of Ivy, 7 · Grow-Strap Dungarees</span></div><span class="stars" data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5 stars">★★★★★</span></div>
+          <h3>“We're on the second notch already.”</h3>
+          <p>Double knees, wooden buttons that haven't come off, and straps that really do move. Ivy picked mustard and now refuses to wear anything else.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="33"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>33</span>)</button></div>
+        </article>
+        <article class="rev card" hidden data-more>
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="TV" data-p-status="none" data-size="60" data-label="Tomás V.">TV</span><div><b>Tomás V.</b><span>Dad of Nico, 4 · Loud Socks, 3-Pack</span></div><span class="stars" data-live="rating-stars" data-p-rating="4" data-size="72" data-label="4 out of 5 stars">★★★★</span></div>
+          <h3>“Louder than the cat.”</h3>
+          <p>Two pairs survived the dryer, one is missing, as is tradition. Heels are properly cushioned and there is no toe seam to complain about, which ended the sock drama.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="12"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>12</span>)</button></div>
+        </article>
+        <article class="rev card" hidden data-more>
+          <div class="rev-h"><span data-live="avatar-initials" data-p-initials="PN" data-p-status="none" data-size="60" data-label="Priya N.">PN</span><div><b>Priya N.</b><span>Mum of Asha, 5 · Puddle Starter Bundle</span></div><span class="stars" data-live="rating-stars" data-p-rating="5" data-size="72" data-label="5 out of 5 stars">★★★★★</span></div>
+          <h3>“Wrong size, fixed in two days.”</h3>
+          <p>Ordered 4Y, Asha needed 5Y. Free return label was in the parcel, the swap arrived before the first one was even collected. The drawstring bag is now the wellie bag.</p>
+          <div class="rev-f"><span class="ok"><span data-ico="badge-check" data-size="18">✅</span> Verified purchase</span><button type="button" class="help" aria-pressed="false" data-help="52"><span data-ico="thumbs-up" data-size="20">👍</span> Helpful (<span>52</span>)</button></div>
+        </article>
+        <div><button type="button" class="btn white" id="more-revs"><span data-ico="chevron-down" data-size="22">⌄</span> Show three more reviews</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERY + FAQ ============ -->
+<section class="sec deliver" id="delivery" aria-labelledby="del-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p><span class="tag mint"><span data-ico="truck" data-size="18">🚚</span> Delivery and returns</span></p>
+      <h2 class="h2" id="del-t">Faster than the school run</h2>
+      <p class="lead">Ordered before 2 pm on a working day? It leaves the Drizzlebrook stockroom the same afternoon.</p>
+    </div>
+    <div class="dgrid">
+      <article class="dcard card"><div class="top"><span data-ico="truck" data-size="56" data-motion="hover" data-label="Delivery">🚚</span><h3>Free over $60</h3></div><p>Under $60 it's $5.95. Every parcel is tracked, with a one-hour delivery window on the day.</p></article>
+      <article class="dcard card"><div class="top"><span data-live="calendar-weekday" id="arrive" data-p-weekday="THU" data-p-day="15" data-size="64" data-label="Arrives by Thursday 15">THU 15</span><h3>Arrives by</h3></div><p>Order today and standard delivery lands by <b id="arrive-t">Thursday 15</b>. Express gets there next working day.</p></article>
+      <article class="dcard card"><div class="top"><span data-ico="rotate-ccw" data-size="56" data-motion="hover" data-label="Returns">↩️</span><h3>60-day free returns</h3></div><p>A prepaid label comes in every parcel. Size swaps are free, always, and refunds land in 3 working days.</p></article>
+      <article class="dcard card"><div class="top"><span data-ico="recycle" data-size="56" data-motion="hover" data-label="Recycled packaging">♻️</span><h3>Plastic-free parcels</h3></div><p>Recycled-card mailers and a reusable drawstring bag instead of a poly bag (demo claim).</p></article>
+    </div>
+
+    <div class="dtbl card tblw" style="margin-top:22px;padding:8px 6px">
+      <table class="tbl">
+        <thead><tr><th>Option</th><th>Arrives</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dt-opt"><span data-ico="package" data-size="22">📦</span><span>Standard</span></span></td><td>2 to 3 working days</td><td>Free over $60, else $5.95</td></tr>
+          <tr><td><span class="dt-opt"><span data-ico="zap" data-size="22">⚡</span><span>Express (order by 2 pm)</span></span></td><td>Next working day</td><td>$9.95</td></tr>
+          <tr><td><span class="dt-opt"><span data-ico="store" data-size="22">🏬</span><span>Click and collect</span></span></td><td>Saturdays, 10 am to 2 pm</td><td>Free</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="faq" aria-label="Frequently asked questions">
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> How does grow-with-me sizing work?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Coats and dungarees have cuffs, hems and straps that lengthen by about two sizes. Pick the size for their height today (or one up if you want room) and the adjustments take care of the next year or so.</p></details>
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> Are the coats really waterproof?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Seams are taped and the fabric is coated, with an 8,000 mm rating in our (fictional) lab. For a day of full-on puddle stomping, that's plenty. Boots should be dried upside down on the stairs, as per tradition.</p></details>
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> Can I wash them?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Yes. 40 degrees, no fabric softener (it clogs the coating), and low tumble or line dry. Re-proof the coat once a year with a wash-in proofer.</p></details>
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> What if the size is wrong?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Swap it free, any time in 60 days, even if it's been worn to the park. Use the prepaid label in the parcel or ask us for a new one.</p></details>
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> Do you ship outside the country?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Not yet. This is a demo shop, so nothing ships at all, but a real Puddle &amp; Pip would start with domestic delivery and add Europe next.</p></details>
+      <details><summary><span data-ico="help-circle" data-size="26">❓</span> Is there a discount code?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><p>Join the Puddle Club below and we'll show you the code for 10% off your first bag. It works in the bag, so go ahead and try it.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLUB ============ -->
+<section class="club" id="club" aria-labelledby="club-t">
+  <span class="deco" data-min-level="2" aria-hidden="true" style="left:3%;top:14px"><span data-ico="party-popper" data-size="72" data-motion="hover"></span></span>
+  <span class="deco" data-min-level="2" aria-hidden="true" style="left:15%;top:30px"><span data-ico="sparkles" data-size="48"></span></span>
+  <div class="wrap club-in">
+    <div>
+      <h2 class="h2" id="club-t">Join the Puddle Club</h2>
+      <p class="lead" style="color:var(--ink);margin-top:12px">First look at new drops, a size-swap reminder every spring, and 10% off your first bag.</p>
+    </div>
+    <form class="club-form card" id="club-form" action="#" novalidate>
+      <div class="field"><label for="club-email">Your email</label>
+        <div class="inp"><span data-ico="mail" data-size="24">✉️</span><input id="club-email" type="email" placeholder="parent@example.com" autocomplete="email" aria-describedby="club-err" required></div></div>
+      <p class="err" id="club-err" role="alert"></p>
+      <button class="btn red" type="submit"><span data-ico="send" data-size="22">➤</span> Join the club</button>
+      <p class="fine">One email a fortnight. Unsubscribe whenever. Nothing is actually sent from this demo.</p>
+      <div class="ok-msg" id="club-ok" hidden>
+        <span class="row"><span data-ico="gift" data-size="44" data-label="Gift">🎁</span><b class="h3" id="club-ok-t" tabindex="-1">You're in. Welcome to the puddle.</b></span>
+        <p>Your code for 10% off is <b>PIP10</b>. Add something to your bag and pop it in at the bottom.</p>
+        <button type="button" class="btn sm" id="club-open-bag"><span data-ico="shopping-bag" data-size="20">🛍️</span> Open my bag</button>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ============ CREDITS ============ -->
+<section id="credits" aria-labelledby="credits-t">
+  <div class="wrap">
+    <h2 id="credits-t">Photo credits</h2>
+    <ul>
+      <li>Rainy-day hero, girl with a yellow umbrella. Photo by <a href="https://www.pexels.com/@olly">Andrea Piacquadio</a> on <a href="https://www.pexels.com/photo/3761522/">Pexels</a></li>
+      <li>Sunny-day hero, boy jumping a puddle. Photo by <a href="https://www.pexels.com/@hotaru">Luna Lovegood</a> on <a href="https://www.pexels.com/photo/1104014/">Pexels</a></li>
+      <li>Snowy-day hero, child and snowball. Photo by <a href="https://unsplash.com/@pizbern?utm_source=withicons_demos&utm_medium=referral">Pauline Bernfeld</a> on <a href="https://unsplash.com/photos/16l2ezZQ_Yw?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Pip Puddle-Proof Raincoat and Grow-with-me. Photo by <a href="https://www.pexels.com/@atahandemir">Atahan Demir</a> on <a href="https://www.pexels.com/photo/14753847/">Pexels</a></li>
+      <li>Splash Wellies. Photo by <a href="https://www.pexels.com/@freestockpro">Atlantic Ambience</a> on <a href="https://www.pexels.com/photo/12932484/">Pexels</a></li>
+      <li>Mini Brolly. Photo by <a href="https://www.pexels.com/@umudicreative">Umut Raw</a> on <a href="https://www.pexels.com/photo/18903456/">Pexels</a></li>
+      <li>Bobble Knit Jumper. Photo by <a href="https://www.pexels.com/@ivan-s">Ivan S</a> on <a href="https://www.pexels.com/photo/6816484/">Pexels</a></li>
+      <li>Grow-Strap Dungarees. Photo by <a href="https://www.pexels.com/@cottonbro">cottonbro studio</a> on <a href="https://www.pexels.com/photo/4715315/">Pexels</a></li>
+      <li>Mini Explorer Satchel. Photo by <a href="https://unsplash.com/@stones_and_bones?utm_source=withicons_demos&utm_medium=referral">STONES and BONES</a> on <a href="https://unsplash.com/photos/atLykI9IpEE?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Sunny Bucket Hat. Photo by <a href="https://www.pexels.com/@aysin">Ayşin S.</a> on <a href="https://www.pexels.com/photo/26846575/">Pexels</a></li>
+      <li>Critter Cosy Pyjamas. Photo by <a href="https://www.pexels.com/@dmitriy-steinke-559643503">Dmitriy Steinke</a> on <a href="https://www.pexels.com/photo/18820123/">Pexels</a></li>
+      <li>Doodle Canvas Sneakers. Photo by <a href="https://www.pexels.com/@antonius-ferret">Antonius Ferret</a> on <a href="https://www.pexels.com/photo/5275375/">Pexels</a></li>
+      <li>Loud Socks, 3-Pack. Photo by <a href="https://www.pexels.com/@licalze-socks-427041938">Licalze Socks</a> on <a href="https://www.pexels.com/photo/15195444/">Pexels</a></li>
+      <li>Doodle Tee and Pocket Shorts Set. Photo by <a href="https://www.pexels.com/@d-ng-thanh-tu-2922122">Đặng Thanh Tú</a> on <a href="https://www.pexels.com/photo/5693888/">Pexels</a></li>
+      <li>Puddle Starter Bundle. Photo by <a href="https://unsplash.com/@xavi_cabrera?utm_source=withicons_demos&utm_medium=referral">Xavi Cabrera</a> on <a href="https://unsplash.com/photos/6bnH1v-IQK0?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+    </ul>
+    <p class="credit-note">Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Demo page made with with icons. Names, places, products, prices, reviews and fabric claims are fictional.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a class="logo" href="#top" aria-label="Puddle and Pip, back to top"><span class="blob"><span data-ico="droplet" data-size="26">💧</span></span><span>Puddle<i>&amp;</i>Pip</span></a>
+        <p>Rainwear, wellies and cosy layers for ages 2 to 10, designed in Drizzlebrook and tested by an unpaid panel of puddle jumpers.</p>
+        <p class="pay" style="margin-top:16px"><span data-ico="credit-card" data-size="30" data-label="Cards accepted">💳</span><span data-ico="lock" data-size="26" data-label="Secure checkout">🔒</span><span data-ico="shield-check" data-size="30" data-label="Safety tested">🛡️</span><span class="fine" style="color:#fff">Secure checkout, safety-tested fabrics</span></p>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><span data-ico="cloud-rain" data-size="20">🌧️</span><a href="#shop" data-jump="rain">Rain gear</a></li>
+          <li><span data-ico="shirt" data-size="20">👕</span><a href="#shop" data-jump="layers">Layers</a></li>
+          <li><span data-ico="backpack" data-size="20">🎒</span><a href="#shop" data-jump="out">Out and about</a></li>
+          <li><span data-ico="gift" data-size="20">🎁</span><a href="#bundle">Puddle Starter Bundle</a></li>
+          <li><span data-ico="ruler" data-size="20">📏</span><a href="#size">Size finder</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul>
+          <li><span data-ico="truck" data-size="20">🚚</span><a href="#delivery">Delivery</a></li>
+          <li><span data-ico="rotate-ccw" data-size="20">↩️</span><a href="#delivery">Returns</a></li>
+          <li><span data-ico="sprout" data-size="20">🌱</span><a href="#grow">Grow-with-me</a></li>
+          <li><span data-ico="heart-handshake" data-size="20">🤝</span><a href="#club">Puddle Club</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Visit and say hi</h3>
+        <ul>
+          <li><span data-ico="map-pin" data-size="20">📍</span><span>Unit 4, Brolly Yard, 12 Gutter Lane, Drizzlebrook</span></li>
+          <li><span data-ico="phone" data-size="20">📞</span><span>555-0142</span></li>
+          <li><span data-ico="mail" data-size="20">✉️</span><span>hello@puddleandpip.example</span></li>
+          <li><span data-ico="clock" data-size="20">🕐</span><span>Mon to Fri 9 to 5, Sat 10 to 2</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot"><span>© 2026 Puddle &amp; Pip. Demo page made with with icons. Names, places and products are fictional.</span><span>Prices in USD. Fabric and testing claims are demo copy.</span></div>
+  </div>
+</footer>
+</div><!-- /#page -->
+
+<!-- ============ LAYERS ============ -->
+<div class="scrim" id="scrim"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-t" aria-hidden="true">
+  <header class="dr-head">
+    <h2 class="h3" id="drawer-t"><span class="row" style="gap:10px"><span data-ico="shopping-bag" data-size="30">🛍️</span> Your bag</span></h2>
+    <button type="button" class="ibtn" id="drawer-x" aria-label="Close your bag"><span data-ico="close" data-size="24">✕</span></button>
+  </header>
+  <div class="dr-ship">
+    <span data-live="progress-ring" id="ship-ring" data-p-value="0" data-size="64" data-label="0 percent of the way to free delivery">0%</span>
+    <p id="ship-txt">Add $60.00 more for free delivery.</p>
+  </div>
+  <ul class="dr-rows" id="dr-rows"></ul>
+  <div class="dr-empty">
+    <span data-ico="shopping-bag" data-size="96" data-label="Empty bag">🛍️</span>
+    <h3 class="h3">Your bag is empty</h3>
+    <p>Nothing in here but air. Start with the forecast kit, or browse the shop.</p>
+    <button type="button" class="btn" id="dr-browse"><span data-ico="cloud-sun" data-size="22">⛅</span> See today's kit</button>
+  </div>
+  <div class="dr-foot">
+    <form class="code" id="code-form" action="#" novalidate>
+      <div class="inp"><span data-ico="tag" data-size="22">🏷️</span><label for="code-in" class="sr">Discount code</label><input id="code-in" type="text" placeholder="Discount code" autocomplete="off"></div>
+      <button type="submit" class="btn sm white">Apply</button>
+    </form>
+    <p class="msg" id="code-msg" role="status"></p>
+    <div class="tot" id="tot"></div>
+    <button type="button" class="btn red" id="checkout"><span data-ico="lock" data-size="22">🔒</span> Checkout</button>
+    <p class="msg good" id="co-msg" role="status"></p>
+  </div>
+</aside>
+
+<div class="sheet card" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t" aria-hidden="true">
+  <div class="row" style="justify-content:space-between;align-items:flex-start">
+    <span class="tag sky"><span data-ico="ruler" data-size="18">📏</span> One quick thing</span>
+    <button type="button" class="ibtn" id="sheet-x" aria-label="Close size picker"><span data-ico="close" data-size="22">✕</span></button>
+  </div>
+  <h2 id="sheet-t">Which size?</h2>
+  <p id="sheet-for" class="fine"></p>
+  <div class="szs" id="szs"></div>
+  <p class="fine">Not sure? <a href="#size" id="sheet-help" style="font-weight:600">Use the size finder</a>. Swaps are free for 60 days.</p>
+</div>
+
+<script src="_kit/demo-kit.js" data-style="sticker" data-recommend="sticker,kawaii,brutal,bauhaus,anime,gloss,pixel,bento" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var m0 = function (n) { return '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '') }
+  var m2 = function (n) { return '$' + n.toFixed(2) }
+  var clamp = function (n, a, b) { return Math.min(b, Math.max(a, n)) }
+
+  // ---------- photos (all from the catalogue) ----------
+  var UNS = ''
+  var PH = {
+    raincoat: { s: 'p', id: 14753847, w: 1200, h: 1800 },
+    boots:    { s: 'p', id: 12932484, w: 1200, h: 800 },
+    umbrella: { s: 'p', id: 18903456, w: 1200, h: 1800 },
+    sweater:  { s: 'p', id: 6816484, w: 1200, h: 1800 },
+    overalls: { s: 'p', id: 4715315, w: 1200, h: 1800 },
+    backpack: { s: 'u', u: UNS + 'photo-1742986410468-0a173a45a21d', w: 1200, h: 1799 },
+    hat:      { s: 'p', id: 26846575, w: 1200, h: 1800 },
+    pyjamas:  { s: 'p', id: 18820123, w: 1200, h: 800 },
+    sneakers: { s: 'p', id: 5275375, w: 1200, h: 800 },
+    socks:    { s: 'p', id: 15195444, w: 1200, h: 1800 },
+    flatlay:  { s: 'p', id: 5693888, w: 1200, h: 1200 },
+    bundle:   { s: 'u', u: UNS + 'photo-1554995783-571a2b4d923a', w: 1200, h: 801 }
+  }
+  function purl(k, w) {
+    var p = PH[k]
+    return '_img/puddle-and-pip/' + (p.s === 'p' ? p.id : p.u) + '-' + w + '.jpg' // self-hosted copies (demos/_tools/localize-photos.mjs)
+  }
+
+  // ---------- products ----------
+  var CATS = { rain: 'Rain gear', layers: 'Layers', out: 'Out and about', cosy: 'Cosy and socks' }
+  var P = [
+    { id: 'raincoat', name: 'Pip Puddle-Proof Raincoat', cat: 'rain', price: 52, was: 69, rate: 4.9, n: 418, ph: 'raincoat', fp: '42% 38%', badge: 'BEST', chip: '<span data-ico="chevrons-up-down" data-size="16">↕️</span> Cuffs grow 2 sizes',
+      desc: 'Taped seams, a hood that stays up and reflective cuffs that let out two sizes.', alt: 'A small child in a yellow hooded raincoat with gathered reflective cuffs walks along a wet street.',
+      colors: [{ n: 'Bus Yellow', h: '#FFC800' }, { n: 'Tomato', h: '#FF5A44' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Mint', h: '#3FD9A0' }] },
+    { id: 'boots', name: 'Splash Wellies', cat: 'rain', price: 34, rate: 4.8, n: 362, ph: 'boots', fp: '36% 50%',
+      desc: 'Easy-on handles, a grippy tread and room for thick socks.', alt: 'Two children in bright rubber boots, one pair turquoise and one blue with red soles, stand in a puddle among autumn leaves.',
+      colors: [{ n: 'Turquoise', h: '#22D1EE' }, { n: 'Tomato', h: '#FF5A44' }, { n: 'Bus Yellow', h: '#FFC800' }, { n: 'Navy', h: '#2D3A8C' }] },
+    { id: 'sweater', name: 'Bobble Knit Jumper', cat: 'layers', price: 44, was: 55, rate: 4.7, n: 289, ph: 'sweater', fp: '50% 38%',
+      desc: 'Chunky, soft and itch-free, knitted from a recycled-cotton blend (demo claim).', alt: 'A toddler in a rust-orange bobble-knit jumper holds up a long paintbrush.',
+      colors: [{ n: 'Rust', h: '#D9622B' }, { n: 'Mustard', h: '#E8B730' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Cream', h: '#F5EBD7' }] },
+    { id: 'overalls', name: 'Grow-Strap Dungarees', cat: 'layers', price: 48, was: 60, rate: 4.9, n: 331, ph: 'overalls', fp: '38% 50%', badge: 'NEW', chip: '<span data-ico="sliders" data-size="16">🎚️</span> 3-notch straps',
+      desc: 'Three-notch straps, double knees and wooden buttons that survive the wash.', alt: 'A smiling toddler in a striped top and navy denim dungarees stands against a bright blue backdrop.',
+      colors: [{ n: 'Denim', h: '#2F4B8F' }, { n: 'Mustard', h: '#E8B730' }, { n: 'Tomato', h: '#FF5A44' }, { n: 'Mint', h: '#3FD9A0' }] },
+    { id: 'umbrella', name: 'Mini Brolly, Safe-Snap', cat: 'rain', price: 18, rate: 4.6, n: 207, ph: 'umbrella', fp: '50% 45%', one: true, chip: '<span data-ico="shield-check" data-size="16">🛡️</span> Safe-snap ribs',
+      desc: 'Rounded tips, a one-hand push button and a pocket-size sleeve.', alt: 'Rainbow-coloured umbrellas hang in overlapping layers, seen from below.',
+      colors: [{ n: 'Rainbow', h: '#FF8A3D', bg: 'conic-gradient(#FF5A44,#FFC800,#3FD9A0,#4DB8FF,#FF5A44)' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Tomato', h: '#FF5A44' }, { n: 'Mint', h: '#3FD9A0' }] },
+    { id: 'backpack', name: 'Mini Explorer Satchel', cat: 'out', price: 29, rate: 4.5, n: 176, ph: 'backpack', fp: '50% 42%', one: true,
+      desc: 'Wipe-clean, eight litres, big enough for a lunchbox, a wellie bag and one rock.', alt: 'Two girls seen from behind in a green meadow wear a pink and an aqua school satchel.',
+      colors: [{ n: 'Blush', h: '#F8A6C4' }, { n: 'Aqua', h: '#6FD6D0' }, { n: 'Bus Yellow', h: '#FFC800' }, { n: 'Tomato', h: '#FF5A44' }] },
+    { id: 'hat', name: 'Sunny Bucket Hat', cat: 'out', price: 18, was: 24, rate: 4.7, n: 143, ph: 'hat', fp: '50% 32%', one: true,
+      desc: 'UPF 50+ cotton, a chin cord and a brim that folds flat into a coat pocket.', alt: 'A girl seen from behind wears a cream bucket sun hat in sunny green countryside.',
+      colors: [{ n: 'Cream', h: '#F5EBD7' }, { n: 'Bus Yellow', h: '#FFC800' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Tomato', h: '#FF5A44' }] },
+    { id: 'pyjamas', name: 'Critter Cosy Pyjamas', cat: 'cosy', price: 32, was: 40, rate: 4.8, n: 254, ph: 'pyjamas', fp: '50% 58%',
+      desc: 'Soft brushed jersey, fold-over cuffs and a fit that gets handed down.', alt: 'Two smiling children sit on a white floor in matching grey animal-print pyjamas.',
+      colors: [{ n: 'Storm Grey', h: '#9AA3B5' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Mint', h: '#3FD9A0' }, { n: 'Tomato', h: '#FF5A44' }] },
+    { id: 'sneakers', name: 'Doodle Canvas Sneakers', cat: 'out', price: 36, rate: 4.6, n: 198, ph: 'sneakers', fp: '45% 50%',
+      desc: 'Blank white canvas, a sticker sheet in the box and a rubber toe that laughs at puddles.', alt: 'Close-up of children\'s hands sticking colourful stickers onto white canvas sneakers.',
+      colors: [{ n: 'White', h: '#FFFFFF' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Bus Yellow', h: '#FFC800' }, { n: 'Tomato', h: '#FF5A44' }] },
+    { id: 'socks', name: 'Loud Socks, 3-Pack', cat: 'cosy', price: 14, rate: 4.8, n: 512, ph: 'socks', fp: '50% 55%',
+      desc: 'Dots, stripes and flames. Cushioned heels, no toe seam, mostly stays in pairs.', alt: 'Colourful patterned socks in polka dots, stripes and flames scattered over bright paper.',
+      colors: [{ n: 'Party Mix', h: '#FF5FA2' }, { n: 'Sunny Mix', h: '#FFC800' }, { n: 'Cool Mix', h: '#4DB8FF' }] },
+    { id: 'flatlay', name: 'Doodle Tee and Pocket Shorts', cat: 'layers', price: 36, was: 45, rate: 4.7, n: 121, ph: 'flatlay', fp: '50% 50%',
+      desc: 'A soft doodle-print tee with olive pocket shorts, ready for the sunny spells.', alt: 'Flat lay of a child\'s grey doodle-print T-shirt and olive-green shorts on a mint background.',
+      colors: [{ n: 'Olive', h: '#6B7A3A' }, { n: 'Sky', h: '#4DB8FF' }, { n: 'Tomato', h: '#FF5A44' }, { n: 'Mustard', h: '#E8B730' }] }
+  ]
+  var BY = {}; P.forEach(function (p, i) { BY[p.id] = p; p.i = i; p.pct = p.was ? Math.round((1 - p.price / p.was) * 100) : 0 })
+  // the bundle is a product too, so the bag can hold it
+  var BUNDLE = { id: 'bundle', name: 'Puddle Starter Bundle', price: 89, ph: 'bundle', fp: '35% 45%', colors: [{ n: 'Yellow and Turquoise', h: '#FFC800' }] }
+  BY.bundle = BUNDLE
+  // units left by size in years (a size that is not listed has plenty); the brolly, satchel and hat are one-size
+  var STOCK = {
+    raincoat: { 2: 4, 3: 2, 7: 1, 10: 0 }, boots: { 2: 0, 5: 3, 8: 2 }, sweater: { 4: 2, 6: 0, 9: 3 }, overalls: { 3: 0, 5: 2, 8: 1 },
+    pyjamas: { 2: 3, 6: 0 }, sneakers: { 2: 2, 9: 0, 10: 1 }, socks: { 4: 3 }, flatlay: { 3: 1, 7: 0, 10: 2 }
+  }
+  function stockOf(p, l) {
+    if (p.one) return 99
+    if (p.id === 'bundle') return Math.min(stockOf(BY.raincoat, l), stockOf(BY.boots, l))
+    var t = STOCK[p.id] || {}, y = parseInt(l, 10)
+    return t[y] != null ? t[y] : 99
+  }
+
+  // ---------- state ----------
+  var S = { cat: 'all', q: '', sort: 'featured', size: '', fav: false, wish: {}, cart: [], code: '', wx: 'rain' }
+  var SIZES = []; for (var y = 2; y <= 10; y++) SIZES.push({ y: y, l: y + 'Y', h: 92 + 6 * (y - 2), chest: 53 + 2 * (y - 2) })
+
+  function setLive(el, params, fb) {
+    if (!el) return
+    Object.keys(params).forEach(function (k) { el.dataset['p' + k.replace(/(^|-)(\w)/g, function (_, a, c) { return c.toUpperCase() })] = params[k] })
+    if (el._kit && window.WithKit) window.WithKit.setLive(el, params)
+    if (fb != null) { var f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; else if (!el._kit) el.textContent = fb }
+  }
+  function labelLive(el, text) {
+    el.setAttribute('data-label', text)
+    if (el._kit && el._kit.wi) el._kit.wi.setAttribute('label', text)
+  }
+
+  // ---------- layers (bag drawer, size sheet) ----------
+  // returnTo = the button that started the whole flow (a size sheet that hands over to the bag keeps the original trigger)
+  var layer = null, lastFocus = null
+  function openLayer(el, focusSel, returnTo) {
+    closeLayer(true)
+    lastFocus = returnTo || document.activeElement
+    layer = el
+    el.classList.add('on'); el.setAttribute('aria-hidden', 'false')
+    $('#scrim').classList.add('on')
+    $('#page').inert = true
+    document.documentElement.style.overflow = 'hidden'
+    var go = function () { if (layer !== el) return; var f = focusSel ? $(focusSel, el) : null; (f || el.querySelector('button')).focus({ preventScroll: true }) }
+    requestAnimationFrame(function () { requestAnimationFrame(function () { go(); if (layer === el && !el.contains(document.activeElement)) setTimeout(go, 120) }) })
+  }
+  function closeLayer(silent) {
+    if (!layer) return
+    layer.classList.remove('on'); layer.setAttribute('aria-hidden', 'true')
+    $('#scrim').classList.remove('on')
+    $('#page').inert = false
+    document.documentElement.style.overflow = ''
+    layer = null
+    if (!silent && lastFocus && lastFocus.focus && lastFocus.isConnected) lastFocus.focus({ preventScroll: true })
+  }
+  // a small status toast, bottom left (the kit bar owns bottom right)
+  var toastT = 0
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg
+    t.classList.remove('on'); void t.offsetWidth; t.classList.add('on')
+    clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); t.textContent = '' }, 4600)
+  }
+  // roving tabindex for the radiogroups: the checked radio is the one tab stop, arrows move inside
+  function rove(box, sel) {
+    var items = $$(sel, box), on = items.filter(function (i) { return i.getAttribute('aria-checked') === 'true' })[0] || items[0]
+    items.forEach(function (i) { i.tabIndex = i === on ? 0 : -1 })
+  }
+  $('#scrim').addEventListener('click', function () { closeLayer() })
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLayer() })
+  $('#drawer-x').addEventListener('click', function () { closeLayer() })
+  $('#sheet-x').addEventListener('click', function () { closeLayer(); pending = null })
+
+  // in-page links: scroll without rewriting the address bar (the kit keeps the look in the hash)
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]')
+    if (!a || a.hasAttribute('data-pid')) return
+    var id = a.getAttribute('href').slice(1), t = id && document.getElementById(id)
+    if (!t) return
+    e.preventDefault()
+    var j = a.getAttribute('data-jump')
+    if (j) { S.cat = j; S.q = ''; $('#shop-search').value = ''; S.fav = false; applyFilter() }
+    t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+    if (id === 'shop-search') setTimeout(function () { t.focus({ preventScroll: true }) }, 350)
+    if ($('#mnav').classList.contains('open')) toggleMenu(false)
+  })
+
+  // ---------- header ----------
+  function toggleMenu(on) {
+    var m = $('#mnav'); on = on == null ? !m.classList.contains('open') : on
+    m.classList.toggle('open', on); $('#menu-btn').setAttribute('aria-expanded', on ? 'true' : 'false')
+  }
+  $('#menu-btn').addEventListener('click', function () { toggleMenu() })
+  function radioKeys(box, sel) {
+    box.addEventListener('keydown', function (e) {
+      if (!/^Arrow(Left|Right|Up|Down)$/.test(e.key)) return
+      var items = $$(sel, box), i = items.indexOf(document.activeElement)
+      if (i < 0) return
+      e.preventDefault()
+      var n = items[(i + (/Right|Down/.test(e.key) ? 1 : items.length - 1)) % items.length]
+      n.focus(); n.click()
+    })
+  }
+
+  // ---------- product grid ----------
+  var grid = $('#grid'), cta = $('#cta-tile'), cards = {}
+  function swatchHtml(p) {
+    return p.colors.map(function (c, i) {
+      return '<button type="button" class="sw" role="radio" aria-checked="' + (i === 0) + '" aria-label="' + esc(c.n) + '" data-i="' + i + '" style="--c:' + c.h + (c.bg ? ';--bg:' + c.bg : '') + '"></button>'
+    }).join('')
+  }
+  function makeCard(p) {
+    var li = document.createElement('li'); li.className = 'pc'; li.id = 'p-' + p.id; li.dataset.id = p.id; li.dataset.ci = 0
+    var ph = PH[p.ph]
+    var tags = (p.badge ? '<span class="live-pill" data-live="ribbon-label" data-p-text="' + p.badge + '" data-size="58" data-label="' + (p.badge === 'BEST' ? 'Best seller' : 'New') + '">' + p.badge + '</span>' : '') +
+      (p.pct ? '<span class="live-pill" data-live="sale-sticker" data-p-text="-' + p.pct + '%" data-size="64" data-label="' + p.pct + ' percent off">-' + p.pct + '%</span>' : '')
+    li.innerHTML =
+      '<div class="pframe"><img src="' + purl(p.ph, 600) + '" width="' + ph.w + '" height="' + ph.h + '" loading="lazy" decoding="async" alt="' + esc(p.name + ': ' + p.alt) + '" style="object-position:' + p.fp + '"><span class="tint"></span><span class="tint t2"></span>' +
+      '<div class="ptags">' + tags + '</div>' +
+      (p.chip ? '<span class="tag gchip" data-min-level="2">' + p.chip + '</span>' : '') +
+      '<button type="button" class="wish" aria-pressed="false" aria-label="Save ' + esc(p.name) + ' to favourites"><span data-ico="heart" data-size="24" data-motion="hover">🩷</span></button></div>' +
+      '<div class="pbody"><h3 class="pname">' + esc(p.name) + '</h3><p class="pdesc">' + esc(p.desc) + '</p>' +
+      '<div class="prate"><span data-ico="star" data-size="20">⭐</span><span>' + p.rate.toFixed(1) + '</span><span>(' + p.n + ')</span></div>' +
+      '<div class="pprice"><span>' + m0(p.price) + '</span>' + (p.was ? '<s><span class="sr">was </span>' + m0(p.was) + '</s>' : '') + '</div>' +
+      '<p class="stock" data-s="none"><span class="st-i" data-ico="ruler" data-size="18">📏</span><span class="st-t">Sizes 2 to 10 years</span></p>' +
+      '<div class="swatches" role="radiogroup" aria-label="Colour for ' + esc(p.name) + '">' + swatchHtml(p) + '</div>' +
+      '<p class="clabel">Colour: <b>' + esc(p.colors[0].n) + '</b><span class="as"> (as shown)</span></p>' +
+      '<button type="button" class="btn sm red add"><span data-ico="shopping-bag" data-size="20">🛍️</span> <span class="add-t">Add to bag</span></button></div>'
+    radioKeys($('.swatches', li), '.sw'); rove($('.swatches', li), '.sw')
+    fixEmoji(li)
+    return li
+  }
+  P.forEach(function (p) { var li = makeCard(p); cards[p.id] = li; grid.insertBefore(li, cta) })
+
+  grid.addEventListener('click', function (e) {
+    var li = e.target.closest('.pc'); if (!li || !li.dataset.id) return
+    var p = BY[li.dataset.id]
+    var sw = e.target.closest('.sw')
+    if (sw) {
+      var i = +sw.dataset.i, c = p.colors[i]
+      $$('.sw', li).forEach(function (b) { b.setAttribute('aria-checked', b === sw ? 'true' : 'false') })
+      li.dataset.ci = i
+      li.removeAttribute('data-tinted'); li.removeAttribute('data-neutral'); li.style.removeProperty('--tbg'); li.style.removeProperty('--filt')
+      if (i === 0) { $('.clabel', li).innerHTML = 'Colour: <b>' + esc(c.n) + '</b><span class="as"> (as shown)</span>' }
+      else {
+        var tn = tone(c.h)
+        if (tn === 'hue') { li.setAttribute('data-tinted', ''); li.style.setProperty('--tint', c.h) }
+        else { li.setAttribute('data-neutral', ''); li.style.setProperty('--filt', FILT[tn]) }
+        li.style.setProperty('--tbg', c.h)
+        $('.clabel', li).innerHTML = 'Colour: <b>' + esc(c.n) + '</b><span class="as"> (preview tint)</span>'
+      }
+      rove($('.swatches', li), '.sw')
+      return
+    }
+    if (e.target.closest('.wish')) { toggleWish(p.id); return }
+    if (e.target.closest('.add')) requestAdd([{ id: p.id, ci: +li.dataset.ci }])
+  })
+  // saturated colours get a hue blend; creams, whites and greys get a lightness treatment instead (a hue blend turns a rust jumper khaki)
+  var FILT = { white: 'saturate(.15) brightness(1.55) contrast(.92)', cream: 'saturate(.45) brightness(1.38) sepia(.22) contrast(.95)', grey: 'grayscale(.9) brightness(1.08) contrast(1.05)' }
+  function tone(hex) {
+    var r = parseInt(hex.slice(1, 3), 16) / 255, g = parseInt(hex.slice(3, 5), 16) / 255, b = parseInt(hex.slice(5, 7), 16) / 255
+    var mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn, sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1))
+    return l > 0.93 ? 'white' : l > 0.82 ? 'cream' : sat < 0.3 ? 'grey' : 'hue'
+  }
+  function favCount() { return Object.keys(S.wish).filter(function (k) { return S.wish[k] }).length }
+  function toggleWish(id) {
+    S.wish[id] = !S.wish[id]
+    var b = $('.wish', cards[id]); b.setAttribute('aria-pressed', S.wish[id] ? 'true' : 'false')
+    var fb = $('.kit-fb', b) || b.firstChild; if (fb) fb.textContent = S.wish[id] ? '❤️' : '🩷'
+    var n = favCount(), wasFav = S.fav
+    $('#wish-n').textContent = n; $('#wish-n').hidden = !n
+    $('#wish-btn').setAttribute('aria-label', n ? 'Show my ' + n + ' saved favourites' : 'Saved favourites: none yet')
+    if (wasFav && !n) { S.fav = false; toast('That was your last favourite, so here is the whole shop again.') }
+    $('#wish-btn').setAttribute('aria-pressed', S.fav ? 'true' : 'false')
+    if (wasFav) applyFilter()
+  }
+  $('#wish-btn').addEventListener('click', function () {
+    var n = favCount()
+    S.fav = !S.fav && n > 0
+    if (n === 0) toast('No favourites yet. Tap the heart on any piece to save it here.')
+    else applyFilter()
+    $('#wish-btn').setAttribute('aria-pressed', S.fav ? 'true' : 'false')
+    $('#shop').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+  })
+
+  function applyFilter() {
+    var q = S.q.trim().toLowerCase(), words = q ? q.split(/\s+/) : [], shown = 0
+    P.forEach(function (p) {
+      var hay = (p.name + ' ' + p.desc + ' ' + CATS[p.cat] + ' ' + p.colors.map(function (c) { return c.n }).join(' ')).toLowerCase()
+      var ok = (S.cat === 'all' || p.cat === S.cat) && words.every(function (w) { return hay.indexOf(w) > -1 }) && (!S.fav || S.wish[p.id])
+      cards[p.id].hidden = !ok; if (ok) shown++
+    })
+    $('#empty').hidden = shown > 0; cta.hidden = shown === 0; cta.classList.toggle('half', shown % 2 === 1)
+    $('#empty h3').textContent = S.fav ? 'No favourites in this view' : 'Nothing here but a puddle'
+    $('#empty p').textContent = S.fav ? 'Your saved pieces are in other categories or filtered out. Clear the filters to see them.' : 'Nothing matches that search. Try another word, or clear the filters.'
+    $$('.tile').forEach(function (t) { t.setAttribute('aria-pressed', t.dataset.cat === S.cat ? 'true' : 'false') })
+    $('#count').textContent = 'Showing ' + shown + ' of ' + P.length + ' pieces' + (S.fav ? ', your favourites' : '') + (S.size ? ' · stock shown for size ' + S.size : '')
+    alignRows()
+  }
+  function sortGrid() {
+    var arr = P.slice()
+    if (S.sort === 'low') arr.sort(function (a, b) { return a.price - b.price })
+    else if (S.sort === 'high') arr.sort(function (a, b) { return b.price - a.price })
+    else if (S.sort === 'rated') arr.sort(function (a, b) { return b.rate - a.rate || b.n - a.n })
+    else if (S.sort === 'sale') arr.sort(function (a, b) { return b.pct - a.pct || a.i - b.i })
+    arr.forEach(function (p) { grid.insertBefore(cards[p.id], cta) })
+    alignRows()
+  }
+  // names and descriptions differ in length: give every card in a row the same text height so prices, swatches and buttons line up
+  function alignRows() {
+    var vis = P.map(function (p) { return cards[p.id] }).filter(function (li) { return !li.hidden }), rows = {}
+    var parts = ['.pname', '.pdesc']
+    vis.forEach(function (li) { parts.forEach(function (q) { $(q, li).style.minHeight = '' }) })
+    vis.forEach(function (li) { (rows[li.offsetTop] = rows[li.offsetTop] || []).push(li) })
+    Object.keys(rows).forEach(function (k) {
+      parts.forEach(function (q) {
+        var mx = 0; rows[k].forEach(function (li) { mx = Math.max(mx, $(q, li).offsetHeight) })
+        rows[k].forEach(function (li) { $(q, li).style.minHeight = mx + 'px' })
+      })
+    })
+  }
+  var rzT = 0
+  window.addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(alignRows, 120) })
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignRows)
+  $('#tiles').addEventListener('click', function (e) { var t = e.target.closest('.tile'); if (!t) return; S.cat = t.dataset.cat; applyFilter() })
+  $('#shop-search').addEventListener('input', function (e) { S.q = e.target.value; applyFilter() })
+  $('#sort').addEventListener('change', function (e) { S.sort = e.target.value; sortGrid() })
+  $('#clear-filters').addEventListener('click', function () { S.cat = 'all'; S.q = ''; S.fav = false; $('#shop-search').value = ''; $('#wish-btn').setAttribute('aria-pressed', 'false'); applyFilter() })
+  // tile counters
+  $$('.tile small').forEach(function (s) { var k = s.dataset.n, n = k === 'all' ? P.length : P.filter(function (p) { return p.cat === k }).length; s.textContent = n + ' pieces' })
+
+  // ---------- size state, sheet ----------
+  var sel = $('#size-sel'); SIZES.forEach(function (z) { var o = document.createElement('option'); o.value = z.l; o.textContent = z.l + ', ' + z.y + ' years'; sel.appendChild(o) })
+  var szs = $('#szs'); SIZES.forEach(function (z) { var b = document.createElement('button'); b.type = 'button'; b.dataset.l = z.l; b.innerHTML = z.l + '<small>' + z.h + ' cm</small>'; szs.appendChild(b) })
+  var pending = null
+  function setSize(l) {
+    S.size = l; sel.value = l
+    $$('.szs button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.l === l ? 'true' : 'false') })
+    renderStock(); applyFilter(); renderBag()
+  }
+  sel.addEventListener('change', function () { setSize(sel.value) })
+  szs.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return
+    var back = lastFocus, list = pending; pending = null
+    setSize(b.dataset.l); closeLayer(true)
+    if (list) addAll(list, back); else if (back && back.focus) back.focus({ preventScroll: true })
+  })
+  $('#sheet-help').addEventListener('click', function () { closeLayer(true); pending = null; setTimeout(function () { $('#age-r').focus({ preventScroll: true }) }, 60) })
+
+  // swap an icon slot to another icon (the kit keeps the name in _kit; a swap the visitor picked in the panel still wins)
+  function setIco(h, name, fb) {
+    if (!h || h.getAttribute('data-ico') === name) return
+    h.setAttribute('data-ico', name)
+    if (!h._kit) { h.textContent = fb; return }
+    h._kit.name = name; h._kit.fb = fb
+    var f = h.querySelector('.kit-fb'); if (f) f.textContent = fb
+    var sw = window.WithKit && window.WithKit.state().swaps[h._kit.key]
+    if (h._kit.wi) h._kit.wi.setAttribute('name', sw || name)
+  }
+  // every card says what is left in the chosen size, and the button follows
+  function renderStock() {
+    P.forEach(function (p) {
+      var li = cards[p.id], st = $('.stock', li), btn = $('.add', li), at = $('.add-t', li), l = S.size, state, text, ico, em
+      if (p.one) { state = 'none'; text = 'One size, adjustable'; ico = 'sliders'; em = '🎚️' }
+      else if (!l) { state = 'none'; text = 'Sizes 2 to 10 years'; ico = 'ruler'; em = '📏' }
+      else {
+        var n = stockOf(p, l)
+        if (n === 0) { state = 'out'; text = 'Sold out in ' + l; ico = 'x-circle'; em = '⛔' }
+        else if (n <= 3) { state = 'low'; text = 'Only ' + n + ' left in ' + l; ico = 'alert-circle'; em = '⚠️' }
+        else { state = 'ok'; text = 'In stock in ' + l; ico = 'badge-check'; em = '✅' }
+      }
+      st.setAttribute('data-s', state); $('.st-t', st).textContent = text; setIco($('.st-i', st), ico, em)
+      btn.disabled = state === 'out'
+      at.textContent = state === 'out' ? 'Sold out in ' + l : (l && !p.one ? 'Add ' + l + ' to bag' : 'Add to bag')
+    })
+  }
+  // the sheet shows what is left per size for the piece (or kit) being added
+  function sheetSizes(list) {
+    var sized = list.map(function (it) { return BY[it.id] }).filter(function (p) { return !p.one })
+    $$('.szs button').forEach(function (b) {
+      var l = b.dataset.l, z = SIZES[parseInt(l, 10) - 2]
+      var out = sized.length > 0 && sized.every(function (p) { return stockOf(p, l) === 0 })
+      var left = sized.length === 1 ? stockOf(sized[0], l) : 99
+      b.disabled = out
+      b.querySelector('small').textContent = out ? 'sold out' : left <= 3 && left > 0 ? left + ' left' : z.h + ' cm'
+    })
+  }
+  function requestAdd(list) {
+    var sized = list.some(function (it) { return !BY[it.id].one })
+    if (sized && !S.size) {
+      pending = list
+      var names = list.map(function (it) { return BY[it.id].name }); $('#sheet-for').textContent = 'For: ' + (names.length > 2 ? names.length + ' pieces in your kit' : names.join(' and ')) + '. The same size is used for everything in your bag.'
+      sheetSizes(list)
+      openLayer($('#sheet'), '#szs button:not([disabled])'); return
+    }
+    addAll(list)
+  }
+  function addAll(list, back) {
+    var skipped = []
+    list.forEach(function (it) {
+      var p = BY[it.id]
+      if (!p.one && stockOf(p, S.size) === 0) skipped.push(p.name)
+      else addLine(it.id, it.ci, p.one ? 'One size' : S.size)
+    })
+    if (skipped.length) toast(skipped.join(' and ') + (skipped.length > 1 ? ' are' : ' is') + ' sold out in ' + S.size + ', so ' + (skipped.length > 1 ? 'they were' : 'it was') + ' left out of your bag.')
+    if (skipped.length < list.length) openBag(back instanceof Element ? back : null)
+    else if (back && back.focus) back.focus({ preventScroll: true })
+  }
+
+  // ---------- bag ----------
+  var rowEls = {}
+  function lineKey(l) { return l.id + '|' + l.ci + '|' + l.size }
+  function addLine(id, ci, size) {
+    var k = id + '|' + ci + '|' + size, f = S.cart.filter(function (l) { return lineKey(l) === k })[0]
+    if (f) f.qty = Math.min(9, f.qty + 1); else S.cart.push({ id: id, ci: ci, size: size, qty: 1 })
+    renderBag()
+  }
+  function makeRow(l) {
+    var p = BY[l.id], c = p.colors[l.ci] || p.colors[0], li = document.createElement('li'); li.className = 'line'
+    li.innerHTML = '<img src="' + purl(p.ph, 300) + '" width="72" height="84" alt="" style="object-position:' + p.fp + '">' +
+      '<div><h3>' + esc(p.name) + '</h3><p class="meta">' + esc(c.n) + ' · ' + (l.size === 'One size' ? 'one size' : 'size ' + l.size) + ' · ' + m0(p.price) + ' each</p>' +
+      '<div class="ctl"><div class="qty"><button type="button" aria-label="One fewer ' + esc(p.name) + '" data-d="-1"><span data-ico="minus" data-size="20">−</span></button><output aria-live="polite">1</output><button type="button" aria-label="One more ' + esc(p.name) + '" data-d="1"><span data-ico="plus" data-size="20">+</span></button></div><span class="lp"></span></div>' +
+      '<button type="button" class="rm" data-rm><span data-ico="trash" data-size="18">🗑️</span> Remove</button></div>'
+    fixEmoji(li)
+    return li
+  }
+  function renderBag() {
+    var rows = $('#dr-rows'), keys = {}, count = 0, sub = 0
+    S.cart.forEach(function (l) {
+      var k = lineKey(l); keys[k] = 1
+      var el = rowEls[k]
+      if (!el) { el = rowEls[k] = makeRow(l); el._line = l; rows.appendChild(el) }
+      el._line = l
+      $('output', el).textContent = l.qty; $('.lp', el).textContent = m0(BY[l.id].price * l.qty)
+      count += l.qty; sub += BY[l.id].price * l.qty
+    })
+    Object.keys(rowEls).forEach(function (k) { if (!keys[k]) { rowEls[k].remove(); delete rowEls[k] } })
+    var disc = S.code ? sub * 0.1 : 0, after = sub - disc, ship = sub === 0 ? 0 : (after >= 60 ? 0 : 5.95), total = after + ship
+    $('#drawer').classList.toggle('is-empty', count === 0)
+    $('#tot').innerHTML = '<div><span>Subtotal (' + count + ' ' + (count === 1 ? 'item' : 'items') + ')</span><span>' + m2(sub) + '</span></div>' +
+      (disc ? '<div class="save"><span>PIP10, 10% off</span><span>-' + m2(disc) + '</span></div>' : '') +
+      '<div><span>Delivery</span><span>' + (ship ? m2(ship) : 'Free') + '</span></div><div class="g"><span>Total</span><span>' + m2(total) + '</span></div>'
+    var pct = clamp(Math.round(after / 60 * 100), 0, 100)
+    setLive($('#ship-ring'), { value: pct }, pct + '%'); labelLive($('#ship-ring'), pct + ' percent of the way to free delivery')
+    $('#ship-txt').innerHTML = after >= 60 ? '<b>Free delivery unlocked.</b> Nice work.' : (count ? 'You are <b>' + m2(60 - after) + '</b> away from free delivery.' : 'Free delivery on orders over $60.')
+    setLive($('#bag-live'), { count: count }, '🛍️ ' + count); labelLive($('#bag-live'), count ? 'Bag, ' + count + (count === 1 ? ' item' : ' items') : 'Bag, empty')
+    $('#bag-btn').setAttribute('aria-label', count ? 'Open your bag, ' + count + (count === 1 ? ' item' : ' items') : 'Open your bag, empty')
+    $('#co-msg').textContent = ''
+  }
+  function openBag(back) { renderBag(); openLayer($('#drawer'), '#drawer-x', back instanceof Element ? back : null) }
+  $('#bag-btn').addEventListener('click', function () { openBag() })
+  $('#dr-rows').addEventListener('click', function (e) {
+    var li = e.target.closest('.line'); if (!li) return
+    var l = li._line
+    var d = e.target.closest('[data-d]')
+    if (d) { l.qty += +d.dataset.d; if (l.qty < 1) S.cart.splice(S.cart.indexOf(l), 1); l.qty = Math.min(l.qty, 9); renderBag(); return }
+    if (e.target.closest('[data-rm]')) { S.cart.splice(S.cart.indexOf(l), 1); renderBag() }
+  })
+  $('#dr-browse').addEventListener('click', function () { closeLayer(true); $('#forecast').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); $('#kit-add').focus({ preventScroll: true }) })
+  $('#code-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var v = $('#code-in').value.trim().toUpperCase(), m = $('#code-msg')
+    if (!v) { m.className = 'msg bad'; m.textContent = 'Type a code first. (Hint: PIP10.)'; return }
+    if (v === 'PIP10') { S.code = 'PIP10'; m.className = 'msg good'; m.textContent = 'PIP10 applied: 10% off your bag.'; renderBag() }
+    else { S.code = ''; m.className = 'msg bad'; m.textContent = 'That code is not valid. Try PIP10.'; renderBag() }
+  })
+  $('#checkout').addEventListener('click', function () { $('#co-msg').textContent = 'This is a demo shop: nothing was charged and nothing will ship. Thanks for playing!' })
+  $('#bundle-add').addEventListener('click', function () { requestAdd([{ id: 'bundle', ci: 0 }]) })
+
+  // ---------- weather picker ----------
+  var WX = {
+    rain: { name: 'Rainy', cond: 'rain', t: 11, em: '🌧️', h1a: 'Puddles are', h1b: 'for jumping.', note: 'Drizzle until teatime. Perfect.', kit: 'The Rainy-Day Kit', blurb: 'Taped seams, wellies with handles and a brolly that won\'t bite. Tap any piece to jump to it in the shop.',
+      lede: 'Rain? Brilliant. Taped-seam coats, wellies with handles and brollies that won\'t bite, with cuffs and straps that grow right alongside them.', ids: ['raincoat', 'boots', 'umbrella', 'socks'],
+      credit: 'Photo by <a href="https://www.pexels.com/@olly">Andrea Piacquadio</a> on <a href="https://www.pexels.com/photo/3761522/">Pexels</a>' },
+    sun: { name: 'Sunny', cond: 'sunny', t: 24, em: '☀️', h1a: 'Sunshine is', h1b: 'for sun hats.', note: 'Bright spells and a warm breeze. Hats on.', kit: 'The Sunny-Spell Kit', blurb: 'UPF hats, canvas sneakers and a tee set for the parks that are suddenly dry. Tap any piece to jump to it in the shop.',
+      lede: 'Sun? Even better. Light layers, a hat with a chin cord and sneakers they can decorate themselves, because puddles are still out there.', ids: ['hat', 'sneakers', 'flatlay', 'backpack'],
+      credit: 'Photo by <a href="https://www.pexels.com/@hotaru">Luna Lovegood</a> on <a href="https://www.pexels.com/photo/1104014/">Pexels</a>' },
+    snow: { name: 'Snowy', cond: 'snow', t: -2, em: '❄️', h1a: 'Snow is', h1b: 'for snowballs.', note: 'Settling by lunchtime. Layers, layers, layers.', kit: 'The Snow-Day Kit', blurb: 'Bobble knits, wellies roomy enough for thick socks and pyjamas for the hot chocolate afterwards. Tap any piece to jump to it in the shop.',
+      lede: 'Snow? Wrap up. Chunky knits, roomy wellies and the loudest socks we make, so the only cold thing is the snowball.', ids: ['sweater', 'boots', 'socks', 'pyjamas'],
+      credit: 'Photo by <a href="https://unsplash.com/@pizbern?utm_source=withicons_demos&utm_medium=referral">Pauline Bernfeld</a> on <a href="https://unsplash.com/photos/16l2ezZQ_Yw?utm_source=withicons_demos&utm_medium=referral">Unsplash</a>' }
+  }
+  var wxChips = $('.wx-chips')
+  function kitTotal(k) { return WX[k].ids.reduce(function (s, id) { return s + BY[id].price }, 0) }
+  function setWeather(k) {
+    var w = WX[k]; S.wx = k
+    $('#top').setAttribute('data-weather', k)
+    $$('.wx-chip').forEach(function (c) { c.setAttribute('aria-checked', c.dataset.wx === k ? 'true' : 'false') })
+    $$('#hero-ph img').forEach(function (im) { var on = im.dataset.wx === k; im.classList.toggle('on', on); im.setAttribute('aria-hidden', on ? 'false' : 'true') })
+    $('#h1-a').textContent = w.h1a; $('#h1-b').textContent = w.h1b
+    rove(wxChips, '.wx-chip')
+    $('#wx-lede').textContent = w.lede
+    $('#hero-credit').innerHTML = w.credit
+    var live = $('#wx-live'); setLive(live, { condition: w.cond, temperature: w.t }, w.em + ' ' + w.t + '°'); labelLive(live, w.name + ', ' + w.t + ' degrees')
+    $('#wx-note').textContent = w.note
+    $('#fc-t').textContent = w.kit; $('#kit-blurb').textContent = w.blurb
+    $('#kit-list').innerHTML = w.ids.map(function (id) {
+      var p = BY[id]; return '<li><a href="#p-' + id + '" data-pid="' + id + '"><img src="' + purl(p.ph, 300) + '" width="48" height="48" alt="" loading="lazy" style="object-position:' + p.fp + '"><span><b>' + esc(p.name) + '</b><span>' + m0(p.price) + '</span></span></a></li>'
+    }).join('')
+    var tot = kitTotal(k); setLive($('#kit-price'), { amount: tot }, '$' + tot); labelLive($('#kit-price'), 'Kit price: ' + tot + ' dollars')
+  }
+  wxChips.addEventListener('click', function (e) { var c = e.target.closest('.wx-chip'); if (c) setWeather(c.dataset.wx) })
+  radioKeys(wxChips, '.wx-chip')
+  $('#kit-list').addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-pid]'); if (!a) return
+    e.preventDefault()
+    S.cat = 'all'; S.q = ''; S.fav = false; $('#shop-search').value = ''; applyFilter()
+    var card = cards[a.dataset.pid]; card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' })
+    card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash')
+  })
+  $('#kit-add').addEventListener('click', function () { requestAdd(WX[S.wx].ids.map(function (id) { return { id: id, ci: 0 } })) })
+
+  // ---------- size finder ----------
+  var mode = 'age', unit = 'cm'
+  var ageR = $('#age-r'), hIn = $('#h-in')
+  function inCm() { var v = parseFloat(hIn.value); if (!isFinite(v)) return null; return unit === 'cm' ? v : v * 2.54 }
+  function recommend() {
+    var base, msg = '', note = ''
+    if (mode === 'age') base = +ageR.value
+    else {
+      var cm = inCm()
+      if (cm == null || cm < 40) {
+        $('#h-msg').textContent = 'Enter their height to see a size.'; $('#h-msg').className = 'msg bad'
+        setLive($('#res-badge'), { text: '–' }, '–'); labelLive($('#res-badge'), 'No size yet, enter a height')
+        $('#res-h').textContent = 'No size yet'; $('#res-fit').textContent = ''; $('#res-note').textContent = ''
+        $$('#ruler li').forEach(function (li) { li.className = '' }); $$('#tbl tbody tr').forEach(function (tr) { tr.className = '' })
+        $('#res-shop-t').textContent = 'Shop by size'; $('#res-shop').disabled = true; delete $('#res-shop').dataset.l
+        return
+      }
+      base = clamp(Math.round((cm - 92) / 6) + 2, 2, 10)
+      msg = cm < 86 ? 'That is smaller than our 2Y (89 to 95 cm), so we start from 2Y. Our range begins at age 2.' : cm > 143 ? 'That is taller than our 10Y (137 to 143 cm). We are growing the range, so 10Y is the closest for now.' : ''
+      $('#h-msg').textContent = msg
+      $('#h-msg').className = 'msg' + (msg ? ' bad' : '')
+    }
+    var up = $('#o-grow').checked, lay = $('#o-layers').checked
+    var y = clamp(base + (up ? 1 : 0), 2, 10), z = SIZES[y - 2]
+    var inch = function (cm) { return Math.round(cm / 2.54) }
+    setLive($('#res-badge'), { text: z.l }, z.l); labelLive($('#res-badge'), 'Recommended size: ' + y + ' years')
+    $('#res-h').textContent = 'Size ' + y + ' years'
+    $('#res-fit').textContent = 'Fits ' + (z.h - 3) + ' to ' + (z.h + 3) + ' cm (' + inch(z.h - 3) + ' to ' + inch(z.h + 3) + ' in)'
+    note = mode === 'age' ? 'Based on age ' + base + '.' : 'Based on their height.'
+    if (up) note += ' We went one size up for room to grow.'
+    note += y < 10 ? ' Cuffs and straps stretch to ' + SIZES[Math.min(10, y + 2) - 2].l + ', so this should last about two seasons.' : ' You are at the top of our range, so enjoy it.'
+    if (lay) note += y < 10 ? ' Over chunky knits? Take the raincoat and dungarees in ' + SIZES[y - 1].l + ' and keep tees and socks at ' + z.l + '.' : ' Over chunky knits, stay with ' + z.l + ' and wear the knit a little looser.'
+    $('#res-note').textContent = note
+    $$('#ruler li').forEach(function (li, i) { var yy = i + 2; li.className = yy === y ? 'me' : (yy > y && yy <= y + 2 ? 'grow' : '') })
+    $$('#tbl tbody tr').forEach(function (tr, i) { tr.className = i + 2 === y ? 'me' : '' })
+    $('#res-shop-t').textContent = 'Shop size ' + z.l
+    $('#res-shop').disabled = false; $('#res-shop').dataset.l = z.l
+  }
+  $('#ruler').innerHTML = SIZES.map(function (z) { return '<li>' + z.l + '</li>' }).join('')
+  $('#tbl tbody').innerHTML = SIZES.map(function (z) { return '<tr><td><b>' + z.l + '</b></td><td>' + z.y + ' years</td><td>' + (z.h - 3) + ' to ' + (z.h + 3) + ' cm</td><td>' + z.chest + ' cm</td></tr>' }).join('')
+  function setMode(m) {
+    mode = m
+    $('#by-age').setAttribute('aria-pressed', m === 'age'); $('#by-h').setAttribute('aria-pressed', m === 'h')
+    $('#dial-age').hidden = m !== 'age'; $('#dial-h').hidden = m !== 'h'
+    recommend()
+  }
+  $('#by-age').addEventListener('click', function () { setMode('age') })
+  $('#by-h').addEventListener('click', function () { setMode('h') })
+  ageR.addEventListener('input', function () { $('#age-out').textContent = ageR.value; ageR.setAttribute('aria-valuetext', ageR.value + ' years old'); recommend() })
+  function syncH() { $('#h-out').textContent = hIn.value || '–'; recommend() }
+  hIn.addEventListener('input', syncH)
+  $('#h-minus').addEventListener('click', function () { hIn.value = (parseFloat(hIn.value) || 100) - 1; syncH() })
+  $('#h-plus').addEventListener('click', function () { hIn.value = (parseFloat(hIn.value) || 100) + 1; syncH() })
+  function setUnit(u) {
+    if (u === unit) return
+    var v = parseFloat(hIn.value) || 110
+    hIn.value = u === 'in' ? Math.round(v / 2.54) : Math.round(v * 2.54)
+    unit = u
+    $('#u-cm').setAttribute('aria-pressed', u === 'cm'); $('#u-in').setAttribute('aria-pressed', u === 'in')
+    $('#h-unit').textContent = (u === 'cm' ? 'cm' : 'in') + ' tall'
+    hIn.min = u === 'cm' ? 30 : 12; hIn.max = u === 'cm' ? 160 : 63
+    syncH()
+  }
+  $('#u-cm').addEventListener('click', function () { setUnit('cm') }); $('#u-in').addEventListener('click', function () { setUnit('in') })
+  $('#o-grow').addEventListener('change', recommend); $('#o-layers').addEventListener('change', recommend)
+  $('#sf').addEventListener('submit', function (e) { e.preventDefault() })
+  $('#res-shop').addEventListener('click', function () {
+    setSize(this.dataset.l)
+    S.cat = 'all'; S.q = ''; $('#shop-search').value = ''; applyFilter()
+    $('#shop').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+    sel.classList.remove('wiggle'); void sel.offsetWidth; sel.classList.add('wiggle')
+  })
+
+  // ---------- grow-with-me slider ----------
+  // size 4Y sleeve: 46 cm with every cuff roll let out; each roll tucks away 4 cm; the sleeve always shows 1 cm past the wrist
+  var SL_FULL = 46
+  var GROW = [
+    { arm: 33, t: '<b>Cuffs rolled three times.</b> Roomy, but the straps and elastic hem keep it from flapping.' },
+    { arm: 37, t: '<b>Cuffs rolled twice.</b> This is the sweet spot: full cover and nothing to trip on.' },
+    { arm: 41, t: '<b>One roll left.</b> Let it out when the next growth spurt arrives. The reflective piping stays in view.' },
+    { arm: 45, t: '<b>Cuffs fully let out.</b> A snug last winter, then it is ready to hand down to a younger cousin.' }
+  ]
+  function setGrow() {
+    var a = +$('#grow-r').value, g = GROW[a - 3], vis = g.arm + 1, tuck = SL_FULL - vis, rolls = Math.round(tuck / 4), sl = $('#sleeve')
+    $('#grow-age').textContent = a; $('#grow-r').setAttribute('aria-valuetext', a + ' years old')
+    sl.style.setProperty('--arm', g.arm); sl.style.setProperty('--vis', vis)
+    $('#sl-rolls').innerHTML = new Array(rolls + 1).join('<i></i>')
+    $('#sl-dim-a').textContent = 'Sleeve ' + vis + ' cm'
+    $('#sl-dim-b').hidden = tuck === 0; $('#sl-dim-b-t').textContent = '+' + tuck + ' cm'
+    $('#sl-arm').textContent = g.arm + ' cm'; $('#sl-vis').textContent = vis + ' cm'
+    $('#sl-tuck').textContent = tuck ? tuck + ' cm, ' + rolls + (rolls === 1 ? ' roll' : ' rolls') : 'Nothing, all let out'
+    sl.setAttribute('aria-label', 'Sleeve diagram for age ' + a + ': arm ' + g.arm + ' cm, sleeve showing ' + vis + ' cm' + (tuck ? ', ' + tuck + ' cm folded into ' + rolls + (rolls === 1 ? ' cuff roll' : ' cuff rolls') : ', cuffs fully let out'))
+    $('#grow-out').innerHTML = 'Age ' + a + ': ' + g.t
+  }
+  $('#grow-r').addEventListener('input', setGrow)
+
+  // ---------- reviews ----------
+  $('#rlist').addEventListener('click', function (e) {
+    var h = e.target.closest('.help'); if (!h) return
+    var on = h.getAttribute('aria-pressed') !== 'true'
+    h.setAttribute('aria-pressed', on ? 'true' : 'false')
+    $('span:last-child', h).textContent = +h.dataset.help + (on ? 1 : 0)
+  })
+  $('#more-revs').addEventListener('click', function () {
+    var more = $$('[data-more]'); more.forEach(function (r) { r.hidden = false })
+    this.parentNode.hidden = true
+    more[0].tabIndex = -1; more[0].focus()
+  })
+
+  // ---------- club form ----------
+  $('#club-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var v = $('#club-email').value.trim(), err = $('#club-err')
+    if (!v) { err.textContent = 'Pop your email in first.'; $('#club-email').focus(); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { err.textContent = 'That doesn\'t look like an email yet. Try parent@example.com.'; $('#club-email').focus(); return }
+    err.textContent = ''
+    $$('#club-form > :not(.ok-msg)').forEach(function (n) { n.hidden = true })
+    $('#club-ok').hidden = false
+    $('#club-ok-t').focus()
+    $('#code-in').value = 'PIP10'
+  })
+  $('#club-open-bag').addEventListener('click', function () { openBag() })
+
+  // ---------- countdown + delivery date ----------
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  function endDate() {
+    var n = new Date(), d = (7 - n.getDay()) % 7, e = new Date(n.getFullYear(), n.getMonth(), n.getDate() + d, 23, 59, 59)
+    if (e <= n) e = new Date(e.getTime() + 7 * 864e5)
+    return e
+  }
+  var END = endDate()
+  function tick() {
+    var ms = END - new Date()
+    if (ms <= 0) { END = endDate(); ms = END - new Date() }
+    var s = Math.floor(ms / 1000), p = function (n) { return String(n).padStart(2, '0') }
+    $('#cd-d').textContent = p(Math.floor(s / 86400)); $('#cd-h').textContent = p(Math.floor(s % 86400 / 3600)); $('#cd-m').textContent = p(Math.floor(s % 3600 / 60)); $('#cd-s').textContent = p(s % 60)
+  }
+  tick(); setInterval(tick, 1000)
+  ;(function () {
+    var d = new Date(), add = 3
+    while (add) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) add-- }
+    var wd = DAYS[d.getDay()], day = d.getDate()
+    setLive($('#arrive'), { weekday: wd.slice(0, 3).toUpperCase(), day: day }, wd.slice(0, 3).toUpperCase() + ' ' + day)
+    labelLive($('#arrive'), 'Arrives by ' + wd + ' ' + day)
+    $('#arrive-t').textContent = wd + ' ' + day + ' ' + MON[d.getMonth()]
+  })()
+
+  // Basic level: size each emoji fallback from its slot's data-size, so a plain site still has proportions
+  function fixEmoji(root) {
+    $$('[data-ico]', root).concat(root.matches && root.matches('[data-ico]') ? [root] : []).forEach(function (h) {
+      var n = parseFloat(h.getAttribute('data-size')) || 24
+      h.style.setProperty('--emoji', clamp(Math.round(n * 0.62), 16, 44) + 'px')
+    })
+  }
+  fixEmoji(document)
+
+  // ---------- go ----------
+  sortGrid(); renderStock(); applyFilter(); setWeather('rain'); setMode('age'); setGrow(); renderBag()
+})()
+</script>
+</body>
+</html>

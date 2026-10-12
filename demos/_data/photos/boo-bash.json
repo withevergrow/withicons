@@ -1,0 +1,233 @@
+{
+  "slug": "boo-bash",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "unsplash",
+      "id": "7FC-84Ap_IU",
+      "page": "https://unsplash.com/photos/7FC-84Ap_IU",
+      "url": "https://images.unsplash.com/photo-1509163245925-f4255dea7727",
+      "photographer": "Conner Baker",
+      "photographerUrl": "https://unsplash.com/@connerbaker",
+      "alt": "A row of small children in Halloween costumes, including a princess in white, a hooded ninja and a superhero, stand holding jack-o-lantern buckets in front of a brick building in soft evening light, with parents and older kids behind them.",
+      "colors": "brick red, white, bright blue, pumpkin orange",
+      "focal": "50% 40%",
+      "notes": "Landscape 3:2, busy and joyful, soft overcast evening light with a muted grey pavement. Faces sit at about 30-50% height, so keep the focal near the top half. Keep the headline beside it or on a left-to-right dark scrim; the kids fill the centre, so do not centre text on top. The superhero mask carries a small Marvel-style emblem; do not crop tight on it for a hero. Spare-1 is the graphic alternative.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1200": "_img/boo-bash/photo-1509163245925-f4255dea7727-1200.jpg"
+      }
+    },
+    {
+      "slot": "patch",
+      "src": "unsplash",
+      "id": "knv2rccMMGc",
+      "page": "https://unsplash.com/photos/knv2rccMMGc",
+      "url": "https://images.unsplash.com/photo-1718208295507-24ba1e846c1e",
+      "photographer": "Emma White",
+      "photographerUrl": "https://unsplash.com/@ewhite7102",
+      "alt": "A long row of orange pumpkins on a grassy field under a clear blue sky, with visitors and trees in the distance.",
+      "colors": "pumpkin orange, grass green, sky blue",
+      "focal": "50% 60%",
+      "notes": "Wide and sunny; sky on top leaves room for a caption or section title. Works well as a full-bleed band behind the trail map, crop with object-position about 50% 60%.",
+      "width": 1200,
+      "height": 674,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/boo-bash/photo-1718208295507-24ba1e846c1e-1600.jpg"
+      }
+    },
+    {
+      "slot": "trick",
+      "src": "pexels",
+      "id": "5859556",
+      "page": "https://www.pexels.com/photo/5859556/",
+      "url": "https://images.pexels.com/photos/5859556/pexels-photo-5859556.jpeg",
+      "photographer": "Charles Parker",
+      "photographerUrl": "https://www.pexels.com/@charles-parker",
+      "alt": "Two small children in a black witch costume and a red devil costume, seen from behind, walk up a leaf-strewn brick path with a jack-o-lantern bucket toward a white front door, with cobwebs draped over the hedge beside them.",
+      "colors": "brick red, white, black, autumn orange",
+      "focal": "50% 50%",
+      "notes": "Back view, no identifiable faces, so it is safe and charming for the trail map section. Landscape 3:2; the white door and brick above the kids give calm space for a caption or numbered pin overlay.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "900": "_img/boo-bash/5859556-900.jpg"
+      }
+    },
+    {
+      "slot": "candy",
+      "src": "pexels",
+      "id": "5420791",
+      "page": "https://www.pexels.com/photo/5420791/",
+      "url": "https://images.pexels.com/photos/5420791/pexels-photo-5420791.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A scalloped paper cup striped in orange, green, purple and black, filled with sour gummy worms and rainbow candy belts, nestled in orange and black shredded foil in front of a curtain of orange and black streamers.",
+      "colors": "orange, black, pastel pink and mint",
+      "focal": "50% 68%",
+      "notes": "Portrait 2:3, bright and punchy. The candy cup sits in the lower half (about 50-80% height), so keep the focal low when cropping to a square or 4:3. Good for the snack menu card; the streamers give a ready-made Halloween backdrop.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/boo-bash/5420791-700.jpg"
+      }
+    },
+    {
+      "slot": "cupcakes",
+      "src": "pexels",
+      "id": "5583534",
+      "page": "https://www.pexels.com/photo/5583534/",
+      "url": "https://images.pexels.com/photos/5583534/pexels-photo-5583534.jpeg",
+      "photographer": "Daisy Anderson",
+      "photographerUrl": "https://www.pexels.com/@daisy-anderson",
+      "alt": "Four dark chocolate cupcakes topped with white fondant ghosts with black bead eyes, served on a pale grey square plate on a wooden table.",
+      "colors": "chocolate brown, ghost white, warm wood",
+      "focal": "50% 42%",
+      "notes": "Portrait 2:3, cute and not scary. Neat enough to be shop-made, so caption it as a treat on the snack menu rather than claiming the kids decorated them. Crop to a square around the ghosts.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/boo-bash/5583534-700.jpg"
+      }
+    },
+    {
+      "slot": "carving",
+      "src": "pexels",
+      "id": "5859180",
+      "page": "https://www.pexels.com/photo/5859180/",
+      "url": "https://images.pexels.com/photos/5859180/pexels-photo-5859180.jpeg",
+      "photographer": "Charles Parker",
+      "photographerUrl": "https://www.pexels.com/@charles-parker",
+      "alt": "Two little girls sit on grass among fallen leaves, painting small pumpkins topped with black witch hats, with a paint palette and paint tubes lying beside them.",
+      "colors": "grass green, leaf brown, cream, soft pink",
+      "focal": "45% 50%",
+      "notes": "Landscape 3:2, faces turned down so it stays friendly and anonymous. Perfect for the pumpkin painting craft station.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "900": "_img/boo-bash/5859180-900.jpg"
+      }
+    },
+    {
+      "slot": "ghosts",
+      "src": "pexels",
+      "id": "5432188",
+      "page": "https://www.pexels.com/photo/5432188/",
+      "url": "https://images.pexels.com/photos/5432188/pexels-photo-5432188.jpeg",
+      "photographer": "Juan Vargas",
+      "photographerUrl": "https://www.pexels.com/@juan-vargas-1955119",
+      "alt": "A white gauze ghost decoration with a simple drawn face hangs on a thread from a branch against a warm golden-orange blur of autumn leaves.",
+      "colors": "ghost white, amber, burnt orange",
+      "focal": "46% 52%",
+      "notes": "Portrait 2:3, soft and cute rather than scary. Ideal for the decorations or what-to-bring card; the blurred background takes overlaid text well.",
+      "width": 1200,
+      "height": 1799,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/boo-bash/5432188-700.jpg"
+      }
+    },
+    {
+      "slot": "party",
+      "src": "pexels",
+      "id": "14449805",
+      "page": "https://www.pexels.com/photo/14449805/",
+      "url": "https://images.pexels.com/photos/14449805/pexels-photo-14449805.jpeg",
+      "photographer": "Helena Jankovičová Kováčová",
+      "photographerUrl": "https://www.pexels.com/@helen1",
+      "alt": "Two children toss armfuls of golden autumn leaves into the air in a sunlit garden under dark evergreen trees, one in an owl-eared hat, with the leaves and arms softly blurred by motion.",
+      "colors": "golden yellow, leaf brown, forest green",
+      "focal": "55% 45%",
+      "notes": "Landscape 3:2, kids partly turned away and deliberately motion-blurred, so use it as an atmospheric card or band rather than a sharp detail shot. Energetic game-time mood for the party games or drop-off section.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "900": "_img/boo-bash/14449805-900.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "unsplash",
+      "id": "4z4ztWP7WPs",
+      "page": "https://unsplash.com/photos/4z4ztWP7WPs",
+      "url": "https://images.unsplash.com/photo-1477241219470-e4f7fa400a9b",
+      "photographer": "Julia Raasch",
+      "photographerUrl": "https://unsplash.com/@julesrsh",
+      "alt": "A child in a magenta top and purple costume holds a large pumpkin decorated with a grinning black vinyl face in both hands, their own face out of frame.",
+      "colors": "pumpkin orange, magenta, black",
+      "focal": "50% 50%",
+      "notes": "Second hero candidate: tight, graphic and anonymous, orange and grape purple match the page palette. Landscape 3:2.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/boo-bash/photo-1477241219470-e4f7fa400a9b-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "SbsJGPqqaN0",
+      "page": "https://unsplash.com/photos/SbsJGPqqaN0",
+      "url": "https://images.unsplash.com/photo-1568041327767-d6a7883f5f99",
+      "photographer": "Debby Hudson",
+      "photographerUrl": "https://unsplash.com/@hudsoncrafted",
+      "alt": "An overhead flat lay of candy corn heaped in a large pumpkin-shaped orange dish beside two smaller dishes of tiny decorative pumpkins on a pale linen cloth.",
+      "colors": "cream, orange, pale grey",
+      "focal": "40% 50%",
+      "notes": "Texture and detail shot with plenty of calm pale space around it. Good behind the snack menu or as a card header.",
+      "width": 1200,
+      "height": 750,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/boo-bash/photo-1568041327767-d6a7883f5f99-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "mKDy1lSR6_M",
+      "page": "https://unsplash.com/photos/mKDy1lSR6_M",
+      "url": "https://images.unsplash.com/photo-1720704328995-4a99ae91dd77",
+      "photographer": "Patrick Otim",
+      "photographerUrl": "https://unsplash.com/@256p",
+      "alt": "A small girl in a dark jacket and red skirt stands in a carpet of fallen orange leaves under golden autumn trees, with other children playing further back.",
+      "colors": "golden yellow, orange, deep brown",
+      "focal": "60% 45%",
+      "notes": "Atmosphere shot, portrait 3:4, warm golden light and children small in the frame. Good for the what-to-bring or parents info section.",
+      "width": 1200,
+      "height": 1600,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/boo-bash/photo-1720704328995-4a99ae91dd77-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-4",
+      "src": "pexels",
+      "id": "5604925",
+      "page": "https://www.pexels.com/photo/5604925/",
+      "url": "https://images.pexels.com/photos/5604925/pexels-photo-5604925.jpeg",
+      "photographer": "Yaroslav Shuraev",
+      "photographerUrl": "https://www.pexels.com/@yaroslav-shuraev",
+      "alt": "Three children, one in a red pointed hat and black cape, one in a black eye mask and one in a tulle cape, sit at a wooden table in a backyard decorated for Halloween, with pumpkins, hay bales, black candles and string lights between the trees.",
+      "colors": "forest green, hay gold, pumpkin orange, black",
+      "focal": "50% 55%",
+      "notes": "Backyard Halloween party scene, landscape 3:2, sharp and editorial; moodier and more witchy than the slot photos, so use it for the venue, hosts or RSVP section rather than the bright hero. Faces are small or turned away.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/boo-bash/5604925-1000.jpg"
+      }
+    }
+  ]
+}

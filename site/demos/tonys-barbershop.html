@@ -1,0 +1,1928 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tony&#39;s Barber &amp; Shave Parlor (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Neighbourhood barbershop on Alder Street since 1974. Three chairs, hot-towel shaves and proper haircuts from $28. Book a chair online, take a number for walk-ins, or pick up pomade and beard oil from the shelf.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Rye&display=swap" rel="stylesheet">
+<style>
+/* ============ Tony's Barber & Shave Parlor: oxblood, navy, brass and black leather ============ */
+:root{
+  --oxblood:#5a101c;--red:#a3202c;--red-2:#bd2c39;--red-3:#7c1621;
+  --navy:#0d1a30;--navy-2:#15284a;--navy-3:#1f3d6c;--blue:#2a5391;
+  --cream:#f6eed9;--paper:#ede1c3;--paper-2:#e3d4ad;--card:#fcf7e8;
+  --brass:#b2842e;--brass-2:#dcb560;--brass-3:#f1d696;--brass-ink:#6c4c10;
+  --leather:#1a120d;--leather-2:#2a1b12;--leather-3:#3d291a;--tan:#8d5c33;
+  --chalk:#f3f1e5;--chalk-2:#c9cdbf;--board:#1e2723;--wood:#5b3820;--wood-2:#7b4e2d;
+  --ink:#1c150f;--ink-2:#4a3c2f;--ink-3:#6b5a47;--ok:#2d6a46;
+  --f-display:'Rye',Georgia,'Times New Roman',serif;
+  --f-body:'Barlow','Helvetica Neue',Arial,sans-serif;
+  --w:1200px;
+  --stripes:repeating-linear-gradient(-45deg,var(--red) 0 10px,#fbf4e3 10px 20px,var(--blue) 20px 30px,#fbf4e3 30px 40px);
+  /* default style (skeuo): c1 to c4 are each icon's own main colours, so only the warm highlights are tuned */
+  --with-skeuo-accent:#e3bb68;--with-skeuo-ink:#21140d;--with-skeuo-shadow:#150e09;--with-skeuo-tint:#fbf2dc;
+  /* recommended styles that would clash with the palette */
+  --with-retro-1:#dcb560;--with-retro-2:#b8793a;--with-retro-3:#a3202c;--with-retro-4:#1f3d6c;--with-retro-cream:#fbf2dc;--with-retro-letter:#1c150f;--with-retro-shadow:#4a2a18;--with-retro-tint:#fbf2dc;
+  --with-brutal-accent:#dcb560;--with-brutal-c1:#e4b94f;--with-brutal-c2:#c4303d;--with-brutal-c3:#2a5391;--with-brutal-c4:#f1e4c0;--with-brutal-tint:#e8d7aa;
+  --with-bauhaus-accent:#2a5391;--with-bauhaus-c1:#a3202c;--with-bauhaus-c2:#dcb560;--with-bauhaus-c3:#2a5391;--with-bauhaus-c4:#16284a;--with-bauhaus-tint:#f3e7c9;
+  --with-chrome-accent:#a3202c;--with-chrome-c4:#d9b98a;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:86px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--leather);color:var(--ink);font:500 17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--red);text-underline-offset:.18em}
+a:hover{color:var(--red-3)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--brass-2);outline-offset:2px}
+.sec--cream :focus-visible,.sec--paper :focus-visible,.appt :focus-visible,.sec--light :focus-visible{outline-color:var(--red)}
+h1,h2,h3,h4{margin:0;font-weight:400}
+p{margin:0 0 1em}
+ul,ol{margin:0;padding:0;list-style:none}
+.wrap{width:min(var(--w),100% - 32px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:8px;top:-64px;z-index:200;background:var(--cream);color:var(--ink);padding:12px 18px;font-weight:700}
+.skip:focus{top:8px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:48px;padding:0 22px;border:2px solid var(--ink);border-radius:4px;background:var(--card);color:var(--ink);font:700 14.5px/1 var(--f-body);letter-spacing:.13em;text-transform:uppercase;text-decoration:none;box-shadow:0 3px 0 var(--ink);transition:transform .1s,box-shadow .1s,background .15s;white-space:nowrap}
+.btn:hover{background:#fff;color:var(--ink);transform:translateY(-1px);box-shadow:0 4px 0 var(--ink)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.btn--red{background:var(--red);border-color:#3b0b12;color:#fff6e8;box-shadow:0 3px 0 #3b0b12}
+.btn--red:hover{background:var(--red-2);color:#fff;box-shadow:0 4px 0 #3b0b12}
+.btn--red:active{box-shadow:0 1px 0 #3b0b12}
+.btn--brass{background:linear-gradient(180deg,var(--brass-3),var(--brass-2));border-color:#4a3208;color:#2a1c05;box-shadow:0 3px 0 #4a3208}
+.btn--brass:hover{background:linear-gradient(180deg,#f8e3aa,var(--brass-2));color:#2a1c05;box-shadow:0 4px 0 #4a3208}
+.btn--ghost{background:rgba(13,26,48,.35);border-color:var(--brass-2);color:var(--cream);box-shadow:none}
+.btn--ghost:hover{background:rgba(220,181,96,.18);color:#fff;box-shadow:none}
+.btn--navy{background:var(--navy-2);border-color:#050c1a;color:var(--cream);box-shadow:0 3px 0 #050c1a}
+.btn--navy:hover{background:var(--navy-3);color:#fff;box-shadow:0 4px 0 #050c1a}
+.btn--lg{min-height:56px;padding:0 28px;font-size:15.5px}
+.btn--sm{min-height:44px;padding:0 16px;font-size:13px}
+.btn--block{display:flex;width:100%}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:0 3px 0 rgba(0,0,0,.4)}
+.link-btn{background:none;border:0;padding:0;color:inherit;text-decoration:underline;text-underline-offset:.2em;font-weight:600}
+
+/* ---------- announcement + header ---------- */
+.announce{background:var(--oxblood);color:#f7e9cf;font:600 13.5px/1.35 var(--f-body);letter-spacing:.03em;padding:9px 16px;display:flex;gap:8px 14px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}
+.announce p{margin:0}
+.announce a{color:var(--brass-3);font-weight:700}
+.announce .today{color:#e8d7b3;display:none}
+@media(min-width:760px){.announce .today{display:inline}.announce .today::before{content:"|";margin-right:14px;opacity:.5}}
+.site-head{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,var(--navy-2),var(--navy));color:var(--cream);box-shadow:0 10px 22px -12px rgba(0,0,0,.7)}
+.site-head::after{content:"";position:absolute;left:0;right:0;top:100%;height:8px;background:var(--stripes);pointer-events:none}
+.head-in{display:flex;align-items:center;gap:14px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--cream);text-decoration:none;flex:none}
+.brand:hover{color:#fff}
+.brand-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#f6dea0,var(--brass) 72%);color:var(--leather);box-shadow:inset 0 0 0 3px var(--navy),0 0 0 2px var(--brass-2)}
+.brand-txt b{display:block;font:400 28px/1 var(--f-display);letter-spacing:.02em;color:var(--brass-3)}
+.brand-txt small{display:none;margin-top:5px;font:600 10.5px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:#d2c5a6}
+@media(min-width:420px){.brand-txt small{display:block}}
+.nav{position:absolute;left:0;right:0;top:100%;z-index:5;display:none;flex-direction:column;padding:6px 16px 18px;background:var(--navy);border-bottom:8px solid transparent}
+.nav.is-open{display:flex}
+.nav a{padding:16px 6px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--cream);font:700 15px/1 var(--f-body);letter-spacing:.15em;text-transform:uppercase;text-decoration:none}
+.nav a:hover{color:var(--brass-2)}
+.head-act{display:flex;align-items:center;gap:10px;margin-left:auto}
+.head-tel{display:none;align-items:center;gap:8px;color:var(--cream);text-decoration:none;font:700 15px/1 var(--f-body);letter-spacing:.06em;white-space:nowrap}
+.head-tel:hover{color:var(--brass-2)}
+.hide-s{display:none}
+.btn-t{display:none}
+.head-act .btn--sm{padding:0 14px}
+@media(min-width:480px){.btn-t{display:inline}.head-act .btn--sm{padding:0 16px;gap:.55em}}
+.cart-btn,.menu-btn{position:relative;display:grid;place-items:center;min-width:46px;height:46px;padding:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:50%;color:var(--cream)}
+.cart-btn:hover,.menu-btn:hover{background:rgba(255,255,255,.14)}
+.cart-basic{position:relative;display:inline-flex}
+.cart-basic i{position:absolute;top:-9px;right:-11px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--red);color:#fff;font:700 12px/20px var(--f-body);font-style:normal;text-align:center}
+.cart-btn.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.18) rotate(-6deg)}60%{transform:scale(.96)}}
+@media(min-width:560px){.hide-s{display:inline}}
+@media(min-width:1080px){
+  .nav{position:static;display:flex;flex-direction:row;gap:2px;margin-left:auto;padding:0;background:none;border:0}
+  .nav a{padding:10px 12px;border:0;font-size:13.5px}
+  .head-act{margin-left:0}.menu-btn{display:none}
+}
+@media(min-width:1270px){.head-tel{display:inline-flex}}
+
+/* ---------- barber pole (CSS only) ---------- */
+.pole{position:relative;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+.pole-cap{display:block;width:calc(100% + 8px);height:22px;background:linear-gradient(90deg,#6b4b12,#e9cd85 30%,#fff3cc 45%,#b2842e 70%,#6b4b12);border-radius:8px}
+.pole-cap:first-child{border-radius:16px 16px 4px 4px;height:26px}
+.pole-glass{flex:1;width:100%;min-height:60px;border-radius:2px;background:
+  linear-gradient(90deg,rgba(0,0,0,.45),rgba(255,255,255,.5) 24%,rgba(255,255,255,.08) 42%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.5)),
+  repeating-linear-gradient(-45deg,var(--red) 0 16px,#fbf4e3 16px 32px,var(--blue) 32px 48px,#fbf4e3 48px 64px);
+  background-size:100% 100%,90.51px 90.51px;animation:polespin 2.2s linear infinite}
+@keyframes polespin{to{background-position:0 0,0 90.51px}}
+.pole--mini{width:14px;height:36px}.pole--mini .pole-cap{height:5px;border-radius:3px}.pole--mini .pole-cap:first-child{height:6px}.pole--mini .pole-glass{min-height:20px;background-size:100% 100%,36px 36px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;color:var(--cream);background:var(--leather);min-height:clamp(660px,92vh,880px);display:flex;align-items:center}
+.hero-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:68% 70%}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,26,48,.86),rgba(13,26,48,.74) 55%,rgba(26,18,13,.94))}
+@media(min-width:1000px){.hero-shade{background:linear-gradient(90deg,rgba(13,26,48,.95) 0,rgba(13,26,48,.82) 38%,rgba(13,26,48,.35) 70%,rgba(13,26,48,.1)),linear-gradient(0deg,rgba(26,18,13,.9),transparent 38%)}}
+.hero .pole{position:absolute;left:14px;top:-6px;bottom:-6px;width:28px;z-index:1;display:none}
+.hero-in{position:relative;display:grid;gap:34px;padding:56px 0 76px}
+.eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 18px;font:700 13px/1.2 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--brass-2)}
+.hero h1{font:400 clamp(46px,12.6vw,78px)/.98 var(--f-display);text-shadow:0 3px 0 rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.4);margin-bottom:22px}
+.hero h1 em{display:block;font-style:normal;color:var(--brass-2)}
+.lede{max-width:34em;font-size:clamp(17px,2.1vw,20px);line-height:1.55;color:#eadfc4;margin-bottom:26px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.open-line{display:flex;align-items:center;gap:10px;margin:26px 0 0;font:600 15px/1.3 var(--f-body);letter-spacing:.04em;color:#eadfc4}
+.open-line .dot{width:11px;height:11px;border-radius:50%;background:#58c47f;box-shadow:0 0 0 4px rgba(88,196,127,.25);flex:none}
+.open-line.is-closed .dot{background:#d9776c;box-shadow:0 0 0 4px rgba(217,119,108,.25)}
+.photo-credit{position:absolute;left:16px;bottom:10px;margin:0;font:500 12px/1 var(--f-body);color:rgba(246,238,217,.75)}
+.photo-credit a{color:inherit}
+@media(min-width:1000px){
+  .hero .pole{display:flex;left:max(14px,calc((100vw - var(--w)) / 2 - 8px))}
+  .hero-in{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:start;padding:72px 0 96px 58px}
+  .walkin{justify-self:end;margin-top:8px}
+  .photo-credit{left:max(14px,calc((100vw - var(--w)) / 2 - 8px + 44px))}
+}
+
+/* walk-in board: a ticket machine on black leather */
+.walkin{position:relative;width:100%;max-width:410px;padding:18px 18px 16px;border:2px solid var(--brass);border-radius:12px;background:linear-gradient(180deg,#2e1f15,#1a120d);color:var(--cream);box-shadow:0 0 0 6px rgba(26,18,13,.72),0 28px 44px -20px #000}
+.walkin::before,.walkin::after{content:"";position:absolute;top:10px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff1c4,var(--brass));box-shadow:0 1px 2px #000}
+.walkin::before{left:10px}.walkin::after{right:10px}
+.wk-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 14px 12px}
+.wk-title{font:400 22px/1 var(--f-display);color:var(--brass-3)}
+.wk-live{display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:#9fe0b6}
+.wk-live i{width:8px;height:8px;border-radius:50%;background:#58c47f;animation:blink 1.6s infinite}
+.wk-live.is-closed{color:#f1b3ab}.wk-live.is-closed i{background:#d9776c;animation:none}
+@keyframes blink{50%{opacity:.25}}
+.wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wk-cell{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 6px 10px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(220,181,96,.28);text-align:center}
+.wk-lab{font:700 11.5px/1.1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--brass-2)}
+.wk-cell [data-live]{color:var(--brass-3);--with-skeuo-tint:#fbf2dc}
+.wk-line{margin:14px 4px 12px;text-align:center;font:600 15px/1.35 var(--f-body);color:#eadfc4}
+.wk-line b{color:var(--brass-3);font-size:1.15em}
+.wk-mine{margin:12px 0 0;padding:10px 12px;border-radius:6px;background:rgba(88,196,127,.14);border:1px dashed #58c47f;color:#cdf3da;font:600 14.5px/1.4 var(--f-body);text-align:center}
+.wk-note{margin:12px 0 0;text-align:center;font:500 12px/1.3 var(--f-body);color:#b9ac8d}
+
+/* ---------- facts strip ---------- */
+.strip{background:linear-gradient(180deg,#e0bb69,#b78933);color:var(--leather);border-block:3px solid var(--leather)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.facts li{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;padding:16px 12px;border-right:1px dashed rgba(26,18,13,.38);border-bottom:1px dashed rgba(26,18,13,.38)}
+.facts li:nth-child(2n){border-right:0}
+.facts li:last-child{grid-column:1/-1;border-right:0;border-bottom:0}
+.facts li>span{grid-row:1/3;color:var(--leather)}
+.facts b{font:700 15px/1.15 var(--f-body);letter-spacing:.1em;text-transform:uppercase}
+.facts small{font:500 13.5px/1.3 var(--f-body);color:rgba(26,18,13,.82)}
+@media(min-width:900px){
+  .facts{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .facts li{border-bottom:0;border-right:1px dashed rgba(26,18,13,.38)!important;padding:20px 16px}
+  .facts li:last-child{grid-column:auto;border-right:0!important}
+}
+
+/* ---------- section primitives ---------- */
+.sec{position:relative;padding:clamp(60px,8vw,108px) 0}
+.sec--cream{background:repeating-linear-gradient(90deg,var(--cream) 0 38px,#f0e5c8 38px 40px);color:var(--ink)}
+.sec--paper{background:var(--paper);color:var(--ink)}
+.sec--navy{background:radial-gradient(120% 70% at 50% 0,var(--navy-3),var(--navy) 60%);color:var(--cream)}
+.sec--leather{background:radial-gradient(90% 60% at 20% 0,var(--leather-3),var(--leather) 70%);color:var(--cream)}
+.sec--oxblood{background:radial-gradient(100% 80% at 80% 0,#7c1a2a,var(--oxblood) 65%);color:var(--cream)}
+.sec-head{max-width:760px;margin:0 0 clamp(30px,4vw,52px)}
+.sec-head--center{margin-inline:auto;text-align:center}
+.sec-head--center .rule{margin-inline:auto}
+.kicker{display:flex;align-items:center;gap:10px;margin:0 0 14px;font:700 13px/1.2 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.sec-head--center .kicker{justify-content:center}
+.sec--navy .kicker,.sec--leather .kicker,.sec--oxblood .kicker{color:var(--brass-2)}
+.sec h2{font:400 clamp(32px,5.2vw,58px)/1.04 var(--f-display);margin-bottom:.35em;text-wrap:balance}
+.rule{width:104px;height:9px;margin:0 0 20px;background:var(--stripes);border-radius:2px;box-shadow:0 0 0 2px var(--leather)}
+.sec--navy .rule,.sec--leather .rule,.sec--oxblood .rule{box-shadow:0 0 0 2px var(--brass-2)}
+.sub{max-width:40em;font-size:clamp(17px,1.9vw,19.5px);color:var(--ink-2)}
+.sec--navy .sub,.sec--leather .sub,.sec--oxblood .sub{color:#d8ccb0}
+.plate{display:inline-grid;place-items:center;flex:none;min-width:44px;min-height:44px;padding:8px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fffaf0,var(--cream) 70%);box-shadow:inset 0 0 0 2px var(--brass),0 2px 0 rgba(0,0,0,.35);color:var(--ink)}
+.plate--lg{min-width:64px;min-height:64px;padding:12px}
+.plate--sm{min-width:46px;min-height:46px;padding:7px}
+.ic-red{color:var(--red)}.ic-brass{color:var(--brass-ink)}.ic-gold{color:var(--brass-2)}.ic-cream{color:var(--cream)}.ic-navy{color:var(--navy-3)}
+
+/* ---------- services: prints on the wall + chalkboard ---------- */
+.prints{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;margin:0 0 clamp(40px,6vw,72px)}
+.print{position:relative;display:flex;flex-direction:column;padding:10px 10px 14px;background:#fffaf0;box-shadow:0 14px 26px -14px rgba(60,35,10,.7),0 0 0 1px rgba(60,35,10,.18);transform:rotate(var(--r,0deg));transition:transform .25s}
+.print:hover{transform:rotate(0) translateY(-4px)}
+.print::before{content:"";position:absolute;left:50%;top:-8px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff1c4,var(--brass) 70%);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.print img{width:100%;aspect-ratio:4/5;object-fit:cover;background:#d8c9a4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.print-cap{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;padding:12px 4px 0}
+.print-cap h3{font:400 19px/1.1 var(--f-display);color:var(--ink)}
+.print-cap p{grid-column:1/-1;margin:2px 0 6px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+.print-cap .row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.print-cap .pr{font:400 24px/1 var(--f-display);color:var(--red)}
+.print-cap .mins{display:inline-flex;align-items:center;gap:5px;font:600 13px/1 var(--f-body);color:var(--ink-3)}
+.print-cap a{font:700 12.5px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--red);padding:12px 0}
+.print-cap a:hover{text-decoration:underline}
+@media(max-width:559px){.prints{grid-template-columns:1fr;gap:28px}.print{flex-direction:row;gap:14px;padding:10px}.print img{width:40%;flex:none;align-self:flex-start}.print-cap{flex:1;min-width:0;align-content:start;padding:2px 0 0}.print-cap .row{flex-wrap:wrap;gap:6px 10px}}
+@media(min-width:900px){.prints{grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}.print-cap h3{font-size:20px}}
+
+.board{position:relative;border:16px solid;border-color:#7a4d2c #4f301b #3c2312 #623d22;border-radius:6px;background:
+  radial-gradient(120% 80% at 18% 0,rgba(255,255,255,.08),transparent 60%),radial-gradient(90% 70% at 92% 100%,rgba(255,255,255,.06),transparent 62%),var(--board);
+  color:var(--chalk);padding:clamp(20px,4vw,46px);box-shadow:inset 0 0 70px rgba(0,0,0,.6),0 26px 44px -22px rgba(40,22,8,.85)}
+.board::after{content:"";position:absolute;left:14px;right:14px;bottom:-34px;height:10px;border-radius:0 0 4px 4px;background:#5b3820;box-shadow:0 8px 0 -3px #3c2312;opacity:0}
+.board-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px;margin:0 0 clamp(18px,3vw,30px);padding-bottom:16px;border-bottom:2px dashed rgba(243,241,229,.35)}
+.board-head h3{font:400 clamp(30px,4.4vw,48px)/1 var(--f-display);color:var(--chalk);text-shadow:0 0 1px #fff,0 0 12px rgba(255,255,255,.18)}
+.board-head p{margin:0;font:600 14px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--chalk-2)}
+.board-cols{display:grid;gap:clamp(22px,3vw,34px) clamp(30px,5vw,64px)}
+@media(min-width:900px){.board-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.b-sec h4{display:flex;align-items:center;gap:10px;margin:0 0 6px;font:400 26px/1.1 var(--f-display);color:var(--brass-3)}
+.b-sec+.b-sec{margin-top:clamp(22px,3vw,30px)}
+.b-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(243,241,229,.12)}
+.b-row:last-child{border-bottom:0}
+.b-main{min-width:0}
+.b-line{display:flex;align-items:baseline;gap:8px}
+.b-line b{font:700 17px/1.15 var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--chalk)}
+.b-line .lead{flex:1;min-width:14px;border-bottom:2px dotted rgba(243,241,229,.4);transform:translateY(-4px)}
+.b-line .pr{font:400 25px/1 var(--f-display);color:#fff}
+.b-main small{display:block;margin-top:3px;font:500 14.5px/1.35 var(--f-body);color:var(--chalk-2)}
+.b-book{min-height:44px;padding:0 14px;border:1.5px solid rgba(243,241,229,.55);border-radius:3px;background:transparent;color:var(--chalk);font:700 12.5px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;transition:background .15s,color .15s}
+.b-book:hover{background:var(--chalk);color:var(--board)}
+.b-extra .b-row{padding:8px 0}.b-extra .b-line b{font-size:15px}.b-extra .pr{font-size:21px!important}
+.b-note{margin:18px 0 0;padding:12px 14px;border:1.5px dashed rgba(220,181,96,.55);border-radius:6px;color:var(--brass-3);font:600 14.5px/1.4 var(--f-body)}
+.board-foot{display:flex;flex-wrap:wrap;gap:8px 22px;margin:clamp(20px,3vw,30px) 0 0;padding-top:16px;border-top:2px dashed rgba(243,241,229,.35);font:600 14px/1.3 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--chalk-2)}
+.board-foot span{display:inline-flex;align-items:center;gap:8px}
+@media(max-width:560px){.board{border-width:10px;padding:18px 14px}.b-row{gap:10px}.b-line b{font-size:15px}.b-line .pr{font-size:22px}.b-book{padding:0 10px}.b-main small{font-size:13.5px}.plate--sm{min-width:42px;min-height:42px;padding:5px}}
+
+/* ---------- booking: an appointment card + a ticket stub ---------- */
+.book-grid{display:grid;gap:26px;align-items:start}
+@media(min-width:1000px){.book-grid{grid-template-columns:minmax(0,1fr) 392px;gap:34px}.stub{position:sticky;top:104px}}
+.appt{position:relative;background:var(--card);color:var(--ink);border-radius:8px;box-shadow:0 36px 60px -34px #000,0 0 0 1px rgba(0,0,0,.2);overflow:hidden}
+.appt-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px clamp(18px,3vw,32px);background:var(--red);color:#fff4e0;border-bottom:6px solid var(--oxblood)}
+.appt-top b{font:400 24px/1 var(--f-display);letter-spacing:.03em}
+.appt-no{font:700 12.5px/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;opacity:.9}
+.appt-body{padding:clamp(18px,3vw,32px)}
+.stp{padding:0 0 26px;margin:0 0 26px;border-bottom:2px dashed rgba(60,40,20,.28)}
+.stp:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.stp-h{display:flex;align-items:center;gap:14px;margin:0 0 16px}
+.stp-n{flex:none;color:var(--red)}
+.stp-h h3{font:400 24px/1.1 var(--f-display)}
+.stp-h p{margin:3px 0 0;font-size:14.5px;color:var(--ink-3);line-height:1.35}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 15px;border:1.5px solid rgba(60,40,20,.4);border-radius:999px;background:transparent;color:var(--ink);font:700 13px/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;transition:background .15s,color .15s,border-color .15s}
+.chip:hover{background:rgba(163,32,44,.08)}
+.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.chip .n{opacity:.65;font-weight:600}
+.opt-grid{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:620px){.opt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.opt{position:relative;display:block;cursor:pointer}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opt-in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;min-height:76px;padding:12px 14px;border:2px solid rgba(60,40,20,.28);border-radius:8px;background:#fff;transition:border-color .15s,background .15s,box-shadow .15s}
+.opt:hover .opt-in{border-color:rgba(163,32,44,.55)}
+.opt input:focus-visible+.opt-in{outline:3px solid var(--red);outline-offset:2px}
+.opt input:checked+.opt-in{border-color:var(--red);background:#fff6ea;box-shadow:0 0 0 3px rgba(163,32,44,.18)}
+.opt-in b{display:block;font:700 16.5px/1.2 var(--f-body)}
+.opt-in small{display:block;margin-top:2px;font:500 13.5px/1.3 var(--f-body);color:var(--ink-3)}
+.opt-in .pr{font:400 22px/1 var(--f-display);color:var(--red);white-space:nowrap}
+.opt-in .tick{display:none}
+.opt input:checked+.opt-in .tick{display:inline-grid}
+.addons{margin:16px 0 0}
+.addons h4{margin:0 0 8px;font:700 12.5px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.addon-row{display:flex;flex-wrap:wrap;gap:8px}
+.addon{position:relative;display:inline-flex}
+.addon input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.addon>span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1.5px dashed rgba(60,40,20,.5);border-radius:6px;background:transparent;font:600 14px/1 var(--f-body)}
+.addon input:checked+span{background:var(--ink);border:1.5px solid var(--ink);color:var(--cream)}
+.addon input:focus-visible+span{outline:3px solid var(--red);outline-offset:2px}
+.barbers-pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:620px){.barbers-pick{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.barbers-pick .opt-in{grid-template-columns:1fr;justify-items:center;text-align:center;gap:6px;padding:14px 8px;min-height:140px}
+.barbers-pick .opt-in small{font-size:12.5px}
+.days{display:flex;gap:10px;margin:0 -4px 18px;padding:6px 4px 12px;overflow-x:auto;scroll-snap-type:x proximity}
+.day{flex:none;scroll-snap-align:start;width:76px;padding:0 0 8px;border:2px solid rgba(60,40,20,.3);border-radius:8px;background:#fff;overflow:hidden;text-align:center;transition:transform .12s,border-color .15s,box-shadow .15s}
+.day:hover:not(:disabled){transform:translateY(-2px);border-color:var(--red)}
+.day i{display:block;padding:5px 0;background:var(--red);color:#fff4e0;font:700 11px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;font-style:normal}
+.day b{display:block;margin-top:6px;font:400 30px/1 var(--f-display)}
+.day small{display:block;margin-top:2px;font:600 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.day[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 3px var(--brass-2);background:#fff6ea}
+.day[aria-pressed=true] i{background:var(--ink)}
+.day:disabled{opacity:.42;cursor:not-allowed}
+.day:disabled b{text-decoration:line-through}
+.slot-group{margin:0 0 16px}
+.slot-group h4{display:flex;align-items:center;gap:8px;margin:0 0 8px;font:700 12.5px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media(min-width:620px){.slots{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.slot{min-height:46px;border:1.5px solid rgba(60,40,20,.38);border-radius:6px;background:#fff;font:700 14.5px/1 var(--f-body);transition:background .12s,color .12s,border-color .12s}
+.slot:hover:not(:disabled){border-color:var(--red);background:#fff2e4}
+.slot[aria-pressed=true]{background:var(--red);border-color:var(--red-3);color:#fff}
+.slot:disabled{background:transparent;border-style:dashed;color:var(--ink-3);opacity:.5;text-decoration:line-through;cursor:not-allowed}
+.empty-note{padding:14px 16px;border:2px dashed rgba(60,40,20,.3);border-radius:8px;color:var(--ink-3);font-size:15px;display:flex;align-items:center;gap:12px}
+.fields{display:grid;gap:14px}
+@media(min-width:620px){.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.fields .full{grid-column:1/-1}}
+.fld label{display:flex;align-items:center;gap:7px;margin:0 0 6px;font:700 12.5px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.fld label em{font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:none;color:var(--ink-3)}
+.fld input,.fld textarea,.fld select{width:100%;min-height:48px;padding:10px 12px;border:2px solid rgba(60,40,20,.35);border-radius:6px;background:#fff;color:var(--ink);font:500 16.5px/1.3 var(--f-body)}
+.fld textarea{min-height:88px;resize:vertical}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:3px solid rgba(163,32,44,.35);border-color:var(--red)}
+.fld [aria-invalid=true]{border-color:var(--red);background:#fff2ee}
+.err{display:none;margin:6px 0 0;font:600 13.5px/1.3 var(--f-body);color:#a1212b}
+.fld.has-err .err{display:block}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--ink-2)}
+.check input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--red);flex:none}
+.appt-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:0}
+.appt-foot p{flex:1 1 220px;margin:0;font:600 14.5px/1.4 var(--f-body);color:var(--ink-3)}
+.appt-foot p.bad{color:#a1212b}
+.stub{background:var(--paper);color:var(--ink);border-radius:8px;box-shadow:0 36px 60px -34px #000,0 0 0 1px rgba(0,0,0,.2);position:relative}
+.stub::before,.stub::after{content:"";position:absolute;top:84px;width:26px;height:26px;border-radius:50%;background:var(--navy)}
+.stub::before{left:-13px}.stub::after{right:-13px}
+.stub-top{padding:18px 22px 22px;border-bottom:3px dotted rgba(60,40,20,.4)}
+.stub-top h3{font:400 24px/1.1 var(--f-display)}
+.stub-top p{margin:4px 0 0;font:600 13px/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.stub-when{display:flex;justify-content:center;gap:22px;padding:22px 16px 6px;color:var(--ink)}
+.stub-when [data-live]{transition:opacity .2s}
+.stub-when.is-empty [data-live]{opacity:.38}
+.stub-dl{margin:0;padding:12px 22px 6px}
+.stub-dl div{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgba(60,40,20,.16);font-size:15.5px}
+.stub-dl dt{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-weight:600}
+.stub-dl dd{margin:0;font-weight:700;text-align:right}
+.stub-total{display:flex;align-items:baseline;justify-content:space-between;padding:12px 22px 6px}
+.stub-total span{font:700 13px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.stub-total b{font:400 40px/1 var(--f-display);color:var(--red)}
+.stub-fine{margin:0;padding:6px 22px 20px;font-size:13.5px;line-height:1.45;color:var(--ink-3)}
+.appt-done{padding:clamp(26px,4vw,48px) clamp(18px,3vw,36px);text-align:center}
+.appt-done h3{margin:14px 0 8px;font:400 clamp(28px,4vw,40px)/1.05 var(--f-display)}
+.appt-done>p{max-width:34em;margin:0 auto 18px;color:var(--ink-2)}
+.done-card{display:grid;gap:0;max-width:440px;margin:0 auto 22px;padding:6px 18px;border:2px dashed rgba(60,40,20,.4);border-radius:8px;background:#fff;text-align:left}
+.done-card div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid rgba(60,40,20,.14)}
+.done-card div:last-child{border-bottom:0}
+.done-card dt{color:var(--ink-3);font-weight:600}.done-card dd{margin:0;font-weight:700;text-align:right}
+.btn-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+
+/* ---------- the shave ritual ---------- */
+.ritual{display:grid;gap:34px;align-items:center}
+@media(min-width:960px){.ritual{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:60px}}
+.frame{position:relative;padding:12px;border-radius:4px;background:linear-gradient(135deg,#f3d99a,#b2842e 38%,#8a6420 62%,#e8c677);box-shadow:0 26px 40px -24px rgba(40,22,8,.9)}
+.ritual>.frame{align-self:start}
+@media(min-width:960px){.ritual>.frame{position:sticky;top:104px}}
+.frame img{width:100%;aspect-ratio:4/4.6;object-fit:cover;border:3px solid #2a1c05;background:#3b2a1a}
+.frame figcaption{position:absolute;left:24px;bottom:24px;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;background:rgba(26,18,13,.86);color:var(--brass-3);font:700 12.5px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;border-radius:3px}
+.steps{counter-reset:s}
+.step{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:start;gap:4px 14px;padding:18px 0;border-bottom:2px dashed rgba(60,40,20,.28)}
+.step:first-child{padding-top:0}
+.step:last-child{border-bottom:0}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);grid-row:1/3;font:400 38px/1 var(--f-display);color:var(--red)}
+.step h3{font:400 24px/1.1 var(--f-display)}
+.step p{grid-column:2;margin:0;color:var(--ink-2);font-size:16.5px}
+.step .temp{grid-column:2;justify-self:start;display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;border-radius:999px;background:rgba(163,32,44,.1);color:var(--red-3);font:700 13px/1 var(--f-body);letter-spacing:.06em}
+.step>.plate{grid-column:3;grid-row:1/3}
+.ritual-meta{display:flex;flex-wrap:wrap;gap:10px 24px;margin:22px 0 0;padding-top:20px;border-top:3px double rgba(60,40,20,.4);font:700 14px/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.ritual-meta span{display:inline-flex;align-items:center;gap:8px}
+
+/* ---------- barbers ---------- */
+.crew{display:grid;gap:30px}
+@media(min-width:1000px){.crew{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:50px;align-items:start}.crew-side{position:sticky;top:104px}}
+.crew-side{display:grid;gap:26px}
+.crew-photo{margin:0;padding:10px 10px 14px;background:#fffaf0;color:var(--ink);box-shadow:0 26px 40px -22px #000;transform:rotate(-1deg)}
+.rules{padding:20px 22px;border:2px dashed rgba(220,181,96,.55);border-radius:10px;background:rgba(0,0,0,.18)}
+.rules h3{margin:0 0 12px;font:400 24px/1.1 var(--f-display);color:var(--brass-3)}
+.rules ul{display:grid;gap:12px}
+.rules li{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.35;color:#eadfc4}
+.crew-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:64% 45%;background:#d8c9a4}
+.crew-photo figcaption{padding:12px 4px 0;font:500 15px/1.4 var(--f-body);color:var(--ink-2)}
+.crew-list{display:grid;gap:22px}
+.barber{padding:clamp(18px,3vw,26px);border:2px solid var(--brass);border-radius:10px;background:linear-gradient(160deg,#35251a,#1e140e);color:var(--cream);box-shadow:inset 0 0 0 4px #1a120d,inset 0 0 0 5px rgba(220,181,96,.4),0 22px 34px -22px #000}
+.barber-h{display:flex;align-items:center;gap:16px}
+.ava{display:grid;place-items:center;flex:none;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fffaf0,#e6d6ae);color:var(--ink);box-shadow:0 0 0 3px var(--brass),0 0 0 6px #1a120d}
+.chair{display:block;margin-bottom:4px;font:700 12px/1 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--brass-2)}
+.barber h3{font:400 clamp(26px,3.4vw,32px)/1.05 var(--f-display);color:var(--brass-3)}
+.role{margin:4px 0 0;font:600 14px/1.3 var(--f-body);letter-spacing:.06em;color:#d2c5a6}
+.barber blockquote{margin:16px 0 0;padding-left:14px;border-left:3px solid var(--red-2);font:500 17.5px/1.5 var(--f-body);font-style:italic;color:#eadfc4}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.tag{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 13px 0 9px;border:1px solid rgba(220,181,96,.5);border-radius:999px;font:600 14px/1 var(--f-body);color:#eadfc4}
+.b-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;margin-top:18px;padding-top:16px;border-top:1px dashed rgba(220,181,96,.38)}
+.b-foot .meta{display:flex;flex-direction:column;gap:6px}
+.stars{display:inline-flex;align-items:center;gap:2px;color:var(--brass-2)}
+.stars .off{opacity:.28}
+.stars em{margin-left:8px;font:600 14px/1 var(--f-body);font-style:normal;color:#d2c5a6}
+.next{display:flex;align-items:center;gap:8px;font:600 14.5px/1.3 var(--f-body);color:#eadfc4}
+.next b{color:var(--brass-3)}
+
+/* ---------- shelf (shop) ---------- */
+.shelf-head{display:grid;gap:26px;align-items:end;margin-bottom:clamp(26px,4vw,40px)}
+@media(min-width:960px){.shelf-head{grid-template-columns:minmax(0,1fr) 440px;gap:48px}}
+.shelf-head .sec-head{margin:0}
+.shelf-photo{margin:0;border:6px solid var(--card);box-shadow:0 18px 30px -18px rgba(60,35,10,.8),0 0 0 2px var(--ink)}
+.shelf-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:65% 40%}
+.shelf-photo figcaption{padding:8px 12px;background:var(--card);font:500 13.5px/1.3 var(--f-body);color:var(--ink-2)}
+.tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;margin:0 0 24px;padding:14px 16px;background:var(--card);border:2px solid var(--ink);border-radius:8px;box-shadow:0 4px 0 var(--ink)}
+.tools .chips{margin:0}
+.tools label{display:inline-flex;align-items:center;gap:8px;font:700 12.5px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.tools select{min-height:44px;padding:0 12px;border:2px solid var(--ink);border-radius:6px;background:#fff;font:600 15px var(--f-body)}
+.pgrid{display:grid;gap:18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:800px){.pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1120px){.pgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.pcard{display:flex;flex-direction:column;overflow:hidden;background:var(--card);border:2px solid var(--ink);border-radius:10px;box-shadow:0 5px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 8px 0 var(--ink)}
+.pt-art{position:relative;display:grid;place-items:center;padding-top:24px;aspect-ratio:1/.84;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(255,255,255,.07) 14px 16px),var(--c1);border-bottom:2px solid var(--ink)}
+.pt-label{display:grid;place-items:center;width:clamp(80px,54%,128px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fffaf0,var(--cream) 72%);box-shadow:inset 0 0 0 3px var(--c2),0 0 0 4px rgba(0,0,0,.4),0 10px 16px rgba(0,0,0,.4);color:var(--ink)}
+.pt-badge{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:5px;padding:5px 9px 5px 6px;border-radius:3px;background:var(--brass-2);color:#2a1c05;font:700 11px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase}
+.pt-no{position:absolute;right:10px;bottom:8px;font:400 14px/1 var(--f-display);color:rgba(255,255,255,.55)}
+.pt-body{display:flex;flex-direction:column;flex:1;padding:14px 14px 16px}
+.pt-cat{font:700 11.5px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.pt-body h3{margin:6px 0 4px;font:700 17.5px/1.2 var(--f-body)}
+.pt-body p{margin:0 0 10px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+.pt-rate{display:flex;align-items:center;gap:6px;font:600 13.5px/1 var(--f-body);color:var(--ink-3)}
+.pt-rate [data-ico]{color:var(--brass)}
+.pt-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px}
+.pt-foot .pr{font:400 28px/1 var(--f-display);color:var(--red)}
+.pt-foot .pr small{display:block;margin-top:2px;font:600 12px/1 var(--f-body);color:var(--ink-3)}
+.add{min-height:44px;padding:0 13px;gap:7px;font-size:12.5px}
+.add.ok{background:var(--ok);border-color:#123a25;color:#fff;box-shadow:0 3px 0 #123a25}
+.shelf-note{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin:28px 0 0;font:600 15px/1.3 var(--f-body);color:var(--ink-2)}
+.shelf-note span{display:inline-flex;align-items:center;gap:8px}
+.noresult{padding:30px;text-align:center;border:2px dashed rgba(60,40,20,.4);border-radius:8px;color:var(--ink-3)}
+
+.c-pomade{--c1:#7c1a2a;--c2:#dcb560}.c-beard{--c1:#1f3d6c;--c2:#dcb560}.c-shave{--c1:#4a3020;--c2:#dcb560}.c-kits{--c1:#26231f;--c2:#a3202c}
+
+/* ---------- cart drawer ---------- */
+.scrim{position:fixed;inset:0;z-index:300;background:rgba(10,6,3,.64);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:310;display:flex;flex-direction:column;width:min(440px,100vw);background:var(--card);color:var(--ink);box-shadow:-24px 0 50px rgba(0,0,0,.5);transform:translateX(105%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+.drawer.on{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.dr-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 14px 20px;background:var(--navy);color:var(--cream);border-bottom:6px solid var(--red)}
+.dr-head h2{margin:0;font:400 26px/1 var(--f-display)}
+.x-btn{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.3);border-radius:50%;background:transparent;color:inherit}
+.x-btn:hover{background:rgba(255,255,255,.12)}
+.dr-body{flex:1;overflow:auto;padding:16px 20px}
+.meter{margin:0 0 16px;padding:12px 14px;border:2px dashed rgba(60,40,20,.35);border-radius:8px;background:#fff}
+.meter p{display:flex;align-items:center;gap:8px;margin:0 0 8px;font:600 14.5px/1.3 var(--f-body)}
+.meter i{display:block;height:10px;border-radius:5px;background:rgba(60,40,20,.15);overflow:hidden}
+.meter i s{display:block;height:100%;width:0;border-radius:5px;background:var(--stripes);background-size:40px 40px;transition:width .35s}
+.line{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(60,40,20,.18)}
+.line b{display:block;font:700 16px/1.25 var(--f-body)}
+.line small{display:block;color:var(--ink-3);font-size:13.5px;line-height:1.3}
+.line .tot{font:400 22px/1 var(--f-display);color:var(--red);text-align:right}
+.line .ctl{grid-column:2/4;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qty{display:inline-flex;align-items:center;border:2px solid var(--ink);border-radius:6px;background:#fff}
+.qty button{display:grid;place-items:center;width:42px;height:42px;border:0;background:none}
+.qty button:hover{background:rgba(163,32,44,.1)}
+.qty span{min-width:32px;text-align:center;font:700 16px var(--f-body)}
+.rm{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 6px;border:0;background:none;color:var(--red-3);font:600 14px var(--f-body);text-decoration:underline;text-underline-offset:.2em}
+.empty{padding:34px 10px;text-align:center;color:var(--ink-3)}
+.empty p{margin:12px 0 18px}
+.dr-foot{padding:14px 20px 88px;background:var(--paper);border-top:2px dashed rgba(60,40,20,.3)}
+.ful{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+.ful label{display:flex;align-items:center;gap:8px;min-height:56px;padding:6px 10px;border:2px solid rgba(60,40,20,.3);border-radius:8px;background:#fff;font:600 14px/1.2 var(--f-body);cursor:pointer}
+.ful b{display:block;font-weight:700}.ful small{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:var(--ink-3)}
+.ful label:has(input:checked){border-color:var(--red);background:#fff6ea}
+.ful input{accent-color:var(--red);width:18px;height:18px;flex:none;margin:0}
+.sum-row{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:15.5px}
+.sum-row.big{margin-top:6px;padding-top:10px;border-top:2px solid var(--ink);font:400 26px/1 var(--f-display)}
+.sum-row.big b{color:var(--red)}
+.dr-foot .fld{margin:10px 0}
+.order-ok{padding:28px 6px;text-align:center}
+.order-ok h3{margin:12px 0 8px;font:400 30px/1.05 var(--f-display)}
+
+/* ---------- gift certificates ---------- */
+.gift{display:grid;gap:34px;align-items:center}
+@media(min-width:1000px){.gift{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px}}
+.cert{padding:13px;background:var(--stripes);border-radius:6px;box-shadow:0 34px 54px -26px #000;transform:rotate(-1.2deg)}
+.cert-in{position:relative;padding:clamp(18px,3.2vw,30px);background:radial-gradient(circle at 50% 0,#fffaf0,#f1e5c6);color:var(--ink);text-align:center;border:3px double var(--brass)}
+.cert-img{display:block;width:148px;height:148px;margin:0 auto 14px;border-radius:50%;object-fit:cover;object-position:62% 50%;border:3px double var(--brass);box-shadow:0 0 0 5px #fffaf0,0 0 0 6px rgba(60,40,20,.35)}
+.cert-k{font:700 12px/1 var(--f-body);letter-spacing:.3em;text-transform:uppercase;color:var(--brass-ink)}
+.cert h3{margin:8px 0 2px;font:400 clamp(30px,4.6vw,46px)/1 var(--f-display)}
+.cert-amt{margin:6px 0;font:400 clamp(54px,9vw,88px)/1 var(--f-display);color:var(--red);text-shadow:2px 2px 0 rgba(163,32,44,.18)}
+.cert-for{margin:0;font:500 17px/1.5 var(--f-body)}
+.cert-for b{display:inline-block;min-width:6em;padding:0 8px;border-bottom:2px solid var(--ink);font-weight:700}
+.cert-msg{min-height:3em;margin:12px auto 0;max-width:30em;font:500 italic 17px/1.5 var(--f-body);color:var(--ink-2)}
+.cert-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:12px;border-top:1px solid rgba(60,40,20,.3);font:700 12px/1.3 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.seal{position:absolute;right:14px;top:18px;display:grid;place-items:center;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#f6dea0,var(--brass));box-shadow:inset 0 0 0 3px #fff2c8,0 4px 8px rgba(0,0,0,.4);color:var(--leather);transform:rotate(10deg)}
+.gift-form{padding:clamp(20px,3vw,32px);background:var(--card);color:var(--ink);border-radius:8px;box-shadow:0 26px 44px -26px #000;border-top:8px solid var(--red)}
+.gift-form h3{margin:0 0 4px;font:400 28px/1.1 var(--f-display)}
+.gift-form>p{margin:0 0 18px;color:var(--ink-3);font-size:15.5px}
+.amounts{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px}
+.amounts .chip{min-width:72px;justify-content:center;font-size:15px}
+.amt-live{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--red)}
+.amt-other{width:104px;min-height:44px;padding:0 10px;border:1.5px solid rgba(60,40,20,.4);border-radius:999px;background:#fff;font:700 14px var(--f-body);text-align:center}
+.amt-other:focus{outline:3px solid rgba(163,32,44,.35);border-color:var(--red)}
+.gift-form .fields{margin-bottom:16px}
+
+/* ---------- story ---------- */
+.story{display:grid;gap:40px}
+@media(min-width:1000px){.story{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media(min-width:1000px){.collage{position:sticky;top:104px}}
+.collage figure{margin:0;padding:8px 8px 10px;background:#fffaf0;box-shadow:0 16px 26px -16px rgba(60,35,10,.8),0 0 0 1px rgba(60,35,10,.18)}
+.collage img{width:100%;object-fit:cover;background:#d8c9a4}
+.collage figcaption{padding:8px 2px 0;font:500 13px/1.3 var(--f-body);color:var(--ink-3)}
+.collage .tall{grid-row:1/3;transform:rotate(-1.4deg)}.collage .tall img{aspect-ratio:2/3.1;object-position:50% 50%}
+.collage .a{transform:rotate(1.2deg)}.collage .a img{aspect-ratio:4/3}
+.collage .b{transform:rotate(-.8deg)}.collage .b img{aspect-ratio:1/1}
+.story-copy>p{font-size:18px;color:var(--ink-2)}
+.tl{margin:26px 0;border-left:3px solid var(--red);padding-left:0}
+.tl li{position:relative;display:grid;grid-template-columns:78px minmax(0,1fr);gap:4px 12px;padding:0 0 20px 22px}
+.tl li::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--cream);border:3px solid var(--red)}
+.tl b{font:400 24px/1.1 var(--f-display);color:var(--red)}
+.tl span{font-size:16.5px;color:var(--ink-2)}
+.tl strong{display:flex;align-items:center;gap:8px;color:var(--ink)}
+.why{padding:18px 20px;border:2px solid var(--ink);border-radius:8px;background:var(--card);box-shadow:0 5px 0 var(--ink)}
+.why h3{margin:0 0 10px;font:400 24px/1.1 var(--f-display)}
+.why ul{display:grid;gap:10px}
+.why li{display:flex;align-items:center;gap:12px;font-size:16.5px}
+.why li b{min-width:4.2em;font:700 13px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase}
+
+/* ---------- reviews ---------- */
+.rev-top{display:grid;gap:26px;margin:0 0 clamp(28px,4vw,44px);align-items:center}
+@media(min-width:900px){.rev-top{grid-template-columns:auto minmax(0,1fr);gap:64px}}
+.score{display:flex;align-items:center;gap:18px}
+.score b{font:400 clamp(64px,10vw,92px)/1 var(--f-display);color:var(--brass-3);text-shadow:0 3px 0 rgba(0,0,0,.4)}
+.score p{margin:0;font:600 15px/1.4 var(--f-body);color:#d8ccb0}
+.bars{display:grid;gap:7px;max-width:440px}
+.bars div{display:grid;grid-template-columns:38px 1fr 42px;align-items:center;gap:10px;font:600 14px/1 var(--f-body);color:#d8ccb0}
+.bars i{display:block;height:10px;border-radius:5px;background:rgba(255,255,255,.14);overflow:hidden}
+.bars s{display:block;height:100%;background:var(--brass-2)}
+.rev-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:0 0 22px}
+.rev-tools .chip{border-color:rgba(246,238,217,.5);color:var(--cream)}
+.rev-tools .chip:hover{background:rgba(255,255,255,.1)}
+.rev-tools .chip[aria-pressed=true]{background:var(--cream);border-color:var(--cream);color:var(--ink)}
+.rev-grid{columns:1;column-gap:20px}
+@media(min-width:720px){.rev-grid{columns:2}}
+@media(min-width:1060px){.rev-grid{columns:3}}
+.rev{position:relative;break-inside:avoid;margin:0 0 20px;padding:26px 20px 18px;background:var(--cream);color:var(--ink);border-radius:4px;box-shadow:0 16px 26px -18px #000}
+.rev::before{content:"";position:absolute;left:0;right:0;top:-1px;height:12px;background:radial-gradient(circle at 10px 0,var(--navy) 6px,transparent 6.6px) 0 0/20px 12px repeat-x}
+.rev-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.rev-h .plate{background:#fff}
+.rev-h b{display:block;font:700 16.5px/1.2 var(--f-body)}
+.rev-h small{display:block;font-size:13px;color:var(--ink-3)}
+.rev-st{display:flex;align-items:center;gap:2px;margin:0 0 8px;color:var(--brass)}
+.rev-st .off{opacity:.25}
+.rev-st span.t{margin-left:8px;font:600 13px/1 var(--f-body);color:var(--ink-3)}
+.rev p{margin:0 0 12px;font-size:16.5px;line-height:1.5}
+.rev-svc{display:inline-flex;align-items:center;gap:7px;font:700 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.rev-ver{display:flex;align-items:center;gap:6px;margin-top:10px;font:600 12.5px/1 var(--f-body);color:var(--ok)}
+.write{margin-top:6px;color:var(--cream)}
+.write summary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;cursor:pointer;list-style:none;font:700 14px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--brass-3)}
+.write summary::-webkit-details-marker{display:none}
+.write[open]{flex:1 1 100%}
+.write form{margin-top:12px;width:100%;padding:20px;border-radius:8px;background:var(--cream);color:var(--ink);max-width:720px}
+
+/* ---------- visit ---------- */
+.visit{display:grid;gap:32px}
+@media(min-width:1000px){.visit{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:54px;align-items:start}}
+.visit-photo{margin:0;padding:10px 10px 12px;background:#fffaf0;box-shadow:0 22px 36px -20px rgba(60,35,10,.85),0 0 0 1px rgba(60,35,10,.18);transform:rotate(1deg)}
+.visit-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;background:#d8c9a4}
+.visit-photo figcaption{padding:10px 2px 0;font:500 14.5px/1.35 var(--f-body);color:var(--ink-2)}
+.info{display:grid;gap:14px}
+@media(min-width:640px){.info{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.info li{display:flex;gap:14px;padding:16px;background:var(--card);border:2px solid var(--ink);border-radius:8px;box-shadow:0 4px 0 var(--ink)}
+.info b{display:block;margin-bottom:2px;font:700 12.5px/1.2 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.info span,.info a{font-size:16.5px;line-height:1.4}
+.info a{color:var(--ink);font-weight:700}
+.info .plate,.rev-h .plate{align-self:flex-start}
+.vgrid{display:grid;gap:18px;margin-top:18px}
+@media(min-width:760px){.vgrid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}}
+.hours{padding:18px 20px;background:var(--navy);color:var(--cream);border-radius:8px;box-shadow:0 5px 0 #050c1a}
+.hours h3{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;font:400 24px/1.1 var(--f-display);color:var(--brass-3)}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(88,196,127,.18);color:#a8ecc0;font:700 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:#58c47f}
+.pill.closed{background:rgba(217,119,108,.2);color:#f1b3ab}.pill.closed::before{background:#d9776c}
+.hours table{width:100%;border-collapse:collapse;font-size:16px}
+.hours th,.hours td{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;font-weight:500}
+.hours th{font-weight:700;letter-spacing:.06em}
+.hours td{text-align:right;color:#e4d9bd}
+.hours tr:last-child>*{border-bottom:0}
+.hours tr.today>*{color:var(--brass-3);font-weight:700}
+.hours tr.today th::after{content:" (today)";font-weight:500;font-size:13px;color:var(--brass-2)}
+.mapcard{position:relative;overflow:hidden;border:2px solid var(--ink);border-radius:8px;box-shadow:0 5px 0 var(--ink);background:#e9ddbc}
+.mapcard svg{display:block;width:100%;height:auto}
+.mapcard .pin{position:absolute;left:56%;top:34%;transform:translate(-50%,-86%);color:var(--red);filter:drop-shadow(0 6px 4px rgba(0,0,0,.35))}
+.map-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--card);border-top:2px solid var(--ink)}
+.map-foot p{margin:0;font:600 14.5px/1.3 var(--f-body);color:var(--ink-2)}
+
+/* ---------- faq ---------- */
+.faq{display:grid;gap:12px;max-width:860px;margin-inline:auto}
+.q{background:var(--card);border:2px solid var(--ink);border-radius:8px;box-shadow:0 4px 0 var(--ink)}
+.q summary{display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 16px;cursor:pointer;list-style:none;font:700 17px/1.3 var(--f-body)}
+.q summary::-webkit-details-marker{display:none}
+.q summary .chev{margin-left:auto;transition:transform .2s;color:var(--red)}
+.q[open] summary .chev{transform:rotate(180deg)}
+.q .a{padding:0 20px 18px 66px;color:var(--ink-2);font-size:16.5px}
+.q .a p{margin:0}
+.faq-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;margin-top:30px;font:600 17px var(--f-body)}
+
+/* ---------- credits, footer ---------- */
+#credits{padding:clamp(40px,6vw,64px) 0;background:var(--leather-2);color:#d2c5a6;border-top:6px solid var(--brass)}
+#credits h2{margin:0 0 14px;font:400 30px/1.1 var(--f-display);color:var(--brass-3)}
+#credits ul{display:grid;gap:8px 32px;font-size:14.5px;line-height:1.45}
+@media(min-width:900px){#credits ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#credits a{color:var(--brass-3)}
+#credits .fine{margin:18px 0 0;font-size:14px}
+.site-foot{position:relative;background:var(--leather);color:#cfc2a3;padding:0 0 96px}
+.site-foot::before{content:"";display:block;height:14px;margin-bottom:46px;background:var(--stripes)}
+.foot-grid{display:grid;gap:30px}
+@media(min-width:800px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px}}
+.site-foot h2{margin:0 0 12px;font:700 12.5px/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--brass-2)}
+.site-foot ul{display:grid;gap:8px;font-size:15.5px}
+.site-foot a{color:#e8dcbf;text-decoration:none}
+.site-foot a:hover{color:var(--brass-3);text-decoration:underline}
+.site-foot li{display:flex;align-items:center;gap:10px}
+.foot-brand p{max-width:26em;margin:14px 0 0;font-size:15.5px}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;color:#a79a7d}
+.toast{position:fixed;left:50%;top:92px;z-index:400;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:8px;background:var(--ink);color:var(--cream);border:1px solid var(--brass-2);font:600 15px/1.3 var(--f-body);box-shadow:0 14px 30px rgba(0,0,0,.45);opacity:0;transform:translate(-50%,-16px);pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- levels: Basic stays a tidy plain site ---------- */
+html[data-level="0"] .stp-n,html[data-level="0"] .stub-when [data-live]{display:inline-grid;place-items:center;border-radius:50%;background:var(--red);color:#fff;font:400 22px/1 var(--f-display)}
+html[data-level="0"] .stub-when [data-live]{border-radius:6px;background:transparent;border:2px solid var(--ink);color:var(--ink);font-size:20px}
+html[data-level="0"] .tix,html[data-level="0"] .clk{display:inline-grid;place-items:center;border:2px dashed var(--brass-2);border-radius:8px;font:400 34px/1 var(--f-display);color:var(--brass-3)}
+html[data-level="0"] .clk{font-size:24px}
+html[data-level="0"] .tix .kit-fb{font-size:36px!important}
+html[data-level="0"] .amt-live [data-live]{font:400 30px/1 var(--f-display)}
+html[data-level="0"] #done-no{display:inline-grid;place-items:center;padding:10px 18px;border:2px dashed var(--red);border-radius:6px;font:400 38px/1 var(--f-display);color:var(--red)}
+html[data-level="0"] .score [data-live]{font:700 16px/1 var(--f-body);color:var(--brass-3)}
+html[data-level="0"] .mapcard .pin [data-live]{display:grid;place-items:center;width:38px;height:38px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--red);color:#fff;font:700 18px var(--f-body)}
+html[data-level="0"] .pole-glass{animation:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pole-glass,.wk-live i,.cart-btn.bump{animation:none}
+  .print,.pcard,.drawer,.scrim,.toast,.btn{transition:none}
+}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Tony&#39;s Barber &amp; Shave Parlor is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce" role="note">
+  <span data-ico="gift" data-size="20">🎁</span>
+  <p>First visit? Ask for the hot-towel finish on the house. <a href="#book">Book a chair</a></p>
+  <span class="today" id="today-line">Tue to Fri 9 to 7, Sat 8 to 5, Sun 10 to 3</span>
+</div>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Tony's Barber and Shave Parlor, back to top">
+      <span class="brand-mark"><span data-ico="scissors" data-size="30" data-motion="hover" data-sample>✂️</span></span>
+      <span class="brand-txt"><b>Tony's</b><small>Barber &amp; Shave Parlor</small></span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="#services">Prices</a><a href="#book">Book</a><a href="#barbers">Barbers</a><a href="#shelf">Shelf</a><a href="#gift">Gifts</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a>
+    </nav>
+    <div class="head-act">
+      <a class="head-tel" href="tel:+13125550142"><span data-ico="phone" data-size="18">📞</span> (312) 555-0142</a>
+      <a class="btn btn--red btn--sm" href="#book" aria-label="Book a chair"><span data-ico="calendar-check" data-size="22">📅</span><span class="btn-t">Book<span class="hide-s">&nbsp;a chair</span></span></a>
+      <button class="cart-btn" id="cart-toggle" type="button" aria-label="Open cart, 0 items" aria-controls="cart" aria-expanded="false">
+        <span class="cart-basic" data-max-level="1"><span data-ico="shopping-cart" data-size="24">🛒</span><i id="cart-n">0</i></span>
+        <span id="cart-live" data-live="cart-count" data-p-count="0" data-size="36" data-min-level="2" data-label="Cart, 0 items">0</span>
+      </button>
+      <button class="menu-btn" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span data-ico="menu" data-size="24">☰</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="h1">
+  <img class="hero-img" src="_img/tonys-barbershop/photo-1702865272115-5afdbae975af-1600.jpg" width="1200" height="800" fetchpriority="high" decoding="async"
+       alt="A quilted brown leather barber chair with white piping and chrome armrests in a dark teal barbershop, a second chair, a wash basin and lit bottle shelves behind it.">
+  <div class="hero-shade"></div>
+  <div class="pole" aria-hidden="true"><i class="pole-cap"></i><i class="pole-glass"></i><i class="pole-cap"></i></div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow"><span data-ico="star" data-size="16" data-min-level="2"></span>Est. 1974 &middot; 214 Alder Street<span data-ico="star" data-size="16" data-min-level="2"></span></p>
+      <h1 id="h1">A proper haircut, <em>since 1974.</em></h1>
+      <p class="lede">Three chairs on Alder Street, hot lather, a straight razor, and barbers who remember how you like it. Walk in and take a number, or book a chair and skip the wait.</p>
+      <div class="cta-row">
+        <a class="btn btn--red btn--lg" href="#book"><span data-ico="calendar-plus" data-size="22">📅</span> Book a chair</a>
+        <a class="btn btn--ghost btn--lg" href="#services"><span data-ico="tag" data-size="22">🏷️</span> See the price board</a>
+      </div>
+      <p class="open-line" id="open-line"><span class="dot"></span><span id="open-text">Open today, 9 am to 7 pm</span></p>
+    </div>
+
+    <aside class="walkin" aria-label="Walk-in board">
+      <div class="wk-top"><span class="wk-title">Walk-in board</span><span class="wk-live" id="wk-state"><i></i>Live</span></div>
+      <div class="wk-grid">
+        <div class="wk-cell">
+          <span class="wk-lab" id="wk-lab1">Now serving</span>
+          <span class="tix" id="wk-now" data-live="ticket-number" data-p-number="47" data-p-hash="true" data-size="104" data-label="Now serving ticket number 47">47</span>
+        </div>
+        <div class="wk-cell">
+          <span class="wk-lab" id="wk-lab2">Next chair free</span>
+          <span class="clk" id="wk-clock" data-live="clock-time" data-p-time="14:35" data-size="104" data-label="Next chair free at 2:35 pm">2:35 pm</span>
+        </div>
+      </div>
+      <p class="wk-line" id="wk-line"><b id="wk-ahead">4</b> ahead of you, about <b id="wk-wait">25</b> min wait</p>
+      <button class="btn btn--red btn--block" id="wk-take" type="button"><span data-ico="ticket" data-size="22">🎟️</span> Take a number</button>
+      <p class="wk-mine" id="wk-mine" role="status" hidden></p>
+      <p class="wk-note">Demo queue: it moves along as chairs open up.</p>
+    </aside>
+  </div>
+  <p class="photo-credit">Photo: Redd Francisco on <a href="#credits">Unsplash</a></p>
+</section>
+
+<!-- ================= FACTS STRIP ================= -->
+<section class="strip" aria-label="At a glance">
+  <div class="wrap">
+    <ul class="facts">
+      <li><span data-ico="calendar-days" data-size="46">📅</span><b>Est. 1974</b><small>Same corner, same pole</small></li>
+      <li><span data-ico="users" data-size="46">👥</span><b>Three chairs</b><small>Dom, Marcus and Ines</small></li>
+      <li><span data-ico="tag" data-size="46">🏷️</span><b>Cuts from $28</b><small>Kids $18, shaves $35</small></li>
+      <li><span data-ico="door-open" data-size="46">🚪</span><b>Walk-ins welcome</b><small>Or book and skip the wait</small></li>
+      <li><span data-ico="banknote" data-size="46">💵</span><b>Cash friendly</b><small>Cards and tips welcome too</small></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec sec--cream" id="services" aria-labelledby="h-services">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>The price board</p>
+      <div class="rule"></div>
+      <h2 id="h-services">Plain prices, chalked up by hand.</h2>
+      <p class="sub">No mystery packages. Tell your barber what you want, pay what is on the board, and tip however the haircut made you feel.</p>
+    </div>
+
+    <ul class="prints">
+      <li class="print" style="--r:-1.4deg">
+        <img src="_img/tonys-barbershop/39559306-700.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:58% 40%"
+             alt="Close-up of hands cutting dark hair with scissors and a black comb, seen from behind.">
+        <div class="print-cap">
+          <span class="plate"><span data-ico="scissors" data-size="34" data-motion="hover">✂️</span></span>
+          <h3>The Classic Cut</h3>
+          <p>Scissors over comb, clipper taper, hot-lather neck shave.</p>
+          <div class="row"><span class="pr">$28</span><span class="mins"><span data-ico="clock" data-size="22">🕒</span>30 min</span><a href="#book" data-pick="cut">Book it</a></div>
+        </div>
+      </li>
+      <li class="print" style="--r:1.1deg">
+        <img src="_img/tonys-barbershop/4625626-700.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:60% 52%"
+             alt="A barber with tattooed forearms trims the back of a seated client's head with an electric clipper and a black guide comb.">
+        <div class="print-cap">
+          <span class="plate"><span data-ico="avatar-man-bald" data-size="34" data-motion="hover">👨‍🦲</span></span>
+          <h3>The Skin Fade</h3>
+          <p>Zero to length, blended by hand. Bring a photo, we do not mind.</p>
+          <div class="row"><span class="pr">$30</span><span class="mins"><span data-ico="clock" data-size="22">🕒</span>40 min</span><a href="#book" data-pick="fade">Book it</a></div>
+        </div>
+      </li>
+      <li class="print" style="--r:-.8deg">
+        <img src="_img/tonys-barbershop/8867486-700.jpg" width="1200" height="801" loading="lazy" decoding="async" style="object-position:50% 40%"
+             alt="A barber in a white shirt holds a straight razor to the jaw of a reclining bearded client with a towel across his chest.">
+        <div class="print-cap">
+          <span class="plate"><span data-ico="bath" data-size="34" data-motion="hover">🧖</span></span>
+          <h3>Hot-Towel Shave</h3>
+          <p>Steam, warm lather, straight razor, two passes, cold-towel finish.</p>
+          <div class="row"><span class="pr">$35</span><span class="mins"><span data-ico="clock" data-size="22">🕒</span>40 min</span><a href="#book" data-pick="shave">Book it</a></div>
+        </div>
+      </li>
+      <li class="print" style="--r:1.3deg">
+        <img src="_img/tonys-barbershop/5853394-700.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:52% 45%"
+             alt="A barber trimming a ginger beard with thinning scissors and a comb while the client sits under a clear cape.">
+        <div class="print-cap">
+          <span class="plate"><span data-ico="avatar-man-beard" data-size="34" data-motion="hover">🧔</span></span>
+          <h3>Beard Sculpt</h3>
+          <p>Shaped to your jaw, hot towel, a line-up and a rub of cedar oil.</p>
+          <div class="row"><span class="pr">$26</span><span class="mins"><span data-ico="clock" data-size="22">🕒</span>30 min</span><a href="#book" data-pick="sculpt">Book it</a></div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="board" id="board" aria-label="Price board"></div>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="sec sec--navy" id="book" aria-labelledby="h-book">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Book a chair</p>
+      <div class="rule"></div>
+      <h2 id="h-book">Pick a chair and a time. We'll save your spot.</h2>
+      <p class="sub">We hold your chair for ten minutes past the hour. Running late? Call the shop and we will shuffle. Prefer to just turn up? Walk-ins are always welcome, the board up top tells you the wait.</p>
+    </div>
+
+    <div class="book-grid">
+      <form class="appt" id="appt" action="#" novalidate>
+        <div class="appt-top"><b>Appointment card</b><span class="appt-no" id="appt-no">Draft</span></div>
+
+        <div class="appt-body" id="appt-form">
+          <!-- step 1 -->
+          <div class="stp" id="stp-1" role="group" aria-labelledby="h-s1">
+            <div class="stp-h">
+              <span class="stp-n" data-live="step-number" data-p-step="1" data-p-done="false" data-size="46" data-label="Step 1">1</span>
+              <div><h3 id="h-s1">What are we doing?</h3><p>Pick one service. Add-ons are optional.</p></div>
+            </div>
+            <div class="chips" id="svc-cats" role="group" aria-label="Service type"></div>
+            <div class="opt-grid" id="svc-list" role="radiogroup" aria-label="Service"></div>
+            <div class="addons">
+              <h4>Add-ons</h4>
+              <div class="addon-row" id="addons"></div>
+            </div>
+          </div>
+
+          <!-- step 2 -->
+          <div class="stp" id="stp-2" role="group" aria-labelledby="h-s2">
+            <div class="stp-h">
+              <span class="stp-n" data-live="step-number" data-p-step="2" data-p-done="false" data-size="46" data-label="Step 2">2</span>
+              <div><h3 id="h-s2">Who is cutting?</h3><p>Anyone free gets you the soonest chair.</p></div>
+            </div>
+            <div class="opt-grid barbers-pick" role="radiogroup" aria-label="Barber">
+              <label class="opt"><input type="radio" name="barber" value="any" checked><span class="opt-in"><span class="plate"><span data-ico="users" data-size="42">👥</span></span><span><b>Anyone free</b><small>Soonest chair</small></span></span></label>
+              <label class="opt"><input type="radio" name="barber" value="dom"><span class="opt-in"><span class="plate"><span data-ico="avatar-man-beard" data-size="42">🧔</span></span><span><b>Dom</b><small>Tue to Sat</small></span></span></label>
+              <label class="opt"><input type="radio" name="barber" value="marcus"><span class="opt-in"><span class="plate"><span data-ico="avatar-man" data-size="42">👨</span></span><span><b>Marcus</b><small>Wed to Sun</small></span></span></label>
+              <label class="opt"><input type="radio" name="barber" value="ines"><span class="opt-in"><span class="plate"><span data-ico="avatar-woman-braids" data-size="42">👩</span></span><span><b>Ines</b><small>Tue, Thu to Sun</small></span></span></label>
+            </div>
+          </div>
+
+          <!-- step 3 -->
+          <div class="stp" id="stp-3" role="group" aria-labelledby="h-s3">
+            <div class="stp-h">
+              <span class="stp-n" data-live="step-number" data-p-step="3" data-p-done="false" data-size="46" data-label="Step 3">3</span>
+              <div><h3 id="h-s3">Day and time</h3><p id="slot-hint">Shops closed Mondays. Struck-through times are taken.</p></div>
+            </div>
+            <div class="days" id="days" role="group" aria-label="Day"></div>
+            <div id="slots" aria-live="polite"></div>
+          </div>
+
+          <!-- step 4 -->
+          <div class="stp" id="stp-4" role="group" aria-labelledby="h-s4">
+            <div class="stp-h">
+              <span class="stp-n" data-live="step-number" data-p-step="4" data-p-done="false" data-size="46" data-label="Step 4">4</span>
+              <div><h3 id="h-s4">Who should we expect?</h3><p>We only use this to hold your chair and text you a reminder.</p></div>
+            </div>
+            <div class="fields">
+              <div class="fld" id="f-name">
+                <label for="in-name"><span data-ico="user" data-size="16">👤</span> Name</label>
+                <input id="in-name" name="name" type="text" autocomplete="name" placeholder="Sam Whitaker" aria-describedby="e-name">
+                <p class="err" id="e-name">Tell us who to look out for.</p>
+              </div>
+              <div class="fld" id="f-phone">
+                <label for="in-phone"><span data-ico="smartphone" data-size="16">📱</span> Mobile</label>
+                <input id="in-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(312) 555-0187" aria-describedby="e-phone">
+                <p class="err" id="e-phone">We need a 10-digit number to text you a reminder.</p>
+              </div>
+              <div class="fld full">
+                <label for="in-note"><span data-ico="pencil" data-size="16">✏️</span> Notes <em>(optional)</em></label>
+                <textarea id="in-note" name="note" placeholder="Number 2 on the sides, a little off the top, scissors only..."></textarea>
+              </div>
+              <label class="check full"><input type="checkbox" id="in-sms" checked> <span>Text me a reminder two hours before my appointment.</span></label>
+            </div>
+          </div>
+
+          <div class="appt-foot">
+            <button class="btn btn--red btn--lg" type="submit" id="confirm"><span data-ico="check-circle" data-size="22">✅</span> Confirm appointment</button>
+            <p id="confirm-hint" role="status">Pick a service, a day and a time to continue.</p>
+          </div>
+        </div>
+
+        <div class="appt-done" id="appt-done" tabindex="-1" hidden>
+          <span id="done-no" data-live="ticket-number" data-p-number="214" data-p-hash="true" data-size="108" data-label="Confirmation number 214">#214</span>
+          <h3>You are in the book, <span id="done-name">friend</span>.</h3>
+          <p id="done-text">We are saving your chair.</p>
+          <dl class="done-card" id="done-card"></dl>
+          <div class="btn-row">
+            <button class="btn btn--red" type="button" id="btn-ics"><span data-ico="calendar-plus" data-size="20">📅</span> Add to calendar</button>
+            <button class="btn" type="button" id="btn-edit"><span data-ico="edit" data-size="20">✏️</span> Change it</button>
+            <button class="btn" type="button" id="btn-cancel"><span data-ico="x-circle" data-size="20">❌</span> Cancel</button>
+          </div>
+        </div>
+      </form>
+
+      <aside class="stub" aria-labelledby="h-stub">
+        <div class="stub-top"><h3 id="h-stub">Your appointment</h3><p id="stub-state">Nothing booked yet</p></div>
+        <div class="stub-when is-empty" id="stub-when">
+          <span id="sum-day" data-live="calendar-weekday" data-p-weekday="TUE" data-p-day="14" data-size="88" data-label="No day chosen yet">Day</span>
+          <span id="sum-time" data-live="clock-time" data-p-time="10:10" data-size="88" data-label="No time chosen yet">Time</span>
+        </div>
+        <dl class="stub-dl">
+          <div><dt><span data-ico="scissors" data-size="24">✂️</span> Service</dt><dd id="sum-svc">Not chosen</dd></div>
+          <div><dt><span data-ico="user" data-size="24">👤</span> Barber</dt><dd id="sum-barber">Anyone free</dd></div>
+          <div><dt><span data-ico="calendar" data-size="24">📅</span> When</dt><dd id="sum-when">Pick a day</dd></div>
+          <div><dt><span data-ico="clock" data-size="24">🕒</span> Length</dt><dd id="sum-len">&mdash;</dd></div>
+          <div><dt><span data-ico="plus-circle" data-size="24">➕</span> Add-ons</dt><dd id="sum-add">None</dd></div>
+        </dl>
+        <div class="stub-total"><span>Total</span><b id="sum-total">$0</b></div>
+        <p class="stub-fine"><span data-ico="wallet" data-size="16">👛</span> Pay at the chair: cash, card or a handshake. Free to change or cancel until two hours before.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE SHAVE ================= -->
+<section class="sec sec--paper" id="ritual" aria-labelledby="h-ritual">
+  <div class="wrap ritual">
+    <figure class="frame">
+      <img src="_img/tonys-barbershop/20405689-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:45% 50%"
+           alt="A tattooed barber in a black T-shirt lays a white hot towel over a reclining client's face in a vintage-style barbershop with framed pictures and warm lamps behind.">
+      <figcaption><span data-ico="bath" data-size="20">🧖</span> The towel goes on first</figcaption>
+    </figure>
+    <div>
+      <div class="sec-head">
+        <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>The Tony's shave</p>
+        <div class="rule"></div>
+        <h2 id="h-ritual">Forty minutes you cannot rush.</h2>
+        <p class="sub">We have done it the same way since 1974, and the only thing that changed is Dom's playlist. Four steps, no shortcuts.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><h3>Hot towel</h3><p>A towel steamed to about 130 degrees goes over your face for a full minute and a half. Pores open, whiskers soften, your shoulders finally drop.</p><span class="temp"><span data-ico="thermometer" data-size="16">🌡️</span> 130&deg;F, wrung out by hand</span><span class="plate"><span data-ico="bath" data-size="40" data-motion="inview">🧖</span></span></li>
+        <li class="step"><h3>Warm lather</h3><p>Shaving soap whipped in a brass bowl and brushed on with a boar-bristle brush, against the grain first so every hair stands up for the blade.</p><span class="plate"><span data-ico="paintbrush" data-size="40" data-motion="inview">🖌️</span></span></li>
+        <li class="step"><h3>Straight razor</h3><p>Two passes, with the grain and then across it, on a blade stropped that morning. Nothing electric, nothing rushed, nothing you will regret.</p><span class="plate"><span data-ico="scissors" data-size="40" data-motion="inview">🪒</span></span></li>
+        <li class="step"><h3>Cold towel and balm</h3><p>A cold towel to close things up, then bay rum splash and a little unscented balm. You walk out smelling like a barbershop, which is the point.</p><span class="plate"><span data-ico="snowflake" data-size="40" data-motion="inview">❄️</span></span></li>
+      </ol>
+      <div class="ritual-meta">
+        <span><span data-ico="clock" data-size="20">🕒</span> 40 minutes in the chair</span>
+        <span><span data-ico="tag" data-size="20">🏷️</span> $35, towel included</span>
+        <a class="btn btn--red btn--sm" href="#book" data-pick="shave"><span data-ico="calendar-plus" data-size="18">📅</span> Book the shave</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BARBERS ================= -->
+<section class="sec sec--leather" id="barbers" aria-labelledby="h-barbers">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Meet the chairs</p>
+      <div class="rule"></div>
+      <h2 id="h-barbers">Three barbers, one rule: nobody leaves rushed.</h2>
+      <p class="sub">Dom runs the shop his father opened. Marcus and Ines have been with us long enough to have their own regulars, and their own opinions about the radio.</p>
+    </div>
+    <div class="crew">
+      <div class="crew-side">
+      <figure class="crew-photo">
+        <img src="_img/tonys-barbershop/7697324-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+             alt="A smiling man in a cream hat and peach shirt looks into a hand mirror in the barber chair while his barber stands behind him in a black apron.">
+        <figcaption>The last step is always the hand mirror. If you do not smile, we keep going.</figcaption>
+      </figure>
+      <div class="rules">
+        <h3>House rules</h3>
+        <ul>
+          <li><span data-ico="phone-off" data-size="34">🔇</span> Phones on silent during a shave. Razors and ringtones do not mix.</li>
+          <li><span data-ico="coffee" data-size="34">☕</span> Coffee is free. Opinions about the ball game are free too.</li>
+          <li><span data-ico="baby" data-size="34">👶</span> Kids sit on the booster. Parents sit on the bench and relax.</li>
+          <li><span data-ico="handshake" data-size="34">🤝</span> Tip your barber, not the jar. Cash goes straight to the chair.</li>
+        </ul>
+      </div>
+      </div>
+      <div class="crew-list">
+        <article class="barber" data-barber="dom">
+          <div class="barber-h">
+            <span class="ava"><span data-ico="avatar-man-beard" data-size="64" data-label="Dom Russo">🧔</span></span>
+            <div><span class="chair">Chair 1</span><h3>Dom Russo</h3><p class="role">Owner &middot; 28 years behind the chair</p></div>
+          </div>
+          <blockquote>If you cannot sit still for a hot towel, you are doing it wrong. I learned that from my father.</blockquote>
+          <ul class="tags">
+            <li class="tag"><span data-ico="scissors" data-size="26">✂️</span> Scissor cuts</li>
+            <li class="tag"><span data-ico="bath" data-size="26">🧖</span> Straight-razor shaves</li>
+            <li class="tag"><span data-ico="award" data-size="26">🏅</span> Classic tapers</li>
+          </ul>
+          <div class="b-foot">
+            <div class="meta"><span class="stars" data-stars="4.9"></span><span class="next"><span data-ico="calendar-clock" data-size="18">🕒</span> Next free: <b data-next="dom">checking...</b></span></div>
+            <button class="btn btn--brass btn--sm" type="button" data-pick-barber="dom"><span data-ico="calendar-plus" data-size="18">📅</span> Book Dom</button>
+          </div>
+        </article>
+        <article class="barber" data-barber="marcus">
+          <div class="barber-h">
+            <span class="ava"><span data-ico="avatar-man" data-size="64" data-label="Marcus Bell">👨</span></span>
+            <div><span class="chair">Chair 2</span><h3>Marcus Bell</h3><p class="role">12 years &middot; fades and sharp line-ups</p></div>
+          </div>
+          <blockquote>Bring the photo. Even the blurry one. I would rather get it right than guess.</blockquote>
+          <ul class="tags">
+            <li class="tag"><span data-ico="avatar-man-bald" data-size="26">👨‍🦲</span> Skin fades</li>
+            <li class="tag"><span data-ico="target" data-size="26">🎯</span> Crisp line-ups</li>
+            <li class="tag"><span data-ico="zap" data-size="26">⚡</span> Clipper work</li>
+          </ul>
+          <div class="b-foot">
+            <div class="meta"><span class="stars" data-stars="4.8"></span><span class="next"><span data-ico="calendar-clock" data-size="18">🕒</span> Next free: <b data-next="marcus">checking...</b></span></div>
+            <button class="btn btn--brass btn--sm" type="button" data-pick-barber="marcus"><span data-ico="calendar-plus" data-size="18">📅</span> Book Marcus</button>
+          </div>
+        </article>
+        <article class="barber" data-barber="ines">
+          <div class="barber-h">
+            <span class="ava"><span data-ico="avatar-woman-braids" data-size="64" data-label="Ines Valdez">👩</span></span>
+            <div><span class="chair">Chair 3</span><h3>Ines Valdez</h3><p class="role">9 years &middot; beards, kids and quiet hands</p></div>
+          </div>
+          <blockquote>First haircut? I keep a booster seat, a lollipop, and a lot of patience behind the counter.</blockquote>
+          <ul class="tags">
+            <li class="tag"><span data-ico="avatar-man-beard" data-size="26">🧔</span> Beard sculpting</li>
+            <li class="tag"><span data-ico="baby" data-size="26">👶</span> Kids' first cuts</li>
+            <li class="tag"><span data-ico="heart" data-size="26">❤️</span> Seniors' Tuesdays</li>
+          </ul>
+          <div class="b-foot">
+            <div class="meta"><span class="stars" data-stars="5"></span><span class="next"><span data-ico="calendar-clock" data-size="18">🕒</span> Next free: <b data-next="ines">checking...</b></span></div>
+            <button class="btn btn--brass btn--sm" type="button" data-pick-barber="ines"><span data-ico="calendar-plus" data-size="18">📅</span> Book Ines</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHELF ================= -->
+<section class="sec sec--cream" id="shelf" aria-labelledby="h-shelf">
+  <div class="wrap">
+    <div class="shelf-head">
+      <div class="sec-head">
+        <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>The shelf</p>
+        <div class="rule"></div>
+        <h2 id="h-shelf">What the chairs run on, to take home.</h2>
+        <p class="sub">Everything on the shelf is something we use on a customer every day. If we would not put it on a regular, it is not for sale.</p>
+      </div>
+      <figure class="shelf-photo">
+        <img src="_img/tonys-barbershop/3944792-1000.jpg" width="1200" height="777" loading="lazy" decoding="async" style="object-position:65% 40%"
+             alt="Angled flat lay of an open tin of pale-yellow balm beside a chrome safety razor and two wooden-handled brushes on a grey-blue woven mat.">
+        <figcaption>Balm, brush and safety razor: the start of a decent home routine.</figcaption>
+      </figure>
+    </div>
+
+    <div class="tools">
+      <div class="chips" id="p-chips" role="group" aria-label="Filter products"></div>
+      <label for="p-sort"><span data-ico="sliders" data-size="18">🎚️</span> Sort <select id="p-sort"><option value="feat">Our picks</option><option value="low">Price, low to high</option><option value="high">Price, high to low</option><option value="rate">Best rated</option></select></label>
+    </div>
+    <div class="pgrid" id="pgrid" aria-live="polite"></div>
+    <p class="shelf-note">
+      <span><span data-ico="truck" data-size="22">🚚</span> Free shipping on orders over $45</span>
+      <span><span data-ico="store" data-size="22">🏪</span> Free pickup at the counter, ready in an hour</span>
+      <span><span data-ico="shield-check" data-size="22">🛡️</span> Not happy? Bring it back within 30 days</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= GIFT CERTIFICATES ================= -->
+<section class="sec sec--oxblood" id="gift" aria-labelledby="h-gift">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Gift certificates<span data-ico="star" data-size="14" data-min-level="2"></span></p>
+      <div class="rule"></div>
+      <h2 id="h-gift">Give somebody a proper haircut.</h2>
+      <p class="sub" style="margin-inline:auto">Good for cuts, shaves and anything on the shelf. They never expire, and nobody needs to know what you paid.</p>
+    </div>
+    <div class="gift">
+      <div class="cert">
+        <div class="cert-in">
+          <span class="seal" aria-hidden="true"><span data-ico="award" data-size="42">🏅</span></span>
+          <img class="cert-img" src="_img/tonys-barbershop/photo-1519500528352-2d1460418d41-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+               alt="An orange-handled shaving brush with a silvertip knot stands in front of a blurred red, white and blue barber pole.">
+          <p class="cert-k">Gift certificate</p>
+          <h3>Tony's Barber &amp; Shave Parlor</h3>
+          <p class="cert-amt" id="cert-amt">$50</p>
+          <p class="cert-for">For <b id="cert-to">someone lucky</b> &nbsp;from <b id="cert-from">a friend</b></p>
+          <p class="cert-msg" id="cert-msg">&ldquo;Happy birthday. Go and sit down for forty minutes, you have earned it.&rdquo;</p>
+          <div class="cert-foot"><span>No. <span id="cert-no">0412</span></span><span>Never expires</span><span>Est. 1974</span></div>
+        </div>
+      </div>
+
+      <form class="gift-form" id="gift-form" action="#" novalidate>
+        <h3>Make it yours</h3>
+        <p>Choose an amount, add a note, and we will have it ready in minutes.</p>
+        <div class="amounts" id="amounts" role="group" aria-label="Amount">
+          <button class="chip" type="button" data-amt="25" aria-pressed="false">$25</button>
+          <button class="chip" type="button" data-amt="50" aria-pressed="true">$50</button>
+          <button class="chip" type="button" data-amt="75" aria-pressed="false">$75</button>
+          <button class="chip" type="button" data-amt="100" aria-pressed="false">$100</button>
+          <label class="sr" for="g-other">Other amount in dollars</label><input class="amt-other" id="g-other" type="number" inputmode="numeric" min="10" max="500" step="5" placeholder="Other $"><span class="amt-live"><span id="amt-live" data-live="price-tag" data-p-amount="50" data-p-currency="usd" data-size="64" data-label="Certificate value: 50 dollars">$50</span></span>
+        </div>
+        <div class="fields">
+          <div class="fld"><label for="g-to"><span data-ico="user" data-size="16">👤</span> For</label><input id="g-to" type="text" maxlength="24" placeholder="Dad" autocomplete="off"></div>
+          <div class="fld"><label for="g-from"><span data-ico="heart" data-size="16">❤️</span> From</label><input id="g-from" type="text" maxlength="24" placeholder="Sam" autocomplete="off"></div>
+          <div class="fld full"><label for="g-msg"><span data-ico="message-square-text" data-size="16">💬</span> A few words <em>(120 characters)</em></label><textarea id="g-msg" maxlength="120" placeholder="Happy birthday. Go and sit down for forty minutes, you have earned it."></textarea></div>
+          <div class="fld full"><label for="g-del"><span data-ico="mail" data-size="16">✉️</span> Delivery</label>
+            <select id="g-del"><option value="0">Email a printable certificate (free)</option><option value="0">Hold at the counter for pickup (free)</option><option value="2">Mail a printed certificate (+$2)</option></select></div>
+        </div>
+        <button class="btn btn--red btn--lg btn--block" type="submit"><span data-ico="gift" data-size="22">🎁</span> Add to cart</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section class="sec sec--paper" id="story" aria-labelledby="h-story">
+  <div class="wrap story">
+    <div class="collage">
+      <figure class="tall">
+        <img src="_img/tonys-barbershop/9280243-800.jpg" width="1200" height="1797" loading="lazy" decoding="async"
+             alt="A classic red, white and blue barber pole with chrome caps mounted on a red brick wall.">
+        <figcaption>The pole, repainted twice since 1974.</figcaption>
+      </figure>
+      <figure class="a">
+        <img src="_img/tonys-barbershop/37764947-800.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 55%"
+             alt="A vintage barbershop seen through a wooden doorway, with a row of green leather chairs with chrome frames on a black and white checkered floor.">
+        <figcaption>Chairs one to three, floor original.</figcaption>
+      </figure>
+      <figure class="b">
+        <img src="_img/tonys-barbershop/7697712-700.jpg" width="1200" height="800" loading="lazy" decoding="async"
+             alt="Barber tools laid out on a black towel: a red cordless clipper, a gold trimmer, scissors, a gold straight razor, a cream comb and a white-handled brush.">
+        <figcaption>The kit, laid out every morning.</figcaption>
+      </figure>
+    </div>
+    <div class="story-copy">
+      <div class="sec-head" style="margin-bottom:22px">
+        <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Since 1974</p>
+        <div class="rule"></div>
+        <h2 id="h-story">Same corner. Same pole. Three chairs.</h2>
+      </div>
+      <p>Antonio &ldquo;Tony&rdquo; Russo opened the shop with nine hundred dollars, two chairs and a pole on loan from his cousin. Fifty years on, his son Dom cuts hair in the same room, the radio still plays the same station, and half the customers are the grandsons of the first ones.</p>
+      <ol class="tl">
+        <li><b>1974</b><span><strong><span data-ico="store" data-size="22">🏪</span> The doors open</strong>A former shoe-repair shop at 214 Alder Street, two chairs, one mirror that does not quite hang straight.</span></li>
+        <li><b>1986</b><span><strong><span data-ico="users" data-size="22">👥</span> The third chair</strong>Bought at an estate sale two towns over. It is still Chair 3, and it still creaks on the left.</span></li>
+        <li><b>1998</b><span><strong><span data-ico="scissors" data-size="22">✂️</span> Dom takes his licence</strong>Twenty-two years old, three chairs, and a father who watched every single cut.</span></li>
+        <li><b>2009</b><span><strong><span data-ico="key" data-size="22">🔑</span> The keys change hands</strong>Tony retires on his seventieth birthday. He still comes in on Thursdays for coffee and opinions.</span></li>
+        <li><b>2024</b><span><strong><span data-ico="award" data-size="22">🏅</span> Fifty years</strong>Fifty years on Alder Street. The pole has been rewired once, which Dom considers a lot.</span></li>
+      </ol>
+      <div class="why">
+        <h3>Why the red, white and blue?</h3>
+        <ul>
+          <li><b>Red</b><span data-ico="droplet" data-size="26">🩸</span> Barber-surgeons once let blood.</li>
+          <li><b>White</b><span data-ico="bandage" data-size="26">🩹</span> The bandages that wrapped the arm.</li>
+          <li><b>Blue</b><span data-ico="heart-pulse" data-size="26">💙</span> Added in America, for the veins.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="sec sec--navy" id="reviews" aria-labelledby="h-reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>What the chairs say</p>
+      <div class="rule"></div>
+      <h2 id="h-reviews">Regulars, mostly. That is the whole trick.</h2>
+    </div>
+    <div class="rev-top">
+      <div class="score">
+        <b>4.8</b>
+        <div>
+          <span data-live="rating-stars" data-p-rating="5" data-size="76" data-label="Rated 4.8 out of 5">4.8 / 5</span>
+          <p>from 612 customer reviews</p>
+        </div>
+      </div>
+      <div class="bars" aria-label="Rating breakdown">
+        <div><span>5 <span data-ico="star" data-size="14">★</span></span><i><s style="width:84%"></s></i><span>84%</span></div>
+        <div><span>4 <span data-ico="star" data-size="14">★</span></span><i><s style="width:12%"></s></i><span>12%</span></div>
+        <div><span>3 <span data-ico="star" data-size="14">★</span></span><i><s style="width:3%"></s></i><span>3%</span></div>
+        <div><span>2 <span data-ico="star" data-size="14">★</span></span><i><s style="width:1%"></s></i><span>1%</span></div>
+        <div><span>1 <span data-ico="star" data-size="14">★</span></span><i><s style="width:0%"></s></i><span>0%</span></div>
+      </div>
+    </div>
+    <div class="rev-tools">
+      <div class="chips" id="rev-chips" role="group" aria-label="Filter reviews"></div>
+      <details class="write" id="write">
+        <summary><span data-ico="pencil" data-size="20">✏️</span> Write a review</summary>
+        <form id="rev-form" action="#" novalidate>
+          <div class="fields">
+            <div class="fld" id="rf-name"><label for="r-name">Your name</label><input id="r-name" type="text" maxlength="30" placeholder="Pat L." autocomplete="name"><p class="err">Add your name so we know who to thank.</p></div>
+            <div class="fld"><label for="r-svc">What did you have?</label><select id="r-svc"><option value="cuts">A haircut</option><option value="shaves">A shave</option><option value="beards">A beard trim</option><option value="kids">A kid's cut</option></select></div>
+            <div class="fld"><label for="r-rate">Rating</label><select id="r-rate"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div>
+            <div class="fld full" id="rf-text"><label for="r-text">Your review</label><textarea id="r-text" maxlength="400" placeholder="Tell the next customer what to expect."></textarea><p class="err">A sentence or two helps the next customer.</p></div>
+          </div>
+          <button class="btn btn--red" type="submit" style="margin-top:14px"><span data-ico="send" data-size="18">📨</span> Post review</button>
+        </form>
+      </details>
+    </div>
+    <div class="rev-grid" id="rev-grid"></div>
+  </div>
+</section>
+
+<!-- ================= VISIT ================= -->
+<section class="sec sec--cream" id="visit" aria-labelledby="h-visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Find the pole</p>
+      <div class="rule"></div>
+      <h2 id="h-visit">214 Alder Street, between the bakery and the bank.</h2>
+      <p class="sub">Look for the red, white and blue. Street parking is free after six, there is a lot behind the hardware store, and the 14 bus stops at our door.</p>
+    </div>
+    <div class="visit">
+      <figure class="visit-photo">
+        <img src="_img/tonys-barbershop/photo-1757283213626-3178d3ab8800-800.jpg" width="1200" height="1600" loading="lazy" decoding="async"
+             alt="A chrome-capped barber pole mounted on a grey rendered wall beside a white-painted brick pier and a black sign with white BARBERSHOP lettering above a dark shop window.">
+        <figcaption>Look for the pole. It spins from open to close.</figcaption>
+      </figure>
+      <div>
+        <ul class="info">
+          <li><span class="plate"><span data-ico="map-pin" data-size="26">📍</span></span><div><b>Address</b><span>214 Alder Street<br>Brookhaven</span></div></li>
+          <li><span class="plate"><span data-ico="phone-call" data-size="26">📞</span></span><div><b>Call or text</b><a href="tel:+13125550142">(312) 555-0142</a></div></li>
+          <li><span class="plate"><span data-ico="mail" data-size="26">✉️</span></span><div><b>Email</b><a href="mailto:chair@tonysbarbers.example">chair@tonysbarbers.example</a></div></li>
+          <li><span class="plate"><span data-ico="parking" data-size="26">🅿️</span></span><div><b>Parking</b><span>Lot behind the hardware store, street parking free after 6 pm</span></div></li>
+          <li><span class="plate"><span data-ico="bus" data-size="26">🚌</span></span><div><b>Transit</b><span>Route 14 stops outside, Alder and Church</span></div></li>
+          <li><span class="plate"><span data-ico="credit-card" data-size="26">💳</span></span><div><b>Payment</b><span>Cash, cards and tap. Tips in cash go straight to the barber.</span></div></li>
+        </ul>
+        <div class="vgrid">
+          <div class="hours">
+            <h3>Hours <span class="pill" id="open-pill">Open now</span></h3>
+            <table>
+              <tbody id="hours-body">
+                <tr data-d="2"><th scope="row">Tuesday</th><td>9 am to 7 pm</td></tr>
+                <tr data-d="3"><th scope="row">Wednesday</th><td>9 am to 7 pm</td></tr>
+                <tr data-d="4"><th scope="row">Thursday</th><td>9 am to 7 pm</td></tr>
+                <tr data-d="5"><th scope="row">Friday</th><td>9 am to 7 pm</td></tr>
+                <tr data-d="6"><th scope="row">Saturday</th><td>8 am to 5 pm</td></tr>
+                <tr data-d="0"><th scope="row">Sunday</th><td>10 am to 3 pm</td></tr>
+                <tr data-d="1"><th scope="row">Monday</th><td>Closed</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mapcard">
+            <svg viewBox="0 0 640 470" role="img" aria-label="Simple street map: Alder Street runs across the middle, with the shop between Church Street and Union Avenue">
+              <rect width="640" height="470" fill="#e9ddbc"/>
+              <path d="M0 372 C120 340 210 396 336 368 S560 360 640 382 V470 H0Z" fill="#b6ccce"/>
+              <rect x="498" y="186" width="124" height="86" rx="6" fill="#b9c9a0"/>
+              <g fill="#fbf5e2" stroke="#cdbf99" stroke-width="2">
+                <rect x="0" y="52" width="640" height="26"/><rect x="0" y="148" width="640" height="30"/><rect x="0" y="262" width="640" height="24"/>
+                <rect x="104" y="0" width="24" height="470"/><rect x="288" y="0" width="26" height="470"/><rect x="480" y="0" width="24" height="470"/>
+              </g>
+              <g fill="#f4ebd2" stroke="#d8c9a2" stroke-width="1.5">
+                <rect x="326" y="104" width="60" height="38"/><rect x="394" y="104" width="76" height="38"/><rect x="326" y="186" width="70" height="36"/><rect x="404" y="186" width="66" height="36"/><rect x="140" y="104" width="140" height="38"/><rect x="140" y="186" width="130" height="62"/>
+              </g>
+              <rect x="326" y="104" width="60" height="38" fill="#e8cfa0" stroke="#a3202c" stroke-width="2.5"/>
+              <g font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="2.2" fill="#8a7a58">
+                <text x="150" y="168">ALDER STREET</text><text x="352" y="168" fill="#a3202c">214</text><text x="36" y="70">MILL ROAD</text><text x="36" y="279">3RD AVENUE</text>
+                <text transform="translate(126 450) rotate(-90)">PINE ST</text><text transform="translate(310 450) rotate(-90)">CHURCH ST</text><text transform="translate(502 450) rotate(-90)">UNION AVE</text>
+                <text x="510" y="232" fill="#5b7a43">PARK</text><text x="560" y="30" fill="#8a7a58">N &#8593;</text>
+              </g>
+            </svg>
+            <span class="pin"><span data-live="map-pin-number" data-p-param-label="T" data-size="58" data-label="Tony's Barber and Shave Parlor, 214 Alder Street">T</span></span>
+            <div class="map-foot">
+              <p>214 Alder Street, Brookhaven</p>
+              <button class="btn btn--sm" type="button" id="copy-addr"><span data-ico="copy" data-size="18">📋</span> Copy address</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec sec--paper" id="faq" aria-labelledby="h-faq">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <p class="kicker"><span data-ico="star" data-size="14" data-min-level="2"></span>Before you come in<span data-ico="star" data-size="14" data-min-level="2"></span></p>
+      <div class="rule"></div>
+      <h2 id="h-faq">Questions we get at the counter.</h2>
+    </div>
+    <div class="faq">
+      <details class="q" open><summary><span class="plate plate--sm"><span data-ico="calendar-check" data-size="22">📅</span></span> Do I need an appointment?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>No. Walk-ins are always welcome, and the walk-in board at the top of this page shows the current wait. An appointment holds a chair for you, which is worth it on Fridays and Saturdays.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="clock" data-size="22">🕒</span></span> How long does a haircut take?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>A classic cut is about 30 minutes, a skin fade 40, and a hot-towel shave 40. The Full Tony (cut and shave together) is 70 minutes, and we do not watch the clock during it.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="baby" data-size="22">👶</span></span> Do you cut kids' hair?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>Every day. Kids 12 and under are $18, and that includes a booster seat, a cape with dinosaurs on it, and a lollipop. For a first haircut, ask for Ines, and bring a favourite toy.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="credit-card" data-size="22">💳</span></span> Do you take cards?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>Yes, cards and tap. Cash is appreciated, and tips in cash go straight to the barber who cut your hair.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="calendar-x" data-size="22">🗓️</span></span> What if I need to cancel?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>Change or cancel up to two hours before and it costs nothing. After that, text the shop and we will sort it out. We do not charge no-show fees, we just remember.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="gift" data-size="22">🎁</span></span> Do gift certificates expire?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>Never. They work for any service and for anything on the shelf, and the balance stays on the card until it is used up.</p></div></details>
+      <details class="q"><summary><span class="plate plate--sm"><span data-ico="image" data-size="22">🖼️</span></span> Can I bring a photo of the cut I want?<span class="chev" data-ico="chevron-down" data-size="22">⌄</span></summary><div class="a"><p>Please do. A photo on your phone is the fastest way to avoid a conversation that begins with &ldquo;a little off the sides&rdquo;. Marcus especially loves a reference.</p></div></details>
+    </div>
+    <p class="faq-cta"><span data-ico="phone" data-size="22">📞</span> Still wondering? Call the shop on <a href="tel:+13125550142"><b>(312) 555-0142</b></a></p>
+  </div>
+</section>
+</main>
+
+<!-- ================= CREDITS ================= -->
+<section id="credits" aria-labelledby="h-credits">
+  <div class="wrap">
+    <h2 id="h-credits">Photo credits</h2>
+    <ul>
+      <li>Hero, shop interior: Photo by <a href="https://unsplash.com/@reddfrancisco?utm_source=withicons_demos&utm_medium=referral">Redd Francisco</a> on <a href="https://unsplash.com/photos/BBGyxhtPpC0?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Classic cut: Photo by <a href="https://www.pexels.com/@brian-silva-2158909901">Brian Silva</a> on <a href="https://www.pexels.com/photo/39559306/">Pexels</a></li>
+      <li>Skin fade: Photo by <a href="https://www.pexels.com/@shkrabaanthony">Antoni Shkraba</a> on <a href="https://www.pexels.com/photo/4625626/">Pexels</a></li>
+      <li>Hot-towel shave: Photo by <a href="https://www.pexels.com/@cristian-rojas">Los Muertos Crew</a> on <a href="https://www.pexels.com/photo/8867486/">Pexels</a></li>
+      <li>Beard sculpt: Photo by <a href="https://www.pexels.com/@alexandre-saraiva-carniato-583650">alexandre saraiva carniato</a> on <a href="https://www.pexels.com/photo/5853394/">Pexels</a></li>
+      <li>The hot towel: Photo by <a href="https://www.pexels.com/@matreding">Mathias Reding</a> on <a href="https://www.pexels.com/photo/20405689/">Pexels</a></li>
+      <li>Hand mirror, barbers section: Photo by <a href="https://www.pexels.com/@rdne">RDNE Stock project</a> on <a href="https://www.pexels.com/photo/7697324/">Pexels</a></li>
+      <li>The shelf: Photo by <a href="https://www.pexels.com/@castorlystock">Castorly Stock</a> on <a href="https://www.pexels.com/photo/3944792/">Pexels</a></li>
+      <li>Gift certificate, shaving brush: Photo by <a href="https://unsplash.com/@timmossholder?utm_source=withicons_demos&utm_medium=referral">Tim Mossholder</a> on <a href="https://unsplash.com/photos/q49oU8NeOHQ?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>The pole on brick: Photo by <a href="https://www.pexels.com/@chris-f-38966">Chris F</a> on <a href="https://www.pexels.com/photo/9280243/">Pexels</a></li>
+      <li>Chairs one to three: Photo by <a href="https://www.pexels.com/@wal_-172619-2156618639">wal_ 172619</a> on <a href="https://www.pexels.com/photo/37764947/">Pexels</a></li>
+      <li>The kit: Photo by <a href="https://www.pexels.com/@rdne">RDNE Stock project</a> on <a href="https://www.pexels.com/photo/7697712/">Pexels</a></li>
+      <li>Storefront: Photo by <a href="https://unsplash.com/@haberdoedas?utm_source=withicons_demos&utm_medium=referral">Haberdoedas</a> on <a href="https://unsplash.com/photos/zj2CkHpoDPQ?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+    </ul>
+    <p class="fine">Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Demo page made with with icons. Tony's Barber &amp; Shave Parlor, its people, address, phone numbers and products are fictional.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Tony's Barber and Shave Parlor, back to top"><span class="brand-mark"><span data-ico="scissors" data-size="30">✂️</span></span><span class="brand-txt"><b>Tony's</b><small>Barber &amp; Shave Parlor</small></span></a>
+        <p>Three chairs, one pole, fifty-odd years. Hot towels, straight razors and a proper haircut on Alder Street.</p>
+      </div>
+      <div><h2>Visit</h2><ul>
+        <li><span data-ico="map-pin" data-size="20">📍</span> 214 Alder Street, Brookhaven</li>
+        <li><span data-ico="phone" data-size="20">📞</span> <a href="tel:+13125550142">(312) 555-0142</a></li>
+        <li><span data-ico="at-sign" data-size="20">📧</span> <a href="mailto:chair@tonysbarbers.example">chair@tonysbarbers.example</a></li></ul></div>
+      <div><h2>Hours</h2><ul>
+        <li><span data-ico="clock" data-size="20">🕒</span> Tue to Fri, 9 am to 7 pm</li>
+        <li><span data-ico="clock" data-size="20">🕒</span> Saturday, 8 am to 5 pm</li>
+        <li><span data-ico="clock" data-size="20">🕒</span> Sunday, 10 am to 3 pm</li>
+        <li><span data-ico="door-closed" data-size="20">🚪</span> Closed Mondays</li></ul></div>
+      <div><h2>Explore</h2><ul>
+        <li><span data-ico="chevron-right" data-size="18">›</span> <a href="#services">Price board</a></li>
+        <li><span data-ico="chevron-right" data-size="18">›</span> <a href="#book">Book a chair</a></li>
+        <li><span data-ico="chevron-right" data-size="18">›</span> <a href="#shelf">The shelf</a></li>
+        <li><span data-ico="chevron-right" data-size="18">›</span> <a href="#gift">Gift certificates</a></li>
+        <li><span data-ico="arrow-up" data-size="18">↑</span> <a href="#top">Back to the top</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <span>&copy; 2026 Tony's Barber &amp; Shave Parlor. Cash tips go to the barber.</span>
+      <span>Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+  <div class="dr-head"><h2 id="cart-title">Your cart</h2><button class="x-btn" type="button" id="cart-close" aria-label="Close cart"><span data-ico="close" data-size="22">✕</span></button></div>
+  <div class="dr-body" id="cart-body"></div>
+  <div class="dr-foot" id="cart-foot"></div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="_kit/demo-kit.js" data-style="skeuo" data-recommend="skeuo,retro,engrave,brutal,chrome,sketch,bauhaus,line" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  /* ---------- helpers ---------- */
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var pad = function (n) { return String(n).padStart(2, '0') }
+  var money = function (n) { var c = Math.round(n * 100); return '$' + (c % 100 ? (c / 100).toFixed(2) : String(c / 100)) }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var clockOffset = 0
+  var NOW = function () { return new Date(Date.now() + clockOffset) }
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  var D3 = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  var M3 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  var cap = function (s) { return s.charAt(0) + s.slice(1).toLowerCase() }
+  var store = { get: function (k) { try { return sessionStorage.getItem(k) } catch (e) { return null } }, set: function (k, v) { try { sessionStorage.setItem(k, v) } catch (e) {} } }
+  var key = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) } return h >>> 0 }
+  // an icon slot for dynamic markup; the emoji is the Basic fallback, the inline font-size keeps it in proportion at Basic
+  function ico(name, size, emoji, cls, label, motion) {
+    var q = '"'
+    return '<span' + (cls ? ' class=' + q + cls + q : '') + ' data-ico=' + q + name + q + ' data-size=' + q + size + q + ' style=' + q + 'font-size:' + Math.round(size * 0.78) + 'px' + q + (label ? ' data-label=' + q + esc(label) + q : '') + (motion ? ' data-motion=' + q + motion + q : '') + '>' + emoji + '</span>'
+  }
+  // size the Basic-level emoji of every static slot to match its data-size
+  $$('[data-ico]').forEach(function (el) { if (!el.style.fontSize) el.style.fontSize = Math.round((parseFloat(el.getAttribute('data-size')) || 24) * 0.78) + 'px' })
+  function setLive(el, params, fb, label) {
+    if (!el) return
+    var ready = window.WithKit && el._kit
+    if (ready) { window.WithKit.setLive(el, params); var f = el.querySelector('.kit-fb'); if (f && fb != null) f.textContent = fb; if (label) { el.setAttribute('aria-label', label); el._kit.wi.setAttribute('label', label) } }
+    else { Object.keys(params).forEach(function (k) { el.dataset['p' + k.replace(/(^|-)(\w)/g, function (_, __, c) { return c.toUpperCase() })] = params[k] }); if (fb != null) el.textContent = fb; if (label) el.dataset.label = label }
+  }
+  var tt
+  function toast(msg) { var t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on') }, 2800) }
+  function stars(r, size) { var n = Math.round(r), h = ''; for (var i = 0; i < 5; i++) h += ico('star', size, '★', i < n ? '' : 'off'); return h }
+  function fmtT(min) { var h = Math.floor(min / 60), m = min % 60; return ((h + 11) % 12 + 1) + ':' + pad(m) + ' ' + (h < 12 ? 'am' : 'pm') }
+  function hAmpm(h) { return ((h + 11) % 12 + 1) + ' ' + (h < 12 ? 'am' : 'pm') }
+
+  /* ---------- data ---------- */
+  var HOURS = { 0: [10, 15], 1: null, 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19], 6: [8, 17] }
+  var BARBERS = { dom: { name: 'Dom', days: [2, 3, 4, 5, 6] }, marcus: { name: 'Marcus', days: [3, 4, 5, 6, 0] }, ines: { name: 'Ines', days: [2, 4, 5, 6, 0] } }
+  var CATS = [['cuts', 'Cuts', 'scissors', '✂️'], ['shaves', 'Shaves', 'bath', '🧖'], ['beard', 'Beard', 'avatar-man-beard', '🧔'], ['kids', 'Kids and seniors', 'baby', '👶'], ['combos', 'Combos', 'crown', '👑']]
+  var SVC = [
+    { id: 'cut', cat: 'cuts', name: 'Classic cut', d: 'Scissors and clippers, finished with a hot-lather neck shave.', min: 30, price: 28, ico: 'scissors', em: '✂️' },
+    { id: 'fade', cat: 'cuts', name: 'Skin fade', d: 'Zero to length, blended by hand. Photos welcome.', min: 40, price: 30, ico: 'avatar-man-bald', em: '👨‍🦲' },
+    { id: 'buzz', cat: 'cuts', name: 'Buzz cut, one length', d: 'One guard, all over, edges squared off.', min: 15, price: 20, ico: 'zap', em: '⚡' },
+    { id: 'long', cat: 'cuts', name: 'Long-hair scissor cut', d: 'Shape, thin and finish. No clippers.', min: 40, price: 34, ico: 'scissors', em: '✂️' },
+    { id: 'shave', cat: 'shaves', name: 'Hot-towel shave', d: 'Steam, warm lather, straight razor, cold-towel finish.', min: 40, price: 35, ico: 'bath', em: '🧖' },
+    { id: 'head', cat: 'shaves', name: 'Head shave', d: 'Hot towel, lather and razor, finished with balm.', min: 30, price: 30, ico: 'avatar-man-bald', em: '👨‍🦲' },
+    { id: 'beard', cat: 'beard', name: 'Beard trim and line-up', d: 'Tidied, shaped and edged. Quick and sharp.', min: 20, price: 18, ico: 'avatar-man-beard', em: '🧔' },
+    { id: 'sculpt', cat: 'beard', name: 'Beard sculpt', d: 'Shaped to your jaw with a hot towel and cedar oil.', min: 30, price: 26, ico: 'droplet', em: '💧' },
+    { id: 'kids', cat: 'kids', name: 'Kids’ cut (12 and under)', d: 'Booster seat, dinosaur cape and a lollipop.', min: 25, price: 18, ico: 'baby', em: '👶' },
+    { id: 'senior', cat: 'kids', name: 'Seniors’ cut (65+, Tue and Wed)', d: 'A classic cut at the Tuesday price. Coffee is free.', min: 30, price: 22, ico: 'avatar-older-man', em: '👴' },
+    { id: 'full', cat: 'combos', name: 'The Full Tony', d: 'Classic cut and hot-towel shave, back to back.', min: 70, price: 58, ico: 'crown', em: '👑' },
+    { id: 'cutbeard', cat: 'combos', name: 'Cut and beard trim', d: 'A classic cut and a beard line-up in one sitting.', min: 50, price: 42, ico: 'star', em: '⭐' },
+    { id: 'fs', cat: 'combos', name: 'Father and son', d: 'Two classic cuts, side by side in chairs 1 and 2.', min: 55, price: 44, ico: 'users', em: '👨‍👦' }
+  ]
+  var ADDONS = [
+    { id: 'towel', name: 'Hot-towel finish', price: 8, min: 5, ico: 'bath', em: '🧖' },
+    { id: 'brow', name: 'Eyebrow tidy', price: 6, min: 5, ico: 'eye', em: '👁️' },
+    { id: 'oil', name: 'Beard-oil rub', price: 5, min: 5, ico: 'droplet', em: '💧' }
+  ]
+  var svcById = function (id) { return SVC.filter(function (s) { return s.id === id })[0] }
+  var addonById = function (id) { return ADDONS.filter(function (a) { return a.id === id })[0] }
+
+  /* ---------- the price board (chalkboard) ---------- */
+  function boardRow(s) {
+    return '<li class="b-row"><span class="plate plate--sm">' + ico(s.ico, 32, s.em) + '</span><div class="b-main"><div class="b-line"><b>' + esc(s.name) + '</b><i class="lead"></i><span class="pr">' + money(s.price) + '</span></div><small>' + esc(s.d) + ' ' + s.min + ' min.</small></div><button class="b-book" type="button" data-pick="' + s.id + '" aria-label="Book ' + esc(s.name) + '">Book</button></li>'
+  }
+  function boardSec(catId) {
+    var c = CATS.filter(function (x) { return x[0] === catId })[0]
+    return '<section class="b-sec"><h4>' + ico(c[2], 28, c[3], 'ic-gold') + ' ' + c[1] + '</h4><ul>' + SVC.filter(function (s) { return s.cat === catId }).map(boardRow).join('') + '</ul></section>'
+  }
+  $('#board').innerHTML =
+    '<header class="board-head"><h3>Price board</h3><p>Updated in chalk, whenever it changes</p></header>' +
+    '<div class="board-cols"><div>' + boardSec('cuts') + boardSec('shaves') + boardSec('combos') + '</div><div>' + boardSec('beard') + boardSec('kids') +
+    '<section class="b-sec b-extra"><h4>' + ico('plus-circle', 28, '➕', 'ic-gold') + ' Extras</h4><ul>' + ADDONS.map(function (a) {
+      return '<li class="b-row"><span class="plate plate--sm">' + ico(a.ico, 28, a.em) + '</span><div class="b-main"><div class="b-line"><b>' + a.name + '</b><i class="lead"></i><span class="pr">+' + money(a.price) + '</span></div></div></li>'
+    }).join('') + '</ul></section>' +
+    '<p class="b-note">' + ico('heart', 22, '❤️', 'ic-gold') + ' Cash tips go straight to the barber. First haircut of a kid under five is on the house.</p></div></div>' +
+    '<p class="board-foot"><span>' + ico('credit-card', 20, '💳') + ' Cards and tap</span><span>' + ico('banknote', 20, '💵') + ' Cash welcome</span><span>' + ico('clock', 20, '🕒') + ' Times are chair time</span></p>'
+
+  /* ---------- opening hours, open now ---------- */
+  function openStatus(now) {
+    var d = now.getDay(), h = HOURS[d], mins = now.getHours() * 60 + now.getMinutes()
+    if (h && mins >= h[0] * 60 && mins < h[1] * 60) return { open: true, short: 'Open today until ' + hAmpm(h[1]), long: 'Open now, until ' + hAmpm(h[1]) }
+    for (var i = 0; i < 8; i++) {
+      var dd = (d + i) % 7, hh = HOURS[dd]
+      if (!hh) continue
+      if (i === 0 && mins >= hh[1] * 60) continue
+      if (i === 0) return { open: false, h: hh[0], short: 'Closed now, opens today at ' + hAmpm(hh[0]), long: 'Closed now, opens today at ' + hAmpm(hh[0]) }
+      return { open: false, h: hh[0], short: 'Closed now, opens ' + (i === 1 ? 'tomorrow' : DAYS[dd]) + ' at ' + hAmpm(hh[0]), long: 'Closed now' }
+    }
+  }
+  function paintHours() {
+    var now = NOW(), st = openStatus(now), h = HOURS[now.getDay()]
+    $('#open-text').textContent = st.short
+    $('#open-line').classList.toggle('is-closed', !st.open)
+    var pill = $('#open-pill'); pill.textContent = st.open ? 'Open now' : 'Closed now'; pill.classList.toggle('closed', !st.open)
+    $$('#hours-body tr').forEach(function (tr) { tr.classList.toggle('today', +tr.dataset.d === now.getDay()) })
+    $('#today-line').textContent = h ? 'Today ' + hAmpm(h[0]) + ' to ' + hAmpm(h[1]) + '. Walk-ins welcome.' : 'Closed Mondays. Back Tuesday at 9 am.'
+  }
+  paintHours(); setInterval(paintHours, 60000)
+
+  /* ---------- the walk-in board (a demo queue that moves along) ---------- */
+  var wk = { serving: 47, issued: 51, mine: null, tick: 0 }
+  var ARR = [1, 0, 2, 1, 0, 1, 1, 0]
+  function wait(ahead) { return Math.round(ahead * 6 / 5) * 5 }
+  function paintWalkin() {
+    var st = openStatus(NOW()), live = $('#wk-state'), take = $('#wk-take')
+    live.classList.toggle('is-closed', !st.open); live.lastChild.textContent = st.open ? 'Live' : 'Closed'
+    if (!st.open) {
+      $('#wk-lab1').textContent = 'Last ticket'; $('#wk-lab2').textContent = 'Doors open'
+      setLive($('#wk-now'), { number: wk.issued }, String(wk.issued), 'Last ticket of the day was ' + wk.issued)
+      setLive($('#wk-clock'), { time: pad(st.h) + ':00' }, hAmpm(st.h), 'Doors open at ' + hAmpm(st.h))
+      $('#wk-line').innerHTML = '<b>Closed right now.</b> Book a chair and skip the line'
+      $('#wk-mine').hidden = true; take.disabled = true; take.innerHTML = '<span data-ico="calendar-clock" data-size="22" style="font-size:17px">🕒</span> Numbers from ' + hAmpm(st.h)
+      return
+    }
+    take.disabled = false; $('#wk-lab1').textContent = 'Now serving'; $('#wk-lab2').textContent = 'Next chair free'
+    var ahead = Math.max(0, wk.issued - wk.serving), w = wait(ahead), t = new Date(NOW().getTime() + w * 60000)
+    var tm = pad(t.getHours()) + ':' + pad(t.getMinutes()), h12 = fmtT(t.getHours() * 60 + t.getMinutes())
+    setLive($('#wk-now'), { number: wk.serving }, String(wk.serving), 'Now serving ticket number ' + wk.serving)
+    setLive($('#wk-clock'), { time: tm }, h12, 'Next chair free at ' + h12)
+    $('#wk-line').innerHTML = ahead ? '<b id="wk-ahead">' + ahead + '</b> waiting, about <b id="wk-wait">' + w + '</b> min for a new number' : '<b>No wait.</b> A chair is free right now'
+    var m = $('#wk-mine'), btn = $('#wk-take')
+    if (wk.mine) {
+      var left = wk.mine - wk.serving - 1
+      m.hidden = false
+      m.innerHTML = left > 0 ? 'Your number is <b>' + wk.mine + '</b>. ' + left + ' ahead of you, about ' + wait(left) + ' min. We will call it out loud.' : left === 0 ? 'Your number <b>' + wk.mine + '</b> is next. Come on in and grab a seat by the pole.' : 'Number <b>' + wk.mine + '</b>, your chair is ready.'
+      btn.innerHTML = '<span data-ico="x-circle" data-size="22" style="font-size:17px">❌</span> Give up number ' + wk.mine
+    } else { m.hidden = true; btn.innerHTML = '<span data-ico="ticket" data-size="22" style="font-size:17px">🎟️</span> Take a number' }
+  }
+  function tickWalkin() {
+    if (!openStatus(NOW()).open) { paintWalkin(); return }
+    wk.tick++
+    if (wk.issued > wk.serving) wk.serving++
+    wk.issued += ARR[wk.tick % ARR.length]
+    if (wk.issued - wk.serving < 2) wk.issued += 1
+    if (wk.mine && wk.serving > wk.mine) { setTimeout(function () { if (wk.mine && wk.serving > wk.mine) { wk.mine = null; paintWalkin() } }, 9000) }
+    paintWalkin()
+  }
+  $('#wk-take').addEventListener('click', function () {
+    if (wk.mine) { wk.mine = null; toast('Number given back. See you next time.') }
+    else { wk.issued++; wk.mine = wk.issued; toast('Your number is ' + wk.mine + '. Have a seat when you arrive.') }
+    paintWalkin()
+  })
+  paintWalkin(); setInterval(tickWalkin, 9000)
+  window.__tonys = { wk: wk, tick: tickWalkin, repaint: function () { paintHours(); paintWalkin() }, setOffset: function (ms) { clockOffset = ms } }
+
+  /* ---------- booking ---------- */
+  var B = { svc: svcById('cut'), addons: {}, barber: 'any', touched: false, date: null, time: null, booked: null }
+  var MINE = {}, svcCat = 'cuts', DAYLIST = []
+  ;(function () {
+    var now = NOW()
+    for (var i = 0; DAYLIST.length < 7 && i < 14; i++) {
+      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i), h = HOURS[d.getDay()]
+      if (!h) continue
+      if (i === 0 && now.getHours() * 60 + now.getMinutes() + 45 > h[1] * 60) continue
+      DAYLIST.push(d)
+    }
+  })()
+  function busy(d, bid, t) {
+    var dow = d.getDay()
+    return !!MINE[key(d) + bid + t] || hash(key(d) + bid + t) % 100 < (dow === 5 || dow === 6 ? 58 : dow === 0 ? 34 : 42)
+  }
+  function addMins() { return Object.keys(B.addons).reduce(function (a, id) { return a + addonById(id).min }, 0) }
+  function addCost() { return Object.keys(B.addons).reduce(function (a, id) { return a + addonById(id).price }, 0) }
+  function need() { return (B.svc ? B.svc.min : 30) + addMins() }
+  function total() { return (B.svc ? B.svc.price : 0) + addCost() }
+  function workers(d) {
+    var dow = d.getDay()
+    if (B.barber === 'any') return Object.keys(BARBERS).filter(function (b) { return BARBERS[b].days.indexOf(dow) > -1 })
+    return BARBERS[B.barber].days.indexOf(dow) > -1 ? [B.barber] : []
+  }
+  function freeFor(d, bid, t, len) { for (var u = t; u < t + len; u += 30) if (busy(d, bid, u)) return false; return true }
+  function slotsFor(d, len) {
+    var h = HOURS[d.getDay()]
+    if (!h) return []
+    if (B.svc && B.svc.id === 'senior' && [2, 3].indexOf(d.getDay()) < 0) return []
+    var out = [], now = NOW(), nowM = now.getHours() * 60 + now.getMinutes(), today = key(d) === key(now), ws = workers(d)
+    for (var t = h[0] * 60; t + len <= h[1] * 60; t += 30) {
+      if (today && t < nowM + 30) continue
+      var who = ws.filter(function (b) { return freeFor(d, b, t, len) })
+      out.push({ t: t, free: who.length > 0, who: who })
+    }
+    return out
+  }
+  var validName = function () { return $('#in-name').value.trim().length >= 2 }
+  var validPhone = function () { var n = $('#in-phone').value.replace(/\D/g, ''); return n.length === 10 || (n.length === 11 && n.charAt(0) === '1') }
+  var dayText = function (d) { return DAYS[d.getDay()].slice(0, 3) + ' ' + d.getDate() + ' ' + cap(M3[d.getMonth()]) }
+
+  function renderSvc() {
+    $('#svc-cats').innerHTML = CATS.map(function (c) {
+      return '<button type="button" class="chip" data-cat="' + c[0] + '" aria-pressed="' + (svcCat === c[0]) + '">' + ico(c[2], 20, c[3]) + ' ' + c[1] + '</button>'
+    }).join('')
+    $('#svc-list').innerHTML = SVC.filter(function (s) { return s.cat === svcCat }).map(function (s) {
+      return '<label class="opt"><input type="radio" name="svc" value="' + s.id + '"' + (B.svc && B.svc.id === s.id ? ' checked' : '') + '><span class="opt-in"><span class="plate">' + ico(s.ico, 28, s.em) + '</span><span><b>' + esc(s.name) + '</b><small>' + esc(s.d) + ' ' + s.min + ' min</small></span><span class="pr">' + money(s.price) + '</span></span></label>'
+    }).join('')
+  }
+  $('#addons').innerHTML = ADDONS.map(function (a) {
+    return '<label class="addon"><input type="checkbox" value="' + a.id + '"><span>' + ico(a.ico, 20, a.em) + ' ' + a.name + ' +' + money(a.price) + '</span></label>'
+  }).join('')
+
+  function renderDays() {
+    var len = need()
+    $('#days').innerHTML = DAYLIST.map(function (d) {
+      var ok = slotsFor(d, len).some(function (s) { return s.free }), sel = B.date && key(B.date) === key(d), today = key(d) === key(NOW())
+      return '<button type="button" class="day" data-date="' + key(d) + '" aria-pressed="' + !!sel + '"' + (ok ? '' : ' disabled') + ' aria-label="' + DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + (ok ? '' : ', not available') + '"><i>' + M3[d.getMonth()] + '</i><b>' + d.getDate() + '</b><small>' + (today ? 'Today' : D3[d.getDay()]) + '</small></button>'
+    }).join('')
+    if (B.date && !B.booked && $('#days [data-date="' + key(B.date) + '"]').disabled) { B.date = null; B.time = null }
+  }
+  function renderSlots() {
+    var box = $('#slots')
+    if (!B.date) { box.innerHTML = '<p class="empty-note">' + ico('calendar', 28, '📅') + ' Pick a day above to see open times.</p>'; return }
+    var list = slotsFor(B.date, need())
+    if (B.time != null && !B.booked && !list.some(function (s) { return s.t === B.time && s.free })) B.time = null
+    var groups = [['Morning', 'sunrise', '🌅', 0, 720], ['Afternoon', 'sun', '☀️', 720, 1020], ['Evening', 'sunset', '🌇', 1020, 1440]]
+    var html = groups.map(function (g) {
+      var items = list.filter(function (s) { return s.t >= g[3] && s.t < g[4] })
+      if (!items.length) return ''
+      return '<div class="slot-group"><h4>' + ico(g[1], 20, g[2]) + ' ' + g[0] + '</h4><div class="slots">' + items.map(function (s) {
+        return '<button type="button" class="slot" data-t="' + s.t + '" aria-pressed="' + (B.time === s.t) + '"' + (s.free ? '' : ' disabled') + '>' + fmtT(s.t) + '</button>'
+      }).join('') + '</div></div>'
+    }).join('')
+    box.innerHTML = html || '<p class="empty-note">' + ico('calendar-x', 28, '🗓️') + ' No chairs left that day for this service.</p>'
+  }
+  function stepDone(n, done) {
+    var el = $('#stp-' + n + ' .stp-n')
+    if (el._d === done) return
+    el._d = done
+    setLive(el, { done: done ? 'true' : 'false' }, done ? '✓' : String(n))
+  }
+  function renderSummary() {
+    var s = B.svc, add = Object.keys(B.addons).map(addonById), have = B.date && B.time != null
+    $('#sum-svc').textContent = s ? s.name : 'Not chosen'
+    $('#sum-barber').textContent = B.barber === 'any' ? 'Anyone free' : BARBERS[B.barber].name
+    $('#sum-when').textContent = have ? dayText(B.date) + ', ' + fmtT(B.time) : B.date ? dayText(B.date) + ', pick a time' : 'Pick a day'
+    $('#sum-len').textContent = need() + ' min'
+    $('#sum-add').textContent = add.length ? add.map(function (a) { return a.name }).join(', ') : 'None'
+    $('#sum-total').textContent = money(total())
+    $('#stub-when').classList.toggle('is-empty', !have)
+    if (B.date) setLive($('#sum-day'), { weekday: D3[B.date.getDay()], day: B.date.getDate() }, D3[B.date.getDay()] + ' ' + B.date.getDate(), DAYS[B.date.getDay()] + ' ' + B.date.getDate() + ' ' + MON[B.date.getMonth()])
+    if (B.time != null) { var tm = pad(Math.floor(B.time / 60)) + ':' + pad(B.time % 60); setLive($('#sum-time'), { time: tm }, fmtT(B.time), fmtT(B.time)) }
+    stepDone(1, !!s); stepDone(2, B.touched); stepDone(3, !!have); stepDone(4, validName() && validPhone())
+    var h = $('#confirm-hint')
+    h.classList.remove('bad')
+    h.textContent = !s ? 'Pick a service to continue.' : !have ? 'Pick a day and a time to continue.' : !(validName() && validPhone()) ? 'Add your name and mobile number and you are nearly done.' : 'All set. Confirm and we will save your chair.'
+    $('#stub-state').textContent = B.booked ? 'Booked, confirmation #' + B.booked.num : 'Nothing booked yet'
+  }
+  function refresh() { renderDays(); renderSlots(); renderSummary() }
+
+  function pickService(id) {
+    var s = svcById(id); if (!s) return
+    B.svc = s; svcCat = s.cat; renderSvc(); refresh()
+  }
+  function pickBarber(id) {
+    B.barber = id; B.touched = true
+    var r = $('#appt input[name=barber][value="' + id + '"]'); if (r) r.checked = true
+    refresh()
+  }
+  $('#svc-cats').addEventListener('click', function (e) { var b = e.target.closest('[data-cat]'); if (b) { svcCat = b.dataset.cat; renderSvc() } })
+  $('#svc-list').addEventListener('change', function (e) { if (e.target.name === 'svc') { B.svc = svcById(e.target.value); refresh() } })
+  $('#addons').addEventListener('change', function (e) { if (e.target.checked) B.addons[e.target.value] = true; else delete B.addons[e.target.value]; refresh() })
+  $('#appt').addEventListener('change', function (e) { if (e.target.name === 'barber') { B.barber = e.target.value; B.touched = true; refresh() } })
+  $('#days').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-date]'); if (!b || b.disabled) return
+    B.date = DAYLIST.filter(function (d) { return key(d) === b.dataset.date })[0]
+    $$('#days .day').forEach(function (x) { x.setAttribute('aria-pressed', x === b) })
+    renderSlots(); renderSummary()
+  })
+  $('#slots').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-t]'); if (!b || b.disabled) return
+    B.time = +b.dataset.t
+    $$('#slots .slot').forEach(function (x) { x.setAttribute('aria-pressed', x === b) })
+    renderSummary()
+  })
+  ;['#in-name', '#in-phone'].forEach(function (s) {
+    $(s).addEventListener('input', function () {
+      var f = $(s).closest('.fld'); if (f.classList.contains('has-err') && (s === '#in-name' ? validName() : validPhone())) { f.classList.remove('has-err'); $(s).removeAttribute('aria-invalid') }
+      renderSummary()
+    })
+  })
+
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n') }
+  function fold(line) { var out = [], s = line; while (s.length > 74) { out.push(s.slice(0, 74)); s = ' ' + s.slice(74) } out.push(s); return out.join('\r\n') }
+  function buildICS(b) {
+    var ymd = key(b.date).replace(/-/g, ''), st = function (m) { return ymd + 'T' + pad(Math.floor(m / 60)) + pad(m % 60) + '00' }
+    var stamp = NOW().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')
+    var who = BARBERS[b.barber].name, items = [b.svc.name].concat(b.addons.map(function (a) { return a.name })).join(', ')
+    var L = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Tonys Barber and Shave Parlor//Demo//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:tonys-' + b.num + '-' + ymd + st(b.time).slice(9) + '@tonysbarbers.example', 'DTSTAMP:' + stamp,
+      'DTSTART:' + st(b.time), 'DTEND:' + st(b.time + b.len),
+      'SUMMARY:' + icsEsc(b.svc.name + ' at Tony\'s with ' + who),
+      'LOCATION:' + icsEsc('Tony\'s Barber & Shave Parlor, 214 Alder Street, Brookhaven'),
+      'DESCRIPTION:' + icsEsc(items + ' with ' + who + '. Total ' + money(b.total) + ', paid at the chair. Confirmation #' + b.num + '. Free to change or cancel until two hours before. Shop phone (312) 555-0142.'),
+      'STATUS:CONFIRMED', 'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc('Your chair at Tony\'s is in two hours'), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ]
+    return L.map(fold).join('\r\n') + '\r\n'
+  }
+  function downloadICS() {
+    if (!B.booked) return
+    var blob = new Blob([buildICS(B.booked)], { type: 'text/calendar;charset=utf-8' }), url = URL.createObjectURL(blob), a = document.createElement('a')
+    a.href = url; a.download = 'tonys-barbershop-' + key(B.booked.date) + '.ics'; document.body.appendChild(a); a.click(); a.remove()
+    setTimeout(function () { URL.revokeObjectURL(url) }, 1500)
+    toast('Calendar file downloaded. Open it to add the appointment.')
+  }
+  $('#btn-ics').addEventListener('click', downloadICS)
+
+  function showDone(show) {
+    $('#appt-form').hidden = show; $('#appt-done').hidden = !show
+    $('#appt-no').textContent = show ? 'No. ' + B.booked.num : 'Draft'
+    if (show) { var d = $('#appt-done'); d.focus({ preventScroll: true }); $('#appt').scrollIntoView({ block: 'start' }) }
+  }
+  function book() {
+    var len = need(), d = B.date, t = B.time, slot = slotsFor(d, len).filter(function (s) { return s.t === t })[0]
+    var bid = slot && slot.who.length ? slot.who[0] : B.barber !== 'any' ? B.barber : 'dom'
+    for (var u = t; u < t + len; u += 30) MINE[key(d) + bid + u] = true
+    var name = $('#in-name').value.trim(), phone = $('#in-phone').value.trim()
+    B.booked = { svc: B.svc, addons: Object.keys(B.addons).map(addonById), barber: bid, date: d, time: t, len: len, total: total(), name: name, phone: phone, num: 100 + hash(key(d) + bid + t + name) % 800, sms: $('#in-sms').checked }
+    var b = B.booked
+    setLive($('#done-no'), { number: b.num }, String(b.num), 'Confirmation number ' + b.num)
+    $('#done-name').textContent = name.split(/\s+/)[0]
+    $('#done-text').textContent = 'We are saving Chair ' + ({ dom: 1, marcus: 2, ines: 3 }[bid]) + ' with ' + BARBERS[bid].name + ' for ' + dayText(d) + ' at ' + fmtT(t) + '. ' + (b.sms ? 'A reminder text goes to ' + phone + ' two hours before.' : 'We will not text you, so put it in your calendar.')
+    $('#done-card').innerHTML = [['Service', b.svc.name + (b.addons.length ? ' + ' + b.addons.map(function (a) { return a.name.toLowerCase() }).join(', ') : '')], ['Barber', BARBERS[bid].name + ', Chair ' + ({ dom: 1, marcus: 2, ines: 3 }[bid])], ['When', DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + ', ' + fmtT(t)], ['Chair time', len + ' min'], ['To pay at the chair', money(b.total)]]
+      .map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd></div>' }).join('')
+    showDone(true); refresh()
+    toast('Booked. Confirmation #' + b.num)
+  }
+  function unbook(msg) {
+    var b = B.booked; if (!b) return
+    for (var u = b.time; u < b.time + b.len; u += 30) delete MINE[key(b.date) + b.barber + u]
+    B.booked = null; showDone(false); refresh(); if (msg) toast(msg)
+  }
+  $('#btn-edit').addEventListener('click', function () { unbook('Your old slot is free again. Pick a new time.') })
+  $('#btn-cancel').addEventListener('click', function () { unbook('Appointment cancelled. Nothing to pay.') })
+  $('#appt').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var okN = validName(), okP = validPhone(), h = $('#confirm-hint')
+    $('#f-name').classList.toggle('has-err', !okN); $('#f-phone').classList.toggle('has-err', !okP)
+    $('#in-name').setAttribute('aria-invalid', !okN); $('#in-phone').setAttribute('aria-invalid', !okP)
+    if (!B.svc) { h.textContent = 'Pick a service first.'; h.classList.add('bad'); $('#stp-1').scrollIntoView({ block: 'center' }); return }
+    if (!(B.date && B.time != null)) { h.textContent = B.date ? 'Pick a time for that day.' : 'Pick a day and a time first.'; h.classList.add('bad'); $('#stp-3').scrollIntoView({ block: 'center' }); return }
+    if (!okN || !okP) { h.textContent = 'Fix the highlighted fields and try again.'; h.classList.add('bad'); (!okN ? $('#in-name') : $('#in-phone')).focus(); return }
+    book()
+  })
+  B.date = DAYLIST.filter(function (d) { return slotsFor(d, need()).some(function (s) { return s.free }) })[0] || null
+  renderSvc(); refresh()
+
+  /* barber cards: next free chair, star rows, quick-book buttons */
+  function nextFree(bid) {
+    var now = NOW(), nowM = now.getHours() * 60 + now.getMinutes()
+    for (var i = 0; i < 10; i++) {
+      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i), h = HOURS[d.getDay()]
+      if (!h || BARBERS[bid].days.indexOf(d.getDay()) < 0) continue
+      for (var t = h[0] * 60; t + 30 <= h[1] * 60; t += 30) {
+        if (i === 0 && t < nowM + 30) continue
+        if (freeFor(d, bid, t, 30)) return (i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : DAYS[d.getDay()].slice(0, 3) + ' ' + d.getDate()) + ', ' + fmtT(t)
+      }
+    }
+    return 'Call the shop'
+  }
+  Object.keys(BARBERS).forEach(function (b) { var el = $('[data-next="' + b + '"]'); if (el) el.textContent = nextFree(b) })
+  $$('.stars[data-stars]').forEach(function (el) { var r = parseFloat(el.dataset.stars); el.setAttribute('role', 'img'); el.setAttribute('aria-label', 'Rated ' + r.toFixed(1) + ' out of 5'); el.innerHTML = stars(r, 18) + '<em>' + r.toFixed(1) + '</em>' })
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-pick]')
+    if (p) { pickService(p.dataset.pick); toast(svcById(p.dataset.pick).name + ' selected. Pick a barber and a time.'); if (p.tagName === 'BUTTON') $('#book').scrollIntoView({ block: 'start' }) }
+    var pb = e.target.closest('[data-pick-barber]')
+    if (pb) { pickBarber(pb.dataset.pickBarber); toast('Booking with ' + BARBERS[pb.dataset.pickBarber].name + '. Pick a day and a time.'); $('#book').scrollIntoView({ block: 'start' }) }
+  })
+
+  /* ---------- shelf ---------- */
+  var PRODUCTS = [
+    { id: 'pom-orig', cat: 'pomade', name: 'Original Pomade', d: 'Water-based, medium hold, high shine. Rinses out with plain water.', size: '3 oz tin', price: 16, r: 4.8, n: 234, ico: 'sparkles', em: '✨', badge: 'Best seller' },
+    { id: 'pom-clay', cat: 'pomade', name: 'Matte Clay', d: 'Strong, flexible hold with no shine. For texture and short layers.', size: '3 oz tin', price: 17, r: 4.6, n: 141, ico: 'mountain', em: '⛰️' },
+    { id: 'pom-birch', cat: 'pomade', name: 'Black Birch Hard Hold', d: 'Old-school firm hold with a clean birch scent. Brushes through.', size: '3 oz tin', price: 18, r: 4.7, n: 96, ico: 'tree-pine', em: '🌲' },
+    { id: 'oil-cedar', cat: 'beard', name: 'Cedar and Bay Rum Beard Oil', d: 'Softens the beard, calms the itch, smells like a cedar chest.', size: '1 oz dropper', price: 19, r: 4.9, n: 312, ico: 'droplet', em: '💧', badge: 'Staff pick' },
+    { id: 'balm', cat: 'beard', name: 'Unscented Beard Balm', d: 'Shea and beeswax for shape and a little hold. Fragrance-free.', size: '2 oz tin', price: 15, r: 4.5, n: 118, ico: 'leaf', em: '🍃' },
+    { id: 'wax', cat: 'beard', name: 'Moustache Wax', d: 'Firm beeswax for a handlebar, or just a tidy upper lip.', size: '0.5 oz', price: 9, r: 4.4, n: 57, ico: 'avatar-older-man', em: '👨' },
+    { id: 'soap', cat: 'shave', name: 'Shave Soap in a Wooden Bowl', d: 'A thick, slow-drying lather. Refill pucks at the counter.', size: '4 oz', price: 14, r: 4.7, n: 203, ico: 'cube', em: '🧼' },
+    { id: 'brush', cat: 'shave', name: 'Boar-Bristle Shaving Brush', d: 'The brush Dom lathers with every morning. Walnut handle.', size: 'Walnut', price: 24, r: 4.8, n: 174, ico: 'paintbrush', em: '🖌️', badge: 'Best seller' },
+    { id: 'razor', cat: 'shave', name: 'Brass Safety Razor', d: 'Heavy, balanced and forgiving. Takes any double-edge blade.', size: 'With 10 blades', price: 38, r: 4.9, n: 89, ico: 'scissors', em: '🪒' },
+    { id: 'splash', cat: 'shave', name: 'Bay Rum Aftershave Splash', d: 'The smell of the shop. Cools the skin with no sting.', size: '4 oz', price: 18, r: 4.6, n: 162, ico: 'flask-conical', em: '🧴' },
+    { id: 'kit', cat: 'kits', name: 'Tony\u2019s Shave Kit', d: 'Brush, soap bowl, brass safety razor and a strop, boxed.', size: 'Gift box', price: 72, r: 4.9, n: 64, ico: 'package-open', em: '📦', badge: 'Gift idea' },
+    { id: 'tin', cat: 'kits', name: 'Travel Grooming Tin', d: 'Comb, balm and scissors that fit in a jacket pocket.', size: 'Tin', price: 29, r: 4.5, n: 41, ico: 'luggage', em: '🧳' }
+  ]
+  var PCATS = [['all', 'All'], ['pomade', 'Pomade'], ['beard', 'Beard'], ['shave', 'Shave'], ['kits', 'Kits and gifts']]
+  var PCATNAME = { pomade: 'Pomade', beard: 'Beard care', shave: 'Shaving', kits: 'Kits and gifts' }
+  var pFilter = 'all', pSort = 'feat'
+  function renderShelf() {
+    var list = PRODUCTS.filter(function (p) { return pFilter === 'all' || p.cat === pFilter })
+    if (pSort === 'low') list.sort(function (a, b) { return a.price - b.price })
+    else if (pSort === 'high') list.sort(function (a, b) { return b.price - a.price })
+    else if (pSort === 'rate') list.sort(function (a, b) { return b.r - a.r || b.n - a.n })
+    $('#p-chips').innerHTML = PCATS.map(function (c) {
+      var n = c[0] === 'all' ? PRODUCTS.length : PRODUCTS.filter(function (p) { return p.cat === c[0] }).length
+      return '<button type="button" class="chip" data-f="' + c[0] + '" aria-pressed="' + (pFilter === c[0]) + '">' + c[1] + ' <span class="n">' + n + '</span></button>'
+    }).join('')
+    $('#pgrid').innerHTML = list.map(function (p) {
+      var no = PRODUCTS.indexOf(p) + 1
+      return '<article class="pcard c-' + p.cat + '"><div class="pt-art">' + (p.badge ? '<span class="pt-badge">' + ico('award', 14, '🏅') + p.badge + '</span>' : '') + '<span class="pt-label">' + ico(p.ico, 64, p.em, '', '', 'hover') + '</span><span class="pt-no">No. ' + pad(no) + '</span></div>' +
+        '<div class="pt-body"><span class="pt-cat">' + PCATNAME[p.cat] + '</span><h3>' + esc(p.name) + '</h3><p>' + esc(p.d) + '</p>' +
+        '<div class="pt-rate">' + ico('star', 16, '★') + ' ' + p.r.toFixed(1) + ' <span>(' + p.n + ')</span> &middot; ' + esc(p.size) + '</div>' +
+        '<div class="pt-foot"><span class="pr">' + money(p.price) + '</span><button class="btn btn--sm add" type="button" data-add="' + p.id + '" aria-label="Add ' + esc(p.name) + ' to cart">' + ico('shopping-cart-plus', 20, '🛒') + ' <span class="lbl">Add</span></button></div></div></article>'
+    }).join('')
+  }
+  $('#p-chips').addEventListener('click', function (e) { var b = e.target.closest('[data-f]'); if (b) { pFilter = b.dataset.f; renderShelf() } })
+  $('#p-sort').addEventListener('change', function (e) { pSort = e.target.value; renderShelf() })
+  renderShelf()
+
+  /* ---------- cart ---------- */
+  var cart = [], ship = 'pickup', orderName = '', FREE_SHIP = 45, SHIP_FEE = 5.95
+  try { cart = JSON.parse(store.get('tonys-cart') || '[]') || [] } catch (e) { cart = [] }
+  var count = function () { return cart.reduce(function (a, c) { return a + c.qty }, 0) }
+  var sub = function () { return cart.reduce(function (a, c) { return a + c.price * c.qty }, 0) }
+  var shipCost = function () { return ship === 'ship' && sub() < FREE_SHIP && cart.length ? SHIP_FEE : 0 }
+  function paintBadge() {
+    var n = count()
+    $('#cart-n').textContent = n
+    setLive($('#cart-live'), { count: n }, String(n), 'Cart, ' + n + (n === 1 ? ' item' : ' items'))
+    $('#cart-toggle').setAttribute('aria-label', 'Open cart, ' + n + (n === 1 ? ' item' : ' items'))
+  }
+  function renderCart() {
+    store.set('tonys-cart', JSON.stringify(cart)); paintBadge()
+    var body = $('#cart-body'), foot = $('#cart-foot')
+    if (!cart.length) {
+      body.innerHTML = '<div class="empty">' + ico('shopping-cart', 72, '🛒', 'ic-brass', 'Empty cart') + '<p>Your cart is empty. The Original Pomade is a good place to start.</p><button class="btn btn--red" type="button" data-cart-close>' + ico('arrow-right', 20, '→') + ' Browse the shelf</button></div>'
+      foot.hidden = true; return
+    }
+    foot.hidden = false
+    var s = sub(), left = Math.max(0, FREE_SHIP - s), pct = Math.min(100, Math.round(s / FREE_SHIP * 100))
+    body.innerHTML = '<div class="meter"><p>' + ico('truck', 22, '🚚') + (left ? 'Add <b>' + money(left) + '</b> more for free shipping' : '<b>Free shipping unlocked.</b>') + '</p><i><s style="width:' + pct + '%"></s></i></div>' +
+      cart.map(function (c) {
+        return '<div class="line" data-id="' + c.id + '"><span class="plate">' + ico(c.ico, 28, c.em) + '</span><div><b>' + esc(c.name) + '</b><small>' + esc(c.sub || '') + '</small></div><span class="tot">' + money(c.price * c.qty) + '</span>' +
+          '<div class="ctl"><span class="qty"><button type="button" data-dec aria-label="One fewer ' + esc(c.name) + '">' + ico('minus', 18, '−') + '</button><span aria-live="polite">' + c.qty + '</span><button type="button" data-inc aria-label="One more ' + esc(c.name) + '">' + ico('plus', 18, '+') + '</button></span><button class="rm" type="button" data-rm>' + ico('trash', 18, '🗑️') + ' Remove</button></div></div>'
+      }).join('')
+    foot.innerHTML = '<div class="ful" role="radiogroup" aria-label="How do you want it?"><label><input type="radio" name="ful" value="pickup"' + (ship === 'pickup' ? ' checked' : '') + '>' + ico('store', 26, '🏪') + '<span><b>Pick up</b><small>Free, ready in an hour</small></span></label><label><input type="radio" name="ful" value="ship"' + (ship === 'ship' ? ' checked' : '') + '>' + ico('truck', 26, '🚚') + '<span><b>Ship it</b><small>' + money(SHIP_FEE) + ', free over ' + money(FREE_SHIP) + '</small></span></label></div>' +
+      '<div class="sum-row"><span>Subtotal</span><span>' + money(s) + '</span></div><div class="sum-row"><span>' + (ship === 'ship' ? 'Shipping' : 'Pickup') + '</span><span>' + (shipCost() ? money(shipCost()) : 'Free') + '</span></div>' +
+      '<div class="sum-row big"><span>Total</span><b>' + money(s + shipCost()) + '</b></div>' +
+      '<div class="fld" id="f-order"><label for="in-order">' + ico('user', 16, '👤') + ' Name for the order</label><input id="in-order" type="text" autocomplete="name" value="' + esc(orderName) + '" placeholder="Sam Whitaker"><p class="err">We need a name to put on the bag.</p></div>' +
+      '<button class="btn btn--red btn--lg btn--block" type="button" id="place">' + ico('check-circle', 22, '✅') + ' Place order</button>'
+  }
+  var opener = null
+  function openCart() {
+    opener = document.activeElement
+    var d = $('#cart'), sc = $('#scrim'); sc.hidden = false
+    requestAnimationFrame(function () { sc.classList.add('on'); d.classList.add('on') })
+    d.setAttribute('aria-hidden', 'false'); $('#cart-toggle').setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'
+    setTimeout(function () { $('#cart-close').focus() }, 60)
+  }
+  function closeCart() {
+    var d = $('#cart'), sc = $('#scrim')
+    sc.classList.remove('on'); d.classList.remove('on'); d.setAttribute('aria-hidden', 'true'); $('#cart-toggle').setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''
+    setTimeout(function () { if (!sc.classList.contains('on')) sc.hidden = true }, 280)
+    if (opener && opener.focus) opener.focus()
+  }
+  function addToCart(item) {
+    var ex = cart.filter(function (c) { return c.id === item.id })[0]
+    if (ex) ex.qty++; else cart.push(Object.assign({ qty: 1 }, item))
+    renderCart()
+    var t = $('#cart-toggle'); t.classList.remove('bump'); void t.offsetWidth; t.classList.add('bump')
+  }
+  $('#cart-toggle').addEventListener('click', openCart)
+  $('#cart-close').addEventListener('click', closeCart)
+  $('#scrim').addEventListener('click', closeCart)
+  document.addEventListener('keydown', function (e) {
+    if (!$('#cart').classList.contains('on')) return
+    if (e.key === 'Escape') { closeCart(); return }
+    if (e.key === 'Tab') {
+      var f = $$('#cart button, #cart input, #cart a[href]').filter(function (x) { return !x.disabled && x.offsetParent !== null })
+      if (!f.length) return
+      var first = f[0], last = f[f.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+  })
+  $('#pgrid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-add]'); if (!b) return
+    var p = PRODUCTS.filter(function (x) { return x.id === b.dataset.add })[0]
+    addToCart({ id: p.id, name: p.name, sub: p.size, price: p.price, ico: p.ico, em: p.em })
+    var l = $('.lbl', b); b.classList.add('ok'); l.textContent = 'Added'
+    setTimeout(function () { b.classList.remove('ok'); l.textContent = 'Add' }, 1300)
+    toast(p.name + ' added to your cart')
+  })
+  $('#cart').addEventListener('click', function (e) {
+    if (e.target.closest('[data-cart-close]')) { closeCart(); $('#shelf').scrollIntoView({ block: 'start' }); return }
+    var line = e.target.closest('.line')
+    if (line) {
+      var it = cart.filter(function (c) { return c.id === line.dataset.id })[0]
+      if (e.target.closest('[data-inc]')) it.qty++
+      else if (e.target.closest('[data-dec]')) { it.qty--; if (it.qty < 1) cart = cart.filter(function (c) { return c !== it }) }
+      else if (e.target.closest('[data-rm]')) cart = cart.filter(function (c) { return c !== it })
+      else return
+      renderCart(); return
+    }
+    if (e.target.closest('#place')) {
+      var nm = $('#in-order').value.trim(); orderName = nm
+      $('#f-order').classList.toggle('has-err', nm.length < 2)
+      if (nm.length < 2) { $('#in-order').focus(); return }
+      var no = 1000 + hash(nm + count() + sub()) % 9000, tot = sub() + shipCost(), mode = ship
+      cart = []; store.set('tonys-cart', '[]'); paintBadge()
+      $('#cart-body').innerHTML = '<div class="order-ok">' + ico('badge-check', 80, '✅', 'ic-red', 'Order placed') + '<h3>Order #' + no + ' is in.</h3><p>' + (mode === 'pickup' ? 'Ask for <b>' + esc(nm.split(/\s+/)[0]) + '</b> at the counter in about an hour. Total at pickup: ' + money(tot) + '.' : 'Thanks, ' + esc(nm.split(/\s+/)[0]) + '. It ships next business day. Total charged: ' + money(tot) + '.') + '</p><button class="btn btn--red" type="button" data-cart-close>' + ico('arrow-right', 20, '→') + ' Keep browsing</button></div>'
+      $('#cart-foot').hidden = true; orderName = ''
+    }
+  })
+  $('#cart').addEventListener('change', function (e) { if (e.target.name === 'ful') { ship = e.target.value; renderCart() } })
+  $('#cart').addEventListener('input', function (e) { if (e.target.id === 'in-order') orderName = e.target.value })
+  renderCart()
+
+  /* ---------- gift certificate ---------- */
+  var gift = { amt: 50 }
+  function paintGift() {
+    $('#cert-amt').textContent = money(gift.amt)
+    setLive($('#amt-live'), { amount: gift.amt }, money(gift.amt), 'Certificate value: ' + gift.amt + ' dollars')
+    $('#cert-to').textContent = $('#g-to').value.trim() || 'someone lucky'
+    $('#cert-from').textContent = $('#g-from').value.trim() || 'a friend'
+    var m = $('#g-msg').value.trim()
+    $('#cert-msg').textContent = '\u201C' + (m || 'Happy birthday. Go and sit down for forty minutes, you have earned it.') + '\u201D'
+  }
+  $('#amounts').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-amt]'); if (!b) return
+    gift.amt = +b.dataset.amt; $$('#amounts [data-amt]').forEach(function (x) { x.setAttribute('aria-pressed', x === b) }); $('#g-other').value = ''; paintGift()
+  })
+  $('#g-other').addEventListener('input', function (e) {
+    var v = Math.round(+e.target.value)
+    if (v >= 10 && v <= 500) { gift.amt = v; $$('#amounts [data-amt]').forEach(function (x) { x.setAttribute('aria-pressed', false) }); paintGift() }
+  })
+  ;['#g-to', '#g-from', '#g-msg'].forEach(function (s) { $(s).addEventListener('input', paintGift) })
+  $('#gift-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var sel = $('#g-del'), fee = +sel.value, to = $('#g-to').value.trim() || 'someone lucky'
+    addToCart({ id: 'gift-' + Date.now(), name: 'Gift certificate, ' + money(gift.amt), sub: 'For ' + to + '. ' + sel.options[sel.selectedIndex].text.replace(/ \(.*\)/, ''), price: gift.amt + fee, ico: 'gift', em: '🎁' })
+    $('#cert-no').textContent = pad(Math.floor(Math.random() * 90) + 10) + pad(Math.floor(Math.random() * 90) + 10)
+    toast('Gift certificate added to your cart')
+  })
+  paintGift()
+
+  /* ---------- reviews ---------- */
+  var REVIEWS = [
+    { n: 'Pete S.', a: 'avatar-older-man', e: '👴', svc: 'Hot-towel shave', cat: 'shaves', r: 5, d: 'March 2026', t: 'Twenty years of coming here and Dom still asks about my knee. The towel alone is worth the ticket.' },
+    { n: 'Andre W.', a: 'avatar-man', e: '👨', svc: 'Skin fade', cat: 'cuts', r: 5, d: 'April 2026', t: 'Brought Marcus a blurry photo and left with exactly the fade I meant. Out the door in 35 minutes on a Saturday.' },
+    { n: 'Linda K.', a: 'avatar-woman-bun', e: '👩', svc: 'Kids\u2019 cut', cat: 'kids', r: 5, d: 'May 2026', t: 'My son used to scream at barbers. Ines gave him a lollipop and a booster seat and he asked when he can come back.' },
+    { n: 'Tom\u00E1s R.', a: 'avatar-man-beard', e: '🧔', svc: 'Beard sculpt', cat: 'beards', r: 4, d: 'May 2026', t: 'Sharp line-up and the beard oil smells like a cedar chest. Only wish: the wait on Saturday afternoon. Book ahead.' },
+    { n: 'Harold B.', a: 'avatar-older-man', e: '👴', svc: 'Seniors\u2019 cut', cat: 'cuts', r: 5, d: 'June 2026', t: 'Tuesday senior price, coffee in a real mug and the ball game on the radio. Reminds me of my father\u2019s shop.' },
+    { n: 'Priya N.', a: 'avatar-woman-curly', e: '👩', svc: 'Cut and beard trim', cat: 'beards', r: 5, d: 'July 2026', t: 'Booked online at nine at night for the next morning. The reminder text was right to the minute.' },
+    { n: 'Jon M.', a: 'avatar-man-cap', e: '🧢', svc: 'Classic cut', cat: 'cuts', r: 4, d: 'August 2026', t: 'Honest, tidy and quick. The cash tip jar situation is a bit old school but I got used to it.' },
+    { n: 'Gus D.', a: 'avatar-man-bald', e: '👨‍🦲', svc: 'The Full Tony', cat: 'shaves', r: 5, d: 'September 2026', t: 'Bought my brother the Full Tony before his wedding. He said it was the best seventy minutes of the whole week.' }
+  ]
+  var RCATS = [['all', 'All reviews'], ['cuts', 'Cuts'], ['shaves', 'Shaves'], ['beards', 'Beards'], ['kids', 'Kids']], rFilter = 'all'
+  function renderReviews() {
+    var list = REVIEWS.filter(function (r) { return rFilter === 'all' || r.cat === rFilter })
+    $('#rev-chips').innerHTML = RCATS.map(function (c) {
+      var n = c[0] === 'all' ? REVIEWS.length : REVIEWS.filter(function (r) { return r.cat === c[0] }).length
+      return '<button type="button" class="chip" data-r="' + c[0] + '" aria-pressed="' + (rFilter === c[0]) + '">' + c[1] + ' <span class="n">' + n + '</span></button>'
+    }).join('')
+    $('#rev-grid').innerHTML = list.length ? list.map(function (r) {
+      return '<article class="rev"><div class="rev-h"><span class="plate plate--sm">' + ico(r.a, 32, r.e) + '</span><div><b>' + esc(r.n) + '</b><small>' + esc(r.d) + '</small></div></div>' +
+        '<div class="rev-st" role="img" aria-label="' + r.r + ' out of 5 stars">' + stars(r.r, 18) + '<span class="t">' + r.r + '.0</span></div><p>' + esc(r.t) + '</p>' +
+        '<span class="rev-svc">' + ico('scissors', 16, '✂️') + ' ' + esc(r.svc) + '</span><div class="rev-ver">' + ico('badge-check', 18, '✅') + ' Verified visit</div></article>'
+    }).join('') : '<p>No reviews in this group yet. Be the first.</p>'
+  }
+  $('#rev-chips').addEventListener('click', function (e) { var b = e.target.closest('[data-r]'); if (b) { rFilter = b.dataset.r; renderReviews() } })
+  $('#rev-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var nm = $('#r-name').value.trim(), tx = $('#r-text').value.trim()
+    $('#rf-name').classList.toggle('has-err', nm.length < 2); $('#rf-text').classList.toggle('has-err', tx.length < 10)
+    if (nm.length < 2 || tx.length < 10) return
+    var sv = $('#r-svc'), cat = sv.value
+    REVIEWS.unshift({ n: nm, a: 'avatar-person', e: '🙂', svc: sv.options[sv.selectedIndex].text.replace(/^A /, '').replace(/^a /, ''), cat: cat, r: +$('#r-rate').value, d: 'Just now', t: tx })
+    rFilter = 'all'; renderReviews(); e.target.reset(); $('#write').open = false
+    toast('Thanks, ' + nm.split(/\s+/)[0] + '. Your review is up.'); $('#rev-grid').scrollIntoView({ block: 'center' })
+  })
+  renderReviews()
+
+  /* ---------- small page behaviour ---------- */
+  var nav = $('#nav'), mt = $('#menu-toggle')
+  mt.addEventListener('click', function () { var o = nav.classList.toggle('is-open'); mt.setAttribute('aria-expanded', o) })
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) { nav.classList.remove('is-open'); mt.setAttribute('aria-expanded', 'false') } })
+  $('#copy-addr').addEventListener('click', function () {
+    var a = '214 Alder Street, Brookhaven'
+    var ok = function () { toast('Address copied. See you soon.') }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(a).then(ok, ok)
+    else { var t = document.createElement('textarea'); t.value = a; document.body.appendChild(t); t.select(); try { document.execCommand('copy') } catch (x) {} t.remove(); ok() }
+  })
+  window.__tonys = Object.assign(window.__tonys || {}, { B: B, buildICS: buildICS, cart: function () { return cart }, nextFree: nextFree })
+})()
+</script>
+</body>
+</html>

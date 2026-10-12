@@ -1,0 +1,1841 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great Cookie Swap (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: Nell & Abe invite you to The Great Cookie Swap: Saturday 12 December 2026, 4 to 8 pm. Bake three and a half dozen of one kind, leave with three dozen of twelve. Ugly sweaters strongly encouraged. A fictional demo page made with with icons.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#1d4d3b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..900,0..100;1,9..144,400..900,0..100&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ───────────── tokens ───────────── */
+:root{
+  --cran:#a8222f; --cran-d:#7c1520; --cran-l:#c93a49;
+  --pine:#1d4d3b; --pine-d:#123326; --pine-l:#2f6b52;
+  --cream:#fbf2dd; --paper:#fffaf0; --paper-2:#f4e8cb; --kraft:#d9b98a; --kraft-d:#b8935f;
+  --gold:#b8862a; --gold-l:#f1c75b; --mint:#c6e6d6; --steel:#aab1b7;
+  --cocoa:#3a211a; --cocoa-2:#5e4034; --choc:#2b1a15; --ink-blue:#2b4f81; --muted:#6a5347;
+  --rule:rgba(88,134,184,.26); --margin:#e0777f; --line:rgba(58,33,26,.16);
+  --f-body:"Fraunces",Georgia,"Times New Roman",serif; --f-hand:"Caveat","Segoe Script","Bradley Hand",cursive;
+  --focus:var(--cran); --wrap:1180px;
+  --card-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 2px 3px rgba(58,33,26,.12),0 18px 34px -16px rgba(58,33,26,.45);
+  --bunting:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='36' viewBox='0 0 120 36'%3E%3Cpath d='M0 3Q15 9 30 3Q45 9 60 3Q75 9 90 3Q105 9 120 3' fill='none' stroke='%23123326' stroke-width='1.6'/%3E%3Cpath d='M4 6.5Q15 11 26 6.5L15 32Z' fill='%23a8222f'/%3E%3Cpath d='M34 6.5Q45 11 56 6.5L45 32Z' fill='%231d4d3b'/%3E%3Cpath d='M64 6.5Q75 11 86 6.5L75 32Z' fill='%23f1c75b'/%3E%3Cpath d='M94 6.5Q105 11 116 6.5L105 32Z' fill='%23fbf2dd' stroke='%23a8222f' stroke-width='1.4'/%3E%3C/svg%3E");
+  --bulbs-a:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='44' viewBox='0 0 96 44'%3E%3Cpath d='M0 4Q12 11 24 4Q36 11 48 4Q60 11 72 4Q84 11 96 4' fill='none' stroke='%230b2219' stroke-width='1.6'/%3E%3Cg%3E%3Crect x='9' y='8' width='6' height='5' rx='1' fill='%230b2219'/%3E%3Cpath d='M12 12c-5 0-6 8-3 13s4 5 3 5-1 0 3-5 2-13-3-13z' fill='%23e8283b'/%3E%3Crect x='57' y='8' width='6' height='5' rx='1' fill='%230b2219'/%3E%3Cpath d='M60 12c-5 0-6 8-3 13s4 5 3 5-1 0 3-5 2-13-3-13z' fill='%23f1c75b'/%3E%3C/g%3E%3C/svg%3E");
+  --bulbs-b:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='44' viewBox='0 0 96 44'%3E%3Cg%3E%3Crect x='33' y='8' width='6' height='5' rx='1' fill='%230b2219'/%3E%3Cpath d='M36 12c-5 0-6 8-3 13s4 5 3 5-1 0 3-5 2-13-3-13z' fill='%2347b884'/%3E%3Crect x='81' y='8' width='6' height='5' rx='1' fill='%230b2219'/%3E%3Cpath d='M84 12c-5 0-6 8-3 13s4 5 3 5-1 0 3-5 2-13-3-13z' fill='%23fbf2dd'/%3E%3C/g%3E%3C/svg%3E");
+  /* with icons: tune the default style (christmas) and the recommended ones to the page's cranberry, pine, cream and gold */
+  --with-christmas-c1:#b3202f; --with-christmas-c2:#1f5b43; --with-christmas-c3:#d9a441; --with-christmas-c4:#fbf1dc;
+  --with-christmas-accent:#f2c14e; --with-christmas-edge:#e9a73c; --with-christmas-ink:#3a1a14; --with-christmas-shadow:#4a1018; --with-christmas-tint:#cfe6da;
+  --with-plush-c1:#c0392f; --with-plush-c2:#e9b949; --with-plush-c3:#4f9a78; --with-plush-c4:#7fb6a0; --with-plush-accent:#e8838f; --with-plush-ink:#4a2a24; --with-plush-tint:#fbf1dc;
+  --with-sticker-bubblegum:#ef8a96; --with-sticker-grape:#b3202f; --with-sticker-lemon:#f2c14e; --with-sticker-mint:#7fc3a0; --with-sticker-peach:#e8986a; --with-sticker-sky:#4f9a86; --with-sticker-c1:#8a5a36; --with-sticker-c4:#1f5b43; --with-sticker-accent:#f2c14e;
+  --with-retro-1:#e9b13c; --with-retro-2:#c8612a; --with-retro-3:#b3202f; --with-retro-4:#1f5b43; --with-retro-cream:#fbf1dc; --with-retro-letter:#3a1a14; --with-retro-shadow:#6b2a22; --with-retro-tint:#fbf1dc;
+  --with-clay-c1:#c0392f; --with-clay-c2:#e9b949; --with-clay-c3:#2f7d5c; --with-clay-c4:#7fb6a0; --with-clay-accent:#e8838f; --with-clay-ink:#4a2a24; --with-clay-tint:#fbf1dc;
+}
+/* ───────────── base ───────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font:400 1.0625rem/1.6 var(--f-body);font-variation-settings:"SOFT" 40;color:var(--cocoa);background:var(--cream);overflow-x:hidden;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--cran);text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{color:var(--cran-d)}
+h1,h2,h3,h4{margin:0;font-weight:800;font-variation-settings:"SOFT" 100;line-height:1.08;letter-spacing:-.012em}
+p{margin:0 0 1em}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+[data-ico],[data-live]{color:var(--pine)}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--cran);color:#fff;padding:.7rem 1rem;border-radius:10px;transition:top .2s}
+.skip:focus{top:12px}
+.wrap{width:min(100% - 32px,var(--wrap));margin-inline:auto}
+.hand{font-family:var(--f-hand);font-weight:700;font-variation-settings:normal;letter-spacing:0;color:var(--ink-blue);line-height:1.15}
+.small{font-size:.9rem;color:var(--muted)}
+.eyebrow{margin:0 0 .5rem;font-size:.8rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--cran);display:flex;align-items:center;gap:.5rem}
+.sec{position:relative;padding:72px 0}
+.sec-head{max-width:46rem;margin-bottom:34px}
+.sec-head h2{font-size:clamp(2rem,5.4vw,3.4rem)}
+.sec-head .lede{margin:.9rem 0 0;font-size:1.15rem;color:var(--cocoa-2)}
+.dark{color:var(--cream)}
+.dark .eyebrow{color:var(--gold-l)} .dark .lede{color:#ecdfc3} .dark [data-ico],.dark [data-live]{color:var(--cream)} .dark{--focus:var(--gold-l)}
+.dark a:not(.btn){color:var(--gold-l)}
+.dark .paper{--focus:var(--cran);color:var(--cocoa)}
+.dark .paper .eyebrow{color:var(--cran)}
+.dark .paper [data-ico],.dark .paper [data-live]{color:var(--pine)}
+.dark .paper .btn [data-ico]{color:currentColor}
+.dark .paper .btn-line{color:var(--pine);box-shadow:inset 0 0 0 2px var(--pine)}
+.dark .paper .btn-line:hover{background:rgba(29,77,59,.08);color:var(--pine-d)}
+.dark .paper a:not(.btn){color:var(--cran)}
+.paper{background-color:var(--paper);border-radius:6px;box-shadow:var(--card-shadow);position:relative}
+.lined{background:var(--paper);border-top:6px solid var(--cran)}
+.ruled{--mx:30px;background-color:var(--paper);background-image:linear-gradient(90deg,transparent calc(var(--mx) - 1px),var(--margin) calc(var(--mx) - 1px),var(--margin) calc(var(--mx) + 1px),transparent calc(var(--mx) + 1px)),repeating-linear-gradient(180deg,transparent 0 31px,var(--rule) 31px 32px);background-position:0 0,0 14px}
+.tape{position:absolute;z-index:3;width:104px;height:28px;background:repeating-linear-gradient(45deg,rgba(198,230,214,.9) 0 8px,rgba(255,250,240,.82) 8px 16px);box-shadow:0 1px 2px rgba(0,0,0,.18);pointer-events:none}
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.7rem 1.4rem;border:0;border-radius:999px;font:700 1rem/1.1 var(--f-body);font-variation-settings:"SOFT" 100;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.btn::after{content:"";position:absolute;inset:4px;border:1.5px dashed currentColor;border-radius:999px;opacity:.4;pointer-events:none}
+.btn [data-ico]{color:currentColor}
+.btn-primary{background:var(--cran);color:#fff8ec;box-shadow:0 3px 0 var(--cran-d)}
+.btn-primary:hover{color:#fff;background:var(--cran-l);transform:translateY(-1px);box-shadow:0 4px 0 var(--cran-d)}
+.btn-gold{background:var(--gold-l);color:var(--pine-d);box-shadow:0 3px 0 #9a7220}
+.btn-gold:hover{color:var(--pine-d);transform:translateY(-1px);box-shadow:0 4px 0 #9a7220}
+.btn-line{background:transparent;color:var(--pine);box-shadow:inset 0 0 0 2px var(--pine)}
+.btn-line:hover{background:rgba(29,77,59,.08);color:var(--pine-d)}
+.dark .btn-line{color:var(--cream);box-shadow:inset 0 0 0 2px rgba(251,242,221,.7)} .dark .btn-line:hover{background:rgba(251,242,221,.12);color:#fff}
+.btn:active{transform:translateY(2px)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn-sm{min-height:44px;padding:.55rem 1rem;font-size:.95rem}
+/* snow */
+.snow{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden;opacity:.9}
+.snow i{position:absolute;left:0;top:-240px;width:100%;height:calc(100% + 240px);background-repeat:repeat;animation:fall linear infinite;will-change:transform}
+.snow i:nth-child(1){background-image:radial-gradient(circle at 30px 40px,#fff 0 2.4px,rgba(130,160,195,.28) 3.2px,transparent 4px),radial-gradient(circle at 150px 130px,#fff 0 2px,rgba(130,160,195,.28) 2.8px,transparent 3.6px),radial-gradient(circle at 90px 210px,#fff 0 2.8px,rgba(130,160,195,.28) 3.6px,transparent 4.4px);background-size:240px 240px;animation-duration:15s}
+.snow i:nth-child(2){background-image:radial-gradient(circle at 60px 90px,#fff 0 2.8px,rgba(130,160,195,.22) 3.6px,transparent 4.4px),radial-gradient(circle at 200px 30px,#fff 0 2.4px,rgba(130,160,195,.22) 3.2px,transparent 4px);background-size:320px 320px;animation-duration:22s;opacity:.75}
+.snow i:nth-child(3){background-image:radial-gradient(circle at 120px 60px,#fff 0 1.6px,rgba(130,160,195,.28) 2.4px,transparent 3px),radial-gradient(circle at 20px 160px,#fff 0 1.4px,rgba(130,160,195,.28) 2px,transparent 2.8px);background-size:180px 180px;animation-duration:11s;opacity:.8}
+.snow i:nth-child(1){--h:240px}.snow i:nth-child(2){--h:320px}.snow i:nth-child(3){--h:180px}
+@keyframes fall{from{transform:translateY(0)}to{transform:translateY(var(--h))}}
+html.no-snow .snow{display:none}
+/* announcement + header */
+.announce{background:var(--pine-d);color:var(--cream);font-size:.92rem;text-align:center;padding:.55rem 16px}
+.announce a{color:var(--gold-l);font-weight:700;display:inline-flex;align-items:center;gap:.45rem;min-height:32px}
+.announce [data-ico]{color:var(--gold-l)}
+@media(max-width:560px){.ann-rsvp{display:none}}
+.site-head{position:sticky;top:0;z-index:60;background:var(--paper);box-shadow:0 2px 0 rgba(58,33,26,.08)}
+.site-head::after{content:"";position:absolute;left:0;right:0;top:100%;height:7px;background:repeating-linear-gradient(-45deg,var(--cran) 0 11px,var(--paper) 11px 22px);border-bottom:1px solid rgba(58,33,26,.1)}
+.head-in{display:flex;align-items:center;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--cocoa);min-height:44px;margin-right:auto}
+.brand [data-ico]{color:var(--cran)}
+.brand b{display:block;white-space:nowrap;font-size:1.12rem;font-weight:800;font-variation-settings:"SOFT" 100;line-height:1}
+.brand small{display:block;white-space:nowrap;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav{display:none}
+.nav a{white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 .7rem;text-decoration:none;color:var(--cocoa);font-weight:600;font-size:.95rem;border-radius:999px}
+.nav a:hover{background:rgba(168,34,47,.08);color:var(--cran-d)}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--pine);cursor:pointer}
+.icon-btn:hover{background:rgba(29,77,59,.1)}
+.icon-btn[aria-pressed="false"]{opacity:.5}
+.head-cta{display:none;white-space:nowrap}
+.m-nav{position:absolute;left:0;right:0;top:100%;margin-top:7px;background:var(--paper);padding:10px 16px 18px;box-shadow:0 18px 30px -12px rgba(58,33,26,.4)}
+.m-nav[hidden]{display:none}
+.m-nav a{display:flex;align-items:center;gap:.7rem;min-height:48px;padding:0 6px;color:var(--cocoa);text-decoration:none;font-weight:600;border-bottom:1px dashed var(--line)}
+.m-nav a:last-child{border:0}
+@media(min-width:1080px){.nav{display:flex;gap:2px}.head-cta{display:inline-flex}.m-toggle{display:none}.m-nav{display:none!important}}
+/* hero */
+.hero{position:relative;z-index:2;background:radial-gradient(900px 420px at 18% 0%,rgba(255,255,255,.1),transparent 62%),radial-gradient(circle at 12px 12px,rgba(251,242,221,.13) 2px,transparent 3px) 0 0/48px 48px,radial-gradient(circle at 36px 36px,rgba(251,242,221,.08) 3px,transparent 4px) 0 0/48px 48px,var(--pine);color:var(--cream);padding:74px 0 96px;isolation:isolate}
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:44px;background:var(--bulbs-a) repeat-x 0 0/96px 44px;z-index:1;pointer-events:none}
+.hero .lights-b{position:absolute;left:0;right:0;top:0;height:44px;background:var(--bulbs-b) repeat-x 0 0/96px 44px;z-index:1;pointer-events:none;animation:twinkle 3.2s steps(1) infinite}
+.hero::before{animation:twinkle 3.2s steps(1) infinite reverse}
+@keyframes twinkle{0%,49%{opacity:1}50%,100%{opacity:.4}}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-24px;height:36px;background:var(--bunting) repeat-x 0 0/120px 36px;z-index:2;pointer-events:none}
+.hero-grid{display:grid;gap:44px;align-items:start}
+.recipe-card{--mx:30px;position:relative;padding:20px 20px 28px 52px;color:var(--cocoa);border-radius:8px;box-shadow:var(--card-shadow),0 0 0 1px rgba(58,33,26,.08)}
+.rc-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 14px;margin:0 -20px 14px -52px;padding:10px 20px 8px 52px;border-bottom:3px solid var(--cran);background:var(--paper);border-radius:8px 8px 0 0}
+.rc-no{font-size:.74rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:var(--cran)}
+.rc-top .hand{font-size:1.3rem}
+.invited{font-size:1.65rem;margin:6px 0 0}
+.h1{font-size:clamp(2.6rem,12vw,6.4rem);line-height:.92;letter-spacing:-.025em;color:var(--cran);text-shadow:3px 3px 0 var(--gold-l),6px 6px 0 rgba(29,77,59,.16)}
+.h1 small{display:block;font-size:.34em;letter-spacing:.02em;margin-bottom:.14em;color:var(--pine);text-shadow:none}
+.h1 em{font-style:italic;font-weight:900}
+.lede-hand{font-size:clamp(1.5rem,4.4vw,2rem);margin:16px 0 18px;max-width:30rem}
+.facts{display:grid;gap:12px 22px;margin:0 0 22px;padding:0;list-style:none}
+.fact{display:flex;gap:14px;align-items:center;min-height:64px}
+.fact>div{min-width:0}
+.fact .fl{display:block;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--cran);line-height:1.2}
+.fact .fv{display:block;margin:2px 0 0;font-weight:600;line-height:1.3}
+.fact .fi{width:64px;display:flex;justify-content:center;font-size:2.3rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 24px}
+.oven{display:flex;align-items:center;gap:16px;padding:14px 16px;border:2px dashed var(--cran);border-radius:16px;background:rgba(255,255,255,.55)}
+.oven .fi{width:72px;display:flex;justify-content:center;font-size:2.3rem}
+.oven p{margin:0}
+.oven .oven-label{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--cran)}
+.oven .cd{font-size:1.35rem;font-weight:800;font-variation-settings:"SOFT" 100;line-height:1.15;color:var(--pine-d)}
+.oven .small{color:var(--cocoa-2)}
+.hero-photo{position:relative;margin:0;justify-self:center;width:min(100%,430px);background:var(--paper);padding:12px 12px 56px;box-shadow:var(--card-shadow),0 0 0 1px rgba(58,33,26,.08);border-radius:4px;transform:rotate(1.6deg)}
+.hero-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:46% 70%;border-radius:2px;background:#26323a}
+.hero-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;color:var(--cocoa)}
+.hero-photo figcaption .hand{font-size:1.4rem}
+.photo-credit{font-size:.7rem;color:var(--muted);text-align:right;line-height:1.25}
+.photo-credit a{color:var(--muted)}
+.hero-photo .tape{top:-14px;left:50%;margin-left:-52px;transform:rotate(-4deg)}
+.hero-deco{position:absolute;pointer-events:none;background:var(--paper);border-radius:50%;padding:6px;box-shadow:0 4px 10px rgba(0,0,0,.3),0 0 0 2px rgba(255,255,255,.7) inset;display:flex}
+.hero-deco.d1{right:-14px;top:-34px;transform:rotate(8deg)}
+.hero-deco.d2{left:-6px;top:34%;transform:rotate(-10deg)}
+.hero-deco.d1{right:-6px}
+@media(min-width:640px){.hero-deco.d1{right:-14px}.hero-deco.d2{left:-24px}}
+@media(min-width:640px){.facts{grid-template-columns:1fr 1fr}.recipe-card{padding:22px 32px 32px 84px;--mx:60px}.rc-top{margin:0 -32px 14px -84px;padding:12px 32px 8px 84px}}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.32fr) minmax(0,.86fr);gap:56px;align-items:center}.recipe-card{transform:rotate(-.7deg)}.hero{padding:84px 0 110px}}
+/* ───────────── dividers + shared bits ───────────── */
+.orn{display:flex;align-items:center;gap:14px;margin:0 auto 26px;max-width:22rem;color:var(--cran)}
+.orn::before,.orn::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,currentColor 0 6px,transparent 6px 12px);opacity:.55}
+.dark .orn{color:var(--gold-l)}
+.scallop{--prev:var(--cream)}
+.scallop::before{content:"";position:absolute;left:0;right:0;top:-1px;height:18px;background:radial-gradient(circle at 18px 0,var(--prev) 0 16px,transparent 17px) repeat-x 0 0/36px 18px;z-index:1;pointer-events:none}
+.i-md{font-size:1.4rem}.i-lg{font-size:2rem}.i-xl{font-size:2.8rem}
+.tag{display:inline-flex;align-items:center;gap:.3rem;padding:2px 9px 2px 6px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.5;border:1.5px solid currentColor}
+.tag [data-ico]{color:currentColor}
+.tag.nuts{color:#9a1c28;background:#fde8e6}.tag.gf{color:#7a5a12;background:#fbefc9}.tag.vg{color:#1d5a3f;background:#dff0e6}
+/* ───────────── method ───────────── */
+.method{background-color:var(--cream);background-image:repeating-linear-gradient(0deg,rgba(168,34,47,.05) 0 22px,transparent 22px 44px),repeating-linear-gradient(90deg,rgba(168,34,47,.05) 0 22px,transparent 22px 44px);padding-top:104px}
+.steps{display:grid;gap:26px;margin:0 0 56px}
+.step{position:relative;display:flex;flex-direction:column;padding:20px 20px 24px;background-color:var(--paper);background-image:repeating-linear-gradient(180deg,transparent 0 31px,var(--rule) 31px 32px);background-position:0 40px;border-radius:6px;box-shadow:var(--card-shadow);border-top:7px solid var(--cran)}
+.step:nth-child(2){border-top-color:var(--pine)}.step:nth-child(3){border-top-color:var(--gold-l)}
+.step-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.step-top .fi{font-size:2.2rem;width:64px;height:64px;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:1.5rem;margin-bottom:8px}
+.step p{margin:0 0 12px;color:var(--cocoa-2)}
+.step .hand{font-size:1.35rem;margin:auto 0 0;padding-top:4px}
+.step-arrow{display:none}
+.kitchen{position:relative;margin:0}
+.kitchen img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 50%;border-radius:10px;box-shadow:var(--card-shadow);background:#c9a77a}
+.math{position:relative;margin:-34px 12px 0;padding:18px 18px 18px 22px;border-radius:6px}
+.math h3{font-size:1.2rem;margin-bottom:8px}
+.math ul li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line);font-size:.98rem}
+.math ul li:last-child{border:0}
+.math ul li .fi{width:28px;flex:none;display:flex;justify-content:center;margin-top:2px}
+/* ───────────── plan ───────────── */
+.plan{background:var(--cream)}
+.plan-grid{display:grid;gap:34px}
+.schedule{padding:14px 18px 8px;align-self:start}
+.sched-row{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line)}
+.sched-row:last-child{border:0}
+.sched-row .clk{display:flex;justify-content:center;font-size:2rem}
+.sched-row .t{display:block;font-size:.76rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--cran)}
+.sched-row h3{font-size:1.25rem}
+.sched-row p{margin:3px 0 0;color:var(--cocoa-2);font-size:.98rem}
+.sched-row.hot{background:linear-gradient(90deg,rgba(241,199,91,.3),rgba(241,199,91,0));margin:0 -18px;padding-inline:18px;border-left:5px solid var(--cran)}
+.side-photo{align-self:start;position:relative;margin:0 auto;width:min(100%,380px);background:var(--paper);padding:12px 12px 52px;box-shadow:var(--card-shadow);border-radius:4px;transform:rotate(-1.6deg)}
+.side-photo img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:55% 60%;border-radius:2px}
+.side-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;font-size:1.35rem}
+.side-photo .tape{top:-13px;left:18px;transform:rotate(-8deg)}
+.goodies{display:grid;gap:14px;margin-top:34px}
+.good{display:flex;gap:14px;align-items:flex-start;padding:16px 16px 14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 16px -12px rgba(58,33,26,.5)}
+.good .fi{flex:none;width:48px;display:flex;justify-content:center;font-size:1.9rem;margin-top:2px}
+.good h3{font-size:1.1rem;margin-bottom:3px}
+.good p{margin:0;font-size:.97rem;color:var(--cocoa-2)}
+/* quotes */
+.quotes{margin-top:60px}
+.q-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.q-head h3{font-size:clamp(1.4rem,3.4vw,1.9rem)}
+.q-grid{display:grid;gap:18px}
+.q{position:relative;margin:0;padding:20px 20px 16px;background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--pine);border-radius:6px;box-shadow:var(--card-shadow)}
+.q:nth-child(2){border-top-color:var(--cran)}.q:nth-child(3){border-top-color:var(--gold-l)}
+.q p{margin:0 0 10px;font-style:italic;color:var(--cocoa-2)}
+.q cite{font:700 1.5rem/1 var(--f-hand);color:var(--ink-blue)}
+/* ───────────── tin / sign-up sheet ───────────── */
+.tinsec{--prev:var(--cream);background:radial-gradient(circle at 12px 12px,rgba(251,242,221,.09) 2px,transparent 3px) 0 0/40px 40px,var(--pine-d);padding-top:92px}
+.tin-tools{display:grid;gap:18px;margin-bottom:26px}
+.field-dark label{display:block;font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);margin-bottom:6px}
+.inp{width:100%;min-height:48px;padding:.65rem .85rem;font:500 1.02rem/1.3 var(--f-body);color:var(--cocoa);background:#fffdf6;border:0;border-bottom:2.5px solid var(--ink-blue);border-radius:10px 10px 0 0}
+.inp:focus{outline:3px solid var(--focus);outline-offset:2px;background:#fff}
+.inp::placeholder{color:#7b6a60}
+.inp[aria-invalid="true"]{border-bottom-color:var(--cran);background:#fff0ee}
+textarea.inp{min-height:96px;resize:vertical;font-family:var(--f-body)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 1rem;border-radius:999px;border:2px solid rgba(251,242,221,.5);background:transparent;color:var(--cream);font:700 .92rem/1 var(--f-body);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
+.chip:hover{background:rgba(251,242,221,.12)}
+.chip[aria-pressed="true"]{background:var(--gold-l);border-color:var(--gold-l);color:var(--pine-d)}
+.chip [data-ico]{color:currentColor}
+.tin-status{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font-weight:700}
+.meter{flex:1 1 180px;max-width:320px;height:12px;border-radius:99px;background:rgba(251,242,221,.2);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--gold-l) 0 8px,#e0ac38 8px 16px);border-radius:99px;transition:width .4s}
+.tin{position:relative;margin-top:8px;padding:12px;border-radius:26px;border:5px solid #8d949a;background:linear-gradient(135deg,#e8ebed,#b9bfc4 38%,#e1e5e8 62%,#a7adb2);box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),inset 0 -10px 24px rgba(0,0,0,.16),0 26px 50px -14px rgba(0,0,0,.65)}
+.tin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cup{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:236px;padding:14px 10px 12px;border:0;border-radius:28px;background:radial-gradient(120% 90% at 50% 0%,#fffdf6 0%,#f7ecd2 100%);box-shadow:inset 0 4px 9px rgba(58,33,26,.22),0 0 0 4px #d9dde0,0 0 0 6px #868e94,0 7px 0 6px rgba(0,0,0,.2);color:var(--cocoa);font:inherit;text-align:center;cursor:pointer;transition:transform .18s,box-shadow .18s,opacity .25s}
+.cup:hover:not([disabled]){transform:translateY(-3px)}
+.cup[disabled]{cursor:default;color:var(--cocoa)}
+.cup[data-state="taken"]{background:radial-gradient(120% 90% at 50% 0%,#f2e4c0,#e3cd9c)}
+.cup[data-state="mine"]{background:radial-gradient(120% 90% at 50% 0%,#fff8dd,#ffe59a);box-shadow:inset 0 4px 9px rgba(58,33,26,.18),0 0 0 4px var(--cran),0 0 0 8px var(--gold-l),0 7px 0 8px rgba(0,0,0,.2)}
+.cup[data-dim]{opacity:.26;filter:saturate(.3)}
+.cup:focus-visible{outline:4px solid var(--cran);outline-offset:6px}
+.cup-tags{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;min-height:24px}
+.cup [data-ico],.cup [data-live]{color:var(--cran-d)}
+.cup .av [data-live]{color:var(--pine)}
+.cup .fi{display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:2px 0}
+.cup .cn{font-weight:800;font-variation-settings:"SOFT" 100;font-size:1.04rem;line-height:1.15}
+.cup .cb{font-size:.82rem;line-height:1.3;color:#59423a}
+.cup .go[hidden],.cup .nm[hidden]{display:none}
+.cup .gx{display:none}
+.cup .go .ic-ok{display:none}.cup[data-state="mine"] .go .ic-ok{display:inline-flex}.cup[data-state="mine"] .go .ic-plus{display:none}
+.cup .go [data-ico]{color:currentColor}
+.cup .who{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:52px;justify-content:flex-end}
+.cup .who .hand{font-size:1.25rem}
+.cup .go{display:inline-flex;align-items:center;gap:.35rem;padding:.38rem .85rem .38rem .6rem;border-radius:999px;background:#fffaf0;color:var(--cran-d);border:2px solid var(--cran);font-weight:800;font-size:.85rem}
+.cup:hover:not([disabled]) .go{background:var(--cran);color:#fff8ec}
+.cup[data-state="mine"] .go{background:var(--mint);color:var(--pine-d);border-color:var(--pine)}
+.cup .av{display:flex;font-size:1.1rem}
+.cup .av[hidden]{display:none}
+.legend{display:grid;gap:10px;margin-top:26px;font-size:.96rem}
+.legend p{margin:0;display:flex;gap:10px;align-items:flex-start}
+.legend .tag{flex:none;margin-top:2px}
+.tin-note{margin-top:14px;min-height:1.6em;font-weight:600;color:var(--gold-l)}
+/* ───────────── pack ───────────── */
+.pack{background:var(--cream)}
+.pack-grid{display:grid;gap:34px;align-items:start}
+.tins-photo{align-self:start;position:relative;margin:0 auto;width:min(100%,400px);background:var(--paper);padding:12px 12px 56px;box-shadow:var(--card-shadow);border-radius:4px;transform:rotate(-1.4deg)}
+.tins-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:40% 65%;border-radius:2px}
+.tins-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;font-size:1.35rem}
+.tins-photo .tape{top:-13px;right:26px;transform:rotate(7deg)}
+.checklist{padding:20px 18px 18px}
+.pack-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.pack-head .fi{width:76px;display:flex;justify-content:center;font-size:2rem}
+.pack-head h3{font-size:1.5rem}
+.pack-head p{margin:2px 0 0;font-size:.95rem;color:var(--cocoa-2)}
+.check-row{display:flex;gap:12px;align-items:flex-start;min-height:56px;padding:11px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.check-row input{flex:none;width:26px;height:26px;margin:2px 0 0;accent-color:var(--cran)}
+.check-row .fi{flex:none;width:34px;display:flex;justify-content:center;margin-top:0}
+.check-row .ct{flex:1;min-width:0}
+.check-row .ct b{display:block;font-weight:800}
+.check-row .ct span{font-size:.93rem;color:var(--cocoa-2)}
+.check-row input:checked ~ .ct{opacity:.62}
+.check-row input:checked ~ .ct b{text-decoration:line-through;text-decoration-color:var(--cran);text-decoration-thickness:2px}
+.pack-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:14px}
+.pack-msg{margin:0;font-size:1.5rem}
+/* ───────────── ballot ───────────── */
+.ballot-sec{--prev:var(--cream);background:radial-gradient(circle at 20px 20px,rgba(251,242,221,.1) 3px,transparent 4px) 0 0/40px 40px,var(--cran-d);padding-top:96px}
+.ballot-grid{display:grid;gap:34px;align-items:start}
+.sweater-photo{position:relative;margin:0 0 4px;background:var(--paper);padding:12px 12px 52px;box-shadow:var(--card-shadow);border-radius:4px;transform:rotate(-1.2deg)}
+.sweater-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 45%;border-radius:2px}
+.sweater-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;font-size:1.35rem}
+.sweater-photo .tape{top:-13px;left:50%;margin-left:-52px;transform:rotate(3deg)}
+.ballot{padding:20px 8px 22px;color:var(--cocoa)}
+.ballot-title{text-align:center;border-bottom:4px double var(--cocoa);padding-bottom:12px;margin-bottom:6px}
+.ballot-title .eyebrow{justify-content:center;margin:0}
+.ballot-title h3{font-size:1.5rem}
+.matrix{width:100%;border-collapse:collapse}
+.matrix th{padding:8px 0;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cran);text-align:center;vertical-align:bottom;line-height:1.2}
+.matrix th:first-child,.matrix td:first-child{text-align:left;padding-right:6px}
+.matrix td{padding:6px 0;border-top:1px dashed var(--line);text-align:center;vertical-align:middle}
+.entry{display:flex;align-items:center;gap:10px;min-width:0}
+.entry .tk{width:46px;flex:none;display:flex;justify-content:center;font-size:1.3rem}
+.entry b{display:block;font-size:.98rem;line-height:1.15}
+.entry .who{display:block;font-size:.8rem;color:var(--muted);line-height:1.25}
+.entry .blurb{display:none}
+.bub{display:inline-grid;place-content:center;width:44px;height:44px;cursor:pointer}
+.bub input{appearance:none;-webkit-appearance:none;margin:0;width:26px;height:26px;border:2.5px solid var(--cocoa);border-radius:50%;background:#fff;display:grid;place-content:center;cursor:pointer}
+.bub input::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--cran);transform:scale(0);transition:transform .14s}
+.bub input:checked::after{transform:scale(1)}
+.bub input:focus-visible{outline:3px solid var(--cran);outline-offset:3px}
+.ballot-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:16px}
+.ballot-msg{margin:0;font-weight:700;color:var(--cran);min-height:1.5em;flex:1 1 220px}
+.results[hidden]{display:none}
+.res-cat{margin:0 0 18px}
+.res-cat h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cran);margin-bottom:8px}
+.res-row{display:grid;grid-template-columns:minmax(0,9.5rem) 1fr 2.6rem;align-items:center;gap:8px;margin:5px 0;font-size:.94rem}
+.res-row .bar{height:16px;border-radius:99px;background:rgba(58,33,26,.1);overflow:hidden}
+.res-row .bar i{display:block;height:100%;border-radius:99px;background:repeating-linear-gradient(-45deg,var(--cran) 0 8px,var(--cran-l) 8px 16px);width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.res-row.mine .bar i{background:repeating-linear-gradient(-45deg,var(--pine) 0 8px,var(--pine-l) 8px 16px)}
+.res-row.lead b{color:var(--cran)}
+.res-row span.n{text-align:right;font-weight:800}
+/* ───────────── cocoa ───────────── */
+.cocoa{--prev:var(--cran-d);background:linear-gradient(180deg,#2b1a15,#3a241c);padding-top:96px}
+.cocoa-grid{display:grid;gap:34px;align-items:start}
+.cocoa-side{display:contents}
+.cocoa-photo{order:1}.menu-board{order:2}.cocoa-side .mug{order:3;margin-top:0}
+.cocoa-photo{position:relative;margin:0;border-radius:10px;overflow:hidden;box-shadow:0 22px 40px -16px rgba(0,0,0,.7);border:6px solid var(--paper)}
+.cocoa-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:55% 55%}
+.menu-board{position:relative;padding:22px 18px 26px;border-radius:12px;border:10px solid #8b5e3c;background:radial-gradient(120% 100% at 30% 0%,#3a2a24,#241713);box-shadow:inset 0 0 50px rgba(0,0,0,.55),0 24px 44px -16px rgba(0,0,0,.7);color:#f4ead3}
+.board-title{font:700 clamp(2.4rem,7vw,3.6rem)/1 var(--f-hand);text-align:center;color:#fff8e6;letter-spacing:.01em}
+.board-sub{text-align:center;margin:2px 0 18px;font-family:var(--f-hand);font-size:1.4rem;color:var(--gold-l);font-weight:500}
+.board-h{display:flex;align-items:center;gap:12px;margin:20px 0 10px;font:700 1.5rem/1 var(--f-hand);color:var(--mint)}
+.board-h::after{content:"";flex:1;border-top:2px dashed rgba(244,234,211,.35)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;min-height:56px;width:100%;padding:8px 14px;border:2px dashed rgba(244,234,211,.4);border-radius:14px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .15s,border-color .15s}
+.opt:hover{background:rgba(244,234,211,.08)}
+.opt[aria-pressed="true"]{border:2px solid var(--gold-l);background:rgba(241,199,91,.14)}
+.opt .fi{flex:none;width:36px;display:flex;justify-content:center;font-size:1.5rem}
+.opt .ot{flex:1;min-width:0;line-height:1.25}
+.opt .ot b{display:block;font-weight:800}
+.opt .ot span{font-size:.88rem;color:#d9cbb0}
+.opt .ok{display:none;color:var(--gold-l)}
+.opt[aria-pressed="true"] .ok{display:inline-flex}
+.dot{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.55)}
+.mug{display:flex;gap:16px;align-items:center;margin-top:20px;padding:16px;border-radius:12px;background:var(--paper);color:var(--cocoa);box-shadow:var(--card-shadow)}
+.mug [data-ico]{color:var(--cran)}
+.mug .fi{flex:none;width:96px;display:flex;justify-content:center;font-size:3.4rem}
+.mug h3{font-size:1.2rem;margin-bottom:4px}
+.mug p{margin:0 0 8px;font-size:.98rem;color:var(--cocoa-2)}
+.mug .hand{font-size:1.5rem;color:var(--cran);margin-bottom:2px}
+.topcount{margin:0;font-family:var(--f-hand);font-size:1.25rem;color:#e8d9b8;text-align:right;min-height:1.3em}
+/* ───────────── care / charity ───────────── */
+.care{--prev:#3a241c;background:repeating-linear-gradient(115deg,rgba(255,255,255,.06) 0 2px,transparent 2px 7px),repeating-linear-gradient(25deg,rgba(90,60,30,.05) 0 1px,transparent 1px 6px),var(--kraft);padding-top:92px}
+.care-grid{display:grid;gap:34px;align-items:center}
+.care-photo{position:relative;margin:0 auto;width:min(100%,520px);background:var(--paper);padding:12px 12px 56px;box-shadow:var(--card-shadow);border-radius:4px;transform:rotate(-1.8deg)}
+.care-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:60% 45%;border-radius:2px}
+.care-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;font-size:1.35rem}
+.care-photo .tape{top:-13px;left:24px;transform:rotate(-7deg)}
+.care h2{font-size:clamp(2rem,5vw,3.1rem);margin-bottom:.45em}
+.care .eyebrow{color:var(--cran-d)}
+.care [data-ico]{color:var(--cran-d)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.stat{padding:12px 8px 10px;text-align:center;background:rgba(255,250,240,.7);border:2px dashed rgba(58,33,26,.4);border-radius:12px}
+.stat .fi{display:flex;justify-content:center;font-size:1.6rem;margin-bottom:2px}
+.stat b{display:block;font-size:clamp(1.6rem,5vw,2.3rem);font-weight:900;font-variation-settings:"SOFT" 100;line-height:1;color:var(--cran-d)}
+.stat span{display:block;font-size:.82rem;line-height:1.25;margin-top:4px}
+.care ul.needs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.care ul.needs li{padding:6px 12px;border-radius:999px;background:var(--paper);font-weight:700;font-size:.92rem;border:1.5px solid rgba(58,33,26,.25)}
+/* ───────────── where ───────────── */
+.where{background:var(--cream)}
+.where-grid{display:grid;gap:30px;align-items:start}
+.map{position:relative;aspect-ratio:3/2.15;border-radius:12px;overflow:hidden;border:7px solid var(--paper);box-shadow:var(--card-shadow);background:#ecefd8}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.map .pin{position:absolute;transform:translate(-50%,-88%);display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3));transition:transform .2s}
+.map .pin .fi{font-size:2rem}
+.map .pin.on{transform:translate(-50%,-96%) scale(1.15);z-index:3}
+.map .pin [data-live]{color:var(--cran)}
+.map .compass{position:absolute;right:10px;top:8px;color:var(--pine);opacity:.9}
+.map .scale{position:absolute;left:12px;bottom:8px;font-size:.74rem;font-weight:700;letter-spacing:.08em;color:var(--pine-d);background:rgba(255,250,240,.85);padding:2px 8px;border-radius:99px}
+.route-list{display:grid;gap:12px}
+.route{display:flex;gap:14px;align-items:flex-start;padding:14px 14px 12px;background:var(--paper);border:1px solid var(--line);border-radius:14px;cursor:default;transition:box-shadow .2s,transform .2s}
+.route.on,.route:hover{box-shadow:0 10px 20px -12px rgba(58,33,26,.6);transform:translateX(3px)}
+.route .fi{flex:none;width:50px;display:flex;justify-content:center;font-size:1.8rem}
+.route h3{font-size:1.1rem;margin-bottom:2px}
+.route p{margin:0;font-size:.96rem;color:var(--cocoa-2)}
+.addr{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:6px;padding:14px 16px;border:2px dashed var(--pine);border-radius:14px;background:rgba(198,230,214,.35)}
+.addr address{font-style:normal;font-weight:700;flex:1 1 220px}
+/* ───────────── rsvp ───────────── */
+.rsvp{--prev:var(--cream);background:radial-gradient(circle at 12px 12px,rgba(251,242,221,.09) 2px,transparent 3px) 0 0/40px 40px,var(--pine);padding-top:96px}
+.rsvp-grid{display:grid;gap:34px;align-items:start}
+.tree-photo{position:relative;margin:0;border-radius:10px;overflow:hidden;box-shadow:0 24px 44px -16px rgba(0,0,0,.7);border:6px solid var(--paper);min-height:300px}
+.tree-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 25%}
+.tree-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,15,.05) 35%,rgba(10,20,15,.82));pointer-events:none}
+.tree-photo figcaption{position:absolute;z-index:2;left:18px;right:18px;bottom:16px;color:#fff}
+.tree-photo figcaption h3{font-size:1.5rem;margin-bottom:6px}
+.tree-photo figcaption p{margin:0 0 4px;display:flex;align-items:center;gap:10px;font-weight:600}
+.tree-photo figcaption [data-ico]{color:var(--gold-l)}
+.form{padding:22px 18px 24px 18px;color:var(--cocoa)}
+.form h3{font-size:1.7rem;margin-bottom:4px}
+.form .intro{margin:0 0 16px;color:var(--cocoa-2)}
+.fgrid{display:grid;gap:16px}
+.field label,.field legend{display:block;font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--cran);margin-bottom:6px;padding:0}
+.field fieldset{border:0;margin:0;padding:0;min-width:0}
+.field .help{display:block;margin-top:5px;font-size:.88rem;color:var(--muted)}
+.err{display:block;margin-top:5px;font-size:.9rem;font-weight:700;color:var(--cran-d);min-height:0}
+.err:empty{display:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg label{margin:0;text-transform:none;letter-spacing:0;font-size:1rem;font-weight:700;color:var(--cocoa);position:relative}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;padding:6px 10px;text-align:center;border:2px solid var(--ink-blue);border-radius:14px;background:rgba(255,255,255,.6);line-height:1.15}
+.seg input:checked + span{background:var(--pine);border-color:var(--pine);color:#fff}
+.seg input:checked + span [data-ico]{color:#fff}
+.seg input:focus-visible + span{outline:3px solid var(--cran);outline-offset:3px}
+.stepper{display:inline-flex;align-items:center;border:2px solid var(--ink-blue);border-radius:999px;background:rgba(255,255,255,.6)}
+.stepper button{width:48px;height:48px;border:0;background:transparent;border-radius:50%;color:var(--ink-blue);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.stepper button:hover{background:rgba(43,79,129,.12)}
+.stepper output{min-width:2.2rem;text-align:center;font-weight:800;font-size:1.2rem}
+.checks{display:grid;gap:2px}
+.checks label{display:flex;gap:12px;align-items:center;min-height:44px;margin:0;font-size:1rem;font-weight:600;letter-spacing:0;text-transform:none;color:var(--cocoa);cursor:pointer}
+.checks input{flex:none;width:24px;height:24px;accent-color:var(--cran)}
+.sub-field[hidden]{display:none}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:20px}
+.form-foot p{margin:0;font-size:.9rem;color:var(--muted);flex:1 1 200px}
+.success{padding:26px 20px 26px 26px;color:var(--cocoa)}
+.success[hidden]{display:none}
+.success h3{font-size:clamp(1.9rem,5vw,2.6rem);color:var(--cran)}
+.success .hand{font-size:1.6rem;margin:4px 0 14px}
+.sum{display:grid;gap:8px 16px;margin:0 0 18px;grid-template-columns:auto 1fr}
+.sum dt{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cran);padding-top:3px}
+.sum dd{margin:0;font-weight:600}
+.succ-top{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.succ-top .fi{flex:none;width:80px;display:flex;justify-content:center;font-size:2.4rem}
+.cal-row{display:flex;flex-wrap:wrap;gap:10px}
+/* ───────────── faq ───────────── */
+.faq{background:var(--cream)}
+.faq-grid{display:grid;gap:36px;align-items:start}
+.faq-photo{position:relative;margin:0 auto;width:min(100%,340px);background:var(--paper);padding:12px 12px 52px;box-shadow:var(--card-shadow);border-radius:4px;transform:rotate(1.4deg)}
+.faq-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 55%;border-radius:2px}
+.faq-photo figcaption{position:absolute;left:16px;right:16px;bottom:8px;font-size:1.35rem}
+.faq-photo .tape{top:-13px;left:50%;margin-left:-52px;transform:rotate(-3deg)}
+details{border-bottom:2px dashed var(--line)}
+details:first-of-type{border-top:2px dashed var(--line)}
+summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:60px;padding:12px 2px;font-weight:800;font-variation-settings:"SOFT" 100;font-size:1.12rem;line-height:1.25;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary .chev{transition:transform .2s;display:flex}
+details[open] summary .chev{transform:rotate(180deg)}
+summary:hover{color:var(--cran-d)}
+details .ans{padding:0 2px 16px;color:var(--cocoa-2);max-width:40rem}
+details .ans p:last-child{margin:0}
+/* ───────────── sign-off / closing / credits / footer ───────────── */
+.signoff{background:var(--paper-2);padding:64px 0}
+.sign-card{display:grid;overflow:hidden;border-radius:10px;box-shadow:var(--card-shadow);background:var(--paper)}
+.sign-card img{width:100%;height:100%;min-height:220px;max-height:300px;object-fit:cover;object-position:50% 70%}
+.sign-body{padding:26px 22px 26px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.sign-body h2{font-size:clamp(1.9rem,4.6vw,2.7rem);margin-bottom:10px}
+.sign-name{font-size:clamp(1.9rem,5.4vw,2.5rem);margin:10px 0 4px}
+.hosts{display:flex;gap:6px;margin:6px 0 12px}
+.contact{display:grid;gap:4px;margin-top:14px;font-weight:600}
+.contact p{margin:0;display:flex;gap:10px;align-items:center;min-height:36px}
+.closing{position:relative;isolation:isolate;overflow:hidden;color:#fff;text-align:center;padding:96px 0 104px;background:#1a1410}
+.closing>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 55%;z-index:-2}
+.closing::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 75% at 50% 55%,rgba(12,24,18,.7),rgba(12,24,18,.2) 100%),linear-gradient(180deg,rgba(18,51,38,.5),rgba(18,20,15,.62));z-index:-1}
+.closing .fest{display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,2vw,22px);margin-bottom:10px}
+.closing h2{font-size:clamp(2rem,6vw,3.8rem);max-width:18ch;margin:0 auto 14px;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.closing p{max-width:34rem;margin:0 auto 24px;font-size:1.15rem;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.closing .cta-row{justify-content:center}
+.closing [data-ico]{color:var(--gold-l)}
+.closing .btn [data-ico]{color:currentColor}
+#credits{background:#efe2c3;padding:48px 0 40px;font-size:.93rem;color:#4b362d}
+#credits h2{font-size:1.5rem;margin-bottom:12px}
+#credits ul{display:grid;gap:6px;margin:0 0 16px;padding:0}
+#credits li{line-height:1.45}
+#credits a{color:var(--cran-d)}
+footer{background:var(--pine-d);color:#ecdfc3;padding:44px 0 96px}
+footer a{color:var(--gold-l)}
+.foot-grid{display:grid;gap:26px}
+.foot-grid h2{font-size:1.1rem;color:var(--cream);margin-bottom:8px}
+.foot-grid ul li{margin:2px 0}
+.foot-grid ul a{display:inline-flex;align-items:center;gap:.5rem;min-height:36px;text-decoration:none}
+.foot-grid ul a:hover{text-decoration:underline}
+.foot-grid [data-ico]{color:var(--gold-l)}
+.fine{margin:28px 0 0;padding-top:16px;border-top:1px dashed rgba(251,242,221,.3);font-size:.9rem}
+.toast{position:fixed;left:16px;bottom:16px;z-index:90;max-width:min(360px,calc(100vw - 32px));padding:12px 16px;border-radius:12px;background:var(--pine-d);color:var(--cream);font-weight:600;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:none}
+.matrix tbody th{padding:6px 6px 6px 0;border-top:1px dashed var(--line);text-align:left;text-transform:none;letter-spacing:0;font-size:inherit;color:inherit;font-weight:inherit;vertical-align:middle}
+section[id]{scroll-margin-top:84px}
+/* ───────────── breakpoints ───────────── */
+@media(min-width:640px){
+  .tin-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .cup .gx{display:inline}
+  .tin{padding:20px;border-width:7px}
+  .legend{grid-template-columns:repeat(3,1fr)}
+  .goodies{grid-template-columns:1fr 1fr}
+  .stats{gap:14px}
+  .entry .blurb{display:block;font-size:.8rem;color:var(--cocoa-2);line-height:1.3;margin-top:2px}
+  .fgrid.two{grid-template-columns:1fr 1fr}
+  .opts.two{grid-template-columns:1fr 1fr}
+  .math{margin:-34px 28px 0}
+  .check-row{padding-inline:8px}
+  .ballot{padding:20px 14px 22px}
+  .sign-card{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+  .sign-card img{max-height:none}
+  .sign-body{padding:34px 34px 34px 38px}
+  .foot-grid{grid-template-columns:1.4fr 1fr 1fr}
+  .res-row{grid-template-columns:minmax(0,12rem) 1fr 2.6rem}
+}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(3,1fr);gap:34px}
+  .step-arrow{display:flex;position:absolute;right:-31px;top:46px;z-index:2;color:var(--cran)}
+  .step:last-child .step-arrow{display:none}
+  .kitchen img{aspect-ratio:21/9}
+  .math{position:absolute;right:30px;bottom:-40px;width:min(390px,46%);margin:0;transform:rotate(1.4deg)}
+  .plan-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px}
+  .goodies{grid-template-columns:repeat(4,1fr)}
+  .q-grid{grid-template-columns:repeat(3,1fr);gap:26px}
+  .q:nth-child(odd){transform:rotate(-.6deg)}.q:nth-child(even){transform:rotate(.5deg)}
+  .tin-tools{grid-template-columns:minmax(0,300px) 1fr;align-items:end}
+  .pack-grid{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px}
+  .ballot-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:50px}
+  .ballot{padding:26px 26px 28px}
+  .ballot-title h3{font-size:1.8rem}
+  .cocoa-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px}
+  .cocoa-side{display:block;position:sticky;top:96px}
+  .cocoa-side .mug{margin-top:22px}
+  .care-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px}
+  .where-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:42px}
+  .rsvp-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:48px}
+  .tree-photo{position:sticky;top:96px;min-height:560px;align-self:start}
+  .faq-grid{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px}
+  .faq-side{position:sticky;top:100px}
+  .form{padding:30px 34px 32px}
+  .sec{padding:92px 0}
+}
+@media(min-width:1100px){.tin-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tin{padding:28px 30px}.tin::before,.tin::after{content:"";position:absolute;top:50%;width:14px;height:64px;margin-top:-32px;border-radius:8px;background:linear-gradient(180deg,#c7ccd0,#8d949a)}.tin::before{left:-21px}.tin::after{right:-21px}}
+/* levels: the same page, plainer at Basic */
+html[data-level="0"] [data-ico],html[data-level="0"] [data-live]{min-width:0!important;min-height:0!important}
+html[data-level="0"] .btn::after{opacity:.25}
+html[data-level="0"] [data-live="step-number"]{width:46px;height:46px;border-radius:50%;background:var(--cran);color:#fff;font:800 1.3rem/1 var(--f-body)}
+html[data-level="0"] .cup .av{width:34px;height:34px;border-radius:50%;background:var(--pine);color:#fff;font-size:.8rem;font-weight:800;align-items:center;justify-content:center}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .snow i{animation:none!important}.snow{opacity:.55}
+}
+@media print{.snow,.announce,.site-head{display:none}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> The Great Cookie Swap is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#main">Skip to the invitation</a>
+<div class="snow" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="announce" role="region" aria-label="Sign-up status">
+  <a href="#tin"><span data-ico="bell-ring" data-size="20">🔔</span><span id="ann-text">5 of 12 cookie kinds are still open: claim yours</span></a>
+  <span class="ann-rsvp"> &nbsp;·&nbsp; RSVP by Friday 4 December</span>
+</div>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="The Great Cookie Swap, back to top">
+      <span data-ico="gingerbread-man" data-size="38" data-sample>🍪</span>
+      <span><b>The Great Cookie Swap</b><small>Dec 12 &middot; Alder Falls</small></span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#method">Method</a>
+      <a href="#plan">Schedule</a>
+      <a href="#tin">Sign-up</a>
+      <a href="#ballot">Sweaters</a>
+      <a href="#cocoa">Cocoa</a>
+      <a href="#where">Find us</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="icon-btn" id="snow-toggle" type="button" aria-pressed="true" aria-label="Snowfall: on" title="Snowfall on or off"><span data-ico="snowflake" data-size="26">❄️</span></button>
+    <a class="btn btn-primary btn-sm head-cta" href="#rsvp"><span data-ico="mail-plus" data-size="20">✉️</span> Save my spot</a>
+    <button class="icon-btn m-toggle" id="m-toggle" type="button" aria-expanded="false" aria-controls="m-nav" aria-label="Menu"><span data-ico="menu" data-size="28">☰</span></button>
+  </div>
+  <nav class="m-nav" id="m-nav" hidden aria-label="Sections (menu)">
+    <a href="#method"><span data-ico="chef-hat" data-size="26">👩‍🍳</span> How it works</a>
+    <a href="#plan"><span data-ico="alarm-clock" data-size="26">⏰</span> Schedule</a>
+    <a href="#tin"><span data-ico="clipboard-list" data-size="26">📋</span> Sign-up sheet</a>
+    <a href="#ballot"><span data-ico="trophy" data-size="26">🏆</span> Sweater vote</a>
+    <a href="#cocoa"><span data-ico="hot-cocoa" data-size="26">☕</span> Cocoa bar</a>
+    <a href="#where"><span data-ico="map-pin" data-size="26">📍</span> Find us</a>
+    <a href="#faq"><span data-ico="help-circle" data-size="26">❓</span> FAQ</a>
+    <a href="#rsvp"><span data-ico="mail-plus" data-size="26">✉️</span> <b>Save my spot</b></a>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ═════════ HERO: the recipe card ═════════ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="lights-b" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <article class="recipe-card ruled">
+      <div class="rc-top"><span class="rc-no">Recipe card no. 12</span><span class="hand">from the kitchen of Nell &amp; Abe</span></div>
+      <p class="hand invited">You&rsquo;re invited to</p>
+      <h1 class="h1" id="h1"><small>The Great</small><em>Cookie</em> Swap</h1>
+      <p class="hand lede-hand">Bake one kind. Leave with twelve. Ugly sweaters strongly encouraged.</p>
+
+      <ul class="facts">
+        <li class="fact">
+          <span class="fi"><span data-live="calendar-date" data-p-day="12" data-p-month="DEC" data-size="60" data-label="Saturday 12 December 2026">📅</span></span>
+          <div><span class="fl">When</span><span class="fv">Saturday, December 12, 2026</span></div>
+        </li>
+        <li class="fact">
+          <span class="fi"><span data-live="clock-time" data-p-time="16:00" data-size="60" data-label="Doors at 4 pm">🕓</span></span>
+          <div><span class="fl">Time</span><span class="fv">4 to 8 pm. Cookies on the table by 4:30</span></div>
+        </li>
+        <li class="fact">
+          <span class="fi i-xl"><span data-ico="home" data-size="48">🏠</span></span>
+          <div><span class="fl">Where</span><span class="fv">Nell &amp; Abe&rsquo;s, 55 Spruce Hollow Road, Alder Falls</span></div>
+        </li>
+        <li class="fact">
+          <span class="fi i-xl"><span data-ico="cookie" data-size="48">🍪</span></span>
+          <div><span class="fl">Bring</span><span class="fv">3&frac12; dozen of one kind, a tin, and a sweater</span></div>
+        </li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#rsvp"><span data-ico="mail-plus" data-size="22">✉️</span> Save my spot</a>
+        <button class="btn btn-line" type="button" id="cal-hero"><span data-ico="calendar-plus" data-size="22">📆</span> Add to calendar</button>
+      </div>
+
+      <div class="oven" id="oven">
+        <span class="fi"><span data-live="timer-ring" data-p-left="62" data-p-total="90" data-size="72" data-label="Days until the swap" id="ring">⏲️</span></span>
+        <div>
+          <p class="oven-label">Oven timer</p>
+          <p class="cd" id="cd">62 days to go</p>
+          <p class="small" id="cd-sub">Doors open Saturday, December 12 at 4:00 pm</p>
+        </div>
+      </div>
+    </article>
+
+    <figure class="hero-photo">
+      <span class="tape" aria-hidden="true"></span>
+      <img src="_img/cookie-swap/35467686-1000.jpg" width="1200" height="800" alt="Iced gingerbread cookies on a white plate beside a lit candle and dark fir branches, on a table in a dim, cosy room.">
+      <figcaption><span class="hand">test batch no. 3 (passed)</span><span class="photo-credit">Photo: <a href="https://www.pexels.com/@mikegles">Miguel González</a><br>on <a href="https://www.pexels.com/photo/35467686/">Pexels</a></span></figcaption>
+      <span class="hero-deco d1" data-min-level="2"><span data-ico="snow-globe" data-size="96" data-motion="loop">☃️</span></span>
+      <span class="hero-deco d2" data-min-level="2"><span data-ico="candy-cane" data-size="72" data-motion="hover">🍬</span></span>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════ HOW A SWAP WORKS ═════════ -->
+<section class="sec method" id="method" aria-labelledby="method-h">
+  <div class="wrap">
+    <div class="orn" aria-hidden="true" data-min-level="1"><span data-ico="holly" data-size="40">🌿</span></div>
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="chef-hat" data-size="24">👩‍🍳</span> The method</p>
+      <h2 id="method-h">How a cookie swap works</h2>
+      <p class="lede">Three steps and a little arithmetic. Everybody bakes one kind, everybody leaves with twelve.</p>
+    </header>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-top">
+          <span data-live="step-number" data-p-step="1" data-size="68" data-label="Step 1">1</span>
+          <span class="fi"><span data-ico="chef-hat" data-size="60" data-label="Chef hat" data-motion="hover">👩‍🍳</span></span>
+        </div>
+        <h3>Bake 3&frac12; dozen of one kind</h3>
+        <p>Claim your cookie on the sign-up sheet first, so we get twelve different kinds and not five gingerbreads. Bake 42: 36 for the swap, 6 for the tasting table. Let them cool all the way.</p>
+        <p class="hand">Nell&rsquo;s rule: cool means cool.</p>
+        <span class="step-arrow" aria-hidden="true"><span data-ico="arrow-right" data-size="34">→</span></span>
+      </li>
+      <li class="step">
+        <div class="step-top">
+          <span data-live="step-number" data-p-step="2" data-size="68" data-label="Step 2">2</span>
+          <span class="fi"><span data-ico="package-open" data-size="60" data-label="Open box" data-motion="hover">📦</span></span>
+        </div>
+        <h3>Bring them boxed, with 12 recipe cards</h3>
+        <p>Layer them in a lidded tin or box with parchment between. Write your recipe on twelve cards (index cards, napkins, whatever you have) and flag nuts or gluten on the lid. Cookies go on the sorting table by 4:30.</p>
+        <p class="hand">Messy handwriting is part of the charm.</p>
+        <span class="step-arrow" aria-hidden="true"><span data-ico="arrow-right" data-size="34">→</span></span>
+      </li>
+      <li class="step">
+        <div class="step-top">
+          <span data-live="step-number" data-p-step="3" data-size="68" data-label="Step 3">3</span>
+          <span class="fi"><span data-ico="swap" data-size="60" data-label="Swap arrows" data-motion="hover">🔄</span></span>
+        </div>
+        <h3>Walk the line, fill your box</h3>
+        <p>At 5:45 we all walk the long table together. Take three of every kind into your own tin (twelve kinds, thirty-six cookies), grab the recipe cards, then go back for cocoa.</p>
+        <p class="hand">Sampling is allowed. The whole row is not.</p>
+      </li>
+    </ol>
+
+    <figure class="kitchen">
+      <img src="_img/cookie-swap/5618060-1000.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Two women in a warm, softly lit home kitchen kneading and rolling cookie dough on a counter, with a candle and fir branches behind them.">
+      <figcaption class="sr-only">Baking together in a warm kitchen</figcaption>
+      <aside class="math paper ruled" style="--mx:24px;padding-left:40px" aria-labelledby="math-h">
+        <h3 id="math-h">The maths (Abe checked it twice)</h3>
+        <ul>
+          <li><span class="fi"><span data-ico="calculator" data-size="26">🧮</span></span><span>12 bakers &times; 36 cookies = <b>432</b> on the long table</span></li>
+          <li><span class="fi"><span data-ico="gift-stack" data-size="26">🎁</span></span><span>You take home 3 of every kind: <b>36 cookies, 12 kinds</b></span></li>
+          <li><span class="fi"><span data-ico="hand-heart" data-size="26">🤝</span></span><span>The 72 &ldquo;table&rdquo; cookies feed the tasters. Leftovers go to the Pantry</span></li>
+        </ul>
+      </aside>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════ SCHEDULE + GOOD TO KNOW ═════════ -->
+<section class="sec plan" id="plan" aria-labelledby="plan-h" style="padding-top:128px">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="alarm-clock" data-size="24">⏰</span> Oven schedule</p>
+      <h2 id="plan-h">Four hours, start to finish</h2>
+      <p class="lede">Doors at four. The swap itself happens at 5:45 sharp, because the cocoa waits for no one.</p>
+    </header>
+
+    <div class="plan-grid">
+      <ol class="schedule paper lined" aria-label="Schedule">
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="16:00" data-size="52" data-label="4:00 pm">🕓</span></span>
+          <div><span class="t">4:00 pm</span><h3>Doors and cocoa</h3><p>Sweaters on, name tags on, cocoa bar open. The kids&rsquo; table is stocked with felt-tip pens.</p></div>
+        </li>
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="16:30" data-size="52" data-label="4:30 pm">🕟</span></span>
+          <div><span class="t">4:30 pm</span><h3>Cookies to the sorting table</h3><p>Open your tin, set out your recipe cards and your nut or gluten flag. Abe counts. Twice.</p></div>
+        </li>
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="17:00" data-size="52" data-label="5:00 pm">🕔</span></span>
+          <div><span class="t">5:00 pm</span><h3>The decorating table</h3><p>Nell&rsquo;s pre-baked sugar cookies, a rainbow of icing bags and one very serious jar of edible glitter.</p></div>
+        </li>
+        <li class="sched-row hot">
+          <span class="clk"><span data-live="clock-time" data-p-time="17:45" data-size="52" data-label="5:45 pm">🕠</span></span>
+          <div><span class="t">5:45 pm &middot; the main event</span><h3>The Swap</h3><p>Walk the line, take three of every kind. Please queue clockwise; Nell has opinions.</p></div>
+        </li>
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="18:30" data-size="52" data-label="6:30 pm">🕡</span></span>
+          <div><span class="t">6:30 pm</span><h3>Sweater parade and vote</h3><p>Everyone gets a turn on the hallway runway. Ballots close at the bell.</p></div>
+        </li>
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="19:00" data-size="52" data-label="7:00 pm">🕖</span></span>
+          <div><span class="t">7:00 pm</span><h3>Winners, a toast, and the leftovers</h3><p>Prizes, a toast (cocoa or otherwise), then every leftover cookie is boxed for the Pantry.</p></div>
+        </li>
+        <li class="sched-row">
+          <span class="clk"><span data-live="clock-time" data-p-time="20:00" data-size="52" data-label="8:00 pm">🕗</span></span>
+          <div><span class="t">8:00 pm</span><h3>Last call</h3><p>Doors close. Please take your tin home; a name label on the lid helps us hand it back.</p></div>
+        </li>
+      </ol>
+
+      <figure class="side-photo">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="_img/cookie-swap/5900056-700.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="A hand piping white icing onto a gingerbread cookie, with other iced reindeer and star cookies on a pale table.">
+        <figcaption class="hand">5:00, the decorating table</figcaption>
+      </figure>
+    </div>
+
+    <div class="goodies">
+      <div class="good">
+        <span class="fi"><span data-ico="shirt" data-size="44">👕</span></span>
+        <div><h3>Dress code: knitwear</h3><p>Ugly Christmas sweaters strongly encouraged. Wear a t-shirt underneath: Nell keeps the house at 72&deg;F.</p></div>
+      </div>
+      <div class="good">
+        <span class="fi"><span data-live="weather" data-p-condition="snow" data-p-temperature="31" data-p-unit="degree" data-size="48" data-label="Typical December weather: snow, 31 degrees Fahrenheit">❄️</span></span>
+        <div><h3>Weather: usually snow</h3><p>The average high on December 12th is 31&deg;F. Boots live on the mat by the door.</p></div>
+      </div>
+      <div class="good">
+        <span class="fi"><span data-ico="users" data-size="44">👨‍👩‍👧</span></span>
+        <div><h3>Kids and plus-ones</h3><p>Up to four people per RSVP. Only the baker has to bake; the rest taste, decorate and vote.</p></div>
+      </div>
+      <div class="good">
+        <span class="fi"><span data-ico="alert-triangle" data-size="44">⚠️</span></span>
+        <div><h3>Allergies, labelled</h3><p>Every tin gets a flag: nuts, gluten-free or vegan. Separate tongs, always.</p></div>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <div class="q-head">
+        <span data-live="rating-stars" data-p-rating="5" data-size="84" data-label="Rated 5 out of 5 stars">★★★★★</span>
+        <div><p class="eyebrow" style="margin-bottom:4px">Last year, in their words</p><h3>Rated 5 out of 5 by 28 guests</h3></div>
+      </div>
+      <div class="q-grid">
+        <blockquote class="q"><p>&ldquo;I came for the shortbread and left with a tin of twelve things I would never have baked. Also a trophy, for a sweater with a lasagna on it.&rdquo;</p><cite>Wren T., 2025</cite></blockquote>
+        <blockquote class="q"><p>&ldquo;The recipe cards are the real prize. I have a whole drawer of them now, and I have actually made six.&rdquo;</p><cite>Priya R., 2025</cite></blockquote>
+        <blockquote class="q"><p>&ldquo;Cocoa bar, decorating table, a very patient dog in a reindeer jumper. Ten out of ten, would carry a tin again.&rdquo;</p><cite>Theo B., 2025</cite></blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ THE TIN: sign-up sheet ═════════ -->
+<section class="sec tinsec dark scallop" id="tin" aria-labelledby="tin-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="clipboard-list" data-size="24">📋</span> The sign-up sheet</p>
+      <h2 id="tin-h">Claim a cup in the tin</h2>
+      <p class="lede">Twelve cups, twelve kinds, one baker each. Tap an open cup to claim it. You can hold one at a time: claim another and we&rsquo;ll slide you over.</p>
+    </header>
+
+    <div class="tin-tools">
+      <div class="field-dark">
+        <label for="sheet-name">Sign the sheet as</label>
+        <input class="inp" id="sheet-name" type="text" autocomplete="name" placeholder="First name and last initial" maxlength="40">
+      </div>
+      <div class="chips" role="group" aria-label="Filter the tin">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All 12</button>
+        <button class="chip" type="button" data-filter="open" aria-pressed="false"><span data-ico="plus-circle" data-size="20">➕</span> Open</button>
+        <button class="chip" type="button" data-filter="taken" aria-pressed="false"><span data-ico="check-circle" data-size="20">✅</span> Claimed</button>
+        <button class="chip" type="button" data-filter="nutfree" aria-pressed="false"><span data-ico="shield-check" data-size="20">🛡️</span> Nut-free</button>
+        <button class="chip" type="button" data-filter="gf" aria-pressed="false"><span data-ico="sprout" data-size="20">🌾</span> Gluten-free</button>
+        <button class="chip" type="button" data-filter="vg" aria-pressed="false"><span data-ico="leaf" data-size="20">🌱</span> Vegan</button>
+      </div>
+    </div>
+
+    <div class="tin-status">
+      <span id="tin-count" role="status">7 of 12 claimed</span>
+      <span class="meter" role="progressbar" aria-label="Cups claimed" aria-valuemin="0" aria-valuemax="12" aria-valuenow="7" id="tin-bar"><i id="tin-meter" style="width:58%"></i></span>
+    </div>
+
+    <div class="tin" id="tin-box">
+      <div class="tin-grid" id="tin-grid">
+        <button class="cup" type="button" data-id="ginger" data-nuts="0" data-gf="0" data-vg="0" data-by="Priya R." data-state="taken" disabled>
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="gingerbread-man" data-size="56" data-motion="hover">🍪</span></span>
+          <span class="cn">Gingerbread people</span>
+          <span class="cb">Dark molasses, crisp edges, royal-icing buttons</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="PR" data-size="40" data-label="Priya R.">PR</span></span>
+            <span class="hand nm">Priya R.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="sugar" data-nuts="0" data-gf="0" data-vg="0" data-state="open">
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="north-star" data-size="56" data-motion="hover">⭐</span></span>
+          <span class="cn">Cut-out sugar stars</span>
+          <span class="cb">Vanilla dough rolled thin, iced in three colours</span>
+          <span class="who">
+            <span class="av" hidden><span data-live="avatar-initials" data-p-initials="ME" data-size="40" data-label="You">ME</span></span>
+            <span class="hand nm" hidden></span>
+            <span class="go"><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="snicker" data-nuts="0" data-gf="0" data-vg="0" data-by="Tomasz W." data-state="taken" disabled>
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="cookie" data-size="56" data-motion="hover">🍪</span></span>
+          <span class="cn">Snickerdoodles</span>
+          <span class="cb">Soft middles and a cinnamon-sugar crackle</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="TW" data-size="40" data-label="Tomasz W.">TW</span></span>
+            <span class="hand nm">Tomasz W.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="thumb" data-nuts="0" data-gf="0" data-vg="0" data-state="open">
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="bauble" data-size="56" data-motion="hover">🔴</span></span>
+          <span class="cn">Raspberry thumbprints</span>
+          <span class="cb">Buttery shortbread cradling tart jam</span>
+          <span class="who">
+            <span class="av" hidden><span data-live="avatar-initials" data-p-initials="ME" data-size="40" data-label="You">ME</span></span>
+            <span class="hand nm" hidden></span>
+            <span class="go"><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="crinkle" data-nuts="0" data-gf="1" data-vg="0" data-by="Delia F." data-state="taken" disabled>
+          <span class="cup-tags"><span class="tag gf"><span data-ico="sprout" data-size="16" data-fixed-style="line">🌾</span>GF</span></span>
+          <span class="fi"><span data-ico="snowflake" data-size="56" data-motion="hover">❄️</span></span>
+          <span class="cn">Flourless chocolate crinkles</span>
+          <span class="cb">Fudgy centres under powdered-sugar snow</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="DF" data-size="40" data-label="Delia F.">DF</span></span>
+            <span class="hand nm">Delia F.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="mint" data-nuts="0" data-gf="1" data-vg="0" data-state="open">
+          <span class="cup-tags"><span class="tag gf"><span data-ico="sprout" data-size="16" data-fixed-style="line">🌾</span>GF</span></span>
+          <span class="fi"><span data-ico="candy-cane" data-size="56" data-motion="hover">🍬</span></span>
+          <span class="cn">Peppermint meringues</span>
+          <span class="cb">Crisp, airy, with a candy-cane crunch</span>
+          <span class="who">
+            <span class="av" hidden><span data-live="avatar-initials" data-p-initials="ME" data-size="40" data-label="You">ME</span></span>
+            <span class="hand nm" hidden></span>
+            <span class="go"><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="tea" data-nuts="1" data-gf="0" data-vg="0" data-by="Hank L." data-state="taken" disabled>
+          <span class="cup-tags"><span class="tag nuts"><span data-ico="alert-triangle" data-size="16" data-fixed-style="line">⚠️</span>Nuts</span></span>
+          <span class="fi"><span data-ico="snowman" data-size="56" data-motion="hover">☃️</span></span>
+          <span class="cn">Pecan snowballs</span>
+          <span class="cb">Buttery tea cakes rolled in sugar</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="HL" data-size="40" data-label="Hank L.">HL</span></span>
+            <span class="hand nm">Hank L.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="short" data-nuts="0" data-gf="0" data-vg="0" data-state="open">
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="wreath" data-size="56" data-motion="hover">🎄</span></span>
+          <span class="cn">Brown-butter shortbread</span>
+          <span class="cb">Three ingredients and a lot of patience</span>
+          <span class="who">
+            <span class="av" hidden><span data-live="avatar-initials" data-p-initials="ME" data-size="40" data-label="You">ME</span></span>
+            <span class="hand nm" hidden></span>
+            <span class="go"><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="molasses" data-nuts="0" data-gf="0" data-vg="0" data-by="Rosa A." data-state="taken" disabled>
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="jingle-bells" data-size="56" data-motion="hover">🔔</span></span>
+          <span class="cn">Molasses crinkles</span>
+          <span class="cb">Chewy, spiced and sparkling with coarse sugar</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="RA" data-size="40" data-label="Rosa A.">RA</span></span>
+            <span class="hand nm">Rosa A.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="oat" data-nuts="0" data-gf="0" data-vg="1" data-state="open">
+          <span class="cup-tags"><span class="tag vg"><span data-ico="leaf" data-size="16" data-fixed-style="line">🌱</span>Vegan</span></span>
+          <span class="fi"><span data-ico="holly" data-size="56" data-motion="hover">🍒</span></span>
+          <span class="cn">Cranberry oat chews</span>
+          <span class="cb">Tart, chewy, dairy-free and egg-free</span>
+          <span class="who">
+            <span class="av" hidden><span data-live="avatar-initials" data-p-initials="ME" data-size="40" data-label="You">ME</span></span>
+            <span class="hand nm" hidden></span>
+            <span class="go"><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="blossom" data-nuts="1" data-gf="0" data-vg="0" data-by="Ines M." data-state="taken" disabled>
+          <span class="cup-tags"><span class="tag nuts"><span data-ico="alert-triangle" data-size="16" data-fixed-style="line">⚠️</span>Nuts</span></span>
+          <span class="fi"><span data-ico="chocolate-box" data-size="56" data-motion="hover">🍫</span></span>
+          <span class="cn">Peanut-butter blossoms</span>
+          <span class="cb">A chocolate kiss pressed into every one</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="IM" data-size="40" data-label="Ines M.">IM</span></span>
+            <span class="hand nm">Ines M.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+        <button class="cup" type="button" data-id="orange" data-nuts="0" data-gf="0" data-vg="0" data-by="Theo B." data-state="taken" disabled>
+          <span class="cup-tags"></span>
+          <span class="fi"><span data-ico="mandarin-orange" data-size="56" data-motion="hover">🍊</span></span>
+          <span class="cn">Chocolate-dipped orange rounds</span>
+          <span class="cb">Zesty shortbread, half-dipped in dark chocolate</span>
+          <span class="who">
+            <span class="av"><span data-live="avatar-initials" data-p-initials="TB" data-size="40" data-label="Theo B.">TB</span></span>
+            <span class="hand nm">Theo B.</span>
+            <span class="go" hidden><span class="ic-plus"><span data-ico="plus" data-size="18">+</span></span><span class="ic-ok"><span data-ico="check" data-size="18">✔</span></span><span class="gt">Claim<span class="gx"> this kind</span></span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <p class="tin-note" id="tin-note" role="status" aria-live="polite"></p>
+
+    <div class="legend" aria-label="What the flags mean">
+      <p><span class="tag nuts"><span data-ico="alert-triangle" data-size="16" data-fixed-style="line">⚠️</span>Nuts</span><span>Contains tree nuts or peanuts. Kept on the separate board by the window.</span></p>
+      <p><span class="tag gf"><span data-ico="sprout" data-size="16" data-fixed-style="line">🌾</span>GF</span><span>Made without gluten ingredients. Baked at home, so ask the baker if you are coeliac.</span></p>
+      <p><span class="tag vg"><span data-ico="leaf" data-size="16" data-fixed-style="line">🌱</span>Vegan</span><span>No eggs, dairy or honey. Every tin on the table also wears a flag card.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ PACK IT ═════════ -->
+<section class="sec pack" id="pack" aria-labelledby="pack-h">
+  <div class="wrap">
+    <div class="orn" aria-hidden="true" data-min-level="1"><span data-ico="wreath" data-size="44">🌿</span></div>
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="package" data-size="24">📦</span> Tins and packaging</p>
+      <h2 id="pack-h">Pack it like you mean it</h2>
+      <p class="lede">Thirty-six cookies have to survive the drive, the doorway and the hug at the door. Tick things off as you go.</p>
+    </header>
+    <div class="pack-grid">
+      <figure class="tins-photo">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="_img/cookie-swap/19572160-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="Overhead view of a red-rimmed oval tin lined with baking paper and packed with dark gingerbread cookies iced in white, beside a fir sprig with warm fairy lights glowing behind.">
+        <figcaption class="hand">a tin worth carrying</figcaption>
+      </figure>
+
+      <div class="checklist paper lined" id="packlist">
+        <div class="pack-head">
+          <span class="fi"><span data-live="progress-ring" data-p-value="0" data-size="76" data-label="Packing progress" id="pack-ring">0%</span></span>
+          <div><h3>Your packing checklist</h3><p id="pack-count" role="status">0 of 7 packed</p></div>
+        </div>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="package" data-size="30">📦</span></span><span class="ct"><b>A lidded tin or sturdy box</b><span>Bakery boxes are fine. Zip bags are not: they squash.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="timer" data-size="30">⏱️</span></span><span class="ct"><b>Cookies cooled completely</b><span>Warm cookies sweat in a closed tin and go soft. Give them an hour.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="layers" data-size="30">📄</span></span><span class="ct"><b>Parchment between the layers</b><span>Wax paper works too. Never stack more than three deep.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="notebook-pen" data-size="30">📝</span></span><span class="ct"><b>Twelve recipe cards</b><span>The cookie&rsquo;s name on top, your name at the bottom.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="alert-triangle" data-size="30">⚠️</span></span><span class="ct"><b>An allergen flag on the lid</b><span>Nuts, gluten-free or vegan. Nell keeps spare flags at the door.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="tag" data-size="30">🏷️</span></span><span class="ct"><b>Your name on the lid</b><span>A strip of masking tape does it. We hand every tin back.</span></span></label>
+        <label class="check-row"><input type="checkbox" data-pk><span class="fi"><span data-ico="shopping-bag" data-size="30">🛍️</span></span><span class="ct"><b>A spare empty tin for your mixed box</b><span>Bring the biggest one you own. Thirty-six cookies take up room.</span></span></label>
+        <div class="pack-foot">
+          <p class="hand pack-msg" id="pack-msg">Nothing packed yet. Cookies first, then the tin.</p>
+          <button class="btn btn-line btn-sm" type="button" id="pack-reset"><span data-ico="rotate-ccw" data-size="20">↺</span> Start over</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ UGLY SWEATER BALLOT ═════════ -->
+<section class="sec ballot-sec dark scallop" id="ballot" aria-labelledby="ballot-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="trophy" data-size="24">🏆</span> The Ugly Sweater Awards</p>
+      <h2 id="ballot-h">Vote for the worst. The very worst.</h2>
+      <p class="lede">Six sweaters are already entered. Mark your ballot (one vote per category, and never for your own, we&rsquo;re watching), then see where the room stands. Winners are announced at 7:00 pm.</p>
+    </header>
+    <div class="ballot-grid">
+      <div>
+        <figure class="sweater-photo">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="_img/cookie-swap/6517758-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Friends in colourful ugly Christmas sweaters laughing and hugging in a doorway, one holding a small wrapped gift box, with a baubled garland on the door beside them.">
+          <figcaption class="hand">the standard to beat</figcaption>
+        </figure>
+        <p style="margin:18px 0 0"><span data-ico="sparkles" data-size="22" data-min-level="1" style="color:var(--gold-l);vertical-align:-4px">✨</span> Want in? Tick &ldquo;Enter me in the Ugly Sweater Awards&rdquo; when you RSVP and name your sweater. Late entries are accepted until the parade.</p>
+      </div>
+
+      <div class="ballot paper" id="ballot-card">
+        <form id="ballot-form" novalidate aria-labelledby="ballot-t">
+          <div class="ballot-title"><p class="eyebrow">Official ballot &middot; Cookie Swap 2026</p><h3 id="ballot-t">Ugly Sweater Awards</h3></div>
+          <table class="matrix">
+            <caption class="sr-only">Choose one sweater per category</caption>
+            <thead><tr><th scope="col">The entries</th><th scope="col">Ugliest overall</th><th scope="col">Most lights</th><th scope="col">Best pun</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="1" data-size="46" data-label="Entry 1">#1</span></span><div><b>The Blinking Rudolph</b><span class="who">Colm D.</span><span class="blurb">Battery-powered nose. Humming not included.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="1" aria-label="Ugliest overall: The Blinking Rudolph"></label></td><td><label class="bub"><input type="radio" name="lights" value="1" aria-label="Most lights: The Blinking Rudolph"></label></td><td><label class="bub"><input type="radio" name="pun" value="1" aria-label="Best pun: The Blinking Rudolph"></label></td></tr>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="2" data-size="46" data-label="Entry 2">#2</span></span><div><b>Llama Navidad</b><span class="who">Sasha P.</span><span class="blurb">Fourteen llamas, one fringe, zero regrets.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="2" aria-label="Ugliest overall: Llama Navidad"></label></td><td><label class="bub"><input type="radio" name="lights" value="2" aria-label="Most lights: Llama Navidad"></label></td><td><label class="bub"><input type="radio" name="pun" value="2" aria-label="Best pun: Llama Navidad"></label></td></tr>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="3" data-size="46" data-label="Entry 3">#3</span></span><div><b>Tinsel Tom</b><span class="who">Theo B.</span><span class="blurb">Sheds on every sofa in the county.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="3" aria-label="Ugliest overall: Tinsel Tom"></label></td><td><label class="bub"><input type="radio" name="lights" value="3" aria-label="Most lights: Tinsel Tom"></label></td><td><label class="bub"><input type="radio" name="pun" value="3" aria-label="Best pun: Tinsel Tom"></label></td></tr>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="4" data-size="46" data-label="Entry 4">#4</span></span><div><b>Fa-La-La-Lasagna</b><span class="who">Wren T.</span><span class="blurb">A pasta pun knitted by a grandmother in 1994.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="4" aria-label="Ugliest overall: Fa-La-La-Lasagna"></label></td><td><label class="bub"><input type="radio" name="lights" value="4" aria-label="Most lights: Fa-La-La-Lasagna"></label></td><td><label class="bub"><input type="radio" name="pun" value="4" aria-label="Best pun: Fa-La-La-Lasagna"></label></td></tr>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="5" data-size="46" data-label="Entry 5">#5</span></span><div><b>Snow Biz</b><span class="who">Bao T.</span><span class="blurb">A sequin snowman in a bow tie, corduroy trim.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="5" aria-label="Ugliest overall: Snow Biz"></label></td><td><label class="bub"><input type="radio" name="lights" value="5" aria-label="Most lights: Snow Biz"></label></td><td><label class="bub"><input type="radio" name="pun" value="5" aria-label="Best pun: Snow Biz"></label></td></tr>
+              <tr><th scope="row"><div class="entry"><span class="tk"><span data-live="ticket-number" data-p-number="6" data-size="46" data-label="Entry 6">#6</span></span><div><b>Two Hundred Bulbs</b><span class="who">Hank L.</span><span class="blurb">Plugs into the wall. Do not stand near the dimmer.</span></div></div></th>
+                <td><label class="bub"><input type="radio" name="ugly" value="6" aria-label="Ugliest overall: Two Hundred Bulbs"></label></td><td><label class="bub"><input type="radio" name="lights" value="6" aria-label="Most lights: Two Hundred Bulbs"></label></td><td><label class="bub"><input type="radio" name="pun" value="6" aria-label="Best pun: Two Hundred Bulbs"></label></td></tr>
+            </tbody>
+          </table>
+          <div class="ballot-foot">
+            <p class="ballot-msg" id="ballot-msg" role="status" aria-live="polite"></p>
+            <button class="btn btn-primary" type="submit"><span data-ico="check-square" data-size="22">☑️</span> Cast my ballot</button>
+          </div>
+        </form>
+
+        <div class="results" id="results" hidden>
+          <div class="ballot-title"><p class="eyebrow">Early returns &middot; <span id="res-total">41</span> ballots in</p><h3>Where the room stands</h3></div>
+          <div id="res-body" style="margin-top:16px"></div>
+          <div class="ballot-foot">
+            <p class="ballot-msg" style="color:var(--pine)">Thanks! Your ballot is counted. Final results land at 7:00 pm.</p>
+            <button class="btn btn-line btn-sm" type="button" id="ballot-redo"><span data-ico="pencil" data-size="20">✏️</span> Change my votes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ COCOA BAR ═════════ -->
+<section class="sec cocoa dark scallop" id="cocoa" aria-labelledby="cocoa-h">
+  <div class="wrap cocoa-grid">
+    <div class="cocoa-side">
+    <figure class="cocoa-photo">
+      <img src="_img/cookie-swap/photo-1702648906616-b030f193edb9-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="A white ceramic cup of hot chocolate piled with mini marshmallows on a wooden board, beside fir sprigs and a red ribbon, with soft fairy lights behind.">
+    </figure>
+    <div class="mug" aria-live="polite">
+      <span class="fi"><span data-ico="hot-cocoa" data-size="96" data-label="Hot cocoa" data-motion="hover">☕</span></span>
+      <div>
+        <p class="hand" id="mug-name">The Fireside</p>
+        <p id="mug-desc">Classic dark, nothing on top. Plain and perfect.</p>
+        <button class="btn btn-primary btn-sm" type="button" id="mug-use"><span data-ico="check-circle" data-size="20">✅</span> Use this for my RSVP</button>
+      </div>
+    </div>
+    </div>
+
+    <div class="menu-board">
+      <h2 class="board-title" id="cocoa-h">The Cocoa Bar</h2>
+      <p class="board-sub">free refills from 4 pm until the pot runs dry</p>
+
+      <h3 class="board-h">1. Pick a base</h3>
+      <div class="opts two" id="bases" role="group" aria-label="Pick one base">
+        <button class="opt" type="button" data-base="classic" aria-pressed="true"><span class="dot" style="background:#4a2a1e"></span><span class="ot"><b>Classic dark</b><span>70% cocoa, whole milk, a pinch of salt</span></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-base="caramel" aria-pressed="false"><span class="dot" style="background:#b9763a"></span><span class="ot"><b>Salted caramel milk</b><span>Milk chocolate, house caramel, flaky salt</span></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-base="white" aria-pressed="false"><span class="dot" style="background:#f3e9d2"></span><span class="ot"><b>White peppermint</b><span>White chocolate and crushed candy cane</span></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-base="oat" aria-pressed="false"><span class="dot" style="background:#2f6b52"></span><span class="ot"><b>Oat-milk dark</b><span>Vegan and dairy-free, still very chocolatey</span></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+      </div>
+
+      <h3 class="board-h">2. Pile on up to three</h3>
+      <div class="opts two" id="tops" role="group" aria-label="Pick up to three toppings">
+        <button class="opt" type="button" data-top="marshmallows" aria-pressed="false"><span class="fi"><span data-ico="cloud" data-size="32">☁️</span></span><span class="ot"><b>Mini marshmallows</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="whipped cream" aria-pressed="false"><span class="fi"><span data-ico="ice-cream" data-size="32">🍦</span></span><span class="ot"><b>Whipped cream</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="candy cane" aria-pressed="false"><span class="fi"><span data-ico="candy-cane" data-size="32">🍬</span></span><span class="ot"><b>Crushed candy cane</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="orange zest" aria-pressed="false"><span class="fi"><span data-ico="mandarin-orange" data-size="32">🍊</span></span><span class="ot"><b>Orange zest</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="gingerbread crumbs" aria-pressed="false"><span class="fi"><span data-ico="gingerbread-man" data-size="32">🍪</span></span><span class="ot"><b>Gingerbread crumbs</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="toasted coconut" aria-pressed="false"><span class="fi"><span data-ico="palm-tree" data-size="32">🥥</span></span><span class="ot"><b>Toasted coconut</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="chili pinch" aria-pressed="false"><span class="fi"><span data-ico="flame" data-size="32">🌶️</span></span><span class="ot"><b>A pinch of chili</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+        <button class="opt" type="button" data-top="chocolate shavings" aria-pressed="false"><span class="fi"><span data-ico="chocolate-box" data-size="32">🍫</span></span><span class="ot"><b>Chocolate shavings</b></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+      </div>
+      <p class="topcount" id="topcount" role="status"></p>
+
+      <h3 class="board-h">3. Grown-up corner</h3>
+      <button class="opt" type="button" id="splash" aria-pressed="false"><span class="fi"><span data-ico="wine" data-size="32">🍷</span></span><span class="ot"><b>A grown-up splash (21+, ID please)</b><span>Peppermint schnapps, Irish cream or bourbon, poured by Abe</span></span><span class="ok"><span data-ico="check" data-size="22">✔</span></span></button>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ LEFTOVERS FOR THE PANTRY ═════════ -->
+<section class="sec care scallop" id="care" aria-labelledby="care-h">
+  <div class="wrap care-grid">
+    <figure class="care-photo">
+      <span class="tape" aria-hidden="true"></span>
+      <img src="_img/cookie-swap/photo-1543268963-0c47b633e281-800.jpg" width="1200" height="795" loading="lazy" decoding="async" alt="A gift wrapped in kraft paper with a red patterned band and ribbon, beside a candy cane, a gingerbread man and pine branches on a dark wooden table.">
+      <figcaption class="hand">kraft paper, red ribbon, one gingerbread</figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow"><span data-ico="hand-heart" data-size="24">🤝</span> Where the leftovers go</p>
+      <h2 id="care-h">Every last cookie does some good</h2>
+      <p>At 7:30 whatever is left on the long table is boxed in kraft paper, tied with red ribbon, and driven to the Alder Falls Community Pantry by Abe&rsquo;s cousin Dara, in a van that plays carols at full volume.</p>
+      <div class="stats">
+        <div class="stat"><span class="fi"><span data-ico="cookie" data-size="36">🍪</span></span><b>214</b><span>cookies boxed last year</span></div>
+        <div class="stat"><span class="fi"><span data-ico="package" data-size="36">📦</span></span><b>17</b><span>care boxes delivered</span></div>
+        <div class="stat"><span class="fi"><span data-ico="sleigh" data-size="36">🛷</span></span><b>1</b><span>very loud van</span></div>
+      </div>
+      <p style="margin:0">The Pantry is also glad of a few things if you can spare them (no pressure at all):</p>
+      <ul class="needs"><li>Cocoa mix</li><li>Flour and sugar</li><li>Canned soup</li><li>Size 4&ndash;6 diapers</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FIND THE KITCHEN ═════════ -->
+<section class="sec where" id="where" aria-labelledby="where-h">
+  <div class="wrap">
+    <div class="orn" aria-hidden="true" data-min-level="1"><span data-ico="mistletoe" data-size="44">🌿</span></div>
+    <header class="sec-head">
+      <p class="eyebrow"><span data-ico="map-pin" data-size="24">📍</span> Getting here</p>
+      <h2 id="where-h">Find the kitchen</h2>
+      <p class="lede">Green door, a wreath the size of a bicycle wheel, and a smell you can follow from the corner.</p>
+    </header>
+    <div class="where-grid">
+      <div class="map" id="map">
+        <svg viewBox="0 0 600 430" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated map. Spruce Hollow Road runs east to west, crossed by Birch Lane and 9th Street. The house is between them, parking is on Birch Lane, and the Route 14 bus stops at 9th Street.">
+          <rect width="600" height="430" fill="#e8edd2"/>
+          <g fill="#f8f0da" stroke="#e0d4b4" stroke-width="2">
+            <rect x="16" y="104" width="170" height="86" rx="10"/><rect x="238" y="100" width="190" height="82" rx="10"/><rect x="16" y="226" width="150" height="90" rx="10"/><rect x="246" y="224" width="176" height="86" rx="10"/><rect x="468" y="224" width="120" height="86" rx="10"/><rect x="238" y="8" width="190" height="64" rx="10"/><rect x="16" y="8" width="170" height="64" rx="10"/>
+          </g>
+          <rect x="470" y="96" width="118" height="82" rx="14" fill="#cfe4bb" stroke="#b5d29f" stroke-width="2"/>
+          <g fill="#8fbf7a"><circle cx="492" cy="120" r="9"/><circle cx="516" cy="146" r="11"/><circle cx="548" cy="118" r="10"/><circle cx="566" cy="152" r="8"/><circle cx="500" cy="158" r="7"/></g>
+          <path d="M-10 372C110 336 210 408 336 372S520 340 612 376" fill="none" stroke="#b7d6e6" stroke-width="40"/>
+          <path d="M-10 372C110 336 210 408 336 372S520 340 612 376" fill="none" stroke="#cfe5f0" stroke-width="20" stroke-dasharray="2 14" stroke-linecap="round"/>
+          <g fill="none" stroke-linecap="round">
+            <path d="M-10 92L612 82" stroke="#d6caa8" stroke-width="20"/><path d="M-10 92L612 82" stroke="#fffaf0" stroke-width="15"/>
+            <path d="M-10 214L612 194" stroke="#d6caa8" stroke-width="32"/><path d="M-10 214L612 194" stroke="#fffaf0" stroke-width="26"/><path d="M-10 214L612 194" stroke="#e8c04a" stroke-width="2" stroke-dasharray="14 12"/>
+            <path d="M206 -10L226 440" stroke="#d6caa8" stroke-width="24"/><path d="M206 -10L226 440" stroke="#fffaf0" stroke-width="18"/>
+            <path d="M440 -10L454 440" stroke="#d6caa8" stroke-width="24"/><path d="M440 -10L454 440" stroke="#fffaf0" stroke-width="18"/>
+          </g>
+          <path d="M196 268L214 214L322 206M444 206L340 204" fill="none" stroke="#a8222f" stroke-width="3.5" stroke-dasharray="3 9" stroke-linecap="round"/>
+          <g font-family="Fraunces,Georgia,serif" font-style="italic" fill="#5e4034" font-size="14">
+            <text x="52" y="204" transform="rotate(-2 52 204)" font-weight="600">Spruce Hollow Rd</text>
+            <text x="238" y="36" transform="rotate(87 238 36)" font-weight="600">Birch Ln</text>
+            <text x="462" y="270" transform="rotate(87 462 270)" font-weight="600">9th St</text>
+            <text x="492" y="172" font-size="12" fill="#3c6a3a">Alder Park</text>
+            <text x="46" y="368" fill="#4b7f98" font-size="13">Pine River</text>
+            <text x="40" y="84" font-size="11" transform="rotate(-1 40 84)">Alder Ave</text>
+          </g>
+        </svg>
+        <span class="compass" data-min-level="1"><span data-ico="compass" data-size="40" data-label="North is up">🧭</span></span>
+        <span class="scale">about 4 minutes on foot</span>
+        <span class="pin" data-pin="1" style="left:55%;top:47%"><span data-live="map-pin-number" data-p-param-label="1" data-size="46" data-label="Pin 1: Nell and Abe's house">📍</span></span>
+        <span class="pin" data-pin="2" style="left:31.5%;top:62%"><span data-live="map-pin-number" data-p-param-label="2" data-size="46" data-label="Pin 2: Birch Lane parking">📍</span></span>
+        <span class="pin" data-pin="3" style="left:75.5%;top:49%"><span data-live="map-pin-number" data-p-param-label="3" data-size="46" data-label="Pin 3: Route 14 bus stop">📍</span></span>
+      </div>
+
+      <div>
+        <ul class="route-list">
+          <li class="route" data-pin="1"><span class="fi"><span data-ico="home" data-size="44">🏠</span></span><div><h3>1. The house</h3><p>55 Spruce Hollow Road. Green door, big wreath. The step-free side gate is on Birch Lane, and there&rsquo;s a rolling cart waiting there to wheel your tins in.</p></div></li>
+          <li class="route" data-pin="2"><span class="fi"><span data-ico="parking" data-size="44">🅿️</span></span><div><h3>2. Parking</h3><p>The Birch Lane lot is a two-minute walk and always has space. The driveway fits three cars, so carpool if you can.</p></div></li>
+          <li class="route" data-pin="3"><span class="fi"><span data-ico="bus" data-size="44">🚌</span></span><div><h3>3. By bus</h3><p>Route 14 to Spruce &amp; 9th, then three minutes uphill. The last bus home leaves at 9:40 pm.</p></div></li>
+        </ul>
+        <div class="addr">
+          <span data-ico="map-pin" data-size="30">📍</span>
+          <address>Nell &amp; Abe&rsquo;s<br>55 Spruce Hollow Road, Alder Falls</address>
+          <button class="btn btn-line btn-sm" type="button" id="copy-addr"><span data-ico="copy" data-size="20">📋</span> Copy address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ RSVP ═════════ -->
+<section class="sec rsvp dark scallop" id="rsvp" aria-labelledby="rsvp-h">
+  <div class="wrap rsvp-grid">
+    <figure class="tree-photo">
+      <img src="_img/cookie-swap/photo-1702276125956-18295ebdb086-800.jpg" width="1200" height="1799" loading="lazy" decoding="async" alt="A dim, cosy living room with a softly lit Christmas tree glowing behind a sofa and a coffee table with a mug and a book.">
+      <figcaption>
+        <h3>Save me a spot</h3>
+        <p><span data-ico="cookie" data-size="26">🍪</span><span><b id="spots-open">5</b> cookie kinds still open</span></p>
+        <p><span data-ico="users" data-size="26">👥</span><span><b id="spots-taste">11</b> taster places left</span></p>
+        <p><span data-ico="calendar-days" data-size="26">🗓️</span><span>RSVP by Friday, December 4</span></p>
+      </figcaption>
+    </figure>
+
+    <div>
+      <form class="form paper lined" id="rsvp-form" novalidate aria-labelledby="rsvp-h">
+        <h2 id="rsvp-h" style="font-size:clamp(1.9rem,4.4vw,2.6rem)">RSVP to the swap</h2>
+        <p class="intro">Takes a minute. You&rsquo;ll get one confirmation and one reminder, and that&rsquo;s it.</p>
+        <div class="fgrid">
+          <div class="fgrid two">
+            <div class="field"><label for="f-name">Your name</label><input class="inp" id="f-name" name="name" type="text" autocomplete="name" required maxlength="40" aria-describedby="e-name"><span class="err" id="e-name"></span></div>
+            <div class="field"><label for="f-email">Email</label><input class="inp" id="f-email" name="email" type="email" autocomplete="email" required maxlength="80" aria-describedby="e-email"><span class="err" id="e-email"></span></div>
+          </div>
+
+          <div class="field">
+            <fieldset><legend>I&rsquo;m coming to</legend>
+              <div class="seg">
+                <label><input type="radio" name="role" value="bake" checked><span><span data-ico="chef-hat" data-size="26">👩‍🍳</span> Bake and swap</span></label>
+                <label><input type="radio" name="role" value="taste"><span><span data-ico="smile" data-size="26">😊</span> Taste and cheer</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="field sub-field" id="bake-field">
+            <label for="f-cookie">The cookie I&rsquo;ll bake</label>
+            <select class="inp" id="f-cookie" name="cookie" aria-describedby="e-cookie"></select>
+            <span class="help">Only open kinds are listed. Choosing one claims it on the sign-up sheet.</span>
+            <span class="err" id="e-cookie"></span>
+          </div>
+          <div class="field sub-field" id="taste-field" hidden>
+            <label for="f-bring">I&rsquo;ll bring a cocoa topping</label>
+            <select class="inp" id="f-bring" name="bring">
+              <option>Mini marshmallows</option><option>Whipped cream (two cans)</option><option>Crushed candy canes</option><option>Sprinkles</option><option>Nothing, just me and my appetite</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label id="party-l">Guests in my party, including me</label>
+            <div class="stepper" role="group" aria-labelledby="party-l">
+              <button type="button" id="p-minus" aria-label="One fewer guest"><span data-ico="minus" data-size="22">−</span></button>
+              <output id="p-out" aria-live="polite">1</output>
+              <button type="button" id="p-plus" aria-label="One more guest"><span data-ico="plus" data-size="22">+</span></button>
+            </div>
+            <span class="help">Up to four per RSVP. Only bakers need to bake.</span>
+          </div>
+
+          <div class="field">
+            <fieldset><legend>Anyone in my party needs</legend>
+              <div class="checks">
+                <label><input type="checkbox" name="diet" value="a nut-free option"> A nut-free option</label>
+                <label><input type="checkbox" name="diet" value="gluten-free"> Gluten-free</label>
+                <label><input type="checkbox" name="diet" value="vegan"> Vegan</label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="field">
+            <div class="checks"><label><input type="checkbox" id="f-sweater"> <span><b>Enter me in the Ugly Sweater Awards</b></span></label></div>
+            <div class="sub-field" id="sweater-field" hidden style="margin-top:8px"><label for="f-sweater-name">Name your sweater</label><input class="inp" id="f-sweater-name" type="text" maxlength="40" placeholder="e.g. Fa-La-La-Lasagna"><span class="err" id="e-sweater"></span></div>
+          </div>
+
+          <div class="field">
+            <label>My cocoa order</label>
+            <p style="margin:0 0 4px;font-weight:700" id="f-cocoa">The Fireside: classic dark, nothing on top</p>
+            <a href="#cocoa" class="small" style="color:var(--cran-d)">Build a different mug at the cocoa bar</a>
+          </div>
+
+          <div class="field"><label for="f-note">Anything Nell should know? (optional)</label><textarea class="inp" id="f-note" rows="3" maxlength="300" placeholder="Allergies, a stroller, a plus-one who is also a very good baker"></textarea></div>
+        </div>
+        <div class="form-foot">
+          <button class="btn btn-primary" type="submit"><span data-ico="send" data-size="22">✉️</span> Send my RSVP</button>
+          <p>No account, no spam. This is a demo, so nothing leaves your browser.</p>
+        </div>
+      </form>
+
+      <div class="success paper ruled" id="rsvp-ok" hidden tabindex="-1" aria-live="polite" style="--mx:34px;padding-left:58px">
+        <div class="succ-top">
+          <span class="fi"><span data-live="ticket-number" data-p-number="7" data-p-hash="true" data-size="76" id="succ-ticket" data-label="Your swap number">#7</span></span>
+          <div><p class="eyebrow" style="margin:0">Recipe card no. 12, filled in</p><h3 id="ok-h">You&rsquo;re on the list, <span id="ok-name">friend</span>!</h3></div>
+        </div>
+        <p class="hand" id="ok-hand">Nell is already clearing counter space.</p>
+        <dl class="sum" id="ok-sum"></dl>
+        <div class="cal-row">
+          <button class="btn btn-primary" type="button" id="cal-ics"><span data-ico="download" data-size="22">⬇️</span> Add to calendar (.ics)</button>
+          <a class="btn btn-line" id="cal-google" href="https://calendar.google.com/" target="_blank" rel="noopener"><span data-ico="external-link" data-size="22">↗</span> Google Calendar</a>
+          <button class="btn btn-line" type="button" id="rsvp-edit"><span data-ico="pencil" data-size="22">✏️</span> Edit my RSVP</button>
+        </div>
+        <p class="small" style="margin:14px 0 0">A confirmation would arrive by email. This is a demo page, so nothing was sent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FAQ ═════════ -->
+<section class="sec faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+  <div class="orn" aria-hidden="true" data-min-level="1"><span data-ico="poinsettia" data-size="44">🌺</span></div>
+  <div class="faq-grid">
+    <div class="faq-side">
+      <p class="eyebrow"><span data-ico="help-circle" data-size="24">❓</span> Good to know</p>
+      <h2 id="faq-h" style="font-size:clamp(2rem,5vw,3rem);margin-bottom:22px">Questions, answered</h2>
+      <figure class="faq-photo">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="_img/cookie-swap/photo-1642511842792-993e9b8cd0f8-700.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="Iced Christmas-tree cookies in green, white and gold, dusted with flour and scattered with sugar snowflakes on a light wooden board and a dark slate surface.">
+        <figcaption class="hand">flour on everything</figcaption>
+      </figure>
+    </div>
+    <div>
+      <details><summary>Do I have to bake?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>No. Bakers take home the full thirty-six, but tasters are very welcome: you&rsquo;ll eat from the table, decorate, vote and pour cocoa. Choose &ldquo;Taste and cheer&rdquo; on the RSVP and, if you like, tell us which cocoa topping you&rsquo;ll bring.</p></div></details>
+      <details><summary>Can I bring store-bought cookies?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>The swap itself is homemade only, because that is the whole point. A bakery box for the tasting table is always welcome, though.</p></div></details>
+      <details><summary>What if the kind I want is already claimed?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Each kind can only be claimed once, first come first served. Check the sign-up sheet again on Sunday: bakers do cancel, and a cup frees up the moment they release it.</p></div></details>
+      <details><summary>How do you handle allergies?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Every kind is flagged on the sheet and every tin on the table wears a flag card (nuts, gluten-free, vegan). Each kind has its own tongs, and nut cookies live on a separate board by the window. Please mention severe allergies in your RSVP and we&rsquo;ll talk it through.</p></div></details>
+      <details><summary>Are kids welcome?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Very. They count toward your party of four. The kids&rsquo; table has felt-tips from 4:00 and icing from 5:00, and there is a quiet room upstairs with a blanket fort.</p></div></details>
+      <details><summary>I don&rsquo;t own an ugly sweater.<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Nobody does until December. Abe keeps a basket of fourteen thrift-shop knits by the door: borrow one, or wear the most festive thing you own. A reindeer headband counts.</p></div></details>
+      <details><summary>Where do I park, and is it step-free?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Use the Birch Lane lot (two minutes on foot) or take Route 14 to Spruce &amp; 9th. The side gate on Birch Lane is step-free, and a rolling cart is waiting there for your tins.</p></div></details>
+      <details><summary>What happens to the leftover cookies?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>At 7:30 they are boxed in kraft paper and delivered to the Alder Falls Community Pantry the same evening. Last year that was 214 cookies in 17 boxes.</p></div></details>
+      <details><summary>Can I change my mind after I RSVP?<span class="chev"><span data-ico="chevron-down" data-size="26">▾</span></span></summary><div class="ans"><p>Yes, until Friday, December 4. Edit your RSVP and switch to &ldquo;Taste and cheer&rdquo;, and your cup goes straight back on the sign-up sheet for someone else.</p></div></details>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ═════════ HOSTS ═════════ -->
+<section class="signoff" aria-labelledby="sign-h">
+  <div class="wrap">
+    <div class="sign-card">
+      <img src="_img/cookie-swap/photo-1639583673417-1c90768cb321-700.jpg" width="1200" height="1798" loading="lazy" decoding="async" alt="Red and green iced mitten and boot cookies on a wire cooling rack, with glowing orange tree lights out of focus above them.">
+      <div class="sign-body">
+        <p class="eyebrow">See you on the twelfth</p>
+        <h2 id="sign-h">Warm kitchen, cold snow, twelve kinds of cookie.</h2>
+        <p>We started this swap in 2019 with six bakers and one very full oven. It has grown, but the rule hasn&rsquo;t: bring something you&rsquo;re proud of, leave with something you&rsquo;ve never tried.</p>
+        <p class="hand sign-name">With flour on our aprons, Nell &amp; Abe</p>
+        <div class="hosts">
+          <span data-ico="avatar-woman-braids" data-size="76" data-label="Nell">👩</span>
+          <span data-ico="avatar-man-beard" data-size="76" data-label="Abe">🧔</span>
+        </div>
+        <div class="contact">
+          <p><span data-ico="phone" data-size="26">📞</span> Questions? Call Nell on 555-0142</p>
+          <p><span data-ico="mail" data-size="26">✉️</span> hello@cookieswap.example</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CLOSING BAND ═════════ -->
+<section class="closing dark" aria-labelledby="close-h">
+  <img src="_img/cookie-swap/18505267-1600.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Three stacked gingerbread Christmas-tree cookies with green and white icing and star toppers, among gold baubles and warm blurred tree lights.">
+  <div class="wrap">
+    <div class="fest" data-min-level="2" aria-hidden="true">
+      <span data-ico="stocking" data-size="64" data-motion="hover">🧦</span>
+      <span data-ico="christmas-tree" data-size="80" data-motion="hover">🎄</span>
+      <span data-ico="reindeer" data-size="104" data-motion="hover">🦌</span>
+      <span data-ico="gift-stack" data-size="80" data-motion="hover">🎁</span>
+      <span data-ico="nutcracker" data-size="64" data-motion="hover">💂</span>
+    </div>
+    <h2 id="close-h">Twelve kinds. One long table. Zero duplicate gingerbreads.</h2>
+    <p><span class="cd-text">62 days</span> until the oven timer dings. Save your spot, claim your cup and find your worst sweater.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#rsvp"><span data-ico="mail-plus" data-size="22">✉️</span> Save my spot</a>
+      <a class="btn btn-line" href="#tin"><span data-ico="cookie" data-size="22">🍪</span> Claim a cookie</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═════════ CREDITS ═════════ -->
+<section id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <ul>
+      <li><b>Hero:</b> iced gingerbread cookies beside a candle. Photo by <a href="https://www.pexels.com/@mikegles">Miguel González</a> on <a href="https://www.pexels.com/photo/35467686/">Pexels</a>.</li>
+      <li><b>Kitchen:</b> two women rolling cookie dough. Photo by <a href="https://www.pexels.com/@pavel-danilyuk">Pavel Danilyuk</a> on <a href="https://www.pexels.com/photo/5618060/">Pexels</a>.</li>
+      <li><b>Decorating table:</b> piping icing onto a gingerbread cookie. Photo by <a href="https://www.pexels.com/@olia-danilevich">Olia Danilevich</a> on <a href="https://www.pexels.com/photo/5900056/">Pexels</a>.</li>
+      <li><b>Tins:</b> a red-rimmed tin of iced gingerbread. Photo by <a href="https://www.pexels.com/@nati-87264186">Nati</a> on <a href="https://www.pexels.com/photo/19572160/">Pexels</a>.</li>
+      <li><b>Sweaters:</b> friends in ugly Christmas sweaters. Photo by <a href="https://www.pexels.com/@rdne">RDNE Stock project</a> on <a href="https://www.pexels.com/photo/6517758/">Pexels</a>.</li>
+      <li><b>Cocoa bar:</b> hot chocolate with marshmallows. Photo by <a href="https://unsplash.com/@sixteenmilesout?utm_source=withicons_demos&amp;utm_medium=referral">Sixteen Miles Out</a> on <a href="https://unsplash.com/photos/z4RgJD-UQSc?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Leftover boxes:</b> a kraft-wrapped gift with ribbon. Photo by <a href="https://unsplash.com/@hudsoncrafted?utm_source=withicons_demos&amp;utm_medium=referral">Debby Hudson</a> on <a href="https://unsplash.com/photos/BBU9RqiovfM?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>RSVP:</b> a softly lit Christmas tree. Photo by <a href="https://unsplash.com/@_imd?utm_source=withicons_demos&amp;utm_medium=referral">Zoe</a> on <a href="https://unsplash.com/photos/wHfg3OGa2AM?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>FAQ:</b> iced Christmas-tree cookies and sugar snowflakes. Photo by <a href="https://unsplash.com/@hamideh_jafari?utm_source=withicons_demos&amp;utm_medium=referral">Hamideh Jafari</a> on <a href="https://unsplash.com/photos/Uob05epD1qg?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Hosts:</b> mitten and boot cookies on a cooling rack. Photo by <a href="https://unsplash.com/@libby_penner?utm_source=withicons_demos&amp;utm_medium=referral">Libby Penner</a> on <a href="https://unsplash.com/photos/tbpDWswyjRw?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a>.</li>
+      <li><b>Closing band:</b> stacked gingerbread trees among baubles. Photo by <a href="https://www.pexels.com/@daniel-dolidze-713706614">Daniel Dolidze</a> on <a href="https://www.pexels.com/photo/18505267/">Pexels</a>.</li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT licence. Typefaces: Fraunces and Caveat from Google Fonts.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>The Great Cookie Swap</h2>
+        <p>Saturday, December 12, 2026, 4 to 8 pm.<br>Nell &amp; Abe&rsquo;s, 55 Spruce Hollow Road, Alder Falls.</p>
+        <button class="btn btn-gold btn-sm" type="button" id="cal-foot"><span data-ico="calendar-plus" data-size="20">📆</span> Add to calendar</button>
+      </div>
+      <div>
+        <h2>On this page</h2>
+        <ul>
+          <li><a href="#method"><span data-ico="chef-hat" data-size="22">👩‍🍳</span> How it works</a></li>
+          <li><a href="#tin"><span data-ico="cookie" data-size="22">🍪</span> Sign-up sheet</a></li>
+          <li><a href="#ballot"><span data-ico="trophy" data-size="22">🏆</span> Sweater vote</a></li>
+          <li><a href="#cocoa"><span data-ico="hot-cocoa" data-size="22">☕</span> Cocoa bar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Say hello</h2>
+        <ul>
+          <li><a href="#rsvp"><span data-ico="mail-plus" data-size="22">✉️</span> RSVP</a></li>
+          <li><a href="#faq"><span data-ico="help-circle" data-size="22">❓</span> FAQ</a></li>
+          <li><a href="#where"><span data-ico="map-pin" data-size="22">📍</span> Find us</a></li>
+          <li><a href="#top"><span data-ico="arrow-up" data-size="22">⬆️</span> Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional. Phone numbers are 555 numbers.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="_kit/demo-kit.js" data-style="christmas" data-recommend="christmas,plush,sticker,retro,engrave,line,clay,lunar" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var store = {
+    get: function (k) { try { return sessionStorage.getItem(k) } catch (e) { return null } },
+    set: function (k, v) { try { sessionStorage.setItem(k, v) } catch (e) {} }
+  }
+  var pad = function (n) { return (n < 10 ? '0' : '') + n }
+  var plural = function (n, w) { return n + ' ' + w + (n === 1 ? '' : 's') }
+  var list = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1] }
+  var initialsOf = function (n) {
+    var p = String(n).trim().replace(/[^A-Za-z\u00C0-\u024F ]/g, ' ').split(/\s+/).filter(Boolean)
+    if (!p.length) return 'ME'
+    return ((p[0][0] || '') + (p.length > 1 ? p[p.length - 1][0] : (p[0][1] || ''))).toUpperCase()
+  }
+  var toastEl = $('#toast'), toastT
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.classList.add('on')
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on') }, 3600)
+  }
+  // update a live icon: works before the kit has started (data attributes) and after (WithKit.setLive)
+  function setLive(el, params, fallback) {
+    if (!el) return
+    Object.keys(params).forEach(function (k) { el.dataset['p' + k.replace(/(^|-)(\w)/g, function (_, a, c) { return c.toUpperCase() })] = params[k] })
+    if (window.WithKit && el._kit && el._kit.live) window.WithKit.setLive(el, params)
+    if (fallback != null) {
+      var f = el.querySelector('.kit-fb')
+      if (f) f.textContent = fallback; else if (!el._kit) el.textContent = fallback
+      if (el._kit) el._kit.fb = fallback
+    }
+  }
+
+  /* ───────── snow toggle + mobile menu ───────── */
+  var snowBtn = $('#snow-toggle')
+  function setSnow(on) {
+    document.documentElement.classList.toggle('no-snow', !on)
+    snowBtn.setAttribute('aria-pressed', on ? 'true' : 'false')
+    snowBtn.setAttribute('aria-label', 'Snowfall: ' + (on ? 'on' : 'off'))
+    store.set('cs:snow', on ? '1' : '0')
+  }
+  snowBtn.addEventListener('click', function () { setSnow(snowBtn.getAttribute('aria-pressed') !== 'true') })
+  if (store.get('cs:snow') === '0') setSnow(false)
+
+  var mBtn = $('#m-toggle'), mNav = $('#m-nav')
+  function menu(open) { mNav.hidden = !open; mBtn.setAttribute('aria-expanded', open ? 'true' : 'false') }
+  mBtn.addEventListener('click', function () { menu(mNav.hidden) })
+  mNav.addEventListener('click', function (e) { if (e.target.closest('a')) menu(false) })
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mNav.hidden) { menu(false); mBtn.focus() } })
+
+  /* ───────── countdown ───────── */
+  var START = new Date(2026, 11, 12, 16, 0, 0), END = new Date(2026, 11, 12, 20, 0, 0)
+  function tick() {
+    var now = new Date(), ms = START - now, main, sub, closing
+    var ringLeft = 0, ringTotal = 90
+    if (now > END) {
+      main = 'This year\u2019s swap is a wrap'; sub = 'Thank you, bakers. Save the date: Saturday, December 11, 2027.'
+      closing = 'This year\u2019s swap is a wrap. Thank you, bakers: see you next December.'
+    } else if (now >= START) {
+      main = 'The oven is on: come on in'; sub = 'Doors are open until 8:00 pm tonight.'
+      closing = 'The swap is happening right now. Come on in, the cocoa is hot.'
+    } else {
+      var d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4)
+      if (d >= 1) main = plural(d, 'day') + (h ? ', ' + plural(h, 'hour') : '') + ' to go'
+      else if (h >= 1) main = plural(h, 'hour') + ', ' + plural(m, 'minute') + ' to go'
+      else main = plural(Math.max(m, 1), 'minute') + ' to go'
+      sub = 'Doors open Saturday, December 12 at 4:00 pm'
+      ringLeft = Math.min(99, Math.max(d, 0)); ringTotal = Math.min(99, Math.max(90, ringLeft))
+      closing = (d >= 1 ? plural(d, 'day') : 'Less than a day') + ' until the oven timer dings. Save your spot, claim your cup and find your worst sweater.'
+    }
+    $('#cd').textContent = main; $('#cd-sub').textContent = sub
+    var cp = $('.closing p'); if (cp) cp.textContent = closing
+    var ring = $('#ring')
+    if (ring.dataset.pLeft !== String(ringLeft) || ring.dataset.pTotal !== String(ringTotal)) setLive(ring, { left: ringLeft, total: ringTotal }, String(ringLeft))
+  }
+  tick(); setInterval(tick, 30000)
+
+  /* ───────── calendar ───────── */
+  var EVT = {
+    title: 'The Great Cookie Swap',
+    where: 'Nell & Abe\'s, 55 Spruce Hollow Road, Alder Falls',
+    start: '20261212T160000', end: '20261212T200000',
+    about: 'Bake 3.5 dozen of one kind (36 to swap, 6 for the tasting table). Bring a tin, 12 recipe cards and an ugly sweater. Cookies go on the sorting table by 4:30 pm and the swap starts at 5:45 pm. Questions: Nell, 555-0142.'
+  }
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n') }
+  function fold(line) {
+    var out = []
+    while (line.length > 74) { out.push(line.slice(0, 74)); line = ' ' + line.slice(74) }
+    out.push(line); return out.join('\r\n')
+  }
+  function buildIcs() {
+    var n = new Date()
+    var stamp = n.getUTCFullYear() + pad(n.getUTCMonth() + 1) + pad(n.getUTCDate()) + 'T' + pad(n.getUTCHours()) + pad(n.getUTCMinutes()) + pad(n.getUTCSeconds()) + 'Z'
+    var about = EVT.about + (tin.mine ? ' You are baking: ' + tin.label(tin.mine) + '.' : '')
+    var lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demos//The Great Cookie Swap//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:great-cookie-swap-2026@demo.example', 'DTSTAMP:' + stamp,
+      'DTSTART:' + EVT.start, 'DTEND:' + EVT.end,
+      'SUMMARY:' + icsEsc(EVT.title), 'LOCATION:' + icsEsc(EVT.where), 'DESCRIPTION:' + icsEsc(about),
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:The Great Cookie Swap is tomorrow at 4 pm', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ]
+    return lines.map(fold).join('\r\n') + '\r\n'
+  }
+  function downloadIcs() {
+    var blob = new Blob([buildIcs()], { type: 'text/calendar;charset=utf-8' })
+    var a = document.createElement('a')
+    a.href = URL.createObjectURL(blob); a.download = 'great-cookie-swap-2026.ics'
+    document.body.appendChild(a); a.click(); a.remove()
+    setTimeout(function () { URL.revokeObjectURL(a.href) }, 4000)
+    toast('Calendar file saved: Saturday, December 12, 4 to 8 pm')
+  }
+  function googleUrl() {
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(EVT.title) +
+      '&dates=' + EVT.start + '/' + EVT.end + '&details=' + encodeURIComponent(EVT.about) + '&location=' + encodeURIComponent(EVT.where)
+  }
+  ;['#cal-hero', '#cal-ics', '#cal-foot'].forEach(function (s) { var b = $(s); if (b) b.addEventListener('click', downloadIcs) })
+  $('#cal-google').href = googleUrl()
+
+  $('#copy-addr').addEventListener('click', function () {
+    var txt = '55 Spruce Hollow Road, Alder Falls'
+    function done() { toast('Address copied: ' + txt) }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback()
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = txt; ta.style.cssText = 'position:fixed;opacity:0'
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done() } catch (e) { toast(txt) } ta.remove()
+    }
+  })
+
+  /* ───────── map pins <-> route list ───────── */
+  function pinOn(id, on) {
+    $$('.pin[data-pin="' + id + '"]').forEach(function (p) { p.classList.toggle('on', on) })
+    $$('.route[data-pin="' + id + '"]').forEach(function (p) { p.classList.toggle('on', on) })
+  }
+  $$('.route, .pin').forEach(function (el) {
+    el.addEventListener('mouseenter', function () { pinOn(el.dataset.pin, true) })
+    el.addEventListener('mouseleave', function () { pinOn(el.dataset.pin, false) })
+    el.addEventListener('click', function () { var on = !el.classList.contains('on'); $$('.route.on,.pin.on').forEach(function (x) { x.classList.remove('on') }); if (on) pinOn(el.dataset.pin, true) })
+  })
+
+  /* ───────── the tin: sign-up sheet ───────── */
+  var cups = $$('.cup')
+  var tin = {
+    taken: {}, mine: null, name: '', filter: 'all',
+    label: function (id) { var c = cups.filter(function (x) { return x.dataset.id === id })[0]; return c ? $('.cn', c).textContent : '' }
+  }
+  cups.forEach(function (c) { if (c.dataset.by) tin.taken[c.dataset.id] = c.dataset.by })
+  var sheetName = $('#sheet-name'), fName = $('#f-name'), tinNote = $('#tin-note')
+  var BASE_TASTERS = 11
+
+  function openCount() { return cups.length - Object.keys(tin.taken).length - (tin.mine ? 1 : 0) }
+  function matches(c) {
+    var st = c.dataset.state
+    switch (tin.filter) {
+      case 'open': return st === 'open'
+      case 'taken': return st !== 'open'
+      case 'nutfree': return c.dataset.nuts === '0'
+      case 'gf': return c.dataset.gf === '1'
+      case 'vg': return c.dataset.vg === '1'
+      default: return true
+    }
+  }
+  function renderTin() {
+    var shown = 0
+    cups.forEach(function (c) {
+      var id = c.dataset.id, other = tin.taken[id], mine = tin.mine === id
+      var st = mine ? 'mine' : other ? 'taken' : 'open'
+      c.dataset.state = st
+      c.disabled = st === 'taken'
+      var av = $('.av', c), nm = $('.nm', c), go = $('.go', c), name = $('.cn', c).textContent
+      if (st === 'open') {
+        av.hidden = true; nm.hidden = true; go.hidden = false; $('.gt', go).innerHTML = 'Claim<span class="gx"> this kind</span>'
+        c.setAttribute('aria-pressed', 'false'); c.setAttribute('aria-label', 'Claim ' + name)
+      } else {
+        var who = mine ? (tin.name.trim() || 'You') : other
+        av.hidden = false; nm.hidden = false; nm.textContent = who
+        setLive($('[data-live]', av), { initials: initialsOf(who) }, initialsOf(who))
+        $('[data-live]', av).setAttribute('data-label', who)
+        go.hidden = !mine; $('.gt', go).innerHTML = 'Yours<span class="gx">. Tap to release</span>'
+        if (mine) { c.setAttribute('aria-pressed', 'true'); c.setAttribute('aria-label', name + ', claimed by you. Tap to release') }
+        else { c.removeAttribute('aria-pressed'); c.setAttribute('aria-label', name + ', claimed by ' + other) }
+      }
+      var ok = matches(c); if (ok) shown++
+      if (ok) c.removeAttribute('data-dim'); else c.setAttribute('data-dim', '')
+    })
+    var claimed = cups.length - openCount()
+    $('#tin-count').textContent = claimed + ' of ' + cups.length + ' claimed' + (tin.filter !== 'all' ? ' \u00b7 showing ' + shown : '')
+    $('#tin-meter').style.width = Math.round(claimed / cups.length * 100) + '%'
+    $('#tin-bar').setAttribute('aria-valuenow', claimed)
+    var left = openCount()
+    $('#spots-open').textContent = left
+    $('#ann-text').textContent = tin.mine ? 'Your cup is saved: ' + tin.label(tin.mine) + '. See you on the 12th' :
+      left === 0 ? 'All twelve cups are claimed. Taster places are still open' :
+      plural(left, 'cookie kind') + ' still open: claim yours'
+    fillCookieSelect()
+    store.set('cs:claim', JSON.stringify({ id: tin.mine, name: tin.name }))
+  }
+  function note(msg) { tinNote.textContent = msg }
+  function needName(from) {
+    var f = from === 'rsvp' ? fName : sheetName
+    f.setAttribute('aria-invalid', 'true'); f.focus()
+    var m = 'Add your name first so Nell knows whose cup this is.'
+    note(m); if (from === 'rsvp') $('#e-name').textContent = m
+    toast(m)
+  }
+  function claim(id, from) {
+    if (!tin.name.trim()) { needName(from); return false }
+    if (tin.taken[id]) return false
+    if (tin.mine === id) { release(); return true }
+    var prev = tin.mine
+    tin.mine = id
+    note(prev ? 'Moved you from ' + tin.label(prev) + ' to ' + tin.label(id) + '. One cup each!' : 'It\u2019s yours: ' + tin.label(id) + '. Nell has added you to the sheet.')
+    renderTin(); return true
+  }
+  function release(quiet) {
+    var prev = tin.mine; tin.mine = null
+    if (prev && !quiet) note('Released ' + tin.label(prev) + '. It\u2019s open again for someone else.')
+    renderTin()
+  }
+  cups.forEach(function (c) { c.addEventListener('click', function () { if (!c.disabled) claim(c.dataset.id, 'sheet') }) })
+  $$('.chip[data-filter]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      tin.filter = b.dataset.filter
+      $$('.chip[data-filter]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
+      renderTin()
+    })
+  })
+  function setName(v, src) {
+    tin.name = v
+    if (src !== sheetName && sheetName.value !== v) sheetName.value = v
+    if (src !== fName && fName.value !== v) fName.value = v
+    if (v.trim()) { sheetName.removeAttribute('aria-invalid'); fName.removeAttribute('aria-invalid'); $('#e-name').textContent = '' }
+    if (tin.mine) renderTin()
+  }
+  sheetName.addEventListener('input', function () { setName(sheetName.value, sheetName) })
+  fName.addEventListener('input', function () { setName(fName.value, fName) })
+
+  /* RSVP cookie select mirrors the sheet */
+  var cookieSel = $('#f-cookie')
+  function fillCookieSelect() {
+    var cur = tin.mine || ''
+    var html = '<option value="">Choose an open cookie\u2026</option>'
+    cups.forEach(function (c) {
+      var id = c.dataset.id
+      if (!tin.taken[id] || false) html += '<option value="' + id + '"' + (id === cur ? ' selected' : '') + '>' + $('.cn', c).textContent + '</option>'
+    })
+    cookieSel.innerHTML = html
+    cookieSel.value = cur
+  }
+  cookieSel.addEventListener('change', function () {
+    $('#e-cookie').textContent = ''; cookieSel.removeAttribute('aria-invalid')
+    var v = cookieSel.value
+    if (!v) { release(); return }
+    if (!claim(v, 'rsvp')) cookieSel.value = tin.mine || ''
+  })
+
+  /* ───────── packing checklist ───────── */
+  var packs = $$('[data-pk]')
+  function renderPack(save) {
+    var n = packs.filter(function (p) { return p.checked }).length, pct = Math.round(n / packs.length * 100)
+    $('#pack-count').textContent = n + ' of ' + packs.length + ' packed'
+    setLive($('#pack-ring'), { value: pct }, pct + '%')
+    $('#pack-msg').textContent = n === 0 ? 'Nothing packed yet. Cookies first, then the tin.' : n < 4 ? 'Good start. Keep going.' : n < packs.length ? 'Nearly there. Check the lid and the labels.' : 'All packed. Go forth and swap!'
+    if (save !== false) store.set('cs:pack', packs.map(function (p) { return p.checked ? 1 : 0 }).join(''))
+  }
+  packs.forEach(function (p) { p.addEventListener('change', renderPack) })
+  $('#pack-reset').addEventListener('click', function () { packs.forEach(function (p) { p.checked = false }); renderPack() })
+  var savedPack = store.get('cs:pack')
+  if (savedPack) packs.forEach(function (p, i) { p.checked = savedPack[i] === '1' })
+  renderPack(false)
+
+  /* ───────── ballot ───────── */
+  var CATS = [['ugly', 'Ugliest overall'], ['lights', 'Most lights'], ['pun', 'Best pun']]
+  var SEED = { ugly: [7, 12, 4, 10, 3, 5], lights: [11, 2, 3, 1, 6, 19], pun: [3, 4, 5, 21, 8, 2] }
+  var entryNames = $$('#ballot-form tbody tr').map(function (tr) { return $('b', tr).textContent })
+  var bForm = $('#ballot-form'), bMsg = $('#ballot-msg'), resBox = $('#results')
+  function showResults() {
+    var body = $('#res-body'); body.textContent = ''
+    var total = 41
+    CATS.forEach(function (cat) {
+      var mineV = (bForm.elements[cat[0]].value || '')
+      var rows = SEED[cat[0]].map(function (n, i) { return { i: i, n: n + (mineV === String(i + 1) ? 1 : 0) } })
+      var sum = rows.reduce(function (a, r) { return a + r.n }, 0)
+      rows.sort(function (a, b) { return b.n - a.n || a.i - b.i })
+      var wrap = document.createElement('div'); wrap.className = 'res-cat'
+      var h = document.createElement('h4'); h.textContent = cat[1]; wrap.appendChild(h)
+      rows.forEach(function (r, k) {
+        var row = document.createElement('div'); row.className = 'res-row' + (mineV === String(r.i + 1) ? ' mine' : '') + (k === 0 ? ' lead' : '')
+        var nm = document.createElement('b'); nm.textContent = entryNames[r.i] + (mineV === String(r.i + 1) ? ' (you)' : '')
+        var bar = document.createElement('span'); bar.className = 'bar'; var fill = document.createElement('i'); bar.appendChild(fill)
+        var n = document.createElement('span'); n.className = 'n'; n.textContent = Math.round(r.n / sum * 100) + '%'
+        row.appendChild(nm); row.appendChild(bar); row.appendChild(n); wrap.appendChild(row)
+        setTimeout(function () { fill.style.width = Math.max(4, Math.round(r.n / sum * 100)) + '%' }, 60)
+      })
+      body.appendChild(wrap)
+    })
+    var mine = CATS.filter(function (c) { return bForm.elements[c[0]].value }).length
+    $('#res-total').textContent = total + 1
+    bForm.hidden = true; resBox.hidden = false
+    store.set('cs:ballot', JSON.stringify(CATS.map(function (c) { return bForm.elements[c[0]].value })))
+    return mine
+  }
+  bForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var any = CATS.some(function (c) { return bForm.elements[c[0]].value })
+    if (!any) { bMsg.textContent = 'Pick at least one sweater first. You can leave a category blank.'; return }
+    bMsg.textContent = ''
+    var n = showResults()
+    toast('Ballot counted: ' + plural(n, 'category') + '. Thank you!')
+  })
+  bForm.addEventListener('change', function () { bMsg.textContent = '' })
+  $('#ballot-redo').addEventListener('click', function () { resBox.hidden = true; bForm.hidden = false; $('input[type=radio]', bForm).focus() })
+  try {
+    var sb = JSON.parse(store.get('cs:ballot') || 'null')
+    if (sb) CATS.forEach(function (c, i) { if (sb[i]) { var r = $('input[name="' + c[0] + '"][value="' + sb[i] + '"]', bForm); if (r) r.checked = true } })
+  } catch (e) {}
+
+  /* ───────── cocoa builder ───────── */
+  var BASES = { classic: ['The Fireside', 'Classic dark'], caramel: ['The Salted Sleigh', 'Salted caramel milk'], white: ['The Snow Day', 'White peppermint'], oat: ['The Evergreen', 'Oat-milk dark'] }
+  var cocoa = { base: 'classic', tops: [], splash: false, saved: 'The Fireside: classic dark, nothing on top' }
+  function cocoaText() {
+    var b = BASES[cocoa.base]
+    var d = b[1] + (cocoa.tops.length ? ', topped with ' + list(cocoa.tops) : ', nothing on top') + (cocoa.splash ? ', plus a grown-up splash' : '') + '.'
+    if (!cocoa.tops.length && !cocoa.splash) d += ' Plain and perfect.'
+    return { name: b[0], desc: d }
+  }
+  function renderCocoa() {
+    var t = cocoaText()
+    $('#mug-name').textContent = t.name; $('#mug-desc').textContent = t.desc
+    $$('#bases .opt').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.base === cocoa.base ? 'true' : 'false') })
+    $$('#tops .opt').forEach(function (b) { b.setAttribute('aria-pressed', cocoa.tops.indexOf(b.dataset.top) > -1 ? 'true' : 'false') })
+    $('#splash').setAttribute('aria-pressed', cocoa.splash ? 'true' : 'false')
+    $('#topcount').textContent = cocoa.tops.length ? cocoa.tops.length + ' of 3 toppings' : ''
+  }
+  $('#bases').addEventListener('click', function (e) { var b = e.target.closest('.opt'); if (b) { cocoa.base = b.dataset.base; renderCocoa() } })
+  $('#tops').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b) return
+    var i = cocoa.tops.indexOf(b.dataset.top)
+    if (i > -1) cocoa.tops.splice(i, 1)
+    else if (cocoa.tops.length >= 3) { $('#topcount').textContent = 'Three is the limit: tap one to swap it out.'; return }
+    else cocoa.tops.push(b.dataset.top)
+    renderCocoa()
+  })
+  $('#splash').addEventListener('click', function () { cocoa.splash = !cocoa.splash; renderCocoa() })
+  $('#mug-use').addEventListener('click', function () {
+    var t = cocoaText(); cocoa.saved = t.name + ': ' + t.desc.charAt(0).toLowerCase() + t.desc.slice(1).replace(/\. Plain and perfect\.$/, '').replace(/\.$/, '')
+    $('#f-cocoa').textContent = cocoa.saved
+    toast('Saved to your RSVP: ' + t.name)
+  })
+  renderCocoa()
+
+  /* ───────── RSVP ───────── */
+  var form = $('#rsvp-form'), ok = $('#rsvp-ok'), party = 1
+  var role = function () { return form.elements.role.value }
+  function setParty(n) {
+    party = Math.max(1, Math.min(4, n)); $('#p-out').textContent = party
+    $('#p-minus').disabled = party === 1; $('#p-plus').disabled = party === 4
+    var left = BASE_TASTERS - (submitted ? (role() === 'taste' ? party : party - 1) : 0)
+    $('#spots-taste').textContent = Math.max(0, left)
+  }
+  var submitted = false
+  $('#p-minus').addEventListener('click', function () { setParty(party - 1) })
+  $('#p-plus').addEventListener('click', function () { setParty(party + 1) })
+  function syncRole() {
+    var bake = role() === 'bake'
+    $('#bake-field').hidden = !bake; $('#taste-field').hidden = bake
+    if (!bake && tin.mine) { var t = tin.label(tin.mine); release(true); toast('Released ' + t + ' back to the sign-up sheet.') }
+  }
+  $$('input[name="role"]').forEach(function (r) { r.addEventListener('change', syncRole) })
+  $('#f-sweater').addEventListener('change', function () { $('#sweater-field').hidden = !this.checked; if (this.checked) $('#f-sweater-name').focus() })
+  ;['#f-email', '#f-sweater-name'].forEach(function (s) { $(s).addEventListener('input', function () { this.removeAttribute('aria-invalid'); var e = $('#' + (this.id === 'f-email' ? 'e-email' : 'e-sweater')); if (e) e.textContent = '' }) })
+
+  function fail(el, errId, msg) { el.setAttribute('aria-invalid', 'true'); $('#' + errId).textContent = msg; return el }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var bad = []
+    ;['#f-name', '#f-email', '#f-cookie', '#f-sweater-name'].forEach(function (s) { $(s).removeAttribute('aria-invalid') })
+    ;['#e-name', '#e-email', '#e-cookie', '#e-sweater'].forEach(function (s) { $(s).textContent = '' })
+    var name = fName.value.trim(), email = $('#f-email').value.trim()
+    if (name.length < 2) bad.push(fail(fName, 'e-name', 'Please add your name so Nell can find you at the door.'))
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) bad.push(fail($('#f-email'), 'e-email', email ? 'That email doesn\u2019t look right. Try name@example.com.' : 'We need an email to send your confirmation.'))
+    if (role() === 'bake' && !tin.mine) bad.push(fail(cookieSel, 'e-cookie', 'Choose an open cookie, or switch to \u201cTaste and cheer\u201d.'))
+    if ($('#f-sweater').checked && !$('#f-sweater-name').value.trim()) bad.push(fail($('#f-sweater-name'), 'e-sweater', 'Give your sweater a name for the ballot.'))
+    if (bad.length) { bad[0].focus(); return }
+    submitted = true; setParty(party)
+    var diet = $$('input[name="diet"]:checked').map(function (c) { return c.value })
+    var baker = role() === 'bake'
+    var sum = $('#ok-sum'); sum.textContent = ''
+    function row(k, v) { var dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; sum.appendChild(dt); sum.appendChild(dd) }
+    row('Guest', name + (party > 1 ? ' + ' + (party - 1) + (party === 2 ? ' guest' : ' guests') : ''))
+    row('Coming as', baker ? 'Baker: ' + tin.label(tin.mine) : 'Taster, bringing ' + $('#f-bring').value.toLowerCase())
+    row('Cocoa', cocoa.saved)
+    row('Sweater', $('#f-sweater').checked ? 'Entered as \u201c' + $('#f-sweater-name').value.trim() + '\u201d' : 'Not entering (yet)')
+    row('Needs', diet.length ? list(diet) : 'Nothing special')
+    row('Doors', 'Saturday, December 12, 4:00 pm')
+    $('#ok-name').textContent = name.split(/\s+/)[0]
+    $('#ok-hand').textContent = baker ? 'Nell is already clearing counter space for your ' + tin.label(tin.mine).toLowerCase() + '.' : 'Abe is saving you a mug and a good spot by the cocoa pot.'
+    var num = baker ? Object.keys(tin.taken).length + 1 : 13 + (name.split('').reduce(function (a, c) { return a + c.charCodeAt(0) }, 0) % 17)
+    setLive($('#succ-ticket'), { number: num, hash: true }, '#' + num)
+    $('#succ-ticket').setAttribute('data-label', (baker ? 'Swap table number ' : 'Guest number ') + num)
+    form.hidden = true; ok.hidden = false; ok.focus()
+    $('#cal-google').href = googleUrl()
+    store.set('cs:rsvp', '1')
+  })
+  $('#rsvp-edit').addEventListener('click', function () { ok.hidden = true; form.hidden = false; fName.focus() })
+
+  /* ───────── restore + first paint ───────── */
+  try {
+    var c = JSON.parse(store.get('cs:claim') || 'null')
+    if (c && c.name) { tin.name = c.name; sheetName.value = c.name; fName.value = c.name }
+    if (c && c.id && !tin.taken[c.id]) tin.mine = c.id
+  } catch (e) {}
+  setParty(1); renderTin(); syncRole()
+  // test hook for the demo pages' QA tools
+  window.cookieSwap = { ics: buildIcs, state: function () { return { mine: tin.mine, name: tin.name, open: openCount(), cocoa: cocoa } } }
+})()
+</script>
+</body>
+</html>

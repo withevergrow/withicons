@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit playground | with icons demos</title>
+<style>
+  body{margin:0;font:16px/1.5 system-ui,sans-serif;background:#faf7f2;color:#241c3a}
+  main{max-width:880px;margin:0 auto;padding:40px 20px 120px}
+  h1{font-size:32px;margin:0 0 6px}
+  .row{display:flex;flex-wrap:wrap;gap:16px;margin:18px 0;align-items:center}
+  .card{background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;gap:12px;align-items:center}
+  [data-min-level="2"]{background:#fff3b0;padding:2px 8px;border-radius:6px}
+  [data-max-level="0"]{background:#ddd;padding:2px 8px;border-radius:6px}
+  #credits{margin-top:40px;font-size:13px;color:#6b6280}
+</style>
+</head>
+<body>
+<main>
+  <h1>Kit playground</h1>
+  <p>Self-test page for <code>demo-kit.js</code>. Everything below is an icon slot with an emoji fallback.</p>
+  <div class="row">
+    <div class="card"><span data-ico="calendar" data-size="28">📅</span> Saturday 31 October</div>
+    <div class="card"><span data-ico="clock" data-size="28">🕗</span> 8:00 pm</div>
+    <div class="card"><span data-ico="map-pin" data-size="28">📍</span> 14 Larkspur Lane</div>
+    <div class="card"><span data-ico="gift" data-size="28" data-label="Gift">🎁</span> No gifts, please</div>
+  </div>
+  <div class="row">
+    <span data-ico="heart" data-size="48" data-sample data-motion="loop">❤️</span>
+    <span data-ico="sparkles" data-size="48" data-motion="hover">✨</span>
+    <span data-ico="home" data-size="48" data-fixed-style="line">🏠</span>
+    <span data-live="calendar-date" data-p-day="31" data-p-month="OCT" data-size="64" data-label="31 October">31</span>
+    <span data-live="clock-time" data-p-time="20:00" data-size="64" data-label="8 pm">8pm</span>
+    <span data-live="cart-count" data-p-count="3" data-size="48" id="cartlive">3</span>
+  </div>
+  <p data-min-level="2">Only at Full level.</p>
+  <p data-max-level="0">Only at Basic level.</p>
+  <button id="add" type="button">Add to cart (setLive)</button>
+  <section id="credits"><h2>Photo credits</h2><p>No photos on this page. Icons by <a href="https://withicons.com">with icons</a>. Fictional demo.</p></section>
+</main>
+<script src="../../site/demos/_kit/demo-kit.js" data-style="gothic" data-recommend="gothic,halloween,sketch,engrave,glass,luxe,chrome,line" data-level="2" defer></script>
+<script>
+  document.getElementById('add').addEventListener('click', function () {
+    var el = document.getElementById('cartlive'); var n = (+el.dataset.pCount || 0) + 1
+    WithKit.setLive(el, { count: n })
+  })
+</script>
+</body>
+</html>

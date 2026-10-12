@@ -1,0 +1,214 @@
+{
+  "slug": "cookie-swap",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "35467686",
+      "page": "https://www.pexels.com/photo/35467686/",
+      "url": "https://images.pexels.com/photos/35467686/pexels-photo-35467686.jpeg",
+      "photographer": "Miguel González",
+      "photographerUrl": "https://www.pexels.com/@mikegles",
+      "alt": "Iced gingerbread cookies on a white plate beside a lit candle and dark fir branches, on a table in a dim, cosy room.",
+      "colors": "deep navy, cream, gingerbread brown",
+      "focal": "50% 70%",
+      "notes": "Dark calm top third is built for headline text; warm candle glow bottom right. Crop wide or tall; keep the plate in the lower half.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/cookie-swap/35467686-1000.jpg"
+      }
+    },
+    {
+      "slot": "decorating",
+      "src": "pexels",
+      "id": "5900056",
+      "page": "https://www.pexels.com/photo/5900056/",
+      "url": "https://images.pexels.com/photos/5900056/pexels-photo-5900056.jpeg",
+      "photographer": "Olia Danilevich",
+      "photographerUrl": "https://www.pexels.com/@olia-danilevich",
+      "alt": "A hand piping white icing onto a gingerbread cookie, with other iced reindeer and star cookies on a pale table.",
+      "colors": "cream, gingerbread brown, white icing",
+      "focal": "55% 60%",
+      "notes": "Portrait close-up, no faces. Bright and airy, so it sits well on cream panels; crop to a square around the piping bag and cookie.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/cookie-swap/5900056-700.jpg"
+      }
+    },
+    {
+      "slot": "sweaters",
+      "src": "pexels",
+      "id": "6517758",
+      "page": "https://www.pexels.com/photo/6517758/",
+      "url": "https://images.pexels.com/photos/6517758/pexels-photo-6517758.jpeg",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": "https://www.pexels.com/@rdne",
+      "alt": "Friends in colourful ugly Christmas sweaters laughing and hugging in a doorway, one holding a small wrapped gift box, with a baubled garland on the door beside them.",
+      "colors": "cobalt, cranberry, cream",
+      "focal": "50% 45%",
+      "notes": "Warm, candid and fun with a wide frame. Works as a section photo or a rounded card; faces are mid-distance, not close-ups.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/cookie-swap/6517758-1000.jpg"
+      }
+    },
+    {
+      "slot": "cocoa",
+      "src": "unsplash",
+      "id": "z4RgJD-UQSc",
+      "page": "https://unsplash.com/photos/z4RgJD-UQSc",
+      "url": "https://images.unsplash.com/photo-1702648906616-b030f193edb9",
+      "photographer": "Sixteen Miles Out",
+      "photographerUrl": "https://unsplash.com/@sixteenmilesout",
+      "alt": "A white ceramic cup of hot chocolate piled with mini marshmallows on a wooden board, beside fir sprigs and a red ribbon, with soft fairy lights behind.",
+      "colors": "white, pine green, cranberry red",
+      "focal": "55% 55%",
+      "notes": "Soft white backdrop gives space for a caption on the upper half. Great for the cocoa bar menu; crop can go wide or square.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/cookie-swap/photo-1702648906616-b030f193edb9-1000.jpg"
+      }
+    },
+    {
+      "slot": "tree",
+      "src": "unsplash",
+      "id": "wHfg3OGa2AM",
+      "page": "https://unsplash.com/photos/wHfg3OGa2AM",
+      "url": "https://images.unsplash.com/photo-1702276125956-18295ebdb086",
+      "photographer": "Zoe",
+      "photographerUrl": "https://unsplash.com/@_imd",
+      "alt": "A dim, cosy living room with a softly lit Christmas tree glowing behind a sofa and a coffee table with a mug and a book.",
+      "colors": "warm gold, deep green, charcoal",
+      "focal": "40% 25%",
+      "notes": "Portrait, very moody and warm; the tree sits in the upper left. Good as a tall side image or a dark band behind light text.",
+      "width": 1200,
+      "height": 1799,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/cookie-swap/photo-1702276125956-18295ebdb086-800.jpg"
+      }
+    },
+    {
+      "slot": "wrap",
+      "src": "unsplash",
+      "id": "BBU9RqiovfM",
+      "page": "https://unsplash.com/photos/BBU9RqiovfM",
+      "url": "https://images.unsplash.com/photo-1543268963-0c47b633e281",
+      "photographer": "Debby Hudson",
+      "photographerUrl": "https://unsplash.com/@hudsoncrafted",
+      "alt": "A gift wrapped in kraft paper with a red patterned band and ribbon, beside a candy cane, a gingerbread man and pine branches on a dark wooden table.",
+      "colors": "kraft brown, cranberry red, pine green",
+      "focal": "60% 45%",
+      "notes": "Top-down flat lay with the ribbon trailing off to the right. Ideal for the packaging checklist; crops well to wide or square.",
+      "width": 1200,
+      "height": 795,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/cookie-swap/photo-1543268963-0c47b633e281-800.jpg"
+      }
+    },
+    {
+      "slot": "tins",
+      "src": "pexels",
+      "id": "19572160",
+      "page": "https://www.pexels.com/photo/19572160/",
+      "url": "https://images.pexels.com/photos/19572160/pexels-photo-19572160.jpeg",
+      "photographer": "Nati",
+      "photographerUrl": "https://www.pexels.com/@nati-87264186",
+      "alt": "Overhead view of a red-rimmed oval tin lined with baking paper and packed with dark gingerbread cookies iced in white, beside a fir sprig with warm fairy lights glowing behind.",
+      "colors": "chocolate brown, white icing, pine green, warm gold",
+      "focal": "40% 65%",
+      "notes": "Portrait, atmospheric and sharp. The tin fills the lower two-thirds; the white cloth top left and soft bokeh above leave room for a caption. Crop to a square around the tin for the packaging checklist.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/cookie-swap/19572160-800.jpg"
+      }
+    },
+    {
+      "slot": "kitchen",
+      "src": "pexels",
+      "id": "5618060",
+      "page": "https://www.pexels.com/photo/5618060/",
+      "url": "https://images.pexels.com/photos/5618060/pexels-photo-5618060.jpeg",
+      "photographer": "Pavel Danilyuk",
+      "photographerUrl": "https://www.pexels.com/@pavel-danilyuk",
+      "alt": "Two women in a warm, softly lit home kitchen kneading and rolling cookie dough on a counter, with a candle and fir branches behind them.",
+      "colors": "warm amber, forest green, cream",
+      "focal": "50% 50%",
+      "notes": "Two young women kneading and rolling gingerbread dough, both looking down at the counter (faces visible in profile, candid). Warm and calm, landscape; good beside the how-a-swap-works steps.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/cookie-swap/5618060-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "18505267",
+      "page": "https://www.pexels.com/photo/18505267/",
+      "url": "https://images.pexels.com/photos/18505267/pexels-photo-18505267.jpeg",
+      "photographer": "Daniel Dolidze",
+      "photographerUrl": "https://www.pexels.com/@daniel-dolidze-713706614",
+      "alt": "Three stacked gingerbread Christmas-tree cookies with green and white icing and star toppers, among gold baubles and warm blurred tree lights.",
+      "colors": "gold, green, deep brown",
+      "focal": "35% 55%",
+      "notes": "Second hero candidate: wide, sparkling and very festive. Text will need a scrim over the bokeh at the top.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/cookie-swap/18505267-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "Uob05epD1qg",
+      "page": "https://unsplash.com/photos/Uob05epD1qg",
+      "url": "https://images.unsplash.com/photo-1642511842792-993e9b8cd0f8",
+      "photographer": "Hamideh Jafari",
+      "photographerUrl": "https://unsplash.com/@hamideh_jafari",
+      "alt": "Iced Christmas-tree cookies in green, white and gold, dusted with flour and scattered with sugar snowflakes on a light wooden board and a dark slate surface.",
+      "colors": "green, white, charcoal",
+      "focal": "50% 55%",
+      "notes": "Texture and detail shot, portrait; flour and snowflakes make a good background for the sign-up sheet or a card.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/cookie-swap/photo-1642511842792-993e9b8cd0f8-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "tbpDWswyjRw",
+      "page": "https://unsplash.com/photos/tbpDWswyjRw",
+      "url": "https://images.unsplash.com/photo-1639583673417-1c90768cb321",
+      "photographer": "Libby Penner",
+      "photographerUrl": "https://unsplash.com/@libby_penner",
+      "alt": "Red and green iced mitten and boot cookies on a wire cooling rack, with glowing orange tree lights out of focus above them.",
+      "colors": "orange bokeh, cranberry red, green",
+      "focal": "50% 70%",
+      "notes": "Atmosphere shot, portrait; warm bokeh fills the top, so it can host a heading. The cookies sit in the lower half.",
+      "width": 1200,
+      "height": 1798,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/cookie-swap/photo-1639583673417-1c90768cb321-700.jpg"
+      }
+    }
+  ]
+}

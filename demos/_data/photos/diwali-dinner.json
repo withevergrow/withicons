@@ -1,0 +1,214 @@
+{
+  "slug": "diwali-dinner",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "29422096",
+      "page": "https://www.pexels.com/photo/29422096/",
+      "url": "https://images.pexels.com/photos/29422096/pexels-photo-29422096.jpeg",
+      "photographer": "Trishik Bose",
+      "photographerUrl": "https://www.pexels.com/@trishik-bose-166596160",
+      "alt": "Small clay diyas burning with tall flames in loose rows along the bottom of a dark frame, with soft amber and violet bokeh lights and wisps of smoke above.",
+      "colors": "near-black, burnt orange, amber",
+      "focal": "50% 82%",
+      "notes": "Landscape 3:2. The dark upper two thirds are calm and carry a headline well (light text, maybe a soft maroon scrim); diyas sit along the bottom edge. Crop with object-position low; also good as a full-bleed section header. A faint violet bokeh smear sits top left; a maroon scrim or object-position that drops the top 15% hides it.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-dinner/29422096-1600.jpg"
+      }
+    },
+    {
+      "slot": "rangoli",
+      "src": "unsplash",
+      "id": "cM8X2DDvnGE",
+      "page": "https://unsplash.com/photos/a-circular-arrangement-of-candles-on-a-floor-cM8X2DDvnGE",
+      "url": "https://images.unsplash.com/photo-1635192592106-77a5aacbe1a3",
+      "photographer": "Suchandra Roy Chowdhury",
+      "photographerUrl": "https://unsplash.com/@artsy_lens21",
+      "alt": "Top-down view of a circular floral rangoli on a tiled floor, built from red powder, orange and yellow marigold petals and pink flower motifs, ringed by small lit diyas.",
+      "colors": "saffron orange, crimson, gold",
+      "focal": "50% 50%",
+      "notes": "Landscape 4:3, near-symmetrical, centred. Works as a round-masked card, a split-section image, or a faint backdrop behind the kids rangoli corner. Very saturated and a little soft at full size, so use it at card size (about 600 px) and keep surrounding UI quiet.",
+      "width": 1200,
+      "height": 905,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/diwali-dinner/photo-1635192592106-77a5aacbe1a3-800.jpg"
+      }
+    },
+    {
+      "slot": "sweets",
+      "src": "pexels",
+      "id": "8887011",
+      "page": "https://www.pexels.com/photo/8887011/",
+      "url": "https://images.pexels.com/photos/8887011/pexels-photo-8887011.jpeg",
+      "photographer": "Lara Jameson",
+      "photographerUrl": "https://www.pexels.com/@lara-jameson",
+      "alt": "Antique brass pedestal bowls holding bright orange ladoo and colourful modak sweets, with pink and white flowers softly blurred in front.",
+      "colors": "orange, brass, magenta pink",
+      "focal": "62% 45%",
+      "notes": "Landscape 3:2 with a light, airy background. Good for the menu section; the ladoo bowl sits right of centre so a text panel fits on the left.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/diwali-dinner/8887011-1000.jpg"
+      }
+    },
+    {
+      "slot": "thali",
+      "src": "pexels",
+      "id": "8818657",
+      "page": "https://www.pexels.com/photo/8818657/",
+      "url": "https://images.pexels.com/photos/8818657/pexels-photo-8818657.jpeg",
+      "photographer": "Yan Krukau",
+      "photographerUrl": "https://www.pexels.com/@yankrukov",
+      "alt": "Overhead view of a woman in a sari spooning curry from a steel thali that also holds a pea curry, a white creamy sweet, a pink beetroot raita, rice and a papad, on a cream table with copper tumblers and small lit diyas.",
+      "colors": "cream, copper, marigold yellow, beetroot pink",
+      "focal": "42% 62%",
+      "notes": "Landscape 3:2, vegetarian festive thali (dal, pea curry, a creamy sweet, raita, papad) with diyas on the table. Hands and bangles show; her chin and lips touch the top-right edge, so crop with object-position left of centre or keep the right edge covered by a panel. Warm, light and airy: sits well beside the dark hero. Replaced the earlier Unsplash thali because one bowl looked like a meat curry on a vegetarian menu.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/diwali-dinner/8818657-800.jpg"
+      }
+    },
+    {
+      "slot": "marigold",
+      "src": "unsplash",
+      "id": "EEeGY0XgNSw",
+      "page": "https://unsplash.com/photos/marigold-and-jasmine-flower-garlands-EEeGY0XgNSw",
+      "url": "https://images.unsplash.com/photo-1789971649652-ae5dfeeaa7b4",
+      "photographer": "Sangram Rakate",
+      "photographerUrl": "https://unsplash.com/@najaratonajaria",
+      "alt": "Hanging strands of orange marigolds with white jasmine, ending in white tassels and marigold clusters, under a dark wooden roof against a softly blurred green-grey background.",
+      "colors": "marigold orange, white, soft green-grey",
+      "focal": "50% 40%",
+      "notes": "Tall portrait. Good as a narrow decorative column, a card or an arch-masked image. The top of the frame is a dark roof beam and the blurred backdrop is brighter in the lower half; text fits beside it, not over it.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/diwali-dinner/photo-1789971649652-ae5dfeeaa7b4-800.jpg"
+      }
+    },
+    {
+      "slot": "family",
+      "src": "pexels",
+      "id": "4094848",
+      "page": "https://www.pexels.com/photo/4094848/",
+      "url": "https://images.pexels.com/photos/4094848/pexels-photo-4094848.jpeg",
+      "photographer": "Bhargava Marripati",
+      "photographerUrl": "https://www.pexels.com/@bhargava-marripati-674798",
+      "alt": "A smiling woman in a red sari lights small clay diyas in front of a blurred deity figure, her face lit by the warm flames in a dark room.",
+      "colors": "amber, deep red, gold",
+      "focal": "35% 30%",
+      "notes": "Portrait 5:7, low-light and very warm. Face sits in the upper left, flames along the bottom; the figure on the right is out of focus. Keep the crop tall or square so the smile and flames both stay in, and put no text over the face. Intimate, good beside the puja timing.",
+      "width": 1200,
+      "height": 1662,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/diwali-dinner/4094848-800.jpg"
+      }
+    },
+    {
+      "slot": "lights",
+      "src": "pexels",
+      "id": "35113256",
+      "page": "https://www.pexels.com/photo/35113256/",
+      "url": "https://images.pexels.com/photos/35113256/pexels-photo-35113256.jpeg",
+      "photographer": "Hanshraj Cinematic short",
+      "photographerUrl": "https://www.pexels.com/@hanshraj-cinematic-short-2155566212",
+      "alt": "Two hands, one reaching in from each side, touch lit sparklers together in front of a building outlined with rows of warm fairy lights at night.",
+      "colors": "warm white, near-black, skin tones",
+      "focal": "50% 45%",
+      "notes": "Landscape 3:2. Shows the house lit up for Diwali and doubles as a sparkler moment. Dark corners make it work behind a heading; text on the dark left or top.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1400": "_img/diwali-dinner/35113256-1400.jpg"
+      }
+    },
+    {
+      "slot": "sparklers",
+      "src": "unsplash",
+      "id": "kMRMcUcO81M",
+      "page": "https://unsplash.com/photos/photo-of-person-holding-lighted-sparkler-kMRMcUcO81M",
+      "url": "https://images.unsplash.com/photo-1501213045308-cfe6e352d850",
+      "photographer": "Warren",
+      "photographerUrl": "https://unsplash.com/@wflwong",
+      "alt": "A hand holds a lit sparkler throwing fine sparks against a dusky blue and orange sky, with other hands blurred in the background.",
+      "colors": "dusk blue, orange, gold sparks",
+      "focal": "55% 38%",
+      "notes": "Portrait. Only hands show, which keeps the kid-safe, family feeling. The cool blue contrasts with the warm sections and makes a good break between them.",
+      "width": 1200,
+      "height": 1628,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/diwali-dinner/photo-1501213045308-cfe6e352d850-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "18376982",
+      "page": "https://www.pexels.com/photo/18376982/",
+      "url": "https://images.pexels.com/photos/18376982/pexels-photo-18376982.jpeg",
+      "photographer": "Yogendra Singh",
+      "photographerUrl": "https://www.pexels.com/@yogendras31",
+      "alt": "Rows of small clay lamps burning along stone steps at night, converging toward the distance.",
+      "colors": "copper red, amber, dark brown",
+      "focal": "50% 50%",
+      "notes": "Second hero candidate. Landscape, strong leading lines; a scrim is needed for text because the lamps run across the whole frame. Good for a wide section divider.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1400": "_img/diwali-dinner/18376982-1400.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "xisPXJqwQkA",
+      "page": "https://unsplash.com/photos/lit-oil-lamps-on-decorative-tray-xisPXJqwQkA",
+      "url": "https://images.unsplash.com/photo-1577083753695-e010191bacb5",
+      "photographer": "Udayaditya Barua",
+      "photographerUrl": "https://unsplash.com/@nookscribe",
+      "alt": "Lit clay oil lamps arranged on an ornate brass tray among scattered pink and magenta flower petals.",
+      "colors": "magenta, brass gold, flame orange",
+      "focal": "50% 55%",
+      "notes": "Detail and texture shot, landscape. Rich enough for a footer band or the RSVP section background; a bit busy for text.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/diwali-dinner/photo-1577083753695-e010191bacb5-1600.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "8818662",
+      "page": "https://www.pexels.com/photo/8818662/",
+      "url": "https://images.pexels.com/photos/8818662/pexels-photo-8818662.jpeg",
+      "photographer": "Yan Krukau",
+      "photographerUrl": "https://www.pexels.com/@yankrukov",
+      "alt": "Small lit clay diyas and a bowl of yellow marigolds on a table where a Diwali meal is being served, with blurred guests in the background.",
+      "colors": "cream, marigold yellow, copper",
+      "focal": "50% 65%",
+      "notes": "Atmosphere shot, portrait. Faces are out of focus, so it reads as a real dinner table. Use cropped to a wide strip around the diyas, or in the dress code and menu area.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "1000": "_img/diwali-dinner/8818662-1000.jpg"
+      }
+    }
+  ]
+}
