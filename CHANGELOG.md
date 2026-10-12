@@ -6,6 +6,8 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+## 0.5.0 - 2026-10-12
+
 Result of an agent evaluation: five agents built pitch decks with the MCP and reported what stopped them
 ([docs/MCP-AGENT-EVAL.md](docs/MCP-AGENT-EVAL.md) has the findings and what is still open).
 
