@@ -2698,6 +2698,7 @@
       // fold is one slim row between them, and a double-click on a format downloads it at once. The preview and Options
       // sit beside (wide) or below (narrow). Every other host keeps the original layout.
       var PK = !!po.pick
+      var G_SHORT = { slides: 'Slides & docs', design: 'Design', web: 'Web & apps', animated: 'Animated' }
       function shell() {
         var hintHtml = '<p class="wdl-hint" id="' + id + '-fh"><span class="wdl-hint-n" aria-hidden="true">1</span>Pick a format<span class="wdl-hint-sep"><span class="visually-hidden">, then </span></span><span class="wdl-hint-n" aria-hidden="true">2</span>Download</p>'
         var goHtml = '<div class="wdl-qual" data-dl-qual hidden></div>' +
@@ -2717,7 +2718,11 @@
           '</div>'
         return '<section class="wdl' + (po.quick === false ? ' no-quick' : '') + (PK ? ' is-pick' : '') + '"' + (po.anchor ? ' id="' + esc(po.anchor) + '"' : '') + ' aria-labelledby="' + id + '-h">' +
           '<div class="wdl-top"><h3 class="wdl-h" id="' + id + '-h">' + esc(po.title || 'Download') + '</h3><p class="wdl-sub">Any format, in your style and colours. <span class="wdl-chk" aria-hidden="true"></span>See-through background unless you pick one.</p></div>' + q +
-          '<div class="wdl-groups" role="tablist" aria-label="Formats, by what you need them for">' + DL_GROUPS.map(function (g) {
+          '<div class="wdl-groups" role="tablist" aria-label="Formats, by what you need them for">' + (PK ? '<span class="wdl-g-ink" aria-hidden="true"></span>' : '') + DL_GROUPS.map(function (g) {
+            // pick layout: a segmented control. One short line under the same outline icon in every state; the full name
+            // is the tab's accessible name and tooltip; a sliding indicator (transform only) marks the chosen one
+            if (PK) return '<button type="button" role="tab" class="wdl-g" id="' + id + '-g-' + g.id + '" data-dlg="' + g.id + '" aria-controls="' + id + '-p" aria-selected="false" tabindex="-1" aria-label="' + esc(g.title) + '" title="' + esc(g.title + ': ' + g.say) + '">' +
+              '<span class="wdl-g-i" aria-hidden="true">' + GI[g.id] + '</span><span class="wdl-g-l" aria-hidden="true">' + esc(G_SHORT[g.id] || g.title) + '</span></button>'
             return '<button type="button" role="tab" class="wdl-g" id="' + id + '-g-' + g.id + '" data-dlg="' + g.id + '" aria-controls="' + id + '-p" aria-selected="false" tabindex="-1">' +
               '<span class="wdl-g-i">' + GI[g.id] + '</span><span class="wdl-g-t"><b>' + (g.id === 'animated' ? esc(g.title) : '<span class="wdl-for">For ' + esc(g.title.charAt(0).toLowerCase() + g.title.slice(1)) + '</span><span class="wdl-short">' + esc(g.title) + '</span>') + '</b><small>' + esc(g.say) + '</small></span></button>'
           }).join('') + '</div>' +
@@ -2853,6 +2858,7 @@
       function paintGroups() {
         $$('[data-dlg]', sec).forEach(function (b) { var on = b.getAttribute('data-dlg') === P.group; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1 })
         $('[data-dl-body]', sec).setAttribute('aria-labelledby', id + '-g-' + P.group)
+        if (PK) { var gi = 0; DL_GROUPS.forEach(function (g, i) { if (g.id === P.group) gi = i }); $('.wdl-groups', sec).style.setProperty('--wdl-gi', gi) }
         $('[data-dl-gsay]', sec).textContent = groupOf(P.group).use
       }
       function update() {

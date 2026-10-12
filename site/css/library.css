@@ -1308,6 +1308,33 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 .wdl.is-pick .wdl-more-i { width: 26px; height: 26px }
 .wdl.is-pick .wdl-go { margin-top: 2px }
 .wdl.is-pick .wdl-status, .wdl.is-pick .wdl-warn { margin: 0 2px }
+/* the use-case tabs as one segmented control: four equal segments, the same outline icon over one short line in
+   every state (only the colour changes), and a quiet card that slides under the chosen one (transform only, 200 ms) */
+.wdl.is-pick .wdl-groups { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 4px; border: 0; border-radius: 14px; background: var(--l-card-2, var(--paper-2)); isolation: isolate }
+.wdl.is-pick .wdl-g-ink {
+  position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 4); border-radius: 10px; pointer-events: none;
+  background: var(--l-card, var(--card)); box-shadow: 0 1px 2px rgba(17, 19, 24, .07), 0 0 0 1px var(--l-rule, var(--rule));
+  transform: translateX(calc(var(--wdl-gi, 0) * 100%)); transition: transform .2s var(--e-out, cubic-bezier(.23, 1, .32, 1))
+}
+.wdl.is-pick .wdl-g {
+  position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 0; min-height: 56px; height: auto; padding: 8px 4px;
+  border: 0; border-radius: 10px; background: none; box-shadow: none; color: var(--l-muted, var(--muted)); text-align: center; transform: none;
+  transition: color .16s ease-out, transform .16s ease-out
+}
+.wdl.is-pick .wdl-g::after { display: none }
+.wdl.is-pick .wdl-g:hover { transform: none; border-color: transparent }
+.wdl.is-pick .wdl-g:active { transform: scale(.97) }
+@media (hover: hover) and (pointer: fine) { .wdl.is-pick .wdl-g:hover { color: var(--l-fg, var(--ink)) } }
+.wdl.is-pick .wdl-g[aria-selected="true"] { background: none; box-shadow: none; color: var(--l-fg, var(--ink)) }
+.wdl.is-pick .wdl-g-i, .wdl.is-pick .wdl-g[aria-selected="true"] .wdl-g-i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 0; background: none; box-shadow: none; color: inherit; transform: none; transition: color .16s ease-out }
+.wdl.is-pick .wdl-g-i svg { width: 20px; height: 20px }
+.wdl.is-pick .wdl-g[aria-selected="true"] .wdl-g-i { color: var(--sc-text, var(--l-fg, var(--ink))) }
+.wdl.is-pick .wdl-g-l { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 650 12px/1.2 var(--f-ui, var(--font-sans)); letter-spacing: -.005em }
+.wdl.is-pick .wdl-g:focus-visible { outline: 2.5px solid var(--focus-ring, #111318); outline-offset: -2px; box-shadow: none }
+@container wdl (max-width: 360px) { .wdl.is-pick .wdl-g-l { font-size: 11.5px; letter-spacing: -.01em } .wdl.is-pick .wdl-g { padding: 8px 2px } }
+:root[data-theme="dark"] .wdl.is-pick .wdl-g-ink { background: color-mix(in srgb, var(--l-card) 72%, #fff 9%); box-shadow: 0 1px 2px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .08) }
+@media (prefers-reduced-motion: reduce) { .wdl.is-pick .wdl-g-ink, .wdl.is-pick .wdl-g, .wdl.is-pick .wdl-g-i { transition: none } }
+@media (forced-colors: active) { .wdl.is-pick .wdl-g-ink { forced-color-adjust: none; background: Highlight; opacity: .35 } }
 /* two narrow columns (phones, a slim drawer): the mark moves to the corner and shows only on the picked format,
    so names like PowerPoint keep their room */
 @container wdl (max-width: 420px) {
@@ -1322,14 +1349,6 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
 @media (max-width: 899px) { .lib-viewer { --vw-stick: 50px } }
 .vw-dl .wdl { gap: 12px }
 .vw-dl .wdl-sub { margin: 0; font-size: 13px; color: var(--l-muted) }
-.vw-dl .wdl-groups { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; padding: 3px; border: 0; border-radius: 14px; background: var(--l-card-2) }
-.vw-dl .wdl-g { min-width: 0; min-height: 0; height: 62px; flex-direction: column; justify-content: center; gap: 4px; padding: 4px 2px; border-radius: 11px; text-align: center }
-.vw-dl .wdl-g-i { width: 24px; height: 24px; border-radius: 7px; background: none; box-shadow: none }
-.vw-dl .wdl-g-i svg { width: 17px; height: 17px }
-.vw-dl .wdl-g-t, .vw-dl .wdl-g b { display: block; min-width: 0; max-width: 100% }
-.vw-dl .wdl-g b { font: 650 11.5px/1.1 var(--f-ui); white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden }
-.vw-dl .wdl-g[aria-selected="true"] { background: var(--l-card); box-shadow: 0 1px 2px rgba(17, 19, 24, .1), 0 0 0 1px var(--l-rule-2) }
-.vw-dl .wdl-g[aria-selected="true"] .wdl-g-i { color: var(--sc-text, var(--l-fg)) }
 .vw-dl .wdl-body { grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); align-items: start; gap: 14px; padding: 0; border: 0; border-radius: 0; background: none }
 .vw-dl .wdl-gsay { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--l-muted) }
 .vw-dl .wdl-hint-n { background: var(--l-card); box-shadow: inset 0 0 0 1px var(--l-rule-2) }
@@ -1367,9 +1386,7 @@ html.vw-lock, html.vw-lock body { overflow: hidden }
   .vw-dl .wdl-f small { display: none }
   .vw-dl .wdl-f b { white-space: normal; line-height: 1.15 }
   .vw-dl .wdl-opts { padding: 4px 2px }
-  .vw-dl .wdl-groups { grid-template-columns: repeat(4, minmax(0, 1fr)) }
 }
-:root[data-theme="dark"] .vw-dl .wdl-g[aria-selected="true"] { background: color-mix(in srgb, var(--l-card) 70%, #fff 8%) }
 
 /* ═════════════ motion system + craft ═════════════
    One set of timings and curves for the page: --m-1 taps, --m-2 small state changes, --m-3 panels and morphs,
