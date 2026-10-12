@@ -1,4 +1,4 @@
-import { p, h2, h3, figure, iconGrid, styleRow, table, yes, no, meh, callout, stats, steps, cta, faceOff, rivalStyles, prosCons, icon, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, h3, figure, iconGrid, styleRow, table, yes, no, meh, callout, stats, steps, cta, faceOff, rivalStyles, prosCons, icon, L, N_ICONS, N_STYLES, N_CATEGORIES, N_SVGS } from '../lib/blocks.mjs'
 import { rivalIcon } from '../lib/rivals.mjs'
 
 // a real icon sitting inline next to its class name in a table cell
@@ -85,7 +85,7 @@ ${callout('tip', `Not sure what CC BY or MIT really mean? Our guide ${L.post('fr
 
 ${h2('How many icons do you really need?')}
 ${p('This is where Font Awesome clearly wins. More than 2,000 free icons is a lot, and if you need a whisk, a garlic clove and a pressure cooker for a cooking app, a big catalogue is a real advantage.')}
-${p('But most websites and apps only use <strong>a few dozen icons</strong>, and they are almost always the same ones: home, search, menu, user, settings, bell, mail, cart, arrows, checkmarks. with icons covers those essentials across 19 categories.')}
+${p(`But most websites and apps only use <strong>a few dozen icons</strong>, and they are almost always the same ones: home, search, menu, user, settings, bell, mail, cart, arrows, checkmarks. with icons covers those essentials across ${N_CATEGORIES} categories.`)}
 ${iconGrid(['home', 'search', 'menu', 'user', 'settings', 'bell', 'mail', 'calendar', 'shopping-cart', 'heart', 'share', 'trash'], 'line', 'The twelve icons almost every website needs, in the with icons line style. So the real question is not “which set is bigger?” but “does it have the icons <em>I</em> need?”')}
 
 ${h2('Do Font Awesome and with icons look different?')}
