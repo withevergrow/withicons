@@ -197,7 +197,7 @@ const WASHLINE = {
 // card walks through twenty different objects instead of one icon twenty times. The first icon of each list is in the
 // first pack (it paints with the hero); the alternates, which take over on later rounds, ride in the second pack.
 const SHOWCASE = {
-  line: ['bike', 'telescope', 'send'], solid: ['apple', 'umbrella', 'paw-print'], duo: ['piggy-bank', 'palette', 'gift'],
+  line: ['bike', 'telescope', 'send'], solid: ['apple', 'umbrella', 'paw-print'], duo: ['lightbulb', 'palette', 'gift'],
   gloss: ['balloon', 'ice-cream', 'gamepad'], engrave: ['landmark', 'compass', 'hourglass'], blueprint: ['rocket', 'plane', 'car'],
   sketch: ['bird', 'cat', 'notebook'], glass: ['droplet', 'gem', 'snowflake'], kawaii: ['cloud', 'star', 'cat'],
   sticker: ['butterfly', 'pizza', 'cloud-lightning'], pixel: ['trophy', 'heart', 'star'], retro: ['disc', 'camera', 'bus'],
